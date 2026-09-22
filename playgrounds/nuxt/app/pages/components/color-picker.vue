@@ -15,7 +15,9 @@ const formats:NonNullable<ColorPickerProps['format']>[] = [
   'rgb',
   'hsl',
   'cmyk',
-  'lab'
+  'lab',
+  'lch',
+  'hwb'
 ]
 const targetFormat = ref<(typeof formats)[number]>('hex')
 

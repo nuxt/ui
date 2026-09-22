@@ -63,7 +63,7 @@ export type ColorPickerProps = {
    * Format of the color
    * @defaultValue 'hex'
    */
-  format?: 'hex' | 'rgb' | 'hsl' | 'cmyk' | 'lab'
+  format?: 'hex' | 'rgb' | 'hsl' | 'cmyk' | 'lab' | 'lch' | 'hwb'
   /**
    * @defaultValue 'md'
    */
@@ -135,6 +135,12 @@ const pickedColor = computed<HSVColor>({
         break
       case 'lab':
         modelValue.value = props.alphaTrack ? color.CIELabA : color.CIELab
+        break
+      case 'lch':
+        modelValue.value = props.alphaTrack ? color.LCHA : color.LCH
+        break
+      case 'hwb':
+        modelValue.value = props.alphaTrack ? color.HWBA : color.HWB
         break
       case 'hex':
       default:
