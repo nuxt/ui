@@ -22,7 +22,7 @@ export function getDefaultConfig(theme?: ModuleOptions['theme']) {
     icons,
     prefix: theme?.prefix,
     tv: {
-      twMergeConfig: {
+      mergeConfig: {
         prefix: theme?.prefix
       }
     }
