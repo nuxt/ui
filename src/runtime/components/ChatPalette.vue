@@ -41,14 +41,14 @@ const ui = computed(() => tv(theme, appConfig.ui?.chatPalette)())
 </script>
 
 <template>
-  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div data-slot="content" :class="ui.content({ class: props.ui?.content })">
+  <Primitive :as="props.as" data-slot="chat-palette" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div data-slot="chat-palette-content" :class="ui.content({ class: props.ui?.content })">
       <Slot compact>
         <slot />
       </Slot>
     </div>
 
-    <Slot v-if="!!slots.prompt" data-slot="prompt" :class="ui.prompt({ class: props.ui?.prompt })">
+    <Slot v-if="!!slots.prompt" data-slot="chat-palette-prompt" :class="ui.prompt({ class: props.ui?.prompt })">
       <slot name="prompt" />
     </Slot>
   </Primitive>

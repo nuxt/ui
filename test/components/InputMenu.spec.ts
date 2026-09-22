@@ -133,8 +133,8 @@ describe('InputMenu', () => {
       }
     })
 
-    expect(wrapper.find('[data-slot="trailing"]').exists()).toBe(false)
-    expect(wrapper.find('[data-slot="trailingIcon"]').exists()).toBe(false)
+    expect(wrapper.find('[data-slot="input-menu-trailing"]').exists()).toBe(false)
+    expect(wrapper.find('[data-slot="input-menu-trailingIcon"]').exists()).toBe(false)
   })
 
   // `root` and `base` are the same element in `multiple` mode, so the rounding
@@ -145,7 +145,7 @@ describe('InputMenu', () => {
       template: `<UFieldGroup><UButton label="Button" /><UInputMenu multiple /></UFieldGroup>`
     })
 
-    expect(wrapper.get('div[data-slot="base"]').classes()).toContain('not-only:last:rounded-s-none')
+    expect(wrapper.get('div[data-slot="input-menu"]').classes()).toContain('not-only:last:rounded-s-none')
   })
 
   it('with autocomplete mode ignores multiple', () => {
@@ -299,7 +299,7 @@ describe('InputMenu', () => {
       await input.trigger('keydown', { key: 'Enter' })
       await flushPromises()
 
-      expect(wrapper.findAll('[data-slot="tagsItem"]')).toHaveLength(1)
+      expect(wrapper.findAll('[data-slot="input-menu-tagsItem"]')).toHaveLength(1)
       expect(wrapper.emitted('update:modelValue')).toBeFalsy()
 
       wrapper.unmount()

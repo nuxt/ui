@@ -187,6 +187,7 @@ const linkClass = computed(() => {
   </Slot>
   <ULinkBase
     v-else
+    data-slot="link"
     v-bind="{
       ...$attrs,
       ...routerLinkProps,

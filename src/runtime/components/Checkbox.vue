@@ -159,14 +159,14 @@ function onUpdate(value: any) {
         v-bind="{ ...rootProps, ...forwardedAttrs, ...ariaAttrs }"
         :name="name"
         :disabled="disabled"
-        data-slot="base"
+        data-slot="checkbox-base"
         :class="ui.base({ class: props.ui?.base })"
         @update:model-value="onUpdate"
       >
         <template #default="{ state }">
-          <CheckboxIndicator v-if="props.indicator !== 'hidden'" data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })">
-            <UIcon v-if="state === 'indeterminate'" :name="props.indeterminateIcon || appConfig.ui.icons.minus" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
-            <UIcon v-else :name="props.icon || appConfig.ui.icons.check" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
+          <CheckboxIndicator v-if="props.indicator !== 'hidden'" data-slot="checkbox-indicator" :class="ui.indicator({ class: props.ui?.indicator })">
+            <UIcon v-if="state === 'indeterminate'" :name="props.indeterminateIcon || appConfig.ui.icons.minus" data-slot="checkbox-icon" :class="ui.icon({ class: props.ui?.icon })" />
+            <UIcon v-else :name="props.icon || appConfig.ui.icons.check" data-slot="checkbox-icon" :class="ui.icon({ class: props.ui?.icon })" />
           </CheckboxIndicator>
         </template>
       </CheckboxRoot>
@@ -179,7 +179,7 @@ function onUpdate(value: any) {
           {{ props.label }}
         </slot>
       </component>
-      <p v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+      <p v-if="props.description || !!slots.description" data-slot="checkbox-description" :class="ui.description({ class: props.ui?.description })">
         <slot name="description" :description="props.description">
           {{ props.description }}
         </slot>
