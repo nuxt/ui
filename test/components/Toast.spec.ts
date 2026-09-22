@@ -60,8 +60,8 @@ describe('Toast', () => {
     const wrapper = await mountSuspended(Toaster, { props: { portal: false } })
     const body = toast.add({ title: 'Toast', onClick })
 
-    await vi.waitFor(() => expect(wrapper.find('[data-slot="base"]').exists()).toBe(true), { timeout: 4000 })
-    await wrapper.find('[data-slot="base"]').trigger('click')
+    await vi.waitFor(() => expect(wrapper.find('[data-slot="toaster-base"]').exists()).toBe(true), { timeout: 4000 })
+    await wrapper.find('[data-slot="toaster-base"]').trigger('click')
 
     expect(onClick).toHaveBeenCalledTimes(1)
     expect(onClick).toHaveBeenCalledWith(expect.objectContaining({ id: body.id, title: 'Toast' }))
