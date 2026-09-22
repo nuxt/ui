@@ -82,17 +82,17 @@ const ariaLabel = computed(() => {
     :as="props.as"
     v-bind="!props.to ? $attrs : {}"
     :data-orientation="props.orientation"
-    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
+    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'page-feature'"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @click="props.onClick"
   >
-    <div v-if="props.icon || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+    <div v-if="props.icon || !!slots.leading" data-slot="page-feature-leading" :class="ui.leading({ class: props.ui?.leading })">
       <slot name="leading" :ui="ui">
-        <UIcon v-if="props.icon" :name="props.icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+        <UIcon v-if="props.icon" :name="props.icon" data-slot="page-feature-leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
       </slot>
     </div>
 
-    <div data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+    <div data-slot="page-feature-wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
       <ULink
         v-if="props.to"
         :aria-label="ariaLabel"
@@ -104,13 +104,13 @@ const ariaLabel = computed(() => {
       </ULink>
 
       <slot>
-        <div v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+        <div v-if="props.title || !!slots.title" data-slot="page-feature-title" :class="ui.title({ class: props.ui?.title })">
           <slot name="title">
             {{ props.title }}
           </slot>
         </div>
 
-        <div v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+        <div v-if="props.description || !!slots.description" data-slot="page-feature-description" :class="ui.description({ class: props.ui?.description })">
           <slot name="description">
             {{ props.description }}
           </slot>

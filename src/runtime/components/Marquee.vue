@@ -74,8 +74,8 @@ const ui = computed(() => tv(theme, appConfig.ui?.marquee)({
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-for="i in props.repeat" :key="i" data-slot="content" :class="ui.content({ class: [props.ui?.content] })">
+  <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="marquee" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div v-for="i in props.repeat" :key="i" data-slot="marquee-content" :class="ui.content({ class: [props.ui?.content] })">
       <slot />
     </div>
   </Primitive>

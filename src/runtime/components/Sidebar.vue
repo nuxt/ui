@@ -237,23 +237,23 @@ const renderMenu = useLazyOverlay(() => openMobile.value || (props.menu as Modal
 
 <template>
   <DefineContentTemplate>
-    <div v-if="hasHeader" data-slot="header" :class="ui.header({ class: props.ui?.header })">
+    <div v-if="hasHeader" data-slot="sidebar-header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header" :state="state" :open="open" :close="closeSidebar">
-        <div v-if="props.title || !!slots.title || props.description || !!slots.description" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
-          <p v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+        <div v-if="props.title || !!slots.title || props.description || !!slots.description" data-slot="sidebar-wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+          <p v-if="props.title || !!slots.title" data-slot="sidebar-title" :class="ui.title({ class: props.ui?.title })">
             <slot name="title" :state="state">
               {{ props.title }}
             </slot>
           </p>
 
-          <p v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+          <p v-if="props.description || !!slots.description" data-slot="sidebar-description" :class="ui.description({ class: props.ui?.description })">
             <slot name="description" :state="state">
               {{ props.description }}
             </slot>
           </p>
         </div>
 
-        <div v-if="!!slots.actions || canClose" data-slot="actions" :class="ui.actions({ class: props.ui?.actions })">
+        <div v-if="!!slots.actions || canClose" data-slot="sidebar-actions" :class="ui.actions({ class: props.ui?.actions })">
           <slot name="actions" :state="state" />
 
           <slot name="close" :state="state" :ui="ui">
@@ -264,7 +264,7 @@ const renderMenu = useLazyOverlay(() => openMobile.value || (props.menu as Modal
               variant="ghost"
               :aria-label="t('sidebar.close')"
               v-bind="(typeof props.close === 'object' ? props.close : {})"
-              data-slot="close"
+              data-slot="sidebar-close"
               :class="ui.close({ class: props.ui?.close })"
               @click="closeSidebar"
             />
@@ -273,17 +273,17 @@ const renderMenu = useLazyOverlay(() => openMobile.value || (props.menu as Modal
       </slot>
     </div>
 
-    <div data-slot="body" :class="ui.body({ class: props.ui?.body })">
+    <div data-slot="sidebar-body" :class="ui.body({ class: props.ui?.body })">
       <slot :state="state" :open="open" :close="closeSidebar" />
     </div>
 
-    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
+    <div v-if="!!slots.footer" data-slot="sidebar-footer" :class="ui.footer({ class: props.ui?.footer })">
       <slot name="footer" :state="state" :open="open" :close="closeSidebar" />
     </div>
   </DefineContentTemplate>
 
   <DefineInnerTemplate>
-    <div data-slot="inner" :class="ui.inner({ class: props.ui?.inner })">
+    <div data-slot="sidebar-inner" :class="ui.inner({ class: props.ui?.inner })">
       <ReuseContentTemplate />
     </div>
   </DefineInnerTemplate>
@@ -292,7 +292,7 @@ const renderMenu = useLazyOverlay(() => openMobile.value || (props.menu as Modal
   <Primitive
     v-if="props.collapsible === 'none'"
     :as="props.as"
-    data-slot="root"
+    data-slot="sidebar"
     v-bind="$attrs"
     :data-variant="props.variant"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
@@ -304,7 +304,7 @@ const renderMenu = useLazyOverlay(() => openMobile.value || (props.menu as Modal
   <template v-else>
     <Primitive
       :as="props.as"
-      data-slot="root"
+      data-slot="sidebar"
       v-bind="$attrs"
       :data-state="state"
       :data-collapsible="state === 'collapsed' ? props.collapsible : undefined"
@@ -314,14 +314,14 @@ const renderMenu = useLazyOverlay(() => openMobile.value || (props.menu as Modal
     >
       <!-- Gap spacer: reserves layout space for the fixed sidebar -->
       <div
-        data-slot="gap"
+        data-slot="sidebar-gap"
         :data-state="state"
         :class="ui.gap({ class: props.ui?.gap })"
       />
 
       <!-- Fixed container: the actual visible sidebar -->
       <div
-        data-slot="container"
+        data-slot="sidebar-container"
         :data-state="state"
         :class="ui.container({ class: props.ui?.container })"
       >
@@ -329,7 +329,7 @@ const renderMenu = useLazyOverlay(() => openMobile.value || (props.menu as Modal
 
         <slot v-if="props.rail" name="rail" :state="state" :ui="ui">
           <button
-            data-slot="rail"
+            data-slot="sidebar-rail"
             :data-state="state"
             :aria-label="t('sidebar.toggle')"
             :tabindex="-1"
