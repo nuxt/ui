@@ -124,7 +124,7 @@ const gridUi = {
         :ui="{
           root: 'w-68',
           indicator: 'bg-default',
-          trigger: 'data-[state=active]:text-highlighted in-[[data-slot=list]:not(:has([data-slot=indicator]))]:data-[state=active]:before:bg-default w-1/2'
+          trigger: 'data-[state=active]:text-highlighted in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:bg-default w-1/2'
         }"
         data-keep-panels
         aria-label="View"

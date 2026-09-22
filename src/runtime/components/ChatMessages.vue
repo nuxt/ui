@@ -400,7 +400,7 @@ defineExpose({
     role="log"
     :aria-busy="props.status === 'submitted' || props.status === 'streaming' ? 'true' : undefined"
     :data-status="props.status"
-    data-slot="root"
+    data-slot="chat-messages"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :style="{ '--last-message-height': `${lastMessageHeight}px`, '--bottom-offset': slots.footer ? `${bottomOffset}px` : undefined }"
   >
@@ -428,7 +428,7 @@ defineExpose({
     >
       <template #content>
         <slot name="indicator" :ui="ui">
-          <div data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })">
+          <div data-slot="chat-messages-indicator" :class="ui.indicator({ class: props.ui?.indicator })">
             <span />
             <span />
             <span />
@@ -438,7 +438,7 @@ defineExpose({
     </UChatMessage>
 
     <Presence :present="showAutoScroll">
-      <div :data-state="showAutoScroll ? 'open' : 'closed'" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
+      <div :data-state="showAutoScroll ? 'open' : 'closed'" data-slot="chat-messages-viewport" :class="ui.viewport({ class: props.ui?.viewport })">
         <slot name="viewport" :ui="ui" :on-click="onAutoScrollClick">
           <UButton
             v-if="props.autoScroll"
@@ -447,7 +447,7 @@ defineExpose({
             variant="outline"
             :aria-label="t('chatMessages.autoScroll')"
             v-bind="(typeof props.autoScroll === 'object' ? props.autoScroll : {})"
-            data-slot="autoScroll"
+            data-slot="chat-messages-autoScroll"
             :class="ui.autoScroll({ class: props.ui?.autoScroll })"
             @click="onAutoScrollClick"
           />

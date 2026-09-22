@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`DashboardSearch > renders with class correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!--v-if-->
   <!--teleport start-->
@@ -42,7 +42,7 @@ exports[`DashboardSearch > renders with class correctly 1`] = `
 `;
 
 exports[`DashboardSearch > renders with fullscreen correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!--v-if-->
   <!--teleport start-->
@@ -83,7 +83,7 @@ exports[`DashboardSearch > renders with fullscreen correctly 1`] = `
 `;
 
 exports[`DashboardSearch > renders with groups correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!--v-if-->
   <!--teleport start-->
@@ -124,7 +124,7 @@ exports[`DashboardSearch > renders with groups correctly 1`] = `
 `;
 
 exports[`DashboardSearch > renders with icon correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!--v-if-->
   <!--teleport start-->
@@ -165,7 +165,7 @@ exports[`DashboardSearch > renders with icon correctly 1`] = `
 `;
 
 exports[`DashboardSearch > renders with loading correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!--v-if-->
   <!--teleport start-->
@@ -206,7 +206,7 @@ exports[`DashboardSearch > renders with loading correctly 1`] = `
 `;
 
 exports[`DashboardSearch > renders with loadingIcon correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!--v-if-->
   <!--teleport start-->
@@ -247,7 +247,7 @@ exports[`DashboardSearch > renders with loadingIcon correctly 1`] = `
 `;
 
 exports[`DashboardSearch > renders with placeholder correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!--v-if-->
   <!--teleport start-->
@@ -288,7 +288,7 @@ exports[`DashboardSearch > renders with placeholder correctly 1`] = `
 `;
 
 exports[`DashboardSearch > renders with size lg correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!--v-if-->
   <!--teleport start-->
@@ -329,7 +329,7 @@ exports[`DashboardSearch > renders with size lg correctly 1`] = `
 `;
 
 exports[`DashboardSearch > renders with size md correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!--v-if-->
   <!--teleport start-->
@@ -370,7 +370,7 @@ exports[`DashboardSearch > renders with size md correctly 1`] = `
 `;
 
 exports[`DashboardSearch > renders with size sm correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!--v-if-->
   <!--teleport start-->
@@ -411,7 +411,7 @@ exports[`DashboardSearch > renders with size sm correctly 1`] = `
 `;
 
 exports[`DashboardSearch > renders with size xl correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!--v-if-->
   <!--teleport start-->
@@ -452,7 +452,7 @@ exports[`DashboardSearch > renders with size xl correctly 1`] = `
 `;
 
 exports[`DashboardSearch > renders with size xs correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!--v-if-->
   <!--teleport start-->
@@ -493,7 +493,7 @@ exports[`DashboardSearch > renders with size xs correctly 1`] = `
 `;
 
 exports[`DashboardSearch > renders with ui correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!--v-if-->
   <!--teleport start-->
@@ -534,7 +534,7 @@ exports[`DashboardSearch > renders with ui correctly 1`] = `
 `;
 
 exports[`DashboardSearch > renders without colorMode correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!--v-if-->
   <!--teleport start-->

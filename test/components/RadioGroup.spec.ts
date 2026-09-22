@@ -63,17 +63,17 @@ describe('RadioGroup', () => {
     const items = [{ value: '1', label: 'Option 1', icon: 'i-lucide-rocket' }]
 
     const wrapper = await mountSuspended(RadioGroup, { props: { items } })
-    expect(wrapper.find('[data-slot="wrapper"] [data-slot="icon"]').exists()).toBe(false)
+    expect(wrapper.find('[data-slot="radio-group-wrapper"] [data-slot="radio-group-icon"]').exists()).toBe(false)
 
     const hidden = await mountSuspended(RadioGroup, { props: { items, indicator: 'hidden' } })
-    expect(hidden.find('[data-slot="wrapper"] [data-slot="icon"]').exists()).toBe(true)
+    expect(hidden.find('[data-slot="radio-group-wrapper"] [data-slot="radio-group-icon"]').exists()).toBe(true)
   })
 
   it('renders an item icon without a label', async () => {
     const wrapper = await mountSuspended(RadioGroup, {
       props: { items: [{ value: 'table', icon: 'i-lucide-table' }], indicator: 'hidden' }
     })
-    expect(wrapper.find('[data-slot="wrapper"] [data-slot="icon"]').exists()).toBe(true)
+    expect(wrapper.find('[data-slot="radio-group-wrapper"] [data-slot="radio-group-icon"]').exists()).toBe(true)
   })
 
   it('passes accessibility tests with icon items', async () => {

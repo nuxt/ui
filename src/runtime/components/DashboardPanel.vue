@@ -57,7 +57,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.dashboardPanel)({
   <div
     :id="id"
     ref="el"
-    data-slot="root"
+    data-slot="dashboard-panel"
     v-bind="$attrs"
     :data-dragging="isDragging"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
@@ -66,7 +66,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.dashboardPanel)({
     <slot>
       <slot name="header" />
 
-      <div data-slot="body" :class="ui.body({ class: props.ui?.body })">
+      <div data-slot="dashboard-panel-body" :class="ui.body({ class: props.ui?.body })">
         <slot name="body" />
       </div>
 
@@ -78,7 +78,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.dashboardPanel)({
     <UDashboardResizeHandle
       v-if="props.resizable"
       :aria-controls="id"
-      data-slot="handle"
+      data-slot="dashboard-panel-handle"
       :class="ui.handle({ class: props.ui?.handle })"
       @mousedown="onMouseDown"
       @touchstart="onTouchStart"

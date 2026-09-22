@@ -56,6 +56,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.dashboardSidebarCollapse)({ si
 
 <template>
   <UButton
+    data-slot="dashboard-sidebar-collapse"
     v-bind="{
       ...buttonProps,
       'icon': props.icon || (sidebarCollapsed ? appConfig.ui.icons.panelOpen : appConfig.ui.icons.panelClose),

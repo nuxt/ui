@@ -154,7 +154,7 @@ function onClick() {
     :compute-position-config="computePositionConfig"
     :editor="props.editor"
     :on-node-change="onNodeChange"
-    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
+    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'editor-drag-handle'"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @click="onClick"
   >
@@ -165,7 +165,7 @@ function onClick() {
           icon: props.icon || appConfig.ui.icons.drag,
           ...$attrs
         }"
-        data-slot="handle"
+        data-slot="editor-drag-handle-handle"
         :class="ui.handle({ class: [props.ui?.handle, props.class] })"
         :ui="transformUI(ui, props.ui)"
       />

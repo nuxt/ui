@@ -44,14 +44,14 @@ const ui = computed(() => tv(theme, appConfig.ui?.pageAside)())
 </script>
 
 <template>
-  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
-      <div v-if="!!slots.top" data-slot="top" :class="ui.top({ class: props.ui?.top })">
-        <div data-slot="topHeader" :class="ui.topHeader({ class: props.ui?.topHeader })" />
-        <div data-slot="topBody" :class="ui.topBody({ class: props.ui?.topBody })">
+  <Primitive :as="props.as" data-slot="page-aside" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div data-slot="page-aside-container" :class="ui.container({ class: props.ui?.container })">
+      <div v-if="!!slots.top" data-slot="page-aside-top" :class="ui.top({ class: props.ui?.top })">
+        <div data-slot="page-aside-topHeader" :class="ui.topHeader({ class: props.ui?.topHeader })" />
+        <div data-slot="page-aside-topBody" :class="ui.topBody({ class: props.ui?.topBody })">
           <slot name="top" />
         </div>
-        <div data-slot="topFooter" :class="ui.topFooter({ class: props.ui?.topFooter })" />
+        <div data-slot="page-aside-topFooter" :class="ui.topFooter({ class: props.ui?.topFooter })" />
       </div>
 
       <slot />

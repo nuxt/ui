@@ -94,21 +94,21 @@ const nextIcon = computed(() => props.nextIcon || (dir.value === 'rtl' ? appConf
 
 <template>
   <DefineLinkTemplate v-slot="{ link, icon, direction }">
-    <ULink v-if="link" :to="link.path" raw data-slot="link" :class="ui.link({ class: [props.ui?.link, link.ui?.link, link.class], direction })">
+    <ULink v-if="link" :to="link.path" raw data-slot="content-surround-link" :class="ui.link({ class: [props.ui?.link, link.ui?.link, link.class], direction })">
       <slot name="link" :link="(link as T)" :ui="ui">
-        <div data-slot="linkLeading" :class="ui.linkLeading({ class: [props.ui?.linkLeading, link.ui?.linkLeading] })">
+        <div data-slot="content-surround-linkLeading" :class="ui.linkLeading({ class: [props.ui?.linkLeading, link.ui?.linkLeading] })">
           <slot name="link-leading" :link="(link as T)" :ui="ui">
-            <UIcon :name="link.icon || icon" data-slot="linkLeadingIcon" :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, link.ui?.linkLeadingIcon], direction })" />
+            <UIcon :name="link.icon || icon" data-slot="content-surround-linkLeadingIcon" :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, link.ui?.linkLeadingIcon], direction })" />
           </slot>
         </div>
 
-        <p data-slot="linkTitle" :class="ui.linkTitle({ class: [props.ui?.linkTitle, link.ui?.linkTitle] })">
+        <p data-slot="content-surround-linkTitle" :class="ui.linkTitle({ class: [props.ui?.linkTitle, link.ui?.linkTitle] })">
           <slot name="link-title" :link="(link as T)" :ui="ui">
             {{ link.title }}
           </slot>
         </p>
 
-        <p data-slot="linkDescription" :class="ui.linkDescription({ class: [props.ui?.linkDescription, link.ui?.linkDescription] })">
+        <p data-slot="content-surround-linkDescription" :class="ui.linkDescription({ class: [props.ui?.linkDescription, link.ui?.linkDescription] })">
           <slot name="link-description" :link="(link as T)" :ui="ui">
             {{ link.description }}
           </slot>
@@ -118,7 +118,7 @@ const nextIcon = computed(() => props.nextIcon || (dir.value === 'rtl' ? appConf
     <span v-else :class="prefix('hidden sm:block')">&nbsp;</span>
   </DefineLinkTemplate>
 
-  <Primitive v-if="props.surround" :as="props.as" data-slot="root" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive v-if="props.surround" :as="props.as" data-slot="content-surround" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <ReuseLinkTemplate :link="props.surround[0]" :icon="prevIcon" direction="left" />
     <ReuseLinkTemplate :link="props.surround[1]" :icon="nextIcon" direction="right" />
   </Primitive>

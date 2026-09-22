@@ -91,7 +91,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.dashboardNavbar)())
         v-if="props.toggle"
         v-bind="(typeof props.toggle === 'object' ? props.toggle : {})"
         :side="props.toggleSide"
-        data-slot="toggle"
+        data-slot="dashboard-navbar-toggle"
         :class="ui.toggle({ class: props.ui?.toggle, toggleSide: props.toggleSide })"
       />
     </slot>
@@ -103,7 +103,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.dashboardNavbar)())
 
       <slot name="left" v-bind="dashboardContext">
         <slot name="leading" v-bind="{ ...dashboardContext, ui }">
-          <UIcon v-if="props.icon" :name="props.icon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
+          <UIcon v-if="props.icon" :name="props.icon" data-slot="dashboard-navbar-icon" :class="ui.icon({ class: props.ui?.icon })" />
         </slot>
 
         <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
@@ -116,11 +116,11 @@ const ui = computed(() => tv(theme, appConfig.ui?.dashboardNavbar)())
       </slot>
     </div>
 
-    <div v-if="!!slots.default" data-slot="center" :class="ui.center({ class: props.ui?.center })">
+    <div v-if="!!slots.default" data-slot="dashboard-navbar-center" :class="ui.center({ class: props.ui?.center })">
       <slot v-bind="dashboardContext" />
     </div>
 
-    <div data-slot="right" :class="ui.right({ class: props.ui?.right })">
+    <div data-slot="dashboard-navbar-right" :class="ui.right({ class: props.ui?.right })">
       <slot name="right" v-bind="dashboardContext" />
 
       <ReuseToggleTemplate v-if="props.toggleSide === 'right'" />

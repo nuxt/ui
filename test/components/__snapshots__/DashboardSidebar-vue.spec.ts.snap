@@ -1,13 +1,13 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`DashboardSidebar > renders with class correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0" data-slot="root" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default border-none" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0" data-slot="dashboard-sidebar" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default border-none" style="--width: 15%;">
     <!--v-if-->
-    <div data-slot="body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
+    <div data-slot="dashboard-sidebar-body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -16,13 +16,13 @@ exports[`DashboardSidebar > renders with class correctly 1`] = `
 `;
 
 exports[`DashboardSidebar > renders with collapsedSize correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0" data-slot="root" data-collapsed="true" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 10%;">
+  <div id="dashboard-sidebar-v-0" data-slot="dashboard-sidebar" data-collapsed="true" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 10%;">
     <!--v-if-->
-    <div data-slot="body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
+    <div data-slot="dashboard-sidebar-body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -31,13 +31,13 @@ exports[`DashboardSidebar > renders with collapsedSize correctly 1`] = `
 `;
 
 exports[`DashboardSidebar > renders with collapsible correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0" data-slot="root" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0" data-slot="dashboard-sidebar" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
-    <div data-slot="body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
+    <div data-slot="dashboard-sidebar-body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -46,13 +46,13 @@ exports[`DashboardSidebar > renders with collapsible correctly 1`] = `
 `;
 
 exports[`DashboardSidebar > renders with content slot correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0" data-slot="root" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0" data-slot="dashboard-sidebar" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
-    <div data-slot="body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
+    <div data-slot="dashboard-sidebar-body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -61,13 +61,13 @@ exports[`DashboardSidebar > renders with content slot correctly 1`] = `
 `;
 
 exports[`DashboardSidebar > renders with default slot correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0" data-slot="root" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0" data-slot="dashboard-sidebar" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
-    <div data-slot="body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2">Default slot</div>
+    <div data-slot="dashboard-sidebar-body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2">Default slot</div>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -76,13 +76,13 @@ exports[`DashboardSidebar > renders with default slot correctly 1`] = `
 `;
 
 exports[`DashboardSidebar > renders with defaultSize correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0" data-slot="root" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 50%;">
+  <div id="dashboard-sidebar-v-0" data-slot="dashboard-sidebar" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 50%;">
     <!--v-if-->
-    <div data-slot="body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
+    <div data-slot="dashboard-sidebar-body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -91,14 +91,14 @@ exports[`DashboardSidebar > renders with defaultSize correctly 1`] = `
 `;
 
 exports[`DashboardSidebar > renders with footer slot correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0" data-slot="root" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0" data-slot="dashboard-sidebar" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
-    <div data-slot="body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
-    <div data-slot="footer" class="shrink-0 flex items-center gap-1.5 px-4 py-2">Footer slot</div>
+    <div data-slot="dashboard-sidebar-body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
+    <div data-slot="dashboard-sidebar-footer" class="shrink-0 flex items-center gap-1.5 px-4 py-2">Footer slot</div>
   </div>
   <!--v-if-->
   <!--v-if-->
@@ -106,13 +106,13 @@ exports[`DashboardSidebar > renders with footer slot correctly 1`] = `
 `;
 
 exports[`DashboardSidebar > renders with header slot correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0" data-slot="root" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
-    <div data-slot="header" class="h-(--ui-header-height) shrink-0 flex items-center gap-1.5 px-4">Header slot</div>
-    <div data-slot="body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
+  <div id="dashboard-sidebar-v-0" data-slot="dashboard-sidebar" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+    <div data-slot="dashboard-sidebar-header" class="h-(--ui-header-height) shrink-0 flex items-center gap-1.5 px-4">Header slot</div>
+    <div data-slot="dashboard-sidebar-body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -121,13 +121,13 @@ exports[`DashboardSidebar > renders with header slot correctly 1`] = `
 `;
 
 exports[`DashboardSidebar > renders with id correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-test" data-slot="root" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-test" data-slot="dashboard-sidebar" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
-    <div data-slot="body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
+    <div data-slot="dashboard-sidebar-body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -136,13 +136,13 @@ exports[`DashboardSidebar > renders with id correctly 1`] = `
 `;
 
 exports[`DashboardSidebar > renders with maxSize correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0" data-slot="root" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0" data-slot="dashboard-sidebar" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
-    <div data-slot="body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
+    <div data-slot="dashboard-sidebar-body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -151,13 +151,13 @@ exports[`DashboardSidebar > renders with maxSize correctly 1`] = `
 `;
 
 exports[`DashboardSidebar > renders with minSize correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0" data-slot="root" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0" data-slot="dashboard-sidebar" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
-    <div data-slot="body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
+    <div data-slot="dashboard-sidebar-body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -166,13 +166,13 @@ exports[`DashboardSidebar > renders with minSize correctly 1`] = `
 `;
 
 exports[`DashboardSidebar > renders with mode drawer correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0" data-slot="root" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0" data-slot="dashboard-sidebar" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
-    <div data-slot="body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
+    <div data-slot="dashboard-sidebar-body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -182,7 +182,7 @@ exports[`DashboardSidebar > renders with mode drawer correctly 1`] = `
   <div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" tabindex="-1" data-vaul-drawer="" data-vaul-drawer-direction="bottom" data-vaul-delayed-snap-points="false" data-vaul-snap-points="false" data-slot="content" class="fixed bg-default ring ring-default flex focus:outline-none mt-24 flex-col h-auto max-h-[96%] inset-x-0 bottom-0 rounded-t-lg lg:hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-1" aria-labelledby="reka-dialog-title-v-0-0" data-state="open">
     <div data-vaul-drawer-visible="true" data-vaul-handle="" aria-hidden="true" data-slot="handle" class="shrink-0 !bg-accented transition-opacity ease-out mt-4 !w-12 !h-1.5 mx-auto"><span data-vaul-handle-hitarea="" aria-hidden="true"></span></div><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0">Open sidebar</h2><p id="reka-dialog-description-v-0-1"></p></span>
     <!--v-if-->
-    <div data-slot="body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2 sm:px-6"></div>
+    <div data-slot="dashboard-sidebar-body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2 sm:px-6"></div>
     <!--v-if-->
   </div>
   <!--teleport end-->
@@ -190,13 +190,13 @@ exports[`DashboardSidebar > renders with mode drawer correctly 1`] = `
 `;
 
 exports[`DashboardSidebar > renders with mode modal correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0" data-slot="root" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0" data-slot="dashboard-sidebar" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
-    <div data-slot="body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
+    <div data-slot="dashboard-sidebar-body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -211,7 +211,7 @@ exports[`DashboardSidebar > renders with mode modal correctly 1`] = `
       </button>
       <!--v-if-->
     </div>
-    <div data-slot="body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2 sm:px-6"></div>
+    <div data-slot="dashboard-sidebar-body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2 sm:px-6"></div>
     <!--v-if-->
   </div>
   <!--teleport end-->
@@ -219,13 +219,13 @@ exports[`DashboardSidebar > renders with mode modal correctly 1`] = `
 `;
 
 exports[`DashboardSidebar > renders with mode slideover correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0" data-slot="root" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0" data-slot="dashboard-sidebar" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
-    <div data-slot="body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
+    <div data-slot="dashboard-sidebar-body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -239,7 +239,7 @@ exports[`DashboardSidebar > renders with mode slideover correctly 1`] = `
       </button>
       <!--v-if-->
     </div>
-    <div data-slot="body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2 sm:px-6"></div>
+    <div data-slot="dashboard-sidebar-body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2 sm:px-6"></div>
     <!--v-if-->
   </div>
   <!--teleport end-->
@@ -247,28 +247,28 @@ exports[`DashboardSidebar > renders with mode slideover correctly 1`] = `
 `;
 
 exports[`DashboardSidebar > renders with resizable correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0" data-slot="root" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0" data-slot="dashboard-sidebar" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
-    <div data-slot="body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
+    <div data-slot="dashboard-sidebar-body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
   </div>
-  <div role="separator" class="hidden lg:block touch-none select-none cursor-ew-resize relative before:absolute before:inset-y-0 before:-left-1.5 before:-right-1.5 before:z-1" aria-controls="dashboard-sidebar-v-0" data-slot="handle"></div>
+  <div role="separator" data-slot="dashboard-sidebar-handle" class="hidden lg:block touch-none select-none cursor-ew-resize relative before:absolute before:inset-y-0 before:-left-1.5 before:-right-1.5 before:z-1" aria-controls="dashboard-sidebar-v-0"></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`DashboardSidebar > renders with resize-handle slot correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0" data-slot="root" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0" data-slot="dashboard-sidebar" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
-    <div data-slot="body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
+    <div data-slot="dashboard-sidebar-body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
   </div>Resize handle slot
   <!--v-if-->
@@ -276,13 +276,13 @@ exports[`DashboardSidebar > renders with resize-handle slot correctly 1`] = `
 `;
 
 exports[`DashboardSidebar > renders with side right correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0" data-slot="root" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0" data-slot="dashboard-sidebar" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0" style="--width: 15%;">
     <!--v-if-->
-    <div data-slot="body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
+    <div data-slot="dashboard-sidebar-body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -291,13 +291,13 @@ exports[`DashboardSidebar > renders with side right correctly 1`] = `
 `;
 
 exports[`DashboardSidebar > renders with toggle correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0" data-slot="root" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0" data-slot="dashboard-sidebar" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
-    <div data-slot="body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
+    <div data-slot="dashboard-sidebar-body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -306,13 +306,13 @@ exports[`DashboardSidebar > renders with toggle correctly 1`] = `
 `;
 
 exports[`DashboardSidebar > renders with toggle slot correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0" data-slot="root" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0" data-slot="dashboard-sidebar" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
-    <div data-slot="body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
+    <div data-slot="dashboard-sidebar-body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -321,13 +321,13 @@ exports[`DashboardSidebar > renders with toggle slot correctly 1`] = `
 `;
 
 exports[`DashboardSidebar > renders with toggleSide correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0" data-slot="root" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0" data-slot="dashboard-sidebar" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
-    <div data-slot="body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
+    <div data-slot="dashboard-sidebar-body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -341,7 +341,7 @@ exports[`DashboardSidebar > renders with toggleSide correctly 1`] = `
         <!--v-if-->
       </button>
     </div>
-    <div data-slot="body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2 sm:px-6"></div>
+    <div data-slot="dashboard-sidebar-body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2 sm:px-6"></div>
     <!--v-if-->
   </div>
   <!--teleport end-->
@@ -349,13 +349,13 @@ exports[`DashboardSidebar > renders with toggleSide correctly 1`] = `
 `;
 
 exports[`DashboardSidebar > renders with ui correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0" data-slot="root" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0" data-slot="dashboard-sidebar" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
-    <div data-slot="body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-4"></div>
+    <div data-slot="dashboard-sidebar-body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-4"></div>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -364,13 +364,13 @@ exports[`DashboardSidebar > renders with ui correctly 1`] = `
 `;
 
 exports[`DashboardSidebar > renders without toggle correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0" data-slot="root" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0" data-slot="dashboard-sidebar" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
-    <div data-slot="body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
+    <div data-slot="dashboard-sidebar-body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
   </div>
   <!--v-if-->

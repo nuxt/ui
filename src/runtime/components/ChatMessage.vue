@@ -113,20 +113,20 @@ const ui = computed(() => tv(theme, appConfig.ui?.chatMessage)({
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-role="props.role" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="(!!slots.files && fileParts.length) || !!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
+  <Primitive :as="props.as" :data-role="props.role" data-slot="chat-message" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div v-if="(!!slots.files && fileParts.length) || !!slots.header" data-slot="chat-message-header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header" v-bind="{ ...messageProps }">
-        <div v-if="!!slots.files && fileParts.length" data-slot="files" :class="ui.files({ class: props.ui?.files })">
+        <div v-if="!!slots.files && fileParts.length" data-slot="chat-message-files" :class="ui.files({ class: props.ui?.files })">
           <slot name="files" v-bind="{ ...messageProps, parts: fileParts }" />
         </div>
       </slot>
     </div>
 
-    <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
-      <div v-if="props.icon || props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+    <div data-slot="chat-message-container" :class="ui.container({ class: props.ui?.container })">
+      <div v-if="props.icon || props.avatar || !!slots.leading" data-slot="chat-message-leading" :class="ui.leading({ class: props.ui?.leading })">
         <slot name="leading" v-bind="{ ...messageProps, avatar: props.avatar, ui }">
-          <UIcon v-if="props.icon" :name="props.icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
-          <UAvatar v-else-if="props.avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
+          <UIcon v-if="props.icon" :name="props.icon" data-slot="chat-message-leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+          <UAvatar v-else-if="props.avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="chat-message-leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
         </slot>
       </div>
 
@@ -150,7 +150,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.chatMessage)({
             </slot>
           </div>
 
-          <div v-if="props.actions || !!slots.actions" data-slot="actions" :class="ui.actions({ class: props.ui?.actions })">
+          <div v-if="props.actions || !!slots.actions" data-slot="chat-message-actions" :class="ui.actions({ class: props.ui?.actions })">
             <slot name="actions" v-bind="{ ...messageProps, actions: props.actions }">
               <UTooltip v-for="(action, index) in props.actions" :key="index" :text="action.label">
                 <UButton

@@ -183,6 +183,7 @@ const navigate = handleNavigation
   </Slot>
   <ULinkBase
     v-else
+    data-slot="link"
     v-bind="{
       ...$attrs,
       as,

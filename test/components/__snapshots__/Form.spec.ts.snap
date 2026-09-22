@@ -1,58 +1,58 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Form > custom validation works > with error 1`] = `
-"<form id="42" method="post" class="">
-  <div data-orientation="vertical" data-slot="root" class="text-sm" id="emailField">
-    <div data-slot="wrapper" class="">
+"<form id="42" method="post" data-slot="form" class="">
+  <div data-orientation="vertical" data-slot="form-field" class="text-sm" id="emailField">
+    <div data-slot="form-field-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div class="">
-      <div data-slot="root" class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="base" value="bob@dylan.com">
+    <div data-slot="form-field-container" class="">
+      <div data-slot="input" class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="input-base" value="bob@dylan.com">
         <!--v-if-->
         <!--v-if-->
       </div>
       <!--v-if-->
     </div>
   </div>
-  <div data-orientation="vertical" data-slot="root" class="text-sm" id="passwordField">
-    <div data-slot="wrapper" class="">
+  <div data-orientation="vertical" data-slot="form-field" class="text-sm" id="passwordField">
+    <div data-slot="form-field-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div class="">
-      <div data-slot="root" class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default outline-error/25 focus-visible:outline-3 focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" data-slot="base" value="short" aria-describedby="v-0-0-1-error">
+    <div data-slot="form-field-container" class="">
+      <div data-slot="input" class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default outline-error/25 focus-visible:outline-3 focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" data-slot="input-base" value="short" aria-describedby="v-0-0-1-error">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Must be at least 8 characters</div>
+      <div id="v-0-0-1-error" data-slot="form-field-error" class="mt-2 text-error">Must be at least 8 characters</div>
     </div>
   </div>
 </form>"
 `;
 
 exports[`Form > custom validation works > without error 1`] = `
-"<form id="42" method="post" class="">
-  <div data-orientation="vertical" data-slot="root" class="text-sm" id="emailField">
-    <div data-slot="wrapper" class="">
+"<form id="42" method="post" data-slot="form" class="">
+  <div data-orientation="vertical" data-slot="form-field" class="text-sm" id="emailField">
+    <div data-slot="form-field-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div class="">
-      <div data-slot="root" class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="base" value="bob@dylan.com">
+    <div data-slot="form-field-container" class="">
+      <div data-slot="input" class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="input-base" value="bob@dylan.com">
         <!--v-if-->
         <!--v-if-->
       </div>
       <!--v-if-->
     </div>
   </div>
-  <div data-orientation="vertical" data-slot="root" class="text-sm" id="passwordField">
-    <div data-slot="wrapper" class="">
+  <div data-orientation="vertical" data-slot="form-field" class="text-sm" id="passwordField">
+    <div data-slot="form-field-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div class="">
-      <div data-slot="root" class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="base" value="validpassword">
+    <div data-slot="form-field-container" class="">
+      <div data-slot="input" class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="input-base" value="validpassword">
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -63,58 +63,58 @@ exports[`Form > custom validation works > without error 1`] = `
 `;
 
 exports[`Form > joi validation works > with error 1`] = `
-"<form id="42" method="post" class="">
-  <div data-orientation="vertical" data-slot="root" class="text-sm" id="emailField">
-    <div data-slot="wrapper" class="">
+"<form id="42" method="post" data-slot="form" class="">
+  <div data-orientation="vertical" data-slot="form-field" class="text-sm" id="emailField">
+    <div data-slot="form-field-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div class="">
-      <div data-slot="root" class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="base" value="bob@dylan.com">
+    <div data-slot="form-field-container" class="">
+      <div data-slot="input" class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="input-base" value="bob@dylan.com">
         <!--v-if-->
         <!--v-if-->
       </div>
       <!--v-if-->
     </div>
   </div>
-  <div data-orientation="vertical" data-slot="root" class="text-sm" id="passwordField">
-    <div data-slot="wrapper" class="">
+  <div data-orientation="vertical" data-slot="form-field" class="text-sm" id="passwordField">
+    <div data-slot="form-field-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div class="">
-      <div data-slot="root" class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default outline-error/25 focus-visible:outline-3 focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" data-slot="base" value="short" aria-describedby="v-0-0-1-error">
+    <div data-slot="form-field-container" class="">
+      <div data-slot="input" class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default outline-error/25 focus-visible:outline-3 focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" data-slot="input-base" value="short" aria-describedby="v-0-0-1-error">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Must be at least 8 characters</div>
+      <div id="v-0-0-1-error" data-slot="form-field-error" class="mt-2 text-error">Must be at least 8 characters</div>
     </div>
   </div>
 </form>"
 `;
 
 exports[`Form > joi validation works > without error 1`] = `
-"<form id="42" method="post" class="">
-  <div data-orientation="vertical" data-slot="root" class="text-sm" id="emailField">
-    <div data-slot="wrapper" class="">
+"<form id="42" method="post" data-slot="form" class="">
+  <div data-orientation="vertical" data-slot="form-field" class="text-sm" id="emailField">
+    <div data-slot="form-field-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div class="">
-      <div data-slot="root" class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="base" value="bob@dylan.com">
+    <div data-slot="form-field-container" class="">
+      <div data-slot="input" class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="input-base" value="bob@dylan.com">
         <!--v-if-->
         <!--v-if-->
       </div>
       <!--v-if-->
     </div>
   </div>
-  <div data-orientation="vertical" data-slot="root" class="text-sm" id="passwordField">
-    <div data-slot="wrapper" class="">
+  <div data-orientation="vertical" data-slot="form-field" class="text-sm" id="passwordField">
+    <div data-slot="form-field-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div class="">
-      <div data-slot="root" class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="base" value="validpassword">
+    <div data-slot="form-field-container" class="">
+      <div data-slot="input" class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="input-base" value="validpassword">
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -124,75 +124,75 @@ exports[`Form > joi validation works > without error 1`] = `
 </form>"
 `;
 
-exports[`Form > renders with aria-label correctly 1`] = `"<form id="v-0-0" method="post" class="" aria-label="Contact form"></form>"`;
+exports[`Form > renders with aria-label correctly 1`] = `"<form id="v-0-0" method="post" data-slot="form" class="" aria-label="Contact form"></form>"`;
 
-exports[`Form > renders with class correctly 1`] = `"<form id="v-0-0" method="post" class="gap-4"></form>"`;
+exports[`Form > renders with class correctly 1`] = `"<form id="v-0-0" method="post" data-slot="form" class="gap-4"></form>"`;
 
-exports[`Form > renders with default slot correctly 1`] = `"<form id="v-0-0" method="post" class="">Form slot</form>"`;
+exports[`Form > renders with default slot correctly 1`] = `"<form id="v-0-0" method="post" data-slot="form" class="">Form slot</form>"`;
 
-exports[`Form > renders with id correctly 1`] = `"<form id="id" method="post" class=""></form>"`;
+exports[`Form > renders with id correctly 1`] = `"<form id="id" method="post" data-slot="form" class=""></form>"`;
 
-exports[`Form > renders with method correctly 1`] = `"<form id="v-0-0" method="get" class=""></form>"`;
+exports[`Form > renders with method correctly 1`] = `"<form id="v-0-0" method="get" data-slot="form" class=""></form>"`;
 
-exports[`Form > renders with name correctly 1`] = `"<form id="v-0-0" name="contact" method="post" class=""></form>"`;
+exports[`Form > renders with name correctly 1`] = `"<form id="v-0-0" name="contact" method="post" data-slot="form" class=""></form>"`;
 
-exports[`Form > renders with state correctly 1`] = `"<form id="v-0-0" method="post" class=""></form>"`;
+exports[`Form > renders with state correctly 1`] = `"<form id="v-0-0" method="post" data-slot="form" class=""></form>"`;
 
-exports[`Form > renders with ui correctly 1`] = `"<form id="v-0-0" method="post" class="rounded-lg"></form>"`;
+exports[`Form > renders with ui correctly 1`] = `"<form id="v-0-0" method="post" data-slot="form" class="rounded-lg"></form>"`;
 
 exports[`Form > superstruct validation works > with error 1`] = `
-"<form id="42" method="post" class="">
-  <div data-orientation="vertical" data-slot="root" class="text-sm" id="emailField">
-    <div data-slot="wrapper" class="">
+"<form id="42" method="post" data-slot="form" class="">
+  <div data-orientation="vertical" data-slot="form-field" class="text-sm" id="emailField">
+    <div data-slot="form-field-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div class="">
-      <div data-slot="root" class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="base" value="bob@dylan.com">
+    <div data-slot="form-field-container" class="">
+      <div data-slot="input" class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="input-base" value="bob@dylan.com">
         <!--v-if-->
         <!--v-if-->
       </div>
       <!--v-if-->
     </div>
   </div>
-  <div data-orientation="vertical" data-slot="root" class="text-sm" id="passwordField">
-    <div data-slot="wrapper" class="">
+  <div data-orientation="vertical" data-slot="form-field" class="text-sm" id="passwordField">
+    <div data-slot="form-field-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div class="">
-      <div data-slot="root" class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default outline-error/25 focus-visible:outline-3 focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" data-slot="base" value="short" aria-describedby="v-0-0-1-error">
+    <div data-slot="form-field-container" class="">
+      <div data-slot="input" class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default outline-error/25 focus-visible:outline-3 focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" data-slot="input-base" value="short" aria-describedby="v-0-0-1-error">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Must be at least 8 characters</div>
+      <div id="v-0-0-1-error" data-slot="form-field-error" class="mt-2 text-error">Must be at least 8 characters</div>
     </div>
   </div>
 </form>"
 `;
 
 exports[`Form > superstruct validation works > without error 1`] = `
-"<form id="42" method="post" class="">
-  <div data-orientation="vertical" data-slot="root" class="text-sm" id="emailField">
-    <div data-slot="wrapper" class="">
+"<form id="42" method="post" data-slot="form" class="">
+  <div data-orientation="vertical" data-slot="form-field" class="text-sm" id="emailField">
+    <div data-slot="form-field-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div class="">
-      <div data-slot="root" class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="base" value="bob@dylan.com">
+    <div data-slot="form-field-container" class="">
+      <div data-slot="input" class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="input-base" value="bob@dylan.com">
         <!--v-if-->
         <!--v-if-->
       </div>
       <!--v-if-->
     </div>
   </div>
-  <div data-orientation="vertical" data-slot="root" class="text-sm" id="passwordField">
-    <div data-slot="wrapper" class="">
+  <div data-orientation="vertical" data-slot="form-field" class="text-sm" id="passwordField">
+    <div data-slot="form-field-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div class="">
-      <div data-slot="root" class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="base" value="validpassword">
+    <div data-slot="form-field-container" class="">
+      <div data-slot="input" class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="input-base" value="validpassword">
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -203,58 +203,58 @@ exports[`Form > superstruct validation works > without error 1`] = `
 `;
 
 exports[`Form > valibot validation works > with error 1`] = `
-"<form id="42" method="post" class="">
-  <div data-orientation="vertical" data-slot="root" class="text-sm" id="emailField">
-    <div data-slot="wrapper" class="">
+"<form id="42" method="post" data-slot="form" class="">
+  <div data-orientation="vertical" data-slot="form-field" class="text-sm" id="emailField">
+    <div data-slot="form-field-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div class="">
-      <div data-slot="root" class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="base" value="bob@dylan.com">
+    <div data-slot="form-field-container" class="">
+      <div data-slot="input" class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="input-base" value="bob@dylan.com">
         <!--v-if-->
         <!--v-if-->
       </div>
       <!--v-if-->
     </div>
   </div>
-  <div data-orientation="vertical" data-slot="root" class="text-sm" id="passwordField">
-    <div data-slot="wrapper" class="">
+  <div data-orientation="vertical" data-slot="form-field" class="text-sm" id="passwordField">
+    <div data-slot="form-field-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div class="">
-      <div data-slot="root" class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default outline-error/25 focus-visible:outline-3 focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" data-slot="base" value="short" aria-describedby="v-0-0-1-error">
+    <div data-slot="form-field-container" class="">
+      <div data-slot="input" class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default outline-error/25 focus-visible:outline-3 focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" data-slot="input-base" value="short" aria-describedby="v-0-0-1-error">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Must be at least 8 characters</div>
+      <div id="v-0-0-1-error" data-slot="form-field-error" class="mt-2 text-error">Must be at least 8 characters</div>
     </div>
   </div>
 </form>"
 `;
 
 exports[`Form > valibot validation works > without error 1`] = `
-"<form id="42" method="post" class="">
-  <div data-orientation="vertical" data-slot="root" class="text-sm" id="emailField">
-    <div data-slot="wrapper" class="">
+"<form id="42" method="post" data-slot="form" class="">
+  <div data-orientation="vertical" data-slot="form-field" class="text-sm" id="emailField">
+    <div data-slot="form-field-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div class="">
-      <div data-slot="root" class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="base" value="bob@dylan.com">
+    <div data-slot="form-field-container" class="">
+      <div data-slot="input" class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="input-base" value="bob@dylan.com">
         <!--v-if-->
         <!--v-if-->
       </div>
       <!--v-if-->
     </div>
   </div>
-  <div data-orientation="vertical" data-slot="root" class="text-sm" id="passwordField">
-    <div data-slot="wrapper" class="">
+  <div data-orientation="vertical" data-slot="form-field" class="text-sm" id="passwordField">
+    <div data-slot="form-field-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div class="">
-      <div data-slot="root" class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="base" value="validpassword">
+    <div data-slot="form-field-container" class="">
+      <div data-slot="input" class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="input-base" value="validpassword">
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -265,58 +265,58 @@ exports[`Form > valibot validation works > without error 1`] = `
 `;
 
 exports[`Form > yup validation works > with error 1`] = `
-"<form id="42" method="post" class="">
-  <div data-orientation="vertical" data-slot="root" class="text-sm" id="emailField">
-    <div data-slot="wrapper" class="">
+"<form id="42" method="post" data-slot="form" class="">
+  <div data-orientation="vertical" data-slot="form-field" class="text-sm" id="emailField">
+    <div data-slot="form-field-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div class="">
-      <div data-slot="root" class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="base" value="bob@dylan.com">
+    <div data-slot="form-field-container" class="">
+      <div data-slot="input" class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="input-base" value="bob@dylan.com">
         <!--v-if-->
         <!--v-if-->
       </div>
       <!--v-if-->
     </div>
   </div>
-  <div data-orientation="vertical" data-slot="root" class="text-sm" id="passwordField">
-    <div data-slot="wrapper" class="">
+  <div data-orientation="vertical" data-slot="form-field" class="text-sm" id="passwordField">
+    <div data-slot="form-field-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div class="">
-      <div data-slot="root" class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default outline-error/25 focus-visible:outline-3 focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" data-slot="base" value="short" aria-describedby="v-0-0-1-error">
+    <div data-slot="form-field-container" class="">
+      <div data-slot="input" class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default outline-error/25 focus-visible:outline-3 focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" data-slot="input-base" value="short" aria-describedby="v-0-0-1-error">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Must be at least 8 characters</div>
+      <div id="v-0-0-1-error" data-slot="form-field-error" class="mt-2 text-error">Must be at least 8 characters</div>
     </div>
   </div>
 </form>"
 `;
 
 exports[`Form > yup validation works > without error 1`] = `
-"<form id="42" method="post" class="">
-  <div data-orientation="vertical" data-slot="root" class="text-sm" id="emailField">
-    <div data-slot="wrapper" class="">
+"<form id="42" method="post" data-slot="form" class="">
+  <div data-orientation="vertical" data-slot="form-field" class="text-sm" id="emailField">
+    <div data-slot="form-field-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div class="">
-      <div data-slot="root" class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="base" value="bob@dylan.com">
+    <div data-slot="form-field-container" class="">
+      <div data-slot="input" class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="input-base" value="bob@dylan.com">
         <!--v-if-->
         <!--v-if-->
       </div>
       <!--v-if-->
     </div>
   </div>
-  <div data-orientation="vertical" data-slot="root" class="text-sm" id="passwordField">
-    <div data-slot="wrapper" class="">
+  <div data-orientation="vertical" data-slot="form-field" class="text-sm" id="passwordField">
+    <div data-slot="form-field-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div class="">
-      <div data-slot="root" class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="base" value="validpassword">
+    <div data-slot="form-field-container" class="">
+      <div data-slot="input" class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="input-base" value="validpassword">
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -327,58 +327,58 @@ exports[`Form > yup validation works > without error 1`] = `
 `;
 
 exports[`Form > zod validation works > with error 1`] = `
-"<form id="42" method="post" class="">
-  <div data-orientation="vertical" data-slot="root" class="text-sm" id="emailField">
-    <div data-slot="wrapper" class="">
+"<form id="42" method="post" data-slot="form" class="">
+  <div data-orientation="vertical" data-slot="form-field" class="text-sm" id="emailField">
+    <div data-slot="form-field-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div class="">
-      <div data-slot="root" class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="base" value="bob@dylan.com">
+    <div data-slot="form-field-container" class="">
+      <div data-slot="input" class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="input-base" value="bob@dylan.com">
         <!--v-if-->
         <!--v-if-->
       </div>
       <!--v-if-->
     </div>
   </div>
-  <div data-orientation="vertical" data-slot="root" class="text-sm" id="passwordField">
-    <div data-slot="wrapper" class="">
+  <div data-orientation="vertical" data-slot="form-field" class="text-sm" id="passwordField">
+    <div data-slot="form-field-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div class="">
-      <div data-slot="root" class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default outline-error/25 focus-visible:outline-3 focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" data-slot="base" value="short" aria-describedby="v-0-0-1-error">
+    <div data-slot="form-field-container" class="">
+      <div data-slot="input" class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default outline-error/25 focus-visible:outline-3 focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" data-slot="input-base" value="short" aria-describedby="v-0-0-1-error">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Must be at least 8 characters</div>
+      <div id="v-0-0-1-error" data-slot="form-field-error" class="mt-2 text-error">Must be at least 8 characters</div>
     </div>
   </div>
 </form>"
 `;
 
 exports[`Form > zod validation works > without error 1`] = `
-"<form id="42" method="post" class="">
-  <div data-orientation="vertical" data-slot="root" class="text-sm" id="emailField">
-    <div data-slot="wrapper" class="">
+"<form id="42" method="post" data-slot="form" class="">
+  <div data-orientation="vertical" data-slot="form-field" class="text-sm" id="emailField">
+    <div data-slot="form-field-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div class="">
-      <div data-slot="root" class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="base" value="bob@dylan.com">
+    <div data-slot="form-field-container" class="">
+      <div data-slot="input" class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="input-base" value="bob@dylan.com">
         <!--v-if-->
         <!--v-if-->
       </div>
       <!--v-if-->
     </div>
   </div>
-  <div data-orientation="vertical" data-slot="root" class="text-sm" id="passwordField">
-    <div data-slot="wrapper" class="">
+  <div data-orientation="vertical" data-slot="form-field" class="text-sm" id="passwordField">
+    <div data-slot="form-field-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div class="">
-      <div data-slot="root" class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="base" value="validpassword">
+    <div data-slot="form-field-container" class="">
+      <div data-slot="input" class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary md:text-sm" autocomplete="off" aria-invalid="false" data-slot="input-base" value="validpassword">
         <!--v-if-->
         <!--v-if-->
       </div>

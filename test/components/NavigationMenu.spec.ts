@@ -128,11 +128,11 @@ describe('NavigationMenu', () => {
       }
     })
 
-    const link = wrapper.find('[data-slot="link"]')
+    const link = wrapper.find('[data-slot="navigation-menu-link"]')
     expect(wrapper.findAll(`[id="${link.attributes('id')}"]`)).toHaveLength(1)
 
-    await wrapper.find('[data-slot="linkTrailing"]').trigger('click')
-    expect(wrapper.find('[data-slot="link"]').attributes('data-state')).toBe('open')
+    await wrapper.find('[data-slot="navigation-menu-linkTrailing"]').trigger('click')
+    expect(wrapper.find('[data-slot="navigation-menu-link"]').attributes('data-state')).toBe('open')
   })
 
   it('keeps the trailing accordion trigger for a vertical item with `to`', async () => {
@@ -143,10 +143,10 @@ describe('NavigationMenu', () => {
       }
     })
 
-    expect(wrapper.find('[data-slot="link"]').element.tagName).toBe('A')
+    expect(wrapper.find('[data-slot="navigation-menu-link"]').element.tagName).toBe('A')
 
-    await wrapper.find('[data-slot="linkTrailing"]').trigger('click')
-    expect(wrapper.find('[data-slot="content"]').attributes('data-state')).toBe('open')
+    await wrapper.find('[data-slot="navigation-menu-linkTrailing"]').trigger('click')
+    expect(wrapper.find('[data-slot="navigation-menu-content"]').attributes('data-state')).toBe('open')
   })
 
   it('toggles a horizontal item with `to` from its trailing area', async () => {

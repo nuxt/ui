@@ -270,18 +270,18 @@ const trackThumbStyle = computed(() => ({
 </script>
 
 <template>
-  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" :data-disabled="disabled ? true : undefined">
-    <div data-slot="picker" :class="ui.picker({ class: props.ui?.picker })">
+  <Primitive :as="props.as" data-slot="color-picker" :class="ui.root({ class: [props.ui?.root, props.class] })" :data-disabled="disabled ? true : undefined">
+    <div data-slot="color-picker-picker" :class="ui.picker({ class: props.ui?.picker })">
       <div
         ref="selectorRef"
-        data-slot="selector"
+        data-slot="color-picker-selector"
         :class="ui.selector({ class: props.ui?.selector })"
         :style="selectorStyle"
       >
-        <div data-slot="selectorBackground" :class="ui.selectorBackground({ class: props.ui?.selectorBackground })" data-color-picker-background>
+        <div data-slot="color-picker-selectorBackground" :class="ui.selectorBackground({ class: props.ui?.selectorBackground })" data-color-picker-background>
           <div
             ref="selectorThumbRef"
-            data-slot="selectorThumb"
+            data-slot="color-picker-selectorThumb"
             :class="ui.selectorThumb({ class: props.ui?.selectorThumb })"
             :style="selectorThumbStyle"
             :data-disabled="disabled ? true : undefined"
@@ -290,13 +290,13 @@ const trackThumbStyle = computed(() => ({
       </div>
       <div
         ref="trackRef"
-        data-slot="track"
+        data-slot="color-picker-track"
         :class="ui.track({ class: props.ui?.track })"
         data-color-picker-track
       >
         <div
           ref="trackThumbRef"
-          data-slot="trackThumb"
+          data-slot="color-picker-trackThumb"
           :class="ui.trackThumb({ class: props.ui?.trackThumb })"
           :style="trackThumbStyle"
           :data-disabled="disabled ? true : undefined"

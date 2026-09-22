@@ -83,10 +83,10 @@ function handleError() {
   <Primitive :as="as.root" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div v-if="props.icon || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
       <slot name="leading" :ui="ui">
-        <UIcon v-if="props.icon" :name="props.icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+        <UIcon v-if="props.icon" :name="props.icon" data-slot="error-leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
       </slot>
     </div>
-    <p v-if="!!props.error?.statusCode || !!props.error?.status || !!slots.statusCode" data-slot="statusCode" :class="ui.statusCode({ class: props.ui?.statusCode })">
+    <p v-if="!!props.error?.statusCode || !!props.error?.status || !!slots.statusCode" data-slot="error-statusCode" :class="ui.statusCode({ class: props.ui?.statusCode })">
       <slot name="statusCode">
         {{ props.error?.statusCode || props.error?.status }}
       </slot>
@@ -101,7 +101,7 @@ function handleError() {
         {{ props.error?.message }}
       </slot>
     </p>
-    <div v-if="!!props.clear || !!slots.links" data-slot="links" :class="ui.links({ class: props.ui?.links })">
+    <div v-if="!!props.clear || !!slots.links" data-slot="error-links" :class="ui.links({ class: props.ui?.links })">
       <slot name="links">
         <UButton
           v-if="props.clear"

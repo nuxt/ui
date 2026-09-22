@@ -317,14 +317,14 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'editor'" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <template v-if="editor">
       <slot :editor="editor" :handlers="handlers" />
 
       <EditorContent
         role="presentation"
         :editor="editor"
-        data-slot="content"
+        data-slot="editor-content"
         :class="ui.content({ class: props.ui?.content })"
       />
     </template>

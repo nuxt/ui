@@ -73,20 +73,20 @@ const ui = computed(() => tv(theme, appConfig.ui?.badge)({
 </script>
 
 <template>
-  <Primitive :as="props.as" data-slot="base" :class="ui.base({ class: [props.ui?.base, props.class] })">
+  <Primitive :as="props.as" data-slot="badge" :class="ui.base({ class: [props.ui?.base, props.class] })">
     <slot name="leading" :ui="ui">
-      <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
-      <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
+      <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="badge-leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+      <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="badge-leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
     </slot>
 
     <slot :ui="ui">
-      <span v-if="props.label !== undefined && props.label !== null" data-slot="label" :class="ui.label({ class: props.ui?.label })">
+      <span v-if="props.label !== undefined && props.label !== null" data-slot="badge-label" :class="ui.label({ class: props.ui?.label })">
         {{ props.label }}
       </span>
     </slot>
 
     <slot name="trailing" :ui="ui">
-      <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+      <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" data-slot="badge-trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
     </slot>
   </Primitive>
 </template>

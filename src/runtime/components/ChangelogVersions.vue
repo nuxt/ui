@@ -83,14 +83,14 @@ const ui = computed(() => tv(theme, appConfig.ui?.changelogVersions)())
 </script>
 
 <template>
-  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="!!props.indicator || !!slots.indicator" data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })">
+  <Primitive :as="props.as" data-slot="changelog-versions" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div v-if="!!props.indicator || !!slots.indicator" data-slot="changelog-versions-indicator" :class="ui.indicator({ class: props.ui?.indicator })">
       <slot name="indicator">
-        <Motion v-if="!!props.indicatorMotion" data-slot="beam" :class="ui.beam({ class: props.ui?.beam })" :style="{ height }" />
+        <Motion v-if="!!props.indicatorMotion" data-slot="changelog-versions-beam" :class="ui.beam({ class: props.ui?.beam })" :style="{ height }" />
       </slot>
     </div>
 
-    <div v-if="props.versions?.length || !!slots.default" data-slot="container" :class="ui.container({ class: props.ui?.container })">
+    <div v-if="props.versions?.length || !!slots.default" data-slot="changelog-versions-container" :class="ui.container({ class: props.ui?.container })">
       <slot>
         <UChangelogVersion
           v-for="(version, index) in props.versions"

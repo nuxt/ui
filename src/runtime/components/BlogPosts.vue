@@ -62,7 +62,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.blogPosts)({ orientation: prop
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-orientation="props.orientation" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="blog-posts" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot>
       <UBlogPost
         v-for="(post, index) in props.posts"

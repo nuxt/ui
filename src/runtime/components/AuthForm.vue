@@ -213,9 +213,9 @@ defineExpose({
   <Primitive :as="as.root" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div v-if="(props.icon || !!slots.leading) || (props.title || !!slots.title) || (props.description || !!slots.description) || !!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header">
-        <div v-if="props.icon || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+        <div v-if="props.icon || !!slots.leading" data-slot="auth-form-leading" :class="ui.leading({ class: props.ui?.leading })">
           <slot name="leading" :ui="ui">
-            <UIcon v-if="props.icon" :name="props.icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+            <UIcon v-if="props.icon" :name="props.icon" data-slot="auth-form-leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
           </slot>
         </div>
 
@@ -225,7 +225,7 @@ defineExpose({
           </slot>
         </Primitive>
 
-        <div v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+        <div v-if="props.description || !!slots.description" data-slot="auth-form-description" :class="ui.description({ class: props.ui?.description })">
           <slot name="description">
             {{ props.description }}
           </slot>
@@ -233,8 +233,8 @@ defineExpose({
       </slot>
     </div>
 
-    <div data-slot="body" :class="ui.body({ class: props.ui?.body })">
-      <div v-if="props.providers?.length || !!slots.providers" data-slot="providers" :class="ui.providers({ class: props.ui?.providers })">
+    <div data-slot="auth-form-body" :class="ui.body({ class: props.ui?.body })">
+      <div v-if="props.providers?.length || !!slots.providers" data-slot="auth-form-providers" :class="ui.providers({ class: props.ui?.providers })">
         <slot name="providers">
           <UButton
             v-for="(provider, index) in props.providers"
@@ -251,7 +251,7 @@ defineExpose({
         <USeparator
           v-if="props.providers?.length && props.fields?.length"
           v-bind="typeof props.separator === 'object' ? props.separator : { label: props.separator }"
-          data-slot="separator"
+          data-slot="auth-form-separator"
           :class="ui.separator({ class: props.ui?.separator })"
         />
       </slot>
@@ -267,7 +267,7 @@ defineExpose({
         :loading-auto="props.loadingAuto"
         :class="ui.form({ class: props.ui?.form })"
         v-bind="$attrs"
-        data-slot="form"
+        data-slot="auth-form-form"
         @submit="props.onSubmit"
       >
         <UFormField
@@ -279,14 +279,14 @@ defineExpose({
             <UCheckbox
               v-if="field.type === 'checkbox'"
               v-model="state[field.name]"
-              data-slot="checkbox"
+              data-slot="auth-form-checkbox"
               :class="ui.checkbox({ class: props.ui?.checkbox })"
               v-bind="(omitFieldProps(field))"
             />
             <USelectMenu
               v-else-if="field.type === 'select'"
               v-model="state[field.name]"
-              data-slot="select"
+              data-slot="auth-form-select"
               :class="ui.select({ class: props.ui?.select })"
               v-bind="(omitFieldProps(field) as AuthFormSelectField)"
             />
@@ -294,7 +294,7 @@ defineExpose({
               v-else-if="field.type === 'otp'"
               :id="field.name"
               v-model="state[field.name]"
-              data-slot="otp"
+              data-slot="auth-form-otp"
               :class="ui.otp({ class: props.ui?.otp })"
               v-bind="(Object.assign({}, omitFieldProps(field), typeof (field as AuthFormOtpField).otp === 'object' ? (field as AuthFormOtpField).otp : {}) as any)"
               otp
@@ -303,7 +303,7 @@ defineExpose({
               v-else-if="field.type === 'password'"
               :ref="(el: any) => { passwordRefs[field.name] = el }"
               v-model="state[field.name]"
-              data-slot="password"
+              data-slot="auth-form-password"
               :class="ui.password({ class: props.ui?.password })"
               v-bind="(omitFieldProps(field) as AuthFormInputField<'password'>)"
               :type="passwordVisibility[field.name] ? 'text' : 'password'"
@@ -324,7 +324,7 @@ defineExpose({
             <UInput
               v-else
               v-model="state[field.name]"
-              data-slot="input"
+              data-slot="auth-form-input"
               :class="ui.input({ class: props.ui?.input })"
               v-bind="(omitFieldProps(field) as AuthFormInputField)"
             />
@@ -362,7 +362,7 @@ defineExpose({
       </UForm>
     </div>
 
-    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
+    <div v-if="!!slots.footer" data-slot="auth-form-footer" :class="ui.footer({ class: props.ui?.footer })">
       <slot name="footer" />
     </div>
   </Primitive>
