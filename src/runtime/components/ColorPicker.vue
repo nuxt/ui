@@ -8,20 +8,23 @@ import type { ComponentConfig } from '../types/tv'
 
 type ColorPicker = ComponentConfig<typeof theme, AppConfig, 'colorPicker'>
 
-type HSVColor = {
+interface HSVColor {
   h: number
   s: number
   v: number
+  a?: number
 }
 
 function HSLtoHSV(hsl: HSLObject): HSVColor {
+  console.log(`🚀 ~ ColorPicker.vue:19 ~ HSLtoHSV ~ hsl:`, hsl);
   const x = hsl.S * (hsl.L < 50 ? hsl.L : 100 - hsl.L)
   const v = hsl.L + (x / 100)
 
   return {
     h: hsl.H,
     s: hsl.L === 0 ? hsl.S : 2 * x / v,
-    v
+    v,
+    a: hsl.A != null ? hsl.A * 100 : undefined
   }
 }
 
@@ -31,7 +34,8 @@ function HSVtoHSL(hsv: HSVColor): HSLObject {
   return {
     H: hsv.h,
     S: x === 0 || x === 200 ? 0 : Math.round(hsv.s * hsv.v / (x <= 100 ? x : 200 - x)),
-    L: x / 2
+    L: x / 2,
+    A: hsv.a != null ? hsv.a / 100 : undefined
   }
 }
 
@@ -64,6 +68,7 @@ export type ColorPickerProps = {
    * @defaultValue 'md'
    */
   size?: ColorPicker['variants']['size']
+  alphaTrack?: boolean
   class?: any
   ui?: ColorPicker['slots']
 }
@@ -71,7 +76,7 @@ export type ColorPickerProps = {
 </script>
 
 <script setup lang="ts">
-import { ref, nextTick, computed, toValue } from 'vue'
+import { ref, nextTick, computed, toValue, useTemplateRef, watch, triggerRef } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useEventListener, useElementBounding, watchThrottled, watchPausable } from '@vueuse/core'
 import { isClient } from '@vueuse/shared'
@@ -101,35 +106,39 @@ const pickedColor = computed<HSVColor>({
   get() {
     try {
       const color = new ColorTranslator(modelValue.value || props.defaultValue)
+      console.log(`🚀 ~ ColorPicker.vue:108 ~ color get:`, color);
 
-      return HSLtoHSV(color.HSLObject)
+      return HSLtoHSV(color.HSLAObject)
     } catch (_) {
       return { h: 0, s: 0, v: 100 }
     }
   },
   set(value) {
+    console.log(modelValue.value)
     const color = new ColorTranslator(HSVtoHSL(value), {
       labUnit: 'percent',
       cmykUnit: 'percent',
-      cmykFunction: 'cmyk'
+      cmykFunction: 'cmyk',
+      decimals: 4
     })
+      console.log(`🚀 ~ ColorPicker.vue:109 ~ color:`, color);
 
     switch (props.format) {
       case 'rgb':
-        modelValue.value = color.RGB
+        modelValue.value = props.alphaTrack ? color.RGBA : color.RGB
         break
       case 'hsl':
-        modelValue.value = color.HSL
+        modelValue.value = props.alphaTrack ? color.HSLA : color.HSL
         break
       case 'cmyk':
-        modelValue.value = color.CMYK
+        modelValue.value = props.alphaTrack ? color.CMYKA : color.CMYK
         break
       case 'lab':
-        modelValue.value = color.CIELab
+        modelValue.value = props.alphaTrack ? color.CIELabA : color.CIELab
         break
       case 'hex':
       default:
-        modelValue.value = color.HEX
+        modelValue.value = props.alphaTrack ? color.HEXA : color.HEX
     }
   }
 })
@@ -206,10 +215,16 @@ function normalizeBrightness(brightness: number): number {
   return 100 - brightness
 }
 
+function normalizeAlpha(alpha: number): number {
+  return 100 - alpha
+}
+
 const selectorRef = ref<HTMLDivElement | null>(null)
 const selectorThumbRef = ref<HTMLDivElement | null>(null)
 const trackRef = ref<HTMLDivElement | null>(null)
 const trackThumbRef = ref<HTMLDivElement | null>(null)
+const alphaTrackRef = ref<HTMLDivElement | null>(null)
+const alphaTrackThumbRef = ref<HTMLDivElement | null>(null)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const disabled = computed(() => props.disabled)
@@ -224,7 +239,13 @@ const { position: trackThumbPosition } = useColorDraggable(trackThumbRef, trackR
   y: normalizeHue(pickedColor.value.h, 'right')
 }, disabled)
 
+const { position: alphaTrackThumbPosition } = useColorDraggable(alphaTrackThumbRef, alphaTrackRef, 'y', {
+  x: 0,
+  y: normalizeAlpha(pickedColor.value.a ?? 0)
+}, disabled)
+
 const { pause: pauseWatchColor, resume: resumeWatchColor } = watchPausable(pickedColor, (hsb) => {
+  console.log(`🚀 ~ ColorPicker.vue:243 ~ hsb:`, hsb);
   selectorThumbPosition.value = {
     x: hsb.s,
     y: normalizeBrightness(hsb.v)
@@ -233,24 +254,39 @@ const { pause: pauseWatchColor, resume: resumeWatchColor } = watchPausable(picke
     x: 0,
     y: normalizeHue(hsb.h, 'right')
   }
+  alphaTrackThumbPosition.value = {
+    x: 0,
+    y: normalizeAlpha(hsb.a ?? 0)
+  }
 })
 
-watchThrottled([selectorThumbPosition, trackThumbPosition], () => {
+watchThrottled([selectorThumbPosition, trackThumbPosition, alphaTrackThumbPosition], () => {
   pauseWatchColor()
 
   pickedColor.value = {
     h: normalizeHue(trackThumbPosition.value.y),
     s: selectorThumbPosition.value.x,
-    v: normalizeBrightness(selectorThumbPosition.value.y)
+    v: normalizeBrightness(selectorThumbPosition.value.y),
+    a: normalizeAlpha(alphaTrackThumbPosition.value.y)
   }
 
   nextTick(resumeWatchColor)
 }, { throttle: () => props.throttle })
 
+watch([() => props.alphaTrack, () => props.format], () => {
+  triggerRef(modelValue)
+})
+
 const trackThumbColor = computed(() => new ColorTranslator(HSVtoHSL({
   h: normalizeHue(trackThumbPosition.value.y),
   s: 100,
   v: 100
+})).HEX)
+
+const alphaTrackThumbColor = computed(() => new ColorTranslator(HSVtoHSL({
+  h: 0,
+  s: 0,
+  v: alphaTrackThumbPosition.value.y,
 })).HEX)
 
 const selectorStyle = computed(() => ({
@@ -266,6 +302,12 @@ const selectorThumbStyle = computed(() => ({
 const trackThumbStyle = computed(() => ({
   backgroundColor: trackThumbColor.value,
   top: `${trackThumbPosition.value.y}%`
+}))
+
+const alphaTrackThumbStyle = computed(() => ({
+  backgroundColor: 'white',
+  backgroundImage: `linear-gradient(0deg, ${modelValue.value || props.defaultValue})`,
+  top: `${alphaTrackThumbPosition.value.y}%`
 }))
 </script>
 
@@ -302,6 +344,22 @@ const trackThumbStyle = computed(() => ({
           :data-disabled="disabled ? true : undefined"
         />
       </div>
+      <div
+        v-if="alphaTrack"
+        ref="alphaTrackRef"
+        data-slot="track"
+        :class="ui.track({ class: props.ui?.track })"
+        :style="{ '--current-color': ColorTranslator.toHEX(modelValue || defaultValue) }"
+        data-color-picker-alpha
+      >
+        <div
+          ref="alphaTrackThumbRef"
+          data-slot="trackThumb"
+          :class="ui.trackThumb({ class: props.ui?.trackThumb })"
+          :style="alphaTrackThumbStyle"
+          :data-disabled="disabled ? true : undefined"
+        />
+      </div>
     </div>
   </Primitive>
 </template>
@@ -313,5 +371,21 @@ const trackThumbStyle = computed(() => ({
 
 [data-color-picker-track] {
   background-image: linear-gradient(0deg, red 0, #f0f 17%, #00f 33%, #0ff 50%, #0f0 67%, #ff0 83%, red);
+}
+
+[data-color-picker-alpha] {
+  background-image: linear-gradient(to top, transparent 0%, var(--current-color));
+  &::before {
+    content: "";
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%222%22%20height%3D%222%22%20viewBox%3D%220%200%202%202%22%3E%3Cpath%20fill%3D%22%23c0c0c030%22%20d%3D%22M0%200h2v2H0z%22%2F%3E%3Cpath%20d%3D%22M0%200h1v2h1V1H0Z%22%20fill%3D%22%23c0c0c050%22%2F%3E%3C%2Fsvg%3E");
+    background-size: 8px 8px;
+    background-position: center, 4px 4px;
+    border-radius: inherit;
+    z-index: -1;
+  }
 }
 </style>

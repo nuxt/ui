@@ -1,13 +1,23 @@
 <script setup lang="ts">
 import theme from '#build/ui/color-picker'
+import type { ColorPickerProps } from '#ui/types'
 
 const sizes = Object.keys(theme.variants.size)
 
 const attrs = reactive({
-  size: [theme.defaultVariants.size]
+  size: [theme.defaultVariants.size],
 })
 
-const colorHex = ref('#9C27B0')
+const colorHex = ref('#9C27B050')
+const alphaTrack = ref(true)
+const formats:NonNullable<ColorPickerProps['format']>[] = [
+  'hex',
+  'rgb',
+  'hsl',
+  'cmyk',
+  'lab'
+]
+const targetFormat = ref<(typeof formats)[number]>('hex')
 
 function handleColorChange(event: Event) {
   colorHex.value = (event.target as HTMLInputElement).value
@@ -16,6 +26,8 @@ function handleColorChange(event: Event) {
 
 <template>
   <Navbar>
+    <USwitch v-model="alphaTrack" label="Alpha Track" />
+    <USelect v-model="targetFormat" :items="formats" />
     <USelect v-model="attrs.size" :items="sizes" multiple />
 
     <UFieldGroup>
@@ -27,6 +39,6 @@ function handleColorChange(event: Event) {
   </Navbar>
 
   <Matrix v-slot="props" :attrs="attrs">
-    <UColorPicker v-model="colorHex" v-bind="props" />
+    <UColorPicker v-model="colorHex" v-bind="props" :format="targetFormat" :alpha-track />
   </Matrix>
 </template>
