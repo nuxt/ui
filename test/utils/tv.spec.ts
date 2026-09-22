@@ -819,3 +819,25 @@ describe('tv theme sources', () => {
     expect(tv(stepsTheme)({ level: 4 }).base()).toContain('[&>h4]:[counter-increment:step]')
   })
 })
+
+describe('tv merger config', () => {
+  // What `useComponentOverrides` builds from `app.config.ui.tv`
+  const withConfig = (config?: Record<string, any>, prefix?: string) => new ComponentOverrides([undefined], false, engineFor(config as any, prefix))
+  const theme = { slots: { base: 'px-2 py-1' } }
+
+  it('merges with the default engine when nothing is set', () => {
+    expect(tvt(theme, withConfig({ prefix: undefined }))().base({ class: 'px-4' })).toBe('py-1 px-4')
+  })
+
+  it('reads prefixed classes with `prefix`', () => {
+    expect(tvt(theme, withConfig({ prefix: 'tw' }, 'tw'))().base({ class: 'tw:px-4' })).toBe('tw:py-1 tw:px-4')
+  })
+
+  it('keeps every class with `merge: false`', () => {
+    expect(tvt(theme, withConfig({ merge: false }))().base({ class: 'px-4' })).toBe('px-2 py-1 px-4')
+  })
+
+  it('still merges with `cacheSize: 0`', () => {
+    expect(tvt(theme, withConfig({ cacheSize: 0 }))().base({ class: 'px-4' })).toBe('py-1 px-4')
+  })
+})
