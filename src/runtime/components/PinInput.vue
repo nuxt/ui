@@ -185,7 +185,7 @@ defineExpose({
     :placeholder="props.placeholder"
     :model-value="(props.modelValue as PinInputValue<T>)"
     :default-value="(props.defaultValue as PinInputValue<T>)"
-    data-slot="root"
+    data-slot="pin-input"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="emitFormInput()"
     @complete="onComplete"
@@ -196,13 +196,13 @@ defineExpose({
       <PinInputInput
         :ref="el => setInputRef(index as number, el)"
         :index="(index as number)"
-        data-slot="base"
+        data-slot="pin-input-base"
         :class="ui.base({ class: props.ui?.base })"
         :disabled="disabled"
       />
       <span
         v-if="shouldInsertSeparator(index as number)"
-        data-slot="separator"
+        data-slot="pin-input-separator"
         role="presentation"
         aria-hidden="true"
         :class="ui.separator({ class: props.ui?.separator })"

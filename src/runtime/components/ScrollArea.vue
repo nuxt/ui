@@ -306,14 +306,14 @@ defineExpose({
   <Primitive
     ref="rootRef"
     :as="props.as"
-    data-slot="root"
+    data-slot="scroll-area"
     :data-orientation="props.orientation"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :style="scrollShadowStyle"
   >
     <template v-if="virtualizer">
       <div
-        data-slot="viewport"
+        data-slot="scroll-area-viewport"
         :class="ui.viewport({ class: props.ui?.viewport })"
         :style="virtualViewportStyle"
       >
@@ -322,7 +322,7 @@ defineExpose({
           :key="String(virtualItem.key)"
           :ref="measureElement"
           :data-index="virtualItem.index"
-          data-slot="item"
+          data-slot="scroll-area-item"
           :class="ui.item({ class: props.ui?.item })"
           :style="getVirtualItemStyle(virtualItem)"
         >
@@ -336,12 +336,12 @@ defineExpose({
     </template>
 
     <template v-else>
-      <div data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
+      <div data-slot="scroll-area-viewport" :class="ui.viewport({ class: props.ui?.viewport })">
         <template v-if="props.items">
           <div
             v-for="(item, index) in props.items"
             :key="getItemKey(item, index)"
-            data-slot="item"
+            data-slot="scroll-area-item"
             :class="ui.item({ class: props.ui?.item })"
           >
             <slot :item="item" :index="index" />

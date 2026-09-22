@@ -96,24 +96,24 @@ const ui = computed(() => tv(theme, appConfig.ui?.separator)({
 
 <template>
   <DefineContainer>
-    <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
+    <div data-slot="separator-container" :class="ui.container({ class: props.ui?.container })">
       <slot :ui="ui">
-        <span v-if="props.label" data-slot="label" :class="ui.label({ class: props.ui?.label })">{{ props.label }}</span>
-        <UIcon v-else-if="props.icon" :name="props.icon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
-        <UAvatar v-else-if="props.avatar" :size="((props.ui?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
+        <span v-if="props.label" data-slot="separator-label" :class="ui.label({ class: props.ui?.label })">{{ props.label }}</span>
+        <UIcon v-else-if="props.icon" :name="props.icon" data-slot="separator-icon" :class="ui.icon({ class: props.ui?.icon })" />
+        <UAvatar v-else-if="props.avatar" :size="((props.ui?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="separator-avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
       </slot>
     </div>
   </DefineContainer>
 
-  <Separator data-slot="root" v-bind="{ ...rootProps, ...$attrs }" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Separator data-slot="separator" v-bind="{ ...rootProps, ...$attrs }" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <ReuseContainer v-if="hasContent && props.position === 'start'" />
 
-    <div data-slot="border" :class="ui.border({ class: props.ui?.border })" />
+    <div data-slot="separator-border" :class="ui.border({ class: props.ui?.border })" />
 
     <template v-if="hasContent && props.position === 'center'">
       <ReuseContainer />
 
-      <div data-slot="border" :class="ui.border({ class: props.ui?.border })" />
+      <div data-slot="separator-border" :class="ui.border({ class: props.ui?.border })" />
     </template>
 
     <ReuseContainer v-if="hasContent && props.position === 'end'" />

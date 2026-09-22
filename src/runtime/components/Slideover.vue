@@ -152,11 +152,11 @@ const ui = computed(() => tv(theme, appConfig.ui?.slideover)({
 
     <DialogPortal v-bind="portalProps" :force-mount="(portalProps.disabled && props.unmountOnHide === false) || undefined">
       <FieldGroupReset>
-        <DialogOverlay v-if="props.overlay" data-slot="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
+        <DialogOverlay v-if="props.overlay" data-slot="slideover-overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
         <DialogContent
           :data-side="props.side"
-          data-slot="content"
+          data-slot="slideover-content"
           :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
           v-bind="contentProps"
           @enter="emits('enter')"
@@ -182,16 +182,16 @@ const ui = computed(() => tv(theme, appConfig.ui?.slideover)({
           </VisuallyHidden>
 
           <slot name="content" :close="close">
-            <div v-if="!!slots.header || (props.title || !!slots.title) || (props.description || !!slots.description) || (props.close || !!slots.close)" data-slot="header" :class="ui.header({ class: props.ui?.header })">
+            <div v-if="!!slots.header || (props.title || !!slots.title) || (props.description || !!slots.description) || (props.close || !!slots.close)" data-slot="slideover-header" :class="ui.header({ class: props.ui?.header })">
               <slot name="header" :close="close">
-                <div v-if="props.title || !!slots.title || props.description || !!slots.description" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
-                  <DialogTitle v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+                <div v-if="props.title || !!slots.title || props.description || !!slots.description" data-slot="slideover-wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+                  <DialogTitle v-if="props.title || !!slots.title" data-slot="slideover-title" :class="ui.title({ class: props.ui?.title })">
                     <slot name="title">
                       {{ props.title }}
                     </slot>
                   </DialogTitle>
 
-                  <DialogDescription v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+                  <DialogDescription v-if="props.description || !!slots.description" data-slot="slideover-description" :class="ui.description({ class: props.ui?.description })">
                     <slot name="description">
                       {{ props.description }}
                     </slot>
@@ -209,7 +209,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.slideover)({
                       variant="ghost"
                       :aria-label="t('slideover.close')"
                       v-bind="(typeof props.close === 'object' ? props.close : {})"
-                      data-slot="close"
+                      data-slot="slideover-close"
                       :class="ui.close({ class: props.ui?.close })"
                     />
                   </slot>
@@ -217,11 +217,11 @@ const ui = computed(() => tv(theme, appConfig.ui?.slideover)({
               </slot>
             </div>
 
-            <div data-slot="body" :class="ui.body({ class: props.ui?.body })">
+            <div data-slot="slideover-body" :class="ui.body({ class: props.ui?.body })">
               <slot name="body" :close="close" />
             </div>
 
-            <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
+            <div v-if="!!slots.footer" data-slot="slideover-footer" :class="ui.footer({ class: props.ui?.footer })">
               <slot name="footer" :close="close" />
             </div>
           </slot>

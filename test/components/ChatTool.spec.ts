@@ -40,7 +40,7 @@ describe('ChatTool', () => {
       slots: { default: () => 'Tool output content' }
     })
 
-    expect(wrapper.find('[data-slot="root"]').attributes('data-state')).toBe('open')
+    expect(wrapper.find('[data-slot="chat-tool"]').attributes('data-state')).toBe('open')
   })
 
   it('does not auto-open when there is no content', async () => {
@@ -48,7 +48,7 @@ describe('ChatTool', () => {
       props: { ...props, actions: [{ label: 'Approve' }] }
     })
 
-    expect(wrapper.find('[data-slot="root"]').attributes('data-state')).toBe('closed')
+    expect(wrapper.find('[data-slot="chat-tool"]').attributes('data-state')).toBe('closed')
   })
 
   it('does not auto-open when defaultOpen is explicitly set', async () => {
@@ -57,7 +57,7 @@ describe('ChatTool', () => {
       slots: { default: () => 'Tool output content' }
     })
 
-    expect(wrapper.find('[data-slot="root"]').attributes('data-state')).toBe('closed')
+    expect(wrapper.find('[data-slot="chat-tool"]').attributes('data-state')).toBe('closed')
   })
 
   it('calls the action onClick when the action button is clicked', async () => {
@@ -66,7 +66,7 @@ describe('ChatTool', () => {
       props: { ...props, actions: [{ label: 'Approve', onClick }] }
     })
 
-    await wrapper.find('[data-slot="actions"] button').trigger('click')
+    await wrapper.find('[data-slot="chat-tool-actions"] button').trigger('click')
 
     expect(onClick).toHaveBeenCalledTimes(1)
   })
@@ -76,7 +76,7 @@ describe('ChatTool', () => {
       props
     })
 
-    expect(wrapper.find('[data-slot="actions"]').exists()).toBe(false)
+    expect(wrapper.find('[data-slot="chat-tool-actions"]').exists()).toBe(false)
   })
 
   it('passes accessibility tests', async () => {

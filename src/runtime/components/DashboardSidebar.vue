@@ -153,7 +153,7 @@ function toggleOpen() {
         v-if="props.toggle"
         v-bind="(typeof props.toggle === 'object' ? props.toggle : {})"
         :side="props.toggleSide"
-        data-slot="toggle"
+        data-slot="dashboard-sidebar-toggle"
         :class="ui.toggle({ class: props.ui?.toggle, toggleSide: props.toggleSide })"
       />
     </slot>
@@ -164,7 +164,7 @@ function toggleOpen() {
       <UDashboardResizeHandle
         v-if="props.resizable"
         :aria-controls="id"
-        data-slot="handle"
+        data-slot="dashboard-sidebar-handle"
         :class="ui.handle({ class: props.ui?.handle })"
         @mousedown="onMouseDown"
         @touchstart="onTouchStart"
@@ -178,22 +178,22 @@ function toggleOpen() {
   <div
     :id="id"
     ref="el"
-    data-slot="root"
+    data-slot="dashboard-sidebar"
     v-bind="$attrs"
     :data-collapsed="isCollapsed"
     :data-dragging="isDragging"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :style="{ '--width': `${size || 0}${dashboardContext.unit}` }"
   >
-    <div v-if="!!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
+    <div v-if="!!slots.header" data-slot="dashboard-sidebar-header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header" :collapsed="isCollapsed" :collapse="collapse" />
     </div>
 
-    <div data-slot="body" :class="ui.body({ class: props.ui?.body })">
+    <div data-slot="dashboard-sidebar-body" :class="ui.body({ class: props.ui?.body })">
       <slot :collapsed="isCollapsed" :collapse="collapse" />
     </div>
 
-    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
+    <div v-if="!!slots.footer" data-slot="dashboard-sidebar-footer" :class="ui.footer({ class: props.ui?.footer })">
       <slot name="footer" :collapsed="isCollapsed" :collapse="collapse" />
     </div>
   </div>
@@ -212,7 +212,7 @@ function toggleOpen() {
   >
     <template #content="contentData">
       <slot name="content" v-bind="contentData">
-        <div v-if="!!slots.header || props.mode !== 'drawer'" data-slot="header" :class="ui.header({ class: props.ui?.header, menu: true })">
+        <div v-if="!!slots.header || props.mode !== 'drawer'" data-slot="dashboard-sidebar-header" :class="ui.header({ class: props.ui?.header, menu: true })">
           <ReuseToggleTemplate v-if="props.mode !== 'drawer' && props.toggleSide === 'left'" />
 
           <slot name="header" :collapsed="false" :collapse="() => {}" />
@@ -220,11 +220,11 @@ function toggleOpen() {
           <ReuseToggleTemplate v-if="props.mode !== 'drawer' && props.toggleSide === 'right'" />
         </div>
 
-        <div data-slot="body" :class="ui.body({ class: props.ui?.body, menu: true })">
+        <div data-slot="dashboard-sidebar-body" :class="ui.body({ class: props.ui?.body, menu: true })">
           <slot :collapsed="false" :collapse="() => {}" />
         </div>
 
-        <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer, menu: true })">
+        <div v-if="!!slots.footer" data-slot="dashboard-sidebar-footer" :class="ui.footer({ class: props.ui?.footer, menu: true })">
           <slot name="footer" :collapsed="false" :collapse="() => {}" />
         </div>
       </slot>

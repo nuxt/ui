@@ -298,11 +298,12 @@ const attrs = useAttrs()
 // In multiple non-autocomplete mode `Root` is `as-child`: it renders no element and
 // merges its attributes onto `Anchor`, where the child's own `data-slot` wins the
 // merge. `Anchor` is then the effective root, so it reads the caller's `data-slot`
-// itself. In every other mode `Root` renders its own element (and receives the
-// caller's value through its own binding), so `Anchor` keeps its `base` label.
+// itself, and is named after the component like any outermost element. In every
+// other mode `Root` renders its own element (and receives the caller's value
+// through its own binding), so `Anchor` keeps its `base` label.
 const baseDataSlot = computed(() => isMultiple.value
-  ? ((attrs['data-slot'] as string | undefined) ?? 'base')
-  : 'base')
+  ? ((attrs['data-slot'] as string | undefined) ?? 'input-menu')
+  : 'input-menu-base')
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as ComboboxArrowProps)
@@ -621,12 +622,12 @@ defineExpose({
 <template>
   <DefineCreateItemTemplate>
     <Component.Item
-      data-slot="item"
+      data-slot="input-menu-item"
       :class="ui.item({ class: props.ui?.item })"
       :value="searchTerm"
       @select="onCreate"
     >
-      <span data-slot="itemLabel" :class="ui.itemLabel({ class: props.ui?.itemLabel })">
+      <span data-slot="input-menu-itemLabel" :class="ui.itemLabel({ class: props.ui?.itemLabel })">
         <slot name="create-item-label" :item="searchTerm">
           {{ t('inputMenu.create', { label: searchTerm }) }}
         </slot>
@@ -635,15 +636,15 @@ defineExpose({
   </DefineCreateItemTemplate>
 
   <DefineItemTemplate v-slot="{ item, index }">
-    <Component.Label v-if="isInputItem(item) && item.type === 'label'" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
+    <Component.Label v-if="isInputItem(item) && item.type === 'label'" data-slot="input-menu-label" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
       {{ get(item, props.labelKey as string) }}
     </Component.Label>
 
-    <Component.Separator v-else-if="isInputItem(item) && item.type === 'separator'" data-slot="separator" :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator, item.class] })" />
+    <Component.Separator v-else-if="isInputItem(item) && item.type === 'separator'" data-slot="input-menu-separator" :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator, item.class] })" />
 
     <Component.Item
       v-else
-      data-slot="item"
+      data-slot="input-menu-item"
       :class="ui.item({ class: [props.ui?.item, isInputItem(item) && item.ui?.item, isInputItem(item) && item.class] })"
       :disabled="isInputItem(item) && item.disabled"
       :value="props.valueKey && isInputItem(item) ? get(item, props.valueKey as string) : item"
@@ -651,38 +652,38 @@ defineExpose({
     >
       <slot name="item" :item="(item as NestedItem<T>)" :index="index" :ui="ui">
         <slot name="item-leading" :item="(item as NestedItem<T>)" :index="index" :ui="ui">
-          <UIcon v-if="isInputItem(item) && item.icon" :name="item.icon" data-slot="itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })" />
-          <UAvatar v-else-if="isInputItem(item) && item.avatar" :size="((item.ui?.itemLeadingAvatarSize || props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [props.ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })" />
+          <UIcon v-if="isInputItem(item) && item.icon" :name="item.icon" data-slot="input-menu-itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })" />
+          <UAvatar v-else-if="isInputItem(item) && item.avatar" :size="((item.ui?.itemLeadingAvatarSize || props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="input-menu-itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [props.ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })" />
           <UChip
             v-else-if="isInputItem(item) && item.chip"
             :size="((item.ui?.itemLeadingChipSize || props.ui?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
             inset
             standalone
             v-bind="item.chip"
-            data-slot="itemLeadingChip"
+            data-slot="input-menu-itemLeadingChip"
             :class="ui.itemLeadingChip({ class: [props.ui?.itemLeadingChip, item.ui?.itemLeadingChip] })"
           />
         </slot>
 
-        <span data-slot="itemWrapper" :class="ui.itemWrapper({ class: [props.ui?.itemWrapper, isInputItem(item) && item.ui?.itemWrapper] })">
-          <span data-slot="itemLabel" :class="ui.itemLabel({ class: [props.ui?.itemLabel, isInputItem(item) && item.ui?.itemLabel] })">
+        <span data-slot="input-menu-itemWrapper" :class="ui.itemWrapper({ class: [props.ui?.itemWrapper, isInputItem(item) && item.ui?.itemWrapper] })">
+          <span data-slot="input-menu-itemLabel" :class="ui.itemLabel({ class: [props.ui?.itemLabel, isInputItem(item) && item.ui?.itemLabel] })">
             <slot name="item-label" :item="(item as NestedItem<T>)" :index="index">
               {{ isInputItem(item) ? get(item, props.labelKey as string) : item }}
             </slot>
           </span>
 
-          <span v-if="isInputItem(item) && (get(item, props.descriptionKey as string) || !!slots['item-description'])" data-slot="itemDescription" :class="ui.itemDescription({ class: [props.ui?.itemDescription, isInputItem(item) && item.ui?.itemDescription] })">
+          <span v-if="isInputItem(item) && (get(item, props.descriptionKey as string) || !!slots['item-description'])" data-slot="input-menu-itemDescription" :class="ui.itemDescription({ class: [props.ui?.itemDescription, isInputItem(item) && item.ui?.itemDescription] })">
             <slot name="item-description" :item="(item as NestedItem<T>)" :index="index">
               {{ get(item, props.descriptionKey as string) }}
             </slot>
           </span>
         </span>
 
-        <span data-slot="itemTrailing" :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, isInputItem(item) && item.ui?.itemTrailing] })">
+        <span data-slot="input-menu-itemTrailing" :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, isInputItem(item) && item.ui?.itemTrailing] })">
           <slot name="item-trailing" :item="(item as NestedItem<T>)" :index="index" :ui="ui" />
 
           <Component.ItemIndicator v-if="!isAutocomplete" as-child>
-            <UIcon :name="props.selectedIcon || appConfig.ui.icons.check" data-slot="itemTrailingIcon" :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, isInputItem(item) && item.ui?.itemTrailingIcon] })" />
+            <UIcon :name="props.selectedIcon || appConfig.ui.icons.check" data-slot="input-menu-itemTrailingIcon" :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, isInputItem(item) && item.ui?.itemTrailingIcon] })" />
           </Component.ItemIndicator>
         </span>
       </slot>
@@ -695,7 +696,7 @@ defineExpose({
     v-bind="rootProps"
     :name="name"
     :disabled="disabled"
-    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
+    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'input-menu'"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :as-child="isMultiple"
     ignore-filter
@@ -715,16 +716,16 @@ defineExpose({
         @focus="onFocus"
         @remove-tag="onRemoveTag($event, modelValue as GetModelValue<T, VK, true, ExcludeItem>)"
       >
-        <TagsInputItem v-for="(item, index) in tags" :key="index" :value="item" data-slot="tagsItem" :class="ui.tagsItem({ class: [props.ui?.tagsItem, isInputItem(item) && item.ui?.tagsItem] })">
-          <TagsInputItemText data-slot="tagsItemText" :class="ui.tagsItemText({ class: [props.ui?.tagsItemText, isInputItem(item) && item.ui?.tagsItemText] })">
+        <TagsInputItem v-for="(item, index) in tags" :key="index" :value="item" data-slot="input-menu-tagsItem" :class="ui.tagsItem({ class: [props.ui?.tagsItem, isInputItem(item) && item.ui?.tagsItem] })">
+          <TagsInputItemText data-slot="input-menu-tagsItemText" :class="ui.tagsItemText({ class: [props.ui?.tagsItemText, isInputItem(item) && item.ui?.tagsItemText] })">
             <slot name="tags-item-text" :item="(item as NestedItem<T>)" :index="index">
               {{ displayValue(item as GetItemValue<T, VK, ExcludeItem>) }}
             </slot>
           </TagsInputItemText>
 
-          <TagsInputItemDelete data-slot="tagsItemDelete" :class="ui.tagsItemDelete({ class: [props.ui?.tagsItemDelete, isInputItem(item) && item.ui?.tagsItemDelete] })" :disabled="disabled">
+          <TagsInputItemDelete data-slot="input-menu-tagsItemDelete" :class="ui.tagsItemDelete({ class: [props.ui?.tagsItemDelete, isInputItem(item) && item.ui?.tagsItemDelete] })" :disabled="disabled">
             <slot name="tags-item-delete" :item="(item as NestedItem<T>)" :index="index" :ui="ui">
-              <UIcon :name="props.deleteIcon || appConfig.ui.icons.close" data-slot="tagsItemDeleteIcon" :class="ui.tagsItemDeleteIcon({ class: [props.ui?.tagsItemDeleteIcon, isInputItem(item) && item.ui?.tagsItemDeleteIcon] })" />
+              <UIcon :name="props.deleteIcon || appConfig.ui.icons.close" data-slot="input-menu-tagsItemDeleteIcon" :class="ui.tagsItemDeleteIcon({ class: [props.ui?.tagsItemDeleteIcon, isInputItem(item) && item.ui?.tagsItemDeleteIcon] })" />
             </slot>
           </TagsInputItemDelete>
         </TagsInputItem>
@@ -735,7 +736,7 @@ defineExpose({
             ref="inputRef"
             v-bind="{ ...$attrs, ...ariaAttrs }"
             :placeholder="props.placeholder"
-            data-slot="tagsInput"
+            data-slot="input-menu-tagsInput"
             :class="ui.tagsInput({ class: props.ui?.tagsInput })"
             @change.stop
             @keydown.enter="onTagsInputKeydown"
@@ -748,7 +749,7 @@ defineExpose({
         :id="id"
         ref="inputRef"
         v-bind="{ ...(!isAutocomplete ? { displayValue } : {}), ...$attrs, ...ariaAttrs }"
-        data-slot="base"
+        data-slot="input-menu-base"
         :type="props.type"
         :placeholder="props.placeholder"
         :required="props.required"
@@ -758,14 +759,14 @@ defineExpose({
         @update:model-value="onInputUpdate"
       />
 
-      <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+      <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="input-menu-leading" :class="ui.leading({ class: props.ui?.leading })">
         <slot name="leading" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
-          <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
-          <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
+          <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="input-menu-leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+          <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="input-menu-itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
         </slot>
       </span>
 
-      <Component.Trigger v-if="isTrailing || !!slots.trailing || !!props.clear" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
+      <Component.Trigger v-if="isTrailing || !!slots.trailing || !!props.clear" data-slot="input-menu-trailing" :class="ui.trailing({ class: props.ui?.trailing })">
         <slot name="trailing" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
           <Component.Cancel v-if="!!props.clear && !disabled && !isModelValueEmpty(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" as-child>
             <UButton
@@ -776,29 +777,29 @@ defineExpose({
               color="neutral"
               tabindex="-1"
               v-bind="clearProps"
-              data-slot="trailingClear"
+              data-slot="input-menu-trailingClear"
               :class="ui.trailingClear({ class: props.ui?.trailingClear })"
               @click.stop="onClear"
             />
           </Component.Cancel>
 
-          <UIcon v-else-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+          <UIcon v-else-if="trailingIconName" :name="trailingIconName" data-slot="input-menu-trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
         </slot>
       </Component.Trigger>
     </Component.Anchor>
 
     <Component.Portal v-bind="portalProps">
       <FieldGroupReset>
-        <Component.Content data-slot="content" :class="ui.content({ class: props.ui?.content })" v-bind="contentProps" @focus-outside.prevent>
+        <Component.Content data-slot="input-menu-content" :class="ui.content({ class: props.ui?.content })" v-bind="contentProps" @focus-outside.prevent>
           <slot name="content-top" />
 
-          <Component.Empty data-slot="empty" :class="ui.empty({ class: props.ui?.empty })">
+          <Component.Empty data-slot="input-menu-empty" :class="ui.empty({ class: props.ui?.empty })">
             <slot name="empty" :search-term="searchTerm">
               {{ searchTerm ? t('inputMenu.noMatch', { searchTerm }) : t('inputMenu.noData') }}
             </slot>
           </Component.Empty>
 
-          <div ref="viewportRef" role="presentation" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
+          <div ref="viewportRef" role="presentation" data-slot="input-menu-viewport" :class="ui.viewport({ class: props.ui?.viewport })">
             <template v-if="!!props.virtualize">
               <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'top'" />
 
@@ -815,15 +816,15 @@ defineExpose({
             </template>
 
             <template v-else>
-              <Component.Group v-if="createItem && createItemPosition === 'top'" data-slot="group" :class="ui.group({ class: props.ui?.group })">
+              <Component.Group v-if="createItem && createItemPosition === 'top'" data-slot="input-menu-group" :class="ui.group({ class: props.ui?.group })">
                 <ReuseCreateItemTemplate />
               </Component.Group>
 
-              <Component.Group v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" data-slot="group" :class="ui.group({ class: props.ui?.group })">
+              <Component.Group v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" data-slot="input-menu-group" :class="ui.group({ class: props.ui?.group })">
                 <ReuseItemTemplate v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`" :item="item" :index="index" />
               </Component.Group>
 
-              <Component.Group v-if="createItem && createItemPosition === 'bottom'" data-slot="group" :class="ui.group({ class: props.ui?.group })">
+              <Component.Group v-if="createItem && createItemPosition === 'bottom'" data-slot="input-menu-group" :class="ui.group({ class: props.ui?.group })">
                 <ReuseCreateItemTemplate />
               </Component.Group>
             </template>
@@ -831,7 +832,7 @@ defineExpose({
 
           <slot name="content-bottom" />
 
-          <Component.Arrow v-if="!!props.arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: props.ui?.arrow })" />
+          <Component.Arrow v-if="!!props.arrow" v-bind="arrowProps" data-slot="input-menu-arrow" :class="ui.arrow({ class: props.ui?.arrow })" />
         </Component.Content>
       </FieldGroupReset>
     </Component.Portal>
