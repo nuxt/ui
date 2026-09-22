@@ -1,6 +1,7 @@
 import { computed, isReactive } from 'vue'
 import type { ComputedRef } from 'vue'
-import { twMerge, extendTailwindMerge } from 'tailwind-merge'
+import { createEngine as createMerger } from 'cn/engine'
+import tables from 'cn/tables'
 import { isEmpty } from './index'
 import { unstyledTheme } from './unstyled'
 import { applyPrefix } from './prefix'
@@ -80,49 +81,35 @@ function cx(...classes: any[]): string | undefined {
 }
 
 /* ------------------------------------------------------------------ *
- * merger (`app.config.ui.tv` to a `tailwind-merge` instance, created once per config)
+ * merger (`app.config.ui.tv` to a `cn` engine, created once per config)
  * ------------------------------------------------------------------ */
 
 type Merger = (classes: string) => string
 
 const mergerCache = new WeakMap<TVMergeConfig, Merger | null>()
 
-function hasDefinedKey(obj: Record<string, any> | undefined): boolean {
-  for (const key in obj) {
-    if (obj[key] !== undefined) {
-      return true
-    }
-  }
-  return false
-}
+/** Every class string is pre-joined by `cx`, so the engine's string path is the one we want. */
+const defaultMerger: Merger = /* @__PURE__ */ createMerger(tables).mergeString
 
 /**
- * The `tailwind-merge` instance for a config. `app.config.ui.tv` is read once
- * per config object: each engine gets its own copy (see `engineFor`), since the
- * slot caches hold merged results. Returns `null` when merging is turned off
+ * The merger for a config. `app.config.ui.tv` is read once per config object:
+ * each engine gets its own copy (see `engineFor`), since the slot caches hold
+ * merged results. Returns `null` when merging is turned off
  * (`merge: false`).
  */
 function getMerger(config: TVMergeConfig | undefined): Merger | null {
   if (!config) {
-    return twMerge
+    return defaultMerger
   }
   let merger = mergerCache.get(config)
   if (merger === undefined) {
-    const mergeConfig = config.mergeConfig as Record<string, any> | undefined
-    merger = config.merge === false
-      ? null
-      : !hasDefinedKey(mergeConfig)
-          ? twMerge
-          : extendTailwindMerge({
-              ...mergeConfig,
-              extend: {
-                theme: mergeConfig!.theme,
-                classGroups: mergeConfig!.classGroups,
-                conflictingClassGroupModifiers: mergeConfig!.conflictingClassGroupModifiers,
-                conflictingClassGroups: mergeConfig!.conflictingClassGroups,
-                ...mergeConfig!.extend
-              }
-            } as Parameters<typeof extendTailwindMerge>[0])
+    if (config.merge === false) {
+      merger = null
+    } else if (config.prefix === undefined && config.cacheSize === undefined) {
+      merger = defaultMerger
+    } else {
+      merger = createMerger(tables, undefined, { prefix: config.prefix, cacheSize: config.cacheSize }).mergeString
+    }
     mergerCache.set(config, merger)
   }
   return merger
@@ -830,9 +817,7 @@ export function engineFor(config?: TVMergeConfig, prefix?: string): Engine {
   if (!config && !prefix) {
     return defaultEngine
   }
-  // Deeper than an entry's limit: a merge config nests its class groups the way
-  // Tailwind Merge's own does
-  const configKey = config ? contentKey(config, 32) : ''
+  const configKey = config ? contentKey(config) : ''
   if (configKey === BAIL) {
     return createEngine(config, prefix)
   }
