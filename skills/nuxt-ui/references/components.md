@@ -44,7 +44,7 @@ Quick-reference index of all 125+ components. For full API docs (props, slots, e
 | `UScrollArea` | Scrollable area with custom scrollbar |
 | `UTimeline` | Timeline display for events and activity |
 | `UUser` | User display — avatar + name + description |
-| `UTheme` | Theme provider — scoped color overrides for children |
+| `UTheme` | Scoped `ui` class overrides and prop defaults for a subtree |
 
 ## Form
 
