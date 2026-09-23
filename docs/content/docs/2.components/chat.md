@@ -30,7 +30,7 @@ Check out the [`Nuxt`](https://github.com/nuxt-ui-templates/chat) and [`Vue`](ht
 
 ## Installation
 
-The Chat components are designed to be used with the [Vercel AI SDK](https://ai-sdk.dev/), specifically the [`Chat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-chat) class for managing chat state and streaming responses.
+The Chat components are designed to be used with the [Vercel AI SDK](https://ai-sdk.dev/), specifically the [`Chat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-chat) class for managing chat state and streaming responses. The examples on this page target AI SDK v7.
 
 Install the required dependencies:
 
@@ -205,7 +205,7 @@ export default defineEventHandler(async (event) => {
     instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages),
     tools: {
-      web_search: anthropic.tools.webSearch_20250305({})
+      web_search: anthropic.tools.webSearch_20260209({})
     }
   })
 

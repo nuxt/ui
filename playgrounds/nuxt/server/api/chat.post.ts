@@ -9,10 +9,10 @@ export default defineEventHandler(async (event) => {
 
   const result = streamText({
     model: gateway('anthropic/claude-sonnet-5'),
-    instructions: 'You are a helpful assistant. When answering questions, search the web for up-to-date information when relevant. Use the `send_email` tool when the user asks to send an email.',
+    instructions: 'You are a helpful assistant. When answering questions, search the web for up-to-date information when relevant.',
     messages: await convertToModelMessages(messages),
     tools: {
-      web_search: anthropic.tools.webSearch_20250305(),
+      web_search: anthropic.tools.webSearch_20260209(),
       send_email: tool({
         description: 'Send an email to a recipient.',
         inputSchema: z.object({
