@@ -57,6 +57,8 @@ html.dark .shiki span {
 
 ### Server endpoint
 
+These examples target AI SDK v7 (`instructions`, `toUIMessageStream`).
+
 Using [Vercel AI Gateway](https://vercel.com/ai-gateway) (recommended):
 
 ```ts [server/api/chat.post.ts]
