@@ -409,7 +409,7 @@ const tools = {
 }
 
 export type DocsChatTools = InferUITools<typeof tools>
-export type DocsChatMessage = UIMessage<unknown, never, DocsChatTools>
+export type DocsChatMessage = UIMessage<{ currentPage?: string }, never, DocsChatTools>
 
 function buildInstructions(framework: 'nuxt' | 'vue') {
   return `You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue. Nuxt UI includes \`@nuxt/fonts\` and \`@nuxt/icon\` as built-in dependencies — never tell users to install them separately. Use your knowledge base tools to search for relevant information before answering questions.
@@ -460,34 +460,38 @@ const anthropicOptions = {
   effort: 'low'
 } satisfies AnthropicLanguageModelOptions
 
+// The page path reaches the model as a marker, so it is an indirect prompt-injection
+// surface (a crafted /docs/... link can smuggle newlines and instructions via Vue Router's
+// path decoding). Accept it only when it is a plain site path with no control characters.
+function safePagePath(path: unknown) {
+  return typeof path === 'string'
+    && path.length <= 128
+    && !/[\r\n]/.test(path)
+    && /^\/[\w/-]*$/.test(path)
+    ? path
+    : null
+}
+
 export default defineEventHandler(async (event) => {
-  const { messages, framework, currentPage } = await readBody(event)
+  const { messages, framework } = await readBody(event)
 
   if (!messages || !Array.isArray(messages)) {
     throw createError({ statusCode: 400, message: 'Invalid or missing messages array.' })
   }
 
-  // `currentPage` reaches the model as a marker on the last user message, so it is an
-  // indirect prompt-injection surface (a crafted /docs/... link can smuggle newlines and
-  // instructions via Vue Router's path decoding). Accept it only when it is a plain docs
-  // path with no control characters; otherwise drop it.
-  const safeCurrentPage = typeof currentPage === 'string'
-    && currentPage.length <= 128
-    && !/[\r\n]/.test(currentPage)
-    && /^\/docs\/[\w/-]*$/.test(currentPage)
-    ? currentPage
-    : null
-
-  // Page context belongs to the turn it was sent with, not to the thread: it is appended
-  // here and never persisted client-side, so a stale path can't leak into a later answer.
-  const uiMessages = messages.map((message: UIMessage, index: number) => {
-    if (!safeCurrentPage || index !== messages.length - 1 || message.role !== 'user') {
+  // Each user message carries the page it was sent from in its metadata, and every one
+  // gets its marker back on each request: the history stays byte-identical across turns,
+  // so the cached prompt prefix covers the earlier tool results. The instructions tell
+  // the model only the latest marker counts.
+  const uiMessages = messages.map((message: DocsChatMessage) => {
+    const currentPage = message.role === 'user' ? safePagePath(message.metadata?.currentPage) : null
+    if (!currentPage) {
       return message
     }
 
     return {
       ...message,
-      parts: [...(message.parts || []), { type: 'text' as const, text: `[Context: the user is currently viewing ${safeCurrentPage}]` }]
+      parts: [...(message.parts || []), { type: 'text' as const, text: `[Context: the user is currently viewing ${currentPage}]` }]
     }
   })
 

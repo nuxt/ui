@@ -7,6 +7,10 @@ export const useChat = createSharedComposable(() => {
 
   const open = ref(false)
 
+  // Stored on each user message, the server turns it into a page context marker
+  const route = useRoute()
+  const currentPage = computed(() => route.path)
+
   onNuxtReady(() => {
     nextTick(() => {
       open.value = storageOpen.value
@@ -26,7 +30,8 @@ export const useChat = createSharedComposable(() => {
     messages.value = [...messages.value, {
       id: String(Date.now()),
       role: 'user',
-      parts: [{ type: 'text', text }]
+      parts: [{ type: 'text', text }],
+      metadata: { currentPage: currentPage.value }
     }]
     pending.value = true
     open.value = true
@@ -36,6 +41,7 @@ export const useChat = createSharedComposable(() => {
     open,
     messages,
     pending,
+    currentPage,
     ask
   }
 })

@@ -9,8 +9,7 @@ const input = ref('')
 
 const toast = useToast()
 const { track } = useAnalytics()
-const route = useRoute()
-const { open, messages, pending } = useChat()
+const { open, messages, pending, currentPage } = useChat()
 const { framework } = useFrameworks()
 const { resetTheme, applyThemeSettings, hasChanges: hasThemeChanges } = useTheme()
 // A preset is a whole ThemeDoc, so it rides applyDoc (reset, style axis, class
@@ -79,7 +78,7 @@ const { messages: chatMessages, status, error, sendMessage, regenerate, stop } =
   messages: messages.value,
   transport: new DefaultChatTransport<DocsChatMessage>({
     api: '/api/ai',
-    body: () => ({ framework: framework.value, currentPage: route.path.startsWith('/docs/') ? route.path : null })
+    body: () => ({ framework: framework.value })
   }),
   onError: (error) => {
     let message = error.message
@@ -123,7 +122,7 @@ function onSubmit() {
 
   track('AI Chat Message Sent')
 
-  sendMessage({ text: input.value })
+  sendMessage({ text: input.value, metadata: { currentPage: currentPage.value } })
 
   input.value = ''
 }
