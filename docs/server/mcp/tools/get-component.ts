@@ -6,7 +6,7 @@ import { getAgentDocument } from '#agent-discovery'
 const sectionEnum = z.enum(['usage', 'examples', 'api', 'theme', 'changelog'])
 
 export default defineMcpTool({
-  description: 'Retrieves Nuxt UI component documentation and details. Use the `sections` parameter to fetch only specific parts of the documentation to reduce response size.',
+  description: 'Retrieves Nuxt UI component documentation and details. Use the `sections` parameter to fetch only specific parts of the documentation to reduce response size. Use `get-component-metadata` instead when you only need structured props, slots and events.',
   annotations: {
     readOnlyHint: true,
     destructiveHint: false,

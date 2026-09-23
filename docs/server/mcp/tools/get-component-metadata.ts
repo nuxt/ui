@@ -3,7 +3,7 @@ import { kebabCase } from 'scule'
 import { queryCollection } from '@nuxt/content/server'
 
 export default defineMcpTool({
-  description: 'Retrieves metadata for a Nuxt UI component including props, slots, and events. Props are compact by default, pass `full: true` to get the raw recursive prop schemas (very large)',
+  description: 'Retrieves metadata for a Nuxt UI component including props, slots, and events. Props are compact by default, pass `full: true` to get the raw recursive prop schemas (very large). Use this over `get-component` when you need structured props, slots and events rather than prose documentation.',
   annotations: {
     readOnlyHint: true,
     destructiveHint: false,
