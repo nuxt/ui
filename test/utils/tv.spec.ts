@@ -1,4 +1,5 @@
 import { describe, it, expect, expectTypeOf, vi } from 'vitest'
+import { reactive } from 'vue'
 import { tv } from '../../src/runtime/utils/tv'
 import type { VariantProps } from '../../src/runtime/types/tv'
 
@@ -686,6 +687,16 @@ describe('tv spec sharing', () => {
     expect(ui.label()).toBe('truncate font-bold')
     overrides.variants.tone.quiet.label = 'font-bold'
     expect(tvt(theme, overrides)({ tone: 'quiet' }).label()).toBe('truncate font-bold')
+  })
+
+  it('resolves a fresh entry when reactive overrides change in place', () => {
+    // The content key of a reactive `app.config.ui.<c>` is cached until it changes.
+    const overrides = reactive({ slots: { base: 'p-1' } })
+    expect(tvt(theme, overrides)().base()).toBe('inline-flex p-1')
+    overrides.slots.base = 'p-2'
+    expect(tvt(theme, overrides)().base()).toBe('inline-flex p-2')
+    Object.assign(overrides, { variants: { active: { true: { base: 'italic' } } } })
+    expect(tvt(theme, overrides)().base({ active: true })).toBe('inline-flex font-bold italic p-2')
   })
 
   it('keys a replacer in the overrides by identity', () => {
