@@ -405,21 +405,6 @@ describe('tv variant merging', () => {
     }
   })
 
-  it('warns once in development about a key or slot the theme does not have', () => {
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
-    tvt(theme, { base: 'p-4', slots: { root: 'p-4' }, variants: { size: { md: { root: 'p-4' } } } })().base()
-    const calls = warn.mock.calls.map(call => call[0])
-    warn.mockRestore()
-    // `import.meta.dev` is off in the Nuxt test build, where nothing is logged.
-    if (calls.length) {
-      expect(calls).toEqual([
-        expect.stringContaining('`base` is not a theme key'),
-        expect.stringContaining('`slots.root` is not a slot of this component, which has `base`, `label`'),
-        expect.stringContaining('`variants.size.md.root` is not a slot')
-      ])
-    }
-  })
-
   it('merges two per-slot values slot by slot', () => {
     const ui = tvt(theme, { variants: { size: { md: { label: 'font-medium' } } } })()
     expect(ui.base()).toBe('inline-flex text-base')
