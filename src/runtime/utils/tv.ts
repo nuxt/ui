@@ -769,6 +769,9 @@ function createTV(config?: TVMergeConfig) {
     const spec = specFor(theme, overrides, config)
 
     return (props?: Record<string, any>) => {
+      if (import.meta.dev && props?.class !== undefined) {
+        warnOnce(`[@nuxt/ui] \`class\` is ignored when invoking a \`tv\` component. Pass it to a slot function instead, e.g. \`ui.${spec.slotKeys[0] ?? 'base'}({ class })\`.`)
+      }
       const fns: Record<string, (slotProps?: Record<string, any>) => string | undefined> = {}
       const slotKeys = spec.slotKeys
       for (let i = 0; i < slotKeys.length; i++) {
