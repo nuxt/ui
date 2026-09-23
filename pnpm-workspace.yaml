@@ -139,7 +139,6 @@ catalog:
   unplugin-auto-import: ^21.1.0
   unplugin-vue-components: ^32.1.0
   valibot: ^1.5.0
-  vaul-vue: 0.4.1
   vite: ^8.3.0
   vitest: ^4.1.11
   vitest-axe: ^0.1.0

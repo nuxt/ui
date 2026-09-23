@@ -50,8 +50,7 @@ export default defineNuxtConfig({
       }
     },
     rootAttrs: {
-      'data-vaul-drawer-wrapper': '',
-      'class': 'bg-default'
+      class: 'bg-default'
     }
   },
 
@@ -247,7 +246,6 @@ export default defineNuxtConfig({
         'tailwind-merge',
         '@comark/vue',
         '@comark/vue/plugins/shiki',
-        'vaul-vue',
         '@vueuse/integrations/useFuse',
         '@floating-ui/dom',
         '@tiptap/vue-3',
