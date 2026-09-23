@@ -9,8 +9,6 @@ hero:
   accent: Nuxt UI
   description: Sites and apps teams have shipped with Nuxt UI, from documentation and dashboards to storefronts. Built one? Add it to the list.
 items:
-  - name: Neleto
-    url: https://neleto.io/
   - name: Ace
     url: https://acecompany.nl/
   - name: Brusnika.LMS
@@ -57,6 +55,8 @@ items:
     url: https://mawrble.com/
   - name: Meet Sponsors
     url: https://meetsponsors.com/
+  - name: Neleto
+    url: https://neleto.io/
   - name: Ovatu
     url: https://ovatu.com/
   - name: Pallyy
