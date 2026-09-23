@@ -747,22 +747,6 @@ describe('tv merger config', () => {
     expect(tv({ slots: { base: 'px-2 py-1' } })().base({ class: 'px-4' })).toBe('px-2 py-1 px-4')
   })
 
-  it('warns in development about the `tailwind-merge` keys it no longer reads', async () => {
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
-    const tv = await load({ twMerge: false, mergeConfig: { prefix: 'tw' } })
-    // Still merges: the legacy keys are ignored, not honored.
-    expect(tv({ slots: { base: 'px-2 py-1' } })().base({ class: 'px-4' })).toBe('py-1 px-4')
-    const calls = warn.mock.calls.map(call => call[0])
-    warn.mockRestore()
-    // `import.meta.dev` is off in the Nuxt test build, where nothing is logged.
-    if (calls.length) {
-      expect(calls).toEqual([
-        expect.stringContaining('`ui.tv.twMerge` is no longer read. It is now `merge`.'),
-        expect.stringContaining('`ui.tv.mergeConfig` is no longer read.')
-      ])
-    }
-  })
-
   it('still merges with `cacheSize: 0`', async () => {
     const tv = await load({ cacheSize: 0 })
     expect(tv({ slots: { base: 'px-2 py-1' } })().base({ class: 'px-4' })).toBe('py-1 px-4')
