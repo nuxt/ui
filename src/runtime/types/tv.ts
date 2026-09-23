@@ -149,19 +149,23 @@ export type TVOverrides<T> = {
 }
 
 /**
- * The props a built component and its slot functions accept: the theme's
- * variants, plus classes to merge on top. Variants that `app.config.ui.<c>`
- * adds reach the component's own props through `ComponentConfig`, so nothing
- * needs to be open here.
+ * The props a built component accepts: the theme's variants. Variants that
+ * `app.config.ui.<c>` adds reach the component's own props through
+ * `ComponentConfig`, so nothing needs to be open here.
  */
-export type TVProps<T> = {
+export type TVVariantProps<T> = {
   [K in keyof VariantsOf<T>]?: VariantValue<T, K>
-} & ClassProp<SlotClassValue>
+}
 
 /**
- * The variant props of a built component, without the class overrides.
+ * The props a slot function accepts: the variants, plus classes to merge on top.
  */
-export type VariantProps<Component extends (...args: any) => any> = Omit<Exclude<Parameters<Component>[0], undefined>, 'class'>
+export type TVProps<T> = TVVariantProps<T> & ClassProp<SlotClassValue>
+
+/**
+ * The variant props of a built component.
+ */
+export type VariantProps<Component extends (...args: any) => any> = Exclude<Parameters<Component>[0], undefined>
 
 /**
  * One function per slot.
@@ -172,8 +176,9 @@ type TVSlotFunctions<T> = {
 
 /**
  * A built component: callable with variant props, returning a function per slot.
+ * Classes go to the slot functions, the invocation takes none.
  */
-export type TVReturnType<T> = (props?: TVProps<T>) => TVSlotFunctions<T>
+export type TVReturnType<T> = (props?: TVVariantProps<T>) => TVSlotFunctions<T>
 
 /**
  * The theme's own `compoundVariants` and `defaultVariants` checked against its

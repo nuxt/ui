@@ -1,4 +1,5 @@
 import { describe, it, expect, expectTypeOf, vi } from 'vitest'
+import { reactive } from 'vue'
 import { tv } from '../../src/runtime/utils/tv'
 import type { VariantProps } from '../../src/runtime/types/tv'
 
@@ -404,6 +405,23 @@ describe('tv variant merging', () => {
     }
   })
 
+  it('warns once in development about a key or slot the theme does not have', () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    tvt(theme, { base: 'p-4', slots: { root: 'p-4' }, variants: { size: { md: { root: 'p-4' } } } })().base()
+    tvt(theme)({ class: 'p-4' })
+    const calls = warn.mock.calls.map(call => call[0])
+    warn.mockRestore()
+    // `import.meta.dev` is off in the Nuxt test build, where nothing is logged.
+    if (calls.length) {
+      expect(calls).toEqual([
+        expect.stringContaining('`base` is not a theme key'),
+        expect.stringContaining('`slots.root` is not a slot of this component, which has `base`, `label`'),
+        expect.stringContaining('`variants.size.md.root` is not a slot'),
+        expect.stringContaining('`class` is ignored when invoking')
+      ])
+    }
+  })
+
   it('merges two per-slot values slot by slot', () => {
     const ui = tvt(theme, { variants: { size: { md: { label: 'font-medium' } } } })()
     expect(ui.base()).toBe('inline-flex text-base')
@@ -478,8 +496,10 @@ describe('tv types', () => {
     component({ size: 'lg' })
     // @ts-expect-error a prop no variant declares
     component({ sizee: 'sm' })
+    // @ts-expect-error classes go to the slot functions
+    component({ class: 'p-2' })
     // classes, and a replacer, at any depth
-    component({ class: ['p-2', () => 'block'] })
+    component().base({ class: ['p-2', () => 'block'] })
   })
 
   it('keeps slot functions for a theme typed with optional slots', () => {
@@ -492,7 +512,7 @@ describe('tv types', () => {
   it('derives the variant props of a built component', () => {
     const component = tv(button)
 
-    expectTypeOf(component).parameter(0).exclude<undefined>().omit<'class'>().toEqualTypeOf<VariantProps<typeof component>>()
+    expectTypeOf(component).parameter(0).exclude<undefined>().toEqualTypeOf<VariantProps<typeof component>>()
     expectTypeOf<VariantProps<typeof component>>().toEqualTypeOf<{ size?: 'sm' | 'md', block?: boolean }>()
   })
 
@@ -667,6 +687,16 @@ describe('tv spec sharing', () => {
     expect(ui.label()).toBe('truncate font-bold')
     overrides.variants.tone.quiet.label = 'font-bold'
     expect(tvt(theme, overrides)({ tone: 'quiet' }).label()).toBe('truncate font-bold')
+  })
+
+  it('resolves a fresh entry when reactive overrides change in place', () => {
+    // The content key of a reactive `app.config.ui.<c>` is cached until it changes.
+    const overrides = reactive({ slots: { base: 'p-1' } })
+    expect(tvt(theme, overrides)().base()).toBe('inline-flex p-1')
+    overrides.slots.base = 'p-2'
+    expect(tvt(theme, overrides)().base()).toBe('inline-flex p-2')
+    Object.assign(overrides, { variants: { active: { true: { base: 'italic' } } } })
+    expect(tvt(theme, overrides)().base({ active: true })).toBe('inline-flex font-bold italic p-2')
   })
 
   it('keys a replacer in the overrides by identity', () => {

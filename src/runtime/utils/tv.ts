@@ -1,3 +1,5 @@
+import { computed, isReactive } from 'vue'
+import type { ComputedRef } from 'vue'
 import { createEngine } from 'cn/engine'
 import tables from 'cn/tables'
 import type { AppConfig } from '@nuxt/schema'
@@ -260,6 +262,9 @@ function resolveSpec(theme: Record<string, any>, overrides: Record<string, any> 
     const slot = slotKeys[0] ?? 'base'
     warnBareClasses(theme, slot)
     warnBareClasses(own, slot)
+    if (overrides) {
+      warnUnknownKeys(own, Object.keys(themeSlots))
+    }
   }
 
   // A replacer's result stands in for the theme's classes, beneath the
@@ -340,15 +345,18 @@ function classForSlot(value: any, slotKey: string): any {
  */
 const warned = new Set<string>()
 
+function warnOnce(message: string): void {
+  // Specs are rebuilt per overrides, and on every call when those can't be keyed.
+  if (!warned.has(message)) {
+    warned.add(message)
+    console.warn(message)
+  }
+}
+
 function warnBareClasses(source: Record<string, any>, slot: string): void {
   const bare = (value: any) => !!value && !isPlainObject(value)
   const warn = (where: string, value: any) => {
-    const message = `[@nuxt/ui] ${where} must be an object of classes per slot, e.g. \`{ ${slot}: '...' }\`. Received ${typeof value === 'string' ? JSON.stringify(value) : String(value)}, which is ignored.`
-    // Specs are rebuilt per overrides, and on every call when those can't be keyed.
-    if (!warned.has(message)) {
-      warned.add(message)
-      console.warn(message)
-    }
+    warnOnce(`[@nuxt/ui] ${where} must be an object of classes per slot, e.g. \`{ ${slot}: '...' }\`. Received ${typeof value === 'string' ? JSON.stringify(value) : String(value)}, which is ignored.`)
   }
   for (const key in source.variants ?? EMPTY) {
     const group = source.variants[key] ?? EMPTY
@@ -362,6 +370,44 @@ function warnBareClasses(source: Record<string, any>, slot: string): void {
     if (bare(compound?.class)) {
       warn('A `compoundVariants` entry\'s `class`', compound.class)
     }
+  }
+}
+
+const OVERRIDE_KEYS = new Set(['slots', 'variants', 'compoundVariants', 'defaultVariants'])
+
+/**
+ * A top-level key other than the four an override is made of, such as the
+ * `base` single-element components used to take, and a slot the theme doesn't
+ * have, such as `base` after it was renamed `root`, both target nothing. Types
+ * catch them in `app.config.ts`, a plain JS config doesn't.
+ */
+function warnUnknownKeys(overrides: Record<string, any>, slots: string[]): void {
+  const known = new Set(slots)
+  const list = slots.map(slot => `\`${slot}\``).join(', ')
+  const check = (where: string, value: any) => {
+    if (!isPlainObject(value)) {
+      return
+    }
+    for (const key of Object.keys(value)) {
+      if (!known.has(key)) {
+        warnOnce(`[@nuxt/ui] \`${where}${key}\` is not a slot of this component, which has ${list}. Its classes are ignored.`)
+      }
+    }
+  }
+  for (const key of Object.keys(overrides)) {
+    if (!OVERRIDE_KEYS.has(key)) {
+      warnOnce(`[@nuxt/ui] \`${key}\` is not a theme key. Classes go under \`slots\`, e.g. \`{ slots: { ${slots[0] ?? 'base'}: '...' } }\`, next to \`variants\`, \`compoundVariants\` and \`defaultVariants\`. It is ignored.`)
+    }
+  }
+  check('slots.', overrides.slots)
+  for (const key in overrides.variants ?? EMPTY) {
+    const group = overrides.variants[key] ?? EMPTY
+    for (const valueKey in group) {
+      check(`variants.${key}.${valueKey}.`, group[valueKey])
+    }
+  }
+  for (const compound of flatten(overrides.compoundVariants)) {
+    check('compoundVariants[].class.', compound?.class)
   }
 }
 
@@ -681,6 +727,25 @@ function keyOfOverrides(value: any, depth = 0): string | typeof BAIL {
   return out + '}'
 }
 
+/**
+ * The content key of a reactive `app.config.ui.<c>`, recomputed only when that
+ * object changes rather than on every variant prop change of every instance.
+ * A plain object can't signal a mutation, so it is walked on every call.
+ */
+const reactiveKeys = new WeakMap<object, ComputedRef<string | typeof BAIL>>()
+
+function contentKey(overrides: Record<string, any>): string | typeof BAIL {
+  if (!isReactive(overrides)) {
+    return keyOfOverrides(overrides)
+  }
+  let key = reactiveKeys.get(overrides)
+  if (!key) {
+    key = computed(() => keyOfOverrides(overrides))
+    reactiveKeys.set(overrides, key)
+  }
+  return key.value
+}
+
 function specFor(theme: Record<string, any>, overrides: Record<string, any> | null | undefined, config: TVMergeConfig | undefined): Spec {
   if (overrides == null || isEmpty(overrides)) {
     let spec = themeSpecs.get(theme)
@@ -690,7 +755,7 @@ function specFor(theme: Record<string, any>, overrides: Record<string, any> | nu
     }
     return spec
   }
-  const key = keyOfOverrides(overrides)
+  const key = contentKey(overrides)
   if (key === BAIL) {
     return resolveSpec(theme, overrides, config)
   }
@@ -712,6 +777,9 @@ function createTV(config?: TVMergeConfig) {
     const spec = specFor(theme, overrides, config)
 
     return (props?: Record<string, any>) => {
+      if (import.meta.dev && props?.class !== undefined) {
+        warnOnce(`[@nuxt/ui] \`class\` is ignored when invoking a \`tv\` component. Pass it to a slot function instead, e.g. \`ui.${spec.slotKeys[0] ?? 'base'}({ class })\`.`)
+      }
       const fns: Record<string, (slotProps?: Record<string, any>) => string | undefined> = {}
       const slotKeys = spec.slotKeys
       for (let i = 0; i < slotKeys.length; i++) {
