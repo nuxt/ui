@@ -186,7 +186,7 @@ These render identically in LTR, so prefer them even when a component has no RTL
 
 Some things logical properties don't cover, handle them explicitly:
 - **`transform`** (`translate-x-*`, `-scale-x-*`) does not flip. Add an `rtl:` counterpart when it is direction-dependent (e.g. `translate-x-1/2 rtl:-translate-x-1/2`). Centering (`*-1/2` with a translate) is symmetric and needs nothing.
-- **`cursor-w/e-resize`** and **gradients** (`bg-gradient-to-l/r`) are physical with no logical form, add `rtl:` counterparts.
+- **`cursor-w/e-resize`** and **gradients** (`bg-linear-to-l/r`) are physical with no logical form, add `rtl:` counterparts.
 - **Transitions** must name the logical property they animate (`transition-[inset-inline-start,inset-inline-end,width]`, not `transition-[left,right,width]`).
 - An **`absolute`** element needs an explicit `start-*`/`end-*` anchor, don't rely on its static position (unreliable in RTL).
 
