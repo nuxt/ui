@@ -29,7 +29,7 @@ describe('tv class replace', () => {
   it('keeps merging plain string classes (no regression)', () => {
     const ui = build()
     expect(ui.label({ class: 'font-bold' })).toBe('truncate font-bold')
-    // A conflicting utility is still resolved by tailwind-merge.
+    // A conflicting utility is still resolved by the merger.
     const base = ui.base({ class: 'text-lg' })
     expect(base).toContain('text-lg')
     expect(base).not.toContain('text-sm')
@@ -112,7 +112,7 @@ describe('tv class replace', () => {
   })
 
   it('lets the last replacer win when several are forwarded in the class array', () => {
-    // Mirrors `[props.ui?.base, props.class]` with both set: `class` wins, like twMerge.
+    // Mirrors `[props.ui?.base, props.class]` with both set: `class` wins, like the merger.
     expect(build().base({ class: [() => 'block', () => 'w-full'] })).toBe('w-full')
   })
 })
