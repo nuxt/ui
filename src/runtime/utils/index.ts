@@ -170,17 +170,6 @@ export function isArrayOfArray<
   return Array.isArray(item[0])
 }
 
-export function mergeClasses(appConfigClass?: string | string[], propClass?: string) {
-  if (!appConfigClass && !propClass) {
-    return ''
-  }
-
-  return [
-    ...(Array.isArray(appConfigClass) ? appConfigClass : [appConfigClass]),
-    propClass
-  ].filter(Boolean)
-}
-
 export function getSlotChildrenText(children: any) {
   return children.map((node: any) => {
     if (!node.children || typeof node.children === 'string') return node.children || ''
