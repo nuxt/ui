@@ -42,8 +42,7 @@ const skip: Record<string, string> = {
   DashboardSearch: 'closed modal, renders nothing by default',
   EditorEmojiMenu: 'renderless, requires editor context',
   EditorMentionMenu: 'renderless, requires editor context',
-  EditorSuggestionMenu: 'renderless, requires editor context',
-  EditorToolbar: '`$attrs` lands on a conditional outer element, never passed a `data-slot`'
+  EditorSuggestionMenu: 'renderless, requires editor context'
 }
 
 // Minimal props for components that cannot render bare.
@@ -51,6 +50,7 @@ const options: Record<string, { props?: any, slots?: any }> = {
   Chart: { props: { tooltip: false } },
   ChatReasoning: { props: { text: 'Reasoning' } },
   ChatShimmer: { props: { text: 'Loading' } },
+  EditorToolbar: { props: { editor: { registerPlugin: () => {} } } },
   Form: { props: { state: {} } },
   Icon: { props: { name: 'i-lucide-check' } }
 }
