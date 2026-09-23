@@ -275,9 +275,6 @@ function resolveSpec(theme: Record<string, any>, overrides: Record<string, any> 
     const slot = slotKeys[0] ?? 'base'
     warnBareClasses(theme, slot)
     warnBareClasses(own, slot)
-    if (overrides) {
-      warnUnknownKeys(own, Object.keys(themeSlots))
-    }
   }
 
   // A replacer's result stands in for the theme's classes, beneath the
@@ -358,18 +355,15 @@ function classForSlot(value: any, slotKey: string): any {
  */
 const warned = new Set<string>()
 
-function warnOnce(message: string): void {
-  // Specs are rebuilt per overrides, and on every call when those can't be keyed.
-  if (!warned.has(message)) {
-    warned.add(message)
-    console.warn(message)
-  }
-}
-
 function warnBareClasses(source: Record<string, any>, slot: string): void {
   const bare = (value: any) => !!value && !isPlainObject(value)
   const warn = (where: string, value: any) => {
-    warnOnce(`[@nuxt/ui] ${where} must be an object of classes per slot, e.g. \`{ ${slot}: '...' }\`. Received ${typeof value === 'string' ? JSON.stringify(value) : String(value)}, which is ignored.`)
+    const message = `[@nuxt/ui] ${where} must be an object of classes per slot, e.g. \`{ ${slot}: '...' }\`. Received ${typeof value === 'string' ? JSON.stringify(value) : String(value)}, which is ignored.`
+    // Specs are rebuilt per overrides, and on every call when those can't be keyed.
+    if (!warned.has(message)) {
+      warned.add(message)
+      console.warn(message)
+    }
   }
   for (const key in source.variants ?? EMPTY) {
     const group = source.variants[key] ?? EMPTY
@@ -383,44 +377,6 @@ function warnBareClasses(source: Record<string, any>, slot: string): void {
     if (bare(compound?.class)) {
       warn('A `compoundVariants` entry\'s `class`', compound.class)
     }
-  }
-}
-
-const OVERRIDE_KEYS = new Set(['slots', 'variants', 'compoundVariants', 'defaultVariants'])
-
-/**
- * A top-level key other than the four an override is made of, such as the
- * `base` single-element components used to take, and a slot the theme doesn't
- * have, such as `base` after it was renamed `root`, both target nothing. Types
- * catch them in `app.config.ts`, a plain JS config doesn't.
- */
-function warnUnknownKeys(overrides: Record<string, any>, slots: string[]): void {
-  const known = new Set(slots)
-  const list = slots.map(slot => `\`${slot}\``).join(', ')
-  const check = (where: string, value: any) => {
-    if (!isPlainObject(value)) {
-      return
-    }
-    for (const key of Object.keys(value)) {
-      if (!known.has(key)) {
-        warnOnce(`[@nuxt/ui] \`${where}${key}\` is not a slot of this component, which has ${list}. Its classes are ignored.`)
-      }
-    }
-  }
-  for (const key of Object.keys(overrides)) {
-    if (!OVERRIDE_KEYS.has(key)) {
-      warnOnce(`[@nuxt/ui] \`${key}\` is not a theme key. Classes go under \`slots\`, e.g. \`{ slots: { ${slots[0] ?? 'base'}: '...' } }\`, next to \`variants\`, \`compoundVariants\` and \`defaultVariants\`. It is ignored.`)
-    }
-  }
-  check('slots.', overrides.slots)
-  for (const key in overrides.variants ?? EMPTY) {
-    const group = overrides.variants[key] ?? EMPTY
-    for (const valueKey in group) {
-      check(`variants.${key}.${valueKey}.`, group[valueKey])
-    }
-  }
-  for (const compound of flatten(overrides.compoundVariants)) {
-    check('compoundVariants[].class.', compound?.class)
   }
 }
 
