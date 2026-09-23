@@ -1,3 +1,5 @@
+import { computed, isReactive } from 'vue'
+import type { ComputedRef } from 'vue'
 import { twMerge, extendTailwindMerge } from 'tailwind-merge'
 import type { AppConfig } from '@nuxt/schema'
 import { isEmpty } from './index'
@@ -738,6 +740,25 @@ function keyOfOverrides(value: any, depth = 0): string | typeof BAIL {
   return out + '}'
 }
 
+/**
+ * The content key of a reactive `app.config.ui.<c>`, recomputed only when that
+ * object changes rather than on every variant prop change of every instance.
+ * A plain object can't signal a mutation, so it is walked on every call.
+ */
+const reactiveKeys = new WeakMap<object, ComputedRef<string | typeof BAIL>>()
+
+function contentKey(overrides: Record<string, any>): string | typeof BAIL {
+  if (!isReactive(overrides)) {
+    return keyOfOverrides(overrides)
+  }
+  let key = reactiveKeys.get(overrides)
+  if (!key) {
+    key = computed(() => keyOfOverrides(overrides))
+    reactiveKeys.set(overrides, key)
+  }
+  return key.value
+}
+
 function specFor(theme: Record<string, any>, overrides: Record<string, any> | null | undefined, config: TVMergeConfig | undefined): Spec {
   if (overrides == null || isEmpty(overrides)) {
     let spec = themeSpecs.get(theme)
@@ -747,7 +768,7 @@ function specFor(theme: Record<string, any>, overrides: Record<string, any> | nu
     }
     return spec
   }
-  const key = keyOfOverrides(overrides)
+  const key = contentKey(overrides)
   if (key === BAIL) {
     return resolveSpec(theme, overrides, config)
   }
