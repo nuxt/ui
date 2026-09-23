@@ -139,6 +139,8 @@ const Component = computed(() => {
     fixed: 'template'
   }[props.layout!])
 })
+// The `fixed` layout renders no menu around the toolbar, so the toolbar is the root.
+const isFixed = computed(() => Component.value === 'template')
 
 const rootProps = useForwardProps(reactiveOmit(props, 'as', 'color', 'variant', 'activeColor', 'activeVariant', 'size', 'items', 'layout', 'editor', 'class', 'ui'))
 
@@ -329,7 +331,7 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
       ...$attrs
     }"
   >
-    <Primitive :as="props.as" role="toolbar" data-slot="editor-toolbar" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <Primitive :as="props.as" role="toolbar" :data-slot="(isFixed ? $attrs['data-slot'] as string | undefined : undefined) ?? 'editor-toolbar'" :class="ui.root({ class: [props.ui?.root, props.class] })">
       <template v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`">
         <div role="group" data-slot="editor-toolbar-group" :class="ui.group({ class: props.ui?.group })">
           <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
