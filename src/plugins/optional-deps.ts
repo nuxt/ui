@@ -25,6 +25,8 @@ export function missingDependencyMessage(id: string, component: string, packages
   return `[nuxt-ui] \`${id}\` is not installed. The \`${component}\` component needs these optional peer dependencies:\n\n  npx nypm add ${packages.join(' ')}\n`
 }
 
+const VITE_OPTIONAL_PEER = '__vite-optional-peer-dep'
+
 interface RollupResolveContext {
   resolve: (id: string, importer?: string, options?: Record<string, any>) => Promise<{ id: string } | null>
 }
@@ -60,7 +62,9 @@ export default function OptionalDepsPlugin(runtimeDir: string) {
 
       // `ssr`, `scan`, `attributes` and `custom` change what the bundler resolves to.
       const result = await this.resolve(id, importer, { ...options, skipSelf: true })
-      if (!result) {
+      // Vite resolves a missing optional peer to a stub that throws at runtime, which
+      // would turn our message into a missing export error.
+      if (!result || result.id.includes(VITE_OPTIONAL_PEER)) {
         fail(id, dependency)
       }
 
