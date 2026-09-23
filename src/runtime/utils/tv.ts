@@ -98,6 +98,9 @@ function getMerger(config: TVMergeConfig | undefined): Merger | null {
   }
   let merger = mergerCache.get(config)
   if (merger === undefined) {
+    if (import.meta.dev) {
+      warnLegacyConfig(config)
+    }
     if (config.merge === false) {
       merger = null
     } else if (config.prefix === undefined && config.cacheSize === undefined) {
@@ -108,6 +111,25 @@ function getMerger(config: TVMergeConfig | undefined): Merger | null {
     mergerCache.set(config, merger)
   }
   return merger
+}
+
+/**
+ * The keys `app.config.ui.tv` took when it configured `tailwind-merge`, none of
+ * which the merger reads. Left in place they are ignored, so `twMerge: false`
+ * would silently turn merging back on.
+ */
+const LEGACY_CONFIG: Record<string, string> = {
+  twMerge: 'It is now `merge`.',
+  twMergeConfig: 'Set `prefix` on `ui.tv` directly. Extending class groups has no equivalent.',
+  mergeConfig: 'Set `prefix` on `ui.tv` directly. Extending class groups has no equivalent.'
+}
+
+function warnLegacyConfig(config: Record<string, any>): void {
+  for (const key in LEGACY_CONFIG) {
+    if (config[key] !== undefined) {
+      warnOnce(`[@nuxt/ui] \`ui.tv.${key}\` is no longer read. ${LEGACY_CONFIG[key]}`)
+    }
+  }
 }
 
 /**
