@@ -40,7 +40,7 @@ export default (options: Required<ModuleOptions>) => ({
     active: false,
     to: true,
     class: {
-      link: ['hover:text-default', options.theme.transitions && 'transition-colors']
+      link: 'hover:text-default transition-colors'
     }
   }, ...(options.theme.colors || []).map((color: string) => ({
     color,

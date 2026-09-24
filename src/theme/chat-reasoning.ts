@@ -1,9 +1,7 @@
-import type { ModuleOptions } from '../module'
-
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: '',
-    trigger: ['group flex w-full items-center gap-1.5 text-muted text-sm disabled:cursor-default disabled:hover:text-muted hover:text-default rounded-sm outline-primary/25 focus-visible:outline-3 min-w-0', options.theme.transitions && 'transition-colors'],
+    trigger: 'group flex w-full items-center gap-1.5 text-muted text-sm disabled:cursor-default disabled:hover:text-muted hover:text-default rounded-sm outline-primary/25 focus-visible:outline-3 min-w-0 transition-colors',
     leading: 'relative size-4 shrink-0',
     leadingIcon: 'size-4 shrink-0',
     chevronIcon: 'size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none',
@@ -21,9 +19,9 @@ export default (options: Required<ModuleOptions>) => ({
     },
     alone: {
       false: {
-        leadingIcon: ['absolute inset-0 group-data-[state=open]:opacity-0', options.theme.transitions && 'transition-opacity duration-200 ease-out'],
-        chevronIcon: ['absolute inset-0 opacity-0 group-hover:opacity-100 group-data-[state=open]:opacity-100', options.theme.transitions && 'transition-[rotate,opacity] duration-200 ease-out motion-reduce:transition-none']
+        leadingIcon: 'absolute inset-0 group-data-[state=open]:opacity-0 transition-opacity duration-200 ease-out',
+        chevronIcon: 'absolute inset-0 opacity-0 group-hover:opacity-100 group-data-[state=open]:opacity-100 transition-[rotate,opacity] duration-200 ease-out motion-reduce:transition-none'
       }
     }
   }
-})
+}
