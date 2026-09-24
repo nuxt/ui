@@ -92,7 +92,7 @@ exports[`ColorPicker > renders with format having alpha channel cmyk correctly 1
       <div data-v-c9a043d6="" data-slot="trackThumb" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00FF8C; top: 42.48666666666667%;"></div>
     </div>
     <div data-v-c9a043d6="" data-slot="track" class="w-[8px] relative rounded-md touch-none h-42" style="--current-color: #00C16A;" data-color-picker-alpha="">
-      <div data-v-c9a043d6="" data-slot="trackThumb" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: white; background-image: linear-gradient(0deg, cmyk(100% 0% 45.08% 24.31% / 50%)); top: 50%;"></div>
+      <div data-v-c9a043d6="" data-slot="trackThumb" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: white; background-image: linear-gradient(0deg, rgb(0 193.0095 106.000817 / 50%)); top: 50%;"></div>
     </div>
   </div>
 </div>"
@@ -110,7 +110,7 @@ exports[`ColorPicker > renders with format having alpha channel hex correctly 1`
       <div data-v-c9a043d6="" data-slot="trackThumb" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00FF8C; top: 42.48704666666667%;"></div>
     </div>
     <div data-v-c9a043d6="" data-slot="track" class="w-[8px] relative rounded-md touch-none h-42" style="--current-color: #00C16A;" data-color-picker-alpha="">
-      <div data-v-c9a043d6="" data-slot="trackThumb" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: white; background-image: linear-gradient(0deg, #00C16A80); top: 49.8039%;"></div>
+      <div data-v-c9a043d6="" data-slot="trackThumb" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: white; background-image: linear-gradient(0deg, rgb(0 193 106 / 0.501961)); top: 49.8039%;"></div>
     </div>
   </div>
 </div>"
@@ -128,7 +128,7 @@ exports[`ColorPicker > renders with format having alpha channel hsl correctly 1`
       <div data-v-c9a043d6="" data-slot="trackThumb" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00FF8C; top: 42.5%;"></div>
     </div>
     <div data-v-c9a043d6="" data-slot="track" class="w-[8px] relative rounded-md touch-none h-42" style="--current-color: #00C16A;" data-color-picker-alpha="">
-      <div data-v-c9a043d6="" data-slot="trackThumb" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: white; background-image: linear-gradient(0deg, hsl(153 100% 37.8% / 50%)); top: 50%;"></div>
+      <div data-v-c9a043d6="" data-slot="trackThumb" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: white; background-image: linear-gradient(0deg, rgb(0 192.78 106.029 / 50%)); top: 50%;"></div>
     </div>
   </div>
 </div>"
@@ -146,7 +146,7 @@ exports[`ColorPicker > renders with format having alpha channel hwb correctly 1`
       <div data-v-c9a043d6="" data-slot="trackThumb" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00FF8C; top: 42.48611111111111%;"></div>
     </div>
     <div data-v-c9a043d6="" data-slot="track" class="w-[8px] relative rounded-md touch-none h-42" style="--current-color: #00C16A;" data-color-picker-alpha="">
-      <div data-v-c9a043d6="" data-slot="trackThumb" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: white; background-image: linear-gradient(0deg, hwb(152.95 0% 24.31% / 50%)); top: 50%;"></div>
+      <div data-v-c9a043d6="" data-slot="trackThumb" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: white; background-image: linear-gradient(0deg, rgb(0 193.0095 105.994384 / 50%)); top: 50%;"></div>
     </div>
   </div>
 </div>"
@@ -164,7 +164,7 @@ exports[`ColorPicker > renders with format having alpha channel lab correctly 1`
       <div data-v-c9a043d6="" data-slot="trackThumb" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00FF6F; top: 40.609066111111105%;"></div>
     </div>
     <div data-v-c9a043d6="" data-slot="track" class="w-[8px] relative rounded-md touch-none h-42" style="--current-color: #00C757;" data-color-picker-alpha="">
-      <div data-v-c9a043d6="" data-slot="trackThumb" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: white; background-image: linear-gradient(0deg, lab(68.88% -60.41% 32.55% / 50%)); top: 50%;"></div>
+      <div data-v-c9a043d6="" data-slot="trackThumb" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: white; background-image: linear-gradient(0deg, rgb(0 198.82084 86.794037 / 50%)); top: 50%;"></div>
     </div>
   </div>
 </div>"
@@ -182,7 +182,7 @@ exports[`ColorPicker > renders with format having alpha channel lch correctly 1`
       <div data-v-c9a043d6="" data-slot="trackThumb" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00FF8C; top: 42.48592194444444%;"></div>
     </div>
     <div data-v-c9a043d6="" data-slot="track" class="w-[8px] relative rounded-md touch-none h-42" style="--current-color: #00C16A;" data-color-picker-alpha="">
-      <div data-v-c9a043d6="" data-slot="trackThumb" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: white; background-image: linear-gradient(0deg, lch(68.83 65.58 151.01 / 50%)); top: 50%;"></div>
+      <div data-v-c9a043d6="" data-slot="trackThumb" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: white; background-image: linear-gradient(0deg, rgb(0.032606 193.012011 106.008274 / 50%)); top: 50%;"></div>
     </div>
   </div>
 </div>"
