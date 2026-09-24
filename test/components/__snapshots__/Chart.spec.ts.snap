@@ -517,6 +517,38 @@ exports[`Chart > renders with ui correctly 1`] = `
 </div>"
 `;
 
+exports[`Chart > renders without axes correctly 1`] = `
+"<div data-slot="root" class="relative w-full text-xs text-muted [--ts-chart-tooltip-background:var(--ui-bg)] [--ts-chart-tooltip-color:var(--ui-text-highlighted)] [--ts-chart-tooltip-border:1px_solid_var(--ui-border)] [--ts-chart-tooltip-border-radius:calc(var(--ui-radius)*1.5)] [--ts-chart-tooltip-shadow:var(--shadow-lg)] [--ts-chart-tooltip-padding:--spacing(2)] [--ts-chart-tooltip-font:inherit]" style="--ts-chart-1: var(--ui-primary); --ts-chart-2: var(--ui-secondary); --ts-chart-3: var(--ui-info); --ts-chart-4: var(--ui-success); --ts-chart-5: var(--ui-warning); --ts-chart-6: var(--ui-error);">
+  <div class="ts-chart-host" style="position: relative; width: 100%; height: 300px;">
+    <div class="ts-chart-surface" style="width: 100%; height: 100%; position: relative;"><svg class="ts-chart" width="100%" height="100%" viewBox="0 0 640 300" role="img" aria-roledescription="chart" aria-label="Visitors" tabindex="0" style="display:block;overflow:visible">
+        <g data-ts-key="grid" class="ts-chart__grid" aria-hidden="true" stroke="currentColor" stroke-opacity="0.11" stroke-width="1">
+          <line data-ts-key="y-grid:number:50" x1="0" y1="300" x2="640" y2="300"></line>
+          <line data-ts-key="y-grid:number:100" x1="0" y1="256.17" x2="640" y2="256.17"></line>
+          <line data-ts-key="y-grid:number:150" x1="0" y1="212.33" x2="640" y2="212.33"></line>
+          <line data-ts-key="y-grid:number:200" x1="0" y1="168.5" x2="640" y2="168.5"></line>
+          <line data-ts-key="y-grid:number:250" x1="0" y1="124.67" x2="640" y2="124.67"></line>
+          <line data-ts-key="y-grid:number:300" x1="0" y1="80.83" x2="640" y2="80.83"></line>
+          <line data-ts-key="y-grid:number:350" x1="0" y1="37" x2="640" y2="37"></line>
+        </g>
+        <g data-ts-key="marks" class="ts-chart__marks">
+          <g data-ts-key="line-0:string:7:desktop" class="ts-chart__line" aria-hidden="true">
+            <path data-ts-key="line-0:string:7:desktop:segment:0" fill="none" stroke="var(--ts-chart-1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M0,180.77L320,76.45L640,136.06" vector-effect="non-scaling-stroke"></path>
+          </g>
+          <g data-ts-key="line-0:string:6:mobile" class="ts-chart__line" aria-hidden="true">
+            <path data-ts-key="line-0:string:6:mobile:segment:0" fill="none" stroke="var(--ts-chart-2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M0,273.7L320,168.5L640,238.63" vector-effect="non-scaling-stroke"></path>
+          </g>
+        </g>
+        <g data-ts-key="legend" class="ts-chart__legend" aria-hidden="true">
+          <circle data-ts-key="legend-dot:string:7:desktop" fill="var(--ts-chart-1)" cx="4" cy="10" r="4"></circle><text data-ts-key="legend-label:string:7:desktop" fill="currentColor" fill-opacity="0.76" x="13" y="10" text-anchor="start" dominant-baseline="middle" font-size="11" font-family="inherit">desktop</text>
+          <circle data-ts-key="legend-dot:string:6:mobile" fill="var(--ts-chart-2)" cx="324" cy="10" r="4"></circle><text data-ts-key="legend-label:string:6:mobile" fill="currentColor" fill-opacity="0.76" x="333" y="10" text-anchor="start" dominant-baseline="middle" font-size="11" font-family="inherit">mobile</text>
+        </g>
+        <g data-ts-key="default-focus:line-0" class="ts-chart__focus-layer ts-chart__focus-layer--default" aria-hidden="true" data-ts-focus-layer="over" visibility="hidden"></g>
+      </svg></div>
+  </div>
+  <!---->
+</div>"
+`;
+
 exports[`Chart > renders without grid correctly 1`] = `
 "<div data-slot="root" class="relative w-full text-xs text-muted [--ts-chart-tooltip-background:var(--ui-bg)] [--ts-chart-tooltip-color:var(--ui-text-highlighted)] [--ts-chart-tooltip-border:1px_solid_var(--ui-border)] [--ts-chart-tooltip-border-radius:calc(var(--ui-radius)*1.5)] [--ts-chart-tooltip-shadow:var(--shadow-lg)] [--ts-chart-tooltip-padding:--spacing(2)] [--ts-chart-tooltip-font:inherit]" style="--ts-chart-1: var(--ui-primary); --ts-chart-2: var(--ui-secondary); --ts-chart-3: var(--ui-info); --ts-chart-4: var(--ui-success); --ts-chart-5: var(--ui-warning); --ts-chart-6: var(--ui-error);">
   <div class="ts-chart-host" style="position: relative; width: 100%; height: 300px;">

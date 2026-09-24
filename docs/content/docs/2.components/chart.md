@@ -261,6 +261,45 @@ props:
 ---
 ::
 
+### Axis
+
+Use the `x-axis` and `y-axis` props to toggle each axis. Both default to `true`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - data
+  - index
+  - categories
+props:
+  yAxis: false
+  data:
+    - month: January
+      desktop: 186
+      mobile: 80
+    - month: February
+      desktop: 305
+      mobile: 200
+    - month: March
+      desktop: 237
+      mobile: 120
+    - month: April
+      desktop: 73
+      mobile: 190
+    - month: May
+      desktop: 209
+      mobile: 130
+    - month: June
+      desktop: 214
+      mobile: 140
+  index: month
+  categories:
+    - desktop
+    - mobile
+---
+::
+
 ### Legend
 
 Use the `legend` prop to toggle the legend. Defaults to `true` when there is more than one category.

@@ -26,6 +26,7 @@ describe('Chart', () => {
     ['with stacked area', { props: { ...props, type: 'area', stacked: true } }],
     ['with points', { props: { ...props, points: true } }],
     ['without grid', { props: { ...props, grid: false } }],
+    ['without axes', { props: { ...props, xAxis: false, yAxis: false } }],
     ['without legend', { props: { ...props, legend: false } }],
     ['with colors', { props: { ...props, colors: ['success', '#8b5cf6'] } }],
     ['with format', { props: { ...props, format: (value: number) => `$${value}` } }],

@@ -38,6 +38,16 @@ export interface ChartProps<T extends ChartDatum = ChartDatum> {
    * @defaultValue true
    */
   grid?: boolean
+  /**
+   * Display the x axis.
+   * @defaultValue true
+   */
+  xAxis?: boolean
+  /**
+   * Display the y axis.
+   * @defaultValue true
+   */
+  yAxis?: boolean
   /** Display a legend. Defaults to `true` when there is more than one category. */
   legend?: boolean
   /** Format the y axis ticks. */
@@ -86,6 +96,8 @@ const _props = withDefaults(defineProps<ChartProps<T>>(), {
   type: 'line',
   points: false,
   grid: true,
+  xAxis: true,
+  yAxis: true,
   height: 300,
   initialWidth: 640
 })
@@ -158,13 +170,14 @@ const generatedDefinition = computed(() => {
       x: {
         scale: props.type === 'bar'
           ? () => scaleBand<string>().padding(0.2)
-          : () => scalePoint<string>().padding(0)
+          : () => scalePoint<string>().padding(0),
+        axis: props.xAxis ? undefined : false
       },
       y: {
         scale: scaleLinear,
         nice: true,
         grid: props.grid,
-        axis: props.format ? { ticks: { format: props.format } } : undefined
+        axis: !props.yAxis ? false : props.format ? { ticks: { format: props.format } } : undefined
       }
     },
     color: {
