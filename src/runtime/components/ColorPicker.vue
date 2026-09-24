@@ -282,7 +282,7 @@ watchThrottled([selectorThumbPosition, trackThumbPosition, alphaTrackThumbPositi
   nextTick(resumeWatchColor)
 }, { throttle: () => props.throttle })
 
-watch([() => props.alphaTrack, () => props.format], () => {
+watch([() => props.alphaTrack, () => props.format, () => props.decimals], () => {
   triggerRef(modelValue)
 })
 
