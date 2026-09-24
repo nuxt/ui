@@ -64,10 +64,11 @@ export type ColorPickerProps = {
    */
   format?: 'hex' | 'rgb' | 'hsl' | 'cmyk' | 'lab' | 'lch' | 'hwb'
   /**
-   * Show the alpha track or not
+   * Show the track for picking transparency of the color
    */
   alphaTrack?: boolean
   /**
+   * The maximum number of decimals for the outputs
    * @defaultValue 4
    */
   decimals?: number

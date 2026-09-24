@@ -72,6 +72,40 @@ props:
 ---
 ::
 
+### HWB Format
+
+Use the `format` prop to set `hwb` value of the ColorPicker.
+
+::component-code
+---
+ignore:
+  - modelValue
+  - format
+external:
+  - modelValue
+props:
+  format: hwb
+  modelValue: 'hwb(152.95 0% 24.31%)'
+---
+::
+
+### LCH Format
+
+Use the `format` prop to set `lch` value of the ColorPicker.
+
+::component-code
+---
+ignore:
+  - modelValue
+  - format
+external:
+  - modelValue
+props:
+  format: lch
+  modelValue: 'lch(68.83 65.58 151.01)'
+---
+::
+
 ### CMYK Format
 
 Use the `format` prop to set `cmyk` value of the ColorPicker.
@@ -102,6 +136,42 @@ external:
   - modelValue
 props:
   format: lab
+  modelValue: 'lab(68.88% -60.41% 32.55%)'
+---
+::
+
+### Alpha Channel
+
+Use the `alphaTrack` prop to enable picking transparency of the color.
+
+::component-code
+---
+ignore:
+  - modelValue
+  - format
+external:
+  - modelValue
+props:
+  format: hex
+  alphaTrack: true
+  modelValue: '#00C16A50'
+---
+::
+
+### Decimals
+
+Use the `decimals` prop to set the maximum number of decimals for the outputs.
+
+::component-code
+---
+ignore:
+  - modelValue
+  - format
+external:
+  - modelValue
+props:
+  format: lab
+  decimals: 2
   modelValue: 'lab(68.88% -60.41% 32.55%)'
 ---
 ::
