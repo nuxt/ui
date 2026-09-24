@@ -49,13 +49,6 @@ export interface ModuleOptions {
     colors?: Color[]
 
     /**
-     * Enable or disable transitions on components
-     * @defaultValue `true`
-     * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#themetransitions
-     */
-    transitions?: boolean
-
-    /**
      * Remove all default theme classes from components, keeping only their
      * structure and the classes you supply via `class`, `ui` or `app.config.ui`.
      * @defaultValue `false`

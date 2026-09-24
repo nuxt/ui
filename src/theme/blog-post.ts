@@ -1,6 +1,4 @@
-import type { ModuleOptions } from '../module'
-
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'relative group/blog-post flex flex-col rounded-lg overflow-hidden',
     header: 'relative overflow-hidden aspect-[16/9] w-full pointer-events-none',
@@ -56,7 +54,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     to: {
       true: {
-        root: ['outline-primary/25 has-[>a:focus-visible]:outline-3', options.theme.transitions && 'transition'],
+        root: 'outline-primary/25 has-[>a:focus-visible]:outline-3 transition',
         image: 'transform transition-transform ease-out motion-reduce:transition-none group-hover/blog-post:scale-110',
         avatar: 'inline-flex transform transition-transform ease-out motion-reduce:transition-none hover:scale-115 rounded-full outline-primary/25 focus-visible:outline-3'
       }
@@ -94,7 +92,7 @@ export default (options: Required<ModuleOptions>) => ({
     to: true,
     class: {
       root: 'hover:bg-elevated/50',
-      header: ['group-hover/blog-post:shadow-none', options.theme.transitions && 'transition-[box-shadow,border-radius] ease-out']
+      header: 'group-hover/blog-post:shadow-none transition-[box-shadow,border-radius] ease-out'
     }
   }, {
     variant: 'ghost',
@@ -121,4 +119,4 @@ export default (options: Required<ModuleOptions>) => ({
   defaultVariants: {
     variant: 'outline'
   }
-})
+}

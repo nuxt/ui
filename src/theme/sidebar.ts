@@ -1,6 +1,4 @@
-import type { ModuleOptions } from '../module'
-
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'peer [--sidebar-width:16rem] [--sidebar-width-icon:4rem]',
     gap: 'relative w-(--sidebar-width) bg-transparent',
@@ -14,7 +12,7 @@ export default (options: Required<ModuleOptions>) => ({
     close: '',
     body: 'flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4',
     footer: 'flex items-center gap-1.5 overflow-hidden p-4',
-    rail: ['absolute inset-y-0 z-20 hidden w-4 after:absolute after:inset-y-0 after:left-1/2 after:w-px lg:flex hover:after:bg-(--ui-border-accented)', options.theme.transitions && 'after:transition-colors']
+    rail: 'absolute inset-y-0 z-20 hidden w-4 after:absolute after:inset-y-0 after:left-1/2 after:w-px lg:flex hover:after:bg-(--ui-border-accented) after:transition-colors'
   },
   variants: {
     transition: {
@@ -131,4 +129,4 @@ export default (options: Required<ModuleOptions>) => ({
       rail: 'start-[calc(--spacing(4)-1px)]'
     }
   }]
-})
+}

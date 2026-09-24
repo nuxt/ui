@@ -137,6 +137,11 @@ export function applyDefaultVariants(result: any, defaultVariants?: { color?: st
     return result
   }
 
+  // Copy before writing: object-shaped themes are the shared module export, and
+  // several themes can share one (the editor menus), so writing in place would
+  // carry these defaults into every later generation.
+  result = { ...result, defaultVariants: { ...result.defaultVariants } }
+
   if (defaultVariants.color && result.defaultVariants?.color && result.defaultVariants.color === 'primary') {
     result.defaultVariants.color = defaultVariants.color
   }
