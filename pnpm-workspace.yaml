@@ -50,8 +50,8 @@ catalog:
   "@tailwindcss/postcss": ^4.3.3
   "@tailwindcss/vite": ^4.3.3
   "@takumi-rs/core": ^2.14.0
-  "@tanstack/table-core": ^8.21.3
-  "@tanstack/vue-table": ^8.21.3
+  "@tanstack/table-core": ^9.2.4
+  "@tanstack/vue-table": ^9.2.4
   "@tanstack/vue-virtual": ^3.13.39
   "@tiptap/core": ^3.31.3
   "@tiptap/extension-bubble-menu": ^3.31.3
