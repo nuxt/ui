@@ -2,7 +2,7 @@ import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    root: ['relative z-50 w-full', options.theme.transitions && 'transition-colors'],
+    root: 'relative z-50 w-full transition-colors',
     container: 'flex items-center justify-between gap-3 h-12',
     left: 'hidden lg:flex-1 lg:flex lg:items-center',
     center: 'flex items-center gap-1.5 min-w-0',

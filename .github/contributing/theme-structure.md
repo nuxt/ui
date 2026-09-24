@@ -59,7 +59,7 @@ import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    base: ['font-medium inline-flex items-center', options.theme.transitions && 'transition-colors'],
+    base: 'font-medium inline-flex items-center transition-colors',
     label: 'truncate',
     leadingIcon: 'shrink-0',
     trailingIcon: 'shrink-0'
@@ -191,19 +191,6 @@ Some things logical properties don't cover, handle them explicitly:
 - An **`absolute`** element needs an explicit `start-*`/`end-*` anchor, don't rely on its static position (unreliable in RTL).
 
 Keep physical only when the class is tied to a physical prop **value** (`side`, `direction`, `position` = `left`/`right`), or when positioning is driven by a Reka `offsetLeft`-based CSS variable (which already tracks correctly in RTL).
-
-## Conditional Transitions
-
-Add transitions based on module options:
-
-```ts
-slots: {
-  base: [
-    'rounded-md font-medium',
-    options.theme.transitions && 'transition-colors'
-  ]
-}
-```
 
 ## Animations
 

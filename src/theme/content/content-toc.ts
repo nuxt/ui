@@ -36,7 +36,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     active: {
       false: {
-        link: ['text-muted hover:text-default', options.theme.transitions && 'transition-colors']
+        link: 'text-muted hover:text-default transition-colors'
       }
     },
     highlight: {

@@ -63,15 +63,15 @@ export default (options: Required<ModuleOptions>) => ({
     highlight: true,
     level: true,
     class: {
-      link: ['after:absolute after:-start-1.5 after:inset-y-0.5 after:block after:w-px after:rounded-full', options.theme.transitions && 'after:transition-colors']
+      link: 'after:absolute after:-start-1.5 after:inset-y-0.5 after:block after:w-px after:rounded-full after:transition-colors'
     }
   }, {
     disabled: false,
     active: false,
     variant: 'pill',
     class: {
-      link: ['hover:text-highlighted hover:before:bg-elevated/50 data-[state=open]:text-highlighted', options.theme.transitions && 'transition-colors before:transition-colors'],
-      linkLeadingIcon: ['group-hover:text-default group-data-[state=open]:text-default', options.theme.transitions && 'transition-colors']
+      link: 'hover:text-highlighted hover:before:bg-elevated/50 data-[state=open]:text-highlighted transition-colors before:transition-colors',
+      linkLeadingIcon: 'group-hover:text-default group-data-[state=open]:text-default transition-colors'
     }
   }, ...(options.theme.colors || []).map((color: string) => ({
     color,
@@ -102,15 +102,15 @@ export default (options: Required<ModuleOptions>) => ({
     highlight: true,
     disabled: false,
     class: {
-      link: ['hover:before:bg-elevated/50', options.theme.transitions && 'before:transition-colors']
+      link: 'hover:before:bg-elevated/50 before:transition-colors'
     }
   }, {
     disabled: false,
     active: false,
     variant: 'link',
     class: {
-      link: ['hover:text-highlighted data-[state=open]:text-highlighted', options.theme.transitions && 'transition-colors'],
-      linkLeadingIcon: ['group-hover:text-default group-data-[state=open]:text-default', options.theme.transitions && 'transition-colors']
+      link: 'hover:text-highlighted data-[state=open]:text-highlighted transition-colors',
+      linkLeadingIcon: 'group-hover:text-default group-data-[state=open]:text-default transition-colors'
     }
   }, ...(options.theme.colors || []).map((color: string) => ({
     color,

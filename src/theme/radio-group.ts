@@ -31,10 +31,10 @@ export default (options: Required<ModuleOptions>) => ({
       },
       card: {
         fieldset: 'flex-wrap',
-        item: [`border border-default rounded-lg ${hover}bg-elevated/50`, options.theme.transitions && 'transition-colors']
+        item: `border border-default rounded-lg ${hover}bg-elevated/50 transition-colors`
       },
       table: {
-        item: [`border border-default ${hover}bg-elevated/50`, options.theme.transitions && 'transition-colors']
+        item: `border border-default ${hover}bg-elevated/50 transition-colors`
       }
     },
     orientation: {

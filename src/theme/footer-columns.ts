@@ -1,6 +1,4 @@
-import type { ModuleOptions } from '../module'
-
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'xl:grid xl:grid-cols-3 xl:gap-8',
     left: 'mb-10 xl:mb-0',
@@ -20,8 +18,8 @@ export default (options: Required<ModuleOptions>) => ({
         link: 'text-primary font-medium'
       },
       false: {
-        link: ['text-muted hover:text-default', options.theme.transitions && 'transition-colors']
+        link: 'text-muted hover:text-default transition-colors'
       }
     }
   }
-})
+}
