@@ -1,6 +1,4 @@
-import type { ModuleOptions } from '../module'
-
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: '',
     content: 'relative size-full flex-1',
@@ -10,10 +8,10 @@ export default (options: Required<ModuleOptions>) => ({
       '[&_p]:leading-7',
       // Links
       '[&_a]:text-primary [&_a]:border-b [&_a]:border-transparent [&_a]:hover:border-primary [&_a]:font-medium',
-      options.theme?.transitions && '[&_a]:transition-colors',
+      '[&_a]:transition-colors',
       // Code inside links
       '[&_a>code]:border-dashed [&_a:hover>code]:border-primary [&_a:hover>code]:text-primary',
-      options.theme?.transitions && '[&_a>code]:transition-colors',
+      '[&_a>code]:transition-colors',
       // Mentions
       '[&_.mention]:text-primary [&_.mention]:font-medium',
       // Headings - shared styles
@@ -62,4 +60,4 @@ export default (options: Required<ModuleOptions>) => ({
   defaultVariants: {
     placeholderMode: 'everyLine'
   }
-})
+}

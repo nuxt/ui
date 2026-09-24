@@ -1,6 +1,4 @@
-import type { ModuleOptions } from '../../module'
-
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'relative lg:h-[450px] my-5 grid lg:grid-cols-3 border border-muted rounded-md',
     list: 'isolate relative p-2 border-b lg:border-b-0 lg:border-e border-muted overflow-y-auto',
@@ -20,8 +18,8 @@ export default (options: Required<ModuleOptions>) => ({
         link: 'text-highlighted before:bg-elevated'
       },
       false: {
-        link: ['hover:text-highlighted hover:before:bg-elevated/50', options.theme.transitions && 'transition-colors before:transition-colors']
+        link: 'hover:text-highlighted hover:before:bg-elevated/50 transition-colors before:transition-colors'
       }
     }
   }
-})
+}

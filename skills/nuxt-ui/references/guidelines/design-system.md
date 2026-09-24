@@ -259,21 +259,6 @@ export default defineNuxtConfig({
 })
 ```
 
-### `theme.transitions`
-
-Controls whether interactive components get `transition-colors`. Enabled by default.
-
-```ts
-// nuxt.config.ts — disable transitions
-export default defineNuxtConfig({
-  ui: {
-    theme: {
-      transitions: false
-    }
-  }
-})
-```
-
 ### `theme.prefix`
 
 When using Tailwind CSS with a prefix, configure the same prefix in Nuxt UI so component classes match:
