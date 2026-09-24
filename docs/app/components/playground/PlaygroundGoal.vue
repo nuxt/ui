@@ -1,7 +1,11 @@
 <script setup lang="ts">
-const percent = 80
+const invested = 24000
+const goal = 30000
 
-const ring = `conic-gradient(var(--ui-primary) ${percent}%, var(--ui-bg-accented) 0)`
+const data = [
+  { label: 'Invested', amount: invested },
+  { label: 'Remaining', amount: goal - invested }
+]
 </script>
 
 <template>
@@ -10,12 +14,23 @@ const ring = `conic-gradient(var(--ui-primary) ${percent}%, var(--ui-bg-accented
       Investment goal
     </p>
 
-    <div class="relative size-32 rounded-full" :style="{ background: ring }">
-      <div class="absolute inset-3 rounded-full bg-default flex flex-col items-center justify-center">
+    <UChart
+      type="donut"
+      :data="data"
+      index="label"
+      :categories="['amount']"
+      :colors="['primary', 'var(--ui-bg-accented)']"
+      :thickness="12"
+      :height="128"
+      :initial-width="128"
+      aria-label="Investment goal progress"
+      class="w-32"
+    >
+      <template #center>
         <span class="text-xl font-semibold text-highlighted">$24k</span>
-        <span class="text-xs text-muted">{{ percent }}% of $30k</span>
-      </div>
-    </div>
+        <span class="text-xs text-muted">{{ Math.round(invested / goal * 100) }}% of $30k</span>
+      </template>
+    </UChart>
 
     <div class="flex items-center justify-between w-full text-sm">
       <span class="text-muted">Projected finish</span>
