@@ -6,11 +6,31 @@ import { addTemplate, addTypeTemplate, hasNuxtModule, logger, updateTemplates, g
 import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
 import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
-import { applyDefaultVariants, applyPrefixToObject, applyUnstyled } from './utils/theme'
+import { applyDefaultVariants, applyPrefixToObject, applyUnstyled, expandColorVariants } from './utils/theme'
 import { detectUsedComponents } from './utils/components'
 import * as theme from './theme'
 import * as themeProse from './theme/prose'
 import * as themeContent from './theme/content'
+
+// The accent roles every color resolves through; unset, a role falls back to its recipe
+const ACCENT_ROLES = ['foreground', 'hover', 'soft', 'soft-hover', 'soft-foreground', 'soft-active', 'border', 'border-soft', 'focus', 'surface', 'muted', 'muted-hover', 'line', 'tint', 'faint', 'border-muted', 'border-strong']
+
+// Neutral keeps the surface tokens it has always used
+const NEUTRAL_ROLES: Record<string, string> = {
+  'hover': 'color-mix(in oklab, var(--ui-bg-inverted) 90%, transparent)',
+  'soft': 'var(--ui-bg-elevated)',
+  'soft-hover': 'color-mix(in oklab, var(--ui-bg-accented) 75%, transparent)',
+  'soft-foreground': 'var(--ui-text)',
+  'border': 'var(--ui-border-accented)',
+  'border-soft': 'var(--ui-border-accented)',
+  'surface': 'var(--ui-bg)',
+  'muted': 'var(--ui-text-muted)',
+  'muted-hover': 'var(--ui-text)',
+  'line': 'var(--ui-border)',
+  'tint': 'color-mix(in oklab, var(--ui-bg-elevated) 50%, transparent)',
+  'faint': 'var(--ui-text-dimmed)',
+  'border-muted': 'var(--ui-border)'
+}
 
 export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt?: Nuxt, resolve?: Resolver['resolve'], vue?: { detectedComponents?: Set<string> }) {
   const templates: NuxtTemplate[] = []
@@ -38,6 +58,8 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
           const unused = path !== 'prose' && !!vue?.detectedComponents?.size
             && !Array.from(vue.detectedComponents).some(detected => camelCase(detected) === component)
 
+          // Expand `'*'` color variants into one entry per alias
+          result = expandColorVariants(result, [...(options.theme?.colors || []), 'neutral'])
           // Override default variants from nuxt.config.ts
           result = applyDefaultVariants(result, options.theme?.defaultVariants)
           // Strip default theme classes if `unstyled` is enabled
@@ -79,10 +101,11 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
 
             return [
               `import template from ${JSON.stringify(templatePath)}`,
-              `import { applyDefaultVariants, applyPrefixToObject, applyUnstyled } from ${JSON.stringify(themeUtilsPath)}`,
+              `import { applyDefaultVariants, applyPrefixToObject, applyUnstyled, expandColorVariants } from ${JSON.stringify(themeUtilsPath)}`,
               ...generateVariantDeclarations(variants),
               `const options = ${JSON.stringify(options, null, 2)}`,
               `let result = typeof template === 'function' ? (template as Function)(options) : template`,
+              `result = expandColorVariants(result, ${JSON.stringify([...(options.theme?.colors || []), 'neutral'])})`,
               `result = applyDefaultVariants(result, ${defaultVariantsJson})`,
               `result = applyUnstyled(result, ${unstyledJson})`,
               `result = applyPrefixToObject(result, ${prefixJson})`,
@@ -227,6 +250,25 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
 @theme default inline {
   ${[...(options.theme?.colors || []).filter(color => !colors[color as keyof typeof colors]), 'neutral'].map(color => [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map(shade => `--color-${color}-${shade}: var(--ui-color-${color}-${shade});`).join('\n\t')).join('\n\t')}
   ${options.theme?.colors?.map(color => `--color-${color}: var(--ui-${color});`).join('\n\t')}
+  --color-neutral: var(--ui-neutral);
+  --color-accent: var(--ui-accent);
+  --color-accent-foreground: var(--ui-accent-foreground, var(--ui-text-inverted));
+  --color-accent-hover: var(--ui-accent-hover, color-mix(in oklab, var(--ui-accent) 75%, transparent));
+  --color-accent-soft: var(--ui-accent-soft, color-mix(in oklab, var(--ui-accent) 10%, transparent));
+  --color-accent-soft-hover: var(--ui-accent-soft-hover, color-mix(in oklab, var(--ui-accent) 15%, transparent));
+  --color-accent-soft-foreground: var(--ui-accent-soft-foreground, var(--ui-accent));
+  --color-accent-soft-active: var(--ui-accent-soft-active, color-mix(in oklab, var(--ui-accent) 20%, transparent));
+  --color-accent-border: var(--ui-accent-border, color-mix(in oklab, var(--ui-accent) 50%, transparent));
+  --color-accent-border-soft: var(--ui-accent-border-soft, color-mix(in oklab, var(--ui-accent) 25%, transparent));
+  --color-accent-focus: var(--ui-accent-focus, color-mix(in oklab, var(--ui-accent) 25%, transparent));
+  --color-accent-surface: var(--ui-accent-surface, transparent);
+  --color-accent-muted: var(--ui-accent-muted, var(--ui-accent));
+  --color-accent-muted-hover: var(--ui-accent-muted-hover, color-mix(in oklab, var(--ui-accent) 75%, transparent));
+  --color-accent-line: var(--ui-accent-line, var(--ui-accent));
+  --color-accent-tint: var(--ui-accent-tint, color-mix(in oklab, var(--ui-accent) 10%, transparent));
+  --color-accent-faint: var(--ui-accent-faint, color-mix(in oklab, var(--ui-accent) 75%, transparent));
+  --color-accent-border-muted: var(--ui-accent-border-muted, color-mix(in oklab, var(--ui-accent) 25%, transparent));
+  --color-accent-border-strong: var(--ui-accent-border-strong, color-mix(in oklab, var(--ui-accent) 50%, transparent));
   --radius-xs: calc(var(--ui-radius) * 0.5);
   --radius-sm: var(--ui-radius);
   --radius-md: calc(var(--ui-radius) * 1.5);
@@ -289,6 +331,19 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
 @layer base {
   body {
     @apply ${prefix}antialiased ${prefix}text-default ${prefix}bg-default ${prefix}scheme-light ${prefix}dark:scheme-dark;
+  }
+
+  /* A color scope (\`[--ui-accent:var(--ui-<alias>)]\`) resets the accent roles, so a
+     colored component nested in another doesn't inherit them, and every role falls
+     back to its recipe on the color. */
+  [class*="[--ui-accent:"] {
+    ${ACCENT_ROLES.map(role => `--ui-accent-${role}: initial;`).join('\n    ')}
+  }
+
+  /* Neutral points its roles at the surface tokens instead of the recipes. Matched
+     as a whole class, so a state-prefixed neutral scope doesn't apply them. */
+  [class~="${prefix}[--ui-accent:var(--ui-neutral)]"] {
+    ${Object.entries(NEUTRAL_ROLES).map(([role, value]) => `--ui-accent-${role}: ${value};`).join('\n    ')}
   }
 }
 

@@ -1,6 +1,4 @@
-import type { ModuleOptions } from '../module'
-
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'gap-2',
     base: 'flex overflow-hidden rounded-full bg-accented',
@@ -16,15 +14,10 @@ export default (options: Required<ModuleOptions>) => ({
   },
   variants: {
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        indicator: `bg-${color}`,
-        itemLeadingIcon: `text-${color}`,
-        itemLeadingDot: `bg-${color}`
-      }])),
-      neutral: {
-        indicator: 'bg-inverted',
-        itemLeadingIcon: 'text-highlighted',
-        itemLeadingDot: 'bg-inverted'
+      '*': {
+        indicator: 'bg-accent [--ui-accent:var(--ui-{value})]',
+        itemLeadingIcon: 'text-accent [--ui-accent:var(--ui-{value})]',
+        itemLeadingDot: 'bg-accent [--ui-accent:var(--ui-{value})]'
       }
     },
     size: {
@@ -147,4 +140,4 @@ export default (options: Required<ModuleOptions>) => ({
     color: 'primary',
     size: 'md'
   }
-})
+}

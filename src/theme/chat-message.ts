@@ -1,6 +1,4 @@
-import type { ModuleOptions } from '../module'
-
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'group/message relative w-full',
     header: 'flex mb-1.5',
@@ -23,8 +21,11 @@ export default (options: Required<ModuleOptions>) => ({
       naked: ''
     },
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
-      neutral: ''
+      '*': {
+        content: '[--ui-accent:var(--ui-{value})]'
+      },
+      // Neutral keeps the inherited text color, so it has its own classes.
+      'neutral': ''
     },
     side: {
       left: {},
@@ -58,6 +59,60 @@ export default (options: Required<ModuleOptions>) => ({
     }
   },
   compoundVariants: [{
+    color: '*',
+    variant: 'solid',
+    class: {
+      content: 'bg-accent text-accent-foreground'
+    }
+  }, {
+    color: '*',
+    variant: 'outline',
+    class: {
+      content: 'text-accent ring ring-accent-border-soft'
+    }
+  }, {
+    color: '*',
+    variant: 'soft',
+    class: {
+      content: 'bg-accent-soft text-accent-soft-foreground'
+    }
+  }, {
+    color: '*',
+    variant: 'subtle',
+    class: {
+      content: 'bg-accent-soft text-accent-soft-foreground ring ring-accent-border-soft'
+    }
+  }, {
+    color: '*',
+    variant: 'naked',
+    class: {
+      content: 'text-accent'
+    }
+  }, {
+    color: 'neutral',
+    variant: 'solid',
+    class: {
+      content: 'bg-inverted text-inverted'
+    }
+  }, {
+    color: 'neutral',
+    variant: 'outline',
+    class: {
+      content: 'bg-default ring ring-default'
+    }
+  }, {
+    color: 'neutral',
+    variant: 'soft',
+    class: {
+      content: 'bg-elevated/50'
+    }
+  }, {
+    color: 'neutral',
+    variant: 'subtle',
+    class: {
+      content: 'bg-elevated/50 ring ring-default'
+    }
+  }, {
     compact: true,
     actions: true,
     class: {
@@ -84,64 +139,10 @@ export default (options: Required<ModuleOptions>) => ({
       body: 'w-full',
       content: 'w-full'
     }
-  }, ...(options.theme.colors || []).map((color: string) => ({
-    color,
-    variant: 'solid',
-    class: {
-      content: `bg-${color} text-inverted`
-    }
-  })), ...(options.theme.colors || []).map((color: string) => ({
-    color,
-    variant: 'outline',
-    class: {
-      content: `text-${color} ring ring-${color}/25`
-    }
-  })), ...(options.theme.colors || []).map((color: string) => ({
-    color,
-    variant: 'soft',
-    class: {
-      content: `bg-${color}/10 text-${color}`
-    }
-  })), ...(options.theme.colors || []).map((color: string) => ({
-    color,
-    variant: 'subtle',
-    class: {
-      content: `bg-${color}/10 text-${color} ring ring-${color}/25`
-    }
-  })), ...(options.theme.colors || []).map((color: string) => ({
-    color,
-    variant: 'naked',
-    class: {
-      content: `text-${color}`
-    }
-  })), {
-    color: 'neutral',
-    variant: 'solid',
-    class: {
-      content: 'bg-inverted text-inverted'
-    }
-  }, {
-    color: 'neutral',
-    variant: 'outline',
-    class: {
-      content: 'bg-default ring ring-default'
-    }
-  }, {
-    color: 'neutral',
-    variant: 'soft',
-    class: {
-      content: 'bg-elevated/50'
-    }
-  }, {
-    color: 'neutral',
-    variant: 'subtle',
-    class: {
-      content: 'bg-elevated/50 ring ring-default'
-    }
   }],
   defaultVariants: {
     side: 'left',
     variant: 'naked',
     color: 'neutral'
   }
-})
+}

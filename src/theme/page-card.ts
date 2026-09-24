@@ -1,6 +1,4 @@
-import type { ModuleOptions } from '../module'
-
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'relative flex rounded-lg',
     spotlight: 'absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90',
@@ -66,12 +64,13 @@ export default (options: Required<ModuleOptions>) => ({
     },
     highlight: {
       true: {
-        root: 'ring-2'
+        root: 'ring-2 ring-accent'
       }
     },
     highlightColor: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
-      neutral: ''
+      '*': {
+        root: '[--ui-accent:var(--ui-{value})]'
+      }
     },
     spotlight: {
       true: {
@@ -79,8 +78,9 @@ export default (options: Required<ModuleOptions>) => ({
       }
     },
     spotlightColor: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
-      neutral: ''
+      '*': {
+        root: '[--spotlight-color:var(--ui-{value})]'
+      }
     }
   },
   compoundVariants: [{
@@ -127,34 +127,10 @@ export default (options: Required<ModuleOptions>) => ({
     class: {
       root: 'hover:bg-elevated/50'
     }
-  }, ...(options.theme.colors || []).map((highlightColor: string) => ({
-    highlightColor,
-    highlight: true,
-    class: {
-      root: `ring-${highlightColor}`
-    }
-  })), {
-    highlightColor: 'neutral',
-    highlight: true,
-    class: {
-      root: 'ring-inverted'
-    }
-  }, ...(options.theme.colors || []).map((spotlightColor: string) => ({
-    spotlightColor,
-    spotlight: true,
-    class: {
-      root: `[--spotlight-color:var(--ui-${spotlightColor})]`
-    }
-  })), {
-    spotlightColor: 'neutral',
-    spotlight: true,
-    class: {
-      root: '[--spotlight-color:var(--ui-bg-inverted)]'
-    }
   }],
   defaultVariants: {
     variant: 'outline',
     highlightColor: 'primary',
     spotlightColor: 'primary'
   }
-})
+}

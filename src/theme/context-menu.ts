@@ -1,6 +1,4 @@
-import type { ModuleOptions } from '../module'
-
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     content: 'min-w-32 max-h-(--reka-context-menu-content-available-height) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-context-menu-content-transform-origin) flex flex-col',
     viewport: 'relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1',
@@ -22,8 +20,10 @@ export default (options: Required<ModuleOptions>) => ({
   },
   variants: {
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
-      neutral: ''
+      '*': {
+        item: '[--ui-accent:var(--ui-{value})]',
+        itemLeadingIcon: '[--ui-accent:var(--ui-{value})]'
+      }
     },
     active: {
       true: {
@@ -88,22 +88,22 @@ export default (options: Required<ModuleOptions>) => ({
       }
     }
   },
-  compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
-    color,
+  compoundVariants: [{
+    color: '*',
     active: false,
     class: {
-      item: `text-${color} data-highlighted:text-${color} data-highlighted:before:bg-${color}/10 data-[state=open]:before:bg-${color}/10`,
-      itemLeadingIcon: `text-${color}/75 group-data-highlighted:text-${color} group-data-[state=open]:text-${color}`
+      item: 'text-accent-soft-foreground data-highlighted:text-accent data-highlighted:before:bg-accent-tint data-[state=open]:before:bg-accent-tint',
+      itemLeadingIcon: 'text-accent-faint group-data-highlighted:text-accent-soft-foreground group-data-[state=open]:text-accent-soft-foreground'
     }
-  })), ...(options.theme.colors || []).map((color: string) => ({
-    color,
+  }, {
+    color: '*',
     active: true,
     class: {
-      item: `text-${color} before:bg-${color}/10`,
-      itemLeadingIcon: `text-${color}`
+      item: 'text-accent before:bg-accent-soft',
+      itemLeadingIcon: 'text-accent-soft-foreground'
     }
-  }))],
+  }],
   defaultVariants: {
     size: 'md'
   }
-})
+}

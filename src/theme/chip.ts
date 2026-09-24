@@ -1,14 +1,13 @@
-import type { ModuleOptions } from '../module'
-
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'relative inline-flex items-center justify-center shrink-0',
-    base: 'rounded-full ring ring-bg flex items-center justify-center text-inverted font-medium whitespace-nowrap'
+    base: 'rounded-full ring ring-bg flex items-center justify-center text-accent-foreground font-medium whitespace-nowrap bg-accent'
   },
   variants: {
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, { base: `bg-${color}` }])),
-      neutral: { base: 'bg-inverted' }
+      '*': {
+        base: '[--ui-accent:var(--ui-{value})]'
+      }
     },
     size: {
       '3xs': { base: 'h-[4px] min-w-[4px] text-[4px]' },
@@ -56,4 +55,4 @@ export default (options: Required<ModuleOptions>) => ({
     color: 'primary',
     position: 'top-right'
   }
-})
+}

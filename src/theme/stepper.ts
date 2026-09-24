@@ -1,15 +1,13 @@
-import type { ModuleOptions } from '../module'
-
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'flex gap-4',
     header: 'flex',
     item: 'group text-center relative w-full',
     container: 'relative',
-    trigger: 'rounded-full font-medium text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-3',
+    trigger: 'rounded-full font-medium text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-foreground group-data-[state=active]:text-accent-foreground text-muted bg-elevated focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus',
     indicator: 'flex items-center justify-center size-full',
     icon: 'shrink-0',
-    separator: 'absolute rounded-full group-data-[disabled]:opacity-75 bg-accented',
+    separator: 'absolute rounded-full group-data-[disabled]:opacity-75 bg-accented group-data-[state=completed]:bg-accent',
     wrapper: '',
     title: 'font-medium text-default',
     description: 'text-muted text-wrap',
@@ -70,13 +68,9 @@ export default (options: Required<ModuleOptions>) => ({
     },
 
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        trigger: `group-data-[state=completed]:bg-${color} group-data-[state=active]:bg-${color} outline-${color}/25`,
-        separator: `group-data-[state=completed]:bg-${color}`
-      }])),
-      neutral: {
-        trigger: `group-data-[state=completed]:bg-inverted group-data-[state=active]:bg-inverted outline-inverted/25`,
-        separator: `group-data-[state=completed]:bg-inverted`
+      '*': {
+        trigger: '[--ui-accent:var(--ui-{value})]',
+        separator: '[--ui-accent:var(--ui-{value})]'
       }
     }
   },
@@ -127,4 +121,4 @@ export default (options: Required<ModuleOptions>) => ({
     size: 'md',
     color: 'primary'
   }
-})
+}

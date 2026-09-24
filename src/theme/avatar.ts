@@ -1,23 +1,16 @@
-import type { ModuleOptions } from '../module'
-
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
-    root: 'inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle',
+    root: 'inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-accent-soft',
     image: 'h-full w-full rounded-[inherit] object-cover',
-    fallback: 'font-medium truncate',
-    icon: 'shrink-0'
+    fallback: 'font-medium truncate text-accent-muted',
+    icon: 'shrink-0 text-accent-muted'
   },
   variants: {
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        root: `bg-${color}/10`,
-        fallback: `text-${color}`,
-        icon: `text-${color}`
-      }])),
-      neutral: {
-        root: 'bg-elevated',
-        fallback: 'text-muted',
-        icon: 'text-muted'
+      '*': {
+        root: '[--ui-accent:var(--ui-{value})]',
+        fallback: '[--ui-accent:var(--ui-{value})]',
+        icon: '[--ui-accent:var(--ui-{value})]'
       }
     },
     size: {
@@ -54,4 +47,4 @@ export default (options: Required<ModuleOptions>) => ({
     size: 'md',
     color: 'neutral'
   }
-})
+}

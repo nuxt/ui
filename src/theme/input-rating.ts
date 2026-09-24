@@ -1,10 +1,8 @@
-import type { ModuleOptions } from '../module'
-
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: '',
-    item: 'relative inline-block cursor-pointer select-none rounded-sm has-focus-visible:outline-3 transition',
-    indicator: 'absolute inset-0 overflow-hidden outline-none text-transparent w-(--reka-rating-item-step-width) opacity-(--reka-rating-item-step-opacity) z-(--reka-rating-item-step-z-index)',
+    item: 'relative inline-block cursor-pointer select-none rounded-sm has-focus-visible:outline-3 transition outline-accent-focus',
+    indicator: 'absolute inset-0 overflow-hidden outline-none text-transparent w-(--reka-rating-item-step-width) opacity-(--reka-rating-item-step-opacity) z-(--reka-rating-item-step-z-index) data-[state=active]:text-accent',
     icon: 'block',
     emptyIcon: 'block w-full h-full text-muted pointer-events-none'
   },
@@ -40,13 +38,9 @@ export default (options: Required<ModuleOptions>) => ({
       }
     },
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        indicator: `data-[state=active]:text-${color}`,
-        item: `outline-${color}/25`
-      }])),
-      neutral: {
-        indicator: 'data-[state=active]:text-highlighted',
-        item: 'outline-inverted/25'
+      '*': {
+        indicator: '[--ui-accent:var(--ui-{value})]',
+        item: '[--ui-accent:var(--ui-{value})]'
       }
     },
     readonly: {
@@ -75,4 +69,4 @@ export default (options: Required<ModuleOptions>) => ({
     color: 'primary',
     size: 'md'
   }
-})
+}

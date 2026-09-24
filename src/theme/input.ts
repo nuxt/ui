@@ -1,7 +1,6 @@
-import type { ModuleOptions } from '../module'
 import { fieldGroupVariantWithRoot } from './field-group'
 
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'relative inline-flex items-center',
     base: 'w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
@@ -64,8 +63,9 @@ export default (options: Required<ModuleOptions>) => ({
       none: { base: 'text-highlighted bg-transparent focus:outline-none' }
     },
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
-      neutral: ''
+      '*': {
+        base: '[--ui-accent:var(--ui-{value})]'
+      }
     },
     leading: {
       true: ''
@@ -77,7 +77,7 @@ export default (options: Required<ModuleOptions>) => ({
       true: ''
     },
     highlight: {
-      true: ''
+      true: { base: 'ring ring-inset ring-accent' }
     },
     fixed: {
       false: ''
@@ -86,30 +86,12 @@ export default (options: Required<ModuleOptions>) => ({
       file: { base: 'file:me-1.5 file:font-medium file:text-muted file:outline-none' }
     }
   },
-  compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
-    color,
+  compoundVariants: [{
     variant: ['outline', 'subtle'],
-    class: { base: `outline-${color}/25 focus-visible:outline-3 focus-visible:ring-${color}` }
-  })), ...(options.theme.colors || []).map((color: string) => ({
-    color,
-    variant: ['soft', 'ghost'],
-    class: { base: `outline-${color}/25 focus-visible:outline-3` }
-  })), ...(options.theme.colors || []).map((color: string) => ({
-    color,
-    highlight: true,
-    class: { base: `ring ring-inset ring-${color}` }
-  })), {
-    color: 'neutral',
-    variant: ['outline', 'subtle'],
-    class: { base: 'outline-inverted/25 focus-visible:outline-3 focus-visible:ring-inverted' }
+    class: { base: 'outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent' }
   }, {
-    color: 'neutral',
     variant: ['soft', 'ghost'],
-    class: { base: 'outline-inverted/25 focus-visible:outline-3' }
-  }, {
-    color: 'neutral',
-    highlight: true,
-    class: { base: 'ring ring-inset ring-inverted' }
+    class: { base: 'outline-accent-focus focus-visible:outline-3' }
   }, {
     leading: true,
     size: 'xs',
@@ -185,4 +167,4 @@ export default (options: Required<ModuleOptions>) => ({
     color: 'primary',
     variant: 'outline'
   }
-})
+}

@@ -1,20 +1,19 @@
-import type { ModuleOptions } from '../../module'
-
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
-    base: 'group relative block px-4 py-3 rounded-md text-sm/6 my-5 last:mb-0 [&_code]:text-xs/5 [&_code]:bg-default [&_pre]:bg-default [&>div]:my-2.5 [&_ul]:my-2.5 [&_ol]:my-2.5 *:last:mb-0! [&_ul]:ps-4.5 [&_ol]:ps-4.5 [&_li]:my-0 transition-colors',
+    base: 'group relative block px-4 py-3 rounded-md text-sm/6 my-5 last:mb-0 [&_code]:text-xs/5 [&_code]:bg-default [&_pre]:bg-default [&>div]:my-2.5 [&_ul]:my-2.5 [&_ol]:my-2.5 *:last:mb-0! [&_ul]:ps-4.5 [&_ol]:ps-4.5 [&_li]:my-0 transition-colors border',
     icon: 'size-4 shrink-0 align-sub me-2 inline-block transition-colors',
     externalIcon: 'size-4 align-top absolute end-2 top-2 pointer-events-none transition-colors'
   },
   variants: {
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        base: `border border-${color}/25 bg-${color}/10 text-${color}-600 dark:text-${color}-300 [&_a]:text-${color} [&_a]:hover:border-${color} [&_a]:outline-${color}/25 [&_a]:focus-visible:outline-3 [&_a]:focus-visible:has-[>code]:outline-0 [&_code]:text-${color}-600 dark:[&_code]:text-${color}-300 [&_code]:border-${color}/25 [&_a]:[&>code]:outline-${color}/25 [&_a]:hover:[&>code]:border-${color} [&_a]:hover:[&>code]:text-${color} [&_a]:focus-visible:[&>code]:border-${color} [&_a]:focus-visible:[&>code]:text-${color} [&>ul]:marker:text-${color}/50`,
-        icon: `text-${color}`,
-        externalIcon: `text-${color}-600 dark:text-${color}-300`
-      }])),
-      neutral: {
-        base: 'border border-muted bg-muted text-default',
+      '*': {
+        base: '[--ui-accent:var(--ui-{value})] border-accent-border-soft bg-accent-soft text-accent-soft-foreground [&_a]:text-accent [&_a]:hover:border-accent [&_a]:outline-accent-focus [&_a]:focus-visible:outline-3 [&_a]:focus-visible:has-[>code]:outline-0 [&_code]:text-accent-soft-foreground [&_code]:border-accent-border-soft [&_a]:[&>code]:outline-accent-focus [&_a]:hover:[&>code]:border-accent [&_a]:hover:[&>code]:text-accent [&_a]:focus-visible:[&>code]:border-accent [&_a]:focus-visible:[&>code]:text-accent [&>ul]:marker:text-accent-border',
+        icon: '[--ui-accent:var(--ui-{value})] text-accent',
+        externalIcon: '[--ui-accent:var(--ui-{value})] text-accent-soft-foreground'
+      },
+      // Neutral is the plain callout, not a variant of the colored one.
+      'neutral': {
+        base: 'border-muted bg-muted text-default',
         icon: 'text-highlighted',
         externalIcon: 'text-dimmed'
       }
@@ -23,14 +22,14 @@ export default (options: Required<ModuleOptions>) => ({
       true: { base: 'border-dashed' }
     }
   },
-  compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
-    color,
+  compoundVariants: [{
+    color: '*',
     to: true,
     class: {
-      base: `hover:border-${color} outline-${color}/25 has-[>a:focus-visible]:outline-3 has-[>a:focus-visible]:border-${color}`,
-      externalIcon: `group-hover:text-${color}`
+      base: 'hover:border-accent outline-accent-focus has-[>a:focus-visible]:outline-3 has-[>a:focus-visible]:border-accent',
+      externalIcon: 'group-hover:text-accent'
     }
-  })), {
+  }, {
     color: 'neutral',
     to: true,
     class: {
@@ -41,4 +40,4 @@ export default (options: Required<ModuleOptions>) => ({
   defaultVariants: {
     color: 'neutral'
   }
-})
+}

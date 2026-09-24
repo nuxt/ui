@@ -1,9 +1,9 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`ChatPrompt > renders with as correctly 1`] = `
-"<section data-slot="chat-prompt" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+"<section data-slot="chat-prompt" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm [--ui-accent:var(--ui-primary)] bg-default/75 ring ring-default outline-accent-focus has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-accent has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-accent">
   <!--v-if-->
-  <div data-slot="chat-prompt-body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none resize-none px-0" data-slot="textarea-base" value=""></textarea>
+  <div data-slot="chat-prompt-body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none [--ui-accent:var(--ui-primary)] resize-none px-0" data-slot="textarea-base" value=""></textarea>
     <!--v-if-->
     <!--v-if-->
   </div>
@@ -12,16 +12,16 @@ exports[`ChatPrompt > renders with as correctly 1`] = `
 `;
 
 exports[`ChatPrompt > renders with body slot correctly 1`] = `
-"<form data-slot="chat-prompt" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+"<form data-slot="chat-prompt" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm [--ui-accent:var(--ui-primary)] bg-default/75 ring ring-default outline-accent-focus has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-accent has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-accent">
   <!--v-if-->Body slot
   <!--v-if-->
 </form>"
 `;
 
 exports[`ChatPrompt > renders with class correctly 1`] = `
-"<form data-slot="chat-prompt" class="relative flex flex-col items-stretch gap-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary p-5">
+"<form data-slot="chat-prompt" class="relative flex flex-col items-stretch gap-2 w-full rounded-lg backdrop-blur-sm [--ui-accent:var(--ui-primary)] bg-default/75 ring ring-default outline-accent-focus has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-accent has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-accent p-5">
   <!--v-if-->
-  <div data-slot="chat-prompt-body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none resize-none px-0" data-slot="textarea-base" value=""></textarea>
+  <div data-slot="chat-prompt-body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none [--ui-accent:var(--ui-primary)] resize-none px-0" data-slot="textarea-base" value=""></textarea>
     <!--v-if-->
     <!--v-if-->
   </div>
@@ -30,9 +30,9 @@ exports[`ChatPrompt > renders with class correctly 1`] = `
 `;
 
 exports[`ChatPrompt > renders with error correctly 1`] = `
-"<form data-slot="chat-prompt" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+"<form data-slot="chat-prompt" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm [--ui-accent:var(--ui-primary)] bg-default/75 ring ring-default outline-accent-focus has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-accent has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-accent">
   <!--v-if-->
-  <div data-slot="chat-prompt-body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none resize-none px-0" disabled="" data-slot="textarea-base" value=""></textarea>
+  <div data-slot="chat-prompt-body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none [--ui-accent:var(--ui-primary)] resize-none px-0" disabled="" data-slot="textarea-base" value=""></textarea>
     <!--v-if-->
     <!--v-if-->
   </div>
@@ -41,9 +41,9 @@ exports[`ChatPrompt > renders with error correctly 1`] = `
 `;
 
 exports[`ChatPrompt > renders with footer slot correctly 1`] = `
-"<form data-slot="chat-prompt" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+"<form data-slot="chat-prompt" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm [--ui-accent:var(--ui-primary)] bg-default/75 ring ring-default outline-accent-focus has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-accent has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-accent">
   <!--v-if-->
-  <div data-slot="chat-prompt-body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none resize-none px-0" data-slot="textarea-base" value=""></textarea>
+  <div data-slot="chat-prompt-body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none [--ui-accent:var(--ui-primary)] resize-none px-0" data-slot="textarea-base" value=""></textarea>
     <!--v-if-->
     <!--v-if-->
   </div>
@@ -52,9 +52,9 @@ exports[`ChatPrompt > renders with footer slot correctly 1`] = `
 `;
 
 exports[`ChatPrompt > renders with header slot correctly 1`] = `
-"<form data-slot="chat-prompt" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+"<form data-slot="chat-prompt" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm [--ui-accent:var(--ui-primary)] bg-default/75 ring ring-default outline-accent-focus has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-accent has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-accent">
   <div data-slot="chat-prompt-header" class="flex items-center gap-1.5">Header slot</div>
-  <div data-slot="chat-prompt-body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none resize-none px-0" data-slot="textarea-base" value=""></textarea>
+  <div data-slot="chat-prompt-body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none [--ui-accent:var(--ui-primary)] resize-none px-0" data-slot="textarea-base" value=""></textarea>
     <!--v-if-->
     <!--v-if-->
   </div>
@@ -63,9 +63,9 @@ exports[`ChatPrompt > renders with header slot correctly 1`] = `
 `;
 
 exports[`ChatPrompt > renders with placeholder correctly 1`] = `
-"<form data-slot="chat-prompt" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+"<form data-slot="chat-prompt" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm [--ui-accent:var(--ui-primary)] bg-default/75 ring ring-default outline-accent-focus has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-accent has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-accent">
   <!--v-if-->
-  <div data-slot="chat-prompt-body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Placeholder" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none resize-none px-0" data-slot="textarea-base" value=""></textarea>
+  <div data-slot="chat-prompt-body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Placeholder" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none [--ui-accent:var(--ui-primary)] resize-none px-0" data-slot="textarea-base" value=""></textarea>
     <!--v-if-->
     <!--v-if-->
   </div>
@@ -74,9 +74,9 @@ exports[`ChatPrompt > renders with placeholder correctly 1`] = `
 `;
 
 exports[`ChatPrompt > renders with ui correctly 1`] = `
-"<form data-slot="chat-prompt" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+"<form data-slot="chat-prompt" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm [--ui-accent:var(--ui-primary)] bg-default/75 ring ring-default outline-accent-focus has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-accent has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-accent">
   <!--v-if-->
-  <div data-slot="chat-prompt-body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none resize-none px-0" data-slot="textarea-base" value=""></textarea>
+  <div data-slot="chat-prompt-body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none [--ui-accent:var(--ui-primary)] resize-none px-0" data-slot="textarea-base" value=""></textarea>
     <!--v-if-->
     <!--v-if-->
   </div>
@@ -85,9 +85,9 @@ exports[`ChatPrompt > renders with ui correctly 1`] = `
 `;
 
 exports[`ChatPrompt > renders with variant naked correctly 1`] = `
-"<form data-slot="chat-prompt" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm">
+"<form data-slot="chat-prompt" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm [--ui-accent:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="chat-prompt-body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none resize-none px-0" data-slot="textarea-base" value=""></textarea>
+  <div data-slot="chat-prompt-body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none [--ui-accent:var(--ui-primary)] resize-none px-0" data-slot="textarea-base" value=""></textarea>
     <!--v-if-->
     <!--v-if-->
   </div>
@@ -96,9 +96,9 @@ exports[`ChatPrompt > renders with variant naked correctly 1`] = `
 `;
 
 exports[`ChatPrompt > renders with variant outline correctly 1`] = `
-"<form data-slot="chat-prompt" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+"<form data-slot="chat-prompt" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm [--ui-accent:var(--ui-primary)] bg-default/75 ring ring-default outline-accent-focus has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-accent has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-accent">
   <!--v-if-->
-  <div data-slot="chat-prompt-body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none resize-none px-0" data-slot="textarea-base" value=""></textarea>
+  <div data-slot="chat-prompt-body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none [--ui-accent:var(--ui-primary)] resize-none px-0" data-slot="textarea-base" value=""></textarea>
     <!--v-if-->
     <!--v-if-->
   </div>
@@ -107,9 +107,9 @@ exports[`ChatPrompt > renders with variant outline correctly 1`] = `
 `;
 
 exports[`ChatPrompt > renders with variant soft correctly 1`] = `
-"<form data-slot="chat-prompt" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-elevated/50 outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:outline-3">
+"<form data-slot="chat-prompt" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm [--ui-accent:var(--ui-primary)] bg-elevated/50 outline-accent-focus has-[textarea:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:outline-3">
   <!--v-if-->
-  <div data-slot="chat-prompt-body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none resize-none px-0" data-slot="textarea-base" value=""></textarea>
+  <div data-slot="chat-prompt-body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none [--ui-accent:var(--ui-primary)] resize-none px-0" data-slot="textarea-base" value=""></textarea>
     <!--v-if-->
     <!--v-if-->
   </div>
@@ -118,9 +118,9 @@ exports[`ChatPrompt > renders with variant soft correctly 1`] = `
 `;
 
 exports[`ChatPrompt > renders with variant subtle correctly 1`] = `
-"<form data-slot="chat-prompt" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-elevated/50 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+"<form data-slot="chat-prompt" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm [--ui-accent:var(--ui-primary)] bg-elevated/50 ring ring-default outline-accent-focus has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-accent has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-accent">
   <!--v-if-->
-  <div data-slot="chat-prompt-body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none resize-none px-0" data-slot="textarea-base" value=""></textarea>
+  <div data-slot="chat-prompt-body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none [--ui-accent:var(--ui-primary)] resize-none px-0" data-slot="textarea-base" value=""></textarea>
     <!--v-if-->
     <!--v-if-->
   </div>

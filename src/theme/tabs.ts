@@ -1,12 +1,10 @@
-import type { ModuleOptions } from '../module'
-
 // Active-tab highlight shown before reka-ui's `TabsIndicator` mounts (SSR / pre-hydration).
 // reka-ui only renders the real indicator on the client (it needs DOM measurements), so we gate
 // a CSS-only pseudo-element fallback on the active trigger by the *absence* of the indicator
 // element — the instant reka's measured indicator appears, this selector stops matching.
 const ssr = (...classes: string[]) => classes.map(c => `in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:${c}`).join(' ')
 
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'flex items-center gap-2',
     list: 'relative flex p-1 group',
@@ -18,27 +16,26 @@ export default (options: Required<ModuleOptions>) => ({
     label: 'truncate',
     trailingBadge: 'shrink-0',
     trailingBadgeSize: 'sm',
-    content: 'w-full rounded-md focus-visible:outline-3'
+    content: 'w-full rounded-md focus-visible:outline-3 outline-accent-focus'
   },
   variants: {
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        content: `outline-${color}/25`
-      }])),
-      neutral: {
-        content: 'outline-inverted/25'
+      '*': {
+        content: '[--ui-accent:var(--ui-{value})]',
+        trigger: '[--ui-accent:var(--ui-{value})]',
+        indicator: '[--ui-accent:var(--ui-{value})]'
       }
     },
     variant: {
       pill: {
         list: 'bg-elevated rounded-lg',
-        trigger: [`grow`, ssr('before:content-[\'\']', 'before:absolute', 'before:inset-0', 'before:rounded-md', 'before:shadow-xs', 'before:-z-10', 'isolate')],
-        indicator: 'rounded-md shadow-xs'
+        trigger: [`grow`, ssr('before:content-[\'\']', 'before:absolute', 'before:inset-0', 'before:rounded-md', 'before:shadow-xs', 'before:-z-10', 'isolate'), 'data-[state=active]:text-accent-foreground outline-accent-focus focus-visible:outline-3', ssr('before:bg-accent')],
+        indicator: 'rounded-md shadow-xs bg-accent'
       },
       link: {
         list: 'border-default',
-        indicator: 'rounded-full',
-        trigger: ssr('after:content-[\'\']', 'after:absolute', 'after:rounded-full')
+        indicator: 'rounded-full bg-accent',
+        trigger: [ssr('after:content-[\'\']', 'after:absolute', 'after:rounded-full'), 'data-[state=active]:text-accent outline-accent-focus focus-visible:outline-3', ssr('after:bg-accent')]
       }
     },
     orientation: {
@@ -111,38 +108,10 @@ export default (options: Required<ModuleOptions>) => ({
       indicator: '-start-px w-px',
       trigger: ssr('after:inset-y-0', 'after:-start-[calc(var(--spacing)+1px)]', 'after:w-px')
     }
-  }, ...(options.theme.colors || []).map((color: string) => ({
-    color,
-    variant: 'pill',
-    class: {
-      indicator: `bg-${color}`,
-      trigger: [`data-[state=active]:text-inverted outline-${color}/25 focus-visible:outline-3`, ssr(`before:bg-${color}`)]
-    }
-  })), {
-    color: 'neutral',
-    variant: 'pill',
-    class: {
-      indicator: 'bg-inverted',
-      trigger: [`data-[state=active]:text-inverted outline-inverted/25 focus-visible:outline-3`, ssr('before:bg-inverted')]
-    }
-  }, ...(options.theme.colors || []).map((color: string) => ({
-    color,
-    variant: 'link',
-    class: {
-      indicator: `bg-${color}`,
-      trigger: [`data-[state=active]:text-${color} outline-${color}/25 focus-visible:outline-3`, ssr(`after:bg-${color}`)]
-    }
-  })), {
-    color: 'neutral',
-    variant: 'link',
-    class: {
-      indicator: 'bg-inverted',
-      trigger: [`data-[state=active]:text-highlighted outline-inverted/25 focus-visible:outline-3`, ssr('after:bg-inverted')]
-    }
   }],
   defaultVariants: {
     color: 'primary',
     variant: 'pill',
     size: 'md'
   }
-})
+}

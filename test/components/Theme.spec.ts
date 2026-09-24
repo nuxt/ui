@@ -263,8 +263,8 @@ describe('Theme', () => {
       `
     })
 
-    expect(wrapper.find('button').classes()).toContain('bg-error/10')
-    expect(wrapper.find('button').classes()).not.toContain('bg-primary')
+    expect(wrapper.find('button').classes()).toEqual(expect.arrayContaining(['[--ui-accent:var(--ui-error)]', 'bg-accent-soft']))
+    expect(wrapper.find('button').classes()).not.toContain('[--ui-accent:var(--ui-primary)]')
   })
 
   test('explicit prop wins over :props (other theme props still flow through)', async () => {
@@ -277,8 +277,8 @@ describe('Theme', () => {
       `
     })
 
-    expect(wrapper.find('button').classes()).toContain('bg-primary/10')
-    expect(wrapper.find('button').classes()).not.toContain('bg-error/10')
+    expect(wrapper.find('button').classes()).toEqual(expect.arrayContaining(['[--ui-accent:var(--ui-primary)]', 'bg-accent-soft']))
+    expect(wrapper.find('button').classes()).not.toContain('[--ui-accent:var(--ui-error)]')
   })
 
   test(':props applies to multiple component types simultaneously', async () => {
@@ -292,8 +292,8 @@ describe('Theme', () => {
       `
     })
 
-    expect(wrapper.find('button').classes()).toContain('bg-error/10')
-    expect(wrapper.html()).toContain('focus-visible:ring-success')
+    expect(wrapper.find('button').classes()).toEqual(expect.arrayContaining(['[--ui-accent:var(--ui-error)]', 'bg-accent-soft']))
+    expect(wrapper.html()).toContain('[--ui-accent:var(--ui-success)]')
   })
 
   test(':props does not leak outside scope', async () => {
@@ -309,8 +309,8 @@ describe('Theme', () => {
       `
     })
 
-    expect(wrapper.find('.inside-btn').classes()).toContain('bg-error/10')
-    expect(wrapper.find('.outside-btn').classes()).not.toContain('bg-error/10')
+    expect(wrapper.find('.inside-btn').classes()).toEqual(expect.arrayContaining(['[--ui-accent:var(--ui-error)]', 'bg-accent-soft']))
+    expect(wrapper.find('.outside-btn').classes()).not.toContain('[--ui-accent:var(--ui-error)]')
   })
 
   test('nested :props inherits non-overridden keys from outer', async () => {
@@ -326,9 +326,9 @@ describe('Theme', () => {
       `
     })
 
-    expect(wrapper.find('.outer-btn').classes()).toContain('bg-error/10')
-    expect(wrapper.find('.inner-btn').classes()).toContain('bg-success/10')
-    expect(wrapper.find('.inner-btn').classes()).not.toContain('bg-error/10')
+    expect(wrapper.find('.outer-btn').classes()).toEqual(expect.arrayContaining(['[--ui-accent:var(--ui-error)]', 'bg-accent-soft']))
+    expect(wrapper.find('.inner-btn').classes()).toEqual(expect.arrayContaining(['[--ui-accent:var(--ui-success)]', 'bg-accent-soft']))
+    expect(wrapper.find('.inner-btn').classes()).not.toContain('[--ui-accent:var(--ui-error)]')
   })
 
   // Real-world layout: an outer `<UTheme :props>` set near the root configures
@@ -355,8 +355,8 @@ describe('Theme', () => {
     // Inner button picks up the inner theme's color override, but inherits
     // `variant: 'soft'` from the outer theme (proven by `bg-success/10` —
     // the soft variant of success).
-    expect(wrapper.find('.inner-btn').classes()).toContain('bg-success/10')
-    expect(wrapper.find('.inner-btn').classes()).not.toContain('bg-error/10')
+    expect(wrapper.find('.inner-btn').classes()).toEqual(expect.arrayContaining(['[--ui-accent:var(--ui-success)]', 'bg-accent-soft']))
+    expect(wrapper.find('.inner-btn').classes()).not.toContain('[--ui-accent:var(--ui-error)]')
 
     // Tooltip below the inner theme inherits the outer theme's `arrow: true`
     // because the inner theme didn't touch the `tooltip` key.
@@ -376,13 +376,13 @@ describe('Theme', () => {
       `
     })
 
-    expect(wrapper.find('button').classes()).toContain('bg-error/10')
+    expect(wrapper.find('button').classes()).toEqual(expect.arrayContaining(['[--ui-accent:var(--ui-error)]', 'bg-accent-soft']))
 
     themeProps.value = { button: { color: 'success', variant: 'soft' } }
     await nextTick()
 
-    expect(wrapper.find('button').classes()).toContain('bg-success/10')
-    expect(wrapper.find('button').classes()).not.toContain('bg-error/10')
+    expect(wrapper.find('button').classes()).toEqual(expect.arrayContaining(['[--ui-accent:var(--ui-success)]', 'bg-accent-soft']))
+    expect(wrapper.find('button').classes()).not.toContain('[--ui-accent:var(--ui-error)]')
   })
 
   test(':props and :ui work together', async () => {
@@ -398,7 +398,7 @@ describe('Theme', () => {
       `
     })
 
-    expect(wrapper.find('button').classes()).toContain('bg-error/10')
+    expect(wrapper.find('button').classes()).toEqual(expect.arrayContaining(['[--ui-accent:var(--ui-error)]', 'bg-accent-soft']))
     expect(wrapper.find('button').classes()).toContain('rounded-full')
   })
 
@@ -489,7 +489,7 @@ describe('Theme', () => {
     })
 
     // theme `color` flows through the proxy onto the checkbox
-    expect(wrapper.html()).toContain('focus-visible:ring-success')
+    expect(wrapper.html()).toContain('[--ui-accent:var(--ui-success)]')
     // FormField label is wired up
     expect(wrapper.text()).toContain('Accept')
     // FormField-injected `size` (xl) wins over `<UTheme :props>` size (xs).
@@ -515,8 +515,8 @@ describe('Theme', () => {
       `
     })
 
-    expect(wrapper.html()).toContain('focus-visible:ring-error')
-    expect(wrapper.html()).not.toContain('focus-visible:ring-success')
+    expect(wrapper.html()).toContain('[--ui-accent:var(--ui-error)]')
+    expect(wrapper.html()).not.toContain('[--ui-accent:var(--ui-success)]')
   })
 
   // `highlight` and `disabled` are Boolean props, which Vue auto-casts to
@@ -533,7 +533,7 @@ describe('Theme', () => {
       `
     })
 
-    expect(wrapper.find('button[role="checkbox"]').classes()).toContain('ring-primary')
+    expect(wrapper.find('button[role="checkbox"]').classes()).toEqual(expect.arrayContaining(['[--ui-accent:var(--ui-primary)]', 'ring-accent']))
     expect(wrapper.find('button[role="checkbox"]').classes()).not.toContain('ring-accented')
   })
 
@@ -584,8 +584,8 @@ describe('Theme', () => {
       `
     })
 
-    expect(wrapper.html()).toContain('outline-success/25')
-    expect(wrapper.html()).not.toContain('outline-primary/25')
+    expect(wrapper.html()).toContain('[--ui-accent:var(--ui-success)]')
+    expect(wrapper.html()).not.toContain('[--ui-accent:var(--ui-primary)]')
   })
 
   // The group resolves `color` once and hands it to every child, so a FormField
@@ -603,8 +603,8 @@ describe('Theme', () => {
       `
     })
 
-    expect(wrapper.html()).toContain('outline-error/25')
-    expect(wrapper.html()).not.toContain('outline-success/25')
+    expect(wrapper.html()).toContain('[--ui-accent:var(--ui-error)]')
+    expect(wrapper.html()).not.toContain('[--ui-accent:var(--ui-success)]')
   })
 
   // `useFieldGroup` shares the same closer-context-wins fallback as

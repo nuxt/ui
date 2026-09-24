@@ -6,13 +6,13 @@ exports[`BlogPosts > renders with as correctly 1`] = `
     <!--v-if-->
     <div data-slot="blog-post-header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img alt="Image alt" src="https://picsum.photos/640/360" data-slot="blog-post-image" class="object-cover object-top w-full h-full"></div>
     <div data-slot="blog-post-body" class="min-w-0 flex-1 flex flex-col p-4 sm:p-6">
-      <div data-slot="blog-post-meta" class="flex items-center gap-2 mb-2"><span data-slot="blog-post-badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md ring ring-inset ring-accented text-default bg-elevated"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="blog-post-meta" class="flex items-center gap-2 mb-2"><span data-slot="blog-post-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-neutral)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
         <!--v-if--></span><time datetime="2024-12-13T09:32:32.598Z" data-slot="blog-post-date" class="text-sm text-toned">Dec 13, 2024</time>
       </div>
       <h2 data-slot="blog-post-title" class="text-xl text-pretty font-semibold text-highlighted">Title</h2>
       <div data-slot="blog-post-description" class="mt-1 text-base text-pretty text-muted">Description</div>
       <div data-slot="blog-post-authors" class="pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5">
-        <div data-orientation="horizontal" data-slot="user" class="relative group/user flex items-center gap-2"><span data-slot="user-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://i.pravatar.cc/120?img=1" alt="Author" width="32" height="32" data-slot="avatar-image" class="h-full w-full rounded-[inherit] object-cover"></span>
+        <div data-orientation="horizontal" data-slot="user" class="relative group/user flex items-center gap-2"><span data-slot="user-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><img src="https://i.pravatar.cc/120?img=1" alt="Author" width="32" height="32" data-slot="avatar-image" class="h-full w-full rounded-[inherit] object-cover"></span>
           <div data-slot="user-wrapper" class="">
             <!--v-if-->
             <p data-slot="user-name" class="font-medium text-highlighted text-sm">Author</p>
@@ -32,13 +32,13 @@ exports[`BlogPosts > renders with class correctly 1`] = `
     <!--v-if-->
     <div data-slot="blog-post-header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img alt="Image alt" src="https://picsum.photos/640/360" data-slot="blog-post-image" class="object-cover object-top w-full h-full"></div>
     <div data-slot="blog-post-body" class="min-w-0 flex-1 flex flex-col p-4 sm:p-6">
-      <div data-slot="blog-post-meta" class="flex items-center gap-2 mb-2"><span data-slot="blog-post-badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md ring ring-inset ring-accented text-default bg-elevated"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="blog-post-meta" class="flex items-center gap-2 mb-2"><span data-slot="blog-post-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-neutral)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
         <!--v-if--></span><time datetime="2024-12-13T09:32:32.598Z" data-slot="blog-post-date" class="text-sm text-toned">Dec 13, 2024</time>
       </div>
       <h2 data-slot="blog-post-title" class="text-xl text-pretty font-semibold text-highlighted">Title</h2>
       <div data-slot="blog-post-description" class="mt-1 text-base text-pretty text-muted">Description</div>
       <div data-slot="blog-post-authors" class="pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5">
-        <div data-orientation="horizontal" data-slot="user" class="relative group/user flex items-center gap-2"><span data-slot="user-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://i.pravatar.cc/120?img=1" alt="Author" width="32" height="32" data-slot="avatar-image" class="h-full w-full rounded-[inherit] object-cover"></span>
+        <div data-orientation="horizontal" data-slot="user" class="relative group/user flex items-center gap-2"><span data-slot="user-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><img src="https://i.pravatar.cc/120?img=1" alt="Author" width="32" height="32" data-slot="avatar-image" class="h-full w-full rounded-[inherit] object-cover"></span>
           <div data-slot="user-wrapper" class="">
             <!--v-if-->
             <p data-slot="user-name" class="font-medium text-highlighted text-sm">Author</p>
@@ -60,13 +60,13 @@ exports[`BlogPosts > renders with orientation vertical correctly 1`] = `
     <!--v-if-->
     <div data-slot="blog-post-header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img alt="Image alt" src="https://picsum.photos/640/360" data-slot="blog-post-image" class="object-cover object-top w-full h-full"></div>
     <div data-slot="blog-post-body" class="min-w-0 flex-1 flex flex-col justify-center p-4 sm:p-6 lg:px-0">
-      <div data-slot="blog-post-meta" class="flex items-center gap-2 mb-2"><span data-slot="blog-post-badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md ring ring-inset ring-accented text-default bg-elevated"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="blog-post-meta" class="flex items-center gap-2 mb-2"><span data-slot="blog-post-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-neutral)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
         <!--v-if--></span><time datetime="2024-12-13T09:32:32.598Z" data-slot="blog-post-date" class="text-sm text-toned">Dec 13, 2024</time>
       </div>
       <h2 data-slot="blog-post-title" class="text-xl text-pretty font-semibold text-highlighted">Title</h2>
       <div data-slot="blog-post-description" class="mt-1 text-base text-pretty text-muted">Description</div>
       <div data-slot="blog-post-authors" class="pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5">
-        <div data-orientation="horizontal" data-slot="user" class="relative group/user flex items-center gap-2"><span data-slot="user-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://i.pravatar.cc/120?img=1" alt="Author" width="32" height="32" data-slot="avatar-image" class="h-full w-full rounded-[inherit] object-cover"></span>
+        <div data-orientation="horizontal" data-slot="user" class="relative group/user flex items-center gap-2"><span data-slot="user-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><img src="https://i.pravatar.cc/120?img=1" alt="Author" width="32" height="32" data-slot="avatar-image" class="h-full w-full rounded-[inherit] object-cover"></span>
           <div data-slot="user-wrapper" class="">
             <!--v-if-->
             <p data-slot="user-name" class="font-medium text-highlighted text-sm">Author</p>
@@ -86,13 +86,13 @@ exports[`BlogPosts > renders with posts correctly 1`] = `
     <!--v-if-->
     <div data-slot="blog-post-header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img alt="Image alt" src="https://picsum.photos/640/360" data-slot="blog-post-image" class="object-cover object-top w-full h-full"></div>
     <div data-slot="blog-post-body" class="min-w-0 flex-1 flex flex-col p-4 sm:p-6">
-      <div data-slot="blog-post-meta" class="flex items-center gap-2 mb-2"><span data-slot="blog-post-badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md ring ring-inset ring-accented text-default bg-elevated"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="blog-post-meta" class="flex items-center gap-2 mb-2"><span data-slot="blog-post-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-neutral)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
         <!--v-if--></span><time datetime="2024-12-13T09:32:32.598Z" data-slot="blog-post-date" class="text-sm text-toned">Dec 13, 2024</time>
       </div>
       <h2 data-slot="blog-post-title" class="text-xl text-pretty font-semibold text-highlighted">Title</h2>
       <div data-slot="blog-post-description" class="mt-1 text-base text-pretty text-muted">Description</div>
       <div data-slot="blog-post-authors" class="pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5">
-        <div data-orientation="horizontal" data-slot="user" class="relative group/user flex items-center gap-2"><span data-slot="user-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://i.pravatar.cc/120?img=1" alt="Author" width="32" height="32" data-slot="avatar-image" class="h-full w-full rounded-[inherit] object-cover"></span>
+        <div data-orientation="horizontal" data-slot="user" class="relative group/user flex items-center gap-2"><span data-slot="user-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><img src="https://i.pravatar.cc/120?img=1" alt="Author" width="32" height="32" data-slot="avatar-image" class="h-full w-full rounded-[inherit] object-cover"></span>
           <div data-slot="user-wrapper" class="">
             <!--v-if-->
             <p data-slot="user-name" class="font-medium text-highlighted text-sm">Author</p>
