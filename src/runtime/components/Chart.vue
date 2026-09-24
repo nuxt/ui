@@ -90,7 +90,7 @@ export interface ChartSlots {
 </script>
 
 <script setup lang="ts" generic="T extends ChartDatum">
-import { computed } from 'vue'
+import { computed, defineAsyncComponent } from 'vue'
 import { Chart as TanStackChart } from '@tanstack/charts/vue'
 import { areaY, barY, colorLegend, defineChart, group, lineY, ruleY } from '@tanstack/charts'
 import { scaleBand } from '@tanstack/charts/scales/band'
@@ -99,7 +99,6 @@ import { scaleOrdinal } from '@tanstack/charts/scales/ordinal'
 import { scalePoint } from '@tanstack/charts/scales/point'
 import { tooltip } from '@tanstack/charts/tooltip'
 import { crosshair } from '@tanstack/charts/crosshair'
-import { pie, polar, radialArc } from '@tanstack/charts/polar'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
@@ -149,40 +148,7 @@ const rows = computed(() => (props.data ?? []).flatMap(datum => seriesKeys.value
   value: datum[category] as number
 }))))
 
-// Slices are colored by label rather than by series.
-const donutDefinition = computed(() => {
-  const labels = (props.data ?? []).map(datum => String(datum[props.index!]))
-  const slices = pie(props.data ?? [], { value: seriesKeys.value[0]! } as any)
-
-  return defineChart({
-    marks: [
-      polar({
-        marks: [
-          radialArc(slices, {
-            innerRadius: ({ radius }: { radius: number }) => Math.max(radius - props.thickness!, 0),
-            color: props.index,
-            key: props.index
-          } as any)
-        ],
-        scales: { angle: null, radius: null }
-      })
-    ],
-    scales: { x: null, y: null },
-    color: {
-      scale: scaleOrdinal<string, string>()
-        .domain(labels)
-        .range(labels.map((_, i) => `var(--ts-chart-${(i % seriesColors.value.length) + 1})`)),
-      legend: props.legend ? colorLegend() : undefined
-    },
-    tooltip
-  } as any)
-})
-
 const generatedDefinition = computed(() => {
-  if (props.type === 'donut') {
-    return donutDefinition.value
-  }
-
   const multiple = seriesKeys.value.length > 1
   const color = scaleOrdinal<string, string>()
     .domain(seriesKeys.value)
@@ -243,13 +209,29 @@ const generatedDefinition = computed(() => {
   } as any)
 })
 
+// Loaded on demand so line, area and bar charts don't ship the polar geometry. Vue waits
+// for the chunk during SSR and before hydrating, so the server markup is kept.
+const ChartDonut = defineAsyncComponent(() => import('../utils/chart-donut').then(m => m.ChartDonut))
+
+const isDonut = computed(() => props.type === 'donut' && !props.definition)
+
+const donutOptions = computed(() => ({
+  data: props.data ?? [],
+  index: props.index!,
+  value: seriesKeys.value[0]!,
+  thickness: props.thickness!,
+  colors: seriesColors.value.length,
+  legend: props.legend
+}))
+
 const chartDefinition = computed(() => (props.definition ?? generatedDefinition.value) as ChartDefinition<any, any, any>)
 </script>
 
 <template>
   <div data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" :style="style">
-    <TanStackChart
-      :definition="chartDefinition"
+    <component
+      :is="isDonut ? ChartDonut : TanStackChart"
+      v-bind="isDonut ? { options: donutOptions } : { definition: chartDefinition }"
       :aria-label="props.ariaLabel ?? seriesKeys.join(', ')"
       :height="props.height"
       :initial-width="props.initialWidth"
@@ -259,7 +241,7 @@ const chartDefinition = computed(() => (props.definition ?? generatedDefinition.
       <template v-if="!!slots.tooltip" #tooltipBody="slotProps">
         <slot name="tooltip" v-bind="slotProps" />
       </template>
-    </TanStackChart>
+    </component>
 
     <div v-if="!!slots.center" data-slot="center" :class="ui.center({ class: props.ui?.center })">
       <slot name="center" />
