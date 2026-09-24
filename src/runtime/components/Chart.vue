@@ -29,6 +29,11 @@ export interface ChartProps<T extends ChartDatum = ChartDatum> {
   /** Stack the series on top of each other. Only applies to `area` and `bar`. */
   stacked?: boolean
   /**
+   * The shape of the line between values. Only applies to `line` and `area`.
+   * @defaultValue 'linear'
+   */
+  curve?: 'linear' | 'monotone' | 'step'
+  /**
    * Draw a dot at each value. Only applies to `line`.
    * @defaultValue false
    */
@@ -90,10 +95,13 @@ import { tooltip } from '@tanstack/charts/tooltip'
 import { crosshair } from '@tanstack/charts/crosshair'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
+import { useLocale } from '../composables/useLocale'
+import { chartCurves } from '../utils/chart'
 import { tv } from '../utils/tv'
 
 const _props = withDefaults(defineProps<ChartProps<T>>(), {
   type: 'line',
+  curve: 'linear',
   points: false,
   grid: true,
   xAxis: true,
@@ -105,6 +113,7 @@ const slots = defineSlots<ChartSlots>()
 
 const props = useComponentProps<ChartProps<T>>('chart', _props)
 
+const { dir } = useLocale()
 const appConfig = useAppConfig() as Chart['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -139,6 +148,7 @@ const generatedDefinition = computed(() => {
     .range(seriesKeys.value.map((_, i) => `var(--ts-chart-${(i % seriesColors.value.length) + 1})`))
 
   const channels = { x: 'x', y: 'value', z: 'category', color: 'category' } as const
+  const curve = props.curve === 'linear' ? undefined : chartCurves[props.curve!]
 
   let marks: any[]
   switch (props.type) {
@@ -152,14 +162,14 @@ const generatedDefinition = computed(() => {
       // Repeated x positions stack inside one area mark, so overlapping areas need a mark per series.
       marks = [
         ...(props.stacked
-          ? [areaY(rows.value, { ...channels, fillOpacity: 0.2 } as any)]
-          : seriesKeys.value.map(category => areaY(rows.value.filter(row => row.category === category), { ...channels, fillOpacity: 0.2 } as any))),
+          ? [areaY(rows.value, { ...channels, curve, fillOpacity: 0.2 } as any)]
+          : seriesKeys.value.map(category => areaY(rows.value.filter(row => row.category === category), { ...channels, curve, fillOpacity: 0.2 } as any))),
         crosshair({ x: true, y: false })
       ]
       break
     default:
       marks = [
-        lineY(rows.value, { ...channels, strokeWidth: 2, points: props.points } as any),
+        lineY(rows.value, { ...channels, curve, strokeWidth: 2, points: props.points } as any),
         crosshair({ x: true, y: false })
       ]
   }
@@ -171,12 +181,15 @@ const generatedDefinition = computed(() => {
         scale: props.type === 'bar'
           ? () => scaleBand<string>().padding(0.2)
           : () => scalePoint<string>().padding(0),
+        // Axis sides stay physical in a right-to-left container, so the range and the y axis flip here.
+        reverse: dir.value === 'rtl',
         axis: props.xAxis ? undefined : false
       },
       y: {
         scale: scaleLinear,
         nice: true,
         grid: props.grid,
+        side: dir.value === 'rtl' ? 'right' : 'left',
         axis: !props.yAxis ? false : props.format ? { ticks: { format: props.format } } : undefined
       }
     },

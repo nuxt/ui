@@ -5,6 +5,7 @@ const types = Object.keys(theme.variants.type) as Array<keyof typeof theme.varia
 
 const type = ref<keyof typeof theme.variants.type>('line')
 const stacked = ref(false)
+const curve = ref<'linear' | 'monotone' | 'step'>('linear')
 
 const data = [
   { month: 'January', desktop: 186, mobile: 80, tablet: 40 },
@@ -21,6 +22,7 @@ const currency = new Intl.NumberFormat('en-US', { style: 'currency', currency: '
 <template>
   <Navbar>
     <USelect v-model="type" :items="types" />
+    <USelect v-model="curve" :items="['linear', 'monotone', 'step']" />
     <USwitch v-model="stacked" label="Stacked" />
   </Navbar>
 
@@ -29,6 +31,7 @@ const currency = new Intl.NumberFormat('en-US', { style: 'currency', currency: '
       <UChart
         :type="type"
         :stacked="stacked"
+        :curve="curve"
         :data="data"
         index="month"
         :categories="['desktop', 'mobile', 'tablet']"
@@ -39,6 +42,7 @@ const currency = new Intl.NumberFormat('en-US', { style: 'currency', currency: '
     <UCard>
       <UChart
         :type="type"
+        :curve="curve"
         :data="data"
         index="month"
         :categories="['desktop']"

@@ -92,6 +92,147 @@ exports[`Chart > renders with colors correctly 1`] = `
 </div>"
 `;
 
+exports[`Chart > renders with curve monotone area correctly 1`] = `
+"<div data-slot="root" class="relative w-full text-xs text-muted [--ts-chart-tooltip-background:var(--ui-bg)] [--ts-chart-tooltip-color:var(--ui-text-highlighted)] [--ts-chart-tooltip-border:1px_solid_var(--ui-border)] [--ts-chart-tooltip-border-radius:calc(var(--ui-radius)*1.5)] [--ts-chart-tooltip-shadow:var(--shadow-lg)] [--ts-chart-tooltip-padding:--spacing(2)] [--ts-chart-tooltip-font:inherit]" style="--ts-chart-1: var(--ui-primary); --ts-chart-2: var(--ui-secondary); --ts-chart-3: var(--ui-info); --ts-chart-4: var(--ui-success); --ts-chart-5: var(--ui-warning); --ts-chart-6: var(--ui-error);">
+  <div class="ts-chart-host" style="position: relative; width: 100%; height: 300px;">
+    <div class="ts-chart-surface" style="width: 100%; height: 100%; position: relative;"><svg class="ts-chart" width="100%" height="100%" viewBox="0 0 640 300" role="img" aria-roledescription="chart" aria-label="Visitors" tabindex="0" style="display:block;overflow:visible">
+        <g data-ts-key="grid" class="ts-chart__grid" aria-hidden="true" stroke="currentColor" stroke-opacity="0.11" stroke-width="1">
+          <line data-ts-key="y-grid:number:0" x1="30.48" y1="277" x2="625.11" y2="277"></line>
+          <line data-ts-key="y-grid:number:50" x1="30.48" y1="242.71" x2="625.11" y2="242.71"></line>
+          <line data-ts-key="y-grid:number:100" x1="30.48" y1="208.43" x2="625.11" y2="208.43"></line>
+          <line data-ts-key="y-grid:number:150" x1="30.48" y1="174.14" x2="625.11" y2="174.14"></line>
+          <line data-ts-key="y-grid:number:200" x1="30.48" y1="139.86" x2="625.11" y2="139.86"></line>
+          <line data-ts-key="y-grid:number:250" x1="30.48" y1="105.57" x2="625.11" y2="105.57"></line>
+          <line data-ts-key="y-grid:number:300" x1="30.48" y1="71.29" x2="625.11" y2="71.29"></line>
+          <line data-ts-key="y-grid:number:350" x1="30.48" y1="37" x2="625.11" y2="37"></line>
+        </g>
+        <g data-ts-key="marks" class="ts-chart__marks">
+          <g data-ts-key="area-y-0" class="ts-chart__area" aria-hidden="true">
+            <path data-ts-key="area-y-0:string:7:desktop:segment:0" fill="var(--ts-chart-1)" fill-opacity="0.2" d="M30.48,149.46C129.59,108.66,228.69,67.86,327.8,67.86C426.9,67.86,526.01,91.17,625.11,114.49L625.11,277C526.01,277,426.9,277,327.8,277C228.69,277,129.59,277,30.48,277Z" vector-effect="non-scaling-stroke"></path>
+          </g>
+          <g data-ts-key="area-y-1" class="ts-chart__area" aria-hidden="true">
+            <path data-ts-key="area-y-1:string:6:mobile:segment:0" fill="var(--ts-chart-2)" fill-opacity="0.2" d="M30.48,222.14C129.59,181,228.69,139.86,327.8,139.86C426.9,139.86,526.01,167.29,625.11,194.71L625.11,277C526.01,277,426.9,277,327.8,277C228.69,277,129.59,277,30.48,277Z" vector-effect="non-scaling-stroke"></path>
+          </g>
+        </g>
+        <g data-ts-key="axes" class="ts-chart__axes" aria-hidden="true">
+          <line data-ts-key="x-axis" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="277" x2="625.11" y2="277"></line>
+          <line data-ts-key="x-tick-rule:string:3:Jan" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="277" x2="30.48" y2="281"></line>
+          <line data-ts-key="x-tick-rule:string:3:Feb" stroke="currentColor" stroke-opacity="0.28" x1="327.8" y1="277" x2="327.8" y2="281"></line>
+          <line data-ts-key="x-tick-rule:string:3:Mar" stroke="currentColor" stroke-opacity="0.28" x1="625.11" y1="277" x2="625.11" y2="281"></line><text data-ts-key="x-tick-label:string:3:Jan" fill="currentColor" fill-opacity="0.68" x="30.48" y="293.8" text-anchor="middle" font-size="11" font-family="inherit">Jan</text><text data-ts-key="x-tick-label:string:3:Feb" fill="currentColor" fill-opacity="0.68" x="327.8" y="293.8" text-anchor="middle" font-size="11" font-family="inherit">Feb</text><text data-ts-key="x-tick-label:string:3:Mar" fill="currentColor" fill-opacity="0.68" x="625.11" y="293.8" text-anchor="middle" font-size="11" font-family="inherit">Mar</text>
+          <line data-ts-key="y-axis" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="37" x2="30.48" y2="277"></line>
+          <line data-ts-key="y-tick-rule:number:0" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="277" x2="26.48" y2="277"></line>
+          <line data-ts-key="y-tick-rule:number:50" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="242.71" x2="26.48" y2="242.71"></line>
+          <line data-ts-key="y-tick-rule:number:100" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="208.43" x2="26.48" y2="208.43"></line>
+          <line data-ts-key="y-tick-rule:number:150" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="174.14" x2="26.48" y2="174.14"></line>
+          <line data-ts-key="y-tick-rule:number:200" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="139.86" x2="26.48" y2="139.86"></line>
+          <line data-ts-key="y-tick-rule:number:250" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="105.57" x2="26.48" y2="105.57"></line>
+          <line data-ts-key="y-tick-rule:number:300" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="71.29" x2="26.48" y2="71.29"></line>
+          <line data-ts-key="y-tick-rule:number:350" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="37" x2="26.48" y2="37"></line><text data-ts-key="y-tick-label:number:0" fill="currentColor" fill-opacity="0.68" x="22.48" y="277" text-anchor="end" dominant-baseline="middle" font-size="11" font-family="inherit">0</text><text data-ts-key="y-tick-label:number:50" fill="currentColor" fill-opacity="0.68" x="22.48" y="242.71" text-anchor="end" dominant-baseline="middle" font-size="11" font-family="inherit">50</text><text data-ts-key="y-tick-label:number:100" fill="currentColor" fill-opacity="0.68" x="22.48" y="208.43" text-anchor="end" dominant-baseline="middle" font-size="11" font-family="inherit">100</text><text data-ts-key="y-tick-label:number:150" fill="currentColor" fill-opacity="0.68" x="22.48" y="174.14" text-anchor="end" dominant-baseline="middle" font-size="11" font-family="inherit">150</text><text data-ts-key="y-tick-label:number:200" fill="currentColor" fill-opacity="0.68" x="22.48" y="139.86" text-anchor="end" dominant-baseline="middle" font-size="11" font-family="inherit">200</text><text data-ts-key="y-tick-label:number:250" fill="currentColor" fill-opacity="0.68" x="22.48" y="105.57" text-anchor="end" dominant-baseline="middle" font-size="11" font-family="inherit">250</text><text data-ts-key="y-tick-label:number:300" fill="currentColor" fill-opacity="0.68" x="22.48" y="71.29" text-anchor="end" dominant-baseline="middle" font-size="11" font-family="inherit">300</text><text data-ts-key="y-tick-label:number:350" fill="currentColor" fill-opacity="0.68" x="22.48" y="37" text-anchor="end" dominant-baseline="middle" font-size="11" font-family="inherit">350</text>
+        </g>
+        <g data-ts-key="legend" class="ts-chart__legend" aria-hidden="true">
+          <circle data-ts-key="legend-dot:string:7:desktop" fill="var(--ts-chart-1)" cx="34.48" cy="10" r="4"></circle><text data-ts-key="legend-label:string:7:desktop" fill="currentColor" fill-opacity="0.76" x="43.48" y="10" text-anchor="start" dominant-baseline="middle" font-size="11" font-family="inherit">desktop</text>
+          <circle data-ts-key="legend-dot:string:6:mobile" fill="var(--ts-chart-2)" cx="331.8" cy="10" r="4"></circle><text data-ts-key="legend-label:string:6:mobile" fill="currentColor" fill-opacity="0.76" x="340.8" y="10" text-anchor="start" dominant-baseline="middle" font-size="11" font-family="inherit">mobile</text>
+        </g>
+        <g data-ts-key="default-focus:area-y-0" class="ts-chart__focus-layer ts-chart__focus-layer--default" aria-hidden="true" data-ts-focus-layer="over" visibility="hidden"></g>
+        <g data-ts-key="default-focus:area-y-1" class="ts-chart__focus-layer ts-chart__focus-layer--default" aria-hidden="true" data-ts-focus-layer="over" visibility="hidden"></g>
+      </svg></div>
+  </div>
+  <!---->
+</div>"
+`;
+
+exports[`Chart > renders with curve monotone correctly 1`] = `
+"<div data-slot="root" class="relative w-full text-xs text-muted [--ts-chart-tooltip-background:var(--ui-bg)] [--ts-chart-tooltip-color:var(--ui-text-highlighted)] [--ts-chart-tooltip-border:1px_solid_var(--ui-border)] [--ts-chart-tooltip-border-radius:calc(var(--ui-radius)*1.5)] [--ts-chart-tooltip-shadow:var(--shadow-lg)] [--ts-chart-tooltip-padding:--spacing(2)] [--ts-chart-tooltip-font:inherit]" style="--ts-chart-1: var(--ui-primary); --ts-chart-2: var(--ui-secondary); --ts-chart-3: var(--ui-info); --ts-chart-4: var(--ui-success); --ts-chart-5: var(--ui-warning); --ts-chart-6: var(--ui-error);">
+  <div class="ts-chart-host" style="position: relative; width: 100%; height: 300px;">
+    <div class="ts-chart-surface" style="width: 100%; height: 100%; position: relative;"><svg class="ts-chart" width="100%" height="100%" viewBox="0 0 640 300" role="img" aria-roledescription="chart" aria-label="Visitors" tabindex="0" style="display:block;overflow:visible">
+        <g data-ts-key="grid" class="ts-chart__grid" aria-hidden="true" stroke="currentColor" stroke-opacity="0.11" stroke-width="1">
+          <line data-ts-key="y-grid:number:50" x1="30.48" y1="277" x2="625.11" y2="277"></line>
+          <line data-ts-key="y-grid:number:100" x1="30.48" y1="237" x2="625.11" y2="237"></line>
+          <line data-ts-key="y-grid:number:150" x1="30.48" y1="197" x2="625.11" y2="197"></line>
+          <line data-ts-key="y-grid:number:200" x1="30.48" y1="157" x2="625.11" y2="157"></line>
+          <line data-ts-key="y-grid:number:250" x1="30.48" y1="117" x2="625.11" y2="117"></line>
+          <line data-ts-key="y-grid:number:300" x1="30.48" y1="77" x2="625.11" y2="77"></line>
+          <line data-ts-key="y-grid:number:350" x1="30.48" y1="37" x2="625.11" y2="37"></line>
+        </g>
+        <g data-ts-key="marks" class="ts-chart__marks">
+          <g data-ts-key="line-0:string:7:desktop" class="ts-chart__line" aria-hidden="true">
+            <path data-ts-key="line-0:string:7:desktop:segment:0" fill="none" stroke="var(--ts-chart-1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M30.48,168.2C129.59,120.6,228.69,73,327.8,73C426.9,73,526.01,100.2,625.11,127.4" vector-effect="non-scaling-stroke"></path>
+          </g>
+          <g data-ts-key="line-0:string:6:mobile" class="ts-chart__line" aria-hidden="true">
+            <path data-ts-key="line-0:string:6:mobile:segment:0" fill="none" stroke="var(--ts-chart-2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M30.48,253C129.59,205,228.69,157,327.8,157C426.9,157,526.01,189,625.11,221" vector-effect="non-scaling-stroke"></path>
+          </g>
+        </g>
+        <g data-ts-key="axes" class="ts-chart__axes" aria-hidden="true">
+          <line data-ts-key="x-axis" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="277" x2="625.11" y2="277"></line>
+          <line data-ts-key="x-tick-rule:string:3:Jan" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="277" x2="30.48" y2="281"></line>
+          <line data-ts-key="x-tick-rule:string:3:Feb" stroke="currentColor" stroke-opacity="0.28" x1="327.8" y1="277" x2="327.8" y2="281"></line>
+          <line data-ts-key="x-tick-rule:string:3:Mar" stroke="currentColor" stroke-opacity="0.28" x1="625.11" y1="277" x2="625.11" y2="281"></line><text data-ts-key="x-tick-label:string:3:Jan" fill="currentColor" fill-opacity="0.68" x="30.48" y="293.8" text-anchor="middle" font-size="11" font-family="inherit">Jan</text><text data-ts-key="x-tick-label:string:3:Feb" fill="currentColor" fill-opacity="0.68" x="327.8" y="293.8" text-anchor="middle" font-size="11" font-family="inherit">Feb</text><text data-ts-key="x-tick-label:string:3:Mar" fill="currentColor" fill-opacity="0.68" x="625.11" y="293.8" text-anchor="middle" font-size="11" font-family="inherit">Mar</text>
+          <line data-ts-key="y-axis" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="37" x2="30.48" y2="277"></line>
+          <line data-ts-key="y-tick-rule:number:50" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="277" x2="26.48" y2="277"></line>
+          <line data-ts-key="y-tick-rule:number:100" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="237" x2="26.48" y2="237"></line>
+          <line data-ts-key="y-tick-rule:number:150" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="197" x2="26.48" y2="197"></line>
+          <line data-ts-key="y-tick-rule:number:200" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="157" x2="26.48" y2="157"></line>
+          <line data-ts-key="y-tick-rule:number:250" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="117" x2="26.48" y2="117"></line>
+          <line data-ts-key="y-tick-rule:number:300" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="77" x2="26.48" y2="77"></line>
+          <line data-ts-key="y-tick-rule:number:350" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="37" x2="26.48" y2="37"></line><text data-ts-key="y-tick-label:number:50" fill="currentColor" fill-opacity="0.68" x="22.48" y="277" text-anchor="end" dominant-baseline="middle" font-size="11" font-family="inherit">50</text><text data-ts-key="y-tick-label:number:100" fill="currentColor" fill-opacity="0.68" x="22.48" y="237" text-anchor="end" dominant-baseline="middle" font-size="11" font-family="inherit">100</text><text data-ts-key="y-tick-label:number:150" fill="currentColor" fill-opacity="0.68" x="22.48" y="197" text-anchor="end" dominant-baseline="middle" font-size="11" font-family="inherit">150</text><text data-ts-key="y-tick-label:number:200" fill="currentColor" fill-opacity="0.68" x="22.48" y="157" text-anchor="end" dominant-baseline="middle" font-size="11" font-family="inherit">200</text><text data-ts-key="y-tick-label:number:250" fill="currentColor" fill-opacity="0.68" x="22.48" y="117" text-anchor="end" dominant-baseline="middle" font-size="11" font-family="inherit">250</text><text data-ts-key="y-tick-label:number:300" fill="currentColor" fill-opacity="0.68" x="22.48" y="77" text-anchor="end" dominant-baseline="middle" font-size="11" font-family="inherit">300</text><text data-ts-key="y-tick-label:number:350" fill="currentColor" fill-opacity="0.68" x="22.48" y="37" text-anchor="end" dominant-baseline="middle" font-size="11" font-family="inherit">350</text>
+        </g>
+        <g data-ts-key="legend" class="ts-chart__legend" aria-hidden="true">
+          <circle data-ts-key="legend-dot:string:7:desktop" fill="var(--ts-chart-1)" cx="34.48" cy="10" r="4"></circle><text data-ts-key="legend-label:string:7:desktop" fill="currentColor" fill-opacity="0.76" x="43.48" y="10" text-anchor="start" dominant-baseline="middle" font-size="11" font-family="inherit">desktop</text>
+          <circle data-ts-key="legend-dot:string:6:mobile" fill="var(--ts-chart-2)" cx="331.8" cy="10" r="4"></circle><text data-ts-key="legend-label:string:6:mobile" fill="currentColor" fill-opacity="0.76" x="340.8" y="10" text-anchor="start" dominant-baseline="middle" font-size="11" font-family="inherit">mobile</text>
+        </g>
+        <g data-ts-key="default-focus:line-0" class="ts-chart__focus-layer ts-chart__focus-layer--default" aria-hidden="true" data-ts-focus-layer="over" visibility="hidden"></g>
+      </svg></div>
+  </div>
+  <!---->
+</div>"
+`;
+
+exports[`Chart > renders with curve step correctly 1`] = `
+"<div data-slot="root" class="relative w-full text-xs text-muted [--ts-chart-tooltip-background:var(--ui-bg)] [--ts-chart-tooltip-color:var(--ui-text-highlighted)] [--ts-chart-tooltip-border:1px_solid_var(--ui-border)] [--ts-chart-tooltip-border-radius:calc(var(--ui-radius)*1.5)] [--ts-chart-tooltip-shadow:var(--shadow-lg)] [--ts-chart-tooltip-padding:--spacing(2)] [--ts-chart-tooltip-font:inherit]" style="--ts-chart-1: var(--ui-primary); --ts-chart-2: var(--ui-secondary); --ts-chart-3: var(--ui-info); --ts-chart-4: var(--ui-success); --ts-chart-5: var(--ui-warning); --ts-chart-6: var(--ui-error);">
+  <div class="ts-chart-host" style="position: relative; width: 100%; height: 300px;">
+    <div class="ts-chart-surface" style="width: 100%; height: 100%; position: relative;"><svg class="ts-chart" width="100%" height="100%" viewBox="0 0 640 300" role="img" aria-roledescription="chart" aria-label="Visitors" tabindex="0" style="display:block;overflow:visible">
+        <g data-ts-key="grid" class="ts-chart__grid" aria-hidden="true" stroke="currentColor" stroke-opacity="0.11" stroke-width="1">
+          <line data-ts-key="y-grid:number:50" x1="30.48" y1="277" x2="625.11" y2="277"></line>
+          <line data-ts-key="y-grid:number:100" x1="30.48" y1="237" x2="625.11" y2="237"></line>
+          <line data-ts-key="y-grid:number:150" x1="30.48" y1="197" x2="625.11" y2="197"></line>
+          <line data-ts-key="y-grid:number:200" x1="30.48" y1="157" x2="625.11" y2="157"></line>
+          <line data-ts-key="y-grid:number:250" x1="30.48" y1="117" x2="625.11" y2="117"></line>
+          <line data-ts-key="y-grid:number:300" x1="30.48" y1="77" x2="625.11" y2="77"></line>
+          <line data-ts-key="y-grid:number:350" x1="30.48" y1="37" x2="625.11" y2="37"></line>
+        </g>
+        <g data-ts-key="marks" class="ts-chart__marks">
+          <g data-ts-key="line-0:string:7:desktop" class="ts-chart__line" aria-hidden="true">
+            <path data-ts-key="line-0:string:7:desktop:segment:0" fill="none" stroke="var(--ts-chart-1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M30.48,168.2L179.14,168.2L179.14,73L327.8,73L476.45,73L476.45,127.4L625.11,127.4" vector-effect="non-scaling-stroke"></path>
+          </g>
+          <g data-ts-key="line-0:string:6:mobile" class="ts-chart__line" aria-hidden="true">
+            <path data-ts-key="line-0:string:6:mobile:segment:0" fill="none" stroke="var(--ts-chart-2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M30.48,253L179.14,253L179.14,157L327.8,157L476.45,157L476.45,221L625.11,221" vector-effect="non-scaling-stroke"></path>
+          </g>
+        </g>
+        <g data-ts-key="axes" class="ts-chart__axes" aria-hidden="true">
+          <line data-ts-key="x-axis" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="277" x2="625.11" y2="277"></line>
+          <line data-ts-key="x-tick-rule:string:3:Jan" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="277" x2="30.48" y2="281"></line>
+          <line data-ts-key="x-tick-rule:string:3:Feb" stroke="currentColor" stroke-opacity="0.28" x1="327.8" y1="277" x2="327.8" y2="281"></line>
+          <line data-ts-key="x-tick-rule:string:3:Mar" stroke="currentColor" stroke-opacity="0.28" x1="625.11" y1="277" x2="625.11" y2="281"></line><text data-ts-key="x-tick-label:string:3:Jan" fill="currentColor" fill-opacity="0.68" x="30.48" y="293.8" text-anchor="middle" font-size="11" font-family="inherit">Jan</text><text data-ts-key="x-tick-label:string:3:Feb" fill="currentColor" fill-opacity="0.68" x="327.8" y="293.8" text-anchor="middle" font-size="11" font-family="inherit">Feb</text><text data-ts-key="x-tick-label:string:3:Mar" fill="currentColor" fill-opacity="0.68" x="625.11" y="293.8" text-anchor="middle" font-size="11" font-family="inherit">Mar</text>
+          <line data-ts-key="y-axis" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="37" x2="30.48" y2="277"></line>
+          <line data-ts-key="y-tick-rule:number:50" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="277" x2="26.48" y2="277"></line>
+          <line data-ts-key="y-tick-rule:number:100" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="237" x2="26.48" y2="237"></line>
+          <line data-ts-key="y-tick-rule:number:150" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="197" x2="26.48" y2="197"></line>
+          <line data-ts-key="y-tick-rule:number:200" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="157" x2="26.48" y2="157"></line>
+          <line data-ts-key="y-tick-rule:number:250" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="117" x2="26.48" y2="117"></line>
+          <line data-ts-key="y-tick-rule:number:300" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="77" x2="26.48" y2="77"></line>
+          <line data-ts-key="y-tick-rule:number:350" stroke="currentColor" stroke-opacity="0.28" x1="30.48" y1="37" x2="26.48" y2="37"></line><text data-ts-key="y-tick-label:number:50" fill="currentColor" fill-opacity="0.68" x="22.48" y="277" text-anchor="end" dominant-baseline="middle" font-size="11" font-family="inherit">50</text><text data-ts-key="y-tick-label:number:100" fill="currentColor" fill-opacity="0.68" x="22.48" y="237" text-anchor="end" dominant-baseline="middle" font-size="11" font-family="inherit">100</text><text data-ts-key="y-tick-label:number:150" fill="currentColor" fill-opacity="0.68" x="22.48" y="197" text-anchor="end" dominant-baseline="middle" font-size="11" font-family="inherit">150</text><text data-ts-key="y-tick-label:number:200" fill="currentColor" fill-opacity="0.68" x="22.48" y="157" text-anchor="end" dominant-baseline="middle" font-size="11" font-family="inherit">200</text><text data-ts-key="y-tick-label:number:250" fill="currentColor" fill-opacity="0.68" x="22.48" y="117" text-anchor="end" dominant-baseline="middle" font-size="11" font-family="inherit">250</text><text data-ts-key="y-tick-label:number:300" fill="currentColor" fill-opacity="0.68" x="22.48" y="77" text-anchor="end" dominant-baseline="middle" font-size="11" font-family="inherit">300</text><text data-ts-key="y-tick-label:number:350" fill="currentColor" fill-opacity="0.68" x="22.48" y="37" text-anchor="end" dominant-baseline="middle" font-size="11" font-family="inherit">350</text>
+        </g>
+        <g data-ts-key="legend" class="ts-chart__legend" aria-hidden="true">
+          <circle data-ts-key="legend-dot:string:7:desktop" fill="var(--ts-chart-1)" cx="34.48" cy="10" r="4"></circle><text data-ts-key="legend-label:string:7:desktop" fill="currentColor" fill-opacity="0.76" x="43.48" y="10" text-anchor="start" dominant-baseline="middle" font-size="11" font-family="inherit">desktop</text>
+          <circle data-ts-key="legend-dot:string:6:mobile" fill="var(--ts-chart-2)" cx="331.8" cy="10" r="4"></circle><text data-ts-key="legend-label:string:6:mobile" fill="currentColor" fill-opacity="0.76" x="340.8" y="10" text-anchor="start" dominant-baseline="middle" font-size="11" font-family="inherit">mobile</text>
+        </g>
+        <g data-ts-key="default-focus:line-0" class="ts-chart__focus-layer ts-chart__focus-layer--default" aria-hidden="true" data-ts-focus-layer="over" visibility="hidden"></g>
+      </svg></div>
+  </div>
+  <!---->
+</div>"
+`;
+
 exports[`Chart > renders with format correctly 1`] = `
 "<div data-slot="root" class="relative w-full text-xs text-muted [--ts-chart-tooltip-background:var(--ui-bg)] [--ts-chart-tooltip-color:var(--ui-text-highlighted)] [--ts-chart-tooltip-border:1px_solid_var(--ui-border)] [--ts-chart-tooltip-border-radius:calc(var(--ui-radius)*1.5)] [--ts-chart-tooltip-shadow:var(--shadow-lg)] [--ts-chart-tooltip-padding:--spacing(2)] [--ts-chart-tooltip-font:inherit]" style="--ts-chart-1: var(--ui-primary); --ts-chart-2: var(--ui-secondary); --ts-chart-3: var(--ui-info); --ts-chart-4: var(--ui-success); --ts-chart-5: var(--ui-warning); --ts-chart-6: var(--ui-error);">
   <div class="ts-chart-host" style="position: relative; width: 100%; height: 300px;">
