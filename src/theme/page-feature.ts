@@ -1,6 +1,4 @@
-import type { ModuleOptions } from '../module'
-
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'relative rounded-sm',
     wrapper: '',
@@ -21,7 +19,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     to: {
       true: {
-        root: ['outline-primary/25 has-focus-visible:outline-3', options.theme.transitions && 'transition']
+        root: 'outline-primary/25 has-focus-visible:outline-3 transition'
       }
     },
     title: {
@@ -30,4 +28,4 @@ export default (options: Required<ModuleOptions>) => ({
       }
     }
   }
-})
+}

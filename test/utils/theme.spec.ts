@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { applyUnstyled } from '../../src/utils/theme'
+import { applyDefaultVariants, applyUnstyled } from '../../src/utils/theme'
 
 describe('applyUnstyled', () => {
   const theme = () => ({
@@ -79,5 +79,14 @@ describe('applyUnstyled', () => {
     expect(result.defaultVariants).toEqual({ color: 'primary', size: 'md' })
     expect(Object.keys(result.variants)).toEqual(['color', 'size'])
     expect(Object.keys(result.variants.color)).toEqual(['primary', 'neutral'])
+  })
+})
+
+describe('applyDefaultVariants', () => {
+  it('does not mutate a shared theme object', () => {
+    const theme = { slots: { base: '' }, defaultVariants: { color: 'primary', size: 'md' } }
+    const result = applyDefaultVariants(theme, { color: 'neutral', size: 'sm' })
+    expect(result.defaultVariants).toEqual({ color: 'neutral', size: 'sm' })
+    expect(theme.defaultVariants).toEqual({ color: 'primary', size: 'md' })
   })
 })

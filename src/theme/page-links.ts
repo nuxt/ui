@@ -1,6 +1,4 @@
-import type { ModuleOptions } from '../module'
-
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'flex flex-col gap-3',
     title: 'text-sm font-semibold flex items-center gap-1.5',
@@ -17,8 +15,8 @@ export default (options: Required<ModuleOptions>) => ({
         link: 'text-primary font-medium'
       },
       false: {
-        link: ['text-muted hover:text-default', options.theme.transitions && 'transition-colors']
+        link: 'text-muted hover:text-default transition-colors'
       }
     }
   }
-})
+}

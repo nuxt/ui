@@ -13,7 +13,7 @@ export default (options: Required<ModuleOptions>) => ({
     files: 'flex flex-wrap items-center gap-1.5',
     content: 'relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0',
     text: 'whitespace-pre-wrap',
-    actions: ['[@media(hover:hover)]:opacity-0 group-hover/message:opacity-100 focus-within:opacity-100 absolute bottom-0 flex items-center', options.theme.transitions && 'transition-opacity ease-out']
+    actions: '[@media(hover:hover)]:opacity-0 group-hover/message:opacity-100 focus-within:opacity-100 absolute bottom-0 flex items-center transition-opacity ease-out'
   },
   variants: {
     variant: {

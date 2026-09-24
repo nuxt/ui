@@ -1,6 +1,4 @@
-import type { ModuleOptions } from '../module'
-
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'relative focus:outline-none',
     viewport: 'overflow-hidden',
@@ -11,7 +9,7 @@ export default (options: Required<ModuleOptions>) => ({
     prev: 'absolute rounded-full',
     next: 'absolute rounded-full',
     dots: 'absolute inset-x-0 -bottom-7 isolate flex flex-wrap items-center justify-center gap-3',
-    dot: ['relative cursor-pointer size-3 bg-accented rounded-full after:absolute after:-inset-1.5 after:-z-1 outline-inverted/25 focus-visible:outline-3', options.theme.transitions && 'transition']
+    dot: 'relative cursor-pointer size-3 bg-accented rounded-full after:absolute after:-inset-1.5 after:-z-1 outline-inverted/25 focus-visible:outline-3 transition'
   },
   variants: {
     orientation: {
@@ -34,4 +32,4 @@ export default (options: Required<ModuleOptions>) => ({
       }
     }
   }
-})
+}
