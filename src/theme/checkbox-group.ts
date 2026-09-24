@@ -30,7 +30,7 @@ export default (options: Required<ModuleOptions>) => ({
         fieldset: 'flex-wrap'
       },
       table: {
-        item: [`border border-default ${hover}bg-elevated/50`, options.theme.transitions && 'transition-colors']
+        item: `border border-default ${hover}bg-elevated/50 transition-colors`
       }
     },
     size: {
