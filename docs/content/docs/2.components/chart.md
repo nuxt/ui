@@ -142,6 +142,45 @@ props:
 ---
 ::
 
+### Curve
+
+Use the `curve` prop to change the shape of the line between values, `linear`, `monotone` or `step`. Only applies to `line` and `area` types. Defaults to `linear`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - data
+  - index
+  - categories
+props:
+  curve: monotone
+  data:
+    - month: January
+      desktop: 186
+      mobile: 80
+    - month: February
+      desktop: 305
+      mobile: 200
+    - month: March
+      desktop: 237
+      mobile: 120
+    - month: April
+      desktop: 73
+      mobile: 190
+    - month: May
+      desktop: 209
+      mobile: 130
+    - month: June
+      desktop: 214
+      mobile: 140
+  index: month
+  categories:
+    - desktop
+    - mobile
+---
+::
+
 ### Colors
 
 Use the `colors` prop to set the color of each series, in `categories` order. It accepts theme colors or any CSS color. Defaults to `['primary', 'secondary', 'info', 'success', 'warning', 'error']`.
@@ -375,6 +414,28 @@ props:
   categories:
     - desktop
     - mobile
+---
+::
+
+## Examples
+
+### With custom tooltip
+
+Use the `#tooltip` slot to replace the tooltip content. It receives the hovered `points`, each with the `datum` it comes from and its `color`.
+
+::component-example
+---
+name: 'chart-tooltip-slot-example'
+---
+::
+
+### With a chart definition
+
+Use the `definition` prop to pass a complete [TanStack Charts definition](https://tanstack.com/charts/latest/docs/concepts/chart-definitions) when the other props are not enough. The component still applies the theme and keeps the chart responsive.
+
+::component-example
+---
+name: 'chart-definition-example'
 ---
 ::
 
