@@ -630,9 +630,6 @@ importers:
       '@tailwindcss/vite':
         specifier: 'catalog:'
         version: 4.3.3(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))
-      '@tanstack/charts':
-        specifier: 'catalog:'
-        version: 0.18.0(vue@3.5.43(typescript@6.0.3))
       '@tanstack/vue-table':
         specifier: 'catalog:'
         version: 8.21.3(vue@3.5.43(typescript@6.0.3))
@@ -829,6 +826,9 @@ importers:
       '@release-it/conventional-changelog':
         specifier: 'catalog:'
         version: 12.0.2(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)(release-it@21.1.0(@types/node@25.9.0)(magicast@0.5.5)(supports-color@10.2.2))
+      '@tanstack/charts':
+        specifier: 'catalog:'
+        version: 0.18.0(vue@3.5.43(typescript@6.0.3))
       '@tanstack/table-core':
         specifier: 'catalog:'
         version: 8.21.3
@@ -952,6 +952,9 @@ importers:
       '@takumi-rs/core':
         specifier: 'catalog:'
         version: 2.14.0(csstype@3.2.3)
+      '@tanstack/charts':
+        specifier: 'catalog:'
+        version: 0.18.0(vue@3.5.43(typescript@6.0.3))
       '@tiptap/extension-emoji':
         specifier: 'catalog:'
         version: 3.31.3(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3)(@tiptap/suggestion@3.31.3(@floating-ui/dom@1.8.0)(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3))(emojibase@17.0.0)
@@ -1094,6 +1097,9 @@ importers:
       '@nuxt/ui':
         specifier: workspace:*
         version: link:../..
+      '@tanstack/charts':
+        specifier: 'catalog:'
+        version: 0.18.0(vue@3.5.43(typescript@6.0.3))
       '@tanstack/vue-table':
         specifier: 'catalog:'
         version: 8.21.3(vue@3.5.43(typescript@6.0.3))
@@ -1168,6 +1174,9 @@ importers:
       '@nuxt/ui':
         specifier: workspace:*
         version: link:../..
+      '@tanstack/charts':
+        specifier: 'catalog:'
+        version: 0.18.0(vue@3.5.43(typescript@6.0.3))
       '@tiptap/extension-emoji':
         specifier: 'catalog:'
         version: 3.31.3(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3)(@tiptap/suggestion@3.31.3(@floating-ui/dom@1.8.0)(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3))(emojibase@17.0.0)

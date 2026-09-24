@@ -28,6 +28,7 @@
     "@regle/core": "catalog:",
     "@regle/rules": "catalog:",
     "@takumi-rs/core": "catalog:",
+    "@tanstack/charts": "catalog:",
     "@tiptap/extension-emoji": "catalog:",
     "@tiptap/extension-text-align": "catalog:",
     "@vercel/analytics": "catalog:",
