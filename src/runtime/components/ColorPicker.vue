@@ -96,7 +96,7 @@ const _props = withDefaults(defineProps<ColorPickerProps>(), {
   format: 'hex',
   throttle: 50,
   defaultValue: '#FFFFFF',
-  decimals: 4,
+  decimals: 4
 })
 
 const props = useComponentProps('colorPicker', _props)
@@ -293,12 +293,6 @@ const trackThumbColor = computed(() => ColorTranslator.toHEX(HSVtoHSL({
   v: 100
 })))
 
-const alphaTrackThumbColor = computed(() => ColorTranslator.toHEX(HSVtoHSL({
-  h: 0,
-  s: 0,
-  v: alphaTrackThumbPosition.value.y,
-})))
-
 const selectorStyle = computed(() => ({
   backgroundColor: trackThumbColor.value
 }))
@@ -355,11 +349,11 @@ const alphaTrackThumbStyle = computed(() => ({
         />
       </div>
       <div
-        v-if="alphaTrack"
+        v-if="props.alphaTrack"
         ref="alphaTrackRef"
         data-slot="track"
         :class="ui.track({ class: props.ui?.track })"
-        :style="{ '--current-color': ColorTranslator.toHEX(modelValue || defaultValue) }"
+        :style="{ '--current-color': ColorTranslator.toHEX(modelValue || props.defaultValue) }"
         data-color-picker-alpha
       >
         <div

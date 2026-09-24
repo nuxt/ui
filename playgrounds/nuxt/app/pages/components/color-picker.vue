@@ -5,12 +5,12 @@ import type { ColorPickerProps } from '#ui/types'
 const sizes = Object.keys(theme.variants.size)
 
 const attrs = reactive({
-  size: [theme.defaultVariants.size],
+  size: [theme.defaultVariants.size]
 })
 
 const colorHex = ref('#9C27B050')
 const alphaTrack = ref(true)
-const formats:NonNullable<ColorPickerProps['format']>[] = [
+const formats: NonNullable<ColorPickerProps['format']>[] = [
   'hex',
   'rgb',
   'hsl',
