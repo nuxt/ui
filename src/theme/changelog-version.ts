@@ -1,6 +1,4 @@
-import type { ModuleOptions } from '../module'
-
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'relative',
     container: 'flex flex-col mx-auto max-w-2xl',
@@ -31,7 +29,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     to: {
       true: {
-        title: ['outline-primary/25 has-focus-visible:outline-3 rounded-xs', options.theme.transitions && 'transition'],
+        title: 'outline-primary/25 has-focus-visible:outline-3 rounded-xs transition',
         image: 'transform transition-transform ease-out motion-reduce:transition-none group-hover/changelog-version-image:scale-105 group-has-focus-visible/changelog-version-image:scale-105'
       }
     },
@@ -41,4 +39,4 @@ export default (options: Required<ModuleOptions>) => ({
       }
     }
   }
-})
+}
