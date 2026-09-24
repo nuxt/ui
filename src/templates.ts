@@ -64,7 +64,9 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
 
           function generateVariantDeclarations(variants: string[]) {
             return variants.filter(variant => json.includes(`as typeof ${variant}`)).map((variant) => {
-              const keys = Object.keys(result.variants[variant])
+              // `true` / `false` keys are typed as `boolean` by tailwind-variants so they
+              // must not appear in the string union the values are cast to
+              const keys = Object.keys(result.variants[variant]).filter(key => key !== 'true' && key !== 'false')
               return `const ${variant} = ${JSON.stringify(keys, null, 2)} as const`
             })
           }
