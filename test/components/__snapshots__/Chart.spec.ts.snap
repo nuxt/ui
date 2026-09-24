@@ -43,6 +43,7 @@ exports[`Chart > renders with class correctly 1`] = `
       </svg></div>
   </div>
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -89,6 +90,7 @@ exports[`Chart > renders with colors correctly 1`] = `
       </svg></div>
   </div>
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -138,6 +140,7 @@ exports[`Chart > renders with curve monotone area correctly 1`] = `
       </svg></div>
   </div>
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -184,6 +187,7 @@ exports[`Chart > renders with curve monotone correctly 1`] = `
       </svg></div>
   </div>
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -230,6 +234,7 @@ exports[`Chart > renders with curve step correctly 1`] = `
       </svg></div>
   </div>
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -276,6 +281,7 @@ exports[`Chart > renders with format correctly 1`] = `
       </svg></div>
   </div>
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -314,6 +320,7 @@ exports[`Chart > renders with height correctly 1`] = `
       </svg></div>
   </div>
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -366,6 +373,7 @@ exports[`Chart > renders with points correctly 1`] = `
       </svg></div>
   </div>
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -410,6 +418,7 @@ exports[`Chart > renders with stacked area correctly 1`] = `
       </svg></div>
   </div>
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -461,6 +470,7 @@ exports[`Chart > renders with stacked bar correctly 1`] = `
       </svg></div>
   </div>
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -510,6 +520,7 @@ exports[`Chart > renders with type area correctly 1`] = `
       </svg></div>
   </div>
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -563,6 +574,75 @@ exports[`Chart > renders with type bar correctly 1`] = `
       </svg></div>
   </div>
   <!---->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Chart > renders with type donut and center slot correctly 1`] = `
+"<div data-slot="root" class="relative w-full text-xs text-muted [--ts-chart-tooltip-background:var(--ui-bg)] [--ts-chart-tooltip-color:var(--ui-text-highlighted)] [--ts-chart-tooltip-border:1px_solid_var(--ui-border)] [--ts-chart-tooltip-border-radius:calc(var(--ui-radius)*1.5)] [--ts-chart-tooltip-shadow:var(--shadow-lg)] [--ts-chart-tooltip-padding:--spacing(2)] [--ts-chart-tooltip-font:inherit]" style="--ts-chart-1: var(--ui-primary); --ts-chart-2: var(--ui-secondary); --ts-chart-3: var(--ui-info); --ts-chart-4: var(--ui-success); --ts-chart-5: var(--ui-warning); --ts-chart-6: var(--ui-error);">
+  <div class="ts-chart-host" style="position: relative; width: 100%; height: 300px;">
+    <div class="ts-chart-surface" style="width: 100%; height: 100%; position: relative;"><svg class="ts-chart" width="100%" height="100%" viewBox="0 0 640 300" role="img" aria-roledescription="chart" aria-label="Desktop" tabindex="0" style="display:block;overflow:visible">
+        <g data-ts-key="marks" class="ts-chart__marks">
+          <g data-ts-key="polar-0" class="ts-chart__polar" aria-hidden="true" transform="translate(320 150)">
+            <g data-ts-key="polar-0:arc-0" class="ts-chart__arc" aria-hidden="true">
+              <path data-ts-key="polar-0:arc-0:object:null:string:3:Jan" fill="var(--ts-chart-1)" stroke-linejoin="round" d="M0,-150A150,150,0,0,1,149.911,5.177L137.918,4.763A138,138,0,0,0,0,-138Z" vector-effect="non-scaling-stroke"></path>
+              <path data-ts-key="polar-0:arc-0:object:null:string:3:Feb" fill="var(--ts-chart-2)" stroke-linejoin="round" d="M149.911,5.177A150,150,0,0,1,-133.415,68.56L-122.742,63.075A138,138,0,0,0,137.918,4.763Z" vector-effect="non-scaling-stroke"></path>
+              <path data-ts-key="polar-0:arc-0:object:null:string:3:Mar" fill="var(--ts-chart-3)" stroke-linejoin="round" d="M-133.415,68.56A150,150,0,0,1,0,-150L0,-138A138,138,0,0,0,-122.742,63.075Z" vector-effect="non-scaling-stroke"></path>
+            </g>
+          </g>
+        </g>
+        <g data-ts-key="default-focus:polar-0" class="ts-chart__focus-layer ts-chart__focus-layer--default" aria-hidden="true" data-ts-focus-layer="over" visibility="hidden"></g>
+      </svg></div>
+  </div>
+  <!---->
+  <div data-slot="center" class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">Center slot</div>
+</div>"
+`;
+
+exports[`Chart > renders with type donut and legend correctly 1`] = `
+"<div data-slot="root" class="relative w-full text-xs text-muted [--ts-chart-tooltip-background:var(--ui-bg)] [--ts-chart-tooltip-color:var(--ui-text-highlighted)] [--ts-chart-tooltip-border:1px_solid_var(--ui-border)] [--ts-chart-tooltip-border-radius:calc(var(--ui-radius)*1.5)] [--ts-chart-tooltip-shadow:var(--shadow-lg)] [--ts-chart-tooltip-padding:--spacing(2)] [--ts-chart-tooltip-font:inherit]" style="--ts-chart-1: var(--ui-primary); --ts-chart-2: var(--ui-secondary); --ts-chart-3: var(--ui-info); --ts-chart-4: var(--ui-success); --ts-chart-5: var(--ui-warning); --ts-chart-6: var(--ui-error);">
+  <div class="ts-chart-host" style="position: relative; width: 100%; height: 300px;">
+    <div class="ts-chart-surface" style="width: 100%; height: 100%; position: relative;"><svg class="ts-chart" width="100%" height="100%" viewBox="0 0 640 300" role="img" aria-roledescription="chart" aria-label="Desktop" tabindex="0" style="display:block;overflow:visible">
+        <g data-ts-key="marks" class="ts-chart__marks">
+          <g data-ts-key="polar-0" class="ts-chart__polar" aria-hidden="true" transform="translate(320 168.5)">
+            <g data-ts-key="polar-0:arc-0" class="ts-chart__arc" aria-hidden="true">
+              <path data-ts-key="polar-0:arc-0:object:null:string:3:Jan" fill="var(--ts-chart-1)" stroke-linejoin="round" d="M0,-131.5A131.5,131.5,0,0,1,131.422,4.539L107.436,3.71A107.5,107.5,0,0,0,0,-107.5Z" vector-effect="non-scaling-stroke"></path>
+              <path data-ts-key="polar-0:arc-0:object:null:string:3:Feb" fill="var(--ts-chart-2)" stroke-linejoin="round" d="M131.422,4.539A131.5,131.5,0,0,1,-116.961,60.104L-95.614,49.134A107.5,107.5,0,0,0,107.436,3.71Z" vector-effect="non-scaling-stroke"></path>
+              <path data-ts-key="polar-0:arc-0:object:null:string:3:Mar" fill="var(--ts-chart-3)" stroke-linejoin="round" d="M-116.961,60.104A131.5,131.5,0,0,1,0,-131.5L0,-107.5A107.5,107.5,0,0,0,-95.614,49.134Z" vector-effect="non-scaling-stroke"></path>
+            </g>
+          </g>
+        </g>
+        <g data-ts-key="legend" class="ts-chart__legend" aria-hidden="true">
+          <circle data-ts-key="legend-dot:string:3:Jan" fill="var(--ts-chart-1)" cx="4" cy="10" r="4"></circle><text data-ts-key="legend-label:string:3:Jan" fill="currentColor" fill-opacity="0.76" x="13" y="10" text-anchor="start" dominant-baseline="middle" font-size="11" font-family="inherit">Jan</text>
+          <circle data-ts-key="legend-dot:string:3:Feb" fill="var(--ts-chart-2)" cx="217.33" cy="10" r="4"></circle><text data-ts-key="legend-label:string:3:Feb" fill="currentColor" fill-opacity="0.76" x="226.33" y="10" text-anchor="start" dominant-baseline="middle" font-size="11" font-family="inherit">Feb</text>
+          <circle data-ts-key="legend-dot:string:3:Mar" fill="var(--ts-chart-3)" cx="430.67" cy="10" r="4"></circle><text data-ts-key="legend-label:string:3:Mar" fill="currentColor" fill-opacity="0.76" x="439.67" y="10" text-anchor="start" dominant-baseline="middle" font-size="11" font-family="inherit">Mar</text>
+        </g>
+        <g data-ts-key="default-focus:polar-0" class="ts-chart__focus-layer ts-chart__focus-layer--default" aria-hidden="true" data-ts-focus-layer="over" visibility="hidden"></g>
+      </svg></div>
+  </div>
+  <!---->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Chart > renders with type donut correctly 1`] = `
+"<div data-slot="root" class="relative w-full text-xs text-muted [--ts-chart-tooltip-background:var(--ui-bg)] [--ts-chart-tooltip-color:var(--ui-text-highlighted)] [--ts-chart-tooltip-border:1px_solid_var(--ui-border)] [--ts-chart-tooltip-border-radius:calc(var(--ui-radius)*1.5)] [--ts-chart-tooltip-shadow:var(--shadow-lg)] [--ts-chart-tooltip-padding:--spacing(2)] [--ts-chart-tooltip-font:inherit]" style="--ts-chart-1: var(--ui-primary); --ts-chart-2: var(--ui-secondary); --ts-chart-3: var(--ui-info); --ts-chart-4: var(--ui-success); --ts-chart-5: var(--ui-warning); --ts-chart-6: var(--ui-error);">
+  <div class="ts-chart-host" style="position: relative; width: 100%; height: 300px;">
+    <div class="ts-chart-surface" style="width: 100%; height: 100%; position: relative;"><svg class="ts-chart" width="100%" height="100%" viewBox="0 0 640 300" role="img" aria-roledescription="chart" aria-label="Visitors" tabindex="0" style="display:block;overflow:visible">
+        <g data-ts-key="marks" class="ts-chart__marks">
+          <g data-ts-key="polar-0" class="ts-chart__polar" aria-hidden="true" transform="translate(320 150)">
+            <g data-ts-key="polar-0:arc-0" class="ts-chart__arc" aria-hidden="true">
+              <path data-ts-key="polar-0:arc-0:object:null:string:3:Jan" fill="var(--ts-chart-1)" stroke-linejoin="round" d="M0,-150A150,150,0,0,1,149.911,5.177L125.925,4.349A126,126,0,0,0,0,-126Z" vector-effect="non-scaling-stroke"></path>
+              <path data-ts-key="polar-0:arc-0:object:null:string:3:Feb" fill="var(--ts-chart-2)" stroke-linejoin="round" d="M149.911,5.177A150,150,0,0,1,-133.415,68.56L-112.069,57.59A126,126,0,0,0,125.925,4.349Z" vector-effect="non-scaling-stroke"></path>
+              <path data-ts-key="polar-0:arc-0:object:null:string:3:Mar" fill="var(--ts-chart-3)" stroke-linejoin="round" d="M-133.415,68.56A150,150,0,0,1,0,-150L0,-126A126,126,0,0,0,-112.069,57.59Z" vector-effect="non-scaling-stroke"></path>
+            </g>
+          </g>
+        </g>
+        <g data-ts-key="default-focus:polar-0" class="ts-chart__focus-layer ts-chart__focus-layer--default" aria-hidden="true" data-ts-focus-layer="over" visibility="hidden"></g>
+      </svg></div>
+  </div>
+  <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -609,6 +689,7 @@ exports[`Chart > renders with type line correctly 1`] = `
       </svg></div>
   </div>
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -655,6 +736,7 @@ exports[`Chart > renders with ui correctly 1`] = `
       </svg></div>
   </div>
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -687,6 +769,7 @@ exports[`Chart > renders without axes correctly 1`] = `
       </svg></div>
   </div>
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -724,6 +807,7 @@ exports[`Chart > renders without grid correctly 1`] = `
       </svg></div>
   </div>
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -766,5 +850,6 @@ exports[`Chart > renders without legend correctly 1`] = `
       </svg></div>
   </div>
   <!---->
+  <!--v-if-->
 </div>"
 `;

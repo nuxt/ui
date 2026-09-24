@@ -10,13 +10,15 @@ export default {
       '[--ts-chart-tooltip-padding:--spacing(2)]',
       '[--ts-chart-tooltip-font:inherit]'
     ],
-    base: ''
+    base: '',
+    center: 'absolute inset-0 flex flex-col items-center justify-center pointer-events-none'
   },
   variants: {
     type: {
       line: '',
       area: '',
-      bar: ''
+      bar: '',
+      donut: ''
     }
   }
 }

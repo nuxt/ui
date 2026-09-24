@@ -15,14 +15,14 @@ export interface ChartProps<T extends ChartDatum = ChartDatum> {
    * @defaultValue 'line'
    */
   type?: Chart['variants']['type']
-  /** The rows to plot, one object per x value. */
+  /** The rows to plot, one object per x value, or per slice with `donut`. */
   data?: T[]
-  /** The key of each row used for the x axis. */
+  /** The key of each row used for the x axis, or for the slice labels with `donut`. */
   index?: keyof T & string
-  /** The keys of each row plotted as series on the y axis. */
+  /** The keys of each row plotted as series on the y axis. With `donut`, the first key sets the slice values. */
   categories?: (keyof T & string)[]
   /**
-   * The series colors, in `categories` order. Accepts theme colors or any CSS color.
+   * The series colors, in `categories` order, or in `data` order with `donut`. Accepts theme colors or any CSS color.
    * @defaultValue ['primary', 'secondary', 'info', 'success', 'warning', 'error']
    */
   colors?: string[]
@@ -58,6 +58,11 @@ export interface ChartProps<T extends ChartDatum = ChartDatum> {
   /** Format the y axis ticks. */
   format?: (value: number) => string
   /**
+   * The width of the ring in pixels. Only applies to `donut`.
+   * @defaultValue 24
+   */
+  thickness?: number
+  /**
    * The height of the chart in pixels.
    * @defaultValue 300
    */
@@ -80,6 +85,7 @@ export interface ChartProps<T extends ChartDatum = ChartDatum> {
 
 export interface ChartSlots {
   tooltip?(props: ChartTooltipBodySlotContext<any, any, any>): VNode[]
+  center?(props?: {}): VNode[]
 }
 </script>
 
@@ -93,6 +99,7 @@ import { scaleOrdinal } from '@tanstack/charts/scales/ordinal'
 import { scalePoint } from '@tanstack/charts/scales/point'
 import { tooltip } from '@tanstack/charts/tooltip'
 import { crosshair } from '@tanstack/charts/crosshair'
+import { pie, polar, radialArc } from '@tanstack/charts/polar'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
@@ -106,6 +113,7 @@ const _props = withDefaults(defineProps<ChartProps<T>>(), {
   grid: true,
   xAxis: true,
   yAxis: true,
+  thickness: 24,
   height: 300,
   initialWidth: 640
 })
@@ -141,7 +149,40 @@ const rows = computed(() => (props.data ?? []).flatMap(datum => seriesKeys.value
   value: datum[category] as number
 }))))
 
+// Slices are colored by label rather than by series.
+const donutDefinition = computed(() => {
+  const labels = (props.data ?? []).map(datum => String(datum[props.index!]))
+  const slices = pie(props.data ?? [], { value: seriesKeys.value[0]! } as any)
+
+  return defineChart({
+    marks: [
+      polar({
+        marks: [
+          radialArc(slices, {
+            innerRadius: ({ radius }: { radius: number }) => Math.max(radius - props.thickness!, 0),
+            color: props.index,
+            key: props.index
+          } as any)
+        ],
+        scales: { angle: null, radius: null }
+      })
+    ],
+    scales: { x: null, y: null },
+    color: {
+      scale: scaleOrdinal<string, string>()
+        .domain(labels)
+        .range(labels.map((_, i) => `var(--ts-chart-${(i % seriesColors.value.length) + 1})`)),
+      legend: props.legend ? colorLegend() : undefined
+    },
+    tooltip
+  } as any)
+})
+
 const generatedDefinition = computed(() => {
+  if (props.type === 'donut') {
+    return donutDefinition.value
+  }
+
   const multiple = seriesKeys.value.length > 1
   const color = scaleOrdinal<string, string>()
     .domain(seriesKeys.value)
@@ -219,5 +260,9 @@ const chartDefinition = computed(() => (props.definition ?? generatedDefinition.
         <slot name="tooltip" v-bind="slotProps" />
       </template>
     </TanStackChart>
+
+    <div v-if="!!slots.center" data-slot="center" :class="ui.center({ class: props.ui?.center })">
+      <slot name="center" />
+    </div>
   </div>
 </template>

@@ -65,7 +65,9 @@ props:
 
 ### Type
 
-Use the `type` prop to change the type of chart. Defaults to `line`.
+Use the `type` prop to change the type of chart, `line`, `area`, `bar` or `donut`. Defaults to `line`.
+
+With `donut`, each row of `data` is a slice: `index` sets its label and the first key of `categories` its value.
 
 ::component-code
 ---
@@ -74,6 +76,12 @@ ignore:
   - data
   - index
   - categories
+items:
+  type:
+    - line
+    - area
+    - bar
+    - donut
 props:
   type: bar
   data:
@@ -378,6 +386,46 @@ props:
 ---
 ::
 
+### Thickness
+
+Use the `thickness` prop to set the width of the ring in pixels. Only applies to the `donut` type. Defaults to `24`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - data
+  - index
+  - categories
+props:
+  type: donut
+  thickness: 12
+  data:
+    - month: January
+      desktop: 186
+      mobile: 80
+    - month: February
+      desktop: 305
+      mobile: 200
+    - month: March
+      desktop: 237
+      mobile: 120
+    - month: April
+      desktop: 73
+      mobile: 190
+    - month: May
+      desktop: 209
+      mobile: 130
+    - month: June
+      desktop: 214
+      mobile: 140
+  index: month
+  categories:
+    - desktop
+    - mobile
+---
+::
+
 ### Height
 
 Use the `height` prop to set the height of the chart in pixels. Defaults to `300`.
@@ -418,6 +466,16 @@ props:
 ::
 
 ## Examples
+
+### With center content
+
+Use the `#center` slot to display content in the middle of a `donut` chart.
+
+::component-example
+---
+name: 'chart-donut-example'
+---
+::
 
 ### With custom tooltip
 

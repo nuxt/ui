@@ -39,6 +39,8 @@ describe('Chart', () => {
   renderEach(Chart, [
     // Props
     ...types.map((type: string) => [`with type ${type}`, { props: { ...props, type } }]),
+    ['with type donut and center slot', { props: { data: props.data, type: 'donut', index: 'month', categories: ['desktop'], thickness: 12, ariaLabel: 'Desktop' }, slots: { center: () => 'Center slot' } }],
+    ['with type donut and legend', { props: { data: props.data, type: 'donut', index: 'month', categories: ['desktop'], legend: true, ariaLabel: 'Desktop' } }],
     ['with stacked bar', { props: { ...props, type: 'bar', stacked: true } }],
     ['with stacked area', { props: { ...props, type: 'area', stacked: true } }],
     ['with curve monotone', { props: { ...props, curve: 'monotone' } }],
