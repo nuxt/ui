@@ -35,7 +35,6 @@ export const defaultOptions = {
   colorMode: true,
   theme: {
     colors: undefined,
-    transitions: true,
     unstyled: false,
     defaultVariants: {
       color: undefined,
