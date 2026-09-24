@@ -140,6 +140,7 @@
     "@standard-schema/spec": "catalog:",
     "@tailwindcss/postcss": "catalog:",
     "@tailwindcss/vite": "catalog:",
+    "@tanstack/charts": "catalog:",
     "@tanstack/vue-table": "catalog:",
     "@tanstack/vue-virtual": "catalog:",
     "@tiptap/core": "catalog:",

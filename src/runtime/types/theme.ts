@@ -43,6 +43,7 @@ export interface ThemeDefaults {
   carousel?: Partial<ComponentTypes.CarouselProps>
   changelogVersion?: Partial<ComponentTypes.ChangelogVersionProps>
   changelogVersions?: Partial<ComponentTypes.ChangelogVersionsProps>
+  chart?: Partial<ComponentTypes.ChartProps>
   chatMessage?: Partial<ComponentTypes.ChatMessageProps>
   chatMessages?: Partial<ComponentTypes.ChatMessagesProps>
   chatPalette?: Partial<ComponentTypes.ChatPaletteProps>

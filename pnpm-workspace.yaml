@@ -51,6 +51,7 @@ catalog:
   "@tailwindcss/vite": ^4.3.3
   "@takumi-rs/core": ^2.14.0
   "@tanstack/table-core": ^8.21.3
+  "@tanstack/charts": 0.18.0
   "@tanstack/vue-table": ^8.21.3
   "@tanstack/vue-virtual": ^3.13.39
   "@tiptap/core": ^3.31.3

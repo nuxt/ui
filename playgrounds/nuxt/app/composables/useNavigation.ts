@@ -13,6 +13,7 @@ const components = [
   'calendar',
   'card',
   'carousel',
+  'chart',
   'chat-message',
   'chat-prompt',
   'chat-reasoning',
