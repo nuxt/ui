@@ -1,10 +1,18 @@
 <script lang="ts">
-import type { VNode } from 'vue'
+import type { VNode, InjectionKey, ComputedRef } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/chip'
 import type { ComponentConfig } from '../types/tv'
 
 type Chip = ComponentConfig<typeof theme, AppConfig, 'chip'>
+
+/**
+ * Lets `UAvatar` bind fallthrough attributes onto the chip's own root when it renders itself
+ * as a chip, bypassing the default behaviour of forwarding them to the slotted content
+ * (see nuxt/ui#2484, where a `UChip` wrapping a `UButton` trigger needs those attributes on
+ * the button instead).
+ */
+export const chipRootAttrsInjectionKey: InjectionKey<ComputedRef<Record<string, any>>> = Symbol('nuxt-ui.chip-root-attrs')
 
 export interface ChipProps {
   /**
@@ -46,7 +54,7 @@ export interface ChipSlots {
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, inject } from 'vue'
 import { Primitive, Slot } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
@@ -68,6 +76,8 @@ const show = defineModel<boolean>('show', { default: true })
 const { size } = useAvatarGroup(_props)
 const appConfig = useAppConfig() as Chip['AppConfig']
 
+const injectedRootAttrs = inject(chipRootAttrsInjectionKey, undefined)
+
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chip || {}) })({
   color: props.color,
@@ -79,7 +89,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chip || {}) })({
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" v-bind="injectedRootAttrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <Slot v-bind="{ ...$attrs, 'data-slot': undefined }">
       <slot />
     </Slot>

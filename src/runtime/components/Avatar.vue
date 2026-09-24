@@ -42,8 +42,8 @@ export interface AvatarSlots {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
-import { Primitive, Slot } from 'reka-ui'
+import { ref, computed, watch, useAttrs, provide } from 'vue'
+import { Primitive } from 'reka-ui'
 import { defu } from 'defu'
 import { useAppConfig } from '#imports'
 import ImageComponent from '#build/ui-image-component'
@@ -51,7 +51,7 @@ import { useComponentProps } from '../composables/useComponentProps'
 import { useAvatarGroup } from '../composables/useAvatarGroup'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
-import UChip from './Chip.vue'
+import UChip, { chipRootAttrsInjectionKey } from './Chip.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -94,6 +94,16 @@ const sizePx = computed(() => {
 
 const error = ref(false)
 
+const attrs = useAttrs()
+// Mirrors `ImgHTMLAttributes` in `types/html.ts` without `src` / `alt`, which are props
+const imgAttrKeys = ['crossorigin', 'decoding', 'height', 'loading', 'referrerpolicy', 'sizes', 'srcset', 'usemap', 'width']
+const imgAttrs = computed(() => Object.fromEntries(Object.entries(attrs).filter(([key]) => imgAttrKeys.includes(key))))
+const rootAttrs = computed(() => Object.fromEntries(Object.entries(attrs).filter(([key]) => !imgAttrKeys.includes(key))))
+
+// When rendering as `UChip`, bind these onto the chip's own root instead of passing them down
+// as regular fallthrough attrs, since `UChip` otherwise forwards its attrs to its slotted content
+provide(chipRootAttrsInjectionKey, rootAttrs)
+
 watch(() => props.src, () => {
   if (error.value) {
     error.value = false
@@ -109,7 +119,7 @@ function onError() {
   <component
     :is="props.chip ? UChip : Primitive"
     :as="as.root"
-    v-bind="props.chip ? (typeof props.chip === 'object' ? { inset: true, ...props.chip } : { inset: true }) : {}"
+    v-bind="props.chip ? (typeof props.chip === 'object' ? { inset: true, ...props.chip } : { inset: true }) : rootAttrs"
     :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
     :class="rootClass"
     :style="props.style"
@@ -121,17 +131,15 @@ function onError() {
       :alt="props.alt"
       :width="sizePx"
       :height="sizePx"
-      v-bind="$attrs"
+      v-bind="imgAttrs"
       data-slot="image"
       :class="ui.image({ class: props.ui?.image })"
       @error="onError"
     />
 
-    <Slot v-else v-bind="{ ...$attrs, 'data-slot': undefined }">
-      <slot>
-        <UIcon v-if="props.icon" :name="props.icon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
-        <span v-else data-slot="fallback" :class="ui.fallback({ class: props.ui?.fallback })">{{ fallback || '&nbsp;' }}</span>
-      </slot>
-    </Slot>
+    <slot v-else>
+      <UIcon v-if="props.icon" :name="props.icon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
+      <span v-else data-slot="fallback" :class="ui.fallback({ class: props.ui?.fallback })">{{ fallback || '&nbsp;' }}</span>
+    </slot>
   </component>
 </template>
