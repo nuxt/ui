@@ -125,6 +125,66 @@ export function applyUnstyled(result: any, unstyled?: boolean): any {
 }
 
 /**
+ * Expand the `'*'` entry of a variant group into one entry per color alias,
+ * with `{value}` in its classes replaced by the alias, and a `'*'` compound
+ * value into the list of aliases. Lets a theme style every color with one class
+ * set (`{ '*': { base: '[--ui-accent:var(--ui-{value})]' } }`) without reading
+ * `options.theme.colors`. Aliases the group already lists keep their own entry.
+ * @param result - The theme result object
+ * @param colors - The color aliases from module options
+ * @returns The theme result with wildcard variants expanded
+ */
+export function expandColorVariants(result: any, colors: string[] = []): any {
+  if (!result?.variants) {
+    return result
+  }
+
+  const fill = (value: unknown, color: string): unknown => {
+    if (typeof value === 'string') {
+      return value.replaceAll('{value}', color)
+    }
+    if (Array.isArray(value)) {
+      return value.map(item => fill(item, color))
+    }
+    if (value && typeof value === 'object') {
+      return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, fill(item, color)]))
+    }
+    return value
+  }
+
+  const unique = [...new Set(colors)]
+  const variants: Record<string, any> = {}
+  for (const [name, group] of Object.entries<Record<string, unknown>>(result.variants)) {
+    if (!group || !('*' in group)) {
+      variants[name] = group
+      continue
+    }
+    const expanded: Record<string, unknown> = {}
+    for (const [key, value] of Object.entries(group)) {
+      if (key !== '*') {
+        expanded[key] = value
+        continue
+      }
+      for (const color of unique) {
+        if (!(color in group)) {
+          expanded[color] = fill(value, color)
+        }
+      }
+    }
+    variants[name] = expanded
+  }
+
+  // A compound matching `'*'` matches every alias the group doesn't style on its own, and never an unset color.
+  const compoundVariants = result.compoundVariants?.map((compound: Record<string, unknown>) => Object.fromEntries(
+    Object.entries(compound).map(([key, value]) => [key, key !== 'class' && value === '*' && '*' in (result.variants[key] ?? {})
+      ? unique.filter(color => !(color in result.variants[key]))
+      : value])
+  ))
+
+  return { ...result, variants, ...(compoundVariants && { compoundVariants }) }
+}
+
+/**
  * Override default variants from module options
  * @param result - The theme result object
  * @param defaultVariants - The default variants from module options

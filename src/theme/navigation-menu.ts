@@ -1,12 +1,10 @@
-import type { ModuleOptions } from '../module'
-
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'relative flex gap-1.5 [&>div]:min-w-0',
     list: 'isolate min-w-0',
     label: 'w-full flex items-center gap-1.5 font-semibold text-xs/5 text-highlighted px-2.5 py-1.5',
     item: 'min-w-0',
-    link: 'group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3',
+    link: 'group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3 before:outline-accent-focus',
     linkLeadingIcon: 'shrink-0 size-5',
     linkLeadingAvatar: 'shrink-0',
     linkLeadingAvatarSize: '2xs',
@@ -20,7 +18,7 @@ export default (options: Required<ModuleOptions>) => ({
     childList: 'isolate',
     childLabel: 'text-xs text-highlighted',
     childItem: '',
-    childLink: 'group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3',
+    childLink: 'group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3 before:outline-accent-focus',
     childLinkWrapper: 'min-w-0',
     childLinkIcon: 'size-5 shrink-0',
     childLinkLabel: 'truncate',
@@ -35,18 +33,16 @@ export default (options: Required<ModuleOptions>) => ({
   },
   variants: {
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        link: `before:outline-${color}/25`,
-        childLink: `before:outline-${color}/25`
-      }])),
-      neutral: {
-        link: 'before:outline-inverted/25',
-        childLink: 'before:outline-inverted/25'
+      '*': {
+        link: '[--ui-accent:var(--ui-{value})]',
+        linkLeadingIcon: '[--ui-accent:var(--ui-{value})]',
+        childLink: '[--ui-accent:var(--ui-{value})]'
       }
     },
     highlightColor: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
-      neutral: ''
+      '*': {
+        link: '[--ui-highlight:var(--ui-{value})]'
+      }
     },
     variant: {
       pill: '',
@@ -183,21 +179,12 @@ export default (options: Required<ModuleOptions>) => ({
     class: {
       link: 'data-[state=open]:before:bg-elevated/50'
     }
-  }, ...(options.theme.colors || []).map((color: string) => ({
-    color,
+  }, {
     variant: 'pill',
     active: true,
     class: {
-      link: `text-${color}`,
-      linkLeadingIcon: `text-${color} group-data-[state=open]:text-${color}`
-    }
-  })), {
-    color: 'neutral',
-    variant: 'pill',
-    active: true,
-    class: {
-      link: 'text-highlighted',
-      linkLeadingIcon: 'text-highlighted group-data-[state=open]:text-highlighted'
+      link: 'text-accent',
+      linkLeadingIcon: 'text-accent group-data-[state=open]:text-accent'
     }
   }, {
     variant: 'pill',
@@ -231,37 +218,19 @@ export default (options: Required<ModuleOptions>) => ({
       link: 'data-[state=open]:text-highlighted',
       linkLeadingIcon: 'group-data-[state=open]:text-default'
     }
-  }, ...(options.theme.colors || []).map((color: string) => ({
-    color,
+  }, {
     variant: 'link',
     active: true,
     class: {
-      link: `text-${color}`,
-      linkLeadingIcon: `text-${color} group-data-[state=open]:text-${color}`
+      link: 'text-accent',
+      linkLeadingIcon: 'text-accent group-data-[state=open]:text-accent'
     }
-  })), {
-    color: 'neutral',
-    variant: 'link',
-    active: true,
-    class: {
-      link: 'text-highlighted',
-      linkLeadingIcon: 'text-highlighted group-data-[state=open]:text-highlighted'
-    }
-  }, ...(options.theme.colors || []).map((highlightColor: string) => ({
-    highlightColor,
+  }, {
     highlight: true,
     level: true,
     active: true,
     class: {
-      link: `after:bg-${highlightColor}`
-    }
-  })), {
-    highlightColor: 'neutral',
-    highlight: true,
-    level: true,
-    active: true,
-    class: {
-      link: 'after:bg-inverted'
+      link: 'after:bg-(--ui-highlight)'
     }
   }],
   defaultVariants: {
@@ -269,4 +238,4 @@ export default (options: Required<ModuleOptions>) => ({
     highlightColor: 'primary',
     variant: 'pill'
   }
-})
+}

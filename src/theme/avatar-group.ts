@@ -1,6 +1,4 @@
-import type { ModuleOptions } from '../module'
-
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'inline-flex flex-row-reverse justify-end',
     base: 'relative rounded-full ring-bg first:me-0'
@@ -36,12 +34,11 @@ export default (options: Required<ModuleOptions>) => ({
       }
     },
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
-      neutral: ''
+      '*': ''
     }
   },
   defaultVariants: {
     size: 'md',
     color: 'neutral'
   }
-})
+}

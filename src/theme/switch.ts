@@ -1,25 +1,19 @@
-import type { ModuleOptions } from '../module'
-
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'relative flex items-start',
-    base: 'inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-3 data-[state=unchecked]:bg-accented transition-[background] duration-200 ease-out',
+    base: 'inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-3 data-[state=unchecked]:bg-accented transition-[background] duration-200 ease-out data-[state=checked]:bg-accent outline-accent-focus',
     container: 'flex items-center',
     thumb: 'group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 ease-out motion-reduce:transition-none data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center',
-    icon: 'absolute shrink-0 group-data-[state=unchecked]:text-dimmed opacity-0 size-10/12 transition-[color,opacity] duration-200 ease-out',
+    icon: 'absolute shrink-0 group-data-[state=unchecked]:text-dimmed opacity-0 size-10/12 transition-[color,opacity] duration-200 ease-out group-data-[state=checked]:text-accent',
     wrapper: 'ms-2',
     label: 'block font-medium text-default',
     description: 'text-muted'
   },
   variants: {
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        base: `data-[state=checked]:bg-${color} outline-${color}/25`,
-        icon: `group-data-[state=checked]:text-${color}`
-      }])),
-      neutral: {
-        base: 'data-[state=checked]:bg-inverted outline-inverted/25',
-        icon: 'group-data-[state=checked]:text-highlighted'
+      '*': {
+        base: '[--ui-accent:var(--ui-{value})]',
+        icon: '[--ui-accent:var(--ui-{value})]'
       }
     },
     size: {
@@ -70,7 +64,9 @@ export default (options: Required<ModuleOptions>) => ({
       }
     },
     highlight: {
-      true: ''
+      true: {
+        base: 'ring ring-accent'
+      }
     },
     required: {
       true: {
@@ -86,24 +82,8 @@ export default (options: Required<ModuleOptions>) => ({
       }
     }
   },
-  compoundVariants: [
-    ...(options.theme.colors || []).map((color: string) => ({
-      color,
-      highlight: true,
-      class: {
-        base: `ring ring-${color}`
-      }
-    })),
-    {
-      color: 'neutral',
-      highlight: true,
-      class: {
-        base: 'ring ring-inverted'
-      }
-    }
-  ],
   defaultVariants: {
     color: 'primary',
     size: 'md'
   }
-})
+}

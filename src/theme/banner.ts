@@ -1,8 +1,6 @@
-import type { ModuleOptions } from '../module'
-
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
-    root: 'relative z-50 w-full transition-colors',
+    root: 'relative z-50 w-full transition-colors bg-accent',
     container: 'flex items-center justify-between gap-3 h-12',
     left: 'hidden lg:flex-1 lg:flex lg:items-center',
     center: 'flex items-center gap-1.5 min-w-0',
@@ -14,33 +12,17 @@ export default (options: Required<ModuleOptions>) => ({
   },
   variants: {
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        root: `bg-${color}`
-      }])),
-      neutral: {
-        root: 'bg-inverted'
+      '*': {
+        root: '[--ui-accent:var(--ui-{value})]'
       }
     },
     to: {
       true: {
-        root: 'outline-(--ui-bg)/25 -outline-offset-3 has-[>a:focus-visible]:outline-3'
+        root: 'outline-(--ui-bg)/25 -outline-offset-3 has-[>a:focus-visible]:outline-3 hover:bg-accent-hover'
       }
     }
   },
-  compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
-    color,
-    to: true,
-    class: {
-      root: `hover:bg-${color}/90`
-    }
-  })), {
-    color: 'neutral',
-    to: true,
-    class: {
-      root: 'hover:bg-inverted/90'
-    }
-  }],
   defaultVariants: {
     color: 'primary'
   }
-})
+}
