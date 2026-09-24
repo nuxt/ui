@@ -112,9 +112,9 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.colorPicker || {
 const pickedColor = computed<HSVColor>({
   get() {
     try {
-      const color = new ColorTranslator(modelValue.value || props.defaultValue)
+      const color = ColorTranslator.toHSLAObject(modelValue.value || props.defaultValue)
 
-      return HSLtoHSV(color.HSLAObject)
+      return HSLtoHSV(color)
     } catch (_) {
       return { h: 0, s: 0, v: 100 }
     }
@@ -286,24 +286,24 @@ watch([() => props.alphaTrack, () => props.format], () => {
   triggerRef(modelValue)
 })
 
-const trackThumbColor = computed(() => new ColorTranslator(HSVtoHSL({
+const trackThumbColor = computed(() => ColorTranslator.toHEX(HSVtoHSL({
   h: normalizeHue(trackThumbPosition.value.y),
   s: 100,
   v: 100
-})).HEX)
+})))
 
-const alphaTrackThumbColor = computed(() => new ColorTranslator(HSVtoHSL({
+const alphaTrackThumbColor = computed(() => ColorTranslator.toHEX(HSVtoHSL({
   h: 0,
   s: 0,
   v: alphaTrackThumbPosition.value.y,
-})).HEX)
+})))
 
 const selectorStyle = computed(() => ({
   backgroundColor: trackThumbColor.value
 }))
 
 const selectorThumbStyle = computed(() => ({
-  backgroundColor: new ColorTranslator(modelValue.value || props.defaultValue).HEX,
+  backgroundColor: ColorTranslator.toHEX(modelValue.value || props.defaultValue),
   left: `${selectorThumbPosition.value.x}%`,
   top: `${selectorThumbPosition.value.y}%`
 }))
