@@ -309,7 +309,7 @@ const trackThumbStyle = computed(() => ({
 
 const alphaTrackThumbStyle = computed(() => ({
   backgroundColor: 'white',
-  backgroundImage: `linear-gradient(0deg, ${modelValue.value || props.defaultValue})`,
+  backgroundImage: `linear-gradient(0deg, ${ColorTranslator.toRGBA(modelValue.value || props.defaultValue)})`,
   top: `${alphaTrackThumbPosition.value.y}%`
 }))
 </script>
