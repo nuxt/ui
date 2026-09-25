@@ -348,7 +348,7 @@ describe('Form', () => {
     it.skip('dirtyFields works', async () => {
       const email = wrapper.find('#email')
 
-      email.trigger('change')
+      await email.trigger('change')
       await flushPromises()
 
       expect(form.dirtyFields.has('email')).toBe(true)
@@ -583,6 +583,22 @@ describe('Form', () => {
         { id: 'email', name: 'email' },
         { id: 'password', name: 'password' }
       ])
+    })
+
+    it('dirty reflects nested forms', async () => {
+      const nestedWrapper: any = await renderForm({ fixture: 'FormNestedFields' })
+      const nestedForm = nestedWrapper.setupState.form.value
+      const nestedState = nestedWrapper.setupState.state
+      expect(nestedForm.dirty).toBe(false)
+
+      await nestedWrapper.find('#first').trigger('change')
+      await flushPromises()
+      expect(nestedForm.dirty).toBe(true)
+
+      nestedState.nested.first = 'first'
+      nestedState.nested.second = 'second'
+      await nestedForm.submit()
+      expect(nestedForm.dirty).toBe(false)
     })
   })
 
