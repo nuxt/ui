@@ -105,12 +105,18 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
     formField?.value.validateOnInputDelay ?? formOptions?.value.validateOnInputDelay ?? 0
   )
 
+  // A field can be invalid without rendering a message (`:error="true"`, or `:error="''"`,
+  // which Vue casts to `true`), so the invalid state is its own fact — reading it off `error`
+  // is what made `aria-invalid` and `aria-describedby` disagree. The fallback keeps
+  // hand-rolled `formFieldInjectionKey` providers that only set `error` working.
+  const invalid = computed(() => formField?.value?.invalid ?? !!formField?.value?.error)
+
   return {
     id: computed(() => props?.id ?? inputId?.value),
     name: computed(() => props?.name ?? formField?.value.name),
     size: computed(() => props?.size ?? formField?.value.size),
-    color: computed(() => formField?.value.error ? 'error' : props?.color),
-    highlight: computed(() => formField?.value.error ? true : (props?.highlight || undefined)),
+    color: computed(() => invalid.value ? 'error' : props?.color),
+    highlight: computed(() => invalid.value ? true : (props?.highlight || undefined)),
     disabled: computed(() => formOptions?.value.disabled || props?.disabled || undefined),
     emitFormBlur,
     emitFormInput,
@@ -119,12 +125,14 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
     ariaAttrs: computed(() => {
       if (!formField?.value) return
 
+      // The field only sets these while the matching region is rendered, so every id here
+      // resolves to an element.
       const descriptiveAttrs = ['error' as const, 'hint' as const, 'description' as const, 'help' as const]
         .filter(type => formField?.value?.[type])
         .map(type => `${formField?.value.ariaId}-${type}`) || []
 
       const attrs: Record<string, any> = {
-        'aria-invalid': !!formField?.value.error
+        'aria-invalid': invalid.value
       }
 
       if (descriptiveAttrs.length > 0) {
