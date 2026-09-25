@@ -2,7 +2,7 @@
 import type { VNode, MaybeRef } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFileDialogReturn } from '@vueuse/core'
-import theme from '#build/ui/file-upload'
+import theme from '../theme/file-upload'
 import type { ButtonProps } from './Button.vue'
 import type { IconProps } from './Icon.vue'
 import type { LinkPropsKeys } from './Link.vue'

@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/kbd'
+import theme from '../theme/kbd'
 import type { KbdKey } from '../composables/useKbd'
 import type { ComponentConfig } from '../types/tv'
 

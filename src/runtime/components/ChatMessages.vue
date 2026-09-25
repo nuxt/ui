@@ -3,7 +3,7 @@
 import type { ComponentPublicInstance, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { UIDataTypes, UIMessage, UITools, ChatStatus } from 'ai'
-import theme from '#build/ui/chat-messages'
+import theme from '../theme/chat-messages'
 import type { ButtonProps } from './Button.vue'
 import type { ChatMessageProps, ChatMessageSlots } from './ChatMessage.vue'
 import type { IconProps } from './Icon.vue'

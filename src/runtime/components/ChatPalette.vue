@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/chat-palette'
+import theme from '../theme/chat-palette'
 import type { ComponentConfig } from '../types/tv'
 
 type ChatPalette = ComponentConfig<typeof theme, AppConfig, 'chatPalette'>

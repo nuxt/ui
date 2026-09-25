@@ -40,7 +40,7 @@ import type {
   VisibilityState
 } from '@tanstack/vue-table'
 import type { VirtualizerOptions } from '@tanstack/vue-virtual'
-import theme from '#build/ui/table'
+import theme from '../theme/table'
 import type { TableHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 

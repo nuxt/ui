@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/prose/collapsible'
+import theme from '../../theme/prose/collapsible'
 import type { IconProps } from '../Icon.vue'
 import type { CollapsibleProps } from '../Collapsible.vue'
 import type { ComponentConfig } from '../../types/tv'

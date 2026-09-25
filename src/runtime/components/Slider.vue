@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { SliderRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/slider'
+import theme from '../theme/slider'
 import type { TooltipProps } from './Tooltip.vue'
 import type { ComponentConfig } from '../types/tv'
 

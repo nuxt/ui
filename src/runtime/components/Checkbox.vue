@@ -2,7 +2,7 @@
 import type { CheckboxRootProps, CheckboxRootEmits } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/checkbox'
+import theme from '../theme/checkbox'
 import type { IconProps } from './Icon.vue'
 import type { ButtonHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'

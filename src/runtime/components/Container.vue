@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/container'
+import theme from '../theme/container'
 import type { ComponentConfig } from '../types/tv'
 
 type Container = ComponentConfig<typeof theme, AppConfig, 'container'>

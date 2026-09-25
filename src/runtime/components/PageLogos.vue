@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/page-logos'
+import theme from '../theme/page-logos'
 import type { MarqueeProps } from './Marquee.vue'
 import type { ComponentConfig } from '../types/tv'
 
