@@ -497,7 +497,7 @@ function closesAt(expression, open) {
 
 /**
  * Tailwind class checks for the apps in this repo (docs and playgrounds).
- * `src/theme` is not covered yet: the plugin skips `export default (options) => ({...})`
+ * `src/runtime/theme` is not covered yet: the plugin skips `export default (options) => ({...})`
  * until https://github.com/schoero/eslint-plugin-better-tailwindcss/pull/397 ships.
  */
 function betterTailwindcssConfig(files, entryPoint, ignore = []) {

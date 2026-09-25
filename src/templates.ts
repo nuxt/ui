@@ -8,10 +8,10 @@ import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
 import { applyUnstyled, getThemeClasses } from './utils/theme'
 import { detectUsedComponents } from './utils/components'
-import * as theme from './theme'
-import { colors as aliases } from './theme/color'
-import * as themeProse from './theme/prose'
-import * as themeContent from './theme/content'
+import * as theme from './runtime/theme'
+import { colors as aliases } from './runtime/theme/color'
+import * as themeProse from './runtime/theme/prose'
+import * as themeContent from './runtime/theme/content'
 
 // The accent roles every color resolves through, with the recipe each falls back to.
 // A color scope points each one at `--ui-<color>-<role>`, and a role left unset
@@ -115,7 +115,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
 
           // For local development, import directly from theme
           if (isDev) {
-            const templatePath = fileURLToPath(new URL(`./theme/${path ? `${path}/` : ''}${kebabCase(component)}`, import.meta.url))
+            const templatePath = fileURLToPath(new URL(`./runtime/theme/${path ? `${path}/` : ''}${kebabCase(component)}`, import.meta.url))
             const themeUtilsPath = fileURLToPath(new URL('./utils/theme', import.meta.url))
             const unstyledJson = JSON.stringify(isUnused(component, path))
 

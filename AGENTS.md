@@ -114,7 +114,7 @@ Component: [name]
 Progress:
 - [ ] 1. Scaffold with CLI: pnpm cli make component <name>
 - [ ] 2. Implement component in src/runtime/components/
-- [ ] 3. Create theme in src/theme/
+- [ ] 3. Create theme in src/runtime/theme/
 - [ ] 4. Export types from src/runtime/types/index.ts
 - [ ] 5. Register in ThemeDefaults interface (src/runtime/types/theme.ts)
 - [ ] 6. Write tests in test/components/
