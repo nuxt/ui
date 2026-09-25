@@ -4,9 +4,11 @@ import defu from 'defu'
 import { createContext } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { get } from '../utils'
+import type { ComponentOverrides } from '../types/tv'
 
 export type ThemeContext = {
   defaults: ComputedRef<Record<string, Record<string, any> | undefined>>
+  unstyled: ComputedRef<boolean | undefined>
 }
 
 const [_injectThemeContext, provideThemeContext] = createContext<ThemeContext>('UTheme', 'RootContext')
@@ -16,7 +18,8 @@ const [_injectThemeContext, provideThemeContext] = createContext<ThemeContext>('
  * `<UTheme>` wrapper without crashing.
  */
 export const defaultThemeContext: ThemeContext = {
-  defaults: computed(() => ({}))
+  defaults: computed(() => ({})),
+  unstyled: computed(() => undefined)
 }
 
 export function injectThemeContext(fallback: ThemeContext = defaultThemeContext): ThemeContext {
@@ -149,5 +152,20 @@ export function useComponentProps<T extends object>(name: string, props: T, them
     has: (t, p) => Reflect.has(t, p),
     ownKeys: t => Reflect.ownKeys(t),
     getOwnPropertyDescriptor: (t, p) => Reflect.getOwnPropertyDescriptor(t, p)
+  })
+}
+
+/**
+ * A component's `tv()` overrides: its `app.config.ui` entry, flagged `unstyled`
+ * when the nearest `<UTheme>` says so, or `app.config.ui.unstyled` without one.
+ */
+export function useComponentOverrides<T extends Record<string, any>>(config: () => T | undefined): ComputedRef<ComponentOverrides<T> | undefined> {
+  const { unstyled } = injectThemeContext()
+  const appConfig = useAppConfig() as { ui?: Record<string, any> }
+
+  return computed(() => {
+    const value = config()
+    if (!(unstyled.value ?? appConfig.ui?.unstyled)) return value as ComponentOverrides<T> | undefined
+    return { ...value, unstyled: true } as unknown as ComponentOverrides<T>
   })
 }

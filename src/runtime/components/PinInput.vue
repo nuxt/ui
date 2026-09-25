@@ -67,7 +67,7 @@ import { PinInputInput, PinInputRoot } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
 import { tv } from '../utils/tv'
@@ -83,6 +83,7 @@ defineSlots<PinInputSlots>()
 const props = useComponentProps<PinInputProps<T>>('pinInput', _props, theme)
 
 const appConfig = useAppConfig() as PinInput['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.pinInput)
 
 const rootProps = useForwardProps(reactivePick(props, 'disabled', 'id', 'mask', 'name', 'otp', 'required', 'type'), emits)
 
@@ -98,7 +99,7 @@ const size = computed(() => formFieldSize.value ?? props.size)
 const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.pinInput)({
+const ui = computed(() => tv(theme, overrides.value)({
   color: color.value,
   variant: props.variant,
   size: size.value,

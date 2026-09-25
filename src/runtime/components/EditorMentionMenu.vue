@@ -36,6 +36,7 @@ export interface EditorMentionMenuProps<T extends EditorMentionMenuItem = Editor
 import { computed, h, onMounted, onBeforeUnmount, nextTick, toRef } from 'vue'
 import { useAppConfig } from '#imports'
 import { useEditorMenu } from '../composables/useEditorMenu'
+import { useComponentOverrides } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
@@ -50,8 +51,9 @@ const props = withDefaults(defineProps<EditorMentionMenuProps<T>>(), {
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const appConfig = useAppConfig() as EditorMentionMenu['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.editorMentionMenu)
 
-const ui = computed(() => tv(theme, appConfig.ui?.editorMentionMenu)({
+const ui = computed(() => tv(theme, overrides.value)({
   size: props.size
 }))
 

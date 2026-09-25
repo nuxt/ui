@@ -76,13 +76,12 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
           // With `experimental.componentDetection` (Vue integration), a component
           // detection didn't find keeps its theme file — the `#build/ui` aliases
           // and type imports rely on it existing — but with every class blanked
-          // (like `theme.unstyled`), so the `@source "./ui";` scan yields no CSS
+          // (like `<UTheme unstyled>`), so the `@source "./ui";` scan yields no CSS
           // for it. Prose has no detection and stays styled.
           const unused = path !== 'prose' && !!vue?.detectedComponents?.size
             && !Array.from(vue.detectedComponents).some(detected => camelCase(detected) === component)
 
-          // Strip default theme classes if `unstyled` is enabled
-          result = applyUnstyled(result, options.theme?.unstyled || unused)
+          result = applyUnstyled(result, unused)
           // Apply Tailwind prefix if configured
           result = applyPrefixToObject(result, options.theme?.prefix)
 
@@ -115,7 +114,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
             const templatePath = fileURLToPath(new URL(`./theme/${path ? `${path}/` : ''}${kebabCase(component)}`, import.meta.url))
             const themeUtilsPath = fileURLToPath(new URL('./utils/theme', import.meta.url))
             const prefixJson = JSON.stringify(options.theme?.prefix) ?? 'undefined'
-            const unstyledJson = JSON.stringify(options.theme?.unstyled || unused) ?? 'undefined'
+            const unstyledJson = JSON.stringify(unused)
 
             return [
               `import template from ${JSON.stringify(templatePath)}`,
@@ -397,6 +396,7 @@ type AppConfigUI = {
   prefix?: string
   tv?: TVMergeConfig
   defaultVariants?: ThemeDefaultVariants
+  unstyled?: boolean
 } & TVConfig<typeof ui>
 
 type AppConfigRuntimeUI = DeepRequired<Pick<AppConfigUI, 'colors' | 'icons' | 'tv'>> & typeof ui

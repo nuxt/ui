@@ -238,7 +238,7 @@ import { FlexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, ge
 import { useVirtualizer } from '@tanstack/vue-virtual'
 import { reactivePick, createReusableTemplate, createRef } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
@@ -257,6 +257,7 @@ const props = useComponentProps<TableProps<T>>('table', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Table['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.table)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const data = createRef(props.data ?? [], props.watchOptions?.deep !== false)
@@ -291,7 +292,7 @@ function processColumns(columns: TableColumn<T>[]): TableColumn<T>[] {
 const isExternalScroll = computed(() => typeof props.virtualize === 'object' && !!props.virtualize.getScrollElement)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.table)({
+const ui = computed(() => tv(theme, overrides.value)({
   sticky: props.sticky,
   loading: props.loading,
   loadingColor: props.loadingColor,
