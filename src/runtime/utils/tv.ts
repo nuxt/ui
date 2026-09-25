@@ -4,6 +4,7 @@ import { twMerge, extendTailwindMerge } from 'tailwind-merge'
 import type { AppConfig } from '@nuxt/schema'
 import { isEmpty } from './index'
 import { unstyledTheme } from './unstyled'
+import { applyPrefix } from './prefix'
 import type { ClassValue, SlotClassReplacer, TVMergeConfig, TV } from '../types/tv'
 import appConfig from '#build/app.config'
 
@@ -742,7 +743,11 @@ function specFor(theme: Record<string, any>, overrides: Record<string, any> | nu
   return spec
 }
 
-function createTV(config?: TVMergeConfig) {
+function createTV(config?: TVMergeConfig, prefix?: string) {
+  // The themes ship unprefixed, so with Tailwind's `prefix(...)` each resolves
+  // against a prefixed copy, built once per theme object
+  const prefixedThemes = new WeakMap<object, Record<string, any>>()
+
   return function tv(theme: Record<string, any>, overrides?: Record<string, any> | null) {
     // `unstyled` from the nearest `<UTheme>`: resolve against the blanked theme,
     // so only the overrides, `:ui` and `class` classes remain
@@ -750,6 +755,13 @@ function createTV(config?: TVMergeConfig) {
       const { unstyled: _, ...rest } = overrides
       theme = unstyledTheme(theme)
       overrides = rest
+    } else if (prefix) {
+      let prefixed = prefixedThemes.get(theme)
+      if (!prefixed) {
+        prefixed = applyPrefix(theme, prefix) as Record<string, any>
+        prefixedThemes.set(theme, prefixed)
+      }
+      theme = prefixed
     }
     const spec = specFor(theme, overrides, config)
 
@@ -765,10 +777,10 @@ function createTV(config?: TVMergeConfig) {
   }
 }
 
-const appConfigTv = appConfig as AppConfig & { ui: { tv: TVMergeConfig } }
+const appConfigTv = appConfig as AppConfig & { ui: { tv: TVMergeConfig, prefix?: string } }
 
 /**
  * Build a component's classes from its theme, the `app.config.ui.<c>` overrides
  * merged on top, and the props it is invoked with.
  */
-export const tv = /* @__PURE__ */ createTV(appConfigTv.ui?.tv) as TV
+export const tv = /* @__PURE__ */ createTV(appConfigTv.ui?.tv, appConfigTv.ui?.prefix) as TV

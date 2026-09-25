@@ -27,4 +27,20 @@ describe('theme templates', () => {
     expect(css).toContain('[class~="tw:[--ui-accent:var(--ui-warning)]"] {\n    --ui-accent-foreground: var(--ui-warning-foreground);')
     expect(css).toContain('[class~="tw:[--ui-accent:var(--ui-neutral)]"] {\n    --ui-neutral: var(--ui-bg-inverted);')
   })
+
+  it('keeps the theme files unprefixed and lists the prefixed classes inline', async () => {
+    const contents = themeContents({ theme: { prefix: 'tw' } })
+    const css = await contents('ui.css')
+
+    expect(await contents('ui/button.ts')).not.toContain('tw:')
+    expect(css).not.toContain('@source "./ui"')
+    expect(css).toMatch(/@source inline\(".*tw:rounded-md.*"\);/)
+  })
+
+  it('lists only the detected components\' classes with the prefix', async () => {
+    const css = await themeContents({ theme: { prefix: 'tw' }, experimental: { componentDetection: true } }, { detectedComponents: new Set(['Button']) })('ui.css')
+
+    expect(css).toContain('tw:rounded-md')
+    expect(css).not.toContain('tw:min-w-full')
+  })
 })
