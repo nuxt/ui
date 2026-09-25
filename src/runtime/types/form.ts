@@ -62,6 +62,7 @@ export type FormChildAttachEvent<S extends FormSchema> = {
   formId: string | number
   validate: Form<any>['validate']
   clearDirty: () => void
+  hasInput: (name: string) => boolean
   name?: string
   api: Form<S>
 }
