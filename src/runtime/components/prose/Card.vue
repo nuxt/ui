@@ -30,8 +30,7 @@ export interface ProseCardSlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 import ULink from '../Link.vue'
 import UIcon from '../Icon.vue'
@@ -43,7 +42,7 @@ const slots = defineSlots<ProseCardSlots>()
 
 const props = useComponentProps('prose.card', _props, theme)
 
-const appConfig = useAppConfig() as ProseCard['AppConfig']
+const appConfig = useThemeConfig() as ProseCard['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.prose?.card)
 
 // eslint-disable-next-line vue/no-dupe-keys

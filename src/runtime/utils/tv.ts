@@ -1,12 +1,10 @@
 import { computed, isReactive } from 'vue'
 import type { ComputedRef } from 'vue'
 import { twMerge, extendTailwindMerge } from 'tailwind-merge'
-import type { AppConfig } from '@nuxt/schema'
 import { isEmpty } from './index'
 import { unstyledTheme } from './unstyled'
 import { applyPrefix } from './prefix'
 import type { ClassValue, SlotClassReplacer, TVMergeConfig, TV } from '../types/tv'
-import appConfig from '#build/app.config'
 
 /**
  * The variants engine. It covers exactly the surface our themes use, which is
@@ -21,7 +19,9 @@ import appConfig from '#build/app.config'
  * prop it is the slot's whole resolved chain.
  *
  * The performance model follows how components call it, `tv(theme,
- * appConfig.ui.<c>)(props)` rebuilt inside a computed:
+ * overrides.value)(props)` rebuilt inside a computed, where the overrides carry
+ * the component's `app.config.ui.<c>` and the engine for the app's merge config
+ * and prefix (one engine per distinct config, see `engineFor`):
  * - build defers all merging and resolves to a shared compiled entry: the theme
  *   is a WeakMap hit, and overrides are keyed by content, so every rebuild,
  *   instance and server request with the same `app.config.ui.<c>` shares one.
@@ -94,10 +94,10 @@ function hasDefinedKey(obj: Record<string, any> | undefined): boolean {
 }
 
 /**
- * The `tailwind-merge` instance for a config. `app.config.ui.tv` is build
- * configuration: it is read once per config object, since the slot caches hold
- * merged results and would serve the previous setting anyway. Returns `null`
- * when merging is turned off (`merge: false`).
+ * The `tailwind-merge` instance for a config. `app.config.ui.tv` is read once
+ * per config object: each engine gets its own copy (see `engineFor`), since the
+ * slot caches hold merged results. Returns `null` when merging is turned off
+ * (`merge: false`).
  */
 function getMerger(config: TVMergeConfig | undefined): Merger | null {
   if (!config) {
@@ -646,12 +646,6 @@ function resolveSlotCached(spec: Spec, slotKey: string, props: Props, slotProps:
  * factory
  * ------------------------------------------------------------------ */
 
-/** Compiled entries for a theme on its own, keyed by identity. */
-const themeSpecs = new WeakMap<object, Spec>()
-
-/** Compiled entries per theme for the overrides it was called with, keyed by content. */
-const overrideSpecs = new WeakMap<object, Generations<Spec>>()
-
 const OVERRIDES_LIMIT = 32
 
 const functionIds = new WeakMap<(...args: any[]) => any, number>()
@@ -672,6 +666,9 @@ function keyOfOverrides(value: any, depth = 0): string | typeof BAIL {
   }
   if (typeof value !== 'object' || value === null) {
     return serialize(value)
+  }
+  if (value instanceof RegExp) {
+    return 'R' + String(value)
   }
   if (depth >= 8) {
     return BAIL
@@ -717,44 +714,56 @@ function contentKey(overrides: Record<string, any>): string | typeof BAIL {
   return key.value
 }
 
-function specFor(theme: Record<string, any>, overrides: Record<string, any> | null | undefined, config: TVMergeConfig | undefined): Spec {
-  if (overrides == null || isEmpty(overrides)) {
-    let spec = themeSpecs.get(theme)
-    if (!spec) {
-      spec = resolveSpec(theme, undefined, config)
-      themeSpecs.set(theme, spec)
-    }
-    return spec
-  }
-  const key = contentKey(overrides)
-  if (key === BAIL) {
-    return resolveSpec(theme, overrides, config)
-  }
-  let specs = overrideSpecs.get(theme)
-  if (!specs) {
-    specs = new Generations<Spec>(OVERRIDES_LIMIT)
-    overrideSpecs.set(theme, specs)
-  }
-  let spec = specs.get(key)
-  if (spec === BAIL) {
-    spec = resolveSpec(theme, overrides, config)
-    specs.set(key, spec)
-  }
-  return spec
-}
+type Build = (props?: Record<string, any>) => Record<string, (slotProps?: Record<string, any>) => string | undefined>
 
-function createTV(config?: TVMergeConfig, prefix?: string) {
+type Engine = (theme: Record<string, any>, overrides?: Record<string, any> | null, unstyled?: boolean) => Build
+
+/**
+ * An engine for one merge config and prefix, with the compiled entries it owns:
+ * a spec holds merged classes, so engines never share them.
+ */
+function createEngine(config?: TVMergeConfig, prefix?: string): Engine {
+  /** Compiled entries for a theme on its own, keyed by identity. */
+  const themeSpecs = new WeakMap<object, Spec>()
+
+  /** Compiled entries per theme for the overrides it was called with, keyed by content. */
+  const overrideSpecs = new WeakMap<object, Generations<Spec>>()
+
   // The themes ship unprefixed, so with Tailwind's `prefix(...)` each resolves
   // against a prefixed copy, built once per theme object
   const prefixedThemes = new WeakMap<object, Record<string, any>>()
 
-  return function tv(theme: Record<string, any>, overrides?: Record<string, any> | null) {
+  function specFor(theme: Record<string, any>, overrides: Record<string, any> | null | undefined): Spec {
+    if (overrides == null || isEmpty(overrides)) {
+      let spec = themeSpecs.get(theme)
+      if (!spec) {
+        spec = resolveSpec(theme, undefined, config)
+        themeSpecs.set(theme, spec)
+      }
+      return spec
+    }
+    const key = contentKey(overrides)
+    if (key === BAIL) {
+      return resolveSpec(theme, overrides, config)
+    }
+    let specs = overrideSpecs.get(theme)
+    if (!specs) {
+      specs = new Generations<Spec>(OVERRIDES_LIMIT)
+      overrideSpecs.set(theme, specs)
+    }
+    let spec = specs.get(key)
+    if (spec === BAIL) {
+      spec = resolveSpec(theme, overrides, config)
+      specs.set(key, spec)
+    }
+    return spec
+  }
+
+  return function build(theme, overrides, unstyled) {
     // `unstyled` from the nearest `<UTheme>`: resolve against the blanked theme,
     // so only the overrides, `:ui` and `class` classes remain
-    if (overrides?.unstyled) {
-      const { unstyled: _, ...rest } = overrides
+    if (unstyled) {
       theme = unstyledTheme(theme)
-      overrides = rest
     } else if (prefix) {
       let prefixed = prefixedThemes.get(theme)
       if (!prefixed) {
@@ -763,7 +772,7 @@ function createTV(config?: TVMergeConfig, prefix?: string) {
       }
       theme = prefixed
     }
-    const spec = specFor(theme, overrides, config)
+    const spec = specFor(theme, overrides)
 
     return (props?: Record<string, any>) => {
       const fns: Record<string, (slotProps?: Record<string, any>) => string | undefined> = {}
@@ -777,10 +786,61 @@ function createTV(config?: TVMergeConfig, prefix?: string) {
   }
 }
 
-const appConfigTv = appConfig as AppConfig & { ui: { tv: TVMergeConfig, prefix?: string } }
+/** The engine for a `tv()` called with plain overrides: the default merger, no prefix. */
+const defaultEngine = /* @__PURE__ */ createEngine()
+
+const engines = new Map<string, Engine>()
 
 /**
- * Build a component's classes from its theme, the `app.config.ui.<c>` overrides
- * merged on top, and the props it is invoked with.
+ * The engine for the merge config (`app.config.ui.tv`) and Tailwind prefix of
+ * the nearest theme. Keyed by content, since Nuxt clones the app config for
+ * each request on the server, and built once per key.
  */
-export const tv = /* @__PURE__ */ createTV(appConfigTv.ui?.tv, appConfigTv.ui?.prefix) as TV
+export function engineFor(config?: TVMergeConfig, prefix?: string): Engine {
+  if (!config && !prefix) {
+    return defaultEngine
+  }
+  const configKey = config ? contentKey(config) : ''
+  if (configKey === BAIL) {
+    return createEngine(config, prefix)
+  }
+  const key = `${prefix ?? ''}|${configKey}`
+  let engine = engines.get(key)
+  if (!engine) {
+    // A copy, so a config mutated in place (HMR) doesn't reach the merger an
+    // engine built for its previous content
+    engine = createEngine(config && snapshot(config), prefix)
+    engines.set(key, engine)
+  }
+  return engine
+}
+
+/**
+ * A component's overrides as `useComponentOverrides` resolves them from the
+ * nearest theme: its `app.config.ui.<c>` entry, whether the subtree is
+ * `unstyled`, and the engine for the app's merge config and prefix.
+ */
+export class ComponentOverrides<O = Record<string, any>> {
+  constructor(
+    readonly entry: O | undefined,
+    readonly unstyled: boolean,
+    readonly engine: Engine
+  ) {}
+}
+
+/**
+ * Build a component's classes from its theme, the overrides on top of it, and
+ * the props it is invoked with. A component passes its `ComponentOverrides`;
+ * plain overrides (`{ slots, variants, ... }`, plus `unstyled`) resolve with the
+ * default merger and no prefix.
+ */
+export const tv = /* @__PURE__ */ ((theme: Record<string, any>, overrides?: Record<string, any> | ComponentOverrides | null): Build => {
+  if (overrides instanceof ComponentOverrides) {
+    return overrides.engine(theme, overrides.entry as Record<string, any> | undefined, overrides.unstyled)
+  }
+  if (overrides?.unstyled) {
+    const { unstyled: _, ...rest } = overrides
+    return defaultEngine(theme, rest, true)
+  }
+  return defaultEngine(theme, overrides)
+}) as TV

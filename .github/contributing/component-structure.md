@@ -49,8 +49,7 @@ export interface ComponentNameSlots {
 // 6. Regular imports (separate from type imports)
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 
 // 7. Raw props (use withDefaults only when you actually need a runtime default)
@@ -65,7 +64,7 @@ const slots = defineSlots<ComponentNameSlots>()
 const props = useComponentProps('componentName', _props, theme)
 
 // 9. App config
-const appConfig = useAppConfig() as ComponentName['AppConfig']
+const appConfig = useThemeConfig() as ComponentName['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.componentName)
 
 // 10. Computed UI - always computed for reactivity
@@ -115,8 +114,7 @@ export interface CollapsibleSlots {
 import { computed } from 'vue'
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { tv } from '../utils/tv'
 
@@ -129,7 +127,7 @@ const slots = defineSlots<CollapsibleSlots>()
 // Theme-aware proxy. `props` deep-merges `ui` and resolves <UTheme :props> defaults.
 const props = useComponentProps('collapsible', _props, theme)
 
-const appConfig = useAppConfig() as Collapsible['AppConfig']
+const appConfig = useThemeConfig() as Collapsible['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.collapsible)
 
 // Pick from `props` (the proxy) so theme-supplied values flow through.
@@ -315,7 +313,7 @@ defineExpose({
 ```
 
 Notes:
-- Pass the component's `app.config.ui` entry to `tv()` through `useComponentOverrides(() => appConfig.ui?.<name>)`, never directly. It flags the overrides `unstyled` under `<UTheme unstyled>` (or `app.config.ui.unstyled`), and types them so variant values the app adds, a custom `color` for example, type-check in the `tv()` call.
+- Read the `ui` config through `useThemeConfig()`, never `useAppConfig()`: it comes from the nearest `<UTheme>`, which `<UApp>` provides at the root from `app.config.ui`. Pass the component's entry to `tv()` through `useComponentOverrides(() => appConfig.ui?.<name>)`, never directly. It flags the overrides `unstyled` under `<UTheme unstyled>` (or `app.config.ui.unstyled`), carries the engine for the app's merge config and Tailwind prefix, and types the overrides so variant values the app adds, a custom `color` for example, type-check in the `tv()` call.
 - The proxy passes through to `_props` for explicitly set props, so `withDefaults` fallbacks stay lower priority than `<UTheme>` overrides.
 - The `ui` prop is deep-merged (slot classes layered on top of theme overrides). All other props are explicit-wins.
 - **Always read props as `props.x` in templates and `<script setup>`.** Bare prop names (`{{ label }}`, `v-if="arrow"`) resolve to `_props` and bypass the proxy, so `<UTheme :props>` defaults won't apply. The `nuxt-ui/no-bare-prop-refs` ESLint rule autofixes this.

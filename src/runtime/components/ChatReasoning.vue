@@ -66,8 +66,7 @@ export interface ChatReasoningSlots {
 <script setup lang="ts">
 import { ref, computed, watch, onUnmounted, nextTick, useTemplateRef } from 'vue'
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { useScrollShadow } from '../composables/useScrollShadow'
 import { tv } from '../utils/tv'
@@ -88,7 +87,7 @@ defineSlots<ChatReasoningSlots>()
 const props = useComponentProps('chatReasoning', _props, theme)
 
 const { t, code } = useLocale()
-const appConfig = useAppConfig() as ChatReasoning['AppConfig']
+const appConfig = useThemeConfig() as ChatReasoning['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.chatReasoning)
 
 // eslint-disable-next-line vue/no-dupe-keys

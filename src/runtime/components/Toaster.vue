@@ -50,8 +50,7 @@ export default {
 import { ref, computed, toRef, provide } from 'vue'
 import { ToastProvider, ToastViewport, ToastPortal } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useToast, toastMaxInjectionKey } from '../composables/useToast'
 import { usePortal } from '../composables/usePortal'
@@ -71,7 +70,7 @@ defineSlots<ToasterSlots>()
 const props = useComponentProps('toaster', _props, theme)
 
 const { toasts, remove } = useToast()
-const appConfig = useAppConfig() as Toaster['AppConfig']
+const appConfig = useThemeConfig() as Toaster['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.toaster)
 
 provide(toastMaxInjectionKey, toRef(() => props.max))

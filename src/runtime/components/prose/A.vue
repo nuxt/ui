@@ -20,8 +20,7 @@ export interface ProseASlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 import ULink from '../Link.vue'
 
@@ -31,7 +30,7 @@ defineSlots<ProseASlots>()
 
 const props = useComponentProps('prose.a', _props, theme)
 
-const appConfig = useAppConfig() as ProseA['AppConfig']
+const appConfig = useThemeConfig() as ProseA['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.prose?.a)
 
 // eslint-disable-next-line vue/no-dupe-keys
