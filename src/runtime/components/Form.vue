@@ -131,7 +131,9 @@ provide(formStateInjectionKey, state)
 const nestedForms = ref<Map<string | number, { validate: typeof _validate, clearDirty: () => void, hasInput: (name: string) => boolean, name?: string, api: Form<any> }>>(new Map())
 
 function hasInput(name: string): boolean {
-  return !!inputs.value[name as keyof I] || Object.values(inputs.value as Record<string, { id?: string, pattern?: RegExp } | undefined>).some(input => input?.pattern?.test(name))
+  return !!ownerOf({ name, message: '' })
+    || !!inputs.value[name as keyof I]
+    || Object.values(inputs.value as Record<string, { id?: string, pattern?: RegExp } | undefined>).some(input => input?.pattern?.test(name))
 }
 
 onMounted(async () => {

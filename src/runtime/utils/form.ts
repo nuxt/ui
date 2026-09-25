@@ -90,7 +90,9 @@ export function getAtPath<T extends object>(
 }
 
 function isPlainObject(value: unknown): value is Record<string, any> {
-  return value !== null && typeof value === 'object' && !Array.isArray(value)
+  if (value === null || typeof value !== 'object') return false
+  const proto = Object.getPrototypeOf(value)
+  return proto === Object.prototype || proto === null
 }
 
 /**
@@ -102,7 +104,7 @@ export function mergeAtPath<T>(data: T, path: string | undefined, value: any): T
   }
 
   const [key, ...rest] = path.split('.') as [string, ...string[]]
-  const copy: any = Array.isArray(data) ? [...data] : { ...data }
+  const copy: any = Array.isArray(data) ? [...data] : data == null && /^\d+$/.test(key) ? [] : { ...data }
   copy[key] = mergeAtPath(copy[key], rest.join('.'), value)
   return copy
 }

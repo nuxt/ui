@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { getAtPath, setAtPath } from '../../src/runtime/utils/form'
+import { getAtPath, setAtPath, mergeAtPath } from '../../src/runtime/utils/form'
 
 describe('form utils', () => {
   describe('getAtPath', () => {
@@ -96,6 +96,24 @@ describe('form utils', () => {
       const obj: any = {}
       const result = setAtPath(obj, 'foo.bar', 'baz')
       expect(result).toBe(obj)
+    })
+  })
+
+  describe('mergeAtPath', () => {
+    it('merges into a copy without mutating data', () => {
+      const obj: any = { foo: { bar: 'baz', other: 1 } }
+      const result = mergeAtPath(obj, 'foo', { bar: 'new' })
+      expect(result).toEqual({ foo: { bar: 'new', other: 1 } })
+      expect(obj).toEqual({ foo: { bar: 'baz', other: 1 } })
+    })
+
+    it('creates arrays for numeric keys', () => {
+      expect(mergeAtPath({ customer: 'Wonka' }, 'items.0', { price: 1 })).toEqual({ customer: 'Wonka', items: [{ price: 1 }] })
+    })
+
+    it('replaces values that are not plain objects', () => {
+      const date = new Date()
+      expect(mergeAtPath({ foo: { bar: 1 } }, 'foo', date).foo).toBe(date)
     })
   })
 })

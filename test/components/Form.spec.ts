@@ -484,13 +484,23 @@ describe('Form', () => {
       expect(onError).toHaveBeenCalledTimes(0)
     })
 
+    it('routes errors through unnamed nested forms', async () => {
+      const wrapper: any = await renderForm({ fixture: 'FormNestedDeep' })
+      await flushPromises()
+
+      wrapper.setupState.form.value.setErrors([{ name: 'address.street', message: 'Server error' }])
+      await nextTick()
+
+      expect(wrapper.find('#streetField').text()).toContain('Server error')
+    })
+
     it('passes disabled down to nested forms', async () => {
       const wrapper: any = await renderForm({ fixture: 'FormNested', props: { disabled: true } })
 
       expect(wrapper.find('#nested').attributes('disabled')).toBeDefined()
     })
 
-    it('passes the loading state down to nested forms', async () => {
+    it('disables nested fields while the parent submits', async () => {
       let resolve!: () => void
       const wrapper: any = await renderForm({
         fixture: 'FormNested',
