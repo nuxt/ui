@@ -372,11 +372,9 @@ const dataSlotNamespace = {
           }
 
           const template = context.sourceCode.getText()
-          // Every slot the component reads, `:class` or not: `linkLeadingChipSize`
-          // sizes the child labelled `linkLeadingChip`, which has no classes.
+          // Every slot the component reads, `:class` or not
           const rendered = [...template.matchAll(SLOT_CALL)].map(match => match[1])
-          const named = rendered.flatMap(slot => slot.endsWith('Size') ? [slot, slot.slice(0, -4)] : [slot])
-          const valid = new Set([namespace, ...named.map(slot => `${namespace}-${slot}`)])
+          const valid = new Set([namespace, ...rendered.map(slot => `${namespace}-${slot}`)])
 
           // The outermost element is the `root` slot, or the `base` that
           // `props.class` lands on when there is none. Overlays have neither:

@@ -4,7 +4,6 @@ import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/button'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { LinkProps } from './Link.vue'
-import type { AvatarProps } from './Avatar.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type Button = ComponentConfig<typeof theme, AppConfig, 'button'>
@@ -53,6 +52,7 @@ import { useFieldGroup } from '../composables/useFieldGroup'
 import { formLoadingInjectionKey } from '../composables/useFormField'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
+import { getAvatarSize } from '../utils/size'
 import { pickLinkProps } from '../utils/link'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
@@ -107,6 +107,8 @@ const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponen
   }))
 )
 
+const avatarSize = computed(() => getAvatarSize(buttonSize.value ?? props.size))
+
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
   color: props.color,
@@ -142,7 +144,7 @@ const ui = computed(() => tv(theme, overrides.value)({
     >
       <slot name="leading" :ui="ui">
         <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="button-leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon, active })" />
-        <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="button-leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar, active })" />
+        <UAvatar v-else-if="!!props.avatar" :size="avatarSize" v-bind="props.avatar" data-slot="button-leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar, active })" />
       </slot>
 
       <slot :ui="ui">
