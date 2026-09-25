@@ -1,14 +1,12 @@
+import { colorVariant } from './color'
+
 export default {
   slots: {
     root: 'relative inline-flex items-center justify-center shrink-0',
     base: 'rounded-full ring ring-bg flex items-center justify-center text-accent-foreground font-medium whitespace-nowrap bg-accent'
   },
   variants: {
-    color: {
-      '*': {
-        base: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
+    color: colorVariant({ base: '' }),
     size: {
       '3xs': { base: 'h-[4px] min-w-[4px] text-[4px]' },
       '2xs': { base: 'h-[5px] min-w-[5px] text-[5px]' },

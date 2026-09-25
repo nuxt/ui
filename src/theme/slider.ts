@@ -1,3 +1,5 @@
+import { colorVariant } from './color'
+
 export default {
   slots: {
     root: 'relative flex items-center select-none touch-none',
@@ -6,12 +8,7 @@ export default {
     thumb: 'rounded-full bg-default ring-2 focus-visible:outline-3 focus-visible:outline-offset-2 ring-accent outline-accent-focus'
   },
   variants: {
-    color: {
-      '*': {
-        range: '[--ui-accent:var(--ui-{value})]',
-        thumb: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
+    color: colorVariant({ range: '', thumb: '' }),
     size: {
       xs: {
         thumb: 'size-3'

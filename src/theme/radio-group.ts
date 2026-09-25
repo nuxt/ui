@@ -1,3 +1,4 @@
+import { colorVariant } from './color'
 import { focusCard, focusControl, hover } from './checkbox'
 
 export default {
@@ -15,13 +16,7 @@ export default {
     description: 'text-muted'
   },
   variants: {
-    color: {
-      '*': {
-        indicator: '[--ui-accent:var(--ui-{value})]',
-        base: '[--ui-accent:var(--ui-{value})]',
-        item: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
+    color: colorVariant({ indicator: '', base: '', item: '' }),
     variant: {
       list: {
         fieldset: 'flex-wrap',

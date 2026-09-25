@@ -1,3 +1,5 @@
+import { colorVariant } from './color'
+
 export default {
   slots: {
     root: 'inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-accent-soft',
@@ -6,13 +8,7 @@ export default {
     icon: 'shrink-0 text-accent-muted'
   },
   variants: {
-    color: {
-      '*': {
-        root: '[--ui-accent:var(--ui-{value})]',
-        fallback: '[--ui-accent:var(--ui-{value})]',
-        icon: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
+    color: colorVariant({ root: '', fallback: '', icon: '' }),
     size: {
       '3xs': {
         root: 'size-4 text-[8px]'

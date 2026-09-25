@@ -88,18 +88,19 @@ Available color palettes:
 
 ### Extending with new semantic color names
 
-To add a color beyond the 7 defaults (e.g., `tertiary`), register it in `theme.colors`:
+The `color` prop only accepts the 7 defaults. To add another color (e.g., `tertiary`), declare it in CSS and bridge it to Tailwind:
 
-```ts
-// nuxt.config.ts
-export default defineNuxtConfig({
-  ui: {
-    theme: {
-      colors: ['primary', 'secondary', 'tertiary', 'info', 'success', 'warning', 'error']
-    }
-  }
-})
+```css
+/* main.css */
+@theme inline {
+  --color-tertiary: var(--ui-tertiary);
+}
+
+:root { --ui-tertiary: var(--color-indigo-500); }
+.dark { --ui-tertiary: var(--color-indigo-400); }
 ```
+
+Apply it to a component through `--ui-accent`, not the `color` prop: `<UButton class="[--ui-accent:var(--ui-tertiary)]" />`. Set it on the root of a Button or a Badge, on a slot through `ui` otherwise.
 
 ## Semantic utility classes
 

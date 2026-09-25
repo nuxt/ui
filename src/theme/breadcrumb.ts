@@ -1,3 +1,5 @@
+import { colorVariant } from './color'
+
 export default {
   slots: {
     root: 'relative min-w-0',
@@ -28,9 +30,7 @@ export default {
     to: {
       true: ''
     },
-    color: {
-      '*': { link: '[--ui-accent:var(--ui-{value})]' }
-    }
+    color: colorVariant({ link: '' })
   },
   compoundVariants: [{
     disabled: false,

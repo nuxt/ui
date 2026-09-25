@@ -1,3 +1,5 @@
+import { colorVariant } from './color'
+
 export default {
   slots: {
     root: 'relative z-50 w-full transition-colors bg-accent',
@@ -11,11 +13,7 @@ export default {
     close: 'text-inverted hover:bg-default/10 focus-visible:bg-default/10 -me-1.5 lg:me-0'
   },
   variants: {
-    color: {
-      '*': {
-        root: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
+    color: colorVariant({ root: '' }),
     to: {
       true: {
         root: 'outline-(--ui-bg)/25 -outline-offset-3 has-[>a:focus-visible]:outline-3 hover:bg-accent-hover'

@@ -6,9 +6,10 @@ import { addTemplate, addTypeTemplate, hasNuxtModule, logger, updateTemplates, g
 import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
 import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
-import { applyDefaultVariants, applyPrefixToObject, applyUnstyled, expandColorVariants } from './utils/theme'
+import { applyDefaultVariants, applyPrefixToObject, applyUnstyled } from './utils/theme'
 import { detectUsedComponents } from './utils/components'
 import * as theme from './theme'
+import { colors as aliases } from './theme/color'
 import * as themeProse from './theme/prose'
 import * as themeContent from './theme/content'
 
@@ -58,8 +59,6 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
           const unused = path !== 'prose' && !!vue?.detectedComponents?.size
             && !Array.from(vue.detectedComponents).some(detected => camelCase(detected) === component)
 
-          // Expand `'*'` color variants into one entry per alias
-          result = expandColorVariants(result, [...(options.theme?.colors || []), 'neutral'])
           // Override default variants from nuxt.config.ts
           result = applyDefaultVariants(result, options.theme?.defaultVariants)
           // Strip default theme classes if `unstyled` is enabled
@@ -101,11 +100,10 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
 
             return [
               `import template from ${JSON.stringify(templatePath)}`,
-              `import { applyDefaultVariants, applyPrefixToObject, applyUnstyled, expandColorVariants } from ${JSON.stringify(themeUtilsPath)}`,
+              `import { applyDefaultVariants, applyPrefixToObject, applyUnstyled } from ${JSON.stringify(themeUtilsPath)}`,
               ...generateVariantDeclarations(variants),
               `const options = ${JSON.stringify(options, null, 2)}`,
               `let result = typeof template === 'function' ? (template as Function)(options) : template`,
-              `result = expandColorVariants(result, ${JSON.stringify([...(options.theme?.colors || []), 'neutral'])})`,
               `result = applyDefaultVariants(result, ${defaultVariantsJson})`,
               `result = applyUnstyled(result, ${unstyledJson})`,
               `result = applyPrefixToObject(result, ${prefixJson})`,
@@ -248,9 +246,8 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
 }
 
 @theme default inline {
-  ${[...(options.theme?.colors || []).filter(color => !colors[color as keyof typeof colors]), 'neutral'].map(color => [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map(shade => `--color-${color}-${shade}: var(--ui-color-${color}-${shade});`).join('\n\t')).join('\n\t')}
-  ${options.theme?.colors?.map(color => `--color-${color}: var(--ui-${color});`).join('\n\t')}
-  --color-neutral: var(--ui-neutral);
+  ${aliases.map(color => [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map(shade => `--color-${color}-${shade}: var(--ui-color-${color}-${shade});`).join('\n\t')).join('\n\t')}
+  ${aliases.map(color => `--color-${color}: var(--ui-${color});`).join('\n\t')}
   --color-accent: var(--ui-accent);
   --color-accent-foreground: var(--ui-accent-foreground, var(--ui-text-inverted));
   --color-accent-hover: var(--ui-accent-hover, color-mix(in oklab, var(--ui-accent) 75%, transparent));
@@ -390,7 +387,7 @@ type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' 
 
 type AppConfigUI = {
   colors?: {
-    ${options.theme?.colors?.map(color => `'${color}'?: Color`).join('\n\t\t')}
+    ${aliases.filter(color => color !== 'neutral').map(color => `'${color}'?: Color`).join('\n\t\t')}
     neutral?: NeutralColor | (string & {})
   }
   icons?: Partial<IconsConfig>

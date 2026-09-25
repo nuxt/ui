@@ -4,7 +4,7 @@ import { createUnplugin } from 'unplugin'
 import type { HookResult, ModuleDependencies } from '@nuxt/schema'
 import { addTemplates } from './templates'
 import { publicComposables } from './imports'
-import { defaultOptions, getDefaultConfig, resolveColors } from './utils/defaults'
+import { defaultOptions, getDefaultConfig } from './utils/defaults'
 import { getClientBundleIcons } from './utils/icons'
 import OptionalDepsPlugin from './plugins/optional-deps'
 import { name, version } from '../package.json'
@@ -41,13 +41,6 @@ export interface ModuleOptions {
    * @see https://ui.nuxt.com/docs/getting-started/theme/design-system
    */
   theme?: {
-    /**
-     * Define the color aliases available for components
-     * @defaultValue `['primary', 'secondary', 'success', 'info', 'warning', 'error']`
-     * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#themecolors
-     */
-    colors?: Color[]
-
     /**
      * Remove all default theme classes from components, keeping only their
      * structure and the classes you supply via `class`, `ui` or `app.config.ui`.
@@ -209,7 +202,6 @@ export default defineNuxtModule<ModuleOptions>({
     const { resolve } = createResolver(import.meta.url)
 
     options.theme = options.theme || {}
-    options.theme.colors = resolveColors(options.theme.colors)
 
     nuxt.options.ui = options
 

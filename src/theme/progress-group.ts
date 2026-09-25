@@ -1,3 +1,5 @@
+import { colorVariant } from './color'
+
 export default {
   slots: {
     root: 'gap-2',
@@ -13,13 +15,7 @@ export default {
     itemTrailing: 'ms-auto shrink-0 text-dimmed'
   },
   variants: {
-    color: {
-      '*': {
-        indicator: 'bg-accent [--ui-accent:var(--ui-{value})]',
-        itemLeadingIcon: 'text-accent [--ui-accent:var(--ui-{value})]',
-        itemLeadingDot: 'bg-accent [--ui-accent:var(--ui-{value})]'
-      }
-    },
+    color: colorVariant({ indicator: 'bg-accent', itemLeadingIcon: 'text-accent', itemLeadingDot: 'bg-accent' }),
     size: {
       '2xs': {
         status: 'text-xs',

@@ -2,9 +2,9 @@ import { describe, it, expect } from 'vitest'
 import * as theme from '../../src/theme'
 import * as themeProse from '../../src/theme/prose'
 import * as themeContent from '../../src/theme/content'
-import { defaultOptions, resolveColors } from '../../src/utils/defaults'
+import { defaultOptions } from '../../src/utils/defaults'
 
-const options = { ...defaultOptions, theme: { ...defaultOptions.theme, colors: resolveColors(undefined) } }
+const options = { ...defaultOptions, theme: { ...defaultOptions.theme } }
 
 const isObject = (value: unknown): value is Record<string, unknown> => !!value && typeof value === 'object' && !Array.isArray(value)
 

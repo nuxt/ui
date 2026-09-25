@@ -1,3 +1,5 @@
+import { colorVariant } from './color'
+
 export default {
   slots: {
     root: 'relative flex items-start',
@@ -10,12 +12,7 @@ export default {
     description: 'text-muted'
   },
   variants: {
-    color: {
-      '*': {
-        base: '[--ui-accent:var(--ui-{value})]',
-        icon: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
+    color: colorVariant({ base: '', icon: '' }),
     size: {
       xs: {
         base: 'w-7',

@@ -1,3 +1,5 @@
+import { colorVariant, spotlightColorVariant } from './color'
+
 export default {
   slots: {
     root: 'relative flex rounded-lg',
@@ -67,21 +69,13 @@ export default {
         root: 'ring-2 ring-accent'
       }
     },
-    highlightColor: {
-      '*': {
-        root: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
+    highlightColor: colorVariant({ root: '' }),
     spotlight: {
       true: {
         root: '[--spotlight-size:400px] before:absolute before:-inset-px before:pointer-events-none before:rounded-[inherit] before:bg-[radial-gradient(var(--spotlight-size)_var(--spotlight-size)_at_calc(var(--spotlight-x,0px))_calc(var(--spotlight-y,0px)),var(--spotlight-color),transparent_70%)]'
       }
     },
-    spotlightColor: {
-      '*': {
-        root: '[--spotlight-color:var(--ui-{value})]'
-      }
-    }
+    spotlightColor: spotlightColorVariant({ root: '' })
   },
   compoundVariants: [{
     variant: 'solid',

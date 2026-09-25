@@ -1,3 +1,4 @@
+import { colorVariant } from './color'
 import { fieldGroupVariant } from './field-group'
 
 export default {
@@ -11,11 +12,7 @@ export default {
   },
   variants: {
     ...fieldGroupVariant,
-    color: {
-      '*': {
-        base: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
+    color: colorVariant({ base: '' }),
     variant: {
       solid: {
         base: 'bg-accent text-accent-foreground'

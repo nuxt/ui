@@ -12,7 +12,7 @@ import type { ModuleOptions as NuxtIconModuleOptions, RuntimeOptions } from '@nu
 
 import type * as ui from '#build/ui'
 
-import { defaultOptions, getDefaultConfig, resolveColors } from './utils/defaults'
+import { defaultOptions, getDefaultConfig } from './utils/defaults'
 import type { ModuleOptions } from './module'
 import type icons from './theme/icons'
 
@@ -31,7 +31,6 @@ type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone' | 'taupe' | 
 type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
 
 type AppConfigUI = {
-  // TODO: add type hinting for colors from `options.theme.colors`
   colors?: Record<string, Color> & { neutral?: NeutralColor }
   icons?: Partial<typeof icons>
   prefix?: string
@@ -106,7 +105,6 @@ export const NuxtUIPlugin = createUnplugin<NuxtUIOptions | undefined>((_options 
   const options = defu(_options, { fonts: false }, defaultOptions)
 
   options.theme = options.theme || {}
-  options.theme.colors = resolveColors(options.theme.colors)
 
   // `clientBundle` is a build-time concern, so keep it out of the runtime app config.
   const { clientBundle, ...icon } = options.icon || {}

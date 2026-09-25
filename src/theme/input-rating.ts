@@ -1,3 +1,5 @@
+import { colorVariant } from './color'
+
 export default {
   slots: {
     root: '',
@@ -37,12 +39,7 @@ export default {
         icon: 'size-7'
       }
     },
-    color: {
-      '*': {
-        indicator: '[--ui-accent:var(--ui-{value})]',
-        item: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
+    color: colorVariant({ indicator: '', item: '' }),
     readonly: {
       true: {
         root: 'cursor-default',

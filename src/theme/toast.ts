@@ -1,3 +1,5 @@
+import { colorVariant } from './color'
+
 export default {
   slots: {
     root: 'relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent',
@@ -12,12 +14,7 @@ export default {
     close: 'p-0'
   },
   variants: {
-    color: {
-      '*': {
-        root: '[--ui-accent:var(--ui-{value})]',
-        icon: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
+    color: colorVariant({ root: '', icon: '' }),
     orientation: {
       horizontal: {
         root: 'items-center',

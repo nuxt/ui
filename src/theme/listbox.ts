@@ -1,3 +1,5 @@
+import { colorVariant } from './color'
+
 export default {
   slots: {
     root: 'flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-accent-focus has-focus-visible:outline-3 has-focus-visible:ring-accent',
@@ -85,11 +87,7 @@ export default {
         itemDescription: 'text-sm'
       }
     },
-    color: {
-      '*': {
-        root: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
+    color: colorVariant({ root: '' }),
     virtualize: {
       true: {
         content: 'p-1 isolate'

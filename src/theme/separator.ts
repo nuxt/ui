@@ -1,3 +1,5 @@
+import { colorVariant } from './color'
+
 export default {
   slots: {
     root: 'flex items-center align-center text-center',
@@ -9,9 +11,7 @@ export default {
     label: 'text-sm'
   },
   variants: {
-    color: {
-      '*': { border: '[--ui-accent:var(--ui-{value})]' }
-    },
+    color: colorVariant({ border: '' }),
     orientation: {
       horizontal: {
         root: 'w-full flex-row',

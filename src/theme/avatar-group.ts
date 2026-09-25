@@ -1,3 +1,5 @@
+import { colorVariant } from './color'
+
 export default {
   slots: {
     root: 'inline-flex flex-row-reverse justify-end',
@@ -33,9 +35,7 @@ export default {
         base: 'ring-3 -me-2'
       }
     },
-    color: {
-      '*': ''
-    }
+    color: colorVariant({})
   },
   defaultVariants: {
     size: 'md',

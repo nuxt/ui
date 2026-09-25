@@ -1,3 +1,5 @@
+import { colorVariant } from './color'
+
 export default {
   slots: {
     root: 'relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5',
@@ -11,11 +13,7 @@ export default {
     close: 'p-0'
   },
   variants: {
-    color: {
-      '*': {
-        root: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
+    color: colorVariant({ root: '' }),
     variant: {
       solid: {
         root: 'bg-accent text-accent-foreground'
