@@ -5,6 +5,7 @@ packages:
   - playgrounds/nuxt
   - playgrounds/vue
   - playgrounds/repl
+  - test/bundle/*
 
 ignoreWorkspaceRootCheck: true
 

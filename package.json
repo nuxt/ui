@@ -125,6 +125,7 @@
     "test:vue": "vitest --project vue",
     "test:nuxt": "vitest --project nuxt",
     "bench": "vitest bench --project vue",
+    "size": "node test/bundle/size.mjs",
     "release": "release-it"
   },
   "dependencies": {

@@ -1,0 +1,163 @@
+name: bundle-size-comment
+
+on:
+  workflow_run:
+    workflows:
+      - bundle-size
+    types:
+      - completed
+
+permissions:
+  actions: read
+  contents: read
+  pull-requests: write
+
+jobs:
+  comment:
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'pull_request'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Resolve report artifact
+        id: artifact
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const run = context.payload.workflow_run
+
+            const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: run.id,
+              per_page: 100
+            })
+            const matches = artifacts.filter(artifact => artifact.name === 'bundle-size-report' && !artifact.expired)
+
+            if (matches.length !== 1 || matches[0].size_in_bytes > 1024 * 1024) {
+              core.setFailed('Expected exactly one bundle size report under 1 MB.')
+              return
+            }
+
+            core.setOutput('id', String(matches[0].id))
+
+      # Everything in this artifact comes from the untrusted pull request and is validated before use
+      - name: Download report
+        uses: actions/download-artifact@v8
+        with:
+          artifact-ids: ${{ steps.artifact.outputs.id }}
+          path: ${{ runner.temp }}/bundle-size
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Resolve pull request
+        id: pull
+        uses: actions/github-script@v9
+        env:
+          REPORT_DIR: ${{ runner.temp }}/bundle-size
+        with:
+          script: |
+            const fs = require('node:fs')
+            const path = require('node:path')
+            const run = context.payload.workflow_run
+            const dir = process.env.REPORT_DIR
+
+            core.setOutput('should-comment', 'false')
+
+            const files = fs.readdirSync(dir).sort()
+            if (files.join() !== 'base.json,context.json,pr.json' || files.some(file => !fs.lstatSync(path.join(dir, file)).isFile())) {
+              core.setFailed('The report artifact contains unexpected files.')
+              return
+            }
+
+            const { prNumber, ...rest } = JSON.parse(fs.readFileSync(path.join(dir, 'context.json'), 'utf8'))
+            if (Object.keys(rest).length || !Number.isSafeInteger(prNumber) || prNumber <= 0) {
+              core.setFailed('The report context contains an invalid pull request number.')
+              return
+            }
+
+            const candidates = run.pull_requests || []
+            if (candidates.length > 1 || (candidates.length === 1 && candidates[0].number !== prNumber)) {
+              core.setFailed('The report context does not match the workflow payload.')
+              return
+            }
+
+            const { data: pull } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: prNumber
+            })
+
+            if (pull.state !== 'open' || pull.head.sha !== run.head_sha) {
+              core.info(`Skipping stale or closed PR #${prNumber}.`)
+              return
+            }
+
+            if (pull.head.repo?.id !== run.head_repository.id) {
+              core.setFailed('The pull request head repository does not match the triggering workflow.')
+              return
+            }
+
+            if (pull.base.repo.id !== context.payload.repository.id || !['v4', 'v5'].includes(pull.base.ref)) {
+              core.setFailed('The pull request does not target a release branch.')
+              return
+            }
+
+            core.setOutput('should-comment', 'true')
+            core.setOutput('number', String(prNumber))
+
+      - name: Checkout
+        if: steps.pull.outputs.should-comment == 'true'
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          ref: ${{ github.sha }}
+
+      - name: Install node
+        if: steps.pull.outputs.should-comment == 'true'
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Render report
+        if: steps.pull.outputs.should-comment == 'true'
+        id: report
+        run: node test/bundle/compare.mjs --base "$RUNNER_TEMP/bundle-size/base.json" --head "$RUNNER_TEMP/bundle-size/pr.json" --output "$RUNNER_TEMP/bundle-size.md"
+
+      - name: Update comment
+        if: steps.pull.outputs.should-comment == 'true'
+        uses: actions/github-script@v9
+        env:
+          CHANGED: ${{ steps.report.outputs.changed }}
+          PR_NUMBER: ${{ steps.pull.outputs.number }}
+        with:
+          script: |
+            const fs = require('node:fs')
+            const marker = '<!-- bundle-size -->'
+            const issue_number = Number(process.env.PR_NUMBER)
+            const body = `${marker}\n${fs.readFileSync(`${process.env.RUNNER_TEMP}/bundle-size.md`, 'utf8')}`
+
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number,
+              per_page: 100
+            })
+            const previous = comments.find(comment => comment.user?.login === 'github-actions[bot]' && comment.body?.includes(marker))
+
+            if (previous) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: previous.id,
+                body
+              })
+            } else if (process.env.CHANGED === 'true') {
+              // Only start commenting once a pull request changes the bundle size
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number,
+                body
+              })
+            }
