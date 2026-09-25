@@ -420,6 +420,67 @@ describe('Form', () => {
 
       expect(form.dirty).toBe(true)
     })
+
+    it('validate with name ignores errors on other fields', async () => {
+      await form.submit()
+      state.email = 'bob@dylan.com'
+
+      await expect(form.validate({ name: 'email' })).resolves.toBeTruthy()
+      expect(await form.validate({ name: 'email', silent: true })).not.toBe(false)
+      expect(form.errors).toMatchObject([{ name: 'password' }])
+    })
+  })
+
+  describe('validation timing', () => {
+    const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
+
+    it('stays clean when submit beats the input debounce', async () => {
+      const wrapper: any = await renderForm({ fixture: 'FormBasic', props: { validateOnInputDelay: 50, onSubmit: vi.fn() } })
+      const form = wrapper.setupState.form.value
+
+      await wrapper.find('#email').setValue('bob@dylan.com')
+      expect(form.dirty).toBe(true)
+
+      await form.submit()
+      await wait(60)
+
+      expect(form.dirty).toBe(false)
+    })
+
+    it('ignores input typed before clear', async () => {
+      const wrapper: any = await renderForm({
+        fixture: 'FormBasic',
+        props: { validateOnInputDelay: 50, schema: z.object({ email: z.email(), password: z.string().optional() }) }
+      })
+      const form = wrapper.setupState.form.value
+      const email = wrapper.find('#email')
+
+      await email.trigger('blur')
+      await email.setValue('not-an-email')
+      wrapper.setupState.state.email = undefined
+      form.clear()
+      await wait(60)
+
+      expect(form.errors).toEqual([])
+    })
+
+    it('drops an older validation that finishes last', async () => {
+      const validate = async ({ email }: any) => {
+        await wait(email === 'bad' ? 40 : 0)
+        return email === 'bad' ? [{ name: 'email', message: 'Bad' }] : []
+      }
+      const wrapper: any = await renderForm({ fixture: 'FormBasic', props: { validate } })
+      const form = wrapper.setupState.form.value
+      const email = wrapper.find('#email')
+
+      await email.setValue('bad')
+      await email.trigger('change')
+      await email.setValue('good')
+      await email.trigger('change')
+      await wait(50)
+
+      expect(form.errors).toEqual([])
+    })
   })
 
   describe('nested', async () => {
