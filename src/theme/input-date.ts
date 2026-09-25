@@ -1,5 +1,6 @@
 import { defuFn } from 'defu'
 import input from './input'
+import { colorVariant } from './color'
 import { fieldGroupVariant } from './field-group'
 
 export default defuFn({
@@ -11,6 +12,8 @@ export default defuFn({
   },
   variants: {
     ...fieldGroupVariant,
+    // No `root` slot here, so the color scopes `base`
+    color: () => colorVariant({ base: '' }),
     size: {
       xs: {
         base: (prev: string) => [prev, 'gap-0.25'],

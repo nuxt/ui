@@ -1,5 +1,6 @@
 import { defuFn } from 'defu'
 import input from './input'
+import { colorVariant } from './color'
 import { fieldGroupVariant } from './field-group'
 
 export default defuFn({
@@ -29,6 +30,8 @@ export default defuFn({
   },
   variants: {
     ...fieldGroupVariant,
+    // No `root` slot here, so the color scopes `base`
+    color: () => colorVariant({ base: '' }),
     variant: (prev: Record<string, { base: string }>) => ({
       ...prev,
       outline: {

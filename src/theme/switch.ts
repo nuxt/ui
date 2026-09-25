@@ -12,7 +12,7 @@ export default {
     description: 'text-muted'
   },
   variants: {
-    color: colorVariant({ base: '', icon: '' }),
+    color: colorVariant({ root: '' }),
     size: {
       xs: {
         base: 'w-7',

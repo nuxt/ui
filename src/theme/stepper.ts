@@ -69,7 +69,7 @@ export default {
       }
     },
 
-    color: colorVariant({ trigger: '', separator: '' })
+    color: colorVariant({ root: '' })
   },
 
   compoundVariants: [{

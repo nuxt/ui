@@ -533,7 +533,8 @@ describe('Theme', () => {
       `
     })
 
-    expect(wrapper.find('button[role="checkbox"]').classes()).toEqual(expect.arrayContaining(['[--ui-accent:var(--ui-primary)]', 'ring-accent']))
+    expect(wrapper.find('[data-slot="checkbox"]').classes()).toContain('[--ui-accent:var(--ui-primary)]')
+    expect(wrapper.find('button[role="checkbox"]').classes()).toContain('ring-accent')
     expect(wrapper.find('button[role="checkbox"]').classes()).not.toContain('ring-accented')
   })
 

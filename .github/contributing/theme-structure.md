@@ -85,9 +85,9 @@ export default {
 }
 ```
 
-Scope the slot that carries the color, usually the root. A slot rendered as another component with its own `color` (an Avatar, a Button) takes the color through that prop instead. `neutral` needs no entry of its own: it sets the accent roles to the surface tokens, so the same classes render the neutral look.
+Scope the root slot, so a `[--ui-accent:…]` class on the component reaches all of it, and don't scope a slot inside it again. Scope an inner slot only when its color differs from the root's: a per-item color, a slot rendered as another component with its own color (Timeline's indicator is an Avatar), or a part rendered in a portal. A theme that extends another and drops its `root` slot scopes its own outer slot (`color: () => colorVariant({ base: '' })` in Select). `neutral` needs no entry of its own: it sets the accent roles to the surface tokens, so the same classes render the neutral look.
 
-Pass the classes a color adds next to its scope when it needs any: `colorVariant({ base: '', icon: 'text-accent' })`. A component whose neutral is a different design, not a neutral version of the colored one, overrides that entry: `{ ...colorVariant({ base: '...' }), neutral: { base: '...' } }`.
+Every slot passed to `colorVariant` gets the scope, so put the classes the colors share in `slots`. A component whose neutral is a different design, not a neutral version of the colored one, overrides the `neutral` entry, which replaces those classes: `{ ...colorVariant({ base: '' }), neutral: { base: '...', icon: '...' } }`.
 
 For a second color on the same element, use `highlightColorVariant` (sets `--ui-highlight`) or `spotlightColorVariant` (sets `--spotlight-color`). A compound that still has to match colors lists them with `colors` from the same file, never with a template string: `color: colors.filter(color => color !== 'neutral')`.
 

@@ -13,10 +13,11 @@ import { colors as aliases } from './theme/color'
 import * as themeProse from './theme/prose'
 import * as themeContent from './theme/content'
 
-// The accent roles every color resolves through; unset, a role falls back to its recipe
+// The accent roles every color resolves through. A color scope points each one at
+// `--ui-<color>-<role>`, and a role left unset falls back to its recipe on the color.
 const ACCENT_ROLES = ['foreground', 'hover', 'soft', 'soft-hover', 'soft-foreground', 'soft-active', 'border', 'border-soft', 'focus', 'surface', 'muted', 'muted-hover', 'line', 'tint', 'faint', 'border-muted', 'border-strong']
 
-// Neutral keeps the surface tokens it has always used
+// Neutral's roles default to the surface tokens it has always used
 const NEUTRAL_ROLES: Record<string, string> = {
   'hover': 'color-mix(in oklab, var(--ui-bg-inverted) 90%, transparent)',
   'soft': 'var(--ui-bg-elevated)',
@@ -330,18 +331,17 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     @apply ${prefix}antialiased ${prefix}text-default ${prefix}bg-default ${prefix}scheme-light ${prefix}dark:scheme-dark;
   }
 
-  /* A color scope (\`[--ui-accent:var(--ui-<alias>)]\`) resets the accent roles, so a
-     colored component nested in another doesn't inherit them, and every role falls
-     back to its recipe on the color. */
+  /* Any \`--ui-accent\` scope resets the accent roles, so a colored component nested
+     in another doesn't inherit them and every role falls back to its recipe. */
   [class*="[--ui-accent:"] {
     ${ACCENT_ROLES.map(role => `--ui-accent-${role}: initial;`).join('\n    ')}
   }
 
-  /* Neutral points its roles at the surface tokens instead of the recipes. Matched
-     as a whole class, so a state-prefixed neutral scope doesn't apply them. */
-  [class~="${prefix}[--ui-accent:var(--ui-neutral)]"] {
-    ${Object.entries(NEUTRAL_ROLES).map(([role, value]) => `--ui-accent-${role}: ${value};`).join('\n    ')}
-  }
+  /* A color's scope reads its roles from \`--ui-<color>-<role>\`. An unset variable
+     leaves the role unset, so it keeps its recipe, or for neutral its surface token. */
+  ${aliases.map(color => `[class~="${prefix}[--ui-accent:var(--ui-${color})]"] {
+    ${ACCENT_ROLES.map(role => `--ui-accent-${role}: var(--ui-${color}-${role}${color === 'neutral' && NEUTRAL_ROLES[role] ? `, ${NEUTRAL_ROLES[role]}` : ''});`).join('\n    ')}
+  }`).join('\n\n  ')}
 }
 
 ${themeBlocks}`

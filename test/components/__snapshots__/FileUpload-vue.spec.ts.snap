@@ -1,10 +1,10 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`FileUpload > renders with accept correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -15,10 +15,10 @@ exports[`FileUpload > renders with accept correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with actions slot correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <div data-slot="file-upload-actions" class="flex flex-wrap gap-1.5 shrink-0 mt-4">Actions slot</div>
@@ -36,10 +36,10 @@ exports[`FileUpload > renders with actions slot correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with ariaLabel correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -50,10 +50,10 @@ exports[`FileUpload > renders with ariaLabel correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with as correctly 1`] = `
-"<section data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<section data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -64,10 +64,10 @@ exports[`FileUpload > renders with as correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with class correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col w-full gap-4">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)] w-full gap-4">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -77,13 +77,13 @@ exports[`FileUpload > renders with class correctly 1`] = `
 </div>"
 `;
 
-exports[`FileUpload > renders with default slot correctly 1`] = `"<div data-slot="file-upload" class="relative flex flex-col">Default slot<input aria-hidden="true" data-hidden="" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;" type="file" accept="*"></div>"`;
+exports[`FileUpload > renders with default slot correctly 1`] = `"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">Default slot<input aria-hidden="true" data-hidden="" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;" type="file" accept="*"></div>"`;
 
 exports[`FileUpload > renders with description correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <div data-slot="file-upload-description" class="text-muted mt-1">SVG, PNG, JPG or GIF (max. 2MB)</div>
       <!--v-if-->
@@ -94,10 +94,10 @@ exports[`FileUpload > renders with description correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with description slot correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <div data-slot="file-upload-description" class="text-muted mt-1">Description slot</div>
       <!--v-if-->
@@ -115,10 +115,10 @@ exports[`FileUpload > renders with description slot correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with disabled correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" aria-disabled="true" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 cursor-not-allowed opacity-75" tabindex="-1">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" aria-disabled="true" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 cursor-not-allowed opacity-75" tabindex="-1">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -129,10 +129,10 @@ exports[`FileUpload > renders with disabled correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with disabled correctly 2`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" aria-disabled="true" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 cursor-not-allowed opacity-75" tabindex="-1">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" aria-disabled="true" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 cursor-not-allowed opacity-75" tabindex="-1">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -143,7 +143,7 @@ exports[`FileUpload > renders with disabled correctly 2`] = `
 `;
 
 exports[`FileUpload > renders with disabled variant button correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col"><button type="button" disabled="" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] text-sm border-dashed data-[dragging=true]:bg-elevated/25 cursor-not-allowed opacity-75 p-1.5" tabindex="-1">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]"><button type="button" disabled="" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent text-sm border-dashed data-[dragging=true]:bg-elevated/25 cursor-not-allowed opacity-75 p-1.5" tabindex="-1">
     <!--v-if-->
     <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="file-upload-icon" class="shrink-0 size-5"></svg>
       <!--v-if-->
@@ -154,10 +154,10 @@ exports[`FileUpload > renders with disabled variant button correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with file slot correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -170,10 +170,10 @@ exports[`FileUpload > renders with file slot correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with file-leading slot correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -189,10 +189,10 @@ exports[`FileUpload > renders with file-leading slot correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with file-name slot correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -210,10 +210,10 @@ exports[`FileUpload > renders with file-name slot correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with file-size slot correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -231,10 +231,10 @@ exports[`FileUpload > renders with file-size slot correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with file-trailing slot correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -249,10 +249,10 @@ exports[`FileUpload > renders with file-trailing slot correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with fileDelete correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -270,10 +270,10 @@ exports[`FileUpload > renders with fileDelete correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with fileDeleteIcon correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -291,10 +291,10 @@ exports[`FileUpload > renders with fileDeleteIcon correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with fileIcon correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -312,10 +312,10 @@ exports[`FileUpload > renders with fileIcon correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with files slot correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -326,10 +326,10 @@ exports[`FileUpload > renders with files slot correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with files-bottom slot correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -347,10 +347,10 @@ exports[`FileUpload > renders with files-bottom slot correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with files-top slot correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -367,10 +367,10 @@ exports[`FileUpload > renders with files-top slot correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with highlight correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 border-accent hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 border-accent hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -381,10 +381,10 @@ exports[`FileUpload > renders with highlight correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with highlight neutral correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-neutral)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 border-accent hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-neutral)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 border-accent hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -395,10 +395,10 @@ exports[`FileUpload > renders with highlight neutral correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with icon correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -409,10 +409,10 @@ exports[`FileUpload > renders with icon correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with id correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -423,10 +423,10 @@ exports[`FileUpload > renders with id correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with label correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <div data-slot="file-upload-label" class="font-medium text-default mt-2">Drop your image here</div>
       <!--v-if-->
       <!--v-if-->
@@ -437,10 +437,10 @@ exports[`FileUpload > renders with label correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with label slot correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <div data-slot="file-upload-label" class="font-medium text-default mt-2">Label slot</div>
       <!--v-if-->
       <!--v-if-->
@@ -458,10 +458,10 @@ exports[`FileUpload > renders with label slot correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with layout grid correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -479,8 +479,8 @@ exports[`FileUpload > renders with layout grid correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with layout grid multiple correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <div data-slot="file-upload-files" class="grid grid-cols-2 md:grid-cols-3 gap-4 w-full">
       <div data-slot="file-upload-file" class="relative text-xs gap-1.5 p-0 aspect-square"><span data-slot="file-upload-fileLeadingAvatar" class="inline-flex items-center justify-center select-none align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] text-base shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" data-slot="avatar-image" class="h-full w-full rounded-[inherit] object-cover"></span>
         <div data-slot="file-upload-fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="file-upload-fileName" class="text-default truncate">file.txt</span><span data-slot="file-upload-fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="file-upload-fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 text-xs gap-1 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
@@ -496,10 +496,10 @@ exports[`FileUpload > renders with layout grid multiple correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with layout list correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)] gap-2 items-start">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -517,10 +517,10 @@ exports[`FileUpload > renders with layout list correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with layout list multiple correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)] gap-2 items-start">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -538,8 +538,8 @@ exports[`FileUpload > renders with layout list multiple correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with leading slot correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
     <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3">Leading slot
       <!--v-if-->
@@ -559,10 +559,10 @@ exports[`FileUpload > renders with leading slot correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with modelValue correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -580,8 +580,8 @@ exports[`FileUpload > renders with modelValue correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with multiple correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <div data-slot="file-upload-files" class="grid grid-cols-2 md:grid-cols-3 gap-4 w-full">
       <div data-slot="file-upload-file" class="relative text-xs gap-1.5 p-0 aspect-square"><span data-slot="file-upload-fileLeadingAvatar" class="inline-flex items-center justify-center select-none align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] text-base shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" data-slot="avatar-image" class="h-full w-full rounded-[inherit] object-cover"></span>
         <div data-slot="file-upload-fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="file-upload-fileName" class="text-default truncate">file.txt</span><span data-slot="file-upload-fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="file-upload-fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 text-xs gap-1 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
@@ -597,10 +597,10 @@ exports[`FileUpload > renders with multiple correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with name correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -611,10 +611,10 @@ exports[`FileUpload > renders with name correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with neutral color correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-neutral)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-neutral)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -625,8 +625,8 @@ exports[`FileUpload > renders with neutral color correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with position inside correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <div data-slot="file-upload-files" class="">
       <div data-slot="file-upload-file" class="text-xs gap-1.5 absolute inset-0 p-0"><span data-slot="file-upload-fileLeadingAvatar" class="inline-flex items-center justify-center select-none align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] text-base shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" data-slot="avatar-image" class="h-full w-full rounded-[inherit] object-cover"></span>
         <div data-slot="file-upload-fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="file-upload-fileName" class="text-default truncate">file.txt</span><span data-slot="file-upload-fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="file-upload-fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 text-xs gap-1 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
@@ -642,8 +642,8 @@ exports[`FileUpload > renders with position inside correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with position inside multiple correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <div data-slot="file-upload-files" class="grid grid-cols-2 md:grid-cols-3 gap-4 w-full">
       <div data-slot="file-upload-file" class="relative text-xs gap-1.5 p-0 aspect-square"><span data-slot="file-upload-fileLeadingAvatar" class="inline-flex items-center justify-center select-none align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] text-base shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" data-slot="avatar-image" class="h-full w-full rounded-[inherit] object-cover"></span>
         <div data-slot="file-upload-fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="file-upload-fileName" class="text-default truncate">file.txt</span><span data-slot="file-upload-fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="file-upload-fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 text-xs gap-1 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
@@ -659,10 +659,10 @@ exports[`FileUpload > renders with position inside multiple correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with position outside correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -680,8 +680,8 @@ exports[`FileUpload > renders with position outside correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with position outside multiple correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <div data-slot="file-upload-files" class="grid grid-cols-2 md:grid-cols-3 gap-4 w-full">
       <div data-slot="file-upload-file" class="relative text-xs gap-1.5 p-0 aspect-square"><span data-slot="file-upload-fileLeadingAvatar" class="inline-flex items-center justify-center select-none align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] text-base shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" data-slot="avatar-image" class="h-full w-full rounded-[inherit] object-cover"></span>
         <div data-slot="file-upload-fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="file-upload-fileName" class="text-default truncate">file.txt</span><span data-slot="file-upload-fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="file-upload-fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 text-xs gap-1 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
@@ -697,10 +697,10 @@ exports[`FileUpload > renders with position outside multiple correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with required correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -711,10 +711,10 @@ exports[`FileUpload > renders with required correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with required correctly 2`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -725,10 +725,10 @@ exports[`FileUpload > renders with required correctly 2`] = `
 `;
 
 exports[`FileUpload > renders with size lg correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-9 text-lg shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-9 text-lg shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -746,7 +746,7 @@ exports[`FileUpload > renders with size lg correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with size lg variant button correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col"><button type="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] text-sm border-dashed data-[dragging=true]:bg-elevated/25 p-2 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]"><button type="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent text-sm border-dashed data-[dragging=true]:bg-elevated/25 p-2 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
     <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="file-upload-icon" class="shrink-0 size-5"></svg>
       <!--v-if-->
@@ -764,10 +764,10 @@ exports[`FileUpload > renders with size lg variant button correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with size md correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -785,7 +785,7 @@ exports[`FileUpload > renders with size md correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with size md variant button correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col"><button type="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] text-sm border-dashed data-[dragging=true]:bg-elevated/25 p-1.5 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]"><button type="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent text-sm border-dashed data-[dragging=true]:bg-elevated/25 p-1.5 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
     <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="file-upload-icon" class="shrink-0 size-5"></svg>
       <!--v-if-->
@@ -803,10 +803,10 @@ exports[`FileUpload > renders with size md variant button correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with size sm correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-xs border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-xs border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-7 text-sm shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-7 text-sm shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -824,7 +824,7 @@ exports[`FileUpload > renders with size sm correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with size sm variant button correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col"><button type="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] text-xs border-dashed data-[dragging=true]:bg-elevated/25 p-1.5 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]"><button type="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent text-xs border-dashed data-[dragging=true]:bg-elevated/25 p-1.5 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
     <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="file-upload-icon" class="shrink-0 size-4"></svg>
       <!--v-if-->
@@ -842,10 +842,10 @@ exports[`FileUpload > renders with size sm variant button correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with size xl correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-base border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-base border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-10 text-xl shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-10 text-xl shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -863,7 +863,7 @@ exports[`FileUpload > renders with size xl correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with size xl variant button correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col"><button type="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] text-base border-dashed data-[dragging=true]:bg-elevated/25 p-2 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]"><button type="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent text-base border-dashed data-[dragging=true]:bg-elevated/25 p-2 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
     <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="file-upload-icon" class="shrink-0 size-6"></svg>
       <!--v-if-->
@@ -881,10 +881,10 @@ exports[`FileUpload > renders with size xl variant button correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with size xs correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-xs border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-xs border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-6 text-xs shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-6 text-xs shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -902,7 +902,7 @@ exports[`FileUpload > renders with size xs correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with size xs variant button correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col"><button type="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] text-xs border-dashed data-[dragging=true]:bg-elevated/25 p-1 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]"><button type="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent text-xs border-dashed data-[dragging=true]:bg-elevated/25 p-1 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
     <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="file-upload-icon" class="shrink-0 size-4"></svg>
       <!--v-if-->
@@ -920,10 +920,10 @@ exports[`FileUpload > renders with size xs variant button correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with ui correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 rounded-xl" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 rounded-xl" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -934,10 +934,10 @@ exports[`FileUpload > renders with ui correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with variant area correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -955,7 +955,7 @@ exports[`FileUpload > renders with variant area correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with variant button correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col"><button type="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] text-sm border-dashed data-[dragging=true]:bg-elevated/25 p-1.5 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]"><button type="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent text-sm border-dashed data-[dragging=true]:bg-elevated/25 p-1.5 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
     <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="file-upload-icon" class="shrink-0 size-5"></svg>
       <!--v-if-->
@@ -973,10 +973,10 @@ exports[`FileUpload > renders with variant button correctly 1`] = `
 `;
 
 exports[`FileUpload > renders without dropzone correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -987,10 +987,10 @@ exports[`FileUpload > renders without dropzone correctly 1`] = `
 `;
 
 exports[`FileUpload > renders without interactive correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25" tabindex="-1">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25" tabindex="-1">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -1001,10 +1001,10 @@ exports[`FileUpload > renders without interactive correctly 1`] = `
 `;
 
 exports[`FileUpload > renders without preview correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -1015,10 +1015,10 @@ exports[`FileUpload > renders without preview correctly 1`] = `
 `;
 
 exports[`FileUpload > renders without preview with multiple correctly 1`] = `
-"<div data-slot="file-upload" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent [--ui-accent:var(--ui-primary)] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="file-upload" class="relative flex flex-col [--ui-accent:var(--ui-primary)]">
+  <div role="button" data-dragging="false" data-slot="file-upload-base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
-    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]"></svg></span>
+    <div data-slot="file-upload-wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="file-upload-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="avatar-icon" class="shrink-0 text-accent-muted"></svg></span>
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->

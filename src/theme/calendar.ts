@@ -27,15 +27,15 @@ export default {
     gridRow: 'grid',
     gridWeekDaysRow: 'mb-1 grid w-full grid-cols-7',
     gridBody: 'grid',
-    headCell: 'rounded-md',
+    headCell: 'rounded-md text-accent',
     headCellWeek: 'rounded-md text-muted',
     cell: 'relative text-center',
-    cellTrigger: 'm-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:outline-3 data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition',
+    cellTrigger: 'm-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:outline-3 data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition outline-accent-focus',
     cellWeek: 'relative text-center text-muted'
   },
   variants: {
     color: {
-      ...colorVariant({ headCell: 'text-accent', cellTrigger: 'outline-accent-focus' }),
+      ...colorVariant({ root: '' }),
       // Neutral hovers at 10% where the colors use 20%, so it keeps its own classes.
       neutral: {
         headCell: 'text-highlighted',

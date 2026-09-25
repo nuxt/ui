@@ -117,7 +117,7 @@ exports[`Listbox > renders with disabled correctly 1`] = `
 
 exports[`Listbox > renders with filter and placeholder correctly 1`] = `
 "<div dir="ltr" data-slot="listbox" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-accent-focus has-focus-visible:outline-3 has-focus-visible:ring-accent [--ui-accent:var(--ui-primary)]">
-  <div data-slot="listbox-input" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Filter..." class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none [--ui-accent:var(--ui-primary)] md:text-sm" autocomplete="off" aria-disabled="false" data-slot="input-base" value="" aria-activedescendant="reka-listbox-item-v-0-0-1">
+  <div data-slot="listbox-input" class="relative inline-flex items-center [--ui-accent:var(--ui-primary)] border-b border-default"><input type="text" placeholder="Filter..." class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none md:text-sm" autocomplete="off" aria-disabled="false" data-slot="input-base" value="" aria-activedescendant="reka-listbox-item-v-0-0-1">
     <!--v-if-->
     <!--v-if-->
   </div>
@@ -143,7 +143,7 @@ exports[`Listbox > renders with filter and placeholder correctly 1`] = `
 
 exports[`Listbox > renders with filter correctly 1`] = `
 "<div dir="ltr" data-slot="listbox" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-accent-focus has-focus-visible:outline-3 has-focus-visible:ring-accent [--ui-accent:var(--ui-primary)]">
-  <div data-slot="listbox-input" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none [--ui-accent:var(--ui-primary)] md:text-sm" autocomplete="off" aria-disabled="false" data-slot="input-base" value="" aria-activedescendant="reka-listbox-item-v-0-0-1">
+  <div data-slot="listbox-input" class="relative inline-flex items-center [--ui-accent:var(--ui-primary)] border-b border-default"><input type="text" placeholder="Search…" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none md:text-sm" autocomplete="off" aria-disabled="false" data-slot="input-base" value="" aria-activedescendant="reka-listbox-item-v-0-0-1">
     <!--v-if-->
     <!--v-if-->
   </div>

@@ -30,7 +30,7 @@ export default {
     to: {
       true: ''
     },
-    color: colorVariant({ link: '' })
+    color: colorVariant({ root: '' })
   },
   compoundVariants: [{
     disabled: false,

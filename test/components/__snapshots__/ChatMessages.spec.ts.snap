@@ -15,7 +15,7 @@ exports[`ChatMessages > renders with assistant correctly 1`] = `
   <article data-role="assistant" data-slot="chat-message" class="group/message relative w-full scroll-mt-4 sm:scroll-mt-6">
     <!--v-if-->
     <div data-slot="chat-message-container" class="relative flex items-start gap-3 pb-8">
-      <div data-slot="chat-message-leading" class="inline-flex items-center justify-center min-h-6"><span data-slot="chat-message-leadingAvatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><span class="iconify i-lucide:bot shrink-0 text-accent-muted [--ui-accent:var(--ui-neutral)]" aria-hidden="true" data-slot="avatar-icon"></span></span></div>
+      <div data-slot="chat-message-leading" class="inline-flex items-center justify-center min-h-6"><span data-slot="chat-message-leadingAvatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><span class="iconify i-lucide:bot shrink-0 text-accent-muted" aria-hidden="true" data-slot="avatar-icon"></span></span></div>
       <div data-slot="chat-message-body" class="min-w-0 w-full">
         <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 w-full">I am fine, thank you!</div>
         <!--v-if-->

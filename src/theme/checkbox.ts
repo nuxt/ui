@@ -20,7 +20,7 @@ export default {
     description: 'text-muted'
   },
   variants: {
-    color: colorVariant({ indicator: '', base: '', root: '' }),
+    color: colorVariant({ root: '' }),
     variant: {
       list: {
         root: ''

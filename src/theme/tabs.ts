@@ -20,7 +20,7 @@ export default {
     content: 'w-full rounded-md focus-visible:outline-3 outline-accent-focus'
   },
   variants: {
-    color: colorVariant({ content: '', trigger: '', indicator: '' }),
+    color: colorVariant({ root: '' }),
     variant: {
       pill: {
         list: 'bg-elevated rounded-lg',

@@ -9,7 +9,7 @@ export default {
     externalIcon: 'size-4 align-top absolute end-2 top-2 text-dimmed pointer-events-none transition-colors'
   },
   variants: {
-    color: colorVariant({ base: '', icon: '', externalIcon: '' }),
+    color: colorVariant({ base: '' }),
     to: {
       true: {
         base: 'hover:bg-accent-tint hover:border-accent outline-accent-focus has-[>a:focus-visible]:outline-3 has-[>a:focus-visible]:border-accent',
