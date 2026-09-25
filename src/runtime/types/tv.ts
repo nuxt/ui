@@ -77,8 +77,11 @@ export type SlotClassValue = ClassValue | SlotClassReplacer | readonly SlotClass
  */
 export type SlotClass = ClassValue | SlotClassReplacer
 
-/** Variant values spelled `'true'` / `'false'` are read as booleans. */
-type VariantKey<T> = T extends 'true' | 'false' ? boolean : T
+/**
+ * Variant values spelled `'true'` / `'false'` are read as booleans, and a
+ * numeric key (`2: {...}`) is matched by its string form as well.
+ */
+type VariantKey<T> = T extends 'true' | 'false' ? boolean : T extends number ? T | `${T}` : T
 
 /** A variant value declared for its key alone, with no classes of its own. */
 type NoClass = '' | false | null | undefined
@@ -87,7 +90,7 @@ type NoClass = '' | false | null | undefined
 type VariantPropValue = string | number | boolean | null | undefined
 
 /**
- * A theme, the shape `src/theme/*` produces and `#build/ui/*` exports: classes
+ * A theme, the shape `src/runtime/theme/*` produces and `#build/ui/*` exports: classes
  * per slot, the variants that switch them, and what they default to.
  */
 export type TVTheme = {
@@ -189,9 +192,20 @@ export type TVReturnType<T> = (props?: TVVariantProps<T>) => TVSlotFunctions<T>
  * The theme's own `compoundVariants` and `defaultVariants` checked against its
  * `variants`, the part of a literal theme inference alone doesn't validate.
  */
-type TVThemeCheck<T> = {
+export type TVThemeCheck<T> = {
   compoundVariants?: TVCompoundVariants<T>
   defaultVariants?: TVDefaultVariants<T>
+}
+
+/**
+ * A theme as `defineTheme` returns it: checked, and with each default typed as
+ * any value its variant accepts, the way app code reads it
+ * (`reactive({ color: [theme.defaultVariants.color] })`).
+ */
+export type DefinedTheme<T> = {
+  [K in keyof T]: K extends 'defaultVariants'
+    ? { [D in keyof T[K]]: D extends keyof VariantsOf<T> ? VariantValue<T, D> : T[K][D] }
+    : T[K]
 }
 
 declare const componentOverrides: unique symbol

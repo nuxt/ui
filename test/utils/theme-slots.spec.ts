@@ -1,9 +1,9 @@
 import { readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, it, expect } from 'vitest'
-import * as theme from '../../src/theme'
-import * as themeProse from '../../src/theme/prose'
-import * as themeContent from '../../src/theme/content'
+import * as theme from '../../src/runtime/theme'
+import * as themeProse from '../../src/runtime/theme/prose'
+import * as themeContent from '../../src/runtime/theme/content'
 import { defaultOptions } from '../../src/utils/defaults'
 
 const options = { ...defaultOptions, theme: { ...defaultOptions.theme } }
@@ -65,7 +65,7 @@ describe('theme slots', () => {
   })
 })
 
-const themeDir = join(process.cwd(), 'src/theme')
+const themeDir = join(process.cwd(), 'src/runtime/theme')
 const source = readdirSync(themeDir, { recursive: true, encoding: 'utf8' })
   .filter(file => file.endsWith('.ts'))
   .map(file => readFileSync(join(themeDir, file), 'utf8'))
@@ -99,7 +99,7 @@ function spelledOut(cls: string) {
 }
 
 /**
- * Tailwind generates the theme CSS by scanning `src/theme`, so a class a theme
+ * Tailwind generates the theme CSS by scanning `src/runtime/theme`, so a class a theme
  * only builds at runtime, from a template literal, a helper or an escaped
  * quote, gets no CSS. Write it out as a literal instead.
  */
