@@ -1,0 +1,114 @@
+name: bundle-size
+
+on:
+  pull_request:
+    branches:
+      - v4
+      - v5
+    paths:
+      - 'src/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'pnpm-workspace.yaml'
+      - 'test/bundle/**'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number }}
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        include:
+          - target: base
+            dir: .bundle-base
+          - target: pr
+            dir: .
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Checkout base
+        if: matrix.target == 'base'
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: .bundle-base
+
+      # Build the base with the fixtures of the PR so both sides are measured the same way
+      - name: Copy fixtures to base
+        if: matrix.target == 'base'
+        run: |
+          rm -rf .bundle-base/test/bundle
+          cp -r test/bundle .bundle-base/test/bundle
+          grep -q 'test/bundle/\*' .bundle-base/pnpm-workspace.yaml || sed -i 's|^packages:$|packages:\n  - test/bundle/*|' .bundle-base/pnpm-workspace.yaml
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Install node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: ${{ matrix.dir }}/pnpm-lock.yaml
+
+      # The base lockfile doesn't know about the fixtures of the PR
+      - name: Install dependencies
+        working-directory: ${{ matrix.dir }}
+        run: pnpm install ${{ matrix.target == 'base' && '--no-frozen-lockfile' || '' }}
+
+      - name: Build
+        working-directory: ${{ matrix.dir }}
+        run: |
+          pnpm nuxt-module-build prepare
+          pnpm run build
+
+      - name: Measure bundle size
+        working-directory: ${{ matrix.dir }}
+        run: node test/bundle/size.mjs --json "$RUNNER_TEMP/${{ matrix.target }}.json"
+
+      - name: Upload sizes
+        uses: actions/upload-artifact@v7
+        with:
+          name: bundle-size-${{ matrix.target }}
+          path: ${{ runner.temp }}/${{ matrix.target }}.json
+          if-no-files-found: error
+          retention-days: 1
+
+  # The comment is posted by `bundle-size-comment.yml`, which has the write access this workflow lacks on forks
+  report:
+    needs: analyze
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download sizes
+        uses: actions/download-artifact@v8
+        with:
+          pattern: bundle-size-*
+          path: ${{ runner.temp }}/bundle-size
+          merge-multiple: true
+
+      - name: Store pull request number
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+        run: printf '{"prNumber":%s}\n' "$PR_NUMBER" > "$RUNNER_TEMP/bundle-size/context.json"
+
+      - name: Upload report
+        uses: actions/upload-artifact@v7
+        with:
+          name: bundle-size-report
+          path: ${{ runner.temp }}/bundle-size
+          if-no-files-found: error
+          retention-days: 7

@@ -1,0 +1,14 @@
+{
+  "name": "@nuxt/ui-bundle-nuxt",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node ../build.mjs"
+  },
+  "dependencies": {
+    "@nuxt/ui": "catalog:",
+    "nuxt": "catalog:",
+    "tailwindcss": "catalog:",
+    "vue": "catalog:"
+  }
+}

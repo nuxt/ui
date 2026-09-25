@@ -18,6 +18,7 @@ src/
 ├── theme/              # Tailwind Variants themes (kebab-case.ts)
 └── module.ts
 test/
+├── bundle/             # Bundle size fixtures (`pnpm run size`)
 ├── components/         # Component tests (*.spec.ts)
 │   └── __snapshots__/  # Auto-generated snapshots
 └── component-render.ts
@@ -39,6 +40,7 @@ pnpm run lint         # Check linting
 pnpm run lint:fix     # Fix linting
 pnpm run typecheck    # Type checking
 pnpm run test         # Run tests
+pnpm run size         # Build test/bundle apps and print their JS/CSS sizes
 ```
 
 ## CLI for Scaffolding
