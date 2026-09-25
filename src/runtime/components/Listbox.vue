@@ -31,7 +31,7 @@ export interface ListboxItem {
   disabled?: boolean
   onSelect?: (e: Event) => void
   class?: any
-  ui?: Partial<Pick<Listbox['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatar' | 'itemLeadingAvatarSize' | 'itemLeadingChip' | 'itemLeadingChipSize' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>>
+  ui?: Partial<Pick<Listbox['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatar' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>>
   [key: string]: any
 }
 
@@ -173,6 +173,7 @@ import { useLocale } from '../composables/useLocale'
 import { get, isArrayOfArray, looseToNumber } from '../utils'
 import { getEstimateSize } from '../utils/virtualizer'
 import { tv } from '../utils/tv'
+import { getAvatarSize, getItemSize } from '../utils/size'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
@@ -234,6 +235,9 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: L
     }
   }
 })
+
+const avatarSize = computed(() => getAvatarSize(size.value))
+const itemSize = computed(() => getItemSize(size.value))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
@@ -328,10 +332,10 @@ const filteredItems = computed(() => filteredGroups.value.flatMap(group => group
       <slot name="item" :item="(item as NestedItem<T>)" :index="index" :ui="ui">
         <slot name="item-leading" :item="(item as NestedItem<T>)" :index="index" :ui="ui">
           <UIcon v-if="item.icon" :name="item.icon" data-slot="listbox-itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })" />
-          <UAvatar v-else-if="item.avatar" :size="((item.ui?.itemLeadingAvatarSize || props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="listbox-itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [props.ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })" />
+          <UAvatar v-else-if="item.avatar" :size="avatarSize" v-bind="item.avatar" data-slot="listbox-itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [props.ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })" />
           <UChip
             v-else-if="item.chip"
-            :size="((item.ui?.itemLeadingChipSize || props.ui?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
+            :size="itemSize"
             inset
             standalone
             v-bind="item.chip"

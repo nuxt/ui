@@ -98,7 +98,7 @@ const ui = computed(() => tv(theme, overrides.value)())
             <span v-if="props.text" data-slot="tooltip-text" :class="ui.text({ class: props.ui?.text })">{{ props.text }}</span>
 
             <span v-if="props.kbds?.length" data-slot="tooltip-kbds" :class="ui.kbds({ class: props.ui?.kbds })">
-              <UKbd v-for="(kbd, index) in props.kbds" :key="index" :size="((props.ui?.kbdsSize || ui.kbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
+              <UKbd v-for="(kbd, index) in props.kbds" :key="index" size="sm" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
             </span>
           </slot>
 

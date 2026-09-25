@@ -38,6 +38,7 @@ import { useAppConfig } from '#imports'
 import { useEditorMenu } from '../composables/useEditorMenu'
 import { useComponentOverrides } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
+import { getAvatarSize } from '../utils/size'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 
@@ -96,7 +97,7 @@ onMounted(async () => {
     },
     renderItem: (item, styles) => [
       item.avatar
-        ? h(UAvatar, { ...item.avatar, size: styles.value.itemLeadingAvatarSize(), class: styles.value.itemLeadingAvatar() })
+        ? h(UAvatar, { size: getAvatarSize(props.size), ...item.avatar, class: styles.value.itemLeadingAvatar() })
         : item.icon
           ? h(UIcon, { name: item.icon, class: styles.value.itemLeadingIcon() })
           : null,

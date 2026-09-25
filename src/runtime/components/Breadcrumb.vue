@@ -109,7 +109,7 @@ const ui = computed(() => tv(theme, overrides.value)({
               <slot :name="((item.slot || 'item') as keyof BreadcrumbSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :active="item.active ?? (index === props.items!.length - 1)" :index="index" :ui="ui">
                 <slot :name="((item.slot ? `${item.slot}-leading`: 'item-leading') as keyof BreadcrumbSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :active="item.active ?? (index === props.items!.length - 1)" :index="index" :ui="ui">
                   <UIcon v-if="item.icon" :name="item.icon" data-slot="breadcrumb-linkLeadingIcon" :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, item.ui?.linkLeadingIcon], active: item.active ?? (index === props.items!.length - 1) })" />
-                  <UAvatar v-else-if="item.avatar" :size="((props.ui?.linkLeadingAvatarSize || ui.linkLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="breadcrumb-linkLeadingAvatar" :class="ui.linkLeadingAvatar({ class: [props.ui?.linkLeadingAvatar, item.ui?.linkLeadingAvatar], active: item.active ?? (index === props.items!.length - 1) })" />
+                  <UAvatar v-else-if="item.avatar" size="2xs" v-bind="item.avatar" data-slot="breadcrumb-linkLeadingAvatar" :class="ui.linkLeadingAvatar({ class: [props.ui?.linkLeadingAvatar, item.ui?.linkLeadingAvatar], active: item.active ?? (index === props.items!.length - 1) })" />
                 </slot>
 
                 <span v-if="get(item, props.labelKey as string) || !!slots[(item.slot ? `${item.slot}-label`: 'item-label') as keyof BreadcrumbSlots<T>]" data-slot="breadcrumb-linkLabel" :class="ui.linkLabel({ class: [props.ui?.linkLabel, item.ui?.linkLabel] })">

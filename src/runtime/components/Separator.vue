@@ -101,7 +101,7 @@ const ui = computed(() => tv(theme, overrides.value)({
       <slot :ui="ui">
         <span v-if="props.label" data-slot="separator-label" :class="ui.label({ class: props.ui?.label })">{{ props.label }}</span>
         <UIcon v-else-if="props.icon" :name="props.icon" data-slot="separator-icon" :class="ui.icon({ class: props.ui?.icon })" />
-        <UAvatar v-else-if="props.avatar" :size="((props.ui?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="separator-avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
+        <UAvatar v-else-if="props.avatar" size="2xs" v-bind="props.avatar" data-slot="separator-avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
       </slot>
     </div>
   </DefineContainer>

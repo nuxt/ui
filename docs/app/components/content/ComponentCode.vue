@@ -1,6 +1,5 @@
 <!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
-import type { ChipProps } from '@nuxt/ui'
 import json5 from 'json5'
 import { upperFirst, camelCase, kebabCase } from 'scule'
 import { hash } from 'ohash'
@@ -437,13 +436,13 @@ const { data: markdown } = useAsyncData(codeKey, async () => {
               :ui="{ itemLeadingChip: 'w-2' }"
               @update:model-value="setComponentProp(option.name, $event)"
             >
-              <template v-if="option.name.toLowerCase().endsWith('color')" #leading="{ modelValue, ui }">
+              <template v-if="option.name.toLowerCase().endsWith('color')" #leading="{ modelValue }">
                 <UChip
                   v-if="modelValue"
                   inset
                   standalone
                   :color="(modelValue as any)"
-                  :size="(ui.itemLeadingChipSize() as ChipProps['size'])"
+                  size="md"
                   class="size-2"
                 />
               </template>
