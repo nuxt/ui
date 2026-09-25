@@ -39,7 +39,7 @@ export default {
         icon: 'size-7'
       }
     },
-    color: colorVariant({ indicator: '', item: '' }),
+    color: colorVariant({ root: '' }),
     readonly: {
       true: {
         root: 'cursor-default',

@@ -11,7 +11,7 @@ export default {
     label: 'text-sm'
   },
   variants: {
-    color: colorVariant({ border: '' }),
+    color: colorVariant({ root: '' }),
     orientation: {
       horizontal: {
         root: 'w-full flex-row',

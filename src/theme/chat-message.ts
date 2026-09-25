@@ -23,7 +23,7 @@ export default {
       naked: ''
     },
     color: {
-      ...colorVariant({ content: '' }),
+      ...colorVariant({ root: '' }),
       // Neutral keeps the inherited text color, so it has its own classes.
       neutral: ''
     },

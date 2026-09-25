@@ -31,7 +31,7 @@ export default {
       ghost: { base: 'text-highlighted bg-transparent hover:bg-elevated focus:bg-elevated disabled:bg-transparent dark:disabled:bg-transparent' },
       none: { base: 'text-highlighted bg-transparent focus:outline-none' }
     },
-    color: colorVariant({ base: '' }),
+    color: colorVariant({ root: '' }),
     highlight: {
       true: { base: 'ring ring-inset ring-accent' }
     },

@@ -16,7 +16,7 @@ export default {
     description: 'text-muted'
   },
   variants: {
-    color: colorVariant({ indicator: '', base: '', item: '' }),
+    color: colorVariant({ root: '' }),
     variant: {
       list: {
         fieldset: 'flex-wrap',

@@ -22,7 +22,7 @@ export default {
     indicatorActive: 'bg-accent'
   },
   variants: {
-    color: colorVariant({ link: '' }),
+    color: colorVariant({ root: '' }),
     highlightColor: colorVariant({ indicatorActive: '' }),
     active: {
       true: {

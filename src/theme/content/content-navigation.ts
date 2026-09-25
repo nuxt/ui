@@ -19,7 +19,7 @@ export default {
     linkTitleExternalIcon: 'size-3 align-top text-dimmed'
   },
   variants: {
-    color: colorVariant({ link: '', linkLeadingIcon: '' }),
+    color: colorVariant({ root: '' }),
     highlightColor: highlightColorVariant({ link: '' }),
     variant: {
       pill: '',

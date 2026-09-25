@@ -100,7 +100,7 @@ The `color` prop only accepts the 7 defaults. To add another color (e.g., `terti
 .dark { --ui-tertiary: var(--color-indigo-400); }
 ```
 
-Apply it to a component through `--ui-accent`, not the `color` prop: `<UButton class="[--ui-accent:var(--ui-tertiary)]" />`. Set it on the root of a Button or a Badge, on a slot through `ui` otherwise.
+Apply it to a component through `--ui-accent` in `class`, not the `color` prop: `<UButton class="[--ui-accent:var(--ui-tertiary)]" />`.
 
 ## Semantic utility classes
 

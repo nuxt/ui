@@ -34,7 +34,7 @@ export default {
     arrow: 'relative top-[50%] size-2.5 rotate-45 border border-default bg-default z-1 rounded-xs'
   },
   variants: {
-    color: colorVariant({ link: '', linkLeadingIcon: '', childLink: '' }),
+    color: colorVariant({ link: '', childLink: '' }),
     highlightColor: highlightColorVariant({ link: '' }),
     variant: {
       pill: '',

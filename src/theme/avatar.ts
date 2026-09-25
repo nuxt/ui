@@ -8,7 +8,7 @@ export default {
     icon: 'shrink-0 text-accent-muted'
   },
   variants: {
-    color: colorVariant({ root: '', fallback: '', icon: '' }),
+    color: colorVariant({ root: '' }),
     size: {
       '3xs': {
         root: 'size-4 text-[8px]'

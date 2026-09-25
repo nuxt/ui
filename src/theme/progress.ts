@@ -16,7 +16,7 @@ export default {
       'swing': '',
       'elastic': ''
     },
-    color: colorVariant({ indicator: '', steps: '' }),
+    color: colorVariant({ root: '' }),
     size: {
       '2xs': {
         status: 'text-xs',

@@ -18,7 +18,7 @@ export default {
         root: 'overflow-y-auto'
       }
     },
-    color: colorVariant({ link: '' }),
+    color: colorVariant({ root: '' }),
     size: {
       xs: {
         listWithChildren: 'ms-4',

@@ -1,167 +1,167 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Separator > renders with as correctly 1`] = `"<span data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center w-full flex-row"><!--v-if--><div data-slot="separator-border" class="border-accent-line [--ui-accent:var(--ui-neutral)] w-full border-solid border-t"></div><!--v-if--><!--v-if--></span>"`;
+exports[`Separator > renders with as correctly 1`] = `"<span data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center [--ui-accent:var(--ui-neutral)] w-full flex-row"><!--v-if--><div data-slot="separator-border" class="border-accent-line w-full border-solid border-t"></div><!--v-if--><!--v-if--></span>"`;
 
 exports[`Separator > renders with avatar correctly 1`] = `
-"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center w-full flex-row">
+"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center [--ui-accent:var(--ui-neutral)] w-full flex-row">
   <!--v-if-->
-  <div data-slot="separator-border" class="border-accent-line [--ui-accent:var(--ui-neutral)] w-full border-solid border-t"></div>
+  <div data-slot="separator-border" class="border-accent-line w-full border-solid border-t"></div>
   <div data-slot="separator-container" class="font-medium text-default flex whitespace-nowrap mx-3"><span data-slot="separator-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" width="20" height="20" data-slot="avatar-image" class="h-full w-full rounded-[inherit] object-cover"></span></div>
-  <div data-slot="separator-border" class="border-accent-line [--ui-accent:var(--ui-neutral)] w-full border-solid border-t"></div>
+  <div data-slot="separator-border" class="border-accent-line w-full border-solid border-t"></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Separator > renders with class correctly 1`] = `
-"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center w-full flex-row-reverse">
+"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center [--ui-accent:var(--ui-neutral)] w-full flex-row-reverse">
   <!--v-if-->
-  <div data-slot="separator-border" class="border-accent-line [--ui-accent:var(--ui-neutral)] w-full border-solid border-t"></div>
+  <div data-slot="separator-border" class="border-accent-line w-full border-solid border-t"></div>
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Separator > renders with color primary correctly 1`] = `
-"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center w-full flex-row">
+"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center [--ui-accent:var(--ui-primary)] w-full flex-row">
   <!--v-if-->
-  <div data-slot="separator-border" class="border-accent-line [--ui-accent:var(--ui-primary)] w-full border-solid border-t"></div>
+  <div data-slot="separator-border" class="border-accent-line w-full border-solid border-t"></div>
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Separator > renders with decorative correctly 1`] = `
-"<div data-orientation="horizontal" role="none" data-slot="separator" class="flex items-center align-center text-center w-full flex-row">
+"<div data-orientation="horizontal" role="none" data-slot="separator" class="flex items-center align-center text-center [--ui-accent:var(--ui-neutral)] w-full flex-row">
   <!--v-if-->
-  <div data-slot="separator-border" class="border-accent-line [--ui-accent:var(--ui-neutral)] w-full border-solid border-t"></div>
+  <div data-slot="separator-border" class="border-accent-line w-full border-solid border-t"></div>
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Separator > renders with icon correctly 1`] = `
-"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center w-full flex-row">
+"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center [--ui-accent:var(--ui-neutral)] w-full flex-row">
   <!--v-if-->
-  <div data-slot="separator-border" class="border-accent-line [--ui-accent:var(--ui-neutral)] w-full border-solid border-t"></div>
+  <div data-slot="separator-border" class="border-accent-line w-full border-solid border-t"></div>
   <div data-slot="separator-container" class="font-medium text-default flex whitespace-nowrap mx-3"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="separator-icon" class="shrink-0 size-5"></svg></div>
-  <div data-slot="separator-border" class="border-accent-line [--ui-accent:var(--ui-neutral)] w-full border-solid border-t"></div>
+  <div data-slot="separator-border" class="border-accent-line w-full border-solid border-t"></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Separator > renders with label correctly 1`] = `
-"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center w-full flex-row">
+"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center [--ui-accent:var(--ui-neutral)] w-full flex-row">
   <!--v-if-->
-  <div data-slot="separator-border" class="border-accent-line [--ui-accent:var(--ui-neutral)] w-full border-solid border-t"></div>
+  <div data-slot="separator-border" class="border-accent-line w-full border-solid border-t"></div>
   <div data-slot="separator-container" class="font-medium text-default flex whitespace-nowrap mx-3"><span data-slot="separator-label" class="text-sm">+1</span></div>
-  <div data-slot="separator-border" class="border-accent-line [--ui-accent:var(--ui-neutral)] w-full border-solid border-t"></div>
+  <div data-slot="separator-border" class="border-accent-line w-full border-solid border-t"></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Separator > renders with orientation vertical correctly 1`] = `
-"<div data-orientation="vertical" aria-orientation="vertical" role="separator" data-slot="separator" class="flex items-center align-center text-center h-full flex-col">
+"<div data-orientation="vertical" aria-orientation="vertical" role="separator" data-slot="separator" class="flex items-center align-center text-center [--ui-accent:var(--ui-neutral)] h-full flex-col">
   <!--v-if-->
-  <div data-slot="separator-border" class="border-accent-line [--ui-accent:var(--ui-neutral)] h-full border-solid border-s"></div>
+  <div data-slot="separator-border" class="border-accent-line h-full border-solid border-s"></div>
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Separator > renders with position end correctly 1`] = `
-"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center w-full flex-row">
+"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center [--ui-accent:var(--ui-neutral)] w-full flex-row">
   <!--v-if-->
-  <div data-slot="separator-border" class="border-accent-line [--ui-accent:var(--ui-neutral)] w-full border-solid border-t"></div>
+  <div data-slot="separator-border" class="border-accent-line w-full border-solid border-t"></div>
   <!--v-if-->
   <div data-slot="separator-container" class="font-medium text-default flex whitespace-nowrap ms-3"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="separator-icon" class="shrink-0 size-5"></svg></div>
 </div>"
 `;
 
 exports[`Separator > renders with position start correctly 1`] = `
-"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center w-full flex-row">
+"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center [--ui-accent:var(--ui-neutral)] w-full flex-row">
   <div data-slot="separator-container" class="font-medium text-default flex whitespace-nowrap me-3"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="separator-icon" class="shrink-0 size-5"></svg></div>
-  <div data-slot="separator-border" class="border-accent-line [--ui-accent:var(--ui-neutral)] w-full border-solid border-t"></div>
+  <div data-slot="separator-border" class="border-accent-line w-full border-solid border-t"></div>
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Separator > renders with size lg correctly 1`] = `
-"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center w-full flex-row">
+"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center [--ui-accent:var(--ui-neutral)] w-full flex-row">
   <!--v-if-->
-  <div data-slot="separator-border" class="border-accent-line [--ui-accent:var(--ui-neutral)] w-full border-solid border-t-[4px]"></div>
+  <div data-slot="separator-border" class="border-accent-line w-full border-solid border-t-[4px]"></div>
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Separator > renders with size md correctly 1`] = `
-"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center w-full flex-row">
+"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center [--ui-accent:var(--ui-neutral)] w-full flex-row">
   <!--v-if-->
-  <div data-slot="separator-border" class="border-accent-line [--ui-accent:var(--ui-neutral)] w-full border-solid border-t-[3px]"></div>
+  <div data-slot="separator-border" class="border-accent-line w-full border-solid border-t-[3px]"></div>
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Separator > renders with size sm correctly 1`] = `
-"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center w-full flex-row">
+"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center [--ui-accent:var(--ui-neutral)] w-full flex-row">
   <!--v-if-->
-  <div data-slot="separator-border" class="border-accent-line [--ui-accent:var(--ui-neutral)] w-full border-solid border-t-[2px]"></div>
+  <div data-slot="separator-border" class="border-accent-line w-full border-solid border-t-[2px]"></div>
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Separator > renders with size xl correctly 1`] = `
-"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center w-full flex-row">
+"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center [--ui-accent:var(--ui-neutral)] w-full flex-row">
   <!--v-if-->
-  <div data-slot="separator-border" class="border-accent-line [--ui-accent:var(--ui-neutral)] w-full border-solid border-t-[5px]"></div>
+  <div data-slot="separator-border" class="border-accent-line w-full border-solid border-t-[5px]"></div>
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Separator > renders with size xs correctly 1`] = `
-"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center w-full flex-row">
+"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center [--ui-accent:var(--ui-neutral)] w-full flex-row">
   <!--v-if-->
-  <div data-slot="separator-border" class="border-accent-line [--ui-accent:var(--ui-neutral)] w-full border-solid border-t"></div>
+  <div data-slot="separator-border" class="border-accent-line w-full border-solid border-t"></div>
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Separator > renders with type dashed correctly 1`] = `
-"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center w-full flex-row">
+"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center [--ui-accent:var(--ui-neutral)] w-full flex-row">
   <!--v-if-->
-  <div data-slot="separator-border" class="border-accent-line [--ui-accent:var(--ui-neutral)] w-full border-dashed border-t"></div>
+  <div data-slot="separator-border" class="border-accent-line w-full border-dashed border-t"></div>
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Separator > renders with type dotted correctly 1`] = `
-"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center w-full flex-row">
+"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center [--ui-accent:var(--ui-neutral)] w-full flex-row">
   <!--v-if-->
-  <div data-slot="separator-border" class="border-accent-line [--ui-accent:var(--ui-neutral)] w-full border-dotted border-t"></div>
+  <div data-slot="separator-border" class="border-accent-line w-full border-dotted border-t"></div>
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Separator > renders with type solid correctly 1`] = `
-"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center w-full flex-row">
+"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center [--ui-accent:var(--ui-neutral)] w-full flex-row">
   <!--v-if-->
-  <div data-slot="separator-border" class="border-accent-line [--ui-accent:var(--ui-neutral)] w-full border-solid border-t"></div>
+  <div data-slot="separator-border" class="border-accent-line w-full border-solid border-t"></div>
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Separator > renders with ui correctly 1`] = `
-"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center w-full flex-row">
+"<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center [--ui-accent:var(--ui-neutral)] w-full flex-row">
   <!--v-if-->
-  <div data-slot="separator-border" class="border-accent-line [--ui-accent:var(--ui-neutral)] w-full border-solid border-t"></div>
+  <div data-slot="separator-border" class="border-accent-line w-full border-solid border-t"></div>
   <!--v-if-->
   <!--v-if-->
 </div>"

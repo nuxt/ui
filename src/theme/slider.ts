@@ -8,7 +8,7 @@ export default {
     thumb: 'rounded-full bg-default ring-2 focus-visible:outline-3 focus-visible:outline-offset-2 ring-accent outline-accent-focus'
   },
   variants: {
-    color: colorVariant({ range: '', thumb: '' }),
+    color: colorVariant({ root: '' }),
     size: {
       xs: {
         thumb: 'size-3'

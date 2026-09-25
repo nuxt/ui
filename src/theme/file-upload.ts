@@ -19,7 +19,7 @@ export default {
     fileTrailingButton: ''
   },
   variants: {
-    color: colorVariant({ base: '' }),
+    color: colorVariant({ root: '' }),
     variant: {
       area: {
         wrapper: 'px-4 py-3',

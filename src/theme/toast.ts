@@ -14,7 +14,7 @@ export default {
     close: 'p-0'
   },
   variants: {
-    color: colorVariant({ root: '', icon: '' }),
+    color: colorVariant({ root: '' }),
     orientation: {
       horizontal: {
         root: 'items-center',
