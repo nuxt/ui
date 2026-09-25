@@ -134,6 +134,7 @@ function hasInput(name: string): boolean {
   return !!ownerOf({ name, message: '' })
     || !!inputs.value[name as keyof I]
     || Object.values(inputs.value as Record<string, { id?: string, pattern?: RegExp } | undefined>).some(input => input?.pattern?.test(name))
+    || errors.value.some(error => error.name === name)
 }
 
 onMounted(async () => {
@@ -392,10 +393,16 @@ function filterErrorsByTarget(currentErrors: FormErrorWithId[], target: keyof I 
 }
 
 function ownerOf(error: FormError) {
-  if (!error.name) return
-  for (const form of nestedForms.value.values()) {
-    if (form.name ? error.name.startsWith(`${form.name}.`) : form.hasInput(error.name)) return form
-  }
+  const name = error.name
+  if (!name) return
+
+  // The most specific named form wins, unnamed forms only own what they render or hold
+  const forms = Array.from(nestedForms.value.values())
+  const named = forms
+    .filter(form => form.name && name.startsWith(`${form.name}.`))
+    .sort((a, b) => b.name!.length - a.name!.length)[0]
+
+  return named ?? forms.find(form => !form.name && form.hasInput?.(name))
 }
 
 const api = {
@@ -403,21 +410,23 @@ const api = {
   errors,
 
   setErrors(errs: FormError[], name?: keyof I | string | RegExp) {
+    const owners = errs.map(err => ownerOf(err))
+
     // Handle local errors
-    const localErrors = resolveErrorIds(errs.filter(err => !ownerOf(err)))
+    const localErrors = resolveErrorIds(errs.filter((_, index) => !owners[index]))
 
     // Handle nested form errors
     const nestedErrors: FormErrorWithId[] = []
     for (const form of nestedForms.value.values()) {
       if (matchesTarget(name, form.name)) {
-        const formErrors = form.name ? filterFormErrors(errs, form.name) : errs.filter(err => ownerOf(err) === form)
-        form.api.setErrors(formErrors, getNestedTarget(name, form.name || ''))
-        nestedErrors.push(...getFormErrors(form as any))
+        const owned = errs.filter((_, index) => owners[index] === form)
+        form.api.setErrors(form.name ? filterFormErrors(owned, form.name) : owned, getNestedTarget(name, form.name || ''))
       }
+      nestedErrors.push(...getFormErrors(form as any))
     }
 
     if (name) {
-      const keepErrors = filterErrorsByTarget(errors.value, name)
+      const keepErrors = filterErrorsByTarget(errors.value.filter(err => !ownerOf(err)), name)
       errors.value = [...keepErrors, ...localErrors, ...nestedErrors]
     } else {
       errors.value = [...localErrors, ...nestedErrors]

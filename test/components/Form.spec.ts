@@ -488,10 +488,16 @@ describe('Form', () => {
       const wrapper: any = await renderForm({ fixture: 'FormNestedDeep' })
       await flushPromises()
 
-      wrapper.setupState.form.value.setErrors([{ name: 'address.street', message: 'Server error' }])
+      const form = wrapper.setupState.form.value
+      form.setErrors([{ name: 'address.street', message: 'Server error' }, { name: 'address.zip', message: 'Unknown zip' }])
       await nextTick()
 
       expect(wrapper.find('#streetField').text()).toContain('Server error')
+      expect(form.errors.map((error: any) => error.name)).toEqual(['address.street', 'address.zip'])
+
+      form.setErrors([{ name: 'email', message: 'Taken' }], 'email')
+      form.setErrors([{ name: 'email', message: 'Taken' }], 'email')
+      expect(form.errors.map((error: any) => error.name)).toEqual(['email', 'address.street', 'address.zip'])
     })
 
     it('passes disabled down to nested forms', async () => {
