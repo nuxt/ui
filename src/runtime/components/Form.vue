@@ -455,7 +455,13 @@ const api = {
   },
 
   clear(name?: keyof I | string | RegExp) {
-    if (!name) epoch++
+    // Drop pending and running validations so they don't bring the cleared errors back
+    if (typeof name === 'string') {
+      inputEpochs.delete(name as keyof I)
+      validationRuns.set(name as keyof I, (validationRuns.get(name as keyof I) ?? 0) + 1)
+    } else {
+      epoch++
+    }
 
     // Keep local errors not matching the target
     const localErrors = name

@@ -481,6 +481,21 @@ describe('Form', () => {
 
       expect(form.errors).toEqual([])
     })
+
+    it('drops a running validation when its field is cleared', async () => {
+      const validate = async ({ email }: any) => {
+        await wait(40)
+        return email ? [] : [{ name: 'email', message: 'Required' }]
+      }
+      const wrapper: any = await renderForm({ fixture: 'FormBasic', props: { validate } })
+      const form = wrapper.setupState.form.value
+
+      await wrapper.find('#email').trigger('blur')
+      form.clear('email')
+      await wait(50)
+
+      expect(form.errors).toEqual([])
+    })
   })
 
   describe('nested', async () => {
