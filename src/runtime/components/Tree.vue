@@ -148,7 +148,7 @@ import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { defu } from 'defu'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { get } from '../utils'
 import { getEstimateSize } from '../utils/virtualizer'
 import { tv } from '../utils/tv'
@@ -167,6 +167,7 @@ const slots = defineSlots<TreeSlots<T>>()
 const props = useComponentProps<TreeProps<T, M>>('tree', _props, theme)
 
 const appConfig = useAppConfig() as Tree['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.tree)
 
 const rootProps = useForwardProps(reactivePick(props, 'items', 'multiple', 'expanded', 'disabled', 'propagateSelect', 'bubbleSelect'), emits)
 
@@ -221,7 +222,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: T
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.tree)({
+const ui = computed(() => tv(theme, overrides.value)({
   color: props.color,
   size: props.size,
   virtualize: !!props.virtualize

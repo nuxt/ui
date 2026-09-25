@@ -49,7 +49,7 @@ import { SliderRoot, SliderRange, SliderTrack, SliderThumb } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useFormField } from '../composables/useFormField'
 import { pick, omit } from '../utils'
 import { tv } from '../utils/tv'
@@ -70,6 +70,7 @@ const props = useComponentProps<SliderProps>('slider', _props, theme)
 const modelValue = defineModel<T>()
 
 const appConfig = useAppConfig() as Slider['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.slider)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'orientation', 'min', 'max', 'step', 'minStepsBetweenThumbs', 'inverted'))
 
@@ -108,7 +109,7 @@ const thumbs = computed(() => sliderValue.value?.length ?? 1)
 const thumbAttrs = ['aria-label', 'aria-labelledby', 'aria-describedby', 'aria-valuetext', 'aria-invalid', 'aria-errormessage']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.slider)({
+const ui = computed(() => tv(theme, overrides.value)({
   disabled: disabled.value,
   size: size.value,
   color: color.value,

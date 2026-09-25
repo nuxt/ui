@@ -58,7 +58,7 @@ import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useLocale } from '../composables/useLocale'
 import { useDashboard } from '../utils/dashboard'
@@ -89,10 +89,11 @@ const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : 
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as DashboardSearchButton['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.dashboardSearchButton)
 const { toggleSearch } = useDashboard({ toggleSearch: () => {} })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.dashboardSearchButton)({
+const ui = computed(() => tv(theme, overrides.value)({
   collapsed: props.collapsed
 }))
 </script>

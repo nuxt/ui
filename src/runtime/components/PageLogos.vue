@@ -35,7 +35,7 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 import UMarquee from './Marquee.vue'
 import UAvatar from './Avatar.vue'
@@ -53,9 +53,10 @@ const slots = defineSlots<PageLogosSlots>()
 const props = useComponentProps('pageLogos', _props, theme)
 
 const appConfig = useAppConfig() as PageLogos['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.pageLogos)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.pageLogos)())
+const ui = computed(() => tv(theme, overrides.value)())
 </script>
 
 <template>

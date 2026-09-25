@@ -244,7 +244,7 @@ import { defu } from 'defu'
 import { isEqual } from 'ohash/utils'
 import { reactivePick, reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useFieldGroup, FieldGroupReset } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
@@ -282,6 +282,7 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as InputMenu['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.inputMenu)
 const { filterGroups } = useFilter()
 
 const isAutocomplete = computed(() => props.mode === 'autocomplete')
@@ -357,7 +358,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: I
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.inputMenu)({
+const ui = computed(() => tv(theme, overrides.value)({
   color: color.value,
   variant: props.variant,
   size: size.value,

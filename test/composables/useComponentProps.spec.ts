@@ -137,3 +137,47 @@ describe('\'*\' default variants', () => {
     })
   })
 })
+
+// `unstyled` resolves against the blanked theme, keeping the user's classes.
+describe('unstyled', () => {
+  const render = (template: string) => mountSuspended({
+    components: { UTheme, UButton },
+    template
+  })
+
+  it('drops the theme classes under `<UTheme unstyled>` and keeps `ui` and `class`', async () => {
+    const wrapper = await render('<UTheme unstyled><UButton label="Button" class="px-3" :ui="{ label: \'font-bold\' }" /></UTheme>')
+
+    const button = wrapper.find('[data-slot="button"]')
+    expect(button.classes()).toEqual(['px-3'])
+    expect(wrapper.find('[data-slot="button-label"]').classes()).toEqual(['font-bold'])
+  })
+
+  it('styles a subtree again with `:unstyled="false"`', async () => {
+    const wrapper = await render('<UTheme unstyled><UTheme :unstyled="false"><UButton label="Button" /></UTheme></UTheme>')
+
+    expect(wrapper.find('[data-slot="button"]').classes()).toContain('rounded-md')
+  })
+
+  describe('from app.config', () => {
+    let appConfig: { ui?: Record<string, any> }
+
+    beforeAll(() => {
+      appConfig = useAppConfig() as { ui?: Record<string, any> }
+      appConfig.ui ??= {}
+      appConfig.ui.unstyled = true
+    })
+
+    afterAll(() => {
+      delete appConfig.ui!.unstyled
+    })
+
+    it('applies app-wide, below `<UTheme>`', async () => {
+      const wrapper = await render('<UButton label="Button" />')
+      expect(wrapper.find('[data-slot="button"]').classes()).not.toContain('rounded-md')
+
+      const styled = await render('<UTheme :unstyled="false"><UButton label="Button" /></UTheme>')
+      expect(styled.find('[data-slot="button"]').classes()).toContain('rounded-md')
+    })
+  })
+})

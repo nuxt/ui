@@ -239,7 +239,7 @@ import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useFieldGroup, FieldGroupReset } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
@@ -277,6 +277,7 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as SelectMenu['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.selectMenu)
 const { filterGroups } = useFilter()
 const rootProps = useForwardProps(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'highlightOnHover', 'by'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
@@ -334,7 +335,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: S
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.selectMenu)({
+const ui = computed(() => tv(theme, overrides.value)({
   color: color.value,
   variant: props.variant,
   size: size.value,

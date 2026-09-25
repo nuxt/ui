@@ -99,7 +99,7 @@ import { Primitive, AccordionRoot, AccordionItem, AccordionTrigger, AccordionCon
 import { useForwardProps } from '../../composables/useForwardProps'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useRoute, useAppConfig } from '#imports'
-import { useComponentProps } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
 import { pickLinkProps } from '../../utils/link'
 import { tv } from '../../utils/tv'
 import { mapContentNavigationItem } from '../../utils/content'
@@ -129,11 +129,12 @@ const rootProps = useForwardProps(reactivePick(props, 'collapsible', 'type', 'un
 
 const route = useRoute()
 const appConfig = useAppConfig() as ContentNavigation['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.contentNavigation)
 
 const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ link: ContentNavigationLink, active: boolean }>()
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.contentNavigation)({
+const ui = computed(() => tv(theme, overrides.value)({
   color: props.color,
   variant: props.variant,
   highlight: props.highlight,

@@ -91,7 +91,7 @@ import { NumberFieldRoot, NumberFieldInput, NumberFieldDecrement, NumberFieldInc
 import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
@@ -113,6 +113,7 @@ const props = useComponentProps<InputNumberProps<T, Mod>>('inputNumber', _props,
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as InputNumber['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.inputNumber)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'stepSnapping', 'formatOptions', 'disableWheelChange', 'invertWheelChange', 'required', 'readonly', 'focusOnChange', 'locale'))
 
@@ -130,7 +131,7 @@ const size = computed(() => fieldGroupSize.value ?? formFieldSize.value ?? props
 const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.inputNumber)({
+const ui = computed(() => tv(theme, overrides.value)({
   color: color.value,
   variant: props.variant,
   size: size.value,

@@ -8,9 +8,9 @@ function themeContents(overrides: Record<string, any>, vue?: { detectedComponent
   return (filename: string) => templates.find(template => template.filename === filename)!.getContents!({} as any)
 }
 
-// `skeleton` is a single-element theme, one `base` slot. Both the detection
-// blanking and `theme.unstyled` go through `applyUnstyled`, so these assert on
-// the emitted theme contents, not on the detected component list.
+// `skeleton` is a single-element theme, one `base` slot. The detection blanking
+// goes through `applyUnstyled`, so this asserts on the emitted theme contents,
+// not on the detected component list.
 describe('theme templates', () => {
   it('blanks single-element themes for undetected components', async () => {
     const contents = themeContents({ experimental: { componentDetection: true } }, { detectedComponents: new Set(['Button']) })
@@ -18,12 +18,6 @@ describe('theme templates', () => {
     expect(await contents('ui/skeleton.ts')).not.toContain('animate-pulse')
     expect(await contents('ui/table.ts')).not.toContain('min-w-full')
     expect(await contents('ui/button.ts')).toContain('rounded-md')
-  })
-
-  it('blanks single-element themes with `theme.unstyled`', async () => {
-    const contents = themeContents({ theme: { unstyled: true } })
-
-    expect(await contents('ui/skeleton.ts')).not.toContain('animate-pulse')
   })
 
   it('points each color scope at its own role variables, with the prefix', async () => {

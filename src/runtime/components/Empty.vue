@@ -62,7 +62,7 @@ export interface EmptySlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 import UAvatar from './Avatar.vue'
 import UButton from './Button.vue'
@@ -73,11 +73,12 @@ const slots = defineSlots<EmptySlots>()
 const props = useComponentProps('empty', _props, theme)
 
 const appConfig = useAppConfig() as Empty['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.empty)
 
 const iconName = computed(() => props.loading ? (props.loadingIcon || appConfig.ui.icons.loading) : props.icon)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.empty)({
+const ui = computed(() => tv(theme, overrides.value)({
   variant: props.variant,
   size: props.size,
   loading: props.loading
