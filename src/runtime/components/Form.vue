@@ -200,7 +200,8 @@ const dirtyFields: Set<keyof I> = reactive(new Set<keyof I>())
 const touchedFields: Set<keyof I> = reactive(new Set<keyof I>())
 const blurredFields: Set<keyof I> = reactive(new Set<keyof I>())
 
-// Bumped on submit and `clear()`: input and validations started before are stale.
+// Bumped on every full validation (submit, `validate()`, a parent validating its nested forms):
+// input typed and field validations started before it are stale.
 let epoch = 0
 const inputEpochs = new Map<keyof I, number>()
 const validationRuns = new Map<keyof I, number>()
@@ -241,6 +242,7 @@ async function _validate<T extends boolean>(opts: ValidateOpts<false, T>): Promi
 async function _validate<T extends boolean>(opts: ValidateOpts<true, T>): Promise<FormData<S, T> | false>
 async function _validate<T extends boolean>(opts: ValidateOpts<boolean, boolean> = { silent: false, nested: false, transform: false }): Promise<FormData<S, T> | false> {
   const names = opts.name && !Array.isArray(opts.name) ? [opts.name] : opts.name as (keyof O)[]
+  if (!names) epoch++
 
   // Validate nested forms if needed
   let nestedResults: any[] = []
@@ -300,7 +302,6 @@ const loading = ref(false)
 provide(formLoadingInjectionKey, readonly(loading))
 
 async function onSubmitWrapper(payload: Event) {
-  epoch++
   loading.value = !!props.loadingAuto
 
   const event = payload as FormSubmitEvent<FormData<S, T>>
@@ -455,14 +456,6 @@ const api = {
   },
 
   clear(name?: keyof I | string | RegExp) {
-    // Drop pending and running validations so they don't bring the cleared errors back
-    if (typeof name === 'string') {
-      inputEpochs.delete(name as keyof I)
-      validationRuns.set(name as keyof I, (validationRuns.get(name as keyof I) ?? 0) + 1)
-    } else {
-      epoch++
-    }
-
     // Keep local errors not matching the target
     const localErrors = name
       ? errors.value.filter(err =>

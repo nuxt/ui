@@ -434,11 +434,17 @@ describe('Form', () => {
   describe('validation timing', () => {
     const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
 
+    async function type(wrapper: any, selector: string, value: string) {
+      const input = wrapper.find(selector)
+      input.element.value = value
+      await input.trigger('input')
+    }
+
     it('stays clean when submit beats the input debounce', async () => {
       const wrapper: any = await renderForm({ fixture: 'FormBasic', props: { validateOnInputDelay: 50, onSubmit: vi.fn() } })
       const form = wrapper.setupState.form.value
 
-      await wrapper.find('#email').setValue('bob@dylan.com')
+      await type(wrapper, '#email', 'bob@dylan.com')
       expect(form.dirty).toBe(true)
 
       await form.submit()
@@ -447,21 +453,52 @@ describe('Form', () => {
       expect(form.dirty).toBe(false)
     })
 
-    it('ignores input typed before clear', async () => {
+    it('ignores input typed before a submit', async () => {
+      const onSubmit = () => {
+        wrapper.setupState.state.email = undefined
+      }
+      const wrapper: any = await renderForm({
+        fixture: 'FormBasic',
+        props: { validateOnInputDelay: 50, onSubmit, schema: z.object({ email: z.email(), password: z.string().optional() }) }
+      })
+      const form = wrapper.setupState.form.value
+
+      await wrapper.find('#email').trigger('blur')
+      await type(wrapper, '#email', 'bob@dylan.com')
+      await form.submit()
+      form.clear()
+      await wait(60)
+
+      expect(form.errors).toEqual([])
+    })
+
+    it('ignores nested input typed before the parent submits', async () => {
+      const wrapper: any = await renderForm({ fixture: 'FormNested', props: { onSubmit: vi.fn() } })
+      const form = wrapper.setupState.form.value
+      Object.assign(wrapper.setupState.state, { email: 'bob@dylan.com', password: 'strongpassword' })
+
+      await wrapper.find('#nested').trigger('blur')
+      await type(wrapper, '#nested', 'value')
+      await form.submit()
+      wrapper.setupState.state.nested.field = undefined
+      await wait(350)
+
+      expect(wrapper.find('#nestedField').text()).toBe('')
+    })
+
+    it('still validates a field cleared right after the input', async () => {
       const wrapper: any = await renderForm({
         fixture: 'FormBasic',
         props: { validateOnInputDelay: 50, schema: z.object({ email: z.email(), password: z.string().optional() }) }
       })
       const form = wrapper.setupState.form.value
-      const email = wrapper.find('#email')
 
-      await email.trigger('blur')
-      await email.setValue('not-an-email')
-      wrapper.setupState.state.email = undefined
-      form.clear()
+      await wrapper.find('#email').trigger('blur')
+      await type(wrapper, '#email', 'not-an-email')
+      form.clear('email')
       await wait(60)
 
-      expect(form.errors).toEqual([])
+      expect(form.errors).toMatchObject([{ name: 'email' }])
     })
 
     it('drops an older validation that finishes last', async () => {
@@ -477,21 +514,6 @@ describe('Form', () => {
       await email.trigger('change')
       await email.setValue('good')
       await email.trigger('change')
-      await wait(50)
-
-      expect(form.errors).toEqual([])
-    })
-
-    it('drops a running validation when its field is cleared', async () => {
-      const validate = async ({ email }: any) => {
-        await wait(40)
-        return email ? [] : [{ name: 'email', message: 'Required' }]
-      }
-      const wrapper: any = await renderForm({ fixture: 'FormBasic', props: { validate } })
-      const form = wrapper.setupState.form.value
-
-      await wrapper.find('#email').trigger('blur')
-      form.clear('email')
       await wait(50)
 
       expect(form.errors).toEqual([])
