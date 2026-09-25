@@ -34,7 +34,7 @@ export interface TabsItem {
   value?: string | number
   disabled?: boolean
   class?: any
-  ui?: Partial<Pick<Tabs['slots'], 'trigger' | 'leadingIcon' | 'leadingAvatar' | 'leadingAvatarSize' | 'label' | 'trailingBadge' | 'trailingBadgeSize' | 'content'>>
+  ui?: Partial<Pick<Tabs['slots'], 'trigger' | 'leadingIcon' | 'leadingAvatar' | 'label' | 'trailingBadge' | 'content'>>
   [key: string]: any
 }
 
@@ -105,6 +105,7 @@ import { useAppConfig } from '#imports'
 import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { get } from '../utils'
 import { tv } from '../utils/tv'
+import { getAvatarSize } from '../utils/size'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UBadge from './Badge.vue'
@@ -126,6 +127,8 @@ const appConfig = useAppConfig() as Tabs['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.tabs)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'unmountOnHide'), emits)
+
+const avatarSize = computed(() => getAvatarSize(props.size))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
@@ -173,7 +176,7 @@ defineExpose({
       >
         <slot name="leading" :item="item" :index="index" :ui="ui">
           <UIcon v-if="item.icon" :name="item.icon" data-slot="tabs-leadingIcon" :class="ui.leadingIcon({ class: [props.ui?.leadingIcon, item.ui?.leadingIcon] })" />
-          <UAvatar v-else-if="item.avatar" :size="((item.ui?.leadingAvatarSize || props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="tabs-leadingAvatar" :class="ui.leadingAvatar({ class: [props.ui?.leadingAvatar, item.ui?.leadingAvatar] })" />
+          <UAvatar v-else-if="item.avatar" :size="avatarSize" v-bind="item.avatar" data-slot="tabs-leadingAvatar" :class="ui.leadingAvatar({ class: [props.ui?.leadingAvatar, item.ui?.leadingAvatar] })" />
         </slot>
 
         <span v-if="get(item, props.labelKey as string) || !!slots.default" data-slot="tabs-label" :class="ui.label({ class: [props.ui?.label, item.ui?.label] })">
@@ -185,7 +188,7 @@ defineExpose({
             v-if="item.badge || item.badge === 0"
             color="neutral"
             variant="outline"
-            :size="((item.ui?.trailingBadgeSize || props.ui?.trailingBadgeSize || ui.trailingBadgeSize()) as BadgeProps['size'])"
+            size="sm"
             v-bind="(typeof item.badge === 'string' || typeof item.badge === 'number') ? { label: item.badge } : item.badge"
             data-slot="tabs-trailingBadge"
             :class="ui.trailingBadge({ class: [props.ui?.trailingBadge, item.ui?.trailingBadge] })"

@@ -2,10 +2,8 @@
 import type { ContextMenuContentProps as RekaContextMenuContentProps, ContextMenuContentEmits as RekaContextMenuContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import type theme from '#build/ui/context-menu'
-import type { AvatarProps } from './Avatar.vue'
 import type { ContextMenuItem, ContextMenuSlots } from './ContextMenu.vue'
 import type { IconProps } from './Icon.vue'
-import type { KbdProps } from './Kbd.vue'
 import type { ArrayOrNested, GetItemKeys } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -29,6 +27,7 @@ interface ContextMenuContentProps<T extends ArrayOrNested<ContextMenuItem>> exte
    * @IconifyIcon
    */
   externalIcon?: boolean | IconProps['name']
+  size?: ContextMenu['variants']['size']
   class?: any
   ui: ContextMenu['ui']
   uiOverride?: ContextMenu['slots']
@@ -47,6 +46,7 @@ import { FieldGroupReset } from '../composables/useFieldGroup'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
 import { omit, get, isArrayOfArray } from '../utils'
+import { getAvatarSize, getItemSize } from '../utils/size'
 import { pickLinkProps } from '../utils/link'
 import ULinkBase from './LinkBase.vue'
 import ULink from './Link.vue'
@@ -63,7 +63,7 @@ const { dir } = useLocale()
 const appConfig = useAppConfig()
 
 const portalProps = usePortal(toRef(() => props.portal))
-const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'descriptionKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'class', 'ui', 'uiOverride'), emits)
+const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'descriptionKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'size', 'class', 'ui', 'uiOverride'), emits)
 const getProxySlots = () => omit(slots, ['default'])
 
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: ContextMenuItem, active?: boolean, index: number }>()
@@ -76,6 +76,8 @@ const groups = computed<ContextMenuItem[][]>(() =>
       : [props.items]
     : []
 )
+const avatarSize = computed(() => getAvatarSize(props.size))
+const itemSize = computed(() => getItemSize(props.size))
 </script>
 
 <template>
@@ -84,7 +86,7 @@ const groups = computed<ContextMenuItem[][]>(() =>
       <slot :name="((item.slot ? `${item.slot}-leading`: 'item-leading') as keyof ContextMenuSlots<T>)" :item="item" :active="active" :index="index" :ui="ui">
         <UIcon v-if="item.loading" :name="loadingIcon || appConfig.ui.icons.loading" data-slot="context-menu-itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [uiOverride?.itemLeadingIcon, item.ui?.itemLeadingIcon], color: item?.color, loading: true })" />
         <UIcon v-else-if="item.icon" :name="item.icon" data-slot="context-menu-itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [uiOverride?.itemLeadingIcon, item.ui?.itemLeadingIcon], color: item?.color, active })" />
-        <UAvatar v-else-if="item.avatar" :size="((item.ui?.itemLeadingAvatarSize || uiOverride?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="context-menu-itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [uiOverride?.itemLeadingAvatar, item.ui?.itemLeadingAvatar], active })" />
+        <UAvatar v-else-if="item.avatar" :size="avatarSize" v-bind="item.avatar" data-slot="context-menu-itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [uiOverride?.itemLeadingAvatar, item.ui?.itemLeadingAvatar], active })" />
       </slot>
 
       <span v-if="(get(item, props.labelKey as string) || !!slots[(item.slot ? `${item.slot}-label`: 'item-label') as keyof ContextMenuSlots<T>]) || (get(item, props.descriptionKey as string) || !!slots[(item.slot ? `${item.slot}-description`: 'item-description') as keyof ContextMenuSlots<T>])" data-slot="context-menu-itemWrapper" :class="ui.itemWrapper({ class: [uiOverride?.itemWrapper, item.ui?.itemWrapper] })">
@@ -107,7 +109,7 @@ const groups = computed<ContextMenuItem[][]>(() =>
         <slot :name="((item.slot ? `${item.slot}-trailing`: 'item-trailing') as keyof ContextMenuSlots<T>)" :item="item" :active="active" :index="index" :ui="ui">
           <UIcon v-if="item.children?.length" :name="childrenIcon" data-slot="context-menu-itemTrailingIcon" :class="ui.itemTrailingIcon({ class: [uiOverride?.itemTrailingIcon, item.ui?.itemTrailingIcon], color: item?.color, active })" />
           <span v-else-if="item.kbds?.length" data-slot="context-menu-itemTrailingKbds" :class="ui.itemTrailingKbds({ class: [uiOverride?.itemTrailingKbds, item.ui?.itemTrailingKbds] })">
-            <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="((item.ui?.itemTrailingKbdsSize || uiOverride?.itemTrailingKbdsSize || ui.itemTrailingKbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
+            <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="itemSize" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
           </span>
         </slot>
 
@@ -147,6 +149,7 @@ const groups = computed<ContextMenuItem[][]>(() =>
                   :class="item.ui?.content"
                   :ui="ui"
                   :ui-override="uiOverride"
+                  :size="size"
                   :portal="portal"
                   :items="(item.children as T)"
                   :align-offset="-4"
