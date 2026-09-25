@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/badge'
+import theme from '../theme/badge'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { ComponentConfig } from '../types/tv'
 

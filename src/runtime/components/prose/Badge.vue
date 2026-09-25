@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/prose/badge'
+import theme from '../../theme/prose/badge'
 import type { ComponentConfig } from '../../types/tv'
 
 type ProseBadge = ComponentConfig<typeof theme, AppConfig, 'badge', 'ui.prose'>

@@ -2,7 +2,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { InertiaLinkProps } from '@inertiajs/vue3'
-import theme from '#build/ui/link'
+import theme from '../../../theme/link'
 import type { ButtonHTMLAttributes, AnchorHTMLAttributes } from '../../../types/html'
 import type { ComponentConfig } from '../../../types/tv'
 
