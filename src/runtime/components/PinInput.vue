@@ -3,7 +3,7 @@
 import type { ComponentPublicInstance, VNode } from 'vue'
 import type { PinInputRootEmits, PinInputRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/pin-input'
+import theme from '../theme/pin-input'
 import type { ComponentConfig } from '../types/tv'
 
 type PinInput = ComponentConfig<typeof theme, AppConfig, 'pinInput'>

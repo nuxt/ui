@@ -283,7 +283,7 @@ type ComponentAppConfig<
 
 /**
  * Defines the configuration shape expected for a component.
- * @template T The component's theme imported from `#build/ui/*`.
+ * @template T The component's theme, from `src/runtime/theme`.
  * @template A The base AppConfig type from `@nuxt/schema`.
  * @template K The key identifying the component (e.g., 'badge').
  * @template U The top-level key in AppConfig ('ui' or 'ui.prose').

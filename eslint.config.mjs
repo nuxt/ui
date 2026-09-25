@@ -298,7 +298,7 @@ const noUnresolvedFormFieldRefs = {
  * value is unique across the library, so a stylesheet can target one part of
  * one component.
  *
- * `<component>` is the `#build/ui/<path>` import in kebab-case, `<slot>` the
+ * `<component>` is the `../theme/<path>` import in kebab-case, `<slot>` the
  * theme slot key as written. Both are derived from the `ui.<slot>()` call on
  * the tag rather than from the value already there, so the fix is idempotent
  * and re-applies whatever a `v4` sync brings back bare.
@@ -472,7 +472,7 @@ const dataSlotNamespace = {
           }
         },
         ImportDeclaration(node) {
-          const path = node.source.value?.match?.(/^#build\/ui\/([\w/-]+)$/)?.[1]
+          const path = node.source.value?.match?.(/^(?:\.\.\/)+theme\/([\w/-]+)$/)?.[1]
           if (path) {
             namespace = path.replace(/^content\//, '').replaceAll('/', '-')
           }

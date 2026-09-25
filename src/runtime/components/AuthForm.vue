@@ -2,7 +2,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/auth-form'
+import theme from '../theme/auth-form'
 import type { ButtonProps } from './Button.vue'
 import type { FormProps } from './Form.vue'
 import type { FormFieldProps } from './FormField.vue'

@@ -1,14 +1,14 @@
 import { applyPrefix } from '../runtime/utils/prefix'
 
 /**
- * Every class the themes hold, prefixed the way the engine prefixes them at
- * runtime, for the `@source inline(...)` list of an app that sets Tailwind's
- * `prefix(...)`.
+ * Every class the themes resolve to, prefixed the way the engine prefixes them
+ * at runtime when the app sets Tailwind's `prefix(...)`, for an
+ * `@source inline(...)` list.
  * @param themes - The theme objects
  * @param prefix - The Tailwind prefix (e.g. `tw`)
  * @returns The sorted, deduplicated class list
  */
-export function getThemeClasses(themes: Record<string, any>[], prefix: string): string[] {
+export function getThemeClasses(themes: Record<string, any>[], prefix?: string): string[] {
   const classes = new Set<string>()
 
   const collect = (value: unknown): void => {
@@ -35,5 +35,3 @@ export function getThemeClasses(themes: Record<string, any>[], prefix: string): 
 
   return [...classes].sort()
 }
-
-export { applyUnstyled } from '../runtime/utils/unstyled'
