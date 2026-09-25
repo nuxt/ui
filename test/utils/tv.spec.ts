@@ -1,7 +1,8 @@
 import { describe, it, expect, expectTypeOf, vi } from 'vitest'
 import { reactive } from 'vue'
 import { tv } from '../../src/runtime/utils/tv'
-import type { VariantProps } from '../../src/runtime/types/tv'
+import type { TVTheme, VariantProps } from '../../src/runtime/types/tv'
+import { extendTheme } from '../../src/runtime/utils/theme'
 import buttonTheme from '../../src/runtime/theme/button'
 import selectTheme from '../../src/runtime/theme/select'
 import stepsTheme from '../../src/runtime/theme/prose/steps'
@@ -725,6 +726,16 @@ describe('tv theme sources', () => {
     expect(ui.content()).toContain('origin-(--reka-select-content-transform-origin)')
     expectTypeOf(ui.leadingIcon).toBeFunction()
     expectTypeOf(selectTheme.defaultVariants.variant).toEqualTypeOf<'outline' | 'soft' | 'subtle' | 'ghost' | 'none'>()
+  })
+
+  it('keeps a callback typed as a function when the base has no value for it', () => {
+    const theme = extendTheme(buttonTheme, { variants: { tone: () => ({ soft: { base: 'opacity-75' } }) } })
+    const check = (value: TVTheme) => value
+
+    // `defuFn` only calls a callback with a base value, so `tone` stays a function
+    expect(theme.variants.tone).toBeTypeOf('function')
+    // @ts-expect-error a variant group can't be a function
+    check(theme)
   })
 
   it('matches a numeric variant key by its string form', () => {
