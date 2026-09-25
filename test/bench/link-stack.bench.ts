@@ -1,4 +1,4 @@
-import { bench, describe } from 'vitest'
+import { test } from 'vitest'
 import { h } from 'vue'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { Primitive } from 'reka-ui'
@@ -33,27 +33,25 @@ function makeParent(render: (cls: string) => any) {
   }
 }
 
-describe('mount', () => {
-  for (const [name, render] of CASES) {
-    bench(name, async () => {
+test('mount', async ({ bench }) => {
+  await bench.compare(
+    ...CASES.map(([name, render]) => bench(name, async () => {
       const wrapper = await mountSuspended(makeParent(render), { props: { cls: 'p-2' } })
       wrapper.unmount()
-    })
-  }
+    }))
+  )
 })
 
-describe('re-render', () => {
-  for (const [name, render] of CASES) {
-    describe(name, () => {
-      let wrapper: Awaited<ReturnType<typeof mountSuspended>> | undefined
+for (const [name, render] of CASES) {
+  test(`re-render: ${name}`, async ({ bench }) => {
+    let wrapper: Awaited<ReturnType<typeof mountSuspended>> | undefined
 
-      // Mounted lazily on the first call: CodSpeed's analysis runner invokes the
-      // bench function without tinybench's `setup`/`teardown` options.
-      bench(name, async () => {
-        wrapper ??= await mountSuspended(makeParent(render), { props: { cls: 'p-2' } })
-        await wrapper.setProps({ cls: 'p-3' })
-        await wrapper.setProps({ cls: 'p-2' })
-      })
-    })
-  }
-})
+    // Mounted lazily on the first call: CodSpeed's analysis runner invokes the
+    // bench function without the `beforeAll`/`afterAll` bench hooks.
+    await bench(name, async () => {
+      wrapper ??= await mountSuspended(makeParent(render), { props: { cls: 'p-2' } })
+      await wrapper.setProps({ cls: 'p-3' })
+      await wrapper.setProps({ cls: 'p-2' })
+    }).run()
+  })
+}

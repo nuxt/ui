@@ -16,11 +16,9 @@ export default defineConfig({
     globals: true,
     silent: true,
     resolveSnapshotPath(path, extension, { config }) {
-      if (config.name === 'vue') {
-        return path.replace(/\/([^/]+)\.spec\.ts$/, `/__snapshots__/$1-vue.spec.ts${extension}`)
-      } else {
-        return path.replace(/\/([^/]+)\.spec\.ts$/, `/__snapshots__/$1.spec.ts${extension}`)
-      }
+      // Benchmark projects are derived from the base ones as `<name> (bench)`.
+      const suffix = config.name?.startsWith('vue') ? '-vue' : ''
+      return path.replace(/\/([^/]+)\.(spec|bench)\.ts$/, `/__snapshots__/$1${suffix}.$2.ts${extension}`)
     },
     projects: [
       await defineVitestProject({
