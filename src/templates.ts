@@ -19,7 +19,7 @@ const ACCENT_ROLES = ['foreground', 'hover', 'soft', 'soft-hover', 'soft-foregro
 
 // Neutral's roles default to the surface tokens it has always used
 const NEUTRAL_ROLES: Record<string, string> = {
-  'hover': 'color-mix(in oklab, var(--ui-accent) 90%, transparent)',
+  'hover': 'color-mix(in oklab, var(--ui-bg-inverted) 90%, transparent)',
   'soft': 'var(--ui-bg-elevated)',
   'soft-hover': 'color-mix(in oklab, var(--ui-bg-accented) 75%, transparent)',
   'soft-foreground': 'var(--ui-text)',
@@ -338,9 +338,11 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   }
 
   /* A color's scope reads its roles from \`--ui-<color>-<role>\`. An unset variable
-     leaves the role unset, so it keeps its recipe, or for neutral its surface token. */
+     leaves the role unset, so it keeps its recipe, or for neutral its surface token.
+     Neutral also resolves \`--ui-neutral\` on the element, so it follows a surface
+     that redefines \`--ui-bg-inverted\`. */
   ${aliases.map(color => `[class~="${prefix}[--ui-accent:var(--ui-${color})]"] {
-    ${ACCENT_ROLES.map(role => `--ui-accent-${role}: var(--ui-${color}-${role}${color === 'neutral' && NEUTRAL_ROLES[role] ? `, ${NEUTRAL_ROLES[role]}` : ''});`).join('\n    ')}
+    ${color === 'neutral' ? '--ui-neutral: var(--ui-bg-inverted);\n    ' : ''}${ACCENT_ROLES.map(role => `--ui-accent-${role}: var(--ui-${color}-${role}${color === 'neutral' && NEUTRAL_ROLES[role] ? `, ${NEUTRAL_ROLES[role]}` : ''});`).join('\n    ')}
   }`).join('\n\n  ')}
 }
 

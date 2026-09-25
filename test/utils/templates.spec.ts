@@ -31,6 +31,6 @@ describe('theme templates', () => {
 
     expect(css).toContain('[class*="[--ui-accent:"]')
     expect(css).toContain('[class~="tw:[--ui-accent:var(--ui-warning)]"] {\n    --ui-accent-foreground: var(--ui-warning-foreground);')
-    expect(css).toContain('--ui-accent-soft: var(--ui-neutral-soft, var(--ui-bg-elevated));')
+    expect(css).toContain('[class~="tw:[--ui-accent:var(--ui-neutral)]"] {\n    --ui-neutral: var(--ui-bg-inverted);')
   })
 })
