@@ -486,7 +486,10 @@ describe('Form', () => {
       expect(wrapper.find('#nestedField').text()).toBe('')
     })
 
-    it('still validates a field cleared right after the input', async () => {
+    it.each([
+      ['by name', 'email'],
+      ['entirely', undefined]
+    ])('still validates a field cleared %s right after the input', async (_, target) => {
       const wrapper: any = await renderForm({
         fixture: 'FormBasic',
         props: { validateOnInputDelay: 50, schema: z.object({ email: z.email(), password: z.string().optional() }) }
@@ -495,10 +498,28 @@ describe('Form', () => {
 
       await wrapper.find('#email').trigger('blur')
       await type(wrapper, '#email', 'not-an-email')
-      form.clear('email')
+      form.clear(target)
       await wait(60)
 
       expect(form.errors).toMatchObject([{ name: 'email' }])
+    })
+
+    it('keeps fields edited during an async submit dirty', async () => {
+      let resolve!: () => void
+      const wrapper: any = await renderForm({
+        fixture: 'FormBasic',
+        props: { loadingAuto: false, onSubmit: () => new Promise<void>(r => (resolve = r)) }
+      })
+      const form = wrapper.setupState.form.value
+
+      await type(wrapper, '#email', 'bob@dylan.com')
+      const submitting = form.submit()
+      await flushPromises()
+      await type(wrapper, '#password', 'strongpassword')
+      resolve()
+      await submitting
+
+      expect([...form.dirtyFields]).toEqual(['password'])
     })
 
     it('drops an older validation that finishes last', async () => {

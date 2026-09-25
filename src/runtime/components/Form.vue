@@ -164,6 +164,7 @@ onMounted(async () => {
 
       if (event.type === 'change' || event.type === 'input') {
         dirtyFields.add(event.name)
+        dirtyEpochs.set(event.name, epoch)
       }
 
       if (event.type === 'input') {
@@ -205,9 +206,13 @@ const blurredFields: Set<keyof I> = reactive(new Set<keyof I>())
 let epoch = 0
 const inputEpochs = new Map<keyof I, number>()
 const validationRuns = new Map<keyof I, number>()
+const dirtyEpochs = new Map<keyof I, number>()
 
 function clearDirty() {
-  dirtyFields.clear()
+  // Fields edited since the last full validation (during an async `onSubmit`) stay dirty
+  for (const field of dirtyFields) {
+    if (dirtyEpochs.get(field) !== epoch) dirtyFields.delete(field)
+  }
   for (const form of nestedForms.value.values()) {
     form.clearDirty()
   }

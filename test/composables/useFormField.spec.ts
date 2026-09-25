@@ -192,9 +192,10 @@ describe('useFormField', () => {
     })
 
     it('emits the input right away and a debounced eager validation', async () => {
-      const { api, events } = await mountField({}, undefined, { formField: { name: 'email', ariaId: 'aria-1' } })
+      const { api, events } = await mountField({}, undefined, { formField: { name: 'email', ariaId: 'aria-1' }, formOptions: { validateOnInputDelay: 20 } })
 
       api.emitFormInput()
+      expect(events).toEqual([{ type: 'input', name: 'email', validate: false }])
 
       await vi.waitFor(() => expect(events).toEqual([
         { type: 'input', name: 'email', validate: false },
