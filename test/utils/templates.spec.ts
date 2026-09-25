@@ -82,6 +82,12 @@ describe('static css', () => {
   const tokens = readFileSync(resolve('./runtime/tokens.css'), 'utf8')
   const accent = readFileSync(resolve('./runtime/accent.css'), 'utf8')
 
+  // `#build/ui.css` adds the prefixed scopes before `accent.css`, so the reset,
+  // which also matches a prefixed scope class, must not outrank them
+  it('resets the accent roles at zero specificity', () => {
+    expect(accent).toContain(':where([class*="[--ui-accent:"]) {')
+  })
+
   it.each(colors)('bridges and scopes %s', (color) => {
     expect(tokens).toContain(`--color-${color}: var(--ui-${color});`)
     expect(tokens).toContain(`--color-${color}-500: var(--ui-color-${color}-500);`)
