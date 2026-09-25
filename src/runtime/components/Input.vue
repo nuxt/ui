@@ -89,7 +89,7 @@ const _props = withDefaults(defineProps<InputProps<T, Mod>>(), {
 const emits = defineEmits<InputEmits<T, Mod>>()
 const slots = defineSlots<InputSlots>()
 
-const props = useComponentProps<InputProps<T, Mod>>('input', _props)
+const props = useComponentProps<InputProps<T, Mod>>('input', _props, theme)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const modelValue = useVModel<InputProps<T, Mod>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, { defaultValue: props.defaultValue })

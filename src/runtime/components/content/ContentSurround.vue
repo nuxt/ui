@@ -69,7 +69,7 @@ const _props = defineProps<ContentSurroundProps<T>>()
 
 defineSlots<ContentSurroundSlots<T>>()
 
-const props = useComponentProps<ContentSurroundProps<T>>('contentSurround', _props)
+const props = useComponentProps<ContentSurroundProps<T>>('contentSurround', _props, theme)
 
 const { dir } = useLocale()
 const appConfig = useAppConfig() as ContentSurround['AppConfig']

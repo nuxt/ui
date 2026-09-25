@@ -51,7 +51,7 @@ const _props = withDefaults(defineProps<BlogPostsProps>(), {
 })
 const slots = defineSlots<BlogPostsSlots<T>>()
 
-const props = useComponentProps<BlogPostsProps>('blogPosts', _props)
+const props = useComponentProps<BlogPostsProps>('blogPosts', _props, theme)
 
 const getProxySlots = () => omit(slots, ['default'])
 

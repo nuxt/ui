@@ -86,7 +86,7 @@ const _props = withDefaults(defineProps<TimelineProps<T>>(), {
 const emits = defineEmits<TimelineEmits<T>>()
 const slots = defineSlots<TimelineSlots<T>>()
 
-const props = useComponentProps<TimelineProps<T>>('timeline', _props)
+const props = useComponentProps<TimelineProps<T>>('timeline', _props, theme)
 
 const modelValue = defineModel<string | number>()
 

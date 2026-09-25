@@ -84,7 +84,7 @@ const _props = withDefaults(defineProps<InputRatingProps>(), {
 const emits = defineEmits<InputRatingEmits>()
 defineSlots<InputRatingSlots>()
 
-const props = useComponentProps<InputRatingProps>('inputRating', _props)
+const props = useComponentProps<InputRatingProps>('inputRating', _props, theme)
 
 const appConfig = useAppConfig() as InputRating['AppConfig']
 

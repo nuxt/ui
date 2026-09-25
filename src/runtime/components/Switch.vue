@@ -76,7 +76,7 @@ const _props = defineProps<SwitchProps<T>>()
 const slots = defineSlots<SwitchSlots>()
 const emits = defineEmits<SwitchEmits<T>>()
 
-const props = useComponentProps<SwitchProps<T>>('switch', _props)
+const props = useComponentProps<SwitchProps<T>>('switch', _props, theme)
 
 const appConfig = useAppConfig() as Switch['AppConfig']
 

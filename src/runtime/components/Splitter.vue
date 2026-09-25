@@ -87,7 +87,7 @@ const _props = withDefaults(defineProps<SplitterProps<T>>(), {
 const emits = defineEmits<SplitterEmits>()
 defineSlots<SplitterSlots<T>>()
 
-const props = useComponentProps<SplitterProps<T>>('splitter', _props)
+const props = useComponentProps<SplitterProps<T>>('splitter', _props, theme)
 
 const appConfig = useAppConfig() as Splitter['AppConfig']
 

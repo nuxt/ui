@@ -105,7 +105,7 @@ const _props = withDefaults(defineProps<CheckboxGroupProps<T, VK>>(), {
 const emits = defineEmits<CheckboxGroupEmits<T, VK>>()
 const slots = defineSlots<CheckboxGroupSlots<T>>()
 
-const props = useComponentProps<CheckboxGroupProps<T, VK>>('checkboxGroup', _props)
+const props = useComponentProps<CheckboxGroupProps<T, VK>>('checkboxGroup', _props, theme)
 
 const appConfig = useAppConfig() as CheckboxGroup['AppConfig']
 

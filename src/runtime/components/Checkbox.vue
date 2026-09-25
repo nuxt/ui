@@ -79,7 +79,7 @@ const _props = defineProps<CheckboxProps<T>>()
 const slots = defineSlots<CheckboxSlots>()
 const emits = defineEmits<CheckboxEmits<T>>()
 
-const props = useComponentProps<CheckboxProps<T>>('checkbox', _props)
+const props = useComponentProps<CheckboxProps<T>>('checkbox', _props, theme)
 
 const appConfig = useAppConfig() as Checkbox['AppConfig']
 

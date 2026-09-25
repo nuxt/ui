@@ -117,7 +117,7 @@ const _props = withDefaults(defineProps<RadioGroupProps<T, VK>>(), {
 const emits = defineEmits<RadioGroupEmits<T, VK>>()
 const slots = defineSlots<RadioGroupSlots<T>>()
 
-const props = useComponentProps<RadioGroupProps<T, VK>>('radioGroup', _props)
+const props = useComponentProps<RadioGroupProps<T, VK>>('radioGroup', _props, theme)
 
 const appConfig = useAppConfig() as RadioGroup['AppConfig']
 

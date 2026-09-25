@@ -84,7 +84,7 @@ const _props = withDefaults(defineProps<BreadcrumbProps<T>>(), {
 })
 const slots = defineSlots<BreadcrumbSlots<T>>()
 
-const props = useComponentProps<BreadcrumbProps<T>>('breadcrumb', _props)
+const props = useComponentProps<BreadcrumbProps<T>>('breadcrumb', _props, theme)
 
 const { dir } = useLocale()
 const appConfig = useAppConfig() as Breadcrumb['AppConfig']
