@@ -2,8 +2,8 @@
 @import './keyframes.css';
 @source './components';
 
-@variant light (&:where(.light, .light *));
-@variant dark (&:where(.dark, .dark *));
+@custom-variant light (&:where(.light, .light *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
   /* Chromium applies an `outline-offset` on focused links, reset it so focus outlines hug elements consistently */
