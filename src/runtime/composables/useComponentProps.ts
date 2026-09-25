@@ -87,7 +87,7 @@ export function useComponentProps<T extends object>(name: string, props: T): T {
 
       // Like `ui`, `class` is merged instead of replaced so a component passing
       // its own `class` still gets the theme classes. The explicit class comes
-      // last to win `twMerge`'s last-in-wins resolution.
+      // last to win the merger's last-in-wins resolution.
       if (prop === 'class') {
         const themeClass = themeEntry?.class
         if (themeClass === undefined) return raw

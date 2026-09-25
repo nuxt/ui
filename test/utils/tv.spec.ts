@@ -29,7 +29,7 @@ describe('tv class replace', () => {
   it('keeps merging plain string classes (no regression)', () => {
     const ui = build()
     expect(ui.label({ class: 'font-bold' })).toBe('truncate font-bold')
-    // A conflicting utility is still resolved by tailwind-merge.
+    // A conflicting utility is still resolved by the merger.
     const base = ui.base({ class: 'text-lg' })
     expect(base).toContain('text-lg')
     expect(base).not.toContain('text-sm')
@@ -112,7 +112,7 @@ describe('tv class replace', () => {
   })
 
   it('lets the last replacer win when several are forwarded in the class array', () => {
-    // Mirrors `[props.ui?.base, props.class]` with both set: `class` wins, like twMerge.
+    // Mirrors `[props.ui?.base, props.class]` with both set: `class` wins, like the merger.
     expect(build().base({ class: [() => 'block', () => 'w-full'] })).toBe('w-full')
   })
 })
@@ -701,5 +701,37 @@ describe('tv spec sharing', () => {
     expect(tvt(theme, {})().base(props)).toBe('inline-flex font-bold')
     expect(tvt(theme, null)().base(props)).toBe('inline-flex font-bold')
     expect(counter.reads).toBe(hit * 2)
+  })
+})
+
+describe('tv merger config', () => {
+  // `app.config.ui.tv` is read once when the engine module loads, so each case
+  // loads a fresh copy against its own config.
+  async function load(config: Record<string, any>) {
+    vi.resetModules()
+    vi.doMock('#build/app.config', () => ({ default: { ui: { tv: config } } }))
+    const { tv } = await import('../../src/runtime/utils/tv')
+    vi.doUnmock('#build/app.config')
+    return tv as unknown as typeof tvt
+  }
+
+  it('merges with the default engine when nothing is set', async () => {
+    const tv = await load({ prefix: undefined })
+    expect(tv({ slots: { base: 'px-2 py-1' } })().base({ class: 'px-4' })).toBe('py-1 px-4')
+  })
+
+  it('reads prefixed classes with `prefix`', async () => {
+    const tv = await load({ prefix: 'tw' })
+    expect(tv({ slots: { base: 'tw:px-2 tw:py-1' } })().base({ class: 'tw:px-4' })).toBe('tw:py-1 tw:px-4')
+  })
+
+  it('keeps every class with `merge: false`', async () => {
+    const tv = await load({ merge: false })
+    expect(tv({ slots: { base: 'px-2 py-1' } })().base({ class: 'px-4' })).toBe('px-2 py-1 px-4')
+  })
+
+  it('still merges with `cacheSize: 0`', async () => {
+    const tv = await load({ cacheSize: 0 })
+    expect(tv({ slots: { base: 'px-2 py-1' } })().base({ class: 'px-4' })).toBe('py-1 px-4')
   })
 })
