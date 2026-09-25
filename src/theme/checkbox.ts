@@ -1,6 +1,4 @@
 import { colorVariant } from './color'
-// Shared with `checkbox-group` and `radio-group`, which style the same states on their own slots.
-export const hover = 'hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:'
 
 // `list` puts focus on the control, which is the click target there. `card` and `table`
 // render the root as a label wrapping everything, so focus belongs on the card itself,
@@ -26,7 +24,7 @@ export default {
         root: ''
       },
       card: {
-        root: `border border-default rounded-lg ${hover}bg-elevated/50 transition-colors ${focusCard} has-data-[state=checked]:border-accent-border-strong has-data-[state=checked]:bg-accent-soft`
+        root: `border border-default rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors ${focusCard} has-data-[state=checked]:border-accent-border-strong has-data-[state=checked]:bg-accent-soft`
       }
     },
     indicator: {
@@ -77,7 +75,7 @@ export default {
     },
     required: {
       true: {
-        label: 'after:content-[\'*\'] after:ms-0.5 after:text-error'
+        label: `after:content-['*'] after:ms-0.5 after:text-error`
       }
     },
     disabled: {
@@ -109,7 +107,7 @@ export default {
       variant: 'card',
       highlight: false,
       class: {
-        root: `${hover}border-accented`
+        root: 'hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-accented'
       }
     },
     { size: 'xs', indicator: 'hidden', class: { icon: 'size-3' } },

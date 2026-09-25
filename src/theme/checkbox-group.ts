@@ -1,6 +1,6 @@
 import { colorVariant } from './color'
 // `table` is defined here rather than in checkbox.ts, so its focus ring is too
-import { focusCard, hover } from './checkbox'
+import { focusCard } from './checkbox'
 
 export default {
   slots: {
@@ -27,7 +27,7 @@ export default {
         fieldset: 'flex-wrap'
       },
       table: {
-        item: `border border-default ${hover}bg-elevated/50 transition-colors ${focusCard} has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent-border-strong has-data-[state=checked]:z-[1]`
+        item: `border border-default hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors ${focusCard} has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent-border-strong has-data-[state=checked]:z-[1]`
       }
     },
     size: {
@@ -54,7 +54,7 @@ export default {
     },
     required: {
       true: {
-        legend: 'after:content-[\'*\'] after:ms-0.5 after:text-error'
+        legend: `after:content-['*'] after:ms-0.5 after:text-error`
       }
     },
     highlight: {
@@ -70,7 +70,7 @@ export default {
       variant: 'table',
       highlight: false,
       class: {
-        item: `${hover}border-accented`
+        item: 'hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-accented'
       }
     },
     { size: 'xs', variant: 'table', class: { item: 'p-2.5' } },

@@ -1,3 +1,5 @@
+import { readdirSync, readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { describe, it, expect } from 'vitest'
 import * as theme from '../../src/theme'
 import * as themeProse from '../../src/theme/prose'
@@ -60,5 +62,55 @@ describe('theme slots', () => {
     }
 
     expect(problems, 'give each class per slot, e.g. `{ base: \'...\' }`').toEqual([])
+  })
+})
+
+const themeDir = join(process.cwd(), 'src/theme')
+const source = readdirSync(themeDir, { recursive: true, encoding: 'utf8' })
+  .filter(file => file.endsWith('.ts'))
+  .map(file => readFileSync(join(themeDir, file), 'utf8'))
+  .join('\n')
+
+const BOUNDARY = /[\s'"`]/
+
+function classesOf(value: unknown): string[] {
+  if (typeof value === 'string') {
+    return value.split(/\s+/).filter(Boolean)
+  }
+  if (Array.isArray(value)) {
+    return value.flatMap(classesOf)
+  }
+  if (isObject(value)) {
+    return Object.values(value).flatMap(classesOf)
+  }
+  return []
+}
+
+// Written out whole, between quotes or spaces, the way Tailwind's scanner reads it
+function spelledOut(cls: string) {
+  for (let index = source.indexOf(cls); index !== -1; index = source.indexOf(cls, index + 1)) {
+    const before = source[index - 1]
+    const after = source[index + cls.length]
+    if ((!before || BOUNDARY.test(before)) && (!after || BOUNDARY.test(after))) {
+      return true
+    }
+  }
+  return false
+}
+
+/**
+ * Tailwind generates the theme CSS by scanning `src/theme`, so a class a theme
+ * only builds at runtime, from a template literal, a helper or an escaped
+ * quote, gets no CSS. Write it out as a literal instead.
+ */
+describe('theme classes', () => {
+  it.each(themes)('%s spells out every class it resolves to', (_, resolved) => {
+    const classes = [
+      ...classesOf(resolved.slots),
+      ...classesOf(resolved.variants),
+      ...[resolved.compoundVariants ?? []].flat(Infinity).flatMap(compound => classesOf((compound as Record<string, unknown>)?.class))
+    ]
+
+    expect([...new Set(classes)].filter(cls => !spelledOut(cls))).toEqual([])
   })
 })
