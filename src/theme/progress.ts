@@ -1,3 +1,5 @@
+import { colorVariant } from './color'
+
 export default {
   slots: {
     root: 'gap-2',
@@ -14,12 +16,7 @@ export default {
       'swing': '',
       'elastic': ''
     },
-    color: {
-      '*': {
-        indicator: '[--ui-accent:var(--ui-{value})]',
-        steps: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
+    color: colorVariant({ indicator: '', steps: '' }),
     size: {
       '2xs': {
         status: 'text-xs',

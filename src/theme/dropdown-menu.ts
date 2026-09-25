@@ -1,3 +1,5 @@
+import { colorVariant, colors } from './color'
+
 export default {
   slots: {
     content: 'min-w-32 max-h-(--reka-dropdown-menu-content-available-height) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col',
@@ -22,12 +24,7 @@ export default {
     itemLabelExternalIcon: 'inline-block size-3 align-top text-dimmed'
   },
   variants: {
-    color: {
-      '*': {
-        item: '[--ui-accent:var(--ui-{value})]',
-        itemLeadingIcon: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
+    color: colorVariant({ item: '', itemLeadingIcon: '' }),
     active: {
       true: {
         item: 'text-highlighted before:bg-elevated',
@@ -97,14 +94,14 @@ export default {
     }
   },
   compoundVariants: [{
-    color: '*',
+    color: [...colors],
     active: false,
     class: {
       item: 'text-accent-soft-foreground data-highlighted:text-accent data-highlighted:before:bg-accent-tint data-[state=open]:before:bg-accent-tint',
       itemLeadingIcon: 'text-accent-faint group-data-highlighted:text-accent-soft-foreground group-data-[state=open]:text-accent-soft-foreground'
     }
   }, {
-    color: '*',
+    color: [...colors],
     active: true,
     class: {
       item: 'text-accent before:bg-accent-soft',

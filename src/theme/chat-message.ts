@@ -1,3 +1,5 @@
+import { colorVariant, colors } from './color'
+
 export default {
   slots: {
     root: 'group/message relative w-full',
@@ -21,11 +23,9 @@ export default {
       naked: ''
     },
     color: {
-      '*': {
-        content: '[--ui-accent:var(--ui-{value})]'
-      },
+      ...colorVariant({ content: '' }),
       // Neutral keeps the inherited text color, so it has its own classes.
-      'neutral': ''
+      neutral: ''
     },
     side: {
       left: {},
@@ -59,31 +59,31 @@ export default {
     }
   },
   compoundVariants: [{
-    color: '*',
+    color: colors.filter(color => color !== 'neutral'),
     variant: 'solid',
     class: {
       content: 'bg-accent text-accent-foreground'
     }
   }, {
-    color: '*',
+    color: colors.filter(color => color !== 'neutral'),
     variant: 'outline',
     class: {
       content: 'text-accent ring ring-accent-border-soft'
     }
   }, {
-    color: '*',
+    color: colors.filter(color => color !== 'neutral'),
     variant: 'soft',
     class: {
       content: 'bg-accent-soft text-accent-soft-foreground'
     }
   }, {
-    color: '*',
+    color: colors.filter(color => color !== 'neutral'),
     variant: 'subtle',
     class: {
       content: 'bg-accent-soft text-accent-soft-foreground ring ring-accent-border-soft'
     }
   }, {
-    color: '*',
+    color: colors.filter(color => color !== 'neutral'),
     variant: 'naked',
     class: {
       content: 'text-accent'

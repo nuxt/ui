@@ -1,3 +1,5 @@
+import { colorVariant } from './color'
+
 export default {
   slots: {
     root: 'flex gap-4',
@@ -67,12 +69,7 @@ export default {
       }
     },
 
-    color: {
-      '*': {
-        trigger: '[--ui-accent:var(--ui-{value})]',
-        separator: '[--ui-accent:var(--ui-{value})]'
-      }
-    }
+    color: colorVariant({ trigger: '', separator: '' })
   },
 
   compoundVariants: [{

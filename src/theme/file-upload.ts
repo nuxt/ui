@@ -1,3 +1,5 @@
+import { colorVariant } from './color'
+
 export default {
   slots: {
     root: 'relative flex flex-col',
@@ -17,11 +19,7 @@ export default {
     fileTrailingButton: ''
   },
   variants: {
-    color: {
-      '*': {
-        base: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
+    color: colorVariant({ base: '' }),
     variant: {
       area: {
         wrapper: 'px-4 py-3',

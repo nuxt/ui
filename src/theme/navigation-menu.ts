@@ -1,3 +1,5 @@
+import { colorVariant, highlightColorVariant } from './color'
+
 export default {
   slots: {
     root: 'relative flex gap-1.5 [&>div]:min-w-0',
@@ -32,18 +34,8 @@ export default {
     arrow: 'relative top-[50%] size-2.5 rotate-45 border border-default bg-default z-1 rounded-xs'
   },
   variants: {
-    color: {
-      '*': {
-        link: '[--ui-accent:var(--ui-{value})]',
-        linkLeadingIcon: '[--ui-accent:var(--ui-{value})]',
-        childLink: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
-    highlightColor: {
-      '*': {
-        link: '[--ui-highlight:var(--ui-{value})]'
-      }
-    },
+    color: colorVariant({ link: '', linkLeadingIcon: '', childLink: '' }),
+    highlightColor: highlightColorVariant({ link: '' }),
     variant: {
       pill: '',
       link: ''

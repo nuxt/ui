@@ -1,3 +1,4 @@
+import { colorVariant } from './color'
 import { fieldGroupVariantWithRoot } from './field-group'
 
 export default {
@@ -62,11 +63,7 @@ export default {
       ghost: { base: 'text-highlighted bg-transparent hover:bg-elevated focus:bg-elevated disabled:bg-transparent dark:disabled:bg-transparent' },
       none: { base: 'text-highlighted bg-transparent focus:outline-none' }
     },
-    color: {
-      '*': {
-        base: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
+    color: colorVariant({ base: '' }),
     leading: {
       true: ''
     },

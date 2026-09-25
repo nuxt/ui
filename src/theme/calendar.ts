@@ -1,3 +1,5 @@
+import { colorVariant, colors } from './color'
+
 const daySizes = {
   xs: 'size-6',
   sm: 'size-7',
@@ -33,12 +35,9 @@ export default {
   },
   variants: {
     color: {
-      '*': {
-        headCell: '[--ui-accent:var(--ui-{value})] text-accent',
-        cellTrigger: '[--ui-accent:var(--ui-{value})] outline-accent-focus'
-      },
+      ...colorVariant({ headCell: 'text-accent', cellTrigger: 'outline-accent-focus' }),
       // Neutral hovers at 10% where the colors use 20%, so it keeps its own classes.
-      'neutral': {
+      neutral: {
         headCell: 'text-highlighted',
         cellTrigger: 'outline-inverted/25'
       }
@@ -107,28 +106,28 @@ export default {
   },
   compoundVariants: [
     {
-      color: '*',
+      color: colors.filter(color => color !== 'neutral'),
       variant: 'solid',
       class: {
         cellTrigger: 'data-selected:bg-accent data-selected:text-accent-foreground data-today:not-data-selected:text-accent data-highlighted:bg-accent-soft-active hover:not-data-selected:bg-accent-soft-active'
       }
     },
     {
-      color: '*',
+      color: colors.filter(color => color !== 'neutral'),
       variant: 'outline',
       class: {
         cellTrigger: 'data-selected:ring data-selected:ring-inset data-selected:ring-accent-border data-selected:text-accent data-selected:focus-visible:ring-accent data-today:not-data-selected:text-accent data-highlighted:bg-accent-soft hover:not-data-selected:bg-accent-soft'
       }
     },
     {
-      color: '*',
+      color: colors.filter(color => color !== 'neutral'),
       variant: 'soft',
       class: {
         cellTrigger: 'data-selected:bg-accent-soft data-selected:text-accent-soft-foreground data-today:not-data-selected:text-accent data-highlighted:bg-accent-soft-active hover:not-data-selected:bg-accent-soft-active'
       }
     },
     {
-      color: '*',
+      color: colors.filter(color => color !== 'neutral'),
       variant: 'subtle',
       class: {
         cellTrigger: 'data-selected:bg-accent-soft data-selected:text-accent-soft-foreground data-selected:ring data-selected:ring-inset data-selected:ring-accent-border-soft data-selected:focus-visible:ring-accent data-today:not-data-selected:text-accent data-highlighted:bg-accent-soft-active hover:not-data-selected:bg-accent-soft-active'

@@ -1,3 +1,4 @@
+import { colorVariant } from './color'
 // Highlight the prompt like a focused input when the text surface (native textarea or editor's contenteditable) is focused, without reacting to header/footer controls.
 const focusHighlight = (utilities: string) => ['textarea', '[contenteditable]']
   .flatMap(element => utilities.split(' ').map(utility => `has-[${element}:focus-visible]:${utility}`))
@@ -12,11 +13,7 @@ export default {
     base: 'px-0'
   },
   variants: {
-    color: {
-      '*': {
-        root: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
+    color: colorVariant({ root: '' }),
     variant: {
       outline: {
         root: 'bg-default/75 ring ring-default'

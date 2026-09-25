@@ -1,3 +1,4 @@
+import { colorVariant } from './color'
 // Active-tab highlight shown before reka-ui's `TabsIndicator` mounts (SSR / pre-hydration).
 // reka-ui only renders the real indicator on the client (it needs DOM measurements), so we gate
 // a CSS-only pseudo-element fallback on the active trigger by the *absence* of the indicator
@@ -19,13 +20,7 @@ export default {
     content: 'w-full rounded-md focus-visible:outline-3 outline-accent-focus'
   },
   variants: {
-    color: {
-      '*': {
-        content: '[--ui-accent:var(--ui-{value})]',
-        trigger: '[--ui-accent:var(--ui-{value})]',
-        indicator: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
+    color: colorVariant({ content: '', trigger: '', indicator: '' }),
     variant: {
       pill: {
         list: 'bg-elevated rounded-lg',

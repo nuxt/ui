@@ -1,13 +1,11 @@
+import { colorVariant } from './color'
+
 export default {
   slots: {
     base: 'inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase'
   },
   variants: {
-    color: {
-      '*': {
-        base: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
+    color: colorVariant({ base: '' }),
     variant: {
       solid: {
         base: 'text-accent-foreground bg-accent'

@@ -25,12 +25,36 @@ export default {
       }
     },
 
+    // The indicator is an Avatar with its own color, so the timeline's color only
+    // takes over in the states where it paints the indicator.
     color: {
-      '*': {
-        // The indicator is an Avatar with its own color, so the timeline's color
-        // only takes over in the states where it paints the indicator.
-        indicator: 'group-data-[state=completed]:[--ui-accent:var(--ui-{value})] group-data-[state=active]:[--ui-accent:var(--ui-{value})]',
-        separator: '[--ui-accent:var(--ui-{value})]'
+      primary: {
+        indicator: 'group-data-[state=completed]:[--ui-accent:var(--ui-primary)] group-data-[state=active]:[--ui-accent:var(--ui-primary)]',
+        separator: '[--ui-accent:var(--ui-primary)]'
+      },
+      secondary: {
+        indicator: 'group-data-[state=completed]:[--ui-accent:var(--ui-secondary)] group-data-[state=active]:[--ui-accent:var(--ui-secondary)]',
+        separator: '[--ui-accent:var(--ui-secondary)]'
+      },
+      success: {
+        indicator: 'group-data-[state=completed]:[--ui-accent:var(--ui-success)] group-data-[state=active]:[--ui-accent:var(--ui-success)]',
+        separator: '[--ui-accent:var(--ui-success)]'
+      },
+      info: {
+        indicator: 'group-data-[state=completed]:[--ui-accent:var(--ui-info)] group-data-[state=active]:[--ui-accent:var(--ui-info)]',
+        separator: '[--ui-accent:var(--ui-info)]'
+      },
+      warning: {
+        indicator: 'group-data-[state=completed]:[--ui-accent:var(--ui-warning)] group-data-[state=active]:[--ui-accent:var(--ui-warning)]',
+        separator: '[--ui-accent:var(--ui-warning)]'
+      },
+      error: {
+        indicator: 'group-data-[state=completed]:[--ui-accent:var(--ui-error)] group-data-[state=active]:[--ui-accent:var(--ui-error)]',
+        separator: '[--ui-accent:var(--ui-error)]'
+      },
+      neutral: {
+        indicator: 'group-data-[state=completed]:[--ui-accent:var(--ui-neutral)] group-data-[state=active]:[--ui-accent:var(--ui-neutral)]',
+        separator: '[--ui-accent:var(--ui-neutral)]'
       }
     },
 

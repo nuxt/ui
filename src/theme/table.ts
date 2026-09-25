@@ -1,3 +1,5 @@
+import { colorVariant } from './color'
+
 export default {
   slots: {
     root: 'relative overflow-auto outline-primary/25 focus-visible:outline-3',
@@ -48,11 +50,7 @@ export default {
       'swing': '',
       'elastic': ''
     },
-    loadingColor: {
-      '*': {
-        thead: '[--ui-accent:var(--ui-{value})]'
-      }
-    }
+    loadingColor: colorVariant({ thead: '' })
   },
   compoundVariants: [{
     loading: true,

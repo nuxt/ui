@@ -1,3 +1,5 @@
+import { colorVariant } from '../color'
+
 export default {
   slots: {
     root: 'sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur-sm -mx-4 px-4 sm:px-6 sm:-mx-6 lg:ms-0 flex flex-col overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]',
@@ -20,16 +22,8 @@ export default {
     indicatorActive: 'bg-accent'
   },
   variants: {
-    color: {
-      '*': {
-        link: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
-    highlightColor: {
-      '*': {
-        indicatorActive: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
+    color: colorVariant({ link: '' }),
+    highlightColor: colorVariant({ indicatorActive: '' }),
     active: {
       true: {
         link: 'text-accent'

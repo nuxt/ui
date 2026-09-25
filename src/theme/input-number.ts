@@ -1,3 +1,4 @@
+import { colorVariant } from './color'
 import input from './input'
 import { fieldGroupVariantWithRoot } from './field-group'
 
@@ -10,11 +11,7 @@ export default {
   },
   variants: {
     ...fieldGroupVariantWithRoot,
-    color: {
-      '*': {
-        base: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
+    color: colorVariant({ base: '' }),
     size: {
       xs: { base: 'px-2 py-1 text-sm/4 gap-1' },
       sm: { base: 'px-2.5 py-1.5 text-sm/4 gap-1.5' },

@@ -1,3 +1,5 @@
+import { colorVariant, colors } from '../color'
+
 export default {
   slots: {
     base: 'group relative block px-4 py-3 rounded-md text-sm/6 my-5 last:mb-0 [&_code]:text-xs/5 [&_code]:bg-default [&_pre]:bg-default [&>div]:my-2.5 [&_ul]:my-2.5 [&_ol]:my-2.5 *:last:mb-0! [&_ul]:ps-4.5 [&_ol]:ps-4.5 [&_li]:my-0 transition-colors border',
@@ -6,13 +8,9 @@ export default {
   },
   variants: {
     color: {
-      '*': {
-        base: '[--ui-accent:var(--ui-{value})] border-accent-border-soft bg-accent-soft text-accent-soft-foreground [&_a]:text-accent [&_a]:hover:border-accent [&_a]:outline-accent-focus [&_a]:focus-visible:outline-3 [&_a]:focus-visible:has-[>code]:outline-0 [&_code]:text-accent-soft-foreground [&_code]:border-accent-border-soft [&_a]:[&>code]:outline-accent-focus [&_a]:hover:[&>code]:border-accent [&_a]:hover:[&>code]:text-accent [&_a]:focus-visible:[&>code]:border-accent [&_a]:focus-visible:[&>code]:text-accent [&>ul]:marker:text-accent-border',
-        icon: '[--ui-accent:var(--ui-{value})] text-accent',
-        externalIcon: '[--ui-accent:var(--ui-{value})] text-accent-soft-foreground'
-      },
+      ...colorVariant({ base: 'border-accent-border-soft bg-accent-soft text-accent-soft-foreground [&_a]:text-accent [&_a]:hover:border-accent [&_a]:outline-accent-focus [&_a]:focus-visible:outline-3 [&_a]:focus-visible:has-[>code]:outline-0 [&_code]:text-accent-soft-foreground [&_code]:border-accent-border-soft [&_a]:[&>code]:outline-accent-focus [&_a]:hover:[&>code]:border-accent [&_a]:hover:[&>code]:text-accent [&_a]:focus-visible:[&>code]:border-accent [&_a]:focus-visible:[&>code]:text-accent [&>ul]:marker:text-accent-border', icon: 'text-accent', externalIcon: 'text-accent-soft-foreground' }),
       // Neutral is the plain callout, not a variant of the colored one.
-      'neutral': {
+      neutral: {
         base: 'border-muted bg-muted text-default',
         icon: 'text-highlighted',
         externalIcon: 'text-dimmed'
@@ -23,7 +21,7 @@ export default {
     }
   },
   compoundVariants: [{
-    color: '*',
+    color: colors.filter(color => color !== 'neutral'),
     to: true,
     class: {
       base: 'hover:border-accent outline-accent-focus has-[>a:focus-visible]:outline-3 has-[>a:focus-visible]:border-accent',

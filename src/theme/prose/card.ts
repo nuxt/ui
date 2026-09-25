@@ -1,3 +1,5 @@
+import { colorVariant } from '../color'
+
 export default {
   slots: {
     base: 'group relative block my-5 p-4 sm:p-6 border border-default rounded-md bg-default transition-colors',
@@ -7,13 +9,7 @@ export default {
     externalIcon: 'size-4 align-top absolute end-2 top-2 text-dimmed pointer-events-none transition-colors'
   },
   variants: {
-    color: {
-      '*': {
-        base: '[--ui-accent:var(--ui-{value})]',
-        icon: '[--ui-accent:var(--ui-{value})]',
-        externalIcon: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
+    color: colorVariant({ base: '', icon: '', externalIcon: '' }),
     to: {
       true: {
         base: 'hover:bg-accent-tint hover:border-accent outline-accent-focus has-[>a:focus-visible]:outline-3 has-[>a:focus-visible]:border-accent',

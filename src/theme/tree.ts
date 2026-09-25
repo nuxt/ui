@@ -1,3 +1,5 @@
+import { colorVariant } from './color'
+
 export default {
   slots: {
     root: 'relative isolate',
@@ -16,11 +18,7 @@ export default {
         root: 'overflow-y-auto'
       }
     },
-    color: {
-      '*': {
-        link: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
+    color: colorVariant({ link: '' }),
     size: {
       xs: {
         listWithChildren: 'ms-4',

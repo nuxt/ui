@@ -1,3 +1,4 @@
+import { colorVariant } from './color'
 // `table` is defined here rather than in checkbox.ts, so its focus ring is too
 import { focusCard, hover } from './checkbox'
 
@@ -17,11 +18,7 @@ export default {
         fieldset: 'flex-col'
       }
     },
-    color: {
-      '*': {
-        item: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
+    color: colorVariant({ item: '' }),
     variant: {
       list: {
         fieldset: 'flex-wrap'

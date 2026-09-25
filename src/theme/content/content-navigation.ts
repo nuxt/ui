@@ -1,3 +1,5 @@
+import { colorVariant, highlightColorVariant } from '../color'
+
 export default {
   slots: {
     root: '',
@@ -17,17 +19,8 @@ export default {
     linkTitleExternalIcon: 'size-3 align-top text-dimmed'
   },
   variants: {
-    color: {
-      '*': {
-        link: '[--ui-accent:var(--ui-{value})]',
-        linkLeadingIcon: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
-    highlightColor: {
-      '*': {
-        link: '[--ui-highlight:var(--ui-{value})]'
-      }
-    },
+    color: colorVariant({ link: '', linkLeadingIcon: '' }),
+    highlightColor: highlightColorVariant({ link: '' }),
     variant: {
       pill: '',
       link: ''

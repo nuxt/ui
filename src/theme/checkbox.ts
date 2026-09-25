@@ -1,3 +1,4 @@
+import { colorVariant } from './color'
 // Shared with `checkbox-group` and `radio-group`, which style the same states on their own slots.
 export const hover = 'hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:'
 
@@ -19,13 +20,7 @@ export default {
     description: 'text-muted'
   },
   variants: {
-    color: {
-      '*': {
-        indicator: '[--ui-accent:var(--ui-{value})]',
-        base: '[--ui-accent:var(--ui-{value})]',
-        root: '[--ui-accent:var(--ui-{value})]'
-      }
-    },
+    color: colorVariant({ indicator: '', base: '', root: '' }),
     variant: {
       list: {
         root: ''
