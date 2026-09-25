@@ -1,19 +1,19 @@
 import type { ModuleOptions } from '../module'
 
 const daySizes = {
-  xs: 'size-7',
+  xs: 'size-6',
   sm: 'size-7',
   md: 'size-8',
-  lg: 'size-9 text-md',
-  xl: 'size-10 text-lg'
+  lg: 'size-9',
+  xl: 'size-10'
 }
 
 const pickerSizes = {
-  xs: 'h-7 px-2',
+  xs: 'h-6 px-2',
   sm: 'h-7 px-2',
   md: 'h-8 px-3',
-  lg: 'h-9 px-4 text-md',
-  xl: 'h-10 px-5 text-lg'
+  lg: 'h-9 px-4',
+  xl: 'h-10 px-5'
 }
 
 export default (options: Required<ModuleOptions>) => ({
@@ -74,14 +74,18 @@ export default (options: Required<ModuleOptions>) => ({
         cell: 'text-sm'
       },
       lg: {
-        headingLabel: 'text-md',
-        headCell: 'text-md',
-        headCellWeek: 'text-md'
+        headingLabel: 'text-base',
+        headCell: 'text-base',
+        headCellWeek: 'text-base',
+        cellWeek: 'text-base',
+        cell: 'text-base'
       },
       xl: {
         headingLabel: 'text-lg',
         headCell: 'text-lg',
-        headCellWeek: 'text-lg'
+        headCellWeek: 'text-lg',
+        cellWeek: 'text-lg',
+        cell: 'text-lg'
       }
     },
     view: {

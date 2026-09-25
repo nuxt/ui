@@ -26,6 +26,28 @@ describe('applyUnstyled', () => {
     }
   })
 
+  it('blanks a top-level base', () => {
+    // Single-element components (e.g. Skeleton) have no `slots`, their theme
+    // is a top-level `base` string or array.
+    const stringBase = { base: 'animate-pulse rounded-md bg-elevated' }
+    expect(applyUnstyled(stringBase, true)).toEqual({ base: '' })
+    expect(stringBase.base).toBe('animate-pulse rounded-md bg-elevated')
+
+    expect(applyUnstyled({ base: ['flex', 'transition-colors'] }, true)).toEqual({ base: '' })
+  })
+
+  it('does not mutate the input theme', () => {
+    // Object-shaped themes are shared module exports: blanking in place would
+    // blank every later read within the same process.
+    const input = theme()
+    const snapshot = JSON.parse(JSON.stringify(input))
+
+    const result = applyUnstyled(input, true)
+
+    expect(result).not.toBe(input)
+    expect(input).toEqual(snapshot)
+  })
+
   it('returns the theme untouched when unstyled is falsy', () => {
     const input = theme()
     expect(applyUnstyled(input, false)).toBe(input)

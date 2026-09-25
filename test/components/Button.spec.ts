@@ -1,5 +1,5 @@
-import { ref } from 'vue'
-import { describe, it, expect, test } from 'vitest'
+import { ref, onErrorCaptured } from 'vue'
+import { describe, it, expect, test, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { flushPromises } from '@vue/test-utils'
@@ -73,6 +73,32 @@ describe('Button', () => {
     expect(icon?.vm?.name).toBe('i-lucide-loader-circle')
 
     resolve?.(null)
+  })
+
+  test.each([
+    ['sync', () => {
+      throw new Error('click error')
+    }],
+    ['async', () => Promise.reject(new Error('click error'))]
+  ])('propagates %s click handler errors to onErrorCaptured', async (_, onClick) => {
+    const onError = vi.fn(() => false)
+    const wrapper = await mountSuspended({
+      components: { Button },
+      setup() {
+        onErrorCaptured(onError)
+
+        return { onClick }
+      },
+      template: `
+        <Button loading-auto @click="onClick"> Click </Button>
+      `
+    })
+
+    wrapper.find('button').trigger('click')
+    await flushPromises()
+
+    expect(onError).toHaveBeenCalledOnce()
+    expect(wrapper.findComponent({ name: 'Icon' }).exists()).toBe(false)
   })
 
   test('with loading-auto works with forms', async () => {

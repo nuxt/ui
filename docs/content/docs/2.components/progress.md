@@ -1,6 +1,10 @@
 ---
 description: An indicator showing the progress of a task.
 category: element
+keywords:
+  - progress bar
+  - loading bar
+  - meter
 links:
   - label: Progress
     icon: i-custom-reka-ui
@@ -21,6 +25,10 @@ external:
 props:
   modelValue: 50
 ---
+::
+
+::note
+Use the [`ProgressGroup`](/docs/components/progress-group) component to split a single bar into multiple segments that add up to a total.
 ::
 
 ### Max
@@ -71,6 +79,10 @@ props:
 ---
 ::
 
+::tip
+The status tracks the end of the bar, use `:ui="{ status: 'w-full' }"` to make it span the full width instead.
+::
+
 ### Indeterminate
 
 When no `v-model` is set or the value is `null`, the Progress becomes _indeterminate_. The progress bar is animated as a `carousel`, but you can change it using the [`animation`](#animation) prop.
@@ -115,7 +127,7 @@ props:
 
 ### Color
 
-Use the `color` prop to change the color of the Slider.
+Use the `color` prop to change the color of the Progress.
 
 ::component-code
 ---
@@ -124,9 +136,13 @@ props:
 ---
 ::
 
+::tip
+This prop also accepts any CSS color value for palettes outside the theme.
+::
+
 ### Size
 
-Use the `size` prop to change the size of the Slider.
+Use the `size` prop to change the size of the Progress.
 
 ::component-code
 ---

@@ -118,7 +118,7 @@ export interface ModuleOptions {
      * - `string[]`: Enable detection and include additional components (useful for dynamic components)
      * @defaultValue false
      * @example true
-     * @example ['Modal', 'Dropdown']
+     * @example ['Modal', 'DropdownMenu']
      */
     componentDetection?: boolean | string[]
   }

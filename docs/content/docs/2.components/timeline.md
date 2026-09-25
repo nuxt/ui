@@ -1,7 +1,9 @@
 ---
-title: Timeline
 description: 'A component that displays a sequence of events with dates, titles, icons or avatars.'
 category: data
+keywords:
+  - activity feed
+  - history
 links:
   - label: GitHub
     icon: i-simple-icons-github

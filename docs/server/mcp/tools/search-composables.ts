@@ -32,7 +32,7 @@ export default defineMcpTool({
       title: composable.title,
       description: composable.description,
       path: composable.path,
-      url: `https://ui.nuxt.com${composable.path}`
+      url: `${SITE_URL}${composable.path}`
     }))
 
     if (search) {

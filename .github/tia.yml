@@ -1,0 +1,13 @@
+# https://github.com/benjamincanac/tia#configuration
+maintainers:
+  - benjamincanac
+package:
+  name: "@nuxt/ui"
+upstreams:
+  - nuxt/nuxt
+  - unovue/reka-ui
+  - tailwindlabs/tailwindcss
+  - ueberdosis/tiptap
+nextMajor: v5
+securityPolicy: https://github.com/nuxt/.github/blob/main/SECURITY.md
+help: https://ui.nuxt.com

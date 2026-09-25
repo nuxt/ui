@@ -1,5 +1,5 @@
 ---
-description: A container lets you center and constrain the width of your content.
+description: A layout element to center and constrain the width of your content.
 category: layout
 links:
   - label: GitHub

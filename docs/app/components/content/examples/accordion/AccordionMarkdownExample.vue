@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Markdown } from '@comark/vue'
+
 const items = [
   {
     label: 'Is Nuxt UI free to use?',
@@ -18,7 +20,7 @@ const items = [
   {
     label: 'How does Nuxt UI handle accessibility?',
     icon: 'i-lucide-circle-help',
-    content: 'Through [Reka UI](https://reka-ui.com/docs/overview/accessibility) integration, Nuxt UI provides automatic ARIA attributes, keyboard navigation, focus management, and screen reader support. While offering a strong foundation, testing in your specific use case remains important.'
+    content: 'Through [Reka UI](https://reka-ui.com/docs/overview/accessibility) integration, Nuxt UI provides **automatic ARIA attributes**, **keyboard navigation**, **focus management**, and **screen reader support**. While offering a strong foundation, testing in your specific use case remains important.'
   },
   {
     label: 'How is Nuxt UI tested?',
@@ -45,7 +47,7 @@ const items = [
     }"
   >
     <template #body="{ item }">
-      <MDC :value="item.content" unwrap="p" />
+      <Markdown :value="item.content" unwrap="p" />
     </template>
   </UAccordion>
 </template>

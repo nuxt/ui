@@ -4,6 +4,7 @@ import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import { flushPromises, mount } from '@vue/test-utils'
 import InputMenu from '../../src/runtime/components/InputMenu.vue'
+import { UButton, UFieldGroup } from '#components'
 import type { FormInputEvents } from '../../src/module'
 import { renderForm } from '../utils/form'
 import { expectEmitPayloadType } from '../utils/types'
@@ -136,6 +137,24 @@ describe('InputMenu', () => {
     expect(wrapper.find('[data-slot="trailingIcon"]').exists()).toBe(false)
   })
 
+  // `root` and `base` are the same element in `multiple` mode, so the rounding
+  // has to come from the element's own position, not from a `group` ancestor.
+  it('with multiple rounds its corners inside a FieldGroup', async () => {
+    const wrapper = await mountSuspended({
+      components: { UFieldGroup, UButton, UInputMenu: InputMenu },
+      template: `<UFieldGroup><UButton label="Button" /><UInputMenu multiple /></UFieldGroup>`
+    })
+
+    expect(wrapper.get('div[data-slot="base"]').classes()).toContain('not-only:last:rounded-s-none')
+  })
+
+  it('with autocomplete mode ignores multiple', () => {
+    const autocomplete = mount(InputMenu, { props: { items, mode: 'autocomplete' as const } })
+    const withMultiple = mount(InputMenu, { props: { items, mode: 'autocomplete' as const, multiple: true } })
+
+    expect(withMultiple.html()).toBe(autocomplete.html())
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(InputMenu, {
       props: {
@@ -205,6 +224,20 @@ describe('InputMenu', () => {
     })
   })
 
+  describe('clear', () => {
+    it('does not render the clear button when disabled', () => {
+      const wrapper = mount(InputMenu, { props: { items, modelValue: items[0]!, clear: true, disabled: true } })
+
+      expect(wrapper.find('[data-slot="trailingClear"]').exists()).toBe(false)
+    })
+
+    it('renders the clear button when not disabled', () => {
+      const wrapper = mount(InputMenu, { props: { items, modelValue: items[0]!, clear: true } })
+
+      expect(wrapper.find('[data-slot="trailingClear"]').exists()).toBe(true)
+    })
+  })
+
   describe('create-item', () => {
     // With `create-item`, the create item is always registered so reka-ui's collection
     // never goes from empty to non-empty, leaving the highlight stale when async items load.
@@ -238,6 +271,61 @@ describe('InputMenu', () => {
       const highlighted = wrapper.find('[role="option"][data-highlighted]')
       expect(highlighted.exists()).toBe(true)
       expect(highlighted.text()).toContain('Option 1')
+
+      wrapper.unmount()
+    })
+  })
+
+  describe('multiple', () => {
+    // reka-ui's `TagsInputInput` adds the search term as a tag on `Enter`, which renders a chip
+    // that is not part of the model since `TagsInputRoot` is controlled by the combobox.
+    test('does not add a tag on enter when the search term matches no item', async () => {
+      const wrapper = mount(InputMenu, {
+        attachTo: document.body,
+        props: {
+          modelValue: ['Option 1'],
+          items: ['Option 1', 'Option 2'],
+          multiple: true,
+          portal: false
+        }
+      })
+
+      await flushPromises()
+
+      const input = wrapper.find('input')
+      await input.setValue('Option 3')
+      await flushPromises()
+
+      await input.trigger('keydown', { key: 'Enter' })
+      await flushPromises()
+
+      expect(wrapper.findAll('[data-slot="tagsItem"]')).toHaveLength(1)
+      expect(wrapper.emitted('update:modelValue')).toBeFalsy()
+
+      wrapper.unmount()
+    })
+
+    test('still selects the highlighted item on enter', async () => {
+      const wrapper = mount(InputMenu, {
+        attachTo: document.body,
+        props: {
+          modelValue: ['Option 1'],
+          items: ['Option 1', 'Option 2'],
+          multiple: true,
+          portal: false
+        }
+      })
+
+      await flushPromises()
+
+      const input = wrapper.find('input')
+      await input.setValue('Option 2')
+      await flushPromises()
+
+      await input.trigger('keydown', { key: 'Enter' })
+      await flushPromises()
+
+      expect(wrapper.emitted('update:modelValue')).toMatchObject([[['Option 1', 'Option 2']]])
 
       wrapper.unmount()
     })

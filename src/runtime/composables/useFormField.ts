@@ -1,4 +1,4 @@
-import { inject, computed, provide } from 'vue'
+import { inject, computed, provide, getCurrentScope, onScopeDispose } from 'vue'
 import type { InjectionKey, Ref, ComputedRef } from 'vue'
 import { useDebounceFn } from '@vueuse/core'
 import type { UseEventBusReturn } from '@vueuse/core'
@@ -39,10 +39,16 @@ export const formErrorsInjectionKey: InjectionKey<Readonly<Ref<FormErrorWithId[]
  * ```ts
  * size: size.value ?? props.size,
  * color: color.value ?? props.color,
- * highlight: highlight.value ?? props.highlight
+ * highlight: highlight.value ?? props.highlight,
+ * disabled: disabled.value ?? props.disabled
  * ```
  *
- * Final precedence: `explicit > FormField > <UTheme :props> > withDefaults > app.config > tv defaults`.
+ * `highlight` and `disabled` are Boolean props, which Vue auto-casts to `false`
+ * when unset, so they are normalized back to `undefined` here. Otherwise the
+ * `??` above would short-circuit on `false` and the proxy would never be read.
+ *
+ * Final precedence: `explicit > FormField > <UTheme :props> > app.config > withDefaults > tv defaults`,
+ * matching what `useComponentProps` resolves.
  */
 export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, deferInputValidation?: boolean }) {
   const formOptions = inject(formOptionsInjectionKey, undefined)
@@ -81,8 +87,19 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
     emitFormEvent('change', formField?.value.name)
   }
 
+  // The trailing call still fires after teardown, which would validate a field
+  // that is no longer rendered when the input unmounts inside the debounce window.
+  let disposed = false
+  if (getCurrentScope()) {
+    onScopeDispose(() => {
+      disposed = true
+    })
+  }
+
   const emitFormInput = useDebounceFn(
     () => {
+      if (disposed) return
+
       emitFormEvent('input', formField?.value.name, !opts?.deferInputValidation || formField?.value.eagerValidation)
     },
     formField?.value.validateOnInputDelay ?? formOptions?.value.validateOnInputDelay ?? 0
@@ -93,8 +110,8 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
     name: computed(() => props?.name ?? formField?.value.name),
     size: computed(() => props?.size ?? formField?.value.size),
     color: computed(() => formField?.value.error ? 'error' : props?.color),
-    highlight: computed(() => formField?.value.error ? true : props?.highlight),
-    disabled: computed(() => formOptions?.value.disabled || props?.disabled),
+    highlight: computed(() => formField?.value.error ? true : (props?.highlight || undefined)),
+    disabled: computed(() => formOptions?.value.disabled || props?.disabled || undefined),
     emitFormBlur,
     emitFormInput,
     emitFormChange,

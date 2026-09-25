@@ -27,7 +27,7 @@ export type TreeItem = {
   onToggle?: (e: TreeItemToggleEvent<TreeItem>) => void
   onSelect?: (e: TreeItemSelectEvent<TreeItem>) => void
   class?: any
-  ui?: Pick<Tree['slots'], 'item' | 'itemWithChildren' | 'link' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren'>
+  ui?: Partial<Pick<Tree['slots'], 'item' | 'itemWithChildren' | 'link' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren'>>
   [key: string]: any
 }
 
@@ -190,7 +190,7 @@ const flattenedPaddingFormula = computed(() => {
     lg: { base: 3, perLevel: 7 }, // px-3, ms-5.5 + ps-1.5
     xl: { base: 3, perLevel: 7.5 } // px-3, ms-6 + ps-1.5
   }
-  const config = sizeConfig[props.size || 'md']
+  const config = sizeConfig[props.size as keyof typeof sizeConfig] ?? sizeConfig.md
   return (level: number) => `calc(var(--spacing) * ${(level - 1) * config.perLevel + config.base})`
 })
 
@@ -281,7 +281,7 @@ defineExpose({
             :disabled="item.disabled || props.disabled"
             data-slot="link"
             :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], selected: isSelected, disabled: item.disabled || props.disabled })"
-            :style="!nested && level > 1 ? { paddingLeft: flattenedPaddingFormula(level) } : undefined"
+            :style="!nested && level > 1 ? { paddingInlineStart: flattenedPaddingFormula(level) } : undefined"
           >
             <slot
               :name="((item.slot || 'item') as keyof TreeSlots<T>)"

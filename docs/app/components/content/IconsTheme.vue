@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import json5 from 'json5'
-import { themeIcons } from '../../utils/theme'
+import { themeIcons } from '../../utils/theme/icons'
 
 const { icon: iconSet } = useTheme()
 
 const icons = computed(() => themeIcons[iconSet.value as keyof typeof themeIcons || 'lucide'])
 
-const { data: ast } = useAsyncData(`icons-theme`, async () => {
-  const md = `
+const markdown = computed(() => `
 ::code-collapse{class="nuxt-only"}
 
 \`\`\`ts [app.config.ts]
@@ -43,12 +42,9 @@ export default defineConfig({
 \`\`\`
 
 ::
-`
-
-  return cachedParseMarkdown(md)
-}, { lazy: import.meta.client, watch: [icons] })
+`)
 </script>
 
 <template>
-  <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" />
+  <DocsMarkdown :value="markdown" />
 </template>

@@ -24,20 +24,34 @@ const tableProps = {
   externalScroll: false
 } as const
 
+// CodSpeed runs these under a simulator that counts instructions, and GitHub's
+// hosted runners alternate between Intel and AMD CPUs whose cache sizes make
+// glibc select different string routines. Anything under ~1ms picks up phantom
+// regressions from that alone, so every bench body repeats its work enough to
+// clear the bar. Scaling every group by the same factor keeps the ratios that
+// these benchmarks exist to compare.
+const ITERATIONS = 100
+
 // Building the factory is the expensive step (deep-merges the whole variant
 // matrix, joins every slot, flattens compound variants). Today it happens inside
 // each component's `computed`, so every variant-prop change re-runs it.
 describe('factory build', () => {
   bench('button (~6 slots)', () => {
-    tv({ extend: buttonTheme })
+    for (let i = 0; i < ITERATIONS; i++) {
+      tv({ extend: buttonTheme })
+    }
   })
 
   bench('table (~13 slots)', () => {
-    tv({ extend: tableTheme })
+    for (let i = 0; i < ITERATIONS; i++) {
+      tv({ extend: tableTheme })
+    }
   })
 
   bench('navigation-menu (~31 slots)', () => {
-    tv({ extend: navigationMenuTheme })
+    for (let i = 0; i < ITERATIONS; i++) {
+      tv({ extend: navigationMenuTheme })
+    }
   })
 })
 
@@ -48,11 +62,15 @@ describe('invocation (prebuilt factory)', () => {
   const tableFactory = tv({ extend: tableTheme })
 
   bench('button', () => {
-    buttonFactory(buttonProps)
+    for (let i = 0; i < ITERATIONS; i++) {
+      buttonFactory(buttonProps)
+    }
   })
 
   bench('table', () => {
-    tableFactory(tableProps)
+    for (let i = 0; i < ITERATIONS; i++) {
+      tableFactory(tableProps)
+    }
   })
 })
 
@@ -61,11 +79,15 @@ describe('invocation (prebuilt factory)', () => {
 // hoisting factory construction out of the per-variant-prop recomputation.
 describe('build + invoke (current fused pattern)', () => {
   bench('button', () => {
-    tv({ extend: buttonTheme })(buttonProps)
+    for (let i = 0; i < ITERATIONS; i++) {
+      tv({ extend: buttonTheme })(buttonProps)
+    }
   })
 
   bench('table', () => {
-    tv({ extend: tableTheme })(tableProps)
+    for (let i = 0; i < ITERATIONS; i++) {
+      tv({ extend: tableTheme })(tableProps)
+    }
   })
 })
 

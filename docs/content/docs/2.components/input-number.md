@@ -2,6 +2,10 @@
 title: InputNumber
 description: An input for numerical values with a customizable range.
 category: form
+keywords:
+  - number field
+  - spinbutton
+  - counter
 links:
   - label: NumberField
     icon: i-custom-reka-ui

@@ -1,7 +1,10 @@
 ---
-title: Empty
 description: 'A component to display an empty state.'
 category: data
+keywords:
+  - no data
+  - placeholder
+  - zero state
 links:
   - label: GitHub
     icon: i-simple-icons-github
@@ -9,6 +12,8 @@ links:
 ---
 
 ## Usage
+
+Use the Empty component to display a placeholder state when there is no content to show.
 
 ::code-preview
 

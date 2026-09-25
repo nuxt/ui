@@ -149,6 +149,35 @@ describe('SelectMenu', () => {
     })).toHaveNoViolations()
   })
 
+  // Reka's `ComboboxTrigger` hard-codes `aria-label="Show popup"`, which would win over the `FormField` label.
+  describe('accessible name', () => {
+    test('does not inherit the Reka trigger label', () => {
+      const wrapper = mount(SelectMenu, { props })
+
+      expect(wrapper.get('[data-slot="base"]').attributes('aria-label')).toBeUndefined()
+    })
+
+    test('keeps a caller label', () => {
+      const wrapper = mount(SelectMenu, { props, attrs: { 'aria-label': 'Aria label' } })
+
+      expect(wrapper.get('[data-slot="base"]').attributes('aria-label')).toBe('Aria label')
+    })
+
+    test('is named by the form field label', async () => {
+      const wrapper = await renderForm({
+        slotTemplate: `
+        <UFormField label="Sort order">
+          <USelectMenu :items="['Newest', 'Oldest']" />
+        </UFormField>
+        `
+      })
+
+      const trigger = wrapper.get('[data-slot="base"]')
+      expect(trigger.attributes('aria-label')).toBeUndefined()
+      expect(wrapper.get('label').attributes('for')).toBe(trigger.attributes('id'))
+    })
+  })
+
   describe('emits', () => {
     test('update:modelValue event', async () => {
       const wrapper = mount(SelectMenu, { props: { items: ['Option 1', 'Option 2'] } })
@@ -170,6 +199,73 @@ describe('SelectMenu', () => {
       const input = wrapper.findComponent({ name: 'ComboboxRoot' })
       input.vm.$emit('update:open', false)
       expect(wrapper.emitted()).toMatchObject({ blur: [[{ type: 'blur' }]] })
+    })
+  })
+
+  describe('clear', () => {
+    it('does not render the clear button when disabled', () => {
+      const wrapper = mount(SelectMenu, { props: { items, modelValue: items[0]!, clear: true, disabled: true } })
+
+      expect(wrapper.find('[data-slot="trailingClear"]').exists()).toBe(false)
+    })
+
+    it('renders the clear button when not disabled', () => {
+      const wrapper = mount(SelectMenu, { props: { items, modelValue: items[0]!, clear: true } })
+
+      expect(wrapper.find('[data-slot="trailingClear"]').exists()).toBe(true)
+    })
+  })
+
+  describe('keyboard', () => {
+    test.each(['ArrowDown', 'ArrowUp'])('opens the menu on %s', async (key) => {
+      const wrapper = mount(SelectMenu, { attachTo: document.body, props: { portal: false, items } })
+
+      await wrapper.find('[data-slot="base"]').trigger('keydown', { key })
+      await flushPromises()
+
+      expect(wrapper.emitted('update:open')).toMatchObject([[true]])
+
+      wrapper.unmount()
+    })
+
+    test('does not toggle the menu on ArrowDown when already open', async () => {
+      const wrapper = mount(SelectMenu, { attachTo: document.body, props: { portal: false, items } })
+      const root = wrapper.findComponent({ name: 'ComboboxRoot' })
+
+      await root.vm.$emit('update:open', true)
+      await wrapper.find('[data-slot="base"]').trigger('keydown', { key: 'ArrowDown' })
+      await flushPromises()
+
+      expect(wrapper.emitted('update:open')).toMatchObject([[true]])
+
+      wrapper.unmount()
+    })
+  })
+
+  describe('search input', () => {
+    test('focuses the search input when the menu opens by default', async () => {
+      const wrapper = mount(SelectMenu, { attachTo: document.body, props: { open: true, portal: false, items } })
+
+      await flushPromises()
+      // Input.vue's autofocus runs on a macrotask
+      await new Promise(resolve => setTimeout(resolve))
+
+      const input = wrapper.find('[data-slot="input"] input')
+      expect(document.activeElement).toBe(input.element)
+
+      wrapper.unmount()
+    })
+
+    test('does not focus the search input with searchInput autofocus disabled', async () => {
+      const wrapper = mount(SelectMenu, { attachTo: document.body, props: { open: true, portal: false, items, searchInput: { autofocus: false } } })
+
+      await flushPromises()
+      await new Promise(resolve => setTimeout(resolve))
+
+      const input = wrapper.find('[data-slot="input"] input')
+      expect(document.activeElement).not.toBe(input.element)
+
+      wrapper.unmount()
     })
   })
 

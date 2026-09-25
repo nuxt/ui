@@ -209,14 +209,14 @@ const { data, status } = await useAsyncData(
   <UTable :data="data?.items" :columns="columns" :loading="status === 'pending'" />
 
   <div class="flex justify-end p-4">
-    <UPagination v-model="page" :total="data?.total" :items-per-page="data?.pageSize" />
+    <UPagination v-model:page="page" :total="data?.total" :items-per-page="data?.pageSize" />
   </div>
 </template>
 ```
 
 ## Tips
 
-- Table is built on [TanStack Table](https://tanstack.com/table/latest) — columns use `ColumnDef` format with `accessorKey`, `header`, `cell`
+- Table is built on [TanStack Table v8](https://tanstack.com/table/v8) — columns use `ColumnDef` format with `accessorKey`, `header`, `cell`
 - Use `#<column>-cell` and `#<column>-header` template slots to customize rendering with Vue templates
 - Alternatively, use the `h` function inside `header` and `cell` column properties for inline rendering
 - Row data in slots is accessed via `row.original` (not `row` directly)

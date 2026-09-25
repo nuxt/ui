@@ -57,8 +57,8 @@ export default (options: Required<ModuleOptions>) => ({
     to: {
       true: {
         root: ['outline-primary/25 has-[>a:focus-visible]:outline-3', options.theme.transitions && 'transition'],
-        image: 'transform transition-transform ease-out group-hover/blog-post:scale-110',
-        avatar: 'inline-flex transform transition-transform ease-out hover:scale-115 rounded-full outline-primary/25 focus-visible:outline-3'
+        image: 'transform transition-transform ease-out motion-reduce:transition-none group-hover/blog-post:scale-110',
+        avatar: 'inline-flex transform transition-transform ease-out motion-reduce:transition-none hover:scale-115 rounded-full outline-primary/25 focus-visible:outline-3'
       }
     },
     image: {

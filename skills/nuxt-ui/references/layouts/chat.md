@@ -57,6 +57,8 @@ html.dark .shiki span {
 
 ### Server endpoint
 
+These examples target AI SDK v7 (`instructions`, `toUIMessageStream`).
+
 Using [Vercel AI Gateway](https://vercel.com/ai-gateway) (recommended):
 
 ```ts [server/api/chat.post.ts]
@@ -200,7 +202,7 @@ function onSubmit() {
 - `UChatMessage` — individual bubble. Props: `message`, `side` (`'left'`/`'right'`).
 - `UChatReasoning` — collapsible reasoning block. Auto-opens during streaming, auto-closes when done. Use `isPartStreaming(part)` from `@nuxt/ui/utils/ai`.
 - `UChatTool` — tool invocation status. Use `isToolStreaming(part)`. Variants: `'inline'` (default), `'card'`.
-- `UChatPrompt` — enhanced textarea. Accepts all Textarea props + `error` prop.
+- `UChatPrompt` — enhanced textarea for chat. Its typed API exposes a selected subset of `UTextarea` props, forwards additional attributes to the underlying textarea, and adds chat-specific props such as `error` and `submitOnEnter`.
 - `UChatPromptSubmit` — submit button with automatic status handling (send/stop/reload).
 - `UChatPalette` — layout wrapper for chat inside overlays.
 

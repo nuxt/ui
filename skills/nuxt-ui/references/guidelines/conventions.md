@@ -172,7 +172,8 @@ const items = [
 ]
 ```
 
-Components supporting nested arrays: `UDropdownMenu`, `UContextMenu`, `UCommandPalette`, `UNavigationMenu`.
+Components supporting nested arrays: `UDropdownMenu`, `UContextMenu`, `UNavigationMenu`.
+`UCommandPalette` uses a `groups` prop instead, with an `items` array on each group.
 
 ## Composables
 
@@ -356,15 +357,16 @@ const isDark = computed({
 Bootstrap a project from a template instead of starting from scratch:
 
 ```bash
-npx nuxi@latest init -t ui              # Starter
-npx nuxi@latest init -t ui/dashboard    # Dashboard
-npx nuxi@latest init -t ui/docs         # Docs (Nuxt Content)
-npx nuxi@latest init -t ui/landing      # Landing page
-npx nuxi@latest init -t ui/saas         # SaaS (landing + pricing + docs + blog)
-npx nuxi@latest init -t ui/chat         # AI chat (Vercel AI SDK)
-npx nuxi@latest init -t ui/editor       # Rich text editor
-npx nuxi@latest init -t ui/portfolio    # Portfolio
-npx nuxi@latest init -t ui/changelog    # Changelog
+npm create nuxt@latest -- -t ui            # Starter
+npm create nuxt@latest -- -t ui/dashboard  # Dashboard
+npm create nuxt@latest -- -t ui/docs       # Docs (Nuxt Content)
+npm create nuxt@latest -- -t ui/landing    # Landing page
+npm create nuxt@latest -- -t ui/saas       # SaaS (landing + pricing + docs + blog)
+npm create nuxt@latest -- -t ui/chat       # AI chat (Vercel AI SDK)
+npm create nuxt@latest -- -t ui/editor     # Rich text editor
+npm create nuxt@latest -- -t ui/portfolio  # Portfolio
+npm create nuxt@latest -- -t ui/changelog  # Changelog
+npm create nuxt@latest -- -t ui/calendar   # Calendar
 ```
 
 ## Responsive patterns

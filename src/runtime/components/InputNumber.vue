@@ -86,10 +86,10 @@ export interface InputNumberSlots {
 </script>
 
 <script setup lang="ts" generic="T extends InputNumberValue = InputNumberValue, Mod extends Pick<ModelModifiers, 'optional'> = Pick<ModelModifiers, 'optional'>">
-import { onMounted, computed, useTemplateRef, toRef } from 'vue'
+import { onMounted, onScopeDispose, computed, useTemplateRef, toRef } from 'vue'
 import { NumberFieldRoot, NumberFieldInput, NumberFieldDecrement, NumberFieldIncrement } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { reactivePick, useVModel } from '@vueuse/core'
+import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useFieldGroup } from '../composables/useFieldGroup'
@@ -111,25 +111,30 @@ defineSlots<InputNumberSlots>()
 
 const props = useComponentProps<InputNumberProps<T, Mod>>('inputNumber', _props)
 
-// eslint-disable-next-line vue/no-dupe-keys
-const modelValue = useVModel<InputNumberProps<T, Mod>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, { defaultValue: props.defaultValue })
-
 const { t } = useLocale()
 const appConfig = useAppConfig() as InputNumber['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'stepSnapping', 'formatOptions', 'disableWheelChange', 'invertWheelChange', 'required', 'readonly', 'focusOnChange', 'locale'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'as', 'stepSnapping', 'formatOptions', 'disableWheelChange', 'invertWheelChange', 'required', 'readonly', 'focusOnChange', 'locale'))
 
-const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formFieldSize, name, highlight, disabled, ariaAttrs } = useFormField<InputNumberProps<T, Mod>>(_props)
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color: formFieldColor, size: formFieldSize, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<InputNumberProps<T, Mod>>(_props)
+
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputNumberProps<T, Mod>>(_props)
 
-const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
+// eslint-disable-next-line vue/no-dupe-keys
+const color = computed(() => formFieldColor.value ?? props.color)
+// eslint-disable-next-line vue/no-dupe-keys
+const highlight = computed(() => formFieldHighlight.value ?? props.highlight)
+// eslint-disable-next-line vue/no-dupe-keys
+const size = computed(() => fieldGroupSize.value ?? formFieldSize.value ?? props.size)
+
+const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.inputNumber || {}) })({
-  color: color.value ?? props.color,
+  color: color.value,
   variant: props.variant,
-  size: inputSize.value ?? props.size,
-  highlight: highlight.value ?? props.highlight,
+  size: size.value,
+  highlight: highlight.value,
   fixed: props.fixed,
   orientation: props.orientation,
   fieldGroup: orientation.value,
@@ -146,8 +151,15 @@ const inputRef = useTemplateRef('inputRef')
 
 function onUpdate(value: ApplyModifiers<T, Mod> | undefined) {
   if (props.modelModifiers?.optional) {
-    modelValue.value = value = value ?? undefined
+    value = value ?? undefined
   }
+
+  // In controlled mode reka emits on every write, even when nothing changed (blur, Enter, stepping at a bound).
+  if (value === props.modelValue || (value == null && props.modelValue == null)) {
+    return
+  }
+
+  emits('update:modelValue', value as ApplyModifiers<T, Mod>)
 
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
@@ -168,11 +180,15 @@ function autoFocus() {
   }
 }
 
+let autofocusTimeoutId: ReturnType<typeof setTimeout> | undefined
+
 onMounted(() => {
-  setTimeout(() => {
+  autofocusTimeoutId = setTimeout(() => {
     autoFocus()
   }, props.autofocusDelay)
 })
+
+onScopeDispose(() => clearTimeout(autofocusTimeoutId))
 
 defineExpose({
   inputRef: toRef(() => inputRef.value?.$el as HTMLInputElement)
@@ -184,7 +200,7 @@ defineExpose({
     v-bind="rootProps"
     :id="id"
     :default-value="props.defaultValue"
-    :model-value="modelValue"
+    :model-value="props.modelValue"
     :min="props.min"
     :max="props.max"
     :step="props.step"
@@ -211,7 +227,7 @@ defineExpose({
           <UButton
             :icon="incrementIcon"
             :color="color"
-            :size="inputSize"
+            :size="size"
             variant="link"
             :aria-label="t('inputNumber.increment')"
             v-bind="typeof props.increment === 'object' ? props.increment : undefined"
@@ -226,7 +242,7 @@ defineExpose({
           <UButton
             :icon="decrementIcon"
             :color="color"
-            :size="inputSize"
+            :size="size"
             variant="link"
             :aria-label="t('inputNumber.decrement')"
             v-bind="typeof props.decrement === 'object' ? props.decrement : undefined"

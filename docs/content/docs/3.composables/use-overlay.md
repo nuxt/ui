@@ -16,7 +16,7 @@ name: 'use-overlay-example'
 - The `useOverlay` composable is created using `createSharedComposable`, ensuring that the same overlay state is shared across your entire application.
 
 ::note
-In order to return a value from the overlay, the `overlay.open()` can be awaited. In order for this to work, however, the **overlay component must emit a `close` event**. See example below for details.
+Await `overlay.open()` to get a value back from the overlay. This only works if the **overlay component emits a `close` event**. See the example below for details.
 ::
 
 ## API
@@ -27,7 +27,7 @@ The `useOverlay` composable provides methods to manage overlays globally. Each c
 
 ### create()
 
-`create(component: T, options: OverlayOptions): OverlayInstance`{lang="ts-type"}
+`create(component: T, options?: OverlayOptions<ComponentProps<T>>): OverlayInstance<T>`{lang="ts-type"}
 
 Create an overlay, and return a factory instance.
 
@@ -157,11 +157,13 @@ In-memory list of all overlays that were created.
 
 ## Instance API
 
+These are the methods available on the instance returned by `create()`.
+
 ### open()
 
 `open(props?: ComponentProps<T>): OpenedOverlay<T>`{lang="ts-type"}
 
-Open the overlay. Returns an `OpenedOverlay` which is a Promise that resolves with the value emitted by the `close` event.
+Open the overlay. Returns an `OpenedOverlay`, a Promise that resolves with the value emitted by the `close` event. The same promise is also exposed as `result`, so `const { result } = modal.open()` works too.
 
 #### Parameters
 
@@ -357,7 +359,7 @@ const handleDelete = async () => {
 
 ### Provide / Inject
 
-When opening overlays programmatically (e.g. modals, slideovers, etc), the overlay component can only access injected values from the component containing `UApp` (typically `app.vue` or layout components). This is because overlays are mounted outside of the page context by the `UApp` component.
+When opening overlays programmatically (modals, slideovers and so on), the overlay component can only access injected values from the component containing `UApp` (typically `app.vue` or layout components). This is because overlays are mounted outside of the page context by the `UApp` component.
 
 As such, using `provide()` in pages or parent components isn't supported directly. To pass provided values to overlays, the recommended approach is to use props instead:
 

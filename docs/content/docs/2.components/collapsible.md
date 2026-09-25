@@ -1,6 +1,9 @@
 ---
 description: A collapsible element to toggle visibility of its content.
 category: element
+keywords:
+  - disclosure
+  - expand
 links:
   - label: Collapsible
     icon: i-custom-reka-ui
@@ -116,7 +119,7 @@ In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcu
 ::
 
 ::tip
-This allows you to move the trigger outside of the Collapsible or remove it entirely.
+This lets you move the trigger outside of the Collapsible or remove it entirely.
 ::
 
 ### With rotating icon

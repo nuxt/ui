@@ -1,10 +1,11 @@
 import { defineComponent } from 'vue'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import Toaster from '../../src/runtime/components/Toaster.vue'
 import Toast from '../../src/runtime/components/Toast.vue'
+import { useToast } from '../../src/runtime/composables/useToast'
 import { ClientOnly } from '#components'
 
 const ToastWrapper = defineComponent({
@@ -50,6 +51,23 @@ describe('Toast', () => {
     ['with description slot', { props, slots: { description: () => 'Description slot' } }],
     ['with close slot', { props, slots: { close: () => 'Close slot' } }]
   ])
+
+  it('calls onClick once per click', async () => {
+    const onClick = vi.fn()
+    const toast = useToast()
+    toast.clear()
+
+    const wrapper = await mountSuspended(Toaster, { props: { portal: false } })
+    const body = toast.add({ title: 'Toast', onClick })
+
+    await vi.waitFor(() => expect(wrapper.find('[data-slot="base"]').exists()).toBe(true), { timeout: 4000 })
+    await wrapper.find('[data-slot="base"]').trigger('click')
+
+    expect(onClick).toHaveBeenCalledTimes(1)
+    expect(onClick).toHaveBeenCalledWith(expect.objectContaining({ id: body.id, title: 'Toast' }))
+
+    toast.clear()
+  })
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(ToastWrapper, {

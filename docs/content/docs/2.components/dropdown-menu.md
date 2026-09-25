@@ -2,6 +2,10 @@
 title: DropdownMenu
 description: A menu to display actions when clicking on an element.
 category: overlay
+keywords:
+  - menu
+  - context menu
+  - actions
 links:
   - label: DropdownMenu
     icon: i-custom-reka-ui
@@ -56,6 +60,10 @@ props:
               avatar:
                 src: 'https://github.com/HugoRCD.png'
                 loading: lazy
+            - label: atinux
+              avatar:
+                src: 'https://github.com/atinux.png'
+                loading: lazy
             - label: romhml
               avatar:
                 src: 'https://github.com/romhml.png'
@@ -64,17 +72,13 @@ props:
               avatar:
                 src: 'https://github.com/sandros94.png'
                 loading: lazy
-            - label: hywax
-              avatar:
-                src: 'https://github.com/hywax.png'
-                loading: lazy
             - label: J-Michalek
               avatar:
                 src: 'https://github.com/J-Michalek.png'
                 loading: lazy
-            - label: genu
+            - label: hywax
               avatar:
-                src: 'https://github.com/genu.png'
+                src: 'https://github.com/hywax.png'
                 loading: lazy
       - label: Invite users
         icon: i-lucide-user-plus

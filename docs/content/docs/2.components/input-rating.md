@@ -2,6 +2,9 @@
 title: InputRating
 description: A component to display and collect ratings from users.
 category: form
+keywords:
+  - star rating
+  - stars
 links:
   - label: Rating
     icon: i-custom-reka-ui
@@ -9,7 +12,6 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/InputRating.vue
-navigation.badge: New
 ---
 
 ## Usage
@@ -128,8 +130,8 @@ Use the `empty-icon` prop to customize the icon used for empty stars. If not pro
 ignore:
   - defaultValue
 props:
-  emptyIcon: 'i-ph-star'
-  icon: 'i-ph-star-fill'
+  emptyIcon: 'i-lucide-circle'
+  icon: 'i-lucide-circle-check'
   defaultValue: 3
 ---
 ::

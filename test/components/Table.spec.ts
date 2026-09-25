@@ -1,5 +1,5 @@
 import { h, ref, computed } from 'vue'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { flushPromises } from '@vue/test-utils'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
@@ -8,6 +8,13 @@ import { UCheckbox, UButton, UBadge, UDropdownMenu } from '#components'
 import Table from '../../src/runtime/components/Table.vue'
 import type { TableColumn, TableRow } from '../../src/runtime/components/Table.vue'
 import theme from '#build/ui/table'
+
+async function triggerKeydown(element: Element, init: KeyboardEventInit) {
+  const event = new KeyboardEvent('keydown', { bubbles: true, cancelable: true, ...init })
+  element.dispatchEvent(event)
+  await flushPromises()
+  return event
+}
 
 describe('Table', () => {
   const loadingColors = Object.keys(theme.variants.loadingColor) as any
@@ -214,6 +221,262 @@ describe('Table', () => {
     })).toHaveNoViolations()
   })
 
+  it('passes accessibility tests with select event', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        ...props,
+        columns: columns as any,
+        caption: 'Table caption',
+        onSelect: () => {}
+      }
+    })
+    expect(await axe(wrapper.element, {
+      rules: {
+        'empty-table-header': { enabled: false }
+      }
+    })).toHaveNoViolations()
+  })
+
+  it('calls select on Enter and Space', async () => {
+    const onSelect = vi.fn()
+    const wrapper = await mountSuspended(Table, {
+      props: { ...props, onSelect }
+    })
+
+    const row = wrapper.find('tbody tr')
+    expect(row.attributes('tabindex')).toBe('0')
+    expect(row.attributes('role')).toBeUndefined()
+
+    const enterEvent = await triggerKeydown(row.element, { key: 'Enter' })
+    expect(onSelect).toHaveBeenCalledTimes(1)
+    expect(enterEvent.defaultPrevented).toBe(true)
+
+    const spaceEvent = await triggerKeydown(row.element, { key: ' ' })
+    expect(onSelect).toHaveBeenCalledTimes(2)
+    expect(spaceEvent.defaultPrevented).toBe(true)
+  })
+
+  it('does not call select when a modifier key is held', async () => {
+    const onSelect = vi.fn()
+    const wrapper = await mountSuspended(Table, {
+      props: { ...props, onSelect }
+    })
+
+    const row = wrapper.find('tbody tr')
+    const metaEvent = await triggerKeydown(row.element, { key: 'Enter', metaKey: true })
+    expect(metaEvent.defaultPrevented).toBe(false)
+
+    const shiftEvent = await triggerKeydown(row.element, { key: ' ', shiftKey: true })
+    expect(shiftEvent.defaultPrevented).toBe(false)
+
+    expect(onSelect).not.toHaveBeenCalled()
+
+    await triggerKeydown(row.element, { key: 'Enter' })
+    expect(onSelect).toHaveBeenCalledTimes(1)
+  })
+
+  it('does not call select on repeated keydown', async () => {
+    const onSelect = vi.fn()
+    const wrapper = await mountSuspended(Table, {
+      props: { ...props, onSelect }
+    })
+
+    const row = wrapper.find('tbody tr')
+    await row.trigger('keydown', { key: 'Enter', repeat: true })
+    const spaceEvent = await triggerKeydown(row.element, { key: ' ', repeat: true })
+    expect(spaceEvent.defaultPrevented).toBe(true)
+    expect(onSelect).not.toHaveBeenCalled()
+
+    await row.trigger('keydown', { key: 'Enter' })
+    expect(onSelect).toHaveBeenCalledTimes(1)
+  })
+
+  it('does not call select from nested controls', async () => {
+    const onSelect = vi.fn()
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        ...props,
+        columns: [{
+          id: 'controls',
+          header: 'Controls',
+          cell: () => [
+            h('input', { 'type': 'checkbox', 'aria-label': 'Select row' }),
+            h('button', { type: 'button' }, 'Edit'),
+            h('a', { href: '#' }, 'Details'),
+            h('label', {}, [h('input', { type: 'checkbox' }), 'Toggle'])
+          ]
+        }] as any,
+        onSelect
+      }
+    })
+
+    const checkbox = wrapper.find<HTMLInputElement>('tbody tr input')
+    const checkboxEvent = await triggerKeydown(checkbox.element, { key: ' ' })
+    expect(checkboxEvent.defaultPrevented).toBe(false)
+
+    const buttonEvent = await triggerKeydown(wrapper.find('tbody tr button').element, { key: ' ' })
+    expect(buttonEvent.defaultPrevented).toBe(false)
+
+    const linkEvent = await triggerKeydown(wrapper.find('tbody tr a').element, { key: 'Enter' })
+    expect(linkEvent.defaultPrevented).toBe(false)
+
+    await checkbox.trigger('click')
+    expect(checkbox.element.checked).toBe(true)
+
+    await wrapper.find('tbody tr button').trigger('click')
+    await wrapper.find('tbody tr a').trigger('click')
+    await wrapper.find('tbody tr label').trigger('click')
+    expect(wrapper.find<HTMLInputElement>('tbody tr label input').element.checked).toBe(true)
+
+    expect(onSelect).not.toHaveBeenCalled()
+
+    await wrapper.find('tbody tr').trigger('keydown', { key: 'Enter' })
+    expect(onSelect).toHaveBeenCalledTimes(1)
+  })
+
+  it('does not call select from a nested contenteditable', async () => {
+    const onSelect = vi.fn()
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        ...props,
+        columns: [{
+          id: 'notes',
+          header: 'Notes',
+          cell: () => h('div', { contenteditable: 'true' }, 'Notes')
+        }] as any,
+        onSelect
+      }
+    })
+
+    const editable = wrapper.find('tbody tr [contenteditable]')
+    const enterEvent = await triggerKeydown(editable.element, { key: 'Enter' })
+    expect(enterEvent.defaultPrevented).toBe(false)
+
+    const spaceEvent = await triggerKeydown(editable.element, { key: ' ' })
+    expect(spaceEvent.defaultPrevented).toBe(false)
+
+    expect(onSelect).not.toHaveBeenCalled()
+  })
+
+  it('sets aria-sort on sortable th elements', async () => {
+    const sortableColumns: TableColumn<typeof data[number]>[] = [
+      { accessorKey: 'id', header: 'Id', enableSorting: true },
+      { accessorKey: 'email', header: 'Email', enableSorting: false },
+      { accessorKey: 'amount', header: 'Amount' }
+    ]
+
+    const wrapper = await mountSuspended(Table, {
+      props: { data, columns: sortableColumns as any }
+    })
+
+    const [idTh, emailTh, amountTh] = wrapper.findAll('th')
+    expect(idTh!.attributes('aria-sort')).toBe('none')
+    expect(emailTh!.attributes('aria-sort')).toBeUndefined()
+    // No `enableSorting` means no sort UI, so the column must not claim to be sortable.
+    expect(amountTh!.attributes('aria-sort')).toBeUndefined()
+
+    await wrapper.setProps({ sorting: [{ id: 'id', desc: false }] })
+    expect(wrapper.findAll('th')[0]!.attributes('aria-sort')).toBe('ascending')
+
+    await wrapper.setProps({ sorting: [{ id: 'id', desc: true }] })
+    expect(wrapper.findAll('th')[0]!.attributes('aria-sort')).toBe('descending')
+  })
+
+  it('only sets a directional aria-sort on the primary sort column', async () => {
+    const sortableColumns: TableColumn<typeof data[number]>[] = [
+      { accessorKey: 'id', header: 'Id', enableSorting: true },
+      { accessorKey: 'email', header: 'Email', enableSorting: true }
+    ]
+
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data,
+        columns: sortableColumns as any,
+        sorting: [{ id: 'email', desc: false }, { id: 'id', desc: true }]
+      }
+    })
+
+    const [idTh, emailTh] = wrapper.findAll('th')
+    expect(emailTh!.attributes('aria-sort')).toBe('ascending')
+    expect(idTh!.attributes('aria-sort')).toBe('none')
+  })
+
+  it('skips sort keys with no th on screen when picking the primary sort column', async () => {
+    const sortableColumns: TableColumn<typeof data[number]>[] = [
+      { accessorKey: 'id', header: 'Id', enableSorting: true },
+      { accessorKey: 'email', header: 'Email', enableSorting: true }
+    ]
+
+    const unknownIdWrapper = await mountSuspended(Table, {
+      props: {
+        data,
+        columns: sortableColumns as any,
+        sorting: [{ id: 'unknown', desc: false }, { id: 'id', desc: true }]
+      }
+    })
+
+    expect(unknownIdWrapper.findAll('th')[0]!.attributes('aria-sort')).toBe('descending')
+
+    const hiddenColumnWrapper = await mountSuspended(Table, {
+      props: {
+        data,
+        columns: sortableColumns as any,
+        columnVisibility: { email: false },
+        sorting: [{ id: 'email', desc: false }, { id: 'id', desc: true }]
+      }
+    })
+
+    const visibleThs = hiddenColumnWrapper.findAll('thead th')
+    expect(visibleThs.length).toBe(1)
+    expect(visibleThs[0]!.attributes('aria-sort')).toBe('descending')
+  })
+
+  it('does not set aria-sort on footer or placeholder th elements', async () => {
+    const groupedColumns: TableColumn<typeof data[number]>[] = [
+      { header: 'Group', columns: [{ accessorKey: 'id', header: 'Id', footer: 'Id total', enableSorting: true }] },
+      { accessorKey: 'email', header: 'Email', enableSorting: true }
+    ]
+
+    const wrapper = await mountSuspended(Table, {
+      props: { data, columns: groupedColumns as any, sorting: [{ id: 'email', desc: false }] }
+    })
+
+    const [, emailPlaceholderTh] = wrapper.findAll('thead th')
+    expect(emailPlaceholderTh!.attributes('aria-sort')).toBeUndefined()
+    // The real email header sits on the second header row and does carry the attribute.
+    expect(wrapper.findAll('thead tr')[1]!.findAll('th')[1]!.attributes('aria-sort')).toBe('ascending')
+
+    const footerThs = wrapper.findAll('tfoot th')
+    expect(footerThs.length).toBeGreaterThan(0)
+    expect(footerThs.every(th => th.attributes('aria-sort') === undefined)).toBe(true)
+  })
+
+  it('does not set aria-sort on th elements the table cannot sort', async () => {
+    const sortableColumns: TableColumn<typeof data[number]>[] = [
+      { accessorKey: 'id', header: 'Id', enableSorting: true },
+      { accessorKey: 'email', header: 'Email', enableSorting: true }
+    ]
+
+    const disabledWrapper = await mountSuspended(Table, {
+      props: { data, columns: sortableColumns as any, sortingOptions: { enableSorting: false } }
+    })
+
+    expect(disabledWrapper.findAll('th').every(th => th.attributes('aria-sort') === undefined)).toBe(true)
+
+    const displayColumns: TableColumn<typeof data[number]>[] = [
+      { id: 'actions', header: 'Actions' },
+      { accessorKey: 'id', header: 'Id' }
+    ]
+
+    const defaultColumnWrapper = await mountSuspended(Table, {
+      props: { data, columns: displayColumns as any, defaultColumn: { enableSorting: true } }
+    })
+
+    const [actionsTh, idTh] = defaultColumnWrapper.findAll('th')
+    expect(actionsTh!.attributes('aria-sort')).toBeUndefined()
+    expect(idTh!.attributes('aria-sort')).toBe('none')
+  })
+
   it('reactive columns', async () => {
     const wrapper = await mountSuspended({
       components: { Table },
@@ -254,5 +517,23 @@ describe('Table', () => {
     await flushPromises()
 
     expect(wrapper.find('[data-test-th="amount"]').exists()).toBeTruthy()
+  })
+
+  it('excludes hidden columns from colspan', async () => {
+    const columnVisibility = { email: false }
+    const visibleColumns = String(columns.length - 1)
+
+    const empty = await mountSuspended(Table, {
+      props: { columns: columns as any, columnVisibility }
+    })
+
+    expect(empty.find('[data-slot="empty"]').attributes('colspan')).toBe(visibleColumns)
+
+    const expanded = await mountSuspended(Table, {
+      props: { ...props, columns: columns as any, columnVisibility, expanded: { 0: true } },
+      slots: { expanded: () => 'Expanded slot' }
+    })
+
+    expect(expanded.findAll('td').find(td => td.text() === 'Expanded slot')?.attributes('colspan')).toBe(visibleColumns)
   })
 })

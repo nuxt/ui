@@ -67,14 +67,14 @@ export interface TextareaSlots {
 </script>
 
 <script setup lang="ts" generic="T extends TextareaValue, Mod extends ModelModifiers = ModelModifiers">
-import { useTemplateRef, computed, onMounted, nextTick, watch } from 'vue'
+import { useTemplateRef, computed, onMounted, onScopeDispose, nextTick, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useVModel } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
-import { looseToNumber } from '../utils'
+import { isEmpty, looseToNumber } from '../utils'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
@@ -97,16 +97,25 @@ const modelValue = useVModel<TextareaProps<T, Mod>, 'modelValue', 'update:modelV
 
 const appConfig = useAppConfig() as Textarea['AppConfig']
 
-const { emitFormFocus, emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField<TextareaProps<T>>(_props, { deferInputValidation: true })
+const { emitFormFocus, emitFormBlur, emitFormInput, emitFormChange, size: formFieldSize, color: formFieldColor, id, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<TextareaProps<T>>(_props, { deferInputValidation: true })
+
+// eslint-disable-next-line vue/no-dupe-keys
+const color = computed(() => formFieldColor.value ?? props.color)
+// eslint-disable-next-line vue/no-dupe-keys
+const highlight = computed(() => formFieldHighlight.value ?? props.highlight)
+// eslint-disable-next-line vue/no-dupe-keys
+const size = computed(() => formFieldSize.value ?? props.size)
+// eslint-disable-next-line vue/no-dupe-keys
+const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.textarea || {}) })({
-  color: color.value ?? props.color,
+  color: color.value,
   variant: props.variant,
-  size: size?.value ?? props.size,
+  size: size.value,
   loading: props.loading,
-  highlight: highlight.value ?? props.highlight,
+  highlight: highlight.value,
   fixed: props.fixed,
   autoresize: props.autoresize,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
@@ -125,12 +134,13 @@ function updateInput(value: string | null | undefined) {
     value = looseToNumber(value)
   }
 
-  if (props.modelModifiers?.nullable) {
-    value ||= null
+  // Only empty values are mapped, `0` is a value on its own with the `number` modifier
+  if (props.modelModifiers?.nullable && isEmpty(value)) {
+    value = null
   }
 
-  if (props.modelModifiers?.optional && !props.modelModifiers?.nullable && value !== null) {
-    value ||= undefined
+  if (props.modelModifiers?.optional && !props.modelModifiers?.nullable && value !== null && isEmpty(value)) {
+    value = undefined
   }
 
   modelValue.value = value as ApplyModifiers<T, Mod>
@@ -198,15 +208,23 @@ watch(modelValue, () => {
   nextTick(autoResize)
 })
 
+let autofocusTimeoutId: ReturnType<typeof setTimeout> | undefined
+let autoresizeTimeoutId: ReturnType<typeof setTimeout> | undefined
+
 onMounted(() => {
-  setTimeout(() => {
+  autofocusTimeoutId = setTimeout(() => {
     autoFocus()
   }, props.autofocusDelay)
 
-  setTimeout(async () => {
+  autoresizeTimeoutId = setTimeout(async () => {
     await nextTick()
     autoResize()
   }, props.autoresizeDelay)
+})
+
+onScopeDispose(() => {
+  clearTimeout(autofocusTimeoutId)
+  clearTimeout(autoresizeTimeoutId)
 })
 
 defineExpose({

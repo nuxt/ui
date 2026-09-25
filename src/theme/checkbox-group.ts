@@ -1,4 +1,6 @@
 import type { ModuleOptions } from '../module'
+// `table` is defined here rather than in checkbox.ts, so its focus ring is too
+import { focusCard, hover } from './checkbox'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
@@ -21,10 +23,14 @@ export default (options: Required<ModuleOptions>) => ({
       neutral: {}
     },
     variant: {
-      list: {},
-      card: {},
+      list: {
+        fieldset: 'flex-wrap'
+      },
+      card: {
+        fieldset: 'flex-wrap'
+      },
       table: {
-        item: 'border border-muted'
+        item: [`border border-default ${hover}bg-elevated/50`, options.theme.transitions && 'transition-colors']
       }
     },
     size: {
@@ -54,11 +60,29 @@ export default (options: Required<ModuleOptions>) => ({
         legend: 'after:content-[\'*\'] after:ms-0.5 after:text-error'
       }
     },
+    highlight: {
+      true: {},
+      false: {}
+    },
     disabled: {
       true: {}
     }
   },
   compoundVariants: [
+    ...[...(options.theme.colors || []).map((color: string) => [color, color]), ['neutral', 'inverted']].map(([color, token]: string[]) => ({
+      color,
+      variant: 'table',
+      class: {
+        item: focusCard(token!)
+      }
+    })),
+    {
+      variant: 'table',
+      highlight: false,
+      class: {
+        item: `${hover}border-accented`
+      }
+    },
     { size: 'xs', variant: 'table', class: { item: 'p-2.5' } },
     { size: 'sm', variant: 'table', class: { item: 'p-3' } },
     { size: 'md', variant: 'table', class: { item: 'p-3.5' } },
@@ -103,6 +127,7 @@ export default (options: Required<ModuleOptions>) => ({
     }
   ],
   defaultVariants: {
+    highlight: false,
     size: 'md',
     variant: 'list',
     color: 'primary'

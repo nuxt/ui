@@ -119,12 +119,20 @@ Required fields:
 ```yaml
 ---
 description: Brief description of the component.
-category: element  # element, form, overlay, navigation, layout, data
+category: element  # reuse an existing category from docs/content/docs/2.components/
 links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/ComponentName.vue
 ---
+```
+
+Optional `keywords` feed the docs search and the MCP `search-components` tool. Use alternate names from other ecosystems, not words already in the title or description:
+
+```yaml
+keywords:
+  - segmented control
+  - button group
 ```
 
 For Reka UI based components, add the Reka UI link:
@@ -280,10 +288,10 @@ For complex examples with setup code:
 :component-example{name="button-loading-auto-example"}
 ```
 
-Example component in `docs/app/components/content/examples/`:
+Example component in `docs/app/components/content/examples/<component>/`:
 
 ```vue
-<!-- ButtonLoadingAutoExample.vue -->
+<!-- button/ButtonLoadingAutoExample.vue -->
 <script setup lang="ts">
 async function onClick() {
   await new Promise(resolve => setTimeout(resolve, 2000))
@@ -357,3 +365,10 @@ Configure icons in your Vite config.
 | `navigation` | NavigationMenu, Breadcrumb, Tabs, etc. |
 | `layout` | Card, Container, Separator, etc. |
 | `data` | Table, Tree, Calendar, etc. |
+| `page` | PageHero, PageSection, PageCard, etc. |
+| `dashboard` | DashboardGroup, DashboardSidebar, DashboardPanel, etc. |
+| `chat` | ChatMessages, ChatPrompt, ChatPalette, etc. |
+| `editor` | Editor, EditorToolbar, EditorSuggestionMenu, etc. |
+| `content` | ContentNavigation, ContentSearch, ContentToc, etc. |
+| `color-mode` | ColorModeButton, ColorModeSelect, etc. |
+| `i18n` | LocaleSelect |

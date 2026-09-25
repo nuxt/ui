@@ -2,8 +2,8 @@
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
 import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming, isToolApprovalPending } from '@nuxt/ui/utils/ai'
-import { Comark } from '@comark/vue'
-import highlight from '@comark/vue/plugins/highlight'
+import { Markdown } from '@comark/vue'
+import shiki from '@comark/vue/plugins/shiki'
 
 const toast = useToast()
 
@@ -120,20 +120,20 @@ function generateMessages() {
             :streaming="isPartStreaming(part)"
             chevron="leading"
           >
-            <Comark
-              :markdown="part.text"
+            <Markdown
+              :value="part.text"
               :streaming="isPartStreaming(part)"
-              :plugins="[highlight()]"
+              :plugins="[shiki()]"
               class="*:first:mt-0 *:last:mb-0"
             />
           </UChatReasoning>
 
           <template v-else-if="isTextUIPart(part)">
-            <Comark
+            <Markdown
               v-if="message.role === 'assistant'"
-              :markdown="part.text"
+              :value="part.text"
               :streaming="isPartStreaming(part)"
-              :plugins="[highlight()]"
+              :plugins="[shiki()]"
               class="*:first:mt-0 *:last:mb-0"
             />
             <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">

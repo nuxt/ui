@@ -2,6 +2,10 @@
 title: SelectMenu
 description: An advanced searchable select element.
 category: form
+keywords:
+  - combobox
+  - multi select
+  - filterable select
 links:
   - label: Combobox
     icon: i-custom-reka-ui
@@ -273,6 +277,10 @@ props:
 
 ::tip
 You can set the `search-input` prop to `false` to hide the search input.
+::
+
+::note
+Use `:search-input="{ autofocus: false }"` to prevent the search input from being focused when the menu opens, e.g. to avoid opening the virtual keyboard on touch devices.
 ::
 
 ### Content

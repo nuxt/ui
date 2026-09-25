@@ -1,4 +1,6 @@
 import { createConfigForNuxt } from '@nuxt/eslint-config/flat'
+import { fileURLToPath } from 'node:url'
+import betterTailwindcss from 'eslint-plugin-better-tailwindcss'
 
 /**
  * Flag bare prop references in templates of components that use
@@ -139,6 +141,185 @@ const noBarePropRefs = {
   }
 }
 
+/**
+ * Flag reads of a `useFormField` / `useFieldGroup` ref that don't fall back to
+ * the `useComponentProps` proxy.
+ *
+ * `size`, `color`, `highlight` and `disabled` come back holding only what the
+ * wrapping `<UForm>` / `<UFormField>` / `<UFieldGroup>` supplied, so a bare
+ * `size.value` silently drops `<UTheme :props>` and `app.config` defaults. The
+ * fix is always the same shape, either inline or hoisted into a computed:
+ *
+ * ```ts
+ * size: formFieldSize.value ?? props.size
+ * const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
+ * ```
+ *
+ * So the rule allows a read only when it sits in a `??` chain that ends in a
+ * `props.<key>` member access, and reports it everywhere else. Chaining two
+ * refs (`fieldGroupSize.value ?? formFieldSize.value ?? props.size`) is fine.
+ *
+ * Templates are checked too, and more strictly: refs auto-unwrap there, so an
+ * unresolved `:size="formFieldSize"` has no `.value` to key off and reads
+ * exactly like the resolved `:size="size"`. Since the resolution always belongs
+ * in setup anyway, any appearance of one of these refs in a template is
+ * reported outright.
+ *
+ * Not auto-fixable: the right landing spot is often a shared computed rather
+ * than the use site, and appending `?? props.x` to the wrong branch of a
+ * ternary would change behaviour silently.
+ */
+const RESOLVABLE_FORM_FIELD_KEYS = new Set(['size', 'color', 'highlight', 'disabled'])
+const noUnresolvedFormFieldRefs = {
+  meta: {
+    type: 'problem',
+    docs: {
+      description: 'Require `<ref>.value ?? props.X` when reading a `useFormField` / `useFieldGroup` ref'
+    },
+    schema: [],
+    messages: {
+      unresolved: 'Reading `{{ local }}` without a `?? {{ propsVar }}.{{ key }}` fallback drops `<UTheme :props>` and `app.config` defaults. Chain it, or read a computed that already does.',
+      inTemplate: 'Binding the raw `{{ local }}` in the template drops `<UTheme :props>` and `app.config` defaults, and refs auto-unwrap here so it is indistinguishable from a resolved one. Resolve it in setup with `computed(() => {{ local }}.value ?? {{ propsVar }}.{{ key }})` and bind that.'
+    }
+  },
+  create(context) {
+    const parserServices = context.sourceCode?.parserServices ?? context.parserServices
+    let propsVar = 'props'
+    // local binding name -> the prop key it must fall back to
+    const formFieldRefs = new Map()
+
+    function isPropsAccess(node, key) {
+      return !!node
+        && node.type === 'MemberExpression'
+        && !node.computed
+        && node.object.type === 'Identifier'
+        && node.object.name === propsVar
+        && node.property.type === 'Identifier'
+        && node.property.name === key
+    }
+
+    // `a ?? b ?? props.size` parses as `(a ?? b) ?? props.size`, so the fallback
+    // can sit at any depth on either spine. Flatten the whole chain and accept
+    // it if `props.<key>` shows up anywhere in it — that also covers the
+    // `?? props.size ?? 'md'` shape used for virtualizer estimates.
+    function chainOperands(node, out = []) {
+      if (node.type === 'LogicalExpression' && node.operator === '??') {
+        chainOperands(node.left, out)
+        chainOperands(node.right, out)
+      } else {
+        out.push(node)
+      }
+      return out
+    }
+
+    const scriptVisitor = {
+      'CallExpression[callee.name="useComponentProps"]'(node) {
+        const decl = node.parent?.type === 'VariableDeclarator' ? node.parent : null
+        if (decl?.id?.type === 'Identifier') {
+          propsVar = decl.id.name
+        }
+      },
+      ':matches(CallExpression[callee.name="useFormField"], CallExpression[callee.name="useFieldGroup"])'(node) {
+        const decl = node.parent?.type === 'VariableDeclarator' ? node.parent : null
+        if (decl?.id?.type !== 'ObjectPattern') return
+
+        for (const prop of decl.id.properties) {
+          if (prop.type !== 'Property' || prop.key.type !== 'Identifier') continue
+          if (!RESOLVABLE_FORM_FIELD_KEYS.has(prop.key.name)) continue
+          if (prop.value.type !== 'Identifier') continue
+          formFieldRefs.set(prop.value.name, prop.key.name)
+        }
+      },
+      // Matches `<local>.value`, the only way these refs are read in script.
+      'MemberExpression[computed=false][property.name="value"]'(node) {
+        if (node.object.type !== 'Identifier') return
+
+        const key = formFieldRefs.get(node.object.name)
+        if (!key) return
+
+        // Climb to the outermost `??` so the whole chain is in scope, then look
+        // for the `props.<key>` fallback in the operands that follow this read.
+        // Only a fallback placed after it is a fallback: `props.size ?? size.value`
+        // reads the other way round and would let a theme default win over the
+        // wrapping FormField.
+        let top = node
+        while (top.parent?.type === 'LogicalExpression' && top.parent.operator === '??') {
+          top = top.parent
+        }
+
+        const operands = chainOperands(top)
+        const index = operands.indexOf(node)
+
+        if (index !== -1 && operands.slice(index + 1).some(operand => isPropsAccess(operand, key))) {
+          return
+        }
+
+        context.report({
+          node,
+          messageId: 'unresolved',
+          data: { local: `${node.object.name}.value`, propsVar, key }
+        })
+      }
+    }
+
+    if (!parserServices?.defineTemplateBodyVisitor) {
+      return scriptVisitor
+    }
+
+    // Template visitors run after the script is fully traversed, so
+    // `formFieldRefs` is populated by the time this fires.
+    return parserServices.defineTemplateBodyVisitor(
+      {
+        VExpressionContainer(node) {
+          for (const ref of node.references ?? []) {
+            const name = ref.id?.name
+            if (!name) continue
+
+            const key = formFieldRefs.get(name)
+            if (!key) continue
+
+            context.report({
+              node: ref.id,
+              messageId: 'inTemplate',
+              data: { local: name, propsVar, key }
+            })
+          }
+        }
+      },
+      scriptVisitor
+    )
+  }
+}
+
+/**
+ * Tailwind class checks for the apps in this repo (docs and playgrounds).
+ * `src/theme` is not covered yet: the plugin skips `export default (options) => ({...})`
+ * until https://github.com/schoero/eslint-plugin-better-tailwindcss/pull/397 ships.
+ */
+function betterTailwindcssConfig(files, entryPoint, ignore = []) {
+  // Absolute so editor ESLint servers running from a subfolder resolve it too.
+  entryPoint = fileURLToPath(new URL(entryPoint, import.meta.url))
+  return {
+    files,
+    plugins: {
+      'better-tailwindcss': betterTailwindcss
+    },
+    settings: {
+      'better-tailwindcss': {
+        entryPoint,
+        attributes: [
+          '^(v-bind:|:)?class$',
+          ['^(v-bind:|:)?ui$', [{ match: 'objectValues' }]]
+        ]
+      }
+    },
+    rules: {
+      ...betterTailwindcss.configs['correctness-error'].rules,
+      'better-tailwindcss/no-unknown-classes': ['error', { ignore }]
+    }
+  }
+}
+
 export default createConfigForNuxt({
   features: {
     tooling: true,
@@ -160,14 +341,24 @@ export default createConfigForNuxt({
   plugins: {
     'nuxt-ui': {
       rules: {
-        'no-bare-prop-refs': noBarePropRefs
+        'no-bare-prop-refs': noBarePropRefs,
+        'no-unresolved-form-field-refs': noUnresolvedFormFieldRefs
       }
     }
   },
   rules: {
-    'nuxt-ui/no-bare-prop-refs': 'error'
+    'nuxt-ui/no-bare-prop-refs': 'error',
+    'nuxt-ui/no-unresolved-form-field-refs': 'error'
   }
-}).append({
+}).append(betterTailwindcssConfig(['docs/app/**/*.vue'], 'docs/app/assets/css/main.css', [
+  // Hook classes styled in scoped `<style>` blocks or `main.css`, not Tailwind utilities.
+  '^nuxi-', '^landing-', '^(nuxt|vue)-only$', '^(playground-)?wall$', '^horizon$', '^twinkle$',
+  '^stars?$', '^star-layer$', '^dice-rolling$', '^squircle$', '^carbon$', '^example$', '^my-table-tbody$'
+])).append(
+  betterTailwindcssConfig(['playgrounds/nuxt/app/**/*.vue'], 'playgrounds/nuxt/app/assets/css/main.css')
+).append(
+  betterTailwindcssConfig(['playgrounds/vue/src/**/*.vue'], 'playgrounds/vue/src/assets/css/main.css')
+).append({
   files: ['src/runtime/components/**/*.vue', 'src/runtime/composables/**/*.ts'],
   rules: {
     'no-restricted-imports': ['error', {

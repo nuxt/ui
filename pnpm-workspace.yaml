@@ -10,15 +10,169 @@ ignoreWorkspaceRootCheck: true
 
 linkWorkspacePackages: true
 
+catalogMode: strict
+
+catalog:
+  "@ai-sdk/anthropic": ^4.0.58
+  "@ai-sdk/gateway": ^4.0.87
+  "@ai-sdk/vue": ^4.0.107
+  "@codspeed/vitest-plugin": ^5.7.1
+  "@comark/vue": ^0.7.0
+  "@floating-ui/dom": ^1.8.0
+  "@iconify-json/logos": ^1.2.14
+  "@iconify-json/lucide": ^1.2.134
+  "@iconify-json/simple-icons": ^1.2.96
+  "@iconify-json/vscode-icons": ^1.2.78
+  "@iconify/vue": ^5.0.2
+  "@internationalized/date": ^3.12.4
+  "@internationalized/number": ^3.6.8
+  "@nuxt/content": ^3.16.0
+  "@nuxt/eslint-config": ^1.17.0
+  "@nuxt/fonts": ^0.14.0
+  "@nuxt/icon": ^2.5.1
+  "@nuxt/image": ^2.0.0
+  "@nuxt/kit": ^4.5.2
+  "@nuxt/module-builder": ^1.0.3
+  "@nuxt/schema": ^4.5.2
+  "@nuxt/test-utils": ^4.3.2
+  "@nuxt/ui": workspace:*
+  "@nuxtjs/color-mode": ^4.0.1
+  "@nuxtjs/mcp-toolkit": ^0.21.0
+  "@nuxtjs/mdc": ^0.23.1
+  "@nuxtjs/robots": ^6.2.3
+  "@nuxtjs/sitemap": ^8.5.1
+  "@octokit/rest": ^22.0.1
+  "@regle/core": ^1.29.1
+  "@regle/rules": ^1.29.1
+  "@release-it/conventional-changelog": ^12.0.2
+  "@shikijs/types": ^4.4.3
+  "@standard-schema/spec": ^1.1.0
+  "@tailwindcss/postcss": ^4.3.3
+  "@tailwindcss/vite": ^4.3.3
+  "@takumi-rs/core": ^2.14.0
+  "@tanstack/table-core": ^8.21.3
+  "@tanstack/vue-table": ^8.21.3
+  "@tanstack/vue-virtual": ^3.13.39
+  "@tiptap/core": ^3.31.3
+  "@tiptap/extension-bubble-menu": ^3.31.3
+  "@tiptap/extension-code": ^3.31.3
+  "@tiptap/extension-collaboration": ^3.31.3
+  "@tiptap/extension-drag-handle": ^3.31.3
+  "@tiptap/extension-drag-handle-vue-3": ^3.31.3
+  "@tiptap/extension-emoji": ^3.31.3
+  "@tiptap/extension-floating-menu": ^3.31.3
+  "@tiptap/extension-horizontal-rule": ^3.31.3
+  "@tiptap/extension-image": ^3.31.3
+  "@tiptap/extension-mention": ^3.31.3
+  "@tiptap/extension-node-range": ^3.31.3
+  "@tiptap/extension-placeholder": ^3.31.3
+  "@tiptap/extension-text-align": ^3.31.3
+  "@tiptap/markdown": ^3.31.3
+  "@tiptap/pm": ^3.31.3
+  "@tiptap/starter-kit": ^3.31.3
+  "@tiptap/suggestion": ^3.31.3
+  "@tiptap/vue-3": ^3.31.3
+  "@types/sortablejs": ^1.15.9
+  "@unhead/vue": ^3.4.1
+  "@vercel/analytics": ^2.0.1
+  "@vercel/speed-insights": ^2.0.0
+  "@vitejs/plugin-vue": ^6.0.9
+  "@vue/repl": ^4.7.2
+  "@vue/test-utils": ^2.5.1
+  "@vueuse/core": ^14.4.0
+  "@vueuse/integrations": ^14.4.0
+  "@vueuse/nuxt": ^14.4.0
+  "@vueuse/shared": ^14.4.0
+  ai: ^7.0.107
+  capture-website: ^5.1.0
+  citty: ^0.2.2
+  colortranslator: ^5.0.0
+  consola: ^3.4.2
+  defu: ^6.1.7
+  embla-carousel: ^8.6.0
+  embla-carousel-auto-height: ^8.6.0
+  embla-carousel-auto-scroll: ^8.6.0
+  embla-carousel-autoplay: ^8.6.0
+  embla-carousel-class-names: ^8.6.0
+  embla-carousel-fade: ^8.6.0
+  embla-carousel-vue: ^8.6.0
+  embla-carousel-wheel-gestures: ^8.1.0
+  eslint: ^10.11.0
+  eslint-plugin-better-tailwindcss: ^4.7.0
+  fflate: ^0.8.3
+  fuse.js: ^7.5.0
+  happy-dom: ^20.14.5
+  hookable: ^6.1.2
+  joi: ^18.2.9
+  json5: ^2.2.3
+  knitwork: ^1.3.0
+  magic-string: ^1.4.1
+  maska: ^3.2.1
+  minimark: ^0.2.0
+  mlly: ^1.8.2
+  motion-v: ^2.4.4
+  nuxt: ^4.5.2
+  nuxt-agent-discovery: ^0.7.0
+  nuxt-component-meta: ^0.18.0
+  nuxt-llms: ^0.2.0
+  nuxt-og-image: ^6.8.0
+  nuxt-schema-org: ^6.3.2
+  ohash: ^2.0.12
+  pathe: ^2.0.3
+  prettier: ^3.9.8
+  reka-ui: 2.10.5
+  release-it: ^21.1.0
+  scule: ^1.3.0
+  shiki: ^4.4.3
+  shiki-transformer-color-highlight: ^1.1.0
+  shiki-transformer-icon-highlight: ^0.2.0
+  simple-git: ^3.36.0
+  sortablejs: ^1.15.7
+  superstruct: ^2.0.2
+  tailwind-merge: ^3.7.0
+  tailwind-variants: ^3.2.2
+  tailwindcss: ^4.3.3
+  tinyglobby: ^0.2.17
+  tiptap-extension-code-block-shiki: ^1.2.0
+  typescript: ^6.0.3
+  ufo: ^1.6.4
+  unbuild: ^3.6.1
+  unist-util-visit: ^5.1.0
+  unplugin: ^3.4.0
+  unplugin-auto-import: ^21.1.0
+  unplugin-vue-components: ^32.1.0
+  valibot: ^1.5.0
+  vaul-vue: 0.4.1
+  vite: ^8.3.0
+  vitest: ^4.1.11
+  vitest-axe: ^0.1.0
+  vitest-environment-nuxt: ^2.0.0
+  vue: ^3.5.43
+  vue-component-meta: ^3.3.11
+  vue-component-type-helpers: ^3.3.11
+  vue-router: ^5.3.1
+  vue-tsc: ^3.3.11
+  yup: ^1.7.1
+  zod: ^4.6.5
+
 overrides:
   # `@codspeed/vitest-plugin` caps its `vite` peer at ^7 while the repo resolves
   # vite 8 for the Nuxt modules; without widening it, pnpm's peer dedupe re-keys
   # the whole vite peer group down to vitest's vite 7. The plugin only ever runs
   # inside vitest's own vite, so the wider range is bookkeeping, not runtime.
   "@codspeed/vitest-plugin>vite": ^7.0.0 || ^8.0.0
-  "@nuxt/kit": ^4.5.1
+  "@nuxt/kit": ^4.5.2
   "@nuxt/ui": workspace:*
-  unplugin: ^3.3.0
+  # `@nuxt/image` 2.1.0 depends on `ipx` 4.0.0-beta.1, which pulls a second sharp
+  # alongside 0.34.5 and kills the docs prerender as soon as it hits `/_ipx`.
+  # Pinned until ipx 4 is stable, keep in sync with the renovate.json rule.
+  "@nuxt/image": 2.0.0
+  # tailwind-variants 3.3.x is a full internal rewrite: invoking a tv() result is
+  # 18 to 103x slower than 3.2.2 (see test/bench/tv.bench.ts) and the exported
+  # type constraints changed in a breaking way. Pinned until upstream addresses
+  # the perf regression, keep in sync with the renovate.json rule.
+  tailwind-variants: 3.2.2
+  unplugin: ^3.4.0
   c12: ^3.3.4
   h3: 1.15.11
   typescript: ^6.0.3
@@ -33,3 +187,7 @@ allowBuilds:
   esbuild: false
   unrs-resolver: false
   vue-demi: false
+
+minimumReleaseAgeExclude:
+  - 'nuxt-agent-discovery@0.4.0'
+  - 'shiki-transformer-icon-highlight@0.2.0'

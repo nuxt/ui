@@ -62,7 +62,7 @@ export interface PricingTableProps<T extends PricingTableTier = PricingTableTier
   as?: any
   /**
    * The caption to display above the table.
-   * @defeaultValue t('pricingTable.caption')
+   * @defaultValue t('pricingTable.caption')
    */
   caption?: string
   /**

@@ -1,6 +1,9 @@
 ---
 description: A non-modal dialog that floats around a trigger element.
 category: overlay
+keywords:
+  - hover card
+  - flyout
 links:
   - label: HoverCard
     icon: i-custom-reka-ui

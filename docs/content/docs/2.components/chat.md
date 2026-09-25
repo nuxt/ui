@@ -1,5 +1,4 @@
 ---
-title: Chat
 description: Build AI chat interfaces with streaming, reasoning, and tool calling.
 category: chat
 index: true
@@ -31,7 +30,7 @@ Check out the [`Nuxt`](https://github.com/nuxt-ui-templates/chat) and [`Vue`](ht
 
 ## Installation
 
-The Chat components are designed to be used with the [Vercel AI SDK](https://ai-sdk.dev/), specifically the [`Chat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-chat) class for managing chat state and streaming responses.
+The Chat components are designed to be used with the [Vercel AI SDK](https://ai-sdk.dev/), specifically the [`Chat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-chat) class for managing chat state and streaming responses. The examples on this page target AI SDK v7.
 
 Install the required dependencies:
 
@@ -71,7 +70,7 @@ export default defineNuxtConfig({
 ```
 
 ::::note
-[`@comark/nuxt`](https://comark.dev/rendering/nuxt) provides the `Comark` component used to render AI responses as streaming Markdown, it incrementally renders tokens as they arrive, avoiding the flicker and re-parsing that traditional Markdown renderers cause. It also automatically enables Nuxt UI's [prose components](/docs/typography) so your content is styled to match your theme.
+[`@comark/nuxt`](https://comark.dev/rendering/nuxt) provides the `Markdown` component used to render AI responses as streaming Markdown, it incrementally renders tokens as they arrive, avoiding the flicker and re-parsing that traditional Markdown renderers cause. It also automatically enables Nuxt UI's [prose components](/docs/typography) so your content is styled to match your theme.
 ::::
 
 :::
@@ -100,7 +99,7 @@ bun add ai @ai-sdk/gateway @ai-sdk/vue @comark/vue
 ::::
 
 ::::note
-[`@comark/vue`](https://comark.dev/rendering/vue) provides the `Comark` component used to render AI responses as streaming Markdown, it incrementally renders tokens as they arrive, avoiding the flicker and re-parsing that traditional Markdown renderers cause.
+[`@comark/vue`](https://comark.dev/rendering/vue) provides the `Markdown` component used to render AI responses as streaming Markdown, it incrementally renders tokens as they arrive, avoiding the flicker and re-parsing that traditional Markdown renderers cause.
 <br><br>To use Nuxt UI's [prose components](/docs/typography) with Comark, enable the `prose` option in your `vite.config.ts`:
 
 ```ts [vite.config.ts] {9}
@@ -148,7 +147,7 @@ export default defineEventHandler(async (event) => {
 
 ### Reasoning
 
-To enable [reasoning](https://ai-sdk.dev/docs/ai-sdk-ui/chatbot#reasoning), configure `providerOptions` for your provider ([Anthropic](https://ai-sdk.dev/docs/guides/providers/anthropic#reasoning), [Google](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai#thinking), [OpenAI](https://ai-sdk.dev/docs/guides/providers/openai#reasoning)):
+To enable [reasoning](https://ai-sdk.dev/docs/ai-sdk-ui/chatbot#reasoning), configure `providerOptions` for your provider ([Anthropic](https://ai-sdk.dev/providers/ai-sdk-providers/anthropic#reasoning), [Google](https://ai-sdk.dev/providers/ai-sdk-providers/google#thinking), [OpenAI](https://ai-sdk.dev/providers/ai-sdk-providers/openai#reasoning)):
 
 ```ts [server/api/chat.post.ts]
 import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
@@ -189,7 +188,7 @@ export default defineEventHandler(async (event) => {
 
 ### Web Search
 
-Some providers offer built-in web search tools: [Anthropic](https://ai-sdk.dev/docs/guides/providers/anthropic#web-search-tool), [Google](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai#google-search), [OpenAI](https://ai-sdk.dev/providers/ai-sdk-providers/openai#web-search-tool).
+Some providers offer built-in web search tools: [Anthropic](https://ai-sdk.dev/providers/ai-sdk-providers/anthropic#web-search-tool), [Google](https://ai-sdk.dev/providers/ai-sdk-providers/google#google-search), [OpenAI](https://ai-sdk.dev/providers/ai-sdk-providers/openai#web-search-tool).
 
 ::code-group
 
@@ -206,7 +205,7 @@ export default defineEventHandler(async (event) => {
     instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages),
     tools: {
-      web_search: anthropic.tools.webSearch_20250305({})
+      web_search: anthropic.tools.webSearch_20260209({})
     }
   })
 
@@ -370,7 +369,9 @@ Use the `useChat` composable from `@ai-sdk/vue` to manage chat state and connect
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
 import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
-import highlight from '@comark/nuxt/plugins/highlight'
+import shiki from '@comark/nuxt/plugins/shiki'
+
+const plugins = [shiki()]
 
 const input = ref('')
 
@@ -403,10 +404,10 @@ function onSubmit() {
           :text="part.text"
           :streaming="isPartStreaming(part)"
         >
-          <Comark
-            :markdown="part.text"
+          <Markdown
+            :value="part.text"
             :streaming="isPartStreaming(part)"
-            :plugins="[highlight()]"
+            :plugins="plugins"
             class="*:first:mt-0 *:last:mb-0"
           />
         </UChatReasoning>
@@ -422,11 +423,11 @@ function onSubmit() {
         />
 
         <template v-else-if="isTextUIPart(part)">
-          <Comark
+          <Markdown
             v-if="message.role === 'assistant'"
-            :markdown="part.text"
+            :value="part.text"
             :streaming="isPartStreaming(part)"
-            :plugins="[highlight()]"
+            :plugins="plugins"
             class="*:first:mt-0 *:last:mb-0"
           />
           <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
@@ -458,8 +459,10 @@ import { ref } from 'vue'
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
 import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
-import { Comark } from '@comark/vue'
-import highlight from '@comark/vue/plugins/highlight'
+import { Markdown } from '@comark/vue'
+import shiki from '@comark/vue/plugins/shiki'
+
+const plugins = [shiki()]
 
 const input = ref('')
 
@@ -492,10 +495,10 @@ function onSubmit() {
           :text="part.text"
           :streaming="isPartStreaming(part)"
         >
-          <Comark
-            :markdown="part.text"
+          <Markdown
+            :value="part.text"
             :streaming="isPartStreaming(part)"
-            :plugins="[highlight()]"
+            :plugins="plugins"
             class="*:first:mt-0 *:last:mb-0"
           />
         </UChatReasoning>
@@ -511,11 +514,11 @@ function onSubmit() {
         />
 
         <template v-else-if="isTextUIPart(part)">
-          <Comark
+          <Markdown
             v-if="message.role === 'assistant'"
-            :markdown="part.text"
+            :value="part.text"
             :streaming="isPartStreaming(part)"
-            :plugins="[highlight()]"
+            :plugins="plugins"
             class="*:first:mt-0 *:last:mb-0"
           />
           <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
@@ -543,17 +546,17 @@ function onSubmit() {
 ::
 
 ::tip
-For reusable Comark configuration (plugins, class, etc.), use [`defineComarkComponent`](https://comark.dev/rendering/vue#code-definecomarkcomponent) to create a custom component instead of passing props inline each time.
+For reusable Comark configuration (plugins, class, etc.), use [`defineMarkdownComponent`](https://comark.dev/rendering/vue#code-markdown-code-definemarkdowncomponent-code) to create a custom component instead of passing props inline each time.
 
 ::framework-only
 #nuxt
 :::div{class="*:my-0"}
-```ts [components/chat/Comark.ts]
-import highlight from '@comark/nuxt/plugins/highlight'
+```ts [components/chat/Markdown.ts]
+import shiki from '@comark/nuxt/plugins/shiki'
 
-export default defineComarkComponent({
-  name: 'ChatComark',
-  plugins: [highlight()],
+export default defineMarkdownComponent({
+  name: 'ChatMarkdown',
+  plugins: [shiki()],
   class: '*:first:mt-0 *:last:mb-0'
 })
 ```
@@ -561,13 +564,13 @@ export default defineComarkComponent({
 
 #vue
 :::div{class="*:my-0"}
-```ts [components/chat/Comark.ts]
-import { defineComarkComponent } from '@comark/vue'
-import highlight from '@comark/vue/plugins/highlight'
+```ts [components/chat/Markdown.ts]
+import { defineMarkdownComponent } from '@comark/vue'
+import shiki from '@comark/vue/plugins/shiki'
 
-export default defineComarkComponent({
-  name: 'ChatComark',
-  plugins: [highlight()],
+export default defineMarkdownComponent({
+  name: 'ChatMarkdown',
+  plugins: [shiki()],
   class: '*:first:mt-0 *:last:mb-0'
 })
 ```
@@ -577,7 +580,7 @@ export default defineComarkComponent({
 ::
 
 ::note
-When using the `highlight` plugin, add the following CSS to your stylesheet to support dark mode:
+When using the `shiki` plugin, add the following CSS to your stylesheet to support dark mode:
 
 ```css [main.css]
 html.dark .shiki span {

@@ -2,7 +2,7 @@ import type { Messages } from '../types/locale'
 import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
-  name: 'Schweizerdeutsch',
+  name: 'Schweizer Hochdeutsch',
   code: 'de-CH',
   messages: {
     alert: {

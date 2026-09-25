@@ -1,0 +1,62 @@
+import { TOKEN_SHADE_TARGETS, SHADE_LADDER } from '../utils/theme/engine/types'
+import { canonicalTokenShades } from '../utils/theme/engine/sections'
+import type { ColorAlias, ShadeStop } from '../utils/theme/engine/types'
+
+/**
+ * Per-mode shade sliders for the semantic tokens riding one ramp, the accent
+ * pair for a color alias, every neutral-ramped token for neutral. Shared by
+ * the Colors panel section and the folded token groups.
+ */
+export function useTokenShades(alias: ColorAlias) {
+  const { style, setStyle, baselineDoc } = useThemeStudio()
+
+  /** The active preset's own shade choices, what a row reset restores. */
+  const baselineShades = computed(() => canonicalTokenShades(baselineDoc.value))
+
+  // Only the touched mode is written, so an untouched mode never becomes an
+  // override. Reset restores the BASELINE preset's shade, or deletes the entry
+  // when the preset made no choice, a token's real default may not sit on the
+  // ramp at all (--ui-bg is literally `white`).
+  function control(token: string, defaults: { light: ShadeStop, dark: ShadeStop }, target: 'light' | 'dark') {
+    const model = computed({
+      get: () => {
+        const value = style.value.tokenShades?.[token]?.[target] ?? defaults[target]
+        // an older theme's off-ladder stop reads indexOf -1, clamp so the
+        // slider stays grabbable
+        return Math.max(0, SHADE_LADDER.indexOf(value as ShadeStop))
+      },
+      set: (index: number) => {
+        setStyle({
+          tokenShades: {
+            ...style.value.tokenShades,
+            [token]: { ...style.value.tokenShades?.[token], [target]: SHADE_LADDER[index]! }
+          }
+        })
+      }
+    })
+    const baseline = computed(() => baselineShades.value[token]?.[target])
+    const dirty = computed(() => style.value.tokenShades?.[token]?.[target] !== baseline.value)
+    function reset() {
+      const entry: { light?: ShadeStop, dark?: ShadeStop } = { ...style.value.tokenShades?.[token] }
+      if (baseline.value !== undefined) entry[target] = baseline.value
+      else Reflect.deleteProperty(entry, target)
+      const tokenShades = { ...style.value.tokenShades }
+      if (Object.keys(entry).length) tokenShades[token] = entry
+      else Reflect.deleteProperty(tokenShades, token)
+      setStyle({ tokenShades })
+    }
+    return { model, dirty, reset }
+  }
+
+  const sections = TOKEN_SHADE_TARGETS
+    .filter(target => alias === 'neutral' ? target.ramp === 'neutral' : target.token === `--ui-${alias}`)
+    .map(target => ({
+      ...target,
+      sliders: {
+        light: control(target.token, target.defaults, 'light'),
+        dark: control(target.token, target.defaults, 'dark')
+      }
+    }))
+
+  return { sections }
+}

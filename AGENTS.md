@@ -33,7 +33,7 @@ playgrounds/
 pnpm run dev:prepare  # Generate type stubs (run after install)
 pnpm run dev          # Nuxt playground
 pnpm run dev:vue      # Vue playground
-pnpm run dev:repl     # REPL playground
+pnpm run repl         # REPL playground
 pnpm run docs         # Documentation site
 pnpm run lint         # Check linting
 pnpm run lint:fix     # Fix linting
@@ -43,16 +43,10 @@ pnpm run test         # Run tests
 
 ## CLI for Scaffolding
 
-Link the CLI first (one-time setup):
+Use the CLI to create new components:
 
 ```bash
-npm link
-```
-
-Then use it to create new components:
-
-```bash
-nuxt-ui make component <name> [options]
+pnpm cli make component <name> [options]
 ```
 
 Options:
@@ -66,6 +60,7 @@ Options:
 - **Conventional commits**: All commit messages must follow [conventional commits](https://conventionalcommits.org) (e.g. `fix(Button): resolve hover state`, `feat(Modal): add fullscreen prop`).
 - **Semantic colors**: Use `text-default`, `bg-elevated`, etc. — never raw Tailwind palette colors like `text-gray-500`.
 - **`Soon` badge on docs headings**: PRs that introduce a new feature or fix often add `:badge{label="Soon" class="align-text-top"}` to the relevant docs heading. This is intentional: the docs site redeploys on merge, but the feature only ships on the next npm release — the badge bridges that gap. Do NOT flag this as inconsistent in reviews. See [documentation.md](.github/contributing/documentation.md) for details.
+- **Two build adapters**: Build-side changes (templates, auto-imports, icons, component detection, build plugins) must be checked against both adapters: `src/module.ts` for Nuxt, `src/unplugin.ts` and `src/plugins/*` for Vue. Shared logic belongs in `src/utils/`. In code that runs from the published build, only the two entry files may resolve paths from `import.meta.url`, since bundled files can land in any output chunk. Everything else anchors on `runtimeDir`.
 
 ## Library Source (`src/` and `test/`)
 
@@ -105,11 +100,11 @@ Copy this checklist and track progress when creating a new component:
 ```
 Component: [name]
 Progress:
-- [ ] 1. Scaffold with CLI: nuxt-ui make component <name>
+- [ ] 1. Scaffold with CLI: pnpm cli make component <name>
 - [ ] 2. Implement component in src/runtime/components/
 - [ ] 3. Create theme in src/theme/
 - [ ] 4. Export types from src/runtime/types/index.ts
-- [ ] 5. Register in ThemeDefaults interface (src/runtime/composables/useComponentProps.ts)
+- [ ] 5. Register in ThemeDefaults interface (src/runtime/types/theme.ts)
 - [ ] 6. Write tests in test/components/
 - [ ] 7. Create docs in docs/content/docs/2.components/
 - [ ] 8. Add playground page
