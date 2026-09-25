@@ -1,9 +1,9 @@
 import { colorVariant } from './color'
 // Active-tab highlight shown before reka-ui's `TabsIndicator` mounts (SSR / pre-hydration).
-// reka-ui only renders the real indicator on the client (it needs DOM measurements), so we gate
-// a CSS-only pseudo-element fallback on the active trigger by the *absence* of the indicator
+// reka-ui only renders the real indicator on the client (it needs DOM measurements), so the
+// `in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:` classes
+// gate a CSS-only pseudo-element fallback on the active trigger by the *absence* of the indicator
 // element — the instant reka's measured indicator appears, this selector stops matching.
-const ssr = (...classes: string[]) => classes.map(c => `in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:${c}`).join(' ')
 
 export default {
   slots: {
@@ -22,13 +22,13 @@ export default {
     variant: {
       pill: {
         list: 'bg-elevated rounded-lg',
-        trigger: [`grow`, ssr('before:content-[\'\']', 'before:absolute', 'before:inset-0', 'before:rounded-md', 'before:shadow-xs', 'before:-z-10', 'isolate'), 'data-[state=active]:text-accent-foreground outline-accent-focus focus-visible:outline-3', ssr('before:bg-accent')],
+        trigger: [`grow`, `in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:content-[''] in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:absolute in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:inset-0 in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:rounded-md in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:shadow-xs in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:-z-10 in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:isolate`, 'data-[state=active]:text-accent-foreground outline-accent-focus focus-visible:outline-3', 'in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:bg-accent'],
         indicator: 'rounded-md shadow-xs bg-accent'
       },
       link: {
         list: 'border-default',
         indicator: 'rounded-full bg-accent',
-        trigger: [ssr('after:content-[\'\']', 'after:absolute', 'after:rounded-full'), 'data-[state=active]:text-accent outline-accent-focus focus-visible:outline-3', ssr('after:bg-accent')]
+        trigger: [`in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:content-[''] in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:absolute in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:rounded-full`, 'data-[state=active]:text-accent outline-accent-focus focus-visible:outline-3', 'in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:bg-accent']
       }
     },
     orientation: {
@@ -78,7 +78,7 @@ export default {
     class: {
       list: 'border-b -mb-px',
       indicator: '-bottom-px h-px',
-      trigger: ssr('after:inset-x-0', 'after:-bottom-[calc(var(--spacing)+1px)]', 'after:h-px')
+      trigger: 'in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:inset-x-0 in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:-bottom-[calc(var(--spacing)+1px)] in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:h-px'
     }
   }, {
     orientation: 'vertical',
@@ -94,7 +94,7 @@ export default {
     class: {
       list: 'border-s -ms-px',
       indicator: '-start-px w-px',
-      trigger: ssr('after:inset-y-0', 'after:-start-[calc(var(--spacing)+1px)]', 'after:w-px')
+      trigger: 'in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:inset-y-0 in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:-start-[calc(var(--spacing)+1px)] in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:w-px'
     }
   }],
   defaultVariants: {
