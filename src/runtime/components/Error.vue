@@ -63,7 +63,7 @@ const _props = withDefaults(defineProps<ErrorProps>(), {
 })
 const slots = defineSlots<ErrorSlots>()
 
-const props = useComponentProps('error', _props)
+const props = useComponentProps('error', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Error['AppConfig']

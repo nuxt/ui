@@ -69,7 +69,7 @@ const _props = withDefaults(defineProps<DashboardNavbarProps>(), {
 })
 const slots = defineSlots<DashboardNavbarSlots>()
 
-const props = useComponentProps('dashboardNavbar', _props)
+const props = useComponentProps('dashboardNavbar', _props, theme)
 
 const appConfig = useAppConfig() as DashboardNavbar['AppConfig']
 const dashboardContext = useDashboard({})

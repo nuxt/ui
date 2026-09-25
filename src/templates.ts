@@ -6,7 +6,7 @@ import { addTemplate, addTypeTemplate, hasNuxtModule, logger, updateTemplates, g
 import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
 import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
-import { applyDefaultVariants, applyPrefixToObject, applyUnstyled } from './utils/theme'
+import { applyPrefixToObject, applyUnstyled } from './utils/theme'
 import { detectUsedComponents } from './utils/components'
 import * as theme from './theme'
 import { colors as aliases } from './theme/color'
@@ -81,8 +81,6 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
           const unused = path !== 'prose' && !!vue?.detectedComponents?.size
             && !Array.from(vue.detectedComponents).some(detected => camelCase(detected) === component)
 
-          // Override default variants from nuxt.config.ts
-          result = applyDefaultVariants(result, options.theme?.defaultVariants)
           // Strip default theme classes if `unstyled` is enabled
           result = applyUnstyled(result, options.theme?.unstyled || unused)
           // Apply Tailwind prefix if configured
@@ -116,17 +114,15 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
           if (isDev) {
             const templatePath = fileURLToPath(new URL(`./theme/${path ? `${path}/` : ''}${kebabCase(component)}`, import.meta.url))
             const themeUtilsPath = fileURLToPath(new URL('./utils/theme', import.meta.url))
-            const defaultVariantsJson = JSON.stringify(options.theme?.defaultVariants) ?? 'undefined'
             const prefixJson = JSON.stringify(options.theme?.prefix) ?? 'undefined'
             const unstyledJson = JSON.stringify(options.theme?.unstyled || unused) ?? 'undefined'
 
             return [
               `import template from ${JSON.stringify(templatePath)}`,
-              `import { applyDefaultVariants, applyPrefixToObject, applyUnstyled } from ${JSON.stringify(themeUtilsPath)}`,
+              `import { applyPrefixToObject, applyUnstyled } from ${JSON.stringify(themeUtilsPath)}`,
               ...generateVariantDeclarations(variants),
               `const options = ${JSON.stringify(options, null, 2)}`,
               `let result = typeof template === 'function' ? (template as Function)(options) : template`,
-              `result = applyDefaultVariants(result, ${defaultVariantsJson})`,
               `result = applyUnstyled(result, ${unstyledJson})`,
               `result = applyPrefixToObject(result, ${prefixJson})`,
               `const theme = ${json}`,
@@ -384,7 +380,7 @@ ${themeBlocks}`
       const iconUnion = iconKeys.length ? iconKeys.map(i => JSON.stringify(i)).join(' | ') : 'string'
 
       return `import * as ui from '#build/ui'
-import type { TVConfig, TVMergeConfig, DeepRequired } from '@nuxt/ui'
+import type { TVConfig, TVMergeConfig, DeepRequired, ThemeDefaultVariants } from '@nuxt/ui'
 import colors from 'tailwindcss/colors'
 
 type IconsConfig = Record<${iconUnion} | (string & {}), string>
@@ -400,6 +396,7 @@ type AppConfigUI = {
   icons?: Partial<IconsConfig>
   prefix?: string
   tv?: TVMergeConfig
+  defaultVariants?: ThemeDefaultVariants
 } & TVConfig<typeof ui>
 
 type AppConfigRuntimeUI = DeepRequired<Pick<AppConfigUI, 'colors' | 'icons' | 'tv'>> & typeof ui

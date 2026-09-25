@@ -26,7 +26,7 @@ const _props = defineProps<ProseLiProps>()
 
 defineSlots<ProseLiSlots>()
 
-const props = useComponentProps('prose.li', _props)
+const props = useComponentProps('prose.li', _props, theme)
 
 const appConfig = useAppConfig() as ProseLi['AppConfig']
 

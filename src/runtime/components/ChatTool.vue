@@ -100,7 +100,7 @@ const _props = withDefaults(defineProps<ChatToolProps>(), {
 const emits = defineEmits<ChatToolEmits>()
 const slots = defineSlots<ChatToolSlots>()
 
-const props = useComponentProps('chatTool', _props)
+const props = useComponentProps('chatTool', _props, theme)
 
 const appConfig = useAppConfig() as ChatTool['AppConfig']
 

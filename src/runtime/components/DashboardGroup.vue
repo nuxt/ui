@@ -38,7 +38,7 @@ const _props = withDefaults(defineProps<DashboardGroupProps>(), {
 })
 defineSlots<DashboardGroupSlots>()
 
-const props = useComponentProps('dashboardGroup', _props)
+const props = useComponentProps('dashboardGroup', _props, theme)
 
 const nuxtApp = useNuxtApp()
 const appConfig = useAppConfig() as DashboardGroup['AppConfig']

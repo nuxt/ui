@@ -64,7 +64,7 @@ const _props = defineProps<ProseCodeTreeProps>()
 const emits = defineEmits<ProseCodeTreeEmits>()
 const slots = defineSlots<ProseCodeTreeSlots>()
 
-const props = useComponentProps('prose.codeTree', _props)
+const props = useComponentProps('prose.codeTree', _props, theme)
 
 const appConfig = useAppConfig() as ProseCodeTree['AppConfig']
 

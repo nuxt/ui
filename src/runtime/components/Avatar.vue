@@ -57,7 +57,7 @@ defineOptions({ inheritAttrs: false })
 
 const _props = defineProps<AvatarProps>()
 
-const props = useComponentProps('avatar', _props)
+const props = useComponentProps('avatar', _props, theme)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const as = computed(() => {

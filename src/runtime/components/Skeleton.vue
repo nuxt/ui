@@ -25,7 +25,7 @@ import { useComponentProps } from '../composables/useComponentProps'
 
 const _props = defineProps<SkeletonProps>()
 
-const props = useComponentProps('skeleton', _props)
+const props = useComponentProps('skeleton', _props, theme)
 
 const appConfig = useAppConfig() as Skeleton['AppConfig']
 

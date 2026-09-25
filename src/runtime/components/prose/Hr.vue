@@ -19,7 +19,7 @@ import { tv } from '../../utils/tv'
 
 const _props = defineProps<ProseHrProps>()
 
-const props = useComponentProps('prose.hr', _props)
+const props = useComponentProps('prose.hr', _props, theme)
 
 const appConfig = useAppConfig() as ProseHr['AppConfig']
 

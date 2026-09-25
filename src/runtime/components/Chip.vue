@@ -61,7 +61,7 @@ const _props = withDefaults(defineProps<ChipProps>(), {
 })
 defineSlots<ChipSlots>()
 
-const props = useComponentProps('chip', _props)
+const props = useComponentProps('chip', _props, theme)
 
 const show = defineModel<boolean>('show', { default: true })
 

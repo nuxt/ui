@@ -26,7 +26,7 @@ const _props = defineProps<ProsePProps>()
 
 defineSlots<ProsePSlots>()
 
-const props = useComponentProps('prose.p', _props)
+const props = useComponentProps('prose.p', _props, theme)
 
 const appConfig = useAppConfig() as ProseP['AppConfig']
 

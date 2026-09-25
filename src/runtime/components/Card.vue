@@ -41,7 +41,7 @@ import { tv } from '../utils/tv'
 const _props = defineProps<CardProps>()
 const slots = defineSlots<CardSlots>()
 
-const props = useComponentProps('card', _props)
+const props = useComponentProps('card', _props, theme)
 
 const appConfig = useAppConfig() as Card['AppConfig']
 

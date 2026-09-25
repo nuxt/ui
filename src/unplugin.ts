@@ -27,6 +27,7 @@ import IconsPlugin from './plugins/icons'
 import OptionalDepsPlugin from './plugins/optional-deps'
 
 import type { TVConfig, TVMergeConfig } from './runtime/types/tv'
+import type { ThemeDefaultVariants } from './runtime/types/theme'
 
 type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone' | 'taupe' | 'mauve' | 'mist' | 'olive'
 type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
@@ -36,6 +37,7 @@ type AppConfigUI = {
   icons?: Partial<typeof icons>
   prefix?: string
   tv?: TVMergeConfig
+  defaultVariants?: ThemeDefaultVariants
 } & TVConfig<typeof ui>
 
 export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode' | 'content'> {

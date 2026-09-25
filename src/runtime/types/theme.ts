@@ -16,6 +16,21 @@ export type ThemeUI = {
 }
 
 /**
+ * App-wide defaults for the `'*'` key of `<UTheme :props>` and
+ * `app.config.ui.defaultVariants`. They replace the library-wide `primary` and
+ * `md`, so a component with its own default color or size keeps it.
+ */
+export interface ThemeDefaultVariants {
+  color?: 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral'
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+}
+
+// Its own interface, so the quoted `'*'` key doesn't force quotes on the component keys
+interface ThemeGlobalDefaults {
+  '*'?: ThemeDefaultVariants
+}
+
+/**
  * Strict per-component defaults shape used by `<UTheme :props>`. Authored as
  * a flat interface with literal keys (rather than a mapped type) so editors —
  * Volar in particular — surface key completions inside template inline
@@ -26,7 +41,7 @@ export type ThemeUI = {
  * `src/templates.ts`): every themable component gets one camelCase entry
  * whose value is a `Partial` of that component's `<PascalCase>Props`.
  */
-export interface ThemeDefaults {
+export interface ThemeDefaults extends ThemeGlobalDefaults {
   accordion?: Partial<ComponentTypes.AccordionProps>
   alert?: Partial<ComponentTypes.AlertProps>
   authForm?: Partial<ComponentTypes.AuthFormProps>
