@@ -13,9 +13,30 @@ import { colors as aliases } from './theme/color'
 import * as themeProse from './theme/prose'
 import * as themeContent from './theme/content'
 
-// The accent roles every color resolves through. A color scope points each one at
-// `--ui-<color>-<role>`, and a role left unset falls back to its recipe on the color.
-const ACCENT_ROLES = ['foreground', 'hover', 'soft', 'soft-hover', 'soft-foreground', 'soft-active', 'border', 'border-soft', 'focus', 'surface', 'muted', 'muted-hover', 'line', 'tint', 'faint', 'border-muted', 'border-strong']
+// The accent roles every color resolves through, with the recipe each falls back to.
+// A color scope points each one at `--ui-<color>-<role>`, and a role left unset
+// keeps its recipe on the color.
+const ACCENT_RECIPES: Record<string, string> = {
+  'foreground': 'var(--ui-text-inverted)',
+  'hover': 'color-mix(in oklab, var(--ui-accent) 75%, transparent)',
+  'soft': 'color-mix(in oklab, var(--ui-accent) 10%, transparent)',
+  'soft-hover': 'color-mix(in oklab, var(--ui-accent) 15%, transparent)',
+  'soft-foreground': 'var(--ui-accent)',
+  'soft-active': 'color-mix(in oklab, var(--ui-accent) 20%, transparent)',
+  'border': 'color-mix(in oklab, var(--ui-accent) 50%, transparent)',
+  'border-soft': 'color-mix(in oklab, var(--ui-accent) 25%, transparent)',
+  'focus': 'color-mix(in oklab, var(--ui-accent) 25%, transparent)',
+  'surface': 'transparent',
+  'muted': 'var(--ui-accent)',
+  'muted-hover': 'color-mix(in oklab, var(--ui-accent) 75%, transparent)',
+  'line': 'var(--ui-accent)',
+  'tint': 'color-mix(in oklab, var(--ui-accent) 10%, transparent)',
+  'faint': 'color-mix(in oklab, var(--ui-accent) 75%, transparent)',
+  'border-muted': 'color-mix(in oklab, var(--ui-accent) 25%, transparent)',
+  'border-strong': 'color-mix(in oklab, var(--ui-accent) 50%, transparent)'
+}
+
+const ACCENT_ROLES = Object.keys(ACCENT_RECIPES)
 
 // Neutral's roles default to the surface tokens it has always used
 const NEUTRAL_ROLES: Record<string, string> = {
@@ -250,23 +271,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   ${aliases.map(color => [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map(shade => `--color-${color}-${shade}: var(--ui-color-${color}-${shade});`).join('\n\t')).join('\n\t')}
   ${aliases.map(color => `--color-${color}: var(--ui-${color});`).join('\n\t')}
   --color-accent: var(--ui-accent);
-  --color-accent-foreground: var(--ui-accent-foreground, var(--ui-text-inverted));
-  --color-accent-hover: var(--ui-accent-hover, color-mix(in oklab, var(--ui-accent) 75%, transparent));
-  --color-accent-soft: var(--ui-accent-soft, color-mix(in oklab, var(--ui-accent) 10%, transparent));
-  --color-accent-soft-hover: var(--ui-accent-soft-hover, color-mix(in oklab, var(--ui-accent) 15%, transparent));
-  --color-accent-soft-foreground: var(--ui-accent-soft-foreground, var(--ui-accent));
-  --color-accent-soft-active: var(--ui-accent-soft-active, color-mix(in oklab, var(--ui-accent) 20%, transparent));
-  --color-accent-border: var(--ui-accent-border, color-mix(in oklab, var(--ui-accent) 50%, transparent));
-  --color-accent-border-soft: var(--ui-accent-border-soft, color-mix(in oklab, var(--ui-accent) 25%, transparent));
-  --color-accent-focus: var(--ui-accent-focus, color-mix(in oklab, var(--ui-accent) 25%, transparent));
-  --color-accent-surface: var(--ui-accent-surface, transparent);
-  --color-accent-muted: var(--ui-accent-muted, var(--ui-accent));
-  --color-accent-muted-hover: var(--ui-accent-muted-hover, color-mix(in oklab, var(--ui-accent) 75%, transparent));
-  --color-accent-line: var(--ui-accent-line, var(--ui-accent));
-  --color-accent-tint: var(--ui-accent-tint, color-mix(in oklab, var(--ui-accent) 10%, transparent));
-  --color-accent-faint: var(--ui-accent-faint, color-mix(in oklab, var(--ui-accent) 75%, transparent));
-  --color-accent-border-muted: var(--ui-accent-border-muted, color-mix(in oklab, var(--ui-accent) 25%, transparent));
-  --color-accent-border-strong: var(--ui-accent-border-strong, color-mix(in oklab, var(--ui-accent) 50%, transparent));
+  ${ACCENT_ROLES.map(role => `--color-accent-${role}: var(--ui-accent-${role}, ${ACCENT_RECIPES[role]});`).join('\n  ')}
   --radius-xs: calc(var(--ui-radius) * 0.5);
   --radius-sm: var(--ui-radius);
   --radius-md: calc(var(--ui-radius) * 1.5);
