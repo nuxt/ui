@@ -96,7 +96,7 @@ const _props = withDefaults(defineProps<StepperProps<T>>(), {
 const emits = defineEmits<StepperEmits<T>>()
 const slots = defineSlots<StepperSlots<T>>()
 
-const props = useComponentProps<StepperProps<T>>('stepper', _props)
+const props = useComponentProps<StepperProps<T>>('stepper', _props, theme)
 
 const modelValue = defineModel<string | number>()
 

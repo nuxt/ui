@@ -91,7 +91,7 @@ const _props = withDefaults(defineProps<InputDateProps<R>>(), {
 const emits = defineEmits<InputDateEmits<R>>()
 const slots = defineSlots<InputDateSlots>()
 
-const props = useComponentProps<InputDateProps<R>>('inputDate', _props)
+const props = useComponentProps<InputDateProps<R>>('inputDate', _props, theme)
 
 const appConfig = useAppConfig() as InputDate['AppConfig']
 
