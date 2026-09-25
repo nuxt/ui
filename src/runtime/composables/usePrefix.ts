@@ -1,4 +1,5 @@
 import { useAppConfig } from '#imports'
+import { prefixClasses } from '../utils/prefix'
 
 /**
  * Prefixes Tailwind utility class strings with the configured `theme.prefix`,
@@ -9,14 +10,5 @@ export function usePrefix() {
   const appConfig = useAppConfig() as { ui?: { prefix?: string } }
   const prefix = appConfig.ui?.prefix
 
-  return (classString: string): string => {
-    if (!prefix || !classString) {
-      return classString
-    }
-    return classString
-      .split(/\s+/)
-      .filter(Boolean)
-      .map(cls => `${prefix}:${cls}`)
-      .join(' ')
-  }
+  return (classString: string): string => prefixClasses(classString, prefix)
 }
