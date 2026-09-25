@@ -13,11 +13,12 @@ export function defineTheme<T extends TVTheme>(theme: T & TVThemeCheck<T>): Defi
 /**
  * A theme extended by another, typed after `defuFn`: objects merge, arrays
  * concatenate with the extension's items first, and any other value the
- * extension sets wins, a function being called with the base value.
+ * extension sets wins, a function being called with the base value. With no
+ * base value the function is kept as is, which `tv()` then rejects.
  */
 export type ExtendedTheme<T, B>
   = T extends (...args: any[]) => infer R
-    ? R
+    ? B extends undefined ? T : R
     : T extends readonly any[]
       ? B extends readonly any[] ? Array<ExtendedTheme<T[number], undefined> | B[number]> : Array<ExtendedTheme<T[number], undefined>>
       : T extends Record<string, any>
