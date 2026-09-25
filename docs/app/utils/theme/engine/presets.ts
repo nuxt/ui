@@ -8,7 +8,7 @@ export interface ThemePreset {
 }
 
 /**
- * The six tokens the library pins to white, routed through the neutral ramp
+ * The five tokens the library pins to white, routed through the neutral ramp
  * the way picking a neutral in the studio does (selectPalette's remaps), so a
  * tinted ramp reaches the page and the export reproduces the preview.
  *
@@ -22,8 +22,7 @@ const tintedNeutralBase = {
   '--ui-text-inverted': { light: 50 },
   '--ui-text-highlighted': { dark: 50 },
   '--ui-bg-inverted': { dark: 50 },
-  '--ui-border-inverted': { dark: 50 },
-  '--ui-neutral': { dark: 50 }
+  '--ui-border-inverted': { dark: 50 }
 } satisfies StyleOptions['tokenShades']
 
 /**
@@ -341,7 +340,6 @@ export const presets: ThemePreset[] = [{
         '--ui-bg-elevated': { light: 300, dark: 700 },
         '--ui-bg-accented': { light: 400, dark: 600 },
         '--ui-bg-inverted': { light: 900, dark: 50 },
-        '--ui-neutral': { dark: 50 },
         '--ui-text-inverted': { light: 50 },
         '--ui-text-dimmed': { light: 500, dark: 400 },
         '--ui-text-muted': { light: 800, dark: 300 },
@@ -400,8 +398,7 @@ export const presets: ThemePreset[] = [{
       dark: {
         '--ui-bg-inverted': 'var(--ui-color-neutral-50)',
         '--ui-text-highlighted': 'var(--ui-color-neutral-50)',
-        '--ui-border-inverted': 'var(--ui-color-neutral-50)',
-        '--ui-neutral': 'var(--ui-color-neutral-50)'
+        '--ui-border-inverted': 'var(--ui-color-neutral-50)'
       }
     }
   }

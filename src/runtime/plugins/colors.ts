@@ -38,11 +38,11 @@ export default defineNuxtPlugin(() => {
   }
   :root, :host, .light {
   ${Object.keys(colors).map(key => generateColor(key, 500)).join('\n  ')}
-  --ui-neutral: var(--ui-color-neutral-900);
+  --ui-neutral: var(--ui-bg-inverted);
   }
   .dark {
   ${Object.keys(colors).map(key => generateColor(key, 400)).join('\n  ')}
-  --ui-neutral: white;
+  --ui-neutral: var(--ui-bg-inverted);
   }
 }`
   })
