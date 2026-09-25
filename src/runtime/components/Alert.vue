@@ -90,7 +90,7 @@ const _props = withDefaults(defineProps<AlertProps>(), {
 const emits = defineEmits<AlertEmits>()
 const slots = defineSlots<AlertSlots>()
 
-const props = useComponentProps('alert', _props)
+const props = useComponentProps('alert', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Alert['AppConfig']
