@@ -34,8 +34,6 @@ import pinInputTheme from '#build/ui/pin-input'
 import fileUploadTheme from '#build/ui/file-upload'
 import dropdownMenuTheme from '#build/ui/dropdown-menu'
 import contextMenuTheme from '#build/ui/context-menu'
-import calloutTheme from '#build/ui/prose/callout'
-import codeTheme from '#build/ui/prose/code'
 
 // Compact grid: header row of color names, one row per variant (or relevant boolean).
 function gridStyle(n: number) {
@@ -176,9 +174,9 @@ const contextMenuItems = computed(() => [
   { label: 'active', active: true }
 ] satisfies ContextMenuItem[])
 
-// Prose
-const calloutColors = Object.keys(calloutTheme.variants.color)
-const codeColors = Object.keys(codeTheme.variants.color)
+// Prose themes aren't generated in the Vue playground, and every component takes the same colors
+const calloutColors = buttonColors
+const codeColors = buttonColors
 </script>
 
 <template>
