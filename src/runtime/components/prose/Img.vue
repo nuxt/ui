@@ -25,9 +25,9 @@ import { ref, computed, useId } from 'vue'
 import { DialogRoot, DialogPortal, DialogTrigger } from 'reka-ui'
 import { AnimatePresence, Motion } from 'motion-v'
 import { useEventListener, createReusableTemplate } from '@vueuse/core'
-import { useRuntimeConfig, useAppConfig } from '#imports'
+import { useRuntimeConfig } from '#imports'
 import ImageComponent from '#build/ui-image-component'
-import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
 import { resolveBaseURL } from '../../utils'
 import { tv } from '../../utils/tv'
 
@@ -39,7 +39,7 @@ const _props = withDefaults(defineProps<ProseImgProps>(), {
 
 const props = useComponentProps('prose.img', _props, theme)
 
-const appConfig = useAppConfig() as ProseImg['AppConfig']
+const appConfig = useThemeConfig() as ProseImg['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.prose?.img)
 
 const [DefineImageTemplate, ReuseImageTemplate] = createReusableTemplate()

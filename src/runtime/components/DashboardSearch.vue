@@ -76,8 +76,8 @@ export type DashboardSearchSlots = CommandPaletteSlots<CommandPaletteItem> & {
 import { computed, useTemplateRef } from 'vue'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig, useColorMode, defineShortcuts, useRuntimeHook } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useColorMode, defineShortcuts, useRuntimeHook } from '#imports'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useLocale } from '../composables/useLocale'
 import { omit, transformUI } from '../utils'
@@ -106,7 +106,7 @@ useRuntimeHook('dashboard:search:toggle', () => {
 const { t } = useLocale()
 // eslint-disable-next-line vue/no-dupe-keys
 const colorMode = useColorMode()
-const appConfig = useAppConfig() as DashboardSearch['AppConfig']
+const appConfig = useThemeConfig() as DashboardSearch['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.dashboardSearch)
 
 const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'trailingIcon', 'selectedIcon', 'childrenIcon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon', 'back', 'backIcon', 'disabled', 'highlightOnHover', 'labelKey', 'descriptionKey', 'preserveGroupOrder', 'virtualize', 'searchDelay'))

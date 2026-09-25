@@ -44,8 +44,7 @@ export interface PageLinksSlots<T extends PageLink = PageLink> {
 <script setup lang="ts" generic="T extends PageLink">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { pickLinkProps } from '../utils/link'
 import { tv } from '../utils/tv'
 import ULink from './Link.vue'
@@ -59,7 +58,7 @@ const slots = defineSlots<PageLinksSlots<T>>()
 
 const props = useComponentProps<PageLinksProps<T>>('pageLinks', _props, theme)
 
-const appConfig = useAppConfig() as PageLinks['AppConfig']
+const appConfig = useThemeConfig() as PageLinks['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.pageLinks)
 
 // eslint-disable-next-line vue/no-dupe-keys

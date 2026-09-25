@@ -139,8 +139,8 @@ export type ContentSearchSlots = CommandPaletteSlots<ContentSearchItem> & {
 import { computed, shallowRef, useTemplateRef, watch } from 'vue'
 import { defu } from 'defu'
 import { reactivePick, refDebounced } from '@vueuse/core'
-import { useAppConfig, useColorMode, defineShortcuts } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
+import { useColorMode, defineShortcuts } from '#imports'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
 import { useForwardProps } from '../../composables/useForwardProps'
 import { useContentSearch } from '../../composables/useContentSearch'
 import { useLocale } from '../../composables/useLocale'
@@ -166,7 +166,7 @@ const { t } = useLocale()
 const { open, mapNavigationItems, mapLinks, mapSearchResults, postFilter } = useContentSearch()
 // eslint-disable-next-line vue/no-dupe-keys
 const colorMode = useColorMode()
-const appConfig = useAppConfig() as ContentSearch['AppConfig']
+const appConfig = useThemeConfig() as ContentSearch['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.contentSearch)
 
 const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'trailingIcon', 'selectedIcon', 'childrenIcon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon', 'back', 'backIcon', 'disabled', 'highlightOnHover', 'labelKey', 'descriptionKey', 'preserveGroupOrder', 'virtualize', 'searchDelay'))

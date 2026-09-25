@@ -17,8 +17,8 @@ export interface ColorModeButtonProps extends Omit<ButtonProps, LinkPropsKeys | 
 <script setup lang="ts">
 import { computed } from 'vue'
 import { reactiveOmit } from '@vueuse/core'
-import { useColorMode, useAppConfig } from '#imports'
-import { useComponentProps } from '../../composables/useComponentProps'
+import { useColorMode } from '#imports'
+import { useComponentProps, useThemeConfig } from '../../composables/useComponentProps'
 import { useForwardProps } from '../../composables/useForwardProps'
 import { useLocale } from '../../composables/useLocale'
 import { usePrefix } from '../../composables/usePrefix'
@@ -36,7 +36,7 @@ const props = useComponentProps('button', _props)
 
 const { t } = useLocale()
 const colorMode = useColorMode()
-const appConfig = useAppConfig()
+const appConfig = useThemeConfig()
 const prefix = usePrefix()
 
 const buttonProps = useForwardProps(reactiveOmit(props, 'icon'))

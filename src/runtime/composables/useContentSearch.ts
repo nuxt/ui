@@ -1,13 +1,13 @@
 import { ref } from 'vue'
 import type { ContentNavigationItem } from '@nuxt/content'
 import { createSharedComposable } from '@vueuse/core'
-import { useAppConfig } from '#imports'
 import { sanitizeSnippet } from '../utils/search'
 import type { ContentSearchFile, ContentSearchItem, ContentSearchLink, ContentSearchResult } from '../components/content/ContentSearch.vue'
+import { useThemeConfig } from './useComponentProps'
 
 function _useContentSearch() {
   const open = ref(false)
-  const appConfig = useAppConfig()
+  const appConfig = useThemeConfig()
 
   /**
    * Map a file to a ContentSearchItem

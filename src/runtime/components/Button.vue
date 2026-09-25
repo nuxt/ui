@@ -44,8 +44,7 @@ export interface ButtonSlots {
 
 <script setup lang="ts">
 import { computed, ref, inject } from 'vue'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFieldGroup } from '../composables/useFieldGroup'
@@ -64,7 +63,7 @@ const slots = defineSlots<ButtonSlots>()
 
 const props = useComponentProps('button', _props, theme)
 
-const appConfig = useAppConfig() as Button['AppConfig']
+const appConfig = useThemeConfig() as Button['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.button)
 const { orientation, size: buttonSize } = useFieldGroup<ButtonProps>(_props)
 

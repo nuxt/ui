@@ -145,8 +145,7 @@ import { computed, ref, shallowRef, watch } from 'vue'
 import { useForwardProps } from '../composables/useForwardProps'
 import { Calendar as SingleCalendar, RangeCalendar, MonthPicker, MonthRangePicker, YearPicker, YearRangePicker } from 'reka-ui/namespaced'
 import { reactiveOmit } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
@@ -165,7 +164,7 @@ defineSlots<CalendarSlots>()
 const props = useComponentProps<CalendarProps<R, M>>('calendar', _props, theme)
 
 const { dir, t, locale } = useLocale()
-const appConfig = useAppConfig() as Calendar['AppConfig']
+const appConfig = useThemeConfig() as Calendar['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.calendar)
 
 const VIEWS: CalendarView[] = ['day', 'month', 'year']

@@ -121,8 +121,7 @@ import { computed, ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import useEmblaCarousel from 'embla-carousel-vue'
 import { Primitive } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
@@ -163,7 +162,7 @@ const emits = defineEmits<CarouselEmits>()
 const props = useComponentProps<CarouselProps<T>>('carousel', _props, theme)
 
 const { dir, t } = useLocale()
-const appConfig = useAppConfig() as Carousel['AppConfig']
+const appConfig = useThemeConfig() as Carousel['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.carousel)
 
 const rootProps = useForwardProps(reactivePick(props, 'active', 'align', 'breakpoints', 'containScroll', 'dragFree', 'dragThreshold', 'duration', 'inViewThreshold', 'loop', 'skipSnaps', 'slidesToScroll', 'startIndex', 'watchDrag', 'watchResize', 'watchSlides', 'watchFocus'))

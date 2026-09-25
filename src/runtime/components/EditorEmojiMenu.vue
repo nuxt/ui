@@ -29,9 +29,8 @@ export interface EditorEmojiMenuProps<T extends EditorEmojiMenuItem = EditorEmoj
 
 <script setup lang="ts" generic="T extends EditorEmojiMenuItem">
 import { computed, h, onMounted, onBeforeUnmount, nextTick, toRef } from 'vue'
-import { useAppConfig } from '#imports'
 import { useEditorMenu } from '../composables/useEditorMenu'
-import { useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 
 defineOptions({ inheritAttrs: false })
@@ -42,7 +41,7 @@ const props = withDefaults(defineProps<EditorEmojiMenuProps<T>>(), {
   filterFields: () => ['name', 'shortcodes', 'tags']
 })
 
-const appConfig = useAppConfig() as EditorEmojiMenu['AppConfig']
+const appConfig = useThemeConfig() as EditorEmojiMenu['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.editorEmojiMenu)
 
 const ui = computed(() => tv(theme, overrides.value)({

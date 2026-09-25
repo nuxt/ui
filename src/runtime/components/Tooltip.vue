@@ -55,8 +55,7 @@ import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArrow, injectTooltipProviderContext } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { FieldGroupReset } from '../composables/useFieldGroup'
 import { usePortal } from '../composables/usePortal'
@@ -71,7 +70,7 @@ const slots = defineSlots<TooltipSlots>()
 
 const props = useComponentProps('tooltip', _props, theme)
 
-const appConfig = useAppConfig() as Tooltip['AppConfig']
+const appConfig = useThemeConfig() as Tooltip['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.tooltip)
 
 const providerContext = injectTooltipProviderContext()
