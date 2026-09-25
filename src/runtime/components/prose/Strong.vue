@@ -26,7 +26,7 @@ const _props = defineProps<ProseStrongProps>()
 
 defineSlots<ProseStrongSlots>()
 
-const props = useComponentProps('prose.strong', _props)
+const props = useComponentProps('prose.strong', _props, theme)
 
 const appConfig = useAppConfig() as ProseStrong['AppConfig']
 

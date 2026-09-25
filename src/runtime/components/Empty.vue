@@ -70,7 +70,7 @@ import UButton from './Button.vue'
 const _props = defineProps<EmptyProps>()
 const slots = defineSlots<EmptySlots>()
 
-const props = useComponentProps('empty', _props)
+const props = useComponentProps('empty', _props, theme)
 
 const appConfig = useAppConfig() as Empty['AppConfig']
 

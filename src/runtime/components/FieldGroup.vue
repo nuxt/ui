@@ -43,7 +43,7 @@ const _props = withDefaults(defineProps<FieldGroupProps>(), {
 })
 defineSlots<FieldGroupSlots>()
 
-const props = useComponentProps('fieldGroup', _props)
+const props = useComponentProps('fieldGroup', _props, theme)
 
 const appConfig = useAppConfig() as FieldGroup['AppConfig']
 

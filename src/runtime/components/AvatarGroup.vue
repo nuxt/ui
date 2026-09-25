@@ -45,7 +45,7 @@ import UAvatar from './Avatar.vue'
 const _props = defineProps<AvatarGroupProps>()
 const slots = defineSlots<AvatarGroupSlots>()
 
-const props = useComponentProps('avatarGroup', _props)
+const props = useComponentProps('avatarGroup', _props, theme)
 
 const appConfig = useAppConfig() as AvatarGroup['AppConfig']
 

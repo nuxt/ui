@@ -127,7 +127,7 @@ const _props = withDefaults(defineProps<PaginationProps>(), {
 const emits = defineEmits<PaginationEmits>()
 const slots = defineSlots<PaginationSlots>()
 
-const props = useComponentProps('pagination', _props)
+const props = useComponentProps('pagination', _props, theme)
 
 const { dir } = useLocale()
 const appConfig = useAppConfig() as Pagination['AppConfig']

@@ -82,7 +82,7 @@ const _props = withDefaults(defineProps<BlogPostProps>(), {
 })
 const slots = defineSlots<BlogPostSlots>()
 
-const props = useComponentProps('blogPost', _props)
+const props = useComponentProps('blogPost', _props, theme)
 
 const { locale } = useLocale()
 const appConfig = useAppConfig() as BlogPost['AppConfig']

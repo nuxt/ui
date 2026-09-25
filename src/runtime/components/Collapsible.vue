@@ -40,7 +40,7 @@ const _props = withDefaults(defineProps<CollapsibleProps>(), {
 const emits = defineEmits<CollapsibleEmits>()
 const slots = defineSlots<CollapsibleSlots>()
 
-const props = useComponentProps('collapsible', _props)
+const props = useComponentProps('collapsible', _props, theme)
 
 const appConfig = useAppConfig() as Collapsible['AppConfig']
 

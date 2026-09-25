@@ -67,7 +67,7 @@ const _props = withDefaults(defineProps<FormFieldProps>(), {
 })
 const slots = defineSlots<FormFieldSlots>()
 
-const props = useComponentProps('formField', _props)
+const props = useComponentProps('formField', _props, theme)
 
 const appConfig = useAppConfig() as FormField['AppConfig']
 
