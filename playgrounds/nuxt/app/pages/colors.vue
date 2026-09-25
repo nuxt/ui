@@ -37,7 +37,7 @@ import contextMenuTheme from '#build/ui/context-menu'
 
 // Compact grid: header row of color names, one row per variant (or relevant boolean).
 function gridStyle(n: number) {
-  return { gridTemplateColumns: `max-content repeat(${n}, minmax(0, 1fr))` }
+  return { gridTemplateColumns: `repeat(${n + 1}, max-content)` }
 }
 
 const toast = useToast()
@@ -180,9 +180,9 @@ const codeColors = buttonColors
 </script>
 
 <template>
-  <UDashboardNavbar title="Colors" class="absolute top-0 inset-x-0 lg:border-b-0" />
+  <UDashboardNavbar title="Colors" class="absolute top-0 inset-x-0 z-5 bg-default" />
 
-  <div class="flex flex-col gap-10 min-h-0 w-full max-w-full pt-16 pb-10 px-4">
+  <div class="flex flex-col gap-10 min-h-0 w-full max-w-full py-6">
     <p class="max-w-lg text-muted">
       Every color-aware component, in every configured color (including neutral), across its variants. Toggle dark mode to check both themes.
     </p>
@@ -569,8 +569,8 @@ const codeColors = buttonColors
           <div class="text-xs font-medium text-muted whitespace-nowrap pe-3">
             stepper
           </div>
-          <div v-for="color in stepperColors" :key="`stepper-${color}`" class="flex justify-center w-56">
-            <UStepper :items="stepperItems" default-value="1" :color="(color as any)" />
+          <div v-for="color in stepperColors" :key="`stepper-${color}`" class="flex justify-center w-72">
+            <UStepper :items="stepperItems" :default-value="1" :color="(color as any)" />
           </div>
         </div>
       </div>
@@ -591,7 +591,7 @@ const codeColors = buttonColors
             timeline
           </div>
           <div v-for="color in timelineColors" :key="`timeline-${color}`" class="flex justify-center w-40">
-            <UTimeline :items="timelineItems" default-value="0" :color="(color as any)" />
+            <UTimeline :items="timelineItems" :default-value="1" :color="(color as any)" />
           </div>
         </div>
       </div>
