@@ -88,7 +88,7 @@ Available color palettes:
 
 ### Extending with new semantic color names
 
-The `color` prop only accepts the 7 defaults. To add another color (e.g., `tertiary`), declare it in CSS and bridge it to Tailwind:
+The `color` prop only accepts the 7 defaults. To add another color such as `tertiary`, declare it in CSS and bridge it to Tailwind:
 
 ```css
 /* main.css */

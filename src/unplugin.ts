@@ -15,6 +15,7 @@ import type * as ui from '#build/ui'
 import { defaultOptions, getDefaultConfig } from './utils/defaults'
 import type { ModuleOptions } from './module'
 import type icons from './theme/icons'
+import type { Color as ColorAlias } from './theme/color'
 
 import TemplatePlugin from './plugins/templates'
 import PluginsPlugin from './plugins/plugins'
@@ -31,7 +32,7 @@ type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone' | 'taupe' | 
 type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
 
 type AppConfigUI = {
-  colors?: Record<string, Color> & { neutral?: NeutralColor }
+  colors?: { [K in Exclude<ColorAlias, 'neutral'>]?: Color } & { neutral?: NeutralColor | (string & {}) }
   icons?: Partial<typeof icons>
   prefix?: string
   tv?: TVMergeConfig

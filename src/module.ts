@@ -6,12 +6,12 @@ import { addTemplates } from './templates'
 import { publicComposables } from './imports'
 import { defaultOptions, getDefaultConfig } from './utils/defaults'
 import { getClientBundleIcons } from './utils/icons'
+import type { Color } from './theme/color'
 import OptionalDepsPlugin from './plugins/optional-deps'
 import { name, version } from '../package.json'
 
 export type * from './runtime/types'
 
-type Color = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | (string & {})
 type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | (string & {})
 
 export interface ModuleOptions {

@@ -25,4 +25,12 @@ describe('theme templates', () => {
 
     expect(await contents('ui/skeleton.ts')).not.toContain('animate-pulse')
   })
+
+  it('points each color scope at its own role variables, with the prefix', async () => {
+    const css = await themeContents({ theme: { prefix: 'tw' } })('ui.css')
+
+    expect(css).toContain('[class*="[--ui-accent:"]')
+    expect(css).toContain('[class~="tw:[--ui-accent:var(--ui-warning)]"] {\n    --ui-accent-foreground: var(--ui-warning-foreground);')
+    expect(css).toContain('--ui-accent-soft: var(--ui-neutral-soft, var(--ui-bg-elevated));')
+  })
 })

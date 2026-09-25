@@ -18,7 +18,7 @@ export default {
         fieldset: 'flex-col'
       }
     },
-    color: colorVariant({ item: '' }),
+    color: colorVariant({ root: '' }),
     variant: {
       list: {
         fieldset: 'flex-wrap'
