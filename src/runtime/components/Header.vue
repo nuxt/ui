@@ -93,7 +93,7 @@ const _props = withDefaults(defineProps<HeaderProps<T>>(), {
 })
 const slots = defineSlots<HeaderSlots>()
 
-const props = useComponentProps<HeaderProps<T>>('header', _props)
+const props = useComponentProps<HeaderProps<T>>('header', _props, theme)
 
 const open = defineModel<boolean>('open', { default: false })
 

@@ -1,7 +1,7 @@
 import { describe, expectTypeOf, it, expect, test, beforeAll, afterAll } from 'vitest'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { useAppConfig } from '#imports'
-import { UFormField, UTheme, UButton, UAvatar } from '#components'
+import { UFormField, UTheme, UButton, UAvatar, UInput } from '#components'
 import type * as ui from '#build/ui'
 import type { ThemeDefaults } from '../../src/runtime/types/theme'
 
@@ -97,6 +97,16 @@ describe('\'*\' default variants', () => {
 
     expect(wrapper.find('[data-slot="button"]').classes()).toEqual(expect.arrayContaining(['[--ui-accent:var(--ui-error)]', 'text-xs']))
     expect(wrapper.find('[data-slot="avatar"]').classes()).toContain('[--ui-accent:var(--ui-neutral)]')
+  })
+
+  it('reaches components with generic props', async () => {
+    const wrapper = await mountSuspended({
+      components: { UTheme, UInput },
+      template: `<UTheme :props="{ '*': { color: 'error', size: 'sm' } }"><UInput highlight /></UTheme>`
+    })
+
+    expect(wrapper.find('[data-slot="input"]').classes()).toContain('[--ui-accent:var(--ui-error)]')
+    expect(wrapper.find('[data-slot="input-base"]').classes()).toContain('text-sm/4')
   })
 
   it('lets a component\'s own key win', async () => {

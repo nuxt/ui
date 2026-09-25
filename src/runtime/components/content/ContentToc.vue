@@ -93,7 +93,7 @@ const _props = withDefaults(defineProps<ContentTocProps<T>>(), {
 const emits = defineEmits<ContentTocEmits>()
 const slots = defineSlots<ContentTocSlots<T>>()
 
-const props = useComponentProps<ContentTocProps<T>>('contentToc', _props)
+const props = useComponentProps<ContentTocProps<T>>('contentToc', _props, theme)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'open', 'defaultOpen'), emits)
 
