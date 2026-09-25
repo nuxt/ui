@@ -585,14 +585,20 @@ describe('Form', () => {
       ])
     })
 
-    it('reactivity: dirty works for nested forms', async () => {
-      const nestedInput = wrapper.find('#nested')
-      expect(form.dirty).toBe(false)
+    it('dirty reflects nested forms', async () => {
+      const nestedWrapper: any = await renderForm({ fixture: 'FormNestedFields' })
+      const nestedForm = nestedWrapper.setupState.form.value
+      const nestedState = nestedWrapper.setupState.state
+      expect(nestedForm.dirty).toBe(false)
 
-      nestedInput.trigger('change')
+      await nestedWrapper.find('#first').trigger('change')
       await flushPromises()
+      expect(nestedForm.dirty).toBe(true)
 
-      expect(form.dirty).toBe(true)
+      nestedState.nested.first = 'first'
+      nestedState.nested.second = 'second'
+      await nestedForm.submit()
+      expect(nestedForm.dirty).toBe(false)
     })
   })
 
