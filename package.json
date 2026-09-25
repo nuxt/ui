@@ -19,6 +19,8 @@
       "style": "./dist/runtime/index.css",
       "import": "./dist/module.mjs"
     },
+    "./sources": "./dist/runtime/sources.css",
+    "./base": "./dist/runtime/base.css",
     "./unplugin": {
       "types": "./dist/unplugin.d.mts",
       "import": "./dist/unplugin.mjs"

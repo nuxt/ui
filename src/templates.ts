@@ -1,6 +1,6 @@
+import { readFile } from 'node:fs/promises'
 import { camelCase, kebabCase } from 'scule'
 import { genExport } from 'knitwork'
-import colors from 'tailwindcss/colors'
 import { addTemplate, addTypeTemplate, hasNuxtModule, logger, updateTemplates, getLayerDirectories } from '@nuxt/kit'
 import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
 import type { Resolver } from '@nuxt/kit'
@@ -11,48 +11,6 @@ import * as theme from './runtime/theme'
 import { colors as aliases } from './runtime/theme/color'
 import * as themeProse from './runtime/theme/prose'
 import * as themeContent from './runtime/theme/content'
-
-// The accent roles every color resolves through, with the recipe each falls back to.
-// A color scope points each one at `--ui-<color>-<role>`, and a role left unset
-// keeps its recipe on the color.
-const ACCENT_RECIPES: Record<string, string> = {
-  'foreground': 'var(--ui-text-inverted)',
-  'hover': 'color-mix(in oklab, var(--ui-accent) 75%, transparent)',
-  'soft': 'color-mix(in oklab, var(--ui-accent) 10%, transparent)',
-  'soft-hover': 'color-mix(in oklab, var(--ui-accent) 15%, transparent)',
-  'soft-foreground': 'var(--ui-accent)',
-  'soft-active': 'color-mix(in oklab, var(--ui-accent) 20%, transparent)',
-  'border': 'color-mix(in oklab, var(--ui-accent) 50%, transparent)',
-  'border-soft': 'color-mix(in oklab, var(--ui-accent) 25%, transparent)',
-  'focus': 'color-mix(in oklab, var(--ui-accent) 25%, transparent)',
-  'surface': 'transparent',
-  'muted': 'var(--ui-accent)',
-  'muted-hover': 'color-mix(in oklab, var(--ui-accent) 75%, transparent)',
-  'line': 'var(--ui-accent)',
-  'tint': 'color-mix(in oklab, var(--ui-accent) 10%, transparent)',
-  'faint': 'color-mix(in oklab, var(--ui-accent) 75%, transparent)',
-  'border-muted': 'color-mix(in oklab, var(--ui-accent) 25%, transparent)',
-  'border-strong': 'color-mix(in oklab, var(--ui-accent) 50%, transparent)'
-}
-
-const ACCENT_ROLES = Object.keys(ACCENT_RECIPES)
-
-// Neutral's roles default to the surface tokens it has always used
-const NEUTRAL_ROLES: Record<string, string> = {
-  'hover': 'color-mix(in oklab, var(--ui-bg-inverted) 90%, transparent)',
-  'soft': 'var(--ui-bg-elevated)',
-  'soft-hover': 'color-mix(in oklab, var(--ui-bg-accented) 75%, transparent)',
-  'soft-foreground': 'var(--ui-text)',
-  'border': 'var(--ui-border-accented)',
-  'border-soft': 'var(--ui-border-accented)',
-  'surface': 'var(--ui-bg)',
-  'muted': 'var(--ui-text-muted)',
-  'muted-hover': 'var(--ui-text)',
-  'line': 'var(--ui-border)',
-  'tint': 'color-mix(in oklab, var(--ui-bg-elevated) 50%, transparent)',
-  'faint': 'var(--ui-text-dimmed)',
-  'border-muted': 'var(--ui-border)'
-}
 
 export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt?: Nuxt, resolve?: Resolver['resolve'], vue?: { detectedComponents?: Set<string> }) {
   const templates: NuxtTemplate[] = []
@@ -201,117 +159,34 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     return sources.join('\n')
   }
 
-  const themeBlocks = `@theme static {
-  --color-old-neutral-50: ${colors.neutral[50]};
-  --color-old-neutral-100: ${colors.neutral[100]};
-  --color-old-neutral-200: ${colors.neutral[200]};
-  --color-old-neutral-300: ${colors.neutral[300]};
-  --color-old-neutral-400: ${colors.neutral[400]};
-  --color-old-neutral-500: ${colors.neutral[500]};
-  --color-old-neutral-600: ${colors.neutral[600]};
-  --color-old-neutral-700: ${colors.neutral[700]};
-  --color-old-neutral-800: ${colors.neutral[800]};
-  --color-old-neutral-900: ${colors.neutral[900]};
-  --color-old-neutral-950: ${colors.neutral[950]};
-}
-
-@theme default inline {
-  ${aliases.map(color => [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map(shade => `--color-${color}-${shade}: var(--ui-color-${color}-${shade});`).join('\n\t')).join('\n\t')}
-  ${aliases.map(color => `--color-${color}: var(--ui-${color});`).join('\n\t')}
-  --color-accent: var(--ui-accent);
-  ${ACCENT_ROLES.map(role => `--color-accent-${role}: var(--ui-accent-${role}, ${ACCENT_RECIPES[role]});`).join('\n  ')}
-  --radius-xs: calc(var(--ui-radius) * 0.5);
-  --radius-sm: var(--ui-radius);
-  --radius-md: calc(var(--ui-radius) * 1.5);
-  --radius-lg: calc(var(--ui-radius) * 2);
-  --radius-xl: calc(var(--ui-radius) * 3);
-  --radius-2xl: calc(var(--ui-radius) * 4);
-  --radius-3xl: calc(var(--ui-radius) * 6);
-  --text-color-dimmed: var(--ui-text-dimmed);
-  --text-color-muted: var(--ui-text-muted);
-  --text-color-toned: var(--ui-text-toned);
-  --text-color-default: var(--ui-text);
-  --text-color-highlighted: var(--ui-text-highlighted);
-  --text-color-inverted: var(--ui-text-inverted);
-  --background-color-default: var(--ui-bg);
-  --background-color-muted: var(--ui-bg-muted);
-  --background-color-elevated: var(--ui-bg-elevated);
-  --background-color-accented: var(--ui-bg-accented);
-  --background-color-inverted: var(--ui-bg-inverted);
-  --background-color-border: var(--ui-border);
-  --border-color-default: var(--ui-border);
-  --border-color-muted: var(--ui-border-muted);
-  --border-color-accented: var(--ui-border-accented);
-  --border-color-inverted: var(--ui-border-inverted);
-  --border-color-bg: var(--ui-bg);
-  --ring-color-default: var(--ui-border);
-  --ring-color-muted: var(--ui-border-muted);
-  --ring-color-accented: var(--ui-border-accented);
-  --ring-color-inverted: var(--ui-border-inverted);
-  --ring-color-bg: var(--ui-bg);
-  --ring-offset-color-default: var(--ui-border);
-  --ring-offset-color-muted: var(--ui-border-muted);
-  --ring-offset-color-accented: var(--ui-border-accented);
-  --ring-offset-color-inverted: var(--ui-border-inverted);
-  --ring-offset-color-bg: var(--ui-bg);
-  --divide-color-default: var(--ui-border);
-  --divide-color-muted: var(--ui-border-muted);
-  --divide-color-accented: var(--ui-border-accented);
-  --divide-color-inverted: var(--ui-border-inverted);
-  --divide-color-bg: var(--ui-bg);
-  --outline-color-default: var(--ui-border);
-  --outline-color-inverted: var(--ui-border-inverted);
-  --stroke-bg: var(--ui-bg);
-  --stroke-default: var(--ui-border);
-  --stroke-inverted: var(--ui-border-inverted);
-  --fill-bg: var(--ui-bg);
-  --fill-default: var(--ui-border);
-  --fill-inverted: var(--ui-border-inverted);
-}
-`
-
   templates.push({
     filename: 'ui.css',
     write: true,
     getContents: async () => {
       const sources = await generateSources()
-      const prefix = options.theme?.prefix ? `${options.theme.prefix}:` : ''
+      const prefix = options.theme?.prefix
 
-      return `${sources}
+      if (!prefix || !resolve) {
+        return sources
+      }
 
-@layer base {
-  body {
-    @apply ${prefix}antialiased ${prefix}text-default ${prefix}bg-default ${prefix}scheme-light ${prefix}dark:scheme-dark;
-  }
+      // The color scopes key their accent roles on the scope class, which the
+      // engine prefixes at runtime, so the rules repeat for the prefixed class.
+      const accent = await readFile(resolve('./runtime/accent.css'), 'utf8')
 
-  /* Any \`--ui-accent\` scope resets the accent roles, so a colored component nested
-     in another doesn't inherit them and every role falls back to its recipe. */
-  [class*="[--ui-accent:"] {
-    ${ACCENT_ROLES.map(role => `--ui-accent-${role}: initial;`).join('\n    ')}
-  }
-
-  /* A color's scope reads its roles from \`--ui-<color>-<role>\`. An unset variable
-     leaves the role unset, so it keeps its recipe, or for neutral its surface token.
-     Neutral also resolves \`--ui-neutral\` on the element, so it follows a surface
-     that redefines \`--ui-bg-inverted\`. */
-  ${aliases.map(color => `[class~="${prefix}[--ui-accent:var(--ui-${color})]"] {
-    ${color === 'neutral' ? '--ui-neutral: var(--ui-bg-inverted);\n    ' : ''}${ACCENT_ROLES.map(role => `--ui-accent-${role}: var(--ui-${color}-${role}${color === 'neutral' && NEUTRAL_ROLES[role] ? `, ${NEUTRAL_ROLES[role]}` : ''});`).join('\n    ')}
-  }`).join('\n\n  ')}
-}
-
-${themeBlocks}`
+      return `${sources}\n\n${accent.replaceAll('[class~="[--ui-accent:', `[class~="${prefix}:[--ui-accent:`)}`
     }
   })
 
   // Static fallback shipped in the published npm package and exposed via
-  // `package.json` `imports` so tooling that resolves `#build/ui.css` through
-  // Node module resolution (Prettier, Tailwind IntelliSense) has something to
-  // read. Strips `@source` directives (paths don't exist on consumer machines)
-  // and the body rule (runtime template handles it with the user's prefix).
+  // `package.json` `imports`, so tooling that resolves `#build/ui.css` through
+  // Node module resolution (Prettier, Tailwind IntelliSense) finds a file. What
+  // it generates is per app, the tokens and styles ship in `sources.css` and
+  // `base.css`.
   templates.push({
     filename: 'ui.static.css',
     write: true,
-    getContents: () => themeBlocks
+    getContents: () => ''
   })
 
   templates.push({
