@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { SelectItem } from '@nuxt/ui'
+import { getAvatarSize } from '@nuxt/ui/utils/size'
 import theme from '#build/ui/select'
 import type { User } from '~/types'
 
@@ -112,7 +113,7 @@ const valueMultiple = ref([fruits[0]!, vegetables[0]!])
       v-bind="props"
     >
       <template #leading="{ modelValue }">
-        <UAvatar v-if="modelValue" size="2xs" v-bind="getUserAvatar(modelValue)" />
+        <UAvatar v-if="modelValue" :size="getAvatarSize(props?.size)" v-bind="getUserAvatar(modelValue)" />
       </template>
     </USelect>
   </Matrix>
