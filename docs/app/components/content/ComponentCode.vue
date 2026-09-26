@@ -442,7 +442,7 @@ const { data: markdown } = useAsyncData(codeKey, async () => {
                   inset
                   standalone
                   :color="(modelValue as any)"
-                  size="md"
+                  size="sm"
                   class="size-2"
                 />
               </template>
