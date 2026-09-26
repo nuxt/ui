@@ -43,7 +43,7 @@ export interface ThemeSlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import defu from 'defu'
+import defu, { createDefu } from 'defu'
 import { injectThemeContext, provideThemeContext } from '../composables/useComponentProps'
 
 const _props = withDefaults(defineProps<ThemeProps>(), { unstyled: undefined })
@@ -102,6 +102,15 @@ function toConfig(variants?: ThemeVariants, icons?: ThemeIcons): Record<string, 
   return config
 }
 
+// Like `defu`, but an array of classes replaces the inherited one instead of
+// being concatenated with it, so the nearest Theme's value wins
+const mergeConfig = createDefu((object, key, value) => {
+  if (Array.isArray(value)) {
+    object[key] = value
+    return true
+  }
+})
+
 provideThemeContext({
   defaults: computed(() => defu(
     (_props.props ?? {}) as ThemeContextDefaults,
@@ -110,7 +119,7 @@ provideThemeContext({
   )),
   unstyled: computed(() => _props.unstyled ?? parent.unstyled.value),
   config: computed(() => _props.variants || _props.icons
-    ? defu(toConfig(_props.variants, _props.icons), parent.config.value)
+    ? mergeConfig(toConfig(_props.variants, _props.icons), parent.config.value)
     : parent.config.value)
 })
 </script>

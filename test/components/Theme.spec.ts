@@ -738,6 +738,24 @@ describe('Theme', () => {
     expect(outline!.classes()).toContain('rounded-none')
   })
 
+  test('nested :variants replace an inherited array of classes', async () => {
+    const wrapper = await mountSuspended({
+      components: { Theme, Button },
+      template: `
+        <Theme :variants="{ button: { variant: { soft: { base: ['rounded-full', 'shadow-lg'] } } } }">
+          <Theme :variants="{ button: { variant: { soft: { base: ['rounded-xl'] } } } }">
+            <Button label="Soft" variant="soft" />
+          </Theme>
+        </Theme>
+      `
+    })
+
+    const classes = wrapper.find('button').classes()
+    expect(classes).toContain('rounded-xl')
+    expect(classes).not.toContain('rounded-full')
+    expect(classes).not.toContain('shadow-lg')
+  })
+
   test(':variants does not leak outside scope', async () => {
     const wrapper = await mountSuspended({
       components: { Theme, Button },
