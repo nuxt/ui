@@ -221,7 +221,7 @@ const urlSearchParams = computed(() => {
                     inset
                     standalone
                     :color="(modelValue as any)"
-                    size="md"
+                    size="sm"
                     class="size-2"
                   />
                 </template>
