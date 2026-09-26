@@ -15,12 +15,12 @@ export interface ProseCodeIconProps {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { defu } from 'defu'
-import { useAppConfig } from '#imports'
 import UIcon from '../Icon.vue'
+import { useThemeConfig } from '../../composables/useComponentProps'
 
 const props = defineProps<ProseCodeIconProps>()
 
-const appConfig = useAppConfig() as ProseCodeIcon['AppConfig']
+const appConfig = useThemeConfig() as ProseCodeIcon['AppConfig']
 
 const icons = computed<any>(() => defu(appConfig.ui?.prose?.codeIcon || {}, theme))
 

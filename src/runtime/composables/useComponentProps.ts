@@ -1,32 +1,76 @@
-import type { ComputedRef, VNode } from 'vue'
-import { computed, getCurrentInstance } from 'vue'
+import type { App, ComputedRef, VNode } from 'vue'
+import { computed, effectScope, getCurrentInstance } from 'vue'
 import defu from 'defu'
 import { createContext } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { get } from '../utils'
-import type { ComponentOverrides } from '../types/tv'
+import { ComponentOverrides, engineFor } from '../utils/tv'
 
 export type ThemeContext = {
   defaults: ComputedRef<Record<string, Record<string, any> | undefined>>
   unstyled: ComputedRef<boolean | undefined>
+  /**
+   * The `ui` config components read: `app.config.ui`, which `<UApp>` provides
+   * at the root and every `<UTheme>` passes down.
+   */
+  config: ComputedRef<Record<string, any>>
 }
 
 const [_injectThemeContext, provideThemeContext] = createContext<ThemeContext>('UTheme', 'RootContext')
 
-/**
- * Module-level fallback so components can call `useComponentProps` outside any
- * `<UTheme>` wrapper without crashing.
- */
-export const defaultThemeContext: ThemeContext = {
-  defaults: computed(() => ({})),
-  unstyled: computed(() => undefined)
+const rootContexts = new WeakMap<App, ThemeContext>()
+
+function createRootThemeContext(): ThemeContext {
+  const appConfig = useAppConfig() as { ui?: Record<string, any> }
+
+  // Detached, so the first component to create it doesn't take it down with it
+  return effectScope(true).run(() => ({
+    defaults: computed(() => ({})),
+    unstyled: computed(() => undefined),
+    config: computed(() => appConfig.ui ?? {})
+  }))!
 }
 
-export function injectThemeContext(fallback: ThemeContext = defaultThemeContext): ThemeContext {
-  return _injectThemeContext(fallback)
+/**
+ * The context at the root of an app: `app.config.ui` and no prop defaults.
+ * `<UApp>` provides it, and a component rendered outside `<UApp>` falls back to
+ * the same one, created once per app.
+ * @internal
+ */
+export function useRootThemeContext(): ThemeContext {
+  const app = getCurrentInstance()?.appContext.app
+  if (!app) {
+    return createRootThemeContext()
+  }
+  let context = rootContexts.get(app)
+  if (!context) {
+    context = createRootThemeContext()
+    rootContexts.set(app, context)
+  }
+  return context
+}
+
+export function injectThemeContext(): ThemeContext {
+  return _injectThemeContext(null) ?? useRootThemeContext()
 }
 
 export { provideThemeContext }
+
+/**
+ * The `ui` config of the nearest `<UTheme>`, shaped like the app config so
+ * `appConfig.ui.<c>` and `appConfig.ui.icons` read the same. At the root it is
+ * `app.config.ui`.
+ * @internal
+ */
+export function useThemeConfig(): { ui: Record<string, any> } {
+  const { config } = injectThemeContext()
+
+  return {
+    get ui() {
+      return config.value
+    }
+  }
+}
 
 function camelCase(str: string): string {
   return str.replace(/-(\w)/g, (_, c: string) => c.toUpperCase())
@@ -69,8 +113,7 @@ const GLOBAL_DEFAULTS: Record<string, string> = { color: 'primary', size: 'md' }
  */
 export function useComponentProps<T extends object>(name: string, props: T, theme?: { defaultVariants?: Record<string, unknown>, [key: string]: unknown }): T {
   const vm = getCurrentInstance()
-  const { defaults } = injectThemeContext()
-  const appConfig = useAppConfig() as { ui?: Record<string, any> }
+  const { defaults, config } = injectThemeContext()
 
   // A `'*'` value, only for a prop whose theme default is the library-wide one
   function globalDefault(entry: Record<string, any> | undefined, prop: string) {
@@ -125,11 +168,11 @@ export function useComponentProps<T extends object>(name: string, props: T, them
       // working uniformly for every variant, including props a component pins in
       // `withDefaults` (e.g. `orientation`, kept defined so `:data-orientation`
       // always renders a value).
-      const appConfigEntry = name.includes('.') ? get(appConfig.ui ?? {}, name) : appConfig.ui?.[name]
+      const appConfigEntry = name.includes('.') ? get(config.value, name) : config.value[name]
       const appConfigValue = appConfigEntry?.defaultVariants?.[prop]
       if (appConfigValue !== undefined) return appConfigValue
 
-      const appConfigGlobalValue = globalDefault(appConfig.ui?.defaultVariants, prop)
+      const appConfigGlobalValue = globalDefault(config.value.defaultVariants, prop)
       if (appConfigGlobalValue !== undefined) return appConfigGlobalValue
 
       // Only fall back to `raw` when `withDefaults` set an explicit default for
@@ -156,16 +199,16 @@ export function useComponentProps<T extends object>(name: string, props: T, them
 }
 
 /**
- * A component's `tv()` overrides: its `app.config.ui` entry, flagged `unstyled`
- * when the nearest `<UTheme>` says so, or `app.config.ui.unstyled` without one.
+ * A component's `tv()` overrides: its `app.config.ui` entry, whether the nearest
+ * `<UTheme>` (or `app.config.ui.unstyled` without one) makes it `unstyled`, and
+ * the engine for the app's merge config (`app.config.ui.tv`) and Tailwind prefix.
  */
-export function useComponentOverrides<T extends Record<string, any>>(config: () => T | undefined): ComputedRef<ComponentOverrides<T> | undefined> {
-  const { unstyled } = injectThemeContext()
-  const appConfig = useAppConfig() as { ui?: Record<string, any> }
+export function useComponentOverrides<T extends Record<string, any>>(entry: () => T | undefined): ComputedRef<ComponentOverrides<T>> {
+  const { unstyled, config } = injectThemeContext()
 
-  return computed(() => {
-    const value = config()
-    if (!(unstyled.value ?? appConfig.ui?.unstyled)) return value as ComponentOverrides<T> | undefined
-    return { ...value, unstyled: true } as unknown as ComponentOverrides<T>
-  })
+  return computed(() => new ComponentOverrides(
+    entry(),
+    !!(unstyled.value ?? config.value.unstyled),
+    engineFor(config.value.tv, config.value.prefix)
+  ))
 }

@@ -1,3 +1,4 @@
+import type { ComponentOverrides } from '../utils/tv'
 import type { extendTailwindMerge } from 'tailwind-merge'
 
 /**
@@ -209,14 +210,12 @@ export type DefinedTheme<T> = {
     : T[K]
 }
 
-declare const componentOverrides: unique symbol
-
 /**
- * A component's resolved `app.config.ui.<c>`, as `useComponentOverrides`
- * returns it: typed after the theme and the app's own config, so the variant
- * values the app adds (a custom `color`) reach the built component.
+ * A component's resolved overrides, as `useComponentOverrides` returns them:
+ * its `app.config.ui.<c>` typed after the theme and the app's own config, so the
+ * variant values the app adds (a custom `color`) reach the built component.
  */
-export type ComponentOverrides<O> = O & { readonly [componentOverrides]: true }
+export type { ComponentOverrides }
 
 /**
  * The engine itself: a theme and the overrides on top of it in, a built

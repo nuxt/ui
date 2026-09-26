@@ -73,8 +73,7 @@ import { computed, onMounted, onScopeDispose, ref } from 'vue'
 import { useForwardProps } from '../composables/useForwardProps'
 import { DateField as SingleDateField, DateRangeField as RangeDateField } from 'reka-ui/namespaced'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
@@ -93,7 +92,7 @@ const slots = defineSlots<InputDateSlots>()
 
 const props = useComponentProps<InputDateProps<R>>('inputDate', _props, theme)
 
-const appConfig = useAppConfig() as InputDate['AppConfig']
+const appConfig = useThemeConfig() as InputDate['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.inputDate)
 
 const rootProps = useForwardProps(reactiveOmit(props, 'id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'ui'), emits)

@@ -86,8 +86,7 @@ import { VisuallyHidden } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { DrawerRoot, DrawerRootNested, DrawerTrigger, DrawerPortal, DrawerOverlay, DrawerContent, DrawerTitle, DrawerDescription, DrawerHandle, DrawerClose } from 'vaul-vue'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { FieldGroupReset } from '../composables/useFieldGroup'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
@@ -109,7 +108,7 @@ const slots = defineSlots<DrawerSlots>()
 const props = useComponentProps('drawer', _props, theme)
 
 const { t } = useLocale()
-const appConfig = useAppConfig() as Drawer['AppConfig']
+const appConfig = useThemeConfig() as Drawer['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.drawer)
 
 const rootProps = useForwardProps(reactivePick(props, 'activeSnapPoint', 'closeThreshold', 'shouldScaleBackground', 'setBackgroundColorOnScale', 'scrollLockTimeout', 'fixed', 'dismissible', 'modal', 'open', 'defaultOpen', 'nested', 'direction', 'noBodyStyles', 'handleOnly', 'preventScrollRestoration', 'snapPoints'), emits)

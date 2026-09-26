@@ -40,8 +40,7 @@ export interface ProseFieldSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 
 const _props = defineProps<ProseFieldProps>()
@@ -49,7 +48,7 @@ const slots = defineSlots<ProseFieldSlots>()
 
 const props = useComponentProps('prose.field', _props, theme)
 
-const appConfig = useAppConfig() as ProseField['AppConfig']
+const appConfig = useThemeConfig() as ProseField['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.prose?.field)
 
 // eslint-disable-next-line vue/no-dupe-keys

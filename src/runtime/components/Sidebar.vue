@@ -103,8 +103,7 @@ import { computed, onMounted, ref, toRef, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { defu } from 'defu'
 import { createReusableTemplate, useMediaQuery } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
@@ -183,7 +182,7 @@ watch(openMobile, (value) => {
 })
 
 const { t } = useLocale()
-const appConfig = useAppConfig() as Sidebar['AppConfig']
+const appConfig = useThemeConfig() as Sidebar['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.sidebar)
 
 const state = computed<SidebarState>(() => open.value ? 'expanded' : 'collapsed')

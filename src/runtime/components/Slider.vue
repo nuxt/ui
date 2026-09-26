@@ -48,8 +48,7 @@ import { computed } from 'vue'
 import { SliderRoot, SliderRange, SliderTrack, SliderThumb } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useFormField } from '../composables/useFormField'
 import { pick, omit } from '../utils'
 import { tv } from '../utils/tv'
@@ -69,7 +68,7 @@ const props = useComponentProps<SliderProps>('slider', _props, theme)
 
 const modelValue = defineModel<T>()
 
-const appConfig = useAppConfig() as Slider['AppConfig']
+const appConfig = useThemeConfig() as Slider['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.slider)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'orientation', 'min', 'max', 'step', 'minStepsBetweenThumbs', 'inverted'))

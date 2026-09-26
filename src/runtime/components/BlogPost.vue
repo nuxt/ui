@@ -61,9 +61,8 @@ export interface BlogPostSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive, useDateFormatter } from 'reka-ui'
-import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { usePrefix } from '../composables/usePrefix'
 import ImageComponent from '#build/ui-image-component'
 import { getSlotChildrenText } from '../utils'
@@ -85,7 +84,7 @@ const slots = defineSlots<BlogPostSlots>()
 const props = useComponentProps('blogPost', _props, theme)
 
 const { locale } = useLocale()
-const appConfig = useAppConfig() as BlogPost['AppConfig']
+const appConfig = useThemeConfig() as BlogPost['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.blogPost)
 const formatter = useDateFormatter(locale.value.code)
 const prefix = usePrefix()

@@ -30,8 +30,7 @@ export interface ProsePromptSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useClipboard } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
 import { useLocale } from '../../composables/useLocale'
 import { getSlotChildrenText } from '../../utils'
 import { tv } from '../../utils/tv'
@@ -49,7 +48,7 @@ const props = useComponentProps('prose.prompt', _props, theme)
 
 const { t } = useLocale()
 const { copy, copied } = useClipboard()
-const appConfig = useAppConfig() as ProsePrompt['AppConfig']
+const appConfig = useThemeConfig() as ProsePrompt['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.prose?.prompt)
 
 // eslint-disable-next-line vue/no-dupe-keys

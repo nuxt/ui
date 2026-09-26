@@ -165,8 +165,7 @@ import { ListboxRoot, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxVi
 import { useForwardProps } from '../composables/useForwardProps'
 import { createReusableTemplate, reactivePick } from '@vueuse/core'
 import { defu } from 'defu'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useFilter } from '../composables/useFilter'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
@@ -197,7 +196,7 @@ const props = useComponentProps<ListboxProps<T, VK, M, Mod>>('listbox', _props, 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
-const appConfig = useAppConfig() as Listbox['AppConfig']
+const appConfig = useThemeConfig() as Listbox['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.listbox)
 const { filterGroups } = useFilter()
 

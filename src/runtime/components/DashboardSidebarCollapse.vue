@@ -28,9 +28,8 @@ export interface DashboardSidebarCollapseProps extends Omit<ButtonProps, LinkPro
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { reactiveOmit } from '@vueuse/core'
-import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useDashboard } from '../utils/dashboard'
 import { tv } from '../utils/tv'
@@ -47,7 +46,7 @@ const props = useComponentProps('dashboardSidebarCollapse', _props, theme)
 const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'side', 'class'))
 
 const { t } = useLocale()
-const appConfig = useAppConfig() as DashboardSidebarCollapse['AppConfig']
+const appConfig = useThemeConfig() as DashboardSidebarCollapse['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.dashboardSidebarCollapse)
 const { sidebarCollapsed, collapseSidebar } = useDashboard({ sidebarCollapsed: ref(false), collapseSidebar: () => {} })
 

@@ -235,8 +235,7 @@ import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
 import { reactivePick, createReusableTemplate, refDebounced, refThrottled } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { omit, get } from '../utils'
 import { highlight } from '../utils/search'
@@ -274,7 +273,7 @@ const props = useComponentProps<CommandPaletteProps<G, T>>('commandPalette', _pr
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
-const appConfig = useAppConfig() as CommandPalette['AppConfig']
+const appConfig = useThemeConfig() as CommandPalette['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.commandPalette)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover', 'by'), emits)

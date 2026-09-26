@@ -243,8 +243,7 @@ import { Combobox, Autocomplete } from 'reka-ui/namespaced'
 import { defu } from 'defu'
 import { isEqual } from 'ohash/utils'
 import { reactivePick, reactiveOmit, createReusableTemplate } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useFieldGroup, FieldGroupReset } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
@@ -282,7 +281,7 @@ const props = useComponentProps<InputMenuProps<T, VK, M, Mod, C>>('inputMenu', _
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
-const appConfig = useAppConfig() as InputMenu['AppConfig']
+const appConfig = useThemeConfig() as InputMenu['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.inputMenu)
 const { filterGroups } = useFilter()
 

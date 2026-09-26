@@ -61,9 +61,8 @@ export interface ChangelogVersionSlots {
 import { computed } from 'vue'
 import { Primitive, useDateFormatter } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
-import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { usePrefix } from '../composables/usePrefix'
 import ImageComponent from '#build/ui-image-component'
 import { getSlotChildrenText } from '../utils'
@@ -83,7 +82,7 @@ const slots = defineSlots<ChangelogVersionSlots>()
 const props = useComponentProps('changelogVersion', _props, theme)
 
 const { locale } = useLocale()
-const appConfig = useAppConfig() as ChangelogVersion['AppConfig']
+const appConfig = useThemeConfig() as ChangelogVersion['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.changelogVersion)
 const formatter = useDateFormatter(locale.value.code)
 const prefix = usePrefix()

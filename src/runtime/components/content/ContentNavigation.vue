@@ -98,8 +98,8 @@ import { computed } from 'vue'
 import { Primitive, AccordionRoot, AccordionItem, AccordionTrigger, AccordionContent } from 'reka-ui'
 import { useForwardProps } from '../../composables/useForwardProps'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
-import { useRoute, useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
+import { useRoute } from '#imports'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
 import { pickLinkProps } from '../../utils/link'
 import { tv } from '../../utils/tv'
 import { mapContentNavigationItem } from '../../utils/content'
@@ -128,7 +128,7 @@ const props = useComponentProps<ContentNavigationProps<T>>('contentNavigation', 
 const rootProps = useForwardProps(reactivePick(props, 'collapsible', 'type', 'unmountOnHide'), emits)
 
 const route = useRoute()
-const appConfig = useAppConfig() as ContentNavigation['AppConfig']
+const appConfig = useThemeConfig() as ContentNavigation['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.contentNavigation)
 
 const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ link: ContentNavigationLink, active: boolean }>()

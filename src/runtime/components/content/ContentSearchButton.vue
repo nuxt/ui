@@ -57,8 +57,7 @@ export interface ContentSearchButtonProps extends Omit<ButtonProps, LinkPropsKey
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
 import { useForwardProps } from '../../composables/useForwardProps'
 import { useContentSearch } from '../../composables/useContentSearch'
 import { useLocale } from '../../composables/useLocale'
@@ -89,7 +88,7 @@ const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : 
 
 const { t } = useLocale()
 const { open } = useContentSearch()
-const appConfig = useAppConfig() as ContentSearchButton['AppConfig']
+const appConfig = useThemeConfig() as ContentSearchButton['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.contentSearchButton)
 
 // eslint-disable-next-line vue/no-dupe-keys

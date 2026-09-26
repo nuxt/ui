@@ -66,8 +66,7 @@ export interface CheckboxSlots {
 import { computed, useAttrs, useId } from 'vue'
 import { Primitive, CheckboxRoot, CheckboxIndicator, Label } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useFormField } from '../composables/useFormField'
 import { tv } from '../utils/tv'
@@ -81,7 +80,7 @@ const emits = defineEmits<CheckboxEmits<T>>()
 
 const props = useComponentProps<CheckboxProps<T>>('checkbox', _props, theme)
 
-const appConfig = useAppConfig() as Checkbox['AppConfig']
+const appConfig = useThemeConfig() as Checkbox['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.checkbox)
 
 const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue', 'modelValue', 'trueValue', 'falseValue'), emits)

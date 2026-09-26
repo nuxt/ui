@@ -88,8 +88,7 @@ import { computed, toRef } from 'vue'
 import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, VisuallyHidden } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { FieldGroupReset } from '../composables/useFieldGroup'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
@@ -112,7 +111,7 @@ const slots = defineSlots<SlideoverSlots>()
 const props = useComponentProps('slideover', _props, theme)
 
 const { t } = useLocale()
-const appConfig = useAppConfig() as Slideover['AppConfig']
+const appConfig = useThemeConfig() as Slideover['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.slideover)
 
 const rootProps = useForwardProps(reactivePick(props, 'open', 'defaultOpen', 'modal', 'unmountOnHide'), emits)

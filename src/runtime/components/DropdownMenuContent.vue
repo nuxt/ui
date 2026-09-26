@@ -61,7 +61,6 @@ import { defu } from 'defu'
 import { DropdownMenu } from 'reka-ui/namespaced'
 import { useForwardPropsEmits } from 'reka-ui'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
-import { useAppConfig } from '#imports'
 import { FieldGroupReset } from '../composables/useFieldGroup'
 import { useFilter } from '../composables/useFilter'
 import { useLocale } from '../composables/useLocale'
@@ -76,13 +75,14 @@ import UIcon from './Icon.vue'
 import UInput from './Input.vue'
 import UKbd from './Kbd.vue'
 import UDropdownMenuContent from './DropdownMenuContent.vue'
+import { useThemeConfig } from '../composables/useComponentProps'
 
 const props = defineProps<DropdownMenuContentProps<T>>()
 const emits = defineEmits<DropdownMenuContentEmits>()
 const slots = defineSlots<DropdownMenuContentSlots<T>>()
 
 const { t, dir } = useLocale()
-const appConfig = useAppConfig()
+const appConfig = useThemeConfig()
 const { filterGroups } = useFilter()
 
 const _searchTerm = ref('')

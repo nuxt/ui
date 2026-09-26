@@ -238,8 +238,7 @@ import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTri
 import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useFieldGroup, FieldGroupReset } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
@@ -277,7 +276,7 @@ const props = useComponentProps<SelectMenuProps<T, VK, M, Mod, C>>('selectMenu',
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
-const appConfig = useAppConfig() as SelectMenu['AppConfig']
+const appConfig = useThemeConfig() as SelectMenu['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.selectMenu)
 const { filterGroups } = useFilter()
 const rootProps = useForwardProps(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'highlightOnHover', 'by'), emits)
