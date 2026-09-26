@@ -28,6 +28,17 @@ describe('applyUnstyled', () => {
     }
   })
 
+  it('keeps the color scope classes', () => {
+    const result = applyUnstyled({
+      slots: { base: 'inline-flex' },
+      variants: { color: { error: { base: '[--ui-accent:var(--ui-error)] bg-accent' } } },
+      compoundVariants: [{ highlight: true, class: { base: 'ring [--ui-highlight:var(--ui-error)]' } }]
+    }, true)
+
+    expect(result.variants.color.error).toEqual({ base: '[--ui-accent:var(--ui-error)]' })
+    expect(result.compoundVariants[0].class).toEqual({ base: '[--ui-highlight:var(--ui-error)]' })
+  })
+
   it('blanks a single-slot theme', () => {
     // Single-element components (e.g. Skeleton) declare one `base` slot.
     const theme = { slots: { base: 'animate-pulse rounded-md bg-elevated' } }
