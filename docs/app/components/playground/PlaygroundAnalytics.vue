@@ -1,7 +1,14 @@
 <script setup lang="ts">
 const studioIcons = useStudioIcons()
-const bars = [40, 65, 52, 80, 60, 95, 72]
-const days = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
+const data = [
+  { day: 'Mon', visitors: 40 },
+  { day: 'Tue', visitors: 65 },
+  { day: 'Wed', visitors: 52 },
+  { day: 'Thu', visitors: 80 },
+  { day: 'Fri', visitors: 60 },
+  { day: 'Sat', visitors: 95 },
+  { day: 'Sun', visitors: 72 }
+]
 </script>
 
 <template>
@@ -20,20 +27,16 @@ const days = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
       </UBadge>
     </div>
 
-    <div>
-      <div class="flex items-end gap-1.5 h-24">
-        <div
-          v-for="(bar, index) in bars"
-          :key="index"
-          class="flex-1 rounded-t-sm bg-primary/80 transition-colors hover:bg-primary"
-          :style="{ height: `${bar}%` }"
-        />
-      </div>
-      <div class="flex gap-1.5 mt-1.5">
-        <span v-for="(day, index) in days" :key="index" class="flex-1 text-center text-xs text-muted">
-          {{ day }}
-        </span>
-      </div>
-    </div>
+    <UChart
+      type="bar"
+      :data="data"
+      index="day"
+      :categories="['visitors']"
+      :grid="false"
+      :y-axis="false"
+      :height="120"
+      :initial-width="280"
+      aria-label="Visitors per day"
+    />
   </div>
 </template>

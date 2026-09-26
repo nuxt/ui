@@ -201,6 +201,7 @@
     "@nuxt/module-builder": "catalog:",
     "@nuxt/test-utils": "catalog:",
     "@release-it/conventional-changelog": "catalog:",
+    "@tanstack/charts": "catalog:",
     "@tanstack/table-core": "catalog:",
     "@vitejs/plugin-vue": "catalog:",
     "@vue/test-utils": "catalog:",
@@ -223,6 +224,7 @@
     "@internationalized/date": "^3",
     "@internationalized/number": "^3",
     "@nuxt/content": "^3",
+    "@tanstack/charts": "^0.18.0",
     "@tiptap/core": "^3",
     "@tiptap/extension-bubble-menu": "^3",
     "@tiptap/extension-code": "^3",
@@ -261,6 +263,9 @@
       "optional": true
     },
     "@nuxt/content": {
+      "optional": true
+    },
+    "@tanstack/charts": {
       "optional": true
     },
     "ai": {
