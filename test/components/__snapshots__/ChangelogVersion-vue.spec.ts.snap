@@ -32,6 +32,28 @@ exports[`ChangelogVersion > renders with as correctly 1`] = `
 </section>"
 `;
 
+exports[`ChangelogVersion > renders with as object correctly 1`] = `
+"<section data-slot="root" class="relative">
+  <div data-slot="indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
+    <!--v-if-->
+    <div data-slot="dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
+      <div data-slot="dotInner" class="size-2 rounded-full bg-primary"></div>
+    </div>
+  </div>
+  <div data-slot="container" class="flex flex-col mx-auto max-w-2xl">
+    <div data-slot="header" class="">
+      <!--v-if-->
+      <h3 data-slot="title" class="relative text-xl text-pretty font-semibold text-highlighted">
+        <!--v-if-->Title
+      </h3>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <!--v-if-->
+  </div>
+</section>"
+`;
+
 exports[`ChangelogVersion > renders with authors correctly 1`] = `
 "<article data-slot="root" class="relative">
   <div data-slot="indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">

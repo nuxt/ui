@@ -15,7 +15,7 @@ export interface ChangelogVersionProps {
    * The element or component this component should render as.
    * @defaultValue 'article'
    */
-  as?: any
+  as?: any | { root?: any, title?: any }
   title?: string
   description?: string
   /** The date of the changelog version. Can be a string or a Date object. */
@@ -59,6 +59,7 @@ export interface ChangelogVersionSlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { defu } from 'defu'
 import { Primitive, useDateFormatter } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -75,7 +76,6 @@ import UUser from './User.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<ChangelogVersionProps>(), {
-  as: 'article',
   indicator: true
 })
 const slots = defineSlots<ChangelogVersionSlots>()
@@ -86,6 +86,15 @@ const { locale } = useLocale()
 const appConfig = useAppConfig() as ChangelogVersion['AppConfig']
 const formatter = useDateFormatter(locale.value.code)
 const prefix = usePrefix()
+
+// eslint-disable-next-line vue/no-dupe-keys
+const as = computed(() => {
+  if (typeof props.as === 'string' || typeof props.as?.render === 'function') {
+    return { root: props.as, title: 'h2' }
+  }
+
+  return defu(props.as, { root: 'article', title: 'h2' })
+})
 
 const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate()
 const [DefineDateTemplate, ReuseDateTemplate] = createReusableTemplate<{ hidden?: boolean }>({
@@ -152,7 +161,7 @@ const ariaLabel = computed(() => {
     </time>
   </DefineDateTemplate>
 
-  <Primitive :as="props.as" v-bind="!props.to ? $attrs : {}" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="props.onClick">
+  <Primitive :as="as.root" v-bind="!props.to ? $attrs : {}" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="props.onClick">
     <div v-if="!!props.indicator || !!slots.indicator" data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })">
       <slot name="indicator" :ui="ui">
         <ReuseDateTemplate />
@@ -181,13 +190,13 @@ const ariaLabel = computed(() => {
             <ReuseDateTemplate :hidden="!!props.indicator" />
           </div>
 
-          <h2 v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+          <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
             <ReuseLinkTemplate />
 
             <slot name="title">
               {{ props.title }}
             </slot>
-          </h2>
+          </Primitive>
 
           <div v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
             <slot name="description">
