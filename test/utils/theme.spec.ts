@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import { applyUnstyled } from '../../src/utils/theme'
+import { applyUnstyled, getThemeClasses } from '../../src/utils/theme'
+import { applyPrefix, prefixClasses } from '../../src/runtime/utils/prefix'
 
 describe('applyUnstyled', () => {
   const theme = () => ({
@@ -90,5 +91,81 @@ describe('applyUnstyled', () => {
     expect(result.defaultVariants).toEqual({ color: 'primary', size: 'md' })
     expect(Object.keys(result.variants)).toEqual(['color', 'size'])
     expect(Object.keys(result.variants.color)).toEqual(['primary', 'neutral'])
+  })
+})
+
+describe('prefixClasses', () => {
+  it('prefixes every class', () => {
+    expect(prefixClasses('flex  hover:bg-primary\n[&>svg]:size-4', 'tw')).toBe('tw:flex tw:hover:bg-primary tw:[&>svg]:size-4')
+  })
+
+  it('leaves a class that already carries the prefix', () => {
+    expect(prefixClasses('tw:flex gap-2', 'tw')).toBe('tw:flex tw:gap-2')
+  })
+
+  it('returns the string untouched without a prefix', () => {
+    expect(prefixClasses('flex gap-2', undefined)).toBe('flex gap-2')
+  })
+})
+
+describe('applyPrefix', () => {
+  const theme = () => ({
+    slots: {
+      base: 'inline-flex rounded-md',
+      label: ['truncate', 'font-medium']
+    },
+    variants: {
+      color: {
+        primary: { base: 'bg-primary' },
+        neutral: { base: 'bg-inverted', label: 'text-default' }
+      }
+    },
+    compoundVariants: [
+      { color: ['primary', 'neutral'], variant: 'solid', class: { base: 'shadow-xs' } }
+    ],
+    defaultVariants: {
+      color: 'primary'
+    }
+  })
+
+  it('prefixes the slot, variant and compound classes', () => {
+    const result = applyPrefix(theme(), 'tw')
+
+    expect(result.slots).toEqual({ base: 'tw:inline-flex tw:rounded-md', label: ['tw:truncate', 'tw:font-medium'] })
+    expect(result.variants.color.neutral).toEqual({ base: 'tw:bg-inverted', label: 'tw:text-default' })
+    expect(result.compoundVariants[0].class).toEqual({ base: 'tw:shadow-xs' })
+  })
+
+  it('keeps the compound matchers and default variants', () => {
+    const result = applyPrefix(theme(), 'tw')
+
+    expect(result.compoundVariants[0]).toMatchObject({ color: ['primary', 'neutral'], variant: 'solid' })
+    expect(result.defaultVariants).toEqual({ color: 'primary' })
+  })
+
+  it('does not mutate the input theme', () => {
+    const input = theme()
+    applyPrefix(input, 'tw')
+
+    expect(input).toEqual(theme())
+  })
+
+  it('returns the theme untouched without a prefix', () => {
+    const input = theme()
+
+    expect(applyPrefix(input, undefined)).toBe(input)
+  })
+
+  it('lists every class once, prefixed', () => {
+    expect(getThemeClasses([theme(), { slots: { base: 'inline-flex' } }], 'tw')).toEqual([
+      'tw:bg-inverted',
+      'tw:bg-primary',
+      'tw:font-medium',
+      'tw:inline-flex',
+      'tw:rounded-md',
+      'tw:shadow-xs',
+      'tw:text-default',
+      'tw:truncate'
+    ])
   })
 })
