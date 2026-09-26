@@ -2,7 +2,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-navbar'
-import type { DashboardContext } from '../utils/dashboard'
+import type { DashboardContext, DashboardSidebarTarget } from '../utils/dashboard'
 import type { ButtonProps } from './Button.vue'
 import type { IconProps } from './Icon.vue'
 import type { LinkPropsKeys } from './Link.vue'
@@ -25,9 +25,10 @@ export interface DashboardNavbarProps {
   /**
    * Customize the toggle button to open the sidebar.
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
+   * Pass `target` to control a specific sidebar (`id` or `side`); omit it to toggle every sidebar.
    * @defaultValue true
    */
-  toggle?: boolean | Omit<ButtonProps, LinkPropsKeys>
+  toggle?: boolean | (Omit<ButtonProps, LinkPropsKeys> & { target?: DashboardSidebarTarget })
   /**
    * The side to render the toggle button on.
    * @defaultValue 'left'

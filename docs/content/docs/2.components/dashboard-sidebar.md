@@ -264,6 +264,26 @@ props:
 
 ## Examples
 
+### Left and right sidebars :badge{label="Soon" class="align-text-top"}
+
+Give each sidebar a stable `id` and pass the same value to `target` on the toggle you want to control it. Without `target`, toggles keep the original behavior and affect every sidebar.
+
+::component-example
+---
+collapse: true
+iframe:
+  height: 500px;
+iframeMobile: true
+overflowHidden: true
+name: 'dashboard-sidebar-dual-example'
+class: '!p-0 !justify-start'
+---
+::
+
+::note
+You can also target by `side` (`left` / `right`) instead of `id`. Controls rendered inside a sidebar inherit that sidebar automatically.
+::
+
 ### Control open state
 
 You can control the open state by using the `open` prop or the `v-model:open` directive.

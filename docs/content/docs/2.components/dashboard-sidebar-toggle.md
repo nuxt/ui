@@ -92,6 +92,16 @@ definePageMeta({
 When using the `toggle-side` prop of the `DashboardSidebar` and `DashboardNavbar` components, the button will be displayed on the specified side.
 ::
 
+### Target a sidebar :badge{label="Soon" class="align-text-top"}
+
+Use the `target` prop to toggle one sidebar when several are present. It matches a `DashboardSidebar` `id` or `side`. Omit it to keep the original behavior (every sidebar toggles).
+
+```vue
+<UDashboardSidebarToggle target="chat" />
+```
+
+On `UDashboardNavbar`, pass it through the `toggle` object: `:toggle="{ target: 'nav' }"`.
+
 ## API
 
 ### Props

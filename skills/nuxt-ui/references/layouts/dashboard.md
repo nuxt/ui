@@ -218,16 +218,26 @@ definePageMeta({ layout: 'dashboard' })
 
 ## Right sidebar
 
+Give each sidebar a stable `id`. Toggles without `target` keep broadcasting to every sidebar (backwards compatible). Pass `target` to isolate.
+
 ```vue
 <UDashboardGroup>
-  <UDashboardSidebar collapsible resizable>
+  <UDashboardSidebar id="nav" collapsible resizable>
     <!-- Left sidebar -->
   </UDashboardSidebar>
 
   <slot />
 
-  <UDashboardSidebar side="right" resizable>
+  <UDashboardSidebar id="chat" side="right" resizable>
     <!-- Right sidebar -->
   </UDashboardSidebar>
 </UDashboardGroup>
+```
+
+```vue
+<UDashboardNavbar :toggle="{ target: 'nav' }">
+  <template #right>
+    <UDashboardSidebarToggle target="chat" side="right" />
+  </template>
+</UDashboardNavbar>
 ```

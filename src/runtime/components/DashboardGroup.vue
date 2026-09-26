@@ -23,10 +23,11 @@ export interface DashboardGroupSlots {
 </script>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useNuxtApp, useAppConfig } from '#imports'
 import { provideDashboardContext } from '../utils/dashboard'
+import type { DashboardSidebarTarget } from '../utils/dashboard'
 import { tv } from '../utils/tv'
 import { useComponentProps } from '../composables/useComponentProps'
 
@@ -48,6 +49,8 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.dashboardGroup |
 
 const sidebarOpen = ref(false)
 const sidebarCollapsed = ref(false)
+const openByTarget = reactive<Record<string, boolean>>({})
+const collapsedByTarget = reactive<Record<string, boolean>>({})
 
 provideDashboardContext({
   storage: props.storage,
@@ -56,12 +59,23 @@ provideDashboardContext({
   persistent: props.persistent,
   unit: props.unit,
   sidebarOpen,
-  toggleSidebar: () => {
-    nuxtApp.hooks.callHook('dashboard:sidebar:toggle')
-  },
   sidebarCollapsed,
-  collapseSidebar: (collapsed: boolean) => {
-    nuxtApp.hooks.callHook('dashboard:sidebar:collapse', collapsed)
+  openByTarget,
+  collapsedByTarget,
+  toggleSidebar: (target?: DashboardSidebarTarget) => {
+    // No target → identical to the historic broadcast hook (backwards compatible).
+    if (target) {
+      nuxtApp.hooks.callHook('dashboard:sidebar:toggle', { target })
+    } else {
+      nuxtApp.hooks.callHook('dashboard:sidebar:toggle')
+    }
+  },
+  collapseSidebar: (collapsed: boolean, target?: DashboardSidebarTarget) => {
+    if (target) {
+      nuxtApp.hooks.callHook('dashboard:sidebar:collapse', collapsed, { target })
+    } else {
+      nuxtApp.hooks.callHook('dashboard:sidebar:collapse', collapsed)
+    }
   },
   toggleSearch: () => {
     nuxtApp.hooks.callHook('dashboard:search:toggle')
