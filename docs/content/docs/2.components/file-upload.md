@@ -16,6 +16,15 @@ links:
 
 Use the `v-model` directive to control the value of the FileUpload.
 
+The model accepts native [`File`](https://developer.mozilla.org/en-US/docs/Web/API/File) objects or custom [`FileUploadItem`](#with-custom-file-items) objects with the following properties:
+
+- `name: string`{lang="ts-type"}
+- `size?: number`{lang="ts-type"}
+- `type?: string`{lang="ts-type"}
+- `avatar?: AvatarProps`{lang="ts-type"}
+
+You can also add custom properties for your application.
+
 ::component-code
 ---
 ignore:
@@ -268,6 +277,30 @@ props:
 ::
 
 ## Examples
+
+### With custom file items :badge{label="Soon" class="align-text-top"}
+
+Use an object with a `name`, optional file metadata and an [Avatar](/docs/components/avatar) to display an existing file. Native files selected by the user are added to the same model.
+
+::component-example
+---
+name: 'file-upload-items-example'
+prettier: true
+collapse: true
+---
+::
+
+### With upload status :badge{label="Soon" class="align-text-top"}
+
+Extend `FileUploadItem` with custom fields and use the file slots to display upload progress or other asynchronous states.
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'file-upload-status-example'
+---
+::
 
 ### With Form validation
 
