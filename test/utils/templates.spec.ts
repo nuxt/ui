@@ -45,19 +45,22 @@ describe('theme templates', () => {
     expect(classes).not.toContain('animate-pulse')
   })
 
-  it('generates only the sources without a prefix', async () => {
-    const css = await themeContents({})('ui.css')
+  it('generates only the sources', async () => {
+    const contents = themeContents({ theme: { prefix: 'tw' } })
 
-    expect(css).not.toContain('@layer')
-    expect(css).not.toContain('--ui-accent')
+    expect(await contents('ui.css')).not.toContain('@layer')
+    expect(await contents('ui.css')).not.toContain('[class~=')
+    expect(await themeContents({})('ui.base.css')).toBe('')
   })
 
-  it('repeats the color scopes for the prefixed class', async () => {
-    const css = await themeContents({ theme: { prefix: 'tw' } })('ui.css')
+  it('repeats the color scopes for the prefixed class in the base layer', async () => {
+    const css = await themeContents({ theme: { prefix: 'tw' } })('ui.base.css')
 
+    expect(css).toMatch(/^@layer base \{\n {2}\[class~="tw:\[--ui-accent:var\(--ui-primary\)\]"\] \{/)
     expect(css).toContain('[class~="tw:[--ui-accent:var(--ui-warning)]"] {\n    --ui-accent-foreground: var(--ui-warning-foreground);')
     expect(css).toContain('[class~="tw:[--ui-accent:var(--ui-neutral)]"] {\n    --ui-neutral: var(--ui-bg-inverted);')
     expect(css).not.toContain('[class~="[--ui-accent:')
+    expect(css).not.toContain(':where(')
   })
 
   it('lists the prefixed classes inline with the prefix', async () => {
@@ -82,8 +85,8 @@ describe('static css', () => {
   const tokens = readFileSync(resolve('./runtime/tokens.css'), 'utf8')
   const accent = readFileSync(resolve('./runtime/accent.css'), 'utf8')
 
-  // `#build/ui.css` adds the prefixed scopes before `accent.css`, so the reset,
-  // which also matches a prefixed scope class, must not outrank them
+  // `#build/ui.base.css` adds the prefixed scopes after `accent.css`, so the
+  // reset, which also matches a prefixed scope class, must not outrank them
   it('resets the accent roles at zero specificity', () => {
     expect(accent).toContain(':where([class*="[--ui-accent:"]) {')
   })

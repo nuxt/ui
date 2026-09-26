@@ -205,7 +205,8 @@ export type TVThemeCheck<T> = {
  */
 export type DefinedTheme<T> = {
   [K in keyof T]: K extends 'defaultVariants'
-    ? { [D in keyof T[K]]: D extends keyof VariantsOf<T> ? VariantValue<T, D> : T[K][D] }
+    // A default the variant doesn't accept keeps its own type, so `tv()` still rejects it
+    ? { [D in keyof T[K]]: D extends keyof VariantsOf<T> ? T[K][D] extends VariantValue<T, D> ? VariantValue<T, D> : T[K][D] : T[K][D] }
     : T[K]
 }
 

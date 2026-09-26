@@ -472,7 +472,10 @@ const dataSlotNamespace = {
           }
         },
         ImportDeclaration(node) {
-          const path = node.source.value?.match?.(/^(?:\.\.\/)+theme\/([\w/-]+)$/)?.[1]
+          // The theme's default import: a named one (`colors` from `../theme/color`) is a helper
+          const path = node.specifiers?.some(specifier => specifier.type === 'ImportDefaultSpecifier')
+            ? node.source.value?.match?.(/^(?:\.\.\/)+theme\/([\w/-]+)$/)?.[1]
+            : undefined
           if (path) {
             namespace = path.replace(/^content\//, '').replaceAll('/', '-')
           }

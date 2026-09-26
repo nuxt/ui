@@ -3,11 +3,12 @@ import type { ContentNavigationItem } from '@nuxt/content'
 import { createSharedComposable } from '@vueuse/core'
 import { sanitizeSnippet } from '../utils/search'
 import type { ContentSearchFile, ContentSearchItem, ContentSearchLink, ContentSearchResult } from '../components/content/ContentSearch.vue'
-import { useThemeConfig } from './useComponentProps'
+import { useRootThemeContext } from './useComponentProps'
 
 function _useContentSearch() {
   const open = ref(false)
-  const appConfig = useThemeConfig()
+  // Shared by every caller, so it reads the root config, not the first caller's `<UTheme>`
+  const { config } = useRootThemeContext()
 
   /**
    * Map a file to a ContentSearchItem
@@ -26,7 +27,7 @@ function _useContentSearch() {
       label: file.id === link.path ? link.title : file.title,
       suffix: file.content.replaceAll('<', '&lt;').replaceAll('>', '&gt;'),
       to: file.id,
-      icon: (link.icon || ancestorIcon || (file.level > 1 ? appConfig.ui.icons.hash : appConfig.ui.icons.file)) as string,
+      icon: (link.icon || ancestorIcon || (file.level > 1 ? config.value.icons.hash : config.value.icons.file)) as string,
       level: file.level
     }
   }
@@ -78,14 +79,14 @@ function _useContentSearch() {
       ...link,
       suffix: link.description,
       description: undefined,
-      icon: link.icon || appConfig.ui.icons.file,
+      icon: link.icon || config.value.icons.file,
       children: undefined
     } as ContentSearchItem, ...(link.children?.map(child => ({
       ...child,
       prefix: link.label ? link.label + ' >' : undefined,
       suffix: child.description,
       description: undefined,
-      icon: child.icon || link.icon || appConfig.ui.icons.file
+      icon: child.icon || link.icon || config.value.icons.file
     } as ContentSearchItem)) || [])])
   }
 
@@ -141,7 +142,7 @@ function _useContentSearch() {
         description: result.content.replaceAll('<', '&lt;').replaceAll('>', '&gt;'),
         descriptionHtml: result.snippets?.content ? sanitizeSnippet(result.snippets.content) : undefined,
         to: result.id,
-        icon: (link?.icon || ancestorIcon || (result.level > 1 ? appConfig.ui.icons.hash : appConfig.ui.icons.file)) as string,
+        icon: (link?.icon || ancestorIcon || (result.level > 1 ? config.value.icons.hash : config.value.icons.file)) as string,
         level: result.level
       })
 

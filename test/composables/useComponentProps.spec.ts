@@ -1,7 +1,7 @@
 import { describe, expectTypeOf, it, expect, test, beforeAll, afterAll } from 'vitest'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { useAppConfig } from '#imports'
-import { UFormField, UTheme, UButton, UAvatar, UInput } from '#components'
+import { UFormField, UFieldGroup, UAvatarGroup, UTheme, UButton, UAvatar, UInput } from '#components'
 import type * as ui from '#build/ui'
 import type { ThemeDefaults } from '../../src/runtime/types/theme'
 
@@ -18,9 +18,6 @@ import type { ThemeDefaults } from '../../src/runtime/types/theme'
  */
 type NonProxyComponents
   = | 'link'
-    | 'editorEmojiMenu'
-    | 'editorMentionMenu'
-    | 'editorSuggestionMenu'
 
 type Expected = Exclude<keyof typeof ui, NonProxyComponents>
 
@@ -115,6 +112,34 @@ describe('\'*\' default variants', () => {
     expect(wrapper.find('[data-slot="button"]').classes()).toContain('[--ui-accent:var(--ui-success)]')
   })
 
+  // A group passes down only what was set for it, so the `'*'` default doesn't
+  // reach a child as the group's own value and beat the child's key
+  it('lets a child\'s own key win inside a group', async () => {
+    const wrapper = await mountSuspended({
+      components: { UTheme, UFormField, UFieldGroup, UAvatarGroup, UInput, UButton, UAvatar },
+      template: `
+        <UTheme :props="{ '*': { size: 'xs' }, input: { size: 'xl' }, button: { size: 'xl' }, avatar: { size: 'xl' } }">
+          <UFormField label="Field"><UInput /></UFormField>
+          <UFieldGroup><UButton label="Button" /></UFieldGroup>
+          <UAvatarGroup><UAvatar alt="Benjamin Canac" /></UAvatarGroup>
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="input-base"]').classes()).toContain('text-base')
+    expect(wrapper.find('[data-slot="button"]').classes()).toContain('text-base')
+    expect(wrapper.find('[data-slot="avatar-group-base"]').classes()).toContain('size-10')
+  })
+
+  it('still reaches a child through a group', async () => {
+    const wrapper = await mountSuspended({
+      components: { UTheme, UFormField, UInput },
+      template: `<UTheme :props="{ '*': { size: 'xs' } }"><UFormField label="Field"><UInput /></UFormField></UTheme>`
+    })
+
+    expect(wrapper.find('[data-slot="input-base"]').classes()).toEqual(expect.arrayContaining(['px-2', 'py-1']))
+  })
+
   describe('from app.config', () => {
     let appConfig: { ui?: Record<string, any> }
 
@@ -149,8 +174,16 @@ describe('unstyled', () => {
     const wrapper = await render('<UTheme unstyled><UButton label="Button" class="px-3" :ui="{ label: \'font-bold\' }" /></UTheme>')
 
     const button = wrapper.find('[data-slot="button"]')
-    expect(button.classes()).toEqual(['px-3'])
+    expect(button.classes()).toEqual(['[--ui-accent:var(--ui-primary)]', 'px-3'])
     expect(wrapper.find('[data-slot="button-label"]').classes()).toEqual(['font-bold'])
+  })
+
+  // The color scope sets a variable and styles nothing, so `color` keeps working
+  // for the `accent` classes the user writes
+  it('keeps the color scope under `<UTheme unstyled>`', async () => {
+    const wrapper = await render('<UTheme unstyled><UButton label="Button" color="error" class="bg-accent" /></UTheme>')
+
+    expect(wrapper.find('[data-slot="button"]').classes()).toEqual(['[--ui-accent:var(--ui-error)]', 'bg-accent'])
   })
 
   it('styles a subtree again with `:unstyled="false"`', async () => {
