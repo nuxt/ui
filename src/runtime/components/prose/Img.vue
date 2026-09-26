@@ -27,7 +27,7 @@ import { AnimatePresence, Motion } from 'motion-v'
 import { useEventListener, createReusableTemplate } from '@vueuse/core'
 import { useRuntimeConfig, useAppConfig } from '#imports'
 import ImageComponent from '#build/ui-image-component'
-import { useComponentProps } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
 import { resolveBaseURL } from '../../utils'
 import { tv } from '../../utils/tv'
 
@@ -40,6 +40,7 @@ const _props = withDefaults(defineProps<ProseImgProps>(), {
 const props = useComponentProps('prose.img', _props, theme)
 
 const appConfig = useAppConfig() as ProseImg['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.prose?.img)
 
 const [DefineImageTemplate, ReuseImageTemplate] = createReusableTemplate()
 const [DefineZoomedImageTemplate, ReuseZoomedImageTemplate] = createReusableTemplate()
@@ -47,7 +48,7 @@ const [DefineZoomedImageTemplate, ReuseZoomedImageTemplate] = createReusableTemp
 const open = ref(false)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.prose?.img)({
+const ui = computed(() => tv(theme, overrides.value)({
   zoom: props.zoom,
   open: open.value,
   width: !!props.width

@@ -64,7 +64,7 @@ import { computed } from 'vue'
 import { RatingRoot, RatingItem, RatingItemIndicator } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useFormField } from '../composables/useFormField'
 import { tv } from '../utils/tv'
@@ -87,6 +87,7 @@ defineSlots<InputRatingSlots>()
 const props = useComponentProps<InputRatingProps>('inputRating', _props, theme)
 
 const appConfig = useAppConfig() as InputRating['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.inputRating)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'length', 'step', 'hoverable', 'clearable', 'required', 'modelValue', 'defaultValue'), emits)
 
@@ -102,7 +103,7 @@ const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 const rootDisabled = computed(() => disabled.value || props.readonly)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.inputRating)({
+const ui = computed(() => tv(theme, overrides.value)({
   size: size.value,
   color: color.value,
   orientation: props.orientation,

@@ -56,7 +56,7 @@ import { defu } from 'defu'
 import { TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArrow, injectTooltipProviderContext } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { FieldGroupReset } from '../composables/useFieldGroup'
 import { usePortal } from '../composables/usePortal'
@@ -72,6 +72,7 @@ const slots = defineSlots<TooltipSlots>()
 const props = useComponentProps('tooltip', _props, theme)
 
 const appConfig = useAppConfig() as Tooltip['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.tooltip)
 
 const providerContext = injectTooltipProviderContext()
 
@@ -81,7 +82,7 @@ const contentProps = toRef(() => defu(props.content, providerContext.content.val
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as TooltipArrowProps)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.tooltip)())
+const ui = computed(() => tv(theme, overrides.value)())
 </script>
 
 <template>

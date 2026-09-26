@@ -89,7 +89,7 @@ export interface ChatPromptSubmitEmits {
 import { computed } from 'vue'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useLocale } from '../composables/useLocale'
 import { transformUI } from '../utils'
@@ -114,6 +114,7 @@ const props = useComponentProps('chatPromptSubmit', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as ChatPromptSubmit['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.chatPromptSubmit)
 
 const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'color', 'variant', 'status', 'disabled', 'streamingIcon', 'streamingColor', 'streamingVariant', 'submittedIcon', 'submittedColor', 'submittedVariant', 'errorIcon', 'errorColor', 'errorVariant', 'class', 'ui'))
 
@@ -153,7 +154,7 @@ const statusButtonProps = computed(() => ({
 } satisfies { [key: string]: ButtonProps })[props.status])
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.chatPromptSubmit)())
+const ui = computed(() => tv(theme, overrides.value)())
 </script>
 
 <template>

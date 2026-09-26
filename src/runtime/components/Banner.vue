@@ -70,7 +70,7 @@ export interface BannerEmits {
 import { computed, ref, onMounted, useId } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useHead, useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { usePrefix } from '../composables/usePrefix'
 import { tv } from '../utils/tv'
@@ -89,10 +89,11 @@ const props = useComponentProps('banner', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Banner['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.banner)
 const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.banner)({
+const ui = computed(() => tv(theme, overrides.value)({
   color: props.color,
   to: !!props.to
 }))

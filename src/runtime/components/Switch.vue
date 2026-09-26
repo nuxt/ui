@@ -65,7 +65,7 @@ import { Primitive, SwitchRoot, SwitchThumb, Label } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useFormField } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -79,6 +79,7 @@ const emits = defineEmits<SwitchEmits<T>>()
 const props = useComponentProps<SwitchProps<T>>('switch', _props, theme)
 
 const appConfig = useAppConfig() as Switch['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.switch)
 
 const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue', 'modelValue', 'trueValue', 'falseValue'), emits)
 
@@ -102,7 +103,7 @@ const forwardedAttrs = computed(() => {
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.switch)({
+const ui = computed(() => tv(theme, overrides.value)({
   size: size.value,
   color: color.value,
   highlight: highlight.value,

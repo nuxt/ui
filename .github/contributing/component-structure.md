@@ -50,7 +50,7 @@ export interface ComponentNameSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 
 // 7. Raw props (use withDefaults only when you actually need a runtime default)
@@ -66,9 +66,10 @@ const props = useComponentProps('componentName', _props, theme)
 
 // 9. App config
 const appConfig = useAppConfig() as ComponentName['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.componentName)
 
 // 10. Computed UI - always computed for reactivity
-const ui = computed(() => tv(theme, appConfig.ui?.componentName)({
+const ui = computed(() => tv(theme, overrides.value)({
   color: props.color,
   size: props.size
 }))
@@ -115,7 +116,7 @@ import { computed } from 'vue'
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { tv } from '../utils/tv'
 
@@ -129,6 +130,7 @@ const slots = defineSlots<CollapsibleSlots>()
 const props = useComponentProps('collapsible', _props, theme)
 
 const appConfig = useAppConfig() as Collapsible['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.collapsible)
 
 // Pick from `props` (the proxy) so theme-supplied values flow through.
 // Use the local `useForwardProps` — reka-ui's `useForwardProps` /
@@ -136,7 +138,7 @@ const appConfig = useAppConfig() as Collapsible['AppConfig']
 // and would strip <UTheme :props> values.
 const rootProps = useForwardProps(reactivePick(props, 'as', 'defaultOpen', 'open', 'disabled', 'unmountOnHide'), emits)
 
-const ui = computed(() => tv(theme, appConfig.ui?.collapsible)())
+const ui = computed(() => tv(theme, overrides.value)())
 </script>
 
 <template>
@@ -212,7 +214,7 @@ const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
 //
 // Final precedence: explicit > closer-context (form/group) > <UTheme :props>
 //                   > withDefaults > app.config > tv defaults
-const ui = computed(() => tv(theme, appConfig.ui?.input)({
+const ui = computed(() => tv(theme, overrides.value)({
   color: color.value ?? props.color,
   size: inputSize.value ?? props.size,
   highlight: highlight.value ?? props.highlight,
@@ -313,6 +315,7 @@ defineExpose({
 ```
 
 Notes:
+- Pass the component's `app.config.ui` entry to `tv()` through `useComponentOverrides(() => appConfig.ui?.<name>)`, never directly. It flags the overrides `unstyled` under `<UTheme unstyled>` (or `app.config.ui.unstyled`), and types them so variant values the app adds, a custom `color` for example, type-check in the `tv()` call.
 - The proxy passes through to `_props` for explicitly set props, so `withDefaults` fallbacks stay lower priority than `<UTheme>` overrides.
 - The `ui` prop is deep-merged (slot classes layered on top of theme overrides). All other props are explicit-wins.
 - **Always read props as `props.x` in templates and `<script setup>`.** Bare prop names (`{{ label }}`, `v-if="arrow"`) resolve to `_props` and bypass the proxy, so `<UTheme :props>` defaults won't apply. The `nuxt-ui/no-bare-prop-refs` ESLint rule autofixes this.

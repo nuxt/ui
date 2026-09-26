@@ -76,7 +76,7 @@ export type ProgressGroupSlots<T extends ProgressGroupItem = ProgressGroupItem> 
 import { computed } from 'vue'
 import { Primitive, ProgressRoot, ProgressIndicator } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
@@ -89,9 +89,10 @@ const slots = defineSlots<ProgressGroupSlots<T>>()
 const props = useComponentProps<ProgressGroupProps<T>>('progressGroup', _props, theme)
 
 const appConfig = useAppConfig() as ProgressGroup['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.progressGroup)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.progressGroup)({
+const ui = computed(() => tv(theme, overrides.value)({
   size: props.size,
   color: props.color as ProgressGroup['variants']['color'],
   orientation: props.orientation

@@ -117,7 +117,7 @@ export type AuthFormSlots<T extends object = object, F extends AuthFormField = A
 import { reactive, shallowReactive, computed, useTemplateRef } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { omit, pick } from '../utils'
 import { tv } from '../utils/tv'
@@ -158,9 +158,10 @@ const props = useComponentProps<AuthFormProps<T, F>>('authForm', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as AuthForm['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.authForm)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.authForm)())
+const ui = computed(() => tv(theme, overrides.value)())
 
 const formRef = useTemplateRef('formRef')
 const passwordVisibility = reactive<Record<string, boolean>>(

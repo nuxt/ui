@@ -69,7 +69,7 @@ import { Primitive } from 'reka-ui'
 import { defu } from 'defu'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig, useRoute } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { getSlotChildrenText } from '../utils'
 import { tv } from '../utils/tv'
@@ -100,6 +100,7 @@ const open = defineModel<boolean>('open', { default: false })
 const route = useRoute()
 const { t } = useLocale()
 const appConfig = useAppConfig() as Header['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.header)
 
 const [DefineLeftTemplate, ReuseLeftTemplate] = createReusableTemplate()
 const [DefineRightTemplate, ReuseRightTemplate] = createReusableTemplate()
@@ -117,7 +118,7 @@ watch(() => route.fullPath, () => {
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.header)())
+const ui = computed(() => tv(theme, overrides.value)())
 
 const Menu = computed(() => ({
   slideover: USlideover,

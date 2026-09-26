@@ -76,6 +76,7 @@ import { reactiveOmit } from '@vueuse/core'
 import { usePage } from '@inertiajs/vue3'
 import { hasProtocol } from 'ufo'
 import { useAppConfig } from '#imports'
+import { useComponentOverrides } from '../../../composables/useComponentProps'
 import { tv } from '../../../utils/tv'
 import ULinkBase from './LinkBase.vue'
 
@@ -92,11 +93,12 @@ defineSlots<LinkSlots>()
 const page = usePage()
 
 const appConfig = useAppConfig() as Link['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.link)
 
 const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class', 'ui', 'target', 'rel', 'noRel'))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.link))
+const ui = computed(() => tv(theme, overrides.value))
 
 const href = computed(() => props.to ?? props.href)
 

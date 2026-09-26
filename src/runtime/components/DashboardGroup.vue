@@ -28,7 +28,7 @@ import { Primitive } from 'reka-ui'
 import { useNuxtApp, useAppConfig } from '#imports'
 import { provideDashboardContext } from '../utils/dashboard'
 import { tv } from '../utils/tv'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 
 const _props = withDefaults(defineProps<DashboardGroupProps>(), {
   storage: 'cookie',
@@ -42,9 +42,10 @@ const props = useComponentProps('dashboardGroup', _props, theme)
 
 const nuxtApp = useNuxtApp()
 const appConfig = useAppConfig() as DashboardGroup['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.dashboardGroup)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.dashboardGroup)())
+const ui = computed(() => tv(theme, overrides.value)())
 
 const sidebarOpen = ref(false)
 const sidebarCollapsed = ref(false)

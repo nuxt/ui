@@ -90,7 +90,7 @@ import { CheckboxGroupRoot } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useFormField } from '../composables/useFormField'
 import { get, omit } from '../utils'
 import { tv } from '../utils/tv'
@@ -108,6 +108,7 @@ const slots = defineSlots<CheckboxGroupSlots<T>>()
 const props = useComponentProps<CheckboxGroupProps<T, VK>>('checkboxGroup', _props, theme)
 
 const appConfig = useAppConfig() as CheckboxGroup['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.checkboxGroup)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'loop', 'required'), emits)
 const checkboxProps = useForwardProps(reactivePick(props, 'variant', 'indicator'))
@@ -129,7 +130,7 @@ const highlight = computed(() => formFieldHighlight.value ?? props.highlight)
 const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.checkboxGroup)({
+const ui = computed(() => tv(theme, overrides.value)({
   size: size.value,
   required: props.required,
   orientation: props.orientation,

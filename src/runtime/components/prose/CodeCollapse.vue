@@ -40,7 +40,7 @@ export interface ProseCodeCollapseSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
 import { useLocale } from '../../composables/useLocale'
 import { tv } from '../../utils/tv'
 import UButton from '../Button.vue'
@@ -55,9 +55,10 @@ const open = defineModel<boolean>('open', { default: false })
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as ProseCodeCollapse['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.prose?.codeCollapse)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.prose?.codeCollapse)({
+const ui = computed(() => tv(theme, overrides.value)({
   open: open.value
 }))
 </script>

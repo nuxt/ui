@@ -53,7 +53,7 @@ import DragHandle from '@tiptap/extension-drag-handle-vue-3'
 import { reactiveOmit, reactivePick } from '@vueuse/core'
 import { defu } from 'defu'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { buildFloatingUIMiddleware } from '../utils/editor'
 import { transformUI } from '../utils'
@@ -76,9 +76,10 @@ const dragHandleProps = useForwardProps(reactivePick(props, 'pluginKey', 'nested
 const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'options', 'editor', 'pluginKey', 'nested', 'nestedOptions', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement', 'class', 'ui'))
 
 const appConfig = useAppConfig() as EditorDragHandle['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.editorDragHandle)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.editorDragHandle)())
+const ui = computed(() => tv(theme, overrides.value)())
 
 const floatingUIOptions = computed(() => defu(props.options, {
   strategy: 'absolute' as Strategy,

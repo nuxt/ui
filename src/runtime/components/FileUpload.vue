@@ -144,7 +144,7 @@ import { Primitive, VisuallyHidden } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useFormField } from '../composables/useFormField'
 import { useFileUpload } from '../composables/useFileUpload'
 import { tv } from '../utils/tv'
@@ -174,6 +174,7 @@ const modelValue = defineModel<(M extends true ? File[] : File) | null>()
 const props = useComponentProps<FileUploadProps<M>>('fileUpload', _props, theme)
 
 const appConfig = useAppConfig() as FileUpload['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.fileUpload)
 
 const { t } = useLocale()
 
@@ -215,7 +216,7 @@ const position = computed(() => {
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.fileUpload)({
+const ui = computed(() => tv(theme, overrides.value)({
   dropzone: props.dropzone,
   interactive: props.interactive,
   color: color.value,
