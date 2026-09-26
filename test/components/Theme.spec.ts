@@ -3,7 +3,7 @@ import { mountSuspended } from '@nuxt/test-utils/runtime'
 import type { ThemeProps, ThemeSlots } from '../../src/runtime/components/Theme.vue'
 import Theme from '../../src/runtime/components/Theme.vue'
 import { renderEach, componentRender } from '../component-render'
-import { h, ref, nextTick } from 'vue'
+import { h, ref, nextTick, defineComponent } from 'vue'
 import { TooltipProvider } from 'reka-ui'
 import Button from '../../src/runtime/components/Button.vue'
 import Badge from '../../src/runtime/components/Badge.vue'
@@ -19,6 +19,8 @@ import FieldGroup from '../../src/runtime/components/FieldGroup.vue'
 import Avatar from '../../src/runtime/components/Avatar.vue'
 import AvatarGroup from '../../src/runtime/components/AvatarGroup.vue'
 import type { ButtonProps } from '../../src/runtime/types'
+import type { ThemeIcons, ThemeVariants } from '../../src/runtime/types/theme'
+import { useThemeConfig } from '../../src/runtime/composables/useComponentProps'
 
 type CaseOptions = { props?: ThemeProps, slots?: ThemeSlots }
 
@@ -674,5 +676,127 @@ describe('Theme', () => {
     await nextTick()
 
     expect(wrapper.find('[data-slot="tooltip-arrow"]').exists()).toBe(true)
+  })
+
+  test(':variants and :icons are typed after the themes and the icon keys', () => {
+    const variants: ThemeVariants = {
+      button: { variant: { soft: { base: 'rounded-full' } }, color: { tertiary: { base: '[--ui-accent:var(--ui-tertiary)]' } } }
+    }
+    const icons: ThemeIcons = { close: 'i-lucide-circle-x', custom: 'i-lucide-star' }
+
+    // @ts-expect-error `notASlot` is not a Button slot
+    const wrong: ThemeVariants = { button: { variant: { soft: { notASlot: 'rounded-full' } } } }
+
+    expect([variants, icons, wrong]).toHaveLength(3)
+  })
+
+  test(':variants changes the classes of one variant value', async () => {
+    const wrapper = await mountSuspended({
+      components: { Theme, Button },
+      template: `
+        <Theme :variants="{ button: { variant: { soft: { base: 'rounded-full' } } } }">
+          <Button label="Soft" variant="soft" />
+          <Button label="Solid" />
+        </Theme>
+      `
+    })
+
+    const [soft, solid] = wrapper.findAll('button')
+    expect(soft!.classes()).toContain('rounded-full')
+    expect(solid!.classes()).not.toContain('rounded-full')
+  })
+
+  test(':variants adds a variant value', async () => {
+    const wrapper = await mountSuspended({
+      components: { Theme, Button },
+      template: `
+        <Theme :variants="{ button: { color: { tertiary: { base: '[--ui-accent:var(--ui-tertiary)]' } } } }">
+          <Button label="Tertiary" color="tertiary" />
+        </Theme>
+      `
+    })
+
+    expect(wrapper.find('button').classes()).toContain('[--ui-accent:var(--ui-tertiary)]')
+  })
+
+  test('nested :variants override the outer value and keep the others', async () => {
+    const wrapper = await mountSuspended({
+      components: { Theme, Button },
+      template: `
+        <Theme :variants="{ button: { variant: { soft: { base: 'rounded-full' }, outline: { base: 'rounded-none' } } } }">
+          <Theme :variants="{ button: { variant: { soft: { base: 'rounded-xl' } } } }">
+            <Button label="Soft" variant="soft" />
+            <Button label="Outline" variant="outline" />
+          </Theme>
+        </Theme>
+      `
+    })
+
+    const [soft, outline] = wrapper.findAll('button')
+    expect(soft!.classes()).toContain('rounded-xl')
+    expect(soft!.classes()).not.toContain('rounded-full')
+    expect(outline!.classes()).toContain('rounded-none')
+  })
+
+  test('nested :variants replace an inherited array of classes', async () => {
+    const wrapper = await mountSuspended({
+      components: { Theme, Button },
+      template: `
+        <Theme :variants="{ button: { variant: { soft: { base: ['rounded-full', 'shadow-lg'] } } } }">
+          <Theme :variants="{ button: { variant: { soft: { base: ['rounded-xl'] } } } }">
+            <Button label="Soft" variant="soft" />
+          </Theme>
+        </Theme>
+      `
+    })
+
+    const classes = wrapper.find('button').classes()
+    expect(classes).toContain('rounded-xl')
+    expect(classes).not.toContain('rounded-full')
+    expect(classes).not.toContain('shadow-lg')
+  })
+
+  test(':variants does not leak outside scope', async () => {
+    const wrapper = await mountSuspended({
+      components: { Theme, Button },
+      template: `
+        <div>
+          <Theme :variants="{ button: { variant: { soft: { base: 'rounded-full' } } } }">
+            <Button label="Inside" variant="soft" />
+          </Theme>
+          <Button label="Outside" variant="soft" />
+        </div>
+      `
+    })
+
+    const [inside, outside] = wrapper.findAll('button')
+    expect(inside!.classes()).toContain('rounded-full')
+    expect(outside!.classes()).not.toContain('rounded-full')
+  })
+
+  test(':icons overrides icons for its subtree', async () => {
+    const IconProbe = defineComponent({
+      setup() {
+        const appConfig = useThemeConfig()
+        return () => h('span', { 'data-icon': appConfig.ui.icons.close }, appConfig.ui.icons.check)
+      }
+    })
+
+    const wrapper = await mountSuspended({
+      components: { Theme, IconProbe },
+      template: `
+        <div>
+          <Theme :icons="{ close: 'i-lucide-circle-x' }">
+            <IconProbe />
+          </Theme>
+          <IconProbe />
+        </div>
+      `
+    })
+
+    const [inside, outside] = wrapper.findAll('span')
+    expect(inside!.attributes('data-icon')).toBe('i-lucide-circle-x')
+    expect(inside!.text()).toBe(outside!.text())
+    expect(outside!.attributes('data-icon')).toBe('i-lucide-x')
   })
 })

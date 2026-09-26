@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { VNode } from 'vue'
-import type { ThemeContextDefaults, ThemeDefaults, ThemeUI } from '../types/theme'
+import type { ThemeContextDefaults, ThemeDefaults, ThemeIcons, ThemeUI, ThemeVariants } from '../types/theme'
 
 export interface ThemeProps {
   /**
@@ -14,6 +14,19 @@ export interface ThemeProps {
    * @example `{ button: { base: 'rounded-full' } }`
    */
   ui?: ThemeUI
+  /**
+   * Per-component variant values (the `variants` of `app.config.ui.<name>`),
+   * merged over the app config and any `<UTheme>` above, the nearest winning.
+   * Changes the classes of a variant value, or adds one.
+   * @example `{ button: { variant: { soft: { base: 'rounded-full' } } } }`
+   */
+  variants?: ThemeVariants
+  /**
+   * Icons for descendant components, merged over `app.config.ui.icons` and any
+   * `<UTheme>` above.
+   * @example `{ close: 'i-lucide-circle-x' }`
+   */
+  icons?: ThemeIcons
   /**
    * Render descendant components without their theme classes, keeping only the
    * classes you supply through `class`, `ui` or `app.config.ui`. Set it to
@@ -30,7 +43,7 @@ export interface ThemeSlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import defu from 'defu'
+import defu, { createDefu } from 'defu'
 import { injectThemeContext, provideThemeContext } from '../composables/useComponentProps'
 
 const _props = withDefaults(defineProps<ThemeProps>(), { unstyled: undefined })
@@ -70,6 +83,34 @@ function normalizeUi(ui?: ThemeUI): ThemeContextDefaults {
   return result
 }
 
+/**
+ * `variants` and `icons` in the shape of `app.config.ui`, to merge over the
+ * parent's config: `{ button: { variants: {...} }, icons: {...} }`, with prose
+ * components nested under `prose` as in the app config.
+ */
+function toConfig(variants?: ThemeVariants, icons?: ThemeIcons): Record<string, any> {
+  const config: Record<string, any> = {}
+  for (const [key, value] of Object.entries(variants ?? {})) {
+    if (!value || typeof value !== 'object') continue
+    config[key] = NAMESPACES.has(key)
+      ? Object.fromEntries(Object.entries(value).map(([child, childValue]) => [child, { variants: childValue }]))
+      : { variants: value }
+  }
+  if (icons) {
+    config.icons = icons
+  }
+  return config
+}
+
+// Like `defu`, but an array of classes replaces the inherited one instead of
+// being concatenated with it, so the nearest Theme's value wins
+const mergeConfig = createDefu((object, key, value) => {
+  if (Array.isArray(value)) {
+    object[key] = value
+    return true
+  }
+})
+
 provideThemeContext({
   defaults: computed(() => defu(
     (_props.props ?? {}) as ThemeContextDefaults,
@@ -77,7 +118,9 @@ provideThemeContext({
     parent.defaults.value
   )),
   unstyled: computed(() => _props.unstyled ?? parent.unstyled.value),
-  config: parent.config
+  config: computed(() => _props.variants || _props.icons
+    ? mergeConfig(toConfig(_props.variants, _props.icons), parent.config.value)
+    : parent.config.value)
 })
 </script>
 
