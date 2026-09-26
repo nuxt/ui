@@ -1,7 +1,9 @@
+import { readFileSync } from 'node:fs'
 import { describe, it, expect } from 'vitest'
 import { join } from 'pathe'
 import { getTemplates } from '../../src/templates'
 import { defaultOptions, getDefaultConfig } from '../../src/utils/defaults'
+import { colors } from '../../src/runtime/theme/color'
 
 const resolve = (...paths: string[]) => join(process.cwd(), 'src', ...paths)
 const themeDir = resolve('./runtime/theme')
@@ -43,12 +45,22 @@ describe('theme templates', () => {
     expect(classes).not.toContain('animate-pulse')
   })
 
-  it('points each color scope at its own role variables, with the prefix', async () => {
-    const css = await themeContents({ theme: { prefix: 'tw' } })('ui.css')
+  it('generates only the sources', async () => {
+    const contents = themeContents({ theme: { prefix: 'tw' } })
 
-    expect(css).toContain('[class*="[--ui-accent:"]')
+    expect(await contents('ui.css')).not.toContain('@layer')
+    expect(await contents('ui.css')).not.toContain('[class~=')
+    expect(await themeContents({})('ui.base.css')).toBe('')
+  })
+
+  it('repeats the color scopes for the prefixed class in the base layer', async () => {
+    const css = await themeContents({ theme: { prefix: 'tw' } })('ui.base.css')
+
+    expect(css).toMatch(/^@layer base \{\n {2}\[class~="tw:\[--ui-accent:var\(--ui-primary\)\]"\] \{/)
     expect(css).toContain('[class~="tw:[--ui-accent:var(--ui-warning)]"] {\n    --ui-accent-foreground: var(--ui-warning-foreground);')
     expect(css).toContain('[class~="tw:[--ui-accent:var(--ui-neutral)]"] {\n    --ui-neutral: var(--ui-bg-inverted);')
+    expect(css).not.toContain('[class~="[--ui-accent:')
+    expect(css).not.toContain(':where(')
   })
 
   it('lists the prefixed classes inline with the prefix', async () => {
@@ -64,5 +76,25 @@ describe('theme templates', () => {
 
     expect(classes).toContain('tw:rounded-md')
     expect(classes).not.toContain('tw:min-w-full')
+  })
+})
+
+// The tokens and color scopes are static CSS now, so they're checked against
+// the color set the themes scope with.
+describe('static css', () => {
+  const tokens = readFileSync(resolve('./runtime/tokens.css'), 'utf8')
+  const accent = readFileSync(resolve('./runtime/accent.css'), 'utf8')
+
+  // `#build/ui.base.css` adds the prefixed scopes after `accent.css`, so the
+  // reset, which also matches a prefixed scope class, must not outrank them
+  it('resets the accent roles at zero specificity', () => {
+    expect(accent).toContain(':where([class*="[--ui-accent:"]) {')
+  })
+
+  it.each(colors)('bridges and scopes %s', (color) => {
+    expect(tokens).toContain(`--color-${color}: var(--ui-${color});`)
+    expect(tokens).toContain(`--color-${color}-500: var(--ui-color-${color}-500);`)
+    expect(accent).toContain(`[class~="[--ui-accent:var(--ui-${color})]"] {`)
+    expect(accent).toContain(`--ui-accent-foreground: var(--ui-${color}-foreground`)
   })
 })

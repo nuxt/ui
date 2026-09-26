@@ -152,7 +152,7 @@ The `color` prop accepts `primary`, `secondary`, `success`, `info`, `warning`, `
 - `text-accent-muted` / `text-accent-muted-hover` / `text-accent-faint` - Secondary and faint text
 - `border-accent-line` - Separator line
 
-The full list with values is in `src/templates.ts` and the [CSS Variables](../../docs/content/docs/1.getting-started/5.theme/2.css-variables.md#accent) docs.
+The full list with values is in `src/runtime/tokens.css` and the [CSS Variables](../../docs/content/docs/1.getting-started/5.theme/2.css-variables.md#accent) docs.
 
 ## Logical Properties (RTL)
 

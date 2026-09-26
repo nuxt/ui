@@ -1,0 +1,173 @@
+/* The accent roles of the color scopes, keyed on the scope class the `color`
+   variant puts on a component: `[--ui-accent:var(--ui-primary)]`. With
+   `theme.prefix`, `#build/ui.base.css` repeats these rules for the prefixed class. */
+@layer base {
+  /* Any `--ui-accent` scope resets the accent roles, so a colored component nested
+     in another doesn't inherit them and every role falls back to its recipe. At zero
+     specificity, so a color's own scope wins wherever it lands, like the prefixed
+     scopes `#build/ui.base.css` adds. */
+  :where([class*="[--ui-accent:"]) {
+    --ui-accent-foreground: initial;
+    --ui-accent-hover: initial;
+    --ui-accent-soft: initial;
+    --ui-accent-soft-hover: initial;
+    --ui-accent-soft-foreground: initial;
+    --ui-accent-soft-active: initial;
+    --ui-accent-border: initial;
+    --ui-accent-border-soft: initial;
+    --ui-accent-focus: initial;
+    --ui-accent-surface: initial;
+    --ui-accent-muted: initial;
+    --ui-accent-muted-hover: initial;
+    --ui-accent-line: initial;
+    --ui-accent-tint: initial;
+    --ui-accent-faint: initial;
+    --ui-accent-border-muted: initial;
+    --ui-accent-border-strong: initial;
+  }
+
+  /* A color's scope reads its roles from `--ui-<color>-<role>`. An unset variable
+     leaves the role unset, so it keeps its recipe, or for neutral its surface token.
+     Neutral also resolves `--ui-neutral` on the element, so it follows a surface
+     that redefines `--ui-bg-inverted`. */
+  [class~="[--ui-accent:var(--ui-primary)]"] {
+    --ui-accent-foreground: var(--ui-primary-foreground);
+    --ui-accent-hover: var(--ui-primary-hover);
+    --ui-accent-soft: var(--ui-primary-soft);
+    --ui-accent-soft-hover: var(--ui-primary-soft-hover);
+    --ui-accent-soft-foreground: var(--ui-primary-soft-foreground);
+    --ui-accent-soft-active: var(--ui-primary-soft-active);
+    --ui-accent-border: var(--ui-primary-border);
+    --ui-accent-border-soft: var(--ui-primary-border-soft);
+    --ui-accent-focus: var(--ui-primary-focus);
+    --ui-accent-surface: var(--ui-primary-surface);
+    --ui-accent-muted: var(--ui-primary-muted);
+    --ui-accent-muted-hover: var(--ui-primary-muted-hover);
+    --ui-accent-line: var(--ui-primary-line);
+    --ui-accent-tint: var(--ui-primary-tint);
+    --ui-accent-faint: var(--ui-primary-faint);
+    --ui-accent-border-muted: var(--ui-primary-border-muted);
+    --ui-accent-border-strong: var(--ui-primary-border-strong);
+  }
+
+  [class~="[--ui-accent:var(--ui-secondary)]"] {
+    --ui-accent-foreground: var(--ui-secondary-foreground);
+    --ui-accent-hover: var(--ui-secondary-hover);
+    --ui-accent-soft: var(--ui-secondary-soft);
+    --ui-accent-soft-hover: var(--ui-secondary-soft-hover);
+    --ui-accent-soft-foreground: var(--ui-secondary-soft-foreground);
+    --ui-accent-soft-active: var(--ui-secondary-soft-active);
+    --ui-accent-border: var(--ui-secondary-border);
+    --ui-accent-border-soft: var(--ui-secondary-border-soft);
+    --ui-accent-focus: var(--ui-secondary-focus);
+    --ui-accent-surface: var(--ui-secondary-surface);
+    --ui-accent-muted: var(--ui-secondary-muted);
+    --ui-accent-muted-hover: var(--ui-secondary-muted-hover);
+    --ui-accent-line: var(--ui-secondary-line);
+    --ui-accent-tint: var(--ui-secondary-tint);
+    --ui-accent-faint: var(--ui-secondary-faint);
+    --ui-accent-border-muted: var(--ui-secondary-border-muted);
+    --ui-accent-border-strong: var(--ui-secondary-border-strong);
+  }
+
+  [class~="[--ui-accent:var(--ui-success)]"] {
+    --ui-accent-foreground: var(--ui-success-foreground);
+    --ui-accent-hover: var(--ui-success-hover);
+    --ui-accent-soft: var(--ui-success-soft);
+    --ui-accent-soft-hover: var(--ui-success-soft-hover);
+    --ui-accent-soft-foreground: var(--ui-success-soft-foreground);
+    --ui-accent-soft-active: var(--ui-success-soft-active);
+    --ui-accent-border: var(--ui-success-border);
+    --ui-accent-border-soft: var(--ui-success-border-soft);
+    --ui-accent-focus: var(--ui-success-focus);
+    --ui-accent-surface: var(--ui-success-surface);
+    --ui-accent-muted: var(--ui-success-muted);
+    --ui-accent-muted-hover: var(--ui-success-muted-hover);
+    --ui-accent-line: var(--ui-success-line);
+    --ui-accent-tint: var(--ui-success-tint);
+    --ui-accent-faint: var(--ui-success-faint);
+    --ui-accent-border-muted: var(--ui-success-border-muted);
+    --ui-accent-border-strong: var(--ui-success-border-strong);
+  }
+
+  [class~="[--ui-accent:var(--ui-info)]"] {
+    --ui-accent-foreground: var(--ui-info-foreground);
+    --ui-accent-hover: var(--ui-info-hover);
+    --ui-accent-soft: var(--ui-info-soft);
+    --ui-accent-soft-hover: var(--ui-info-soft-hover);
+    --ui-accent-soft-foreground: var(--ui-info-soft-foreground);
+    --ui-accent-soft-active: var(--ui-info-soft-active);
+    --ui-accent-border: var(--ui-info-border);
+    --ui-accent-border-soft: var(--ui-info-border-soft);
+    --ui-accent-focus: var(--ui-info-focus);
+    --ui-accent-surface: var(--ui-info-surface);
+    --ui-accent-muted: var(--ui-info-muted);
+    --ui-accent-muted-hover: var(--ui-info-muted-hover);
+    --ui-accent-line: var(--ui-info-line);
+    --ui-accent-tint: var(--ui-info-tint);
+    --ui-accent-faint: var(--ui-info-faint);
+    --ui-accent-border-muted: var(--ui-info-border-muted);
+    --ui-accent-border-strong: var(--ui-info-border-strong);
+  }
+
+  [class~="[--ui-accent:var(--ui-warning)]"] {
+    --ui-accent-foreground: var(--ui-warning-foreground);
+    --ui-accent-hover: var(--ui-warning-hover);
+    --ui-accent-soft: var(--ui-warning-soft);
+    --ui-accent-soft-hover: var(--ui-warning-soft-hover);
+    --ui-accent-soft-foreground: var(--ui-warning-soft-foreground);
+    --ui-accent-soft-active: var(--ui-warning-soft-active);
+    --ui-accent-border: var(--ui-warning-border);
+    --ui-accent-border-soft: var(--ui-warning-border-soft);
+    --ui-accent-focus: var(--ui-warning-focus);
+    --ui-accent-surface: var(--ui-warning-surface);
+    --ui-accent-muted: var(--ui-warning-muted);
+    --ui-accent-muted-hover: var(--ui-warning-muted-hover);
+    --ui-accent-line: var(--ui-warning-line);
+    --ui-accent-tint: var(--ui-warning-tint);
+    --ui-accent-faint: var(--ui-warning-faint);
+    --ui-accent-border-muted: var(--ui-warning-border-muted);
+    --ui-accent-border-strong: var(--ui-warning-border-strong);
+  }
+
+  [class~="[--ui-accent:var(--ui-error)]"] {
+    --ui-accent-foreground: var(--ui-error-foreground);
+    --ui-accent-hover: var(--ui-error-hover);
+    --ui-accent-soft: var(--ui-error-soft);
+    --ui-accent-soft-hover: var(--ui-error-soft-hover);
+    --ui-accent-soft-foreground: var(--ui-error-soft-foreground);
+    --ui-accent-soft-active: var(--ui-error-soft-active);
+    --ui-accent-border: var(--ui-error-border);
+    --ui-accent-border-soft: var(--ui-error-border-soft);
+    --ui-accent-focus: var(--ui-error-focus);
+    --ui-accent-surface: var(--ui-error-surface);
+    --ui-accent-muted: var(--ui-error-muted);
+    --ui-accent-muted-hover: var(--ui-error-muted-hover);
+    --ui-accent-line: var(--ui-error-line);
+    --ui-accent-tint: var(--ui-error-tint);
+    --ui-accent-faint: var(--ui-error-faint);
+    --ui-accent-border-muted: var(--ui-error-border-muted);
+    --ui-accent-border-strong: var(--ui-error-border-strong);
+  }
+
+  [class~="[--ui-accent:var(--ui-neutral)]"] {
+    --ui-neutral: var(--ui-bg-inverted);
+    --ui-accent-foreground: var(--ui-neutral-foreground);
+    --ui-accent-hover: var(--ui-neutral-hover, color-mix(in oklab, var(--ui-bg-inverted) 90%, transparent));
+    --ui-accent-soft: var(--ui-neutral-soft, var(--ui-bg-elevated));
+    --ui-accent-soft-hover: var(--ui-neutral-soft-hover, color-mix(in oklab, var(--ui-bg-accented) 75%, transparent));
+    --ui-accent-soft-foreground: var(--ui-neutral-soft-foreground, var(--ui-text));
+    --ui-accent-soft-active: var(--ui-neutral-soft-active);
+    --ui-accent-border: var(--ui-neutral-border, var(--ui-border-accented));
+    --ui-accent-border-soft: var(--ui-neutral-border-soft, var(--ui-border-accented));
+    --ui-accent-focus: var(--ui-neutral-focus);
+    --ui-accent-surface: var(--ui-neutral-surface, var(--ui-bg));
+    --ui-accent-muted: var(--ui-neutral-muted, var(--ui-text-muted));
+    --ui-accent-muted-hover: var(--ui-neutral-muted-hover, var(--ui-text));
+    --ui-accent-line: var(--ui-neutral-line, var(--ui-border));
+    --ui-accent-tint: var(--ui-neutral-tint, color-mix(in oklab, var(--ui-bg-elevated) 50%, transparent));
+    --ui-accent-faint: var(--ui-neutral-faint, var(--ui-text-dimmed));
+    --ui-accent-border-muted: var(--ui-neutral-border-muted, var(--ui-border));
+    --ui-accent-border-strong: var(--ui-neutral-border-strong);
+  }
+}
