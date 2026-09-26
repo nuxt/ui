@@ -104,7 +104,7 @@ const _props = withDefaults(defineProps<ToastProps>(), {
 const emits = defineEmits<ToastEmits>()
 const slots = defineSlots<ToastSlots>()
 
-const props = useComponentProps('toast', _props)
+const props = useComponentProps('toast', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Toast['AppConfig']

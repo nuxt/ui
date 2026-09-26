@@ -102,7 +102,7 @@ const _props = withDefaults(defineProps<InputTimeProps<R>>(), {
 const emits = defineEmits<InputTimeEmits<R>>()
 const slots = defineSlots<InputTimeSlots>()
 
-const props = useComponentProps<InputTimeProps<R>>('inputTime', _props)
+const props = useComponentProps<InputTimeProps<R>>('inputTime', _props, theme)
 
 const appConfig = useAppConfig() as InputTime['AppConfig']
 

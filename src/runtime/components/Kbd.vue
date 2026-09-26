@@ -48,7 +48,7 @@ const _props = withDefaults(defineProps<KbdProps>(), {
 })
 defineSlots<KbdSlots>()
 
-const props = useComponentProps('kbd', _props)
+const props = useComponentProps('kbd', _props, theme)
 
 const { getKbdKey } = useKbd()
 const appConfig = useAppConfig() as Kbd['AppConfig']

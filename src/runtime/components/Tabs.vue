@@ -120,7 +120,7 @@ const _props = withDefaults(defineProps<TabsProps<T>>(), {
 const emits = defineEmits<TabsEmits>()
 const slots = defineSlots<TabsSlots<T>>()
 
-const props = useComponentProps<TabsProps<T>>('tabs', _props)
+const props = useComponentProps<TabsProps<T>>('tabs', _props, theme)
 
 const appConfig = useAppConfig() as Tabs['AppConfig']
 

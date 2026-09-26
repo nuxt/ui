@@ -51,6 +51,59 @@ name: 'theme-props-example'
 Explicit props on a component (e.g. `<UButton color="primary" />`) always win over `<UTheme :props>`. Theme defaults only apply when the prop wasn't passed explicitly.
 ::
 
+### Default variants :badge{label="Soon" class="align-text-top"}
+
+Use the `'*'` key of `props` to change the default `color` and `size` of every descendant component. It only replaces the library defaults, `primary` and `md`, so a component with its own default keeps it: Avatar stays `neutral` and Separator stays `xs`. A component's own key takes priority over `'*'`.
+
+::component-example
+---
+name: 'theme-default-variants-example'
+---
+::
+
+::framework-only
+#nuxt
+:::tip
+Set `ui.defaultVariants` in your `app.config.ts` to apply them to your whole app:
+
+```ts [app.config.ts]
+export default defineAppConfig({
+  ui: {
+    defaultVariants: {
+      color: 'neutral',
+      size: 'sm'
+    }
+  }
+})
+```
+:::
+
+#vue
+:::tip
+Set `ui.defaultVariants` in your `vite.config.ts` to apply them to your whole app:
+
+```ts [vite.config.ts]
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import ui from '@nuxt/ui/vite'
+
+export default defineConfig({
+  plugins: [
+    vue(),
+    ui({
+      ui: {
+        defaultVariants: {
+          color: 'neutral',
+          size: 'sm'
+        }
+      }
+    })
+  ]
+})
+```
+:::
+::
+
 ## Examples
 
 ### Multiple components

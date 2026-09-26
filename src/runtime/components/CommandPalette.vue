@@ -268,7 +268,7 @@ const _props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
 const emits = defineEmits<CommandPaletteEmits<T>>()
 const slots = defineSlots<CommandPaletteSlots<T, G>>()
 
-const props = useComponentProps<CommandPaletteProps<G, T>>('commandPalette', _props)
+const props = useComponentProps<CommandPaletteProps<G, T>>('commandPalette', _props, theme)
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 

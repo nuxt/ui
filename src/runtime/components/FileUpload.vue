@@ -171,7 +171,7 @@ const slots = defineSlots<FileUploadSlots<M>>()
 
 const modelValue = defineModel<(M extends true ? File[] : File) | null>()
 
-const props = useComponentProps<FileUploadProps<M>>('fileUpload', _props)
+const props = useComponentProps<FileUploadProps<M>>('fileUpload', _props, theme)
 
 const appConfig = useAppConfig() as FileUpload['AppConfig']
 

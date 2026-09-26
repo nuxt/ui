@@ -169,7 +169,7 @@ const slots = defineSlots<DropdownMenuSlots<T>>()
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
-const props = useComponentProps<DropdownMenuProps<T>>('dropdownMenu', _props)
+const props = useComponentProps<DropdownMenuProps<T>>('dropdownMenu', _props, theme)
 
 const appConfig = useAppConfig() as DropdownMenu['AppConfig']
 

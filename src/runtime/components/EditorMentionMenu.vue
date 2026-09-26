@@ -37,20 +37,24 @@ import { computed, h, onMounted, onBeforeUnmount, nextTick, toRef } from 'vue'
 import { useAppConfig } from '#imports'
 import { useEditorMenu } from '../composables/useEditorMenu'
 import { tv } from '../utils/tv'
+import { useComponentProps } from '../composables/useComponentProps'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<EditorMentionMenuProps<T>>(), {
+const _props = withDefaults(defineProps<EditorMentionMenuProps<T>>(), {
   pluginKey: 'mentionMenu',
   char: '@'
 })
+
+const props = useComponentProps('editorMentionMenu', _props, theme)
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const appConfig = useAppConfig() as EditorMentionMenu['AppConfig']
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, appConfig.ui?.editorMentionMenu)({
   size: props.size
 }))

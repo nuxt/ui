@@ -191,7 +191,7 @@ const _props = withDefaults(defineProps<ListboxProps<T, VK, M, Mod>>(), {
 const emits = defineEmits<ListboxEmits<T, VK, M, Mod>>()
 const slots = defineSlots<ListboxSlots<T>>()
 
-const props = useComponentProps<ListboxProps<T, VK, M, Mod>>('listbox', _props)
+const props = useComponentProps<ListboxProps<T, VK, M, Mod>>('listbox', _props, theme)
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 

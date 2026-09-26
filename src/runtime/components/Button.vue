@@ -62,7 +62,7 @@ import ULinkBase from './LinkBase.vue'
 const _props = defineProps<ButtonProps>()
 const slots = defineSlots<ButtonSlots>()
 
-const props = useComponentProps('button', _props)
+const props = useComponentProps('button', _props, theme)
 
 const appConfig = useAppConfig() as Button['AppConfig']
 const { orientation, size: buttonSize } = useFieldGroup<ButtonProps>(_props)

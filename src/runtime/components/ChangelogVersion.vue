@@ -80,7 +80,7 @@ const _props = withDefaults(defineProps<ChangelogVersionProps>(), {
 })
 const slots = defineSlots<ChangelogVersionSlots>()
 
-const props = useComponentProps('changelogVersion', _props)
+const props = useComponentProps('changelogVersion', _props, theme)
 
 const { locale } = useLocale()
 const appConfig = useAppConfig() as ChangelogVersion['AppConfig']

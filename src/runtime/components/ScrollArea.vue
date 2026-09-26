@@ -111,7 +111,7 @@ const _props = withDefaults(defineProps<ScrollAreaProps<T>>(), {
 defineSlots<ScrollAreaSlots<T>>()
 const emits = defineEmits<ScrollAreaEmits>()
 
-const props = useComponentProps<ScrollAreaProps<T>>('scrollArea', _props)
+const props = useComponentProps<ScrollAreaProps<T>>('scrollArea', _props, theme)
 
 const { dir } = useLocale()
 const appConfig = useAppConfig() as ScrollArea['AppConfig']

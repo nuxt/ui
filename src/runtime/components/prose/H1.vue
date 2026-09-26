@@ -32,7 +32,7 @@ const _props = defineProps<ProseH1Props>()
 
 defineSlots<ProseH1Slots>()
 
-const props = useComponentProps('prose.h1', _props)
+const props = useComponentProps('prose.h1', _props, theme)
 
 const appConfig = useAppConfig() as ProseH1['AppConfig']
 // NOTE: the `mdc.headings.anchorLinks` fallback is deprecated, remove in v5 in favor of the `anchor` prop.

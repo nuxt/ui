@@ -28,10 +28,6 @@ export const defaultOptions = {
   colorMode: true,
   theme: {
     unstyled: false,
-    defaultVariants: {
-      color: undefined,
-      size: undefined
-    },
     prefix: undefined
   },
   prose: false,

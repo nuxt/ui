@@ -1,7 +1,7 @@
 import { describe, expectTypeOf, it, expect, test, beforeAll, afterAll } from 'vitest'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { useAppConfig } from '#imports'
-import { UFormField } from '#components'
+import { UFormField, UFieldGroup, UAvatarGroup, UTheme, UButton, UAvatar, UInput } from '#components'
 import type * as ui from '#build/ui'
 import type { ThemeDefaults } from '../../src/runtime/types/theme'
 
@@ -18,9 +18,6 @@ import type { ThemeDefaults } from '../../src/runtime/types/theme'
  */
 type NonProxyComponents
   = | 'link'
-    | 'editorEmojiMenu'
-    | 'editorMentionMenu'
-    | 'editorSuggestionMenu'
 
 type Expected = Exclude<keyof typeof ui, NonProxyComponents>
 
@@ -29,7 +26,7 @@ type Expected = Exclude<keyof typeof ui, NonProxyComponents>
 // `vue-tsc --noEmit` in CI. The error message names the offending key
 // directly, e.g. `Type 'never' is not assignable to type '"button"'`.
 type MissingFromThemeDefaults = Exclude<Expected, keyof ThemeDefaults>
-type ExtraInThemeDefaults = Exclude<keyof ThemeDefaults, Expected>
+type ExtraInThemeDefaults = Exclude<keyof ThemeDefaults, Expected | '*'>
 
 describe('ThemeDefaults registry', () => {
   test('every themable `#build/ui` component has a ThemeDefaults entry', () => {
@@ -75,5 +72,93 @@ describe('app.config defaultVariants', () => {
 
     const root = wrapper.find('[data-slot="form-field"]')
     expect(root.attributes('data-orientation')).toBe('vertical')
+  })
+})
+
+// `'*'` replaces only the library-wide `primary` / `md` defaults, below a
+// component's own key, from `<UTheme :props>` or `app.config.ui.defaultVariants`.
+describe('\'*\' default variants', () => {
+  const render = (props: Record<string, any>) => mountSuspended({
+    components: { UTheme, UButton, UAvatar },
+    setup: () => ({ props }),
+    template: `
+      <UTheme :props="props">
+        <UButton label="Button" />
+        <UAvatar alt="Benjamin Canac" />
+      </UTheme>
+    `
+  })
+
+  it('replaces primary and md, and keeps a component\'s own default', async () => {
+    const wrapper = await render({ '*': { color: 'error', size: 'sm' } })
+
+    expect(wrapper.find('[data-slot="button"]').classes()).toEqual(expect.arrayContaining(['[--ui-accent:var(--ui-error)]', 'text-xs']))
+    expect(wrapper.find('[data-slot="avatar"]').classes()).toContain('[--ui-accent:var(--ui-neutral)]')
+  })
+
+  it('reaches components with generic props', async () => {
+    const wrapper = await mountSuspended({
+      components: { UTheme, UInput },
+      template: `<UTheme :props="{ '*': { color: 'error', size: 'sm' } }"><UInput highlight /></UTheme>`
+    })
+
+    expect(wrapper.find('[data-slot="input"]').classes()).toContain('[--ui-accent:var(--ui-error)]')
+    expect(wrapper.find('[data-slot="input-base"]').classes()).toContain('text-sm/4')
+  })
+
+  it('lets a component\'s own key win', async () => {
+    const wrapper = await render({ '*': { color: 'error' }, 'button': { color: 'success' } })
+
+    expect(wrapper.find('[data-slot="button"]').classes()).toContain('[--ui-accent:var(--ui-success)]')
+  })
+
+  // A group passes down only what was set for it, so the `'*'` default doesn't
+  // reach a child as the group's own value and beat the child's key
+  it('lets a child\'s own key win inside a group', async () => {
+    const wrapper = await mountSuspended({
+      components: { UTheme, UFormField, UFieldGroup, UAvatarGroup, UInput, UButton, UAvatar },
+      template: `
+        <UTheme :props="{ '*': { size: 'xs' }, input: { size: 'xl' }, button: { size: 'xl' }, avatar: { size: 'xl' } }">
+          <UFormField label="Field"><UInput /></UFormField>
+          <UFieldGroup><UButton label="Button" /></UFieldGroup>
+          <UAvatarGroup><UAvatar alt="Benjamin Canac" /></UAvatarGroup>
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="input-base"]').classes()).toContain('text-base')
+    expect(wrapper.find('[data-slot="button"]').classes()).toContain('text-base')
+    expect(wrapper.find('[data-slot="avatar-group-base"]').classes()).toContain('size-10')
+  })
+
+  it('still reaches a child through a group', async () => {
+    const wrapper = await mountSuspended({
+      components: { UTheme, UFormField, UInput },
+      template: `<UTheme :props="{ '*': { size: 'xs' } }"><UFormField label="Field"><UInput /></UFormField></UTheme>`
+    })
+
+    expect(wrapper.find('[data-slot="input-base"]').classes()).toEqual(expect.arrayContaining(['px-2', 'py-1']))
+  })
+
+  describe('from app.config', () => {
+    let appConfig: { ui?: Record<string, any> }
+
+    beforeAll(() => {
+      appConfig = useAppConfig() as { ui?: Record<string, any> }
+      appConfig.ui ??= {}
+      appConfig.ui.defaultVariants = { color: 'warning' }
+    })
+
+    afterAll(() => {
+      delete appConfig.ui!.defaultVariants
+    })
+
+    it('applies app-wide, below `<UTheme>`', async () => {
+      const wrapper = await render({})
+      expect(wrapper.find('[data-slot="button"]').classes()).toContain('[--ui-accent:var(--ui-warning)]')
+
+      const themed = await render({ '*': { color: 'error' } })
+      expect(themed.find('[data-slot="button"]').classes()).toContain('[--ui-accent:var(--ui-error)]')
+    })
   })
 })

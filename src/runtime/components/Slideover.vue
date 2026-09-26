@@ -109,7 +109,7 @@ const _props = withDefaults(defineProps<SlideoverProps>(), {
 const emits = defineEmits<SlideoverEmits>()
 const slots = defineSlots<SlideoverSlots>()
 
-const props = useComponentProps('slideover', _props)
+const props = useComponentProps('slideover', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Slideover['AppConfig']

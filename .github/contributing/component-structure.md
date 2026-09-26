@@ -57,12 +57,12 @@ import { tv } from '../utils/tv'
 const _props = defineProps<ComponentNameProps>()
 const slots = defineSlots<ComponentNameSlots>()
 
-// 8. Theme-aware proxy: resolves explicit > <UTheme :props> > withDefaults
-//    > app.config.ui.<name>.defaultVariants. The `ui` prop is deep-merged
-//    automatically, so reach for `props.ui?.<slot>` in the template.
-//    `theme.defaultVariants` is NOT in this chain — it only feeds `tv()`
-//    class resolution.
-const props = useComponentProps('componentName', _props)
+// 8. Theme-aware proxy: resolves explicit > <UTheme :props> > <UTheme :props> '*'
+//    > app.config.ui.<name>.defaultVariants > app.config.ui.defaultVariants
+//    > withDefaults. The `ui` prop is deep-merged automatically, so reach for
+//    `props.ui?.<slot>` in the template. The theme is passed so `'*'` only
+//    replaces a `primary` color or an `md` size.
+const props = useComponentProps('componentName', _props, theme)
 
 // 9. App config
 const appConfig = useAppConfig() as ComponentName['AppConfig']
@@ -126,7 +126,7 @@ const emits = defineEmits<CollapsibleEmits>()
 const slots = defineSlots<CollapsibleSlots>()
 
 // Theme-aware proxy. `props` deep-merges `ui` and resolves <UTheme :props> defaults.
-const props = useComponentProps('collapsible', _props)
+const props = useComponentProps('collapsible', _props, theme)
 
 const appConfig = useAppConfig() as Collapsible['AppConfig']
 
@@ -304,7 +304,7 @@ defineExpose({
 
 ## Theme Defaults
 
-`useComponentProps` is the primary integration with `<UTheme>`. The proxy resolves the priority chain **explicit prop > nearest `<UTheme :props>` > `withDefaults` > `app.config.ui.<name>.defaultVariants`** for every prop — including ones driving template logic that `tv().defaultVariants` can't reach (`<component :is>`, `v-if`, computed conditionals). `theme.defaultVariants` is intentionally NOT in the proxy chain — it only feeds `tv()` class resolution. If a prop value is consumed in template logic, it must come from one of the proxy-resolved sources (typically `withDefaults`):
+`useComponentProps` is the primary integration with `<UTheme>`. The proxy resolves the priority chain **explicit prop > nearest `<UTheme :props>` > its `'*'` key > `app.config.ui.<name>.defaultVariants` > `app.config.ui.defaultVariants` > `withDefaults`** for every prop — including ones driving template logic that `tv().defaultVariants` can't reach (`<component :is>`, `v-if`, computed conditionals). The theme's `defaultVariants` are intentionally NOT in the proxy chain, they only feed `tv()` class resolution. The proxy reads them to apply `'*'` only where the default is `primary` or `md`, which is why the component passes `theme` as the third argument. If a prop value is consumed in template logic, it must come from one of the proxy-resolved sources (typically `withDefaults`):
 
 ```vue
 <template>

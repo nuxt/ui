@@ -129,7 +129,7 @@ const _props = withDefaults(defineProps<PricingPlanProps>(), {
 })
 const slots = defineSlots<PricingPlanSlots>()
 
-const props = useComponentProps('pricingPlan', _props)
+const props = useComponentProps('pricingPlan', _props, theme)
 
 const appConfig = useAppConfig() as PricingPlan['AppConfig']
 

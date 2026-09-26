@@ -276,7 +276,7 @@ const _props = withDefaults(defineProps<InputMenuProps<T, VK, M, Mod, C>>(), {
 const emits = defineEmits<InputMenuEmits<T, VK, M, Mod, C>>()
 const slots = defineSlots<InputMenuSlots<T, VK, M, Mod, C>>()
 
-const props = useComponentProps<InputMenuProps<T, VK, M, Mod, C>>('inputMenu', _props)
+const props = useComponentProps<InputMenuProps<T, VK, M, Mod, C>>('inputMenu', _props, theme)
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 

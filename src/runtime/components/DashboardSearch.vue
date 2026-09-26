@@ -94,7 +94,7 @@ const _props = withDefaults(defineProps<DashboardSearchProps>(), {
 })
 const slots = defineSlots<DashboardSearchSlots>()
 
-const props = useComponentProps('dashboardSearch', _props)
+const props = useComponentProps('dashboardSearch', _props, theme)
 
 const open = defineModel<boolean>('open', { default: false })
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
