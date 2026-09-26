@@ -29,14 +29,16 @@ afterAll(() => rmSync(app, { recursive: true, force: true }))
 async function build(overrides: Record<string, any>, vue?: { detectedComponents?: Set<string> }) {
   const options = { ...defaultOptions, ...overrides, theme: { ...defaultOptions.theme } }
   const templates = getTemplates(options as any, getDefaultConfig(options.theme), undefined, (...paths: string[]) => join(dist, ...paths), vue)
-  writeFileSync(join(app, 'ui.css'), await templates.find(template => template.filename === 'ui.css')!.getContents!({} as any))
+  for (const filename of ['ui.css', 'ui.base.css']) {
+    writeFileSync(join(app, filename), await templates.find(template => template.filename === filename)!.getContents!({} as any))
+  }
 
   const { compile } = await load('@tailwindcss/node')
   const { Scanner } = await load('@tailwindcss/oxide')
   const compiler = await compile(`@import "tailwindcss";\n@import "${join(dist, 'runtime/index.css')}";`, {
     base: app,
     onDependency: () => {},
-    customCssResolver: async (id: string) => id === '#build/ui.css' ? join(app, 'ui.css') : undefined
+    customCssResolver: async (id: string) => id.startsWith('#build/') ? join(app, id.slice('#build/'.length)) : undefined
   })
 
   return compiler.build(new Scanner({ sources: compiler.sources }).scan()) as string
