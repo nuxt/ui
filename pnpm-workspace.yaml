@@ -80,10 +80,10 @@ catalog:
   "@vitejs/plugin-vue": ^6.0.9
   "@vue/repl": ^4.7.2
   "@vue/test-utils": ^2.5.1
-  "@vueuse/core": ^14.4.0
-  "@vueuse/integrations": ^14.4.0
-  "@vueuse/nuxt": ^14.4.0
-  "@vueuse/shared": ^14.4.0
+  "@vueuse/core": ^15.0.0
+  "@vueuse/integrations": ^15.0.0
+  "@vueuse/nuxt": ^15.0.0
+  "@vueuse/shared": ^15.0.0
   ai: ^7.0.107
   capture-website: ^5.1.0
   citty: ^0.2.2
