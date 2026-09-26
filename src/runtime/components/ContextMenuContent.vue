@@ -126,7 +126,7 @@ const groups = computed<ContextMenuItem[][]>(() =>
         <div role="presentation" data-slot="context-menu-viewport" :class="ui.viewport({ class: uiOverride?.viewport })">
           <ContextMenu.Group v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" data-slot="context-menu-group" :class="ui.group({ class: uiOverride?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
-              <ContextMenu.Label v-if="item.type === 'label'" data-slot="context-menu-label" :class="ui.label({ class: [uiOverride?.label, item.ui?.label, item.class] })">
+              <ContextMenu.Label v-if="item.type === 'label'" data-slot="context-menu-label" :class="ui.label({ class: [uiOverride?.label, item.ui?.label, item.class], color: item?.color })">
                 <ReuseItemTemplate :item="item" :index="index" />
               </ContextMenu.Label>
               <ContextMenu.Separator v-else-if="item.type === 'separator'" data-slot="context-menu-separator" :class="ui.separator({ class: [uiOverride?.separator, item.ui?.separator, item.class] })" />
