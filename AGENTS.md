@@ -23,9 +23,9 @@ src/
 ├── runtime/
 │   ├── components/     # Vue components (PascalCase.vue)
 │   ├── composables/    # Composables (use*.ts)
+│   ├── theme/          # Variants themes (kebab-case.ts)
 │   ├── types/          # TypeScript types
 │   └── utils/          # Utility functions
-├── theme/              # Variants themes (kebab-case.ts)
 └── module.ts
 test/
 ├── bundle/             # Bundle size fixtures (`pnpm run size`)
