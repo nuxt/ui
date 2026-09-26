@@ -1,4 +1,4 @@
-import type { ModuleOptions } from '../module'
+import { colorVariant, colors } from './color'
 
 const daySizes = {
   xs: 'size-6',
@@ -16,7 +16,7 @@ const pickerSizes = {
   xl: 'h-10 px-5'
 }
 
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: '',
     header: 'flex items-center justify-between',
@@ -27,18 +27,16 @@ export default (options: Required<ModuleOptions>) => ({
     gridRow: 'grid',
     gridWeekDaysRow: 'mb-1 grid w-full grid-cols-7',
     gridBody: 'grid',
-    headCell: 'rounded-md',
+    headCell: 'rounded-md text-accent',
     headCellWeek: 'rounded-md text-muted',
     cell: 'relative text-center',
-    cellTrigger: 'm-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:outline-3 data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition',
+    cellTrigger: 'm-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:outline-3 data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition outline-accent-focus',
     cellWeek: 'relative text-center text-muted'
   },
   variants: {
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        headCell: `text-${color}`,
-        cellTrigger: `outline-${color}/25`
-      }])),
+      ...colorVariant({ root: '' }),
+      // Neutral hovers at 10% where the colors use 20%, so it keeps its own classes.
       neutral: {
         headCell: 'text-highlighted',
         cellTrigger: 'outline-inverted/25'
@@ -106,77 +104,85 @@ export default (options: Required<ModuleOptions>) => ({
       true: ''
     }
   },
-  compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
-    color,
-    variant: 'solid',
-    class: {
-      cellTrigger: `data-selected:bg-${color} data-selected:text-inverted data-today:not-data-selected:text-${color} data-highlighted:bg-${color}/20 hover:not-data-selected:bg-${color}/20`
-    }
-  })), ...(options.theme.colors || []).map((color: string) => ({
-    color,
-    variant: 'outline',
-    class: {
-      cellTrigger: `data-selected:ring data-selected:ring-inset data-selected:ring-${color}/50 data-selected:text-${color} data-selected:focus-visible:ring-${color} data-today:not-data-selected:text-${color} data-highlighted:bg-${color}/10 hover:not-data-selected:bg-${color}/10`
-    }
-  })), ...(options.theme.colors || []).map((color: string) => ({
-    color,
-    variant: 'soft',
-    class: {
-      cellTrigger: `data-selected:bg-${color}/10 data-selected:text-${color} data-today:not-data-selected:text-${color} data-highlighted:bg-${color}/20 hover:not-data-selected:bg-${color}/20`
-    }
-  })), ...(options.theme.colors || []).map((color: string) => ({
-    color,
-    variant: 'subtle',
-    class: {
-      cellTrigger: `data-selected:bg-${color}/10 data-selected:text-${color} data-selected:ring data-selected:ring-inset data-selected:ring-${color}/25 data-selected:focus-visible:ring-${color} data-today:not-data-selected:text-${color} data-highlighted:bg-${color}/20 hover:not-data-selected:bg-${color}/20`
-    }
-  })), {
-    color: 'neutral',
-    variant: 'solid',
-    class: {
-      cellTrigger: 'data-selected:bg-inverted data-selected:text-inverted data-today:not-data-selected:text-highlighted data-highlighted:bg-inverted/20 hover:not-data-selected:bg-inverted/10'
-    }
-  }, {
-    color: 'neutral',
-    variant: 'outline',
-    class: {
-      cellTrigger: 'data-selected:ring data-selected:ring-inset data-selected:ring-accented data-selected:text-default data-selected:bg-default data-selected:focus-visible:ring-inverted data-today:not-data-selected:text-highlighted data-highlighted:bg-inverted/10 hover:not-data-selected:bg-inverted/10'
-    }
-  }, {
-    color: 'neutral',
-    variant: 'soft',
-    class: {
-      cellTrigger: 'data-selected:bg-elevated data-selected:text-default data-today:not-data-selected:text-highlighted data-highlighted:bg-inverted/20 hover:not-data-selected:bg-inverted/10'
-    }
-  }, {
-    color: 'neutral',
-    variant: 'subtle',
-    class: {
-      cellTrigger: 'data-selected:bg-elevated data-selected:text-default data-selected:ring data-selected:ring-inset data-selected:ring-accented data-selected:focus-visible:ring-inverted data-today:not-data-selected:text-highlighted data-highlighted:bg-inverted/20 hover:not-data-selected:bg-inverted/10'
-    }
-  },
-  ...Object.entries(daySizes).map(([size, cellTrigger]) => ({
-    size,
-    view: 'day',
-    class: { cellTrigger }
-  })),
-  ...Object.entries(pickerSizes).map(([size, cellTrigger]) => ({
-    size,
-    view: ['month', 'year'],
-    class: { cellTrigger }
-  })),
-  {
-    view: 'day',
-    weekNumbers: true,
-    class: {
-      gridRow: 'grid-cols-8',
-      gridWeekDaysRow: 'grid-cols-8 [&>*:first-child]:col-start-2'
-    }
-  }],
+  compoundVariants: [
+    {
+      color: colors.filter(color => color !== 'neutral'),
+      variant: 'solid',
+      class: {
+        cellTrigger: 'data-selected:bg-accent data-selected:text-accent-foreground data-today:not-data-selected:text-accent data-highlighted:bg-accent-soft-active hover:not-data-selected:bg-accent-soft-active'
+      }
+    },
+    {
+      color: colors.filter(color => color !== 'neutral'),
+      variant: 'outline',
+      class: {
+        cellTrigger: 'data-selected:ring data-selected:ring-inset data-selected:ring-accent-border data-selected:text-accent data-selected:focus-visible:ring-accent data-today:not-data-selected:text-accent data-highlighted:bg-accent-soft hover:not-data-selected:bg-accent-soft'
+      }
+    },
+    {
+      color: colors.filter(color => color !== 'neutral'),
+      variant: 'soft',
+      class: {
+        cellTrigger: 'data-selected:bg-accent-soft data-selected:text-accent-soft-foreground data-today:not-data-selected:text-accent data-highlighted:bg-accent-soft-active hover:not-data-selected:bg-accent-soft-active'
+      }
+    },
+    {
+      color: colors.filter(color => color !== 'neutral'),
+      variant: 'subtle',
+      class: {
+        cellTrigger: 'data-selected:bg-accent-soft data-selected:text-accent-soft-foreground data-selected:ring data-selected:ring-inset data-selected:ring-accent-border-soft data-selected:focus-visible:ring-accent data-today:not-data-selected:text-accent data-highlighted:bg-accent-soft-active hover:not-data-selected:bg-accent-soft-active'
+      }
+    },
+    {
+      color: 'neutral',
+      variant: 'solid',
+      class: {
+        cellTrigger: 'data-selected:bg-inverted data-selected:text-inverted data-today:not-data-selected:text-highlighted data-highlighted:bg-inverted/20 hover:not-data-selected:bg-inverted/10'
+      }
+    },
+    {
+      color: 'neutral',
+      variant: 'outline',
+      class: {
+        cellTrigger: 'data-selected:ring data-selected:ring-inset data-selected:ring-accented data-selected:text-default data-selected:bg-default data-selected:focus-visible:ring-inverted data-today:not-data-selected:text-highlighted data-highlighted:bg-inverted/10 hover:not-data-selected:bg-inverted/10'
+      }
+    },
+    {
+      color: 'neutral',
+      variant: 'soft',
+      class: {
+        cellTrigger: 'data-selected:bg-elevated data-selected:text-default data-today:not-data-selected:text-highlighted data-highlighted:bg-inverted/20 hover:not-data-selected:bg-inverted/10'
+      }
+    },
+    {
+      color: 'neutral',
+      variant: 'subtle',
+      class: {
+        cellTrigger: 'data-selected:bg-elevated data-selected:text-default data-selected:ring data-selected:ring-inset data-selected:ring-accented data-selected:focus-visible:ring-inverted data-today:not-data-selected:text-highlighted data-highlighted:bg-inverted/20 hover:not-data-selected:bg-inverted/10'
+      }
+    },
+    ...Object.entries(daySizes).map(([size, cellTrigger]) => ({
+      size,
+      view: 'day',
+      class: { cellTrigger }
+    })),
+    ...Object.entries(pickerSizes).map(([size, cellTrigger]) => ({
+      size,
+      view: ['month', 'year'],
+      class: { cellTrigger }
+    })),
+    {
+      view: 'day',
+      weekNumbers: true,
+      class: {
+        gridRow: 'grid-cols-8',
+        gridWeekDaysRow: 'grid-cols-8 [&>*:first-child]:col-start-2'
+      }
+    }],
   defaultVariants: {
     size: 'md',
     color: 'primary',
     variant: 'solid',
     view: 'day'
   }
-})
+}

@@ -1,6 +1,6 @@
-import type { ModuleOptions } from '../module'
+import { colorVariant } from './color'
 
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'relative overflow-auto outline-primary/25 focus-visible:outline-3',
     base: 'min-w-full overflow-clip',
@@ -36,7 +36,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     loading: {
       true: {
-        thead: 'after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse'
+        thead: 'after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-accent'
       }
     },
     externalScroll: {
@@ -50,24 +50,9 @@ export default (options: Required<ModuleOptions>) => ({
       'swing': '',
       'elastic': ''
     },
-    loadingColor: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
-      neutral: ''
-    }
+    loadingColor: colorVariant({ thead: '' })
   },
-  compoundVariants: [...(options.theme.colors || []).map((loadingColor: string) => ({
-    loading: true,
-    loadingColor,
-    class: {
-      thead: `after:bg-${loadingColor}`
-    }
-  })), {
-    loading: true,
-    loadingColor: 'neutral',
-    class: {
-      thead: 'after:bg-inverted'
-    }
-  }, {
+  compoundVariants: [{
     loading: true,
     loadingAnimation: 'carousel',
     class: {
@@ -96,4 +81,4 @@ export default (options: Required<ModuleOptions>) => ({
     loadingColor: 'primary',
     loadingAnimation: 'carousel'
   }
-})
+}

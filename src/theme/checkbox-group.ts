@@ -1,8 +1,8 @@
-import type { ModuleOptions } from '../module'
+import { colorVariant } from './color'
 // `table` is defined here rather than in checkbox.ts, so its focus ring is too
 import { focusCard, hover } from './checkbox'
 
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'relative',
     fieldset: 'flex gap-x-2',
@@ -18,10 +18,7 @@ export default (options: Required<ModuleOptions>) => ({
         fieldset: 'flex-col'
       }
     },
-    color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {}])),
-      neutral: {}
-    },
+    color: colorVariant({ root: '' }),
     variant: {
       list: {
         fieldset: 'flex-wrap'
@@ -30,7 +27,7 @@ export default (options: Required<ModuleOptions>) => ({
         fieldset: 'flex-wrap'
       },
       table: {
-        item: `border border-default ${hover}bg-elevated/50 transition-colors`
+        item: `border border-default ${hover}bg-elevated/50 transition-colors ${focusCard} has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent-border-strong has-data-[state=checked]:z-[1]`
       }
     },
     size: {
@@ -69,13 +66,6 @@ export default (options: Required<ModuleOptions>) => ({
     }
   },
   compoundVariants: [
-    ...[...(options.theme.colors || []).map((color: string) => [color, color]), ['neutral', 'inverted']].map(([color, token]: string[]) => ({
-      color,
-      variant: 'table',
-      class: {
-        item: focusCard(token!)
-      }
-    })),
     {
       variant: 'table',
       highlight: false,
@@ -104,20 +94,6 @@ export default (options: Required<ModuleOptions>) => ({
         fieldset: 'gap-0 -space-y-px'
       }
     },
-    ...(options.theme.colors || []).map((color: string) => ({
-      color,
-      variant: 'table',
-      class: {
-        item: `has-data-[state=checked]:bg-${color}/10 has-data-[state=checked]:border-${color}/50 has-data-[state=checked]:z-[1]`
-      }
-    })),
-    {
-      color: 'neutral',
-      variant: 'table',
-      class: {
-        item: 'has-data-[state=checked]:bg-elevated has-data-[state=checked]:border-inverted/50 has-data-[state=checked]:z-[1]'
-      }
-    },
     {
       variant: 'table',
       disabled: true,
@@ -132,4 +108,4 @@ export default (options: Required<ModuleOptions>) => ({
     variant: 'list',
     color: 'primary'
   }
-})
+}

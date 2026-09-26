@@ -1,7 +1,7 @@
-import type { ModuleOptions } from '../module'
+import { colorVariant } from './color'
 import { focusCard, focusControl, hover } from './checkbox'
 
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'relative',
     fieldset: 'flex gap-x-2',
@@ -9,21 +9,14 @@ export default (options: Required<ModuleOptions>) => ({
     item: 'flex items-start',
     container: 'flex items-center',
     base: 'rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-none',
-    indicator: 'flex items-center justify-center size-full after:bg-default after:rounded-full',
+    indicator: 'flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent',
     wrapper: 'w-full',
     label: 'block font-medium text-default',
     icon: 'shrink-0',
     description: 'text-muted'
   },
   variants: {
-    color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        indicator: `bg-${color}`
-      }])),
-      neutral: {
-        indicator: 'bg-inverted'
-      }
-    },
+    color: colorVariant({ root: '' }),
     variant: {
       list: {
         fieldset: 'flex-wrap',
@@ -31,10 +24,10 @@ export default (options: Required<ModuleOptions>) => ({
       },
       card: {
         fieldset: 'flex-wrap',
-        item: `border border-default rounded-lg ${hover}bg-elevated/50 transition-colors`
+        item: `border border-default rounded-lg ${hover}bg-elevated/50 transition-colors has-data-[state=checked]:border-accent-border-strong has-data-[state=checked]:bg-accent-soft`
       },
       table: {
-        item: `border border-default ${hover}bg-elevated/50 transition-colors`
+        item: `border border-default ${hover}bg-elevated/50 transition-colors has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent-border-strong has-data-[state=checked]:z-[1]`
       }
     },
     orientation: {
@@ -102,7 +95,9 @@ export default (options: Required<ModuleOptions>) => ({
       }
     },
     highlight: {
-      true: '',
+      true: {
+        base: 'ring-accent'
+      },
       false: ''
     },
     disabled: {
@@ -159,55 +154,24 @@ export default (options: Required<ModuleOptions>) => ({
         fieldset: 'gap-0 -space-y-px'
       }
     },
-    ...[...(options.theme.colors || []).map((color: string) => [color, color]), ['neutral', 'inverted']].map(([color, token]: string[]) => ({
-      color,
+    {
       variant: 'list',
       indicator: ['start', 'end'],
       class: {
-        base: focusControl(token!)
+        base: focusControl
       }
-    })),
-    ...[...(options.theme.colors || []).map((color: string) => [color, color]), ['neutral', 'inverted']].map(([color, token]: string[]) => ({
-      color,
+    },
+    {
       variant: ['card', 'table'],
       class: {
-        item: focusCard(token!)
+        item: focusCard
       }
-    })),
-    ...[...(options.theme.colors || []).map((color: string) => [color, color]), ['neutral', 'inverted']].map(([color, token]: string[]) => ({
-      color,
+    },
+    {
       variant: 'list',
       indicator: 'hidden',
       class: {
-        item: focusCard(token!)
-      }
-    })),
-    ...(options.theme.colors || []).map((color: string) => ({
-      color,
-      variant: 'card',
-      class: {
-        item: `has-data-[state=checked]:border-${color}/50 has-data-[state=checked]:bg-${color}/10`
-      }
-    })),
-    {
-      color: 'neutral',
-      variant: 'card',
-      class: {
-        item: 'has-data-[state=checked]:border-inverted/50 has-data-[state=checked]:bg-elevated'
-      }
-    },
-    ...(options.theme.colors || []).map((color: string) => ({
-      color,
-      variant: 'table',
-      class: {
-        item: `has-data-[state=checked]:bg-${color}/10 has-data-[state=checked]:border-${color}/50 has-data-[state=checked]:z-[1]`
-      }
-    })),
-    {
-      color: 'neutral',
-      variant: 'table',
-      class: {
-        item: 'has-data-[state=checked]:bg-elevated has-data-[state=checked]:border-inverted/50 has-data-[state=checked]:z-[1]'
+        item: focusCard
       }
     },
     {
@@ -217,34 +181,11 @@ export default (options: Required<ModuleOptions>) => ({
         item: 'cursor-not-allowed'
       }
     },
-    ...(options.theme.colors || []).map((color: string) => ({
-      color,
+    {
       indicator: 'hidden',
       highlight: true,
       class: {
-        item: `not-has-disabled:border-${color} not-has-disabled:has-data-[state=checked]:border-${color}`
-      }
-    })),
-    {
-      color: 'neutral',
-      indicator: 'hidden',
-      highlight: true,
-      class: {
-        item: 'not-has-disabled:border-inverted not-has-disabled:has-data-[state=checked]:border-inverted'
-      }
-    },
-    ...(options.theme.colors || []).map((color: string) => ({
-      color,
-      highlight: true,
-      class: {
-        base: `ring-${color}`
-      }
-    })),
-    {
-      color: 'neutral',
-      highlight: true,
-      class: {
-        base: 'ring-inverted'
+        item: 'not-has-disabled:border-accent not-has-disabled:has-data-[state=checked]:border-accent'
       }
     }
   ],
@@ -255,4 +196,4 @@ export default (options: Required<ModuleOptions>) => ({
     variant: 'list',
     indicator: 'start'
   }
-})
+}

@@ -21,15 +21,15 @@ variants: {
   }
 },
 compoundVariants: [{
-  color: 'neutral',
-  variant: 'solid',
-  class: { base: 'text-inverted bg-inverted' }
+  size: 'xs',
+  square: true,
+  class: { base: 'p-1' }
 }]
 ```
 
-## Static Theme (Simple Components)
+## Static Theme
 
-For components without dynamic colors:
+A theme is a plain object. It never reads module options, so every class it can produce is written in the file and Tailwind finds it by scanning.
 
 ```ts
 export default {
@@ -50,14 +50,14 @@ export default {
 }
 ```
 
-## Dynamic Theme (With Module Options)
+## Colors
 
-For components using theme colors:
+A component with a `color` prop doesn't repeat its classes per color. `colorVariant` from `./color` builds the `color` group: each color sets `--ui-accent` on the slots you pass, and the classes read it through the `accent` utilities listed in [Accent Tokens](#accent-tokens). The variant then holds one set of classes for every color, with no `color` compounds:
 
 ```ts
-import type { ModuleOptions } from '../module'
+import { colorVariant } from './color'
 
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     base: 'font-medium inline-flex items-center transition-colors',
     label: 'truncate',
@@ -65,72 +65,46 @@ export default (options: Required<ModuleOptions>) => ({
     trailingIcon: 'shrink-0'
   },
   variants: {
-    color: {
-      // Dynamic colors from module options
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
-      neutral: ''
-    },
+    // Sets `--ui-accent` on `base` for each color
+    color: colorVariant({ base: '' }),
     variant: {
-      solid: '',
-      outline: '',
-      soft: '',
-      subtle: ''
+      solid: { base: 'text-accent-foreground bg-accent hover:bg-accent-hover' },
+      outline: { base: 'ring ring-inset ring-accent-border text-accent-soft-foreground bg-accent-surface' },
+      soft: { base: 'text-accent-soft-foreground bg-accent-soft' }
     },
     size: {
       xs: { base: 'text-xs px-2 py-1', leadingIcon: 'size-3' },
-      sm: { base: 'text-xs px-2.5 py-1.5', leadingIcon: 'size-4' },
-      md: { base: 'text-sm px-2.5 py-1.5', leadingIcon: 'size-5' },
-      lg: { base: 'text-sm px-3 py-2', leadingIcon: 'size-5' },
-      xl: { base: 'text-base px-3 py-2', leadingIcon: 'size-6' }
+      md: { base: 'text-sm px-2.5 py-1.5', leadingIcon: 'size-5' }
     }
   },
-  compoundVariants: [
-    // Color + variant combinations
-    ...(options.theme.colors || []).map((color: string) => ({
-      color,
-      variant: 'solid',
-      class: { base: `bg-${color} text-inverted` }
-    })),
-    ...(options.theme.colors || []).map((color: string) => ({
-      color,
-      variant: 'outline',
-      class: { base: `text-${color} ring ring-inset ring-${color}/50` }
-    })),
-    // Neutral variants
-    {
-      color: 'neutral',
-      variant: 'solid',
-      class: { base: 'text-inverted bg-inverted' }
-    },
-    {
-      color: 'neutral',
-      variant: 'outline',
-      class: { base: 'ring ring-inset ring-accented text-default bg-default' }
-    }
-  ],
   defaultVariants: {
     color: 'primary',
     variant: 'solid',
     size: 'md'
   }
-})
+}
 ```
+
+Scope the root slot, so a `[--ui-accent:…]` class on the component reaches all of it, and don't scope a slot inside it again. Scope an inner slot only when its color differs from the root's: a per-item color, a slot rendered as another component with its own color, like Timeline's indicator, which is an Avatar, a part rendered in a portal, or the one colored part of a component that wraps your content, like the dot of a Chip. A theme that extends another and drops its `root` slot scopes its own outer slot, as Select does with `color: () => colorVariant({ base: '' })`. `neutral` needs no entry of its own: it sets the accent roles to the surface tokens, so the same classes render the neutral look.
+
+Every slot passed to `colorVariant` gets the scope, so put the classes the colors share in `slots`. A component whose neutral is a different design, not a neutral version of the colored one, overrides the `neutral` entry, which replaces those classes and the scope, so its own classes can't read `accent`: `{ ...colorVariant({ base: '' }), neutral: { base: '...', icon: '...' } }`.
+
+For a second color on the same element, use `highlightColorVariant` (sets `--ui-highlight`) or `spotlightColorVariant` (sets `--spotlight-color`). A compound that still has to match colors lists them with `colors` from the same file, never with a template string: `color: colors.filter(color => color !== 'neutral')`.
 
 ## Reusing Variants
 
 Import shared variants from other themes:
 
 ```ts
-import type { ModuleOptions } from '../module'
 import { fieldGroupVariant } from './field-group'
 
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: { ... },
   variants: {
     ...fieldGroupVariant,
     // Additional variants
   }
-})
+}
 ```
 
 ## Semantic Colors
@@ -156,17 +130,21 @@ Always use semantic colors, never Tailwind palette colors:
 - `ring-accented` - Accented rings
 - `divide-default` - Dividers
 
-### Theme Colors
-Primary colors used with variants:
-- `primary`, `secondary`, `success`, `info`, `warning`, `error`, `neutral`
+### Accent Tokens
+The `color` prop accepts `primary`, `secondary`, `success`, `info`, `warning`, `error` and `neutral`. Colored classes read the scoped color through `accent` roles, never through an alias name or an opacity modifier:
+- `bg-accent` - The color itself
+- `text-accent-foreground` - Text on a solid accent background
+- `bg-accent-hover` - Hover of a solid background
+- `bg-accent-soft` / `bg-accent-soft-hover` / `bg-accent-soft-active` - Tinted background, its hover and its selected state
+- `text-accent-soft-foreground` - Text on a tinted background
+- `ring-accent-border` / `ring-accent-border-soft` / `ring-accent-border-muted` / `border-accent-border-strong` - Colored borders
+- `outline-accent-focus` - Focus outline
+- `bg-accent-surface` - Resting background of an outlined element
+- `bg-accent-tint` - Light tint on large surfaces
+- `text-accent-muted` / `text-accent-muted-hover` / `text-accent-faint` - Secondary and faint text
+- `border-accent-line` - Separator line
 
-Usage in compoundVariants:
-```ts
-`bg-${color}` // background
-`text-${color}` // text color
-`ring-${color}` // ring/border
-`ring-${color}/50` // with opacity
-```
+The full list with values is in `src/templates.ts` and the [CSS Variables](../../docs/content/docs/1.getting-started/5.theme/2.css-variables.md#accent) docs.
 
 ## Logical Properties (RTL)
 

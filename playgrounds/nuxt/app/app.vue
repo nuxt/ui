@@ -56,7 +56,7 @@ provide('components', components)
         v-else
         :ui="{
           body: [
-            route.path.startsWith('/components') && 'mt-16',
+            (route.path.startsWith('/components') || route.path === '/colors') && 'mt-16',
             route.path.startsWith('/components/scroll-area') && 'p-0!'
           ]
         }"
