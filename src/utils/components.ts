@@ -10,6 +10,7 @@ import { resolvePathSync } from 'mlly'
  * Pattern to match:
  * - <UButton in templates
  * - <u-button in templates (kebab-case, mandatory for in-DOM templates)
+ * - u-button at the start of a line or after `: ` (Pug templates)
  * - UButton in script (imports, usage)
  * - <LazyUButton / <lazy-u-button (lazy components)
  * - LazyUButton in script
@@ -22,7 +23,7 @@ function createComponentPattern(prefix: string): RegExp {
   const escapedPrefix = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
   const kebabPrefix = kebabCase(prefix).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
-  return new RegExp(`<(?:Lazy)?${escapedPrefix}([A-Z][a-zA-Z]+)|<(?:lazy-)?${kebabPrefix}-([a-z][a-z0-9-]*)|\\b(?:Lazy)?${escapedPrefix}([A-Z][a-zA-Z]+)\\b`, 'g')
+  return new RegExp(`<(?:Lazy)?${escapedPrefix}([A-Z][a-zA-Z]+)|(?:<|^[ \\t]*|:[ \\t]+)(?:lazy-)?${kebabPrefix}-([a-z][a-z0-9-]*)|\\b(?:Lazy)?${escapedPrefix}([A-Z][a-zA-Z]+)\\b`, 'gm')
 }
 
 /**
