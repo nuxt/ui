@@ -195,6 +195,8 @@ Use the `nested` prop to nest multiple Form components and link their validation
 
 Nested forms directly inherit their parent's state, so you don't need to define a separate state for them. You can use the `name` prop to target a nested attribute within the parent's state.
 
+Nested forms also inherit the parent's `disabled` prop and loading state, so disabling or submitting the parent form disables the nested fields too.
+
 It can be used to dynamically add fields based on user's input:
 
 ::component-example

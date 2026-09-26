@@ -89,6 +89,26 @@ export function getAtPath<T extends object>(
   return value
 }
 
+function isPlainObject(value: unknown): value is Record<string, any> {
+  if (value === null || typeof value !== 'object') return false
+  const proto = Object.getPrototypeOf(value)
+  return proto === Object.prototype || proto === null
+}
+
+/**
+ * Returns a copy of `data` with `value` merged in at `path`, copying each level on the way so `data` is never mutated.
+ */
+export function mergeAtPath<T>(data: T, path: string | undefined, value: any): T {
+  if (!path) {
+    return isPlainObject(data) && isPlainObject(value) ? { ...data, ...value } as T : value
+  }
+
+  const [key, ...rest] = path.split('.') as [string, ...string[]]
+  const copy: any = Array.isArray(data) ? [...data] : data == null && /^\d+$/.test(key) ? [] : { ...data }
+  copy[key] = mergeAtPath(copy[key], rest.join('.'), value)
+  return copy
+}
+
 export function setAtPath<T extends object>(
   data: T,
   path: string,

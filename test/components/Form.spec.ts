@@ -1,4 +1,4 @@
-import { nextTick, watch } from 'vue'
+import { nextTick, watch, isReactive } from 'vue'
 import { describe, expect, it, beforeEach, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { flushPromises } from '@vue/test-utils'
@@ -6,7 +6,7 @@ import * as z from 'zod'
 import * as yup from 'yup'
 import Joi from 'joi'
 import * as valibot from 'valibot'
-import { object, string, nonempty, refine } from 'superstruct'
+import { object, string, nonempty, refine, type } from 'superstruct'
 import { renderEach } from '../component-render'
 import { renderForm } from '../utils/form'
 import UForm from '../../src/runtime/components/Form.vue'
@@ -483,6 +483,45 @@ describe('Form', () => {
       expect(onSubmit).toHaveBeenCalledTimes(1)
       expect(onError).toHaveBeenCalledTimes(0)
     })
+
+    it('routes errors through unnamed nested forms', async () => {
+      const wrapper: any = await renderForm({ fixture: 'FormNestedDeep' })
+      await flushPromises()
+
+      const form = wrapper.setupState.form.value
+      form.setErrors([{ name: 'address.street', message: 'Server error' }, { name: 'address.zip', message: 'Unknown zip' }])
+      await nextTick()
+
+      expect(wrapper.find('#streetField').text()).toContain('Server error')
+      expect(form.errors.map((error: any) => error.name)).toEqual(['address.street', 'address.zip'])
+
+      form.setErrors([{ name: 'email', message: 'Taken' }], 'email')
+      form.setErrors([{ name: 'email', message: 'Taken' }], 'email')
+      expect(form.errors.map((error: any) => error.name)).toEqual(['email', 'address.street', 'address.zip'])
+    })
+
+    it('passes disabled down to nested forms', async () => {
+      const wrapper: any = await renderForm({ fixture: 'FormNested', props: { disabled: true } })
+
+      expect(wrapper.find('#nested').attributes('disabled')).toBeDefined()
+    })
+
+    it('disables nested fields while the parent submits', async () => {
+      let resolve!: () => void
+      const wrapper: any = await renderForm({
+        fixture: 'FormNested',
+        props: { onSubmit: () => new Promise<void>(r => (resolve = r)) }
+      })
+      const form = wrapper.setupState.form.value
+      Object.assign(wrapper.setupState.state, { email: 'bob@dylan.com', password: 'strongpassword', nested: { field: 'nested' } })
+
+      const submitting = form.submit()
+      await flushPromises()
+      expect(wrapper.find('#nested').attributes('disabled')).toBeDefined()
+
+      resolve()
+      await submitting
+    })
   })
   describe('nested API operations', async () => {
     let wrapper: any
@@ -659,6 +698,34 @@ describe('Form', () => {
         }))
       }
     )
+
+    it.each([
+      ['without a schema', {}],
+      ['with a validate function', { validate: () => [] }]
+    ])('merges an unnamed nested form into a parent %s', async (_, props) => {
+      const onSubmit = vi.fn()
+      const wrapper: any = await renderForm({ fixture: 'FormNestedTransform', props: { ...props, onSubmit } })
+
+      await wrapper.setupState.form.value.submit()
+
+      expect(onSubmit.mock.lastCall![0].data.field).toBe('ABC')
+    })
+
+    it.each([
+      ['without a schema', {}],
+      ['with a superstruct schema', { schema: type({ field: string() }) }],
+      ['with a yup schema', { schema: yup.object({ field: yup.string() }) }]
+    ])('merges a named nested form into a parent %s without mutating state', async (_, props) => {
+      const onSubmit = vi.fn()
+      const wrapper: any = await renderForm({ fixture: 'FormNestedTransform', props: { ...props, nestedName: 'nested', onSubmit } })
+
+      await wrapper.setupState.form.value.submit()
+
+      const { data } = onSubmit.mock.lastCall![0]
+      expect(data.nested.field).toBe('ABC')
+      expect(isReactive(data)).toBe(false)
+      expect(wrapper.setupState.state.nested.field).toBe('abc')
+    })
   })
 
   it('form field errorPattern works', async () => {
@@ -667,6 +734,20 @@ describe('Form', () => {
     form.submit()
     await flushPromises()
     expect(wrapper.html()).toContain('Error message')
+  })
+
+  it('setErrors keeps errors without a registered field', async () => {
+    const wrapper: any = await renderForm({ fixture: 'FormErrorPattern' })
+    const form = wrapper.setupState.form.value
+
+    form.setErrors([{ name: 'email.1', message: 'Server error' }, { name: 'general', message: 'Try again' }])
+    await nextTick()
+
+    expect(form.errors.map((error: any) => error.name)).toEqual(['email.1', 'general'])
+    expect(wrapper.find('#emailField').text()).toContain('Server error')
+
+    form.clear('general')
+    expect(form.errors.map((error: any) => error.name)).toEqual(['email.1'])
   })
 
   it('works with empty fields', async () => {
