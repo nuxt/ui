@@ -1,5 +1,5 @@
 import { colorVariant } from './color'
-import { focusCard, focusControl, hover } from './checkbox'
+import { focusCard, focusControl } from './checkbox'
 
 export default {
   slots: {
@@ -24,10 +24,10 @@ export default {
       },
       card: {
         fieldset: 'flex-wrap',
-        item: `border border-default rounded-lg ${hover}bg-elevated/50 transition-colors has-data-[state=checked]:border-accent-border-strong has-data-[state=checked]:bg-accent-soft`
+        item: `border border-default rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors has-data-[state=checked]:border-accent-border-strong has-data-[state=checked]:bg-accent-soft`
       },
       table: {
-        item: `border border-default ${hover}bg-elevated/50 transition-colors has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent-border-strong has-data-[state=checked]:z-[1]`
+        item: `border border-default hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent-border-strong has-data-[state=checked]:z-[1]`
       }
     },
     orientation: {
@@ -110,7 +110,7 @@ export default {
     },
     required: {
       true: {
-        legend: 'after:content-[\'*\'] after:ms-0.5 after:text-error'
+        legend: `after:content-['*'] after:ms-0.5 after:text-error`
       }
     }
   },
@@ -125,7 +125,7 @@ export default {
       variant: ['card', 'table'],
       highlight: false,
       class: {
-        item: `${hover}border-accented`
+        item: 'hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-accented'
       }
     },
     { size: 'xs', indicator: 'hidden', class: { icon: 'size-3' } },

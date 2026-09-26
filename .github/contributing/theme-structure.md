@@ -31,6 +31,8 @@ compoundVariants: [{
 
 A theme is a plain object. It never reads module options, so every class it can produce is written in the file and Tailwind finds it by scanning.
 
+Write each class out whole. A class built at runtime, from a template literal (`` `${hover}bg-elevated` ``), a helper that maps or rewrites classes, or a string with escaped quotes (`'content-[\'*\']'`), never reaches Tailwind's scanner and gets no CSS. Use backticks for a class that holds quotes, and give a helper that rewrites classes its results as literals, like `replaceFocus` in `input.ts`. The `theme classes` test in `test/utils/theme-slots.spec.ts` fails on any class the themes resolve to that isn't spelled out in `src/theme`.
+
 ```ts
 export default {
   slots: {
