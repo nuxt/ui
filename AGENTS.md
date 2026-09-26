@@ -23,9 +23,9 @@ src/
 ├── runtime/
 │   ├── components/     # Vue components (PascalCase.vue)
 │   ├── composables/    # Composables (use*.ts)
+│   ├── theme/          # Variants themes (kebab-case.ts)
 │   ├── types/          # TypeScript types
 │   └── utils/          # Utility functions
-├── theme/              # Variants themes (kebab-case.ts)
 └── module.ts
 test/
 ├── bundle/             # Bundle size fixtures (`pnpm run size`)
@@ -114,7 +114,7 @@ Component: [name]
 Progress:
 - [ ] 1. Scaffold with CLI: pnpm cli make component <name>
 - [ ] 2. Implement component in src/runtime/components/
-- [ ] 3. Create theme in src/theme/
+- [ ] 3. Create theme in src/runtime/theme/
 - [ ] 4. Export types from src/runtime/types/index.ts
 - [ ] 5. Register in ThemeDefaults interface (src/runtime/types/theme.ts)
 - [ ] 6. Write tests in test/components/

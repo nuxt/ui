@@ -1,7 +1,11 @@
 import { describe, it, expect, expectTypeOf, vi } from 'vitest'
 import { reactive } from 'vue'
 import { tv } from '../../src/runtime/utils/tv'
-import type { VariantProps } from '../../src/runtime/types/tv'
+import type { TVTheme, VariantProps } from '../../src/runtime/types/tv'
+import { extendTheme } from '../../src/runtime/utils/theme'
+import buttonTheme from '../../src/runtime/theme/button'
+import selectTheme from '../../src/runtime/theme/select'
+import stepsTheme from '../../src/runtime/theme/prose/steps'
 
 // Cast to a permissive local signature: the strongly-typed `tv` is what
 // components rely on, whereas these tests exercise the engine at runtime with
@@ -701,5 +705,47 @@ describe('tv spec sharing', () => {
     expect(tvt(theme, {})().base(props)).toBe('inline-flex font-bold')
     expect(tvt(theme, null)().base(props)).toBe('inline-flex font-bold')
     expect(counter.reads).toBe(hit * 2)
+  })
+})
+
+// Components pass their theme source to `tv()` as is: `defineTheme` keeps the
+// variant values literal and `extendTheme` keeps the slots and variants of both
+// the base and the extension.
+describe('tv theme sources', () => {
+  it('takes a theme source', () => {
+    expect(tv(buttonTheme)({ color: 'error' }).base()).toContain('[--ui-accent:var(--ui-error)]')
+    expectTypeOf(buttonTheme.defaultVariants.color).toEqualTypeOf<'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral'>()
+
+    // @ts-expect-error not a color
+    tv(buttonTheme)({ color: 'tertiary' })
+  })
+
+  it('takes an extended theme source', () => {
+    const ui = tv(selectTheme)({ variant: 'soft', position: 'item-aligned' })
+
+    expect(ui.content()).toContain('origin-(--reka-select-content-transform-origin)')
+    expectTypeOf(ui.leadingIcon).toBeFunction()
+    expectTypeOf(selectTheme.defaultVariants.variant).toEqualTypeOf<'outline' | 'soft' | 'subtle' | 'ghost' | 'none'>()
+  })
+
+  it('keeps a callback typed as a function when the base has no value for it', () => {
+    const theme = extendTheme(buttonTheme, { variants: { tone: () => ({ soft: { base: 'opacity-75' } }) } })
+    const check = (value: TVTheme) => value
+
+    // `defuFn` only calls a callback with a base value, so `tone` stays a function
+    expect(theme.variants.tone).toBeTypeOf('function')
+    // @ts-expect-error a variant group can't be a function
+    check(theme)
+  })
+
+  it('rejects a default an extended theme\'s variant doesn\'t accept', () => {
+    const theme = extendTheme(buttonTheme, { defaultVariants: { variant: 'nope' } })
+
+    // @ts-expect-error `nope` is not a Button variant
+    expect(() => tv(theme)).not.toThrow()
+  })
+
+  it('matches a numeric variant key by its string form', () => {
+    expect(tv(stepsTheme)({ level: '4' }).base()).toBe(tv(stepsTheme)({ level: 4 }).base())
   })
 })
