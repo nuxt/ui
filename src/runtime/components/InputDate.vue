@@ -3,7 +3,6 @@ import type { ComponentPublicInstance, VNode } from 'vue'
 import type { DateFieldRootProps, DateFieldRootEmits, DateRangeFieldRootProps, DateRangeFieldRootEmits, DateValue, SegmentPart } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { AvatarProps } from './Avatar.vue'
 import type { IconProps } from './Icon.vue'
 import type { ComponentConfig } from '../types/tv'
 import theme from '#build/ui/input-date'
@@ -80,6 +79,7 @@ import { useFieldGroup } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { tv } from '../utils/tv'
+import { getAvatarSize } from '../utils/size'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 
@@ -115,6 +115,8 @@ const highlight = computed(() => formFieldHighlight.value ?? props.highlight)
 const size = computed(() => fieldGroupSize.value ?? formFieldSize.value ?? props.size)
 
 const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
+
+const avatarSize = computed(() => getAvatarSize(size.value))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
@@ -232,7 +234,7 @@ defineExpose({
     <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="input-date-leading" :class="ui.leading({ class: props.ui?.leading })">
       <slot name="leading" :ui="ui">
         <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="input-date-leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
-        <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="input-date-leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
+        <UAvatar v-else-if="!!props.avatar" :size="avatarSize" v-bind="props.avatar" data-slot="input-date-leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
       </slot>
     </span>
 

@@ -4,8 +4,6 @@ import type { DropdownMenuContentProps as RekaDropdownMenuContentProps, Dropdown
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type theme from '#build/ui/dropdown-menu'
-import type { KbdProps } from './Kbd.vue'
-import type { AvatarProps } from './Avatar.vue'
 import type { DropdownMenuItem, DropdownMenuSlots } from './DropdownMenu.vue'
 import type { IconProps } from './Icon.vue'
 import type { InputProps } from './Input.vue'
@@ -69,6 +67,7 @@ import { useFilter } from '../composables/useFilter'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
 import { omit, get, isArrayOfArray } from '../utils'
+import { getAvatarSize, getItemSize } from '../utils/size'
 import { pickLinkProps } from '../utils/link'
 import ULinkBase from './LinkBase.vue'
 import ULink from './Link.vue'
@@ -123,6 +122,8 @@ const filteredGroups = computed(() => {
   })
 })
 const hasFilteredItems = computed(() => filteredGroups.value.some(group => group.some(item => !isStructuralItem(item))))
+const avatarSize = computed(() => getAvatarSize(props.size))
+const itemSize = computed(() => getItemSize(props.size))
 </script>
 
 <template>
@@ -131,7 +132,7 @@ const hasFilteredItems = computed(() => filteredGroups.value.some(group => group
       <slot :name="((item.slot ? `${item.slot}-leading`: 'item-leading') as keyof DropdownMenuContentSlots<T>)" :item="(item as Extract<NestedItem<T>, { slot: string; }>)" :active="active" :index="index" :ui="ui">
         <UIcon v-if="item.loading" :name="loadingIcon || appConfig.ui.icons.loading" data-slot="dropdown-menu-itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [uiOverride?.itemLeadingIcon, item.ui?.itemLeadingIcon], color: item?.color, loading: true })" />
         <UIcon v-else-if="item.icon" :name="item.icon" data-slot="dropdown-menu-itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [uiOverride?.itemLeadingIcon, item.ui?.itemLeadingIcon], color: item?.color, active })" />
-        <UAvatar v-else-if="item.avatar" :size="((item.ui?.itemLeadingAvatarSize || uiOverride?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="dropdown-menu-itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [uiOverride?.itemLeadingAvatar, item.ui?.itemLeadingAvatar], active })" />
+        <UAvatar v-else-if="item.avatar" :size="avatarSize" v-bind="item.avatar" data-slot="dropdown-menu-itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [uiOverride?.itemLeadingAvatar, item.ui?.itemLeadingAvatar], active })" />
       </slot>
 
       <span v-if="(get(item, props.labelKey as string) || !!slots[(item.slot ? `${item.slot}-label`: 'item-label') as keyof DropdownMenuSlots<T>]) || (get(item, props.descriptionKey as string) || !!slots[(item.slot ? `${item.slot}-description`: 'item-description') as keyof DropdownMenuSlots<T>])" data-slot="dropdown-menu-itemWrapper" :class="ui.itemWrapper({ class: [uiOverride?.itemWrapper, item.ui?.itemWrapper] })">
@@ -154,7 +155,7 @@ const hasFilteredItems = computed(() => filteredGroups.value.some(group => group
         <slot :name="((item.slot ? `${item.slot}-trailing`: 'item-trailing') as keyof DropdownMenuContentSlots<T>)" :item="(item as Extract<NestedItem<T>, { slot: string; }>)" :active="active" :index="index" :ui="ui">
           <UIcon v-if="item.children?.length" :name="childrenIcon" data-slot="dropdown-menu-itemTrailingIcon" :class="ui.itemTrailingIcon({ class: [uiOverride?.itemTrailingIcon, item.ui?.itemTrailingIcon], color: item?.color, active })" />
           <span v-else-if="item.kbds?.length" data-slot="dropdown-menu-itemTrailingKbds" :class="ui.itemTrailingKbds({ class: [uiOverride?.itemTrailingKbds, item.ui?.itemTrailingKbds] })">
-            <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="((item.ui?.itemTrailingKbdsSize || uiOverride?.itemTrailingKbdsSize || ui.itemTrailingKbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
+            <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="itemSize" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
           </span>
         </slot>
 

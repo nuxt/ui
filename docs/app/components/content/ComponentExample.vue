@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { ChipProps } from '@nuxt/ui'
 import { camelCase, upperFirst } from 'scule'
 import { hash } from 'ohash'
 import { useElementSize } from '@vueuse/core'
@@ -217,12 +216,12 @@ const urlSearchParams = computed(() => {
                 :ui="{ itemLeadingChip: 'w-2' }"
                 @update:model-value="set(optionsValues, option.name, $event)"
               >
-                <template v-if="option.name.toLowerCase().endsWith('color')" #leading="{ modelValue, ui }">
+                <template v-if="option.name.toLowerCase().endsWith('color')" #leading="{ modelValue }">
                   <UChip
                     inset
                     standalone
                     :color="(modelValue as any)"
-                    :size="(ui.itemLeadingChipSize() as ChipProps['size'])"
+                    size="sm"
                     class="size-2"
                   />
                 </template>

@@ -39,7 +39,7 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custo
   onSelect?: (e: Event) => void
   onUpdateChecked?: (checked: boolean) => void
   class?: any
-  ui?: Partial<Pick<ContextMenu['slots'], 'content' | 'item' | 'label' | 'separator' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemLabelExternalIcon' | 'itemTrailing' | 'itemTrailingIcon' | 'itemTrailingKbds' | 'itemTrailingKbdsSize'>>
+  ui?: Partial<Pick<ContextMenu['slots'], 'content' | 'item' | 'label' | 'separator' | 'itemLeadingIcon' | 'itemLeadingAvatar' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemLabelExternalIcon' | 'itemTrailing' | 'itemTrailingIcon' | 'itemTrailingKbds'>>
   [key: string]: any
 }
 
@@ -158,6 +158,7 @@ const ui = computed(() => tv(theme, overrides.value)({
       :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
       :ui="ui"
       :ui-override="props.ui"
+      :size="props.size"
       v-bind="contentProps"
       :items="props.items"
       :portal="props.portal"
