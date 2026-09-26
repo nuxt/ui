@@ -174,8 +174,16 @@ describe('unstyled', () => {
     const wrapper = await render('<UTheme unstyled><UButton label="Button" class="px-3" :ui="{ label: \'font-bold\' }" /></UTheme>')
 
     const button = wrapper.find('[data-slot="button"]')
-    expect(button.classes()).toEqual(['px-3'])
+    expect(button.classes()).toEqual(['[--ui-accent:var(--ui-primary)]', 'px-3'])
     expect(wrapper.find('[data-slot="button-label"]').classes()).toEqual(['font-bold'])
+  })
+
+  // The color scope sets a variable and styles nothing, so `color` keeps working
+  // for the `accent` classes the user writes
+  it('keeps the color scope under `<UTheme unstyled>`', async () => {
+    const wrapper = await render('<UTheme unstyled><UButton label="Button" color="error" class="bg-accent" /></UTheme>')
+
+    expect(wrapper.find('[data-slot="button"]').classes()).toEqual(['[--ui-accent:var(--ui-error)]', 'bg-accent'])
   })
 
   it('styles a subtree again with `:unstyled="false"`', async () => {
