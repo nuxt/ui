@@ -75,6 +75,8 @@ export type FormInputEvent<T extends object> = {
   type: FormEventType
   name: keyof T
   eager?: boolean
+  track?: boolean
+  validate?: boolean
 }
 
 export type FormEvent<T extends object>

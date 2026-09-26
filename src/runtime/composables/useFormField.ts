@@ -69,9 +69,9 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
     }
   }
 
-  function emitFormEvent(type: FormInputEvents, name?: string, eager?: boolean) {
+  function emitFormEvent(type: FormInputEvents, name?: string, flags?: { eager?: boolean, track?: boolean, validate?: boolean }) {
     if (formBus && formField && name) {
-      formBus.emit({ type, name, eager })
+      formBus.emit({ type, name, ...flags })
     }
   }
 
@@ -96,14 +96,21 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
     })
   }
 
-  const emitFormInput = useDebounceFn(
+  // Only the validation is debounced: the form tracks the input right away so a
+  // submit within the delay isn't followed by a late dirty or validation.
+  const validateInput = useDebounceFn(
     () => {
       if (disposed) return
 
-      emitFormEvent('input', formField?.value.name, !opts?.deferInputValidation || formField?.value.eagerValidation)
+      emitFormEvent('input', formField?.value.name, { eager: !opts?.deferInputValidation || formField?.value.eagerValidation, track: false })
     },
     formField?.value.validateOnInputDelay ?? formOptions?.value.validateOnInputDelay ?? 0
   )
+
+  function emitFormInput() {
+    emitFormEvent('input', formField?.value.name, { validate: false })
+    return validateInput()
+  }
 
   return {
     id: computed(() => props?.id ?? inputId?.value),
