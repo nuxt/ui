@@ -738,6 +738,13 @@ describe('tv theme sources', () => {
     check(theme)
   })
 
+  it('rejects a default an extended theme\'s variant doesn\'t accept', () => {
+    const theme = extendTheme(buttonTheme, { defaultVariants: { variant: 'nope' } })
+
+    // @ts-expect-error `nope` is not a Button variant
+    expect(() => tv(theme)).not.toThrow()
+  })
+
   it('matches a numeric variant key by its string form', () => {
     expect(tv(stepsTheme)({ level: '4' }).base()).toBe(tv(stepsTheme)({ level: 4 }).base())
   })

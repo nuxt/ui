@@ -186,7 +186,7 @@ const itemSize = computed(() => getItemSize(props.size))
         <div v-if="!searchTerm || hasFilteredItems" role="presentation" data-slot="dropdown-menu-viewport" :class="ui.viewport({ class: uiOverride?.viewport })">
           <DropdownMenu.Group v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" data-slot="dropdown-menu-group" :class="ui.group({ class: uiOverride?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
-              <DropdownMenu.Label v-if="item.type === 'label'" data-slot="dropdown-menu-label" :class="ui.label({ class: [uiOverride?.label, item.ui?.label, item.class] })">
+              <DropdownMenu.Label v-if="item.type === 'label'" data-slot="dropdown-menu-label" :class="ui.label({ class: [uiOverride?.label, item.ui?.label, item.class], color: item?.color })">
                 <ReuseItemTemplate :item="item" :index="index" />
               </DropdownMenu.Label>
               <DropdownMenu.Separator v-else-if="item.type === 'separator'" data-slot="dropdown-menu-separator" :class="ui.separator({ class: [uiOverride?.separator, item.ui?.separator, item.class] })" />
