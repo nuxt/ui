@@ -2,7 +2,7 @@
 import type { SwitchRootProps, SwitchRootEmits } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/switch'
+import theme from '../theme/switch'
 import type { IconProps } from './Icon.vue'
 import type { ButtonHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'

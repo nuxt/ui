@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/editor-suggestion-menu'
+import theme from '../theme/editor-suggestion-menu'
 import type { EditorMenuOptions } from '../composables/useEditorMenu'
 import type { IconProps } from './Icon.vue'
 import type { EditorItem, EditorCustomHandlers } from '../types/editor'

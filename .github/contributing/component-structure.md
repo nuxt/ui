@@ -14,7 +14,7 @@ import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../types/tv'
 
 // 2. Theme import
-import theme from '#build/ui/component-name'
+import theme from '../theme/component-name'
 
 // 3. Type definition
 type ComponentName = ComponentConfig<typeof theme, AppConfig, 'componentName'>
@@ -92,7 +92,7 @@ For components wrapping Reka UI primitives (example: `Collapsible.vue`):
 import type { CollapsibleRootProps, CollapsibleRootEmits } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/collapsible'
+import theme from '../theme/collapsible'
 import type { ComponentConfig } from '../types/tv'
 
 type Collapsible = ComponentConfig<typeof theme, AppConfig, 'collapsible'>
@@ -241,7 +241,7 @@ The same `?? props.X` pattern applies to `useAvatarGroup` (`size`) and any other
 
 Every element styled by a slot carries `data-slot="<component>-<slot>"`, except the outermost one, which carries the component name alone: `data-slot="card"`, `data-slot="card-header"`, `data-slot="button-leadingIcon"`. Each value is unique across the library, so a stylesheet can target one part of one component.
 
-- `<component>` is the theme path in kebab-case, read from the `#build/ui/<path>` import: `page-hero`, `prose-h1`, and `content-toc` for `#build/ui/content/content-toc`. `ContextMenuContent` imports `context-menu`, so its markers say `context-menu-…`.
+- `<component>` is the theme path in kebab-case, read from the `../theme/<path>` import: `page-hero`, `prose-h1`, and `content-toc` for `../../theme/content/content-toc`. `ContextMenuContent` imports `context-menu`, so its markers say `context-menu-…`.
 - `<slot>` is the theme slot key as written, camelCase included.
 - The outermost element is the `root` slot, or the `base` that `class` lands on when there is no `root` (Button, Select). Overlays have neither, their teleported content is `modal-content` like any other part.
 - Prose components emit no marker: one on every `<p>` and `<li>` of a rendered document is weight nobody selects on.

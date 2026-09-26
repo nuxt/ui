@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/input'
+import theme from '../theme/input'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { InputHTMLAttributes } from '../types/html'
 import type { ModelModifiers, ApplyModifiers } from '../types/input'

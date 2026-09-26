@@ -58,11 +58,11 @@ const options: Record<string, { props?: any, slots?: any }> = {
 // its own implementation (the Vue override does not depend on `@nuxt/icon`).
 const modules = import.meta.glob<Component>(['../../src/runtime/components/*.vue', '!../../src/runtime/components/Icon.vue'], { eager: true, import: 'default' })
 
-// The component name a root is expected to carry, read from the `#build/ui/<path>`
+// The component name a root is expected to carry, read from the `../theme/<path>`
 // import the same way `nuxt-ui/data-slot-namespace` derives it.
 const namespaces: Record<string, string> = Object.fromEntries(
   Object.entries(import.meta.glob<string>('../../src/runtime/components/*.vue', { eager: true, query: '?raw', import: 'default' }))
-    .map(([path, source]) => [path.split('/').pop()!.replace('.vue', ''), source.match(/from '#build\/ui\/([\w/-]+)'/)?.[1]])
+    .map(([path, source]) => [path.split('/').pop()!.replace('.vue', ''), source.match(/import (?:type )?theme from '(?:\.\.\/)+theme\/([\w/-]+)'/)?.[1]])
     .filter((entry): entry is [string, string] => !!entry[1])
 )
 
