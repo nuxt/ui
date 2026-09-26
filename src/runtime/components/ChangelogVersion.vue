@@ -89,7 +89,12 @@ const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys
 const as = computed(() => {
-  if (typeof props.as === 'string' || typeof props.as?.render === 'function') {
+  if (
+    typeof props.as === 'string'
+    || typeof props.as === 'function'
+    || typeof props.as?.render === 'function'
+    || typeof props.as?.setup === 'function'
+  ) {
     return { root: props.as, title: 'h2' }
   }
 
