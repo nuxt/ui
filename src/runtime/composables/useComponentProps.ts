@@ -35,6 +35,7 @@ function createRootThemeContext(): ThemeContext {
  * The context at the root of an app: `app.config.ui` and no prop defaults.
  * `<UApp>` provides it, and a component rendered outside `<UApp>` falls back to
  * the same one, created once per app.
+ * @internal
  */
 export function useRootThemeContext(): ThemeContext {
   const app = getCurrentInstance()?.appContext.app
@@ -59,6 +60,7 @@ export { provideThemeContext }
  * The `ui` config of the nearest `<UTheme>`, shaped like the app config so
  * `appConfig.ui.<c>` and `appConfig.ui.icons` read the same. At the root it is
  * `app.config.ui`.
+ * @internal
  */
 export function useThemeConfig(): { ui: Record<string, any> } {
   const { config } = injectThemeContext()

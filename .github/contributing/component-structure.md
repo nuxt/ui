@@ -324,7 +324,7 @@ Notes:
 
 | Pattern | Usage |
 |---------|-------|
-| `useComponentProps(name, _props)` | Theme-aware proxy — default for new components |
+| `useComponentProps(name, _props, theme)` | Theme-aware proxy — default for new components |
 | `useForwardProps(source, emits?)` (local) | Forward Reka UI props/emits without filtering theme defaults |
 | `withDefaults` | Runtime default values |
 | `defineOptions({ inheritAttrs: false })` | When spreading `$attrs` to inner element |

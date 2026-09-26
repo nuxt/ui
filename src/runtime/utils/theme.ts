@@ -5,6 +5,7 @@ import type { DefinedTheme, TVTheme, TVThemeCheck } from '../types/tv'
  * Declare a component theme. Checks its `compoundVariants` and `defaultVariants`
  * against its `variants`, and keeps their values literal, which inference alone
  * widens to `string`, so the theme can be passed to `tv()` as is.
+ * @internal
  */
 export function defineTheme<T extends TVTheme>(theme: T & TVThemeCheck<T>): DefinedTheme<T> {
   return theme as DefinedTheme<T>
@@ -31,6 +32,7 @@ export type ExtendedTheme<T, B>
  * Declare a theme that extends another, like Select extends Input. The
  * extension's values win, a function receives the base value and returns the
  * new one, and `compoundVariants` concatenate.
+ * @internal
  */
 export function extendTheme<B extends TVTheme, const T extends Record<string, any>>(base: B, theme: T): DefinedTheme<ExtendedTheme<T, B>> {
   return defuFn(theme, base) as DefinedTheme<ExtendedTheme<T, B>>
