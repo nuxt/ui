@@ -22,7 +22,7 @@ export default {
     itemLabelExternalIcon: 'inline-block size-3 align-top text-dimmed'
   },
   variants: {
-    color: colorVariant({ item: '' }),
+    color: colorVariant({ item: '', label: '' }),
     active: {
       true: {
         item: 'text-highlighted before:bg-elevated',
