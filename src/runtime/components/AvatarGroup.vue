@@ -46,6 +46,11 @@ const slots = defineSlots<AvatarGroupSlots>()
 
 const props = useComponentProps('avatarGroup', _props, theme)
 
+// What the group passes down to its children: without `theme`, the proxy leaves
+// out the `'*'` and `app.config.ui.defaultVariants` defaults, which each child
+// applies itself, so a child's own `<UTheme :props>` key still beats them
+const providedProps = useComponentProps('avatarGroup', _props)
+
 const appConfig = useThemeConfig() as AvatarGroup['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.avatarGroup)
 
@@ -99,8 +104,8 @@ const hiddenCount = computed(() => {
 })
 
 provide(avatarGroupInjectionKey, computed(() => ({
-  size: props.size,
-  color: props.color
+  size: providedProps.size,
+  color: providedProps.color
 })))
 </script>
 
