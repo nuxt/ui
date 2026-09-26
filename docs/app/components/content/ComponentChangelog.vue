@@ -42,7 +42,9 @@ const { data: commits } = useLazyFetch('/api/github/commits.json', {
   query: {
     path: [
       `src/runtime/components/${props.prefix ? `${props.prefix}/` : ''}${camelName}.vue`,
-      `src/runtime/theme/${props.prefix ? `${props.prefix}/` : ''}${kebabName}.ts`
+      `src/runtime/theme/${props.prefix ? `${props.prefix}/` : ''}${kebabName}.ts`,
+      // Where themes lived before v5, which the commit history still records
+      `src/theme/${props.prefix ? `${props.prefix}/` : ''}${kebabName}.ts`
     ]
   },
   server: false,
