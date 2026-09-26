@@ -1,6 +1,7 @@
 import { readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, it, expect } from 'vitest'
+import ts from 'typescript'
 import * as theme from '../../src/theme'
 import * as themeProse from '../../src/theme/prose'
 import * as themeContent from '../../src/theme/content'
@@ -66,9 +67,13 @@ describe('theme slots', () => {
 })
 
 const themeDir = join(process.cwd(), 'src/theme')
+// The published JavaScript, comments stripped, which is what Tailwind scans:
+// a class that only appears in a comment is not spelled out
 const source = readdirSync(themeDir, { recursive: true, encoding: 'utf8' })
   .filter(file => file.endsWith('.ts'))
-  .map(file => readFileSync(join(themeDir, file), 'utf8'))
+  .map(file => ts.transpileModule(readFileSync(join(themeDir, file), 'utf8'), {
+    compilerOptions: { removeComments: true, target: ts.ScriptTarget.ESNext, module: ts.ModuleKind.ESNext }
+  }).outputText)
   .join('\n')
 
 const BOUNDARY = /[\s'"`]/
