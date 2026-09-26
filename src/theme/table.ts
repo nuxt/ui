@@ -7,7 +7,7 @@ export default (options: Required<ModuleOptions>) => ({
     caption: 'sr-only',
     thead: 'relative',
     tbody: 'isolate [&>tr]:data-[selectable=true]:hover:bg-elevated/50 [&>tr]:data-[selectable=true]:outline-primary/25 [&>tr]:data-[selectable=true]:focus-visible:outline-3 [&>tr]:data-[selectable=true]:-outline-offset-3 divide-y divide-default',
-    tfoot: 'relative',
+    tfoot: 'relative [&>[data-slot=separator]]:z-2',
     tr: 'data-[selected=true]:bg-elevated/50',
     th: 'px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&:has([role=checkbox])]:pe-0',
     td: 'p-4 text-sm text-muted whitespace-nowrap [&:has([role=checkbox])]:pe-0',
