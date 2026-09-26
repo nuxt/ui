@@ -54,7 +54,7 @@ const NEUTRAL_ROLES: Record<string, string> = {
   'border-muted': 'var(--ui-border)'
 }
 
-export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt?: Nuxt, resolve?: Resolver['resolve'], vue?: { detectedComponents?: Set<string> }) {
+export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt: Nuxt | undefined, resolve: Resolver['resolve'], vue?: { detectedComponents?: Set<string> }) {
   const templates: NuxtTemplate[] = []
 
   let hasProse = false
@@ -63,7 +63,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
 
   // The package's themes. Tailwind scans them from `@source './theme'` in
   // `index.css`, and `#build/ui/*` re-exports them for app code.
-  const themeDir = resolve ? resolve('./runtime/theme') : undefined
+  const themeDir = resolve('./runtime/theme')
 
   function writeThemeTemplate(theme: Record<string, any>, path?: string) {
     for (const component in theme) {
@@ -128,7 +128,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
 
     // With `experimental.componentDetection`, only the themes of the detected
     // components, their dependencies included, reach the CSS.
-    const componentDir = resolve ? resolve('./runtime/components') : undefined
+    const componentDir = resolve('./runtime/components')
 
     let detectedComponents = vue?.detectedComponents
 

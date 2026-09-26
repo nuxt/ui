@@ -62,7 +62,7 @@ const modules = import.meta.glob<Component>(['../../src/runtime/components/*.vue
 // import the same way `nuxt-ui/data-slot-namespace` derives it.
 const namespaces: Record<string, string> = Object.fromEntries(
   Object.entries(import.meta.glob<string>('../../src/runtime/components/*.vue', { eager: true, query: '?raw', import: 'default' }))
-    .map(([path, source]) => [path.split('/').pop()!.replace('.vue', ''), source.match(/from '(?:\.\.\/)+theme\/([\w/-]+)'/)?.[1]])
+    .map(([path, source]) => [path.split('/').pop()!.replace('.vue', ''), source.match(/import (?:type )?theme from '(?:\.\.\/)+theme\/([\w/-]+)'/)?.[1]])
     .filter((entry): entry is [string, string] => !!entry[1])
 )
 
