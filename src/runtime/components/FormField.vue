@@ -69,6 +69,11 @@ const slots = defineSlots<FormFieldSlots>()
 
 const props = useComponentProps('formField', _props, theme)
 
+// What the group passes down to its children: without `theme`, the proxy leaves
+// out the `'*'` and `app.config.ui.defaultVariants` defaults, which each child
+// applies itself, so a child's own `<UTheme :props>` key still beats them
+const providedProps = useComponentProps('formField', _props)
+
 const appConfig = useAppConfig() as FormField['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.formField)
 
@@ -101,7 +106,7 @@ provide(inputIdInjectionKey, id)
 provide(formFieldInjectionKey, computed(() => ({
   error: error.value,
   name: props.name,
-  size: props.size,
+  size: providedProps.size,
   eagerValidation: props.eagerValidation,
   validateOnInputDelay: props.validateOnInputDelay,
   errorPattern: props.errorPattern,
