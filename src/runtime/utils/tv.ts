@@ -656,7 +656,7 @@ let nextFunctionId = 0
  * object that says the same thing shares one compiled entry. A replacer keys by
  * identity, which is what its captured scope makes it.
  */
-function keyOfOverrides(value: any, depth = 0): string | typeof BAIL {
+function keyOfOverrides(value: any, depth = 0, limit = 8): string | typeof BAIL {
   if (typeof value === 'function') {
     let id = functionIds.get(value)
     if (id === undefined) {
@@ -670,13 +670,13 @@ function keyOfOverrides(value: any, depth = 0): string | typeof BAIL {
   if (value instanceof RegExp) {
     return 'R' + String(value)
   }
-  if (depth >= 8) {
+  if (depth >= limit) {
     return BAIL
   }
   if (Array.isArray(value)) {
     let out = '['
     for (const item of value) {
-      const part = keyOfOverrides(item, depth + 1)
+      const part = keyOfOverrides(item, depth + 1, limit)
       if (part === BAIL) {
         return BAIL
       }
@@ -686,7 +686,7 @@ function keyOfOverrides(value: any, depth = 0): string | typeof BAIL {
   }
   let out = '{'
   for (const key of Object.keys(value)) {
-    const part = keyOfOverrides(value[key], depth + 1)
+    const part = keyOfOverrides(value[key], depth + 1, limit)
     if (part === BAIL) {
       return BAIL
     }
@@ -702,13 +702,13 @@ function keyOfOverrides(value: any, depth = 0): string | typeof BAIL {
  */
 const reactiveKeys = new WeakMap<object, ComputedRef<string | typeof BAIL>>()
 
-function contentKey(overrides: Record<string, any>): string | typeof BAIL {
+function contentKey(overrides: Record<string, any>, limit?: number): string | typeof BAIL {
   if (!isReactive(overrides)) {
-    return keyOfOverrides(overrides)
+    return keyOfOverrides(overrides, 0, limit)
   }
   let key = reactiveKeys.get(overrides)
   if (!key) {
-    key = computed(() => keyOfOverrides(overrides))
+    key = computed(() => keyOfOverrides(overrides, 0, limit))
     reactiveKeys.set(overrides, key)
   }
   return key.value
@@ -795,12 +795,15 @@ const engines = new Map<string, Engine>()
  * The engine for the merge config (`app.config.ui.tv`) and Tailwind prefix of
  * the nearest theme. Keyed by content, since Nuxt clones the app config for
  * each request on the server, and built once per key.
+ * @internal
  */
 export function engineFor(config?: TVMergeConfig, prefix?: string): Engine {
   if (!config && !prefix) {
     return defaultEngine
   }
-  const configKey = config ? contentKey(config) : ''
+  // Deeper than an entry's limit: a merge config nests its class groups the way
+  // Tailwind Merge's own does
+  const configKey = config ? contentKey(config, 32) : ''
   if (configKey === BAIL) {
     return createEngine(config, prefix)
   }
@@ -819,6 +822,7 @@ export function engineFor(config?: TVMergeConfig, prefix?: string): Engine {
  * A component's overrides as `useComponentOverrides` resolves them from the
  * nearest theme: its `app.config.ui.<c>` entry, whether the subtree is
  * `unstyled`, and the engine for the app's merge config and prefix.
+ * @internal
  */
 export class ComponentOverrides<O = Record<string, any>> {
   constructor(
@@ -839,8 +843,9 @@ export const tv = /* @__PURE__ */ ((theme: Record<string, any>, overrides?: Reco
     return overrides.engine(theme, overrides.entry as Record<string, any> | undefined, overrides.unstyled)
   }
   if (overrides?.unstyled) {
-    const { unstyled: _, ...rest } = overrides
-    return defaultEngine(theme, rest, true)
+    // The engine reads no `unstyled` key, so the overrides pass as they are and
+    // keep their cache entry
+    return defaultEngine(theme, overrides, true)
   }
   return defaultEngine(theme, overrides)
 }) as TV

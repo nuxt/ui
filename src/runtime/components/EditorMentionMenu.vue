@@ -35,7 +35,7 @@ export interface EditorMentionMenuProps<T extends EditorMentionMenuItem = Editor
 <script setup lang="ts" generic="T extends EditorMentionMenuItem">
 import { computed, h, onMounted, onBeforeUnmount, nextTick, toRef } from 'vue'
 import { useEditorMenu } from '../composables/useEditorMenu'
-import { useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 import { getAvatarSize } from '../utils/size'
 import UIcon from './Icon.vue'
@@ -43,16 +43,19 @@ import UAvatar from './Avatar.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<EditorMentionMenuProps<T>>(), {
+const _props = withDefaults(defineProps<EditorMentionMenuProps<T>>(), {
   pluginKey: 'mentionMenu',
   char: '@'
 })
+
+const props = useComponentProps('editorMentionMenu', _props, theme)
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const appConfig = useThemeConfig() as EditorMentionMenu['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.editorMentionMenu)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
   size: props.size
 }))

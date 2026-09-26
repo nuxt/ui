@@ -3,6 +3,7 @@
    `@import "@nuxt/ui/sources";`. */
 @import './keyframes.css';
 @import './accent.css';
+@import '#build/ui.base.css';
 
 @layer base {
   body {

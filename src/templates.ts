@@ -12,7 +12,7 @@ import { colors as aliases } from './runtime/theme/color'
 import * as themeProse from './runtime/theme/prose'
 import * as themeContent from './runtime/theme/content'
 
-export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt?: Nuxt, resolve?: Resolver['resolve'], vue?: { detectedComponents?: Set<string> }) {
+export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt: Nuxt | undefined, resolve: Resolver['resolve'], vue?: { detectedComponents?: Set<string> }) {
   const templates: NuxtTemplate[] = []
 
   let hasProse = false
@@ -21,7 +21,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
 
   // The package's themes. Tailwind scans them from `@source './theme'` in
   // `index.css`, and `#build/ui/*` re-exports them for app code.
-  const themeDir = resolve ? resolve('./runtime/theme') : undefined
+  const themeDir = resolve('./runtime/theme')
 
   function writeThemeTemplate(theme: Record<string, any>, path?: string) {
     for (const component in theme) {
@@ -86,7 +86,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
 
     // With `experimental.componentDetection`, only the themes of the detected
     // components, their dependencies included, reach the CSS.
-    const componentDir = resolve ? resolve('./runtime/components') : undefined
+    const componentDir = resolve('./runtime/components')
 
     let detectedComponents = vue?.detectedComponents
 
@@ -162,27 +162,33 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   templates.push({
     filename: 'ui.css',
     write: true,
-    getContents: async () => {
-      const sources = await generateSources()
-      const prefix = options.theme?.prefix
+    getContents: generateSources
+  })
 
-      if (!prefix || !resolve) {
-        return sources
+  // The color scopes key their accent roles on the scope class, which the engine
+  // prefixes at runtime, so the rules repeat for the prefixed class. Imported from
+  // `base.css`, so they land in the same cascade layer as `accent.css`.
+  templates.push({
+    filename: 'ui.base.css',
+    write: true,
+    getContents: async () => {
+      const prefix = options.theme?.prefix
+      if (!prefix) {
+        return ''
       }
 
-      // The color scopes key their accent roles on the scope class, which the
-      // engine prefixes at runtime, so the rules repeat for the prefixed class.
       const accent = await readFile(resolve('./runtime/accent.css'), 'utf8')
+      const scopes = accent.match(/\[class~="\[--ui-accent:[^"]*"\]\s*\{[^}]*\}/g) ?? []
 
-      return `${sources}\n\n${accent.replaceAll('[class~="[--ui-accent:', `[class~="${prefix}:[--ui-accent:`)}`
+      return `@layer base {\n  ${scopes.map(rule => rule.replace('[class~="[--ui-accent:', `[class~="${prefix}:[--ui-accent:`)).join('\n\n  ')}\n}\n`
     }
   })
 
   // Static fallback shipped in the published npm package and exposed via
-  // `package.json` `imports`, so tooling that resolves `#build/ui.css` through
-  // Node module resolution (Prettier, Tailwind IntelliSense) finds a file. What
-  // it generates is per app, the tokens and styles ship in `sources.css` and
-  // `base.css`.
+  // `package.json` `imports`, so tooling that resolves `#build/ui.css` or
+  // `#build/ui.base.css` through Node module resolution (Prettier, Tailwind
+  // IntelliSense) finds a file. What they generate is per app, the tokens and
+  // styles ship in `sources.css` and `base.css`.
   templates.push({
     filename: 'ui.static.css',
     write: true,

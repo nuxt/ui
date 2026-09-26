@@ -111,6 +111,9 @@ export interface ThemeDefaults extends ThemeGlobalDefaults {
   dropdownMenu?: Partial<ComponentTypes.DropdownMenuProps>
   editor?: Partial<ComponentTypes.EditorProps>
   editorDragHandle?: Partial<ComponentTypes.EditorDragHandleProps>
+  editorEmojiMenu?: Partial<ComponentTypes.EditorEmojiMenuProps>
+  editorMentionMenu?: Partial<ComponentTypes.EditorMentionMenuProps>
+  editorSuggestionMenu?: Partial<ComponentTypes.EditorSuggestionMenuProps>
   editorToolbar?: Partial<ComponentTypes.EditorToolbarProps>
   empty?: Partial<ComponentTypes.EmptyProps>
   error?: Partial<ComponentTypes.ErrorProps>

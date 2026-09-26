@@ -40,6 +40,12 @@ describe('tv with a Tailwind prefix', () => {
     expect(engineFor({ mergeConfig: { prefix: 'tw' } }, 'tw')).not.toBe(engineFor({ mergeConfig: { prefix: 'tw' } }, 'ui'))
   })
 
+  it('shares the engine of a merge config with deep class groups', () => {
+    const config = () => ({ mergeConfig: { extend: { classGroups: { 'bg-img': [{ bg: ['none', { linear: [{ to: ['x'] }] }] }] } } } })
+
+    expect(engineFor(config())).toBe(engineFor(config()))
+  })
+
   it('leaves plain overrides unprefixed', () => {
     expect(tvt(theme)().base!()).toBe('inline-flex px-2 text-sm')
   })
