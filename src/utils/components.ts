@@ -15,8 +15,8 @@ import { resolvePathSync } from 'mlly'
  * - <LazyUButton / <lazy-u-button (lazy components)
  * - LazyUButton in script
  *
- * The kebab form only matches as a tag: bare kebab identifiers in scripts and
- * prose would match far too much ordinary text.
+ * The kebab form only matches in tag position: bare kebab identifiers in
+ * scripts and prose would match far too much ordinary text.
  */
 function createComponentPattern(prefix: string): RegExp {
   // The prefix is user-configured, so it can carry regex metacharacters.
