@@ -106,7 +106,7 @@ export default defineConfig({
 
 ### Unstyled :badge{label="Soon" class="align-text-top"}
 
-Use the `unstyled` prop to render descendant components without their theme classes. Only the classes you supply through `class`, `ui` or `app.config.ui` remain, so you can style them from scratch. Set it to `false` on a nested Theme to style a subtree again.
+Use the `unstyled` prop to render descendant components without their theme classes. Only the classes you supply through `class`, `ui` or `app.config.ui` remain, so you can style them from scratch. The `color` prop keeps working: its `[--ui-accent:…]` class stays, so the `accent` utilities you add, like `bg-accent`, follow it. Set it to `false` on a nested Theme to style a subtree again.
 
 ::component-example
 ---
