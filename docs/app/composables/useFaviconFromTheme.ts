@@ -23,7 +23,16 @@ export function useFaviconFromTheme() {
     const svg = generateFaviconSvg(color)
     const encoded = `data:image/svg+xml,${encodeURIComponent(svg)}`
 
-    useFavicon(encoded)
+    // Not `useFavicon`: it creates the missing link with a `type` taken from
+    // the text after the last `.`, which in a data URI is encoded svg.
+    let link = document.head.querySelector<HTMLLinkElement>('link[rel="icon"]')
+    if (!link) {
+      link = document.createElement('link')
+      link.rel = 'icon'
+      document.head.append(link)
+    }
+    link.type = 'image/svg+xml'
+    link.href = encoded
   }
 
   function setupMutationObserver() {
