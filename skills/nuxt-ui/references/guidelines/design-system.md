@@ -42,6 +42,14 @@ Colors are set in CSS, the same for Nuxt and Vue, with the `@nuxt/ui/colors` plu
 
 Only palettes that exist in your theme work — either Tailwind's defaults or custom colors defined with `@theme`. There is no `colors` key in `app.config.ts` or `vite.config.ts`.
 
+To change colors at runtime (per tenant, from a color picker), call `useTheme` with the palette values, since Tailwind only outputs the palettes your CSS uses:
+
+```ts
+import colors from 'tailwindcss/colors'
+
+useTheme({ colors: { primary: colors.indigo, secondary: '#5647ff' }, radius: '0.375rem' })
+```
+
 Available color palettes:
 - **Standard Tailwind**: red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose
 - **Neutral palettes** (for `neutral` key — pick one that matches the aesthetic):

@@ -2,20 +2,17 @@
 import type { DropdownMenuItem } from '@nuxt/ui'
 import tailwindColors from 'tailwindcss/colors'
 
-// Switches a palette at runtime by writing the alias's shades on the root element
-const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
-
 const primary = useState('theme-dropdown-primary', () => 'green')
 const neutral = useState('theme-dropdown-neutral', () => 'slate')
 
-function setAlias(alias: 'primary' | 'neutral', palette: string) {
-  const shade = (tailwindColors as Record<string, Record<number, string>>)[palette]
-  if (!shade) return
-  for (const stop of shades) {
-    const value = shade[stop]
-    if (value) document.documentElement.style.setProperty(`--ui-color-${alias}-${stop}`, value)
+const palettes = tailwindColors as unknown as Record<string, Record<number, string>>
+
+useTheme(() => ({
+  colors: {
+    primary: palettes[primary.value],
+    neutral: palettes[neutral.value]
   }
-}
+}))
 
 const colors = ['red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose']
 const neutrals = ['slate', 'gray', 'zinc', 'neutral', 'stone', 'taupe', 'mauve', 'mist', 'olive']
@@ -32,7 +29,6 @@ const items = computed<DropdownMenuItem[]>(() => [{
       e.preventDefault()
 
       primary.value = color
-      setAlias('primary', color)
     }
   }))
 }, {
@@ -47,7 +43,6 @@ const items = computed<DropdownMenuItem[]>(() => [{
       e.preventDefault()
 
       neutral.value = color
-      setAlias('neutral', color)
     }
   }))
 }])

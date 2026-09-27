@@ -11,6 +11,7 @@ export const publicComposables: Record<string, string[]> = {
   useResizable: ['useResizable'],
   useScrollShadow: ['useScrollShadow'],
   useScrollspy: ['useScrollspy'],
+  useTheme: ['useTheme'],
   useToast: ['useToast'],
   useTour: ['useTour']
 }
