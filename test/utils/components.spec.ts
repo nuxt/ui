@@ -198,6 +198,37 @@ describe('detectUsedComponents', { timeout: 20000 }, () => {
     expect(detected).not.toContain('Calendar')
   })
 
+  it('scans the files it is given besides the dirs', async () => {
+    const dir = fixtureUsing('<UButton />')
+    const outside = fixtureRoot()
+    writeFileSync(join(outside, 'AcmeDate.vue'), '<template><UCalendar /></template>\n')
+
+    expect(await detectUsedComponents([dir], 'U', componentDir, undefined, { files: [join(outside, 'AcmeDate.vue')] })).toContain('Calendar')
+  })
+
+  it('detects components imported from their file', async () => {
+    const dir = fixtureRoot()
+    writeFileSync(join(dir, 'App.vue'), [
+      '<script setup lang="ts">',
+      'import Button from \'@nuxt/ui/components/Button.vue\'',
+      'import Calendar from \'@nuxt/ui/runtime/components/Calendar.vue\'',
+      'const Modal = defineAsyncComponent(() => import(\'#ui/components/Modal.vue\'))',
+      '</script>'
+    ].join('\n'))
+
+    const detected = await detectUsedComponents([dir], 'U', componentDir)
+    expect(detected).toContain('Button')
+    expect(detected).toContain('Calendar')
+    expect(detected).toContain('Modal')
+  })
+
+  it('detects components in HTML files', async () => {
+    const dir = fixtureRoot()
+    writeFileSync(join(dir, 'index.html'), '<div id="app"><u-calendar></u-calendar></div>\n')
+
+    expect(await detectUsedComponents([dir], 'U', componentDir)).toContain('Calendar')
+  })
+
   it('returns undefined when no component is detected', async () => {
     expect(await detectUsedComponents([fixtureUsing('<div>no nuxt ui here</div>')], 'U', componentDir)).toBeUndefined()
   })

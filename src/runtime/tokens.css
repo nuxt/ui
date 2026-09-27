@@ -1,6 +1,8 @@
 /* The Tailwind tokens behind the semantic utilities (`bg-default`, `text-muted`,
    `ring-accented`...), the color aliases and the accent roles. */
-@theme static {
+/* Tailwind's neutral palette, which the `neutral` alias takes over, for
+   `@plugin "@nuxt/ui/colors" { neutral: neutral; }` and `bg-old-neutral-*` */
+@theme {
   --color-old-neutral-50: oklch(98.5% 0 none);
   --color-old-neutral-100: oklch(97% 0 none);
   --color-old-neutral-200: oklch(92.2% 0 none);
