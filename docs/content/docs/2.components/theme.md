@@ -53,7 +53,7 @@ Explicit props on a component (e.g. `<UButton color="primary" />`) always win ov
 
 ### Default variants :badge{label="Soon" class="align-text-top"}
 
-Use the `'*'` key of `props` to change the default `color` and `size` of every descendant component. It only replaces the library defaults, `primary` and `md`, so a component with its own default keeps it: Avatar stays `neutral` and Separator stays `xs`. A component's own key takes priority over `'*'`.
+Use the `'*'` key of `props` to change the default `color` and `size` of every descendant component. It only replaces the library defaults, `primary` and `md`, so a component with its own default keeps it: Avatar stays `neutral` and Separator stays `xs`. A component's own key takes priority over `'*'`, even from a Theme further out: buttons inside `<UTheme :props="{ '*': { size: 'xs' } }">` stay `xl` when an outer Theme sets `{ button: { size: 'xl' } }`.
 
 ::component-example
 ---
