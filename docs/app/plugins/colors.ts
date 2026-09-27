@@ -29,7 +29,10 @@ export default defineNuxtPlugin(() => {
   const appConfig = useAppConfig()
   const nuxtApp = useNuxtApp()
 
-  const root = computed(() => `@layer base {
+  // Declares Tailwind's layer order first: rendered before the stylesheet, this
+  // `@layer base` would otherwise become the first layer and the lowest
+  const root = computed(() => `@layer properties, theme, base, components, utilities;
+@layer base {
   :root, :host {
   ${Object.entries(appConfig.colors).map(([key, value]) => generateShades(key, value as string)).join('\n  ')}
   }
