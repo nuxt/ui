@@ -8,6 +8,7 @@ import type { ModuleOptions } from './module'
 import { getThemeClasses } from './utils/theme'
 import { detectUsedComponents } from './utils/components'
 import * as theme from './runtime/theme'
+import { colors } from './runtime/theme/color'
 import * as themeProse from './runtime/theme/prose'
 import * as themeContent from './runtime/theme/content'
 
@@ -179,8 +180,8 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
       const accent = await readFile(resolve('./runtime/accent.css'), 'utf8')
       const scopes = accent.match(/\[class~="\[--ui-accent:[^"]*"\]\s*\{[^}]*\}/g) ?? []
       // One rule per color: fewer means the shipped CSS no longer looks the way this reads it
-      if (scopes.length < aliases.length) {
-        throw new Error(`[@nuxt/ui] Found ${scopes.length} color scope rules in \`accent.css\` for the prefix, expected ${aliases.length}.`)
+      if (scopes.length < colors.length) {
+        throw new Error(`[@nuxt/ui] Found ${scopes.length} color scope rules in \`accent.css\` for the prefix, expected ${colors.length}.`)
       }
 
       return `@layer base {\n  ${scopes.map(rule => rule.replace('[class~="[--ui-accent:', `[class~="${prefix}:[--ui-accent:`)).join('\n\n  ')}\n}\n`
