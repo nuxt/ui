@@ -21,7 +21,7 @@ const colors = computed(() => props.alias === 'neutral' ? neutralColors : primar
 const value = computed(() => {
   if (props.alias === 'primary') return blackAsPrimary.value ? 'black' : primary.value
   if (props.alias === 'neutral') return neutral.value
-  return (appConfig.ui.colors as Record<string, string>)[props.alias] || props.alias
+  return (appConfig.colors as Record<string, string>)[props.alias] || props.alias
 })
 
 const label = computed(() => {

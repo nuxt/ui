@@ -28,6 +28,13 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explici
     '@import "@nuxt/ui";'
   ]
 
+  // Only the aliases that differ from the defaults, or all of them when `explicit`
+  const colorEntries = Object.entries(doc.colors || {}).filter(([key, value]) => value !== DEFAULT_COLORS[key as keyof typeof DEFAULT_COLORS])
+  const colorAliases = explicit ? { ...DEFAULT_COLORS, ...doc.colors } : Object.fromEntries(colorEntries)
+  if (Object.keys(colorAliases).length) {
+    lines.push('', '@plugin "@nuxt/ui/colors" {', ...Object.entries(colorAliases).map(([key, value]) => `  ${key}: ${value};`), '}')
+  }
+
   // Nuxt resolves the `--font-*` variables below through @nuxt/fonts and
   // self-hosts the faces, so an import there would load each one twice. The
   // Vite plugin ships no fonts integration, so that export fetches them from
@@ -156,14 +163,8 @@ function toObjectSource(value: Record<string, any>): string {
 }
 
 /** The `app.config.ts` / `vite.config.ts` side of the export. */
-export function generateConfig(doc: ThemeDoc, framework: string = 'nuxt', { explicit = false }: SerializeOptions = {}): string {
+export function generateConfig(doc: ThemeDoc, framework: string = 'nuxt', _options: SerializeOptions = {}): string {
   const config: Record<string, any> = {}
-
-  const colorEntries = Object.entries(doc.colors || {}).filter(([key, value]) => value !== DEFAULT_COLORS[key as keyof typeof DEFAULT_COLORS])
-  const colors = explicit ? { ...DEFAULT_COLORS, ...doc.colors } : Object.fromEntries(colorEntries)
-  if (Object.keys(colors).length) {
-    config.ui = { colors }
-  }
 
   if (doc.icons && doc.icons !== THEME_DEFAULTS.icons && Object.hasOwn(themeIcons, doc.icons)) {
     config.ui = config.ui || {}

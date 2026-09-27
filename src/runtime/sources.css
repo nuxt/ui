@@ -1,9 +1,13 @@
 /* What Tailwind can't take inside a cascade layer: the sources it scans, the
-   `light` / `dark` variants and the theme tokens. Import it at the top level,
-   `@nuxt/ui` does both halves. */
+   `light` / `dark` variants, the theme tokens and the colors plugin. Import it
+   at the top level, `@nuxt/ui` does both halves. */
 @import './package-sources.css';
 @import '#build/ui.css';
 @import './tokens.css';
+
+/* The default palette of each color alias. Register it again with options to
+   change them: `@plugin "@nuxt/ui/colors" { primary: indigo; }` */
+@plugin './colors';
 
 @custom-variant light (&:where(.light, .light *));
 @custom-variant dark (&:where(.dark, .dark *));

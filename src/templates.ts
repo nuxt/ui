@@ -8,7 +8,6 @@ import type { ModuleOptions } from './module'
 import { getThemeClasses } from './utils/theme'
 import { detectUsedComponents } from './utils/components'
 import * as theme from './runtime/theme'
-import { colors as aliases } from './runtime/theme/color'
 import * as themeProse from './runtime/theme/prose'
 import * as themeContent from './runtime/theme/content'
 
@@ -205,7 +204,6 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     ].join('\n')
   })
 
-  // FIXME: `typeof colors[number]` should include all colors from the theme
   templates.push({
     filename: 'types/ui.d.ts',
     getContents: () => {
@@ -214,18 +212,10 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
 
       return `import * as ui from '#build/ui'
 import type { TVConfig, TVMergeConfig, DeepRequired, ThemeDefaultVariants } from '@nuxt/ui'
-import colors from 'tailwindcss/colors'
 
 type IconsConfig = Record<${iconUnion} | (string & {}), string>
 
-type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone' | 'taupe' | 'mauve' | 'mist' | 'olive'
-type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
-
 type AppConfigUI = {
-  colors?: {
-    ${aliases.filter(color => color !== 'neutral').map(color => `'${color}'?: Color`).join('\n\t\t')}
-    neutral?: NeutralColor | (string & {})
-  }
   icons?: Partial<IconsConfig>
   prefix?: string
   tv?: TVMergeConfig
@@ -233,7 +223,7 @@ type AppConfigUI = {
   unstyled?: boolean
 } & TVConfig<typeof ui>
 
-type AppConfigRuntimeUI = DeepRequired<Pick<AppConfigUI, 'colors' | 'icons' | 'tv'>> & typeof ui
+type AppConfigRuntimeUI = DeepRequired<Pick<AppConfigUI, 'icons' | 'tv'>> & typeof ui
 
 declare module '@nuxt/schema' {
   interface AppConfigInput {

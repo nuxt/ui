@@ -61,7 +61,7 @@ export default defineNuxtPlugin({
         // inside <style> text.
         for (const alias of Object.keys(DEFAULT_COLORS) as Array<keyof typeof DEFAULT_COLORS>) {
           const value = alias === 'primary' ? saved.primary : alias === 'neutral' ? saved.neutral : saved.colors?.[alias]
-          ;(appConfig.ui.colors as any)[alias] = typeof value === 'string' && SAFE_NAME.test(value) ? value : DEFAULT_COLORS[alias]
+          ;(appConfig.colors as any)[alias] = typeof value === 'string' && SAFE_NAME.test(value) ? value : DEFAULT_COLORS[alias]
         }
 
         const pack = saved.icons && Object.hasOwn(themeIcons, saved.icons) ? themeIcons[saved.icons as keyof typeof themeIcons] : themeIcons.lucide

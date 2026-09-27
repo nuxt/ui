@@ -194,8 +194,8 @@ export function snapshotStoredTheme(): StoredTheme {
   const extras = useState<Record<string, any>>('nuxt-ui-ai-theme').value
   const cssVariables = useState<StoredTheme['cssVariables']>('nuxt-ui-css-variables').value
   return {
-    primary: unless(appConfig.ui.colors.primary, DEFAULT_COLORS.primary),
-    neutral: unless(appConfig.ui.colors.neutral, DEFAULT_COLORS.neutral),
+    primary: unless(appConfig.colors.primary, DEFAULT_COLORS.primary),
+    neutral: unless(appConfig.colors.neutral, DEFAULT_COLORS.neutral),
     radius: unless(useState<number>('nuxt-ui-radius').value, THEME_DEFAULTS.radius),
     fontSize: unless(useState<number>('nuxt-ui-font-size').value, THEME_DEFAULTS.fontSize),
     font: filled(useState<StoredTheme['font']>('nuxt-ui-font').value),

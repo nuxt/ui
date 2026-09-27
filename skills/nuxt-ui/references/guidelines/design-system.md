@@ -24,31 +24,23 @@ Nuxt UI uses 7 semantic colors. Never use raw Tailwind palette colors in compone
 
 ### Configuring colors
 
-```ts
-// Nuxt — app.config.ts
-export default defineAppConfig({
-  ui: {
-    colors: {
-      primary: 'indigo',
-      secondary: 'violet',
-      success: 'emerald',
-      error: 'rose',
-      neutral: 'zinc'
-    }
-  }
-})
+Colors are set in CSS, the same for Nuxt and Vue, with the `@nuxt/ui/colors` plugin after the imports. Aliases left out keep their default:
+
+```css
+/* main.css */
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@plugin "@nuxt/ui/colors" {
+  primary: indigo;
+  secondary: violet;
+  success: emerald;
+  error: rose;
+  neutral: zinc;
+}
 ```
 
-```ts
-// Vue — vite.config.ts
-ui({
-  ui: {
-    colors: { primary: 'indigo', secondary: 'violet', neutral: 'zinc' }
-  }
-})
-```
-
-Only colors that exist in your theme work — either Tailwind's defaults or custom colors defined with `@theme`.
+Only palettes that exist in your theme work — either Tailwind's defaults or custom colors defined with `@theme`. There is no `colors` key in `app.config.ts` or `vite.config.ts`.
 
 Available color palettes:
 - **Standard Tailwind**: red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose
@@ -84,7 +76,7 @@ Available color palettes:
 }
 ```
 
-2. Assign it: `ui: { colors: { primary: 'brand' } }`
+2. Assign it: `@plugin "@nuxt/ui/colors" { primary: brand; }`
 
 ### Extending with new semantic color names
 

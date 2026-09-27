@@ -1,5 +1,5 @@
 import { defu } from 'defu'
-import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addPlugin, addBuildPlugin, hasNuxtModule } from '@nuxt/kit'
+import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addBuildPlugin, hasNuxtModule } from '@nuxt/kit'
 import { createUnplugin } from 'unplugin'
 import type { HookResult, ModuleDependencies } from '@nuxt/schema'
 import { addTemplates } from './templates'
@@ -201,7 +201,6 @@ export default defineNuxtModule<ModuleOptions>({
       nuxt.options.postcss.plugins['@tailwindcss/postcss'] = {}
     }
 
-    addPlugin({ src: resolve('./runtime/plugins/colors') })
     addBuildPlugin(createUnplugin(() => OptionalDepsPlugin(resolve('./runtime'))))
 
     if (options.prose || options.mdc || options.content || hasNuxtModule('@nuxtjs/mdc') || hasNuxtModule('@nuxt/content')) {
