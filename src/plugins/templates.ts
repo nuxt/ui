@@ -20,19 +20,17 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
   const templates = getTemplates(options, appConfig.ui, undefined, (...paths: string[]) => join(runtimeDir, '..', ...paths), vue)
 
   let root = ''
+  let scanDirs: string[] = []
   let templateFiles: Record<string, string> = {}
 
-  function detect() {
-    // `scanPackages` packages resolve Nuxt UI components from `node_modules`
-    // and user component dirs can sit outside the root: detection has to
-    // scan both or their components lose their theme CSS.
-    const dirs = resolveExtraScanDirs(root, options.scanPackages, options.components ? options.components.dirs : undefined)
+  // The first run warns about what it can't resolve, the dev server's reruns don't repeat it
+  function detect(warn = true) {
     return detectUsedComponents(
-      [root, ...dirs],
+      [root, ...scanDirs],
       options.prefix!,
       componentDir,
       Array.isArray(options.componentDetection) ? options.componentDetection : undefined,
-      { prose: !!(options.prose || options.mdc) }
+      { prose: !!(options.prose || options.mdc), warn }
     )
   }
   const templateKeys = new Set(templates.map(t => `#build/${t.filename}`))
@@ -89,6 +87,10 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
         root = path.resolve(options.root || config.root || '.')
 
         if (options.componentDetection) {
+          // `scanPackages` packages resolve Nuxt UI components from `node_modules`
+          // and user component dirs can sit outside the root: detection has to
+          // scan both or their components lose their theme CSS.
+          scanDirs = resolveExtraScanDirs(root, options.scanPackages, options.components ? options.components.dirs : undefined)
           vue.detectedComponents = await detect()
 
           if (vue.detectedComponents?.size) {
@@ -113,9 +115,8 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
           return
         }
 
-        let timer: ReturnType<typeof setTimeout> | undefined
-        const redetect = async () => {
-          const detected = await detect()
+        async function update() {
+          const detected = await detect(false)
           const previous = vue.detectedComponents
           if (detected?.size === previous?.size && [...(detected ?? [])].every(component => previous?.has(component))) {
             return
@@ -137,8 +138,35 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
           }
         }
 
+        // One run at a time: a save during a run schedules one more after it
+        let running = false
+        let pending = false
+        async function redetect() {
+          if (running) {
+            pending = true
+            return
+          }
+          running = true
+          do {
+            pending = false
+            try {
+              await update()
+            } catch (error) {
+              consola.error('Nuxt UI could not detect the components in use', error)
+            }
+          } while (pending)
+          running = false
+        }
+
+        // Component dirs and linked packages outside the root aren't watched otherwise
+        const outside = scanDirs.filter(dir => !dir.startsWith(`${root}/`) && !dir.includes('/node_modules/'))
+        if (outside.length) {
+          server.watcher.add(outside)
+        }
+
+        let timer: ReturnType<typeof setTimeout> | undefined
         server.watcher.on('all', (event, file) => {
-          if ((event === 'add' || event === 'change' || event === 'unlink') && /\.(?:vue|ts|mts|js|mjs|cjs|tsx|jsx|md)$/.test(file) && !file.includes('/node_modules/')) {
+          if ((event === 'add' || event === 'change' || event === 'unlink') && /\.(?:vue|ts|mts|js|mjs|cjs|tsx|jsx|md|html)$/.test(file) && !file.includes('/node_modules/')) {
             clearTimeout(timer)
             timer = setTimeout(redetect, 100)
           }
