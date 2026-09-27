@@ -35,6 +35,11 @@ const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugi
     if (!(colors as readonly string[]).includes(alias)) {
       throw new Error(`[@nuxt/ui] \`${alias}\` isn't a color alias. The \`@nuxt/ui/colors\` plugin takes ${colors.map(color => `\`${color}\``).join(', ')}.`)
     }
+    // An alias's palette is the alias itself (`--color-primary-500` reads
+    // `--ui-color-primary-500`), so pointing one at another loops
+    if (palette !== 'neutral' && (colors as readonly string[]).includes(palette)) {
+      throw new Error(`[@nuxt/ui] \`${alias}: ${palette}\` points a color alias at another. Give it a Tailwind palette, like \`indigo\`.`)
+    }
     // Nuxt UI's `neutral` alias takes over `--color-neutral-*`, so Tailwind's
     // own neutral palette lives on as `old-neutral`
     const name = palette === 'neutral' ? 'old-neutral' : palette
