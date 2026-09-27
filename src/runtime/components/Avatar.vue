@@ -46,7 +46,7 @@ import { ref, computed, watch } from 'vue'
 import { Primitive, Slot } from 'reka-ui'
 import { defu } from 'defu'
 import ImageComponent from '#build/ui-image-component'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useAvatarGroup } from '../composables/useAvatarGroup'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -69,8 +69,7 @@ const as = computed(() => {
 
 const fallback = computed(() => props.text || (props.alt || '').split(' ').map(word => word.charAt(0)).join('').substring(0, 2))
 
-const appConfig = useThemeConfig() as Avatar['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.avatar)
+const overrides = useComponentOverrides((ui: Avatar['AppConfig']['ui']) => ui.avatar)
 
 const { size, color } = useAvatarGroup(_props)
 

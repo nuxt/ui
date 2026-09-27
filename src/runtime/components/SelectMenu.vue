@@ -277,7 +277,7 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
 const appConfig = useThemeConfig() as SelectMenu['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.selectMenu)
+const overrides = useComponentOverrides((ui: SelectMenu['AppConfig']['ui']) => ui.selectMenu)
 const { filterGroups } = useFilter()
 const rootProps = useForwardProps(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'highlightOnHover', 'by'), emits)
 const portalProps = usePortal(toRef(() => props.portal))

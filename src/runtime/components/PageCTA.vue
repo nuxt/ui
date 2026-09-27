@@ -54,7 +54,7 @@ export interface PageCTASlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { usePrefix } from '../composables/usePrefix'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
@@ -68,8 +68,7 @@ const slots = defineSlots<PageCTASlots>()
 
 const props = useComponentProps('pageCTA', _props, theme)
 
-const appConfig = useThemeConfig() as PageCTA['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.pageCTA)
+const overrides = useComponentOverrides((ui: PageCTA['AppConfig']['ui']) => ui.pageCTA)
 const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys

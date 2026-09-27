@@ -25,7 +25,7 @@ export interface DashboardResizeHandleSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { tv } from '../utils/tv'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 
 const _props = defineProps<DashboardResizeHandleProps>()
 
@@ -33,8 +33,7 @@ defineSlots<DashboardResizeHandleSlots>()
 
 const props = useComponentProps('dashboardResizeHandle', _props, theme)
 
-const appConfig = useThemeConfig() as DashboardResizeHandle['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.dashboardResizeHandle)
+const overrides = useComponentOverrides((ui: DashboardResizeHandle['AppConfig']['ui']) => ui.dashboardResizeHandle)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)())

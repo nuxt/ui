@@ -54,7 +54,7 @@ const open = defineModel<boolean>('open', { default: false })
 
 const { t } = useLocale()
 const appConfig = useThemeConfig() as ProseCodeCollapse['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.prose?.codeCollapse)
+const overrides = useComponentOverrides((ui: ProseCodeCollapse['AppConfig']['ui']) => ui.prose?.codeCollapse)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({

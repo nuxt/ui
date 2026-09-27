@@ -69,7 +69,7 @@ import { useForwardProps, Slot } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
 import { hasProtocol } from 'ufo'
 import { useRoute, RouterLink } from 'vue-router'
-import { useComponentOverrides, useThemeConfig } from '../../../composables/useComponentProps'
+import { useComponentOverrides } from '../../../composables/useComponentProps'
 import { tv } from '../../../utils/tv'
 import { isPartiallyEqual } from '../../../utils/link'
 import ULinkBase from '../../../components/LinkBase.vue'
@@ -86,8 +86,7 @@ defineSlots<LinkSlots>()
 
 const route = useRoute()
 
-const appConfig = useThemeConfig() as Link['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.link)
+const overrides = useComponentOverrides((ui: Link['AppConfig']['ui']) => ui.link)
 
 const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class', 'ui', 'target', 'rel', 'noRel'))
 

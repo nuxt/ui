@@ -1,6 +1,6 @@
 import { describe, it, expect, expectTypeOf, vi } from 'vitest'
 import { reactive } from 'vue'
-import { tv } from '../../src/runtime/utils/tv'
+import { tv, ComponentOverrides, engineFor } from '../../src/runtime/utils/tv'
 import type { TVTheme, VariantProps } from '../../src/runtime/types/tv'
 import { extendTheme } from '../../src/runtime/utils/theme'
 import buttonTheme from '../../src/runtime/theme/button'
@@ -573,10 +573,15 @@ describe('tv override layers', () => {
     defaultVariants: { size: 'md', tone: 'quiet' }
   }
 
-  it('lets an override slot class win over the theme variants and compounds', () => {
+  it('lets an override slot class win over the theme variants', () => {
     // `label` loses to the `tone` variant when it rides beneath it.
     expect(tvt(theme, { slots: { label: 'text-inherit' } })().label()).toBe('text-inherit')
-    expect(tvt(theme, { slots: { base: 'p-4' } })({ square: true }).base()).toBe('inline-flex text-sm p-4')
+    expect(tvt(theme, { slots: { base: 'p-4' } })().base()).toBe('inline-flex text-sm p-4')
+  })
+
+  it('keeps an override slot class beneath the theme compounds', () => {
+    // Like a variant, a slot class for every case doesn't cancel the `square` exception.
+    expect(tvt(theme, { slots: { base: 'p-4' } })({ square: true }).base()).toBe('inline-flex text-sm p-1.5')
   })
 
   it('lets an override variant win over every theme variant', () => {
@@ -628,6 +633,61 @@ describe('tv override layers', () => {
 
   it('keeps the theme variants on top of an override slot replacer', () => {
     expect(tvt(theme, { slots: { label: () => 'font-bold text-default' } })().label()).toBe('font-bold text-dimmed')
+  })
+})
+
+describe('tv override levels', () => {
+  const theme = {
+    slots: { base: 'inline-flex px-2.5', label: 'text-muted' },
+    variants: {
+      size: { md: { base: 'px-2.5 text-sm' } },
+      square: { true: '' },
+      tone: { quiet: { label: 'text-dimmed' } }
+    },
+    compoundVariants: [{ size: 'md', square: true, class: { base: 'p-1.5' } }],
+    defaultVariants: { size: 'md', tone: 'quiet' }
+  }
+  // `app.config.ui.<c>` first, then each `<UTheme>` down to the component
+  const levels = (...entries: any[]) => tvt(theme, new ComponentOverrides(entries, false, engineFor()))
+
+  it('lets a nearer level win over a farther one', () => {
+    expect(levels({ slots: { label: 'text-default' } }, { slots: { label: 'text-toned' } })().label()).toBe('text-toned')
+    expect(levels({ variants: { tone: { quiet: { label: 'text-default' } } } }, { variants: { tone: { quiet: { label: 'text-toned' } } } })().label()).toBe('text-toned')
+  })
+
+  it('lets a nearer level\'s variant win over a farther level\'s slot class', () => {
+    expect(levels({ slots: { label: 'text-default' } }, { variants: { tone: { quiet: { label: 'text-toned' } } } })().label()).toBe('text-toned')
+  })
+
+  it('lets a level\'s slot class win over its own variants', () => {
+    expect(levels({}, { slots: { label: 'text-default' }, variants: { tone: { quiet: { label: 'text-toned' } } } })().label()).toBe('text-default')
+  })
+
+  it('merges the classes of every level instead of replacing them', () => {
+    expect(levels({ slots: { base: 'rounded-full shadow-lg' } }, { slots: { base: 'rounded-none' } })().base()).toBe('inline-flex px-2.5 text-sm shadow-lg rounded-none')
+  })
+
+  it('keeps every level beneath the theme compounds, and their own compounds above them', () => {
+    const ui = levels({ slots: { base: 'p-4' } }, { variants: { size: { md: { base: 'px-4' } } } })
+    expect(ui({ square: true }).base()).toBe('inline-flex text-sm p-1.5')
+    const compounds = levels(
+      { compoundVariants: [{ square: true, class: { base: 'p-2' } }] },
+      { compoundVariants: [{ square: true, class: { base: 'p-3' } }] }
+    )
+    expect(compounds({ square: true }).base()).toBe('inline-flex text-sm p-3')
+  })
+
+  it('lets a nearer replacer take the place of the farther levels\' slot classes', () => {
+    const ui = levels({ slots: { base: 'shadow-lg' } }, { slots: { base: (classes: string) => classes.replace('inline-flex', 'flex') } })
+    expect(ui().base()).toBe('flex shadow-lg px-2.5 text-sm')
+  })
+
+  it('shares one compiled entry for the same levels', () => {
+    const spy = vi.fn((classes: string) => classes)
+    const first = levels({ slots: { label: 'text-default' } }, { slots: { label: spy } })
+    first().label()
+    levels({ slots: { label: 'text-default' } }, { slots: { label: spy } })().label()
+    expect(spy).toHaveBeenCalledTimes(1)
   })
 })
 
