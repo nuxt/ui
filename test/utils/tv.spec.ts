@@ -677,8 +677,15 @@ describe('tv override levels', () => {
     expect(compounds({ square: true }).base()).toBe('inline-flex text-sm p-3')
   })
 
-  it('lets a nearer replacer take the place of the farther levels\' slot classes', () => {
-    const ui = levels({ slots: { base: 'shadow-lg' } }, { slots: { base: (classes: string) => classes.replace('inline-flex', 'flex') } })
+  it('lets a replacer take the place of the theme\'s classes and keeps the levels\' ones', () => {
+    // The farther slot class still wins over the theme variant, identity replacer or not
+    const ui = levels({ slots: { label: 'text-default' } }, { slots: { label: (classes: string) => `${classes} underline` } })
+    expect(ui().label()).toBe('underline text-default')
+    expect(levels({ slots: { label: 'text-default' } }, { slots: { label: (classes: string) => classes } })().label()).toBe(levels({ slots: { label: 'text-default' } })().label())
+  })
+
+  it('applies the replacers of every level, farthest first', () => {
+    const ui = levels({ slots: { base: (classes: string) => classes.replace('inline-flex', 'flex') } }, { slots: { base: (classes: string) => `${classes} shadow-lg` } })
     expect(ui().base()).toBe('flex shadow-lg px-2.5 text-sm')
   })
 

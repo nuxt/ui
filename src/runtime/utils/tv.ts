@@ -15,9 +15,9 @@ import type { ClassValue, SlotClassReplacer, TVMergeConfig, TV } from '../types/
  *
  * Class values may be a `(defaults) => classes` **replacer**, which takes the
  * place of what it receives instead of appending to it. In a level of overrides
- * (`app.config.ui`, a `<UTheme :ui>`) that is the slot's classes below it, from
- * the theme and the farther levels, resolved at construction time, and
- * `variants` / `compoundVariants` still apply on top. In `:ui` and the `class`
+ * (`app.config.ui`, a `<UTheme :ui>`) that is the theme's classes for the slot,
+ * resolved at construction time, and `variants`, `compoundVariants` and the
+ * other levels' classes still apply on top. In `:ui` and the `class`
  * prop it is the slot's whole resolved chain.
  *
  * The performance model follows how components call it, `tv(theme,
@@ -265,9 +265,9 @@ function snapshot<T>(value: T): T {
 
 /**
  * Stack the levels of overrides on the theme, farthest first. A replacer in a
- * level's slots resolves against the slot classes below it, the theme's and the
- * farther levels', and takes their place in the theme layer, so every variant
- * and compound variant still applies on top of it.
+ * level's slots resolves against the theme's slot classes, as a farther
+ * level's replacer left them, and takes their place in the theme layer, so
+ * every variant, compound variant and level class still applies on top of it.
  */
 function resolveSpec(theme: Record<string, any>, levels: readonly Record<string, any>[], config: TVMergeConfig | undefined): Spec {
   const themeSlots: Record<string, any> = theme.slots ?? EMPTY
@@ -294,12 +294,9 @@ function resolveSpec(theme: Record<string, any>, levels: readonly Record<string,
         levelStatics[index]![key] = snapshot(slots[key])
         continue
       }
-      const below = [themeStatics[key]]
-      for (let farther = 0; farther < index; farther++) {
-        below.push(levelStatics[farther]![key])
-        levelStatics[farther]![key] = undefined
-      }
-      themeStatics[key] = replaceClasses(config, slots[key], below)
+      // A replacer takes the place of the theme's classes, after a farther
+      // level's replacer, and leaves every level's plain classes where they are
+      themeStatics[key] = replaceClasses(config, slots[key], themeStatics[key])
     }
   })
 
