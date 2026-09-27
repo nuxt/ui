@@ -7,6 +7,7 @@ import type { UseFileUploadOptions } from '../../src/runtime/composables/useFile
 // Captures the callbacks that `useFileUpload` registers with the VueUse hooks
 // inside `onMounted`, so the test can drive drops and dialog changes directly.
 const vueuse = vi.hoisted(() => ({
+  dropTarget: undefined as MaybeRef<HTMLElement | undefined> | undefined,
   dropOptions: undefined as { onDrop: (files: File[] | FileList | null) => void } | undefined,
   onChangeCb: undefined as ((files: FileList | File[] | null) => void) | undefined,
   open: undefined as ReturnType<typeof vi.fn> | undefined,
@@ -20,7 +21,8 @@ vi.mock('@vueuse/core', async () => {
 
   return {
     ...actual,
-    useDropZone: (_target: unknown, options: any) => {
+    useDropZone: (target: any, options: any) => {
+      vueuse.dropTarget = target
       vueuse.dropOptions = options
       vueuse.isOver = ref(false)
       return { isOverDropZone: vueuse.isOver }
@@ -55,6 +57,7 @@ async function mountUpload(options: UseFileUploadOptions) {
 
 describe('useFileUpload', () => {
   beforeEach(() => {
+    vueuse.dropTarget = undefined
     vueuse.dropOptions = undefined
     vueuse.onChangeCb = undefined
     vueuse.open = undefined
@@ -221,11 +224,28 @@ describe('useFileUpload', () => {
   })
 
   describe('dropzone option', () => {
-    it('does not register a drop zone when dropzone is false', async () => {
-      const onUpdate = vi.fn()
-      await mountUpload({ onUpdate, dropzone: false })
+    it('does not target the drop zone when dropzone is false', async () => {
+      const { api } = await mountUpload({ onUpdate: vi.fn(), dropzone: false })
+      api.dropzoneRef.value = document.createElement('div')
 
-      expect(vueuse.dropOptions).toBeUndefined()
+      expect(unref(vueuse.dropTarget)).toBeUndefined()
+    })
+
+    it('keeps the drop zone target reactive to dropzone changes', async () => {
+      const dropzone = ref(true)
+      const { api } = await mountUpload({ onUpdate: vi.fn(), dropzone })
+      const el = document.createElement('div')
+      api.dropzoneRef.value = el
+
+      expect(unref(vueuse.dropTarget)).toBe(el)
+
+      dropzone.value = false
+
+      expect(unref(vueuse.dropTarget)).toBeUndefined()
+
+      dropzone.value = true
+
+      expect(unref(vueuse.dropTarget)).toBe(el)
     })
   })
 

@@ -11,7 +11,7 @@ export interface UseFileUploadOptions {
   accept?: MaybeRef<string>
   reset?: MaybeRef<boolean>
   multiple?: MaybeRef<boolean>
-  dropzone?: boolean
+  dropzone?: MaybeRef<boolean>
   onUpdate: (files: File[]) => void
   /**
    * Called with the dropped files that do not match `accept`.
@@ -110,9 +110,9 @@ export function useFileUpload(options: UseFileUploadOptions) {
   }
 
   onMounted(() => {
-    const { isOverDropZone } = dropzone
-      ? useDropZone(dropzoneRef, { onDrop: files => onDrop(files, true) })
-      : { isOverDropZone: ref(false) }
+    const { isOverDropZone } = useDropZone(computed(() => unref(dropzone) ? dropzoneRef.value : undefined), {
+      onDrop: files => onDrop(files, true)
+    })
 
     watch(isOverDropZone, (value) => {
       isDragging.value = value

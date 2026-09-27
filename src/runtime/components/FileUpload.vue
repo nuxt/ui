@@ -196,7 +196,7 @@ const { isDragging, open, inputRef, dropzoneRef } = useFileUpload({
   accept,
   reset,
   multiple: multiple as MaybeRef<boolean>,
-  dropzone: props.dropzone,
+  dropzone: toRef(() => props.dropzone) as MaybeRef<boolean>,
   onUpdate,
   onReject
 })
