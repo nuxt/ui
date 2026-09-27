@@ -91,7 +91,7 @@ import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
 import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useFormField } from '../composables/useFormField'
-import { get, omit } from '../utils'
+import { get, omit, transformUI } from '../utils'
 import { tv } from '../utils/tv'
 import UCheckbox from './Checkbox.vue'
 
@@ -212,7 +212,7 @@ function onUpdate(value: any) {
         :size="size"
         :name="name"
         :disabled="item.disabled || disabled"
-        :ui="{ ...(props.ui ? omit(props.ui, ['root']) : undefined), ...(item.ui || {}) }"
+        :ui="{ ...transformUI(omit(ui, ['root', 'fieldset', 'legend', 'item']), props.ui ? omit(props.ui, ['root']) : undefined), ...(item.ui || {}) }"
         data-slot="checkbox-group-item"
         :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class], disabled: item.disabled || disabled })"
       >
