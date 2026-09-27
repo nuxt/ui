@@ -35,7 +35,6 @@ type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' 
 type AppConfigUI = {
   colors?: { [K in Exclude<ColorAlias, 'neutral'>]?: Color } & { neutral?: NeutralColor | (string & {}) }
   icons?: Partial<typeof icons>
-  prefix?: string
   tv?: TVMergeConfig
   defaultVariants?: ThemeDefaultVariants
   unstyled?: boolean

@@ -227,13 +227,13 @@ type AppConfigUI = {
     neutral?: NeutralColor | (string & {})
   }
   icons?: Partial<IconsConfig>
-  prefix?: string
   tv?: TVMergeConfig
   defaultVariants?: ThemeDefaultVariants
   unstyled?: boolean
 } & TVConfig<typeof ui>
 
-type AppConfigRuntimeUI = DeepRequired<Pick<AppConfigUI, 'colors' | 'icons' | 'tv'>> & typeof ui
+// The module writes \`prefix\` from \`tailwindPrefix\`, so it's read at runtime but not set here
+type AppConfigRuntimeUI = DeepRequired<Pick<AppConfigUI, 'colors' | 'icons' | 'tv'>> & { prefix?: string } & typeof ui
 
 declare module '@nuxt/schema' {
   interface AppConfigInput {
