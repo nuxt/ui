@@ -57,10 +57,12 @@ export function useRootThemeContext(): ThemeContext {
   return context
 }
 
+/** @internal */
 export function injectThemeContext(): ThemeContext {
   return _injectThemeContext(null) ?? useRootThemeContext()
 }
 
+/** @internal */
 export { provideThemeContext }
 
 /**

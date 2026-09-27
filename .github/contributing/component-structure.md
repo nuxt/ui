@@ -210,7 +210,7 @@ const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
 // theme size/color/highlight is silently dropped on bare inputs.
 //
 // Final precedence: explicit > closer-context (form/group) > <UTheme :props>
-//                   > withDefaults > app.config > tv defaults
+//                   > app.config defaultVariants > withDefaults > tv defaults
 const ui = computed(() => tv(theme, overrides.value)({
   color: color.value ?? props.color,
   size: inputSize.value ?? props.size,
@@ -343,7 +343,7 @@ export * from '../components/ComponentName.vue'
 
 ## Register in `ThemeDefaults`
 
-The `ThemeDefaults` interface in `src/runtime/composables/useComponentProps.ts` powers autocomplete inside `<UTheme :props="{ componentName: { … } }">`. The CLI scaffolder (`pnpm cli make component`) auto-inserts the entry; only do this manually if you skipped the CLI:
+The `ThemeDefaults` interface in `src/runtime/types/theme.ts` powers autocomplete inside `<UTheme :props="{ componentName: { … } }">`. The CLI scaffolder (`pnpm cli make component`) auto-inserts the entry; only do this manually if you skipped the CLI:
 
 ```ts
 export interface ThemeDefaults {

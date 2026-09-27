@@ -16,6 +16,7 @@ export function defineTheme<T extends TVTheme>(theme: T & TVThemeCheck<T>): Defi
  * concatenate with the extension's items first, and any other value the
  * extension sets wins, a function being called with the base value. With no
  * base value the function is kept as is, which `tv()` then rejects.
+ * @internal
  */
 export type ExtendedTheme<T, B>
   = T extends (...args: any[]) => infer R

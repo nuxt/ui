@@ -344,13 +344,10 @@ You can use `var(--ui-color-<name>-<shade>)` to reference shades from the active
 
 ### Black/white as primary
 
-`black` and `white` have no shades, so they can't be used in config. Set them directly:
+`black` and `white` have no shades, so the `@nuxt/ui/colors` plugin can't take them. Point `primary` at `neutral`, which is near black in light mode and white in dark mode:
 
 ```css
 :root {
-  --ui-primary: black;
-}
-.dark {
-  --ui-primary: white;
+  --ui-primary: var(--ui-neutral);
 }
 ```

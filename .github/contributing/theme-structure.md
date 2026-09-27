@@ -29,7 +29,7 @@ compoundVariants: [{
 
 ## Static Theme
 
-A theme is a plain object wrapped in `defineTheme`. It never reads module options, so every class it can produce is written in the file and Tailwind finds it by scanning `src/runtime/theme` from the package, through `@source './theme'` in `src/runtime/index.css`. Components import it directly (`import theme from '../theme/accordion'`), and `#build/ui/*` re-exports it for app code.
+A theme is a plain object wrapped in `defineTheme`. It never reads module options, so every class it can produce is written in the file and Tailwind finds it by scanning `src/runtime/theme` from the package, through `@source './theme'` in `src/runtime/package-sources.css`. Components import it directly (`import theme from '../theme/accordion'`), and `#build/ui/*` re-exports it for app code.
 
 `defineTheme` checks `compoundVariants` and `defaultVariants` against `variants`, and keeps their values typed as the variant's values, which inference alone widens to `string`. A theme that builds on another uses `extendTheme(base, {...})` instead, typed after `defuFn`: its values win, a function receives the base value and returns the new one, and `compoundVariants` concatenate. Type a function's parameter from the base (`(prev: typeof input.variants.variant) => ...`) so the variant values survive.
 
@@ -199,13 +199,6 @@ Apply styles when multiple conditions match:
 
 ```ts
 compoundVariants: [
-  // Color + variant
-  {
-    color: 'primary',
-    variant: 'solid',
-    class: { base: 'bg-primary text-inverted' }
-  },
-  
   // Size + boolean
   {
     size: 'sm',
@@ -224,9 +217,9 @@ compoundVariants: [
   
   // Array of variants
   {
-    color: 'neutral',
     variant: ['outline', 'subtle'],
-    class: { base: 'focus-visible:ring-2 focus-visible:ring-inverted' }
+    highlight: true,
+    class: { base: 'ring-2' }
   }
 ]
 ```
