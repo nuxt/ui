@@ -755,7 +755,9 @@ function createTV(config?: TVMergeConfig, prefix?: string) {
       const { unstyled: _, ...rest } = overrides
       theme = unstyledTheme(theme)
       overrides = rest
-    } else if (prefix) {
+    }
+    // After blanking, so the color scope it keeps is prefixed too
+    if (prefix) {
       let prefixed = prefixedThemes.get(theme)
       if (!prefixed) {
         prefixed = applyPrefix(theme, prefix) as Record<string, any>
