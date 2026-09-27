@@ -11,6 +11,7 @@ describe('PageCTA', () => {
   renderEach(PageCTA, [
     // Props
     ['with as', { props: { as: 'section' } }],
+    ['with as object', { props: { title: 'Title', as: { root: 'section', title: 'h3' } } }],
     ['with title', { props: { title: 'Title' } }],
     ['with description', { props: { description: 'Description' } }],
     ['with links', { props: { links: [{ label: 'Get started' }] } }],

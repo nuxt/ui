@@ -59,7 +59,6 @@ export interface ChangelogVersionSlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { defu } from 'defu'
 import { Primitive, useDateFormatter } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -67,7 +66,7 @@ import { useLocale } from '../composables/useLocale'
 import { useComponentProps } from '../composables/useComponentProps'
 import { usePrefix } from '../composables/usePrefix'
 import ImageComponent from '#build/ui-image-component'
-import { getSlotChildrenText } from '../utils'
+import { getSlotChildrenText, resolveAs } from '../utils'
 import { tv } from '../utils/tv'
 import ULink from './Link.vue'
 import UBadge from './Badge.vue'
@@ -87,20 +86,6 @@ const appConfig = useAppConfig() as ChangelogVersion['AppConfig']
 const formatter = useDateFormatter(locale.value.code)
 const prefix = usePrefix()
 
-// eslint-disable-next-line vue/no-dupe-keys
-const as = computed(() => {
-  if (
-    typeof props.as === 'string'
-    || typeof props.as === 'function'
-    || typeof props.as?.render === 'function'
-    || typeof props.as?.setup === 'function'
-  ) {
-    return { root: props.as, title: 'h2' }
-  }
-
-  return defu(props.as, { root: 'article', title: 'h2' })
-})
-
 const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate()
 const [DefineDateTemplate, ReuseDateTemplate] = createReusableTemplate<{ hidden?: boolean }>({
   props: {
@@ -110,6 +95,9 @@ const [DefineDateTemplate, ReuseDateTemplate] = createReusableTemplate<{ hidden?
     }
   }
 })
+
+// eslint-disable-next-line vue/no-dupe-keys
+const as = computed(() => resolveAs(props.as, { root: 'article', title: 'h2' }))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.changelogVersion || {}) })({

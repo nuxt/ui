@@ -28,7 +28,7 @@ export interface FooterColumnsProps<T extends FooterColumnLink = FooterColumnLin
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: any
+  as?: any | { root?: any, label?: any }
   class?: any
   columns?: FooterColumn<T>[]
   ui?: FooterColumns['slots']
@@ -54,14 +54,13 @@ import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { pickLinkProps } from '../utils/link'
+import { resolveAs } from '../utils'
 import { tv } from '../utils/tv'
 import ULink from './Link.vue'
 import ULinkBase from './LinkBase.vue'
 import UIcon from './Icon.vue'
 
-const _props = withDefaults(defineProps<FooterColumnsProps<T>>(), {
-  as: 'nav'
-})
+const _props = defineProps<FooterColumnsProps<T>>()
 const slots = defineSlots<FooterColumnsSlots<T>>()
 
 const props = useComponentProps<FooterColumnsProps<T>>('footerColumns', _props)
@@ -69,11 +68,14 @@ const props = useComponentProps<FooterColumnsProps<T>>('footerColumns', _props)
 const appConfig = useAppConfig() as FooterColumns['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
+const as = computed(() => resolveAs(props.as, { root: 'nav', label: 'h3' }))
+
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.footerColumns || {}) })())
 </script>
 
 <template>
-  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="as.root" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div v-if="!!slots.left" data-slot="left" :class="ui.left({ class: props.ui?.left })">
       <slot name="left" />
     </div>
@@ -81,11 +83,11 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.footerColumns ||
     <div v-if="!!slots.default || props.columns?.length" data-slot="center" :class="ui.center({ class: props.ui?.center })">
       <slot>
         <div v-for="(column, index) in props.columns" :key="index">
-          <h3 data-slot="label" :class="ui.label({ class: props.ui?.label })">
+          <Primitive :as="as.label" data-slot="label" :class="ui.label({ class: props.ui?.label })">
             <slot name="column-label" :column="column">
               {{ column.label }}
             </slot>
-          </h3>
+          </Primitive>
 
           <ul data-slot="list" :class="ui.list({ class: props.ui?.list })">
             <li v-for="(link, linkIndex) in column.children" :key="linkIndex" data-slot="item" :class="ui.item({ class: [props.ui?.item, link.ui?.item] })">
