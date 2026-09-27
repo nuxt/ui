@@ -800,7 +800,9 @@ function createEngine(config?: TVMergeConfig, prefix?: string): Engine {
     // so only the overrides, `:ui` and `class` classes remain
     if (unstyled) {
       theme = unstyledTheme(theme)
-    } else if (prefix) {
+    }
+    // After blanking, so the color scope it keeps is prefixed too
+    if (prefix) {
       let prefixed = prefixedThemes.get(theme)
       if (!prefixed) {
         prefixed = applyPrefix(theme, prefix) as Record<string, any>
