@@ -29,7 +29,6 @@ import type { ThemeDefaultVariants } from './runtime/types/theme'
 
 type AppConfigUI = {
   icons?: Partial<typeof icons>
-  prefix?: string
   tv?: TVMergeConfig
   defaultVariants?: ThemeDefaultVariants
   unstyled?: boolean
