@@ -11,6 +11,7 @@ import Alert from '../../src/runtime/components/Alert.vue'
 import Input from '../../src/runtime/components/Input.vue'
 import Checkbox from '../../src/runtime/components/Checkbox.vue'
 import CheckboxGroup from '../../src/runtime/components/CheckboxGroup.vue'
+import Progress from '../../src/runtime/components/Progress.vue'
 import FileUpload from '../../src/runtime/components/FileUpload.vue'
 import Tooltip from '../../src/runtime/components/Tooltip.vue'
 import Form from '../../src/runtime/components/Form.vue'
@@ -628,6 +629,22 @@ describe('Theme', () => {
 
     expect(wrapper.html()).toContain('[--ui-accent:var(--ui-success)]')
     expect(wrapper.html()).not.toContain('[--ui-accent:var(--ui-primary)]')
+  })
+
+  // Progress styles an unknown color inline, so it has to know the ones a Theme adds
+  test(':variants color on a progress is a known color', async () => {
+    const wrapper = await mountSuspended({
+      components: { Theme, Progress },
+      template: `
+        <Theme :variants="{ progress: { color: { teal: { indicator: 'bg-[#0f0]' } } } }">
+          <Progress color="teal" :model-value="50" />
+        </Theme>
+      `
+    })
+
+    const indicator = wrapper.find('[data-slot="progress-indicator"]')
+    expect(indicator.classes()).toContain('bg-[#0f0]')
+    expect(indicator.attributes('style') ?? '').not.toContain('background-color')
   })
 
   // The group forwards the Checkbox slots of its `ui` to every item, the ones a
