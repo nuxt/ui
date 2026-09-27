@@ -269,26 +269,20 @@ export default defineNuxtConfig({
 @import "@nuxt/ui";
 ```
 
-### Tree-shaking with `experimental.componentDetection`
+### Tree-shaking with `componentDetection`
 
-Enable automatic component detection to only generate CSS for components you actually use:
+Nuxt UI only generates the CSS of the components your app uses, detected by scanning your source and Markdown content. It's on by default. For components resolved from a dynamic name (e.g., `<component :is="...">`), list them so they're included:
 
 ```ts
 // nuxt.config.ts
 export default defineNuxtConfig({
   ui: {
-    experimental: {
-      componentDetection: true
-    }
+    componentDetection: ['Modal', 'DropdownMenu', 'Popover']
   }
 })
 ```
 
-For dynamic components (e.g., `<component :is="...">`), pass an array of component names to guarantee they're included:
-
-```ts
-componentDetection: ['Modal', 'DropdownMenu', 'Popover']
-```
+Set `componentDetection: false` to generate the CSS of every component.
 
 ## CSS `@theme` customization
 

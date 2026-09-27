@@ -26,6 +26,17 @@ function createComponentPattern(prefix: string): RegExp {
 }
 
 /**
+ * Pattern to match the MDC syntax of Markdown content, block and inline:
+ * `::u-callout`, `:u-badge{label="New"}`. Nuxt Content resolves these to the
+ * prefixed component.
+ */
+function createMdcPattern(prefix: string): RegExp {
+  const kebabPrefix = kebabCase(prefix).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
+  return new RegExp(`(?<![\\w-]):+${kebabPrefix}-([a-z][a-z0-9-]*)`, 'g')
+}
+
+/**
  * The component name a pattern match refers to, normalised to prefix-less
  * PascalCase (`match[2]` is the kebab-case tag capture).
  */
@@ -52,20 +63,21 @@ async function buildComponentDependencyGraph(componentDir: string): Promise<Map<
     cwd: componentDir,
     absolute: true,
     // Prose components share file basenames with nine regular components
-    // (`prose/Tabs.vue` vs `Tabs.vue`), and the graph is keyed by basename:
-    // letting them in overwrites the regular component's dependency set. They
-    // don't need nodes anyway, they are never used with the `U` prefix.
+    // (`prose/Tabs.vue` vs `Tabs.vue`), so they get their own `Prose` keys below
     ignore: ['prose/**']
   })
+  const proseFiles = globSync(['prose/**/*.vue'], { cwd: componentDir, absolute: true })
+
+  const nameOf = (file: string) => pascalCase(file.split('/').pop()!.replace('.vue', ''))
 
   // The pattern also matches ordinary identifiers (`URL` -> `RL`), so an edge
   // only counts when it points at a real component file.
-  const componentNames = new Set(componentFiles.map(file => pascalCase(file.split('/').pop()!.replace('.vue', ''))))
+  const componentNames = new Set(componentFiles.map(nameOf))
 
-  for (const componentFile of componentFiles) {
+  for (const componentFile of [...componentFiles, ...proseFiles]) {
     try {
       const content = await readFile(componentFile, 'utf-8')
-      const componentName = pascalCase(componentFile.split('/').pop()!.replace('.vue', ''))
+      const componentName = proseFiles.includes(componentFile) ? `Prose${nameOf(componentFile)}` : nameOf(componentFile)
       const dependencies = new Set<string>()
 
       const matches = content.matchAll(componentPattern)
@@ -159,7 +171,11 @@ export async function detectUsedComponents(
   dirs: string[],
   prefix: string,
   componentDir: string,
-  includeComponents?: string[]
+  includeComponents?: string[],
+  { prose = false }: {
+    /** Prose components render from Markdown, which can't be traced, so what they render is always included. */
+    prose?: boolean
+  } = {}
 ): Promise<Set<string> | undefined> {
   const detectedComponents = new Set<string>()
 
@@ -171,6 +187,7 @@ export async function detectUsedComponents(
   }
 
   const componentPattern = createComponentPattern(prefix)
+  const mdcPattern = createMdcPattern(prefix)
 
   // Scan all source files for component usage across all layers
   for (const dir of dirs) {
@@ -178,7 +195,7 @@ export async function detectUsedComponents(
     // `.mjs`/`.cjs`), so the build-output ignores only apply to project dirs.
     const isPackageDir = normalize(dir).includes('node_modules/')
 
-    const appFiles = globSync(['**/*.{vue,ts,mts,js,mjs,cjs,tsx,jsx}'], {
+    const appFiles = globSync(['**/*.{vue,ts,mts,js,mjs,cjs,tsx,jsx,md}'], {
       cwd: dir,
       // `**/` prefixes so nested dirs are skipped too: the Vue integration
       // scans the whole Vite root, not just Nuxt layer `app/` directories.
@@ -194,12 +211,16 @@ export async function detectUsedComponents(
       try {
         const filePath = join(dir, file)
         const content = await readFile(filePath, 'utf-8')
-        const matches = content.matchAll(componentPattern)
-
-        for (const match of matches) {
+        for (const match of content.matchAll(componentPattern)) {
           const componentName = getMatchedComponent(match)
           if (componentName) {
             detectedComponents.add(componentName)
+          }
+        }
+
+        if (file.endsWith('.md')) {
+          for (const match of content.matchAll(mdcPattern)) {
+            detectedComponents.add(pascalCase(match[1]!))
           }
         }
       } catch {
@@ -208,12 +229,21 @@ export async function detectUsedComponents(
     }
   }
 
+  // Nothing found in the app keeps every theme, prose or not
   if (detectedComponents.size === 0) {
     return undefined
   }
 
   // Build dependency graph of components
   const dependencyGraph = await buildComponentDependencyGraph(componentDir)
+
+  if (prose) {
+    for (const component of dependencyGraph.keys()) {
+      if (component.startsWith('Prose')) {
+        detectedComponents.add(component)
+      }
+    }
+  }
 
   // The pattern also matches ordinary identifiers (`URL` -> `RL`, `UUID` ->
   // `UID`), and `includeComponents` names arrive unvalidated: filter against
@@ -235,6 +265,13 @@ export async function detectUsedComponents(
   const allComponents = new Set<string>()
   for (const component of validComponents) {
     resolveComponentDependencies(component, dependencyGraph, allComponents)
+  }
+
+  // The prose nodes only exist to reach what they render, their themes come as a whole
+  for (const component of allComponents) {
+    if (component.startsWith('Prose')) {
+      allComponents.delete(component)
+    }
   }
 
   return allComponents

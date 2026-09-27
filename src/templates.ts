@@ -1,3 +1,4 @@
+import { existsSync } from 'node:fs'
 import { readFile } from 'node:fs/promises'
 import { camelCase, kebabCase } from 'scule'
 import { genExport } from 'knitwork'
@@ -83,18 +84,22 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
       }
     }
 
-    // With `experimental.componentDetection`, only the themes of the detected
-    // components, their dependencies included, reach the CSS.
+    // With `componentDetection`, only the themes of the detected components,
+    // their dependencies included, reach the CSS.
     const componentDir = resolve('./runtime/components')
 
     let detectedComponents = vue?.detectedComponents
 
-    if (options.experimental?.componentDetection && nuxt && componentDir && layers.length) {
+    if (options.componentDetection && nuxt && componentDir && layers.length) {
+      // Markdown content lives next to each layer's app dir, in `content/`
+      const contentDirs = hasProse ? getLayerDirectories(nuxt).map(layer => `${layer.root}content`).filter(dir => existsSync(dir)) : []
+
       detectedComponents = await detectUsedComponents(
-        layers,
+        [...layers, ...contentDirs],
         options.prefix!,
         componentDir,
-        Array.isArray(options.experimental.componentDetection) ? options.experimental.componentDetection : undefined
+        Array.isArray(options.componentDetection) ? options.componentDetection : undefined,
+        { prose: hasProse }
       )
 
       if (detectedComponents && detectedComponents.size > 0) {
@@ -270,9 +275,9 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt, resolve: Resolv
     references.push({ path: resolve('./runtime/types/app.config.d.ts') })
   })
 
-  if (options.experimental?.componentDetection && nuxt.options.dev) {
+  if (options.componentDetection && nuxt.options.dev) {
     nuxt.hook('builder:watch', async (_, path) => {
-      if (/\.(?:vue|ts|mts|js|mjs|cjs|tsx|jsx)$/.test(path)) {
+      if (/\.(?:vue|ts|mts|js|mjs|cjs|tsx|jsx|md)$/.test(path)) {
         await updateTemplates({ filter: template => template.filename === 'ui.css' })
       }
     })

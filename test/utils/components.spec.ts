@@ -179,6 +179,25 @@ describe('detectUsedComponents', { timeout: 20000 }, () => {
     expect(detected).not.toContain('Table')
   })
 
+  it('includes what prose components render when prose is on', async () => {
+    const dir = fixtureUsing('<UButton />')
+
+    const withProse = await detectUsedComponents([dir], 'U', componentDir, undefined, { prose: true })
+    expect(withProse).toContain('Tabs')
+    expect([...withProse!].some(component => component.startsWith('Prose'))).toBe(false)
+    expect(await detectUsedComponents([dir], 'U', componentDir)).not.toContain('Tabs')
+  })
+
+  it('detects the MDC syntax of Markdown content', async () => {
+    const dir = fixtureRoot()
+    writeFileSync(join(dir, 'index.md'), '::u-alert\n---\ntitle: Heads up\n---\n::\n\nNew :u-badge{label="Beta"} feature, see https://example.com:u-calendar\n')
+
+    const detected = await detectUsedComponents([dir], 'U', componentDir)
+    expect(detected).toContain('Alert')
+    expect(detected).toContain('Badge')
+    expect(detected).not.toContain('Calendar')
+  })
+
   it('returns undefined when no component is detected', async () => {
     expect(await detectUsedComponents([fixtureUsing('<div>no nuxt ui here</div>')], 'U', componentDir)).toBeUndefined()
   })
