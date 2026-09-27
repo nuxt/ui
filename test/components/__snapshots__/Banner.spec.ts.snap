@@ -5,8 +5,8 @@ exports[`Banner > renders with actions correctly 1`] = `
   <!--v-if-->
   <div data-slot="banner-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12">
     <div data-slot="banner-left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
-    <div data-slot="banner-center" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:rocket size-5 shrink-0 text-inverted pointer-events-none" aria-hidden="true" data-slot="banner-icon"></span>
-      <div data-slot="banner-title" class="text-sm text-inverted font-medium truncate">Title</div>
+    <div data-slot="banner-center" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:rocket size-5 shrink-0 text-accent-foreground pointer-events-none" aria-hidden="true" data-slot="banner-icon"></span>
+      <div data-slot="banner-title" class="text-sm text-accent-foreground font-medium truncate">Title</div>
       <div data-slot="banner-actions" class="flex gap-1.5 shrink-0 isolate"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2 py-1 text-xs gap-1">
           <!--v-if--><span data-slot="button-label" class="truncate">Learn more</span><span class="iconify i-lucide:arrow-right shrink-0 size-4" aria-hidden="true" data-slot="button-trailingIcon"></span>
         </button></div>
@@ -79,7 +79,7 @@ exports[`Banner > renders with close correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-slot="banner-right" class="lg:flex-1 flex items-center justify-end"><button type="button" data-slot="banner-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] active:bg-accent-soft outline-accent-focus focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent text-sm gap-1.5 p-1.5 text-inverted hover:bg-default/10 focus-visible:bg-default/10 -me-1.5 lg:me-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
+    <div data-slot="banner-right" class="lg:flex-1 flex items-center justify-end"><button type="button" data-slot="banner-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] active:bg-accent-soft outline-accent-focus focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent text-sm gap-1.5 p-1.5 text-accent-foreground hover:bg-default/10 focus-visible:bg-default/10 -me-1.5 lg:me-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
       </button></div>
@@ -124,8 +124,8 @@ exports[`Banner > renders with icon correctly 1`] = `
   <!--v-if-->
   <div data-slot="banner-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12">
     <div data-slot="banner-left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
-    <div data-slot="banner-center" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:rocket size-5 shrink-0 text-inverted pointer-events-none" aria-hidden="true" data-slot="banner-icon"></span>
-      <div data-slot="banner-title" class="text-sm text-inverted font-medium truncate">Title</div>
+    <div data-slot="banner-center" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:rocket size-5 shrink-0 text-accent-foreground pointer-events-none" aria-hidden="true" data-slot="banner-icon"></span>
+      <div data-slot="banner-title" class="text-sm text-accent-foreground font-medium truncate">Title</div>
       <!--v-if-->
     </div>
     <div data-slot="banner-right" class="lg:flex-1 flex items-center justify-end">
@@ -173,8 +173,8 @@ exports[`Banner > renders with neutral color correctly 1`] = `
   <!--v-if-->
   <div data-slot="banner-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12">
     <div data-slot="banner-left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
-    <div data-slot="banner-center" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:rocket size-5 shrink-0 text-inverted pointer-events-none" aria-hidden="true" data-slot="banner-icon"></span>
-      <div data-slot="banner-title" class="text-sm text-inverted font-medium truncate">Title</div>
+    <div data-slot="banner-center" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:rocket size-5 shrink-0 text-accent-foreground pointer-events-none" aria-hidden="true" data-slot="banner-icon"></span>
+      <div data-slot="banner-title" class="text-sm text-accent-foreground font-medium truncate">Title</div>
       <!--v-if-->
     </div>
     <div data-slot="banner-right" class="lg:flex-1 flex items-center justify-end">
@@ -207,7 +207,7 @@ exports[`Banner > renders with title correctly 1`] = `
     <div data-slot="banner-left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
     <div data-slot="banner-center" class="flex items-center gap-1.5 min-w-0">
       <!--v-if-->
-      <div data-slot="banner-title" class="text-sm text-inverted font-medium truncate">Title</div>
+      <div data-slot="banner-title" class="text-sm text-accent-foreground font-medium truncate">Title</div>
       <!--v-if-->
     </div>
     <div data-slot="banner-right" class="lg:flex-1 flex items-center justify-end">
@@ -224,7 +224,7 @@ exports[`Banner > renders with title slot correctly 1`] = `
     <div data-slot="banner-left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
     <div data-slot="banner-center" class="flex items-center gap-1.5 min-w-0">
       <!--v-if-->
-      <div data-slot="banner-title" class="text-sm text-inverted font-medium truncate">Title slot</div>
+      <div data-slot="banner-title" class="text-sm text-accent-foreground font-medium truncate">Title slot</div>
       <!--v-if-->
     </div>
     <div data-slot="banner-right" class="lg:flex-1 flex items-center justify-end">
