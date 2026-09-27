@@ -8,7 +8,6 @@ import type { UseFileUploadOptions } from '../../src/runtime/composables/useFile
 // Captures the callbacks that `useFileUpload` registers with the VueUse hooks
 // inside `onMounted`, so the test can drive drops and dialog changes directly.
 const vueuse = vi.hoisted(() => ({
-  dropTarget: undefined as MaybeRef<HTMLElement | undefined> | undefined,
   dropOptions: undefined as { dataTypes?: MaybeRef<readonly string[]>, onDrop: (files: File[] | FileList | null) => void } | undefined,
   onChangeCb: undefined as ((files: FileList | File[] | null) => void) | undefined,
   open: undefined as ReturnType<typeof vi.fn> | undefined,
@@ -22,8 +21,7 @@ vi.mock('@vueuse/core', async () => {
 
   return {
     ...actual,
-    useDropZone: (target: any, options: any) => {
-      vueuse.dropTarget = target
+    useDropZone: (_target: unknown, options: any) => {
       vueuse.dropOptions = options
       vueuse.isOver = ref(false)
       return { isOverDropZone: vueuse.isOver }
@@ -58,7 +56,6 @@ async function mountUpload(options: UseFileUploadOptions) {
 
 describe('useFileUpload', () => {
   beforeEach(() => {
-    vueuse.dropTarget = undefined
     vueuse.dropOptions = undefined
     vueuse.onChangeCb = undefined
     vueuse.open = undefined
@@ -185,28 +182,38 @@ describe('useFileUpload', () => {
   })
 
   describe('dropzone option', () => {
-    it('does not target the drop zone when dropzone is false', async () => {
-      const { api } = await mountUpload({ onUpdate: vi.fn(), dropzone: false })
-      api.dropzoneRef.value = document.createElement('div')
+    it('does not register a drop zone when dropzone is false', async () => {
+      const onUpdate = vi.fn()
+      await mountUpload({ onUpdate, dropzone: false })
 
-      expect(unref(vueuse.dropTarget)).toBeUndefined()
+      expect(vueuse.dropOptions).toBeUndefined()
     })
 
-    it('keeps the drop zone target reactive to dropzone changes', async () => {
-      const dropzone = ref(true)
-      const { api } = await mountUpload({ onUpdate: vi.fn(), dropzone })
-      const el = document.createElement('div')
-      api.dropzoneRef.value = el
+    it('registers the drop zone once dropzone is enabled', async () => {
+      const dropzone = ref(false)
+      await mountUpload({ onUpdate: vi.fn(), dropzone })
 
-      expect(unref(vueuse.dropTarget)).toBe(el)
-
-      dropzone.value = false
-
-      expect(unref(vueuse.dropTarget)).toBeUndefined()
+      expect(vueuse.dropOptions).toBeUndefined()
 
       dropzone.value = true
+      await nextTick()
 
-      expect(unref(vueuse.dropTarget)).toBe(el)
+      expect(vueuse.dropOptions).toBeDefined()
+    })
+
+    it('stops dragging when dropzone is disabled mid-drag', async () => {
+      const dropzone = ref(true)
+      const { api } = await mountUpload({ onUpdate: vi.fn(), dropzone })
+
+      vueuse.isOver!.value = true
+      await nextTick()
+
+      expect(api.isDragging.value).toBe(true)
+
+      dropzone.value = false
+      await nextTick()
+
+      expect(api.isDragging.value).toBe(false)
     })
   })
 
