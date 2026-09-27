@@ -1,5 +1,5 @@
 import type { ComponentPublicInstance, MaybeRef } from 'vue'
-import { ref, computed, unref, onMounted, watch, reactive } from 'vue'
+import { ref, computed, unref, onMounted, watch, reactive, effectScope } from 'vue'
 import { useFileDialog, useDropZone } from '@vueuse/core'
 
 export interface UseFileUploadOptions {
@@ -110,13 +110,26 @@ export function useFileUpload(options: UseFileUploadOptions) {
   }
 
   onMounted(() => {
-    const { isOverDropZone } = useDropZone(computed(() => unref(dropzone) ? dropzoneRef.value : undefined), {
-      onDrop: files => onDrop(files, true)
-    })
+    // A fresh scope per enable, so VueUse's drag counter doesn't outlive a disable mid-drag.
+    watch(() => unref(dropzone), (enabled, _, onCleanup) => {
+      if (!enabled) {
+        return
+      }
 
-    watch(isOverDropZone, (value) => {
-      isDragging.value = value
-    })
+      const scope = effectScope()
+      scope.run(() => {
+        const { isOverDropZone } = useDropZone(dropzoneRef, { onDrop: files => onDrop(files, true) })
+
+        watch(isOverDropZone, (value) => {
+          isDragging.value = value
+        })
+      })
+
+      onCleanup(() => {
+        scope.stop()
+        isDragging.value = false
+      })
+    }, { immediate: true })
 
     const { onChange, open } = useFileDialog({
       accept,

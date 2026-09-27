@@ -267,12 +267,14 @@ describe('FileUpload', () => {
   })
 
   describe('dropzone', () => {
-    async function dropFiles(wrapper: Awaited<ReturnType<typeof mountSuspended>>, files: File[]) {
+    const file = new File(['foo'], 'file.txt', { type: 'text/plain' })
+
+    async function drag(wrapper: Awaited<ReturnType<typeof mountSuspended>>, types: string[]) {
       const data = new DataTransfer()
-      files.forEach(file => data.items.add(file))
+      data.items.add(file)
       const base = wrapper.find('[data-slot="base"]').element
 
-      for (const type of ['dragenter', 'drop']) {
+      for (const type of types) {
         const event = new Event(type, { bubbles: true, cancelable: true })
         Object.defineProperty(event, 'dataTransfer', { value: data })
         base.dispatchEvent(event)
@@ -284,7 +286,7 @@ describe('FileUpload', () => {
       const wrapper = await mountSuspended(FileUpload, { props: { dropzone: false } })
 
       await wrapper.setProps({ dropzone: true })
-      await dropFiles(wrapper, [new File(['foo'], 'file.txt', { type: 'text/plain' })])
+      await drag(wrapper, ['dragenter', 'drop'])
 
       expect(wrapper.emitted('update:modelValue')).toHaveLength(1)
     })
@@ -293,9 +295,24 @@ describe('FileUpload', () => {
       const wrapper = await mountSuspended(FileUpload, { props: { dropzone: true } })
 
       await wrapper.setProps({ dropzone: false })
-      await dropFiles(wrapper, [new File(['foo'], 'file.txt', { type: 'text/plain' })])
+      await drag(wrapper, ['dragenter', 'drop'])
 
       expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+    })
+
+    it('clears the drag state when dropzone is disabled mid-drag', async () => {
+      const wrapper = await mountSuspended(FileUpload, { props: { dropzone: true } })
+      const base = wrapper.find('[data-slot="base"]')
+
+      await drag(wrapper, ['dragenter'])
+      expect(base.attributes('data-dragging')).toBe('true')
+
+      await wrapper.setProps({ dropzone: false })
+      expect(base.attributes('data-dragging')).toBe('false')
+
+      await wrapper.setProps({ dropzone: true })
+      await drag(wrapper, ['dragenter', 'dragleave'])
+      expect(base.attributes('data-dragging')).toBe('false')
     })
   })
 
