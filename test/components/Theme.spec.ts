@@ -630,6 +630,23 @@ describe('Theme', () => {
     expect(wrapper.html()).not.toContain('[--ui-accent:var(--ui-primary)]')
   })
 
+  // The group forwards the Checkbox slots of its `ui` to every item, the ones a
+  // Theme sets included, which only the group's resolved classes carry
+  test(':props ui on a checkbox group reaches its items', async () => {
+    const wrapper = await mountSuspended({
+      components: { Theme, CheckboxGroup },
+      template: `
+        <Theme :props="{ checkboxGroup: { ui: { base: 'rounded-full' } } }">
+          <CheckboxGroup :items="[{ label: 'A', value: 'a' }]" :ui="{ base: 'shadow-lg' }" />
+        </Theme>
+      `
+    })
+
+    const base = wrapper.find('[data-slot="checkbox-base"]').classes()
+    expect(base).toContain('rounded-full')
+    expect(base).toContain('shadow-lg')
+  })
+
   // The group resolves `color` once and hands it to every child, so a FormField
   // validation error has to beat `<UTheme :props>` on the items too, not just on
   // the group root.
