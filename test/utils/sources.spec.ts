@@ -97,8 +97,9 @@ describe('colors plugin', () => {
     expect(rule(css, ':root, :host')).toContain(`--ui-color-primary-500: ${colors.indigo[500]};`)
   })
 
-  it('rejects an alias outside the set and a missing palette', async () => {
+  it('rejects an alias outside the set, a missing palette and another alias', async () => {
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { tertiary: indigo; }')).rejects.toThrow('`tertiary` isn\'t a color alias')
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: brand; }')).rejects.toThrow('`primary: brand` needs a Tailwind palette')
+    await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: primary; }')).rejects.toThrow('`primary: primary` points a color alias at another')
   })
 })
