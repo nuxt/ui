@@ -213,7 +213,7 @@ export function useComponentProps<T extends object>(name: string, props: T, them
  * Type the level as the component's app config to type the variant values the
  * app adds: `useComponentOverrides((ui: Button['AppConfig']['ui']) => ui.button)`.
  */
-export function useComponentOverrides<U, T extends Record<string, any>>(entry: (ui: U) => T | undefined): ComputedRef<ComponentOverrides<T>> {
+export function useComponentOverrides<U = Record<string, any>, T extends Record<string, any> = Record<string, any>>(entry: (ui: U) => T | undefined): ComputedRef<ComponentOverrides<T>> {
   const { unstyled, config, levels } = injectThemeContext()
 
   return computed(() => new ComponentOverrides(
