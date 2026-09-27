@@ -26,9 +26,22 @@ export interface UseThemeOptions {
   radius?: string
 }
 
-// A value lands in a `<style>` tag, so anything that could close the rule or
-// the tag is refused rather than escaped
-const UNSAFE = /[;{}<>]/
+// A value lands in a `<style>` tag, often from a database, so anything that
+// could close the rule or the tag, or swallow the next declarations, is refused
+// rather than escaped
+function isSafe(value: string): boolean {
+  if (/[;{}<>\\"']/.test(value) || value.includes('/*')) {
+    return false
+  }
+  let depth = 0
+  for (const char of value) {
+    depth += char === '(' ? 1 : char === ')' ? -1 : 0
+    if (depth < 0) {
+      return false
+    }
+  }
+  return depth === 0
+}
 
 /** @internal */
 export function themeToCSS(options: UseThemeOptions = {}): string {
@@ -37,7 +50,7 @@ export function themeToCSS(options: UseThemeOptions = {}): string {
     if (typeof value !== 'string' || !value) {
       return
     }
-    if (UNSAFE.test(value)) {
+    if (!isSafe(value)) {
       if (import.meta.dev) {
         console.warn(`[@nuxt/ui] \`useTheme\` ignored \`${name}: ${value}\`, which isn't a CSS value.`)
       }
@@ -53,6 +66,8 @@ export function themeToCSS(options: UseThemeOptions = {}): string {
     if (typeof value === 'string') {
       if (alias !== 'neutral') {
         set(`--ui-${alias}`, value)
+      } else if (import.meta.dev) {
+        console.warn('[@nuxt/ui] `useTheme` ignored the single color of `neutral`, which takes a palette since the surfaces use its shades.')
       }
     } else if (value) {
       // Only the known shades, since a key would land in the property name
@@ -63,9 +78,10 @@ export function themeToCSS(options: UseThemeOptions = {}): string {
   }
   set('--ui-radius', options.radius)
 
-  // Unlayered, so it wins over the palettes set in CSS and over dark mode:
-  // a single color applies in both, a palette keeps its light and dark shades
-  return declarations.length ? `:root, :host {\n  ${declarations.join('\n  ')}\n}` : ''
+  // Unlayered, so it wins over the palettes set in CSS and over dark mode: a
+  // single color applies in both, on nested `.light` and `.dark` elements too,
+  // and a palette keeps its light and dark shades
+  return declarations.length ? `:root, :host, .light, .dark {\n  ${declarations.join('\n  ')}\n}` : ''
 }
 
 /**
@@ -78,6 +94,8 @@ export function themeToCSS(options: UseThemeOptions = {}): string {
 export function useTheme(options: MaybeRefOrGetter<UseThemeOptions>) {
   useHead(() => {
     const css = themeToCSS(toValue(options))
-    return css ? { style: [{ innerHTML: css }] } : {}
+    // After the stylesheets, so it wins over the app's own `:root` rules the
+    // same way on the server and in the browser
+    return css ? { style: [{ innerHTML: css, tagPriority: 'low' }] } : {}
   })
 }

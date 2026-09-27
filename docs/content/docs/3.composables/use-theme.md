@@ -23,8 +23,8 @@ useTheme(() => ({
 ```
 
 - Renders a `<style>` in the head, on the server too, so the first paint already has the colors.
-- Updates when the options change, and goes away with the component that calls it.
-- Wins over the colors set in CSS with the [`@nuxt/ui/colors` plugin](/docs/getting-started/theme/design-system#configure-colors), in light and dark mode.
+- Updates when the options change, and goes away with the component that calls it, so call it in `app.vue` for the whole app, during setup.
+- Wins over the colors set in CSS with the [`@nuxt/ui/colors` plugin](/docs/getting-started/theme/design-system#configure-colors) and over your own `:root` rules, in light and dark mode.
 
 A color alias takes a palette, from `50` to `950`, or a single color. A palette sets the shades behind the alias, so `bg-primary-600` follows it and dark mode keeps its lighter shade. A single color sets the alias alone, in both modes, which recolors the components but not the shade utilities. `neutral` only takes a palette, since the surfaces use its shades.
 
@@ -46,7 +46,7 @@ Tailwind only outputs the palettes your CSS uses, so give `useTheme` the values 
     ::collapsible
 
       ::field-group
-        ::field{name="colors" type="Partial<Record<Color, string | ThemeColorScale>>"}
+        ::field{name="colors" type="{ [C in Color]?: string | ThemeColorScale } & { neutral?: ThemeColorScale }"}
         The palette of each color alias (`primary`, `secondary`, `success`, `info`, `warning`, `error`, `neutral`), as an object of shades from `50` to `950`, or a single color for all but `neutral`.
         ::
 

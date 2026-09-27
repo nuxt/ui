@@ -16,7 +16,7 @@ describe('useTheme', () => {
   it('writes a single color as the alias alone', () => {
     const css = themeToCSS({ colors: { secondary: '#5647ff' } })
 
-    expect(css).toBe(':root, :host {\n  --ui-secondary: #5647ff;\n}')
+    expect(css).toBe(':root, :host, .light, .dark {\n  --ui-secondary: #5647ff;\n}')
   })
 
   it('writes the radius', () => {
@@ -24,6 +24,8 @@ describe('useTheme', () => {
   })
 
   it('leaves out a single color for `neutral` and unknown aliases', () => {
+    vi.spyOn(console, 'warn').mockImplementation(() => {})
+
     expect(themeToCSS({ colors: { neutral: '#000', tertiary: '#fff' } } as any)).toBe('')
   })
 
@@ -33,6 +35,11 @@ describe('useTheme', () => {
     expect(themeToCSS({ colors: { primary: 'red; } body { display: none' } })).toBe('')
     expect(themeToCSS({ radius: '1rem</style><script>' })).toBe('')
     expect(themeToCSS({ colors: { primary: { '500; } body { display: none': 'red' } as any } })).toBe('')
+    // Values that would swallow the declarations after them
+    for (const value of ['red /*', 'var(--x', 'url("a")', 'red\\']) {
+      expect(themeToCSS({ radius: value })).toBe('')
+    }
+    expect(themeToCSS({ radius: 'calc(var(--x) * 2)' })).toContain('--ui-radius: calc(var(--x) * 2);')
   })
 
   it('renders the style in the head and follows the options', async () => {
