@@ -34,17 +34,12 @@ export interface ModuleOptions {
   colorMode?: boolean
 
   /**
-   * Customize how the theme is generated
-   * @see https://ui.nuxt.com/docs/getting-started/theme/design-system
+   * The prefix of your Tailwind CSS import, `@import "tailwindcss" prefix(tw)`,
+   * so components prefix their classes the same way
+   * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#tailwindprefix
+   * @example 'tw'
    */
-  theme?: {
-    /**
-     * Prefix for Tailwind CSS utility classes
-     * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#themeprefix
-     * @example 'tw'
-     */
-    prefix?: string
-  }
+  tailwindPrefix?: string
 
   /**
    * Force the import of prose components even if `@nuxtjs/mdc` or `@nuxt/content` are not installed
@@ -172,13 +167,11 @@ export default defineNuxtModule<ModuleOptions>({
   async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
 
-    options.theme = options.theme || {}
-
     nuxt.options.ui = options
 
     nuxt.options.alias['#ui'] = resolve('./runtime')
 
-    nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, getDefaultConfig(options.theme)) as typeof nuxt.options.appConfig.ui
+    nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, getDefaultConfig(options.tailwindPrefix)) as typeof nuxt.options.appConfig.ui
 
     // Pre-bundle the icons Nuxt UI uses into `@nuxt/icon`'s client bundle so they're
     // embedded at build time instead of fetched at runtime. Its `clientBundle.scan`
@@ -197,7 +190,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     // Isolate root node from portaled components
     nuxt.options.app.rootAttrs = nuxt.options.app.rootAttrs || {}
-    nuxt.options.app.rootAttrs.class = [nuxt.options.app.rootAttrs.class, `${options.theme?.prefix ? options.theme.prefix + ':' : ''}isolate`].filter(Boolean).join(' ')
+    nuxt.options.app.rootAttrs.class = [nuxt.options.app.rootAttrs.class, `${options.tailwindPrefix ? options.tailwindPrefix + ':' : ''}isolate`].filter(Boolean).join(' ')
 
     nuxt.hook('vite:extend', async ({ config }) => {
       const plugin = await import('@tailwindcss/vite').then(r => r.default)

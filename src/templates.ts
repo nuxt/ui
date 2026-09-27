@@ -144,9 +144,9 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     // Tailwind also only generates prefixed candidates, while the themes keep
     // their classes unprefixed since the engine prefixes them at runtime. So
     // either way, the themes' resolved classes are listed inline instead.
-    if (detectedComponents?.size || options.theme?.prefix) {
+    if (detectedComponents?.size || options.tailwindPrefix) {
       sources.push(`@source not "${themeDir}";`)
-      sources.push(`@source inline(${JSON.stringify(getThemeClasses(themes, options.theme?.prefix).join(' '))});`)
+      sources.push(`@source inline(${JSON.stringify(getThemeClasses(themes, options.tailwindPrefix).join(' '))});`)
     } else {
       if (!hasProse) {
         sources.push(`@source not "${themeDir}/prose";`)
@@ -172,7 +172,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     filename: 'ui.base.css',
     write: true,
     getContents: async () => {
-      const prefix = options.theme?.prefix
+      const prefix = options.tailwindPrefix
       if (!prefix) {
         return ''
       }
