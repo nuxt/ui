@@ -7,12 +7,6 @@ export default defineConfig({
   plugins: [
     vue(),
     ui({
-      ui: {
-        colors: {
-          primary: 'green',
-          neutral: 'slate'
-        }
-      },
       router: false,
       // Components typed into the REPL can't be detected at build time
       componentDetection: false,
