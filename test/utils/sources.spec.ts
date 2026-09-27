@@ -69,16 +69,21 @@ describe('colors plugin', () => {
     .map(match => match[1]!)
     .find(body => /^\s*--ui-color-/m.test(body)) ?? ''
 
-  it('gives each alias its default palette at zero specificity', async () => {
-    const defaults = rule(await build({}), ':where(:root, :host)')
+  it('gives each alias its default palette at zero specificity, without the plugin', async () => {
+    const css = await build({})
+    const defaults = rule(css, ':where(:root, :host)')
 
-    expect(defaults).toContain(`--ui-color-primary-500: ${colors.green[500]};`)
-    expect(defaults).toContain(`--ui-color-neutral-950: ${colors.slate[950]};`)
+    expect(defaults).toContain(`--ui-color-primary-500: var(--color-green-500, ${colors.green[500]});`)
+    expect(defaults).toContain(`--ui-color-neutral-950: var(--color-slate-950, ${colors.slate[950]});`)
+    // Tailwind outputs the palettes the defaults read
+    expect(css).toContain(`--color-green-500: ${colors.green[500]};`)
   })
 
   it('follows a palette you override in `@theme`', async () => {
     const css = await build({}, undefined, '@theme static { --color-green-500: #00C16A; }')
-    expect(rule(css, ':where(:root, :host)')).toContain('--ui-color-primary-500: #00C16A;')
+
+    expect(css).toContain('--color-green-500: #00C16A;')
+    expect(rule(css, ':where(:root, :host)')).toContain('--ui-color-primary-500: var(--color-green-500,')
   })
 
   it('points the aliases you pass at their palette', async () => {
