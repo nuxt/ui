@@ -4,16 +4,6 @@ import type { Color } from './theme/color'
 
 const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
 
-const defaults: Record<Color, string> = {
-  primary: 'green',
-  secondary: 'blue',
-  success: 'green',
-  info: 'blue',
-  warning: 'yellow',
-  error: 'red',
-  neutral: 'slate'
-}
-
 export type ColorsOptions = Partial<Record<Color, string>>
 
 /**
@@ -23,17 +13,19 @@ export type ColorsOptions = Partial<Record<Color, string>>
  * values, resolved when Tailwind compiles, so a prefixed or customized palette
  * works too.
  *
- * Nuxt UI registers it without options for the defaults, at zero specificity,
- * so the aliases you set win wherever you register it.
+ * The defaults are plain CSS in `base.css`, at zero specificity, so the
+ * aliases you set win wherever you register it.
  */
 const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugin.withOptions<ColorsOptions>(options => ({ addBase, theme }) => {
-  const aliases = options ?? defaults
-  const selector = options ? ':root, :host' : ':where(:root, :host)'
+  const aliases: Record<string, string | undefined> = options ?? {}
 
   const declarations: Record<string, string> = {}
   for (const [alias, palette] of Object.entries(aliases)) {
     if (!(colors as readonly string[]).includes(alias)) {
       throw new Error(`[@nuxt/ui] \`${alias}\` isn't a color alias. The \`@nuxt/ui/colors\` plugin takes ${colors.map(color => `\`${color}\``).join(', ')}.`)
+    }
+    if (!palette) {
+      continue
     }
     // An alias's palette is the alias itself (`--color-primary-500` reads
     // `--ui-color-primary-500`), so pointing one at another loops
@@ -52,7 +44,9 @@ const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugi
     }
   }
 
-  addBase({ [selector]: declarations })
+  if (Object.keys(declarations).length) {
+    addBase({ ':root, :host': declarations })
+  }
 })
 
 export default colorsPlugin

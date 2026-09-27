@@ -3,6 +3,7 @@ import { describe, it, expect } from 'vitest'
 import { join } from 'pathe'
 import { getTemplates } from '../../src/templates'
 import { defaultOptions, getDefaultConfig } from '../../src/utils/defaults'
+import tailwindColors from 'tailwindcss/colors'
 import { colors } from '../../src/runtime/theme/color'
 
 const resolve = (...paths: string[]) => join(process.cwd(), 'src', ...paths)
@@ -89,6 +90,14 @@ describe('static css', () => {
   // reset, which also matches a prefixed scope class, must not outrank them
   it('resets the accent roles at zero specificity', () => {
     expect(accent).toContain(':where([class*="[--ui-accent:"]) {')
+  })
+
+  // The fallbacks hold Tailwind's palette for a prefixed app, so they follow its version
+  it.each(Object.entries({ primary: 'green', secondary: 'blue', success: 'green', info: 'blue', warning: 'yellow', error: 'red', neutral: 'slate' }))('defaults %s to %s', (alias, palette) => {
+    const base = readFileSync(resolve('./runtime/base.css'), 'utf8')
+    for (const [shade, value] of Object.entries((tailwindColors as any)[palette])) {
+      expect(base).toContain(`--ui-color-${alias}-${shade}: var(--color-${palette}-${shade}, ${value});`)
+    }
   })
 
   it.each(colors)('bridges and scopes %s', (color) => {
