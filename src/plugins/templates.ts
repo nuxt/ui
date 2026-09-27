@@ -18,6 +18,23 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
   // can narrow the theme CSS to the used components (see `getTemplates`).
   const vue: { detectedComponents?: Set<string> } = {}
   const templates = getTemplates(options, appConfig.ui, undefined, (...paths: string[]) => join(runtimeDir, '..', ...paths), vue)
+
+  let root = ''
+  let templateFiles: Record<string, string> = {}
+
+  function detect() {
+    // `scanPackages` packages resolve Nuxt UI components from `node_modules`
+    // and user component dirs can sit outside the root: detection has to
+    // scan both or their components lose their theme CSS.
+    const dirs = resolveExtraScanDirs(root, options.scanPackages, options.components ? options.components.dirs : undefined)
+    return detectUsedComponents(
+      [root, ...dirs],
+      options.prefix!,
+      componentDir,
+      Array.isArray(options.componentDetection) ? options.componentDetection : undefined,
+      { prose: !!(options.prose || options.mdc) }
+    )
+  }
   const templateKeys = new Set(templates.map(t => `#build/${t.filename}`))
 
   async function writeTemplates(root: string) {
@@ -69,20 +86,10 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
         // every theme class from the generated CSS.
         // `options.root` lets setups like `electron-vite` override the location
         // when `config.root` points to a sub-directory Tailwind doesn't scan.
-        const root = path.resolve(options.root || config.root || '.')
+        root = path.resolve(options.root || config.root || '.')
 
         if (options.componentDetection) {
-          // `scanPackages` packages resolve Nuxt UI components from `node_modules`
-          // and user component dirs can sit outside the root: detection has to
-          // scan both or their components lose their theme CSS.
-          const dirs = resolveExtraScanDirs(root, options.scanPackages, options.components ? options.components.dirs : undefined)
-          vue.detectedComponents = await detectUsedComponents(
-            [root, ...dirs],
-            options.prefix!,
-            componentDir,
-            Array.isArray(options.componentDetection) ? options.componentDetection : undefined,
-            { prose: !!(options.prose || options.mdc) }
-          )
+          vue.detectedComponents = await detect()
 
           if (vue.detectedComponents?.size) {
             consola.success(`Nuxt UI detected ${vue.detectedComponents.size} components in use (including dependencies)`)
@@ -91,13 +98,51 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
           }
         }
 
-        const alias = await writeTemplates(root)
+        templateFiles = await writeTemplates(root)
 
         return {
           resolve: {
-            alias
+            alias: templateFiles
           }
         }
+      },
+      // A component used for the first time in dev needs its theme CSS: detect
+      // again when the source changes, and rewrite `ui.css` when the set does
+      configureServer(server) {
+        if (!options.componentDetection) {
+          return
+        }
+
+        let timer: ReturnType<typeof setTimeout> | undefined
+        const redetect = async () => {
+          const detected = await detect()
+          const previous = vue.detectedComponents
+          if (detected?.size === previous?.size && [...(detected ?? [])].every(component => previous?.has(component))) {
+            return
+          }
+
+          const added = [...(detected ?? [])].filter(component => !previous?.has(component))
+          if (added.length) {
+            consola.success(`Nuxt UI detected new components: ${added.join(', ')}`)
+          }
+
+          vue.detectedComponents = detected
+          await writeTemplates(root)
+
+          // The templates live in `node_modules`, which Vite doesn't watch, so
+          // tell it `ui.css` changed for Tailwind to rebuild the CSS importing it
+          const file = templateFiles['#build/ui.css']
+          if (file) {
+            server.watcher.emit('change', file)
+          }
+        }
+
+        server.watcher.on('all', (event, file) => {
+          if ((event === 'add' || event === 'change' || event === 'unlink') && /\.(?:vue|ts|mts|js|mjs|cjs|tsx|jsx|md)$/.test(file) && !file.includes('/node_modules/')) {
+            clearTimeout(timer)
+            timer = setTimeout(redetect, 100)
+          }
+        })
       }
     },
     resolveId(id) {
