@@ -9,8 +9,8 @@ const resolve = (...paths: string[]) => join(process.cwd(), 'src', ...paths)
 const themeDir = resolve('./runtime/theme')
 
 function themeContents(overrides: Record<string, any>, vue?: { detectedComponents?: Set<string> }) {
-  const options = { ...defaultOptions, ...overrides, theme: { ...defaultOptions.theme, ...(overrides.theme || {}) } }
-  const templates = getTemplates(options as any, getDefaultConfig(options.theme), undefined, resolve, vue)
+  const options = { ...defaultOptions, ...overrides }
+  const templates = getTemplates(options as any, getDefaultConfig(options.tailwindPrefix), undefined, resolve, vue)
   return (filename: string) => templates.find(template => template.filename === filename)!.getContents!({} as any)
 }
 
@@ -46,7 +46,7 @@ describe('theme templates', () => {
   })
 
   it('generates only the sources', async () => {
-    const contents = themeContents({ theme: { prefix: 'tw' } })
+    const contents = themeContents({ tailwindPrefix: 'tw' })
 
     expect(await contents('ui.css')).not.toContain('@layer')
     expect(await contents('ui.css')).not.toContain('[class~=')
@@ -54,7 +54,7 @@ describe('theme templates', () => {
   })
 
   it('repeats the color scopes for the prefixed class in the base layer', async () => {
-    const css = await themeContents({ theme: { prefix: 'tw' } })('ui.base.css')
+    const css = await themeContents({ tailwindPrefix: 'tw' })('ui.base.css')
 
     expect(css).toMatch(/^@layer base \{\n {2}\[class~="tw:\[--ui-accent:var\(--ui-primary\)\]"\] \{/)
     expect(css).toContain('[class~="tw:[--ui-accent:var(--ui-warning)]"] {\n    --ui-accent-foreground: var(--ui-warning-foreground);')
@@ -64,14 +64,14 @@ describe('theme templates', () => {
   })
 
   it('lists the prefixed classes inline with the prefix', async () => {
-    const css = await themeContents({ theme: { prefix: 'tw' } })('ui.css')
+    const css = await themeContents({ tailwindPrefix: 'tw' })('ui.css')
 
     expect(css).toContain(`@source not "${themeDir}";`)
     expect(inlineClasses(css)).toContain('tw:rounded-md')
   })
 
   it('lists only the detected components\' classes with the prefix', async () => {
-    const css = await themeContents({ theme: { prefix: 'tw' }, experimental: { componentDetection: true } }, { detectedComponents: new Set(['Button']) })('ui.css')
+    const css = await themeContents({ tailwindPrefix: 'tw', experimental: { componentDetection: true } }, { detectedComponents: new Set(['Button']) })('ui.css')
     const classes = inlineClasses(css)
 
     expect(classes).toContain('tw:rounded-md')
