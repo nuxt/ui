@@ -62,20 +62,16 @@ export interface ModuleOptions {
   content?: boolean
 
   /**
-   * Experimental features
+   * Only generate the theme CSS of the components your app uses, found by
+   * scanning its source and Markdown content
+   * - `true`: detect them
+   * - `string[]`: detect them and always include these, for components resolved from a dynamic name
+   * - `false`: generate the theme CSS of every component
+   * @defaultValue true
+   * @example ['Modal', 'DropdownMenu']
+   * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#componentdetection
    */
-  experimental?: {
-    /**
-     * Enable automatic component detection for tree-shaking
-     * Only generates the theme CSS of the components actually used in your app
-     * - `true`: Enable automatic detection
-     * - `string[]`: Enable detection and include additional components (useful for dynamic components)
-     * @defaultValue false
-     * @example true
-     * @example ['Modal', 'DropdownMenu']
-     */
-    componentDetection?: boolean | string[]
-  }
+  componentDetection?: boolean | string[]
 }
 
 declare module '#app' {

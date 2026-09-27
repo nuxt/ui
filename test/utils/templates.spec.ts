@@ -36,7 +36,7 @@ describe('theme templates', () => {
 
   // Select's theme extends Input's, so its file alone doesn't hold all its classes
   it('lists the detected components\' classes inline, the ones they extend included', async () => {
-    const css = await themeContents({ experimental: { componentDetection: true } }, { detectedComponents: new Set(['Select']) })('ui.css')
+    const css = await themeContents({ componentDetection: true }, { detectedComponents: new Set(['Select']) })('ui.css')
     const classes = inlineClasses(css)
 
     expect(css).toContain(`@source not "${themeDir}";`)
@@ -71,7 +71,7 @@ describe('theme templates', () => {
   })
 
   it('lists only the detected components\' classes with the prefix', async () => {
-    const css = await themeContents({ tailwindPrefix: 'tw', experimental: { componentDetection: true } }, { detectedComponents: new Set(['Button']) })('ui.css')
+    const css = await themeContents({ tailwindPrefix: 'tw', componentDetection: true }, { detectedComponents: new Set(['Button']) })('ui.css')
     const classes = inlineClasses(css)
 
     expect(classes).toContain('tw:rounded-md')
