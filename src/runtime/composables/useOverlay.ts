@@ -100,7 +100,14 @@ function _useOverlay() {
 
     overlay.isOpen = true
     overlay.isMounted = true
-    const result = new Promise<any>(resolve => overlay.resolvePromise = resolve)
+    // Opening an overlay that is already open must not orphan the previous caller's promise.
+    const resolvePrevious = overlay.resolvePromise
+    const result = new Promise<any>((resolve) => {
+      overlay.resolvePromise = (value) => {
+        resolvePrevious?.(value)
+        resolve(value)
+      }
+    })
 
     return Object.assign(result, {
       id,
