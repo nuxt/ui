@@ -7,10 +7,10 @@ export default {
     left: 'hidden lg:flex-1 lg:flex lg:items-center',
     center: 'flex items-center gap-1.5 min-w-0',
     right: 'lg:flex-1 flex items-center justify-end',
-    icon: 'size-5 shrink-0 text-inverted pointer-events-none',
-    title: 'text-sm text-inverted font-medium truncate',
+    icon: 'size-5 shrink-0 text-accent-foreground pointer-events-none',
+    title: 'text-sm text-accent-foreground font-medium truncate',
     actions: 'flex gap-1.5 shrink-0 isolate',
-    close: 'text-inverted hover:bg-default/10 focus-visible:bg-default/10 -me-1.5 lg:me-0'
+    close: 'text-accent-foreground hover:bg-default/10 focus-visible:bg-default/10 -me-1.5 lg:me-0'
   },
   variants: {
     color: colorVariant({ root: '' }),
