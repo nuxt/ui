@@ -1,37 +1,53 @@
 <script setup lang="ts">
 import type { DropdownMenuItem } from '@nuxt/ui'
+import tailwindColors from 'tailwindcss/colors'
 
-const appConfig = useAppConfig()
+// Switches a palette at runtime by writing the alias's shades on the root element
+const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
+
+const primary = useState('theme-dropdown-primary', () => 'green')
+const neutral = useState('theme-dropdown-neutral', () => 'slate')
+
+function setAlias(alias: 'primary' | 'neutral', palette: string) {
+  const shade = (tailwindColors as Record<string, Record<number, string>>)[palette]
+  if (!shade) return
+  for (const stop of shades) {
+    const value = shade[stop]
+    if (value) document.documentElement.style.setProperty(`--ui-color-${alias}-${stop}`, value)
+  }
+}
 
 const colors = ['red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose']
 const neutrals = ['slate', 'gray', 'zinc', 'neutral', 'stone', 'taupe', 'mauve', 'mist', 'olive']
 
 const items = computed<DropdownMenuItem[]>(() => [{
   label: 'Primary',
-  chip: appConfig.ui.colors.primary,
+  chip: primary.value,
   children: colors.map(color => ({
     label: color,
     chip: color,
-    checked: appConfig.ui.colors.primary === color,
+    checked: primary.value === color,
     type: 'checkbox',
     onSelect: (e) => {
       e.preventDefault()
 
-      appConfig.ui.colors.primary = color
+      primary.value = color
+      setAlias('primary', color)
     }
   }))
 }, {
   label: 'Neutral',
-  chip: appConfig.ui.colors.neutral === 'neutral' ? 'old-neutral' : appConfig.ui.colors.neutral,
+  chip: neutral.value === 'neutral' ? 'old-neutral' : neutral.value,
   children: neutrals.map(color => ({
     label: color,
     chip: color === 'neutral' ? 'old-neutral' : color,
     type: 'checkbox',
-    checked: appConfig.ui.colors.neutral === color,
+    checked: neutral.value === color,
     onSelect: (e) => {
       e.preventDefault()
 
-      appConfig.ui.colors.neutral = color
+      neutral.value = color
+      setAlias('neutral', color)
     }
   }))
 }])

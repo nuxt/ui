@@ -3,6 +3,12 @@ import colors from 'tailwindcss/colors'
 import type { UseHeadInput } from '@unhead/vue/types'
 import { defineNuxtPlugin, injectHead, useAppConfig, useNuxtApp, useHead } from '#imports'
 
+/**
+ * The palettes the theme picker and studio switch at runtime, from the docs'
+ * own `appConfig.colors`. The library sets its defaults in CSS through the
+ * `@nuxt/ui/colors` plugin, in `@layer base` at zero specificity, so these go in
+ * the same layer on `:root` to win over them.
+ */
 const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
 
 function getColor(color: keyof typeof colors, shade: typeof shades[number]): string {
@@ -12,12 +18,8 @@ function getColor(color: keyof typeof colors, shade: typeof shades[number]): str
   return ''
 }
 
-function generateShades(key: string, value: string, prefix?: string) {
-  const prefixStr = prefix ? `${prefix}-` : ''
-  return `${shades.map(shade => `--ui-color-${key}-${shade}: var(--${prefixStr}color-${value === 'neutral' ? 'old-neutral' : value}-${shade}, ${getColor(value as keyof typeof colors, shade)});`).join('\n  ')}`
-}
-function generateColor(key: string, shade: number) {
-  return `--ui-${key}: var(--ui-color-${key}-${shade});`
+function generateShades(key: string, value: string) {
+  return `${shades.map(shade => `--ui-color-${key}-${shade}: var(--color-${value === 'neutral' ? 'old-neutral' : value}-${shade}, ${getColor(value as keyof typeof colors, shade)});`).join('\n  ')}`
 }
 
 function removeTemporaryColorsStyle() {
@@ -28,24 +30,11 @@ export default defineNuxtPlugin(() => {
   const appConfig = useAppConfig()
   const nuxtApp = useNuxtApp()
 
-  const root = computed(() => {
-    const { neutral, ...colors } = appConfig.ui.colors
-    const prefix = (appConfig.ui as { prefix?: string }).prefix
-
-    return `@layer theme {
+  const root = computed(() => `@layer base {
   :root, :host {
-  ${Object.entries(appConfig.ui.colors).map(([key, value]: [string, string]) => generateShades(key, value, prefix)).join('\n  ')}
+  ${Object.entries(appConfig.colors).map(([key, value]) => generateShades(key, value as string)).join('\n  ')}
   }
-  :root, :host, .light {
-  ${Object.keys(colors).map(key => generateColor(key, 500)).join('\n  ')}
-  --ui-neutral: var(--ui-bg-inverted);
-  }
-  .dark {
-  ${Object.keys(colors).map(key => generateColor(key, 400)).join('\n  ')}
-  --ui-neutral: var(--ui-bg-inverted);
-  }
-}`
-  })
+}`)
 
   // Head
   const headData: UseHeadInput = {

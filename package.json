@@ -21,6 +21,10 @@
     },
     "./sources": "./dist/runtime/sources.css",
     "./base": "./dist/runtime/base.css",
+    "./colors": {
+      "types": "./dist/runtime/colors.d.ts",
+      "import": "./dist/runtime/colors.js"
+    },
     "./unplugin": {
       "types": "./dist/unplugin.d.mts",
       "import": "./dist/unplugin.mjs"

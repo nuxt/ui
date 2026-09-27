@@ -39,7 +39,7 @@ export function useTheme() {
   // a throw here would abort the whole unhead flush.
   const route = useRoute()
   const color = computed(() => {
-    const neutral = appConfig.ui.colors.neutral
+    const neutral = appConfig.colors.neutral
     // match the page background: only /theme paints the recessed neutral-50
     // canvas, every other page's body is plain white in light mode
     if (colorMode.value !== 'dark' && route.path !== '/theme') return 'white'
@@ -94,20 +94,20 @@ export function useTheme() {
 
   const neutral = computed({
     get() {
-      return appConfig.ui.colors.neutral
+      return appConfig.colors.neutral
     },
     set(option) {
-      appConfig.ui.colors.neutral = option
+      appConfig.colors.neutral = option
       track('Theme Changed', { setting: 'neutral', value: option })
     }
   })
 
   const primary = computed({
     get() {
-      return appConfig.ui.colors.primary
+      return appConfig.colors.primary
     },
     set(option) {
-      appConfig.ui.colors.primary = option
+      appConfig.colors.primary = option
       setBlackAsPrimary(false)
       track('Theme Changed', { setting: 'primary', value: option })
     }
@@ -272,7 +272,7 @@ export function useTheme() {
 
     const colorOverrides: Record<string, string> = {}
     for (const [key, def] of Object.entries(DEFAULT_COLORS)) {
-      const value = (appConfig.ui.colors as any)[key]
+      const value = (appConfig.colors as any)[key]
       if (value && value !== def) {
         colorOverrides[key] = value
       }
@@ -295,7 +295,7 @@ export function useTheme() {
 
     // Only alias-referenced palettes export. Reference by CURRENT value, not
     // overrides, a custom palette can shadow a default name and must still export.
-    const referenced = new Set(Object.values(appConfig.ui.colors as Record<string, string>))
+    const referenced = new Set(Object.values(appConfig.colors as Record<string, string>))
     const paletteEntries = Object.entries(customColorsData.value).filter(([name]) => referenced.has(name))
     if (paletteEntries.length) {
       doc.palettes = Object.fromEntries(paletteEntries.map(([name, shades]) => [name, { shades: shades as ThemePalette['shades'] }]))
@@ -451,7 +451,7 @@ export function useTheme() {
     const savedExtras: Record<string, any> = { ...aiThemeExtras.value }
 
     for (const color of semanticUpdates) {
-      (appConfig.ui.colors as any)[color] = settings[color]
+      (appConfig.colors as any)[color] = settings[color]
       savedExtras.colors = savedExtras.colors || {}
       savedExtras.colors[color] = settings[color]
     }
@@ -490,8 +490,8 @@ export function useTheme() {
       track('Theme Reset')
     }
 
-    appConfig.ui.colors.primary = DEFAULT_COLORS.primary
-    appConfig.ui.colors.neutral = DEFAULT_COLORS.neutral
+    appConfig.colors.primary = DEFAULT_COLORS.primary
+    appConfig.colors.neutral = DEFAULT_COLORS.neutral
 
     _radius.value = THEME_DEFAULTS.radius
     _fontSize.value = THEME_DEFAULTS.fontSize
@@ -503,7 +503,7 @@ export function useTheme() {
     const extras = aiThemeExtras.value
     if (extras.colors) {
       for (const key of Object.keys(extras.colors)) {
-        (appConfig.ui.colors as any)[key] = DEFAULT_COLORS[key as keyof typeof DEFAULT_COLORS] || (appConfig.ui.colors as any)[key]
+        (appConfig.colors as any)[key] = DEFAULT_COLORS[key as keyof typeof DEFAULT_COLORS] || (appConfig.colors as any)[key]
       }
     }
     if (extras.ui) {

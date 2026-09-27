@@ -103,7 +103,7 @@ export function useThemeStudio() {
   }
 
   function isCustomPalette(alias: string) {
-    return (appConfig.ui.colors as Record<string, string>)[alias] === customPaletteName(alias)
+    return (appConfig.colors as Record<string, string>)[alias] === customPaletteName(alias)
   }
 
   /**
@@ -145,7 +145,7 @@ export function useThemeStudio() {
     // would still write the neutral remaps below, turning a stock theme
     // into a changed one. Black-as-primary is the exception: the primary
     // swatch is the way back off it.
-    const current = (appConfig.ui.colors as Record<string, string>)[alias]
+    const current = (appConfig.colors as Record<string, string>)[alias]
     if (current === name && !isCustomPalette(alias) && !(alias === 'primary' && theme.blackAsPrimary.value)) return
 
     if (isCustomPalette(alias)) {
@@ -248,7 +248,7 @@ export function useThemeStudio() {
     // sending it every tick makes applyThemeSettings re-persist the AI-extras
     // channel (a JSON.stringify + reactive wake) on every frame. Send it
     // only when it actually changes.
-    const aliasAlreadySet = (appConfig.ui.colors as Record<string, string>)[alias] === name
+    const aliasAlreadySet = (appConfig.colors as Record<string, string>)[alias] === name
 
     theme.applyThemeSettings({
       customColors: { [name]: generatePalette(applyPaletteEffects(base, effects, amount), pins) },
@@ -391,7 +391,7 @@ export function useThemeStudio() {
   function rampChip(ramp: TokenRamp): string {
     if (ramp === 'primary') return primaryChip.value
     if (ramp === 'neutral') return neutralChip.value
-    return rampCssName((appConfig.ui.colors as Record<string, string>)[ramp] || ramp)
+    return rampCssName((appConfig.colors as Record<string, string>)[ramp] || ramp)
   }
 
   /* ------------------------------------------------------------ preview -- */

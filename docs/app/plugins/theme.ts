@@ -61,7 +61,7 @@ export default defineNuxtPlugin({
         // inside <style> text.
         for (const alias of Object.keys(DEFAULT_COLORS) as Array<keyof typeof DEFAULT_COLORS>) {
           const value = alias === 'primary' ? saved.primary : alias === 'neutral' ? saved.neutral : saved.colors?.[alias]
-          ;(appConfig.ui.colors as any)[alias] = typeof value === 'string' && SAFE_NAME.test(value) ? value : DEFAULT_COLORS[alias]
+          ;(appConfig.colors as any)[alias] = typeof value === 'string' && SAFE_NAME.test(value) ? value : DEFAULT_COLORS[alias]
         }
 
         const pack = saved.icons && Object.hasOwn(themeIcons, saved.icons) ? themeIcons[saved.icons as keyof typeof themeIcons] : themeIcons.lucide
@@ -147,10 +147,10 @@ export default defineNuxtPlugin({
                 var swapColors = function(el) {
                   var html = el.innerHTML;
                   if (primaryColor && primaryColor !== 'black') {
-                    html = html.replace(/(--ui-color-primary-\\d{2,3}:\\s*var\\(--color-)${appConfig.ui.colors.primary}(-\\d{2,3}.*?\\))/g, '$1' + primaryColor + '$2');
+                    html = html.replace(/(--ui-color-primary-\\d{2,3}:\\s*var\\(--color-)${appConfig.colors.primary}(-\\d{2,3}.*?\\))/g, '$1' + primaryColor + '$2');
                   }
                   if (neutralColor) {
-                    html = html.replace(/(--ui-color-neutral-\\d{2,3}:\\s*var\\(--color-)${appConfig.ui.colors.neutral}(-\\d{2,3}.*?\\))/g, '$1' + (neutralColor === 'neutral' ? 'old-neutral' : neutralColor) + '$2');
+                    html = html.replace(/(--ui-color-neutral-\\d{2,3}:\\s*var\\(--color-)${appConfig.colors.neutral}(-\\d{2,3}.*?\\))/g, '$1' + (neutralColor === 'neutral' ? 'old-neutral' : neutralColor) + '$2');
                   }
                   el.innerHTML = html;
                 };
