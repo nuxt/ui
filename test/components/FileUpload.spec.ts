@@ -2,7 +2,7 @@ import { describe, it, expect, vi, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
-import { mount } from '@vue/test-utils'
+import { flushPromises, mount } from '@vue/test-utils'
 import FileUpload from '../../src/runtime/components/FileUpload.vue'
 import type { FormInputEvents } from '../../src/module'
 import { renderForm } from '../utils/form'
@@ -140,6 +140,39 @@ describe('FileUpload', () => {
 
     expect(input.attributes('accept')).toBe('application/pdf')
     expect(input.attributes('multiple')).toBe('')
+  })
+
+  describe('dropzone', () => {
+    async function dropFiles(wrapper: Awaited<ReturnType<typeof mountSuspended>>, files: File[]) {
+      const data = new DataTransfer()
+      files.forEach(file => data.items.add(file))
+      const base = wrapper.find('[data-slot="base"]').element
+
+      for (const type of ['dragenter', 'drop']) {
+        const event = new Event(type, { bubbles: true, cancelable: true })
+        Object.defineProperty(event, 'dataTransfer', { value: data })
+        base.dispatchEvent(event)
+      }
+      await flushPromises()
+    }
+
+    it('accepts drops once dropzone is enabled', async () => {
+      const wrapper = await mountSuspended(FileUpload, { props: { dropzone: false } })
+
+      await wrapper.setProps({ dropzone: true })
+      await dropFiles(wrapper, [new File(['foo'], 'file.txt', { type: 'text/plain' })])
+
+      expect(wrapper.emitted('update:modelValue')).toHaveLength(1)
+    })
+
+    it('ignores drops once dropzone is disabled', async () => {
+      const wrapper = await mountSuspended(FileUpload, { props: { dropzone: true } })
+
+      await wrapper.setProps({ dropzone: false })
+      await dropFiles(wrapper, [new File(['foo'], 'file.txt', { type: 'text/plain' })])
+
+      expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+    })
   })
 
   describe('emits', () => {

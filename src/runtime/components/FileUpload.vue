@@ -185,7 +185,7 @@ const { isDragging, open, inputRef, dropzoneRef } = useFileUpload({
   accept,
   reset,
   multiple: multiple as MaybeRef<boolean>,
-  dropzone: props.dropzone,
+  dropzone: toRef(() => props.dropzone) as MaybeRef<boolean>,
   onUpdate
 })
 const { emitFormInput, emitFormChange, id, name, size: formFieldSize, color: formFieldColor, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<FileUploadProps>(_props)
