@@ -37,6 +37,13 @@ function createMdcPattern(prefix: string): RegExp {
 }
 
 /**
+ * Pattern to match a component imported from its file, for apps that don't
+ * register them: `import Button from '@nuxt/ui/components/Button.vue'`, or
+ * `#ui/components/prose/Callout.vue` in Nuxt.
+ */
+const IMPORT_PATTERN = /(?:@nuxt\/ui|#ui)\/(?:runtime\/)?components\/(prose\/)?(?:content\/)?([A-Z]\w+)\.vue/g
+
+/**
  * The component name a pattern match refers to, normalised to prefix-less
  * PascalCase (`match[2]` is the kebab-case tag capture).
  */
@@ -172,9 +179,11 @@ export async function detectUsedComponents(
   prefix: string,
   componentDir: string,
   includeComponents?: string[],
-  { prose = false }: {
+  { prose = false, files = [] }: {
     /** Prose components render from Markdown, which can't be traced, so what they render is always included. */
     prose?: boolean
+    /** Files to scan besides the dirs, like components registered from elsewhere. */
+    files?: string[]
   } = {}
 ): Promise<Set<string> | undefined> {
   const detectedComponents = new Set<string>()
@@ -189,13 +198,30 @@ export async function detectUsedComponents(
   const componentPattern = createComponentPattern(prefix)
   const mdcPattern = createMdcPattern(prefix)
 
+  const scan = (file: string, content: string) => {
+    for (const match of content.matchAll(componentPattern)) {
+      const componentName = getMatchedComponent(match)
+      if (componentName) {
+        detectedComponents.add(componentName)
+      }
+    }
+    for (const match of content.matchAll(IMPORT_PATTERN)) {
+      detectedComponents.add(match[1] ? `Prose${match[2]}` : match[2]!)
+    }
+    if (file.endsWith('.md')) {
+      for (const match of content.matchAll(mdcPattern)) {
+        detectedComponents.add(pascalCase(match[1]!))
+      }
+    }
+  }
+
   // Scan all source files for component usage across all layers
   for (const dir of dirs) {
     // `scanPackages` directories ship their code in `dist/` (and as
     // `.mjs`/`.cjs`), so the build-output ignores only apply to project dirs.
     const isPackageDir = normalize(dir).includes('node_modules/')
 
-    const appFiles = globSync(['**/*.{vue,ts,mts,js,mjs,cjs,tsx,jsx,md}'], {
+    const appFiles = globSync(['**/*.{vue,ts,mts,js,mjs,cjs,tsx,jsx,md,html}'], {
       cwd: dir,
       // `**/` prefixes so nested dirs are skipped too: the Vue integration
       // scans the whole Vite root, not just Nuxt layer `app/` directories.
@@ -209,23 +235,18 @@ export async function detectUsedComponents(
 
     for (const file of appFiles) {
       try {
-        const filePath = join(dir, file)
-        const content = await readFile(filePath, 'utf-8')
-        for (const match of content.matchAll(componentPattern)) {
-          const componentName = getMatchedComponent(match)
-          if (componentName) {
-            detectedComponents.add(componentName)
-          }
-        }
-
-        if (file.endsWith('.md')) {
-          for (const match of content.matchAll(mdcPattern)) {
-            detectedComponents.add(pascalCase(match[1]!))
-          }
-        }
+        scan(file, await readFile(join(dir, file), 'utf-8'))
       } catch {
         // Ignore files that can't be read
       }
+    }
+  }
+
+  for (const file of files) {
+    try {
+      scan(file, await readFile(file, 'utf-8'))
+    } catch {
+      // Ignore files that can't be read
     }
   }
 
