@@ -11,7 +11,7 @@ const toast = useToast()
 const { track } = useAnalytics()
 const { open, messages, pending, currentPage } = useChat()
 const { framework } = useFrameworks()
-const { resetTheme, applyThemeSettings, hasChanges: hasThemeChanges } = useTheme()
+const { resetTheme, applyThemeSettings, hasChanges: hasThemeChanges } = useThemePicker()
 // A preset is a whole ThemeDoc, so it rides applyDoc (reset, style axis, class
 // bundle) rather than the settings channel applyTheme uses.
 const { presets, applyPreset } = useThemeStudio()

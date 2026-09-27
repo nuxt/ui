@@ -11,11 +11,11 @@ import { sectionFingerprint, stableStringify, mergeSection, canonicalTokenShades
 import type { SectionKey, ThemeDoc, ThemePreset, PaletteCurveParams, PaletteEffects, StoredPaletteParams, PalettePin, StyleOptions, Shade, ShadeStop, ColorAlias, TokenRamp, VariantGroup, DefaultVariant } from '../utils/theme/engine'
 
 export function useThemeStudio() {
-  const theme = useTheme()
+  const theme = useThemePicker()
   const appConfig = useAppConfig()
   const { track, trackThrottled } = useAnalytics()
 
-  // The three studio channels are declared in useTheme with the rest of the
+  // The three studio channels are declared in useThemePicker with the rest of the
   // persisted state (assigned by plugins/theme.ts on the client); this
   // composable owns every write to them.
 

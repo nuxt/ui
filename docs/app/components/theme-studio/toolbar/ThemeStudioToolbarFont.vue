@@ -11,7 +11,7 @@ import { THEME_DEFAULTS } from '../../../utils/theme/engine/types'
  * points `code`/`kbd`/`pre`/`samp` at it) and serif drives the h1–h6 rule in
  * main.css until v5 ships `--ui-font-heading`.
  */
-const { fonts, font, fontPrefs, setFontPrefs, fontSize } = useTheme()
+const { fonts, font, fontPrefs, setFontPrefs, fontSize } = useThemePicker()
 
 // The saved font is client-only: report the stock face until mounted, like
 // the other triggers, so hydration adopts the server's label and aria-label.

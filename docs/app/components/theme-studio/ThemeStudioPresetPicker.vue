@@ -17,7 +17,7 @@ const { track } = useAnalytics()
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
 const studioIcons = useStudioIcons()
-const { primary, primaryColors, neutral, neutralColors, blackAsPrimary, setBlackAsPrimary, radius, radiuses, font, icon, icons, currentDoc } = useTheme()
+const { primary, primaryColors, neutral, neutralColors, blackAsPrimary, setBlackAsPrimary, radius, radiuses, font, icon, icons, currentDoc } = useThemePicker()
 const { presets, selectedPreset, applyPreset, selectPalette, isCustomPalette, neutralChip, sectionDirty } = useThemeStudio()
 // "changed from the preset" per control, the cue the studio toolbar carries
 const { groupDirtyFlags } = useThemeStudioToolbar()

@@ -10,7 +10,7 @@ const props = withDefaults(defineProps<ButtonProps & {
 })
 
 const { shuffle } = useThemeStudio()
-const { icon: iconSet } = useTheme()
+const { icon: iconSet } = useThemePicker()
 const studioIcons = useStudioIcons()
 
 const DICE_FACES = ['i-lucide-dice-1', 'i-lucide-dice-2', 'i-lucide-dice-3', 'i-lucide-dice-4', 'i-lucide-dice-5', 'i-lucide-dice-6']

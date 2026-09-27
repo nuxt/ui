@@ -11,7 +11,7 @@ defineProps<{
 }>()
 
 const { presets, selectedPreset, applyPreset } = useThemeStudio()
-const { fonts } = useTheme()
+const { fonts } = useThemePicker()
 const studioIcons = useStudioIcons()
 
 // The persisted preset (and any persisted edits) are client-only, resolve

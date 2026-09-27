@@ -2,7 +2,7 @@
 import json5 from 'json5'
 import { themeIcons } from '../../utils/theme/icons'
 
-const { icon: iconSet } = useTheme()
+const { icon: iconSet } = useThemePicker()
 
 const icons = computed(() => themeIcons[iconSet.value as keyof typeof themeIcons || 'lucide'])
 

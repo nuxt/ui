@@ -4,7 +4,7 @@ import { iconSetSamples } from '../../../utils/theme/icons'
 /** The icon-pack select, every set previewing a strip of its own glyphs. */
 defineProps<{ vertical?: boolean }>()
 
-const { icon, icons } = useTheme()
+const { icon, icons } = useThemePicker()
 const { groupDirtyFlags } = useThemeStudioToolbar()
 </script>
 

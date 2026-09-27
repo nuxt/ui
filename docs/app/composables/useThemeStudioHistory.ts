@@ -28,7 +28,7 @@ interface HistoryEntry {
  */
 export function useThemeStudioHistory(options: { record?: boolean } = {}) {
   const { applyDoc, paletteParams, setPaletteParams, activePreset } = useThemeStudio()
-  const { currentDoc } = useTheme()
+  const { currentDoc } = useThemePicker()
 
   const past = useState<HistoryEntry[]>('theme-studio-history-past', () => [])
   const future = useState<HistoryEntry[]>('theme-studio-history-future', () => [])

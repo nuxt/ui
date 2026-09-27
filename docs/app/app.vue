@@ -27,7 +27,7 @@ defineShortcuts({
 })
 
 const appConfig = useAppConfig()
-const { style, link, color } = useTheme()
+const { style, link, color } = useThemePicker()
 
 const colorMode = useColorMode()
 

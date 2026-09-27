@@ -8,7 +8,7 @@ import type { MarkdownDoc } from '../../utils/markdown'
  * renders the stock theme highlighted; the client takes over after mount,
  * once the persisted theme is on.
  */
-const { exportCSS, exportConfig, configLabel, currentDoc } = useTheme()
+const { exportCSS, exportConfig, configLabel, currentDoc } = useThemePicker()
 const { framework } = useFrameworks()
 
 interface Pane {

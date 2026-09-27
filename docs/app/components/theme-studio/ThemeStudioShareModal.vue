@@ -12,7 +12,7 @@ const open = defineModel<boolean>('open', { default: false })
 
 const appConfig = useAppConfig()
 const studioIcons = useStudioIcons()
-const { exportCSS, exportConfig, configLabel, currentDoc } = useTheme()
+const { exportCSS, exportConfig, configLabel, currentDoc } = useThemePicker()
 const { presets, activePreset, dirty } = useThemeStudio()
 const { framework } = useFrameworks()
 const { track } = useAnalytics()

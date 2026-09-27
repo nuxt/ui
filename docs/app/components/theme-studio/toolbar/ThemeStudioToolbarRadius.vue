@@ -2,7 +2,7 @@
 /** The radius select; `--ui-radius` is a rem length, so the stop IS the label. */
 defineProps<{ vertical?: boolean }>()
 
-const { radius, radiuses } = useTheme()
+const { radius, radiuses } = useThemePicker()
 const { groupDirtyFlags } = useThemeStudioToolbar()
 const studioIcons = useStudioIcons()
 

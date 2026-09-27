@@ -13,7 +13,7 @@ import { mergeUi, isDefaultStyle, isDefaultTheme, styleTokens, DEFAULT_COLORS, D
 import type { ThemeDoc, ThemePalette, StyleOptions, StoredPaletteParams } from '../utils/theme/engine'
 import colors from 'tailwindcss/colors'
 
-export function useTheme() {
+export function useThemePicker() {
   const appConfig = useAppConfig()
   const colorMode = useColorMode()
   const { track: _track, trackThrottled } = useAnalytics()
@@ -57,7 +57,7 @@ export function useTheme() {
   const activePreset = useState<string | undefined>(THEME_STATE_KEYS.themePreset, () => undefined)
   /** The palette editor's curves and pins, the source its custom ramps derive from. */
   const paletteParams = useState<Partial<Record<string, StoredPaletteParams>>>(THEME_STATE_KEYS.paletteParams, () => ({}))
-  // useState, not useLocalStorage: these are app-level, so every useTheme call
+  // useState, not useLocalStorage: these are app-level, so every useThemePicker call
   // shares one ref directly instead of converging through storage events.
   const _radius = useState('nuxt-ui-radius', () => THEME_DEFAULTS.radius as number)
   const _fontSize = useState('nuxt-ui-font-size', () => THEME_DEFAULTS.fontSize as number)

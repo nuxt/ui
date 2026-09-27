@@ -10,7 +10,7 @@ import { paletteLabel, rampCssName } from '../../../utils/theme/studio'
 const props = defineProps<{ alias: ColorAlias }>()
 
 const appConfig = useAppConfig()
-const { neutralColors, primaryColors, primary, neutral, blackAsPrimary, setBlackAsPrimary } = useTheme()
+const { neutralColors, primaryColors, primary, neutral, blackAsPrimary, setBlackAsPrimary } = useThemePicker()
 const { selectPalette, isCustomPalette, clearCustomPalette } = useThemeStudio()
 
 // Strictly separated for v4: color roles offer only chromatic ramps, the

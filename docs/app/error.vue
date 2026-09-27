@@ -6,7 +6,7 @@ const props = defineProps<{
 }>()
 
 const route = useRoute()
-const { style, link, color } = useTheme()
+const { style, link, color } = useThemePicker()
 
 // same lazy mount as app.vue: a static mount here would defeat the
 // dynamic import and pull the studio engine back into the entry chunk

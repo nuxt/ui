@@ -9,7 +9,7 @@ import { paletteLabel, rampCssName } from '../utils/theme/studio'
  * would never lift.
  */
 export function useThemeStudioToolbar() {
-  const { resetTheme, primary, neutral, blackAsPrimary } = useTheme()
+  const { resetTheme, primary, neutral, blackAsPrimary } = useThemePicker()
   const { groupDirty, sectionDirty, dirty, presets, activePreset, applyPreset, primaryChip, neutralChip, isCustomPalette, style } = useThemeStudio()
 
   const mounted = useMounted()

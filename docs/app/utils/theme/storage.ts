@@ -184,7 +184,7 @@ export function writeStoredTheme(value: StoredTheme) {
  * The live theme in the stored shape, defaults omitted so an untouched theme
  * stores nothing. Reads the raw state refs rather than `currentDoc()`: the
  * doc is diffed against a stock library install on every call, far too much
- * work for the persistence watcher's per-flush getter, and `useTheme()`
+ * work for the persistence watcher's per-flush getter, and `useThemePicker()`
  * outside a component would fire its onMounted with no instance.
  */
 export function snapshotStoredTheme(): StoredTheme {

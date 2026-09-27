@@ -125,7 +125,7 @@ export default defineNuxtPlugin({
     if (import.meta.server) {
       // One FOUC script over the one storage key. Every setting used to ship
       // its own inline script re-reading its own key, eight of them, each
-      // duplicating a slice of useTheme's reactive style tags. This still
+      // duplicating a slice of useThemePicker's reactive style tags. This still
       // duplicates the derivations (it has to run before paint, before any
       // Vue code exists) but it parses once and writes every tag in order.
       // It stands down on a theme link, like the boot restore above: the

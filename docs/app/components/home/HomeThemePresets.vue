@@ -9,7 +9,7 @@ import type { ThemePreset } from '../../utils/theme/engine/presets'
  * the studio itself loads on the first click, so the landing chunk carries
  * neither the palette math nor the section engine.
  */
-const { selectedPreset } = useTheme()
+const { selectedPreset } = useThemePicker()
 const studioIcons = useStudioIcons()
 const nuxtApp = useNuxtApp()
 
