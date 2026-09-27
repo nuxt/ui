@@ -35,4 +35,10 @@ describe('tv with a Tailwind prefix', () => {
 
     expect(ui.base!()).toBe('tw:px-4')
   })
+
+  it('prefixes the color scope it keeps when unstyled', () => {
+    const colored = { ...theme, variants: { ...theme.variants, color: { error: { base: '[--ui-accent:var(--ui-error)]' } } } }
+
+    expect(tvt(colored, { unstyled: true })({ color: 'error' }).base!()).toBe('tw:[--ui-accent:var(--ui-error)]')
+  })
 })
