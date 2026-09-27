@@ -20,7 +20,7 @@ describe('component detection in the Vite dev server', () => {
     const uiCss = alias['#build/ui.css']
     expect(readFileSync(uiCss, 'utf8')).not.toContain('grid-cols-7')
 
-    const watcher = Object.assign(new EventEmitter(), { emit: vi.fn(EventEmitter.prototype.emit) })
+    const watcher = Object.assign(new EventEmitter(), { emit: vi.fn(EventEmitter.prototype.emit), add: vi.fn() })
     plugin.vite.configureServer({ watcher })
 
     const file = join(root, 'Extra.vue')
