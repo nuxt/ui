@@ -38,7 +38,7 @@ const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugi
     for (const shade of shades) {
       const value = theme(`colors.${name}.${shade}`)
       if (typeof value !== 'string') {
-        throw new TypeError(`[@nuxt/ui] \`${alias}: ${palette}\` needs a Tailwind palette with shades from 50 to 950, like \`indigo\` or one you declare as \`--color-${palette}-500\` in \`@theme\`.`)
+        throw new TypeError(`[@nuxt/ui] \`${alias}: ${palette}\` needs the name of a Tailwind palette with shades from 50 to 950, like \`indigo\`, or of one you declare in \`@theme\` as \`--color-<name>-50\` to \`-950\`.`)
       }
       declarations[`--ui-color-${alias}-${shade}`] = value
     }

@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises'
 import { camelCase, kebabCase } from 'scule'
 import { genExport } from 'knitwork'
 import { addTemplate, addTypeTemplate, hasNuxtModule, logger, updateTemplates, getLayerDirectories } from '@nuxt/kit'
-import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
+import type { Nuxt, NuxtApp, NuxtPage, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
 import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
 import { getThemeClasses } from './utils/theme'
@@ -57,7 +57,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
 
   writeThemeTemplate(theme)
 
-  async function generateSources() {
+  async function generateSources(app?: NuxtApp) {
     const sources: string[] = []
 
     // Layer + inline sources are Nuxt-only; the Vue integration relies on the
@@ -94,12 +94,19 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
       // Markdown content lives next to each layer's app dir, in `content/`
       const contentDirs = hasProse ? getLayerDirectories(nuxt).map(layer => `${layer.root}content`).filter(dir => existsSync(dir)) : []
 
+      // Components and pages registered from outside the layers, by another
+      // `components.dirs` entry, a module or a package, render components too
+      const runtimeDir = resolve('./runtime')
+      const pageFiles = (pages: NuxtPage[] = []): string[] => pages.flatMap(page => [page.file, ...pageFiles(page.children)]).filter((file): file is string => !!file)
+      const files = [...(app?.components ?? []).map(component => component.filePath), ...pageFiles(app?.pages)]
+        .filter(file => !file.startsWith(runtimeDir) && !layers.some(layer => file.startsWith(layer)))
+
       detectedComponents = await detectUsedComponents(
         [...layers, ...contentDirs],
         options.prefix!,
         componentDir,
         Array.isArray(options.componentDetection) ? options.componentDetection : undefined,
-        { prose: hasProse }
+        { prose: hasProse, files }
       )
 
       if (detectedComponents && detectedComponents.size > 0) {
@@ -166,7 +173,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   templates.push({
     filename: 'ui.css',
     write: true,
-    getContents: generateSources
+    getContents: ({ app }) => generateSources(app)
   })
 
   // The color scopes key their accent roles on the scope class, which the engine
@@ -183,6 +190,10 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
 
       const accent = await readFile(resolve('./runtime/accent.css'), 'utf8')
       const scopes = accent.match(/\[class~="\[--ui-accent:[^"]*"\]\s*\{[^}]*\}/g) ?? []
+      // One rule per color: fewer means the shipped CSS no longer looks the way this reads it
+      if (scopes.length < aliases.length) {
+        throw new Error(`[@nuxt/ui] Found ${scopes.length} color scope rules in \`accent.css\` for the prefix, expected ${aliases.length}.`)
+      }
 
       return `@layer base {\n  ${scopes.map(rule => rule.replace('[class~="[--ui-accent:', `[class~="${prefix}:[--ui-accent:`)).join('\n\n  ')}\n}\n`
     }
@@ -277,7 +288,7 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt, resolve: Resolv
 
   if (options.componentDetection && nuxt.options.dev) {
     nuxt.hook('builder:watch', async (_, path) => {
-      if (/\.(?:vue|ts|mts|js|mjs|cjs|tsx|jsx|md)$/.test(path)) {
+      if (/\.(?:vue|ts|mts|js|mjs|cjs|tsx|jsx|md|html)$/.test(path)) {
         await updateTemplates({ filter: template => template.filename === 'ui.css' })
       }
     })
