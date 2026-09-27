@@ -165,7 +165,7 @@ const props = useComponentProps<CalendarProps<R, M>>('calendar', _props, theme)
 
 const { dir, t, locale } = useLocale()
 const appConfig = useThemeConfig() as Calendar['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.calendar)
+const overrides = useComponentOverrides((ui: Calendar['AppConfig']['ui']) => ui.calendar)
 
 const VIEWS: CalendarView[] = ['day', 'month', 'year']
 

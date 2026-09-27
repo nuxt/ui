@@ -72,7 +72,7 @@ const props = useComponentProps<ContentSurroundProps<T>>('contentSurround', _pro
 
 const { dir } = useLocale()
 const appConfig = useThemeConfig() as ContentSurround['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.contentSurround)
+const overrides = useComponentOverrides((ui: ContentSurround['AppConfig']['ui']) => ui.contentSurround)
 const prefix = usePrefix()
 
 const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ link?: ContentSurroundLink, icon: IconProps['name'], direction: 'left' | 'right' }>({

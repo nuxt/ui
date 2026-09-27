@@ -1,6 +1,5 @@
 import type { App, ComputedRef, VNode } from 'vue'
 import { computed, effectScope, getCurrentInstance } from 'vue'
-import defu from 'defu'
 import { createContext } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { get } from '../utils'
@@ -11,9 +10,16 @@ export type ThemeContext = {
   unstyled: ComputedRef<boolean | undefined>
   /**
    * The `ui` config components read: `app.config.ui`, which `<UApp>` provides
-   * at the root and every `<UTheme>` passes down.
+   * at the root and every `<UTheme>` passes down, with the `icons` it sets.
    */
   config: ComputedRef<Record<string, any>>
+  /**
+   * The levels of class overrides, farthest first: `app.config.ui`, then each
+   * `<UTheme>` that sets `variants` or `ui`, in the shape of `app.config.ui`
+   * (`{ button: { variants, slots } }`). The engine stacks them in that order,
+   * so the nearest wins.
+   */
+  levels: ComputedRef<Record<string, any>[]>
 }
 
 const [_injectThemeContext, provideThemeContext] = createContext<ThemeContext>('UTheme', 'RootContext')
@@ -27,7 +33,8 @@ function createRootThemeContext(): ThemeContext {
   return effectScope(true).run(() => ({
     defaults: computed(() => ({})),
     unstyled: computed(() => undefined),
-    config: computed(() => appConfig.ui ?? {})
+    config: computed(() => appConfig.ui ?? {}),
+    levels: computed(() => [appConfig.ui ?? {}])
   }))!
 }
 
@@ -135,15 +142,13 @@ export function useComponentProps<T extends object>(name: string, props: T, them
       if (typeof prop !== 'string') return raw
 
       // Support dotted-path names (e.g. `prose.p`, `prose.code`) so prose
-      // components can pull from the same nested `ThemeContext.defaults` shape
-      // that `normalizeUi` produces in `<UTheme>`.
+      // components can pull from the nested `ThemeContext.defaults` shape
+      // `<UTheme :props>` takes (`{ prose: { p: { ... } } }`).
       const themeEntry = name.includes('.') ? get(defaults.value, name) : defaults.value[name]
 
-      if (prop === 'ui') {
-        const themeUi = themeEntry?.ui
-        if (!raw && !themeUi) return raw
-        return defu(raw ?? {}, themeUi ?? {})
-      }
+      // A `<UTheme>`'s `ui` is one of the levels the engine stacks, beneath this
+      // one, so the prop only holds what the component was given
+      if (prop === 'ui') return raw
 
       // Like `ui`, `class` is merged instead of replaced so a component passing
       // its own `class` still gets the theme classes. The explicit class comes
@@ -199,15 +204,20 @@ export function useComponentProps<T extends object>(name: string, props: T, them
 }
 
 /**
- * A component's `tv()` overrides: its `app.config.ui` entry, whether the nearest
- * `<UTheme>` (or `app.config.ui.unstyled` without one) makes it `unstyled`, and
- * the engine for the app's merge config (`app.config.ui.tv`) and Tailwind prefix.
+ * A component's `tv()` overrides: its entry at each level, read by `entry` from
+ * `app.config.ui` then from each `<UTheme>` down to the component, whether the
+ * nearest `<UTheme>` (or `app.config.ui.unstyled` without one) makes it
+ * `unstyled`, and the engine for the app's merge config (`app.config.ui.tv`)
+ * and Tailwind prefix.
+ *
+ * Type the level as the component's app config to type the variant values the
+ * app adds: `useComponentOverrides((ui: Button['AppConfig']['ui']) => ui.button)`.
  */
-export function useComponentOverrides<T extends Record<string, any>>(entry: () => T | undefined): ComputedRef<ComponentOverrides<T>> {
-  const { unstyled, config } = injectThemeContext()
+export function useComponentOverrides<U, T extends Record<string, any>>(entry: (ui: U) => T | undefined): ComputedRef<ComponentOverrides<T>> {
+  const { unstyled, config, levels } = injectThemeContext()
 
   return computed(() => new ComponentOverrides(
-    entry(),
+    levels.value.map(level => entry(level as U)),
     !!(unstyled.value ?? config.value.unstyled),
     engineFor(config.value.tv, config.value.prefix)
   ))

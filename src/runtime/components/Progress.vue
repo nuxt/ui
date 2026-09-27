@@ -74,7 +74,7 @@ const props = useComponentProps('progress', _props, theme)
 
 const { dir } = useLocale()
 const appConfig = useThemeConfig() as Progress['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.progress)
+const overrides = useComponentOverrides((ui: Progress['AppConfig']['ui']) => ui.progress)
 
 const rootProps = useForwardProps(reactivePick(props, 'getValueLabel', 'getValueText', 'modelValue'), emits)
 

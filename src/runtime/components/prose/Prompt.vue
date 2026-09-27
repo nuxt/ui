@@ -49,7 +49,7 @@ const props = useComponentProps('prose.prompt', _props, theme)
 const { t } = useLocale()
 const { copy, copied } = useClipboard()
 const appConfig = useThemeConfig() as ProsePrompt['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.prose?.prompt)
+const overrides = useComponentOverrides((ui: ProsePrompt['AppConfig']['ui']) => ui.prose?.prompt)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)())

@@ -104,7 +104,7 @@ const slots = defineSlots<InputTimeSlots>()
 const props = useComponentProps<InputTimeProps<R>>('inputTime', _props, theme)
 
 const appConfig = useThemeConfig() as InputTime['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.inputTime)
+const overrides = useComponentOverrides((ui: InputTime['AppConfig']['ui']) => ui.inputTime)
 
 const rootProps = useForwardProps(reactiveOmit(props, 'id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'ui'), emits)
 

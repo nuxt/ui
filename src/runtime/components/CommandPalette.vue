@@ -274,7 +274,7 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
 const appConfig = useThemeConfig() as CommandPalette['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.commandPalette)
+const overrides = useComponentOverrides((ui: CommandPalette['AppConfig']['ui']) => ui.commandPalette)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover', 'by'), emits)
 const virtualizerProps = toRef(() => {

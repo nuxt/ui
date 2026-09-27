@@ -219,7 +219,7 @@ export interface ThemeDefaults extends ThemeGlobalDefaults {
 
 /**
  * Loose internal shape stored on the injected `ThemeContext`. Allows the
- * `prose` namespace (lifted by `normalizeUi`) and any unknown keys to flow
+ * `prose` namespace and any unknown keys to flow
  * through without polluting the user-facing `ThemeDefaults` type.
  */
 export type ThemeContextDefaults = ThemeDefaults & {

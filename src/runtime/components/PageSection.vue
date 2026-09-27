@@ -68,7 +68,7 @@ export interface PageSectionSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { usePrefix } from '../composables/usePrefix'
 import { tv } from '../utils/tv'
 import UPageFeature from './PageFeature.vue'
@@ -84,8 +84,7 @@ const slots = defineSlots<PageSectionSlots>()
 
 const props = useComponentProps('pageSection', _props, theme)
 
-const appConfig = useThemeConfig() as PageSection['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.pageSection)
+const overrides = useComponentOverrides((ui: PageSection['AppConfig']['ui']) => ui.pageSection)
 const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys

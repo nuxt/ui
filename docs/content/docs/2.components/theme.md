@@ -29,7 +29,7 @@ For app-level theme configuration, we recommend using the `vite.config.ts` file 
 
 ### Slot classes
 
-Use the `ui` prop to override slot classes of descendant components. Keys are component names (camelCase) and values are their slot class overrides.
+Use the `ui` prop to override slot classes of descendant components. Keys are component names (camelCase) and values are their slot class overrides. They apply like the slot classes of your app config, on top of it: they win over the component's variants, while its `compoundVariants` still apply on top, like a `square` button keeping its own padding.
 
 ::component-example
 ---
@@ -132,7 +132,7 @@ Set `ui.unstyled` in the `ui` options of your `vite.config.ts` to apply it to yo
 
 ### Variants :badge{label="Soon" class="align-text-top"}
 
-Use the `variants` prop to change the classes of a component's variant values in a subtree, or to add values. It takes the same shape as the `variants` of the component in `app.config.ui`. For a value and slot you set, its classes replace the ones from your app config, and a nested Theme's replace the ones above it.
+Use the `variants` prop to change the classes of a component's variant values in a subtree, or to add values. It takes the same shape as the `variants` of the component in `app.config.ui`, and its classes apply on top of your app config and of any Theme above, so the nearest wins a conflict.
 
 ::component-example
 ---
@@ -172,7 +172,7 @@ name: 'theme-multiple-example'
 
 ### Nested themes
 
-Nest multiple Theme components to compose overrides. The innermost Theme takes precedence, while unoverridden keys are inherited from the outer Theme.
+Nest multiple Theme components to compose overrides. Each Theme's classes apply on top of the ones above it, so the innermost wins a conflict and the rest still apply. Prop defaults work the same way: the innermost Theme's value wins, and the keys it doesn't set are inherited.
 
 ::component-example
 ---
@@ -182,7 +182,7 @@ name: 'theme-nested-example'
 
 ### Explicit priority
 
-Explicitly setting any prop (including `ui`) on an individual component always takes priority over the Theme component.
+Explicitly setting any prop on an individual component always takes priority over the Theme component. Its `ui` classes apply on top of the Theme's.
 
 ::component-example
 ---

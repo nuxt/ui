@@ -78,7 +78,7 @@ const emits = defineEmits<SwitchEmits<T>>()
 const props = useComponentProps<SwitchProps<T>>('switch', _props, theme)
 
 const appConfig = useThemeConfig() as Switch['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.switch)
+const overrides = useComponentOverrides((ui: Switch['AppConfig']['ui']) => ui.switch)
 
 const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue', 'modelValue', 'trueValue', 'falseValue'), emits)
 

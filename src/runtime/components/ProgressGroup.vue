@@ -88,7 +88,7 @@ const slots = defineSlots<ProgressGroupSlots<T>>()
 const props = useComponentProps<ProgressGroupProps<T>>('progressGroup', _props, theme)
 
 const appConfig = useThemeConfig() as ProgressGroup['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.progressGroup)
+const overrides = useComponentOverrides((ui: ProgressGroup['AppConfig']['ui']) => ui.progressGroup)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
