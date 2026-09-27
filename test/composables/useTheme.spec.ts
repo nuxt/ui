@@ -32,6 +32,7 @@ describe('useTheme', () => {
 
     expect(themeToCSS({ colors: { primary: 'red; } body { display: none' } })).toBe('')
     expect(themeToCSS({ radius: '1rem</style><script>' })).toBe('')
+    expect(themeToCSS({ colors: { primary: { '500; } body { display: none': 'red' } as any } })).toBe('')
   })
 
   it('renders the style in the head and follows the options', async () => {

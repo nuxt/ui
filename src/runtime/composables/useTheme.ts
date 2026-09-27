@@ -4,6 +4,8 @@ import { useHead } from '#imports'
 import { colors } from '../theme/color'
 import type { Color } from '../theme/color'
 
+const shades = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900', '950'] as const
+
 type Shade = 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950
 
 /** A palette, like the ones `tailwindcss/colors` exports. */
@@ -53,8 +55,9 @@ export function themeToCSS(options: UseThemeOptions = {}): string {
         set(`--ui-${alias}`, value)
       }
     } else if (value) {
-      for (const [shade, color] of Object.entries(value)) {
-        set(`--ui-color-${alias}-${shade}`, color)
+      // Only the known shades, since a key would land in the property name
+      for (const shade of shades) {
+        set(`--ui-color-${alias}-${shade}`, (value as Record<string, unknown>)[shade])
       }
     }
   }
