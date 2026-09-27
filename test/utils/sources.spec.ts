@@ -30,7 +30,7 @@ symlinkSync(join(process.cwd(), 'node_modules/tailwindcss'), join(app, 'node_mod
 
 afterAll(() => rmSync(app, { recursive: true, force: true }))
 
-async function build(overrides: Record<string, any>, vue?: { detectedComponents?: Set<string> }, css = '') {
+async function build(overrides: Record<string, any>, vue?: { detectedComponents?: Set<string> }, css = '', before = '') {
   const options = { ...defaultOptions, ...overrides }
   const templates = getTemplates(options as any, getDefaultConfig(options.tailwindPrefix), undefined, (...paths: string[]) => join(dist, ...paths), vue)
   for (const filename of ['ui.css', 'ui.base.css']) {
@@ -40,7 +40,7 @@ async function build(overrides: Record<string, any>, vue?: { detectedComponents?
   const { compile } = await load('@tailwindcss/node')
   const { Scanner } = await load('@tailwindcss/oxide')
   const tailwind = overrides.tailwindPrefix ? `@import "tailwindcss" prefix(${overrides.tailwindPrefix});` : '@import "tailwindcss";'
-  const compiler = await compile(`${tailwind}\n@import "${join(dist, 'runtime/index.css')}";\n${css}`, {
+  const compiler = await compile(`${tailwind}\n${before}\n@import "${join(dist, 'runtime/index.css')}";\n${css}`, {
     base: app,
     onDependency: () => {},
     customCssResolver: async (id: string) => id.startsWith('#build/') ? join(app, id.slice('#build/'.length)) : undefined
@@ -79,6 +79,15 @@ describe('colors plugin', () => {
     expect(css).toContain(`--color-green-500: ${colors.green[500]};`)
   })
 
+  it('falls back to the palette values when you reset the colors before the import', async () => {
+    const css = await build({}, undefined, '', '@theme { --color-*: initial; }')
+
+    expect(rule(css, ':where(:root, :host)')).toContain(`--ui-color-primary-500: var(--color-green-500, ${colors.green[500]});`)
+    expect(css).not.toContain(`--color-green-500: ${colors.green[500]};`)
+    // Nuxt UI's own tokens come after the reset, so their utilities stay
+    expect(css).toContain('background-color: var(--ui-accent)')
+  })
+
   it('follows a palette you override in `@theme`', async () => {
     const css = await build({}, undefined, '@theme static { --color-green-500: #00C16A; }')
 
@@ -104,7 +113,7 @@ describe('colors plugin', () => {
 
   it('rejects an alias outside the set, a missing palette and another alias', async () => {
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { tertiary: indigo; }')).rejects.toThrow('`tertiary` isn\'t a color alias')
-    await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: brand; }')).rejects.toThrow('`primary: brand` needs a Tailwind palette')
+    await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: brand; }')).rejects.toThrow('`primary: brand` needs the name of a Tailwind palette')
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: primary; }')).rejects.toThrow('`primary: primary` points a color alias at another')
   })
 })
