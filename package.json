@@ -70,6 +70,9 @@
       "vite": [
         "./dist/vite.d.mts"
       ],
+      "colors": [
+        "./dist/runtime/colors.d.ts"
+      ],
       "vue-plugin": [
         "./vue-plugin.d.ts"
       ],
