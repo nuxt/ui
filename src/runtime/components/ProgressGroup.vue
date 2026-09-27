@@ -75,7 +75,7 @@ export type ProgressGroupSlots<T extends ProgressGroupItem = ProgressGroupItem> 
 <script setup lang="ts" generic="T extends ProgressGroupItem">
 import { computed } from 'vue'
 import { Primitive, ProgressRoot, ProgressIndicator } from 'reka-ui'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
@@ -87,7 +87,6 @@ const slots = defineSlots<ProgressGroupSlots<T>>()
 
 const props = useComponentProps<ProgressGroupProps<T>>('progressGroup', _props, theme)
 
-const appConfig = useThemeConfig() as ProgressGroup['AppConfig']
 const overrides = useComponentOverrides((ui: ProgressGroup['AppConfig']['ui']) => ui.progressGroup)
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -120,7 +119,8 @@ const statusStyle = computed(() => ({ '--percent': `${percent.value}%` }))
 
 // `tv` skips a color it doesn't know, so a value outside the theme palette adds no class
 // and is applied inline instead.
-const themeColors = computed(() => Object.keys({ ...theme.variants?.color, ...appConfig.ui?.progressGroup?.variants?.color }))
+// The colors the theme knows, with the ones the app config and each `<UTheme>` add
+const themeColors = computed(() => Object.keys(Object.assign({ ...theme.variants?.color }, ...overrides.value.levels.map(level => level?.variants?.color))))
 
 const itemColors = computed(() => (props.items ?? []).map(item => (item.color || props.color) as ProgressGroup['variants']['color']))
 
