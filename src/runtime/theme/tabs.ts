@@ -22,7 +22,7 @@ export default defineTheme({
     color: colorVariant({ root: '' }),
     variant: {
       pill: {
-        list: 'bg-elevated rounded-lg',
+        list: 'bg-soft rounded-lg',
         trigger: [`grow`, `in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:content-[''] in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:absolute in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:inset-0 in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:rounded-md in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:shadow-xs in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:-z-10 in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:isolate`, 'data-[state=active]:text-accent-foreground outline-accent-focus focus-visible:outline-3', 'in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:bg-accent'],
         indicator: 'rounded-md shadow-xs bg-accent'
       },

@@ -13,14 +13,14 @@ export default defineTheme({
     color: colorVariant({ root: '' }),
     variant: {
       outline: {
-        root: 'bg-default/75 ring ring-default'
+        root: 'bg-surface/75 ring ring-default'
       },
       // Highlight the prompt like a focused input when the text surface (native textarea or editor's contenteditable) is focused, without reacting to header/footer controls.
       soft: {
-        root: 'bg-elevated/50 outline-accent-focus has-[textarea:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:outline-3'
+        root: 'bg-tint outline-accent-focus has-[textarea:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:outline-3'
       },
       subtle: {
-        root: 'bg-elevated/50 ring ring-default'
+        root: 'bg-tint ring ring-default'
       },
       naked: {
         root: ''

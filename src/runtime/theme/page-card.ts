@@ -4,7 +4,7 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'relative flex rounded-lg',
-    spotlight: 'absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90',
+    spotlight: 'absolute inset-0 rounded-[inherit] pointer-events-none bg-surface/90',
     container: 'relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6',
     wrapper: 'flex flex-col flex-1 items-start',
     header: 'mb-4',
@@ -33,19 +33,19 @@ export default defineTheme({
       solid: {
         root: 'bg-inverted text-inverted',
         title: 'text-inverted',
-        description: 'text-dimmed'
+        description: 'text-faint'
       },
       outline: {
-        root: 'bg-default ring ring-default',
+        root: 'bg-surface ring ring-default',
         description: 'text-muted'
       },
       soft: {
-        root: 'bg-elevated/50',
-        description: 'text-toned'
+        root: 'bg-tint',
+        description: 'text-default'
       },
       subtle: {
-        root: 'bg-elevated/50 ring ring-default',
-        description: 'text-toned'
+        root: 'bg-tint ring ring-default',
+        description: 'text-default'
       },
       ghost: {
         description: 'text-muted'
@@ -57,7 +57,7 @@ export default defineTheme({
     },
     to: {
       true: {
-        root: 'outline-primary/25 has-[>a:focus-visible]:outline-3 transition'
+        root: 'outline-focus has-[>a:focus-visible]:outline-3 transition'
       }
     },
     title: {
@@ -88,26 +88,26 @@ export default defineTheme({
     variant: 'outline',
     to: true,
     class: {
-      root: 'hover:bg-elevated/50'
+      root: 'hover:bg-tint'
     }
   }, {
     variant: 'soft',
     to: true,
     class: {
-      root: 'hover:bg-elevated'
+      root: 'hover:bg-soft'
     }
   }, {
     variant: 'subtle',
     to: true,
     class: {
-      root: 'hover:bg-elevated'
+      root: 'hover:bg-soft'
     }
   }, {
     variant: 'subtle',
     to: true,
     highlight: false,
     class: {
-      root: 'hover:ring-accented'
+      root: 'hover:ring-strong'
     }
   }, {
     variant: ['outline', 'subtle'],
@@ -120,7 +120,7 @@ export default defineTheme({
     variant: 'ghost',
     to: true,
     class: {
-      root: 'hover:bg-elevated/50'
+      root: 'hover:bg-tint'
     }
   }],
   defaultVariants: {

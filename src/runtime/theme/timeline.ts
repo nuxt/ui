@@ -6,10 +6,10 @@ export default defineTheme({
     root: 'flex gap-1.5',
     item: 'group relative flex flex-1 gap-3',
     container: 'relative flex items-center gap-1.5',
-    indicator: 'group-data-[state=completed]:text-accent-foreground group-data-[state=active]:text-accent-foreground text-muted bg-elevated group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent',
-    separator: 'flex-1 rounded-full bg-elevated',
+    indicator: 'group-data-[state=completed]:text-accent-foreground group-data-[state=active]:text-accent-foreground text-muted bg-soft group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent',
+    separator: 'flex-1 rounded-full bg-soft',
     wrapper: 'w-full',
-    date: 'text-dimmed text-xs/5',
+    date: 'text-faint text-xs/5',
     title: 'font-medium text-highlighted text-sm',
     description: 'text-muted text-wrap text-sm'
   },

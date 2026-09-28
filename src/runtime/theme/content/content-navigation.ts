@@ -16,7 +16,7 @@ export default defineTheme({
     linkTrailingBadge: 'shrink-0',
     linkTrailingIcon: 'size-5 transform transition-transform duration-200 ease-out motion-reduce:transition-none shrink-0 group-data-[state=open]:rotate-180',
     linkTitle: 'truncate',
-    linkTitleExternalIcon: 'size-3 align-top text-dimmed'
+    linkTitleExternalIcon: 'size-3 align-top text-faint'
   },
   variants: {
     color: colorVariant({ root: '' }),
@@ -31,7 +31,7 @@ export default defineTheme({
       },
       false: {
         link: 'text-muted',
-        linkLeadingIcon: 'text-dimmed'
+        linkLeadingIcon: 'text-faint'
       }
     },
     disabled: {
@@ -60,7 +60,7 @@ export default defineTheme({
     active: false,
     variant: 'pill',
     class: {
-      link: 'hover:text-highlighted hover:before:bg-elevated/50 data-[state=open]:text-highlighted transition-colors before:transition-colors',
+      link: 'hover:text-highlighted hover:before:bg-tint data-[state=open]:text-highlighted transition-colors before:transition-colors',
       linkLeadingIcon: 'group-hover:text-default group-data-[state=open]:text-default transition-colors'
     }
   }, {
@@ -75,7 +75,7 @@ export default defineTheme({
     active: true,
     highlight: false,
     class: {
-      link: 'before:bg-elevated'
+      link: 'before:bg-soft'
     }
   }, {
     variant: 'pill',
@@ -83,7 +83,7 @@ export default defineTheme({
     highlight: true,
     disabled: false,
     class: {
-      link: 'hover:before:bg-elevated/50 before:transition-colors'
+      link: 'hover:before:bg-tint before:transition-colors'
     }
   }, {
     disabled: false,

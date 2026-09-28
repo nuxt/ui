@@ -117,7 +117,7 @@ export default defineTheme({
       color: colors.filter(color => color !== 'neutral'),
       variant: 'outline',
       class: {
-        cellTrigger: 'data-selected:ring data-selected:ring-inset data-selected:ring-accent-border data-selected:text-accent data-selected:focus-visible:ring-accent data-today:not-data-selected:text-accent data-highlighted:bg-accent-soft hover:not-data-selected:bg-accent-soft'
+        cellTrigger: 'data-selected:ring data-selected:ring-inset data-selected:ring-accent-border-strong data-selected:text-accent data-selected:focus-visible:ring-accent data-today:not-data-selected:text-accent data-highlighted:bg-accent-soft hover:not-data-selected:bg-accent-soft'
       }
     },
     {
@@ -131,7 +131,7 @@ export default defineTheme({
       color: colors.filter(color => color !== 'neutral'),
       variant: 'subtle',
       class: {
-        cellTrigger: 'data-selected:bg-accent-soft data-selected:text-accent-soft-foreground data-selected:ring data-selected:ring-inset data-selected:ring-accent-border-soft data-selected:focus-visible:ring-accent data-today:not-data-selected:text-accent data-highlighted:bg-accent-soft-hover hover:not-data-selected:bg-accent-soft-hover'
+        cellTrigger: 'data-selected:bg-accent-soft data-selected:text-accent-soft-foreground data-selected:ring data-selected:ring-inset data-selected:ring-accent-border data-selected:focus-visible:ring-accent data-today:not-data-selected:text-accent data-highlighted:bg-accent-soft-hover hover:not-data-selected:bg-accent-soft-hover'
       }
     },
     {
@@ -145,21 +145,21 @@ export default defineTheme({
       color: 'neutral',
       variant: 'outline',
       class: {
-        cellTrigger: 'data-selected:ring data-selected:ring-inset data-selected:ring-accented data-selected:text-default data-selected:bg-default data-selected:focus-visible:ring-inverted data-today:not-data-selected:text-highlighted data-highlighted:bg-inverted/10 hover:not-data-selected:bg-inverted/10'
+        cellTrigger: 'data-selected:ring data-selected:ring-inset data-selected:ring-strong data-selected:text-default data-selected:bg-surface data-selected:focus-visible:ring-inverted data-today:not-data-selected:text-highlighted data-highlighted:bg-inverted/10 hover:not-data-selected:bg-inverted/10'
       }
     },
     {
       color: 'neutral',
       variant: 'soft',
       class: {
-        cellTrigger: 'data-selected:bg-elevated data-selected:text-default data-today:not-data-selected:text-highlighted data-highlighted:bg-inverted/20 hover:not-data-selected:bg-inverted/10'
+        cellTrigger: 'data-selected:bg-soft data-selected:text-default data-today:not-data-selected:text-highlighted data-highlighted:bg-inverted/20 hover:not-data-selected:bg-inverted/10'
       }
     },
     {
       color: 'neutral',
       variant: 'subtle',
       class: {
-        cellTrigger: 'data-selected:bg-elevated data-selected:text-default data-selected:ring data-selected:ring-inset data-selected:ring-accented data-selected:focus-visible:ring-inverted data-today:not-data-selected:text-highlighted data-highlighted:bg-inverted/20 hover:not-data-selected:bg-inverted/10'
+        cellTrigger: 'data-selected:bg-soft data-selected:text-default data-selected:ring data-selected:ring-inset data-selected:ring-strong data-selected:focus-visible:ring-inverted data-today:not-data-selected:text-highlighted data-highlighted:bg-inverted/20 hover:not-data-selected:bg-inverted/10'
       }
     },
     ...(Object.entries(daySizes) as [keyof typeof daySizes, string][]).map(([size, cellTrigger]) => ({

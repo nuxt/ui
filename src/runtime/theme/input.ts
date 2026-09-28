@@ -5,7 +5,7 @@ import { defineTheme } from '../utils/theme'
 // The focus classes below, for a container whose segments or items take the focus
 // (InputDate, InputTime, InputTags), spelled out so Tailwind finds them
 const containerFocus: Record<string, string> = {
-  'focus:bg-elevated': 'has-focus:bg-elevated',
+  'focus:bg-soft': 'has-focus:bg-soft',
   'focus:outline-none': 'has-focus:outline-none',
   'focus-visible:outline-3': 'has-focus-visible:outline-3',
   'focus-visible:ring-accent': 'has-focus-visible:ring-accent'
@@ -18,12 +18,12 @@ export function replaceFocus(classes: string): string {
 export default defineTheme({
   slots: {
     root: 'relative inline-flex items-center',
-    base: 'w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
+    base: 'w-full rounded-md border-0 appearance-none placeholder:text-faint disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
     leading: 'absolute inset-y-0 start-0 flex items-center',
-    leadingIcon: 'shrink-0 text-dimmed',
+    leadingIcon: 'shrink-0 text-faint',
     leadingAvatar: 'shrink-0',
     trailing: 'absolute inset-y-0 end-0 flex items-center',
-    trailingIcon: 'shrink-0 text-dimmed'
+    trailingIcon: 'shrink-0 text-faint'
   },
   variants: {
     ...fieldGroupVariantWithRoot,
@@ -65,10 +65,10 @@ export default defineTheme({
       }
     },
     variant: {
-      outline: { base: 'text-highlighted bg-default ring ring-inset ring-accented' },
-      soft: { base: 'text-highlighted bg-elevated/50 hover:bg-elevated focus:bg-elevated disabled:bg-elevated/50' },
-      subtle: { base: 'text-highlighted bg-elevated ring ring-inset ring-accented' },
-      ghost: { base: 'text-highlighted bg-transparent hover:bg-elevated focus:bg-elevated disabled:bg-transparent dark:disabled:bg-transparent' },
+      outline: { base: 'text-highlighted bg-surface ring ring-inset ring-strong' },
+      soft: { base: 'text-highlighted bg-tint hover:bg-soft focus:bg-soft disabled:bg-tint' },
+      subtle: { base: 'text-highlighted bg-soft ring ring-inset ring-strong' },
+      ghost: { base: 'text-highlighted bg-transparent hover:bg-soft focus:bg-soft disabled:bg-transparent dark:disabled:bg-transparent' },
       none: { base: 'text-highlighted bg-transparent focus:outline-none' }
     },
     color: colorVariant({ root: '' }),

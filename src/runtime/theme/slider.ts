@@ -4,9 +4,9 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'relative flex items-center select-none touch-none',
-    track: 'relative bg-accented overflow-hidden rounded-full grow',
+    track: 'relative bg-soft-hover overflow-hidden rounded-full grow',
     range: 'absolute rounded-full bg-accent',
-    thumb: 'rounded-full bg-default ring-2 focus-visible:outline-3 focus-visible:outline-offset-2 ring-accent outline-accent-focus'
+    thumb: 'rounded-full bg-surface ring-2 focus-visible:outline-3 focus-visible:outline-offset-2 ring-accent outline-accent-focus'
   },
   variants: {
     color: colorVariant({ root: '' }),

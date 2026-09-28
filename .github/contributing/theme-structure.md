@@ -33,7 +33,7 @@ A theme is a plain object wrapped in `defineTheme`. It never reads module option
 
 `defineTheme` checks `compoundVariants` and `defaultVariants` against `variants`, and keeps their values typed as the variant's values, which inference alone widens to `string`. A theme that builds on another uses `extendTheme(base, {...})` instead, typed after `defuFn`: its values win, a function receives the base value and returns the new one, and `compoundVariants` concatenate. Type a function's parameter from the base (`(prev: typeof input.variants.variant) => ...`) so the variant values survive.
 
-Write each class out whole. A class built at runtime, from a template literal (`` `${hover}bg-elevated` ``), a helper that maps or rewrites classes, or a string with escaped quotes (`'content-[\'*\']'`), never reaches Tailwind's scanner and gets no CSS. Use backticks for a class that holds quotes, and give a helper that rewrites classes its results as literals, like `replaceFocus` in `input.ts`. The `theme classes` test in `test/utils/theme-slots.spec.ts` fails on any class the themes resolve to that isn't spelled out in `src/runtime/theme`.
+Write each class out whole. A class built at runtime, from a template literal (`` `${hover}bg-soft` ``), a helper that maps or rewrites classes, or a string with escaped quotes (`'content-[\'*\']'`), never reaches Tailwind's scanner and gets no CSS. Use backticks for a class that holds quotes, and give a helper that rewrites classes its results as literals, like `replaceFocus` in `input.ts`. The `theme classes` test in `test/utils/theme-slots.spec.ts` fails on any class the themes resolve to that isn't spelled out in `src/runtime/theme`.
 
 ```ts
 import { defineTheme } from '../utils/theme'
@@ -76,7 +76,7 @@ export default defineTheme({
     color: colorVariant({ base: '' }),
     variant: {
       solid: { base: 'text-accent-foreground bg-accent hover:bg-accent-hover' },
-      outline: { base: 'ring ring-inset ring-accent-border text-accent-soft-foreground bg-accent-surface' },
+      outline: { base: 'ring ring-inset ring-accent-border-strong text-accent-soft-foreground bg-accent-surface' },
       soft: { base: 'text-accent-soft-foreground bg-accent-soft' }
     },
     size: {
@@ -122,21 +122,23 @@ Always use semantic colors, never Tailwind palette colors:
 ### Text Colors
 - `text-default` - Primary text
 - `text-muted` - Secondary text
-- `text-dimmed` - Tertiary/placeholder text
+- `text-faint` - Tertiary/placeholder text
 - `text-highlighted` - Emphasized text
 - `text-inverted` - Text on dark backgrounds
 
 ### Background Colors
-- `bg-default` - Primary background
-- `bg-elevated` - Elevated surface (cards, dropdowns)
-- `bg-accented` - Subtle accent background
+- `bg-surface` - Primary background
+- `bg-soft` - Raised surface (cards, dropdowns)
+- `bg-soft-hover` - Hover of a raised surface
+- `bg-tint` - Hovered and highlighted items
 - `bg-inverted` - Inverted (dark) background
 
 ### Border Colors
 - `border-default` - Standard borders
 - `ring-default` - Focus rings
-- `ring-accented` - Accented rings
+- `ring-strong` - Field outlines
 - `divide-default` - Dividers
+- `outline-focus` - Focus outline of a component without a `color` prop
 
 ### Accent Tokens
 The `color` prop accepts `primary`, `secondary`, `success`, `info`, `warning`, `error` and `neutral`. Colored classes read the scoped color through `accent` roles, never through an alias name. An opacity modifier on `accent` (`bg-accent/20`, `border-accent/50`) is only for a state no color tunes and whose neutral look follows the color too; a state that needs its own neutral look gets a role:
@@ -145,7 +147,7 @@ The `color` prop accepts `primary`, `secondary`, `success`, `info`, `warning`, `
 - `bg-accent-hover` - Hover of a solid background
 - `bg-accent-soft` / `bg-accent-soft-hover` - Tinted background and its hover
 - `text-accent-soft-foreground` - Text on a tinted background
-- `ring-accent-border` / `ring-accent-border-soft` / `ring-accent-border-muted` - Colored borders
+- `ring-accent-border` / `ring-accent-border-strong` - Colored borders
 - `outline-accent-focus` - Focus outline
 - `bg-accent-surface` - Resting background of an outlined element
 - `bg-accent-tint` - Light tint on large surfaces

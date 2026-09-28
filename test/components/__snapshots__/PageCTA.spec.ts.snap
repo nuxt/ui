@@ -1,13 +1,13 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`PageCTA > renders with as correctly 1`] = `
-"<section data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-default ring ring-default">
+"<section data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-surface ring ring-default">
   <div data-slot="page-cta-container" class="w-full max-w-(--ui-container) mx-auto flex flex-col lg:grid px-6 py-12 sm:px-12 sm:py-24 lg:px-16 lg:py-24 gap-8 sm:gap-16"></div>
 </section>"
 `;
 
 exports[`PageCTA > renders with body slot correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-default ring ring-default">
+"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-surface ring ring-default">
   <div data-slot="page-cta-container" class="w-full max-w-(--ui-container) mx-auto flex flex-col lg:grid px-6 py-12 sm:px-12 sm:py-24 lg:px-16 lg:py-24 gap-8 sm:gap-16">
     <div data-slot="page-cta-wrapper" class="">
       <!--v-if-->
@@ -20,19 +20,19 @@ exports[`PageCTA > renders with body slot correctly 1`] = `
 `;
 
 exports[`PageCTA > renders with bottom slot correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-default ring ring-default">
+"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-surface ring ring-default">
   <div data-slot="page-cta-container" class="w-full max-w-(--ui-container) mx-auto flex flex-col lg:grid px-6 py-12 sm:px-12 sm:py-24 lg:px-16 lg:py-24 gap-8 sm:gap-16"></div>Bottom slot
 </div>"
 `;
 
 exports[`PageCTA > renders with class correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate overflow-hidden bg-default ring ring-default rounded-none">
+"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate overflow-hidden bg-surface ring ring-default rounded-none">
   <div data-slot="page-cta-container" class="w-full max-w-(--ui-container) mx-auto flex flex-col lg:grid px-6 py-12 sm:px-12 sm:py-24 lg:px-16 lg:py-24 gap-8 sm:gap-16"></div>
 </div>"
 `;
 
 exports[`PageCTA > renders with default slot correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-default ring ring-default">
+"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-surface ring ring-default">
   <div data-slot="page-cta-container" class="w-full max-w-(--ui-container) mx-auto flex flex-col lg:grid px-6 py-12 sm:px-12 sm:py-24 lg:px-16 lg:py-24 gap-8 sm:gap-16">
     <!--v-if-->Default slot
   </div>
@@ -40,7 +40,7 @@ exports[`PageCTA > renders with default slot correctly 1`] = `
 `;
 
 exports[`PageCTA > renders with description correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-default ring ring-default">
+"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-surface ring ring-default">
   <div data-slot="page-cta-container" class="w-full max-w-(--ui-container) mx-auto flex flex-col lg:grid px-6 py-12 sm:px-12 sm:py-24 lg:px-16 lg:py-24 gap-8 sm:gap-16">
     <div data-slot="page-cta-wrapper" class="">
       <div data-slot="page-cta-header" class="">
@@ -56,7 +56,7 @@ exports[`PageCTA > renders with description correctly 1`] = `
 `;
 
 exports[`PageCTA > renders with description slot correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-default ring ring-default">
+"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-surface ring ring-default">
   <div data-slot="page-cta-container" class="w-full max-w-(--ui-container) mx-auto flex flex-col lg:grid px-6 py-12 sm:px-12 sm:py-24 lg:px-16 lg:py-24 gap-8 sm:gap-16">
     <div data-slot="page-cta-wrapper" class="">
       <div data-slot="page-cta-header" class="">
@@ -72,7 +72,7 @@ exports[`PageCTA > renders with description slot correctly 1`] = `
 `;
 
 exports[`PageCTA > renders with footer slot correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-default ring ring-default">
+"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-surface ring ring-default">
   <div data-slot="page-cta-container" class="w-full max-w-(--ui-container) mx-auto flex flex-col lg:grid px-6 py-12 sm:px-12 sm:py-24 lg:px-16 lg:py-24 gap-8 sm:gap-16">
     <div data-slot="page-cta-wrapper" class="">
       <!--v-if-->
@@ -85,7 +85,7 @@ exports[`PageCTA > renders with footer slot correctly 1`] = `
 `;
 
 exports[`PageCTA > renders with header slot correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-default ring ring-default">
+"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-surface ring ring-default">
   <div data-slot="page-cta-container" class="w-full max-w-(--ui-container) mx-auto flex flex-col lg:grid px-6 py-12 sm:px-12 sm:py-24 lg:px-16 lg:py-24 gap-8 sm:gap-16">
     <div data-slot="page-cta-wrapper" class="">
       <div data-slot="page-cta-header" class="">Header slot</div>
@@ -98,7 +98,7 @@ exports[`PageCTA > renders with header slot correctly 1`] = `
 `;
 
 exports[`PageCTA > renders with links correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-default ring ring-default">
+"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-surface ring ring-default">
   <div data-slot="page-cta-container" class="w-full max-w-(--ui-container) mx-auto flex flex-col lg:grid px-6 py-12 sm:px-12 sm:py-24 lg:px-16 lg:py-24 gap-8 sm:gap-16">
     <div data-slot="page-cta-wrapper" class="">
       <!--v-if-->
@@ -116,7 +116,7 @@ exports[`PageCTA > renders with links correctly 1`] = `
 `;
 
 exports[`PageCTA > renders with links slot correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-default ring ring-default">
+"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-surface ring ring-default">
   <div data-slot="page-cta-container" class="w-full max-w-(--ui-container) mx-auto flex flex-col lg:grid px-6 py-12 sm:px-12 sm:py-24 lg:px-16 lg:py-24 gap-8 sm:gap-16">
     <div data-slot="page-cta-wrapper" class="">
       <!--v-if-->
@@ -131,7 +131,7 @@ exports[`PageCTA > renders with links slot correctly 1`] = `
 `;
 
 exports[`PageCTA > renders with orientation horizontal correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-default ring ring-default">
+"<div data-orientation="horizontal" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-surface ring ring-default">
   <div data-slot="page-cta-container" class="w-full max-w-(--ui-container) mx-auto flex flex-col lg:grid px-6 py-12 sm:px-12 sm:py-24 lg:px-16 lg:py-24 gap-8 sm:gap-16 lg:grid-cols-2 lg:items-center">
     <!--v-if-->
     <div class="hidden lg:block"></div>
@@ -140,7 +140,7 @@ exports[`PageCTA > renders with orientation horizontal correctly 1`] = `
 `;
 
 exports[`PageCTA > renders with orientation horizontal links correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-default ring ring-default">
+"<div data-orientation="horizontal" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-surface ring ring-default">
   <div data-slot="page-cta-container" class="w-full max-w-(--ui-container) mx-auto flex flex-col lg:grid px-6 py-12 sm:px-12 sm:py-24 lg:px-16 lg:py-24 gap-8 sm:gap-16 lg:grid-cols-2 lg:items-center">
     <div data-slot="page-cta-wrapper" class="">
       <!--v-if-->
@@ -158,7 +158,7 @@ exports[`PageCTA > renders with orientation horizontal links correctly 1`] = `
 `;
 
 exports[`PageCTA > renders with orientation horizontal reverse correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-default ring ring-default">
+"<div data-orientation="horizontal" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-surface ring ring-default">
   <div data-slot="page-cta-container" class="w-full max-w-(--ui-container) mx-auto flex flex-col lg:grid px-6 py-12 sm:px-12 sm:py-24 lg:px-16 lg:py-24 gap-8 sm:gap-16 lg:grid-cols-2 lg:items-center">
     <!--v-if-->
     <div class="hidden lg:block"></div>
@@ -167,13 +167,13 @@ exports[`PageCTA > renders with orientation horizontal reverse correctly 1`] = `
 `;
 
 exports[`PageCTA > renders with reverse correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-default ring ring-default">
+"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-surface ring ring-default">
   <div data-slot="page-cta-container" class="w-full max-w-(--ui-container) mx-auto flex flex-col lg:grid px-6 py-12 sm:px-12 sm:py-24 lg:px-16 lg:py-24 gap-8 sm:gap-16"></div>
 </div>"
 `;
 
 exports[`PageCTA > renders with title correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-default ring ring-default">
+"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-surface ring ring-default">
   <div data-slot="page-cta-container" class="w-full max-w-(--ui-container) mx-auto flex flex-col lg:grid px-6 py-12 sm:px-12 sm:py-24 lg:px-16 lg:py-24 gap-8 sm:gap-16">
     <div data-slot="page-cta-wrapper" class="">
       <div data-slot="page-cta-header" class="">
@@ -189,7 +189,7 @@ exports[`PageCTA > renders with title correctly 1`] = `
 `;
 
 exports[`PageCTA > renders with title slot correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-default ring ring-default">
+"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-surface ring ring-default">
   <div data-slot="page-cta-container" class="w-full max-w-(--ui-container) mx-auto flex flex-col lg:grid px-6 py-12 sm:px-12 sm:py-24 lg:px-16 lg:py-24 gap-8 sm:gap-16">
     <div data-slot="page-cta-wrapper" class="">
       <div data-slot="page-cta-header" class="">
@@ -205,12 +205,12 @@ exports[`PageCTA > renders with title slot correctly 1`] = `
 `;
 
 exports[`PageCTA > renders with top slot correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-default ring ring-default">Top slot<div data-slot="page-cta-container" class="w-full max-w-(--ui-container) mx-auto flex flex-col lg:grid px-6 py-12 sm:px-12 sm:py-24 lg:px-16 lg:py-24 gap-8 sm:gap-16"></div>
+"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-surface ring ring-default">Top slot<div data-slot="page-cta-container" class="w-full max-w-(--ui-container) mx-auto flex flex-col lg:grid px-6 py-12 sm:px-12 sm:py-24 lg:px-16 lg:py-24 gap-8 sm:gap-16"></div>
 </div>"
 `;
 
 exports[`PageCTA > renders with ui correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-default ring ring-default">
+"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-surface ring ring-default">
   <div data-slot="page-cta-container" class="w-full mx-auto flex flex-col lg:grid px-6 py-12 sm:px-12 sm:py-24 lg:px-16 lg:py-24 gap-8 sm:gap-16 max-w-5xl"></div>
 </div>"
 `;
@@ -222,13 +222,13 @@ exports[`PageCTA > renders with variant naked correctly 1`] = `
 `;
 
 exports[`PageCTA > renders with variant outline correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-default ring ring-default">
+"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-surface ring ring-default">
   <div data-slot="page-cta-container" class="w-full max-w-(--ui-container) mx-auto flex flex-col lg:grid px-6 py-12 sm:px-12 sm:py-24 lg:px-16 lg:py-24 gap-8 sm:gap-16"></div>
 </div>"
 `;
 
 exports[`PageCTA > renders with variant soft correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-elevated/50">
+"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-tint">
   <div data-slot="page-cta-container" class="w-full max-w-(--ui-container) mx-auto flex flex-col lg:grid px-6 py-12 sm:px-12 sm:py-24 lg:px-16 lg:py-24 gap-8 sm:gap-16"></div>
 </div>"
 `;
@@ -240,7 +240,7 @@ exports[`PageCTA > renders with variant solid correctly 1`] = `
 `;
 
 exports[`PageCTA > renders with variant subtle correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-elevated/50 ring ring-default">
+"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-tint ring ring-default">
   <div data-slot="page-cta-container" class="w-full max-w-(--ui-container) mx-auto flex flex-col lg:grid px-6 py-12 sm:px-12 sm:py-24 lg:px-16 lg:py-24 gap-8 sm:gap-16"></div>
 </div>"
 `;

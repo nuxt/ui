@@ -66,7 +66,7 @@ export default defineTheme({
     color: colors.filter(color => color !== 'neutral'),
     variant: 'outline',
     class: {
-      content: 'text-accent ring ring-accent-border-soft'
+      content: 'text-accent ring ring-accent-border'
     }
   }, {
     color: colors.filter(color => color !== 'neutral'),
@@ -78,7 +78,7 @@ export default defineTheme({
     color: colors.filter(color => color !== 'neutral'),
     variant: 'subtle',
     class: {
-      content: 'bg-accent-soft text-accent-soft-foreground ring ring-accent-border-soft'
+      content: 'bg-accent-soft text-accent-soft-foreground ring ring-accent-border'
     }
   }, {
     color: colors.filter(color => color !== 'neutral'),
@@ -96,19 +96,19 @@ export default defineTheme({
     color: 'neutral',
     variant: 'outline',
     class: {
-      content: 'bg-default ring ring-default'
+      content: 'bg-surface ring ring-default'
     }
   }, {
     color: 'neutral',
     variant: 'soft',
     class: {
-      content: 'bg-elevated/50'
+      content: 'bg-tint'
     }
   }, {
     color: 'neutral',
     variant: 'subtle',
     class: {
-      content: 'bg-elevated/50 ring ring-default'
+      content: 'bg-tint ring ring-default'
     }
   }, {
     compact: true,

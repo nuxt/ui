@@ -41,9 +41,9 @@ describe('applyUnstyled', () => {
 
   it('blanks a single-slot theme', () => {
     // Single-element components (e.g. Skeleton) declare one `base` slot.
-    const theme = { slots: { base: 'animate-pulse rounded-md bg-elevated' } }
+    const theme = { slots: { base: 'animate-pulse rounded-md bg-soft' } }
     expect(applyUnstyled(theme, true)).toEqual({ slots: { base: '' } })
-    expect(theme.slots.base).toBe('animate-pulse rounded-md bg-elevated')
+    expect(theme.slots.base).toBe('animate-pulse rounded-md bg-soft')
 
     expect(applyUnstyled({ slots: { base: ['flex', 'transition-colors'] } }, true)).toEqual({ slots: { base: '' } })
   })

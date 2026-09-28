@@ -4,7 +4,7 @@ exports[`ChangelogVersion > renders with actions slot correctly 1`] = `
 "<article data-slot="changelog-version" class="relative">
   <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
-    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
+    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
       <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
     </div>
   </div>
@@ -21,7 +21,7 @@ exports[`ChangelogVersion > renders with as correctly 1`] = `
 "<section data-slot="changelog-version" class="relative">
   <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
-    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
+    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
       <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
     </div>
   </div>
@@ -36,7 +36,7 @@ exports[`ChangelogVersion > renders with authors correctly 1`] = `
 "<article data-slot="changelog-version" class="relative">
   <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
-    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
+    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
       <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
     </div>
   </div>
@@ -61,7 +61,7 @@ exports[`ChangelogVersion > renders with authors slot correctly 1`] = `
 "<article data-slot="changelog-version" class="relative">
   <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
-    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
+    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
       <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
     </div>
   </div>
@@ -78,7 +78,7 @@ exports[`ChangelogVersion > renders with badge correctly 1`] = `
 "<article data-slot="changelog-version" class="relative">
   <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
-    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
+    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
       <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
     </div>
   </div>
@@ -101,7 +101,7 @@ exports[`ChangelogVersion > renders with badge object correctly 1`] = `
 "<article data-slot="changelog-version" class="relative">
   <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
-    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
+    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
       <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
     </div>
   </div>
@@ -124,7 +124,7 @@ exports[`ChangelogVersion > renders with badge slot correctly 1`] = `
 "<article data-slot="changelog-version" class="relative">
   <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
-    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
+    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
       <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
     </div>
   </div>
@@ -146,7 +146,7 @@ exports[`ChangelogVersion > renders with body slot correctly 1`] = `
 "<article data-slot="changelog-version" class="relative">
   <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
-    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
+    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
       <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
     </div>
   </div>
@@ -161,7 +161,7 @@ exports[`ChangelogVersion > renders with class correctly 1`] = `
 "<article data-slot="changelog-version" class="absolute">
   <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
-    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
+    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
       <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
     </div>
   </div>
@@ -174,15 +174,15 @@ exports[`ChangelogVersion > renders with class correctly 1`] = `
 
 exports[`ChangelogVersion > renders with date correctly 1`] = `
 "<article data-slot="changelog-version" class="relative">
-  <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0"><time datetime="2025-01-01T00:00:00.000Z" data-slot="changelog-version-date" class="text-sm/6 text-toned truncate">Jan 1, 2025</time>
-    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
+  <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0"><time datetime="2025-01-01T00:00:00.000Z" data-slot="changelog-version-date" class="text-sm/6 text-default truncate">Jan 1, 2025</time>
+    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
       <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
     </div>
   </div>
   <div data-slot="changelog-version-container" class="flex flex-col mx-auto max-w-2xl">
     <div data-slot="changelog-version-header" class="">
       <div data-slot="changelog-version-meta" class="flex items-center gap-3 mb-2 lg:hidden">
-        <!--v-if--><time datetime="2025-01-01T00:00:00.000Z" data-slot="changelog-version-date" class="text-sm/6 text-toned truncate lg:hidden">Jan 1, 2025</time>
+        <!--v-if--><time datetime="2025-01-01T00:00:00.000Z" data-slot="changelog-version-date" class="text-sm/6 text-default truncate lg:hidden">Jan 1, 2025</time>
       </div>
       <!--v-if-->
       <!--v-if-->
@@ -197,7 +197,7 @@ exports[`ChangelogVersion > renders with date slot correctly 1`] = `
 "<article data-slot="changelog-version" class="relative">
   <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
-    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
+    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
       <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
     </div>
   </div>
@@ -220,7 +220,7 @@ exports[`ChangelogVersion > renders with description correctly 1`] = `
 "<article data-slot="changelog-version" class="relative">
   <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
-    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
+    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
       <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
     </div>
   </div>
@@ -240,7 +240,7 @@ exports[`ChangelogVersion > renders with description slot correctly 1`] = `
 "<article data-slot="changelog-version" class="relative">
   <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
-    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
+    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
       <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
     </div>
   </div>
@@ -260,7 +260,7 @@ exports[`ChangelogVersion > renders with description slot correctly 2`] = `
 "<article data-slot="changelog-version" class="relative">
   <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
-    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
+    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
       <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
     </div>
   </div>
@@ -280,7 +280,7 @@ exports[`ChangelogVersion > renders with footer slot correctly 1`] = `
 "<article data-slot="changelog-version" class="relative">
   <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
-    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
+    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
       <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
     </div>
   </div>
@@ -295,7 +295,7 @@ exports[`ChangelogVersion > renders with header slot correctly 1`] = `
 "<article data-slot="changelog-version" class="relative">
   <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
-    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
+    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
       <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
     </div>
   </div>
@@ -310,7 +310,7 @@ exports[`ChangelogVersion > renders with image correctly 1`] = `
 "<article data-slot="changelog-version" class="relative">
   <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
-    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
+    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
       <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
     </div>
   </div>
@@ -332,7 +332,7 @@ exports[`ChangelogVersion > renders with image slot correctly 1`] = `
 "<article data-slot="changelog-version" class="relative">
   <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
-    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
+    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
       <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
     </div>
   </div>
@@ -364,7 +364,7 @@ exports[`ChangelogVersion > renders with title correctly 1`] = `
 "<article data-slot="changelog-version" class="relative">
   <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
-    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
+    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
       <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
     </div>
   </div>
@@ -386,7 +386,7 @@ exports[`ChangelogVersion > renders with title slot correctly 1`] = `
 "<article data-slot="changelog-version" class="relative">
   <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
-    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
+    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
       <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
     </div>
   </div>
@@ -408,7 +408,7 @@ exports[`ChangelogVersion > renders with title slot correctly 2`] = `
 "<article data-slot="changelog-version" class="relative">
   <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
-    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
+    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
       <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
     </div>
   </div>
@@ -430,7 +430,7 @@ exports[`ChangelogVersion > renders with to & image correctly 1`] = `
 "<article data-slot="changelog-version" class="relative">
   <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
-    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
+    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
       <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
     </div>
   </div>
@@ -450,7 +450,7 @@ exports[`ChangelogVersion > renders with to correctly 1`] = `
 "<article data-slot="changelog-version" class="relative">
   <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
-    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
+    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
       <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
     </div>
   </div>
@@ -465,7 +465,7 @@ exports[`ChangelogVersion > renders with ui correctly 1`] = `
 "<article data-slot="changelog-version" class="relative">
   <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
-    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
+    <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
       <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
     </div>
   </div>

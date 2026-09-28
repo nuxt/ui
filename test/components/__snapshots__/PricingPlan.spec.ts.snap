@@ -1,18 +1,18 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`PricingPlan > renders with as correctly 1`] = `
-"<section data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<section data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
-      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="pricing-plan-description" class="text-muted text-base text-pretty mt-2">Description</div>
     <div data-slot="pricing-plan-priceWrapper" class="flex items-center gap-1 mt-6">
       <div data-slot="pricing-plan-discount" class="text-muted line-through text-xl sm:text-2xl">$249</div>
       <div data-slot="pricing-plan-price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$199</div>
-      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-toned truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
+      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-default truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
     </div>
     <ul data-slot="pricing-plan-features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
       <li data-slot="pricing-plan-feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="pricing-plan-featureIcon"></span><span data-slot="pricing-plan-featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
@@ -32,11 +32,11 @@ exports[`PricingPlan > renders with as correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with badge correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
-      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <!--v-if-->
@@ -48,11 +48,11 @@ exports[`PricingPlan > renders with badge correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with badge object correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
-      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <!--v-if-->
@@ -64,7 +64,7 @@ exports[`PricingPlan > renders with badge object correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with badge slot correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
@@ -74,7 +74,7 @@ exports[`PricingPlan > renders with badge slot correctly 1`] = `
     <div data-slot="pricing-plan-priceWrapper" class="flex items-center gap-1 mt-6">
       <div data-slot="pricing-plan-discount" class="text-muted line-through text-xl sm:text-2xl">$249</div>
       <div data-slot="pricing-plan-price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$199</div>
-      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-toned truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
+      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-default truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
     </div>
     <ul data-slot="pricing-plan-features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
       <li data-slot="pricing-plan-feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="pricing-plan-featureIcon"></span><span data-slot="pricing-plan-featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
@@ -94,7 +94,7 @@ exports[`PricingPlan > renders with badge slot correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with billing cycle correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
@@ -105,7 +105,7 @@ exports[`PricingPlan > renders with billing cycle correctly 1`] = `
     <div data-slot="pricing-plan-priceWrapper" class="flex items-center gap-1 mt-6">
       <div data-slot="pricing-plan-discount" class="text-muted line-through text-xl sm:text-2xl">$249</div>
       <div data-slot="pricing-plan-price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$199</div>
-      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-toned truncate text-xs font-medium">&nbsp;</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
+      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-default truncate text-xs font-medium">&nbsp;</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
     </div>
     <!--v-if-->
   </div>
@@ -114,7 +114,7 @@ exports[`PricingPlan > renders with billing cycle correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with billing period correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
@@ -125,7 +125,7 @@ exports[`PricingPlan > renders with billing period correctly 1`] = `
     <div data-slot="pricing-plan-priceWrapper" class="flex items-center gap-1 mt-6">
       <div data-slot="pricing-plan-discount" class="text-muted line-through text-xl sm:text-2xl">$249</div>
       <div data-slot="pricing-plan-price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$199</div>
-      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-toned truncate text-xs font-medium">billed annually</span>
+      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-default truncate text-xs font-medium">billed annually</span>
         <!--v-if-->
       </div>
     </div>
@@ -136,11 +136,11 @@ exports[`PricingPlan > renders with billing period correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with billing slot correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
-      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="pricing-plan-description" class="text-muted text-base text-pretty mt-2">Description</div>
@@ -167,7 +167,7 @@ exports[`PricingPlan > renders with billing slot correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with body slot correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">Body slot</div>
   <div data-slot="pricing-plan-footer" class="flex flex-col gap-6 items-center justify-end">
@@ -182,7 +182,7 @@ exports[`PricingPlan > renders with body slot correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with button correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
@@ -205,18 +205,18 @@ exports[`PricingPlan > renders with button correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with button slot correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
-      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="pricing-plan-description" class="text-muted text-base text-pretty mt-2">Description</div>
     <div data-slot="pricing-plan-priceWrapper" class="flex items-center gap-1 mt-6">
       <div data-slot="pricing-plan-discount" class="text-muted line-through text-xl sm:text-2xl">$249</div>
       <div data-slot="pricing-plan-price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$199</div>
-      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-toned truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
+      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-default truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
     </div>
     <ul data-slot="pricing-plan-features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
       <li data-slot="pricing-plan-feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="pricing-plan-featureIcon"></span><span data-slot="pricing-plan-featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
@@ -232,18 +232,18 @@ exports[`PricingPlan > renders with button slot correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with class correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default rounded-xl">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default rounded-xl">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
-      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="pricing-plan-description" class="text-muted text-base text-pretty mt-2">Description</div>
     <div data-slot="pricing-plan-priceWrapper" class="flex items-center gap-1 mt-6">
       <div data-slot="pricing-plan-discount" class="text-muted line-through text-xl sm:text-2xl">$249</div>
       <div data-slot="pricing-plan-price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$199</div>
-      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-toned truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
+      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-default truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
     </div>
     <ul data-slot="pricing-plan-features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
       <li data-slot="pricing-plan-feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="pricing-plan-featureIcon"></span><span data-slot="pricing-plan-featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
@@ -263,7 +263,7 @@ exports[`PricingPlan > renders with class correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with description correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
@@ -279,18 +279,18 @@ exports[`PricingPlan > renders with description correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with description slot correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
-      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="pricing-plan-description" class="text-muted text-base text-pretty mt-2">Description slot</div>
     <div data-slot="pricing-plan-priceWrapper" class="flex items-center gap-1 mt-6">
       <div data-slot="pricing-plan-discount" class="text-muted line-through text-xl sm:text-2xl">$249</div>
       <div data-slot="pricing-plan-price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$199</div>
-      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-toned truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
+      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-default truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
     </div>
     <ul data-slot="pricing-plan-features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
       <li data-slot="pricing-plan-feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="pricing-plan-featureIcon"></span><span data-slot="pricing-plan-featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
@@ -310,7 +310,7 @@ exports[`PricingPlan > renders with description slot correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with discount correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
@@ -330,18 +330,18 @@ exports[`PricingPlan > renders with discount correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with discount slot correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
-      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="pricing-plan-description" class="text-muted text-base text-pretty mt-2">Description</div>
     <div data-slot="pricing-plan-priceWrapper" class="flex items-center gap-1 mt-6">
       <div data-slot="pricing-plan-discount" class="text-muted line-through text-xl sm:text-2xl">Discount slot</div>
       <div data-slot="pricing-plan-price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$199</div>
-      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-toned truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
+      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-default truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
     </div>
     <ul data-slot="pricing-plan-features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
       <li data-slot="pricing-plan-feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="pricing-plan-featureIcon"></span><span data-slot="pricing-plan-featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
@@ -361,7 +361,7 @@ exports[`PricingPlan > renders with discount slot correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with features correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
@@ -381,7 +381,7 @@ exports[`PricingPlan > renders with features correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with features object correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
@@ -401,18 +401,18 @@ exports[`PricingPlan > renders with features object correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with features slot correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
-      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="pricing-plan-description" class="text-muted text-base text-pretty mt-2">Description</div>
     <div data-slot="pricing-plan-priceWrapper" class="flex items-center gap-1 mt-6">
       <div data-slot="pricing-plan-discount" class="text-muted line-through text-xl sm:text-2xl">$249</div>
       <div data-slot="pricing-plan-price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$199</div>
-      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-toned truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
+      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-default truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
     </div>
     <ul data-slot="pricing-plan-features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">Features slot</ul>
   </div>
@@ -428,18 +428,18 @@ exports[`PricingPlan > renders with features slot correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with footer slot correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
-      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="pricing-plan-description" class="text-muted text-base text-pretty mt-2">Description</div>
     <div data-slot="pricing-plan-priceWrapper" class="flex items-center gap-1 mt-6">
       <div data-slot="pricing-plan-discount" class="text-muted line-through text-xl sm:text-2xl">$249</div>
       <div data-slot="pricing-plan-price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$199</div>
-      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-toned truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
+      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-default truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
     </div>
     <ul data-slot="pricing-plan-features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
       <li data-slot="pricing-plan-feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="pricing-plan-featureIcon"></span><span data-slot="pricing-plan-featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
@@ -452,18 +452,18 @@ exports[`PricingPlan > renders with footer slot correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with header slot correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <div data-slot="pricing-plan-header" class="">Header slot</div>
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
-      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="pricing-plan-description" class="text-muted text-base text-pretty mt-2">Description</div>
     <div data-slot="pricing-plan-priceWrapper" class="flex items-center gap-1 mt-6">
       <div data-slot="pricing-plan-discount" class="text-muted line-through text-xl sm:text-2xl">$249</div>
       <div data-slot="pricing-plan-price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$199</div>
-      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-toned truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
+      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-default truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
     </div>
     <ul data-slot="pricing-plan-features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
       <li data-slot="pricing-plan-feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="pricing-plan-featureIcon"></span><span data-slot="pricing-plan-featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
@@ -483,18 +483,18 @@ exports[`PricingPlan > renders with header slot correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with highlight correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring-2 ring-inset ring-primary">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring-2 ring-inset ring-primary">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
-      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="pricing-plan-description" class="text-muted text-base text-pretty mt-2">Description</div>
     <div data-slot="pricing-plan-priceWrapper" class="flex items-center gap-1 mt-6">
       <div data-slot="pricing-plan-discount" class="text-muted line-through text-xl sm:text-2xl">$249</div>
       <div data-slot="pricing-plan-price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$199</div>
-      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-toned truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
+      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-default truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
     </div>
     <ul data-slot="pricing-plan-features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
       <li data-slot="pricing-plan-feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="pricing-plan-featureIcon"></span><span data-slot="pricing-plan-featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
@@ -514,11 +514,11 @@ exports[`PricingPlan > renders with highlight correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with orientation horizontal correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="horizontal" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 grid-cols-1 lg:grid-cols-3 justify-between divide-y lg:divide-y-0 lg:divide-x divide-default bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="horizontal" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 grid-cols-1 lg:grid-cols-3 justify-between divide-y lg:divide-y-0 lg:divide-x divide-default bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0 lg:col-span-2 pb-6 lg:pb-0 lg:pe-6 justify-center">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
-      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="pricing-plan-description" class="text-muted text-base text-pretty mt-2">Description</div>
@@ -534,7 +534,7 @@ exports[`PricingPlan > renders with orientation horizontal correctly 1`] = `
     <div data-slot="pricing-plan-priceWrapper" class="flex items-center gap-1">
       <div data-slot="pricing-plan-discount" class="text-muted line-through text-xl sm:text-2xl">$249</div>
       <div data-slot="pricing-plan-price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$199</div>
-      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-toned truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
+      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-default truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
     </div><button type="button" data-slot="pricing-plan-button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-3 py-2 text-sm gap-2 w-full justify-center">
       <!--v-if--><span data-slot="button-label" class="truncate">Buy now</span>
       <!--v-if-->
@@ -545,18 +545,18 @@ exports[`PricingPlan > renders with orientation horizontal correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with orientation vertical correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
-      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="pricing-plan-description" class="text-muted text-base text-pretty mt-2">Description</div>
     <div data-slot="pricing-plan-priceWrapper" class="flex items-center gap-1 mt-6">
       <div data-slot="pricing-plan-discount" class="text-muted line-through text-xl sm:text-2xl">$249</div>
       <div data-slot="pricing-plan-price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$199</div>
-      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-toned truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
+      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-default truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
     </div>
     <ul data-slot="pricing-plan-features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
       <li data-slot="pricing-plan-feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="pricing-plan-featureIcon"></span><span data-slot="pricing-plan-featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
@@ -576,7 +576,7 @@ exports[`PricingPlan > renders with orientation vertical correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with price correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
@@ -596,18 +596,18 @@ exports[`PricingPlan > renders with price correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with price slot correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
-      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="pricing-plan-description" class="text-muted text-base text-pretty mt-2">Description</div>
     <div data-slot="pricing-plan-priceWrapper" class="flex items-center gap-1 mt-6">
       <div data-slot="pricing-plan-discount" class="text-muted line-through text-xl sm:text-2xl">$249</div>
       <div data-slot="pricing-plan-price" class="text-highlighted text-3xl sm:text-4xl font-semibold">Price slot</div>
-      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-toned truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
+      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-default truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
     </div>
     <ul data-slot="pricing-plan-features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
       <li data-slot="pricing-plan-feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="pricing-plan-featureIcon"></span><span data-slot="pricing-plan-featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
@@ -627,18 +627,18 @@ exports[`PricingPlan > renders with price slot correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with scale correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default lg:scale-[1.1] lg:z-[1]">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default lg:scale-[1.1] lg:z-[1]">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
-      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="pricing-plan-description" class="text-muted text-base text-pretty mt-2">Description</div>
     <div data-slot="pricing-plan-priceWrapper" class="flex items-center gap-1 mt-6">
       <div data-slot="pricing-plan-discount" class="text-muted line-through text-xl sm:text-2xl">$249</div>
       <div data-slot="pricing-plan-price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$199</div>
-      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-toned truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
+      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-default truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
     </div>
     <ul data-slot="pricing-plan-features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
       <li data-slot="pricing-plan-feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="pricing-plan-featureIcon"></span><span data-slot="pricing-plan-featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
@@ -658,7 +658,7 @@ exports[`PricingPlan > renders with scale correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with tagline correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
@@ -679,18 +679,18 @@ exports[`PricingPlan > renders with tagline correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with tagline slot correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
-      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="pricing-plan-description" class="text-muted text-base text-pretty mt-2">Description</div>
     <div data-slot="pricing-plan-priceWrapper" class="flex items-center gap-1 mt-6">
       <div data-slot="pricing-plan-discount" class="text-muted line-through text-xl sm:text-2xl">$249</div>
       <div data-slot="pricing-plan-price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$199</div>
-      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-toned truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
+      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-default truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
     </div>
     <ul data-slot="pricing-plan-features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
       <li data-slot="pricing-plan-feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="pricing-plan-featureIcon"></span><span data-slot="pricing-plan-featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
@@ -710,7 +710,7 @@ exports[`PricingPlan > renders with tagline slot correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with terms correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
@@ -731,18 +731,18 @@ exports[`PricingPlan > renders with terms correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with terms slot correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
-      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="pricing-plan-description" class="text-muted text-base text-pretty mt-2">Description</div>
     <div data-slot="pricing-plan-priceWrapper" class="flex items-center gap-1 mt-6">
       <div data-slot="pricing-plan-discount" class="text-muted line-through text-xl sm:text-2xl">$249</div>
       <div data-slot="pricing-plan-price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$199</div>
-      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-toned truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
+      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-default truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
     </div>
     <ul data-slot="pricing-plan-features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
       <li data-slot="pricing-plan-feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="pricing-plan-featureIcon"></span><span data-slot="pricing-plan-featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
@@ -762,7 +762,7 @@ exports[`PricingPlan > renders with terms slot correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with title correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
@@ -778,18 +778,18 @@ exports[`PricingPlan > renders with title correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with title slot correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
-      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title slot</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title slot</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="pricing-plan-description" class="text-muted text-base text-pretty mt-2">Description</div>
     <div data-slot="pricing-plan-priceWrapper" class="flex items-center gap-1 mt-6">
       <div data-slot="pricing-plan-discount" class="text-muted line-through text-xl sm:text-2xl">$249</div>
       <div data-slot="pricing-plan-price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$199</div>
-      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-toned truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
+      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-default truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
     </div>
     <ul data-slot="pricing-plan-features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
       <li data-slot="pricing-plan-feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="pricing-plan-featureIcon"></span><span data-slot="pricing-plan-featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
@@ -809,18 +809,18 @@ exports[`PricingPlan > renders with title slot correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with ui correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
-      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="pricing-plan-description" class="text-muted text-base text-pretty mt-2">Description</div>
     <div data-slot="pricing-plan-priceWrapper" class="flex items-center gap-1 mt-6">
       <div data-slot="pricing-plan-discount" class="text-muted line-through text-xl sm:text-2xl">$249</div>
       <div data-slot="pricing-plan-price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$199</div>
-      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-toned truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
+      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-default truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
     </div>
     <ul data-slot="pricing-plan-features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
       <li data-slot="pricing-plan-feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="pricing-plan-featureIcon"></span><span data-slot="pricing-plan-featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
@@ -840,18 +840,18 @@ exports[`PricingPlan > renders with ui correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with variant outline correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-surface ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
-      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="pricing-plan-description" class="text-muted text-base text-pretty mt-2">Description</div>
     <div data-slot="pricing-plan-priceWrapper" class="flex items-center gap-1 mt-6">
       <div data-slot="pricing-plan-discount" class="text-muted line-through text-xl sm:text-2xl">$249</div>
       <div data-slot="pricing-plan-price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$199</div>
-      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-toned truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
+      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-default truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
     </div>
     <ul data-slot="pricing-plan-features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
       <li data-slot="pricing-plan-feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="pricing-plan-featureIcon"></span><span data-slot="pricing-plan-featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
@@ -871,18 +871,18 @@ exports[`PricingPlan > renders with variant outline correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with variant soft correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-elevated/50">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-tint">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
-      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="pricing-plan-description" class="text-muted text-base text-pretty mt-2">Description</div>
     <div data-slot="pricing-plan-priceWrapper" class="flex items-center gap-1 mt-6">
       <div data-slot="pricing-plan-discount" class="text-muted line-through text-xl sm:text-2xl">$249</div>
       <div data-slot="pricing-plan-price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$199</div>
-      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-toned truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
+      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-default truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
     </div>
     <ul data-slot="pricing-plan-features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
       <li data-slot="pricing-plan-feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="pricing-plan-featureIcon"></span><span data-slot="pricing-plan-featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
@@ -906,19 +906,19 @@ exports[`PricingPlan > renders with variant solid correctly 1`] = `
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
-      <div data-slot="pricing-plan-title" class="truncate text-2xl sm:text-3xl text-pretty font-semibold text-inverted">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="pricing-plan-title" class="truncate text-2xl sm:text-3xl text-pretty font-semibold text-inverted">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
-    <div data-slot="pricing-plan-description" class="text-base text-pretty mt-2 text-dimmed">Description</div>
+    <div data-slot="pricing-plan-description" class="text-base text-pretty mt-2 text-faint">Description</div>
     <div data-slot="pricing-plan-priceWrapper" class="flex items-center gap-1 mt-6">
-      <div data-slot="pricing-plan-discount" class="line-through text-xl sm:text-2xl text-dimmed">$249</div>
+      <div data-slot="pricing-plan-discount" class="line-through text-xl sm:text-2xl text-faint">$249</div>
       <div data-slot="pricing-plan-price" class="text-3xl sm:text-4xl font-semibold text-inverted">$199</div>
-      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="truncate text-xs font-medium text-dimmed">billed annually</span><span data-slot="pricing-plan-billingCycle" class="truncate text-xs font-medium text-dimmed">/month</span></div>
+      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="truncate text-xs font-medium text-faint">billed annually</span><span data-slot="pricing-plan-billingCycle" class="truncate text-xs font-medium text-faint">/month</span></div>
     </div>
     <ul data-slot="pricing-plan-features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
-      <li data-slot="pricing-plan-feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="pricing-plan-featureIcon"></span><span data-slot="pricing-plan-featureTitle" class="text-sm truncate text-dimmed">Feature 1</span></li>
-      <li data-slot="pricing-plan-feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="pricing-plan-featureIcon"></span><span data-slot="pricing-plan-featureTitle" class="text-sm truncate text-dimmed">Feature 2</span></li>
-      <li data-slot="pricing-plan-feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="pricing-plan-featureIcon"></span><span data-slot="pricing-plan-featureTitle" class="text-sm truncate text-dimmed">Feature 3</span></li>
+      <li data-slot="pricing-plan-feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="pricing-plan-featureIcon"></span><span data-slot="pricing-plan-featureTitle" class="text-sm truncate text-faint">Feature 1</span></li>
+      <li data-slot="pricing-plan-feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="pricing-plan-featureIcon"></span><span data-slot="pricing-plan-featureTitle" class="text-sm truncate text-faint">Feature 2</span></li>
+      <li data-slot="pricing-plan-feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="pricing-plan-featureIcon"></span><span data-slot="pricing-plan-featureTitle" class="text-sm truncate text-faint">Feature 3</span></li>
     </ul>
   </div>
   <div data-slot="pricing-plan-footer" class="flex flex-col gap-6 items-center justify-end">
@@ -933,18 +933,18 @@ exports[`PricingPlan > renders with variant solid correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with variant subtle correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-elevated/50 ring ring-default">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-tint ring ring-default">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">
-      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="pricing-plan-title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="pricing-plan-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="pricing-plan-description" class="text-muted text-base text-pretty mt-2">Description</div>
     <div data-slot="pricing-plan-priceWrapper" class="flex items-center gap-1 mt-6">
       <div data-slot="pricing-plan-discount" class="text-muted line-through text-xl sm:text-2xl">$249</div>
       <div data-slot="pricing-plan-price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$199</div>
-      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-toned truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
+      <div data-slot="pricing-plan-billing" class="flex flex-col justify-between min-w-0"><span data-slot="pricing-plan-billingPeriod" class="text-default truncate text-xs font-medium">billed annually</span><span data-slot="pricing-plan-billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
     </div>
     <ul data-slot="pricing-plan-features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
       <li data-slot="pricing-plan-feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="pricing-plan-featureIcon"></span><span data-slot="pricing-plan-featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>

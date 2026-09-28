@@ -14,7 +14,7 @@ exports[`Avatar > renders with as correctly 1`] = `"<section data-slot="avatar" 
 
 exports[`Avatar > renders with chip correctly 1`] = `"<span data-slot="avatar" class="relative inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base"><span data-slot="avatar-fallback" class="font-medium truncate text-accent-muted">&nbsp;</span><span data-slot="chip-base" class="rounded-full ring ring-bg flex items-center justify-center text-accent-foreground font-medium whitespace-nowrap bg-accent [--ui-accent:var(--ui-primary)] h-[8px] min-w-[8px] text-[8px] top-0 right-0 absolute">1</span></span>"`;
 
-exports[`Avatar > renders with class correctly 1`] = `"<span data-slot="avatar" class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle [--ui-accent:var(--ui-neutral)] size-8 text-base bg-default"><span data-slot="avatar-fallback" class="font-medium truncate text-accent-muted">&nbsp;</span></span>"`;
+exports[`Avatar > renders with class correctly 1`] = `"<span data-slot="avatar" class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle [--ui-accent:var(--ui-neutral)] size-8 text-base bg-surface"><span data-slot="avatar-fallback" class="font-medium truncate text-accent-muted">&nbsp;</span></span>"`;
 
 exports[`Avatar > renders with color error correctly 1`] = `"<span data-slot="avatar" class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-error)] size-8 text-base"><span data-slot="avatar-fallback" class="font-medium truncate text-accent-muted">BC</span></span>"`;
 

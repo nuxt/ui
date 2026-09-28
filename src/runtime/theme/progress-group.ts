@@ -4,16 +4,16 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'gap-2',
-    base: 'flex overflow-hidden rounded-full bg-accented',
+    base: 'flex overflow-hidden rounded-full bg-soft-hover',
     segment: 'duration-200 ease-out motion-reduce:transition-none',
     indicator: 'size-full',
-    status: 'flex text-dimmed duration-200 ease-out motion-reduce:transition-none',
+    status: 'flex text-faint duration-200 ease-out motion-reduce:transition-none',
     list: 'flex flex-col gap-1',
     item: 'flex items-center gap-1.5 min-w-0',
     itemLeadingIcon: 'shrink-0',
     itemLeadingDot: 'shrink-0 rounded-full',
     itemLabel: 'truncate',
-    itemTrailing: 'ms-auto shrink-0 text-dimmed'
+    itemTrailing: 'ms-auto shrink-0 text-faint'
   },
   variants: {
     color: colorVariant({ indicator: 'bg-accent', itemLeadingIcon: 'text-accent', itemLeadingDot: 'bg-accent' }),

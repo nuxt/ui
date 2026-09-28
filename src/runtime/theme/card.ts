@@ -14,16 +14,16 @@ export default defineTheme({
       solid: {
         root: 'bg-inverted text-inverted',
         title: 'text-inverted',
-        description: 'text-dimmed'
+        description: 'text-faint'
       },
       outline: {
-        root: 'bg-default ring ring-default divide-y divide-default'
+        root: 'bg-surface ring ring-default divide-y divide-default'
       },
       soft: {
-        root: 'bg-elevated/50 divide-y divide-default'
+        root: 'bg-tint divide-y divide-default'
       },
       subtle: {
-        root: 'bg-elevated/50 ring ring-default divide-y divide-default'
+        root: 'bg-tint ring ring-default divide-y divide-default'
       }
     }
   },

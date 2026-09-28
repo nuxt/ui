@@ -9,8 +9,8 @@ export default defineTheme({
     legend: 'mb-1 block font-medium text-default',
     item: 'flex items-start',
     container: 'flex items-center',
-    base: 'rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-none',
-    indicator: 'flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent',
+    base: 'rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none',
+    indicator: 'flex items-center justify-center size-full after:bg-surface after:rounded-full bg-accent',
     wrapper: 'w-full',
     label: 'block font-medium text-default',
     icon: 'shrink-0',
@@ -25,10 +25,10 @@ export default defineTheme({
       },
       card: {
         fieldset: 'flex-wrap',
-        item: `border border-default rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors has-data-[state=checked]:border-accent-border has-data-[state=checked]:bg-accent-soft`
+        item: `border border-default rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:border-accent-border-strong has-data-[state=checked]:bg-accent-soft`
       },
       table: {
-        item: `border border-default hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent-border has-data-[state=checked]:z-[1]`
+        item: `border border-default hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent-border-strong has-data-[state=checked]:z-[1]`
       }
     },
     orientation: {
@@ -126,7 +126,7 @@ export default defineTheme({
       variant: ['card', 'table'],
       highlight: false,
       class: {
-        item: 'hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-accented'
+        item: 'hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong'
       }
     },
     { size: 'xs', indicator: 'hidden', class: { icon: 'size-3' } },

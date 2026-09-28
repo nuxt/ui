@@ -18,13 +18,13 @@ export default defineTheme({
         base: 'text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3'
       },
       outline: {
-        base: 'ring ring-inset ring-accent-border text-accent-soft-foreground bg-accent-surface hover:bg-accent-soft active:bg-accent-soft disabled:bg-accent-surface aria-disabled:bg-accent-surface dark:disabled:bg-accent-surface dark:aria-disabled:bg-accent-surface outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent'
+        base: 'ring ring-inset ring-accent-border-strong text-accent-soft-foreground bg-accent-surface hover:bg-accent-soft active:bg-accent-soft disabled:bg-accent-surface aria-disabled:bg-accent-surface dark:disabled:bg-accent-surface dark:aria-disabled:bg-accent-surface outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent'
       },
       soft: {
         base: 'text-accent-soft-foreground bg-accent-soft hover:bg-accent-soft-hover active:bg-accent-soft-hover outline-accent-focus focus-visible:outline-3 disabled:bg-accent-soft aria-disabled:bg-accent-soft'
       },
       subtle: {
-        base: 'text-accent-soft-foreground ring ring-inset ring-accent-border-soft bg-accent-soft hover:bg-accent-soft-hover active:bg-accent-soft-hover disabled:bg-accent-soft aria-disabled:bg-accent-soft outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent'
+        base: 'text-accent-soft-foreground ring ring-inset ring-accent-border bg-accent-soft hover:bg-accent-soft-hover active:bg-accent-soft-hover disabled:bg-accent-soft aria-disabled:bg-accent-soft outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent'
       },
       ghost: {
         base: 'text-accent-soft-foreground hover:bg-accent-soft active:bg-accent-soft outline-accent-focus focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent'

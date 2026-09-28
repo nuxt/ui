@@ -101,22 +101,21 @@ Use these everywhere instead of raw palette colors:
 ### Text
 - `text-default` — primary body text
 - `text-muted` — secondary text (descriptions, hints)
-- `text-toned` — medium-emphasis text (between muted and default)
-- `text-dimmed` — tertiary text (placeholders, disabled)
+- `text-faint` — tertiary text (placeholders, disabled)
 - `text-highlighted` — emphasized text (headings, important labels)
 - `text-inverted` — text on inverted backgrounds (pair with `bg-inverted`)
 
 ### Backgrounds
-- `bg-default` — page background
+- `bg-surface` — page background
 - `bg-muted` — subtle backgrounds (hover states, alternating rows)
-- `bg-elevated` — raised surfaces (cards, dropdowns)
-- `bg-accented` — accent backgrounds (active states, selected items)
+- `bg-soft` — raised surfaces (cards, dropdowns)
+- `bg-soft-hover` — hover of a raised surface (active states, selected items)
+- `bg-tint` — hovered and highlighted items (menu items, table rows)
 - `bg-inverted` — inverse background (dark on light, light on dark)
 
 ### Borders
-- `border-default` — standard borders
-- `border-muted` — subtle borders (dividers, separators)
-- `border-accented` — accent borders (active states)
+- `border-default` — standard borders (dividers, separators)
+- `border-strong` — stronger borders (field outlines, active states)
 - `border-inverted` — inverse borders
 
 ## Variants
@@ -184,7 +183,7 @@ export default defineAppConfig({
         color: 'neutral',
         variant: 'outline',
         class: {
-          base: 'ring-default hover:bg-accented'
+          base: 'ring-default hover:bg-soft-hover'
         }
       }],
       defaultVariants: {

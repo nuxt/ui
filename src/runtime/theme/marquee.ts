@@ -26,7 +26,7 @@ export default defineTheme({
     },
     overlay: {
       true: {
-        root: `before:absolute before:pointer-events-none before:content-[''] before:z-2 before:from-default before:to-transparent after:absolute after:pointer-events-none after:content-[''] after:z-2 after:from-default after:to-transparent`
+        root: `before:absolute before:pointer-events-none before:content-[''] before:z-2 before:from-surface before:to-transparent after:absolute after:pointer-events-none after:content-[''] after:z-2 after:from-surface after:to-transparent`
       }
     }
   },

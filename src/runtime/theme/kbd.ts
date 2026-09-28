@@ -12,13 +12,13 @@ export default defineTheme({
         base: 'text-accent-foreground bg-accent'
       },
       outline: {
-        base: 'ring ring-inset ring-accent-border text-accent-soft-foreground bg-accent-surface'
+        base: 'ring ring-inset ring-accent-border-strong text-accent-soft-foreground bg-accent-surface'
       },
       soft: {
         base: 'text-accent-soft-foreground bg-accent-soft'
       },
       subtle: {
-        base: 'text-accent-soft-foreground ring ring-inset ring-accent-border-soft bg-accent-soft'
+        base: 'text-accent-soft-foreground ring ring-inset ring-accent-border bg-accent-soft'
       }
     },
     size: {

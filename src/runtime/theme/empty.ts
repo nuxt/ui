@@ -43,19 +43,19 @@ export default defineTheme({
       solid: {
         root: 'bg-inverted',
         title: 'text-inverted',
-        description: 'text-dimmed'
+        description: 'text-faint'
       },
       outline: {
-        root: 'bg-default ring ring-default',
+        root: 'bg-surface ring ring-default',
         description: 'text-muted'
       },
       soft: {
-        root: 'bg-elevated/50',
-        description: 'text-toned'
+        root: 'bg-tint',
+        description: 'text-default'
       },
       subtle: {
-        root: 'bg-elevated/50 ring ring-default',
-        description: 'text-toned'
+        root: 'bg-tint ring ring-default',
+        description: 'text-default'
       },
       naked: {
         description: 'text-muted'

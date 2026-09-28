@@ -22,7 +22,7 @@ export default defineTheme({
     tierPrice: 'text-highlighted text-3xl sm:text-4xl font-semibold',
     tierDiscount: 'text-muted line-through text-xl sm:text-2xl',
     tierBilling: 'flex flex-col justify-between min-w-0',
-    tierBillingPeriod: 'text-toned truncate text-xs font-medium',
+    tierBillingPeriod: 'text-default truncate text-xs font-medium',
     tierBillingCycle: 'text-muted truncate text-xs font-medium',
     tierButton: 'mt-6 md:mt-auto md:pt-6',
     tierFeatureIcon: 'size-5 shrink-0',
@@ -45,9 +45,9 @@ export default defineTheme({
     },
     highlight: {
       true: {
-        tier: 'bg-elevated/50 border-x border-t border-default rounded-t-lg',
-        td: 'bg-elevated/50 border-x border-default',
-        item: 'bg-elevated/50'
+        tier: 'bg-tint border-x border-t border-default rounded-t-lg',
+        td: 'bg-tint border-x border-default',
+        item: 'bg-tint'
       }
     }
   }

@@ -10,7 +10,7 @@ export default defineTheme({
     linkLeading: 'rounded-md p-1 inline-flex ring-inset ring',
     linkLeadingIcon: 'size-4 shrink-0',
     linkLabel: 'truncate',
-    linkLabelExternalIcon: 'size-3 absolute top-0 text-dimmed'
+    linkLabelExternalIcon: 'size-3 absolute top-0 text-faint'
   },
   variants: {
     active: {
@@ -20,7 +20,7 @@ export default defineTheme({
       },
       false: {
         link: 'text-muted hover:text-default font-medium transition-colors',
-        linkLeading: 'bg-elevated/50 ring-accented text-dimmed group-hover:bg-accent group-hover:ring-accent group-hover:text-accent-foreground transition'
+        linkLeading: 'bg-tint ring-strong text-faint group-hover:bg-accent group-hover:ring-accent group-hover:text-accent-foreground transition'
       }
     }
   }

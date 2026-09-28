@@ -8,14 +8,14 @@ export default extendTheme(input, {
     trailing: 'group absolute inset-y-0 end-0 flex items-center disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none',
     trailingClear: 'p-0',
     arrow: 'fill-bg stroke-default',
-    content: 'max-h-[min(15rem,var(--reka-combobox-content-available-height,15rem))] w-(--reka-combobox-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-combobox-content-transform-origin) pointer-events-auto flex flex-col',
+    content: 'max-h-[min(15rem,var(--reka-combobox-content-available-height,15rem))] w-(--reka-combobox-trigger-width) bg-surface shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-combobox-content-transform-origin) pointer-events-auto flex flex-col',
     viewport: 'relative scroll-py-1 overflow-y-auto flex-1',
     group: 'p-1 isolate',
     empty: 'text-center text-muted',
     label: 'font-semibold text-highlighted',
     separator: '-mx-1 my-1 h-px bg-border',
-    item: 'group relative w-full flex items-start gap-1.5 p-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors',
-    itemLeadingIcon: 'shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors',
+    item: 'group relative w-full flex items-start gap-1.5 p-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-tint transition-colors before:transition-colors',
+    itemLeadingIcon: 'shrink-0 text-faint group-data-highlighted:not-group-data-disabled:text-default transition-colors',
     itemLeadingAvatar: 'shrink-0',
     itemLeadingChip: 'shrink-0',
     itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
@@ -23,11 +23,11 @@ export default extendTheme(input, {
     itemWrapper: 'flex-1 flex flex-col min-w-0',
     itemLabel: 'truncate',
     itemDescription: 'truncate text-muted',
-    tagsItem: 'px-1.5 py-0.5 rounded-sm font-medium inline-flex items-center gap-0.5 ring ring-inset ring-accented bg-elevated text-default data-disabled:cursor-not-allowed data-disabled:opacity-75',
+    tagsItem: 'px-1.5 py-0.5 rounded-sm font-medium inline-flex items-center gap-0.5 ring ring-inset ring-strong bg-soft text-default data-disabled:cursor-not-allowed data-disabled:opacity-75',
     tagsItemText: 'truncate',
-    tagsItemDelete: 'inline-flex items-center rounded-xs text-dimmed hover:text-default hover:bg-accented/75 disabled:pointer-events-none transition-colors',
+    tagsItemDelete: 'inline-flex items-center rounded-xs text-faint hover:text-default hover:bg-soft-hover/75 disabled:pointer-events-none transition-colors',
     tagsItemDeleteIcon: 'shrink-0',
-    tagsInput: 'flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
+    tagsInput: 'flex-1 border-0 bg-transparent placeholder:text-faint focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
   },
   variants: {
     // `root` and `base` are the same element in `multiple` mode, so the
@@ -51,7 +51,7 @@ export default extendTheme(input, {
         root: 'flex-wrap'
       },
       false: {
-        base: 'w-full border-0 placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75'
+        base: 'w-full border-0 placeholder:text-faint disabled:cursor-not-allowed disabled:opacity-75'
       }
     },
     size: {
@@ -126,11 +126,11 @@ export default extendTheme(input, {
   }, {
     variant: 'soft',
     multiple: true,
-    class: { base: 'has-focus:bg-elevated has-focus-visible:outline-3' }
+    class: { base: 'has-focus:bg-soft has-focus-visible:outline-3' }
   }, {
     variant: 'ghost',
     multiple: true,
-    class: { base: 'has-focus:bg-elevated has-focus-visible:outline-3' }
+    class: { base: 'has-focus:bg-soft has-focus-visible:outline-3' }
   }, {
     multiple: true,
     variant: ['outline', 'subtle'],

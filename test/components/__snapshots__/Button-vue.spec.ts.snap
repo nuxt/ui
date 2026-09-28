@@ -15,7 +15,7 @@ exports[`Button > renders with active variant link correctly 1`] = `
 `;
 
 exports[`Button > renders with active variant outline correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] ring ring-inset ring-accent-border text-accent-soft-foreground bg-accent-surface hover:bg-accent-soft active:bg-accent-soft disabled:bg-accent-surface aria-disabled:bg-accent-surface dark:disabled:bg-accent-surface dark:aria-disabled:bg-accent-surface outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] ring ring-inset ring-accent-border-strong text-accent-soft-foreground bg-accent-surface hover:bg-accent-soft active:bg-accent-soft disabled:bg-accent-surface aria-disabled:bg-accent-surface dark:disabled:bg-accent-surface dark:aria-disabled:bg-accent-surface outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent px-2.5 py-1.5 text-sm gap-1.5">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
@@ -36,7 +36,7 @@ exports[`Button > renders with active variant solid correctly 1`] = `
 `;
 
 exports[`Button > renders with active variant subtle correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-soft-foreground ring ring-inset ring-accent-border-soft bg-accent-soft hover:bg-accent-soft-hover active:bg-accent-soft-hover disabled:bg-accent-soft aria-disabled:bg-accent-soft outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-soft-foreground ring ring-inset ring-accent-border bg-accent-soft hover:bg-accent-soft-hover active:bg-accent-soft-hover disabled:bg-accent-soft aria-disabled:bg-accent-soft outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent px-2.5 py-1.5 text-sm gap-1.5">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
@@ -202,7 +202,7 @@ exports[`Button > renders with neutral variant link correctly 1`] = `
 `;
 
 exports[`Button > renders with neutral variant outline correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] ring ring-inset ring-accent-border text-accent-soft-foreground bg-accent-surface hover:bg-accent-soft active:bg-accent-soft disabled:bg-accent-surface aria-disabled:bg-accent-surface dark:disabled:bg-accent-surface dark:aria-disabled:bg-accent-surface outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] ring ring-inset ring-accent-border-strong text-accent-soft-foreground bg-accent-surface hover:bg-accent-soft active:bg-accent-soft disabled:bg-accent-surface aria-disabled:bg-accent-surface dark:disabled:bg-accent-surface dark:aria-disabled:bg-accent-surface outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent px-2.5 py-1.5 text-sm gap-1.5">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
@@ -223,7 +223,7 @@ exports[`Button > renders with neutral variant solid correctly 1`] = `
 `;
 
 exports[`Button > renders with neutral variant subtle correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-soft-foreground ring ring-inset ring-accent-border-soft bg-accent-soft hover:bg-accent-soft-hover active:bg-accent-soft-hover disabled:bg-accent-soft aria-disabled:bg-accent-soft outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-soft-foreground ring ring-inset ring-accent-border bg-accent-soft hover:bg-accent-soft-hover active:bg-accent-soft-hover disabled:bg-accent-soft aria-disabled:bg-accent-soft outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent px-2.5 py-1.5 text-sm gap-1.5">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
@@ -244,7 +244,7 @@ exports[`Button > renders with primary variant link correctly 1`] = `
 `;
 
 exports[`Button > renders with primary variant outline correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] ring ring-inset ring-accent-border text-accent-soft-foreground bg-accent-surface hover:bg-accent-soft active:bg-accent-soft disabled:bg-accent-surface aria-disabled:bg-accent-surface dark:disabled:bg-accent-surface dark:aria-disabled:bg-accent-surface outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] ring ring-inset ring-accent-border-strong text-accent-soft-foreground bg-accent-surface hover:bg-accent-soft active:bg-accent-soft disabled:bg-accent-surface aria-disabled:bg-accent-surface dark:disabled:bg-accent-surface dark:aria-disabled:bg-accent-surface outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent px-2.5 py-1.5 text-sm gap-1.5">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
@@ -265,7 +265,7 @@ exports[`Button > renders with primary variant solid correctly 1`] = `
 `;
 
 exports[`Button > renders with primary variant subtle correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-soft-foreground ring ring-inset ring-accent-border-soft bg-accent-soft hover:bg-accent-soft-hover active:bg-accent-soft-hover disabled:bg-accent-soft aria-disabled:bg-accent-soft outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-soft-foreground ring ring-inset ring-accent-border bg-accent-soft hover:bg-accent-soft-hover active:bg-accent-soft-hover disabled:bg-accent-soft aria-disabled:bg-accent-soft outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent px-2.5 py-1.5 text-sm gap-1.5">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"

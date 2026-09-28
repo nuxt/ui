@@ -567,7 +567,7 @@ describe('tv override layers', () => {
     variants: {
       size: { md: { base: 'px-2.5 text-sm' } },
       square: { true: '' },
-      tone: { quiet: { label: 'text-dimmed' } }
+      tone: { quiet: { label: 'text-faint' } }
     },
     compoundVariants: [{ size: 'md', square: true, class: { base: 'p-1.5' } }],
     defaultVariants: { size: 'md', tone: 'quiet' }
@@ -620,19 +620,19 @@ describe('tv override layers', () => {
   it('lets an override compound win over an override slot class', () => {
     const ui = tvt(theme, {
       slots: { label: 'text-default' },
-      compoundVariants: [{ tone: 'quiet', class: { label: 'text-toned' } }]
+      compoundVariants: [{ tone: 'quiet', class: { label: 'text-inverted' } }]
     })
-    expect(ui().label()).toBe('text-toned')
+    expect(ui().label()).toBe('text-inverted')
     expect(ui({ tone: null }).label()).toBe('text-default')
   })
 
   it('still lets `:ui` and `class` win over every layer', () => {
-    const ui = tvt(theme, { slots: { label: 'text-default' }, compoundVariants: [{ tone: 'quiet', class: { label: 'text-toned' } }] })
+    const ui = tvt(theme, { slots: { label: 'text-default' }, compoundVariants: [{ tone: 'quiet', class: { label: 'text-inverted' } }] })
     expect(ui().label({ class: 'text-highlighted' })).toBe('text-highlighted')
   })
 
   it('keeps the theme variants on top of an override slot replacer', () => {
-    expect(tvt(theme, { slots: { label: () => 'font-bold text-default' } })().label()).toBe('font-bold text-dimmed')
+    expect(tvt(theme, { slots: { label: () => 'font-bold text-default' } })().label()).toBe('font-bold text-faint')
   })
 })
 
@@ -642,7 +642,7 @@ describe('tv override levels', () => {
     variants: {
       size: { md: { base: 'px-2.5 text-sm' } },
       square: { true: '' },
-      tone: { quiet: { label: 'text-dimmed' } }
+      tone: { quiet: { label: 'text-faint' } }
     },
     compoundVariants: [{ size: 'md', square: true, class: { base: 'p-1.5' } }],
     defaultVariants: { size: 'md', tone: 'quiet' }
@@ -651,16 +651,16 @@ describe('tv override levels', () => {
   const levels = (...entries: any[]) => tvt(theme, new ComponentOverrides(entries, false, engineFor()))
 
   it('lets a nearer level win over a farther one', () => {
-    expect(levels({ slots: { label: 'text-default' } }, { slots: { label: 'text-toned' } })().label()).toBe('text-toned')
-    expect(levels({ variants: { tone: { quiet: { label: 'text-default' } } } }, { variants: { tone: { quiet: { label: 'text-toned' } } } })().label()).toBe('text-toned')
+    expect(levels({ slots: { label: 'text-default' } }, { slots: { label: 'text-inverted' } })().label()).toBe('text-inverted')
+    expect(levels({ variants: { tone: { quiet: { label: 'text-default' } } } }, { variants: { tone: { quiet: { label: 'text-inverted' } } } })().label()).toBe('text-inverted')
   })
 
   it('lets a nearer level\'s variant win over a farther level\'s slot class', () => {
-    expect(levels({ slots: { label: 'text-default' } }, { variants: { tone: { quiet: { label: 'text-toned' } } } })().label()).toBe('text-toned')
+    expect(levels({ slots: { label: 'text-default' } }, { variants: { tone: { quiet: { label: 'text-inverted' } } } })().label()).toBe('text-inverted')
   })
 
   it('lets a level\'s slot class win over its own variants', () => {
-    expect(levels({}, { slots: { label: 'text-default' }, variants: { tone: { quiet: { label: 'text-toned' } } } })().label()).toBe('text-default')
+    expect(levels({}, { slots: { label: 'text-default' }, variants: { tone: { quiet: { label: 'text-inverted' } } } })().label()).toBe('text-default')
   })
 
   it('merges the classes of every level instead of replacing them', () => {

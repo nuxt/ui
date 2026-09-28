@@ -591,7 +591,7 @@ describe('Theme', () => {
 
     expect(wrapper.find('[data-slot="checkbox"]').classes()).toContain('[--ui-accent:var(--ui-primary)]')
     expect(wrapper.find('button[role="checkbox"]').classes()).toContain('ring-accent')
-    expect(wrapper.find('button[role="checkbox"]').classes()).not.toContain('ring-accented')
+    expect(wrapper.find('button[role="checkbox"]').classes()).not.toContain('ring-strong')
   })
 
   // A theme-provided `disabled` must disable the control, not only paint it as

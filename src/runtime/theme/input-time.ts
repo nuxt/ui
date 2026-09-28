@@ -7,7 +7,7 @@ export default extendTheme(input, {
   slots: {
     root: () => undefined,
     base: () => 'group relative inline-flex items-center rounded-md select-none transition-colors',
-    segment: 'rounded-sm text-center outline-hidden data-placeholder:text-dimmed data-[segment=literal]:text-muted data-invalid:text-error data-disabled:cursor-not-allowed data-disabled:opacity-75 transition-colors',
+    segment: 'rounded-sm text-center outline-hidden data-placeholder:text-faint data-[segment=literal]:text-muted data-invalid:text-error data-disabled:cursor-not-allowed data-disabled:opacity-75 transition-colors',
     separatorIcon: 'shrink-0 size-4 text-muted'
   },
   variants: {
@@ -46,27 +46,27 @@ export default extendTheme(input, {
   })), ...[{
     variant: 'outline',
     class: {
-      segment: 'focus:bg-elevated'
+      segment: 'focus:bg-soft'
     }
   }, {
     variant: 'soft',
     class: {
-      segment: 'focus:bg-accented/50 group-hover:focus:bg-accented'
+      segment: 'focus:bg-soft-hover/50 group-hover:focus:bg-soft-hover'
     }
   }, {
     variant: 'subtle',
     class: {
-      segment: 'focus:bg-accented'
+      segment: 'focus:bg-soft-hover'
     }
   }, {
     variant: 'ghost',
     class: {
-      segment: 'focus:bg-elevated group-hover:focus:bg-accented'
+      segment: 'focus:bg-soft group-hover:focus:bg-soft-hover'
     }
   }, {
     variant: 'none',
     class: {
-      segment: 'focus:bg-elevated'
+      segment: 'focus:bg-soft'
     }
   }] as const]
 })

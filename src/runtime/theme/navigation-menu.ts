@@ -15,7 +15,7 @@ export default defineTheme({
     linkTrailingBadge: 'shrink-0',
     linkTrailingIcon: 'size-5 transform shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none',
     linkLabel: 'truncate',
-    linkLabelExternalIcon: 'inline-block size-3 align-top text-dimmed',
+    linkLabelExternalIcon: 'inline-block size-3 align-top text-faint',
     childList: 'isolate',
     childLabel: 'text-xs text-highlighted',
     childItem: '',
@@ -23,14 +23,14 @@ export default defineTheme({
     childLinkWrapper: 'min-w-0',
     childLinkIcon: 'size-5 shrink-0',
     childLinkLabel: 'truncate',
-    childLinkLabelExternalIcon: 'inline-block size-3 align-top text-dimmed',
+    childLinkLabelExternalIcon: 'inline-block size-3 align-top text-faint',
     childLinkDescription: 'text-muted',
     separator: 'px-2 h-px bg-border',
     viewportWrapper: 'absolute top-full start-0 flex w-full',
-    viewport: 'relative overflow-hidden bg-default shadow-lg rounded-md ring ring-default h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left,right] duration-200 ease-out motion-reduce:transition-none origin-[top_center] data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] z-1',
+    viewport: 'relative overflow-hidden bg-surface shadow-lg rounded-md ring ring-default h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left,right] duration-200 ease-out motion-reduce:transition-none origin-[top_center] data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] z-1',
     content: '',
     indicator: 'absolute left-0 data-[state=visible]:animate-[fade-in_100ms_var(--ease-out)] data-[state=hidden]:animate-[fade-out_100ms_var(--ease-out)] data-[state=hidden]:opacity-0 bottom-0 z-2 w-(--reka-navigation-menu-indicator-size) translate-x-(--reka-navigation-menu-indicator-position) flex h-2.5 items-end justify-center overflow-hidden transition-[translate,width] duration-200 ease-out motion-reduce:transition-none',
-    arrow: 'relative top-[50%] size-2.5 rotate-45 border border-default bg-default z-1 rounded-xs'
+    arrow: 'relative top-[50%] size-2.5 rotate-45 border border-default bg-surface z-1 rounded-xs'
   },
   variants: {
     color: colorVariant({ link: '', childLink: '' }),
@@ -68,14 +68,14 @@ export default defineTheme({
     },
     active: {
       true: {
-        childLink: 'before:bg-elevated text-highlighted',
+        childLink: 'before:bg-soft text-highlighted',
         childLinkIcon: 'text-default'
       },
       false: {
         link: 'text-muted',
-        linkLeadingIcon: 'text-dimmed',
-        childLink: 'hover:before:bg-elevated/50 text-default hover:text-highlighted transition-colors before:transition-colors',
-        childLinkIcon: 'text-dimmed group-hover:text-default transition-colors'
+        linkLeadingIcon: 'text-faint',
+        childLink: 'hover:before:bg-tint text-default hover:text-highlighted transition-colors before:transition-colors',
+        childLinkIcon: 'text-faint group-hover:text-default transition-colors'
       }
     },
     disabled: {
@@ -141,7 +141,7 @@ export default defineTheme({
     active: false,
     variant: 'pill',
     class: {
-      link: 'hover:text-highlighted hover:before:bg-elevated/50 transition-colors before:transition-colors',
+      link: 'hover:text-highlighted hover:before:bg-tint transition-colors before:transition-colors',
       linkLeadingIcon: 'group-hover:text-default transition-colors'
     }
   }, {
@@ -159,7 +159,7 @@ export default defineTheme({
     highlight: true,
     orientation: 'horizontal',
     class: {
-      link: 'data-[state=open]:before:bg-elevated/50'
+      link: 'data-[state=open]:before:bg-tint'
     }
   }, {
     disabled: false,
@@ -168,7 +168,7 @@ export default defineTheme({
     active: false,
     orientation: 'horizontal',
     class: {
-      link: 'data-[state=open]:before:bg-elevated/50'
+      link: 'data-[state=open]:before:bg-tint'
     }
   }, {
     variant: 'pill',
@@ -182,7 +182,7 @@ export default defineTheme({
     active: true,
     highlight: false,
     class: {
-      link: 'before:bg-elevated'
+      link: 'before:bg-soft'
     }
   }, {
     variant: 'pill',
@@ -190,7 +190,7 @@ export default defineTheme({
     highlight: true,
     disabled: false,
     class: {
-      link: 'hover:before:bg-elevated/50 before:transition-colors'
+      link: 'hover:before:bg-tint before:transition-colors'
     }
   }, {
     disabled: false,

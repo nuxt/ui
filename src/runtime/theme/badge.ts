@@ -18,13 +18,13 @@ export default defineTheme({
         base: 'bg-accent text-accent-foreground'
       },
       outline: {
-        base: 'text-accent-soft-foreground bg-accent-surface ring ring-inset ring-accent-border'
+        base: 'text-accent-soft-foreground bg-accent-surface ring ring-inset ring-accent-border-strong'
       },
       soft: {
         base: 'bg-accent-soft text-accent-soft-foreground'
       },
       subtle: {
-        base: 'bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft'
+        base: 'bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border'
       }
     },
     size: {

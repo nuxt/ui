@@ -4,9 +4,9 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'gap-2',
-    base: 'relative overflow-hidden rounded-full bg-accented',
+    base: 'relative overflow-hidden rounded-full bg-soft-hover',
     indicator: 'rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-accent',
-    status: 'flex text-dimmed duration-200 ease-out motion-reduce:transition-none',
+    status: 'flex text-faint duration-200 ease-out motion-reduce:transition-none',
     steps: 'grid items-end text-accent',
     step: 'truncate text-end row-start-1 col-start-1 transition-opacity ease-out'
   },

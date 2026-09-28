@@ -3,7 +3,7 @@ import { defineTheme } from '../utils/theme'
 
 export default defineTheme({
   slots: {
-    content: 'min-w-32 max-h-(--reka-dropdown-menu-content-available-height) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col',
+    content: 'min-w-32 max-h-(--reka-dropdown-menu-content-available-height) bg-surface shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col',
     input: 'border-b border-default',
     empty: 'text-center text-muted',
     viewport: 'relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1',
@@ -20,18 +20,18 @@ export default defineTheme({
     itemWrapper: 'flex-1 flex flex-col text-start min-w-0',
     itemLabel: 'truncate',
     itemDescription: 'truncate text-muted',
-    itemLabelExternalIcon: 'inline-block size-3 align-top text-dimmed'
+    itemLabelExternalIcon: 'inline-block size-3 align-top text-faint'
   },
   variants: {
     color: colorVariant({ item: '', label: '' }),
     active: {
       true: {
-        item: 'text-highlighted before:bg-elevated',
+        item: 'text-highlighted before:bg-soft',
         itemLeadingIcon: 'text-default'
       },
       false: {
-        item: 'text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors',
-        itemLeadingIcon: 'text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors'
+        item: 'text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-tint data-[state=open]:before:bg-tint transition-colors before:transition-colors',
+        itemLeadingIcon: 'text-faint group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors'
       }
     },
     loading: {

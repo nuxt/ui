@@ -2,7 +2,7 @@ import { defineTheme } from '../utils/theme'
 
 export default defineTheme({
   slots: {
-    root: 'bg-default/75 backdrop-blur-sm border-b border-default h-(--ui-header-height) sticky top-0 z-50',
+    root: 'bg-surface/75 backdrop-blur-sm border-b border-default h-(--ui-header-height) sticky top-0 z-50',
     container: 'flex items-center justify-between gap-3 h-full',
     left: 'lg:flex-1 flex items-center gap-1.5',
     center: 'hidden lg:flex',

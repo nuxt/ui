@@ -21,7 +21,7 @@ describe('Avatar', () => {
     ['with as', { props: { as: 'section' } }],
     ['with as (object)', { props: { src: 'https://github.com/benjamincanac.png', as: { root: 'section', img: 'p' } } }],
     ['with as (partial object)', { props: { src: 'https://github.com/benjamincanac.png', as: { img: 'p' } } }],
-    ['with class', { props: { class: 'bg-default' } }],
+    ['with class', { props: { class: 'bg-surface' } }],
     ['with ui', { props: { ui: { fallback: 'font-bold' } } }],
     ['with custom size', { props: { class: 'size-100', src: 'https://github.com/benjamincanac.png' } }],
     // Slots

@@ -11,7 +11,7 @@ export default defineTheme({
   slots: {
     root: 'relative flex items-start',
     container: 'flex items-center',
-    base: 'rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none',
+    base: 'rounded-sm ring ring-inset ring-strong overflow-hidden focus-visible:outline-none',
     indicator: 'flex items-center justify-center size-full text-accent-foreground bg-accent',
     icon: 'shrink-0',
     wrapper: 'w-full',
@@ -25,7 +25,7 @@ export default defineTheme({
         root: ''
       },
       card: {
-        root: `border border-default rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors ${focusCard} has-data-[state=checked]:border-accent-border has-data-[state=checked]:bg-accent-soft`
+        root: `border border-default rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors ${focusCard} has-data-[state=checked]:border-accent-border-strong has-data-[state=checked]:bg-accent-soft`
       }
     },
     indicator: {
@@ -108,7 +108,7 @@ export default defineTheme({
       variant: 'card',
       highlight: false,
       class: {
-        root: 'hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-accented'
+        root: 'hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong'
       }
     },
     { size: 'xs', indicator: 'hidden', class: { icon: 'size-3' } },

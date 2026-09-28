@@ -9,8 +9,8 @@
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: var(--ui-text);
-    background-color: var(--ui-bg);
+    color: var(--ui-text-default);
+    background-color: var(--ui-bg-surface);
     color-scheme: light;
 
     &:where(.dark, .dark *) {
@@ -143,50 +143,53 @@
   }
 }
 
-@layer theme {
-  :root, :host {
+@layer base {
+  /* The surface tokens, shades of `neutral` that don't follow `color`, and the
+     layout sizes. In `base` at zero specificity, like the palettes, so an
+     override in `base` wins wherever `@nuxt/icon` puts that layer. `--ui-bg-tint`
+     and `--ui-focus` are unset: their utilities mix `--ui-bg-soft` and
+     `--ui-primary` on the element, so a subtree that overrides those reaches them. */
+  :where(:root, :host) {
     --ui-header-height: 4rem;
     --ui-radius: 0.25rem;
     --ui-container: 80rem;
   }
 
-  :root, :host, .light {
-    --ui-text-dimmed: var(--ui-color-neutral-400);
+  :where(:root, :host, .light) {
+    --ui-text-faint: var(--ui-color-neutral-400);
     --ui-text-muted: var(--ui-color-neutral-500);
-    --ui-text-toned: var(--ui-color-neutral-600);
-    --ui-text: var(--ui-color-neutral-700);
+    --ui-text-default: var(--ui-color-neutral-700);
     --ui-text-highlighted: var(--ui-color-neutral-900);
     --ui-text-inverted: white;
 
-    --ui-bg: white;
+    --ui-bg-surface: white;
     --ui-bg-muted: var(--ui-color-neutral-50);
-    --ui-bg-elevated: var(--ui-color-neutral-100);
-    --ui-bg-accented: var(--ui-color-neutral-200);
+    --ui-bg-soft: var(--ui-color-neutral-100);
+    --ui-bg-soft-hover: var(--ui-color-neutral-200);
     --ui-bg-inverted: var(--ui-color-neutral-900);
 
-    --ui-border: var(--ui-color-neutral-200);
-    --ui-border-muted: var(--ui-color-neutral-200);
-    --ui-border-accented: var(--ui-color-neutral-300);
+    --ui-border-default: var(--ui-color-neutral-200);
+    --ui-border-strong: var(--ui-color-neutral-300);
     --ui-border-inverted: var(--ui-color-neutral-900);
+
   }
 
-  .dark {
-    --ui-text-dimmed: var(--ui-color-neutral-500);
+  :where(.dark) {
+    --ui-text-faint: var(--ui-color-neutral-500);
     --ui-text-muted: var(--ui-color-neutral-400);
-    --ui-text-toned: var(--ui-color-neutral-300);
-    --ui-text: var(--ui-color-neutral-200);
+    --ui-text-default: var(--ui-color-neutral-200);
     --ui-text-highlighted: white;
     --ui-text-inverted: var(--ui-color-neutral-900);
 
-    --ui-bg: var(--ui-color-neutral-900);
+    --ui-bg-surface: var(--ui-color-neutral-900);
     --ui-bg-muted: var(--ui-color-neutral-800);
-    --ui-bg-elevated: var(--ui-color-neutral-800);
-    --ui-bg-accented: var(--ui-color-neutral-700);
+    --ui-bg-soft: var(--ui-color-neutral-800);
+    --ui-bg-soft-hover: var(--ui-color-neutral-700);
     --ui-bg-inverted: white;
 
-    --ui-border: var(--ui-color-neutral-800);
-    --ui-border-muted: var(--ui-color-neutral-700);
-    --ui-border-accented: var(--ui-color-neutral-700);
+    --ui-border-default: var(--ui-color-neutral-800);
+    --ui-border-strong: var(--ui-color-neutral-700);
     --ui-border-inverted: white;
+
   }
 }
