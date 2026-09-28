@@ -171,7 +171,6 @@
     --ui-border-default: var(--ui-color-neutral-200);
     --ui-border-strong: var(--ui-color-neutral-300);
     --ui-border-inverted: var(--ui-color-neutral-900);
-
   }
 
   :where(.dark) {
@@ -187,9 +186,10 @@
     --ui-bg-soft-hover: var(--ui-color-neutral-700);
     --ui-bg-inverted: white;
 
-    --ui-border-default: var(--ui-color-neutral-800);
+    /* Translucent, so a border stays visible on the `bg-soft` and `bg-muted`
+       fills, which share its shade in dark mode */
+    --ui-border-default: color-mix(in oklab, var(--ui-color-neutral-50) 10%, transparent);
     --ui-border-strong: var(--ui-color-neutral-700);
     --ui-border-inverted: white;
-
   }
 }
