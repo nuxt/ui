@@ -195,6 +195,9 @@ export async function detectUsedComponents(
   } = {}
 ): Promise<Set<string> | undefined> {
   const detectedComponents = new Set<string>()
+  // Theme files by path (`page-cta`, `prose/callout`), matched to a component
+  // once the graph is built, since their kebab-case name loses acronyms (`PageCTA`)
+  const themeImports = new Set<string>()
 
   // Add manually specified components
   if (includeComponents && includeComponents.length > 0) {
@@ -217,7 +220,7 @@ export async function detectUsedComponents(
       detectedComponents.add(match[1] ? `Prose${match[2]}` : match[2]!)
     }
     for (const match of content.matchAll(THEME_IMPORT_PATTERN)) {
-      detectedComponents.add(`${match[1] ? 'Prose' : ''}${pascalCase(match[2]!)}`)
+      themeImports.add(`${match[1] ?? ''}${match[2]}`)
     }
     if (file.endsWith('.md')) {
       for (const match of content.matchAll(mdcPattern)) {
@@ -262,12 +265,20 @@ export async function detectUsedComponents(
   }
 
   // Nothing found in the app keeps every theme, prose or not
-  if (detectedComponents.size === 0) {
+  if (detectedComponents.size === 0 && themeImports.size === 0) {
     return undefined
   }
 
   // Build dependency graph of components
   const dependencyGraph = await buildComponentDependencyGraph(componentDir)
+
+  const byThemeFile = new Map([...dependencyGraph.keys()].map(name => [name.startsWith('Prose') ? `prose/${kebabCase(name.slice('Prose'.length))}` : kebabCase(name), name]))
+  for (const file of themeImports) {
+    const component = byThemeFile.get(file)
+    if (component) {
+      detectedComponents.add(component)
+    }
+  }
 
   if (prose) {
     for (const component of dependencyGraph.keys()) {
