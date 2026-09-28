@@ -127,7 +127,7 @@ catalog:
   shiki: ^4.4.3
   shiki-transformer-color-highlight: ^1.1.0
   shiki-transformer-icon-highlight: ^0.2.0
-  simple-git: ^3.36.0
+  simple-git: ^4.0.2
   sortablejs: ^1.15.7
   superstruct: ^2.0.2
   tailwind-merge: ^3.7.0
