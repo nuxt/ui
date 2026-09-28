@@ -28,7 +28,7 @@ export default defineTheme({
         fieldset: 'flex-wrap'
       },
       table: {
-        item: `border border-default hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors ${focusCard} has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent-border has-data-[state=checked]:z-[1]`
+        item: `border border-default hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors ${focusCard} has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent has-data-[state=checked]:z-[1]`
       }
     },
     size: {
