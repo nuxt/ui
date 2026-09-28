@@ -28,13 +28,35 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explici
     '@import "@nuxt/ui";'
   ]
 
+  // Semantic token shades behind the style choices.
+  const style = styleTokens(doc.style || {})
+  // Style expansion and explicit token overrides merge, explicit last so a
+  // round-tripped doc collapses instead of printing every variable twice.
+  const light: Record<string, string> = { ...style.light, ...doc.tokens?.light }
+  const dark: Record<string, string> = { ...style.dark, ...doc.tokens?.dark }
+
+  // An alias pinned to other shades of its own palette goes on its plugin line,
+  // `primary: neutral 900 200`, instead of a variable
+  const aliasShades: Record<string, string> = {}
+  for (const alias of Object.keys(DEFAULT_COLORS)) {
+    const token = `--ui-${alias}`
+    const shadeOf = (value?: string) => value?.match(new RegExp(`^var\\(--ui-color-${alias}-(\\d+)\\)$`))?.[1]
+    const lightShade = shadeOf(light[token])
+    const darkShade = shadeOf(dark[token])
+    if (alias === 'neutral' || (!lightShade && !darkShade) || (light[token] && !lightShade) || (dark[token] && !darkShade)) continue
+    const shades = [lightShade ?? '500', darkShade ?? '400']
+    aliasShades[alias] = shades[0] === shades[1] ? shades[0]! : shades.join(' ')
+    Reflect.deleteProperty(light, token)
+    Reflect.deleteProperty(dark, token)
+  }
+
   // Only the aliases that differ from the defaults, plus `primary` and `neutral`
   // when `explicit`, the two a theme is read by
   const colorEntries = Object.entries(doc.colors || {}).filter(([key, value]) => value !== DEFAULT_COLORS[key as keyof typeof DEFAULT_COLORS])
   const changed = Object.fromEntries(colorEntries)
-  const colorAliases = explicit
-    ? Object.fromEntries(Object.entries({ ...DEFAULT_COLORS, ...changed }).filter(([key]) => key === 'primary' || key === 'neutral' || key in changed))
-    : changed
+  const colorAliases = Object.fromEntries(Object.entries({ ...DEFAULT_COLORS, ...changed })
+    .filter(([key]) => key in changed || key in aliasShades || (explicit && (key === 'primary' || key === 'neutral')))
+    .map(([key, value]) => [key, aliasShades[key] ? `${value} ${aliasShades[key]}` : value]))
   if (Object.keys(colorAliases).length) {
     lines.push('', '@plugin "@nuxt/ui/colors" {', ...Object.entries(colorAliases).map(([key, value]) => `  ${key}: ${value};`), '}')
   }
@@ -120,13 +142,6 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explici
     lines.push('', ':root {', `  --ui-radius: ${doc.radius}rem;`, '}')
   }
 
-  // Semantic token shades behind the style choices.
-  const style = styleTokens(doc.style || {})
-  // Style expansion and explicit token overrides merge, explicit last so a
-  // round-tripped doc collapses instead of printing every variable twice.
-  const light = { ...style.light, ...doc.tokens?.light }
-
-  const dark: Record<string, string> = { ...style.dark, ...doc.tokens?.dark }
   // `:root, .light` matches `<html class="dark">` too and lands after the
   // library's `.dark` block, so a light-only override would win in dark mode.
   // Restate the library's dark value so the `.dark` block wins it back.
