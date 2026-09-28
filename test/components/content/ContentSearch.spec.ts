@@ -136,6 +136,17 @@ describe('ContentSearch', () => {
     ['with class', { props: { ...props, class: 'sm:max-w-5xl' } }]
   ])
 
+  it('labels the dialog with the translated search label', async () => {
+    const wrapper = await mountSuspended(ContentSearch, { props })
+
+    const dialog = wrapper.find('[role="dialog"]')
+    const title = wrapper.find(`#${dialog.attributes('aria-labelledby')}`)
+    expect(title.text()).toBe('Search…')
+    expect(wrapper.html()).not.toContain('contentSearch.')
+
+    wrapper.unmount()
+  })
+
   describe('async search', () => {
     afterEach(() => {
       vi.useRealTimers()
