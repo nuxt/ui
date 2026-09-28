@@ -245,6 +245,7 @@ describe('detectUsedComponents', { timeout: 20000 }, () => {
       'import button from \'#build/ui/button\'',
       'import inputMenu from \'#ui/theme/input-menu\'',
       'import contentSearch from \'@nuxt/ui/runtime/theme/content/content-search\'',
+      'import pageCTA from \'#build/ui/page-cta\'',
       '</script>'
     ].join('\n'))
 
@@ -252,6 +253,7 @@ describe('detectUsedComponents', { timeout: 20000 }, () => {
     expect(detected).toContain('Button')
     expect(detected).toContain('InputMenu')
     expect(detected).toContain('ContentSearch')
+    expect(detected).toContain('PageCTA')
   })
 
   it('detects components in HTML files', async () => {

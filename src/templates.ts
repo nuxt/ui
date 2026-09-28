@@ -210,19 +210,21 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
         ? [...detectedComponents].map(component => camelCase(component))
         : [...Object.keys(theme), ...(hasContent ? Object.keys(themeContent) : [])]
 
-      return `const detected = new Set<string>(${JSON.stringify(names)})
+      return `const names: string[] = ${JSON.stringify(names)}
+
+// Detection runs again as files change. Each version of this module refills the
+// one set components read, kept across updates in \`import.meta.hot.data\`
+const detected: Set<string> = import.meta.hot?.data.detected ?? new Set()
+detected.clear()
+for (const name of names) {
+  detected.add(name)
+}
+if (import.meta.hot) {
+  import.meta.hot.data.detected = detected
+  import.meta.hot.accept()
+}
 
 export default detected as Set<string> | null
-
-// Detection runs again as files change, the update refills the set components read
-if (import.meta.hot) {
-  import.meta.hot.accept((mod) => {
-    detected.clear()
-    for (const name of mod?.default ?? []) {
-      detected.add(name)
-    }
-  })
-}
 `
     }
   })
