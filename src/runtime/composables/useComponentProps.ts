@@ -122,10 +122,12 @@ export function useComponentProps<T extends object>(name: string, props: T, them
   const vm = getCurrentInstance()
   const { defaults, config } = injectThemeContext()
 
-  // A `'*'` value, only for a prop whose theme default is the library-wide one
+  // A `'*'` value, only for a prop whose own default is the library-wide one:
+  // the component's `app.config.ui.<name>.defaultVariants`, or else its theme's
   function globalDefault(entry: Record<string, any> | undefined, prop: string) {
     const base = GLOBAL_DEFAULTS[prop]
-    if (!base || theme?.defaultVariants?.[prop] !== base) return undefined
+    const appConfigEntry = name.includes('.') ? get(appConfig.ui ?? {}, name) : appConfig.ui?.[name]
+    if (!base || (appConfigEntry?.defaultVariants?.[prop] ?? theme?.defaultVariants?.[prop]) !== base) return undefined
     return entry?.[prop]
   }
 

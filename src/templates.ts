@@ -178,13 +178,13 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
       }
 
       const accent = await readFile(resolve('./runtime/accent.css'), 'utf8')
-      const scopes = accent.match(/\[class~="\[--ui-accent:[^"]*"\]\s*\{[^}]*\}/g) ?? []
+      const scopes = accent.match(/\.\\\[--ui-accent\\:var\\\(--ui-[a-z]+\\\)\\\]\s*\{[^}]*\}/g) ?? []
       // One rule per color: fewer means the shipped CSS no longer looks the way this reads it
       if (scopes.length < aliases.length) {
         throw new Error(`[@nuxt/ui] Found ${scopes.length} color scope rules in \`accent.css\` for the prefix, expected ${aliases.length}.`)
       }
 
-      return `@layer base {\n  ${scopes.map(rule => rule.replace('[class~="[--ui-accent:', `[class~="${prefix}:[--ui-accent:`)).join('\n\n  ')}\n}\n`
+      return `@layer base {\n  ${scopes.map(rule => rule.replace('.\\[--ui-accent', `.${prefix}\\:\\[--ui-accent`)).join('\n\n  ')}\n}\n`
     }
   })
 
