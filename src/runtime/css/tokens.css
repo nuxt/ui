@@ -137,4 +137,18 @@
   --fill-bg: var(--ui-bg-surface);
   --fill-default: var(--ui-border-default);
   --fill-inverted: var(--ui-border-inverted);
+
+  /* TEMPORARY: the v4 names the docs app and playgrounds still use, removed
+     when they move to the new ones in #7071. */
+  --text-color-dimmed: var(--ui-text-faint);
+  --text-color-toned: var(--ui-text-default);
+  --background-color-default: var(--ui-bg-surface);
+  --background-color-elevated: var(--ui-bg-soft);
+  --background-color-accented: var(--ui-bg-soft-hover);
+  --border-color-muted: var(--ui-border-default);
+  --border-color-accented: var(--ui-border-strong);
+  --ring-color-muted: var(--ui-border-default);
+  --ring-color-accented: var(--ui-border-strong);
+  --ring-offset-color-bg: var(--ui-bg-surface);
+  --divide-color-accented: var(--ui-border-strong);
 }
