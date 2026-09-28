@@ -222,6 +222,38 @@ describe('detectUsedComponents', { timeout: 20000 }, () => {
     expect(detected).toContain('Modal')
   })
 
+  it('detects kebab-case names given as a string', async () => {
+    const dir = fixtureRoot()
+    writeFileSync(join(dir, 'App.vue'), [
+      '<script setup lang="ts">',
+      'const Alert = resolveComponent(\'u-alert\')',
+      'const Badge = resolveComponent("lazy-u-badge")',
+      '</script>',
+      '<template><component is="u-calendar" /></template>'
+    ].join('\n'))
+
+    const detected = await detectUsedComponents([dir], 'U', componentDir)
+    expect(detected).toContain('Alert')
+    expect(detected).toContain('Badge')
+    expect(detected).toContain('Calendar')
+  })
+
+  it('detects themes imported to style a component of the app', async () => {
+    const dir = fixtureRoot()
+    writeFileSync(join(dir, 'MyButton.vue'), [
+      '<script setup lang="ts">',
+      'import button from \'#build/ui/button\'',
+      'import inputMenu from \'#ui/theme/input-menu\'',
+      'import contentSearch from \'@nuxt/ui/runtime/theme/content/content-search\'',
+      '</script>'
+    ].join('\n'))
+
+    const detected = await detectUsedComponents([dir], 'U', componentDir)
+    expect(detected).toContain('Button')
+    expect(detected).toContain('InputMenu')
+    expect(detected).toContain('ContentSearch')
+  })
+
   it('detects components in HTML files', async () => {
     const dir = fixtureRoot()
     writeFileSync(join(dir, 'index.html'), '<div id="app"><u-calendar></u-calendar></div>\n')

@@ -16,7 +16,7 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
   // `detectedComponents` is assigned in the `vite.config` hook (below), before
   // any template's `getContents` runs — so `componentDetection`
   // can narrow the theme CSS to the used components (see `getTemplates`).
-  const vue: { detectedComponents?: Set<string> } = {}
+  const vue: { detectedComponents?: Set<string>, dev?: boolean } = {}
   const templates = getTemplates(options, appConfig.ui, undefined, (...paths: string[]) => join(runtimeDir, '..', ...paths), vue)
   const templateKeys = new Set(templates.map(t => `#build/${t.filename}`))
 
@@ -61,7 +61,7 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
     name: 'nuxt:ui:templates',
     enforce: 'pre',
     vite: {
-      async config(config) {
+      async config(config, { command }) {
         // `config.root` is not resolved yet when `config` hooks run, so a
         // CLI-provided root (e.g. `vite some/dir`) can still be relative here.
         // Alias targets must be absolute: Vite 8 warns on relative targets and
@@ -70,6 +70,8 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
         // `options.root` lets setups like `electron-vite` override the location
         // when `config.root` points to a sub-directory Tailwind doesn't scan.
         const root = path.resolve(options.root || config.root || '.')
+
+        vue.dev = command === 'serve'
 
         if (options.componentDetection) {
           // `scanPackages` packages resolve Nuxt UI components from `node_modules`

@@ -9,7 +9,7 @@ import { colors } from '../../src/runtime/theme/color'
 const resolve = (...paths: string[]) => join(process.cwd(), 'src', ...paths)
 const themeDir = resolve('./runtime/theme')
 
-function themeContents(overrides: Record<string, any>, vue?: { detectedComponents?: Set<string> }) {
+function themeContents(overrides: Record<string, any>, vue?: { detectedComponents?: Set<string>, dev?: boolean }) {
   const options = { ...defaultOptions, ...overrides }
   const templates = getTemplates(options as any, getDefaultConfig(options.tailwindPrefix), undefined, resolve, vue)
   return (filename: string) => templates.find(template => template.filename === filename)!.getContents!({} as any)
@@ -44,6 +44,27 @@ describe('theme templates', () => {
     expect(classes).toContain('origin-(--reka-select-content-transform-origin)')
     expect(classes).toContain('dark:disabled:bg-transparent')
     expect(classes).not.toContain('animate-pulse')
+  })
+
+  it('lists the detected themes in dev for the runtime warning', async () => {
+    const contents = await themeContents({ componentDetection: true }, { detectedComponents: new Set(['Button', 'InputMenu']), dev: true })('ui/detected.ts')
+
+    expect(contents).toContain('new Set<string>(["button","inputMenu"])')
+    expect(contents).toContain('import.meta.hot.accept(')
+  })
+
+  it('lists every theme in dev when nothing is detected', async () => {
+    const contents = await themeContents({ componentDetection: true }, { dev: true })('ui/detected.ts')
+
+    expect(contents).toContain('"button"')
+    expect(contents).toContain('"dashboardSidebar"')
+  })
+
+  it('leaves the detected themes out of the build and without detection', async () => {
+    const detectedComponents = new Set(['Button'])
+
+    expect(await themeContents({ componentDetection: true }, { detectedComponents })('ui/detected.ts')).toBe('export default null as Set<string> | null\n')
+    expect(await themeContents({ componentDetection: false }, { detectedComponents, dev: true })('ui/detected.ts')).toBe('export default null as Set<string> | null\n')
   })
 
   it('generates only the sources', async () => {

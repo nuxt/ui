@@ -2,6 +2,7 @@ import type { App, ComputedRef, VNode } from 'vue'
 import { computed, effectScope, getCurrentInstance } from 'vue'
 import { createContext } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import detected from '#build/ui/detected'
 import { get } from '../utils'
 import { ComponentOverrides, engineFor } from '../utils/tv'
 
@@ -104,6 +105,25 @@ function propIsDefined(vnode: VNode | null | undefined, prop: string): boolean {
  */
 const GLOBAL_DEFAULTS: Record<string, string> = { color: 'primary', size: 'md' }
 
+const undetected = new Set<string>()
+
+/**
+ * Warns in dev when a component renders whose theme component detection didn't
+ * find, since its classes aren't in the CSS.
+ */
+function warnUndetected(name: string) {
+  if (!detected || detected.has(name) || name.includes('.') || undetected.has(name)) return
+  undetected.add(name)
+
+  // A component just added to a file renders before detection runs again, so
+  // it's only reported when still missing once the update had time to land
+  setTimeout(() => {
+    if (detected.has(name)) return
+    const component = name[0]!.toUpperCase() + name.slice(1)
+    console.warn(`[@nuxt/ui] Component detection didn't find \`${component}\`, so its classes aren't in your CSS. Add it to the \`componentDetection\` option: \`componentDetection: ['${component}']\`.`)
+  }, 1000)
+}
+
 /**
  * Resolve a component's props with the priority chain:
  *   explicit prop > nearest UTheme > nearest UTheme `'*'`
@@ -121,6 +141,10 @@ const GLOBAL_DEFAULTS: Record<string, string> = { color: 'primary', size: 'md' }
 export function useComponentProps<T extends object>(name: string, props: T, theme?: { defaultVariants?: Record<string, unknown>, [key: string]: unknown }): T {
   const vm = getCurrentInstance()
   const { defaults, config } = injectThemeContext()
+
+  if (import.meta.dev && import.meta.client && theme) {
+    warnUndetected(name)
+  }
 
   // A `'*'` value, only for a prop whose own default is the library-wide one:
   // the component's `app.config.ui.<name>.defaultVariants`, or else its theme's
