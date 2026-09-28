@@ -83,8 +83,8 @@ describe('theme templates', () => {
 // The tokens and color scopes are static CSS now, so they're checked against
 // the color set the themes scope with.
 describe('static css', () => {
-  const tokens = readFileSync(resolve('./runtime/tokens.css'), 'utf8')
-  const accent = readFileSync(resolve('./runtime/accent.css'), 'utf8')
+  const tokens = readFileSync(resolve('./runtime/css/tokens.css'), 'utf8')
+  const accent = readFileSync(resolve('./runtime/css/accent.css'), 'utf8')
 
   // `#build/ui.base.css` adds the prefixed scopes after `accent.css`, so the
   // reset, which also matches a prefixed scope class, must not outrank them
