@@ -108,22 +108,7 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
   const style: StyleOptions = doc.style ?? {}
   switch (key) {
     case 'primary':
-      return {
-        // both: black only overrides --ui-primary, the ramp still colours
-        // every primary-* utility, so a ramp change under black is a change
-        color: alias(doc, 'primary'),
-        black: !!doc.blackAsPrimary,
-        palette: aliasPalette(doc, 'primary') ?? null,
-        tokens: ownedTokens(doc, 'primary'),
-        shades: ownedTokenShades(doc, 'primary')
-      }
     case 'neutral':
-      return {
-        color: alias(doc, 'neutral'),
-        palette: aliasPalette(doc, 'neutral') ?? null,
-        tokens: ownedTokens(doc, 'neutral'),
-        shades: ownedTokenShades(doc, 'neutral')
-      }
     case 'secondary':
     case 'success':
     case 'info':
@@ -291,14 +276,7 @@ export function mergeSection(current: ThemeDoc, base: ThemeDoc, key: SectionKey)
 
   switch (key) {
     case 'primary':
-      setOrDelete(doc, 'blackAsPrimary', base.blackAsPrimary || undefined)
-      mergeAlias(doc, base, 'primary')
-      mergeColorExtras(doc, base, 'primary')
-      break
     case 'neutral':
-      mergeAlias(doc, base, 'neutral')
-      mergeColorExtras(doc, base, 'neutral')
-      break
     case 'secondary':
     case 'success':
     case 'info':

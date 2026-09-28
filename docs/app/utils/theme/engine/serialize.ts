@@ -112,16 +112,8 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explici
     lines.push('', '/* until v5 ships --ui-font-heading */', '@layer base {', '  h1, h2, h3, h4, h5, h6 {', '    font-family: var(--font-serif);', '  }', '}')
   }
 
-  const rootLines: string[] = []
   if (doc.radius !== undefined && doc.radius !== THEME_DEFAULTS.radius) {
-    rootLines.push(`  --ui-radius: ${doc.radius}rem;`)
-  }
-  if (doc.blackAsPrimary) {
-    rootLines.push('  --ui-primary: black;')
-  }
-
-  if (rootLines.length) {
-    lines.push('', ':root {', ...rootLines, '}')
+    lines.push('', ':root {', `  --ui-radius: ${doc.radius}rem;`, '}')
   }
 
   // Semantic token shades behind the style choices.
@@ -130,11 +122,7 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explici
   // round-tripped doc collapses instead of printing every variable twice.
   const light = { ...style.light, ...doc.tokens?.light }
 
-  const dark: Record<string, string> = {
-    ...style.dark,
-    ...(doc.blackAsPrimary ? { '--ui-primary': 'white' } : {}),
-    ...doc.tokens?.dark
-  }
+  const dark: Record<string, string> = { ...style.dark, ...doc.tokens?.dark }
   // `:root, .light` matches `<html class="dark">` too and lands after the
   // library's `.dark` block, so a light-only override would win in dark mode.
   // Restate the library's dark value so the `.dark` block wins it back.

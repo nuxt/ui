@@ -62,7 +62,6 @@ export function useTheme() {
   const _radius = useState('nuxt-ui-radius', () => THEME_DEFAULTS.radius as number)
   const _fontSize = useState('nuxt-ui-font-size', () => THEME_DEFAULTS.fontSize as number)
   const _iconSet = useState('nuxt-ui-icons', () => THEME_DEFAULTS.icons as string)
-  const _blackAsPrimary = useState('nuxt-ui-black-as-primary', () => false)
 
   /**
    * The whole font document in one JSON channel, shared with the FOUC script.
@@ -108,7 +107,6 @@ export function useTheme() {
     },
     set(option) {
       appConfig.colors.primary = option
-      setBlackAsPrimary(false)
       track('Theme Changed', { setting: 'primary', value: option })
     }
   })
@@ -165,19 +163,9 @@ export function useTheme() {
     }
   })
 
-  const blackAsPrimary = computed(() => _blackAsPrimary.value)
-
-  function setBlackAsPrimary(value: boolean) {
-    _blackAsPrimary.value = value
-    if (value) {
-      track('Theme Changed', { setting: 'primary', value: 'black' })
-    }
-  }
-
   const radiusStyle = computed(() => `:root { --ui-radius: ${_radius.value}rem; }`)
   // font-size scales every rem-based metric on the page
   const fontSizeStyle = computed(() => _fontSize.value !== 16 ? `html { font-size: ${_fontSize.value}px; }` : 'html {}')
-  const blackAsPrimaryStyle = computed(() => _blackAsPrimary.value ? `:root { --ui-primary: black; } .dark { --ui-primary: white; }` : ':root {}')
   const fontStyle = computed(() => {
     // fonts hydrate unvalidated from localStorage, re-assert SAFE_NAME at
     // the sink so a tampered name can't break out of the quoted string
@@ -252,7 +240,6 @@ export function useTheme() {
   const style = [
     { innerHTML: radiusStyle, id: 'nuxt-ui-radius', tagPriority: -2 },
     { innerHTML: fontSizeStyle, id: 'nuxt-ui-font-size', tagPriority: -2 },
-    { innerHTML: blackAsPrimaryStyle, id: 'nuxt-ui-black-as-primary', tagPriority: -2 },
     { innerHTML: fontStyle, id: 'nuxt-ui-font', tagPriority: -2 },
     { innerHTML: customColorsStyle, id: THEME_TAG_IDS.customColors, tagPriority: -2 },
     { innerHTML: cssVariablesStyle, id: THEME_TAG_IDS.cssVariables, tagPriority: -2 }
@@ -281,7 +268,6 @@ export function useTheme() {
       doc.colors = colorOverrides
     }
 
-    if (_blackAsPrimary.value) doc.blackAsPrimary = true
     if (_radius.value !== THEME_DEFAULTS.radius) doc.radius = _radius.value
     if (_fontSize.value !== THEME_DEFAULTS.fontSize) doc.fontSize = _fontSize.value
     // setFontPrefs already normalized this to the doc's own sparse shape,
@@ -445,7 +431,6 @@ export function useTheme() {
       })
     }
     if (settings.icons && Object.hasOwn(themeIcons, settings.icons)) icon.value = settings.icons
-    if (settings.blackAsPrimary !== undefined) setBlackAsPrimary(!!settings.blackAsPrimary)
 
     const semanticUpdates = SEMANTIC_ALIASES.filter(color => validPalette(settings[color]))
     const savedExtras: Record<string, any> = { ...aiThemeExtras.value }
@@ -498,7 +483,6 @@ export function useTheme() {
     fontPrefs.value = {}
     _iconSet.value = THEME_DEFAULTS.icons
     appConfig.ui.icons = themeIcons.lucide as any
-    _blackAsPrimary.value = false
 
     const extras = aiThemeExtras.value
     if (extras.colors) {
@@ -542,8 +526,6 @@ export function useTheme() {
     neutral,
     primaryColors: PRIMARY_COLORS,
     primary,
-    blackAsPrimary,
-    setBlackAsPrimary,
     radiuses: RADIUSES,
     radius,
     fontSize,
