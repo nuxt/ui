@@ -114,6 +114,13 @@ describe('colors plugin', () => {
     expect(aliasRule(css, '.dark', '--ui-primary: var(--ui-color-primary-200);')).toContain('--ui-secondary: var(--ui-color-secondary-600);')
   })
 
+  it('points `neutral` at the shades you pick too', async () => {
+    const css = await build({}, undefined, '@plugin "@nuxt/ui/colors" { neutral: zinc 800 100; }')
+
+    expect(aliasRule(css, ':root, :host, .light', '--ui-neutral: var(--ui-color-neutral-800);')).not.toBe('')
+    expect(aliasRule(css, '.dark', '--ui-neutral: var(--ui-color-neutral-100);')).not.toBe('')
+  })
+
   it('resolves the palette with a Tailwind prefix', async () => {
     const css = await build({ tailwindPrefix: 'tw' }, undefined, '@plugin "@nuxt/ui/colors" { primary: indigo; }')
 
@@ -125,6 +132,5 @@ describe('colors plugin', () => {
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: brand; }')).rejects.toThrow('`primary: brand` needs the name of a Tailwind palette')
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: primary; }')).rejects.toThrow('`primary: primary` points a color alias at another')
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: indigo 550; }')).rejects.toThrow('`primary: indigo 550` takes a palette and up to two shades')
-    await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { neutral: zinc 900; }')).rejects.toThrow('`neutral: zinc 900` takes no shades')
   })
 })

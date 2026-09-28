@@ -118,10 +118,10 @@
 }
 
 @layer base {
-  /* Each color alias is a shade of its palette, lighter in dark mode. `neutral`
-     is the inverted surface, so it follows a surface that redefines it. In
-     `base` at zero specificity, like the palettes, so the shades
-     `@plugin "@nuxt/ui/colors"` picks win. */
+  /* Each color alias is a shade of its palette, lighter in dark mode, and
+     `neutral` the ends of its own, like the inverted surface. In `base` at zero
+     specificity, like the palettes, so the shades `@plugin "@nuxt/ui/colors"`
+     picks win. */
   :where(:root, :host, .light) {
     --ui-primary: var(--ui-color-primary-500);
     --ui-secondary: var(--ui-color-secondary-500);
@@ -129,7 +129,7 @@
     --ui-info: var(--ui-color-info-500);
     --ui-warning: var(--ui-color-warning-500);
     --ui-error: var(--ui-color-error-500);
-    --ui-neutral: var(--ui-bg-inverted);
+    --ui-neutral: var(--ui-color-neutral-900);
   }
 
   :where(.dark) {
@@ -139,7 +139,7 @@
     --ui-info: var(--ui-color-info-400);
     --ui-warning: var(--ui-color-warning-400);
     --ui-error: var(--ui-color-error-400);
-    --ui-neutral: var(--ui-bg-inverted);
+    --ui-neutral: var(--ui-color-neutral-50);
   }
 }
 

@@ -26,9 +26,7 @@
   }
 
   /* A color's scope reads its roles from `--ui-<color>-<role>`. An unset variable
-     leaves the role unset, so it keeps its recipe, or for neutral its surface token.
-     Neutral also resolves `--ui-neutral` on the element, so it follows a surface
-     that redefines `--ui-bg-inverted`. */
+     leaves the role unset, so it keeps its recipe, or for neutral its surface token. */
   .\[--ui-accent\:var\(--ui-primary\)\] {
     --ui-accent-foreground: var(--ui-primary-foreground);
     --ui-accent-hover: var(--ui-primary-hover);
@@ -132,9 +130,8 @@
   }
 
   .\[--ui-accent\:var\(--ui-neutral\)\] {
-    --ui-neutral: var(--ui-bg-inverted);
     --ui-accent-foreground: var(--ui-neutral-foreground);
-    --ui-accent-hover: var(--ui-neutral-hover, color-mix(in oklab, var(--ui-bg-inverted) 90%, transparent));
+    --ui-accent-hover: var(--ui-neutral-hover, color-mix(in oklab, var(--ui-neutral) 90%, transparent));
     --ui-accent-soft: var(--ui-neutral-soft, var(--ui-bg-elevated));
     --ui-accent-soft-hover: var(--ui-neutral-soft-hover, color-mix(in oklab, var(--ui-bg-accented) 75%, transparent));
     --ui-accent-soft-foreground: var(--ui-neutral-soft-foreground, var(--ui-text));
