@@ -16,8 +16,8 @@ export type ColorsOptions = Partial<Record<Color, string>>
  * works too.
  *
  * The shades an alias uses follow the palette, `500` in light mode and `400`
- * in dark mode by default: `primary: neutral 900 200` picks others, and a
- * single shade applies to both.
+ * in dark mode by default (`900` and `50` for `neutral`): `primary: neutral
+ * 900 200` picks others, and a single shade applies to both.
  *
  * The defaults are plain CSS in `base.css`, at zero specificity, so the
  * aliases you set win wherever you register it.
@@ -37,9 +37,6 @@ const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugi
     }
     const [palette, lightShade, darkShade = lightShade, ...rest] = String(value).replace(/["']/g, '').trim().split(/\s+/) as [string, ...string[]]
     if (lightShade) {
-      if (alias === 'neutral') {
-        throw new Error(`[@nuxt/ui] \`neutral: ${value}\` takes no shades: the \`neutral\` alias is the inverted surface, \`--ui-bg-inverted\`.`)
-      }
       if (rest.length || ![lightShade, darkShade].every(shade => (shades as readonly number[]).includes(Number(shade)))) {
         throw new Error(`[@nuxt/ui] \`${alias}: ${value}\` takes a palette and up to two shades, for light and dark mode, from ${shades.join(', ')}, like \`${alias}: indigo 600 300\`.`)
       }
