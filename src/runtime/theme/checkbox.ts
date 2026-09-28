@@ -25,7 +25,7 @@ export default defineTheme({
         root: ''
       },
       card: {
-        root: `border border-default rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors ${focusCard} has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft`
+        root: `border border-default rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors ${focusCard} has-data-[state=checked]:border-accent-border has-data-[state=checked]:bg-accent-soft`
       }
     },
     indicator: {
