@@ -8,6 +8,11 @@ const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
 /** A palette name, optionally followed by the light and dark shades the alias uses. */
 export type ColorsOptions = Partial<Record<Color, string>>
 
+const isShade = (word: string) => word === 'black' || word === 'white' || (shades as readonly number[]).includes(Number(word))
+
+// `black` and `white` aren't shades of a palette, so they are the color itself
+const shadeValue = (alias: string, shade: string) => shade === 'black' || shade === 'white' ? shade : `var(--ui-color-${alias}-${shade})`
+
 /**
  * Points the color aliases at Tailwind palettes, one line per alias:
  * `@plugin "@nuxt/ui/colors" { primary: indigo; neutral: zinc; }`. Each writes
@@ -17,7 +22,8 @@ export type ColorsOptions = Partial<Record<Color, string>>
  *
  * The shades an alias uses follow the palette, `500` in light mode and `400`
  * in dark mode by default (`900` and `50` for `neutral`): `primary: neutral
- * 900 200` picks others, and a single shade applies to both.
+ * 900 200` picks others, a single shade applies to both, `black` and `white`
+ * work as shades, and shades alone (`primary: black white`) keep the palette.
  *
  * The defaults are plain CSS in `base.css`, at zero specificity, so the
  * aliases you set win wherever you register it.
@@ -35,13 +41,19 @@ const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugi
     if (!value) {
       continue
     }
-    const [palette, lightShade, darkShade = lightShade, ...rest] = String(value).replace(/["']/g, '').trim().split(/\s+/) as [string, ...string[]]
+    const words = String(value).replace(/["']/g, '').trim().split(/\s+/)
+    // The palette is optional: shades alone keep the alias's palette
+    const palette = isShade(words[0]!) ? undefined : words.shift()
+    const [lightShade, darkShade = lightShade, ...rest] = words
     if (lightShade) {
-      if (rest.length || ![lightShade, darkShade].every(shade => (shades as readonly number[]).includes(Number(shade)))) {
-        throw new Error(`[@nuxt/ui] \`${alias}: ${value}\` takes a palette and up to two shades, for light and dark mode, from ${shades.join(', ')}, like \`${alias}: indigo 600 300\`.`)
+      if (rest.length || ![lightShade, darkShade].every(shade => isShade(shade!))) {
+        throw new Error(`[@nuxt/ui] \`${alias}: ${value}\` takes a palette and up to two shades, for light and dark mode, from ${shades.join(', ')}, \`black\` or \`white\`, like \`${alias}: indigo 600 300\`.`)
       }
-      light[`--ui-${alias}`] = `var(--ui-color-${alias}-${lightShade})`
-      dark[`--ui-${alias}`] = `var(--ui-color-${alias}-${darkShade})`
+      light[`--ui-${alias}`] = shadeValue(alias, lightShade)
+      dark[`--ui-${alias}`] = shadeValue(alias, darkShade!)
+    }
+    if (!palette) {
+      continue
     }
     // An alias's palette is the alias itself (`--color-primary-500` reads
     // `--ui-color-primary-500`), so pointing one at another loops

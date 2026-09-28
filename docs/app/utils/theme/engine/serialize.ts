@@ -40,10 +40,10 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explici
   const aliasShades: Record<string, string> = {}
   for (const alias of Object.keys(DEFAULT_COLORS)) {
     const token = `--ui-${alias}`
-    const shadeOf = (value?: string) => value?.match(new RegExp(`^var\\(--ui-color-${alias}-(\\d+)\\)$`))?.[1]
+    const shadeOf = (value?: string) => value === 'black' || value === 'white' ? value : value?.match(new RegExp(`^var\\(--ui-color-${alias}-(\\d+)\\)$`))?.[1]
     const lightShade = shadeOf(light[token])
     const darkShade = shadeOf(dark[token])
-    if (alias === 'neutral' || (!lightShade && !darkShade) || (light[token] && !lightShade) || (dark[token] && !darkShade)) continue
+    if ((!lightShade && !darkShade) || (light[token] && !lightShade) || (dark[token] && !darkShade)) continue
     const shades = [lightShade ?? '500', darkShade ?? '400']
     aliasShades[alias] = shades[0] === shades[1] ? shades[0]! : shades.join(' ')
     Reflect.deleteProperty(light, token)
