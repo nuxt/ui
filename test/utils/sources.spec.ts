@@ -114,6 +114,15 @@ describe('colors plugin', () => {
     expect(aliasRule(css, '.dark', '--ui-primary: var(--ui-color-primary-200);')).toContain('--ui-secondary: var(--ui-color-secondary-600);')
   })
 
+  it('takes `black` and `white` as shades, and shades without a palette', async () => {
+    const css = await build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: neutral black 200; neutral: white black; }')
+
+    expect(rule(css, ':root, :host')).toContain(`--ui-color-primary-500: ${colors.neutral[500]};`)
+    expect(rule(css, ':root, :host')).not.toContain('--ui-color-neutral-')
+    expect(aliasRule(css, ':root, :host, .light', '--ui-primary: black;')).toContain('--ui-neutral: white;')
+    expect(aliasRule(css, '.dark', '--ui-primary: var(--ui-color-primary-200);')).toContain('--ui-neutral: black;')
+  })
+
   it('points `neutral` at the shades you pick too', async () => {
     const css = await build({}, undefined, '@plugin "@nuxt/ui/colors" { neutral: zinc 800 100; }')
 
