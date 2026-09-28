@@ -1,4 +1,5 @@
 import { defu } from 'defu'
+import colors from 'tailwindcss/colors'
 import { watchDebounced } from '@vueuse/core'
 import { themeIcons } from '../utils/theme/icons'
 import { cssVariableDefaults } from '../utils/theme/tokens'
@@ -129,6 +130,10 @@ export default defineNuxtPlugin({
       // Vue code exists) but it parses once and writes every tag in order.
       // It stands down on a theme link, like the boot restore above: the
       // server already rendered the linked theme.
+      //
+      // Tailwind's own neutral goes in as its values, the module's neutral
+      // alias having taken its `--color-neutral-*` names, so a shade holds
+      // either a `var(--color-*)` or a value, whichever palette rendered.
       useHead({
         script: [{
           innerHTML: `
@@ -146,9 +151,12 @@ export default defineNuxtPlugin({
               if (SAFE.test(T.primary || '') && T.primary !== 'black') { saved.primary = T.primary; }
               if (SAFE.test(T.neutral || '')) { saved.neutral = T.neutral; }
               if (Object.keys(saved).length) {
+                var NEUTRAL = ${JSON.stringify(colors.neutral)};
                 var swapColors = function(el) {
-                  el.innerHTML = el.innerHTML.replace(/(--ui-color-([\\w-]+?)-\\d{2,3}:\\s*var\\(--color-)[\\w-]+?(-\\d{2,3}[,)])/g, function(match, head, alias, tail) {
-                    return saved[alias] ? head + (saved[alias] === 'neutral' ? 'old-neutral' : saved[alias]) + tail : match;
+                  el.innerHTML = el.innerHTML.replace(/(--ui-color-([\\w-]+?)-(\\d{2,3}):\\s*)(?:var\\(--color-[\\w-]+?-\\d{2,3}(,[^;]*)?\\)|([^;]+))/g, function(match, head, alias, shade, fallback, literal) {
+                    if (!saved[alias]) { return match; }
+                    if (saved[alias] === 'neutral') { return NEUTRAL[shade] ? head + NEUTRAL[shade] : match; }
+                    return head + 'var(--color-' + saved[alias] + '-' + shade + (fallback || (literal ? ', ' + literal : '')) + ')';
                   });
                 };
                 var colorsEl = document.querySelector('style#nuxt-ui-colors');

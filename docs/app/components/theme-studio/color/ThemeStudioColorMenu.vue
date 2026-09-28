@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ColorAlias } from '../../../utils/theme/engine'
-import { paletteLabel, rampCssName } from '../../../utils/theme/studio'
+import { paletteLabel, paletteShade } from '../../../utils/theme/studio'
 
 /**
  * The shared color picker: a swatch-labelled trigger opening the palette
@@ -28,7 +28,7 @@ const label = computed(() => isCustomPalette(props.alias) ? 'Custom' : paletteLa
 
 const swatchColor = computed(() => {
   if (isCustomPalette(props.alias)) return `var(--color-custom-${props.alias}-500)`
-  return `var(--color-${rampCssName(value.value)}-500)`
+  return paletteShade(value.value, 500)
 })
 
 function isSelected(color: string) {
@@ -84,7 +84,7 @@ function isSelected(color: string) {
           <span
             class="inline-block h-2 w-3 shrink-0 rounded-full"
             :style="{
-              background: `linear-gradient(to right, var(--color-${rampCssName(color)}-400), var(--color-${rampCssName(color)}-500), var(--color-${rampCssName(color)}-600))`
+              background: `linear-gradient(to right, ${paletteShade(color, 400)}, ${paletteShade(color, 500)}, ${paletteShade(color, 600)})`
             }"
           />
         </template>
