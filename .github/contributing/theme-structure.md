@@ -141,7 +141,7 @@ Always use semantic colors, never Tailwind palette colors:
 - `outline-focus` - Focus outline of a component without a `color` prop
 
 ### Accent Tokens
-The `color` prop accepts `primary`, `secondary`, `success`, `info`, `warning`, `error` and `neutral`. Colored classes read the scoped color through `accent` roles, never through an alias name. An opacity modifier on `accent` (`bg-accent/20`, `border-accent/50`) is only for a state no color tunes and whose neutral look follows the color too; a state that needs its own neutral look gets a role:
+The `color` prop accepts `primary`, `secondary`, `success`, `info`, `warning`, `error` and `neutral`. Colored classes read the scoped color through `accent` roles, never through an alias name and never with an opacity modifier, so every color and the neutral scope can tune each state:
 - `bg-accent` - The color itself
 - `text-accent-foreground` - Text on a solid accent background
 - `bg-accent-hover` - Hover of a solid background
