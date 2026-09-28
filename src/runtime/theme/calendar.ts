@@ -110,7 +110,7 @@ export default defineTheme({
       color: colors.filter(color => color !== 'neutral'),
       variant: 'solid',
       class: {
-        cellTrigger: 'data-selected:bg-accent data-selected:text-accent-foreground data-today:not-data-selected:text-accent data-highlighted:bg-accent/20 hover:not-data-selected:bg-accent/20'
+        cellTrigger: 'data-selected:bg-accent data-selected:text-accent-foreground data-today:not-data-selected:text-accent data-highlighted:bg-accent-soft-hover hover:not-data-selected:bg-accent-soft-hover'
       }
     },
     {
@@ -124,14 +124,14 @@ export default defineTheme({
       color: colors.filter(color => color !== 'neutral'),
       variant: 'soft',
       class: {
-        cellTrigger: 'data-selected:bg-accent-soft data-selected:text-accent-soft-foreground data-today:not-data-selected:text-accent data-highlighted:bg-accent/20 hover:not-data-selected:bg-accent/20'
+        cellTrigger: 'data-selected:bg-accent-soft data-selected:text-accent-soft-foreground data-today:not-data-selected:text-accent data-highlighted:bg-accent-soft-hover hover:not-data-selected:bg-accent-soft-hover'
       }
     },
     {
       color: colors.filter(color => color !== 'neutral'),
       variant: 'subtle',
       class: {
-        cellTrigger: 'data-selected:bg-accent-soft data-selected:text-accent-soft-foreground data-selected:ring data-selected:ring-inset data-selected:ring-accent-border-soft data-selected:focus-visible:ring-accent data-today:not-data-selected:text-accent data-highlighted:bg-accent/20 hover:not-data-selected:bg-accent/20'
+        cellTrigger: 'data-selected:bg-accent-soft data-selected:text-accent-soft-foreground data-selected:ring data-selected:ring-inset data-selected:ring-accent-border-soft data-selected:focus-visible:ring-accent data-today:not-data-selected:text-accent data-highlighted:bg-accent-soft-hover hover:not-data-selected:bg-accent-soft-hover'
       }
     },
     {
