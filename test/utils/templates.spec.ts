@@ -98,7 +98,7 @@ describe('theme templates', () => {
 
     expect(css).toMatch(/^@layer base \{\n {2}\.tw\\:\\\[--ui-accent\\:var\\\(--ui-primary\\\)\\\] \{/)
     expect(css).toContain('.tw\\:\\[--ui-accent\\:var\\(--ui-warning\\)\\] {\n    --ui-accent-foreground: var(--ui-warning-foreground);')
-    expect(css).toContain('.tw\\:\\[--ui-accent\\:var\\(--ui-neutral\\)\\] {\n    --ui-neutral: var(--ui-bg-inverted);')
+    expect(css).toContain('.tw\\:\\[--ui-accent\\:var\\(--ui-neutral\\)\\] {\n    --ui-accent-foreground: var(--ui-neutral-foreground);')
     expect(css).not.toContain('  .\\[--ui-accent')
     expect(css).not.toContain(':where(')
   })
