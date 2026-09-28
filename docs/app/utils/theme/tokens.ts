@@ -1,5 +1,5 @@
 // The semantic token defaults the docs render on, the library's own
-// (src/runtime/css/index.css) minus the --ui-<alias> tokens the colors plugin
+// (src/runtime/css/base.css) minus the --ui-<alias> tokens the colors plugin
 // generates. Restated whole into the .light/.dark blocks whenever a mode
 // carries an override, so every entry must match the library or the page
 // would silently diverge from the export, which diffs against the engine's
