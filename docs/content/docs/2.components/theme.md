@@ -150,7 +150,7 @@ A value you add this way works at runtime, but it isn't part of the component's 
 
 ### Icons :badge{label="Soon" class="align-text-top"}
 
-Use the `icons` prop to change the icons descendant components use, merged over `app.config.ui.icons`.
+Use the `icons` prop to change the icons descendant components use, merged over `app.config.ui.icons`. The icons of ContentSearch's results are the exception: its search index is shared by the whole app, so they always come from `app.config.ui.icons`.
 
 ::component-example
 ---
