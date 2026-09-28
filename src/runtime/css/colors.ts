@@ -1,6 +1,6 @@
 import plugin from 'tailwindcss/plugin'
-import { colors } from './theme/color'
-import type { Color } from './theme/color'
+import { colors } from '../theme/color'
+import type { Color } from '../theme/color'
 
 const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
 
