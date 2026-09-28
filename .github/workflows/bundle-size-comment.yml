@@ -18,6 +18,10 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node: [24]
+
     steps:
       - name: Resolve report artifact
         id: artifact
@@ -117,7 +121,7 @@ jobs:
         if: steps.pull.outputs.should-comment == 'true'
         uses: actions/setup-node@v7
         with:
-          node-version: 24.21.0
+          node-version: ${{ matrix.node }}
 
       - name: Render report
         if: steps.pull.outputs.should-comment == 'true'
