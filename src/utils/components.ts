@@ -13,16 +13,17 @@ import { resolvePathSync } from 'mlly'
  * - UButton in script (imports, usage)
  * - <LazyUButton / <lazy-u-button (lazy components)
  * - LazyUButton in script
+ * - 'u-button' as a whole string, like `resolveComponent('u-button')`
  *
- * The kebab form only matches as a tag: bare kebab identifiers in scripts and
- * prose would match far too much ordinary text.
+ * The kebab form only matches as a tag or a whole string: bare kebab
+ * identifiers in scripts and prose would match far too much ordinary text.
  */
 function createComponentPattern(prefix: string): RegExp {
   // The prefix is user-configured, so it can carry regex metacharacters.
   const escapedPrefix = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
   const kebabPrefix = kebabCase(prefix).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
-  return new RegExp(`<(?:Lazy)?${escapedPrefix}([A-Z][a-zA-Z]+)|<(?:lazy-)?${kebabPrefix}-([a-z][a-z0-9-]*)|\\b(?:Lazy)?${escapedPrefix}([A-Z][a-zA-Z]+)\\b`, 'g')
+  return new RegExp(`<(?:Lazy)?${escapedPrefix}([A-Z][a-zA-Z]+)|(?:<|['"\`])(?:lazy-)?${kebabPrefix}-([a-z][a-z0-9-]*)(?=[\\s/>'"\`])|\\b(?:Lazy)?${escapedPrefix}([A-Z][a-zA-Z]+)\\b`, 'g')
 }
 
 /**
@@ -42,6 +43,13 @@ function createMdcPattern(prefix: string): RegExp {
  * `#ui/components/prose/Callout.vue` in Nuxt.
  */
 const IMPORT_PATTERN = /(?:@nuxt\/ui|#ui)\/(?:runtime\/)?components\/(prose\/)?(?:content\/)?([A-Z]\w+)\.vue/g
+
+/**
+ * Pattern to match a theme imported to style a component of the app's own:
+ * `import theme from '#build/ui/button'`, `#ui/theme/button` or
+ * `@nuxt/ui/runtime/theme/button`.
+ */
+const THEME_IMPORT_PATTERN = /(?:#build\/ui|(?:@nuxt\/ui|#ui)\/(?:runtime\/)?theme)\/(prose\/)?(?:content\/)?([a-z][a-z0-9-]*)(?![\w-])/g
 
 /**
  * The component name a pattern match refers to, normalised to prefix-less
@@ -209,6 +217,9 @@ export async function detectUsedComponents(
     }
     for (const match of content.matchAll(IMPORT_PATTERN)) {
       detectedComponents.add(match[1] ? `Prose${match[2]}` : match[2]!)
+    }
+    for (const match of content.matchAll(THEME_IMPORT_PATTERN)) {
+      detectedComponents.add(`${match[1] ? 'Prose' : ''}${pascalCase(match[2]!)}`)
     }
     if (file.endsWith('.md')) {
       for (const match of content.matchAll(mdcPattern)) {

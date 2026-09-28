@@ -1,11 +1,13 @@
 import { defu } from 'defu'
-import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addBuildPlugin, hasNuxtModule } from '@nuxt/kit'
+import { relative } from 'pathe'
+import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addBuildPlugin, hasNuxtModule, logger, resolvePath } from '@nuxt/kit'
 import { createUnplugin } from 'unplugin'
 import type { HookResult, ModuleDependencies } from '@nuxt/schema'
 import { addTemplates } from './templates'
 import { publicComposables } from './imports'
 import { defaultOptions, getDefaultConfig } from './utils/defaults'
 import { getClientBundleIcons } from './utils/icons'
+import { findTailwindPrefix } from './utils/tailwind'
 import OptionalDepsPlugin from './plugins/optional-deps'
 import { name, version } from '../package.json'
 
@@ -166,6 +168,17 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.ui = options
 
     nuxt.options.alias['#ui'] = resolve('./runtime')
+
+    // Read the prefix off the app's `@import "tailwindcss" prefix(...)`, so it's set in one place
+    const stylesheets = await Promise.all(nuxt.options.css.filter(entry => typeof entry === 'string').map(entry => resolvePath(entry)))
+    const tailwind = await findTailwindPrefix(stylesheets)
+    if (tailwind) {
+      if (!options.tailwindPrefix) {
+        options.tailwindPrefix = tailwind.prefix ?? undefined
+      } else if (options.tailwindPrefix !== tailwind.prefix) {
+        logger.warn(`Nuxt UI \`tailwindPrefix\` is \`${options.tailwindPrefix}\` but \`${relative(nuxt.options.rootDir, tailwind.path)}\` imports Tailwind CSS ${tailwind.prefix ? `with \`prefix(${tailwind.prefix})\`` : 'without a prefix'}: components will render classes Tailwind CSS doesn't generate`)
+      }
+    }
 
     nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, getDefaultConfig(options.tailwindPrefix)) as typeof nuxt.options.appConfig.ui
 

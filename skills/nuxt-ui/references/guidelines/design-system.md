@@ -282,7 +282,7 @@ export default defineNuxtConfig({
 })
 ```
 
-Set `componentDetection: false` to generate the CSS of every component.
+Set `componentDetection: false` to generate the CSS of every component. In development, a component detection missed logs a browser console warning with the name to add.
 
 ## CSS `@theme` customization
 

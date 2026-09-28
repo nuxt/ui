@@ -202,15 +202,13 @@ const isPlainObject = (value: any): value is Record<string, any> => typeof value
 
 /**
  * One step of a spec. Steps resolve in order, last class winning:
- * 1. the theme's slot classes and its variants
+ * 1. the theme: its slot classes, variants and compound variants
  * 2. each level of overrides, farthest first (`app.config.ui.<c>`, then each
- *    `<UTheme>` down to the component): its variants, then its slot classes,
- *    so the nearest level wins, and a level's slot classes win over every
- *    variant below them the way `:ui` does
- * 3. the theme's compound variants, then each level's, farthest first. A
- *    compound is the exception for a combination (`square` and `size` to
- *    `p-1.5`), and tuning a variant or a slot doesn't mean to cancel it, so
- *    compounds stay above both.
+ *    `<UTheme>` down to the component): its variants, its slot classes, then
+ *    its compound variants
+ *
+ * So a class a level sets wins over the whole theme, whatever form the theme
+ * rule takes, and the nearest level wins over the ones further out.
  */
 interface Layer {
   /** Per slot. */
@@ -300,22 +298,16 @@ function resolveSpec(theme: Record<string, any>, levels: readonly Record<string,
     }
   })
 
-  const layers: Layer[] = [{ statics: themeStatics, variants: theme.variants }]
+  const layers: Layer[] = [{ statics: themeStatics, variants: theme.variants, compoundVariants: flatten(theme.compoundVariants) }]
   levels.forEach((level, index) => {
     if (!isEmpty(level.variants)) {
       layers.push({ variants: snapshot(level.variants) })
     }
-    if (!isEmpty(levelStatics[index])) {
-      layers.push({ statics: levelStatics[index] })
+    const compoundVariants = flatten(level.compoundVariants)
+    if (!isEmpty(levelStatics[index]) || compoundVariants.length) {
+      layers.push({ statics: levelStatics[index], compoundVariants: snapshot(compoundVariants) })
     }
   })
-  layers.push({ compoundVariants: flatten(theme.compoundVariants) })
-  for (const level of levels) {
-    const compoundVariants = flatten(level.compoundVariants)
-    if (compoundVariants.length) {
-      layers.push({ compoundVariants: snapshot(compoundVariants) })
-    }
-  }
 
   const defaultVariants = { ...theme.defaultVariants }
   for (const level of levels) {

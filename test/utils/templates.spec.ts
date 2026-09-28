@@ -9,7 +9,7 @@ import { colors } from '../../src/runtime/theme/color'
 const resolve = (...paths: string[]) => join(process.cwd(), 'src', ...paths)
 const themeDir = resolve('./runtime/theme')
 
-function themeContents(overrides: Record<string, any>, vue?: { detectedComponents?: Set<string> }) {
+function themeContents(overrides: Record<string, any>, vue?: { detectedComponents?: Set<string>, dev?: boolean }) {
   const options = { ...defaultOptions, ...overrides }
   const templates = getTemplates(options as any, getDefaultConfig(options.tailwindPrefix), undefined, resolve, vue)
   return (filename: string) => templates.find(template => template.filename === filename)!.getContents!({} as any)
@@ -46,21 +46,42 @@ describe('theme templates', () => {
     expect(classes).not.toContain('animate-pulse')
   })
 
+  it('lists the detected themes in dev for the runtime warning', async () => {
+    const contents = await themeContents({ componentDetection: true }, { detectedComponents: new Set(['Button', 'InputMenu']), dev: true })('ui/detected.ts')
+
+    expect(contents).toContain('new Set<string>(["button","inputMenu"])')
+    expect(contents).toContain('import.meta.hot.accept(')
+  })
+
+  it('lists every theme in dev when nothing is detected', async () => {
+    const contents = await themeContents({ componentDetection: true }, { dev: true })('ui/detected.ts')
+
+    expect(contents).toContain('"button"')
+    expect(contents).toContain('"dashboardSidebar"')
+  })
+
+  it('leaves the detected themes out of the build and without detection', async () => {
+    const detectedComponents = new Set(['Button'])
+
+    expect(await themeContents({ componentDetection: true }, { detectedComponents })('ui/detected.ts')).toBe('export default null as Set<string> | null\n')
+    expect(await themeContents({ componentDetection: false }, { detectedComponents, dev: true })('ui/detected.ts')).toBe('export default null as Set<string> | null\n')
+  })
+
   it('generates only the sources', async () => {
     const contents = themeContents({ tailwindPrefix: 'tw' })
 
     expect(await contents('ui.css')).not.toContain('@layer')
-    expect(await contents('ui.css')).not.toContain('[class~=')
+    expect(await contents('ui.css')).not.toContain('--ui-accent-')
     expect(await themeContents({})('ui.base.css')).toBe('')
   })
 
   it('repeats the color scopes for the prefixed class in the base layer', async () => {
     const css = await themeContents({ tailwindPrefix: 'tw' })('ui.base.css')
 
-    expect(css).toMatch(/^@layer base \{\n {2}\[class~="tw:\[--ui-accent:var\(--ui-primary\)\]"\] \{/)
-    expect(css).toContain('[class~="tw:[--ui-accent:var(--ui-warning)]"] {\n    --ui-accent-foreground: var(--ui-warning-foreground);')
-    expect(css).toContain('[class~="tw:[--ui-accent:var(--ui-neutral)]"] {\n    --ui-neutral: var(--ui-bg-inverted);')
-    expect(css).not.toContain('[class~="[--ui-accent:')
+    expect(css).toMatch(/^@layer base \{\n {2}\.tw\\:\\\[--ui-accent\\:var\\\(--ui-primary\\\)\\\] \{/)
+    expect(css).toContain('.tw\\:\\[--ui-accent\\:var\\(--ui-warning\\)\\] {\n    --ui-accent-foreground: var(--ui-warning-foreground);')
+    expect(css).toContain('.tw\\:\\[--ui-accent\\:var\\(--ui-neutral\\)\\] {\n    --ui-neutral: var(--ui-bg-inverted);')
+    expect(css).not.toContain('  .\\[--ui-accent')
     expect(css).not.toContain(':where(')
   })
 
@@ -103,7 +124,7 @@ describe('static css', () => {
   it.each(colors)('bridges and scopes %s', (color) => {
     expect(tokens).toContain(`--color-${color}: var(--ui-${color});`)
     expect(tokens).toContain(`--color-${color}-500: var(--ui-color-${color}-500);`)
-    expect(accent).toContain(`[class~="[--ui-accent:var(--ui-${color})]"] {`)
+    expect(accent).toContain(`.\\[--ui-accent\\:var\\(--ui-${color}\\)\\] {`)
     expect(accent).toContain(`--ui-accent-foreground: var(--ui-${color}-foreground`)
   })
 })
