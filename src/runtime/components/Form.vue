@@ -260,7 +260,7 @@ async function _validate<T extends boolean>(opts: ValidateOpts<boolean, boolean>
     let output = transformedState.value
     nestedResults.forEach((result) => {
       if (result.name) {
-        setAtPath(output, result.name, result.output)
+        setAtPath(transformedState.value, result.name, result.output)
       } else {
         // A parent without a schema has no output yet, merge into a copy of the state
         output = Object.assign(output ?? { ...toRaw(state.value) }, result.output)
