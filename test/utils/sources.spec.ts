@@ -1,4 +1,4 @@
-import { cpSync, mkdirSync, mkdtempSync, readdirSync, realpathSync, rmSync, symlinkSync, writeFileSync } from 'node:fs'
+import { cpSync, mkdirSync, mkdtempSync, realpathSync, rmSync, symlinkSync, writeFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
 import { tmpdir } from 'node:os'
 import { pathToFileURL } from 'node:url'
@@ -19,13 +19,10 @@ const app = realpathSync(mkdtempSync(join(tmpdir(), 'nuxt-ui-sources-')))
 const dist = join(app, 'node_modules/@nuxt/ui/dist')
 
 mkdirSync(join(dist, 'runtime/components'), { recursive: true })
-for (const file of readdirSync(runtime).filter(file => file.endsWith('.css'))) {
-  cpSync(join(runtime, file), join(dist, 'runtime', file))
-}
+cpSync(join(runtime, 'css'), join(dist, 'runtime/css'), { recursive: true })
 cpSync(join(runtime, 'theme'), join(dist, 'runtime/theme'), { recursive: true })
-cpSync(join(runtime, 'colors.ts'), join(dist, 'runtime/colors.ts'))
 // The `./colors` export, pointing at the source the test copies
-writeFileSync(join(dist, '../package.json'), JSON.stringify({ name: '@nuxt/ui', type: 'module', exports: { './colors': './dist/runtime/colors.ts' } }))
+writeFileSync(join(dist, '../package.json'), JSON.stringify({ name: '@nuxt/ui', type: 'module', exports: { './colors': './dist/runtime/css/colors.ts' } }))
 symlinkSync(join(process.cwd(), 'node_modules/tailwindcss'), join(app, 'node_modules/tailwindcss'))
 
 afterAll(() => rmSync(app, { recursive: true, force: true }))
@@ -40,7 +37,7 @@ async function build(overrides: Record<string, any>, vue?: { detectedComponents?
   const { compile } = await load('@tailwindcss/node')
   const { Scanner } = await load('@tailwindcss/oxide')
   const tailwind = overrides.tailwindPrefix ? `@import "tailwindcss" prefix(${overrides.tailwindPrefix});` : '@import "tailwindcss";'
-  const compiler = await compile(`${tailwind}\n${before}\n@import "${join(dist, 'runtime/index.css')}";\n${css}`, {
+  const compiler = await compile(`${tailwind}\n${before}\n@import "${join(dist, 'runtime/css/index.css')}";\n${css}`, {
     base: app,
     onDependency: () => {},
     customCssResolver: async (id: string) => id.startsWith('#build/') ? join(app, id.slice('#build/'.length)) : undefined

@@ -104,8 +104,8 @@ describe('theme templates', () => {
 // The tokens and color scopes are static CSS now, so they're checked against
 // the color set the themes scope with.
 describe('static css', () => {
-  const tokens = readFileSync(resolve('./runtime/tokens.css'), 'utf8')
-  const accent = readFileSync(resolve('./runtime/accent.css'), 'utf8')
+  const tokens = readFileSync(resolve('./runtime/css/tokens.css'), 'utf8')
+  const accent = readFileSync(resolve('./runtime/css/accent.css'), 'utf8')
 
   // `#build/ui.base.css` adds the prefixed scopes after `accent.css`, so the
   // reset, which also matches a prefixed scope class, must not outrank them
@@ -115,7 +115,7 @@ describe('static css', () => {
 
   // The fallbacks hold Tailwind's palette for a prefixed app, so they follow its version
   it.each(Object.entries({ primary: 'green', secondary: 'blue', success: 'green', info: 'blue', warning: 'yellow', error: 'red', neutral: 'slate' }))('defaults %s to %s', (alias, palette) => {
-    const base = readFileSync(resolve('./runtime/base.css'), 'utf8')
+    const base = readFileSync(resolve('./runtime/css/base.css'), 'utf8')
     for (const [shade, value] of Object.entries((tailwindColors as any)[palette])) {
       expect(base).toContain(`--ui-color-${alias}-${shade}: var(--color-${palette}-${shade}, ${value});`)
     }

@@ -21,8 +21,8 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   let hasContent = false
   let previousDetectedComponents: Set<string> | undefined
 
-  // The package's themes. Tailwind scans them from `@source './theme'` in
-  // `index.css`, and `#build/ui/*` re-exports them for app code.
+  // The package's themes. Tailwind scans them from `@source '../theme'` in
+  // `css/package-sources.css`, and `#build/ui/*` re-exports them for app code.
   const themeDir = resolve('./runtime/theme')
 
   function writeThemeTemplate(theme: Record<string, any>, path?: string) {
@@ -239,7 +239,7 @@ if (import.meta.hot) {
         return ''
       }
 
-      const accent = await readFile(resolve('./runtime/accent.css'), 'utf8')
+      const accent = await readFile(resolve('./runtime/css/accent.css'), 'utf8')
       const scopes = accent.match(/\.\\\[--ui-accent\\:var\\\(--ui-[a-z]+\\\)\\\]\s*\{[^}]*\}/g) ?? []
       // One rule per color: fewer means the shipped CSS no longer looks the way this reads it
       if (scopes.length < colors.length) {
