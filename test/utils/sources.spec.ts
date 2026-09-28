@@ -61,12 +61,13 @@ describe('package sources', () => {
 })
 
 describe('colors plugin', () => {
+  const escape = (selector: string) => selector.replace(/[\\^$.*+?()[\]{}|]/g, '\\$&')
   // The rule with that selector that sets the alias shades, not Tailwind's own `:root` tokens
-  const rule = (css: string, selector: string) => [...css.matchAll(new RegExp(`${selector.replace(/[()]/g, '\\$&')} \\{([^}]*)\\}`, 'g'))]
+  const rule = (css: string, selector: string) => [...css.matchAll(new RegExp(`${escape(selector)} \\{([^}]*)\\}`, 'g'))]
     .map(match => match[1]!)
     .find(body => /^\s*--ui-color-/m.test(body)) ?? ''
   // The plugin's own alias rule, told apart from the defaults by the value it sets
-  const aliasRule = (css: string, selector: string, declaration: string) => [...css.matchAll(new RegExp(`${selector.replace(/[().]/g, '\\$&')} \\{([^}]*)\\}`, 'g'))]
+  const aliasRule = (css: string, selector: string, declaration: string) => [...css.matchAll(new RegExp(`${escape(selector)} \\{([^}]*)\\}`, 'g'))]
     .map(match => match[1]!)
     .find(body => body.includes(declaration)) ?? ''
 
