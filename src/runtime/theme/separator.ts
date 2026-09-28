@@ -4,14 +4,15 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'flex items-center align-center text-center',
-    border: 'border-accent-line',
+    border: 'border-accent',
     container: 'font-medium text-default flex',
     icon: 'shrink-0 size-5',
     avatar: 'shrink-0',
     label: 'text-sm'
   },
   variants: {
-    color: colorVariant({ root: '' }),
+    // Neutral draws its line with the border token rather than the neutral color
+    color: { ...colorVariant({ root: '' }), neutral: { root: '[--ui-accent:var(--ui-neutral)]', border: 'border-default' } },
     orientation: {
       horizontal: {
         root: 'w-full flex-row',

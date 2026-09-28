@@ -47,8 +47,8 @@ describe('theme templates', () => {
     const css = await themeContents({ theme: { prefix: 'tw' } })('ui.css')
 
     expect(css).toContain('[class*="[--ui-accent:"]')
-    expect(css).toContain('[class~="tw:[--ui-accent:var(--ui-warning)]"] {\n    --ui-accent-foreground: var(--ui-warning-foreground);')
-    expect(css).toContain('[class~="tw:[--ui-accent:var(--ui-neutral)]"] {\n    --ui-neutral: var(--ui-bg-inverted);')
+    expect(css).toContain('.tw\\:\\[--ui-accent\\:var\\(--ui-warning\\)\\] {\n    --ui-accent-foreground: var(--ui-warning-foreground);')
+    expect(css).toContain('.tw\\:\\[--ui-accent\\:var\\(--ui-neutral\\)\\] {\n    --ui-neutral: var(--ui-bg-inverted);')
   })
 
   it('lists the prefixed classes inline with the prefix', async () => {
