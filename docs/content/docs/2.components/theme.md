@@ -29,7 +29,7 @@ For app-level theme configuration, we recommend using the `vite.config.ts` file 
 
 ### Slot classes
 
-Use the `ui` prop to override slot classes of descendant components. Keys are component names (camelCase) and values are their slot class overrides. They apply like the slot classes of your app config, on top of it: they win over the component's variants, while its `compoundVariants` still apply on top, like a `square` button keeping its own padding.
+Use the `ui` prop to override slot classes of descendant components. Keys are component names (camelCase) and values are their slot class overrides. They apply like the slot classes of your app config, on top of it and of the whole theme, compound variants included.
 
 ::component-example
 ---
@@ -53,7 +53,7 @@ Explicit props on a component (e.g. `<UButton color="primary" />`) always win ov
 
 ### Default variants :badge{label="Soon" class="align-text-top"}
 
-Use the `'*'` key of `props` to change the default `color` and `size` of every descendant component. It only replaces the library defaults, `primary` and `md`, so a component with its own default keeps it: Avatar stays `neutral` and Separator stays `xs`. A component's own key takes priority over `'*'`, even from a Theme further out: buttons inside `<UTheme :props="{ '*': { size: 'xs' } }">` stay `xl` when an outer Theme sets `{ button: { size: 'xl' } }`.
+Use the `'*'` key of `props` to change the default `color` and `size` of every descendant component. It only replaces the library defaults, `primary` and `md`, so a component with its own default keeps it: Avatar, AvatarGroup, ChatMessage, Kbd, Separator and the prose Callout and Code stay `neutral`, Separator stays `xs`, and the items of DropdownMenu and ContextMenu stay uncolored. A default you give a component in `app.config.ui.<name>.defaultVariants` counts as its own too. A component's own key takes priority over `'*'`, even from a Theme further out: buttons inside `<UTheme :props="{ '*': { size: 'xs' } }">` stay `xl` when an outer Theme sets `{ button: { size: 'xl' } }`.
 
 ::component-example
 ---
