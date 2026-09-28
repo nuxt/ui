@@ -1,4 +1,5 @@
 import plugin from 'tailwindcss/plugin'
+import tailwindColors from 'tailwindcss/colors'
 import { colors } from '../theme/color'
 import type { Color } from '../theme/color'
 
@@ -51,10 +52,9 @@ const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugi
       throw new Error(`[@nuxt/ui] \`${alias}: ${palette}\` points a color alias at another. Give it a Tailwind palette, like \`indigo\`.`)
     }
     // Nuxt UI's `neutral` alias takes over `--color-neutral-*`, so Tailwind's
-    // own neutral palette lives on as `old-neutral`
-    const name = palette === 'neutral' ? 'old-neutral' : palette
+    // own neutral palette is read from its package
     for (const shade of shades) {
-      const value = theme(`colors.${name}.${shade}`)
+      const value = palette === 'neutral' ? tailwindColors.neutral[shade] : theme(`colors.${palette}.${shade}`)
       if (typeof value !== 'string') {
         throw new TypeError(`[@nuxt/ui] \`${alias}: ${palette}\` needs the name of a Tailwind palette with shades from 50 to 950, like \`indigo\`, or of one you declare in \`@theme\` as \`--color-<name>-50\` to \`-950\`.`)
       }
