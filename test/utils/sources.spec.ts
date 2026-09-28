@@ -140,6 +140,7 @@ describe('colors plugin', () => {
   it('rejects an alias outside the set, a missing palette, another alias and a wrong shade', async () => {
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { tertiary: indigo; }')).rejects.toThrow('`tertiary` isn\'t a color alias')
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: brand; }')).rejects.toThrow('`primary: brand` needs the name of a Tailwind palette')
+    await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { neutral: zinx; }')).rejects.toThrow('Did you mean `zinc`?')
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: primary; }')).rejects.toThrow('`primary: primary` points a color alias at another')
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: indigo 550; }')).rejects.toThrow('`primary: indigo 550` takes a palette and up to two shades')
   })
