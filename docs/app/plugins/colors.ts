@@ -17,8 +17,10 @@ function getColor(color: keyof typeof colors, shade: typeof shades[number]): str
   return ''
 }
 
+// Tailwind's own `neutral` goes in as its values, the module's neutral alias
+// having taken its `--color-neutral-*` names
 function generateShades(key: string, value: string) {
-  return `${shades.map(shade => `--ui-color-${key}-${shade}: var(--color-${value === 'neutral' ? 'old-neutral' : value}-${shade}, ${getColor(value as keyof typeof colors, shade)});`).join('\n  ')}`
+  return `${shades.map(shade => `--ui-color-${key}-${shade}: ${value === 'neutral' ? getColor(value, shade) : `var(--color-${value}-${shade}, ${getColor(value as keyof typeof colors, shade)})`};`).join('\n  ')}`
 }
 
 function removeTemporaryColorsStyle() {

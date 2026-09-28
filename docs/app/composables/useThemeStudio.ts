@@ -1,6 +1,6 @@
 import type { MaybeRefOrGetter } from 'vue'
 import colors from 'tailwindcss/colors'
-import { NEUTRAL_COLORS, rampCssName, THEME_STUDIO_VIEWS } from '../utils/theme/studio'
+import { NEUTRAL_COLORS, THEME_STUDIO_VIEWS } from '../utils/theme/studio'
 // Leaf modules, never the barrel: the barrel re-exports serialize (and json5
 // with it), and this composable is reached from the header preset picker on
 // every docs page, which would put the exporter in the entry chunk.
@@ -125,7 +125,7 @@ export function useThemeStudio() {
     if (import.meta.client) {
       const styles = getComputedStyle(document.documentElement)
       const entries = SHADES
-        .map(shade => [shade, parseCssColor(styles.getPropertyValue(`--color-${rampCssName(name)}-${shade}`))] as const)
+        .map(shade => [shade, parseCssColor(styles.getPropertyValue(`--color-${name}-${shade}`))] as const)
         .filter(([, color]) => color)
       if (entries.length >= 2) {
         return Object.fromEntries(entries)
@@ -380,13 +380,13 @@ export function useThemeStudio() {
   }
 
   /** Palette-name chips coloring shade-slider swatches, each alias's current ramp. */
-  const neutralChip = computed(() => rampCssName(theme.neutral.value))
+  const neutralChip = computed(() => theme.neutral.value)
   const primaryChip = computed(() => isCustomPalette('primary') ? customPaletteName('primary') : theme.primary.value)
 
   function rampChip(ramp: TokenRamp): string {
     if (ramp === 'primary') return primaryChip.value
     if (ramp === 'neutral') return neutralChip.value
-    return rampCssName((appConfig.colors as Record<string, string>)[ramp] || ramp)
+    return (appConfig.colors as Record<string, string>)[ramp] || ramp
   }
 
   /* ------------------------------------------------------------ preview -- */

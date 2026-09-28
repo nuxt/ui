@@ -1,6 +1,6 @@
 import { upperFirst } from 'scule'
 import { DEFAULT_PRESET_ID, GROUP_STOCK_VARIANT } from '../utils/theme/engine/types'
-import { paletteLabel, rampCssName } from '../utils/theme/studio'
+import { paletteLabel, paletteShade } from '../utils/theme/studio'
 
 /**
  * What the toolbar reports and what its reset does. The persisted theme is
@@ -26,10 +26,10 @@ export function useThemeStudioToolbar() {
    */
   const colorChips = computed(() => (mounted.value
     ? [{
-        dot: `var(--color-${rampCssName(primaryChip.value)}-500)`,
+        dot: paletteShade(primaryChip.value, 500),
         label: paletteName('primary', primary.value)
       }, {
-        dot: `var(--color-${neutralChip.value}-500)`,
+        dot: paletteShade(neutralChip.value, 500),
         label: paletteName('neutral', neutral.value)
       }]
     : [{ dot: 'var(--color-green-500)', label: 'Green' }, { dot: 'var(--color-slate-500)', label: 'Slate' }]))
