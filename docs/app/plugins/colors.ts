@@ -5,8 +5,8 @@ import { defineNuxtPlugin, injectHead, useAppConfig, useNuxtApp, useHead } from 
 
 /**
  * The palettes the theme picker and studio switch at runtime, from the docs'
- * own `appConfig.colors`. The library's defaults sit in `@layer theme` at zero
- * specificity, so these win from `@layer base` on `:root`.
+ * own `appConfig.colors`. The library's defaults sit in `@layer base` at zero
+ * specificity, so these win from the same layer on `:root`.
  */
 const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
 

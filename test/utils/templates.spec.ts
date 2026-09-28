@@ -86,6 +86,16 @@ describe('static css', () => {
   const tokens = readFileSync(resolve('./runtime/css/tokens.css'), 'utf8')
   const accent = readFileSync(resolve('./runtime/css/accent.css'), 'utf8')
 
+  // `@nuxt/icon` inserts `@layer base` styles before the app's stylesheet, which
+  // declares `base` below `theme`: a default palette in `theme` would then beat
+  // the `@nuxt/ui/colors` output, which lands in `base`
+  it('keeps the default palettes in the base layer', () => {
+    const base = readFileSync(resolve('./runtime/css/base.css'), 'utf8')
+    const before = base.slice(0, base.indexOf('--ui-color-primary-500:'))
+
+    expect(before.lastIndexOf('@layer base {')).toBeGreaterThan(before.lastIndexOf('@layer theme {'))
+  })
+
   // `#build/ui.base.css` adds the prefixed scopes after `accent.css`, so the
   // reset, which also matches a prefixed scope class, must not outrank them
   it('resets the accent roles at zero specificity', () => {
