@@ -63,7 +63,7 @@ describe('useLocale', () => {
     }))
     teardowns.push(() => wrapper.unmount())
 
-    const icon = (control: string) => wrapper.findAllComponents(UButton).find(b => b.attributes('data-slot') === control)?.props('icon')
+    const icon = (control: string) => wrapper.findAllComponents(UButton).find(b => b.attributes('data-slot') === `pagination-${control}`)?.props('icon')
 
     expect(icon('first')).toBe('i-lucide-chevrons-right')
     expect(icon('prev')).toBe('i-lucide-chevron-right')
