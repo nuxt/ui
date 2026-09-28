@@ -216,6 +216,7 @@ export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, ramp: To
   { token: '--ui-text-default', label: 'Default', ramp: 'neutral', group: 'text', defaults: { light: 700, dark: 200 } },
   { token: '--ui-text-highlighted', label: 'Highlighted', ramp: 'neutral', group: 'text', defaults: { light: 900, dark: 'white' } },
   { token: '--ui-text-inverted', label: 'Inverted', ramp: 'neutral', group: 'text', defaults: { light: 'white', dark: 900 } },
+  // dark rests on the library's translucent border, which reads as 800 on the page
   { token: '--ui-border-default', label: 'Default', ramp: 'neutral', group: 'border', defaults: { light: 200, dark: 800 } },
   { token: '--ui-border-strong', label: 'Strong', ramp: 'neutral', group: 'border', defaults: { light: 300, dark: 700 } },
   { token: '--ui-border-inverted', label: 'Inverted', ramp: 'neutral', group: 'border', defaults: { light: 900, dark: 'white' } }
@@ -422,7 +423,7 @@ export const LIBRARY_TOKEN_DEFAULTS = {
     '--ui-bg-soft': 'var(--ui-color-neutral-800)',
     '--ui-bg-soft-hover': 'var(--ui-color-neutral-700)',
     '--ui-bg-inverted': 'white',
-    '--ui-border-default': 'var(--ui-color-neutral-800)',
+    '--ui-border-default': 'color-mix(in oklab, var(--ui-color-neutral-50) 10%, transparent)',
     '--ui-border-strong': 'var(--ui-color-neutral-700)',
     '--ui-border-inverted': 'white'
   }
