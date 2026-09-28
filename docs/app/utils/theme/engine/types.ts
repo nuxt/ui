@@ -381,7 +381,7 @@ export function isDefaultStyle(style: StyleOptions = {}): boolean {
 /* ------------------------------------------------------ library defaults -- */
 
 /**
- * The semantic token defaults as @nuxt/ui ships them (src/runtime/css/index.css).
+ * The semantic token defaults as @nuxt/ui ships them (src/runtime/css/base.css).
  * Exports diff against THESE, not the docs site's diverging baseline, an
  * exported theme must reproduce the preview on a stock library install.
  */
