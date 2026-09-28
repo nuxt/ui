@@ -1,5 +1,5 @@
 import type { ShikiTransformer } from '@shikijs/types'
-import { transformerColorHighlight } from 'shiki-transformer-color-highlight'
+import { defaultGetForegroundColor, transformerColorHighlight } from 'shiki-transformer-color-highlight'
 import { transformerIconHighlight } from 'shiki-transformer-icon-highlight'
 
 // The content pipeline turns a swatch's inline style into a generated class,
@@ -19,7 +19,9 @@ const transformerColorHighlightClass = (): ShikiTransformer => ({
  * a code block is marked up the same wherever it was parsed.
  */
 export const shikiTransformers = (): ShikiTransformer[] => [
-  transformerColorHighlight() as ShikiTransformer,
+  // A bare name is a Tailwind palette here (`primary: violet`), which the CSS
+  // keyword of the same name doesn't match, so only literal values get a swatch
+  transformerColorHighlight({ getForegroundColor: color => /^[a-z]+$/i.test(color) ? null : defaultGetForegroundColor(color) }) as ShikiTransformer,
   transformerIconHighlight(),
   transformerColorHighlightClass()
 ]
