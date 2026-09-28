@@ -58,7 +58,7 @@ export const presets: ThemePreset[] = [{
     font: { sans: 'Geist', mono: 'Geist Mono' },
     style: {
       tokenShades: {
-        '--ui-primary': { dark: 200 },
+        '--ui-primary': { light: 'black', dark: 200 },
         '--ui-bg': { dark: 950 },
         '--ui-bg-muted': { light: 100 },
         '--ui-text': { dark: 50 },
@@ -67,10 +67,9 @@ export const presets: ThemePreset[] = [{
         '--ui-border-accented': { light: 200 }
       }
     },
-    // Pure black and translucent borders aren't shades of the ramp
+    // Pure black text and translucent borders aren't shades of the ramp
     tokens: {
       light: {
-        '--ui-primary': 'black',
         '--ui-text': 'black',
         '--ui-text-highlighted': 'black',
         '--ui-text-inverted': 'var(--ui-color-neutral-50)'
