@@ -112,13 +112,14 @@ const undetected = new Set<string>()
  * find, since its classes aren't in the CSS.
  */
 function warnUndetected(name: string) {
-  if (!detected || detected.has(name) || name.includes('.') || undetected.has(name)) return
+  const names = detected
+  if (!names || names.has(name) || name.includes('.') || undetected.has(name)) return
   undetected.add(name)
 
   // A component just added to a file renders before detection runs again, so
   // it's only reported when still missing once the update had time to land
   setTimeout(() => {
-    if (detected.has(name)) return
+    if (names.has(name)) return
     const component = name[0]!.toUpperCase() + name.slice(1)
     console.warn(`[@nuxt/ui] Component detection didn't find \`${component}\`, so its classes aren't in your CSS. Add it to the \`componentDetection\` option: \`componentDetection: ['${component}']\`.`)
   }, 1000)
