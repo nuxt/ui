@@ -355,8 +355,7 @@ describe('Theme', () => {
     })
 
     // Inner button picks up the inner theme's color override, but inherits
-    // `variant: 'soft'` from the outer theme (proven by `bg-success/10` —
-    // the soft variant of success).
+    // `variant: 'soft'` from the outer theme (the success scope with the soft classes)
     expect(wrapper.find('.inner-btn').classes()).toEqual(expect.arrayContaining(['[--ui-accent:var(--ui-success)]', 'bg-accent-soft']))
     expect(wrapper.find('.inner-btn').classes()).not.toContain('[--ui-accent:var(--ui-error)]')
 
