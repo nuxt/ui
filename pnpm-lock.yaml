@@ -494,9 +494,6 @@ catalogs:
     shiki-transformer-icon-highlight:
       specifier: ^0.2.0
       version: 0.2.0
-    simple-git:
-      specifier: ^3.36.0
-      version: 3.36.0
     sortablejs:
       specifier: ^1.15.7
       version: 1.15.7
@@ -521,9 +518,6 @@ catalogs:
     unbuild:
       specifier: ^3.6.1
       version: 3.6.1
-    unist-util-visit:
-      specifier: ^5.1.0
-      version: 5.1.0
     unplugin-auto-import:
       specifier: ^21.1.0
       version: 21.1.0
@@ -1018,9 +1012,6 @@ importers:
       shiki-transformer-icon-highlight:
         specifier: 'catalog:'
         version: 0.2.0
-      simple-git:
-        specifier: 'catalog:'
-        version: 3.36.0(supports-color@10.2.2)
       sortablejs:
         specifier: 'catalog:'
         version: 1.15.7
@@ -1036,9 +1027,6 @@ importers:
       ufo:
         specifier: 'catalog:'
         version: 1.6.4
-      unist-util-visit:
-        specifier: 'catalog:'
-        version: 5.1.0
       valibot:
         specifier: 'catalog:'
         version: 1.5.0(typescript@6.0.3)

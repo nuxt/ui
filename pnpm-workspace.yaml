@@ -127,7 +127,6 @@ catalog:
   shiki: ^4.4.3
   shiki-transformer-color-highlight: ^1.1.0
   shiki-transformer-icon-highlight: ^0.2.0
-  simple-git: ^3.36.0
   sortablejs: ^1.15.7
   superstruct: ^2.0.2
   tailwind-merge: ^3.7.0
@@ -138,7 +137,6 @@ catalog:
   typescript: ^6.0.3
   ufo: ^1.6.4
   unbuild: ^3.6.1
-  unist-util-visit: ^5.1.0
   unplugin: ^3.4.0
   unplugin-auto-import: ^21.1.0
   unplugin-vue-components: ^32.1.0
