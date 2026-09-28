@@ -17,7 +17,7 @@ const { track } = useAnalytics()
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
 const studioIcons = useStudioIcons()
-const { primary, primaryColors, neutral, neutralColors, blackAsPrimary, setBlackAsPrimary, radius, radiuses, font, icon, icons, currentDoc } = useTheme()
+const { primary, primaryColors, neutral, neutralColors, radius, radiuses, font, icon, icons, currentDoc } = useTheme()
 const { presets, selectedPreset, applyPreset, selectPalette, isCustomPalette, neutralChip, sectionDirty } = useThemeStudio()
 // "changed from the preset" per control, the cue the studio toolbar carries
 const { groupDirtyFlags } = useThemeStudioToolbar()
@@ -129,23 +129,16 @@ const items = computed<DropdownMenuItem[][]>(() => [[{
     label: 'Primary',
     dirty: mounted.value && primaryDirty.value,
     icon: studioIcons.brush,
-    value: blackAsPrimary.value ? 'Black' : isCustomPalette('primary') ? 'Custom' : upperFirst(paletteLabel(primary.value)),
+    value: isCustomPalette('primary') ? 'Custom' : upperFirst(paletteLabel(primary.value)),
     dot: 'var(--ui-primary)',
-    children: [{
-      label: 'Black',
-      slot: 'color',
-      dot: 'var(--ui-text-highlighted)',
-      type: 'checkbox' as const,
-      checked: blackAsPrimary.value,
-      onSelect: keep(() => setBlackAsPrimary(true))
-    }, ...primaryColors.map(color => ({
+    children: primaryColors.map(color => ({
       label: upperFirst(paletteLabel(color)),
       slot: 'color',
       dot: swatch(color),
       type: 'checkbox' as const,
-      checked: !blackAsPrimary.value && !isCustomPalette('primary') && primary.value === color,
+      checked: !isCustomPalette('primary') && primary.value === color,
       onSelect: keep(() => selectPalette('primary', color))
-    }))]
+    }))
   }),
   setting({
     label: 'Neutral',

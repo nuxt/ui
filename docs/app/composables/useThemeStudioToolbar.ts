@@ -9,7 +9,7 @@ import { paletteLabel, rampCssName } from '../utils/theme/studio'
  * would never lift.
  */
 export function useThemeStudioToolbar() {
-  const { resetTheme, primary, neutral, blackAsPrimary } = useTheme()
+  const { resetTheme, primary, neutral } = useTheme()
   const { groupDirty, sectionDirty, dirty, presets, activePreset, applyPreset, primaryChip, neutralChip, isCustomPalette, style } = useThemeStudio()
 
   const mounted = useMounted()
@@ -26,8 +26,8 @@ export function useThemeStudioToolbar() {
    */
   const colorChips = computed(() => (mounted.value
     ? [{
-        dot: blackAsPrimary.value ? undefined : `var(--color-${rampCssName(primaryChip.value)}-500)`,
-        label: blackAsPrimary.value ? 'Black' : paletteName('primary', primary.value)
+        dot: `var(--color-${rampCssName(primaryChip.value)}-500)`,
+        label: paletteName('primary', primary.value)
       }, {
         dot: `var(--color-${neutralChip.value}-500)`,
         label: paletteName('neutral', neutral.value)
