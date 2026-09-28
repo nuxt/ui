@@ -330,7 +330,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="relative w-full rounded-t-sm ring ring-default bg-elevated/30 overflow-hidden">
+  <div class="relative w-full rounded-t-sm ring ring-default bg-soft/30 overflow-hidden">
     <!-- canvas, not SVG gradients + blur: the filter re-rasterised on every
          page restyle (~7ms per apply during a drag) -->
     <canvas
@@ -354,7 +354,7 @@ onUnmounted(() => {
         :y1="toHandleY(startY)"
         :x2="toX(curve.p1x)"
         :y2="toHandleY(curve.p1y)"
-        class="stroke-(--ui-text-dimmed)"
+        class="stroke-(--ui-text-faint)"
         stroke-width="0.75"
         stroke-dasharray="2 2"
       />
@@ -363,7 +363,7 @@ onUnmounted(() => {
         :y1="toHandleY(endY)"
         :x2="toX(curve.p2x)"
         :y2="toHandleY(curve.p2y)"
-        class="stroke-(--ui-text-dimmed)"
+        class="stroke-(--ui-text-faint)"
         stroke-width="0.75"
         stroke-dasharray="2 2"
       />
@@ -386,14 +386,14 @@ onUnmounted(() => {
           :cy="stop.cy"
           :r="stop.pinned ? stopRadius + 0.25 : stopRadius"
           :fill="stop.fill"
-          class="stroke-(--ui-bg)"
+          class="stroke-(--ui-bg-surface)"
           stroke-width="0.5"
         />
       </template>
 
       <!-- handles -->
-      <circle :cx="toX(curve.p1x)" :cy="toHandleY(curve.p1y)" r="4" class="fill-(--ui-bg) stroke-(--ui-text-muted)" stroke-width="1.25" />
-      <circle :cx="toX(curve.p2x)" :cy="toHandleY(curve.p2y)" r="4" class="fill-(--ui-bg) stroke-(--ui-text-muted)" stroke-width="1.25" />
+      <circle :cx="toX(curve.p1x)" :cy="toHandleY(curve.p1y)" r="4" class="fill-(--ui-bg-surface) stroke-(--ui-text-muted)" stroke-width="1.25" />
+      <circle :cx="toX(curve.p2x)" :cy="toHandleY(curve.p2y)" r="4" class="fill-(--ui-bg-surface) stroke-(--ui-text-muted)" stroke-width="1.25" />
 
       <!-- endpoints, filled with the ramp's 50 and 950 so the drag targets show
          what they steer -->

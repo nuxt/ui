@@ -80,6 +80,6 @@ onMounted(() => {
     indeterminate
     size="xs"
     class="absolute top-0 inset-x-0 z-1"
-    :ui="{ base: 'bg-default' }"
+    :ui="{ base: 'bg-surface' }"
   />
 </template>

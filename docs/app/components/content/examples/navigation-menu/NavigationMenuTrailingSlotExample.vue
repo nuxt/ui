@@ -50,7 +50,7 @@ const dropdownItems: DropdownMenuItem[][] = [
   <UNavigationMenu
     orientation="vertical"
     :items="items"
-    :ui="{ link: 'overflow-hidden has-data-[state=open]:before:bg-elevated/50' }"
+    :ui="{ link: 'overflow-hidden has-data-[state=open]:before:bg-tint' }"
     class="w-48"
   >
     <template #personal-label-trailing>
@@ -75,7 +75,7 @@ const dropdownItems: DropdownMenuItem[][] = [
             color="neutral"
             variant="ghost"
             size="xs"
-            class="text-muted hover:text-highlighted hover:bg-accented/50 data-[state=open]:bg-accented/50 mr-1.5"
+            class="text-muted hover:text-highlighted hover:bg-soft-hover/50 data-[state=open]:bg-soft-hover/50 mr-1.5"
           />
         </UDropdownMenu>
       </div>

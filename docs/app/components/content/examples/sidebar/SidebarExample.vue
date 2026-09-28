@@ -138,7 +138,7 @@ defineShortcuts(extractShortcuts(teamsItems.value))
       rail
       :ui="{
         container: 'h-full',
-        inner: 'bg-elevated/25 divide-transparent',
+        inner: 'bg-soft/25 divide-transparent',
         body: 'py-0'
       }"
     >
@@ -154,9 +154,9 @@ defineShortcuts(extractShortcuts(teamsItems.value))
             color="neutral"
             variant="ghost"
             square
-            class="w-full data-[state=open]:bg-elevated overflow-hidden"
+            class="w-full data-[state=open]:bg-soft overflow-hidden"
             :ui="{
-              trailingIcon: 'text-dimmed ms-auto'
+              trailingIcon: 'text-faint ms-auto'
             }"
           />
         </UDropdownMenu>
@@ -184,9 +184,9 @@ defineShortcuts(extractShortcuts(teamsItems.value))
             color="neutral"
             variant="ghost"
             square
-            class="w-full data-[state=open]:bg-elevated overflow-hidden"
+            class="w-full data-[state=open]:bg-soft overflow-hidden"
             :ui="{
-              trailingIcon: 'text-dimmed ms-auto'
+              trailingIcon: 'text-faint ms-auto'
             }"
           />
         </UDropdownMenu>

@@ -170,8 +170,8 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
                 class="group"
                 :ui="{
                   label: 'flex-1 text-left',
-                  leadingIcon: 'text-dimmed',
-                  trailingIcon: 'text-dimmed transition-transform duration-200 group-data-[state=open]:rotate-180'
+                  leadingIcon: 'text-faint',
+                  trailingIcon: 'text-faint transition-transform duration-200 group-data-[state=open]:rotate-180'
                 }"
               >
                 <!-- the tag belongs in the grid, where it names the stock option -->
@@ -191,7 +191,7 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
                   :class="[item.value === 'none' && 'opacity-60', 'min-w-0']"
                   @click="groupVariants[field.key].value = (item.value === field.stock ? 'default' : item.value); variantGridOpen[field.key] = false"
                 >
-                  <!-- opacity, not a color: text-dimmed would fight the variant's own text color -->
+                  <!-- opacity, not a color: text-faint would fight the variant's own text color -->
                   <span class="truncate">{{ item.label }}<span v-if="item.value === field.stock" class="opacity-70 font-normal">&nbsp;(Default)</span></span>
                 </UButton>
               </template>

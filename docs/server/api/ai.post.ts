@@ -99,7 +99,7 @@ const applyTheme = tool({
         properties: {
           light: {
             type: 'object',
-            description: 'CSS variables for light mode (.light). Keys: --ui-text, --ui-bg, --ui-border, --ui-primary, etc. Values: var(--ui-color-<name>-<shade>), hex, white, black.',
+            description: 'CSS variables for light mode (.light). Keys: --ui-text-default, --ui-bg-surface, --ui-border-default, --ui-primary, etc. Values: var(--ui-color-<name>-<shade>), hex, white, black.',
             additionalProperties: { type: 'string' }
           },
           dark: {
@@ -225,9 +225,9 @@ The main.css file uses Tailwind CSS directives to configure design tokens:
 .dark { --ui-primary: white; }
 \`\`\`
 
-*True black & white theme* — for a monochrome theme, also set \`--ui-bg\` to pure black/white:
+*True black & white theme* — for a monochrome theme, also set \`--ui-bg-surface\` to pure black/white:
 \`\`\`css
-.dark { --ui-bg: black; }
+.dark { --ui-bg-surface: black; }
 \`\`\`
 
 *Semantic shade overrides* — override which shade a semantic color uses:
@@ -236,10 +236,10 @@ The main.css file uses Tailwind CSS directives to configure design tokens:
 .dark { --ui-primary: var(--ui-color-primary-200); }
 \`\`\`
 
-**CSS Variable fine-tuning (last resort)** — use the \`cssVariables\` property in \`applyTheme\` ONLY for subtle one-shade adjustments. Example: shifting \`--ui-bg\` from neutral-900 to neutral-950 in dark mode, or \`--ui-border\` from neutral-200 to neutral-300 in light mode.
+**CSS Variable fine-tuning (last resort)** — use the \`cssVariables\` property in \`applyTheme\` ONLY for subtle one-shade adjustments. Example: shifting \`--ui-bg-surface\` from neutral-900 to neutral-950 in dark mode, or \`--ui-border-default\` from neutral-200 to neutral-300 in light mode.
 
 CRITICAL RULES for \`cssVariables\`:
-- ONLY shift by 1-2 shade levels from the default (e.g. neutral-900 → neutral-950). NEVER replace the neutral palette with a completely different color (e.g. setting \`--ui-bg\` to a custom color like cream). If you want warm/cool backgrounds, choose the right \`neutral\` color instead (see color options below). Exception: for monochrome/black-and-white themes, you MAY use \`black\` or \`white\` as values (e.g. \`--ui-bg: black\` in dark mode).
+- ONLY shift by 1-2 shade levels from the default (e.g. neutral-900 → neutral-950). NEVER replace the neutral palette with a completely different color (e.g. setting \`--ui-bg-surface\` to a custom color like cream). If you want warm/cool backgrounds, choose the right \`neutral\` color instead (see color options below). Exception: for monochrome/black-and-white themes, you MAY use \`black\` or \`white\` as values (e.g. \`--ui-bg-surface: black\` in dark mode).
 - ALWAYS provide BOTH \`light\` and \`dark\` objects, but only include variables you are CHANGING from their defaults. Do NOT include variables that keep their default value.
 - Values MUST use \`var(--ui-color-<name>-<shade>)\` references (e.g. \`var(--ui-color-neutral-950)\`), \`white\`, or \`black\`. NEVER use raw hex values.
 - The \`<name>\` in the variable reference MUST match the current neutral color (which the user may have changed). Use \`neutral\` as the name since it maps to whatever neutral palette is active.

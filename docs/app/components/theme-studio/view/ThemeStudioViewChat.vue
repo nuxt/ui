@@ -118,7 +118,7 @@ const ui = {
   <UDashboardGroup
     unit="rem"
     :persistent="false"
-    class="relative inset-auto h-full w-full bg-elevated/50"
+    class="relative inset-auto h-full w-full bg-tint"
   >
     <UDashboardSidebar
       collapsible
@@ -147,7 +147,7 @@ const ui = {
                 :value="kbd"
                 size="sm"
                 variant="soft"
-                class="bg-accented/50"
+                class="bg-soft-hover/50"
               />
             </div>
           </template>
@@ -170,7 +170,7 @@ const ui = {
                 color="neutral"
                 variant="link"
                 size="sm"
-                class="rounded-[5px] hover:bg-accented/50 focus-visible:bg-accented/50 data-[state=open]:bg-accented/50"
+                class="rounded-[5px] hover:bg-soft-hover/50 focus-visible:bg-soft-hover/50 data-[state=open]:bg-soft-hover/50"
                 aria-label="Chat actions"
                 tabindex="-1"
                 @click.stop.prevent
@@ -194,15 +194,15 @@ const ui = {
             variant="ghost"
             block
             :square="collapsed"
-            class="data-[state=open]:bg-elevated"
-            :ui="{ trailingIcon: 'ms-auto text-dimmed' }"
+            class="data-[state=open]:bg-soft"
+            :ui="{ trailingIcon: 'ms-auto text-faint' }"
           />
         </UDropdownMenu>
       </template>
     </UDashboardSidebar>
 
     <!-- The template's signature: the conversation floats over the body. -->
-    <div class="flex-1 flex m-4 lg:ms-0 rounded-lg ring ring-default bg-default/75 shadow-sm min-w-0 overflow-hidden">
+    <div class="flex-1 flex m-4 lg:ms-0 rounded-lg ring ring-default bg-surface/75 shadow-sm min-w-0 overflow-hidden">
       <UDashboardPanel class="relative min-h-0" :ui="{ body: 'p-0 sm:p-0 overscroll-none' }">
         <template #header>
           <!-- Transparent and absolute, so the messages scroll under a blur.
@@ -220,8 +220,8 @@ const ui = {
                   :trailing-icon="appConfig.ui.icons.chevronDown"
                   color="neutral"
                   variant="ghost"
-                  class="max-w-3xs data-[state=open]:bg-elevated"
-                  :ui="{ trailingIcon: 'text-dimmed shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                  class="max-w-3xs data-[state=open]:bg-soft"
+                  :ui="{ trailingIcon: 'text-faint shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200' }"
                 />
               </UDropdownMenu>
             </template>
@@ -295,7 +295,7 @@ const ui = {
                     color="neutral"
                     variant="ghost"
                     size="sm"
-                    class="data-[state=open]:bg-elevated"
+                    class="data-[state=open]:bg-soft"
                     :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
                   />
                 </div>

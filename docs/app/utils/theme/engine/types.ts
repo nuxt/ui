@@ -32,7 +32,7 @@ export function nearestShade(value: number): Shade {
 
 /**
  * The shade sliders' travel: the ramp's stops plus literal white/black ends,
- * several stock defaults are literals the ramp can't express (--ui-bg is
+ * several stock defaults are literals the ramp can't express (--ui-bg-surface is
  * `white`).
  */
 export const SHADE_LADDER: readonly ShadeStop[] = ['white', ...SHADES, 'black']
@@ -197,7 +197,7 @@ export const TOKEN_GROUPS: Array<{ key: TokenGroup, label: string }> = [
 /**
  * Semantic tokens exposed as per-mode shade sliders. `defaults` are the
  * LIBRARY's real resting values, some are the literal ladder ends (light
- * --ui-bg is `white`, not a ramp stop); `ramp` names the scale the slider walks.
+ * --ui-bg-surface is `white`, not a ramp stop); `ramp` names the scale the slider walks.
  */
 export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, ramp: TokenRamp, group: TokenGroup, defaults: { light: ShadeStop, dark: ShadeStop } }> = [
   { token: '--ui-primary', label: 'Primary', ramp: 'primary', group: 'colors', defaults: { light: 500, dark: 400 } },
@@ -206,20 +206,18 @@ export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, ramp: To
   { token: '--ui-info', label: 'Info', ramp: 'info', group: 'colors', defaults: { light: 500, dark: 400 } },
   { token: '--ui-warning', label: 'Warning', ramp: 'warning', group: 'colors', defaults: { light: 500, dark: 400 } },
   { token: '--ui-error', label: 'Error', ramp: 'error', group: 'colors', defaults: { light: 500, dark: 400 } },
-  { token: '--ui-bg', label: 'Default', ramp: 'neutral', group: 'background', defaults: { light: 'white', dark: 900 } },
+  { token: '--ui-bg-surface', label: 'Surface', ramp: 'neutral', group: 'background', defaults: { light: 'white', dark: 900 } },
   { token: '--ui-bg-muted', label: 'Muted', ramp: 'neutral', group: 'background', defaults: { light: 50, dark: 800 } },
-  { token: '--ui-bg-elevated', label: 'Elevated', ramp: 'neutral', group: 'background', defaults: { light: 100, dark: 800 } },
-  { token: '--ui-bg-accented', label: 'Accented', ramp: 'neutral', group: 'background', defaults: { light: 200, dark: 700 } },
+  { token: '--ui-bg-soft', label: 'Soft', ramp: 'neutral', group: 'background', defaults: { light: 100, dark: 800 } },
+  { token: '--ui-bg-soft-hover', label: 'Soft hover', ramp: 'neutral', group: 'background', defaults: { light: 200, dark: 700 } },
   { token: '--ui-bg-inverted', label: 'Inverted', ramp: 'neutral', group: 'background', defaults: { light: 900, dark: 'white' } },
-  { token: '--ui-text-dimmed', label: 'Dimmed', ramp: 'neutral', group: 'text', defaults: { light: 400, dark: 500 } },
+  { token: '--ui-text-faint', label: 'Faint', ramp: 'neutral', group: 'text', defaults: { light: 400, dark: 500 } },
   { token: '--ui-text-muted', label: 'Muted', ramp: 'neutral', group: 'text', defaults: { light: 500, dark: 400 } },
-  { token: '--ui-text-toned', label: 'Toned', ramp: 'neutral', group: 'text', defaults: { light: 600, dark: 300 } },
-  { token: '--ui-text', label: 'Default', ramp: 'neutral', group: 'text', defaults: { light: 700, dark: 200 } },
+  { token: '--ui-text-default', label: 'Default', ramp: 'neutral', group: 'text', defaults: { light: 700, dark: 200 } },
   { token: '--ui-text-highlighted', label: 'Highlighted', ramp: 'neutral', group: 'text', defaults: { light: 900, dark: 'white' } },
   { token: '--ui-text-inverted', label: 'Inverted', ramp: 'neutral', group: 'text', defaults: { light: 'white', dark: 900 } },
-  { token: '--ui-border', label: 'Default', ramp: 'neutral', group: 'border', defaults: { light: 200, dark: 800 } },
-  { token: '--ui-border-muted', label: 'Muted', ramp: 'neutral', group: 'border', defaults: { light: 200, dark: 700 } },
-  { token: '--ui-border-accented', label: 'Accented', ramp: 'neutral', group: 'border', defaults: { light: 300, dark: 700 } },
+  { token: '--ui-border-default', label: 'Default', ramp: 'neutral', group: 'border', defaults: { light: 200, dark: 800 } },
+  { token: '--ui-border-strong', label: 'Strong', ramp: 'neutral', group: 'border', defaults: { light: 300, dark: 700 } },
   { token: '--ui-border-inverted', label: 'Inverted', ramp: 'neutral', group: 'border', defaults: { light: 900, dark: 'white' } }
 ]
 /**
@@ -393,20 +391,18 @@ export const LIBRARY_TOKEN_DEFAULTS = {
     '--ui-info': 'var(--ui-color-info-500)',
     '--ui-warning': 'var(--ui-color-warning-500)',
     '--ui-error': 'var(--ui-color-error-500)',
-    '--ui-text-dimmed': 'var(--ui-color-neutral-400)',
+    '--ui-text-faint': 'var(--ui-color-neutral-400)',
     '--ui-text-muted': 'var(--ui-color-neutral-500)',
-    '--ui-text-toned': 'var(--ui-color-neutral-600)',
-    '--ui-text': 'var(--ui-color-neutral-700)',
+    '--ui-text-default': 'var(--ui-color-neutral-700)',
     '--ui-text-highlighted': 'var(--ui-color-neutral-900)',
     '--ui-text-inverted': 'white',
-    '--ui-bg': 'white',
+    '--ui-bg-surface': 'white',
     '--ui-bg-muted': 'var(--ui-color-neutral-50)',
-    '--ui-bg-elevated': 'var(--ui-color-neutral-100)',
-    '--ui-bg-accented': 'var(--ui-color-neutral-200)',
+    '--ui-bg-soft': 'var(--ui-color-neutral-100)',
+    '--ui-bg-soft-hover': 'var(--ui-color-neutral-200)',
     '--ui-bg-inverted': 'var(--ui-color-neutral-900)',
-    '--ui-border': 'var(--ui-color-neutral-200)',
-    '--ui-border-muted': 'var(--ui-color-neutral-200)',
-    '--ui-border-accented': 'var(--ui-color-neutral-300)',
+    '--ui-border-default': 'var(--ui-color-neutral-200)',
+    '--ui-border-strong': 'var(--ui-color-neutral-300)',
     '--ui-border-inverted': 'var(--ui-color-neutral-900)'
   },
   dark: {
@@ -416,20 +412,18 @@ export const LIBRARY_TOKEN_DEFAULTS = {
     '--ui-info': 'var(--ui-color-info-400)',
     '--ui-warning': 'var(--ui-color-warning-400)',
     '--ui-error': 'var(--ui-color-error-400)',
-    '--ui-text-dimmed': 'var(--ui-color-neutral-500)',
+    '--ui-text-faint': 'var(--ui-color-neutral-500)',
     '--ui-text-muted': 'var(--ui-color-neutral-400)',
-    '--ui-text-toned': 'var(--ui-color-neutral-300)',
-    '--ui-text': 'var(--ui-color-neutral-200)',
+    '--ui-text-default': 'var(--ui-color-neutral-200)',
     '--ui-text-highlighted': 'white',
     '--ui-text-inverted': 'var(--ui-color-neutral-900)',
-    '--ui-bg': 'var(--ui-color-neutral-900)',
+    '--ui-bg-surface': 'var(--ui-color-neutral-900)',
     '--ui-bg-muted': 'var(--ui-color-neutral-800)',
-    '--ui-bg-elevated': 'var(--ui-color-neutral-800)',
-    '--ui-bg-accented': 'var(--ui-color-neutral-700)',
+    '--ui-bg-soft': 'var(--ui-color-neutral-800)',
+    '--ui-bg-soft-hover': 'var(--ui-color-neutral-700)',
     '--ui-bg-inverted': 'white',
-    '--ui-border': 'var(--ui-color-neutral-800)',
-    '--ui-border-muted': 'var(--ui-color-neutral-700)',
-    '--ui-border-accented': 'var(--ui-color-neutral-700)',
+    '--ui-border-default': 'var(--ui-color-neutral-800)',
+    '--ui-border-strong': 'var(--ui-color-neutral-700)',
     '--ui-border-inverted': 'white'
   }
 } as const

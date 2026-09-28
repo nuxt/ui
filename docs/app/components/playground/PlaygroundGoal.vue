@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const percent = 80
 
-const ring = `conic-gradient(var(--ui-primary) ${percent}%, var(--ui-bg-accented) 0)`
+const ring = `conic-gradient(var(--ui-primary) ${percent}%, var(--ui-bg-soft-hover) 0)`
 </script>
 
 <template>
@@ -11,7 +11,7 @@ const ring = `conic-gradient(var(--ui-primary) ${percent}%, var(--ui-bg-accented
     </p>
 
     <div class="relative size-32 rounded-full" :style="{ background: ring }">
-      <div class="absolute inset-3 rounded-full bg-default flex flex-col items-center justify-center">
+      <div class="absolute inset-3 rounded-full bg-surface flex flex-col items-center justify-center">
         <span class="text-xl font-semibold text-highlighted">$24k</span>
         <span class="text-xs text-muted">{{ percent }}% of $30k</span>
       </div>

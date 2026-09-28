@@ -87,7 +87,7 @@ const gridUi = {
   root: 'ring-0 rounded-none overflow-visible has-focus-visible:outline-0',
   content: 'max-h-none overflow-visible',
   group: 'p-0 grid grid-cols-4 gap-0',
-  item: 'flex-col p-2 rounded-lg ring-inset before:rounded-lg gap-2 data-[state=checked]:before:bg-elevated/50',
+  item: 'flex-col p-2 rounded-lg ring-inset before:rounded-lg gap-2 data-[state=checked]:before:bg-tint',
   itemDescription: 'whitespace-normal line-clamp-2 text-xs p-0',
   itemTrailing: 'hidden'
 }
@@ -123,8 +123,8 @@ const gridUi = {
         size="sm"
         :ui="{
           root: 'w-68',
-          indicator: 'bg-default',
-          trigger: 'data-[state=active]:text-highlighted in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:bg-default w-1/2'
+          indicator: 'bg-surface',
+          trigger: 'data-[state=active]:text-highlighted in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:bg-surface w-1/2'
         }"
         data-keep-panels
         aria-label="View"

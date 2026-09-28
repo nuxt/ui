@@ -240,7 +240,7 @@ watch(open, (isOpen) => {
         <span class="truncate">{{ asRow(item).value }}</span>
       </span>
 
-      <UIcon :name="appConfig.ui.icons.chevronRight" class="size-5 shrink-0 text-dimmed" />
+      <UIcon :name="appConfig.ui.icons.chevronRight" class="size-5 shrink-0 text-faint" />
     </template>
 
     <!-- the swatch sits in the box an item icon takes, so it centers on the label -->
@@ -251,7 +251,7 @@ watch(open, (isOpen) => {
     </template>
 
     <template #color-mode="{ item }">
-      <UIcon :name="asRow(item).icon" class="size-5 shrink-0 text-dimmed" />
+      <UIcon :name="asRow(item).icon" class="size-5 shrink-0 text-faint" />
       {{ asRow(item).label }}
       <ThemeStudioColorModeTabs class="ms-auto -my-1.5 [&>div]:ring-0" />
     </template>
@@ -259,7 +259,7 @@ watch(open, (isOpen) => {
     <!-- its own slot: the menu only draws a trailing icon for submenus, and
          appConfig.ui.icons is swapped whole with the pack so this follows it -->
     <template #link-trailing>
-      <UIcon :name="appConfig.ui.icons.arrowRight" class="size-5 shrink-0 text-dimmed" />
+      <UIcon :name="appConfig.ui.icons.arrowRight" class="size-5 shrink-0 text-faint" />
     </template>
 
     <template #font-label="{ item }">

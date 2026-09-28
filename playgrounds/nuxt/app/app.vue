@@ -23,7 +23,7 @@ provide('components', components)
   <UApp :toaster="appConfig.toaster" :dir="appConfig.dir">
     <UDashboardGroup unit="rem">
       <UDashboardSidebar
-        class="bg-elevated/25"
+        class="bg-soft/25"
         resizable
         collapsible
         :toggle="{ size: 'sm', variant: 'outline', class: 'ring-default' }"

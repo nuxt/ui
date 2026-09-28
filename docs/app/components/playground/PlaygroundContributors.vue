@@ -29,7 +29,7 @@ const usernames = [
         :alt="username"
         loading="lazy"
       />
-      <div class="flex items-center justify-center size-8 rounded-full bg-elevated text-xs font-medium text-muted">
+      <div class="flex items-center justify-center size-8 rounded-full bg-soft text-xs font-medium text-muted">
         +300
       </div>
     </div>

@@ -78,7 +78,7 @@ if (import.meta.server) {
                 </p>
 
                 <ul class="flex flex-col gap-2">
-                  <li v-for="feature in template.features" :key="feature.title" class="flex items-center gap-2.5 text-base text-toned">
+                  <li v-for="feature in template.features" :key="feature.title" class="flex items-center gap-2.5 text-base text-default">
                     <UIcon :name="feature.icon" class="size-4.5 shrink-0 text-primary" />
                     {{ feature.title }}
                   </li>

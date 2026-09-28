@@ -16,7 +16,7 @@ export function useTokenShades(alias: ColorAlias) {
   // Only the touched mode is written, so an untouched mode never becomes an
   // override. Reset restores the BASELINE preset's shade, or deletes the entry
   // when the preset made no choice, a token's real default may not sit on the
-  // ramp at all (--ui-bg is literally `white`).
+  // ramp at all (--ui-bg-surface is literally `white`).
   function control(token: string, defaults: { light: ShadeStop, dark: ShadeStop }, target: 'light' | 'dark') {
     const model = computed({
       get: () => {

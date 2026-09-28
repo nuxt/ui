@@ -7,7 +7,7 @@ const studioIcons = useStudioIcons()
 <template>
   <div>
     <div class="p-4 flex items-start gap-3">
-      <div class="flex items-center justify-center size-9 rounded-lg bg-elevated text-primary shrink-0">
+      <div class="flex items-center justify-center size-9 rounded-lg bg-soft text-primary shrink-0">
         <UIcon :name="studioIcons.radar" class="size-5" />
       </div>
       <div>

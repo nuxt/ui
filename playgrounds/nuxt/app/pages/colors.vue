@@ -180,7 +180,7 @@ const codeColors = buttonColors
 </script>
 
 <template>
-  <UDashboardNavbar title="Colors" class="absolute top-0 inset-x-0 z-5 bg-default" />
+  <UDashboardNavbar title="Colors" class="absolute top-0 inset-x-0 z-5 bg-surface" />
 
   <div class="flex flex-col gap-10 min-h-0 w-full max-w-full py-6">
     <p class="max-w-lg text-muted">
@@ -908,7 +908,7 @@ const codeColors = buttonColors
         ContextMenu
       </h2>
       <UContextMenu :items="contextMenuItems">
-        <div class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72">
+        <div class="flex items-center justify-center rounded-md border border-dashed border-strong text-sm aspect-video w-72">
           Right click here
         </div>
       </UContextMenu>

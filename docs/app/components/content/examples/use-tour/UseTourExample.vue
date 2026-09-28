@@ -32,7 +32,7 @@ const tour = useTour([
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-      <div ref="dashboard" class="p-4 rounded-lg border border-default bg-elevated/50">
+      <div ref="dashboard" class="p-4 rounded-lg border border-default bg-tint">
         <p class="font-medium text-highlighted">
           Dashboard
         </p>
@@ -40,7 +40,7 @@ const tour = useTour([
           Overview of your workspace.
         </p>
       </div>
-      <div ref="profile" class="p-4 rounded-lg border border-default bg-elevated/50">
+      <div ref="profile" class="p-4 rounded-lg border border-default bg-tint">
         <p class="font-medium text-highlighted">
           Profile
         </p>
@@ -48,7 +48,7 @@ const tour = useTour([
           Manage your account.
         </p>
       </div>
-      <div ref="settings" class="p-4 rounded-lg border border-default bg-elevated/50">
+      <div ref="settings" class="p-4 rounded-lg border border-default bg-tint">
         <p class="font-medium text-highlighted">
           Settings
         </p>

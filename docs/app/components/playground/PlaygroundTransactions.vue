@@ -28,7 +28,7 @@ function format(amount: number) {
 
     <ul class="divide-y divide-default">
       <li v-for="transaction in transactions" :key="transaction.name" class="flex items-center gap-3 px-4 py-2.5">
-        <div class="flex items-center justify-center size-8 rounded-full bg-elevated text-muted shrink-0">
+        <div class="flex items-center justify-center size-8 rounded-full bg-soft text-muted shrink-0">
           <UIcon :name="transaction.icon" class="size-4" />
         </div>
         <div class="min-w-0 flex-1">

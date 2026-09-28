@@ -532,7 +532,7 @@ const pageTitles: Record<Page, string> = {
     <UDashboardSidebar
       collapsible
       resizable
-      class="bg-elevated/25"
+      class="bg-soft/25"
       :ui="{ root: 'flex min-h-0', footer: 'border-t border-default' }"
     >
       <template #header="{ collapsed }">
@@ -551,9 +551,9 @@ const pageTitles: Record<Page, string> = {
             variant="ghost"
             block
             :square="collapsed"
-            class="data-[state=open]:bg-elevated"
+            class="data-[state=open]:bg-soft"
             :class="[!collapsed && 'py-2']"
-            :ui="{ trailingIcon: 'text-dimmed' }"
+            :ui="{ trailingIcon: 'text-faint' }"
           />
         </UDropdownMenu>
       </template>
@@ -594,8 +594,8 @@ const pageTitles: Record<Page, string> = {
             variant="ghost"
             block
             :square="collapsed"
-            class="data-[state=open]:bg-elevated"
-            :ui="{ trailingIcon: 'text-dimmed' }"
+            class="data-[state=open]:bg-soft"
+            :ui="{ trailingIcon: 'text-faint' }"
           />
         </UDropdownMenu>
       </template>
@@ -634,7 +634,7 @@ const pageTitles: Record<Page, string> = {
             <div
               class="p-4 sm:px-6 text-sm cursor-pointer border-l-2 transition-colors"
               :class="[
-                mail.unread ? 'text-highlighted' : 'text-toned',
+                mail.unread ? 'text-highlighted' : 'text-default',
                 selectedMail && selectedMail.id === mail.id
                   ? 'border-primary bg-primary/10'
                   : 'border-bg hover:border-primary hover:bg-primary/5'
@@ -653,7 +653,7 @@ const pageTitles: Record<Page, string> = {
               <p class="truncate" :class="[mail.unread && 'font-semibold']">
                 {{ mail.subject }}
               </p>
-              <p class="text-dimmed line-clamp-1">
+              <p class="text-faint line-clamp-1">
                 {{ mail.body }}
               </p>
             </div>
@@ -715,7 +715,7 @@ const pageTitles: Record<Page, string> = {
         </div>
 
         <div class="pb-4 px-4 sm:px-6 shrink-0">
-          <UCard variant="subtle" class="mt-auto" :ui="{ header: 'flex items-center gap-1.5 text-dimmed' }">
+          <UCard variant="subtle" class="mt-auto" :ui="{ header: 'flex items-center gap-1.5 text-faint' }">
             <template #header>
               <UIcon :name="studioIcons.reply" class="size-5" />
 
@@ -751,7 +751,7 @@ const pageTitles: Record<Page, string> = {
         </div>
       </UDashboardPanel>
       <div v-else class="flex-1 hidden lg:flex items-center justify-center">
-        <UIcon :name="studioIcons.inbox" class="size-32 text-dimmed" />
+        <UIcon :name="studioIcons.inbox" class="size-32 text-faint" />
       </div>
     </template>
 
@@ -789,14 +789,14 @@ const pageTitles: Record<Page, string> = {
                 color="neutral"
                 variant="ghost"
                 :icon="studioIcons.calendar"
-                class="-ms-1 group data-[state=open]:bg-elevated"
+                class="-ms-1 group data-[state=open]:bg-soft"
               >
                 <span class="truncate">{{ dateRangeLabel }}</span>
 
                 <template #trailing>
                   <UIcon
                     :name="appConfig.ui.icons.chevronDown"
-                    class="shrink-0 text-dimmed size-5 group-data-[state=open]:rotate-180 transition-transform duration-200"
+                    class="shrink-0 text-faint size-5 group-data-[state=open]:rotate-180 transition-transform duration-200"
                   />
                 </template>
               </UButton>
@@ -811,7 +811,7 @@ const pageTitles: Record<Page, string> = {
                       color="neutral"
                       variant="ghost"
                       class="rounded-none px-4"
-                      :class="isDateRangeSelected(range) ? 'bg-elevated' : 'hover:bg-elevated/50'"
+                      :class="isDateRangeSelected(range) ? 'bg-soft' : 'hover:bg-tint'"
                       truncate
                       @click="selectDateRange(range)"
                     />
@@ -826,7 +826,7 @@ const pageTitles: Record<Page, string> = {
               v-model="period"
               :items="periodItems"
               variant="ghost"
-              class="data-[state=open]:bg-elevated"
+              class="data-[state=open]:bg-soft"
               :ui="{
                 value: 'capitalize',
                 itemLabel: 'capitalize',
@@ -902,7 +902,7 @@ const pageTitles: Record<Page, string> = {
               />
             </svg>
 
-            <div class="flex items-center justify-between px-4 sm:px-6 pt-2 text-xs text-dimmed">
+            <div class="flex items-center justify-between px-4 sm:px-6 pt-2 text-xs text-faint">
               <span v-for="tick in chartTicks" :key="tick">{{ tick }}</span>
             </div>
           </UCard>
@@ -913,7 +913,7 @@ const pageTitles: Record<Page, string> = {
             class="shrink-0"
             :ui="{
               base: 'table-fixed border-separate border-spacing-0',
-              thead: '[&>tr]:bg-elevated/50 [&>tr]:after:content-none',
+              thead: '[&>tr]:bg-tint [&>tr]:after:content-none',
               tbody: '[&>tr]:last:[&>td]:border-b-0',
               th: 'first:rounded-l-lg last:rounded-r-lg border-y border-default first:border-l last:border-r',
               td: 'border-b border-default'
@@ -970,7 +970,7 @@ const pageTitles: Record<Page, string> = {
             class="shrink-0"
             :ui="{
               base: 'table-fixed border-separate border-spacing-0',
-              thead: '[&>tr]:bg-elevated/50 [&>tr]:after:content-none',
+              thead: '[&>tr]:bg-tint [&>tr]:after:content-none',
               tbody: '[&>tr]:last:[&>td]:border-b-0',
               th: 'py-2 first:rounded-l-lg last:rounded-r-lg border-y border-default first:border-l last:border-r',
               td: 'border-b border-default'
@@ -1079,7 +1079,7 @@ const pageTitles: Record<Page, string> = {
             <UPageCard
               title="Account"
               description="No longer want to use our service? You can delete your account here. This action is not reversible. All information related to this account will be deleted permanently."
-              class="bg-linear-to-tl from-error/10 from-5% to-default"
+              class="bg-linear-to-tl from-error/10 from-5% to-surface"
             >
               <template #footer>
                 <UButton label="Delete account" color="error" />

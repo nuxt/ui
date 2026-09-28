@@ -25,12 +25,12 @@ const appConfig = useAppConfig()
     :trailing-icon="appConfig.ui.icons.chevronDown"
     color="neutral"
     variant="outline"
-    class="group bg-default"
+    class="group bg-surface"
     :class="dirty && 'ring-primary/50'"
     :ui="{
       label: ['flex-1 min-w-0 text-left truncate', dirty && 'text-primary'],
-      leadingIcon: dirty ? 'text-primary' : (leadingIconClass ?? 'text-dimmed'),
-      trailingIcon: ['transition-transform duration-200', open && 'rotate-180', dirty ? 'text-primary' : 'text-dimmed']
+      leadingIcon: dirty ? 'text-primary' : (leadingIconClass ?? 'text-faint'),
+      trailingIcon: ['transition-transform duration-200', open && 'rotate-180', dirty ? 'text-primary' : 'text-faint']
     }"
   >
     <template v-if="$slots.leading" #leading>

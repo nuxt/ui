@@ -44,7 +44,7 @@ if (import.meta.server) {
               color="neutral"
               variant="link"
               size="xs"
-              class="font-mono text-dimmed tracking-wide text-[13px]"
+              class="font-mono text-faint tracking-wide text-[13px]"
               :trailing-icon="appConfig.ui.icons.plus"
             />
           </PageSectionHeading>

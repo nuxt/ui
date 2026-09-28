@@ -195,7 +195,7 @@ export default defineAppConfig({
 
 <template>
   <!-- The pane is the scroll container, so the header and asides stick to it. -->
-  <div class="h-full overflow-y-auto bg-default">
+  <div class="h-full overflow-y-auto bg-surface">
     <UHeader :toggle="false" class="rounded-t-[inherit]" :ui="{ center: 'flex-1' }">
       <template #left>
         <div class="flex items-center gap-1.5">
@@ -211,7 +211,7 @@ export default defineAppConfig({
         color="neutral"
         variant="outline"
         class="w-full"
-        :ui="{ base: 'text-dimmed hover:text-default font-normal', leadingIcon: 'size-4' }"
+        :ui="{ base: 'text-faint hover:text-default font-normal', leadingIcon: 'size-4' }"
       >
         <template #trailing>
           <div class="ms-auto hidden lg:flex items-center gap-0.5">
