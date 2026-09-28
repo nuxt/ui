@@ -746,6 +746,7 @@ describe('tv theme sources', () => {
   })
 
   it('matches a numeric variant key by its string form', () => {
-    expect(tv(stepsTheme)({ level: '4' }).base()).toBe(tv(stepsTheme)({ level: 4 }).base())
+    expect(tv(stepsTheme)({ level: '4' }).base()).toContain('[&>h4]:[counter-increment:step]')
+    expect(tv(stepsTheme)({ level: 4 }).base()).toContain('[&>h4]:[counter-increment:step]')
   })
 })
