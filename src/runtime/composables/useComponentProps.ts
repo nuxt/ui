@@ -115,8 +115,8 @@ const GLOBAL_DEFAULTS: Record<string, string> = { color: 'primary', size: 'md' }
  * defaults. The component's tv() `defaultVariants` are intentionally left out
  * of the proxy fallback — they continue to drive `tv()`-internal class
  * resolution (the original semantics) without leaking into prop reads. The
- * `ui` and `class` props are merged (explicit classes override theme classes)
- * instead of being replaced.
+ * `ui` prop holds the component's own `ui` only, and `class` merges a
+ * `<UTheme :props>` class under the component's own.
  */
 export function useComponentProps<T extends object>(name: string, props: T, theme?: { defaultVariants?: Record<string, unknown>, [key: string]: unknown }): T {
   const vm = getCurrentInstance()
@@ -126,9 +126,11 @@ export function useComponentProps<T extends object>(name: string, props: T, them
   // the component's `app.config.ui.<name>.defaultVariants`, or else its theme's
   function globalDefault(entry: Record<string, any> | undefined, prop: string) {
     const base = GLOBAL_DEFAULTS[prop]
+    const value = entry?.[prop]
+    if (!base || value === undefined) return undefined
     const appConfigEntry = name.includes('.') ? get(config.value, name) : config.value[name]
-    if (!base || (appConfigEntry?.defaultVariants?.[prop] ?? theme?.defaultVariants?.[prop]) !== base) return undefined
-    return entry?.[prop]
+    if (appConfigEntry?.defaultVariants?.[prop] !== undefined || theme?.defaultVariants?.[prop] !== base) return undefined
+    return value
   }
 
   return new Proxy(props, {
@@ -152,9 +154,9 @@ export function useComponentProps<T extends object>(name: string, props: T, them
       // one, so the prop only holds what the component was given
       if (prop === 'ui') return raw
 
-      // Like `ui`, `class` is merged instead of replaced so a component passing
-      // its own `class` still gets the theme classes. The explicit class comes
-      // last to win `twMerge`'s last-in-wins resolution.
+      // `class` is merged instead of replaced so a component passing its own
+      // `class` still gets the theme's. The explicit class comes last to win
+      // the merge.
       if (prop === 'class') {
         const themeClass = themeEntry?.class
         if (themeClass === undefined) return raw
