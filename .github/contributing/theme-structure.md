@@ -133,18 +133,17 @@ Always use semantic colors, never Tailwind palette colors:
 - `divide-default` - Dividers
 
 ### Accent Tokens
-The `color` prop accepts `primary`, `secondary`, `success`, `info`, `warning`, `error` and `neutral`. Colored classes read the scoped color through `accent` roles, never through an alias name or an opacity modifier:
+The `color` prop accepts `primary`, `secondary`, `success`, `info`, `warning`, `error` and `neutral`. Colored classes read the scoped color through `accent` roles, never through an alias name. An opacity modifier on `accent` (`bg-accent/20`, `border-accent/50`) is only for a state no color tunes and whose neutral look follows the color too; a state that needs its own neutral look gets a role:
 - `bg-accent` - The color itself
 - `text-accent-foreground` - Text on a solid accent background
 - `bg-accent-hover` - Hover of a solid background
-- `bg-accent-soft` / `bg-accent-soft-hover` / `bg-accent-soft-active` - Tinted background, its hover and its selected state
+- `bg-accent-soft` / `bg-accent-soft-hover` - Tinted background and its hover
 - `text-accent-soft-foreground` - Text on a tinted background
-- `ring-accent-border` / `ring-accent-border-soft` / `ring-accent-border-muted` / `border-accent-border-strong` - Colored borders
+- `ring-accent-border` / `ring-accent-border-soft` / `ring-accent-border-muted` - Colored borders
 - `outline-accent-focus` - Focus outline
 - `bg-accent-surface` - Resting background of an outlined element
 - `bg-accent-tint` - Light tint on large surfaces
 - `text-accent-muted` / `text-accent-muted-hover` / `text-accent-faint` - Secondary and faint text
-- `border-accent-line` - Separator line
 
 The full list with values is in `src/templates.ts` and the [CSS Variables](../../docs/content/docs/1.getting-started/5.theme/2.css-variables.md#accent) docs.
 

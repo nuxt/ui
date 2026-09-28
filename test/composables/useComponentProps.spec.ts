@@ -112,6 +112,20 @@ describe('\'*\' default variants', () => {
     expect(wrapper.find('[data-slot="button"]').classes()).toContain('[--ui-accent:var(--ui-success)]')
   })
 
+  it('keeps a default the app config gives the component', async () => {
+    const appConfig = useAppConfig() as { ui?: Record<string, any> }
+    appConfig.ui ??= {}
+    appConfig.ui.button = { defaultVariants: { color: 'neutral' } }
+
+    try {
+      const wrapper = await render({ '*': { color: 'secondary' } })
+
+      expect(wrapper.find('[data-slot="button"]').classes()).toContain('[--ui-accent:var(--ui-neutral)]')
+    } finally {
+      delete appConfig.ui.button
+    }
+  })
+
   // A group passes down only what was set for it, so the `'*'` default doesn't
   // reach a child as the group's own value and beat the child's key
   it('lets a child\'s own key win inside a group', async () => {
