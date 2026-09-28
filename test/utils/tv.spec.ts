@@ -579,9 +579,9 @@ describe('tv override layers', () => {
     expect(tvt(theme, { slots: { base: 'p-4' } })().base()).toBe('inline-flex text-sm p-4')
   })
 
-  it('keeps an override slot class beneath the theme compounds', () => {
-    // Like a variant, a slot class for every case doesn't cancel the `square` exception.
-    expect(tvt(theme, { slots: { base: 'p-4' } })({ square: true }).base()).toBe('inline-flex text-sm p-1.5')
+  it('lets an override slot class win over the theme compounds', () => {
+    // An override wins over the whole theme, whether a rule is a variant or a compound
+    expect(tvt(theme, { slots: { base: 'p-4' } })({ square: true }).base()).toBe('inline-flex text-sm p-4')
   })
 
   it('lets an override variant win over every theme variant', () => {
@@ -610,11 +610,11 @@ describe('tv override layers', () => {
     expect(ui.inner()).toBe('flex divide-none')
   })
 
-  it('keeps an override variant beneath the theme compounds', () => {
-    // Tuning a size from `app.config.ui` doesn't cancel the `square` exception.
+  it('lets an override variant win over the theme compounds', () => {
+    // Tuning a size from `app.config.ui` reaches the `square` buttons too
     const ui = tvt(theme, { variants: { size: { md: { base: 'px-4' } } } })
     expect(ui().base()).toBe('inline-flex text-sm px-4')
-    expect(ui({ square: true }).base()).toBe('inline-flex text-sm p-1.5')
+    expect(ui({ square: true }).base()).toBe('inline-flex text-sm p-1.5 px-4')
   })
 
   it('lets an override compound win over an override slot class', () => {
@@ -667,9 +667,10 @@ describe('tv override levels', () => {
     expect(levels({ slots: { base: 'rounded-full shadow-lg' } }, { slots: { base: 'rounded-none' } })().base()).toBe('inline-flex px-2.5 text-sm shadow-lg rounded-none')
   })
 
-  it('keeps every level beneath the theme compounds, and their own compounds above them', () => {
+  it('puts every level above the theme compounds, a level\'s compounds above its own slots', () => {
     const ui = levels({ slots: { base: 'p-4' } }, { variants: { size: { md: { base: 'px-4' } } } })
-    expect(ui({ square: true }).base()).toBe('inline-flex text-sm p-1.5')
+    expect(ui({ square: true }).base()).toBe('inline-flex text-sm p-4 px-4')
+    expect(levels({ slots: { base: 'p-4' }, compoundVariants: [{ square: true, class: { base: 'p-2' } }] })({ square: true }).base()).toBe('inline-flex text-sm p-2')
     const compounds = levels(
       { compoundVariants: [{ square: true, class: { base: 'p-2' } }] },
       { compoundVariants: [{ square: true, class: { base: 'p-3' } }] }
