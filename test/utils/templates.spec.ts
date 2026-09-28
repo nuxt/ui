@@ -49,17 +49,17 @@ describe('theme templates', () => {
     const contents = themeContents({ theme: { prefix: 'tw' } })
 
     expect(await contents('ui.css')).not.toContain('@layer')
-    expect(await contents('ui.css')).not.toContain('[class~=')
+    expect(await contents('ui.css')).not.toContain('--ui-accent-')
     expect(await themeContents({})('ui.base.css')).toBe('')
   })
 
   it('repeats the color scopes for the prefixed class in the base layer', async () => {
     const css = await themeContents({ theme: { prefix: 'tw' } })('ui.base.css')
 
-    expect(css).toMatch(/^@layer base \{\n {2}\[class~="tw:\[--ui-accent:var\(--ui-primary\)\]"\] \{/)
-    expect(css).toContain('[class~="tw:[--ui-accent:var(--ui-warning)]"] {\n    --ui-accent-foreground: var(--ui-warning-foreground);')
-    expect(css).toContain('[class~="tw:[--ui-accent:var(--ui-neutral)]"] {\n    --ui-neutral: var(--ui-bg-inverted);')
-    expect(css).not.toContain('[class~="[--ui-accent:')
+    expect(css).toMatch(/^@layer base \{\n {2}\.tw\\:\\\[--ui-accent\\:var\\\(--ui-primary\\\)\\\] \{/)
+    expect(css).toContain('.tw\\:\\[--ui-accent\\:var\\(--ui-warning\\)\\] {\n    --ui-accent-foreground: var(--ui-warning-foreground);')
+    expect(css).toContain('.tw\\:\\[--ui-accent\\:var\\(--ui-neutral\\)\\] {\n    --ui-neutral: var(--ui-bg-inverted);')
+    expect(css).not.toContain('  .\\[--ui-accent')
     expect(css).not.toContain(':where(')
   })
 
@@ -94,7 +94,7 @@ describe('static css', () => {
   it.each(colors)('bridges and scopes %s', (color) => {
     expect(tokens).toContain(`--color-${color}: var(--ui-${color});`)
     expect(tokens).toContain(`--color-${color}-500: var(--ui-color-${color}-500);`)
-    expect(accent).toContain(`[class~="[--ui-accent:var(--ui-${color})]"] {`)
+    expect(accent).toContain(`.\\[--ui-accent\\:var\\(--ui-${color}\\)\\] {`)
     expect(accent).toContain(`--ui-accent-foreground: var(--ui-${color}-foreground`)
   })
 })
