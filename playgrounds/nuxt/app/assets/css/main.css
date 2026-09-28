@@ -1,22 +1,6 @@
 @import "tailwindcss" theme(static) source(none);
 @import "@nuxt/ui";
 
-/* Tailwind's neutral palette, which the `neutral` alias takes over, for the
-   theme picker to offer */
-@theme static {
-  --color-old-neutral-50: oklch(98.5% 0 none);
-  --color-old-neutral-100: oklch(97% 0 none);
-  --color-old-neutral-200: oklch(92.2% 0 none);
-  --color-old-neutral-300: oklch(87% 0 none);
-  --color-old-neutral-400: oklch(70.8% 0 none);
-  --color-old-neutral-500: oklch(55.6% 0 none);
-  --color-old-neutral-600: oklch(43.9% 0 none);
-  --color-old-neutral-700: oklch(37.1% 0 none);
-  --color-old-neutral-800: oklch(26.9% 0 none);
-  --color-old-neutral-900: oklch(20.5% 0 none);
-  --color-old-neutral-950: oklch(14.5% 0 none);
-}
-
 /* Scoped to this playground and the library source, where components and
    themes resolve from. A repo-root source also put `docs` and `test` on the
    CSS watcher. */

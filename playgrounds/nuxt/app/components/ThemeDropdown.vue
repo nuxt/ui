@@ -18,6 +18,12 @@ function setAlias(alias: 'primary' | 'neutral', palette: string) {
   }
 }
 
+// Tailwind's own `neutral` as its values, the `neutral` alias having taken its
+// `--color-neutral-*` names
+function chipColor(palette: string, shade: 400 | 500) {
+  return palette === 'neutral' ? tailwindColors.neutral[shade] : `var(--color-${palette}-${shade})`
+}
+
 const colors = ['red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose']
 const neutrals = ['slate', 'gray', 'zinc', 'neutral', 'stone', 'taupe', 'mauve', 'mist', 'olive']
 
@@ -38,10 +44,10 @@ const items = computed<DropdownMenuItem[]>(() => [{
   }))
 }, {
   label: 'Neutral',
-  chip: neutral.value === 'neutral' ? 'old-neutral' : neutral.value,
+  chip: neutral.value,
   children: neutrals.map(color => ({
     label: color,
-    chip: color === 'neutral' ? 'old-neutral' : color,
+    chip: color,
     type: 'checkbox',
     checked: neutral.value === color,
     onSelect: (e) => {
@@ -69,8 +75,8 @@ const items = computed<DropdownMenuItem[]>(() => [{
         <span
           class="rounded-full ring ring-bg bg-(--chip-light) dark:bg-(--chip-dark) size-2"
           :style="{
-            '--chip-light': `var(--color-${(item as any).chip}-500)`,
-            '--chip-dark': `var(--color-${(item as any).chip}-400)`
+            '--chip-light': chipColor((item as any).chip, 500),
+            '--chip-dark': chipColor((item as any).chip, 400)
           }"
         />
       </div>

@@ -52,12 +52,12 @@ export const FONTS: Array<{ name: string, category: FontCategory }> = [
 ]
 
 /**
- * A palette name as its `--color-*` prefix. Tailwind's own `neutral` ramp
- * ships in the docs as `old-neutral`, the module's neutral alias having
- * taken the name.
+ * A palette's shade as a CSS color. Tailwind's own `neutral` ramp comes as
+ * its value, the module's neutral alias having taken its `--color-neutral-*`
+ * names; every other palette, custom ones included, through its variable.
  */
-export function rampCssName(name: string) {
-  return name === 'neutral' ? 'old-neutral' : name
+export function paletteShade(name: string, shade: number | string) {
+  return name === 'neutral' ? colors.neutral[shade as keyof typeof colors.neutral] : `var(--color-${name}-${shade})`
 }
 
 /* --------------------------------------------------------------- views -- */
