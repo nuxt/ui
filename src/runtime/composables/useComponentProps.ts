@@ -119,7 +119,7 @@ export function useComponentProps<T extends object>(name: string, props: T, them
   // the component's `app.config.ui.<name>.defaultVariants`, or else its theme's
   function globalDefault(entry: Record<string, any> | undefined, prop: string) {
     const base = GLOBAL_DEFAULTS[prop]
-    const appConfigEntry = name.includes('.') ? get(appConfig.ui ?? {}, name) : appConfig.ui?.[name]
+    const appConfigEntry = name.includes('.') ? get(config.value, name) : config.value[name]
     if (!base || (appConfigEntry?.defaultVariants?.[prop] ?? theme?.defaultVariants?.[prop]) !== base) return undefined
     return entry?.[prop]
   }
