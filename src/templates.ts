@@ -372,7 +372,6 @@ ${themeBlocks}`
     ].join('\n')
   })
 
-  // FIXME: `typeof colors[number]` should include all colors from the theme
   templates.push({
     filename: 'types/ui.d.ts',
     getContents: () => {
