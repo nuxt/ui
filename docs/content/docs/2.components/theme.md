@@ -29,7 +29,7 @@ For app-level theme configuration, we recommend using the `vite.config.ts` file 
 
 ### Slot classes
 
-Use the `ui` prop to override slot classes of descendant components. Keys are component names (camelCase) and values are their slot class overrides. They apply like the slot classes of your app config, on top of it: they win over the component's variants, while its `compoundVariants` still apply on top, like a `square` button keeping its own padding.
+Use the `ui` prop to override slot classes of descendant components. Keys are component names (camelCase) and values are their slot class overrides. They apply like the slot classes of your app config, on top of it and of the whole theme, compound variants included.
 
 ::component-example
 ---
