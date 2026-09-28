@@ -36,5 +36,13 @@ describe('component detection in the Vite dev server', () => {
     expect(server.moduleGraph.getModuleById).toHaveBeenCalledWith('virtual:nuxt-ui-templates/ui/detected.ts')
     expect(server.reloadModule).toHaveBeenCalledWith(detectedModule)
     expect(await plugin.load('virtual:nuxt-ui-templates/ui/detected.ts')).toContain('"calendar"')
+
+    // And again for the next one
+    const next = join(root, 'Next.vue')
+    writeFileSync(next, '<template><UCarousel /></template>\n')
+    watcher.emit('all', 'add', next)
+
+    await vi.waitFor(() => expect(server.reloadModule).toHaveBeenCalledTimes(2), { timeout: 5000 })
+    expect(await plugin.load('virtual:nuxt-ui-templates/ui/detected.ts')).toContain('"carousel"')
   })
 })
