@@ -35,7 +35,6 @@ export default defineNuxtPlugin({
         useState('nuxt-ui-font-size').value = clamped(saved.fontSize, 12, 20) ?? THEME_DEFAULTS.fontSize
         useState('nuxt-ui-font').value = saved.font ?? {}
         useState('nuxt-ui-icons').value = saved.icons ?? THEME_DEFAULTS.icons
-        useState('nuxt-ui-black-as-primary').value = saved.blackAsPrimary ?? false
         // Through the same boundary the AI path uses: these two are
         // concatenated into <style> text, and storage is writable by anything
         // on the origin. (The inline FOUC script still paints the raw values
@@ -172,9 +171,6 @@ export default defineNuxtPlugin({
 
               var fontSize = num(T.fontSize, 12, 20);
               if (fontSize !== undefined && fontSize !== 16) { set('nuxt-ui-font-size', 'html { font-size: ' + fontSize + 'px; }'); }
-
-
-              set('nuxt-ui-black-as-primary', T.blackAsPrimary ? ':root { --ui-primary: black; } .dark { --ui-primary: white; }' : '');
 
               var prefs = T.font || {};
               var font = (prefs.sans && SAFE.test(prefs.sans)) ? prefs.sans : 'Public Sans';

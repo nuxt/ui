@@ -395,9 +395,9 @@ const vReveal = {
 }
 
 /* Shimmering gradient text on the hero title's second line: primary against a
-   lighter shade of itself. Mixed off --ui-primary rather than ramp stops:
-   black-as-primary has no ramp, and the stops keep painting the last palette.
-   Dark mixes toward black instead, where the primary may itself be white. */
+   lighter shade of itself. Mixed off --ui-primary rather than ramp stops, so
+   a preset that pins the primary to another shade shimmers from that one.
+   Dark mixes toward white instead. */
 .landing-shimmer {
   background-image: linear-gradient(135deg, var(--ui-primary), color-mix(in oklch, var(--ui-primary) 65%, black), var(--ui-primary), color-mix(in oklch, var(--ui-primary) 65%, black), var(--ui-primary));
   background-size: 200% auto;

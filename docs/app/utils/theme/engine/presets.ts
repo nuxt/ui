@@ -45,28 +45,28 @@ export const presets: ThemePreset[] = [{
 }, {
   id: 'mono',
   name: 'Mono',
-  description: 'Black on a pure gray neutral, generous radius, quiet surfaces.',
+  description: 'Near-black on a pure gray neutral, outlined fields, soft corners, Geist type.',
   doc: {
     version: 1,
-    blackAsPrimary: true,
+    // The gray ramp serves as primary too, pinned below to its darkest
+    // stops: near-black actions in light, near-white in dark.
     colors: {
+      primary: 'neutral',
       neutral: 'neutral'
     },
-    radius: 0.5,
+    radius: 0.625,
     font: { sans: 'Geist', mono: 'Geist Mono' },
     style: {
-      defaults: {
-        variants: {
-          inputs: 'subtle'
-        }
-      },
       tokenShades: {
+        '--ui-primary': { light: 900, dark: 200 },
         '--ui-bg': { dark: 950 },
-        '--ui-bg-muted': { light: 100, dark: 900 },
-        '--ui-bg-elevated': { light: 100, dark: 900 },
-        '--ui-bg-accented': { light: 200, dark: 800 },
-        '--ui-text': { light: 900, dark: 100 },
-        '--ui-text-highlighted': { light: 950, dark: 50 }
+        '--ui-bg-muted': { light: 100 },
+        '--ui-text': { light: 950, dark: 50 },
+        '--ui-text-highlighted': { light: 950, dark: 50 },
+        // dividers sit on the same hairline as borders in dark
+        '--ui-border-muted': { dark: 800 },
+        // field outlines match the border in light, the library steps them up to 300
+        '--ui-border-accented': { light: 200 }
       }
     }
   }

@@ -1,6 +1,6 @@
 import type { MaybeRefOrGetter } from 'vue'
 import colors from 'tailwindcss/colors'
-import { rampCssName, THEME_STUDIO_VIEWS } from '../utils/theme/studio'
+import { NEUTRAL_COLORS, rampCssName, THEME_STUDIO_VIEWS } from '../utils/theme/studio'
 // Leaf modules, never the barrel: the barrel re-exports serialize (and json5
 // with it), and this composable is reached from the header preset picker on
 // every docs page, which would put the exporter in the entry chunk.
@@ -143,10 +143,9 @@ export function useThemeStudio() {
   function selectPalette(alias: ColorAlias, name: string) {
     // A click on the swatch already selected is a no-op. Without this it
     // would still write the neutral remaps below, turning a stock theme
-    // into a changed one. Black-as-primary is the exception: the primary
-    // swatch is the way back off it.
+    // into a changed one.
     const current = (appConfig.colors as Record<string, string>)[alias]
-    if (current === name && !isCustomPalette(alias) && !(alias === 'primary' && theme.blackAsPrimary.value)) return
+    if (current === name && !isCustomPalette(alias)) return
 
     if (isCustomPalette(alias)) {
       clearCustomPalette(alias)
@@ -341,7 +340,8 @@ export function useThemeStudio() {
     const doc: ThemeDoc = {
       version: 1,
       colors: {
-        primary: pick(theme.primaryColors),
+        // A gray primary only reads as a theme with its shades pinned, like Mono
+        primary: pick(theme.primaryColors.filter(color => !NEUTRAL_COLORS.includes(color))),
         neutral: pick(theme.neutralColors)
       },
       radius: pick(theme.radiuses),
@@ -367,11 +367,6 @@ export function useThemeStudio() {
     if (Math.random() < 0.1) variants.panels = pick(['soft', 'subtle'] as const)
     if (Object.keys(variants).length) {
       doc.style = { defaults: { variants } }
-    }
-
-    if (Math.random() < 0.125) {
-      doc.blackAsPrimary = true
-      delete doc.colors!.primary
     }
 
     applyDoc(doc)

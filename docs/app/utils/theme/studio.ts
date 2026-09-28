@@ -1,15 +1,16 @@
 import colors from 'tailwindcss/colors'
 import { resolveAlias, resolveShade } from './engine/types'
-import type { ThemeDoc, Shade } from './engine/types'
+import type { ThemeDoc, ShadeStop } from './engine/types'
 
 /* ------------------------------------------------------------- choices -- */
 
 // What the pickers offer. Static, so it lives here rather than in the
 // composables that hand it out.
 
-// tailwind's extra neutrals, listed so they stay out of PRIMARY_COLORS
+// tailwind's grays, the palettes the neutral takes
 export const NEUTRAL_COLORS = ['slate', 'gray', 'zinc', 'neutral', 'stone', 'taupe', 'mauve', 'mist', 'olive']
-const NOT_A_RAMP = ['inherit', 'current', 'transparent', 'black', 'white', ...NEUTRAL_COLORS]
+const NOT_A_RAMP = ['inherit', 'current', 'transparent', 'black', 'white']
+// Grays included: the primary can take any palette, like Mono's `neutral`
 export const PRIMARY_COLORS = Object.keys(colors).filter(name => !NOT_A_RAMP.includes(name))
 
 export const RADIUSES = [0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75]
@@ -114,9 +115,11 @@ export const PRESET_ICONS: Record<string, string> = {
  * as its color rather than as its neutral.
  */
 export function themeChipStyle(doc: ThemeDoc) {
-  const shade = (step: Shade) => resolveShade(doc, resolveAlias(doc, 'primary'), step)
-  const light = doc.blackAsPrimary ? 'black' : shade(500)
-  const dark = doc.blackAsPrimary ? 'white' : shade(400)
+  const shade = (stop: ShadeStop) => stop === 'white' || stop === 'black' ? stop : resolveShade(doc, resolveAlias(doc, 'primary'), stop)
+  // the stops --ui-primary sits on, a preset may pin it off the library's 500/400
+  const pinned = doc.style?.tokenShades?.['--ui-primary']
+  const light = shade(pinned?.light ?? 500)
+  const dark = shade(pinned?.dark ?? 400)
   const tint = (color: string | undefined, from: number, to: number) =>
     `linear-gradient(135deg, color-mix(in oklab, ${color} ${from}%, transparent), color-mix(in oklab, ${color} ${to}%, transparent))`
 
