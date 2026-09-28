@@ -166,8 +166,10 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
           running = false
         }
 
-        // Component dirs and linked packages outside the root aren't watched otherwise
-        const outside = scanDirs.filter(dir => !dir.startsWith(`${root}/`) && !dir.includes('/node_modules/'))
+        // Vite only watches its own root: the scan root (`options.root`), component
+        // dirs and linked packages outside it aren't watched otherwise
+        const viteRoot = server.config.root
+        const outside = [root, ...scanDirs].filter(dir => dir !== viteRoot && !dir.startsWith(`${viteRoot}/`) && !dir.includes('/node_modules/'))
         if (outside.length) {
           server.watcher.add(outside)
         }

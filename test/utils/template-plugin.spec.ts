@@ -22,7 +22,7 @@ describe('component detection in the Vite dev server', () => {
 
     const watcher = Object.assign(new EventEmitter(), { emit: vi.fn(EventEmitter.prototype.emit), add: vi.fn() })
     const detectedModule = {}
-    const server = { watcher, moduleGraph: { getModuleById: vi.fn(() => detectedModule) }, reloadModule: vi.fn() }
+    const server = { config: { root }, watcher, moduleGraph: { getModuleById: vi.fn(() => detectedModule) }, reloadModule: vi.fn() }
     plugin.vite.configureServer(server)
 
     const file = join(root, 'Extra.vue')
@@ -44,5 +44,15 @@ describe('component detection in the Vite dev server', () => {
 
     await vi.waitFor(() => expect(server.reloadModule).toHaveBeenCalledTimes(2), { timeout: 5000 })
     expect(await plugin.load('virtual:nuxt-ui-templates/ui/detected.ts')).toContain('"carousel"')
+  })
+
+  it('watches the scan root when Vite runs from a directory inside it', async () => {
+    const plugin = TemplatePlugin({ ...defaultOptions, root } as any, { ui: getDefaultConfig() }, runtimeDir) as any
+    await plugin.vite.config({ root: join(root, 'renderer') }, { command: 'serve' })
+
+    const watcher = Object.assign(new EventEmitter(), { add: vi.fn() })
+    plugin.vite.configureServer({ config: { root: join(root, 'renderer') }, watcher, moduleGraph: { getModuleById: vi.fn() }, reloadModule: vi.fn() })
+
+    expect(watcher.add).toHaveBeenCalledWith([root])
   })
 })
