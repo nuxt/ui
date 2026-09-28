@@ -181,6 +181,8 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
             timer = setTimeout(redetect, 100)
           }
         })
+        // a scan queued as the server closes would run against a closed server
+        server.httpServer?.once('close', () => clearTimeout(timer))
       }
     },
     resolveId(id) {
