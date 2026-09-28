@@ -4,6 +4,7 @@ import type { Color } from '../theme/color'
 
 const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
 
+/** A palette name, optionally followed by the light and dark shades the alias uses. */
 export type ColorsOptions = Partial<Record<Color, string>>
 
 /**
@@ -13,6 +14,10 @@ export type ColorsOptions = Partial<Record<Color, string>>
  * values, resolved when Tailwind compiles, so a prefixed or customized palette
  * works too.
  *
+ * The shades an alias uses follow the palette, `500` in light mode and `400`
+ * in dark mode by default: `primary: neutral 900 200` picks others, and a
+ * single shade applies to both.
+ *
  * The defaults are plain CSS in `base.css`, at zero specificity, so the
  * aliases you set win wherever you register it.
  */
@@ -20,12 +25,25 @@ const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugi
   const aliases: Record<string, string | undefined> = options ?? {}
 
   const declarations: Record<string, string> = {}
-  for (const [alias, palette] of Object.entries(aliases)) {
+  const light: Record<string, string> = {}
+  const dark: Record<string, string> = {}
+  for (const [alias, value] of Object.entries(aliases)) {
     if (!(colors as readonly string[]).includes(alias)) {
       throw new Error(`[@nuxt/ui] \`${alias}\` isn't a color alias. The \`@nuxt/ui/colors\` plugin takes ${colors.map(color => `\`${color}\``).join(', ')}.`)
     }
-    if (!palette) {
+    if (!value) {
       continue
+    }
+    const [palette, lightShade, darkShade = lightShade, ...rest] = String(value).replace(/["']/g, '').trim().split(/\s+/) as [string, ...string[]]
+    if (lightShade) {
+      if (alias === 'neutral') {
+        throw new Error(`[@nuxt/ui] \`neutral: ${value}\` takes no shades: the \`neutral\` alias is the inverted surface, \`--ui-bg-inverted\`.`)
+      }
+      if (rest.length || ![lightShade, darkShade].every(shade => (shades as readonly number[]).includes(Number(shade)))) {
+        throw new Error(`[@nuxt/ui] \`${alias}: ${value}\` takes a palette and up to two shades, for light and dark mode, from ${shades.join(', ')}, like \`${alias}: indigo 600 300\`.`)
+      }
+      light[`--ui-${alias}`] = `var(--ui-color-${alias}-${lightShade})`
+      dark[`--ui-${alias}`] = `var(--ui-color-${alias}-${darkShade})`
     }
     // An alias's palette is the alias itself (`--color-primary-500` reads
     // `--ui-color-primary-500`), so pointing one at another loops
@@ -46,6 +64,11 @@ const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugi
 
   if (Object.keys(declarations).length) {
     addBase({ ':root, :host': declarations })
+  }
+  // After the palettes, `.dark` last so it wins on a dark root
+  if (Object.keys(light).length) {
+    addBase({ ':root, :host, .light': light })
+    addBase({ '.dark': dark })
   }
 })
 
