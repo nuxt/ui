@@ -22,21 +22,22 @@ const ACCENT_RECIPES: Record<string, string> = {
   'soft': 'color-mix(in oklab, var(--ui-accent) 10%, transparent)',
   'soft-hover': 'color-mix(in oklab, var(--ui-accent) 15%, transparent)',
   'soft-foreground': 'var(--ui-accent)',
-  'soft-active': 'color-mix(in oklab, var(--ui-accent) 20%, transparent)',
   'border': 'color-mix(in oklab, var(--ui-accent) 50%, transparent)',
   'border-soft': 'color-mix(in oklab, var(--ui-accent) 25%, transparent)',
   'focus': 'color-mix(in oklab, var(--ui-accent) 25%, transparent)',
   'surface': 'transparent',
   'muted': 'var(--ui-accent)',
   'muted-hover': 'color-mix(in oklab, var(--ui-accent) 75%, transparent)',
-  'line': 'var(--ui-accent)',
   'tint': 'color-mix(in oklab, var(--ui-accent) 10%, transparent)',
   'faint': 'color-mix(in oklab, var(--ui-accent) 75%, transparent)',
-  'border-muted': 'color-mix(in oklab, var(--ui-accent) 25%, transparent)',
-  'border-strong': 'color-mix(in oklab, var(--ui-accent) 50%, transparent)'
+  'border-muted': 'color-mix(in oklab, var(--ui-accent) 25%, transparent)'
 }
 
 const ACCENT_ROLES = Object.keys(ACCENT_RECIPES)
+
+// A class name as a CSS selector: a class selector matches through the class
+// hash, where an attribute selector is tested against every element
+const classSelector = (name: string) => `.${name.replace(/[^\w-]/g, '\\$&')}`
 
 // Neutral's roles default to the surface tokens it has always used
 const NEUTRAL_ROLES: Record<string, string> = {
@@ -49,7 +50,6 @@ const NEUTRAL_ROLES: Record<string, string> = {
   'surface': 'var(--ui-bg)',
   'muted': 'var(--ui-text-muted)',
   'muted-hover': 'var(--ui-text)',
-  'line': 'var(--ui-border)',
   'tint': 'color-mix(in oklab, var(--ui-bg-elevated) 50%, transparent)',
   'faint': 'var(--ui-text-dimmed)',
   'border-muted': 'var(--ui-border)'
@@ -342,7 +342,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
      leaves the role unset, so it keeps its recipe, or for neutral its surface token.
      Neutral also resolves \`--ui-neutral\` on the element, so it follows a surface
      that redefines \`--ui-bg-inverted\`. */
-  ${aliases.map(color => `[class~="${prefix}[--ui-accent:var(--ui-${color})]"] {
+  ${aliases.map(color => `${classSelector(`${prefix}[--ui-accent:var(--ui-${color})]`)} {
     ${color === 'neutral' ? '--ui-neutral: var(--ui-bg-inverted);\n    ' : ''}${ACCENT_ROLES.map(role => `--ui-accent-${role}: var(--ui-${color}-${role}${color === 'neutral' && NEUTRAL_ROLES[role] ? `, ${NEUTRAL_ROLES[role]}` : ''});`).join('\n    ')}
   }`).join('\n\n  ')}
 }
