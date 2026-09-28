@@ -7,7 +7,7 @@ import { findTailwindPrefix, getTailwindPrefix } from '../../src/utils/tailwind'
 describe('getTailwindPrefix', () => {
   it.each([
     ['@import "tailwindcss" prefix(tw);', 'tw'],
-    ['@import \'tailwindcss\' source(none) prefix( ui-tw );', 'ui-tw'],
+    ['@import \'tailwindcss\' source(none) prefix( ui );', 'ui'],
     ['@import "tailwindcss/theme.css" layer(theme) prefix(tw);\n@import "tailwindcss/utilities.css" layer(utilities);', 'tw'],
     ['@import "tailwindcss/utilities.css" layer(utilities);\n@import "tailwindcss/theme.css" layer(theme) prefix(tw);', 'tw'],
     ['@import "tailwindcss";\n@import "@nuxt/ui";', null],
