@@ -24,9 +24,11 @@
   }
 }
 
-@layer theme {
+@layer base {
   /* The default palette of each color alias, at zero specificity so any
-     `@plugin "@nuxt/ui/colors"` or `:root` rule wins. The fallback is the
+     `@plugin "@nuxt/ui/colors"` or `:root` rule wins. In `base` with that
+     output, not `theme`: `@nuxt/icon` can declare `base` first, which puts it
+     below `theme`, and a default in `theme` would then win. The fallback is the
      palette's value, for a Tailwind prefix, which renames `--color-*`. */
   :where(:root, :host) {
     --ui-color-primary-50: var(--color-green-50, oklch(98.2% 0.018 155.826));
@@ -113,7 +115,9 @@
     --ui-color-neutral-900: var(--color-slate-900, oklch(20.8% 0.042 265.755));
     --ui-color-neutral-950: var(--color-slate-950, oklch(12.9% 0.042 264.695));
   }
+}
 
+@layer theme {
   :root, :host {
     --ui-header-height: 4rem;
     --ui-radius: 0.25rem;

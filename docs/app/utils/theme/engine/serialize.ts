@@ -1,7 +1,7 @@
 /**
  * The theme's wire format: `generateCSS`/`generateConfig` emit the minimal
  * `main.css` + `app.config.ts` pair for a doc. `explicit` writes the headline
- * settings (the semantic colors, the body font) even at their defaults, for
+ * settings (`primary`, `neutral`, the body font) even at their defaults, for
  * a pane that shows the theme rather than a diff to paste.
  */
 export interface SerializeOptions {
@@ -28,9 +28,13 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explici
     '@import "@nuxt/ui";'
   ]
 
-  // Only the aliases that differ from the defaults, or all of them when `explicit`
+  // Only the aliases that differ from the defaults, plus `primary` and `neutral`
+  // when `explicit`, the two a theme is read by
   const colorEntries = Object.entries(doc.colors || {}).filter(([key, value]) => value !== DEFAULT_COLORS[key as keyof typeof DEFAULT_COLORS])
-  const colorAliases = explicit ? { ...DEFAULT_COLORS, ...doc.colors } : Object.fromEntries(colorEntries)
+  const changed = Object.fromEntries(colorEntries)
+  const colorAliases = explicit
+    ? Object.fromEntries(Object.entries({ ...DEFAULT_COLORS, ...changed }).filter(([key]) => key === 'primary' || key === 'neutral' || key in changed))
+    : changed
   if (Object.keys(colorAliases).length) {
     lines.push('', '@plugin "@nuxt/ui/colors" {', ...Object.entries(colorAliases).map(([key, value]) => `  ${key}: ${value};`), '}')
   }
