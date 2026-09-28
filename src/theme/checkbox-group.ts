@@ -27,7 +27,7 @@ export default {
         fieldset: 'flex-wrap'
       },
       table: {
-        item: `border border-default ${hover}bg-elevated/50 transition-colors ${focusCard} has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent/50 has-data-[state=checked]:z-[1]`
+        item: `border border-default ${hover}bg-elevated/50 transition-colors ${focusCard} has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent-border has-data-[state=checked]:z-[1]`
       }
     },
     size: {
