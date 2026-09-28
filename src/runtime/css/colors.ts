@@ -13,6 +13,37 @@ const isShade = (word: string) => word === 'black' || word === 'white' || (shade
 // `black` and `white` aren't shades of a palette, so they are the color itself
 const shadeValue = (alias: string, shade: string) => shade === 'black' || shade === 'white' ? shade : `var(--ui-color-${alias}-${shade})`
 
+// Edits between two words, for the palette a typo was probably meant as
+function distance(a: string, b: string) {
+  let row = Array.from({ length: b.length + 1 }, (_, i) => i)
+  for (let i = 1; i <= a.length; i++) {
+    const next = [i]
+    for (let j = 1; j <= b.length; j++) {
+      next[j] = Math.min(next[j - 1]! + 1, row[j]! + 1, row[j - 1]! + (a[i - 1] === b[j - 1] ? 0 : 1))
+    }
+    row = next
+  }
+  return row[b.length]!
+}
+
+// `theme('colors')` lists every shade flat, like `red-500`
+function closestPalette(name: string, shadesByName: unknown) {
+  let closest: string | undefined
+  let closestDistance = 3
+  for (const key of Object.keys(shadesByName ?? {})) {
+    const palette = key.match(/^(.+)-500$/)?.[1]
+    if (!palette || (palette !== 'neutral' && (colors as readonly string[]).includes(palette))) {
+      continue
+    }
+    const edits = distance(name, palette)
+    if (edits < closestDistance) {
+      closest = palette
+      closestDistance = edits
+    }
+  }
+  return closest
+}
+
 /**
  * Points the color aliases at Tailwind palettes, one line per alias:
  * `@plugin "@nuxt/ui/colors" { primary: indigo; neutral: zinc; }`. Each writes
@@ -65,7 +96,8 @@ const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugi
     for (const shade of shades) {
       const value = palette === 'neutral' ? tailwindColors.neutral[shade] : theme(`colors.${palette}.${shade}`)
       if (typeof value !== 'string') {
-        throw new TypeError(`[@nuxt/ui] \`${alias}: ${palette}\` needs the name of a Tailwind palette with shades from 50 to 950, like \`indigo\`, or of one you declare in \`@theme\` as \`--color-<name>-50\` to \`-950\`.`)
+        const closest = closestPalette(palette, theme('colors'))
+        throw new TypeError(`[@nuxt/ui] \`${alias}: ${palette}\` needs the name of a Tailwind palette with shades from 50 to 950, like \`indigo\`, or of one you declare in \`@theme\` as \`--color-<name>-50\` to \`-950\`.${closest ? ` Did you mean \`${closest}\`?` : ''}`)
       }
       declarations[`--ui-color-${alias}-${shade}`] = value
     }
