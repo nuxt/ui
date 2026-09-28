@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs'
 import { describe, it, expect } from 'vitest'
+import ts from 'typescript'
 import { join } from 'pathe'
 import { getTemplates } from '../../src/templates'
 import { defaultOptions, getDefaultConfig } from '../../src/utils/defaults'
@@ -49,8 +50,25 @@ describe('theme templates', () => {
   it('lists the detected themes in dev for the runtime warning', async () => {
     const contents = await themeContents({ componentDetection: true }, { detectedComponents: new Set(['Button', 'InputMenu']), dev: true })('ui/detected.ts')
 
-    expect(contents).toContain('new Set<string>(["button","inputMenu"])')
+    expect(contents).toContain('["button","inputMenu"]')
     expect(contents).toContain('import.meta.hot.accept(')
+  })
+
+  // A module that accepts its own update runs again, and its importers keep the
+  // first version's export, so every version has to refill that same set
+  it('refills the set components read on every detection update', async () => {
+    const hot = { data: {} as Record<string, any>, accept: () => {} }
+    const run = async (detectedComponents: Set<string>) => {
+      const code = await themeContents({ componentDetection: true }, { detectedComponents, dev: true })('ui/detected.ts')
+      const js = ts.transpileModule(code, { compilerOptions: { target: ts.ScriptTarget.ESNext, module: ts.ModuleKind.ESNext } }).outputText
+      return new Function('hot', js.replaceAll('import.meta.hot', 'hot').replace('export default', 'return'))(hot) as Set<string>
+    }
+
+    const first = await run(new Set(['Button']))
+    await run(new Set(['Button', 'Calendar']))
+    await run(new Set(['Calendar']))
+
+    expect([...first]).toEqual(['calendar'])
   })
 
   it('lists every theme in dev when nothing is detected', async () => {
