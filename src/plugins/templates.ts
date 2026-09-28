@@ -138,6 +138,12 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
           if (file) {
             server.watcher.emit('change', file)
           }
+
+          // And send the new list to the dev warning, which accepts the update itself
+          const module = server.moduleGraph.getModuleById('virtual:nuxt-ui-templates/ui/detected.ts')
+          if (module) {
+            await server.reloadModule(module)
+          }
         }
 
         // One run at a time: a save during a run schedules one more after it

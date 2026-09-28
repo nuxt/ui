@@ -12,16 +12,18 @@ const root = realpathSync(mkdtempSync(join(tmpdir(), 'nuxt-ui-redetect-')))
 afterAll(() => rmSync(root, { recursive: true, force: true }))
 
 describe('component detection in the Vite dev server', () => {
-  it('rewrites `ui.css` when a newly used component shows up', async () => {
+  it('rewrites `ui.css` and updates the detected list when a newly used component shows up', async () => {
     writeFileSync(join(root, 'App.vue'), '<template><UButton /></template>\n')
 
     const plugin = TemplatePlugin({ ...defaultOptions } as any, { ui: getDefaultConfig() }, runtimeDir) as any
-    const { resolve: { alias } } = await plugin.vite.config({ root })
+    const { resolve: { alias } } = await plugin.vite.config({ root }, { command: 'serve' })
     const uiCss = alias['#build/ui.css']
     expect(readFileSync(uiCss, 'utf8')).not.toContain('grid-cols-7')
 
     const watcher = Object.assign(new EventEmitter(), { emit: vi.fn(EventEmitter.prototype.emit), add: vi.fn() })
-    plugin.vite.configureServer({ watcher })
+    const detectedModule = {}
+    const server = { watcher, moduleGraph: { getModuleById: vi.fn(() => detectedModule) }, reloadModule: vi.fn() }
+    plugin.vite.configureServer(server)
 
     const file = join(root, 'Extra.vue')
     writeFileSync(file, '<template><UCalendar /></template>\n')
@@ -30,5 +32,9 @@ describe('component detection in the Vite dev server', () => {
     await vi.waitFor(() => expect(readFileSync(uiCss, 'utf8')).toContain('grid-cols-7'), { timeout: 5000 })
     // Vite doesn't watch `node_modules`, so the plugin reports the change itself
     expect(watcher.emit).toHaveBeenCalledWith('change', uiCss)
+    // The dev warning's list comes through HMR
+    expect(server.moduleGraph.getModuleById).toHaveBeenCalledWith('virtual:nuxt-ui-templates/ui/detected.ts')
+    expect(server.reloadModule).toHaveBeenCalledWith(detectedModule)
+    expect(await plugin.load('virtual:nuxt-ui-templates/ui/detected.ts')).toContain('"calendar"')
   })
 })
