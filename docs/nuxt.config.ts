@@ -127,6 +127,7 @@ export default defineNuxtConfig({
     '/docs/getting-started/color-mode/**': { redirect: { to: '/docs/getting-started/integrations/color-mode/**', statusCode: 301 }, prerender: false },
     '/docs/getting-started/i18n/**': { redirect: { to: '/docs/getting-started/integrations/i18n/**', statusCode: 301 }, prerender: false },
     '/docs/getting-started/content': { redirect: { to: '/docs/getting-started/integrations/content', statusCode: 301 }, prerender: false },
+    '/docs/getting-started/theme/css-variables': { redirect: { to: '/docs/getting-started/theme/design-system', statusCode: 301 }, prerender: false },
     // v4 redirects - renamed components
     '/docs/components/button-group': { redirect: { to: '/docs/components/field-group', statusCode: 301 }, prerender: false },
     '/docs/components/page-accordion': { redirect: { to: '/docs/components/accordion', statusCode: 301 }, prerender: false },

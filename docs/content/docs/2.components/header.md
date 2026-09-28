@@ -11,7 +11,7 @@ links:
 
 The Header component renders a `<header>` element.
 
-::tip{to="/docs/getting-started/theme/css-variables#header"}
+::tip{to="/docs/getting-started/theme/design-system#header"}
 Its height is defined through a `--ui-header-height` CSS variable.
 ::
 
