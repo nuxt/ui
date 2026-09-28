@@ -5,8 +5,9 @@ import tailwindColors from 'tailwindcss/colors'
 // Switches a palette at runtime by writing the alias's shades on the root element
 const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
 
-const primary = useState('theme-dropdown-primary', () => 'green')
-const neutral = useState('theme-dropdown-neutral', () => 'slate')
+// The Vue playground renders this too, so no Nuxt `useState`
+const primary = ref('green')
+const neutral = ref('slate')
 
 function setAlias(alias: 'primary' | 'neutral', palette: string) {
   const shade = (tailwindColors as Record<string, Record<number, string>>)[palette]
