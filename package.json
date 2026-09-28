@@ -22,8 +22,8 @@
     "./sources": "./dist/runtime/css/sources.css",
     "./base": "./dist/runtime/css/base.css",
     "./colors": {
-      "types": "./dist/runtime/colors.d.ts",
-      "import": "./dist/runtime/colors.js"
+      "types": "./dist/runtime/css/colors.d.ts",
+      "import": "./dist/runtime/css/colors.js"
     },
     "./unplugin": {
       "types": "./dist/unplugin.d.mts",
@@ -71,7 +71,7 @@
         "./dist/vite.d.mts"
       ],
       "colors": [
-        "./dist/runtime/colors.d.ts"
+        "./dist/runtime/css/colors.d.ts"
       ],
       "vue-plugin": [
         "./vue-plugin.d.ts"

@@ -94,7 +94,7 @@ describe('static css', () => {
 
   // The fallbacks hold Tailwind's palette for a prefixed app, so they follow its version
   it.each(Object.entries({ primary: 'green', secondary: 'blue', success: 'green', info: 'blue', warning: 'yellow', error: 'red', neutral: 'slate' }))('defaults %s to %s', (alias, palette) => {
-    const base = readFileSync(resolve('./runtime/base.css'), 'utf8')
+    const base = readFileSync(resolve('./runtime/css/base.css'), 'utf8')
     for (const [shade, value] of Object.entries((tailwindColors as any)[palette])) {
       expect(base).toContain(`--ui-color-${alias}-${shade}: var(--color-${palette}-${shade}, ${value});`)
     }

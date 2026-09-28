@@ -21,9 +21,8 @@ const dist = join(app, 'node_modules/@nuxt/ui/dist')
 mkdirSync(join(dist, 'runtime/components'), { recursive: true })
 cpSync(join(runtime, 'css'), join(dist, 'runtime/css'), { recursive: true })
 cpSync(join(runtime, 'theme'), join(dist, 'runtime/theme'), { recursive: true })
-cpSync(join(runtime, 'colors.ts'), join(dist, 'runtime/colors.ts'))
 // The `./colors` export, pointing at the source the test copies
-writeFileSync(join(dist, '../package.json'), JSON.stringify({ name: '@nuxt/ui', type: 'module', exports: { './colors': './dist/runtime/colors.ts' } }))
+writeFileSync(join(dist, '../package.json'), JSON.stringify({ name: '@nuxt/ui', type: 'module', exports: { './colors': './dist/runtime/css/colors.ts' } }))
 symlinkSync(join(process.cwd(), 'node_modules/tailwindcss'), join(app, 'node_modules/tailwindcss'))
 
 afterAll(() => rmSync(app, { recursive: true, force: true }))
