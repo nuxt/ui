@@ -38,7 +38,7 @@ const _props = withDefaults(defineProps<FooterProps>(), {
 })
 const slots = defineSlots<FooterSlots>()
 
-const props = useComponentProps('footer', _props)
+const props = useComponentProps('footer', _props, theme)
 
 const appConfig = useAppConfig() as Footer['AppConfig']
 

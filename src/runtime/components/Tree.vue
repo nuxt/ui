@@ -164,7 +164,7 @@ const _props = withDefaults(defineProps<TreeProps<T, M>>(), {
 const emits = defineEmits<TreeEmits<T, M>>()
 const slots = defineSlots<TreeSlots<T>>()
 
-const props = useComponentProps<TreeProps<T, M>>('tree', _props)
+const props = useComponentProps<TreeProps<T, M>>('tree', _props, theme)
 
 const appConfig = useAppConfig() as Tree['AppConfig']
 

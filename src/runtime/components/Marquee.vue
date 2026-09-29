@@ -60,7 +60,7 @@ const _props = withDefaults(defineProps<MarqueeProps>(), {
 })
 defineSlots<MarqueeSlots>()
 
-const props = useComponentProps('marquee', _props)
+const props = useComponentProps('marquee', _props, theme)
 
 const appConfig = useAppConfig() as Marquee['AppConfig']
 

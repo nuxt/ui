@@ -26,7 +26,7 @@ const _props = defineProps<ProseEmProps>()
 
 defineSlots<ProseEmSlots>()
 
-const props = useComponentProps('prose.em', _props)
+const props = useComponentProps('prose.em', _props, theme)
 
 const appConfig = useAppConfig() as ProseEm['AppConfig']
 

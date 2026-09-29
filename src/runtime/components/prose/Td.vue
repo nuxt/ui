@@ -27,7 +27,7 @@ const _props = defineProps<ProseTdProps>()
 
 defineSlots<ProseTdSlots>()
 
-const props = useComponentProps('prose.td', _props)
+const props = useComponentProps('prose.td', _props, theme)
 
 const appConfig = useAppConfig() as ProseTd['AppConfig']
 

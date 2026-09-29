@@ -39,7 +39,7 @@ const _props = defineProps<ProseCalloutProps>()
 
 defineSlots<ProseCalloutSlots>()
 
-const props = useComponentProps('prose.callout', _props)
+const props = useComponentProps('prose.callout', _props, theme)
 
 const appConfig = useAppConfig() as ProseCallout['AppConfig']
 

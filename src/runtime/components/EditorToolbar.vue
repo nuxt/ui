@@ -126,7 +126,7 @@ const _props = withDefaults(defineProps<EditorToolbarProps<T>>(), {
 })
 defineSlots<EditorToolbarSlots<T>>()
 
-const props = useComponentProps<EditorToolbarProps<T>>('editorToolbar', _props)
+const props = useComponentProps<EditorToolbarProps<T>>('editorToolbar', _props, theme)
 
 const appConfig = useAppConfig() as EditorToolbar['AppConfig']
 
