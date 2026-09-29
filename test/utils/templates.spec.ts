@@ -1,9 +1,11 @@
+import { readFileSync } from 'node:fs'
 import { join } from 'pathe'
+import { globSync } from 'tinyglobby'
 import { describe, it, expect } from 'vitest'
-import { getPrefixedLiterals, getTemplates } from '../../src/templates'
+import { getTemplates, prefixedClasses } from '../../src/templates'
 import { defaultOptions, getDefaultConfig, resolveColors } from '../../src/utils/defaults'
 
-function themeContents(overrides: Record<string, any>, vue?: { componentDir?: string, detectedComponents?: Set<string> }) {
+function themeContents(overrides: Record<string, any>, vue?: { detectedComponents?: Set<string> }) {
   const options = { ...defaultOptions, ...overrides, theme: { ...defaultOptions.theme, colors: resolveColors(undefined), ...(overrides.theme || {}) } }
   const templates = getTemplates(options as any, getDefaultConfig(options.theme), undefined, undefined, vue)
   return (filename: string) => templates.find(template => template.filename === filename)!.getContents!({} as any)
@@ -29,18 +31,22 @@ describe('theme templates', () => {
   })
 })
 
-describe('getPrefixedLiterals', () => {
-  it('prefixes the classes components pass to `usePrefix`', () => {
-    const classes = getPrefixedLiterals(join(process.cwd(), 'src/runtime/components'), 'tw')
-    expect(classes).toContain('tw:dark:hidden')
-    expect(classes).toContain('tw:hidden')
-    expect(classes).toContain('tw:dark:block')
-    expect(classes.every(cls => cls.startsWith('tw:'))).toBe(true)
+describe('prefixedClasses', () => {
+  it('lists every class components pass to `usePrefix`', () => {
+    const componentDir = join(process.cwd(), 'src/runtime/components')
+    const classes = new Set<string>()
+    for (const file of globSync('**/*.vue', { cwd: componentDir })) {
+      for (const [, value] of readFileSync(join(componentDir, file), 'utf8').matchAll(/\bprefix\(\s*'([^']+)'\s*\)/g)) {
+        value!.split(/\s+/).filter(Boolean).forEach(cls => classes.add(cls))
+      }
+    }
+
+    expect([...classes].sort()).toEqual(prefixedClasses)
   })
 
-  it('adds them to `ui.css` in the Vue plugin', async () => {
-    const contents = themeContents({ theme: { prefix: 'tw' } }, { componentDir: join(process.cwd(), 'src/runtime/components') })
+  it('adds them to `ui.css` with `theme.prefix`', async () => {
+    const contents = themeContents({ theme: { prefix: 'tw' } })
 
-    expect(await contents('ui.css')).toMatch(/@source inline\("[^"]*tw:dark:hidden[^"]*"\);/)
+    expect(await contents('ui.css')).toContain(`@source inline("${prefixedClasses.map(cls => `tw:${cls}`).join(' ')}");`)
   })
 })

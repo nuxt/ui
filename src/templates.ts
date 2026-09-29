@@ -1,9 +1,6 @@
-import { readFileSync } from 'node:fs'
-import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { camelCase, kebabCase } from 'scule'
 import { genExport } from 'knitwork'
-import { globSync } from 'tinyglobby'
 import colors from 'tailwindcss/colors'
 import { addTemplate, addTypeTemplate, hasNuxtModule, logger, updateTemplates, getLayerDirectories } from '@nuxt/kit'
 import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
@@ -15,26 +12,11 @@ import * as theme from './theme'
 import * as themeProse from './theme/prose'
 import * as themeContent from './theme/content'
 
-const PREFIX_CALL = /\bprefix\(\s*'([^']+)'\s*\)/g
+// The classes components pass to `usePrefix`, which only adds the prefix at
+// runtime, so Tailwind never sees them prefixed
+export const prefixedClasses = ['absolute', 'dark:block', 'dark:hidden', 'dark:inline-block', 'focus:outline-none', 'hidden', 'inset-0', 'lg:block', 'lg:flex', 'lg:hidden', 'peer', 'sm:block']
 
-/**
- * The classes components pass to `usePrefix()`, with the Tailwind prefix.
- * @param componentDir - The components directory
- * @param prefix - The Tailwind prefix
- */
-export function getPrefixedLiterals(componentDir: string, prefix: string): string[] {
-  const classes = new Set<string>()
-  for (const file of globSync('**/*.vue', { cwd: componentDir })) {
-    for (const [, value] of readFileSync(join(componentDir, file), 'utf8').matchAll(PREFIX_CALL)) {
-      for (const cls of value!.split(/\s+/).filter(Boolean)) {
-        classes.add(`${prefix}:${cls}`)
-      }
-    }
-  }
-  return [...classes].sort()
-}
-
-export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt?: Nuxt, resolve?: Resolver['resolve'], vue?: { componentDir?: string, detectedComponents?: Set<string> }) {
+export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt?: Nuxt, resolve?: Resolver['resolve'], vue?: { detectedComponents?: Set<string> }) {
   const templates: NuxtTemplate[] = []
 
   let hasProse = false
@@ -172,6 +154,11 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
       }
     }
 
+    const prefix = options.theme?.prefix
+    if (prefix) {
+      sources.push(`@source inline(${JSON.stringify(prefixedClasses.map(cls => `${prefix}:${cls}`).join(' '))});`)
+    }
+
     // Add theme sources. With `experimental.componentDetection`, Nuxt narrows
     // these to the detected components' files. The Vue plugin can't: its
     // templates live inside `node_modules`, where Tailwind widens a file
@@ -179,16 +166,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     // wouldn't narrow the CSS. It sources the whole directory instead and
     // blanks the theme of unused components at write time (see
     // `writeThemeTemplate`), which needs no extra directive.
-    const componentDir = resolve ? resolve('./runtime/components') : vue?.componentDir
-
-    // The few classes components write themselves go through `usePrefix`, which
-    // only adds the prefix at runtime, so Tailwind never sees them prefixed
-    if (options.theme?.prefix && componentDir) {
-      const classes = getPrefixedLiterals(componentDir, options.theme.prefix)
-      if (classes.length) {
-        sources.push(`@source inline(${JSON.stringify(classes.join(' '))});`)
-      }
-    }
+    const componentDir = resolve ? resolve('./runtime/components') : undefined
 
     if (options.experimental?.componentDetection && nuxt && componentDir && layers.length) {
       const detectedComponents = await detectUsedComponents(

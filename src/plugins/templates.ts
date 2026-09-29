@@ -14,7 +14,7 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
   // `detectedComponents` is assigned in the `vite.config` hook (below), before
   // any template's `getContents` runs — so `experimental.componentDetection`
   // can blank the theme of unused components (see `getTemplates`).
-  const vue: { componentDir?: string, detectedComponents?: Set<string> } = { componentDir }
+  const vue: { detectedComponents?: Set<string> } = {}
   const templates = getTemplates(options, appConfig.ui, undefined, undefined, vue)
   const templateKeys = new Set(templates.map(t => `#build/${t.filename}`))
 
