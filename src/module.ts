@@ -1,11 +1,13 @@
 import { defu } from 'defu'
-import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addPlugin, addBuildPlugin, hasNuxtModule } from '@nuxt/kit'
+import { relative } from 'pathe'
+import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addPlugin, addBuildPlugin, hasNuxtModule, logger, resolvePath } from '@nuxt/kit'
 import { createUnplugin } from 'unplugin'
 import type { HookResult, ModuleDependencies } from '@nuxt/schema'
 import { addTemplates } from './templates'
 import { publicComposables } from './imports'
 import { defaultOptions, getDefaultConfig } from './utils/defaults'
 import { getClientBundleIcons } from './utils/icons'
+import { findTailwindPrefix } from './utils/tailwind'
 import OptionalDepsPlugin from './plugins/optional-deps'
 import { name, version } from '../package.json'
 
@@ -34,17 +36,12 @@ export interface ModuleOptions {
   colorMode?: boolean
 
   /**
-   * Customize how the theme is generated
-   * @see https://ui.nuxt.com/docs/getting-started/theme/design-system
+   * The prefix of your Tailwind CSS import, `@import "tailwindcss" prefix(tw)`,
+   * so components prefix their classes the same way
+   * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#tailwindprefix
+   * @example 'tw'
    */
-  theme?: {
-    /**
-     * Prefix for Tailwind CSS utility classes
-     * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#themeprefix
-     * @example 'tw'
-     */
-    prefix?: string
-  }
+  tailwindPrefix?: string
 
   /**
    * Force the import of prose components even if `@nuxtjs/mdc` or `@nuxt/content` are not installed
@@ -172,13 +169,22 @@ export default defineNuxtModule<ModuleOptions>({
   async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
 
-    options.theme = options.theme || {}
-
     nuxt.options.ui = options
 
     nuxt.options.alias['#ui'] = resolve('./runtime')
 
-    nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, getDefaultConfig(options.theme)) as typeof nuxt.options.appConfig.ui
+    // Read the prefix off the app's `@import "tailwindcss" prefix(...)`, so it's set in one place
+    const stylesheets = await Promise.all(nuxt.options.css.filter(entry => typeof entry === 'string').map(entry => resolvePath(entry)))
+    const tailwind = await findTailwindPrefix(stylesheets)
+    if (tailwind) {
+      if (!options.tailwindPrefix) {
+        options.tailwindPrefix = tailwind.prefix ?? undefined
+      } else if (options.tailwindPrefix !== tailwind.prefix) {
+        logger.warn(`Nuxt UI \`tailwindPrefix\` is \`${options.tailwindPrefix}\` but \`${relative(nuxt.options.rootDir, tailwind.path)}\` imports Tailwind CSS ${tailwind.prefix ? `with \`prefix(${tailwind.prefix})\`` : 'without a prefix'}: components will render classes Tailwind CSS doesn't generate`)
+      }
+    }
+
+    nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, getDefaultConfig(options.tailwindPrefix)) as typeof nuxt.options.appConfig.ui
 
     // Pre-bundle the icons Nuxt UI uses into `@nuxt/icon`'s client bundle so they're
     // embedded at build time instead of fetched at runtime. Its `clientBundle.scan`
@@ -197,7 +203,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     // Isolate root node from portaled components
     nuxt.options.app.rootAttrs = nuxt.options.app.rootAttrs || {}
-    nuxt.options.app.rootAttrs.class = [nuxt.options.app.rootAttrs.class, `${options.theme?.prefix ? options.theme.prefix + ':' : ''}isolate`].filter(Boolean).join(' ')
+    nuxt.options.app.rootAttrs.class = [nuxt.options.app.rootAttrs.class, `${options.tailwindPrefix ? options.tailwindPrefix + ':' : ''}isolate`].filter(Boolean).join(' ')
 
     nuxt.hook('vite:extend', async ({ config }) => {
       const plugin = await import('@tailwindcss/vite').then(r => r.default)
