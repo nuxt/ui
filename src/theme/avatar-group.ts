@@ -1,6 +1,6 @@
-import type { ModuleOptions } from '../module'
+import { colorVariant } from './color'
 
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'inline-flex flex-row-reverse justify-end',
     base: 'relative rounded-full ring-bg first:me-0'
@@ -35,13 +35,10 @@ export default (options: Required<ModuleOptions>) => ({
         base: 'ring-3 -me-2'
       }
     },
-    color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
-      neutral: ''
-    }
+    color: colorVariant({})
   },
   defaultVariants: {
     size: 'md',
     color: 'neutral'
   }
-})
+}

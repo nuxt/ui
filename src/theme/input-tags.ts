@@ -1,53 +1,50 @@
 import { defuFn } from 'defu'
-import type { ModuleOptions } from '../module'
 import input from './input'
 import { fieldGroupVariant } from './field-group'
 
-export default (options: Required<ModuleOptions>) => {
-  return defuFn({
-    slots: {
-      root: (prev: string) => [prev, 'flex-wrap'],
-      base: () => 'rounded-md transition-colors',
-      item: 'px-1.5 py-0.5 rounded-sm font-medium inline-flex items-center gap-0.5 ring ring-inset ring-accented bg-elevated text-default data-disabled:cursor-not-allowed data-disabled:opacity-75 wrap-anywhere data-[state=active]:bg-accented',
-      itemText: '',
-      itemDelete: 'inline-flex items-center rounded-xs text-dimmed hover:text-default hover:bg-accented/75 disabled:pointer-events-none transition-colors',
-      itemDeleteIcon: 'shrink-0',
-      input: 'flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
-    },
-    variants: {
-      ...fieldGroupVariant,
-      size: {
-        xs: {
-          item: 'text-[10px]/3',
-          itemDeleteIcon: 'size-3'
-        },
-        sm: {
-          item: 'text-[10px]/3',
-          itemDeleteIcon: 'size-3'
-        },
-        md: {
-          item: 'text-xs',
-          itemDeleteIcon: 'size-3.5'
-        },
-        lg: {
-          item: 'text-xs',
-          itemDeleteIcon: 'size-3.5'
-        },
-        xl: {
-          item: 'text-sm',
-          itemDeleteIcon: 'size-4'
-        }
+export default defuFn({
+  slots: {
+    root: (prev: string) => [prev, 'flex-wrap'],
+    base: () => 'rounded-md transition-colors',
+    item: 'px-1.5 py-0.5 rounded-sm font-medium inline-flex items-center gap-0.5 ring ring-inset ring-accented bg-elevated text-default data-disabled:cursor-not-allowed data-disabled:opacity-75 wrap-anywhere data-[state=active]:bg-accented',
+    itemText: '',
+    itemDelete: 'inline-flex items-center rounded-xs text-dimmed hover:text-default hover:bg-accented/75 disabled:pointer-events-none transition-colors',
+    itemDeleteIcon: 'shrink-0',
+    input: 'flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
+  },
+  variants: {
+    ...fieldGroupVariant,
+    size: {
+      xs: {
+        item: 'text-[10px]/3',
+        itemDeleteIcon: 'size-3'
       },
-      variant: (prev: Record<string, { base: string }>) => Object.fromEntries(
-        Object.entries(prev).map(([key, value]) => [key, { base: replaceFocus(value.base) }])
-      )
+      sm: {
+        item: 'text-[10px]/3',
+        itemDeleteIcon: 'size-3'
+      },
+      md: {
+        item: 'text-xs',
+        itemDeleteIcon: 'size-3.5'
+      },
+      lg: {
+        item: 'text-xs',
+        itemDeleteIcon: 'size-3.5'
+      },
+      xl: {
+        item: 'text-sm',
+        itemDeleteIcon: 'size-4'
+      }
     },
-    compoundVariants: (prev: Record<string, any>[]) => prev.map(item => ({
-      ...item,
-      class: typeof item.class.base === 'string' ? { ...item.class, base: replaceFocus(item.class.base) } : item.class
-    }))
-  }, input(options))
-}
+    variant: (prev: Record<string, { base: string }>) => Object.fromEntries(
+      Object.entries(prev).map(([key, value]) => [key, { base: replaceFocus(value.base) }])
+    )
+  },
+  compoundVariants: (prev: Record<string, any>[]) => prev.map(item => ({
+    ...item,
+    class: typeof item.class.base === 'string' ? { ...item.class, base: replaceFocus(item.class.base) } : item.class
+  }))
+}, input)
 
 function replaceFocus(str: string): string {
   return str

@@ -297,7 +297,7 @@ export const presets: ThemePreset[] = [{
     },
     components: {
       // solid primary actions cast a warm glow
-      button: { compoundVariants: [{ color: 'primary', variant: 'solid', class: 'shadow-md shadow-primary/30' }] }
+      button: { compoundVariants: [{ color: 'primary', variant: 'solid', class: { base: 'shadow-md shadow-primary/30' } }] }
     }
   }
 }, {
