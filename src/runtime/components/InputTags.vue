@@ -72,8 +72,7 @@ import { computed, useTemplateRef, onMounted, onScopeDispose, toRaw, toRef } fro
 import { TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
@@ -93,7 +92,7 @@ const slots = defineSlots<InputTagsSlots<T>>()
 
 const props = useComponentProps<InputTagsProps<T>>('inputTags', _props, theme)
 
-const appConfig = useAppConfig() as InputTags['AppConfig']
+const appConfig = useThemeConfig() as InputTags['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.inputTags)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'addOnPaste', 'addOnTab', 'addOnBlur', 'duplicate', 'delimiter', 'max', 'convertValue', 'displayValue', 'required'), emits)

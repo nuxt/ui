@@ -68,8 +68,7 @@ export interface InputSlots {
 import { useTemplateRef, computed, onMounted, onScopeDispose } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useVModel } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
@@ -94,7 +93,7 @@ const props = useComponentProps<InputProps<T, Mod>>('input', _props, theme)
 // eslint-disable-next-line vue/no-dupe-keys
 const modelValue = useVModel<InputProps<T, Mod>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, { defaultValue: props.defaultValue })
 
-const appConfig = useAppConfig() as Input['AppConfig']
+const appConfig = useThemeConfig() as Input['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.input)
 
 const { emitFormBlur, emitFormInput, emitFormChange, size: formFieldSize, color: formFieldColor, id, name, highlight: formFieldHighlight, disabled: formFieldDisabled, emitFormFocus, ariaAttrs } = useFormField<InputProps<T>>(_props, { deferInputValidation: true })

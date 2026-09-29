@@ -125,8 +125,8 @@ import { isEqual } from 'ohash/utils'
 import { useForwardProps, Slot } from 'reka-ui'
 import { hasProtocol } from 'ufo'
 import { reactiveOmit } from '@vueuse/core'
-import { useRoute, useAppConfig, useNuxtApp, onNuxtReady } from '#imports'
-import { useComponentOverrides } from '../composables/useComponentProps'
+import { useRoute, useNuxtApp, onNuxtReady } from '#imports'
+import { useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 import { isPartiallyEqual } from '../utils/link'
 import { requestIdleCallback, cancelIdleCallback, observeIntersection } from '../utils/prefetch'
@@ -144,7 +144,7 @@ const props = withDefaults(defineProps<LinkProps>(), {
 defineSlots<LinkSlots>()
 
 const route = useRoute()
-const appConfig = useAppConfig() as Link['AppConfig']
+const appConfig = useThemeConfig() as Link['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.link)
 const nuxtApp = useNuxtApp()
 

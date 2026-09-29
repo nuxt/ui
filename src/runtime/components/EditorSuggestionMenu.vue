@@ -52,10 +52,9 @@ export interface EditorSuggestionMenuProps<T extends EditorSuggestionMenuItem = 
 
 <script setup lang="ts" generic="T extends EditorSuggestionMenuItem">
 import { computed, h, inject, onMounted, onBeforeUnmount, nextTick, toRef } from 'vue'
-import { useAppConfig } from '#imports'
 import { useEditorMenu } from '../composables/useEditorMenu'
 import { createHandlers } from '../utils/editor'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
@@ -68,7 +67,7 @@ const _props = withDefaults(defineProps<EditorSuggestionMenuProps<T>>(), {
 
 const props = useComponentProps('editorSuggestionMenu', _props, theme)
 
-const appConfig = useAppConfig() as EditorSuggestionMenu['AppConfig']
+const appConfig = useThemeConfig() as EditorSuggestionMenu['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.editorSuggestionMenu)
 
 const handlers = inject('editorHandlers', computed(() => createHandlers()))

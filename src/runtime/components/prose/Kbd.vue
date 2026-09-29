@@ -19,8 +19,7 @@ export interface ProseKbdSlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 import UKbd from '../Kbd.vue'
 
@@ -29,7 +28,7 @@ defineSlots<ProseKbdSlots>()
 
 const props = useComponentProps('prose.kbd', _props, theme)
 
-const appConfig = useAppConfig() as ProseKbd['AppConfig']
+const appConfig = useThemeConfig() as ProseKbd['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.prose?.kbd)
 
 // eslint-disable-next-line vue/no-dupe-keys

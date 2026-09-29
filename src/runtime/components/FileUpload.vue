@@ -152,9 +152,8 @@ export interface FileUploadSlots<M extends boolean = false, T extends FileUpload
 import { computed, toRef, toRefs, watch } from 'vue'
 import { Primitive, VisuallyHidden } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
-import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useFormField } from '../composables/useFormField'
 import { useFileUpload } from '../composables/useFileUpload'
 import { tv } from '../utils/tv'
@@ -184,7 +183,7 @@ const modelValue = defineModel<FileUploadFiles<T | File, M>>()
 
 const props = useComponentProps<FileUploadProps<M, T>>('fileUpload', _props, theme)
 
-const appConfig = useAppConfig() as FileUpload['AppConfig']
+const appConfig = useThemeConfig() as FileUpload['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.fileUpload)
 
 const { t } = useLocale()
