@@ -27,7 +27,6 @@ export interface StoredTheme {
   radius?: number
   fontSize?: number
   icons?: string
-  blackAsPrimary?: boolean
   font?: FontPrefs
   /** Semantic alias overrides (secondary, success, info, warning, error). */
   colors?: Record<string, string>
@@ -50,7 +49,7 @@ export interface StoredTheme {
  */
 const LEGACY_KEYS = [
   'nuxt-ui-primary', 'nuxt-ui-neutral', 'nuxt-ui-radius', 'nuxt-ui-font-size',
-  'nuxt-ui-font', 'nuxt-ui-icons', 'nuxt-ui-black-as-primary',
+  'nuxt-ui-font', 'nuxt-ui-icons',
   'nuxt-ui-font-prefs', 'nuxt-ui-ai-theme', 'nuxt-ui-custom-colors', 'nuxt-ui-css-variables'
 ]
 
@@ -76,7 +75,6 @@ function migrateLegacyTheme(): StoredTheme {
     radius: number('nuxt-ui-radius'),
     fontSize: number('nuxt-ui-font-size'),
     icons: read('nuxt-ui-icons'),
-    blackAsPrimary: read('nuxt-ui-black-as-primary') === 'true' || undefined,
     // the family and the rest of the typography were separate keys
     font: normalizeFont({ ...json<Record<string, unknown>>('nuxt-ui-font-prefs'), sans: read('nuxt-ui-font') }),
     colors: extras?.colors,
@@ -194,13 +192,12 @@ export function snapshotStoredTheme(): StoredTheme {
   const extras = useState<Record<string, any>>('nuxt-ui-ai-theme').value
   const cssVariables = useState<StoredTheme['cssVariables']>('nuxt-ui-css-variables').value
   return {
-    primary: unless(appConfig.ui.colors.primary, DEFAULT_COLORS.primary),
-    neutral: unless(appConfig.ui.colors.neutral, DEFAULT_COLORS.neutral),
+    primary: unless(appConfig.colors.primary, DEFAULT_COLORS.primary),
+    neutral: unless(appConfig.colors.neutral, DEFAULT_COLORS.neutral),
     radius: unless(useState<number>('nuxt-ui-radius').value, THEME_DEFAULTS.radius),
     fontSize: unless(useState<number>('nuxt-ui-font-size').value, THEME_DEFAULTS.fontSize),
     font: filled(useState<StoredTheme['font']>('nuxt-ui-font').value),
     icons: unless(useState<string>('nuxt-ui-icons').value, THEME_DEFAULTS.icons),
-    blackAsPrimary: useState<boolean>('nuxt-ui-black-as-primary').value || undefined,
     colors: filled(extras?.colors),
     components: filled(extras?.ui),
     customColors: filled(useState<StoredTheme['customColors']>('nuxt-ui-custom-colors').value),
