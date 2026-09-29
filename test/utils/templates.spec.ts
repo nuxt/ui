@@ -1,12 +1,9 @@
-import { readFileSync } from 'node:fs'
-import { join } from 'pathe'
-import { globSync } from 'tinyglobby'
 import { describe, it, expect } from 'vitest'
-import { getTemplates, prefixedClasses } from '../../src/templates'
-import { defaultOptions, getDefaultConfig, resolveColors } from '../../src/utils/defaults'
+import { getTemplates } from '../../src/templates'
+import { defaultOptions, getDefaultConfig } from '../../src/utils/defaults'
 
 function themeContents(overrides: Record<string, any>, vue?: { detectedComponents?: Set<string> }) {
-  const options = { ...defaultOptions, ...overrides, theme: { ...defaultOptions.theme, colors: resolveColors(undefined), ...(overrides.theme || {}) } }
+  const options = { ...defaultOptions, ...overrides, theme: { ...defaultOptions.theme, ...(overrides.theme || {}) } }
   const templates = getTemplates(options as any, getDefaultConfig(options.theme), undefined, undefined, vue)
   return (filename: string) => templates.find(template => template.filename === filename)!.getContents!({} as any)
 }
@@ -31,31 +28,19 @@ describe('theme templates', () => {
 
   it('skips prose themes with `prose: false`', () => {
     const hasProse = (overrides: Record<string, any>) => {
-      const options = { ...defaultOptions, ...overrides, theme: { ...defaultOptions.theme, colors: resolveColors(undefined) } }
+      const options = { ...defaultOptions, ...overrides }
       return getTemplates(options as any, getDefaultConfig(options.theme)).some(template => template.filename === 'ui/prose/index.ts')
     }
 
     expect(hasProse({ content: true })).toBe(true)
     expect(hasProse({ content: true, prose: false })).toBe(false)
   })
-})
 
-describe('prefixedClasses', () => {
-  it('lists every class components pass to `usePrefix`', () => {
-    const componentDir = join(process.cwd(), 'src/runtime/components')
-    const classes = new Set<string>()
-    for (const file of globSync('**/*.vue', { cwd: componentDir })) {
-      for (const [, value] of readFileSync(join(componentDir, file), 'utf8').matchAll(/\bprefix\(\s*'([^']+)'\s*\)/g)) {
-        value!.split(/\s+/).filter(Boolean).forEach(cls => classes.add(cls))
-      }
-    }
+  it('points each color scope at its own role variables, with the prefix', async () => {
+    const css = await themeContents({ theme: { prefix: 'tw' } })('ui.css')
 
-    expect([...classes].sort()).toEqual(prefixedClasses)
-  })
-
-  it('adds them to `ui.css` with `theme.prefix`', async () => {
-    const contents = themeContents({ theme: { prefix: 'tw' } })
-
-    expect(await contents('ui.css')).toContain(`@source inline("${prefixedClasses.map(cls => `tw:${cls}`).join(' ')}");`)
+    expect(css).toContain('[class*="[--ui-accent:"]')
+    expect(css).toContain('.tw\\:\\[--ui-accent\\:var\\(--ui-warning\\)\\] {\n    --ui-accent-foreground: var(--ui-warning-foreground);')
+    expect(css).toContain('.tw\\:\\[--ui-accent\\:var\\(--ui-neutral\\)\\] {\n    --ui-neutral: var(--ui-bg-inverted);')
   })
 })
