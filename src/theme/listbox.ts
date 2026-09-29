@@ -1,8 +1,8 @@
-import type { ModuleOptions } from '../module'
+import { colorVariant } from './color'
 
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
-    root: 'flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden',
+    root: 'flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-accent-focus has-focus-visible:outline-3 has-focus-visible:ring-accent',
     input: 'border-b border-default',
     content: 'relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none',
     group: 'p-1 isolate',
@@ -87,14 +87,7 @@ export default (options: Required<ModuleOptions>) => ({
         itemDescription: 'text-sm'
       }
     },
-    color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        root: `outline-${color}/25 has-focus-visible:outline-3 has-focus-visible:ring-${color}`
-      }])),
-      neutral: {
-        root: 'outline-inverted/25 has-focus-visible:outline-3 has-focus-visible:ring-inverted'
-      }
-    },
+    color: colorVariant({ root: '' }),
     virtualize: {
       true: {
         content: 'p-1 isolate'
@@ -109,24 +102,13 @@ export default (options: Required<ModuleOptions>) => ({
       }
     },
     highlight: {
-      true: ''
+      true: {
+        root: 'ring ring-inset ring-accent'
+      }
     }
   },
-  compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
-    color,
-    highlight: true,
-    class: {
-      root: `ring ring-inset ring-${color}`
-    }
-  })), {
-    color: 'neutral',
-    highlight: true,
-    class: {
-      root: 'ring ring-inset ring-inverted'
-    }
-  }],
   defaultVariants: {
     color: 'primary',
     size: 'md'
   }
-})
+}

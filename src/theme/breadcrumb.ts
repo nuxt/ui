@@ -1,11 +1,11 @@
-import type { ModuleOptions } from '../module'
+import { colorVariant } from './color'
 
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'relative min-w-0',
     list: 'flex items-center gap-1.5',
     item: 'flex min-w-0',
-    link: 'group relative flex items-center gap-1.5 text-sm min-w-0 rounded-md',
+    link: 'group relative flex items-center gap-1.5 text-sm min-w-0 rounded-md outline-accent-focus focus-visible:outline-3',
     linkLeadingIcon: 'shrink-0 size-5',
     linkLeadingAvatar: 'shrink-0',
     linkLeadingAvatarSize: '2xs',
@@ -16,7 +16,7 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     active: {
       true: {
-        link: 'font-semibold'
+        link: 'font-semibold text-accent'
       },
       false: {
         link: 'text-muted font-medium'
@@ -30,10 +30,7 @@ export default (options: Required<ModuleOptions>) => ({
     to: {
       true: ''
     },
-    color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, { link: `outline-${color}/25 focus-visible:outline-3` }])),
-      neutral: { link: 'outline-inverted/25 focus-visible:outline-3' }
-    }
+    color: colorVariant({ root: '' })
   },
   compoundVariants: [{
     disabled: false,
@@ -42,20 +39,8 @@ export default (options: Required<ModuleOptions>) => ({
     class: {
       link: 'hover:text-default transition-colors'
     }
-  }, ...(options.theme.colors || []).map((color: string) => ({
-    color,
-    active: true,
-    class: {
-      link: `text-${color}`
-    }
-  })), {
-    color: 'neutral',
-    active: true,
-    class: {
-      link: 'text-highlighted'
-    }
   }],
   defaultVariants: {
     color: 'primary'
   }
-})
+}

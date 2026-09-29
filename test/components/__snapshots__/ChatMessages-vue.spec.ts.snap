@@ -91,7 +91,7 @@ exports[`ChatMessages > renders with content slot correctly 1`] = `
     <div data-slot="chat-message-container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
       <!--v-if-->
       <div data-slot="chat-message-body" class="min-w-0">
-        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Content slot</div>
+        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 bg-elevated/50 px-4 py-3 rounded-lg min-h-12">Content slot</div>
         <!--v-if-->
       </div>
     </div>

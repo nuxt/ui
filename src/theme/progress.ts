@@ -1,12 +1,12 @@
-import type { ModuleOptions } from '../module'
+import { colorVariant } from './color'
 
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'gap-2',
     base: 'relative overflow-hidden rounded-full bg-accented',
-    indicator: 'rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse',
+    indicator: 'rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-accent',
     status: 'flex text-dimmed duration-200 ease-out motion-reduce:transition-none',
-    steps: 'grid items-end',
+    steps: 'grid items-end text-accent',
     step: 'truncate text-end row-start-1 col-start-1 transition-opacity ease-out'
   },
   variants: {
@@ -16,16 +16,7 @@ export default (options: Required<ModuleOptions>) => ({
       'swing': '',
       'elastic': ''
     },
-    color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        indicator: `bg-${color}`,
-        steps: `text-${color}`
-      }])),
-      neutral: {
-        indicator: 'bg-inverted',
-        steps: 'text-highlighted'
-      }
-    },
+    color: colorVariant({ root: '' }),
     size: {
       '2xs': {
         status: 'text-xs',
@@ -212,4 +203,4 @@ export default (options: Required<ModuleOptions>) => ({
     color: 'primary',
     size: 'md'
   }
-})
+}

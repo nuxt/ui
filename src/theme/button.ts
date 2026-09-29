@@ -1,7 +1,7 @@
-import type { ModuleOptions } from '../module'
+import { colorVariant } from './color'
 import { fieldGroupVariant } from './field-group'
 
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     base: 'rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors',
     label: 'truncate',
@@ -12,17 +12,26 @@ export default (options: Required<ModuleOptions>) => ({
   },
   variants: {
     ...fieldGroupVariant,
-    color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
-      neutral: ''
-    },
+    color: colorVariant({ base: '' }),
     variant: {
-      solid: '',
-      outline: '',
-      soft: '',
-      subtle: '',
-      ghost: '',
-      link: ''
+      solid: {
+        base: 'text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3'
+      },
+      outline: {
+        base: 'ring ring-inset ring-accent-border text-accent-soft-foreground bg-accent-surface hover:bg-accent-soft active:bg-accent-soft disabled:bg-accent-surface aria-disabled:bg-accent-surface dark:disabled:bg-accent-surface dark:aria-disabled:bg-accent-surface outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent'
+      },
+      soft: {
+        base: 'text-accent-soft-foreground bg-accent-soft hover:bg-accent-soft-hover active:bg-accent-soft-hover outline-accent-focus focus-visible:outline-3 disabled:bg-accent-soft aria-disabled:bg-accent-soft'
+      },
+      subtle: {
+        base: 'text-accent-soft-foreground ring ring-inset ring-accent-border-soft bg-accent-soft hover:bg-accent-soft-hover active:bg-accent-soft-hover disabled:bg-accent-soft aria-disabled:bg-accent-soft outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent'
+      },
+      ghost: {
+        base: 'text-accent-soft-foreground hover:bg-accent-soft active:bg-accent-soft outline-accent-focus focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent'
+      },
+      link: {
+        base: 'text-accent-muted hover:text-accent-muted-hover active:text-accent-muted-hover disabled:text-accent-muted aria-disabled:text-accent-muted outline-accent-focus focus-visible:outline-3'
+      }
     },
     size: {
       xs: {
@@ -83,55 +92,7 @@ export default (options: Required<ModuleOptions>) => ({
       }
     }
   },
-  compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
-    color,
-    variant: 'solid',
-    class: { base: `text-inverted bg-${color} hover:bg-${color}/75 active:bg-${color}/75 disabled:bg-${color} aria-disabled:bg-${color} outline-${color}/25 focus-visible:outline-3` }
-  })), ...(options.theme.colors || []).map((color: string) => ({
-    color,
-    variant: 'outline',
-    class: { base: `ring ring-inset ring-${color}/50 text-${color} hover:bg-${color}/10 active:bg-${color}/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent outline-${color}/25 focus-visible:outline-3 focus-visible:ring-${color}` }
-  })), ...(options.theme.colors || []).map((color: string) => ({
-    color,
-    variant: 'soft',
-    class: { base: `text-${color} bg-${color}/10 hover:bg-${color}/15 active:bg-${color}/15 outline-${color}/25 focus-visible:outline-3 disabled:bg-${color}/10 aria-disabled:bg-${color}/10` }
-  })), ...(options.theme.colors || []).map((color: string) => ({
-    color,
-    variant: 'subtle',
-    class: { base: `text-${color} ring ring-inset ring-${color}/25 bg-${color}/10 hover:bg-${color}/15 active:bg-${color}/15 disabled:bg-${color}/10 aria-disabled:bg-${color}/10 outline-${color}/25 focus-visible:outline-3 focus-visible:ring-${color}` }
-  })), ...(options.theme.colors || []).map((color: string) => ({
-    color,
-    variant: 'ghost',
-    class: { base: `text-${color} hover:bg-${color}/10 active:bg-${color}/10 outline-${color}/25 focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent` }
-  })), ...(options.theme.colors || []).map((color: string) => ({
-    color,
-    variant: 'link',
-    class: { base: `text-${color} hover:text-${color}/75 active:text-${color}/75 disabled:text-${color} aria-disabled:text-${color} outline-${color}/25 focus-visible:outline-3` }
-  })), {
-    color: 'neutral',
-    variant: 'solid',
-    class: { base: 'text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3' }
-  }, {
-    color: 'neutral',
-    variant: 'outline',
-    class: { base: 'ring ring-inset ring-accented text-default bg-default hover:bg-elevated active:bg-elevated disabled:bg-default aria-disabled:bg-default outline-inverted/25 focus-visible:outline-3 focus-visible:ring-inverted' }
-  }, {
-    color: 'neutral',
-    variant: 'soft',
-    class: { base: 'text-default bg-elevated hover:bg-accented/75 active:bg-accented/75 outline-inverted/25 focus-visible:outline-3 disabled:bg-elevated aria-disabled:bg-elevated' }
-  }, {
-    color: 'neutral',
-    variant: 'subtle',
-    class: { base: 'ring ring-inset ring-accented text-default bg-elevated hover:bg-accented/75 active:bg-accented/75 disabled:bg-elevated aria-disabled:bg-elevated outline-inverted/25 focus-visible:outline-3 focus-visible:ring-inverted' }
-  }, {
-    color: 'neutral',
-    variant: 'ghost',
-    class: { base: 'text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent' }
-  }, {
-    color: 'neutral',
-    variant: 'link',
-    class: { base: 'text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3' }
-  }, {
+  compoundVariants: [{
     size: 'xs',
     square: true,
     class: { base: 'p-1' }
@@ -170,4 +131,4 @@ export default (options: Required<ModuleOptions>) => ({
     variant: 'solid',
     size: 'md'
   }
-})
+}

@@ -1,7 +1,7 @@
-import type { ModuleOptions } from '../module'
+import { colorVariant } from './color'
 import { fieldGroupVariant } from './field-group'
 
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     base: 'font-medium inline-flex items-center',
     label: 'truncate',
@@ -12,15 +12,20 @@ export default (options: Required<ModuleOptions>) => ({
   },
   variants: {
     ...fieldGroupVariant,
-    color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
-      neutral: ''
-    },
+    color: colorVariant({ base: '' }),
     variant: {
-      solid: '',
-      outline: '',
-      soft: '',
-      subtle: ''
+      solid: {
+        base: 'bg-accent text-accent-foreground'
+      },
+      outline: {
+        base: 'text-accent-soft-foreground bg-accent-surface ring ring-inset ring-accent-border'
+      },
+      soft: {
+        base: 'bg-accent-soft text-accent-soft-foreground'
+      },
+      subtle: {
+        base: 'bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft'
+      }
     },
     size: {
       xs: {
@@ -58,39 +63,7 @@ export default (options: Required<ModuleOptions>) => ({
       true: ''
     }
   },
-  compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
-    color,
-    variant: 'solid',
-    class: { base: `bg-${color} text-inverted` }
-  })), ...(options.theme.colors || []).map((color: string) => ({
-    color,
-    variant: 'outline',
-    class: { base: `text-${color} ring ring-inset ring-${color}/50` }
-  })), ...(options.theme.colors || []).map((color: string) => ({
-    color,
-    variant: 'soft',
-    class: { base: `bg-${color}/10 text-${color}` }
-  })), ...(options.theme.colors || []).map((color: string) => ({
-    color,
-    variant: 'subtle',
-    class: { base: `bg-${color}/10 text-${color} ring ring-inset ring-${color}/25` }
-  })), {
-    color: 'neutral',
-    variant: 'solid',
-    class: { base: 'text-inverted bg-inverted' }
-  }, {
-    color: 'neutral',
-    variant: 'outline',
-    class: { base: 'ring ring-inset ring-accented text-default bg-default' }
-  }, {
-    color: 'neutral',
-    variant: 'soft',
-    class: { base: 'text-default bg-elevated' }
-  }, {
-    color: 'neutral',
-    variant: 'subtle',
-    class: { base: 'ring ring-inset ring-accented text-default bg-elevated' }
-  }, {
+  compoundVariants: [{
     size: 'xs',
     square: true,
     class: { base: 'p-0.5' }
@@ -116,4 +89,4 @@ export default (options: Required<ModuleOptions>) => ({
     variant: 'solid',
     size: 'md'
   }
-})
+}
