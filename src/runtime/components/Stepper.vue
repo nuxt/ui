@@ -82,7 +82,7 @@ import { computed } from 'vue'
 import { StepperRoot, StepperItem, StepperTrigger, StepperIndicator, StepperSeparator, StepperTitle, StepperDescription } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
@@ -103,11 +103,12 @@ const modelValue = defineModel<string | number>()
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Stepper['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.stepper)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'linear'))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.stepper)({
+const ui = computed(() => tv(theme, overrides.value)({
   orientation: props.orientation,
   size: props.size,
   color: props.color

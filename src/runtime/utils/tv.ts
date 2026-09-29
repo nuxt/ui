@@ -3,6 +3,7 @@ import type { ComputedRef } from 'vue'
 import { twMerge, extendTailwindMerge } from 'tailwind-merge'
 import type { AppConfig } from '@nuxt/schema'
 import { isEmpty } from './index'
+import { unstyledTheme } from './unstyled'
 import type { ClassValue, SlotClassReplacer, TVMergeConfig, TV } from '../types/tv'
 import appConfig from '#build/app.config'
 
@@ -743,6 +744,13 @@ function specFor(theme: Record<string, any>, overrides: Record<string, any> | nu
 
 function createTV(config?: TVMergeConfig) {
   return function tv(theme: Record<string, any>, overrides?: Record<string, any> | null) {
+    // `unstyled` from the nearest `<UTheme>`: resolve against the blanked theme,
+    // so only the overrides, `:ui` and `class` classes remain
+    if (overrides?.unstyled) {
+      const { unstyled: _, ...rest } = overrides
+      theme = unstyledTheme(theme)
+      overrides = rest
+    }
     const spec = specFor(theme, overrides, config)
 
     return (props?: Record<string, any>) => {

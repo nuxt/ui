@@ -77,7 +77,7 @@ import { ref, computed, onBeforeUpdate } from 'vue'
 import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { tv } from '../utils/tv'
 
@@ -90,11 +90,12 @@ defineSlots<SplitterSlots<T>>()
 const props = useComponentProps<SplitterProps<T>>('splitter', _props, theme)
 
 const appConfig = useAppConfig() as Splitter['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.splitter)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'id', 'autoSaveId', 'keyboardResizeBy', 'storage'))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.splitter)({
+const ui = computed(() => tv(theme, overrides.value)({
   orientation: props.orientation
 }))
 

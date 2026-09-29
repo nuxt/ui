@@ -38,6 +38,7 @@ type AppConfigUI = {
   prefix?: string
   tv?: TVMergeConfig
   defaultVariants?: ThemeDefaultVariants
+  unstyled?: boolean
 } & TVConfig<typeof ui>
 
 export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode' | 'content'> {

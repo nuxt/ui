@@ -34,7 +34,7 @@ export interface ChatShimmerProps {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 
 const _props = withDefaults(defineProps<ChatShimmerProps>(), {
@@ -46,9 +46,10 @@ const _props = withDefaults(defineProps<ChatShimmerProps>(), {
 const props = useComponentProps('chatShimmer', _props, theme)
 
 const appConfig = useAppConfig() as ChatShimmer['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.chatShimmer)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.chatShimmer)())
+const ui = computed(() => tv(theme, overrides.value)())
 
 // eslint-disable-next-line vue/no-dupe-keys
 const spread = computed(() => props.text.length * props.spread)

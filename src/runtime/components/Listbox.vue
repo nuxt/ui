@@ -166,7 +166,7 @@ import { useForwardProps } from '../composables/useForwardProps'
 import { createReusableTemplate, reactivePick } from '@vueuse/core'
 import { defu } from 'defu'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useFilter } from '../composables/useFilter'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
@@ -197,6 +197,7 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Listbox['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.listbox)
 const { filterGroups } = useFilter()
 
 // `role="listbox"` is on the content, not on the root.
@@ -239,7 +240,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: L
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.listbox)({
+const ui = computed(() => tv(theme, overrides.value)({
   color: color.value,
   size: size.value,
   highlight: highlight.value,
