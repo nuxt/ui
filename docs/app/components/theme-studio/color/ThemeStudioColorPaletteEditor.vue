@@ -380,7 +380,7 @@ onUnmounted(() => {
 
 /** Fit curves from whatever palette the alias currently shows. */
 function seedFromCurrent() {
-  const name = (appConfig.ui.colors as Record<string, string>)[props.alias]
+  const name = (appConfig.colors as Record<string, string>)[props.alias]
   if (!name) return
 
   const source = paletteShades(name)
@@ -413,7 +413,7 @@ watch(() => paletteParams.value[props.alias], (value) => {
 // Seed from the curves of the colour on screen, unless the editor already OWNS
 // curves for this alias: a preset's custom ramp is active but unowned, so it
 // still gets fitted. Immediate because the popover mounts this on open.
-watch(() => (appConfig.ui.colors as Record<string, string>)[props.alias], () => {
+watch(() => (appConfig.colors as Record<string, string>)[props.alias], () => {
   stuckShade.value = undefined
   hoveredShade.value = undefined
   const owned = paletteParams.value[props.alias]
