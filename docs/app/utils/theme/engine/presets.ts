@@ -76,6 +76,7 @@ export const presets: ThemePreset[] = [{
       },
       dark: {
         '--ui-border-default': 'color-mix(in oklab, white 10%, transparent)',
+        '--ui-border-muted': 'color-mix(in oklab, white 10%, transparent)',
         '--ui-border-strong': 'color-mix(in oklab, white 15%, transparent)'
       }
     }
@@ -142,6 +143,7 @@ export const presets: ThemePreset[] = [{
         '--ui-bg-muted': 'var(--ui-color-neutral-200)',
         '--ui-text-default': 'var(--ui-color-neutral-800)',
         '--ui-border-default': 'var(--ui-color-neutral-400)',
+        '--ui-border-muted': 'var(--ui-color-neutral-300)',
         '--ui-bg-surface': 'var(--ui-color-neutral-100)',
         '--ui-text-muted': 'var(--ui-color-neutral-600)',
         '--ui-text-faint': 'var(--ui-color-neutral-600)',
@@ -356,6 +358,9 @@ export const presets: ThemePreset[] = [{
         // Light keeps the ink hairline; dark has to run the other way, a
         // border below the surface's own lightness just reads as a seam.
         '--ui-border-default': { light: 950, dark: 600 },
+        // dark is left at the library's own neutral-700, restating it would
+        // only add a line the importer then has to recognise as generated
+        '--ui-border-muted': { light: 400 },
         '--ui-border-strong': { light: 950, dark: 500 },
         '--ui-border-inverted': { light: 500, dark: 50 }
       }
@@ -465,6 +470,9 @@ export const presets: ThemePreset[] = [{
         '--ui-bg-soft': 'var(--ui-color-neutral-200)',
         '--ui-bg-soft-hover': 'var(--ui-color-neutral-300)',
         '--ui-border-default': 'var(--ui-color-neutral-300)',
+        // the library leaves this at 200, where the muted surface now sits:
+        // a code block's frame would land on its own background
+        '--ui-border-muted': 'var(--ui-color-neutral-300)',
         '--ui-border-strong': 'var(--ui-color-neutral-400)'
       },
       dark: {

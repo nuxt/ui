@@ -140,13 +140,11 @@ function normalizeFont(raw: unknown): FontPrefs | undefined {
 
 /**
  * The semantic tokens v5 renamed. A theme saved before keeps its overrides
- * under the new names. `--ui-text-toned` and `--ui-border-muted` merged into
- * `--ui-text-default` and `--ui-border-default`, and only fill them when the
- * theme doesn't set them another way.
+ * under the new names. `--ui-text-toned` merged into `--ui-text-default`, and
+ * only fills it when the theme doesn't set it another way.
  */
 const MERGED_TOKENS: Record<string, string> = {
-  '--ui-text-toned': '--ui-text-default',
-  '--ui-border-muted': '--ui-border-default'
+  '--ui-text-toned': '--ui-text-default'
 }
 const RENAMED_TOKENS: Record<string, string> = {
   '--ui-bg': '--ui-bg-surface',

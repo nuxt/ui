@@ -23,7 +23,7 @@ const { data: components } = await useAsyncData(`components-${props.category}`, 
       :description="component.description"
       :to="component.path"
       :ui="{
-        root: 'overflow-hidden group ring-default',
+        root: 'overflow-hidden group ring-muted',
         header: 'mb-0',
         container: 'p-0 lg:p-0',
         body: 'p-4',
@@ -32,7 +32,7 @@ const { data: components } = await useAsyncData(`components-${props.category}`, 
       }"
     >
       <template #header>
-        <div class="rounded-md rounded-b-none border border-default overflow-hidden aspect-video -m-px bg-muted">
+        <div class="rounded-md rounded-b-none border border-muted overflow-hidden aspect-video -m-px bg-muted">
           <UColorModeImage
             :light="`${component.path.replace('/docs/components/', '/components/light/')}.png`"
             :dark="`${component.path.replace('/docs/components/', '/components/dark/')}.png`"

@@ -17,6 +17,7 @@ export const cssVariableDefaults = {
     '--ui-bg-soft-hover': 'var(--ui-color-neutral-200)',
     '--ui-bg-inverted': 'var(--ui-color-neutral-900)',
     '--ui-border-default': 'var(--ui-color-neutral-200)',
+    '--ui-border-muted': 'var(--ui-color-neutral-200)',
     '--ui-border-strong': 'var(--ui-color-neutral-300)',
     '--ui-border-inverted': 'var(--ui-color-neutral-900)'
   },
@@ -31,7 +32,8 @@ export const cssVariableDefaults = {
     '--ui-bg-soft': 'var(--ui-color-neutral-800)',
     '--ui-bg-soft-hover': 'var(--ui-color-neutral-700)',
     '--ui-bg-inverted': 'white',
-    '--ui-border-default': 'color-mix(in oklab, var(--ui-color-neutral-50) 10%, transparent)',
+    '--ui-border-default': 'var(--ui-color-neutral-800)',
+    '--ui-border-muted': 'var(--ui-color-neutral-700)',
     '--ui-border-strong': 'var(--ui-color-neutral-700)',
     '--ui-border-inverted': 'white'
   }

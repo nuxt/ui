@@ -141,7 +141,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
         :items="navItems"
         variant="link"
         color="neutral"
-        class="pointer-events-auto bg-muted/80 backdrop-blur-sm rounded-full px-2 sm:px-4 border border-default/50 shadow-lg shadow-neutral-950/5"
+        class="pointer-events-auto bg-muted/80 backdrop-blur-sm rounded-full px-2 sm:px-4 border border-muted/50 shadow-lg shadow-neutral-950/5"
         :ui="{
           link: 'px-2 py-1',
           linkLeadingIcon: 'hidden'

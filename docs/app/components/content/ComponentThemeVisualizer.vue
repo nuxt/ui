@@ -173,7 +173,7 @@ watch(open, (isOpen) => {
           variant="outline"
           size="sm"
           square
-          class="absolute -top-[13px] -right-[13px] z-1 rounded-full lg:opacity-0 lg:group-hover/component:opacity-100 ring-default transition-opacity duration-200"
+          class="absolute -top-[13px] -right-[13px] z-1 rounded-full lg:opacity-0 lg:group-hover/component:opacity-100 ring-muted transition-opacity duration-200"
           :class="[open && 'lg:opacity-100 bg-soft']"
           tabindex="-1"
         >
