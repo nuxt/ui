@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs'
 import { describe, it, expect } from 'vitest'
+import ts from 'typescript'
 import { join } from 'pathe'
 import { getTemplates } from '../../src/templates'
 import { defaultOptions, getDefaultConfig } from '../../src/utils/defaults'
@@ -9,7 +10,7 @@ import { colors } from '../../src/runtime/theme/color'
 const resolve = (...paths: string[]) => join(process.cwd(), 'src', ...paths)
 const themeDir = resolve('./runtime/theme')
 
-function themeContents(overrides: Record<string, any>, vue?: { detectedComponents?: Set<string> }) {
+function themeContents(overrides: Record<string, any>, vue?: { detectedComponents?: Set<string>, dev?: boolean }) {
   const options = { ...defaultOptions, ...overrides }
   const templates = getTemplates(options as any, getDefaultConfig(options.tailwindPrefix), undefined, resolve, vue)
   return (filename: string) => templates.find(template => template.filename === filename)!.getContents!({} as any)
@@ -37,13 +38,51 @@ describe('theme templates', () => {
 
   // Select's theme extends Input's, so its file alone doesn't hold all its classes
   it('lists the detected components\' classes inline, the ones they extend included', async () => {
-    const css = await themeContents({ experimental: { componentDetection: true } }, { detectedComponents: new Set(['Select']) })('ui.css')
+    const css = await themeContents({ componentDetection: true }, { detectedComponents: new Set(['Select']) })('ui.css')
     const classes = inlineClasses(css)
 
     expect(css).toContain(`@source not "${themeDir}";`)
     expect(classes).toContain('origin-(--reka-select-content-transform-origin)')
     expect(classes).toContain('dark:disabled:bg-transparent')
     expect(classes).not.toContain('animate-pulse')
+  })
+
+  it('lists the detected themes in dev for the runtime warning', async () => {
+    const contents = await themeContents({ componentDetection: true }, { detectedComponents: new Set(['Button', 'InputMenu']), dev: true })('ui/detected.ts')
+
+    expect(contents).toContain('["button","inputMenu"]')
+    expect(contents).toContain('import.meta.hot.accept(')
+  })
+
+  // A module that accepts its own update runs again, and its importers keep the
+  // first version's export, so every version has to refill that same set
+  it('refills the set components read on every detection update', async () => {
+    const hot = { data: {} as Record<string, any>, accept: () => {} }
+    const run = async (detectedComponents: Set<string>) => {
+      const code = await themeContents({ componentDetection: true }, { detectedComponents, dev: true })('ui/detected.ts')
+      const js = ts.transpileModule(code, { compilerOptions: { target: ts.ScriptTarget.ESNext, module: ts.ModuleKind.ESNext } }).outputText
+      return new Function('hot', js.replaceAll('import.meta.hot', 'hot').replace('export default', 'return'))(hot) as Set<string>
+    }
+
+    const first = await run(new Set(['Button']))
+    await run(new Set(['Button', 'Calendar']))
+    await run(new Set(['Calendar']))
+
+    expect([...first]).toEqual(['calendar'])
+  })
+
+  it('lists every theme in dev when nothing is detected', async () => {
+    const contents = await themeContents({ componentDetection: true }, { dev: true })('ui/detected.ts')
+
+    expect(contents).toContain('"button"')
+    expect(contents).toContain('"dashboardSidebar"')
+  })
+
+  it('leaves the detected themes out of the build and without detection', async () => {
+    const detectedComponents = new Set(['Button'])
+
+    expect(await themeContents({ componentDetection: true }, { detectedComponents })('ui/detected.ts')).toBe('export default null as Set<string> | null\n')
+    expect(await themeContents({ componentDetection: false }, { detectedComponents, dev: true })('ui/detected.ts')).toBe('export default null as Set<string> | null\n')
   })
 
   it('generates only the sources', async () => {
@@ -72,7 +111,7 @@ describe('theme templates', () => {
   })
 
   it('lists only the detected components\' classes with the prefix', async () => {
-    const css = await themeContents({ tailwindPrefix: 'tw', experimental: { componentDetection: true } }, { detectedComponents: new Set(['Button']) })('ui.css')
+    const css = await themeContents({ tailwindPrefix: 'tw', componentDetection: true }, { detectedComponents: new Set(['Button']) })('ui.css')
     const classes = inlineClasses(css)
 
     expect(classes).toContain('tw:rounded-md')
