@@ -1,5 +1,5 @@
 import { defuFn } from 'defu'
-import input from './input'
+import input, { replaceFocus } from './input'
 import { colorVariant } from './color'
 import { fieldGroupVariant } from './field-group'
 
@@ -70,9 +70,3 @@ export default defuFn({
     }
   }]
 }, input)
-
-function replaceFocus(str: string): string {
-  return str
-    .replace(/focus:/g, 'has-focus:')
-    .replace(/focus-visible:/g, 'has-focus-visible:')
-}

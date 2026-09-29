@@ -1,6 +1,19 @@
 import { colorVariant } from './color'
 import { fieldGroupVariantWithRoot } from './field-group'
 
+// The focus classes below, for a container whose segments or items take the focus
+// (InputDate, InputTime, InputTags), spelled out so Tailwind finds them
+const containerFocus: Record<string, string> = {
+  'focus:bg-elevated': 'has-focus:bg-elevated',
+  'focus:outline-none': 'has-focus:outline-none',
+  'focus-visible:outline-3': 'has-focus-visible:outline-3',
+  'focus-visible:ring-accent': 'has-focus-visible:ring-accent'
+}
+
+export function replaceFocus(classes: string): string {
+  return classes.split(' ').map(cls => containerFocus[cls] ?? cls).join(' ')
+}
+
 export default {
   slots: {
     root: 'relative inline-flex items-center',
