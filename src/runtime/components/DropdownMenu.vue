@@ -147,8 +147,7 @@ export type DropdownMenuSlots<
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow } from 'reka-ui'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
@@ -170,7 +169,7 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const props = useComponentProps<DropdownMenuProps<T>>('dropdownMenu', _props, theme)
 
-const appConfig = useAppConfig() as DropdownMenu['AppConfig']
+const appConfig = useThemeConfig() as DropdownMenu['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.dropdownMenu)
 
 const rootProps = useForwardProps(props, ['defaultOpen', 'open', 'modal'], emits)

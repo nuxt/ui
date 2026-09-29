@@ -29,10 +29,9 @@ export interface EditorEmojiMenuProps<T extends EditorEmojiMenuItem = EditorEmoj
 
 <script setup lang="ts" generic="T extends EditorEmojiMenuItem">
 import { computed, h, onMounted, onBeforeUnmount, nextTick, toRef } from 'vue'
-import { useAppConfig } from '#imports'
 import { useEditorMenu } from '../composables/useEditorMenu'
 import { useLocale } from '../composables/useLocale'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 
 defineOptions({ inheritAttrs: false })
@@ -45,7 +44,7 @@ const _props = withDefaults(defineProps<EditorEmojiMenuProps<T>>(), {
 
 const props = useComponentProps('editorEmojiMenu', _props, theme)
 
-const appConfig = useAppConfig() as EditorEmojiMenu['AppConfig']
+const appConfig = useThemeConfig() as EditorEmojiMenu['AppConfig']
 const { t } = useLocale()
 const overrides = useComponentOverrides(() => appConfig.ui?.editorEmojiMenu)
 

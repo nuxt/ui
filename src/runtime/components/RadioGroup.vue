@@ -99,8 +99,7 @@ export interface RadioGroupSlots<T extends RadioGroupItem[] = RadioGroupItem[]> 
 <script setup lang="ts" generic="T extends RadioGroupItem[], VK extends GetItemKeys<T> = 'value'">
 import { computed, useId } from 'vue'
 import { RadioGroupRoot, RadioGroupItem as RRadioGroupItem, RadioGroupIndicator, Label } from 'reka-ui'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useFormField } from '../composables/useFormField'
 import { get } from '../utils'
@@ -118,7 +117,7 @@ const slots = defineSlots<RadioGroupSlots<T>>()
 
 const props = useComponentProps<RadioGroupProps<T, VK>>('radioGroup', _props, theme)
 
-const appConfig = useAppConfig() as RadioGroup['AppConfig']
+const appConfig = useThemeConfig() as RadioGroup['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.radioGroup)
 
 const rootProps = useForwardProps(props, ['as', 'loop', 'required'], emits)

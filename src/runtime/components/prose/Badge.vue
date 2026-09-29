@@ -18,8 +18,7 @@ export interface ProseBadgeSlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 import UBadge from '../Badge.vue'
 
@@ -29,7 +28,7 @@ defineSlots<ProseBadgeSlots>()
 
 const props = useComponentProps('prose.badge', _props, theme)
 
-const appConfig = useAppConfig() as ProseBadge['AppConfig']
+const appConfig = useThemeConfig() as ProseBadge['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.prose?.badge)
 
 // eslint-disable-next-line vue/no-dupe-keys

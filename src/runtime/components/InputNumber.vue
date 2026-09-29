@@ -89,8 +89,7 @@ export interface InputNumberSlots {
 import { onMounted, onScopeDispose, computed, useTemplateRef, toRef } from 'vue'
 import { NumberFieldRoot, NumberFieldInput, NumberFieldDecrement, NumberFieldIncrement } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
@@ -111,7 +110,7 @@ defineSlots<InputNumberSlots>()
 const props = useComponentProps<InputNumberProps<T, Mod>>('inputNumber', _props, theme)
 
 const { t } = useLocale()
-const appConfig = useAppConfig() as InputNumber['AppConfig']
+const appConfig = useThemeConfig() as InputNumber['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.inputNumber)
 
 const rootProps = useForwardProps(props, ['as', 'stepSnapping', 'startingValue', 'allowInvalid', 'formatOptions', 'disableWheelChange', 'invertWheelChange', 'required', 'readonly', 'focusOnChange', 'locale'])

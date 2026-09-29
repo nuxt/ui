@@ -25,6 +25,7 @@ import { computed, toRef, useId, inject, provide } from 'vue'
 import { ConfigProvider, TooltipProvider, useForwardProps } from 'reka-ui'
 import { localeContextInjectionKey } from '../composables/useLocale'
 import { portalTargetInjectionKey } from '../composables/usePortal'
+import { injectThemeContext, provideThemeContext } from '../composables/useComponentProps'
 import UToaster from './Toaster.vue'
 import UOverlayProvider from './OverlayProvider.vue'
 import en from '../locale/en'
@@ -47,6 +48,9 @@ provide(localeContextInjectionKey, locale)
 
 const portal = toRef(() => props.portal)
 provide(portalTargetInjectionKey, portal)
+
+// The root theme context: `app.config.ui` for every component below
+provideThemeContext(injectThemeContext())
 </script>
 
 <template>

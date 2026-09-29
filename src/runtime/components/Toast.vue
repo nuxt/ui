@@ -92,8 +92,7 @@ export interface ToastSlots {
 import { ref, computed, onMounted, useTemplateRef } from 'vue'
 import { ToastRoot, ToastTitle, ToastDescription, ToastAction, ToastClose } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -112,7 +111,7 @@ const slots = defineSlots<ToastSlots>()
 const props = useComponentProps('toast', _props, theme)
 
 const { t } = useLocale()
-const appConfig = useAppConfig() as Toast['AppConfig']
+const appConfig = useThemeConfig() as Toast['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.toast)
 
 const rootProps = useForwardProps(props, ['as', 'defaultOpen', 'open', 'duration', 'type'], emits)

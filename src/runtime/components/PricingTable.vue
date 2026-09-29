@@ -104,8 +104,7 @@ export type PricingTableSlots<T extends PricingTableTier = PricingTableTier> = {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UBadge from './Badge.vue'
@@ -120,7 +119,7 @@ const slots = defineSlots<PricingTableSlots<T>>()
 const props = useComponentProps<PricingTableProps<T>>('pricingTable', _props, theme)
 
 const { t } = useLocale()
-const appConfig = useAppConfig() as PricingTable['AppConfig']
+const appConfig = useThemeConfig() as PricingTable['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.pricingTable)
 
 const formatSlotName = (item: { id?: string, title: string }): string => {

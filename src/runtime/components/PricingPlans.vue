@@ -51,10 +51,9 @@ export type PricingPlansSlots<T extends PricingPlanProps = PricingPlanProps> = {
 <script setup lang="ts" generic="T extends PricingPlanProps">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import UPricingPlan from './PricingPlan.vue'
 
 const _props = withDefaults(defineProps<PricingPlansProps>(), {
@@ -68,7 +67,7 @@ const props = useComponentProps<PricingPlansProps>('pricingPlans', _props, theme
 
 const getProxySlots = () => omit(slots, ['default'])
 
-const appConfig = useAppConfig() as PricingPlans['AppConfig']
+const appConfig = useThemeConfig() as PricingPlans['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.pricingPlans)
 
 // eslint-disable-next-line vue/no-dupe-keys

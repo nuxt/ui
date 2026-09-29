@@ -93,8 +93,7 @@ export interface ChatToolSlots {
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { omitUnsafeAttrs } from '../utils'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
@@ -117,7 +116,7 @@ const slots = defineSlots<ChatToolSlots>()
 
 const props = useComponentProps('chatTool', _props, theme)
 
-const appConfig = useAppConfig() as ChatTool['AppConfig']
+const appConfig = useThemeConfig() as ChatTool['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.chatTool)
 
 // eslint-disable-next-line vue/no-dupe-keys

@@ -88,8 +88,7 @@ export interface CheckboxGroupSlots<T extends CheckboxGroupItem[] = CheckboxGrou
 import { computed, useId } from 'vue'
 import { CheckboxGroupRoot } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useFormField } from '../composables/useFormField'
 import { get, omit } from '../utils'
 import { tv } from '../utils/tv'
@@ -106,7 +105,7 @@ const slots = defineSlots<CheckboxGroupSlots<T>>()
 
 const props = useComponentProps<CheckboxGroupProps<T, VK>>('checkboxGroup', _props, theme)
 
-const appConfig = useAppConfig() as CheckboxGroup['AppConfig']
+const appConfig = useThemeConfig() as CheckboxGroup['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.checkboxGroup)
 
 const rootProps = useForwardProps(props, ['as', 'modelValue', 'defaultValue', 'orientation', 'loop', 'max', 'required'], emits)

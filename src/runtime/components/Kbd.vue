@@ -52,7 +52,7 @@ defineSlots<KbdSlots>()
 const props = useComponentProps('kbd', _props, theme)
 
 const { getKbdKey } = useKbd()
-const appConfig = useAppConfig() as Kbd['AppConfig']
+const appConfig = useThemeConfig() as Kbd['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.kbd)
 const prefix = usePrefix()
 

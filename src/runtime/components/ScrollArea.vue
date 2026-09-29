@@ -97,8 +97,7 @@ import { computed, onUnmounted, toRef, useTemplateRef, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { defu } from 'defu'
 import { useVirtualizer } from '@tanstack/vue-virtual'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 import { useLocale } from '../composables/useLocale'
 import { useScrollShadow } from '../composables/useScrollShadow'
@@ -114,7 +113,7 @@ const emits = defineEmits<ScrollAreaEmits>()
 const props = useComponentProps<ScrollAreaProps<T>>('scrollArea', _props, theme)
 
 const { dir } = useLocale()
-const appConfig = useAppConfig() as ScrollArea['AppConfig']
+const appConfig = useThemeConfig() as ScrollArea['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.scrollArea)
 
 // When an external scroll element is provided, it owns the scroll (the root grows inline).

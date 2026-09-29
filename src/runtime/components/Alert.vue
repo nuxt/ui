@@ -76,8 +76,7 @@ export interface AlertSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -93,7 +92,7 @@ const slots = defineSlots<AlertSlots>()
 const props = useComponentProps('alert', _props, theme)
 
 const { t } = useLocale()
-const appConfig = useAppConfig() as Alert['AppConfig']
+const appConfig = useThemeConfig() as Alert['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.alert)
 
 // eslint-disable-next-line vue/no-dupe-keys

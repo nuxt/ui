@@ -25,8 +25,7 @@ export interface ChatPaletteSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive, Slot } from 'reka-ui'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 
 const _props = defineProps<ChatPaletteProps>()
@@ -34,7 +33,7 @@ const slots = defineSlots<ChatPaletteSlots>()
 
 const props = useComponentProps('chatPalette', _props, theme)
 
-const appConfig = useAppConfig() as ChatPalette['AppConfig']
+const appConfig = useThemeConfig() as ChatPalette['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.chatPalette)
 
 // eslint-disable-next-line vue/no-dupe-keys

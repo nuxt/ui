@@ -18,8 +18,7 @@ export interface ProseTheadSlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 
 const _props = defineProps<ProseTheadProps>()
@@ -28,7 +27,7 @@ defineSlots<ProseTheadSlots>()
 
 const props = useComponentProps('prose.thead', _props, theme)
 
-const appConfig = useAppConfig() as ProseThead['AppConfig']
+const appConfig = useThemeConfig() as ProseThead['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.prose?.thead)
 
 // eslint-disable-next-line vue/no-dupe-keys

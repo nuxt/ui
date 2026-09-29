@@ -18,8 +18,7 @@ export interface ProseStrongSlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 
 const _props = defineProps<ProseStrongProps>()
@@ -28,7 +27,7 @@ defineSlots<ProseStrongSlots>()
 
 const props = useComponentProps('prose.strong', _props, theme)
 
-const appConfig = useAppConfig() as ProseStrong['AppConfig']
+const appConfig = useThemeConfig() as ProseStrong['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.prose?.strong)
 
 // eslint-disable-next-line vue/no-dupe-keys
