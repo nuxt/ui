@@ -14,6 +14,13 @@ export interface ThemeProps {
    * @example `{ button: { base: 'rounded-full' } }`
    */
   ui?: ThemeUI
+  /**
+   * Render descendant components without their theme classes, keeping only the
+   * classes you supply through `class`, `ui` or `app.config.ui`. Set it to
+   * `false` to style a subtree again.
+   * @defaultValue undefined
+   */
+  unstyled?: boolean
 }
 
 export interface ThemeSlots {
@@ -26,7 +33,7 @@ import { computed } from 'vue'
 import defu from 'defu'
 import { injectThemeContext, provideThemeContext } from '../composables/useComponentProps'
 
-const _props = defineProps<ThemeProps>()
+const _props = withDefaults(defineProps<ThemeProps>(), { unstyled: undefined })
 defineSlots<ThemeSlots>()
 
 const parent = injectThemeContext()
@@ -68,7 +75,8 @@ provideThemeContext({
     (_props.props ?? {}) as ThemeContextDefaults,
     normalizeUi(_props.ui),
     parent.defaults.value
-  ))
+  )),
+  unstyled: computed(() => _props.unstyled ?? parent.unstyled.value)
 })
 </script>
 

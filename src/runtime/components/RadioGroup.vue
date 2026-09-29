@@ -100,7 +100,7 @@ export interface RadioGroupSlots<T extends RadioGroupItem[] = RadioGroupItem[]> 
 import { computed, useId } from 'vue'
 import { RadioGroupRoot, RadioGroupItem as RRadioGroupItem, RadioGroupIndicator, Label } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useFormField } from '../composables/useFormField'
 import { get } from '../utils'
@@ -119,6 +119,7 @@ const slots = defineSlots<RadioGroupSlots<T>>()
 const props = useComponentProps<RadioGroupProps<T, VK>>('radioGroup', _props, theme)
 
 const appConfig = useAppConfig() as RadioGroup['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.radioGroup)
 
 const rootProps = useForwardProps(props, ['as', 'loop', 'required'], emits)
 
@@ -135,7 +136,7 @@ const size = computed(() => formFieldSize.value ?? props.size)
 const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.radioGroup)({
+const ui = computed(() => tv(theme, overrides.value)({
   size: size.value,
   color: color.value,
   highlight: highlight.value,

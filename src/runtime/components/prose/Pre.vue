@@ -36,7 +36,7 @@ export interface ProsePreSlots {
 import { computed, useTemplateRef } from 'vue'
 import { useClipboard } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
 import { useLocale } from '../../composables/useLocale'
 import { tv } from '../../utils/tv'
 import UCodeIcon from './CodeIcon.vue'
@@ -53,11 +53,12 @@ const props = useComponentProps('prose.pre', _props, theme)
 const { t } = useLocale()
 const { copy: copyToClipboard, copied } = useClipboard()
 const appConfig = useAppConfig() as ProsePre['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.prose?.pre)
 
 const baseRef = useTemplateRef('baseRef')
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.prose?.pre)())
+const ui = computed(() => tv(theme, overrides.value)())
 
 function copyCode() {
   const code = props.code ?? baseRef.value?.textContent ?? ''

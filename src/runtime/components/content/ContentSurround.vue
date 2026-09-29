@@ -56,7 +56,7 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
 import { useLocale } from '../../composables/useLocale'
 import { usePrefix } from '../../composables/usePrefix'
 import { tv } from '../../utils/tv'
@@ -73,6 +73,7 @@ const props = useComponentProps<ContentSurroundProps<T>>('contentSurround', _pro
 
 const { dir } = useLocale()
 const appConfig = useAppConfig() as ContentSurround['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.contentSurround)
 const prefix = usePrefix()
 
 const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ link?: ContentSurroundLink, icon: IconProps['name'], direction: 'left' | 'right' }>({
@@ -84,7 +85,7 @@ const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ link?: 
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.contentSurround)())
+const ui = computed(() => tv(theme, overrides.value)())
 
 // eslint-disable-next-line vue/no-dupe-keys
 const prevIcon = computed(() => props.prevIcon || (dir.value === 'rtl' ? appConfig.ui.icons.arrowRight : appConfig.ui.icons.arrowLeft))

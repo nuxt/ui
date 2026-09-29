@@ -116,7 +116,7 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { resolveAs } from '../utils'
 import { tv } from '../utils/tv'
 import UBadge from './Badge.vue'
@@ -133,6 +133,7 @@ const slots = defineSlots<PricingPlanSlots>()
 const props = useComponentProps('pricingPlan', _props, theme)
 
 const appConfig = useAppConfig() as PricingPlan['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.pricingPlan)
 
 const [DefinePriceTemplate, ReusePriceTemplate] = createReusableTemplate()
 
@@ -140,7 +141,7 @@ const [DefinePriceTemplate, ReusePriceTemplate] = createReusableTemplate()
 const as = computed(() => resolveAs(props.as, { root: 'div', title: 'div' }))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.pricingPlan)({
+const ui = computed(() => tv(theme, overrides.value)({
   orientation: props.orientation,
   variant: props.variant,
   highlight: props.highlight,

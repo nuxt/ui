@@ -38,7 +38,7 @@ export interface PageHeaderSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { resolveAs } from '../utils'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
@@ -49,12 +49,13 @@ const slots = defineSlots<PageHeaderSlots>()
 const props = useComponentProps('pageHeader', _props, theme)
 
 const appConfig = useAppConfig() as PageHeader['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.pageHeader)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const as = computed(() => resolveAs(props.as, { root: 'div', title: 'h1' }))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.pageHeader)({
+const ui = computed(() => tv(theme, overrides.value)({
   title: !!props.title || !!slots.title
 }))
 </script>

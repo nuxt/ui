@@ -56,7 +56,7 @@ export interface FormFieldSlots {
 import { computed, ref, inject, provide, useId, watch } from 'vue'
 import { Primitive, Label } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { formFieldInjectionKey, inputIdInjectionKey, formErrorsInjectionKey, formInputsInjectionKey } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import type { FormError, FormFieldInjectedOptions } from '../types/form'
@@ -75,9 +75,10 @@ const props = useComponentProps('formField', _props, theme)
 const providedProps = useComponentProps('formField', _props)
 
 const appConfig = useAppConfig() as FormField['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.formField)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.formField)({
+const ui = computed(() => tv(theme, overrides.value)({
   size: props.size,
   required: props.required,
   orientation: props.orientation

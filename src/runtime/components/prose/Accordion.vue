@@ -21,7 +21,7 @@ export interface ProseAccordionSlots {
 <script setup lang="ts">
 import { computed, ref, onBeforeUpdate } from 'vue'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
 import { transformUI } from '../../utils'
 import { tv } from '../../utils/tv'
 import UAccordion from '../Accordion.vue'
@@ -34,9 +34,10 @@ const slots = defineSlots<ProseAccordionSlots>()
 const props = useComponentProps('prose.accordion', _props, theme)
 
 const appConfig = useAppConfig() as ProseAccordion['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.prose?.accordion)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.prose?.accordion))
+const ui = computed(() => tv(theme, overrides.value))
 
 const rerenderCount = ref(1)
 

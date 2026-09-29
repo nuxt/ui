@@ -24,7 +24,7 @@ export interface DashboardPanelSlots {
 <script setup lang="ts">
 import { computed, useId, toRef } from 'vue'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useResizable } from '../composables/useResizable'
 import { useDashboard } from '../utils/dashboard'
 import { tv } from '../utils/tv'
@@ -41,6 +41,7 @@ defineSlots<DashboardPanelSlots>()
 const props = useComponentProps('dashboardPanel', _props, theme)
 
 const appConfig = useAppConfig() as DashboardPanel['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.dashboardPanel)
 const dashboardContext = useDashboard({ storageKey: 'dashboard', unit: '%' })
 
 const id = `${dashboardContext.storageKey}-panel-${props.id || useId()}`
@@ -48,7 +49,7 @@ const id = `${dashboardContext.storageKey}-panel-${props.id || useId()}`
 const { el, size, isDragging, onMouseDown, onTouchStart, onDoubleClick } = useResizable(id, toRef(() => ({ ...dashboardContext, ...props })))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.dashboardPanel)({
+const ui = computed(() => tv(theme, overrides.value)({
   size: !!size.value
 }))
 </script>

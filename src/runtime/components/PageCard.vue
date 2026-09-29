@@ -73,7 +73,7 @@ export interface PageCardSlots {
 import { computed, effectScope, ref, shallowRef, watch, onMounted, onBeforeUnmount } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { usePrefix } from '../composables/usePrefix'
 import { useSpotlight } from '../composables/useSpotlight'
 import { getSlotChildrenText, resolveAs } from '../utils'
@@ -94,6 +94,7 @@ const props = useComponentProps('pageCard', _props, theme)
 const cardRef = ref<HTMLElement>()
 
 const appConfig = useAppConfig() as PageCard['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.pageCard)
 
 const idle = ref(false)
 let idleId: ReturnType<typeof requestIdleCallback>
@@ -137,7 +138,7 @@ const spotlight = computed(() => props.spotlight && (elementX.value !== 0 || ele
 const as = computed(() => resolveAs(props.as, { root: 'div', title: 'div' }))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.pageCard)({
+const ui = computed(() => tv(theme, overrides.value)({
   orientation: props.orientation,
   reverse: props.reverse,
   variant: props.variant,

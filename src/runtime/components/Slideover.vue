@@ -88,7 +88,7 @@ import { computed, toRef } from 'vue'
 import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, VisuallyHidden } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { FieldGroupReset } from '../composables/useFieldGroup'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
@@ -112,6 +112,7 @@ const props = useComponentProps('slideover', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Slideover['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.slideover)
 
 const rootProps = useForwardProps(props, ['open', 'defaultOpen', 'modal', 'unmountOnHide'], emits)
 const portalProps = usePortal(toRef(() => props.portal))
@@ -135,7 +136,7 @@ const contentEvents = computed(() => {
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.slideover)({
+const ui = computed(() => tv(theme, overrides.value)({
   transition: props.transition,
   side: props.side,
   inset: props.inset

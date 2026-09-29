@@ -93,7 +93,7 @@ import { ref, computed, onMounted, useTemplateRef } from 'vue'
 import { ToastRoot, ToastTitle, ToastDescription, ToastAction, ToastClose } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -113,11 +113,12 @@ const props = useComponentProps('toast', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Toast['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.toast)
 
 const rootProps = useForwardProps(props, ['as', 'defaultOpen', 'open', 'duration', 'type'], emits)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.toast)({
+const ui = computed(() => tv(theme, overrides.value)({
   color: props.color,
   orientation: props.orientation,
   title: !!props.title || !!slots.title

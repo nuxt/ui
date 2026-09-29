@@ -40,7 +40,7 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig, useHead } from '#imports'
 import { useKbd, kbdKeysPlatformMap } from '../composables/useKbd'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { usePrefix } from '../composables/usePrefix'
 import { tv } from '../utils/tv'
 
@@ -53,6 +53,7 @@ const props = useComponentProps('kbd', _props, theme)
 
 const { getKbdKey } = useKbd()
 const appConfig = useAppConfig() as Kbd['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.kbd)
 const prefix = usePrefix()
 
 const platformKey = computed(() => props.value && Object.hasOwn(kbdKeysPlatformMap, props.value) ? kbdKeysPlatformMap[props.value as KbdKeySpecific] : undefined)
@@ -68,7 +69,7 @@ if (!import.meta.client && platformKey.value) {
 }
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.kbd)({
+const ui = computed(() => tv(theme, overrides.value)({
   color: props.color,
   variant: props.variant,
   size: props.size

@@ -28,7 +28,7 @@ export interface ProseCalloutSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 import ULink from '../Link.vue'
 import UIcon from '../Icon.vue'
@@ -42,9 +42,10 @@ defineSlots<ProseCalloutSlots>()
 const props = useComponentProps('prose.callout', _props, theme)
 
 const appConfig = useAppConfig() as ProseCallout['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.prose?.callout)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.prose?.callout)({
+const ui = computed(() => tv(theme, overrides.value)({
   color: props.color,
   to: !!props.to
 }))

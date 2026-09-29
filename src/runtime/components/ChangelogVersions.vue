@@ -54,7 +54,7 @@ import { Primitive } from 'reka-ui'
 import { Motion, useScroll, useSpring, useTransform } from 'motion-v'
 import { defu } from 'defu'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UChangelogVersion from './ChangelogVersion.vue'
@@ -70,6 +70,7 @@ const props = useComponentProps<ChangelogVersionsProps<T>>('changelogVersions', 
 const getProxySlots = () => omit(slots, ['default', 'indicator'])
 
 const appConfig = useAppConfig() as ChangelogVersions['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.changelogVersions)
 
 const springOptions = computed(() => defu(typeof props.indicatorMotion === 'object' ? props.indicatorMotion : {}, { damping: 30, restDelta: 0.001 }))
 const scrollOptions = computed(() => typeof props.indicator === 'object' ? props.indicator : {})
@@ -79,7 +80,7 @@ const y = useSpring(scrollYProgress, springOptions)
 const height = useTransform(() => `${Number(y.get()) * 100}%`)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.changelogVersions)())
+const ui = computed(() => tv(theme, overrides.value)())
 </script>
 
 <template>

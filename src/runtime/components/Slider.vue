@@ -48,7 +48,7 @@ import { computed, useAttrs } from 'vue'
 import { SliderRoot, SliderRange, SliderTrack, SliderThumb } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
 import { pick, omit } from '../utils'
@@ -71,6 +71,7 @@ const modelValue = defineModel<T>()
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Slider['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.slider)
 
 const rootProps = useForwardProps(props, ['as', 'orientation', 'min', 'max', 'step', 'minStepsBetweenThumbs', 'inverted'])
 
@@ -123,7 +124,7 @@ function thumbLabel(index: number) {
 }
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.slider)({
+const ui = computed(() => tv(theme, overrides.value)({
   disabled: disabled.value,
   size: size.value,
   color: color.value,

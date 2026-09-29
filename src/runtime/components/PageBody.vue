@@ -26,7 +26,7 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 
 const _props = defineProps<PageBodyProps>()
 
@@ -35,9 +35,10 @@ defineSlots<PageBodySlots>()
 const props = useComponentProps('pageBody', _props, theme)
 
 const appConfig = useAppConfig() as PageBody['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.pageBody)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.pageBody)())
+const ui = computed(() => tv(theme, overrides.value)())
 </script>
 
 <template>

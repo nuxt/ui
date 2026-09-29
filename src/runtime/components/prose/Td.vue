@@ -20,7 +20,7 @@ export interface ProseTdSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 
 const _props = defineProps<ProseTdProps>()
@@ -30,9 +30,10 @@ defineSlots<ProseTdSlots>()
 const props = useComponentProps('prose.td', _props, theme)
 
 const appConfig = useAppConfig() as ProseTd['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.prose?.td)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.prose?.td)({ align: props.align }))
+const ui = computed(() => tv(theme, overrides.value)({ align: props.align }))
 </script>
 
 <template>

@@ -30,7 +30,7 @@ import { computed } from 'vue'
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 
 const _props = withDefaults(defineProps<CollapsibleProps>(), {
@@ -42,11 +42,12 @@ const slots = defineSlots<CollapsibleSlots>()
 const props = useComponentProps('collapsible', _props, theme)
 
 const appConfig = useAppConfig() as Collapsible['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.collapsible)
 
 const rootProps = useForwardProps(props, ['as', 'defaultOpen', 'open', 'disabled', 'unmountOnHide'], emits)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.collapsible)())
+const ui = computed(() => tv(theme, overrides.value)())
 </script>
 
 <template>

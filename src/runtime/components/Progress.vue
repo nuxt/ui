@@ -58,7 +58,7 @@ import { computed } from 'vue'
 import { Primitive, ProgressRoot, ProgressIndicator } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 
@@ -74,6 +74,7 @@ const props = useComponentProps('progress', _props, theme)
 
 const { dir } = useLocale()
 const appConfig = useAppConfig() as Progress['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.progress)
 
 const rootProps = useForwardProps(props, ['getValueLabel', 'getValueText', 'modelValue'], emits)
 
@@ -161,7 +162,7 @@ function stepVariant(index: number | string) {
 }
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.progress)({
+const ui = computed(() => tv(theme, overrides.value)({
   animation: props.animation,
   size: props.size,
   color: props.color as Progress['variants']['color'],
