@@ -20,8 +20,7 @@ export interface ProseAccordionItemSlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 
 const _props = defineProps<ProseAccordionItemProps>()
@@ -30,7 +29,7 @@ defineSlots<ProseAccordionItemSlots>()
 
 const props = useComponentProps('prose.accordionItem', _props, theme)
 
-const appConfig = useAppConfig() as ProseAccordionItem['AppConfig']
+const appConfig = useThemeConfig() as ProseAccordionItem['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.prose?.accordionItem)
 
 // eslint-disable-next-line vue/no-dupe-keys

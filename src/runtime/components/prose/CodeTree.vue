@@ -52,8 +52,7 @@ export interface ProseCodeTreeSlots {
 import { computed, watch, onBeforeUpdate, onMounted, ref } from 'vue'
 import { TreeRoot, TreeItem } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 import UCodeIcon from './CodeIcon.vue'
 import UIcon from '../Icon.vue'
@@ -66,7 +65,7 @@ const slots = defineSlots<ProseCodeTreeSlots>()
 
 const props = useComponentProps('prose.codeTree', _props, theme)
 
-const appConfig = useAppConfig() as ProseCodeTree['AppConfig']
+const appConfig = useThemeConfig() as ProseCodeTree['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.prose?.codeTree)
 
 const [DefineTreeTemplate, ReuseTreeTemplate] = createReusableTemplate<{ items: TreeNode[], level: number }>()

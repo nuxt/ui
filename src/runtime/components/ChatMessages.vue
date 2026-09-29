@@ -89,8 +89,7 @@ import { ref, computed, watch, nextTick, toRef, onMounted } from 'vue'
 import { Presence } from 'reka-ui'
 import { defu } from 'defu'
 import { useEventListener, useMutationObserver, watchThrottled } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
@@ -132,7 +131,7 @@ function isMessageStreaming(message: UIMessage) {
 }
 
 const { t } = useLocale()
-const appConfig = useAppConfig() as ChatMessages['AppConfig']
+const appConfig = useThemeConfig() as ChatMessages['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.chatMessages)
 
 const userProps = toRef(() => defu(props.user, { side: 'right' as const, variant: 'soft' as const }))

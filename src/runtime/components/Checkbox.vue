@@ -82,7 +82,7 @@ const emits = defineEmits<CheckboxEmits<T>>()
 
 const props = useComponentProps<CheckboxProps<T>>('checkbox', _props, theme)
 
-const appConfig = useAppConfig() as Checkbox['AppConfig']
+const appConfig = useThemeConfig() as Checkbox['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.checkbox)
 
 const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue', 'modelValue', 'trueValue', 'falseValue'), emits)

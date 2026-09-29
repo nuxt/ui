@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useAppConfig } from '#imports'
 import Callout from '../Callout.vue'
+import { useThemeConfig } from '../../../composables/useComponentProps'
 
-const appConfig = useAppConfig()
+const appConfig = useThemeConfig()
 </script>
 
 <template>
