@@ -1,6 +1,6 @@
 import { upperFirst } from 'scule'
 import { DEFAULT_PRESET_ID, GROUP_STOCK_VARIANT } from '../utils/theme/engine/types'
-import { paletteLabel, rampCssName } from '../utils/theme/studio'
+import { paletteLabel, paletteShade } from '../utils/theme/studio'
 
 /**
  * What the toolbar reports and what its reset does. The persisted theme is
@@ -9,7 +9,7 @@ import { paletteLabel, rampCssName } from '../utils/theme/studio'
  * would never lift.
  */
 export function useThemeStudioToolbar() {
-  const { resetTheme, primary, neutral, blackAsPrimary } = useTheme()
+  const { resetTheme, primary, neutral } = useTheme()
   const { groupDirty, sectionDirty, dirty, presets, activePreset, applyPreset, primaryChip, neutralChip, isCustomPalette, style } = useThemeStudio()
 
   const mounted = useMounted()
@@ -26,10 +26,10 @@ export function useThemeStudioToolbar() {
    */
   const colorChips = computed(() => (mounted.value
     ? [{
-        dot: blackAsPrimary.value ? undefined : `var(--color-${rampCssName(primaryChip.value)}-500)`,
-        label: blackAsPrimary.value ? 'Black' : paletteName('primary', primary.value)
+        dot: paletteShade(primaryChip.value, 500),
+        label: paletteName('primary', primary.value)
       }, {
-        dot: `var(--color-${neutralChip.value}-500)`,
+        dot: paletteShade(neutralChip.value, 500),
         label: paletteName('neutral', neutral.value)
       }]
     : [{ dot: 'var(--color-green-500)', label: 'Green' }, { dot: 'var(--color-slate-500)', label: 'Slate' }]))

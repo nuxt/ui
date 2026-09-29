@@ -1,4 +1,5 @@
 import { defu } from 'defu'
+import colors from 'tailwindcss/colors'
 import { watchDebounced } from '@vueuse/core'
 import { themeIcons } from '../utils/theme/icons'
 import { cssVariableDefaults } from '../utils/theme/tokens'
@@ -35,7 +36,6 @@ export default defineNuxtPlugin({
         useState('nuxt-ui-font-size').value = clamped(saved.fontSize, 12, 20) ?? THEME_DEFAULTS.fontSize
         useState('nuxt-ui-font').value = saved.font ?? {}
         useState('nuxt-ui-icons').value = saved.icons ?? THEME_DEFAULTS.icons
-        useState('nuxt-ui-black-as-primary').value = saved.blackAsPrimary ?? false
         // Through the same boundary the AI path uses: these two are
         // concatenated into <style> text, and storage is writable by anything
         // on the origin. (The inline FOUC script still paints the raw values
@@ -61,7 +61,7 @@ export default defineNuxtPlugin({
         // inside <style> text.
         for (const alias of Object.keys(DEFAULT_COLORS) as Array<keyof typeof DEFAULT_COLORS>) {
           const value = alias === 'primary' ? saved.primary : alias === 'neutral' ? saved.neutral : saved.colors?.[alias]
-          ;(appConfig.ui.colors as any)[alias] = typeof value === 'string' && SAFE_NAME.test(value) ? value : DEFAULT_COLORS[alias]
+          ;(appConfig.colors as any)[alias] = typeof value === 'string' && SAFE_NAME.test(value) ? value : DEFAULT_COLORS[alias]
         }
 
         const pack = saved.icons && Object.hasOwn(themeIcons, saved.icons) ? themeIcons[saved.icons as keyof typeof themeIcons] : themeIcons.lucide
@@ -130,6 +130,10 @@ export default defineNuxtPlugin({
       // Vue code exists) but it parses once and writes every tag in order.
       // It stands down on a theme link, like the boot restore above: the
       // server already rendered the linked theme.
+      //
+      // Tailwind's own neutral goes in as its values, the module's neutral
+      // alias having taken its `--color-neutral-*` names, so a shade holds
+      // either a `var(--color-*)` or a value, whichever palette rendered.
       useHead({
         script: [{
           innerHTML: `
@@ -147,9 +151,12 @@ export default defineNuxtPlugin({
               if (SAFE.test(T.primary || '') && T.primary !== 'black') { saved.primary = T.primary; }
               if (SAFE.test(T.neutral || '')) { saved.neutral = T.neutral; }
               if (Object.keys(saved).length) {
+                var NEUTRAL = ${JSON.stringify(colors.neutral)};
                 var swapColors = function(el) {
-                  el.innerHTML = el.innerHTML.replace(/(--ui-color-([\\w-]+?)-\\d{2,3}:\\s*var\\(--color-)[\\w-]+?(-\\d{2,3}[,)])/g, function(match, head, alias, tail) {
-                    return saved[alias] ? head + (saved[alias] === 'neutral' ? 'old-neutral' : saved[alias]) + tail : match;
+                  el.innerHTML = el.innerHTML.replace(/(--ui-color-([\\w-]+?)-(\\d{2,3}):\\s*)(?:var\\(--color-[\\w-]+?-\\d{2,3}(,[^;]*)?\\)|([^;]+))/g, function(match, head, alias, shade, fallback, literal) {
+                    if (!saved[alias]) { return match; }
+                    if (saved[alias] === 'neutral') { return NEUTRAL[shade] ? head + NEUTRAL[shade] : match; }
+                    return head + 'var(--color-' + saved[alias] + '-' + shade + (fallback || (literal ? ', ' + literal : '')) + ')';
                   });
                 };
                 var colorsEl = document.querySelector('style#nuxt-ui-colors');
@@ -172,9 +179,6 @@ export default defineNuxtPlugin({
 
               var fontSize = num(T.fontSize, 12, 20);
               if (fontSize !== undefined && fontSize !== 16) { set('nuxt-ui-font-size', 'html { font-size: ' + fontSize + 'px; }'); }
-
-
-              set('nuxt-ui-black-as-primary', T.blackAsPrimary ? ':root { --ui-primary: black; } .dark { --ui-primary: white; }' : '');
 
               var prefs = T.font || {};
               var font = (prefs.sans && SAFE.test(prefs.sans)) ? prefs.sans : 'Public Sans';

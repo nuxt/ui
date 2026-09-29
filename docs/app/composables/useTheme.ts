@@ -39,7 +39,7 @@ export function useTheme() {
   // a throw here would abort the whole unhead flush.
   const route = useRoute()
   const color = computed(() => {
-    const neutral = appConfig.ui.colors.neutral
+    const neutral = appConfig.colors.neutral
     // match the page background: only /theme paints the recessed neutral-50
     // canvas, every other page's body is plain white in light mode
     if (colorMode.value !== 'dark' && route.path !== '/theme') return 'white'
@@ -62,7 +62,6 @@ export function useTheme() {
   const _radius = useState('nuxt-ui-radius', () => THEME_DEFAULTS.radius as number)
   const _fontSize = useState('nuxt-ui-font-size', () => THEME_DEFAULTS.fontSize as number)
   const _iconSet = useState('nuxt-ui-icons', () => THEME_DEFAULTS.icons as string)
-  const _blackAsPrimary = useState('nuxt-ui-black-as-primary', () => false)
 
   /**
    * The whole font document in one JSON channel, shared with the FOUC script.
@@ -94,21 +93,20 @@ export function useTheme() {
 
   const neutral = computed({
     get() {
-      return appConfig.ui.colors.neutral
+      return appConfig.colors.neutral
     },
     set(option) {
-      appConfig.ui.colors.neutral = option
+      appConfig.colors.neutral = option
       track('Theme Changed', { setting: 'neutral', value: option })
     }
   })
 
   const primary = computed({
     get() {
-      return appConfig.ui.colors.primary
+      return appConfig.colors.primary
     },
     set(option) {
-      appConfig.ui.colors.primary = option
-      setBlackAsPrimary(false)
+      appConfig.colors.primary = option
       track('Theme Changed', { setting: 'primary', value: option })
     }
   })
@@ -165,19 +163,9 @@ export function useTheme() {
     }
   })
 
-  const blackAsPrimary = computed(() => _blackAsPrimary.value)
-
-  function setBlackAsPrimary(value: boolean) {
-    _blackAsPrimary.value = value
-    if (value) {
-      track('Theme Changed', { setting: 'primary', value: 'black' })
-    }
-  }
-
   const radiusStyle = computed(() => `:root { --ui-radius: ${_radius.value}rem; }`)
   // font-size scales every rem-based metric on the page
   const fontSizeStyle = computed(() => _fontSize.value !== 16 ? `html { font-size: ${_fontSize.value}px; }` : 'html {}')
-  const blackAsPrimaryStyle = computed(() => _blackAsPrimary.value ? `:root { --ui-primary: black; } .dark { --ui-primary: white; }` : ':root {}')
   const fontStyle = computed(() => {
     // fonts hydrate unvalidated from localStorage, re-assert SAFE_NAME at
     // the sink so a tampered name can't break out of the quoted string
@@ -252,7 +240,6 @@ export function useTheme() {
   const style = [
     { innerHTML: radiusStyle, id: 'nuxt-ui-radius', tagPriority: -2 },
     { innerHTML: fontSizeStyle, id: 'nuxt-ui-font-size', tagPriority: -2 },
-    { innerHTML: blackAsPrimaryStyle, id: 'nuxt-ui-black-as-primary', tagPriority: -2 },
     { innerHTML: fontStyle, id: 'nuxt-ui-font', tagPriority: -2 },
     { innerHTML: customColorsStyle, id: THEME_TAG_IDS.customColors, tagPriority: -2 },
     { innerHTML: cssVariablesStyle, id: THEME_TAG_IDS.cssVariables, tagPriority: -2 }
@@ -272,7 +259,7 @@ export function useTheme() {
 
     const colorOverrides: Record<string, string> = {}
     for (const [key, def] of Object.entries(DEFAULT_COLORS)) {
-      const value = (appConfig.ui.colors as any)[key]
+      const value = (appConfig.colors as any)[key]
       if (value && value !== def) {
         colorOverrides[key] = value
       }
@@ -281,7 +268,6 @@ export function useTheme() {
       doc.colors = colorOverrides
     }
 
-    if (_blackAsPrimary.value) doc.blackAsPrimary = true
     if (_radius.value !== THEME_DEFAULTS.radius) doc.radius = _radius.value
     if (_fontSize.value !== THEME_DEFAULTS.fontSize) doc.fontSize = _fontSize.value
     // setFontPrefs already normalized this to the doc's own sparse shape,
@@ -295,7 +281,7 @@ export function useTheme() {
 
     // Only alias-referenced palettes export. Reference by CURRENT value, not
     // overrides, a custom palette can shadow a default name and must still export.
-    const referenced = new Set(Object.values(appConfig.ui.colors as Record<string, string>))
+    const referenced = new Set(Object.values(appConfig.colors as Record<string, string>))
     const paletteEntries = Object.entries(customColorsData.value).filter(([name]) => referenced.has(name))
     if (paletteEntries.length) {
       doc.palettes = Object.fromEntries(paletteEntries.map(([name, shades]) => [name, { shades: shades as ThemePalette['shades'] }]))
@@ -445,13 +431,12 @@ export function useTheme() {
       })
     }
     if (settings.icons && Object.hasOwn(themeIcons, settings.icons)) icon.value = settings.icons
-    if (settings.blackAsPrimary !== undefined) setBlackAsPrimary(!!settings.blackAsPrimary)
 
     const semanticUpdates = SEMANTIC_ALIASES.filter(color => validPalette(settings[color]))
     const savedExtras: Record<string, any> = { ...aiThemeExtras.value }
 
     for (const color of semanticUpdates) {
-      (appConfig.ui.colors as any)[color] = settings[color]
+      (appConfig.colors as any)[color] = settings[color]
       savedExtras.colors = savedExtras.colors || {}
       savedExtras.colors[color] = settings[color]
     }
@@ -490,20 +475,19 @@ export function useTheme() {
       track('Theme Reset')
     }
 
-    appConfig.ui.colors.primary = DEFAULT_COLORS.primary
-    appConfig.ui.colors.neutral = DEFAULT_COLORS.neutral
+    appConfig.colors.primary = DEFAULT_COLORS.primary
+    appConfig.colors.neutral = DEFAULT_COLORS.neutral
 
     _radius.value = THEME_DEFAULTS.radius
     _fontSize.value = THEME_DEFAULTS.fontSize
     fontPrefs.value = {}
     _iconSet.value = THEME_DEFAULTS.icons
     appConfig.ui.icons = themeIcons.lucide as any
-    _blackAsPrimary.value = false
 
     const extras = aiThemeExtras.value
     if (extras.colors) {
       for (const key of Object.keys(extras.colors)) {
-        (appConfig.ui.colors as any)[key] = DEFAULT_COLORS[key as keyof typeof DEFAULT_COLORS] || (appConfig.ui.colors as any)[key]
+        (appConfig.colors as any)[key] = DEFAULT_COLORS[key as keyof typeof DEFAULT_COLORS] || (appConfig.colors as any)[key]
       }
     }
     if (extras.ui) {
@@ -542,8 +526,6 @@ export function useTheme() {
     neutral,
     primaryColors: PRIMARY_COLORS,
     primary,
-    blackAsPrimary,
-    setBlackAsPrimary,
     radiuses: RADIUSES,
     radius,
     fontSize,

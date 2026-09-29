@@ -7,12 +7,6 @@ export default defineConfig({
   plugins: [
     vue(),
     ui({
-      ui: {
-        colors: {
-          primary: 'green',
-          neutral: 'slate'
-        }
-      },
       autoImport: {
         dirs: ['../nuxt/app/composables'],
         imports: ['vue']
