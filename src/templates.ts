@@ -6,7 +6,7 @@ import { addTemplate, addTypeTemplate, hasNuxtModule, logger, updateTemplates, g
 import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
 import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
-import { applyPrefixToObject, applyUnstyled } from './utils/theme'
+import { applyUnstyled, getThemeClasses } from './utils/theme'
 import { detectUsedComponents } from './utils/components'
 import * as theme from './theme'
 import { colors as aliases } from './theme/color'
@@ -64,26 +64,30 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
 
   const isDev = process.argv.includes('--uiDev')
 
+  // With `experimental.componentDetection` (Vue integration), a component
+  // detection didn't find keeps its theme file — the `#build/ui` aliases
+  // and type imports rely on it existing — but with every class blanked
+  // (like `<UTheme unstyled>`), so the `@source "./ui";` scan yields no CSS
+  // for it. Prose has no detection and stays styled.
+  function isUnused(component: string, path?: string) {
+    return path !== 'prose' && !!vue?.detectedComponents?.size
+      && !Array.from(vue.detectedComponents).some(detected => camelCase(detected) === component)
+  }
+
+  function resolveTheme(theme: Record<string, any>, component: string, path?: string) {
+    const template = theme[component]
+    const result = typeof template === 'function' ? template(options) : template
+
+    return applyUnstyled(result, isUnused(component, path))
+  }
+
   function writeThemeTemplate(theme: Record<string, any>, path?: string) {
     for (const component in theme) {
       templates.push({
         filename: `ui/${path ? path + '/' : ''}${kebabCase(component)}.ts`,
         write: true,
         getContents: async () => {
-          const template = (theme as any)[component]
-          let result = typeof template === 'function' ? template(options) : template
-
-          // With `experimental.componentDetection` (Vue integration), a component
-          // detection didn't find keeps its theme file — the `#build/ui` aliases
-          // and type imports rely on it existing — but with every class blanked
-          // (like `<UTheme unstyled>`), so the `@source "./ui";` scan yields no CSS
-          // for it. Prose has no detection and stays styled.
-          const unused = path !== 'prose' && !!vue?.detectedComponents?.size
-            && !Array.from(vue.detectedComponents).some(detected => camelCase(detected) === component)
-
-          result = applyUnstyled(result, unused)
-          // Apply Tailwind prefix if configured
-          result = applyPrefixToObject(result, options.theme?.prefix)
+          const result = resolveTheme(theme, component, path)
 
           const variants = Object.entries(result.variants || {})
             .filter(([_, values]) => {
@@ -113,17 +117,15 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
           if (isDev) {
             const templatePath = fileURLToPath(new URL(`./theme/${path ? `${path}/` : ''}${kebabCase(component)}`, import.meta.url))
             const themeUtilsPath = fileURLToPath(new URL('./utils/theme', import.meta.url))
-            const prefixJson = JSON.stringify(options.theme?.prefix) ?? 'undefined'
-            const unstyledJson = JSON.stringify(unused)
+            const unstyledJson = JSON.stringify(isUnused(component, path))
 
             return [
               `import template from ${JSON.stringify(templatePath)}`,
-              `import { applyPrefixToObject, applyUnstyled } from ${JSON.stringify(themeUtilsPath)}`,
+              `import { applyUnstyled } from ${JSON.stringify(themeUtilsPath)}`,
               ...generateVariantDeclarations(variants),
               `const options = ${JSON.stringify(options, null, 2)}`,
               `let result = typeof template === 'function' ? (template as Function)(options) : template`,
               `result = applyUnstyled(result, ${unstyledJson})`,
-              `result = applyPrefixToObject(result, ${prefixJson})`,
               `const theme = ${json}`,
               `export default result as typeof theme`
             ].join('\n\n')
@@ -197,6 +199,27 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     // `writeThemeTemplate`), which needs no extra directive.
     const componentDir = resolve ? resolve('./runtime/components') : undefined
 
+    const themeSources: string[] = []
+    // The themes those sources cover, which a prefixed app lists instead
+    const themes: Record<string, any>[] = []
+
+    function addThemes(group: Record<string, any>, path?: string) {
+      for (const component in group) {
+        themes.push(resolveTheme(group, component, path))
+      }
+    }
+
+    function addAllThemes() {
+      themeSources.push('@source "./ui";')
+      addThemes(theme)
+      if (hasContent) {
+        addThemes(themeContent, 'content')
+      }
+      if (hasProse) {
+        addThemes(themeProse, 'prose')
+      }
+    }
+
     if (options.experimental?.componentDetection && nuxt && componentDir && layers.length) {
       const detectedComponents = await detectUsedComponents(
         layers,
@@ -220,7 +243,8 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
         previousDetectedComponents = detectedComponents
 
         if (hasProse) {
-          sources.push('@source "./ui/prose";')
+          themeSources.push('@source "./ui/prose";')
+          addThemes(themeProse, 'prose')
         }
 
         for (const component of detectedComponents) {
@@ -228,9 +252,11 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
           const camelComponent = camelCase(component)
 
           if (hasContent && (themeContent as any)[camelComponent]) {
-            sources.push(`@source "./ui/content/${kebabComponent}.ts";`)
+            themeSources.push(`@source "./ui/content/${kebabComponent}.ts";`)
+            themes.push(resolveTheme(themeContent, camelComponent, 'content'))
           } else if ((theme as any)[camelComponent]) {
-            sources.push(`@source "./ui/${kebabComponent}.ts";`)
+            themeSources.push(`@source "./ui/${kebabComponent}.ts";`)
+            themes.push(resolveTheme(theme, camelComponent))
           }
         }
       } else {
@@ -239,10 +265,19 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
         }
         previousDetectedComponents = new Set()
 
-        sources.push('@source "./ui";')
+        addAllThemes()
       }
     } else {
-      sources.push('@source "./ui";')
+      addAllThemes()
+    }
+
+    // Tailwind only generates prefixed candidates, and the theme files keep
+    // their classes unprefixed since the engine prefixes them at runtime, so a
+    // prefixed app gets the prefixed classes inline instead of the files.
+    if (options.theme?.prefix) {
+      sources.push(`@source inline(${JSON.stringify(getThemeClasses(themes, options.theme.prefix).join(' '))});`)
+    } else {
+      sources.push(...themeSources)
     }
 
     return sources.join('\n')
