@@ -7,9 +7,7 @@ export default defineConfig({
     vue(),
     ui({
       dts: false,
-      experimental: {
-        componentDetection: true
-      }
+      componentDetection: true
     })
   ]
 })

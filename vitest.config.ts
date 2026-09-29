@@ -56,7 +56,7 @@ export default defineConfig({
           // inactive for a local `pnpm bench`.
           codspeedPlugin(),
           vue(),
-          ui({ dts: false }),
+          ui({ dts: false, componentDetection: false }),
           {
             name: 'nuxt-ui-test:components',
             enforce: 'pre',

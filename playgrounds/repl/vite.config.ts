@@ -8,6 +8,8 @@ export default defineConfig({
     vue(),
     ui({
       router: false,
+      // Components typed into the REPL can't be detected at build time
+      componentDetection: false,
       autoImport: {
         imports: ['vue']
       }
