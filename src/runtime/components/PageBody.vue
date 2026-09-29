@@ -32,7 +32,7 @@ const _props = defineProps<PageBodyProps>()
 
 defineSlots<PageBodySlots>()
 
-const props = useComponentProps('pageBody', _props)
+const props = useComponentProps('pageBody', _props, theme)
 
 const appConfig = useAppConfig() as PageBody['AppConfig']
 

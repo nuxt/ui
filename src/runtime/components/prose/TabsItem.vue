@@ -28,7 +28,7 @@ const _props = defineProps<ProseTabsItemProps>()
 
 defineSlots<ProseTabsItemSlots>()
 
-const props = useComponentProps('prose.tabsItem', _props)
+const props = useComponentProps('prose.tabsItem', _props, theme)
 
 const appConfig = useAppConfig() as ProseTabsItem['AppConfig']
 

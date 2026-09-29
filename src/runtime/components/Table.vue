@@ -253,7 +253,7 @@ const _props = withDefaults(defineProps<TableProps<T>>(), {
 })
 const slots = defineSlots<TableSlots<T>>()
 
-const props = useComponentProps<TableProps<T>>('table', _props)
+const props = useComponentProps<TableProps<T>>('table', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Table['AppConfig']

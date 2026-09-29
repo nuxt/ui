@@ -244,21 +244,21 @@ Override theme for a section of the component tree without affecting the rest of
 
 ### Global `defaultVariants`
 
-Override default `size` and `color` for **all** components at once:
+Override default `size` and `color` for **all** components at once. Only components whose default is `primary` or `md` change:
 
 ```ts
-// nuxt.config.ts
-export default defineNuxtConfig({
+// app.config.ts
+export default defineAppConfig({
   ui: {
-    theme: {
-      defaultVariants: {
-        size: 'lg',
-        color: 'neutral'
-      }
+    defaultVariants: {
+      size: 'lg',
+      color: 'neutral'
     }
   }
 })
 ```
+
+For part of the app only, use the `'*'` key of `<UTheme :props>`: `<UTheme :props="{ '*': { size: 'sm' } }">`.
 
 ### `theme.prefix`
 

@@ -37,7 +37,7 @@ const _props = withDefaults(defineProps<ProseImgProps>(), {
   zoom: true
 })
 
-const props = useComponentProps('prose.img', _props)
+const props = useComponentProps('prose.img', _props, theme)
 
 const appConfig = useAppConfig() as ProseImg['AppConfig']
 

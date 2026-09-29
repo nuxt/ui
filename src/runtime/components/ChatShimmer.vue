@@ -43,7 +43,7 @@ const _props = withDefaults(defineProps<ChatShimmerProps>(), {
   spread: 2
 })
 
-const props = useComponentProps('chatShimmer', _props)
+const props = useComponentProps('chatShimmer', _props, theme)
 
 const appConfig = useAppConfig() as ChatShimmer['AppConfig']
 

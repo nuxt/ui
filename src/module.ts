@@ -8,13 +8,10 @@ import { defaultOptions, getDefaultConfig } from './utils/defaults'
 import { getClientBundleIcons } from './utils/icons'
 import { generateI18nPlugin, getLocaleKeys } from './utils/locales'
 import type { I18nLocale } from './utils/locales'
-import type { Color } from './theme/color'
 import OptionalDepsPlugin from './plugins/optional-deps'
 import { name, version } from '../package.json'
 
 export type * from './runtime/types'
-
-type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | (string & {})
 
 export interface ModuleOptions {
   /**
@@ -50,24 +47,6 @@ export interface ModuleOptions {
      * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#themeunstyled
      */
     unstyled?: boolean
-
-    /**
-     * The default variants to use for components
-     * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#themedefaultvariants
-     */
-    defaultVariants?: {
-      /**
-       * The default color variant to use for components
-       * @defaultValue `'primary'`
-       */
-      color?: Color
-
-      /**
-       * The default size variant to use for components
-       * @defaultValue `'md'`
-       */
-      size?: Size
-    }
 
     /**
      * Prefix for Tailwind CSS utility classes

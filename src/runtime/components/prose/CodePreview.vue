@@ -26,7 +26,7 @@ import { tv } from '../../utils/tv'
 const _props = defineProps<ProseCodePreviewProps>()
 const slots = defineSlots<ProseCodePreviewSlots>()
 
-const props = useComponentProps('prose.codePreview', _props)
+const props = useComponentProps('prose.codePreview', _props, theme)
 
 const appConfig = useAppConfig() as ProseCodePreview['AppConfig']
 

@@ -56,7 +56,7 @@ const _props = withDefaults(defineProps<BadgeProps>(), {
 })
 const slots = defineSlots<BadgeSlots>()
 
-const props = useComponentProps('badge', _props)
+const props = useComponentProps('badge', _props, theme)
 
 const appConfig = useAppConfig() as Badge['AppConfig']
 const { orientation, size: fieldGroupSize } = useFieldGroup<BadgeProps>(_props)

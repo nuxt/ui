@@ -182,7 +182,7 @@ const slots = defineSlots<FileUploadSlots<M, T>>()
 // eslint-disable-next-line vue/no-dupe-keys
 const modelValue = defineModel<FileUploadFiles<T | File, M>>()
 
-const props = useComponentProps<FileUploadProps<M, T>>('fileUpload', _props)
+const props = useComponentProps<FileUploadProps<M, T>>('fileUpload', _props, theme)
 
 const appConfig = useAppConfig() as FileUpload['AppConfig']
 
