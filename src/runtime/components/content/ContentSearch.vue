@@ -167,7 +167,7 @@ const { open, mapNavigationItems, mapLinks, mapSearchResults, postFilter } = use
 // eslint-disable-next-line vue/no-dupe-keys
 const colorMode = useColorMode()
 const appConfig = useThemeConfig() as ContentSearch['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.contentSearch)
+const overrides = useComponentOverrides((ui: ContentSearch['AppConfig']['ui']) => ui.contentSearch)
 
 const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'trailingIcon', 'selectedIcon', 'childrenIcon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon', 'back', 'backIcon', 'disabled', 'highlightOnHover', 'loop', 'labelKey', 'descriptionKey', 'preserveGroupOrder', 'virtualize', 'searchDelay'))
 const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal', 'unmountOnHide'))

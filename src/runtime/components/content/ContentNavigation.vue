@@ -129,7 +129,7 @@ const rootProps = useForwardProps(reactivePick(props, 'collapsible', 'type', 'un
 
 const route = useRoute()
 const appConfig = useThemeConfig() as ContentNavigation['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.contentNavigation)
+const overrides = useComponentOverrides((ui: ContentNavigation['AppConfig']['ui']) => ui.contentNavigation)
 
 const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ link: ContentNavigationLink, active: boolean }>()
 

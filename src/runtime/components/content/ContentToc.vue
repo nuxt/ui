@@ -100,7 +100,7 @@ const rootProps = useForwardProps(reactivePick(props, 'as', 'open', 'defaultOpen
 const { t } = useLocale()
 const router = useRouter()
 const appConfig = useThemeConfig() as ContentToc['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.contentToc)
+const overrides = useComponentOverrides((ui: ContentToc['AppConfig']['ui']) => ui.contentToc)
 const { activeHeadings, updateHeadings } = useScrollspy()
 const prefix = usePrefix()
 

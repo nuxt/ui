@@ -112,7 +112,7 @@ const props = useComponentProps<InputNumberProps<T, Mod>>('inputNumber', _props,
 
 const { t } = useLocale()
 const appConfig = useThemeConfig() as InputNumber['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.inputNumber)
+const overrides = useComponentOverrides((ui: InputNumber['AppConfig']['ui']) => ui.inputNumber)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'stepSnapping', 'startingValue', 'allowInvalid', 'formatOptions', 'disableWheelChange', 'invertWheelChange', 'required', 'readonly', 'focusOnChange', 'locale'))
 

@@ -66,7 +66,7 @@ import { ref, computed, onMounted, onScopeDispose } from 'vue'
 import { PinInputInput, PinInputRoot } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
 import { looseToNumber } from '../utils'
@@ -83,8 +83,7 @@ defineSlots<PinInputSlots>()
 const props = useComponentProps<PinInputProps<T>>('pinInput', _props, theme)
 
 const { t } = useLocale()
-const appConfig = useThemeConfig() as PinInput['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.pinInput)
+const overrides = useComponentOverrides((ui: PinInput['AppConfig']['ui']) => ui.pinInput)
 
 const rootProps = useForwardProps(reactivePick(props, 'disabled', 'id', 'mask', 'name', 'otp', 'required', 'type'), emits)
 
