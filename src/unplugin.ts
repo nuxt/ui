@@ -7,7 +7,6 @@ import type { Options as AutoImportOptions } from 'unplugin-auto-import/types'
 import type { Options as ComponentsOptions } from 'unplugin-vue-components/types'
 import { defu } from 'defu'
 import tailwind from '@tailwindcss/vite'
-import type colors from 'tailwindcss/colors'
 import type { ModuleOptions as NuxtIconModuleOptions, RuntimeOptions } from '@nuxt/icon'
 
 import type * as ui from '#build/ui'
@@ -15,7 +14,6 @@ import type * as ui from '#build/ui'
 import { defaultOptions, getDefaultConfig } from './utils/defaults'
 import type { ModuleOptions } from './module'
 import type icons from './runtime/theme/icons'
-import type { Color as ColorAlias } from './runtime/theme/color'
 
 import TemplatePlugin from './plugins/templates'
 import PluginsPlugin from './plugins/plugins'
@@ -29,11 +27,7 @@ import OptionalDepsPlugin from './plugins/optional-deps'
 import type { TVConfig, TVMergeConfig } from './runtime/types/tv'
 import type { ThemeDefaultVariants } from './runtime/types/theme'
 
-type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone' | 'taupe' | 'mauve' | 'mist' | 'olive'
-type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
-
 type AppConfigUI = {
-  colors?: { [K in Exclude<ColorAlias, 'neutral'>]?: Color } & { neutral?: NeutralColor | (string & {}) }
   icons?: Partial<typeof icons>
   tv?: TVMergeConfig
   defaultVariants?: ThemeDefaultVariants

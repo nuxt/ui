@@ -8,7 +8,7 @@ import type { ModuleOptions } from './module'
 import { getThemeClasses } from './utils/theme'
 import { detectUsedComponents } from './utils/components'
 import * as theme from './runtime/theme'
-import { colors as aliases } from './runtime/theme/color'
+import { colors } from './runtime/theme/color'
 import * as themeProse from './runtime/theme/prose'
 import * as themeContent from './runtime/theme/content'
 
@@ -180,8 +180,8 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
       const accent = await readFile(resolve('./runtime/css/accent.css'), 'utf8')
       const scopes = accent.match(/\.\\\[--ui-accent\\:var\\\(--ui-[a-z]+\\\)\\\]\s*\{[^}]*\}/g) ?? []
       // One rule per color: fewer means the shipped CSS no longer looks the way this reads it
-      if (scopes.length < aliases.length) {
-        throw new Error(`[@nuxt/ui] Found ${scopes.length} color scope rules in \`accent.css\` for the prefix, expected ${aliases.length}.`)
+      if (scopes.length < colors.length) {
+        throw new Error(`[@nuxt/ui] Found ${scopes.length} color scope rules in \`accent.css\` for the prefix, expected ${colors.length}.`)
       }
 
       return `@layer base {\n  ${scopes.map(rule => rule.replace('.\\[--ui-accent', `.${prefix}\\:\\[--ui-accent`)).join('\n\n  ')}\n}\n`
@@ -217,18 +217,10 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
 
       return `import * as ui from '#build/ui'
 import type { TVConfig, TVMergeConfig, DeepRequired, ThemeDefaultVariants } from '@nuxt/ui'
-import colors from 'tailwindcss/colors'
 
 type IconsConfig = Record<${iconUnion} | (string & {}), string>
 
-type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone' | 'taupe' | 'mauve' | 'mist' | 'olive'
-type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
-
 type AppConfigUI = {
-  colors?: {
-    ${aliases.filter(color => color !== 'neutral').map(color => `'${color}'?: Color`).join('\n\t\t')}
-    neutral?: NeutralColor | (string & {})
-  }
   icons?: Partial<IconsConfig>
   tv?: TVMergeConfig
   defaultVariants?: ThemeDefaultVariants
@@ -236,7 +228,7 @@ type AppConfigUI = {
 } & TVConfig<typeof ui>
 
 // The module writes \`prefix\` from \`tailwindPrefix\`, so it's read at runtime but not set here
-type AppConfigRuntimeUI = DeepRequired<Pick<AppConfigUI, 'colors' | 'icons' | 'tv'>> & { prefix?: string } & typeof ui
+type AppConfigRuntimeUI = DeepRequired<Pick<AppConfigUI, 'icons' | 'tv'>> & { prefix?: string } & typeof ui
 
 declare module '@nuxt/schema' {
   interface AppConfigInput {

@@ -157,9 +157,10 @@ bun add @nuxt/ui
 \`\`\`ts [app/app.config.ts]
 export default defineAppConfig({
   ui: {
-    colors: {
-      primary: 'green',
-      neutral: 'slate'
+    button: {
+      defaultVariants: {
+        size: 'sm'
+      }
     }
   }
 })

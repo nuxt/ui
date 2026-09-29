@@ -6,6 +6,8 @@ const IMPORT = /@import\s+(?:url\(\s*)?["']([^"']+)["']\s*\)?([^;]*)/g
 // bring it: the whole of Tailwind CSS or `theme.css`, not `utilities.css`
 const THEME = /^tailwindcss(?:\/(?:index|theme)(?:\.css)?)?$/
 const PREFIX = /\bprefix\(\s*([\w-]+)\s*\)/
+const WHOLE = /^tailwindcss(?:\/index\.css)?$/
+const LAYER = /\blayer\(\s*([\w.-]+)\s*\)/
 
 /**
  * The prefix a stylesheet gives Tailwind CSS, `@import "tailwindcss" prefix(tw)`.
@@ -31,16 +33,30 @@ export function getTailwindPrefix(css: string): string | null | undefined {
 }
 
 /**
+ * The cascade layer a stylesheet imports all of Tailwind CSS into,
+ * `@import "tailwindcss" layer(framework)`.
+ * @param css - The stylesheet source
+ */
+export function getTailwindLayer(css: string): string | undefined {
+  for (const [, specifier, params] of css.replace(COMMENT, '').matchAll(IMPORT)) {
+    const layer = WHOLE.test(specifier!) ? params!.match(LAYER)?.[1] : undefined
+    if (layer) {
+      return layer
+    }
+  }
+}
+
+/**
  * Reads the Tailwind CSS prefix of the first stylesheet that imports Tailwind CSS.
  * @param paths - The stylesheets, in order
- * @returns The stylesheet and its prefix, or `undefined` when none imports Tailwind CSS
+ * @returns The stylesheet, its prefix and the layer it imports Tailwind CSS into, or `undefined` when none imports Tailwind CSS
  */
-export async function findTailwindPrefix(paths: string[]): Promise<{ path: string, prefix: string | null } | undefined> {
+export async function findTailwindPrefix(paths: string[]): Promise<{ path: string, prefix: string | null, layer?: string } | undefined> {
   for (const path of paths) {
     const css = await readFile(path, 'utf8').catch(() => undefined)
     const prefix = css === undefined ? undefined : getTailwindPrefix(css)
     if (prefix !== undefined) {
-      return { path, prefix }
+      return { path, prefix, layer: getTailwindLayer(css!) }
     }
   }
 }

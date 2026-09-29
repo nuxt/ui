@@ -4,7 +4,7 @@ import type { DropdownMenuItem } from '@nuxt/ui'
 import type { ThemeDoc } from '../../utils/theme/engine/types'
 import { DEFAULT_PRESET_ID } from '../../utils/theme/engine/types'
 import { studioIcons as stockIcons } from '../../utils/theme/icons'
-import { keepPanels, paletteLabel, rampCssName, themeChipStyle, loadFontPreviews, PRESET_ICONS, FONTS } from '../../utils/theme/studio'
+import { keepPanels, paletteLabel, paletteShade, themeChipStyle, loadFontPreviews, PRESET_ICONS, FONTS } from '../../utils/theme/studio'
 
 /**
  * The header's theme menu: the applied preset up top with the presets a
@@ -17,7 +17,7 @@ const { track } = useAnalytics()
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
 const studioIcons = useStudioIcons()
-const { primary, primaryColors, neutral, neutralColors, blackAsPrimary, setBlackAsPrimary, radius, radiuses, font, icon, icons, currentDoc } = useTheme()
+const { primary, primaryColors, neutral, neutralColors, radius, radiuses, font, icon, icons, currentDoc } = useTheme()
 const { presets, selectedPreset, applyPreset, selectPalette, isCustomPalette, neutralChip, sectionDirty } = useThemeStudio()
 // "changed from the preset" per control, the cue the studio toolbar carries
 const { groupDirtyFlags } = useThemeStudioToolbar()
@@ -50,8 +50,8 @@ const triggerIcon = computed(() => {
   return (id && id !== DEFAULT_PRESET_ID && PRESET_ICONS[id]) || studioIcons.palette
 })
 
-/** A palette's swatch, through the ramp name the docs expose it under. */
-const swatch = (palette: string) => `var(--color-${rampCssName(palette)}-500)`
+/** A palette's swatch. */
+const swatch = (palette: string) => paletteShade(palette, 500)
 
 /** A theme as a chip avatar: its icon in its primary, on that primary's tint. */
 function chip(id: string | undefined, doc: ThemeDoc): DropdownMenuItem['avatar'] {
@@ -129,30 +129,23 @@ const items = computed<DropdownMenuItem[][]>(() => [[{
     label: 'Primary',
     dirty: mounted.value && primaryDirty.value,
     icon: studioIcons.brush,
-    value: blackAsPrimary.value ? 'Black' : isCustomPalette('primary') ? 'Custom' : upperFirst(paletteLabel(primary.value)),
+    value: isCustomPalette('primary') ? 'Custom' : upperFirst(paletteLabel(primary.value)),
     dot: 'var(--ui-primary)',
-    children: [{
-      label: 'Black',
-      slot: 'color',
-      dot: 'var(--ui-text-highlighted)',
-      type: 'checkbox' as const,
-      checked: blackAsPrimary.value,
-      onSelect: keep(() => setBlackAsPrimary(true))
-    }, ...primaryColors.map(color => ({
+    children: primaryColors.map(color => ({
       label: upperFirst(paletteLabel(color)),
       slot: 'color',
       dot: swatch(color),
       type: 'checkbox' as const,
-      checked: !blackAsPrimary.value && !isCustomPalette('primary') && primary.value === color,
+      checked: !isCustomPalette('primary') && primary.value === color,
       onSelect: keep(() => selectPalette('primary', color))
-    }))]
+    }))
   }),
   setting({
     label: 'Neutral',
     dirty: mounted.value && neutralDirty.value,
     icon: studioIcons.contrast,
     value: isCustomPalette('neutral') ? 'Custom' : upperFirst(paletteLabel(neutral.value)),
-    dot: `var(--color-${neutralChip.value}-500)`,
+    dot: swatch(neutralChip.value),
     children: neutralColors.map(color => ({
       label: upperFirst(paletteLabel(color)),
       slot: 'color',
