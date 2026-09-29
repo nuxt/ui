@@ -33,7 +33,7 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'p-3 flex 
           <span
             v-for="(chip, index) in colorChips"
             :key="chip.label"
-            class="relative size-3 rounded-full ring-2 ring-bg group-hover:ring-(--ui-bg-soft) transition"
+            class="relative size-3 rounded-full ring-2 ring-surface group-hover:ring-(--ui-bg-soft) transition"
             :style="{ backgroundColor: chip.dot, zIndex: colorChips.length - index }"
           />
         </span>

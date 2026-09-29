@@ -637,7 +637,7 @@ const pageTitles: Record<Page, string> = {
                 mail.unread ? 'text-highlighted' : 'text-default',
                 selectedMail && selectedMail.id === mail.id
                   ? 'border-primary bg-primary/10'
-                  : 'border-bg hover:border-primary hover:bg-primary/5'
+                  : 'border-surface hover:border-primary hover:bg-primary/5'
               ]"
               @click="selectedMail = mail"
             >
