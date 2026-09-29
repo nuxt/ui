@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/prose/code-tree'
+import theme from '../../theme/prose/code-tree'
 import type { ComponentConfig } from '../../types/tv'
 
 type ProseCodeTree = ComponentConfig<typeof theme, AppConfig, 'codeTree', 'ui.prose'>

@@ -7,7 +7,7 @@ import type { PlaceholderOptions } from '@tiptap/extension-placeholder'
 import type { MarkdownExtensionOptions } from '@tiptap/markdown'
 import type { ImageOptions } from '@tiptap/extension-image'
 import type { MentionOptions } from '@tiptap/extension-mention'
-import theme from '#build/ui/editor'
+import theme from '../theme/editor'
 import type { EditorHandlers, EditorCustomHandlers } from '../types/editor'
 import type { ComponentConfig } from '../types/tv'
 

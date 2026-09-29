@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/chat-shimmer'
+import theme from '../theme/chat-shimmer'
 import type { ComponentConfig } from '../types/tv'
 
 type ChatShimmer = ComponentConfig<typeof theme, AppConfig, 'chatShimmer'>

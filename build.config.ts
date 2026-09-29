@@ -6,18 +6,12 @@ export default defineBuildConfig({
     './src/unplugin',
     './src/vite'
   ],
-  rollup: {
-    replace: {
-      delimiters: ['', ''],
-      values: {
-        // Used in development to import directly from theme
-        'process.argv.includes(\'--uiDev\')': 'false'
-      }
-    }
-  },
   hooks: {
     'mkdist:entry:options'(ctx, entry, options) {
       options.addRelativeDeclarationExtensions = false
+      // Tailwind scans the built themes, so a class keeps its characters as
+      // written: `content-['·']` rather than esbuild's `content-['\xB7']`
+      options.esbuild = { ...options.esbuild, charset: 'utf8' }
     }
   },
   externals: ['#build/ui', 'vite']
