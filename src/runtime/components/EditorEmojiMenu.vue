@@ -2,7 +2,7 @@
 import type { AppConfig } from '@nuxt/schema'
 import type { EditorMenuOptions } from '../composables/useEditorMenu'
 import type { ComponentConfig } from '../types/tv'
-import theme from '#build/ui/editor-emoji-menu'
+import theme from '../theme/editor-emoji-menu'
 
 type EditorEmojiMenu = ComponentConfig<typeof theme, AppConfig, 'editorEmojiMenu'>
 

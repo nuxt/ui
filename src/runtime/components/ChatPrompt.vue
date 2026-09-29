@@ -2,7 +2,7 @@
 import type { VNode } from 'vue'
 import type { ChatStatus } from 'ai'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/chat-prompt'
+import theme from '../theme/chat-prompt'
 import type { TextareaProps, TextareaSlots } from './Textarea.vue'
 import type { ComponentConfig } from '../types/tv'
 

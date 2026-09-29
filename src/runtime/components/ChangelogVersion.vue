@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/changelog-version'
+import theme from '../theme/changelog-version'
 import type { BadgeProps } from './Badge.vue'
 import type { LinkProps } from './Link.vue'
 import type { UserProps } from './User.vue'

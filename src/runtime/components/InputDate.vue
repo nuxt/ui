@@ -5,7 +5,7 @@ import type { AppConfig } from '@nuxt/schema'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { IconProps } from './Icon.vue'
 import type { ComponentConfig } from '../types/tv'
-import theme from '#build/ui/input-date'
+import theme from '../theme/input-date'
 
 type InputDate = ComponentConfig<typeof theme, AppConfig, 'inputDate'>
 
