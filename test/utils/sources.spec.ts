@@ -53,7 +53,7 @@ describe('package sources', () => {
   })
 
   it('leaves out the themes detection didn\'t find', async () => {
-    const css = await build({ experimental: { componentDetection: true } }, { detectedComponents: new Set(['Button']) })
+    const css = await build({ componentDetection: true }, { detectedComponents: new Set(['Button']) })
 
     expect(css).toContain('.rounded-md')
     expect(css).not.toContain('.animate-pulse')
