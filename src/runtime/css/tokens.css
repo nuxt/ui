@@ -119,15 +119,18 @@
   --background-color-inverted: var(--ui-bg-inverted);
   --background-color-border: var(--ui-border-default);
   --border-color-default: var(--ui-border-default);
+  --border-color-muted: var(--ui-border-muted);
   --border-color-strong: var(--ui-border-strong);
   --border-color-inverted: var(--ui-border-inverted);
   --border-color-surface: var(--ui-bg-surface);
   --ring-color-default: var(--ui-border-default);
+  --ring-color-muted: var(--ui-border-muted);
   --ring-color-strong: var(--ui-border-strong);
   --ring-color-inverted: var(--ui-border-inverted);
   --ring-color-surface: var(--ui-bg-surface);
   --ring-offset-color-surface: var(--ui-bg-surface);
   --divide-color-default: var(--ui-border-default);
+  --divide-color-muted: var(--ui-border-muted);
   --divide-color-strong: var(--ui-border-strong);
   --divide-color-inverted: var(--ui-border-inverted);
   --outline-color-focus: var(--ui-focus, color-mix(in oklab, var(--ui-primary) 25%, transparent));
