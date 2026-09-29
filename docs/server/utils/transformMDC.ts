@@ -676,7 +676,7 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
     const pascalName = componentName.charAt(0).toUpperCase() + componentName.slice(1)
     const kebabName = kebabCase(componentName)
     const componentPath = `src/runtime/components/${prefix ? `${prefix}/` : ''}${pascalName}.vue`
-    const themePath = `src/theme/${prefix ? `${prefix}/` : ''}${kebabName}.ts`
+    const themePath = `src/runtime/theme/${prefix ? `${prefix}/` : ''}${kebabName}.ts`
 
     node[0] = 'p'
     node[1] = {}
