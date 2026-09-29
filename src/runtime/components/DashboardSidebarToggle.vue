@@ -30,7 +30,7 @@ import { ref, computed } from 'vue'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useDashboard } from '../utils/dashboard'
 import { tv } from '../utils/tv'
@@ -50,10 +50,11 @@ const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'side', 'class')
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as DashboardSidebarToggle['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.dashboardSidebarToggle)
 const { sidebarOpen, toggleSidebar } = useDashboard({ sidebarOpen: ref(false), toggleSidebar: () => {} })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.dashboardSidebarToggle)({ side: props.side }))
+const ui = computed(() => tv(theme, overrides.value)({ side: props.side }))
 </script>
 
 <template>

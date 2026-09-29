@@ -71,7 +71,7 @@ import { useTemplateRef, computed, onMounted, onScopeDispose, nextTick, watch } 
 import { Primitive } from 'reka-ui'
 import { useVModel } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { isEmpty, looseToNumber } from '../utils'
@@ -96,6 +96,7 @@ const props = useComponentProps<TextareaProps<T, Mod>>('textarea', _props, theme
 const modelValue = useVModel<TextareaProps<T, Mod>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, { defaultValue: props.defaultValue })
 
 const appConfig = useAppConfig() as Textarea['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.textarea)
 
 const { emitFormFocus, emitFormBlur, emitFormInput, emitFormChange, size: formFieldSize, color: formFieldColor, id, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<TextareaProps<T>>(_props, { deferInputValidation: true })
 
@@ -110,7 +111,7 @@ const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.textarea)({
+const ui = computed(() => tv(theme, overrides.value)({
   color: color.value,
   variant: props.variant,
   size: size.value,

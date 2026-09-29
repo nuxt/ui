@@ -243,7 +243,7 @@ import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { get, isArrayOfArray } from '../utils'
 import { tv } from '../utils/tv'
 import { pickLinkProps } from '../utils/link'
@@ -275,6 +275,7 @@ const slots = defineSlots<NavigationMenuSlots<T>>()
 const props = useComponentProps<NavigationMenuProps<T, K, O>>('navigationMenu', _props, theme)
 
 const appConfig = useAppConfig() as NavigationMenu['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.navigationMenu)
 
 const rootProps = useForwardProps(computed(() => ({
   as: props.as,
@@ -303,7 +304,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: N
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.navigationMenu)({
+const ui = computed(() => tv(theme, overrides.value)({
   orientation: props.orientation,
   contentOrientation: props.orientation === 'vertical' ? undefined : props.contentOrientation,
   collapsed: props.collapsed,

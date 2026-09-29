@@ -68,7 +68,7 @@ import { useForwardProps } from '../composables/useForwardProps'
 import { PopoverRoot, PopoverTrigger, PopoverPortal, PopoverContent, PopoverArrow, PopoverAnchor, HoverCardRoot, HoverCardTrigger, HoverCardPortal, HoverCardContent, HoverCardArrow } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { FieldGroupReset } from '../composables/useFieldGroup'
 import { usePortal } from '../composables/usePortal'
 import { pointerDownOutside } from '../utils/overlay'
@@ -90,6 +90,7 @@ const slots = defineSlots<PopoverSlots<M>>()
 const props = useComponentProps<PopoverProps<M>>('popover', _props, theme)
 
 const appConfig = useAppConfig() as Popover['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.popover)
 
 const pick = props.mode === 'hover' ? reactivePick(props, 'defaultOpen', 'open', 'openDelay', 'closeDelay', 'enableTouch') : reactivePick(props, 'defaultOpen', 'open', 'modal')
 const rootProps = useForwardProps(pick, emits)
@@ -115,7 +116,7 @@ const contentEvents = computed(() => {
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as PopoverArrowProps)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.popover)())
+const ui = computed(() => tv(theme, overrides.value)())
 
 const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover)
 </script>

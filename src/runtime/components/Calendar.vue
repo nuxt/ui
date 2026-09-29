@@ -146,7 +146,7 @@ import { useForwardProps } from '../composables/useForwardProps'
 import { CalendarRoot, CalendarHeader, CalendarHeading, CalendarGrid, CalendarCell, CalendarHeadCell, CalendarNext, CalendarPrev, CalendarGridHead, CalendarGridBody, CalendarGridRow, CalendarCellTrigger, RangeCalendarRoot, RangeCalendarHeader, RangeCalendarHeading, RangeCalendarGrid, RangeCalendarCell, RangeCalendarHeadCell, RangeCalendarNext, RangeCalendarPrev, RangeCalendarGridHead, RangeCalendarGridBody, RangeCalendarGridRow, RangeCalendarCellTrigger, MonthPickerRoot, MonthPickerHeader, MonthPickerHeading, MonthPickerGrid, MonthPickerCell, MonthPickerNext, MonthPickerPrev, MonthPickerGridBody, MonthPickerGridRow, MonthPickerCellTrigger, MonthRangePickerRoot, MonthRangePickerHeader, MonthRangePickerHeading, MonthRangePickerGrid, MonthRangePickerCell, MonthRangePickerNext, MonthRangePickerPrev, MonthRangePickerGridBody, MonthRangePickerGridRow, MonthRangePickerCellTrigger, YearPickerRoot, YearPickerHeader, YearPickerHeading, YearPickerGrid, YearPickerCell, YearPickerNext, YearPickerPrev, YearPickerGridBody, YearPickerGridRow, YearPickerCellTrigger, YearRangePickerRoot, YearRangePickerHeader, YearRangePickerHeading, YearRangePickerGrid, YearRangePickerCell, YearRangePickerNext, YearRangePickerPrev, YearRangePickerGridBody, YearRangePickerGridRow, YearRangePickerCellTrigger } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
@@ -173,6 +173,7 @@ const props = useComponentProps<CalendarProps<R, M>>('calendar', _props, theme)
 
 const { dir, t, locale } = useLocale()
 const appConfig = useAppConfig() as Calendar['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.calendar)
 
 const VIEWS: CalendarView[] = ['day', 'month', 'year']
 
@@ -302,7 +303,7 @@ const prevLabel = computed(() => view.value === 'day' ? t('calendar.prevMonth') 
 const nextLabel = computed(() => view.value === 'day' ? t('calendar.nextMonth') : t('calendar.nextYear'))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.calendar)({
+const ui = computed(() => tv(theme, overrides.value)({
   color: props.color,
   size: props.size,
   variant: props.variant,

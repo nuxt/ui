@@ -55,7 +55,7 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useDashboard } from '../utils/dashboard'
 import { tv } from '../utils/tv'
 import UDashboardSidebarToggle from './DashboardSidebarToggle.vue'
@@ -72,12 +72,13 @@ const slots = defineSlots<DashboardNavbarSlots>()
 const props = useComponentProps('dashboardNavbar', _props, theme)
 
 const appConfig = useAppConfig() as DashboardNavbar['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.dashboardNavbar)
 const dashboardContext = useDashboard({})
 
 const [DefineToggleTemplate, ReuseToggleTemplate] = createReusableTemplate()
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.dashboardNavbar)())
+const ui = computed(() => tv(theme, overrides.value)())
 </script>
 
 <template>

@@ -53,7 +53,7 @@ import { computed, watch, onBeforeUpdate, onMounted, ref } from 'vue'
 import { TreeRoot, TreeItem } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 import UCodeIcon from './CodeIcon.vue'
 import UIcon from '../Icon.vue'
@@ -67,11 +67,12 @@ const slots = defineSlots<ProseCodeTreeSlots>()
 const props = useComponentProps('prose.codeTree', _props, theme)
 
 const appConfig = useAppConfig() as ProseCodeTree['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.prose?.codeTree)
 
 const [DefineTreeTemplate, ReuseTreeTemplate] = createReusableTemplate<{ items: TreeNode[], level: number }>()
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.prose?.codeTree)())
+const ui = computed(() => tv(theme, overrides.value)())
 
 const initialPath = props.modelValue ?? props.defaultValue
 const model = ref(initialPath ? { path: initialPath } : undefined)

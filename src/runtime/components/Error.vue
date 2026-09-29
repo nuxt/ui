@@ -50,7 +50,7 @@ export interface ErrorSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { clearError, useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
@@ -67,9 +67,10 @@ const props = useComponentProps('error', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Error['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.error)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.error)())
+const ui = computed(() => tv(theme, overrides.value)())
 
 function handleError() {
   clearError({ redirect: props.redirect })
