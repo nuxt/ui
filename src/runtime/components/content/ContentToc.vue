@@ -76,7 +76,7 @@ import { computed, onUnmounted, useTemplateRef, watch, nextTick } from 'vue'
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useRouter, useAppConfig, useNuxtApp } from '#imports'
-import { useComponentProps } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
 import { useForwardProps } from '../../composables/useForwardProps'
 import { useScrollspy } from '../../composables/useScrollspy'
 import { useScrollShadow } from '../../composables/useScrollShadow'
@@ -100,6 +100,7 @@ const rootProps = useForwardProps(reactivePick(props, 'as', 'open', 'defaultOpen
 const { t } = useLocale()
 const router = useRouter()
 const appConfig = useAppConfig() as ContentToc['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.contentToc)
 const { activeHeadings, updateHeadings } = useScrollspy()
 const prefix = usePrefix()
 
@@ -116,7 +117,7 @@ const [DefineTriggerTemplate, ReuseTriggerTemplate] = createReusableTemplate<{ o
 const [DefineContentTemplate, ReuseContentTemplate] = createReusableTemplate()
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.contentToc)({
+const ui = computed(() => tv(theme, overrides.value)({
   color: props.color,
   highlight: props.highlight,
   highlightVariant: props.highlightVariant,

@@ -51,7 +51,7 @@ import { ref, computed, defineAsyncComponent, toRef, provide, onMounted, onBefor
 import { ToastProvider, ToastViewport, ToastPortal } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useLocale } from '../composables/useLocale'
 import { useToast, toastMaxInjectionKey } from '../composables/useToast'
@@ -94,6 +94,7 @@ onBeforeUnmount(() => {
 const { toasts, remove } = useToast()
 const { t } = useLocale()
 const appConfig = useAppConfig() as Toaster['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.toaster)
 
 provide(toastMaxInjectionKey, toRef(() => props.max))
 
@@ -117,7 +118,7 @@ const swipeDirection = computed(() => {
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.toaster)({
+const ui = computed(() => tv(theme, overrides.value)({
   position: props.position,
   swipeDirection: swipeDirection.value
 }))
