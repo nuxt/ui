@@ -237,7 +237,7 @@ exports[`ChatMessage > renders with parts correctly 1`] = `
 `;
 
 exports[`ChatMessage > renders with primary variant naked correctly 1`] = `
-"<article data-role="user" data-slot="chat-message" class="group/message relative w-full scroll-mt-4 sm:scroll-mt-6">
+"<article data-role="user" data-slot="chat-message" class="group/message relative w-full [--ui-accent:var(--ui-primary)] scroll-mt-4 sm:scroll-mt-6">
   <!--v-if-->
   <div data-slot="chat-message-container" class="relative flex items-start gap-3 pb-8">
     <!--v-if-->
@@ -250,7 +250,7 @@ exports[`ChatMessage > renders with primary variant naked correctly 1`] = `
 `;
 
 exports[`ChatMessage > renders with primary variant outline correctly 1`] = `
-"<article data-role="user" data-slot="chat-message" class="group/message relative w-full scroll-mt-4 sm:scroll-mt-6">
+"<article data-role="user" data-slot="chat-message" class="group/message relative w-full [--ui-accent:var(--ui-primary)] scroll-mt-4 sm:scroll-mt-6">
   <!--v-if-->
   <div data-slot="chat-message-container" class="relative flex items-start gap-3 pb-8">
     <!--v-if-->
@@ -263,7 +263,7 @@ exports[`ChatMessage > renders with primary variant outline correctly 1`] = `
 `;
 
 exports[`ChatMessage > renders with primary variant soft correctly 1`] = `
-"<article data-role="user" data-slot="chat-message" class="group/message relative w-full scroll-mt-4 sm:scroll-mt-6">
+"<article data-role="user" data-slot="chat-message" class="group/message relative w-full [--ui-accent:var(--ui-primary)] scroll-mt-4 sm:scroll-mt-6">
   <!--v-if-->
   <div data-slot="chat-message-container" class="relative flex items-start gap-3 pb-8">
     <!--v-if-->
@@ -276,7 +276,7 @@ exports[`ChatMessage > renders with primary variant soft correctly 1`] = `
 `;
 
 exports[`ChatMessage > renders with primary variant solid correctly 1`] = `
-"<article data-role="user" data-slot="chat-message" class="group/message relative w-full scroll-mt-4 sm:scroll-mt-6">
+"<article data-role="user" data-slot="chat-message" class="group/message relative w-full [--ui-accent:var(--ui-primary)] scroll-mt-4 sm:scroll-mt-6">
   <!--v-if-->
   <div data-slot="chat-message-container" class="relative flex items-start gap-3 pb-8">
     <!--v-if-->
@@ -289,7 +289,7 @@ exports[`ChatMessage > renders with primary variant solid correctly 1`] = `
 `;
 
 exports[`ChatMessage > renders with primary variant subtle correctly 1`] = `
-"<article data-role="user" data-slot="chat-message" class="group/message relative w-full scroll-mt-4 sm:scroll-mt-6">
+"<article data-role="user" data-slot="chat-message" class="group/message relative w-full [--ui-accent:var(--ui-primary)] scroll-mt-4 sm:scroll-mt-6">
   <!--v-if-->
   <div data-slot="chat-message-container" class="relative flex items-start gap-3 pb-8">
     <!--v-if-->

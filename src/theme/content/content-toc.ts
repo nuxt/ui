@@ -1,6 +1,6 @@
-import type { ModuleOptions } from '../../module'
+import { colorVariant } from '../color'
 
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur-sm -mx-4 px-4 sm:px-6 sm:-mx-6 lg:ms-0 flex flex-col overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]',
     container: 'pt-4 sm:pt-6 pb-2.5 sm:pb-4.5 lg:py-8 border-b border-dashed border-default lg:border-0 flex flex-col lg:min-h-0',
@@ -19,22 +19,15 @@ export default (options: Required<ModuleOptions>) => ({
     linkText: 'truncate',
     indicator: '',
     indicatorLine: '',
-    indicatorActive: ''
+    indicatorActive: 'bg-accent'
   },
   variants: {
-    color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
-      neutral: ''
-    },
-    highlightColor: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        indicatorActive: `bg-${color}`
-      }])),
-      neutral: {
-        indicatorActive: 'bg-inverted'
-      }
-    },
+    color: colorVariant({ root: '' }),
+    highlightColor: colorVariant({ indicatorActive: '' }),
     active: {
+      true: {
+        link: 'text-accent'
+      },
       false: {
         link: 'text-muted hover:text-default transition-colors'
       }
@@ -52,19 +45,7 @@ export default (options: Required<ModuleOptions>) => ({
       }
     }
   },
-  compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
-    color,
-    active: true,
-    class: {
-      link: `text-${color}`
-    }
-  })), {
-    color: 'neutral',
-    active: true,
-    class: {
-      link: 'text-highlighted'
-    }
-  }, {
+  compoundVariants: [{
     highlight: true,
     highlightVariant: 'straight',
     class: {
@@ -91,4 +72,4 @@ export default (options: Required<ModuleOptions>) => ({
     highlightColor: 'primary',
     highlightVariant: 'straight'
   }
-})
+}

@@ -1,24 +1,20 @@
-import type { ModuleOptions } from '../../module'
+import { colorVariant } from '../color'
 
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     base: 'group relative block my-5 p-4 sm:p-6 border border-default rounded-md bg-default transition-colors',
-    icon: 'size-6 mb-2 block',
+    icon: 'size-6 mb-2 block text-accent',
     title: 'text-highlighted font-semibold',
     description: 'text-[15px] text-muted *:first:mt-0 *:last:mb-0 *:my-1',
     externalIcon: 'size-4 align-top absolute end-2 top-2 text-dimmed pointer-events-none transition-colors'
   },
   variants: {
-    color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        icon: `text-${color}`
-      }])),
-      neutral: {
-        icon: 'text-highlighted'
-      }
-    },
+    color: colorVariant({ base: '' }),
     to: {
-      true: ''
+      true: {
+        base: 'hover:bg-accent-tint hover:border-accent outline-accent-focus has-[>a:focus-visible]:outline-3 has-[>a:focus-visible]:border-accent',
+        externalIcon: 'group-hover:text-accent'
+      }
     },
     title: {
       true: {
@@ -26,22 +22,7 @@ export default (options: Required<ModuleOptions>) => ({
       }
     }
   },
-  compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
-    color,
-    to: true,
-    class: {
-      base: `hover:bg-${color}/10 hover:border-${color} outline-${color}/25 has-[>a:focus-visible]:outline-3 has-[>a:focus-visible]:border-${color}`,
-      externalIcon: `group-hover:text-${color}`
-    }
-  })), {
-    color: 'neutral',
-    to: true,
-    class: {
-      base: 'hover:bg-elevated/50 hover:border-inverted outline-inverted/25 has-[>a:focus-visible]:outline-3 has-[>a:focus-visible]:border-inverted',
-      externalIcon: 'group-hover:text-highlighted'
-    }
-  }],
   defaultVariants: {
     color: 'primary'
   }
-})
+}
