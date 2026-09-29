@@ -67,7 +67,7 @@ export default {
     },
     required: {
       true: {
-        label: 'after:content-[\'*\'] after:ms-0.5 after:text-error'
+        label: `after:content-['*'] after:ms-0.5 after:text-error`
       }
     },
     disabled: {
