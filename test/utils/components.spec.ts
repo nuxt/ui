@@ -109,6 +109,19 @@ describe('detectUsedComponents', { timeout: 20000 }, () => {
     expect(detected).toContain('PageCTA')
   })
 
+  it('detects kebab-case tags in Pug templates', async () => {
+    const dir = fixtureUsing('<UButton label="x" />')
+    writeFileSync(join(dir, 'Pug.vue'), `<template lang="pug">\nu-accordion(:items="items")\n  u-card: u-badge(label="x")\n  p This has a #[u-kbd K]\n  u-separator\n</template>\n`)
+
+    const detected = await detectUsedComponents([dir], 'U', componentDir)
+
+    expect(detected).toContain('Accordion')
+    expect(detected).toContain('Card')
+    expect(detected).toContain('Badge')
+    expect(detected).toContain('Kbd')
+    expect(detected).toContain('Separator')
+  })
+
   it('detects kebab-case and PascalCase usage in the same file', async () => {
     const detected = await detectUsedComponents([fixtureUsing('<UCard><u-badge label="x" /></UCard>')], 'U', componentDir)
 
