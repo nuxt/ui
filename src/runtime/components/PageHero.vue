@@ -53,7 +53,7 @@ export interface PageHeroSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { usePrefix } from '../composables/usePrefix'
 import { resolveAs } from '../utils'
 import { tv } from '../utils/tv'
@@ -68,13 +68,14 @@ const slots = defineSlots<PageHeroSlots>()
 const props = useComponentProps('pageHero', _props, theme)
 
 const appConfig = useAppConfig() as PageHero['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.pageHero)
 const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys
 const as = computed(() => resolveAs(props.as, { root: 'div', title: 'h1' }))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.pageHero)({
+const ui = computed(() => tv(theme, overrides.value)({
   orientation: props.orientation,
   reverse: props.reverse,
   title: !!props.title || !!slots.title

@@ -104,6 +104,32 @@ export default defineConfig({
 :::
 ::
 
+### Unstyled :badge{label="Soon" class="align-text-top"}
+
+Use the `unstyled` prop to render descendant components without their theme classes. Only the classes you supply through `class`, `ui` or `app.config.ui` remain, so you can style them from scratch. The `color` prop keeps working: its `[--ui-accent:…]` class stays, so the `accent` utilities you add, like `bg-accent`, follow it. Set it to `false` on a nested Theme to style a subtree again.
+
+::component-example
+---
+name: 'theme-unstyled-example'
+---
+::
+
+::warning
+This strips **structural** classes too (positioning, transitions, flex/grid), not just cosmetic ones. Layout-heavy components like `Modal`, `Drawer` or `Calendar` will need you to re-supply their layout.
+::
+
+::framework-only
+#nuxt
+:::tip
+Set `ui.unstyled` in your `app.config.ts` to apply it to your whole app.
+:::
+
+#vue
+:::tip
+Set `ui.unstyled` in the `ui` options of your `vite.config.ts` to apply it to your whole app.
+:::
+::
+
 ## Examples
 
 ### Multiple components

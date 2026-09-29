@@ -66,7 +66,7 @@ import { ref, computed, onMounted, onScopeDispose } from 'vue'
 import { PinInputInput, PinInputRoot } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
 import { looseToNumber } from '../utils'
@@ -84,6 +84,7 @@ const props = useComponentProps<PinInputProps<T>>('pinInput', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as PinInput['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.pinInput)
 
 const rootProps = useForwardProps(props, ['disabled', 'id', 'mask', 'name', 'otp', 'required', 'type'], emits)
 
@@ -99,7 +100,7 @@ const size = computed(() => formFieldSize.value ?? props.size)
 const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.pinInput)({
+const ui = computed(() => tv(theme, overrides.value)({
   color: color.value,
   variant: props.variant,
   size: size.value,

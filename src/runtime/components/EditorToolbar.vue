@@ -105,7 +105,7 @@ import { defu } from 'defu'
 import { BubbleMenu, FloatingMenu } from '@tiptap/vue-3/menus'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { isArrayOfArray, pick, omit } from '../utils'
 import { createHandlers } from '../utils/editor'
@@ -129,6 +129,7 @@ defineSlots<EditorToolbarSlots<T>>()
 const props = useComponentProps<EditorToolbarProps<T>>('editorToolbar', _props, theme)
 
 const appConfig = useAppConfig() as EditorToolbar['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.editorToolbar)
 
 const handlers = inject('editorHandlers', computed(() => createHandlers()))
 
@@ -150,7 +151,7 @@ const options = computed(() => defu((props as any).options, {
 }))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.editorToolbar)({
+const ui = computed(() => tv(theme, overrides.value)({
   layout: props.layout
 }))
 

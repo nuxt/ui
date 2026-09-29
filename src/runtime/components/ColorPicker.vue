@@ -77,7 +77,7 @@ import { useEventListener, useElementBounding, watchThrottled, watchPausable } f
 import { isClient } from '@vueuse/shared'
 import { ColorTranslator } from 'colortranslator'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 
 const _props = withDefaults(defineProps<ColorPickerProps>(), {
@@ -91,9 +91,10 @@ const props = useComponentProps('colorPicker', _props, theme)
 const modelValue = defineModel<string>(undefined)
 
 const appConfig = useAppConfig() as ColorPicker['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.colorPicker)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.colorPicker)({
+const ui = computed(() => tv(theme, overrides.value)({
   size: props.size
 }))
 

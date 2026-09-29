@@ -100,7 +100,7 @@ import { Presence } from 'reka-ui'
 import { defu } from 'defu'
 import { useElementSize, useEventListener, useMutationObserver, watchThrottled } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
@@ -143,12 +143,13 @@ function isMessageStreaming(message: UIMessage) {
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as ChatMessages['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.chatMessages)
 
 const userProps = toRef(() => defu(props.user, { side: 'right' as const, variant: 'soft' as const }))
 const assistantProps = toRef(() => defu(props.assistant, { side: 'left' as const, variant: 'naked' as const }))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.chatMessages)({
+const ui = computed(() => tv(theme, overrides.value)({
   compact: props.compact,
   footer: !!slots.footer
 }))

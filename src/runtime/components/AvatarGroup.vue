@@ -37,7 +37,7 @@ export interface AvatarGroupSlots {
 import { computed, provide } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { avatarGroupInjectionKey } from '../composables/useAvatarGroup'
 import { tv } from '../utils/tv'
 import UAvatar from './Avatar.vue'
@@ -53,9 +53,10 @@ const props = useComponentProps('avatarGroup', _props, theme)
 const providedProps = useComponentProps('avatarGroup', _props)
 
 const appConfig = useAppConfig() as AvatarGroup['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.avatarGroup)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.avatarGroup)({
+const ui = computed(() => tv(theme, overrides.value)({
   size: props.size,
   color: props.color
 }))

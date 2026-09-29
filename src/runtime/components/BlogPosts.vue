@@ -43,7 +43,7 @@ import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import UBlogPost from './BlogPost.vue'
 
 const _props = withDefaults(defineProps<BlogPostsProps>(), {
@@ -56,9 +56,10 @@ const props = useComponentProps<BlogPostsProps>('blogPosts', _props, theme)
 const getProxySlots = () => omit(slots, ['default'])
 
 const appConfig = useAppConfig() as BlogPosts['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.blogPosts)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.blogPosts)({ orientation: props.orientation }))
+const ui = computed(() => tv(theme, overrides.value)({ orientation: props.orientation }))
 </script>
 
 <template>

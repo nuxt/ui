@@ -157,7 +157,7 @@ import { useTemplateRef, computed, onMounted, onScopeDispose, toRef } from 'vue'
 import { SelectRoot, SelectArrow, SelectTrigger, SelectPortal, SelectContent, SelectViewport, SelectValue as RSelectValue, SelectLabel, SelectGroup, SelectItem as RSelectItem, SelectItemIndicator, SelectItemText, SelectSeparator } from 'reka-ui'
 import { defu } from 'defu'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useFieldGroup, FieldGroupReset } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
@@ -184,6 +184,7 @@ const slots = defineSlots<SelectSlots<T, VK, M, Mod>>()
 const props = useComponentProps<SelectProps<T, VK, M, Mod>>('select', _props, theme)
 
 const appConfig = useAppConfig() as Select['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.select)
 
 const rootProps = useForwardProps(props, ['open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple', 'nullableValue'], emits)
 const portalProps = usePortal(toRef(() => props.portal))
@@ -220,7 +221,7 @@ const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 const isItemAligned = computed(() => position.value === 'item-aligned')
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.select)({
+const ui = computed(() => tv(theme, overrides.value)({
   color: color.value,
   variant: props.variant,
   size: size.value,

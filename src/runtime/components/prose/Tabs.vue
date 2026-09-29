@@ -33,7 +33,7 @@ export interface ProseTabsSlots {
 <script setup lang="ts">
 import { computed, watch, onMounted, ref, onBeforeUpdate } from 'vue'
 import { useState, useAppConfig } from '#imports'
-import { useComponentProps } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
 import { transformUI } from '../../utils'
 import { tv } from '../../utils/tv'
 import UTabs from '../Tabs.vue'
@@ -48,9 +48,10 @@ const props = useComponentProps('prose.tabs', _props, theme)
 const model = defineModel<string>()
 
 const appConfig = useAppConfig() as ProseTabs['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.prose?.tabs)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.prose?.tabs))
+const ui = computed(() => tv(theme, overrides.value))
 
 const rerenderCount = ref(1)
 

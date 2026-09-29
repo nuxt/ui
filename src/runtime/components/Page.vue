@@ -27,7 +27,7 @@ export interface PageSlots {
 import { computed, onBeforeUpdate, shallowRef } from 'vue'
 import { Primitive, Slot } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 
 const _props = defineProps<PageProps>()
@@ -36,6 +36,7 @@ const slots = defineSlots<PageSlots>()
 const props = useComponentProps('page', _props, theme)
 
 const appConfig = useAppConfig() as Page['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.page)
 
 const hasLeft = shallowRef(!!slots.left)
 const hasRight = shallowRef(!!slots.right)
@@ -46,7 +47,7 @@ onBeforeUpdate(() => {
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.page)({
+const ui = computed(() => tv(theme, overrides.value)({
   left: hasLeft.value,
   right: hasRight.value
 }))
