@@ -101,8 +101,7 @@ import { ref, computed } from 'vue'
 import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { get } from '../utils'
 import { tv } from '../utils/tv'
 import { getAvatarSize } from '../utils/size'
@@ -123,7 +122,7 @@ const slots = defineSlots<TabsSlots<T>>()
 
 const props = useComponentProps<TabsProps<T>>('tabs', _props, theme)
 
-const appConfig = useAppConfig() as Tabs['AppConfig']
+const appConfig = useThemeConfig() as Tabs['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.tabs)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'unmountOnHide'), emits)

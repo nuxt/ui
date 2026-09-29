@@ -23,8 +23,7 @@ export interface ProseStepsSlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 
 const _props = defineProps<ProseStepsProps>()
@@ -33,7 +32,7 @@ defineSlots<ProseStepsSlots>()
 
 const props = useComponentProps('prose.steps', _props, theme)
 
-const appConfig = useAppConfig() as ProseSteps['AppConfig']
+const appConfig = useThemeConfig() as ProseSteps['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.prose?.steps)
 
 // eslint-disable-next-line vue/no-dupe-keys

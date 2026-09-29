@@ -18,8 +18,7 @@ export interface ProseLiSlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 
 const _props = defineProps<ProseLiProps>()
@@ -28,7 +27,7 @@ defineSlots<ProseLiSlots>()
 
 const props = useComponentProps('prose.li', _props, theme)
 
-const appConfig = useAppConfig() as ProseLi['AppConfig']
+const appConfig = useThemeConfig() as ProseLi['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.prose?.li)
 
 // eslint-disable-next-line vue/no-dupe-keys
