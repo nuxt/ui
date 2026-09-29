@@ -154,7 +154,7 @@ const state = reactive<FormStateType>((_props.fields as TypedAuthFormField[] || 
 defineEmits<AuthFormEmits<FormData<T>>>()
 const slots = defineSlots<AuthFormSlots<typeof state, F>>()
 
-const props = useComponentProps<AuthFormProps<T, F>>('authForm', _props)
+const props = useComponentProps<AuthFormProps<T, F>>('authForm', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as AuthForm['AppConfig']

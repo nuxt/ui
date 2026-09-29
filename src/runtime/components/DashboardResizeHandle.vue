@@ -32,7 +32,7 @@ const _props = defineProps<DashboardResizeHandleProps>()
 
 defineSlots<DashboardResizeHandleSlots>()
 
-const props = useComponentProps('dashboardResizeHandle', _props)
+const props = useComponentProps('dashboardResizeHandle', _props, theme)
 
 const appConfig = useAppConfig() as DashboardResizeHandle['AppConfig']
 

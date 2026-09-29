@@ -48,7 +48,7 @@ import { tv } from '../../utils/tv'
 const _props = defineProps<ProseFieldProps>()
 const slots = defineSlots<ProseFieldSlots>()
 
-const props = useComponentProps('prose.field', _props)
+const props = useComponentProps('prose.field', _props, theme)
 
 const appConfig = useAppConfig() as ProseField['AppConfig']
 

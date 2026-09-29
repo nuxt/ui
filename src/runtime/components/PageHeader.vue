@@ -46,7 +46,7 @@ import UButton from './Button.vue'
 const _props = defineProps<PageHeaderProps>()
 const slots = defineSlots<PageHeaderSlots>()
 
-const props = useComponentProps('pageHeader', _props)
+const props = useComponentProps('pageHeader', _props, theme)
 
 const appConfig = useAppConfig() as PageHeader['AppConfig']
 

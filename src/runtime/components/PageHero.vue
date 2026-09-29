@@ -65,7 +65,7 @@ const _props = withDefaults(defineProps<PageHeroProps>(), {
 })
 const slots = defineSlots<PageHeroSlots>()
 
-const props = useComponentProps('pageHero', _props)
+const props = useComponentProps('pageHero', _props, theme)
 
 const appConfig = useAppConfig() as PageHero['AppConfig']
 const prefix = usePrefix()

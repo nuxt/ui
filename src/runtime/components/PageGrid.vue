@@ -32,7 +32,7 @@ const _props = defineProps<PageGridProps>()
 
 defineSlots<PageGridSlots>()
 
-const props = useComponentProps('pageGrid', _props)
+const props = useComponentProps('pageGrid', _props, theme)
 
 const appConfig = useAppConfig() as PageGrid['AppConfig']
 

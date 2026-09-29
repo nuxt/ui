@@ -31,7 +31,7 @@ const _props = defineProps<ProseStepsProps>()
 
 defineSlots<ProseStepsSlots>()
 
-const props = useComponentProps('prose.steps', _props)
+const props = useComponentProps('prose.steps', _props, theme)
 
 const appConfig = useAppConfig() as ProseSteps['AppConfig']
 

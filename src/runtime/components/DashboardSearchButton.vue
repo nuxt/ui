@@ -78,7 +78,7 @@ const _props = withDefaults(defineProps<DashboardSearchButtonProps>(), {
 })
 const slots = defineSlots<ButtonSlots>()
 
-const props = useComponentProps('dashboardSearchButton', _props)
+const props = useComponentProps('dashboardSearchButton', _props, theme)
 
 const [DefineButtonTemplate, ReuseButtonTemplate] = createReusableTemplate()
 

@@ -26,7 +26,7 @@ const _props = defineProps<ProseTbodyProps>()
 
 defineSlots<ProseTbodySlots>()
 
-const props = useComponentProps('prose.tbody', _props)
+const props = useComponentProps('prose.tbody', _props, theme)
 
 const appConfig = useAppConfig() as ProseTbody['AppConfig']
 

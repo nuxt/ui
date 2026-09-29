@@ -26,7 +26,7 @@ const _props = defineProps<ProseCardGroupProps>()
 
 defineSlots<ProseCardGroupSlots>()
 
-const props = useComponentProps('prose.cardGroup', _props)
+const props = useComponentProps('prose.cardGroup', _props, theme)
 
 const appConfig = useAppConfig() as ProseCardGroup['AppConfig']
 

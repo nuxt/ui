@@ -32,7 +32,7 @@ const _props = defineProps<ContainerProps>()
 
 defineSlots<ContainerSlots>()
 
-const props = useComponentProps('container', _props)
+const props = useComponentProps('container', _props, theme)
 
 const appConfig = useAppConfig() as Container['AppConfig']
 

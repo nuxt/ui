@@ -33,18 +33,22 @@ import { useAppConfig } from '#imports'
 import { useEditorMenu } from '../composables/useEditorMenu'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
+import { useComponentProps } from '../composables/useComponentProps'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<EditorEmojiMenuProps<T>>(), {
+const _props = withDefaults(defineProps<EditorEmojiMenuProps<T>>(), {
   pluginKey: 'emojiMenu',
   char: ':',
   filterFields: () => ['name', 'shortcodes', 'tags']
 })
 
+const props = useComponentProps('editorEmojiMenu', _props, theme)
+
 const appConfig = useAppConfig() as EditorEmojiMenu['AppConfig']
 const { t } = useLocale()
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, appConfig.ui?.editorEmojiMenu)({
   size: props.size
 }))

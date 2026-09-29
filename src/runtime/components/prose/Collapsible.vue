@@ -52,7 +52,7 @@ const _props = defineProps<ProseCollapsibleProps>()
 
 defineSlots<ProseCollapsibleSlots>()
 
-const props = useComponentProps('prose.collapsible', _props)
+const props = useComponentProps('prose.collapsible', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as ProseCollapsible['AppConfig']

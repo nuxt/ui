@@ -44,7 +44,7 @@ const _props = withDefaults(defineProps<DashboardSidebarToggleProps>(), {
   side: 'left'
 })
 
-const props = useComponentProps('dashboardSidebarToggle', _props)
+const props = useComponentProps('dashboardSidebarToggle', _props, theme)
 
 const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'side', 'class'))
 

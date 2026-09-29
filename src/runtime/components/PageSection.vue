@@ -83,7 +83,7 @@ const _props = withDefaults(defineProps<PageSectionProps>(), {
 })
 const slots = defineSlots<PageSectionSlots>()
 
-const props = useComponentProps('pageSection', _props)
+const props = useComponentProps('pageSection', _props, theme)
 
 const appConfig = useAppConfig() as PageSection['AppConfig']
 const prefix = usePrefix()

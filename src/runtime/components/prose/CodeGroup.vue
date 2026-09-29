@@ -41,7 +41,7 @@ const _props = withDefaults(defineProps<ProseCodeGroupProps>(), {
 })
 const slots = defineSlots<ProseCodeGroupSlots>()
 
-const props = useComponentProps('prose.codeGroup', _props)
+const props = useComponentProps('prose.codeGroup', _props, theme)
 
 const model = defineModel<string>()
 

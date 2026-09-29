@@ -34,7 +34,7 @@ const _props = defineProps<DashboardToolbarProps>()
 
 defineSlots<DashboardToolbarSlots>()
 
-const props = useComponentProps('dashboardToolbar', _props)
+const props = useComponentProps('dashboardToolbar', _props, theme)
 
 const appConfig = useAppConfig() as DashboardToolbar['AppConfig']
 

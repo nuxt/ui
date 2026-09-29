@@ -72,7 +72,7 @@ import { tv } from '${importPrefix}/utils/tv'
 const _props = defineProps<${upperName}Props>()
 defineSlots<${upperName}Slots>()
 
-const props = useComponentProps('${componentKey}', _props)
+const props = useComponentProps('${componentKey}', _props, theme)
 
 const appConfig = useAppConfig() as ${upperName}['AppConfig']
 
@@ -121,7 +121,7 @@ const _props = defineProps<${upperName}Props>()
 const emits = defineEmits<${upperName}Emits>()
 defineSlots<${upperName}Slots>()
 
-const props = useComponentProps('${componentKey}', _props)
+const props = useComponentProps('${componentKey}', _props, theme)
 
 const appConfig = useAppConfig() as ${upperName}['AppConfig']
 

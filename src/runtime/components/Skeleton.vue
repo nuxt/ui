@@ -26,7 +26,7 @@ import { useLocale } from '../composables/useLocale'
 
 const _props = defineProps<SkeletonProps>()
 
-const props = useComponentProps('skeleton', _props)
+const props = useComponentProps('skeleton', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Skeleton['AppConfig']

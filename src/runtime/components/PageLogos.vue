@@ -51,7 +51,7 @@ const _props = withDefaults(defineProps<PageLogosProps>(), {
 })
 const slots = defineSlots<PageLogosSlots>()
 
-const props = useComponentProps('pageLogos', _props)
+const props = useComponentProps('pageLogos', _props, theme)
 
 const appConfig = useAppConfig() as PageLogos['AppConfig']
 

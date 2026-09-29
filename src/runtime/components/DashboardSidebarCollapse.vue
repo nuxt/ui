@@ -42,7 +42,7 @@ const _props = withDefaults(defineProps<DashboardSidebarCollapseProps>(), {
   side: 'left'
 })
 
-const props = useComponentProps('dashboardSidebarCollapse', _props)
+const props = useComponentProps('dashboardSidebarCollapse', _props, theme)
 
 const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'side', 'class'))
 

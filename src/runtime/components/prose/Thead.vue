@@ -26,7 +26,7 @@ const _props = defineProps<ProseTheadProps>()
 
 defineSlots<ProseTheadSlots>()
 
-const props = useComponentProps('prose.thead', _props)
+const props = useComponentProps('prose.thead', _props, theme)
 
 const appConfig = useAppConfig() as ProseThead['AppConfig']
 
