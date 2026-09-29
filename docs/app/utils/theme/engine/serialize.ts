@@ -44,7 +44,8 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explici
     const lightShade = shadeOf(light[token])
     const darkShade = shadeOf(dark[token])
     if ((!lightShade && !darkShade) || (light[token] && !lightShade) || (dark[token] && !darkShade)) continue
-    const shades = [lightShade ?? '500', darkShade ?? '400']
+    // A mode left unset keeps the alias's default, `900` and `50` for neutral
+    const shades = [lightShade ?? (alias === 'neutral' ? '900' : '500'), darkShade ?? (alias === 'neutral' ? '50' : '400')]
     aliasShades[alias] = shades[0] === shades[1] ? shades[0]! : shades.join(' ')
     Reflect.deleteProperty(light, token)
     Reflect.deleteProperty(dark, token)
