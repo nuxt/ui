@@ -16,9 +16,11 @@
   "exports": {
     ".": {
       "types": "./dist/module.d.mts",
-      "style": "./dist/runtime/index.css",
+      "style": "./dist/runtime/css/index.css",
       "import": "./dist/module.mjs"
     },
+    "./sources": "./dist/runtime/css/sources.css",
+    "./base": "./dist/runtime/css/base.css",
     "./unplugin": {
       "types": "./dist/unplugin.d.mts",
       "import": "./dist/unplugin.mjs"
@@ -98,9 +100,10 @@
     }
   },
   "imports": {
-    "#build/ui.css": "./.nuxt/ui.static.css"
+    "#build/ui.css": "./.nuxt/ui.static.css",
+    "#build/ui.base.css": "./.nuxt/ui.static.css"
   },
-  "style": "./dist/runtime/index.css",
+  "style": "./dist/runtime/css/index.css",
   "main": "./dist/module.mjs",
   "sideEffects": [
     "**/*.css"
