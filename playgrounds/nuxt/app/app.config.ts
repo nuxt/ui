@@ -8,11 +8,5 @@ export default defineAppConfig({
     max: 5,
     expand: true,
     disableSwipe: false
-  },
-  ui: {
-    colors: {
-      primary: 'green',
-      neutral: 'slate'
-    }
   }
 })

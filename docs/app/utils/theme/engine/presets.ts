@@ -45,28 +45,39 @@ export const presets: ThemePreset[] = [{
 }, {
   id: 'mono',
   name: 'Mono',
-  description: 'Black on a pure gray neutral, generous radius, quiet surfaces.',
+  description: 'Black on white after shadcn/ui: a pure gray neutral, hairline borders, soft corners, Geist type.',
   doc: {
     version: 1,
-    blackAsPrimary: true,
+    // The gray ramp serves as primary too: black actions in light, pinned to
+    // its 200 in dark, with shadcn/ui's default values for everything else.
     colors: {
+      primary: 'neutral',
       neutral: 'neutral'
     },
-    radius: 0.5,
+    radius: 0.625,
     font: { sans: 'Geist', mono: 'Geist Mono' },
     style: {
-      defaults: {
-        variants: {
-          inputs: 'subtle'
-        }
-      },
       tokenShades: {
+        '--ui-primary': { light: 'black', dark: 200 },
         '--ui-bg': { dark: 950 },
-        '--ui-bg-muted': { light: 100, dark: 900 },
-        '--ui-bg-elevated': { light: 100, dark: 900 },
-        '--ui-bg-accented': { light: 200, dark: 800 },
-        '--ui-text': { light: 900, dark: 100 },
-        '--ui-text-highlighted': { light: 950, dark: 50 }
+        '--ui-bg-muted': { light: 100 },
+        '--ui-text': { dark: 50 },
+        '--ui-text-highlighted': { dark: 50 },
+        // field outlines match the border in light, the library steps them up to 300
+        '--ui-border-accented': { light: 200 }
+      }
+    },
+    // Pure black text and translucent borders aren't shades of the ramp
+    tokens: {
+      light: {
+        '--ui-text': 'black',
+        '--ui-text-highlighted': 'black',
+        '--ui-text-inverted': 'var(--ui-color-neutral-50)'
+      },
+      dark: {
+        '--ui-border': 'color-mix(in oklab, white 10%, transparent)',
+        '--ui-border-muted': 'color-mix(in oklab, white 10%, transparent)',
+        '--ui-border-accented': 'color-mix(in oklab, white 15%, transparent)'
       }
     }
   }

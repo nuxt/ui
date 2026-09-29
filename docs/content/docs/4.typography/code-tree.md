@@ -29,14 +29,20 @@ export default defineNuxtConfig({
 ```css [app/assets/css/main.css]
 @import "tailwindcss";
 @import "@nuxt/ui";
+
+@plugin "@nuxt/ui/colors" {
+  primary: sky;
+  neutral: slate;
+}
 ```
 
 ```ts [app/app.config.ts]
 export default defineAppConfig({
   ui: {
-    colors: {
-      primary: 'sky',
-      colors: 'slate'
+    button: {
+      defaultVariants: {
+        size: 'sm'
+      }
     }
   }
 })
@@ -180,14 +186,20 @@ export default defineNuxtConfig({
 ```css [app/assets/css/main.css]
 @import "tailwindcss";
 @import "@nuxt/ui";
+
+@plugin "@nuxt/ui/colors" {
+  primary: sky;
+  neutral: slate;
+}
 ```
 
 ```ts [app/app.config.ts]
 export default defineAppConfig({
   ui: {
-    colors: {
-      primary: 'sky',
-      colors: 'slate'
+    button: {
+      defaultVariants: {
+        size: 'sm'
+      }
     }
   }
 })

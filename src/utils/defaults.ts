@@ -2,15 +2,6 @@ import icons from '../runtime/theme/icons'
 
 export function getDefaultConfig(tailwindPrefix?: string) {
   return {
-    colors: {
-      primary: 'green',
-      secondary: 'blue',
-      success: 'green',
-      info: 'blue',
-      warning: 'yellow',
-      error: 'red',
-      neutral: 'slate'
-    },
     icons,
     prefix: tailwindPrefix,
     tv: {

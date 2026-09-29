@@ -1,6 +1,6 @@
 import type { MaybeRefOrGetter } from 'vue'
 import colors from 'tailwindcss/colors'
-import { rampCssName, THEME_STUDIO_VIEWS } from '../utils/theme/studio'
+import { NEUTRAL_COLORS, THEME_STUDIO_VIEWS } from '../utils/theme/studio'
 // Leaf modules, never the barrel: the barrel re-exports serialize (and json5
 // with it), and this composable is reached from the header preset picker on
 // every docs page, which would put the exporter in the entry chunk.
@@ -103,7 +103,7 @@ export function useThemeStudio() {
   }
 
   function isCustomPalette(alias: string) {
-    return (appConfig.ui.colors as Record<string, string>)[alias] === customPaletteName(alias)
+    return (appConfig.colors as Record<string, string>)[alias] === customPaletteName(alias)
   }
 
   /**
@@ -125,7 +125,7 @@ export function useThemeStudio() {
     if (import.meta.client) {
       const styles = getComputedStyle(document.documentElement)
       const entries = SHADES
-        .map(shade => [shade, parseCssColor(styles.getPropertyValue(`--color-${rampCssName(name)}-${shade}`))] as const)
+        .map(shade => [shade, parseCssColor(styles.getPropertyValue(`--color-${name}-${shade}`))] as const)
         .filter(([, color]) => color)
       if (entries.length >= 2) {
         return Object.fromEntries(entries)
@@ -143,10 +143,9 @@ export function useThemeStudio() {
   function selectPalette(alias: ColorAlias, name: string) {
     // A click on the swatch already selected is a no-op. Without this it
     // would still write the neutral remaps below, turning a stock theme
-    // into a changed one. Black-as-primary is the exception: the primary
-    // swatch is the way back off it.
-    const current = (appConfig.ui.colors as Record<string, string>)[alias]
-    if (current === name && !isCustomPalette(alias) && !(alias === 'primary' && theme.blackAsPrimary.value)) return
+    // into a changed one.
+    const current = (appConfig.colors as Record<string, string>)[alias]
+    if (current === name && !isCustomPalette(alias)) return
 
     if (isCustomPalette(alias)) {
       clearCustomPalette(alias)
@@ -248,7 +247,7 @@ export function useThemeStudio() {
     // sending it every tick makes applyThemeSettings re-persist the AI-extras
     // channel (a JSON.stringify + reactive wake) on every frame. Send it
     // only when it actually changes.
-    const aliasAlreadySet = (appConfig.ui.colors as Record<string, string>)[alias] === name
+    const aliasAlreadySet = (appConfig.colors as Record<string, string>)[alias] === name
 
     theme.applyThemeSettings({
       customColors: { [name]: generatePalette(applyPaletteEffects(base, effects, amount), pins) },
@@ -341,7 +340,8 @@ export function useThemeStudio() {
     const doc: ThemeDoc = {
       version: 1,
       colors: {
-        primary: pick(theme.primaryColors),
+        // A gray primary only reads as a theme with its shades pinned, like Mono
+        primary: pick(theme.primaryColors.filter(color => !NEUTRAL_COLORS.includes(color))),
         neutral: pick(theme.neutralColors)
       },
       radius: pick(theme.radiuses),
@@ -369,11 +369,6 @@ export function useThemeStudio() {
       doc.style = { defaults: { variants } }
     }
 
-    if (Math.random() < 0.125) {
-      doc.blackAsPrimary = true
-      delete doc.colors!.primary
-    }
-
     applyDoc(doc)
     // applyDoc routes neutral through the plain setter, the shuffled
     // neutral needs the same white-literal remaps selectPalette applies,
@@ -385,13 +380,13 @@ export function useThemeStudio() {
   }
 
   /** Palette-name chips coloring shade-slider swatches, each alias's current ramp. */
-  const neutralChip = computed(() => rampCssName(theme.neutral.value))
+  const neutralChip = computed(() => theme.neutral.value)
   const primaryChip = computed(() => isCustomPalette('primary') ? customPaletteName('primary') : theme.primary.value)
 
   function rampChip(ramp: TokenRamp): string {
     if (ramp === 'primary') return primaryChip.value
     if (ramp === 'neutral') return neutralChip.value
-    return rampCssName((appConfig.ui.colors as Record<string, string>)[ramp] || ramp)
+    return (appConfig.colors as Record<string, string>)[ramp] || ramp
   }
 
   /* ------------------------------------------------------------ preview -- */
