@@ -14,18 +14,23 @@ import { resolvePathSync } from 'mlly'
  * - <LazyUButton / <lazy-u-button (lazy components)
  * - LazyUButton in script
  * - 'u-button' as a whole string, like `resolveComponent('u-button')`
- * - u-button in Pug templates: at the start of a line, after `: ` (block
- *   expansion) or in `#[...]` (tag interpolation)
+ * - u-button in Pug templates, with `pug`: at the start of a line, after `: `
+ *   (block expansion) or in `#[...]` (tag interpolation). Only for `.vue` files,
+ *   where Pug templates live: in Markdown or scripts those positions would match
+ *   indented code and comments.
  *
  * The kebab form only matches in tag position or as a whole string: bare kebab
  * identifiers in scripts and prose would match far too much ordinary text.
  */
-function createComponentPattern(prefix: string): RegExp {
+function createComponentPattern(prefix: string, pug = false): RegExp {
   // The prefix is user-configured, so it can carry regex metacharacters.
   const escapedPrefix = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
   const kebabPrefix = kebabCase(prefix).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
-  return new RegExp(`<(?:Lazy)?${escapedPrefix}([A-Z][a-zA-Z]+)|(?:<|['"\`]|#\\[|^[ \\t]*|:[ \\t]+)(?:lazy-)?${kebabPrefix}-([a-z][a-z0-9-]*)(?=[\\s/>'"\`(.#:\\]]|$)|\\b(?:Lazy)?${escapedPrefix}([A-Z][a-zA-Z]+)\\b`, 'gm')
+  const kebabStart = pug ? `(?:<|['"\`]|#\\[|^[ \\t]*|:[ \\t]+)` : `(?:<|['"\`])`
+  const kebabEnd = pug ? `(?=[\\s/>'"\`(.#:\\]]|$)` : `(?=[\\s/>'"\`])`
+
+  return new RegExp(`<(?:Lazy)?${escapedPrefix}([A-Z][a-zA-Z]+)|${kebabStart}(?:lazy-)?${kebabPrefix}-([a-z][a-z0-9-]*)${kebabEnd}|\\b(?:Lazy)?${escapedPrefix}([A-Z][a-zA-Z]+)\\b`, 'gm')
 }
 
 /**
@@ -211,10 +216,11 @@ export async function detectUsedComponents(
   }
 
   const componentPattern = createComponentPattern(prefix)
+  const vuePattern = createComponentPattern(prefix, true)
   const mdcPattern = createMdcPattern(prefix)
 
   const scan = (file: string, content: string) => {
-    for (const match of content.matchAll(componentPattern)) {
+    for (const match of content.matchAll(file.endsWith('.vue') ? vuePattern : componentPattern)) {
       const componentName = getMatchedComponent(match)
       if (componentName) {
         detectedComponents.add(componentName)
