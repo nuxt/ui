@@ -1,7 +1,6 @@
 import icons from '../runtime/theme/icons'
-import type { ModuleOptions } from '../module'
 
-export function getDefaultConfig(theme?: ModuleOptions['theme']) {
+export function getDefaultConfig(tailwindPrefix?: string) {
   return {
     colors: {
       primary: 'green',
@@ -13,10 +12,10 @@ export function getDefaultConfig(theme?: ModuleOptions['theme']) {
       neutral: 'slate'
     },
     icons,
-    prefix: theme?.prefix,
+    prefix: tailwindPrefix,
     tv: {
       mergeConfig: {
-        prefix: theme?.prefix
+        prefix: tailwindPrefix
       }
     }
   }
@@ -26,9 +25,7 @@ export const defaultOptions = {
   prefix: 'U',
   fonts: true,
   colorMode: true,
-  theme: {
-    prefix: undefined
-  },
+  tailwindPrefix: undefined,
   prose: false,
   mdc: false,
   content: false

@@ -35,7 +35,6 @@ type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' 
 type AppConfigUI = {
   colors?: { [K in Exclude<ColorAlias, 'neutral'>]?: Color } & { neutral?: NeutralColor | (string & {}) }
   icons?: Partial<typeof icons>
-  prefix?: string
   tv?: TVMergeConfig
   defaultVariants?: ThemeDefaultVariants
   unstyled?: boolean
@@ -108,11 +107,9 @@ export const runtimeUrl = pathToFileURL(`${runtimeDir}/`).href
 export const NuxtUIPlugin = createUnplugin<NuxtUIOptions | undefined>((_options = {}, meta) => {
   const options = defu(_options, { fonts: false }, defaultOptions)
 
-  options.theme = options.theme || {}
-
   // `clientBundle` is a build-time concern, so keep it out of the runtime app config.
   const { clientBundle, ...icon } = options.icon || {}
-  const appConfig = defu({ ui: options.ui, colorMode: options.colorMode, icon }, { ui: getDefaultConfig(options.theme) })
+  const appConfig = defu({ ui: options.ui, colorMode: options.colorMode, icon }, { ui: getDefaultConfig(options.tailwindPrefix) })
 
   return [
     NuxtEnvironmentPlugin(options),
