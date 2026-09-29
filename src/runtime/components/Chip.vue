@@ -48,7 +48,7 @@ export interface ChipSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive, Slot } from 'reka-ui'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useAvatarGroup } from '../composables/useAvatarGroup'
 import { tv } from '../utils/tv'
 
@@ -65,8 +65,7 @@ const props = useComponentProps('chip', _props, theme)
 const show = defineModel<boolean>('show', { default: true })
 
 const { size } = useAvatarGroup(_props)
-const appConfig = useThemeConfig() as Chip['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.chip)
+const overrides = useComponentOverrides((ui: Chip['AppConfig']['ui']) => ui.chip)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({

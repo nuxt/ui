@@ -72,7 +72,7 @@ export interface PageCardSlots {
 <script setup lang="ts">
 import { computed, effectScope, ref, shallowRef, watch, onMounted, onBeforeUnmount } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { usePrefix } from '../composables/usePrefix'
 import { useSpotlight } from '../composables/useSpotlight'
 import { getSlotChildrenText, resolveAs } from '../utils'
@@ -92,8 +92,7 @@ const props = useComponentProps('pageCard', _props, theme)
 
 const cardRef = ref<HTMLElement>()
 
-const appConfig = useThemeConfig() as PageCard['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.pageCard)
+const overrides = useComponentOverrides((ui: PageCard['AppConfig']['ui']) => ui.pageCard)
 
 const idle = ref(false)
 let idleId: ReturnType<typeof requestIdleCallback>

@@ -37,7 +37,7 @@ defineSlots<ProseH2Slots>()
 const props = useComponentProps('prose.h2', _props, theme)
 
 const appConfig = useThemeConfig() as ProseH2['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.prose?.h2)
+const overrides = useComponentOverrides((ui: ProseH2['AppConfig']['ui']) => ui.prose?.h2)
 // NOTE: the `mdc.headings.anchorLinks` fallback is deprecated, remove in v5 in favor of the `anchor` prop.
 const { headings } = useRuntimeConfig().public?.mdc || {}
 

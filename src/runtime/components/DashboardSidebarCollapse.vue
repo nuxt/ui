@@ -47,7 +47,7 @@ const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'side', 'class')
 
 const { t } = useLocale()
 const appConfig = useThemeConfig() as DashboardSidebarCollapse['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.dashboardSidebarCollapse)
+const overrides = useComponentOverrides((ui: DashboardSidebarCollapse['AppConfig']['ui']) => ui.dashboardSidebarCollapse)
 const { sidebarCollapsed, collapseSidebar } = useDashboard({ sidebarCollapsed: ref(false), collapseSidebar: () => {} })
 
 // eslint-disable-next-line vue/no-dupe-keys

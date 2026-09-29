@@ -36,7 +36,7 @@ export interface AvatarGroupSlots {
 <script setup lang="ts">
 import { computed, provide } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { avatarGroupInjectionKey } from '../composables/useAvatarGroup'
 import { tv } from '../utils/tv'
 import UAvatar from './Avatar.vue'
@@ -51,8 +51,7 @@ const props = useComponentProps('avatarGroup', _props, theme)
 // applies itself, so a child's own `<UTheme :props>` key still beats them
 const providedProps = useComponentProps('avatarGroup', _props)
 
-const appConfig = useThemeConfig() as AvatarGroup['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.avatarGroup)
+const overrides = useComponentOverrides((ui: AvatarGroup['AppConfig']['ui']) => ui.avatarGroup)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({

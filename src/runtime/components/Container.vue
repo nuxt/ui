@@ -25,7 +25,7 @@ export interface ContainerSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { tv } from '../utils/tv'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 
 const _props = defineProps<ContainerProps>()
 
@@ -33,8 +33,7 @@ defineSlots<ContainerSlots>()
 
 const props = useComponentProps('container', _props, theme)
 
-const appConfig = useThemeConfig() as Container['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.container)
+const overrides = useComponentOverrides((ui: Container['AppConfig']['ui']) => ui.container)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)())

@@ -80,7 +80,7 @@ export type StepperSlots<T extends StepperItem = StepperItem> = {
 <script setup lang="ts" generic="T extends StepperItem">
 import { computed } from 'vue'
 import { StepperRoot, StepperItem, StepperTrigger, StepperIndicator, StepperSeparator, StepperTitle, StepperDescription } from 'reka-ui'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
@@ -100,8 +100,7 @@ const props = useComponentProps<StepperProps<T>>('stepper', _props, theme)
 const modelValue = defineModel<string | number>()
 
 const { t } = useLocale()
-const appConfig = useThemeConfig() as Stepper['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.stepper)
+const overrides = useComponentOverrides((ui: Stepper['AppConfig']['ui']) => ui.stepper)
 
 const rootProps = useForwardProps(props, ['as', 'linear'])
 

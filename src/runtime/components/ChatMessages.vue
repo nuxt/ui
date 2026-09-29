@@ -142,7 +142,7 @@ function isMessageStreaming(message: UIMessage) {
 
 const { t } = useLocale()
 const appConfig = useThemeConfig() as ChatMessages['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.chatMessages)
+const overrides = useComponentOverrides((ui: ChatMessages['AppConfig']['ui']) => ui.chatMessages)
 
 const userProps = toRef(() => defu(props.user, { side: 'right' as const, variant: 'soft' as const }))
 const assistantProps = toRef(() => defu(props.assistant, { side: 'left' as const, variant: 'naked' as const }))

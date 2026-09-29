@@ -126,7 +126,7 @@ import { useForwardProps, Slot } from 'reka-ui'
 import { hasProtocol } from 'ufo'
 import { useRoute, useNuxtApp, onNuxtReady } from '#imports'
 import { omit } from '../utils'
-import { useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentOverrides } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 import { isPartiallyEqual } from '../utils/link'
 import { requestIdleCallback, cancelIdleCallback, observeIntersection } from '../utils/prefetch'
@@ -144,8 +144,7 @@ const props = withDefaults(defineProps<LinkProps>(), {
 defineSlots<LinkSlots>()
 
 const route = useRoute()
-const appConfig = useThemeConfig() as Link['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.link)
+const overrides = useComponentOverrides((ui: Link['AppConfig']['ui']) => ui.link)
 const nuxtApp = useNuxtApp()
 
 const nuxtLinkProps = useForwardProps(computed(() => omit(props, ['as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'locale', 'class', 'ui'])))

@@ -157,7 +157,7 @@ const props = useComponentProps<AuthFormProps<T, F>>('authForm', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useThemeConfig() as AuthForm['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.authForm)
+const overrides = useComponentOverrides((ui: AuthForm['AppConfig']['ui']) => ui.authForm)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const as = computed(() => resolveAs(props.as, { root: 'div', title: 'div' }))

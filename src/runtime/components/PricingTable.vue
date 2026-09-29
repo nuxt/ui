@@ -120,7 +120,7 @@ const props = useComponentProps<PricingTableProps<T>>('pricingTable', _props, th
 
 const { t } = useLocale()
 const appConfig = useThemeConfig() as PricingTable['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.pricingTable)
+const overrides = useComponentOverrides((ui: PricingTable['AppConfig']['ui']) => ui.pricingTable)
 
 const formatSlotName = (item: { id?: string, title: string }): string => {
   if (item.id) return item.id

@@ -49,7 +49,7 @@ const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'side', 'class')
 
 const { t } = useLocale()
 const appConfig = useThemeConfig() as DashboardSidebarToggle['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.dashboardSidebarToggle)
+const overrides = useComponentOverrides((ui: DashboardSidebarToggle['AppConfig']['ui']) => ui.dashboardSidebarToggle)
 const { sidebarOpen, toggleSidebar } = useDashboard({ sidebarOpen: ref(false), toggleSidebar: () => {} })
 
 // eslint-disable-next-line vue/no-dupe-keys

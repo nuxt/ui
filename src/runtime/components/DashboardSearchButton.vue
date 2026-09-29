@@ -88,7 +88,7 @@ const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : 
 
 const { t } = useLocale()
 const appConfig = useThemeConfig() as DashboardSearchButton['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.dashboardSearchButton)
+const overrides = useComponentOverrides((ui: DashboardSearchButton['AppConfig']['ui']) => ui.dashboardSearchButton)
 const { toggleSearch } = useDashboard({ toggleSearch: () => {} })
 
 // eslint-disable-next-line vue/no-dupe-keys

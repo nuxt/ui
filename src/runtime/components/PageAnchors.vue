@@ -57,7 +57,7 @@ const slots = defineSlots<PageAnchorsSlots<T>>()
 const props = useComponentProps<PageAnchorsProps<T>>('pageAnchors', _props, theme)
 
 const appConfig = useThemeConfig() as PageAnchors['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.pageAnchors)
+const overrides = useComponentOverrides((ui: PageAnchors['AppConfig']['ui']) => ui.pageAnchors)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)())

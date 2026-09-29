@@ -162,7 +162,7 @@ const props = useComponentProps<CarouselProps<T>>('carousel', _props, theme)
 
 const { dir, t } = useLocale()
 const appConfig = useThemeConfig() as Carousel['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.carousel)
+const overrides = useComponentOverrides((ui: Carousel['AppConfig']['ui']) => ui.carousel)
 
 const rootProps = useForwardProps(props, ['active', 'align', 'breakpoints', 'containScroll', 'dragFree', 'dragThreshold', 'duration', 'inViewThreshold', 'loop', 'skipSnaps', 'slidesToScroll', 'startIndex', 'watchDrag', 'watchResize', 'watchSlides', 'watchFocus'])
 

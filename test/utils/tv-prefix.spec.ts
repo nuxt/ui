@@ -4,7 +4,7 @@ import { tv, engineFor, ComponentOverrides } from '../../src/runtime/utils/tv'
 const tvt = tv as unknown as (theme: any, overrides?: any) => (props?: any) => Record<string, (props?: any) => string>
 
 // What `useComponentOverrides` builds for a component in an app with `theme.prefix: 'tw'`
-const withPrefix = (entry?: Record<string, any>, unstyled = false) => new ComponentOverrides(entry, unstyled, engineFor({ mergeConfig: { prefix: 'tw' } }, 'tw'))
+const withPrefix = (entry?: Record<string, any>, unstyled = false) => new ComponentOverrides([entry], unstyled, engineFor({ mergeConfig: { prefix: 'tw' } }, 'tw'))
 
 describe('tv with a Tailwind prefix', () => {
   const theme = {

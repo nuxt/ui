@@ -44,7 +44,7 @@ export interface ButtonSlots {
 
 <script setup lang="ts">
 import { computed, ref, inject } from 'vue'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { formLoadingInjectionKey } from '../composables/useFormField'
@@ -61,8 +61,7 @@ const slots = defineSlots<ButtonSlots>()
 
 const props = useComponentProps('button', _props, theme)
 
-const appConfig = useThemeConfig() as Button['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.button)
+const overrides = useComponentOverrides((ui: Button['AppConfig']['ui']) => ui.button)
 const { orientation, size: buttonSize } = useFieldGroup<ButtonProps>(_props)
 
 // Without `to` or `href`, `LinkSlot` stands in for the Link and these are never read

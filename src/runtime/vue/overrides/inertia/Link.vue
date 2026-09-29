@@ -74,7 +74,7 @@ import { computed } from 'vue'
 import { useForwardProps, Slot } from 'reka-ui'
 import { usePage } from '@inertiajs/vue3'
 import { hasProtocol } from 'ufo'
-import { useComponentOverrides, useThemeConfig } from '../../../composables/useComponentProps'
+import { useComponentOverrides } from '../../../composables/useComponentProps'
 import { tv } from '../../../utils/tv'
 import { omit } from '../../../utils'
 import ULinkBase from './LinkBase.vue'
@@ -91,8 +91,7 @@ defineSlots<LinkSlots>()
 
 const page = usePage()
 
-const appConfig = useThemeConfig() as Link['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.link)
+const overrides = useComponentOverrides((ui: Link['AppConfig']['ui']) => ui.link)
 
 const routerLinkProps = useForwardProps(computed(() => omit(props, ['as', 'type', 'disabled', 'active', 'exact', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class', 'ui', 'target', 'rel', 'noRel'])))
 

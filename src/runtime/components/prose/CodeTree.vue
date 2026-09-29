@@ -66,7 +66,7 @@ const slots = defineSlots<ProseCodeTreeSlots>()
 const props = useComponentProps('prose.codeTree', _props, theme)
 
 const appConfig = useThemeConfig() as ProseCodeTree['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.prose?.codeTree)
+const overrides = useComponentOverrides((ui: ProseCodeTree['AppConfig']['ui']) => ui.prose?.codeTree)
 
 const [DefineTreeTemplate, ReuseTreeTemplate] = createReusableTemplate<{ items: TreeNode[], level: number }>()
 
