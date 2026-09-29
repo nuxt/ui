@@ -222,7 +222,7 @@ The main.css file uses Tailwind CSS directives to configure design tokens:
 *Monochrome primary:*
 \`\`\`css
 @plugin "@nuxt/ui/colors" {
-  primary: black white;
+  primary: neutral 900 50; /* a gray primary takes neutral's surface look in every variant */
 }
 \`\`\`
 

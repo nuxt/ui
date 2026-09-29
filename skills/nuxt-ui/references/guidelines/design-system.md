@@ -333,12 +333,12 @@ Each semantic color defaults to shade 500 in light mode, 400 in dark mode. Overr
 
 You can use `var(--ui-color-<name>-<shade>)` to reference shades from the active palette (e.g., `var(--ui-color-neutral-800)` maps to whichever neutral palette is configured).
 
-### Black/white as primary
+### Monochrome primary
 
-`black` and `white` work as shades in the plugin, for light then dark mode. Shades alone keep the alias's palette:
+Give `primary` a gray palette with the ends of its scale. It then renders like `color="neutral"` in every variant, the soft, outline, subtle and link ones on the surface colors:
 
 ```css
 @plugin "@nuxt/ui/colors" {
-  primary: black white;
+  primary: neutral 900 50;
 }
 ```
