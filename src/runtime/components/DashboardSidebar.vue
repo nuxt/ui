@@ -88,7 +88,7 @@ const _props = withDefaults(defineProps<DashboardSidebarProps<T>>(), {
 })
 const slots = defineSlots<DashboardSidebarSlots>()
 
-const props = useComponentProps<DashboardSidebarProps<T>>('dashboardSidebar', _props)
+const props = useComponentProps<DashboardSidebarProps<T>>('dashboardSidebar', _props, theme)
 
 const open = defineModel<boolean>('open', { default: false })
 const collapsed = defineModel<boolean>('collapsed', { default: false })

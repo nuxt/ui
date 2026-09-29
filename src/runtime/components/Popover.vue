@@ -84,7 +84,7 @@ const _props = withDefaults(defineProps<PopoverProps<M>>(), {
 const emits = defineEmits<PopoverEmits>()
 const slots = defineSlots<PopoverSlots<M>>()
 
-const props = useComponentProps<PopoverProps<M>>('popover', _props)
+const props = useComponentProps<PopoverProps<M>>('popover', _props, theme)
 
 const appConfig = useAppConfig() as Popover['AppConfig']
 

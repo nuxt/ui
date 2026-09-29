@@ -123,7 +123,7 @@ const _props = withDefaults(defineProps<ContentNavigationProps<T>>(), {
 const emits = defineEmits<ContentNavigationEmits>()
 const slots = defineSlots<ContentNavigationSlots<T>>()
 
-const props = useComponentProps<ContentNavigationProps<T>>('contentNavigation', _props)
+const props = useComponentProps<ContentNavigationProps<T>>('contentNavigation', _props, theme)
 
 const rootProps = useForwardProps(reactivePick(props, 'collapsible', 'type', 'unmountOnHide'), emits)
 

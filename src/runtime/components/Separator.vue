@@ -74,7 +74,7 @@ const _props = withDefaults(defineProps<SeparatorProps>(), {
 })
 const slots = defineSlots<SeparatorSlots>()
 
-const props = useComponentProps('separator', _props)
+const props = useComponentProps('separator', _props, theme)
 
 const appConfig = useAppConfig() as Separator['AppConfig']
 

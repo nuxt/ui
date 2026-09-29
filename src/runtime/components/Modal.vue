@@ -108,7 +108,7 @@ const _props = withDefaults(defineProps<ModalProps>(), {
 const emits = defineEmits<ModalEmits>()
 const slots = defineSlots<ModalSlots>()
 
-const props = useComponentProps('modal', _props)
+const props = useComponentProps('modal', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Modal['AppConfig']
