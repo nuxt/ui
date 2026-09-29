@@ -71,7 +71,7 @@ defineSlots<ToasterSlots>()
 // `ToastProvider` is the root, attributes would fall through as its props (`limit`, `toastManager`).
 defineOptions({ inheritAttrs: false })
 
-const props = useComponentProps('toaster', _props)
+const props = useComponentProps('toaster', _props, theme)
 
 const loadToast = () => import('./Toast.vue')
 

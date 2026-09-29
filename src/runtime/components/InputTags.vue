@@ -91,7 +91,7 @@ const _props = withDefaults(defineProps<InputTagsProps<T>>(), {
 const emits = defineEmits<InputTagsEmits<T>>()
 const slots = defineSlots<InputTagsSlots<T>>()
 
-const props = useComponentProps<InputTagsProps<T>>('inputTags', _props)
+const props = useComponentProps<InputTagsProps<T>>('inputTags', _props, theme)
 
 const appConfig = useAppConfig() as InputTags['AppConfig']
 

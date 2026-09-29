@@ -43,7 +43,12 @@ const _props = withDefaults(defineProps<FieldGroupProps>(), {
 })
 defineSlots<FieldGroupSlots>()
 
-const props = useComponentProps('fieldGroup', _props)
+const props = useComponentProps('fieldGroup', _props, theme)
+
+// What the group passes down to its children: without `theme`, the proxy leaves
+// out the `'*'` and `app.config.ui.defaultVariants` defaults, which each child
+// applies itself, so a child's own `<UTheme :props>` key still beats them
+const providedProps = useComponentProps('fieldGroup', _props)
 
 const appConfig = useAppConfig() as FieldGroup['AppConfig']
 
@@ -52,7 +57,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.fieldGroup)({ orientation: pro
 
 provide(fieldGroupInjectionKey, computed(() => ({
   orientation: props.orientation,
-  size: props.size
+  size: providedProps.size
 })))
 </script>
 

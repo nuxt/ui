@@ -86,7 +86,7 @@ const _props = withDefaults(defineProps<ColorPickerProps>(), {
   defaultValue: '#FFFFFF'
 })
 
-const props = useComponentProps('colorPicker', _props)
+const props = useComponentProps('colorPicker', _props, theme)
 
 const modelValue = defineModel<string>(undefined)
 

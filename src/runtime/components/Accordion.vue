@@ -97,7 +97,7 @@ const _props = withDefaults(defineProps<AccordionProps<T>>(), {
 const emits = defineEmits<AccordionEmits>()
 const slots = defineSlots<AccordionSlots<T>>()
 
-const props = useComponentProps<AccordionProps<T>>('accordion', _props)
+const props = useComponentProps<AccordionProps<T>>('accordion', _props, theme)
 
 const appConfig = useAppConfig() as Accordion['AppConfig']
 

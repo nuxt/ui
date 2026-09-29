@@ -26,7 +26,7 @@ const _props = defineProps<ProseTrProps>()
 
 defineSlots<ProseTrSlots>()
 
-const props = useComponentProps('prose.tr', _props)
+const props = useComponentProps('prose.tr', _props, theme)
 
 const appConfig = useAppConfig() as ProseTr['AppConfig']
 

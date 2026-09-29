@@ -21,7 +21,7 @@ import UIcon from '../Icon.vue'
 
 const _props = defineProps<ProseIconProps>()
 
-const props = useComponentProps('prose.icon', _props)
+const props = useComponentProps('prose.icon', _props, theme)
 
 const appConfig = useAppConfig() as ProseIcon['AppConfig']
 
