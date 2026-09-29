@@ -147,8 +147,7 @@ import { TreeRoot, TreeItem, TreeVirtualizer } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { defu } from 'defu'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { get } from '../utils'
 import { getEstimateSize } from '../utils/virtualizer'
 import { tv } from '../utils/tv'
@@ -166,7 +165,7 @@ const slots = defineSlots<TreeSlots<T>>()
 
 const props = useComponentProps<TreeProps<T, M>>('tree', _props, theme)
 
-const appConfig = useAppConfig() as Tree['AppConfig']
+const appConfig = useThemeConfig() as Tree['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.tree)
 
 const rootProps = useForwardProps(reactivePick(props, 'items', 'multiple', 'expanded', 'disabled', 'propagateSelect', 'bubbleSelect'), emits)

@@ -24,9 +24,8 @@ export interface MainSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 
 const _props = withDefaults(defineProps<MainProps>(), {
   as: 'main'
@@ -35,7 +34,7 @@ defineSlots<MainSlots>()
 
 const props = useComponentProps('main', _props, theme)
 
-const appConfig = useAppConfig() as Main['AppConfig']
+const appConfig = useThemeConfig() as Main['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.main)
 
 // eslint-disable-next-line vue/no-dupe-keys

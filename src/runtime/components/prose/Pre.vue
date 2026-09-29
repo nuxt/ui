@@ -35,8 +35,7 @@ export interface ProsePreSlots {
 <script setup lang="ts">
 import { computed, useTemplateRef } from 'vue'
 import { useClipboard } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
 import { useLocale } from '../../composables/useLocale'
 import { tv } from '../../utils/tv'
 import UCodeIcon from './CodeIcon.vue'
@@ -52,7 +51,7 @@ const props = useComponentProps('prose.pre', _props, theme)
 
 const { t } = useLocale()
 const { copy: copyToClipboard, copied } = useClipboard()
-const appConfig = useAppConfig() as ProsePre['AppConfig']
+const appConfig = useThemeConfig() as ProsePre['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.prose?.pre)
 
 const baseRef = useTemplateRef('baseRef')
