@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/page-hero'
+import theme from '../theme/page-hero'
 import type { ButtonProps } from './Button.vue'
 import type { ComponentConfig } from '../types/tv'
 

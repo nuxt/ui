@@ -2,7 +2,7 @@
 import type { PaginationRootProps, PaginationRootEmits } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/pagination'
+import theme from '../theme/pagination'
 import type { ButtonProps } from './Button.vue'
 import type { IconProps } from './Icon.vue'
 import type { ComponentConfig } from '../types/tv'

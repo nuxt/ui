@@ -2,7 +2,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/dashboard-search'
+import theme from '../theme/dashboard-search'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import type { ButtonProps } from './Button.vue'
 import type { ModalProps } from './Modal.vue'

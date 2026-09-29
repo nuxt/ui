@@ -2,7 +2,7 @@
 import type { CollapsibleRootProps, CollapsibleRootEmits } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/collapsible'
+import theme from '../theme/collapsible'
 import type { ComponentConfig } from '../types/tv'
 
 type Collapsible = ComponentConfig<typeof theme, AppConfig, 'collapsible'>

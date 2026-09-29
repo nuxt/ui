@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/user'
+import theme from '../theme/user'
 import type { AvatarProps } from './Avatar.vue'
 import type { ChipProps } from './Chip.vue'
 import type { LinkProps } from './Link.vue'

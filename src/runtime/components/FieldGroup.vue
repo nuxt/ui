@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/field-group'
+import theme from '../theme/field-group'
 import type { ComponentConfig } from '../types/tv'
 
 type FieldGroup = ComponentConfig<typeof theme, AppConfig, 'fieldGroup'>

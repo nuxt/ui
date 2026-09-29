@@ -1,0 +1,5 @@
+/* The package's own sources. They come before `#build/ui.css`: when the
+   package sits in `node_modules`, Tailwind drops an `@source not` listed
+   before the source it excludes, so detection wouldn't narrow anything. */
+@source './components';
+@source './theme';

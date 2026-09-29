@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/marquee'
+import theme from '../theme/marquee'
 import type { ComponentConfig } from '../types/tv'
 
 type Marquee = ComponentConfig<typeof theme, AppConfig, 'marquee'>

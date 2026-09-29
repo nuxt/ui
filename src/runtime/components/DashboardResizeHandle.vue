@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/dashboard-resize-handle'
+import theme from '../theme/dashboard-resize-handle'
 import type { ComponentConfig } from '../types/tv'
 
 type DashboardResizeHandle = ComponentConfig<typeof theme, AppConfig, 'dashboardResizeHandle'>

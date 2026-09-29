@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { ChatStatus } from 'ai'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/chat-prompt-submit'
+import theme from '../theme/chat-prompt-submit'
 import type { ButtonProps, ButtonSlots } from './Button.vue'
 import type { IconProps } from './Icon.vue'
 import type { LinkPropsKeys } from './Link.vue'

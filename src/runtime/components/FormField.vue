@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { Ref, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/form-field'
+import theme from '../theme/form-field'
 import type { ComponentConfig } from '../types/tv'
 
 type FormField = ComponentConfig<typeof theme, AppConfig, 'formField'>

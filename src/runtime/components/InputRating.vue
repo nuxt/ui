@@ -2,7 +2,7 @@
 import type { VNode } from 'vue'
 import type { RatingRootProps, RatingRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/input-rating'
+import theme from '../theme/input-rating'
 import type { IconProps } from './Icon.vue'
 import type { ComponentConfig } from '../types/tv'
 

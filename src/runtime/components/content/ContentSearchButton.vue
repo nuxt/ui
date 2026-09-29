@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/content/content-search-button'
+import theme from '../../theme/content/content-search-button'
 import type { ButtonProps, ButtonSlots } from '../Button.vue'
 import type { IconProps } from '../Icon.vue'
 import type { KbdProps } from '../Kbd.vue'

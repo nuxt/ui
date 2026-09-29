@@ -2,7 +2,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { TagsInputRootProps, TagsInputRootEmits, AcceptableInputValue } from 'reka-ui'
-import theme from '#build/ui/input-tags'
+import theme from '../theme/input-tags'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { IconProps } from './Icon.vue'
 import type { InputHTMLAttributes } from '../types/html'

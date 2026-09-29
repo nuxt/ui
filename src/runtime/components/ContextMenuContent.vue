@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { ContextMenuContentProps as RekaContextMenuContentProps, ContextMenuContentEmits as RekaContextMenuContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import type theme from '#build/ui/context-menu'
+import type theme from '../theme/context-menu'
 import type { ContextMenuItem, ContextMenuSlots } from './ContextMenu.vue'
 import type { IconProps } from './Icon.vue'
 import type { ArrayOrNested, GetItemKeys } from '../types/utils'

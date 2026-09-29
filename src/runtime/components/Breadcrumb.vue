@@ -2,7 +2,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/breadcrumb'
+import theme from '../theme/breadcrumb'
 import type { AvatarProps } from './Avatar.vue'
 import type { IconProps } from './Icon.vue'
 import type { LinkProps } from './Link.vue'
