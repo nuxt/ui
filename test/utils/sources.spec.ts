@@ -151,7 +151,7 @@ describe('colors plugin', () => {
   it('gives an alias on a gray palette neutral\'s surface roles', async () => {
     const gray = await build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: neutral 900 50; }')
     expect(gray).toContain(':root, :host, .light, .dark {')
-    expect(gray).toContain('--ui-primary-soft: var(--ui-bg-elevated);')
+    expect(gray).toContain('--ui-primary-soft: var(--ui-bg-soft);')
     // neutral's hover mixes the color itself, so primary's mixes primary
     expect(gray).toContain('--ui-primary-hover: color-mix(in oklab, var(--ui-primary) 90%, transparent);')
     // a role neutral leaves to its recipe stays on it
