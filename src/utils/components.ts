@@ -14,8 +14,10 @@ import { resolvePathSync } from 'mlly'
  * - <LazyUButton / <lazy-u-button (lazy components)
  * - LazyUButton in script
  * - 'u-button' as a whole string, like `resolveComponent('u-button')`
+ * - u-button in Pug templates: at the start of a line, after `: ` (block
+ *   expansion) or in `#[...]` (tag interpolation)
  *
- * The kebab form only matches as a tag or a whole string: bare kebab
+ * The kebab form only matches in tag position or as a whole string: bare kebab
  * identifiers in scripts and prose would match far too much ordinary text.
  */
 function createComponentPattern(prefix: string): RegExp {
@@ -23,7 +25,7 @@ function createComponentPattern(prefix: string): RegExp {
   const escapedPrefix = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
   const kebabPrefix = kebabCase(prefix).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
-  return new RegExp(`<(?:Lazy)?${escapedPrefix}([A-Z][a-zA-Z]+)|(?:<|['"\`])(?:lazy-)?${kebabPrefix}-([a-z][a-z0-9-]*)(?=[\\s/>'"\`])|\\b(?:Lazy)?${escapedPrefix}([A-Z][a-zA-Z]+)\\b`, 'g')
+  return new RegExp(`<(?:Lazy)?${escapedPrefix}([A-Z][a-zA-Z]+)|(?:<|['"\`]|#\\[|^[ \\t]*|:[ \\t]+)(?:lazy-)?${kebabPrefix}-([a-z][a-z0-9-]*)(?=[\\s/>'"\`(.#:\\]]|$)|\\b(?:Lazy)?${escapedPrefix}([A-Z][a-zA-Z]+)\\b`, 'gm')
 }
 
 /**
