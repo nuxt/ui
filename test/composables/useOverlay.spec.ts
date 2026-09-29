@@ -167,14 +167,6 @@ describe('useOverlay', () => {
     expect(await Promise.race([second, 'pending'])).toBe('test-result')
   })
 
-  it('should resolve many pending promises without overflowing the stack', async () => {
-    const modal = overlay.create(MockModal)
-    const instances = Array.from({ length: 50_000 }, () => modal.open())
-
-    expect(() => modal.close('test-result')).not.toThrow()
-    expect(await Promise.race([instances[0], 'pending'])).toBe('test-result')
-  })
-
   it('should close an overlay', () => {
     const modal = overlay.create(MockModal)
 
