@@ -17,6 +17,7 @@ export const defaultOptions = {
   fonts: true,
   colorMode: true,
   tailwindPrefix: undefined,
+  componentDetection: true,
   prose: undefined,
   mdc: false,
   content: false,
