@@ -1,6 +1,6 @@
-import type { ModuleOptions } from '../module'
+import { colorVariant, colors } from './color'
 
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     content: 'min-w-32 max-h-(--reka-dropdown-menu-content-available-height) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col',
     input: 'border-b border-default',
@@ -24,10 +24,7 @@ export default (options: Required<ModuleOptions>) => ({
     itemLabelExternalIcon: 'inline-block size-3 align-top text-dimmed'
   },
   variants: {
-    color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
-      neutral: ''
-    },
+    color: colorVariant({ item: '', label: '' }),
     active: {
       true: {
         item: 'text-highlighted before:bg-elevated',
@@ -96,22 +93,22 @@ export default (options: Required<ModuleOptions>) => ({
       }
     }
   },
-  compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
-    color,
+  compoundVariants: [{
+    color: [...colors],
     active: false,
     class: {
-      item: `text-${color} data-highlighted:text-${color} data-highlighted:before:bg-${color}/10 data-[state=open]:before:bg-${color}/10`,
-      itemLeadingIcon: `text-${color}/75 group-data-highlighted:text-${color} group-data-[state=open]:text-${color}`
+      item: 'text-accent-soft-foreground data-highlighted:text-accent data-highlighted:before:bg-accent-tint data-[state=open]:before:bg-accent-tint',
+      itemLeadingIcon: 'text-accent-faint group-data-highlighted:text-accent-soft-foreground group-data-[state=open]:text-accent-soft-foreground'
     }
-  })), ...(options.theme.colors || []).map((color: string) => ({
-    color,
+  }, {
+    color: [...colors],
     active: true,
     class: {
-      item: `text-${color} before:bg-${color}/10`,
-      itemLeadingIcon: `text-${color}`
+      item: 'text-accent before:bg-accent-soft',
+      itemLeadingIcon: 'text-accent-soft-foreground'
     }
-  }))],
+  }],
   defaultVariants: {
     size: 'md'
   }
-})
+}

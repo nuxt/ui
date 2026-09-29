@@ -31,9 +31,11 @@ function generateRoot(colors: Colors | undefined, uiColors: Record<string, strin
   }
   :root, :host, .light {
   ${Object.keys(rest).map(key => generateColor(key, 500)).join('\n  ')}
+  --ui-neutral: var(--ui-bg-inverted);
   }
   .dark {
   ${Object.keys(rest).map(key => generateColor(key, 400)).join('\n  ')}
+  --ui-neutral: var(--ui-bg-inverted);
   }
 }`
 }

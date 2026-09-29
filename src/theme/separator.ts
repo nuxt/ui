@@ -1,9 +1,9 @@
-import type { ModuleOptions } from '../module'
+import { colorVariant } from './color'
 
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'flex items-center text-center',
-    border: '',
+    border: 'border-accent',
     container: 'font-medium text-default flex',
     icon: 'shrink-0 size-5',
     avatar: 'shrink-0',
@@ -11,10 +11,8 @@ export default (options: Required<ModuleOptions>) => ({
     label: 'text-sm'
   },
   variants: {
-    color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, { border: `border-${color}` }])),
-      neutral: { border: 'border-default' }
-    },
+    // Neutral draws its line with the border token rather than the neutral color
+    color: { ...colorVariant({ root: '' }), neutral: { root: '[--ui-accent:var(--ui-neutral)]', border: 'border-default' } },
     orientation: {
       horizontal: {
         root: 'w-full flex-row',
@@ -121,4 +119,4 @@ export default (options: Required<ModuleOptions>) => ({
     size: 'xs',
     type: 'solid'
   }
-})
+}
