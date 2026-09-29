@@ -61,7 +61,7 @@ const _props = withDefaults(defineProps<UserProps>(), {
 })
 const slots = defineSlots<UserSlots>()
 
-const props = useComponentProps('user', _props)
+const props = useComponentProps('user', _props, theme)
 
 const appConfig = useAppConfig() as User['AppConfig']
 const prefix = usePrefix()

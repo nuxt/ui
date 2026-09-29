@@ -71,7 +71,7 @@ const _props = withDefaults(defineProps<ProgressProps>(), {
 const emits = defineEmits<ProgressEmits>()
 const slots = defineSlots<ProgressSlots>()
 
-const props = useComponentProps('progress', _props)
+const props = useComponentProps('progress', _props, theme)
 
 const { dir } = useLocale()
 const appConfig = useAppConfig() as Progress['AppConfig']

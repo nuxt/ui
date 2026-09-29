@@ -64,7 +64,7 @@ const _props = withDefaults(defineProps<PricingPlansProps>(), {
 })
 const slots = defineSlots<PricingPlansSlots<T>>()
 
-const props = useComponentProps<PricingPlansProps>('pricingPlans', _props)
+const props = useComponentProps<PricingPlansProps>('pricingPlans', _props, theme)
 
 const getProxySlots = () => omit(slots, ['default'])
 

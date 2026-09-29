@@ -41,7 +41,7 @@ defineOptions({ inheritAttrs: false })
 const _props = defineProps<ProseCardProps>()
 const slots = defineSlots<ProseCardSlots>()
 
-const props = useComponentProps('prose.card', _props)
+const props = useComponentProps('prose.card', _props, theme)
 
 const appConfig = useAppConfig() as ProseCard['AppConfig']
 

@@ -117,7 +117,7 @@ defineOptions({ inheritAttrs: false })
 const _props = defineProps<PricingTableProps<T>>()
 const slots = defineSlots<PricingTableSlots<T>>()
 
-const props = useComponentProps<PricingTableProps<T>>('pricingTable', _props)
+const props = useComponentProps<PricingTableProps<T>>('pricingTable', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as PricingTable['AppConfig']

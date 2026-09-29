@@ -57,7 +57,7 @@ const _props = withDefaults(defineProps<PageLinksProps<T>>(), {
 })
 const slots = defineSlots<PageLinksSlots<T>>()
 
-const props = useComponentProps<PageLinksProps<T>>('pageLinks', _props)
+const props = useComponentProps<PageLinksProps<T>>('pageLinks', _props, theme)
 
 const appConfig = useAppConfig() as PageLinks['AppConfig']
 

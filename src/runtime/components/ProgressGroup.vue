@@ -86,7 +86,7 @@ const _props = withDefaults(defineProps<ProgressGroupProps<T>>(), {
 })
 const slots = defineSlots<ProgressGroupSlots<T>>()
 
-const props = useComponentProps<ProgressGroupProps<T>>('progressGroup', _props)
+const props = useComponentProps<ProgressGroupProps<T>>('progressGroup', _props, theme)
 
 const appConfig = useAppConfig() as ProgressGroup['AppConfig']
 
