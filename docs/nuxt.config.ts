@@ -79,6 +79,11 @@ export default defineNuxtConfig({
     }
   },
 
+  ui: {
+    // The component pages import components by a dynamic path, which detection can't follow
+    componentDetection: false
+  },
+
   runtimeConfig: {
     public: {
       version: pkg.version
