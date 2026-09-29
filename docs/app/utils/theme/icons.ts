@@ -1,7 +1,7 @@
-import lucide from '../../../../src/theme/icons'
+import lucide from '../../../../src/runtime/theme/icons'
 
 // Picking a set replaces appConfig.ui.icons wholesale, so every set must
-// map the full key list from src/theme/icons, a missing key would blank
+// map the full key list from src/runtime/theme/icons, a missing key would blank
 // that icon across the whole app. The `satisfies` below enforces that: a
 // missing key fails to compile, and so does a stray one. Names are validated
 // against the Iconify API (sets beyond lucide resolve through @nuxt/icon's
