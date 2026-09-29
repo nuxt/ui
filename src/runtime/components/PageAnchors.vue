@@ -55,7 +55,7 @@ const _props = withDefaults(defineProps<PageAnchorsProps<T>>(), {
 })
 const slots = defineSlots<PageAnchorsSlots<T>>()
 
-const props = useComponentProps<PageAnchorsProps<T>>('pageAnchors', _props)
+const props = useComponentProps<PageAnchorsProps<T>>('pageAnchors', _props, theme)
 
 const appConfig = useAppConfig() as PageAnchors['AppConfig']
 

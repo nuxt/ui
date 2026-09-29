@@ -85,7 +85,7 @@ const _props = defineProps<BannerProps>()
 const slots = defineSlots<BannerSlots>()
 const emits = defineEmits<BannerEmits>()
 
-const props = useComponentProps('banner', _props)
+const props = useComponentProps('banner', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Banner['AppConfig']

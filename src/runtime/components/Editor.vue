@@ -117,7 +117,7 @@ const emits = defineEmits<EditorEmits<T>>()
 
 defineSlots<EditorSlots<H>>()
 
-const props = useComponentProps<EditorProps<T, H>>('editor', _props)
+const props = useComponentProps<EditorProps<T, H>>('editor', _props, theme)
 
 const attrs = useAttrs()
 

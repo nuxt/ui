@@ -32,7 +32,7 @@ const _props = defineProps<PageColumnsProps>()
 
 defineSlots<PageColumnsSlots>()
 
-const props = useComponentProps('pageColumns', _props)
+const props = useComponentProps('pageColumns', _props, theme)
 
 const appConfig = useAppConfig() as PageColumns['AppConfig']
 

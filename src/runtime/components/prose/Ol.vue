@@ -26,7 +26,7 @@ const _props = defineProps<ProseOlProps>()
 
 defineSlots<ProseOlSlots>()
 
-const props = useComponentProps('prose.ol', _props)
+const props = useComponentProps('prose.ol', _props, theme)
 
 const appConfig = useAppConfig() as ProseOl['AppConfig']
 

@@ -132,7 +132,7 @@ const _props = withDefaults(defineProps<ContextMenuProps<T>>(), {
 const emits = defineEmits<ContextMenuEmits>()
 const slots = defineSlots<ContextMenuSlots<T>>()
 
-const props = useComponentProps<ContextMenuProps<T>>('contextMenu', _props)
+const props = useComponentProps<ContextMenuProps<T>>('contextMenu', _props, theme)
 
 const appConfig = useAppConfig() as ContextMenu['AppConfig']
 

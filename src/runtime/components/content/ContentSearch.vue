@@ -158,7 +158,7 @@ const _props = withDefaults(defineProps<ContentSearchProps<T>>(), {
 })
 const slots = defineSlots<ContentSearchSlots>()
 
-const props = useComponentProps<ContentSearchProps<T>>('contentSearch', _props)
+const props = useComponentProps<ContentSearchProps<T>>('contentSearch', _props, theme)
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 

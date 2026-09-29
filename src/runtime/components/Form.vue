@@ -100,7 +100,7 @@ const _props = withDefaults(defineProps<FormProps<S, T, N>>(), {
 const emits = defineEmits<FormEmits<S, T>>()
 defineSlots<FormSlots>()
 
-const props = useComponentProps<FormProps<S, T, N>>('form', _props)
+const props = useComponentProps<FormProps<S, T, N>>('form', _props, theme)
 
 const appConfig = useAppConfig() as FormConfig['AppConfig']
 

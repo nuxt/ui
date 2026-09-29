@@ -26,7 +26,7 @@ const _props = defineProps<ProseTableProps>()
 
 defineSlots<ProseTableSlots>()
 
-const props = useComponentProps('prose.table', _props)
+const props = useComponentProps('prose.table', _props, theme)
 
 const appConfig = useAppConfig() as ProseTable['AppConfig']
 

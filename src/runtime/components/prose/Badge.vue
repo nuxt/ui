@@ -27,7 +27,7 @@ const _props = defineProps<ProseBadgeProps>()
 
 defineSlots<ProseBadgeSlots>()
 
-const props = useComponentProps('prose.badge', _props)
+const props = useComponentProps('prose.badge', _props, theme)
 
 const appConfig = useAppConfig() as ProseBadge['AppConfig']
 

@@ -159,7 +159,7 @@ const _props = withDefaults(defineProps<CarouselProps<T>>(), {
 defineSlots<CarouselSlots<T>>()
 const emits = defineEmits<CarouselEmits>()
 
-const props = useComponentProps<CarouselProps<T>>('carousel', _props)
+const props = useComponentProps<CarouselProps<T>>('carousel', _props, theme)
 
 const { dir, t } = useLocale()
 const appConfig = useAppConfig() as Carousel['AppConfig']

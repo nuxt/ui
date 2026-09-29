@@ -49,7 +49,7 @@ const _props = defineProps<ProseCodeCollapseProps>()
 
 defineSlots<ProseCodeCollapseSlots>()
 
-const props = useComponentProps('prose.codeCollapse', _props)
+const props = useComponentProps('prose.codeCollapse', _props, theme)
 
 const open = defineModel<boolean>('open', { default: false })
 

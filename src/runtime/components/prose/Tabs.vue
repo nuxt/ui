@@ -43,7 +43,7 @@ const _props = withDefaults(defineProps<ProseTabsProps>(), {
 })
 const slots = defineSlots<ProseTabsSlots>()
 
-const props = useComponentProps('prose.tabs', _props)
+const props = useComponentProps('prose.tabs', _props, theme)
 
 const model = defineModel<string>()
 

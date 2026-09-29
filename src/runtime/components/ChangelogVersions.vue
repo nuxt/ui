@@ -65,7 +65,7 @@ const _props = withDefaults(defineProps<ChangelogVersionsProps<T>>(), {
 })
 const slots = defineSlots<ChangelogVersionsSlots<T>>()
 
-const props = useComponentProps<ChangelogVersionsProps<T>>('changelogVersions', _props)
+const props = useComponentProps<ChangelogVersionsProps<T>>('changelogVersions', _props, theme)
 
 const getProxySlots = () => omit(slots, ['default', 'indicator'])
 

@@ -59,7 +59,7 @@ const _props = withDefaults(defineProps<PageFeatureProps>(), {
 })
 const slots = defineSlots<PageFeatureSlots>()
 
-const props = useComponentProps('pageFeature', _props)
+const props = useComponentProps('pageFeature', _props, theme)
 
 const appConfig = useAppConfig() as PageFeature['AppConfig']
 const prefix = usePrefix()

@@ -32,7 +32,7 @@ import { tv } from '../utils/tv'
 const _props = defineProps<ChatPaletteProps>()
 const slots = defineSlots<ChatPaletteSlots>()
 
-const props = useComponentProps('chatPalette', _props)
+const props = useComponentProps('chatPalette', _props, theme)
 
 const appConfig = useAppConfig() as ChatPalette['AppConfig']
 

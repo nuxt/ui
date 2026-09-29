@@ -133,7 +133,7 @@ const _props = withDefaults(defineProps<ChatPromptProps>(), {
 const emits = defineEmits<ChatPromptEmits>()
 const slots = defineSlots<ChatPromptSlots>()
 
-const props = useComponentProps('chatPrompt', _props)
+const props = useComponentProps('chatPrompt', _props, theme)
 
 const model = defineModel<string>({ default: '' })
 const files = defineModel<File[]>('files')

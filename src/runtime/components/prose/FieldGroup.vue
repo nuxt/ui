@@ -32,7 +32,7 @@ const _props = defineProps<ProseFieldGroupProps>()
 
 defineSlots<ProseFieldGroupSlots>()
 
-const props = useComponentProps('prose.fieldGroup', _props)
+const props = useComponentProps('prose.fieldGroup', _props, theme)
 
 const appConfig = useAppConfig() as ProseFieldGroup['AppConfig']
 

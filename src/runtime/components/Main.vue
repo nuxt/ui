@@ -33,7 +33,7 @@ const _props = withDefaults(defineProps<MainProps>(), {
 })
 defineSlots<MainSlots>()
 
-const props = useComponentProps('main', _props)
+const props = useComponentProps('main', _props, theme)
 
 const appConfig = useAppConfig() as Main['AppConfig']
 
