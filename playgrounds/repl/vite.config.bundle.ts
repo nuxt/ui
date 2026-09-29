@@ -33,12 +33,6 @@ export default defineConfig({
     },
     vue(),
     ui({
-      ui: {
-        colors: {
-          primary: 'green',
-          neutral: 'slate'
-        }
-      },
       router: false,
       autoImport: false,
       components: false

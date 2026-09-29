@@ -60,7 +60,6 @@ export interface ApplyThemeSettings {
   fontSans?: string
   fontSerif?: string
   fontMono?: string
-  blackAsPrimary?: boolean
   icons?: string
   customColors?: Record<string, Record<string, string>>
   cssVariables?: { light?: Record<string, string>, dark?: Record<string, string> }
@@ -87,7 +86,6 @@ const applyTheme = tool({
       fontSans: { type: 'string', description: 'Body font family (tailwind\'s --font-sans), the one every element inherits. Any Google Font works, and it does not have to be a sans (e.g. Public Sans, DM Sans, Geist, Inter, Poppins, Outfit, Playfair Display).' },
       fontSerif: { type: 'string', description: 'Heading font family (tailwind\'s --font-serif; h1–h6 follow it). Any Google Font. Omit to keep headings on the body font.' },
       fontMono: { type: 'string', description: 'Code font family (tailwind\'s --font-mono; code, kbd, pre and samp follow it). Any Google Font.' },
-      blackAsPrimary: { type: 'boolean', description: 'Use solid black/white as primary color for a monochrome look' },
       icons: { type: 'string', description: 'Icon set for live preview: lucide (default), bootstrap, heroicons, iconoir, material, phosphor, pixelarticons, remix or tabler. For exported code, any Iconify icon set can be suggested.' },
       customColors: {
         type: 'object',
@@ -191,7 +189,7 @@ When users ask for a complete theme, to change "all colors", or describe a broad
 - Pick a **primary** that embodies the theme's identity. If no standard Tailwind color fits, use \`customColors\` to define a bespoke palette with all shades 50-950 as \`oklch(L% C H)\` values, tailwind v4's native format, e.g. \`oklch(62.3% 0.214 259.815)\`. This is encouraged for creative/unique themes.
 - Pick a **secondary** that complements the primary (analogous or contrasting on the color wheel). Can also be a custom palette.
 - Pick **success/info/warning/error** that feel harmonious with the palette while staying semantically meaningful (success = green-ish, error = red-ish, warning = amber/yellow-ish, info = blue/cyan-ish). You can shift hues — e.g. \`lime\` for success in a nature theme, \`rose\` for error in a warm theme — but keep them recognizable.
-- For monochrome/black-and-white themes, keep semantic colors meaningful. Only primary, secondary, and neutral should go monochrome. Use \`blackAsPrimary: true\` for monochrome primary.
+- For monochrome/black-and-white themes, keep semantic colors meaningful. Only primary, secondary, and neutral should go monochrome. For a monochrome primary, set \`primary\` to the same gray as \`neutral\` and pin \`--ui-primary\` with \`cssVariables\`: \`var(--ui-color-primary-900)\` in light, \`var(--ui-color-primary-200)\` in dark.
 
 When users ask to reset, revert, or restore the default theme, use the \`resetTheme\` tool. This resets primary to green, neutral to slate, radius to 0.25rem, font to Public Sans, and removes any custom colors.
 
@@ -225,8 +223,9 @@ The main.css file uses Tailwind CSS directives to configure design tokens:
 
 *Monochrome primary:*
 \`\`\`css
-:root { --ui-primary: black; }
-.dark { --ui-primary: white; }
+@plugin "@nuxt/ui/colors" {
+  primary: neutral 900 50; /* a gray primary takes neutral's surface look in every variant */
+}
 \`\`\`
 
 *True black & white theme* — for a monochrome theme, also set \`--ui-bg\` to pure black/white:
@@ -234,10 +233,11 @@ The main.css file uses Tailwind CSS directives to configure design tokens:
 .dark { --ui-bg: black; }
 \`\`\`
 
-*Semantic shade overrides* — override which shade a semantic color uses:
+*Semantic shade overrides* — pick which shades a semantic color uses, light then dark:
 \`\`\`css
-:root, .light { --ui-primary: var(--ui-color-primary-700); }
-.dark { --ui-primary: var(--ui-color-primary-200); }
+@plugin "@nuxt/ui/colors" {
+  primary: indigo 700 200;
+}
 \`\`\`
 
 **CSS Variable fine-tuning (last resort)** — use the \`cssVariables\` property in \`applyTheme\` ONLY for subtle one-shade adjustments. Example: shifting \`--ui-bg\` from neutral-900 to neutral-950 in dark mode, or \`--ui-border\` from neutral-200 to neutral-300 in light mode.
@@ -263,13 +263,9 @@ Do NOT use \`cssVariables\` for things achievable with \`primary\`, \`neutral\`,
 
 **2. Config (app.config.ts for Nuxt / vite.config.ts for Vue)**
 
-For semantic color assignment and component-level theming. The \`ui\` object is the same for both frameworks:
+For component-level theming. Colors are NOT set here: they go in main.css through the \`@plugin "@nuxt/ui/colors"\` block. The \`ui\` object is the same for both frameworks:
 \`\`\`
 ui: {
-  colors: {
-    primary: 'blue',
-    neutral: 'zinc'
-  },
   button: {
     slots: { base: 'font-bold' },
     defaultVariants: { size: 'lg' }
@@ -354,8 +350,13 @@ CRITICAL rules for component \`ui\` overrides:
   /* custom color palettes here */
 }
 
+@plugin "@nuxt/ui/colors" {
+  primary: blue;  /* a palette, optionally followed by light and dark shades */
+  neutral: zinc;  /* only the aliases that changed */
+}
+
 :root {
-  --ui-radius: 0.375rem; /* only radius and monochrome --ui-primary go here */
+  --ui-radius: 0.375rem; /* only radius goes here */
 }
 
 :root, .light {
@@ -363,11 +364,11 @@ CRITICAL rules for component \`ui\` overrides:
 }
 
 .dark {
-  /* dark-mode CSS variable overrides AND monochrome --ui-primary: white here */
+  /* dark-mode CSS variable overrides here */
 }
 \`\`\`
 
-3. Show the config code block if colors, icons, or component overrides changed. Use **app.config.ts** for Nuxt or **vite.config.ts** for Vue (based on the user's framework). IMPORTANT: this must include ALL settings from the entire conversation — not just the current \`applyTheme\` call but also all previous calls (colors, icons with full \`ui.icons\` mapping, component \`ui\` overrides like button, popover, etc.). If a non-default icon set was chosen, the exported config MUST include the complete \`ui.icons\` object with every key mapped. Review earlier \`applyTheme\` calls in the conversation and merge everything into one complete config.
+3. Show the config code block if icons or component overrides changed (colors belong in main.css). Use **app.config.ts** for Nuxt or **vite.config.ts** for Vue (based on the user's framework). IMPORTANT: this must include ALL settings from the entire conversation — not just the current \`applyTheme\` call but also all previous calls (colors, icons with full \`ui.icons\` mapping, component \`ui\` overrides like button, popover, etc.). If a non-default icon set was chosen, the exported config MUST include the complete \`ui.icons\` object with every key mapped. Review earlier \`applyTheme\` calls in the conversation and merge everything into one complete config, without a \`colors\` key.
 
 For **Nuxt** — \`app.config.ts\`:
 \`\`\`typescript
@@ -396,7 +397,7 @@ export default defineConfig({
 })
 \`\`\`
 
-NEVER recommend \`appConfig.theme.*\` properties (like \`blackAsPrimary\`, \`radius\`, \`font\`) — those are internal to the docs site. Users should use CSS variables in main.css for radius, fonts, and monochrome primary.`
+NEVER recommend \`appConfig.theme.*\` properties (like \`radius\`, \`font\`) — those are internal to the docs site. Users should use main.css for colors (the \`@plugin "@nuxt/ui/colors"\` block), radius and fonts.`
   })
 })
 
