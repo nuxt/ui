@@ -194,13 +194,25 @@ type TVThemeCheck<T> = {
   defaultVariants?: TVDefaultVariants<T>
 }
 
+declare const componentOverrides: unique symbol
+
+/**
+ * A component's resolved `app.config.ui.<c>`, as `useComponentOverrides`
+ * returns it: typed after the theme and the app's own config, so the variant
+ * values the app adds (a custom `color`) reach the built component.
+ */
+export type ComponentOverrides<O> = O & { readonly [componentOverrides]: true }
+
 /**
  * The engine itself: a theme and the overrides on top of it in, a built
- * component out. The resolved `app.config.ui.<c>` is typed after the theme,
- * whose empty placeholders widen to `string`, so it is accepted as is: the
- * strict shape is enforced where overrides are written, through `TVConfig`.
+ * component out. A component passes its `ComponentOverrides`, accepted as is
+ * and widening the variant props; overrides written inline are checked
+ * against the theme.
  */
-export type TV = <T extends TVTheme>(theme: T & TVThemeCheck<T>, overrides?: TVOverrides<T> | Partial<T> | null) => TVReturnType<T>
+export type TV = {
+  <T extends TVTheme, O extends Record<string, any>>(theme: T & TVThemeCheck<T>, overrides: ComponentOverrides<O> | undefined): TVReturnType<T & O>
+  <T extends TVTheme>(theme: T & TVThemeCheck<T>, overrides?: TVOverrides<T> | Partial<T> | null): TVReturnType<T>
+}
 
 /** A theme whose variant groups also accept values `app.config.ui` adds. */
 type WidenTheme<T> = Omit<T, 'variants'> & {
@@ -251,8 +263,8 @@ type ComponentAppConfig<
   U extends 'ui' | 'ui.prose'
 > = Omit<A, 'ui'> & {
   ui: U extends 'ui.prose'
-    ? Omit<UIOf<A>, 'prose'> & { prose?: WithComponent<ProseOf<A>, K, T> }
-    : WithComponent<UIOf<A>, K, T>
+    ? Omit<UIOf<A>, 'prose'> & { prose?: WithComponent<ProseOf<A>, K, T & GetComponentAppConfig<A, U, K>> }
+    : WithComponent<UIOf<A>, K, T & GetComponentAppConfig<A, U, K>>
 }
 
 /**
