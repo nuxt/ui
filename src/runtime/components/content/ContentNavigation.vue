@@ -31,7 +31,7 @@ export interface ContentNavigationLink extends ContentNavigationItem {
   defaultOpen?: boolean
   active?: boolean
   class?: any
-  ui?: Partial<Pick<ContentNavigation['slots'], 'link' | 'linkLeadingIcon' | 'linkTitle' | 'linkTrailing' | 'linkTrailingIcon' | 'linkTrailingBadge' | 'linkTrailingBadgeSize' | 'linkTrailingIcon' | 'linkTitleExternalIcon' | 'trigger' | 'content' | 'item' | 'itemWithChildren'>>
+  ui?: Partial<Pick<ContentNavigation['slots'], 'link' | 'linkLeadingIcon' | 'linkTitle' | 'linkTrailing' | 'linkTrailingIcon' | 'linkTrailingBadge' | 'linkTrailingIcon' | 'linkTitleExternalIcon' | 'trigger' | 'content' | 'item' | 'itemWithChildren'>>
 }
 
 export interface ContentNavigationProps<T extends ContentNavigationLink = ContentNavigationLink> extends Pick<AccordionRootProps, 'disabled' | 'type' | 'unmountOnHide'> {
@@ -192,7 +192,7 @@ const defaultValue = computed(() => {
             v-if="link.badge || link.badge === 0"
             color="neutral"
             variant="outline"
-            :size="((props.ui?.linkTrailingBadgeSize || ui.linkTrailingBadgeSize()) as BadgeProps['size'])"
+            size="sm"
             v-bind="(typeof link.badge === 'string' || typeof link.badge === 'number') ? { label: link.badge } : link.badge"
             data-slot="content-navigation-linkTrailingBadge"
             :class="ui.linkTrailingBadge({ class: props.ui?.linkTrailingBadge })"
