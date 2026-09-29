@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { AvatarProps } from '@nuxt/ui'
-
 const { data: users, status, execute } = await useLazyFetch('https://jsonplaceholder.typicode.com/users', {
   key: 'typicode-users',
   transform: (data: { id: number, name: string }[]) => {
@@ -32,7 +30,7 @@ function onOpen() {
       <UAvatar
         v-if="modelValue"
         v-bind="modelValue.avatar"
-        :size="(ui.leadingAvatarSize() as AvatarProps['size'])"
+        size="2xs"
         :class="ui.leadingAvatar()"
       />
     </template>

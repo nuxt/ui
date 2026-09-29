@@ -19,15 +19,6 @@ function prefixClasses(classString: string, prefix: string): string {
 }
 
 /**
- * Check if a string value looks like a component size prop value
- * (e.g., '2xs', '3xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', etc.)
- */
-function isSizeValue(value: string): boolean {
-  // Size values: xs, sm, md, lg, xl, 2xs, 3xs, 2xl, 3xl
-  return /^(?:[23]x[sl]|xs|sm|md|lg|xl)$/.test(value.trim())
-}
-
-/**
  * Recursively apply prefix to class strings in an object
  * Only prefixes actual CSS class strings, not variant/color values used for matching
  * @param obj - The object to apply prefix to
@@ -40,18 +31,14 @@ export function applyPrefixToObject(obj: any, prefix?: string, context: string[]
     return obj
   }
 
-  const currentKey = context[context.length - 1]
-
   // Don't prefix string values in these contexts:
   // 1. Inside compoundVariants array items, keys that are not 'class' (these are variant matchers)
   // 2. Inside defaultVariants (these are default variant values)
-  // 3. Values that look like size prop values (e.g., '2xl', '3xs') for keys ending with 'Size'
   const compoundVariantsIndex = context.indexOf('compoundVariants')
   const isInCompoundVariant = compoundVariantsIndex !== -1 && !context.slice(compoundVariantsIndex).includes('class')
   const isInDefaultVariants = context.includes('defaultVariants')
-  const isComponentSizeValue = typeof obj === 'string' && typeof currentKey === 'string' && currentKey.endsWith('Size') && isSizeValue(obj)
 
-  if (typeof obj === 'string' && (isInCompoundVariant || isInDefaultVariants || isComponentSizeValue)) {
+  if (typeof obj === 'string' && (isInCompoundVariant || isInDefaultVariants)) {
     return obj
   }
 

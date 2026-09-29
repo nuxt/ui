@@ -108,7 +108,7 @@ const ui = computed(() => tv(theme, overrides.value)({
 <template>
   <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="alert" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot name="leading" :ui="ui">
-      <UAvatar v-if="props.avatar" :size="((props.ui?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="alert-avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
+      <UAvatar v-if="props.avatar" size="2xl" v-bind="props.avatar" data-slot="alert-avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
       <UIcon v-else-if="props.icon" :name="props.icon" data-slot="alert-icon" :class="ui.icon({ class: props.ui?.icon })" />
     </slot>
 

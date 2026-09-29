@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import type { SelectMenuItem, AvatarProps } from '@nuxt/ui'
+import type { SelectMenuItem } from '@nuxt/ui'
 import { refDebounced } from '@vueuse/core'
+import { getAvatarSize } from '@nuxt/ui/utils/size'
 import theme from '#build/ui/select-menu'
 import type { User } from '~/types'
 
@@ -116,8 +117,8 @@ const valueMultiple = ref([fruits[0]!, vegetables[0]!])
       :items="users"
       v-bind="props"
     >
-      <template #leading="{ modelValue, ui }">
-        <UAvatar v-if="modelValue" :size="(ui.itemLeadingAvatarSize() as AvatarProps['size'])" v-bind="modelValue.avatar" />
+      <template #leading="{ modelValue }">
+        <UAvatar v-if="modelValue" :size="getAvatarSize(props?.size)" v-bind="modelValue.avatar" />
       </template>
     </USelectMenu>
     <USelectMenu

@@ -8,7 +8,6 @@ export default {
     description: 'text-sm text-muted',
     icon: 'shrink-0 size-5 text-accent',
     avatar: 'shrink-0',
-    avatarSize: '2xl',
     actions: 'flex gap-1.5 shrink-0',
     progress: 'absolute inset-x-0 bottom-0',
     close: 'p-0'

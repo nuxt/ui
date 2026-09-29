@@ -13,11 +13,9 @@ export default {
     item: 'group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75',
     itemLeadingIcon: 'shrink-0',
     itemLeadingAvatar: 'shrink-0',
-    itemLeadingAvatarSize: '',
     itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
     itemTrailingIcon: 'shrink-0',
     itemTrailingKbds: 'hidden lg:inline-flex items-center shrink-0',
-    itemTrailingKbdsSize: '',
     itemWrapper: 'flex-1 flex flex-col text-start min-w-0',
     itemLabel: 'truncate',
     itemDescription: 'truncate text-muted',
@@ -46,50 +44,40 @@ export default {
         item: 'p-1 text-xs gap-1',
         empty: 'p-2 text-xs',
         itemLeadingIcon: 'size-4',
-        itemLeadingAvatarSize: '3xs',
         itemTrailingIcon: 'size-4',
-        itemTrailingKbds: 'gap-0.5',
-        itemTrailingKbdsSize: 'sm'
+        itemTrailingKbds: 'gap-0.5'
       },
       sm: {
         label: 'p-1.5 text-xs gap-1.5',
         item: 'p-1.5 text-xs gap-1.5',
         empty: 'p-2.5 text-xs',
         itemLeadingIcon: 'size-4',
-        itemLeadingAvatarSize: '3xs',
         itemTrailingIcon: 'size-4',
-        itemTrailingKbds: 'gap-0.5',
-        itemTrailingKbdsSize: 'sm'
+        itemTrailingKbds: 'gap-0.5'
       },
       md: {
         label: 'p-1.5 text-sm gap-1.5',
         item: 'p-1.5 text-sm gap-1.5',
         empty: 'p-2.5 text-sm',
         itemLeadingIcon: 'size-5',
-        itemLeadingAvatarSize: '2xs',
         itemTrailingIcon: 'size-5',
-        itemTrailingKbds: 'gap-0.5',
-        itemTrailingKbdsSize: 'md'
+        itemTrailingKbds: 'gap-0.5'
       },
       lg: {
         label: 'p-2 text-sm gap-2',
         item: 'p-2 text-sm gap-2',
         empty: 'p-3 text-sm',
         itemLeadingIcon: 'size-5',
-        itemLeadingAvatarSize: '2xs',
         itemTrailingIcon: 'size-5',
-        itemTrailingKbds: 'gap-1',
-        itemTrailingKbdsSize: 'md'
+        itemTrailingKbds: 'gap-1'
       },
       xl: {
         label: 'p-2 text-base gap-2',
         item: 'p-2 text-base gap-2',
         empty: 'p-3 text-base',
         itemLeadingIcon: 'size-6',
-        itemLeadingAvatarSize: 'xs',
         itemTrailingIcon: 'size-6',
-        itemTrailingKbds: 'gap-1',
-        itemTrailingKbdsSize: 'lg'
+        itemTrailingKbds: 'gap-1'
       }
     }
   },
