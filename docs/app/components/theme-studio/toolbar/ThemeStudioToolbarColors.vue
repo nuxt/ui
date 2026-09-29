@@ -29,14 +29,12 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'p-3 flex 
         <!-- -space-x-1 makes the pair exactly 20px, the width of a leading
              icon, so every trigger's text starts on the same pixel -->
         <span class="flex items-center -space-x-1">
-          <!-- primary stacks on top; black-as-primary has no ramp
-               variable to point at -->
+          <!-- primary stacks on top -->
           <span
             v-for="(chip, index) in colorChips"
             :key="chip.label"
             class="relative size-3 rounded-full ring-2 ring-bg group-hover:ring-(--ui-bg-elevated) transition"
-            :class="!chip.dot && 'bg-black dark:bg-white'"
-            :style="{ ...(chip.dot ? { backgroundColor: chip.dot } : {}), zIndex: colorChips.length - index }"
+            :style="{ backgroundColor: chip.dot, zIndex: colorChips.length - index }"
           />
         </span>
       </template>

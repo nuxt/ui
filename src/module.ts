@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises'
 import { join, relative } from 'pathe'
 import { defu } from 'defu'
-import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addPlugin, addPluginTemplate, addBuildPlugin, findPath, getLayerDirectories, hasNuxtModule, logger, resolvePath } from '@nuxt/kit'
+import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addPluginTemplate, addBuildPlugin, findPath, getLayerDirectories, hasNuxtModule, logger, resolvePath } from '@nuxt/kit'
 import { IconUsageScanner } from '@nuxt/icon/utils'
 import { createUnplugin } from 'unplugin'
 import type { HookResult, ModuleDependencies } from '@nuxt/schema'
@@ -104,12 +104,19 @@ export default defineNuxtModule<ModuleOptions>({
     }
   },
   defaults: defaultOptions,
-  moduleDependencies(nuxt): ModuleDependencies {
+  async moduleDependencies(nuxt): Promise<ModuleDependencies> {
     const userUiOptions = nuxt.options.ui || {}
+    // `@nuxt/icon`'s inline styles can load before the app's stylesheet. In the
+    // `base` layer, they declare it first, below a layer Tailwind CSS is imported
+    // into, which then beats the `@nuxt/ui/colors` output in the top-level `base`.
+    // Nested in that layer, they leave the top-level `base` after it. A default,
+    // so an explicit `icon.cssLayer` wins whichever module sets up first.
+    const stylesheets = await Promise.all(nuxt.options.css.filter(entry => typeof entry === 'string').map(entry => resolvePath(entry)))
+    const layer = (await findTailwindPrefix(stylesheets))?.layer
     return {
       '@nuxt/icon': {
         defaults: {
-          cssLayer: 'base'
+          cssLayer: layer ? `${layer}.base` : 'base'
         }
       },
       ...userUiOptions.fonts !== false && {
@@ -234,7 +241,6 @@ export default defineNuxtModule<ModuleOptions>({
       nuxt.options.postcss.plugins['@tailwindcss/postcss'] = {}
     }
 
-    addPlugin({ src: resolve('./runtime/plugins/colors') })
     addBuildPlugin(createUnplugin(() => OptionalDepsPlugin(resolve('./runtime'))))
 
     if (hasNuxtModule('@nuxtjs/i18n')) {

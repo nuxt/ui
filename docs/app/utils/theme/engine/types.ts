@@ -53,7 +53,6 @@ export interface ThemeDoc {
   palettes?: Record<string, ThemePalette>
   /** L1, alias → palette name (tailwind or a key of `palettes`) */
   colors?: Partial<Record<ColorAlias, string>>
-  blackAsPrimary?: boolean
   /** L2, semantic `--ui-*` token overrides per mode */
   tokens?: {
     light?: Record<string, string>
@@ -472,7 +471,7 @@ export function resolveShade(doc: ThemeDoc, palette: string, shade: Shade): stri
 
 /** A document with no overrides means "stock Nuxt UI". */
 export function isDefaultTheme(doc: ThemeDoc): boolean {
-  return !doc.palettes && !doc.colors && !doc.blackAsPrimary && !doc.tokens
+  return !doc.palettes && !doc.colors && !doc.tokens
     && doc.radius === undefined && doc.fontSize === undefined
     && !doc.font?.sans && !doc.font?.serif && !doc.font?.mono && !doc.font?.weights
     && !doc.font?.uppercase && !doc.font?.italic
@@ -493,7 +492,6 @@ export function docToSettings(doc: ThemeDoc): Record<string, any> {
     settings[alias] = palette
   }
 
-  if (doc.blackAsPrimary) settings.blackAsPrimary = true
   if (doc.radius !== undefined) settings.radius = doc.radius
   if (doc.fontSize !== undefined) settings.fontSize = doc.fontSize
   if (doc.font?.sans) settings.fontSans = doc.font.sans
