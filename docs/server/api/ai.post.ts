@@ -221,8 +221,9 @@ The main.css file uses Tailwind CSS directives to configure design tokens:
 
 *Monochrome primary:*
 \`\`\`css
-:root { --ui-primary: black; }
-.dark { --ui-primary: white; }
+@plugin "@nuxt/ui/colors" {
+  primary: black white;
+}
 \`\`\`
 
 *True black & white theme* — for a monochrome theme, also set \`--ui-bg-surface\` to pure black/white:
@@ -230,10 +231,11 @@ The main.css file uses Tailwind CSS directives to configure design tokens:
 .dark { --ui-bg-surface: black; }
 \`\`\`
 
-*Semantic shade overrides* — override which shade a semantic color uses:
+*Semantic shade overrides* — pick which shades a semantic color uses, light then dark:
 \`\`\`css
-:root, .light { --ui-primary: var(--ui-color-primary-700); }
-.dark { --ui-primary: var(--ui-color-primary-200); }
+@plugin "@nuxt/ui/colors" {
+  primary: indigo 700 200;
+}
 \`\`\`
 
 **CSS Variable fine-tuning (last resort)** — use the \`cssVariables\` property in \`applyTheme\` ONLY for subtle one-shade adjustments. Example: shifting \`--ui-bg-surface\` from neutral-900 to neutral-950 in dark mode, or \`--ui-border-default\` from neutral-200 to neutral-300 in light mode.
@@ -259,13 +261,9 @@ Do NOT use \`cssVariables\` for things achievable with \`primary\`, \`neutral\`,
 
 **2. Config (app.config.ts for Nuxt / vite.config.ts for Vue)**
 
-For semantic color assignment and component-level theming. The \`ui\` object is the same for both frameworks:
+For component-level theming. Colors are NOT set here: they go in main.css through the \`@plugin "@nuxt/ui/colors"\` block. The \`ui\` object is the same for both frameworks:
 \`\`\`
 ui: {
-  colors: {
-    primary: 'blue',
-    neutral: 'zinc'
-  },
   button: {
     slots: { base: 'font-bold' },
     defaultVariants: { size: 'lg' }
@@ -350,8 +348,13 @@ CRITICAL rules for component \`ui\` overrides:
   /* custom color palettes here */
 }
 
+@plugin "@nuxt/ui/colors" {
+  primary: blue;  /* a palette, optionally followed by light and dark shades */
+  neutral: zinc;  /* only the aliases that changed */
+}
+
 :root {
-  --ui-radius: 0.375rem; /* only radius and monochrome --ui-primary go here */
+  --ui-radius: 0.375rem; /* only radius goes here */
 }
 
 :root, .light {
@@ -359,11 +362,11 @@ CRITICAL rules for component \`ui\` overrides:
 }
 
 .dark {
-  /* dark-mode CSS variable overrides AND monochrome --ui-primary: white here */
+  /* dark-mode CSS variable overrides here */
 }
 \`\`\`
 
-3. Show the config code block if colors, icons, or component overrides changed. Use **app.config.ts** for Nuxt or **vite.config.ts** for Vue (based on the user's framework). IMPORTANT: this must include ALL settings from the entire conversation — not just the current \`applyTheme\` call but also all previous calls (colors, icons with full \`ui.icons\` mapping, component \`ui\` overrides like button, popover, etc.). If a non-default icon set was chosen, the exported config MUST include the complete \`ui.icons\` object with every key mapped. Review earlier \`applyTheme\` calls in the conversation and merge everything into one complete config.
+3. Show the config code block if icons or component overrides changed (colors belong in main.css). Use **app.config.ts** for Nuxt or **vite.config.ts** for Vue (based on the user's framework). IMPORTANT: this must include ALL settings from the entire conversation — not just the current \`applyTheme\` call but also all previous calls (colors, icons with full \`ui.icons\` mapping, component \`ui\` overrides like button, popover, etc.). If a non-default icon set was chosen, the exported config MUST include the complete \`ui.icons\` object with every key mapped. Review earlier \`applyTheme\` calls in the conversation and merge everything into one complete config, without a \`colors\` key.
 
 For **Nuxt** — \`app.config.ts\`:
 \`\`\`typescript
@@ -392,7 +395,7 @@ export default defineConfig({
 })
 \`\`\`
 
-NEVER recommend \`appConfig.theme.*\` properties (like \`radius\`, \`font\`) — those are internal to the docs site. Users should use CSS variables in main.css for radius, fonts, and monochrome primary.`
+NEVER recommend \`appConfig.theme.*\` properties (like \`radius\`, \`font\`) — those are internal to the docs site. Users should use main.css for colors (the \`@plugin "@nuxt/ui/colors"\` block), radius and fonts.`
   })
 })
 
