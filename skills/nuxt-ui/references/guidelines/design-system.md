@@ -24,31 +24,23 @@ Nuxt UI uses 7 semantic colors. Never use raw Tailwind palette colors in compone
 
 ### Configuring colors
 
-```ts
-// Nuxt — app.config.ts
-export default defineAppConfig({
-  ui: {
-    colors: {
-      primary: 'indigo',
-      secondary: 'violet',
-      success: 'emerald',
-      error: 'rose',
-      neutral: 'zinc'
-    }
-  }
-})
+Colors are set in CSS, the same for Nuxt and Vue, with the `@nuxt/ui/colors` plugin after the imports. Aliases left out keep their default:
+
+```css
+/* main.css */
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@plugin "@nuxt/ui/colors" {
+  primary: indigo;
+  secondary: violet;
+  success: emerald;
+  error: rose;
+  neutral: zinc;
+}
 ```
 
-```ts
-// Vue — vite.config.ts
-ui({
-  ui: {
-    colors: { primary: 'indigo', secondary: 'violet', neutral: 'zinc' }
-  }
-})
-```
-
-Only colors that exist in your theme work — either Tailwind's defaults or custom colors defined with `@theme`.
+Only palettes that exist in your theme work — either Tailwind's defaults or custom colors defined with `@theme`. There is no `colors` key in `app.config.ts` or `vite.config.ts`.
 
 Available color palettes:
 - **Standard Tailwind**: red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose
@@ -84,7 +76,7 @@ Available color palettes:
 }
 ```
 
-2. Assign it: `ui: { colors: { primary: 'brand' } }`
+2. Assign it: `@plugin "@nuxt/ui/colors" { primary: brand; }`
 
 ### Extending with new semantic color names
 
@@ -348,15 +340,12 @@ Each semantic color defaults to shade 500 in light mode, 400 in dark mode. Overr
 
 You can use `var(--ui-color-<name>-<shade>)` to reference shades from the active palette (e.g., `var(--ui-color-neutral-800)` maps to whichever neutral palette is configured).
 
-### Black/white as primary
+### Monochrome primary
 
-`black` and `white` have no shades, so they can't be used in config. Set them directly:
+Give `primary` a gray palette with the ends of its scale. It then renders like `color="neutral"` in every variant, the soft, outline, subtle and link ones on the surface colors:
 
 ```css
-:root {
-  --ui-primary: black;
-}
-.dark {
-  --ui-primary: white;
+@plugin "@nuxt/ui/colors" {
+  primary: neutral 900 50;
 }
 ```
