@@ -1,6 +1,6 @@
 import { fileURLToPath, pathToFileURL } from 'node:url'
 
-import { join, normalize } from 'pathe'
+import { normalize } from 'pathe'
 import type { UnpluginOptions } from 'unplugin'
 import { createUnplugin } from 'unplugin'
 import type { Options as AutoImportOptions } from 'unplugin-auto-import/types'
@@ -92,9 +92,9 @@ export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'
    */
   scanPackages?: string[]
   /**
-   * Root directory where the `.nuxt-ui` directory (generated theme templates) is created.
+   * Root directory where the `.nuxt-ui` directory (`#build/ui.css` and `#build/ui/*`) is created.
    * Useful for setups like `electron-vite` where `config.root` points to a sub-directory
-   * (e.g. `src/renderer`) that Tailwind doesn't scan.
+   * (e.g. `src/renderer`).
    * @defaultValue `config.root`
    * @see https://ui.nuxt.com/docs/getting-started/installation/vue#root
    */
@@ -122,7 +122,7 @@ export const NuxtUIPlugin = createUnplugin<NuxtUIOptions | undefined>((_options 
     tailwind(),
     IconsPlugin(options, appConfig),
     PluginsPlugin(options),
-    TemplatePlugin(options, appConfig, join(runtimeDir, 'components')),
+    TemplatePlugin(options, appConfig, runtimeDir),
     AppConfigPlugin(options, appConfig),
     <UnpluginOptions>{
       name: 'nuxt:ui:plugins-duplication-detection',

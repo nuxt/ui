@@ -2,7 +2,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../../types/tv'
-import theme from '#build/ui/prose/table'
+import theme from '../../theme/prose/table'
 
 type ProseTable = ComponentConfig<typeof theme, AppConfig, 'table', 'ui.prose'>
 

@@ -3,7 +3,7 @@
 import type { NavigationMenuRootProps, NavigationMenuContentProps, NavigationMenuContentEmits, AccordionRootProps } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/navigation-menu'
+import theme from '../theme/navigation-menu'
 import type { AvatarProps } from './Avatar.vue'
 import type { BadgeProps } from './Badge.vue'
 import type { ChipProps } from './Chip.vue'
