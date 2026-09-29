@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs'
 import plugin from 'tailwindcss/plugin'
 import tailwindColors from 'tailwindcss/colors'
 import { colors } from '../theme/color'
@@ -13,6 +14,31 @@ const isShade = (word: string) => word === 'black' || word === 'white' || shades
 
 // `black` and `white` aren't shades of a palette, so they are the color itself
 const shadeValue = (alias: string, shade: string) => shade === 'black' || shade === 'white' ? shade : `var(--ui-color-${alias}-${shade})`
+
+// Tailwind's gray palettes. An alias on one of them, or on the palette `neutral`
+// uses, is a monochrome color: it takes neutral's surface roles, see below.
+const grays = ['slate', 'gray', 'zinc', 'neutral', 'stone', 'taupe', 'mauve', 'mist', 'olive']
+
+let neutralRoles: Array<[role: string, value: string]> | undefined
+
+/**
+ * The roles the neutral scope points at the surface tokens, read from
+ * `accent.css` next to this file so the two can't drift. A role neutral leaves
+ * to its recipe, like `focus`, isn't listed. Read from this module's own URL:
+ * the runtime ships file by file, so it sits next to `accent.css` in `dist` too.
+ */
+function getNeutralRoles() {
+  if (!neutralRoles) {
+    const css = readFileSync(new URL('./accent.css', import.meta.url), 'utf8')
+    const scope = css.match(/\.\\\[--ui-accent\\:var\\\(--ui-neutral\\\)\\\]\s*\{([^}]*)\}/)?.[1] ?? ''
+    neutralRoles = [...scope.matchAll(/--ui-accent-([\w-]+): var\(--ui-neutral-\1, (\S.*)\);/g)].map(([, role, value]) => [role!, value!])
+    // None found means `accent.css` no longer reads the way this parses it
+    if (!neutralRoles.length) {
+      throw new Error('[@nuxt/ui] Found no neutral roles in `accent.css`.')
+    }
+  }
+  return neutralRoles
+}
 
 // Edits between two words, for the palette a typo was probably meant as
 function distance(a: string, b: string) {
@@ -60,6 +86,12 @@ function closestPalette(name: string, shadesByName: unknown) {
  * The defaults are plain CSS in `base.css`, at zero specificity, so the
  * aliases you set win wherever you register it.
  */
+// The palette an alias's value names, if any
+const paletteOf = (value?: string) => {
+  const word = value && String(value).replace(/["']/g, '').trim().split(/\s+/)[0]
+  return word && !isShade(word) ? word : undefined
+}
+
 const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugin.withOptions<ColorsOptions>(options => ({ addBase, theme }) => {
   const aliases: Record<string, string | undefined> = options ?? {}
 
@@ -118,6 +150,24 @@ const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugi
 
   if (Object.keys(declarations).length) {
     addBase({ ':root, :host': declarations })
+  }
+
+  // An alias on a gray takes neutral's surface roles, like `color="neutral"`:
+  // soft, outline and ghost variants on the surfaces, not tinted by the gray.
+  // Set as its per-color roles, so an override of those still wins.
+  const neutralPalette = paletteOf(aliases.neutral) ?? 'slate'
+  const roles: Record<string, string> = {}
+  for (const [alias, value] of Object.entries(aliases)) {
+    const palette = paletteOf(value)
+    if (alias === 'neutral' || !palette || (!grays.includes(palette) && palette !== neutralPalette)) {
+      continue
+    }
+    for (const [role, fallback] of getNeutralRoles()) {
+      roles[`--ui-${alias}-${role}`] = fallback.replace(/var\(--ui-neutral\)/g, `var(--ui-${alias})`)
+    }
+  }
+  if (Object.keys(roles).length) {
+    addBase({ ':root, :host, .light, .dark': roles })
   }
   // After the palettes, `.dark` last so it wins on a dark root
   if (Object.keys(light).length) {
