@@ -1,5 +1,6 @@
+import { join } from 'pathe'
 import { describe, it, expect } from 'vitest'
-import { getTemplates } from '../../src/templates'
+import { getPrefixedLiterals, getTemplates } from '../../src/templates'
 import { defaultOptions, getDefaultConfig, resolveColors } from '../../src/utils/defaults'
 
 function themeContents(overrides: Record<string, any>, vue?: { detectedComponents?: Set<string> }) {
@@ -25,5 +26,19 @@ describe('theme templates', () => {
     const contents = themeContents({ theme: { unstyled: true } })
 
     expect(await contents('ui/skeleton.ts')).not.toContain('animate-pulse')
+  })
+})
+
+describe('getPrefixedLiterals', () => {
+  it('prefixes the classes components pass to `usePrefix`', () => {
+    const classes = getPrefixedLiterals(join(process.cwd(), 'src/runtime/components'), 'tw')
+    expect(classes).toContain('tw:dark:hidden')
+    expect(classes).toContain('tw:hidden')
+    expect(classes).toContain('tw:dark:block')
+    expect(classes.every(cls => cls.startsWith('tw:'))).toBe(true)
+  })
+
+  it('is empty for a missing directory', () => {
+    expect(getPrefixedLiterals('/missing', 'tw')).toEqual([])
   })
 })

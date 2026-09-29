@@ -1,3 +1,5 @@
+import { readdirSync, readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { camelCase, kebabCase } from 'scule'
 import { genExport } from 'knitwork'
@@ -11,6 +13,31 @@ import { detectUsedComponents } from './utils/components'
 import * as theme from './theme'
 import * as themeProse from './theme/prose'
 import * as themeContent from './theme/content'
+
+const PREFIX_CALL = /\bprefix\(\s*'([^']+)'\s*\)/g
+
+/**
+ * The classes components pass to `usePrefix()`, with the Tailwind prefix.
+ * @param componentDir - The components directory
+ * @param prefix - The Tailwind prefix
+ */
+export function getPrefixedLiterals(componentDir: string, prefix: string): string[] {
+  const classes = new Set<string>()
+  let files: string[]
+  try {
+    files = readdirSync(componentDir, { recursive: true }).map(String).filter(file => file.endsWith('.vue'))
+  } catch {
+    return []
+  }
+  for (const file of files) {
+    for (const [, value] of readFileSync(join(componentDir, file), 'utf8').matchAll(PREFIX_CALL)) {
+      for (const cls of value!.split(/\s+/).filter(Boolean)) {
+        classes.add(`${prefix}:${cls}`)
+      }
+    }
+  }
+  return [...classes].sort()
+}
 
 export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt?: Nuxt, resolve?: Resolver['resolve'], vue?: { detectedComponents?: Set<string> }) {
   const templates: NuxtTemplate[] = []
@@ -158,6 +185,15 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     // blanks the theme of unused components at write time (see
     // `writeThemeTemplate`), which needs no extra directive.
     const componentDir = resolve ? resolve('./runtime/components') : undefined
+
+    // The few classes components write themselves go through `usePrefix`, which
+    // only adds the prefix at runtime, so Tailwind never sees them prefixed
+    if (options.theme?.prefix && componentDir) {
+      const classes = getPrefixedLiterals(componentDir, options.theme.prefix)
+      if (classes.length) {
+        sources.push(`@source inline(${JSON.stringify(classes.join(' '))});`)
+      }
+    }
 
     if (options.experimental?.componentDetection && nuxt && componentDir && layers.length) {
       const detectedComponents = await detectUsedComponents(
