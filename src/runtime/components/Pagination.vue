@@ -107,8 +107,7 @@ import { computed } from 'vue'
 import { PaginationRoot, PaginationList, PaginationListItem, PaginationFirst, PaginationPrev, PaginationEllipsis, PaginationNext, PaginationLast } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
@@ -130,7 +129,7 @@ const slots = defineSlots<PaginationSlots>()
 const props = useComponentProps('pagination', _props, theme)
 
 const { dir } = useLocale()
-const appConfig = useAppConfig() as Pagination['AppConfig']
+const appConfig = useThemeConfig() as Pagination['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.pagination)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'defaultPage', 'disabled', 'itemsPerPage', 'page', 'showEdges', 'siblingCount', 'total'), emits)

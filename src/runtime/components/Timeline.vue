@@ -73,8 +73,7 @@ export type TimelineSlots<T extends TimelineItem = TimelineItem> = {
 <script setup lang="ts" generic="T extends TimelineItem">
 import { computed } from 'vue'
 import { Primitive, Separator } from 'reka-ui'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 import { get } from '../utils'
 import UAvatar from './Avatar.vue'
@@ -90,7 +89,7 @@ const props = useComponentProps<TimelineProps<T>>('timeline', _props, theme)
 
 const modelValue = defineModel<string | number>()
 
-const appConfig = useAppConfig() as Timeline['AppConfig']
+const appConfig = useThemeConfig() as Timeline['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.timeline)
 
 // eslint-disable-next-line vue/no-dupe-keys

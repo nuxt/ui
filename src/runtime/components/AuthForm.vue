@@ -116,8 +116,7 @@ export type AuthFormSlots<T extends object = object, F extends AuthFormField = A
 <script setup lang="ts" generic="T extends FormSchema, F extends AuthFormField">
 import { reactive, shallowReactive, computed, useTemplateRef } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { omit, pick } from '../utils'
 import { tv } from '../utils/tv'
@@ -157,7 +156,7 @@ const slots = defineSlots<AuthFormSlots<typeof state, F>>()
 const props = useComponentProps<AuthFormProps<T, F>>('authForm', _props, theme)
 
 const { t } = useLocale()
-const appConfig = useAppConfig() as AuthForm['AppConfig']
+const appConfig = useThemeConfig() as AuthForm['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.authForm)
 
 // eslint-disable-next-line vue/no-dupe-keys

@@ -67,8 +67,7 @@ export interface ChatMessageSlots<TMetadata = unknown, TDataParts extends UIData
 <script setup lang="ts" generic="TMetadata, TDataParts extends UIDataTypes, TTools extends UITools">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
@@ -83,7 +82,7 @@ const slots = defineSlots<ChatMessageSlots<TMetadata, TDataParts, TTools>>()
 
 const props = useComponentProps<ChatMessageProps<TMetadata, TDataParts, TTools>>('chatMessage', _props, theme)
 
-const appConfig = useAppConfig() as ChatMessage['AppConfig']
+const appConfig = useThemeConfig() as ChatMessage['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.chatMessage)
 
 const fileParts = computed(() => props.parts?.filter((part): part is FileUIPart => part.type === 'file') ?? [])

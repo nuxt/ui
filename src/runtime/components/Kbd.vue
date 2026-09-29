@@ -38,9 +38,8 @@ export interface KbdSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
 import { useKbd } from '../composables/useKbd'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 
 const _props = withDefaults(defineProps<KbdProps>(), {
@@ -51,7 +50,7 @@ defineSlots<KbdSlots>()
 const props = useComponentProps('kbd', _props, theme)
 
 const { getKbdKey } = useKbd()
-const appConfig = useAppConfig() as Kbd['AppConfig']
+const appConfig = useThemeConfig() as Kbd['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.kbd)
 
 // eslint-disable-next-line vue/no-dupe-keys
