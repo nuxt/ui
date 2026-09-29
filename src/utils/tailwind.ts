@@ -4,6 +4,9 @@ import { dirname, isAbsolute, join, resolve } from 'pathe'
 const COMMENT = /\/\*[\s\S]*?\*\//g
 const IMPORT = /@import\s+(?:url\(\s*)?["']([^"']+)["']\s*\)?([^;]*)/g
 const TAILWIND = /^tailwindcss(?:\/[\w.-]+)?$/
+// `prefix(...)` is an option of the theme, so it only applies on the imports that
+// bring it: the whole of Tailwind CSS or `theme.css`, not `utilities.css`
+const THEME = /^tailwindcss(?:\/(?:index|theme)(?:\.css)?)?$/
 const NUXT_UI = /^@nuxt\/ui(?:\/(?:base|sources))?$/
 const PREFIX = /\bprefix\(\s*([\w-]+)\s*\)/
 const WHOLE = /^tailwindcss(?:\/index\.css)?$/
@@ -11,7 +14,7 @@ const LAYER = /\blayer\(\s*([\w.-]+)\s*\)/
 
 /**
  * The prefix a stylesheet gives Tailwind CSS, `@import "tailwindcss" prefix(tw)`.
- * A layered import carries it on one of its imports, usually `tailwindcss/theme.css`.
+ * A layered import carries it on `tailwindcss/theme.css`, where Tailwind CSS reads it.
  * @param css - The stylesheet source
  * @returns The prefix, `null` when Tailwind CSS is imported without one, `undefined` when it isn't imported
  */
@@ -22,7 +25,7 @@ export function getTailwindPrefix(css: string): string | null | undefined {
       continue
     }
     imported = true
-    const prefix = params!.match(PREFIX)?.[1]
+    const prefix = THEME.test(specifier!) ? params!.match(PREFIX)?.[1] : undefined
     if (prefix) {
       return prefix
     }
