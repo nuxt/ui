@@ -191,6 +191,15 @@ export default defineNuxtModule<ModuleOptions>({
       logger.warn(`Nuxt UI couldn't find the \`@import "tailwindcss"\` of \`${relative(nuxt.options.rootDir, unresolved[0]!)}\`. If Tailwind CSS has a prefix, set \`tailwindPrefix\` to it.`)
     }
 
+    // `@nuxt/icon`'s inline styles can load before the app's stylesheet. In the
+    // `base` layer, they declare it first, below the layer Tailwind CSS is imported
+    // into, which then beats the `@nuxt/ui/colors` output in the top-level `base`.
+    // Nested in that layer, they leave the top-level `base` after it.
+    const layer = first?.layer
+    if (layer && nuxt.options.appConfig.icon?.cssLayer === 'base') {
+      nuxt.options.appConfig.icon.cssLayer = `${layer}.base`
+    }
+
     nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, getDefaultConfig(options.tailwindPrefix)) as typeof nuxt.options.appConfig.ui
 
     // Pre-bundle the icons Nuxt UI uses into `@nuxt/icon`'s client bundle so they're

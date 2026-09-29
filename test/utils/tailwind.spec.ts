@@ -2,7 +2,7 @@ import { mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'pathe'
 import { describe, it, expect, afterAll } from 'vitest'
-import { findTailwindStylesheets, getTailwindPrefix } from '../../src/utils/tailwind'
+import { findTailwindStylesheets, getTailwindLayer, getTailwindPrefix } from '../../src/utils/tailwind'
 
 describe('getTailwindPrefix', () => {
   it.each([
@@ -17,6 +17,17 @@ describe('getTailwindPrefix', () => {
     ['@import "tailwindcss-animate" prefix(tw);', undefined]
   ])('reads %j', (css, prefix) => {
     expect(getTailwindPrefix(css)).toBe(prefix)
+  })
+})
+
+describe('getTailwindLayer', () => {
+  it.each([
+    ['@import "tailwindcss" layer(framework);', 'framework'],
+    ['@import "tailwindcss/index.css" layer(app.framework) prefix(tw);', 'app.framework'],
+    ['@import "tailwindcss/theme.css" layer(theme);\n@import "tailwindcss/utilities.css" layer(utilities);', undefined],
+    ['@import "tailwindcss";', undefined]
+  ])('reads %j', (css, layer) => {
+    expect(getTailwindLayer(css)).toBe(layer)
   })
 })
 

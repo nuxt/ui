@@ -6,6 +6,8 @@ const IMPORT = /@import\s+(?:url\(\s*)?["']([^"']+)["']\s*\)?([^;]*)/g
 const TAILWIND = /^tailwindcss(?:\/[\w.-]+)?$/
 const NUXT_UI = /^@nuxt\/ui(?:\/(?:base|sources))?$/
 const PREFIX = /\bprefix\(\s*([\w-]+)\s*\)/
+const WHOLE = /^tailwindcss(?:\/index\.css)?$/
+const LAYER = /\blayer\(\s*([\w.-]+)\s*\)/
 
 /**
  * The prefix a stylesheet gives Tailwind CSS, `@import "tailwindcss" prefix(tw)`.
@@ -28,9 +30,23 @@ export function getTailwindPrefix(css: string): string | null | undefined {
   return imported ? null : undefined
 }
 
+/**
+ * The cascade layer a stylesheet imports all of Tailwind CSS into,
+ * `@import "tailwindcss" layer(framework)`.
+ * @param css - The stylesheet source
+ */
+export function getTailwindLayer(css: string): string | undefined {
+  for (const [, specifier, params] of css.replace(COMMENT, '').matchAll(IMPORT)) {
+    const layer = WHOLE.test(specifier!) ? params!.match(LAYER)?.[1] : undefined
+    if (layer) {
+      return layer
+    }
+  }
+}
+
 export interface TailwindStylesheets {
   /** Each stylesheet that imports Tailwind CSS, in order, with its prefix. */
-  tailwind: Array<{ path: string, prefix: string | null }>
+  tailwind: Array<{ path: string, prefix: string | null, layer?: string }>
   /** The stylesheets that import Nuxt UI where no Tailwind CSS import was found. */
   unresolved: string[]
 }
@@ -69,7 +85,7 @@ export async function findTailwindStylesheets(paths: string[], alias: Record<str
     const prefix = getTailwindPrefix(css)
     let found = prefix !== undefined
     if (found) {
-      result.tailwind.push({ path, prefix: prefix! })
+      result.tailwind.push({ path, prefix: prefix!, layer: getTailwindLayer(css) })
     }
     let importsUi = false
     for (const [, specifier] of css.replace(COMMENT, '').matchAll(IMPORT)) {
