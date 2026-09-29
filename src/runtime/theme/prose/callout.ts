@@ -12,7 +12,7 @@ export default defineTheme({
       ...colorVariant({ base: 'border-accent-border bg-accent-soft text-accent-soft-foreground [&_a]:text-accent [&_a]:hover:border-accent [&_a]:outline-accent-focus [&_a]:focus-visible:outline-3 [&_a]:focus-visible:has-[>code]:outline-0 [&_code]:text-accent-soft-foreground [&_code]:border-accent-border [&_a]:[&>code]:outline-accent-focus [&_a]:hover:[&>code]:border-accent [&_a]:hover:[&>code]:text-accent [&_a]:focus-visible:[&>code]:border-accent [&_a]:focus-visible:[&>code]:text-accent [&>ul]:marker:text-accent-border-strong' }),
       // Neutral is the plain callout, not a variant of the colored one.
       neutral: {
-        base: 'border-default bg-muted text-default',
+        base: 'border-muted bg-muted text-default',
         icon: 'text-highlighted',
         externalIcon: 'text-faint'
       }

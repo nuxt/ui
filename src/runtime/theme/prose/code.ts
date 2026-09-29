@@ -9,7 +9,7 @@ export default defineTheme({
     color: {
       ...colorVariant({ base: 'border-accent-border bg-accent-soft text-accent-soft-foreground' }),
       // Neutral is the plain inline code, not a variant of the colored one.
-      neutral: { base: 'border-default text-highlighted bg-muted' }
+      neutral: { base: 'border-muted text-highlighted bg-muted' }
     }
   },
   defaultVariants: {

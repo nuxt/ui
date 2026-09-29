@@ -129,7 +129,7 @@
     --ui-accent-soft-hover: var(--ui-neutral-soft-hover, var(--ui-bg-soft-hover));
     --ui-accent-soft-foreground: var(--ui-neutral-soft-foreground, var(--ui-text-default));
     --ui-accent-border-strong: var(--ui-neutral-border-strong, var(--ui-border-strong));
-    --ui-accent-border: var(--ui-neutral-border, var(--ui-border-default));
+    --ui-accent-border: var(--ui-neutral-border, var(--ui-border-muted));
     --ui-accent-focus: var(--ui-neutral-focus);
     --ui-accent-surface: var(--ui-neutral-surface, var(--ui-bg-surface));
     --ui-accent-muted: var(--ui-neutral-muted, var(--ui-text-muted));
