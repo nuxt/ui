@@ -1,8 +1,9 @@
+import { existsSync } from 'node:fs'
 import { readFile } from 'node:fs/promises'
 import { camelCase, kebabCase } from 'scule'
 import { genExport } from 'knitwork'
 import { addTemplate, addTypeTemplate, hasNuxtModule, logger, updateTemplates, getLayerDirectories } from '@nuxt/kit'
-import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
+import type { Nuxt, NuxtApp, NuxtPage, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
 import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
 import { getThemeClasses } from './utils/theme'
@@ -12,7 +13,7 @@ import { colors } from './runtime/theme/color'
 import * as themeProse from './runtime/theme/prose'
 import * as themeContent from './runtime/theme/content'
 
-export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt: Nuxt | undefined, resolve: Resolver['resolve'], vue?: { detectedComponents?: Set<string> }) {
+export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt: Nuxt | undefined, resolve: Resolver['resolve'], vue?: { detectedComponents?: Set<string>, dev?: boolean }) {
   const templates: NuxtTemplate[] = []
 
   let hasProse = false
@@ -57,7 +58,64 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
 
   writeThemeTemplate(theme)
 
-  async function generateSources() {
+  // `ui.css` and `ui/detected.ts` read the same detection, run once per generation
+  let detection: Promise<Set<string> | undefined> | undefined
+  nuxt?.hook('builder:generateApp', () => {
+    detection = undefined
+  })
+
+  function getDetectedComponents(app?: NuxtApp) {
+    return nuxt ? (detection ??= detectComponents(app)) : Promise.resolve(vue?.detectedComponents)
+  }
+
+  async function detectComponents(app?: NuxtApp) {
+    const layers = getLayerDirectories(nuxt!).map(layer => layer.app)
+    if (!options.componentDetection || !layers.length) {
+      return undefined
+    }
+
+    // Markdown content lives next to each layer's app dir, in `content/`
+    const contentDirs = hasProse ? getLayerDirectories(nuxt!).map(layer => `${layer.root}content`).filter(dir => existsSync(dir)) : []
+
+    // Components and pages registered from outside the layers, by another
+    // `components.dirs` entry, a module or a package, render components too
+    const runtimeDir = resolve('./runtime')
+    const pageFiles = (pages: NuxtPage[] = []): string[] => pages.flatMap(page => [page.file, ...pageFiles(page.children)]).filter((file): file is string => !!file)
+    const files = [...(app?.components ?? []).map(component => component.filePath), ...pageFiles(app?.pages)]
+      .filter(file => !file.startsWith(runtimeDir) && !layers.some(layer => file.startsWith(layer)))
+
+    const detectedComponents = await detectUsedComponents(
+      [...layers, ...contentDirs],
+      options.prefix!,
+      resolve('./runtime/components'),
+      Array.isArray(options.componentDetection) ? options.componentDetection : undefined,
+      { prose: hasProse, files }
+    )
+
+    if (detectedComponents && detectedComponents.size > 0) {
+      if (previousDetectedComponents) {
+        const newComponents = Array.from(detectedComponents).filter(
+          component => !previousDetectedComponents!.has(component)
+        )
+        if (newComponents.length > 0) {
+          logger.success(`Nuxt UI detected new components: ${newComponents.join(', ')}`)
+        }
+      } else {
+        logger.success(`Nuxt UI detected ${detectedComponents.size} components in use (including dependencies)`)
+      }
+
+      previousDetectedComponents = detectedComponents
+    } else {
+      if (!previousDetectedComponents || previousDetectedComponents.size > 0) {
+        logger.info('Nuxt UI detected no components in use, including all components')
+      }
+      previousDetectedComponents = new Set()
+    }
+
+    return detectedComponents
+  }
+
+  async function generateSources(app?: NuxtApp) {
     const sources: string[] = []
 
     // Layer + inline sources are Nuxt-only; the Vue integration relies on the
@@ -84,40 +142,9 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
       }
     }
 
-    // With `experimental.componentDetection`, only the themes of the detected
-    // components, their dependencies included, reach the CSS.
-    const componentDir = resolve('./runtime/components')
-
-    let detectedComponents = vue?.detectedComponents
-
-    if (options.experimental?.componentDetection && nuxt && componentDir && layers.length) {
-      detectedComponents = await detectUsedComponents(
-        layers,
-        options.prefix!,
-        componentDir,
-        Array.isArray(options.experimental.componentDetection) ? options.experimental.componentDetection : undefined
-      )
-
-      if (detectedComponents && detectedComponents.size > 0) {
-        if (previousDetectedComponents) {
-          const newComponents = Array.from(detectedComponents).filter(
-            component => !previousDetectedComponents!.has(component)
-          )
-          if (newComponents.length > 0) {
-            logger.success(`Nuxt UI detected new components: ${newComponents.join(', ')}`)
-          }
-        } else {
-          logger.success(`Nuxt UI detected ${detectedComponents.size} components in use (including dependencies)`)
-        }
-
-        previousDetectedComponents = detectedComponents
-      } else {
-        if (!previousDetectedComponents || previousDetectedComponents.size > 0) {
-          logger.info('Nuxt UI detected no components in use, including all components')
-        }
-        previousDetectedComponents = new Set()
-      }
-    }
+    // With `componentDetection`, only the themes of the detected components,
+    // their dependencies included, reach the CSS.
+    const detectedComponents = await getDetectedComponents(app)
 
     const themes: Record<string, any>[] = []
 
@@ -162,7 +189,43 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   templates.push({
     filename: 'ui.css',
     write: true,
-    getContents: generateSources
+    getContents: ({ app }) => generateSources(app)
+  })
+
+  // The themes detection put in the CSS, for the dev warning in
+  // `useComponentProps` when a component renders without its classes. `null`
+  // when there's nothing to check.
+  templates.push({
+    filename: 'ui/detected.ts',
+    write: true,
+    getContents: async ({ app }) => {
+      if (!options.componentDetection || !(nuxt ? nuxt.options.dev : vue?.dev)) {
+        return 'export default null as Set<string> | null\n'
+      }
+
+      const detectedComponents = await getDetectedComponents(app)
+      // Nothing detected keeps every theme
+      const names = detectedComponents?.size
+        ? [...detectedComponents].map(component => camelCase(component))
+        : [...Object.keys(theme), ...(hasContent ? Object.keys(themeContent) : [])]
+
+      return `const names: string[] = ${JSON.stringify(names)}
+
+// Detection runs again as files change. Each version of this module refills the
+// one set components read, kept across updates in \`import.meta.hot.data\`
+const detected: Set<string> = import.meta.hot?.data.detected ?? new Set()
+detected.clear()
+for (const name of names) {
+  detected.add(name)
+}
+if (import.meta.hot) {
+  import.meta.hot.data.detected = detected
+  import.meta.hot.accept()
+}
+
+export default detected as Set<string> | null
+`
+    }
   })
 
   // The color scopes key their accent roles on the scope class, which the engine
@@ -275,10 +338,10 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt, resolve: Resolv
     references.push({ path: resolve('./runtime/types/app.config.d.ts') })
   })
 
-  if (options.experimental?.componentDetection && nuxt.options.dev) {
+  if (options.componentDetection && nuxt.options.dev) {
     nuxt.hook('builder:watch', async (_, path) => {
-      if (/\.(?:vue|ts|mts|js|mjs|cjs|tsx|jsx)$/.test(path)) {
-        await updateTemplates({ filter: template => template.filename === 'ui.css' })
+      if (/\.(?:vue|ts|mts|js|mjs|cjs|tsx|jsx|md|html)$/.test(path)) {
+        await updateTemplates({ filter: template => template.filename === 'ui.css' || template.filename === 'ui/detected.ts' })
       }
     })
   }
