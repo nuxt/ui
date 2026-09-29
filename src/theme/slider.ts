@@ -1,23 +1,14 @@
-import type { ModuleOptions } from '../module'
+import { colorVariant } from './color'
 
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'relative flex items-center select-none touch-none',
     track: 'relative bg-accented overflow-hidden rounded-full grow',
-    range: 'absolute rounded-full',
-    thumb: 'rounded-full bg-default ring-2 focus-visible:outline-3 focus-visible:outline-offset-2'
+    range: 'absolute rounded-full bg-accent',
+    thumb: 'rounded-full bg-default ring-2 focus-visible:outline-3 focus-visible:outline-offset-2 ring-accent outline-accent-focus'
   },
   variants: {
-    color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        range: `bg-${color}`,
-        thumb: `ring-${color} outline-${color}/25`
-      }])),
-      neutral: {
-        range: 'bg-inverted',
-        thumb: 'ring-inverted outline-inverted/25'
-      }
-    },
+    color: colorVariant({ root: '' }),
     size: {
       xs: {
         thumb: 'size-3'
@@ -116,4 +107,4 @@ export default (options: Required<ModuleOptions>) => ({
     size: 'md',
     color: 'primary'
   }
-})
+}
