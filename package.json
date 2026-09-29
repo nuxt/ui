@@ -2,7 +2,7 @@
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
   "version": "4.11.2",
-  "packageManager": "pnpm@12.5.1",
+  "packageManager": "pnpm@12.6.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nuxt/ui.git"
@@ -120,7 +120,7 @@
     "docs:build": "nuxt build docs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "typecheck": "vue-tsc --noEmit && nuxt typecheck playgrounds/nuxt && nuxt typecheck docs && cd playgrounds/vue && vue-tsc --noEmit",
+    "typecheck": "vue-tsc --noEmit && nuxt typecheck playgrounds/nuxt && nuxt typecheck docs",
     "test": "vitest",
     "test:vue": "vitest --project vue",
     "test:nuxt": "vitest --project nuxt",
