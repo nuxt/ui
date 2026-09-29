@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { SHADE_LADDER } from '../../utils/theme/engine'
+import { paletteShade } from '../../utils/theme/studio'
 import type { ChipProps } from '@nuxt/ui'
 
 /** Every settings row in every panel: label, then the control, on one 28px line. */
@@ -68,9 +69,9 @@ const shade = computed(() => props.control === 'shade')
 const sliderMax = computed(() => props.max ?? SHADE_LADDER.length - 1)
 const stop = computed(() => SHADE_LADDER[model.value as number])
 const sliderColor = computed(() => {
-  if (!shade.value) return undefined
+  if (!shade.value || !props.chip || stop.value === undefined) return undefined
   // the ladder's ends are literals no ramp variable can express
-  return stop.value === 'white' || stop.value === 'black' ? stop.value : `var(--color-${props.chip}-${stop.value})`
+  return stop.value === 'white' || stop.value === 'black' ? stop.value : paletteShade(props.chip, stop.value)
 })
 
 // ×1000 turns the lightness difference into a hard black/white switch.
