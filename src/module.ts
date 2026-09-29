@@ -189,8 +189,15 @@ export default defineNuxtModule<ModuleOptions>({
     // into, which then beats the `@nuxt/ui/colors` output in the top-level `base`.
     // Nested in that layer, they leave the top-level `base` after it.
     const layer = tailwind?.layer
-    if (layer && nuxt.options.appConfig.icon?.cssLayer === 'base') {
-      nuxt.options.appConfig.icon.cssLayer = `${layer}.base`
+    if (layer) {
+      // Installed as a dependency, `@nuxt/icon` sets up after this module and
+      // reads its options then; listed before `@nuxt/ui`, it has already written
+      // its app config. An explicit `icon.cssLayer` is kept either way.
+      const icon = ((nuxt.options as { icon?: { cssLayer?: string } }).icon ||= {})
+      icon.cssLayer ??= `${layer}.base`
+      if (nuxt.options.appConfig.icon?.cssLayer === 'base') {
+        nuxt.options.appConfig.icon.cssLayer = icon.cssLayer
+      }
     }
 
     nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, getDefaultConfig(options.tailwindPrefix)) as typeof nuxt.options.appConfig.ui
