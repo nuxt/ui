@@ -109,6 +109,29 @@ describe('detectUsedComponents', { timeout: 20000 }, () => {
     expect(detected).toContain('PageCTA')
   })
 
+  it('detects kebab-case tags in Pug templates', async () => {
+    const dir = fixtureUsing('<UButton label="x" />')
+    writeFileSync(join(dir, 'Pug.vue'), `<template lang="pug">\nu-accordion(:items="items")\n  u-card: u-badge(label="x")\n  p This has a #[u-kbd K]\n  u-separator\n</template>\n`)
+
+    const detected = await detectUsedComponents([dir], 'U', componentDir)
+
+    expect(detected).toContain('Accordion')
+    expect(detected).toContain('Card')
+    expect(detected).toContain('Badge')
+    expect(detected).toContain('Kbd')
+    expect(detected).toContain('Separator')
+  })
+
+  it('reads Pug positions in Vue files only', async () => {
+    const dir = fixtureUsing('<UButton label="x" />')
+    writeFileSync(join(dir, 'notes.md'), `---\ncomponent: u-accordion\n---\n\n    u-card\n`)
+
+    const detected = await detectUsedComponents([dir], 'U', componentDir)
+
+    expect(detected).not.toContain('Accordion')
+    expect(detected).not.toContain('Card')
+  })
+
   it('detects kebab-case and PascalCase usage in the same file', async () => {
     const detected = await detectUsedComponents([fixtureUsing('<UCard><u-badge label="x" /></UCard>')], 'U', componentDir)
 
@@ -177,6 +200,97 @@ describe('detectUsedComponents', { timeout: 20000 }, () => {
     expect(detected).toContain('Button')
     expect(detected).not.toContain('Alert')
     expect(detected).not.toContain('Table')
+  })
+
+  it('includes what prose components render when prose is on', async () => {
+    const dir = fixtureUsing('<UButton />')
+
+    const withProse = await detectUsedComponents([dir], 'U', componentDir, undefined, { prose: true })
+    expect(withProse).toContain('Tabs')
+    expect([...withProse!].some(component => component.startsWith('Prose'))).toBe(false)
+    expect(await detectUsedComponents([dir], 'U', componentDir)).not.toContain('Tabs')
+  })
+
+  it('detects the MDC syntax of Markdown content', async () => {
+    const dir = fixtureRoot()
+    writeFileSync(join(dir, 'index.md'), '::u-alert\n---\ntitle: Heads up\n---\n::\n\nNew :u-badge{label="Beta"} feature, see https://example.com:u-calendar\n')
+
+    const detected = await detectUsedComponents([dir], 'U', componentDir)
+    expect(detected).toContain('Alert')
+    expect(detected).toContain('Badge')
+    expect(detected).not.toContain('Calendar')
+  })
+
+  it('scans the files it is given besides the dirs', async () => {
+    const dir = fixtureUsing('<UButton />')
+    const outside = fixtureRoot()
+    writeFileSync(join(outside, 'AcmeDate.vue'), '<template><UCalendar /></template>\n')
+
+    expect(await detectUsedComponents([dir], 'U', componentDir, undefined, { files: [join(outside, 'AcmeDate.vue')] })).toContain('Calendar')
+  })
+
+  it('detects components imported from their file', async () => {
+    const dir = fixtureRoot()
+    writeFileSync(join(dir, 'App.vue'), [
+      '<script setup lang="ts">',
+      'import Button from \'@nuxt/ui/components/Button.vue\'',
+      'import Calendar from \'@nuxt/ui/runtime/components/Calendar.vue\'',
+      'const Modal = defineAsyncComponent(() => import(\'#ui/components/Modal.vue\'))',
+      'import ColorModeSwitch from \'@nuxt/ui/components/color-mode/ColorModeSwitch.vue\'',
+      'import LocaleSelect from \'#ui/components/locale/LocaleSelect.vue\'',
+      '</script>'
+    ].join('\n'))
+
+    const detected = await detectUsedComponents([dir], 'U', componentDir)
+    expect(detected).toContain('Button')
+    expect(detected).toContain('Calendar')
+    expect(detected).toContain('Modal')
+    // from a subdirectory, with what they render
+    expect(detected).toContain('ColorModeSwitch')
+    expect(detected).toContain('Switch')
+    expect(detected).toContain('LocaleSelect')
+    expect(detected).toContain('SelectMenu')
+  })
+
+  it('detects kebab-case names given as a string', async () => {
+    const dir = fixtureRoot()
+    writeFileSync(join(dir, 'App.vue'), [
+      '<script setup lang="ts">',
+      'const Alert = resolveComponent(\'u-alert\')',
+      'const Badge = resolveComponent("lazy-u-badge")',
+      '</script>',
+      '<template><component is="u-calendar" /></template>'
+    ].join('\n'))
+
+    const detected = await detectUsedComponents([dir], 'U', componentDir)
+    expect(detected).toContain('Alert')
+    expect(detected).toContain('Badge')
+    expect(detected).toContain('Calendar')
+  })
+
+  it('detects themes imported to style a component of the app', async () => {
+    const dir = fixtureRoot()
+    writeFileSync(join(dir, 'MyButton.vue'), [
+      '<script setup lang="ts">',
+      'import button from \'#build/ui/button\'',
+      'import inputMenu from \'#ui/theme/input-menu\'',
+      'import contentSearch from \'@nuxt/ui/runtime/theme/content/content-search\'',
+      'import pageCTA from \'#build/ui/page-cta\'',
+      '</script>'
+    ].join('\n'))
+
+    const detected = await detectUsedComponents([dir], 'U', componentDir)
+    expect(detected).toContain('Button')
+    expect(detected).toContain('InputMenu')
+    expect(detected).toContain('ContentSearch')
+    expect(detected).toContain('PageCTA')
+  })
+
+  it('detects components in HTML files', async () => {
+    const dir = fixtureRoot()
+    writeFileSync(join(dir, 'index.html'), '<div id="app"><u-calendar></u-calendar></div>\n')
+
+    expect(await detectUsedComponents([dir], 'U', componentDir)).toContain('Calendar')
   })
 
   it('returns undefined when no component is detected', async () => {

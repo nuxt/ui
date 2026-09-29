@@ -13,17 +13,51 @@ import { resolvePathSync } from 'mlly'
  * - UButton in script (imports, usage)
  * - <LazyUButton / <lazy-u-button (lazy components)
  * - LazyUButton in script
+ * - 'u-button' as a whole string, like `resolveComponent('u-button')`
+ * - u-button in Pug templates, with `pug`: at the start of a line, after `: `
+ *   (block expansion) or in `#[...]` (tag interpolation). Only for `.vue` files,
+ *   where Pug templates live: in Markdown or scripts those positions would match
+ *   indented code and comments.
  *
- * The kebab form only matches as a tag: bare kebab identifiers in scripts and
- * prose would match far too much ordinary text.
+ * The kebab form only matches in tag position or as a whole string: bare kebab
+ * identifiers in scripts and prose would match far too much ordinary text.
  */
-function createComponentPattern(prefix: string): RegExp {
+function createComponentPattern(prefix: string, pug = false): RegExp {
   // The prefix is user-configured, so it can carry regex metacharacters.
   const escapedPrefix = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
   const kebabPrefix = kebabCase(prefix).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
-  return new RegExp(`<(?:Lazy)?${escapedPrefix}([A-Z][a-zA-Z]+)|<(?:lazy-)?${kebabPrefix}-([a-z][a-z0-9-]*)|\\b(?:Lazy)?${escapedPrefix}([A-Z][a-zA-Z]+)\\b`, 'g')
+  const kebabStart = pug ? `(?:<|['"\`]|#\\[|^[ \\t]*|:[ \\t]+)` : `(?:<|['"\`])`
+  const kebabEnd = pug ? `(?=[\\s/>'"\`(.#:\\]]|$)` : `(?=[\\s/>'"\`])`
+
+  return new RegExp(`<(?:Lazy)?${escapedPrefix}([A-Z][a-zA-Z]+)|${kebabStart}(?:lazy-)?${kebabPrefix}-([a-z][a-z0-9-]*)${kebabEnd}|\\b(?:Lazy)?${escapedPrefix}([A-Z][a-zA-Z]+)\\b`, 'gm')
 }
+
+/**
+ * Pattern to match the MDC syntax of Markdown content, block and inline:
+ * `::u-callout`, `:u-badge{label="New"}`. Nuxt Content resolves these to the
+ * prefixed component.
+ */
+function createMdcPattern(prefix: string): RegExp {
+  const kebabPrefix = kebabCase(prefix).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
+  return new RegExp(`(?<![\\w-]):+${kebabPrefix}-([a-z][a-z0-9-]*)`, 'g')
+}
+
+/**
+ * Pattern to match a component imported from its file, for apps that don't
+ * register them: `import Button from '@nuxt/ui/components/Button.vue'`, or
+ * `#ui/components/prose/Callout.vue` in Nuxt, subdirectories included
+ * (`color-mode/ColorModeButton.vue`, `prose/callout/Note.vue`).
+ */
+const IMPORT_PATTERN = /(?:@nuxt\/ui|#ui)\/(?:runtime\/)?components\/(prose\/)?(?:[a-z-]+\/)*([A-Z]\w+)\.vue/g
+
+/**
+ * Pattern to match a theme imported to style a component of the app's own:
+ * `import theme from '#build/ui/button'`, `#ui/theme/button` or
+ * `@nuxt/ui/runtime/theme/button`.
+ */
+const THEME_IMPORT_PATTERN = /(?:#build\/ui|(?:@nuxt\/ui|#ui)\/(?:runtime\/)?theme)\/(prose\/)?(?:content\/)?([a-z][a-z0-9-]*)(?![\w-])/g
 
 /**
  * The component name a pattern match refers to, normalised to prefix-less
@@ -52,20 +86,21 @@ async function buildComponentDependencyGraph(componentDir: string): Promise<Map<
     cwd: componentDir,
     absolute: true,
     // Prose components share file basenames with nine regular components
-    // (`prose/Tabs.vue` vs `Tabs.vue`), and the graph is keyed by basename:
-    // letting them in overwrites the regular component's dependency set. They
-    // don't need nodes anyway, they are never used with the `U` prefix.
+    // (`prose/Tabs.vue` vs `Tabs.vue`), so they get their own `Prose` keys below
     ignore: ['prose/**']
   })
+  const proseFiles = globSync(['prose/**/*.vue'], { cwd: componentDir, absolute: true })
+
+  const nameOf = (file: string) => pascalCase(file.split('/').pop()!.replace('.vue', ''))
 
   // The pattern also matches ordinary identifiers (`URL` -> `RL`), so an edge
   // only counts when it points at a real component file.
-  const componentNames = new Set(componentFiles.map(file => pascalCase(file.split('/').pop()!.replace('.vue', ''))))
+  const componentNames = new Set(componentFiles.map(nameOf))
 
-  for (const componentFile of componentFiles) {
+  for (const componentFile of [...componentFiles, ...proseFiles]) {
     try {
       const content = await readFile(componentFile, 'utf-8')
-      const componentName = pascalCase(componentFile.split('/').pop()!.replace('.vue', ''))
+      const componentName = proseFiles.includes(componentFile) ? `Prose${nameOf(componentFile)}` : nameOf(componentFile)
       const dependencies = new Set<string>()
 
       const matches = content.matchAll(componentPattern)
@@ -159,9 +194,18 @@ export async function detectUsedComponents(
   dirs: string[],
   prefix: string,
   componentDir: string,
-  includeComponents?: string[]
+  includeComponents?: string[],
+  { prose = false, files = [] }: {
+    /** Prose components render from Markdown, which can't be traced, so what they render is always included. */
+    prose?: boolean
+    /** Files to scan besides the dirs, like components registered from elsewhere. */
+    files?: string[]
+  } = {}
 ): Promise<Set<string> | undefined> {
   const detectedComponents = new Set<string>()
+  // Theme files by path (`page-cta`, `prose/callout`), matched to a component
+  // once the graph is built, since their kebab-case name loses acronyms (`PageCTA`)
+  const themeImports = new Set<string>()
 
   // Add manually specified components
   if (includeComponents && includeComponents.length > 0) {
@@ -171,6 +215,28 @@ export async function detectUsedComponents(
   }
 
   const componentPattern = createComponentPattern(prefix)
+  const vuePattern = createComponentPattern(prefix, true)
+  const mdcPattern = createMdcPattern(prefix)
+
+  const scan = (file: string, content: string) => {
+    for (const match of content.matchAll(file.endsWith('.vue') ? vuePattern : componentPattern)) {
+      const componentName = getMatchedComponent(match)
+      if (componentName) {
+        detectedComponents.add(componentName)
+      }
+    }
+    for (const match of content.matchAll(IMPORT_PATTERN)) {
+      detectedComponents.add(match[1] ? `Prose${match[2]}` : match[2]!)
+    }
+    for (const match of content.matchAll(THEME_IMPORT_PATTERN)) {
+      themeImports.add(`${match[1] ?? ''}${match[2]}`)
+    }
+    if (file.endsWith('.md')) {
+      for (const match of content.matchAll(mdcPattern)) {
+        detectedComponents.add(pascalCase(match[1]!))
+      }
+    }
+  }
 
   // Scan all source files for component usage across all layers
   for (const dir of dirs) {
@@ -178,7 +244,7 @@ export async function detectUsedComponents(
     // `.mjs`/`.cjs`), so the build-output ignores only apply to project dirs.
     const isPackageDir = normalize(dir).includes('node_modules/')
 
-    const appFiles = globSync(['**/*.{vue,ts,mts,js,mjs,cjs,tsx,jsx}'], {
+    const appFiles = globSync(['**/*.{vue,ts,mts,js,mjs,cjs,tsx,jsx,md,html}'], {
       cwd: dir,
       // `**/` prefixes so nested dirs are skipped too: the Vue integration
       // scans the whole Vite root, not just Nuxt layer `app/` directories.
@@ -192,28 +258,44 @@ export async function detectUsedComponents(
 
     for (const file of appFiles) {
       try {
-        const filePath = join(dir, file)
-        const content = await readFile(filePath, 'utf-8')
-        const matches = content.matchAll(componentPattern)
-
-        for (const match of matches) {
-          const componentName = getMatchedComponent(match)
-          if (componentName) {
-            detectedComponents.add(componentName)
-          }
-        }
+        scan(file, await readFile(join(dir, file), 'utf-8'))
       } catch {
         // Ignore files that can't be read
       }
     }
   }
 
-  if (detectedComponents.size === 0) {
+  for (const file of files) {
+    try {
+      scan(file, await readFile(file, 'utf-8'))
+    } catch {
+      // Ignore files that can't be read
+    }
+  }
+
+  // Nothing found in the app keeps every theme, prose or not
+  if (detectedComponents.size === 0 && themeImports.size === 0) {
     return undefined
   }
 
   // Build dependency graph of components
   const dependencyGraph = await buildComponentDependencyGraph(componentDir)
+
+  const byThemeFile = new Map([...dependencyGraph.keys()].map(name => [name.startsWith('Prose') ? `prose/${kebabCase(name.slice('Prose'.length))}` : kebabCase(name), name]))
+  for (const file of themeImports) {
+    const component = byThemeFile.get(file)
+    if (component) {
+      detectedComponents.add(component)
+    }
+  }
+
+  if (prose) {
+    for (const component of dependencyGraph.keys()) {
+      if (component.startsWith('Prose')) {
+        detectedComponents.add(component)
+      }
+    }
+  }
 
   // The pattern also matches ordinary identifiers (`URL` -> `RL`, `UUID` ->
   // `UID`), and `includeComponents` names arrive unvalidated: filter against
@@ -235,6 +317,13 @@ export async function detectUsedComponents(
   const allComponents = new Set<string>()
   for (const component of validComponents) {
     resolveComponentDependencies(component, dependencyGraph, allComponents)
+  }
+
+  // The prose nodes only exist to reach what they render, their themes come as a whole
+  for (const component of allComponents) {
+    if (component.startsWith('Prose')) {
+      allComponents.delete(component)
+    }
   }
 
   return allComponents
