@@ -72,7 +72,7 @@ const slots = defineSlots<EmptySlots>()
 const props = useComponentProps('empty', _props, theme)
 
 const appConfig = useThemeConfig() as Empty['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.empty)
+const overrides = useComponentOverrides((ui: Empty['AppConfig']['ui']) => ui.empty)
 
 const iconName = computed(() => props.loading ? (props.loadingIcon || appConfig.ui.icons.loading) : props.icon)
 

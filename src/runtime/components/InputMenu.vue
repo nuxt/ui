@@ -282,7 +282,7 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
 const appConfig = useThemeConfig() as InputMenu['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.inputMenu)
+const overrides = useComponentOverrides((ui: InputMenu['AppConfig']['ui']) => ui.inputMenu)
 const { filterGroups } = useFilter()
 
 const isAutocomplete = computed(() => props.mode === 'autocomplete')

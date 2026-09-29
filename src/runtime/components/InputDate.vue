@@ -93,7 +93,7 @@ const slots = defineSlots<InputDateSlots>()
 const props = useComponentProps<InputDateProps<R>>('inputDate', _props, theme)
 
 const appConfig = useThemeConfig() as InputDate['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.inputDate)
+const overrides = useComponentOverrides((ui: InputDate['AppConfig']['ui']) => ui.inputDate)
 
 const rootProps = useForwardProps(reactiveOmit(props, 'id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'ui'), emits)
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formFieldSize, color: formFieldColor, id, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<InputDateProps<R>>(_props)

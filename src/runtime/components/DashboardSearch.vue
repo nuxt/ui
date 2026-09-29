@@ -107,7 +107,7 @@ const { t, locale } = useLocale()
 // eslint-disable-next-line vue/no-dupe-keys
 const colorMode = useColorMode()
 const appConfig = useThemeConfig() as DashboardSearch['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.dashboardSearch)
+const overrides = useComponentOverrides((ui: DashboardSearch['AppConfig']['ui']) => ui.dashboardSearch)
 
 const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'trailingIcon', 'selectedIcon', 'childrenIcon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon', 'back', 'backIcon', 'disabled', 'highlightOnHover', 'labelKey', 'descriptionKey', 'preserveGroupOrder', 'virtualize', 'searchDelay'))
 const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal', 'unmountOnHide'))

@@ -166,7 +166,7 @@ const slots = defineSlots<TreeSlots<T>>()
 const props = useComponentProps<TreeProps<T, M>>('tree', _props, theme)
 
 const appConfig = useThemeConfig() as Tree['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.tree)
+const overrides = useComponentOverrides((ui: Tree['AppConfig']['ui']) => ui.tree)
 
 const rootProps = useForwardProps(reactivePick(props, 'items', 'multiple', 'expanded', 'disabled', 'propagateSelect', 'bubbleSelect'), emits)
 

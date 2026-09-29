@@ -173,7 +173,7 @@ const modelValue = defineModel<(M extends true ? File[] : File) | null>()
 const props = useComponentProps<FileUploadProps<M>>('fileUpload', _props, theme)
 
 const appConfig = useThemeConfig() as FileUpload['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.fileUpload)
+const overrides = useComponentOverrides((ui: FileUpload['AppConfig']['ui']) => ui.fileUpload)
 
 const { t } = useLocale()
 
