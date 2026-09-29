@@ -236,6 +236,8 @@ describe('detectUsedComponents', { timeout: 20000 }, () => {
       'import Button from \'@nuxt/ui/components/Button.vue\'',
       'import Calendar from \'@nuxt/ui/runtime/components/Calendar.vue\'',
       'const Modal = defineAsyncComponent(() => import(\'#ui/components/Modal.vue\'))',
+      'import ColorModeSwitch from \'@nuxt/ui/components/color-mode/ColorModeSwitch.vue\'',
+      'import LocaleSelect from \'#ui/components/locale/LocaleSelect.vue\'',
       '</script>'
     ].join('\n'))
 
@@ -243,6 +245,11 @@ describe('detectUsedComponents', { timeout: 20000 }, () => {
     expect(detected).toContain('Button')
     expect(detected).toContain('Calendar')
     expect(detected).toContain('Modal')
+    // from a subdirectory, with what they render
+    expect(detected).toContain('ColorModeSwitch')
+    expect(detected).toContain('Switch')
+    expect(detected).toContain('LocaleSelect')
+    expect(detected).toContain('SelectMenu')
   })
 
   it('detects kebab-case names given as a string', async () => {
