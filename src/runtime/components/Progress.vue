@@ -3,7 +3,7 @@
 import type { ProgressRootProps, ProgressRootEmits } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/progress'
+import theme from '../theme/progress'
 import type { ComponentConfig } from '../types/tv'
 
 type Progress = ComponentConfig<typeof theme, AppConfig, 'progress'>

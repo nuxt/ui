@@ -3,7 +3,7 @@
 import type { ComponentPublicInstance, VNode } from 'vue'
 import type { TabsRootProps, TabsRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/tabs'
+import theme from '../theme/tabs'
 import type { AvatarProps } from './Avatar.vue'
 import type { BadgeProps } from './Badge.vue'
 import type { IconProps } from './Icon.vue'

@@ -2,7 +2,7 @@
 import type { SeparatorProps as _SeparatorProps } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/separator'
+import theme from '../theme/separator'
 import type { AvatarProps } from './Avatar.vue'
 import type { IconProps } from './Icon.vue'
 import type { ComponentConfig } from '../types/tv'
