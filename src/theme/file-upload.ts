@@ -1,9 +1,9 @@
-import type { ModuleOptions } from '../module'
+import { colorVariant } from './color'
 
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'relative flex flex-col',
-    base: 'w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-3 transition-[background] ease-out',
+    base: 'w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-3 transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent',
     wrapper: 'flex flex-col items-center justify-center text-center',
     icon: 'shrink-0',
     avatar: 'shrink-0',
@@ -19,10 +19,7 @@ export default (options: Required<ModuleOptions>) => ({
     fileTrailingButton: ''
   },
   variants: {
-    color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
-      neutral: ''
-    },
+    color: colorVariant({ root: '' }),
     variant: {
       area: {
         wrapper: 'px-4 py-3',
@@ -85,7 +82,7 @@ export default (options: Required<ModuleOptions>) => ({
       true: ''
     },
     highlight: {
-      true: ''
+      true: { base: 'border-accent' }
     },
     multiple: {
       true: ''
@@ -94,21 +91,7 @@ export default (options: Required<ModuleOptions>) => ({
       true: { base: 'cursor-not-allowed opacity-75' }
     }
   },
-  compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
-    color,
-    class: { base: `outline-${color}/25 focus-visible:outline-3 focus-visible:border-${color}` }
-  })), ...(options.theme.colors || []).map((color: string) => ({
-    color,
-    highlight: true,
-    class: { base: `border-${color}` }
-  })), {
-    color: 'neutral',
-    class: { base: 'outline-inverted/25 focus-visible:outline-3 focus-visible:border-inverted' }
-  }, {
-    color: 'neutral',
-    highlight: true,
-    class: { base: 'border-inverted' }
-  }, {
+  compoundVariants: [{
     size: 'xs',
     layout: 'list',
     class: {
@@ -191,4 +174,4 @@ export default (options: Required<ModuleOptions>) => ({
     variant: 'area',
     size: 'md'
   }
-})
+}
