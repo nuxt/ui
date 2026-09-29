@@ -122,6 +122,16 @@ describe('detectUsedComponents', { timeout: 20000 }, () => {
     expect(detected).toContain('Separator')
   })
 
+  it('reads Pug positions in Vue files only', async () => {
+    const dir = fixtureUsing('<UButton label="x" />')
+    writeFileSync(join(dir, 'notes.md'), `---\ncomponent: u-accordion\n---\n\n    u-card\n`)
+
+    const detected = await detectUsedComponents([dir], 'U', componentDir)
+
+    expect(detected).not.toContain('Accordion')
+    expect(detected).not.toContain('Card')
+  })
+
   it('detects kebab-case and PascalCase usage in the same file', async () => {
     const detected = await detectUsedComponents([fixtureUsing('<UCard><u-badge label="x" /></UCard>')], 'U', componentDir)
 
