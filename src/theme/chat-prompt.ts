@@ -1,8 +1,4 @@
 import { colorVariant } from './color'
-// Highlight the prompt like a focused input when the text surface (native textarea or editor's contenteditable) is focused, without reacting to header/footer controls.
-const focusHighlight = (utilities: string) => ['textarea', '[contenteditable]']
-  .flatMap(element => utilities.split(' ').map(utility => `has-[${element}:focus-visible]:${utility}`))
-  .join(' ')
 
 export default {
   slots: {
@@ -18,8 +14,9 @@ export default {
       outline: {
         root: 'bg-default/75 ring ring-default'
       },
+      // Highlight the prompt like a focused input when the text surface (native textarea or editor's contenteditable) is focused, without reacting to header/footer controls.
       soft: {
-        root: `bg-elevated/50 outline-accent-focus ${focusHighlight('outline-3')}`
+        root: 'bg-elevated/50 outline-accent-focus has-[textarea:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:outline-3'
       },
       subtle: {
         root: 'bg-elevated/50 ring ring-default'
@@ -31,7 +28,7 @@ export default {
   },
   compoundVariants: [{
     variant: ['outline', 'subtle'],
-    class: { root: `outline-accent-focus ${focusHighlight('outline-3 ring-accent')}` }
+    class: { root: 'outline-accent-focus has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-accent has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-accent' }
   }],
   defaultVariants: {
     color: 'primary',
