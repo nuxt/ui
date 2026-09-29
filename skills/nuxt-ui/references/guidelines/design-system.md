@@ -258,7 +258,7 @@ export default defineAppConfig({
 
 For part of the app only, use the `'*'` key of `<UTheme :props>`: `<UTheme :props="{ '*': { size: 'sm' } }">`.
 
-### `theme.prefix`
+### `tailwindPrefix`
 
 When using Tailwind CSS with a prefix, configure the same prefix in Nuxt UI so component classes match:
 
@@ -266,9 +266,7 @@ When using Tailwind CSS with a prefix, configure the same prefix in Nuxt UI so c
 // nuxt.config.ts
 export default defineNuxtConfig({
   ui: {
-    theme: {
-      prefix: 'tw'
-    }
+    tailwindPrefix: 'tw'
   }
 })
 ```

@@ -1,8 +1,8 @@
 /* The accent roles of the color scopes, keyed on the scope class the `color`
    variant puts on a component, `[--ui-accent:var(--ui-primary)]`, as a class
    selector: the browser matches it through the class hash, where an attribute
-   selector would be tested against every element. With
-   `theme.prefix`, `#build/ui.base.css` repeats these rules for the prefixed class. */
+   selector would be tested against every element. With `tailwindPrefix`,
+   `#build/ui.base.css` repeats these rules for the prefixed class. */
 @layer base {
   /* Any `--ui-accent` scope resets the accent roles, so a colored component nested
      in another doesn't inherit them and every role falls back to its recipe. At zero
