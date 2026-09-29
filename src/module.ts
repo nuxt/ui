@@ -39,14 +39,6 @@ export interface ModuleOptions {
    */
   theme?: {
     /**
-     * Remove all default theme classes from components, keeping only their
-     * structure and the classes you supply via `class`, `ui` or `app.config.ui`.
-     * @defaultValue `false`
-     * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#themeunstyled
-     */
-    unstyled?: boolean
-
-    /**
      * Prefix for Tailwind CSS utility classes
      * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#themeprefix
      * @example 'tw'

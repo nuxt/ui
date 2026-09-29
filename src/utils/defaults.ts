@@ -27,7 +27,6 @@ export const defaultOptions = {
   fonts: true,
   colorMode: true,
   theme: {
-    unstyled: false,
     prefix: undefined
   },
   prose: false,

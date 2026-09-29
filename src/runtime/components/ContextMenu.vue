@@ -118,7 +118,7 @@ import { ContextMenuRoot, ContextMenuTrigger } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UContextMenuContent from './ContextMenuContent.vue'
@@ -136,13 +136,14 @@ const slots = defineSlots<ContextMenuSlots<T>>()
 const props = useComponentProps<ContextMenuProps<T>>('contextMenu', _props, theme)
 
 const appConfig = useAppConfig() as ContextMenu['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.contextMenu)
 
 const rootProps = useForwardProps(reactivePick(props, 'modal'), emits)
 const contentProps = toRef(() => props.content)
 const getProxySlots = () => omit(slots, ['default'])
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.contextMenu)({
+const ui = computed(() => tv(theme, overrides.value)({
   size: props.size
 }))
 </script>

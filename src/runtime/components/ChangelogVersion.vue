@@ -63,7 +63,7 @@ import { Primitive, useDateFormatter } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { usePrefix } from '../composables/usePrefix'
 import ImageComponent from '#build/ui-image-component'
 import { getSlotChildrenText } from '../utils'
@@ -84,6 +84,7 @@ const props = useComponentProps('changelogVersion', _props, theme)
 
 const { locale } = useLocale()
 const appConfig = useAppConfig() as ChangelogVersion['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.changelogVersion)
 const formatter = useDateFormatter(locale.value.code)
 const prefix = usePrefix()
 
@@ -98,7 +99,7 @@ const [DefineDateTemplate, ReuseDateTemplate] = createReusableTemplate<{ hidden?
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.changelogVersion)({
+const ui = computed(() => tv(theme, overrides.value)({
   to: !!props.to || !!props.onClick
 }))
 

@@ -236,7 +236,7 @@ import { defu } from 'defu'
 import { reactivePick, createReusableTemplate, refDebounced, refThrottled } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { omit, get } from '../utils'
 import { highlight } from '../utils/search'
@@ -274,6 +274,7 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as CommandPalette['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.commandPalette)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover', 'by'), emits)
 const virtualizerProps = toRef(() => {
@@ -302,7 +303,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: C
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.commandPalette)({
+const ui = computed(() => tv(theme, overrides.value)({
   size: props.size,
   virtualize: !!props.virtualize
 }))

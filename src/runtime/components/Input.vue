@@ -70,7 +70,7 @@ import { useTemplateRef, computed, onMounted, onScopeDispose } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useVModel } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
@@ -95,6 +95,7 @@ const props = useComponentProps<InputProps<T, Mod>>('input', _props, theme)
 const modelValue = useVModel<InputProps<T, Mod>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, { defaultValue: props.defaultValue })
 
 const appConfig = useAppConfig() as Input['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.input)
 
 const { emitFormBlur, emitFormInput, emitFormChange, size: formFieldSize, color: formFieldColor, id, name, highlight: formFieldHighlight, disabled: formFieldDisabled, emitFormFocus, ariaAttrs } = useFormField<InputProps<T>>(_props, { deferInputValidation: true })
 
@@ -111,7 +112,7 @@ const size = computed(() => fieldGroupSize.value ?? formFieldSize.value ?? props
 const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.input)({
+const ui = computed(() => tv(theme, overrides.value)({
   type: props.type as Input['variants']['type'],
   color: color.value,
   variant: props.variant,
