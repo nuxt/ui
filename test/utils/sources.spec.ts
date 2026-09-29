@@ -147,4 +147,20 @@ describe('colors plugin', () => {
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: indigo 550; }')).rejects.toThrow('`primary: indigo 550` takes a palette and up to two shades')
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: indigo 050; }')).rejects.toThrow('`primary: indigo 050` takes a palette and up to two shades')
   })
+
+  it('gives an alias on a gray palette neutral\'s surface roles', async () => {
+    const gray = await build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: neutral 900 50; }')
+    expect(gray).toContain(':root, :host, .light, .dark {')
+    expect(gray).toContain('--ui-primary-soft: var(--ui-bg-elevated);')
+    // neutral's hover mixes the color itself, so primary's mixes primary
+    expect(gray).toContain('--ui-primary-hover: color-mix(in oklab, var(--ui-primary) 90%, transparent);')
+    // a role neutral leaves to its recipe stays on it
+    expect(gray).not.toContain('--ui-primary-focus:')
+
+    const samePalette = await build({}, undefined, '@plugin "@nuxt/ui/colors" { secondary: brand; neutral: brand; }', '@theme { --color-brand-50: #fafafa; --color-brand-100: #f5f5f5; --color-brand-200: #e5e5e5; --color-brand-300: #d4d4d4; --color-brand-400: #a3a3a3; --color-brand-500: #737373; --color-brand-600: #525252; --color-brand-700: #404040; --color-brand-800: #262626; --color-brand-900: #171717; --color-brand-950: #0a0a0a; }')
+    expect(samePalette).toContain('--ui-secondary-soft:')
+
+    const colored = await build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: indigo; }')
+    expect(colored).not.toContain('--ui-primary-soft:')
+  })
 })
