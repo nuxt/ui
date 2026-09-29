@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { getClientBundleIcons, parseIconName } from '../../src/utils/icons'
-import defaultIcons from '../../src/theme/icons'
+import defaultIcons from '../../src/runtime/theme/icons'
 
 describe('parseIconName', () => {
   it('parses the colon form for any collection', () => {

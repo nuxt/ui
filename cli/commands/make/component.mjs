@@ -69,7 +69,7 @@ export default defineCommand({
       return
     }
 
-    const themePath = resolve(path, `src/theme/${args.prose ? 'prose/' : ''}${args.content ? 'content/' : ''}index.ts`)
+    const themePath = resolve(path, `src/runtime/theme/${args.prose ? 'prose/' : ''}${args.content ? 'content/' : ''}index.ts`)
     await appendFile(themePath, `export { default as ${camelCase(name)} } from './${kebabCase(name)}'`)
     await sortFile(themePath)
 
