@@ -8,9 +8,10 @@ export interface ColorModeSwitchProps extends Omit<SwitchProps, 'checkedIcon' | 
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useForwardProps } from 'reka-ui'
-import { useColorMode, useAppConfig } from '#imports'
+import { useColorMode } from '#imports'
 import { useLocale } from '../../composables/useLocale'
 import USwitch from '../Switch.vue'
+import { useThemeConfig } from '../../composables/useComponentProps'
 
 defineOptions({ inheritAttrs: false })
 
@@ -18,7 +19,7 @@ const props = defineProps<ColorModeSwitchProps>()
 
 const { t } = useLocale()
 const colorMode = useColorMode()
-const appConfig = useAppConfig()
+const appConfig = useThemeConfig()
 
 const switchProps = useForwardProps(props)
 

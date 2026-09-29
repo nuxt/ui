@@ -54,8 +54,7 @@ export interface DashboardNavbarSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useDashboard } from '../utils/dashboard'
 import { tv } from '../utils/tv'
 import UDashboardSidebarToggle from './DashboardSidebarToggle.vue'
@@ -71,7 +70,7 @@ const slots = defineSlots<DashboardNavbarSlots>()
 
 const props = useComponentProps('dashboardNavbar', _props, theme)
 
-const appConfig = useAppConfig() as DashboardNavbar['AppConfig']
+const appConfig = useThemeConfig() as DashboardNavbar['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.dashboardNavbar)
 const dashboardContext = useDashboard({})
 

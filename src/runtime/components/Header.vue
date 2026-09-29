@@ -68,8 +68,8 @@ import { computed, watch, toRef } from 'vue'
 import { Primitive } from 'reka-ui'
 import { defu } from 'defu'
 import { createReusableTemplate } from '@vueuse/core'
-import { useAppConfig, useRoute } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useRoute } from '#imports'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { getSlotChildrenText } from '../utils'
 import { tv } from '../utils/tv'
@@ -99,7 +99,7 @@ const open = defineModel<boolean>('open', { default: false })
 
 const route = useRoute()
 const { t } = useLocale()
-const appConfig = useAppConfig() as Header['AppConfig']
+const appConfig = useThemeConfig() as Header['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.header)
 
 const [DefineLeftTemplate, ReuseLeftTemplate] = createReusableTemplate()

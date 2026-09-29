@@ -115,8 +115,7 @@ export interface PricingPlanSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 import UBadge from './Badge.vue'
 import UButton from './Button.vue'
@@ -131,7 +130,7 @@ const slots = defineSlots<PricingPlanSlots>()
 
 const props = useComponentProps('pricingPlan', _props, theme)
 
-const appConfig = useAppConfig() as PricingPlan['AppConfig']
+const appConfig = useThemeConfig() as PricingPlan['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.pricingPlan)
 
 const [DefinePriceTemplate, ReusePriceTemplate] = createReusableTemplate()

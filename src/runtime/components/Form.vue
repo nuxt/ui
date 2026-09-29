@@ -78,10 +78,9 @@ export interface FormSlots {
 <script lang="ts" setup generic="S extends FormSchema, T extends boolean = true, N extends boolean = false">
 import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly, reactive, useTemplateRef, unref } from 'vue'
 import { useEventBus } from '@vueuse/core'
-import { useAppConfig } from '#imports'
 import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey, formErrorsInjectionKey, formStateInjectionKey } from '../composables/useFormField'
 import { tv } from '../utils/tv'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { validateSchema, getAtPath, setAtPath } from '../utils/form'
 import { FormValidationException } from '../types/form'
 
@@ -102,7 +101,7 @@ defineSlots<FormSlots>()
 
 const props = useComponentProps<FormProps<S, T, N>>('form', _props, theme)
 
-const appConfig = useAppConfig() as FormConfig['AppConfig']
+const appConfig = useThemeConfig() as FormConfig['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.form)
 
 // eslint-disable-next-line vue/no-dupe-keys
