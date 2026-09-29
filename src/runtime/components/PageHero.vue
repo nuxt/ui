@@ -52,7 +52,7 @@ export interface PageHeroSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { usePrefix } from '../composables/usePrefix'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
@@ -65,8 +65,7 @@ const slots = defineSlots<PageHeroSlots>()
 
 const props = useComponentProps('pageHero', _props, theme)
 
-const appConfig = useThemeConfig() as PageHero['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.pageHero)
+const overrides = useComponentOverrides((ui: PageHero['AppConfig']['ui']) => ui.pageHero)
 const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys

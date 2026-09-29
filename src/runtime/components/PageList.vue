@@ -26,7 +26,7 @@ export interface PageListSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { tv } from '../utils/tv'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 
 const _props = withDefaults(defineProps<PageListProps>(), {
   divide: false
@@ -35,8 +35,7 @@ defineSlots<PageListSlots>()
 
 const props = useComponentProps('pageList', _props, theme)
 
-const appConfig = useThemeConfig() as PageList['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.pageList)
+const overrides = useComponentOverrides((ui: PageList['AppConfig']['ui']) => ui.pageList)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({ divide: props.divide }))

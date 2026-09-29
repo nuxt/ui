@@ -38,7 +38,7 @@ export interface KbdSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig, useHead } from '#imports'
+import { useHead } from '#imports'
 import { useKbd, kbdKeysPlatformMap } from '../composables/useKbd'
 import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { usePrefix } from '../composables/usePrefix'
@@ -52,8 +52,7 @@ defineSlots<KbdSlots>()
 const props = useComponentProps('kbd', _props, theme)
 
 const { getKbdKey } = useKbd()
-const appConfig = useThemeConfig() as Kbd['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.kbd)
+const overrides = useComponentOverrides((ui: Kbd['AppConfig']['ui']) => ui.kbd)
 const prefix = usePrefix()
 
 const platformKey = computed(() => props.value && Object.hasOwn(kbdKeysPlatformMap, props.value) ? kbdKeysPlatformMap[props.value as KbdKeySpecific] : undefined)

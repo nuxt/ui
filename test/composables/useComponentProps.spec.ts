@@ -1,9 +1,11 @@
+import type { ComputedRef } from 'vue'
 import { describe, expectTypeOf, it, expect, test, beforeAll, afterAll } from 'vitest'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { useAppConfig } from '#imports'
 import { UFormField, UFieldGroup, UAvatarGroup, UTheme, UButton, UAvatar, UInput } from '#components'
 import type * as ui from '#build/ui'
 import type { ThemeDefaults } from '../../src/runtime/types/theme'
+import { useComponentOverrides } from '../../src/runtime/composables/useComponentProps'
 
 /**
  * Hand-maintained list of `#build/ui` exports that intentionally don't
@@ -27,6 +29,13 @@ type Expected = Exclude<keyof typeof ui, NonProxyComponents>
 // directly, e.g. `Type 'never' is not assignable to type '"button"'`.
 type MissingFromThemeDefaults = Exclude<Expected, keyof ThemeDefaults>
 type ExtraInThemeDefaults = Exclude<keyof ThemeDefaults, Expected | '*'>
+
+describe('useComponentOverrides', () => {
+  it('types the documented recipe without an annotation', () => {
+    const recipe = () => useComponentOverrides(ui => ui.myComponent)
+    expectTypeOf(recipe).returns.toMatchTypeOf<ComputedRef<unknown>>()
+  })
+})
 
 describe('ThemeDefaults registry', () => {
   test('every themable `#build/ui` component has a ThemeDefaults entry', () => {

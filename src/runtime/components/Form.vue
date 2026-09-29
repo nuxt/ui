@@ -80,7 +80,7 @@ import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId
 import { useEventBus } from '@vueuse/core'
 import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey, formErrorsInjectionKey, formStateInjectionKey } from '../composables/useFormField'
 import { tv } from '../utils/tv'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { validateSchema, getAtPath, setAtPath } from '../utils/form'
 import { FormValidationException } from '../types/form'
 
@@ -101,8 +101,7 @@ defineSlots<FormSlots>()
 
 const props = useComponentProps<FormProps<S, T, N>>('form', _props, theme)
 
-const appConfig = useThemeConfig() as FormConfig['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.form)
+const overrides = useComponentOverrides((ui: FormConfig['AppConfig']['ui']) => ui.form)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)())

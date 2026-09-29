@@ -50,7 +50,7 @@ export interface ErrorSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { clearError } from '#imports'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
@@ -66,8 +66,7 @@ const slots = defineSlots<ErrorSlots>()
 const props = useComponentProps('error', _props, theme)
 
 const { t } = useLocale()
-const appConfig = useThemeConfig() as Error['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.error)
+const overrides = useComponentOverrides((ui: Error['AppConfig']['ui']) => ui.error)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)())

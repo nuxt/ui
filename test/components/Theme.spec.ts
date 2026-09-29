@@ -11,6 +11,7 @@ import Alert from '../../src/runtime/components/Alert.vue'
 import Input from '../../src/runtime/components/Input.vue'
 import Checkbox from '../../src/runtime/components/Checkbox.vue'
 import CheckboxGroup from '../../src/runtime/components/CheckboxGroup.vue'
+import Progress from '../../src/runtime/components/Progress.vue'
 import FileUpload from '../../src/runtime/components/FileUpload.vue'
 import Tooltip from '../../src/runtime/components/Tooltip.vue'
 import Form from '../../src/runtime/components/Form.vue'
@@ -121,43 +122,47 @@ describe('Theme', () => {
     expect(wrapper.find('button').classes()).toContain('test-theme-class')
   })
 
-  test('child ui prop takes priority over theme', async () => {
+  test('child ui prop merges over the theme and wins', async () => {
     const wrapper = await mountSuspended({
       components: { Theme, Button },
       template: `
-        <Theme :ui="{ button: { base: 'theme-class' } }">
-          <Button label="Themed" :ui="{ base: 'ui-prop-class' }" />
+        <Theme :ui="{ button: { base: 'rounded-full shadow-lg' } }">
+          <Button label="Themed" :ui="{ base: 'rounded-none' }" />
         </Theme>
       `
     })
 
-    expect(wrapper.find('button').classes()).toContain('ui-prop-class')
-    expect(wrapper.find('button').classes()).not.toContain('theme-class')
+    const classes = wrapper.find('button').classes()
+    expect(classes).toContain('rounded-none')
+    expect(classes).toContain('shadow-lg')
+    expect(classes).not.toContain('rounded-full')
   })
 
-  test('nested theme overrides outer theme', async () => {
+  test('nested theme merges over the outer theme and wins', async () => {
     const wrapper = await mountSuspended({
       components: { Theme, Button },
       template: `
-        <Theme :ui="{ button: { base: 'outer-theme-class' } }">
-          <Theme :ui="{ button: { base: 'inner-theme-class' } }">
+        <Theme :ui="{ button: { base: 'rounded-full shadow-lg' } }">
+          <Theme :ui="{ button: { base: 'rounded-xl' } }">
             <Button label="Themed" />
           </Theme>
         </Theme>
       `
     })
 
-    expect(wrapper.find('button').classes()).toContain('inner-theme-class')
-    expect(wrapper.find('button').classes()).not.toContain('outer-theme-class')
+    const classes = wrapper.find('button').classes()
+    expect(classes).toContain('rounded-xl')
+    expect(classes).toContain('shadow-lg')
+    expect(classes).not.toContain('rounded-full')
   })
 
   test('deeply nested themes (3 levels)', async () => {
     const wrapper = await mountSuspended({
       components: { Theme, Button },
       template: `
-        <Theme :ui="{ button: { base: 'level-1-class' } }">
-          <Theme :ui="{ button: { base: 'level-2-class' } }">
-            <Theme :ui="{ button: { base: 'level-3-class' } }">
+        <Theme :ui="{ button: { base: 'rounded-full shadow-lg' } }">
+          <Theme :ui="{ button: { base: 'rounded-xl ring-2' } }">
+            <Theme :ui="{ button: { base: 'rounded-none' } }">
               <Button label="Themed" />
             </Theme>
           </Theme>
@@ -165,9 +170,59 @@ describe('Theme', () => {
       `
     })
 
-    expect(wrapper.find('button').classes()).toContain('level-3-class')
-    expect(wrapper.find('button').classes()).not.toContain('level-2-class')
-    expect(wrapper.find('button').classes()).not.toContain('level-1-class')
+    const classes = wrapper.find('button').classes()
+    expect(classes).toContain('rounded-none')
+    expect(classes).toContain('shadow-lg')
+    expect(classes).toContain('ring-2')
+    expect(classes).not.toContain('rounded-xl')
+    expect(classes).not.toContain('rounded-full')
+  })
+
+  test(':ui wins over the theme compounds', async () => {
+    const wrapper = await mountSuspended({
+      components: { Theme, Button },
+      template: `
+        <Theme :ui="{ button: { base: 'p-3' } }">
+          <Button icon="i-lucide-plus" square />
+        </Theme>
+      `
+    })
+
+    const classes = wrapper.find('button').classes()
+    expect(classes).toContain('p-3')
+    expect(classes).not.toContain('p-1.5')
+  })
+
+  test('a nested :variants wins over an outer :ui', async () => {
+    const wrapper = await mountSuspended({
+      components: { Theme, Button },
+      template: `
+        <Theme :ui="{ button: { base: 'rounded-full' } }">
+          <Theme :variants="{ button: { variant: { soft: { base: 'rounded-xl' } } } }">
+            <Button label="Soft" variant="soft" />
+          </Theme>
+        </Theme>
+      `
+    })
+
+    const classes = wrapper.find('button').classes()
+    expect(classes).toContain('rounded-xl')
+    expect(classes).not.toContain('rounded-full')
+  })
+
+  test('the ui in :props works like :ui', async () => {
+    const wrapper = await mountSuspended({
+      components: { Theme, Button },
+      template: `
+        <Theme :props="{ button: { ui: { base: 'rounded-full shadow-lg' } } }">
+          <Button label="Themed" :ui="{ base: 'rounded-none' }" />
+        </Theme>
+      `
+    })
+
+    const classes = wrapper.find('button').classes()
+    expect(classes).toContain('rounded-none')
+    expect(classes).toContain('shadow-lg')
   })
 
   test('applies theme to multiple children of same type', async () => {
@@ -590,6 +645,39 @@ describe('Theme', () => {
     expect(wrapper.html()).not.toContain('[--ui-accent:var(--ui-primary)]')
   })
 
+  // Progress styles an unknown color inline, so it has to know the ones a Theme adds
+  test(':variants color on a progress is a known color', async () => {
+    const wrapper = await mountSuspended({
+      components: { Theme, Progress },
+      template: `
+        <Theme :variants="{ progress: { color: { teal: { indicator: 'bg-[#0f0]' } } } }">
+          <Progress color="teal" :model-value="50" />
+        </Theme>
+      `
+    })
+
+    const indicator = wrapper.find('[data-slot="progress-indicator"]')
+    expect(indicator.classes()).toContain('bg-[#0f0]')
+    expect(indicator.attributes('style') ?? '').not.toContain('background-color')
+  })
+
+  // The group forwards the Checkbox slots of its `ui` to every item, the ones a
+  // Theme sets included, which only the group's resolved classes carry
+  test(':props ui on a checkbox group reaches its items', async () => {
+    const wrapper = await mountSuspended({
+      components: { Theme, CheckboxGroup },
+      template: `
+        <Theme :props="{ checkboxGroup: { ui: { base: 'rounded-full' } } }">
+          <CheckboxGroup :items="[{ label: 'A', value: 'a' }]" :ui="{ base: 'shadow-lg' }" />
+        </Theme>
+      `
+    })
+
+    const base = wrapper.find('[data-slot="checkbox-base"]').classes()
+    expect(base).toContain('rounded-full')
+    expect(base).toContain('shadow-lg')
+  })
+
   // The group resolves `color` once and hands it to every child, so a FormField
   // validation error has to beat `<UTheme :props>` on the items too, not just on
   // the group root.
@@ -737,7 +825,7 @@ describe('Theme', () => {
     expect(outline!.classes()).toContain('rounded-none')
   })
 
-  test('nested :variants replace an inherited array of classes', async () => {
+  test('nested :variants merge over an inherited array of classes and win', async () => {
     const wrapper = await mountSuspended({
       components: { Theme, Button },
       template: `
@@ -751,8 +839,8 @@ describe('Theme', () => {
 
     const classes = wrapper.find('button').classes()
     expect(classes).toContain('rounded-xl')
+    expect(classes).toContain('shadow-lg')
     expect(classes).not.toContain('rounded-full')
-    expect(classes).not.toContain('shadow-lg')
   })
 
   test(':variants does not leak outside scope', async () => {

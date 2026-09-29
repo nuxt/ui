@@ -131,7 +131,7 @@ const slots = defineSlots<PricingPlanSlots>()
 const props = useComponentProps('pricingPlan', _props, theme)
 
 const appConfig = useThemeConfig() as PricingPlan['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.pricingPlan)
+const overrides = useComponentOverrides((ui: PricingPlan['AppConfig']['ui']) => ui.pricingPlan)
 
 const [DefinePriceTemplate, ReusePriceTemplate] = createReusableTemplate()
 
