@@ -204,6 +204,10 @@ name: 'theme-deep-example'
 In this example, `MyButton` is a custom component that renders a `UButton` internally. The theme overrides still apply because they propagate through the entire component tree.
 ::
 
+::warning
+Overlays and toasts opened with [`useOverlay`](/docs/composables/use-overlay) and [`useToast`](/docs/composables/use-toast) render inside `App`, not where you call them, so they take the `Theme` around `<UApp>` and not the one around your call. Wrap the overlay's content in a `UTheme` to theme it. A `UModal` or `USlideover` written in your template keeps the `Theme` around it.
+::
+
 ### Form components
 
 Use the Theme component to apply consistent styling across a group of form components.
