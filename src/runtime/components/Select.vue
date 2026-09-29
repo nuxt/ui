@@ -2,7 +2,7 @@
 import type { SelectRootProps, SelectRootEmits, SelectContentProps, SelectContentEmits, SelectArrowProps } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/select'
+import theme from '../theme/select'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps } from './Avatar.vue'
 import type { ChipProps } from './Chip.vue'

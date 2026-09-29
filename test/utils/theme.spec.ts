@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import { applyUnstyled, getThemeClasses } from '../../src/utils/theme'
+import { getThemeClasses } from '../../src/utils/theme'
+import { applyUnstyled } from '../../src/runtime/utils/unstyled'
 import { applyPrefix, prefixClasses } from '../../src/runtime/utils/prefix'
 
 describe('applyUnstyled', () => {

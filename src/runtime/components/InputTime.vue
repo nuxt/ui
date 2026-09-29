@@ -2,7 +2,7 @@
 import type { ComponentPublicInstance, VNode } from 'vue'
 import type { TimeFieldRootEmits, TimeFieldRootProps, TimeRangeFieldRootEmits, TimeRangeFieldRootProps, TimeValue, SegmentPart } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/input-time'
+import theme from '../theme/input-time'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { IconProps } from './Icon.vue'
 import type { ComponentConfig } from '../types/tv'

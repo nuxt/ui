@@ -3,7 +3,7 @@ import type { CollapsibleRootProps, CollapsibleRootEmits } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { TocLink } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/content/content-toc'
+import theme from '../../theme/content/content-toc'
 import type { IconProps } from '../Icon.vue'
 import type { ComponentConfig } from '../../types/tv'
 
