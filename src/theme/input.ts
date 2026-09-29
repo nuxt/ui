@@ -8,7 +8,6 @@ export default {
     leading: 'absolute inset-y-0 start-0 flex items-center',
     leadingIcon: 'shrink-0 text-dimmed',
     leadingAvatar: 'shrink-0',
-    leadingAvatarSize: '',
     trailing: 'absolute inset-y-0 end-0 flex items-center',
     trailingIcon: 'shrink-0 text-dimmed'
   },
@@ -20,7 +19,6 @@ export default {
         leading: 'ps-2',
         trailing: 'pe-2',
         leadingIcon: 'size-4',
-        leadingAvatarSize: '3xs',
         trailingIcon: 'size-4'
       },
       sm: {
@@ -28,7 +26,6 @@ export default {
         leading: 'ps-2.5',
         trailing: 'pe-2.5',
         leadingIcon: 'size-4',
-        leadingAvatarSize: '3xs',
         trailingIcon: 'size-4'
       },
       md: {
@@ -36,7 +33,6 @@ export default {
         leading: 'ps-2.5',
         trailing: 'pe-2.5',
         leadingIcon: 'size-5',
-        leadingAvatarSize: '2xs',
         trailingIcon: 'size-5'
       },
       lg: {
@@ -44,7 +40,6 @@ export default {
         leading: 'ps-3',
         trailing: 'pe-3',
         leadingIcon: 'size-5',
-        leadingAvatarSize: '2xs',
         trailingIcon: 'size-5'
       },
       xl: {
@@ -52,7 +47,6 @@ export default {
         leading: 'ps-3',
         trailing: 'pe-3',
         leadingIcon: 'size-6',
-        leadingAvatarSize: 'xs',
         trailingIcon: 'size-6'
       }
     },

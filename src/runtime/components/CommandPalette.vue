@@ -42,7 +42,7 @@ export interface CommandPaletteItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
   children?: CommandPaletteItem[]
   onSelect?: (e: Event) => void
   class?: any
-  ui?: Partial<Pick<CommandPalette['slots'], 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemLabelPrefix' | 'itemLabelBase' | 'itemLabelSuffix' | 'itemTrailing' | 'itemTrailingKbds' | 'itemTrailingKbdsSize' | 'itemTrailingHighlightedIcon' | 'itemTrailingIcon'>>
+  ui?: Partial<Pick<CommandPalette['slots'], 'item' | 'itemLeadingIcon' | 'itemLeadingAvatar' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemLabelPrefix' | 'itemLabelBase' | 'itemLabelSuffix' | 'itemTrailing' | 'itemTrailingKbds' | 'itemTrailingHighlightedIcon' | 'itemTrailingIcon'>>
   [key: string]: any
 }
 
@@ -243,6 +243,7 @@ import { highlight } from '../utils/search'
 import { pickLinkProps } from '../utils/link'
 import { getEstimateSize } from '../utils/virtualizer'
 import { tv } from '../utils/tv'
+import { getAvatarSize, getItemSize } from '../utils/size'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UButton from './Button.vue'
@@ -301,6 +302,9 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: C
     }
   }
 })
+
+const avatarSize = computed(() => getAvatarSize(props.size))
+const itemSize = computed(() => getItemSize(props.size))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
@@ -531,10 +535,10 @@ function onSelect(e: Event, item: T) {
             <slot :name="((item.slot ? `${item.slot}-leading` : group?.slot ? `${group.slot}-leading` : `item-leading`) as keyof CommandPaletteSlots<T>)" :item="(item as any)" :index="index" :ui="ui">
               <UIcon v-if="item.loading" :name="props.loadingIcon || appConfig.ui.icons.loading" data-slot="command-palette-itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon], loading: true })" />
               <UIcon v-else-if="item.icon" :name="item.icon" data-slot="command-palette-itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon], active: active || item.active })" />
-              <UAvatar v-else-if="item.avatar" :size="((item.ui?.itemLeadingAvatarSize || props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="command-palette-itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [props.ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar], active: active || item.active })" />
+              <UAvatar v-else-if="item.avatar" :size="avatarSize" v-bind="item.avatar" data-slot="command-palette-itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [props.ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar], active: active || item.active })" />
               <UChip
                 v-else-if="item.chip"
-                :size="((item.ui?.itemLeadingChipSize || props.ui?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
+                :size="itemSize"
                 inset
                 standalone
                 v-bind="item.chip"
@@ -574,7 +578,7 @@ function onSelect(e: Event, item: T) {
                 />
 
                 <span v-else-if="item.kbds?.length" data-slot="command-palette-itemTrailingKbds" :class="ui.itemTrailingKbds({ class: [props.ui?.itemTrailingKbds, item.ui?.itemTrailingKbds] })">
-                  <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="((item.ui?.itemTrailingKbdsSize || props.ui?.itemTrailingKbdsSize || ui.itemTrailingKbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
+                  <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="itemSize" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
                 </span>
 
                 <UIcon v-else-if="group?.highlightedIcon" :name="group.highlightedIcon" data-slot="command-palette-itemTrailingHighlightedIcon" :class="ui.itemTrailingHighlightedIcon({ class: [props.ui?.itemTrailingHighlightedIcon, item.ui?.itemTrailingHighlightedIcon] })" />
