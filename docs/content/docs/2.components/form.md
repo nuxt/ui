@@ -162,7 +162,11 @@ You can listen to the `@error` event to handle errors. This event is triggered w
 - `name` - the `name` of the `FormField`
 - `message` - the error message to display.
 
-Here's an example that focuses the first input element with an error after the form is submitted:
+::tip
+By default, the form automatically focuses the first field with an error when submission fails through the `focus-on-error` prop. You can disable this by passing `:focus-on-error="false"`.
+::
+
+Here's an example of using the `@error` event to add custom behavior, such as displaying a toast notification when validation fails:
 
 ::component-example
 ---
