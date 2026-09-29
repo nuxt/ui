@@ -143,10 +143,10 @@ function normalizeFont(raw: unknown): FontPrefs | undefined {
  * under the new names. `--ui-text-toned` merged into `--ui-text-default`, and
  * only fills it when the theme doesn't set it another way.
  */
-const MERGED_TOKENS: Record<string, string> = {
+export const MERGED_TOKENS: Record<string, string> = {
   '--ui-text-toned': '--ui-text-default'
 }
-const RENAMED_TOKENS: Record<string, string> = {
+export const RENAMED_TOKENS: Record<string, string> = {
   '--ui-bg': '--ui-bg-surface',
   '--ui-bg-elevated': '--ui-bg-soft',
   '--ui-bg-accented': '--ui-bg-soft-hover',
