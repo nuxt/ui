@@ -1,6 +1,6 @@
-import type { ModuleOptions } from '../module'
+import { colorVariant } from './color'
 
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'gap-2',
     base: 'flex overflow-hidden rounded-full bg-accented',
@@ -15,18 +15,7 @@ export default (options: Required<ModuleOptions>) => ({
     itemTrailing: 'ms-auto shrink-0 text-dimmed'
   },
   variants: {
-    color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        indicator: `bg-${color}`,
-        itemLeadingIcon: `text-${color}`,
-        itemLeadingDot: `bg-${color}`
-      }])),
-      neutral: {
-        indicator: 'bg-inverted',
-        itemLeadingIcon: 'text-highlighted',
-        itemLeadingDot: 'bg-inverted'
-      }
-    },
+    color: colorVariant({ indicator: 'bg-accent', itemLeadingIcon: 'text-accent', itemLeadingDot: 'bg-accent' }),
     size: {
       '2xs': {
         status: 'text-xs',
@@ -147,4 +136,4 @@ export default (options: Required<ModuleOptions>) => ({
     color: 'primary',
     size: 'md'
   }
-})
+}
