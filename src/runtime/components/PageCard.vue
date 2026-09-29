@@ -74,7 +74,7 @@ import { computed, ref, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useMouseInElement, pausableFilter } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { usePrefix } from '../composables/usePrefix'
 import { getSlotChildrenText } from '../utils'
 import { tv } from '../utils/tv'
@@ -94,6 +94,7 @@ const cardRef = ref<HTMLElement>()
 const motionControl = pausableFilter()
 
 const appConfig = useAppConfig() as PageCard['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.pageCard)
 const { elementX, elementY } = useMouseInElement(cardRef, {
   eventFilter: motionControl.eventFilter
 })
@@ -111,7 +112,7 @@ watch(() => props.spotlight, (value) => {
 }, { immediate: true })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.pageCard)({
+const ui = computed(() => tv(theme, overrides.value)({
   orientation: props.orientation,
   reverse: props.reverse,
   variant: props.variant,

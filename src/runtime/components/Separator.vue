@@ -60,7 +60,7 @@ import { computed } from 'vue'
 import { Separator } from 'reka-ui'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -77,6 +77,7 @@ const slots = defineSlots<SeparatorSlots>()
 const props = useComponentProps('separator', _props, theme)
 
 const appConfig = useAppConfig() as Separator['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.separator)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'decorative', 'orientation'))
 
@@ -85,7 +86,7 @@ const [DefineContainer, ReuseContainer] = createReusableTemplate()
 const hasContent = computed(() => !!(props.label || props.icon || props.avatar || slots.default))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.separator)({
+const ui = computed(() => tv(theme, overrides.value)({
   color: props.color,
   orientation: props.orientation,
   size: props.size,

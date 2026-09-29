@@ -68,7 +68,7 @@ export type BreadcrumbSlots<T extends BreadcrumbItem = BreadcrumbItem> = {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { get } from '../utils'
 import { tv } from '../utils/tv'
@@ -88,12 +88,13 @@ const props = useComponentProps<BreadcrumbProps<T>>('breadcrumb', _props, theme)
 
 const { dir } = useLocale()
 const appConfig = useAppConfig() as Breadcrumb['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.breadcrumb)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const separatorIcon = computed(() => props.separatorIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.breadcrumb)({
+const ui = computed(() => tv(theme, overrides.value)({
   color: props.color
 }))
 </script>
