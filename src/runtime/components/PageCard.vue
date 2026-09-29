@@ -88,7 +88,7 @@ const _props = withDefaults(defineProps<PageCardProps>(), {
 })
 const slots = defineSlots<PageCardSlots>()
 
-const props = useComponentProps('pageCard', _props)
+const props = useComponentProps('pageCard', _props, theme)
 
 const cardRef = ref<HTMLElement>()
 const motionControl = pausableFilter()

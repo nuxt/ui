@@ -109,7 +109,7 @@ const emits = defineEmits<InputNumberEmits<T, Mod>>()
 
 defineSlots<InputNumberSlots>()
 
-const props = useComponentProps<InputNumberProps<T, Mod>>('inputNumber', _props)
+const props = useComponentProps<InputNumberProps<T, Mod>>('inputNumber', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as InputNumber['AppConfig']

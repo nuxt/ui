@@ -45,8 +45,15 @@ function propIsDefined(vnode: VNode | null | undefined, prop: string): boolean {
 }
 
 /**
+ * The library-wide defaults a `'*'` entry replaces. A component whose own theme
+ * default is something else (a `neutral` Kbd, an `sm` component) keeps it.
+ */
+const GLOBAL_DEFAULTS: Record<string, string> = { color: 'primary', size: 'md' }
+
+/**
  * Resolve a component's props with the priority chain:
- *   explicit prop > nearest UTheme > app.config.ui.<name>.defaultVariants
+ *   explicit prop > nearest UTheme > nearest UTheme `'*'`
+ *     > app.config.ui.<name>.defaultVariants > app.config.ui.defaultVariants
  *     > withDefaults
  *
  * The returned proxy transparently reads from `props`, falling through to the
@@ -57,10 +64,21 @@ function propIsDefined(vnode: VNode | null | undefined, prop: string): boolean {
  * `ui` and `class` props are merged (explicit classes override theme classes)
  * instead of being replaced.
  */
-export function useComponentProps<T extends object>(name: string, props: T): T {
+export function useComponentProps<T extends object>(name: string, props: T, theme?: { defaultVariants?: Record<string, unknown>, [key: string]: unknown }): T {
   const vm = getCurrentInstance()
   const { defaults } = injectThemeContext()
   const appConfig = useAppConfig() as { ui?: Record<string, any> }
+
+  // A `'*'` value, only for a prop whose own default is the library-wide one:
+  // the component's `app.config.ui.<name>.defaultVariants`, or else its theme's
+  function globalDefault(entry: Record<string, any> | undefined, prop: string) {
+    const base = GLOBAL_DEFAULTS[prop]
+    const value = entry?.[prop]
+    if (!base || value === undefined) return undefined
+    const appConfigEntry = name.includes('.') ? get(appConfig.ui ?? {}, name) : appConfig.ui?.[name]
+    if (appConfigEntry?.defaultVariants?.[prop] !== undefined || theme?.defaultVariants?.[prop] !== base) return undefined
+    return value
+  }
 
   return new Proxy(props, {
     get(target, prop, receiver) {
@@ -100,6 +118,9 @@ export function useComponentProps<T extends object>(name: string, props: T): T {
       const themeValue = themeEntry?.[prop]
       if (themeValue !== undefined) return themeValue
 
+      const themeGlobalValue = globalDefault(defaults.value['*'], prop)
+      if (themeGlobalValue !== undefined) return themeGlobalValue
+
       // A global `app.config.ui.<name>.defaultVariants` value takes priority over
       // the component's `withDefaults` fallback. This keeps `defaultVariants`
       // working uniformly for every variant, including props a component pins in
@@ -108,6 +129,9 @@ export function useComponentProps<T extends object>(name: string, props: T): T {
       const appConfigEntry = name.includes('.') ? get(appConfig.ui ?? {}, name) : appConfig.ui?.[name]
       const appConfigValue = appConfigEntry?.defaultVariants?.[prop]
       if (appConfigValue !== undefined) return appConfigValue
+
+      const appConfigGlobalValue = globalDefault(appConfig.ui?.defaultVariants, prop)
+      if (appConfigGlobalValue !== undefined) return appConfigGlobalValue
 
       // Only fall back to `raw` when `withDefaults` set an explicit default for
       // this prop. Otherwise Vue's runtime would auto-cast unset Boolean props

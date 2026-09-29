@@ -126,7 +126,7 @@ const _props = withDefaults(defineProps<SidebarProps<T>>(), {
 })
 const slots = defineSlots<SidebarSlots>()
 
-const props = useComponentProps<SidebarProps<T>>('sidebar', _props)
+const props = useComponentProps<SidebarProps<T>>('sidebar', _props, theme)
 
 const [DefineInnerTemplate, ReuseInnerTemplate] = createReusableTemplate()
 const [DefineContentTemplate, ReuseContentTemplate] = createReusableTemplate()

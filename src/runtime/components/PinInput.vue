@@ -80,7 +80,7 @@ const _props = withDefaults(defineProps<PinInputProps<T>>(), {
 const emits = defineEmits<PinInputEmits<T>>()
 defineSlots<PinInputSlots>()
 
-const props = useComponentProps<PinInputProps<T>>('pinInput', _props)
+const props = useComponentProps<PinInputProps<T>>('pinInput', _props, theme)
 
 const appConfig = useAppConfig() as PinInput['AppConfig']
 

@@ -27,7 +27,7 @@ import UKbd from '../Kbd.vue'
 const _props = defineProps<ProseKbdProps>()
 defineSlots<ProseKbdSlots>()
 
-const props = useComponentProps('prose.kbd', _props)
+const props = useComponentProps('prose.kbd', _props, theme)
 
 const appConfig = useAppConfig() as ProseKbd['AppConfig']
 

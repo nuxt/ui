@@ -48,7 +48,7 @@ const _props = withDefaults(defineProps<ProsePreProps>(), {
 
 defineSlots<ProsePreSlots>()
 
-const props = useComponentProps('prose.pre', _props)
+const props = useComponentProps('prose.pre', _props, theme)
 
 const { t } = useLocale()
 const { copy: copyToClipboard, copied } = useClipboard()

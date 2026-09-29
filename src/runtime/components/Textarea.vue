@@ -90,7 +90,7 @@ const _props = withDefaults(defineProps<TextareaProps<T, Mod>>(), {
 const emits = defineEmits<TextareaEmits<T, Mod>>()
 const slots = defineSlots<TextareaSlots>()
 
-const props = useComponentProps<TextareaProps<T, Mod>>('textarea', _props)
+const props = useComponentProps<TextareaProps<T, Mod>>('textarea', _props, theme)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const modelValue = useVModel<TextareaProps<T, Mod>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, { defaultValue: props.defaultValue })

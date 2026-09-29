@@ -69,7 +69,7 @@ const _props = withDefaults(defineProps<TooltipProps>(), {
 const emits = defineEmits<TooltipEmits>()
 const slots = defineSlots<TooltipSlots>()
 
-const props = useComponentProps('tooltip', _props)
+const props = useComponentProps('tooltip', _props, theme)
 
 const appConfig = useAppConfig() as Tooltip['AppConfig']
 
