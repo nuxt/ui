@@ -149,13 +149,15 @@ const theme = ({ name, prose, content }) => {
   const slot = prose ? 'base' : 'root'
 
   return {
-    filename: `src/theme/${prose ? 'prose/' : ''}${content ? 'content/' : ''}${kebabName}.ts`,
+    filename: `src/runtime/theme/${prose ? 'prose/' : ''}${content ? 'content/' : ''}${kebabName}.ts`,
     contents: `
-export default {
+import { defineTheme } from '${prose || content ? '../../' : '../'}utils/theme'
+
+export default defineTheme({
   slots: {
     ${slot}: ''
   }
-}
+})
 `
   }
 }
