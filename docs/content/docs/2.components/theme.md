@@ -130,6 +130,34 @@ Set `ui.unstyled` in the `ui` options of your `vite.config.ts` to apply it to yo
 :::
 ::
 
+### Variants :badge{label="Soon" class="align-text-top"}
+
+Use the `variants` prop to change the classes of a component's variant values in a subtree, or to add values. It takes the same shape as the `variants` of the component in `app.config.ui`. For a value and slot you set, its classes replace the ones from your app config, and a nested Theme's replace the ones above it.
+
+::component-example
+---
+name: 'theme-variants-example'
+---
+::
+
+::note
+Unlike the `ui` prop, which applies to every instance of a component, a variant only applies where the component uses that value: here the `soft` buttons, not the `solid` one.
+::
+
+::tip
+A value you add this way works at runtime, but it isn't part of the component's prop types. Add it to the component's `variants` in your app config to get it typed.
+::
+
+### Icons :badge{label="Soon" class="align-text-top"}
+
+Use the `icons` prop to change the icons descendant components use, merged over `app.config.ui.icons`. The icons of ContentSearch's results are the exception: its search index is shared by the whole app, so they always come from `app.config.ui.icons`.
+
+::component-example
+---
+name: 'theme-icons-example'
+---
+::
+
 ## Examples
 
 ### Multiple components
@@ -174,6 +202,10 @@ name: 'theme-deep-example'
 
 ::note
 In this example, `MyButton` is a custom component that renders a `UButton` internally. The theme overrides still apply because they propagate through the entire component tree.
+::
+
+::warning
+Overlays and toasts opened with [`useOverlay`](/docs/composables/use-overlay) and [`useToast`](/docs/composables/use-toast) render inside `App`, not where you call them, so they take the `Theme` around `<UApp>` and not the one around your call. Wrap the overlay's content in a `UTheme` to theme it. A `UModal` or `USlideover` written in your template keeps the `Theme` around it.
 ::
 
 ### Form components
