@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { refDebounced } from '@vueuse/core'
-import type { AvatarProps } from '@nuxt/ui'
 
 const searchTerm = ref('')
 const searchTermDebounced = refDebounced(searchTerm, 200)
@@ -43,7 +42,7 @@ function onOpen() {
       <UAvatar
         v-if="modelValue"
         v-bind="modelValue.avatar"
-        :size="(ui.leadingAvatarSize() as AvatarProps['size'])"
+        size="2xs"
         :class="ui.leadingAvatar()"
       />
     </template>
