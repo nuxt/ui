@@ -1,10 +1,8 @@
 name: bundle-size
 
 on:
+  # Any base branch, stacked pull requests are compared to the branch below them
   pull_request:
-    branches:
-      - v4
-      - v5
     paths:
       - 'src/**'
       - 'package.json'
