@@ -2,7 +2,7 @@
 import type { TooltipRootProps, TooltipRootEmits, TooltipContentProps, TooltipContentEmits, TooltipArrowProps, TooltipTriggerProps } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/tooltip'
+import theme from '../theme/tooltip'
 import type { KbdProps } from './Kbd.vue'
 import type { EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'

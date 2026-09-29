@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/page-section'
+import theme from '../theme/page-section'
 import type { ButtonProps } from './Button.vue'
 import type { IconProps } from './Icon.vue'
 import type { PageFeatureProps } from './PageFeature.vue'

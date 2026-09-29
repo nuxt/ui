@@ -1,4 +1,3 @@
-import { fileURLToPath } from 'node:url'
 import { camelCase, kebabCase } from 'scule'
 import { genExport } from 'knitwork'
 import colors from 'tailwindcss/colors'
@@ -6,7 +5,7 @@ import { addTemplate, addTypeTemplate, hasNuxtModule, logger, updateTemplates, g
 import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
 import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
-import { applyUnstyled, getThemeClasses } from './utils/theme'
+import { getThemeClasses } from './utils/theme'
 import { detectUsedComponents } from './utils/components'
 import * as theme from './runtime/theme'
 import { colors as aliases } from './runtime/theme/color'
@@ -55,88 +54,25 @@ const NEUTRAL_ROLES: Record<string, string> = {
   'border-muted': 'var(--ui-border)'
 }
 
-export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt?: Nuxt, resolve?: Resolver['resolve'], vue?: { detectedComponents?: Set<string> }) {
+export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt: Nuxt | undefined, resolve: Resolver['resolve'], vue?: { detectedComponents?: Set<string> }) {
   const templates: NuxtTemplate[] = []
 
   let hasProse = false
   let hasContent = false
   let previousDetectedComponents: Set<string> | undefined
 
-  const isDev = process.argv.includes('--uiDev')
-
-  // With `experimental.componentDetection` (Vue integration), a component
-  // detection didn't find keeps its theme file — the `#build/ui` aliases
-  // and type imports rely on it existing — but with every class blanked
-  // (like `<UTheme unstyled>`), so the `@source "./ui";` scan yields no CSS
-  // for it. Prose has no detection and stays styled.
-  function isUnused(component: string, path?: string) {
-    return path !== 'prose' && !!vue?.detectedComponents?.size
-      && !Array.from(vue.detectedComponents).some(detected => camelCase(detected) === component)
-  }
-
-  function resolveTheme(theme: Record<string, any>, component: string, path?: string) {
-    const template = theme[component]
-    const result = typeof template === 'function' ? template(options) : template
-
-    return applyUnstyled(result, isUnused(component, path))
-  }
+  // The package's themes. Tailwind scans them from `@source './theme'` in
+  // `index.css`, and `#build/ui/*` re-exports them for app code.
+  const themeDir = resolve('./runtime/theme')
 
   function writeThemeTemplate(theme: Record<string, any>, path?: string) {
     for (const component in theme) {
+      const filename = `${path ? path + '/' : ''}${kebabCase(component)}`
+
       templates.push({
-        filename: `ui/${path ? path + '/' : ''}${kebabCase(component)}.ts`,
+        filename: `ui/${filename}.ts`,
         write: true,
-        getContents: async () => {
-          const result = resolveTheme(theme, component, path)
-
-          const variants = Object.entries(result.variants || {})
-            .filter(([_, values]) => {
-              const keys = Object.keys(values as Record<string, unknown>)
-              return keys.some(key => key !== 'true' && key !== 'false')
-            })
-            .map(([key]) => key)
-
-          let json = JSON.stringify(result, null, 2)
-
-          for (const variant of variants) {
-            json = json.replace(new RegExp(`("${variant}": "[^"]+")`, 'g'), `$1 as typeof ${variant}[number]`)
-            json = json.replace(new RegExp(`("${variant}": \\[\\s*)((?:"[^"]+",?\\s*)+)(\\])`, 'g'), (_, before, match, after) => {
-              const replaced = match.replace(/("[^"]+")/g, `$1 as typeof ${variant}[number]`)
-              return `${before}${replaced}${after}`
-            })
-          }
-
-          function generateVariantDeclarations(variants: string[]) {
-            return variants.filter(variant => json.includes(`as typeof ${variant}`)).map((variant) => {
-              const keys = Object.keys(result.variants[variant])
-              return `const ${variant} = ${JSON.stringify(keys, null, 2)} as const`
-            })
-          }
-
-          // For local development, import directly from theme
-          if (isDev) {
-            const templatePath = fileURLToPath(new URL(`./runtime/theme/${path ? `${path}/` : ''}${kebabCase(component)}`, import.meta.url))
-            const themeUtilsPath = fileURLToPath(new URL('./utils/theme', import.meta.url))
-            const unstyledJson = JSON.stringify(isUnused(component, path))
-
-            return [
-              `import template from ${JSON.stringify(templatePath)}`,
-              `import { applyUnstyled } from ${JSON.stringify(themeUtilsPath)}`,
-              ...generateVariantDeclarations(variants),
-              `const options = ${JSON.stringify(options, null, 2)}`,
-              `let result = typeof template === 'function' ? (template as Function)(options) : template`,
-              `result = applyUnstyled(result, ${unstyledJson})`,
-              `const theme = ${json}`,
-              `export default result as typeof theme`
-            ].join('\n\n')
-          }
-
-          // For production build
-          return [
-            ...generateVariantDeclarations(variants),
-            `export default ${json}`
-          ].join('\n\n')
-        }
+        getContents: () => `export { default } from ${JSON.stringify(`${themeDir}/${filename}`)}\n`
       })
     }
   }
@@ -190,38 +126,14 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
       }
     }
 
-    // Add theme sources. With `experimental.componentDetection`, Nuxt narrows
-    // these to the detected components' files. The Vue plugin can't: its
-    // templates live inside `node_modules`, where Tailwind widens a file
-    // `@source` to a scan of its whole parent directory, so a narrowed list
-    // wouldn't narrow the CSS. It sources the whole directory instead and
-    // blanks the theme of unused components at write time (see
-    // `writeThemeTemplate`), which needs no extra directive.
-    const componentDir = resolve ? resolve('./runtime/components') : undefined
+    // With `experimental.componentDetection`, only the themes of the detected
+    // components, their dependencies included, reach the CSS.
+    const componentDir = resolve('./runtime/components')
 
-    const themeSources: string[] = []
-    // The themes those sources cover, which a prefixed app lists instead
-    const themes: Record<string, any>[] = []
-
-    function addThemes(group: Record<string, any>, path?: string) {
-      for (const component in group) {
-        themes.push(resolveTheme(group, component, path))
-      }
-    }
-
-    function addAllThemes() {
-      themeSources.push('@source "./ui";')
-      addThemes(theme)
-      if (hasContent) {
-        addThemes(themeContent, 'content')
-      }
-      if (hasProse) {
-        addThemes(themeProse, 'prose')
-      }
-    }
+    let detectedComponents = vue?.detectedComponents
 
     if (options.experimental?.componentDetection && nuxt && componentDir && layers.length) {
-      const detectedComponents = await detectUsedComponents(
+      detectedComponents = await detectUsedComponents(
         layers,
         options.prefix!,
         componentDir,
@@ -241,43 +153,49 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
         }
 
         previousDetectedComponents = detectedComponents
-
-        if (hasProse) {
-          themeSources.push('@source "./ui/prose";')
-          addThemes(themeProse, 'prose')
-        }
-
-        for (const component of detectedComponents) {
-          const kebabComponent = kebabCase(component)
-          const camelComponent = camelCase(component)
-
-          if (hasContent && (themeContent as any)[camelComponent]) {
-            themeSources.push(`@source "./ui/content/${kebabComponent}.ts";`)
-            themes.push(resolveTheme(themeContent, camelComponent, 'content'))
-          } else if ((theme as any)[camelComponent]) {
-            themeSources.push(`@source "./ui/${kebabComponent}.ts";`)
-            themes.push(resolveTheme(theme, camelComponent))
-          }
-        }
       } else {
         if (!previousDetectedComponents || previousDetectedComponents.size > 0) {
           logger.info('Nuxt UI detected no components in use, including all components')
         }
         previousDetectedComponents = new Set()
-
-        addAllThemes()
       }
-    } else {
-      addAllThemes()
     }
 
-    // Tailwind only generates prefixed candidates, and the theme files keep
-    // their classes unprefixed since the engine prefixes them at runtime, so a
-    // prefixed app gets the prefixed classes inline instead of the files.
-    if (options.theme?.prefix) {
-      sources.push(`@source inline(${JSON.stringify(getThemeClasses(themes, options.theme.prefix).join(' '))});`)
+    const themes: Record<string, any>[] = []
+
+    if (detectedComponents?.size) {
+      if (hasProse) {
+        themes.push(...Object.values(themeProse))
+      }
+
+      for (const component of detectedComponents) {
+        const camelComponent = camelCase(component)
+
+        if (hasContent && (themeContent as any)[camelComponent]) {
+          themes.push((themeContent as any)[camelComponent])
+        } else if ((theme as any)[camelComponent]) {
+          themes.push((theme as any)[camelComponent])
+        }
+      }
     } else {
-      sources.push(...themeSources)
+      themes.push(...Object.values(theme), ...(hasContent ? Object.values(themeContent) : []), ...(hasProse ? Object.values(themeProse) : []))
+    }
+
+    // Scanning the theme files can't narrow them to the detected components: a
+    // theme that extends another (Select from Input) only holds its own classes.
+    // Tailwind also only generates prefixed candidates, while the themes keep
+    // their classes unprefixed since the engine prefixes them at runtime. So
+    // either way, the themes' resolved classes are listed inline instead.
+    if (detectedComponents?.size || options.theme?.prefix) {
+      sources.push(`@source not "${themeDir}";`)
+      sources.push(`@source inline(${JSON.stringify(getThemeClasses(themes, options.theme?.prefix).join(' '))});`)
+    } else {
+      if (!hasProse) {
+        sources.push(`@source not "${themeDir}/prose";`)
+      }
+      if (!hasContent) {
+        sources.push(`@source not "${themeDir}/content";`)
+      }
     }
 
     return sources.join('\n')

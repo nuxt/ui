@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { ButtonHTMLAttributes, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/link'
+import theme from '../../../theme/link'
 import type { ComponentConfig } from '../../../types/tv'
 
 type Link = ComponentConfig<typeof theme, AppConfig, 'link'>
