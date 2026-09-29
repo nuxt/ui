@@ -25,8 +25,8 @@ symlinkSync(join(process.cwd(), 'node_modules/tailwindcss'), join(app, 'node_mod
 afterAll(() => rmSync(app, { recursive: true, force: true }))
 
 async function build(overrides: Record<string, any>, vue?: { detectedComponents?: Set<string> }) {
-  const options = { ...defaultOptions, ...overrides, theme: { ...defaultOptions.theme } }
-  const templates = getTemplates(options as any, getDefaultConfig(options.theme), undefined, (...paths: string[]) => join(dist, ...paths), vue)
+  const options = { ...defaultOptions, ...overrides }
+  const templates = getTemplates(options as any, getDefaultConfig(options.tailwindPrefix), undefined, (...paths: string[]) => join(dist, ...paths), vue)
   for (const filename of ['ui.css', 'ui.base.css']) {
     writeFileSync(join(app, filename), await templates.find(template => template.filename === filename)!.getContents!({} as any))
   }

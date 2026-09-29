@@ -2,7 +2,7 @@ import { prefixClasses } from '../utils/prefix'
 import { injectThemeContext } from './useComponentProps'
 
 /**
- * Prefixes Tailwind utility class strings with the configured `theme.prefix`,
+ * Prefixes Tailwind utility class strings with the configured `tailwindPrefix`,
  * so static utility classes inside Nuxt UI components match the consumer's
  * Tailwind `prefix(...)` configuration.
  */
