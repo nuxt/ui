@@ -40,7 +40,6 @@ interface ContextMenuContentEmits extends RekaContextMenuContentEmits {}
 import { computed, toRef } from 'vue'
 import { ContextMenuPortal, ContextMenuContent, ContextMenuItem as RekaContextMenuItem, ContextMenuGroup, ContextMenuSeparator, ContextMenuCheckboxItem, ContextMenuItemIndicator, ContextMenuLabel, ContextMenuSub, ContextMenuSubContent, ContextMenuSubTrigger, useForwardPropsEmits } from 'reka-ui'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
-import { useAppConfig } from '#imports'
 import { FieldGroupReset } from '../composables/useFieldGroup'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
@@ -53,6 +52,7 @@ import UAvatar from './Avatar.vue'
 import UIcon from './Icon.vue'
 import UKbd from './Kbd.vue'
 import UContextMenuContent from './ContextMenuContent.vue'
+import { useThemeConfig } from '../composables/useComponentProps'
 
 const ContextMenu = { Portal: ContextMenuPortal, Content: ContextMenuContent, Item: RekaContextMenuItem, Group: ContextMenuGroup, Separator: ContextMenuSeparator, CheckboxItem: ContextMenuCheckboxItem, ItemIndicator: ContextMenuItemIndicator, Label: ContextMenuLabel, Sub: ContextMenuSub, SubContent: ContextMenuSubContent, SubTrigger: ContextMenuSubTrigger }
 
@@ -61,7 +61,7 @@ const emits = defineEmits<ContextMenuContentEmits>()
 const slots = defineSlots<ContextMenuSlots<T>>()
 
 const { dir } = useLocale()
-const appConfig = useAppConfig()
+const appConfig = useThemeConfig()
 
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'descriptionKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'size', 'class', 'ui', 'uiOverride'), emits)

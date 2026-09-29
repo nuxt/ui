@@ -32,6 +32,7 @@ function scopesOf(value: unknown): string {
  * @param result - The theme result object
  * @param unstyled - Whether to strip the theme classes
  * @returns The theme result with blanked class strings
+ * @internal
  */
 export function applyUnstyled(result: any, unstyled?: boolean): any {
   if (!result || !unstyled) {
@@ -76,6 +77,7 @@ const unstyledThemes = new WeakMap<object, Record<string, any>>()
 /**
  * The blanked copy of a theme, built once per theme object, which the engine
  * resolves in place of the theme under `<UTheme unstyled>`.
+ * @internal
  */
 export function unstyledTheme(theme: Record<string, any>): Record<string, any> {
   let blanked = unstyledThemes.get(theme)

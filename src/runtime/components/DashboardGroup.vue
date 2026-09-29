@@ -25,10 +25,10 @@ export interface DashboardGroupSlots {
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useNuxtApp, useAppConfig } from '#imports'
+import { useNuxtApp } from '#imports'
 import { provideDashboardContext } from '../utils/dashboard'
 import { tv } from '../utils/tv'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 
 const _props = withDefaults(defineProps<DashboardGroupProps>(), {
   storage: 'cookie',
@@ -41,7 +41,7 @@ defineSlots<DashboardGroupSlots>()
 const props = useComponentProps('dashboardGroup', _props, theme)
 
 const nuxtApp = useNuxtApp()
-const appConfig = useAppConfig() as DashboardGroup['AppConfig']
+const appConfig = useThemeConfig() as DashboardGroup['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.dashboardGroup)
 
 // eslint-disable-next-line vue/no-dupe-keys

@@ -69,8 +69,8 @@ export interface BannerEmits {
 <script setup lang="ts">
 import { computed, ref, onMounted, useId } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useHead, useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useHead } from '#imports'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { usePrefix } from '../composables/usePrefix'
 import { tv } from '../utils/tv'
@@ -88,7 +88,7 @@ const emits = defineEmits<BannerEmits>()
 const props = useComponentProps('banner', _props, theme)
 
 const { t } = useLocale()
-const appConfig = useAppConfig() as Banner['AppConfig']
+const appConfig = useThemeConfig() as Banner['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.banner)
 const prefix = usePrefix()
 

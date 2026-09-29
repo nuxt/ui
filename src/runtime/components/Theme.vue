@@ -76,7 +76,8 @@ provideThemeContext({
     normalizeUi(_props.ui),
     parent.defaults.value
   )),
-  unstyled: computed(() => _props.unstyled ?? parent.unstyled.value)
+  unstyled: computed(() => _props.unstyled ?? parent.unstyled.value),
+  config: parent.config
 })
 </script>
 

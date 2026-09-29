@@ -104,8 +104,7 @@ import { Primitive, Separator } from 'reka-ui'
 import { defu } from 'defu'
 import { BubbleMenu, FloatingMenu } from '@tiptap/vue-3/menus'
 import { reactiveOmit } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { isArrayOfArray, pick, omit } from '../utils'
 import { createHandlers } from '../utils/editor'
@@ -128,7 +127,7 @@ defineSlots<EditorToolbarSlots<T>>()
 
 const props = useComponentProps<EditorToolbarProps<T>>('editorToolbar', _props, theme)
 
-const appConfig = useAppConfig() as EditorToolbar['AppConfig']
+const appConfig = useThemeConfig() as EditorToolbar['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.editorToolbar)
 
 const handlers = inject('editorHandlers', computed(() => createHandlers()))

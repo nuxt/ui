@@ -23,8 +23,7 @@ export interface DashboardPanelSlots {
 
 <script setup lang="ts">
 import { computed, useId, toRef } from 'vue'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useResizable } from '../composables/useResizable'
 import { useDashboard } from '../utils/dashboard'
 import { tv } from '../utils/tv'
@@ -40,7 +39,7 @@ defineSlots<DashboardPanelSlots>()
 
 const props = useComponentProps('dashboardPanel', _props, theme)
 
-const appConfig = useAppConfig() as DashboardPanel['AppConfig']
+const appConfig = useThemeConfig() as DashboardPanel['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.dashboardPanel)
 const dashboardContext = useDashboard({ storageKey: 'dashboard', unit: '%' })
 

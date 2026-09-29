@@ -62,8 +62,7 @@ export interface InputRatingSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { RatingRoot, RatingItem, RatingItemIndicator } from 'reka-ui'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
@@ -87,7 +86,7 @@ defineSlots<InputRatingSlots>()
 const props = useComponentProps<InputRatingProps>('inputRating', _props, theme)
 
 const { t } = useLocale()
-const appConfig = useAppConfig() as InputRating['AppConfig']
+const appConfig = useThemeConfig() as InputRating['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.inputRating)
 
 const rootProps = useForwardProps(props, ['as', 'length', 'step', 'hoverable', 'clearable', 'required', 'modelValue', 'defaultValue'], emits)

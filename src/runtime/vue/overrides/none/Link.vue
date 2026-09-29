@@ -75,8 +75,7 @@ export interface LinkSlots {
 import { computed, inject } from 'vue'
 import { Slot } from 'reka-ui'
 import { hasProtocol } from 'ufo'
-import { useAppConfig } from '#imports'
-import { useComponentOverrides } from '../../../composables/useComponentProps'
+import { useComponentOverrides, useThemeConfig } from '../../../composables/useComponentProps'
 import { tv } from '../../../utils/tv'
 import ULinkBase from '../../../components/LinkBase.vue'
 
@@ -90,7 +89,7 @@ const props = withDefaults(defineProps<LinkProps>(), {
 })
 defineSlots<LinkSlots>()
 
-const appConfig = useAppConfig() as Link['AppConfig']
+const appConfig = useThemeConfig() as Link['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.link)
 
 // eslint-disable-next-line vue/no-dupe-keys

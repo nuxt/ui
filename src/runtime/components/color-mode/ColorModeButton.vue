@@ -36,7 +36,7 @@ const props = useComponentProps('button', _props)
 
 const { t } = useLocale()
 const colorMode = useColorMode()
-const appConfig = useAppConfig()
+const appConfig = useThemeConfig()
 const prefix = usePrefix()
 
 const buttonProps = useForwardProps(reactiveOmit(props, 'icon'))

@@ -40,10 +40,9 @@ export type BlogPostsSlots<T extends BlogPostProps = BlogPostProps> = {
 <script setup lang="ts" generic="T extends BlogPostProps">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import UBlogPost from './BlogPost.vue'
 
 const _props = withDefaults(defineProps<BlogPostsProps>(), {
@@ -55,7 +54,7 @@ const props = useComponentProps<BlogPostsProps>('blogPosts', _props, theme)
 
 const getProxySlots = () => omit(slots, ['default'])
 
-const appConfig = useAppConfig() as BlogPosts['AppConfig']
+const appConfig = useThemeConfig() as BlogPosts['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.blogPosts)
 
 // eslint-disable-next-line vue/no-dupe-keys

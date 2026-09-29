@@ -80,8 +80,7 @@ export type AccordionSlots<T extends AccordionItem = AccordionItem> = {
 import { computed } from 'vue'
 import { AccordionRoot, AccordionItem, AccordionHeader, AccordionTrigger, AccordionContent } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { get } from '../utils'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -98,7 +97,7 @@ const slots = defineSlots<AccordionSlots<T>>()
 
 const props = useComponentProps<AccordionProps<T>>('accordion', _props, theme)
 
-const appConfig = useAppConfig() as Accordion['AppConfig']
+const appConfig = useThemeConfig() as Accordion['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.accordion)
 
 const rootProps = useForwardProps(props, ['as', 'collapsible', 'defaultValue', 'disabled', 'modelValue', 'unmountOnHide'], emits)

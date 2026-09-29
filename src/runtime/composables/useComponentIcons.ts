@@ -1,8 +1,8 @@
 import { computed, toValue } from 'vue'
 import type { MaybeRefOrGetter } from 'vue'
-import { useAppConfig } from '#imports'
 import type { AvatarProps } from '../components/Avatar.vue'
 import type { IconProps } from '../components/Icon.vue'
+import { useThemeConfig } from './useComponentProps'
 
 export interface UseComponentIconsProps {
   /**
@@ -37,7 +37,7 @@ export interface UseComponentIconsProps {
 }
 
 export function useComponentIcons(componentProps: MaybeRefOrGetter<UseComponentIconsProps>) {
-  const appConfig = useAppConfig()
+  const appConfig = useThemeConfig()
 
   const props = computed(() => toValue(componentProps))
 

@@ -19,9 +19,8 @@ export interface SkeletonProps {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 
 const _props = defineProps<SkeletonProps>()
@@ -29,7 +28,7 @@ const _props = defineProps<SkeletonProps>()
 const props = useComponentProps('skeleton', _props, theme)
 
 const { t } = useLocale()
-const appConfig = useAppConfig() as Skeleton['AppConfig']
+const appConfig = useThemeConfig() as Skeleton['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.skeleton)
 
 // eslint-disable-next-line vue/no-dupe-keys

@@ -75,8 +75,7 @@ export type SplitterSlots<T extends SplitterItem = SplitterItem> = {
 <script setup lang="ts" generic="T extends SplitterItem">
 import { ref, computed, onBeforeUpdate } from 'vue'
 import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from 'reka-ui'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { tv } from '../utils/tv'
 
@@ -88,7 +87,7 @@ defineSlots<SplitterSlots<T>>()
 
 const props = useComponentProps<SplitterProps<T>>('splitter', _props, theme)
 
-const appConfig = useAppConfig() as Splitter['AppConfig']
+const appConfig = useThemeConfig() as Splitter['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.splitter)
 
 const rootProps = useForwardProps(props, ['as', 'id', 'autoSaveId', 'keyboardResizeBy', 'storage'])

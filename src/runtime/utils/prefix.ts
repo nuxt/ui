@@ -42,6 +42,7 @@ function prefixValue(value: unknown, prefix: string): unknown {
  * @param theme - The theme object
  * @param prefix - The Tailwind prefix (e.g. `tw`)
  * @returns A prefixed copy of the theme
+ * @internal
  */
 export function applyPrefix(theme: any, prefix?: string): any {
   if (!theme || !prefix) {

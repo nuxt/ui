@@ -1,5 +1,5 @@
-import { useAppConfig } from '#imports'
 import { prefixClasses } from '../utils/prefix'
+import { injectThemeContext } from './useComponentProps'
 
 /**
  * Prefixes Tailwind utility class strings with the configured `theme.prefix`,
@@ -7,8 +7,7 @@ import { prefixClasses } from '../utils/prefix'
  * Tailwind `prefix(...)` configuration.
  */
 export function usePrefix() {
-  const appConfig = useAppConfig() as { ui?: { prefix?: string } }
-  const prefix = appConfig.ui?.prefix
+  const { config } = injectThemeContext()
 
-  return (classString: string): string => prefixClasses(classString, prefix)
+  return (classString: string): string => prefixClasses(classString, config.value.prefix)
 }

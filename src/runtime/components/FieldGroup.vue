@@ -33,8 +33,7 @@ export interface FieldGroupSlots {
 <script setup lang="ts">
 import { provide, computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { fieldGroupInjectionKey } from '../composables/useFieldGroup'
 import { tv } from '../utils/tv'
 
@@ -50,7 +49,7 @@ const props = useComponentProps('fieldGroup', _props, theme)
 // applies itself, so a child's own `<UTheme :props>` key still beats them
 const providedProps = useComponentProps('fieldGroup', _props)
 
-const appConfig = useAppConfig() as FieldGroup['AppConfig']
+const appConfig = useThemeConfig() as FieldGroup['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.fieldGroup)
 
 // eslint-disable-next-line vue/no-dupe-keys

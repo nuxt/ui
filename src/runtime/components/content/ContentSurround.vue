@@ -55,8 +55,7 @@ export interface ContentSurroundSlots<T extends ContentSurroundLink = ContentSur
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
 import { useLocale } from '../../composables/useLocale'
 import { usePrefix } from '../../composables/usePrefix'
 import { tv } from '../../utils/tv'
@@ -72,7 +71,7 @@ defineSlots<ContentSurroundSlots<T>>()
 const props = useComponentProps<ContentSurroundProps<T>>('contentSurround', _props, theme)
 
 const { dir } = useLocale()
-const appConfig = useAppConfig() as ContentSurround['AppConfig']
+const appConfig = useThemeConfig() as ContentSurround['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.contentSurround)
 const prefix = usePrefix()
 

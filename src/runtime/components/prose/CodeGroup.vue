@@ -28,8 +28,8 @@ export interface ProseCodeGroupSlots {
 <script setup lang="ts">
 import { computed, watch, onMounted, ref, onBeforeUpdate } from 'vue'
 import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent } from 'reka-ui'
-import { useState, useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
+import { useState } from '#imports'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 import UCodeIcon from './CodeIcon.vue'
 
@@ -42,7 +42,7 @@ const props = useComponentProps('prose.codeGroup', _props, theme)
 
 const model = defineModel<string>()
 
-const appConfig = useAppConfig() as ProseCodeGroup['AppConfig']
+const appConfig = useThemeConfig() as ProseCodeGroup['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.prose?.codeGroup)
 
 // eslint-disable-next-line vue/no-dupe-keys

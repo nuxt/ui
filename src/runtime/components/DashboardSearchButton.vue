@@ -57,8 +57,7 @@ export interface DashboardSearchButtonProps extends Omit<ButtonProps, LinkPropsK
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useLocale } from '../composables/useLocale'
 import { useDashboard } from '../utils/dashboard'
@@ -88,7 +87,7 @@ const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'label', 'varian
 const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : props.tooltip, { delayDuration: 0, content: { side: 'right' } }) as TooltipProps)
 
 const { t } = useLocale()
-const appConfig = useAppConfig() as DashboardSearchButton['AppConfig']
+const appConfig = useThemeConfig() as DashboardSearchButton['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.dashboardSearchButton)
 const { toggleSearch } = useDashboard({ toggleSearch: () => {} })
 
