@@ -26,7 +26,7 @@ export interface PageAsideSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 
 const _props = withDefaults(defineProps<PageAsideProps>(), {
@@ -36,8 +36,7 @@ const slots = defineSlots<PageAsideSlots>()
 
 const props = useComponentProps('pageAside', _props, theme)
 
-const appConfig = useThemeConfig() as PageAside['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.pageAside)
+const overrides = useComponentOverrides((ui: PageAside['AppConfig']['ui']) => ui.pageAside)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)())

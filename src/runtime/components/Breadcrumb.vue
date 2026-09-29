@@ -87,7 +87,7 @@ const props = useComponentProps<BreadcrumbProps<T>>('breadcrumb', _props, theme)
 
 const { dir } = useLocale()
 const appConfig = useThemeConfig() as Breadcrumb['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.breadcrumb)
+const overrides = useComponentOverrides((ui: Breadcrumb['AppConfig']['ui']) => ui.breadcrumb)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const separatorIcon = computed(() => props.separatorIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight))

@@ -81,7 +81,7 @@ export type StepperSlots<T extends StepperItem = StepperItem> = {
 import { computed } from 'vue'
 import { StepperRoot, StepperItem, StepperTrigger, StepperIndicator, StepperSeparator, StepperTitle, StepperDescription } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { tv } from '../utils/tv'
 import { get } from '../utils'
@@ -99,8 +99,7 @@ const props = useComponentProps<StepperProps<T>>('stepper', _props, theme)
 
 const modelValue = defineModel<string | number>()
 
-const appConfig = useThemeConfig() as Stepper['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.stepper)
+const overrides = useComponentOverrides((ui: Stepper['AppConfig']['ui']) => ui.stepper)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'linear'))
 

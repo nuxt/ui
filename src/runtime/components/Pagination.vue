@@ -129,8 +129,8 @@ const slots = defineSlots<PaginationSlots>()
 const props = useComponentProps('pagination', _props, theme)
 
 const { dir, t } = useLocale()
-const appConfig = useAppConfig() as Pagination['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.pagination)
+const appConfig = useThemeConfig() as Pagination['AppConfig']
+const overrides = useComponentOverrides((ui: Pagination['AppConfig']['ui']) => ui.pagination)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'defaultPage', 'disabled', 'itemsPerPage', 'page', 'showEdges', 'siblingCount', 'total'), emits)
 

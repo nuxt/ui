@@ -99,7 +99,7 @@ const slots = defineSlots<AccordionSlots<T>>()
 const props = useComponentProps<AccordionProps<T>>('accordion', _props, theme)
 
 const appConfig = useThemeConfig() as Accordion['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.accordion)
+const overrides = useComponentOverrides((ui: Accordion['AppConfig']['ui']) => ui.accordion)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'collapsible', 'defaultValue', 'disabled', 'modelValue', 'unmountOnHide'), emits)
 

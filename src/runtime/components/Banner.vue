@@ -89,7 +89,7 @@ const props = useComponentProps('banner', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useThemeConfig() as Banner['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.banner)
+const overrides = useComponentOverrides((ui: Banner['AppConfig']['ui']) => ui.banner)
 const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys

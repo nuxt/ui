@@ -197,7 +197,7 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
 const appConfig = useThemeConfig() as Listbox['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.listbox)
+const overrides = useComponentOverrides((ui: Listbox['AppConfig']['ui']) => ui.listbox)
 const { filterGroups } = useFilter()
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'multiple', 'selectionBehavior', 'highlightOnHover', 'loop', 'by', 'orientation', 'required'), emits)
