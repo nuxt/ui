@@ -44,7 +44,7 @@ export interface ThemeSlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import defu from 'defu'
+import defu, { createDefu } from 'defu'
 import { injectThemeContext, provideThemeContext } from '../composables/useComponentProps'
 
 const _props = withDefaults(defineProps<ThemeProps>(), { unstyled: undefined })
@@ -85,12 +85,21 @@ function propsUi(props?: Record<string, any>): Record<string, any> {
   return ui
 }
 
+// Like `defu`, but the winning slot's array of classes replaces the other
+// instead of being concatenated before it, where the other would win
+const mergeSlots = createDefu((object, key, value) => {
+  if (Array.isArray(object[key]) && Array.isArray(value)) {
+    object[key] = value
+    return true
+  }
+})
+
 /**
  * This Theme's level of class overrides: its `variants`, and its `ui` with the
  * one in `:props` (which wins on the same slot, as a prop default would).
  */
 const level = computed(() => {
-  const slots = defu(propsUi(_props.props), _props.ui ?? {})
+  const slots = mergeSlots(propsUi(_props.props), _props.ui ?? {})
   if (!_props.variants && !Object.keys(slots).length) {
     return undefined
   }

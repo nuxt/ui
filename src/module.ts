@@ -7,7 +7,7 @@ import { addTemplates } from './templates'
 import { publicComposables } from './imports'
 import { defaultOptions, getDefaultConfig } from './utils/defaults'
 import { getClientBundleIcons } from './utils/icons'
-import { findTailwindPrefix } from './utils/tailwind'
+import { findTailwindStylesheets } from './utils/tailwind'
 import OptionalDepsPlugin from './plugins/optional-deps'
 import { name, version } from '../package.json'
 
@@ -171,13 +171,29 @@ export default defineNuxtModule<ModuleOptions>({
 
     // Read the prefix off the app's `@import "tailwindcss" prefix(...)`, so it's set in one place
     const stylesheets = await Promise.all(nuxt.options.css.filter(entry => typeof entry === 'string').map(entry => resolvePath(entry)))
-    const tailwind = await findTailwindPrefix(stylesheets)
-    if (tailwind) {
+    const { tailwind, unresolved } = await findTailwindStylesheets(stylesheets, nuxt.options.alias)
+    const describe = (prefix: string | null) => prefix ? `with \`prefix(${prefix})\`` : 'without a prefix'
+    if (new Set(tailwind.map(stylesheet => stylesheet.prefix)).size > 1) {
+      logger.warn(`Nuxt UI found stylesheets importing Tailwind CSS with different prefixes: ${tailwind.map(stylesheet => `\`${relative(nuxt.options.rootDir, stylesheet.path)}\` ${describe(stylesheet.prefix)}`).join(', ')}. It uses the first one, set \`tailwindPrefix\` to choose.`)
+    }
+    const first = tailwind[0]
+    if (first) {
       if (!options.tailwindPrefix) {
-        options.tailwindPrefix = tailwind.prefix ?? undefined
-      } else if (options.tailwindPrefix !== tailwind.prefix) {
-        logger.warn(`Nuxt UI \`tailwindPrefix\` is \`${options.tailwindPrefix}\` but \`${relative(nuxt.options.rootDir, tailwind.path)}\` imports Tailwind CSS ${tailwind.prefix ? `with \`prefix(${tailwind.prefix})\`` : 'without a prefix'}: components will render classes Tailwind CSS doesn't generate`)
+        options.tailwindPrefix = first.prefix ?? undefined
+      } else if (!tailwind.some(stylesheet => stylesheet.prefix === options.tailwindPrefix)) {
+        logger.warn(`Nuxt UI \`tailwindPrefix\` is \`${options.tailwindPrefix}\` but \`${relative(nuxt.options.rootDir, first.path)}\` imports Tailwind CSS ${describe(first.prefix)}: components will render classes Tailwind CSS doesn't generate`)
       }
+    } else if (unresolved.length && !options.tailwindPrefix) {
+      logger.warn(`Nuxt UI couldn't find the \`@import "tailwindcss"\` of \`${relative(nuxt.options.rootDir, unresolved[0]!)}\`. If Tailwind CSS has a prefix, set \`tailwindPrefix\` to it.`)
+    }
+
+    // `@nuxt/icon`'s inline styles can load before the app's stylesheet. In the
+    // `base` layer, they declare it first, below the layer Tailwind CSS is imported
+    // into, which then beats the `@nuxt/ui/colors` output in the top-level `base`.
+    // Nested in that layer, they leave the top-level `base` after it.
+    const layer = first?.layer
+    if (layer && nuxt.options.appConfig.icon?.cssLayer === 'base') {
+      nuxt.options.appConfig.icon.cssLayer = `${layer}.base`
     }
 
     nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, getDefaultConfig(options.tailwindPrefix)) as typeof nuxt.options.appConfig.ui
