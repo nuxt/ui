@@ -44,7 +44,7 @@ exports[`ChangelogVersion > renders with authors correctly 1`] = `
     <!--v-if-->
     <div data-slot="changelog-version-footer" class="border-t border-default pt-5 flex items-center justify-between mt-5">
       <div data-slot="changelog-version-authors" class="flex flex-wrap gap-x-4 gap-y-1.5">
-        <div data-orientation="horizontal" data-slot="user" class="relative group/user flex items-center gap-2"><span data-slot="user-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" data-slot="avatar-image" class="h-full w-full rounded-[inherit] object-cover"></span>
+        <div data-orientation="horizontal" data-slot="user" class="relative group/user flex items-center gap-2"><span data-slot="user-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" data-slot="avatar-image" class="h-full w-full rounded-[inherit] object-cover"></span>
           <div data-slot="user-wrapper" class="">
             <!--v-if-->
             <p data-slot="user-name" class="font-medium text-highlighted text-sm">Benjamin Canac</p>
@@ -84,7 +84,7 @@ exports[`ChangelogVersion > renders with badge correctly 1`] = `
   </div>
   <div data-slot="changelog-version-container" class="flex flex-col mx-auto max-w-2xl">
     <div data-slot="changelog-version-header" class="">
-      <div data-slot="changelog-version-meta" class="flex items-center gap-3 mb-2"><span data-slot="changelog-version-badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md text-inverted bg-inverted"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="changelog-version-meta" class="flex items-center gap-3 mb-2"><span data-slot="changelog-version-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-neutral)] bg-accent text-accent-foreground text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
         <!--v-if--></span>
         <!--v-if-->
       </div>
@@ -107,7 +107,7 @@ exports[`ChangelogVersion > renders with badge object correctly 1`] = `
   </div>
   <div data-slot="changelog-version-container" class="flex flex-col mx-auto max-w-2xl">
     <div data-slot="changelog-version-header" class="">
-      <div data-slot="changelog-version-meta" class="flex items-center gap-3 mb-2"><span data-slot="changelog-version-badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary text-inverted"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="changelog-version-meta" class="flex items-center gap-3 mb-2"><span data-slot="changelog-version-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent text-accent-foreground text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
         <!--v-if--></span>
         <!--v-if-->
       </div>

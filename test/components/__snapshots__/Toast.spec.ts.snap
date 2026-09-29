@@ -9,26 +9,26 @@ exports[`Toast > renders with actions correctly 1`] = `
 
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" data-slot="toaster-viewport" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
+    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent [--ui-accent:var(--ui-primary)] items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
       <div data-slot="toast-wrapper" class="w-0 flex-1 flex flex-col">
         <div data-slot="toast-title" class="text-sm font-medium text-highlighted">Toast</div>
         <!--v-if-->
-        <div data-slot="toast-actions" class="flex gap-1.5 shrink-0 items-start mt-2.5"><button type="button" data-slot="button" data-reka-toast-announce-exclude="" data-reka-toast-announce-alt="Action" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+        <div data-slot="toast-actions" class="flex gap-1.5 shrink-0 items-start mt-2.5"><button type="button" data-slot="button" data-reka-toast-announce-exclude="" data-reka-toast-announce-alt="Action" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2 py-1 text-xs gap-1">
             <!--v-if--><span data-slot="button-label" class="truncate">Action</span>
             <!--v-if-->
           </button></div>
       </div>
       <div data-slot="toast-actions" class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-muted hover:text-accent-muted-hover active:text-accent-muted-hover disabled:text-accent-muted aria-disabled:text-accent-muted outline-accent-focus focus-visible:outline-3 text-sm gap-1.5 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 [--ui-accent:var(--ui-primary)] w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="progress-base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-accent motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -49,7 +49,7 @@ exports[`Toast > renders with as correctly 1`] = `
 
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" data-slot="toaster-viewport" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <section data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
+    <section data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent [--ui-accent:var(--ui-primary)] items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
       <div data-slot="toast-wrapper" class="w-0 flex-1 flex flex-col">
         <div data-slot="toast-title" class="text-sm font-medium text-highlighted">Toast</div>
@@ -57,15 +57,15 @@ exports[`Toast > renders with as correctly 1`] = `
         <!--v-if-->
       </div>
       <div data-slot="toast-actions" class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-muted hover:text-accent-muted-hover active:text-accent-muted-hover disabled:text-accent-muted aria-disabled:text-accent-muted outline-accent-focus focus-visible:outline-3 text-sm gap-1.5 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 [--ui-accent:var(--ui-primary)] w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="progress-base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-accent motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -86,22 +86,22 @@ exports[`Toast > renders with avatar correctly 1`] = `
 
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" data-slot="toaster-viewport" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right"><span data-slot="toast-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-11 text-[22px] shrink-0"><img src="https://github.com/benjamincanac.png" width="44" height="44" data-slot="avatar-image" class="h-full w-full rounded-[inherit] object-cover"></span>
+    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent [--ui-accent:var(--ui-primary)] items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right"><span data-slot="toast-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-11 text-[22px] shrink-0"><img src="https://github.com/benjamincanac.png" width="44" height="44" data-slot="avatar-image" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div data-slot="toast-wrapper" class="w-0 flex-1 flex flex-col">
         <div data-slot="toast-title" class="text-sm font-medium text-highlighted">Toast</div>
         <!--v-if-->
         <!--v-if-->
       </div>
       <div data-slot="toast-actions" class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-muted hover:text-accent-muted-hover active:text-accent-muted-hover disabled:text-accent-muted aria-disabled:text-accent-muted outline-accent-focus focus-visible:outline-3 text-sm gap-1.5 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 [--ui-accent:var(--ui-primary)] w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="progress-base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-accent motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -122,7 +122,7 @@ exports[`Toast > renders with class correctly 1`] = `
 
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" data-slot="toaster-viewport" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary items-start bg-elevated/50" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
+    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent [--ui-accent:var(--ui-primary)] items-start bg-elevated/50" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
       <div data-slot="toast-wrapper" class="w-0 flex-1 flex flex-col">
         <div data-slot="toast-title" class="text-sm font-medium text-highlighted">Toast</div>
@@ -130,15 +130,15 @@ exports[`Toast > renders with class correctly 1`] = `
         <!--v-if-->
       </div>
       <div data-slot="toast-actions" class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-muted hover:text-accent-muted-hover active:text-accent-muted-hover disabled:text-accent-muted aria-disabled:text-accent-muted outline-accent-focus focus-visible:outline-3 text-sm gap-1.5 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 [--ui-accent:var(--ui-primary)] w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="progress-base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-accent motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -159,7 +159,7 @@ exports[`Toast > renders with close slot correctly 1`] = `
 
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" data-slot="toaster-viewport" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
+    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent [--ui-accent:var(--ui-primary)] items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
       <div data-slot="toast-wrapper" class="w-0 flex-1 flex flex-col">
         <div data-slot="toast-title" class="text-sm font-medium text-highlighted">Toast</div>
@@ -169,10 +169,10 @@ exports[`Toast > renders with close slot correctly 1`] = `
       <div data-slot="toast-actions" class="flex gap-1.5 shrink-0 items-center">
         <!--v-if-->Close slot
       </div>
-      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 [--ui-accent:var(--ui-primary)] w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="progress-base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-accent motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -193,7 +193,7 @@ exports[`Toast > renders with closeIcon correctly 1`] = `
 
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" data-slot="toaster-viewport" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
+    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent [--ui-accent:var(--ui-primary)] items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
       <div data-slot="toast-wrapper" class="w-0 flex-1 flex flex-col">
         <div data-slot="toast-title" class="text-sm font-medium text-highlighted">Toast</div>
@@ -201,15 +201,15 @@ exports[`Toast > renders with closeIcon correctly 1`] = `
         <!--v-if-->
       </div>
       <div data-slot="toast-actions" class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:trash shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-muted hover:text-accent-muted-hover active:text-accent-muted-hover disabled:text-accent-muted aria-disabled:text-accent-muted outline-accent-focus focus-visible:outline-3 text-sm gap-1.5 p-0"><span class="iconify i-lucide:trash shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 [--ui-accent:var(--ui-primary)] w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="progress-base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-accent motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -230,7 +230,7 @@ exports[`Toast > renders with color neutral correctly 1`] = `
 
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" data-slot="toaster-viewport" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-inverted/25 focus-visible:outline-3 focus-visible:ring-inverted items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
+    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent [--ui-accent:var(--ui-neutral)] items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
       <div data-slot="toast-wrapper" class="w-0 flex-1 flex flex-col">
         <div data-slot="toast-title" class="text-sm font-medium text-highlighted">Toast</div>
@@ -238,15 +238,15 @@ exports[`Toast > renders with color neutral correctly 1`] = `
         <!--v-if-->
       </div>
       <div data-slot="toast-actions" class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-muted hover:text-accent-muted-hover active:text-accent-muted-hover disabled:text-accent-muted aria-disabled:text-accent-muted outline-accent-focus focus-visible:outline-3 text-sm gap-1.5 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 [--ui-accent:var(--ui-neutral)] w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="progress-base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-inverted motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-accent motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -267,7 +267,7 @@ exports[`Toast > renders with description correctly 1`] = `
 
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" data-slot="toaster-viewport" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
+    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent [--ui-accent:var(--ui-primary)] items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
       <div data-slot="toast-wrapper" class="w-0 flex-1 flex flex-col">
         <div data-slot="toast-title" class="text-sm font-medium text-highlighted">Toast</div>
@@ -275,15 +275,15 @@ exports[`Toast > renders with description correctly 1`] = `
         <!--v-if-->
       </div>
       <div data-slot="toast-actions" class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-muted hover:text-accent-muted-hover active:text-accent-muted-hover disabled:text-accent-muted aria-disabled:text-accent-muted outline-accent-focus focus-visible:outline-3 text-sm gap-1.5 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 [--ui-accent:var(--ui-primary)] w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="progress-base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-accent motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -304,7 +304,7 @@ exports[`Toast > renders with description slot correctly 1`] = `
 
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" data-slot="toaster-viewport" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
+    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent [--ui-accent:var(--ui-primary)] items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
       <div data-slot="toast-wrapper" class="w-0 flex-1 flex flex-col">
         <div data-slot="toast-title" class="text-sm font-medium text-highlighted">Toast</div>
@@ -312,15 +312,15 @@ exports[`Toast > renders with description slot correctly 1`] = `
         <!--v-if-->
       </div>
       <div data-slot="toast-actions" class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-muted hover:text-accent-muted-hover active:text-accent-muted-hover disabled:text-accent-muted aria-disabled:text-accent-muted outline-accent-focus focus-visible:outline-3 text-sm gap-1.5 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 [--ui-accent:var(--ui-primary)] w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="progress-base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-accent motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -341,22 +341,22 @@ exports[`Toast > renders with icon correctly 1`] = `
 
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" data-slot="toaster-viewport" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right"><span class="iconify i-lucide:rocket shrink-0 size-5 text-primary" aria-hidden="true" data-slot="toast-icon"></span>
+    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent [--ui-accent:var(--ui-primary)] items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right"><span class="iconify i-lucide:rocket shrink-0 size-5 text-accent" aria-hidden="true" data-slot="toast-icon"></span>
       <div data-slot="toast-wrapper" class="w-0 flex-1 flex flex-col">
         <div data-slot="toast-title" class="text-sm font-medium text-highlighted">Toast</div>
         <!--v-if-->
         <!--v-if-->
       </div>
       <div data-slot="toast-actions" class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-muted hover:text-accent-muted-hover active:text-accent-muted-hover disabled:text-accent-muted aria-disabled:text-accent-muted outline-accent-focus focus-visible:outline-3 text-sm gap-1.5 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 [--ui-accent:var(--ui-primary)] w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="progress-base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-accent motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -377,21 +377,21 @@ exports[`Toast > renders with leading slot correctly 1`] = `
 
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" data-slot="toaster-viewport" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">Leading slot<div data-slot="toast-wrapper" class="w-0 flex-1 flex flex-col">
+    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent [--ui-accent:var(--ui-primary)] items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">Leading slot<div data-slot="toast-wrapper" class="w-0 flex-1 flex flex-col">
         <div data-slot="toast-title" class="text-sm font-medium text-highlighted">Toast</div>
         <!--v-if-->
         <!--v-if-->
       </div>
       <div data-slot="toast-actions" class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-muted hover:text-accent-muted-hover active:text-accent-muted-hover disabled:text-accent-muted aria-disabled:text-accent-muted outline-accent-focus focus-visible:outline-3 text-sm gap-1.5 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 [--ui-accent:var(--ui-primary)] w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="progress-base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-accent motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -412,23 +412,23 @@ exports[`Toast > renders with orientation horizontal correctly 1`] = `
 
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" data-slot="toaster-viewport" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li data-reka-collection-item="" tabindex="0" data-orientation="horizontal" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right"><span class="iconify i-lucide:rocket shrink-0 size-5 text-primary" aria-hidden="true" data-slot="toast-icon"></span>
+    <li data-reka-collection-item="" tabindex="0" data-orientation="horizontal" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent [--ui-accent:var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right"><span class="iconify i-lucide:rocket shrink-0 size-5 text-accent" aria-hidden="true" data-slot="toast-icon"></span>
       <div data-slot="toast-wrapper" class="w-0 flex-1 flex flex-col">
         <div data-slot="toast-title" class="text-sm font-medium text-highlighted">Toast</div>
         <div data-slot="toast-description" class="text-sm text-muted mt-1">This is a toast</div>
         <!--v-if-->
       </div>
-      <div data-slot="toast-actions" class="flex gap-1.5 shrink-0 items-center"><button type="button" data-slot="button" data-reka-toast-announce-exclude="" data-reka-toast-announce-alt="Action" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+      <div data-slot="toast-actions" class="flex gap-1.5 shrink-0 items-center"><button type="button" data-slot="button" data-reka-toast-announce-exclude="" data-reka-toast-announce-alt="Action" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2 py-1 text-xs gap-1">
           <!--v-if--><span data-slot="button-label" class="truncate">Action</span>
           <!--v-if-->
-        </button><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        </button><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-muted hover:text-accent-muted-hover active:text-accent-muted-hover disabled:text-accent-muted aria-disabled:text-accent-muted outline-accent-focus focus-visible:outline-3 text-sm gap-1.5 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
           <!--v-if-->
           <!--v-if-->
         </button></div>
-      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 [--ui-accent:var(--ui-primary)] w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="progress-base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-accent motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -449,25 +449,25 @@ exports[`Toast > renders with orientation vertical correctly 1`] = `
 
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" data-slot="toaster-viewport" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right"><span class="iconify i-lucide:rocket shrink-0 size-5 text-primary" aria-hidden="true" data-slot="toast-icon"></span>
+    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent [--ui-accent:var(--ui-primary)] items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right"><span class="iconify i-lucide:rocket shrink-0 size-5 text-accent" aria-hidden="true" data-slot="toast-icon"></span>
       <div data-slot="toast-wrapper" class="w-0 flex-1 flex flex-col">
         <div data-slot="toast-title" class="text-sm font-medium text-highlighted">Toast</div>
         <div data-slot="toast-description" class="text-sm text-muted mt-1">This is a toast</div>
-        <div data-slot="toast-actions" class="flex gap-1.5 shrink-0 items-start mt-2.5"><button type="button" data-slot="button" data-reka-toast-announce-exclude="" data-reka-toast-announce-alt="Action" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+        <div data-slot="toast-actions" class="flex gap-1.5 shrink-0 items-start mt-2.5"><button type="button" data-slot="button" data-reka-toast-announce-exclude="" data-reka-toast-announce-alt="Action" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2 py-1 text-xs gap-1">
             <!--v-if--><span data-slot="button-label" class="truncate">Action</span>
             <!--v-if-->
           </button></div>
       </div>
       <div data-slot="toast-actions" class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-muted hover:text-accent-muted-hover active:text-accent-muted-hover disabled:text-accent-muted aria-disabled:text-accent-muted outline-accent-focus focus-visible:outline-3 text-sm gap-1.5 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 [--ui-accent:var(--ui-primary)] w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="progress-base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-accent motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -488,7 +488,7 @@ exports[`Toast > renders with title correctly 1`] = `
 
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" data-slot="toaster-viewport" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
+    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent [--ui-accent:var(--ui-primary)] items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
       <div data-slot="toast-wrapper" class="w-0 flex-1 flex flex-col">
         <div data-slot="toast-title" class="text-sm font-medium text-highlighted">Toast</div>
@@ -496,15 +496,15 @@ exports[`Toast > renders with title correctly 1`] = `
         <!--v-if-->
       </div>
       <div data-slot="toast-actions" class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-muted hover:text-accent-muted-hover active:text-accent-muted-hover disabled:text-accent-muted aria-disabled:text-accent-muted outline-accent-focus focus-visible:outline-3 text-sm gap-1.5 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 [--ui-accent:var(--ui-primary)] w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="progress-base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-accent motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -525,7 +525,7 @@ exports[`Toast > renders with title slot correctly 1`] = `
 
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" data-slot="toaster-viewport" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
+    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent [--ui-accent:var(--ui-primary)] items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
       <div data-slot="toast-wrapper" class="w-0 flex-1 flex flex-col">
         <div data-slot="toast-title" class="text-sm font-medium text-highlighted">Title slot</div>
@@ -533,15 +533,15 @@ exports[`Toast > renders with title slot correctly 1`] = `
         <!--v-if-->
       </div>
       <div data-slot="toast-actions" class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-muted hover:text-accent-muted-hover active:text-accent-muted-hover disabled:text-accent-muted aria-disabled:text-accent-muted outline-accent-focus focus-visible:outline-3 text-sm gap-1.5 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 [--ui-accent:var(--ui-primary)] w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="progress-base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-accent motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -562,7 +562,7 @@ exports[`Toast > renders with type correctly 1`] = `
 
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" data-slot="toaster-viewport" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
+    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent [--ui-accent:var(--ui-primary)] items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
       <div data-slot="toast-wrapper" class="w-0 flex-1 flex flex-col">
         <div data-slot="toast-title" class="text-sm font-medium text-highlighted">Toast</div>
@@ -570,15 +570,15 @@ exports[`Toast > renders with type correctly 1`] = `
         <!--v-if-->
       </div>
       <div data-slot="toast-actions" class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-muted hover:text-accent-muted-hover active:text-accent-muted-hover disabled:text-accent-muted aria-disabled:text-accent-muted outline-accent-focus focus-visible:outline-3 text-sm gap-1.5 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 [--ui-accent:var(--ui-primary)] w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="progress-base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-accent motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -599,7 +599,7 @@ exports[`Toast > renders with ui correctly 1`] = `
 
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" data-slot="toaster-viewport" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
+    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent [--ui-accent:var(--ui-primary)] items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
       <div data-slot="toast-wrapper" class="w-0 flex-1 flex flex-col">
         <div data-slot="toast-title" class="text-sm text-highlighted font-bold">Toast</div>
@@ -607,15 +607,15 @@ exports[`Toast > renders with ui correctly 1`] = `
         <!--v-if-->
       </div>
       <div data-slot="toast-actions" class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if--><button type="button" data-slot="toast-close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-muted hover:text-accent-muted-hover active:text-accent-muted-hover disabled:text-accent-muted aria-disabled:text-accent-muted outline-accent-focus focus-visible:outline-3 text-sm gap-1.5 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 [--ui-accent:var(--ui-primary)] w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="progress-base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-accent motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -636,7 +636,7 @@ exports[`Toast > renders without close correctly 1`] = `
 
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" data-slot="toaster-viewport" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
+    <li data-reka-collection-item="" tabindex="0" data-orientation="vertical" data-slot="toast" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent [--ui-accent:var(--ui-primary)] items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
       <div data-slot="toast-wrapper" class="w-0 flex-1 flex flex-col">
         <div data-slot="toast-title" class="text-sm font-medium text-highlighted">Toast</div>
@@ -644,10 +644,10 @@ exports[`Toast > renders without close correctly 1`] = `
         <!--v-if-->
       </div>
       <!--v-if-->
-      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" data-slot="toast-progress" class="gap-2 [--ui-accent:var(--ui-primary)] w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="progress-base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-accent motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>

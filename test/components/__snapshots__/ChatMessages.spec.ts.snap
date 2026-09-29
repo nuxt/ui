@@ -7,7 +7,7 @@ exports[`ChatMessages > renders with assistant correctly 1`] = `
     <div data-slot="chat-message-container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
       <!--v-if-->
       <div data-slot="chat-message-body" class="min-w-0">
-        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Hello, how are you?</div>
+        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 bg-elevated/50 px-4 py-3 rounded-lg min-h-12">Hello, how are you?</div>
         <!--v-if-->
       </div>
     </div>
@@ -15,7 +15,7 @@ exports[`ChatMessages > renders with assistant correctly 1`] = `
   <article data-role="assistant" data-slot="chat-message" class="group/message relative w-full scroll-mt-4 sm:scroll-mt-6">
     <!--v-if-->
     <div data-slot="chat-message-container" class="relative flex items-start gap-3 pb-8">
-      <div data-slot="chat-message-leading" class="inline-flex items-center justify-center min-h-6"><span data-slot="chat-message-leadingAvatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:bot shrink-0 text-muted" aria-hidden="true" data-slot="avatar-icon"></span></span></div>
+      <div data-slot="chat-message-leading" class="inline-flex items-center justify-center min-h-6"><span data-slot="chat-message-leadingAvatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><span class="iconify i-lucide:bot shrink-0 text-accent-muted" aria-hidden="true" data-slot="avatar-icon"></span></span></div>
       <div data-slot="chat-message-body" class="min-w-0 w-full">
         <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 w-full">I am fine, thank you!</div>
         <!--v-if-->
@@ -34,7 +34,7 @@ exports[`ChatMessages > renders with class correctly 1`] = `
     <div data-slot="chat-message-container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
       <!--v-if-->
       <div data-slot="chat-message-body" class="min-w-0">
-        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Hello, how are you?</div>
+        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 bg-elevated/50 px-4 py-3 rounded-lg min-h-12">Hello, how are you?</div>
         <!--v-if-->
       </div>
     </div>
@@ -61,7 +61,7 @@ exports[`ChatMessages > renders with compact correctly 1`] = `
     <div data-slot="chat-message-container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-1.5 pb-3">
       <!--v-if-->
       <div data-slot="chat-message-body" class="min-w-0">
-        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-2 px-2 py-1 rounded-lg min-h-8 bg-elevated/50">Hello, how are you?</div>
+        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-2 bg-elevated/50 px-2 py-1 rounded-lg min-h-8">Hello, how are you?</div>
         <!--v-if-->
       </div>
     </div>
@@ -88,7 +88,7 @@ exports[`ChatMessages > renders with content slot correctly 1`] = `
     <div data-slot="chat-message-container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
       <!--v-if-->
       <div data-slot="chat-message-body" class="min-w-0">
-        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Content slot</div>
+        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 bg-elevated/50 px-4 py-3 rounded-lg min-h-12">Content slot</div>
         <!--v-if-->
       </div>
     </div>
@@ -122,7 +122,7 @@ exports[`ChatMessages > renders with files slot correctly 1`] = `
     <div data-slot="chat-message-container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
       <!--v-if-->
       <div data-slot="chat-message-body" class="min-w-0">
-        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Hello, how are you?</div>
+        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 bg-elevated/50 px-4 py-3 rounded-lg min-h-12">Hello, how are you?</div>
         <!--v-if-->
       </div>
     </div>
@@ -149,7 +149,7 @@ exports[`ChatMessages > renders with indicator slot correctly 1`] = `
     <div data-slot="chat-message-container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
       <!--v-if-->
       <div data-slot="chat-message-body" class="min-w-0">
-        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Hello, how are you?</div>
+        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 bg-elevated/50 px-4 py-3 rounded-lg min-h-12">Hello, how are you?</div>
         <!--v-if-->
       </div>
     </div>
@@ -185,7 +185,7 @@ exports[`ChatMessages > renders with messages correctly 1`] = `
     <div data-slot="chat-message-container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
       <!--v-if-->
       <div data-slot="chat-message-body" class="min-w-0">
-        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Hello, how are you?</div>
+        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 bg-elevated/50 px-4 py-3 rounded-lg min-h-12">Hello, how are you?</div>
         <!--v-if-->
       </div>
     </div>
@@ -212,7 +212,7 @@ exports[`ChatMessages > renders with status error correctly 1`] = `
     <div data-slot="chat-message-container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
       <!--v-if-->
       <div data-slot="chat-message-body" class="min-w-0">
-        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Hello, how are you?</div>
+        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 bg-elevated/50 px-4 py-3 rounded-lg min-h-12">Hello, how are you?</div>
         <!--v-if-->
       </div>
     </div>
@@ -239,7 +239,7 @@ exports[`ChatMessages > renders with status ready correctly 1`] = `
     <div data-slot="chat-message-container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
       <!--v-if-->
       <div data-slot="chat-message-body" class="min-w-0">
-        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Hello, how are you?</div>
+        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 bg-elevated/50 px-4 py-3 rounded-lg min-h-12">Hello, how are you?</div>
         <!--v-if-->
       </div>
     </div>
@@ -266,7 +266,7 @@ exports[`ChatMessages > renders with status streaming correctly 1`] = `
     <div data-slot="chat-message-container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
       <!--v-if-->
       <div data-slot="chat-message-body" class="min-w-0">
-        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Hello, how are you?</div>
+        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 bg-elevated/50 px-4 py-3 rounded-lg min-h-12">Hello, how are you?</div>
         <!--v-if-->
       </div>
     </div>
@@ -293,7 +293,7 @@ exports[`ChatMessages > renders with status submitted correctly 1`] = `
     <div data-slot="chat-message-container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
       <!--v-if-->
       <div data-slot="chat-message-body" class="min-w-0">
-        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Hello, how are you?</div>
+        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 bg-elevated/50 px-4 py-3 rounded-lg min-h-12">Hello, how are you?</div>
         <!--v-if-->
       </div>
     </div>
@@ -331,7 +331,7 @@ exports[`ChatMessages > renders with ui correctly 1`] = `
     <div data-slot="chat-message-container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
       <!--v-if-->
       <div data-slot="chat-message-body" class="min-w-0">
-        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Hello, how are you?</div>
+        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 bg-elevated/50 px-4 py-3 rounded-lg min-h-12">Hello, how are you?</div>
         <!--v-if-->
       </div>
     </div>
@@ -356,9 +356,9 @@ exports[`ChatMessages > renders with user correctly 1`] = `
   <article data-role="user" data-slot="chat-message" class="group/message relative w-full scroll-mt-4 sm:scroll-mt-6">
     <!--v-if-->
     <div data-slot="chat-message-container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
-      <div data-slot="chat-message-leading" class="inline-flex items-center justify-center min-h-6 mt-2"><span data-slot="chat-message-leadingAvatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" width="32" height="32" data-slot="avatar-image" class="h-full w-full rounded-[inherit] object-cover"></span></div>
+      <div data-slot="chat-message-leading" class="inline-flex items-center justify-center min-h-6 mt-2"><span data-slot="chat-message-leadingAvatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" width="32" height="32" data-slot="avatar-image" class="h-full w-full rounded-[inherit] object-cover"></span></div>
       <div data-slot="chat-message-body" class="min-w-0">
-        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Hello, how are you?</div>
+        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 bg-elevated/50 px-4 py-3 rounded-lg min-h-12">Hello, how are you?</div>
         <!--v-if-->
       </div>
     </div>
@@ -385,7 +385,7 @@ exports[`ChatMessages > renders with viewport slot correctly 1`] = `
     <div data-slot="chat-message-container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
       <!--v-if-->
       <div data-slot="chat-message-body" class="min-w-0">
-        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Hello, how are you?</div>
+        <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 bg-elevated/50 px-4 py-3 rounded-lg min-h-12">Hello, how are you?</div>
         <!--v-if-->
       </div>
     </div>
