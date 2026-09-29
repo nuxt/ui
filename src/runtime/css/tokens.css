@@ -153,4 +153,5 @@
   --divide-color-accented: var(--ui-border-strong);
   --ring-color-bg: var(--ui-bg-surface);
   --border-color-bg: var(--ui-bg-surface);
+  --ring-offset-color-bg: var(--ui-bg-surface);
 }
