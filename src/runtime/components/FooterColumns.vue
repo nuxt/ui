@@ -63,7 +63,7 @@ import UIcon from './Icon.vue'
 const _props = defineProps<FooterColumnsProps<T>>()
 const slots = defineSlots<FooterColumnsSlots<T>>()
 
-const props = useComponentProps<FooterColumnsProps<T>>('footerColumns', _props)
+const props = useComponentProps<FooterColumnsProps<T>>('footerColumns', _props, theme)
 
 const appConfig = useAppConfig() as FooterColumns['AppConfig']
 

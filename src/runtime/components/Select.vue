@@ -182,7 +182,7 @@ const _props = withDefaults(defineProps<SelectProps<T, VK, M, Mod>>(), {
 const emits = defineEmits<SelectEmits<T, VK, M, Mod>>()
 const slots = defineSlots<SelectSlots<T, VK, M, Mod>>()
 
-const props = useComponentProps<SelectProps<T, VK, M, Mod>>('select', _props)
+const props = useComponentProps<SelectProps<T, VK, M, Mod>>('select', _props, theme)
 
 const appConfig = useAppConfig() as Select['AppConfig']
 

@@ -31,7 +31,7 @@ const _props = withDefaults(defineProps<ProseAccordionProps>(), {
 })
 const slots = defineSlots<ProseAccordionSlots>()
 
-const props = useComponentProps('prose.accordion', _props)
+const props = useComponentProps('prose.accordion', _props, theme)
 
 const appConfig = useAppConfig() as ProseAccordion['AppConfig']
 
