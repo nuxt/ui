@@ -140,7 +140,7 @@ const queue = defineModel<ChatPromptQueueItem[]>('queue')
 
 const { t } = useLocale()
 const appConfig = useThemeConfig() as ChatPrompt['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.chatPrompt)
+const overrides = useComponentOverrides((ui: ChatPrompt['AppConfig']['ui']) => ui.chatPrompt)
 
 const textareaProps = useForwardProps(reactivePick(props, 'rows', 'autofocus', 'autofocusDelay', 'autoresize', 'autoresizeDelay', 'maxrows', 'icon', 'avatar', 'loading', 'loadingIcon'))
 

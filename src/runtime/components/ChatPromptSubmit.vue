@@ -113,7 +113,7 @@ const props = useComponentProps('chatPromptSubmit', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useThemeConfig() as ChatPromptSubmit['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.chatPromptSubmit)
+const overrides = useComponentOverrides((ui: ChatPromptSubmit['AppConfig']['ui']) => ui.chatPromptSubmit)
 
 const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'color', 'variant', 'status', 'disabled', 'streamingIcon', 'streamingColor', 'streamingVariant', 'submittedIcon', 'submittedColor', 'submittedVariant', 'errorIcon', 'errorColor', 'errorVariant', 'class', 'ui'))
 

@@ -17,8 +17,8 @@ export interface ColorModeButtonProps extends Omit<ButtonProps, LinkPropsKeys | 
 <script setup lang="ts">
 import { computed } from 'vue'
 import { reactiveOmit, useMounted } from '@vueuse/core'
-import { useColorMode, useAppConfig } from '#imports'
-import { useComponentProps } from '../../composables/useComponentProps'
+import { useColorMode } from '#imports'
+import { useComponentProps, useThemeConfig } from '../../composables/useComponentProps'
 import { useForwardProps } from '../../composables/useForwardProps'
 import { useLocale } from '../../composables/useLocale'
 import { usePrefix } from '../../composables/usePrefix'

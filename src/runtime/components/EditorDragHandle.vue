@@ -75,7 +75,7 @@ const dragHandleProps = useForwardProps(reactivePick(props, 'pluginKey', 'nested
 const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'options', 'editor', 'pluginKey', 'nested', 'nestedOptions', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement', 'class', 'ui'))
 
 const appConfig = useThemeConfig() as EditorDragHandle['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.editorDragHandle)
+const overrides = useComponentOverrides((ui: EditorDragHandle['AppConfig']['ui']) => ui.editorDragHandle)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)())

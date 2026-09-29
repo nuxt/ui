@@ -109,7 +109,7 @@ const props = useComponentProps('drawer', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useThemeConfig() as Drawer['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.drawer)
+const overrides = useComponentOverrides((ui: Drawer['AppConfig']['ui']) => ui.drawer)
 
 const rootProps = useForwardProps(reactivePick(props, 'activeSnapPoint', 'closeThreshold', 'shouldScaleBackground', 'setBackgroundColorOnScale', 'scrollLockTimeout', 'fixed', 'dismissible', 'modal', 'open', 'defaultOpen', 'nested', 'direction', 'noBodyStyles', 'handleOnly', 'preventScrollRestoration', 'snapPoints'), emits)
 const portalProps = usePortal(toRef(() => props.portal))

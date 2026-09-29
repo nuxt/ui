@@ -9,22 +9,25 @@ import type { ClassValue, SlotClassReplacer, TVMergeConfig, TV } from '../types/
 /**
  * The variants engine. It covers exactly the surface our themes use, which is
  * `slots`, `variants`, `compoundVariants` and `defaultVariants`, a theme
- * and one overrides object on top of it, and leaves out `compoundSlots` and the
- * per-call config argument, neither of which appears in any theme or call site.
+ * and the levels of overrides on top of it, and leaves out `compoundSlots` and
+ * the per-call config argument, neither of which appears in any theme or call
+ * site.
  *
  * Class values may be a `(defaults) => classes` **replacer**, which takes the
- * place of what it receives instead of appending to it. In `app.config.ui` that
- * is the slot's classes from the theme, resolved at construction time, and
- * `variants` / `compoundVariants` still apply on top. In `:ui` and the `class`
+ * place of what it receives instead of appending to it. In a level of overrides
+ * (`app.config.ui`, a `<UTheme :ui>`) that is the theme's classes for the slot,
+ * resolved at construction time, and `variants`, `compoundVariants` and the
+ * other levels' classes still apply on top. In `:ui` and the `class`
  * prop it is the slot's whole resolved chain.
  *
  * The performance model follows how components call it, `tv(theme,
  * overrides.value)(props)` rebuilt inside a computed, where the overrides carry
- * the component's `app.config.ui.<c>` and the engine for the app's merge config
- * and prefix (one engine per distinct config, see `engineFor`):
+ * the component's entry at each level (`app.config.ui.<c>`, then each `<UTheme>`)
+ * and the engine for the app's merge config and prefix (one engine per distinct
+ * config, see `engineFor`):
  * - build defers all merging and resolves to a shared compiled entry: the theme
  *   is a WeakMap hit, and overrides are keyed by content, so every rebuild,
- *   instance and server request with the same `app.config.ui.<c>` shares one.
+ *   instance and server request with the same levels shares one.
  *   Content rather than identity because Nuxt clones the app config per request
  *   on the server and mutates it in place on the client (`updateAppConfig`, HMR).
  * - invoking allocates slot closures only, with no class resolution
@@ -199,15 +202,13 @@ const isPlainObject = (value: any): value is Record<string, any> => typeof value
 
 /**
  * One step of a spec. Steps resolve in order, last class winning:
- * 1. the theme's slot classes and its variants
- * 2. the overrides' variants, so tuning one from `app.config.ui` wins over
- *    every theme variant, not only the ones declared before it
- * 3. the theme's compound variants. A compound is often the exception to a
- *    variant (`square` and `size` to `p-1.5`), and tuning the variant doesn't
- *    mean to cancel it, so it stays above both.
- * 4. the overrides' slot classes, then their compound variants, so
- *    `app.config.ui.<c>.slots.<x>` wins over what the theme resolved the way
- *    `:ui` does, and the more specific compound still wins over it.
+ * 1. the theme: its slot classes, variants and compound variants
+ * 2. each level of overrides, farthest first (`app.config.ui.<c>`, then each
+ *    `<UTheme>` down to the component): its slot classes, its variants, then
+ *    its compound variants
+ *
+ * So a class a level sets wins over the whole theme, whatever form the theme
+ * rule takes, and the nearest level wins over the ones further out.
  */
 interface Layer {
   /** Per slot. */
@@ -261,52 +262,62 @@ function snapshot<T>(value: T): T {
 }
 
 /**
- * Stack the overrides (`app.config.ui.<c>`) on the theme. A replacer among them
- * resolves against the theme's slot classes and takes their place in the theme
- * layer, so the variants and compound variants still apply on top of it.
+ * Stack the levels of overrides on the theme, farthest first. A replacer in a
+ * level's slots resolves against the theme's slot classes, as a farther
+ * level's replacer left them, and takes their place in the theme layer, so
+ * every variant, compound variant and level class still applies on top of it.
  */
-function resolveSpec(theme: Record<string, any>, overrides: Record<string, any> | undefined, config: TVMergeConfig | undefined): Spec {
-  const own = overrides ?? EMPTY
-
+function resolveSpec(theme: Record<string, any>, levels: readonly Record<string, any>[], config: TVMergeConfig | undefined): Spec {
   const themeSlots: Record<string, any> = theme.slots ?? EMPTY
-  const ownSlots: Record<string, any> = own.slots ?? EMPTY
 
-  const slotKeys = [...new Set([...Object.keys(themeSlots), ...Object.keys(ownSlots)])]
+  const slotKeys = [...new Set([...Object.keys(themeSlots), ...levels.flatMap(level => Object.keys(level.slots ?? EMPTY))])]
 
   if (import.meta.dev) {
     const slot = slotKeys[0] ?? 'base'
     warnBareClasses(theme, slot)
-    warnBareClasses(own, slot)
-  }
-
-  // A replacer's result stands in for the theme's classes, beneath the
-  // variants. Plain classes are overrides like any other and go on top.
-  const themeStatics: Record<string, ClassValue> = {}
-  const ownStatics: Record<string, ClassValue> = {}
-  for (const key of slotKeys) {
-    const slotClasses = ownSlots[key]
-    if (typeof slotClasses === 'function') {
-      themeStatics[key] = replaceClasses(config, slotClasses, themeSlots[key])
-    } else {
-      themeStatics[key] = themeSlots[key]
-      ownStatics[key] = snapshot(slotClasses)
+    for (const level of levels) {
+      warnBareClasses(level, slot)
     }
   }
 
-  const layers: Layer[] = [{ statics: themeStatics, variants: theme.variants }]
-  if (!isEmpty(own.variants)) {
-    layers.push({ variants: snapshot(own.variants) })
+  const themeStatics: Record<string, ClassValue> = {}
+  for (const key of slotKeys) {
+    themeStatics[key] = themeSlots[key]
   }
-  layers.push({ compoundVariants: flatten(theme.compoundVariants) })
-  if (overrides) {
-    layers.push({ statics: ownStatics, compoundVariants: snapshot(flatten(own.compoundVariants)) })
+  const levelStatics = levels.map(() => ({} as Record<string, ClassValue>))
+  levels.forEach((level, index) => {
+    const slots: Record<string, any> = level.slots ?? EMPTY
+    for (const key of Object.keys(slots)) {
+      if (typeof slots[key] !== 'function') {
+        levelStatics[index]![key] = snapshot(slots[key])
+        continue
+      }
+      // A replacer takes the place of the theme's classes, after a farther
+      // level's replacer, and leaves every level's plain classes where they are
+      themeStatics[key] = replaceClasses(config, slots[key], themeStatics[key])
+    }
+  })
+
+  // Each level applies like the theme, its slots, then its variants, then its
+  // compound variants, so a variant it sets still wins over its own slot classes
+  const layers: Layer[] = [{ statics: themeStatics, variants: theme.variants, compoundVariants: flatten(theme.compoundVariants) }]
+  levels.forEach((level, index) => {
+    const compoundVariants = flatten(level.compoundVariants)
+    if (!isEmpty(levelStatics[index]) || !isEmpty(level.variants) || compoundVariants.length) {
+      layers.push({ statics: levelStatics[index], variants: snapshot(level.variants), compoundVariants: snapshot(compoundVariants) })
+    }
+  })
+
+  const defaultVariants = { ...theme.defaultVariants }
+  for (const level of levels) {
+    Object.assign(defaultVariants, level.defaultVariants)
   }
 
   return {
     config,
     layers,
     slotKeys,
-    defaultVariants: { ...theme.defaultVariants, ...own.defaultVariants },
+    defaultVariants,
     compiled: Object.create(null)
   }
 }
@@ -716,7 +727,14 @@ function contentKey(overrides: Record<string, any>, limit?: number): string | ty
 
 type Build = (props?: Record<string, any>) => Record<string, (slotProps?: Record<string, any>) => string | undefined>
 
-type Engine = (theme: Record<string, any>, overrides?: Record<string, any> | null, unstyled?: boolean) => Build
+type Engine = (theme: Record<string, any>, levels: readonly (Record<string, any> | null | undefined)[], unstyled?: boolean) => Build
+
+const NO_LEVELS: readonly Record<string, any>[] = []
+
+/** The levels that hold overrides, farthest first. */
+function levelsOf(entries: readonly (Record<string, any> | null | undefined)[]): Record<string, any>[] {
+  return entries.filter((entry): entry is Record<string, any> => entry != null && !isEmpty(entry))
+}
 
 /**
  * An engine for one merge config and prefix, with the compiled entries it owns:
@@ -726,25 +744,34 @@ function createEngine(config?: TVMergeConfig, prefix?: string): Engine {
   /** Compiled entries for a theme on its own, keyed by identity. */
   const themeSpecs = new WeakMap<object, Spec>()
 
-  /** Compiled entries per theme for the overrides it was called with, keyed by content. */
+  /** Compiled entries per theme for the levels it was called with, keyed by content. */
   const overrideSpecs = new WeakMap<object, Generations<Spec>>()
 
   // The themes ship unprefixed, so with Tailwind's `prefix(...)` each resolves
   // against a prefixed copy, built once per theme object
   const prefixedThemes = new WeakMap<object, Record<string, any>>()
 
-  function specFor(theme: Record<string, any>, overrides: Record<string, any> | null | undefined): Spec {
-    if (overrides == null || isEmpty(overrides)) {
+  function specFor(theme: Record<string, any>, entries: readonly (Record<string, any> | null | undefined)[]): Spec {
+    let key = ''
+    for (let i = 0; i < entries.length; i++) {
+      const entry = entries[i]
+      if (entry == null || isEmpty(entry)) {
+        continue
+      }
+      const part = contentKey(entry)
+      if (part === BAIL) {
+        return resolveSpec(theme, levelsOf(entries), config)
+      }
+      // One level keys as its own content, the common case, so nothing is copied
+      key = key ? key + '|' + part : part
+    }
+    if (!key) {
       let spec = themeSpecs.get(theme)
       if (!spec) {
-        spec = resolveSpec(theme, undefined, config)
+        spec = resolveSpec(theme, NO_LEVELS, config)
         themeSpecs.set(theme, spec)
       }
       return spec
-    }
-    const key = contentKey(overrides)
-    if (key === BAIL) {
-      return resolveSpec(theme, overrides, config)
     }
     let specs = overrideSpecs.get(theme)
     if (!specs) {
@@ -753,13 +780,13 @@ function createEngine(config?: TVMergeConfig, prefix?: string): Engine {
     }
     let spec = specs.get(key)
     if (spec === BAIL) {
-      spec = resolveSpec(theme, overrides, config)
+      spec = resolveSpec(theme, levelsOf(entries), config)
       specs.set(key, spec)
     }
     return spec
   }
 
-  return function build(theme, overrides, unstyled) {
+  return function build(theme, levels, unstyled) {
     // `unstyled` from the nearest `<UTheme>`: resolve against the blanked theme,
     // so only the overrides, `:ui` and `class` classes remain
     if (unstyled) {
@@ -774,7 +801,7 @@ function createEngine(config?: TVMergeConfig, prefix?: string): Engine {
       }
       theme = prefixed
     }
-    const spec = specFor(theme, overrides)
+    const spec = specFor(theme, levels)
 
     return (props?: Record<string, any>) => {
       const fns: Record<string, (slotProps?: Record<string, any>) => string | undefined> = {}
@@ -822,13 +849,14 @@ export function engineFor(config?: TVMergeConfig, prefix?: string): Engine {
 
 /**
  * A component's overrides as `useComponentOverrides` resolves them from the
- * nearest theme: its `app.config.ui.<c>` entry, whether the subtree is
- * `unstyled`, and the engine for the app's merge config and prefix.
+ * nearest theme: its entry at each level, `app.config.ui.<c>` then each
+ * `<UTheme>` down to the component, whether the subtree is `unstyled`, and the
+ * engine for the app's merge config and prefix.
  * @internal
  */
 export class ComponentOverrides<O = Record<string, any>> {
   constructor(
-    readonly entry: O | undefined,
+    readonly levels: readonly (O | undefined)[],
     readonly unstyled: boolean,
     readonly engine: Engine
   ) {}
@@ -842,12 +870,12 @@ export class ComponentOverrides<O = Record<string, any>> {
  */
 export const tv = /* @__PURE__ */ ((theme: Record<string, any>, overrides?: Record<string, any> | ComponentOverrides | null): Build => {
   if (overrides instanceof ComponentOverrides) {
-    return overrides.engine(theme, overrides.entry as Record<string, any> | undefined, overrides.unstyled)
+    return overrides.engine(theme, overrides.levels as readonly (Record<string, any> | undefined)[], overrides.unstyled)
   }
   if (overrides?.unstyled) {
     // The engine reads no `unstyled` key, so the overrides pass as they are and
     // keep their cache entry
-    return defaultEngine(theme, overrides, true)
+    return defaultEngine(theme, [overrides], true)
   }
-  return defaultEngine(theme, overrides)
+  return defaultEngine(theme, overrides ? [overrides] : NO_LEVELS)
 }) as TV

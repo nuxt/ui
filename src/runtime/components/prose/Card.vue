@@ -43,7 +43,7 @@ const slots = defineSlots<ProseCardSlots>()
 const props = useComponentProps('prose.card', _props, theme)
 
 const appConfig = useThemeConfig() as ProseCard['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.prose?.card)
+const overrides = useComponentOverrides((ui: ProseCard['AppConfig']['ui']) => ui.prose?.card)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({

@@ -27,9 +27,9 @@ const component = ({ name, primitive, prose, content }) => {
   const componentConfigArgs = prose
     ? `typeof theme, AppConfig, '${camelName}', 'ui.prose'`
     : `typeof theme, AppConfig, '${camelName}'`
-  const appConfigLookup = prose
-    ? `appConfig.ui?.prose?.${camelName}`
-    : `appConfig.ui?.${camelName}`
+  const levelLookup = prose
+    ? `ui.prose?.${camelName}`
+    : `ui.${camelName}`
   // A prose component stands for one HTML element, its `base`.
   const slot = prose ? 'base' : 'root'
   // The outermost element is named after the component. Prose emits no marker.
@@ -65,7 +65,7 @@ export interface ${upperName}Slots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '${importPrefix}/composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '${importPrefix}/composables/useComponentProps'
 import { tv } from '${importPrefix}/utils/tv'
 
 const _props = defineProps<${upperName}Props>()
@@ -73,8 +73,7 @@ defineSlots<${upperName}Slots>()
 
 const props = useComponentProps('${componentKey}', _props, theme)
 
-const appConfig = useThemeConfig() as ${upperName}['AppConfig']
-const overrides = useComponentOverrides(() => ${appConfigLookup})
+const overrides = useComponentOverrides((ui: ${upperName}['AppConfig']['ui']) => ${levelLookup})
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)())
@@ -113,7 +112,7 @@ export interface ${upperName}Slots {
 import { computed } from 'vue'
 import { ${upperName}Root } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '${importPrefix}/composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '${importPrefix}/composables/useComponentProps'
 import { useForwardProps } from '${importPrefix}/composables/useForwardProps'
 import { tv } from '${importPrefix}/utils/tv'
 
@@ -123,8 +122,7 @@ defineSlots<${upperName}Slots>()
 
 const props = useComponentProps('${componentKey}', _props, theme)
 
-const appConfig = useThemeConfig() as ${upperName}['AppConfig']
-const overrides = useComponentOverrides(() => ${appConfigLookup})
+const overrides = useComponentOverrides((ui: ${upperName}['AppConfig']['ui']) => ${levelLookup})
 
 // TODO: list the same keys as in \`${upperName}Props\` Pick.
 const rootProps = useForwardProps(reactivePick(props, 'as'), emits)
