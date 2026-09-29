@@ -14,8 +14,8 @@ import type * as ui from '#build/ui'
 
 import { defaultOptions, getDefaultConfig } from './utils/defaults'
 import type { ModuleOptions } from './module'
-import type icons from './theme/icons'
-import type { Color as ColorAlias } from './theme/color'
+import type icons from './runtime/theme/icons'
+import type { Color as ColorAlias } from './runtime/theme/color'
 
 import TemplatePlugin from './plugins/templates'
 import PluginsPlugin from './plugins/plugins'
