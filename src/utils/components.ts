@@ -47,9 +47,10 @@ function createMdcPattern(prefix: string): RegExp {
 /**
  * Pattern to match a component imported from its file, for apps that don't
  * register them: `import Button from '@nuxt/ui/components/Button.vue'`, or
- * `#ui/components/prose/Callout.vue` in Nuxt.
+ * `#ui/components/prose/Callout.vue` in Nuxt, subdirectories included
+ * (`color-mode/ColorModeButton.vue`, `prose/callout/Note.vue`).
  */
-const IMPORT_PATTERN = /(?:@nuxt\/ui|#ui)\/(?:runtime\/)?components\/(prose\/)?(?:content\/)?([A-Z]\w+)\.vue/g
+const IMPORT_PATTERN = /(?:@nuxt\/ui|#ui)\/(?:runtime\/)?components\/(prose\/)?(?:[a-z-]+\/)*([A-Z]\w+)\.vue/g
 
 /**
  * Pattern to match a theme imported to style a component of the app's own:
