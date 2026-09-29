@@ -13,15 +13,14 @@ export interface ProseHrProps {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 
 const _props = defineProps<ProseHrProps>()
 
 const props = useComponentProps('prose.hr', _props, theme)
 
-const appConfig = useThemeConfig() as ProseHr['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.prose?.hr)
+const overrides = useComponentOverrides((ui: ProseHr['AppConfig']['ui']) => ui.prose?.hr)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)())

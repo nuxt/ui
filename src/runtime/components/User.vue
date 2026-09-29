@@ -46,7 +46,7 @@ export interface UserSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { usePrefix } from '../composables/usePrefix'
 import { tv } from '../utils/tv'
 import UChip from './Chip.vue'
@@ -62,8 +62,7 @@ const slots = defineSlots<UserSlots>()
 
 const props = useComponentProps('user', _props, theme)
 
-const appConfig = useThemeConfig() as User['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.user)
+const overrides = useComponentOverrides((ui: User['AppConfig']['ui']) => ui.user)
 const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys

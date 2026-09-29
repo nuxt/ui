@@ -88,7 +88,7 @@ const props = useComponentProps<InputRatingProps>('inputRating', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useThemeConfig() as InputRating['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.inputRating)
+const overrides = useComponentOverrides((ui: InputRating['AppConfig']['ui']) => ui.inputRating)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'length', 'step', 'hoverable', 'clearable', 'required', 'modelValue', 'defaultValue'), emits)
 

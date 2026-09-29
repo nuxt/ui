@@ -59,7 +59,7 @@ export interface SeparatorSlots {
 import { computed } from 'vue'
 import { Separator } from 'reka-ui'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -75,8 +75,7 @@ const slots = defineSlots<SeparatorSlots>()
 
 const props = useComponentProps('separator', _props, theme)
 
-const appConfig = useThemeConfig() as Separator['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.separator)
+const overrides = useComponentOverrides((ui: Separator['AppConfig']['ui']) => ui.separator)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'decorative', 'orientation'))
 

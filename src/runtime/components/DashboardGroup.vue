@@ -28,7 +28,7 @@ import { Primitive } from 'reka-ui'
 import { useNuxtApp } from '#imports'
 import { provideDashboardContext } from '../utils/dashboard'
 import { tv } from '../utils/tv'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 
 const _props = withDefaults(defineProps<DashboardGroupProps>(), {
   storage: 'cookie',
@@ -41,8 +41,7 @@ defineSlots<DashboardGroupSlots>()
 const props = useComponentProps('dashboardGroup', _props, theme)
 
 const nuxtApp = useNuxtApp()
-const appConfig = useThemeConfig() as DashboardGroup['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.dashboardGroup)
+const overrides = useComponentOverrides((ui: DashboardGroup['AppConfig']['ui']) => ui.dashboardGroup)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)())

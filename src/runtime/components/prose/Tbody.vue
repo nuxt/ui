@@ -18,7 +18,7 @@ export interface ProseTbodySlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 
 const _props = defineProps<ProseTbodyProps>()
@@ -27,8 +27,7 @@ defineSlots<ProseTbodySlots>()
 
 const props = useComponentProps('prose.tbody', _props, theme)
 
-const appConfig = useThemeConfig() as ProseTbody['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.prose?.tbody)
+const overrides = useComponentOverrides((ui: ProseTbody['AppConfig']['ui']) => ui.prose?.tbody)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)())

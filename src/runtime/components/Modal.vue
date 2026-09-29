@@ -111,7 +111,7 @@ const props = useComponentProps('modal', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useThemeConfig() as Modal['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.modal)
+const overrides = useComponentOverrides((ui: Modal['AppConfig']['ui']) => ui.modal)
 
 const rootProps = useForwardProps(reactivePick(props, 'open', 'defaultOpen', 'modal', 'unmountOnHide'), emits)
 const portalProps = usePortal(toRef(() => props.portal))

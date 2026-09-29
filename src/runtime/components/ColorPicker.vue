@@ -76,7 +76,7 @@ import { Primitive } from 'reka-ui'
 import { useEventListener, useElementBounding, watchThrottled, watchPausable } from '@vueuse/core'
 import { isClient } from '@vueuse/shared'
 import { ColorTranslator } from 'colortranslator'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 
 const _props = withDefaults(defineProps<ColorPickerProps>(), {
@@ -89,8 +89,7 @@ const props = useComponentProps('colorPicker', _props, theme)
 
 const modelValue = defineModel<string>(undefined)
 
-const appConfig = useThemeConfig() as ColorPicker['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.colorPicker)
+const overrides = useComponentOverrides((ui: ColorPicker['AppConfig']['ui']) => ui.colorPicker)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
