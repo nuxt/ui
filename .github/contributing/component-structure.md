@@ -49,7 +49,7 @@ export interface ComponentNameSlots {
 // 6. Regular imports (separate from type imports)
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 
 // 7. Raw props (use withDefaults only when you actually need a runtime default)
@@ -58,14 +58,14 @@ const slots = defineSlots<ComponentNameSlots>()
 
 // 8. Theme-aware proxy: resolves explicit > <UTheme :props> > <UTheme :props> '*'
 //    > app.config.ui.<name>.defaultVariants > app.config.ui.defaultVariants
-//    > withDefaults. The `ui` prop is deep-merged automatically, so reach for
+//    > withDefaults. `props.ui` is the component's own `ui`, a `<UTheme :ui>`
+//    reaches the engine through `useComponentOverrides`, so reach for
 //    `props.ui?.<slot>` in the template. The theme is passed so `'*'` only
 //    replaces a `primary` color or an `md` size.
 const props = useComponentProps('componentName', _props, theme)
 
-// 9. App config
-const appConfig = useThemeConfig() as ComponentName['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.componentName)
+// 9. Overrides, from `app.config.ui` and each `<UTheme>` around the component
+const overrides = useComponentOverrides((ui: ComponentName['AppConfig']['ui']) => ui.componentName)
 
 // 10. Computed UI - always computed for reactivity
 const ui = computed(() => tv(theme, overrides.value)({
@@ -114,7 +114,7 @@ export interface CollapsibleSlots {
 import { computed } from 'vue'
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { tv } from '../utils/tv'
 
@@ -124,11 +124,10 @@ const _props = withDefaults(defineProps<CollapsibleProps>(), {
 const emits = defineEmits<CollapsibleEmits>()
 const slots = defineSlots<CollapsibleSlots>()
 
-// Theme-aware proxy. `props` deep-merges `ui` and resolves <UTheme :props> defaults.
+// Theme-aware proxy. `props` resolves <UTheme :props> defaults.
 const props = useComponentProps('collapsible', _props, theme)
 
-const appConfig = useThemeConfig() as Collapsible['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.collapsible)
+const overrides = useComponentOverrides((ui: Collapsible['AppConfig']['ui']) => ui.collapsible)
 
 // Pick from `props` (the proxy) so theme-supplied values flow through.
 // Use the local `useForwardProps` — reka-ui's `useForwardProps` /
@@ -313,9 +312,9 @@ defineExpose({
 ```
 
 Notes:
-- Read the `ui` config through `useThemeConfig()`, never `useAppConfig()`: it comes from the nearest `<UTheme>`, which `<UApp>` provides at the root from `app.config.ui`. Pass the component's entry to `tv()` through `useComponentOverrides(() => appConfig.ui?.<name>)`, never directly. It flags the overrides `unstyled` under `<UTheme unstyled>` (or `app.config.ui.unstyled`), carries the engine for the app's merge config and Tailwind prefix, and types the overrides so variant values the app adds, a custom `color` for example, type-check in the `tv()` call.
+- Read the `ui` config through `useThemeConfig()`, never `useAppConfig()`: it comes from the nearest `<UTheme>`, which `<UApp>` provides at the root from `app.config.ui`. Pass the component's entry to `tv()` through `useComponentOverrides((ui: X['AppConfig']['ui']) => ui.<name>)`, never directly. It reads the entry from `app.config.ui` and from each `<UTheme>` around the component, nearest last, flags the overrides `unstyled` under `<UTheme unstyled>` (or `app.config.ui.unstyled`), carries the engine for the app's merge config and Tailwind prefix, and types the overrides so variant values the app adds, a custom `color` for example, type-check in the `tv()` call.
 - The proxy passes through to `_props` for explicitly set props, so `withDefaults` fallbacks stay lower priority than `<UTheme>` overrides.
-- The `ui` prop is deep-merged (slot classes layered on top of theme overrides). All other props are explicit-wins.
+- The `ui` prop holds the component's own `ui` only: a `<UTheme :ui>` reaches the engine as a level of overrides, not through the prop. `class` merges a `<UTheme :props>` class under the component's own. All other props are explicit-wins.
 - **Always read props as `props.x` in templates and `<script setup>`.** Bare prop names (`{{ label }}`, `v-if="arrow"`) resolve to `_props` and bypass the proxy, so `<UTheme :props>` defaults won't apply. The `nuxt-ui/no-bare-prop-refs` ESLint rule autofixes this.
 - Pass the **raw** `_props` (not the proxy) to context composables — `useFormField`, `useFieldGroup`, `useAvatarGroup`. Their internal fallback is `props?.x ?? injected.x`, so the wrapping `<UFormField>` / `<UFieldGroup>` / `<UAvatarGroup>` should beat `<UTheme :props>` / `withDefaults` / `app.config` defaults (closer context wins). **Then always fall back to the proxy in `tv()` calls** — `size: formSize.value ?? props.size`, `color: color.value ?? props.color`, `highlight: highlight.value ?? props.highlight`. Without `?? props.X`, `<UTheme :props>` is silently dropped when no closer context wraps the component. Final chain: `explicit > closer-context > <UTheme :props> > its '*' > app.config.ui.<name>.defaultVariants > app.config.ui.defaultVariants > withDefaults`. `useComponentIcons` has no injection chain, so pass the proxy `props` directly.
 - Reka primitives' `useForwardProps` / `useForwardPropsEmits` filter root props by `vm.vnode.props ∪ withDefaults` and would strip theme-supplied values. Import `useForwardProps` from `composables/useForwardProps.ts` instead — same `(source, emits?)` signature, proxy-aware.

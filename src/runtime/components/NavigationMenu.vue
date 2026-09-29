@@ -268,7 +268,7 @@ const slots = defineSlots<NavigationMenuSlots<T>>()
 const props = useComponentProps<NavigationMenuProps<T, K, O>>('navigationMenu', _props, theme)
 
 const appConfig = useThemeConfig() as NavigationMenu['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.navigationMenu)
+const overrides = useComponentOverrides((ui: NavigationMenu['AppConfig']['ui']) => ui.navigationMenu)
 
 const rootProps = useForwardProps(computed(() => ({
   as: props.as,

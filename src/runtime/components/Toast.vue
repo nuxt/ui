@@ -107,7 +107,7 @@ const props = useComponentProps('toast', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useThemeConfig() as Toast['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.toast)
+const overrides = useComponentOverrides((ui: Toast['AppConfig']['ui']) => ui.toast)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'defaultOpen', 'open', 'duration', 'type'), emits)
 
