@@ -99,12 +99,19 @@ export default defineNuxtModule<ModuleOptions>({
     }
   },
   defaults: defaultOptions,
-  moduleDependencies(nuxt): ModuleDependencies {
+  async moduleDependencies(nuxt): Promise<ModuleDependencies> {
     const userUiOptions = nuxt.options.ui || {}
+    // `@nuxt/icon`'s inline styles can load before the app's stylesheet. In the
+    // `base` layer, they declare it first, below a layer Tailwind CSS is imported
+    // into, which then beats the `@nuxt/ui/colors` output in the top-level `base`.
+    // Nested in that layer, they leave the top-level `base` after it. A default,
+    // so an explicit `icon.cssLayer` wins whichever module sets up first.
+    const stylesheets = await Promise.all(nuxt.options.css.filter(entry => typeof entry === 'string').map(entry => resolvePath(entry)))
+    const layer = (await findTailwindPrefix(stylesheets))?.layer
     return {
       '@nuxt/icon': {
         defaults: {
-          cssLayer: 'base'
+          cssLayer: layer ? `${layer}.base` : 'base'
         }
       },
       ...userUiOptions.fonts !== false && {
@@ -181,22 +188,6 @@ export default defineNuxtModule<ModuleOptions>({
         options.tailwindPrefix = tailwind.prefix ?? undefined
       } else if (options.tailwindPrefix !== tailwind.prefix) {
         logger.warn(`Nuxt UI \`tailwindPrefix\` is \`${options.tailwindPrefix}\` but \`${relative(nuxt.options.rootDir, tailwind.path)}\` imports Tailwind CSS ${tailwind.prefix ? `with \`prefix(${tailwind.prefix})\`` : 'without a prefix'}: components will render classes Tailwind CSS doesn't generate`)
-      }
-    }
-
-    // `@nuxt/icon`'s inline styles can load before the app's stylesheet. In the
-    // `base` layer, they declare it first, below the layer Tailwind CSS is imported
-    // into, which then beats the `@nuxt/ui/colors` output in the top-level `base`.
-    // Nested in that layer, they leave the top-level `base` after it.
-    const layer = tailwind?.layer
-    if (layer) {
-      // Installed as a dependency, `@nuxt/icon` sets up after this module and
-      // reads its options then; listed before `@nuxt/ui`, it has already written
-      // its app config. An explicit `icon.cssLayer` is kept either way.
-      const icon = ((nuxt.options as { icon?: { cssLayer?: string } }).icon ||= {})
-      icon.cssLayer ??= `${layer}.base`
-      if (nuxt.options.appConfig.icon?.cssLayer === 'base') {
-        nuxt.options.appConfig.icon.cssLayer = icon.cssLayer
       }
     }
 
