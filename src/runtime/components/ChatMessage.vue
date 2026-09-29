@@ -116,7 +116,7 @@ const ui = computed(() => tv(theme, overrides.value)({
       <div v-if="props.icon || props.avatar || !!slots.leading" data-slot="chat-message-leading" :class="ui.leading({ class: props.ui?.leading })">
         <slot name="leading" v-bind="{ ...messageProps, avatar: props.avatar, ui }">
           <UIcon v-if="props.icon" :name="props.icon" data-slot="chat-message-leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
-          <UAvatar v-else-if="props.avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="chat-message-leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
+          <UAvatar v-else-if="props.avatar" :size="props.compact ? '2xs' : 'md'" v-bind="props.avatar" data-slot="chat-message-leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
         </slot>
       </div>
 

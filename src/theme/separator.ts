@@ -7,7 +7,6 @@ export default {
     container: 'font-medium text-default flex',
     icon: 'shrink-0 size-5',
     avatar: 'shrink-0',
-    avatarSize: '2xs',
     label: 'text-sm'
   },
   variants: {

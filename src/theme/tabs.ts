@@ -13,10 +13,8 @@ export default {
     trigger: 'group relative inline-flex items-center min-w-0 data-[state=inactive]:text-muted hover:data-[state=inactive]:not-disabled:text-default font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
-    leadingAvatarSize: '',
     label: 'truncate',
     trailingBadge: 'shrink-0',
-    trailingBadgeSize: 'sm',
     content: 'w-full rounded-md focus-visible:outline-3 outline-accent-focus'
   },
   variants: {
@@ -48,28 +46,23 @@ export default {
     size: {
       xs: {
         trigger: 'px-2 py-1 text-xs gap-1',
-        leadingIcon: 'size-4',
-        leadingAvatarSize: '3xs'
+        leadingIcon: 'size-4'
       },
       sm: {
         trigger: 'px-2.5 py-1.5 text-xs gap-1.5',
-        leadingIcon: 'size-4',
-        leadingAvatarSize: '3xs'
+        leadingIcon: 'size-4'
       },
       md: {
         trigger: 'px-3 py-1.5 text-sm gap-1.5',
-        leadingIcon: 'size-5',
-        leadingAvatarSize: '2xs'
+        leadingIcon: 'size-5'
       },
       lg: {
         trigger: 'px-3 py-2 text-sm gap-2',
-        leadingIcon: 'size-5',
-        leadingAvatarSize: '2xs'
+        leadingIcon: 'size-5'
       },
       xl: {
         trigger: 'px-3 py-2 text-base gap-2',
-        leadingIcon: 'size-6',
-        leadingAvatarSize: 'xs'
+        leadingIcon: 'size-6'
       }
     }
   },

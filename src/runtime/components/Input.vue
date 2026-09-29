@@ -3,7 +3,6 @@ import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { AvatarProps } from './Avatar.vue'
 import type { InputHTMLAttributes } from '../types/html'
 import type { ModelModifiers, ApplyModifiers } from '../types/input'
 import type { AcceptableValue } from '../types/utils'
@@ -76,6 +75,7 @@ import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { isEmpty, looseToNumber } from '../utils'
 import { tv } from '../utils/tv'
+import { getAvatarSize } from '../utils/size'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 
@@ -110,6 +110,8 @@ const highlight = computed(() => formFieldHighlight.value ?? props.highlight)
 const size = computed(() => fieldGroupSize.value ?? formFieldSize.value ?? props.size)
 // eslint-disable-next-line vue/no-dupe-keys
 const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
+
+const avatarSize = computed(() => getAvatarSize(size.value))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
@@ -224,7 +226,7 @@ defineExpose({
     <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="input-leading" :class="ui.leading({ class: props.ui?.leading })">
       <slot name="leading" :ui="ui">
         <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="input-leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
-        <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="input-leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
+        <UAvatar v-else-if="!!props.avatar" :size="avatarSize" v-bind="props.avatar" data-slot="input-leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
       </slot>
     </span>
 
