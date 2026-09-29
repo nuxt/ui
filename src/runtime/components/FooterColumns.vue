@@ -52,7 +52,7 @@ export interface FooterColumnsSlots<T extends FooterColumnLink = FooterColumnLin
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { pickLinkProps } from '../utils/link'
 import { resolveAs } from '../utils'
 import { tv } from '../utils/tv'
@@ -66,12 +66,13 @@ const slots = defineSlots<FooterColumnsSlots<T>>()
 const props = useComponentProps<FooterColumnsProps<T>>('footerColumns', _props, theme)
 
 const appConfig = useAppConfig() as FooterColumns['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.footerColumns)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const as = computed(() => resolveAs(props.as, { root: 'nav', label: 'h3' }))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.footerColumns)())
+const ui = computed(() => tv(theme, overrides.value)())
 </script>
 
 <template>

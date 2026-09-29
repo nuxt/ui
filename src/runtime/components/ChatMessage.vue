@@ -73,7 +73,7 @@ export interface ChatMessageSlots<TMetadata = unknown, TDataParts extends UIData
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
@@ -89,6 +89,7 @@ const slots = defineSlots<ChatMessageSlots<TMetadata, TDataParts, TTools>>()
 const props = useComponentProps<ChatMessageProps<TMetadata, TDataParts, TTools>>('chatMessage', _props, theme)
 
 const appConfig = useAppConfig() as ChatMessage['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.chatMessage)
 
 function isTextPart(part: { type: string }): part is TextUIPart {
   return part.type === 'text'
@@ -102,7 +103,7 @@ const hasContent = computed(() => !!props.content || !!textParts.value.length ||
 const messageProps = computed(() => omit(props, ['as', 'icon', 'avatar', 'variant', 'color', 'side', 'actions', 'compact', 'class', 'ui', 'content']))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.chatMessage)({
+const ui = computed(() => tv(theme, overrides.value)({
   variant: props.variant,
   color: props.color,
   side: props.side,

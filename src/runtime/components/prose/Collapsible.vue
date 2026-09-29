@@ -41,7 +41,7 @@ export interface ProseCollapsibleSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
 import { useLocale } from '../../composables/useLocale'
 import { transformUI } from '../../utils'
 import { tv } from '../../utils/tv'
@@ -56,9 +56,10 @@ const props = useComponentProps('prose.collapsible', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as ProseCollapsible['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.prose?.collapsible)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.prose?.collapsible)())
+const ui = computed(() => tv(theme, overrides.value)())
 </script>
 
 <template>

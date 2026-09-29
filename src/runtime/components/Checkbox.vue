@@ -68,7 +68,7 @@ import { Primitive, CheckboxRoot, CheckboxIndicator, Label, injectCheckboxGroupR
 import { reactivePick } from '@vueuse/core'
 import { isEqual } from 'ohash/utils'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useFormField } from '../composables/useFormField'
 import { getFormControlAttrs } from '../utils/attributes'
@@ -84,6 +84,7 @@ const emits = defineEmits<CheckboxEmits<T>>()
 const props = useComponentProps<CheckboxProps<T>>('checkbox', _props, theme)
 
 const appConfig = useAppConfig() as Checkbox['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.checkbox)
 
 const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue', 'modelValue', 'trueValue', 'falseValue'), emits)
 
@@ -124,7 +125,7 @@ const labelIcon = computed(() => props.indicator === 'hidden' ? props.icon : und
 const isListVariant = computed(() => !props.variant || props.variant === 'list')
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.checkbox)({
+const ui = computed(() => tv(theme, overrides.value)({
   size: size.value,
   color: color.value,
   variant: props.variant,

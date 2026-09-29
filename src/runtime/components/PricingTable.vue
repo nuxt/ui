@@ -105,7 +105,7 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UBadge from './Badge.vue'
@@ -121,6 +121,7 @@ const props = useComponentProps<PricingTableProps<T>>('pricingTable', _props, th
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as PricingTable['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.pricingTable)
 
 const formatSlotName = (item: { id?: string, title: string }): string => {
   if (item.id) return item.id
@@ -134,7 +135,7 @@ const formatSlotName = (item: { id?: string, title: string }): string => {
 }
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.pricingTable)())
+const ui = computed(() => tv(theme, overrides.value)())
 
 const [DefineTierTemplate, ReuseTierTemplate] = createReusableTemplate<{ tier: PricingTableTier }>({
   props: {

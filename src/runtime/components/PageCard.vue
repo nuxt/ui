@@ -74,7 +74,7 @@ import { computed, effectScope, ref, shallowRef, watch, onMounted, onBeforeUnmou
 import { Primitive } from 'reka-ui'
 import { useMouseInElement } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { usePrefix } from '../composables/usePrefix'
 import { getSlotChildrenText, resolveAs } from '../utils'
 import { tv } from '../utils/tv'
@@ -94,6 +94,7 @@ const props = useComponentProps('pageCard', _props, theme)
 const cardRef = ref<HTMLElement>()
 
 const appConfig = useAppConfig() as PageCard['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.pageCard)
 
 const idle = ref(false)
 let idleId: ReturnType<typeof requestIdleCallback>
@@ -133,7 +134,7 @@ const spotlight = computed(() => props.spotlight && (elementX.value !== 0 || ele
 const as = computed(() => resolveAs(props.as, { root: 'div', title: 'div' }))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.pageCard)({
+const ui = computed(() => tv(theme, overrides.value)({
   orientation: props.orientation,
   reverse: props.reverse,
   variant: props.variant,

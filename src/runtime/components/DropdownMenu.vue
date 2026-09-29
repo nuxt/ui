@@ -149,7 +149,7 @@ import { defu } from 'defu'
 import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
@@ -172,6 +172,7 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 const props = useComponentProps<DropdownMenuProps<T>>('dropdownMenu', _props, theme)
 
 const appConfig = useAppConfig() as DropdownMenu['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.dropdownMenu)
 
 const rootProps = useForwardProps(reactivePick(props, 'defaultOpen', 'open', 'modal'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as DropdownMenuContentProps)
@@ -179,7 +180,7 @@ const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as DropdownM
 const getProxySlots = () => omit(slots, ['default'])
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.dropdownMenu)({
+const ui = computed(() => tv(theme, overrides.value)({
   size: props.size
 }))
 </script>

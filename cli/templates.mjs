@@ -66,7 +66,7 @@ export interface ${upperName}Slots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '${importPrefix}/composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '${importPrefix}/composables/useComponentProps'
 import { tv } from '${importPrefix}/utils/tv'
 
 const _props = defineProps<${upperName}Props>()
@@ -75,9 +75,10 @@ defineSlots<${upperName}Slots>()
 const props = useComponentProps('${componentKey}', _props, theme)
 
 const appConfig = useAppConfig() as ${upperName}['AppConfig']
+const overrides = useComponentOverrides(() => ${appConfigLookup})
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, ${appConfigLookup})())
+const ui = computed(() => tv(theme, overrides.value)())
 </script>
 
 <template>
@@ -114,7 +115,7 @@ import { computed } from 'vue'
 import { ${upperName}Root } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '${importPrefix}/composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '${importPrefix}/composables/useComponentProps'
 import { useForwardProps } from '${importPrefix}/composables/useForwardProps'
 import { tv } from '${importPrefix}/utils/tv'
 
@@ -125,12 +126,13 @@ defineSlots<${upperName}Slots>()
 const props = useComponentProps('${componentKey}', _props, theme)
 
 const appConfig = useAppConfig() as ${upperName}['AppConfig']
+const overrides = useComponentOverrides(() => ${appConfigLookup})
 
 // TODO: list the same keys as in \`${upperName}Props\` Pick.
 const rootProps = useForwardProps(reactivePick(props, 'as'), emits)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, ${appConfigLookup})())
+const ui = computed(() => tv(theme, overrides.value)())
 </script>
 
 <template>
