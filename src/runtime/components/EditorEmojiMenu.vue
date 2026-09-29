@@ -31,8 +31,8 @@ export interface EditorEmojiMenuProps<T extends EditorEmojiMenuItem = EditorEmoj
 import { computed, h, onMounted, onBeforeUnmount, nextTick, toRef } from 'vue'
 import { useAppConfig } from '#imports'
 import { useEditorMenu } from '../composables/useEditorMenu'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
-import { useComponentProps } from '../composables/useComponentProps'
 
 defineOptions({ inheritAttrs: false })
 
@@ -45,9 +45,10 @@ const _props = withDefaults(defineProps<EditorEmojiMenuProps<T>>(), {
 const props = useComponentProps('editorEmojiMenu', _props, theme)
 
 const appConfig = useAppConfig() as EditorEmojiMenu['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.editorEmojiMenu)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.editorEmojiMenu)({
+const ui = computed(() => tv(theme, overrides.value)({
   size: props.size
 }))
 

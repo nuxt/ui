@@ -21,16 +21,17 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 
 const _props = defineProps<SkeletonProps>()
 
 const props = useComponentProps('skeleton', _props, theme)
 
 const appConfig = useAppConfig() as Skeleton['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.skeleton)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.skeleton)())
+const ui = computed(() => tv(theme, overrides.value)())
 </script>
 
 <template>

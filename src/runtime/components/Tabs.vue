@@ -102,7 +102,7 @@ import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent } from 'rek
 import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { get } from '../utils'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -123,11 +123,12 @@ const slots = defineSlots<TabsSlots<T>>()
 const props = useComponentProps<TabsProps<T>>('tabs', _props, theme)
 
 const appConfig = useAppConfig() as Tabs['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.tabs)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'unmountOnHide'), emits)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.tabs)({
+const ui = computed(() => tv(theme, overrides.value)({
   color: props.color,
   variant: props.variant,
   size: props.size,

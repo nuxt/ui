@@ -104,7 +104,7 @@ import { Primitive } from 'reka-ui'
 import { defu } from 'defu'
 import { createReusableTemplate, useMediaQuery } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
@@ -184,6 +184,7 @@ watch(openMobile, (value) => {
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Sidebar['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.sidebar)
 
 const state = computed<SidebarState>(() => open.value ? 'expanded' : 'collapsed')
 
@@ -197,7 +198,7 @@ function closeSidebar() {
 const hasHeader = computed(() => !!slots.header || props.title || !!slots.title || props.description || !!slots.description || !!slots.actions || canClose.value || !!slots.close)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.sidebar)({
+const ui = computed(() => tv(theme, overrides.value)({
   side: props.side,
   variant: props.variant,
   collapsible: props.collapsible,

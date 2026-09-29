@@ -126,6 +126,7 @@ import { useForwardProps, Slot } from 'reka-ui'
 import { hasProtocol } from 'ufo'
 import { reactiveOmit } from '@vueuse/core'
 import { useRoute, useAppConfig, useNuxtApp, onNuxtReady } from '#imports'
+import { useComponentOverrides } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 import { isPartiallyEqual } from '../utils/link'
 import { requestIdleCallback, cancelIdleCallback, observeIntersection } from '../utils/prefetch'
@@ -144,12 +145,13 @@ defineSlots<LinkSlots>()
 
 const route = useRoute()
 const appConfig = useAppConfig() as Link['AppConfig']
+const overrides = useComponentOverrides(() => appConfig.ui?.link)
 const nuxtApp = useNuxtApp()
 
 const nuxtLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'locale', 'class', 'ui'))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.link))
+const ui = computed(() => tv(theme, overrides.value))
 
 const to = computed(() => {
   const path = props.to ?? props.href
