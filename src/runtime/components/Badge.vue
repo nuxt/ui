@@ -3,7 +3,6 @@ import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/badge'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { AvatarProps } from './Avatar.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type Badge = ComponentConfig<typeof theme, AppConfig, 'badge'>
@@ -63,6 +62,10 @@ const overrides = useComponentOverrides(() => appConfig.ui?.badge)
 const { orientation, size: fieldGroupSize } = useFieldGroup<BadgeProps>(_props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
+// Badges keep a smaller avatar than buttons up to `md`
+const avatarSizes = { xs: '3xs', sm: '3xs', md: '3xs', lg: '2xs', xl: '2xs' } as const
+const avatarSize = computed(() => avatarSizes[(fieldGroupSize.value ?? props.size) as keyof typeof avatarSizes] ?? avatarSizes.md)
+
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
   color: props.color,
@@ -77,7 +80,7 @@ const ui = computed(() => tv(theme, overrides.value)({
   <Primitive :as="props.as" data-slot="badge" :class="ui.base({ class: [props.ui?.base, props.class] })">
     <slot name="leading" :ui="ui">
       <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="badge-leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
-      <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="badge-leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
+      <UAvatar v-else-if="!!props.avatar" :size="avatarSize" v-bind="props.avatar" data-slot="badge-leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
     </slot>
 
     <slot :ui="ui">
