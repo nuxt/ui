@@ -33,7 +33,7 @@ import { tv } from '../utils/tv'
 const _props = defineProps<PageProps>()
 const slots = defineSlots<PageSlots>()
 
-const props = useComponentProps('page', _props)
+const props = useComponentProps('page', _props, theme)
 
 const appConfig = useAppConfig() as Page['AppConfig']
 

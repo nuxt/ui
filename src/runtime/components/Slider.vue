@@ -65,7 +65,7 @@ const emits = defineEmits<SliderEmits>()
 
 defineOptions({ inheritAttrs: false })
 
-const props = useComponentProps<SliderProps>('slider', _props)
+const props = useComponentProps<SliderProps>('slider', _props, theme)
 
 const modelValue = defineModel<T>()
 

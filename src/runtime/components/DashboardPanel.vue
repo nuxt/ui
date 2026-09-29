@@ -38,7 +38,7 @@ const _props = withDefaults(defineProps<DashboardPanelProps>(), {
 })
 defineSlots<DashboardPanelSlots>()
 
-const props = useComponentProps('dashboardPanel', _props)
+const props = useComponentProps('dashboardPanel', _props, theme)
 
 const appConfig = useAppConfig() as DashboardPanel['AppConfig']
 const dashboardContext = useDashboard({ storageKey: 'dashboard', unit: '%' })

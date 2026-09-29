@@ -35,7 +35,7 @@ const _props = withDefaults(defineProps<PageAsideProps>(), {
 })
 const slots = defineSlots<PageAsideSlots>()
 
-const props = useComponentProps('pageAside', _props)
+const props = useComponentProps('pageAside', _props, theme)
 
 const appConfig = useAppConfig() as PageAside['AppConfig']
 

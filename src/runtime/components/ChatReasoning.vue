@@ -91,7 +91,7 @@ const emits = defineEmits<ChatReasoningEmits>()
 
 defineSlots<ChatReasoningSlots>()
 
-const props = useComponentProps('chatReasoning', _props)
+const props = useComponentProps('chatReasoning', _props, theme)
 
 const { t, code } = useLocale()
 const appConfig = useAppConfig() as ChatReasoning['AppConfig']

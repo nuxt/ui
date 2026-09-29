@@ -106,7 +106,7 @@ const _props = withDefaults(defineProps<DrawerProps>(), {
 const emits = defineEmits<DrawerEmits>()
 const slots = defineSlots<DrawerSlots>()
 
-const props = useComponentProps('drawer', _props)
+const props = useComponentProps('drawer', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Drawer['AppConfig']

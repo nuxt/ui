@@ -81,7 +81,7 @@ const _props = withDefaults(defineProps<ChatMessageProps<TMetadata, TDataParts, 
 })
 const slots = defineSlots<ChatMessageSlots<TMetadata, TDataParts, TTools>>()
 
-const props = useComponentProps<ChatMessageProps<TMetadata, TDataParts, TTools>>('chatMessage', _props)
+const props = useComponentProps<ChatMessageProps<TMetadata, TDataParts, TTools>>('chatMessage', _props, theme)
 
 const appConfig = useAppConfig() as ChatMessage['AppConfig']
 

@@ -34,7 +34,7 @@ const _props = withDefaults(defineProps<PageListProps>(), {
 })
 defineSlots<PageListSlots>()
 
-const props = useComponentProps('pageList', _props)
+const props = useComponentProps('pageList', _props, theme)
 
 const appConfig = useAppConfig() as PageList['AppConfig']
 

@@ -26,7 +26,7 @@ const _props = defineProps<ProseBlockquoteProps>()
 
 defineSlots<ProseBlockquoteSlots>()
 
-const props = useComponentProps('prose.blockquote', _props)
+const props = useComponentProps('prose.blockquote', _props, theme)
 
 const appConfig = useAppConfig() as ProseBlockquote['AppConfig']
 

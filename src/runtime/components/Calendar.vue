@@ -169,7 +169,7 @@ const emits = defineEmits<CalendarEmits<R, M>>()
 
 defineSlots<CalendarSlots>()
 
-const props = useComponentProps<CalendarProps<R, M>>('calendar', _props)
+const props = useComponentProps<CalendarProps<R, M>>('calendar', _props, theme)
 
 const { dir, t, locale } = useLocale()
 const appConfig = useAppConfig() as Calendar['AppConfig']
