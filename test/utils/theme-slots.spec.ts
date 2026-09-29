@@ -5,18 +5,14 @@ import ts from 'typescript'
 import * as theme from '../../src/runtime/theme'
 import * as themeProse from '../../src/runtime/theme/prose'
 import * as themeContent from '../../src/runtime/theme/content'
-import { defaultOptions } from '../../src/utils/defaults'
-
-const options = { ...defaultOptions, theme: { ...defaultOptions.theme } }
 
 const isObject = (value: unknown): value is Record<string, unknown> => !!value && typeof value === 'object' && !Array.isArray(value)
 
-const themes = [
+const themes = ([
   ...Object.entries(theme).map(([key, value]) => [key, value] as const),
   ...Object.entries(themeProse).map(([key, value]) => [`prose.${key}`, value] as const),
   ...Object.entries(themeContent).map(([key, value]) => [`content.${key}`, value] as const)
-]
-  .map(([key, value]) => [key, typeof value === 'function' ? (value as (options: any) => unknown)(options) : value] as const)
+] as (readonly [string, unknown])[])
   .filter((entry): entry is readonly [string, Record<string, any>] => isObject(entry[1]) && ('slots' in entry[1] || 'base' in entry[1] || 'variants' in entry[1]))
 
 /**
