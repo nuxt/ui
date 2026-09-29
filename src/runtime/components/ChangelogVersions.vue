@@ -3,7 +3,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { SpringOptions, UseScrollOptions } from 'motion-v'
-import theme from '#build/ui/changelog-versions'
+import theme from '../theme/changelog-versions'
 import type { ChangelogVersionProps, ChangelogVersionSlots } from './ChangelogVersion.vue'
 import type { ComponentConfig } from '../types/tv'
 

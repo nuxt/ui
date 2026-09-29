@@ -2,7 +2,7 @@
 import type { ComponentPublicInstance, CSSProperties, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { VirtualItem, VirtualizerOptions } from '@tanstack/vue-virtual'
-import theme from '#build/ui/scroll-area'
+import theme from '../theme/scroll-area'
 import type { ComponentConfig } from '../types/tv'
 
 type ScrollArea = ComponentConfig<typeof theme, AppConfig, 'scrollArea'>

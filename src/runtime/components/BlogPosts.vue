@@ -2,7 +2,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/blog-posts'
+import theme from '../theme/blog-posts'
 import type { BlogPostProps, BlogPostSlots } from './BlogPost.vue'
 import type { ComponentConfig } from '../types/tv'
 
