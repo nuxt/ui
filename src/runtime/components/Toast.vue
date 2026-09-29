@@ -2,7 +2,7 @@
 import type { ToastRootProps, ToastRootEmits } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/toast'
+import theme from '../theme/toast'
 import type { AvatarProps } from './Avatar.vue'
 import type { ButtonProps } from './Button.vue'
 import type { IconProps } from './Icon.vue'

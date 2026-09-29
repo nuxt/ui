@@ -2,7 +2,7 @@
 import type { CheckboxGroupRootProps, CheckboxGroupRootEmits } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/checkbox-group'
+import theme from '../theme/checkbox-group'
 import type { CheckboxProps } from './Checkbox.vue'
 import type { IconProps } from './Icon.vue'
 import type { AcceptableValue, GetItemKeys, GetModelValue, GetModelValueEmits } from '../types/utils'

@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/sidebar'
+import theme from '../theme/sidebar'
 import type { ButtonProps } from './Button.vue'
 import type { DrawerProps } from './Drawer.vue'
 import type { IconProps } from './Icon.vue'
