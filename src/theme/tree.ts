@@ -1,12 +1,12 @@
-import type { ModuleOptions } from '../module'
+import { colorVariant } from './color'
 
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'relative isolate',
     item: 'w-full',
     listWithChildren: 'border-s border-default',
     itemWithChildren: 'ps-1.5 -ms-px',
-    link: 'relative group w-full flex items-center text-sm select-none before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3',
+    link: 'relative group w-full flex items-center text-sm select-none before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3 before:outline-accent-focus',
     linkLeadingIcon: 'shrink-0 relative',
     linkLabel: 'truncate',
     linkTrailing: 'ms-auto inline-flex gap-1.5 items-center',
@@ -18,14 +18,7 @@ export default (options: Required<ModuleOptions>) => ({
         root: 'overflow-y-auto'
       }
     },
-    color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        link: `before:outline-${color}/25`
-      }])),
-      neutral: {
-        link: 'before:outline-inverted/25'
-      }
-    },
+    color: colorVariant({ root: '' }),
     size: {
       xs: {
         listWithChildren: 'ms-4',
@@ -60,7 +53,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     selected: {
       true: {
-        link: 'before:bg-elevated'
+        link: 'before:bg-elevated text-accent'
       }
     },
     disabled: {
@@ -69,19 +62,7 @@ export default (options: Required<ModuleOptions>) => ({
       }
     }
   },
-  compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
-    color,
-    selected: true,
-    class: {
-      link: `text-${color}`
-    }
-  })), {
-    color: 'neutral',
-    selected: true,
-    class: {
-      link: 'text-highlighted'
-    }
-  }, {
+  compoundVariants: [{
     selected: false,
     disabled: false,
     class: {
@@ -92,4 +73,4 @@ export default (options: Required<ModuleOptions>) => ({
     color: 'primary',
     size: 'md'
   }
-})
+}
