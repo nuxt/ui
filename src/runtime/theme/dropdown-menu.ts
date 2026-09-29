@@ -7,7 +7,7 @@ export default defineTheme({
     input: 'border-b border-default',
     empty: 'text-center text-muted',
     viewport: 'relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1',
-    arrow: 'fill-bg stroke-default',
+    arrow: 'fill-surface stroke-default',
     group: 'p-1 isolate',
     label: 'w-full flex items-center font-semibold text-highlighted',
     separator: '-mx-1 my-1 h-px bg-border',

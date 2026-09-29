@@ -9,7 +9,7 @@ export default extendTheme(input, {
     base: () => 'relative group rounded-md inline-flex items-center disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
     value: 'truncate pointer-events-none',
     placeholder: 'truncate text-faint',
-    arrow: 'fill-bg stroke-default',
+    arrow: 'fill-surface stroke-default',
     content: 'max-h-[min(15rem,var(--reka-select-content-available-height,15rem))] w-(--reka-select-trigger-width) bg-surface shadow-lg rounded-md ring ring-default overflow-hidden origin-(--reka-select-content-transform-origin) pointer-events-auto flex flex-col',
     viewport: 'relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1',
     group: 'p-1 isolate',
