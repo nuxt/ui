@@ -266,7 +266,7 @@ const _props = withDefaults(defineProps<NavigationMenuProps<T, K, O>>(), {
 const emits = defineEmits<NavigationMenuEmits<K, O>>()
 const slots = defineSlots<NavigationMenuSlots<T>>()
 
-const props = useComponentProps<NavigationMenuProps<T, K, O>>('navigationMenu', _props)
+const props = useComponentProps<NavigationMenuProps<T, K, O>>('navigationMenu', _props, theme)
 
 const appConfig = useAppConfig() as NavigationMenu['AppConfig']
 

@@ -104,7 +104,7 @@ const _props = withDefaults(defineProps<ChatMessagesProps<T>>(), {
 })
 const slots = defineSlots<ChatMessagesSlots<T>>()
 
-const props = useComponentProps<ChatMessagesProps<T>>('chatMessages', _props)
+const props = useComponentProps<ChatMessagesProps<T>>('chatMessages', _props, theme)
 
 const getProxySlots = () => omit(slots, ['default', 'indicator', 'viewport'])
 

@@ -110,7 +110,7 @@ const _props = withDefaults(defineProps<ChatPromptSubmitProps>(), {
 const emits = defineEmits<ChatPromptSubmitEmits>()
 const slots = defineSlots<ButtonSlots>()
 
-const props = useComponentProps('chatPromptSubmit', _props)
+const props = useComponentProps('chatPromptSubmit', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as ChatPromptSubmit['AppConfig']

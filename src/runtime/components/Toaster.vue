@@ -68,7 +68,7 @@ const _props = withDefaults(defineProps<ToasterProps>(), {
 })
 defineSlots<ToasterSlots>()
 
-const props = useComponentProps('toaster', _props)
+const props = useComponentProps('toaster', _props, theme)
 
 const { toasts, remove } = useToast()
 const appConfig = useAppConfig() as Toaster['AppConfig']

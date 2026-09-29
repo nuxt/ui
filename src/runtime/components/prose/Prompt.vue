@@ -45,7 +45,7 @@ const _props = withDefaults(defineProps<ProsePromptProps>(), {
 })
 const slots = defineSlots<ProsePromptSlots>()
 
-const props = useComponentProps('prose.prompt', _props)
+const props = useComponentProps('prose.prompt', _props, theme)
 
 const { t } = useLocale()
 const { copy, copied } = useClipboard()

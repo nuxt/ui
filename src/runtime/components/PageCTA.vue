@@ -67,7 +67,7 @@ const _props = withDefaults(defineProps<PageCTAProps>(), {
 })
 const slots = defineSlots<PageCTASlots>()
 
-const props = useComponentProps('pageCTA', _props)
+const props = useComponentProps('pageCTA', _props, theme)
 
 const appConfig = useAppConfig() as PageCTA['AppConfig']
 const prefix = usePrefix()
