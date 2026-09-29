@@ -3,7 +3,7 @@
 import type { VNode } from 'vue'
 import type { ListboxRootEmits, ListboxRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/listbox'
+import theme from '../theme/listbox'
 import type { AvatarProps } from './Avatar.vue'
 import type { ChipProps } from './Chip.vue'
 import type { IconProps } from './Icon.vue'

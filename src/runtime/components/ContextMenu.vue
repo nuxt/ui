@@ -3,7 +3,7 @@
 import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProps, ContextMenuContentEmits } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/context-menu'
+import theme from '../theme/context-menu'
 import type { AvatarProps } from './Avatar.vue'
 import type { IconProps } from './Icon.vue'
 import type { KbdProps } from './Kbd.vue'

@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../../types/tv'
-import theme from '#build/ui/prose/img'
+import theme from '../../theme/prose/img'
 
 type ProseImg = ComponentConfig<typeof theme, AppConfig, 'img', 'ui.prose'>
 

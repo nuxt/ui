@@ -2,7 +2,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../types/tv'
-import theme from '#build/ui/footer'
+import theme from '../theme/footer'
 
 type Footer = ComponentConfig<typeof theme, AppConfig, 'footer'>
 

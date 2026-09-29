@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { Ref, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/button'
+import theme from '../theme/button'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { LinkProps } from './Link.vue'
 import type { ComponentConfig } from '../types/tv'

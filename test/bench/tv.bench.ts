@@ -1,8 +1,8 @@
 import { bench, describe } from 'vitest'
 import { tv } from '../../src/runtime/utils/tv'
-import buttonTheme from '#build/ui/button'
-import navigationMenuTheme from '#build/ui/navigation-menu'
-import tableTheme from '#build/ui/table'
+import buttonTheme from '../../src/runtime/theme/button'
+import navigationMenuTheme from '../../src/runtime/theme/navigation-menu'
+import tableTheme from '../../src/runtime/theme/table'
 
 // Representative invocation props for each component (mirrors the objects the
 // components pass to `tv(...)(...)` at runtime).

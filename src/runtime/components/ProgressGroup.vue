@@ -2,7 +2,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/progress-group'
+import theme from '../theme/progress-group'
 import type { IconProps } from './Icon.vue'
 import type { DynamicSlots } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'

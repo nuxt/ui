@@ -2,8 +2,8 @@
 @import "@nuxt/ui";
 
 /* Scoped to this playground, the Nuxt playground's `app` that `vite.config.ts`
-   borrows components and composables from, and the library source, which
-   `--uiDev` resolves components and theme from. */
+   borrows components and composables from, and the library source, where
+   components and themes resolve from. */
 @source "../../..";
 @source "../../../../nuxt/app";
 @source "../../../../../src";

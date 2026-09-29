@@ -3,7 +3,7 @@
 import type { SplitterGroupProps, SplitterGroupEmits, SplitterPanelProps, SplitterResizeHandleProps } from 'reka-ui'
 import type { VNode, ComponentPublicInstance } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/splitter'
+import theme from '../theme/splitter'
 import type { DynamicSlots } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 

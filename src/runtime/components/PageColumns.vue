@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/page-columns'
+import theme from '../theme/page-columns'
 import type { ComponentConfig } from '../types/tv'
 
 type PageColumns = ComponentConfig<typeof theme, AppConfig, 'pageColumns'>

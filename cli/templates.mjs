@@ -42,7 +42,7 @@ const component = ({ name, primitive, prose, content }) => {
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/${dirPrefix}${kebabName}'
+import theme from '${importPrefix}/theme/${dirPrefix}${kebabName}'
 import type { ComponentConfig } from '${importPrefix}/types/tv'
 
 type ${upperName} = ComponentConfig<${componentConfigArgs}>
@@ -92,7 +92,7 @@ const ui = computed(() => tv(theme, overrides.value)())
 import type { ${upperName}RootProps, ${upperName}RootEmits } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/${dirPrefix}${kebabName}'
+import theme from '${importPrefix}/theme/${dirPrefix}${kebabName}'
 import type { ComponentConfig } from '${importPrefix}/types/tv'
 
 type ${upperName} = ComponentConfig<${componentConfigArgs}>

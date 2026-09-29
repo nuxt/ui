@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/dashboard-navbar'
+import theme from '../theme/dashboard-navbar'
 import type { DashboardContext } from '../utils/dashboard'
 import type { ButtonProps } from './Button.vue'
 import type { IconProps } from './Icon.vue'

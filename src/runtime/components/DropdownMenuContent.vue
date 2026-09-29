@@ -3,7 +3,7 @@
 import type { DropdownMenuContentProps as RekaDropdownMenuContentProps, DropdownMenuContentEmits as RekaDropdownMenuContentEmits } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import type theme from '#build/ui/dropdown-menu'
+import type theme from '../theme/dropdown-menu'
 import type { DropdownMenuItem, DropdownMenuSlots } from './DropdownMenu.vue'
 import type { IconProps } from './Icon.vue'
 import type { InputProps } from './Input.vue'

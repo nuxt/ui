@@ -2,7 +2,7 @@
 import type { RadioGroupRootProps, RadioGroupRootEmits } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/radio-group'
+import theme from '../theme/radio-group'
 import type { IconProps } from './Icon.vue'
 import type { AcceptableValue, GetItemKeys, GetModelValue, GetModelValueEmits } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'

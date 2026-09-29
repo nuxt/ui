@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/card'
+import theme from '../theme/card'
 import type { ComponentConfig } from '../types/tv'
 
 type Card = ComponentConfig<typeof theme, AppConfig, 'card'>

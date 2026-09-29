@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/dashboard-sidebar-toggle'
+import theme from '../theme/dashboard-sidebar-toggle'
 import type { ButtonProps } from './Button.vue'
 import type { LinkPropsKeys } from './Link.vue'
 import type { ComponentConfig } from '../types/tv'

@@ -2,7 +2,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/pricing-plans'
+import theme from '../theme/pricing-plans'
 import type { PricingPlanProps, PricingPlanSlots } from './PricingPlan.vue'
 import type { ComponentConfig } from '../types/tv'
 

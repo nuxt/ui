@@ -2,7 +2,7 @@
 import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxContentEmits, ComboboxArrowProps } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/select-menu'
+import theme from '../theme/select-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps } from './Avatar.vue'
 import type { ButtonProps } from './Button.vue'

@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/dashboard-toolbar'
+import theme from '../theme/dashboard-toolbar'
 import type { ComponentConfig } from '../types/tv'
 
 type DashboardToolbar = ComponentConfig<typeof theme, AppConfig, 'dashboardToolbar'>

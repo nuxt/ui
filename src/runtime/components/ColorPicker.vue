@@ -2,7 +2,7 @@
 <script lang="ts">
 import type { MaybeRefOrGetter } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/color-picker'
+import theme from '../theme/color-picker'
 import type { HSLObject } from 'colortranslator'
 import type { ComponentConfig } from '../types/tv'
 

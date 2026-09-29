@@ -3,7 +3,7 @@
 import type { AccordionRootProps, AccordionRootEmits } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/accordion'
+import theme from '../theme/accordion'
 import type { IconProps } from './Icon.vue'
 import type { DynamicSlots, GetItemKeys } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'

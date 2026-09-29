@@ -2,7 +2,7 @@
 import type { DialogRootProps, DialogRootEmits, DialogContentProps, DialogContentEmits } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/slideover'
+import theme from '../theme/slideover'
 import type { ButtonProps } from './Button.vue'
 import type { IconProps } from './Icon.vue'
 import type { LinkPropsKeys } from './Link.vue'
