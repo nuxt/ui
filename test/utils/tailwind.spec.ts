@@ -15,6 +15,7 @@ describe('getTailwindPrefix', () => {
     ['@import "tailwindcss";\n/* @import "tailwindcss" prefix(tw); */', null],
     ['@import url("tailwindcss") prefix(tw);', 'tw'],
     ['@import "@nuxt/ui";', undefined],
+    ['@import "tailwindcss/preflight.css" layer(base);', undefined],
     ['@import "tailwindcss-animate" prefix(tw);', undefined]
   ])('reads %j', (css, prefix) => {
     expect(getTailwindPrefix(css)).toBe(prefix)
@@ -29,6 +30,13 @@ describe('findTailwindPrefix', () => {
     writeFileSync(join(dir, name), css)
     return join(dir, name)
   }
+
+  it('skips a stylesheet that only imports Tailwind CSS\'s preflight', async () => {
+    const preflight = file('preflight.css', '@import "tailwindcss/preflight.css" layer(base);')
+    const main = file('main-tw.css', '@import "tailwindcss" prefix(tw);')
+
+    expect(await findTailwindPrefix([preflight, main])).toMatchObject({ path: main, prefix: 'tw' })
+  })
 
   it('reads the first stylesheet that imports Tailwind CSS', async () => {
     const fonts = file('fonts.css', '@font-face { font-family: Inter; }')
