@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import type { InputMenuItem, AvatarProps } from '@nuxt/ui'
+import type { InputMenuItem } from '@nuxt/ui'
 import { refDebounced } from '@vueuse/core'
+import { getAvatarSize } from '@nuxt/ui/utils/size'
 import type { User } from '~/types'
 import theme from '#build/ui/input-menu'
 
@@ -118,8 +119,8 @@ const statusKey = ref('todo')
       :loading="status === 'pending'"
       v-bind="props"
     >
-      <template #leading="{ modelValue, ui }">
-        <UAvatar v-if="modelValue" :size="(ui.itemLeadingAvatarSize() as AvatarProps['size'])" v-bind="modelValue.avatar" />
+      <template #leading="{ modelValue }">
+        <UAvatar v-if="modelValue" :size="getAvatarSize(props?.size)" v-bind="modelValue.avatar" />
       </template>
     </UInputMenu>
     <UInputMenu

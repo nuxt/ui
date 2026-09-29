@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { SelectItem, AvatarProps } from '@nuxt/ui'
+import type { SelectItem } from '@nuxt/ui'
+import { getAvatarSize } from '@nuxt/ui/utils/size'
 import theme from '#build/ui/select'
 import type { User } from '~/types'
 
@@ -105,8 +106,8 @@ const statusKeys = ref(['todo', 'done'])
       :items="users"
       v-bind="props"
     >
-      <template #leading="{ item, ui }">
-        <UAvatar v-if="item" :size="(ui.itemLeadingAvatarSize() as AvatarProps['size'])" v-bind="item.avatar" />
+      <template #leading="{ item }">
+        <UAvatar v-if="item" :size="getAvatarSize(props?.size)" v-bind="item.avatar" />
       </template>
     </USelect>
     <USelect v-model="statusKey" :items="statuses" v-bind="props">

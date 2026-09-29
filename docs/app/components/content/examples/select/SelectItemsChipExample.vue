@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SelectItem, ChipProps } from '@nuxt/ui'
+import type { SelectItem } from '@nuxt/ui'
 
 const items = ref([
   {
@@ -36,7 +36,7 @@ const value = ref(items.value[0]?.value)
         v-bind="item.chip"
         inset
         standalone
-        :size="(ui.itemLeadingChipSize() as ChipProps['size'])"
+        size="md"
         :class="ui.itemLeadingChip()"
       />
     </template>

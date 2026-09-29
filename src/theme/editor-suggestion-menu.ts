@@ -8,7 +8,6 @@ export default {
     item: 'group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75',
     itemLeadingIcon: 'shrink-0 flex items-center justify-center',
     itemLeadingAvatar: 'shrink-0',
-    itemLeadingAvatarSize: '',
     itemWrapper: 'flex-1 flex flex-col text-start min-w-0',
     itemLabel: 'truncate',
     itemDescription: 'truncate text-muted',
@@ -19,32 +18,27 @@ export default {
       xs: {
         label: 'p-1 text-[10px]/3 gap-1',
         item: 'p-1 text-xs gap-1',
-        itemLeadingIcon: 'size-4 text-sm',
-        itemLeadingAvatarSize: '3xs'
+        itemLeadingIcon: 'size-4 text-sm'
       },
       sm: {
         label: 'p-1.5 text-[10px]/3 gap-1.5',
         item: 'p-1.5 text-xs gap-1.5',
-        itemLeadingIcon: 'size-4 text-sm',
-        itemLeadingAvatarSize: '3xs'
+        itemLeadingIcon: 'size-4 text-sm'
       },
       md: {
         label: 'p-1.5 text-xs gap-1.5',
         item: 'p-1.5 text-sm gap-1.5',
-        itemLeadingIcon: 'size-5 text-base',
-        itemLeadingAvatarSize: '2xs'
+        itemLeadingIcon: 'size-5 text-base'
       },
       lg: {
         label: 'p-2 text-xs gap-2',
         item: 'p-2 text-sm gap-2',
-        itemLeadingIcon: 'size-5 text-base',
-        itemLeadingAvatarSize: '2xs'
+        itemLeadingIcon: 'size-5 text-base'
       },
       xl: {
         label: 'p-2 text-sm gap-2',
         item: 'p-2 text-base gap-2',
-        itemLeadingIcon: 'size-6 text-xl',
-        itemLeadingAvatarSize: 'xs'
+        itemLeadingIcon: 'size-6 text-xl'
       }
     },
     active: {
