@@ -26,7 +26,7 @@ export interface ProseH4Slots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRuntimeConfig } from '#imports'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 
 const _props = defineProps<ProseH4Props>()
@@ -35,8 +35,7 @@ defineSlots<ProseH4Slots>()
 
 const props = useComponentProps('prose.h4', _props, theme)
 
-const appConfig = useThemeConfig() as ProseH4['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.prose?.h4)
+const overrides = useComponentOverrides((ui: ProseH4['AppConfig']['ui']) => ui.prose?.h4)
 // NOTE: the `mdc.headings.anchorLinks` fallback is deprecated, remove in v5 in favor of the `anchor` prop.
 const { headings } = useRuntimeConfig().public?.mdc || {}
 

@@ -148,7 +148,7 @@ import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
@@ -170,8 +170,7 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const props = useComponentProps<DropdownMenuProps<T>>('dropdownMenu', _props, theme)
 
-const appConfig = useThemeConfig() as DropdownMenu['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.dropdownMenu)
+const overrides = useComponentOverrides((ui: DropdownMenu['AppConfig']['ui']) => ui.dropdownMenu)
 
 const rootProps = useForwardProps(reactivePick(props, 'defaultOpen', 'open', 'modal'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as DropdownMenuContentProps)

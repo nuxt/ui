@@ -100,7 +100,7 @@ const open = defineModel<boolean>('open', { default: false })
 const route = useRoute()
 const { t, locale } = useLocale()
 const appConfig = useThemeConfig() as Header['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.header)
+const overrides = useComponentOverrides((ui: Header['AppConfig']['ui']) => ui.header)
 
 const [DefineLeftTemplate, ReuseLeftTemplate] = createReusableTemplate()
 const [DefineRightTemplate, ReuseRightTemplate] = createReusableTemplate()

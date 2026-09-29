@@ -44,7 +44,7 @@ export interface PageFeatureSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { usePrefix } from '../composables/usePrefix'
 import { getSlotChildrenText } from '../utils'
 import { tv } from '../utils/tv'
@@ -60,8 +60,7 @@ const slots = defineSlots<PageFeatureSlots>()
 
 const props = useComponentProps('pageFeature', _props, theme)
 
-const appConfig = useThemeConfig() as PageFeature['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.pageFeature)
+const overrides = useComponentOverrides((ui: PageFeature['AppConfig']['ui']) => ui.pageFeature)
 const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys

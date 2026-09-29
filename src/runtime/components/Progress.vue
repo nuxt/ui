@@ -58,7 +58,7 @@ import { computed } from 'vue'
 import { Primitive, ProgressRoot, ProgressIndicator } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 
@@ -73,8 +73,7 @@ const slots = defineSlots<ProgressSlots>()
 const props = useComponentProps('progress', _props, theme)
 
 const { dir } = useLocale()
-const appConfig = useThemeConfig() as Progress['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.progress)
+const overrides = useComponentOverrides((ui: Progress['AppConfig']['ui']) => ui.progress)
 
 const rootProps = useForwardProps(reactivePick(props, 'getValueLabel', 'getValueText', 'modelValue'), emits)
 
@@ -172,7 +171,8 @@ const ui = computed(() => tv(theme, overrides.value)({
 
 // `tv` skips a color it doesn't know, so a value outside the theme palette adds no class
 // and is applied inline instead.
-const themeColors = computed(() => Object.keys({ ...theme.variants?.color, ...appConfig.ui?.progress?.variants?.color }))
+// The colors the theme knows, with the ones the app config and each `<UTheme>` add
+const themeColors = computed(() => Object.keys(Object.assign({ ...theme.variants?.color }, ...overrides.value.levels.map(level => level?.variants?.color))))
 
 const customColor = computed(() => props.color && !themeColors.value.includes(props.color) ? props.color : undefined)
 </script>

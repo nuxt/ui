@@ -53,7 +53,7 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { Motion, useScroll, useSpring, useTransform } from 'motion-v'
 import { defu } from 'defu'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UChangelogVersion from './ChangelogVersion.vue'
@@ -68,8 +68,7 @@ const props = useComponentProps<ChangelogVersionsProps<T>>('changelogVersions', 
 
 const getProxySlots = () => omit(slots, ['default', 'indicator'])
 
-const appConfig = useThemeConfig() as ChangelogVersions['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.changelogVersions)
+const overrides = useComponentOverrides((ui: ChangelogVersions['AppConfig']['ui']) => ui.changelogVersions)
 
 const springOptions = computed(() => defu(typeof props.indicatorMotion === 'object' ? props.indicatorMotion : {}, { damping: 30, restDelta: 0.001 }))
 const scrollOptions = computed(() => typeof props.indicator === 'object' ? props.indicator : {})

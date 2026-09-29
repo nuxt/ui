@@ -183,7 +183,7 @@ watch(openMobile, (value) => {
 
 const { t } = useLocale()
 const appConfig = useThemeConfig() as Sidebar['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.sidebar)
+const overrides = useComponentOverrides((ui: Sidebar['AppConfig']['ui']) => ui.sidebar)
 
 const state = computed<SidebarState>(() => open.value ? 'expanded' : 'collapsed')
 
