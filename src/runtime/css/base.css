@@ -24,6 +24,125 @@
   }
 }
 
+@layer base {
+  /* The default palette of each color alias, at zero specificity so any
+     `@plugin "@nuxt/ui/colors"` or `:root` rule wins. In `base` with that
+     output, not `theme`: `@nuxt/icon` can declare `base` first, which puts it
+     below `theme`, and a default in `theme` would then win. The fallback is the
+     palette's value, for a Tailwind prefix, which renames `--color-*`. */
+  :where(:root, :host) {
+    --ui-color-primary-50: var(--color-green-50, oklch(98.2% 0.018 155.826));
+    --ui-color-primary-100: var(--color-green-100, oklch(96.2% 0.044 156.743));
+    --ui-color-primary-200: var(--color-green-200, oklch(92.5% 0.084 155.995));
+    --ui-color-primary-300: var(--color-green-300, oklch(87.1% 0.15 154.449));
+    --ui-color-primary-400: var(--color-green-400, oklch(79.2% 0.209 151.711));
+    --ui-color-primary-500: var(--color-green-500, oklch(72.3% 0.219 149.579));
+    --ui-color-primary-600: var(--color-green-600, oklch(62.7% 0.194 149.214));
+    --ui-color-primary-700: var(--color-green-700, oklch(52.7% 0.154 150.069));
+    --ui-color-primary-800: var(--color-green-800, oklch(44.8% 0.119 151.328));
+    --ui-color-primary-900: var(--color-green-900, oklch(39.3% 0.095 152.535));
+    --ui-color-primary-950: var(--color-green-950, oklch(26.6% 0.065 152.934));
+
+    --ui-color-secondary-50: var(--color-blue-50, oklch(97% 0.014 254.604));
+    --ui-color-secondary-100: var(--color-blue-100, oklch(93.2% 0.032 255.585));
+    --ui-color-secondary-200: var(--color-blue-200, oklch(88.2% 0.059 254.128));
+    --ui-color-secondary-300: var(--color-blue-300, oklch(80.9% 0.105 251.813));
+    --ui-color-secondary-400: var(--color-blue-400, oklch(70.7% 0.165 254.624));
+    --ui-color-secondary-500: var(--color-blue-500, oklch(62.3% 0.214 259.815));
+    --ui-color-secondary-600: var(--color-blue-600, oklch(54.6% 0.245 262.881));
+    --ui-color-secondary-700: var(--color-blue-700, oklch(48.8% 0.243 264.376));
+    --ui-color-secondary-800: var(--color-blue-800, oklch(42.4% 0.199 265.638));
+    --ui-color-secondary-900: var(--color-blue-900, oklch(37.9% 0.146 265.522));
+    --ui-color-secondary-950: var(--color-blue-950, oklch(28.2% 0.091 267.935));
+
+    --ui-color-success-50: var(--color-green-50, oklch(98.2% 0.018 155.826));
+    --ui-color-success-100: var(--color-green-100, oklch(96.2% 0.044 156.743));
+    --ui-color-success-200: var(--color-green-200, oklch(92.5% 0.084 155.995));
+    --ui-color-success-300: var(--color-green-300, oklch(87.1% 0.15 154.449));
+    --ui-color-success-400: var(--color-green-400, oklch(79.2% 0.209 151.711));
+    --ui-color-success-500: var(--color-green-500, oklch(72.3% 0.219 149.579));
+    --ui-color-success-600: var(--color-green-600, oklch(62.7% 0.194 149.214));
+    --ui-color-success-700: var(--color-green-700, oklch(52.7% 0.154 150.069));
+    --ui-color-success-800: var(--color-green-800, oklch(44.8% 0.119 151.328));
+    --ui-color-success-900: var(--color-green-900, oklch(39.3% 0.095 152.535));
+    --ui-color-success-950: var(--color-green-950, oklch(26.6% 0.065 152.934));
+
+    --ui-color-info-50: var(--color-blue-50, oklch(97% 0.014 254.604));
+    --ui-color-info-100: var(--color-blue-100, oklch(93.2% 0.032 255.585));
+    --ui-color-info-200: var(--color-blue-200, oklch(88.2% 0.059 254.128));
+    --ui-color-info-300: var(--color-blue-300, oklch(80.9% 0.105 251.813));
+    --ui-color-info-400: var(--color-blue-400, oklch(70.7% 0.165 254.624));
+    --ui-color-info-500: var(--color-blue-500, oklch(62.3% 0.214 259.815));
+    --ui-color-info-600: var(--color-blue-600, oklch(54.6% 0.245 262.881));
+    --ui-color-info-700: var(--color-blue-700, oklch(48.8% 0.243 264.376));
+    --ui-color-info-800: var(--color-blue-800, oklch(42.4% 0.199 265.638));
+    --ui-color-info-900: var(--color-blue-900, oklch(37.9% 0.146 265.522));
+    --ui-color-info-950: var(--color-blue-950, oklch(28.2% 0.091 267.935));
+
+    --ui-color-warning-50: var(--color-yellow-50, oklch(98.7% 0.026 102.212));
+    --ui-color-warning-100: var(--color-yellow-100, oklch(97.3% 0.071 103.193));
+    --ui-color-warning-200: var(--color-yellow-200, oklch(94.5% 0.129 101.54));
+    --ui-color-warning-300: var(--color-yellow-300, oklch(90.5% 0.182 98.111));
+    --ui-color-warning-400: var(--color-yellow-400, oklch(85.2% 0.199 91.936));
+    --ui-color-warning-500: var(--color-yellow-500, oklch(79.5% 0.184 86.047));
+    --ui-color-warning-600: var(--color-yellow-600, oklch(68.1% 0.162 75.834));
+    --ui-color-warning-700: var(--color-yellow-700, oklch(55.4% 0.135 66.442));
+    --ui-color-warning-800: var(--color-yellow-800, oklch(47.6% 0.114 61.907));
+    --ui-color-warning-900: var(--color-yellow-900, oklch(42.1% 0.095 57.708));
+    --ui-color-warning-950: var(--color-yellow-950, oklch(28.6% 0.066 53.813));
+
+    --ui-color-error-50: var(--color-red-50, oklch(97.1% 0.013 17.38));
+    --ui-color-error-100: var(--color-red-100, oklch(93.6% 0.032 17.717));
+    --ui-color-error-200: var(--color-red-200, oklch(88.5% 0.062 18.334));
+    --ui-color-error-300: var(--color-red-300, oklch(80.8% 0.114 19.571));
+    --ui-color-error-400: var(--color-red-400, oklch(70.4% 0.191 22.216));
+    --ui-color-error-500: var(--color-red-500, oklch(63.7% 0.237 25.331));
+    --ui-color-error-600: var(--color-red-600, oklch(57.7% 0.245 27.325));
+    --ui-color-error-700: var(--color-red-700, oklch(50.5% 0.213 27.518));
+    --ui-color-error-800: var(--color-red-800, oklch(44.4% 0.177 26.899));
+    --ui-color-error-900: var(--color-red-900, oklch(39.6% 0.141 25.723));
+    --ui-color-error-950: var(--color-red-950, oklch(25.8% 0.092 26.042));
+
+    --ui-color-neutral-50: var(--color-slate-50, oklch(98.4% 0.003 247.858));
+    --ui-color-neutral-100: var(--color-slate-100, oklch(96.8% 0.007 247.896));
+    --ui-color-neutral-200: var(--color-slate-200, oklch(92.9% 0.013 255.508));
+    --ui-color-neutral-300: var(--color-slate-300, oklch(86.9% 0.022 252.894));
+    --ui-color-neutral-400: var(--color-slate-400, oklch(70.4% 0.04 256.788));
+    --ui-color-neutral-500: var(--color-slate-500, oklch(55.4% 0.046 257.417));
+    --ui-color-neutral-600: var(--color-slate-600, oklch(44.6% 0.043 257.281));
+    --ui-color-neutral-700: var(--color-slate-700, oklch(37.2% 0.044 257.287));
+    --ui-color-neutral-800: var(--color-slate-800, oklch(27.9% 0.041 260.031));
+    --ui-color-neutral-900: var(--color-slate-900, oklch(20.8% 0.042 265.755));
+    --ui-color-neutral-950: var(--color-slate-950, oklch(12.9% 0.042 264.695));
+  }
+}
+
+@layer base {
+  /* Each color alias is a shade of its palette, lighter in dark mode, and
+     `neutral` the ends of its own, like the inverted surface. In `base` at zero
+     specificity, like the palettes, so the shades `@plugin "@nuxt/ui/colors"`
+     picks win. */
+  :where(:root, :host, .light) {
+    --ui-primary: var(--ui-color-primary-500);
+    --ui-secondary: var(--ui-color-secondary-500);
+    --ui-success: var(--ui-color-success-500);
+    --ui-info: var(--ui-color-info-500);
+    --ui-warning: var(--ui-color-warning-500);
+    --ui-error: var(--ui-color-error-500);
+    --ui-neutral: var(--ui-color-neutral-900);
+  }
+
+  :where(.dark) {
+    --ui-primary: var(--ui-color-primary-400);
+    --ui-secondary: var(--ui-color-secondary-400);
+    --ui-success: var(--ui-color-success-400);
+    --ui-info: var(--ui-color-info-400);
+    --ui-warning: var(--ui-color-warning-400);
+    --ui-error: var(--ui-color-error-400);
+    --ui-neutral: var(--ui-color-neutral-50);
+  }
+}
+
 @layer theme {
   :root, :host {
     --ui-header-height: 4rem;

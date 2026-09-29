@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ColorAlias } from '../../../utils/theme/engine'
-import { paletteLabel, rampCssName } from '../../../utils/theme/studio'
+import { paletteLabel, paletteShade } from '../../../utils/theme/studio'
 
 /**
  * The shared color picker: a swatch-labelled trigger opening the palette
@@ -14,8 +14,8 @@ const props = defineProps<{
 }>()
 
 const appConfig = useAppConfig()
-const { neutralColors, primaryColors, primary, neutral, blackAsPrimary, setBlackAsPrimary } = useTheme()
-const { selectPalette, isCustomPalette, clearCustomPalette } = useThemeStudio()
+const { neutralColors, primaryColors, primary, neutral } = useTheme()
+const { selectPalette, isCustomPalette } = useThemeStudio()
 
 // Strictly separated for v4: color roles offer only chromatic ramps, the
 // neutral role only gray ramps, the module's shade recipes differ per
@@ -23,11 +23,10 @@ const { selectPalette, isCustomPalette, clearCustomPalette } = useThemeStudio()
 const colors = computed(() => props.alias === 'neutral' ? neutralColors : primaryColors)
 
 const live = computed(() => {
-  if (props.alias === 'primary' && blackAsPrimary.value) return 'black'
   if (isCustomPalette(props.alias)) return 'custom'
   if (props.alias === 'primary') return primary.value
   if (props.alias === 'neutral') return neutral.value
-  return (appConfig.ui.colors as Record<string, string>)[props.alias] || props.alias
+  return (appConfig.colors as Record<string, string>)[props.alias] || props.alias
 })
 
 // the applied palette, held while a preview runs so the trigger and the
@@ -36,18 +35,9 @@ const value = useHeldDuringPreview(() => live.value)
 
 const label = computed(() => paletteLabel(value.value))
 
-/** Black rides the primary alias too: a custom ramp left in place would keep exporting. */
-function pickBlack() {
-  if (isCustomPalette('primary')) {
-    clearCustomPalette('primary')
-  }
-  setBlackAsPrimary(true)
-}
-
 const swatchColor = computed(() => {
-  if (value.value === 'black') return undefined
   if (value.value === 'custom') return `var(--color-custom-${props.alias}-500)`
-  return `var(--color-${rampCssName(value.value)}-500)`
+  return paletteShade(value.value, 500)
 })
 
 function isSelected(color: string) {
@@ -68,7 +58,7 @@ watch(open, (isOpen) => {
  */
 function hover(color: string) {
   if (!props.preview || color === value.value) return show()
-  show(color === 'black' ? pickBlack : () => selectPalette(props.alias, color))
+  show(() => selectPalette(props.alias, color))
 }
 </script>
 
@@ -86,7 +76,7 @@ function hover(color: string) {
       block
       :trailing-icon="appConfig.ui.icons.chevronDown"
       class="capitalize group"
-      :style="swatchColor ? { '--swatch-color': swatchColor } : undefined"
+      :style="{ '--swatch-color': swatchColor }"
       :ui="{ trailingIcon: 'text-dimmed transition-transform duration-200 group-data-[state=open]:rotate-180' }"
     >
       <template #leading>
@@ -95,31 +85,12 @@ function hover(color: string) {
           inset
           standalone
           class="mx-1"
-          :ui="{ base: ['ring-0', swatchColor ? 'bg-(--swatch-color)' : 'bg-black dark:bg-white'] }"
+          :ui="{ base: 'ring-0 bg-(--swatch-color)' }"
         />
       </template>
     </UButton>
 
     <template #content>
-      <UButton
-        v-if="alias === 'primary'"
-        label="Black"
-        size="sm"
-        color="neutral"
-        variant="subtle"
-        :active="value === 'black'"
-        active-color="primary"
-        active-variant="subtle"
-        class="capitalize"
-        @pointerenter="hover('black')"
-        @pointerleave="show()"
-        @click="commit(pickBlack)"
-      >
-        <template #leading>
-          <span class="inline-block h-2 w-3 shrink-0 rounded-full bg-black dark:bg-white" />
-        </template>
-      </UButton>
-
       <UButton
         v-for="color in colors"
         :key="color"
@@ -140,7 +111,7 @@ function hover(color: string) {
           <span
             class="inline-block h-2 w-3 shrink-0 rounded-full"
             :style="{
-              background: `linear-gradient(to right, var(--color-${rampCssName(color)}-400), var(--color-${rampCssName(color)}-500), var(--color-${rampCssName(color)}-600))`
+              background: `linear-gradient(to right, ${paletteShade(color, 400)}, ${paletteShade(color, 500)}, ${paletteShade(color, 600)})`
             }"
           />
         </template>

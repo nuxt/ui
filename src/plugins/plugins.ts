@@ -1,4 +1,3 @@
-import MagicString from 'magic-string'
 import { genSafeVariableName } from 'knitwork'
 import { resolvePathSync } from 'mlly'
 import { join } from 'pathe'
@@ -8,15 +7,16 @@ import { runtimeDir, runtimeUrl } from '../unplugin'
 import type { NuxtUIOptions } from '../unplugin'
 
 /**
- * This plugin provides the necessary transforms to allow loading the
- * Nuxt UI _Nuxt_ plugins in `src/runtime/plugins/` in a pure Vue environment.
+ * This plugin installs the Vue plugins that stand in for what Nuxt provides
+ * (icons, head, router, color mode) and registers the prose components, through
+ * `@nuxt/ui/vue-plugin`.
  */
 export default function PluginsPlugin(options: NuxtUIOptions) {
-  const plugins = globSync(['**/*', '!*.d.ts'], { cwd: join(runtimeDir, 'plugins'), absolute: true })
-
-  plugins.unshift(resolvePathSync('./vue/plugins/router', { extensions: ['.ts', '.mjs', '.js'], url: runtimeUrl }))
-  plugins.unshift(resolvePathSync('./vue/plugins/head', { extensions: ['.ts', '.mjs', '.js'], url: runtimeUrl }))
-  plugins.unshift(resolvePathSync('./vue/plugins/icons', { extensions: ['.ts', '.mjs', '.js'], url: runtimeUrl }))
+  const plugins = [
+    resolvePathSync('./vue/plugins/icons', { extensions: ['.ts', '.mjs', '.js'], url: runtimeUrl }),
+    resolvePathSync('./vue/plugins/head', { extensions: ['.ts', '.mjs', '.js'], url: runtimeUrl }),
+    resolvePathSync('./vue/plugins/router', { extensions: ['.ts', '.mjs', '.js'], url: runtimeUrl })
+  ]
 
   if (options.colorMode) {
     plugins.push(resolvePathSync('./vue/plugins/color-mode', { extensions: ['.ts', '.mjs', '.js'], url: runtimeUrl }))
@@ -32,19 +32,6 @@ export default function PluginsPlugin(options: NuxtUIOptions) {
     resolveId(id) {
       if (id === '@nuxt/ui/vue-plugin') {
         return 'virtual:nuxt-ui-plugins'
-      }
-    },
-    transform(code, id) {
-      if (plugins.some(p => id.startsWith(p)) && code.includes('import.meta.client')) {
-        const s = new MagicString(code)
-        s.replaceAll('import.meta.client', 'true')
-
-        if (s.hasChanged()) {
-          return {
-            code: s.toString(),
-            map: s.generateMap({ hires: true })
-          }
-        }
       }
     },
     loadInclude: id => id === 'virtual:nuxt-ui-plugins',

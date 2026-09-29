@@ -4,7 +4,7 @@ import type { DropdownMenuItem } from '@nuxt/ui'
 import type { ThemeDoc } from '../../utils/theme/engine/types'
 import { DEFAULT_PRESET_ID } from '../../utils/theme/engine/types'
 import { studioIcons as stockIcons } from '../../utils/theme/icons'
-import { keepPanels, paletteLabel, rampCssName, themeChipStyle, loadFontPreviews, PRESET_ICONS, FONTS } from '../../utils/theme/studio'
+import { keepPanels, paletteLabel, paletteShade, themeChipStyle, loadFontPreviews, PRESET_ICONS, FONTS } from '../../utils/theme/studio'
 
 /**
  * The header's theme menu: the applied preset up top with the presets a
@@ -20,7 +20,7 @@ const { track } = useAnalytics()
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
 const studioIcons = useStudioIcons()
-const { primary, primaryColors, neutral, neutralColors, blackAsPrimary, setBlackAsPrimary, radius, radiuses, font, icon, icons, currentDoc } = useTheme()
+const { primary, primaryColors, neutral, neutralColors, radius, radiuses, font, icon, icons, currentDoc } = useTheme()
 const { presets, selectedPreset, applyPreset, selectPalette, isCustomPalette, neutralChip, sectionDirty } = useThemeStudio()
 // "changed from the preset" per control, the cue the studio toolbar carries
 const { groupDirtyFlags } = useThemeStudioToolbar()
@@ -47,7 +47,7 @@ const live = computed(() => ({
   doc: preset.value?.doc ?? currentDoc(),
   name: name.value,
   modified: modified.value,
-  primary: blackAsPrimary.value ? 'black' : isCustomPalette('primary') ? 'custom' : primary.value,
+  primary: isCustomPalette('primary') ? 'custom' : primary.value,
   primaryDirty: mounted.value && primaryDirty.value,
   neutral: isCustomPalette('neutral') ? 'custom' : neutral.value,
   neutralChip: neutralChip.value,
@@ -78,8 +78,8 @@ const triggerIcon = computed(() => {
   return (id && id !== DEFAULT_PRESET_ID && PRESET_ICONS[id]) || studioIcons.palette
 })
 
-/** A palette's swatch, through the ramp name the docs expose it under. */
-const swatch = (palette: string) => `var(--color-${rampCssName(palette)}-500)`
+/** A palette's swatch. */
+const swatch = (palette: string) => paletteShade(palette, 500)
 
 /** A theme as a chip avatar: its icon in its primary, on that primary's tint. */
 function chip(id: string | undefined, doc: ThemeDoc): DropdownMenuItem['avatar'] {
@@ -104,7 +104,6 @@ function action(key: string): (() => void) | undefined {
       const entry = presets.find(entry => entry.id === value)
       return entry && (() => applyPreset(entry))
     }
-    case 'black': return () => setBlackAsPrimary(true)
     case 'primary':
     case 'neutral': return () => selectPalette(kind, value)
     case 'font': return () => (font.value = value)
@@ -188,26 +187,21 @@ const items = computed<DropdownMenuItem[][]>(() => [[{
     dirty: view.value.primaryDirty,
     icon: studioIcons.brush,
     value: upperFirst(paletteLabel(view.value.primary)),
-    // the live var only for black and a custom ramp, which have no held swatch
-    dot: view.value.primary === 'black' || view.value.primary === 'custom' ? 'var(--ui-primary)' : swatch(view.value.primary),
-    children: [option('black:', {
-      label: 'Black',
-      slot: 'color',
-      dot: 'var(--ui-text-highlighted)',
-      checked: view.value.primary === 'black'
-    }), ...primaryColors.map(color => option(`primary:${color}`, {
+    // the live var only for a custom ramp, which has no held swatch
+    dot: view.value.primary === 'custom' ? 'var(--ui-primary)' : swatch(view.value.primary),
+    children: primaryColors.map(color => option(`primary:${color}`, {
       label: upperFirst(paletteLabel(color)),
       slot: 'color',
       dot: swatch(color),
       checked: view.value.primary === color
-    }))]
+    }))
   }),
   setting({
     label: 'Neutral',
     dirty: view.value.neutralDirty,
     icon: studioIcons.contrast,
     value: upperFirst(paletteLabel(view.value.neutral)),
-    dot: `var(--color-${view.value.neutralChip}-500)`,
+    dot: swatch(view.value.neutralChip),
     children: neutralColors.map(color => option(`neutral:${color}`, {
       label: upperFirst(paletteLabel(color)),
       slot: 'color',
@@ -296,7 +290,7 @@ useEventListener('focusin', (event) => {
  */
 function isApplied(key: string) {
   const { preset, primary, neutral, font, radius } = view.value
-  return [`preset:${preset?.id}`, primary === 'black' ? 'black:' : `primary:${primary}`, `neutral:${neutral}`, `font:${font}`, `radius:${radius}`].includes(key)
+  return [`preset:${preset?.id}`, `primary:${primary}`, `neutral:${neutral}`, `font:${font}`, `radius:${radius}`].includes(key)
 }
 </script>
 

@@ -23,10 +23,10 @@ if (route.query.theme) {
   colorMode.preference = route.query.theme === 'light' ? 'light' : 'dark'
 }
 if (route.query.neutral) {
-  appConfig.ui.colors.neutral = route.query.neutral as string
+  appConfig.colors.neutral = route.query.neutral as string
 }
 if (route.query.primary) {
-  appConfig.ui.colors.primary = route.query.primary as string
+  appConfig.colors.primary = route.query.primary as string
 }
 
 const width = computed(() => route.query.width && Number.parseInt(route.query.width as string) > 0 ? `${Number.parseInt(route.query.width as string) - 2}px` : '864px')
