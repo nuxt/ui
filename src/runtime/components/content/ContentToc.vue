@@ -75,8 +75,8 @@ export interface ContentTocSlots<T extends ContentTocLink = ContentTocLink> {
 import { computed, onUnmounted, useTemplateRef, watch, nextTick } from 'vue'
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
-import { useRouter, useAppConfig, useNuxtApp } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
+import { useRouter, useNuxtApp } from '#imports'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
 import { useForwardProps } from '../../composables/useForwardProps'
 import { useScrollspy } from '../../composables/useScrollspy'
 import { useScrollShadow } from '../../composables/useScrollShadow'
@@ -99,7 +99,7 @@ const rootProps = useForwardProps(reactivePick(props, 'as', 'open', 'defaultOpen
 
 const { t } = useLocale()
 const router = useRouter()
-const appConfig = useAppConfig() as ContentToc['AppConfig']
+const appConfig = useThemeConfig() as ContentToc['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.contentToc)
 const { activeHeadings, updateHeadings } = useScrollspy()
 const prefix = usePrefix()

@@ -42,8 +42,7 @@ export interface PageAnchorsSlots<T extends PageAnchor = PageAnchor> {
 <script setup lang="ts" generic="T extends PageAnchor">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { pickLinkProps } from '../utils/link'
 import { tv } from '../utils/tv'
 import ULink from './Link.vue'
@@ -57,7 +56,7 @@ const slots = defineSlots<PageAnchorsSlots<T>>()
 
 const props = useComponentProps<PageAnchorsProps<T>>('pageAnchors', _props, theme)
 
-const appConfig = useAppConfig() as PageAnchors['AppConfig']
+const appConfig = useThemeConfig() as PageAnchors['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.pageAnchors)
 
 // eslint-disable-next-line vue/no-dupe-keys

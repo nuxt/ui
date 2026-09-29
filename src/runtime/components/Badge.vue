@@ -42,10 +42,9 @@ export interface BadgeSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
@@ -57,7 +56,7 @@ const slots = defineSlots<BadgeSlots>()
 
 const props = useComponentProps('badge', _props, theme)
 
-const appConfig = useAppConfig() as Badge['AppConfig']
+const appConfig = useThemeConfig() as Badge['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.badge)
 const { orientation, size: fieldGroupSize } = useFieldGroup<BadgeProps>(_props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)

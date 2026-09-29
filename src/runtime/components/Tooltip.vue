@@ -72,7 +72,7 @@ const slots = defineSlots<TooltipSlots>()
 
 const props = useComponentProps('tooltip', _props, theme)
 
-const appConfig = useAppConfig() as Tooltip['AppConfig']
+const appConfig = useThemeConfig() as Tooltip['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.tooltip)
 
 const providerContext = injectTooltipProviderContext()

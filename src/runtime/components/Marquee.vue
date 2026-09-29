@@ -49,8 +49,7 @@ export interface MarqueeSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 
 const _props = withDefaults(defineProps<MarqueeProps>(), {
@@ -62,7 +61,7 @@ defineSlots<MarqueeSlots>()
 
 const props = useComponentProps('marquee', _props, theme)
 
-const appConfig = useAppConfig() as Marquee['AppConfig']
+const appConfig = useThemeConfig() as Marquee['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.marquee)
 
 // eslint-disable-next-line vue/no-dupe-keys

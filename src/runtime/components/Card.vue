@@ -34,8 +34,7 @@ export interface CardSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 
 const _props = defineProps<CardProps>()
@@ -43,7 +42,7 @@ const slots = defineSlots<CardSlots>()
 
 const props = useComponentProps('card', _props, theme)
 
-const appConfig = useAppConfig() as Card['AppConfig']
+const appConfig = useThemeConfig() as Card['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.card)
 
 // eslint-disable-next-line vue/no-dupe-keys

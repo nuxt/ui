@@ -28,8 +28,7 @@ export interface FooterSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 import UContainer from './Container.vue'
 
@@ -40,7 +39,7 @@ const slots = defineSlots<FooterSlots>()
 
 const props = useComponentProps('footer', _props, theme)
 
-const appConfig = useAppConfig() as Footer['AppConfig']
+const appConfig = useThemeConfig() as Footer['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.footer)
 
 // eslint-disable-next-line vue/no-dupe-keys

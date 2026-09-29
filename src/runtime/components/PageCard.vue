@@ -73,8 +73,7 @@ export interface PageCardSlots {
 import { computed, ref, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useMouseInElement, pausableFilter } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { usePrefix } from '../composables/usePrefix'
 import { getSlotChildrenText } from '../utils'
 import { tv } from '../utils/tv'
@@ -93,7 +92,7 @@ const props = useComponentProps('pageCard', _props, theme)
 const cardRef = ref<HTMLElement>()
 const motionControl = pausableFilter()
 
-const appConfig = useAppConfig() as PageCard['AppConfig']
+const appConfig = useThemeConfig() as PageCard['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.pageCard)
 const { elementX, elementY } = useMouseInElement(cardRef, {
   eventFilter: motionControl.eventFilter

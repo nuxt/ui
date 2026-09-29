@@ -56,8 +56,7 @@ export interface ChatPromptSlots extends TextareaSlots {
 import { computed, toRef, useTemplateRef } from 'vue'
 import { Primitive } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useIMEGuard } from '../composables/useIMEGuard'
 import { useLocale } from '../composables/useLocale'
@@ -82,7 +81,7 @@ const props = useComponentProps('chatPrompt', _props, theme)
 const model = defineModel<string>({ default: '' })
 
 const { t } = useLocale()
-const appConfig = useAppConfig() as ChatPrompt['AppConfig']
+const appConfig = useThemeConfig() as ChatPrompt['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.chatPrompt)
 
 const textareaProps = useForwardProps(reactivePick(props, 'rows', 'autofocus', 'autofocusDelay', 'autoresize', 'autoresizeDelay', 'maxrows', 'icon', 'avatar', 'loading', 'loadingIcon'))
