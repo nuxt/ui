@@ -5,7 +5,7 @@ import type { NuxtUIOptions } from '../unplugin'
  * This plugin injects Nuxt UI configuration into the runtime build so Nuxt UI components can
  * access it.
  */
-export default function AppConfigPlugin(_options: NuxtUIOptions & { theme: NonNullable<NuxtUIOptions['theme']> }, appConfig: Record<string, any>) {
+export default function AppConfigPlugin(_options: NuxtUIOptions, appConfig: Record<string, any>) {
   return {
     name: 'nuxt:ui:app-config',
     enforce: 'pre',
