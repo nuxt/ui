@@ -4,7 +4,7 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'inline-flex flex-row-reverse justify-end',
-    base: 'relative rounded-full ring-bg first:me-0'
+    base: 'relative rounded-full ring-surface first:me-0'
   },
   variants: {
     size: {

@@ -204,7 +204,7 @@ const isPlainObject = (value: any): value is Record<string, any> => typeof value
  * One step of a spec. Steps resolve in order, last class winning:
  * 1. the theme: its slot classes, variants and compound variants
  * 2. each level of overrides, farthest first (`app.config.ui.<c>`, then each
- *    `<UTheme>` down to the component): its variants, its slot classes, then
+ *    `<UTheme>` down to the component): its slot classes, its variants, then
  *    its compound variants
  *
  * So a class a level sets wins over the whole theme, whatever form the theme
@@ -298,14 +298,13 @@ function resolveSpec(theme: Record<string, any>, levels: readonly Record<string,
     }
   })
 
+  // Each level applies like the theme, its slots, then its variants, then its
+  // compound variants, so a variant it sets still wins over its own slot classes
   const layers: Layer[] = [{ statics: themeStatics, variants: theme.variants, compoundVariants: flatten(theme.compoundVariants) }]
   levels.forEach((level, index) => {
-    if (!isEmpty(level.variants)) {
-      layers.push({ variants: snapshot(level.variants) })
-    }
     const compoundVariants = flatten(level.compoundVariants)
-    if (!isEmpty(levelStatics[index]) || compoundVariants.length) {
-      layers.push({ statics: levelStatics[index], compoundVariants: snapshot(compoundVariants) })
+    if (!isEmpty(levelStatics[index]) || !isEmpty(level.variants) || compoundVariants.length) {
+      layers.push({ statics: levelStatics[index], variants: snapshot(level.variants), compoundVariants: snapshot(compoundVariants) })
     }
   })
 

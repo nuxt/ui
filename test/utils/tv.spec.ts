@@ -659,8 +659,9 @@ describe('tv override levels', () => {
     expect(levels({ slots: { label: 'text-default' } }, { variants: { tone: { quiet: { label: 'text-inverted' } } } })().label()).toBe('text-inverted')
   })
 
-  it('lets a level\'s slot class win over its own variants', () => {
-    expect(levels({}, { slots: { label: 'text-default' }, variants: { tone: { quiet: { label: 'text-inverted' } } } })().label()).toBe('text-default')
+  it('lets a level\'s variants win over its own slot classes, like the theme\'s', () => {
+    expect(levels({}, { slots: { label: 'text-default' }, variants: { tone: { quiet: { label: 'text-inverted' } } } })().label()).toBe('text-inverted')
+    expect(tvt(theme, { slots: { base: 'px-2' }, variants: { size: { md: { base: 'px-8' } } } })().base()).toBe('inline-flex text-sm px-8')
   })
 
   it('merges the classes of every level instead of replacing them', () => {
@@ -751,7 +752,7 @@ describe('tv spec sharing', () => {
     overrides.slots.base = 'p-2'
     expect(tvt(theme, overrides)().base()).toBe('inline-flex p-2')
     Object.assign(overrides, { variants: { active: { true: { base: 'italic' } } } })
-    expect(tvt(theme, overrides)().base({ active: true })).toBe('inline-flex font-bold italic p-2')
+    expect(tvt(theme, overrides)().base({ active: true })).toBe('inline-flex font-bold p-2 italic')
   })
 
   it('keys a replacer in the overrides by identity', () => {
