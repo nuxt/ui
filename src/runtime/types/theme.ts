@@ -1,5 +1,6 @@
-import type { SlotClass } from './tv'
+import type { SlotClass, TVVariants } from './tv'
 import type * as ui from '#build/ui'
+import type icons from '../theme/icons'
 import type * as ComponentTypes from './index'
 
 type ThemeSlotOverrides<T> = T extends { slots: infer S extends Record<string, any> }
@@ -14,6 +15,23 @@ type ThemeSlotOverrides<T> = T extends { slots: infer S extends Record<string, a
 export type ThemeUI = {
   [K in keyof typeof ui]?: ThemeSlotOverrides<(typeof ui)[K]>
 }
+
+/**
+ * Per-component variant values, the `variants` of `app.config.ui.<c>`:
+ * `{ button: { variant: { soft: { base: 'rounded-full' } } } }`. Powers the
+ * `:variants` prop on `<UTheme>`.
+ */
+export type ThemeVariants = {
+  [K in keyof typeof ui]?: K extends 'prose'
+    ? { [P in keyof (typeof ui)[K]]?: TVVariants<(typeof ui)[K][P]> }
+    : TVVariants<(typeof ui)[K]>
+}
+
+/**
+ * Icon names by key, the shape of `app.config.ui.icons`. Powers the `:icons`
+ * prop on `<UTheme>`.
+ */
+export type ThemeIcons = Partial<Record<keyof typeof icons | (string & {}), string>>
 
 /**
  * App-wide defaults for the `'*'` key of `<UTheme :props>` and
