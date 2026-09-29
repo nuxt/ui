@@ -3,7 +3,7 @@ import { describe, it, expect } from 'vitest'
 import { getPrefixedLiterals, getTemplates } from '../../src/templates'
 import { defaultOptions, getDefaultConfig, resolveColors } from '../../src/utils/defaults'
 
-function themeContents(overrides: Record<string, any>, vue?: { detectedComponents?: Set<string> }) {
+function themeContents(overrides: Record<string, any>, vue?: { componentDir?: string, detectedComponents?: Set<string> }) {
   const options = { ...defaultOptions, ...overrides, theme: { ...defaultOptions.theme, colors: resolveColors(undefined), ...(overrides.theme || {}) } }
   const templates = getTemplates(options as any, getDefaultConfig(options.theme), undefined, undefined, vue)
   return (filename: string) => templates.find(template => template.filename === filename)!.getContents!({} as any)
@@ -38,7 +38,9 @@ describe('getPrefixedLiterals', () => {
     expect(classes.every(cls => cls.startsWith('tw:'))).toBe(true)
   })
 
-  it('is empty for a missing directory', () => {
-    expect(getPrefixedLiterals('/missing', 'tw')).toEqual([])
+  it('adds them to `ui.css` in the Vue plugin', async () => {
+    const contents = themeContents({ theme: { prefix: 'tw' } }, { componentDir: join(process.cwd(), 'src/runtime/components') })
+
+    expect(await contents('ui.css')).toMatch(/@source inline\("[^"]*tw:dark:hidden[^"]*"\);/)
   })
 })
