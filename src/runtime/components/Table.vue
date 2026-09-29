@@ -237,7 +237,7 @@ import { defu } from 'defu'
 import { FlexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, getExpandedRowModel, useVueTable } from '@tanstack/vue-table'
 import { useVirtualizer } from '@tanstack/vue-virtual'
 import { reactivePick, createReusableTemplate, createRef } from '@vueuse/core'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
@@ -255,8 +255,7 @@ const slots = defineSlots<TableSlots<T>>()
 const props = useComponentProps<TableProps<T>>('table', _props, theme)
 
 const { t } = useLocale()
-const appConfig = useThemeConfig() as Table['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.table)
+const overrides = useComponentOverrides((ui: Table['AppConfig']['ui']) => ui.table)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const data = createRef(props.data ?? [], props.watchOptions?.deep !== false)

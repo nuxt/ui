@@ -93,7 +93,7 @@ const slots = defineSlots<InputTagsSlots<T>>()
 const props = useComponentProps<InputTagsProps<T>>('inputTags', _props, theme)
 
 const appConfig = useThemeConfig() as InputTags['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.inputTags)
+const overrides = useComponentOverrides((ui: InputTags['AppConfig']['ui']) => ui.inputTags)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'addOnPaste', 'addOnTab', 'addOnBlur', 'duplicate', 'delimiter', 'max', 'convertValue', 'displayValue', 'required'), emits)
 

@@ -18,7 +18,7 @@ export interface ProseCardGroupSlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 
 const _props = defineProps<ProseCardGroupProps>()
@@ -27,8 +27,7 @@ defineSlots<ProseCardGroupSlots>()
 
 const props = useComponentProps('prose.cardGroup', _props, theme)
 
-const appConfig = useThemeConfig() as ProseCardGroup['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.prose?.cardGroup)
+const overrides = useComponentOverrides((ui: ProseCardGroup['AppConfig']['ui']) => ui.prose?.cardGroup)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)())

@@ -67,7 +67,7 @@ import { defu } from 'defu'
 import { useForwardProps } from '../composables/useForwardProps'
 import { PopoverRoot, PopoverTrigger, PopoverPortal, PopoverContent, PopoverArrow, PopoverAnchor, HoverCardRoot, HoverCardTrigger, HoverCardPortal, HoverCardContent, HoverCardArrow } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { FieldGroupReset } from '../composables/useFieldGroup'
 import { usePortal } from '../composables/usePortal'
 import { pointerDownOutside } from '../utils/overlay'
@@ -88,8 +88,7 @@ const slots = defineSlots<PopoverSlots<M>>()
 
 const props = useComponentProps<PopoverProps<M>>('popover', _props, theme)
 
-const appConfig = useThemeConfig() as Popover['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.popover)
+const overrides = useComponentOverrides((ui: Popover['AppConfig']['ui']) => ui.popover)
 
 const pick = props.mode === 'hover' ? reactivePick(props, 'defaultOpen', 'open', 'openDelay', 'closeDelay', 'enableTouch') : reactivePick(props, 'defaultOpen', 'open', 'modal')
 const rootProps = useForwardProps(pick, emits)

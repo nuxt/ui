@@ -102,7 +102,7 @@ const slots = defineSlots<ChatToolSlots>()
 const props = useComponentProps('chatTool', _props, theme)
 
 const appConfig = useThemeConfig() as ChatTool['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.chatTool)
+const overrides = useComponentOverrides((ui: ChatTool['AppConfig']['ui']) => ui.chatTool)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({

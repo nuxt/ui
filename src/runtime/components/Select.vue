@@ -185,7 +185,7 @@ const slots = defineSlots<SelectSlots<T, VK, M, Mod>>()
 const props = useComponentProps<SelectProps<T, VK, M, Mod>>('select', _props, theme)
 
 const appConfig = useThemeConfig() as Select['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.select)
+const overrides = useComponentOverrides((ui: Select['AppConfig']['ui']) => ui.select)
 
 const rootProps = useForwardProps(reactivePick(props, 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple', 'nullableValue'), emits)
 const portalProps = usePortal(toRef(() => props.portal))

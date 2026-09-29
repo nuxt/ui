@@ -112,7 +112,7 @@ const props = useComponentProps('slideover', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useThemeConfig() as Slideover['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.slideover)
+const overrides = useComponentOverrides((ui: Slideover['AppConfig']['ui']) => ui.slideover)
 
 const rootProps = useForwardProps(reactivePick(props, 'open', 'defaultOpen', 'modal', 'unmountOnHide'), emits)
 const portalProps = usePortal(toRef(() => props.portal))

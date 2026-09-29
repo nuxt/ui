@@ -55,7 +55,7 @@ const props = useComponentProps('prose.collapsible', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useThemeConfig() as ProseCollapsible['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.prose?.collapsible)
+const overrides = useComponentOverrides((ui: ProseCollapsible['AppConfig']['ui']) => ui.prose?.collapsible)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)())
