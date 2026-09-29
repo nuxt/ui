@@ -242,8 +242,7 @@ import { NavigationMenuRoot, NavigationMenuList, NavigationMenuItem, NavigationM
 import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { get, isArrayOfArray } from '../utils'
 import { tv } from '../utils/tv'
 import { pickLinkProps } from '../utils/link'
@@ -274,7 +273,7 @@ const slots = defineSlots<NavigationMenuSlots<T>>()
 
 const props = useComponentProps<NavigationMenuProps<T, K, O>>('navigationMenu', _props, theme)
 
-const appConfig = useAppConfig() as NavigationMenu['AppConfig']
+const appConfig = useThemeConfig() as NavigationMenu['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.navigationMenu)
 
 const rootProps = useForwardProps(computed(() => ({

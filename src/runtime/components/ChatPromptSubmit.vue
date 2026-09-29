@@ -88,8 +88,7 @@ export interface ChatPromptSubmitEmits {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { reactiveOmit } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useLocale } from '../composables/useLocale'
 import { transformUI } from '../utils'
@@ -113,7 +112,7 @@ const slots = defineSlots<ButtonSlots>()
 const props = useComponentProps('chatPromptSubmit', _props, theme)
 
 const { t } = useLocale()
-const appConfig = useAppConfig() as ChatPromptSubmit['AppConfig']
+const appConfig = useThemeConfig() as ChatPromptSubmit['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.chatPromptSubmit)
 
 const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'color', 'variant', 'status', 'disabled', 'streamingIcon', 'streamingColor', 'streamingVariant', 'submittedIcon', 'submittedColor', 'submittedVariant', 'errorIcon', 'errorColor', 'errorVariant', 'class', 'ui'))

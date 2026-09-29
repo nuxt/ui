@@ -50,8 +50,7 @@ export default {
 import { ref, computed, defineAsyncComponent, toRef, provide, onMounted, onBeforeUnmount } from 'vue'
 import { ToastProvider, ToastViewport, ToastPortal } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useLocale } from '../composables/useLocale'
 import { useToast, toastMaxInjectionKey } from '../composables/useToast'
@@ -93,7 +92,7 @@ onBeforeUnmount(() => {
 
 const { toasts, remove } = useToast()
 const { t } = useLocale()
-const appConfig = useAppConfig() as Toaster['AppConfig']
+const appConfig = useThemeConfig() as Toaster['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.toaster)
 
 provide(toastMaxInjectionKey, toRef(() => props.max))

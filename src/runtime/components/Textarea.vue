@@ -69,8 +69,7 @@ export interface TextareaSlots {
 import { useTemplateRef, computed, onMounted, onScopeDispose, nextTick, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useVModel } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { isEmpty, looseToNumber } from '../utils'
@@ -95,7 +94,7 @@ const props = useComponentProps<TextareaProps<T, Mod>>('textarea', _props, theme
 // eslint-disable-next-line vue/no-dupe-keys
 const modelValue = useVModel<TextareaProps<T, Mod>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, { defaultValue: props.defaultValue })
 
-const appConfig = useAppConfig() as Textarea['AppConfig']
+const appConfig = useThemeConfig() as Textarea['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.textarea)
 
 const { emitFormFocus, emitFormBlur, emitFormInput, emitFormChange, size: formFieldSize, color: formFieldColor, id, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<TextareaProps<T>>(_props, { deferInputValidation: true })

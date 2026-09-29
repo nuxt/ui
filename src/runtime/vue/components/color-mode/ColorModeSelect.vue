@@ -8,9 +8,10 @@ export interface ColorModeSelectProps extends Omit<SelectMenuProps<SelectMenuIte
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useForwardProps } from 'reka-ui'
-import { useAppConfig, useColorMode } from '#imports'
+import { useColorMode } from '#imports'
 import { useLocale } from '../../../composables/useLocale'
 import USelectMenu from '../../../components/SelectMenu.vue'
+import { useThemeConfig } from '../../../composables/useComponentProps'
 
 defineOptions({ inheritAttrs: false })
 
@@ -20,7 +21,7 @@ const props = withDefaults(defineProps<ColorModeSelectProps>(), {
 
 const { t } = useLocale()
 const colorMode = useColorMode()
-const appConfig = useAppConfig()
+const appConfig = useThemeConfig()
 
 const selectMenuProps = useForwardProps(props)
 

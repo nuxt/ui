@@ -157,8 +157,7 @@ import { useTemplateRef, computed, onMounted, onScopeDispose, toRef } from 'vue'
 import { SelectRoot, SelectArrow, SelectTrigger, SelectPortal, SelectContent, SelectViewport, SelectValue as RSelectValue, SelectLabel, SelectGroup, SelectItem as RSelectItem, SelectItemIndicator, SelectItemText, SelectSeparator } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useFieldGroup, FieldGroupReset } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
@@ -185,7 +184,7 @@ const slots = defineSlots<SelectSlots<T, VK, M, Mod>>()
 
 const props = useComponentProps<SelectProps<T, VK, M, Mod>>('select', _props, theme)
 
-const appConfig = useAppConfig() as Select['AppConfig']
+const appConfig = useThemeConfig() as Select['AppConfig']
 const overrides = useComponentOverrides(() => appConfig.ui?.select)
 
 const rootProps = useForwardProps(reactivePick(props, 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple', 'nullableValue'), emits)
