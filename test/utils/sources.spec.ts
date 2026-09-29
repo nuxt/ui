@@ -1,4 +1,4 @@
-import { cpSync, mkdirSync, mkdtempSync, readdirSync, realpathSync, rmSync, symlinkSync, writeFileSync } from 'node:fs'
+import { cpSync, mkdirSync, mkdtempSync, realpathSync, rmSync, symlinkSync, writeFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
 import { tmpdir } from 'node:os'
 import { pathToFileURL } from 'node:url'
@@ -18,9 +18,7 @@ const app = realpathSync(mkdtempSync(join(tmpdir(), 'nuxt-ui-sources-')))
 const dist = join(app, 'node_modules/@nuxt/ui/dist')
 
 mkdirSync(join(dist, 'runtime/components'), { recursive: true })
-for (const file of readdirSync(runtime).filter(file => file.endsWith('.css'))) {
-  cpSync(join(runtime, file), join(dist, 'runtime', file))
-}
+cpSync(join(runtime, 'css'), join(dist, 'runtime/css'), { recursive: true })
 cpSync(join(runtime, 'theme'), join(dist, 'runtime/theme'), { recursive: true })
 symlinkSync(join(process.cwd(), 'node_modules/tailwindcss'), join(app, 'node_modules/tailwindcss'))
 
@@ -29,14 +27,16 @@ afterAll(() => rmSync(app, { recursive: true, force: true }))
 async function build(overrides: Record<string, any>, vue?: { detectedComponents?: Set<string> }) {
   const options = { ...defaultOptions, ...overrides, theme: { ...defaultOptions.theme } }
   const templates = getTemplates(options as any, getDefaultConfig(options.theme), undefined, (...paths: string[]) => join(dist, ...paths), vue)
-  writeFileSync(join(app, 'ui.css'), await templates.find(template => template.filename === 'ui.css')!.getContents!({} as any))
+  for (const filename of ['ui.css', 'ui.base.css']) {
+    writeFileSync(join(app, filename), await templates.find(template => template.filename === filename)!.getContents!({} as any))
+  }
 
   const { compile } = await load('@tailwindcss/node')
   const { Scanner } = await load('@tailwindcss/oxide')
-  const compiler = await compile(`@import "tailwindcss";\n@import "${join(dist, 'runtime/index.css')}";`, {
+  const compiler = await compile(`@import "tailwindcss";\n@import "${join(dist, 'runtime/css/index.css')}";`, {
     base: app,
     onDependency: () => {},
-    customCssResolver: async (id: string) => id === '#build/ui.css' ? join(app, 'ui.css') : undefined
+    customCssResolver: async (id: string) => id.startsWith('#build/') ? join(app, id.slice('#build/'.length)) : undefined
   })
 
   return compiler.build(new Scanner({ sources: compiler.sources }).scan()) as string
