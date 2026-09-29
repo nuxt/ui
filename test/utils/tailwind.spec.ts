@@ -10,6 +10,7 @@ describe('getTailwindPrefix', () => {
     ['@import \'tailwindcss\' source(none) prefix( ui );', 'ui'],
     ['@import "tailwindcss/theme.css" layer(theme) prefix(tw);\n@import "tailwindcss/utilities.css" layer(utilities);', 'tw'],
     ['@import "tailwindcss/utilities.css" layer(utilities);\n@import "tailwindcss/theme.css" layer(theme) prefix(tw);', 'tw'],
+    ['@import "tailwindcss/theme.css" layer(theme);\n@import "tailwindcss/utilities.css" layer(utilities) prefix(tw);', null],
     ['@import "tailwindcss";\n@import "@nuxt/ui";', null],
     ['@import "tailwindcss";\n/* @import "tailwindcss" prefix(tw); */', null],
     ['@import url("tailwindcss") prefix(tw);', 'tw'],
