@@ -141,6 +141,8 @@ describe('colors plugin', () => {
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { tertiary: indigo; }')).rejects.toThrow('`tertiary` isn\'t a color alias')
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: brand; }')).rejects.toThrow('`primary: brand` needs the name of a Tailwind palette')
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { neutral: zinx; }')).rejects.toThrow('Did you mean `zinc`?')
+    await expect(build({}, undefined, '@theme { --color-brand-500: #ef4444; }\n@plugin "@nuxt/ui/colors" { primary: brand; }')).rejects.toThrow('`--color-brand-50` is missing')
+    await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: #5865f2; }')).rejects.toThrow('set `--ui-primary` in your CSS')
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: primary; }')).rejects.toThrow('`primary: primary` points a color alias at another')
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: indigo 550; }')).rejects.toThrow('`primary: indigo 550` takes a palette and up to two shades')
   })

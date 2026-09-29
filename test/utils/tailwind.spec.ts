@@ -2,7 +2,7 @@ import { mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'pathe'
 import { describe, it, expect, afterAll } from 'vitest'
-import { findTailwindPrefix, getTailwindPrefix } from '../../src/utils/tailwind'
+import { findTailwindStylesheets, getTailwindLayer, getTailwindPrefix } from '../../src/utils/tailwind'
 
 describe('getTailwindPrefix', () => {
   it.each([
@@ -12,6 +12,7 @@ describe('getTailwindPrefix', () => {
     ['@import "tailwindcss/utilities.css" layer(utilities);\n@import "tailwindcss/theme.css" layer(theme) prefix(tw);', 'tw'],
     ['@import "tailwindcss";\n@import "@nuxt/ui";', null],
     ['@import "tailwindcss";\n/* @import "tailwindcss" prefix(tw); */', null],
+    ['@import url("tailwindcss") prefix(tw);', 'tw'],
     ['@import "@nuxt/ui";', undefined],
     ['@import "tailwindcss-animate" prefix(tw);', undefined]
   ])('reads %j', (css, prefix) => {
@@ -19,7 +20,18 @@ describe('getTailwindPrefix', () => {
   })
 })
 
-describe('findTailwindPrefix', () => {
+describe('getTailwindLayer', () => {
+  it.each([
+    ['@import "tailwindcss" layer(framework);', 'framework'],
+    ['@import "tailwindcss/index.css" layer(app.framework) prefix(tw);', 'app.framework'],
+    ['@import "tailwindcss/theme.css" layer(theme);\n@import "tailwindcss/utilities.css" layer(utilities);', undefined],
+    ['@import "tailwindcss";', undefined]
+  ])('reads %j', (css, layer) => {
+    expect(getTailwindLayer(css)).toBe(layer)
+  })
+})
+
+describe('findTailwindStylesheets', () => {
   const dir = mkdtempSync(join(tmpdir(), 'nuxt-ui-tailwind-'))
   afterAll(() => rmSync(dir, { recursive: true, force: true }))
 
@@ -28,15 +40,30 @@ describe('findTailwindPrefix', () => {
     return join(dir, name)
   }
 
-  it('reads the first stylesheet that imports Tailwind CSS', async () => {
+  it('lists every stylesheet that imports Tailwind CSS, in order', async () => {
     const fonts = file('fonts.css', '@font-face { font-family: Inter; }')
     const main = file('main.css', '@import "tailwindcss" prefix(tw);')
     const other = file('other.css', '@import "tailwindcss";')
 
-    expect(await findTailwindPrefix([fonts, join(dir, 'missing.css'), main, other])).toEqual({ path: main, prefix: 'tw' })
+    expect((await findTailwindStylesheets([fonts, join(dir, 'missing.css'), main, other])).tailwind).toEqual([
+      { path: main, prefix: 'tw' },
+      { path: other, prefix: null }
+    ])
   })
 
-  it('is undefined when no stylesheet imports Tailwind CSS', async () => {
-    expect(await findTailwindPrefix([file('fonts.css', '@font-face { font-family: Inter; }')])).toBeUndefined()
+  it('follows relative and aliased imports', async () => {
+    const tw = file('tw.css', '@import "tailwindcss" prefix(tw);')
+    const relative = file('relative.css', '@import "./tw.css";\n@import "@nuxt/ui";')
+    const aliased = file('aliased.css', '@import "~/tw.css";\n@import "@nuxt/ui";')
+
+    expect(await findTailwindStylesheets([relative])).toEqual({ tailwind: [{ path: tw, prefix: 'tw' }], unresolved: [] })
+    expect((await findTailwindStylesheets([aliased], { '~': dir })).tailwind).toEqual([{ path: tw, prefix: 'tw' }])
+  })
+
+  it('reports a stylesheet that imports Nuxt UI without a Tailwind CSS import it can find', async () => {
+    const main = file('ui-only.css', '@import "#tailwind";\n@import "@nuxt/ui";')
+
+    expect(await findTailwindStylesheets([main])).toEqual({ tailwind: [], unresolved: [main] })
+    expect(await findTailwindStylesheets([file('fonts.css', '@font-face { font-family: Inter; }')])).toEqual({ tailwind: [], unresolved: [] })
   })
 })

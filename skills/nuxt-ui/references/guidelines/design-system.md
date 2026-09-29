@@ -335,13 +335,10 @@ You can use `var(--ui-color-<name>-<shade>)` to reference shades from the active
 
 ### Black/white as primary
 
-`black` and `white` have no shades, so they can't be used in config. Set them directly:
+`black` and `white` work as shades in the plugin, for light then dark mode. Shades alone keep the alias's palette:
 
 ```css
-:root {
-  --ui-primary: black;
-}
-.dark {
-  --ui-primary: white;
+@plugin "@nuxt/ui/colors" {
+  primary: black white;
 }
 ```
