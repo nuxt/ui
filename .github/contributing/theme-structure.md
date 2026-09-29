@@ -4,7 +4,7 @@ Theme files define component styling using the variants engine in `src/runtime/u
 
 ## File Location
 
-Themes live in `src/theme/` with kebab-case naming (e.g., `button.ts`, `input-menu.ts`).
+Themes live in `src/runtime/theme/` with kebab-case naming (e.g., `button.ts`, `input-menu.ts`).
 
 ## Shape
 
@@ -29,12 +29,16 @@ compoundVariants: [{
 
 ## Static Theme
 
-A theme is a plain object. It never reads module options, so every class it can produce is written in the file and Tailwind finds it by scanning.
+A theme is a plain object wrapped in `defineTheme`. It never reads module options, so every class it can produce is written in the file and Tailwind finds it by scanning.
 
-Write each class out whole. A class built at runtime, from a template literal (`` `${hover}bg-elevated` ``), a helper that maps or rewrites classes, or a string with escaped quotes (`'content-[\'*\']'`), never reaches Tailwind's scanner and gets no CSS. Use backticks for a class that holds quotes, and give a helper that rewrites classes its results as literals, like `replaceFocus` in `input.ts`. The `theme classes` test in `test/utils/theme-slots.spec.ts` fails on any class the themes resolve to that isn't spelled out in `src/theme`.
+`defineTheme` checks `compoundVariants` and `defaultVariants` against `variants`, and keeps their values typed as the variant's values, which inference alone widens to `string`. A theme that builds on another uses `extendTheme(base, {...})` instead, typed after `defuFn`: its values win, a function receives the base value and returns the new one, and `compoundVariants` concatenate. Type a function's parameter from the base (`(prev: typeof input.variants.variant) => ...`) so the variant values survive.
+
+Write each class out whole. A class built at runtime, from a template literal (`` `${hover}bg-elevated` ``), a helper that maps or rewrites classes, or a string with escaped quotes (`'content-[\'*\']'`), never reaches Tailwind's scanner and gets no CSS. Use backticks for a class that holds quotes, and give a helper that rewrites classes its results as literals, like `replaceFocus` in `input.ts`. The `theme classes` test in `test/utils/theme-slots.spec.ts` fails on any class the themes resolve to that isn't spelled out in `src/runtime/theme`.
 
 ```ts
-export default {
+import { defineTheme } from '../utils/theme'
+
+export default defineTheme({
   slots: {
     root: 'w-full',
     item: 'border-b border-default last:border-b-0',
@@ -49,7 +53,7 @@ export default {
       }
     }
   }
-}
+})
 ```
 
 ## Colors
@@ -58,8 +62,9 @@ A component with a `color` prop doesn't repeat its classes per color. `colorVari
 
 ```ts
 import { colorVariant } from './color'
+import { defineTheme } from '../utils/theme'
 
-export default {
+export default defineTheme({
   slots: {
     base: 'font-medium inline-flex items-center transition-colors',
     label: 'truncate',
@@ -84,7 +89,7 @@ export default {
     variant: 'solid',
     size: 'md'
   }
-}
+})
 ```
 
 Scope the root slot, so a `[--ui-accent:…]` class on the component reaches all of it, and don't scope a slot inside it again. Scope an inner slot only when its color differs from the root's: a per-item color, a slot rendered as another component with its own color, like Timeline's indicator, which is an Avatar, a part rendered in a portal, or the one colored part of a component that wraps your content, like the dot of a Chip. A theme that extends another and drops its `root` slot scopes its own outer slot, as Select does with `color: () => colorVariant({ base: '' })`. `neutral` needs no entry of its own: it sets the accent roles to the surface tokens, so the same classes render the neutral look.
@@ -99,14 +104,15 @@ Import shared variants from other themes:
 
 ```ts
 import { fieldGroupVariant } from './field-group'
+import { defineTheme } from '../utils/theme'
 
-export default {
+export default defineTheme({
   slots: { ... },
   variants: {
     ...fieldGroupVariant,
     // Additional variants
   }
-}
+})
 ```
 
 ## Semantic Colors

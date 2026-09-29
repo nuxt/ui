@@ -1,4 +1,4 @@
-import icons from '../theme/icons'
+import icons from '../runtime/theme/icons'
 import type { ModuleOptions } from '../module'
 
 export function getDefaultConfig(theme?: ModuleOptions['theme']) {

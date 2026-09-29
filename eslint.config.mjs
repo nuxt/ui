@@ -505,7 +505,7 @@ function closesAt(expression, open) {
 
 /**
  * Tailwind class checks for the apps in this repo (docs and playgrounds) and
- * for the theme files in `src/theme`.
+ * for the theme files in `src/runtime/theme`.
  */
 function betterTailwindcssConfig(files, entryPoint, { ignore = [], settings = {}, rules = {} } = {}) {
   // Absolute so editor ESLint servers running from a subfolder resolve it too.

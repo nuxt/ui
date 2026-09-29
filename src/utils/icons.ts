@@ -1,5 +1,5 @@
 import { collectionNames } from '@nuxt/icon/utils'
-import defaultIcons from '../theme/icons'
+import defaultIcons from '../runtime/theme/icons'
 
 /**
  * Split an icon (`i-{collection}-{name}`, `{collection}:{name}`, with or without the
