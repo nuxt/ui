@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import { join } from 'pathe'
 import { consola } from 'consola'
 import type { UnpluginOptions } from 'unplugin'
 import type { NuxtUIOptions } from '../unplugin'
@@ -10,12 +11,13 @@ import { detectUsedComponents, resolveExtraScanDirs } from '../utils/components'
  * This plugin is responsible for getting the generated virtual templates and
  * making them available to the Vue build.
  */
-export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record<string, any>, componentDir?: string) {
+export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record<string, any>, runtimeDir: string) {
+  const componentDir = join(runtimeDir, 'components')
   // `detectedComponents` is assigned in the `vite.config` hook (below), before
   // any template's `getContents` runs — so `experimental.componentDetection`
-  // can blank the theme of unused components (see `getTemplates`).
+  // can narrow the theme CSS to the used components (see `getTemplates`).
   const vue: { detectedComponents?: Set<string> } = {}
-  const templates = getTemplates(options, appConfig.ui, undefined, undefined, vue)
+  const templates = getTemplates(options, appConfig.ui, undefined, (...paths: string[]) => join(runtimeDir, '..', ...paths), vue)
   const templateKeys = new Set(templates.map(t => `#build/${t.filename}`))
 
   async function writeTemplates(root: string) {
@@ -69,7 +71,7 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
         // when `config.root` points to a sub-directory Tailwind doesn't scan.
         const root = path.resolve(options.root || config.root || '.')
 
-        if (options.experimental?.componentDetection && componentDir) {
+        if (options.experimental?.componentDetection) {
           // `scanPackages` packages resolve Nuxt UI components from `node_modules`
           // and user component dirs can sit outside the root: detection has to
           // scan both or their components lose their theme CSS.
