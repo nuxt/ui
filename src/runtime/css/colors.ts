@@ -32,7 +32,7 @@ function closestPalette(name: string, shadesByName: unknown) {
   let closestDistance = 3
   for (const key of Object.keys(shadesByName ?? {})) {
     const palette = key.match(/^(.+)-500$/)?.[1]
-    if (!palette || (palette !== 'neutral' && (colors as readonly string[]).includes(palette))) {
+    if (!palette || palette === name || (palette !== 'neutral' && (colors as readonly string[]).includes(palette))) {
       continue
     }
     const edits = distance(name, palette)
@@ -86,6 +86,11 @@ const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugi
     if (!palette) {
       continue
     }
+    // A color value like `#5865f2` or `oklch(...)` isn't a palette: the alias
+    // itself takes it, as a CSS variable
+    if (/^#|\(/.test(palette)) {
+      throw new Error(`[@nuxt/ui] \`${alias}: ${palette}\` takes a palette name, not a color. To use a color of your own, set \`--ui-${alias}\` in your CSS, or declare a palette in \`@theme\` and give its name.`)
+    }
     // An alias's palette is the alias itself (`--color-primary-500` reads
     // `--ui-color-primary-500`), so pointing one at another loops
     if (palette !== 'neutral' && (colors as readonly string[]).includes(palette)) {
@@ -96,7 +101,14 @@ const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugi
     for (const shade of shades) {
       const value = palette === 'neutral' ? tailwindColors.neutral[shade] : theme(`colors.${palette}.${shade}`)
       if (typeof value !== 'string') {
-        const closest = closestPalette(palette, theme('colors'))
+        const palettes = theme('colors')
+        if (!palettes || !Object.keys(palettes).length) {
+          throw new TypeError(`[@nuxt/ui] \`${alias}: ${palette}\` can't be read: Tailwind CSS's theme isn't loaded in this stylesheet. Import \`tailwindcss\` before the plugin, or in a stylesheet that only adds colors, like a layer's, \`@import "tailwindcss/theme" theme(reference);\`.`)
+        }
+        if (typeof theme(`colors.${palette}.500`) === 'string') {
+          throw new TypeError(`[@nuxt/ui] \`${alias}: ${palette}\` needs every shade of \`${palette}\` from 50 to 950, and \`--color-${palette}-${shade}\` is missing.`)
+        }
+        const closest = closestPalette(palette, palettes)
         throw new TypeError(`[@nuxt/ui] \`${alias}: ${palette}\` needs the name of a Tailwind palette with shades from 50 to 950, like \`indigo\`, or of one you declare in \`@theme\` as \`--color-<name>-50\` to \`-950\`.${closest ? ` Did you mean \`${closest}\`?` : ''}`)
       }
       declarations[`--ui-color-${alias}-${shade}`] = value
