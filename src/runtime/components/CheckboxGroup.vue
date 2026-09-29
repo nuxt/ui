@@ -88,9 +88,9 @@ export interface CheckboxGroupSlots<T extends CheckboxGroupItem[] = CheckboxGrou
 import { computed, useId } from 'vue'
 import { CheckboxGroupRoot } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useFormField } from '../composables/useFormField'
-import { get, omit } from '../utils'
+import { get, omit, transformUI } from '../utils'
 import { tv } from '../utils/tv'
 import UCheckbox from './Checkbox.vue'
 
@@ -105,8 +105,7 @@ const slots = defineSlots<CheckboxGroupSlots<T>>()
 
 const props = useComponentProps<CheckboxGroupProps<T, VK>>('checkboxGroup', _props, theme)
 
-const appConfig = useThemeConfig() as CheckboxGroup['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.checkboxGroup)
+const overrides = useComponentOverrides((ui: CheckboxGroup['AppConfig']['ui']) => ui.checkboxGroup)
 
 const rootProps = useForwardProps(props, ['as', 'modelValue', 'defaultValue', 'orientation', 'loop', 'max', 'required'], emits)
 const checkboxProps = useForwardProps(props, ['variant', 'indicator'])
@@ -212,7 +211,7 @@ function onUpdate(value: any) {
         :size="size"
         :name="name"
         :disabled="item.disabled || disabled"
-        :ui="{ ...(props.ui ? omit(props.ui, ['root']) : undefined), ...(item.ui || {}) }"
+        :ui="{ ...transformUI(omit(ui, ['root', 'fieldset', 'legend', 'item']), props.ui ? omit(props.ui, ['root']) : undefined), ...(item.ui || {}) }"
         data-slot="checkbox-group-item"
         :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class], disabled: item.disabled || disabled })"
       >

@@ -60,7 +60,7 @@ import { ref, computed, toRef, useId, watch } from 'vue'
 import { defu } from 'defu'
 import { createReusableTemplate } from '@vueuse/core'
 import { useRuntimeHook, useRoute } from '#imports'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useResizable } from '../composables/useResizable'
 import { useLocale } from '../composables/useLocale'
 import { useLazyOverlay } from '../composables/useLazyOverlay'
@@ -94,8 +94,7 @@ const collapsed = defineModel<boolean>('collapsed', { default: false })
 
 const route = useRoute()
 const { t, locale } = useLocale()
-const appConfig = useThemeConfig() as DashboardSidebar['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.dashboardSidebar)
+const overrides = useComponentOverrides((ui: DashboardSidebar['AppConfig']['ui']) => ui.dashboardSidebar)
 
 const dashboardContext = useDashboard({
   storageKey: 'dashboard',

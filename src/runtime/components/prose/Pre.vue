@@ -52,7 +52,7 @@ const props = useComponentProps('prose.pre', _props, theme)
 const { t } = useLocale()
 const { copy: copyToClipboard, copied } = useClipboard()
 const appConfig = useThemeConfig() as ProsePre['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.prose?.pre)
+const overrides = useComponentOverrides((ui: ProsePre['AppConfig']['ui']) => ui.prose?.pre)
 
 const baseRef = useTemplateRef('baseRef')
 

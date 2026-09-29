@@ -59,7 +59,7 @@ const slots = defineSlots<PageLinksSlots<T>>()
 const props = useComponentProps<PageLinksProps<T>>('pageLinks', _props, theme)
 
 const appConfig = useThemeConfig() as PageLinks['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.pageLinks)
+const overrides = useComponentOverrides((ui: PageLinks['AppConfig']['ui']) => ui.pageLinks)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)())

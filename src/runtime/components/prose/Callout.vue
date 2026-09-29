@@ -41,7 +41,7 @@ defineSlots<ProseCalloutSlots>()
 const props = useComponentProps('prose.callout', _props, theme)
 
 const appConfig = useThemeConfig() as ProseCallout['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.prose?.callout)
+const overrides = useComponentOverrides((ui: ProseCallout['AppConfig']['ui']) => ui.prose?.callout)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({

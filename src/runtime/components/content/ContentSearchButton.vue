@@ -89,7 +89,7 @@ const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : 
 const { t } = useLocale()
 const { open } = useContentSearch()
 const appConfig = useThemeConfig() as ContentSearchButton['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.contentSearchButton)
+const overrides = useComponentOverrides((ui: ContentSearchButton['AppConfig']['ui']) => ui.contentSearchButton)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({

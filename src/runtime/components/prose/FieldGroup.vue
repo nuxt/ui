@@ -24,7 +24,7 @@ export interface ProseFieldGroupSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 
 const _props = defineProps<ProseFieldGroupProps>()
@@ -33,8 +33,7 @@ defineSlots<ProseFieldGroupSlots>()
 
 const props = useComponentProps('prose.fieldGroup', _props, theme)
 
-const appConfig = useThemeConfig() as ProseFieldGroup['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.prose?.fieldGroup)
+const overrides = useComponentOverrides((ui: ProseFieldGroup['AppConfig']['ui']) => ui.prose?.fieldGroup)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)())

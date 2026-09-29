@@ -14,7 +14,7 @@ export interface ProseIconProps {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 import UIcon from '../Icon.vue'
 
@@ -22,8 +22,7 @@ const _props = defineProps<ProseIconProps>()
 
 const props = useComponentProps('prose.icon', _props, theme)
 
-const appConfig = useThemeConfig() as ProseIcon['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.prose?.icon)
+const overrides = useComponentOverrides((ui: ProseIcon['AppConfig']['ui']) => ui.prose?.icon)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)())

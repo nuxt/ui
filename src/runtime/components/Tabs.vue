@@ -100,7 +100,7 @@ export type TabsSlots<T extends TabsItem = TabsItem> = {
 import { ref, computed } from 'vue'
 import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { get } from '../utils'
 import { tv } from '../utils/tv'
 import { getAvatarSize } from '../utils/size'
@@ -121,8 +121,7 @@ const slots = defineSlots<TabsSlots<T>>()
 
 const props = useComponentProps<TabsProps<T>>('tabs', _props, theme)
 
-const appConfig = useThemeConfig() as Tabs['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.tabs)
+const overrides = useComponentOverrides((ui: Tabs['AppConfig']['ui']) => ui.tabs)
 
 const rootProps = useForwardProps(props, ['as', 'unmountOnHide'], emits)
 

@@ -94,7 +94,7 @@ const props = useComponentProps('chatReasoning', _props, theme)
 
 const { t, code } = useLocale()
 const appConfig = useThemeConfig() as ChatReasoning['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.chatReasoning)
+const overrides = useComponentOverrides((ui: ChatReasoning['AppConfig']['ui']) => ui.chatReasoning)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({

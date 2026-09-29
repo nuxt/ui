@@ -53,7 +53,7 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import UPricingPlan from './PricingPlan.vue'
 
 const _props = withDefaults(defineProps<PricingPlansProps>(), {
@@ -67,8 +67,7 @@ const props = useComponentProps<PricingPlansProps>('pricingPlans', _props, theme
 
 const getProxySlots = () => omit(slots, ['default'])
 
-const appConfig = useThemeConfig() as PricingPlans['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.pricingPlans)
+const overrides = useComponentOverrides((ui: PricingPlans['AppConfig']['ui']) => ui.pricingPlans)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({

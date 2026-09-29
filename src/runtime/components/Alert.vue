@@ -93,7 +93,7 @@ const props = useComponentProps('alert', _props, theme)
 
 const { t } = useLocale()
 const appConfig = useThemeConfig() as Alert['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.alert)
+const overrides = useComponentOverrides((ui: Alert['AppConfig']['ui']) => ui.alert)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({

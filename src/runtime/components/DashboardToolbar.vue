@@ -26,7 +26,7 @@ export interface DashboardToolbarSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 
 const _props = defineProps<DashboardToolbarProps>()
@@ -35,8 +35,7 @@ defineSlots<DashboardToolbarSlots>()
 
 const props = useComponentProps('dashboardToolbar', _props, theme)
 
-const appConfig = useThemeConfig() as DashboardToolbar['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.dashboardToolbar)
+const overrides = useComponentOverrides((ui: DashboardToolbar['AppConfig']['ui']) => ui.dashboardToolbar)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)())

@@ -65,7 +65,7 @@ const slots = defineSlots<FooterColumnsSlots<T>>()
 const props = useComponentProps<FooterColumnsProps<T>>('footerColumns', _props, theme)
 
 const appConfig = useThemeConfig() as FooterColumns['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.footerColumns)
+const overrides = useComponentOverrides((ui: FooterColumns['AppConfig']['ui']) => ui.footerColumns)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const as = computed(() => resolveAs(props.as, { root: 'nav', label: 'h3' }))

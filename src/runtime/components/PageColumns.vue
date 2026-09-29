@@ -25,7 +25,7 @@ export interface PageColumnsSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { tv } from '../utils/tv'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 
 const _props = defineProps<PageColumnsProps>()
 
@@ -33,8 +33,7 @@ defineSlots<PageColumnsSlots>()
 
 const props = useComponentProps('pageColumns', _props, theme)
 
-const appConfig = useThemeConfig() as PageColumns['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.pageColumns)
+const overrides = useComponentOverrides((ui: PageColumns['AppConfig']['ui']) => ui.pageColumns)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)())

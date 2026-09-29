@@ -25,7 +25,7 @@ export interface PageGridSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { tv } from '../utils/tv'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 
 const _props = defineProps<PageGridProps>()
 
@@ -33,8 +33,7 @@ defineSlots<PageGridSlots>()
 
 const props = useComponentProps('pageGrid', _props, theme)
 
-const appConfig = useThemeConfig() as PageGrid['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.pageGrid)
+const overrides = useComponentOverrides((ui: PageGrid['AppConfig']['ui']) => ui.pageGrid)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)())

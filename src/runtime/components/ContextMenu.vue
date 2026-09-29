@@ -116,7 +116,7 @@ export type ContextMenuSlots<
 import { computed, toRef } from 'vue'
 import { ContextMenuRoot, ContextMenuTrigger } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UContextMenuContent from './ContextMenuContent.vue'
@@ -133,8 +133,7 @@ const slots = defineSlots<ContextMenuSlots<T>>()
 
 const props = useComponentProps<ContextMenuProps<T>>('contextMenu', _props, theme)
 
-const appConfig = useThemeConfig() as ContextMenu['AppConfig']
-const overrides = useComponentOverrides(() => appConfig.ui?.contextMenu)
+const overrides = useComponentOverrides((ui: ContextMenu['AppConfig']['ui']) => ui.contextMenu)
 
 const rootProps = useForwardProps(props, ['open', 'pressOpenDelay', 'modal'], emits)
 const contentProps = toRef(() => props.content)
