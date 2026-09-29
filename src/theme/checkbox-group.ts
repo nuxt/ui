@@ -80,7 +80,7 @@ export default (options: Required<ModuleOptions>) => ({
       variant: 'table',
       highlight: false,
       class: {
-        item: `${hover}border-accented`
+        item: `${hover}border-accented ${hover}z-[1]`
       }
     },
     { size: 'xs', variant: 'table', class: { item: 'p-2.5' } },
