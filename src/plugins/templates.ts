@@ -14,9 +14,9 @@ import { detectUsedComponents, resolveExtraScanDirs } from '../utils/components'
 export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record<string, any>, runtimeDir: string) {
   const componentDir = join(runtimeDir, 'components')
   // `detectedComponents` is assigned in the `vite.config` hook (below), before
-  // any template's `getContents` runs — so `experimental.componentDetection`
+  // any template's `getContents` runs — so `componentDetection`
   // can narrow the theme CSS to the used components (see `getTemplates`).
-  const vue: { detectedComponents?: Set<string> } = {}
+  const vue: { detectedComponents?: Set<string>, dev?: boolean } = {}
   const templates = getTemplates(options, appConfig.ui, undefined, (...paths: string[]) => join(runtimeDir, '..', ...paths), vue)
   const templateKeys = new Set(templates.map(t => `#build/${t.filename}`))
 
@@ -61,7 +61,7 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
     name: 'nuxt:ui:templates',
     enforce: 'pre',
     vite: {
-      async config(config) {
+      async config(config, { command }) {
         // `config.root` is not resolved yet when `config` hooks run, so a
         // CLI-provided root (e.g. `vite some/dir`) can still be relative here.
         // Alias targets must be absolute: Vite 8 warns on relative targets and
@@ -71,7 +71,9 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
         // when `config.root` points to a sub-directory Tailwind doesn't scan.
         const root = path.resolve(options.root || config.root || '.')
 
-        if (options.experimental?.componentDetection) {
+        vue.dev = command === 'serve'
+
+        if (options.componentDetection) {
           // `scanPackages` packages resolve Nuxt UI components from `node_modules`
           // and user component dirs can sit outside the root: detection has to
           // scan both or their components lose their theme CSS.
@@ -80,7 +82,8 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
             [root, ...dirs],
             options.prefix!,
             componentDir,
-            Array.isArray(options.experimental.componentDetection) ? options.experimental.componentDetection : undefined
+            Array.isArray(options.componentDetection) ? options.componentDetection : undefined,
+            { prose: !!(options.prose || options.mdc) }
           )
 
           if (vue.detectedComponents?.size) {

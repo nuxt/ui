@@ -13,7 +13,9 @@ export default defineConfig({
       },
       components: {
         dirs: ['../nuxt/app/components']
-      }
+      },
+      // The pages come from the Nuxt playground, outside this root, which detection doesn't scan
+      componentDetection: false
     })
   ]
 })

@@ -6,7 +6,8 @@ export default defineConfig({
   plugins: [
     vue(),
     ui({
-      dts: false
+      dts: false,
+      componentDetection: false
     })
   ]
 })
