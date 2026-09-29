@@ -119,8 +119,14 @@ export function themeChipStyle(doc: ThemeDoc) {
   // the stops --ui-primary sits on, a preset may pin it off the library's 500/400
   // or set it to a value of its own, like Mono's black
   const pinned = doc.style?.tokenShades?.['--ui-primary']
-  const light = doc.tokens?.light?.['--ui-primary'] ?? shade(pinned?.light ?? 500)
-  const dark = doc.tokens?.dark?.['--ui-primary'] ?? shade(pinned?.dark ?? 400)
+  // A reference to one of the primary's own shades resolves through the preset,
+  // or the chip would show the active theme's primary
+  const token = (value?: string) => {
+    const stop = value?.match(/^var\(--ui-color-primary-(\d+)\)$/)?.[1]
+    return stop ? shade(Number(stop) as ShadeStop) : value
+  }
+  const light = token(doc.tokens?.light?.['--ui-primary']) ?? shade(pinned?.light ?? 500)
+  const dark = token(doc.tokens?.dark?.['--ui-primary']) ?? shade(pinned?.dark ?? 400)
   const tint = (color: string | undefined, from: number, to: number) =>
     `linear-gradient(135deg, color-mix(in oklab, ${color} ${from}%, transparent), color-mix(in oklab, ${color} ${to}%, transparent))`
 

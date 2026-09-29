@@ -8,7 +8,8 @@ const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
 /** A palette name, optionally followed by the light and dark shades the alias uses. */
 export type ColorsOptions = Partial<Record<Color, string>>
 
-const isShade = (word: string) => word === 'black' || word === 'white' || (shades as readonly number[]).includes(Number(word))
+// Compared as written: `050` would pass as a number but name no variable
+const isShade = (word: string) => word === 'black' || word === 'white' || shades.some(shade => String(shade) === word)
 
 // `black` and `white` aren't shades of a palette, so they are the color itself
 const shadeValue = (alias: string, shade: string) => shade === 'black' || shade === 'white' ? shade : `var(--ui-color-${alias}-${shade})`

@@ -145,5 +145,6 @@ describe('colors plugin', () => {
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: #5865f2; }')).rejects.toThrow('set `--ui-primary` in your CSS')
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: primary; }')).rejects.toThrow('`primary: primary` points a color alias at another')
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: indigo 550; }')).rejects.toThrow('`primary: indigo 550` takes a palette and up to two shades')
+    await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: indigo 050; }')).rejects.toThrow('`primary: indigo 050` takes a palette and up to two shades')
   })
 })
