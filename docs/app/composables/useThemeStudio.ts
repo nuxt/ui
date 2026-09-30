@@ -169,10 +169,9 @@ export function useThemeStudio() {
    * The library hardcodes three tokens to `white` (light `--ui-bg-default`
    * and `--ui-text-contrast`, dark `--ui-text-strong`), so a tinted neutral
    * ramp would never reach them. Choosing a neutral re-routes all three
-   * through the ramp, and lifts
-   * the muted surface a stop: the library sits it at 50 too, so it would
-   * land ON the page and every muted panel would lose its shape. The
-   * presets' tintedNeutralBase carries the same four.
+   * through the ramp, and lifts the muted surface a stop: the library sits it
+   * at 50 too, so it would land ON the page and every muted panel would lose
+   * its shape. The presets' tintedNeutralBase carries the same four.
    */
   const NEUTRAL_TOKEN_REMAPS = {
     light: {
@@ -355,7 +354,7 @@ export function useThemeStudio() {
 
     // Variant re-rolls are the loud ones, so each group rolls rarely and
     // independently; most shuffles restyle none, a lucky one restyles two.
-    // `solid` stays off cards (an inverted, full-white panel in dark mode)
+    // `solid` stays off cards (the neutral solid, a near-white panel in dark mode)
     // and off inputs (fields don't support it). Left off entirely when
     // nothing rolled, an empty `style` would ride into history and exports
     // as a phantom key.

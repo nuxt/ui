@@ -141,11 +141,13 @@ function normalizeFont(raw: unknown): FontPrefs | undefined {
 /**
  * The semantic tokens v5 renamed. A theme saved before keeps its overrides
  * under the new names. `--ui-text-toned` merged into `--ui-text-default`, and
- * only fills it when the theme doesn't set it another way.
+ * only fills it when the theme doesn't set it another way. The inverted tokens
+ * are gone, the neutral solid is `--ui-neutral`, so their overrides are dropped.
  */
 export const MERGED_TOKENS: Record<string, string> = {
   '--ui-text-toned': '--ui-text-default'
 }
+export const DROPPED_TOKENS: string[] = ['--ui-bg-inverted', '--ui-border-inverted']
 export const RENAMED_TOKENS: Record<string, string> = {
   '--ui-bg': '--ui-bg-default',
   '--ui-bg-elevated': '--ui-bg-soft',
@@ -165,7 +167,7 @@ function renameTokens<T>(record: Record<string, T> | undefined): Record<string, 
   // merged names first, then renamed, then current ones: the closest name wins
   for (const [key, value] of entries) if (MERGED_TOKENS[key]) renamed[MERGED_TOKENS[key]] = value
   for (const [key, value] of entries) if (RENAMED_TOKENS[key]) renamed[RENAMED_TOKENS[key]] = value
-  for (const [key, value] of entries) if (!MERGED_TOKENS[key] && !RENAMED_TOKENS[key]) renamed[key] = value
+  for (const [key, value] of entries) if (!MERGED_TOKENS[key] && !RENAMED_TOKENS[key] && !DROPPED_TOKENS.includes(key)) renamed[key] = value
   return renamed
 }
 
