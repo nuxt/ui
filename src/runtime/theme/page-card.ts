@@ -82,7 +82,7 @@ export default defineTheme({
     variant: 'solid',
     to: true,
     class: {
-      root: 'hover:bg-neutral/90'
+      root: 'hover:bg-neutral-hover'
     }
   }, {
     variant: 'outline',
@@ -114,7 +114,7 @@ export default defineTheme({
     to: true,
     highlight: false,
     class: {
-      root: 'has-[>a:focus-visible]:ring-primary'
+      root: 'has-[>a:focus-visible]:ring-neutral'
     }
   }, {
     variant: 'ghost',

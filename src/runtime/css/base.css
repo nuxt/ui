@@ -146,9 +146,9 @@
 @layer base {
   /* The surface tokens, shades of `neutral` that don't follow `color`, and the
      layout sizes. In `base` at zero specificity, like the palettes, so an
-     override in `base` wins wherever `@nuxt/icon` puts that layer. `--ui-bg-tint`
-     and `--ui-outline-focus` are unset: their utilities mix `--ui-bg-soft` and
-     `--ui-neutral` on the element, so a subtree that overrides those reaches them.
+     override in `base` wins wherever `@nuxt/icon` puts that layer. `--ui-bg-tint`,
+     `--ui-outline-focus` and `--ui-neutral-bg-hover` are unset: their utilities mix
+     `--ui-bg-soft` and `--ui-neutral` on the element, so a subtree that overrides those reaches them.
      The solid is `--ui-neutral` itself, with `--ui-text-contrast` on it. */
   :where(:root, :host) {
     --ui-header-height: 4rem;
