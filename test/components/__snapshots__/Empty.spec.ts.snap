@@ -3,11 +3,11 @@
 exports[`Empty > renders with actions correctly 1`] = `
 "<div data-slot="empty" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-default ring ring-default">
   <div data-slot="empty-header" class="flex flex-col items-center gap-2 max-w-sm text-center"><span data-slot="empty-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] shrink-0 mb-2 size-10 text-xl"><span class="iconify i-lucide:file shrink-0 text-accent-muted" aria-hidden="true" data-slot="avatar-icon"></span></span>
-    <h2 data-slot="empty-title" class="text-highlighted text-pretty font-medium text-base">Title</h2>
+    <h2 data-slot="empty-title" class="text-strong text-pretty font-medium text-base">Title</h2>
     <div data-slot="empty-description" class="text-balance text-center text-sm text-muted">Description</div>
   </div>
   <div data-slot="empty-body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
+    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -18,7 +18,7 @@ exports[`Empty > renders with actions correctly 1`] = `
 exports[`Empty > renders with actions slot correctly 1`] = `
 "<div data-slot="empty" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-default ring ring-default">
   <div data-slot="empty-header" class="flex flex-col items-center gap-2 max-w-sm text-center"><span data-slot="empty-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] shrink-0 mb-2 size-10 text-xl"><span class="iconify i-lucide:file shrink-0 text-accent-muted" aria-hidden="true" data-slot="avatar-icon"></span></span>
-    <h2 data-slot="empty-title" class="text-highlighted text-pretty font-medium text-base">Title</h2>
+    <h2 data-slot="empty-title" class="text-strong text-pretty font-medium text-base">Title</h2>
     <div data-slot="empty-description" class="text-balance text-center text-sm text-muted">Description</div>
   </div>
   <div data-slot="empty-body" class="flex flex-col items-center gap-4 max-w-sm">
@@ -50,7 +50,7 @@ exports[`Empty > renders with avatar correctly 1`] = `
 exports[`Empty > renders with body slot correctly 1`] = `
 "<div data-slot="empty" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-default ring ring-default">
   <div data-slot="empty-header" class="flex flex-col items-center gap-2 max-w-sm text-center"><span data-slot="empty-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] shrink-0 mb-2 size-10 text-xl"><span class="iconify i-lucide:file shrink-0 text-accent-muted" aria-hidden="true" data-slot="avatar-icon"></span></span>
-    <h2 data-slot="empty-title" class="text-highlighted text-pretty font-medium text-base">Title</h2>
+    <h2 data-slot="empty-title" class="text-strong text-pretty font-medium text-base">Title</h2>
     <div data-slot="empty-description" class="text-balance text-center text-sm text-muted">Description</div>
   </div>
   <div data-slot="empty-body" class="flex flex-col items-center gap-4 max-w-sm">Body slot</div>
@@ -61,11 +61,11 @@ exports[`Empty > renders with body slot correctly 1`] = `
 exports[`Empty > renders with class correctly 1`] = `
 "<div data-slot="empty" class="relative flex flex-col items-center justify-center rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-default ring ring-default gap-6">
   <div data-slot="empty-header" class="flex flex-col items-center gap-2 max-w-sm text-center"><span data-slot="empty-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] shrink-0 mb-2 size-10 text-xl"><span class="iconify i-lucide:file shrink-0 text-accent-muted" aria-hidden="true" data-slot="avatar-icon"></span></span>
-    <h2 data-slot="empty-title" class="text-highlighted text-pretty font-medium text-base">Title</h2>
+    <h2 data-slot="empty-title" class="text-strong text-pretty font-medium text-base">Title</h2>
     <div data-slot="empty-description" class="text-balance text-center text-sm text-muted">Description</div>
   </div>
   <div data-slot="empty-body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
+    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -76,7 +76,7 @@ exports[`Empty > renders with class correctly 1`] = `
 exports[`Empty > renders with description correctly 1`] = `
 "<div data-slot="empty" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-default ring ring-default">
   <div data-slot="empty-header" class="flex flex-col items-center gap-2 max-w-sm text-center"><span data-slot="empty-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] shrink-0 mb-2 size-10 text-xl"><span class="iconify i-lucide:file shrink-0 text-accent-muted" aria-hidden="true" data-slot="avatar-icon"></span></span>
-    <h2 data-slot="empty-title" class="text-highlighted text-pretty font-medium text-base">Title</h2>
+    <h2 data-slot="empty-title" class="text-strong text-pretty font-medium text-base">Title</h2>
     <div data-slot="empty-description" class="text-balance text-center text-sm text-muted">Description</div>
   </div>
   <!--v-if-->
@@ -87,11 +87,11 @@ exports[`Empty > renders with description correctly 1`] = `
 exports[`Empty > renders with description slot correctly 1`] = `
 "<div data-slot="empty" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-default ring ring-default">
   <div data-slot="empty-header" class="flex flex-col items-center gap-2 max-w-sm text-center"><span data-slot="empty-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] shrink-0 mb-2 size-10 text-xl"><span class="iconify i-lucide:file shrink-0 text-accent-muted" aria-hidden="true" data-slot="avatar-icon"></span></span>
-    <h2 data-slot="empty-title" class="text-highlighted text-pretty font-medium text-base">Title</h2>
+    <h2 data-slot="empty-title" class="text-strong text-pretty font-medium text-base">Title</h2>
     <div data-slot="empty-description" class="text-balance text-center text-sm text-muted">Description slot</div>
   </div>
   <div data-slot="empty-body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
+    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -102,11 +102,11 @@ exports[`Empty > renders with description slot correctly 1`] = `
 exports[`Empty > renders with footer slot correctly 1`] = `
 "<div data-slot="empty" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-default ring ring-default">
   <div data-slot="empty-header" class="flex flex-col items-center gap-2 max-w-sm text-center"><span data-slot="empty-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] shrink-0 mb-2 size-10 text-xl"><span class="iconify i-lucide:file shrink-0 text-accent-muted" aria-hidden="true" data-slot="avatar-icon"></span></span>
-    <h2 data-slot="empty-title" class="text-highlighted text-pretty font-medium text-base">Title</h2>
+    <h2 data-slot="empty-title" class="text-strong text-pretty font-medium text-base">Title</h2>
     <div data-slot="empty-description" class="text-balance text-center text-sm text-muted">Description</div>
   </div>
   <div data-slot="empty-body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
+    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -118,7 +118,7 @@ exports[`Empty > renders with header slot correctly 1`] = `
 "<div data-slot="empty" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-default ring ring-default">
   <div data-slot="empty-header" class="flex flex-col items-center gap-2 max-w-sm text-center">Header slot</div>
   <div data-slot="empty-body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
+    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -139,11 +139,11 @@ exports[`Empty > renders with icon correctly 1`] = `
 
 exports[`Empty > renders with leading slot correctly 1`] = `
 "<div data-slot="empty" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-default ring ring-default">
-  <div data-slot="empty-header" class="flex flex-col items-center gap-2 max-w-sm text-center">Leading slot<h2 data-slot="empty-title" class="text-highlighted text-pretty font-medium text-base">Title</h2>
+  <div data-slot="empty-header" class="flex flex-col items-center gap-2 max-w-sm text-center">Leading slot<h2 data-slot="empty-title" class="text-strong text-pretty font-medium text-base">Title</h2>
     <div data-slot="empty-description" class="text-balance text-center text-sm text-muted">Description</div>
   </div>
   <div data-slot="empty-body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
+    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -154,7 +154,7 @@ exports[`Empty > renders with leading slot correctly 1`] = `
 exports[`Empty > renders with loading correctly 1`] = `
 "<div aria-busy="true" data-slot="empty" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-default ring ring-default">
   <div data-slot="empty-header" class="flex flex-col items-center gap-2 max-w-sm text-center"><span data-slot="empty-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] shrink-0 mb-2 size-10 text-xl [&amp;>[data-slot=avatar-icon]]:animate-spin"><span class="iconify i-lucide:loader-circle shrink-0 text-accent-muted" aria-hidden="true" data-slot="avatar-icon"></span></span>
-    <h2 data-slot="empty-title" class="text-highlighted text-pretty font-medium text-base">Title</h2>
+    <h2 data-slot="empty-title" class="text-strong text-pretty font-medium text-base">Title</h2>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -165,7 +165,7 @@ exports[`Empty > renders with loading correctly 1`] = `
 exports[`Empty > renders with loading without icon correctly 1`] = `
 "<div aria-busy="true" data-slot="empty" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-default ring ring-default">
   <div data-slot="empty-header" class="flex flex-col items-center gap-2 max-w-sm text-center"><span data-slot="empty-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] shrink-0 mb-2 size-10 text-xl [&amp;>[data-slot=avatar-icon]]:animate-spin"><span class="iconify i-lucide:loader-circle shrink-0 text-accent-muted" aria-hidden="true" data-slot="avatar-icon"></span></span>
-    <h2 data-slot="empty-title" class="text-highlighted text-pretty font-medium text-base">Title</h2>
+    <h2 data-slot="empty-title" class="text-strong text-pretty font-medium text-base">Title</h2>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -176,7 +176,7 @@ exports[`Empty > renders with loading without icon correctly 1`] = `
 exports[`Empty > renders with loadingIcon correctly 1`] = `
 "<div aria-busy="true" data-slot="empty" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-default ring ring-default">
   <div data-slot="empty-header" class="flex flex-col items-center gap-2 max-w-sm text-center"><span data-slot="empty-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] shrink-0 mb-2 size-10 text-xl [&amp;>[data-slot=avatar-icon]]:animate-spin"><span class="iconify i-lucide:loader shrink-0 text-accent-muted" aria-hidden="true" data-slot="avatar-icon"></span></span>
-    <h2 data-slot="empty-title" class="text-highlighted text-pretty font-medium text-base">Title</h2>
+    <h2 data-slot="empty-title" class="text-strong text-pretty font-medium text-base">Title</h2>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -187,11 +187,11 @@ exports[`Empty > renders with loadingIcon correctly 1`] = `
 exports[`Empty > renders with primary variant naked correctly 1`] = `
 "<div data-slot="empty" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0">
   <div data-slot="empty-header" class="flex flex-col items-center gap-2 max-w-sm text-center"><span data-slot="empty-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] shrink-0 mb-2 size-10 text-xl"><span class="iconify i-lucide:file shrink-0 text-accent-muted" aria-hidden="true" data-slot="avatar-icon"></span></span>
-    <h2 data-slot="empty-title" class="text-highlighted text-pretty font-medium text-base">Title</h2>
+    <h2 data-slot="empty-title" class="text-strong text-pretty font-medium text-base">Title</h2>
     <div data-slot="empty-description" class="text-balance text-center text-sm text-muted">Description</div>
   </div>
   <div data-slot="empty-body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
+    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -202,11 +202,11 @@ exports[`Empty > renders with primary variant naked correctly 1`] = `
 exports[`Empty > renders with primary variant outline correctly 1`] = `
 "<div data-slot="empty" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-default ring ring-default">
   <div data-slot="empty-header" class="flex flex-col items-center gap-2 max-w-sm text-center"><span data-slot="empty-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] shrink-0 mb-2 size-10 text-xl"><span class="iconify i-lucide:file shrink-0 text-accent-muted" aria-hidden="true" data-slot="avatar-icon"></span></span>
-    <h2 data-slot="empty-title" class="text-highlighted text-pretty font-medium text-base">Title</h2>
+    <h2 data-slot="empty-title" class="text-strong text-pretty font-medium text-base">Title</h2>
     <div data-slot="empty-description" class="text-balance text-center text-sm text-muted">Description</div>
   </div>
   <div data-slot="empty-body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
+    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -217,11 +217,11 @@ exports[`Empty > renders with primary variant outline correctly 1`] = `
 exports[`Empty > renders with primary variant soft correctly 1`] = `
 "<div data-slot="empty" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-tint">
   <div data-slot="empty-header" class="flex flex-col items-center gap-2 max-w-sm text-center"><span data-slot="empty-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] shrink-0 mb-2 size-10 text-xl"><span class="iconify i-lucide:file shrink-0 text-accent-muted" aria-hidden="true" data-slot="avatar-icon"></span></span>
-    <h2 data-slot="empty-title" class="text-highlighted text-pretty font-medium text-base">Title</h2>
+    <h2 data-slot="empty-title" class="text-strong text-pretty font-medium text-base">Title</h2>
     <div data-slot="empty-description" class="text-balance text-center text-sm text-default">Description</div>
   </div>
   <div data-slot="empty-body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
+    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -230,13 +230,13 @@ exports[`Empty > renders with primary variant soft correctly 1`] = `
 `;
 
 exports[`Empty > renders with primary variant solid correctly 1`] = `
-"<div data-slot="empty" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-inverted">
+"<div data-slot="empty" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-neutral">
   <div data-slot="empty-header" class="flex flex-col items-center gap-2 max-w-sm text-center"><span data-slot="empty-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] shrink-0 mb-2 size-10 text-xl"><span class="iconify i-lucide:file shrink-0 text-accent-muted" aria-hidden="true" data-slot="avatar-icon"></span></span>
-    <h2 data-slot="empty-title" class="text-pretty font-medium text-base text-inverted">Title</h2>
+    <h2 data-slot="empty-title" class="text-pretty font-medium text-base text-contrast">Title</h2>
     <div data-slot="empty-description" class="text-balance text-center text-sm text-faint">Description</div>
   </div>
   <div data-slot="empty-body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
+    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -247,11 +247,11 @@ exports[`Empty > renders with primary variant solid correctly 1`] = `
 exports[`Empty > renders with primary variant subtle correctly 1`] = `
 "<div data-slot="empty" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-tint ring ring-default">
   <div data-slot="empty-header" class="flex flex-col items-center gap-2 max-w-sm text-center"><span data-slot="empty-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] shrink-0 mb-2 size-10 text-xl"><span class="iconify i-lucide:file shrink-0 text-accent-muted" aria-hidden="true" data-slot="avatar-icon"></span></span>
-    <h2 data-slot="empty-title" class="text-highlighted text-pretty font-medium text-base">Title</h2>
+    <h2 data-slot="empty-title" class="text-strong text-pretty font-medium text-base">Title</h2>
     <div data-slot="empty-description" class="text-balance text-center text-sm text-default">Description</div>
   </div>
   <div data-slot="empty-body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
+    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -262,11 +262,11 @@ exports[`Empty > renders with primary variant subtle correctly 1`] = `
 exports[`Empty > renders with size lg correctly 1`] = `
 "<div data-slot="empty" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-default ring ring-default">
   <div data-slot="empty-header" class="flex flex-col items-center gap-2 max-w-sm text-center"><span data-slot="empty-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] shrink-0 mb-2 size-11 text-[22px]"><span class="iconify i-lucide:file shrink-0 text-accent-muted" aria-hidden="true" data-slot="avatar-icon"></span></span>
-    <h2 data-slot="empty-title" class="text-highlighted text-pretty font-medium text-base">Title</h2>
+    <h2 data-slot="empty-title" class="text-strong text-pretty font-medium text-base">Title</h2>
     <div data-slot="empty-description" class="text-balance text-center text-sm text-muted">Description</div>
   </div>
   <div data-slot="empty-body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-3 py-2 text-sm gap-2"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
+    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-3 py-2 text-sm gap-2"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -277,11 +277,11 @@ exports[`Empty > renders with size lg correctly 1`] = `
 exports[`Empty > renders with size md correctly 1`] = `
 "<div data-slot="empty" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-default ring ring-default">
   <div data-slot="empty-header" class="flex flex-col items-center gap-2 max-w-sm text-center"><span data-slot="empty-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] shrink-0 mb-2 size-10 text-xl"><span class="iconify i-lucide:file shrink-0 text-accent-muted" aria-hidden="true" data-slot="avatar-icon"></span></span>
-    <h2 data-slot="empty-title" class="text-highlighted text-pretty font-medium text-base">Title</h2>
+    <h2 data-slot="empty-title" class="text-strong text-pretty font-medium text-base">Title</h2>
     <div data-slot="empty-description" class="text-balance text-center text-sm text-muted">Description</div>
   </div>
   <div data-slot="empty-body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
+    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -292,11 +292,11 @@ exports[`Empty > renders with size md correctly 1`] = `
 exports[`Empty > renders with size sm correctly 1`] = `
 "<div data-slot="empty" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-default ring ring-default">
   <div data-slot="empty-header" class="flex flex-col items-center gap-2 max-w-sm text-center"><span data-slot="empty-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] shrink-0 mb-2 size-9 text-lg"><span class="iconify i-lucide:file shrink-0 text-accent-muted" aria-hidden="true" data-slot="avatar-icon"></span></span>
-    <h2 data-slot="empty-title" class="text-highlighted text-pretty font-medium text-sm">Title</h2>
+    <h2 data-slot="empty-title" class="text-strong text-pretty font-medium text-sm">Title</h2>
     <div data-slot="empty-description" class="text-balance text-center text-xs text-muted">Description</div>
   </div>
   <div data-slot="empty-body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-xs gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-4" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
+    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-xs gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-4" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -307,11 +307,11 @@ exports[`Empty > renders with size sm correctly 1`] = `
 exports[`Empty > renders with size xl correctly 1`] = `
 "<div data-slot="empty" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-default ring ring-default">
   <div data-slot="empty-header" class="flex flex-col items-center gap-2 max-w-sm text-center"><span data-slot="empty-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] shrink-0 mb-2 size-12 text-2xl"><span class="iconify i-lucide:file shrink-0 text-accent-muted" aria-hidden="true" data-slot="avatar-icon"></span></span>
-    <h2 data-slot="empty-title" class="text-highlighted text-pretty font-medium text-lg">Title</h2>
+    <h2 data-slot="empty-title" class="text-strong text-pretty font-medium text-lg">Title</h2>
     <div data-slot="empty-description" class="text-balance text-center text-base text-muted">Description</div>
   </div>
   <div data-slot="empty-body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-3 py-2 text-base gap-2"><span class="iconify i-lucide:plus shrink-0 size-6" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
+    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-3 py-2 text-base gap-2"><span class="iconify i-lucide:plus shrink-0 size-6" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -322,11 +322,11 @@ exports[`Empty > renders with size xl correctly 1`] = `
 exports[`Empty > renders with size xs correctly 1`] = `
 "<div data-slot="empty" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-default ring ring-default">
   <div data-slot="empty-header" class="flex flex-col items-center gap-2 max-w-sm text-center"><span data-slot="empty-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] shrink-0 mb-2 size-8 text-base"><span class="iconify i-lucide:file shrink-0 text-accent-muted" aria-hidden="true" data-slot="avatar-icon"></span></span>
-    <h2 data-slot="empty-title" class="text-highlighted text-pretty font-medium text-sm">Title</h2>
+    <h2 data-slot="empty-title" class="text-strong text-pretty font-medium text-sm">Title</h2>
     <div data-slot="empty-description" class="text-balance text-center text-xs text-muted">Description</div>
   </div>
   <div data-slot="empty-body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2 py-1 text-xs gap-1"><span class="iconify i-lucide:plus shrink-0 size-4" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
+    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2 py-1 text-xs gap-1"><span class="iconify i-lucide:plus shrink-0 size-4" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -337,7 +337,7 @@ exports[`Empty > renders with size xs correctly 1`] = `
 exports[`Empty > renders with title correctly 1`] = `
 "<div data-slot="empty" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-default ring ring-default">
   <div data-slot="empty-header" class="flex flex-col items-center gap-2 max-w-sm text-center"><span data-slot="empty-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] shrink-0 mb-2 size-10 text-xl"><span class="iconify i-lucide:file shrink-0 text-accent-muted" aria-hidden="true" data-slot="avatar-icon"></span></span>
-    <h2 data-slot="empty-title" class="text-highlighted text-pretty font-medium text-base">Title</h2>
+    <h2 data-slot="empty-title" class="text-strong text-pretty font-medium text-base">Title</h2>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -348,11 +348,11 @@ exports[`Empty > renders with title correctly 1`] = `
 exports[`Empty > renders with title slot correctly 1`] = `
 "<div data-slot="empty" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-default ring ring-default">
   <div data-slot="empty-header" class="flex flex-col items-center gap-2 max-w-sm text-center"><span data-slot="empty-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] shrink-0 mb-2 size-10 text-xl"><span class="iconify i-lucide:file shrink-0 text-accent-muted" aria-hidden="true" data-slot="avatar-icon"></span></span>
-    <h2 data-slot="empty-title" class="text-highlighted text-pretty font-medium text-base">Title slot</h2>
+    <h2 data-slot="empty-title" class="text-strong text-pretty font-medium text-base">Title slot</h2>
     <div data-slot="empty-description" class="text-balance text-center text-sm text-muted">Description</div>
   </div>
   <div data-slot="empty-body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
+    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -363,11 +363,11 @@ exports[`Empty > renders with title slot correctly 1`] = `
 exports[`Empty > renders with ui correctly 1`] = `
 "<div data-slot="empty" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-default ring ring-default">
   <div data-slot="empty-header" class="flex flex-col items-center gap-2 max-w-sm text-center"><span data-slot="empty-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] shrink-0 mb-2 size-10 text-xl"><span class="iconify i-lucide:file shrink-0 text-accent-muted" aria-hidden="true" data-slot="avatar-icon"></span></span>
-    <h2 data-slot="empty-title" class="text-highlighted text-pretty font-medium text-base">Title</h2>
+    <h2 data-slot="empty-title" class="text-strong text-pretty font-medium text-base">Title</h2>
     <div data-slot="empty-description" class="text-balance text-center text-sm text-muted">Description</div>
   </div>
   <div data-slot="empty-body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
+    <div data-slot="empty-actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-2.5 py-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span><span data-slot="button-label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>

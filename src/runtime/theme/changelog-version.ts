@@ -8,7 +8,7 @@ export default defineTheme({
     meta: 'flex items-center gap-3 mb-2',
     date: 'text-sm/6 text-default truncate',
     badge: '',
-    title: 'relative text-xl text-pretty font-semibold text-highlighted',
+    title: 'relative text-xl text-pretty font-semibold text-strong',
     description: 'text-base text-pretty text-muted mt-1',
     imageWrapper: 'relative overflow-hidden rounded-lg aspect-[16/9] mt-5 group/changelog-version-image',
     image: 'object-cover object-top w-full h-full',

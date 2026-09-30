@@ -26,11 +26,11 @@ export default defineTheme({
       }
     },
     variant: {
-      outline: { base: 'text-highlighted bg-default ring ring-inset ring-strong' },
-      soft: { base: 'text-highlighted bg-tint hover:bg-soft focus:bg-soft disabled:bg-tint' },
-      subtle: { base: 'text-highlighted bg-soft ring ring-inset ring-strong' },
-      ghost: { base: 'text-highlighted bg-transparent hover:bg-soft focus:bg-soft disabled:bg-transparent dark:disabled:bg-transparent' },
-      none: { base: 'text-highlighted bg-transparent focus:outline-none' }
+      outline: { base: 'text-strong bg-default ring ring-inset ring-strong' },
+      soft: { base: 'text-strong bg-tint hover:bg-soft focus:bg-soft disabled:bg-tint' },
+      subtle: { base: 'text-strong bg-soft ring ring-inset ring-strong' },
+      ghost: { base: 'text-strong bg-transparent hover:bg-soft focus:bg-soft disabled:bg-transparent dark:disabled:bg-transparent' },
+      none: { base: 'text-strong bg-transparent focus:outline-none' }
     },
     color: colorVariant({ root: '' }),
     highlight: {

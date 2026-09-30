@@ -39,8 +39,8 @@ export default defineTheme({
       ...colorVariant({ root: '' }),
       // Neutral hovers at 10% where the colors use 20%, so it keeps its own classes.
       neutral: {
-        headCell: 'text-highlighted',
-        cellTrigger: 'outline-inverted/25'
+        headCell: 'text-strong',
+        cellTrigger: 'outline-focus'
       }
     },
     variant: {
@@ -110,56 +110,56 @@ export default defineTheme({
       color: colors.filter(color => color !== 'neutral'),
       variant: 'solid',
       class: {
-        cellTrigger: 'data-selected:bg-accent data-selected:text-accent-foreground data-today:not-data-selected:text-accent data-highlighted:bg-accent-soft-hover hover:not-data-selected:bg-accent-soft-hover'
+        cellTrigger: 'data-selected:bg-accent data-selected:text-accent-contrast data-today:not-data-selected:text-accent data-highlighted:bg-accent-strong hover:not-data-selected:bg-accent-strong'
       }
     },
     {
       color: colors.filter(color => color !== 'neutral'),
       variant: 'outline',
       class: {
-        cellTrigger: 'data-selected:ring data-selected:ring-inset data-selected:ring-accent-border-strong data-selected:text-accent data-selected:focus-visible:ring-accent data-today:not-data-selected:text-accent data-highlighted:bg-accent-soft hover:not-data-selected:bg-accent-soft'
+        cellTrigger: 'data-selected:ring data-selected:ring-inset data-selected:ring-accent-strong data-selected:text-accent data-selected:focus-visible:ring-accent data-today:not-data-selected:text-accent data-highlighted:bg-accent-soft hover:not-data-selected:bg-accent-soft'
       }
     },
     {
       color: colors.filter(color => color !== 'neutral'),
       variant: 'soft',
       class: {
-        cellTrigger: 'data-selected:bg-accent-soft data-selected:text-accent-soft-foreground data-today:not-data-selected:text-accent data-highlighted:bg-accent-soft-hover hover:not-data-selected:bg-accent-soft-hover'
+        cellTrigger: 'data-selected:bg-accent-soft data-selected:text-accent-default data-today:not-data-selected:text-accent data-highlighted:bg-accent-strong hover:not-data-selected:bg-accent-strong'
       }
     },
     {
       color: colors.filter(color => color !== 'neutral'),
       variant: 'subtle',
       class: {
-        cellTrigger: 'data-selected:bg-accent-soft data-selected:text-accent-soft-foreground data-selected:ring data-selected:ring-inset data-selected:ring-accent-border data-selected:focus-visible:ring-accent data-today:not-data-selected:text-accent data-highlighted:bg-accent-soft-hover hover:not-data-selected:bg-accent-soft-hover'
+        cellTrigger: 'data-selected:bg-accent-soft data-selected:text-accent-default data-selected:ring data-selected:ring-inset data-selected:ring-accent-muted data-selected:focus-visible:ring-accent data-today:not-data-selected:text-accent data-highlighted:bg-accent-strong hover:not-data-selected:bg-accent-strong'
       }
     },
     {
       color: 'neutral',
       variant: 'solid',
       class: {
-        cellTrigger: 'data-selected:bg-inverted data-selected:text-inverted data-today:not-data-selected:text-highlighted data-highlighted:bg-inverted/20 hover:not-data-selected:bg-inverted/10'
+        cellTrigger: 'data-selected:bg-neutral data-selected:text-contrast data-today:not-data-selected:text-strong data-highlighted:bg-neutral/20 hover:not-data-selected:bg-neutral/10'
       }
     },
     {
       color: 'neutral',
       variant: 'outline',
       class: {
-        cellTrigger: 'data-selected:ring data-selected:ring-inset data-selected:ring-strong data-selected:text-default data-selected:bg-default data-selected:focus-visible:ring-inverted data-today:not-data-selected:text-highlighted data-highlighted:bg-inverted/10 hover:not-data-selected:bg-inverted/10'
+        cellTrigger: 'data-selected:ring data-selected:ring-inset data-selected:ring-strong data-selected:text-default data-selected:bg-default data-selected:focus-visible:ring-neutral data-today:not-data-selected:text-strong data-highlighted:bg-neutral/10 hover:not-data-selected:bg-neutral/10'
       }
     },
     {
       color: 'neutral',
       variant: 'soft',
       class: {
-        cellTrigger: 'data-selected:bg-soft data-selected:text-default data-today:not-data-selected:text-highlighted data-highlighted:bg-inverted/20 hover:not-data-selected:bg-inverted/10'
+        cellTrigger: 'data-selected:bg-soft data-selected:text-default data-today:not-data-selected:text-strong data-highlighted:bg-neutral/20 hover:not-data-selected:bg-neutral/10'
       }
     },
     {
       color: 'neutral',
       variant: 'subtle',
       class: {
-        cellTrigger: 'data-selected:bg-soft data-selected:text-default data-selected:ring data-selected:ring-inset data-selected:ring-strong data-selected:focus-visible:ring-inverted data-today:not-data-selected:text-highlighted data-highlighted:bg-inverted/20 hover:not-data-selected:bg-inverted/10'
+        cellTrigger: 'data-selected:bg-soft data-selected:text-default data-selected:ring data-selected:ring-inset data-selected:ring-strong data-selected:focus-visible:ring-neutral data-today:not-data-selected:text-strong data-highlighted:bg-neutral/20 hover:not-data-selected:bg-neutral/10'
       }
     },
     ...(Object.entries(daySizes) as [keyof typeof daySizes, string][]).map(([size, cellTrigger]) => ({

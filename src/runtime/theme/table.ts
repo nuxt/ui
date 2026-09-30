@@ -10,7 +10,7 @@ export default defineTheme({
     tbody: 'isolate [&>tr]:data-[selectable=true]:hover:bg-tint [&>tr]:data-[selectable=true]:outline-focus [&>tr]:data-[selectable=true]:focus-visible:outline-3 [&>tr]:data-[selectable=true]:-outline-offset-3 divide-y divide-default',
     tfoot: 'relative [&>[data-slot=table-separator]]:z-2',
     tr: 'data-[selected=true]:bg-tint',
-    th: 'px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&:has([role=checkbox])]:pe-0',
+    th: 'px-4 py-3.5 text-sm text-strong text-start font-semibold [&:has([role=checkbox])]:pe-0',
     td: 'p-4 text-sm text-muted whitespace-nowrap [&:has([role=checkbox])]:pe-0',
     separator: 'absolute z-1 start-0 w-full h-px bg-(--ui-border-strong)',
     empty: 'py-6 text-center text-sm text-muted',

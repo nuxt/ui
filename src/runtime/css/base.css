@@ -119,7 +119,7 @@
 
 @layer base {
   /* Each color alias is a shade of its palette, lighter in dark mode, and
-     `neutral` the ends of its own, like the inverted surface. In `base` at zero
+     `neutral` the ends of its own, which makes it the neutral solid. In `base` at zero
      specificity, like the palettes, so the shades `@plugin "@nuxt/ui/colors"`
      picks win. */
   :where(:root, :host, .light) {
@@ -147,8 +147,9 @@
   /* The surface tokens, shades of `neutral` that don't follow `color`, and the
      layout sizes. In `base` at zero specificity, like the palettes, so an
      override in `base` wins wherever `@nuxt/icon` puts that layer. `--ui-bg-tint`
-     and `--ui-focus` are unset: their utilities mix `--ui-bg-soft` and
-     `--ui-primary` on the element, so a subtree that overrides those reaches them. */
+     and `--ui-outline-focus` are unset: their utilities mix `--ui-bg-soft` and
+     `--ui-neutral` on the element, so a subtree that overrides those reaches them.
+     The solid is `--ui-neutral` itself, with `--ui-text-contrast` on it. */
   :where(:root, :host) {
     --ui-header-height: 4rem;
     --ui-radius: 0.25rem;
@@ -159,38 +160,34 @@
     --ui-text-faint: var(--ui-color-neutral-400);
     --ui-text-muted: var(--ui-color-neutral-500);
     --ui-text-default: var(--ui-color-neutral-700);
-    --ui-text-highlighted: var(--ui-color-neutral-900);
-    --ui-text-inverted: white;
+    --ui-text-strong: var(--ui-color-neutral-900);
+    --ui-text-contrast: white;
 
     --ui-bg-default: white;
     --ui-bg-muted: var(--ui-color-neutral-50);
     --ui-bg-soft: var(--ui-color-neutral-100);
-    --ui-bg-soft-hover: var(--ui-color-neutral-200);
-    --ui-bg-inverted: var(--ui-color-neutral-900);
+    --ui-bg-strong: var(--ui-color-neutral-200);
 
     --ui-border-default: var(--ui-color-neutral-200);
     --ui-border-muted: var(--ui-color-neutral-200);
     --ui-border-strong: var(--ui-color-neutral-300);
-    --ui-border-inverted: var(--ui-color-neutral-900);
   }
 
   :where(.dark) {
     --ui-text-faint: var(--ui-color-neutral-500);
     --ui-text-muted: var(--ui-color-neutral-400);
     --ui-text-default: var(--ui-color-neutral-200);
-    --ui-text-highlighted: white;
-    --ui-text-inverted: var(--ui-color-neutral-900);
+    --ui-text-strong: white;
+    --ui-text-contrast: var(--ui-color-neutral-900);
 
     --ui-bg-default: var(--ui-color-neutral-900);
     --ui-bg-muted: var(--ui-color-neutral-800);
     --ui-bg-soft: var(--ui-color-neutral-800);
-    --ui-bg-soft-hover: var(--ui-color-neutral-700);
-    --ui-bg-inverted: white;
+    --ui-bg-strong: var(--ui-color-neutral-700);
 
     --ui-border-default: var(--ui-color-neutral-800);
     /* A border on a `bg-soft` or `bg-muted` fill, which share the default's shade */
     --ui-border-muted: var(--ui-color-neutral-700);
     --ui-border-strong: var(--ui-color-neutral-700);
-    --ui-border-inverted: white;
   }
 }

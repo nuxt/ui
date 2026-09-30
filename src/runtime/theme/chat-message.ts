@@ -60,25 +60,25 @@ export default defineTheme({
     color: colors.filter(color => color !== 'neutral'),
     variant: 'solid',
     class: {
-      content: 'bg-accent text-accent-foreground'
+      content: 'bg-accent text-accent-contrast'
     }
   }, {
     color: colors.filter(color => color !== 'neutral'),
     variant: 'outline',
     class: {
-      content: 'text-accent ring ring-accent-border'
+      content: 'text-accent ring ring-accent-muted'
     }
   }, {
     color: colors.filter(color => color !== 'neutral'),
     variant: 'soft',
     class: {
-      content: 'bg-accent-soft text-accent-soft-foreground'
+      content: 'bg-accent-soft text-accent-default'
     }
   }, {
     color: colors.filter(color => color !== 'neutral'),
     variant: 'subtle',
     class: {
-      content: 'bg-accent-soft text-accent-soft-foreground ring ring-accent-border'
+      content: 'bg-accent-soft text-accent-default ring ring-accent-muted'
     }
   }, {
     color: colors.filter(color => color !== 'neutral'),
@@ -90,7 +90,7 @@ export default defineTheme({
     color: 'neutral',
     variant: 'solid',
     class: {
-      content: 'bg-inverted text-inverted'
+      content: 'bg-neutral text-contrast'
     }
   }, {
     color: 'neutral',

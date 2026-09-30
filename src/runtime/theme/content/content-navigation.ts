@@ -36,7 +36,7 @@ export default defineTheme({
     },
     disabled: {
       true: {
-        trigger: 'data-[state=open]:text-highlighted'
+        trigger: 'data-[state=open]:text-strong'
       }
     },
     highlight: {
@@ -60,7 +60,7 @@ export default defineTheme({
     active: false,
     variant: 'pill',
     class: {
-      link: 'hover:text-highlighted hover:before:bg-tint data-[state=open]:text-highlighted transition-colors before:transition-colors',
+      link: 'hover:text-strong hover:before:bg-tint data-[state=open]:text-strong transition-colors before:transition-colors',
       linkLeadingIcon: 'group-hover:text-default group-data-[state=open]:text-default transition-colors'
     }
   }, {
@@ -90,7 +90,7 @@ export default defineTheme({
     active: false,
     variant: 'link',
     class: {
-      link: 'hover:text-highlighted data-[state=open]:text-highlighted transition-colors',
+      link: 'hover:text-strong data-[state=open]:text-strong transition-colors',
       linkLeadingIcon: 'group-hover:text-default group-data-[state=open]:text-default transition-colors'
     }
   }, {

@@ -3,7 +3,7 @@
 exports[`ProgressGroup > renders with as correctly 1`] = `
 "<section data-orientation="horizontal" data-slot="progress-group" class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-2">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-2">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="progress-group-indicator" class="size-full [--ui-accent:var(--ui-neutral)] bg-accent"></div>
     </div>
@@ -29,7 +29,7 @@ exports[`ProgressGroup > renders with as correctly 1`] = `
 exports[`ProgressGroup > renders with class correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 flex flex-col w-48">
   <!--v-if-->
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-2">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-2">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="progress-group-indicator" class="size-full [--ui-accent:var(--ui-neutral)] bg-accent"></div>
     </div>
@@ -55,7 +55,7 @@ exports[`ProgressGroup > renders with class correctly 1`] = `
 exports[`ProgressGroup > renders with color correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-2">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-2">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="progress-group-indicator" class="size-full [--ui-accent:var(--ui-neutral)] bg-accent"></div>
     </div>
@@ -73,7 +73,7 @@ exports[`ProgressGroup > renders with color correctly 1`] = `
 exports[`ProgressGroup > renders with custom color correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-2">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-2">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="progress-group-indicator" class="size-full" style="background-color: #8b5cf6;"></div>
     </div>
@@ -91,7 +91,7 @@ exports[`ProgressGroup > renders with custom color correctly 1`] = `
 exports[`ProgressGroup > renders with invalid max correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-2">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-2">
     <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="100" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 24%;">
       <div data-state="loading" data-value="24" data-max="100" data-slot="progress-group-indicator" class="size-full [--ui-accent:var(--ui-neutral)] bg-accent"></div>
     </div>
@@ -117,7 +117,7 @@ exports[`ProgressGroup > renders with invalid max correctly 1`] = `
 exports[`ProgressGroup > renders with item class correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-2">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-2">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="progress-group-indicator" class="size-full [--ui-accent:var(--ui-primary)] bg-accent"></div>
     </div>
@@ -131,7 +131,7 @@ exports[`ProgressGroup > renders with item class correctly 1`] = `
 exports[`ProgressGroup > renders with item slot correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-2">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-2">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="progress-group-indicator" class="size-full [--ui-accent:var(--ui-primary)] bg-accent"></div>
     </div>
@@ -145,7 +145,7 @@ exports[`ProgressGroup > renders with item slot correctly 1`] = `
 exports[`ProgressGroup > renders with item slot correctly 2`] = `
 "<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-2">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-2">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="progress-group-indicator" class="size-full [--ui-accent:var(--ui-neutral)] bg-accent"></div>
     </div>
@@ -171,7 +171,7 @@ exports[`ProgressGroup > renders with item slot correctly 2`] = `
 exports[`ProgressGroup > renders with item ui correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-2">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-2">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="progress-group-indicator" class="size-full [--ui-accent:var(--ui-primary)] bg-accent"></div>
     </div>
@@ -185,7 +185,7 @@ exports[`ProgressGroup > renders with item ui correctly 1`] = `
 exports[`ProgressGroup > renders with item-label slot correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-2">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-2">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="progress-group-indicator" class="size-full [--ui-accent:var(--ui-neutral)] bg-accent"></div>
     </div>
@@ -211,7 +211,7 @@ exports[`ProgressGroup > renders with item-label slot correctly 1`] = `
 exports[`ProgressGroup > renders with item-leading slot correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-2">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-2">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="progress-group-indicator" class="size-full [--ui-accent:var(--ui-neutral)] bg-accent"></div>
     </div>
@@ -237,7 +237,7 @@ exports[`ProgressGroup > renders with item-leading slot correctly 1`] = `
 exports[`ProgressGroup > renders with item-trailing slot correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-2">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-2">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="progress-group-indicator" class="size-full [--ui-accent:var(--ui-neutral)] bg-accent"></div>
     </div>
@@ -263,7 +263,7 @@ exports[`ProgressGroup > renders with item-trailing slot correctly 1`] = `
 exports[`ProgressGroup > renders with items correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-2">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-2">
     <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="100" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 24%;">
       <div data-state="loading" data-value="24" data-max="100" data-slot="progress-group-indicator" class="size-full [--ui-accent:var(--ui-neutral)] bg-accent"></div>
     </div>
@@ -289,7 +289,7 @@ exports[`ProgressGroup > renders with items correctly 1`] = `
 exports[`ProgressGroup > renders with max correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-2">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-2">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="progress-group-indicator" class="size-full [--ui-accent:var(--ui-neutral)] bg-accent"></div>
     </div>
@@ -315,7 +315,7 @@ exports[`ProgressGroup > renders with max correctly 1`] = `
 exports[`ProgressGroup > renders with orientation horizontal correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 w-full flex flex-col">
   <div data-slot="progress-group-status" class="flex text-faint duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">67% </div>
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-2">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-2">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="progress-group-indicator" class="size-full [--ui-accent:var(--ui-neutral)] bg-accent"></div>
     </div>
@@ -341,7 +341,7 @@ exports[`ProgressGroup > renders with orientation horizontal correctly 1`] = `
 exports[`ProgressGroup > renders with orientation vertical correctly 1`] = `
 "<div data-orientation="vertical" data-slot="progress-group" class="gap-2 h-full flex flex-row">
   <div data-slot="progress-group-status" class="flex text-faint duration-200 ease-out motion-reduce:transition-none text-sm flex-col justify-end h-(--percent) min-h-fit transition-[height]" style="--percent: 67%;">67% </div>
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover h-full flex-col w-2">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong h-full flex-col w-2">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none w-full transition-[height]" style="height: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="progress-group-indicator" class="size-full [--ui-accent:var(--ui-neutral)] bg-accent"></div>
     </div>
@@ -367,7 +367,7 @@ exports[`ProgressGroup > renders with orientation vertical correctly 1`] = `
 exports[`ProgressGroup > renders with size 2xl correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 w-full flex flex-col">
   <div data-slot="progress-group-status" class="flex text-faint duration-200 ease-out motion-reduce:transition-none text-base flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">67% </div>
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-5">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-5">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="progress-group-indicator" class="size-full [--ui-accent:var(--ui-neutral)] bg-accent"></div>
     </div>
@@ -393,7 +393,7 @@ exports[`ProgressGroup > renders with size 2xl correctly 1`] = `
 exports[`ProgressGroup > renders with size 2xs correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 w-full flex flex-col">
   <div data-slot="progress-group-status" class="flex text-faint duration-200 ease-out motion-reduce:transition-none text-xs flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">67% </div>
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-px">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-px">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="progress-group-indicator" class="size-full [--ui-accent:var(--ui-neutral)] bg-accent"></div>
     </div>
@@ -419,7 +419,7 @@ exports[`ProgressGroup > renders with size 2xs correctly 1`] = `
 exports[`ProgressGroup > renders with size lg correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 w-full flex flex-col">
   <div data-slot="progress-group-status" class="flex text-faint duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">67% </div>
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-3">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-3">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="progress-group-indicator" class="size-full [--ui-accent:var(--ui-neutral)] bg-accent"></div>
     </div>
@@ -445,7 +445,7 @@ exports[`ProgressGroup > renders with size lg correctly 1`] = `
 exports[`ProgressGroup > renders with size md correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 w-full flex flex-col">
   <div data-slot="progress-group-status" class="flex text-faint duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">67% </div>
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-2">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-2">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="progress-group-indicator" class="size-full [--ui-accent:var(--ui-neutral)] bg-accent"></div>
     </div>
@@ -471,7 +471,7 @@ exports[`ProgressGroup > renders with size md correctly 1`] = `
 exports[`ProgressGroup > renders with size sm correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 w-full flex flex-col">
   <div data-slot="progress-group-status" class="flex text-faint duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">67% </div>
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-1">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-1">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="progress-group-indicator" class="size-full [--ui-accent:var(--ui-neutral)] bg-accent"></div>
     </div>
@@ -497,7 +497,7 @@ exports[`ProgressGroup > renders with size sm correctly 1`] = `
 exports[`ProgressGroup > renders with size xl correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 w-full flex flex-col">
   <div data-slot="progress-group-status" class="flex text-faint duration-200 ease-out motion-reduce:transition-none text-base flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">67% </div>
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-4">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-4">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="progress-group-indicator" class="size-full [--ui-accent:var(--ui-neutral)] bg-accent"></div>
     </div>
@@ -523,7 +523,7 @@ exports[`ProgressGroup > renders with size xl correctly 1`] = `
 exports[`ProgressGroup > renders with size xs correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 w-full flex flex-col">
   <div data-slot="progress-group-status" class="flex text-faint duration-200 ease-out motion-reduce:transition-none text-xs flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">67% </div>
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-0.5">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-0.5">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="progress-group-indicator" class="size-full [--ui-accent:var(--ui-neutral)] bg-accent"></div>
     </div>
@@ -549,7 +549,7 @@ exports[`ProgressGroup > renders with size xs correctly 1`] = `
 exports[`ProgressGroup > renders with status correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 w-full flex flex-col">
   <div data-slot="progress-group-status" class="flex text-faint duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">67% </div>
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-2">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-2">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="progress-group-indicator" class="size-full [--ui-accent:var(--ui-neutral)] bg-accent"></div>
     </div>
@@ -575,7 +575,7 @@ exports[`ProgressGroup > renders with status correctly 1`] = `
 exports[`ProgressGroup > renders with status slot correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 w-full flex flex-col">
   <div data-slot="progress-group-status" class="flex text-faint duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">Status slot</div>
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-2">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-2">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="progress-group-indicator" class="size-full [--ui-accent:var(--ui-neutral)] bg-accent"></div>
     </div>
@@ -627,7 +627,7 @@ exports[`ProgressGroup > renders with ui correctly 1`] = `
 exports[`ProgressGroup > renders with value out of bounds correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-2">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-2">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="0" aria-label="System" role="progressbar" data-state="loading" data-value="0" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 0%;">
       <div data-state="loading" data-value="0" data-max="128" data-slot="progress-group-indicator" class="size-full [--ui-accent:var(--ui-primary)] bg-accent"></div>
     </div>
@@ -645,7 +645,7 @@ exports[`ProgressGroup > renders with value out of bounds correctly 1`] = `
 exports[`ProgressGroup > renders with values above max correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 w-full flex flex-col">
   <div data-slot="progress-group-status" class="flex text-faint duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 100%;">100% </div>
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-2">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-2">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="96" aria-label="System" role="progressbar" data-state="loading" data-value="96" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 75%;">
       <div data-state="loading" data-value="96" data-max="128" data-slot="progress-group-indicator" class="size-full [--ui-accent:var(--ui-primary)] bg-accent"></div>
     </div>
@@ -663,7 +663,7 @@ exports[`ProgressGroup > renders with values above max correctly 1`] = `
 exports[`ProgressGroup > renders without items correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-2"></div>
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-2"></div>
   <!--v-if-->
 </div>"
 `;
@@ -671,7 +671,7 @@ exports[`ProgressGroup > renders without items correctly 1`] = `
 exports[`ProgressGroup > renders without labels correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-soft-hover w-full flex-row h-2">
+  <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full flex-row h-2">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="19%" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="progress-group-indicator" class="size-full [--ui-accent:var(--ui-primary)] bg-accent"></div>
     </div>

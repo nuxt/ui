@@ -53,7 +53,7 @@ exports[`PageLogos > renders with marquee correctly 1`] = `
 
 exports[`PageLogos > renders with title correctly 1`] = `
 "<div data-slot="page-logos" class="relative overflow-hidden">
-  <h2 data-slot="page-logos-title" class="text-lg text-center font-semibold text-highlighted">Title</h2>
+  <h2 data-slot="page-logos-title" class="text-lg text-center font-semibold text-strong">Title</h2>
   <div data-slot="page-logos-logos" class="mt-10 flex items-center shrink-0 justify-around gap-(--gap) [--gap:--spacing(16)]">
     <!--v-if-->
   </div>

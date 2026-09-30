@@ -99,25 +99,27 @@ Apply it to a component through `--ui-accent` in `class`: `<UButton class="[--ui
 Use these everywhere instead of raw palette colors:
 
 ### Text
+- `text-strong` — headings and important labels
 - `text-default` — primary body text
 - `text-muted` — secondary text (descriptions, hints)
-- `text-faint` — tertiary text (placeholders, disabled)
-- `text-highlighted` — emphasized text (headings, important labels)
-- `text-inverted` — text on inverted backgrounds (pair with `bg-inverted`)
+- `text-faint` — placeholders and disabled text
+- `text-contrast` — text on a solid (`bg-neutral`, `bg-accent`)
 
 ### Backgrounds
 - `bg-default` — page background
-- `bg-muted` — subtle backgrounds (hover states, alternating rows)
-- `bg-soft` — raised surfaces (cards, dropdowns)
-- `bg-soft-hover` — hover of a raised surface (active states, selected items)
+- `bg-muted` — recessed surfaces (code blocks)
 - `bg-tint` — hovered and highlighted items (menu items, table rows)
-- `bg-inverted` — inverse background (dark on light, light on dark)
+- `bg-soft` — soft fills and raised areas
+- `bg-strong` — strong fills (tracks, the hover of `bg-soft`)
+- `bg-neutral` — the neutral solid (dark on light, light on dark)
 
 ### Borders
 - `border-default` — standard borders (dividers, separators)
 - `border-muted` — a border on a `bg-soft` or `bg-muted` fill
-- `border-strong` — stronger borders (field outlines, active states)
-- `border-inverted` — inverse borders
+- `border-strong` — stronger borders (field outlines)
+- `border-neutral` — the neutral solid as a border
+
+Inside a component with a `color`, the same words with `accent-` follow that color: `bg-accent-soft`, `text-accent-muted`, `ring-accent-strong`. `bg-accent` is the color itself, with `text-accent-contrast` on it.
 
 ## Variants
 
@@ -184,7 +186,7 @@ export default defineAppConfig({
         color: 'neutral',
         variant: 'outline',
         class: {
-          base: 'ring-default hover:bg-soft-hover'
+          base: 'ring-default hover:bg-strong'
         }
       }],
       defaultVariants: {

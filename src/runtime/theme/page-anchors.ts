@@ -16,11 +16,11 @@ export default defineTheme({
     active: {
       true: {
         link: 'text-accent font-semibold',
-        linkLeading: 'bg-accent ring-accent text-accent-foreground'
+        linkLeading: 'bg-accent ring-accent text-accent-contrast'
       },
       false: {
         link: 'text-muted hover:text-default font-medium transition-colors',
-        linkLeading: 'bg-tint ring-strong text-faint group-hover:bg-accent group-hover:ring-accent group-hover:text-accent-foreground transition'
+        linkLeading: 'bg-tint ring-strong text-faint group-hover:bg-accent group-hover:ring-accent group-hover:text-accent-contrast transition'
       }
     }
   }

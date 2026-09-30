@@ -67,7 +67,7 @@ export default defineTheme({
     selected: false,
     disabled: false,
     class: {
-      link: 'hover:text-highlighted hover:before:bg-tint transition-colors before:transition-colors'
+      link: 'hover:text-strong hover:before:bg-tint transition-colors before:transition-colors'
     }
   }],
   defaultVariants: {

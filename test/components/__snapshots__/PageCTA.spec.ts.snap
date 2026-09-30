@@ -104,7 +104,7 @@ exports[`PageCTA > renders with links correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <div data-slot="page-cta-footer" class="mt-8">
-        <div data-slot="page-cta-links" class="flex flex-wrap gap-x-6 gap-y-3 justify-center"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-3 py-2 text-sm gap-2">
+        <div data-slot="page-cta-links" class="flex flex-wrap gap-x-6 gap-y-3 justify-center"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-3 py-2 text-sm gap-2">
             <!--v-if--><span data-slot="button-label" class="truncate">Get started</span>
             <!--v-if-->
           </button></div>
@@ -146,7 +146,7 @@ exports[`PageCTA > renders with orientation horizontal links correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <div data-slot="page-cta-footer" class="mt-8">
-        <div data-slot="page-cta-links" class="flex flex-wrap gap-x-6 gap-y-3"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-3 py-2 text-sm gap-2">
+        <div data-slot="page-cta-links" class="flex flex-wrap gap-x-6 gap-y-3"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3 px-3 py-2 text-sm gap-2">
             <!--v-if--><span data-slot="button-label" class="truncate">Get started</span>
             <!--v-if-->
           </button></div>
@@ -177,7 +177,7 @@ exports[`PageCTA > renders with title correctly 1`] = `
   <div data-slot="page-cta-container" class="w-full max-w-(--ui-container) mx-auto flex flex-col lg:grid px-6 py-12 sm:px-12 sm:py-24 lg:px-16 lg:py-24 gap-8 sm:gap-16">
     <div data-slot="page-cta-wrapper" class="">
       <div data-slot="page-cta-header" class="">
-        <h2 data-slot="page-cta-title" class="text-3xl sm:text-4xl text-pretty tracking-tight font-bold text-highlighted text-center">Title</h2>
+        <h2 data-slot="page-cta-title" class="text-3xl sm:text-4xl text-pretty tracking-tight font-bold text-strong text-center">Title</h2>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -193,7 +193,7 @@ exports[`PageCTA > renders with title slot correctly 1`] = `
   <div data-slot="page-cta-container" class="w-full max-w-(--ui-container) mx-auto flex flex-col lg:grid px-6 py-12 sm:px-12 sm:py-24 lg:px-16 lg:py-24 gap-8 sm:gap-16">
     <div data-slot="page-cta-wrapper" class="">
       <div data-slot="page-cta-header" class="">
-        <h2 data-slot="page-cta-title" class="text-3xl sm:text-4xl text-pretty tracking-tight font-bold text-highlighted text-center">Title slot</h2>
+        <h2 data-slot="page-cta-title" class="text-3xl sm:text-4xl text-pretty tracking-tight font-bold text-strong text-center">Title slot</h2>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -234,7 +234,7 @@ exports[`PageCTA > renders with variant soft correctly 1`] = `
 `;
 
 exports[`PageCTA > renders with variant solid correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-inverted text-inverted">
+"<div data-orientation="vertical" data-slot="page-cta" class="relative isolate rounded-xl overflow-hidden bg-neutral text-contrast">
   <div data-slot="page-cta-container" class="w-full max-w-(--ui-container) mx-auto flex flex-col lg:grid px-6 py-12 sm:px-12 sm:py-24 lg:px-16 lg:py-24 gap-8 sm:gap-16"></div>
 </div>"
 `;
