@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { join } from 'pathe'
+import { join, resolve } from 'pathe'
 import { consola } from 'consola'
 import type { UnpluginOptions } from 'unplugin'
 import type { NuxtUIOptions } from '../unplugin'
@@ -84,7 +84,8 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
         // every theme class from the generated CSS.
         // `options.root` lets setups like `electron-vite` override the location
         // when `config.root` points to a sub-directory Tailwind doesn't scan.
-        root = path.resolve(options.root || config.root || '.')
+        // pathe, so the root compares with Vite's forward-slash paths on Windows too
+        root = resolve(options.root || config.root || '.')
 
         vue.dev = command === 'serve'
 
