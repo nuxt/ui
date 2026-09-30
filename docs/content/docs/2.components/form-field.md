@@ -142,7 +142,7 @@ slots:
 :u-input{placeholder="Enter your email" class="w-full"}
 ::
 
-::tip{to="/docs/getting-started/theme/design-system#color-system"}
+::tip{to="/docs/getting-started/theme/colors"}
 This sets the `color` to `error` on the form control. Change what `error` looks like in your CSS with the `@nuxt/ui/colors` plugin.
 ::
 
