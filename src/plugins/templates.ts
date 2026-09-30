@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { join } from 'pathe'
+import { join, resolve } from 'pathe'
 import { consola } from 'consola'
 import type { UnpluginOptions } from 'unplugin'
 import type { NuxtUIOptions } from '../unplugin'
@@ -18,6 +18,21 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
   // can narrow the theme CSS to the used components (see `getTemplates`).
   const vue: { detectedComponents?: Set<string>, dev?: boolean } = {}
   const templates = getTemplates(options, appConfig.ui, undefined, (...paths: string[]) => join(runtimeDir, '..', ...paths), vue)
+
+  let root = ''
+  let scanDirs: string[] = []
+  let templateFiles: Record<string, string> = {}
+
+  // The first run warns about what it can't resolve, the dev server's reruns don't repeat it
+  function detect(warn = true) {
+    return detectUsedComponents(
+      [root, ...scanDirs],
+      options.prefix!,
+      componentDir,
+      Array.isArray(options.componentDetection) ? options.componentDetection : undefined,
+      { prose: !!(options.prose || options.mdc), warn }
+    )
+  }
   const templateKeys = new Set(templates.map(t => `#build/${t.filename}`))
 
   async function writeTemplates(root: string) {
@@ -69,7 +84,8 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
         // every theme class from the generated CSS.
         // `options.root` lets setups like `electron-vite` override the location
         // when `config.root` points to a sub-directory Tailwind doesn't scan.
-        const root = path.resolve(options.root || config.root || '.')
+        // pathe, so the root compares with Vite's forward-slash paths on Windows too
+        root = resolve(options.root || config.root || '.')
 
         vue.dev = command === 'serve'
 
@@ -77,14 +93,8 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
           // `scanPackages` packages resolve Nuxt UI components from `node_modules`
           // and user component dirs can sit outside the root: detection has to
           // scan both or their components lose their theme CSS.
-          const dirs = resolveExtraScanDirs(root, options.scanPackages, options.components ? options.components.dirs : undefined)
-          vue.detectedComponents = await detectUsedComponents(
-            [root, ...dirs],
-            options.prefix!,
-            componentDir,
-            Array.isArray(options.componentDetection) ? options.componentDetection : undefined,
-            { prose: !!(options.prose || options.mdc) }
-          )
+          scanDirs = resolveExtraScanDirs(root, options.scanPackages, options.components ? options.components.dirs : undefined)
+          vue.detectedComponents = await detect()
 
           if (vue.detectedComponents?.size) {
             consola.success(`Nuxt UI detected ${vue.detectedComponents.size} components in use (including dependencies)`)
@@ -93,13 +103,87 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
           }
         }
 
-        const alias = await writeTemplates(root)
+        templateFiles = await writeTemplates(root)
 
         return {
           resolve: {
-            alias
+            alias: templateFiles
           }
         }
+      },
+      // A component used for the first time in dev needs its theme CSS: detect
+      // again when the source changes, and rewrite `ui.css` when the set does
+      configureServer(server) {
+        if (!options.componentDetection) {
+          return
+        }
+
+        async function update() {
+          const detected = await detect(false)
+          const previous = vue.detectedComponents
+          if (detected?.size === previous?.size && [...(detected ?? [])].every(component => previous?.has(component))) {
+            return
+          }
+
+          const added = [...(detected ?? [])].filter(component => !previous?.has(component))
+          if (added.length) {
+            consola.success(`Nuxt UI detected new components: ${added.join(', ')}`)
+          }
+
+          vue.detectedComponents = detected
+          await writeTemplates(root)
+
+          // The templates live in `node_modules`, which Vite doesn't watch, so
+          // tell it `ui.css` changed for Tailwind to rebuild the CSS importing it
+          const file = templateFiles['#build/ui.css']
+          if (file) {
+            server.watcher.emit('change', file)
+          }
+
+          // And send the new list to the dev warning, which accepts the update itself
+          const module = server.moduleGraph.getModuleById('virtual:nuxt-ui-templates/ui/detected.ts')
+          if (module) {
+            await server.reloadModule(module)
+          }
+        }
+
+        // One run at a time: a save during a run schedules one more after it
+        let running = false
+        let pending = false
+        async function redetect() {
+          if (running) {
+            pending = true
+            return
+          }
+          running = true
+          do {
+            pending = false
+            try {
+              await update()
+            } catch (error) {
+              consola.error('Nuxt UI could not detect the components in use', error)
+            }
+          } while (pending)
+          running = false
+        }
+
+        // Vite only watches its own root: the scan root (`options.root`), component
+        // dirs and linked packages outside it aren't watched otherwise
+        const viteRoot = server.config.root
+        const outside = [root, ...scanDirs].filter(dir => dir !== viteRoot && !dir.startsWith(`${viteRoot}/`) && !dir.includes('/node_modules/'))
+        if (outside.length) {
+          server.watcher.add(outside)
+        }
+
+        let timer: ReturnType<typeof setTimeout> | undefined
+        server.watcher.on('all', (event, file) => {
+          if ((event === 'add' || event === 'change' || event === 'unlink') && /\.(?:vue|ts|mts|js|mjs|cjs|tsx|jsx|md|html)$/.test(file) && !file.includes('/node_modules/')) {
+            clearTimeout(timer)
+            timer = setTimeout(redetect, 100)
+          }
+        })
+        // a scan queued as the server closes would run against a closed server
+        server.httpServer?.once('close', () => clearTimeout(timer))
       }
     },
     resolveId(id) {

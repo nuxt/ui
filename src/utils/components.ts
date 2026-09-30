@@ -195,11 +195,13 @@ export async function detectUsedComponents(
   prefix: string,
   componentDir: string,
   includeComponents?: string[],
-  { prose = false, files = [] }: {
+  { prose = false, files = [], warn = true }: {
     /** Prose components render from Markdown, which can't be traced, so what they render is always included. */
     prose?: boolean
     /** Files to scan besides the dirs, like components registered from elsewhere. */
     files?: string[]
+    /** Warn about unknown `includeComponents` names. */
+    warn?: boolean
   } = {}
 ): Promise<Set<string> | undefined> {
   const detectedComponents = new Set<string>()
@@ -304,7 +306,7 @@ export async function detectUsedComponents(
   // typo in `componentDetection: [...]` surfaces instead of silently doing
   // nothing.
   const unknownComponents = includeComponents?.filter(component => !dependencyGraph.has(component))
-  if (unknownComponents?.length) {
+  if (warn && unknownComponents?.length) {
     consola.warn(`Nuxt UI \`componentDetection\` includes unknown components: ${unknownComponents.join(', ')}`)
   }
 
