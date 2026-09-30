@@ -78,7 +78,7 @@ export default defineTheme({
     color: colors.filter(color => color !== 'neutral'),
     variant: 'subtle',
     class: {
-      content: 'bg-accent-soft text-accent-default ring ring-accent-strong'
+      content: 'bg-accent-soft text-accent-default ring ring-accent-soft'
     }
   }, {
     color: colors.filter(color => color !== 'neutral'),
@@ -108,7 +108,7 @@ export default defineTheme({
     color: 'neutral',
     variant: 'subtle',
     class: {
-      content: 'bg-tint ring ring-strong'
+      content: 'bg-tint ring ring-default'
     }
   }, {
     compact: true,

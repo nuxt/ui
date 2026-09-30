@@ -131,7 +131,7 @@ export default defineTheme({
       color: colors.filter(color => color !== 'neutral'),
       variant: 'subtle',
       class: {
-        cellTrigger: 'data-selected:bg-accent-soft data-selected:text-accent-default data-selected:ring data-selected:ring-inset data-selected:ring-accent-strong data-selected:focus-visible:ring-accent data-today:not-data-selected:text-accent data-highlighted:bg-accent-strong hover:not-data-selected:bg-accent-strong'
+        cellTrigger: 'data-selected:bg-accent-soft data-selected:text-accent-default data-selected:ring data-selected:ring-inset data-selected:ring-accent-soft data-selected:focus-visible:ring-accent data-today:not-data-selected:text-accent data-highlighted:bg-accent-strong hover:not-data-selected:bg-accent-strong'
       }
     },
     {

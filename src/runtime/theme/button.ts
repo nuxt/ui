@@ -24,7 +24,7 @@ export default defineTheme({
         base: 'text-accent-default bg-accent-soft hover:bg-accent-strong active:bg-accent-strong outline-accent-focus focus-visible:outline-3 disabled:bg-accent-soft aria-disabled:bg-accent-soft'
       },
       subtle: {
-        base: 'text-accent-default ring ring-inset ring-accent-strong bg-accent-soft hover:bg-accent-strong active:bg-accent-strong disabled:bg-accent-soft aria-disabled:bg-accent-soft outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent'
+        base: 'text-accent-default ring ring-inset ring-accent-soft bg-accent-soft hover:bg-accent-strong active:bg-accent-strong disabled:bg-accent-soft aria-disabled:bg-accent-soft outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent'
       },
       ghost: {
         base: 'text-accent-default hover:bg-accent-soft active:bg-accent-soft outline-accent-focus focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent'
