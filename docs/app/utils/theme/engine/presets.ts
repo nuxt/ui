@@ -45,11 +45,11 @@ export const presets: ThemePreset[] = [{
 }, {
   id: 'mono',
   name: 'Mono',
-  description: 'Black on white after shadcn/ui: a pure gray neutral, hairline borders, soft corners, Geist type.',
+  description: 'Black on white: a pure gray neutral, hairline borders, soft corners, Geist type.',
   doc: {
     version: 1,
     // The gray ramp serves as primary too: black actions in light, pinned to
-    // its 200 in dark, with shadcn/ui's default values for everything else.
+    // its 200 in dark, with the default values for everything else.
     colors: {
       primary: 'neutral',
       neutral: 'neutral'
