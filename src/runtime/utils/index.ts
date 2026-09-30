@@ -42,14 +42,14 @@ export function get(object: Record<string, any> | undefined, path: (string | num
 export function set(object: Record<string, any>, path: (string | number)[] | string, value: any): void {
   const keys = typeof path === 'string' ? path.split('.') : path
 
+  if (keys.some(key => key === '__proto__' || key === 'constructor' || key === 'prototype')) {
+    return
+  }
+
   let current = object
 
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i]!
-
-    if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
-      return
-    }
 
     if (i === keys.length - 1) {
       current[key] = value

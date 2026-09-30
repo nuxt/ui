@@ -33,7 +33,9 @@ describe('set', () => {
     ['__proto__', 'polluted'],
     'a.__proto__.polluted'
   ])('does not pollute the prototype with %j', (path) => {
-    set({}, path, true)
+    const object = {}
+    set(object, path, true)
+    expect(object).toEqual({})
     expect(({} as any).polluted).toBeUndefined()
   })
 })
