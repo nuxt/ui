@@ -51,7 +51,7 @@ name: 'theme-props-example'
 Explicit props on a component (e.g. `<UButton color="primary" />`) always win over `<UTheme :props>`. Theme defaults only apply when the prop wasn't passed explicitly.
 ::
 
-### Default variants :badge{label="Soon" class="align-text-top"}
+### Default variants
 
 Use the `'*'` key of `props` to change the default `color` and `size` of every descendant component. It only replaces the library defaults, `primary` and `md`, so a component with its own default keeps it: Avatar, AvatarGroup, ChatMessage, Kbd, Separator and the prose Callout and Code stay `neutral`, Separator stays `xs`, and the items of DropdownMenu and ContextMenu stay uncolored. A default you give a component in `app.config.ui.<name>.defaultVariants` counts as its own too. A component's own key takes priority over `'*'`, even from a Theme further out: buttons inside `<UTheme :props="{ '*': { size: 'xs' } }">` stay `xl` when an outer Theme sets `{ button: { size: 'xl' } }`.
 
@@ -104,7 +104,7 @@ export default defineConfig({
 :::
 ::
 
-### Unstyled :badge{label="Soon" class="align-text-top"}
+### Unstyled
 
 Use the `unstyled` prop to render descendant components without their theme classes. Only the classes you supply through `class`, `ui` or `app.config.ui` remain, so you can style them from scratch. The `color` prop keeps working: its `[--ui-accent:…]` class stays, so the `accent` utilities you add, like `bg-accent`, follow it. Set it to `false` on a nested Theme to style a subtree again.
 
@@ -130,7 +130,7 @@ Set `ui.unstyled` in the `ui` options of your `vite.config.ts` to apply it to yo
 :::
 ::
 
-### Variants :badge{label="Soon" class="align-text-top"}
+### Variants
 
 Use the `variants` prop to change the classes of a component's variant values in a subtree, or to add values. It takes the same shape as the `variants` of the component in `app.config.ui`, and its classes apply on top of your app config and of any Theme above, so the nearest wins a conflict.
 
@@ -148,7 +148,7 @@ Unlike the `ui` prop, which applies to every instance of a component, a variant 
 A value you add this way works at runtime, but it isn't part of the component's prop types. Add it to the component's `variants` in your app config to get it typed.
 ::
 
-### Icons :badge{label="Soon" class="align-text-top"}
+### Icons
 
 Use the `icons` prop to change the icons descendant components use, merged over `app.config.ui.icons`. The icons of ContentSearch's results are the exception: its search index is shared by the whole app, so they always come from `app.config.ui.icons`.
 
