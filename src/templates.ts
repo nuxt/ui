@@ -2,6 +2,7 @@ import { existsSync } from 'node:fs'
 import { readFile } from 'node:fs/promises'
 import { camelCase, kebabCase } from 'scule'
 import { genExport } from 'knitwork'
+import { join } from 'pathe'
 import { addTemplate, addTypeTemplate, hasNuxtModule, logger, updateTemplates, getLayerDirectories } from '@nuxt/kit'
 import type { Nuxt, NuxtApp, NuxtPage, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
 import type { Resolver } from '@nuxt/kit'
@@ -339,9 +340,24 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt, resolve: Resolv
   })
 
   if (options.componentDetection && nuxt.options.dev) {
+    let watcher: { emit: (event: string, file: string) => unknown } | undefined
+    nuxt.hook('vite:serverCreated', (server, { isClient }) => {
+      if (isClient) {
+        watcher = server.watcher
+      }
+    })
+
     nuxt.hook('builder:watch', async (_, path) => {
       if (/\.(?:vue|ts|mts|js|mjs|cjs|tsx|jsx|md|html)$/.test(path)) {
+        const file = join(nuxt.options.buildDir, 'ui.css')
+        const before = await readFile(file, 'utf8').catch(() => '')
         await updateTemplates({ filter: template => template.filename === 'ui.css' || template.filename === 'ui/detected.ts' })
+
+        // Vite doesn't watch the build dir, so tell it `ui.css` changed for
+        // Tailwind to rebuild the CSS importing it
+        if (watcher && await readFile(file, 'utf8').catch(() => '') !== before) {
+          watcher.emit('change', file)
+        }
       }
     })
   }
