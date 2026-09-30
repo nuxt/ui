@@ -16,7 +16,7 @@ exports[`PageFeature > renders with class correctly 1`] = `
   <div data-slot="page-feature-leading" class="inline-flex items-center justify-center p-0.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-feature-leadingIcon"></span></div>
   <div data-slot="page-feature-wrapper" class="">
     <!--v-if-->
-    <div data-slot="page-feature-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+    <div data-slot="page-feature-title" class="text-base text-pretty font-semibold text-strong">Title</div>
     <div data-slot="page-feature-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
   </div>
 </div>"
@@ -47,7 +47,7 @@ exports[`PageFeature > renders with description slot correctly 1`] = `
   <div data-slot="page-feature-leading" class="inline-flex items-center justify-center p-0.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-feature-leadingIcon"></span></div>
   <div data-slot="page-feature-wrapper" class="">
     <!--v-if-->
-    <div data-slot="page-feature-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+    <div data-slot="page-feature-title" class="text-base text-pretty font-semibold text-strong">Title</div>
     <div data-slot="page-feature-description" class="text-[15px] text-pretty text-muted mt-1">Description slot</div>
   </div>
 </div>"
@@ -69,7 +69,7 @@ exports[`PageFeature > renders with leading slot correctly 1`] = `
   <div data-slot="page-feature-leading" class="inline-flex items-center justify-center p-0.5">Leading slot</div>
   <div data-slot="page-feature-wrapper" class="">
     <!--v-if-->
-    <div data-slot="page-feature-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+    <div data-slot="page-feature-title" class="text-base text-pretty font-semibold text-strong">Title</div>
     <div data-slot="page-feature-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
   </div>
 </div>"
@@ -80,7 +80,7 @@ exports[`PageFeature > renders with orientation horizontal correctly 1`] = `
   <div data-slot="page-feature-leading" class="inline-flex items-center justify-center p-0.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-feature-leadingIcon"></span></div>
   <div data-slot="page-feature-wrapper" class="">
     <!--v-if-->
-    <div data-slot="page-feature-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+    <div data-slot="page-feature-title" class="text-base text-pretty font-semibold text-strong">Title</div>
     <div data-slot="page-feature-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
   </div>
 </div>"
@@ -91,7 +91,7 @@ exports[`PageFeature > renders with orientation vertical correctly 1`] = `
   <div data-slot="page-feature-leading" class="inline-flex items-center justify-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-feature-leadingIcon"></span></div>
   <div data-slot="page-feature-wrapper" class="">
     <!--v-if-->
-    <div data-slot="page-feature-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+    <div data-slot="page-feature-title" class="text-base text-pretty font-semibold text-strong">Title</div>
     <div data-slot="page-feature-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
   </div>
 </div>"
@@ -102,7 +102,7 @@ exports[`PageFeature > renders with title correctly 1`] = `
   <!--v-if-->
   <div data-slot="page-feature-wrapper" class="">
     <!--v-if-->
-    <div data-slot="page-feature-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+    <div data-slot="page-feature-title" class="text-base text-pretty font-semibold text-strong">Title</div>
     <!--v-if-->
   </div>
 </div>"
@@ -113,7 +113,7 @@ exports[`PageFeature > renders with title slot correctly 1`] = `
   <div data-slot="page-feature-leading" class="inline-flex items-center justify-center p-0.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-feature-leadingIcon"></span></div>
   <div data-slot="page-feature-wrapper" class="">
     <!--v-if-->
-    <div data-slot="page-feature-title" class="text-base text-pretty font-semibold text-highlighted">Title slot</div>
+    <div data-slot="page-feature-title" class="text-base text-pretty font-semibold text-strong">Title slot</div>
     <div data-slot="page-feature-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
   </div>
 </div>"
@@ -134,7 +134,7 @@ exports[`PageFeature > renders with ui correctly 1`] = `
   <div data-slot="page-feature-leading" class="inline-flex items-center justify-center p-0.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-feature-leadingIcon"></span></div>
   <div data-slot="page-feature-wrapper" class="">
     <!--v-if-->
-    <div data-slot="page-feature-title" class="text-base text-pretty text-highlighted font-bold">Title</div>
+    <div data-slot="page-feature-title" class="text-base text-pretty text-strong font-bold">Title</div>
     <div data-slot="page-feature-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
   </div>
 </div>"

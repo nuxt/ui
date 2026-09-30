@@ -5,7 +5,7 @@ export default defineTheme({
   slots: {
     root: 'relative flex gap-1.5 [&>div]:min-w-0',
     list: 'isolate min-w-0',
-    label: 'w-full flex items-center gap-1.5 font-semibold text-xs/5 text-highlighted px-2.5 py-1.5',
+    label: 'w-full flex items-center gap-1.5 font-semibold text-xs/5 text-strong px-2.5 py-1.5',
     item: 'min-w-0',
     link: 'group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3 before:outline-accent-focus',
     linkLeadingIcon: 'shrink-0 size-5',
@@ -17,7 +17,7 @@ export default defineTheme({
     linkLabel: 'truncate',
     linkLabelExternalIcon: 'inline-block size-3 align-top text-faint',
     childList: 'isolate',
-    childLabel: 'text-xs text-highlighted',
+    childLabel: 'text-xs text-strong',
     childItem: '',
     childLink: 'group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3 before:outline-accent-focus',
     childLinkWrapper: 'min-w-0',
@@ -68,13 +68,13 @@ export default defineTheme({
     },
     active: {
       true: {
-        childLink: 'before:bg-soft text-highlighted',
+        childLink: 'before:bg-soft text-strong',
         childLinkIcon: 'text-default'
       },
       false: {
         link: 'text-muted',
         linkLeadingIcon: 'text-faint',
-        childLink: 'hover:before:bg-tint text-default hover:text-highlighted transition-colors before:transition-colors',
+        childLink: 'hover:before:bg-tint text-default hover:text-strong transition-colors before:transition-colors',
         childLinkIcon: 'text-faint group-hover:text-default transition-colors'
       }
     },
@@ -141,7 +141,7 @@ export default defineTheme({
     active: false,
     variant: 'pill',
     class: {
-      link: 'hover:text-highlighted hover:before:bg-tint transition-colors before:transition-colors',
+      link: 'hover:text-strong hover:before:bg-tint transition-colors before:transition-colors',
       linkLeadingIcon: 'group-hover:text-default transition-colors'
     }
   }, {
@@ -150,7 +150,7 @@ export default defineTheme({
     variant: 'pill',
     orientation: 'horizontal',
     class: {
-      link: 'data-[state=open]:text-highlighted',
+      link: 'data-[state=open]:text-strong',
       linkLeadingIcon: 'group-data-[state=open]:text-default'
     }
   }, {
@@ -197,7 +197,7 @@ export default defineTheme({
     active: false,
     variant: 'link',
     class: {
-      link: 'hover:text-highlighted transition-colors',
+      link: 'hover:text-strong transition-colors',
       linkLeadingIcon: 'group-hover:text-default transition-colors'
     }
   }, {
@@ -206,7 +206,7 @@ export default defineTheme({
     variant: 'link',
     orientation: 'horizontal',
     class: {
-      link: 'data-[state=open]:text-highlighted',
+      link: 'data-[state=open]:text-strong',
       linkLeadingIcon: 'group-data-[state=open]:text-default'
     }
   }, {

@@ -5,7 +5,7 @@ export default defineTheme({
     root: 'relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0',
     header: 'flex flex-col items-center gap-2 max-w-sm text-center',
     avatar: 'shrink-0 mb-2',
-    title: 'text-highlighted text-pretty font-medium',
+    title: 'text-strong text-pretty font-medium',
     description: 'text-balance text-center',
     body: 'flex flex-col items-center gap-4 max-w-sm',
     actions: 'flex flex-wrap justify-center gap-2 shrink-0',
@@ -41,8 +41,8 @@ export default defineTheme({
     },
     variant: {
       solid: {
-        root: 'bg-inverted',
-        title: 'text-inverted',
+        root: 'bg-neutral',
+        title: 'text-contrast',
         description: 'text-faint'
       },
       outline: {

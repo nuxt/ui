@@ -8,7 +8,7 @@ export default defineTheme({
     wrapper: '',
     body: 'flex-1 overflow-y-auto p-4 sm:p-6',
     footer: 'flex items-center gap-1.5 p-4 sm:px-6',
-    title: 'text-highlighted font-semibold',
+    title: 'text-strong font-semibold',
     description: 'mt-1 text-muted text-sm',
     close: 'absolute top-4 end-4'
   },

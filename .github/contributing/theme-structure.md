@@ -75,9 +75,9 @@ export default defineTheme({
     // Sets `--ui-accent` on `base` for each color
     color: colorVariant({ base: '' }),
     variant: {
-      solid: { base: 'text-accent-foreground bg-accent hover:bg-accent-hover' },
-      outline: { base: 'ring ring-inset ring-accent-border-strong text-accent-soft-foreground bg-accent-surface' },
-      soft: { base: 'text-accent-soft-foreground bg-accent-soft' }
+      solid: { base: 'text-accent-contrast bg-accent hover:bg-accent-hover' },
+      outline: { base: 'ring ring-inset ring-accent-strong text-accent-default' },
+      soft: { base: 'text-accent-default bg-accent-soft' }
     },
     size: {
       xs: { base: 'text-xs px-2 py-1', leadingIcon: 'size-3' },
@@ -120,38 +120,34 @@ export default defineTheme({
 Always use semantic colors, never Tailwind palette colors:
 
 ### Text Colors
+- `text-strong` - Headings and emphasized text
 - `text-default` - Primary text
 - `text-muted` - Secondary text
-- `text-faint` - Tertiary/placeholder text
-- `text-highlighted` - Emphasized text
-- `text-inverted` - Text on dark backgrounds
+- `text-faint` - Placeholder and disabled text
+- `text-contrast` - Text on a solid (`bg-neutral`, `bg-accent`)
 
 ### Background Colors
-- `bg-default` - Primary background
-- `bg-soft` - Raised surface (cards, dropdowns)
-- `bg-soft-hover` - Hover of a raised surface
+- `bg-default` - The page
+- `bg-muted` - Recessed surface (code blocks)
 - `bg-tint` - Hovered and highlighted items
-- `bg-inverted` - Inverted (dark) background
+- `bg-soft` - Soft fill (neutral soft variants, raised areas)
+- `bg-strong` - Strong fill (tracks, hover of `bg-soft`)
+- `bg-neutral` / `bg-neutral-hover` - The neutral solid and its hover
 
 ### Border Colors
-- `border-default` - Standard borders
-- `ring-default` - Focus rings
-- `ring-strong` - Field outlines
-- `divide-default` - Dividers
+- `border-default` - Standard borders, `ring-default`, `divide-default`
+- `border-muted` - A border on a `bg-soft` or `bg-muted` fill
+- `border-strong` - Field outlines
 - `outline-focus` - Focus outline of a component without a `color` prop
 
 ### Accent Tokens
-The `color` prop accepts `primary`, `secondary`, `success`, `info`, `warning`, `error` and `neutral`. Colored classes read the scoped color through `accent` roles, never through an alias name and never with an opacity modifier, so every color and the neutral scope can tune each state:
-- `bg-accent` - The color itself
-- `text-accent-foreground` - Text on a solid accent background
-- `bg-accent-hover` - Hover of a solid background
-- `bg-accent-soft` / `bg-accent-soft-hover` - Tinted background and its hover
-- `text-accent-soft-foreground` - Text on a tinted background
-- `ring-accent-border` / `ring-accent-border-strong` - Colored borders
+The `color` prop accepts `primary`, `secondary`, `success`, `info`, `warning`, `error` and `neutral`. Colored classes read the scoped color through `accent` roles, never through an alias name and never with an opacity modifier, so every color and the neutral scope can tune each state. Each role is the neutral token of the same name with `accent-` in front, and `color="neutral"` resolves it to that token:
+- `bg-accent` / `bg-accent-hover` - The color itself (solid) and its hover (`bg-neutral` / `bg-neutral-hover` for neutral)
+- `text-accent-contrast` - Text on the solid
+- `bg-accent-tint` / `bg-accent-soft` / `bg-accent-strong` - Fills
+- `text-accent-default` / `text-accent-muted` / `text-accent-faint` - Text
+- `ring-accent-muted` / `ring-accent-strong` - Borders, also on `border-*`
 - `outline-accent-focus` - Focus outline
-- `bg-accent-surface` - Resting background of an outlined element
-- `bg-accent-tint` - Light tint on large surfaces
-- `text-accent-muted` / `text-accent-muted-hover` / `text-accent-faint` - Secondary and faint text
 
 The full list with values is in `src/runtime/css/tokens.css` and the [CSS Variables](../../docs/content/docs/1.getting-started/5.theme/2.css-variables.md#accent) docs.
 
@@ -204,7 +200,7 @@ compoundVariants: [
   {
     color: 'primary',
     variant: 'solid',
-    class: { base: 'bg-primary text-inverted' }
+    class: { base: 'bg-primary text-contrast' }
   },
   
   // Size + boolean
@@ -227,7 +223,7 @@ compoundVariants: [
   {
     color: 'neutral',
     variant: ['outline', 'subtle'],
-    class: { base: 'focus-visible:ring-2 focus-visible:ring-inverted' }
+    class: { base: 'focus-visible:ring-2 focus-visible:ring-neutral' }
   }
 ]
 ```

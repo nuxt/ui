@@ -381,7 +381,7 @@ const customerColumns: TableColumn<Customer>[] = [{
     return h('div', { class: 'flex items-center gap-3' }, [
       h(UAvatar, { ...row.original.avatar, size: 'lg' }),
       h('div', undefined, [
-        h('p', { class: 'font-medium text-highlighted' }, row.original.name),
+        h('p', { class: 'font-medium text-strong' }, row.original.name),
         h('p', undefined, `@${row.original.username}`)
       ])
     ])
@@ -634,7 +634,7 @@ const pageTitles: Record<Page, string> = {
             <div
               class="p-4 sm:px-6 text-sm cursor-pointer border-l-2 transition-colors"
               :class="[
-                mail.unread ? 'text-highlighted' : 'text-default',
+                mail.unread ? 'text-strong' : 'text-default',
                 selectedMail && selectedMail.id === mail.id
                   ? 'border-primary bg-primary/10'
                   : 'border-bg hover:border-primary hover:bg-primary/5'
@@ -694,7 +694,7 @@ const pageTitles: Record<Page, string> = {
             <UAvatar v-bind="selectedMail.from.avatar" size="3xl" />
 
             <div class="min-w-0">
-              <p class="font-semibold text-highlighted">
+              <p class="font-semibold text-strong">
                 {{ selectedMail.from.name }}
               </p>
               <p class="text-muted">
@@ -863,7 +863,7 @@ const pageTitles: Record<Page, string> = {
               class="xl:rounded-none xl:first:rounded-l-lg xl:last:rounded-r-lg"
             >
               <div class="flex items-center gap-2 flex-wrap min-w-0">
-                <span class="text-2xl font-semibold text-highlighted">
+                <span class="text-2xl font-semibold text-strong">
                   {{ stat.value }}
                 </span>
 
@@ -880,7 +880,7 @@ const pageTitles: Record<Page, string> = {
                 <p class="text-xs text-muted uppercase mb-1.5">
                   Revenue
                 </p>
-                <p class="text-3xl text-highlighted font-semibold">
+                <p class="text-3xl text-strong font-semibold">
                   {{ revenueTotal }}
                 </p>
               </div>

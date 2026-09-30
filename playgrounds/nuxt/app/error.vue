@@ -15,7 +15,7 @@ provide('components', components)
     <UDashboardGroup unit="rem">
       <UDashboardSidebar class="bg-soft/25">
         <template #header>
-          <NuxtLink to="/" class="text-highlighted">
+          <NuxtLink to="/" class="text-strong">
             <Logo class="h-5 w-auto" />
           </NuxtLink>
 

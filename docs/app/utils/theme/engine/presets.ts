@@ -19,10 +19,8 @@ export interface ThemePreset {
 const tintedNeutralBase = {
   '--ui-bg-default': { light: 50 },
   '--ui-bg-muted': { light: 100 },
-  '--ui-text-inverted': { light: 50 },
-  '--ui-text-highlighted': { dark: 50 },
-  '--ui-bg-inverted': { dark: 50 },
-  '--ui-border-inverted': { dark: 50 }
+  '--ui-text-contrast': { light: 50 },
+  '--ui-text-strong': { dark: 50 }
 } satisfies StyleOptions['tokenShades']
 
 /**
@@ -62,7 +60,7 @@ export const presets: ThemePreset[] = [{
         '--ui-bg-default': { dark: 950 },
         '--ui-bg-muted': { light: 100 },
         '--ui-text-default': { dark: 50 },
-        '--ui-text-highlighted': { dark: 50 },
+        '--ui-text-strong': { dark: 50 },
         // field outlines match the border in light, the library steps them up to 300
         '--ui-border-strong': { light: 200 }
       }
@@ -71,8 +69,8 @@ export const presets: ThemePreset[] = [{
     tokens: {
       light: {
         '--ui-text-default': 'black',
-        '--ui-text-highlighted': 'black',
-        '--ui-text-inverted': 'var(--ui-color-neutral-50)'
+        '--ui-text-strong': 'black',
+        '--ui-text-contrast': 'var(--ui-color-neutral-50)'
       },
       dark: {
         '--ui-border-default': 'color-mix(in oklab, white 10%, transparent)',
@@ -148,7 +146,7 @@ export const presets: ThemePreset[] = [{
         '--ui-text-muted': 'var(--ui-color-neutral-600)',
         '--ui-text-faint': 'var(--ui-color-neutral-600)',
         '--ui-bg-soft': 'var(--ui-color-neutral-200)',
-        '--ui-bg-soft-hover': 'var(--ui-color-neutral-300)'
+        '--ui-bg-strong': 'var(--ui-color-neutral-300)'
       },
       // Dark keeps the same brand colours rather than lifting to the 400s.
       dark: {
@@ -252,7 +250,7 @@ export const presets: ThemePreset[] = [{
         // light restates tintedNeutral's step: this key replaces it wholesale
         '--ui-bg-muted': { light: 100, dark: 900 },
         '--ui-bg-soft': { dark: 900 },
-        '--ui-bg-soft-hover': { dark: 800 }
+        '--ui-bg-strong': { dark: 800 }
       }
     }
   }
@@ -348,21 +346,19 @@ export const presets: ThemePreset[] = [{
         '--ui-bg-default': { light: 50, dark: 800 },
         '--ui-bg-muted': { light: 300, dark: 700 },
         '--ui-bg-soft': { light: 300, dark: 700 },
-        '--ui-bg-soft-hover': { light: 400, dark: 600 },
-        '--ui-bg-inverted': { light: 900, dark: 50 },
-        '--ui-text-inverted': { light: 50 },
+        '--ui-bg-strong': { light: 400, dark: 600 },
+        '--ui-text-contrast': { light: 50 },
         '--ui-text-faint': { light: 500, dark: 400 },
         '--ui-text-muted': { light: 800, dark: 300 },
         '--ui-text-default': { light: 900 },
-        '--ui-text-highlighted': { light: 950, dark: 100 },
+        '--ui-text-strong': { light: 950, dark: 100 },
         // Light keeps the ink hairline; dark has to run the other way, a
         // border below the surface's own lightness just reads as a seam.
         '--ui-border-default': { light: 950, dark: 600 },
         // dark is left at the library's own neutral-700, restating it would
         // only add a line the importer then has to recognise as generated
         '--ui-border-muted': { light: 400 },
-        '--ui-border-strong': { light: 950, dark: 500 },
-        '--ui-border-inverted': { light: 500, dark: 50 }
+        '--ui-border-strong': { light: 950, dark: 500 }
       }
     }
   }
@@ -401,13 +397,11 @@ export const presets: ThemePreset[] = [{
     tokens: {
       light: {
         '--ui-bg-default': 'var(--ui-color-neutral-50)',
-        '--ui-text-inverted': 'var(--ui-color-neutral-50)',
+        '--ui-text-contrast': 'var(--ui-color-neutral-50)',
         '--ui-bg-muted': 'var(--ui-color-neutral-100)'
       },
       dark: {
-        '--ui-bg-inverted': 'var(--ui-color-neutral-50)',
-        '--ui-text-highlighted': 'var(--ui-color-neutral-50)',
-        '--ui-border-inverted': 'var(--ui-color-neutral-50)'
+        '--ui-text-strong': 'var(--ui-color-neutral-50)'
       }
     }
   }
@@ -468,7 +462,7 @@ export const presets: ThemePreset[] = [{
         '--ui-bg-default': 'var(--ui-color-neutral-100)',
         '--ui-bg-muted': 'var(--ui-color-neutral-200)',
         '--ui-bg-soft': 'var(--ui-color-neutral-200)',
-        '--ui-bg-soft-hover': 'var(--ui-color-neutral-300)',
+        '--ui-bg-strong': 'var(--ui-color-neutral-300)',
         '--ui-border-default': 'var(--ui-color-neutral-300)',
         // the library leaves this at 200, where the muted surface now sits:
         // a code block's frame would land on its own background
@@ -477,7 +471,7 @@ export const presets: ThemePreset[] = [{
       },
       dark: {
         '--ui-primary': 'var(--ui-color-primary-500)',
-        '--ui-bg-soft-hover': 'var(--ui-color-neutral-800)'
+        '--ui-bg-strong': 'var(--ui-color-neutral-800)'
       }
     }
   }

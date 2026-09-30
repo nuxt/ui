@@ -75,7 +75,7 @@ const dropdownItems: DropdownMenuItem[][] = [
             color="neutral"
             variant="ghost"
             size="xs"
-            class="text-muted hover:text-highlighted hover:bg-soft-hover/50 data-[state=open]:bg-soft-hover/50 mr-1.5"
+            class="text-muted hover:text-strong hover:bg-strong/50 data-[state=open]:bg-strong/50 mr-1.5"
           />
         </UDropdownMenu>
       </div>

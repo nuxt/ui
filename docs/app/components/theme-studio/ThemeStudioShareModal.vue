@@ -114,7 +114,7 @@ watch(open, async (isOpen) => {
       <div class="flex flex-col gap-2 p-4 sm:px-6 bg-tint border-b border-default">
         <div class="flex items-center gap-2">
           <UIcon :name="studioIcons.link" class="size-4 shrink-0 text-faint" />
-          <span class="text-sm font-semibold text-highlighted">Share link</span>
+          <span class="text-sm font-semibold text-strong">Share link</span>
           <span class="text-sm text-muted truncate hidden sm:block">Opens the editor with this theme applied</span>
         </div>
 

@@ -200,7 +200,7 @@ export default defineAppConfig({
       <template #left>
         <div class="flex items-center gap-1.5">
           <UIcon :name="studioIcons.bookOpen" class="size-6 text-primary shrink-0" />
-          <span class="text-xl font-bold text-highlighted">Docs</span>
+          <span class="text-xl font-bold text-strong">Docs</span>
         </div>
       </template>
 
@@ -284,7 +284,7 @@ export default defineAppConfig({
           <template #right>
             <div class="hidden lg:flex flex-col gap-6 self-start sticky top-(--ui-header-height) py-8">
               <div>
-                <p class="text-sm font-semibold text-highlighted mb-1.5">
+                <p class="text-sm font-semibold text-strong mb-1.5">
                   Table of Contents
                 </p>
 

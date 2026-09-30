@@ -247,7 +247,7 @@ onMounted(() => {
       <template #left>
         <div class="flex items-center gap-1.5">
           <UIcon :name="studioIcons.saas" class="size-6 text-primary shrink-0" />
-          <span class="text-xl font-bold text-highlighted">SaaS</span>
+          <span class="text-xl font-bold text-strong">SaaS</span>
         </div>
       </template>
 
@@ -346,7 +346,7 @@ onMounted(() => {
       <!-- Template's ImagePlaceholder: a framed card with a diagonal-stripes pattern. -->
       <UPageCard variant="subtle">
         <div class="relative overflow-hidden rounded-sm border border-dashed border-strong opacity-75 px-4 flex items-center justify-center aspect-video">
-          <svg class="absolute inset-0 h-full w-full stroke-inverted/10" fill="none">
+          <svg class="absolute inset-0 h-full w-full stroke-neutral/10" fill="none">
             <defs>
               <pattern
                 :id="`saas-stripes-${index}`"
@@ -439,7 +439,7 @@ onMounted(() => {
         :default-value="['0']"
         :unmount-on-hide="false"
         class="max-w-3xl mx-auto"
-        :ui="{ trigger: 'text-base text-highlighted', body: 'text-base text-muted' }"
+        :ui="{ trigger: 'text-base text-strong', body: 'text-base text-muted' }"
       />
     </UPageSection>
 

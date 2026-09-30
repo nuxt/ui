@@ -7,7 +7,7 @@ export default defineTheme({
     body: 'min-w-0 flex-1 flex flex-col',
     footer: '',
     image: 'object-cover object-top w-full h-full',
-    title: 'text-xl text-pretty font-semibold text-highlighted',
+    title: 'text-xl text-pretty font-semibold text-strong',
     description: 'mt-1 text-base text-pretty',
     authors: 'pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5',
     avatar: '',

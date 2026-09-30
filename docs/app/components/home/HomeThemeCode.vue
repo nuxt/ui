@@ -88,7 +88,7 @@ const pane = computed(() => panes.value.find(entry => entry.key === tab.value) ?
         :label="entry.filename"
         :active="tab === entry.key"
         :aria-pressed="tab === entry.key"
-        :class="tab === entry.key ? 'bg-soft-hover/75' : ''"
+        :class="tab === entry.key ? 'bg-strong/75' : ''"
         @click="tab = entry.key"
       >
         <template #leading>

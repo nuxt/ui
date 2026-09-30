@@ -11,7 +11,7 @@ const studioIcons = useStudioIcons()
         <UIcon :name="studioIcons.radar" class="size-5" />
       </div>
       <div>
-        <p class="font-semibold text-highlighted">
+        <p class="font-semibold text-strong">
           Observability Plus
         </p>
         <p class="text-sm text-muted">

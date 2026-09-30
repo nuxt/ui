@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Link > renders with activeClass correctly 1`] = `"<button type="button" data-slot="link" class="outline-focus focus-visible:outline-3 rounded-md text-highlighted"></button>"`;
+exports[`Link > renders with activeClass correctly 1`] = `"<button type="button" data-slot="link" class="outline-focus focus-visible:outline-3 rounded-md text-strong"></button>"`;
 
 exports[`Link > renders with as correctly 1`] = `"<div data-slot="link" class="outline-focus focus-visible:outline-3 rounded-md text-muted hover:text-default transition-colors"></div>"`;
 
@@ -28,7 +28,7 @@ exports[`Link > renders with internal to and target correctly 1`] = `"<a href="/
 
 exports[`Link > renders with internal to object and target correctly 1`] = `"<a href="/about" rel="noopener noreferrer" target="_blank" data-slot="link" class="outline-focus focus-visible:outline-3 rounded-md text-muted hover:text-default transition-colors"></a>"`;
 
-exports[`Link > renders with raw activeClass correctly 1`] = `"<button type="button" data-slot="link" class="text-highlighted"></button>"`;
+exports[`Link > renders with raw activeClass correctly 1`] = `"<button type="button" data-slot="link" class="text-strong"></button>"`;
 
 exports[`Link > renders with raw correctly 1`] = `"<button type="button" data-slot="link" class=""></button>"`;
 

@@ -65,7 +65,7 @@ exports[`Card > renders with header slot correctly 1`] = `
 exports[`Card > renders with title and description correctly 1`] = `
 "<div data-slot="card" class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
   <div data-slot="card-header" class="p-4 sm:px-6">
-    <div data-slot="card-title" class="text-highlighted font-semibold">Title</div>
+    <div data-slot="card-title" class="text-strong font-semibold">Title</div>
     <div data-slot="card-description" class="mt-1 text-muted text-sm">Description</div>
   </div>
   <!--v-if-->
@@ -76,7 +76,7 @@ exports[`Card > renders with title and description correctly 1`] = `
 exports[`Card > renders with title correctly 1`] = `
 "<div data-slot="card" class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
   <div data-slot="card-header" class="p-4 sm:px-6">
-    <div data-slot="card-title" class="text-highlighted font-semibold">Title</div>
+    <div data-slot="card-title" class="text-strong font-semibold">Title</div>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -87,7 +87,7 @@ exports[`Card > renders with title correctly 1`] = `
 exports[`Card > renders with title slot correctly 1`] = `
 "<div data-slot="card" class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
   <div data-slot="card-header" class="p-4 sm:px-6">
-    <div data-slot="card-title" class="text-highlighted font-semibold">Title slot</div>
+    <div data-slot="card-title" class="text-strong font-semibold">Title slot</div>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -120,7 +120,7 @@ exports[`Card > renders with variant soft correctly 1`] = `
 `;
 
 exports[`Card > renders with variant solid correctly 1`] = `
-"<div data-slot="card" class="rounded-lg overflow-hidden bg-inverted text-inverted">
+"<div data-slot="card" class="rounded-lg overflow-hidden bg-neutral text-contrast">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->

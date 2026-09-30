@@ -166,24 +166,22 @@ export function useThemeStudio() {
   }
 
   /**
-   * The library hardcodes five tokens to `white` (light `--ui-bg-default` and
-   * `--ui-text-inverted`; dark `--ui-text-highlighted`, `--ui-bg-inverted`
-   * and `--ui-border-inverted`), so a tinted neutral ramp would never reach
-   * them. Choosing a neutral re-routes all five through the ramp, and lifts
+   * The library hardcodes three tokens to `white` (light `--ui-bg-default`
+   * and `--ui-text-contrast`, dark `--ui-text-strong`), so a tinted neutral
+   * ramp would never reach them. Choosing a neutral re-routes all three
+   * through the ramp, and lifts
    * the muted surface a stop: the library sits it at 50 too, so it would
    * land ON the page and every muted panel would lose its shape. The
-   * presets' tintedNeutralBase carries the same six.
+   * presets' tintedNeutralBase carries the same four.
    */
   const NEUTRAL_TOKEN_REMAPS = {
     light: {
       '--ui-bg-default': 'var(--ui-color-neutral-50)',
       '--ui-bg-muted': 'var(--ui-color-neutral-100)',
-      '--ui-text-inverted': 'var(--ui-color-neutral-50)'
+      '--ui-text-contrast': 'var(--ui-color-neutral-50)'
     },
     dark: {
-      '--ui-text-highlighted': 'var(--ui-color-neutral-50)',
-      '--ui-bg-inverted': 'var(--ui-color-neutral-50)',
-      '--ui-border-inverted': 'var(--ui-color-neutral-50)'
+      '--ui-text-strong': 'var(--ui-color-neutral-50)'
     }
   }
 

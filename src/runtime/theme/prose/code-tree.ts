@@ -17,10 +17,10 @@ export default defineTheme({
   variants: {
     active: {
       true: {
-        link: 'text-highlighted before:bg-soft'
+        link: 'text-strong before:bg-soft'
       },
       false: {
-        link: 'hover:text-highlighted hover:before:bg-tint transition-colors before:transition-colors'
+        link: 'hover:text-strong hover:before:bg-tint transition-colors before:transition-colors'
       }
     }
   }

@@ -78,7 +78,7 @@ html.dark .shiki span:not([style*="background-color"]) {
   height: 1.25em;
   vertical-align: -0.25em;
   margin-right: 0.125em;
-  background-color: var(--ui-text-highlighted);
+  background-color: var(--ui-text-strong);
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-size: 100% 100%;

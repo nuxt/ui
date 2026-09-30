@@ -209,17 +209,15 @@ export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, ramp: To
   { token: '--ui-bg-default', label: 'Surface', ramp: 'neutral', group: 'background', defaults: { light: 'white', dark: 900 } },
   { token: '--ui-bg-muted', label: 'Muted', ramp: 'neutral', group: 'background', defaults: { light: 50, dark: 800 } },
   { token: '--ui-bg-soft', label: 'Soft', ramp: 'neutral', group: 'background', defaults: { light: 100, dark: 800 } },
-  { token: '--ui-bg-soft-hover', label: 'Soft hover', ramp: 'neutral', group: 'background', defaults: { light: 200, dark: 700 } },
-  { token: '--ui-bg-inverted', label: 'Inverted', ramp: 'neutral', group: 'background', defaults: { light: 900, dark: 'white' } },
+  { token: '--ui-bg-strong', label: 'Strong', ramp: 'neutral', group: 'background', defaults: { light: 200, dark: 700 } },
   { token: '--ui-text-faint', label: 'Faint', ramp: 'neutral', group: 'text', defaults: { light: 400, dark: 500 } },
   { token: '--ui-text-muted', label: 'Muted', ramp: 'neutral', group: 'text', defaults: { light: 500, dark: 400 } },
   { token: '--ui-text-default', label: 'Default', ramp: 'neutral', group: 'text', defaults: { light: 700, dark: 200 } },
-  { token: '--ui-text-highlighted', label: 'Highlighted', ramp: 'neutral', group: 'text', defaults: { light: 900, dark: 'white' } },
-  { token: '--ui-text-inverted', label: 'Inverted', ramp: 'neutral', group: 'text', defaults: { light: 'white', dark: 900 } },
+  { token: '--ui-text-strong', label: 'Strong', ramp: 'neutral', group: 'text', defaults: { light: 900, dark: 'white' } },
+  { token: '--ui-text-contrast', label: 'Contrast', ramp: 'neutral', group: 'text', defaults: { light: 'white', dark: 900 } },
   { token: '--ui-border-default', label: 'Default', ramp: 'neutral', group: 'border', defaults: { light: 200, dark: 800 } },
   { token: '--ui-border-muted', label: 'Muted', ramp: 'neutral', group: 'border', defaults: { light: 200, dark: 700 } },
-  { token: '--ui-border-strong', label: 'Strong', ramp: 'neutral', group: 'border', defaults: { light: 300, dark: 700 } },
-  { token: '--ui-border-inverted', label: 'Inverted', ramp: 'neutral', group: 'border', defaults: { light: 900, dark: 'white' } }
+  { token: '--ui-border-strong', label: 'Strong', ramp: 'neutral', group: 'border', defaults: { light: 300, dark: 700 } }
 ]
 /**
  * A ramp shade reference, or the literal for white/black. Only the 11 standard
@@ -392,20 +390,19 @@ export const LIBRARY_TOKEN_DEFAULTS = {
     '--ui-info': 'var(--ui-color-info-500)',
     '--ui-warning': 'var(--ui-color-warning-500)',
     '--ui-error': 'var(--ui-color-error-500)',
+    '--ui-neutral': 'var(--ui-color-neutral-900)',
     '--ui-text-faint': 'var(--ui-color-neutral-400)',
     '--ui-text-muted': 'var(--ui-color-neutral-500)',
     '--ui-text-default': 'var(--ui-color-neutral-700)',
-    '--ui-text-highlighted': 'var(--ui-color-neutral-900)',
-    '--ui-text-inverted': 'white',
+    '--ui-text-strong': 'var(--ui-color-neutral-900)',
+    '--ui-text-contrast': 'white',
     '--ui-bg-default': 'white',
     '--ui-bg-muted': 'var(--ui-color-neutral-50)',
     '--ui-bg-soft': 'var(--ui-color-neutral-100)',
-    '--ui-bg-soft-hover': 'var(--ui-color-neutral-200)',
-    '--ui-bg-inverted': 'var(--ui-color-neutral-900)',
+    '--ui-bg-strong': 'var(--ui-color-neutral-200)',
     '--ui-border-default': 'var(--ui-color-neutral-200)',
     '--ui-border-muted': 'var(--ui-color-neutral-200)',
-    '--ui-border-strong': 'var(--ui-color-neutral-300)',
-    '--ui-border-inverted': 'var(--ui-color-neutral-900)'
+    '--ui-border-strong': 'var(--ui-color-neutral-300)'
   },
   dark: {
     '--ui-primary': 'var(--ui-color-primary-400)',
@@ -414,20 +411,19 @@ export const LIBRARY_TOKEN_DEFAULTS = {
     '--ui-info': 'var(--ui-color-info-400)',
     '--ui-warning': 'var(--ui-color-warning-400)',
     '--ui-error': 'var(--ui-color-error-400)',
+    '--ui-neutral': 'var(--ui-color-neutral-50)',
     '--ui-text-faint': 'var(--ui-color-neutral-500)',
     '--ui-text-muted': 'var(--ui-color-neutral-400)',
     '--ui-text-default': 'var(--ui-color-neutral-200)',
-    '--ui-text-highlighted': 'white',
-    '--ui-text-inverted': 'var(--ui-color-neutral-900)',
+    '--ui-text-strong': 'white',
+    '--ui-text-contrast': 'var(--ui-color-neutral-900)',
     '--ui-bg-default': 'var(--ui-color-neutral-900)',
     '--ui-bg-muted': 'var(--ui-color-neutral-800)',
     '--ui-bg-soft': 'var(--ui-color-neutral-800)',
-    '--ui-bg-soft-hover': 'var(--ui-color-neutral-700)',
-    '--ui-bg-inverted': 'white',
+    '--ui-bg-strong': 'var(--ui-color-neutral-700)',
     '--ui-border-default': 'var(--ui-color-neutral-800)',
     '--ui-border-muted': 'var(--ui-color-neutral-700)',
-    '--ui-border-strong': 'var(--ui-color-neutral-700)',
-    '--ui-border-inverted': 'white'
+    '--ui-border-strong': 'var(--ui-color-neutral-700)'
   }
 } as const
 

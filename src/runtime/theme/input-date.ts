@@ -51,17 +51,17 @@ export default extendTheme(input, {
   }, {
     variant: 'soft',
     class: {
-      segment: 'focus:bg-soft-hover/50 group-hover:focus:bg-soft-hover'
+      segment: 'focus:bg-strong/50 group-hover:focus:bg-strong'
     }
   }, {
     variant: 'subtle',
     class: {
-      segment: 'focus:bg-soft-hover'
+      segment: 'focus:bg-strong'
     }
   }, {
     variant: 'ghost',
     class: {
-      segment: 'focus:bg-soft group-hover:focus:bg-soft-hover'
+      segment: 'focus:bg-soft group-hover:focus:bg-strong'
     }
   }, {
     variant: 'none',

@@ -115,7 +115,7 @@ const items = computed<DropdownMenuItem[][]>(() => [[{
   avatar: chip(preset.value?.id, preset.value?.doc ?? currentDoc()),
   // edits on top of a preset keep its name (it stays the baseline), the name
   // goes primary like a changed value does
-  ui: { itemLabel: `font-semibold ${preset.value && modified.value ? 'text-primary' : 'text-highlighted'}` },
+  ui: { itemLabel: `font-semibold ${preset.value && modified.value ? 'text-primary' : 'text-strong'}` },
   children: presets.map(entry => ({
     label: entry.name,
     type: 'checkbox' as const,

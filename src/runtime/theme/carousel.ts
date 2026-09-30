@@ -11,7 +11,7 @@ export default defineTheme({
     prev: 'absolute rounded-full',
     next: 'absolute rounded-full',
     dots: 'absolute inset-x-0 -bottom-7 flex flex-wrap items-center justify-center gap-3',
-    dot: 'cursor-pointer size-3 bg-soft-hover rounded-full outline-inverted/25 focus-visible:outline-3 transition'
+    dot: 'cursor-pointer size-3 bg-strong rounded-full outline-focus focus-visible:outline-3 transition'
   },
   variants: {
     orientation: {
@@ -30,7 +30,7 @@ export default defineTheme({
     },
     active: {
       true: {
-        dot: 'data-[state=active]:bg-inverted'
+        dot: 'data-[state=active]:bg-neutral'
       }
     }
   }

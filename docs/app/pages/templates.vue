@@ -69,7 +69,7 @@ if (import.meta.server) {
               />
 
               <div class="flex flex-col gap-3 min-w-0">
-                <h2 class="text-2xl font-semibold tracking-tight text-highlighted">
+                <h2 class="text-2xl font-semibold tracking-tight text-strong">
                   {{ template.title }}
                 </h2>
 

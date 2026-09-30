@@ -402,7 +402,7 @@ onUnmounted(() => {
         :cy="toHandleY(startY)"
         r="4.5"
         :fill="stopColors?.[0] || 'currentColor'"
-        class="stroke-(--ui-text-highlighted)"
+        class="stroke-(--ui-text-strong)"
         stroke-width="1.5"
       />
       <circle
@@ -410,7 +410,7 @@ onUnmounted(() => {
         :cy="toHandleY(endY)"
         r="4.5"
         :fill="stopColors?.[stopColors.length - 1] || 'currentColor'"
-        class="stroke-(--ui-text-highlighted)"
+        class="stroke-(--ui-text-strong)"
         stroke-width="1.5"
       />
 

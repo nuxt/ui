@@ -131,7 +131,7 @@ const ui = {
       <template #header="{ collapsed }">
         <div v-if="!collapsed" class="flex items-center gap-1.5 px-2.5 py-1">
           <UIcon :name="studioIcons.messageCircle" class="size-6 text-primary shrink-0" />
-          <span class="text-xl font-bold text-highlighted">Chat</span>
+          <span class="text-xl font-bold text-strong">Chat</span>
         </div>
 
         <UDashboardSidebarCollapse class="ms-auto" />
@@ -147,7 +147,7 @@ const ui = {
                 :value="kbd"
                 size="sm"
                 variant="soft"
-                class="bg-soft-hover/50"
+                class="bg-strong/50"
               />
             </div>
           </template>
@@ -170,7 +170,7 @@ const ui = {
                 color="neutral"
                 variant="link"
                 size="sm"
-                class="rounded-[5px] hover:bg-soft-hover/50 focus-visible:bg-soft-hover/50 data-[state=open]:bg-soft-hover/50"
+                class="rounded-[5px] hover:bg-strong/50 focus-visible:bg-strong/50 data-[state=open]:bg-strong/50"
                 aria-label="Chat actions"
                 tabindex="-1"
                 @click.stop.prevent

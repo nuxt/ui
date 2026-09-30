@@ -15,22 +15,22 @@ export default defineTheme({
     color: colorVariant({ base: '' }),
     variant: {
       solid: {
-        base: 'text-accent-foreground bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3'
+        base: 'text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent outline-accent-focus focus-visible:outline-3'
       },
       outline: {
-        base: 'ring ring-inset ring-accent-border-strong text-accent-soft-foreground bg-accent-surface hover:bg-accent-soft active:bg-accent-soft disabled:bg-accent-surface aria-disabled:bg-accent-surface dark:disabled:bg-accent-surface dark:aria-disabled:bg-accent-surface outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent'
+        base: 'ring ring-inset ring-accent-strong text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent'
       },
       soft: {
-        base: 'text-accent-soft-foreground bg-accent-soft hover:bg-accent-soft-hover active:bg-accent-soft-hover outline-accent-focus focus-visible:outline-3 disabled:bg-accent-soft aria-disabled:bg-accent-soft'
+        base: 'text-accent-default bg-accent-soft hover:bg-accent-strong active:bg-accent-strong outline-accent-focus focus-visible:outline-3 disabled:bg-accent-soft aria-disabled:bg-accent-soft'
       },
       subtle: {
-        base: 'text-accent-soft-foreground ring ring-inset ring-accent-border bg-accent-soft hover:bg-accent-soft-hover active:bg-accent-soft-hover disabled:bg-accent-soft aria-disabled:bg-accent-soft outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent'
+        base: 'text-accent-default ring ring-inset ring-accent-muted bg-accent-soft hover:bg-accent-strong active:bg-accent-strong disabled:bg-accent-soft aria-disabled:bg-accent-soft outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent'
       },
       ghost: {
-        base: 'text-accent-soft-foreground hover:bg-accent-soft active:bg-accent-soft outline-accent-focus focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent'
+        base: 'text-accent-default hover:bg-accent-soft active:bg-accent-soft outline-accent-focus focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent'
       },
       link: {
-        base: 'text-accent-muted hover:text-accent-muted-hover active:text-accent-muted-hover disabled:text-accent-muted aria-disabled:text-accent-muted outline-accent-focus focus-visible:outline-3'
+        base: 'text-accent-muted hover:text-accent-default active:text-accent-default disabled:text-accent-muted aria-disabled:text-accent-muted outline-accent-focus focus-visible:outline-3'
       }
     },
     size: {

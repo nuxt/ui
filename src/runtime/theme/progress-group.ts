@@ -4,7 +4,7 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'gap-2',
-    base: 'flex overflow-hidden rounded-full bg-soft-hover',
+    base: 'flex overflow-hidden rounded-full bg-strong',
     segment: 'duration-200 ease-out motion-reduce:transition-none',
     indicator: 'size-full',
     status: 'flex text-faint duration-200 ease-out motion-reduce:transition-none',

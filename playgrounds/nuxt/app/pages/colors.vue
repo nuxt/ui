@@ -189,7 +189,7 @@ const codeColors = buttonColors
 
     <!-- Button -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Button
       </h2>
       <div class="overflow-x-auto">
@@ -227,7 +227,7 @@ const codeColors = buttonColors
 
     <!-- Badge -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Badge
       </h2>
       <div class="overflow-x-auto">
@@ -250,7 +250,7 @@ const codeColors = buttonColors
 
     <!-- Kbd -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Kbd
       </h2>
       <div class="overflow-x-auto">
@@ -273,7 +273,7 @@ const codeColors = buttonColors
 
     <!-- Alert -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Alert
       </h2>
       <div class="overflow-x-auto">
@@ -301,7 +301,7 @@ const codeColors = buttonColors
 
     <!-- Avatar -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Avatar
       </h2>
       <div class="overflow-x-auto">
@@ -330,7 +330,7 @@ const codeColors = buttonColors
 
     <!-- Chip (on an avatar) -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Chip
       </h2>
       <div class="overflow-x-auto">
@@ -353,7 +353,7 @@ const codeColors = buttonColors
 
     <!-- Banner -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Banner
       </h2>
       <div class="flex flex-col gap-2 w-full">
@@ -369,7 +369,7 @@ const codeColors = buttonColors
 
     <!-- Separator (with and without label) -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Separator
       </h2>
       <div class="overflow-x-auto">
@@ -398,7 +398,7 @@ const codeColors = buttonColors
 
     <!-- Toast (overlay-based, one button per color) -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Toast
       </h2>
       <div class="flex flex-wrap gap-2">
@@ -415,7 +415,7 @@ const codeColors = buttonColors
 
     <!-- Checkbox -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Checkbox
       </h2>
       <div class="overflow-x-auto">
@@ -438,7 +438,7 @@ const codeColors = buttonColors
 
     <!-- RadioGroup -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         RadioGroup
       </h2>
       <div class="overflow-x-auto">
@@ -466,7 +466,7 @@ const codeColors = buttonColors
 
     <!-- CheckboxGroup -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         CheckboxGroup
       </h2>
       <div class="overflow-x-auto">
@@ -494,7 +494,7 @@ const codeColors = buttonColors
 
     <!-- Switch (on) -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Switch
       </h2>
       <div class="overflow-x-auto">
@@ -515,7 +515,7 @@ const codeColors = buttonColors
 
     <!-- Slider -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Slider
       </h2>
       <div class="overflow-x-auto">
@@ -536,7 +536,7 @@ const codeColors = buttonColors
 
     <!-- Progress -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Progress
       </h2>
       <div class="overflow-x-auto">
@@ -557,7 +557,7 @@ const codeColors = buttonColors
 
     <!-- Stepper -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Stepper
       </h2>
       <div class="overflow-x-auto">
@@ -578,7 +578,7 @@ const codeColors = buttonColors
 
     <!-- Timeline -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Timeline
       </h2>
       <div class="overflow-x-auto">
@@ -599,7 +599,7 @@ const codeColors = buttonColors
 
     <!-- Tabs -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Tabs
       </h2>
       <div class="overflow-x-auto">
@@ -622,7 +622,7 @@ const codeColors = buttonColors
 
     <!-- Calendar -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Calendar
       </h2>
       <div class="overflow-x-auto">
@@ -645,7 +645,7 @@ const codeColors = buttonColors
 
     <!-- Breadcrumb -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Breadcrumb
       </h2>
       <div class="overflow-x-auto">
@@ -666,7 +666,7 @@ const codeColors = buttonColors
 
     <!-- NavigationMenu (with highlight + highlightColor) -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         NavigationMenu
       </h2>
       <div class="overflow-x-auto">
@@ -693,7 +693,7 @@ const codeColors = buttonColors
 
     <!-- Tree (with a selected item) -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Tree
       </h2>
       <div class="overflow-x-auto">
@@ -714,7 +714,7 @@ const codeColors = buttonColors
 
     <!-- PageCard (highlight + highlightColor, spotlight + spotlightColor) -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         PageCard
       </h2>
       <div class="overflow-x-auto">
@@ -743,7 +743,7 @@ const codeColors = buttonColors
 
     <!-- ChatMessage -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         ChatMessage
       </h2>
       <div class="overflow-x-auto">
@@ -773,7 +773,7 @@ const codeColors = buttonColors
 
     <!-- Form controls with `highlight` -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Input
       </h2>
       <div class="overflow-x-auto">
@@ -793,7 +793,7 @@ const codeColors = buttonColors
     </section>
 
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Textarea
       </h2>
       <div class="overflow-x-auto">
@@ -813,7 +813,7 @@ const codeColors = buttonColors
     </section>
 
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Select
       </h2>
       <div class="overflow-x-auto">
@@ -833,7 +833,7 @@ const codeColors = buttonColors
     </section>
 
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         InputNumber
       </h2>
       <div class="overflow-x-auto">
@@ -853,7 +853,7 @@ const codeColors = buttonColors
     </section>
 
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         PinInput
       </h2>
       <div class="overflow-x-auto">
@@ -873,7 +873,7 @@ const codeColors = buttonColors
     </section>
 
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         FileUpload
       </h2>
       <div class="overflow-x-auto">
@@ -894,7 +894,7 @@ const codeColors = buttonColors
 
     <!-- DropdownMenu: items carry a color each -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         DropdownMenu
       </h2>
       <UDropdownMenu :items="dropdownMenuItems">
@@ -904,7 +904,7 @@ const codeColors = buttonColors
 
     <!-- ContextMenu: items carry a color each -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         ContextMenu
       </h2>
       <UContextMenu :items="contextMenuItems">
@@ -916,7 +916,7 @@ const codeColors = buttonColors
 
     <!-- Prose (ProseCallout, ProseCode) -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Prose Callout
       </h2>
       <div class="flex flex-col gap-2 max-w-lg">
@@ -927,7 +927,7 @@ const codeColors = buttonColors
     </section>
 
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Prose Code
       </h2>
       <div class="flex flex-wrap gap-2">

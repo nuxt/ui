@@ -12,7 +12,7 @@ export default defineTheme({
     footer: 'pt-4 mt-auto',
     leading: 'inline-flex items-center mb-2.5',
     leadingIcon: 'size-5 shrink-0 text-primary',
-    title: 'text-base text-pretty font-semibold text-highlighted',
+    title: 'text-base text-pretty font-semibold text-strong',
     description: 'text-[15px] text-pretty'
   },
   variants: {
@@ -31,8 +31,8 @@ export default defineTheme({
     },
     variant: {
       solid: {
-        root: 'bg-inverted text-inverted',
-        title: 'text-inverted',
+        root: 'bg-neutral text-contrast',
+        title: 'text-contrast',
         description: 'text-faint'
       },
       outline: {
@@ -82,7 +82,7 @@ export default defineTheme({
     variant: 'solid',
     to: true,
     class: {
-      root: 'hover:bg-inverted/90'
+      root: 'hover:bg-neutral/90'
     }
   }, {
     variant: 'outline',

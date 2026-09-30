@@ -14,9 +14,9 @@ export default extendTheme(input, {
     viewport: 'relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1',
     group: 'p-1 isolate',
     empty: 'text-center text-muted',
-    label: 'font-semibold text-highlighted',
+    label: 'font-semibold text-strong',
     separator: '-mx-1 my-1 h-px bg-border',
-    item: 'group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-tint transition-colors before:transition-colors',
+    item: 'group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-strong data-highlighted:not-data-disabled:before:bg-tint transition-colors before:transition-colors',
     itemLeadingIcon: 'shrink-0 text-faint group-data-highlighted:not-group-data-disabled:text-default transition-colors',
     itemLeadingAvatar: 'shrink-0',
     itemLeadingChip: 'shrink-0',
@@ -36,7 +36,7 @@ export default extendTheme(input, {
         base: [prev.outline!.base, 'hover:bg-soft disabled:bg-default'].join(' ')
       },
       subtle: {
-        base: [prev.subtle!.base, 'hover:bg-soft-hover/75 disabled:bg-soft'].join(' ')
+        base: [prev.subtle!.base, 'hover:bg-strong/75 disabled:bg-soft'].join(' ')
       }
     }),
     size: {

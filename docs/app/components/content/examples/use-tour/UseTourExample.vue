@@ -33,7 +33,7 @@ const tour = useTour([
 
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
       <div ref="dashboard" class="p-4 rounded-lg border border-default bg-tint">
-        <p class="font-medium text-highlighted">
+        <p class="font-medium text-strong">
           Dashboard
         </p>
         <p class="text-sm text-muted">
@@ -41,7 +41,7 @@ const tour = useTour([
         </p>
       </div>
       <div ref="profile" class="p-4 rounded-lg border border-default bg-tint">
-        <p class="font-medium text-highlighted">
+        <p class="font-medium text-strong">
           Profile
         </p>
         <p class="text-sm text-muted">
@@ -49,7 +49,7 @@ const tour = useTour([
         </p>
       </div>
       <div ref="settings" class="p-4 rounded-lg border border-default bg-tint">
-        <p class="font-medium text-highlighted">
+        <p class="font-medium text-strong">
           Settings
         </p>
         <p class="text-sm text-muted">
@@ -68,7 +68,7 @@ const tour = useTour([
       <template #content>
         <div class="p-4 max-w-xs space-y-2">
           <div class="flex items-center justify-between gap-4">
-            <p class="font-semibold text-highlighted">
+            <p class="font-semibold text-strong">
               {{ tour.current.value?.title }}
             </p>
             <span class="text-xs text-muted tabular-nums">

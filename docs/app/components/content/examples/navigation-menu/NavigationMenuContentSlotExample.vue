@@ -78,7 +78,7 @@ const items = [
 
         <li v-for="child in item.children" :key="child.label">
           <ULink class="text-sm text-left rounded-md p-3 transition-colors hover:bg-tint">
-            <p class="font-medium text-highlighted">
+            <p class="font-medium text-strong">
               {{ child.label }}
             </p>
             <p class="text-muted line-clamp-2">

@@ -4,7 +4,7 @@ export default defineTheme({
   slots: {
     root: 'rounded-lg overflow-hidden',
     header: 'p-4 sm:px-6',
-    title: 'text-highlighted font-semibold',
+    title: 'text-strong font-semibold',
     description: 'mt-1 text-muted text-sm',
     body: 'p-4 sm:p-6',
     footer: 'p-4 sm:px-6'
@@ -12,8 +12,8 @@ export default defineTheme({
   variants: {
     variant: {
       solid: {
-        root: 'bg-inverted text-inverted',
-        title: 'text-inverted',
+        root: 'bg-neutral text-contrast',
+        title: 'text-contrast',
         description: 'text-faint'
       },
       outline: {

@@ -26,17 +26,17 @@ type TerminalSegment = {
 const terminalLines: TerminalSegment[][] = [
   [
     { text: '$ ', class: 'text-muted' },
-    { text: 'npx telemetry', class: 'text-highlighted' },
+    { text: 'npx telemetry', class: 'text-strong' },
     { text: ' init', class: 'text-primary' }
   ],
   [{ text: '→ Scanning service topology...', class: 'text-muted' }],
   [
     { text: '→ Found ', class: 'text-muted' },
-    { text: '23 services', class: 'text-highlighted' },
+    { text: '23 services', class: 'text-strong' },
     { text: ', ', class: 'text-muted' },
-    { text: '847 endpoints', class: 'text-highlighted' },
+    { text: '847 endpoints', class: 'text-strong' },
     { text: ', ', class: 'text-muted' },
-    { text: '12 databases', class: 'text-highlighted' }
+    { text: '12 databases', class: 'text-strong' }
   ],
   [
     { text: '→ Deploying collector agents ', class: 'text-muted' },
@@ -130,7 +130,7 @@ const vReveal = {
       <template #left>
         <div class="flex items-center gap-1.5">
           <UIcon :name="studioIcons.activity" class="size-6 text-primary shrink-0" />
-          <span class="text-xl font-bold text-highlighted">Landing</span>
+          <span class="text-xl font-bold text-strong">Landing</span>
         </div>
       </template>
 
@@ -164,7 +164,7 @@ const vReveal = {
             label="v2.0, Now with predictive alerting"
             color="neutral"
             variant="soft"
-            class="rounded-full px-3 py-1.5 gap-1.5 bg-inverted/5 backdrop-blur-sm"
+            class="rounded-full px-3 py-1.5 gap-1.5 bg-neutral/5 backdrop-blur-sm"
           >
             <template #leading>
               <UChip inset standalone :ui="{ base: 'animate-pulse ring-0' }" />
@@ -195,7 +195,7 @@ const vReveal = {
       </template>
 
       <div class="landing-enter max-w-2xl mx-auto w-full" style="animation-delay: 850ms">
-        <div class="rounded-xl border border-default bg-tint backdrop-blur-sm ring-1 ring-inverted/2 overflow-hidden">
+        <div class="rounded-xl border border-default bg-tint backdrop-blur-sm ring-1 ring-neutral/2 overflow-hidden">
           <div class="flex items-center gap-1.5 border-b border-default p-4 sm:px-6">
             <span class="size-2.5 rounded-full border border-default bg-muted" />
             <span class="size-2.5 rounded-full border border-default bg-muted" />

@@ -11,7 +11,7 @@ const days = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
         <p class="text-sm text-muted">
           Visitors
         </p>
-        <p class="text-2xl font-semibold text-highlighted">
+        <p class="text-2xl font-semibold text-strong">
           418.2K
         </p>
       </div>

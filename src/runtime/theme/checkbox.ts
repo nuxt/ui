@@ -12,7 +12,7 @@ export default defineTheme({
     root: 'relative flex items-start',
     container: 'flex items-center',
     base: 'rounded-sm ring ring-inset ring-strong overflow-hidden focus-visible:outline-none',
-    indicator: 'flex items-center justify-center size-full text-accent-foreground bg-accent',
+    indicator: 'flex items-center justify-center size-full text-accent-contrast bg-accent',
     icon: 'shrink-0',
     wrapper: 'w-full',
     label: 'block font-medium text-default',

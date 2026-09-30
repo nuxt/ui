@@ -149,9 +149,11 @@ export const MERGED_TOKENS: Record<string, string> = {
 export const RENAMED_TOKENS: Record<string, string> = {
   '--ui-bg': '--ui-bg-default',
   '--ui-bg-elevated': '--ui-bg-soft',
-  '--ui-bg-accented': '--ui-bg-soft-hover',
+  '--ui-bg-accented': '--ui-bg-strong',
   '--ui-text': '--ui-text-default',
   '--ui-text-dimmed': '--ui-text-faint',
+  '--ui-text-highlighted': '--ui-text-strong',
+  '--ui-text-inverted': '--ui-text-contrast',
   '--ui-border': '--ui-border-default',
   '--ui-border-accented': '--ui-border-strong'
 }

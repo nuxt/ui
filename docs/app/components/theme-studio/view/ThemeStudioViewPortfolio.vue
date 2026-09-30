@@ -259,7 +259,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
                 <USeparator />
                 <span class="flex items-center gap-1">
                   <span class="text-sm">{{ item.position }}</span>
-                  <span class="inline-flex items-center gap-1 text-highlighted">
+                  <span class="inline-flex items-center gap-1 text-strong">
                     <span class="font-medium text-sm">{{ item.company.name }}</span>
                     <UIcon :name="item.company.logo" />
                   </span>
@@ -350,7 +350,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
             root: 'flex items-center gap-4 w-full',
             list: 'relative flex bg-transparent dark:bg-transparent gap-2 px-0',
             indicator: 'absolute top-[4px] duration-200 ease-out focus:outline-none rounded-lg bg-soft/60',
-            trigger: 'px-3 py-2 rounded-lg hover:bg-muted/50 data-[state=active]:text-highlighted data-[state=inactive]:text-muted',
+            trigger: 'px-3 py-2 rounded-lg hover:bg-muted/50 data-[state=active]:text-strong data-[state=inactive]:text-muted',
             label: 'truncate'
           }"
         >

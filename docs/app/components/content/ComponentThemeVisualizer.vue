@@ -182,7 +182,7 @@ watch(open, (isOpen) => {
       </UTooltip>
 
       <template #content>
-        <div ref="popoverContentRef" class="px-2.5 py-1.5 text-xs font-semibold text-highlighted border-b border-default">
+        <div ref="popoverContentRef" class="px-2.5 py-1.5 text-xs font-semibold text-strong border-b border-default">
           Theme slots
         </div>
         <div class="p-1">
@@ -195,7 +195,7 @@ watch(open, (isOpen) => {
             @mouseleave="clearHighlight"
           >
             <div class="flex items-center gap-2">
-              <code class="text-xs font-medium" :class="[getSlotRenderLocation(slotName) !== 'none' ? 'text-highlighted' : 'text-muted']">{{ slotName }}</code>
+              <code class="text-xs font-medium" :class="[getSlotRenderLocation(slotName) !== 'none' ? 'text-strong' : 'text-muted']">{{ slotName }}</code>
               <span v-if="getSlotRenderLocation(slotName) === 'portal'" class="text-[10px] text-muted">(in portal)</span>
               <span v-else-if="getSlotRenderLocation(slotName) === 'none'" class="text-[10px] text-muted">(not rendered)</span>
             </div>
@@ -219,7 +219,7 @@ watch(open, (isOpen) => {
       >
         <div
           v-if="highlightedSlot"
-          class="absolute -top-6 -left-0.5 px-1.5 py-0.5 text-xs font-medium font-mono bg-primary text-highlighted rounded-sm whitespace-nowrap"
+          class="absolute -top-6 -left-0.5 px-1.5 py-0.5 text-xs font-medium font-mono bg-primary text-strong rounded-sm whitespace-nowrap"
         >
           {{ highlightedSlot }}
         </div>

@@ -84,7 +84,7 @@ watch(matches, () => {
       class="flex items-end justify-between gap-4 p-6 bg-tint"
     >
       <div>
-        <h2 class="text-2xl font-bold text-highlighted">
+        <h2 class="text-2xl font-bold text-strong">
           Members
         </h2>
         <p class="text-muted">
@@ -159,7 +159,7 @@ watch(matches, () => {
         class="w-72 shrink-0 flex flex-col justify-center gap-4 p-6 bg-tint border-r border-default"
       >
         <div>
-          <h2 class="text-2xl font-bold text-highlighted">
+          <h2 class="text-2xl font-bold text-strong">
             Members
           </h2>
           <p class="text-muted">
@@ -197,7 +197,7 @@ watch(matches, () => {
               loading="lazy"
             />
             <div class="min-w-0">
-              <p class="font-medium text-highlighted truncate">
+              <p class="font-medium text-strong truncate">
                 {{ item.firstName }} {{ item.lastName }}
               </p>
               <p class="text-sm text-muted truncate">

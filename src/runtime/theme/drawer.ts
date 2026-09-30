@@ -4,11 +4,11 @@ export default defineTheme({
   slots: {
     overlay: 'fixed inset-0 bg-soft/75',
     content: 'fixed bg-default ring ring-default flex focus:outline-none',
-    handle: 'shrink-0 !bg-soft-hover transition-opacity ease-out',
+    handle: 'shrink-0 !bg-strong transition-opacity ease-out',
     container: 'w-full flex flex-col gap-4 p-4 overflow-y-auto',
     header: 'flex items-center gap-1.5 min-h-8',
     wrapper: 'min-w-0 flex-1',
-    title: 'text-highlighted font-semibold',
+    title: 'text-strong font-semibold',
     description: 'mt-1 text-muted text-sm',
     actions: 'flex items-center gap-1.5 shrink-0 ms-auto',
     body: 'flex-1',
