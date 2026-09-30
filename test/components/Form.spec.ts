@@ -604,6 +604,18 @@ describe('Form', () => {
 
   describe('apply transform', async () => {
     it.each([
+      ['without a schema', {}],
+      ['with a validate function', { validate: () => [] }]
+    ])('merges an unnamed nested form into a parent %s', async (_, props) => {
+      const onSubmit = vi.fn()
+      const wrapper: any = await renderForm({ fixture: 'FormNestedTransform', props: { ...props, onSubmit } })
+
+      await wrapper.setupState.form.value.submit()
+
+      expect(onSubmit.mock.lastCall![0].data.field).toBe('ABC')
+    })
+
+    it.each([
       [
         'zod',
         z.object({

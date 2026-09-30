@@ -76,7 +76,7 @@ export interface FormSlots {
 </script>
 
 <script lang="ts" setup generic="S extends FormSchema, T extends boolean = true, N extends boolean = false">
-import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly, reactive, useTemplateRef, unref } from 'vue'
+import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly, reactive, useTemplateRef, unref, toRaw } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey, formErrorsInjectionKey, formStateInjectionKey } from '../composables/useFormField'
@@ -257,14 +257,16 @@ async function _validate<T extends boolean>(opts: ValidateOpts<boolean, boolean>
 
   // Apply transformations
   if (opts.transform) {
+    let output = transformedState.value
     nestedResults.forEach((result) => {
       if (result.name) {
         setAtPath(transformedState.value, result.name, result.output)
       } else {
-        Object.assign(transformedState.value, result.output)
+        // A parent without a schema has no output yet, merge into a copy of the state
+        output = Object.assign(output ?? { ...toRaw(state.value) }, result.output)
       }
     })
-    return transformedState.value ?? state.value
+    return output ?? state.value
   }
 
   return state.value as FormData<S, T>
