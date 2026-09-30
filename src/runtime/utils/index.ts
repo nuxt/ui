@@ -24,16 +24,11 @@ export function omit<Data extends object, Keys extends keyof Data>(data: Data, k
 }
 
 export function get(object: Record<string, any> | undefined, path: (string | number)[] | string, defaultValue?: any): any {
-  if (typeof path === 'string') {
-    path = path.split('.').map((key) => {
-      const numKey = Number(key)
-      return Number.isNaN(numKey) ? key : numKey
-    })
-  }
+  const keys = typeof path === 'string' ? path.split('.') : path
 
   let result: any = object
 
-  for (const key of path) {
+  for (const key of keys) {
     if (result === undefined || result === null) {
       return defaultValue
     }
