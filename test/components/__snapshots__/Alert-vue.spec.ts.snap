@@ -144,7 +144,7 @@ exports[`Alert > renders with leading slot correctly 1`] = `
 `;
 
 exports[`Alert > renders with neutral variant outline correctly 1`] = `
-"<div data-orientation="vertical" data-slot="alert" class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 [--ui-accent:var(--ui-neutral)] text-accent ring ring-inset ring-accent-muted items-start">
+"<div data-orientation="vertical" data-slot="alert" class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 [--ui-accent:var(--ui-neutral)] text-accent ring ring-inset ring-accent-default items-start">
   <!--v-if-->
   <div data-slot="alert-wrapper" class="min-w-0 flex-1 flex flex-col">
     <div data-slot="alert-title" class="text-sm font-medium">Alert</div>
@@ -180,7 +180,7 @@ exports[`Alert > renders with neutral variant solid correctly 1`] = `
 `;
 
 exports[`Alert > renders with neutral variant subtle correctly 1`] = `
-"<div data-orientation="vertical" data-slot="alert" class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 [--ui-accent:var(--ui-neutral)] bg-accent-tint text-accent ring ring-inset ring-accent-muted items-start">
+"<div data-orientation="vertical" data-slot="alert" class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 [--ui-accent:var(--ui-neutral)] bg-accent-tint text-accent ring ring-inset ring-accent-default items-start">
   <!--v-if-->
   <div data-slot="alert-wrapper" class="min-w-0 flex-1 flex flex-col">
     <div data-slot="alert-title" class="text-sm font-medium">Alert</div>
@@ -222,7 +222,7 @@ exports[`Alert > renders with orientation vertical correctly 1`] = `
 `;
 
 exports[`Alert > renders with primary variant outline correctly 1`] = `
-"<div data-orientation="vertical" data-slot="alert" class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 [--ui-accent:var(--ui-primary)] text-accent ring ring-inset ring-accent-muted items-start">
+"<div data-orientation="vertical" data-slot="alert" class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 [--ui-accent:var(--ui-primary)] text-accent ring ring-inset ring-accent-default items-start">
   <!--v-if-->
   <div data-slot="alert-wrapper" class="min-w-0 flex-1 flex flex-col">
     <div data-slot="alert-title" class="text-sm font-medium">Alert</div>
@@ -258,7 +258,7 @@ exports[`Alert > renders with primary variant solid correctly 1`] = `
 `;
 
 exports[`Alert > renders with primary variant subtle correctly 1`] = `
-"<div data-orientation="vertical" data-slot="alert" class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 [--ui-accent:var(--ui-primary)] bg-accent-tint text-accent ring ring-inset ring-accent-muted items-start">
+"<div data-orientation="vertical" data-slot="alert" class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 [--ui-accent:var(--ui-primary)] bg-accent-tint text-accent ring ring-inset ring-accent-default items-start">
   <!--v-if-->
   <div data-slot="alert-wrapper" class="min-w-0 flex-1 flex flex-col">
     <div data-slot="alert-title" class="text-sm font-medium">Alert</div>

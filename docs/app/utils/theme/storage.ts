@@ -147,7 +147,7 @@ function normalizeFont(raw: unknown): FontPrefs | undefined {
 export const MERGED_TOKENS: Record<string, string> = {
   '--ui-text-toned': '--ui-text-default'
 }
-export const DROPPED_TOKENS: string[] = ['--ui-bg-inverted', '--ui-border-inverted']
+export const DROPPED_TOKENS: string[] = ['--ui-bg-inverted', '--ui-border-inverted', '--ui-border-muted', '--ui-bg-muted']
 export const RENAMED_TOKENS: Record<string, string> = {
   '--ui-bg': '--ui-bg-default',
   '--ui-bg-elevated': '--ui-bg-soft',

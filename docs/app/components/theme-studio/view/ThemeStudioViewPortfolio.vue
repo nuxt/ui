@@ -141,7 +141,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
         :items="navItems"
         variant="link"
         color="neutral"
-        class="pointer-events-auto bg-muted/80 backdrop-blur-sm rounded-full px-2 sm:px-4 border border-muted/50 shadow-lg shadow-neutral-950/5"
+        class="pointer-events-auto bg-soft/80 backdrop-blur-sm rounded-full px-2 sm:px-4 border border-default/50 shadow-lg shadow-neutral-950/5"
         :ui="{
           link: 'px-2 py-1',
           linkLeadingIcon: 'hidden'
@@ -350,7 +350,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
             root: 'flex items-center gap-4 w-full',
             list: 'relative flex bg-transparent dark:bg-transparent gap-2 px-0',
             indicator: 'absolute top-[4px] duration-200 ease-out focus:outline-none rounded-lg bg-soft/60',
-            trigger: 'px-3 py-2 rounded-lg hover:bg-muted/50 data-[state=active]:text-strong data-[state=inactive]:text-muted',
+            trigger: 'px-3 py-2 rounded-lg hover:bg-soft/50 data-[state=active]:text-strong data-[state=inactive]:text-muted',
             label: 'truncate'
           }"
         >
@@ -361,7 +361,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
               :unmount-on-hide="false"
               :ui="{
                 item: 'border-none',
-                trigger: 'mb-2 border-0 group px-4 transform-gpu rounded-lg bg-soft/60 will-change-transform hover:bg-muted/50 text-base',
+                trigger: 'mb-2 border-0 group px-4 transform-gpu rounded-lg bg-soft/60 will-change-transform hover:bg-soft/50 text-base',
                 body: 'px-4',
                 trailingIcon: 'group-data-[state=closed]:rotate-0 group-data-[state=open]:rotate-135 text-base text-muted'
               }"

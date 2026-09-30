@@ -249,7 +249,7 @@ const previewOptions = {
 .vue-repl,
 .dark .vue-repl {
   --bg: var(--ui-bg-default);
-  --bg-soft: var(--ui-bg-muted);
+  --bg-soft: var(--ui-bg-soft);
   --border: var(--ui-border-default);
   --text-light: var(--ui-text-muted);
   --color-branding: var(--ui-primary);

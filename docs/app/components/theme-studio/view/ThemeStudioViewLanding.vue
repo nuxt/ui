@@ -197,9 +197,9 @@ const vReveal = {
       <div class="landing-enter max-w-2xl mx-auto w-full" style="animation-delay: 850ms">
         <div class="rounded-xl border border-default bg-tint backdrop-blur-sm ring-1 ring-neutral/2 overflow-hidden">
           <div class="flex items-center gap-1.5 border-b border-default p-4 sm:px-6">
-            <span class="size-2.5 rounded-full border border-default bg-muted" />
-            <span class="size-2.5 rounded-full border border-default bg-muted" />
-            <span class="size-2.5 rounded-full border border-default bg-muted" />
+            <span class="size-2.5 rounded-full border border-default bg-tint" />
+            <span class="size-2.5 rounded-full border border-default bg-tint" />
+            <span class="size-2.5 rounded-full border border-default bg-tint" />
           </div>
 
           <div class="min-h-[200px] p-5 sm:p-6 font-mono text-[13px] leading-[1.8] text-start">

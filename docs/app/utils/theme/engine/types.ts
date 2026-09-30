@@ -207,7 +207,6 @@ export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, ramp: To
   { token: '--ui-warning', label: 'Warning', ramp: 'warning', group: 'colors', defaults: { light: 500, dark: 400 } },
   { token: '--ui-error', label: 'Error', ramp: 'error', group: 'colors', defaults: { light: 500, dark: 400 } },
   { token: '--ui-bg-default', label: 'Default', ramp: 'neutral', group: 'background', defaults: { light: 'white', dark: 900 } },
-  { token: '--ui-bg-muted', label: 'Muted', ramp: 'neutral', group: 'background', defaults: { light: 50, dark: 800 } },
   { token: '--ui-bg-soft', label: 'Soft', ramp: 'neutral', group: 'background', defaults: { light: 100, dark: 800 } },
   { token: '--ui-bg-strong', label: 'Strong', ramp: 'neutral', group: 'background', defaults: { light: 200, dark: 700 } },
   { token: '--ui-text-faint', label: 'Faint', ramp: 'neutral', group: 'text', defaults: { light: 400, dark: 500 } },
@@ -216,7 +215,6 @@ export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, ramp: To
   { token: '--ui-text-strong', label: 'Strong', ramp: 'neutral', group: 'text', defaults: { light: 900, dark: 'white' } },
   { token: '--ui-text-contrast', label: 'Contrast', ramp: 'neutral', group: 'text', defaults: { light: 'white', dark: 900 } },
   { token: '--ui-border-default', label: 'Default', ramp: 'neutral', group: 'border', defaults: { light: 200, dark: 800 } },
-  { token: '--ui-border-muted', label: 'Muted', ramp: 'neutral', group: 'border', defaults: { light: 200, dark: 700 } },
   { token: '--ui-border-strong', label: 'Strong', ramp: 'neutral', group: 'border', defaults: { light: 300, dark: 700 } }
 ]
 /**
@@ -397,11 +395,9 @@ export const LIBRARY_TOKEN_DEFAULTS = {
     '--ui-text-strong': 'var(--ui-color-neutral-900)',
     '--ui-text-contrast': 'white',
     '--ui-bg-default': 'white',
-    '--ui-bg-muted': 'var(--ui-color-neutral-50)',
     '--ui-bg-soft': 'var(--ui-color-neutral-100)',
     '--ui-bg-strong': 'var(--ui-color-neutral-200)',
     '--ui-border-default': 'var(--ui-color-neutral-200)',
-    '--ui-border-muted': 'var(--ui-color-neutral-200)',
     '--ui-border-strong': 'var(--ui-color-neutral-300)'
   },
   dark: {
@@ -418,11 +414,9 @@ export const LIBRARY_TOKEN_DEFAULTS = {
     '--ui-text-strong': 'white',
     '--ui-text-contrast': 'var(--ui-color-neutral-900)',
     '--ui-bg-default': 'var(--ui-color-neutral-900)',
-    '--ui-bg-muted': 'var(--ui-color-neutral-800)',
     '--ui-bg-soft': 'var(--ui-color-neutral-800)',
     '--ui-bg-strong': 'var(--ui-color-neutral-700)',
-    '--ui-border-default': 'var(--ui-color-neutral-800)',
-    '--ui-border-muted': 'var(--ui-color-neutral-700)',
+    '--ui-border-default': 'color-mix(in oklab, var(--ui-color-neutral-800) 50%, var(--ui-color-neutral-700))',
     '--ui-border-strong': 'var(--ui-color-neutral-700)'
   }
 } as const

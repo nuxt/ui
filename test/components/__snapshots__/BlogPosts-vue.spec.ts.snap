@@ -6,7 +6,7 @@ exports[`BlogPosts > renders with as correctly 1`] = `
     <!--v-if-->
     <div data-slot="blog-post-header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img alt="Image alt" src="https://picsum.photos/640/360" data-slot="blog-post-image" class="object-cover object-top w-full h-full"></div>
     <div data-slot="blog-post-body" class="min-w-0 flex-1 flex flex-col p-4 sm:p-6">
-      <div data-slot="blog-post-meta" class="flex items-center gap-2 mb-2"><span data-slot="blog-post-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-neutral)] bg-accent-soft text-accent-default ring ring-inset ring-accent-muted text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="blog-post-meta" class="flex items-center gap-2 mb-2"><span data-slot="blog-post-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-neutral)] bg-accent-soft text-accent-default ring ring-inset ring-accent-default text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
         <!--v-if--></span><time datetime="2024-12-13T09:32:32.598Z" data-slot="blog-post-date" class="text-sm text-default">Dec 13, 2024</time>
       </div>
       <h2 data-slot="blog-post-title" class="text-xl text-pretty font-semibold text-strong">Title</h2>
@@ -32,7 +32,7 @@ exports[`BlogPosts > renders with class correctly 1`] = `
     <!--v-if-->
     <div data-slot="blog-post-header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img alt="Image alt" src="https://picsum.photos/640/360" data-slot="blog-post-image" class="object-cover object-top w-full h-full"></div>
     <div data-slot="blog-post-body" class="min-w-0 flex-1 flex flex-col p-4 sm:p-6">
-      <div data-slot="blog-post-meta" class="flex items-center gap-2 mb-2"><span data-slot="blog-post-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-neutral)] bg-accent-soft text-accent-default ring ring-inset ring-accent-muted text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="blog-post-meta" class="flex items-center gap-2 mb-2"><span data-slot="blog-post-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-neutral)] bg-accent-soft text-accent-default ring ring-inset ring-accent-default text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
         <!--v-if--></span><time datetime="2024-12-13T09:32:32.598Z" data-slot="blog-post-date" class="text-sm text-default">Dec 13, 2024</time>
       </div>
       <h2 data-slot="blog-post-title" class="text-xl text-pretty font-semibold text-strong">Title</h2>
@@ -60,7 +60,7 @@ exports[`BlogPosts > renders with orientation vertical correctly 1`] = `
     <!--v-if-->
     <div data-slot="blog-post-header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img alt="Image alt" src="https://picsum.photos/640/360" data-slot="blog-post-image" class="object-cover object-top w-full h-full"></div>
     <div data-slot="blog-post-body" class="min-w-0 flex-1 flex flex-col justify-center p-4 sm:p-6 lg:px-0">
-      <div data-slot="blog-post-meta" class="flex items-center gap-2 mb-2"><span data-slot="blog-post-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-neutral)] bg-accent-soft text-accent-default ring ring-inset ring-accent-muted text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="blog-post-meta" class="flex items-center gap-2 mb-2"><span data-slot="blog-post-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-neutral)] bg-accent-soft text-accent-default ring ring-inset ring-accent-default text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
         <!--v-if--></span><time datetime="2024-12-13T09:32:32.598Z" data-slot="blog-post-date" class="text-sm text-default">Dec 13, 2024</time>
       </div>
       <h2 data-slot="blog-post-title" class="text-xl text-pretty font-semibold text-strong">Title</h2>
@@ -86,7 +86,7 @@ exports[`BlogPosts > renders with posts correctly 1`] = `
     <!--v-if-->
     <div data-slot="blog-post-header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img alt="Image alt" src="https://picsum.photos/640/360" data-slot="blog-post-image" class="object-cover object-top w-full h-full"></div>
     <div data-slot="blog-post-body" class="min-w-0 flex-1 flex flex-col p-4 sm:p-6">
-      <div data-slot="blog-post-meta" class="flex items-center gap-2 mb-2"><span data-slot="blog-post-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-neutral)] bg-accent-soft text-accent-default ring ring-inset ring-accent-muted text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="blog-post-meta" class="flex items-center gap-2 mb-2"><span data-slot="blog-post-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-neutral)] bg-accent-soft text-accent-default ring ring-inset ring-accent-default text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
         <!--v-if--></span><time datetime="2024-12-13T09:32:32.598Z" data-slot="blog-post-date" class="text-sm text-default">Dec 13, 2024</time>
       </div>
       <h2 data-slot="blog-post-title" class="text-xl text-pretty font-semibold text-strong">Title</h2>

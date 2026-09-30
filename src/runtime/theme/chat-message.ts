@@ -66,7 +66,7 @@ export default defineTheme({
     color: colors.filter(color => color !== 'neutral'),
     variant: 'outline',
     class: {
-      content: 'text-accent ring ring-accent-muted'
+      content: 'text-accent ring ring-accent-default'
     }
   }, {
     color: colors.filter(color => color !== 'neutral'),
@@ -78,7 +78,7 @@ export default defineTheme({
     color: colors.filter(color => color !== 'neutral'),
     variant: 'subtle',
     class: {
-      content: 'bg-accent-soft text-accent-default ring ring-accent-muted'
+      content: 'bg-accent-soft text-accent-default ring ring-accent-default'
     }
   }, {
     color: colors.filter(color => color !== 'neutral'),

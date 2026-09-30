@@ -24,7 +24,7 @@ export default defineTheme({
         base: 'bg-accent-soft text-accent-default'
       },
       subtle: {
-        base: 'bg-accent-soft text-accent-default ring ring-inset ring-accent-muted'
+        base: 'bg-accent-soft text-accent-default ring ring-inset ring-accent-default'
       }
     },
     size: {

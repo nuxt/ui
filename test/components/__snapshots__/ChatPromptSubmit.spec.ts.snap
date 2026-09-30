@@ -29,14 +29,14 @@ exports[`ChatPromptSubmit > renders with status ready correctly 1`] = `
 `;
 
 exports[`ChatPromptSubmit > renders with status streaming correctly 1`] = `
-"<button type="button" data-slot="chat-prompt-submit" aria-label="Send prompt" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-default ring ring-inset ring-accent-muted bg-accent-soft hover:bg-accent-strong active:bg-accent-strong disabled:bg-accent-soft aria-disabled:bg-accent-soft outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent text-sm gap-1.5 p-1.5"><span class="iconify i-lucide:square shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
+"<button type="button" data-slot="chat-prompt-submit" aria-label="Send prompt" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-default ring ring-inset ring-accent-default bg-accent-soft hover:bg-accent-strong active:bg-accent-strong disabled:bg-accent-soft aria-disabled:bg-accent-soft outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent text-sm gap-1.5 p-1.5"><span class="iconify i-lucide:square shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
   <!--v-if-->
   <!--v-if-->
 </button>"
 `;
 
 exports[`ChatPromptSubmit > renders with status submitted correctly 1`] = `
-"<button type="button" data-slot="chat-prompt-submit" aria-label="Send prompt" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-default ring ring-inset ring-accent-muted bg-accent-soft hover:bg-accent-strong active:bg-accent-strong disabled:bg-accent-soft aria-disabled:bg-accent-soft outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent text-sm gap-1.5 p-1.5"><span class="iconify i-lucide:square shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
+"<button type="button" data-slot="chat-prompt-submit" aria-label="Send prompt" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-default ring ring-inset ring-accent-default bg-accent-soft hover:bg-accent-strong active:bg-accent-strong disabled:bg-accent-soft aria-disabled:bg-accent-soft outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent text-sm gap-1.5 p-1.5"><span class="iconify i-lucide:square shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
   <!--v-if-->
   <!--v-if-->
 </button>"

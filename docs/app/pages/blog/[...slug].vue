@@ -111,7 +111,7 @@ const items = computed(() => Object.entries(tree.value).map(([key, value]) => ({
             class="lg:h-full my-0 rounded-none border-y-0 border-r-0 border-default"
             :items="items"
             expand-all
-            :ui="{ list: 'border-default', content: '[&>div>pre]:bg-muted/50 [&>div>pre]:border-default [&>div>pre]:rounded-none' }"
+            :ui="{ list: 'border-default', content: '[&>div>pre]:bg-soft/50 [&>div>pre]:border-default [&>div>pre]:rounded-none' }"
           />
           <div v-else class="size-full border-l border-default flex items-center justify-center">
             <UIcon :name="appConfig.ui.icons.arrowDown" class="size-12 text-faint animate-bounce" />

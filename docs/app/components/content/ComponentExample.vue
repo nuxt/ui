@@ -185,8 +185,8 @@ const urlSearchParams = computed(() => {
   <div ref="el" class="my-5" :style="{ '--ui-header-height': '4rem' }">
     <template v-if="preview">
       <div ref="wrapperContainer" class="relative group/component">
-        <div class="border border-muted relative z-1" :class="[{ 'border-b-0 rounded-t-md': props.source, 'rounded-md': !props.source, 'overflow-hidden': props.overflowHidden }]">
-          <div v-if="props.options?.length || !!slots.options" class="flex gap-4 p-4 border-b border-muted">
+        <div class="border border-default relative z-1" :class="[{ 'border-b-0 rounded-t-md': props.source, 'rounded-md': !props.source, 'overflow-hidden': props.overflowHidden }]">
+          <div v-if="props.options?.length || !!slots.options" class="flex gap-4 p-4 border-b border-default">
             <slot name="options" />
 
             <UFormField

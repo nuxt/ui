@@ -169,14 +169,11 @@ export function useThemeStudio() {
    * The library hardcodes three tokens to `white` (light `--ui-bg-default`
    * and `--ui-text-contrast`, dark `--ui-text-strong`), so a tinted neutral
    * ramp would never reach them. Choosing a neutral re-routes all three
-   * through the ramp, and lifts the muted surface a stop: the library sits it
-   * at 50 too, so it would land ON the page and every muted panel would lose
-   * its shape. The presets' tintedNeutralBase carries the same four.
+   * through the ramp. The presets' tintedNeutralBase carries the same three.
    */
   const NEUTRAL_TOKEN_REMAPS = {
     light: {
       '--ui-bg-default': 'var(--ui-color-neutral-50)',
-      '--ui-bg-muted': 'var(--ui-color-neutral-100)',
       '--ui-text-contrast': 'var(--ui-color-neutral-50)'
     },
     dark: {

@@ -107,19 +107,17 @@ Use these everywhere instead of raw palette colors:
 
 ### Backgrounds
 - `bg-default` — page background
-- `bg-muted` — recessed surfaces (code blocks)
-- `bg-tint` — hovered and highlighted items (menu items, table rows)
+- `bg-tint` — the lightest fill (hovered items, code blocks, table heads)
 - `bg-soft` — soft fills and raised areas
 - `bg-strong` — strong fills (tracks, the hover of `bg-soft`)
 - `bg-neutral` — the neutral solid (dark on light, light on dark)
 
 ### Borders
 - `border-default` — standard borders (dividers, separators)
-- `border-muted` — a border on a `bg-soft` or `bg-muted` fill
 - `border-strong` — stronger borders (field outlines)
 - `border-neutral` — the neutral solid as a border
 
-Inside a component with a `color`, the same words with `accent-` follow that color: `bg-accent-soft`, `text-accent-muted`, `ring-accent-strong`. `bg-accent` is the color itself, with `text-accent-contrast` on it.
+Inside a component with a `color`, the same words with `accent-` follow that color: `bg-accent-soft`, `text-accent-muted`, `ring-accent-default`. `bg-accent` is the color itself, with `text-accent-contrast` on it.
 
 ## Variants
 
@@ -148,7 +146,7 @@ Override theme **slots** on a single instance — wins over global config and va
 
 ```vue
 <UButton :ui="{ base: 'font-bold', trailingIcon: 'size-3 rotate-90' }" />
-<UCard :ui="{ header: 'bg-muted', body: 'p-8' }" />
+<UCard :ui="{ header: 'bg-tint', body: 'p-8' }" />
 ```
 
 Rules for `ui` overrides:

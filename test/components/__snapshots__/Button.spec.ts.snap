@@ -36,7 +36,7 @@ exports[`Button > renders with active variant solid correctly 1`] = `
 `;
 
 exports[`Button > renders with active variant subtle correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-default ring ring-inset ring-accent-muted bg-accent-soft hover:bg-accent-strong active:bg-accent-strong disabled:bg-accent-soft aria-disabled:bg-accent-soft outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-default ring ring-inset ring-accent-default bg-accent-soft hover:bg-accent-strong active:bg-accent-strong disabled:bg-accent-soft aria-disabled:bg-accent-soft outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent px-2.5 py-1.5 text-sm gap-1.5">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
@@ -223,7 +223,7 @@ exports[`Button > renders with neutral variant solid correctly 1`] = `
 `;
 
 exports[`Button > renders with neutral variant subtle correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-default ring ring-inset ring-accent-muted bg-accent-soft hover:bg-accent-strong active:bg-accent-strong disabled:bg-accent-soft aria-disabled:bg-accent-soft outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-default ring ring-inset ring-accent-default bg-accent-soft hover:bg-accent-strong active:bg-accent-strong disabled:bg-accent-soft aria-disabled:bg-accent-soft outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent px-2.5 py-1.5 text-sm gap-1.5">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
@@ -265,7 +265,7 @@ exports[`Button > renders with primary variant solid correctly 1`] = `
 `;
 
 exports[`Button > renders with primary variant subtle correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-default ring ring-inset ring-accent-muted bg-accent-soft hover:bg-accent-strong active:bg-accent-strong disabled:bg-accent-soft aria-disabled:bg-accent-soft outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-primary)] text-accent-default ring ring-inset ring-accent-default bg-accent-soft hover:bg-accent-strong active:bg-accent-strong disabled:bg-accent-soft aria-disabled:bg-accent-soft outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent px-2.5 py-1.5 text-sm gap-1.5">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"

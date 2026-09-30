@@ -12,11 +12,9 @@ export const cssVariableDefaults = {
     '--ui-text-strong': 'var(--ui-color-neutral-900)',
     '--ui-text-contrast': 'white',
     '--ui-bg-default': 'white',
-    '--ui-bg-muted': 'var(--ui-color-neutral-50)',
     '--ui-bg-soft': 'var(--ui-color-neutral-100)',
     '--ui-bg-strong': 'var(--ui-color-neutral-200)',
     '--ui-border-default': 'var(--ui-color-neutral-200)',
-    '--ui-border-muted': 'var(--ui-color-neutral-200)',
     '--ui-border-strong': 'var(--ui-color-neutral-300)'
   },
   dark: {
@@ -26,11 +24,9 @@ export const cssVariableDefaults = {
     '--ui-text-strong': 'white',
     '--ui-text-contrast': 'var(--ui-color-neutral-900)',
     '--ui-bg-default': 'var(--ui-color-neutral-900)',
-    '--ui-bg-muted': 'var(--ui-color-neutral-800)',
     '--ui-bg-soft': 'var(--ui-color-neutral-800)',
     '--ui-bg-strong': 'var(--ui-color-neutral-700)',
-    '--ui-border-default': 'var(--ui-color-neutral-800)',
-    '--ui-border-muted': 'var(--ui-color-neutral-700)',
+    '--ui-border-default': 'color-mix(in oklab, var(--ui-color-neutral-800) 50%, var(--ui-color-neutral-700))',
     '--ui-border-strong': 'var(--ui-color-neutral-700)'
   }
 } as const

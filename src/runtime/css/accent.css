@@ -17,7 +17,7 @@
     --ui-accent-text-default: initial;
     --ui-accent-text-muted: initial;
     --ui-accent-text-faint: initial;
-    --ui-accent-border-muted: initial;
+    --ui-accent-border-default: initial;
     --ui-accent-border-strong: initial;
     --ui-accent-outline-focus: initial;
   }
@@ -34,7 +34,7 @@
     --ui-accent-text-default: var(--ui-primary-text-default);
     --ui-accent-text-muted: var(--ui-primary-text-muted);
     --ui-accent-text-faint: var(--ui-primary-text-faint);
-    --ui-accent-border-muted: var(--ui-primary-border-muted);
+    --ui-accent-border-default: var(--ui-primary-border-default);
     --ui-accent-border-strong: var(--ui-primary-border-strong);
     --ui-accent-outline-focus: var(--ui-primary-outline-focus);
   }
@@ -48,7 +48,7 @@
     --ui-accent-text-default: var(--ui-secondary-text-default);
     --ui-accent-text-muted: var(--ui-secondary-text-muted);
     --ui-accent-text-faint: var(--ui-secondary-text-faint);
-    --ui-accent-border-muted: var(--ui-secondary-border-muted);
+    --ui-accent-border-default: var(--ui-secondary-border-default);
     --ui-accent-border-strong: var(--ui-secondary-border-strong);
     --ui-accent-outline-focus: var(--ui-secondary-outline-focus);
   }
@@ -62,7 +62,7 @@
     --ui-accent-text-default: var(--ui-success-text-default);
     --ui-accent-text-muted: var(--ui-success-text-muted);
     --ui-accent-text-faint: var(--ui-success-text-faint);
-    --ui-accent-border-muted: var(--ui-success-border-muted);
+    --ui-accent-border-default: var(--ui-success-border-default);
     --ui-accent-border-strong: var(--ui-success-border-strong);
     --ui-accent-outline-focus: var(--ui-success-outline-focus);
   }
@@ -76,7 +76,7 @@
     --ui-accent-text-default: var(--ui-info-text-default);
     --ui-accent-text-muted: var(--ui-info-text-muted);
     --ui-accent-text-faint: var(--ui-info-text-faint);
-    --ui-accent-border-muted: var(--ui-info-border-muted);
+    --ui-accent-border-default: var(--ui-info-border-default);
     --ui-accent-border-strong: var(--ui-info-border-strong);
     --ui-accent-outline-focus: var(--ui-info-outline-focus);
   }
@@ -90,7 +90,7 @@
     --ui-accent-text-default: var(--ui-warning-text-default);
     --ui-accent-text-muted: var(--ui-warning-text-muted);
     --ui-accent-text-faint: var(--ui-warning-text-faint);
-    --ui-accent-border-muted: var(--ui-warning-border-muted);
+    --ui-accent-border-default: var(--ui-warning-border-default);
     --ui-accent-border-strong: var(--ui-warning-border-strong);
     --ui-accent-outline-focus: var(--ui-warning-outline-focus);
   }
@@ -104,7 +104,7 @@
     --ui-accent-text-default: var(--ui-error-text-default);
     --ui-accent-text-muted: var(--ui-error-text-muted);
     --ui-accent-text-faint: var(--ui-error-text-faint);
-    --ui-accent-border-muted: var(--ui-error-border-muted);
+    --ui-accent-border-default: var(--ui-error-border-default);
     --ui-accent-border-strong: var(--ui-error-border-strong);
     --ui-accent-outline-focus: var(--ui-error-outline-focus);
   }
@@ -118,7 +118,7 @@
     --ui-accent-text-default: var(--ui-neutral-text-default, var(--ui-text-default));
     --ui-accent-text-muted: var(--ui-neutral-text-muted, var(--ui-text-muted));
     --ui-accent-text-faint: var(--ui-neutral-text-faint, var(--ui-text-faint));
-    --ui-accent-border-muted: var(--ui-neutral-border-muted, var(--ui-border-muted));
+    --ui-accent-border-default: var(--ui-neutral-border-default, var(--ui-border-default));
     --ui-accent-border-strong: var(--ui-neutral-border-strong, var(--ui-border-strong));
     --ui-accent-outline-focus: var(--ui-neutral-outline-focus, var(--ui-outline-focus, color-mix(in oklab, var(--ui-neutral) 25%, transparent)));
   }

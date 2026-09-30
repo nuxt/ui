@@ -2,8 +2,8 @@ import { defineTheme } from '../../utils/theme'
 
 export default defineTheme({
   slots: {
-    root: 'relative lg:h-[450px] my-5 grid lg:grid-cols-3 border border-muted rounded-md',
-    list: 'isolate relative p-2 border-b lg:border-b-0 lg:border-e border-muted overflow-y-auto',
+    root: 'relative lg:h-[450px] my-5 grid lg:grid-cols-3 border border-default rounded-md',
+    list: 'isolate relative p-2 border-b lg:border-b-0 lg:border-e border-default overflow-y-auto',
     item: '',
     listWithChildren: 'ms-4.5 border-s border-default',
     itemWithChildren: 'ps-1.5 -ms-px',

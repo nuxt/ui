@@ -128,15 +128,13 @@ Always use semantic colors, never Tailwind palette colors:
 
 ### Background Colors
 - `bg-default` - The page
-- `bg-muted` - Recessed surface (code blocks)
-- `bg-tint` - Hovered and highlighted items
+- `bg-tint` - The lightest fill: hovered items, code blocks, table heads
 - `bg-soft` - Soft fill (neutral soft variants, raised areas)
 - `bg-strong` - Strong fill (tracks, hover of `bg-soft`)
 - `bg-neutral` / `bg-neutral-hover` - The neutral solid and its hover
 
 ### Border Colors
-- `border-default` - Standard borders, `ring-default`, `divide-default`
-- `border-muted` - A border on a `bg-soft` or `bg-muted` fill
+- `border-default` - Standard borders, on the page and on a fill, `ring-default`, `divide-default`
 - `border-strong` - Field outlines
 - `outline-focus` - Focus outline of a component without a `color` prop
 
@@ -146,7 +144,7 @@ The `color` prop accepts `primary`, `secondary`, `success`, `info`, `warning`, `
 - `text-accent-contrast` - Text on the solid
 - `bg-accent-tint` / `bg-accent-soft` / `bg-accent-strong` - Fills
 - `text-accent-default` / `text-accent-muted` / `text-accent-faint` - Text
-- `ring-accent-muted` / `ring-accent-strong` - Borders, also on `border-*`
+- `ring-accent-default` / `ring-accent-strong` - Borders, also on `border-*`
 - `outline-accent-focus` - Focus outline
 
 The full list with values is in `src/runtime/css/tokens.css` and the [CSS Variables](../../docs/content/docs/1.getting-started/5.theme/2.css-variables.md#accent) docs.
