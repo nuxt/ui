@@ -52,6 +52,10 @@ export function set(object: Record<string, any>, path: (string | number)[] | str
     })
   }
 
+  if (path.some(key => key === '__proto__' || key === 'constructor' || key === 'prototype')) {
+    return
+  }
+
   path.reduce((acc, key, i) => {
     if (acc[key] === undefined) acc[key] = {}
     if (i === path.length - 1) acc[key] = value
