@@ -1,9 +1,10 @@
-import { defineComponent } from 'vue'
+import { defineComponent, provide, ref } from 'vue'
 import { describe, it, expect, test, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import type { FormFieldProps } from '../../src/runtime/components/FormField.vue'
+import { formErrorsInjectionKey } from '../../src/runtime/composables/useFormField'
 import theme from '#build/ui/form-field'
 import {
   UInput,
@@ -205,6 +206,80 @@ describe('FormField', () => {
 
       const attr = wrapper.find('[id=v-0-0-help]')
       expect(attr.exists()).toBe(false)
+    })
+  })
+
+  describe('error states', () => {
+    // `error` declares `Boolean` before `String`, so Vue casts `:error="''"` to `true`.
+    // "is invalid" and "has a message to render" are therefore two different facts, and
+    // `aria-describedby` must only advertise the regions that actually render.
+    const cases = [
+      ['omitted', undefined, false, false],
+      ['false', false, false, false],
+      ['an empty string', '', true, false],
+      ['true', true, true, false],
+      ['a message', 'Username is already taken', true, true]
+    ] as const
+
+    test.each(cases)('with error %s: every aria-describedby id resolves', async (_, error, expectInvalid, expectMessage) => {
+      const wrapper = await renderFormField({
+        props: { error, help: 'Username must be unique', hint: 'Letters only', description: 'Enter your username' },
+        inputComponent: UInput
+      })
+
+      const described = wrapper.find('[aria-describedby]')
+      const ids = described.exists() ? described.attributes('aria-describedby')!.split(' ') : []
+
+      expect(ids.length).toBeGreaterThan(0)
+      for (const id of ids) {
+        expect(wrapper.find(`#${id}`).exists(), `aria-describedby points at #${id}, which is not rendered`).toBe(true)
+      }
+
+      expect(wrapper.find('[aria-invalid=true]').exists()).toBe(expectInvalid)
+      expect(wrapper.find('[data-slot=error]').exists()).toBe(expectMessage)
+      expect(ids.includes('v-0-0-error')).toBe(expectMessage)
+    })
+
+    test('keeps the error styling when the error has no message', async () => {
+      const wrapper = await renderFormField({
+        props: { error: true },
+        inputComponent: UInput
+      })
+
+      expect(wrapper.find('[aria-invalid=true]').exists()).toBe(true)
+      expect(wrapper.find('input').classes().some(c => c.includes('error'))).toBe(true)
+    })
+
+    test.each([
+      ['an empty message', '', false],
+      ['a message', 'Username is already taken', true]
+    ])('stays invalid for a matching form error with %s', async (_, message, expectMessage) => {
+      const Wrapper = defineComponent({
+        components: { UFormField, UInput },
+        setup: () => {
+          provide(formErrorsInjectionKey, ref([{ name: 'username', message }]))
+        },
+        template: `<UFormField name="username"><UInput /></UFormField>`
+      })
+
+      const wrapper = await mountSuspended(Wrapper)
+
+      expect(wrapper.find('[aria-invalid=true]').exists()).toBe(true)
+      expect(wrapper.find('[data-slot=error]').exists()).toBe(expectMessage)
+      // Nothing may be advertised as describing the control when no message renders.
+      expect(wrapper.find('[aria-describedby]').exists()).toBe(expectMessage)
+    })
+
+    test('does not advertise help while the error takes its place', async () => {
+      const wrapper = await renderFormField({
+        props: { error: 'Username is already taken', help: 'Username must be unique' },
+        inputComponent: UInput
+      })
+
+      const ids = wrapper.find('[aria-describedby]').attributes('aria-describedby')!.split(' ')
+      expect(ids).toContain('v-0-0-error')
+      expect(ids).not.toContain('v-0-0-help')
+      expect(wrapper.find('[id=v-0-0-help]').exists()).toBe(false)
     })
   })
 })

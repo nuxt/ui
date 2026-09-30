@@ -6,7 +6,7 @@ exports[`FormField > renders with as correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
   </div>
-  <div class="">
+  <div data-slot="container" class="">
     <!--v-if-->
   </div>
 </section>"
@@ -18,7 +18,7 @@ exports[`FormField > renders with class correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
   </div>
-  <div class="">
+  <div data-slot="container" class="">
     <!--v-if-->
   </div>
 </div>"
@@ -30,7 +30,7 @@ exports[`FormField > renders with default slot correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
   </div>
-  <div class="">Default slot
+  <div data-slot="container" class="">Default slot
     <!--v-if-->
   </div>
 </div>"
@@ -42,7 +42,7 @@ exports[`FormField > renders with description slot correctly 1`] = `
     <!--v-if-->
     <p id="v-0-0-description" data-slot="description" class="text-muted">Description slot</p>
   </div>
-  <div class="relative mt-1">
+  <div data-slot="container" class="relative mt-1">
     <!--v-if-->
   </div>
 </div>"
@@ -54,7 +54,7 @@ exports[`FormField > renders with error correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
   </div>
-  <div class="">
+  <div data-slot="container" class="">
     <div id="v-0-0-error" data-slot="error" class="mt-2 text-error">Username is already taken</div>
   </div>
 </div>"
@@ -66,7 +66,7 @@ exports[`FormField > renders with error slot correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
   </div>
-  <div class="">
+  <div data-slot="container" class="">
     <div id="v-0-0-error" data-slot="error" class="mt-2 text-error">Error slot</div>
   </div>
 </div>"
@@ -78,7 +78,7 @@ exports[`FormField > renders with help correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
   </div>
-  <div class="">
+  <div data-slot="container" class="">
     <div id="v-0-0-help" data-slot="help" class="mt-2 text-muted">Username must be unique</div>
   </div>
 </div>"
@@ -90,7 +90,7 @@ exports[`FormField > renders with help slot correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
   </div>
-  <div class="">
+  <div data-slot="container" class="">
     <div id="v-0-0-help" data-slot="help" class="mt-2 text-muted">Help slot</div>
   </div>
 </div>"
@@ -99,10 +99,12 @@ exports[`FormField > renders with help slot correctly 1`] = `
 exports[`FormField > renders with hint correctly 1`] = `
 "<div data-orientation="vertical" data-slot="root" class="text-sm">
   <div data-slot="wrapper" class="">
-    <!--v-if-->
+    <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1">
+      <!--v-if--><span id="v-0-0-hint" data-slot="hint" class="text-muted">Use letters, numbers, and special characters</span>
+    </div>
     <!--v-if-->
   </div>
-  <div class="">
+  <div data-slot="container" class="relative mt-1">
     <!--v-if-->
   </div>
 </div>"
@@ -111,10 +113,12 @@ exports[`FormField > renders with hint correctly 1`] = `
 exports[`FormField > renders with hint slot correctly 1`] = `
 "<div data-orientation="vertical" data-slot="root" class="text-sm">
   <div data-slot="wrapper" class="">
-    <!--v-if-->
+    <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1">
+      <!--v-if--><span id="v-0-0-hint" data-slot="hint" class="text-muted">Hint slot</span>
+    </div>
     <!--v-if-->
   </div>
-  <div class="">
+  <div data-slot="container" class="relative mt-1">
     <!--v-if-->
   </div>
 </div>"
@@ -128,7 +132,7 @@ exports[`FormField > renders with label and description correctly 1`] = `
     </div>
     <p id="v-0-0-description" data-slot="description" class="text-muted">Enter your username</p>
   </div>
-  <div class="relative mt-1">
+  <div data-slot="container" class="relative mt-1">
     <!--v-if-->
   </div>
 </div>"
@@ -142,7 +146,7 @@ exports[`FormField > renders with label slot correctly 1`] = `
     </div>
     <!--v-if-->
   </div>
-  <div class="relative mt-1">
+  <div data-slot="container" class="relative mt-1">
     <!--v-if-->
   </div>
 </div>"
@@ -156,7 +160,7 @@ exports[`FormField > renders with orientation horizontal correctly 1`] = `
     </div>
     <p id="v-0-0-description" data-slot="description" class="text-muted">Enter your username</p>
   </div>
-  <div class="relative">
+  <div data-slot="container" class="relative">
     <!--v-if-->
   </div>
 </div>"
@@ -170,7 +174,7 @@ exports[`FormField > renders with orientation vertical correctly 1`] = `
     </div>
     <p id="v-0-0-description" data-slot="description" class="text-muted">Enter your username</p>
   </div>
-  <div class="relative mt-1">
+  <div data-slot="container" class="relative mt-1">
     <!--v-if-->
   </div>
 </div>"
@@ -184,7 +188,7 @@ exports[`FormField > renders with required correctly 1`] = `
     </div>
     <!--v-if-->
   </div>
-  <div class="relative mt-1">
+  <div data-slot="container" class="relative mt-1">
     <!--v-if-->
   </div>
 </div>"
@@ -198,7 +202,7 @@ exports[`FormField > renders with size lg correctly 1`] = `
     </div>
     <p id="v-0-0-description" data-slot="description" class="text-muted">Enter your username</p>
   </div>
-  <div class="relative mt-1">
+  <div data-slot="container" class="relative mt-1">
     <!--v-if-->
   </div>
 </div>"
@@ -212,7 +216,7 @@ exports[`FormField > renders with size md correctly 1`] = `
     </div>
     <p id="v-0-0-description" data-slot="description" class="text-muted">Enter your username</p>
   </div>
-  <div class="relative mt-1">
+  <div data-slot="container" class="relative mt-1">
     <!--v-if-->
   </div>
 </div>"
@@ -226,7 +230,7 @@ exports[`FormField > renders with size sm correctly 1`] = `
     </div>
     <p id="v-0-0-description" data-slot="description" class="text-muted">Enter your username</p>
   </div>
-  <div class="relative mt-1">
+  <div data-slot="container" class="relative mt-1">
     <!--v-if-->
   </div>
 </div>"
@@ -240,7 +244,7 @@ exports[`FormField > renders with size xl correctly 1`] = `
     </div>
     <p id="v-0-0-description" data-slot="description" class="text-muted">Enter your username</p>
   </div>
-  <div class="relative mt-1">
+  <div data-slot="container" class="relative mt-1">
     <!--v-if-->
   </div>
 </div>"
@@ -254,7 +258,7 @@ exports[`FormField > renders with size xs correctly 1`] = `
     </div>
     <p id="v-0-0-description" data-slot="description" class="text-muted">Enter your username</p>
   </div>
-  <div class="relative mt-1">
+  <div data-slot="container" class="relative mt-1">
     <!--v-if-->
   </div>
 </div>"
@@ -266,7 +270,7 @@ exports[`FormField > renders with ui correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
   </div>
-  <div class="">
+  <div data-slot="container" class="">
     <!--v-if-->
   </div>
 </div>"

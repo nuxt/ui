@@ -77,9 +77,9 @@ slots:
 :u-input{placeholder="Enter your email" class="w-full"}
 ::
 
-### Hint
+### Hint :badge{label="Soon" class="align-text-top"}
 
-Use the `hint` prop to display a hint message next to the label.
+Use the `hint` prop to display a hint message next to the label. When the field has no label, the hint is displayed on its own.
 
 ::component-code
 ---
