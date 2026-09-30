@@ -25,7 +25,7 @@ const appConfig = useAppConfig()
     :trailing-icon="appConfig.ui.icons.chevronDown"
     color="neutral"
     variant="outline"
-    class="group bg-surface"
+    class="group bg-default"
     :class="dirty && 'ring-primary/50'"
     :ui="{
       label: ['flex-1 min-w-0 text-left truncate', dirty && 'text-primary'],

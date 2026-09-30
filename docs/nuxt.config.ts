@@ -51,7 +51,7 @@ export default defineNuxtConfig({
     },
     rootAttrs: {
       'data-vaul-drawer-wrapper': '',
-      'class': 'bg-surface'
+      'class': 'bg-default'
     }
   },
 

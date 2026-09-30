@@ -168,7 +168,7 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
           </section>
 
           <section>
-            <div class="relative overflow-hidden rounded-2xl border border-default bg-linear-to-b from-surface to-(--ui-bg-soft)/60 px-8 py-10 sm:px-13 sm:py-12 flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-10">
+            <div class="relative overflow-hidden rounded-2xl border border-default bg-linear-to-b from-default to-(--ui-bg-soft)/60 px-8 py-10 sm:px-13 sm:py-12 flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-10">
               <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(var(--ui-border-strong)_1px,transparent_1px)] bg-[size:26px_26px] opacity-50 [mask-image:radial-gradient(80%_120%_at_90%_50%,black,transparent_70%)]" />
 
               <div class="relative flex flex-col gap-2">

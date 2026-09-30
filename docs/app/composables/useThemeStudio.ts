@@ -166,7 +166,7 @@ export function useThemeStudio() {
   }
 
   /**
-   * The library hardcodes five tokens to `white` (light `--ui-bg-surface` and
+   * The library hardcodes five tokens to `white` (light `--ui-bg-default` and
    * `--ui-text-inverted`; dark `--ui-text-highlighted`, `--ui-bg-inverted`
    * and `--ui-border-inverted`), so a tinted neutral ramp would never reach
    * them. Choosing a neutral re-routes all five through the ramp, and lifts
@@ -176,7 +176,7 @@ export function useThemeStudio() {
    */
   const NEUTRAL_TOKEN_REMAPS = {
     light: {
-      '--ui-bg-surface': 'var(--ui-color-neutral-50)',
+      '--ui-bg-default': 'var(--ui-color-neutral-50)',
       '--ui-bg-muted': 'var(--ui-color-neutral-100)',
       '--ui-text-inverted': 'var(--ui-color-neutral-50)'
     },

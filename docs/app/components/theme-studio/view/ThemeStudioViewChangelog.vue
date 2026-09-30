@@ -205,7 +205,7 @@ onMounted(() => {
       </template>
     </UButton>
 
-    <div class="h-full overflow-y-auto bg-surface">
+    <div class="h-full overflow-y-auto bg-default">
       <div class="min-h-full xl:grid xl:grid-cols-2">
         <UPageSection
           title="Release Notes"

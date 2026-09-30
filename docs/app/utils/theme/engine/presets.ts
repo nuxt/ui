@@ -17,7 +17,7 @@ export interface ThemePreset {
  * block, a table head) would lose its shape.
  */
 const tintedNeutralBase = {
-  '--ui-bg-surface': { light: 50 },
+  '--ui-bg-default': { light: 50 },
   '--ui-bg-muted': { light: 100 },
   '--ui-text-inverted': { light: 50 },
   '--ui-text-highlighted': { dark: 50 },
@@ -59,7 +59,7 @@ export const presets: ThemePreset[] = [{
     style: {
       tokenShades: {
         '--ui-primary': { light: 'black', dark: 200 },
-        '--ui-bg-surface': { dark: 950 },
+        '--ui-bg-default': { dark: 950 },
         '--ui-bg-muted': { light: 100 },
         '--ui-text-default': { dark: 50 },
         '--ui-text-highlighted': { dark: 50 },
@@ -144,7 +144,7 @@ export const presets: ThemePreset[] = [{
         '--ui-text-default': 'var(--ui-color-neutral-800)',
         '--ui-border-default': 'var(--ui-color-neutral-400)',
         '--ui-border-muted': 'var(--ui-color-neutral-300)',
-        '--ui-bg-surface': 'var(--ui-color-neutral-100)',
+        '--ui-bg-default': 'var(--ui-color-neutral-100)',
         '--ui-text-muted': 'var(--ui-color-neutral-600)',
         '--ui-text-faint': 'var(--ui-color-neutral-600)',
         '--ui-bg-soft': 'var(--ui-color-neutral-200)',
@@ -248,7 +248,7 @@ export const presets: ThemePreset[] = [{
         // 600 is the deep cinema red, 500 leans orange; dark holds it rather
         // than lifting to the salmon 400
         '--ui-primary': { light: 600, dark: 500 },
-        '--ui-bg-surface': { light: 50, dark: 950 },
+        '--ui-bg-default': { light: 50, dark: 950 },
         // light restates tintedNeutral's step: this key replaces it wholesale
         '--ui-bg-muted': { light: 100, dark: 900 },
         '--ui-bg-soft': { dark: 900 },
@@ -345,7 +345,7 @@ export const presets: ThemePreset[] = [{
     style: {
       defaults: { variants: { buttons: 'solid', panels: 'subtle', inputs: 'subtle' } },
       tokenShades: {
-        '--ui-bg-surface': { light: 50, dark: 800 },
+        '--ui-bg-default': { light: 50, dark: 800 },
         '--ui-bg-muted': { light: 300, dark: 700 },
         '--ui-bg-soft': { light: 300, dark: 700 },
         '--ui-bg-soft-hover': { light: 400, dark: 600 },
@@ -400,7 +400,7 @@ export const presets: ThemePreset[] = [{
     icons: 'phosphor',
     tokens: {
       light: {
-        '--ui-bg-surface': 'var(--ui-color-neutral-50)',
+        '--ui-bg-default': 'var(--ui-color-neutral-50)',
         '--ui-text-inverted': 'var(--ui-color-neutral-50)',
         '--ui-bg-muted': 'var(--ui-color-neutral-100)'
       },
@@ -465,7 +465,7 @@ export const presets: ThemePreset[] = [{
     // into it.
     tokens: {
       light: {
-        '--ui-bg-surface': 'var(--ui-color-neutral-100)',
+        '--ui-bg-default': 'var(--ui-color-neutral-100)',
         '--ui-bg-muted': 'var(--ui-color-neutral-200)',
         '--ui-bg-soft': 'var(--ui-color-neutral-200)',
         '--ui-bg-soft-hover': 'var(--ui-color-neutral-300)',

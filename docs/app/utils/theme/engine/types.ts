@@ -32,7 +32,7 @@ export function nearestShade(value: number): Shade {
 
 /**
  * The shade sliders' travel: the ramp's stops plus literal white/black ends,
- * several stock defaults are literals the ramp can't express (--ui-bg-surface is
+ * several stock defaults are literals the ramp can't express (--ui-bg-default is
  * `white`).
  */
 export const SHADE_LADDER: readonly ShadeStop[] = ['white', ...SHADES, 'black']
@@ -197,7 +197,7 @@ export const TOKEN_GROUPS: Array<{ key: TokenGroup, label: string }> = [
 /**
  * Semantic tokens exposed as per-mode shade sliders. `defaults` are the
  * LIBRARY's real resting values, some are the literal ladder ends (light
- * --ui-bg-surface is `white`, not a ramp stop); `ramp` names the scale the slider walks.
+ * --ui-bg-default is `white`, not a ramp stop); `ramp` names the scale the slider walks.
  */
 export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, ramp: TokenRamp, group: TokenGroup, defaults: { light: ShadeStop, dark: ShadeStop } }> = [
   { token: '--ui-primary', label: 'Primary', ramp: 'primary', group: 'colors', defaults: { light: 500, dark: 400 } },
@@ -206,7 +206,7 @@ export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, ramp: To
   { token: '--ui-info', label: 'Info', ramp: 'info', group: 'colors', defaults: { light: 500, dark: 400 } },
   { token: '--ui-warning', label: 'Warning', ramp: 'warning', group: 'colors', defaults: { light: 500, dark: 400 } },
   { token: '--ui-error', label: 'Error', ramp: 'error', group: 'colors', defaults: { light: 500, dark: 400 } },
-  { token: '--ui-bg-surface', label: 'Surface', ramp: 'neutral', group: 'background', defaults: { light: 'white', dark: 900 } },
+  { token: '--ui-bg-default', label: 'Surface', ramp: 'neutral', group: 'background', defaults: { light: 'white', dark: 900 } },
   { token: '--ui-bg-muted', label: 'Muted', ramp: 'neutral', group: 'background', defaults: { light: 50, dark: 800 } },
   { token: '--ui-bg-soft', label: 'Soft', ramp: 'neutral', group: 'background', defaults: { light: 100, dark: 800 } },
   { token: '--ui-bg-soft-hover', label: 'Soft hover', ramp: 'neutral', group: 'background', defaults: { light: 200, dark: 700 } },
@@ -397,7 +397,7 @@ export const LIBRARY_TOKEN_DEFAULTS = {
     '--ui-text-default': 'var(--ui-color-neutral-700)',
     '--ui-text-highlighted': 'var(--ui-color-neutral-900)',
     '--ui-text-inverted': 'white',
-    '--ui-bg-surface': 'white',
+    '--ui-bg-default': 'white',
     '--ui-bg-muted': 'var(--ui-color-neutral-50)',
     '--ui-bg-soft': 'var(--ui-color-neutral-100)',
     '--ui-bg-soft-hover': 'var(--ui-color-neutral-200)',
@@ -419,7 +419,7 @@ export const LIBRARY_TOKEN_DEFAULTS = {
     '--ui-text-default': 'var(--ui-color-neutral-200)',
     '--ui-text-highlighted': 'white',
     '--ui-text-inverted': 'var(--ui-color-neutral-900)',
-    '--ui-bg-surface': 'var(--ui-color-neutral-900)',
+    '--ui-bg-default': 'var(--ui-color-neutral-900)',
     '--ui-bg-muted': 'var(--ui-color-neutral-800)',
     '--ui-bg-soft': 'var(--ui-color-neutral-800)',
     '--ui-bg-soft-hover': 'var(--ui-color-neutral-700)',

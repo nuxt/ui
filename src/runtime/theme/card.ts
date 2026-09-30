@@ -17,7 +17,7 @@ export default defineTheme({
         description: 'text-faint'
       },
       outline: {
-        root: 'bg-surface ring ring-default divide-y divide-default'
+        root: 'bg-default ring ring-default divide-y divide-default'
       },
       soft: {
         root: 'bg-tint divide-y divide-default'

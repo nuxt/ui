@@ -102,7 +102,7 @@ const pane = computed(() => panes.value.find(entry => entry.key === tab.value) ?
     <CodePane
       v-if="pane"
       :doc="pane.doc"
-      :ui="{ root: 'my-0', base: 'h-74 whitespace-pre text-xs/5 bg-surface/50 border-0 rounded-lg shadow-sm backdrop-blur-xs' }"
+      :ui="{ root: 'my-0', base: 'h-74 whitespace-pre text-xs/5 bg-default/50 border-0 rounded-lg shadow-sm backdrop-blur-xs' }"
     />
 
     <HomeThemePresets />

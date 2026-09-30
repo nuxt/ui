@@ -84,7 +84,7 @@ if (import.meta.server) {
 
             <!-- [contain:paint]: Chromium won't clip nested composited layers
                  by an ancestor's overflow alone -->
-            <div v-else class="h-[80vh] rounded-xl ring ring-default bg-surface overflow-hidden *:contain-[paint]">
+            <div v-else class="h-[80vh] rounded-xl ring ring-default bg-default overflow-hidden *:contain-[paint]">
               <LazyThemeStudioViewDashboard v-if="view === 'dashboard'" />
               <LazyThemeStudioViewChat v-else-if="view === 'chat'" />
               <LazyThemeStudioViewSaas v-else-if="view === 'saas'" />

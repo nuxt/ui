@@ -27,7 +27,7 @@ describe('Progress', () => {
     ['with custom color', { props: { color: '#8b5cf6', modelValue: 2, status: true, max } }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'w-48' } }],
-    ['with ui', { props: { ui: { base: 'bg-surface' } } }],
+    ['with ui', { props: { ui: { base: 'bg-default' } } }],
     // Slots
     ['with status slot', { slots: { status: () => 'Status slot' } }]
   ])

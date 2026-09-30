@@ -180,7 +180,7 @@ const codeColors = buttonColors
 </script>
 
 <template>
-  <UDashboardNavbar title="Colors" class="absolute top-0 inset-x-0 z-5 bg-surface" />
+  <UDashboardNavbar title="Colors" class="absolute top-0 inset-x-0 z-5 bg-default" />
 
   <div class="flex flex-col gap-10 min-h-0 w-full max-w-full py-6">
     <p class="max-w-lg text-muted">

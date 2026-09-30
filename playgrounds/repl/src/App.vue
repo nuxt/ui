@@ -243,12 +243,12 @@ const previewOptions = {
 <style>
 .iframe-container,
 .iframe-container iframe {
-  background-color: var(--ui-bg-surface) !important;
+  background-color: var(--ui-bg-default) !important;
 }
 
 .vue-repl,
 .dark .vue-repl {
-  --bg: var(--ui-bg-surface);
+  --bg: var(--ui-bg-default);
   --bg-soft: var(--ui-bg-muted);
   --border: var(--ui-border-default);
   --text-light: var(--ui-text-muted);

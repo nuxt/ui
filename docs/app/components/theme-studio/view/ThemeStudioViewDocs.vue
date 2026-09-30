@@ -195,7 +195,7 @@ export default defineAppConfig({
 
 <template>
   <!-- The pane is the scroll container, so the header and asides stick to it. -->
-  <div class="h-full overflow-y-auto bg-surface">
+  <div class="h-full overflow-y-auto bg-default">
     <UHeader :toggle="false" class="rounded-t-[inherit]" :ui="{ center: 'flex-1' }">
       <template #left>
         <div class="flex items-center gap-1.5">

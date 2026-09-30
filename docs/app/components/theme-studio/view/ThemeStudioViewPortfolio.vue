@@ -134,7 +134,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
 
 <template>
   <!-- A mini portfolio: the pane is the scroll container, so the pill nav sticks to it. -->
-  <div class="h-full overflow-y-auto bg-surface" style="--ui-container: var(--container-4xl)">
+  <div class="h-full overflow-y-auto bg-default" style="--ui-container: var(--container-4xl)">
     <!-- Template's AppHeader: a floating centered pill navigation. -->
     <div class="sticky top-2 sm:top-4 z-10 h-0 flex items-start justify-center pointer-events-none">
       <UNavigationMenu
@@ -182,7 +182,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
             alt="Mike Newbon"
             size="3xl"
             src="https://github.com/mikenewbon.png"
-            class="size-18 ring ring-default ring-offset-3 ring-offset-(color:--ui-bg-surface) transition-all duration-600"
+            class="size-18 ring ring-default ring-offset-3 ring-offset-(color:--ui-bg-default) transition-all duration-600"
             :class="heroAppear ? 'opacity-100 blur-none scale-100' : 'opacity-0 blur-lg scale-110'"
           />
         </template>
@@ -370,7 +370,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
         </UTabs>
       </UPageSection>
 
-      <UFooter class="z-10 bg-surface" :ui="{ left: 'text-muted text-xs' }">
+      <UFooter class="z-10 bg-default" :ui="{ left: 'text-muted text-xs' }">
         <template #left>
           Built with Nuxt UI • © 2026
         </template>

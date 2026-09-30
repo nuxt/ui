@@ -241,7 +241,7 @@ function dragHandleItems(editor: Editor): DropdownMenuItem[][] {
 </script>
 
 <template>
-  <div class="h-full overflow-y-auto bg-surface">
+  <div class="h-full overflow-y-auto bg-default">
     <ClientOnly>
       <UEditor
         v-slot="{ editor, handlers }"

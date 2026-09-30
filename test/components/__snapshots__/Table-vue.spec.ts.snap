@@ -390,7 +390,7 @@ exports[`Table > renders with column pinning and footer correctly 1`] = `
     <!--v-if-->
     <thead data-slot="table-thead" class="relative [--ui-accent:var(--ui-primary)]">
       <tr data-slot="table-tr" class="data-[selected=true]:bg-tint">
-        <th data-pinned="left" scope="col" data-slot="table-th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 sticky bg-surface/75 z-1" style="left: 0px;">#</th>
+        <th data-pinned="left" scope="col" data-slot="table-th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 sticky bg-default/75 z-1" style="left: 0px;">#</th>
         <th data-pinned="false" scope="col" data-slot="table-th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
             <div data-slot="checkbox-container" class="flex items-center h-5"><button data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
@@ -410,7 +410,7 @@ exports[`Table > renders with column pinning and footer correctly 1`] = `
             <!--v-if-->
           </button></th>
         <th data-pinned="false" scope="col" data-slot="table-th" class="px-4 py-3.5 text-sm text-highlighted font-semibold [&amp;:has([role=checkbox])]:pe-0 text-right">Amount</th>
-        <th data-pinned="right" scope="col" data-slot="table-th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 sticky bg-surface/75 z-1" style="right: 0px;">
+        <th data-pinned="right" scope="col" data-slot="table-th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 sticky bg-default/75 z-1" style="right: 0px;">
           <!---->
         </th>
       </tr>
@@ -418,7 +418,7 @@ exports[`Table > renders with column pinning and footer correctly 1`] = `
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-3 [&amp;>tr]:data-[selectable=true]:-outline-offset-3 divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
-        <td data-pinned="left" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 sticky bg-surface/75 z-1" style="left: 0px;">#m5gr84i9</td>
+        <td data-pinned="left" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 sticky bg-default/75 z-1" style="left: 0px;">#m5gr84i9</td>
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
           <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
             <div data-slot="checkbox-container" class="flex items-center h-5"><button aria-label="Select row" data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
@@ -433,7 +433,7 @@ exports[`Table > renders with column pinning and footer correctly 1`] = `
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0"><span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md capitalize"><!--v-if-->success<!--v-if--></span></td>
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 lowercase">ken99@yahoo.com</td>
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 text-right font-medium">€316.00</td>
-        <td data-pinned="right" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 sticky bg-surface/75 z-1 text-right" style="right: 0px;"><button type="button" data-slot="button" id="reka-dropdown-menu-trigger-v-2" aria-haspopup="menu" aria-expanded="false" data-state="closed" aria-label="Actions" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-soft-foreground hover:bg-accent-soft active:bg-accent-soft outline-accent-focus focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent text-sm gap-1.5 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-5"></svg>
+        <td data-pinned="right" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 sticky bg-default/75 z-1 text-right" style="right: 0px;"><button type="button" data-slot="button" id="reka-dropdown-menu-trigger-v-2" aria-haspopup="menu" aria-expanded="false" data-state="closed" aria-label="Actions" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-soft-foreground hover:bg-accent-soft active:bg-accent-soft outline-accent-focus focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent text-sm gap-1.5 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-5"></svg>
             <!--v-if-->
             <!--v-if-->
           </button>
@@ -444,7 +444,7 @@ exports[`Table > renders with column pinning and footer correctly 1`] = `
       </tr>
       <!--v-if-->
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
-        <td data-pinned="left" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 sticky bg-surface/75 z-1" style="left: 0px;">#3u1reuv4</td>
+        <td data-pinned="left" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 sticky bg-default/75 z-1" style="left: 0px;">#3u1reuv4</td>
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
           <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
             <div data-slot="checkbox-container" class="flex items-center h-5"><button aria-label="Select row" data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
@@ -459,7 +459,7 @@ exports[`Table > renders with column pinning and footer correctly 1`] = `
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0"><span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md capitalize"><!--v-if-->success<!--v-if--></span></td>
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 lowercase">Abe45@gmail.com</td>
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 text-right font-medium">€242.00</td>
-        <td data-pinned="right" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 sticky bg-surface/75 z-1 text-right" style="right: 0px;"><button type="button" data-slot="button" id="reka-dropdown-menu-trigger-v-4" aria-haspopup="menu" aria-expanded="false" data-state="closed" aria-label="Actions" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-soft-foreground hover:bg-accent-soft active:bg-accent-soft outline-accent-focus focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent text-sm gap-1.5 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-5"></svg>
+        <td data-pinned="right" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 sticky bg-default/75 z-1 text-right" style="right: 0px;"><button type="button" data-slot="button" id="reka-dropdown-menu-trigger-v-4" aria-haspopup="menu" aria-expanded="false" data-state="closed" aria-label="Actions" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-soft-foreground hover:bg-accent-soft active:bg-accent-soft outline-accent-focus focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent text-sm gap-1.5 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-5"></svg>
             <!--v-if-->
             <!--v-if-->
           </button>
@@ -470,7 +470,7 @@ exports[`Table > renders with column pinning and footer correctly 1`] = `
       </tr>
       <!--v-if-->
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
-        <td data-pinned="left" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 sticky bg-surface/75 z-1" style="left: 0px;">#derv1ws0</td>
+        <td data-pinned="left" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 sticky bg-default/75 z-1" style="left: 0px;">#derv1ws0</td>
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
           <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
             <div data-slot="checkbox-container" class="flex items-center h-5"><button aria-label="Select row" data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-5" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
@@ -485,7 +485,7 @@ exports[`Table > renders with column pinning and footer correctly 1`] = `
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0"><span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md capitalize"><!--v-if-->processing<!--v-if--></span></td>
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 lowercase">Monserrat44@gmail.com</td>
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 text-right font-medium">€837.00</td>
-        <td data-pinned="right" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 sticky bg-surface/75 z-1 text-right" style="right: 0px;"><button type="button" data-slot="button" id="reka-dropdown-menu-trigger-v-6" aria-haspopup="menu" aria-expanded="false" data-state="closed" aria-label="Actions" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-soft-foreground hover:bg-accent-soft active:bg-accent-soft outline-accent-focus focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent text-sm gap-1.5 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-5"></svg>
+        <td data-pinned="right" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 sticky bg-default/75 z-1 text-right" style="right: 0px;"><button type="button" data-slot="button" id="reka-dropdown-menu-trigger-v-6" aria-haspopup="menu" aria-expanded="false" data-state="closed" aria-label="Actions" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-soft-foreground hover:bg-accent-soft active:bg-accent-soft outline-accent-focus focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent text-sm gap-1.5 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-5"></svg>
             <!--v-if-->
             <!--v-if-->
           </button>
@@ -496,7 +496,7 @@ exports[`Table > renders with column pinning and footer correctly 1`] = `
       </tr>
       <!--v-if-->
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
-        <td data-pinned="left" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 sticky bg-surface/75 z-1" style="left: 0px;">#5kma53ae</td>
+        <td data-pinned="left" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 sticky bg-default/75 z-1" style="left: 0px;">#5kma53ae</td>
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
           <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
             <div data-slot="checkbox-container" class="flex items-center h-5"><button aria-label="Select row" data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-7" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
@@ -511,7 +511,7 @@ exports[`Table > renders with column pinning and footer correctly 1`] = `
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0"><span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md capitalize"><!--v-if-->success<!--v-if--></span></td>
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 lowercase">Silas22@gmail.com</td>
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 text-right font-medium">€874.00</td>
-        <td data-pinned="right" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 sticky bg-surface/75 z-1 text-right" style="right: 0px;"><button type="button" data-slot="button" id="reka-dropdown-menu-trigger-v-8" aria-haspopup="menu" aria-expanded="false" data-state="closed" aria-label="Actions" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-soft-foreground hover:bg-accent-soft active:bg-accent-soft outline-accent-focus focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent text-sm gap-1.5 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-5"></svg>
+        <td data-pinned="right" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 sticky bg-default/75 z-1 text-right" style="right: 0px;"><button type="button" data-slot="button" id="reka-dropdown-menu-trigger-v-8" aria-haspopup="menu" aria-expanded="false" data-state="closed" aria-label="Actions" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-soft-foreground hover:bg-accent-soft active:bg-accent-soft outline-accent-focus focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent text-sm gap-1.5 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-5"></svg>
             <!--v-if-->
             <!--v-if-->
           </button>
@@ -522,7 +522,7 @@ exports[`Table > renders with column pinning and footer correctly 1`] = `
       </tr>
       <!--v-if-->
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
-        <td data-pinned="left" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 sticky bg-surface/75 z-1" style="left: 0px;">#bhqecj4p</td>
+        <td data-pinned="left" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 sticky bg-default/75 z-1" style="left: 0px;">#bhqecj4p</td>
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
           <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
             <div data-slot="checkbox-container" class="flex items-center h-5"><button aria-label="Select row" data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-9" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
@@ -537,7 +537,7 @@ exports[`Table > renders with column pinning and footer correctly 1`] = `
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0"><span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-error)] bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border text-xs px-2 py-1 gap-1 rounded-md capitalize"><!--v-if-->failed<!--v-if--></span></td>
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 lowercase">carmella@hotmail.com</td>
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 text-right font-medium">€721.00</td>
-        <td data-pinned="right" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 sticky bg-surface/75 z-1 text-right" style="right: 0px;"><button type="button" data-slot="button" id="reka-dropdown-menu-trigger-v-10" aria-haspopup="menu" aria-expanded="false" data-state="closed" aria-label="Actions" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-soft-foreground hover:bg-accent-soft active:bg-accent-soft outline-accent-focus focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent text-sm gap-1.5 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-5"></svg>
+        <td data-pinned="right" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 sticky bg-default/75 z-1 text-right" style="right: 0px;"><button type="button" data-slot="button" id="reka-dropdown-menu-trigger-v-10" aria-haspopup="menu" aria-expanded="false" data-state="closed" aria-label="Actions" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors [--ui-accent:var(--ui-neutral)] text-accent-soft-foreground hover:bg-accent-soft active:bg-accent-soft outline-accent-focus focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent text-sm gap-1.5 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-5"></svg>
             <!--v-if-->
             <!--v-if-->
           </button>
@@ -551,7 +551,7 @@ exports[`Table > renders with column pinning and footer correctly 1`] = `
     <tfoot data-slot="table-tfoot" class="relative [&amp;>[data-slot=table-separator]]:z-2">
       <tr data-slot="table-separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-strong)"></tr>
       <tr data-slot="table-tr" class="data-[selected=true]:bg-tint">
-        <th data-pinned="left" data-slot="table-th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 sticky bg-surface/75 z-1" style="left: 0px;">
+        <th data-pinned="left" data-slot="table-th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 sticky bg-default/75 z-1" style="left: 0px;">
           <!---->
         </th>
         <th data-pinned="false" data-slot="table-th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
@@ -567,7 +567,7 @@ exports[`Table > renders with column pinning and footer correctly 1`] = `
           <!---->
         </th>
         <th data-pinned="false" data-slot="table-th" class="px-4 py-3.5 text-sm text-highlighted font-semibold [&amp;:has([role=checkbox])]:pe-0 text-right">Total: €2,990.00</th>
-        <th data-pinned="right" data-slot="table-th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 sticky bg-surface/75 z-1" style="right: 0px;">
+        <th data-pinned="right" data-slot="table-th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 sticky bg-default/75 z-1" style="right: 0px;">
           <!---->
         </th>
       </tr>
@@ -2069,7 +2069,7 @@ exports[`Table > renders with sticky correctly 1`] = `
 "<div data-slot="table" class="relative overflow-auto outline-focus focus-visible:outline-3">
   <table data-slot="table-base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="table-thead" class="sticky top-0 inset-x-0 bg-surface/75 backdrop-blur-sm z-1 [--ui-accent:var(--ui-primary)]">
+    <thead data-slot="table-thead" class="sticky top-0 inset-x-0 bg-default/75 backdrop-blur-sm z-1 [--ui-accent:var(--ui-primary)]">
       <tr data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <th data-pinned="false" scope="col" data-slot="table-th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="table-th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -2179,7 +2179,7 @@ exports[`Table > renders with virtualize and sticky correctly 1`] = `
 "<div data-slot="table" class="relative overflow-auto outline-focus focus-visible:outline-3">
   <table data-slot="table-base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="table-thead" class="sticky top-0 inset-x-0 bg-surface/75 backdrop-blur-sm z-1 [--ui-accent:var(--ui-primary)]">
+    <thead data-slot="table-thead" class="sticky top-0 inset-x-0 bg-default/75 backdrop-blur-sm z-1 [--ui-accent:var(--ui-primary)]">
       <tr data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <th data-pinned="false" scope="col" data-slot="table-th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
@@ -2211,7 +2211,7 @@ exports[`Table > renders with virtualize and sticky correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
     </tbody>
-    <tfoot data-slot="table-tfoot" class="[&amp;>[data-slot=table-separator]]:z-2 sticky bottom-0 inset-x-0 bg-surface/75 backdrop-blur-sm z-1">
+    <tfoot data-slot="table-tfoot" class="[&amp;>[data-slot=table-separator]]:z-2 sticky bottom-0 inset-x-0 bg-default/75 backdrop-blur-sm z-1">
       <tr data-slot="table-separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-strong)"></tr>
       <tr data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <th data-pinned="false" data-slot="table-th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">

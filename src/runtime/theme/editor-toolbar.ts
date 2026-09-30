@@ -10,10 +10,10 @@ export default defineTheme({
   variants: {
     layout: {
       bubble: {
-        root: 'bg-surface border border-default rounded-lg p-1'
+        root: 'bg-default border border-default rounded-lg p-1'
       },
       floating: {
-        root: 'bg-surface border border-default rounded-lg p-1'
+        root: 'bg-default border border-default rounded-lg p-1'
       },
       fixed: {
         root: ''

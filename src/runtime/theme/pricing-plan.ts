@@ -49,7 +49,7 @@ export default defineTheme({
         featureTitle: 'text-faint'
       },
       outline: {
-        root: 'bg-surface ring ring-default'
+        root: 'bg-default ring ring-default'
       },
       soft: {
         root: 'bg-tint'

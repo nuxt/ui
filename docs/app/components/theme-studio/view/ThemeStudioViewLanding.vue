@@ -123,7 +123,7 @@ const vReveal = {
 </script>
 
 <template>
-  <div class="h-full overflow-y-auto bg-surface">
+  <div class="h-full overflow-y-auto bg-default">
     <!-- Header. `center: 'flex'` because the pane is narrower than `lg`, where
          UHeader would otherwise hide its center slot. -->
     <UHeader :toggle="false" class="rounded-t-[inherit]" :ui="{ center: 'flex' }">
@@ -244,7 +244,7 @@ const vReveal = {
         <span v-reveal="200" class="inline-block">No more tab-switching between metrics, traces, and logs. Correlate everything into a single explorable topology.</span>
       </template>
 
-      <div class="rounded-2xl border border-default bg-surface overflow-hidden">
+      <div class="rounded-2xl border border-default bg-default overflow-hidden">
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-px">
           <UPageCard
             v-for="(feature, index) in features"
@@ -280,7 +280,7 @@ const vReveal = {
         <span v-reveal="200" class="inline-block">Process billions of events per day across thousands of production environments with an architecture designed for the workloads of 2030.</span>
       </template>
 
-      <div class="rounded-2xl border border-default bg-surface overflow-hidden">
+      <div class="rounded-2xl border border-default bg-default overflow-hidden">
         <div class="grid grid-cols-2 xl:grid-cols-4 gap-px">
           <UPageCard
             v-for="(metric, index) in metrics"

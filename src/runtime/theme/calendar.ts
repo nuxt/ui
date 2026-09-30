@@ -145,7 +145,7 @@ export default defineTheme({
       color: 'neutral',
       variant: 'outline',
       class: {
-        cellTrigger: 'data-selected:ring data-selected:ring-inset data-selected:ring-strong data-selected:text-default data-selected:bg-surface data-selected:focus-visible:ring-inverted data-today:not-data-selected:text-highlighted data-highlighted:bg-inverted/10 hover:not-data-selected:bg-inverted/10'
+        cellTrigger: 'data-selected:ring data-selected:ring-inset data-selected:ring-strong data-selected:text-default data-selected:bg-default data-selected:focus-visible:ring-inverted data-today:not-data-selected:text-highlighted data-highlighted:bg-inverted/10 hover:not-data-selected:bg-inverted/10'
       }
     },
     {

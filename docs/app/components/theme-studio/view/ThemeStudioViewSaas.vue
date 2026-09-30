@@ -242,7 +242,7 @@ onMounted(() => {
 
 <template>
   <!-- A mini landing page: the pane is the scroll container, so the header sticks to it. -->
-  <div class="h-full overflow-y-auto bg-surface">
+  <div class="h-full overflow-y-auto bg-default">
     <UHeader :toggle="false" class="rounded-t-[inherit]">
       <template #left>
         <div class="flex items-center gap-1.5">

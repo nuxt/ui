@@ -28,7 +28,7 @@ export default defineTheme({
     },
     variant: {
       outline: {
-        root: 'bg-surface ring ring-default',
+        root: 'bg-default ring ring-default',
         date: 'text-default',
         description: 'text-muted'
       },

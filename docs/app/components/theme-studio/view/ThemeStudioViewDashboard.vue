@@ -637,7 +637,7 @@ const pageTitles: Record<Page, string> = {
                 mail.unread ? 'text-highlighted' : 'text-default',
                 selectedMail && selectedMail.id === mail.id
                   ? 'border-primary bg-primary/10'
-                  : 'border-surface hover:border-primary hover:bg-primary/5'
+                  : 'border-bg hover:border-primary hover:bg-primary/5'
               ]"
               @click="selectedMail = mail"
             >
@@ -1079,7 +1079,7 @@ const pageTitles: Record<Page, string> = {
             <UPageCard
               title="Account"
               description="No longer want to use our service? You can delete your account here. This action is not reversible. All information related to this account will be deleted permanently."
-              class="bg-linear-to-tl from-error/10 from-5% to-surface"
+              class="bg-linear-to-tl from-error/10 from-5% to-default"
             >
               <template #footer>
                 <UButton label="Delete account" color="error" />

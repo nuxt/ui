@@ -386,14 +386,14 @@ onUnmounted(() => {
           :cy="stop.cy"
           :r="stop.pinned ? stopRadius + 0.25 : stopRadius"
           :fill="stop.fill"
-          class="stroke-(--ui-bg-surface)"
+          class="stroke-(--ui-bg-default)"
           stroke-width="0.5"
         />
       </template>
 
       <!-- handles -->
-      <circle :cx="toX(curve.p1x)" :cy="toHandleY(curve.p1y)" r="4" class="fill-(--ui-bg-surface) stroke-(--ui-text-muted)" stroke-width="1.25" />
-      <circle :cx="toX(curve.p2x)" :cy="toHandleY(curve.p2y)" r="4" class="fill-(--ui-bg-surface) stroke-(--ui-text-muted)" stroke-width="1.25" />
+      <circle :cx="toX(curve.p1x)" :cy="toHandleY(curve.p1y)" r="4" class="fill-(--ui-bg-default) stroke-(--ui-text-muted)" stroke-width="1.25" />
+      <circle :cx="toX(curve.p2x)" :cy="toHandleY(curve.p2y)" r="4" class="fill-(--ui-bg-default) stroke-(--ui-text-muted)" stroke-width="1.25" />
 
       <!-- endpoints, filled with the ramp's 50 and 950 so the drag targets show
          what they steer -->

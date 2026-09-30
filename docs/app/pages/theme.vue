@@ -180,7 +180,7 @@ const shareOpen = ref(false)
       </template>
     </UHeader>
 
-    <div class="flex flex-col bg-surface rounded-xl overflow-hidden shadow-sm ring ring-default h-[calc(100dvh-var(--ui-header-height)-0.5rem)] lg:h-[calc(100dvh-var(--ui-header-height)-var(--ui-header-height)-0.5rem)] mx-2">
+    <div class="flex flex-col bg-default rounded-xl overflow-hidden shadow-sm ring ring-default h-[calc(100dvh-var(--ui-header-height)-0.5rem)] lg:h-[calc(100dvh-var(--ui-header-height)-var(--ui-header-height)-0.5rem)] mx-2">
       <!-- [contain:paint]: Chromium won't clip nested composited layers by
              an ancestor's overflow alone -->
       <div class="flex-1 min-h-0 overflow-hidden *:contain-[paint]">
@@ -198,7 +198,7 @@ const shareOpen = ref(false)
 
     <!-- the centre takes every pixel the two clusters leave and shrinks
          (min-w-0), so the toolbar inside it scrolls instead of widening the bar -->
-    <UFooter class="hidden lg:block ring ring-default rounded-xl bg-surface mx-2 mt-2" :ui="{ container: 'py-3! px-6!', left: 'mt-0 gap-0 lg:flex-none', center: 'flex-1 min-w-0 justify-start', right: 'mt-0 lg:flex-none' }">
+    <UFooter class="hidden lg:block ring ring-default rounded-xl bg-default mx-2 mt-2" :ui="{ container: 'py-3! px-6!', left: 'mt-0 gap-0 lg:flex-none', center: 'flex-1 min-w-0 justify-start', right: 'mt-0 lg:flex-none' }">
       <template #left>
         <div class="flex items-center gap-0.5 p-0.5 rounded-lg ring ring-default bg-tint">
           <UTooltip text="Undo" :kbds="['meta', 'Z']">

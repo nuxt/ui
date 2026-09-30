@@ -4,7 +4,7 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'relative flex rounded-lg',
-    spotlight: 'absolute inset-0 rounded-[inherit] pointer-events-none bg-surface/90',
+    spotlight: 'absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90',
     container: 'relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6',
     wrapper: 'flex flex-col flex-1 items-start',
     header: 'mb-4',
@@ -36,7 +36,7 @@ export default defineTheme({
         description: 'text-faint'
       },
       outline: {
-        root: 'bg-surface ring ring-default',
+        root: 'bg-default ring ring-default',
         description: 'text-muted'
       },
       soft: {

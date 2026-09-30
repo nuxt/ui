@@ -19,20 +19,20 @@ export default defineTheme({
   variants: {
     pinned: {
       true: {
-        th: 'sticky bg-surface/75 z-1',
-        td: 'sticky bg-surface/75 z-1'
+        th: 'sticky bg-default/75 z-1',
+        td: 'sticky bg-default/75 z-1'
       }
     },
     sticky: {
       true: {
-        thead: 'sticky top-0 inset-x-0 bg-surface/75 backdrop-blur-sm z-1',
-        tfoot: 'sticky bottom-0 inset-x-0 bg-surface/75 backdrop-blur-sm z-1'
+        thead: 'sticky top-0 inset-x-0 bg-default/75 backdrop-blur-sm z-1',
+        tfoot: 'sticky bottom-0 inset-x-0 bg-default/75 backdrop-blur-sm z-1'
       },
       header: {
-        thead: 'sticky top-0 inset-x-0 bg-surface/75 backdrop-blur-sm z-1'
+        thead: 'sticky top-0 inset-x-0 bg-default/75 backdrop-blur-sm z-1'
       },
       footer: {
-        tfoot: 'sticky bottom-0 inset-x-0 bg-surface/75 backdrop-blur-sm z-1'
+        tfoot: 'sticky bottom-0 inset-x-0 bg-default/75 backdrop-blur-sm z-1'
       }
     },
     loading: {

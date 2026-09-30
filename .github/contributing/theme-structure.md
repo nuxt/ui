@@ -127,7 +127,7 @@ Always use semantic colors, never Tailwind palette colors:
 - `text-inverted` - Text on dark backgrounds
 
 ### Background Colors
-- `bg-surface` - Primary background
+- `bg-default` - Primary background
 - `bg-soft` - Raised surface (cards, dropdowns)
 - `bg-soft-hover` - Hover of a raised surface
 - `bg-tint` - Hovered and highlighted items
