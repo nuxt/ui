@@ -3,7 +3,7 @@ import colors from 'tailwindcss/colors'
 import { watchDebounced } from '@vueuse/core'
 import { themeIcons } from '../utils/theme/icons'
 import { cssVariableDefaults } from '../utils/theme/tokens'
-import { DROPPED_TOKENS, MERGED_TOKENS, RENAMED_TOKENS, THEME_STATE_KEYS, THEME_STORAGE_KEY, clamped, readStoredTheme, snapshotStoredTheme, writeStoredTheme } from '../utils/theme/storage'
+import { THEME_STATE_KEYS, THEME_STORAGE_KEY, clamped, readStoredTheme, snapshotStoredTheme, writeStoredTheme } from '../utils/theme/storage'
 import type { StoredTheme } from '../utils/theme/storage'
 import { mergeUi, styleComponents, DEFAULT_COLORS, THEME_DEFAULTS } from '../utils/theme/engine/types'
 import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables } from '../utils/theme/sanitize'
@@ -227,17 +227,6 @@ export default defineNuxtPlugin({
 
               var cssVars = T.cssVariables;
               if (cssVars) {
-                // the names v5 renamed, as readStoredTheme maps them at boot
-                var MERGED = ${JSON.stringify(MERGED_TOKENS)}, RENAMED = ${JSON.stringify(RENAMED_TOKENS)}, DROPPED = ${JSON.stringify(DROPPED_TOKENS)};
-                var rename = function(o) {
-                  if (!o || typeof o !== 'object') return o;
-                  var r = {}, k;
-                  for (k in o) { if (MERGED[k]) r[MERGED[k]] = o[k]; }
-                  for (k in o) { if (RENAMED[k]) r[RENAMED[k]] = o[k]; }
-                  for (k in o) { if (!MERGED[k] && !RENAMED[k] && DROPPED.indexOf(k) < 0) r[k] = o[k]; }
-                  return r;
-                };
-                cssVars = { light: rename(cssVars.light), dark: rename(cssVars.dark) };
                 var defaults = ${JSON.stringify(cssVariableDefaults)};
                 var merge = function(defs, overrides) {
                   var result = [];

@@ -138,52 +138,6 @@ function normalizeFont(raw: unknown): FontPrefs | undefined {
   return Object.keys(font).length ? font : undefined
 }
 
-/**
- * The semantic tokens v5 renamed. A theme saved before keeps its overrides
- * under the new names. `--ui-text-toned` merged into `--ui-text-default`, and
- * only fills it when the theme doesn't set it another way, like `--ui-border-muted`
- * into `--ui-border-default`. The inverted tokens are gone, the neutral solid is
- * `--ui-neutral`, and `--ui-bg-muted` became the unset `--ui-bg-tint`, so their
- * overrides are dropped.
- */
-export const MERGED_TOKENS: Record<string, string> = {
-  '--ui-text-toned': '--ui-text-default',
-  '--ui-border-muted': '--ui-border-default'
-}
-export const DROPPED_TOKENS: string[] = ['--ui-bg-inverted', '--ui-border-inverted', '--ui-bg-muted']
-export const RENAMED_TOKENS: Record<string, string> = {
-  '--ui-bg': '--ui-bg-default',
-  '--ui-bg-elevated': '--ui-bg-soft',
-  '--ui-bg-accented': '--ui-bg-strong',
-  '--ui-text': '--ui-text-default',
-  '--ui-text-dimmed': '--ui-text-faint',
-  '--ui-text-highlighted': '--ui-text-strong',
-  '--ui-text-inverted': '--ui-text-contrast',
-  '--ui-border': '--ui-border-default',
-  '--ui-border-accented': '--ui-border-strong'
-}
-
-function renameTokens<T>(record: Record<string, T> | undefined): Record<string, T> | undefined {
-  if (!record || typeof record !== 'object') return record
-  const entries = Object.entries(record)
-  const renamed: Record<string, T> = {}
-  // merged names first, then renamed, then current ones: the closest name wins
-  for (const [key, value] of entries) if (MERGED_TOKENS[key]) renamed[MERGED_TOKENS[key]] = value
-  for (const [key, value] of entries) if (RENAMED_TOKENS[key]) renamed[RENAMED_TOKENS[key]] = value
-  for (const [key, value] of entries) if (!MERGED_TOKENS[key] && !RENAMED_TOKENS[key] && !DROPPED_TOKENS.includes(key)) renamed[key] = value
-  return renamed
-}
-
-function renameStoredTokens(theme: StoredTheme): StoredTheme {
-  if (theme.cssVariables) {
-    theme.cssVariables = { light: renameTokens(theme.cssVariables.light), dark: renameTokens(theme.cssVariables.dark) }
-  }
-  if (theme.style?.tokenShades) {
-    theme.style = { ...theme.style, tokenShades: renameTokens(theme.style.tokenShades) }
-  }
-  return theme
-}
-
 /** Never throws: a corrupt or absent key reads as "no saved theme". */
 export function readStoredTheme(): StoredTheme {
   if (!import.meta.client) return {}
@@ -191,13 +145,12 @@ export function readStoredTheme(): StoredTheme {
     const raw = window.localStorage.getItem(THEME_STORAGE_KEY)
     if (!raw) {
       return LEGACY_KEYS.some(key => window.localStorage.getItem(key) !== null)
-        ? renameStoredTokens(migrateLegacyTheme())
+        ? migrateLegacyTheme()
         : {}
     }
     const parsed = JSON.parse(raw)
     if (!parsed || typeof parsed !== 'object') return {}
     parsed.font = normalizeFont(parsed.font)
-    renameStoredTokens(parsed)
     return parsed as StoredTheme
   } catch {
     return {}
