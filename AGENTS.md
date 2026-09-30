@@ -16,6 +16,8 @@ Every breaking change must keep three places in sync in the same PR:
 - **Tracking issue**: link the PR in the checklist of [nuxt/ui#6918](https://github.com/nuxt/ui/issues/6918).
 - **Roadmap**: tick the matching item in the [v5 roadmap discussion](https://github.com/nuxt/ui/discussions/6610), or add it if it was not planned.
 
+The docs of this branch go live with the first alpha, so the `Soon` badge convention below does not apply here. Don't add one to a docs heading, and drop it when a `v4` docs change that carries one lands on `v5`.
+
 ## Project Structure
 
 ```
