@@ -45,22 +45,29 @@ export function get(object: Record<string, any> | undefined, path: (string | num
 }
 
 export function set(object: Record<string, any>, path: (string | number)[] | string, value: any): void {
-  if (typeof path === 'string') {
-    path = path.split('.').map((key) => {
-      const numKey = Number(key)
-      return Number.isNaN(numKey) ? key : numKey
-    })
-  }
+  const keys = typeof path === 'string' ? path.split('.') : path
 
-  if (path.some(key => key === '__proto__' || key === 'constructor' || key === 'prototype')) {
-    return
-  }
+  let current = object
 
-  path.reduce((acc, key, i) => {
-    if (acc[key] === undefined) acc[key] = {}
-    if (i === path.length - 1) acc[key] = value
-    return acc[key]
-  }, object)
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i]!
+
+    if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+      return
+    }
+
+    if (i === keys.length - 1) {
+      current[key] = value
+      return
+    }
+
+    if (current[key] === null || (typeof current[key] !== 'object' && typeof current[key] !== 'function')) {
+      const nextKey = keys[i + 1]!
+      current[key] = typeof nextKey === 'number' || /^(?:0|[1-9]\d*)$/.test(nextKey) ? [] : {}
+    }
+
+    current = current[key]
+  }
 }
 
 export function looseToNumber(val: any): any {

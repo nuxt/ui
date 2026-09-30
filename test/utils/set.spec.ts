@@ -13,6 +13,20 @@ describe('set', () => {
     expect(object).toEqual({ a: { b: { c: 1 } }, d: { e: 2 } })
   })
 
+  it('creates arrays for index keys', () => {
+    const object: Record<string, any> = {}
+    set(object, 'items.0.label', 'a')
+    set(object, ['list', 1], 'b')
+    expect(object).toEqual({ items: [{ label: 'a' }], list: [undefined, 'b'] })
+  })
+
+  it('replaces primitive values in the path', () => {
+    const object: Record<string, any> = { a: null, b: 'string' }
+    set(object, 'a.c', 1)
+    set(object, 'b.c', 2)
+    expect(object).toEqual({ a: { c: 1 }, b: { c: 2 } })
+  })
+
   it.each([
     '__proto__.polluted',
     'constructor.prototype.polluted',
