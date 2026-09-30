@@ -86,8 +86,8 @@ jobs:
                 per_page: 100
               })
               const sources = [
-                { label: 'issue', body: issue.body },
-                ...comments.map(comment => ({ label: `comment by ${comment.user?.login}`, body: comment.body }))
+                { label: 'Open', body: issue.body },
+                ...comments.map(comment => ({ label: `Open (comment by ${comment.user?.login})`, body: comment.body }))
               ]
 
               const links = []
@@ -157,10 +157,9 @@ jobs:
 
             // The deployment status can land a few seconds after the commit status
             let url
-            let sha = pull.head.sha
             if (status.state === 'success' && !status.description?.includes('Ignored Build Step')) {
               for (let attempt = 0; !url && attempt < 6; attempt++) {
-                url = await getDeploymentUrl(sha)
+                url = await getDeploymentUrl(pull.head.sha)
                 if (!url) {
                   await new Promise(resolve => setTimeout(resolve, 10 * 1000))
                 }
@@ -178,7 +177,6 @@ jobs:
               for (const commit of commits.reverse().slice(0, 20)) {
                 url = await getDeploymentUrl(commit.sha)
                 if (url) {
-                  sha = commit.sha
                   break
                 }
               }
@@ -189,9 +187,9 @@ jobs:
               return
             }
 
-            let text = `${marker}\n### Playground\n\nReproductions from the linked issues on the [playground](${url}) built from [\`${sha.slice(0, 7)}\`](https://github.com/${owner}/${repo}/pull/${pull.number}/commits/${sha}):\n\n`
+            let text = `${marker}\nLinked issue reproductions on this pull request playground.\n\n| Issue | Reproduction |\n| --- | --- |\n`
             for (const { number, links } of sections) {
-              const line = `- #${number}: ${links.map(({ label, hash }) => `[${label}](${url}/#${hash})`).join(' · ')}\n`
+              const line = `| #${number} | ${links.map(({ label, hash }) => `[${label}](${url}/#${hash})`).join(' · ')} |\n`
               if (text.length + line.length > 60000) {
                 break
               }
