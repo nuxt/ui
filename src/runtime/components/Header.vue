@@ -98,7 +98,7 @@ const props = useComponentProps<HeaderProps<T>>('header', _props)
 const open = defineModel<boolean>('open', { default: false })
 
 const route = useRoute()
-const { t } = useLocale()
+const { t, locale } = useLocale()
 const appConfig = useAppConfig() as Header['AppConfig']
 
 const [DefineLeftTemplate, ReuseLeftTemplate] = createReusableTemplate()
@@ -189,8 +189,8 @@ function toggleOpen() {
 
   <Menu
     v-model:open="open"
-    :title="t('header.title')"
-    :description="t('header.description')"
+    :title="locale.messages.header?.title || t('header.open')"
+    :description="locale.messages.header?.description"
     v-bind="menuProps"
     :ui="{
       overlay: ui.overlay({ class: props.ui?.overlay }),
