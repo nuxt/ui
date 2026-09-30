@@ -18,7 +18,7 @@ const description = 'Make changes to your profile here. Click save when you\'re 
   <DefineFormTemplate>
     <UForm :state="state" class="space-y-4">
       <UFormField label="Email" name="email" required>
-        <UInput v-model="state.email" placeholder="shadcn@example.com" required />
+        <UInput v-model="state.email" placeholder="you@example.com" required />
       </UFormField>
 
       <UButton label="Save changes" type="submit" />
