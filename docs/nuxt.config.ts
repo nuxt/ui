@@ -107,7 +107,7 @@ export default defineNuxtConfig({
     '/docs/getting-started/migration/v3': { redirect: { to: 'https://ui3.nuxt.com/getting-started/migration', statusCode: 301 }, prerender: false },
     // llms.txt advertised its Markdown twin, which has no page to serve it now
     '/raw/docs/getting-started/migration/v3.md': { redirect: { to: 'https://ui3.nuxt.com/getting-started/migration', statusCode: 301 }, prerender: false },
-    '/docs/getting-started/theme': { redirect: '/docs/getting-started/theme/colors', prerender: false },
+    '/docs/getting-started/theme': { redirect: '/docs/getting-started/theme/design-system', prerender: false },
     // the Figma guide lives with the kit now; the docs entry is a link, not a page
     '/figma': { redirect: { to: 'https://go.nuxt.com/figma-ui', statusCode: 301 }, prerender: false },
     '/docs/getting-started/figma': { redirect: { to: 'https://go.nuxt.com/figma-ui', statusCode: 301 }, prerender: false },
@@ -127,7 +127,6 @@ export default defineNuxtConfig({
     '/docs/getting-started/color-mode/**': { redirect: { to: '/docs/getting-started/integrations/color-mode/**', statusCode: 301 }, prerender: false },
     '/docs/getting-started/i18n/**': { redirect: { to: '/docs/getting-started/integrations/i18n/**', statusCode: 301 }, prerender: false },
     '/docs/getting-started/content': { redirect: { to: '/docs/getting-started/integrations/content', statusCode: 301 }, prerender: false },
-    '/docs/getting-started/theme/css-variables': { redirect: { to: '/docs/getting-started/theme/design-system', statusCode: 301 }, prerender: false },
     // v4 redirects - renamed components
     '/docs/components/button-group': { redirect: { to: '/docs/components/field-group', statusCode: 301 }, prerender: false },
     '/docs/components/page-accordion': { redirect: { to: '/docs/components/accordion', statusCode: 301 }, prerender: false },
