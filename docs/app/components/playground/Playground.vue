@@ -24,8 +24,8 @@ import {
 } from '#components'
 
 // Live, interactive component showcase, the Theme Studio's grid view, laid
-// out as a virtualized masonry (UScrollArea lanes) of content-sized cards à
-// la shadcn/HeroUI. Each tile is a self-contained, product-like block
+// out as a virtualized masonry (UScrollArea lanes) of content-sized cards.
+// Each tile is a self-contained, product-like block
 // (header + body + footer action). Overlays are only shown embedded in
 // richer examples (command palette, dashboard dropdown, select menus, auth
 // form, chat), never as bare triggers.
