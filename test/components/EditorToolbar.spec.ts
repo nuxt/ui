@@ -81,7 +81,7 @@ describe('EditorToolbar', () => {
     ['with layout bubble', { props: { ...props, layout: 'bubble' } }],
     ['with layout floating', { props: { ...props, layout: 'floating' } }],
     ['with class', { props: { ...props, class: 'overflow-x-auto' } }],
-    ['with ui', { props: { ...props, ui: { separator: 'bg-surface' } } }],
+    ['with ui', { props: { ...props, ui: { separator: 'bg-default' } } }],
     // Slots
     ['with item slot', { props, slots: { item: () => 'Item slot' } }]
   ])

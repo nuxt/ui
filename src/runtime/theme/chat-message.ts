@@ -96,7 +96,7 @@ export default defineTheme({
     color: 'neutral',
     variant: 'outline',
     class: {
-      content: 'bg-surface ring ring-default'
+      content: 'bg-default ring ring-default'
     }
   }, {
     color: 'neutral',

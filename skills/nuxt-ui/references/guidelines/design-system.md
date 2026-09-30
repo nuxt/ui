@@ -106,7 +106,7 @@ Use these everywhere instead of raw palette colors:
 - `text-inverted` — text on inverted backgrounds (pair with `bg-inverted`)
 
 ### Backgrounds
-- `bg-surface` — page background
+- `bg-default` — page background
 - `bg-muted` — subtle backgrounds (hover states, alternating rows)
 - `bg-soft` — raised surfaces (cards, dropdowns)
 - `bg-soft-hover` — hover of a raised surface (active states, selected items)
@@ -115,6 +115,7 @@ Use these everywhere instead of raw palette colors:
 
 ### Borders
 - `border-default` — standard borders (dividers, separators)
+- `border-muted` — a border on a `bg-soft` or `bg-muted` fill
 - `border-strong` — stronger borders (field outlines, active states)
 - `border-inverted` — inverse borders
 

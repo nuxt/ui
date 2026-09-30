@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Card > renders with as correctly 1`] = `
-"<section data-slot="card" class="rounded-lg overflow-hidden bg-surface ring ring-default divide-y divide-default">
+"<section data-slot="card" class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -9,7 +9,7 @@ exports[`Card > renders with as correctly 1`] = `
 `;
 
 exports[`Card > renders with class correctly 1`] = `
-"<div data-slot="card" class="overflow-hidden bg-surface ring ring-default divide-y divide-default rounded-xl">
+"<div data-slot="card" class="overflow-hidden bg-default ring ring-default divide-y divide-default rounded-xl">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -17,7 +17,7 @@ exports[`Card > renders with class correctly 1`] = `
 `;
 
 exports[`Card > renders with default slot correctly 1`] = `
-"<div data-slot="card" class="rounded-lg overflow-hidden bg-surface ring ring-default divide-y divide-default">
+"<div data-slot="card" class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
   <!--v-if-->
   <div data-slot="card-body" class="p-4 sm:p-6">Default slot</div>
   <!--v-if-->
@@ -25,7 +25,7 @@ exports[`Card > renders with default slot correctly 1`] = `
 `;
 
 exports[`Card > renders with description correctly 1`] = `
-"<div data-slot="card" class="rounded-lg overflow-hidden bg-surface ring ring-default divide-y divide-default">
+"<div data-slot="card" class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
   <div data-slot="card-header" class="p-4 sm:px-6">
     <!--v-if-->
     <div data-slot="card-description" class="mt-1 text-muted text-sm">Description</div>
@@ -36,7 +36,7 @@ exports[`Card > renders with description correctly 1`] = `
 `;
 
 exports[`Card > renders with description slot correctly 1`] = `
-"<div data-slot="card" class="rounded-lg overflow-hidden bg-surface ring ring-default divide-y divide-default">
+"<div data-slot="card" class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
   <div data-slot="card-header" class="p-4 sm:px-6">
     <!--v-if-->
     <div data-slot="card-description" class="mt-1 text-muted text-sm">Description slot</div>
@@ -47,7 +47,7 @@ exports[`Card > renders with description slot correctly 1`] = `
 `;
 
 exports[`Card > renders with footer slot correctly 1`] = `
-"<div data-slot="card" class="rounded-lg overflow-hidden bg-surface ring ring-default divide-y divide-default">
+"<div data-slot="card" class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
   <!--v-if-->
   <!--v-if-->
   <div data-slot="card-footer" class="p-4 sm:px-6">Footer slot</div>
@@ -55,7 +55,7 @@ exports[`Card > renders with footer slot correctly 1`] = `
 `;
 
 exports[`Card > renders with header slot correctly 1`] = `
-"<div data-slot="card" class="rounded-lg overflow-hidden bg-surface ring ring-default divide-y divide-default">
+"<div data-slot="card" class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
   <div data-slot="card-header" class="p-4 sm:px-6">Header slot</div>
   <!--v-if-->
   <!--v-if-->
@@ -63,7 +63,7 @@ exports[`Card > renders with header slot correctly 1`] = `
 `;
 
 exports[`Card > renders with title and description correctly 1`] = `
-"<div data-slot="card" class="rounded-lg overflow-hidden bg-surface ring ring-default divide-y divide-default">
+"<div data-slot="card" class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
   <div data-slot="card-header" class="p-4 sm:px-6">
     <div data-slot="card-title" class="text-highlighted font-semibold">Title</div>
     <div data-slot="card-description" class="mt-1 text-muted text-sm">Description</div>
@@ -74,7 +74,7 @@ exports[`Card > renders with title and description correctly 1`] = `
 `;
 
 exports[`Card > renders with title correctly 1`] = `
-"<div data-slot="card" class="rounded-lg overflow-hidden bg-surface ring ring-default divide-y divide-default">
+"<div data-slot="card" class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
   <div data-slot="card-header" class="p-4 sm:px-6">
     <div data-slot="card-title" class="text-highlighted font-semibold">Title</div>
     <!--v-if-->
@@ -85,7 +85,7 @@ exports[`Card > renders with title correctly 1`] = `
 `;
 
 exports[`Card > renders with title slot correctly 1`] = `
-"<div data-slot="card" class="rounded-lg overflow-hidden bg-surface ring ring-default divide-y divide-default">
+"<div data-slot="card" class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
   <div data-slot="card-header" class="p-4 sm:px-6">
     <div data-slot="card-title" class="text-highlighted font-semibold">Title slot</div>
     <!--v-if-->
@@ -96,7 +96,7 @@ exports[`Card > renders with title slot correctly 1`] = `
 `;
 
 exports[`Card > renders with ui correctly 1`] = `
-"<div data-slot="card" class="rounded-lg overflow-hidden bg-surface ring ring-default divide-y divide-default">
+"<div data-slot="card" class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -104,7 +104,7 @@ exports[`Card > renders with ui correctly 1`] = `
 `;
 
 exports[`Card > renders with variant outline correctly 1`] = `
-"<div data-slot="card" class="rounded-lg overflow-hidden bg-surface ring ring-default divide-y divide-default">
+"<div data-slot="card" class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->

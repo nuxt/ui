@@ -10,7 +10,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: var(--ui-text-default);
-    background-color: var(--ui-bg-surface);
+    background-color: var(--ui-bg-default);
     color-scheme: light;
 
     &:where(.dark, .dark *) {
@@ -162,7 +162,7 @@
     --ui-text-highlighted: var(--ui-color-neutral-900);
     --ui-text-inverted: white;
 
-    --ui-bg-surface: white;
+    --ui-bg-default: white;
     --ui-bg-muted: var(--ui-color-neutral-50);
     --ui-bg-soft: var(--ui-color-neutral-100);
     --ui-bg-soft-hover: var(--ui-color-neutral-200);
@@ -181,7 +181,7 @@
     --ui-text-highlighted: white;
     --ui-text-inverted: var(--ui-color-neutral-900);
 
-    --ui-bg-surface: var(--ui-color-neutral-900);
+    --ui-bg-default: var(--ui-color-neutral-900);
     --ui-bg-muted: var(--ui-color-neutral-800);
     --ui-bg-soft: var(--ui-color-neutral-800);
     --ui-bg-soft-hover: var(--ui-color-neutral-700);

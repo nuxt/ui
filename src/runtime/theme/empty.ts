@@ -46,7 +46,7 @@ export default defineTheme({
         description: 'text-faint'
       },
       outline: {
-        root: 'bg-surface ring ring-default',
+        root: 'bg-default ring ring-default',
         description: 'text-muted'
       },
       soft: {

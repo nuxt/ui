@@ -10,7 +10,7 @@ exports[`ChangelogVersions > renders with as correctly 1`] = `
     <!---->
     <article data-slot="changelog-version" class="relative">
       <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0"><time datetime="2024-12-13T09:32:32.598Z" data-slot="changelog-version-date" class="text-sm/6 text-default truncate">Dec 13, 2024</time>
-        <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
+        <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
           <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
         </div>
       </div>
@@ -54,7 +54,7 @@ exports[`ChangelogVersions > renders with class correctly 1`] = `
     <!---->
     <article data-slot="changelog-version" class="relative">
       <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0"><time datetime="2024-12-13T09:32:32.598Z" data-slot="changelog-version-date" class="text-sm/6 text-default truncate">Dec 13, 2024</time>
-        <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
+        <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
           <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
         </div>
       </div>
@@ -105,7 +105,7 @@ exports[`ChangelogVersions > renders with indicator slot correctly 1`] = `
     <!---->
     <article data-slot="changelog-version" class="relative">
       <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0"><time datetime="2024-12-13T09:32:32.598Z" data-slot="changelog-version-date" class="text-sm/6 text-default truncate">Dec 13, 2024</time>
-        <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
+        <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
           <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
         </div>
       </div>
@@ -149,7 +149,7 @@ exports[`ChangelogVersions > renders with ui correctly 1`] = `
     <!---->
     <article data-slot="changelog-version" class="relative">
       <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0"><time datetime="2024-12-13T09:32:32.598Z" data-slot="changelog-version-date" class="text-sm/6 text-default truncate">Dec 13, 2024</time>
-        <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
+        <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
           <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
         </div>
       </div>
@@ -193,7 +193,7 @@ exports[`ChangelogVersions > renders with versions correctly 1`] = `
     <!---->
     <article data-slot="changelog-version" class="relative">
       <div data-slot="changelog-version-indicator" class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0"><time datetime="2024-12-13T09:32:32.598Z" data-slot="changelog-version-date" class="text-sm/6 text-default truncate">Dec 13, 2024</time>
-        <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-surface ring ring-default flex items-center justify-center my-1">
+        <div data-slot="changelog-version-dot" class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
           <div data-slot="changelog-version-dotInner" class="size-2 rounded-full bg-primary"></div>
         </div>
       </div>

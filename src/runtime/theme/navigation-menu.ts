@@ -27,10 +27,10 @@ export default defineTheme({
     childLinkDescription: 'text-muted',
     separator: 'px-2 h-px bg-border',
     viewportWrapper: 'absolute top-full start-0 flex w-full',
-    viewport: 'relative overflow-hidden bg-surface shadow-lg rounded-md ring ring-default h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left,right] duration-200 ease-out motion-reduce:transition-none origin-[top_center] data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] z-1',
+    viewport: 'relative overflow-hidden bg-default shadow-lg rounded-md ring ring-default h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left,right] duration-200 ease-out motion-reduce:transition-none origin-[top_center] data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] z-1',
     content: '',
     indicator: 'absolute left-0 data-[state=visible]:animate-[fade-in_100ms_var(--ease-out)] data-[state=hidden]:animate-[fade-out_100ms_var(--ease-out)] data-[state=hidden]:opacity-0 bottom-0 z-2 w-(--reka-navigation-menu-indicator-size) translate-x-(--reka-navigation-menu-indicator-position) flex h-2.5 items-end justify-center overflow-hidden transition-[translate,width] duration-200 ease-out motion-reduce:transition-none',
-    arrow: 'relative top-[50%] size-2.5 rotate-45 border border-default bg-surface z-1 rounded-xs'
+    arrow: 'relative top-[50%] size-2.5 rotate-45 border border-default bg-default z-1 rounded-xs'
   },
   variants: {
     color: colorVariant({ link: '', childLink: '' }),

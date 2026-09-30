@@ -3,7 +3,7 @@ import { defineTheme } from '../../utils/theme'
 
 export default defineTheme({
   slots: {
-    base: 'group relative block my-5 p-4 sm:p-6 border border-default rounded-md bg-surface transition-colors',
+    base: 'group relative block my-5 p-4 sm:p-6 border border-default rounded-md bg-default transition-colors',
     icon: 'size-6 mb-2 block text-accent',
     title: 'text-highlighted font-semibold',
     description: 'text-[15px] text-muted *:first:mt-0 *:last:mb-0 *:my-1',

@@ -4,7 +4,7 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'relative inline-flex items-center justify-center shrink-0',
-    base: 'rounded-full ring ring-surface flex items-center justify-center text-accent-foreground font-medium whitespace-nowrap bg-accent'
+    base: 'rounded-full ring ring-bg flex items-center justify-center text-accent-foreground font-medium whitespace-nowrap bg-accent'
   },
   variants: {
     color: colorVariant({ base: '' }),

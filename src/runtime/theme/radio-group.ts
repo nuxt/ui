@@ -10,7 +10,7 @@ export default defineTheme({
     item: 'flex items-start',
     container: 'flex items-center',
     base: 'rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none',
-    indicator: 'flex items-center justify-center size-full after:bg-surface after:rounded-full bg-accent',
+    indicator: 'flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent',
     wrapper: 'w-full',
     label: 'block font-medium text-default',
     icon: 'shrink-0',

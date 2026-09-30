@@ -3,11 +3,11 @@ import { defineTheme } from '../utils/theme'
 
 export default defineTheme({
   slots: {
-    content: 'min-w-32 max-h-(--reka-dropdown-menu-content-available-height) bg-surface shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col',
+    content: 'min-w-32 max-h-(--reka-dropdown-menu-content-available-height) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col',
     input: 'border-b border-default',
     empty: 'text-center text-muted',
     viewport: 'relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1',
-    arrow: 'fill-surface stroke-default',
+    arrow: 'fill-bg stroke-default',
     group: 'p-1 isolate',
     label: 'w-full flex items-center font-semibold text-highlighted',
     separator: '-mx-1 my-1 h-px bg-border',

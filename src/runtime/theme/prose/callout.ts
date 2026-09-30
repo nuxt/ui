@@ -3,7 +3,7 @@ import { defineTheme } from '../../utils/theme'
 
 export default defineTheme({
   slots: {
-    base: 'group relative block px-4 py-3 rounded-md text-sm/6 my-5 last:mb-0 [&_code]:text-xs/5 [&_code]:bg-surface [&_pre]:bg-surface [&>div]:my-2.5 [&_ul]:my-2.5 [&_ol]:my-2.5 *:last:mb-0! [&_ul]:ps-4.5 [&_ol]:ps-4.5 [&_li]:my-0 transition-colors border',
+    base: 'group relative block px-4 py-3 rounded-md text-sm/6 my-5 last:mb-0 [&_code]:text-xs/5 [&_code]:bg-default [&_pre]:bg-default [&>div]:my-2.5 [&_ul]:my-2.5 [&_ol]:my-2.5 *:last:mb-0! [&_ul]:ps-4.5 [&_ol]:ps-4.5 [&_li]:my-0 transition-colors border',
     icon: 'size-4 shrink-0 align-sub me-2 inline-block transition-colors text-accent',
     externalIcon: 'size-4 align-top absolute end-2 top-2 pointer-events-none transition-colors text-accent-soft-foreground'
   },

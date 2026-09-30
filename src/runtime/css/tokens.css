@@ -1,4 +1,4 @@
-/* The Tailwind tokens behind the semantic utilities (`bg-surface`, `text-muted`,
+/* The Tailwind tokens behind the semantic utilities (`bg-default`, `text-muted`,
    `ring-strong`...), the color aliases and the accent roles. */
 @theme default inline {
   --color-primary-50: var(--ui-color-primary-50);
@@ -111,7 +111,7 @@
   --text-color-muted: var(--ui-text-muted);
   --text-color-faint: var(--ui-text-faint);
   --text-color-inverted: var(--ui-text-inverted);
-  --background-color-surface: var(--ui-bg-surface);
+  --background-color-default: var(--ui-bg-default);
   --background-color-soft: var(--ui-bg-soft);
   --background-color-soft-hover: var(--ui-bg-soft-hover);
   --background-color-tint: var(--ui-bg-tint, color-mix(in oklab, var(--ui-bg-soft) 50%, transparent));
@@ -122,23 +122,29 @@
   --border-color-muted: var(--ui-border-muted);
   --border-color-strong: var(--ui-border-strong);
   --border-color-inverted: var(--ui-border-inverted);
-  --border-color-surface: var(--ui-bg-surface);
+  --border-color-bg: var(--ui-bg-default);
   --ring-color-default: var(--ui-border-default);
   --ring-color-muted: var(--ui-border-muted);
   --ring-color-strong: var(--ui-border-strong);
   --ring-color-inverted: var(--ui-border-inverted);
-  --ring-color-surface: var(--ui-bg-surface);
-  --ring-offset-color-surface: var(--ui-bg-surface);
+  --ring-color-bg: var(--ui-bg-default);
+  --ring-offset-color-default: var(--ui-border-default);
+  --ring-offset-color-muted: var(--ui-border-muted);
+  --ring-offset-color-strong: var(--ui-border-strong);
+  --ring-offset-color-inverted: var(--ui-border-inverted);
+  --ring-offset-color-bg: var(--ui-bg-default);
   --divide-color-default: var(--ui-border-default);
   --divide-color-muted: var(--ui-border-muted);
   --divide-color-strong: var(--ui-border-strong);
   --divide-color-inverted: var(--ui-border-inverted);
+  --divide-color-bg: var(--ui-bg-default);
+  --outline-color-default: var(--ui-border-default);
   --outline-color-focus: var(--ui-focus, color-mix(in oklab, var(--ui-primary) 25%, transparent));
   --outline-color-inverted: var(--ui-border-inverted);
-  --stroke-surface: var(--ui-bg-surface);
+  --stroke-bg: var(--ui-bg-default);
   --stroke-default: var(--ui-border-default);
   --stroke-inverted: var(--ui-border-inverted);
-  --fill-surface: var(--ui-bg-surface);
+  --fill-bg: var(--ui-bg-default);
   --fill-default: var(--ui-border-default);
   --fill-inverted: var(--ui-border-inverted);
 
@@ -146,13 +152,9 @@
      when they move to the new ones in #7071. */
   --text-color-dimmed: var(--ui-text-faint);
   --text-color-toned: var(--ui-text-default);
-  --background-color-default: var(--ui-bg-surface);
   --background-color-elevated: var(--ui-bg-soft);
   --background-color-accented: var(--ui-bg-soft-hover);
   --border-color-accented: var(--ui-border-strong);
   --ring-color-accented: var(--ui-border-strong);
   --divide-color-accented: var(--ui-border-strong);
-  --ring-color-bg: var(--ui-bg-surface);
-  --border-color-bg: var(--ui-bg-surface);
-  --ring-offset-color-bg: var(--ui-bg-surface);
 }

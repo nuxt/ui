@@ -3,7 +3,7 @@ import { defineTheme } from '../../utils/theme'
 export default defineTheme({
   slots: {
     root: 'relative my-5 group',
-    header: 'flex items-center gap-1.5 border border-muted bg-surface border-b-0 relative rounded-t-md px-4 py-3',
+    header: 'flex items-center gap-1.5 border border-muted bg-default border-b-0 relative rounded-t-md px-4 py-3',
     filename: 'text-default text-sm/6',
     icon: 'size-4 shrink-0',
     copy: 'absolute top-[11px] end-[11px] lg:opacity-0 lg:group-hover:opacity-100 lg:focus-visible:opacity-100 transition',

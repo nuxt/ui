@@ -4,7 +4,7 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'relative flex flex-col',
-    base: 'w-full flex-1 bg-surface border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-3 transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent',
+    base: 'w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-3 transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent',
     wrapper: 'flex flex-col items-center justify-center text-center',
     icon: 'shrink-0',
     avatar: 'shrink-0',
@@ -69,7 +69,7 @@ export default defineTheme({
       grid: {
         fileWrapper: 'hidden',
         fileLeadingAvatar: 'size-full rounded-lg',
-        fileTrailingButton: 'absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-surface'
+        fileTrailingButton: 'absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg'
       }
     },
     position: {
