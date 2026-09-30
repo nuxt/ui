@@ -8,13 +8,9 @@ export interface ThemePreset {
 }
 
 /**
- * The five tokens the library pins to white, routed through the neutral ramp
+ * The three tokens the library pins to white, routed through the neutral ramp
  * the way picking a neutral in the studio does (selectPalette's remaps), so a
  * tinted ramp reaches the page and the export reproduces the preview.
- *
- * The page moving to 50 takes the muted surface with it: the library sits it
- * at 50 too, so it would land ON the page and every muted panel (a code
- * block, a table head) would lose its shape.
  */
 const tintedNeutralBase = {
   '--ui-bg-default': { light: 50 },

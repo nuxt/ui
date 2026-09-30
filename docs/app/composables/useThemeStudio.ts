@@ -66,7 +66,7 @@ export function useThemeStudio() {
     }
     theme.removeCSSVariables(removed)
 
-    // A shade slider on one of the five remapped tokens had overwritten the
+    // A shade slider on one of the three remapped tokens had overwritten the
     // remap under the same name; resetting that slider must fall back to
     // the remap, not to the library's white literal.
     const restored = {

@@ -141,13 +141,16 @@ function normalizeFont(raw: unknown): FontPrefs | undefined {
 /**
  * The semantic tokens v5 renamed. A theme saved before keeps its overrides
  * under the new names. `--ui-text-toned` merged into `--ui-text-default`, and
- * only fills it when the theme doesn't set it another way. The inverted tokens
- * are gone, the neutral solid is `--ui-neutral`, so their overrides are dropped.
+ * only fills it when the theme doesn't set it another way, like `--ui-border-muted`
+ * into `--ui-border-default`. The inverted tokens are gone, the neutral solid is
+ * `--ui-neutral`, and `--ui-bg-muted` became the unset `--ui-bg-tint`, so their
+ * overrides are dropped.
  */
 export const MERGED_TOKENS: Record<string, string> = {
-  '--ui-text-toned': '--ui-text-default'
+  '--ui-text-toned': '--ui-text-default',
+  '--ui-border-muted': '--ui-border-default'
 }
-export const DROPPED_TOKENS: string[] = ['--ui-bg-inverted', '--ui-border-inverted', '--ui-border-muted', '--ui-bg-muted']
+export const DROPPED_TOKENS: string[] = ['--ui-bg-inverted', '--ui-border-inverted', '--ui-bg-muted']
 export const RENAMED_TOKENS: Record<string, string> = {
   '--ui-bg': '--ui-bg-default',
   '--ui-bg-elevated': '--ui-bg-soft',

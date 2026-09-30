@@ -4,7 +4,7 @@ export default defineTheme({
   slots: {
     root: '',
     panel: 'flex',
-    handle: 'group relative shrink-0 focus-visible:outline-2 focus-visible:outline-primary data-[panel-resize-handle-enabled=false]:cursor-default'
+    handle: 'group relative shrink-0 focus-visible:outline-2 focus-visible:outline-focus data-[panel-resize-handle-enabled=false]:cursor-default'
   },
   variants: {
     orientation: {

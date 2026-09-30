@@ -144,7 +144,7 @@ The `color` prop accepts `primary`, `secondary`, `success`, `info`, `warning`, `
 - `text-accent-contrast` - Text on the solid
 - `bg-accent-tint` / `bg-accent-soft` / `bg-accent-strong` - Fills
 - `text-accent-default` / `text-accent-muted` / `text-accent-faint` - Text steps, tunable per color with `--ui-<color>-text-default`. `text-accent`, like `bg-accent` and `ring-accent`, is the raw color, the solid
-- `ring-accent-default` / `ring-accent-strong` - Borders, also on `border-*`. Interactive components (Button, Badge, Kbd, Select) ring their `outline` and `subtle` variants with `strong`, surface components (Alert, ChatMessage, Callout, inline Code) with `default`
+- `ring-accent-default` / `ring-accent-strong` - Borders, also on `border-*`. A `subtle` variant sits on a fill, so its ring is always `strong`. An `outline` ring is `strong` on interactive components (Button, Badge, Kbd, a Calendar cell) and `default` on surfaces (Alert, ChatMessage, Callout, inline Code)
 - `outline-accent-focus` - Focus outline
 
 The full list with values is in `src/runtime/css/tokens.css` and the [CSS Variables](../../docs/content/docs/1.getting-started/5.theme/2.css-variables.md#accent) docs.
