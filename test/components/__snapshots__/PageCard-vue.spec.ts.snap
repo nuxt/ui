@@ -599,7 +599,7 @@ exports[`PageCard > renders with title slot correctly 1`] = `
 `;
 
 exports[`PageCard > renders with to correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default outline-focus has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-tint has-[>a:focus-visible]:ring-primary">
+"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default outline-focus has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-tint has-[>a:focus-visible]:ring-neutral">
   <!--v-if-->
   <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
     <!--v-if-->
@@ -768,7 +768,7 @@ exports[`PageCard > renders with variant outline highlight correctly 1`] = `
 `;
 
 exports[`PageCard > renders with variant outline to correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default outline-focus has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-tint has-[>a:focus-visible]:ring-primary">
+"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default outline-focus has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-tint has-[>a:focus-visible]:ring-neutral">
   <!--v-if-->
   <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
@@ -874,7 +874,7 @@ exports[`PageCard > renders with variant solid highlight correctly 1`] = `
 `;
 
 exports[`PageCard > renders with variant solid to correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-neutral text-contrast outline-focus has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-neutral/90">
+"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-neutral text-contrast outline-focus has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-neutral-hover">
   <!--v-if-->
   <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
@@ -927,7 +927,7 @@ exports[`PageCard > renders with variant subtle highlight correctly 1`] = `
 `;
 
 exports[`PageCard > renders with variant subtle to correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-tint ring ring-default outline-focus has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-soft hover:ring-strong has-[>a:focus-visible]:ring-primary">
+"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-tint ring ring-default outline-focus has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-soft hover:ring-strong has-[>a:focus-visible]:ring-neutral">
   <!--v-if-->
   <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">

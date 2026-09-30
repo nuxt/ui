@@ -87,7 +87,7 @@ export default defineTheme({
     variant: ['outline', 'subtle'],
     to: true,
     class: {
-      root: 'has-[>a:focus-visible]:ring-primary'
+      root: 'has-[>a:focus-visible]:ring-neutral'
     }
   }, {
     variant: 'ghost',
