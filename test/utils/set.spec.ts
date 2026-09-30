@@ -31,10 +31,12 @@ describe('set', () => {
     '__proto__.polluted',
     'constructor.prototype.polluted',
     ['__proto__', 'polluted'],
-    'a.__proto__.polluted'
+    'a.__proto__.polluted',
+    [['__proto__'], 'polluted'],
+    [{ toString: () => '__proto__' }, 'polluted']
   ])('does not pollute the prototype with %j', (path) => {
     const object = {}
-    set(object, path, true)
+    set(object, path as any, true)
     expect(object).toEqual({})
     expect(({} as any).polluted).toBeUndefined()
   })

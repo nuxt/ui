@@ -40,10 +40,15 @@ export function get(object: Record<string, any> | undefined, path: (string | num
 }
 
 export function set(object: Record<string, any>, path: (string | number)[] | string, value: any): void {
-  const keys = typeof path === 'string' ? path.split('.') : path
+  const keys: string[] = []
 
-  if (keys.some(key => key === '__proto__' || key === 'constructor' || key === 'prototype')) {
-    return
+  for (const segment of typeof path === 'string' ? path.split('.') : path) {
+    const key = String(segment)
+    if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+      return
+    }
+
+    keys.push(key)
   }
 
   let current = object
@@ -57,8 +62,7 @@ export function set(object: Record<string, any>, path: (string | number)[] | str
     }
 
     if (current[key] === null || (typeof current[key] !== 'object' && typeof current[key] !== 'function')) {
-      const nextKey = keys[i + 1]!
-      current[key] = typeof nextKey === 'number' || /^(?:0|[1-9]\d*)$/.test(nextKey) ? [] : {}
+      current[key] = /^(?:0|[1-9]\d*)$/.test(keys[i + 1]!) ? [] : {}
     }
 
     current = current[key]
