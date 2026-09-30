@@ -107,7 +107,7 @@ export default defineNuxtConfig({
     '/docs/getting-started/migration/v3': { redirect: { to: 'https://ui3.nuxt.com/getting-started/migration', statusCode: 301 }, prerender: false },
     // llms.txt advertised its Markdown twin, which has no page to serve it now
     '/raw/docs/getting-started/migration/v3.md': { redirect: { to: 'https://ui3.nuxt.com/getting-started/migration', statusCode: 301 }, prerender: false },
-    '/docs/getting-started/theme': { redirect: '/docs/getting-started/theme/design-system', prerender: false },
+    '/docs/getting-started/theme': { redirect: '/docs/getting-started/theme/colors', prerender: false },
     // the Figma guide lives with the kit now; the docs entry is a link, not a page
     '/figma': { redirect: { to: 'https://go.nuxt.com/figma-ui', statusCode: 301 }, prerender: false },
     '/docs/getting-started/figma': { redirect: { to: 'https://go.nuxt.com/figma-ui', statusCode: 301 }, prerender: false },
