@@ -134,7 +134,7 @@ Always use semantic colors, never Tailwind palette colors:
 - `bg-neutral` / `bg-neutral-hover` - The neutral solid and its hover
 
 ### Border Colors
-- `border-default` - Standard borders, on the page and on a fill, `ring-default`, `divide-default`
+- `border-default` - Standard borders, `ring-default`, `divide-default`
 - `border-strong` - Field outlines
 - `outline-focus` - Focus outline of a component without a `color` prop
 
@@ -143,8 +143,8 @@ The `color` prop accepts `primary`, `secondary`, `success`, `info`, `warning`, `
 - `bg-accent` / `bg-accent-hover` - The color itself (solid) and its hover (`bg-neutral` / `bg-neutral-hover` for neutral)
 - `text-accent-contrast` - Text on the solid
 - `bg-accent-tint` / `bg-accent-soft` / `bg-accent-strong` - Fills
-- `text-accent-default` / `text-accent-muted` / `text-accent-faint` - Text
-- `ring-accent-default` / `ring-accent-strong` - Borders, also on `border-*`
+- `text-accent-default` / `text-accent-muted` / `text-accent-faint` - Text steps, tunable per color with `--ui-<color>-text-default`. `text-accent`, like `bg-accent` and `ring-accent`, is the raw color, the solid
+- `ring-accent-default` / `ring-accent-strong` - Borders, also on `border-*`. Interactive components (Button, Badge, Kbd, Select) ring their `outline` and `subtle` variants with `strong`, surface components (Alert, ChatMessage, Callout, inline Code) with `default`
 - `outline-accent-focus` - Focus outline
 
 The full list with values is in `src/runtime/css/tokens.css` and the [CSS Variables](../../docs/content/docs/1.getting-started/5.theme/2.css-variables.md#accent) docs.

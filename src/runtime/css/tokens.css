@@ -102,8 +102,8 @@
   --text-color-faint: var(--ui-text-faint);
   --text-color-contrast: var(--ui-text-contrast);
   --text-color-accent-default: var(--ui-accent-text-default, var(--ui-accent));
-  --text-color-accent-muted: var(--ui-accent-text-muted, color-mix(in oklab, var(--ui-accent) 75%, transparent));
-  --text-color-accent-faint: var(--ui-accent-text-faint, color-mix(in oklab, var(--ui-accent) 50%, transparent));
+  --text-color-accent-muted: var(--ui-accent-text-muted, color-mix(in oklab, var(--ui-accent-text-default, var(--ui-accent)) 75%, transparent));
+  --text-color-accent-faint: var(--ui-accent-text-faint, color-mix(in oklab, var(--ui-accent-text-default, var(--ui-accent)) 50%, transparent));
   --text-color-accent-contrast: var(--ui-accent-text-contrast, var(--ui-text-contrast));
   --background-color-default: var(--ui-bg-default);
   --background-color-tint: var(--ui-bg-tint, color-mix(in oklab, var(--ui-bg-soft) 50%, transparent));

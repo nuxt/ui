@@ -26,7 +26,7 @@ export const cssVariableDefaults = {
     '--ui-bg-default': 'var(--ui-color-neutral-900)',
     '--ui-bg-soft': 'var(--ui-color-neutral-800)',
     '--ui-bg-strong': 'var(--ui-color-neutral-700)',
-    '--ui-border-default': 'color-mix(in oklab, var(--ui-color-neutral-800) 50%, var(--ui-color-neutral-700))',
+    '--ui-border-default': 'var(--ui-color-neutral-800)',
     '--ui-border-strong': 'var(--ui-color-neutral-700)'
   }
 } as const
