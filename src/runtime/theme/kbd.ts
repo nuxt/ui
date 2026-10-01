@@ -9,16 +9,16 @@ export default defineTheme({
     color: colorVariant({ base: '' }),
     variant: {
       solid: {
-        base: 'text-accent-foreground bg-accent'
+        base: 'text-accent-contrast bg-accent'
       },
       outline: {
-        base: 'ring ring-inset ring-accent-border text-accent-soft-foreground bg-accent-surface'
+        base: 'ring ring-inset ring-accent-strong text-accent-default bg-default'
       },
       soft: {
-        base: 'text-accent-soft-foreground bg-accent-soft'
+        base: 'text-accent-default bg-accent-soft'
       },
       subtle: {
-        base: 'text-accent-soft-foreground ring ring-inset ring-accent-border-soft bg-accent-soft'
+        base: 'text-accent-default ring ring-inset ring-accent-strong bg-accent-soft'
       }
     },
     size: {

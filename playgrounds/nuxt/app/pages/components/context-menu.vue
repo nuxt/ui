@@ -106,7 +106,7 @@ defineShortcuts(extractShortcuts(items.value))
 
   <Matrix v-slot="props" :attrs="attrs">
     <UContextMenu :items="items" v-bind="props">
-      <div class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72">
+      <div class="flex items-center justify-center rounded-md border border-dashed border-strong text-sm aspect-video w-72">
         Right click here
       </div>
     </UContextMenu>

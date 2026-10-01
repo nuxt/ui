@@ -41,7 +41,7 @@ function scrollToItem(index: number) {
       />
     </UScrollArea>
 
-    <UFieldGroup size="sm" class="px-4 py-3 border-t border-muted w-full">
+    <UFieldGroup size="sm" class="px-4 py-3 border-t border-default w-full">
       <UButton icon="i-lucide-arrow-up-to-line" color="neutral" variant="outline" @click="scrollToTop">
         Top
       </UButton>

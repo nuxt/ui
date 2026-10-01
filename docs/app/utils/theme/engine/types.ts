@@ -32,7 +32,7 @@ export function nearestShade(value: number): Shade {
 
 /**
  * The shade sliders' travel: the ramp's stops plus literal white/black ends,
- * several stock defaults are literals the ramp can't express (--ui-bg is
+ * several stock defaults are literals the ramp can't express (--ui-bg-default is
  * `white`).
  */
 export const SHADE_LADDER: readonly ShadeStop[] = ['white', ...SHADES, 'black']
@@ -117,11 +117,12 @@ export type VariantGroup = 'buttons' | 'panels' | 'inputs'
 
 export interface StyleOptions {
   /**
-   * Default variant/size/color, expanded into per-component `defaultVariants`
-   * only where the component supports the value. `variant` is app-wide;
+   * Default variant/size/color. `size` and `color` are app-wide and export as
+   * `ui.defaultVariants`. `variant` expands into per-component
+   * `defaultVariants` where the component supports the value, and
    * `variants`/`colors` refine per group and win where set.
    */
-  defaults?: { variant?: DefaultVariant, size?: DefaultSize, variants?: Partial<Record<VariantGroup, DefaultVariant>>, colors?: Partial<Record<VariantGroup, DefaultColor>> }
+  defaults?: { variant?: DefaultVariant, size?: DefaultSize, color?: DefaultColor, variants?: Partial<Record<VariantGroup, DefaultVariant>>, colors?: Partial<Record<VariantGroup, DefaultColor>> }
   /**
    * Semantic token → ramp shade, keys whitelisted in TOKEN_SHADE_TARGETS.
    * An absent mode stays inherited, presets hydrating one mode must not
@@ -144,17 +145,6 @@ export const VARIANT_SUPPORT: Record<string, string[]> = {
   // fields have no solid variant, an unsupported value would silently unstyle them
   ...Object.fromEntries(FIELD_COMPONENTS.map(component => [component, FIELD_VARIANTS]))
 }
-
-/**
- * Components the app-wide Size default scales, exactly the xs–xl axis.
- * Components on other scales (avatar's 3xs–3xl, kbd's sm–lg) stay out.
- */
-export const SIZE_SUPPORT = [
-  'button', 'badge', ...FIELD_COMPONENTS, 'inputRating',
-  'tabs', 'checkbox', 'checkboxGroup', 'radioGroup', 'switch', 'slider', 'stepper',
-  'calendar', 'colorPicker', 'fileUpload', 'formField', 'fieldGroup',
-  'dropdownMenu', 'contextMenu', 'commandPalette', 'listbox'
-]
 
 /** Components with a color prop, the panels group has no color axis. */
 export const COLOR_SUPPORT = ['button', 'badge', ...FIELD_COMPONENTS]
@@ -197,7 +187,7 @@ export const TOKEN_GROUPS: Array<{ key: TokenGroup, label: string }> = [
 /**
  * Semantic tokens exposed as per-mode shade sliders. `defaults` are the
  * LIBRARY's real resting values, some are the literal ladder ends (light
- * --ui-bg is `white`, not a ramp stop); `ramp` names the scale the slider walks.
+ * --ui-bg-default is `white`, not a ramp stop); `ramp` names the scale the slider walks.
  */
 export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, ramp: TokenRamp, group: TokenGroup, defaults: { light: ShadeStop, dark: ShadeStop } }> = [
   { token: '--ui-primary', label: 'Primary', ramp: 'primary', group: 'colors', defaults: { light: 500, dark: 400 } },
@@ -206,21 +196,17 @@ export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, ramp: To
   { token: '--ui-info', label: 'Info', ramp: 'info', group: 'colors', defaults: { light: 500, dark: 400 } },
   { token: '--ui-warning', label: 'Warning', ramp: 'warning', group: 'colors', defaults: { light: 500, dark: 400 } },
   { token: '--ui-error', label: 'Error', ramp: 'error', group: 'colors', defaults: { light: 500, dark: 400 } },
-  { token: '--ui-bg', label: 'Default', ramp: 'neutral', group: 'background', defaults: { light: 'white', dark: 900 } },
-  { token: '--ui-bg-muted', label: 'Muted', ramp: 'neutral', group: 'background', defaults: { light: 50, dark: 800 } },
-  { token: '--ui-bg-elevated', label: 'Elevated', ramp: 'neutral', group: 'background', defaults: { light: 100, dark: 800 } },
-  { token: '--ui-bg-accented', label: 'Accented', ramp: 'neutral', group: 'background', defaults: { light: 200, dark: 700 } },
-  { token: '--ui-bg-inverted', label: 'Inverted', ramp: 'neutral', group: 'background', defaults: { light: 900, dark: 'white' } },
-  { token: '--ui-text-dimmed', label: 'Dimmed', ramp: 'neutral', group: 'text', defaults: { light: 400, dark: 500 } },
+  { token: '--ui-bg-default', label: 'Default', ramp: 'neutral', group: 'background', defaults: { light: 'white', dark: 900 } },
+  { token: '--ui-bg-soft', label: 'Soft', ramp: 'neutral', group: 'background', defaults: { light: 100, dark: 800 } },
+  { token: '--ui-bg-strong', label: 'Strong', ramp: 'neutral', group: 'background', defaults: { light: 200, dark: 700 } },
+  { token: '--ui-neutral', label: 'Solid', ramp: 'neutral', group: 'background', defaults: { light: 900, dark: 50 } },
+  { token: '--ui-text-faint', label: 'Faint', ramp: 'neutral', group: 'text', defaults: { light: 400, dark: 500 } },
   { token: '--ui-text-muted', label: 'Muted', ramp: 'neutral', group: 'text', defaults: { light: 500, dark: 400 } },
-  { token: '--ui-text-toned', label: 'Toned', ramp: 'neutral', group: 'text', defaults: { light: 600, dark: 300 } },
-  { token: '--ui-text', label: 'Default', ramp: 'neutral', group: 'text', defaults: { light: 700, dark: 200 } },
-  { token: '--ui-text-highlighted', label: 'Highlighted', ramp: 'neutral', group: 'text', defaults: { light: 900, dark: 'white' } },
-  { token: '--ui-text-inverted', label: 'Inverted', ramp: 'neutral', group: 'text', defaults: { light: 'white', dark: 900 } },
-  { token: '--ui-border', label: 'Default', ramp: 'neutral', group: 'border', defaults: { light: 200, dark: 800 } },
-  { token: '--ui-border-muted', label: 'Muted', ramp: 'neutral', group: 'border', defaults: { light: 200, dark: 700 } },
-  { token: '--ui-border-accented', label: 'Accented', ramp: 'neutral', group: 'border', defaults: { light: 300, dark: 700 } },
-  { token: '--ui-border-inverted', label: 'Inverted', ramp: 'neutral', group: 'border', defaults: { light: 900, dark: 'white' } }
+  { token: '--ui-text-default', label: 'Default', ramp: 'neutral', group: 'text', defaults: { light: 700, dark: 200 } },
+  { token: '--ui-text-strong', label: 'Strong', ramp: 'neutral', group: 'text', defaults: { light: 900, dark: 'white' } },
+  { token: '--ui-text-contrast', label: 'Contrast', ramp: 'neutral', group: 'text', defaults: { light: 'white', dark: 900 } },
+  { token: '--ui-border-default', label: 'Default', ramp: 'neutral', group: 'border', defaults: { light: 200, dark: 800 } },
+  { token: '--ui-border-strong', label: 'Strong', ramp: 'neutral', group: 'border', defaults: { light: 300, dark: 700 } }
 ]
 /**
  * A ramp shade reference, or the literal for white/black. Only the 11 standard
@@ -300,14 +286,16 @@ export function styleComponents(style: StyleOptions): Fragments {
     }
   }
 
+  // Size and color go app-wide, through `ui.defaultVariants`: the library
+  // gives them to every component whose own default is `md` or `primary`.
   const size = style.defaults?.size
-  if (size && size !== 'default') {
-    for (const component of SIZE_SUPPORT) {
-      defaults[component] = {
-        ...defaults[component],
-        defaultVariants: { ...(defaults[component] as any)?.defaultVariants, size }
-      }
-    }
+  const color = style.defaults?.color
+  const global = {
+    ...(size && size !== 'default' && size !== 'md' ? { size } : {}),
+    ...(color && color !== 'default' && color !== 'primary' ? { color } : {})
+  }
+  if (Object.keys(global).length) {
+    ;(defaults as Record<string, any>).defaultVariants = global
   }
 
   return defaults
@@ -357,7 +345,10 @@ export function mergeUi(
 ): Record<string, any> {
   const result: Record<string, any> = {}
   for (const key of new Set([...Object.keys(base || {}), ...Object.keys(extra || {})])) {
-    const merged = mergeComponentOverrides(base?.[key], extra?.[key])
+    // the app-wide `defaultVariants` holds variant names, later value wins per key
+    const merged = key === 'defaultVariants'
+      ? { ...base?.[key], ...extra?.[key] }
+      : mergeComponentOverrides(base?.[key], extra?.[key])
     if (merged && Object.keys(merged).length) result[key] = merged
   }
   return result
@@ -371,7 +362,7 @@ export function mergeUi(
 export function isDefaultStyle(style: StyleOptions = {}): boolean {
   const set = (value?: string) => !!value && value !== 'default'
   const defaults = style.defaults ?? {}
-  return !set(defaults.variant) && !set(defaults.size)
+  return !set(defaults.variant) && !set(defaults.size) && !set(defaults.color)
     && !Object.values(defaults.variants ?? {}).some(set)
     && !Object.values(defaults.colors ?? {}).some(set)
     && !Object.values(style.tokenShades ?? {}).some(modes => modes && Object.keys(modes).length)
@@ -393,21 +384,17 @@ export const LIBRARY_TOKEN_DEFAULTS = {
     '--ui-info': 'var(--ui-color-info-500)',
     '--ui-warning': 'var(--ui-color-warning-500)',
     '--ui-error': 'var(--ui-color-error-500)',
-    '--ui-text-dimmed': 'var(--ui-color-neutral-400)',
+    '--ui-neutral': 'var(--ui-color-neutral-900)',
+    '--ui-text-faint': 'var(--ui-color-neutral-400)',
     '--ui-text-muted': 'var(--ui-color-neutral-500)',
-    '--ui-text-toned': 'var(--ui-color-neutral-600)',
-    '--ui-text': 'var(--ui-color-neutral-700)',
-    '--ui-text-highlighted': 'var(--ui-color-neutral-900)',
-    '--ui-text-inverted': 'white',
-    '--ui-bg': 'white',
-    '--ui-bg-muted': 'var(--ui-color-neutral-50)',
-    '--ui-bg-elevated': 'var(--ui-color-neutral-100)',
-    '--ui-bg-accented': 'var(--ui-color-neutral-200)',
-    '--ui-bg-inverted': 'var(--ui-color-neutral-900)',
-    '--ui-border': 'var(--ui-color-neutral-200)',
-    '--ui-border-muted': 'var(--ui-color-neutral-200)',
-    '--ui-border-accented': 'var(--ui-color-neutral-300)',
-    '--ui-border-inverted': 'var(--ui-color-neutral-900)'
+    '--ui-text-default': 'var(--ui-color-neutral-700)',
+    '--ui-text-strong': 'var(--ui-color-neutral-900)',
+    '--ui-text-contrast': 'white',
+    '--ui-bg-default': 'white',
+    '--ui-bg-soft': 'var(--ui-color-neutral-100)',
+    '--ui-bg-strong': 'var(--ui-color-neutral-200)',
+    '--ui-border-default': 'var(--ui-color-neutral-200)',
+    '--ui-border-strong': 'var(--ui-color-neutral-300)'
   },
   dark: {
     '--ui-primary': 'var(--ui-color-primary-400)',
@@ -416,21 +403,17 @@ export const LIBRARY_TOKEN_DEFAULTS = {
     '--ui-info': 'var(--ui-color-info-400)',
     '--ui-warning': 'var(--ui-color-warning-400)',
     '--ui-error': 'var(--ui-color-error-400)',
-    '--ui-text-dimmed': 'var(--ui-color-neutral-500)',
+    '--ui-neutral': 'var(--ui-color-neutral-50)',
+    '--ui-text-faint': 'var(--ui-color-neutral-500)',
     '--ui-text-muted': 'var(--ui-color-neutral-400)',
-    '--ui-text-toned': 'var(--ui-color-neutral-300)',
-    '--ui-text': 'var(--ui-color-neutral-200)',
-    '--ui-text-highlighted': 'white',
-    '--ui-text-inverted': 'var(--ui-color-neutral-900)',
-    '--ui-bg': 'var(--ui-color-neutral-900)',
-    '--ui-bg-muted': 'var(--ui-color-neutral-800)',
-    '--ui-bg-elevated': 'var(--ui-color-neutral-800)',
-    '--ui-bg-accented': 'var(--ui-color-neutral-700)',
-    '--ui-bg-inverted': 'white',
-    '--ui-border': 'var(--ui-color-neutral-800)',
-    '--ui-border-muted': 'var(--ui-color-neutral-700)',
-    '--ui-border-accented': 'var(--ui-color-neutral-700)',
-    '--ui-border-inverted': 'white'
+    '--ui-text-default': 'var(--ui-color-neutral-200)',
+    '--ui-text-strong': 'white',
+    '--ui-text-contrast': 'var(--ui-color-neutral-900)',
+    '--ui-bg-default': 'var(--ui-color-neutral-900)',
+    '--ui-bg-soft': 'var(--ui-color-neutral-800)',
+    '--ui-bg-strong': 'var(--ui-color-neutral-700)',
+    '--ui-border-default': 'var(--ui-color-neutral-800)',
+    '--ui-border-strong': 'var(--ui-color-neutral-700)'
   }
 } as const
 

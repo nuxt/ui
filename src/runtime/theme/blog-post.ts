@@ -7,7 +7,7 @@ export default defineTheme({
     body: 'min-w-0 flex-1 flex flex-col',
     footer: '',
     image: 'object-cover object-top w-full h-full',
-    title: 'text-xl text-pretty font-semibold text-highlighted',
+    title: 'text-xl text-pretty font-semibold text-strong',
     description: 'mt-1 text-base text-pretty',
     authors: 'pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5',
     avatar: '',
@@ -29,36 +29,36 @@ export default defineTheme({
     variant: {
       outline: {
         root: 'bg-default ring ring-default',
-        date: 'text-toned',
+        date: 'text-default',
         description: 'text-muted'
       },
       soft: {
-        root: 'bg-elevated/50',
+        root: 'bg-tint',
         date: 'text-muted',
-        description: 'text-toned'
+        description: 'text-default'
       },
       subtle: {
-        root: 'bg-elevated/50 ring ring-default',
+        root: 'bg-tint ring ring-default',
         date: 'text-muted',
-        description: 'text-toned'
+        description: 'text-default'
       },
       ghost: {
-        date: 'text-toned',
+        date: 'text-default',
         description: 'text-muted',
         header: 'shadow-lg rounded-lg'
       },
       naked: {
         root: 'p-0 sm:p-0',
-        date: 'text-toned',
+        date: 'text-default',
         description: 'text-muted',
         header: 'shadow-lg rounded-lg'
       }
     },
     to: {
       true: {
-        root: 'outline-primary/25 has-[>a:focus-visible]:outline-3 transition',
+        root: 'outline-focus has-[>a:focus-visible]:outline-3 transition',
         image: 'transform transition-transform ease-out motion-reduce:transition-none group-hover/blog-post:scale-110',
-        avatar: 'inline-flex transform transition-transform ease-out motion-reduce:transition-none hover:scale-115 rounded-full outline-primary/25 focus-visible:outline-3'
+        avatar: 'inline-flex transform transition-transform ease-out motion-reduce:transition-none hover:scale-115 rounded-full outline-focus focus-visible:outline-3'
       }
     },
     image: {
@@ -69,19 +69,19 @@ export default defineTheme({
     variant: 'outline',
     to: true,
     class: {
-      root: 'hover:bg-elevated/50'
+      root: 'hover:bg-tint'
     }
   }, {
     variant: 'soft',
     to: true,
     class: {
-      root: 'hover:bg-elevated'
+      root: 'hover:bg-soft'
     }
   }, {
     variant: 'subtle',
     to: true,
     class: {
-      root: 'hover:bg-elevated hover:ring-accented'
+      root: 'hover:bg-soft hover:ring-strong'
     }
   }, {
     variant: ['outline', 'subtle'],
@@ -93,7 +93,7 @@ export default defineTheme({
     variant: 'ghost',
     to: true,
     class: {
-      root: 'hover:bg-elevated/50',
+      root: 'hover:bg-tint',
       header: 'group-hover/blog-post:shadow-none transition-[box-shadow,border-radius] ease-out'
     }
   }, {

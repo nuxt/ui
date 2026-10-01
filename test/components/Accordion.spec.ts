@@ -51,7 +51,7 @@ describe('Accordion', () => {
     ['with trailingIcon', { props: { ...props, trailingIcon: 'i-lucide-plus' } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'w-96' } }],
-    ['with ui', { props: { ...props, ui: { item: 'border-accented' } } }],
+    ['with ui', { props: { ...props, ui: { item: 'border-strong' } } }],
     // Slots
     ['with leading slot', { props: { ...props, modelValue: '1' }, slots: { leading: () => 'Leading slot' } }],
     ['with default slot', { props: { ...props, modelValue: '1' }, slots: { default: () => 'Default slot' } }],

@@ -11,8 +11,8 @@ describe('applyUnstyled', () => {
     },
     variants: {
       color: {
-        primary: 'bg-primary text-inverted',
-        neutral: { base: 'bg-inverted', label: 'text-default' }
+        primary: 'bg-primary text-contrast',
+        neutral: { base: 'bg-neutral', label: 'text-default' }
       },
       size: {
         md: { base: 'px-2.5 text-sm' }
@@ -41,9 +41,9 @@ describe('applyUnstyled', () => {
 
   it('blanks a single-slot theme', () => {
     // Single-element components (e.g. Skeleton) declare one `base` slot.
-    const theme = { slots: { base: 'animate-pulse rounded-md bg-elevated' } }
+    const theme = { slots: { base: 'animate-pulse rounded-md bg-soft' } }
     expect(applyUnstyled(theme, true)).toEqual({ slots: { base: '' } })
-    expect(theme.slots.base).toBe('animate-pulse rounded-md bg-elevated')
+    expect(theme.slots.base).toBe('animate-pulse rounded-md bg-soft')
 
     expect(applyUnstyled({ slots: { base: ['flex', 'transition-colors'] } }, true)).toEqual({ slots: { base: '' } })
   })
@@ -118,7 +118,7 @@ describe('applyPrefix', () => {
     variants: {
       color: {
         primary: { base: 'bg-primary' },
-        neutral: { base: 'bg-inverted', label: 'text-default' }
+        neutral: { base: 'bg-neutral', label: 'text-default' }
       }
     },
     compoundVariants: [
@@ -133,7 +133,7 @@ describe('applyPrefix', () => {
     const result = applyPrefix(theme(), 'tw')
 
     expect(result.slots).toEqual({ base: 'tw:inline-flex tw:rounded-md', label: ['tw:truncate', 'tw:font-medium'] })
-    expect(result.variants.color.neutral).toEqual({ base: 'tw:bg-inverted', label: 'tw:text-default' })
+    expect(result.variants.color.neutral).toEqual({ base: 'tw:bg-neutral', label: 'tw:text-default' })
     expect(result.compoundVariants[0].class).toEqual({ base: 'tw:shadow-xs' })
   })
 
@@ -159,7 +159,7 @@ describe('applyPrefix', () => {
 
   it('lists every class once, prefixed', () => {
     expect(getThemeClasses([theme(), { slots: { base: 'inline-flex' } }], 'tw')).toEqual([
-      'tw:bg-inverted',
+      'tw:bg-neutral',
       'tw:bg-primary',
       'tw:font-medium',
       'tw:inline-flex',
