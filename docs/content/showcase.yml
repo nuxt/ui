@@ -11,6 +11,8 @@ hero:
 items:
   - name: Ace
     url: https://acecompany.nl/
+  - name: Avelune Online
+    url: https://avelune-online.vercel.app/
   - name: Brusnika.LMS
     url: https://brusnika-lms.com/
     screenshotOptions:
