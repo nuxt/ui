@@ -38,10 +38,10 @@ export default defineTheme({
     color: colorVariant({ root: '' }),
     variant: {
       solid: {
-        cellTrigger: 'data-selected:bg-accent data-selected:text-accent-contrast data-today:not-data-selected:text-accent data-highlighted:bg-accent-strong hover:not-data-selected:bg-accent-strong'
+        cellTrigger: 'data-selected:bg-accent data-selected:text-accent-contrast data-today:not-data-selected:text-accent data-highlighted:bg-accent-tint hover:not-data-selected:bg-accent-tint'
       },
       outline: {
-        cellTrigger: 'data-selected:ring data-selected:ring-inset data-selected:ring-accent-strong data-selected:text-accent-default data-selected:focus-visible:ring-accent data-today:not-data-selected:text-accent data-highlighted:bg-accent-soft hover:not-data-selected:bg-accent-soft'
+        cellTrigger: 'data-selected:ring data-selected:ring-inset data-selected:ring-accent-strong data-selected:text-accent-default data-selected:focus-visible:ring-accent data-today:not-data-selected:text-accent data-highlighted:bg-accent-tint hover:not-data-selected:bg-accent-tint'
       },
       soft: {
         cellTrigger: 'data-selected:bg-accent-soft data-selected:text-accent-default data-today:not-data-selected:text-accent data-highlighted:bg-accent-tint hover:not-data-selected:bg-accent-tint'
