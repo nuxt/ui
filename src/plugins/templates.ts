@@ -22,6 +22,8 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
   let root = ''
   let scanDirs: string[] = []
   let templateFiles: Record<string, string> = {}
+  // The files the last `writeTemplates` run changed
+  let writtenFiles = new Set<string>()
 
   // The first run warns about what it can't resolve, the dev server's reruns don't repeat it
   function detect(warn = true) {
@@ -39,6 +41,7 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
     const map: Record<string, string> = {}
     const dir = path.join(root, 'node_modules', '.nuxt-ui')
     const createdDirs = new Set<string>()
+    writtenFiles = new Set()
     for (const template of templates) {
       if (!template.write || !template.filename) {
         continue
@@ -65,6 +68,7 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
       }
       if (existing !== contents) {
         fs.writeFileSync(filePath, contents)
+        writtenFiles.add(filePath)
       }
 
       map[`#build/${template.filename}`] = filePath
@@ -111,8 +115,9 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
           }
         }
       },
-      // A component used for the first time in dev needs its theme CSS: detect
-      // again when the source changes, and rewrite `ui.css` when the set does
+      // Detect again when the source changes, for the dev warning to follow the
+      // components in use. `ui.css` only lists them with a `tailwindPrefix`: it's
+      // rewritten when the set changes, for a new component to get its theme CSS
       configureServer(server) {
         if (!options.componentDetection) {
           return
@@ -136,7 +141,7 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
           // The templates live in `node_modules`, which Vite doesn't watch, so
           // tell it `ui.css` changed for Tailwind to rebuild the CSS importing it
           const file = templateFiles['#build/ui.css']
-          if (file) {
+          if (file && writtenFiles.has(file)) {
             server.watcher.emit('change', file)
           }
 

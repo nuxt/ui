@@ -65,6 +65,11 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     detection = undefined
   })
 
+  // Read when a template generates: the Vue plugin only knows the command by then
+  function isDev() {
+    return nuxt ? nuxt.options.dev : !!vue?.dev
+  }
+
   function getDetectedComponents(app?: NuxtApp) {
     return nuxt ? (detection ??= detectComponents(app)) : Promise.resolve(vue?.detectedComponents)
   }
@@ -172,7 +177,9 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     // Tailwind also only generates prefixed candidates, while the themes keep
     // their classes unprefixed since the engine prefixes them at runtime. So
     // either way, the themes' resolved classes are listed inline instead.
-    if (detectedComponents?.size || options.tailwindPrefix) {
+    // Detection only narrows the build: the list comes from the themes imported
+    // at startup, so in dev the files are scanned for an edit to reach the CSS.
+    if ((detectedComponents?.size && !isDev()) || options.tailwindPrefix) {
       sources.push(`@source not "${themeDir}";`)
       sources.push(`@source inline(${JSON.stringify(getThemeClasses(themes, options.tailwindPrefix).join(' '))});`)
     } else {
@@ -193,14 +200,14 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     getContents: ({ app }) => generateSources(app)
   })
 
-  // The themes detection put in the CSS, for the dev warning in
-  // `useComponentProps` when a component renders without its classes. `null`
-  // when there's nothing to check.
+  // The themes detection puts in the build's CSS, for the dev warning in
+  // `useComponentProps` when a component renders that the build would leave
+  // without its classes. `null` when there's nothing to check.
   templates.push({
     filename: 'ui/detected.ts',
     write: true,
     getContents: async ({ app }) => {
-      if (!options.componentDetection || !(nuxt ? nuxt.options.dev : vue?.dev)) {
+      if (!options.componentDetection || !isDev()) {
         return 'export default null as Set<string> | null\n'
       }
 
