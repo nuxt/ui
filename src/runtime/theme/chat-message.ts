@@ -20,13 +20,13 @@ export default defineTheme({
         content: 'bg-accent text-accent-contrast'
       },
       outline: {
-        content: 'text-accent-default bg-default ring ring-accent-default'
+        content: 'text-accent-default bg-default ring ring-accent-strong'
       },
       soft: {
-        content: 'bg-accent-tint text-accent-default'
+        content: 'bg-accent-soft text-accent-default'
       },
       subtle: {
-        content: 'bg-accent-tint text-accent-default ring ring-accent-default'
+        content: 'bg-accent-soft text-accent-default ring ring-accent-strong'
       },
       naked: {
         content: 'text-accent-default'
