@@ -22,6 +22,8 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
   let root = ''
   let scanDirs: string[] = []
   let templateFiles: Record<string, string> = {}
+  // The files the last `writeTemplates` run changed
+  let writtenFiles = new Set<string>()
 
   // The first run warns about what it can't resolve, the dev server's reruns don't repeat it
   function detect(warn = true) {
@@ -39,6 +41,7 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
     const map: Record<string, string> = {}
     const dir = path.join(root, 'node_modules', '.nuxt-ui')
     const createdDirs = new Set<string>()
+    writtenFiles = new Set()
     for (const template of templates) {
       if (!template.write || !template.filename) {
         continue
@@ -65,6 +68,7 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
       }
       if (existing !== contents) {
         fs.writeFileSync(filePath, contents)
+        writtenFiles.add(filePath)
       }
 
       map[`#build/${template.filename}`] = filePath
@@ -131,15 +135,13 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
             consola.success(`Nuxt UI detected new components: ${added.join(', ')}`)
           }
 
-          const file = templateFiles['#build/ui.css']
-          const previousCss = file && fs.readFileSync(file, 'utf8')
-
           vue.detectedComponents = detected
           await writeTemplates(root)
 
           // The templates live in `node_modules`, which Vite doesn't watch, so
           // tell it `ui.css` changed for Tailwind to rebuild the CSS importing it
-          if (file && fs.readFileSync(file, 'utf8') !== previousCss) {
+          const file = templateFiles['#build/ui.css']
+          if (file && writtenFiles.has(file)) {
             server.watcher.emit('change', file)
           }
 
