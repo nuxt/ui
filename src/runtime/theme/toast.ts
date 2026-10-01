@@ -5,7 +5,7 @@ export default defineTheme({
   slots: {
     root: 'relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent',
     wrapper: 'w-0 flex-1 flex flex-col',
-    title: 'text-sm font-medium text-highlighted',
+    title: 'text-sm font-medium text-strong',
     description: 'text-sm text-muted',
     icon: 'shrink-0 size-5 text-accent',
     avatar: 'shrink-0',

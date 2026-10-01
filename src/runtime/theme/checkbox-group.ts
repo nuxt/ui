@@ -28,7 +28,7 @@ export default defineTheme({
         fieldset: 'flex-wrap'
       },
       table: {
-        item: `border border-default has-aria-disabled:cursor-not-allowed hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors ${focusCard} has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent has-data-[state=checked]:z-[1]`
+        item: `border border-default has-aria-disabled:cursor-not-allowed hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors ${focusCard} has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent/50 has-data-[state=checked]:z-[1]`
       }
     },
     size: {
@@ -71,7 +71,7 @@ export default defineTheme({
       variant: 'table',
       highlight: false,
       class: {
-        item: 'hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-accented'
+        item: 'hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong'
       }
     },
     { size: 'xs', variant: 'table', class: { item: 'p-2.5' } },

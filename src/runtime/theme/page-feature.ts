@@ -6,7 +6,7 @@ export default defineTheme({
     wrapper: '',
     leading: 'inline-flex items-center justify-center',
     leadingIcon: 'size-5 shrink-0 text-primary',
-    title: 'text-base text-pretty font-semibold text-highlighted',
+    title: 'text-base text-pretty font-semibold text-strong',
     description: 'text-[15px] text-pretty text-muted'
   },
   variants: {
@@ -21,7 +21,7 @@ export default defineTheme({
     },
     to: {
       true: {
-        root: 'outline-primary/25 has-focus-visible:outline-3 transition'
+        root: 'outline-focus has-focus-visible:outline-3 transition'
       }
     },
     title: {

@@ -52,7 +52,7 @@ function selectRange(range: typeof ranges[number]) {
     </UButton>
 
     <template #content>
-      <div class="flex items-stretch divide-x divide-(--ui-border)">
+      <div class="flex items-stretch divide-x divide-default">
         <div class="hidden sm:flex flex-col justify-center py-2">
           <UButton
             v-for="(range, index) in ranges"
@@ -61,7 +61,7 @@ function selectRange(range: typeof ranges[number]) {
             color="neutral"
             variant="ghost"
             class="rounded-none px-4"
-            :class="[isRangeSelected(range) ? 'bg-elevated' : 'hover:bg-elevated/50']"
+            :class="[isRangeSelected(range) ? 'bg-soft' : 'hover:bg-tint']"
             truncate
             @click="selectRange(range)"
           />

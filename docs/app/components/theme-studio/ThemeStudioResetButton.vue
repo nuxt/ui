@@ -22,7 +22,7 @@ const { canReset, resetLabel, resetToBaseline } = useThemeStudioToolbar()
       :block="vertical"
       :disabled="!canReset"
       :aria-label="resetLabel"
-      :ui="{ leadingIcon: vertical && 'text-dimmed' }"
+      :ui="{ leadingIcon: vertical && 'text-faint' }"
       @click="resetToBaseline"
     />
   </UTooltip>

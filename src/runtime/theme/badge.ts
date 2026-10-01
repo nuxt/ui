@@ -15,16 +15,16 @@ export default defineTheme({
     color: colorVariant({ base: '' }),
     variant: {
       solid: {
-        base: 'bg-accent text-accent-foreground'
+        base: 'bg-accent text-accent-contrast'
       },
       outline: {
-        base: 'text-accent-soft-foreground bg-accent-surface ring ring-inset ring-accent-border'
+        base: 'text-accent-default bg-default ring ring-inset ring-accent-strong'
       },
       soft: {
-        base: 'bg-accent-soft text-accent-soft-foreground'
+        base: 'bg-accent-soft text-accent-default'
       },
       subtle: {
-        base: 'bg-accent-soft text-accent-soft-foreground ring ring-inset ring-accent-border-soft'
+        base: 'bg-accent-soft text-accent-default ring ring-inset ring-accent-strong'
       }
     },
     size: {

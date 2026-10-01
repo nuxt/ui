@@ -66,7 +66,7 @@ export function useThemeStudio() {
     }
     theme.removeCSSVariables(removed)
 
-    // A shade slider on one of the five remapped tokens had overwritten the
+    // A shade slider on one of the three remapped tokens had overwritten the
     // remap under the same name; resetting that slider must fall back to
     // the remap, not to the library's white literal.
     const restored = {
@@ -166,24 +166,18 @@ export function useThemeStudio() {
   }
 
   /**
-   * The library hardcodes five tokens to `white` (light `--ui-bg` and
-   * `--ui-text-inverted`; dark `--ui-text-highlighted`, `--ui-bg-inverted`
-   * and `--ui-border-inverted`), so a tinted neutral ramp would never reach
-   * them. Choosing a neutral re-routes all five through the ramp, and lifts
-   * the muted surface a stop: the library sits it at 50 too, so it would
-   * land ON the page and every muted panel would lose its shape. The
-   * presets' tintedNeutralBase carries the same six.
+   * The library hardcodes three tokens to `white` (light `--ui-bg-default`
+   * and `--ui-text-contrast`, dark `--ui-text-strong`), so a tinted neutral
+   * ramp would never reach them. Choosing a neutral re-routes all three
+   * through the ramp. The presets' tintedNeutralBase carries the same three.
    */
   const NEUTRAL_TOKEN_REMAPS = {
     light: {
-      '--ui-bg': 'var(--ui-color-neutral-50)',
-      '--ui-bg-muted': 'var(--ui-color-neutral-100)',
-      '--ui-text-inverted': 'var(--ui-color-neutral-50)'
+      '--ui-bg-default': 'var(--ui-color-neutral-50)',
+      '--ui-text-contrast': 'var(--ui-color-neutral-50)'
     },
     dark: {
-      '--ui-text-highlighted': 'var(--ui-color-neutral-50)',
-      '--ui-bg-inverted': 'var(--ui-color-neutral-50)',
-      '--ui-border-inverted': 'var(--ui-color-neutral-50)'
+      '--ui-text-strong': 'var(--ui-color-neutral-50)'
     }
   }
 
@@ -357,7 +351,7 @@ export function useThemeStudio() {
 
     // Variant re-rolls are the loud ones, so each group rolls rarely and
     // independently; most shuffles restyle none, a lucky one restyles two.
-    // `solid` stays off cards (an inverted, full-white panel in dark mode)
+    // `solid` stays off cards (the neutral solid, a near-white panel in dark mode)
     // and off inputs (fields don't support it). Left off entirely when
     // nothing rolled, an empty `style` would ride into history and exports
     // as a phantom key.

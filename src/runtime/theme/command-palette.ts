@@ -11,20 +11,20 @@ export default defineTheme({
     viewport: 'relative scroll-py-1 overflow-y-auto flex-1 focus:outline-none',
     group: 'p-1 isolate',
     empty: 'text-center text-muted',
-    label: 'font-semibold text-highlighted',
+    label: 'font-semibold text-strong',
     item: 'group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75',
     itemLeadingIcon: 'shrink-0',
     itemLeadingAvatar: 'shrink-0',
     itemLeadingChip: 'shrink-0',
     itemTrailing: 'ms-auto inline-flex items-center',
     itemTrailingIcon: 'shrink-0',
-    itemTrailingHighlightedIcon: 'shrink-0 text-dimmed hidden group-data-highlighted:inline-flex',
+    itemTrailingHighlightedIcon: 'shrink-0 text-faint hidden group-data-highlighted:inline-flex',
     itemTrailingKbds: 'hidden lg:inline-flex items-center shrink-0',
     itemWrapper: 'flex-1 flex flex-col text-start min-w-0',
-    itemLabel: 'truncate space-x-1 text-dimmed',
-    itemLabelBase: 'text-highlighted [&>mark]:text-primary [&>mark]:bg-primary/15',
+    itemLabel: 'truncate space-x-1 text-faint',
+    itemLabelBase: 'text-strong [&>mark]:text-primary [&>mark]:bg-primary/15',
     itemLabelPrefix: 'text-default',
-    itemLabelSuffix: 'text-dimmed [&>mark]:text-primary [&>mark]:bg-primary/15',
+    itemLabelSuffix: 'text-faint [&>mark]:text-primary [&>mark]:bg-primary/15',
     itemDescription: 'truncate text-muted [&>mark]:text-primary [&>mark]:bg-primary/15'
   },
   variants: {
@@ -100,12 +100,12 @@ export default defineTheme({
     },
     active: {
       true: {
-        item: 'text-highlighted before:bg-elevated',
+        item: 'text-strong before:bg-soft',
         itemLeadingIcon: 'text-default'
       },
       false: {
-        item: 'text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors',
-        itemLeadingIcon: 'text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors'
+        item: 'text-default data-highlighted:not-data-disabled:text-strong data-highlighted:not-data-disabled:before:bg-tint transition-colors before:transition-colors',
+        itemLeadingIcon: 'text-faint group-data-highlighted:not-group-data-disabled:text-default transition-colors'
       }
     },
     loading: {

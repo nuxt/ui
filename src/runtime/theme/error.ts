@@ -6,7 +6,7 @@ export default defineTheme({
     leading: 'mb-4 flex items-center justify-center',
     leadingIcon: 'size-10 shrink-0 text-primary',
     statusCode: 'text-base font-semibold text-primary',
-    statusMessage: 'mt-2 text-4xl sm:text-5xl font-bold text-highlighted text-balance',
+    statusMessage: 'mt-2 text-4xl sm:text-5xl font-bold text-strong text-balance',
     message: 'mt-4 text-lg text-muted text-balance',
     links: 'mt-8 flex items-center justify-center gap-6'
   }

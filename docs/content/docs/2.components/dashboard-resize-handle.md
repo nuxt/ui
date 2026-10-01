@@ -28,7 +28,7 @@ Even though this component is automatically displayed when the `resizable` prop 
     <UDashboardSidebar resizable>
       <template #resize-handle="{ onMouseDown, onTouchStart, onDoubleClick }">
         <UDashboardResizeHandle
-          class="after:absolute after:inset-y-0 after:right-0 after:w-px hover:after:bg-(--ui-border-accented) after:transition"
+          class="after:absolute after:inset-y-0 after:right-0 after:w-px hover:after:bg-(--ui-border-strong) after:transition"
           @mousedown="onMouseDown"
           @touchstart="onTouchStart"
           @dblclick="onDoubleClick"
@@ -52,7 +52,7 @@ definePageMeta({
   <UDashboardPanel resizable>
     <template #resize-handle="{ onMouseDown, onTouchStart, onDoubleClick }">
       <UDashboardResizeHandle
-        class="after:absolute after:inset-y-0 after:right-0 after:w-px hover:after:bg-(--ui-border-accented) after:transition"
+        class="after:absolute after:inset-y-0 after:right-0 after:w-px hover:after:bg-(--ui-border-strong) after:transition"
         @mousedown="onMouseDown"
         @touchstart="onTouchStart"
         @dblclick="onDoubleClick"

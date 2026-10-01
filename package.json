@@ -19,7 +19,7 @@
       "style": "./dist/runtime/css/index.css",
       "import": "./dist/module.mjs"
     },
-    "./sources": "./dist/runtime/css/sources.css",
+    "./tailwind": "./dist/runtime/css/tailwind.css",
     "./base": "./dist/runtime/css/base.css",
     "./colors": {
       "types": "./dist/runtime/css/colors.d.ts",

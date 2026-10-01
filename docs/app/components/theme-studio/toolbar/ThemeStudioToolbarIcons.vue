@@ -24,7 +24,7 @@ const { groupDirtyFlags } = useThemeStudioToolbar()
           v-for="name in iconSetSamples(String(item.value))"
           :key="name"
           :name="name"
-          class="size-3 text-dimmed"
+          class="size-3 text-faint"
         />
       </span>
     </template>

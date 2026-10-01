@@ -329,7 +329,7 @@ prompt: |
 
   Requirements:
   - Use \`UDashboardPanel\`, \`UDashboardSidebar\` and \`UDashboardNavbar\`
-  - Use semantic color tokens like \`bg-elevated\` and \`text-muted\`
+  - Use semantic color tokens like \`bg-soft\` and \`text-muted\`
   - The sidebar should include navigation links with icons using \`UNavigationMenu\`
   - The layout must collapse the sidebar on mobile
 ---

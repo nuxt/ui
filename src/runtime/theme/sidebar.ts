@@ -8,13 +8,13 @@ export default defineTheme({
     inner: 'flex size-full flex-col overflow-hidden divide-y divide-default',
     header: 'flex items-center gap-1.5 overflow-hidden px-4 min-h-(--ui-header-height)',
     wrapper: 'min-w-0 flex-1',
-    title: 'text-highlighted font-semibold truncate',
+    title: 'text-strong font-semibold truncate',
     description: 'text-muted text-sm truncate',
     actions: 'flex items-center gap-1.5 shrink-0',
     close: '',
     body: 'flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4',
     footer: 'flex items-center gap-1.5 overflow-hidden p-4',
-    rail: 'absolute inset-y-0 z-20 hidden w-4 after:absolute after:inset-y-0 after:left-1/2 after:w-px hover:after:bg-(--ui-border-accented) after:transition-colors'
+    rail: 'absolute inset-y-0 z-20 hidden w-4 after:absolute after:inset-y-0 after:left-1/2 after:w-px hover:after:bg-(--ui-border-strong) after:transition-colors'
   },
   variants: {
     transition: {

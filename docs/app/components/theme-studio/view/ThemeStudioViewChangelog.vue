@@ -247,7 +247,7 @@ onMounted(() => {
             <!-- Stand-in for the template's AppLogo wordmark. -->
             <div class="flex items-center gap-1.5">
               <UIcon name="i-simple-icons-nuxt" class="size-6 text-primary shrink-0" />
-              <span class="text-xl font-bold"><span class="text-highlighted">Nuxt</span><span class="text-primary">UI</span></span>
+              <span class="text-xl font-bold"><span class="text-strong">Nuxt</span><span class="text-primary">UI</span></span>
             </div>
           </template>
 
@@ -275,7 +275,7 @@ onMounted(() => {
                 header: 'border-b border-default pb-4 mb-8',
                 title: 'text-3xl',
                 description: 'mt-2',
-                date: 'text-xs/9 text-highlighted font-mono',
+                date: 'text-xs/9 text-strong font-mono',
                 indicator: 'sticky top-0 pt-16 -mt-16 sm:pt-24 sm:-mt-24 lg:pt-32 lg:-mt-32'
               }"
             >

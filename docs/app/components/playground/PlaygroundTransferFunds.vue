@@ -15,7 +15,7 @@ const to = ref('savings')
   <div>
     <div class="p-4 space-y-4">
       <div>
-        <p class="font-semibold text-highlighted">
+        <p class="font-semibold text-strong">
           Transfer funds
         </p>
         <p class="text-sm text-muted">
@@ -38,11 +38,11 @@ const to = ref('savings')
       <div class="space-y-1.5 text-sm">
         <div class="flex justify-between">
           <span class="text-muted">Estimated arrival</span>
-          <span class="font-medium text-highlighted">Today</span>
+          <span class="font-medium text-strong">Today</span>
         </div>
         <div class="flex justify-between">
           <span class="text-muted">Transaction fee</span>
-          <span class="font-medium text-highlighted">$0.00</span>
+          <span class="font-medium text-strong">$0.00</span>
         </div>
       </div>
     </div>

@@ -36,7 +36,7 @@ const { data: meta } = await useFetchComponentMeta(name as any)
         <ProseTd>
           <HighlightInlineType v-if="slot.type" :type="slot.type" />
 
-          <DocsMarkdown v-if="slot.description" :value="slot.description" class="text-toned mt-1" />
+          <DocsMarkdown v-if="slot.description" :value="slot.description" class="text-default mt-1" />
         </ProseTd>
       </ProseTr>
     </ProseTbody>

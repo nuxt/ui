@@ -5,7 +5,7 @@ export default defineTheme({
     content: 'min-w-48 max-w-60 max-h-96 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col',
     viewport: 'relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1',
     group: 'p-1 isolate',
-    label: 'w-full flex items-center font-semibold text-highlighted',
+    label: 'w-full flex items-center font-semibold text-strong',
     separator: '-mx-1 my-1 h-px bg-border',
     item: 'group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75',
     itemLeadingIcon: 'shrink-0 flex items-center justify-center',
@@ -13,7 +13,7 @@ export default defineTheme({
     itemWrapper: 'flex-1 flex flex-col text-start min-w-0',
     itemLabel: 'truncate',
     itemDescription: 'truncate text-muted',
-    itemLabelExternalIcon: 'inline-block size-3 align-top text-dimmed'
+    itemLabelExternalIcon: 'inline-block size-3 align-top text-faint'
   },
   variants: {
     size: {
@@ -45,12 +45,12 @@ export default defineTheme({
     },
     active: {
       true: {
-        item: 'text-highlighted before:bg-elevated/75',
+        item: 'text-strong before:bg-soft',
         itemLeadingIcon: 'text-default'
       },
       false: {
-        item: 'text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors',
-        itemLeadingIcon: 'text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors'
+        item: 'text-default data-highlighted:not-data-disabled:text-strong data-highlighted:not-data-disabled:before:bg-tint transition-colors before:transition-colors',
+        itemLeadingIcon: 'text-faint group-data-highlighted:not-group-data-disabled:text-default transition-colors'
       }
     }
   },

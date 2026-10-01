@@ -6,7 +6,7 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'relative inline-flex items-center',
-    base: 'w-full rounded-md border-0 placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
+    base: 'w-full rounded-md border-0 text-strong placeholder:text-faint disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
     increment: 'absolute flex items-center',
     decrement: 'absolute flex items-center'
   },

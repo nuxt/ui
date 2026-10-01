@@ -41,9 +41,9 @@ const mode = computed({
     :size="size"
     :ui="{
       label: 'sr-only',
-      list: 'bg-elevated/50 ring ring-default p-0.5',
+      list: 'bg-tint ring ring-default p-0.5',
       indicator: 'bg-default inset-y-0.5',
-      trigger: 'data-[state=active]:text-highlighted w-full in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:bg-default p-1.5'
+      trigger: 'data-[state=active]:text-strong w-full in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:bg-default p-1.5'
     }"
     aria-label="Color mode"
   />

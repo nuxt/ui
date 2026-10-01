@@ -119,7 +119,7 @@ const metaProps: ComputedRef<ComponentMeta['props']> = computed(() => {
         <ProseTd>
           <HighlightInlineType v-if="prop.type" :type="prop.type" />
 
-          <DocsMarkdown v-if="prop.description" :value="prop.description" class="text-toned mt-1" />
+          <DocsMarkdown v-if="prop.description" :value="prop.description" class="text-default mt-1" />
 
           <ComponentPropsLinks v-if="prop.tags?.length" :prop="prop" />
           <ComponentPropsSchema v-if="prop.schema" :prop="prop" :ignore="ignore" />

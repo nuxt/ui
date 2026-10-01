@@ -9,10 +9,10 @@ export default defineTheme({
     label: 'text-sm font-semibold',
     list: 'mt-6 space-y-4',
     item: 'relative',
-    link: 'group text-sm flex items-center gap-1.5 rounded-sm outline-primary/25 focus-visible:outline-3',
+    link: 'group text-sm flex items-center gap-1.5 rounded-sm outline-focus focus-visible:outline-3',
     linkLeadingIcon: 'size-5 shrink-0',
     linkLabel: 'truncate',
-    linkLabelExternalIcon: 'size-3 absolute top-0 text-dimmed inline-block'
+    linkLabelExternalIcon: 'size-3 absolute top-0 text-faint inline-block'
   },
   variants: {
     active: {

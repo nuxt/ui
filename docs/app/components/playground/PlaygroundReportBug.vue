@@ -25,7 +25,7 @@ const file = ref<File | null>(null)
   <div>
     <div class="p-4 space-y-4">
       <div>
-        <p class="font-semibold text-highlighted">
+        <p class="font-semibold text-strong">
           Report a bug
         </p>
         <p class="text-sm text-muted">

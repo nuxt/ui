@@ -20,7 +20,7 @@ describe('Drawer', () => {
     ['without overlay', { props: { ...props, overlay: false, title: 'Title', description: 'Description' } }],
     ['with close', { props: { ...props, close: true, title: 'Title', description: 'Description' } }],
     ['with closeIcon', { props: { ...props, close: true, closeIcon: 'i-lucide-trash', title: 'Title', description: 'Description' } }],
-    ['with class', { props: { ...props, class: 'bg-elevated' } }],
+    ['with class', { props: { ...props, class: 'bg-soft' } }],
     ['with ui', { props: { ...props, ui: { handle: 'w-20' } } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],

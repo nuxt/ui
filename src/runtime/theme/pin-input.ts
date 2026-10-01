@@ -4,8 +4,8 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'relative inline-flex items-center gap-1.5',
-    base: 'rounded-md border-0 placeholder:text-dimmed text-center disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
-    separator: 'text-dimmed flex items-center justify-center'
+    base: 'rounded-md border-0 text-strong placeholder:text-faint text-center disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
+    separator: 'text-faint flex items-center justify-center'
   },
   variants: {
     size: {
@@ -26,11 +26,11 @@ export default defineTheme({
       }
     },
     variant: {
-      outline: { base: 'text-highlighted bg-default ring ring-inset ring-accented' },
-      soft: { base: 'text-highlighted bg-elevated/50 hover:bg-elevated focus:bg-elevated disabled:bg-elevated/50' },
-      subtle: { base: 'text-highlighted bg-elevated ring ring-inset ring-accented' },
-      ghost: { base: 'text-highlighted bg-transparent hover:bg-elevated focus:bg-elevated disabled:bg-transparent dark:disabled:bg-transparent' },
-      none: { base: 'text-highlighted bg-transparent focus:outline-none' }
+      outline: { base: 'bg-default ring ring-inset ring-strong' },
+      soft: { base: 'bg-tint hover:bg-soft focus:bg-soft disabled:bg-tint' },
+      subtle: { base: 'bg-soft ring ring-inset ring-strong' },
+      ghost: { base: 'bg-transparent hover:bg-soft focus:bg-soft disabled:bg-transparent dark:disabled:bg-transparent' },
+      none: { base: 'bg-transparent focus:outline-none' }
     },
     color: colorVariant({ root: '' }),
     highlight: {

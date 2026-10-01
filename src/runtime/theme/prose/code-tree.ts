@@ -2,12 +2,12 @@ import { defineTheme } from '../../utils/theme'
 
 export default defineTheme({
   slots: {
-    root: 'relative lg:h-[450px] my-5 grid lg:grid-cols-3 border border-muted rounded-md',
-    list: 'isolate relative p-2 border-b lg:border-b-0 lg:border-e border-muted overflow-y-auto',
+    root: 'relative lg:h-[450px] my-5 grid lg:grid-cols-3 border border-default rounded-md',
+    list: 'isolate relative p-2 border-b lg:border-b-0 lg:border-e border-default overflow-y-auto',
     item: '',
     listWithChildren: 'ms-4.5 border-s border-default',
     itemWithChildren: 'ps-1.5 -ms-px',
-    link: 'relative group peer w-full px-2.5 py-1.5 before:inset-y-px before:inset-x-0 flex items-center gap-1.5 text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none before:outline-primary/25 focus-visible:before:outline-3',
+    link: 'relative group peer w-full px-2.5 py-1.5 before:inset-y-px before:inset-x-0 flex items-center gap-1.5 text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none before:outline-focus focus-visible:before:outline-3',
     linkLeadingIcon: 'size-4 shrink-0',
     linkLabel: 'truncate',
     linkTrailing: 'ms-auto inline-flex gap-1.5 items-center',
@@ -17,10 +17,10 @@ export default defineTheme({
   variants: {
     active: {
       true: {
-        link: 'text-highlighted before:bg-elevated'
+        link: 'text-strong before:bg-soft'
       },
       false: {
-        link: 'hover:text-highlighted hover:before:bg-elevated/50 transition-colors before:transition-colors'
+        link: 'hover:text-strong hover:before:bg-tint transition-colors before:transition-colors'
       }
     }
   }

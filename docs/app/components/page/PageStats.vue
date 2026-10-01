@@ -21,7 +21,7 @@ defineProps<{
       :target="item.to?.startsWith('http') ? '_blank' : undefined"
       class="group flex flex-col gap-1.5 focus-visible:outline-primary"
     >
-      <span class="text-3xl sm:text-4xl font-semibold leading-[.95] tracking-[-.03em] tabular-nums text-highlighted group-hover:text-primary transition-colors">
+      <span class="text-3xl sm:text-4xl font-semibold leading-[.95] tracking-[-.03em] tabular-nums text-strong group-hover:text-primary transition-colors">
         {{ item.value }}
       </span>
       <span class="text-[9px] sm:text-[11.5px] font-medium uppercase tracking-[.09em] text-muted whitespace-nowrap">

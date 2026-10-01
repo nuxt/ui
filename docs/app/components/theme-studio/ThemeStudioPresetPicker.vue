@@ -174,7 +174,7 @@ const items = computed<DropdownMenuItem[][]>(() => [[{
   avatar: chip(view.value.preset?.id, view.value.doc),
   // edits on top of a preset keep its name (it stays the baseline), the name
   // goes primary like a changed value does
-  ui: { itemLabel: `font-semibold ${view.value.preset && view.value.modified ? 'text-primary' : 'text-highlighted'}` },
+  ui: { itemLabel: `font-semibold ${view.value.preset && view.value.modified ? 'text-primary' : 'text-strong'}` },
   // picking the current preset again reapplies it, dropping the edits on top
   children: presets.map(entry => option(`preset:${entry.id}`, {
     label: entry.name,
@@ -317,7 +317,7 @@ function isApplied(key: string) {
         <span class="truncate">{{ asRow(item).value }}</span>
       </span>
 
-      <UIcon :name="appConfig.ui.icons.chevronRight" class="size-5 shrink-0 text-dimmed" />
+      <UIcon :name="appConfig.ui.icons.chevronRight" class="size-5 shrink-0 text-faint" />
     </template>
 
     <!-- the swatch sits in the box an item icon takes, so it centers on the label -->
@@ -328,7 +328,7 @@ function isApplied(key: string) {
     </template>
 
     <template #color-mode="{ item }">
-      <UIcon :name="asRow(item).icon" class="size-5 shrink-0 text-dimmed" />
+      <UIcon :name="asRow(item).icon" class="size-5 shrink-0 text-faint" />
       {{ asRow(item).label }}
       <ThemeStudioColorModeTabs class="ms-auto -my-1.5 [&>div]:ring-0" />
     </template>
@@ -336,7 +336,7 @@ function isApplied(key: string) {
     <!-- its own slot: the menu only draws a trailing icon for submenus, and
          appConfig.ui.icons is swapped whole with the pack so this follows it -->
     <template #link-trailing>
-      <UIcon :name="appConfig.ui.icons.arrowRight" class="size-5 shrink-0 text-dimmed" />
+      <UIcon :name="appConfig.ui.icons.arrowRight" class="size-5 shrink-0 text-faint" />
     </template>
 
     <template #font-label="{ item }">

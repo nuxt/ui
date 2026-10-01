@@ -29,11 +29,11 @@ compoundVariants: [{
 
 ## Static Theme
 
-A theme is a plain object wrapped in `defineTheme`. It never reads module options, so every class it can produce is written in the file and Tailwind finds it by scanning `src/runtime/theme` from the package, through `@source '../theme'` in `src/runtime/css/package-sources.css`. Components import it directly (`import theme from '../theme/accordion'`), and `#build/ui/*` re-exports it for app code.
+A theme is a plain object wrapped in `defineTheme`. It never reads module options, so every class it can produce is written in the file and Tailwind finds it by scanning `src/runtime/theme` from the package, through `@source '../theme'` in `src/runtime/css/sources.css`. Components import it directly (`import theme from '../theme/accordion'`), and `#build/ui/*` re-exports it for app code.
 
 `defineTheme` checks `compoundVariants` and `defaultVariants` against `variants`, and keeps their values typed as the variant's values, which inference alone widens to `string`. A theme that builds on another uses `extendTheme(base, {...})` instead, typed after `defuFn`: its values win, a function receives the base value and returns the new one, and `compoundVariants` concatenate. Type a function's parameter from the base (`(prev: typeof input.variants.variant) => ...`) so the variant values survive.
 
-Write each class out whole. A class built at runtime, from a template literal (`` `${hover}bg-elevated` ``), a helper that maps or rewrites classes, or a string with escaped quotes (`'content-[\'*\']'`), never reaches Tailwind's scanner and gets no CSS. Use backticks for a class that holds quotes, and give a helper that rewrites classes its results as literals, like `replaceFocus` in `input.ts`. The `theme classes` test in `test/utils/theme-slots.spec.ts` fails on any class the themes resolve to that isn't spelled out in `src/runtime/theme`.
+Write each class out whole. A class built at runtime, from a template literal (`` `${hover}bg-soft` ``), a helper that maps or rewrites classes, or a string with escaped quotes (`'content-[\'*\']'`), never reaches Tailwind's scanner and gets no CSS. Use backticks for a class that holds quotes, and give a helper that rewrites classes its results as literals, like `replaceFocus` in `input.ts`. The `theme classes` test in `test/utils/theme-slots.spec.ts` fails on any class the themes resolve to that isn't spelled out in `src/runtime/theme`.
 
 ```ts
 import { defineTheme } from '../utils/theme'
@@ -75,9 +75,9 @@ export default defineTheme({
     // Sets `--ui-accent` on `base` for each color
     color: colorVariant({ base: '' }),
     variant: {
-      solid: { base: 'text-accent-foreground bg-accent hover:bg-accent-hover' },
-      outline: { base: 'ring ring-inset ring-accent-border text-accent-soft-foreground bg-accent-surface' },
-      soft: { base: 'text-accent-soft-foreground bg-accent-soft' }
+      solid: { base: 'text-accent-contrast bg-accent hover:bg-accent-hover' },
+      outline: { base: 'ring ring-inset ring-accent-strong text-accent-default bg-default' },
+      soft: { base: 'text-accent-default bg-accent-soft' }
     },
     size: {
       xs: { base: 'text-xs px-2 py-1', leadingIcon: 'size-3' },
@@ -120,36 +120,33 @@ export default defineTheme({
 Always use semantic colors, never Tailwind palette colors:
 
 ### Text Colors
+- `text-strong` - Headings and emphasized text
 - `text-default` - Primary text
 - `text-muted` - Secondary text
-- `text-dimmed` - Tertiary/placeholder text
-- `text-highlighted` - Emphasized text
-- `text-inverted` - Text on dark backgrounds
+- `text-faint` - Placeholder and disabled text
+- `text-contrast` - Text on a solid (`bg-neutral`, `bg-accent`)
 
 ### Background Colors
-- `bg-default` - Primary background
-- `bg-elevated` - Elevated surface (cards, dropdowns)
-- `bg-accented` - Subtle accent background
-- `bg-inverted` - Inverted (dark) background
+- `bg-default` - The page
+- `bg-tint` - The lightest fill: hovered items, code blocks, table heads
+- `bg-backdrop` - The layer behind a Modal, a Slideover and a Drawer
+- `bg-soft` - Soft fill (neutral soft variants, raised areas)
+- `bg-strong` - Strong fill (tracks, hover of `bg-soft`)
+- `bg-neutral` / `bg-neutral-hover` - The neutral solid and its hover
 
 ### Border Colors
-- `border-default` - Standard borders
-- `ring-default` - Standard rings used as borders (`ring ring-inset ring-default`)
-- `ring-accented` - Accented rings
-- `divide-default` - Dividers
+- `border-default` - Standard borders, `ring-default`, `divide-default`
+- `border-strong` - Field outlines
+- `outline-focus` - Focus outline of a component without a `color` prop
 
 ### Accent Tokens
-The `color` prop accepts `primary`, `secondary`, `success`, `info`, `warning`, `error` and `neutral`. Colored classes read the scoped color through `accent` roles, never through an alias name and never with an opacity modifier, so every color and the neutral scope can tune each state:
-- `bg-accent` - The color itself
-- `text-accent-foreground` - Text on a solid accent background
-- `bg-accent-hover` - Hover of a solid background
-- `bg-accent-soft` / `bg-accent-soft-hover` - Tinted background and its hover
-- `text-accent-soft-foreground` - Text on a tinted background
-- `ring-accent-border` / `ring-accent-border-soft` / `ring-accent-border-muted` - Colored borders
+The `color` prop accepts `primary`, `secondary`, `success`, `info`, `warning`, `error` and `neutral`. Colored classes read the scoped color through `accent` roles, never through an alias name, so every color and the neutral scope can tune each state. Each role is the neutral token of the same name with `accent-` in front, and `color="neutral"` resolves it to that token:
+- `bg-accent` / `bg-accent-hover` - The color itself (solid) and its hover (`bg-neutral` / `bg-neutral-hover` for neutral)
+- `text-accent-contrast` - Text on the solid
+- `bg-accent-tint` / `bg-accent-soft` / `bg-accent-strong` - Fills
+- `text-accent-default` / `text-accent-muted` / `text-accent-faint` - Text steps, tunable per color with `--ui-<color>-text-default`. `text-accent`, like `bg-accent` and `ring-accent`, is the raw color, the solid
+- `ring-accent-default` / `ring-accent-strong` - Borders, also on `border-*`: 25% and 40% of the color, `border-default` and `border-strong` for neutral. Every `outline` and `subtle` variant rings with `strong`, and `subtle` keeps the `soft` fill. `default` draws lines, like a Separator. A prose Callout and inline Code are `bg-accent-tint` with `border-accent-default`, the border of a code block
 - `outline-accent-focus` - Focus outline
-- `bg-accent-surface` - Resting background of an outlined element
-- `bg-accent-tint` - Light tint on large surfaces
-- `text-accent-muted` / `text-accent-muted-hover` / `text-accent-faint` - Secondary and faint text
 
 The full list with values is in `src/runtime/css/tokens.css` and the [CSS Variables](../../docs/content/docs/1.getting-started/5.theme/2.css-variables.md#accent) docs.
 
@@ -202,7 +199,7 @@ compoundVariants: [
   {
     color: 'primary',
     variant: 'solid',
-    class: { base: 'bg-primary text-inverted' }
+    class: { base: 'bg-primary text-contrast' }
   },
   
   // Size + boolean
@@ -225,7 +222,7 @@ compoundVariants: [
   {
     color: 'neutral',
     variant: ['outline', 'subtle'],
-    class: { base: 'focus-visible:ring-2 focus-visible:ring-inverted' }
+    class: { base: 'focus-visible:ring-2 focus-visible:ring-neutral' }
   }
 ]
 ```
