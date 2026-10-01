@@ -19,7 +19,7 @@ export default defineTheme({
         root: 'bg-accent text-accent-contrast'
       },
       outline: {
-        root: 'text-accent ring ring-inset ring-accent-default'
+        root: 'text-accent bg-default ring ring-inset ring-accent-default'
       },
       soft: {
         root: 'bg-accent-tint text-accent'

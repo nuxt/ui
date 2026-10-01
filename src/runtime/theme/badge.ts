@@ -18,7 +18,7 @@ export default defineTheme({
         base: 'bg-accent text-accent-contrast'
       },
       outline: {
-        base: 'text-accent-default ring ring-inset ring-accent-strong'
+        base: 'text-accent-default bg-default ring ring-inset ring-accent-strong'
       },
       soft: {
         base: 'bg-accent-soft text-accent-default'

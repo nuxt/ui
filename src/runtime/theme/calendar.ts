@@ -41,7 +41,7 @@ export default defineTheme({
         cellTrigger: 'data-selected:bg-accent data-selected:text-accent-contrast data-today:not-data-selected:text-accent data-highlighted:bg-accent-tint hover:not-data-selected:bg-accent-tint'
       },
       outline: {
-        cellTrigger: 'data-selected:ring data-selected:ring-inset data-selected:ring-accent-strong data-selected:text-accent-default data-selected:focus-visible:ring-accent data-today:not-data-selected:text-accent data-highlighted:bg-accent-tint hover:not-data-selected:bg-accent-tint'
+        cellTrigger: 'data-selected:ring data-selected:ring-inset data-selected:ring-accent-strong data-selected:text-accent-default data-selected:bg-default data-selected:focus-visible:ring-accent data-today:not-data-selected:text-accent data-highlighted:bg-accent-tint hover:not-data-selected:bg-accent-tint'
       },
       soft: {
         cellTrigger: 'data-selected:bg-accent-soft data-selected:text-accent-default data-today:not-data-selected:text-accent data-highlighted:bg-accent-tint hover:not-data-selected:bg-accent-tint'

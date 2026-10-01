@@ -57,7 +57,7 @@ exports[`Badge > renders with leadingIcon correctly 1`] = `
 `;
 
 exports[`Badge > renders with neutral variant outline correctly 1`] = `
-"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-neutral)] text-accent-default ring ring-inset ring-accent-strong text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-neutral)] text-accent-default bg-default ring ring-inset ring-accent-strong text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
 <!--v-if--></span>"
 `;
 
@@ -77,7 +77,7 @@ exports[`Badge > renders with neutral variant subtle correctly 1`] = `
 `;
 
 exports[`Badge > renders with primary variant outline correctly 1`] = `
-"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] text-accent-default ring ring-inset ring-accent-strong text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] text-accent-default bg-default ring ring-inset ring-accent-strong text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
 <!--v-if--></span>"
 `;
 
