@@ -8,8 +8,8 @@ export default defineTheme({
     item: 'min-w-0 shrink-0 basis-full',
     controls: '',
     arrows: '',
-    prev: 'absolute rounded-full',
-    next: 'absolute rounded-full',
+    prev: 'absolute rounded-full bg-default disabled:bg-default dark:disabled:bg-default',
+    next: 'absolute rounded-full bg-default disabled:bg-default dark:disabled:bg-default',
     dots: 'absolute inset-x-0 -bottom-7 flex flex-wrap items-center justify-center gap-3',
     dot: 'cursor-pointer size-3 bg-strong rounded-full outline-focus focus-visible:outline-3 transition'
   },

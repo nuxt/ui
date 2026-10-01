@@ -2,9 +2,9 @@ import { defineTheme } from '../../utils/theme'
 
 export default defineTheme({
   slots: {
-    root: 'relative my-5 bg-tint [&>div]:my-0 [&_pre]:max-h-[80vh] [&_pre]:pb-12',
+    root: 'relative my-5 bg-default [&>div]:my-0 [&_pre]:max-h-[80vh] [&_pre]:pb-12',
     footer: 'h-16 absolute inset-x-px bottom-px rounded-b-md flex items-center justify-center',
-    trigger: 'group',
+    trigger: 'group relative bg-default',
     triggerIcon: 'group-data-[state=open]:rotate-180'
   },
   variants: {
@@ -14,7 +14,7 @@ export default defineTheme({
       },
       false: {
         root: 'max-h-[200px] overflow-hidden rounded-b-md [&_pre]:overflow-hidden',
-        footer: 'inset-x-0 bottom-0 border border-t-0 border-default bg-linear-to-t from-tint'
+        footer: 'inset-x-0 bottom-0 border border-t-0 border-default bg-linear-to-t from-default before:absolute before:inset-0 before:rounded-b-md before:pointer-events-none before:bg-linear-to-t before:from-tint'
       }
     }
   }
