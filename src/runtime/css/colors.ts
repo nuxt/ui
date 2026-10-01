@@ -79,7 +79,7 @@ function closestPalette(name: string, shadesByName: unknown) {
  * works too.
  *
  * The shades an alias uses follow the palette, `500` in light mode and `400`
- * in dark mode by default (`900` and `50` for `neutral`): `primary: neutral
+ * in dark mode by default (`950` and `50` for `neutral`): `primary: neutral
  * 900 200` picks others, a single shade applies to both, `black` and `white`
  * work as shades, and shades alone (`primary: black white`) keep the palette.
  *
@@ -155,7 +155,7 @@ const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugi
   // An alias on a gray takes neutral's roles, like `color="neutral"`: soft,
   // subtle and ghost variants on the neutral fills, not tinted by the gray.
   // Set as its per-color roles, so an override of those still wins.
-  const neutralPalette = paletteOf(aliases.neutral) ?? 'slate'
+  const neutralPalette = paletteOf(aliases.neutral) ?? 'gray'
   const roles: Record<string, string> = {}
   for (const [alias, value] of Object.entries(aliases)) {
     const palette = paletteOf(value)

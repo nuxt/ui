@@ -36,7 +36,7 @@ export default extendTheme(input, {
         base: [prev.outline!.base, 'hover:bg-soft disabled:bg-default'].join(' ')
       },
       subtle: {
-        base: [prev.subtle!.base, 'hover:bg-strong/75 disabled:bg-soft'].join(' ')
+        base: [prev.subtle!.base, 'hover:bg-strong disabled:bg-soft'].join(' ')
       }
     }),
     size: {

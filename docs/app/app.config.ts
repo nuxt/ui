@@ -12,13 +12,13 @@ declare module 'nuxt/schema' {
 
 export default defineAppConfig({
   colors: {
-    primary: 'green',
-    secondary: 'blue',
-    success: 'green',
+    primary: 'sky',
+    secondary: 'violet',
+    success: 'emerald',
     info: 'blue',
-    warning: 'yellow',
+    warning: 'amber',
     error: 'red',
-    neutral: 'slate'
+    neutral: 'gray'
   },
   toaster: {
     position: 'bottom-right' as const,

@@ -6,13 +6,13 @@ Nuxt UI uses 7 semantic colors. Never use raw Tailwind palette colors in compone
 
 | Color | Default | When to use |
 |---|---|---|
-| `primary` | green | CTAs, active states, brand accent, links |
-| `secondary` | blue | Secondary actions, complementary highlights |
-| `success` | green | Success messages, confirmations, positive states |
+| `primary` | sky | CTAs, active states, brand accent, links |
+| `secondary` | violet | Secondary actions, complementary highlights |
+| `success` | emerald | Success messages, confirmations, positive states |
 | `info` | blue | Informational alerts, tips, neutral highlights |
-| `warning` | yellow | Warnings, caution states, pending actions |
+| `warning` | amber | Warnings, caution states, pending actions |
 | `error` | red | Errors, destructive actions, validation failures |
-| `neutral` | slate | Text, borders, backgrounds, disabled states, chrome |
+| `neutral` | gray | Text, borders, backgrounds, disabled states, chrome |
 
 ### Choosing colors for components
 
@@ -45,8 +45,8 @@ Only palettes that exist in your theme work — either Tailwind's defaults or cu
 Available color palettes:
 - **Standard Tailwind**: red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose
 - **Neutral palettes** (for `neutral` key — pick one that matches the aesthetic):
-  - `slate` — cool blue-gray, professional (default)
-  - `gray` — true neutral, clean
+  - `slate` — cool blue-gray, professional
+  - `gray` — true neutral, clean (default)
   - `zinc` — slightly cool, modern, techy
   - `neutral` — perfectly balanced
   - `stone` — warm gray, earthy

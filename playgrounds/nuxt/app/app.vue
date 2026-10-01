@@ -23,7 +23,7 @@ provide('components', components)
   <UApp :toaster="appConfig.toaster" :dir="appConfig.dir">
     <UDashboardGroup unit="rem">
       <UDashboardSidebar
-        class="bg-soft/25"
+        class="bg-tint"
         resizable
         collapsible
         :toggle="{ size: 'sm', variant: 'outline', class: 'ring-default' }"
@@ -56,7 +56,7 @@ provide('components', components)
         v-else
         :ui="{
           body: [
-            (route.path.startsWith('/components') || route.path === '/colors') && 'mt-16',
+            (route.path.startsWith('/components') || route.path === '/colors' || route.path === '/tokens') && 'mt-16',
             route.path.startsWith('/components/scroll-area') && 'p-0!'
           ]
         }"

@@ -89,13 +89,13 @@ export interface ThemeDoc {
 }
 
 export const DEFAULT_COLORS: Record<ColorAlias, string> = {
-  primary: 'green',
-  secondary: 'blue',
-  success: 'green',
+  primary: 'sky',
+  secondary: 'violet',
+  success: 'emerald',
   info: 'blue',
-  warning: 'yellow',
+  warning: 'amber',
   error: 'red',
-  neutral: 'slate'
+  neutral: 'gray'
 }
 
 /** Every color alias that isn't primary or neutral. */

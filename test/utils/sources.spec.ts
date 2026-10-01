@@ -76,26 +76,26 @@ describe('colors plugin', () => {
     const css = await build({})
     const defaults = rule(css, ':where(:root, :host)')
 
-    expect(defaults).toContain(`--ui-color-primary-500: var(--color-green-500, ${colors.green[500]});`)
-    expect(defaults).toContain(`--ui-color-neutral-950: var(--color-slate-950, ${colors.slate[950]});`)
+    expect(defaults).toContain(`--ui-color-primary-500: var(--color-sky-500, ${colors.sky[500]});`)
+    expect(defaults).toContain(`--ui-color-neutral-950: var(--color-gray-950, ${colors.gray[950]});`)
     // Tailwind outputs the palettes the defaults read
-    expect(css).toContain(`--color-green-500: ${colors.green[500]};`)
+    expect(css).toContain(`--color-sky-500: ${colors.sky[500]};`)
   })
 
   it('falls back to the palette values when you reset the colors before the import', async () => {
     const css = await build({}, undefined, '', '@theme { --color-*: initial; }')
 
-    expect(rule(css, ':where(:root, :host)')).toContain(`--ui-color-primary-500: var(--color-green-500, ${colors.green[500]});`)
-    expect(css).not.toContain(`--color-green-500: ${colors.green[500]};`)
+    expect(rule(css, ':where(:root, :host)')).toContain(`--ui-color-primary-500: var(--color-sky-500, ${colors.sky[500]});`)
+    expect(css).not.toContain(`--color-sky-500: ${colors.sky[500]};`)
     // Nuxt UI's own tokens come after the reset, so their utilities stay
     expect(css).toContain('background-color: var(--ui-accent)')
   })
 
   it('follows a palette you override in `@theme`', async () => {
-    const css = await build({}, undefined, '@theme static { --color-green-500: #00C16A; }')
+    const css = await build({}, undefined, '@theme static { --color-sky-500: #00C16A; }')
 
-    expect(css).toContain('--color-green-500: #00C16A;')
-    expect(rule(css, ':where(:root, :host)')).toContain('--ui-color-primary-500: var(--color-green-500,')
+    expect(css).toContain('--color-sky-500: #00C16A;')
+    expect(rule(css, ':where(:root, :host)')).toContain('--ui-color-primary-500: var(--color-sky-500,')
   })
 
   it('points the aliases you pass at their palette', async () => {

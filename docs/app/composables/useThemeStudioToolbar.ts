@@ -32,7 +32,7 @@ export function useThemeStudioToolbar() {
         dot: paletteShade(neutralChip.value, 500),
         label: paletteName('neutral', neutral.value)
       }]
-    : [{ dot: 'var(--color-green-500)', label: 'Green' }, { dot: 'var(--color-slate-500)', label: 'Slate' }]))
+    : [{ dot: 'var(--color-sky-500)', label: 'Sky' }, { dot: 'var(--color-gray-500)', label: 'Gray' }]))
 
   const colorLabel = computed(() => colorChips.value.map(chip => chip.label).join(', '))
 
