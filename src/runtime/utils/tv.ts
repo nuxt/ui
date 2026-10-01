@@ -650,11 +650,18 @@ const functionIds = new WeakMap<(...args: any[]) => any, number>()
 let nextFunctionId = 0
 
 /**
+ * How deep the key walk goes before it bails. An overrides entry is slot classes,
+ * variants and compounds, and a merge config is flat, so nothing valid comes
+ * close; past it, `BAIL` trades the shared entry for a fresh one.
+ */
+const KEY_DEPTH_LIMIT = 8
+
+/**
  * The content key of an overrides object, in the `serialize` encoding, so every
  * object that says the same thing shares one compiled entry. A replacer keys by
  * identity, which is what its captured scope makes it.
  */
-function keyOfOverrides(value: any, depth = 0, limit = 8): string | typeof BAIL {
+function keyOfOverrides(value: any, depth = 0): string | typeof BAIL {
   if (typeof value === 'function') {
     let id = functionIds.get(value)
     if (id === undefined) {
@@ -668,13 +675,13 @@ function keyOfOverrides(value: any, depth = 0, limit = 8): string | typeof BAIL 
   if (value instanceof RegExp) {
     return 'R' + String(value)
   }
-  if (depth >= limit) {
+  if (depth >= KEY_DEPTH_LIMIT) {
     return BAIL
   }
   if (Array.isArray(value)) {
     let out = '['
     for (const item of value) {
-      const part = keyOfOverrides(item, depth + 1, limit)
+      const part = keyOfOverrides(item, depth + 1)
       if (part === BAIL) {
         return BAIL
       }
@@ -684,7 +691,7 @@ function keyOfOverrides(value: any, depth = 0, limit = 8): string | typeof BAIL 
   }
   let out = '{'
   for (const key of Object.keys(value)) {
-    const part = keyOfOverrides(value[key], depth + 1, limit)
+    const part = keyOfOverrides(value[key], depth + 1)
     if (part === BAIL) {
       return BAIL
     }
@@ -700,13 +707,13 @@ function keyOfOverrides(value: any, depth = 0, limit = 8): string | typeof BAIL 
  */
 const reactiveKeys = new WeakMap<object, ComputedRef<string | typeof BAIL>>()
 
-function contentKey(overrides: Record<string, any>, limit?: number): string | typeof BAIL {
+function contentKey(overrides: Record<string, any>): string | typeof BAIL {
   if (!isReactive(overrides)) {
-    return keyOfOverrides(overrides, 0, limit)
+    return keyOfOverrides(overrides)
   }
   let key = reactiveKeys.get(overrides)
   if (!key) {
-    key = computed(() => keyOfOverrides(overrides, 0, limit))
+    key = computed(() => keyOfOverrides(overrides))
     reactiveKeys.set(overrides, key)
   }
   return key.value

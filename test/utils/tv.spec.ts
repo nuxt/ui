@@ -843,4 +843,15 @@ describe('tv merger config', () => {
   it('still merges with `cacheSize: 0`', () => {
     expect(tvt(theme, withConfig({ cacheSize: 0 }))().base({ class: 'px-4' })).toBe('py-1 px-4')
   })
+
+  // A valid merge config is flat, so nothing reaches the key walk's depth limit.
+  // Past it the key bails, which trades the shared engine for a fresh one rather
+  // than keying a deep object, and classes still resolve.
+  it('resolves a config too deep to key', () => {
+    const nest = (depth: number): any => depth === 0 ? 'x' : { a: nest(depth - 1) }
+    const deep = () => ({ prefix: undefined, extra: nest(8) })
+
+    expect(engineFor(deep() as any)).not.toBe(engineFor(deep() as any))
+    expect(tvt(theme, withConfig(deep()))().base({ class: 'px-4' })).toBe('py-1 px-4')
+  })
 })
