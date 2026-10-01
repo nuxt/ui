@@ -14,6 +14,10 @@ import { colors } from './runtime/theme/color'
 import * as themeProse from './runtime/theme/prose'
 import * as themeContent from './runtime/theme/content'
 
+// The classes components pass to `usePrefix`, which only adds the prefix at
+// runtime, so Tailwind never sees them prefixed
+export const prefixedClasses = ['absolute', 'dark:block', 'dark:hidden', 'dark:inline-block', 'focus:outline-none', 'hidden', 'inset-0', 'lg:block', 'lg:flex', 'lg:hidden', 'peer', 'sm:block']
+
 export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt: Nuxt | undefined, resolve: Resolver['resolve'], vue?: { detectedComponents?: Set<string>, dev?: boolean }) {
   const templates: NuxtTemplate[] = []
 
@@ -182,6 +186,9 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     if ((detectedComponents?.size && !isDev()) || options.tailwindPrefix) {
       sources.push(`@source not "${themeDir}";`)
       sources.push(`@source inline(${JSON.stringify(getThemeClasses(themes, options.tailwindPrefix).join(' '))});`)
+      if (options.tailwindPrefix) {
+        sources.push(`@source inline(${JSON.stringify(prefixedClasses.map(cls => `${options.tailwindPrefix}:${cls}`).join(' '))});`)
+      }
     } else {
       if (!hasProse) {
         sources.push(`@source not "${themeDir}/prose";`)
