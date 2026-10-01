@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { join, resolve } from 'pathe'
+import { join, normalize, resolve } from 'pathe'
 import { consola } from 'consola'
 import type { UnpluginOptions } from 'unplugin'
 import type { NuxtUIOptions } from '../unplugin'
@@ -181,7 +181,9 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
         }
 
         let timer: ReturnType<typeof setTimeout> | undefined
-        server.watcher.on('all', (event, file) => {
+        server.watcher.on('all', (event, path) => {
+          // The watcher reports native paths, with backslashes on Windows
+          const file = normalize(path)
           if ((event === 'add' || event === 'change' || event === 'unlink') && /\.(?:vue|ts|mts|js|mjs|cjs|tsx|jsx|md|html)$/.test(file) && !file.includes('/node_modules/')) {
             clearTimeout(timer)
             timer = setTimeout(redetect, 100)
