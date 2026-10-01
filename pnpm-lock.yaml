@@ -369,8 +369,8 @@ catalogs:
       specifier: ^0.2.2
       version: 0.2.2
     cn:
-      specifier: ^0.3.2
-      version: 0.3.2
+      specifier: ^0.4.0
+      version: 0.4.0
     colortranslator:
       specifier: ^5.0.0
       version: 5.0.0
@@ -631,7 +631,7 @@ importers:
         version: 14.4.0(vue@3.5.43(typescript@6.0.3))
       cn:
         specifier: 'catalog:'
-        version: 0.3.2
+        version: 0.4.0
       colortranslator:
         specifier: 'catalog:'
         version: 5.0.0
@@ -5653,8 +5653,8 @@ packages:
     resolution: {integrity: sha512-RMr0FhtfXemyinomL4hrWcYJxmX6deFdCxpJzhDttxgO1+bcCnkk+9drydLVDmAMG7NE6aN/fl4F7ucU/90gAA==}
     engines: {node: '>=0.10.0'}
 
-  cn@0.3.2:
-    resolution: {integrity: sha512-RKzY5Edavc8B2Ka6tjJecKFC4nm0p7lADY72xzICmiJSf4TkaxWXt0fHsib2P2G4FkFyXfSDi9oDtIBuCZvY2g==}
+  cn@0.4.0:
+    resolution: {integrity: sha512-qOAeUhPwPzBxx6jaeQdo646XIKliKHc2j1ZF7Ngb1o0pJZKH5gq8FkA0aVdUdPFUDXNXyUCXpCtoJISo6dhizg==}
     engines: {node: '>=20'}
     hasBin: true
 
@@ -16175,7 +16175,7 @@ snapshots:
 
   cluster-key-slot@1.1.2: {}
 
-  cn@0.3.2: {}
+  cn@0.4.0: {}
 
   color-convert@2.0.1:
     dependencies:
