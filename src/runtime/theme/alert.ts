@@ -19,13 +19,13 @@ export default defineTheme({
         root: 'bg-accent text-accent-contrast'
       },
       outline: {
-        root: 'text-accent bg-default ring ring-inset ring-accent-strong'
+        root: 'text-accent-default bg-default ring ring-inset ring-accent-strong'
       },
       soft: {
-        root: 'bg-accent-soft text-accent'
+        root: 'bg-accent-soft text-accent-default'
       },
       subtle: {
-        root: 'bg-accent-soft text-accent ring ring-inset ring-accent-strong'
+        root: 'bg-accent-soft text-accent-default ring ring-inset ring-accent-strong'
       }
     },
     orientation: {
