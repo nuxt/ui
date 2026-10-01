@@ -10,8 +10,8 @@ export default defineTheme({
   slots: {
     root: 'flex items-center gap-2',
     list: 'relative flex p-1 group',
-    indicator: 'absolute transition-[translate,width] duration-200 ease-out motion-reduce:transition-none',
-    trigger: 'group relative inline-flex items-center min-w-0 data-[state=inactive]:text-muted hover:data-[state=inactive]:not-disabled:text-default font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
+    indicator: 'absolute bg-accent transition-[translate,width] duration-200 ease-out motion-reduce:transition-none',
+    trigger: 'group relative inline-flex items-center min-w-0 data-[state=inactive]:text-muted hover:data-[state=inactive]:not-disabled:text-default font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
     label: 'truncate',
@@ -23,13 +23,13 @@ export default defineTheme({
     variant: {
       pill: {
         list: 'bg-soft rounded-lg',
-        trigger: [`grow`, `in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:content-[''] in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:absolute in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:inset-0 in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:rounded-md in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:shadow-xs in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:-z-10 in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:isolate`, 'data-[state=active]:text-accent-contrast outline-accent-focus focus-visible:outline-3', 'in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:bg-accent'],
-        indicator: 'rounded-md shadow-xs bg-accent'
+        trigger: [`grow`, `in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:content-[''] in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:absolute in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:inset-0 in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:rounded-md in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:shadow-xs in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:-z-10 in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:isolate`, 'data-[state=active]:text-accent-contrast', 'in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:bg-accent'],
+        indicator: 'rounded-md shadow-xs'
       },
       link: {
         list: 'border-default',
-        indicator: 'rounded-full bg-accent',
-        trigger: [`in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:content-[''] in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:absolute in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:rounded-full`, 'data-[state=active]:text-accent outline-accent-focus focus-visible:outline-3', 'in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:bg-accent']
+        indicator: 'rounded-full',
+        trigger: [`in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:content-[''] in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:absolute in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:rounded-full`, 'data-[state=active]:text-accent', 'in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:bg-accent']
       }
     },
     orientation: {

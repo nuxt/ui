@@ -18,7 +18,7 @@ export function replaceFocus(classes: string): string {
 export default defineTheme({
   slots: {
     root: 'relative inline-flex items-center',
-    base: 'w-full rounded-md border-0 appearance-none placeholder:text-faint disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
+    base: 'w-full rounded-md border-0 appearance-none text-strong placeholder:text-faint disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
     leading: 'absolute inset-y-0 start-0 flex items-center',
     leadingIcon: 'shrink-0 text-faint',
     leadingAvatar: 'shrink-0',
@@ -65,11 +65,11 @@ export default defineTheme({
       }
     },
     variant: {
-      outline: { base: 'text-strong bg-default ring ring-inset ring-strong' },
-      soft: { base: 'text-strong bg-tint hover:bg-soft focus:bg-soft disabled:bg-tint' },
-      subtle: { base: 'text-strong bg-soft ring ring-inset ring-strong' },
-      ghost: { base: 'text-strong bg-transparent hover:bg-soft focus:bg-soft disabled:bg-transparent dark:disabled:bg-transparent' },
-      none: { base: 'text-strong bg-transparent focus:outline-none' }
+      outline: { base: 'bg-default ring ring-inset ring-strong' },
+      soft: { base: 'bg-tint hover:bg-soft focus:bg-soft disabled:bg-tint' },
+      subtle: { base: 'bg-soft ring ring-inset ring-strong' },
+      ghost: { base: 'bg-transparent hover:bg-soft focus:bg-soft disabled:bg-transparent dark:disabled:bg-transparent' },
+      none: { base: 'bg-transparent focus:outline-none' }
     },
     color: colorVariant({ root: '' }),
     leading: {

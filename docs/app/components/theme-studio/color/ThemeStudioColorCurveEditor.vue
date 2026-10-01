@@ -368,7 +368,7 @@ onUnmounted(() => {
         stroke-dasharray="2 2"
       />
 
-      <path :d="path" fill="none" class="stroke-(--ui-primary)" stroke-width="1.5" />
+      <path :d="path" fill="none" class="stroke-primary" stroke-width="1.5" />
 
       <!-- shade stops on the curve; a pinned stop wears a larger primary ring -->
       <template v-for="stop in stops" :key="stop.key">
@@ -378,7 +378,7 @@ onUnmounted(() => {
           :cy="stop.cy"
           :r="stopRadius + 1.75"
           fill="none"
-          class="stroke-(--ui-primary)"
+          class="stroke-primary"
           stroke-width="1.25"
         />
         <circle
@@ -386,14 +386,14 @@ onUnmounted(() => {
           :cy="stop.cy"
           :r="stop.pinned ? stopRadius + 0.25 : stopRadius"
           :fill="stop.fill"
-          class="stroke-(--ui-bg-default)"
+          class="stroke-bg"
           stroke-width="0.5"
         />
       </template>
 
       <!-- handles -->
-      <circle :cx="toX(curve.p1x)" :cy="toHandleY(curve.p1y)" r="4" class="fill-(--ui-bg-default) stroke-(--ui-text-muted)" stroke-width="1.25" />
-      <circle :cx="toX(curve.p2x)" :cy="toHandleY(curve.p2y)" r="4" class="fill-(--ui-bg-default) stroke-(--ui-text-muted)" stroke-width="1.25" />
+      <circle :cx="toX(curve.p1x)" :cy="toHandleY(curve.p1y)" r="4" class="fill-bg stroke-(--ui-text-muted)" stroke-width="1.25" />
+      <circle :cx="toX(curve.p2x)" :cy="toHandleY(curve.p2y)" r="4" class="fill-bg stroke-(--ui-text-muted)" stroke-width="1.25" />
 
       <!-- endpoints, filled with the ramp's 50 and 950 so the drag targets show
          what they steer -->
@@ -432,7 +432,7 @@ onUnmounted(() => {
         :aria-valuemax="yMax"
         :aria-valuenow="readout(handle.value)"
         :aria-disabled="handle.locked || undefined"
-        class="cursor-grab focus:outline-none focus-visible:stroke-(--ui-primary)"
+        class="cursor-grab focus:outline-none focus-visible:stroke-primary"
         @keydown="onKeydown(handle.id, $event)"
       />
     </svg>

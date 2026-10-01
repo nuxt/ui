@@ -52,7 +52,7 @@ function selectRange(range: typeof ranges[number]) {
     </UButton>
 
     <template #content>
-      <div class="flex items-stretch divide-x divide-(--ui-border-default)">
+      <div class="flex items-stretch divide-x divide-default">
         <div class="hidden sm:flex flex-col justify-center py-2">
           <UButton
             v-for="(range, index) in ranges"

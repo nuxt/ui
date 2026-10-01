@@ -4,7 +4,7 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'relative inline-flex items-center gap-1.5',
-    base: 'rounded-md border-0 placeholder:text-faint text-center disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
+    base: 'rounded-md border-0 text-strong placeholder:text-faint text-center disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
     separator: 'text-faint flex items-center justify-center'
   },
   variants: {
@@ -26,11 +26,11 @@ export default defineTheme({
       }
     },
     variant: {
-      outline: { base: 'text-strong bg-default ring ring-inset ring-strong' },
-      soft: { base: 'text-strong bg-tint hover:bg-soft focus:bg-soft disabled:bg-tint' },
-      subtle: { base: 'text-strong bg-soft ring ring-inset ring-strong' },
-      ghost: { base: 'text-strong bg-transparent hover:bg-soft focus:bg-soft disabled:bg-transparent dark:disabled:bg-transparent' },
-      none: { base: 'text-strong bg-transparent focus:outline-none' }
+      outline: { base: 'bg-default ring ring-inset ring-strong' },
+      soft: { base: 'bg-tint hover:bg-soft focus:bg-soft disabled:bg-tint' },
+      subtle: { base: 'bg-soft ring ring-inset ring-strong' },
+      ghost: { base: 'bg-transparent hover:bg-soft focus:bg-soft disabled:bg-transparent dark:disabled:bg-transparent' },
+      none: { base: 'bg-transparent focus:outline-none' }
     },
     color: colorVariant({ root: '' }),
     highlight: {

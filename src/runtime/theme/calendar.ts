@@ -31,23 +31,23 @@ export default defineTheme({
     headCell: 'rounded-md text-accent',
     headCellWeek: 'rounded-md text-muted',
     cell: 'relative text-center',
-    cellTrigger: 'm-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:outline-3 data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition outline-accent-focus',
+    cellTrigger: 'm-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:outline-3 data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition outline-accent-focus data-today:not-data-selected:text-accent data-highlighted:bg-accent-tint hover:not-data-selected:bg-accent-tint',
     cellWeek: 'relative text-center text-muted'
   },
   variants: {
     color: colorVariant({ root: '' }),
     variant: {
       solid: {
-        cellTrigger: 'data-selected:bg-accent data-selected:text-accent-contrast data-today:not-data-selected:text-accent data-highlighted:bg-accent-tint hover:not-data-selected:bg-accent-tint'
+        cellTrigger: 'data-selected:bg-accent data-selected:text-accent-contrast'
       },
       outline: {
-        cellTrigger: 'data-selected:ring data-selected:ring-inset data-selected:ring-accent-strong data-selected:text-accent-default data-selected:bg-default data-selected:focus-visible:ring-accent data-today:not-data-selected:text-accent data-highlighted:bg-accent-tint hover:not-data-selected:bg-accent-tint'
+        cellTrigger: 'data-selected:ring data-selected:ring-inset data-selected:ring-accent-strong data-selected:text-accent-default data-selected:bg-default data-selected:focus-visible:ring-accent'
       },
       soft: {
-        cellTrigger: 'data-selected:bg-accent-soft data-selected:text-accent-default data-today:not-data-selected:text-accent data-highlighted:bg-accent-tint hover:not-data-selected:bg-accent-tint'
+        cellTrigger: 'data-selected:bg-accent-soft data-selected:text-accent-default'
       },
       subtle: {
-        cellTrigger: 'data-selected:bg-accent-soft data-selected:text-accent-default data-selected:ring data-selected:ring-inset data-selected:ring-accent-soft data-selected:focus-visible:ring-accent data-today:not-data-selected:text-accent data-highlighted:bg-accent-tint hover:not-data-selected:bg-accent-tint'
+        cellTrigger: 'data-selected:bg-accent-soft data-selected:text-accent-default data-selected:ring data-selected:ring-inset data-selected:ring-accent-soft data-selected:focus-visible:ring-accent'
       }
     },
     size: {

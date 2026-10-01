@@ -4,7 +4,7 @@ import { extendTheme } from '../utils/theme'
 
 export default extendTheme(input, {
   slots: {
-    base: () => 'rounded-md transition-colors',
+    base: () => 'rounded-md text-strong transition-colors',
     trailing: 'group absolute inset-y-0 end-0 flex items-center disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none',
     trailingClear: 'p-0',
     arrow: 'fill-bg stroke-default',

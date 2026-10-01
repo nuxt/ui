@@ -6,7 +6,7 @@ import { extendTheme } from '../utils/theme'
 export default extendTheme(input, {
   slots: {
     root: () => undefined,
-    base: () => 'relative group rounded-md inline-flex items-center disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
+    base: () => 'relative group rounded-md inline-flex items-center text-strong disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
     value: 'truncate pointer-events-none',
     placeholder: 'truncate text-faint',
     arrow: 'fill-bg stroke-default',

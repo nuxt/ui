@@ -64,7 +64,7 @@ export default defineTheme({
       item: '-ms-px',
       itemWithChildren: 'ps-px',
       indicator: 'absolute ms-2.5 start-0 top-0 rtl:-scale-x-100',
-      indicatorLine: 'absolute inset-0 bg-(--ui-border-default)',
+      indicatorLine: 'absolute inset-0 bg-border',
       indicatorActive: 'absolute w-full h-(--indicator-size) translate-y-(--indicator-position) transition-[translate,height] duration-200 ease-out motion-reduce:transition-none'
     }
   }],
