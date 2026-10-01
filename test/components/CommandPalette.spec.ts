@@ -130,7 +130,7 @@ describe('CommandPalette', () => {
     ['with virtualize', { props: { ...props, virtualize: true } }],
     ['without input', { props: { ...props, input: false } }],
     ['with as', { props: { ...props, as: 'section' } }],
-    ['with class', { props: { ...props, class: 'divide-accented' } }],
+    ['with class', { props: { ...props, class: 'divide-strong' } }],
     ['with ui', { props: { ...props, ui: { input: '[&>input]:h-10' } } }],
     // Slots
     ['with empty slot', { props, slots: { empty: () => 'Empty slot' } }],

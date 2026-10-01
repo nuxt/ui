@@ -33,7 +33,7 @@ exports[`PageCard > renders with class correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -51,7 +51,7 @@ exports[`PageCard > renders with default slot correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -87,7 +87,7 @@ exports[`PageCard > renders with description slot correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description slot</div>
       </div>
       <!--v-if-->
@@ -105,7 +105,7 @@ exports[`PageCard > renders with footer slot correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <div data-slot="page-card-footer" class="pt-4 mt-auto">Footer slot</div>
@@ -123,7 +123,7 @@ exports[`PageCard > renders with header slot correctly 1`] = `
       <div data-slot="page-card-header" class="mb-4">Header slot</div>
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -141,7 +141,7 @@ exports[`PageCard > renders with highlight color error correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -159,7 +159,7 @@ exports[`PageCard > renders with highlight color info correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -177,7 +177,7 @@ exports[`PageCard > renders with highlight color neutral correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -195,7 +195,7 @@ exports[`PageCard > renders with highlight color neutral correctly 2`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -213,7 +213,7 @@ exports[`PageCard > renders with highlight color primary correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -231,7 +231,7 @@ exports[`PageCard > renders with highlight color secondary correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -249,7 +249,7 @@ exports[`PageCard > renders with highlight color success correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -267,7 +267,7 @@ exports[`PageCard > renders with highlight color warning correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -285,7 +285,7 @@ exports[`PageCard > renders with highlight correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -318,7 +318,7 @@ exports[`PageCard > renders with leading slot correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5">Leading slot</div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -336,7 +336,7 @@ exports[`PageCard > renders with orientation horizontal correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -354,7 +354,7 @@ exports[`PageCard > renders with orientation horizontal reverse correctly 1`] = 
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -372,7 +372,7 @@ exports[`PageCard > renders with orientation vertical correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -390,7 +390,7 @@ exports[`PageCard > renders with orientation vertical reverse correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -408,7 +408,7 @@ exports[`PageCard > renders with spotlight color error correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -426,7 +426,7 @@ exports[`PageCard > renders with spotlight color info correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -444,7 +444,7 @@ exports[`PageCard > renders with spotlight color neutral correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -462,7 +462,7 @@ exports[`PageCard > renders with spotlight color neutral correctly 2`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -480,7 +480,7 @@ exports[`PageCard > renders with spotlight color primary correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -498,7 +498,7 @@ exports[`PageCard > renders with spotlight color secondary correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -516,7 +516,7 @@ exports[`PageCard > renders with spotlight color success correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -534,7 +534,7 @@ exports[`PageCard > renders with spotlight color warning correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -552,7 +552,7 @@ exports[`PageCard > renders with spotlight correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -570,7 +570,7 @@ exports[`PageCard > renders with title correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -588,7 +588,7 @@ exports[`PageCard > renders with title slot correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title slot</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title slot</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -599,7 +599,7 @@ exports[`PageCard > renders with title slot correctly 1`] = `
 `;
 
 exports[`PageCard > renders with to correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default outline-primary/25 has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-elevated/50 has-[>a:focus-visible]:ring-primary">
+"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default outline-focus has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-tint has-[>a:focus-visible]:ring-primary">
   <!--v-if-->
   <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
     <!--v-if-->
@@ -615,7 +615,7 @@ exports[`PageCard > renders with ui correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty text-highlighted font-bold">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty text-strong font-bold">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -633,7 +633,7 @@ exports[`PageCard > renders with variant ghost correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -651,7 +651,7 @@ exports[`PageCard > renders with variant ghost highlight correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -662,14 +662,14 @@ exports[`PageCard > renders with variant ghost highlight correctly 1`] = `
 `;
 
 exports[`PageCard > renders with variant ghost to correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg outline-primary/25 has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-elevated/50">
+"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg outline-focus has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-tint">
   <!--v-if-->
   <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -686,7 +686,7 @@ exports[`PageCard > renders with variant naked correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -704,7 +704,7 @@ exports[`PageCard > renders with variant naked highlight correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -715,14 +715,14 @@ exports[`PageCard > renders with variant naked highlight correctly 1`] = `
 `;
 
 exports[`PageCard > renders with variant naked to correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg outline-primary/25 has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
+"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg outline-focus has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
   <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-0 sm:p-0">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -739,7 +739,7 @@ exports[`PageCard > renders with variant outline correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -757,7 +757,7 @@ exports[`PageCard > renders with variant outline highlight correctly 1`] = `
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -768,14 +768,14 @@ exports[`PageCard > renders with variant outline highlight correctly 1`] = `
 `;
 
 exports[`PageCard > renders with variant outline to correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default outline-primary/25 has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-elevated/50 has-[>a:focus-visible]:ring-primary">
+"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default outline-focus has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-tint has-[>a:focus-visible]:ring-primary">
   <!--v-if-->
   <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
         <div data-slot="page-card-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
       <!--v-if-->
@@ -785,15 +785,15 @@ exports[`PageCard > renders with variant outline to correctly 1`] = `
 `;
 
 exports[`PageCard > renders with variant soft correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-elevated/50 [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
+"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-tint [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
   <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
-        <div data-slot="page-card-description" class="text-[15px] text-pretty text-toned mt-1">Description</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
+        <div data-slot="page-card-description" class="text-[15px] text-pretty text-default mt-1">Description</div>
       </div>
       <!--v-if-->
     </div>
@@ -803,15 +803,15 @@ exports[`PageCard > renders with variant soft correctly 1`] = `
 `;
 
 exports[`PageCard > renders with variant soft highlight correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-elevated/50 ring-2 ring-accent [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
+"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-tint ring-2 ring-accent [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
   <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
-        <div data-slot="page-card-description" class="text-[15px] text-pretty text-toned mt-1">Description</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
+        <div data-slot="page-card-description" class="text-[15px] text-pretty text-default mt-1">Description</div>
       </div>
       <!--v-if-->
     </div>
@@ -821,15 +821,15 @@ exports[`PageCard > renders with variant soft highlight correctly 1`] = `
 `;
 
 exports[`PageCard > renders with variant soft to correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-elevated/50 outline-primary/25 has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-elevated">
+"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-tint outline-focus has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-soft">
   <!--v-if-->
   <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
-        <div data-slot="page-card-description" class="text-[15px] text-pretty text-toned mt-1">Description</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
+        <div data-slot="page-card-description" class="text-[15px] text-pretty text-default mt-1">Description</div>
       </div>
       <!--v-if-->
     </div>
@@ -838,15 +838,15 @@ exports[`PageCard > renders with variant soft to correctly 1`] = `
 `;
 
 exports[`PageCard > renders with variant solid correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-inverted text-inverted [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
+"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-neutral text-contrast [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
   <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-inverted">Title</div>
-        <div data-slot="page-card-description" class="text-[15px] text-pretty text-dimmed mt-1">Description</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-contrast">Title</div>
+        <div data-slot="page-card-description" class="text-[15px] text-pretty text-faint mt-1">Description</div>
       </div>
       <!--v-if-->
     </div>
@@ -856,15 +856,15 @@ exports[`PageCard > renders with variant solid correctly 1`] = `
 `;
 
 exports[`PageCard > renders with variant solid highlight correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-inverted text-inverted ring-2 ring-accent [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
+"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-neutral text-contrast ring-2 ring-accent [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
   <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-inverted">Title</div>
-        <div data-slot="page-card-description" class="text-[15px] text-pretty text-dimmed mt-1">Description</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-contrast">Title</div>
+        <div data-slot="page-card-description" class="text-[15px] text-pretty text-faint mt-1">Description</div>
       </div>
       <!--v-if-->
     </div>
@@ -874,15 +874,15 @@ exports[`PageCard > renders with variant solid highlight correctly 1`] = `
 `;
 
 exports[`PageCard > renders with variant solid to correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-inverted text-inverted outline-primary/25 has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-inverted/90">
+"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-neutral text-contrast outline-focus has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-neutral-hover">
   <!--v-if-->
   <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-inverted">Title</div>
-        <div data-slot="page-card-description" class="text-[15px] text-pretty text-dimmed mt-1">Description</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-contrast">Title</div>
+        <div data-slot="page-card-description" class="text-[15px] text-pretty text-faint mt-1">Description</div>
       </div>
       <!--v-if-->
     </div>
@@ -891,15 +891,15 @@ exports[`PageCard > renders with variant solid to correctly 1`] = `
 `;
 
 exports[`PageCard > renders with variant subtle correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-elevated/50 ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
+"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-tint ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
   <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
-        <div data-slot="page-card-description" class="text-[15px] text-pretty text-toned mt-1">Description</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
+        <div data-slot="page-card-description" class="text-[15px] text-pretty text-default mt-1">Description</div>
       </div>
       <!--v-if-->
     </div>
@@ -909,15 +909,15 @@ exports[`PageCard > renders with variant subtle correctly 1`] = `
 `;
 
 exports[`PageCard > renders with variant subtle highlight correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-elevated/50 ring-2 ring-accent [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
+"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-tint ring-2 ring-accent [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
   <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
-        <div data-slot="page-card-description" class="text-[15px] text-pretty text-toned mt-1">Description</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
+        <div data-slot="page-card-description" class="text-[15px] text-pretty text-default mt-1">Description</div>
       </div>
       <!--v-if-->
     </div>
@@ -927,15 +927,15 @@ exports[`PageCard > renders with variant subtle highlight correctly 1`] = `
 `;
 
 exports[`PageCard > renders with variant subtle to correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-elevated/50 ring ring-default outline-primary/25 has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-elevated hover:ring-accented has-[>a:focus-visible]:ring-primary">
+"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-tint ring ring-default outline-focus has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-soft hover:ring-strong has-[>a:focus-visible]:ring-primary">
   <!--v-if-->
   <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
       <div data-slot="page-card-body" class="flex-1">
-        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
-        <div data-slot="page-card-description" class="text-[15px] text-pretty text-toned mt-1">Description</div>
+        <div data-slot="page-card-title" class="text-base text-pretty font-semibold text-strong">Title</div>
+        <div data-slot="page-card-description" class="text-[15px] text-pretty text-default mt-1">Description</div>
       </div>
       <!--v-if-->
     </div>

@@ -182,7 +182,7 @@ function onSubmit() {
                 color="neutral"
                 variant="ghost"
                 aria-label="Add content"
-                :class="[open && 'bg-elevated']"
+                :class="[open && 'bg-soft']"
               />
             </template>
 
@@ -197,7 +197,7 @@ function onSubmit() {
                 color="neutral"
                 variant="ghost"
                 :trailing-icon="appConfig.ui.icons.chevronDown"
-                :class="['group', open && 'bg-elevated']"
+                :class="['group', open && 'bg-soft']"
                 :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
               >
                 {{ activeModel?.label }} <span class="text-muted">{{ effort }}</span>

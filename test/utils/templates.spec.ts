@@ -118,8 +118,8 @@ describe('theme templates', () => {
     const css = await themeContents({ tailwindPrefix: 'tw' })('ui.base.css')
 
     expect(css).toMatch(/^@layer base \{\n {2}\.tw\\:\\\[--ui-accent\\:var\\\(--ui-primary\\\)\\\] \{/)
-    expect(css).toContain('.tw\\:\\[--ui-accent\\:var\\(--ui-warning\\)\\] {\n    --ui-accent-foreground: var(--ui-warning-foreground);')
-    expect(css).toContain('.tw\\:\\[--ui-accent\\:var\\(--ui-neutral\\)\\] {\n    --ui-accent-foreground: var(--ui-neutral-foreground);')
+    expect(css).toContain('.tw\\:\\[--ui-accent\\:var\\(--ui-warning\\)\\] {\n    --ui-accent-bg-hover: var(--ui-warning-bg-hover);')
+    expect(css).toContain('.tw\\:\\[--ui-accent\\:var\\(--ui-neutral\\)\\] {\n    --ui-accent-bg-hover: var(--ui-neutral-bg-hover,')
     expect(css).not.toContain('  .\\[--ui-accent')
     expect(css).not.toContain(':where(')
   })
@@ -174,6 +174,6 @@ describe('static css', () => {
     expect(tokens).toContain(`--color-${color}: var(--ui-${color});`)
     expect(tokens).toContain(`--color-${color}-500: var(--ui-color-${color}-500);`)
     expect(accent).toContain(`.\\[--ui-accent\\:var\\(--ui-${color}\\)\\] {`)
-    expect(accent).toContain(`--ui-accent-foreground: var(--ui-${color}-foreground`)
+    expect(accent).toContain(`--ui-accent-text-contrast: var(--ui-${color}-text-contrast`)
   })
 })

@@ -1,4 +1,4 @@
-import { colorVariant, colors } from './color'
+import { colorVariant } from './color'
 import { defineTheme } from '../utils/theme'
 
 export default defineTheme({
@@ -16,17 +16,23 @@ export default defineTheme({
   },
   variants: {
     variant: {
-      solid: '',
-      outline: '',
-      soft: '',
-      subtle: '',
-      naked: ''
+      solid: {
+        content: 'bg-accent text-accent-contrast'
+      },
+      outline: {
+        content: 'text-accent-default bg-default ring ring-accent-strong'
+      },
+      soft: {
+        content: 'bg-accent-soft text-accent-default'
+      },
+      subtle: {
+        content: 'bg-accent-soft text-accent-default ring ring-accent-strong'
+      },
+      naked: {
+        content: 'text-accent-default'
+      }
     },
-    color: {
-      ...colorVariant({ root: '' }),
-      // Neutral keeps the inherited text color, so it has its own classes.
-      neutral: ''
-    },
+    color: colorVariant({ root: '' }),
     side: {
       left: {},
       right: {
@@ -57,60 +63,6 @@ export default defineTheme({
     }
   },
   compoundVariants: [{
-    color: colors.filter(color => color !== 'neutral'),
-    variant: 'solid',
-    class: {
-      content: 'bg-accent text-accent-foreground'
-    }
-  }, {
-    color: colors.filter(color => color !== 'neutral'),
-    variant: 'outline',
-    class: {
-      content: 'text-accent ring ring-accent-border-soft'
-    }
-  }, {
-    color: colors.filter(color => color !== 'neutral'),
-    variant: 'soft',
-    class: {
-      content: 'bg-accent-soft text-accent-soft-foreground'
-    }
-  }, {
-    color: colors.filter(color => color !== 'neutral'),
-    variant: 'subtle',
-    class: {
-      content: 'bg-accent-soft text-accent-soft-foreground ring ring-accent-border-soft'
-    }
-  }, {
-    color: colors.filter(color => color !== 'neutral'),
-    variant: 'naked',
-    class: {
-      content: 'text-accent'
-    }
-  }, {
-    color: 'neutral',
-    variant: 'solid',
-    class: {
-      content: 'bg-inverted text-inverted'
-    }
-  }, {
-    color: 'neutral',
-    variant: 'outline',
-    class: {
-      content: 'bg-default ring ring-default'
-    }
-  }, {
-    color: 'neutral',
-    variant: 'soft',
-    class: {
-      content: 'bg-elevated/50'
-    }
-  }, {
-    color: 'neutral',
-    variant: 'subtle',
-    class: {
-      content: 'bg-elevated/50 ring ring-default'
-    }
-  }, {
     compact: true,
     actions: true,
     class: {

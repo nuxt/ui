@@ -43,7 +43,7 @@ exports[`Collapsible > renders with open correctly 1`] = `
 exports[`Collapsible > renders with ui correctly 1`] = `
 "<div data-state="open" data-slot="collapsible">
   <!--v-if-->
-  <div data-slot="collapsible-content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden bg-elevated" id="reka-collapsible-content-v-0" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;"></div>
+  <div data-slot="collapsible-content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden bg-soft" id="reka-collapsible-content-v-0" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;"></div>
 </div>"
 `;
 

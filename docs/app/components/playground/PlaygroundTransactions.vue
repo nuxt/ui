@@ -16,7 +16,7 @@ function format(amount: number) {
 <template>
   <div>
     <div class="p-4">
-      <p class="font-semibold text-highlighted">
+      <p class="font-semibold text-strong">
         Recent transactions
       </p>
       <p class="text-sm text-muted">
@@ -28,18 +28,18 @@ function format(amount: number) {
 
     <ul class="divide-y divide-default">
       <li v-for="transaction in transactions" :key="transaction.name" class="flex items-center gap-3 px-4 py-2.5">
-        <div class="flex items-center justify-center size-8 rounded-full bg-elevated text-muted shrink-0">
+        <div class="flex items-center justify-center size-8 rounded-full bg-soft text-muted shrink-0">
           <UIcon :name="transaction.icon" class="size-4" />
         </div>
         <div class="min-w-0 flex-1">
-          <p class="text-sm font-medium text-highlighted truncate">
+          <p class="text-sm font-medium text-strong truncate">
             {{ transaction.name }}
           </p>
           <p class="text-xs text-muted truncate">
             {{ transaction.category }}
           </p>
         </div>
-        <span class="text-sm font-medium" :class="transaction.amount < 0 ? 'text-highlighted' : 'text-success'">
+        <span class="text-sm font-medium" :class="transaction.amount < 0 ? 'text-strong' : 'text-success'">
           {{ format(transaction.amount) }}
         </span>
       </li>

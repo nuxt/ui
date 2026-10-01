@@ -12,7 +12,7 @@ export default defineTheme({
     footer: 'pt-4 mt-auto',
     leading: 'inline-flex items-center mb-2.5',
     leadingIcon: 'size-5 shrink-0 text-primary',
-    title: 'text-base text-pretty font-semibold text-highlighted',
+    title: 'text-base text-pretty font-semibold text-strong',
     description: 'text-[15px] text-pretty'
   },
   variants: {
@@ -31,21 +31,21 @@ export default defineTheme({
     },
     variant: {
       solid: {
-        root: 'bg-inverted text-inverted',
-        title: 'text-inverted',
-        description: 'text-dimmed'
+        root: 'bg-neutral text-contrast',
+        title: 'text-contrast',
+        description: 'text-faint'
       },
       outline: {
         root: 'bg-default ring ring-default',
         description: 'text-muted'
       },
       soft: {
-        root: 'bg-elevated/50',
-        description: 'text-toned'
+        root: 'bg-tint',
+        description: 'text-default'
       },
       subtle: {
-        root: 'bg-elevated/50 ring ring-default',
-        description: 'text-toned'
+        root: 'bg-tint ring ring-default',
+        description: 'text-default'
       },
       ghost: {
         description: 'text-muted'
@@ -57,7 +57,7 @@ export default defineTheme({
     },
     to: {
       true: {
-        root: 'outline-primary/25 has-[>a:focus-visible]:outline-3 transition'
+        root: 'outline-focus has-[>a:focus-visible]:outline-3 transition'
       }
     },
     title: {
@@ -82,32 +82,32 @@ export default defineTheme({
     variant: 'solid',
     to: true,
     class: {
-      root: 'hover:bg-inverted/90'
+      root: 'hover:bg-neutral-hover'
     }
   }, {
     variant: 'outline',
     to: true,
     class: {
-      root: 'hover:bg-elevated/50'
+      root: 'hover:bg-tint'
     }
   }, {
     variant: 'soft',
     to: true,
     class: {
-      root: 'hover:bg-elevated'
+      root: 'hover:bg-soft'
     }
   }, {
     variant: 'subtle',
     to: true,
     class: {
-      root: 'hover:bg-elevated'
+      root: 'hover:bg-soft'
     }
   }, {
     variant: 'subtle',
     to: true,
     highlight: false,
     class: {
-      root: 'hover:ring-accented'
+      root: 'hover:ring-strong'
     }
   }, {
     variant: ['outline', 'subtle'],
@@ -120,7 +120,7 @@ export default defineTheme({
     variant: 'ghost',
     to: true,
     class: {
-      root: 'hover:bg-elevated/50'
+      root: 'hover:bg-tint'
     }
   }],
   defaultVariants: {

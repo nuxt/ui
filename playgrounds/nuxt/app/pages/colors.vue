@@ -34,6 +34,14 @@ import pinInputTheme from '#build/ui/pin-input'
 import fileUploadTheme from '#build/ui/file-upload'
 import dropdownMenuTheme from '#build/ui/dropdown-menu'
 import contextMenuTheme from '#build/ui/context-menu'
+import chatPromptTheme from '#build/ui/chat-prompt'
+import inputDateTheme from '#build/ui/input-date'
+import inputTimeTheme from '#build/ui/input-time'
+import inputRatingTheme from '#build/ui/input-rating'
+import listboxTheme from '#build/ui/listbox'
+import progressGroupTheme from '#build/ui/progress-group'
+import avatarGroupTheme from '#build/ui/avatar-group'
+import tableTheme from '#build/ui/table'
 
 // Compact grid: header row of color names, one row per variant (or relevant boolean).
 function gridStyle(n: number) {
@@ -152,14 +160,32 @@ const pageCardSpotlightColors = Object.keys(pageCardTheme.variants.spotlightColo
 const chatMessageColors = Object.keys(chatMessageTheme.variants.color)
 const chatMessageVariants = Object.keys(chatMessageTheme.variants.variant)
 
-// Form controls with `highlight`
-const inputColors = Object.keys(inputTheme.variants.color)
-const textareaColors = Object.keys(textareaTheme.variants.color)
-const selectColors = Object.keys(selectTheme.variants.color)
+// Form controls, every variant plus `highlight`
 const selectItems = ['Apple', 'Banana', 'Blueberry']
-const inputNumberColors = Object.keys(inputNumberTheme.variants.color)
-const pinInputColors = Object.keys(pinInputTheme.variants.color)
+const fields = [
+  { name: 'Input', colors: Object.keys(inputTheme.variants.color), variants: Object.keys(inputTheme.variants.variant) },
+  { name: 'Textarea', colors: Object.keys(textareaTheme.variants.color), variants: Object.keys(textareaTheme.variants.variant) },
+  { name: 'Select', colors: Object.keys(selectTheme.variants.color), variants: Object.keys(selectTheme.variants.variant) },
+  { name: 'InputNumber', colors: Object.keys(inputNumberTheme.variants.color), variants: Object.keys(inputNumberTheme.variants.variant) },
+  { name: 'PinInput', colors: Object.keys(pinInputTheme.variants.color), variants: Object.keys(pinInputTheme.variants.variant) },
+  { name: 'InputDate', colors: Object.keys(inputDateTheme.variants.color), variants: Object.keys(inputDateTheme.variants.variant) },
+  { name: 'InputTime', colors: Object.keys(inputTimeTheme.variants.color), variants: Object.keys(inputTimeTheme.variants.variant) }
+]
 const fileUploadColors = Object.keys(fileUploadTheme.variants.color)
+const fileUploadVariants = Object.keys(fileUploadTheme.variants.variant)
+
+// ChatPrompt
+const chatPromptColors = Object.keys(chatPromptTheme.variants.color)
+const chatPromptVariants = Object.keys(chatPromptTheme.variants.variant)
+
+// Other color-aware components
+const inputRatingColors = Object.keys(inputRatingTheme.variants.color)
+const listboxColors = Object.keys(listboxTheme.variants.color)
+const progressGroupColors = Object.keys(progressGroupTheme.variants.color)
+const progressGroupItems = [{ label: 'Used', value: 40 }, { label: 'Reserved', value: 25 }]
+const avatarGroupColors = Object.keys(avatarGroupTheme.variants.color)
+const tableLoadingColors = Object.keys(tableTheme.variants.loadingColor)
+const progressAnimations = Object.keys(progressTheme.variants.animation)
 
 // DropdownMenu / ContextMenu — items carry a color each
 const dropdownMenuColors = Object.keys(dropdownMenuTheme.variants.color)
@@ -189,7 +215,7 @@ const codeColors = buttonColors
 
     <!-- Button -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Button
       </h2>
       <div class="overflow-x-auto">
@@ -227,7 +253,7 @@ const codeColors = buttonColors
 
     <!-- Badge -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Badge
       </h2>
       <div class="overflow-x-auto">
@@ -250,7 +276,7 @@ const codeColors = buttonColors
 
     <!-- Kbd -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Kbd
       </h2>
       <div class="overflow-x-auto">
@@ -273,7 +299,7 @@ const codeColors = buttonColors
 
     <!-- Alert -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Alert
       </h2>
       <div class="overflow-x-auto">
@@ -301,7 +327,7 @@ const codeColors = buttonColors
 
     <!-- Avatar -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Avatar
       </h2>
       <div class="overflow-x-auto">
@@ -330,7 +356,7 @@ const codeColors = buttonColors
 
     <!-- Chip (on an avatar) -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Chip
       </h2>
       <div class="overflow-x-auto">
@@ -343,7 +369,7 @@ const codeColors = buttonColors
             chip
           </div>
           <div v-for="color in chipColors" :key="`chip-${color}`" class="flex justify-center">
-            <UChip text="1" :color="(color as any)">
+            <UChip text="1" :color="(color as any)" inset>
               <UAvatar src="https://github.com/benjamincanac.png" />
             </UChip>
           </div>
@@ -353,7 +379,7 @@ const codeColors = buttonColors
 
     <!-- Banner -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Banner
       </h2>
       <div class="flex flex-col gap-2 w-full">
@@ -369,7 +395,7 @@ const codeColors = buttonColors
 
     <!-- Separator (with and without label) -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Separator
       </h2>
       <div class="overflow-x-auto">
@@ -398,7 +424,7 @@ const codeColors = buttonColors
 
     <!-- Toast (overlay-based, one button per color) -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Toast
       </h2>
       <div class="flex flex-wrap gap-2">
@@ -415,7 +441,7 @@ const codeColors = buttonColors
 
     <!-- Checkbox -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Checkbox
       </h2>
       <div class="overflow-x-auto">
@@ -432,13 +458,21 @@ const codeColors = buttonColors
               <UCheckbox :label="color" :color="(color as any)" :variant="(variant as any)" :model-value="true" />
             </div>
           </template>
+          <template v-for="state in ['unchecked', 'highlight', 'disabled']" :key="state">
+            <div class="text-xs font-medium text-muted whitespace-nowrap pe-3">
+              {{ state }}
+            </div>
+            <div v-for="color in checkboxColors" :key="`${state}-${color}`" class="flex justify-center">
+              <UCheckbox :label="color" :color="(color as any)" :model-value="state !== 'unchecked'" :highlight="state === 'highlight'" :disabled="state === 'disabled'" />
+            </div>
+          </template>
         </div>
       </div>
     </section>
 
     <!-- RadioGroup -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         RadioGroup
       </h2>
       <div class="overflow-x-auto">
@@ -466,7 +500,7 @@ const codeColors = buttonColors
 
     <!-- CheckboxGroup -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         CheckboxGroup
       </h2>
       <div class="overflow-x-auto">
@@ -494,7 +528,7 @@ const codeColors = buttonColors
 
     <!-- Switch (on) -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Switch
       </h2>
       <div class="overflow-x-auto">
@@ -509,13 +543,25 @@ const codeColors = buttonColors
           <div v-for="color in switchColors" :key="`on-${color}`" class="flex justify-center">
             <USwitch :default-value="true" :color="(color as any)" />
           </div>
+          <div class="text-xs font-medium text-muted whitespace-nowrap pe-3">
+            off
+          </div>
+          <div v-for="color in switchColors" :key="`off-${color}`" class="flex justify-center">
+            <USwitch :default-value="false" :color="(color as any)" />
+          </div>
+          <div class="text-xs font-medium text-muted whitespace-nowrap pe-3">
+            disabled
+          </div>
+          <div v-for="color in switchColors" :key="`disabled-${color}`" class="flex justify-center">
+            <USwitch :default-value="true" disabled :color="(color as any)" />
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Slider -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Slider
       </h2>
       <div class="overflow-x-auto">
@@ -536,7 +582,7 @@ const codeColors = buttonColors
 
     <!-- Progress -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Progress
       </h2>
       <div class="overflow-x-auto">
@@ -551,13 +597,21 @@ const codeColors = buttonColors
           <div v-for="color in progressColors" :key="`progress-${color}`" class="flex justify-center w-32">
             <UProgress :model-value="65" :color="(color as any)" />
           </div>
+          <template v-for="animation in progressAnimations" :key="animation">
+            <div class="text-xs font-medium text-muted whitespace-nowrap pe-3">
+              {{ animation }}
+            </div>
+            <div v-for="color in progressColors" :key="`${animation}-${color}`" class="flex justify-center w-32">
+              <UProgress :model-value="null" :animation="(animation as any)" :color="(color as any)" />
+            </div>
+          </template>
         </div>
       </div>
     </section>
 
     <!-- Stepper -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Stepper
       </h2>
       <div class="overflow-x-auto">
@@ -578,7 +632,7 @@ const codeColors = buttonColors
 
     <!-- Timeline -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Timeline
       </h2>
       <div class="overflow-x-auto">
@@ -599,7 +653,7 @@ const codeColors = buttonColors
 
     <!-- Tabs -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Tabs
       </h2>
       <div class="overflow-x-auto">
@@ -622,7 +676,7 @@ const codeColors = buttonColors
 
     <!-- Calendar -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Calendar
       </h2>
       <div class="overflow-x-auto">
@@ -645,7 +699,7 @@ const codeColors = buttonColors
 
     <!-- Breadcrumb -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Breadcrumb
       </h2>
       <div class="overflow-x-auto">
@@ -666,7 +720,7 @@ const codeColors = buttonColors
 
     <!-- NavigationMenu (with highlight + highlightColor) -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         NavigationMenu
       </h2>
       <div class="overflow-x-auto">
@@ -693,7 +747,7 @@ const codeColors = buttonColors
 
     <!-- Tree (with a selected item) -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Tree
       </h2>
       <div class="overflow-x-auto">
@@ -714,7 +768,7 @@ const codeColors = buttonColors
 
     <!-- PageCard (highlight + highlightColor, spotlight + spotlightColor) -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         PageCard
       </h2>
       <div class="overflow-x-auto">
@@ -743,7 +797,7 @@ const codeColors = buttonColors
 
     <!-- ChatMessage -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         ChatMessage
       </h2>
       <div class="overflow-x-auto">
@@ -771,109 +825,58 @@ const codeColors = buttonColors
       </div>
     </section>
 
-    <!-- Form controls with `highlight` -->
-    <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
-        Input
+    <!-- Form controls: every variant plus `highlight` -->
+    <section v-for="field in fields" :key="field.name" class="space-y-3">
+      <h2 class="text-lg font-semibold text-strong">
+        {{ field.name }}
       </h2>
       <div class="overflow-x-auto">
-        <div class="grid gap-x-3 gap-y-2 items-center w-max" :style="gridStyle(inputColors.length)">
+        <div class="grid gap-x-3 gap-y-2 items-center w-max" :style="gridStyle(field.colors.length)">
           <div />
-          <div v-for="color in inputColors" :key="color" class="text-xs font-medium text-muted text-center capitalize">
+          <div v-for="color in field.colors" :key="color" class="text-xs font-medium text-muted text-center capitalize">
             {{ color }}
           </div>
-          <div class="text-xs font-medium text-muted whitespace-nowrap pe-3">
-            highlight
-          </div>
-          <div v-for="color in inputColors" :key="`input-${color}`" class="flex justify-center w-32">
-            <UInput placeholder="Highlight" highlight :color="(color as any)" />
-          </div>
+          <template v-for="row in [...field.variants, 'highlight']" :key="row">
+            <div class="text-xs font-medium text-muted capitalize whitespace-nowrap pe-3">
+              {{ row }}
+            </div>
+            <div v-for="color in field.colors" :key="`${row}-${color}`" class="flex justify-center w-36">
+              <UInput v-if="field.name === 'Input'" :placeholder="row" :color="(color as any)" :variant="row === 'highlight' ? undefined : (row as any)" :highlight="row === 'highlight'" />
+              <UTextarea
+                v-else-if="field.name === 'Textarea'"
+                :placeholder="row"
+                :rows="1"
+                :color="(color as any)"
+                :variant="row === 'highlight' ? undefined : (row as any)"
+                :highlight="row === 'highlight'"
+              />
+              <USelect
+                v-else-if="field.name === 'Select'"
+                :placeholder="row"
+                :items="selectItems"
+                :color="(color as any)"
+                :variant="row === 'highlight' ? undefined : (row as any)"
+                :highlight="row === 'highlight'"
+              />
+              <UInputNumber v-else-if="field.name === 'InputNumber'" :default-value="50" :color="(color as any)" :variant="row === 'highlight' ? undefined : (row as any)" :highlight="row === 'highlight'" />
+              <UPinInput
+                v-else-if="field.name === 'PinInput'"
+                :length="3"
+                placeholder="○"
+                :color="(color as any)"
+                :variant="row === 'highlight' ? undefined : (row as any)"
+                :highlight="row === 'highlight'"
+              />
+              <UInputDate v-else-if="field.name === 'InputDate'" :color="(color as any)" :variant="row === 'highlight' ? undefined : (row as any)" :highlight="row === 'highlight'" />
+              <UInputTime v-else :color="(color as any)" :variant="row === 'highlight' ? undefined : (row as any)" :highlight="row === 'highlight'" />
+            </div>
+          </template>
         </div>
       </div>
     </section>
 
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
-        Textarea
-      </h2>
-      <div class="overflow-x-auto">
-        <div class="grid gap-x-3 gap-y-2 items-center w-max" :style="gridStyle(textareaColors.length)">
-          <div />
-          <div v-for="color in textareaColors" :key="color" class="text-xs font-medium text-muted text-center capitalize">
-            {{ color }}
-          </div>
-          <div class="text-xs font-medium text-muted whitespace-nowrap pe-3">
-            highlight
-          </div>
-          <div v-for="color in textareaColors" :key="`textarea-${color}`" class="flex justify-center w-32">
-            <UTextarea placeholder="Highlight" highlight :rows="1" :color="(color as any)" />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
-        Select
-      </h2>
-      <div class="overflow-x-auto">
-        <div class="grid gap-x-3 gap-y-2 items-center w-max" :style="gridStyle(selectColors.length)">
-          <div />
-          <div v-for="color in selectColors" :key="color" class="text-xs font-medium text-muted text-center capitalize">
-            {{ color }}
-          </div>
-          <div class="text-xs font-medium text-muted whitespace-nowrap pe-3">
-            highlight
-          </div>
-          <div v-for="color in selectColors" :key="`select-${color}`" class="flex justify-center w-32">
-            <USelect placeholder="Highlight" highlight :items="selectItems" :color="(color as any)" />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
-        InputNumber
-      </h2>
-      <div class="overflow-x-auto">
-        <div class="grid gap-x-3 gap-y-2 items-center w-max" :style="gridStyle(inputNumberColors.length)">
-          <div />
-          <div v-for="color in inputNumberColors" :key="color" class="text-xs font-medium text-muted text-center capitalize">
-            {{ color }}
-          </div>
-          <div class="text-xs font-medium text-muted whitespace-nowrap pe-3">
-            highlight
-          </div>
-          <div v-for="color in inputNumberColors" :key="`input-number-${color}`" class="flex justify-center w-32">
-            <UInputNumber :default-value="50" highlight :color="(color as any)" />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
-        PinInput
-      </h2>
-      <div class="overflow-x-auto">
-        <div class="grid gap-x-3 gap-y-2 items-center w-max" :style="gridStyle(pinInputColors.length)">
-          <div />
-          <div v-for="color in pinInputColors" :key="color" class="text-xs font-medium text-muted text-center capitalize">
-            {{ color }}
-          </div>
-          <div class="text-xs font-medium text-muted whitespace-nowrap pe-3">
-            highlight
-          </div>
-          <div v-for="color in pinInputColors" :key="`pin-input-${color}`" class="flex justify-center">
-            <UPinInput placeholder="○" highlight :color="(color as any)" />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         FileUpload
       </h2>
       <div class="overflow-x-auto">
@@ -882,19 +885,103 @@ const codeColors = buttonColors
           <div v-for="color in fileUploadColors" :key="color" class="text-xs font-medium text-muted text-center capitalize">
             {{ color }}
           </div>
-          <div class="text-xs font-medium text-muted whitespace-nowrap pe-3">
-            highlight
+          <template v-for="row in [...fileUploadVariants, 'highlight']" :key="row">
+            <div class="text-xs font-medium text-muted capitalize whitespace-nowrap pe-3">
+              {{ row }}
+            </div>
+            <div v-for="color in fileUploadColors" :key="`file-upload-${row}-${color}`" class="flex justify-center w-40">
+              <UFileUpload label="Drop files" :color="(color as any)" :variant="row === 'highlight' ? undefined : (row as any)" :highlight="row === 'highlight'" />
+            </div>
+          </template>
+        </div>
+      </div>
+    </section>
+
+    <!-- ChatPrompt -->
+    <section class="space-y-3">
+      <h2 class="text-lg font-semibold text-strong">
+        ChatPrompt
+      </h2>
+      <div class="overflow-x-auto">
+        <div class="grid gap-x-3 gap-y-3 items-start w-max" :style="gridStyle(chatPromptColors.length)">
+          <div />
+          <div v-for="color in chatPromptColors" :key="color" class="text-xs font-medium text-muted text-center capitalize">
+            {{ color }}
           </div>
-          <div v-for="color in fileUploadColors" :key="`file-upload-${color}`" class="flex justify-center w-40">
-            <UFileUpload label="Drop files" highlight :color="(color as any)" />
+          <template v-for="variant in chatPromptVariants" :key="variant">
+            <div class="text-xs font-medium text-muted capitalize whitespace-nowrap pe-3">
+              {{ variant }}
+            </div>
+            <div v-for="color in chatPromptColors" :key="`${variant}-${color}`" class="flex justify-center w-56">
+              <UChatPrompt :placeholder="variant" :color="(color as any)" :variant="(variant as any)" :autofocus="false" />
+            </div>
+          </template>
+        </div>
+      </div>
+    </section>
+
+    <!-- Other color-aware components -->
+    <section class="space-y-3">
+      <h2 class="text-lg font-semibold text-strong">
+        InputRating, Listbox, ProgressGroup, AvatarGroup
+      </h2>
+      <div class="overflow-x-auto">
+        <div class="grid gap-x-3 gap-y-3 items-center w-max" :style="gridStyle(inputRatingColors.length)">
+          <div />
+          <div v-for="color in inputRatingColors" :key="color" class="text-xs font-medium text-muted text-center capitalize">
+            {{ color }}
+          </div>
+          <div class="text-xs font-medium text-muted whitespace-nowrap pe-3">
+            input rating
+          </div>
+          <div v-for="color in inputRatingColors" :key="`rating-${color}`" class="flex justify-center">
+            <UInputRating :default-value="3" :color="(color as any)" />
+          </div>
+          <div class="text-xs font-medium text-muted whitespace-nowrap pe-3">
+            listbox
+          </div>
+          <div v-for="color in listboxColors" :key="`listbox-${color}`" class="flex justify-center w-36">
+            <UListbox :items="selectItems.map(label => ({ label, value: label }))" value-key="value" default-value="Banana" :color="(color as any)" class="w-full" />
+          </div>
+          <div class="text-xs font-medium text-muted whitespace-nowrap pe-3">
+            progress group
+          </div>
+          <div v-for="color in progressGroupColors" :key="`progress-group-${color}`" class="flex justify-center w-36">
+            <UProgressGroup :items="progressGroupItems" :color="(color as any)" class="w-full" />
+          </div>
+          <div class="text-xs font-medium text-muted whitespace-nowrap pe-3">
+            avatar group
+          </div>
+          <div v-for="color in avatarGroupColors" :key="`avatar-group-${color}`" class="flex justify-center">
+            <UAvatarGroup :color="(color as any)">
+              <UAvatar text="AB" />
+              <UAvatar text="CD" />
+            </UAvatarGroup>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- Table loading bar -->
+    <section class="space-y-3">
+      <h2 class="text-lg font-semibold text-strong">
+        Table (loading-color)
+      </h2>
+      <div class="grid sm:grid-cols-2 gap-3">
+        <UTable
+          v-for="color in tableLoadingColors"
+          :key="color"
+          :data="[]"
+          :columns="[{ accessorKey: 'name', header: color }]"
+          loading
+          :loading-color="(color as any)"
+        />
+      </div>
+    </section>
+
     <!-- DropdownMenu: items carry a color each -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         DropdownMenu
       </h2>
       <UDropdownMenu :items="dropdownMenuItems">
@@ -904,22 +991,22 @@ const codeColors = buttonColors
 
     <!-- ContextMenu: items carry a color each -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         ContextMenu
       </h2>
       <UContextMenu :items="contextMenuItems">
-        <div class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72">
+        <div class="flex items-center justify-center rounded-md border border-dashed border-strong text-sm aspect-video w-72">
           Right click here
         </div>
       </UContextMenu>
     </section>
 
-    <!-- Prose (ProseCallout, ProseCode) -->
+    <!-- Prose (ProseCallout, ProseCode, ProseCard) -->
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
         Prose Callout
       </h2>
-      <div class="flex flex-col gap-2 max-w-lg">
+      <div class="flex flex-col gap-2 max-w-lg *:my-0">
         <ProseCallout v-for="color in calloutColors" :key="color" :color="(color as any)">
           This is a {{ color }} callout.
         </ProseCallout>
@@ -927,7 +1014,25 @@ const codeColors = buttonColors
     </section>
 
     <section class="space-y-3">
-      <h2 class="text-lg font-semibold text-highlighted">
+      <h2 class="text-lg font-semibold text-strong">
+        Prose Card
+      </h2>
+      <div class="grid sm:grid-cols-3 gap-3 *:my-0">
+        <ProseCard
+          v-for="color in calloutColors"
+          :key="color"
+          :title="`${color} card`"
+          icon="i-lucide-box"
+          to="#"
+          :color="(color as any)"
+        >
+          A prose card.
+        </ProseCard>
+      </div>
+    </section>
+
+    <section class="space-y-3">
+      <h2 class="text-lg font-semibold text-strong">
         Prose Code
       </h2>
       <div class="flex flex-wrap gap-2">

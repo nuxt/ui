@@ -2,7 +2,7 @@ import { defineTheme } from '../utils/theme'
 
 export default defineTheme({
   slots: {
-    base: 'outline-primary/25 focus-visible:outline-3 rounded-md'
+    base: 'outline-focus focus-visible:outline-3 rounded-md'
   },
   variants: {
     active: {

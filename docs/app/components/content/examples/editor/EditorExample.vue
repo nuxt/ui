@@ -588,7 +588,7 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
     :ui="{ base: 'p-8 sm:px-16 py-13.5' }"
     class="w-full"
   >
-    <UEditorToolbar :editor="editor" :items="fixedToolbarItems" class="border-b border-muted sticky top-0 inset-x-0 px-8 sm:px-16 py-2 z-50 bg-default overflow-x-auto">
+    <UEditorToolbar :editor="editor" :items="fixedToolbarItems" class="border-b border-default sticky top-0 inset-x-0 px-8 sm:px-16 py-2 z-50 bg-default overflow-x-auto">
       <template #link>
         <EditorLinkPopover :editor="editor" auto-open />
       </template>
@@ -667,6 +667,6 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
 html.dark .tiptap .shiki,
 html.dark .tiptap .shiki span {
   color: var(--shiki-dark) !important;
-  background-color: var(--ui-bg-muted) !important;
+  background-color: var(--ui-bg-soft) !important;
 }
 </style>

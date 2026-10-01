@@ -1,5 +1,5 @@
 <template>
-  <div class="relative w-full h-[400px] bg-muted overflow-hidden">
+  <div class="relative w-full h-[400px] bg-tint overflow-hidden">
     <UMarquee reverse orientation="vertical" :overlay="false" :ui="{ root: '[--duration:40s] absolute w-[460px] -left-[100px] -top-[300px] h-[940px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
       <img
         v-for="i in 4"

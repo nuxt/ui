@@ -31,7 +31,7 @@ describe('Slider', () => {
     ['with ariaValueText', { props: { modelValue: 10 }, attrs: { 'aria-valuetext': '10 milliseconds' } }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'w-48' } }],
-    ['with ui', { props: { ui: { track: 'bg-elevated' } } }]
+    ['with ui', { props: { ui: { track: 'bg-soft' } } }]
   ])
 
   it('passes accessibility tests', async () => {

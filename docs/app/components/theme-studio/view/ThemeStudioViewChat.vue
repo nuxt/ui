@@ -118,7 +118,7 @@ const ui = {
   <UDashboardGroup
     unit="rem"
     :persistent="false"
-    class="relative inset-auto h-full w-full bg-elevated/50"
+    class="relative inset-auto h-full w-full bg-tint"
   >
     <UDashboardSidebar
       collapsible
@@ -131,7 +131,7 @@ const ui = {
       <template #header="{ collapsed }">
         <div v-if="!collapsed" class="flex items-center gap-1.5 px-2.5 py-1">
           <UIcon :name="studioIcons.messageCircle" class="size-6 text-primary shrink-0" />
-          <span class="text-xl font-bold text-highlighted">Chat</span>
+          <span class="text-xl font-bold text-strong">Chat</span>
         </div>
 
         <UDashboardSidebarCollapse class="ms-auto" />
@@ -147,7 +147,7 @@ const ui = {
                 :value="kbd"
                 size="sm"
                 variant="soft"
-                class="bg-accented/50"
+                class="bg-strong/50"
               />
             </div>
           </template>
@@ -170,7 +170,7 @@ const ui = {
                 color="neutral"
                 variant="link"
                 size="sm"
-                class="rounded-[5px] hover:bg-accented/50 focus-visible:bg-accented/50 data-[state=open]:bg-accented/50"
+                class="rounded-[5px] hover:bg-strong/50 focus-visible:bg-strong/50 data-[state=open]:bg-strong/50"
                 aria-label="Chat actions"
                 tabindex="-1"
                 @click.stop.prevent
@@ -194,8 +194,8 @@ const ui = {
             variant="ghost"
             block
             :square="collapsed"
-            class="data-[state=open]:bg-elevated"
-            :ui="{ trailingIcon: 'ms-auto text-dimmed' }"
+            class="data-[state=open]:bg-soft"
+            :ui="{ trailingIcon: 'ms-auto text-faint' }"
           />
         </UDropdownMenu>
       </template>
@@ -220,8 +220,8 @@ const ui = {
                   :trailing-icon="appConfig.ui.icons.chevronDown"
                   color="neutral"
                   variant="ghost"
-                  class="max-w-3xs data-[state=open]:bg-elevated"
-                  :ui="{ trailingIcon: 'text-dimmed shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                  class="max-w-3xs data-[state=open]:bg-soft"
+                  :ui="{ trailingIcon: 'text-faint shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200' }"
                 />
               </UDropdownMenu>
             </template>
@@ -295,7 +295,7 @@ const ui = {
                     color="neutral"
                     variant="ghost"
                     size="sm"
-                    class="data-[state=open]:bg-elevated"
+                    class="data-[state=open]:bg-soft"
                     :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
                   />
                 </div>

@@ -44,7 +44,7 @@ if (import.meta.server) {
               color="neutral"
               variant="link"
               size="xs"
-              class="font-mono text-dimmed tracking-wide text-[13px]"
+              class="font-mono text-faint tracking-wide text-[13px]"
               :trailing-icon="appConfig.ui.icons.plus"
             />
           </PageSectionHeading>
@@ -62,7 +62,7 @@ if (import.meta.server) {
               :ui="{
                 container: 'p-0 sm:p-0',
                 wrapper: 'items-stretch',
-                header: 'mb-0 border-b border-default overflow-hidden bg-muted/40',
+                header: 'mb-0 border-b border-default overflow-hidden bg-soft/40',
                 body: 'p-3 text-center',
                 title: 'text-sm',
                 description: 'text-sm'

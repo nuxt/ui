@@ -279,7 +279,7 @@ function randomize() {
 </script>
 
 <template>
-  <div class="flex-1 divide-y divide-accented w-full">
+  <div class="flex-1 divide-y divide-strong w-full">
     <div class="flex items-center gap-2 px-4 py-3.5 overflow-x-auto">
       <UInput
         :model-value="(table?.tableApi?.getColumn('email')?.getFilterValue() as string)"
