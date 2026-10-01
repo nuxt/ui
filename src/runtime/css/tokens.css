@@ -137,7 +137,7 @@
   --ring-offset-color-strong: var(--ui-border-strong);
   --ring-offset-color-bg: var(--ui-bg-default);
   --outline-color-default: var(--ui-border-default);
-  --outline-color-focus: var(--ui-outline-focus, color-mix(in oklab, var(--ui-neutral) 25%, transparent));
+  --outline-color-focus: var(--ui-outline-focus, color-mix(in oklab, var(--ui-primary) 25%, transparent));
   --outline-color-accent-focus: var(--ui-accent-outline-focus, color-mix(in oklab, var(--ui-accent) 25%, transparent));
   --stroke-bg: var(--ui-bg-default);
   --stroke-default: var(--ui-border-default);

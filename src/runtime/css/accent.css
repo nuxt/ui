@@ -128,6 +128,6 @@
     --ui-accent-border-default: var(--ui-neutral-border-default, var(--ui-border-default));
     --ui-accent-border-soft: var(--ui-neutral-border-soft, var(--ui-border-strong));
     --ui-accent-border-strong: var(--ui-neutral-border-strong, var(--ui-border-strong));
-    --ui-accent-outline-focus: var(--ui-neutral-outline-focus, var(--ui-outline-focus, color-mix(in oklab, var(--ui-neutral) 25%, transparent)));
+    --ui-accent-outline-focus: var(--ui-neutral-outline-focus);
   }
 }

@@ -154,9 +154,8 @@ describe('colors plugin', () => {
     expect(gray).toContain('--ui-primary-bg-soft: var(--ui-bg-soft);')
     // neutral's hover mixes the color itself, so primary's mixes primary
     expect(gray).toContain('--ui-primary-bg-hover: color-mix(in oklab, var(--ui-primary) 90%, transparent);')
-    // its focus follows the neutral focus
-    expect(gray).toContain('--ui-primary-outline-focus: var(--ui-outline-focus, color-mix(in oklab, var(--ui-primary) 25%, transparent));')
     // a role neutral leaves to its recipe stays on it
+    expect(gray).not.toContain('--ui-primary-outline-focus:')
     expect(gray).not.toContain('--ui-primary-text-contrast:')
 
     const samePalette = await build({}, undefined, '@plugin "@nuxt/ui/colors" { secondary: brand; neutral: brand; }', '@theme { --color-brand-50: #fafafa; --color-brand-100: #f5f5f5; --color-brand-200: #e5e5e5; --color-brand-300: #d4d4d4; --color-brand-400: #a3a3a3; --color-brand-500: #737373; --color-brand-600: #525252; --color-brand-700: #404040; --color-brand-800: #262626; --color-brand-900: #171717; --color-brand-950: #0a0a0a; }')

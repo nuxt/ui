@@ -7,8 +7,9 @@ export default defineTheme({
   },
   variants: {
     color: {
-      ...colorVariant({ base: 'border-accent-default bg-accent-soft text-accent-default' }),
-      // Neutral is the plain inline code, not a variant of the colored one.
+      ...colorVariant({ base: 'border-accent-soft bg-accent-tint text-accent' }),
+      // Neutral sets no `--ui-accent` scope, so inline code inside a colored
+      // Callout keeps the Callout's color through its `[&_code]` classes.
       neutral: { base: 'border-default dark:border-strong text-strong bg-tint' }
     }
   },

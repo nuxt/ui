@@ -114,7 +114,7 @@ export default defineTheme({
     to: true,
     highlight: false,
     class: {
-      root: 'has-[>a:focus-visible]:ring-neutral'
+      root: 'has-[>a:focus-visible]:ring-primary'
     }
   }, {
     variant: 'ghost',
