@@ -831,6 +831,9 @@ describe('tv merger config', () => {
 
   it('reads prefixed classes with `prefix`', () => {
     expect(tvt(theme, withConfig({ prefix: 'tw' }, 'tw'))().base({ class: 'tw:px-4' })).toBe('tw:py-1 tw:px-4')
+    // Without the option the merger would read `px-2 px-4` as utilities and keep
+    // only the last; with it, an unprefixed class isn't one and both stay.
+    expect(tvt(theme, withConfig({ prefix: 'tw' }, 'tw'))().base({ class: 'px-2 px-4' })).toBe('tw:px-2 tw:py-1 px-2 px-4')
   })
 
   it('keeps every class with `merge: false`', () => {
