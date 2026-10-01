@@ -111,8 +111,9 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
           }
         }
       },
-      // A component used for the first time in dev needs its theme CSS: detect
-      // again when the source changes, and rewrite `ui.css` when the set does
+      // Detect again when the source changes, for the dev warning to follow the
+      // components in use. `ui.css` only lists them with a `tailwindPrefix`: it's
+      // rewritten when the set changes, for a new component to get its theme CSS
       configureServer(server) {
         if (!options.componentDetection) {
           return
@@ -130,13 +131,15 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
             consola.success(`Nuxt UI detected new components: ${added.join(', ')}`)
           }
 
+          const file = templateFiles['#build/ui.css']
+          const previousCss = file && fs.readFileSync(file, 'utf8')
+
           vue.detectedComponents = detected
           await writeTemplates(root)
 
           // The templates live in `node_modules`, which Vite doesn't watch, so
           // tell it `ui.css` changed for Tailwind to rebuild the CSS importing it
-          const file = templateFiles['#build/ui.css']
-          if (file) {
+          if (file && fs.readFileSync(file, 'utf8') !== previousCss) {
             server.watcher.emit('change', file)
           }
 
