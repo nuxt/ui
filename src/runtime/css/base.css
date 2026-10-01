@@ -1,6 +1,6 @@
 /* Nuxt UI's styles, which can go in a cascade layer:
    `@import "@nuxt/ui/base" layer(framework);` next to a top-level
-   `@import "@nuxt/ui/sources";`. */
+   `@import "@nuxt/ui/tailwind";`. */
 @import './keyframes.css';
 @import './accent.css';
 @import '#build/ui.base.css';
