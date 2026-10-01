@@ -109,7 +109,7 @@ const undetected = new Set<string>()
 
 /**
  * Warns in dev when a component renders whose theme component detection didn't
- * find, since its classes aren't in the CSS.
+ * find, since the build leaves its classes out of the CSS.
  */
 function warnUndetected(name: string) {
   const names = detected
@@ -121,7 +121,7 @@ function warnUndetected(name: string) {
   setTimeout(() => {
     if (names.has(name)) return
     const component = name[0]!.toUpperCase() + name.slice(1)
-    console.warn(`[@nuxt/ui] Component detection didn't find \`${component}\`, so its classes aren't in your CSS. Add it to the \`componentDetection\` option: \`componentDetection: ['${component}']\`.`)
+    console.warn(`[@nuxt/ui] Component detection didn't find \`${component}\`, so the build leaves its classes out of your CSS. Add it to the \`componentDetection\` option: \`componentDetection: ['${component}']\`.`)
   }, 1000)
 }
 
