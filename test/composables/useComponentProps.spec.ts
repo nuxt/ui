@@ -2,7 +2,7 @@ import type { ComputedRef } from 'vue'
 import { describe, expectTypeOf, it, expect, test, beforeAll, afterAll } from 'vitest'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { useAppConfig } from '#imports'
-import { UFormField, UFieldGroup, UAvatarGroup, UTheme, UButton, UAvatar, UInput } from '#components'
+import { UFormField, UFieldGroup, UAvatarGroup, UTheme, UButton, UAvatar, UInput, UKbd } from '#components'
 import type * as ui from '#build/ui'
 import type { ThemeDefaults } from '../../src/runtime/types/theme'
 import { useComponentOverrides } from '../../src/runtime/composables/useComponentProps'
@@ -103,6 +103,21 @@ describe('\'*\' default variants', () => {
 
     expect(wrapper.find('[data-slot="button"]').classes()).toEqual(expect.arrayContaining(['[--ui-accent:var(--ui-error)]', 'text-xs']))
     expect(wrapper.find('[data-slot="avatar"]').classes()).toContain('[--ui-accent:var(--ui-neutral)]')
+  })
+
+  it('skips a value the component does not have', async () => {
+    const wrapper = await mountSuspended({
+      components: { UTheme, UButton, UKbd },
+      template: `
+        <UTheme :props="{ '*': { size: 'xl' } }">
+          <UButton label="Button" />
+          <UKbd value="K" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="button"]').classes()).toContain('text-base')
+    expect(wrapper.find('[data-slot="kbd"]').classes()).toContain('h-5')
   })
 
   it('reaches components with generic props', async () => {

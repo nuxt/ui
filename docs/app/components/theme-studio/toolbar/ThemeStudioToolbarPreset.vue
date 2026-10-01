@@ -93,10 +93,10 @@ const selected = computed({
       <span class="flex items-center gap-1">
         <span class="shrink-0 text-xs text-muted truncate" :style="{ fontFamily: `'${asPreset(item).font}', sans-serif` }">{{ asPreset(item).font }}</span>
 
-        <span class="text-dimmed select-none">·</span>
+        <span class="text-faint select-none">·</span>
 
         <span class="flex items-center gap-1 shrink-0">
-          <UIcon v-for="name in asPreset(item).iconSamples" :key="name" :name="name" class="size-3 text-dimmed" />
+          <UIcon v-for="name in asPreset(item).iconSamples" :key="name" :name="name" class="size-3 text-faint" />
         </span>
       </span>
     </template>

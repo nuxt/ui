@@ -6,9 +6,9 @@ export default defineTheme({
     container: 'flex flex-col mx-auto max-w-2xl',
     header: '',
     meta: 'flex items-center gap-3 mb-2',
-    date: 'text-sm/6 text-toned truncate',
+    date: 'text-sm/6 text-default truncate',
     badge: '',
-    title: 'relative text-xl text-pretty font-semibold text-highlighted',
+    title: 'relative text-xl text-pretty font-semibold text-strong',
     description: 'text-base text-pretty text-muted mt-1',
     imageWrapper: 'relative overflow-hidden rounded-lg aspect-[16/9] mt-5 group/changelog-version-image',
     image: 'object-cover object-top w-full h-full',
@@ -31,7 +31,7 @@ export default defineTheme({
     },
     to: {
       true: {
-        title: 'outline-primary/25 has-focus-visible:outline-3 rounded-xs transition',
+        title: 'outline-focus has-focus-visible:outline-3 rounded-xs transition',
         image: 'transform transition-transform ease-out motion-reduce:transition-none group-hover/changelog-version-image:scale-105 group-has-focus-visible/changelog-version-image:scale-105'
       }
     },

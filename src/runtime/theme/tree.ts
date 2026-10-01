@@ -54,7 +54,7 @@ export default defineTheme({
     },
     selected: {
       true: {
-        link: 'before:bg-elevated text-accent'
+        link: 'before:bg-soft text-accent'
       }
     },
     disabled: {
@@ -67,7 +67,7 @@ export default defineTheme({
     selected: false,
     disabled: false,
     class: {
-      link: 'hover:text-highlighted hover:before:bg-elevated/50 transition-colors before:transition-colors'
+      link: 'hover:text-strong hover:before:bg-tint transition-colors before:transition-colors'
     }
   }],
   defaultVariants: {
