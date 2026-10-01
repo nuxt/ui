@@ -368,6 +368,9 @@ catalogs:
     citty:
       specifier: ^0.2.2
       version: 0.2.2
+    cn:
+      specifier: ^0.4.0
+      version: 0.4.0
     colortranslator:
       specifier: ^5.0.0
       version: 5.0.0
@@ -494,9 +497,6 @@ catalogs:
     superstruct:
       specifier: ^2.0.2
       version: 2.0.2
-    tailwind-merge:
-      specifier: ^3.7.0
-      version: 3.7.0
     tailwindcss:
       specifier: ^4.3.3
       version: 4.3.3
@@ -629,6 +629,9 @@ importers:
       '@vueuse/shared':
         specifier: 'catalog:'
         version: 14.4.0(vue@3.5.43(typescript@6.0.3))
+      cn:
+        specifier: 'catalog:'
+        version: 0.4.0
       colortranslator:
         specifier: 'catalog:'
         version: 5.0.0
@@ -674,9 +677,6 @@ importers:
       superstruct:
         specifier: ^2
         version: 2.0.2
-      tailwind-merge:
-        specifier: 'catalog:'
-        version: 3.7.0
       tailwindcss:
         specifier: 'catalog:'
         version: 4.3.3
@@ -5653,6 +5653,11 @@ packages:
     resolution: {integrity: sha512-RMr0FhtfXemyinomL4hrWcYJxmX6deFdCxpJzhDttxgO1+bcCnkk+9drydLVDmAMG7NE6aN/fl4F7ucU/90gAA==}
     engines: {node: '>=0.10.0'}
 
+  cn@0.4.0:
+    resolution: {integrity: sha512-qOAeUhPwPzBxx6jaeQdo646XIKliKHc2j1ZF7Ngb1o0pJZKH5gq8FkA0aVdUdPFUDXNXyUCXpCtoJISo6dhizg==}
+    engines: {node: '>=20'}
+    hasBin: true
+
   color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
     engines: {node: '>=7.0.0'}
@@ -9501,9 +9506,6 @@ packages:
     peerDependenciesMeta:
       '@eslint/css':
         optional: true
-
-  tailwind-merge@3.7.0:
-    resolution: {integrity: sha512-XPPUyAc+cvspz3lHTcR/QgPfW2A0lv/xQNIjX3HGhLR+Nq2lHaLq5MtTesHn8GUr3W3DguT2KT5x3NVgRtYwmA==}
 
   tailwindcss@4.3.3:
     resolution: {integrity: sha512-gOhV3P7ufE62QDGg1zVaTgCR+EtPv92k2nIhVcVKcLmxT1sUBsQGhnZj175j+MqRt4zLF7ic+sCYjfhxMxj7YQ==}
@@ -16173,6 +16175,8 @@ snapshots:
 
   cluster-key-slot@1.1.2: {}
 
+  cn@0.4.0: {}
+
   color-convert@2.0.1:
     dependencies:
       color-name: 1.1.4
@@ -22001,8 +22005,6 @@ snapshots:
   tagged-tag@1.0.0: {}
 
   tailwind-csstree@0.3.3: {}
-
-  tailwind-merge@3.7.0: {}
 
   tailwindcss@4.3.3: {}
 
