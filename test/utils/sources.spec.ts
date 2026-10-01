@@ -13,8 +13,9 @@ const vite = createRequire(join(process.cwd(), 'package.json')).resolve('@tailwi
 const load = (name: string) => import(pathToFileURL(createRequire(vite).resolve(name)).href)
 
 const runtime = join(process.cwd(), 'src/runtime')
-// Its real path, as the module resolves it (`/var` is a symlink on macOS)
-const app = realpathSync(mkdtempSync(join(tmpdir(), 'nuxt-ui-sources-')))
+// Its real path, as the module resolves it (`/var` is a symlink on macOS, the
+// Windows temp dir a short `RUNNER~1` name only the native call expands)
+const app = realpathSync.native(mkdtempSync(join(tmpdir(), 'nuxt-ui-sources-')))
 // Installed the way users get it: under `node_modules`, which Tailwind treats as ignored
 const dist = join(app, 'node_modules/@nuxt/ui/dist')
 

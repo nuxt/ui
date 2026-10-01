@@ -255,7 +255,8 @@ export default detected as Set<string> | null
         return ''
       }
 
-      const accent = await readFile(resolve('./runtime/css/accent.css'), 'utf8')
+      // A Windows checkout can hold the file with CRLF line endings
+      const accent = (await readFile(resolve('./runtime/css/accent.css'), 'utf8')).replace(/\r\n/g, '\n')
       const scopes = accent.match(/\.\\\[--ui-accent\\:var\\\(--ui-[a-z]+\\\)\\\]\s*\{[^}]*\}/g) ?? []
       // One rule per color: fewer means the shipped CSS no longer looks the way this reads it
       if (scopes.length < colors.length) {
