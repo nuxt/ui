@@ -117,11 +117,12 @@ export type VariantGroup = 'buttons' | 'panels' | 'inputs'
 
 export interface StyleOptions {
   /**
-   * Default variant/size/color, expanded into per-component `defaultVariants`
-   * only where the component supports the value. `variant` is app-wide;
+   * Default variant/size/color. `size` and `color` are app-wide and export as
+   * `ui.defaultVariants`. `variant` expands into per-component
+   * `defaultVariants` where the component supports the value, and
    * `variants`/`colors` refine per group and win where set.
    */
-  defaults?: { variant?: DefaultVariant, size?: DefaultSize, variants?: Partial<Record<VariantGroup, DefaultVariant>>, colors?: Partial<Record<VariantGroup, DefaultColor>> }
+  defaults?: { variant?: DefaultVariant, size?: DefaultSize, color?: DefaultColor, variants?: Partial<Record<VariantGroup, DefaultVariant>>, colors?: Partial<Record<VariantGroup, DefaultColor>> }
   /**
    * Semantic token → ramp shade, keys whitelisted in TOKEN_SHADE_TARGETS.
    * An absent mode stays inherited, presets hydrating one mode must not
@@ -144,17 +145,6 @@ export const VARIANT_SUPPORT: Record<string, string[]> = {
   // fields have no solid variant, an unsupported value would silently unstyle them
   ...Object.fromEntries(FIELD_COMPONENTS.map(component => [component, FIELD_VARIANTS]))
 }
-
-/**
- * Components the app-wide Size default scales, exactly the xs–xl axis.
- * Components on other scales (avatar's 3xs–3xl, kbd's sm–lg) stay out.
- */
-export const SIZE_SUPPORT = [
-  'button', 'badge', ...FIELD_COMPONENTS, 'inputRating',
-  'tabs', 'checkbox', 'checkboxGroup', 'radioGroup', 'switch', 'slider', 'stepper',
-  'calendar', 'colorPicker', 'fileUpload', 'formField', 'fieldGroup',
-  'dropdownMenu', 'contextMenu', 'commandPalette', 'listbox'
-]
 
 /** Components with a color prop, the panels group has no color axis. */
 export const COLOR_SUPPORT = ['button', 'badge', ...FIELD_COMPONENTS]
@@ -296,14 +286,16 @@ export function styleComponents(style: StyleOptions): Fragments {
     }
   }
 
+  // Size and color go app-wide, through `ui.defaultVariants`: the library
+  // gives them to every component whose own default is `md` or `primary`.
   const size = style.defaults?.size
-  if (size && size !== 'default') {
-    for (const component of SIZE_SUPPORT) {
-      defaults[component] = {
-        ...defaults[component],
-        defaultVariants: { ...(defaults[component] as any)?.defaultVariants, size }
-      }
-    }
+  const color = style.defaults?.color
+  const global = {
+    ...(size && size !== 'default' && size !== 'md' ? { size } : {}),
+    ...(color && color !== 'default' && color !== 'primary' ? { color } : {})
+  }
+  if (Object.keys(global).length) {
+    ;(defaults as Record<string, any>).defaultVariants = global
   }
 
   return defaults
@@ -353,7 +345,10 @@ export function mergeUi(
 ): Record<string, any> {
   const result: Record<string, any> = {}
   for (const key of new Set([...Object.keys(base || {}), ...Object.keys(extra || {})])) {
-    const merged = mergeComponentOverrides(base?.[key], extra?.[key])
+    // the app-wide `defaultVariants` holds variant names, later value wins per key
+    const merged = key === 'defaultVariants'
+      ? { ...base?.[key], ...extra?.[key] }
+      : mergeComponentOverrides(base?.[key], extra?.[key])
     if (merged && Object.keys(merged).length) result[key] = merged
   }
   return result
@@ -367,7 +362,7 @@ export function mergeUi(
 export function isDefaultStyle(style: StyleOptions = {}): boolean {
   const set = (value?: string) => !!value && value !== 'default'
   const defaults = style.defaults ?? {}
-  return !set(defaults.variant) && !set(defaults.size)
+  return !set(defaults.variant) && !set(defaults.size) && !set(defaults.color)
     && !Object.values(defaults.variants ?? {}).some(set)
     && !Object.values(defaults.colors ?? {}).some(set)
     && !Object.values(style.tokenShades ?? {}).some(modes => modes && Object.keys(modes).length)

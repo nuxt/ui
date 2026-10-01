@@ -105,6 +105,11 @@ function groupColorModel(group: VariantGroup) {
   })
 }
 
+const defaultColor = computed({
+  get: () => style.value.defaults?.color || 'default',
+  set: (value: any) => setStyle({ defaults: { ...style.value.defaults, color: value } })
+})
+
 const groupColors = Object.fromEntries(variantGroupFields.map(field => [field.key, groupColorModel(field.key)])) as Record<VariantGroup, ReturnType<typeof groupColorModel>>
 
 const props = defineProps<{
@@ -135,14 +140,33 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
 
     <template #content>
       <ThemeStudioSection label="Global" section-key="size">
-        <ThemeStudioRow
-          v-model="defaultSize"
-          control="select"
-          label="Size"
-          :control-icon="studioIcons.proportions"
-          :items="defaultSizeItems"
-          aria-label="Default size"
-        />
+        <div class="flex flex-col gap-1">
+          <ThemeStudioRow
+            v-model="defaultSize"
+            control="select"
+            label="Size"
+            :control-icon="studioIcons.proportions"
+            :items="defaultSizeItems"
+            aria-label="Default size"
+          />
+          <ThemeStudioRow
+            v-model="defaultColor"
+            control="select"
+            label="Color"
+            :items="defaultColorItems"
+            aria-label="Default color"
+          >
+            <template #leading>
+              <UChip
+                :color="((defaultColor === 'default' ? 'primary' : defaultColor) as any)"
+                inset
+                standalone
+                class="mx-1"
+                :ui="{ base: 'ring-0' }"
+              />
+            </template>
+          </ThemeStudioRow>
+        </div>
       </ThemeStudioSection>
 
       <ThemeStudioSection
