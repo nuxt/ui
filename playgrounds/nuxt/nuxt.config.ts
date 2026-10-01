@@ -51,6 +51,8 @@ export default defineNuxtConfig({
         '@vueuse/integrations/useFuse',
         '@vueuse/shared',
         'ai',
+        'cn/engine',
+        'cn/tables',
         'colortranslator',
         'embla-carousel-auto-height',
         'embla-carousel-auto-scroll',
@@ -60,7 +62,6 @@ export default defineNuxtConfig({
         'embla-carousel-vue',
         'embla-carousel-wheel-gestures',
         'motion-v',
-        'tailwind-merge',
         'tailwindcss/colors',
         'vaul-vue',
         'zod'
