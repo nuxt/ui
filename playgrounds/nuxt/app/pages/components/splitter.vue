@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { SplitterItem } from '@nuxt/ui'
 
-const card = 'bg-elevated/50 border border-default rounded-xl items-center justify-center text-muted font-semibold'
+const card = 'bg-tint border border-default rounded-xl items-center justify-center text-muted font-semibold'
 
 const items: SplitterItem[] = [
   { slot: 'a', minSize: 20, class: card },

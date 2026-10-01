@@ -8,21 +8,21 @@ export default defineTheme({
     leadingIcon: 'size-4 shrink-0',
     chevronIcon: 'size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none',
     label: 'truncate',
-    suffix: 'text-dimmed ms-1',
+    suffix: 'text-faint ms-1',
     trailingIcon: 'size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none',
     content: 'data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden',
-    body: 'text-sm text-dimmed whitespace-pre-wrap',
+    body: 'text-sm text-faint whitespace-pre-wrap',
     actions: 'flex items-center justify-end gap-1.5'
   },
   variants: {
     variant: {
       inline: {
-        trigger: 'rounded-sm outline-primary/25 focus-visible:outline-3',
+        trigger: 'rounded-sm outline-focus focus-visible:outline-3',
         body: 'pt-2',
         actions: 'pt-2'
       },
       card: {
-        root: 'rounded-md ring ring-default overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary',
+        root: 'rounded-md ring ring-default overflow-hidden outline-focus has-focus-visible:outline-3 has-focus-visible:ring-primary',
         trigger: 'px-2 py-1 focus:outline-none',
         trailingIcon: 'ms-auto',
         body: 'border-t border-default p-2 max-h-[200px] overflow-y-auto focus:outline-none',

@@ -3,7 +3,7 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'relative overflow-hidden',
-    title: 'text-lg text-center font-semibold text-highlighted',
+    title: 'text-lg text-center font-semibold text-strong',
     logos: 'mt-10',
     logo: 'size-10 shrink-0'
   },

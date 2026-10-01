@@ -9,7 +9,7 @@ export default defineTheme({
     leading: 'flex items-center mb-6',
     leadingIcon: 'size-10 shrink-0 text-primary',
     headline: 'mb-3',
-    title: 'text-3xl sm:text-4xl lg:text-5xl text-pretty tracking-tight font-bold text-highlighted',
+    title: 'text-3xl sm:text-4xl lg:text-5xl text-pretty tracking-tight font-bold text-strong',
     description: 'text-base sm:text-lg text-muted',
     body: 'mt-8',
     features: 'grid',

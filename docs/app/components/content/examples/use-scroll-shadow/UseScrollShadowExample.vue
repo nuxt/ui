@@ -5,7 +5,7 @@ const { style } = useScrollShadow(el)
 </script>
 
 <template>
-  <div class="max-w-sm bg-elevated/50 rounded-lg">
+  <div class="max-w-sm bg-tint rounded-lg">
     <div
       ref="el"
       :style="style"

@@ -8,7 +8,7 @@ const targets = [
 <template>
   <div class="p-4 space-y-4">
     <div>
-      <p class="font-semibold text-highlighted">
+      <p class="font-semibold text-strong">
         Savings targets
       </p>
       <p class="text-sm text-muted">
@@ -21,7 +21,7 @@ const targets = [
         <span class="text-xs uppercase tracking-wide text-muted">{{ target.label }}</span>
         <span class="text-xs text-muted">{{ target.value }}% achieved</span>
       </div>
-      <p class="text-xl font-semibold text-highlighted">
+      <p class="text-xl font-semibold text-strong">
         {{ target.amount }}
       </p>
       <UProgress :model-value="target.value" size="sm" />

@@ -24,7 +24,7 @@ let neutralRoles: Array<[role: string, value: string]> | undefined
 /**
  * The roles the neutral scope points at the surface tokens, read from
  * `accent.css` next to this file so the two can't drift. A role neutral leaves
- * to its recipe, like `focus`, isn't listed. Read from this module's own URL:
+ * to its recipe, like `text-contrast`, isn't listed. Read from this module's own URL:
  * the runtime ships file by file, so it sits next to `accent.css` in `dist` too.
  */
 function getNeutralRoles() {
@@ -152,8 +152,8 @@ const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugi
     addBase({ ':root, :host': declarations })
   }
 
-  // An alias on a gray takes neutral's surface roles, like `color="neutral"`:
-  // soft, outline and ghost variants on the surfaces, not tinted by the gray.
+  // An alias on a gray takes neutral's roles, like `color="neutral"`: soft,
+  // subtle and ghost variants on the neutral fills, not tinted by the gray.
   // Set as its per-color roles, so an override of those still wins.
   const neutralPalette = paletteOf(aliases.neutral) ?? 'slate'
   const roles: Record<string, string> = {}

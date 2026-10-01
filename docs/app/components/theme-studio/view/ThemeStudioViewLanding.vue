@@ -10,7 +10,7 @@ const sectionUi = {
   container: 'max-w-5xl',
   headline: 'text-center font-mono font-medium text-xs text-primary uppercase tracking-[0.12em]',
   title: 'max-w-lg mx-auto',
-  description: 'max-w-md mx-auto text-dimmed'
+  description: 'max-w-md mx-auto text-faint'
 }
 
 const navItems: NavigationMenuItem[] = [
@@ -26,17 +26,17 @@ type TerminalSegment = {
 const terminalLines: TerminalSegment[][] = [
   [
     { text: '$ ', class: 'text-muted' },
-    { text: 'npx telemetry', class: 'text-highlighted' },
+    { text: 'npx telemetry', class: 'text-strong' },
     { text: ' init', class: 'text-primary' }
   ],
   [{ text: '→ Scanning service topology...', class: 'text-muted' }],
   [
     { text: '→ Found ', class: 'text-muted' },
-    { text: '23 services', class: 'text-highlighted' },
+    { text: '23 services', class: 'text-strong' },
     { text: ', ', class: 'text-muted' },
-    { text: '847 endpoints', class: 'text-highlighted' },
+    { text: '847 endpoints', class: 'text-strong' },
     { text: ', ', class: 'text-muted' },
-    { text: '12 databases', class: 'text-highlighted' }
+    { text: '12 databases', class: 'text-strong' }
   ],
   [
     { text: '→ Deploying collector agents ', class: 'text-muted' },
@@ -130,7 +130,7 @@ const vReveal = {
       <template #left>
         <div class="flex items-center gap-1.5">
           <UIcon :name="studioIcons.activity" class="size-6 text-primary shrink-0" />
-          <span class="text-xl font-bold text-highlighted">Landing</span>
+          <span class="text-xl font-bold text-strong">Landing</span>
         </div>
       </template>
 
@@ -164,7 +164,7 @@ const vReveal = {
             label="v2.0, Now with predictive alerting"
             color="neutral"
             variant="soft"
-            class="rounded-full px-3 py-1.5 gap-1.5 bg-inverted/5 backdrop-blur-sm"
+            class="rounded-full px-3 py-1.5 gap-1.5 bg-neutral/5 backdrop-blur-sm"
           >
             <template #leading>
               <UChip inset standalone :ui="{ base: 'animate-pulse ring-0' }" />
@@ -195,11 +195,11 @@ const vReveal = {
       </template>
 
       <div class="landing-enter max-w-2xl mx-auto w-full" style="animation-delay: 850ms">
-        <div class="rounded-xl border border-default bg-elevated/50 backdrop-blur-sm ring-1 ring-inverted/2 overflow-hidden">
+        <div class="rounded-xl border border-default bg-tint backdrop-blur-sm ring-1 ring-neutral/2 overflow-hidden">
           <div class="flex items-center gap-1.5 border-b border-default p-4 sm:px-6">
-            <span class="size-2.5 rounded-full border border-default bg-muted" />
-            <span class="size-2.5 rounded-full border border-default bg-muted" />
-            <span class="size-2.5 rounded-full border border-default bg-muted" />
+            <span class="size-2.5 rounded-full border border-default bg-tint" />
+            <span class="size-2.5 rounded-full border border-default bg-tint" />
+            <span class="size-2.5 rounded-full border border-default bg-tint" />
           </div>
 
           <div class="min-h-[200px] p-5 sm:p-6 font-mono text-[13px] leading-[1.8] text-start">
@@ -220,7 +220,7 @@ const vReveal = {
           title="Trusted by engineering teams at"
           :items="logos"
           :ui="{
-            title: 'font-mono uppercase text-xs tracking-[0.12em] text-dimmed',
+            title: 'font-mono uppercase text-xs tracking-[0.12em] text-faint',
             logos: 'gap-0',
             logo: 'text-muted size-6'
           }"
@@ -253,11 +253,11 @@ const vReveal = {
             :icon="feature.icon"
             :title="feature.title"
             :description="feature.description"
-            class="rounded-none transition duration-300 hover:bg-elevated/50"
+            class="rounded-none transition duration-300 hover:bg-tint"
             :ui="{
               leading: 'mb-5 flex size-9 items-center justify-center rounded-lg bg-primary/10',
               title: 'text-sm tracking-tight',
-              description: 'text-sm leading-relaxed sm:line-clamp-2 lg:line-clamp-3 text-dimmed'
+              description: 'text-sm leading-relaxed sm:line-clamp-2 lg:line-clamp-3 text-faint'
             }"
           />
         </div>
@@ -288,12 +288,12 @@ const vReveal = {
             v-reveal="index * 80"
             :title="metric.value"
             :description="metric.label"
-            class="rounded-none transition duration-300 hover:bg-elevated/50"
+            class="rounded-none transition duration-300 hover:bg-tint"
             :ui="{
               root: 'text-center',
               wrapper: 'items-center',
               title: ['text-3xl sm:text-4xl font-bold tracking-tight leading-none', metric.class],
-              description: 'font-mono text-xs uppercase tracking-[0.06em] text-dimmed mt-3'
+              description: 'font-mono text-xs uppercase tracking-[0.06em] text-faint mt-3'
             }"
           />
         </div>
@@ -307,7 +307,7 @@ const vReveal = {
         root: 'py-24 sm:py-32',
         container: 'max-w-3xl text-center',
         title: 'lg:text-5xl tracking-tighter',
-        description: 'mx-auto max-w-sm leading-relaxed text-dimmed'
+        description: 'mx-auto max-w-sm leading-relaxed text-faint'
       }"
     >
       <template #top>
@@ -332,7 +332,7 @@ const vReveal = {
             color="neutral"
             variant="subtle"
             size="xl"
-            class="font-mono font-light text-toned gap-4"
+            class="font-mono font-light text-default gap-4"
             :ui="{ trailingIcon: 'size-5' }"
             @click="copyCommand('npx telemetry init')"
           />
@@ -343,7 +343,7 @@ const vReveal = {
     <!-- Footer -->
     <UFooter :ui="{ container: 'border-t border-default', right: 'gap-x-0 flex-wrap justify-end' }">
       <template #left>
-        <p class="text-sm text-dimmed">
+        <p class="text-sm text-faint">
           Built with Nuxt UI • © 2026
         </p>
       </template>

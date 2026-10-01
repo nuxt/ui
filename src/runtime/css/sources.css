@@ -1,9 +1,5 @@
-/* What Tailwind can't take inside a cascade layer: the sources it scans, the
-   `light` / `dark` variants and the theme tokens. Import it at the top level,
-   `@nuxt/ui` does both halves. */
-@import './package-sources.css';
-@import '#build/ui.css';
-@import './tokens.css';
-
-@custom-variant light (&:where(.light, .light *));
-@custom-variant dark (&:where(.dark, .dark *));
+/* The package's own sources. They come before `#build/ui.css`: when the
+   package sits in `node_modules`, Tailwind drops an `@source not` listed
+   before the source it excludes, so detection wouldn't narrow anything. */
+@source '../components';
+@source '../theme';

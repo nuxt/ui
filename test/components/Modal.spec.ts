@@ -22,7 +22,7 @@ describe('Modal', () => {
     ['with scrollable and without overlay', { props: { ...props, scrollable: true, overlay: false, title: 'Title', description: 'Description' } }],
     ['without close', { props: { ...props, close: false, title: 'Title', description: 'Description' } }],
     ['with closeIcon', { props: { ...props, closeIcon: 'i-lucide-trash' } }],
-    ['with class', { props: { ...props, class: 'bg-elevated' } }],
+    ['with class', { props: { ...props, class: 'bg-soft' } }],
     ['with ui', { props: { ...props, ui: { close: 'end-2' } } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],

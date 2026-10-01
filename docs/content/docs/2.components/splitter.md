@@ -66,10 +66,10 @@ props:
       minSize: 15
       maxSize: 40
       defaultSize: 25
-      class: 'bg-elevated/50 border border-default rounded-xl items-center justify-center text-muted font-medium'
+      class: 'bg-tint border border-default rounded-xl items-center justify-center text-muted font-medium'
     - slot: 'main'
       defaultSize: 75
-      class: 'bg-elevated/50 border border-default rounded-xl items-center justify-center text-muted font-medium'
+      class: 'bg-tint border border-default rounded-xl items-center justify-center text-muted font-medium'
 slots:
   sidebar: Sidebar
   main: Main
@@ -103,9 +103,9 @@ props:
   orientation: 'vertical'
   items:
     - slot: 'first'
-      class: 'bg-elevated/50 border border-default rounded-xl items-center justify-center text-muted font-medium'
+      class: 'bg-tint border border-default rounded-xl items-center justify-center text-muted font-medium'
     - slot: 'second'
-      class: 'bg-elevated/50 border border-default rounded-xl items-center justify-center text-muted font-medium'
+      class: 'bg-tint border border-default rounded-xl items-center justify-center text-muted font-medium'
 slots:
   first: First
   second: Second

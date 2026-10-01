@@ -36,7 +36,7 @@ When you need to know **what a component accepts** or **how its API works**, use
 ## Core rules (always apply)
 
 1. **Always wrap the app in `UApp`** — required for toasts, tooltips, and programmatic overlays. Accepts a `locale` prop for i18n.
-2. **Always use semantic colors** — `text-default`, `bg-elevated`, `border-muted`, etc. Never use raw Tailwind palette colors like `text-gray-500`.
+2. **Always use semantic colors** — `text-default`, `bg-soft`, `border-default`, etc. Never use raw Tailwind palette colors like `text-gray-500`.
 3. **Read the theme files for slot names** — `node_modules/@nuxt/ui/dist/runtime/theme/<component>.js` (`prose/` and `content/` for those components). These show every slot, variant, and default class for any component. A theme that extends another (`extendTheme(input, {...})` in Select) only holds its own changes, read the one it extends too.
 4. **Override priority** (highest wins): `class` prop → `ui` prop → nearest `<UTheme>` → `app.config.ui` → theme. Every override applies after the whole theme, compound variants included.
 5. **Icons use `i-{collection}-{name}` format** — `lucide` is the default collection. Use the MCP `search-icons` tool to find icons, or browse at [icones.js.org](https://icones.js.org).

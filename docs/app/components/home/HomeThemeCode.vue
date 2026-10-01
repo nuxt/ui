@@ -76,7 +76,7 @@ const pane = computed(() => panes.value.find(entry => entry.key === tab.value) ?
 <template>
   <!-- min-w-0: the controls row would otherwise hold the grid column open at
        its own min-content width and push the hero past the viewport -->
-  <div class="hidden lg:flex flex-col gap-2 min-w-0 rounded-xl bg-elevated/50 px-2.5 py-2">
+  <div class="hidden lg:flex flex-col gap-2 min-w-0 rounded-xl bg-tint px-2.5 py-2">
     <div class="flex items-center gap-1 ps-1 pe-2 pt-0.5">
       <UButton
         v-for="entry in panes"
@@ -88,7 +88,7 @@ const pane = computed(() => panes.value.find(entry => entry.key === tab.value) ?
         :label="entry.filename"
         :active="tab === entry.key"
         :aria-pressed="tab === entry.key"
-        :class="tab === entry.key ? 'bg-accented/75' : ''"
+        :class="tab === entry.key ? 'bg-strong/75' : ''"
         @click="tab = entry.key"
       >
         <template #leading>

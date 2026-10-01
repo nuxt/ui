@@ -25,11 +25,8 @@ const paletteEditor = ref(false)
 const shadeEditor = ref(false)
 
 // Neutral rides every semantic token, so its shades come grouped rather than
-// as one accent pair. Border tokens are deliberately not exposed here, their
-// sliders would double the group with no visible payoff.
-const NEUTRAL_GROUPS = ['background', 'text']
+// as one accent pair.
 const tokenGroups = TOKEN_GROUPS
-  .filter(group => NEUTRAL_GROUPS.includes(group.key))
   .map(group => ({ ...group, sections: sections.filter(section => section.group === group.key) }))
   .filter(group => group.sections.length)
 

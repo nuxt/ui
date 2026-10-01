@@ -3,11 +3,11 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'group/attachment relative flex min-w-0 max-w-full w-fit shrink-0',
-    leading: 'relative flex items-center justify-center shrink-0 aspect-square overflow-hidden rounded-lg bg-elevated text-muted',
+    leading: 'relative flex items-center justify-center shrink-0 aspect-square overflow-hidden rounded-lg bg-soft text-muted',
     leadingIcon: 'absolute shrink-0',
     image: 'size-full object-cover',
     wrapper: 'grid grid-cols-[minmax(0,1fr)_auto] items-center min-w-0 flex-1',
-    name: 'block truncate font-medium text-highlighted',
+    name: 'block truncate font-medium text-strong',
     description: 'block truncate row-start-2 text-xs text-muted',
     remove: 'shrink-0'
   },
@@ -66,13 +66,13 @@ export default defineTheme({
         wrapper: 'contents',
         name: 'sr-only',
         description: 'sr-only',
-        remove: 'absolute -top-1.5 -end-1.5 m-0 p-0 rounded-full bg-inverted text-inverted hover:bg-inverted/90 active:bg-inverted/90 ring-2 ring-bg [@media(hover:hover)]:opacity-0 group-hover/attachment:opacity-100 group-focus-within/attachment:opacity-100 transition-opacity ease-out'
+        remove: 'absolute -top-1.5 -end-1.5 m-0 p-0 rounded-full bg-neutral text-contrast hover:bg-neutral/90 active:bg-neutral/90 ring-2 ring-bg [@media(hover:hover)]:opacity-0 group-hover/attachment:opacity-100 group-focus-within/attachment:opacity-100 transition-opacity ease-out'
       }
     },
     status: {
       idle: '',
       uploading: {
-        leading: 'has-data-[slot=image]:text-highlighted',
+        leading: 'has-data-[slot=image]:text-strong',
         leadingIcon: 'animate-spin',
         image: 'opacity-50'
       },

@@ -10,7 +10,7 @@ const data = [
 
 <template>
   <div class="flex flex-col items-center gap-4 p-4">
-    <p class="self-start font-semibold text-highlighted">
+    <p class="self-start font-semibold text-strong">
       Investment goal
     </p>
 
@@ -19,7 +19,7 @@ const data = [
       :data="data"
       index="label"
       :categories="['amount']"
-      :colors="['primary', 'var(--ui-bg-accented)']"
+      :colors="['primary', 'var(--ui-bg-strong)']"
       :legend="false"
       :thickness="12"
       :height="128"
@@ -28,14 +28,14 @@ const data = [
       class="w-32"
     >
       <template #center>
-        <span class="text-xl font-semibold text-highlighted">$24k</span>
+        <span class="text-xl font-semibold text-strong">$24k</span>
         <span class="text-xs text-muted">{{ Math.round(invested / goal * 100) }}% of $30k</span>
       </template>
     </UChart>
 
     <div class="flex items-center justify-between w-full text-sm">
       <span class="text-muted">Projected finish</span>
-      <span class="font-medium text-highlighted">Oct 2026</span>
+      <span class="font-medium text-strong">Oct 2026</span>
     </div>
   </div>
 </template>

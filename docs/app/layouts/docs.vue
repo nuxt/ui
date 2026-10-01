@@ -55,7 +55,7 @@ defineShortcuts({
             <template v-if="isSearchActive" #top>
               <UInput ref="input" v-model="searchTerm" variant="soft" placeholder="Filter..." class="group">
                 <template #trailing>
-                  <UKbd value="/" variant="subtle" class="ring-muted bg-transparent text-muted" />
+                  <UKbd value="/" variant="subtle" class="ring-default bg-transparent text-muted" />
                 </template>
               </UInput>
             </template>
