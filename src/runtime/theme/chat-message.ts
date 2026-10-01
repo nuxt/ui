@@ -26,7 +26,7 @@ export default defineTheme({
         content: 'bg-accent-tint text-accent-default'
       },
       subtle: {
-        content: 'bg-accent-tint text-accent-default ring ring-accent-soft'
+        content: 'bg-accent-tint text-accent-default ring ring-accent-default'
       },
       naked: {
         content: 'text-accent-default'
