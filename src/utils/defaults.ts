@@ -5,9 +5,7 @@ export function getDefaultConfig(tailwindPrefix?: string) {
     icons,
     prefix: tailwindPrefix,
     tv: {
-      mergeConfig: {
-        prefix: tailwindPrefix
-      }
+      prefix: tailwindPrefix
     }
   }
 }
