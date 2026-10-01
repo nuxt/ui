@@ -16,7 +16,7 @@ function format(amount: number) {
 <template>
   <div>
     <div class="p-4">
-      <p class="font-semibold text-highlighted">
+      <p class="font-semibold text-strong">
         Recent transactions
       </p>
       <p class="text-sm text-muted">
@@ -35,7 +35,7 @@ function format(amount: number) {
           :ui="{ wrapper: 'min-w-0 flex-1', name: 'truncate', description: 'truncate' }"
           class="min-w-0 flex-1 gap-3"
         />
-        <span class="text-sm font-medium" :class="transaction.amount < 0 ? 'text-highlighted' : 'text-success'">
+        <span class="text-sm font-medium" :class="transaction.amount < 0 ? 'text-strong' : 'text-success'">
           {{ format(transaction.amount) }}
         </span>
       </li>

@@ -6,18 +6,18 @@ import { extendTheme } from '../utils/theme'
 export default extendTheme(input, {
   slots: {
     root: () => undefined,
-    base: () => 'relative group rounded-md inline-flex items-center disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
+    base: () => 'relative group rounded-md inline-flex items-center text-strong disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
     value: 'truncate pointer-events-none',
-    placeholder: 'truncate text-dimmed',
+    placeholder: 'truncate text-faint',
     arrow: 'fill-bg stroke-default',
     content: 'max-h-[min(15rem,var(--reka-select-content-available-height,15rem))] w-(--reka-select-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden origin-(--reka-select-content-transform-origin) pointer-events-auto flex flex-col',
     viewport: 'relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1',
     group: 'p-1 isolate',
     empty: 'text-center text-muted',
-    label: 'font-semibold text-highlighted',
+    label: 'font-semibold text-strong',
     separator: '-mx-1 my-1 h-px bg-border',
-    item: 'group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors',
-    itemLeadingIcon: 'shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors',
+    item: 'group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-strong data-highlighted:not-data-disabled:before:bg-tint transition-colors before:transition-colors',
+    itemLeadingIcon: 'shrink-0 text-faint group-data-highlighted:not-group-data-disabled:text-default transition-colors',
     itemLeadingAvatar: 'shrink-0',
     itemLeadingChip: 'shrink-0',
     itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
@@ -33,10 +33,10 @@ export default extendTheme(input, {
     variant: (prev: typeof input.variants.variant) => ({
       ...prev,
       outline: {
-        base: [prev.outline!.base, 'hover:bg-elevated disabled:bg-default'].join(' ')
+        base: [prev.outline!.base, 'hover:bg-soft disabled:bg-default'].join(' ')
       },
       subtle: {
-        base: [prev.subtle!.base, 'hover:bg-accented/75 disabled:bg-elevated'].join(' ')
+        base: [prev.subtle!.base, 'hover:bg-strong/75 disabled:bg-soft'].join(' ')
       }
     }),
     size: {

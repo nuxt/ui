@@ -52,7 +52,7 @@ function isSelected(color: string) {
       :trailing-icon="appConfig.ui.icons.chevronDown"
       class="capitalize group"
       :style="{ '--swatch-color': swatchColor }"
-      :ui="{ trailingIcon: 'text-dimmed transition-transform duration-200 group-data-[state=open]:rotate-180' }"
+      :ui="{ trailingIcon: 'text-faint transition-transform duration-200 group-data-[state=open]:rotate-180' }"
     >
       <template #leading>
         <!-- the chip can't take an inline style, the var rides the button -->

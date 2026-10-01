@@ -15,19 +15,19 @@ export default defineTheme({
     tier: 'p-6 text-start font-normal align-top h-full',
     tierWrapper: 'flex flex-col md:h-full',
     tierTitleWrapper: 'flex items-center gap-3',
-    tierTitle: 'text-lg font-semibold text-highlighted',
+    tierTitle: 'text-lg font-semibold text-strong',
     tierDescription: 'text-sm font-normal text-muted mt-1',
     tierBadge: 'truncate',
     tierPriceWrapper: 'flex items-center gap-1 mt-4',
-    tierPrice: 'text-highlighted text-3xl sm:text-4xl font-semibold',
+    tierPrice: 'text-strong text-3xl sm:text-4xl font-semibold',
     tierDiscount: 'text-muted line-through text-xl sm:text-2xl',
     tierBilling: 'flex flex-col justify-between min-w-0',
-    tierBillingPeriod: 'text-toned truncate text-xs font-medium',
+    tierBillingPeriod: 'text-default truncate text-xs font-medium',
     tierBillingCycle: 'text-muted truncate text-xs font-medium',
     tierButton: 'mt-6 md:mt-auto md:pt-6',
     tierFeatureIcon: 'size-5 shrink-0',
     section: 'mt-6 flex flex-col gap-2',
-    sectionTitle: 'font-semibold text-sm text-highlighted',
+    sectionTitle: 'font-semibold text-sm text-strong',
     feature: 'flex items-center justify-between gap-1',
     featureTitle: 'text-sm text-default',
     featureValue: 'text-sm text-muted flex justify-center min-w-5'
@@ -45,9 +45,9 @@ export default defineTheme({
     },
     highlight: {
       true: {
-        tier: 'bg-elevated/50 border-x border-t border-default rounded-t-lg',
-        td: 'bg-elevated/50 border-x border-default',
-        item: 'bg-elevated/50'
+        tier: 'bg-tint border-x border-t border-default rounded-t-lg',
+        td: 'bg-tint border-x border-default',
+        item: 'bg-tint'
       }
     }
   }

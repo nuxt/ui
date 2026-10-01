@@ -8,21 +8,14 @@ export interface ThemePreset {
 }
 
 /**
- * The five tokens the library pins to white, routed through the neutral ramp
+ * The three tokens the library pins to white, routed through the neutral ramp
  * the way picking a neutral in the studio does (selectPalette's remaps), so a
  * tinted ramp reaches the page and the export reproduces the preview.
- *
- * The page moving to 50 takes the muted surface with it: the library sits it
- * at 50 too, so it would land ON the page and every muted panel (a code
- * block, a table head) would lose its shape.
  */
 const tintedNeutralBase = {
-  '--ui-bg': { light: 50 },
-  '--ui-bg-muted': { light: 100 },
-  '--ui-text-inverted': { light: 50 },
-  '--ui-text-highlighted': { dark: 50 },
-  '--ui-bg-inverted': { dark: 50 },
-  '--ui-border-inverted': { dark: 50 }
+  '--ui-bg-default': { light: 50 },
+  '--ui-text-contrast': { light: 50 },
+  '--ui-text-strong': { dark: 50 }
 } satisfies StyleOptions['tokenShades']
 
 /**
@@ -59,25 +52,23 @@ export const presets: ThemePreset[] = [{
     style: {
       tokenShades: {
         '--ui-primary': { light: 'black', dark: 200 },
-        '--ui-bg': { dark: 950 },
-        '--ui-bg-muted': { light: 100 },
-        '--ui-text': { dark: 50 },
-        '--ui-text-highlighted': { dark: 50 },
+        '--ui-bg-default': { dark: 950 },
+        '--ui-text-default': { dark: 50 },
+        '--ui-text-strong': { dark: 50 },
         // field outlines match the border in light, the library steps them up to 300
-        '--ui-border-accented': { light: 200 }
+        '--ui-border-strong': { light: 200 }
       }
     },
     // Pure black text and translucent borders aren't shades of the ramp
     tokens: {
       light: {
-        '--ui-text': 'black',
-        '--ui-text-highlighted': 'black',
-        '--ui-text-inverted': 'var(--ui-color-neutral-50)'
+        '--ui-text-default': 'black',
+        '--ui-text-strong': 'black',
+        '--ui-text-contrast': 'var(--ui-color-neutral-50)'
       },
       dark: {
-        '--ui-border': 'color-mix(in oklab, white 10%, transparent)',
-        '--ui-border-muted': 'color-mix(in oklab, white 10%, transparent)',
-        '--ui-border-accented': 'color-mix(in oklab, white 15%, transparent)'
+        '--ui-border-default': 'color-mix(in oklab, white 10%, transparent)',
+        '--ui-border-strong': 'color-mix(in oklab, white 15%, transparent)'
       }
     }
   }
@@ -140,16 +131,13 @@ export const presets: ThemePreset[] = [{
     tokens: {
       light: {
         '--ui-secondary': 'var(--ui-color-secondary-600)',
-        '--ui-bg-muted': 'var(--ui-color-neutral-200)',
-        '--ui-text': 'var(--ui-color-neutral-800)',
-        '--ui-border': 'var(--ui-color-neutral-400)',
-        '--ui-border-muted': 'var(--ui-color-neutral-300)',
-        '--ui-bg': 'var(--ui-color-neutral-100)',
-        '--ui-text-toned': 'var(--ui-color-neutral-700)',
+        '--ui-text-default': 'var(--ui-color-neutral-800)',
+        '--ui-border-default': 'var(--ui-color-neutral-400)',
+        '--ui-bg-default': 'var(--ui-color-neutral-100)',
         '--ui-text-muted': 'var(--ui-color-neutral-600)',
-        '--ui-text-dimmed': 'var(--ui-color-neutral-600)',
-        '--ui-bg-elevated': 'var(--ui-color-neutral-200)',
-        '--ui-bg-accented': 'var(--ui-color-neutral-300)'
+        '--ui-text-faint': 'var(--ui-color-neutral-600)',
+        '--ui-bg-soft': 'var(--ui-color-neutral-200)',
+        '--ui-bg-strong': 'var(--ui-color-neutral-300)'
       },
       // Dark keeps the same brand colours rather than lifting to the 400s.
       dark: {
@@ -159,8 +147,7 @@ export const presets: ThemePreset[] = [{
         '--ui-info': 'var(--ui-color-info-500)',
         '--ui-warning': 'var(--ui-color-warning-500)',
         '--ui-error': 'var(--ui-color-error-500)',
-        '--ui-bg-muted': 'var(--ui-color-neutral-700)',
-        '--ui-text': 'var(--ui-color-neutral-300)'
+        '--ui-text-default': 'var(--ui-color-neutral-300)'
       }
     }
   }
@@ -249,11 +236,10 @@ export const presets: ThemePreset[] = [{
         // 600 is the deep cinema red, 500 leans orange; dark holds it rather
         // than lifting to the salmon 400
         '--ui-primary': { light: 600, dark: 500 },
-        '--ui-bg': { light: 50, dark: 950 },
+        '--ui-bg-default': { light: 50, dark: 950 },
         // light restates tintedNeutral's step: this key replaces it wholesale
-        '--ui-bg-muted': { light: 100, dark: 900 },
-        '--ui-bg-elevated': { dark: 900 },
-        '--ui-bg-accented': { dark: 800 }
+        '--ui-bg-soft': { dark: 900 },
+        '--ui-bg-strong': { dark: 800 }
       }
     }
   }
@@ -346,25 +332,18 @@ export const presets: ThemePreset[] = [{
     style: {
       defaults: { variants: { buttons: 'solid', panels: 'subtle', inputs: 'subtle' } },
       tokenShades: {
-        '--ui-bg': { light: 50, dark: 800 },
-        '--ui-bg-muted': { light: 300, dark: 700 },
-        '--ui-bg-elevated': { light: 300, dark: 700 },
-        '--ui-bg-accented': { light: 400, dark: 600 },
-        '--ui-bg-inverted': { light: 900, dark: 50 },
-        '--ui-text-inverted': { light: 50 },
-        '--ui-text-dimmed': { light: 500, dark: 400 },
+        '--ui-bg-default': { light: 50, dark: 800 },
+        '--ui-bg-soft': { light: 300, dark: 700 },
+        '--ui-bg-strong': { light: 400, dark: 600 },
+        '--ui-text-contrast': { light: 50 },
+        '--ui-text-faint': { light: 500, dark: 400 },
         '--ui-text-muted': { light: 800, dark: 300 },
-        '--ui-text-toned': { light: 900 },
-        '--ui-text': { light: 900 },
-        '--ui-text-highlighted': { light: 950, dark: 100 },
+        '--ui-text-default': { light: 900 },
+        '--ui-text-strong': { light: 950, dark: 100 },
         // Light keeps the ink hairline; dark has to run the other way, a
         // border below the surface's own lightness just reads as a seam.
-        '--ui-border': { light: 950, dark: 600 },
-        // dark is left at the library's own neutral-700, restating it would
-        // only add a line the importer then has to recognise as generated
-        '--ui-border-muted': { light: 400 },
-        '--ui-border-accented': { light: 950, dark: 500 },
-        '--ui-border-inverted': { light: 500, dark: 50 }
+        '--ui-border-default': { light: 950, dark: 600 },
+        '--ui-border-strong': { light: 950, dark: 500 }
       }
     }
   }
@@ -402,14 +381,11 @@ export const presets: ThemePreset[] = [{
     icons: 'phosphor',
     tokens: {
       light: {
-        '--ui-bg': 'var(--ui-color-neutral-50)',
-        '--ui-text-inverted': 'var(--ui-color-neutral-50)',
-        '--ui-bg-muted': 'var(--ui-color-neutral-100)'
+        '--ui-bg-default': 'var(--ui-color-neutral-50)',
+        '--ui-text-contrast': 'var(--ui-color-neutral-50)'
       },
       dark: {
-        '--ui-bg-inverted': 'var(--ui-color-neutral-50)',
-        '--ui-text-highlighted': 'var(--ui-color-neutral-50)',
-        '--ui-border-inverted': 'var(--ui-color-neutral-50)'
+        '--ui-text-strong': 'var(--ui-color-neutral-50)'
       }
     }
   }
@@ -462,24 +438,20 @@ export const presets: ThemePreset[] = [{
     font: { sans: 'DM Sans', serif: 'Source Serif 4' },
     icons: 'heroicons',
     // Surfaces and borders stepped one deeper to hold on the tinted cream
-    // page. Elevated has to stay below the page: the library's hover and
-    // highlight tints are bg-elevated at half opacity, a lighter elevated
-    // vanishes into it.
+    // page. Soft has to stay below the page: the library's hover and
+    // highlight tint is bg-soft at half opacity, a lighter soft vanishes
+    // into it.
     tokens: {
       light: {
-        '--ui-bg': 'var(--ui-color-neutral-100)',
-        '--ui-bg-muted': 'var(--ui-color-neutral-200)',
-        '--ui-bg-elevated': 'var(--ui-color-neutral-200)',
-        '--ui-bg-accented': 'var(--ui-color-neutral-300)',
-        '--ui-border': 'var(--ui-color-neutral-300)',
-        // the library leaves this at 200, where the muted surface now sits:
-        // a code block's frame would land on its own background
-        '--ui-border-muted': 'var(--ui-color-neutral-300)',
-        '--ui-border-accented': 'var(--ui-color-neutral-400)'
+        '--ui-bg-default': 'var(--ui-color-neutral-100)',
+        '--ui-bg-soft': 'var(--ui-color-neutral-200)',
+        '--ui-bg-strong': 'var(--ui-color-neutral-300)',
+        '--ui-border-default': 'var(--ui-color-neutral-300)',
+        '--ui-border-strong': 'var(--ui-color-neutral-400)'
       },
       dark: {
         '--ui-primary': 'var(--ui-color-primary-500)',
-        '--ui-bg-accented': 'var(--ui-color-neutral-800)'
+        '--ui-bg-strong': 'var(--ui-color-neutral-800)'
       }
     }
   }
