@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-sm bg-elevated/50 rounded-lg">
+  <div class="max-w-sm bg-tint rounded-lg">
     <UScrollArea
       shadow
       class="p-4 h-72"

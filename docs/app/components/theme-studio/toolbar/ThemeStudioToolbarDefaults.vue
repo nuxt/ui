@@ -105,6 +105,11 @@ function groupColorModel(group: VariantGroup) {
   })
 }
 
+const defaultColor = computed({
+  get: () => style.value.defaults?.color || 'default',
+  set: (value: any) => setStyle({ defaults: { ...style.value.defaults, color: value } })
+})
+
 const groupColors = Object.fromEntries(variantGroupFields.map(field => [field.key, groupColorModel(field.key)])) as Record<VariantGroup, ReturnType<typeof groupColorModel>>
 
 const props = defineProps<{
@@ -135,14 +140,33 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
 
     <template #content>
       <ThemeStudioSection label="Global" section-key="size">
-        <ThemeStudioRow
-          v-model="defaultSize"
-          control="select"
-          label="Size"
-          :control-icon="studioIcons.proportions"
-          :items="defaultSizeItems"
-          aria-label="Default size"
-        />
+        <div class="flex flex-col gap-1">
+          <ThemeStudioRow
+            v-model="defaultSize"
+            control="select"
+            label="Size"
+            :control-icon="studioIcons.proportions"
+            :items="defaultSizeItems"
+            aria-label="Default size"
+          />
+          <ThemeStudioRow
+            v-model="defaultColor"
+            control="select"
+            label="Color"
+            :items="defaultColorItems"
+            aria-label="Default color"
+          >
+            <template #leading>
+              <UChip
+                :color="((defaultColor === 'default' ? 'primary' : defaultColor) as any)"
+                inset
+                standalone
+                class="mx-1"
+                :ui="{ base: 'ring-0' }"
+              />
+            </template>
+          </ThemeStudioRow>
+        </div>
       </ThemeStudioSection>
 
       <ThemeStudioSection
@@ -170,8 +194,8 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
                 class="group"
                 :ui="{
                   label: 'flex-1 text-left',
-                  leadingIcon: 'text-dimmed',
-                  trailingIcon: 'text-dimmed transition-transform duration-200 group-data-[state=open]:rotate-180'
+                  leadingIcon: 'text-faint',
+                  trailingIcon: 'text-faint transition-transform duration-200 group-data-[state=open]:rotate-180'
                 }"
               >
                 <!-- the tag belongs in the grid, where it names the stock option -->
@@ -191,7 +215,7 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
                   :class="[item.value === 'none' && 'opacity-60', 'min-w-0']"
                   @click="groupVariants[field.key].value = (item.value === field.stock ? 'default' : item.value); variantGridOpen[field.key] = false"
                 >
-                  <!-- opacity, not a color: text-dimmed would fight the variant's own text color -->
+                  <!-- opacity, not a color: text-faint would fight the variant's own text color -->
                   <span class="truncate">{{ item.label }}<span v-if="item.value === field.stock" class="opacity-70 font-normal">&nbsp;(Default)</span></span>
                 </UButton>
               </template>

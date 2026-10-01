@@ -77,7 +77,7 @@ export default defineTheme({
       outside: ''
     },
     dropzone: {
-      true: { base: 'border-dashed data-[dragging=true]:bg-elevated/25' }
+      true: { base: 'border-dashed data-[dragging=true]:bg-tint' }
     },
     interactive: {
       true: ''
@@ -168,7 +168,7 @@ export default defineTheme({
   }, {
     interactive: true,
     disabled: false,
-    class: { base: 'hover:bg-elevated/25' }
+    class: { base: 'hover:bg-tint' }
   }],
   defaultVariants: {
     color: 'primary',

@@ -31,7 +31,7 @@ props:
 
     Requirements:
     - Use `UDashboardPanel`, `UDashboardSidebar`, and `UDashboardNavbar`
-    - Use semantic color tokens like `bg-elevated` and `text-muted` for theming
+    - Use semantic color tokens like `bg-soft` and `text-muted` for theming
     - The sidebar should include navigation links with icons using `UNavigationMenu`
     - The navbar should display a breadcrumb, a search button, and a user dropdown menu
     - The layout must be fully responsive and collapse the sidebar on mobile

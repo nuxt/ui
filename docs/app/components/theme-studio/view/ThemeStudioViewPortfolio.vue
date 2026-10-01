@@ -141,7 +141,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
         :items="navItems"
         variant="link"
         color="neutral"
-        class="pointer-events-auto bg-muted/80 backdrop-blur-sm rounded-full px-2 sm:px-4 border border-muted/50 shadow-lg shadow-neutral-950/5"
+        class="pointer-events-auto bg-soft/80 backdrop-blur-sm rounded-full px-2 sm:px-4 border border-default/50 shadow-lg shadow-neutral-950/5"
         :ui="{
           link: 'px-2 py-1',
           linkLeadingIcon: 'hidden'
@@ -213,14 +213,14 @@ onUnmounted(() => clearTimeout(appearTimeout))
           <div
             v-for="(img, index) in heroImages"
             :key="index"
-            class="w-[234px] aspect-square shrink-0 rounded-lg overflow-hidden relative bg-elevated flex flex-col items-center justify-center gap-3"
+            class="w-[234px] aspect-square shrink-0 rounded-lg overflow-hidden relative bg-soft flex flex-col items-center justify-center gap-3"
             :class="index % 2 === 0 ? '-rotate-2' : 'rotate-2'"
           >
             <div
               class="absolute inset-0"
               :style="{ background: `radial-gradient(ellipse at ${index % 2 === 0 ? '30% 20%' : '70% 80%'}, color-mix(in srgb, var(--ui-primary) ${12 + (index % 3) * 6}%, transparent), transparent 70%)` }"
             />
-            <UIcon :name="img.icon" class="size-10 text-dimmed relative" />
+            <UIcon :name="img.icon" class="size-10 text-faint relative" />
             <span class="text-xs text-muted font-medium relative">{{ img.label }}</span>
           </div>
         </UMarquee>
@@ -259,7 +259,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
                 <USeparator />
                 <span class="flex items-center gap-1">
                   <span class="text-sm">{{ item.position }}</span>
-                  <span class="inline-flex items-center gap-1 text-highlighted">
+                  <span class="inline-flex items-center gap-1 text-strong">
                     <span class="font-medium text-sm">{{ item.company.name }}</span>
                     <UIcon :name="item.company.logo" />
                   </span>
@@ -313,7 +313,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
           :autoplay="{ delay: 4000 }"
           loop
           dots
-          :ui="{ viewport: '-mx-4 sm:-mx-12 lg:-mx-16 bg-elevated/50 max-w-(--ui-container)' }"
+          :ui="{ viewport: '-mx-4 sm:-mx-12 lg:-mx-16 bg-tint max-w-(--ui-container)' }"
         >
           <UPageCTA
             :description="item.quote"
@@ -321,7 +321,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
             class="rounded-none"
             :ui="{
               container: 'sm:py-12 lg:py-12 sm:gap-8',
-              description: 'text-base! text-balance before:content-[open-quote] before:text-5xl lg:before:text-7xl before:inline-block before:text-dimmed before:absolute before:-ml-6 lg:before:-ml-10 before:-mt-2 lg:before:-mt-4 after:content-[close-quote] after:text-5xl lg:after:text-7xl after:inline-block after:text-dimmed after:absolute after:mt-1 lg:after:mt-0 after:ml-1 lg:after:ml-2'
+              description: 'text-base! text-balance before:content-[open-quote] before:text-5xl lg:before:text-7xl before:inline-block before:text-faint before:absolute before:-ml-6 lg:before:-ml-10 before:-mt-2 lg:before:-mt-4 after:content-[close-quote] after:text-5xl lg:after:text-7xl after:inline-block after:text-faint after:absolute after:mt-1 lg:after:mt-0 after:ml-1 lg:after:ml-2'
             }"
           >
             <UUser
@@ -349,8 +349,8 @@ onUnmounted(() => clearTimeout(appearTimeout))
           :ui="{
             root: 'flex items-center gap-4 w-full',
             list: 'relative flex bg-transparent dark:bg-transparent gap-2 px-0',
-            indicator: 'absolute top-[4px] duration-200 ease-out focus:outline-none rounded-lg bg-elevated/60',
-            trigger: 'px-3 py-2 rounded-lg hover:bg-muted/50 data-[state=active]:text-highlighted data-[state=inactive]:text-muted',
+            indicator: 'absolute top-[4px] duration-200 ease-out focus:outline-none rounded-lg bg-soft/60',
+            trigger: 'px-3 py-2 rounded-lg hover:bg-tint data-[state=active]:text-strong data-[state=inactive]:text-muted',
             label: 'truncate'
           }"
         >
@@ -361,7 +361,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
               :unmount-on-hide="false"
               :ui="{
                 item: 'border-none',
-                trigger: 'mb-2 border-0 group px-4 transform-gpu rounded-lg bg-elevated/60 will-change-transform hover:bg-muted/50 text-base',
+                trigger: 'mb-2 border-0 group px-4 transform-gpu rounded-lg bg-soft/60 will-change-transform hover:bg-tint text-base',
                 body: 'px-4',
                 trailingIcon: 'group-data-[state=closed]:rotate-0 group-data-[state=open]:rotate-135 text-base text-muted'
               }"

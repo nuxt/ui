@@ -23,13 +23,13 @@ provide('components', components)
   <UApp :toaster="appConfig.toaster" :dir="appConfig.dir">
     <UDashboardGroup unit="rem">
       <UDashboardSidebar
-        class="bg-elevated/25"
+        class="bg-soft/25"
         resizable
         collapsible
         :toggle="{ size: 'sm', variant: 'outline', class: 'ring-default' }"
       >
         <template #header="{ collapsed }">
-          <NuxtLink to="/" class="text-highlighted inline-flex" aria-label="Home">
+          <NuxtLink to="/" class="text-strong inline-flex" aria-label="Home">
             <Logo class="h-5 w-auto" :collapsed="collapsed" />
           </NuxtLink>
 

@@ -22,7 +22,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   let previousDetectedComponents: Set<string> | undefined
 
   // The package's themes. Tailwind scans them from `@source '../theme'` in
-  // `css/package-sources.css`, and `#build/ui/*` re-exports them for app code.
+  // `css/sources.css`, and `#build/ui/*` re-exports them for app code.
   const themeDir = resolve('./runtime/theme')
 
   function writeThemeTemplate(theme: Record<string, any>, path?: string) {
@@ -263,7 +263,7 @@ export default detected as Set<string> | null
   // `package.json` `imports`, so tooling that resolves `#build/ui.css` or
   // `#build/ui.base.css` through Node module resolution (Prettier, Tailwind
   // IntelliSense) finds a file. What they generate is per app, the tokens and
-  // styles ship in `sources.css` and `base.css`.
+  // styles ship in `tailwind.css` and `base.css`.
   templates.push({
     filename: 'ui.static.css',
     write: true,

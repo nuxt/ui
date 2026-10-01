@@ -77,7 +77,7 @@ if (import.meta.server) {
             <!-- The wall runs off the bottom of the section under a fade; a
                  template is a page of its own, so it gets a framed window. -->
             <template v-if="view === 'grid'">
-              <div aria-hidden="true" class="absolute inset-0 -z-10 rounded-xl border border-default bg-elevated/50 mask-b-from-25%" />
+              <div aria-hidden="true" class="absolute inset-0 -z-10 rounded-xl border border-default bg-tint mask-b-from-25%" />
 
               <PlaygroundWall />
             </template>
