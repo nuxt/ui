@@ -1001,7 +1001,7 @@ const codeColors = buttonColors
       </UContextMenu>
     </section>
 
-    <!-- Prose (ProseCallout, ProseCode) -->
+    <!-- Prose (ProseCallout, ProseCode, ProseCard) -->
     <section class="space-y-3">
       <h2 class="text-lg font-semibold text-strong">
         Prose Callout

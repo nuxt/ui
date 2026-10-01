@@ -2,8 +2,8 @@
    `ring-strong`...), the color aliases and the accent roles. Each lives in the
    namespace of the property it styles, so `bg-accent-soft` exists and
    `text-accent-soft` doesn't. An accent role is the neutral token of the same
-   name with `accent-` in front, and `color="neutral"` resolves it to that token, except the focus
-   outline, which stays neutral. */
+   name with `accent-` in front, and `color="neutral"` resolves it to that
+   token, except the focus outline and the two hovers, set in `accent.css`. */
 @theme default inline {
   --color-primary-50: var(--ui-color-primary-50);
   --color-primary-100: var(--ui-color-primary-100);

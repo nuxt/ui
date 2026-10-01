@@ -182,7 +182,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
             alt="Mike Newbon"
             size="3xl"
             src="https://github.com/mikenewbon.png"
-            class="size-18 ring ring-default ring-offset-3 ring-offset-(color:--ui-bg-default) transition-all duration-600"
+            class="size-18 ring ring-default ring-offset-3 ring-offset-bg transition-all duration-600"
             :class="heroAppear ? 'opacity-100 blur-none scale-100' : 'opacity-0 blur-lg scale-110'"
           />
         </template>
@@ -350,7 +350,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
             root: 'flex items-center gap-4 w-full',
             list: 'relative flex bg-transparent dark:bg-transparent gap-2 px-0',
             indicator: 'absolute top-[4px] duration-200 ease-out focus:outline-none rounded-lg bg-soft/60',
-            trigger: 'px-3 py-2 rounded-lg hover:bg-soft/50 data-[state=active]:text-strong data-[state=inactive]:text-muted',
+            trigger: 'px-3 py-2 rounded-lg hover:bg-tint data-[state=active]:text-strong data-[state=inactive]:text-muted',
             label: 'truncate'
           }"
         >
@@ -361,7 +361,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
               :unmount-on-hide="false"
               :ui="{
                 item: 'border-none',
-                trigger: 'mb-2 border-0 group px-4 transform-gpu rounded-lg bg-soft/60 will-change-transform hover:bg-soft/50 text-base',
+                trigger: 'mb-2 border-0 group px-4 transform-gpu rounded-lg bg-soft/60 will-change-transform hover:bg-tint text-base',
                 body: 'px-4',
                 trailingIcon: 'group-data-[state=closed]:rotate-0 group-data-[state=open]:rotate-135 text-base text-muted'
               }"

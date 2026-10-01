@@ -76,7 +76,7 @@ export default defineTheme({
     color: colorVariant({ base: '' }),
     variant: {
       solid: { base: 'text-accent-contrast bg-accent hover:bg-accent-hover' },
-      outline: { base: 'ring ring-inset ring-accent-strong text-accent-default' },
+      outline: { base: 'ring ring-inset ring-accent-strong text-accent-default bg-default' },
       soft: { base: 'text-accent-default bg-accent-soft' }
     },
     size: {
@@ -140,7 +140,7 @@ Always use semantic colors, never Tailwind palette colors:
 - `outline-focus` - Focus outline of a component without a `color` prop
 
 ### Accent Tokens
-The `color` prop accepts `primary`, `secondary`, `success`, `info`, `warning`, `error` and `neutral`. Colored classes read the scoped color through `accent` roles, never through an alias name and never with an opacity modifier, so every color and the neutral scope can tune each state. Each role is the neutral token of the same name with `accent-` in front, and `color="neutral"` resolves it to that token:
+The `color` prop accepts `primary`, `secondary`, `success`, `info`, `warning`, `error` and `neutral`. Colored classes read the scoped color through `accent` roles, never through an alias name, so every color and the neutral scope can tune each state. Each role is the neutral token of the same name with `accent-` in front, and `color="neutral"` resolves it to that token:
 - `bg-accent` / `bg-accent-hover` - The color itself (solid) and its hover (`bg-neutral` / `bg-neutral-hover` for neutral)
 - `text-accent-contrast` - Text on the solid
 - `bg-accent-tint` / `bg-accent-soft` / `bg-accent-strong` - Fills

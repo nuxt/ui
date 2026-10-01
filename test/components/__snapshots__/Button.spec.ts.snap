@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Button > renders with active variant ghost correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent px-2.5 py-1.5 text-sm gap-1.5">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
@@ -188,7 +188,7 @@ exports[`Button > renders with loadingIcon correctly 1`] = `
 `;
 
 exports[`Button > renders with neutral variant ghost correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent px-2.5 py-1.5 text-sm gap-1.5">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
@@ -230,7 +230,7 @@ exports[`Button > renders with neutral variant subtle correctly 1`] = `
 `;
 
 exports[`Button > renders with primary variant ghost correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent px-2.5 py-1.5 text-sm gap-1.5">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
