@@ -77,7 +77,7 @@ const ui = {
     <template #top>
       <!-- A dot grid fading in and out vertically, so the type sits on texture
            rather than on a hard band. -->
-      <div aria-hidden="true" class="absolute inset-0 pointer-events-none bg-[radial-gradient(var(--ui-border-accented)_1px,transparent_1px)] bg-size-[28px_28px] opacity-50 mask-[linear-gradient(to_bottom,transparent,black_30%,black_70%,transparent)] -z-10" />
+      <div aria-hidden="true" class="absolute inset-0 pointer-events-none bg-[radial-gradient(var(--ui-border-strong)_1px,transparent_1px)] bg-size-[28px_28px] opacity-50 mask-[linear-gradient(to_bottom,transparent,black_30%,black_70%,transparent)] -z-10" />
 
       <!-- The horizon: a glow rising from the bottom edge, under a hairline
            that fades out at both ends. Both take their strength from the

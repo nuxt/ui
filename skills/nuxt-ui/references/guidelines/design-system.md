@@ -99,25 +99,26 @@ Apply it to a component through `--ui-accent` in `class`: `<UButton class="[--ui
 Use these everywhere instead of raw palette colors:
 
 ### Text
+- `text-strong` — headings and important labels
 - `text-default` — primary body text
 - `text-muted` — secondary text (descriptions, hints)
-- `text-toned` — medium-emphasis text (between muted and default)
-- `text-dimmed` — tertiary text (placeholders, disabled)
-- `text-highlighted` — emphasized text (headings, important labels)
-- `text-inverted` — text on inverted backgrounds (pair with `bg-inverted`)
+- `text-faint` — placeholders and disabled text
+- `text-contrast` — text on a solid (`bg-neutral`, `bg-accent`)
 
 ### Backgrounds
 - `bg-default` — page background
-- `bg-muted` — subtle backgrounds (hover states, alternating rows)
-- `bg-elevated` — raised surfaces (cards, dropdowns)
-- `bg-accented` — accent backgrounds (active states, selected items)
-- `bg-inverted` — inverse background (dark on light, light on dark)
+- `bg-tint` — the lightest fill (hovered items, code blocks, table heads)
+- `bg-backdrop` — the layer behind a Modal, a Slideover and a Drawer
+- `bg-soft` — soft fills and raised areas
+- `bg-strong` — strong fills (tracks, the hover of `bg-soft`)
+- `bg-neutral` — the neutral solid (dark on light, light on dark)
 
 ### Borders
-- `border-default` — standard borders
-- `border-muted` — subtle borders (dividers, separators)
-- `border-accented` — accent borders (active states)
-- `border-inverted` — inverse borders
+- `border-default` — standard borders (dividers, separators)
+- `border-strong` — stronger borders (field outlines)
+- `border-neutral` — the neutral solid as a border
+
+Inside a component with a `color`, the same words with `accent-` follow that color: `bg-accent-soft`, `text-accent-muted`, `ring-accent-default`. `bg-accent` is the color itself, with `text-accent-contrast` on it.
 
 ## Variants
 
@@ -146,7 +147,7 @@ Override theme **slots** on a single instance — wins over global config and va
 
 ```vue
 <UButton :ui="{ base: 'font-bold', trailingIcon: 'size-3 rotate-90' }" />
-<UCard :ui="{ header: 'bg-muted', body: 'p-8' }" />
+<UCard :ui="{ header: 'bg-tint', body: 'p-8' }" />
 ```
 
 Rules for `ui` overrides:
@@ -184,7 +185,7 @@ export default defineAppConfig({
         color: 'neutral',
         variant: 'outline',
         class: {
-          base: 'ring-default hover:bg-accented'
+          base: 'ring-default hover:bg-strong'
         }
       }],
       defaultVariants: {

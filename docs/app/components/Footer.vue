@@ -21,7 +21,7 @@ const { frameworks } = useFrameworks()
   <UFooter>
     <template #left>
       <NuxtLink to="https://github.com/nuxt/ui" target="_blank" class="text-sm text-muted">
-        Published under <span class="text-highlighted">MIT License</span>
+        Published under <span class="text-strong">MIT License</span>
       </NuxtLink>
     </template>
 

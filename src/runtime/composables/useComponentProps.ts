@@ -155,6 +155,9 @@ export function useComponentProps<T extends object>(name: string, props: T, them
     if (!base || value === undefined) return undefined
     const appConfigEntry = name.includes('.') ? get(config.value, name) : config.value[name]
     if (appConfigEntry?.defaultVariants?.[prop] !== undefined || theme?.defaultVariants?.[prop] !== base) return undefined
+    // A value the component doesn't have, like `xl` on a Kbd, leaves its default
+    const values = (theme?.variants as Record<string, Record<string, unknown>> | undefined)?.[prop]
+    if (values && !(value in values) && !(value in (appConfigEntry?.variants?.[prop] ?? {}))) return undefined
     return value
   }
 

@@ -24,7 +24,7 @@ defineProps<{
 
     <span :class="['flex-1 h-px bg-border min-w-6', ui?.rule]" />
 
-    <span v-if="meta || $slots.meta" :class="['text-[13px] text-dimmed whitespace-nowrap font-mono tracking-wide', ui?.meta]">
+    <span v-if="meta || $slots.meta" :class="['text-[13px] text-faint whitespace-nowrap font-mono tracking-wide', ui?.meta]">
       <slot name="meta">{{ meta }}</slot>
     </span>
 

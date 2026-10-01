@@ -9,7 +9,7 @@ export default defineTheme({
     viewport: 'relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1',
     arrow: 'fill-bg stroke-default',
     group: 'p-1 isolate',
-    label: 'w-full flex items-center font-semibold text-highlighted',
+    label: 'w-full flex items-center font-semibold text-strong',
     separator: '-mx-1 my-1 h-px bg-border',
     item: 'group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75',
     itemLeadingIcon: 'shrink-0',
@@ -20,18 +20,18 @@ export default defineTheme({
     itemWrapper: 'flex-1 flex flex-col text-start min-w-0',
     itemLabel: 'truncate',
     itemDescription: 'truncate text-muted',
-    itemLabelExternalIcon: 'inline-block size-3 align-top text-dimmed'
+    itemLabelExternalIcon: 'inline-block size-3 align-top text-faint'
   },
   variants: {
     color: colorVariant({ item: '', label: '' }),
     active: {
       true: {
-        item: 'text-highlighted before:bg-elevated',
+        item: 'text-strong before:bg-soft',
         itemLeadingIcon: 'text-default'
       },
       false: {
-        item: 'text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors',
-        itemLeadingIcon: 'text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors'
+        item: 'text-default data-highlighted:text-strong data-[state=open]:text-strong data-highlighted:before:bg-tint data-[state=open]:before:bg-tint transition-colors before:transition-colors',
+        itemLeadingIcon: 'text-faint group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors'
       }
     },
     loading: {
@@ -86,15 +86,15 @@ export default defineTheme({
     color: [...colors],
     active: false,
     class: {
-      item: 'text-accent-soft-foreground data-highlighted:text-accent data-highlighted:before:bg-accent-tint data-[state=open]:before:bg-accent-tint',
-      itemLeadingIcon: 'text-accent-faint group-data-highlighted:text-accent-soft-foreground group-data-[state=open]:text-accent-soft-foreground'
+      item: 'text-accent-default data-highlighted:text-accent data-highlighted:before:bg-accent-tint data-[state=open]:before:bg-accent-tint',
+      itemLeadingIcon: 'text-accent-faint group-data-highlighted:text-accent-default group-data-[state=open]:text-accent-default'
     }
   }, {
     color: [...colors],
     active: true,
     class: {
       item: 'text-accent before:bg-accent-soft',
-      itemLeadingIcon: 'text-accent-soft-foreground'
+      itemLeadingIcon: 'text-accent-default'
     }
   }],
   defaultVariants: {

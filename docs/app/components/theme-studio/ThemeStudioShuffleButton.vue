@@ -86,7 +86,7 @@ if (!props.vertical) {
       :block="vertical"
       aria-label="Random theme"
       :class="rolling && 'dice-bumping'"
-      :ui="{ leadingIcon: [rolling && 'dice-rolling', vertical && 'text-dimmed'] }"
+      :ui="{ leadingIcon: [rolling && 'dice-rolling', vertical && 'text-faint'] }"
       @click="rollDice"
       @animationend="onRollEnd"
     />

@@ -214,7 +214,7 @@ defineShortcuts({
     >
       <template #footer>
         <div class="flex items-center justify-between gap-2">
-          <UIcon name="i-simple-icons-nuxtdotjs" class="size-5 text-dimmed ml-1" />
+          <UIcon name="i-simple-icons-nuxtdotjs" class="size-5 text-faint ml-1" />
           <div class="flex items-center gap-1">
             <UButton color="neutral" variant="ghost" label="Open" size="xs">
               <template #trailing>
