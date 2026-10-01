@@ -20,7 +20,7 @@ export type TVMergeConfig = {
   merge?: boolean
   /**
    * The Tailwind prefix, so `tw:px-2` is read as `px-2`. Set for you from the
-   * `theme.prefix` module option.
+   * `tailwindPrefix` module option.
    */
   prefix?: string
   /**
