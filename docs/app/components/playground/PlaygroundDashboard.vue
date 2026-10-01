@@ -26,7 +26,7 @@ const progress = ref(75)
         <p class="text-sm text-muted">
           Total revenue
         </p>
-        <p class="text-2xl font-semibold text-highlighted">
+        <p class="text-2xl font-semibold text-strong">
           $48,200
         </p>
       </div>
@@ -52,7 +52,7 @@ const progress = ref(75)
     <div class="space-y-1.5">
       <div class="flex items-center justify-between text-sm">
         <span class="text-muted">Monthly goal</span>
-        <span class="font-medium text-highlighted">{{ progress }}%</span>
+        <span class="font-medium text-strong">{{ progress }}%</span>
       </div>
       <UProgress v-model="progress" size="sm" />
     </div>

@@ -119,7 +119,7 @@ function faceOf(value?: string) {
     </template>
 
     <template #item-label="{ item }">
-      <span :style="faceOf(item.value)">{{ item.label }}</span><span v-if="item.value && item.value === defaultValue" class="text-dimmed">&nbsp;(Default)</span>
+      <span :style="faceOf(item.value)">{{ item.label }}</span><span v-if="item.value && item.value === defaultValue" class="text-faint">&nbsp;(Default)</span>
     </template>
 
     <template #item-description="{ item }">

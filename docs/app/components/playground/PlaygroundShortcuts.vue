@@ -11,7 +11,7 @@ const shortcuts = [
 <template>
   <div>
     <div class="p-4">
-      <p class="font-semibold text-highlighted">
+      <p class="font-semibold text-strong">
         Shortcuts
       </p>
       <p class="text-sm text-muted">

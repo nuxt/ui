@@ -2,7 +2,7 @@ import { defineTheme } from '../../utils/theme'
 
 export default defineTheme({
   slots: {
-    base: 'py-3 px-4 font-semibold text-sm border-e border-b first:border-s border-t border-muted'
+    base: 'py-3 px-4 font-semibold text-sm border-e border-b first:border-s border-t border-default'
   },
   variants: {
     align: {

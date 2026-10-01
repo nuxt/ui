@@ -1,41 +1,23 @@
-import { colorVariant, colors } from '../color'
+import { colorVariant } from '../color'
 import { defineTheme } from '../../utils/theme'
 
+// Inline code scopes its own color: `inherit` on `--ui-accent` and the roles it
+// uses hands it the Callout's instead.
 export default defineTheme({
   slots: {
-    base: 'group relative block px-4 py-3 rounded-md text-sm/6 my-5 last:mb-0 [&_code]:text-xs/5 [&_code]:bg-default [&_pre]:bg-default [&>div]:my-2.5 [&_ul]:my-2.5 [&_ol]:my-2.5 *:last:mb-0! [&_ul]:ps-4.5 [&_ol]:ps-4.5 [&_li]:my-0 transition-colors border',
+    base: 'group relative block px-4 py-3 rounded-md text-sm/6 my-5 last:mb-0 [&_code]:text-xs/5 [&_code]:bg-default [&_a]:[&>code]:bg-none [&_code]:[--ui-accent:inherit] [&_code]:[--ui-accent-border-default:inherit] [&_code]:[--ui-accent-outline-focus:inherit] [&_pre]:bg-default [&>div]:my-2.5 [&_ul]:my-2.5 [&_ol]:my-2.5 *:last:mb-0! [&_ul]:ps-4.5 [&_ol]:ps-4.5 [&_li]:my-0 transition-colors border border-accent-default bg-accent-tint text-accent-default [&_a]:text-accent [&_a]:hover:border-accent [&_a]:outline-accent-focus [&_a]:focus-visible:outline-3 [&_a]:focus-visible:has-[>code]:outline-0 [&_a]:[&>code]:outline-accent-focus [&_a]:hover:[&>code]:border-accent [&_a]:hover:[&>code]:text-accent [&_a]:focus-visible:[&>code]:border-accent [&_a]:focus-visible:[&>code]:text-accent [&>ul]:marker:text-accent-faint',
     icon: 'size-4 shrink-0 align-sub me-2 inline-block transition-colors text-accent',
-    externalIcon: 'size-4 align-top absolute end-2 top-2 pointer-events-none transition-colors text-accent-soft-foreground'
+    externalIcon: 'size-4 align-top absolute end-2 top-2 pointer-events-none transition-colors text-accent-faint'
   },
   variants: {
-    color: {
-      ...colorVariant({ base: 'border-accent-border-soft bg-accent-soft text-accent-soft-foreground [&_a]:text-accent [&_a]:hover:border-accent [&_a]:outline-accent-focus [&_a]:focus-visible:outline-3 [&_a]:focus-visible:has-[>code]:outline-0 [&_code]:text-accent-soft-foreground [&_code]:border-accent-border-soft [&_a]:[&>code]:outline-accent-focus [&_a]:hover:[&>code]:border-accent [&_a]:hover:[&>code]:text-accent [&_a]:focus-visible:[&>code]:border-accent [&_a]:focus-visible:[&>code]:text-accent [&>ul]:marker:text-accent-border' }),
-      // Neutral is the plain callout, not a variant of the colored one.
-      neutral: {
-        base: 'border-muted bg-muted text-default',
-        icon: 'text-highlighted',
-        externalIcon: 'text-dimmed'
-      }
-    },
+    color: colorVariant({ base: '' }),
     to: {
-      true: { base: 'border-dashed' }
+      true: {
+        base: 'border-dashed hover:border-accent outline-accent-focus has-[>a:focus-visible]:outline-3 has-[>a:focus-visible]:border-accent',
+        externalIcon: 'group-hover:text-accent'
+      }
     }
   },
-  compoundVariants: [{
-    color: colors.filter(color => color !== 'neutral'),
-    to: true,
-    class: {
-      base: 'hover:border-accent outline-accent-focus has-[>a:focus-visible]:outline-3 has-[>a:focus-visible]:border-accent',
-      externalIcon: 'group-hover:text-accent'
-    }
-  }, {
-    color: 'neutral',
-    to: true,
-    class: {
-      base: 'hover:border-inverted outline-inverted/25 has-[>a:focus-visible]:outline-3 has-[>a:focus-visible]:border-inverted',
-      externalIcon: 'group-hover:text-highlighted'
-    }
-  }],
   defaultVariants: {
     color: 'neutral'
   }

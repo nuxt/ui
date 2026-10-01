@@ -150,7 +150,7 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
     case 'radius':
       return doc.radius ?? THEME_DEFAULTS.radius
     case 'size':
-      return chosen(style.defaults?.size)
+      return { size: chosen(style.defaults?.size), color: chosen(style.defaults?.color) }
     case 'buttons':
     case 'panels':
     case 'inputs':
@@ -302,10 +302,11 @@ export function mergeSection(current: ThemeDoc, base: ThemeDoc, key: SectionKey)
       setOrDelete(doc, 'radius', base.radius)
       break
     case 'size':
-      if (doc.style?.defaults || baseStyle.defaults?.size !== undefined) {
+      if (doc.style?.defaults || baseStyle.defaults?.size !== undefined || baseStyle.defaults?.color !== undefined) {
         doc.style ??= {}
         doc.style.defaults = { ...doc.style.defaults }
         setOrDelete(doc.style.defaults, 'size', baseStyle.defaults?.size)
+        setOrDelete(doc.style.defaults, 'color', baseStyle.defaults?.color)
       }
       break
     case 'buttons':

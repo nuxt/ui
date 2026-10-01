@@ -122,7 +122,7 @@ function normalizeCommitMessage(commit: Commit) {
         <UBadge variant="subtle" :label="item.tag" />
       </ULink>
 
-      <time v-if="item.published_at" :datetime="item.published_at" class="text-xs text-dimmed font-normal">
+      <time v-if="item.published_at" :datetime="item.published_at" class="text-xs text-faint font-normal">
         {{ useTimeAgo(new Date(item.published_at)) }}
       </time>
     </template>

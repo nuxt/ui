@@ -7,7 +7,7 @@ export default defineTheme({
     container: 'pt-4 sm:pt-6 pb-2.5 sm:pb-4.5 lg:py-8 border-b border-dashed border-default lg:border-0 flex flex-col lg:min-h-0',
     top: 'lg:shrink-0',
     bottom: 'hidden lg:flex lg:flex-col lg:shrink-0 gap-6',
-    trigger: 'group text-sm font-semibold flex-1 flex items-center gap-1.5 py-1.5 -mt-1.5 rounded-sm outline-primary/25 focus-visible:outline-3 lg:shrink-0',
+    trigger: 'group text-sm font-semibold flex-1 flex items-center gap-1.5 py-1.5 -mt-1.5 rounded-sm outline-accent-focus focus-visible:outline-3 lg:shrink-0',
     title: 'truncate',
     trailing: 'ms-auto inline-flex gap-1.5 items-center',
     trailingIcon: 'size-5 transform transition-transform duration-200 ease-out motion-reduce:transition-none shrink-0 group-data-[state=open]:rotate-180 lg:hidden',
@@ -16,7 +16,7 @@ export default defineTheme({
     listWithChildren: 'ms-3',
     item: 'min-w-0',
     itemWithChildren: '',
-    link: 'group relative text-sm flex items-center rounded-sm outline-primary/25 focus-visible:outline-3 py-1',
+    link: 'group relative text-sm flex items-center rounded-sm outline-accent-focus focus-visible:outline-3 py-1',
     linkText: 'truncate',
     indicator: '',
     indicatorLine: '',
@@ -64,7 +64,7 @@ export default defineTheme({
       item: '-ms-px',
       itemWithChildren: 'ps-px',
       indicator: 'absolute ms-2.5 start-0 top-0 rtl:-scale-x-100',
-      indicatorLine: 'absolute inset-0 bg-(--ui-border)',
+      indicatorLine: 'absolute inset-0 bg-border',
       indicatorActive: 'absolute w-full h-(--indicator-size) translate-y-(--indicator-position) transition-[translate,height] duration-200 ease-out motion-reduce:transition-none'
     }
   }],

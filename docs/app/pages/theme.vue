@@ -200,7 +200,7 @@ const shareOpen = ref(false)
          (min-w-0), so the toolbar inside it scrolls instead of widening the bar -->
     <UFooter class="hidden lg:block ring ring-default rounded-xl bg-default mx-2 mt-2" :ui="{ container: 'py-3! px-6!', left: 'mt-0 gap-0 lg:flex-none', center: 'flex-1 min-w-0 justify-start', right: 'mt-0 lg:flex-none' }">
       <template #left>
-        <div class="flex items-center gap-0.5 p-0.5 rounded-lg ring ring-default bg-elevated/50">
+        <div class="flex items-center gap-0.5 p-0.5 rounded-lg ring ring-default bg-tint">
           <UTooltip text="Undo" :kbds="['meta', 'Z']">
             <UButton
               :icon="studioIcons.undo"

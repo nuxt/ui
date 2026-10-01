@@ -5,12 +5,12 @@ import { extendTheme } from '../utils/theme'
 export default extendTheme(input, {
   slots: {
     root: (prev: string) => [prev, 'flex-wrap'],
-    base: () => 'rounded-md transition-colors',
-    item: 'px-1.5 py-0.5 rounded-sm font-medium inline-flex items-center gap-0.5 ring ring-inset ring-accented bg-elevated text-default data-disabled:cursor-not-allowed data-disabled:opacity-75 wrap-anywhere data-[state=active]:bg-accented',
+    base: () => 'rounded-md text-strong transition-colors',
+    item: 'px-1.5 py-0.5 rounded-sm font-medium inline-flex items-center gap-0.5 ring ring-inset ring-strong bg-soft text-default data-disabled:cursor-not-allowed data-disabled:opacity-75 wrap-anywhere data-[state=active]:bg-strong',
     itemText: '',
-    itemDelete: 'inline-flex items-center rounded-xs text-dimmed hover:text-default hover:bg-accented/75 disabled:pointer-events-none transition-colors',
+    itemDelete: 'inline-flex items-center rounded-xs text-faint hover:text-default hover:bg-strong disabled:pointer-events-none transition-colors',
     itemDeleteIcon: 'shrink-0',
-    input: 'flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
+    input: 'flex-1 border-0 bg-transparent placeholder:text-faint focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
   },
   variants: {
     ...fieldGroupVariant,

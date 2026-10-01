@@ -32,7 +32,7 @@ function removeSelected() {
 <template>
   <div class="flex items-stretch gap-4 w-full">
     <div class="flex flex-col flex-1 gap-1">
-      <span class="text-sm font-medium text-highlighted">Available</span>
+      <span class="text-sm font-medium text-strong">Available</span>
 
       <UListbox
         v-model="sourceSelection"
@@ -61,7 +61,7 @@ function removeSelected() {
     </div>
 
     <div class="flex flex-col flex-1 gap-1">
-      <span class="text-sm font-medium text-highlighted">Selected</span>
+      <span class="text-sm font-medium text-strong">Selected</span>
 
       <UListbox
         v-model="targetSelection"
