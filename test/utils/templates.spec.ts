@@ -2,7 +2,8 @@ import { readFileSync } from 'node:fs'
 import { describe, it, expect } from 'vitest'
 import ts from 'typescript'
 import { join } from 'pathe'
-import { getTemplates } from '../../src/templates'
+import { globSync } from 'tinyglobby'
+import { getTemplates, prefixedClasses } from '../../src/templates'
 import { defaultOptions, getDefaultConfig } from '../../src/utils/defaults'
 import tailwindColors from 'tailwindcss/colors'
 import { colors } from '../../src/runtime/theme/color'
@@ -142,6 +143,26 @@ describe('theme templates', () => {
 
 // The tokens and color scopes are static CSS now, so they're checked against
 // the color set the themes scope with.
+describe('prefixedClasses', () => {
+  it('lists every class components pass to `usePrefix`', () => {
+    const componentDir = join(process.cwd(), 'src/runtime/components')
+    const classes = new Set<string>()
+    for (const file of globSync('**/*.vue', { cwd: componentDir })) {
+      for (const [, value] of readFileSync(join(componentDir, file), 'utf8').matchAll(/\bprefix\(\s*'([^']+)'\s*\)/g)) {
+        value!.split(/\s+/).filter(Boolean).forEach(cls => classes.add(cls))
+      }
+    }
+
+    expect([...classes].sort()).toEqual(prefixedClasses)
+  })
+
+  it('adds them to `ui.css` with `tailwindPrefix`', async () => {
+    const css = await themeContents({ tailwindPrefix: 'tw' })('ui.css')
+
+    expect(css).toContain(`@source inline("${prefixedClasses.map(cls => `tw:${cls}`).join(' ')}");`)
+  })
+})
+
 describe('static css', () => {
   const tokens = readFileSync(resolve('./runtime/css/tokens.css'), 'utf8')
   const accent = readFileSync(resolve('./runtime/css/accent.css'), 'utf8')
