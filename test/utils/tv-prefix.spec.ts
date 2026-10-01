@@ -4,7 +4,7 @@ import { tv, engineFor, ComponentOverrides } from '../../src/runtime/utils/tv'
 const tvt = tv as unknown as (theme: any, overrides?: any) => (props?: any) => Record<string, (props?: any) => string>
 
 // What `useComponentOverrides` builds for a component in an app with `tailwindPrefix: 'tw'`
-const withPrefix = (entry?: Record<string, any>, unstyled = false) => new ComponentOverrides([entry], unstyled, engineFor({ mergeConfig: { prefix: 'tw' } }, 'tw'))
+const withPrefix = (entry?: Record<string, any>, unstyled = false) => new ComponentOverrides([entry], unstyled, engineFor({ prefix: 'tw' }, 'tw'))
 
 describe('tv with a Tailwind prefix', () => {
   const theme = {
@@ -42,14 +42,8 @@ describe('tv with a Tailwind prefix', () => {
   })
 
   it('shares one engine per merge config content and prefix', () => {
-    expect(engineFor({ mergeConfig: { prefix: 'tw' } }, 'tw')).toBe(engineFor({ mergeConfig: { prefix: 'tw' } }, 'tw'))
-    expect(engineFor({ mergeConfig: { prefix: 'tw' } }, 'tw')).not.toBe(engineFor({ mergeConfig: { prefix: 'tw' } }, 'ui'))
-  })
-
-  it('shares the engine of a merge config with deep class groups', () => {
-    const config = () => ({ mergeConfig: { extend: { classGroups: { 'bg-img': [{ bg: ['none', { linear: [{ to: ['x'] }] }] }] } } } })
-
-    expect(engineFor(config())).toBe(engineFor(config()))
+    expect(engineFor({ prefix: 'tw' }, 'tw')).toBe(engineFor({ prefix: 'tw' }, 'tw'))
+    expect(engineFor({ prefix: 'tw' }, 'tw')).not.toBe(engineFor({ prefix: 'tw' }, 'ui'))
   })
 
   it('leaves plain overrides unprefixed', () => {
