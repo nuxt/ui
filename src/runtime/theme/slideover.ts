@@ -2,7 +2,7 @@ import { defineTheme } from '../utils/theme'
 
 export default defineTheme({
   slots: {
-    overlay: 'fixed inset-0 bg-soft/75',
+    overlay: 'fixed inset-0 bg-backdrop',
     content: 'fixed bg-default divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none',
     header: 'flex items-center gap-1.5 p-4 sm:px-6 min-h-(--ui-header-height)',
     wrapper: '',

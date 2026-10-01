@@ -51,7 +51,7 @@ export default extendTheme(input, {
   }, {
     variant: 'soft',
     class: {
-      segment: 'focus:bg-strong/50 group-hover:focus:bg-strong'
+      segment: 'focus:bg-soft group-hover:focus:bg-strong'
     }
   }, {
     variant: 'subtle',

@@ -29,7 +29,7 @@ export default defineTheme({
     },
     overlay: {
       true: {
-        overlay: 'bg-soft/75'
+        overlay: 'bg-backdrop'
       }
     },
     scrollable: {

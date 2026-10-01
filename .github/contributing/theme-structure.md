@@ -129,6 +129,7 @@ Always use semantic colors, never Tailwind palette colors:
 ### Background Colors
 - `bg-default` - The page
 - `bg-tint` - The lightest fill: hovered items, code blocks, table heads
+- `bg-backdrop` - The layer behind a Modal, a Slideover and a Drawer
 - `bg-soft` - Soft fill (neutral soft variants, raised areas)
 - `bg-strong` - Strong fill (tracks, hover of `bg-soft`)
 - `bg-neutral` / `bg-neutral-hover` - The neutral solid and its hover

@@ -108,6 +108,7 @@ Use these everywhere instead of raw palette colors:
 ### Backgrounds
 - `bg-default` — page background
 - `bg-tint` — the lightest fill (hovered items, code blocks, table heads)
+- `bg-backdrop` — the layer behind a Modal, a Slideover and a Drawer
 - `bg-soft` — soft fills and raised areas
 - `bg-strong` — strong fills (tracks, the hover of `bg-soft`)
 - `bg-neutral` — the neutral solid (dark on light, light on dark)

@@ -5,7 +5,7 @@ exports[`DashboardSearch > renders with class correctly 1`] = `
   <!---->
   <!--v-if-->
   <!--teleport start-->
-  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-soft/75"></div>
+  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
   <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden h-full sm:h-[28rem] sm:max-w-5xl" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-0">Search…</h2><p id="reka-dialog-description-v-0-0-1"></p></span>
     <!---->
     <div dir="ltr" data-slot="command-palette" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
@@ -49,7 +49,7 @@ exports[`DashboardSearch > renders with fullscreen correctly 1`] = `
   <!---->
   <!--v-if-->
   <!--teleport start-->
-  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-soft/75"></div>
+  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
   <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] inset-0 fixed" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-0">Search…</h2><p id="reka-dialog-description-v-0-0-1"></p></span>
     <!---->
     <div dir="ltr" data-slot="command-palette" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
@@ -93,7 +93,7 @@ exports[`DashboardSearch > renders with groups correctly 1`] = `
   <!---->
   <!--v-if-->
   <!--teleport start-->
-  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-soft/75"></div>
+  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
   <div data-dismissable-layer="" tabindex="-1" data-slot="modal-content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden sm:max-w-3xl h-full sm:h-[28rem]" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" style="pointer-events: auto;"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-0">Search…</h2><p id="reka-dialog-description-v-0-0-1"></p></span>
     <!---->
     <div dir="ltr" data-slot="command-palette" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
@@ -137,7 +137,7 @@ exports[`DashboardSearch > renders with icon correctly 1`] = `
   <!---->
   <!--v-if-->
   <!--teleport start-->
-  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-soft/75"></div>
+  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
   <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden sm:max-w-3xl h-full sm:h-[28rem]" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-0">Search…</h2><p id="reka-dialog-description-v-0-0-1"></p></span>
     <!---->
     <div dir="ltr" data-slot="command-palette" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
@@ -181,7 +181,7 @@ exports[`DashboardSearch > renders with loading correctly 1`] = `
   <!---->
   <!--v-if-->
   <!--teleport start-->
-  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-soft/75"></div>
+  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
   <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden sm:max-w-3xl h-full sm:h-[28rem]" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-0">Search…</h2><p id="reka-dialog-description-v-0-0-1"></p></span>
     <!---->
     <div dir="ltr" data-slot="command-palette" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
@@ -225,7 +225,7 @@ exports[`DashboardSearch > renders with loadingIcon correctly 1`] = `
   <!---->
   <!--v-if-->
   <!--teleport start-->
-  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-soft/75"></div>
+  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
   <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden sm:max-w-3xl h-full sm:h-[28rem]" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-0">Search…</h2><p id="reka-dialog-description-v-0-0-1"></p></span>
     <!---->
     <div dir="ltr" data-slot="command-palette" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
@@ -269,7 +269,7 @@ exports[`DashboardSearch > renders with placeholder correctly 1`] = `
   <!---->
   <!--v-if-->
   <!--teleport start-->
-  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-soft/75"></div>
+  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
   <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden sm:max-w-3xl h-full sm:h-[28rem]" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-0">Search…</h2><p id="reka-dialog-description-v-0-0-1"></p></span>
     <!---->
     <div dir="ltr" data-slot="command-palette" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
@@ -313,7 +313,7 @@ exports[`DashboardSearch > renders with size lg correctly 1`] = `
   <!---->
   <!--v-if-->
   <!--teleport start-->
-  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-soft/75"></div>
+  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
   <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden sm:max-w-3xl h-full sm:h-[28rem]" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-0">Search…</h2><p id="reka-dialog-description-v-0-0-1"></p></span>
     <!---->
     <div dir="ltr" data-slot="command-palette" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
@@ -357,7 +357,7 @@ exports[`DashboardSearch > renders with size md correctly 1`] = `
   <!---->
   <!--v-if-->
   <!--teleport start-->
-  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-soft/75"></div>
+  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
   <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden sm:max-w-3xl h-full sm:h-[28rem]" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-0">Search…</h2><p id="reka-dialog-description-v-0-0-1"></p></span>
     <!---->
     <div dir="ltr" data-slot="command-palette" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
@@ -401,7 +401,7 @@ exports[`DashboardSearch > renders with size sm correctly 1`] = `
   <!---->
   <!--v-if-->
   <!--teleport start-->
-  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-soft/75"></div>
+  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
   <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden sm:max-w-3xl h-full sm:h-[28rem]" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-0">Search…</h2><p id="reka-dialog-description-v-0-0-1"></p></span>
     <!---->
     <div dir="ltr" data-slot="command-palette" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
@@ -445,7 +445,7 @@ exports[`DashboardSearch > renders with size xl correctly 1`] = `
   <!---->
   <!--v-if-->
   <!--teleport start-->
-  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-soft/75"></div>
+  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
   <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden sm:max-w-3xl h-full sm:h-[28rem]" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-0">Search…</h2><p id="reka-dialog-description-v-0-0-1"></p></span>
     <!---->
     <div dir="ltr" data-slot="command-palette" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
@@ -489,7 +489,7 @@ exports[`DashboardSearch > renders with size xs correctly 1`] = `
   <!---->
   <!--v-if-->
   <!--teleport start-->
-  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-soft/75"></div>
+  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
   <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden sm:max-w-3xl h-full sm:h-[28rem]" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-0">Search…</h2><p id="reka-dialog-description-v-0-0-1"></p></span>
     <!---->
     <div dir="ltr" data-slot="command-palette" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
@@ -533,7 +533,7 @@ exports[`DashboardSearch > renders with ui correctly 1`] = `
   <!---->
   <!--v-if-->
   <!--teleport start-->
-  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-soft/75"></div>
+  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
   <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden sm:max-w-3xl h-full sm:h-[28rem]" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-0">Search…</h2><p id="reka-dialog-description-v-0-0-1"></p></span>
     <!---->
     <div dir="ltr" data-slot="command-palette" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
@@ -577,7 +577,7 @@ exports[`DashboardSearch > renders without colorMode correctly 1`] = `
   <!---->
   <!--v-if-->
   <!--teleport start-->
-  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-soft/75"></div>
+  <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
   <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden sm:max-w-3xl h-full sm:h-[28rem]" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-0">Search…</h2><p id="reka-dialog-description-v-0-0-1"></p></span>
     <!---->
     <div dir="ltr" data-slot="command-palette" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">

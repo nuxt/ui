@@ -45,7 +45,7 @@ export default defineTheme({
     },
     active: {
       true: {
-        item: 'text-strong before:bg-soft/75',
+        item: 'text-strong before:bg-soft',
         itemLeadingIcon: 'text-default'
       },
       false: {

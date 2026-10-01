@@ -1,4 +1,4 @@
-import { colorVariant, colors } from './color'
+import { colorVariant } from './color'
 import { defineTheme } from '../utils/theme'
 
 export default defineTheme({
@@ -16,17 +16,23 @@ export default defineTheme({
   },
   variants: {
     variant: {
-      solid: '',
-      outline: '',
-      soft: '',
-      subtle: '',
-      naked: ''
+      solid: {
+        content: 'bg-accent text-accent-contrast'
+      },
+      outline: {
+        content: 'text-accent-default ring ring-accent-default'
+      },
+      soft: {
+        content: 'bg-accent-tint text-accent-default'
+      },
+      subtle: {
+        content: 'bg-accent-tint text-accent-default ring ring-accent-soft'
+      },
+      naked: {
+        content: 'text-accent-default'
+      }
     },
-    color: {
-      ...colorVariant({ root: '' }),
-      // Neutral keeps the inherited text color, so it has its own classes.
-      neutral: ''
-    },
+    color: colorVariant({ root: '' }),
     side: {
       left: {},
       right: {
@@ -57,60 +63,6 @@ export default defineTheme({
     }
   },
   compoundVariants: [{
-    color: colors.filter(color => color !== 'neutral'),
-    variant: 'solid',
-    class: {
-      content: 'bg-accent text-accent-contrast'
-    }
-  }, {
-    color: colors.filter(color => color !== 'neutral'),
-    variant: 'outline',
-    class: {
-      content: 'text-accent ring ring-accent-default'
-    }
-  }, {
-    color: colors.filter(color => color !== 'neutral'),
-    variant: 'soft',
-    class: {
-      content: 'bg-accent-soft text-accent-default'
-    }
-  }, {
-    color: colors.filter(color => color !== 'neutral'),
-    variant: 'subtle',
-    class: {
-      content: 'bg-accent-soft text-accent-default ring ring-accent-soft'
-    }
-  }, {
-    color: colors.filter(color => color !== 'neutral'),
-    variant: 'naked',
-    class: {
-      content: 'text-accent'
-    }
-  }, {
-    color: 'neutral',
-    variant: 'solid',
-    class: {
-      content: 'bg-neutral text-contrast'
-    }
-  }, {
-    color: 'neutral',
-    variant: 'outline',
-    class: {
-      content: 'bg-default ring ring-default'
-    }
-  }, {
-    color: 'neutral',
-    variant: 'soft',
-    class: {
-      content: 'bg-tint'
-    }
-  }, {
-    color: 'neutral',
-    variant: 'subtle',
-    class: {
-      content: 'bg-tint ring ring-default'
-    }
-  }, {
     compact: true,
     actions: true,
     class: {
