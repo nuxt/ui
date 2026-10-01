@@ -47,6 +47,27 @@ describe('theme templates', () => {
     expect(classes).not.toContain('animate-pulse')
   })
 
+  // The inline list is computed once from the imported themes, so an edit to a
+  // theme file would only reach the CSS after a restart
+  it('scans the theme files in dev instead of listing the detected classes', async () => {
+    const css = await themeContents({ componentDetection: true }, { detectedComponents: new Set(['Select']), dev: true })('ui.css')
+
+    expect(css).not.toContain(`@source not "${themeDir}";`)
+    expect(css).not.toContain('@source inline(')
+    expect(css).toContain(`@source not "${themeDir}/prose";`)
+    expect(css).toContain(`@source not "${themeDir}/content";`)
+  })
+
+  // Scanning the theme files only finds unprefixed candidates
+  it('keeps the inline list in dev with the prefix', async () => {
+    const css = await themeContents({ tailwindPrefix: 'tw', componentDetection: true }, { detectedComponents: new Set(['Button']), dev: true })('ui.css')
+    const classes = inlineClasses(css)
+
+    expect(css).toContain(`@source not "${themeDir}";`)
+    expect(classes).toContain('tw:rounded-md')
+    expect(classes).not.toContain('tw:min-w-full')
+  })
+
   it('lists the detected themes in dev for the runtime warning', async () => {
     const contents = await themeContents({ componentDetection: true }, { detectedComponents: new Set(['Button', 'InputMenu']), dev: true })('ui/detected.ts')
 
