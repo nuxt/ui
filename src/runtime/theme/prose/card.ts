@@ -13,7 +13,7 @@ export default defineTheme({
     color: colorVariant({ base: '' }),
     to: {
       true: {
-        base: 'hover:bg-accent-tint hover:border-accent outline-accent-focus has-[>a:focus-visible]:outline-3 has-[>a:focus-visible]:border-accent',
+        base: 'hover:bg-accent-soft hover:border-accent-strong outline-accent-focus has-[>a:focus-visible]:outline-3 has-[>a:focus-visible]:border-accent',
         externalIcon: 'group-hover:text-accent'
       }
     },
