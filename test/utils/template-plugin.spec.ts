@@ -1,13 +1,13 @@
 import { EventEmitter } from 'node:events'
 import { mkdtempSync, readFileSync, realpathSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
-import { join } from 'pathe'
+import { join, normalize } from 'pathe'
 import { describe, it, expect, afterAll, vi } from 'vitest'
 import TemplatePlugin from '../../src/plugins/templates'
 import { defaultOptions, getDefaultConfig } from '../../src/utils/defaults'
 
 const runtimeDir = join(process.cwd(), 'src/runtime')
-const root = realpathSync(mkdtempSync(join(tmpdir(), 'nuxt-ui-redetect-')))
+const root = normalize(realpathSync.native(mkdtempSync(join(tmpdir(), 'nuxt-ui-redetect-'))))
 
 afterAll(() => rmSync(root, { recursive: true, force: true }))
 
