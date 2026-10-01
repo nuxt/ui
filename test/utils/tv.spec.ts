@@ -33,7 +33,7 @@ describe('tv class replace', () => {
   it('keeps merging plain string classes (no regression)', () => {
     const ui = build()
     expect(ui.label({ class: 'font-bold' })).toBe('truncate font-bold')
-    // A conflicting utility is still resolved by tailwind-merge.
+    // A conflicting utility is still resolved by the merger.
     const base = ui.base({ class: 'text-lg' })
     expect(base).toContain('text-lg')
     expect(base).not.toContain('text-sm')
@@ -116,7 +116,7 @@ describe('tv class replace', () => {
   })
 
   it('lets the last replacer win when several are forwarded in the class array', () => {
-    // Mirrors `[props.ui?.base, props.class]` with both set: `class` wins, like twMerge.
+    // Mirrors `[props.ui?.base, props.class]` with both set: `class` wins, like the merger.
     expect(build().base({ class: [() => 'block', () => 'w-full'] })).toBe('w-full')
   })
 })
@@ -817,5 +817,41 @@ describe('tv theme sources', () => {
   it('matches a numeric variant key by its string form', () => {
     expect(tv(stepsTheme)({ level: '4' }).base()).toContain('[&>h4]:[counter-increment:step]')
     expect(tv(stepsTheme)({ level: 4 }).base()).toContain('[&>h4]:[counter-increment:step]')
+  })
+})
+
+describe('tv merger config', () => {
+  // What `useComponentOverrides` builds from `app.config.ui.tv`
+  const withConfig = (config?: Record<string, any>, prefix?: string) => new ComponentOverrides([undefined], false, engineFor(config as any, prefix))
+  const theme = { slots: { base: 'px-2 py-1' } }
+
+  it('merges with the default engine when nothing is set', () => {
+    expect(tvt(theme, withConfig({ prefix: undefined }))().base({ class: 'px-4' })).toBe('py-1 px-4')
+  })
+
+  it('reads prefixed classes with `prefix`', () => {
+    expect(tvt(theme, withConfig({ prefix: 'tw' }, 'tw'))().base({ class: 'tw:px-4' })).toBe('tw:py-1 tw:px-4')
+    // Without the option the merger would read `px-2 px-4` as utilities and keep
+    // only the last; with it, an unprefixed class isn't one and both stay.
+    expect(tvt(theme, withConfig({ prefix: 'tw' }, 'tw'))().base({ class: 'px-2 px-4' })).toBe('tw:px-2 tw:py-1 px-2 px-4')
+  })
+
+  it('keeps every class with `merge: false`', () => {
+    expect(tvt(theme, withConfig({ merge: false }))().base({ class: 'px-4' })).toBe('px-2 py-1 px-4')
+  })
+
+  it('still merges with `cacheSize: 0`', () => {
+    expect(tvt(theme, withConfig({ cacheSize: 0 }))().base({ class: 'px-4' })).toBe('py-1 px-4')
+  })
+
+  // A valid merge config is flat, so nothing reaches the key walk's depth limit.
+  // Past it the key bails, which trades the shared engine for a fresh one rather
+  // than keying a deep object, and classes still resolve.
+  it('resolves a config too deep to key', () => {
+    const nest = (depth: number): any => depth === 0 ? 'x' : { a: nest(depth - 1) }
+    const deep = () => ({ prefix: undefined, extra: nest(8) })
+
+    expect(engineFor(deep() as any)).not.toBe(engineFor(deep() as any))
+    expect(tvt(theme, withConfig(deep()))().base({ class: 'px-4' })).toBe('py-1 px-4')
   })
 })
