@@ -6,7 +6,7 @@
       }
     }"
   >
-    <div class="flex flex-col items-start gap-4 border border-muted p-4 rounded-lg">
+    <div class="flex flex-col items-start gap-4 border border-default p-4 rounded-lg">
       <div class="flex items-center gap-2">
         <UButton label="Outer theme" />
         <UButton label="Outer theme" color="neutral" variant="outline" />
@@ -19,7 +19,7 @@
           }
         }"
       >
-        <div class="border border-muted p-4 rounded-lg">
+        <div class="border border-default p-4 rounded-lg">
           <div class="flex items-center gap-2">
             <UButton label="Inner theme" />
             <UButton label="Inner theme" color="neutral" variant="outline" />

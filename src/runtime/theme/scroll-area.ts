@@ -2,7 +2,7 @@ import { defineTheme } from '../utils/theme'
 
 export default defineTheme({
   slots: {
-    root: 'relative outline-primary/25 focus-visible:outline-3',
+    root: 'relative outline-focus focus-visible:outline-3',
     viewport: 'relative flex',
     item: ''
   },

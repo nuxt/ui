@@ -155,7 +155,7 @@ function generateMessages() {
                 :href="source.url"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="flex items-center gap-2 px-2 py-1 text-sm text-muted hover:text-default hover:bg-elevated/50 transition-colors min-w-0 rounded-md"
+                class="flex items-center gap-2 px-2 py-1 text-sm text-muted hover:text-default hover:bg-tint transition-colors min-w-0 rounded-md"
               >
                 <img
                   :src="getFaviconUrl(source.url)"
@@ -165,7 +165,7 @@ function generateMessages() {
                   @error="($event.target as HTMLImageElement).style.display = 'none'"
                 >
                 <span class="truncate">{{ source.title || source.url }}</span>
-                <span class="text-xs text-dimmed ms-auto shrink-0">{{ getDomain(source.url) }}</span>
+                <span class="text-xs text-faint ms-auto shrink-0">{{ getDomain(source.url) }}</span>
               </a>
             </div>
           </UChatTool>

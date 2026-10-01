@@ -262,7 +262,7 @@ function dragHandleItems(editor: Editor): DropdownMenuItem[][] {
           <template #left>
             <div class="flex items-center gap-1.5">
               <UIcon :name="studioIcons.editor" class="size-6 text-primary shrink-0" />
-              <span class="text-xl font-bold text-highlighted">Editor</span>
+              <span class="text-xl font-bold text-strong">Editor</span>
             </div>
           </template>
 

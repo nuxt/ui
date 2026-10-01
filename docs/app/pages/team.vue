@@ -125,9 +125,9 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
                 />
 
                 <div class="flex-1 md:flex-none md:w-86 min-w-0 flex flex-col gap-0.5">
-                  <span class="text-base sm:text-lg font-semibold leading-tight tracking-tight text-highlighted truncate">{{ person.name }}</span>
+                  <span class="text-base sm:text-lg font-semibold leading-tight tracking-tight text-strong truncate">{{ person.name }}</span>
                   <span v-if="person.location" class="flex items-center gap-1.5 text-[13px] text-muted whitespace-nowrap min-w-0">
-                    <UIcon :name="studioIcons.mapPin" class="size-3 text-dimmed shrink-0" />
+                    <UIcon :name="studioIcons.mapPin" class="size-3 text-faint shrink-0" />
                     <span class="truncate">{{ person.location }}</span>
                   </span>
                 </div>
@@ -143,7 +143,7 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
                     color="neutral"
                     variant="ghost"
                     size="sm"
-                    class="text-muted hover:text-highlighted"
+                    class="text-muted hover:text-strong"
                   />
 
                   <UButton
@@ -160,7 +160,7 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
                 </div>
 
                 <div class="ms-auto flex items-baseline gap-1 shrink-0">
-                  <span class="text-base font-semibold leading-none tracking-tight tabular-nums text-highlighted">{{ format(person.contributions) }}</span>
+                  <span class="text-base font-semibold leading-none tracking-tight tabular-nums text-strong">{{ format(person.contributions) }}</span>
                   <span class="text-xs text-muted whitespace-nowrap">contributions</span>
                 </div>
               </li>
@@ -168,11 +168,11 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
           </section>
 
           <section>
-            <div class="relative overflow-hidden rounded-2xl border border-default bg-linear-to-b from-default to-(--ui-bg-elevated)/60 px-8 py-10 sm:px-13 sm:py-12 flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-10">
-              <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(var(--ui-border-accented)_1px,transparent_1px)] bg-[size:26px_26px] opacity-50 [mask-image:radial-gradient(80%_120%_at_90%_50%,black,transparent_70%)]" />
+            <div class="relative overflow-hidden rounded-2xl border border-default bg-linear-to-b from-default to-soft/60 px-8 py-10 sm:px-13 sm:py-12 flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-10">
+              <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(var(--ui-border-strong)_1px,transparent_1px)] bg-[size:26px_26px] opacity-50 [mask-image:radial-gradient(80%_120%_at_90%_50%,black,transparent_70%)]" />
 
               <div class="relative flex flex-col gap-2">
-                <h2 class="text-2xl sm:text-3xl font-semibold leading-tight tracking-tight text-highlighted">
+                <h2 class="text-2xl sm:text-3xl font-semibold leading-tight tracking-tight text-strong">
                   {{ total }} people have shipped Nuxt UI
                 </h2>
                 <p class="text-[15px] text-muted">
@@ -189,7 +189,7 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
                   :trailing-icon="appConfig.ui.icons.arrowRight"
                   to="https://github.com/nuxt/ui/graphs/contributors"
                   target="_blank"
-                  :ui="{ trailingIcon: 'text-dimmed' }"
+                  :ui="{ trailingIcon: 'text-faint' }"
                 />
                 <UButton
                   size="lg"

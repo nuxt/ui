@@ -57,15 +57,15 @@ const groups = [
   <UCommandPalette :groups="groups" class="flex-1 h-80">
     <template #footer>
       <div class="flex items-center justify-between gap-2">
-        <UIcon name="i-simple-icons-nuxtdotjs" class="size-5 text-dimmed ml-1" />
+        <UIcon name="i-simple-icons-nuxtdotjs" class="size-5 text-faint ml-1" />
         <div class="flex items-center gap-1">
-          <UButton color="neutral" variant="ghost" label="Open Command" class="text-dimmed" size="xs">
+          <UButton color="neutral" variant="ghost" label="Open Command" class="text-faint" size="xs">
             <template #trailing>
               <UKbd value="enter" />
             </template>
           </UButton>
           <USeparator orientation="vertical" class="h-4" />
-          <UButton color="neutral" variant="ghost" label="Actions" class="text-dimmed" size="xs">
+          <UButton color="neutral" variant="ghost" label="Actions" class="text-faint" size="xs">
             <template #trailing>
               <UKbd value="meta" />
               <UKbd value="k" />

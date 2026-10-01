@@ -37,7 +37,7 @@ const items = computed(() => [
 
 <template>
   <UContextMenu :items="items">
-    <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-highlighted min-w-0 outline-primary/25 focus-visible:outline-3 shrink-0 rounded-md p-1 -ms-1" aria-label="Nuxt UI">
+    <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-strong min-w-0 outline-focus focus-visible:outline-3 shrink-0 rounded-md p-1 -ms-1" aria-label="Nuxt UI">
       <Logo ref="logoRef" class="w-auto h-6 shrink-0" />
     </NuxtLink>
   </UContextMenu>

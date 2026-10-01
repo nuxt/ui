@@ -14,7 +14,7 @@ describe('Collapsible', () => {
     ['with unmountOnHide', { props: { ...props, unmountOnHide: false } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with class', { props: { ...props, class: 'flex flex-col gap-2 w-48' } }],
-    ['with ui', { props: { ...props, ui: { content: 'bg-elevated' } } }],
+    ['with ui', { props: { ...props, ui: { content: 'bg-soft' } } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }]

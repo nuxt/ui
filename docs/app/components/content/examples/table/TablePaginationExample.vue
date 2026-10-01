@@ -158,7 +158,7 @@ const globalFilter = ref('')
 
 <template>
   <div class="w-full space-y-4 pb-4">
-    <div class="flex px-4 py-3.5 border-b border-accented">
+    <div class="flex px-4 py-3.5 border-b border-strong">
       <UInput
         v-model="globalFilter"
         class="max-w-sm"

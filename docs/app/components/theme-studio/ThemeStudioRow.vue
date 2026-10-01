@@ -139,10 +139,10 @@ const showTextLabel = computed(() => !props.icon && !shade.value)
     }"
   >
     <template v-if="icon || shade" #label>
-      <UIcon v-if="icon" :name="icon" class="size-3 text-dimmed" />
+      <UIcon v-if="icon" :name="icon" class="size-3 text-faint" />
 
       <span v-else class="flex items-center gap-2 w-full">
-        <UIcon :name="mode === 'light' ? appConfig.ui.icons.light : appConfig.ui.icons.dark" class="size-3 text-dimmed shrink-0" />
+        <UIcon :name="mode === 'light' ? appConfig.ui.icons.light : appConfig.ui.icons.dark" class="size-3 text-faint shrink-0" />
         <span class="size-3 grow rounded-full bg-(--slider-color) ring ring-(--slider-contrast) me-px" />
       </span>
     </template>
@@ -171,7 +171,7 @@ const showTextLabel = computed(() => !props.icon && !shade.value)
         :ui="{
           /* bare until hovered, when a ring says it's editable */
           /* pe-7 is reserved for a chevron we hide, and outranks px-* */
-          base: 'px-1 pe-1 text-xs justify-end font-mono text-dimmed focus:text-default focus:ring-1 ring-inset transition-all focus:ring-default hover:ring-1 ring-default',
+          base: 'px-1 pe-1 text-xs justify-end font-mono text-faint focus:text-default focus:ring-1 ring-inset transition-all focus:ring-default hover:ring-1 ring-default',
           value: 'truncate',
           trailing: 'hidden',
           /* the menu would inherit the readout's 10-wide trigger */
@@ -191,7 +191,7 @@ const showTextLabel = computed(() => !props.icon && !shade.value)
         variant="none"
         size="xs"
         class="w-10 shrink-0"
-        :ui="{ base: 'px-1 text-xs text-right font-mono text-dimmed focus:text-default focus:ring-1 ring-inset transition-all focus:ring-default hover:ring-1 ring-default' }"
+        :ui="{ base: 'px-1 text-xs text-right font-mono text-faint focus:text-default focus:ring-1 ring-inset transition-all focus:ring-default hover:ring-1 ring-default' }"
         :aria-label="`${label ?? 'Value'} (arrow keys to adjust, Shift for ×10)`"
         @keydown="onReadoutKeydown"
         @change="commitReadout"
@@ -238,7 +238,7 @@ const showTextLabel = computed(() => !props.icon && !shade.value)
       </template>
 
       <template #item-label="{ item }">
-        {{ asItem(item).label }}<span v-if="asItem(item).defaultTag" class="text-dimmed">&nbsp;(Default)</span>
+        {{ asItem(item).label }}<span v-if="asItem(item).defaultTag" class="text-faint">&nbsp;(Default)</span>
       </template>
     </USelect>
 
