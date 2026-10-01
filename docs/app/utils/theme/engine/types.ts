@@ -209,6 +209,7 @@ export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, ramp: To
   { token: '--ui-bg-default', label: 'Default', ramp: 'neutral', group: 'background', defaults: { light: 'white', dark: 900 } },
   { token: '--ui-bg-soft', label: 'Soft', ramp: 'neutral', group: 'background', defaults: { light: 100, dark: 800 } },
   { token: '--ui-bg-strong', label: 'Strong', ramp: 'neutral', group: 'background', defaults: { light: 200, dark: 700 } },
+  { token: '--ui-neutral', label: 'Solid', ramp: 'neutral', group: 'background', defaults: { light: 900, dark: 50 } },
   { token: '--ui-text-faint', label: 'Faint', ramp: 'neutral', group: 'text', defaults: { light: 400, dark: 500 } },
   { token: '--ui-text-muted', label: 'Muted', ramp: 'neutral', group: 'text', defaults: { light: 500, dark: 400 } },
   { token: '--ui-text-default', label: 'Default', ramp: 'neutral', group: 'text', defaults: { light: 700, dark: 200 } },
