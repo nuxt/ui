@@ -26,7 +26,7 @@ export type TVMergeConfig = {
   /**
    * How many merged strings the merger keeps. The engine memoizes per slot on
    * top of this, so it only matters for classes that miss that cache.
-   * @defaultValue 500
+   * @defaultValue 8192
    */
   cacheSize?: number
 }
