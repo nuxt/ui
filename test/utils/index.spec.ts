@@ -11,7 +11,6 @@ import {
   findItem,
   getSelectedItem,
   isArrayOfArray,
-  mergeClasses,
   getSlotChildrenText,
   transformUI,
   resolveBaseURL
@@ -255,19 +254,6 @@ describe('isArrayOfArray', () => {
     expect(isArrayOfArray([[1], [2]])).toBe(true)
     expect(isArrayOfArray([1, 2])).toBe(false)
     expect(isArrayOfArray([])).toBe(false)
-  })
-})
-
-describe('mergeClasses', () => {
-  it('returns an empty string without classes', () => {
-    expect(mergeClasses()).toBe('')
-  })
-
-  it('merges app config and prop classes', () => {
-    expect(mergeClasses('a', 'b')).toEqual(['a', 'b'])
-    expect(mergeClasses(['a', 'b'], 'c')).toEqual(['a', 'b', 'c'])
-    expect(mergeClasses(undefined, 'b')).toEqual(['b'])
-    expect(mergeClasses('a')).toEqual(['a'])
   })
 })
 
