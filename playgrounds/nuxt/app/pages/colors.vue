@@ -369,7 +369,7 @@ const codeColors = buttonColors
             chip
           </div>
           <div v-for="color in chipColors" :key="`chip-${color}`" class="flex justify-center">
-            <UChip text="1" :color="(color as any)">
+            <UChip text="1" :color="(color as any)" inset>
               <UAvatar src="https://github.com/benjamincanac.png" />
             </UChip>
           </div>
