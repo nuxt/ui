@@ -145,7 +145,7 @@ The `color` prop accepts `primary`, `secondary`, `success`, `info`, `warning`, `
 - `text-accent-contrast` - Text on the solid
 - `bg-accent-tint` / `bg-accent-soft` / `bg-accent-strong` - Fills
 - `text-accent-default` / `text-accent-muted` / `text-accent-faint` - Text steps, tunable per color with `--ui-<color>-text-default`. `text-accent`, like `bg-accent` and `ring-accent`, is the raw color, the solid
-- `ring-accent-default` / `ring-accent-soft` / `ring-accent-strong` - Borders, also on `border-*`. A `subtle` variant rings with `soft`, the border of a soft fill: 25% of the color, `border-strong` for neutral. A `subtle` ChatMessage sits on the `tint` fill and rings with `default`. An `outline` ring is `strong` on controls and badges (Button, Badge, Kbd, a Calendar cell) and `default` on surfaces (Alert, ChatMessage), like the line of a Separator. A prose Callout and inline Code are `bg-accent-tint` with `border-accent-default`, the border of a code block
+- `ring-accent-default` / `ring-accent-strong` - Borders, also on `border-*`: 25% and 40% of the color, `border-default` and `border-strong` for neutral. A component rings its `outline` and `subtle` variants with the same role: `strong` on controls and badges (Button, Badge, Kbd, a Calendar cell), `default` on surfaces (Alert, ChatMessage), like the line of a Separator. A prose Callout and inline Code are `bg-accent-tint` with `border-accent-default`, the border of a code block
 - `outline-accent-focus` - Focus outline
 
 The full list with values is in `src/runtime/css/tokens.css` and the [CSS Variables](../../docs/content/docs/1.getting-started/5.theme/2.css-variables.md#accent) docs.

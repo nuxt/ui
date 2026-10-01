@@ -47,7 +47,7 @@ export default defineTheme({
         cellTrigger: 'data-selected:bg-accent-soft data-selected:text-accent-default'
       },
       subtle: {
-        cellTrigger: 'data-selected:bg-accent-soft data-selected:text-accent-default data-selected:ring data-selected:ring-inset data-selected:ring-accent-soft data-selected:focus-visible:ring-accent'
+        cellTrigger: 'data-selected:bg-accent-soft data-selected:text-accent-default data-selected:ring data-selected:ring-inset data-selected:ring-accent-strong data-selected:focus-visible:ring-accent'
       }
     },
     size: {
