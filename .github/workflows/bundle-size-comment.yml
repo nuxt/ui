@@ -102,8 +102,8 @@ jobs:
               return
             }
 
-            if (pull.base.repo.id !== context.payload.repository.id || !['v4', 'v5'].includes(pull.base.ref)) {
-              core.setFailed('The pull request does not target a release branch.')
+            if (pull.base.repo.id !== context.payload.repository.id) {
+              core.setFailed('The pull request does not target this repository.')
               return
             }
 

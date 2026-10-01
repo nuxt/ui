@@ -18,8 +18,6 @@ const head = await readSizes(args.head)
 const changed = JSON.stringify(base) !== JSON.stringify(head)
 
 const lines = [
-  '### Bundle size',
-  '',
   changed ? 'Client output of the apps in `test/bundle`, compared to the base branch.' : 'No change to the client output of the apps in `test/bundle`.',
   '',
   '| Fixture | JS (gzip) | CSS (gzip) |',

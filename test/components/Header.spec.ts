@@ -30,6 +30,17 @@ describe('Header', () => {
     ['with content slot', { slots: { content: () => 'Content slot' } }]
   ])
 
+  it('labels the menu dialog with the translated toggle label', async () => {
+    const wrapper = await mountSuspended(Header, { props: { open: true, menu: { portal: false } } })
+
+    const dialog = wrapper.find('[role="dialog"]')
+    const title = wrapper.find(`#${dialog.attributes('aria-labelledby')}`)
+    expect(title.text()).toBe('Open menu')
+    expect(wrapper.html()).not.toContain('header.')
+
+    wrapper.unmount()
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Header, {
       props: {

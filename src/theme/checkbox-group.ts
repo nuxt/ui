@@ -80,7 +80,7 @@ export default (options: Required<ModuleOptions>) => ({
       variant: 'table',
       highlight: false,
       class: {
-        item: `${hover}border-accented`
+        item: `${hover}border-accented ${hover}z-[1]`
       }
     },
     { size: 'xs', variant: 'table', class: { item: 'p-2.5' } },
@@ -108,14 +108,14 @@ export default (options: Required<ModuleOptions>) => ({
       color,
       variant: 'table',
       class: {
-        item: `has-data-[state=checked]:bg-${color}/10 has-data-[state=checked]:border-${color}/50 has-data-[state=checked]:z-[1]`
+        item: `has-data-[state=checked]:bg-${color}/10 has-data-[state=checked]:border-${color}/50 has-data-[state=checked]:z-[2]`
       }
     })),
     {
       color: 'neutral',
       variant: 'table',
       class: {
-        item: 'has-data-[state=checked]:bg-elevated has-data-[state=checked]:border-inverted/50 has-data-[state=checked]:z-[1]'
+        item: 'has-data-[state=checked]:bg-elevated has-data-[state=checked]:border-inverted/50 has-data-[state=checked]:z-[2]'
       }
     },
     {

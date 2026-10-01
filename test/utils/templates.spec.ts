@@ -1,5 +1,8 @@
+import { readFileSync } from 'node:fs'
+import { join } from 'pathe'
+import { globSync } from 'tinyglobby'
 import { describe, it, expect } from 'vitest'
-import { getTemplates } from '../../src/templates'
+import { getTemplates, prefixedClasses } from '../../src/templates'
 import { defaultOptions, getDefaultConfig, resolveColors } from '../../src/utils/defaults'
 
 function themeContents(overrides: Record<string, any>, vue?: { detectedComponents?: Set<string> }) {
@@ -25,5 +28,25 @@ describe('theme templates', () => {
     const contents = themeContents({ theme: { unstyled: true } })
 
     expect(await contents('ui/skeleton.ts')).not.toContain('animate-pulse')
+  })
+})
+
+describe('prefixedClasses', () => {
+  it('lists every class components pass to `usePrefix`', () => {
+    const componentDir = join(process.cwd(), 'src/runtime/components')
+    const classes = new Set<string>()
+    for (const file of globSync('**/*.vue', { cwd: componentDir })) {
+      for (const [, value] of readFileSync(join(componentDir, file), 'utf8').matchAll(/\bprefix\(\s*'([^']+)'\s*\)/g)) {
+        value!.split(/\s+/).filter(Boolean).forEach(cls => classes.add(cls))
+      }
+    }
+
+    expect([...classes].sort()).toEqual(prefixedClasses)
+  })
+
+  it('adds them to `ui.css` with `theme.prefix`', async () => {
+    const contents = themeContents({ theme: { prefix: 'tw' } })
+
+    expect(await contents('ui.css')).toContain(`@source inline("${prefixedClasses.map(cls => `tw:${cls}`).join(' ')}");`)
   })
 })
