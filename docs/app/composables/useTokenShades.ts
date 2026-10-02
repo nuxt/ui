@@ -1,5 +1,4 @@
 import { TOKEN_SHADE_TARGETS, SHADE_LADDER } from '../utils/theme/engine/types'
-import { canonicalTokenShades } from '../utils/theme/engine/sections'
 import type { ColorAlias, ShadeStop } from '../utils/theme/engine/types'
 
 /**
@@ -10,8 +9,11 @@ import type { ColorAlias, ShadeStop } from '../utils/theme/engine/types'
 export function useTokenShades(alias: ColorAlias) {
   const { style, setStyle, baselineDoc } = useThemeStudio()
 
-  /** The active preset's own shade choices, what a row reset restores. */
-  const baselineShades = computed(() => canonicalTokenShades(baselineDoc.value))
+  /**
+   * The active preset's own shade choices, what a row reset restores. Read as
+   * written: a preset keeps its shades in the table, never as raw tokens.
+   */
+  const baselineShades = computed(() => baselineDoc.value.style?.tokenShades ?? {})
 
   // Only the touched mode is written, so an untouched mode never becomes an
   // override. Reset restores the BASELINE preset's shade, or deletes the entry
