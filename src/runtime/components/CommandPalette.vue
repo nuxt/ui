@@ -269,6 +269,9 @@ const emits = defineEmits<CommandPaletteEmits<T>>()
 const slots = defineSlots<CommandPaletteSlots<T, G>>()
 
 const props = useComponentProps<CommandPaletteProps<G, T>>('commandPalette', _props, theme)
+// What the component passes down to the components it renders: without `theme`,
+// the proxy leaves out the theme's defaults, so a child keeps its own
+const forwardedProps = useComponentProps<CommandPaletteProps<G, T>>('commandPalette', _props)
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
@@ -597,7 +600,7 @@ function onSelect(e: Event, item: T) {
     <ListboxFilter v-if="props.input" v-model="searchTerm" as-child>
       <UInput
         variant="none"
-        :size="props.size"
+        :size="forwardedProps.size"
         :placeholder="placeholder"
         :autofocus="props.autofocus"
         :loading="props.loading"
@@ -612,7 +615,7 @@ function onSelect(e: Event, item: T) {
         <template v-if="history?.length && (props.back || !!slots.back)" #leading>
           <slot name="back" :ui="ui">
             <UButton
-              :size="props.size"
+              :size="forwardedProps.size"
               :icon="props.backIcon || appConfig.ui.icons.arrowLeft"
               color="neutral"
               variant="link"
@@ -629,7 +632,7 @@ function onSelect(e: Event, item: T) {
           <slot name="close" :ui="ui">
             <UButton
               v-if="props.close"
-              :size="props.size"
+              :size="forwardedProps.size"
               :icon="props.closeIcon || appConfig.ui.icons.close"
               color="neutral"
               variant="ghost"

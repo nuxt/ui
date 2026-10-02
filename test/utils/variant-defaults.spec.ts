@@ -14,8 +14,9 @@ const exceptions: Record<string, string> = {
   // The component passes no `contentOrientation` to the theme when vertical,
   // which a theme default would fill back in
   'NavigationMenu.vue:contentOrientation': 'depends on `orientation`',
-  // Props declared by another type, with no JSDoc of their own to carry the
-  // default to the docs
+  // Props another type declares, whose default the docs read from
+  // `withDefaults`. `DrawerRootProps` owns `direction`, `layout` is declared
+  // per member of a union
   'Drawer.vue:direction': 'declared by `DrawerRootProps`',
   'EditorToolbar.vue:layout': 'declared per member of a union'
 }

@@ -1,8 +1,9 @@
+import { h } from 'vue'
 import type { ComputedRef } from 'vue'
 import { describe, expectTypeOf, it, expect, test, beforeAll, afterAll } from 'vitest'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { useAppConfig } from '#imports'
-import { UFormField, UFieldGroup, UAvatarGroup, UTheme, UButton, UAvatar, UInput, UKbd } from '#components'
+import { UFormField, UFieldGroup, UAvatarGroup, UTheme, UButton, UAvatar, UInput, UKbd, UEmpty } from '#components'
 import type * as ui from '#build/ui'
 import type { ThemeDefaults } from '../../src/runtime/types/theme'
 import { useComponentOverrides } from '../../src/runtime/composables/useComponentProps'
@@ -93,6 +94,16 @@ describe('theme defaultVariants', () => {
     // `orientation` has no `withDefaults` value: the attribute reads the proxy,
     // which falls back to the theme's `defaultVariants`
     expect(wrapper.find('[data-slot="form-field"]').attributes('data-orientation')).toBe('vertical')
+  })
+
+  it('leaves a child its own default', async () => {
+    const wrapper = await mountSuspended({
+      render: () => h(UTheme, { props: { button: { size: 'xs' } } }, () => h(UEmpty, { title: 'Title', actions: [{ label: 'Action' }] }))
+    })
+
+    // Empty passes its `size` to its buttons only when it was given one, not
+    // the `md` of its theme
+    expect(wrapper.find('[data-slot="button"]').classes()).toContain('text-xs')
   })
 })
 

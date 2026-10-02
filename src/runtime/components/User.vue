@@ -59,6 +59,9 @@ const _props = defineProps<UserProps>()
 const slots = defineSlots<UserSlots>()
 
 const props = useComponentProps('user', _props, theme)
+// What the component passes down to the components it renders: without `theme`,
+// the proxy leaves out the theme's defaults, so a child keeps its own
+const forwardedProps = useComponentProps('user', _props)
 
 const overrides = useComponentOverrides((ui: User['AppConfig']['ui']) => ui.user)
 const prefix = usePrefix()
@@ -81,14 +84,14 @@ const ui = computed(() => tv(theme, overrides.value)({
     @click="props.onClick"
   >
     <slot name="avatar" :ui="ui">
-      <UChip v-if="props.chip && props.avatar" inset v-bind="typeof props.chip === 'object' ? props.chip : {}" :size="props.size">
-        <UAvatar :alt="props.name" v-bind="props.avatar" :size="props.size" data-slot="user-avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
+      <UChip v-if="props.chip && props.avatar" inset v-bind="typeof props.chip === 'object' ? props.chip : {}" :size="forwardedProps.size">
+        <UAvatar :alt="props.name" v-bind="props.avatar" :size="forwardedProps.size" data-slot="user-avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
       </UChip>
       <UAvatar
         v-else-if="props.avatar"
         :alt="props.name"
         v-bind="props.avatar"
-        :size="props.size"
+        :size="forwardedProps.size"
         data-slot="user-avatar"
         :class="ui.avatar({ class: props.ui?.avatar })"
       />

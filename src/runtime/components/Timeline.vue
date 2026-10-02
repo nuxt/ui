@@ -85,6 +85,9 @@ const emits = defineEmits<TimelineEmits<T>>()
 const slots = defineSlots<TimelineSlots<T>>()
 
 const props = useComponentProps<TimelineProps<T>>('timeline', _props, theme)
+// What the component passes down to the components it renders: without `theme`,
+// the proxy leaves out the theme's defaults, so a child keeps its own
+const forwardedProps = useComponentProps<TimelineProps<T>>('timeline', _props)
 
 const modelValue = defineModel<string | number>()
 
@@ -140,7 +143,7 @@ function onSelect(event: Event, item: T) {
     >
       <div data-slot="timeline-container" :class="ui.container({ class: [props.ui?.container, item.ui?.container] })">
         <UAvatar
-          :size="props.size"
+          :size="forwardedProps.size"
           :icon="item.icon"
           v-bind="typeof item.avatar === 'object' ? item.avatar : {}"
           data-slot="timeline-indicator"

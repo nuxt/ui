@@ -70,6 +70,9 @@ const _props = defineProps<EmptyProps>()
 const slots = defineSlots<EmptySlots>()
 
 const props = useComponentProps('empty', _props, theme)
+// What the component passes down to the components it renders: without `theme`,
+// the proxy leaves out the theme's defaults, so a child keeps its own
+const forwardedProps = useComponentProps('empty', _props)
 
 const appConfig = useThemeConfig() as Empty['AppConfig']
 const overrides = useComponentOverrides((ui: Empty['AppConfig']['ui']) => ui.empty)
@@ -110,7 +113,7 @@ const ui = computed(() => tv(theme, overrides.value)({
       <slot name="body">
         <div v-if="props.actions?.length || !!slots.actions" data-slot="empty-actions" :class="ui.actions({ class: props.ui?.actions })">
           <slot name="actions">
-            <UButton v-for="(action, index) in props.actions" :key="index" :size="props.size" v-bind="action" />
+            <UButton v-for="(action, index) in props.actions" :key="index" :size="forwardedProps.size" v-bind="action" />
           </slot>
         </div>
       </slot>
