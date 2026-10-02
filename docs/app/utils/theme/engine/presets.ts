@@ -10,9 +10,10 @@ export interface ThemePreset {
 /**
  * The three tokens the library pins to white, routed through the neutral ramp
  * the way picking a neutral in the studio does (selectPalette's remaps), so a
- * tinted ramp reaches the page and the export reproduces the preview.
+ * tinted ramp reaches the page and the export reproduces the preview. The
+ * studio writes its remaps from this table too.
  */
-const tintedNeutralBase = {
+export const tintedNeutralBase = {
   '--ui-bg-default': { light: 50 },
   '--ui-text-contrast': { light: 50 },
   '--ui-text-strong': { dark: 50 }
