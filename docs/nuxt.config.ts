@@ -381,6 +381,7 @@ export default defineNuxtConfig({
       '@nuxtjs/mdc',
       '@comark/vue',
       'nuxt/dist',
+      'nuxt-nightly/dist',
       'nuxt-og-image',
       resolve('./app/components')
     ],
