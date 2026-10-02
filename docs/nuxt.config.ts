@@ -209,7 +209,14 @@ export default defineNuxtConfig({
     '/getting-started/shortcuts': { redirect: { to: '/composables/define-shortcuts', statusCode: 301 }, prerender: false }
   },
 
+  future: {
+    compatibilityVersion: 5
+  },
+
   experimental: {
+    // `nuxt-component-meta` skips its output when `build.ssr` is set, which is
+    // the case for the client build too once the Vite Environment API is on.
+    viteEnvironmentApi: false,
     defaults: {
       nuxtLink: {
         externalRelAttribute: 'noopener'
