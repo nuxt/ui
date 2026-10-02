@@ -237,7 +237,7 @@ import { useTemplateRef, computed, ref, onMounted, onScopeDispose, toRef, toRaw,
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxCancel, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxVirtualizer, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, FocusScope } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
-import { reactivePick, createReusableTemplate } from '@vueuse/core'
+import { reactivePick, createReusableTemplate, useMutationObserver } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useFieldGroup, FieldGroupReset } from '../composables/useFieldGroup'
@@ -550,8 +550,47 @@ function onMountAutoFocus(event: Event) {
   }
 }
 
-// The `FocusScope` uses `loop` instead of `trapped`: a trapped scope pulls focus back while the menu is closing,
-// so focusing another element on select never lands. An enclosing Modal's trap is still paused by the scope stack.
+const focusScopeRef = useTemplateRef('focusScopeRef')
+const focusScopeEl = computed(() => focusScopeRef.value?.$el as HTMLElement | undefined)
+
+let lastFocusedElement: HTMLElement | null = null
+
+function onFocusIn(event: FocusEvent) {
+  lastFocusedElement = event.target as HTMLElement
+}
+
+// Read from the DOM: the state is already `closed` by the time a listener called on select moves the focus.
+function isContentOpen() {
+  return focusScopeEl.value?.closest('[data-state]')?.getAttribute('data-state') === 'open'
+}
+
+// The `FocusScope` uses `loop` instead of `trapped`: a trapped scope also pulls focus back while the menu is
+// closing, so focusing another element on select never lands. Do it here instead, only while the menu is open,
+// otherwise anything taking the focus outside dismisses it, like another overlay restoring focus to its trigger
+// once closed. Clicking outside still closes the menu since it is dismissed on `pointerdown`, before the focus moves.
+function onFocusOutside(event: Event) {
+  if (event.defaultPrevented || !isContentOpen()) {
+    return
+  }
+
+  event.preventDefault()
+
+  const target = lastFocusedElement?.isConnected ? lastFocusedElement : focusScopeEl.value
+  target?.focus({ preventScroll: true })
+}
+
+// Same when the focused element is removed, like a clicked item scrolled out of a virtualized list:
+// move the focus to the scope so the keyboard keeps working.
+useMutationObserver(focusScopeEl, () => {
+  const el = focusScopeEl.value
+  if (!el || !lastFocusedElement || lastFocusedElement.isConnected || el.contains(document.activeElement) || !isContentOpen()) {
+    return
+  }
+
+  lastFocusedElement = null
+  el.focus({ preventScroll: true })
+}, { childList: true, subtree: true })
+
 function onUnmountAutoFocus(event: Event) {
   // Keep the focus where it was moved on select instead of restoring it to the trigger after the close animation.
   const activeElement = document.activeElement
@@ -722,8 +761,16 @@ defineExpose({
 
     <ComboboxPortal v-bind="portalProps">
       <FieldGroupReset>
-        <ComboboxContent data-slot="content" :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
-          <FocusScope loop data-slot="focusScope" :class="ui.focusScope({ class: props.ui?.focusScope })" @mount-auto-focus="onMountAutoFocus" @unmount-auto-focus="onUnmountAutoFocus">
+        <ComboboxContent data-slot="content" :class="ui.content({ class: props.ui?.content })" v-bind="contentProps" @focus-outside="onFocusOutside">
+          <FocusScope
+            ref="focusScopeRef"
+            loop
+            data-slot="focusScope"
+            :class="ui.focusScope({ class: props.ui?.focusScope })"
+            @mount-auto-focus="onMountAutoFocus"
+            @unmount-auto-focus="onUnmountAutoFocus"
+            @focusin="onFocusIn"
+          >
             <slot name="content-top" />
 
             <ComboboxInput v-if="!!props.searchInput" v-model="searchTerm" :display-value="() => searchTerm" as-child>
