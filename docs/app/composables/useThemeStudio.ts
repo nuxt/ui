@@ -5,10 +5,18 @@ import { NEUTRAL_COLORS, THEME_STUDIO_VIEWS } from '../utils/theme/studio'
 // with it), and this composable is reached from the header preset picker on
 // every docs page, which would put the exporter in the entry chunk.
 import { docToSettings, isDefaultTheme, styleComponents, styleTokens, DEFAULT_COLORS, SHADES, nearestShade } from '../utils/theme/engine/types'
-import { presets } from '../utils/theme/engine/presets'
+import { presets, tintedNeutralBase } from '../utils/theme/engine/presets'
 import { generatePalette, applyPaletteEffects, isDefaultEffects, parseCssColor } from '../utils/theme/engine/palette'
 import { sectionFingerprint, stableStringify, mergeSection, canonicalTokenShades, ALL_SECTION_KEYS, SECTION_GROUPS } from '../utils/theme/engine/sections'
 import type { SectionKey, ThemeDoc, ThemePreset, PaletteCurveParams, PaletteEffects, StoredPaletteParams, PalettePin, StyleOptions, Shade, ShadeStop, ColorAlias, TokenRamp, VariantGroup, DefaultVariant } from '../utils/theme/engine'
+
+/**
+ * The library hardcodes three tokens to `white` (light `--ui-bg-default`
+ * and `--ui-text-contrast`, dark `--ui-text-strong`), so a tinted neutral
+ * ramp would never reach them. Choosing a neutral re-routes all three
+ * through the ramp, with the values the presets' tintedNeutral carries.
+ */
+const NEUTRAL_TOKEN_REMAPS = styleTokens({ tokenShades: tintedNeutralBase })
 
 export function useThemeStudio() {
   const theme = useTheme()
@@ -70,8 +78,8 @@ export function useThemeStudio() {
     // remap under the same name; resetting that slider must fall back to
     // the remap, not to the library's white literal.
     const restored = {
-      light: Object.fromEntries(removed.light.filter(key => remapsActive && key in NEUTRAL_TOKEN_REMAPS.light).map(key => [key, NEUTRAL_TOKEN_REMAPS.light[key as keyof typeof NEUTRAL_TOKEN_REMAPS.light]])),
-      dark: Object.fromEntries(removed.dark.filter(key => remapsActive && key in NEUTRAL_TOKEN_REMAPS.dark).map(key => [key, NEUTRAL_TOKEN_REMAPS.dark[key as keyof typeof NEUTRAL_TOKEN_REMAPS.dark]]))
+      light: Object.fromEntries(removed.light.filter(key => remapsActive && key in NEUTRAL_TOKEN_REMAPS.light).map(key => [key, NEUTRAL_TOKEN_REMAPS.light[key]])),
+      dark: Object.fromEntries(removed.dark.filter(key => remapsActive && key in NEUTRAL_TOKEN_REMAPS.dark).map(key => [key, NEUTRAL_TOKEN_REMAPS.dark[key]]))
     }
     if (Object.keys(restored.light).length || Object.keys(restored.dark).length) {
       theme.applyThemeSettings({ cssVariables: restored }, { track: false })
@@ -162,22 +170,6 @@ export function useThemeStudio() {
     } else {
       theme.applyThemeSettings({ [alias]: name }, { track: false })
       track('Theme Changed', { setting: alias, value: name })
-    }
-  }
-
-  /**
-   * The library hardcodes three tokens to `white` (light `--ui-bg-default`
-   * and `--ui-text-contrast`, dark `--ui-text-strong`), so a tinted neutral
-   * ramp would never reach them. Choosing a neutral re-routes all three
-   * through the ramp. The presets' tintedNeutralBase carries the same three.
-   */
-  const NEUTRAL_TOKEN_REMAPS = {
-    light: {
-      '--ui-bg-default': 'var(--ui-color-neutral-50)',
-      '--ui-text-contrast': 'var(--ui-color-neutral-50)'
-    },
-    dark: {
-      '--ui-text-strong': 'var(--ui-color-neutral-50)'
     }
   }
 
