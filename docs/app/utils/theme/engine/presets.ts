@@ -53,19 +53,15 @@ export const presets: ThemePreset[] = [{
       tokenShades: {
         '--ui-primary': { light: 'black', dark: 200 },
         '--ui-bg-default': { dark: 950 },
-        '--ui-text-default': { dark: 50 },
-        '--ui-text-strong': { dark: 50 },
+        '--ui-text-default': { light: 'black', dark: 50 },
+        '--ui-text-strong': { light: 'black', dark: 50 },
+        '--ui-text-contrast': { light: 50 },
         // field outlines match the border in light, the library steps them up to 300
         '--ui-border-strong': { light: 200 }
       }
     },
-    // Pure black text and translucent borders aren't shades of the ramp
+    // Translucent borders aren't shades of the ramp
     tokens: {
-      light: {
-        '--ui-text-default': 'black',
-        '--ui-text-strong': 'black',
-        '--ui-text-contrast': 'var(--ui-color-neutral-50)'
-      },
       dark: {
         '--ui-border-default': 'color-mix(in oklab, white 10%, transparent)',
         '--ui-border-strong': 'color-mix(in oklab, white 15%, transparent)'
@@ -127,27 +123,25 @@ export const presets: ThemePreset[] = [{
     fontSize: 15,
     font: { sans: 'Roboto' },
     icons: 'bootstrap',
-    // Light rides the gray ramp one step deeper than stock.
-    tokens: {
-      light: {
-        '--ui-secondary': 'var(--ui-color-secondary-600)',
-        '--ui-text-default': 'var(--ui-color-neutral-800)',
-        '--ui-border-default': 'var(--ui-color-neutral-400)',
-        '--ui-bg-default': 'var(--ui-color-neutral-100)',
-        '--ui-text-muted': 'var(--ui-color-neutral-600)',
-        '--ui-text-faint': 'var(--ui-color-neutral-600)',
-        '--ui-bg-soft': 'var(--ui-color-neutral-200)',
-        '--ui-bg-strong': 'var(--ui-color-neutral-300)'
-      },
-      // Dark keeps the same brand colours rather than lifting to the 400s.
-      dark: {
-        '--ui-primary': 'var(--ui-color-primary-500)',
-        '--ui-secondary': 'var(--ui-color-secondary-500)',
-        '--ui-success': 'var(--ui-color-success-500)',
-        '--ui-info': 'var(--ui-color-info-500)',
-        '--ui-warning': 'var(--ui-color-warning-500)',
-        '--ui-error': 'var(--ui-color-error-500)',
-        '--ui-text-default': 'var(--ui-color-neutral-300)'
+    style: {
+      tokenShades: {
+        // Dark keeps the same brand colours rather than lifting to the 400s.
+        '--ui-primary': { dark: 500 },
+        '--ui-secondary': { light: 600, dark: 500 },
+        '--ui-success': { dark: 500 },
+        '--ui-info': { dark: 500 },
+        '--ui-warning': { dark: 500 },
+        '--ui-error': { dark: 500 },
+        // Light rides the gray ramp one step deeper than stock.
+        '--ui-bg-default': { light: 100 },
+        '--ui-bg-soft': { light: 200 },
+        '--ui-bg-strong': { light: 300 },
+        '--ui-text-faint': { light: 600 },
+        '--ui-text-muted': { light: 600 },
+        '--ui-text-default': { light: 800, dark: 300 },
+        '--ui-border-default': { light: 400 },
+        // field outlines match the border, the stock 300 would be lighter than it
+        '--ui-border-strong': { light: 400 }
       }
     }
   }
@@ -236,8 +230,8 @@ export const presets: ThemePreset[] = [{
         // 600 is the deep cinema red, 500 leans orange; dark holds it rather
         // than lifting to the salmon 400
         '--ui-primary': { light: 600, dark: 500 },
-        '--ui-bg-default': { light: 50, dark: 950 },
         // light restates tintedNeutral's step: this key replaces it wholesale
+        '--ui-bg-default': { light: 50, dark: 950 },
         '--ui-bg-soft': { dark: 900 },
         '--ui-bg-strong': { dark: 800 }
       }
@@ -307,13 +301,13 @@ export const presets: ThemePreset[] = [{
     palettes: {
       carbon: {
         shades: {
-          50: 'oklch(98.5% 0.017 447.457)',
-          100: 'oklch(95.9% 0.036 438.639)',
-          200: 'oklch(92.6% 0.054 428.8)',
-          300: 'oklch(87% 0.053 417.734)',
-          400: 'oklch(70.5% 0.032 405.184)',
-          500: 'oklch(55.3% 0.014 390.836)',
-          600: 'oklch(44.7% 0.001 374.343)',
+          50: 'oklch(98.5% 0.017 87.457)',
+          100: 'oklch(95.9% 0.036 78.639)',
+          200: 'oklch(92.6% 0.054 68.8)',
+          300: 'oklch(87% 0.053 57.734)',
+          400: 'oklch(70.5% 0.032 45.184)',
+          500: 'oklch(55.3% 0.014 30.836)',
+          600: 'oklch(44.7% 0.001 14.343)',
           700: 'oklch(35.9% 0 0)',
           800: 'oklch(28% 0 0)',
           900: 'oklch(20.8% 0 0)',
@@ -330,7 +324,7 @@ export const presets: ThemePreset[] = [{
     font: { sans: 'Outfit' },
     icons: 'tabler',
     style: {
-      defaults: { variants: { buttons: 'solid', panels: 'subtle', inputs: 'subtle' } },
+      defaults: { variants: { panels: 'subtle', inputs: 'subtle' } },
       tokenShades: {
         '--ui-bg-default': { light: 50, dark: 800 },
         '--ui-bg-soft': { light: 300, dark: 700 },
@@ -350,7 +344,7 @@ export const presets: ThemePreset[] = [{
 }, {
   id: 'bubblegum',
   name: 'Bubblegum',
-  description: 'Pastel pink softness with mauve-tinted grays.',
+  description: 'Pink on a pink-mauve neutral, pastel softness throughout.',
   doc: {
     version: 1,
     // Sculpted pink-mauve neutral, chroma peaks mid-ramp.
@@ -379,20 +373,14 @@ export const presets: ThemePreset[] = [{
     radius: 0.375,
     font: { sans: 'Poppins' },
     icons: 'phosphor',
-    tokens: {
-      light: {
-        '--ui-bg-default': 'var(--ui-color-neutral-50)',
-        '--ui-text-contrast': 'var(--ui-color-neutral-50)'
-      },
-      dark: {
-        '--ui-text-strong': 'var(--ui-color-neutral-50)'
-      }
+    style: {
+      tokenShades: tintedNeutral()
     }
   }
 }, {
   id: 'parchment',
   name: 'Parchment',
-  description: 'Warm parchment neutrals with a book-cloth clay primary.',
+  description: 'Book-cloth clay on a warm parchment neutral, serif headings, flat surfaces in dark mode.',
   doc: {
     version: 1,
     palettes: {
@@ -440,19 +428,17 @@ export const presets: ThemePreset[] = [{
     // Surfaces and borders stepped one deeper to hold on the tinted cream
     // page. Soft has to stay below the page: the library's hover and
     // highlight tint is bg-soft at half opacity, a lighter soft vanishes
-    // into it.
-    tokens: {
-      light: {
-        '--ui-bg-default': 'var(--ui-color-neutral-100)',
-        '--ui-bg-soft': 'var(--ui-color-neutral-200)',
-        '--ui-bg-strong': 'var(--ui-color-neutral-300)',
-        '--ui-border-default': 'var(--ui-color-neutral-300)',
-        '--ui-border-strong': 'var(--ui-color-neutral-400)'
-      },
-      dark: {
-        '--ui-primary': 'var(--ui-color-primary-500)',
-        '--ui-bg-strong': 'var(--ui-color-neutral-800)'
+    // into it. Dark holds the clay at 500 and keeps one flat surface: strong
+    // sits on the same 800 as soft.
+    style: {
+      tokenShades: {
+        '--ui-primary': { dark: 500 },
+        '--ui-bg-default': { light: 100 },
+        '--ui-bg-soft': { light: 200 },
+        '--ui-bg-strong': { light: 300, dark: 800 },
+        '--ui-border-default': { light: 300 },
+        '--ui-border-strong': { light: 400 }
       }
     }
   }
-}] satisfies ThemePreset[]
+}]
