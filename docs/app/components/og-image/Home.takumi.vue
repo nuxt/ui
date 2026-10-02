@@ -24,8 +24,8 @@ const c = computed(() => props.dark
 
 // each preset's primary as the theme menu chips show it, 500 in light, 400 in dark
 const PRESETS = {
-  light: { default: '#00a6f4', mono: '#000000', cobalt: '#0d6efd', sky: '#00b8db', mint: '#00bba7', iris: '#8e51ff', crimson: '#fb2c36', coral: '#ff2056', sunset: '#ff6900', carbon: '#fe9a00', bubblegum: '#f6339a', parchment: '#d97757' },
-  dark: { default: '#00bcff', mono: '#ffffff', cobalt: '#3d8bfd', sky: '#00d3f2', mint: '#00d5be', iris: '#a684ff', crimson: '#ff6467', coral: '#ff637e', sunset: '#ff8904', carbon: '#ffb900', bubblegum: '#fb64b6', parchment: '#dd9977' }
+  light: { default: '#00a6f4', mono: '#000000', cobalt: '#0d6efd', signal: '#1db954', mint: '#00bba7', iris: '#8e51ff', crimson: '#fb2c36', coral: '#ff2056', sunset: '#ff6900', carbon: '#fe9a00', bubblegum: '#f6339a', parchment: '#d97757' },
+  dark: { default: '#00bcff', mono: '#ffffff', cobalt: '#3d8bfd', signal: '#3ecc76', mint: '#00d5be', iris: '#a684ff', crimson: '#ff6467', coral: '#ff637e', sunset: '#ff8904', carbon: '#ffb900', bubblegum: '#fb64b6', parchment: '#dd9977' }
 }
 const preset = (id: keyof typeof PRESETS.light) => PRESETS[props.dark ? 'dark' : 'light'][id]
 const pill = (id: keyof typeof PRESETS.light) => ({ backgroundColor: `${preset(id)}26`, borderColor: preset(id) })
@@ -133,14 +133,14 @@ const pill = (id: keyof typeof PRESETS.light) => ({ backgroundColor: `${preset(i
         <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('cobalt')">
           <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('cobalt') }"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M10.5 3L8 9l4 13l4-13l-2.5-6" /><path d="M17 3a2 2 0 0 1 1.6.8l3 4a2 2 0 0 1 .013 2.382l-7.99 10.986a2 2 0 0 1-3.247 0l-7.99-10.986A2 2 0 0 1 2.4 7.8l2.998-3.997A2 2 0 0 1 7 3zM2 9h20" /></g></svg>
         </div>
-        <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('sky')">
-          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('sky') }"><path
+        <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('signal')">
+          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('signal') }"><path
             fill="none"
             stroke="currentColor"
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
-            d="M12 2v2m-7.07.93l1.41 1.41M20 12h2m-2.93-7.07l-1.41 1.41m-1.713 6.31a4 4 0 0 0-5.925-4.128M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6"
+            d="M2 10v3m4-7v11m4-14v18m4-13v7m4-10v13m4-8v3"
           /></svg>
         </div>
         <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('mint')">
