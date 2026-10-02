@@ -98,7 +98,7 @@ export const PRESET_ICONS: Record<string, string> = {
   default: 'i-simple-icons-nuxt',
   mono: 'i-lucide-contrast',
   cobalt: 'i-lucide-gem',
-  sky: 'i-lucide-cloud-sun',
+  signal: 'i-lucide-audio-lines',
   mint: 'i-lucide-leaf',
   iris: 'i-lucide-flower',
   crimson: 'i-lucide-clapperboard',
