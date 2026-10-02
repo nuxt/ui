@@ -209,6 +209,10 @@ export default defineNuxtConfig({
     '/getting-started/shortcuts': { redirect: { to: '/composables/define-shortcuts', statusCode: 301 }, prerender: false }
   },
 
+  future: {
+    compatibilityVersion: 5
+  },
+
   experimental: {
     defaults: {
       nuxtLink: {

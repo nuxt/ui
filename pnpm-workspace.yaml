@@ -114,7 +114,7 @@ catalog:
   motion-v: ^2.4.4
   nuxt: ^4.5.2
   nuxt-agent-discovery: ^0.7.0
-  nuxt-component-meta: ^0.18.0
+  nuxt-component-meta: https://pkg.pr.new/nuxt-component-meta@9f64248
   nuxt-llms: ^0.2.0
   nuxt-og-image: ^6.9.0
   nuxt-schema-org: ^6.3.2
@@ -160,7 +160,11 @@ overrides:
   # the whole vite peer group down to vitest's vite 7. The plugin only ever runs
   # inside vitest's own vite, so the wider range is bookkeeping, not runtime.
   "@codspeed/vitest-plugin>vite": ^7.0.0 || ^8.0.0
-  "@nuxt/kit": ^4.5.2
+  "@nuxt/kit": npm:@nuxt/kit-nightly@4.6.0-29844781.aec739e9
+  "@nuxt/schema": npm:@nuxt/schema-nightly@4.6.0-29844781.aec739e9
+  "@nuxt/vite-builder": npm:@nuxt/vite-builder-nightly@4.6.0-29844781.aec739e9
+  "@nuxt/nitro-server": npm:@nuxt/nitro-server-nightly@4.6.0-29844781.aec739e9
+  nuxt: npm:nuxt-nightly@4.6.0-29844781.aec739e9
   "@nuxt/ui": workspace:*
   # `@nuxt/image` 2.1.0 depends on `ipx` 4.0.0-beta.1, which pulls a second sharp
   # alongside 0.34.5 and kills the docs prerender as soon as it hits `/_ipx`.
