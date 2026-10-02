@@ -93,7 +93,7 @@ import { useComponentProps } from '../composables/useComponentProps'
 import { FieldGroupReset } from '../composables/useFieldGroup'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
-import { pointerDownOutside } from '../utils/overlay'
+import { pointerDownOutside, closeAutoFocus } from '../utils/overlay'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
@@ -159,6 +159,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.slideover || {})
           data-slot="content"
           :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
           v-bind="contentProps"
+          @close-auto-focus="closeAutoFocus"
           @enter="emits('enter')"
           @after-enter="emits('after:enter')"
           @leave="emits('leave')"

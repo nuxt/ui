@@ -39,3 +39,16 @@ export function pointerDownOutside(e: PointerDownOutsideEvent, options: PointerD
     }
   }
 }
+
+/**
+ * Handles `closeAutoFocus` events to keep the focus where it is when it has already been moved outside of the
+ * closing content, e.g. by a listener called on select or by another overlay opened in the meantime.
+ * Reka UI otherwise restores it to the trigger once the close animation ends.
+ */
+export function closeAutoFocus(e: Event) {
+  const activeElement = document.activeElement
+
+  if (activeElement && activeElement !== document.body && !(e.target as HTMLElement).contains(activeElement)) {
+    e.preventDefault()
+  }
+}
