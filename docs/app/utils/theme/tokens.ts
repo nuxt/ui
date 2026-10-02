@@ -1,32 +1,14 @@
+import { DEFAULT_COLORS, LIBRARY_TOKEN_DEFAULTS } from './engine/types'
+
+const aliasTokens = new Set(Object.keys(DEFAULT_COLORS).map(alias => `--ui-${alias}`))
+const withoutAliases = (tokens: Record<string, string>) => Object.fromEntries(Object.entries(tokens).filter(([token]) => !aliasTokens.has(token)))
+
 // The semantic token defaults the docs render on, the library's own
 // (src/runtime/css/base.css) minus the --ui-<alias> tokens the colors plugin
 // generates. Restated whole into the .light/.dark blocks whenever a mode
-// carries an override, so every entry must match the library or the page
-// would silently diverge from the export, which diffs against the engine's
-// LIBRARY_TOKEN_DEFAULTS.
+// carries an override, so they are the engine's LIBRARY_TOKEN_DEFAULTS, the
+// table the export diffs against, and the page can't diverge from the export.
 export const cssVariableDefaults = {
-  light: {
-    '--ui-text-faint': 'var(--ui-color-neutral-500)',
-    '--ui-text-muted': 'var(--ui-color-neutral-600)',
-    '--ui-text-default': 'var(--ui-color-neutral-800)',
-    '--ui-text-strong': 'var(--ui-color-neutral-950)',
-    '--ui-text-contrast': 'white',
-    '--ui-bg-default': 'white',
-    '--ui-bg-soft': 'var(--ui-color-neutral-100)',
-    '--ui-bg-strong': 'var(--ui-color-neutral-200)',
-    '--ui-border-default': 'var(--ui-color-neutral-200)',
-    '--ui-border-strong': 'var(--ui-color-neutral-300)'
-  },
-  dark: {
-    '--ui-text-faint': 'var(--ui-color-neutral-500)',
-    '--ui-text-muted': 'var(--ui-color-neutral-400)',
-    '--ui-text-default': 'var(--ui-color-neutral-200)',
-    '--ui-text-strong': 'white',
-    '--ui-text-contrast': 'var(--ui-color-neutral-900)',
-    '--ui-bg-default': 'var(--ui-color-neutral-900)',
-    '--ui-bg-soft': 'var(--ui-color-neutral-800)',
-    '--ui-bg-strong': 'var(--ui-color-neutral-700)',
-    '--ui-border-default': 'var(--ui-color-neutral-800)',
-    '--ui-border-strong': 'var(--ui-color-neutral-700)'
-  }
-} as const
+  light: withoutAliases(LIBRARY_TOKEN_DEFAULTS.light),
+  dark: withoutAliases(LIBRARY_TOKEN_DEFAULTS.dark)
+}

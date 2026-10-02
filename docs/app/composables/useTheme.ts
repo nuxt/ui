@@ -9,7 +9,7 @@ import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables } from '../utils/
 // Tables only, never the engine barrel: this composable rides the entry
 // chunk on every page, and the barrel would drag presets, the palette math
 // and the serializer with it. The serializer loads on demand below.
-import { mergeUi, isDefaultStyle, isDefaultTheme, styleTokens, DEFAULT_COLORS, DEFAULT_PRESET_ID, THEME_DEFAULTS, SEMANTIC_ALIASES, LIBRARY_TOKEN_DEFAULTS } from '../utils/theme/engine/types'
+import { mergeUi, isDefaultStyle, isDefaultTheme, styleTokens, DEFAULT_COLORS, DEFAULT_PRESET_ID, THEME_DEFAULTS, SEMANTIC_ALIASES, LIBRARY_TOKEN_DEFAULTS, tokenShadeDefaults } from '../utils/theme/engine/types'
 import type { ThemeDoc, ThemePalette, StyleOptions, StoredPaletteParams } from '../utils/theme/engine'
 import colors from 'tailwindcss/colors'
 
@@ -43,8 +43,8 @@ export function useTheme() {
     // match the page background: only /theme paints the recessed neutral-50
     // canvas, every other page's body is plain white in light mode
     if (colorMode.value !== 'dark' && route.path !== '/theme') return 'white'
-    const shade = colorMode.value === 'dark' ? 900 : 50
-    return (colors as any)[neutral]?.[shade] || customColorsData.value[neutral]?.[shade] || (colors as any).gray[shade]
+    const shade = colorMode.value === 'dark' ? tokenShadeDefaults('--ui-bg-default').dark : 50
+    return (colors as any)[neutral]?.[shade] || customColorsData.value[neutral]?.[shade] || (colors as any)[DEFAULT_COLORS.neutral][shade]
   })
   const cssVariablesData = useState<{ light?: Record<string, string>, dark?: Record<string, string> }>('nuxt-ui-css-variables', () => ({}))
 
@@ -297,8 +297,8 @@ export function useTheme() {
     // studio-only vars, and keep only values that diverge from the style
     // expansion, doc.style already accounts for the rest.
     const styleVars = doc.style ? styleTokens(doc.style) : { light: {}, dark: {} }
-    const light = Object.fromEntries(Object.entries(cssVariablesData.value.light || {}).filter(([key, val]) => !key.startsWith('--studio-') && val !== LIBRARY_TOKEN_DEFAULTS.light[key as keyof typeof LIBRARY_TOKEN_DEFAULTS.light] && val !== (styleVars.light as Record<string, string>)[key]))
-    const dark = Object.fromEntries(Object.entries(cssVariablesData.value.dark || {}).filter(([key, val]) => !key.startsWith('--studio-') && val !== LIBRARY_TOKEN_DEFAULTS.dark[key as keyof typeof LIBRARY_TOKEN_DEFAULTS.dark] && val !== (styleVars.dark as Record<string, string>)[key]))
+    const light = Object.fromEntries(Object.entries(cssVariablesData.value.light || {}).filter(([key, val]) => !key.startsWith('--studio-') && val !== LIBRARY_TOKEN_DEFAULTS.light[key] && val !== (styleVars.light as Record<string, string>)[key]))
+    const dark = Object.fromEntries(Object.entries(cssVariablesData.value.dark || {}).filter(([key, val]) => !key.startsWith('--studio-') && val !== LIBRARY_TOKEN_DEFAULTS.dark[key] && val !== (styleVars.dark as Record<string, string>)[key]))
     if (Object.keys(light).length || Object.keys(dark).length) {
       doc.tokens = {
         ...(Object.keys(light).length ? { light } : {}),

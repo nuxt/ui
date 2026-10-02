@@ -13,7 +13,7 @@ provide('components', components)
 <template>
   <UApp>
     <UDashboardGroup unit="rem">
-      <UDashboardSidebar class="bg-tint">
+      <UDashboardSidebar class="bg-soft/50">
         <template #header>
           <NuxtLink to="/" class="text-strong">
             <Logo class="h-5 w-auto" />

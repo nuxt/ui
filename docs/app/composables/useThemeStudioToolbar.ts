@@ -1,5 +1,5 @@
 import { upperFirst } from 'scule'
-import { DEFAULT_PRESET_ID, GROUP_STOCK_VARIANT } from '../utils/theme/engine/types'
+import { DEFAULT_COLORS, DEFAULT_PRESET_ID, GROUP_STOCK_VARIANT } from '../utils/theme/engine/types'
 import { paletteLabel, paletteShade } from '../utils/theme/studio'
 
 /**
@@ -32,7 +32,7 @@ export function useThemeStudioToolbar() {
         dot: paletteShade(neutralChip.value, 500),
         label: paletteName('neutral', neutral.value)
       }]
-    : [{ dot: 'var(--color-sky-500)', label: 'Sky' }, { dot: 'var(--color-gray-500)', label: 'Gray' }]))
+    : [DEFAULT_COLORS.primary, DEFAULT_COLORS.neutral].map(name => ({ dot: paletteShade(name, 500), label: upperFirst(paletteLabel(name)) }))))
 
   const colorLabel = computed(() => colorChips.value.map(chip => chip.label).join(', '))
 

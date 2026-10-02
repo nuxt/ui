@@ -33,13 +33,6 @@ const borders = [
   { class: 'border-neutral', variable: '--ui-neutral' }
 ]
 
-// The surfaces a fill or border sits on
-const surfaces = [
-  { label: 'On the page', class: 'bg-default' },
-  { label: 'On bg-soft', class: 'bg-soft' },
-  { label: 'On bg-strong', class: 'bg-strong' }
-]
-
 const accentFills = ['bg-accent-tint', 'bg-accent-soft', 'bg-accent-strong', 'bg-accent', 'bg-accent-hover']
 const accentTexts = ['text-accent-default', 'text-accent-muted', 'text-accent-faint']
 const accentBorders = ['border-accent-default', 'border-accent-strong']
@@ -77,16 +70,11 @@ onBeforeUnmount(() => observer?.disconnect())
       <h2 class="text-lg font-semibold text-strong">
         Text
       </h2>
-      <div class="grid gap-3 sm:grid-cols-3">
-        <div v-for="surface in surfaces" :key="surface.label" class="rounded-lg border border-default p-4 space-y-2" :class="surface.class">
-          <p class="text-xs text-muted">
-            {{ surface.label }}
-          </p>
-          <p v-for="text in texts" :key="text.class" :class="text.class">
-            {{ text.class }}
-            <span class="block font-mono text-xs opacity-75">{{ values[text.variable] }}</span>
-          </p>
-        </div>
+      <div class="max-w-sm space-y-2">
+        <p v-for="text in texts" :key="text.class" :class="text.class">
+          {{ text.class }}
+          <span class="block font-mono text-xs opacity-75">{{ values[text.variable] }}</span>
+        </p>
       </div>
       <div class="inline-flex rounded-lg bg-neutral px-4 py-2 text-contrast">
         text-contrast on bg-neutral
@@ -97,15 +85,10 @@ onBeforeUnmount(() => observer?.disconnect())
       <h2 class="text-lg font-semibold text-strong">
         Backgrounds
       </h2>
-      <div class="grid gap-3 sm:grid-cols-3">
-        <div v-for="surface in surfaces" :key="surface.label" class="rounded-lg border border-default p-4 space-y-2" :class="surface.class">
-          <p class="text-xs text-muted">
-            {{ surface.label }}
-          </p>
-          <div v-for="background in backgrounds" :key="background.class" class="rounded-md border border-default px-3 py-2 text-sm" :class="[background.class, background.class === 'bg-neutral' && 'text-contrast']">
-            {{ background.class }}
-            <span class="block font-mono text-xs opacity-75">{{ values[background.variable] || 'unset' }}</span>
-          </div>
+      <div class="max-w-sm space-y-2">
+        <div v-for="background in backgrounds" :key="background.class" class="rounded-md border border-default px-3 py-2 text-sm" :class="[background.class, background.class === 'bg-neutral' && 'text-contrast']">
+          {{ background.class }}
+          <span class="block font-mono text-xs opacity-75">{{ values[background.variable] || 'unset' }}</span>
         </div>
       </div>
       <div class="relative h-24 overflow-hidden rounded-lg border border-default">
@@ -120,22 +103,17 @@ onBeforeUnmount(() => observer?.disconnect())
       <h2 class="text-lg font-semibold text-strong">
         Borders
       </h2>
-      <div class="grid gap-3 sm:grid-cols-3">
-        <div v-for="surface in surfaces" :key="surface.label" class="rounded-lg border border-default p-4 space-y-2" :class="surface.class">
-          <p class="text-xs text-muted">
-            {{ surface.label }}
-          </p>
-          <div v-for="border in borders" :key="border.class" class="rounded-md border px-3 py-2 text-sm" :class="border.class">
-            {{ border.class }}
-            <span class="block font-mono text-xs text-muted">{{ values[border.variable] }}</span>
+      <div class="max-w-sm space-y-2">
+        <div v-for="border in borders" :key="border.class" class="rounded-md border px-3 py-2 text-sm" :class="border.class">
+          {{ border.class }}
+          <span class="block font-mono text-xs text-muted">{{ values[border.variable] }}</span>
+        </div>
+        <div class="divide-y divide-default rounded-md ring ring-strong text-sm">
+          <div class="px-3 py-2">
+            ring-strong
           </div>
-          <div class="divide-y divide-default rounded-md ring ring-strong text-sm">
-            <div class="px-3 py-2">
-              ring-strong
-            </div>
-            <div class="px-3 py-2">
-              divide-default
-            </div>
+          <div class="px-3 py-2">
+            divide-default
           </div>
         </div>
       </div>

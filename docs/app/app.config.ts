@@ -1,3 +1,4 @@
+import { DEFAULT_COLORS } from './utils/theme/engine/types'
 import type { ColorAlias } from './utils/theme/engine/types'
 
 // The palettes the theme picker and studio switch at runtime, written to CSS by `plugins/colors.ts`
@@ -11,15 +12,7 @@ declare module 'nuxt/schema' {
 }
 
 export default defineAppConfig({
-  colors: {
-    primary: 'sky',
-    secondary: 'violet',
-    success: 'emerald',
-    info: 'blue',
-    warning: 'amber',
-    error: 'red',
-    neutral: 'gray'
-  },
+  colors: { ...DEFAULT_COLORS },
   toaster: {
     position: 'bottom-right' as const,
     duration: 5000,

@@ -532,7 +532,7 @@ const pageTitles: Record<Page, string> = {
     <UDashboardSidebar
       collapsible
       resizable
-      class="bg-tint"
+      class="bg-soft/50"
       :ui="{ root: 'flex min-h-0', footer: 'border-t border-default' }"
     >
       <template #header="{ collapsed }">
