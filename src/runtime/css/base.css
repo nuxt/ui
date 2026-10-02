@@ -121,7 +121,9 @@
   /* Each color alias is a shade of its palette, lighter in dark mode, and
      `neutral` the ends of its own, which makes it the neutral solid. In `base` at zero
      specificity, like the palettes, so the shades `@plugin "@nuxt/ui/colors"`
-     picks win. */
+     picks win. In light mode the text of a color is a darker shade than its
+     solid, which is too light to read on the page or on its own tint. Dark
+     mode leaves the role unset, so the text is the color. */
   :where(:root, :host, .light) {
     --ui-primary: var(--ui-color-primary-500);
     --ui-secondary: var(--ui-color-secondary-500);
@@ -130,6 +132,13 @@
     --ui-warning: var(--ui-color-warning-500);
     --ui-error: var(--ui-color-error-500);
     --ui-neutral: var(--ui-color-neutral-900);
+
+    --ui-primary-text-default: var(--ui-color-primary-700);
+    --ui-secondary-text-default: var(--ui-color-secondary-700);
+    --ui-success-text-default: var(--ui-color-success-700);
+    --ui-info-text-default: var(--ui-color-info-700);
+    --ui-warning-text-default: var(--ui-color-warning-700);
+    --ui-error-text-default: var(--ui-color-error-700);
   }
 
   :where(.dark) {
@@ -140,6 +149,13 @@
     --ui-warning: var(--ui-color-warning-400);
     --ui-error: var(--ui-color-error-400);
     --ui-neutral: var(--ui-color-neutral-50);
+
+    --ui-primary-text-default: initial;
+    --ui-secondary-text-default: initial;
+    --ui-success-text-default: initial;
+    --ui-info-text-default: initial;
+    --ui-warning-text-default: initial;
+    --ui-error-text-default: initial;
   }
 }
 

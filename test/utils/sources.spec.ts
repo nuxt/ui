@@ -149,6 +149,17 @@ describe('colors plugin', () => {
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: indigo 050; }')).rejects.toThrow('`primary: indigo 050` takes a palette and up to two shades')
   })
 
+  it('makes a dark light shade the text of its color', async () => {
+    const css = await build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: black white; secondary: indigo 800 300; success: emerald 600 400; }')
+    const light = aliasRule(css, ':root, :host, .light', '--ui-primary: black')
+
+    expect(light).toContain('--ui-primary-text-default: var(--ui-primary);')
+    expect(light).toContain('--ui-secondary-text-default: var(--ui-secondary);')
+    // A lighter shade keeps the default text, shade 700
+    expect(light).not.toContain('--ui-success-text-default')
+    expect(aliasRule(css, '.dark', '--ui-primary: white')).not.toContain('text-default')
+  })
+
   it('gives an alias on a gray palette neutral\'s surface roles', async () => {
     const gray = await build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: neutral 900 50; }')
     expect(gray).toContain(':root, :host, .light, .dark {')

@@ -5,7 +5,7 @@ export default defineTheme({
   slots: {
     root: '',
     item: 'relative inline-block cursor-pointer select-none rounded-sm has-focus-visible:outline-3 transition outline-accent-focus',
-    indicator: 'absolute inset-0 overflow-hidden outline-none text-transparent w-(--reka-rating-item-step-width) opacity-(--reka-rating-item-step-opacity) z-(--reka-rating-item-step-z-index) data-[state=active]:text-accent',
+    indicator: 'absolute inset-0 overflow-hidden outline-none text-transparent w-(--reka-rating-item-step-width) opacity-(--reka-rating-item-step-opacity) z-(--reka-rating-item-step-z-index) data-[state=active]:text-(--ui-accent)',
     icon: 'block',
     emptyIcon: 'block w-full h-full text-muted pointer-events-none'
   },

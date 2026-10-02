@@ -51,6 +51,8 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explici
     aliasShades[alias] = shades[0] === shades[1] ? shades[0]! : shades.join(' ')
     Reflect.deleteProperty(light, token)
     Reflect.deleteProperty(dark, token)
+    // the plugin writes the text role of a pinned solid itself
+    if (light[`${token}-text-default`] === `var(${token})`) Reflect.deleteProperty(light, `${token}-text-default`)
   }
 
   // Only the aliases that differ from the defaults, plus `primary` and `neutral`

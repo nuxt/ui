@@ -82,6 +82,8 @@ function closestPalette(name: string, shadesByName: unknown) {
  * in dark mode by default (`900` and `50` for `neutral`): `primary: neutral
  * 900 200` picks others, a single shade applies to both, `black` and `white`
  * work as shades, and shades alone (`primary: black white`) keep the palette.
+ * In light mode the text of a color is its shade `700`: a light shade you pick
+ * that is as dark, or `black` or `white`, is the text too, whichever you give.
  *
  * The defaults are plain CSS in `base.css`, at zero specificity, so the
  * aliases you set win wherever you register it.
@@ -98,6 +100,7 @@ const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugi
   const declarations: Record<string, string> = {}
   const light: Record<string, string> = {}
   const dark: Record<string, string> = {}
+  const textRoles: string[] = []
   for (const [alias, value] of Object.entries(aliases)) {
     if (!(colors as readonly string[]).includes(alias)) {
       throw new Error(`[@nuxt/ui] \`${alias}\` isn't a color alias. The \`@nuxt/ui/colors\` plugin takes ${colors.map(color => `\`${color}\``).join(', ')}.`)
@@ -115,6 +118,11 @@ const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugi
       }
       light[`--ui-${alias}`] = shadeValue(alias, lightShade)
       dark[`--ui-${alias}`] = shadeValue(alias, darkShade!)
+      // The text of a color is its shade 700 in light mode: a solid that is as
+      // dark, or black or white, is its own text
+      if (alias !== 'neutral' && (!/^\d+$/.test(lightShade) || Number(lightShade) >= 700)) {
+        textRoles.push(alias)
+      }
     }
     if (!palette) {
       continue
@@ -168,6 +176,12 @@ const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugi
   }
   if (Object.keys(roles).length) {
     addBase({ ':root, :host, .light, .dark': roles })
+  }
+  // An alias on a gray already reads neutral's text
+  for (const alias of textRoles) {
+    if (!(`--ui-${alias}-text-default` in roles)) {
+      light[`--ui-${alias}-text-default`] = `var(--ui-${alias})`
+    }
   }
   // After the palettes, `.dark` last so it wins on a dark root
   if (Object.keys(light).length) {
