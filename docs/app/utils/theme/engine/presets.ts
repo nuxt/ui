@@ -154,11 +154,11 @@ export const presets: ThemePreset[] = [{
 }, {
   id: 'sky',
   name: 'Sky',
-  description: 'Sky blue on a mist neutral, pastel fills everywhere, airy type.',
+  description: 'Cyan on a mist neutral, pastel fills everywhere, airy type.',
   doc: {
     version: 1,
     colors: {
-      primary: 'sky',
+      primary: 'cyan',
       neutral: 'mist'
     },
     radius: 0.75,

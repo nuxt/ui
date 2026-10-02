@@ -277,7 +277,7 @@ For Nuxt, wrap in \`defineAppConfig({ ui: { ... } })\`. For Vue, pass as \`ui({ 
 - Standard Tailwind: red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose
 - Neutral palettes (pick one that matches the aesthetic):
   - **slate** — cool blue-gray, professional
-  - **gray** — true neutral, clean, no color tint
+  - **gray** — light blue-gray, balanced, the default
   - **zinc** — slightly cool, modern, techy
   - **neutral** — perfectly balanced, no warmth or coolness
   - **stone** — warm gray, earthy, organic feel

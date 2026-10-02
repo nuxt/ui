@@ -46,7 +46,7 @@ Available color palettes:
 - **Standard Tailwind**: red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose
 - **Neutral palettes** (for `neutral` key — pick one that matches the aesthetic):
   - `slate` — cool blue-gray, professional
-  - `gray` — true neutral, clean (default)
+  - `gray` — light blue-gray, balanced (default)
   - `zinc` — slightly cool, modern, techy
   - `neutral` — perfectly balanced
   - `stone` — warm gray, earthy

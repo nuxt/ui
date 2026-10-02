@@ -92,9 +92,9 @@ describe('colors plugin', () => {
   })
 
   it('follows a palette you override in `@theme`', async () => {
-    const css = await build({}, undefined, '@theme static { --color-sky-500: #00C16A; }')
+    const css = await build({}, undefined, '@theme static { --color-sky-500: #0EA5E9; }')
 
-    expect(css).toContain('--color-sky-500: #00C16A;')
+    expect(css).toContain('--color-sky-500: #0EA5E9;')
     expect(rule(css, ':where(:root, :host)')).toContain('--ui-color-primary-500: var(--color-sky-500,')
   })
 
