@@ -4,9 +4,7 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'inline-flex flex-row-reverse justify-end',
-    // An avatar's soft fill is translucent: moved to a pseudo-element over
-    // `bg-default`, so an avatar hides the one it overlaps
-    base: 'relative isolate rounded-full ring-bg first:me-0 bg-default before:absolute before:inset-0 before:-z-1 before:rounded-[inherit] before:bg-accent-soft'
+    base: 'relative rounded-full ring-bg first:me-0'
   },
   variants: {
     size: {

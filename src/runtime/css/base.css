@@ -144,14 +144,12 @@
 }
 
 @layer base {
-  /* The surface tokens, which don't follow `color`, and the layout sizes. Text
-     is a shade of `neutral`. Fills and borders are its darkest shade, or white
-     in dark mode, at a low opacity, so they read on any surface under them. In
-     `base` at zero specificity, like the palettes, so an override in `base` wins
-     wherever `@nuxt/icon` puts that layer. `--ui-bg-tint`, `--ui-bg-backdrop`,
-     `--ui-outline-focus` and `--ui-neutral-bg-hover` are unset: their utilities
-     mix `--ui-bg-soft`, `--ui-bg-default`, `--ui-primary` and `--ui-neutral` on
-     the element, so a subtree that overrides those reaches them.
+  /* The surface tokens, shades of `neutral` that don't follow `color`, and the
+     layout sizes. In `base` at zero specificity, like the palettes, so an
+     override in `base` wins wherever `@nuxt/icon` puts that layer. `--ui-bg-tint`,
+     `--ui-bg-backdrop`, `--ui-outline-focus` and `--ui-neutral-bg-hover` are unset:
+     their utilities mix `--ui-bg-soft`, `--ui-primary` and `--ui-neutral` on the
+     element, so a subtree that overrides those reaches them.
      The solid is `--ui-neutral` itself, with `--ui-text-contrast` on it. */
   :where(:root, :host) {
     --ui-header-height: 4rem;
@@ -167,11 +165,11 @@
     --ui-text-contrast: white;
 
     --ui-bg-default: white;
-    --ui-bg-soft: color-mix(in oklab, var(--ui-color-neutral-950) 5%, transparent);
-    --ui-bg-strong: color-mix(in oklab, var(--ui-color-neutral-950) 10%, transparent);
+    --ui-bg-soft: var(--ui-color-neutral-100);
+    --ui-bg-strong: var(--ui-color-neutral-200);
 
-    --ui-border-default: color-mix(in oklab, var(--ui-color-neutral-950) 10%, transparent);
-    --ui-border-strong: color-mix(in oklab, var(--ui-color-neutral-950) 20%, transparent);
+    --ui-border-default: var(--ui-color-neutral-200);
+    --ui-border-strong: var(--ui-color-neutral-300);
   }
 
   :where(.dark) {
@@ -179,13 +177,13 @@
     --ui-text-muted: var(--ui-color-neutral-400);
     --ui-text-default: var(--ui-color-neutral-200);
     --ui-text-strong: white;
-    --ui-text-contrast: var(--ui-color-neutral-950);
+    --ui-text-contrast: var(--ui-color-neutral-900);
 
-    --ui-bg-default: var(--ui-color-neutral-950);
-    --ui-bg-soft: color-mix(in oklab, white 5%, transparent);
-    --ui-bg-strong: color-mix(in oklab, white 10%, transparent);
+    --ui-bg-default: var(--ui-color-neutral-900);
+    --ui-bg-soft: var(--ui-color-neutral-800);
+    --ui-bg-strong: var(--ui-color-neutral-700);
 
-    --ui-border-default: color-mix(in oklab, white 10%, transparent);
-    --ui-border-strong: color-mix(in oklab, white 15%, transparent);
+    --ui-border-default: var(--ui-color-neutral-800);
+    --ui-border-strong: var(--ui-color-neutral-700);
   }
 }

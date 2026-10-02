@@ -1139,7 +1139,7 @@ exports[`Select > renders with neutral variant soft highlight correctly 1`] = `
 `;
 
 exports[`Select > renders with neutral variant subtle correctly 1`] = `
-"<button data-slot="select" class="relative group rounded-md inline-flex items-center text-strong disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 bg-soft ring ring-inset ring-strong hover:bg-strong disabled:bg-soft [--ui-accent:var(--ui-neutral)] outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent pe-9 md:text-sm" role="combobox" type="button" aria-controls="reka-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="">
+"<button data-slot="select" class="relative group rounded-md inline-flex items-center text-strong disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 bg-soft ring ring-inset ring-strong hover:bg-strong/75 disabled:bg-soft [--ui-accent:var(--ui-neutral)] outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent pe-9 md:text-sm" role="combobox" type="button" aria-controls="reka-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="">
   <!--v-if--><span style="pointer-events: none;" data-placeholder="" data-slot="select-placeholder" class="truncate text-faint">&nbsp;</span><span data-slot="select-trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-faint size-5" aria-hidden="true" data-slot="select-trailingIcon"></span></span>
 </button>
 <!--teleport start-->
@@ -1178,7 +1178,7 @@ exports[`Select > renders with neutral variant subtle correctly 1`] = `
 `;
 
 exports[`Select > renders with neutral variant subtle highlight correctly 1`] = `
-"<button data-slot="select" class="relative group rounded-md inline-flex items-center text-strong disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 bg-soft hover:bg-strong disabled:bg-soft [--ui-accent:var(--ui-neutral)] ring ring-inset ring-accent outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent pe-9 md:text-sm" role="combobox" type="button" aria-controls="reka-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="">
+"<button data-slot="select" class="relative group rounded-md inline-flex items-center text-strong disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 bg-soft hover:bg-strong/75 disabled:bg-soft [--ui-accent:var(--ui-neutral)] ring ring-inset ring-accent outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent pe-9 md:text-sm" role="combobox" type="button" aria-controls="reka-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="">
   <!--v-if--><span style="pointer-events: none;" data-placeholder="" data-slot="select-placeholder" class="truncate text-faint">&nbsp;</span><span data-slot="select-trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-faint size-5" aria-hidden="true" data-slot="select-trailingIcon"></span></span>
 </button>
 <!--teleport start-->
@@ -1568,7 +1568,7 @@ exports[`Select > renders with primary variant soft highlight correctly 1`] = `
 `;
 
 exports[`Select > renders with primary variant subtle correctly 1`] = `
-"<button data-slot="select" class="relative group rounded-md inline-flex items-center text-strong disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 bg-soft ring ring-inset ring-strong hover:bg-strong disabled:bg-soft [--ui-accent:var(--ui-primary)] outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent pe-9 md:text-sm" role="combobox" type="button" aria-controls="reka-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="">
+"<button data-slot="select" class="relative group rounded-md inline-flex items-center text-strong disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 bg-soft ring ring-inset ring-strong hover:bg-strong/75 disabled:bg-soft [--ui-accent:var(--ui-primary)] outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent pe-9 md:text-sm" role="combobox" type="button" aria-controls="reka-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="">
   <!--v-if--><span style="pointer-events: none;" data-placeholder="" data-slot="select-placeholder" class="truncate text-faint">&nbsp;</span><span data-slot="select-trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-faint size-5" aria-hidden="true" data-slot="select-trailingIcon"></span></span>
 </button>
 <!--teleport start-->
@@ -1607,7 +1607,7 @@ exports[`Select > renders with primary variant subtle correctly 1`] = `
 `;
 
 exports[`Select > renders with primary variant subtle highlight correctly 1`] = `
-"<button data-slot="select" class="relative group rounded-md inline-flex items-center text-strong disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 bg-soft hover:bg-strong disabled:bg-soft [--ui-accent:var(--ui-primary)] ring ring-inset ring-accent outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent pe-9 md:text-sm" role="combobox" type="button" aria-controls="reka-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="">
+"<button data-slot="select" class="relative group rounded-md inline-flex items-center text-strong disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 bg-soft hover:bg-strong/75 disabled:bg-soft [--ui-accent:var(--ui-primary)] ring ring-inset ring-accent outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent pe-9 md:text-sm" role="combobox" type="button" aria-controls="reka-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="">
   <!--v-if--><span style="pointer-events: none;" data-placeholder="" data-slot="select-placeholder" class="truncate text-faint">&nbsp;</span><span data-slot="select-trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-faint size-5" aria-hidden="true" data-slot="select-trailingIcon"></span></span>
 </button>
 <!--teleport start-->

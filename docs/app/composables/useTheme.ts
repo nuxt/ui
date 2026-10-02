@@ -43,7 +43,7 @@ export function useTheme() {
     // match the page background: only /theme paints the recessed neutral-50
     // canvas, every other page's body is plain white in light mode
     if (colorMode.value !== 'dark' && route.path !== '/theme') return 'white'
-    const shade = colorMode.value === 'dark' ? 950 : 50
+    const shade = colorMode.value === 'dark' ? 900 : 50
     return (colors as any)[neutral]?.[shade] || customColorsData.value[neutral]?.[shade] || (colors as any).gray[shade]
   })
   const cssVariablesData = useState<{ light?: Record<string, string>, dark?: Record<string, string> }>('nuxt-ui-css-variables', () => ({}))

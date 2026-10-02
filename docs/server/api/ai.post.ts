@@ -120,7 +120,7 @@ const applyTheme = tool({
 })
 
 const resetTheme = tool({
-  description: 'Reset the theme back to defaults (primary: green, neutral: slate, radius: 0.25rem, font: Public Sans). Call this when users ask to reset, revert, or restore the default theme.',
+  description: 'Reset the theme back to defaults (primary: sky, neutral: gray, radius: 0.25rem, font: Public Sans). Call this when users ask to reset, revert, or restore the default theme.',
   inputSchema: z.object({}),
   execute: async () => ({ reset: true })
 })
@@ -189,7 +189,7 @@ When users ask for a complete theme, to change "all colors", or describe a broad
 - Pick **success/info/warning/error** that feel harmonious with the palette while staying semantically meaningful (success = green-ish, error = red-ish, warning = amber/yellow-ish, info = blue/cyan-ish). You can shift hues — e.g. \`lime\` for success in a nature theme, \`rose\` for error in a warm theme — but keep them recognizable.
 - For monochrome/black-and-white themes, keep semantic colors meaningful. Only primary, secondary, and neutral should go monochrome. For a monochrome primary, set \`primary\` to the same gray as \`neutral\` and pin \`--ui-primary\` with \`cssVariables\`: \`var(--ui-color-primary-900)\` in light, \`var(--ui-color-primary-200)\` in dark.
 
-When users ask to reset, revert, or restore the default theme, use the \`resetTheme\` tool. This resets primary to green, neutral to slate, radius to 0.25rem, font to Public Sans, and removes any custom colors.
+When users ask to reset, revert, or restore the default theme, use the \`resetTheme\` tool. This resets primary to sky, neutral to gray, radius to 0.25rem, font to Public Sans, and removes any custom colors.
 
 There are two types of customization:
 
@@ -275,8 +275,8 @@ For Nuxt, wrap in \`defineAppConfig({ ui: { ... } })\`. For Vue, pass as \`ui({ 
 **Color options:**
 - Standard Tailwind: red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose
 - Neutral palettes (pick one that matches the aesthetic):
-  - **slate** — cool blue-gray, professional, default
-  - **gray** — true neutral, clean, no color tint
+  - **slate** — cool blue-gray, professional
+  - **gray** — true neutral, clean, no color tint, default
   - **zinc** — slightly cool, modern, techy
   - **neutral** — perfectly balanced, no warmth or coolness
   - **stone** — warm gray, earthy, organic feel
@@ -284,7 +284,7 @@ For Nuxt, wrap in \`defineAppConfig({ ui: { ... } })\`. For Vue, pass as \`ui({ 
   - **mauve** — purple-tinted gray, elegant, creative
   - **mist** — soft blue-gray, airy, light
   - **olive** — green-tinted gray, natural, earthy
-  For example: warm/cozy themes → stone or taupe, elegant/creative → mauve, tech/minimal → zinc, nature → olive, etc. ALWAYS change the neutral when creating a complete theme — don't leave it as the default slate unless it genuinely fits.
+  For example: warm/cozy themes → stone or taupe, elegant/creative → mauve, tech/minimal → zinc, nature → olive, etc. ALWAYS change the neutral when creating a complete theme — don't leave it as the default gray unless it genuinely fits.
 - Custom: define all shades 50-950 in \`customColors\` of the \`applyTheme\` tool, then reference the name
 
 **Other options:**

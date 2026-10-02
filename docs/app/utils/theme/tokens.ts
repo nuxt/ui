@@ -6,10 +6,10 @@
 // LIBRARY_TOKEN_DEFAULTS.
 export const cssVariableDefaults = {
   light: {
-    '--ui-text-faint': 'var(--ui-color-neutral-400)',
-    '--ui-text-muted': 'var(--ui-color-neutral-500)',
-    '--ui-text-default': 'var(--ui-color-neutral-700)',
-    '--ui-text-strong': 'var(--ui-color-neutral-900)',
+    '--ui-text-faint': 'var(--ui-color-neutral-500)',
+    '--ui-text-muted': 'var(--ui-color-neutral-600)',
+    '--ui-text-default': 'var(--ui-color-neutral-800)',
+    '--ui-text-strong': 'var(--ui-color-neutral-950)',
     '--ui-text-contrast': 'white',
     '--ui-bg-default': 'white',
     '--ui-bg-soft': 'var(--ui-color-neutral-100)',

@@ -33,7 +33,7 @@ const borders = [
   { class: 'border-neutral', variable: '--ui-neutral' }
 ]
 
-// The surfaces a translucent fill or border sits on
+// The surfaces a fill or border sits on
 const surfaces = [
   { label: 'On the page', class: 'bg-default' },
   { label: 'On bg-soft', class: 'bg-soft' },

@@ -108,7 +108,7 @@
   --text-color-accent-contrast: var(--ui-accent-text-contrast, var(--ui-text-contrast));
   --background-color-default: var(--ui-bg-default);
   --background-color-tint: var(--ui-bg-tint, color-mix(in oklab, var(--ui-bg-soft) 50%, transparent));
-  --background-color-backdrop: var(--ui-bg-backdrop, color-mix(in oklab, var(--ui-bg-default) 75%, transparent));
+  --background-color-backdrop: var(--ui-bg-backdrop, color-mix(in oklab, var(--ui-bg-soft) 75%, transparent));
   --background-color-soft: var(--ui-bg-soft);
   --background-color-strong: var(--ui-bg-strong);
   --background-color-neutral-hover: var(--ui-neutral-bg-hover, color-mix(in oklab, var(--ui-neutral) 90%, transparent));
