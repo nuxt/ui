@@ -79,7 +79,7 @@ function closestPalette(name: string, shadesByName: unknown) {
  * works too.
  *
  * The shades an alias uses follow the palette, `500` in light mode and `400`
- * in dark mode by default (`950` and `50` for `neutral`): `primary: neutral
+ * in dark mode by default (`900` and `50` for `neutral`): `primary: neutral
  * 900 200` picks others, a single shade applies to both, `black` and `white`
  * work as shades, and shades alone (`primary: black white`) keep the palette.
  *

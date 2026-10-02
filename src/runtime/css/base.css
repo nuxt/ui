@@ -129,7 +129,7 @@
     --ui-info: var(--ui-color-info-500);
     --ui-warning: var(--ui-color-warning-500);
     --ui-error: var(--ui-color-error-500);
-    --ui-neutral: var(--ui-color-neutral-950);
+    --ui-neutral: var(--ui-color-neutral-900);
   }
 
   :where(.dark) {
@@ -158,10 +158,10 @@
   }
 
   :where(:root, :host, .light) {
-    --ui-text-faint: var(--ui-color-neutral-500);
-    --ui-text-muted: var(--ui-color-neutral-600);
-    --ui-text-default: var(--ui-color-neutral-800);
-    --ui-text-strong: var(--ui-color-neutral-950);
+    --ui-text-faint: var(--ui-color-neutral-400);
+    --ui-text-muted: var(--ui-color-neutral-500);
+    --ui-text-default: var(--ui-color-neutral-700);
+    --ui-text-strong: var(--ui-color-neutral-900);
     --ui-text-contrast: white;
 
     --ui-bg-default: white;
