@@ -82,9 +82,7 @@ import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const _props = withDefaults(defineProps<PageCardProps>(), {
-  orientation: 'vertical'
-})
+const _props = defineProps<PageCardProps>()
 const slots = defineSlots<PageCardSlots>()
 
 const props = useComponentProps('pageCard', _props, theme)

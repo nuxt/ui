@@ -76,7 +76,6 @@ import UChatShimmer from './ChatShimmer.vue'
 const _props = withDefaults(defineProps<ChatReasoningProps>(), {
   open: undefined,
   streaming: false,
-  chevron: 'trailing',
   unmountOnHide: false,
   autoCloseDelay: 500
 })

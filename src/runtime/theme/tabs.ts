@@ -101,6 +101,7 @@ export default defineTheme({
   defaultVariants: {
     color: 'primary',
     variant: 'pill',
-    size: 'md'
+    size: 'md',
+    orientation: 'horizontal'
   }
 })

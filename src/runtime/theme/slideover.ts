@@ -110,5 +110,8 @@ export default defineTheme({
     class: {
       content: 'data-[state=open]:animate-[slide-in-from-left_200ms_var(--ease-out)] data-[state=closed]:animate-[slide-out-to-left_200ms_var(--ease-out)]'
     }
-  }]
+  }],
+  defaultVariants: {
+    side: 'right'
+  }
 })

@@ -57,8 +57,7 @@ import UTooltip from './Tooltip.vue'
 const _props = withDefaults(defineProps<SliderProps>(), {
   min: 0,
   max: 100,
-  step: 1,
-  orientation: 'horizontal'
+  step: 1
 })
 const emits = defineEmits<SliderEmits>()
 

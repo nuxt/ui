@@ -116,6 +116,8 @@ export default defineTheme({
   defaultVariants: {
     color: 'neutral',
     size: 'xs',
-    type: 'solid'
+    type: 'solid',
+    position: 'center',
+    orientation: 'horizontal'
   }
 })

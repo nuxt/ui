@@ -53,9 +53,7 @@ import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const _props = withDefaults(defineProps<PageFeatureProps>(), {
-  orientation: 'horizontal'
-})
+const _props = defineProps<PageFeatureProps>()
 const slots = defineSlots<PageFeatureSlots>()
 
 const props = useComponentProps('pageFeature', _props, theme)

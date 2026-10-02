@@ -129,13 +129,14 @@ function warnUndetected(name: string) {
  * Resolve a component's props with the priority chain:
  *   explicit prop > nearest UTheme > nearest UTheme `'*'`
  *     > app.config.ui.<name>.defaultVariants > app.config.ui.defaultVariants
- *     > withDefaults
+ *     > withDefaults > the theme's `defaultVariants`
  *
  * The returned proxy transparently reads from `props`, falling through to the
- * injected `ThemeContext` and `app.config.ui.<name>.defaultVariants` for
- * defaults. The component's tv() `defaultVariants` are intentionally left out
- * of the proxy fallback — they continue to drive `tv()`-internal class
- * resolution (the original semantics) without leaking into prop reads. The
+ * injected `ThemeContext`, `app.config.ui.<name>.defaultVariants` and the
+ * `defaultVariants` of the `theme` it is given. A prop that is a theme variant
+ * takes its default from the theme only, never from `withDefaults`, so the
+ * proxy holds the resolved value of every variant: the one `tv()` picks the
+ * classes with and the one a template binds to a data attribute. The
  * `ui` prop holds the component's own `ui` only, and `class` merges a
  * `<UTheme :props>` class under the component's own.
  */
@@ -201,10 +202,7 @@ export function useComponentProps<T extends object>(name: string, props: T, them
       if (themeGlobalValue !== undefined) return themeGlobalValue
 
       // A global `app.config.ui.<name>.defaultVariants` value takes priority over
-      // the component's `withDefaults` fallback. This keeps `defaultVariants`
-      // working uniformly for every variant, including props a component pins in
-      // `withDefaults` (e.g. `orientation`, kept defined so `:data-orientation`
-      // always renders a value).
+      // the component's `withDefaults` fallback and its theme's `defaultVariants`
       const appConfigEntry = name.includes('.') ? get(config.value, name) : config.value[name]
       const appConfigValue = appConfigEntry?.defaultVariants?.[prop]
       if (appConfigValue !== undefined) return appConfigValue
@@ -222,7 +220,9 @@ export function useComponentProps<T extends object>(name: string, props: T, them
         return raw
       }
 
-      return undefined
+      // A variant's default lives in the theme's `defaultVariants`, so the
+      // template reads the same value `tv()` resolves the classes with
+      return theme?.defaultVariants?.[prop]
     },
     // `has`, `ownKeys`, and `getOwnPropertyDescriptor` reflect the underlying
     // `defineProps` schema only — theme defaults are NOT enumerable. As a

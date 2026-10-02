@@ -41,6 +41,7 @@ export default defineTheme({
     }
   },
   defaultVariants: {
-    size: 'md'
+    size: 'md',
+    orientation: 'horizontal'
   }
 })

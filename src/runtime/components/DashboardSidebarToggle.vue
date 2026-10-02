@@ -39,8 +39,7 @@ defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<DashboardSidebarToggleProps>(), {
   color: 'neutral',
-  variant: 'ghost',
-  side: 'left'
+  variant: 'ghost'
 })
 
 const props = useComponentProps('dashboardSidebarToggle', _props, theme)

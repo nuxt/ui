@@ -107,6 +107,7 @@ export default defineTheme({
     highlight: false,
     size: 'md',
     variant: 'list',
-    color: 'primary'
+    color: 'primary',
+    orientation: 'vertical'
   }
 })

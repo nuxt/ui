@@ -173,6 +173,8 @@ export default defineTheme({
   defaultVariants: {
     color: 'primary',
     variant: 'area',
-    size: 'md'
+    size: 'md',
+    layout: 'grid',
+    position: 'outside'
   }
 })

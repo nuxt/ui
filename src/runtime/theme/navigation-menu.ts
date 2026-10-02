@@ -95,7 +95,6 @@ export default defineTheme({
   },
   compoundVariants: [{
     orientation: 'horizontal',
-    contentOrientation: 'horizontal',
     class: {
       childList: 'grid-cols-2 gap-2'
     }
@@ -226,7 +225,7 @@ export default defineTheme({
   }],
   defaultVariants: {
     color: 'primary',
-    highlightColor: 'primary',
-    variant: 'pill'
+    variant: 'pill',
+    orientation: 'horizontal'
   }
 })

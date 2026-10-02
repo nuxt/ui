@@ -115,9 +115,6 @@ defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<SidebarProps<T>>(), {
   as: 'aside',
-  variant: 'sidebar',
-  collapsible: 'offcanvas',
-  side: 'left',
   close: false,
   transition: true,
   rail: false,

@@ -92,8 +92,6 @@ const _props = withDefaults(defineProps<ChatToolProps>(), {
   open: undefined,
   loading: false,
   streaming: false,
-  variant: 'inline',
-  chevron: 'trailing',
   unmountOnHide: false
 })
 const emits = defineEmits<ChatToolEmits>()

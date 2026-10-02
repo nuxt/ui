@@ -23,5 +23,8 @@ export default defineTheme({
         toggle: '-me-1.5'
       }
     }
+  },
+  defaultVariants: {
+    toggleSide: 'right'
   }
 })

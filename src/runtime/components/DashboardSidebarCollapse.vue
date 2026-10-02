@@ -37,8 +37,7 @@ import UButton from './Button.vue'
 
 const _props = withDefaults(defineProps<DashboardSidebarCollapseProps>(), {
   color: 'neutral',
-  variant: 'ghost',
-  side: 'left'
+  variant: 'ghost'
 })
 
 const props = useComponentProps('dashboardSidebarCollapse', _props, theme)

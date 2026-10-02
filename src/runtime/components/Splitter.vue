@@ -80,9 +80,7 @@ import { useComponentProps, useComponentOverrides } from '../composables/useComp
 import { useForwardProps } from '../composables/useForwardProps'
 import { tv } from '../utils/tv'
 
-const _props = withDefaults(defineProps<SplitterProps<T>>(), {
-  orientation: 'horizontal'
-})
+const _props = defineProps<SplitterProps<T>>()
 const emits = defineEmits<SplitterEmits>()
 defineSlots<SplitterSlots<T>>()
 

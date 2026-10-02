@@ -76,8 +76,7 @@ import UUser from './User.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<BlogPostProps>(), {
-  as: 'article',
-  orientation: 'vertical'
+  as: 'article'
 })
 const slots = defineSlots<BlogPostSlots>()
 

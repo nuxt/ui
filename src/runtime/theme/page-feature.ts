@@ -29,5 +29,8 @@ export default defineTheme({
         description: 'mt-1'
       }
     }
+  },
+  defaultVariants: {
+    orientation: 'horizontal'
   }
 })

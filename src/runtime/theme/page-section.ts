@@ -73,5 +73,8 @@ export default defineTheme({
     class: {
       footer: 'mt-16'
     }
-  }]
+  }],
+  defaultVariants: {
+    orientation: 'vertical'
+  }
 })

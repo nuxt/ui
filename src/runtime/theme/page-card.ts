@@ -126,6 +126,7 @@ export default defineTheme({
   defaultVariants: {
     variant: 'outline',
     highlightColor: 'primary',
-    spotlightColor: 'primary'
+    spotlightColor: 'primary',
+    orientation: 'vertical'
   }
 })

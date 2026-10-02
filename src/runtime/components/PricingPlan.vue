@@ -123,9 +123,7 @@ import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const _props = withDefaults(defineProps<PricingPlanProps>(), {
-  orientation: 'vertical'
-})
+const _props = defineProps<PricingPlanProps>()
 const slots = defineSlots<PricingPlanSlots>()
 
 const props = useComponentProps('pricingPlan', _props, theme)

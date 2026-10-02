@@ -33,5 +33,8 @@ export default defineTheme({
         dot: 'data-[state=active]:bg-neutral'
       }
     }
+  },
+  defaultVariants: {
+    orientation: 'horizontal'
   }
 })

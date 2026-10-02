@@ -63,8 +63,7 @@ import UIcon from './Icon.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<DashboardNavbarProps>(), {
-  toggle: true,
-  toggleSide: 'left'
+  toggle: true
 })
 const slots = defineSlots<DashboardNavbarSlots>()
 

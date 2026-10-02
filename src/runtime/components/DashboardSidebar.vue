@@ -74,11 +74,9 @@ import UDrawer from './Drawer.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<DashboardSidebarProps<T>>(), {
-  side: 'left',
   mode: 'slideover' as never,
   autoClose: true,
   toggle: true,
-  toggleSide: 'left',
   minSize: 10,
   maxSize: 20,
   defaultSize: 15,

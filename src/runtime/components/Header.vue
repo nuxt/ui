@@ -87,7 +87,6 @@ const _props = withDefaults(defineProps<HeaderProps<T>>(), {
   mode: 'modal' as never,
   autoClose: true,
   toggle: true,
-  toggleSide: 'right',
   to: '/',
   title: 'Nuxt UI'
 })

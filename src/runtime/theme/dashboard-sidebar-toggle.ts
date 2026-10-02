@@ -9,5 +9,8 @@ export default defineTheme({
       left: '',
       right: ''
     }
+  },
+  defaultVariants: {
+    side: 'left'
   }
 })

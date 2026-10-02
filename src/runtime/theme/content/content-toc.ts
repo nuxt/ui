@@ -70,7 +70,6 @@ export default defineTheme({
   }],
   defaultVariants: {
     color: 'primary',
-    highlightColor: 'primary',
     highlightVariant: 'straight'
   }
 })

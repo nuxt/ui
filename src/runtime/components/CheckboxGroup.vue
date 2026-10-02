@@ -98,8 +98,7 @@ import UCheckbox from './Checkbox.vue'
 const _props = withDefaults(defineProps<CheckboxGroupProps<T, VK>>(), {
   labelKey: 'label',
   descriptionKey: 'description',
-  valueKey: 'value' as never,
-  orientation: 'vertical'
+  valueKey: 'value' as never
 })
 const emits = defineEmits<CheckboxGroupEmits<T, VK>>()
 const slots = defineSlots<CheckboxGroupSlots<T>>()

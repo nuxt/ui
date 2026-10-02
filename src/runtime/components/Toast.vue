@@ -96,7 +96,6 @@ import UButton from './Button.vue'
 import UProgress from './Progress.vue'
 
 const _props = withDefaults(defineProps<ToastProps>(), {
-  orientation: 'vertical',
   close: true,
   progress: true
 })

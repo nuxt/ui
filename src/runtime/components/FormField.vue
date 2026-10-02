@@ -61,8 +61,7 @@ import { tv } from '../utils/tv'
 import type { FormError, FormFieldInjectedOptions } from '../types/form'
 
 const _props = withDefaults(defineProps<FormFieldProps>(), {
-  error: undefined,
-  orientation: 'vertical'
+  error: undefined
 })
 const slots = defineSlots<FormFieldSlots>()
 

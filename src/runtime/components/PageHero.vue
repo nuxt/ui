@@ -58,9 +58,7 @@ import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 import UContainer from './Container.vue'
 
-const _props = withDefaults(defineProps<PageHeroProps>(), {
-  orientation: 'vertical'
-})
+const _props = defineProps<PageHeroProps>()
 const slots = defineSlots<PageHeroSlots>()
 
 const props = useComponentProps('pageHero', _props, theme)

@@ -202,6 +202,7 @@ export default defineTheme({
   defaultVariants: {
     animation: 'carousel',
     color: 'primary',
-    size: 'md'
+    size: 'md',
+    orientation: 'horizontal'
   }
 })

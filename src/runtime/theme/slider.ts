@@ -106,6 +106,7 @@ export default defineTheme({
   }],
   defaultVariants: {
     size: 'md',
-    color: 'primary'
+    color: 'primary',
+    orientation: 'horizontal'
   }
 })

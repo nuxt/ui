@@ -32,6 +32,7 @@ export default defineTheme({
     }
   },
   defaultVariants: {
-    color: 'primary'
+    color: 'primary',
+    orientation: 'vertical'
   }
 })

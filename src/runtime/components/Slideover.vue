@@ -102,8 +102,7 @@ const _props = withDefaults(defineProps<SlideoverProps>(), {
   overlay: true,
   transition: true,
   modal: true,
-  dismissible: true,
-  side: 'right'
+  dismissible: true
 })
 const emits = defineEmits<SlideoverEmits>()
 const slots = defineSlots<SlideoverSlots>()

@@ -110,7 +110,6 @@ export default defineTheme({
   }],
   defaultVariants: {
     color: 'primary',
-    highlightColor: 'primary',
     variant: 'pill'
   }
 })

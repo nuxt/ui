@@ -79,7 +79,6 @@ import { get } from '../utils'
 import UAvatar from './Avatar.vue'
 
 const _props = withDefaults(defineProps<TimelineProps<T>>(), {
-  orientation: 'vertical',
   valueKey: 'value'
 })
 const emits = defineEmits<TimelineEmits<T>>()

@@ -61,7 +61,6 @@ import UButton from './Button.vue'
 import UContainer from './Container.vue'
 
 const _props = withDefaults(defineProps<PageCTAProps>(), {
-  orientation: 'vertical',
   reverse: false
 })
 const slots = defineSlots<PageCTASlots>()

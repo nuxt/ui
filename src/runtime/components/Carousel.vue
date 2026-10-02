@@ -128,7 +128,6 @@ import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
 const _props = withDefaults(defineProps<CarouselProps<T>>(), {
-  orientation: 'horizontal',
   arrows: false,
   dots: false,
   // Embla Options

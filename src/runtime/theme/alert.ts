@@ -46,6 +46,7 @@ export default defineTheme({
   },
   defaultVariants: {
     color: 'primary',
-    variant: 'solid'
+    variant: 'solid',
+    orientation: 'vertical'
   }
 })

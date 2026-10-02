@@ -83,9 +83,7 @@ import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UButton from './Button.vue'
 
-const _props = withDefaults(defineProps<AlertProps>(), {
-  orientation: 'vertical'
-})
+const _props = defineProps<AlertProps>()
 const emits = defineEmits<AlertEmits>()
 const slots = defineSlots<AlertSlots>()
 

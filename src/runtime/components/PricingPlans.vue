@@ -57,7 +57,6 @@ import { useComponentProps, useComponentOverrides } from '../composables/useComp
 import UPricingPlan from './PricingPlan.vue'
 
 const _props = withDefaults(defineProps<PricingPlansProps>(), {
-  orientation: 'horizontal',
   compact: false,
   scale: false
 })

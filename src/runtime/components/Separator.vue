@@ -67,10 +67,7 @@ import UAvatar from './Avatar.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const _props = withDefaults(defineProps<SeparatorProps>(), {
-  orientation: 'horizontal',
-  position: 'center'
-})
+const _props = defineProps<SeparatorProps>()
 const slots = defineSlots<SeparatorSlots>()
 
 const props = useComponentProps('separator', _props, theme)

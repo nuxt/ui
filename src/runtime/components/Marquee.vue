@@ -53,7 +53,6 @@ import { useComponentProps, useComponentOverrides } from '../composables/useComp
 import { tv } from '../utils/tv'
 
 const _props = withDefaults(defineProps<MarqueeProps>(), {
-  orientation: 'horizontal',
   repeat: 4,
   overlay: true
 })

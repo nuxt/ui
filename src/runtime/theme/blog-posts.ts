@@ -9,5 +9,8 @@ export default defineTheme({
       horizontal: { root: 'sm:grid sm:grid-cols-2 lg:grid-cols-3' },
       vertical: ''
     }
+  },
+  defaultVariants: {
+    orientation: 'horizontal'
   }
 })

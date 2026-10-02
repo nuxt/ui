@@ -52,13 +52,15 @@ import { Primitive } from 'reka-ui'
 import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 
-// 7. Raw props (use withDefaults only when you actually need a runtime default)
+// 7. Raw props (use withDefaults only for a runtime default the theme doesn't
+//    hold: a variant's default goes in the theme's `defaultVariants`)
 const _props = defineProps<ComponentNameProps>()
 const slots = defineSlots<ComponentNameSlots>()
 
 // 8. Theme-aware proxy: resolves explicit > <UTheme :props> > <UTheme :props> '*'
 //    > app.config.ui.<name>.defaultVariants > app.config.ui.defaultVariants
-//    > withDefaults. `props.ui` is the component's own `ui`, a `<UTheme :ui>`
+//    > withDefaults > the theme's defaultVariants. `props.ui` is the
+//    component's own `ui`, a `<UTheme :ui>`
 //    reaches the engine through `useComponentOverrides`, so reach for
 //    `props.ui?.<slot>` in the template. The theme is passed so `'*'` only
 //    replaces a `primary` color or an `md` size.
@@ -210,7 +212,7 @@ const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
 // theme size/color/highlight is silently dropped on bare inputs.
 //
 // Final precedence: explicit > closer-context (form/group) > <UTheme :props>
-//                   > its '*' > app.config > withDefaults
+//                   > its '*' > app.config > withDefaults > theme defaultVariants
 const ui = computed(() => tv(theme, overrides.value)({
   color: color.value ?? props.color,
   size: inputSize.value ?? props.size,
@@ -303,7 +305,7 @@ defineExpose({
 
 ## Theme Defaults
 
-`useComponentProps` is the primary integration with `<UTheme>`. The proxy resolves the priority chain **explicit prop > nearest `<UTheme :props>` > its `'*'` key > `app.config.ui.<name>.defaultVariants` > `app.config.ui.defaultVariants` > `withDefaults`** for every prop — including ones driving template logic that `tv().defaultVariants` can't reach (`<component :is>`, `v-if`, computed conditionals). The theme's `defaultVariants` are intentionally NOT in the proxy chain, they only feed `tv()` class resolution. The proxy reads them to apply `'*'` only where the default is `primary` or `md`, which is why the component passes `theme` as the third argument. If a prop value is consumed in template logic, it must come from one of the proxy-resolved sources (typically `withDefaults`):
+`useComponentProps` is the primary integration with `<UTheme>`. The proxy resolves the priority chain **explicit prop > nearest `<UTheme :props>` > its `'*'` key > `app.config.ui.<name>.defaultVariants` > `app.config.ui.defaultVariants` > `withDefaults` > the theme's `defaultVariants`** for every prop — including ones driving template logic that `tv().defaultVariants` can't reach (`<component :is>`, `v-if`, computed conditionals). The theme's `defaultVariants` are the last link of the chain, which is why the component passes `theme` as the third argument: the proxy holds the resolved value of every variant, the same one `tv()` picks the classes with, so a template can bind it (`:data-orientation="props.orientation"`). The proxy also reads them to apply `'*'` only where the default is `primary` or `md`. A prop that is a theme variant takes its default from the theme's `defaultVariants`, never from `withDefaults`, which keeps booleans and the props the theme doesn't style. If a prop value is consumed in template logic, it must come from one of the proxy-resolved sources:
 
 ```vue
 <template>
@@ -325,7 +327,8 @@ Notes:
 |---------|-------|
 | `useComponentProps(name, _props, theme)` | Theme-aware proxy — default for new components |
 | `useForwardProps(source, emits?)` (local) | Forward Reka UI props/emits without filtering theme defaults |
-| `withDefaults` | Runtime default values |
+| `withDefaults` | Runtime default values of booleans and props that aren't theme variants |
+| Theme `defaultVariants` | Default of every prop that is a theme variant |
 | `defineOptions({ inheritAttrs: false })` | When spreading `$attrs` to inner element |
 | Caller `data-slot` wins on root | Place the default `data-slot` before the root `v-bind`, or read `$attrs['data-slot']` on the root — see [`data-slot` on the root](#data-slot-on-the-root) |
 | `reactivePick` | Pick keys off `props` (the proxy) before forwarding |

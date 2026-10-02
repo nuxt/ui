@@ -64,8 +64,7 @@ import { tv } from '../utils/tv'
 
 const _props = withDefaults(defineProps<ProgressProps>(), {
   inverted: false,
-  modelValue: null,
-  orientation: 'horizontal'
+  modelValue: null
 })
 const emits = defineEmits<ProgressEmits>()
 const slots = defineSlots<ProgressSlots>()

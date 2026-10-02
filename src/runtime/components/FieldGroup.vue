@@ -37,9 +37,7 @@ import { useComponentProps, useComponentOverrides } from '../composables/useComp
 import { fieldGroupInjectionKey } from '../composables/useFieldGroup'
 import { tv } from '../utils/tv'
 
-const _props = withDefaults(defineProps<FieldGroupProps>(), {
-  orientation: 'horizontal'
-})
+const _props = defineProps<FieldGroupProps>()
 defineSlots<FieldGroupSlots>()
 
 const props = useComponentProps('fieldGroup', _props, theme)

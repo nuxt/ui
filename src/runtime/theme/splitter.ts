@@ -15,5 +15,8 @@ export default defineTheme({
         handle: 'h-2 cursor-row-resize'
       }
     }
+  },
+  defaultVariants: {
+    orientation: 'horizontal'
   }
 })

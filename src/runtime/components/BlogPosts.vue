@@ -45,9 +45,7 @@ import { tv } from '../utils/tv'
 import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import UBlogPost from './BlogPost.vue'
 
-const _props = withDefaults(defineProps<BlogPostsProps>(), {
-  orientation: 'horizontal'
-})
+const _props = defineProps<BlogPostsProps>()
 const slots = defineSlots<BlogPostsSlots<T>>()
 
 const props = useComponentProps<BlogPostsProps>('blogPosts', _props, theme)

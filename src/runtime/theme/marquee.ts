@@ -54,5 +54,8 @@ export default defineTheme({
     class: {
       root: 'before:inset-x-0 before:top-0 before:w-full before:h-1/3 before:bg-linear-to-b after:inset-x-0 after:bottom-0 after:w-full after:h-1/3 after:bg-linear-to-t backface-hidden'
     }
-  }]
+  }],
+  defaultVariants: {
+    orientation: 'horizontal'
+  }
 })

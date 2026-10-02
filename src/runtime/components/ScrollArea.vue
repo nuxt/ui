@@ -103,7 +103,6 @@ import { useLocale } from '../composables/useLocale'
 import { useScrollShadow } from '../composables/useScrollShadow'
 
 const _props = withDefaults(defineProps<ScrollAreaProps<T>>(), {
-  orientation: 'vertical',
   virtualize: false,
   shadow: false
 })

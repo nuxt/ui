@@ -55,9 +55,7 @@ import ULink from './Link.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const _props = withDefaults(defineProps<UserProps>(), {
-  orientation: 'horizontal'
-})
+const _props = defineProps<UserProps>()
 const slots = defineSlots<UserSlots>()
 
 const props = useComponentProps('user', _props, theme)

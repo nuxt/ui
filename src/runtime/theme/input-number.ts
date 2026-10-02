@@ -123,6 +123,7 @@ export default defineTheme({
   defaultVariants: {
     size: 'md',
     color: 'primary',
-    variant: 'outline'
+    variant: 'outline',
+    orientation: 'horizontal'
   }
 })

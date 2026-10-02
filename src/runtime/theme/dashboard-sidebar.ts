@@ -35,5 +35,9 @@ export default defineTheme({
         toggle: 'ms-auto'
       }
     }
+  },
+  defaultVariants: {
+    toggleSide: 'left',
+    side: 'left'
   }
 })

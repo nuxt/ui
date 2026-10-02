@@ -76,7 +76,6 @@ const _props = withDefaults(defineProps<InputRatingProps>(), {
   step: 1,
   readonly: false,
   defaultValue: 0,
-  orientation: 'horizontal',
   hoverable: false,
   clearable: false
 })

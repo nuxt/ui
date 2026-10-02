@@ -130,5 +130,10 @@ export default defineTheme({
     class: {
       rail: 'start-[calc(--spacing(4)-1px)]'
     }
-  }]
+  }],
+  defaultVariants: {
+    variant: 'sidebar',
+    collapsible: 'offcanvas',
+    side: 'left'
+  }
 })

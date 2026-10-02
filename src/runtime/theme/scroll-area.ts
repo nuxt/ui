@@ -24,5 +24,8 @@ export default defineTheme({
         root: 'overflow-visible'
       }
     }
+  },
+  defaultVariants: {
+    orientation: 'vertical'
   }
 })

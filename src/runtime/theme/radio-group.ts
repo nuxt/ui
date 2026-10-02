@@ -195,6 +195,7 @@ export default defineTheme({
     size: 'md',
     color: 'primary',
     variant: 'list',
-    indicator: 'start'
+    indicator: 'start',
+    orientation: 'vertical'
   }
 })

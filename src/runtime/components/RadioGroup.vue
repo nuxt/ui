@@ -110,8 +110,7 @@ import UIcon from './Icon.vue'
 const _props = withDefaults(defineProps<RadioGroupProps<T, VK>>(), {
   valueKey: 'value' as never,
   labelKey: 'label',
-  descriptionKey: 'description',
-  orientation: 'vertical'
+  descriptionKey: 'description'
 })
 const emits = defineEmits<RadioGroupEmits<T, VK>>()
 const slots = defineSlots<RadioGroupSlots<T>>()

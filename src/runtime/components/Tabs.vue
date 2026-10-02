@@ -112,7 +112,6 @@ import UBadge from './Badge.vue'
 const _props = withDefaults(defineProps<TabsProps<T>>(), {
   content: true,
   defaultValue: '0',
-  orientation: 'horizontal',
   unmountOnHide: true,
   valueKey: 'value',
   labelKey: 'label'

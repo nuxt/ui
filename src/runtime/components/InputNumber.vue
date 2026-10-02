@@ -100,7 +100,6 @@ import UButton from './Button.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<InputNumberProps<T, Mod>>(), {
-  orientation: 'horizontal',
   increment: true,
   decrement: true
 })

@@ -62,14 +62,14 @@ describe('app.config defaultVariants', () => {
     delete appConfig.ui!.formField
   })
 
-  it('overrides the withDefaults fallback', async () => {
+  it('overrides the theme\'s defaultVariants', async () => {
     const wrapper = await mountSuspended(UFormField, {
       props: { label: 'Label' }
     })
 
     const root = wrapper.find('[data-slot="form-field"]')
     // Drives both the `data-orientation` attribute and the tv class resolution,
-    // even though `orientation` isn't set in the theme's `defaultVariants`.
+    // over the `vertical` the theme's `defaultVariants` set.
     expect(root.attributes('data-orientation')).toBe('horizontal')
     expect(root.classes()).toContain('place-items-baseline')
   })
@@ -81,6 +81,18 @@ describe('app.config defaultVariants', () => {
 
     const root = wrapper.find('[data-slot="form-field"]')
     expect(root.attributes('data-orientation')).toBe('vertical')
+  })
+})
+
+describe('theme defaultVariants', () => {
+  it('fills a variant prop that isn\'t set', async () => {
+    const wrapper = await mountSuspended(UFormField, {
+      props: { label: 'Label' }
+    })
+
+    // `orientation` has no `withDefaults` value: the attribute reads the proxy,
+    // which falls back to the theme's `defaultVariants`
+    expect(wrapper.find('[data-slot="form-field"]').attributes('data-orientation')).toBe('vertical')
   })
 })
 

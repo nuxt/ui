@@ -59,6 +59,7 @@ export default defineTheme({
     }
   },
   defaultVariants: {
-    variant: 'outline'
+    variant: 'outline',
+    orientation: 'vertical'
   }
 })

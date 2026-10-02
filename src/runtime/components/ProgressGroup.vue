@@ -80,8 +80,7 @@ import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
 const _props = withDefaults(defineProps<ProgressGroupProps<T>>(), {
-  max: 100,
-  orientation: 'horizontal'
+  max: 100
 })
 const slots = defineSlots<ProgressGroupSlots<T>>()
 

@@ -77,8 +77,7 @@ import UIcon from './Icon.vue'
 import UButton from './Button.vue'
 
 const _props = withDefaults(defineProps<PageSectionProps>(), {
-  as: 'section',
-  orientation: 'vertical'
+  as: 'section'
 })
 const slots = defineSlots<PageSectionSlots>()
 

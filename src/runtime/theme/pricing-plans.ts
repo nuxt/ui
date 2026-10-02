@@ -20,5 +20,8 @@ export default defineTheme({
     compact: false,
     scale: true,
     class: { root: 'lg:gap-x-13' }
-  }]
+  }],
+  defaultVariants: {
+    orientation: 'horizontal'
+  }
 })

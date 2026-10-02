@@ -19,5 +19,8 @@ export default defineTheme({
         toggle: ''
       }
     }
+  },
+  defaultVariants: {
+    toggleSide: 'left'
   }
 })

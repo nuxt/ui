@@ -252,7 +252,6 @@ import UTooltip from './Tooltip.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<NavigationMenuProps<T, K, O>>(), {
-  orientation: 'horizontal' as never,
   contentOrientation: 'horizontal',
   externalIcon: true,
   delayDuration: 0,
