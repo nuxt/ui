@@ -12,6 +12,7 @@ import {
   DEFAULT_COLORS,
   THEME_DEFAULTS,
   LIBRARY_TOKEN_DEFAULTS,
+  tokenShadeDefaults,
   styleComponents,
   styleTokens,
   mergeUi
@@ -44,8 +45,9 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explici
     const lightShade = shadeOf(light[token])
     const darkShade = shadeOf(dark[token])
     if ((!lightShade && !darkShade) || (light[token] && !lightShade) || (dark[token] && !darkShade)) continue
-    // A mode left unset keeps the alias's default, `900` and `50` for neutral
-    const shades = [lightShade ?? (alias === 'neutral' ? '900' : '500'), darkShade ?? (alias === 'neutral' ? '50' : '400')]
+    // A mode left unset keeps the alias's default shade
+    const defaults = tokenShadeDefaults(token)
+    const shades = [lightShade ?? String(defaults.light), darkShade ?? String(defaults.dark)]
     aliasShades[alias] = shades[0] === shades[1] ? shades[0]! : shades.join(' ')
     Reflect.deleteProperty(light, token)
     Reflect.deleteProperty(dark, token)
@@ -148,7 +150,7 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explici
   // Restate the library's dark value so the `.dark` block wins it back.
   for (const [key, value] of Object.entries(light)) {
     if (key in dark) continue
-    const fallback = (LIBRARY_TOKEN_DEFAULTS.dark as Record<string, string>)[key]
+    const fallback = LIBRARY_TOKEN_DEFAULTS.dark[key]
     if (fallback && fallback !== value) {
       dark[key] = fallback
     }
