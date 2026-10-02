@@ -18,7 +18,7 @@ export function useFaviconFromTheme() {
 
   function updateFavicon() {
     const root = document.documentElement
-    const color = getComputedStyle(root).getPropertyValue('--ui-primary').trim() || '#00DC82'
+    const color = getComputedStyle(root).getPropertyValue('--ui-primary').trim() || '#00BCFF'
 
     const svg = generateFaviconSvg(color)
     const encoded = `data:image/svg+xml,${encodeURIComponent(svg)}`
