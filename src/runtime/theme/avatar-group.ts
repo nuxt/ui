@@ -37,9 +37,5 @@ export default defineTheme({
       }
     },
     color: colorVariant({})
-  },
-  defaultVariants: {
-    size: 'md',
-    color: 'neutral'
   }
 })

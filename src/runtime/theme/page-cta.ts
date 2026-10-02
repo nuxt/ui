@@ -57,8 +57,5 @@ export default defineTheme({
         description: 'mt-6'
       }
     }
-  },
-  defaultVariants: {
-    variant: 'outline'
   }
 })

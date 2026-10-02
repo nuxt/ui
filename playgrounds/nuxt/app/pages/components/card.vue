@@ -4,7 +4,7 @@ import theme from '#build/ui/card'
 const variants = Object.keys(theme.variants.variant)
 
 const attrs = reactive({
-  variant: [theme.defaultVariants.variant]
+  variant: ['outline' as keyof typeof theme.variants.variant]
 })
 </script>
 

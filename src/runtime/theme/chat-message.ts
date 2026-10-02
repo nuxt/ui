@@ -89,10 +89,5 @@ export default defineTheme({
       body: 'w-full',
       content: 'w-full'
     }
-  }],
-  defaultVariants: {
-    side: 'left',
-    variant: 'naked',
-    color: 'neutral'
-  }
+  }]
 })

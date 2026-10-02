@@ -53,8 +53,5 @@ export default defineTheme({
         itemLeadingIcon: 'text-faint group-data-highlighted:not-group-data-disabled:text-default transition-colors'
       }
     }
-  },
-  defaultVariants: {
-    size: 'md'
   }
 })

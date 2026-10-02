@@ -8,10 +8,10 @@ const indicators = Object.keys(theme.variants.indicator)
 const orientations = Object.keys(theme.variants.orientation)
 
 const attrs = reactive({
-  color: [theme.defaultVariants.color],
-  size: [theme.defaultVariants.size],
-  variant: [theme.defaultVariants.variant],
-  indicator: [theme.defaultVariants.indicator]
+  color: ['primary' as keyof typeof theme.variants.color],
+  size: ['md' as keyof typeof theme.variants.size],
+  variant: ['list' as keyof typeof theme.variants.variant],
+  indicator: ['start' as keyof typeof theme.variants.indicator]
 })
 
 const orientation = ref('vertical' as keyof typeof theme.variants.orientation)

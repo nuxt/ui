@@ -39,8 +39,5 @@ export default defineTheme({
     class: {
       link: 'hover:text-default transition-colors'
     }
-  }],
-  defaultVariants: {
-    color: 'primary'
-  }
+  }]
 })

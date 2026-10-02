@@ -8,8 +8,8 @@ const orientations = Object.keys(theme.variants.orientation)
 const contentOrientations = Object.keys(theme.variants.contentOrientation)
 
 const attrs = reactive({
-  color: [theme.defaultVariants.color],
-  variant: [theme.defaultVariants.variant]
+  color: ['primary' as keyof typeof theme.variants.color],
+  variant: ['pill' as keyof typeof theme.variants.variant]
 })
 
 const highlight = ref(true)

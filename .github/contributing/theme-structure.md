@@ -8,7 +8,7 @@ Themes live in `src/runtime/theme/` with kebab-case naming (e.g., `button.ts`, `
 
 ## Shape
 
-A theme is `slots`, `variants`, `compoundVariants` and `defaultVariants`. Every component declares its elements under `slots`, including the ones made of a single element, which declare one `root` slot (`base` for a control or a prose component, see the table below).
+A theme is `slots`, `variants` and `compoundVariants`. The default of a variant that is a prop lives in the component's `withDefaults`, not in the theme: `defaultVariants` only holds the default of a variant the component sets itself, like Select's `position`. Every component declares its elements under `slots`, including the ones made of a single element, which declare one `root` slot (`base` for a control or a prose component, see the table below).
 
 Classes in `variants` and `compoundVariants` are always given per slot, as an object keyed by slot name. A bare string or array targets no slot: the engine ignores it and warns in development. An empty string is fine for a value that only exists to be matched in `compoundVariants` (`solid: ''`).
 
@@ -83,11 +83,6 @@ export default defineTheme({
       xs: { base: 'text-xs px-2 py-1', leadingIcon: 'size-3' },
       md: { base: 'text-sm px-2.5 py-1.5', leadingIcon: 'size-5' }
     }
-  },
-  defaultVariants: {
-    color: 'primary',
-    variant: 'solid',
-    size: 'md'
   }
 })
 ```

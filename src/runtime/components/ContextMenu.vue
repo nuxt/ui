@@ -123,6 +123,7 @@ import { tv } from '../utils/tv'
 import UContextMenuContent from './ContextMenuContent.vue'
 
 const _props = withDefaults(defineProps<ContextMenuProps<T>>(), {
+  size: 'md',
   portal: true,
   modal: true,
   externalIcon: true,

@@ -7,8 +7,5 @@ export default defineTheme({
   },
   variants: {
     color: colorVariant({ base: '' })
-  },
-  defaultVariants: {
-    color: 'neutral'
   }
 })

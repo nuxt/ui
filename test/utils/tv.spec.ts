@@ -783,7 +783,6 @@ describe('tv spec sharing', () => {
 describe('tv theme sources', () => {
   it('takes a theme source', () => {
     expect(tv(buttonTheme)({ color: 'error' }).base()).toContain('[--ui-accent:var(--ui-error)]')
-    expectTypeOf(buttonTheme.defaultVariants.color).toEqualTypeOf<'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral'>()
 
     // @ts-expect-error not a color
     tv(buttonTheme)({ color: 'tertiary' })
@@ -794,7 +793,7 @@ describe('tv theme sources', () => {
 
     expect(ui.content()).toContain('origin-(--reka-select-content-transform-origin)')
     expectTypeOf(ui.leadingIcon).toBeFunction()
-    expectTypeOf(selectTheme.defaultVariants.variant).toEqualTypeOf<'outline' | 'soft' | 'subtle' | 'ghost' | 'none'>()
+    expectTypeOf(selectTheme.defaultVariants.position).toEqualTypeOf<'popper' | 'item-aligned'>()
   })
 
   it('keeps a callback typed as a function when the base has no value for it', () => {

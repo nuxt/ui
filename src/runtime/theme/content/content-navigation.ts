@@ -107,10 +107,5 @@ export default defineTheme({
     class: {
       link: 'after:bg-(--ui-highlight)'
     }
-  }],
-  defaultVariants: {
-    color: 'primary',
-    highlightColor: 'primary',
-    variant: 'pill'
-  }
+  }]
 })

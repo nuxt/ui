@@ -145,12 +145,15 @@ import { computed, ref, shallowRef, watch } from 'vue'
 import { useForwardProps } from '../composables/useForwardProps'
 import { Calendar as SingleCalendar, RangeCalendar, MonthPicker, MonthRangePicker, YearPicker, YearRangePicker } from 'reka-ui/namespaced'
 import { reactiveOmit } from '@vueuse/core'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useGivenProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
 const _props = withDefaults(defineProps<CalendarProps<R, M>>(), {
+  size: 'md',
+  color: 'primary',
+  variant: 'solid',
   type: 'date',
   fixedWeeks: true,
   monthControls: true,
@@ -162,6 +165,9 @@ const emits = defineEmits<CalendarEmits<R, M>>()
 defineSlots<CalendarSlots>()
 
 const props = useComponentProps<CalendarProps<R, M>>('calendar', _props, theme)
+// What the component passes down to the components it renders: what it was
+// given, without its own defaults, so a child keeps its own
+const givenProps = useGivenProps<CalendarProps<R, M>>('calendar', _props)
 
 const { dir, t, locale } = useLocale()
 const appConfig = useThemeConfig() as Calendar['AppConfig']
@@ -320,10 +326,10 @@ const ui = computed(() => tv(theme, overrides.value)({
   >
     <Picker.Header data-slot="calendar-header" :class="ui.header({ class: props.ui?.header })">
       <Picker.Prev v-if="view === 'day' && props.yearControls" :prev-page="(date: DateValue) => paginateYear(date, -1)" :aria-label="t('calendar.prevYear')" as-child>
-        <UButton :icon="prevYearIcon" :size="props.size" color="neutral" variant="ghost" v-bind="props.prevYear" />
+        <UButton :icon="prevYearIcon" :size="givenProps.size" color="neutral" variant="ghost" v-bind="props.prevYear" />
       </Picker.Prev>
       <Picker.Prev v-if="view !== 'day' || props.monthControls" :aria-label="prevLabel" as-child>
-        <UButton :icon="prevMonthIcon" :size="props.size" color="neutral" variant="ghost" v-bind="props.prevMonth" />
+        <UButton :icon="prevMonthIcon" :size="givenProps.size" color="neutral" variant="ghost" v-bind="props.prevMonth" />
       </Picker.Prev>
       <Picker.Heading v-slot="{ headingValue }" data-slot="calendar-heading" :class="ui.heading({ class: props.ui?.heading })">
         <slot
@@ -337,7 +343,7 @@ const ui = computed(() => tv(theme, overrides.value)({
           <UButton
             v-if="switchable && props.viewControl"
             :label="headingValue"
-            :size="props.size"
+            :size="givenProps.size"
             color="neutral"
             variant="ghost"
             block
@@ -348,10 +354,10 @@ const ui = computed(() => tv(theme, overrides.value)({
         </slot>
       </Picker.Heading>
       <Picker.Next v-if="view !== 'day' || props.monthControls" :aria-label="nextLabel" as-child>
-        <UButton :icon="nextMonthIcon" :size="props.size" color="neutral" variant="ghost" v-bind="props.nextMonth" />
+        <UButton :icon="nextMonthIcon" :size="givenProps.size" color="neutral" variant="ghost" v-bind="props.nextMonth" />
       </Picker.Next>
       <Picker.Next v-if="view === 'day' && props.yearControls" :next-page="(date: DateValue) => paginateYear(date, 1)" :aria-label="t('calendar.nextYear')" as-child>
-        <UButton :icon="nextYearIcon" :size="props.size" color="neutral" variant="ghost" v-bind="props.nextYear" />
+        <UButton :icon="nextYearIcon" :size="givenProps.size" color="neutral" variant="ghost" v-bind="props.nextYear" />
       </Picker.Next>
     </Picker.Header>
     <div data-slot="calendar-body" :class="ui.body({ class: props.ui?.body })">

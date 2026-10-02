@@ -26,8 +26,5 @@ export default defineTheme({
         root: 'bg-tint ring ring-default divide-y divide-default'
       }
     }
-  },
-  defaultVariants: {
-    variant: 'outline'
   }
 })

@@ -72,6 +72,8 @@ import UIcon from './Icon.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<InputRatingProps>(), {
+  color: 'primary',
+  size: 'md',
   length: 5,
   step: 1,
   readonly: false,

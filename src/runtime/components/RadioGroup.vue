@@ -108,6 +108,11 @@ import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
 const _props = withDefaults(defineProps<RadioGroupProps<T, VK>>(), {
+  highlight: false,
+  size: 'md',
+  color: 'primary',
+  variant: 'list',
+  indicator: 'start',
   valueKey: 'value' as never,
   labelKey: 'label',
   descriptionKey: 'description',

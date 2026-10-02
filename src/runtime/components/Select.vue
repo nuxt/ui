@@ -173,6 +173,9 @@ import UChip from './Chip.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<SelectProps<T, VK, M, Mod>>(), {
+  size: 'md',
+  color: 'primary',
+  variant: 'outline',
   valueKey: 'value' as never,
   labelKey: 'label',
   descriptionKey: 'description',

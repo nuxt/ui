@@ -103,9 +103,5 @@ export default defineTheme({
     class: {
       track: 'w-[10px]'
     }
-  }],
-  defaultVariants: {
-    size: 'md',
-    color: 'primary'
-  }
+  }]
 })

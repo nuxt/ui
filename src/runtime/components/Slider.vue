@@ -55,6 +55,8 @@ import { tv } from '../utils/tv'
 import UTooltip from './Tooltip.vue'
 
 const _props = withDefaults(defineProps<SliderProps>(), {
+  size: 'md',
+  color: 'primary',
   min: 0,
   max: 100,
   step: 1,

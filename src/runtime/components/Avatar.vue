@@ -54,7 +54,10 @@ import UChip from './Chip.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const _props = defineProps<AvatarProps>()
+const _props = withDefaults(defineProps<AvatarProps>(), {
+  size: 'md',
+  color: 'neutral'
+})
 
 const props = useComponentProps('avatar', _props, theme)
 

@@ -1,6 +1,7 @@
 import { inject, provide, computed } from 'vue'
 import type { ComputedRef, InjectionKey } from 'vue'
 import type { AvatarGroupProps } from '../components/AvatarGroup.vue'
+import { usePropIsSet } from '../utils/props'
 
 export const avatarGroupInjectionKey: InjectionKey<ComputedRef<{ size: AvatarGroupProps['size'], color: AvatarGroupProps['color'] }>> = Symbol('nuxt-ui.avatar-group')
 
@@ -15,8 +16,11 @@ export const avatarGroupInjectionKey: InjectionKey<ComputedRef<{ size: AvatarGro
 export function useAvatarGroup(props: { size: AvatarGroupProps['size'], color: AvatarGroupProps['color'] }) {
   const avatarGroup = inject(avatarGroupInjectionKey, undefined)
 
-  const size = computed(() => props.size ?? avatarGroup?.value.size)
-  const color = computed(() => props.color ?? avatarGroup?.value.color)
+  const isSet = usePropIsSet(props)
+
+  // Only what the parent passed: a `withDefaults` value stays below the group
+  const size = computed(() => (isSet('size') ? props.size : undefined) ?? avatarGroup?.value.size)
+  const color = computed(() => (isSet('color') ? props.color : undefined) ?? avatarGroup?.value.color)
   provide(avatarGroupInjectionKey, computed(() => ({ size: size.value, color: color.value })))
 
   return {

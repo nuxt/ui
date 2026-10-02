@@ -258,6 +258,9 @@ import UInput from './Input.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<SelectMenuProps<T, VK, M, Mod, C>>(), {
+  size: 'md',
+  color: 'primary',
+  variant: 'outline',
   portal: true,
   searchInput: true,
   labelKey: 'label',

@@ -122,10 +122,5 @@ export default defineTheme({
     class: {
       root: 'hover:bg-tint'
     }
-  }],
-  defaultVariants: {
-    variant: 'outline',
-    highlightColor: 'primary',
-    spotlightColor: 'primary'
-  }
+  }]
 })

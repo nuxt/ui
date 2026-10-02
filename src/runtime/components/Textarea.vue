@@ -81,6 +81,9 @@ import UAvatar from './Avatar.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<TextareaProps<T, Mod>>(), {
+  size: 'md',
+  color: 'primary',
+  variant: 'outline',
   rows: 3,
   maxrows: 0,
   autofocusDelay: 0,

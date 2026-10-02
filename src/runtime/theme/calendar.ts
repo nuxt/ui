@@ -126,9 +126,6 @@ export default defineTheme({
       }
     }],
   defaultVariants: {
-    size: 'md',
-    color: 'primary',
-    variant: 'solid',
     view: 'day'
   }
 })

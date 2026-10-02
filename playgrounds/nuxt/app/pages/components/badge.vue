@@ -6,9 +6,9 @@ const variants = Object.keys(theme.variants.variant)
 const sizes = Object.keys(theme.variants.size)
 
 const attrs = reactive({
-  color: [theme.defaultVariants.color],
-  variant: [theme.defaultVariants.variant],
-  size: [theme.defaultVariants.size]
+  color: ['primary' as keyof typeof theme.variants.color],
+  variant: ['solid' as keyof typeof theme.variants.variant],
+  size: ['md' as keyof typeof theme.variants.size]
 })
 </script>
 

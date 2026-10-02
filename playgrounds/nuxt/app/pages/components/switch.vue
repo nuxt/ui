@@ -5,8 +5,8 @@ const colors = Object.keys(theme.variants.color)
 const sizes = Object.keys(theme.variants.size)
 
 const attrs = reactive({
-  color: [theme.defaultVariants.color],
-  size: [theme.defaultVariants.size]
+  color: ['primary' as keyof typeof theme.variants.color],
+  size: ['md' as keyof typeof theme.variants.size]
 })
 
 const value = ref(true)

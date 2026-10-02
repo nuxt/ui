@@ -77,9 +77,5 @@ export default defineTheme({
     class: {
       thead: 'motion-safe:after:animate-[elastic_2s_var(--ease-in-out)_infinite]'
     }
-  }],
-  defaultVariants: {
-    loadingColor: 'primary',
-    loadingAnimation: 'carousel'
-  }
+  }]
 })

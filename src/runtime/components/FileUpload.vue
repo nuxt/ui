@@ -43,7 +43,7 @@ export interface FileUploadProps<M extends boolean = false> extends /** @vue-ign
   /**
    * The layout of how files are displayed.
    * Only works when `variant` is `area`.
-   * @defaultValue 'list'
+   * @defaultValue 'grid'
    */
   layout?: FileUpload['variants']['layout']
   /**
@@ -154,6 +154,9 @@ import UIcon from './Icon.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<FileUploadProps<M>>(), {
+  color: 'primary',
+  variant: 'area',
+  size: 'md',
   accept: '*',
   multiple: false as never,
   reset: false,

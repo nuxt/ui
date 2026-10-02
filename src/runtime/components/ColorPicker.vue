@@ -80,6 +80,7 @@ import { useComponentProps, useComponentOverrides } from '../composables/useComp
 import { tv } from '../utils/tv'
 
 const _props = withDefaults(defineProps<ColorPickerProps>(), {
+  size: 'md',
   format: 'hex',
   throttle: 50,
   defaultValue: '#FFFFFF'

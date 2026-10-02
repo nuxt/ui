@@ -86,6 +86,7 @@ import UCommandPalette from './CommandPalette.vue'
 import UModal from './Modal.vue'
 
 const _props = withDefaults(defineProps<DashboardSearchProps>(), {
+  size: 'md',
   shortcut: 'meta_k',
   colorMode: true,
   close: true,

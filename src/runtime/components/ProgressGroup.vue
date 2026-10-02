@@ -80,6 +80,8 @@ import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
 const _props = withDefaults(defineProps<ProgressGroupProps<T>>(), {
+  color: 'primary',
+  size: 'md',
   max: 100,
   orientation: 'horizontal'
 })

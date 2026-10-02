@@ -76,6 +76,9 @@ import UAvatar from './Avatar.vue'
 import UIcon from './Icon.vue'
 
 const _props = withDefaults(defineProps<ChatMessageProps<TMetadata, TDataParts, TTools>>(), {
+  side: 'left',
+  variant: 'naked',
+  color: 'neutral',
   as: 'article'
 })
 const slots = defineSlots<ChatMessageSlots<TMetadata, TDataParts, TTools>>()

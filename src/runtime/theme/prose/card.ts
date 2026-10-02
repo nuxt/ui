@@ -22,8 +22,5 @@ export default defineTheme({
         description: 'mt-1'
       }
     }
-  },
-  defaultVariants: {
-    color: 'primary'
   }
 })

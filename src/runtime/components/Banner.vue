@@ -81,7 +81,9 @@ import UButton from './Button.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const _props = defineProps<BannerProps>()
+const _props = withDefaults(defineProps<BannerProps>(), {
+  color: 'primary'
+})
 const slots = defineSlots<BannerSlots>()
 const emits = defineEmits<BannerEmits>()
 

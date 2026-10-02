@@ -22,7 +22,9 @@ import { computed } from 'vue'
 import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 
-const _props = defineProps<ProseTdProps>()
+const _props = withDefaults(defineProps<ProseTdProps>(), {
+  align: 'left'
+})
 
 defineSlots<ProseTdSlots>()
 

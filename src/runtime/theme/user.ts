@@ -79,8 +79,5 @@ export default defineTheme({
         description: 'text-base'
       }
     }
-  },
-  defaultVariants: {
-    size: 'md'
   }
 })

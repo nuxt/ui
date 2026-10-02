@@ -1,9 +1,10 @@
-import type { App, ComputedRef, VNode } from 'vue'
+import type { App, ComputedRef } from 'vue'
 import { computed, effectScope, getCurrentInstance } from 'vue'
 import { createContext } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import detected from '#build/ui/detected'
 import { get } from '../utils'
+import { propIsDefined } from '../utils/props'
 import { ComponentOverrides, engineFor } from '../utils/tv'
 
 export type ThemeContext = {
@@ -80,25 +81,6 @@ export function useThemeConfig(): { ui: Record<string, any> } {
   }
 }
 
-function camelCase(str: string): string {
-  return str.replace(/-(\w)/g, (_, c: string) => c.toUpperCase())
-}
-
-function kebabCase(str: string): string {
-  return str.replace(/[A-Z]/g, c => `-${c.toLowerCase()}`)
-}
-
-/**
- * Vuetify-style detection for whether a prop was explicitly passed by the parent,
- * distinguishing "user set it" from "got the `withDefaults` fallback".
- * Checks both camelCase and kebab-case names to cover both template conventions.
- */
-function propIsDefined(vnode: VNode | null | undefined, prop: string): boolean {
-  if (!vnode || !vnode.props) return false
-  return vnode.props[camelCase(prop)] !== undefined
-    || vnode.props[kebabCase(prop)] !== undefined
-}
-
 /**
  * The library-wide defaults a `'*'` entry replaces. A component whose own theme
  * default is something else (a `neutral` Kbd, an `sm` component) keeps it.
@@ -133,13 +115,30 @@ function warnUndetected(name: string) {
  *
  * The returned proxy transparently reads from `props`, falling through to the
  * injected `ThemeContext` and `app.config.ui.<name>.defaultVariants` for
- * defaults. The component's tv() `defaultVariants` are intentionally left out
- * of the proxy fallback — they continue to drive `tv()`-internal class
- * resolution (the original semantics) without leaking into prop reads. The
- * `ui` prop holds the component's own `ui` only, and `class` merges a
- * `<UTheme :props>` class under the component's own.
+ * defaults, then to the component's `withDefaults`, which holds the default of
+ * every prop, the theme variants included. So the proxy has the resolved value
+ * of every variant: the one `tv()` picks the classes with and the one a
+ * template binds to a data attribute. The `ui` prop holds the component's own
+ * `ui` only, and `class` merges a `<UTheme :props>` class under the
+ * component's own.
  */
 export function useComponentProps<T extends object>(name: string, props: T, theme?: { defaultVariants?: Record<string, unknown>, [key: string]: unknown }): T {
+  return createPropsProxy(name, props, theme, true)
+}
+
+/**
+ * What a component was given, for what it passes down: an explicit prop, the
+ * nearest `<UTheme :props>` key or `app.config.ui.<name>.defaultVariants`. It
+ * leaves out the component's own `withDefaults` and the `'*'` defaults, so a
+ * child it renders, or a child of the group it provides to, keeps its own
+ * defaults and its own `<UTheme :props>` key.
+ * @internal
+ */
+export function useGivenProps<T extends object>(name: string, props: T): T {
+  return createPropsProxy(name, props, undefined, false)
+}
+
+function createPropsProxy<T extends object>(name: string, props: T, theme: { defaultVariants?: Record<string, unknown>, [key: string]: unknown } | undefined, own: boolean): T {
   const vm = getCurrentInstance()
   const { defaults, config } = injectThemeContext()
 
@@ -148,13 +147,14 @@ export function useComponentProps<T extends object>(name: string, props: T, them
   }
 
   // A `'*'` value, only for a prop whose own default is the library-wide one:
-  // the component's `app.config.ui.<name>.defaultVariants`, or else its theme's
+  // the component's `app.config.ui.<name>.defaultVariants`, or else the one it
+  // declares in `withDefaults`
   function globalDefault(entry: Record<string, any> | undefined, prop: string) {
     const base = GLOBAL_DEFAULTS[prop]
     const value = entry?.[prop]
-    if (!base || value === undefined) return undefined
+    if (!own || !base || value === undefined) return undefined
     const appConfigEntry = name.includes('.') ? get(config.value, name) : config.value[name]
-    if (appConfigEntry?.defaultVariants?.[prop] !== undefined || theme?.defaultVariants?.[prop] !== base) return undefined
+    if (appConfigEntry?.defaultVariants?.[prop] !== undefined || (vm?.type as any)?.props?.[prop]?.default !== base) return undefined
     // A value the component doesn't have, like `xl` on a Kbd, leaves its default
     const values = (theme?.variants as Record<string, Record<string, unknown>> | undefined)?.[prop]
     if (values && !(value in values) && !(value in (appConfigEntry?.variants?.[prop] ?? {}))) return undefined
@@ -201,10 +201,7 @@ export function useComponentProps<T extends object>(name: string, props: T, them
       if (themeGlobalValue !== undefined) return themeGlobalValue
 
       // A global `app.config.ui.<name>.defaultVariants` value takes priority over
-      // the component's `withDefaults` fallback. This keeps `defaultVariants`
-      // working uniformly for every variant, including props a component pins in
-      // `withDefaults` (e.g. `orientation`, kept defined so `:data-orientation`
-      // always renders a value).
+      // the component's `withDefaults` fallback
       const appConfigEntry = name.includes('.') ? get(config.value, name) : config.value[name]
       const appConfigValue = appConfigEntry?.defaultVariants?.[prop]
       if (appConfigValue !== undefined) return appConfigValue
@@ -218,7 +215,7 @@ export function useComponentProps<T extends object>(name: string, props: T, them
       // would override defaults baked into the underlying primitive when those
       // props are forwarded downstream.
       const propDef = (vm?.type as any)?.props?.[prop]
-      if (propDef && Object.prototype.hasOwnProperty.call(propDef, 'default')) {
+      if (own && propDef && Object.prototype.hasOwnProperty.call(propDef, 'default')) {
         return raw
       }
 

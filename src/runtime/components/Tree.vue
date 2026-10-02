@@ -156,6 +156,8 @@ import UIcon from './Icon.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<TreeProps<T, M>>(), {
+  color: 'primary',
+  size: 'md',
   labelKey: 'label',
   nested: true,
   virtualize: false

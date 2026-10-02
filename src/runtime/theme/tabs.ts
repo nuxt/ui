@@ -97,10 +97,5 @@ export default defineTheme({
       indicator: '-start-px w-px',
       trigger: 'in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:inset-y-0 in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:-start-[calc(var(--spacing)+1px)] in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:w-px'
     }
-  }],
-  defaultVariants: {
-    color: 'primary',
-    variant: 'pill',
-    size: 'md'
-  }
+  }]
 })

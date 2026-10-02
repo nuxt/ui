@@ -37,7 +37,9 @@ import { Primitive } from 'reka-ui'
 import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 
-const _props = defineProps<CardProps>()
+const _props = withDefaults(defineProps<CardProps>(), {
+  variant: 'outline'
+})
 const slots = defineSlots<CardSlots>()
 
 const props = useComponentProps('card', _props, theme)

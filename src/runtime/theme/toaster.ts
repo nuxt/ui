@@ -51,8 +51,5 @@ export default defineTheme({
   }, {
     swipeDirection: ['up', 'down'],
     class: { base: 'data-[swipe=move]:translate-y-(--reka-toast-swipe-move-y) data-[swipe=end]:translate-y-(--reka-toast-swipe-end-y) data-[swipe=cancel]:translate-y-0' }
-  }],
-  defaultVariants: {
-    position: 'bottom-right'
-  }
+  }]
 })

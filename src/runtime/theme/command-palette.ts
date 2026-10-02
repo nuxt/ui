@@ -113,8 +113,5 @@ export default defineTheme({
         itemLeadingIcon: 'animate-spin'
       }
     }
-  },
-  defaultVariants: {
-    size: 'md'
   }
 })

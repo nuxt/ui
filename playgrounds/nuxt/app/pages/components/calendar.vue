@@ -25,9 +25,9 @@ const sizes = Object.keys(theme.variants.size)
 const types = ['date', 'month', 'year']
 
 const attrs = reactive({
-  color: [theme.defaultVariants.color],
-  variant: [theme.defaultVariants.variant],
-  size: [theme.defaultVariants.size],
+  color: ['primary' as keyof typeof theme.variants.color],
+  variant: ['solid' as keyof typeof theme.variants.variant],
+  size: ['md' as keyof typeof theme.variants.size],
   type: ['date'] as ('date' | 'month' | 'year')[]
 })
 

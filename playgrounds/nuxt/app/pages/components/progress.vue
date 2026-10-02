@@ -8,9 +8,9 @@ const animations = Object.keys(theme.variants.animation)
 const orientations = Object.keys(theme.variants.orientation)
 
 const attrs = reactive({
-  color: [theme.defaultVariants.color],
-  size: [theme.defaultVariants.size],
-  animation: [theme.defaultVariants.animation]
+  color: ['primary' as keyof typeof theme.variants.color],
+  size: ['md' as keyof typeof theme.variants.size],
+  animation: ['carousel' as keyof typeof theme.variants.animation]
 })
 
 const orientation = ref('horizontal' as keyof typeof theme.variants.orientation)

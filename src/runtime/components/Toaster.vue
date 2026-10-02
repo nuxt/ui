@@ -59,6 +59,7 @@ import { tv } from '../utils/tv'
 import UToast from './Toast.vue'
 
 const _props = withDefaults(defineProps<ToasterProps>(), {
+  position: 'bottom-right',
   expand: true,
   portal: true,
   duration: 5000,

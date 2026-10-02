@@ -15,7 +15,7 @@ const virtualize = ref(false)
 const preserveGroupOrder = ref(false)
 
 const sizes = Object.keys(theme.variants.size)
-const size = ref(theme.defaultVariants.size)
+const size = ref('md' as keyof typeof theme.variants.size)
 
 const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
   // params: { q: searchTermDebounced },

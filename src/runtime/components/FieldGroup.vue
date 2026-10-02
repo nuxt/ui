@@ -33,21 +33,22 @@ export interface FieldGroupSlots {
 <script setup lang="ts">
 import { provide, computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useGivenProps, useComponentOverrides } from '../composables/useComponentProps'
 import { fieldGroupInjectionKey } from '../composables/useFieldGroup'
 import { tv } from '../utils/tv'
 
 const _props = withDefaults(defineProps<FieldGroupProps>(), {
+  size: 'md',
   orientation: 'horizontal'
 })
 defineSlots<FieldGroupSlots>()
 
 const props = useComponentProps('fieldGroup', _props, theme)
 
-// What the group passes down to its children: without `theme`, the proxy leaves
-// out the `'*'` and `app.config.ui.defaultVariants` defaults, which each child
-// applies itself, so a child's own `<UTheme :props>` key still beats them
-const providedProps = useComponentProps('fieldGroup', _props)
+// What the group passes down to its children: what it was given, without its
+// own defaults or the `'*'` and `app.config.ui.defaultVariants` ones, which
+// each child applies itself, so a child's own `<UTheme :props>` key still beats them
+const providedProps = useGivenProps('fieldGroup', _props)
 
 const overrides = useComponentOverrides((ui: FieldGroup['AppConfig']['ui']) => ui.fieldGroup)
 

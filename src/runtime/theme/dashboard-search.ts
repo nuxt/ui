@@ -18,8 +18,5 @@ export default defineTheme({
       lg: {},
       xl: {}
     }
-  },
-  defaultVariants: {
-    size: 'md'
   }
 })

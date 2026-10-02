@@ -52,8 +52,11 @@ import { Primitive } from 'reka-ui'
 import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 
-// 7. Raw props (use withDefaults only when you actually need a runtime default)
-const _props = defineProps<ComponentNameProps>()
+// 7. Raw props. `withDefaults` holds every default, the theme variants
+//    included (`size`, `color`, `variant`): the theme has none for a prop
+const _props = withDefaults(defineProps<ComponentNameProps>(), {
+  size: 'md'
+})
 const slots = defineSlots<ComponentNameSlots>()
 
 // 8. Theme-aware proxy: resolves explicit > <UTheme :props> > <UTheme :props> '*'
@@ -303,7 +306,7 @@ defineExpose({
 
 ## Theme Defaults
 
-`useComponentProps` is the primary integration with `<UTheme>`. The proxy resolves the priority chain **explicit prop > nearest `<UTheme :props>` > its `'*'` key > `app.config.ui.<name>.defaultVariants` > `app.config.ui.defaultVariants` > `withDefaults`** for every prop — including ones driving template logic that `tv().defaultVariants` can't reach (`<component :is>`, `v-if`, computed conditionals). The theme's `defaultVariants` are intentionally NOT in the proxy chain, they only feed `tv()` class resolution. The proxy reads them to apply `'*'` only where the default is `primary` or `md`, which is why the component passes `theme` as the third argument. If a prop value is consumed in template logic, it must come from one of the proxy-resolved sources (typically `withDefaults`):
+`useComponentProps` is the primary integration with `<UTheme>`. The proxy resolves the priority chain **explicit prop > nearest `<UTheme :props>` > its `'*'` key > `app.config.ui.<name>.defaultVariants` > `app.config.ui.defaultVariants` > `withDefaults`** for every prop — including ones driving template logic that `tv().defaultVariants` can't reach (`<component :is>`, `v-if`, computed conditionals). The default of a prop that is a theme variant lives in `withDefaults`, never in the theme's `defaultVariants`, so the proxy holds the resolved value of every variant: the one `tv()` picks the classes with and the one a template binds to a data attribute (`:data-orientation="props.orientation"`). `'*'` only applies where the `withDefaults` value is `primary` or `md`, and the `theme` passed as the third argument tells which values the component has. If a prop value is consumed in template logic, it must come from one of the proxy-resolved sources (typically `withDefaults`):
 
 ```vue
 <template>
@@ -316,7 +319,7 @@ Notes:
 - The proxy passes through to `_props` for explicitly set props, so `withDefaults` fallbacks stay lower priority than `<UTheme>` overrides.
 - The `ui` prop holds the component's own `ui` only: a `<UTheme :ui>` reaches the engine as a level of overrides, not through the prop. `class` merges a `<UTheme :props>` class under the component's own. All other props are explicit-wins.
 - **Always read props as `props.x` in templates and `<script setup>`.** Bare prop names (`{{ label }}`, `v-if="arrow"`) resolve to `_props` and bypass the proxy, so `<UTheme :props>` defaults won't apply. The `nuxt-ui/no-bare-prop-refs` ESLint rule autofixes this.
-- Pass the **raw** `_props` (not the proxy) to context composables — `useFormField`, `useFieldGroup`, `useAvatarGroup`. Their internal fallback is `props?.x ?? injected.x`, so the wrapping `<UFormField>` / `<UFieldGroup>` / `<UAvatarGroup>` should beat `<UTheme :props>` / `withDefaults` / `app.config` defaults (closer context wins). **Then always fall back to the proxy in `tv()` calls** — `size: formSize.value ?? props.size`, `color: color.value ?? props.color`, `highlight: highlight.value ?? props.highlight`. Without `?? props.X`, `<UTheme :props>` is silently dropped when no closer context wraps the component. Final chain: `explicit > closer-context > <UTheme :props> > its '*' > app.config.ui.<name>.defaultVariants > app.config.ui.defaultVariants > withDefaults`. `useComponentIcons` has no injection chain, so pass the proxy `props` directly.
+- Pass the **raw** `_props` (not the proxy) to context composables — `useFormField`, `useFieldGroup`, `useAvatarGroup`. They read a prop only when the parent passed it, then fall back to the injected value, so the wrapping `<UFormField>` / `<UFieldGroup>` / `<UAvatarGroup>` should beat `<UTheme :props>` / `withDefaults` / `app.config` defaults (closer context wins). **Then always fall back to the proxy in `tv()` calls** — `size: formSize.value ?? props.size`, `color: color.value ?? props.color`, `highlight: highlight.value ?? props.highlight`. Without `?? props.X`, `<UTheme :props>` is silently dropped when no closer context wraps the component. Final chain: `explicit > closer-context > <UTheme :props> > its '*' > app.config.ui.<name>.defaultVariants > app.config.ui.defaultVariants > withDefaults`. `useComponentIcons` has no injection chain, so pass the proxy `props` directly.
 - Reka primitives' `useForwardProps` / `useForwardPropsEmits` filter root props by `vm.vnode.props ∪ withDefaults` and would strip theme-supplied values. Import `useForwardProps` from `composables/useForwardProps.ts` instead — same `(source, emits?)` signature, proxy-aware.
 
 ## Key Patterns
@@ -325,7 +328,8 @@ Notes:
 |---------|-------|
 | `useComponentProps(name, _props, theme)` | Theme-aware proxy — default for new components |
 | `useForwardProps(source, emits?)` (local) | Forward Reka UI props/emits without filtering theme defaults |
-| `withDefaults` | Runtime default values |
+| `withDefaults` | Runtime default values, the theme variants included |
+| `useGivenProps(name, _props)` | What the component was given, without its own defaults, for what it passes to a child or provides to a group |
 | `defineOptions({ inheritAttrs: false })` | When spreading `$attrs` to inner element |
 | Caller `data-slot` wins on root | Place the default `data-slot` before the root `v-bind`, or read `$attrs['data-slot']` on the root — see [`data-slot` on the root](#data-slot-on-the-root) |
 | `reactivePick` | Pick keys off `props` (the proxy) before forwarding |

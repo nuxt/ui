@@ -6,13 +6,13 @@ const variants = Object.keys(theme.variants.variant)
 const orientations = Object.keys(theme.variants.orientation)
 
 const attrs = reactive({
-  variant: [theme.defaultVariants.variant]
+  variant: ['outline' as keyof typeof theme.variants.variant]
 })
 
 const highlight = ref(false)
-const highlightColor = ref(theme.defaultVariants.highlightColor)
+const highlightColor = ref('primary' as keyof typeof theme.variants.highlightColor)
 const spotlight = ref(false)
-const spotlightColor = ref(theme.defaultVariants.spotlightColor)
+const spotlightColor = ref('primary' as keyof typeof theme.variants.spotlightColor)
 
 const orientation = ref('vertical' as keyof typeof theme.variants.orientation)
 const reverse = ref(false)

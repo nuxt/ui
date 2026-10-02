@@ -7,8 +7,8 @@ const variants = Object.keys(theme.variants.variant)
 const compact = ref(false)
 
 const attrs = reactive({
-  color: [theme.defaultVariants.color],
-  variant: [theme.defaultVariants.variant]
+  color: ['neutral' as keyof typeof theme.variants.color],
+  variant: ['naked' as keyof typeof theme.variants.variant]
 })
 
 const actions = [

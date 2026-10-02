@@ -149,12 +149,5 @@ export default defineTheme({
         root: 'not-has-disabled:border-accent not-has-disabled:has-data-[state=checked]:border-accent'
       }
     }
-  ],
-  defaultVariants: {
-    highlight: false,
-    size: 'md',
-    color: 'primary',
-    variant: 'list',
-    indicator: 'start'
-  }
+  ]
 })

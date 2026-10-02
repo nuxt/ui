@@ -4,8 +4,8 @@ import { Markdown } from '@comark/vue'
 import theme from '#build/ui/content/content-toc'
 
 const highlight = ref(true)
-const color = ref(theme.defaultVariants.color)
-const highlightVariant = ref(theme.defaultVariants.highlightVariant)
+const color = ref('primary' as keyof typeof theme.variants.color)
+const highlightVariant = ref('straight' as keyof typeof theme.variants.highlightVariant)
 
 const colors = Object.keys(theme.variants.color)
 const highlightVariants = Object.keys(theme.variants.highlightVariant)

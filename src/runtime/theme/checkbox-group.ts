@@ -102,11 +102,5 @@ export default defineTheme({
         item: 'cursor-not-allowed'
       }
     }
-  ],
-  defaultVariants: {
-    highlight: false,
-    size: 'md',
-    variant: 'list',
-    color: 'primary'
-  }
+  ]
 })

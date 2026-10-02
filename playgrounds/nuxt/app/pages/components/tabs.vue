@@ -7,9 +7,9 @@ const orientations = Object.keys(theme.variants.orientation)
 const sizes = Object.keys(theme.variants.size)
 
 const attrs = reactive({
-  color: [theme.defaultVariants.color],
-  variant: [theme.defaultVariants.variant],
-  size: [theme.defaultVariants.size]
+  color: ['primary' as keyof typeof theme.variants.color],
+  variant: ['pill' as keyof typeof theme.variants.variant],
+  size: ['md' as keyof typeof theme.variants.size]
 })
 
 const orientation = ref('horizontal' as keyof typeof theme.variants.orientation)

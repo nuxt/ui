@@ -150,6 +150,7 @@ import UModal from '../Modal.vue'
 import UCommandPalette from '../CommandPalette.vue'
 
 const _props = withDefaults(defineProps<ContentSearchProps<T>>(), {
+  size: 'md',
   shortcut: 'meta_k',
   colorMode: true,
   close: true,

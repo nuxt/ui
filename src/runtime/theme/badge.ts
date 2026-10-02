@@ -78,10 +78,5 @@ export default defineTheme({
     size: 'xl',
     square: true,
     class: { base: 'p-1' }
-  }],
-  defaultVariants: {
-    color: 'primary',
-    variant: 'solid',
-    size: 'md'
-  }
+  }]
 })

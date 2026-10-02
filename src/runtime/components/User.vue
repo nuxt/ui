@@ -46,7 +46,7 @@ export interface UserSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useGivenProps, useComponentOverrides } from '../composables/useComponentProps'
 import { usePrefix } from '../composables/usePrefix'
 import { tv } from '../utils/tv'
 import UChip from './Chip.vue'
@@ -56,11 +56,15 @@ import ULink from './Link.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<UserProps>(), {
+  size: 'md',
   orientation: 'horizontal'
 })
 const slots = defineSlots<UserSlots>()
 
 const props = useComponentProps('user', _props, theme)
+// What the component passes down to the components it renders: what it was
+// given, without its own defaults, so a child keeps its own
+const givenProps = useGivenProps('user', _props)
 
 const overrides = useComponentOverrides((ui: User['AppConfig']['ui']) => ui.user)
 const prefix = usePrefix()
@@ -83,14 +87,14 @@ const ui = computed(() => tv(theme, overrides.value)({
     @click="props.onClick"
   >
     <slot name="avatar" :ui="ui">
-      <UChip v-if="props.chip && props.avatar" inset v-bind="typeof props.chip === 'object' ? props.chip : {}" :size="props.size">
-        <UAvatar :alt="props.name" v-bind="props.avatar" :size="props.size" data-slot="user-avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
+      <UChip v-if="props.chip && props.avatar" inset v-bind="typeof props.chip === 'object' ? props.chip : {}" :size="givenProps.size">
+        <UAvatar :alt="props.name" v-bind="props.avatar" :size="givenProps.size" data-slot="user-avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
       </UChip>
       <UAvatar
         v-else-if="props.avatar"
         :alt="props.name"
         v-bind="props.avatar"
-        :size="props.size"
+        :size="givenProps.size"
         data-slot="user-avatar"
         :class="ui.avatar({ class: props.ui?.avatar })"
       />

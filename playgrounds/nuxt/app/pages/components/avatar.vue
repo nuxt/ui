@@ -5,8 +5,8 @@ const sizes = Object.keys(theme.variants.size)
 const colors = Object.keys(theme.variants.color)
 
 const attrs = reactive({
-  size: [theme.defaultVariants.size],
-  color: [theme.defaultVariants.color]
+  size: ['md' as keyof typeof theme.variants.size],
+  color: ['neutral' as keyof typeof theme.variants.color]
 })
 </script>
 

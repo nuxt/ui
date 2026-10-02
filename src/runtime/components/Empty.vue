@@ -61,15 +61,21 @@ export interface EmptySlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useGivenProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 import UAvatar from './Avatar.vue'
 import UButton from './Button.vue'
 
-const _props = defineProps<EmptyProps>()
+const _props = withDefaults(defineProps<EmptyProps>(), {
+  variant: 'outline',
+  size: 'md'
+})
 const slots = defineSlots<EmptySlots>()
 
 const props = useComponentProps('empty', _props, theme)
+// What the component passes down to the components it renders: what it was
+// given, without its own defaults, so a child keeps its own
+const givenProps = useGivenProps('empty', _props)
 
 const appConfig = useThemeConfig() as Empty['AppConfig']
 const overrides = useComponentOverrides((ui: Empty['AppConfig']['ui']) => ui.empty)
@@ -110,7 +116,7 @@ const ui = computed(() => tv(theme, overrides.value)({
       <slot name="body">
         <div v-if="props.actions?.length || !!slots.actions" data-slot="empty-actions" :class="ui.actions({ class: props.ui?.actions })">
           <slot name="actions">
-            <UButton v-for="(action, index) in props.actions" :key="index" :size="props.size" v-bind="action" />
+            <UButton v-for="(action, index) in props.actions" :key="index" :size="givenProps.size" v-bind="action" />
           </slot>
         </div>
       </slot>

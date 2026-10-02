@@ -169,10 +169,5 @@ export default defineTheme({
     interactive: true,
     disabled: false,
     class: { base: 'hover:bg-tint' }
-  }],
-  defaultVariants: {
-    color: 'primary',
-    variant: 'area',
-    size: 'md'
-  }
+  }]
 })

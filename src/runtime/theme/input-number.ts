@@ -119,10 +119,5 @@ export default defineTheme({
     fixed: false,
     size: 'lg',
     class: { base: 'md:text-sm' }
-  }],
-  defaultVariants: {
-    size: 'md',
-    color: 'primary',
-    variant: 'outline'
-  }
+  }]
 })

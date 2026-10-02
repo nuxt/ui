@@ -48,10 +48,5 @@ export default defineTheme({
     position: 'bottom-left',
     inset: false,
     class: { base: 'translate-y-1/2 -translate-x-1/2 transform' }
-  }],
-  defaultVariants: {
-    size: 'md',
-    color: 'primary',
-    position: 'top-right'
-  }
+  }]
 })

@@ -4,7 +4,7 @@ import theme from '#build/ui/banner'
 const colors = Object.keys(theme.variants.color)
 
 const attrs = reactive({
-  color: [theme.defaultVariants.color]
+  color: ['primary' as keyof typeof theme.variants.color]
 })
 </script>
 

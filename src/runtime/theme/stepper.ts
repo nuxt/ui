@@ -113,10 +113,6 @@ export default defineTheme({
     orientation: 'vertical',
     size: 'xl',
     class: { separator: 'top-[62px]', item: 'gap-3.5' }
-  }],
+  }]
 
-  defaultVariants: {
-    size: 'md',
-    color: 'primary'
-  }
 })
