@@ -20,7 +20,7 @@ const tintedNeutralBase = {
 
 /**
  * A fresh copy per preset. `deriveStyle` puts these objects straight into
- * reactive studio state, so a spread would hand six presets the same
+ * reactive studio state, so a spread would hand every preset the same
  * per-token object and one in-place write would corrupt all of them.
  */
 const tintedNeutral = () => structuredClone(tintedNeutralBase)
@@ -119,7 +119,6 @@ export const presets: ThemePreset[] = [{
       primary: 'cobalt',
       secondary: 'cobalt-gray',
       info: 'cyan',
-      warning: 'amber',
       neutral: 'cobalt-gray'
     },
     radius: 0.125,
@@ -152,21 +151,62 @@ export const presets: ThemePreset[] = [{
     }
   }
 }, {
-  id: 'sky',
-  name: 'Sky',
-  description: 'Sky blue on a mist neutral, pastel fills everywhere, airy type.',
+  id: 'signal',
+  name: 'Signal',
+  description: 'Signal green on an ink neutral, pill buttons, near-black in dark mode.',
   doc: {
     version: 1,
-    colors: {
-      primary: 'sky',
-      neutral: 'mist'
+    palettes: {
+      signal: {
+        shades: {
+          50: 'oklch(97.3% 0.023 157.606)',
+          100: 'oklch(93.7% 0.051 157.559)',
+          200: 'oklch(88% 0.096 156.74)',
+          300: 'oklch(81.5% 0.14 155.469)',
+          400: 'oklch(75% 0.172 152.412)',
+          500: 'oklch(68.9% 0.187 148.921)',
+          600: 'oklch(60.7% 0.165 149.023)',
+          700: 'oklch(52.9% 0.141 149.561)',
+          800: 'oklch(44.9% 0.115 150.596)',
+          900: 'oklch(38.7% 0.095 151.748)',
+          950: 'oklch(25.6% 0.058 153.065)'
+        }
+      },
+      // A pure gray whose dark end stops short of black, so the page keeps
+      // some depth under the near-black surfaces.
+      ink: {
+        shades: {
+          50: 'oklch(97.9% 0 0)',
+          100: 'oklch(95.2% 0 0)',
+          200: 'oklch(90.1% 0 0)',
+          300: 'oklch(76.7% 0 0)',
+          400: 'oklch(65% 0 0)',
+          500: 'oklch(53.8% 0 0)',
+          600: 'oklch(44.2% 0 0)',
+          700: 'oklch(37.1% 0 0)',
+          800: 'oklch(28.5% 0 0)',
+          900: 'oklch(20.9% 0 0)',
+          950: 'oklch(18.2% 0 0)'
+        }
+      }
     },
-    radius: 0.75,
-    font: { sans: 'Figtree', lineHeight: 1.6 },
+    colors: {
+      primary: 'signal',
+      neutral: 'ink'
+    },
+    radius: 0.5,
+    font: { sans: 'Figtree' },
+    icons: 'material',
     style: {
-      // nothing solid anywhere: one app-wide pastel fill
-      defaults: { variants: { buttons: 'soft', inputs: 'soft' } },
-      tokenShades: tintedNeutral()
+      tokenShades: {
+        '--ui-bg-default': { dark: 950 },
+        '--ui-bg-soft': { dark: 900 },
+        '--ui-bg-strong': { dark: 800 }
+      }
+    },
+    // the radius ladder stops at 0.75rem, the pill has to come from the slot
+    components: {
+      button: { slots: { base: 'rounded-full' } }
     }
   }
 }, {
@@ -324,6 +364,7 @@ export const presets: ThemePreset[] = [{
     colors: {
       primary: 'amber',
       secondary: 'yellow',
+      warning: 'orange',
       neutral: 'carbon'
     },
     radius: 0.5,
@@ -373,7 +414,6 @@ export const presets: ThemePreset[] = [{
     },
     colors: {
       primary: 'pink',
-      secondary: 'violet',
       neutral: 'saturated-mauve'
     },
     radius: 0.375,
