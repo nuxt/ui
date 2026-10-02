@@ -155,7 +155,7 @@ const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugi
   // An alias on a gray takes neutral's roles, like `color="neutral"`: soft,
   // subtle and ghost variants on the neutral fills, not tinted by the gray.
   // Set as its per-color roles, so an override of those still wins.
-  const neutralPalette = paletteOf(aliases.neutral) ?? 'slate'
+  const neutralPalette = paletteOf(aliases.neutral) ?? 'gray'
   const roles: Record<string, string> = {}
   for (const [alias, value] of Object.entries(aliases)) {
     const palette = paletteOf(value)

@@ -6,8 +6,8 @@ import tailwindColors from 'tailwindcss/colors'
 const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
 
 // The Vue playground renders this too, so no Nuxt `useState`
-const primary = ref('green')
-const neutral = ref('slate')
+const primary = ref('sky')
+const neutral = ref('gray')
 
 function setAlias(alias: 'primary' | 'neutral', palette: string) {
   const shade = (tailwindColors as Record<string, Record<number, string>>)[palette]
