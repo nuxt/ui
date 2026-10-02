@@ -138,7 +138,7 @@ defineShortcuts(extractShortcuts(teamsItems.value))
       rail
       :ui="{
         container: 'h-full',
-        inner: 'bg-soft/50 divide-transparent',
+        inner: 'bg-soft/25 divide-transparent',
         body: 'py-0'
       }"
     >
