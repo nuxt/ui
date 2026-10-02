@@ -46,13 +46,14 @@ function readValues() {
   values.value = Object.fromEntries([...texts, ...backgrounds, ...borders].map(({ variable }) => [variable, style.getPropertyValue(variable).trim()]))
 }
 
-// The color mode is a class on `<html>` in both playgrounds
+// The color mode is a class on `<html>` in both playgrounds, and the theme
+// menu writes the palettes as inline styles on it
 let observer: MutationObserver | undefined
 
 onMounted(() => {
   readValues()
   observer = new MutationObserver(readValues)
-  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class', 'style'] })
 })
 
 onBeforeUnmount(() => observer?.disconnect())
