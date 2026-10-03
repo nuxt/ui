@@ -132,10 +132,8 @@ function contrast(a: Color, b: Color) {
   return (light! + 0.05) / (dark! + 0.05)
 }
 
-// WCAG 2 AA for text. A hovered fill is a state, not a resting surface, and
-// amber sits a hair under on it
+// WCAG 2 AA for text
 const AA = 4.5
-const AA_HOVER = 4.4
 
 const chromatic = colors.filter(color => color !== 'neutral')
 
@@ -157,11 +155,11 @@ describe.each(['light', 'dark'] as const)('contrast in %s mode', (mode) => {
     })
 
     it.each([
-      ['soft', '--background-color-accent-soft', AA],
-      ['strong', '--background-color-accent-strong', AA_HOVER]
-    ] as const)('colored text on its %s fill', (_, fill, minimum) => {
+      ['soft', '--background-color-accent-soft'],
+      ['strong', '--background-color-accent-strong']
+    ])('colored text on its %s fill', (_, fill) => {
       const surface = over(read(fill), page)
-      expect(contrast(over(text(), surface), surface)).toBeGreaterThanOrEqual(minimum)
+      expect(contrast(over(text(), surface), surface)).toBeGreaterThanOrEqual(AA)
     })
 
     // The label of a solid isn't checked: the solid keeps its shade 500 with

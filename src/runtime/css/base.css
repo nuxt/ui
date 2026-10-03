@@ -121,8 +121,9 @@
   /* Each color alias is a shade of its palette, lighter in dark mode, and
      `neutral` the ends of its own, which makes it the neutral solid. In `base` at zero
      specificity, like the palettes, so the shades `@plugin "@nuxt/ui/colors"`
-     picks win. In light mode the text of a color is a darker shade than its
-     solid, which is too light to read on the page or on its own tint. Dark
+     picks win. In light mode the text of a color is the color pulled halfway
+     to its palette's darkest shade, as a solid is too light to read on the page
+     or on its own tint, and it follows the shade you pick for the solid. Dark
      mode leaves the role unset, so the text is the color. */
   :where(:root, :host, .light) {
     --ui-primary: var(--ui-color-primary-500);
@@ -133,12 +134,12 @@
     --ui-error: var(--ui-color-error-500);
     --ui-neutral: var(--ui-color-neutral-900);
 
-    --ui-primary-text-default: var(--ui-color-primary-700);
-    --ui-secondary-text-default: var(--ui-color-secondary-700);
-    --ui-success-text-default: var(--ui-color-success-700);
-    --ui-info-text-default: var(--ui-color-info-700);
-    --ui-warning-text-default: var(--ui-color-warning-700);
-    --ui-error-text-default: var(--ui-color-error-700);
+    --ui-primary-text-default: color-mix(in oklab, var(--ui-primary) 50%, var(--ui-color-primary-950));
+    --ui-secondary-text-default: color-mix(in oklab, var(--ui-secondary) 50%, var(--ui-color-secondary-950));
+    --ui-success-text-default: color-mix(in oklab, var(--ui-success) 50%, var(--ui-color-success-950));
+    --ui-info-text-default: color-mix(in oklab, var(--ui-info) 50%, var(--ui-color-info-950));
+    --ui-warning-text-default: color-mix(in oklab, var(--ui-warning) 50%, var(--ui-color-warning-950));
+    --ui-error-text-default: color-mix(in oklab, var(--ui-error) 50%, var(--ui-color-error-950));
   }
 
   :where(.dark) {

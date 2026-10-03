@@ -236,14 +236,7 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
   for (const [token, shade] of Object.entries(style.tokenShades || {})) {
     const target = TOKEN_SHADE_TARGETS.find(target => target.token === token)
     if (target) {
-      if (shade.light !== undefined) {
-        light[token] = shadeRef(target.ramp, shade.light)
-        // A color's text is its shade 700 in light mode: a solid pinned as dark,
-        // or to black or white, is its own text, like the colors plugin writes it
-        if (target.group === 'colors' && (typeof shade.light !== 'number' || shade.light >= 700)) {
-          light[`${token}-text-default`] = `var(${token})`
-        }
-      }
+      if (shade.light !== undefined) light[token] = shadeRef(target.ramp, shade.light)
       if (shade.dark !== undefined) dark[token] = shadeRef(target.ramp, shade.dark)
     }
   }
