@@ -17,6 +17,27 @@ const internal: Record<string, string[]> = {
   'SelectMenu.vue': ['position']
 }
 
+/**
+ * A child that renders part of the same component, from the same theme and
+ * the same `<UTheme :props>` key, so it takes the resolved value.
+ */
+const forwardedToItself: Record<string, string[]> = {
+  'ContextMenu.vue': ['UContextMenuContent'],
+  'DropdownMenu.vue': ['UDropdownMenuContent'],
+  'content/ContentNavigation.vue': ['UContentNavigation']
+}
+
+/**
+ * Props a component picks for the Reka UI primitive it wraps, which has no
+ * theme of its own.
+ */
+const pickedForPrimitive: Record<string, string[]> = {
+  'CheckboxGroup.vue': ['orientation'],
+  'Drawer.vue': ['direction'],
+  'Separator.vue': ['orientation'],
+  'Slider.vue': ['orientation']
+}
+
 function walk(dir: string): string[] {
   return readdirSync(dir, { withFileTypes: true }).flatMap(entry => entry.isDirectory()
     ? walk(join(dir, entry.name))
@@ -55,6 +76,31 @@ describe('variant defaults', () => {
   it.each(components)('%s defaults its variant props in withDefaults', (name, _, theme) => {
     const keys = Object.keys(theme.defaultVariants ?? {}).filter(key => !internal[name]?.includes(key))
     expect(keys, 'move these from the theme\'s `defaultVariants` to the component\'s `withDefaults`').toEqual([])
+  })
+
+  // A prop now always holds a value, its `withDefaults` one when the parent
+  // passed none, so passing `props.size` to a child would hand it that default
+  // as an explicit prop, over the child's own default and its `<UTheme :props>`
+  // key. What a component passes down comes from `useGivenProps`.
+  it.each(components)('%s passes what it was given to its children', (name, source, theme) => {
+    const keys = Object.keys(defaults(source)).filter(key => Object.keys(theme.variants?.[key] ?? {}).some(value => value !== 'true' && value !== 'false'))
+    const template = source.slice(source.indexOf('<template>'))
+    const script = source.slice(0, source.indexOf('<template>'))
+    const problems: string[] = []
+    for (const key of keys) {
+      const kebab = key.replace(/[A-Z]/g, c => `-${c.toLowerCase()}`)
+      for (const match of template.matchAll(new RegExp(`<(U[A-Z]\\w*)\\b[^>]*?\\s:(?:${key}|${kebab})="props\\.${key}"`, 'g'))) {
+        if (!forwardedToItself[name]?.includes(match[1]!)) {
+          problems.push(`\`${match[1]}\` gets \`props.${key}\``)
+        }
+      }
+      for (const match of script.matchAll(/reactivePick\(props, ([^)]*)\)/g)) {
+        if (match[1]!.includes(`'${key}'`) && !pickedForPrimitive[name]?.includes(key)) {
+          problems.push(`\`reactivePick(props, ...)\` forwards \`${key}\``)
+        }
+      }
+    }
+    expect(problems, 'read it from `useGivenProps(name, _props)`').toEqual([])
   })
 
   it.each(components)('%s documents its variant defaults', (_, source, theme) => {
