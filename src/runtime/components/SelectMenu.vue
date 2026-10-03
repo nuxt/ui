@@ -247,6 +247,7 @@ import { useFilter } from '../composables/useFilter'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
 import { compare, get, getDisplayValue, isArrayOfArray, looseToNumber } from '../utils'
+import { closeAutoFocus } from '../utils/overlay'
 import { getEstimateSize } from '../utils/virtualizer'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -543,19 +544,11 @@ function onClear() {
   emits('clear')
 }
 
+// The `FocusScope` uses `loop` instead of `trapped`: a trapped scope pulls focus back while the menu is closing,
+// so focusing another element on select never lands.
 function onMountAutoFocus(event: Event) {
   // Prevent the `FocusScope` from focusing the search input on open when its autofocus is disabled.
   if (searchInputProps.value.autofocus === false) {
-    event.preventDefault()
-  }
-}
-
-// The `FocusScope` uses `loop` instead of `trapped`: a trapped scope pulls focus back while the menu is closing,
-// so focusing another element on select never lands. An enclosing Modal's trap is still paused by the scope stack.
-function onUnmountAutoFocus(event: Event) {
-  // Keep the focus where it was moved on select instead of restoring it to the trigger after the close animation.
-  const activeElement = document.activeElement
-  if (activeElement && activeElement !== document.body && !(event.target as HTMLElement).contains(activeElement)) {
     event.preventDefault()
   }
 }
@@ -723,7 +716,7 @@ defineExpose({
     <ComboboxPortal v-bind="portalProps">
       <FieldGroupReset>
         <ComboboxContent data-slot="content" :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
-          <FocusScope loop data-slot="focusScope" :class="ui.focusScope({ class: props.ui?.focusScope })" @mount-auto-focus="onMountAutoFocus" @unmount-auto-focus="onUnmountAutoFocus">
+          <FocusScope loop data-slot="focusScope" :class="ui.focusScope({ class: props.ui?.focusScope })" @mount-auto-focus="onMountAutoFocus" @unmount-auto-focus="closeAutoFocus">
             <slot name="content-top" />
 
             <ComboboxInput v-if="!!props.searchInput" v-model="searchTerm" :display-value="() => searchTerm" as-child>
