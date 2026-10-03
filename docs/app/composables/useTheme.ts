@@ -5,7 +5,7 @@ import { FONT_WEIGHT_DEFAULTS, FONTS, RADIUSES, NEUTRAL_COLORS, PRIMARY_COLORS }
 import { themeIcons, ICON_PACKS } from '../utils/theme/icons'
 import { cssVariableDefaults } from '../utils/theme/tokens'
 import type { SerializeOptions } from '../utils/theme/engine/serialize'
-import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables } from '../utils/theme/sanitize'
+import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables, sanitizeThemeProps } from '../utils/theme/sanitize'
 // Tables only, never the engine barrel: this composable rides the entry
 // chunk on every page, and the barrel would drag presets, the palette math
 // and the serializer with it. The serializer loads on demand below.
@@ -460,8 +460,7 @@ export function useTheme() {
 
     if (settings.props && typeof settings.props === 'object') {
       savedExtras.props = savedExtras.props || {}
-      for (const [key, value] of Object.entries(settings.props)) {
-        if (key === '__proto__' || key === 'constructor' || key === 'prototype' || !value || typeof value !== 'object') continue
+      for (const [key, value] of Object.entries(sanitizeThemeProps(settings.props))) {
         savedExtras.props[key] = { ...savedExtras.props[key], ...value }
       }
     }

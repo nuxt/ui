@@ -6,7 +6,7 @@ import { cssVariableDefaults } from '../utils/theme/tokens'
 import { THEME_STATE_KEYS, THEME_STORAGE_KEY, clamped, readStoredTheme, snapshotStoredTheme, writeStoredTheme } from '../utils/theme/storage'
 import type { StoredTheme } from '../utils/theme/storage'
 import { DEFAULT_COLORS, THEME_DEFAULTS } from '../utils/theme/engine/types'
-import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables } from '../utils/theme/sanitize'
+import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables, sanitizeThemeProps } from '../utils/theme/sanitize'
 
 export default defineNuxtPlugin({
   enforce: 'post',
@@ -48,7 +48,7 @@ export default defineNuxtPlugin({
         useState<Record<string, any>>('nuxt-ui-ai-theme').value = {
           ...(saved.colors ? { colors: { ...saved.colors } } : {}),
           ...(saved.components ? { ui: { ...saved.components } } : {}),
-          ...(saved.props ? { props: { ...saved.props } } : {})
+          ...(saved.props ? { props: sanitizeThemeProps(saved.props) } : {})
         }
 
         // Same distribution order the per-key restores used, which carries
