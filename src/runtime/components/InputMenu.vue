@@ -262,6 +262,9 @@ import UChip from './Chip.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<InputMenuProps<T, VK, M, Mod, C>>(), {
+  size: 'md',
+  color: 'primary',
+  variant: 'outline',
   type: 'text',
   autofocusDelay: 0,
   portal: true,

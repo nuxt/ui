@@ -88,6 +88,8 @@ import { get } from '../utils'
 import UIcon from './Icon.vue'
 
 const _props = withDefaults(defineProps<StepperProps<T>>(), {
+  size: 'md',
+  color: 'primary',
   orientation: 'horizontal',
   linear: true,
   valueKey: 'value'

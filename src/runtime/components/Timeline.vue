@@ -73,12 +73,14 @@ export type TimelineSlots<T extends TimelineItem = TimelineItem> = {
 <script setup lang="ts" generic="T extends TimelineItem">
 import { computed } from 'vue'
 import { Primitive, Separator } from 'reka-ui'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useGivenProps, useComponentOverrides } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 import { get } from '../utils'
 import UAvatar from './Avatar.vue'
 
 const _props = withDefaults(defineProps<TimelineProps<T>>(), {
+  size: 'md',
+  color: 'primary',
   orientation: 'vertical',
   valueKey: 'value'
 })
@@ -86,6 +88,9 @@ const emits = defineEmits<TimelineEmits<T>>()
 const slots = defineSlots<TimelineSlots<T>>()
 
 const props = useComponentProps<TimelineProps<T>>('timeline', _props, theme)
+// What the component passes down to the components it renders: what it was
+// given, without its own defaults, so a child keeps its own
+const givenProps = useGivenProps<TimelineProps<T>>('timeline', _props)
 
 const modelValue = defineModel<string | number>()
 
@@ -141,7 +146,7 @@ function onSelect(event: Event, item: T) {
     >
       <div data-slot="timeline-container" :class="ui.container({ class: [props.ui?.container, item.ui?.container] })">
         <UAvatar
-          :size="props.size"
+          :size="givenProps.size"
           :icon="item.icon"
           v-bind="typeof item.avatar === 'object' ? item.avatar : {}"
           data-slot="timeline-indicator"

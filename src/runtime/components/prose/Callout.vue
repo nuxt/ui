@@ -34,7 +34,9 @@ import UIcon from '../Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const _props = defineProps<ProseCalloutProps>()
+const _props = withDefaults(defineProps<ProseCalloutProps>(), {
+  color: 'neutral'
+})
 
 defineSlots<ProseCalloutSlots>()
 

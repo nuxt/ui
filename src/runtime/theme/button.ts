@@ -120,10 +120,5 @@ export default defineTheme({
     class: {
       trailingIcon: 'animate-spin'
     }
-  }],
-  defaultVariants: {
-    color: 'primary',
-    variant: 'solid',
-    size: 'md'
-  }
+  }]
 })

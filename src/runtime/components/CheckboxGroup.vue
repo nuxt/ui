@@ -89,13 +89,17 @@ import { computed, useId } from 'vue'
 import { CheckboxGroupRoot } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useGivenProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useFormField } from '../composables/useFormField'
 import { get, omit, transformUI } from '../utils'
 import { tv } from '../utils/tv'
 import UCheckbox from './Checkbox.vue'
 
 const _props = withDefaults(defineProps<CheckboxGroupProps<T, VK>>(), {
+  highlight: false,
+  size: 'md',
+  variant: 'list',
+  color: 'primary',
   labelKey: 'label',
   descriptionKey: 'description',
   valueKey: 'value' as never,
@@ -109,7 +113,10 @@ const props = useComponentProps<CheckboxGroupProps<T, VK>>('checkboxGroup', _pro
 const overrides = useComponentOverrides((ui: CheckboxGroup['AppConfig']['ui']) => ui.checkboxGroup)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'loop', 'required'), emits)
-const checkboxProps = useForwardProps(reactivePick(props, 'variant', 'indicator'))
+// What the group passes down to each Checkbox: what it was given, without its
+// own defaults, so a Checkbox keeps its own
+const givenProps = useGivenProps<CheckboxGroupProps<T, VK>>('checkboxGroup', _props)
+const checkboxProps = useForwardProps(reactivePick(givenProps, 'variant', 'indicator'))
 const getProxySlots = () => omit(slots, ['legend'])
 
 const { emitFormChange, emitFormInput, color: formFieldColor, highlight: formFieldHighlight, name, size: formFieldSize, id: _id, disabled: formFieldDisabled, ariaAttrs } = useFormField<CheckboxGroupProps<T>>(_props, { bind: false })

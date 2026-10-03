@@ -160,10 +160,6 @@ export default defineTheme({
     class: {
       wrapper: 'mt-3.5 pb-8.5'
     }
-  }],
+  }]
 
-  defaultVariants: {
-    size: 'md',
-    color: 'primary'
-  }
 })

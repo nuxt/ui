@@ -55,12 +55,13 @@ export interface FormFieldSlots {
 <script setup lang="ts">
 import { computed, ref, inject, provide, useId, watch } from 'vue'
 import { Primitive, Label } from 'reka-ui'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useGivenProps, useComponentOverrides } from '../composables/useComponentProps'
 import { formFieldInjectionKey, inputIdInjectionKey, formErrorsInjectionKey, formInputsInjectionKey } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import type { FormError, FormFieldInjectedOptions } from '../types/form'
 
 const _props = withDefaults(defineProps<FormFieldProps>(), {
+  size: 'md',
   error: undefined,
   orientation: 'vertical'
 })
@@ -68,10 +69,10 @@ const slots = defineSlots<FormFieldSlots>()
 
 const props = useComponentProps('formField', _props, theme)
 
-// What the group passes down to its children: without `theme`, the proxy leaves
-// out the `'*'` and `app.config.ui.defaultVariants` defaults, which each child
-// applies itself, so a child's own `<UTheme :props>` key still beats them
-const providedProps = useComponentProps('formField', _props)
+// What the group passes down to its children: what it was given, without its
+// own defaults or the `'*'` and `app.config.ui.defaultVariants` ones, which
+// each child applies itself, so a child's own `<UTheme :props>` key still beats them
+const providedProps = useGivenProps('formField', _props)
 
 const overrides = useComponentOverrides((ui: FormField['AppConfig']['ui']) => ui.formField)
 

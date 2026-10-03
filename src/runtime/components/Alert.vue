@@ -84,6 +84,8 @@ import UAvatar from './Avatar.vue'
 import UButton from './Button.vue'
 
 const _props = withDefaults(defineProps<AlertProps>(), {
+  color: 'primary',
+  variant: 'solid',
   orientation: 'vertical'
 })
 const emits = defineEmits<AlertEmits>()

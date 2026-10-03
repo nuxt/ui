@@ -117,8 +117,5 @@ export default defineTheme({
     class: {
       body: 'p-0 sm:p-0'
     }
-  }],
-  defaultVariants: {
-    variant: 'outline'
-  }
+  }]
 })

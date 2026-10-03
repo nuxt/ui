@@ -30,9 +30,5 @@ export default defineTheme({
   compoundVariants: [{
     variant: ['outline', 'subtle'],
     class: { root: 'outline-accent-focus has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-accent has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-accent' }
-  }],
-  defaultVariants: {
-    color: 'primary',
-    variant: 'outline'
-  }
+  }]
 })

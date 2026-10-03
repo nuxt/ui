@@ -2,6 +2,7 @@ import type { InjectionKey, ComputedRef } from 'vue'
 import { computed, defineComponent, inject, provide } from 'vue'
 import type { FieldGroupProps } from '../components/FieldGroup.vue'
 import type { GetObjectField } from '../types/utils'
+import { usePropIsSet } from '../utils/props'
 
 export const fieldGroupInjectionKey: InjectionKey<ComputedRef<{
   size: FieldGroupProps['size']
@@ -22,9 +23,11 @@ type Props<T> = {
  */
 export function useFieldGroup<T>(props: Props<T>) {
   const fieldGroup = inject(fieldGroupInjectionKey, undefined)
+  const isSet = usePropIsSet(props)
   return {
     orientation: computed(() => fieldGroup?.value.orientation),
-    size: computed(() => props?.size ?? fieldGroup?.value.size)
+    // Only what the parent passed: a `withDefaults` value stays below the group
+    size: computed(() => (isSet('size') ? props?.size : undefined) ?? fieldGroup?.value.size)
   }
 }
 

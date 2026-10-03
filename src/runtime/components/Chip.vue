@@ -55,6 +55,9 @@ import { tv } from '../utils/tv'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<ChipProps>(), {
+  size: 'md',
+  color: 'primary',
+  position: 'top-right',
   inset: false,
   standalone: false
 })

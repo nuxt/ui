@@ -43,6 +43,9 @@ import { useComponentProps, useComponentOverrides } from '../composables/useComp
 import { tv } from '../utils/tv'
 
 const _props = withDefaults(defineProps<KbdProps>(), {
+  variant: 'outline',
+  color: 'neutral',
+  size: 'md',
   as: 'kbd'
 })
 defineSlots<KbdSlots>()

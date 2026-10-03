@@ -81,6 +81,9 @@ import UAvatar from './Avatar.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<InputProps<T, Mod>>(), {
+  size: 'md',
+  color: 'primary',
+  variant: 'outline',
   type: 'text',
   autocomplete: 'off',
   autofocusDelay: 0

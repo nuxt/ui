@@ -198,10 +198,5 @@ export default defineTheme({
     class: {
       indicator: 'relative motion-safe:data-[state=indeterminate]:animate-[elastic-vertical_2s_var(--ease-in-out)_infinite]'
     }
-  }],
-  defaultVariants: {
-    animation: 'carousel',
-    color: 'primary',
-    size: 'md'
-  }
+  }]
 })

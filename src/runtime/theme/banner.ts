@@ -20,8 +20,5 @@ export default defineTheme({
         root: 'outline-(--ui-bg-default)/25 -outline-offset-3 has-[>a:focus-visible]:outline-3 hover:bg-accent-hover'
       }
     }
-  },
-  defaultVariants: {
-    color: 'primary'
   }
 })

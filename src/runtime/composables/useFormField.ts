@@ -5,6 +5,7 @@ import type { UseEventBusReturn } from '@vueuse/core'
 import type { FormFieldProps } from '../components/FormField.vue'
 import type { FormErrorWithId, FormEvent, FormInputEvents, FormFieldInjectedOptions, FormInjectedOptions } from '../types/form'
 import type { GetObjectField } from '../types/utils'
+import { usePropIsSet } from '../utils/props'
 
 type Props<T> = {
   id?: string
@@ -55,6 +56,7 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
   const formBus = inject(formBusInjectionKey, undefined)
   const formField = inject(formFieldInjectionKey, undefined)
   const inputId = inject(inputIdInjectionKey, undefined)
+  const isSet = usePropIsSet(props)
 
   // Blocks the FormField injection to avoid duplicating events when nesting input components.
   provide(formFieldInjectionKey, undefined)
@@ -115,9 +117,11 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
   return {
     id: computed(() => props?.id ?? inputId?.value),
     name: computed(() => props?.name ?? formField?.value.name),
-    size: computed(() => props?.size ?? formField?.value.size),
-    color: computed(() => formField?.value.error ? 'error' : props?.color),
-    highlight: computed(() => formField?.value.error ? true : (props?.highlight || undefined)),
+    // Only what the parent passed: a `withDefaults` value stays below the
+    // FormField and `<UTheme :props>`, which the component reads next
+    size: computed(() => (isSet('size') ? props?.size : undefined) ?? formField?.value.size),
+    color: computed(() => formField?.value.error ? 'error' : (isSet('color') ? props?.color : undefined)),
+    highlight: computed(() => formField?.value.error ? true : ((isSet('highlight') && props?.highlight) || undefined)),
     disabled: computed(() => formOptions?.value.disabled || props?.disabled || undefined),
     emitFormBlur,
     emitFormInput,

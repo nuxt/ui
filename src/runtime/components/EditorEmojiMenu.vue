@@ -36,6 +36,7 @@ import { tv } from '../utils/tv'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<EditorEmojiMenuProps<T>>(), {
+  size: 'md',
   pluginKey: 'emojiMenu',
   char: ':',
   filterFields: () => ['name', 'shortcodes', 'tags']

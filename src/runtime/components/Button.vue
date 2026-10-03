@@ -58,7 +58,11 @@ import UAvatar from './Avatar.vue'
 import ULink from './Link.vue'
 import ULinkBase from './LinkBase.vue'
 
-const _props = defineProps<ButtonProps>()
+const _props = withDefaults(defineProps<ButtonProps>(), {
+  color: 'primary',
+  variant: 'solid',
+  size: 'md'
+})
 const slots = defineSlots<ButtonSlots>()
 
 const props = useComponentProps('button', _props, theme)

@@ -33,8 +33,5 @@ export default defineTheme({
         track: 'h-46'
       }
     }
-  },
-  defaultVariants: {
-    size: 'md'
   }
 })

@@ -63,6 +63,9 @@ import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 
 const _props = withDefaults(defineProps<ProgressProps>(), {
+  animation: 'carousel',
+  color: 'primary',
+  size: 'md',
   inverted: false,
   modelValue: null,
   orientation: 'horizontal'

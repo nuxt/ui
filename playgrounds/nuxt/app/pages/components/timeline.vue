@@ -6,8 +6,8 @@ const sizes = Object.keys(theme.variants.size)
 const colors = Object.keys(theme.variants.color)
 const orientations = Object.keys(theme.variants.orientation)
 
-const color = ref(theme.defaultVariants.color)
-const size = ref(theme.defaultVariants.size)
+const color = ref('primary' as keyof typeof theme.variants.color)
+const size = ref('md' as keyof typeof theme.variants.size)
 const orientation = ref('vertical' as keyof typeof theme.variants.orientation)
 const reverse = ref(false)
 

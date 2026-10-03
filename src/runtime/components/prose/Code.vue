@@ -26,7 +26,9 @@ import { computed } from 'vue'
 import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 
-const _props = defineProps<ProseCodeProps>()
+const _props = withDefaults(defineProps<ProseCodeProps>(), {
+  color: 'neutral'
+})
 
 defineSlots<ProseCodeSlots>()
 

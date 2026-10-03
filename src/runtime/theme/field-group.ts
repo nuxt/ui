@@ -39,8 +39,5 @@ export default defineTheme({
       horizontal: { root: 'inline-flex -space-x-px' },
       vertical: { root: 'flex flex-col -space-y-px' }
     }
-  },
-  defaultVariants: {
-    size: 'md'
   }
 })

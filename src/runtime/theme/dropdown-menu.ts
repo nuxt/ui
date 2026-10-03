@@ -96,8 +96,5 @@ export default defineTheme({
       item: 'text-accent before:bg-accent-soft',
       itemLeadingIcon: 'text-accent-default'
     }
-  }],
-  defaultVariants: {
-    size: 'md'
-  }
+  }]
 })

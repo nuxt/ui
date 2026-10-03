@@ -7,8 +7,8 @@ const sizes = Object.keys(theme.variants.size)
 const loading = ref(false)
 
 const attrs = reactive({
-  variant: [theme.defaultVariants.variant],
-  size: [theme.defaultVariants.size]
+  variant: ['outline' as keyof typeof theme.variants.variant],
+  size: ['md' as keyof typeof theme.variants.size]
 })
 </script>
 

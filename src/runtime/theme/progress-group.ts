@@ -132,9 +132,5 @@ export default defineTheme({
     orientation: 'vertical',
     size: '2xl',
     class: { base: 'w-5' }
-  }],
-  defaultVariants: {
-    color: 'primary',
-    size: 'md'
-  }
+  }]
 })

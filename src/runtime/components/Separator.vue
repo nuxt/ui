@@ -68,6 +68,9 @@ import UAvatar from './Avatar.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<SeparatorProps>(), {
+  color: 'neutral',
+  size: 'xs',
+  type: 'solid',
   orientation: 'horizontal',
   position: 'center'
 })

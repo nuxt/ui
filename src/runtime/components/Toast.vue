@@ -87,7 +87,7 @@ import { ref, computed, onMounted, useTemplateRef } from 'vue'
 import { ToastRoot, ToastTitle, ToastDescription, ToastAction, ToastClose } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useGivenProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -96,6 +96,7 @@ import UButton from './Button.vue'
 import UProgress from './Progress.vue'
 
 const _props = withDefaults(defineProps<ToastProps>(), {
+  color: 'primary',
   orientation: 'vertical',
   close: true,
   progress: true
@@ -104,6 +105,9 @@ const emits = defineEmits<ToastEmits>()
 const slots = defineSlots<ToastSlots>()
 
 const props = useComponentProps('toast', _props, theme)
+// What the component passes down to the components it renders: what it was
+// given, without its own defaults, so a child keeps its own
+const givenProps = useGivenProps('toast', _props)
 
 const { t } = useLocale()
 const appConfig = useThemeConfig() as Toast['AppConfig']
@@ -172,7 +176,7 @@ defineExpose({
       <div v-if="props.orientation === 'vertical' && (props.actions?.length || !!slots.actions)" data-slot="toast-actions" :class="ui.actions({ class: props.ui?.actions })">
         <slot name="actions">
           <ToastAction v-for="(action, index) in props.actions" :key="index" :alt-text="action.label || 'Action'" as-child @click.stop>
-            <UButton size="xs" :color="props.color" v-bind="action" />
+            <UButton size="xs" :color="givenProps.color" v-bind="action" />
           </ToastAction>
         </slot>
       </div>
@@ -182,7 +186,7 @@ defineExpose({
       <template v-if="props.orientation === 'horizontal' && (props.actions?.length || !!slots.actions)">
         <slot name="actions">
           <ToastAction v-for="(action, index) in props.actions" :key="index" :alt-text="action.label || 'Action'" as-child @click.stop>
-            <UButton size="xs" :color="props.color" v-bind="action" />
+            <UButton size="xs" :color="givenProps.color" v-bind="action" />
           </ToastAction>
         </slot>
       </template>
@@ -207,7 +211,7 @@ defineExpose({
     <UProgress
       v-if="props.progress && open && remaining > 0 && totalDuration"
       :model-value="remaining / totalDuration * 100"
-      :color="props.color"
+      :color="givenProps.color"
       v-bind="(typeof props.progress === 'object' ? props.progress as Partial<ProgressProps> : {})"
       size="sm"
       data-slot="toast-progress"

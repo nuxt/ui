@@ -17,8 +17,5 @@ export default defineTheme({
         externalIcon: 'group-hover:text-accent'
       }
     }
-  },
-  defaultVariants: {
-    color: 'neutral'
   }
 })

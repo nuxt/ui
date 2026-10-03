@@ -2,7 +2,7 @@ import type { ComputedRef } from 'vue'
 import { describe, expectTypeOf, it, expect, test, beforeAll, afterAll } from 'vitest'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { useAppConfig } from '#imports'
-import { UFormField, UFieldGroup, UAvatarGroup, UTheme, UButton, UAvatar, UInput, UKbd } from '#components'
+import { UFormField, UFieldGroup, UAvatarGroup, UTheme, UButton, UAvatar, UInput, UKbd, UEmpty } from '#components'
 import type * as ui from '#build/ui'
 import type { ThemeDefaults } from '../../src/runtime/types/theme'
 import { useComponentOverrides } from '../../src/runtime/composables/useComponentProps'
@@ -68,8 +68,7 @@ describe('app.config defaultVariants', () => {
     })
 
     const root = wrapper.find('[data-slot="form-field"]')
-    // Drives both the `data-orientation` attribute and the tv class resolution,
-    // even though `orientation` isn't set in the theme's `defaultVariants`.
+    // Drives both the `data-orientation` attribute and the tv class resolution
     expect(root.attributes('data-orientation')).toBe('horizontal')
     expect(root.classes()).toContain('place-items-baseline')
   })
@@ -81,6 +80,53 @@ describe('app.config defaultVariants', () => {
 
     const root = wrapper.find('[data-slot="form-field"]')
     expect(root.attributes('data-orientation')).toBe('vertical')
+  })
+})
+
+// Every variant prop defaults in `withDefaults`, so a raw prop is never
+// `undefined`: a group and a parent tell what was passed from what is a default.
+describe('withDefaults variants', () => {
+  it('still inherits the size of a group', async () => {
+    const wrapper = await mountSuspended({
+      components: { UFormField, UFieldGroup, UAvatarGroup, UInput, UButton, UAvatar },
+      template: `
+        <UFormField label="Field" size="xl"><UInput /></UFormField>
+        <UFieldGroup size="xl"><UButton label="Button" /></UFieldGroup>
+        <UAvatarGroup size="xl"><UAvatar alt="Benjamin Canac" /></UAvatarGroup>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="input-base"]').classes()).toContain('text-base')
+    expect(wrapper.find('[data-slot="button"]').classes()).toContain('text-base')
+    expect(wrapper.find('[data-slot="avatar-group-base"]').classes()).toContain('size-10')
+  })
+
+  it('lets an explicit prop win over a group', async () => {
+    const wrapper = await mountSuspended({
+      components: { UFieldGroup, UButton },
+      template: `<UFieldGroup size="xl"><UButton label="Button" size="xs" /></UFieldGroup>`
+    })
+
+    expect(wrapper.find('[data-slot="button"]').classes()).toContain('text-xs')
+  })
+
+  it('doesn\'t pass a group\'s default down as its own value', async () => {
+    const wrapper = await mountSuspended({
+      components: { UTheme, UFieldGroup, UButton },
+      template: `<UTheme :props="{ button: { size: 'xs' } }"><UFieldGroup><UButton label="Button" /></UFieldGroup></UTheme>`
+    })
+
+    expect(wrapper.find('[data-slot="button"]').classes()).toContain('text-xs')
+  })
+
+  it('leaves a child component its own default', async () => {
+    const wrapper = await mountSuspended({
+      components: { UTheme, UEmpty },
+      template: `<UTheme :props="{ button: { size: 'xs' } }"><UEmpty title="Title" :actions="[{ label: 'Action' }]" /></UTheme>`
+    })
+
+    // Empty passes its `size` to its buttons only when it was given one
+    expect(wrapper.find('[data-slot="button"]').classes()).toContain('text-xs')
   })
 })
 

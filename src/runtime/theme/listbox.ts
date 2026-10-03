@@ -95,9 +95,5 @@ export default defineTheme({
         root: 'ring ring-inset ring-accent'
       }
     }
-  },
-  defaultVariants: {
-    color: 'primary',
-    size: 'md'
   }
 })

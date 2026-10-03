@@ -74,7 +74,13 @@ import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const _props = defineProps<CheckboxProps<T>>()
+const _props = withDefaults(defineProps<CheckboxProps<T>>(), {
+  highlight: false,
+  size: 'md',
+  color: 'primary',
+  variant: 'list',
+  indicator: 'start'
+})
 const slots = defineSlots<CheckboxSlots>()
 const emits = defineEmits<CheckboxEmits<T>>()
 

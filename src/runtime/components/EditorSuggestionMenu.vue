@@ -61,6 +61,7 @@ import UIcon from './Icon.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<EditorSuggestionMenuProps<T>>(), {
+  size: 'md',
   pluginKey: 'suggestionMenu',
   char: '/'
 })

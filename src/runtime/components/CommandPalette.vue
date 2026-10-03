@@ -235,7 +235,7 @@ import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
 import { reactivePick, createReusableTemplate, refDebounced, refThrottled } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useGivenProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { omit, get } from '../utils'
 import { highlight } from '../utils/search'
@@ -255,6 +255,7 @@ import UKbd from './Kbd.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
+  size: 'md',
   labelKey: 'label',
   descriptionKey: 'description',
   input: true,
@@ -269,6 +270,9 @@ const emits = defineEmits<CommandPaletteEmits<T>>()
 const slots = defineSlots<CommandPaletteSlots<T, G>>()
 
 const props = useComponentProps<CommandPaletteProps<G, T>>('commandPalette', _props, theme)
+// What the component passes down to the components it renders: what it was
+// given, without its own defaults, so a child keeps its own
+const givenProps = useGivenProps<CommandPaletteProps<G, T>>('commandPalette', _props)
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
@@ -597,7 +601,7 @@ function onSelect(e: Event, item: T) {
     <ListboxFilter v-if="props.input" v-model="searchTerm" as-child>
       <UInput
         variant="none"
-        :size="props.size"
+        :size="givenProps.size"
         :placeholder="placeholder"
         :autofocus="props.autofocus"
         :loading="props.loading"
@@ -612,7 +616,7 @@ function onSelect(e: Event, item: T) {
         <template v-if="history?.length && (props.back || !!slots.back)" #leading>
           <slot name="back" :ui="ui">
             <UButton
-              :size="props.size"
+              :size="givenProps.size"
               :icon="props.backIcon || appConfig.ui.icons.arrowLeft"
               color="neutral"
               variant="link"
@@ -629,7 +633,7 @@ function onSelect(e: Event, item: T) {
           <slot name="close" :ui="ui">
             <UButton
               v-if="props.close"
-              :size="props.size"
+              :size="givenProps.size"
               :icon="props.closeIcon || appConfig.ui.icons.close"
               color="neutral"
               variant="ghost"

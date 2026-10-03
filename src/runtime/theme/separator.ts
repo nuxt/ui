@@ -112,10 +112,5 @@ export default defineTheme({
     orientation: 'vertical',
     size: 'xl',
     class: { border: 'border-s-[5px]' }
-  }],
-  defaultVariants: {
-    color: 'neutral',
-    size: 'xs',
-    type: 'solid'
-  }
+  }]
 })

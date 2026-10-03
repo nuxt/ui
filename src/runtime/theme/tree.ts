@@ -69,9 +69,5 @@ export default defineTheme({
     class: {
       link: 'hover:text-strong hover:before:bg-tint transition-colors before:transition-colors'
     }
-  }],
-  defaultVariants: {
-    color: 'primary',
-    size: 'md'
-  }
+  }]
 })

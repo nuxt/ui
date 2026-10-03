@@ -9,10 +9,10 @@ const indicators = Object.keys(themeCheckbox.variants.indicator)
 const orientations = Object.keys(theme.variants.orientation)
 
 const attrs = reactive({
-  color: [theme.defaultVariants.color],
-  size: [theme.defaultVariants.size],
-  variant: [theme.defaultVariants.variant],
-  indicator: [themeCheckbox.defaultVariants.indicator]
+  color: ['primary' as keyof typeof theme.variants.color],
+  size: ['md' as keyof typeof theme.variants.size],
+  variant: ['list' as keyof typeof theme.variants.variant],
+  indicator: ['start' as keyof typeof themeCheckbox.variants.indicator]
 })
 
 const orientation = ref('vertical' as keyof typeof theme.variants.orientation)

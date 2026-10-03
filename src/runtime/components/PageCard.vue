@@ -83,6 +83,9 @@ import UIcon from './Icon.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<PageCardProps>(), {
+  variant: 'outline',
+  highlightColor: 'primary',
+  spotlightColor: 'primary',
   orientation: 'vertical'
 })
 const slots = defineSlots<PageCardSlots>()

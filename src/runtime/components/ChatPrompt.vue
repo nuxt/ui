@@ -67,6 +67,8 @@ import UTextarea from './Textarea.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<ChatPromptProps>(), {
+  color: 'primary',
+  variant: 'outline',
   as: 'form',
   autofocus: true,
   autoresize: true,

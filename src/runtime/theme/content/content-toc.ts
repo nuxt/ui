@@ -67,10 +67,5 @@ export default defineTheme({
       indicatorLine: 'absolute inset-0 bg-border',
       indicatorActive: 'absolute w-full h-(--indicator-size) translate-y-(--indicator-position) transition-[translate,height] duration-200 ease-out motion-reduce:transition-none'
     }
-  }],
-  defaultVariants: {
-    color: 'primary',
-    highlightColor: 'primary',
-    highlightVariant: 'straight'
-  }
+  }]
 })

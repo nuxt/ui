@@ -76,6 +76,7 @@ import UUser from './User.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<BlogPostProps>(), {
+  variant: 'outline',
   as: 'article',
   orientation: 'vertical'
 })

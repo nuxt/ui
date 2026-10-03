@@ -61,6 +61,7 @@ import UButton from './Button.vue'
 import UContainer from './Container.vue'
 
 const _props = withDefaults(defineProps<PageCTAProps>(), {
+  variant: 'outline',
   orientation: 'vertical',
   reverse: false
 })

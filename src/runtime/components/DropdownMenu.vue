@@ -155,6 +155,7 @@ import { tv } from '../utils/tv'
 import UDropdownMenuContent from './DropdownMenuContent.vue'
 
 const _props = withDefaults(defineProps<DropdownMenuProps<T>>(), {
+  size: 'md',
   portal: true,
   modal: true,
   externalIcon: true,

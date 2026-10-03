@@ -96,6 +96,9 @@ import UAvatar from './Avatar.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<InputTimeProps<R>>(), {
+  size: 'md',
+  color: 'primary',
+  variant: 'outline',
   autofocusDelay: 0
 })
 const emits = defineEmits<InputTimeEmits<R>>()

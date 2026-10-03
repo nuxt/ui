@@ -72,6 +72,9 @@ import { looseToNumber } from '../utils'
 import { tv } from '../utils/tv'
 
 const _props = withDefaults(defineProps<PinInputProps<T>>(), {
+  size: 'md',
+  color: 'primary',
+  variant: 'outline',
   type: 'text' as never,
   length: 5,
   autofocusDelay: 0

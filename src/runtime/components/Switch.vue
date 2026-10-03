@@ -71,7 +71,10 @@ import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const _props = defineProps<SwitchProps<T>>()
+const _props = withDefaults(defineProps<SwitchProps<T>>(), {
+  color: 'primary',
+  size: 'md'
+})
 const slots = defineSlots<SwitchSlots>()
 const emits = defineEmits<SwitchEmits<T>>()
 

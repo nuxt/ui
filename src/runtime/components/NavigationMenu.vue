@@ -252,6 +252,8 @@ import UTooltip from './Tooltip.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<NavigationMenuProps<T, K, O>>(), {
+  color: 'primary',
+  variant: 'pill',
   orientation: 'horizontal' as never,
   contentOrientation: 'horizontal',
   externalIcon: true,

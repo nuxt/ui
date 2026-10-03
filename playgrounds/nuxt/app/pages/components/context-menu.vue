@@ -93,7 +93,7 @@ const items = computed(() => [
 const sizes = Object.keys(theme.variants.size)
 
 const attrs = reactive({
-  size: [theme.defaultVariants.size]
+  size: ['md' as keyof typeof theme.variants.size]
 })
 
 defineShortcuts(extractShortcuts(items.value))

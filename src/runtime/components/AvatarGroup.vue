@@ -36,20 +36,23 @@ export interface AvatarGroupSlots {
 <script setup lang="ts">
 import { computed, provide } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useGivenProps, useComponentOverrides } from '../composables/useComponentProps'
 import { avatarGroupInjectionKey } from '../composables/useAvatarGroup'
 import { tv } from '../utils/tv'
 import UAvatar from './Avatar.vue'
 
-const _props = defineProps<AvatarGroupProps>()
+const _props = withDefaults(defineProps<AvatarGroupProps>(), {
+  size: 'md',
+  color: 'neutral'
+})
 const slots = defineSlots<AvatarGroupSlots>()
 
 const props = useComponentProps('avatarGroup', _props, theme)
 
-// What the group passes down to its children: without `theme`, the proxy leaves
-// out the `'*'` and `app.config.ui.defaultVariants` defaults, which each child
-// applies itself, so a child's own `<UTheme :props>` key still beats them
-const providedProps = useComponentProps('avatarGroup', _props)
+// What the group passes down to its children: what it was given, without its
+// own defaults or the `'*'` and `app.config.ui.defaultVariants` ones, which
+// each child applies itself, so a child's own `<UTheme :props>` key still beats them
+const providedProps = useGivenProps('avatarGroup', _props)
 
 const overrides = useComponentOverrides((ui: AvatarGroup['AppConfig']['ui']) => ui.avatarGroup)
 

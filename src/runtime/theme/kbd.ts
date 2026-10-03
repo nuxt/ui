@@ -26,10 +26,5 @@ export default defineTheme({
       md: { base: 'h-5 min-w-[20px] text-[11px]' },
       lg: { base: 'h-6 min-w-[24px] text-[12px]' }
     }
-  },
-  defaultVariants: {
-    variant: 'outline',
-    color: 'neutral',
-    size: 'md'
   }
 })

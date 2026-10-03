@@ -26,7 +26,7 @@ export interface InputDateProps<R extends boolean = false> extends UseComponentI
    */
   color?: InputDate['variants']['color']
   /**
-   * @defaultValue 'solid'
+   * @defaultValue 'outline'
    */
   variant?: InputDate['variants']['variant']
   /**
@@ -85,6 +85,9 @@ import UAvatar from './Avatar.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<InputDateProps<R>>(), {
+  size: 'md',
+  color: 'primary',
+  variant: 'outline',
   autofocusDelay: 0
 })
 const emits = defineEmits<InputDateEmits<R>>()

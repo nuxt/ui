@@ -37,7 +37,9 @@ import UIcon from '../Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const _props = defineProps<ProseCardProps>()
+const _props = withDefaults(defineProps<ProseCardProps>(), {
+  color: 'primary'
+})
 const slots = defineSlots<ProseCardSlots>()
 
 const props = useComponentProps('prose.card', _props, theme)

@@ -10,8 +10,5 @@ export default defineTheme({
       center: { base: 'text-center' },
       right: { base: 'text-end' }
     }
-  },
-  defaultVariants: {
-    align: 'left'
   }
 })

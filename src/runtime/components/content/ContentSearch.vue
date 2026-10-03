@@ -140,7 +140,7 @@ import { computed, shallowRef, useTemplateRef, watch } from 'vue'
 import { defu } from 'defu'
 import { reactivePick, refDebounced } from '@vueuse/core'
 import { useColorMode, defineShortcuts } from '#imports'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
+import { useComponentProps, useGivenProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
 import { useForwardProps } from '../../composables/useForwardProps'
 import { useContentSearch } from '../../composables/useContentSearch'
 import { useLocale } from '../../composables/useLocale'
@@ -150,6 +150,7 @@ import UModal from '../Modal.vue'
 import UCommandPalette from '../CommandPalette.vue'
 
 const _props = withDefaults(defineProps<ContentSearchProps<T>>(), {
+  size: 'md',
   shortcut: 'meta_k',
   colorMode: true,
   close: true,
@@ -159,6 +160,9 @@ const _props = withDefaults(defineProps<ContentSearchProps<T>>(), {
 const slots = defineSlots<ContentSearchSlots>()
 
 const props = useComponentProps<ContentSearchProps<T>>('contentSearch', _props, theme)
+// What the component passes down to the CommandPalette: what it was given,
+// without its own defaults, so the CommandPalette keeps its own
+const givenProps = useGivenProps<ContentSearchProps<T>>('contentSearch', _props)
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
@@ -169,7 +173,7 @@ const colorMode = useColorMode()
 const appConfig = useThemeConfig() as ContentSearch['AppConfig']
 const overrides = useComponentOverrides((ui: ContentSearch['AppConfig']['ui']) => ui.contentSearch)
 
-const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'trailingIcon', 'selectedIcon', 'childrenIcon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon', 'back', 'backIcon', 'disabled', 'highlightOnHover', 'labelKey', 'descriptionKey', 'preserveGroupOrder', 'virtualize', 'searchDelay'))
+const commandPaletteProps = useForwardProps(reactivePick(props, 'icon', 'trailingIcon', 'selectedIcon', 'childrenIcon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon', 'back', 'backIcon', 'disabled', 'highlightOnHover', 'labelKey', 'descriptionKey', 'preserveGroupOrder', 'virtualize', 'searchDelay'))
 const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal', 'unmountOnHide'))
 const inputProps = computed(() => {
   if (props.input === false) {
@@ -367,6 +371,7 @@ defineExpose({
           ref="commandPaletteRef"
           v-model:search-term="searchTerm"
           v-bind="commandPaletteProps"
+          :size="givenProps.size"
           :groups="groups"
           :fuse="fuse"
           :input="inputProps"

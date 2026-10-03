@@ -5,7 +5,7 @@ const variants = Object.keys(theme.variants.variant)
 const orientations = Object.keys(theme.variants.orientation)
 
 const attrs = reactive({
-  variant: [theme.defaultVariants.variant]
+  variant: ['outline' as keyof typeof theme.variants.variant]
 })
 
 const orientation = ref('vertical' as keyof typeof theme.variants.orientation)

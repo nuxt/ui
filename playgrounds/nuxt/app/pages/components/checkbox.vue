@@ -7,10 +7,10 @@ const sizes = Object.keys(theme.variants.size)
 const indicators = Object.keys(theme.variants.indicator)
 
 const attrs = reactive({
-  color: [theme.defaultVariants.color],
-  variant: [theme.defaultVariants.variant],
-  size: [theme.defaultVariants.size],
-  indicator: [theme.defaultVariants.indicator]
+  color: ['primary' as keyof typeof theme.variants.color],
+  variant: ['list' as keyof typeof theme.variants.variant],
+  size: ['md' as keyof typeof theme.variants.size],
+  indicator: ['start' as keyof typeof theme.variants.indicator]
 })
 
 const value = ref(true)

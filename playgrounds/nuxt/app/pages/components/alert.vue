@@ -5,8 +5,8 @@ const colors = Object.keys(theme.variants.color)
 const variants = Object.keys(theme.variants.variant)
 
 const attrs = reactive({
-  color: [theme.defaultVariants.color],
-  variant: [theme.defaultVariants.variant]
+  color: ['primary' as keyof typeof theme.variants.color],
+  variant: ['solid' as keyof typeof theme.variants.variant]
 })
 
 const actions = (color: string) => [{

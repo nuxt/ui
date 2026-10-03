@@ -5,8 +5,8 @@ const sizes = Object.keys(theme.variants.size)
 const positions = Object.keys(theme.variants.position)
 
 const attrs = reactive({
-  size: [theme.defaultVariants.size],
-  position: [theme.defaultVariants.position]
+  size: ['md' as keyof typeof theme.variants.size],
+  position: ['top-right' as keyof typeof theme.variants.position]
 })
 
 const items = [{

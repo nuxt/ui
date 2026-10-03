@@ -44,6 +44,7 @@ import UAvatar from './Avatar.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<EditorMentionMenuProps<T>>(), {
+  size: 'md',
   pluginKey: 'mentionMenu',
   char: '@'
 })

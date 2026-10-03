@@ -79,9 +79,5 @@ export default defineTheme({
         description: 'cursor-not-allowed'
       }
     }
-  },
-  defaultVariants: {
-    color: 'primary',
-    size: 'md'
   }
 })

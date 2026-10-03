@@ -66,9 +66,5 @@ export default defineTheme({
         avatar: '[&>[data-slot=avatar-icon]]:animate-spin'
       }
     }
-  },
-  defaultVariants: {
-    variant: 'outline',
-    size: 'md'
   }
 })

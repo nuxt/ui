@@ -7,9 +7,9 @@ const sizes = Object.keys(theme.variants.size)
 const variants = Object.keys(theme.variants.variant)
 
 const attrs = reactive({
-  color: [theme.defaultVariants.color],
-  size: [theme.defaultVariants.size],
-  variant: [theme.defaultVariants.variant]
+  color: ['primary' as keyof typeof theme.variants.color],
+  size: ['md' as keyof typeof theme.variants.size],
+  variant: ['outline' as keyof typeof theme.variants.variant]
 })
 
 const value = shallowRef(new Time(12, 30))

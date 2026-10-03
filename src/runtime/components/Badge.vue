@@ -50,6 +50,9 @@ import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 
 const _props = withDefaults(defineProps<BadgeProps>(), {
+  color: 'primary',
+  variant: 'solid',
+  size: 'md',
   as: 'span'
 })
 const slots = defineSlots<BadgeSlots>()

@@ -8,8 +8,8 @@ const sizes = Object.keys(theme.variants.size)
 const orientations = Object.keys(theme.variants.orientation)
 
 const attrs = reactive({
-  color: [theme.defaultVariants.color],
-  size: [theme.defaultVariants.size]
+  color: ['primary' as keyof typeof theme.variants.color],
+  size: ['md' as keyof typeof theme.variants.size]
 })
 
 const orientation = ref('horizontal' as keyof typeof theme.variants.orientation)

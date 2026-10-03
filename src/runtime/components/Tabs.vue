@@ -110,6 +110,9 @@ import UAvatar from './Avatar.vue'
 import UBadge from './Badge.vue'
 
 const _props = withDefaults(defineProps<TabsProps<T>>(), {
+  color: 'primary',
+  variant: 'pill',
+  size: 'md',
   content: true,
   defaultValue: '0',
   orientation: 'horizontal',

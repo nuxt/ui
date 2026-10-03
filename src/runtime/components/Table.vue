@@ -245,6 +245,8 @@ import { tv } from '../utils/tv'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<TableProps<T>>(), {
+  loadingColor: 'primary',
+  loadingAnimation: 'carousel',
   watchOptions: () => ({
     deep: true
   }),

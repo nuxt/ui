@@ -81,8 +81,5 @@ export default defineTheme({
     class: {
       root: 'divide-strong'
     }
-  }],
-  defaultVariants: {
-    variant: 'outline'
-  }
+  }]
 })

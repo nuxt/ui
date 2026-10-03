@@ -9,10 +9,10 @@ const layouts = Object.keys(theme.variants.layout)
 const positions = Object.keys(theme.variants.position)
 
 const attrs = reactive({
-  size: [theme.defaultVariants.size]
+  size: ['md' as keyof typeof theme.variants.size]
 })
 
-const variant = ref(theme.defaultVariants.variant)
+const variant = ref('area' as keyof typeof theme.variants.variant)
 const layout = ref('grid' as keyof typeof theme.variants.layout)
 const position = ref('outside' as keyof typeof theme.variants.position)
 

@@ -88,6 +88,8 @@ import UIcon from '../Icon.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<ContentTocProps<T>>(), {
+  color: 'primary',
+  highlightVariant: 'straight',
   as: 'nav'
 })
 const emits = defineEmits<ContentTocEmits>()

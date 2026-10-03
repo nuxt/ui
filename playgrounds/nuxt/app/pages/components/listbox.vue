@@ -5,7 +5,7 @@ import theme from '#build/ui/listbox'
 const sizes = Object.keys(theme.variants.size)
 
 const attrs = reactive({
-  size: [theme.defaultVariants.size]
+  size: ['md' as keyof typeof theme.variants.size]
 })
 
 const value = ref()

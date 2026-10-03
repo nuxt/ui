@@ -62,9 +62,5 @@ export default defineTheme({
     class: {
       item: 'hover:scale-110'
     }
-  }],
-  defaultVariants: {
-    color: 'primary',
-    size: 'md'
-  }
+  }]
 })

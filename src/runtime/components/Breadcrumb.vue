@@ -78,6 +78,7 @@ import ULinkBase from './LinkBase.vue'
 import ULink from './Link.vue'
 
 const _props = withDefaults(defineProps<BreadcrumbProps<T>>(), {
+  color: 'primary',
   as: 'nav',
   labelKey: 'label'
 })

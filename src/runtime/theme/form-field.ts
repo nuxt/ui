@@ -33,8 +33,5 @@ export default defineTheme({
         root: 'flex justify-between place-items-baseline gap-2'
       }
     }
-  },
-  defaultVariants: {
-    size: 'md'
   }
 })

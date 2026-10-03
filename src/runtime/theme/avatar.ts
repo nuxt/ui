@@ -39,9 +39,5 @@ export default defineTheme({
         root: 'size-12 text-2xl'
       }
     }
-  },
-  defaultVariants: {
-    size: 'md',
-    color: 'neutral'
   }
 })

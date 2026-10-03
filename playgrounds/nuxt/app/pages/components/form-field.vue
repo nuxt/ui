@@ -5,7 +5,7 @@ const sizes = Object.keys(theme.variants.size)
 const orientations = Object.keys(theme.variants.orientation)
 
 const attrs = reactive({
-  size: [theme.defaultVariants.size],
+  size: ['md' as keyof typeof theme.variants.size],
   orientation: ['vertical' as const]
 })
 
