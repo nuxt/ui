@@ -1418,7 +1418,7 @@ exports[`RadioGroup > renders with primary variant table highlight correctly 1`]
 exports[`RadioGroup > renders with required correctly 1`] = `
 "<div id="v-0-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="true">
   <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-1">
-    <legend data-slot="radio-group-legend" class="mb-1 block font-medium text-default text-sm after:content-['*'] after:ms-0.5 after:text-error">Legend</legend>
+    <legend data-slot="radio-group-legend" class="mb-1 block font-medium text-default text-sm after:content-['*'] after:ms-0.5 after:text-error-default">Legend</legend>
     <div data-slot="radio-group-item" class="flex items-start flex-row text-sm">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="true" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1">
           <!---->

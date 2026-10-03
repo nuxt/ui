@@ -2,7 +2,7 @@ import { defineTheme } from '../../utils/theme'
 
 export default defineTheme({
   slots: {
-    base: 'relative text-2xl text-strong font-bold mt-12 mb-6 scroll-mt-[calc(48px+45px+var(--ui-header-height))] lg:scroll-mt-[calc(48px+var(--ui-header-height))] [&>a]:rounded-sm [&>a]:outline-focus [&>a]:focus-visible:outline-3 [&>a>code]:border-dashed hover:[&>a>code]:border-primary hover:[&>a>code]:text-primary [&>a>code]:text-xl/7 [&>a>code]:font-bold [&>a>code]:transition-colors',
+    base: 'relative text-2xl text-strong font-bold mt-12 mb-6 scroll-mt-[calc(48px+45px+var(--ui-header-height))] lg:scroll-mt-[calc(48px+var(--ui-header-height))] [&>a]:rounded-sm [&>a]:outline-focus [&>a]:focus-visible:outline-3 [&>a>code]:border-dashed hover:[&>a>code]:border-primary hover:[&>a>code]:text-primary-default [&>a>code]:text-xl/7 [&>a>code]:font-bold [&>a>code]:transition-colors',
     leading: 'absolute -ms-8 top-1 opacity-0 group-hover:opacity-100 group-focus:opacity-100 p-1 bg-soft group-hover:text-primary group-focus:text-primary rounded-md hidden lg:flex text-muted transition',
     leadingIcon: 'size-4 shrink-0',
     link: 'group lg:after:absolute lg:after:inset-y-0 lg:after:-inset-s-2 lg:after:w-2'

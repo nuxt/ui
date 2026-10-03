@@ -7,7 +7,7 @@ export default defineTheme({
     base: 'relative overflow-hidden rounded-full bg-strong',
     indicator: 'rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-accent',
     status: 'flex text-faint duration-200 ease-out motion-reduce:transition-none',
-    steps: 'grid items-end text-accent',
+    steps: 'grid items-end text-accent-strong',
     step: 'truncate text-end row-start-1 col-start-1 transition-opacity ease-out'
   },
   variants: {

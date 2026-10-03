@@ -177,7 +177,7 @@ exports[`Switch > renders with required correctly 1`] = `
   <div data-slot="switch-container" class="flex items-center h-5"><button id="v-0-0" role="switch" type="button" aria-checked="false" aria-required="true" data-state="unchecked" data-slot="switch-base" class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-3 data-[state=unchecked]:bg-strong transition-[background] duration-200 ease-out data-[state=checked]:bg-accent outline-accent-focus w-9" value="on"><span data-state="unchecked" data-slot="switch-thumb" class="group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 ease-out motion-reduce:transition-none data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4 data-[state=checked]:rtl:-translate-x-4"></span></button>
     <!--v-if-->
   </div>
-  <div data-slot="switch-wrapper" class="ms-2 text-sm"><label for="v-0-0" data-slot="switch-label" class="block font-medium text-default after:content-['*'] after:ms-0.5 after:text-error">Label</label>
+  <div data-slot="switch-wrapper" class="ms-2 text-sm"><label for="v-0-0" data-slot="switch-label" class="block font-medium text-default after:content-['*'] after:ms-0.5 after:text-error-default">Label</label>
     <!--v-if-->
   </div>
 </div>"

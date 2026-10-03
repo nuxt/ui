@@ -86,14 +86,14 @@ export default defineTheme({
     color: [...colors],
     active: false,
     class: {
-      item: 'text-accent-default data-highlighted:text-accent data-highlighted:before:bg-accent-tint data-[state=open]:before:bg-accent-tint',
+      item: 'text-accent-default data-highlighted:text-accent-strong data-highlighted:before:bg-accent-tint data-[state=open]:before:bg-accent-tint',
       itemLeadingIcon: 'text-accent-faint group-data-highlighted:text-accent-default group-data-[state=open]:text-accent-default'
     }
   }, {
     color: [...colors],
     active: true,
     class: {
-      item: 'text-accent before:bg-accent-soft',
+      item: 'text-accent-strong before:bg-accent-soft',
       itemLeadingIcon: 'text-accent-default'
     }
   }],
