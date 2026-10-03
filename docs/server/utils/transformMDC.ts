@@ -6,7 +6,7 @@ import { textContent } from 'minimark'
 import { queryCollection } from '@nuxt/content/server'
 import * as theme from '../../.nuxt/ui'
 import meta from '#nuxt-component-meta'
-import { compactProps, getDefaultVariants, hasLinkPassthrough, partitionLinkProps } from './componentMeta'
+import { compactProps, hasLinkPassthrough, partitionLinkProps } from './componentMeta'
 import { fencedBlock, pipeTable } from './markdown'
 // @ts-expect-error - no types available
 import { getComponentExample } from '#component-example/nitro'
@@ -613,7 +613,7 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
     const interfaceName = isProse ? `Prose${pascalCaseName}Props` : `${pascalCaseName}Props`
     const interfaceDescription = `Props for the ${isProse ? 'Prose' : ''}${pascalCaseName} component`
 
-    const componentProps = compactProps(Object.values(componentMeta.props), getDefaultVariants(finalComponentName, isProse))
+    const componentProps = compactProps(Object.values(componentMeta.props))
 
     let interfaceCode: string
     if (pascalCaseName !== 'Link' && hasLinkPassthrough(componentProps)) {

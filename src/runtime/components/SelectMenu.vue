@@ -352,7 +352,8 @@ const ui = computed(() => tv(theme, overrides.value)({
   trailing: isTrailing.value || !!slots.trailing,
   fieldGroup: orientation.value,
   virtualize: !!props.virtualize,
-  multiple: props.multiple
+  multiple: props.multiple,
+  position: 'popper'
 }))
 
 function displayValue(value: GetItemValue<T, VK, ExcludeItem> | GetItemValue<T, VK, ExcludeItem>[]): string | undefined {

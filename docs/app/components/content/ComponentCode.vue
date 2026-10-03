@@ -304,14 +304,14 @@ ${props.slots?.default}
     }
 
     const prop = meta.value?.meta?.props?.find((prop: any) => prop.name === key)
-    const propDefault = prop && (prop.default ?? prop.tags?.find(tag => tag.name === 'defaultValue')?.text ?? componentTheme?.defaultVariants?.[prop.name])
+    const propDefault = prop && (prop.default ?? prop.tags?.find(tag => tag.name === 'defaultValue')?.text)
     const name = kebabCase(key)
 
     if (typeof value === 'boolean') {
-      if (value && (propDefault === 'true' || propDefault === '`true`' || propDefault === true)) {
+      if (value && (propDefault === 'true' || propDefault === '`true`')) {
         continue
       }
-      if (!value && (!propDefault || propDefault === 'false' || propDefault === '`false`' || propDefault === false)) {
+      if (!value && (!propDefault || propDefault === 'false' || propDefault === '`false`')) {
         continue
       }
 

@@ -151,7 +151,7 @@ Override theme **slots** on a single instance — wins over global config and va
 ```
 
 Rules for `ui` overrides:
-- **Prefer `defaultVariants`** over slot class overrides when possible (e.g., changing default button variant/size).
+- **Prefer changing a prop default** with `<UTheme :props>` over slot class overrides when possible (e.g., changing default button variant/size).
 - **Don't duplicate default classes** — check the theme file first to see what's already there.
 - Border radius defaults come from `--ui-radius`, but you can override with `rounded-*` classes in `ui` or `class` when you need a specific radius on a component.
 
@@ -171,7 +171,7 @@ These files show every available slot name, variant combination, and default cla
 
 ### Global config
 
-Override `slots`, `variants`, `compoundVariants`, and `defaultVariants` globally in `app.config.ts` (Nuxt) or `vite.config.ts` (Vue):
+Override `slots`, `variants` and `compoundVariants` globally in `app.config.ts` (Nuxt) or `vite.config.ts` (Vue):
 
 ```ts
 // Nuxt — app.config.ts
@@ -187,11 +187,7 @@ export default defineAppConfig({
         class: {
           base: 'ring-default hover:bg-strong'
         }
-      }],
-      defaultVariants: {
-        color: 'neutral',
-        variant: 'outline'
-      }
+      }]
     }
   }
 })
@@ -233,23 +229,20 @@ Override theme for a section of the component tree without affecting the rest of
 </UTheme>
 ```
 
-### Global `defaultVariants`
+### Default props
 
-Override default `size` and `color` for **all** components at once. Only components whose default is `primary` or `md` change:
+Change a component's prop defaults with `<UTheme :props>`, around the whole app in `app.vue` or around part of it. The `'*'` key overrides the default `size` and `color` of **all** components at once; only components whose default is `primary` or `md` change:
 
-```ts
-// app.config.ts
-export default defineAppConfig({
-  ui: {
-    defaultVariants: {
-      size: 'lg',
-      color: 'neutral'
-    }
-  }
-})
+```vue
+<!-- app.vue -->
+<template>
+  <UApp>
+    <UTheme :props="{ '*': { size: 'lg', color: 'neutral' }, button: { variant: 'outline' } }">
+      <NuxtPage />
+    </UTheme>
+  </UApp>
+</template>
 ```
-
-For part of the app only, use the `'*'` key of `<UTheme :props>`: `<UTheme :props="{ '*': { size: 'sm' } }">`.
 
 ### `tailwindPrefix`
 

@@ -53,7 +53,7 @@ Explicit props on a component (e.g. `<UButton color="primary" />`) always win ov
 
 ### Default variants
 
-Use the `'*'` key of `props` to change the default `color` and `size` of every descendant component. It only replaces the library defaults, `primary` and `md`, so a component with its own default keeps it: Avatar, AvatarGroup, ChatMessage, Kbd, Separator and the prose Callout and Code stay `neutral`, Separator stays `xs`, and the items of DropdownMenu and ContextMenu stay uncolored. A default you give a component in `app.config.ui.<name>.defaultVariants` counts as its own too. A value a component doesn't have is skipped, like `xl` on a Kbd, which stops at `lg`. A component's own key takes priority over `'*'`, even from a Theme further out: buttons inside `<UTheme :props="{ '*': { size: 'xs' } }">` stay `xl` when an outer Theme sets `{ button: { size: 'xl' } }`.
+Use the `'*'` key of `props` to change the default `color` and `size` of every descendant component. It only replaces the library defaults, `primary` and `md`, so a component with its own default keeps it: Avatar, AvatarGroup, ChatMessage, Kbd, Separator and the prose Callout and Code stay `neutral`, Separator stays `xs`, and the items of DropdownMenu and ContextMenu stay uncolored. A value a component doesn't have is skipped, like `xl` on a Kbd, which stops at `lg`. A component's own key takes priority over `'*'`, even from a Theme further out: buttons inside `<UTheme :props="{ '*': { size: 'xs' } }">` stay `xl` when an outer Theme sets `{ button: { size: 'xl' } }`.
 
 ::component-example
 ---
@@ -64,42 +64,31 @@ name: 'theme-default-variants-example'
 ::framework-only
 #nuxt
 :::tip
-Set `ui.defaultVariants` in your `app.config.ts` to apply them to your whole app:
+Wrap your app in `app.vue` to apply them everywhere:
 
-```ts [app.config.ts]
-export default defineAppConfig({
-  ui: {
-    defaultVariants: {
-      color: 'neutral',
-      size: 'sm'
-    }
-  }
-})
+```vue [app.vue]
+<template>
+  <UApp>
+    <UTheme :props="{ '*': { color: 'neutral', size: 'sm' } }">
+      <NuxtPage />
+    </UTheme>
+  </UApp>
+</template>
 ```
 :::
 
 #vue
 :::tip
-Set `ui.defaultVariants` in your `vite.config.ts` to apply them to your whole app:
+Wrap your app in `App.vue` to apply them everywhere:
 
-```ts [vite.config.ts]
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import ui from '@nuxt/ui/vite'
-
-export default defineConfig({
-  plugins: [
-    vue(),
-    ui({
-      ui: {
-        defaultVariants: {
-          color: 'neutral',
-          size: 'sm'
-        }
-      }
-    })
-  ]
-})
+```vue [App.vue]
+<template>
+  <UApp>
+    <UTheme :props="{ '*': { color: 'neutral', size: 'sm' } }">
+      <RouterView />
+    </UTheme>
+  </UApp>
+</template>
 ```
 :::
 ::

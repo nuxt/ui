@@ -8,7 +8,7 @@ Themes live in `src/runtime/theme/` with kebab-case naming (e.g., `button.ts`, `
 
 ## Shape
 
-A theme is `slots`, `variants` and `compoundVariants`. The default of a variant that is a prop lives in the component's `withDefaults`, not in the theme: `defaultVariants` only holds the default of a variant the component sets itself, like Select's `position`. Every component declares its elements under `slots`, including the ones made of a single element, which declare one `root` slot (`base` for a control or a prose component, see the table below).
+A theme is `slots`, `variants` and `compoundVariants`. It has no defaults: the default of a variant is the component's prop default, in its `withDefaults`, and a variant the component sets itself, like Select's `position`, is always passed to `tv()`. Every component declares its elements under `slots`, including the ones made of a single element, which declare one `root` slot (`base` for a control or a prose component, see the table below).
 
 Classes in `variants` and `compoundVariants` are always given per slot, as an object keyed by slot name. A bare string or array targets no slot: the engine ignores it and warns in development. An empty string is fine for a value that only exists to be matched in `compoundVariants` (`solid: ''`).
 
@@ -31,7 +31,7 @@ compoundVariants: [{
 
 A theme is a plain object wrapped in `defineTheme`. It never reads module options, so every class it can produce is written in the file and Tailwind finds it by scanning `src/runtime/theme` from the package, through `@source '../theme'` in `src/runtime/css/sources.css`. Components import it directly (`import theme from '../theme/accordion'`), and `#build/ui/*` re-exports it for app code.
 
-`defineTheme` checks `compoundVariants` and `defaultVariants` against `variants`, and keeps their values typed as the variant's values, which inference alone widens to `string`. A theme that builds on another uses `extendTheme(base, {...})` instead, typed after `defuFn`: its values win, a function receives the base value and returns the new one, and `compoundVariants` concatenate. Type a function's parameter from the base (`(prev: typeof input.variants.variant) => ...`) so the variant values survive.
+`defineTheme` checks `compoundVariants` against `variants`, and keeps their values typed as the variant's values, which inference alone widens to `string`. A theme that builds on another uses `extendTheme(base, {...})` instead, typed after `defuFn`: its values win, a function receives the base value and returns the new one, and `compoundVariants` concatenate. Type a function's parameter from the base (`(prev: typeof input.variants.variant) => ...`) so the variant values survive.
 
 Write each class out whole. A class built at runtime, from a template literal (`` `${hover}bg-soft` ``), a helper that maps or rewrites classes, or a string with escaped quotes (`'content-[\'*\']'`), never reaches Tailwind's scanner and gets no CSS. Use backticks for a class that holds quotes, and give a helper that rewrites classes its results as literals, like `replaceFocus` in `input.ts`. The `theme classes` test in `test/utils/theme-slots.spec.ts` fails on any class the themes resolve to that isn't spelled out in `src/runtime/theme`.
 

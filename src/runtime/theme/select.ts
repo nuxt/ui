@@ -92,8 +92,5 @@ export default extendTheme(input, {
     multiple: {
       true: ''
     }
-  },
-  defaultVariants: {
-    position: 'popper'
   }
 })

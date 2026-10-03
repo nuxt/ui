@@ -9,7 +9,7 @@ import type { ClassValue, SlotClassReplacer, TVMergeConfig, TV } from '../types/
 
 /**
  * The variants engine. It covers exactly the surface our themes use, which is
- * `slots`, `variants`, `compoundVariants` and `defaultVariants`, a theme
+ * `slots`, `variants` and `compoundVariants`, a theme
  * and the levels of overrides on top of it, and leaves out `compoundSlots` and
  * the per-call config argument, neither of which appears in any theme or call
  * site.
@@ -208,7 +208,6 @@ interface Spec {
   config: TVMergeConfig | undefined
   layers: Layer[]
   slotKeys: string[]
-  defaultVariants: Record<string, any>
   /** Lazily compiled per-slot resolvers, shared across factory rebuilds. */
   compiled: Record<string, CompiledSlot | undefined>
 }
@@ -295,16 +294,10 @@ function resolveSpec(theme: Record<string, any>, levels: readonly Record<string,
     }
   })
 
-  const defaultVariants = { ...theme.defaultVariants }
-  for (const level of levels) {
-    Object.assign(defaultVariants, level.defaultVariants)
-  }
-
   return {
     config,
     layers,
     slotKeys,
-    defaultVariants,
     compiled: Object.create(null)
   }
 }
@@ -317,7 +310,6 @@ interface CompiledVariant {
   key: string
   /** Variant value key to pre-joined class string for this slot. */
   table: Record<string, string | undefined>
-  defaultValue: any
 }
 
 interface CompiledCompound {
@@ -380,7 +372,7 @@ function warnBareClasses(source: Record<string, any>, slot: string): void {
   }
 }
 
-function compileLayer(layer: Layer, defaultVariants: Record<string, any>, slotKey: string, relevant: Set<string>): CompiledLayer {
+function compileLayer(layer: Layer, slotKey: string, relevant: Set<string>): CompiledLayer {
   const variants: CompiledVariant[] = []
   const groups = layer.variants ?? EMPTY
   for (const key in groups) {
@@ -401,7 +393,7 @@ function compileLayer(layer: Layer, defaultVariants: Record<string, any>, slotKe
     // so it stays out of both the resolve path and the cache key.
     if (hasAny) {
       relevant.add(key)
-      variants.push({ key, table, defaultValue: defaultVariants[key] })
+      variants.push({ key, table })
     }
   }
 
@@ -428,7 +420,7 @@ function compileLayer(layer: Layer, defaultVariants: Record<string, any>, slotKe
 
 function compileSlot(spec: Spec, slotKey: string): CompiledSlot {
   const relevant = new Set<string>()
-  const layers = spec.layers.map(layer => compileLayer(layer, spec.defaultVariants, slotKey, relevant))
+  const layers = spec.layers.map(layer => compileLayer(layer, slotKey, relevant))
   return {
     layers,
     relevantKeys: [...relevant],
@@ -446,20 +438,12 @@ const isNullishOrFalse = (value: any) => value === null || value === undefined |
  * Slot props are read with `in`, so an inherited enumerable key counts, the same
  * way the variant lookup below reads it through `slotProps[key]`.
  */
-function matchesCompound(compound: CompiledCompound, defaults: Record<string, any>, props: Props, slotProps: Props): boolean {
+function matchesCompound(compound: CompiledCompound, props: Props, slotProps: Props): boolean {
   for (let i = 0; i < compound.keys.length; i++) {
     const key = compound.keys[i]!
     const expected = compound.values[i]
-    // Raw spread order: defaults < props (`undefined` dropped) < slotProps
-    // (`undefined` kept).
-    let actual
-    if (slotProps && key in slotProps) {
-      actual = slotProps[key]
-    } else if (props && props[key] !== undefined) {
-      actual = props[key]
-    } else {
-      actual = defaults[key]
-    }
+    // Raw spread order: props < slotProps (`undefined` kept).
+    const actual = slotProps && key in slotProps ? slotProps[key] : props?.[key]
     if (Array.isArray(expected)) {
       if (!expected.includes(actual)) {
         return false
@@ -482,7 +466,7 @@ function variantClass(variant: CompiledVariant, props: Props, slotProps: Props):
   if (prop === null) {
     return undefined
   }
-  const key = falsyToString(prop) ?? falsyToString(variant.defaultValue)
+  const key = falsyToString(prop)
   return variant.table[(key || 'false') as string]
 }
 
@@ -501,7 +485,7 @@ function resolveSlot(spec: Spec, compiled: CompiledSlot, props: Props, slotProps
       }
     }
     for (const compound of layer.compounds) {
-      if (matchesCompound(compound, spec.defaultVariants, props, slotProps)) {
+      if (matchesCompound(compound, props, slotProps)) {
         parts.push(compound.cls)
       }
     }

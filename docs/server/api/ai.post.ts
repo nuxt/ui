@@ -63,6 +63,7 @@ export interface ApplyThemeSettings {
   customColors?: Record<string, Record<string, string>>
   cssVariables?: { light?: Record<string, string>, dark?: Record<string, string> }
   ui?: Record<string, any>
+  props?: Record<string, Record<string, any>>
 }
 
 // Written as a raw JSON Schema rather than zod on purpose: the SDK's zod conversion rewrites
@@ -112,7 +113,12 @@ const applyTheme = tool({
       },
       ui: {
         type: 'object',
-        description: 'Component-level theme overrides. MUST include ALL component customizations here so they are applied live. Keys are camelCase component names (e.g. button, badge, popover). Values have slots, defaultVariants, variants, compoundVariants.',
+        description: 'Component-level slot class overrides. MUST include ALL component customizations here so they are applied live. Keys are camelCase component names (e.g. button, badge, popover). Values have slots, variants, compoundVariants. Default variant/size/color go in `props`, not here.',
+        additionalProperties: true
+      },
+      props: {
+        type: 'object',
+        description: 'Component default prop overrides (size, variant, color), the `<UTheme :props>` shape. MUST include ALL prop-default customizations here so they are applied live. Keys are camelCase component names, or `*` for an app-wide size/color (only replaces a component whose own default is `md` / `primary`). Example: `{ button: { variant: "subtle" }, "*": { size: "sm" } }`.',
         additionalProperties: true
       }
     }
@@ -137,7 +143,7 @@ const applyPreset = tool({
 })
 
 const getComponentTheme = tool({
-  description: 'Get the theme definition (slots, variants, compoundVariants, defaultVariants) for a specific Nuxt UI component. Call this when you need to know the available slots and customization options to suggest component-level theming.',
+  description: 'Get the theme definition (slots, variants, compoundVariants) for a specific Nuxt UI component. Call this when you need to know the available slots and customization options to suggest component-level theming.',
   inputSchema: z.object({
     componentName: z.string().describe(`Component name in camelCase. Available: ${componentNames.join(', ')}`)
   }),
@@ -184,7 +190,7 @@ const getThemeGuide = tool({
   execute: async () => ({
     guide: `When users ask to change the theme, customize colors, or modify the appearance, use the \`applyTheme\` tool to apply changes live on this docs site. Only include properties that changed.
 
-When users ask for a complete theme, to change "all colors", or describe a broad aesthetic (e.g. "sakura-inspired theme"), you MUST set ALL of: primary, neutral, secondary, success, info, warning, error, radius, and fontSans. You can change the icon set (lucide, bootstrap, heroicons, iconoir, material, phosphor, pixelarticons, remix or tabler) if it really enhances the theme, but prefer keeping lucide as the default — it works well with most themes. You can optionally include component-level \`ui\` overrides for a more polished result — if you do, look up the component theme first with \`getComponentTheme\` and prefer \`defaultVariants\` (e.g. button size or variant) over slot class overrides. Create a cohesive design system, not just random colors:
+When users ask for a complete theme, to change "all colors", or describe a broad aesthetic (e.g. "sakura-inspired theme"), you MUST set ALL of: primary, neutral, secondary, success, info, warning, error, radius, and fontSans. You can change the icon set (lucide, bootstrap, heroicons, iconoir, material, phosphor, pixelarticons, remix or tabler) if it really enhances the theme, but prefer keeping lucide as the default — it works well with most themes. You can optionally include component-level overrides for a more polished result — if you do, look up the component theme first with \`getComponentTheme\` and prefer \`props\` (e.g. button size or variant) over \`ui\` slot class overrides. Create a cohesive design system, not just random colors:
 - Pick a **primary** that embodies the theme's identity. If no standard Tailwind color fits, use \`customColors\` to define a bespoke palette with all shades 50-950 as \`oklch(L% C H)\` values, tailwind v4's native format, e.g. \`oklch(62.3% 0.214 259.815)\`. This is encouraged for creative/unique themes.
 - Pick a **secondary** that complements the primary (analogous or contrasting on the color wheel). Can also be a custom palette.
 - Pick **success/info/warning/error** that feel harmonious with the palette while staying semantically meaningful (success = green-ish, error = red-ish, warning = amber/yellow-ish, info = blue/cyan-ish). You can shift hues — e.g. \`lime\` for success in a nature theme, \`rose\` for error in a warm theme — but keep them recognizable.
@@ -260,18 +266,27 @@ Semantic colors (\`--ui-primary\`, \`--ui-secondary\`, \`--ui-success\`, \`--ui-
 
 Do NOT use \`cssVariables\` for things achievable with \`primary\`, \`neutral\`, \`customColors\`, or component \`ui\` overrides.
 
-**2. Config (app.config.ts for Nuxt / vite.config.ts for Vue)**
+**2. Config (app.config.ts for Nuxt / vite.config.ts for Vue) + app.vue / App.vue**
 
-For component-level theming. Colors are NOT set here: they go in main.css through the \`@plugin "@nuxt/ui/colors"\` block. The \`ui\` object is the same for both frameworks:
+For component-level theming. Colors are NOT set here: they go in main.css through the \`@plugin "@nuxt/ui/colors"\` block. Slot class overrides go in the \`ui\` object, the same shape for both frameworks:
 \`\`\`
 ui: {
   button: {
-    slots: { base: 'font-bold' },
-    defaultVariants: { size: 'lg' }
+    slots: { base: 'font-bold' }
   }
 }
 \`\`\`
 For Nuxt, wrap in \`defineAppConfig({ ui: { ... } })\`. For Vue, pass as \`ui({ ui: { ... } })\` in the Vite plugin.
+
+Default prop values (size, variant, color) are NOT set in \`ui\`: they go through \`<UTheme :props>\`, wrapping the app in \`app.vue\` (Nuxt) or \`App.vue\` (Vue):
+\`\`\`
+<UApp>
+  <UTheme :props="{ button: { variant: 'subtle' }, '*': { size: 'sm' } }">
+    <NuxtPage />
+  </UTheme>
+</UApp>
+\`\`\`
+(\`<RouterView />\` instead of \`<NuxtPage />\` for Vue.) Only show this file when there's actually a default to set.
 
 **Color options:**
 - Standard Tailwind: red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose
@@ -316,7 +331,7 @@ When users ask about component-specific customization, use the \`getComponentThe
 
 When you want to suggest component \`ui\` overrides (e.g. customizing button styles), call \`getComponentTheme\` for that component first — never guess slot names. Only look up component themes when you actually plan to include \`ui\` overrides in the \`applyTheme\` call.
 
-Prefer \`defaultVariants\` as your first tool for component customization — changing a component's default size, variant, or color is impactful and low-risk. Only include values that actually differ from the component's defaults (use \`getComponentTheme\` to check) — never include unchanged defaults like \`size: 'md'\` if that's already the default. Only add slot class overrides when \`defaultVariants\` alone can't achieve the desired effect. When creating a complete theme, if you want to customize one component to give it personality, prioritize **button** — e.g. \`button: { defaultVariants: { variant: 'subtle' } }\`. Button is the most visible and impactful component to customize.
+Prefer \`props\` as your first tool for component customization — changing a component's default size, variant, or color is impactful and low-risk. Only include values that actually differ from the component's defaults (use \`getComponentTheme\` to check) — never include unchanged defaults like \`size: 'md'\` if that's already the default. Only add \`ui\` slot class overrides when \`props\` alone can't achieve the desired effect. When creating a complete theme, if you want to customize one component to give it personality, prioritize **button** — e.g. \`props: { button: { variant: 'subtle' } }\`. Button is the most visible and impactful component to customize.
 
 CRITICAL rules for component \`ui\` overrides:
 - NEVER use \`rounded-*\` classes in component slot overrides. Border radius is controlled globally by \`--ui-radius\` — hardcoding rounded classes would override the CSS variable and break consistency.
@@ -367,7 +382,7 @@ CRITICAL rules for component \`ui\` overrides:
 }
 \`\`\`
 
-3. Show the config code block if icons or component overrides changed (colors belong in main.css). Use **app.config.ts** for Nuxt or **vite.config.ts** for Vue (based on the user's framework). IMPORTANT: this must include ALL settings from the entire conversation — not just the current \`applyTheme\` call but also all previous calls (colors, icons with full \`ui.icons\` mapping, component \`ui\` overrides like button, popover, etc.). If a non-default icon set was chosen, the exported config MUST include the complete \`ui.icons\` object with every key mapped. Review earlier \`applyTheme\` calls in the conversation and merge everything into one complete config, without a \`colors\` key.
+3. Show the config code block if icons or component \`ui\` overrides changed (colors belong in main.css). Use **app.config.ts** for Nuxt or **vite.config.ts** for Vue (based on the user's framework). IMPORTANT: this must include ALL settings from the entire conversation — not just the current \`applyTheme\` call but also all previous calls (colors, icons with full \`ui.icons\` mapping, component \`ui\` overrides like button, popover, etc.). If a non-default icon set was chosen, the exported config MUST include the complete \`ui.icons\` object with every key mapped. Review earlier \`applyTheme\` calls in the conversation and merge everything into one complete config, without a \`colors\` key. If any \`props\` were set (default size/variant/color), also show the **app.vue** / **App.vue** snippet wrapping the app in \`<UTheme :props="...">\` with ALL accumulated \`props\` from the conversation.
 
 For **Nuxt** — \`app.config.ts\`:
 \`\`\`typescript

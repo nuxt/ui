@@ -4,7 +4,8 @@
  *
  * A theme doc is sparse, so serializing it IS the minimal export. Two style
  * axes survive on v4, and both map onto public API: default variants/sizes/
- * colors (`defaultVariants` per component) and semantic token shades
+ * colors (the `<UTheme :props>` shape, a component key to its prop defaults,
+ * plus `'*'` for the app-wide size/color) and semantic token shades
  * (`--ui-*`). Shadow and border treatments wait on v5's `--ui-shadow-*` /
  * `--ui-border-width`, the library has no semantic tokens for them yet.
  */
@@ -86,6 +87,11 @@ export interface ThemeDoc {
   style?: StyleOptions
   /** L4, per-component overrides merged into `app.config ui.<component>` */
   components?: Record<string, Record<string, unknown>>
+  /**
+   * Extra `<UTheme :props>` entries (from the AI assistant), merged over the
+   * style axis's own `styleProps(style)` output.
+   */
+  props?: Record<string, Record<string, string>>
 }
 
 export const DEFAULT_COLORS: Record<ColorAlias, string> = {
@@ -117,9 +123,9 @@ export type VariantGroup = 'buttons' | 'panels' | 'inputs'
 
 export interface StyleOptions {
   /**
-   * Default variant/size/color. `size` and `color` are app-wide and export as
-   * `ui.defaultVariants`. `variant` expands into per-component
-   * `defaultVariants` where the component supports the value, and
+   * Default variant/size/color. `size` and `color` are app-wide and export
+   * under the `'*'` key of the `<UTheme :props>` shape. `variant` expands
+   * into a prop default per component where it supports the value, and
    * `variants`/`colors` refine per group and win where set.
    */
   defaults?: { variant?: DefaultVariant, size?: DefaultSize, color?: DefaultColor, variants?: Partial<Record<VariantGroup, DefaultVariant>>, colors?: Partial<Record<VariantGroup, DefaultColor>> }
@@ -219,15 +225,6 @@ function shadeRef(ramp: string, stop: ShadeStop | number): string {
   return `var(--ui-color-${ramp}-${nearestShade(stop)})`
 }
 
-/** The `ui.<component>` override shape the studio and presets both speak. */
-interface ComponentFragment {
-  slots?: Record<string, string>
-  compoundVariants?: Array<Record<string, unknown>>
-  defaultVariants?: Record<string, string>
-}
-
-type Fragments = Record<string, ComponentFragment>
-
 /** Semantic token shades, the only CSS variables a style still emits. */
 export function styleTokens(style: StyleOptions): { light: Record<string, string>, dark: Record<string, string> } {
   const light: Record<string, string> = {}
@@ -244,15 +241,20 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
   return { light, dark }
 }
 
-/** Expand default variant/size/color choices into `ui.<component>` overrides. */
-export function styleComponents(style: StyleOptions): Fragments {
-  // App-wide defaults, only where the component supports the chosen value.
-  const defaults: Fragments = {}
+/**
+ * Expand default variant/size/color choices into the `<UTheme :props>`
+ * shape: a component key to a partial of its props, plus `'*'` for the
+ * app-wide size/color (the library only applies it where a component's own
+ * default is `md` / `primary`).
+ */
+export function styleProps(style: StyleOptions): Record<string, Record<string, string>> {
+  // App-wide variant, only where the component supports the chosen value.
+  const props: Record<string, Record<string, string>> = {}
   const variant = style.defaults?.variant
   if (variant && variant !== 'default') {
     for (const [component, supported] of Object.entries(VARIANT_SUPPORT)) {
       if (supported.includes(variant)) {
-        defaults[component] = { defaultVariants: { variant } }
+        props[component] = { variant }
       }
     }
   }
@@ -262,10 +264,7 @@ export function styleComponents(style: StyleOptions): Fragments {
     if (groupVariant && groupVariant !== 'default') {
       for (const component of components) {
         if (VARIANT_SUPPORT[component]?.includes(groupVariant)) {
-          defaults[component] = {
-            ...defaults[component],
-            defaultVariants: { ...defaults[component]?.defaultVariants, variant: groupVariant }
-          }
+          props[component] = { ...props[component], variant: groupVariant }
         }
       }
     }
@@ -277,17 +276,14 @@ export function styleComponents(style: StyleOptions): Fragments {
     if (groupColor && groupColor !== 'default') {
       for (const component of components) {
         if (COLOR_SUPPORT.includes(component)) {
-          defaults[component] = {
-            ...defaults[component],
-            defaultVariants: { ...(defaults[component] as any)?.defaultVariants, color: groupColor }
-          }
+          props[component] = { ...props[component], color: groupColor }
         }
       }
     }
   }
 
-  // Size and color go app-wide, through `ui.defaultVariants`: the library
-  // gives them to every component whose own default is `md` or `primary`.
+  // Size and color go under `'*'`, which only replaces a component whose own
+  // default is `md` / `primary`.
   const size = style.defaults?.size
   const color = style.defaults?.color
   const global = {
@@ -295,10 +291,26 @@ export function styleComponents(style: StyleOptions): Fragments {
     ...(color && color !== 'default' && color !== 'primary' ? { color } : {})
   }
   if (Object.keys(global).length) {
-    ;(defaults as Record<string, any>).defaultVariants = global
+    props['*'] = global
   }
 
-  return defaults
+  return props
+}
+
+/**
+ * Merge two `<UTheme :props>` bags so both take effect: per-component keys
+ * shallow-merge, later value wins per key.
+ */
+export function mergeProps(
+  base: Record<string, Record<string, string>> | undefined,
+  extra: Record<string, Record<string, string>> | undefined
+): Record<string, Record<string, string>> {
+  const result: Record<string, Record<string, string>> = {}
+  for (const key of new Set([...Object.keys(base || {}), ...Object.keys(extra || {})])) {
+    const merged = { ...base?.[key], ...extra?.[key] }
+    if (Object.keys(merged).length) result[key] = merged
+  }
+  return result
 }
 
 /**
@@ -324,9 +336,6 @@ export function mergeComponentOverrides(
       result[key] = a
     } else if (key === 'compoundVariants' && Array.isArray(a) && Array.isArray(b)) {
       result[key] = [...a, ...b]
-    } else if (key === 'defaultVariants') {
-      // variant NAMES, not class strings, later value replaces per key
-      result[key] = { ...a, ...b }
     } else if (typeof a === 'string' && typeof b === 'string') {
       result[key] = `${a} ${b}`
     } else if (typeof a === 'object' && typeof b === 'object' && !Array.isArray(a) && !Array.isArray(b)) {
@@ -345,10 +354,7 @@ export function mergeUi(
 ): Record<string, any> {
   const result: Record<string, any> = {}
   for (const key of new Set([...Object.keys(base || {}), ...Object.keys(extra || {})])) {
-    // the app-wide `defaultVariants` holds variant names, later value wins per key
-    const merged = key === 'defaultVariants'
-      ? { ...base?.[key], ...extra?.[key] }
-      : mergeComponentOverrides(base?.[key], extra?.[key])
+    const merged = mergeComponentOverrides(base?.[key], extra?.[key])
     if (merged && Object.keys(merged).length) result[key] = merged
   }
   return result
@@ -428,7 +434,7 @@ export function isDefaultTheme(doc: ThemeDoc): boolean {
     && !doc.font?.sans && !doc.font?.serif && !doc.font?.mono && !doc.font?.weights
     && !doc.font?.uppercase && !doc.font?.italic
     && doc.font?.letterSpacing === undefined && doc.font?.lineHeight === undefined
-    && !doc.icons && !doc.components
+    && !doc.icons && !doc.components && !doc.props
     && isDefaultStyle(doc.style)
 }
 
@@ -476,6 +482,9 @@ export function docToSettings(doc: ThemeDoc): Record<string, any> {
   // goes through the dedicated style-ui channel (applyDoc).
   if (doc.components && Object.keys(doc.components).length) {
     settings.ui = doc.components
+  }
+  if (doc.props && Object.keys(doc.props).length) {
+    settings.props = doc.props
   }
 
   return settings

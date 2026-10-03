@@ -24,8 +24,8 @@ function scopesOf(value: unknown): string {
  * Blank every class string in a theme so components render without their
  * default styles, keeping only what the user supplies via `class`, `ui` or
  * `app.config.ui`, and the color scope classes, so `color` still reaches the
- * `accent` utilities the user writes. All keys are preserved (slots stay callable, `variants` and
- * `defaultVariants` keep their values) so variant props still type-check and
+ * `accent` utilities the user writes. All keys are preserved (slots stay callable, `variants` keep
+ * their values) so variant props still type-check and
  * validate. Mirrors the engine's own shapes: a slot value is either a class
  * string/array or, inside `variants`/`compoundVariants`, an object mapping slot
  * names to classes.

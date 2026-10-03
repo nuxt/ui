@@ -124,8 +124,5 @@ export default defineTheme({
         gridRow: 'grid-cols-8',
         gridWeekDaysRow: 'grid-cols-8 [&>*:first-child]:col-start-2'
       }
-    }],
-  defaultVariants: {
-    view: 'day'
-  }
+    }]
 })
