@@ -33,6 +33,7 @@ describe('Input', () => {
     ['with loading and avatar', { props: { loading: true, avatar: { src: 'https://github.com/benjamincanac.png' } } }],
     ['with loading trailing', { props: { loading: true, trailing: true } }],
     ['with loading trailing and avatar', { props: { loading: true, trailing: true, avatar: { src: 'https://github.com/benjamincanac.png' } } }],
+    ['with loading trailing and leadingIcon', { props: { loading: true, trailing: true, leadingIcon: 'i-lucide-arrow-left' } }],
     ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-lucide-loader' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { variant } }]),
@@ -84,6 +85,16 @@ describe('Input', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with loading trailing and leadingIcon does not reserve the trailing side', async () => {
+    const wrapper = await mountSuspended(Input, {
+      props: { loading: true, trailing: true, leadingIcon: 'i-lucide-search' }
+    })
+
+    expect(wrapper.find('[data-slot="leadingIcon"]').classes()).toContain('animate-spin')
+    expect(wrapper.find('[data-slot="trailing"]').exists()).toBe(false)
+    expect(wrapper.find('input').classes()).not.toContain('pe-9')
   })
 
   test('with .lazy modifier updates on change only', async () => {
