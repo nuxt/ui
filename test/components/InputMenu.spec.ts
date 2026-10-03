@@ -1,3 +1,4 @@
+import { nextTick } from 'vue'
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
@@ -221,6 +222,18 @@ describe('InputMenu', () => {
       const emissions = wrapper.emitted('update:searchTerm')
       expect(emissions).toBeTruthy()
       expect(emissions![emissions!.length - 1]).toEqual(['Option 2'])
+    })
+
+    test('clearing searchTerm updates the input element value in autocomplete mode', async () => {
+      const wrapper = mount(InputMenu, { props: { items: ['Option 1', 'Option 2'], mode: 'autocomplete' as const, searchTerm: 'Opt' } })
+
+      await nextTick()
+      expect(wrapper.find('input').element.value).toBe('Opt')
+
+      await wrapper.setProps({ searchTerm: '' })
+      await nextTick()
+
+      expect(wrapper.find('input').element.value).toBe('')
     })
   })
 
