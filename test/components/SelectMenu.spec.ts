@@ -1,5 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
+import { h } from 'vue'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import SelectMenu from '../../src/runtime/components/SelectMenu.vue'
@@ -138,15 +139,34 @@ describe('SelectMenu', () => {
 
       }
     })
-    expect(await axe(wrapper.element, {
-      rules: {
-        // "Certain ARIA roles must contain particular children (aria-required-children)"
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
 
-        // Fix any of the following:
-        //   Element has children which are not allowed: div[tabindex]
-        'aria-required-children': { enabled: false }
+  describe('listbox semantics', () => {
+    it.each([
+      { searchInput: true, multiple: false },
+      { searchInput: false, multiple: false },
+      { searchInput: true, multiple: true },
+      { searchInput: false, multiple: true }
+    ])('keeps controls outside the listbox with %j', async (options) => {
+      const wrapper = await mountSuspended(SelectMenu, {
+        props: { ...props, ...options, placeholder: 'Select a status' },
+        slots: { 'content-top': () => h('button', 'Extra action') }
+      })
+
+      const listbox = wrapper.get('[role="listbox"]')
+      expect(wrapper.findAll('[role="listbox"]')).toHaveLength(1)
+      expect(listbox.attributes('id')).toBeTruthy()
+      expect(listbox.attributes('aria-multiselectable')).toBe(String(options.multiple))
+      expect(listbox.find('input, button').exists()).toBe(false)
+      expect(wrapper.get('[data-slot="base"]').attributes('aria-controls')).toBe(listbox.attributes('id'))
+
+      if (options.searchInput) {
+        expect(wrapper.get('input').attributes('aria-controls')).toBe(listbox.attributes('id'))
       }
-    })).toHaveNoViolations()
+
+      expect(await axe(wrapper.element)).toHaveNoViolations()
+    })
   })
 
   // Reka's `ComboboxTrigger` hard-codes `aria-label="Show popup"`, which would win over the `FormField` label.
