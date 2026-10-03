@@ -15,7 +15,7 @@ export default defineTheme({
   variants: {
     active: {
       true: {
-        link: 'text-accent font-semibold',
+        link: 'text-accent-default font-semibold',
         linkLeading: 'bg-accent ring-accent text-accent-contrast'
       },
       false: {

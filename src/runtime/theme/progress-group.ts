@@ -16,7 +16,7 @@ export default defineTheme({
     itemTrailing: 'ms-auto shrink-0 text-faint'
   },
   variants: {
-    color: colorVariant({ indicator: 'bg-accent', itemLeadingIcon: 'text-(--ui-accent)', itemLeadingDot: 'bg-accent' }),
+    color: colorVariant({ indicator: 'bg-accent', itemLeadingIcon: 'text-accent', itemLeadingDot: 'bg-accent' }),
     size: {
       '2xs': {
         status: 'text-xs',

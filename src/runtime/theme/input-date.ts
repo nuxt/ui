@@ -7,7 +7,7 @@ export default extendTheme(input, {
   slots: {
     root: () => undefined,
     base: () => 'group relative inline-flex items-center rounded-md select-none text-strong transition-colors',
-    segment: 'rounded-sm text-center outline-hidden data-placeholder:text-faint data-[segment=literal]:text-muted data-invalid:text-error data-disabled:cursor-not-allowed data-disabled:opacity-75 transition-colors',
+    segment: 'rounded-sm text-center outline-hidden data-placeholder:text-faint data-[segment=literal]:text-muted data-invalid:text-error-default data-disabled:cursor-not-allowed data-disabled:opacity-75 transition-colors',
     separatorIcon: 'shrink-0 size-4 text-muted'
   },
   variants: {

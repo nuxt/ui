@@ -6,7 +6,7 @@ export default defineTheme({
   },
   variants: {
     active: {
-      true: { base: 'text-primary' },
+      true: { base: 'text-primary-default' },
       false: { base: 'text-muted' }
     },
     disabled: {

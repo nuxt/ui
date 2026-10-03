@@ -9,13 +9,13 @@ export default defineTheme({
       // Paragraph
       '[&_p]:leading-7',
       // Links
-      '[&_a]:text-primary [&_a]:border-b [&_a]:border-transparent [&_a]:hover:border-primary [&_a]:font-medium',
+      '[&_a]:text-primary-default [&_a]:border-b [&_a]:border-transparent [&_a]:hover:border-primary [&_a]:font-medium',
       '[&_a]:transition-colors',
       // Code inside links
-      '[&_a>code]:border-dashed [&_a:hover>code]:border-primary [&_a:hover>code]:text-primary',
+      '[&_a>code]:border-dashed [&_a:hover>code]:border-primary [&_a:hover>code]:text-primary-default',
       '[&_a>code]:transition-colors',
       // Mentions
-      '[&_.mention]:text-primary [&_.mention]:font-medium',
+      '[&_.mention]:text-primary-default [&_.mention]:font-medium',
       // Headings - shared styles
       '[&_:is(h1,h2,h3,h4,h5,h6)]:text-strong [&_:is(h1,h2,h3,h4,h5,h6)]:font-bold',
       // Headings - unique styles

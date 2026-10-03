@@ -27,7 +27,7 @@ export default defineTheme({
     highlightColor: colorVariant({ indicatorActive: '' }),
     active: {
       true: {
-        link: 'text-accent'
+        link: 'text-accent-default'
       },
       false: {
         link: 'text-muted hover:text-default transition-colors'

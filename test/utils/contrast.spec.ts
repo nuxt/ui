@@ -151,8 +151,8 @@ describe.each(['light', 'dark'] as const)('contrast in %s mode', (mode) => {
       expect(contrast(over(text(), page), page)).toBeGreaterThanOrEqual(AA)
     })
 
-    it(`\`text-${color}\` on the page`, () => {
-      const utility = themeValue(`--text-color-${color}`) ?? themeValue(`--color-${color}`)!
+    it(`\`text-${color}-default\` on the page`, () => {
+      const utility = themeValue(`--text-color-${color}-default`)!
       expect(contrast(over(resolve(utility, vars, color)!, page), page)).toBeGreaterThanOrEqual(AA)
     })
 
