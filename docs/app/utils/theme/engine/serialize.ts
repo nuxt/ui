@@ -13,9 +13,10 @@ import {
   THEME_DEFAULTS,
   LIBRARY_TOKEN_DEFAULTS,
   tokenShadeDefaults,
-  styleComponents,
+  styleProps,
   styleTokens,
-  mergeUi
+  mergeUi,
+  mergeProps
 } from './types'
 import json5 from 'json5'
 import { themeIcons } from '../icons'
@@ -181,9 +182,9 @@ export function generateConfig(doc: ThemeDoc, framework: string = 'nuxt', _optio
     config.ui.icons = themeIcons[doc.icons as keyof typeof themeIcons]
   }
 
-  // Explicit components merge INTO the style expansion (classes concatenate,
-  // explicit last), a spread would drop one side wholesale.
-  const componentOverrides = mergeUi(doc.style ? styleComponents(doc.style) : undefined, doc.components)
+  // Default variant/size/color now ride the `<UTheme :props>` snippet
+  // (generateApp), so only explicit slots/compoundVariants land in `ui`.
+  const componentOverrides = mergeUi(undefined, doc.components)
   if (Object.keys(componentOverrides).length) {
     config.ui = config.ui || {}
     Object.assign(config.ui, componentOverrides)
@@ -210,4 +211,40 @@ export function generateConfig(doc: ThemeDoc, framework: string = 'nuxt', _optio
   }
 
   return `export default defineAppConfig(${configString})`
+}
+
+/**
+ * The `app.vue` / `App.vue` snippet wrapping the app in the exported default
+ * variant/size/color, empty when the doc carries none: most exports never
+ * touch a default, and the modal only shows this file when there's something
+ * to show.
+ */
+export function generateApp(doc: ThemeDoc, framework: string = 'nuxt'): string {
+  const props = mergeProps(doc.style ? styleProps(doc.style) : undefined, doc.props)
+  if (!Object.keys(props).length) return ''
+
+  const propsString = toObjectSource(props)
+  const inline = propsString.split('\n').map((line, i) => i === 0 ? line : '    ' + line).join('\n')
+
+  if (framework === 'vue') {
+    return [
+      '<template>',
+      '  <UApp>',
+      `    <UTheme :props="${inline}">`,
+      '      <RouterView />',
+      '    </UTheme>',
+      '  </UApp>',
+      '</template>'
+    ].join('\n')
+  }
+
+  return [
+    '<template>',
+    '  <UApp>',
+    `    <UTheme :props="${inline}">`,
+    '      <NuxtPage />',
+    '    </UTheme>',
+    '  </UApp>',
+    '</template>'
+  ].join('\n')
 }

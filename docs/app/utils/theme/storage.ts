@@ -32,6 +32,8 @@ export interface StoredTheme {
   colors?: Record<string, string>
   /** Explicit per-component overrides, from presets, imports or the AI chat. */
   components?: Record<string, Record<string, unknown>>
+  /** Extra `<UTheme :props>` entries from the AI chat, merged over `style`'s own. */
+  props?: Record<string, Record<string, string>>
   customColors?: Record<string, Record<string, string>>
   cssVariables?: { light?: Record<string, string>, dark?: Record<string, string> }
   style?: StyleOptions
@@ -200,6 +202,7 @@ export function snapshotStoredTheme(): StoredTheme {
     icons: unless(useState<string>('nuxt-ui-icons').value, THEME_DEFAULTS.icons),
     colors: filled(extras?.colors),
     components: filled(extras?.ui),
+    props: filled(extras?.props),
     customColors: filled(useState<StoredTheme['customColors']>('nuxt-ui-custom-colors').value),
     cssVariables: filled(cssVariables?.light) || filled(cssVariables?.dark) ? cssVariables : undefined,
     style: filled(useState<StoredTheme['style']>(THEME_STATE_KEYS.stylePrefs).value),

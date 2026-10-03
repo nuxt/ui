@@ -7,17 +7,6 @@ const componentsDir = join(process.cwd(), 'src/runtime/components')
 const themes = import.meta.glob<Record<string, any>>('../../src/runtime/theme/**/*.ts', { eager: true, import: 'default' })
 
 /**
- * Variants a component sets itself, with no prop to hold their default, which
- * stays in the theme's `defaultVariants`.
- */
-const internal: Record<string, string[]> = {
-  'Calendar.vue': ['view'],
-  'Editor.vue': ['placeholderMode'],
-  'Select.vue': ['position'],
-  'SelectMenu.vue': ['position']
-}
-
-/**
  * A child that renders part of the same component, from the same theme and
  * the same `<UTheme :props>` key, so it takes the resolved value.
  */
@@ -65,23 +54,21 @@ function defaults(source: string): Record<string, string> {
 /**
  * The default of a prop lives in the component's `withDefaults`, the theme
  * variants included, the one place `useComponentProps`, `tv()` and the
- * template's data attributes all read. A theme only defaults a variant the
- * component sets itself.
+ * template's data attributes all read. Themes have no `defaultVariants`.
  */
 describe('variant defaults', () => {
   it('finds the components', () => {
     expect(components.length).toBeGreaterThan(100)
   })
 
-  it.each(components)('%s defaults its variant props in withDefaults', (name, _, theme) => {
-    const keys = Object.keys(theme.defaultVariants ?? {}).filter(key => !internal[name]?.includes(key))
-    expect(keys, 'move these from the theme\'s `defaultVariants` to the component\'s `withDefaults`').toEqual([])
-  })
-
   // A prop now always holds a value, its `withDefaults` one when the parent
   // passed none, so passing `props.size` to a child would hand it that default
   // as an explicit prop, over the child's own default and its `<UTheme :props>`
   // key. What a component passes down comes from `useGivenProps`.
+  it.each(Object.entries(themes).filter(([, theme]) => theme?.slots))('%s declares no defaultVariants', (_, theme) => {
+    expect(theme.defaultVariants, 'a variant prop defaults in the component\'s `withDefaults`').toBeUndefined()
+  })
+
   it.each(components)('%s passes what it was given to its children', (name, source, theme) => {
     const keys = Object.keys(defaults(source)).filter(key => Object.keys(theme.variants?.[key] ?? {}).some(value => value !== 'true' && value !== 'false'))
     const template = source.slice(source.indexOf('<template>'))

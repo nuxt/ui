@@ -21,11 +21,7 @@ describe('applyUnstyled', () => {
     compoundVariants: [
       { color: 'primary', variant: 'solid', class: 'bg-primary' },
       { size: 'md', class: { base: 'gap-1.5' } }
-    ],
-    defaultVariants: {
-      color: 'primary',
-      size: 'md'
-    }
+    ]
   })
 
   it('keeps the color scope classes', () => {
@@ -87,9 +83,8 @@ describe('applyUnstyled', () => {
     ])
   })
 
-  it('preserves defaultVariants and variant keys so props still validate', () => {
+  it('preserves variant keys so props still validate', () => {
     const result = applyUnstyled(theme(), true)
-    expect(result.defaultVariants).toEqual({ color: 'primary', size: 'md' })
     expect(Object.keys(result.variants)).toEqual(['color', 'size'])
     expect(Object.keys(result.variants.color)).toEqual(['primary', 'neutral'])
   })
@@ -123,10 +118,7 @@ describe('applyPrefix', () => {
     },
     compoundVariants: [
       { color: ['primary', 'neutral'], variant: 'solid', class: { base: 'shadow-xs' } }
-    ],
-    defaultVariants: {
-      color: 'primary'
-    }
+    ]
   })
 
   it('prefixes the slot, variant and compound classes', () => {
@@ -137,11 +129,10 @@ describe('applyPrefix', () => {
     expect(result.compoundVariants[0].class).toEqual({ base: 'tw:shadow-xs' })
   })
 
-  it('keeps the compound matchers and default variants', () => {
+  it('keeps the compound matchers', () => {
     const result = applyPrefix(theme(), 'tw')
 
     expect(result.compoundVariants[0]).toMatchObject({ color: ['primary', 'neutral'], variant: 'solid' })
-    expect(result.defaultVariants).toEqual({ color: 'primary' })
   })
 
   it('does not mutate the input theme', () => {

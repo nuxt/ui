@@ -2,9 +2,9 @@ import { defuFn } from 'defu'
 import type { DefinedTheme, TVTheme, TVThemeCheck } from '../types/tv'
 
 /**
- * Declare a component theme. Checks its `compoundVariants` and `defaultVariants`
- * against its `variants`, and keeps their values literal, which inference alone
- * widens to `string`, so the theme can be passed to `tv()` as is.
+ * Declare a component theme. Checks its `compoundVariants` against its
+ * `variants`, and keeps their values literal, which inference alone widens to
+ * `string`, so the theme can be passed to `tv()` as is.
  * @internal
  */
 export function defineTheme<T extends TVTheme>(theme: T & TVThemeCheck<T>): DefinedTheme<T> {

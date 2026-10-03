@@ -1,6 +1,5 @@
 import { camelCase, upperFirst } from 'scule'
 import { linkKeys } from '../../../src/runtime/utils/link-keys'
-import * as theme from '../../.nuxt/ui'
 
 export interface ComponentMetaTag {
   name: string
@@ -20,10 +19,9 @@ export interface CompactProp {
  * Compacts a `vue-component-meta` prop entry into a lean shape without the
  * recursive `schema` field, which can expand to megabytes for generic props.
  * Mirrors the display logic of `docs/app/components/content/ComponentProps.vue`,
- * with stricter fallbacks: an explicit `@defaultValue` tag wins even when empty
- * and falsy theme defaults are surfaced.
+ * with a stricter fallback: an explicit `@defaultValue` tag wins even when empty.
  */
-export function compactProp(prop: any, defaultVariants?: Record<string, any>): CompactProp {
+export function compactProp(prop: any): CompactProp {
   const rawType = prop.type
     ? Array.isArray(prop.type)
       ? prop.type.map((t: any) => t.name || t).join(' | ')
@@ -45,9 +43,6 @@ export function compactProp(prop: any, defaultVariants?: Record<string, any>): C
     const tag = prop.tags?.find((tag: ComponentMetaTag) => tag.name === 'defaultValue')?.text
     if (tag !== undefined) {
       defaultValue = tag
-    } else if (defaultVariants && prop.name in defaultVariants) {
-      const variant = defaultVariants[prop.name]
-      defaultValue = typeof variant === 'string' ? `'${variant}'` : variant
     }
   }
 
@@ -63,12 +58,8 @@ export function compactProp(prop: any, defaultVariants?: Record<string, any>): C
   }
 }
 
-export function compactProps(props: any[] | undefined, defaultVariants?: Record<string, any>): CompactProp[] {
-  return (props ?? []).map(prop => compactProp(prop, defaultVariants))
-}
-
-export function getDefaultVariants(camelName: string, prose = false): Record<string, any> | undefined {
-  return ((prose ? (theme as Record<string, any>).prose : theme) as Record<string, any>)[camelName]?.defaultVariants
+export function compactProps(props: any[] | undefined): CompactProp[] {
+  return (props ?? []).map(prop => compactProp(prop))
 }
 
 /**
@@ -90,7 +81,7 @@ export async function fetchComponentMetadata(normalizedName: string, { full = fa
   return {
     pascalName: metadata.pascalName,
     kebabName: metadata.kebabName,
-    props: full ? metadata.meta.props : compactProps(metadata.meta.props, getDefaultVariants(camelName)),
+    props: full ? metadata.meta.props : compactProps(metadata.meta.props),
     slots: metadata.meta.slots,
     emits: metadata.meta.events
   }

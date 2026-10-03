@@ -88,7 +88,8 @@ type VariantPropValue = string | number | boolean | null | undefined
 
 /**
  * A theme, the shape `src/runtime/theme/*` produces and `#build/ui/*` exports: classes
- * per slot, the variants that switch them, and what they default to.
+ * per slot and the variants that switch them. A variant's default is the
+ * component's prop default.
  */
 export type TVTheme = {
   slots?: TVSlots
@@ -96,7 +97,6 @@ export type TVTheme = {
   // empty placeholder of a value that contributes nothing widens to `string`.
   variants?: Record<string, Record<string, string | NoClass | Record<string, ClassValue>>>
   compoundVariants?: Record<string, VariantPropValue | readonly VariantPropValue[] | Record<string, ClassValue>>[]
-  defaultVariants?: Record<string, VariantPropValue>
 }
 
 /** The theme's variant groups, `{}` when it declares none. */
@@ -135,22 +135,14 @@ export type TVCompoundVariants<T> = Array<
 >
 
 /**
- * `defaultVariants`, the value each variant falls back to.
- */
-export type TVDefaultVariants<T> = {
-  [K in keyof VariantsOf<T>]?: VariantValue<T, K>
-}
-
-/**
  * What `app.config.ui.<c>` may say on top of a theme: classes to merge or a
- * replacer per slot, and variants, compound variants and defaults that extend
- * the theme's own.
+ * replacer per slot, and variants and compound variants that extend the
+ * theme's own.
  */
 export type TVOverrides<T> = {
   slots?: { [K in keyof SlotsOf<T>]?: SlotClass }
   variants?: TVVariants<T>
   compoundVariants?: TVCompoundVariants<T>
-  defaultVariants?: TVDefaultVariants<T>
 }
 
 /**
@@ -186,25 +178,17 @@ type TVSlotFunctions<T> = {
 export type TVReturnType<T> = (props?: TVVariantProps<T>) => TVSlotFunctions<T>
 
 /**
- * The theme's own `compoundVariants` and `defaultVariants` checked against its
- * `variants`, the part of a literal theme inference alone doesn't validate.
+ * The theme's own `compoundVariants` checked against its `variants`, the part
+ * of a literal theme inference alone doesn't validate.
  */
 export type TVThemeCheck<T> = {
   compoundVariants?: TVCompoundVariants<T>
-  defaultVariants?: TVDefaultVariants<T>
 }
 
 /**
- * A theme as `defineTheme` returns it: checked, and with each default typed as
- * any value its variant accepts, the way app code reads it
- * (`reactive({ color: [theme.defaultVariants.color] })`).
+ * A theme as `defineTheme` returns it, checked.
  */
-export type DefinedTheme<T> = {
-  [K in keyof T]: K extends 'defaultVariants'
-    // A default the variant doesn't accept keeps its own type, so `tv()` still rejects it
-    ? { [D in keyof T[K]]: D extends keyof VariantsOf<T> ? T[K][D] extends VariantValue<T, D> ? VariantValue<T, D> : T[K][D] : T[K][D] }
-    : T[K]
-}
+export type DefinedTheme<T> = T
 
 /**
  * A component's resolved overrides, as `useComponentOverrides` returns them:

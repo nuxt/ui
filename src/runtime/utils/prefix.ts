@@ -37,8 +37,8 @@ function prefixValue(value: unknown, prefix: string): unknown {
 /**
  * Prefix every class in a theme. Mirrors `applyUnstyled`: classes live in
  * `slots`, in the `variants` values and in each `compoundVariants` entry's
- * `class`, while the variant values the compound entries match and
- * `defaultVariants` stay as they are.
+ * `class`, while the variant values the compound entries match stay as they
+ * are.
  * @param theme - The theme object
  * @param prefix - The Tailwind prefix (e.g. `tw`)
  * @returns A prefixed copy of the theme

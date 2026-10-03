@@ -12,8 +12,7 @@ describe('tv with a Tailwind prefix', () => {
     variants: {
       size: { md: { base: 'text-sm' }, lg: { base: 'text-base' } }
     },
-    compoundVariants: [{ size: 'lg', class: { label: 'font-bold' } }],
-    defaultVariants: { size: 'md' }
+    compoundVariants: [{ size: 'lg', class: { label: 'font-bold' } }]
   }
 
   it('prefixes the theme classes', () => {
@@ -24,7 +23,7 @@ describe('tv with a Tailwind prefix', () => {
   })
 
   it('leaves the overrides and the call-site classes as written', () => {
-    const ui = tvt(theme, withPrefix({ slots: { base: 'tw:px-4' } }))()
+    const ui = tvt(theme, withPrefix({ slots: { base: 'tw:px-4' } }))({ size: 'md' })
 
     expect(ui.base!({ class: 'tw:rounded-full' })).toBe('tw:inline-flex tw:text-sm tw:px-4 tw:rounded-full')
   })
@@ -47,6 +46,6 @@ describe('tv with a Tailwind prefix', () => {
   })
 
   it('leaves plain overrides unprefixed', () => {
-    expect(tvt(theme)().base!()).toBe('inline-flex px-2 text-sm')
+    expect(tvt(theme)({ size: 'md' }).base!()).toBe('inline-flex px-2 text-sm')
   })
 })

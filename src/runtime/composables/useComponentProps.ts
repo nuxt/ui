@@ -109,26 +109,24 @@ function warnUndetected(name: string) {
 
 /**
  * Resolve a component's props with the priority chain:
- *   explicit prop > nearest UTheme > nearest UTheme `'*'`
- *     > app.config.ui.<name>.defaultVariants > app.config.ui.defaultVariants
- *     > withDefaults
+ *   explicit prop > nearest UTheme > nearest UTheme `'*'` > withDefaults
  *
  * The returned proxy transparently reads from `props`, falling through to the
- * injected `ThemeContext` and `app.config.ui.<name>.defaultVariants` for
- * defaults, then to the component's `withDefaults`, which holds the default of
+ * `<UTheme :props>` of the injected `ThemeContext` for defaults, then to the
+ * component's `withDefaults`, which holds the default of
  * every prop, the theme variants included. So the proxy has the resolved value
  * of every variant: the one `tv()` picks the classes with and the one a
  * template binds to a data attribute. The `ui` prop holds the component's own
  * `ui` only, and `class` merges a `<UTheme :props>` class under the
  * component's own.
  */
-export function useComponentProps<T extends object>(name: string, props: T, theme?: { defaultVariants?: Record<string, unknown>, [key: string]: unknown }): T {
+export function useComponentProps<T extends object>(name: string, props: T, theme?: { [key: string]: unknown }): T {
   return createPropsProxy(name, props, theme, true)
 }
 
 /**
- * What a component was given, for what it passes down: an explicit prop, the
- * nearest `<UTheme :props>` key or `app.config.ui.<name>.defaultVariants`. It
+ * What a component was given, for what it passes down: an explicit prop or the
+ * nearest `<UTheme :props>` key. It
  * leaves out the component's own `withDefaults` and the `'*'` defaults, so a
  * child it renders, or a child of the group it provides to, keeps its own
  * defaults and its own `<UTheme :props>` key.
@@ -138,7 +136,7 @@ export function useGivenProps<T extends object>(name: string, props: T): T {
   return createPropsProxy(name, props, undefined, false)
 }
 
-function createPropsProxy<T extends object>(name: string, props: T, theme: { defaultVariants?: Record<string, unknown>, [key: string]: unknown } | undefined, own: boolean): T {
+function createPropsProxy<T extends object>(name: string, props: T, theme: { [key: string]: unknown } | undefined, own: boolean): T {
   const vm = getCurrentInstance()
   const { defaults, config } = injectThemeContext()
 
@@ -146,15 +144,14 @@ function createPropsProxy<T extends object>(name: string, props: T, theme: { def
     warnUndetected(name)
   }
 
-  // A `'*'` value, only for a prop whose own default is the library-wide one:
-  // the component's `app.config.ui.<name>.defaultVariants`, or else the one it
-  // declares in `withDefaults`
+  // A `'*'` value, only for a prop whose own default, the one it declares in
+  // `withDefaults`, is the library-wide one
   function globalDefault(entry: Record<string, any> | undefined, prop: string) {
     const base = GLOBAL_DEFAULTS[prop]
     const value = entry?.[prop]
     if (!own || !base || value === undefined) return undefined
+    if ((vm?.type as any)?.props?.[prop]?.default !== base) return undefined
     const appConfigEntry = name.includes('.') ? get(config.value, name) : config.value[name]
-    if (appConfigEntry?.defaultVariants?.[prop] !== undefined || (vm?.type as any)?.props?.[prop]?.default !== base) return undefined
     // A value the component doesn't have, like `xl` on a Kbd, leaves its default
     const values = (theme?.variants as Record<string, Record<string, unknown>> | undefined)?.[prop]
     if (values && !(value in values) && !(value in (appConfigEntry?.variants?.[prop] ?? {}))) return undefined
@@ -199,15 +196,6 @@ function createPropsProxy<T extends object>(name: string, props: T, theme: { def
 
       const themeGlobalValue = globalDefault(defaults.value['*'], prop)
       if (themeGlobalValue !== undefined) return themeGlobalValue
-
-      // A global `app.config.ui.<name>.defaultVariants` value takes priority over
-      // the component's `withDefaults` fallback
-      const appConfigEntry = name.includes('.') ? get(config.value, name) : config.value[name]
-      const appConfigValue = appConfigEntry?.defaultVariants?.[prop]
-      if (appConfigValue !== undefined) return appConfigValue
-
-      const appConfigGlobalValue = globalDefault(config.value.defaultVariants, prop)
-      if (appConfigGlobalValue !== undefined) return appConfigGlobalValue
 
       // Only fall back to `raw` when `withDefaults` set an explicit default for
       // this prop. Otherwise Vue's runtime would auto-cast unset Boolean props

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { upperFirst, camelCase } from 'scule'
 import type { ComponentMeta } from 'vue-component-meta'
-import * as theme from '#build/ui'
 
 const props = withDefaults(defineProps<{
   slug?: string
@@ -42,7 +41,6 @@ const route = useRoute()
 const camelName = camelCase(props.slug ?? route.path.split('/').pop() ?? '')
 const componentName = props.prose ? `Prose${upperFirst(camelName)}` : `U${upperFirst(camelName)}`
 
-const componentTheme = ((props.prose ? theme.prose : theme) as any)[camelName]
 const { data: meta } = await useFetchComponentMeta(componentName as any)
 
 const metaProps: ComputedRef<ComponentMeta['props']> = computed(() => {
@@ -59,8 +57,6 @@ const metaProps: ComputedRef<ComponentMeta['props']> = computed(() => {
       const tag = prop.tags?.find(tag => tag.name === 'defaultValue')?.text
       if (tag) {
         prop.default = tag
-      } else if (componentTheme?.defaultVariants?.[prop.name]) {
-        prop.default = typeof componentTheme?.defaultVariants?.[prop.name] === 'string' ? `'${componentTheme?.defaultVariants?.[prop.name]}'` : componentTheme?.defaultVariants?.[prop.name]
       }
     }
 

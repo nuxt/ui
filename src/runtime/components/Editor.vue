@@ -124,7 +124,7 @@ const overrides = useComponentOverrides((ui: Editor['AppConfig']['ui']) => ui.ed
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
-  placeholderMode: typeof props.placeholder === 'object' ? props.placeholder.mode : undefined
+  placeholderMode: (typeof props.placeholder === 'object' ? props.placeholder.mode : undefined) ?? 'everyLine'
 }))
 
 const rootProps = useForwardProps(reactiveOmit(props, 'starterKit', 'extensions', 'editorProps', 'contentType', 'class', 'placeholder', 'markdown', 'image', 'mention', 'handlers'))

@@ -22,8 +22,7 @@ describe('tv class replace', () => {
       color: { primary: { base: 'bg-primary text-contrast' } },
       size: { md: { base: 'px-2.5 text-sm' } }
     },
-    compoundVariants: [{ color: 'primary', size: 'md', class: { base: 'gap-1.5' } }],
-    defaultVariants: { color: 'primary', size: 'md' }
+    compoundVariants: [{ color: 'primary', size: 'md', class: { base: 'gap-1.5' } }]
   }
 
   const build = () => tvt(theme)({ color: 'primary', size: 'md' })
@@ -234,14 +233,6 @@ describe('tv slot memoization', () => {
     expect(ui.base({ active: true, class: 'p-2' })).toBe(ui.base({ class: 'p-2', active: true }))
   })
 
-  it('does not share entries between NaN and null variant values', () => {
-    const ui = tvt(theme, { defaultVariants: { active: true } })()
-    // Both serialize to `"null"`, but tv resolves `null` to the default variant
-    // while NaN falls through the `key || "false"` lookup.
-    expect(ui.base({ active: Number.NaN })).toContain('font-light')
-    expect(ui.base({ active: null })).toContain('font-bold')
-  })
-
   it('does not poison the cache through clsx object classes', () => {
     const ui = build()
     // Object classes bail out of the memo but still resolve...
@@ -381,16 +372,15 @@ describe('tv variant merging', () => {
       size: {
         md: { base: 'text-base', label: 'leading-5' }
       }
-    },
-    defaultVariants: { size: 'md' }
+    }
   }
 
   it('ignores a class given outside a slot object', () => {
     // Classes are always per slot: a bare string or array targets nothing, and
     // must not leak the per-slot object it overrides as `"[object Object]"`.
-    expect(tvt(theme, { variants: { size: { md: 'text-lg' } } })().base()).toBe('inline-flex text-base')
-    expect(tvt(theme, { variants: { size: { md: ['text-lg'] } } })().base()).toBe('inline-flex text-base')
-    expect(tvt(theme, { compoundVariants: [{ size: 'md', class: 'text-lg' }] })().base()).toBe('inline-flex text-base')
+    expect(tvt(theme, { variants: { size: { md: 'text-lg' } } })({ size: 'md' }).base()).toBe('inline-flex text-base')
+    expect(tvt(theme, { variants: { size: { md: ['text-lg'] } } })({ size: 'md' }).base()).toBe('inline-flex text-base')
+    expect(tvt(theme, { compoundVariants: [{ size: 'md', class: 'text-lg' }] })({ size: 'md' }).base()).toBe('inline-flex text-base')
   })
 
   it('warns once in development about a class given outside a slot object', () => {
@@ -410,7 +400,7 @@ describe('tv variant merging', () => {
   })
 
   it('merges two per-slot values slot by slot', () => {
-    const ui = tvt(theme, { variants: { size: { md: { label: 'font-medium' } } } })()
+    const ui = tvt(theme, { variants: { size: { md: { label: 'font-medium' } } } })({ size: 'md' })
     expect(ui.base()).toBe('inline-flex text-base')
     expect(ui.label()).toBe('truncate leading-5 font-medium')
   })
@@ -445,8 +435,7 @@ const button = {
       true: { base: 'w-full' }
     }
   },
-  compoundVariants: [{ size: 'sm' as const, block: true, class: { base: 'gap-1' } }],
-  defaultVariants: { size: 'md' as const }
+  compoundVariants: [{ size: 'sm' as const, block: true, class: { base: 'gap-1' } }]
 }
 
 describe('tv types', () => {
@@ -501,16 +490,6 @@ describe('tv types', () => {
 
     expectTypeOf(component).parameter(0).exclude<undefined>().toEqualTypeOf<VariantProps<typeof component>>()
     expectTypeOf<VariantProps<typeof component>>().toEqualTypeOf<{ size?: 'sm' | 'md', block?: boolean }>()
-  })
-
-  it('checks defaultVariants against the declared variants', () => {
-    tv(button, { defaultVariants: { size: 'sm', block: false } })
-    // @ts-expect-error `lg` is not a declared size
-    tv(button, { defaultVariants: { size: 'lg' } })
-    // The theme's own defaults too, which inference alone would let through.
-    tv({ slots: { base: '' }, variants: { size: { sm: { base: 'text-sm' } } }, defaultVariants: { size: 'sm' } })
-    // @ts-expect-error `lg` is not a declared size
-    tv({ slots: { base: '' }, variants: { size: { sm: { base: 'text-sm' } } }, defaultVariants: { size: 'lg' } })
   })
 
   it('accepts one value or several in compoundVariants', () => {
@@ -569,19 +548,18 @@ describe('tv override layers', () => {
       square: { true: '' },
       tone: { quiet: { label: 'text-faint' } }
     },
-    compoundVariants: [{ size: 'md', square: true, class: { base: 'p-1.5' } }],
-    defaultVariants: { size: 'md', tone: 'quiet' }
+    compoundVariants: [{ size: 'md', square: true, class: { base: 'p-1.5' } }]
   }
 
   it('lets an override slot class win over the theme variants', () => {
     // `label` loses to the `tone` variant when it rides beneath it.
     expect(tvt(theme, { slots: { label: 'text-inherit' } })().label()).toBe('text-inherit')
-    expect(tvt(theme, { slots: { base: 'p-4' } })().base()).toBe('inline-flex text-sm p-4')
+    expect(tvt(theme, { slots: { base: 'p-4' } })({ size: 'md' }).base()).toBe('inline-flex text-sm p-4')
   })
 
   it('lets an override slot class win over the theme compounds', () => {
     // An override wins over the whole theme, whether a rule is a variant or a compound
-    expect(tvt(theme, { slots: { base: 'p-4' } })({ square: true }).base()).toBe('inline-flex text-sm p-4')
+    expect(tvt(theme, { slots: { base: 'p-4' } })({ size: 'md', square: true }).base()).toBe('inline-flex text-sm p-4')
   })
 
   it('lets an override variant win over every theme variant', () => {
@@ -589,11 +567,10 @@ describe('tv override layers', () => {
     // theme group declared after it won the conflict, here `tone` over `size`.
     const ordered = {
       slots: { base: 'inline-flex', label: 'truncate' },
-      variants: { size: { md: { label: 'text-sm' } }, tone: { quiet: { label: 'text-xs' } } },
-      defaultVariants: { size: 'md', tone: 'quiet' }
+      variants: { size: { md: { label: 'text-sm' } }, tone: { quiet: { label: 'text-xs' } } }
     }
-    expect(tvt(ordered)().label()).toBe('truncate text-xs')
-    expect(tvt(ordered, { variants: { size: { md: { label: 'text-lg' } } } })().label()).toBe('truncate text-lg')
+    expect(tvt(ordered)({ size: 'md', tone: 'quiet' }).label()).toBe('truncate text-xs')
+    expect(tvt(ordered, { variants: { size: { md: { label: 'text-lg' } } } })({ size: 'md', tone: 'quiet' }).label()).toBe('truncate text-lg')
   })
 
   it('keeps the theme variant order when an override touches another slot', () => {
@@ -601,11 +578,10 @@ describe('tv override layers', () => {
     // not change which of `side` and `variant` wins on `container`.
     const sidebar = {
       slots: { container: 'fixed', inner: 'flex' },
-      variants: { side: { left: { container: 'border-default' } }, variant: { floating: { container: 'border-transparent' } } },
-      defaultVariants: { side: 'left', variant: 'floating' }
+      variants: { side: { left: { container: 'border-default' } }, variant: { floating: { container: 'border-transparent' } } }
     }
-    const ui = tvt(sidebar, { variants: { variant: { floating: { inner: 'divide-none' } } } })() as any
-    expect(ui.container()).toBe((tvt(sidebar)() as any).container())
+    const ui = tvt(sidebar, { variants: { variant: { floating: { inner: 'divide-none' } } } })({ side: 'left', variant: 'floating' }) as any
+    expect(ui.container()).toBe((tvt(sidebar)({ side: 'left', variant: 'floating' }) as any).container())
     expect(ui.container()).toBe('fixed border-transparent')
     expect(ui.inner()).toBe('flex divide-none')
   })
@@ -613,8 +589,8 @@ describe('tv override layers', () => {
   it('lets an override variant win over the theme compounds', () => {
     // Tuning a size from `app.config.ui` reaches the `square` buttons too
     const ui = tvt(theme, { variants: { size: { md: { base: 'px-4' } } } })
-    expect(ui().base()).toBe('inline-flex text-sm px-4')
-    expect(ui({ square: true }).base()).toBe('inline-flex text-sm p-1.5 px-4')
+    expect(ui({ size: 'md' }).base()).toBe('inline-flex text-sm px-4')
+    expect(ui({ size: 'md', square: true }).base()).toBe('inline-flex text-sm p-1.5 px-4')
   })
 
   it('lets an override compound win over an override slot class', () => {
@@ -622,7 +598,7 @@ describe('tv override layers', () => {
       slots: { label: 'text-default' },
       compoundVariants: [{ tone: 'quiet', class: { label: 'text-contrast' } }]
     })
-    expect(ui().label()).toBe('text-contrast')
+    expect(ui({ tone: 'quiet' }).label()).toBe('text-contrast')
     expect(ui({ tone: null }).label()).toBe('text-default')
   })
 
@@ -632,7 +608,7 @@ describe('tv override layers', () => {
   })
 
   it('keeps the theme variants on top of an override slot replacer', () => {
-    expect(tvt(theme, { slots: { label: () => 'font-bold text-default' } })().label()).toBe('font-bold text-faint')
+    expect(tvt(theme, { slots: { label: () => 'font-bold text-default' } })({ tone: 'quiet' }).label()).toBe('font-bold text-faint')
   })
 })
 
@@ -644,51 +620,50 @@ describe('tv override levels', () => {
       square: { true: '' },
       tone: { quiet: { label: 'text-faint' } }
     },
-    compoundVariants: [{ size: 'md', square: true, class: { base: 'p-1.5' } }],
-    defaultVariants: { size: 'md', tone: 'quiet' }
+    compoundVariants: [{ size: 'md', square: true, class: { base: 'p-1.5' } }]
   }
   // `app.config.ui.<c>` first, then each `<UTheme>` down to the component
   const levels = (...entries: any[]) => tvt(theme, new ComponentOverrides(entries, false, engineFor()))
 
   it('lets a nearer level win over a farther one', () => {
     expect(levels({ slots: { label: 'text-default' } }, { slots: { label: 'text-contrast' } })().label()).toBe('text-contrast')
-    expect(levels({ variants: { tone: { quiet: { label: 'text-default' } } } }, { variants: { tone: { quiet: { label: 'text-contrast' } } } })().label()).toBe('text-contrast')
+    expect(levels({ variants: { tone: { quiet: { label: 'text-default' } } } }, { variants: { tone: { quiet: { label: 'text-contrast' } } } })({ tone: 'quiet' }).label()).toBe('text-contrast')
   })
 
   it('lets a nearer level\'s variant win over a farther level\'s slot class', () => {
-    expect(levels({ slots: { label: 'text-default' } }, { variants: { tone: { quiet: { label: 'text-contrast' } } } })().label()).toBe('text-contrast')
+    expect(levels({ slots: { label: 'text-default' } }, { variants: { tone: { quiet: { label: 'text-contrast' } } } })({ tone: 'quiet' }).label()).toBe('text-contrast')
   })
 
   it('lets a level\'s variants win over its own slot classes, like the theme\'s', () => {
-    expect(levels({}, { slots: { label: 'text-default' }, variants: { tone: { quiet: { label: 'text-contrast' } } } })().label()).toBe('text-contrast')
-    expect(tvt(theme, { slots: { base: 'px-2' }, variants: { size: { md: { base: 'px-8' } } } })().base()).toBe('inline-flex text-sm px-8')
+    expect(levels({}, { slots: { label: 'text-default' }, variants: { tone: { quiet: { label: 'text-contrast' } } } })({ tone: 'quiet' }).label()).toBe('text-contrast')
+    expect(tvt(theme, { slots: { base: 'px-2' }, variants: { size: { md: { base: 'px-8' } } } })({ size: 'md' }).base()).toBe('inline-flex text-sm px-8')
   })
 
   it('merges the classes of every level instead of replacing them', () => {
-    expect(levels({ slots: { base: 'rounded-full shadow-lg' } }, { slots: { base: 'rounded-none' } })().base()).toBe('inline-flex px-2.5 text-sm shadow-lg rounded-none')
+    expect(levels({ slots: { base: 'rounded-full shadow-lg' } }, { slots: { base: 'rounded-none' } })({ size: 'md' }).base()).toBe('inline-flex px-2.5 text-sm shadow-lg rounded-none')
   })
 
   it('puts every level above the theme compounds, a level\'s compounds above its own slots', () => {
     const ui = levels({ slots: { base: 'p-4' } }, { variants: { size: { md: { base: 'px-4' } } } })
-    expect(ui({ square: true }).base()).toBe('inline-flex text-sm p-4 px-4')
-    expect(levels({ slots: { base: 'p-4' }, compoundVariants: [{ square: true, class: { base: 'p-2' } }] })({ square: true }).base()).toBe('inline-flex text-sm p-2')
+    expect(ui({ size: 'md', square: true }).base()).toBe('inline-flex text-sm p-4 px-4')
+    expect(levels({ slots: { base: 'p-4' }, compoundVariants: [{ square: true, class: { base: 'p-2' } }] })({ size: 'md', square: true }).base()).toBe('inline-flex text-sm p-2')
     const compounds = levels(
       { compoundVariants: [{ square: true, class: { base: 'p-2' } }] },
       { compoundVariants: [{ square: true, class: { base: 'p-3' } }] }
     )
-    expect(compounds({ square: true }).base()).toBe('inline-flex text-sm p-3')
+    expect(compounds({ size: 'md', square: true }).base()).toBe('inline-flex text-sm p-3')
   })
 
   it('lets a replacer take the place of the theme\'s classes and keeps the levels\' ones', () => {
     // The farther slot class still wins over the theme variant, identity replacer or not
     const ui = levels({ slots: { label: 'text-default' } }, { slots: { label: (classes: string) => `${classes} underline` } })
-    expect(ui().label()).toBe('underline text-default')
-    expect(levels({ slots: { label: 'text-default' } }, { slots: { label: (classes: string) => classes } })().label()).toBe(levels({ slots: { label: 'text-default' } })().label())
+    expect(ui({ tone: 'quiet' }).label()).toBe('underline text-default')
+    expect(levels({ slots: { label: 'text-default' } }, { slots: { label: (classes: string) => classes } })({ tone: 'quiet' }).label()).toBe(levels({ slots: { label: 'text-default' } })({ tone: 'quiet' }).label())
   })
 
   it('applies the replacers of every level, farthest first', () => {
     const ui = levels({ slots: { base: (classes: string) => classes.replace('inline-flex', 'flex') } }, { slots: { base: (classes: string) => `${classes} shadow-lg` } })
-    expect(ui().base()).toBe('flex shadow-lg px-2.5 text-sm')
+    expect(ui({ size: 'md' }).base()).toBe('flex shadow-lg px-2.5 text-sm')
   })
 
   it('shares one compiled entry for the same levels', () => {
@@ -793,7 +768,6 @@ describe('tv theme sources', () => {
 
     expect(ui.content()).toContain('origin-(--reka-select-content-transform-origin)')
     expectTypeOf(ui.leadingIcon).toBeFunction()
-    expectTypeOf(selectTheme.defaultVariants.position).toEqualTypeOf<'popper' | 'item-aligned'>()
   })
 
   it('keeps a callback typed as a function when the base has no value for it', () => {
@@ -804,13 +778,6 @@ describe('tv theme sources', () => {
     expect(theme.variants.tone).toBeTypeOf('function')
     // @ts-expect-error a variant group can't be a function
     check(theme)
-  })
-
-  it('rejects a default an extended theme\'s variant doesn\'t accept', () => {
-    const theme = extendTheme(buttonTheme, { defaultVariants: { variant: 'nope' } })
-
-    // @ts-expect-error `nope` is not a Button variant
-    expect(() => tv(theme)).not.toThrow()
   })
 
   it('matches a numeric variant key by its string form', () => {
