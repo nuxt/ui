@@ -94,6 +94,20 @@ const sizePx = computed(() => {
 
 const error = ref(false)
 
+const backgroundStyle = computed(() => {
+  const avatarColor = color.value ?? props.color
+  const hasFallback = !props.src || error.value
+
+  if (avatarColor !== 'auto' || !hasFallback) {
+    return props.style
+  }
+
+  const name = props.text || props.alt || ''
+  const hue = [...name].reduce((acc, char) => acc + char.charCodeAt(0), 0) % 360
+
+  return [{ backgroundColor: `hsl(${hue}, 68%, 60%)` }, props.style]
+})
+
 watch(() => props.src, () => {
   if (error.value) {
     error.value = false
@@ -112,7 +126,7 @@ function onError() {
     v-bind="props.chip ? (typeof props.chip === 'object' ? { inset: true, ...props.chip } : { inset: true }) : {}"
     :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
     :class="rootClass"
-    :style="props.style"
+    :style="backgroundStyle"
   >
     <component
       :is="as.img || ImageComponent"
