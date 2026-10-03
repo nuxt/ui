@@ -16,6 +16,7 @@ export type TreeItem = {
    */
   icon?: IconProps['name']
   label?: string
+  value?: string | number
   /**
    * @IconifyIcon
    */
@@ -45,8 +46,13 @@ export interface TreeProps<T extends TreeItem[] = TreeItem[], M extends boolean 
    * @defaultValue 'md'
    */
   size?: Tree['variants']['size']
-  /** This function is passed the index of each item and should return a unique key for that item */
+  /** This function is passed each item and should return a unique key for it. */
   getKey?: (val: T[number]) => string
+  /**
+   * The key used to identify the item.
+   * @defaultValue 'value'
+   */
+  valueKey?: GetItemKeys<T>
   /**
    * The key used to get the label from the item.
    * @defaultValue 'label'
@@ -157,6 +163,7 @@ import UIcon from './Icon.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<TreeProps<T, M>>(), {
+  valueKey: 'value',
   labelKey: 'label',
   nested: true,
   virtualize: false
@@ -233,10 +240,18 @@ function getItemLabel<Item extends T[number]>(item: Item): string {
   return get(item, props.labelKey as string)
 }
 
+function getItemValueKey<Item extends T[number]>(item: Item): string | undefined {
+  const value = get(item, props.valueKey as string)
+
+  if (typeof value === 'string' || typeof value === 'number') {
+    return String(value)
+  }
+}
+
 function getItemKey<Item extends T[number]>(item: Item): string {
   return props.getKey
-    ? props.getKey(item) || getItemLabel(item)
-    : getItemLabel(item)
+    ? props.getKey(item) || getItemValueKey(item) || getItemLabel(item)
+    : getItemValueKey(item) || getItemLabel(item)
 }
 
 function getDefaultOpenedItems(item: T[number]): string[] {
