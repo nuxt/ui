@@ -66,7 +66,7 @@ exports[`Progress > renders with color neutral and max correctly 1`] = `
   <div aria-valuemax="4" aria-valuemin="0" aria-valuenow="2" aria-label="50%" role="progressbar" data-state="loading" data-value="2" data-max="4" data-slot="progress-base" class="relative overflow-hidden rounded-full bg-strong w-full h-2" style="transform: translateZ(0);">
     <div data-state="loading" data-value="2" data-max="4" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-accent motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-50%);"></div>
   </div>
-  <div data-slot="progress-steps" class="grid items-end text-accent-default text-sm">
+  <div data-slot="progress-steps" class="grid items-end text-accent-strong text-sm">
     <div data-slot="progress-step" class="truncate text-end row-start-1 col-start-1 transition-opacity ease-out opacity-0">Waiting...</div>
     <div data-slot="progress-step" class="truncate text-end row-start-1 col-start-1 transition-opacity ease-out opacity-0">Cloning...</div>
     <div data-slot="progress-step" class="truncate text-end row-start-1 col-start-1 transition-opacity ease-out opacity-100">Migrating...</div>
@@ -92,7 +92,7 @@ exports[`Progress > renders with custom color correctly 1`] = `
   <div aria-valuemax="4" aria-valuemin="0" aria-valuenow="2" aria-label="50%" role="progressbar" data-state="loading" data-value="2" data-max="4" data-slot="progress-base" class="relative overflow-hidden rounded-full bg-strong w-full h-2" style="transform: translateZ(0);">
     <div data-state="loading" data-value="2" data-max="4" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-accent motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-50%); background-color: #8b5cf6;"></div>
   </div>
-  <div data-slot="progress-steps" class="grid items-end text-accent-default text-sm" style="color: #8b5cf6;">
+  <div data-slot="progress-steps" class="grid items-end text-accent-strong text-sm" style="color: #8b5cf6;">
     <div data-slot="progress-step" class="truncate text-end row-start-1 col-start-1 transition-opacity ease-out opacity-0">Waiting...</div>
     <div data-slot="progress-step" class="truncate text-end row-start-1 col-start-1 transition-opacity ease-out opacity-0">Cloning...</div>
     <div data-slot="progress-step" class="truncate text-end row-start-1 col-start-1 transition-opacity ease-out opacity-100">Migrating...</div>
@@ -108,7 +108,7 @@ exports[`Progress > renders with max correctly 1`] = `
   <div aria-valuemax="4" aria-valuemin="0" aria-valuenow="2" aria-label="50%" role="progressbar" data-state="loading" data-value="2" data-max="4" data-slot="progress-base" class="relative overflow-hidden rounded-full bg-strong w-full h-2" style="transform: translateZ(0);">
     <div data-state="loading" data-value="2" data-max="4" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-accent motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-50%);"></div>
   </div>
-  <div data-slot="progress-steps" class="grid items-end text-accent-default text-sm">
+  <div data-slot="progress-steps" class="grid items-end text-accent-strong text-sm">
     <div data-slot="progress-step" class="truncate text-end row-start-1 col-start-1 transition-opacity ease-out opacity-0">Waiting...</div>
     <div data-slot="progress-step" class="truncate text-end row-start-1 col-start-1 transition-opacity ease-out opacity-0">Cloning...</div>
     <div data-slot="progress-step" class="truncate text-end row-start-1 col-start-1 transition-opacity ease-out opacity-100">Migrating...</div>
@@ -124,7 +124,7 @@ exports[`Progress > renders with max inverted correctly 1`] = `
   <div aria-valuemax="4" aria-valuemin="0" aria-valuenow="2" aria-label="50%" role="progressbar" data-state="loading" data-value="2" data-max="4" data-slot="progress-base" class="relative overflow-hidden rounded-full bg-strong w-full h-2" style="transform: translateZ(0);">
     <div data-state="loading" data-value="2" data-max="4" data-slot="progress-indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-accent motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(50%);"></div>
   </div>
-  <div data-slot="progress-steps" class="grid items-end text-accent-default text-sm">
+  <div data-slot="progress-steps" class="grid items-end text-accent-strong text-sm">
     <div data-slot="progress-step" class="truncate row-start-1 col-start-1 transition-opacity ease-out opacity-0 text-start">Waiting...</div>
     <div data-slot="progress-step" class="truncate row-start-1 col-start-1 transition-opacity ease-out opacity-0 text-start">Cloning...</div>
     <div data-slot="progress-step" class="truncate row-start-1 col-start-1 transition-opacity ease-out opacity-100 text-start">Migrating...</div>

@@ -174,7 +174,7 @@ export default defineTheme({
     variant: 'pill',
     active: true,
     class: {
-      link: 'text-accent-default',
+      link: 'text-accent-strong',
       linkLeadingIcon: 'text-accent group-data-[state=open]:text-accent'
     }
   }, {
@@ -213,7 +213,7 @@ export default defineTheme({
     variant: 'link',
     active: true,
     class: {
-      link: 'text-accent-default',
+      link: 'text-accent-strong',
       linkLeadingIcon: 'text-accent group-data-[state=open]:text-accent'
     }
   }, {

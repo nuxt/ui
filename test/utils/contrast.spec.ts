@@ -143,23 +143,31 @@ describe.each(['light', 'dark'] as const)('contrast in %s mode', (mode) => {
 
   describe.each(chromatic)('%s', (color) => {
     const read = (name: string) => resolve(themeValue(name)!, vars, color)!
-    const text = () => read('--text-color-accent-default')
 
-    it('colored text on the page', () => {
-      expect(contrast(over(text(), page), page)).toBeGreaterThanOrEqual(AA)
+    describe.each(['default', 'strong'])('%s text', (step) => {
+      const text = () => read(`--text-color-accent-${step}`)
+
+      it('on the page', () => {
+        expect(contrast(over(text(), page), page)).toBeGreaterThanOrEqual(AA)
+      })
+
+      it(`as \`text-${color}-${step}\` on the page`, () => {
+        const utility = themeValue(`--text-color-${color}-${step}`)!
+        expect(contrast(over(resolve(utility, vars, color)!, page), page)).toBeGreaterThanOrEqual(AA)
+      })
+
+      it.each([
+        ['soft', '--background-color-accent-soft'],
+        ['strong', '--background-color-accent-strong']
+      ])('on its %s fill', (_, fill) => {
+        const surface = over(read(fill), page)
+        expect(contrast(over(text(), surface), surface)).toBeGreaterThanOrEqual(AA)
+      })
     })
 
-    it(`\`text-${color}-default\` on the page`, () => {
-      const utility = themeValue(`--text-color-${color}-default`)!
-      expect(contrast(over(resolve(utility, vars, color)!, page), page)).toBeGreaterThanOrEqual(AA)
-    })
-
-    it.each([
-      ['soft', '--background-color-accent-soft'],
-      ['strong', '--background-color-accent-strong']
-    ])('colored text on its %s fill', (_, fill) => {
-      const surface = over(read(fill), page)
-      expect(contrast(over(text(), surface), surface)).toBeGreaterThanOrEqual(AA)
+    // The strong step reads more than the default one, like `text-strong` does
+    it('strong text contrasts more than default text', () => {
+      expect(contrast(over(read('--text-color-accent-strong'), page), page)).toBeGreaterThan(contrast(over(read('--text-color-accent-default'), page), page))
     })
 
     // The label of a solid isn't checked: the solid keeps its shade 500 with
