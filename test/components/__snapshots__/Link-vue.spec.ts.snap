@@ -34,6 +34,6 @@ exports[`Link > renders with raw correctly 1`] = `"<button type="button" data-sl
 
 exports[`Link > renders with raw inactiveClass correctly 1`] = `"<button type="button" data-slot="link" class="hover:text-primary"></button>"`;
 
-exports[`Link > renders with to correctly 1`] = `"<a href="/" data-slot="link" class="outline-focus focus-visible:outline-3 rounded-md text-primary-default"></a>"`;
+exports[`Link > renders with to correctly 1`] = `"<a href="/" data-slot="link" class="outline-focus focus-visible:outline-3 rounded-md text-primary-strong"></a>"`;
 
 exports[`Link > renders with type correctly 1`] = `"<button type="submit" data-slot="link" class="outline-focus focus-visible:outline-3 rounded-md text-muted hover:text-default transition-colors"></button>"`;

@@ -68,7 +68,7 @@ export default defineTheme({
     active: true,
     class: {
       link: 'text-accent-strong',
-      linkLeadingIcon: 'text-accent group-data-[state=open]:text-accent'
+      linkLeadingIcon: 'text-accent-strong group-data-[state=open]:text-accent-strong'
     }
   }, {
     variant: 'pill',
@@ -98,7 +98,7 @@ export default defineTheme({
     active: true,
     class: {
       link: 'text-accent-strong',
-      linkLeadingIcon: 'text-accent group-data-[state=open]:text-accent'
+      linkLeadingIcon: 'text-accent-strong group-data-[state=open]:text-accent-strong'
     }
   }, {
     highlight: true,
