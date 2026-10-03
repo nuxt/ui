@@ -62,6 +62,10 @@ props:
 ::
 
 ::tip
+Set the `auto-open` prop to `false` to keep the component closed when streaming starts, and `auto-close-delay` to `0` to keep it open when streaming ends.
+::
+
+::tip
 Use the `isPartStreaming` utility from `@nuxt/ui/utils/ai` to determine if a part is currently being streamed.
 ::
 
