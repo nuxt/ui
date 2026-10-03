@@ -18,6 +18,10 @@ const fruits = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
 const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek']
 
 const items = [[{ label: 'Fruits', type: 'label' }, ...fruits], [{ label: 'Vegetables', type: 'label' }, ...vegetables]] satisfies SelectMenuItem[][]
+const itemsBadges = [
+  [{ label: 'Fruits', type: 'label' }, ...fruits.map(f => ({ label: f, badge: Math.floor(Math.random() * 10) + 1 }))],
+  [{ label: 'Vegetables', type: 'label' }, ...vegetables.map(f => ({ label: f, badge: Math.floor(Math.random() * 10) + 1 }))]
+] satisfies SelectMenuItem[][]
 
 const statuses = [{
   label: 'Backlog',
@@ -77,6 +81,14 @@ const valueMultiple = ref([fruits[0]!, vegetables[0]!])
       multiple
       placeholder="Multiple"
       :items="items"
+      v-bind="props"
+      clear
+    />
+    <USelectMenu
+      multiple
+      value-key="label"
+      placeholder="Multiple with badges"
+      :items="itemsBadges"
       v-bind="props"
       clear
     />
