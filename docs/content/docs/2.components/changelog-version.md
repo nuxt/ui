@@ -72,6 +72,10 @@ props:
 ---
 ::
 
+::tip
+The title is rendered as an `h2` by default. Use the `as` prop with an object to change it, for example `:as="{ title: 'h3' }"`{lang="ts-type"}. You can also set the root element this way: `:as="{ root: 'div', title: 'h3' }"`{lang="ts-type"}.
+::
+
 ### Description
 
 Use the `description` prop to display the description of the ChangelogVersion.

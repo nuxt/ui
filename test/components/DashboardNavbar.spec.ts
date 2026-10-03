@@ -32,6 +32,7 @@ describe('DashboardNavbar', () => {
       ['with toggle', { props: { toggle: { color: 'primary' as const, variant: 'solid' as const } } }],
       ['with toggleSide', { props: { toggleSide: 'right' as const } }],
       ['with as', { props: { as: 'section' } }],
+      ['with as object', { props: { title: 'Dashboard', as: { root: 'section', title: 'h2' } } }],
       ['with class', { props: { class: 'px-8' } }],
       ['with ui', { props: { ui: { left: 'gap-3' } } }],
       // Slots
