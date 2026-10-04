@@ -499,7 +499,7 @@ export default defineEventHandler(async (event) => {
   event.node.req.on('close', () => abortController.abort())
 
   const agent = new ToolLoopAgent({
-    model: 'anthropic/claude-sonnet-5',
+    model: 'anthropic/claude-sonnet-5.5',
     instructions: framework === 'vue' ? instructions.vue : instructions.nuxt,
     maxOutputTokens: 8000,
     stopWhen: isStepCount(6),
@@ -511,7 +511,7 @@ export default defineEventHandler(async (event) => {
         user: getChatUser(event),
         tags: ['docs-chat'],
         // Same tier as the primary so the adaptive thinking options stay supported.
-        models: ['anthropic/claude-sonnet-4.6']
+        models: ['anthropic/claude-sonnet-5']
       } satisfies GatewayProviderOptions
     }
   })

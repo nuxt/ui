@@ -69,7 +69,7 @@ export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
   const result = streamText({
-    model: gateway('anthropic/claude-sonnet-5'),
+    model: gateway('anthropic/claude-sonnet-5.5'),
     instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages)
   })
