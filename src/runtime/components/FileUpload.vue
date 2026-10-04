@@ -143,7 +143,7 @@ import { computed, toRef, toRefs, watch } from 'vue'
 import { Primitive, VisuallyHidden } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useLocale } from '../composables/useLocale'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useGivenProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useFormField } from '../composables/useFormField'
 import { useFileUpload } from '../composables/useFileUpload'
 import { tv } from '../utils/tv'
@@ -174,6 +174,9 @@ const slots = defineSlots<FileUploadSlots<M>>()
 const modelValue = defineModel<(M extends true ? File[] : File) | null>()
 
 const props = useComponentProps<FileUploadProps<M>>('fileUpload', _props, theme)
+// What the component passes down to the components it renders: what it was
+// given, without its own defaults, so a child keeps its own
+const givenProps = useGivenProps<FileUploadProps<M>>('fileUpload', _props)
 
 const appConfig = useThemeConfig() as FileUpload['AppConfig']
 const overrides = useComponentOverrides((ui: FileUpload['AppConfig']['ui']) => ui.fileUpload)
@@ -199,6 +202,7 @@ const color = computed(() => formFieldColor.value ?? props.color)
 const highlight = computed(() => formFieldHighlight.value ?? props.highlight)
 // eslint-disable-next-line vue/no-dupe-keys
 const size = computed(() => formFieldSize.value ?? props.size)
+const givenSize = computed(() => formFieldSize.value ?? givenProps.size)
 // eslint-disable-next-line vue/no-dupe-keys
 const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 // eslint-disable-next-line vue/no-dupe-keys
@@ -324,7 +328,7 @@ defineExpose({
                   :as="{ img: 'img' }"
                   :src="createObjectUrl(file)"
                   :icon="props.fileIcon || appConfig.ui.icons.file"
-                  :size="size"
+                  :size="givenSize"
                   data-slot="file-upload-fileLeadingAvatar"
                   :class="ui.fileLeadingAvatar({ class: props.ui?.fileLeadingAvatar })"
                 />
@@ -397,7 +401,7 @@ defineExpose({
           <slot name="leading" :ui="ui">
             <template v-if="props.icon !== false">
               <UIcon v-if="variant === 'button'" :name="props.icon ?? appConfig.ui.icons.upload" data-slot="file-upload-icon" :class="ui.icon({ class: props.ui?.icon })" />
-              <UAvatar v-else :icon="props.icon ?? appConfig.ui.icons.upload" :size="size" data-slot="file-upload-avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
+              <UAvatar v-else :icon="props.icon ?? appConfig.ui.icons.upload" :size="givenSize" data-slot="file-upload-avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
             </template>
           </slot>
 

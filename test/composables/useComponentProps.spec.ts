@@ -1,8 +1,9 @@
+import { nextTick, ref } from 'vue'
 import type { ComputedRef } from 'vue'
 import { describe, expectTypeOf, it, expect, test, beforeAll, afterAll } from 'vitest'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { useAppConfig } from '#imports'
-import { UFormField, UFieldGroup, UAvatarGroup, UTheme, UButton, UAvatar, UInput, UKbd, UEmpty } from '#components'
+import { UFormField, UFieldGroup, UAvatarGroup, UTheme, UButton, UAvatar, UInput, UKbd, UEmpty, UCheckbox, UCheckboxGroup, UInputNumber } from '#components'
 import type * as ui from '#build/ui'
 import type { ThemeDefaults } from '../../src/runtime/types/theme'
 import { useComponentOverrides } from '../../src/runtime/composables/useComponentProps'
@@ -117,6 +118,79 @@ describe('withDefaults variants', () => {
     })
 
     expect(wrapper.find('[data-slot="button"]').classes()).toContain('text-xs')
+  })
+
+  it('leaves the components a form control renders their own default', async () => {
+    const wrapper = await mountSuspended({
+      components: { UTheme, UCheckbox, UCheckboxGroup, UInputNumber },
+      template: `
+        <UTheme :props="{ checkbox: { size: 'xl' }, button: { size: 'xl' } }">
+          <UCheckbox />
+          <UCheckboxGroup :items="['a']" />
+          <UInputNumber />
+        </UTheme>
+      `
+    })
+
+    // The Checkbox on its own, then the one the group renders
+    const [checkbox, item] = wrapper.findAll('[data-slot="checkbox-base"]')
+    const size = checkbox!.classes().filter(c => c.startsWith('size-'))
+    expect(size).not.toEqual([])
+    expect(item!.classes()).toEqual(expect.arrayContaining(size))
+    expect(wrapper.find('[data-slot="input-number-increment"] button').classes()).toContain('text-base')
+  })
+
+  // What the parent passes isn't reactive: these changes leave the component's
+  // own props untouched, or happen after a computed stopped reading them
+  describe('when the passed props change', () => {
+    const render = (template: string, size: string | undefined) => {
+      const state = ref(size)
+      return mountSuspended({
+        components: { UTheme, UFormField, UInput, UButton },
+        setup: () => ({ size: state }),
+        template
+      }).then(wrapper => ({ wrapper, state }))
+    }
+
+    it('reads a prop set after mount inside a group', async () => {
+      const { wrapper, state } = await render(`<UFormField size="xl"><UInput :size="size" /></UFormField>`, undefined)
+      expect(wrapper.find('[data-slot="input-base"]').classes()).toContain('px-3')
+
+      state.value = 'xs'
+      await nextTick()
+      expect(wrapper.find('[data-slot="input-base"]').classes()).toContain('px-2')
+    })
+
+    it('falls back to the group when a prop equal to the default is removed', async () => {
+      const { wrapper, state } = await render(`<UFormField size="xl"><UInput :size="size" /></UFormField>`, 'md')
+      expect(wrapper.find('[data-slot="input-base"]').classes()).toContain('px-2.5')
+
+      state.value = undefined
+      await nextTick()
+      expect(wrapper.find('[data-slot="input-base"]').classes()).toContain('px-3')
+    })
+
+    it('falls back to `<UTheme :props>` when a prop equal to the default is removed, and back', async () => {
+      const { wrapper, state } = await render(`<UTheme :props="{ button: { size: 'xl' } }"><UButton label="Button" :size="size" /></UTheme>`, 'md')
+      expect(wrapper.find('[data-slot="button"]').classes()).toContain('text-sm')
+
+      state.value = undefined
+      await nextTick()
+      expect(wrapper.find('[data-slot="button"]').classes()).toContain('text-base')
+
+      state.value = 'md'
+      await nextTick()
+      expect(wrapper.find('[data-slot="button"]').classes()).toContain('text-sm')
+    })
+
+    it('stops providing a group size that is removed', async () => {
+      const { wrapper, state } = await render(`<UTheme :props="{ input: { size: 'xs' } }"><UFormField :size="size"><UInput /></UFormField></UTheme>`, 'md')
+      expect(wrapper.find('[data-slot="input-base"]').classes()).toContain('px-2.5')
+
+      state.value = undefined
+      await nextTick()
+      expect(wrapper.find('[data-slot="input-base"]').classes()).toContain('px-2')
+    })
   })
 
   it('leaves a child component its own default', async () => {

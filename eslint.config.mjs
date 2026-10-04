@@ -185,15 +185,18 @@ const noUnresolvedFormFieldRefs = {
   create(context) {
     const parserServices = context.sourceCode?.parserServices ?? context.parserServices
     let propsVar = 'props'
+    let givenPropsVar = 'givenProps'
     // local binding name -> the prop key it must fall back to
     const formFieldRefs = new Map()
 
+    // `givenProps` is the `useGivenProps` proxy: what the component passes down
+    // to a child falls back to it, so the child keeps its own defaults.
     function isPropsAccess(node, key) {
       return !!node
         && node.type === 'MemberExpression'
         && !node.computed
         && node.object.type === 'Identifier'
-        && node.object.name === propsVar
+        && (node.object.name === propsVar || node.object.name === givenPropsVar)
         && node.property.type === 'Identifier'
         && node.property.name === key
     }
@@ -217,6 +220,12 @@ const noUnresolvedFormFieldRefs = {
         const decl = node.parent?.type === 'VariableDeclarator' ? node.parent : null
         if (decl?.id?.type === 'Identifier') {
           propsVar = decl.id.name
+        }
+      },
+      'CallExpression[callee.name="useGivenProps"]'(node) {
+        const decl = node.parent?.type === 'VariableDeclarator' ? node.parent : null
+        if (decl?.id?.type === 'Identifier') {
+          givenPropsVar = decl.id.name
         }
       },
       ':matches(CallExpression[callee.name="useFormField"], CallExpression[callee.name="useFieldGroup"])'(node) {

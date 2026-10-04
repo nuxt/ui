@@ -165,7 +165,7 @@ import { ListboxRoot, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxVi
 import { useForwardProps } from '../composables/useForwardProps'
 import { createReusableTemplate, reactivePick } from '@vueuse/core'
 import { defu } from 'defu'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useGivenProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useFilter } from '../composables/useFilter'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
@@ -194,6 +194,9 @@ const emits = defineEmits<ListboxEmits<T, VK, M, Mod>>()
 const slots = defineSlots<ListboxSlots<T>>()
 
 const props = useComponentProps<ListboxProps<T, VK, M, Mod>>('listbox', _props, theme)
+// What the component passes down to the components it renders: what it was
+// given, without its own defaults, so a child keeps its own
+const givenProps = useGivenProps<ListboxProps<T, VK, M, Mod>>('listbox', _props)
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
@@ -221,6 +224,7 @@ const color = computed(() => formFieldColor.value ?? props.color)
 const highlight = computed(() => formFieldHighlight.value ?? props.highlight)
 // eslint-disable-next-line vue/no-dupe-keys
 const size = computed(() => formFieldSize.value ?? props.size)
+const givenSize = computed(() => formFieldSize.value ?? givenProps.size)
 
 const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
@@ -383,7 +387,7 @@ const filteredItems = computed(() => filteredGroups.value.flatMap(group => group
       <UInput
         :autofocus="props.autofocus"
         :autofocus-delay="props.autofocusDelay"
-        :size="size"
+        :size="givenSize"
         v-bind="inputProps"
         data-slot="listbox-input"
         :class="ui.input({ class: props.ui?.input })"

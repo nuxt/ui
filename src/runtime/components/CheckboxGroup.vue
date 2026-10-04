@@ -127,10 +127,13 @@ const id = _id.value ?? useId()
 // keeps the `tv()` call and the forwarding to `UCheckbox` in sync.
 
 const color = computed(() => formFieldColor.value ?? props.color)
+const givenColor = computed(() => formFieldColor.value ?? givenProps.color)
 // eslint-disable-next-line vue/no-dupe-keys
 const size = computed(() => formFieldSize.value ?? props.size)
+const givenSize = computed(() => formFieldSize.value ?? givenProps.size)
 
 const highlight = computed(() => formFieldHighlight.value ?? props.highlight)
+const givenHighlight = computed(() => formFieldHighlight.value ?? givenProps.highlight)
 
 const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
@@ -214,9 +217,9 @@ function onUpdate(value: any) {
         :key="item.value"
         v-bind="{ ...item, ...checkboxProps }"
         :icon="item.icon ?? props.icon"
-        :color="color"
-        :highlight="highlight"
-        :size="size"
+        :color="givenColor"
+        :highlight="givenHighlight"
+        :size="givenSize"
         :name="name"
         :disabled="item.disabled || disabled"
         :ui="{ ...transformUI(omit(ui, ['root', 'fieldset', 'legend', 'item']), props.ui ? omit(props.ui, ['root']) : undefined), ...(item.ui || {}) }"

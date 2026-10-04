@@ -18,12 +18,10 @@ const internal: Record<string, string[]> = {
 }
 
 /**
- * A child that renders part of the same component, from the same theme and
- * the same `<UTheme :props>` key, so it takes the resolved value.
+ * A component that renders itself for its nested items, from the same theme
+ * and the same `<UTheme :props>` key, so it takes the resolved value.
  */
 const forwardedToItself: Record<string, string[]> = {
-  'ContextMenu.vue': ['UContextMenuContent'],
-  'DropdownMenu.vue': ['UDropdownMenuContent'],
   'content/ContentNavigation.vue': ['UContentNavigation']
 }
 
@@ -92,6 +90,12 @@ describe('variant defaults', () => {
       for (const match of template.matchAll(new RegExp(`<(U[A-Z]\\w*)\\b[^>]*?\\s:(?:${key}|${kebab})="props\\.${key}"`, 'g'))) {
         if (!forwardedToItself[name]?.includes(match[1]!)) {
           problems.push(`\`${match[1]}\` gets \`props.${key}\``)
+        }
+      }
+      // A computed over the prop, like `size` for `formFieldSize.value ?? props.size`
+      if (new RegExp(`const ${key} = computed\\(\\(\\) => [^\\n]*props\\.${key}\\b`).test(script)) {
+        for (const match of template.matchAll(new RegExp(`<(U[A-Z]\\w*)\\b[^>]*?\\s:(?:${key}|${kebab})="${key}"`, 'g'))) {
+          problems.push(`\`${match[1]}\` gets the resolved \`${key}\``)
         }
       }
       for (const match of script.matchAll(/reactivePick\(props, ([^)]*)\)/g)) {

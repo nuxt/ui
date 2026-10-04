@@ -90,7 +90,7 @@ import { onMounted, onScopeDispose, computed, useTemplateRef, toRef } from 'vue'
 import { NumberFieldRoot, NumberFieldInput, NumberFieldDecrement, NumberFieldIncrement } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useGivenProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
@@ -112,6 +112,9 @@ const emits = defineEmits<InputNumberEmits<T, Mod>>()
 defineSlots<InputNumberSlots>()
 
 const props = useComponentProps<InputNumberProps<T, Mod>>('inputNumber', _props, theme)
+// What the component passes down to the components it renders: what it was
+// given, without its own defaults, so a child keeps its own
+const givenProps = useGivenProps<InputNumberProps<T, Mod>>('inputNumber', _props)
 
 const { t } = useLocale()
 const appConfig = useThemeConfig() as InputNumber['AppConfig']
@@ -125,10 +128,12 @@ const { orientation, size: fieldGroupSize } = useFieldGroup<InputNumberProps<T, 
 
 // eslint-disable-next-line vue/no-dupe-keys
 const color = computed(() => formFieldColor.value ?? props.color)
+const givenColor = computed(() => formFieldColor.value ?? givenProps.color)
 // eslint-disable-next-line vue/no-dupe-keys
 const highlight = computed(() => formFieldHighlight.value ?? props.highlight)
 // eslint-disable-next-line vue/no-dupe-keys
 const size = computed(() => fieldGroupSize.value ?? formFieldSize.value ?? props.size)
+const givenSize = computed(() => fieldGroupSize.value ?? formFieldSize.value ?? givenProps.size)
 
 const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
@@ -229,8 +234,8 @@ defineExpose({
         <slot name="increment">
           <UButton
             :icon="incrementIcon"
-            :color="color"
-            :size="size"
+            :color="givenColor"
+            :size="givenSize"
             variant="link"
             :aria-label="t('inputNumber.increment')"
             v-bind="typeof props.increment === 'object' ? props.increment : undefined"
@@ -244,8 +249,8 @@ defineExpose({
         <slot name="decrement">
           <UButton
             :icon="decrementIcon"
-            :color="color"
-            :size="size"
+            :color="givenColor"
+            :size="givenSize"
             variant="link"
             :aria-label="t('inputNumber.decrement')"
             v-bind="typeof props.decrement === 'object' ? props.decrement : undefined"

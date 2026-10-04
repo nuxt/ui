@@ -148,7 +148,7 @@ import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useGivenProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
@@ -170,6 +170,9 @@ const slots = defineSlots<DropdownMenuSlots<T>>()
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const props = useComponentProps<DropdownMenuProps<T>>('dropdownMenu', _props, theme)
+// What the menu passes down to its content, which renders the filter Input and
+// the submenus: what it was given, without its own defaults, so they keep theirs
+const givenProps = useGivenProps<DropdownMenuProps<T>>('dropdownMenu', _props)
 
 const overrides = useComponentOverrides((ui: DropdownMenu['AppConfig']['ui']) => ui.dropdownMenu)
 
@@ -203,7 +206,7 @@ const ui = computed(() => tv(theme, overrides.value)({
       :checked-icon="props.checkedIcon"
       :loading-icon="props.loadingIcon"
       :external-icon="props.externalIcon"
-      :size="props.size"
+      :size="givenProps.size"
       :filter="props.filter"
       :filter-fields="props.filterFields"
       :ignore-filter="props.ignoreFilter"
