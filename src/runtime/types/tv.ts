@@ -193,6 +193,8 @@ export type TVReturnType<T> = (props?: TVVariantProps<T>) => TVSlotFunctions<T>
  */
 export type TVThemeCheck<T> = {
   compoundVariants?: TVCompoundVariants<T>
+  /** A theme has no defaults: a variant's default is the component's prop default. */
+  defaultVariants?: never
 }
 
 /**

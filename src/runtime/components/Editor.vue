@@ -99,7 +99,7 @@ import { Markdown } from '@tiptap/markdown'
 import StarterKit from '@tiptap/starter-kit'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import { reactiveOmit } from '@vueuse/core'
-import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useDefaultVariant } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { omit } from '../utils'
 import { createHandlers } from '../utils/editor'
@@ -121,10 +121,12 @@ const props = useComponentProps<EditorProps<T, H>>('editor', _props, theme)
 const attrs = useAttrs()
 
 const overrides = useComponentOverrides((ui: Editor['AppConfig']['ui']) => ui.editor)
+// The placeholder mode is no prop of its own: `app.config.ui.editor.defaultVariants` sets it
+const defaultPlaceholderMode = useDefaultVariant<'firstLine' | 'everyLine'>('editor', 'placeholderMode')
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
-  placeholderMode: (typeof props.placeholder === 'object' ? props.placeholder.mode : undefined) ?? 'everyLine'
+  placeholderMode: (typeof props.placeholder === 'object' ? props.placeholder.mode : undefined) ?? defaultPlaceholderMode.value ?? 'everyLine'
 }))
 
 const rootProps = useForwardProps(reactiveOmit(props, 'starterKit', 'extensions', 'editorProps', 'contentType', 'class', 'placeholder', 'markdown', 'image', 'mention', 'handlers'))

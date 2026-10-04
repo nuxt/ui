@@ -195,11 +195,10 @@ import { useFieldGroup } from '../composables/useFieldGroup'
 
 defineOptions({ inheritAttrs: false })
 
-// Pass raw `_props` (not the proxy) so the wrapping `<UFormField>` /
-// `<UFieldGroup>` keep precedence over `<UTheme :props>` / `withDefaults` /
-// `app.config` defaults. Their internal fallback is `props?.x ?? injected.x`,
-// so handing them the proxy would leak theme defaults into "explicit prop"
-// and silently override the wrapper.
+// Pass raw `_props`, the object `defineProps` returns, so the wrapping
+// `<UFormField>` / `<UFieldGroup>` keep precedence over `<UTheme :props>`,
+// `withDefaults` and `app.config` defaults: the composables read a prop from
+// it only when the parent passed it.
 const {
   id, name, size: formFieldSize, color, highlight, disabled,
   ariaAttrs, emitFormBlur, emitFormInput, emitFormChange

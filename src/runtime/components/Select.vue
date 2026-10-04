@@ -157,7 +157,7 @@ import { useTemplateRef, computed, onMounted, onScopeDispose, toRef } from 'vue'
 import { SelectRoot, SelectArrow, SelectTrigger, SelectPortal, SelectContent, SelectViewport, SelectValue as RSelectValue, SelectLabel, SelectGroup, SelectItem as RSelectItem, SelectItemIndicator, SelectItemText, SelectSeparator } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useDefaultVariant, useThemeConfig } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useFieldGroup, FieldGroupReset } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
@@ -194,7 +194,8 @@ const rootProps = useForwardProps(reactivePick(props, 'open', 'defaultOpen', 'di
 const portalProps = usePortal(toRef(() => props.portal))
 // `position` has no prop of its own: its default comes from `content`, then
 // from `app.config.ui.select.defaultVariants`
-const position = computed(() => props.content?.position ?? (appConfig.ui?.select as { defaultVariants?: { position?: SelectContentProps['position'] } } | undefined)?.defaultVariants?.position ?? 'popper')
+const defaultPosition = useDefaultVariant<SelectContentProps['position']>('select', 'position')
+const position = computed(() => props.content?.position ?? defaultPosition.value ?? 'popper')
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: position.value }) as SelectContentProps)
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as SelectArrowProps)
 

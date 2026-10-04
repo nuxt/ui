@@ -31,6 +31,8 @@ interface DropdownMenuContentProps<T extends ArrayOrNested<DropdownMenuItem>> ex
    */
   externalIcon?: boolean | IconProps['name']
   size?: DropdownMenu['variants']['size']
+  /** The size the menu was given, for the filter Input, which otherwise keeps its own default. */
+  givenSize?: DropdownMenu['variants']['size']
   filter?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
   filterFields?: string[]
   ignoreFilter?: boolean
@@ -75,7 +77,7 @@ import UIcon from './Icon.vue'
 import UInput from './Input.vue'
 import UKbd from './Kbd.vue'
 import UDropdownMenuContent from './DropdownMenuContent.vue'
-import { useThemeConfig } from '../composables/useComponentProps'
+import { useDefaultVariant, useThemeConfig } from '../composables/useComponentProps'
 
 const props = defineProps<DropdownMenuContentProps<T>>()
 const emits = defineEmits<DropdownMenuContentEmits>()
@@ -83,6 +85,8 @@ const slots = defineSlots<DropdownMenuContentSlots<T>>()
 
 const { t, dir } = useLocale()
 const appConfig = useThemeConfig()
+// An item's color is no prop of the menu: `app.config.ui.dropdownMenu.defaultVariants` sets it
+const defaultColor = useDefaultVariant<NonNullable<DropdownMenu['variants']['color']>>('dropdownMenu', 'color')
 const { filterGroups } = useFilter()
 
 const _searchTerm = ref('')
@@ -97,7 +101,7 @@ const searchTerm = computed({
 const inputProps = toRef(() => defu(props.filter, { placeholder: t('dropdownMenu.search'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
 
 const portalProps = usePortal(toRef(() => props.portal))
-const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'descriptionKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'size', 'filter', 'filterFields', 'ignoreFilter', 'searchTerm', 'class', 'ui', 'uiOverride'), emits)
+const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'descriptionKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'size', 'givenSize', 'filter', 'filterFields', 'ignoreFilter', 'searchTerm', 'class', 'ui', 'uiOverride'), emits)
 const getProxySlots = () => omit(slots, ['default'])
 
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: DropdownMenuItem, active?: boolean, index: number }>()
@@ -130,8 +134,8 @@ const itemSize = computed(() => getItemSize(props.size))
   <DefineItemTemplate v-slot="{ item, active, index }">
     <slot :name="((item.slot || 'item') as keyof DropdownMenuContentSlots<T>)" :item="(item as Extract<NestedItem<T>, { slot: string; }>)" :index="index" :ui="ui">
       <slot :name="((item.slot ? `${item.slot}-leading`: 'item-leading') as keyof DropdownMenuContentSlots<T>)" :item="(item as Extract<NestedItem<T>, { slot: string; }>)" :active="active" :index="index" :ui="ui">
-        <UIcon v-if="item.loading" :name="loadingIcon || appConfig.ui.icons.loading" data-slot="dropdown-menu-itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [uiOverride?.itemLeadingIcon, item.ui?.itemLeadingIcon], color: item?.color, loading: true })" />
-        <UIcon v-else-if="item.icon" :name="item.icon" data-slot="dropdown-menu-itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [uiOverride?.itemLeadingIcon, item.ui?.itemLeadingIcon], color: item?.color, active })" />
+        <UIcon v-if="item.loading" :name="loadingIcon || appConfig.ui.icons.loading" data-slot="dropdown-menu-itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [uiOverride?.itemLeadingIcon, item.ui?.itemLeadingIcon], color: item?.color ?? defaultColor, loading: true })" />
+        <UIcon v-else-if="item.icon" :name="item.icon" data-slot="dropdown-menu-itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [uiOverride?.itemLeadingIcon, item.ui?.itemLeadingIcon], color: item?.color ?? defaultColor, active })" />
         <UAvatar v-else-if="item.avatar" :size="avatarSize" v-bind="item.avatar" data-slot="dropdown-menu-itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [uiOverride?.itemLeadingAvatar, item.ui?.itemLeadingAvatar], active })" />
       </slot>
 
@@ -141,7 +145,7 @@ const itemSize = computed(() => getItemSize(props.size))
             {{ get(item, props.labelKey as string) }}
           </slot>
 
-          <UIcon v-if="item.target === '_blank' && externalIcon !== false" :name="typeof externalIcon === 'string' ? externalIcon : appConfig.ui.icons.external" data-slot="dropdown-menu-itemLabelExternalIcon" :class="ui.itemLabelExternalIcon({ class: [uiOverride?.itemLabelExternalIcon, item.ui?.itemLabelExternalIcon], color: item?.color, active })" />
+          <UIcon v-if="item.target === '_blank' && externalIcon !== false" :name="typeof externalIcon === 'string' ? externalIcon : appConfig.ui.icons.external" data-slot="dropdown-menu-itemLabelExternalIcon" :class="ui.itemLabelExternalIcon({ class: [uiOverride?.itemLabelExternalIcon, item.ui?.itemLabelExternalIcon], color: item?.color ?? defaultColor, active })" />
         </span>
 
         <span v-if="get(item, props.descriptionKey as string) || !!slots[(item.slot ? `${item.slot}-description`: 'item-description') as keyof DropdownMenuContentSlots<T>]" data-slot="dropdown-menu-itemDescription" :class="ui.itemDescription({ class: [uiOverride?.itemDescription, item.ui?.itemDescription] })">
@@ -153,14 +157,14 @@ const itemSize = computed(() => getItemSize(props.size))
 
       <span data-slot="dropdown-menu-itemTrailing" :class="ui.itemTrailing({ class: [uiOverride?.itemTrailing, item.ui?.itemTrailing] })">
         <slot :name="((item.slot ? `${item.slot}-trailing`: 'item-trailing') as keyof DropdownMenuContentSlots<T>)" :item="(item as Extract<NestedItem<T>, { slot: string; }>)" :active="active" :index="index" :ui="ui">
-          <UIcon v-if="item.children?.length" :name="childrenIcon" data-slot="dropdown-menu-itemTrailingIcon" :class="ui.itemTrailingIcon({ class: [uiOverride?.itemTrailingIcon, item.ui?.itemTrailingIcon], color: item?.color, active })" />
+          <UIcon v-if="item.children?.length" :name="childrenIcon" data-slot="dropdown-menu-itemTrailingIcon" :class="ui.itemTrailingIcon({ class: [uiOverride?.itemTrailingIcon, item.ui?.itemTrailingIcon], color: item?.color ?? defaultColor, active })" />
           <span v-else-if="item.kbds?.length" data-slot="dropdown-menu-itemTrailingKbds" :class="ui.itemTrailingKbds({ class: [uiOverride?.itemTrailingKbds, item.ui?.itemTrailingKbds] })">
             <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="itemSize" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
           </span>
         </slot>
 
         <DropdownMenu.ItemIndicator as-child>
-          <UIcon :name="checkedIcon || appConfig.ui.icons.check" data-slot="dropdown-menu-itemTrailingIcon" :class="ui.itemTrailingIcon({ class: [uiOverride?.itemTrailingIcon, item.ui?.itemTrailingIcon], color: item?.color })" />
+          <UIcon :name="checkedIcon || appConfig.ui.icons.check" data-slot="dropdown-menu-itemTrailingIcon" :class="ui.itemTrailingIcon({ class: [uiOverride?.itemTrailingIcon, item.ui?.itemTrailingIcon], color: item?.color ?? defaultColor })" />
         </DropdownMenu.ItemIndicator>
       </span>
     </slot>
@@ -173,7 +177,7 @@ const itemSize = computed(() => getItemSize(props.size))
           <UInput
             autofocus
             autocomplete="off"
-            :size="size"
+            :size="givenSize"
             v-bind="inputProps"
             data-slot="dropdown-menu-input"
             :class="ui.input({ class: uiOverride?.input })"
@@ -186,7 +190,7 @@ const itemSize = computed(() => getItemSize(props.size))
         <div v-if="!searchTerm || hasFilteredItems" role="presentation" data-slot="dropdown-menu-viewport" :class="ui.viewport({ class: uiOverride?.viewport })">
           <DropdownMenu.Group v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" data-slot="dropdown-menu-group" :class="ui.group({ class: uiOverride?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
-              <DropdownMenu.Label v-if="item.type === 'label'" data-slot="dropdown-menu-label" :class="ui.label({ class: [uiOverride?.label, item.ui?.label, item.class], color: item?.color })">
+              <DropdownMenu.Label v-if="item.type === 'label'" data-slot="dropdown-menu-label" :class="ui.label({ class: [uiOverride?.label, item.ui?.label, item.class], color: item?.color ?? defaultColor })">
                 <ReuseItemTemplate :item="item" :index="index" />
               </DropdownMenu.Label>
               <DropdownMenu.Separator v-else-if="item.type === 'separator'" data-slot="dropdown-menu-separator" :class="ui.separator({ class: [uiOverride?.separator, item.ui?.separator, item.class] })" />
@@ -197,7 +201,7 @@ const itemSize = computed(() => getItemSize(props.size))
                   :disabled="item.disabled"
                   :text-value="get(item, props.labelKey as string)"
                   data-slot="dropdown-menu-item"
-                  :class="ui.item({ class: [uiOverride?.item, item.ui?.item, item.class], color: item?.color })"
+                  :class="ui.item({ class: [uiOverride?.item, item.ui?.item, item.class], color: item?.color ?? defaultColor })"
                 >
                   <ReuseItemTemplate :item="item" :index="index" />
                 </DropdownMenu.SubTrigger>
@@ -218,6 +222,7 @@ const itemSize = computed(() => getItemSize(props.size))
                   :loading-icon="loadingIcon"
                   :external-icon="externalIcon"
                   :size="size"
+                  :given-size="givenSize"
                   :filter="item.filter"
                   :filter-fields="item.filterFields || filterFields"
                   :ignore-filter="item.ignoreFilter ?? ignoreFilter"
@@ -234,7 +239,7 @@ const itemSize = computed(() => getItemSize(props.size))
                 :disabled="item.disabled"
                 :text-value="get(item, props.labelKey as string)"
                 data-slot="dropdown-menu-item"
-                :class="ui.item({ class: [uiOverride?.item, item.ui?.item, item.class], color: item?.color })"
+                :class="ui.item({ class: [uiOverride?.item, item.ui?.item, item.class], color: item?.color ?? defaultColor })"
                 @update:model-value="item.onUpdateChecked"
                 @select="item.onSelect"
               >
@@ -247,7 +252,7 @@ const itemSize = computed(() => getItemSize(props.size))
                   :text-value="get(item, props.labelKey as string)"
                   @select="item.onSelect"
                 >
-                  <ULinkBase v-bind="slotProps" data-slot="dropdown-menu-item" :class="ui.item({ class: [uiOverride?.item, item.ui?.item, item.class], color: item?.color, active })">
+                  <ULinkBase v-bind="slotProps" data-slot="dropdown-menu-item" :class="ui.item({ class: [uiOverride?.item, item.ui?.item, item.class], color: item?.color ?? defaultColor, active })">
                     <ReuseItemTemplate :item="item" :active="active" :index="index" />
                   </ULinkBase>
                 </DropdownMenu.Item>

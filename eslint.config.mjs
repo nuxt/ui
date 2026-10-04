@@ -190,13 +190,14 @@ const noUnresolvedFormFieldRefs = {
     const formFieldRefs = new Map()
 
     // `givenProps` is the `useGivenProps` proxy: what the component passes down
-    // to a child falls back to it, so the child keeps its own defaults.
-    function isPropsAccess(node, key) {
+    // to a child falls back to it, so the child keeps its own defaults. Its own
+    // `tv()` call needs the resolved `props`.
+    function isPropsAccess(node, key, allowGivenProps) {
       return !!node
         && node.type === 'MemberExpression'
         && !node.computed
         && node.object.type === 'Identifier'
-        && (node.object.name === propsVar || node.object.name === givenPropsVar)
+        && (node.object.name === propsVar || (allowGivenProps && node.object.name === givenPropsVar))
         && node.property.type === 'Identifier'
         && node.property.name === key
     }
@@ -213,6 +214,16 @@ const noUnresolvedFormFieldRefs = {
         out.push(node)
       }
       return out
+    }
+
+    // The invocation of a built theme, `tv(theme, overrides)({ ... })`
+    function isInsideTvCall(node) {
+      for (let current = node.parent; current; current = current.parent) {
+        if (current.type === 'CallExpression' && current.callee.type === 'CallExpression' && current.callee.callee.type === 'Identifier' && current.callee.callee.name === 'tv') {
+          return true
+        }
+      }
+      return false
     }
 
     const scriptVisitor = {
@@ -259,7 +270,7 @@ const noUnresolvedFormFieldRefs = {
         const operands = chainOperands(top)
         const index = operands.indexOf(node)
 
-        if (index !== -1 && operands.slice(index + 1).some(operand => isPropsAccess(operand, key))) {
+        if (index !== -1 && operands.slice(index + 1).some(operand => isPropsAccess(operand, key, !isInsideTvCall(node)))) {
           return
         }
 

@@ -3,7 +3,7 @@ import type { ComputedRef } from 'vue'
 import { describe, expectTypeOf, it, expect, test, beforeAll, afterAll } from 'vitest'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { useAppConfig } from '#imports'
-import { UFormField, UFieldGroup, UAvatarGroup, UTheme, UButton, UAvatar, UInput, UKbd, UEmpty, UCheckbox, UCheckboxGroup, UInputNumber } from '#components'
+import { UFormField, UFieldGroup, UAvatarGroup, UTheme, UButton, UAvatar, UInput, UKbd, UEmpty, UCheckbox, UCheckboxGroup, UInputNumber, UDropdownMenu, USelect } from '#components'
 import type * as ui from '#build/ui'
 import type { ThemeDefaults } from '../../src/runtime/types/theme'
 import { useComponentOverrides } from '../../src/runtime/composables/useComponentProps'
@@ -81,6 +81,46 @@ describe('app.config defaultVariants', () => {
 
     const root = wrapper.find('[data-slot="form-field"]')
     expect(root.attributes('data-orientation')).toBe('vertical')
+  })
+})
+
+// A variant that is no prop of the component has no proxy to resolve it, and the
+// engine reads no defaults, so the component reads the app config for it.
+describe('app.config defaultVariants of a variant that is no prop', () => {
+  let appConfig: { ui?: Record<string, any> }
+
+  beforeAll(() => {
+    appConfig = useAppConfig() as { ui?: Record<string, any> }
+    appConfig.ui ??= {}
+    appConfig.ui.dropdownMenu = { defaultVariants: { color: 'error' } }
+    appConfig.ui.select = { defaultVariants: { position: 'item-aligned' } }
+  })
+
+  afterAll(() => {
+    delete appConfig.ui!.dropdownMenu
+    delete appConfig.ui!.select
+  })
+
+  it('colors the items of a menu', async () => {
+    const wrapper = await mountSuspended({
+      components: { UDropdownMenu },
+      setup: () => ({ items: [{ label: 'Item' }, { label: 'Colored', color: 'success' }] }),
+      template: `<UDropdownMenu :items="items" open :portal="false" />`
+    })
+
+    const [item, colored] = wrapper.findAll('[data-slot="dropdown-menu-item"]')
+    expect(item!.classes()).toContain('[--ui-accent:var(--ui-error)]')
+    expect(colored!.classes()).toContain('[--ui-accent:var(--ui-success)]')
+  })
+
+  it('positions the content of a Select', async () => {
+    const wrapper = await mountSuspended({
+      components: { USelect },
+      template: `<USelect :items="['a']" open :portal="false" />`
+    })
+
+    // The `popper` position animates the content, `item-aligned` doesn't
+    expect(wrapper.find('[data-slot="select-content"]').classes().join(' ')).not.toContain('scale-in')
   })
 })
 
@@ -301,6 +341,20 @@ describe('\'*\' default variants', () => {
     expect(wrapper.find('[data-slot="input-base"]').classes()).toContain('text-base')
     expect(wrapper.find('[data-slot="button"]').classes()).toContain('text-base')
     expect(wrapper.find('[data-slot="avatar-group-base"]').classes()).toContain('size-10')
+  })
+
+  it('reaches the sizes a menu derives for its items', async () => {
+    const render = (template: string) => mountSuspended({
+      components: { UTheme, UDropdownMenu },
+      setup: () => ({ items: [{ label: 'Item', avatar: { alt: 'Benjamin Canac' }, kbds: ['K'] }] }),
+      template
+    })
+    const sizes = (wrapper: Awaited<ReturnType<typeof render>>) => ['itemLeadingAvatar', 'itemTrailingKbds'].map(slot => wrapper.find(`[data-slot="dropdown-menu-${slot}"]`).html())
+
+    const explicit = await render(`<UDropdownMenu :items="items" size="xl" open :portal="false" />`)
+    const themed = await render(`<UTheme :props="{ '*': { size: 'xl' } }"><UDropdownMenu :items="items" open :portal="false" /></UTheme>`)
+
+    expect(sizes(themed)).toEqual(sizes(explicit))
   })
 
   it('still reaches a child through a group', async () => {

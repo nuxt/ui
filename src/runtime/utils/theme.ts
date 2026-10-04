@@ -34,6 +34,6 @@ export type ExtendedTheme<T, B>
  * new one, and `compoundVariants` concatenate.
  * @internal
  */
-export function extendTheme<B extends TVTheme, const T extends Record<string, any>>(base: B, theme: T): DefinedTheme<ExtendedTheme<T, B>> {
+export function extendTheme<B extends TVTheme, const T extends Record<string, any>>(base: B, theme: T & { defaultVariants?: never }): DefinedTheme<ExtendedTheme<T, B>> {
   return defuFn(theme, base) as DefinedTheme<ExtendedTheme<T, B>>
 }

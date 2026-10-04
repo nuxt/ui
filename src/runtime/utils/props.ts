@@ -22,10 +22,12 @@ export function propIsDefined(vnode: VNode | null | undefined, prop: string): bo
 
 const versions = new WeakMap<ComponentInternalInstance, ShallowRef<number>>()
 
-function passedKeys(vnode: VNode): string {
+// Declared props only: a `class` or a listener that comes and goes is no prop
+function passedKeys(vm: ComponentInternalInstance): string {
+  const props = vm.vnode.props
   let keys = ''
-  for (const key in vnode.props) {
-    if (vnode.props[key] !== undefined) {
+  for (const key in props) {
+    if (props[key] !== undefined && camelCase(key) in vm.props) {
       keys += key + ','
     }
   }
@@ -45,9 +47,9 @@ export function usePassedProps(vm: ComponentInternalInstance): (prop: string) =>
   if (!version) {
     const ref = version = shallowRef(0)
     versions.set(vm, ref)
-    let keys = passedKeys(vm.vnode)
+    let keys = passedKeys(vm)
     onBeforeUpdate(() => {
-      const next = passedKeys(vm.vnode)
+      const next = passedKeys(vm)
       if (next !== keys) {
         keys = next
         ref.value++

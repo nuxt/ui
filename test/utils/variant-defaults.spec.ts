@@ -7,10 +7,12 @@ const componentsDir = join(process.cwd(), 'src/runtime/components')
 const themes = import.meta.glob<Record<string, any>>('../../src/runtime/theme/**/*.ts', { eager: true, import: 'default' })
 
 /**
- * A component that renders itself for its nested items, from the same theme
- * and the same `<UTheme :props>` key, so it takes the resolved value.
+ * A child that renders part of the same component, from the same theme and
+ * the same `<UTheme :props>` key, so it takes the resolved value.
  */
 const forwardedToItself: Record<string, string[]> = {
+  'ContextMenu.vue': ['UContextMenuContent'],
+  'DropdownMenu.vue': ['UDropdownMenuContent'],
   'content/ContentNavigation.vue': ['UContentNavigation']
 }
 
@@ -41,6 +43,18 @@ const components = walk(componentsDir).flatMap((file) => {
   return themeKey ? [[relative(componentsDir, file), source, themes[themeKey]!] as const] : []
 })
 
+/** The tag an attribute at `index` of a template belongs to. */
+function childTag(template: string, index: number): string | undefined {
+  let tag: string | undefined
+  for (const match of template.matchAll(/<([A-Z][\w.-]*)/gi)) {
+    if (match.index > index) {
+      break
+    }
+    tag = match[1]
+  }
+  return tag
+}
+
 function defaults(source: string): Record<string, string> {
   const block = source.match(/withDefaults\(defineProps<[^\n]*>\(\), \{\n([\s\S]*?)\n\}\)/)
   return Object.fromEntries((block?.[1]?.split('\n') ?? []).flatMap((line) => {
@@ -59,14 +73,14 @@ describe('variant defaults', () => {
     expect(components.length).toBeGreaterThan(100)
   })
 
-  // A prop now always holds a value, its `withDefaults` one when the parent
-  // passed none, so passing `props.size` to a child would hand it that default
-  // as an explicit prop, over the child's own default and its `<UTheme :props>`
-  // key. What a component passes down comes from `useGivenProps`.
   it.each(Object.entries(themes).filter(([, theme]) => theme?.slots))('%s declares no defaultVariants', (_, theme) => {
     expect(theme.defaultVariants, 'a variant prop defaults in the component\'s `withDefaults`').toBeUndefined()
   })
 
+  // A prop now always holds a value, its `withDefaults` one when the parent
+  // passed none, so passing `props.size` to a child would hand it that default
+  // as an explicit prop, over the child's own default and its `<UTheme :props>`
+  // key. What a component passes down comes from `useGivenProps`.
   it.each(components)('%s passes what it was given to its children', (name, source, theme) => {
     const keys = Object.keys(defaults(source)).filter(key => Object.keys(theme.variants?.[key] ?? {}).some(value => value !== 'true' && value !== 'false'))
     const template = source.slice(source.indexOf('<template>'))
@@ -74,15 +88,20 @@ describe('variant defaults', () => {
     const problems: string[] = []
     for (const key of keys) {
       const kebab = key.replace(/[A-Z]/g, c => `-${c.toLowerCase()}`)
-      for (const match of template.matchAll(new RegExp(`<(U[A-Z]\\w*)\\b[^>]*?\\s:(?:${key}|${kebab})="props\\.${key}"`, 'g'))) {
-        if (!forwardedToItself[name]?.includes(match[1]!)) {
-          problems.push(`\`${match[1]}\` gets \`props.${key}\``)
+      // The prop itself, and the computeds that resolve it, like `size` for
+      // `formFieldSize.value ?? props.size`
+      const resolved = [`props\\.${key}`]
+      for (const match of script.matchAll(new RegExp(`const (\\w+) = computed\\((?:(?!\\nconst )[\\s\\S]){0,200}?\\bprops\\.${key}\\b`, 'g'))) {
+        // A size derived for a child, like an Avatar's from a Button's, is the child's own
+        if (!/getAvatarSize\(|getItemSize\(|avatarSizes\[/.test(match[0])) {
+          resolved.push(match[1]!)
         }
       }
-      // A computed over the prop, like `size` for `formFieldSize.value ?? props.size`
-      if (new RegExp(`const ${key} = computed\\(\\(\\) => [^\\n]*props\\.${key}\\b`).test(script)) {
-        for (const match of template.matchAll(new RegExp(`<(U[A-Z]\\w*)\\b[^>]*?\\s:(?:${key}|${kebab})="${key}"`, 'g'))) {
-          problems.push(`\`${match[1]}\` gets the resolved \`${key}\``)
+      // The value as is, or with a fallback: an expression over it is a decision of the component
+      for (const match of template.matchAll(new RegExp(`\\s:(?:${key}|${kebab})="(?:${resolved.join('|')})(?:"| \\|\\| | \\?\\? )`, 'g'))) {
+        const tag = childTag(template, match.index)
+        if (tag && /^(?:U[A-Z]|component$)/.test(tag) && !forwardedToItself[name]?.includes(tag)) {
+          problems.push(`\`${tag}\` gets the resolved \`${key}\``)
         }
       }
       for (const match of script.matchAll(/reactivePick\(props, ([^)]*)\)/g)) {

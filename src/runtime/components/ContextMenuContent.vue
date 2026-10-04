@@ -53,7 +53,7 @@ import UAvatar from './Avatar.vue'
 import UIcon from './Icon.vue'
 import UKbd from './Kbd.vue'
 import UContextMenuContent from './ContextMenuContent.vue'
-import { useThemeConfig } from '../composables/useComponentProps'
+import { useDefaultVariant, useThemeConfig } from '../composables/useComponentProps'
 
 const props = defineProps<ContextMenuContentProps<T>>()
 const emits = defineEmits<ContextMenuContentEmits>()
@@ -61,6 +61,8 @@ const slots = defineSlots<ContextMenuSlots<T>>()
 
 const { dir } = useLocale()
 const appConfig = useThemeConfig()
+// An item's color is no prop of the menu: `app.config.ui.contextMenu.defaultVariants` sets it
+const defaultColor = useDefaultVariant<NonNullable<ContextMenu['variants']['color']>>('contextMenu', 'color')
 
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'descriptionKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'size', 'class', 'ui', 'uiOverride'), emits)
@@ -84,8 +86,8 @@ const itemSize = computed(() => getItemSize(props.size))
   <DefineItemTemplate v-slot="{ item, active, index }">
     <slot :name="((item.slot || 'item') as keyof ContextMenuSlots<T>)" :item="item" :index="index" :ui="ui">
       <slot :name="((item.slot ? `${item.slot}-leading`: 'item-leading') as keyof ContextMenuSlots<T>)" :item="item" :active="active" :index="index" :ui="ui">
-        <UIcon v-if="item.loading" :name="loadingIcon || appConfig.ui.icons.loading" data-slot="context-menu-itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [uiOverride?.itemLeadingIcon, item.ui?.itemLeadingIcon], color: item?.color, loading: true })" />
-        <UIcon v-else-if="item.icon" :name="item.icon" data-slot="context-menu-itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [uiOverride?.itemLeadingIcon, item.ui?.itemLeadingIcon], color: item?.color, active })" />
+        <UIcon v-if="item.loading" :name="loadingIcon || appConfig.ui.icons.loading" data-slot="context-menu-itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [uiOverride?.itemLeadingIcon, item.ui?.itemLeadingIcon], color: item?.color ?? defaultColor, loading: true })" />
+        <UIcon v-else-if="item.icon" :name="item.icon" data-slot="context-menu-itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [uiOverride?.itemLeadingIcon, item.ui?.itemLeadingIcon], color: item?.color ?? defaultColor, active })" />
         <UAvatar v-else-if="item.avatar" :size="avatarSize" v-bind="item.avatar" data-slot="context-menu-itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [uiOverride?.itemLeadingAvatar, item.ui?.itemLeadingAvatar], active })" />
       </slot>
 
@@ -95,7 +97,7 @@ const itemSize = computed(() => getItemSize(props.size))
             {{ get(item, props.labelKey as string) }}
           </slot>
 
-          <UIcon v-if="item.target === '_blank' && externalIcon !== false" :name="typeof externalIcon === 'string' ? externalIcon : appConfig.ui.icons.external" data-slot="context-menu-itemLabelExternalIcon" :class="ui.itemLabelExternalIcon({ class: [uiOverride?.itemLabelExternalIcon, item.ui?.itemLabelExternalIcon], color: item?.color, active })" />
+          <UIcon v-if="item.target === '_blank' && externalIcon !== false" :name="typeof externalIcon === 'string' ? externalIcon : appConfig.ui.icons.external" data-slot="context-menu-itemLabelExternalIcon" :class="ui.itemLabelExternalIcon({ class: [uiOverride?.itemLabelExternalIcon, item.ui?.itemLabelExternalIcon], color: item?.color ?? defaultColor, active })" />
         </span>
 
         <span v-if="get(item, props.descriptionKey as string) || !!slots[(item.slot ? `${item.slot}-description`: 'item-description') as keyof ContextMenuSlots<T>]" data-slot="context-menu-itemDescription" :class="ui.itemDescription({ class: [uiOverride?.itemDescription, item.ui?.itemDescription] })">
@@ -107,14 +109,14 @@ const itemSize = computed(() => getItemSize(props.size))
 
       <span data-slot="context-menu-itemTrailing" :class="ui.itemTrailing({ class: [uiOverride?.itemTrailing, item.ui?.itemTrailing] })">
         <slot :name="((item.slot ? `${item.slot}-trailing`: 'item-trailing') as keyof ContextMenuSlots<T>)" :item="item" :active="active" :index="index" :ui="ui">
-          <UIcon v-if="item.children?.length" :name="childrenIcon" data-slot="context-menu-itemTrailingIcon" :class="ui.itemTrailingIcon({ class: [uiOverride?.itemTrailingIcon, item.ui?.itemTrailingIcon], color: item?.color, active })" />
+          <UIcon v-if="item.children?.length" :name="childrenIcon" data-slot="context-menu-itemTrailingIcon" :class="ui.itemTrailingIcon({ class: [uiOverride?.itemTrailingIcon, item.ui?.itemTrailingIcon], color: item?.color ?? defaultColor, active })" />
           <span v-else-if="item.kbds?.length" data-slot="context-menu-itemTrailingKbds" :class="ui.itemTrailingKbds({ class: [uiOverride?.itemTrailingKbds, item.ui?.itemTrailingKbds] })">
             <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="itemSize" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
           </span>
         </slot>
 
         <ContextMenu.ItemIndicator as-child>
-          <UIcon :name="checkedIcon || appConfig.ui.icons.check" data-slot="context-menu-itemTrailingIcon" :class="ui.itemTrailingIcon({ class: [uiOverride?.itemTrailingIcon, item.ui?.itemTrailingIcon], color: item?.color })" />
+          <UIcon :name="checkedIcon || appConfig.ui.icons.check" data-slot="context-menu-itemTrailingIcon" :class="ui.itemTrailingIcon({ class: [uiOverride?.itemTrailingIcon, item.ui?.itemTrailingIcon], color: item?.color ?? defaultColor })" />
         </ContextMenu.ItemIndicator>
       </span>
     </slot>
@@ -128,7 +130,7 @@ const itemSize = computed(() => getItemSize(props.size))
         <div role="presentation" data-slot="context-menu-viewport" :class="ui.viewport({ class: uiOverride?.viewport })">
           <ContextMenu.Group v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" data-slot="context-menu-group" :class="ui.group({ class: uiOverride?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
-              <ContextMenu.Label v-if="item.type === 'label'" data-slot="context-menu-label" :class="ui.label({ class: [uiOverride?.label, item.ui?.label, item.class], color: item?.color })">
+              <ContextMenu.Label v-if="item.type === 'label'" data-slot="context-menu-label" :class="ui.label({ class: [uiOverride?.label, item.ui?.label, item.class], color: item?.color ?? defaultColor })">
                 <ReuseItemTemplate :item="item" :index="index" />
               </ContextMenu.Label>
               <ContextMenu.Separator v-else-if="item.type === 'separator'" data-slot="context-menu-separator" :class="ui.separator({ class: [uiOverride?.separator, item.ui?.separator, item.class] })" />
@@ -139,7 +141,7 @@ const itemSize = computed(() => getItemSize(props.size))
                   :disabled="item.disabled"
                   :text-value="get(item, props.labelKey as string)"
                   data-slot="context-menu-item"
-                  :class="ui.item({ class: [uiOverride?.item, item.ui?.item, item.class], color: item?.color })"
+                  :class="ui.item({ class: [uiOverride?.item, item.ui?.item, item.class], color: item?.color ?? defaultColor })"
                 >
                   <ReuseItemTemplate :item="item" :index="index" />
                 </ContextMenu.SubTrigger>
@@ -171,7 +173,7 @@ const itemSize = computed(() => getItemSize(props.size))
                 :disabled="item.disabled"
                 :text-value="get(item, props.labelKey as string)"
                 data-slot="context-menu-item"
-                :class="ui.item({ class: [uiOverride?.item, item.ui?.item, item.class], color: item?.color })"
+                :class="ui.item({ class: [uiOverride?.item, item.ui?.item, item.class], color: item?.color ?? defaultColor })"
                 @update:model-value="item.onUpdateChecked"
                 @select="item.onSelect"
               >
@@ -184,7 +186,7 @@ const itemSize = computed(() => getItemSize(props.size))
                   :text-value="get(item, props.labelKey as string)"
                   @select="item.onSelect"
                 >
-                  <ULinkBase v-bind="slotProps" data-slot="context-menu-item" :class="ui.item({ class: [uiOverride?.item, item.ui?.item, item.class], active, color: item?.color })">
+                  <ULinkBase v-bind="slotProps" data-slot="context-menu-item" :class="ui.item({ class: [uiOverride?.item, item.ui?.item, item.class], active, color: item?.color ?? defaultColor })">
                     <ReuseItemTemplate :item="item" :active="active" :index="index" />
                   </ULinkBase>
                 </ContextMenu.Item>

@@ -82,7 +82,7 @@ export function useThemeConfig(): { ui: Record<string, any> } {
 }
 
 /**
- * The library-wide defaults a `'*'` entry replaces. A component whose own theme
+ * The library-wide defaults a `'*'` entry replaces. A component whose own
  * default is something else (a `neutral` Kbd, an `sm` component) keeps it.
  */
 const GLOBAL_DEFAULTS: Record<string, string> = { color: 'primary', size: 'md' }
@@ -155,7 +155,10 @@ function createPropsProxy<T extends object>(name: string, props: T, theme: { [ke
     const value = entry?.[prop]
     if (!own || !base || value === undefined) return undefined
     const appConfigEntry = name.includes('.') ? get(config.value, name) : config.value[name]
-    if (appConfigEntry?.defaultVariants?.[prop] !== undefined || (vm?.type as any)?.props?.[prop]?.default !== base) return undefined
+    // The default it declares in `withDefaults`, or its theme's for a component
+    // that still keeps it there
+    const declared = (vm?.type as any)?.props?.[prop]?.default ?? (theme?.defaultVariants as Record<string, unknown> | undefined)?.[prop]
+    if (appConfigEntry?.defaultVariants?.[prop] !== undefined || declared !== base) return undefined
     // Only a variant of the theme, and a value the component has: `xl` on a
     // Kbd leaves its default
     const values = (theme?.variants as Record<string, Record<string, unknown>> | undefined)?.[prop]
@@ -232,6 +235,19 @@ function createPropsProxy<T extends object>(name: string, props: T, theme: { [ke
     ownKeys: t => Reflect.ownKeys(t),
     getOwnPropertyDescriptor: (t, p) => Reflect.getOwnPropertyDescriptor(t, p)
   })
+}
+
+/**
+ * The default `app.config.ui.<name>.defaultVariants` gives a variant that is no
+ * prop of the component, like the `position` of a Select or the `color` of a
+ * menu item. The proxy only resolves props and the engine reads no defaults,
+ * so the component passes this to `tv()` itself.
+ * @internal
+ */
+export function useDefaultVariant<T = string>(name: string, key: string): ComputedRef<T | undefined> {
+  const { config } = injectThemeContext()
+
+  return computed(() => (name.includes('.') ? get(config.value, name) : config.value[name])?.defaultVariants?.[key])
 }
 
 /**

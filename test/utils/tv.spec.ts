@@ -2,7 +2,7 @@ import { describe, it, expect, expectTypeOf, vi } from 'vitest'
 import { reactive } from 'vue'
 import { tv, ComponentOverrides, engineFor } from '../../src/runtime/utils/tv'
 import type { TVTheme, VariantProps } from '../../src/runtime/types/tv'
-import { extendTheme } from '../../src/runtime/utils/theme'
+import { defineTheme, extendTheme } from '../../src/runtime/utils/theme'
 import buttonTheme from '../../src/runtime/theme/button'
 import selectTheme from '../../src/runtime/theme/select'
 import stepsTheme from '../../src/runtime/theme/prose/steps'
@@ -490,6 +490,17 @@ describe('tv types', () => {
 
     expectTypeOf(component).parameter(0).exclude<undefined>().toEqualTypeOf<VariantProps<typeof component>>()
     expectTypeOf<VariantProps<typeof component>>().toEqualTypeOf<{ size?: 'sm' | 'md', block?: boolean }>()
+  })
+
+  it('checks an override\'s defaultVariants against the declared variants, and takes none in a theme', () => {
+    // `app.config.ui.<c>.defaultVariants` is typed here: the component reads it, the engine doesn't
+    tv(button, { defaultVariants: { size: 'sm', block: false } })
+    // @ts-expect-error `lg` is not a declared size
+    tv(button, { defaultVariants: { size: 'lg' } })
+    // @ts-expect-error a theme has no defaults, a variant's default is the component's prop default
+    tv({ slots: { base: '' }, variants: { size: { sm: { base: 'text-sm' } } }, defaultVariants: { size: 'sm' } })
+    // @ts-expect-error same through `defineTheme`
+    defineTheme({ slots: { base: '' }, variants: { size: { sm: { base: 'text-sm' } } }, defaultVariants: { size: 'sm' } })
   })
 
   it('accepts one value or several in compoundVariants', () => {

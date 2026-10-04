@@ -53,7 +53,7 @@ const providedProps = useGivenProps('fieldGroup', _props)
 const overrides = useComponentOverrides((ui: FieldGroup['AppConfig']['ui']) => ui.fieldGroup)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, overrides.value)({ orientation: props.orientation }))
+const ui = computed(() => tv(theme, overrides.value)({ orientation: props.orientation, size: props.size }))
 
 provide(fieldGroupInjectionKey, computed(() => ({
   orientation: props.orientation,

@@ -238,7 +238,7 @@ import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTri
 import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
-import { useComponentProps, useGivenProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useGivenProps, useComponentOverrides, useDefaultVariant, useThemeConfig } from '../composables/useComponentProps'
 import { useFieldGroup, FieldGroupReset } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
@@ -283,6 +283,8 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
 const appConfig = useThemeConfig() as SelectMenu['AppConfig']
+// `position` is no prop: `app.config.ui.selectMenu.defaultVariants` sets it
+const defaultPosition = useDefaultVariant<'popper' | 'item-aligned'>('selectMenu', 'position')
 const overrides = useComponentOverrides((ui: SelectMenu['AppConfig']['ui']) => ui.selectMenu)
 const { filterGroups } = useFilter()
 const rootProps = useForwardProps(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'highlightOnHover', 'by'), emits)
@@ -357,7 +359,7 @@ const ui = computed(() => tv(theme, overrides.value)({
   fieldGroup: orientation.value,
   virtualize: !!props.virtualize,
   multiple: props.multiple,
-  position: 'popper'
+  position: defaultPosition.value ?? 'popper'
 }))
 
 function displayValue(value: GetItemValue<T, VK, ExcludeItem> | GetItemValue<T, VK, ExcludeItem>[]): string | undefined {

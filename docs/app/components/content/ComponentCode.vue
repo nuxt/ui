@@ -304,7 +304,10 @@ ${props.slots?.default}
     }
 
     const prop = meta.value?.meta?.props?.find((prop: any) => prop.name === key)
-    const propDefault = prop && (prop.default ?? prop.tags?.find(tag => tag.name === 'defaultValue')?.text)
+    // The meta holds a default as written in `withDefaults`, quotes and
+    // `as never` included
+    const rawDefault = prop && (prop.default ?? prop.tags?.find(tag => tag.name === 'defaultValue')?.text)
+    const propDefault = typeof rawDefault === 'string' ? rawDefault.replace(' as never', '').replace(/^(['"`])(.*)\1$/, '$2') : rawDefault
     const name = kebabCase(key)
 
     if (typeof value === 'boolean') {
