@@ -1052,9 +1052,6 @@ importers:
       '@ai-sdk/anthropic':
         specifier: 'catalog:'
         version: 4.0.65(zod@4.6.5)
-      '@ai-sdk/gateway':
-        specifier: 'catalog:'
-        version: 4.0.94(zod@4.6.5)
       '@ai-sdk/vue':
         specifier: 'catalog:'
         version: 4.0.116(vue@3.5.43(typescript@6.0.3))(zod@4.6.5)

@@ -1,14 +1,13 @@
 import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse, tool } from 'ai'
 import { anthropic } from '@ai-sdk/anthropic'
 import type { AnthropicLanguageModelOptions } from '@ai-sdk/anthropic'
-import { gateway } from '@ai-sdk/gateway'
 import { z } from 'zod'
 
 export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
   const result = streamText({
-    model: gateway('anthropic/claude-sonnet-5.5'),
+    model: 'anthropic/claude-sonnet-5.5',
     instructions: 'You are a helpful assistant. When answering questions, search the web for up-to-date information when relevant.',
     messages: await convertToModelMessages(messages),
     tools: {
