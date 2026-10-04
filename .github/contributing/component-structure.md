@@ -55,6 +55,7 @@ import { tv } from '../utils/tv'
 // 7. Raw props. `withDefaults` holds every default, the theme variants
 //    included (`size`, `color`, `variant`): the theme has none for a prop
 const _props = withDefaults(defineProps<ComponentNameProps>(), {
+  color: 'primary',
   size: 'md'
 })
 const slots = defineSlots<ComponentNameSlots>()

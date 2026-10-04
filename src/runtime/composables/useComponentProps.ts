@@ -4,7 +4,7 @@ import { createContext } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import detected from '#build/ui/detected'
 import { get } from '../utils'
-import { propIsDefined } from '../utils/props'
+import { usePassedProps } from '../utils/props'
 import { ComponentOverrides, engineFor } from '../utils/tv'
 
 export type ThemeContext = {
@@ -140,6 +140,7 @@ export function useGivenProps<T extends object>(name: string, props: T): T {
 
 function createPropsProxy<T extends object>(name: string, props: T, theme: { [key: string]: unknown } | undefined, own: boolean): T {
   const vm = getCurrentInstance()
+  const isPassed = vm ? usePassedProps(vm) : undefined
   const { defaults, config } = injectThemeContext()
 
   if (import.meta.dev && import.meta.client && theme) {
@@ -155,9 +156,10 @@ function createPropsProxy<T extends object>(name: string, props: T, theme: { [ke
     if (!own || !base || value === undefined) return undefined
     const appConfigEntry = name.includes('.') ? get(config.value, name) : config.value[name]
     if (appConfigEntry?.defaultVariants?.[prop] !== undefined || (vm?.type as any)?.props?.[prop]?.default !== base) return undefined
-    // A value the component doesn't have, like `xl` on a Kbd, leaves its default
+    // Only a variant of the theme, and a value the component has: `xl` on a
+    // Kbd leaves its default
     const values = (theme?.variants as Record<string, Record<string, unknown>> | undefined)?.[prop]
-    if (values && !(value in values) && !(value in (appConfigEntry?.variants?.[prop] ?? {}))) return undefined
+    if (!values || (!(value in values) && !(value in (appConfigEntry?.variants?.[prop] ?? {})))) return undefined
     return value
   }
 
@@ -192,7 +194,7 @@ function createPropsProxy<T extends object>(name: string, props: T, theme: { [ke
         return [themeClass, raw]
       }
 
-      if (vm && propIsDefined(vm.vnode, prop)) return raw
+      if (isPassed?.(prop)) return raw
 
       const themeValue = themeEntry?.[prop]
       if (themeValue !== undefined) return themeValue

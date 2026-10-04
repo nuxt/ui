@@ -243,7 +243,7 @@ import { Combobox, Autocomplete } from 'reka-ui/namespaced'
 import { defu } from 'defu'
 import { isEqual } from 'ohash/utils'
 import { reactivePick, reactiveOmit, createReusableTemplate } from '@vueuse/core'
-import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useComponentProps, useGivenProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useFieldGroup, FieldGroupReset } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
@@ -280,6 +280,9 @@ const emits = defineEmits<InputMenuEmits<T, VK, M, Mod, C>>()
 const slots = defineSlots<InputMenuSlots<T, VK, M, Mod, C>>()
 
 const props = useComponentProps<InputMenuProps<T, VK, M, Mod, C>>('inputMenu', _props, theme)
+// What the component passes down to the components it renders: what it was
+// given, without its own defaults, so a child keeps its own
+const givenProps = useGivenProps<InputMenuProps<T, VK, M, Mod, C>>('inputMenu', _props)
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
@@ -343,6 +346,7 @@ const color = computed(() => formFieldColor.value ?? props.color)
 const highlight = computed(() => formFieldHighlight.value ?? props.highlight)
 // eslint-disable-next-line vue/no-dupe-keys
 const size = computed(() => fieldGroupSize.value ?? formFieldSize.value ?? props.size)
+const givenSize = computed(() => fieldGroupSize.value ?? formFieldSize.value ?? givenProps.size)
 
 const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
@@ -779,7 +783,7 @@ defineExpose({
             <UButton
               as="span"
               :icon="props.clearIcon || appConfig.ui.icons.close"
-              :size="size"
+              :size="givenSize"
               variant="link"
               color="neutral"
               tabindex="-1"
