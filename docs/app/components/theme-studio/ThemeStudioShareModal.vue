@@ -12,7 +12,7 @@ const open = defineModel<boolean>('open', { default: false })
 
 const appConfig = useAppConfig()
 const studioIcons = useStudioIcons()
-const { exportCSS, exportConfig, exportApp, configLabel, appLabel, currentDoc } = useTheme()
+const { exportCSS, exportConfig, configLabel, currentDoc } = useTheme()
 const { presets, activePreset, dirty } = useThemeStudio()
 const { framework } = useFrameworks()
 const { track } = useAnalytics()
@@ -23,7 +23,6 @@ const { copy: copyFileToClipboard, copied: fileCopied } = useClipboard()
 
 const css = ref('')
 const config = ref('')
-const app = ref('')
 const link = ref('')
 
 /** The URL the studio reads back on load, theme and all. */
@@ -44,25 +43,20 @@ function copyThemeLink() {
 }
 
 // the pane shows the plain file for the frame the highlighter takes to arrive
-const docs = shallowRef<Partial<Record<'css' | 'config' | 'app', MarkdownDoc>>>({})
+const docs = shallowRef<Partial<Record<'css' | 'config', MarkdownDoc>>>({})
 
-// the app.vue/App.vue snippet only exists when a default variant/size/color
-// is set, most exports never touch one
 const panes = computed(() => [
   { key: 'css' as const, filename: 'main.css', code: css.value },
-  { key: 'config' as const, filename: configLabel.value, code: config.value },
-  ...(app.value ? [{ key: 'app' as const, filename: appLabel.value, code: app.value }] : [])
+  { key: 'config' as const, filename: configLabel.value, code: config.value }
 ])
 
-const tab = ref<'css' | 'config' | 'app'>('css')
+const tab = ref<'css' | 'config'>('css')
 const pane = computed(() => panes.value.find(entry => entry.key === tab.value) ?? panes.value[0]!)
-
-const EXPORT_TYPE_LABELS = { css: 'CSS', config: 'Config', app: 'App' } as const
 
 /** Copy and Download both act on the file the tab is showing. */
 function copyFile() {
   copyFileToClipboard(pane.value.code)
-  track('Theme Exported', { type: EXPORT_TYPE_LABELS[pane.value.key], action: 'Copy' })
+  track('Theme Exported', { type: pane.value.key === 'css' ? 'CSS' : 'Config', action: 'Copy' })
 }
 
 function downloadFile() {
@@ -74,7 +68,7 @@ function downloadFile() {
   anchor.click()
   anchor.remove()
   setTimeout(() => URL.revokeObjectURL(url), 0)
-  track('Theme Exported', { type: EXPORT_TYPE_LABELS[pane.value.key], action: 'Download' })
+  track('Theme Exported', { type: pane.value.key === 'css' ? 'CSS' : 'Config', action: 'Download' })
 }
 
 // framework too: only one half of the export is framework-agnostic. The last
@@ -84,27 +78,19 @@ watch([open, framework], async ([isOpen]) => {
   const current = ++version
   css.value = ''
   config.value = ''
-  app.value = ''
   docs.value = {}
 
   if (!isOpen) {
     return
   }
 
-  const [nextCss, nextConfig, nextApp] = await Promise.all([exportCSS(), exportConfig(), exportApp()])
-  const [cssDoc, configDoc, appDoc] = await Promise.all([
-    parseCode(nextCss, 'css'),
-    parseCode(nextConfig, 'ts'),
-    nextApp ? parseCode(nextApp, 'vue') : undefined
-  ])
+  const [nextCss, nextConfig] = await Promise.all([exportCSS(), exportConfig()])
+  const [cssDoc, configDoc] = await Promise.all([parseCode(nextCss, 'css'), parseCode(nextConfig, 'ts')])
   if (current !== version) return
 
   css.value = nextCss
   config.value = nextConfig
-  app.value = nextApp
-  docs.value = { css: cssDoc, config: configDoc, ...(appDoc ? { app: appDoc } : {}) }
-  // the app.vue/App.vue tab only exists conditionally, fall back to css if it was selected and vanished
-  if (tab.value === 'app' && !nextApp) tab.value = 'css'
+  docs.value = { css: cssDoc, config: configDoc }
 })
 
 // The theme can't change while the modal covers the studio, so the link is

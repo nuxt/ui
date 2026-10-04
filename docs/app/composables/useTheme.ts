@@ -5,11 +5,11 @@ import { FONT_WEIGHT_DEFAULTS, FONTS, RADIUSES, NEUTRAL_COLORS, PRIMARY_COLORS }
 import { themeIcons, ICON_PACKS } from '../utils/theme/icons'
 import { cssVariableDefaults } from '../utils/theme/tokens'
 import type { SerializeOptions } from '../utils/theme/engine/serialize'
-import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables, sanitizeThemeProps } from '../utils/theme/sanitize'
+import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables } from '../utils/theme/sanitize'
 // Tables only, never the engine barrel: this composable rides the entry
 // chunk on every page, and the barrel would drag presets, the palette math
 // and the serializer with it. The serializer loads on demand below.
-import { isDefaultStyle, isDefaultTheme, styleTokens, styleProps, mergeProps, DEFAULT_COLORS, DEFAULT_PRESET_ID, THEME_DEFAULTS, SEMANTIC_ALIASES, LIBRARY_TOKEN_DEFAULTS, tokenShadeDefaults } from '../utils/theme/engine/types'
+import { mergeUi, isDefaultStyle, isDefaultTheme, styleTokens, DEFAULT_COLORS, DEFAULT_PRESET_ID, THEME_DEFAULTS, SEMANTIC_ALIASES, LIBRARY_TOKEN_DEFAULTS, tokenShadeDefaults } from '../utils/theme/engine/types'
 import type { ThemeDoc, ThemePalette, StyleOptions, StoredPaletteParams } from '../utils/theme/engine'
 import colors from 'tailwindcss/colors'
 
@@ -29,6 +29,10 @@ export function useTheme() {
   // That plugin also owns the single write (see utils/theme/storage.ts), so
   // nothing in here touches localStorage.
   const aiThemeExtras = useState<Record<string, any>>('nuxt-ui-ai-theme', () => ({}))
+  // Style-treatment bundles live in their OWN channel so restyling can never
+  // destroy preset/AI overrides sharing the same component keys. Derived from
+  // `stylePrefs`, so it is rebuilt on load rather than persisted.
+  const styleUiData = useState<Record<string, any>>('nuxt-ui-style-ui', () => ({}))
   const customColorsData = useState<Record<string, Record<string, string>>>('nuxt-ui-custom-colors', () => ({}))
 
   // The neutral may be a custom palette with no tailwindcss/colors entry,
@@ -249,12 +253,6 @@ export function useTheme() {
    */
   const hasChanges = computed(() => !isDefaultTheme(currentDoc()) || Object.keys(customColorsData.value).length > 0)
 
-  /**
-   * The live `<UTheme :props>` bag wrapping the studio preview: the style
-   * axis's own defaults, with the AI's extra props winning per key.
-   */
-  const themeProps = computed(() => mergeProps(styleProps(stylePrefs.value), aiThemeExtras.value.props))
-
   /** Snapshot the live theme state as a sparse ThemeDoc, the export generators' input. */
   function currentDoc(): ThemeDoc {
     const doc: ThemeDoc = { version: 1 }
@@ -312,9 +310,6 @@ export function useTheme() {
     if (extras.ui && Object.keys(extras.ui).length) {
       doc.components = extras.ui
     }
-    if (extras.props && Object.keys(extras.props).length) {
-      doc.props = extras.props
-    }
 
     return doc
   }
@@ -329,12 +324,6 @@ export function useTheme() {
   async function exportConfig(options?: SerializeOptions): Promise<string> {
     const { generateConfig } = await import('../utils/theme/engine/serialize')
     return generateConfig(currentDoc(), framework.value, options)
-  }
-
-  /** The `app.vue` / `App.vue` snippet, empty when there's no default to wrap the app in. */
-  async function exportApp(): Promise<string> {
-    const { generateApp } = await import('../utils/theme/engine/serialize')
-    return generateApp(currentDoc(), framework.value)
   }
 
   function injectCustomColors(customColors: Record<string, Record<string, string>>) {
@@ -353,15 +342,24 @@ export function useTheme() {
   }
 
   /**
-   * Rebuild `appConfig.ui.<component>` for the given keys from the AI
-   * extras: the style axis's own defaults ride `themeProps`/`<UTheme :props>`
-   * now, so this channel only ever carries slot/compoundVariant overrides.
+   * Rebuild `appConfig.ui.<component>` for the given keys: style bundle
+   * first, preset/AI extras last so explicit overrides win the class merge.
    */
   function recomposeComponentOverrides(keys: Iterable<string>) {
     for (const key of keys) {
-      const value = aiThemeExtras.value.ui?.[key]
-      ;(appConfig.ui as any)[key] = value && Object.keys(value).length ? value : undefined
+      const merged = mergeUi(
+        { [key]: styleUiData.value[key] },
+        { [key]: aiThemeExtras.value.ui?.[key] }
+      )[key]
+      ;(appConfig.ui as any)[key] = merged && Object.keys(merged).length ? merged : undefined
     }
+  }
+
+  /** Replace the style treatment's component bundle wholesale. */
+  function setStyleUi(ui: Record<string, any>) {
+    const touched = new Set([...Object.keys(styleUiData.value), ...Object.keys(ui)])
+    styleUiData.value = ui
+    recomposeComponentOverrides(touched)
   }
 
   function removeCustomColors(names: string[]) {
@@ -450,24 +448,13 @@ export function useTheme() {
         // icons app-wide) and prototype-polluting keys
         if (key === 'colors' || key === 'icons' || key === '__proto__' || key === 'constructor' || key === 'prototype') continue
 
-        // `defaultVariants` is dead on this model (default variant/size/color
-        // now ride `settings.props`, see below): drop it so a stale AI reply
-        // or an older saved theme doesn't export it.
-        const { defaultVariants: _defaultVariants, ...rest } = value as Record<string, any>
-        savedExtras.ui[key] = defu(rest, savedExtras.ui[key] || {})
-      }
-    }
-
-    if (settings.props && typeof settings.props === 'object') {
-      savedExtras.props = savedExtras.props || {}
-      for (const [key, value] of Object.entries(sanitizeThemeProps(settings.props))) {
-        savedExtras.props[key] = { ...savedExtras.props[key], ...value }
+        savedExtras.ui[key] = defu(value as Record<string, any>, savedExtras.ui[key] || {})
       }
     }
 
     // only rewrite the channel when touched, slider/curve drags stream
     // through here and must not reactively wake the AI extras every tick
-    const touchedExtras = settings.ui || settings.props || semanticUpdates.length > 0
+    const touchedExtras = settings.ui || semanticUpdates.length > 0
     if (touchedExtras) {
       aiThemeExtras.value = savedExtras
     }
@@ -514,8 +501,9 @@ export function useTheme() {
     cssVariablesData.value = {}
 
     // the studio channels too: orphaned style prefs would silently resurrect
-    // on the next style click or export (themeProps is derived from them),
-    // and orphaned curve params would be re-persisted by the palette editor
+    // on the next style click or export, and orphaned curve params would be
+    // re-persisted by the palette editor
+    setStyleUi({})
     stylePrefs.value = {}
     activePreset.value = undefined
     paletteParams.value = {}
@@ -556,8 +544,6 @@ export function useTheme() {
      */
     selectedPreset: computed(() => activePreset.value ?? (hasChanges.value ? undefined : DEFAULT_PRESET_ID)),
     configLabel: computed(() => framework.value === 'vue' ? 'vite.config.ts' : 'app.config.ts'),
-    appLabel: computed(() => framework.value === 'vue' ? 'App.vue' : 'app.vue'),
-    themeProps,
     currentDoc,
     cssVariablesData,
     customColorsData,
@@ -566,9 +552,9 @@ export function useTheme() {
     paletteParams,
     removeCustomColors,
     removeCSSVariables,
+    setStyleUi,
     exportCSS,
     exportConfig,
-    exportApp,
     applyThemeSettings,
     resetTheme
   }

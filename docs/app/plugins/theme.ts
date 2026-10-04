@@ -5,8 +5,8 @@ import { themeIcons } from '../utils/theme/icons'
 import { cssVariableDefaults } from '../utils/theme/tokens'
 import { THEME_STATE_KEYS, THEME_STORAGE_KEY, clamped, readStoredTheme, snapshotStoredTheme, writeStoredTheme } from '../utils/theme/storage'
 import type { StoredTheme } from '../utils/theme/storage'
-import { DEFAULT_COLORS, THEME_DEFAULTS } from '../utils/theme/engine/types'
-import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables, sanitizeThemeProps } from '../utils/theme/sanitize'
+import { mergeUi, styleComponents, DEFAULT_COLORS, THEME_DEFAULTS } from '../utils/theme/engine/types'
+import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables } from '../utils/theme/sanitize'
 
 export default defineNuxtPlugin({
   enforce: 'post',
@@ -47,8 +47,7 @@ export default defineNuxtPlugin({
         useState(THEME_STATE_KEYS.themePreset).value = saved.preset
         useState<Record<string, any>>('nuxt-ui-ai-theme').value = {
           ...(saved.colors ? { colors: { ...saved.colors } } : {}),
-          ...(saved.components ? { ui: { ...saved.components } } : {}),
-          ...(saved.props ? { props: sanitizeThemeProps(saved.props) } : {})
+          ...(saved.components ? { ui: { ...saved.components } } : {})
         }
 
         // Same distribution order the per-key restores used, which carries
@@ -68,20 +67,31 @@ export default defineNuxtPlugin({
         const pack = saved.icons && Object.hasOwn(themeIcons, saved.icons) ? themeIcons[saved.icons as keyof typeof themeIcons] : themeIcons.lucide
         defer(() => (appConfig.ui.icons = pack as any))
 
-        // Default variant/size/color ride `themeProps` (a `<UTheme :props>`
-        // bag derived from the style prefs set above, consumed reactively by
-        // app.vue), so `appConfig.ui` only ever needs the AI's own
-        // slot/compoundVariant overrides.
+        // The class bundle is DERIVED from the style prefs, so it is rebuilt
+        // here rather than stored. A generator change therefore reaches
+        // already-saved themes instead of serving a frozen bundle. Guarded
+        // like the studio's own rebuild: a corrupt persisted style must not
+        // take the whole plugin down before the persistence watcher even
+        // registers.
+        let styleUi: Record<string, any> = {}
+        try {
+          styleUi = saved.style ? styleComponents(saved.style) : {}
+        } catch {
+          // ignored: the theme still restores, minus the style bundle
+        }
+        useState<Record<string, any>>('nuxt-ui-style-ui').value = styleUi
         defer(() => {
-          const components = saved.components || {}
+          // same order as the live path: style bundle first, explicit wins;
+          // keys a previous distribution touched but this one doesn't reset
+          const merged = mergeUi(styleUi, saved.components || {})
           for (const key of appliedUiKeys) {
-            if (!(key in components)) (appConfig.ui as any)[key] = undefined
+            if (!(key in merged)) (appConfig.ui as any)[key] = undefined
           }
-          for (const [key, value] of Object.entries(components)) {
+          for (const [key, value] of Object.entries(merged)) {
             if (key === 'colors' || key === 'icons') continue
             (appConfig.ui as any)[key] = defu(value as Record<string, any>, (appConfig.ui as any)[key] || {})
           }
-          appliedUiKeys = Object.keys(components).filter(key => key !== 'colors' && key !== 'icons')
+          appliedUiKeys = Object.keys(merged).filter(key => key !== 'colors' && key !== 'icons')
         })
       }
 

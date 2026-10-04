@@ -27,7 +27,7 @@ defineShortcuts({
 })
 
 const appConfig = useAppConfig()
-const { style, link, color, themeProps } = useTheme()
+const { style, link, color } = useTheme()
 
 const colorMode = useColorMode()
 
@@ -83,37 +83,34 @@ const showLayout = computed(() => !route.path.startsWith('/examples') && !route.
   <UApp :toaster="appConfig.toaster">
     <NuxtLoadingIndicator color="var(--ui-primary)" :height="2" />
 
-    <!-- The studio's default variant, size and color, on every page -->
-    <UTheme :props="themeProps">
-      <div class="flex">
-        <div class="flex-1 min-w-0" :class="[route.path.startsWith('/docs/') && 'root']">
-          <template v-if="showLayout">
-            <!-- <Banner /> -->
+    <div class="flex">
+      <div class="flex-1 min-w-0" :class="[route.path.startsWith('/docs/') && 'root']">
+        <template v-if="showLayout">
+          <!-- <Banner /> -->
 
-            <Header />
-          </template>
+          <Header />
+        </template>
 
-          <NuxtLayout>
-            <NuxtPage />
-          </NuxtLayout>
+        <NuxtLayout>
+          <NuxtPage />
+        </NuxtLayout>
 
-          <template v-if="showLayout">
-            <Footer />
-          </template>
-        </div>
-
-        <template v-if="!route.path.startsWith('/examples')">
-          <ClientOnly>
-            <!-- mounted on first open (state persists, so a kept-open chat
-                 remounts on load): the AI SDK and the chat UI stay out of the
-                 entry chunk, which every plain docs visit can skip downloading -->
-            <LazyChat v-if="chatSeen" />
-
-            <Search :navigation="navigationByFramework" />
-          </ClientOnly>
+        <template v-if="showLayout">
+          <Footer />
         </template>
       </div>
-    </UTheme>
+
+      <template v-if="!route.path.startsWith('/examples')">
+        <ClientOnly>
+          <!-- mounted on first open (state persists, so a kept-open chat
+               remounts on load): the AI SDK and the chat UI stay out of the
+               entry chunk, which every plain docs visit can skip downloading -->
+          <LazyChat v-if="chatSeen" />
+
+          <Search :navigation="navigationByFramework" />
+        </ClientOnly>
+      </template>
+    </div>
   </UApp>
 </template>
 

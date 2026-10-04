@@ -40,8 +40,8 @@ export default defineNuxtConfig({
 export default defineAppConfig({
   ui: {
     button: {
-      slots: {
-        base: 'font-bold'
+      defaultVariants: {
+        size: 'sm'
       }
     }
   }
@@ -197,8 +197,8 @@ export default defineNuxtConfig({
 export default defineAppConfig({
   ui: {
     button: {
-      slots: {
-        base: 'font-bold'
+      defaultVariants: {
+        size: 'sm'
       }
     }
   }

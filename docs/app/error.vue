@@ -6,7 +6,7 @@ const props = defineProps<{
 }>()
 
 const route = useRoute()
-const { style, link, color, themeProps } = useTheme()
+const { style, link, color } = useTheme()
 
 // same lazy mount as app.vue: a static mount here would defeat the
 // dynamic import and pull the studio engine back into the entry chunk
@@ -67,26 +67,24 @@ provide('navigation', rootNavigation)
 
 <template>
   <UApp>
-    <UTheme :props="themeProps">
-      <NuxtLoadingIndicator color="var(--ui-primary)" :height="2" />
+    <NuxtLoadingIndicator color="var(--ui-primary)" :height="2" />
 
-      <div class="flex">
-        <div class="flex-1 min-w-0" :class="[route.path.startsWith('/docs/') && 'root']">
-          <!-- <Banner /> -->
+    <div class="flex">
+      <div class="flex-1 min-w-0" :class="[route.path.startsWith('/docs/') && 'root']">
+        <!-- <Banner /> -->
 
-          <Header />
+        <Header />
 
-          <UError :error="error" />
+        <UError :error="error" />
 
-          <Footer />
-        </div>
-
-        <ClientOnly>
-          <LazyChat v-if="chatSeen" />
-
-          <Search :navigation="navigationByFramework" />
-        </ClientOnly>
+        <Footer />
       </div>
-    </UTheme>
+
+      <ClientOnly>
+        <LazyChat v-if="chatSeen" />
+
+        <Search :navigation="navigationByFramework" />
+      </ClientOnly>
+    </div>
   </UApp>
 </template>

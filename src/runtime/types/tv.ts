@@ -135,14 +135,24 @@ export type TVCompoundVariants<T> = Array<
 >
 
 /**
+ * `defaultVariants` in `app.config.ui.<c>`, the value each variant prop of the
+ * component falls back to.
+ */
+export type TVDefaultVariants<T> = {
+  [K in keyof VariantsOf<T>]?: VariantValue<T, K>
+}
+
+/**
  * What `app.config.ui.<c>` may say on top of a theme: classes to merge or a
- * replacer per slot, and variants and compound variants that extend the
- * theme's own.
+ * replacer per slot, variants and compound variants that extend the theme's
+ * own, and the defaults of the component's variant props. The component reads
+ * those, the engine doesn't.
  */
 export type TVOverrides<T> = {
   slots?: { [K in keyof SlotsOf<T>]?: SlotClass }
   variants?: TVVariants<T>
   compoundVariants?: TVCompoundVariants<T>
+  defaultVariants?: TVDefaultVariants<T>
 }
 
 /**

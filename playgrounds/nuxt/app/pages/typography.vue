@@ -158,8 +158,8 @@ bun add @nuxt/ui
 export default defineAppConfig({
   ui: {
     button: {
-      slots: {
-        base: 'font-bold'
+      defaultVariants: {
+        size: 'sm'
       }
     }
   }

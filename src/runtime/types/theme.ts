@@ -34,8 +34,9 @@ export type ThemeVariants = {
 export type ThemeIcons = Partial<Record<keyof typeof icons | (string & {}), string>>
 
 /**
- * The `'*'` key of `<UTheme :props>`. Its values replace the library-wide
- * `primary` and `md`, so a component with its own default color or size keeps it.
+ * App-wide defaults for the `'*'` key of `<UTheme :props>` and
+ * `app.config.ui.defaultVariants`. They replace the library-wide `primary` and
+ * `md`, so a component with its own default color or size keeps it.
  */
 export interface ThemeDefaultVariants {
   color?: 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral'

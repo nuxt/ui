@@ -4,7 +4,7 @@ import { NEUTRAL_COLORS, THEME_STUDIO_VIEWS } from '../utils/theme/studio'
 // Leaf modules, never the barrel: the barrel re-exports serialize (and json5
 // with it), and this composable is reached from the header preset picker on
 // every docs page, which would put the exporter in the entry chunk.
-import { docToSettings, isDefaultTheme, styleTokens, DEFAULT_COLORS, SHADES, nearestShade } from '../utils/theme/engine/types'
+import { docToSettings, isDefaultTheme, styleComponents, styleTokens, DEFAULT_COLORS, SHADES, nearestShade } from '../utils/theme/engine/types'
 import { presets, tintedNeutralBase } from '../utils/theme/engine/presets'
 import { generatePalette, applyPaletteEffects, isDefaultEffects, parseCssColor } from '../utils/theme/engine/palette'
 import { sectionFingerprint, stableStringify, mergeSection, canonicalTokenShades, ALL_SECTION_KEYS, SECTION_GROUPS } from '../utils/theme/engine/sections'
@@ -85,9 +85,15 @@ export function useThemeStudio() {
       theme.applyThemeSettings({ cssVariables: restored }, { track: false })
     }
 
-    // Default variant/size/color ride `theme.themeProps` (a `<UTheme :props>`
-    // bag the preview wraps itself in), derived reactively from `style`
-    // itself, so no imperative rebuild is needed here any more.
+    // The class bundle lives in its own channel (never touches preset/AI
+    // overrides). It only reads `defaults`, so shade-only patches (every
+    // slider frame) skip the double expansion entirely.
+    if (options.defaults !== undefined) {
+      const components = styleComponents(style.value)
+      if (JSON.stringify(components) !== JSON.stringify(styleComponents(previousStyle))) {
+        theme.setStyleUi(components)
+      }
+    }
 
     if (Object.keys(tokens.light).length || Object.keys(tokens.dark).length) {
       theme.applyThemeSettings({ cssVariables: tokens }, { track: false })
@@ -298,6 +304,10 @@ export function useThemeStudio() {
 
     if (!isDefaultTheme(doc)) {
       theme.applyThemeSettings(docToSettings(doc), { track: false })
+      const components = styleComponents(style.value)
+      if (Object.keys(components).length) {
+        theme.setStyleUi(components)
+      }
     }
   }
 

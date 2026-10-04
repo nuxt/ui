@@ -192,7 +192,9 @@ const overrides = useComponentOverrides((ui: Select['AppConfig']['ui']) => ui.se
 
 const rootProps = useForwardProps(reactivePick(props, 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple', 'nullableValue'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
-const position = computed(() => props.content?.position ?? 'popper')
+// `position` has no prop of its own: its default comes from `content`, then
+// from `app.config.ui.select.defaultVariants`
+const position = computed(() => props.content?.position ?? (appConfig.ui?.select as { defaultVariants?: { position?: SelectContentProps['position'] } } | undefined)?.defaultVariants?.position ?? 'popper')
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: position.value }) as SelectContentProps)
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as SelectArrowProps)
 

@@ -295,13 +295,14 @@ export default detected as Set<string> | null
       const iconUnion = iconKeys.length ? iconKeys.map(i => JSON.stringify(i)).join(' | ') : 'string'
 
       return `import * as ui from '#build/ui'
-import type { TVConfig, TVMergeConfig, DeepRequired } from '@nuxt/ui'
+import type { TVConfig, TVMergeConfig, DeepRequired, ThemeDefaultVariants } from '@nuxt/ui'
 
 type IconsConfig = Record<${iconUnion} | (string & {}), string>
 
 type AppConfigUI = {
   icons?: Partial<IconsConfig>
   tv?: TVMergeConfig
+  defaultVariants?: ThemeDefaultVariants
   unstyled?: boolean
 } & TVConfig<typeof ui>
 

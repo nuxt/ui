@@ -54,19 +54,3 @@ export function sanitizeCSSVariables(input: { light?: Record<string, any>, dark?
   }
   return { light: clean(input.light), dark: clean(input.dark) }
 }
-
-// The `<UTheme :props>` the studio wraps the site in: a component name to the
-// variant values it defaults to. Only words, since each one also lands in the
-// exported `app.vue`.
-export function sanitizeThemeProps(input: Record<string, any>): Record<string, Record<string, string>> {
-  const out: Record<string, Record<string, string>> = {}
-  for (const [component, values] of Object.entries(input ?? {})) {
-    if (UNSAFE_KEYS.has(component) || !values || typeof values !== 'object') continue
-    const entry: Record<string, string> = {}
-    for (const [key, value] of Object.entries(values)) {
-      if (!UNSAFE_KEYS.has(key) && typeof value === 'string' && SAFE_NAME.test(value)) entry[key] = value
-    }
-    if (Object.keys(entry).length) out[component] = entry
-  }
-  return out
-}

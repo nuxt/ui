@@ -47,13 +47,24 @@ describe('ThemeDefaults registry', () => {
   })
 })
 
-// A `<UTheme :props>` key must override a prop the component pins in
-// `withDefaults` (here `orientation`). Regression test for #6683.
-describe('<UTheme :props> over withDefaults', () => {
+// `app.config.ui.<name>.defaultVariants` must override a prop the component
+// pins in `withDefaults` (here `orientation`). Regression test for #6683.
+describe('app.config defaultVariants', () => {
+  let appConfig: { ui?: Record<string, any> }
+
+  beforeAll(() => {
+    appConfig = useAppConfig() as { ui?: Record<string, any> }
+    appConfig.ui ??= {}
+    appConfig.ui.formField = { defaultVariants: { orientation: 'horizontal' } }
+  })
+
+  afterAll(() => {
+    delete appConfig.ui!.formField
+  })
+
   it('overrides the withDefaults fallback', async () => {
-    const wrapper = await mountSuspended({
-      components: { UTheme, UFormField },
-      template: `<UTheme :props="{ formField: { orientation: 'horizontal' } }"><UFormField label="Label" /></UTheme>`
+    const wrapper = await mountSuspended(UFormField, {
+      props: { label: 'Label' }
     })
 
     const root = wrapper.find('[data-slot="form-field"]')
@@ -63,9 +74,8 @@ describe('<UTheme :props> over withDefaults', () => {
   })
 
   it('still lets an explicit prop win', async () => {
-    const wrapper = await mountSuspended({
-      components: { UTheme, UFormField },
-      template: `<UTheme :props="{ formField: { orientation: 'horizontal' } }"><UFormField label="Label" orientation="vertical" /></UTheme>`
+    const wrapper = await mountSuspended(UFormField, {
+      props: { label: 'Label', orientation: 'vertical' }
     })
 
     const root = wrapper.find('[data-slot="form-field"]')
@@ -121,7 +131,7 @@ describe('withDefaults variants', () => {
 })
 
 // `'*'` replaces only the library-wide `primary` / `md` defaults, below a
-// component's own key.
+// component's own key, from `<UTheme :props>` or `app.config.ui.defaultVariants`.
 describe('\'*\' default variants', () => {
   const render = (props: Record<string, any>) => mountSuspended({
     components: { UTheme, UButton, UAvatar },
@@ -172,6 +182,34 @@ describe('\'*\' default variants', () => {
     expect(wrapper.find('[data-slot="button"]').classes()).toContain('[--ui-accent:var(--ui-success)]')
   })
 
+  it('keeps a default the app config gives the component', async () => {
+    const appConfig = useAppConfig() as { ui?: Record<string, any> }
+    appConfig.ui ??= {}
+    appConfig.ui.button = { defaultVariants: { color: 'neutral' } }
+
+    try {
+      const wrapper = await render({ '*': { color: 'secondary' } })
+
+      expect(wrapper.find('[data-slot="button"]').classes()).toContain('[--ui-accent:var(--ui-neutral)]')
+    } finally {
+      delete appConfig.ui.button
+    }
+  })
+
+  it('keeps an app config default that matches the library one', async () => {
+    const appConfig = useAppConfig() as { ui?: Record<string, any> }
+    appConfig.ui ??= {}
+    appConfig.ui.button = { defaultVariants: { color: 'primary' } }
+
+    try {
+      const wrapper = await render({ '*': { color: 'secondary' } })
+
+      expect(wrapper.find('[data-slot="button"]').classes()).toContain('[--ui-accent:var(--ui-primary)]')
+    } finally {
+      delete appConfig.ui.button
+    }
+  })
+
   // A group passes down only what was set for it, so the `'*'` default doesn't
   // reach a child as the group's own value and beat the child's key
   it('lets a child\'s own key win inside a group', async () => {
@@ -198,6 +236,28 @@ describe('\'*\' default variants', () => {
     })
 
     expect(wrapper.find('[data-slot="input-base"]').classes()).toEqual(expect.arrayContaining(['px-2', 'py-1']))
+  })
+
+  describe('from app.config', () => {
+    let appConfig: { ui?: Record<string, any> }
+
+    beforeAll(() => {
+      appConfig = useAppConfig() as { ui?: Record<string, any> }
+      appConfig.ui ??= {}
+      appConfig.ui.defaultVariants = { color: 'warning' }
+    })
+
+    afterAll(() => {
+      delete appConfig.ui!.defaultVariants
+    })
+
+    it('applies app-wide, below `<UTheme>`', async () => {
+      const wrapper = await render({})
+      expect(wrapper.find('[data-slot="button"]').classes()).toContain('[--ui-accent:var(--ui-warning)]')
+
+      const themed = await render({ '*': { color: 'error' } })
+      expect(themed.find('[data-slot="button"]').classes()).toContain('[--ui-accent:var(--ui-error)]')
+    })
   })
 })
 
