@@ -117,7 +117,7 @@ import { computed, toRef } from 'vue'
 import { ContextMenuRoot, ContextMenuTrigger } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
-import { useComponentProps, useGivenProps, useComponentOverrides } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UContextMenuContent from './ContextMenuContent.vue'
@@ -134,9 +134,6 @@ const emits = defineEmits<ContextMenuEmits>()
 const slots = defineSlots<ContextMenuSlots<T>>()
 
 const props = useComponentProps<ContextMenuProps<T>>('contextMenu', _props, theme)
-// What the menu passes down to its content, which renders the filter Input and
-// the submenus: what it was given, without its own defaults, so they keep theirs
-const givenProps = useGivenProps<ContextMenuProps<T>>('contextMenu', _props)
 
 const overrides = useComponentOverrides((ui: ContextMenu['AppConfig']['ui']) => ui.contextMenu)
 
@@ -160,7 +157,7 @@ const ui = computed(() => tv(theme, overrides.value)({
       :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
       :ui="ui"
       :ui-override="props.ui"
-      :size="givenProps.size"
+      :size="props.size"
       v-bind="contentProps"
       :items="props.items"
       :portal="props.portal"

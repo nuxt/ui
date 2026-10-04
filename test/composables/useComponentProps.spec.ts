@@ -3,7 +3,7 @@ import type { ComputedRef } from 'vue'
 import { describe, expectTypeOf, it, expect, test, beforeAll, afterAll } from 'vitest'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { useAppConfig } from '#imports'
-import { UFormField, UFieldGroup, UAvatarGroup, UTheme, UButton, UAvatar, UInput, UKbd, UEmpty, UCheckbox, UCheckboxGroup, UInputNumber } from '#components'
+import { UFormField, UFieldGroup, UAvatarGroup, UTheme, UButton, UAvatar, UInput, UKbd, UEmpty, UCheckbox, UCheckboxGroup, UInputNumber, UDropdownMenu } from '#components'
 import type * as ui from '#build/ui'
 import type { ThemeDefaults } from '../../src/runtime/types/theme'
 import { useComponentOverrides } from '../../src/runtime/composables/useComponentProps'
@@ -301,6 +301,20 @@ describe('\'*\' default variants', () => {
     expect(wrapper.find('[data-slot="input-base"]').classes()).toContain('text-base')
     expect(wrapper.find('[data-slot="button"]').classes()).toContain('text-base')
     expect(wrapper.find('[data-slot="avatar-group-base"]').classes()).toContain('size-10')
+  })
+
+  it('reaches the sizes a menu derives for its items', async () => {
+    const render = (template: string) => mountSuspended({
+      components: { UTheme, UDropdownMenu },
+      setup: () => ({ items: [{ label: 'Item', avatar: { alt: 'Benjamin Canac' }, kbds: ['K'] }] }),
+      template
+    })
+    const sizes = (wrapper: Awaited<ReturnType<typeof render>>) => ['itemLeadingAvatar', 'itemTrailingKbds'].map(slot => wrapper.find(`[data-slot="dropdown-menu-${slot}"]`).html())
+
+    const explicit = await render(`<UDropdownMenu :items="items" size="xl" open :portal="false" />`)
+    const themed = await render(`<UTheme :props="{ '*': { size: 'xl' } }"><UDropdownMenu :items="items" open :portal="false" /></UTheme>`)
+
+    expect(sizes(themed)).toEqual(sizes(explicit))
   })
 
   it('still reaches a child through a group', async () => {

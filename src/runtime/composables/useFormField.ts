@@ -28,11 +28,11 @@ export const formErrorsInjectionKey: InjectionKey<Readonly<Ref<FormErrorWithId[]
 /**
  * Wires an input to its wrapping `<UFormField>` (id/name/aria, validation events, error-driven color).
  *
- * **Always pass the raw `_props`, never the `useComponentProps` proxy.**
- * The internal fallback `props?.x ?? formField?.value.x` must distinguish
- * "explicit prop" from "theme default" — passing the proxy would leak
- * `<UTheme :props>` defaults into the explicit slot and let theme size/color
- * silently override the wrapping field (regression-tested in `Theme.spec.ts`).
+ * **Pass the object `defineProps` returns.** `size`, `color` and `highlight`
+ * are read from it only when the parent passed them, so a `withDefaults` value
+ * or a `<UTheme :props>` default never overrides the wrapping field. Any other
+ * object (a `reactivePick`, a plain object) counts every value it holds as
+ * passed.
  *
  * To get `<UTheme :props>` to apply when no `<UFormField>` wraps the input,
  * fall back to the proxy at the `tv()` call site:
@@ -48,7 +48,7 @@ export const formErrorsInjectionKey: InjectionKey<Readonly<Ref<FormErrorWithId[]
  * when unset, so they are normalized back to `undefined` here. Otherwise the
  * `??` above would short-circuit on `false` and the proxy would never be read.
  *
- * Final precedence: `explicit > FormField > <UTheme :props> > app.config > withDefaults > tv defaults`,
+ * Final precedence: `explicit > FormField > <UTheme :props> > app.config > withDefaults`,
  * matching what `useComponentProps` resolves.
  */
 export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, deferInputValidation?: boolean }) {

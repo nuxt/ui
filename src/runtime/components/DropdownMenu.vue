@@ -170,8 +170,8 @@ const slots = defineSlots<DropdownMenuSlots<T>>()
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const props = useComponentProps<DropdownMenuProps<T>>('dropdownMenu', _props, theme)
-// What the menu passes down to its content, which renders the filter Input and
-// the submenus: what it was given, without its own defaults, so they keep theirs
+// What the menu passes down for the filter Input its content renders: what it
+// was given, without its own defaults, so the Input keeps its own
 const givenProps = useGivenProps<DropdownMenuProps<T>>('dropdownMenu', _props)
 
 const overrides = useComponentOverrides((ui: DropdownMenu['AppConfig']['ui']) => ui.dropdownMenu)
@@ -206,7 +206,8 @@ const ui = computed(() => tv(theme, overrides.value)({
       :checked-icon="props.checkedIcon"
       :loading-icon="props.loadingIcon"
       :external-icon="props.externalIcon"
-      :size="givenProps.size"
+      :size="props.size"
+      :given-size="givenProps.size"
       :filter="props.filter"
       :filter-fields="props.filterFields"
       :ignore-filter="props.ignoreFilter"

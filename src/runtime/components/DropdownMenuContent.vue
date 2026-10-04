@@ -31,6 +31,8 @@ interface DropdownMenuContentProps<T extends ArrayOrNested<DropdownMenuItem>> ex
    */
   externalIcon?: boolean | IconProps['name']
   size?: DropdownMenu['variants']['size']
+  /** The size the menu was given, for the filter Input, which otherwise keeps its own default. */
+  givenSize?: DropdownMenu['variants']['size']
   filter?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
   filterFields?: string[]
   ignoreFilter?: boolean
@@ -97,7 +99,7 @@ const searchTerm = computed({
 const inputProps = toRef(() => defu(props.filter, { placeholder: t('dropdownMenu.search'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
 
 const portalProps = usePortal(toRef(() => props.portal))
-const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'descriptionKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'size', 'filter', 'filterFields', 'ignoreFilter', 'searchTerm', 'class', 'ui', 'uiOverride'), emits)
+const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'descriptionKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'size', 'givenSize', 'filter', 'filterFields', 'ignoreFilter', 'searchTerm', 'class', 'ui', 'uiOverride'), emits)
 const getProxySlots = () => omit(slots, ['default'])
 
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: DropdownMenuItem, active?: boolean, index: number }>()
@@ -173,7 +175,7 @@ const itemSize = computed(() => getItemSize(props.size))
           <UInput
             autofocus
             autocomplete="off"
-            :size="size"
+            :size="givenSize"
             v-bind="inputProps"
             data-slot="dropdown-menu-input"
             :class="ui.input({ class: uiOverride?.input })"
@@ -218,6 +220,7 @@ const itemSize = computed(() => getItemSize(props.size))
                   :loading-icon="loadingIcon"
                   :external-icon="externalIcon"
                   :size="size"
+                  :given-size="givenSize"
                   :filter="item.filter"
                   :filter-fields="item.filterFields || filterFields"
                   :ignore-filter="item.ignoreFilter ?? ignoreFilter"

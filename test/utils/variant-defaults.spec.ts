@@ -18,10 +18,12 @@ const internal: Record<string, string[]> = {
 }
 
 /**
- * A component that renders itself for its nested items, from the same theme
- * and the same `<UTheme :props>` key, so it takes the resolved value.
+ * A child that renders part of the same component, from the same theme and
+ * the same `<UTheme :props>` key, so it takes the resolved value.
  */
 const forwardedToItself: Record<string, string[]> = {
+  'ContextMenu.vue': ['UContextMenuContent'],
+  'DropdownMenu.vue': ['UDropdownMenuContent'],
   'content/ContentNavigation.vue': ['UContentNavigation']
 }
 
@@ -51,6 +53,18 @@ const components = walk(componentsDir).flatMap((file) => {
   const themeKey = Object.keys(themes).find(key => join(process.cwd(), 'test/utils', key) === join(dirname(file), `${themeImport[1]}.ts`))
   return themeKey ? [[relative(componentsDir, file), source, themes[themeKey]!] as const] : []
 })
+
+/** The tag an attribute at `index` of a template belongs to. */
+function childTag(template: string, index: number): string | undefined {
+  let tag: string | undefined
+  for (const match of template.matchAll(/<([A-Z][\w.-]*)/gi)) {
+    if (match.index > index) {
+      break
+    }
+    tag = match[1]
+  }
+  return tag
+}
 
 function defaults(source: string): Record<string, string> {
   const block = source.match(/withDefaults\(defineProps<[^\n]*>\(\), \{\n([\s\S]*?)\n\}\)/)
@@ -87,15 +101,20 @@ describe('variant defaults', () => {
     const problems: string[] = []
     for (const key of keys) {
       const kebab = key.replace(/[A-Z]/g, c => `-${c.toLowerCase()}`)
-      for (const match of template.matchAll(new RegExp(`<(U[A-Z]\\w*)\\b[^>]*?\\s:(?:${key}|${kebab})="props\\.${key}"`, 'g'))) {
-        if (!forwardedToItself[name]?.includes(match[1]!)) {
-          problems.push(`\`${match[1]}\` gets \`props.${key}\``)
+      // The prop itself, and the computeds that resolve it, like `size` for
+      // `formFieldSize.value ?? props.size`
+      const resolved = [`props\\.${key}`]
+      for (const match of script.matchAll(new RegExp(`const (\\w+) = computed\\((?:(?!\\nconst )[\\s\\S]){0,200}?\\bprops\\.${key}\\b`, 'g'))) {
+        // A size derived for a child, like an Avatar's from a Button's, is the child's own
+        if (!/getAvatarSize\(|getItemSize\(|avatarSizes\[/.test(match[0])) {
+          resolved.push(match[1]!)
         }
       }
-      // A computed over the prop, like `size` for `formFieldSize.value ?? props.size`
-      if (new RegExp(`const ${key} = computed\\(\\(\\) => [^\\n]*props\\.${key}\\b`).test(script)) {
-        for (const match of template.matchAll(new RegExp(`<(U[A-Z]\\w*)\\b[^>]*?\\s:(?:${key}|${kebab})="${key}"`, 'g'))) {
-          problems.push(`\`${match[1]}\` gets the resolved \`${key}\``)
+      // The value as is, or with a fallback: an expression over it is a decision of the component
+      for (const match of template.matchAll(new RegExp(`\\s:(?:${key}|${kebab})="(?:${resolved.join('|')})(?:"| \\|\\| | \\?\\? )`, 'g'))) {
+        const tag = childTag(template, match.index)
+        if (tag && /^(?:U[A-Z]|component$)/.test(tag) && !forwardedToItself[name]?.includes(tag)) {
+          problems.push(`\`${tag}\` gets the resolved \`${key}\``)
         }
       }
       for (const match of script.matchAll(/reactivePick\(props, ([^)]*)\)/g)) {
