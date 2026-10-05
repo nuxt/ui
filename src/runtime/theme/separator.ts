@@ -3,7 +3,7 @@ import { defineTheme } from '../utils/theme'
 
 export default defineTheme({
   slots: {
-    root: 'flex items-center align-center text-center',
+    root: 'flex items-center text-center',
     border: 'border-accent-default',
     container: 'font-medium text-default flex',
     icon: 'shrink-0 size-5',

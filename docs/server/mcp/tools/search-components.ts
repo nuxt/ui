@@ -10,14 +10,14 @@ export default defineMcpTool({
     openWorldHint: false
   },
   inputSchema: {
-    category: z.string().optional().describe('Filter components by category'),
+    category: z.string().optional().describe('Exact category: layout, form, element, navigation, data, overlay, dashboard, page, chat, content, editor, color-mode or i18n'),
     search: z.string().optional().describe('Search term to filter components by name, description, or intent (alternate names like "segmented control" are matched)')
   },
   inputExamples: [
     { category: 'layout' },
     { search: 'table' },
     { search: 'segmented control' },
-    { category: 'forms', search: 'input' }
+    { category: 'form', search: 'input' }
   ],
   cache: '30m',
   async handler({ category, search }) {

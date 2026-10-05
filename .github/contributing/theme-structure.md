@@ -200,11 +200,11 @@ Keep physical only when the class is tied to a physical prop **value** (`side`, 
 Common animation classes:
 ```ts
 // Accordion expand/collapse
-content: 'data-[state=open]:animate-[accordion-down_200ms_ease-out] data-[state=closed]:animate-[accordion-up_200ms_ease-out]'
+content: 'data-[state=open]:animate-[accordion-down_200ms_var(--ease-out)] data-[state=closed]:animate-[accordion-up_200ms_var(--ease-out)]'
 
 // Modal fade/scale
-overlay: 'data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]'
-content: 'data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in]'
+overlay: 'data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)]'
+content: 'data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)]'
 
 // Loading spinner
 leadingIcon: 'animate-spin'

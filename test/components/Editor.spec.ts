@@ -19,7 +19,8 @@ describe('Editor', () => {
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Editor, {
-      props
+      props,
+      attrs: { 'aria-label': 'Editor' }
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
