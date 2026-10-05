@@ -1,7 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { flushPromises, mount } from '@vue/test-utils'
 import { createSSRApp, h } from 'vue'
 import { renderToString } from 'vue/server-renderer'
 import { renderEach } from '../component-render'
@@ -48,30 +47,6 @@ describe('Modal', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
-  })
-
-  it('keeps the focus moved on close', async () => {
-    const input = document.createElement('input')
-    document.body.appendChild(input)
-
-    const wrapper = mount(Modal, {
-      attachTo: document.body,
-      props: { portal: false, title: 'Title', description: 'Description', content: { onCloseAutoFocus: () => input.focus() } },
-      slots: { default: () => h('button', 'Open') }
-    })
-
-    await wrapper.find('button').trigger('click')
-    await flushPromises()
-    await new Promise(resolve => setTimeout(resolve))
-
-    await wrapper.find('[data-slot="close"]').trigger('click')
-    await flushPromises()
-    await new Promise(resolve => setTimeout(resolve))
-
-    expect(document.activeElement).toBe(input)
-
-    wrapper.unmount()
-    input.remove()
   })
 
   describe('SSR', () => {

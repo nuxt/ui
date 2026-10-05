@@ -247,7 +247,6 @@ import { useFilter } from '../composables/useFilter'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
 import { compare, get, getDisplayValue, isArrayOfArray, looseToNumber } from '../utils'
-import { closeAutoFocus } from '../utils/overlay'
 import { getEstimateSize } from '../utils/virtualizer'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -544,6 +543,13 @@ function onClear() {
   emits('clear')
 }
 
+function onMountAutoFocus(event: Event) {
+  // Prevent the `FocusScope` from focusing the search input on open when its autofocus is disabled.
+  if (searchInputProps.value.autofocus === false) {
+    event.preventDefault()
+  }
+}
+
 const focusScopeRef = useTemplateRef('focusScopeRef')
 
 // The `FocusScope` uses `loop` instead of `trapped`: a trapped scope pulls focus back while the menu is closing,
@@ -562,9 +568,10 @@ function onFocusOutside(event: Event) {
   target.focus({ preventScroll: true })
 }
 
-function onMountAutoFocus(event: Event) {
-  // Prevent the `FocusScope` from focusing the search input on open when its autofocus is disabled.
-  if (searchInputProps.value.autofocus === false) {
+function onUnmountAutoFocus(event: Event) {
+  // Keep the focus where it was moved on select instead of restoring it to the trigger after the close animation.
+  const activeElement = document.activeElement
+  if (activeElement && activeElement !== document.body && !(event.target as HTMLElement).contains(activeElement)) {
     event.preventDefault()
   }
 }
@@ -738,7 +745,7 @@ defineExpose({
             data-slot="focusScope"
             :class="ui.focusScope({ class: props.ui?.focusScope })"
             @mount-auto-focus="onMountAutoFocus"
-            @unmount-auto-focus="closeAutoFocus"
+            @unmount-auto-focus="onUnmountAutoFocus"
           >
             <slot name="content-top" />
 
