@@ -301,6 +301,8 @@ type IconsConfig = Record<${iconUnion} | (string & {}), string>
 
 type AppConfigUI = {
   icons?: Partial<IconsConfig>
+  /** Removed in v5: set the colors in your CSS with the @nuxt/ui/colors plugin. */
+  colors?: never
   tv?: TVMergeConfig
   defaultVariants?: ThemeDefaultVariants
   unstyled?: boolean

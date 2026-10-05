@@ -29,6 +29,8 @@ import type { ThemeDefaultVariants } from './runtime/types/theme'
 
 type AppConfigUI = {
   icons?: Partial<typeof icons>
+  /** Removed in v5: set the colors in your CSS with the `@nuxt/ui/colors` plugin. */
+  colors?: never
   tv?: TVMergeConfig
   defaultVariants?: ThemeDefaultVariants
   unstyled?: boolean
