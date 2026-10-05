@@ -138,6 +138,9 @@ function warnUndetected(name: string) {
  * resolution (the original semantics) without leaking into prop reads. The
  * `ui` prop holds the component's own `ui` only, and `class` merges a
  * `<UTheme :props>` class under the component's own.
+ *
+ * The library's components are built on it. Its signature may still change
+ * before the stable v5 release.
  */
 export function useComponentProps<T extends object>(name: string, props: T, theme?: { defaultVariants?: Record<string, unknown>, [key: string]: unknown }): T {
   const vm = getCurrentInstance()
@@ -244,6 +247,9 @@ export function useComponentProps<T extends object>(name: string, props: T, them
  *
  * Type the level as the component's app config to type the variant values the
  * app adds: `useComponentOverrides((ui: Button['AppConfig']['ui']) => ui.button)`.
+ *
+ * The library's components are built on it. Its signature may still change
+ * before the stable v5 release.
  */
 export function useComponentOverrides<U = Record<string, any>, T extends Record<string, any> = Record<string, any>>(entry: (ui: U) => T | undefined): ComputedRef<ComponentOverrides<T>> {
   const { unstyled, config, levels } = injectThemeContext()
