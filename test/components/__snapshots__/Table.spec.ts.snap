@@ -392,7 +392,7 @@ exports[`Table > renders with column pinning and footer correctly 1`] = `
       <tr data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <th data-pinned="left" scope="col" data-slot="table-th" class="px-4 py-3.5 text-sm text-strong text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 sticky bg-default/75 z-1" style="left: 0px;">#</th>
         <th data-pinned="false" scope="col" data-slot="table-th" class="px-4 py-3.5 text-sm text-strong text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
-          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
+          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]">
             <div data-slot="checkbox-container" class="flex items-center h-5"><button data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
@@ -420,7 +420,7 @@ exports[`Table > renders with column pinning and footer correctly 1`] = `
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <td data-pinned="left" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 sticky bg-default/75 z-1" style="left: 0px;">#m5gr84i9</td>
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
-          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
+          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]">
             <div data-slot="checkbox-container" class="flex items-center h-5"><button aria-label="Select row" data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-0-0-1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
@@ -446,7 +446,7 @@ exports[`Table > renders with column pinning and footer correctly 1`] = `
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <td data-pinned="left" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 sticky bg-default/75 z-1" style="left: 0px;">#3u1reuv4</td>
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
-          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
+          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]">
             <div data-slot="checkbox-container" class="flex items-center h-5"><button aria-label="Select row" data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-0-0-3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
@@ -472,7 +472,7 @@ exports[`Table > renders with column pinning and footer correctly 1`] = `
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <td data-pinned="left" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 sticky bg-default/75 z-1" style="left: 0px;">#derv1ws0</td>
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
-          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
+          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]">
             <div data-slot="checkbox-container" class="flex items-center h-5"><button aria-label="Select row" data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-0-0-5" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
@@ -498,7 +498,7 @@ exports[`Table > renders with column pinning and footer correctly 1`] = `
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <td data-pinned="left" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 sticky bg-default/75 z-1" style="left: 0px;">#5kma53ae</td>
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
-          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
+          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]">
             <div data-slot="checkbox-container" class="flex items-center h-5"><button aria-label="Select row" data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-0-0-7" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
@@ -524,7 +524,7 @@ exports[`Table > renders with column pinning and footer correctly 1`] = `
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <td data-pinned="left" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 sticky bg-default/75 z-1" style="left: 0px;">#bhqecj4p</td>
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
-          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
+          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]">
             <div data-slot="checkbox-container" class="flex items-center h-5"><button aria-label="Select row" data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-0-0-9" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
@@ -583,7 +583,7 @@ exports[`Table > renders with columns correctly 1`] = `
     <thead data-slot="table-thead" class="relative [--ui-accent:var(--ui-primary)]">
       <tr data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <th data-pinned="false" scope="col" data-slot="table-th" class="px-4 py-3.5 text-sm text-strong text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
-          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
+          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]">
             <div data-slot="checkbox-container" class="flex items-center h-5"><button data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
@@ -611,7 +611,7 @@ exports[`Table > renders with columns correctly 1`] = `
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-3 [&amp;>tr]:data-[selectable=true]:-outline-offset-3 divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
-          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
+          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]">
             <div data-slot="checkbox-container" class="flex items-center h-5"><button aria-label="Select row" data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-0-0-1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
@@ -637,7 +637,7 @@ exports[`Table > renders with columns correctly 1`] = `
       <!--v-if-->
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
-          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
+          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]">
             <div data-slot="checkbox-container" class="flex items-center h-5"><button aria-label="Select row" data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-0-0-3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
@@ -663,7 +663,7 @@ exports[`Table > renders with columns correctly 1`] = `
       <!--v-if-->
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
-          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
+          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]">
             <div data-slot="checkbox-container" class="flex items-center h-5"><button aria-label="Select row" data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-0-0-5" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
@@ -689,7 +689,7 @@ exports[`Table > renders with columns correctly 1`] = `
       <!--v-if-->
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
-          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
+          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]">
             <div data-slot="checkbox-container" class="flex items-center h-5"><button aria-label="Select row" data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-0-0-7" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
@@ -715,7 +715,7 @@ exports[`Table > renders with columns correctly 1`] = `
       <!--v-if-->
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
-          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
+          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]">
             <div data-slot="checkbox-container" class="flex items-center h-5"><button aria-label="Select row" data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-0-0-9" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
@@ -848,7 +848,7 @@ exports[`Table > renders with empty slot correctly 1`] = `
     <thead data-slot="table-thead" class="relative [--ui-accent:var(--ui-primary)]">
       <tr data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <th data-pinned="false" scope="col" data-slot="table-th" class="px-4 py-3.5 text-sm text-strong text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
-          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
+          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]">
             <div data-slot="checkbox-container" class="flex items-center h-5"><button data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
@@ -1683,7 +1683,7 @@ exports[`Table > renders with loading slot correctly 1`] = `
     <thead data-slot="table-thead" class="relative after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-accent [--ui-accent:var(--ui-primary)] motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
       <tr data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <th data-pinned="false" scope="col" data-slot="table-th" class="px-4 py-3.5 text-sm text-strong text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
-          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
+          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]">
             <div data-slot="checkbox-container" class="flex items-center h-5"><button data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
@@ -1748,7 +1748,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
     <thead data-slot="table-thead" class="relative [--ui-accent:var(--ui-primary)]">
       <tr data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <th data-pinned="false" scope="col" data-slot="table-th" class="px-4 py-3.5 text-sm text-strong text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;">
-          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
+          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]">
             <div data-slot="checkbox-container" class="flex items-center h-5"><button data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
@@ -1776,7 +1776,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-3 [&amp;>tr]:data-[selectable=true]:-outline-offset-3 divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 custom-cell-class" style="background-color: lightgray;">
-          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
+          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]">
             <div data-slot="checkbox-container" class="flex items-center h-5"><button aria-label="Select row" data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-0-0-1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
@@ -1802,7 +1802,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
       <!--v-if-->
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 custom-cell-class" style="background-color: lightgray;">
-          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
+          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]">
             <div data-slot="checkbox-container" class="flex items-center h-5"><button aria-label="Select row" data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-0-0-3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
@@ -1828,7 +1828,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
       <!--v-if-->
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 custom-cell-class" style="background-color: lightgray;">
-          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
+          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]">
             <div data-slot="checkbox-container" class="flex items-center h-5"><button aria-label="Select row" data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-0-0-5" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
@@ -1854,7 +1854,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
       <!--v-if-->
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 custom-cell-class" style="background-color: lightgray;">
-          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
+          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]">
             <div data-slot="checkbox-container" class="flex items-center h-5"><button aria-label="Select row" data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-0-0-7" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
@@ -1880,7 +1880,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
       <!--v-if-->
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 custom-cell-class" style="background-color: lightgray;">
-          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
+          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]">
             <div data-slot="checkbox-container" class="flex items-center h-5"><button aria-label="Select row" data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-0-0-9" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
@@ -2182,7 +2182,7 @@ exports[`Table > renders with virtualize and sticky correctly 1`] = `
     <thead data-slot="table-thead" class="sticky top-0 inset-x-0 bg-default/75 backdrop-blur-sm z-1 [--ui-accent:var(--ui-primary)]">
       <tr data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <th data-pinned="false" scope="col" data-slot="table-th" class="px-4 py-3.5 text-sm text-strong text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
-          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row">
+          <div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]">
             <div data-slot="checkbox-container" class="flex items-center h-5"><button data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>

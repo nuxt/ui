@@ -13,7 +13,7 @@ export default defineTheme({
     container: 'flex items-center',
     base: 'rounded-sm ring ring-inset ring-strong overflow-hidden focus-visible:outline-none',
     indicator: 'flex items-center justify-center size-full text-accent-contrast bg-accent',
-    icon: 'shrink-0',
+    icon: 'shrink-0 size-(--ui-control-icon)',
     wrapper: 'w-full',
     label: 'block font-medium text-default',
     description: 'text-muted'
@@ -25,7 +25,7 @@ export default defineTheme({
         root: ''
       },
       card: {
-        root: `border border-default rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors ${focusCard} has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft`
+        root: `px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors ${focusCard} has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft`
       }
     },
     indicator: {
@@ -39,37 +39,38 @@ export default defineTheme({
       },
       hidden: {
         base: 'sr-only',
+        icon: 'size-[calc(var(--ui-control-icon)+--spacing(0.5))]',
         wrapper: 'flex flex-col items-center gap-1 text-center'
       }
     },
     size: {
       xs: {
+        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(2.5)] [--ui-control-icon:--spacing(2.5)]',
         base: 'size-3',
-        icon: 'size-2.5',
         container: 'h-4',
         wrapper: 'text-xs'
       },
       sm: {
+        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(3)] [--ui-control-icon:--spacing(3)]',
         base: 'size-3.5',
-        icon: 'size-3',
         container: 'h-4',
         wrapper: 'text-xs'
       },
       md: {
+        root: '[--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]',
         base: 'size-4',
-        icon: 'size-3.5',
         container: 'h-5',
         wrapper: 'text-sm'
       },
       lg: {
+        root: '[--ui-control-px:--spacing(4)] [--ui-control-py:--spacing(4)] [--ui-control-icon:--spacing(4)]',
         base: 'size-4.5',
-        icon: 'size-4',
         container: 'h-5',
         wrapper: 'text-sm'
       },
       xl: {
+        root: '[--ui-control-px:--spacing(4.5)] [--ui-control-py:--spacing(4.5)] [--ui-control-icon:--spacing(4.5)]',
         base: 'size-5',
-        icon: 'size-4.5',
         container: 'h-6',
         wrapper: 'text-base'
       }
@@ -111,16 +112,6 @@ export default defineTheme({
         root: 'hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong'
       }
     },
-    { size: 'xs', indicator: 'hidden', class: { icon: 'size-3' } },
-    { size: 'sm', indicator: 'hidden', class: { icon: 'size-3.5' } },
-    { size: 'md', indicator: 'hidden', class: { icon: 'size-4' } },
-    { size: 'lg', indicator: 'hidden', class: { icon: 'size-4.5' } },
-    { size: 'xl', indicator: 'hidden', class: { icon: 'size-5' } },
-    { size: 'xs', variant: 'card', class: { root: 'p-2.5' } },
-    { size: 'sm', variant: 'card', class: { root: 'p-3' } },
-    { size: 'md', variant: 'card', class: { root: 'p-3.5' } },
-    { size: 'lg', variant: 'card', class: { root: 'p-4' } },
-    { size: 'xl', variant: 'card', class: { root: 'p-4.5' } },
     {
       variant: 'list',
       indicator: ['start', 'end'],
