@@ -9,6 +9,7 @@ export default defineTheme({
   variants: {
     collapsed: {
       true: {
+        base: 'px-(--ui-control-py)',
         label: 'hidden',
         trailing: 'lg:hidden'
       }

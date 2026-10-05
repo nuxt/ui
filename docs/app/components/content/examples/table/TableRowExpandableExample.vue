@@ -51,7 +51,6 @@ const columns: TableColumn<Payment>[] = [{
     'color': 'neutral',
     'variant': 'ghost',
     'icon': 'i-lucide-chevron-down',
-    'square': true,
     'aria-label': 'Expand',
     'ui': {
       leadingIcon: ['transition-transform', row.getIsExpanded() ? 'duration-200 rotate-180' : '']

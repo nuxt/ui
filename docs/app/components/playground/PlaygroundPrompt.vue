@@ -212,12 +212,11 @@ function onSubmit() {
         </div>
 
         <div class="flex items-center gap-1">
-          <UButton :icon="studioIcons.mic" color="neutral" variant="ghost" square aria-label="Dictate" />
+          <UButton :icon="studioIcons.mic" color="neutral" variant="ghost" aria-label="Dictate" />
           <UButton
             v-if="input.trim()"
             :icon="appConfig.ui.icons.arrowUp"
             color="primary"
-            square
             aria-label="Send"
             @click="onSubmit"
           />
@@ -226,7 +225,6 @@ function onSubmit() {
             :icon="studioIcons.audioLines"
             color="neutral"
             variant="ghost"
-            square
             aria-label="Voice mode"
           />
         </div>

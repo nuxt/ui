@@ -153,8 +153,7 @@ defineShortcuts(extractShortcuts(teamsItems.value))
             trailing-icon="i-lucide-chevrons-up-down"
             color="neutral"
             variant="ghost"
-            square
-            class="w-full data-[state=open]:bg-soft overflow-hidden"
+            class="w-full data-[state=open]:bg-soft overflow-hidden px-(--ui-control-py)"
             :ui="{
               trailingIcon: 'text-faint ms-auto'
             }"
@@ -167,7 +166,7 @@ defineShortcuts(extractShortcuts(teamsItems.value))
           :key="state"
           :items="getItems(state)"
           orientation="vertical"
-          :ui="{ link: 'p-1.5 overflow-hidden' }"
+          :ui="{ link: 'px-(--ui-control-py) overflow-hidden' }"
         />
       </template>
 
@@ -183,8 +182,7 @@ defineShortcuts(extractShortcuts(teamsItems.value))
             trailing-icon="i-lucide-chevrons-up-down"
             color="neutral"
             variant="ghost"
-            square
-            class="w-full data-[state=open]:bg-soft overflow-hidden"
+            class="w-full data-[state=open]:bg-soft overflow-hidden px-(--ui-control-py)"
             :ui="{
               trailingIcon: 'text-faint ms-auto'
             }"

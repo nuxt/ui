@@ -84,7 +84,7 @@ exports[`ChangelogVersion > renders with badge correctly 1`] = `
   </div>
   <div data-slot="changelog-version-container" class="flex flex-col mx-auto max-w-2xl">
     <div data-slot="changelog-version-header" class="">
-      <div data-slot="changelog-version-meta" class="flex items-center gap-3 mb-2"><span data-slot="changelog-version-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-neutral)] bg-accent text-accent-contrast text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="changelog-version-meta" class="flex items-center gap-3 mb-2"><span data-slot="changelog-version-badge" class="font-medium inline-flex items-center px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-neutral)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
         <!--v-if--></span>
         <!--v-if-->
       </div>
@@ -107,7 +107,7 @@ exports[`ChangelogVersion > renders with badge object correctly 1`] = `
   </div>
   <div data-slot="changelog-version-container" class="flex flex-col mx-auto max-w-2xl">
     <div data-slot="changelog-version-header" class="">
-      <div data-slot="changelog-version-meta" class="flex items-center gap-3 mb-2"><span data-slot="changelog-version-badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs px-2 py-1 gap-1 rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+      <div data-slot="changelog-version-meta" class="flex items-center gap-3 mb-2"><span data-slot="changelog-version-badge" class="font-medium inline-flex items-center px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
         <!--v-if--></span>
         <!--v-if-->
       </div>

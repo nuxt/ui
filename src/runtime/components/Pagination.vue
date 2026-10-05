@@ -109,6 +109,7 @@ import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
 import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
+import { usePrefix } from '../composables/usePrefix'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
@@ -130,6 +131,7 @@ const props = useComponentProps('pagination', _props, theme)
 
 const { dir } = useLocale()
 const appConfig = useThemeConfig() as Pagination['AppConfig']
+const prefix = usePrefix()
 const overrides = useComponentOverrides((ui: Pagination['AppConfig']['ui']) => ui.pagination)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'defaultPage', 'disabled', 'itemsPerPage', 'page', 'showEdges', 'siblingCount', 'total'), emits)
@@ -171,7 +173,7 @@ const ui = computed(() => tv(theme, overrides.value)())
               :label="String(item.value)"
               :ui="{ label: ui.label() }"
               :to="props.to?.(item.value)"
-              square
+              :class="prefix('px-(--ui-control-py)')"
             />
           </slot>
         </PaginationListItem>

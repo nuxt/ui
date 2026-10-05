@@ -12,27 +12,27 @@ export default extendTheme(input, {
   },
   variants: {
     ...fieldGroupVariant,
-    // No `root` slot here, so the color scopes `base`
+    // No `root` slot here, so the color and the size tokens go on `base`
     color: () => colorVariant({ base: '' }),
     size: {
       xs: {
-        base: (prev: string) => [prev, 'gap-0.25'],
+        base: (prev: string) => [prev, input.variants.size.xs.root, 'gap-0.25'],
         segment: 'data-[segment=day]:w-8 data-[segment=month]:w-8 data-[segment=year]:w-10'
       },
       sm: {
-        base: (prev: string) => [prev, 'gap-0.5'],
+        base: (prev: string) => [prev, input.variants.size.sm.root, 'gap-0.5'],
         segment: 'data-[segment=day]:w-8 data-[segment=month]:w-8 data-[segment=year]:w-10'
       },
       md: {
-        base: (prev: string) => [prev, 'gap-0.5'],
+        base: (prev: string) => [prev, input.variants.size.md.root, 'gap-0.5'],
         segment: 'data-[segment=day]:w-9 data-[segment=month]:w-9 data-[segment=year]:w-11'
       },
       lg: {
-        base: (prev: string) => [prev, 'gap-0.75'],
+        base: (prev: string) => [prev, input.variants.size.lg.root, 'gap-0.75'],
         segment: 'data-[segment=day]:w-9 data-[segment=month]:w-9 data-[segment=year]:w-11'
       },
       xl: {
-        base: (prev: string) => [prev, 'gap-0.75'],
+        base: (prev: string) => [prev, input.variants.size.xl.root, 'gap-0.75'],
         segment: 'data-[segment=day]:w-10 data-[segment=month]:w-10 data-[segment=year]:w-12'
       }
     },

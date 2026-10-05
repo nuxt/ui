@@ -77,7 +77,7 @@ const variants: { [k: string]: VariantType | ((custom: unknown) => VariantType) 
         size="sm"
         variant="ghost"
         color="neutral"
-        square
+        class="px-(--ui-control-py)"
         :class="ui.toggle({ toggleSide: 'right' })"
         @click="toggle"
       >

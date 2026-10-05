@@ -189,7 +189,7 @@ describe('\'*\' default variants', () => {
       template: `<UTheme :props="{ '*': { size: 'xs' } }"><UFormField label="Field"><UInput /></UFormField></UTheme>`
     })
 
-    expect(wrapper.find('[data-slot="input-base"]').classes()).toEqual(expect.arrayContaining(['px-2', 'py-1']))
+    expect(wrapper.find('[data-slot="input"]').classes()).toEqual(expect.arrayContaining(['[--ui-control-px:--spacing(2)]', '[--ui-control-py:--spacing(1)]']))
   })
 
   describe('from app.config', () => {

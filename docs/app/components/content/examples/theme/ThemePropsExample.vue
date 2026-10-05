@@ -10,7 +10,7 @@
         <UButton label="Hover me" />
       </UTooltip>
       <UButton label="With icon" icon="i-lucide-rocket" />
-      <UButton label="Square" icon="i-lucide-star" square />
+      <UButton label="Equal padding" icon="i-lucide-star" class="px-(--ui-control-py)" />
     </div>
   </UTheme>
 </template>

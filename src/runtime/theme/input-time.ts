@@ -12,27 +12,27 @@ export default extendTheme(input, {
   },
   variants: {
     ...fieldGroupVariant,
-    // No `root` slot here, so the color scopes `base`
+    // No `root` slot here, so the color and the size tokens go on `base`
     color: () => colorVariant({ base: '' }),
     size: {
       xs: {
-        base: (prev: string) => [prev, 'gap-0.25'],
+        base: (prev: string) => [prev, input.variants.size.xs.root, 'gap-0.25'],
         segment: 'not-data-[segment=literal]:w-8'
       },
       sm: {
-        base: (prev: string) => [prev, 'gap-0.5'],
+        base: (prev: string) => [prev, input.variants.size.sm.root, 'gap-0.5'],
         segment: 'not-data-[segment=literal]:w-8'
       },
       md: {
-        base: (prev: string) => [prev, 'gap-0.5'],
+        base: (prev: string) => [prev, input.variants.size.md.root, 'gap-0.5'],
         segment: 'not-data-[segment=literal]:w-9'
       },
       lg: {
-        base: (prev: string) => [prev, 'gap-0.75'],
+        base: (prev: string) => [prev, input.variants.size.lg.root, 'gap-0.75'],
         segment: 'not-data-[segment=literal]:w-9'
       },
       xl: {
-        base: (prev: string) => [prev, 'gap-0.75'],
+        base: (prev: string) => [prev, input.variants.size.xl.root, 'gap-0.75'],
         segment: 'not-data-[segment=literal]:w-10'
       }
     },

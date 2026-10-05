@@ -75,7 +75,7 @@ function onSubmit() {
         color="neutral"
         variant="soft"
         size="xs"
-        square
+        class="px-(--ui-control-py)"
         trailing-icon="i-lucide-x"
         @click="attachments.splice(index, 1)"
       />
@@ -122,7 +122,6 @@ function onSubmit() {
           color="neutral"
           variant="ghost"
           size="sm"
-          square
         />
 
         <UChatPromptSubmit size="sm" :disabled="!input.trim()" />
