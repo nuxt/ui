@@ -54,7 +54,7 @@ export default defineTheme({
       item: '-ms-px',
       indicator: 'absolute ms-2.5 transition-[translate,height] duration-200 ease-out motion-reduce:transition-none h-(--indicator-size) translate-y-(--indicator-position) w-px rounded-full',
       indicatorLine: 'hidden',
-      indicatorActive: 'size-full '
+      indicatorActive: 'size-full'
     }
   }, {
     highlight: true,

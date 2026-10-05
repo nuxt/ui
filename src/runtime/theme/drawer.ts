@@ -59,7 +59,7 @@ export default defineTheme({
     direction: ['right', 'left'],
     class: {
       content: 'w-auto max-w-[calc(100%-2rem)]',
-      handle: 'h-12! w-1.5! my-auto '
+      handle: 'h-12! w-1.5! my-auto'
     }
   }, {
     direction: ['right', 'left'],

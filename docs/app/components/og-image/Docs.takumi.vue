@@ -62,7 +62,7 @@ withDefaults(defineProps<{
       <div v-if="headline" class="self-start flex flex-row items-center h-[38px] px-4 rounded-full bg-sky-50 text-sky-500 text-[20px] font-medium">
         <svg
           v-if="framework === 'nuxt'"
-          class="size-[24px]  mr-2"
+          class="w-[24px] h-[24px] mr-2"
           viewBox="0 0 512 512"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

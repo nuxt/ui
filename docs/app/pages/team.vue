@@ -125,7 +125,7 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
                 />
 
                 <div class="flex-1 md:flex-none md:w-86 min-w-0 flex flex-col gap-0.5">
-                  <span class="text-base/tight sm:text-lg font-semibold  tracking-tight text-strong truncate">{{ person.name }}</span>
+                  <span class="text-base/tight sm:text-lg font-semibold tracking-tight text-strong truncate">{{ person.name }}</span>
                   <span v-if="person.location" class="flex items-center gap-1.5 text-[13px] text-muted whitespace-nowrap min-w-0">
                     <UIcon :name="studioIcons.mapPin" class="size-3 text-faint shrink-0" />
                     <span class="truncate">{{ person.location }}</span>
@@ -172,7 +172,7 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
               <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(var(--ui-border-strong)_1px,transparent_1px)] bg-size-[26px_26px] opacity-50 mask-[radial-gradient(80%_120%_at_90%_50%,black,transparent_70%)]" />
 
               <div class="relative flex flex-col gap-2">
-                <h2 class="text-2xl/tight sm:text-3xl font-semibold  tracking-tight text-strong">
+                <h2 class="text-2xl/tight sm:text-3xl font-semibold tracking-tight text-strong">
                   {{ total }} people have shipped Nuxt UI
                 </h2>
                 <p class="text-[15px] text-muted">

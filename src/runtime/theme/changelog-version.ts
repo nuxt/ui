@@ -11,7 +11,7 @@ export default defineTheme({
     title: 'relative text-xl text-pretty font-semibold text-strong',
     description: 'text-base text-pretty text-muted mt-1',
     imageWrapper: 'relative overflow-hidden rounded-lg aspect-video mt-5 group/changelog-version-image',
-    image: 'object-cover object-top size-full ',
+    image: 'object-cover object-top size-full',
     authors: 'flex flex-wrap gap-x-4 gap-y-1.5',
     footer: 'border-t border-default pt-5 flex items-center justify-between',
     indicator: 'absolute inset-s-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0',

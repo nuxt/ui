@@ -53,7 +53,7 @@ export default defineTheme({
     scrollable: false,
     fullscreen: false,
     class: {
-      content: 'top-1/2 left-1/2 -translate-1/2  max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden'
+      content: 'top-1/2 left-1/2 -translate-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden'
     }
   }]
 })

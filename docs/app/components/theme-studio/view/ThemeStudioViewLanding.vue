@@ -149,7 +149,7 @@ const vReveal = {
         container: 'relative z-10 lg:py-32',
         wrapper: 'flex flex-col items-center',
         title: 'sm:text-6xl lg:text-7xl xl:text-[80px] tracking-tighter leading-[1.05]',
-        description: 'mt-5 max-w-xl mx-auto text-base/relaxed sm:text-lg  text-default',
+        description: 'mt-5 max-w-xl mx-auto text-base/relaxed sm:text-lg text-default',
         links: 'gap-3'
       }"
     >
@@ -257,7 +257,7 @@ const vReveal = {
             :ui="{
               leading: 'mb-5 flex size-9 items-center justify-center rounded-lg bg-primary/10',
               title: 'text-sm tracking-tight',
-              description: 'text-sm/relaxed  sm:line-clamp-2 lg:line-clamp-3 text-faint'
+              description: 'text-sm/relaxed sm:line-clamp-2 lg:line-clamp-3 text-faint'
             }"
           />
         </div>

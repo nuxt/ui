@@ -577,7 +577,13 @@ export default createConfigForNuxt({
     '^nuxi-', '^landing-', '^(nuxt|vue)-only$', '^(playground-)?wall$', '^horizon$', '^twinkle$',
     '^stars?$', '^star-layer$', '^dice-rolling$', '^squircle$', '^carbon$', '^example$', '^my-table-tbody$'
   ]
-})).append(
+})).append({
+  // Rendered by Takumi, which reads the classes itself and not through Tailwind.
+  files: ['docs/app/components/og-image/**/*.vue'],
+  rules: {
+    'better-tailwindcss/enforce-canonical-classes': 'off'
+  }
+}).append(
   betterTailwindcssConfig(['playgrounds/nuxt/app/**/*.vue'], 'playgrounds/nuxt/app/assets/css/main.css')
 ).append(
   betterTailwindcssConfig(['playgrounds/vue/src/**/*.vue'], 'playgrounds/vue/src/assets/css/main.css')
