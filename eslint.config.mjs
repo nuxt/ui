@@ -586,7 +586,7 @@ export default createConfigForNuxt({
     settings: {
       selectors: [
         ...getDefaultSelectors(),
-        { kind: 'callee', name: '^(define|extend)Theme$', match: themeClassMatchers }
+        { kind: 'callee', name: '^(define|extend)Theme$', match: [...themeClassMatchers, { type: 'anonymousFunctionReturn', match: [{ type: 'strings' }] }] }
       ]
     }
   })
