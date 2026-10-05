@@ -72,12 +72,6 @@ export default defineTheme({
     }
   },
   compoundVariants: [{
-    variant: ['outline', 'subtle'],
-    class: { base: 'outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent' }
-  }, {
-    variant: ['soft', 'ghost'],
-    class: { base: 'outline-accent-focus focus-visible:outline-3' }
-  }, {
     orientation: 'horizontal',
     decrement: false,
     class: { base: 'text-start' }

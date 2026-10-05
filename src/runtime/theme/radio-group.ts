@@ -25,10 +25,10 @@ export default defineTheme({
       },
       card: {
         fieldset: 'flex-wrap',
-        item: `px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft`
+        item: `px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft ${focusCard}`
       },
       table: {
-        item: `px-(--ui-control-px) py-(--ui-control-py) border border-default hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent/50 has-data-[state=checked]:z-[2]`
+        item: `px-(--ui-control-px) py-(--ui-control-py) border border-default hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent/50 has-data-[state=checked]:z-[2] ${focusCard}`
       }
     },
     orientation: {
@@ -156,12 +156,6 @@ export default defineTheme({
       indicator: ['start', 'end'],
       class: {
         base: focusControl
-      }
-    },
-    {
-      variant: ['card', 'table'],
-      class: {
-        item: focusCard
       }
     },
     {

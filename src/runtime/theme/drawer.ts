@@ -18,20 +18,20 @@ export default defineTheme({
   variants: {
     direction: {
       top: {
-        content: 'mb-24 flex-col-reverse',
-        handle: 'mb-4'
+        content: 'mb-24 flex-col-reverse h-auto max-h-[96%]',
+        handle: 'mb-4 !w-12 !h-1.5 mx-auto'
       },
       right: {
-        content: 'flex-row rtl:flex-row-reverse',
-        handle: '!ml-4'
+        content: 'flex-row rtl:flex-row-reverse w-auto max-w-[calc(100%-2rem)]',
+        handle: '!ml-4 !h-12 !w-1.5 mt-auto mb-auto'
       },
       bottom: {
-        content: 'mt-24 flex-col',
-        handle: 'mt-4'
+        content: 'mt-24 flex-col h-auto max-h-[96%]',
+        handle: 'mt-4 !w-12 !h-1.5 mx-auto'
       },
       left: {
-        content: 'flex-row-reverse rtl:flex-row',
-        handle: '!mr-4'
+        content: 'flex-row-reverse rtl:flex-row w-auto max-w-[calc(100%-2rem)]',
+        handle: '!mr-4 !h-12 !w-1.5 mt-auto mb-auto'
       }
     },
     inset: {
@@ -45,21 +45,9 @@ export default defineTheme({
   },
   compoundVariants: [{
     direction: ['top', 'bottom'],
-    class: {
-      content: 'h-auto max-h-[96%]',
-      handle: '!w-12 !h-1.5 mx-auto'
-    }
-  }, {
-    direction: ['top', 'bottom'],
     snapPoints: true,
     class: {
       content: 'h-full'
-    }
-  }, {
-    direction: ['right', 'left'],
-    class: {
-      content: 'w-auto max-w-[calc(100%-2rem)]',
-      handle: '!h-12 !w-1.5 mt-auto mb-auto'
     }
   }, {
     direction: ['right', 'left'],
@@ -67,8 +55,7 @@ export default defineTheme({
     class: {
       content: 'w-full'
     }
-  },
-  {
+  }, {
     direction: 'top',
     inset: true,
     class: {

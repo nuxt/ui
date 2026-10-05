@@ -51,10 +51,10 @@ export default defineTheme({
       }
     },
     variant: {
-      outline: { base: 'bg-default ring ring-inset ring-strong' },
-      soft: { base: 'bg-tint hover:bg-soft focus:bg-soft disabled:bg-tint' },
-      subtle: { base: 'bg-soft ring ring-inset ring-strong' },
-      ghost: { base: 'bg-transparent hover:bg-soft focus:bg-soft disabled:bg-transparent dark:disabled:bg-transparent' },
+      outline: { base: 'bg-default ring ring-inset ring-strong outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent' },
+      soft: { base: 'bg-tint hover:bg-soft focus:bg-soft disabled:bg-tint outline-accent-focus focus-visible:outline-3' },
+      subtle: { base: 'bg-soft ring ring-inset ring-strong outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent' },
+      ghost: { base: 'bg-transparent hover:bg-soft focus:bg-soft disabled:bg-transparent dark:disabled:bg-transparent outline-accent-focus focus-visible:outline-3' },
       none: { base: 'bg-transparent focus:outline-none' }
     },
     color: colorVariant({ root: '' }),
@@ -79,12 +79,6 @@ export default defineTheme({
     }
   },
   compoundVariants: [{
-    variant: ['outline', 'subtle'],
-    class: { base: 'outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent' }
-  }, {
-    variant: ['soft', 'ghost'],
-    class: { base: 'outline-accent-focus focus-visible:outline-3' }
-  }, {
     loading: true,
     leading: true,
     class: {
