@@ -109,7 +109,7 @@ describe('colors plugin', () => {
   })
 
   it('points an alias at the shades you pick, for light and dark mode', async () => {
-    const css = await build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: neutral 900 200; secondary: "indigo" 600; }')
+    const css = await build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: neutral 900 200; secondary: "indigo" 600 600; }')
 
     expect(rule(css, ':root, :host')).toContain(`--ui-color-secondary-500: ${colors.indigo[500]};`)
     expect(aliasRule(css, ':root, :host, .light', '--ui-primary: var(--ui-color-primary-900);')).toContain('--ui-secondary: var(--ui-color-secondary-600);')
@@ -145,8 +145,10 @@ describe('colors plugin', () => {
     await expect(build({}, undefined, '@theme { --color-brand-500: #ef4444; }\n@plugin "@nuxt/ui/colors" { primary: brand; }')).rejects.toThrow('`--color-brand-50` is missing')
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: #5865f2; }')).rejects.toThrow('set `--ui-primary` in your CSS')
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: primary; }')).rejects.toThrow('`primary: primary` points a color alias at another')
-    await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: indigo 550; }')).rejects.toThrow('`primary: indigo 550` takes a palette and up to two shades')
-    await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: indigo 050; }')).rejects.toThrow('`primary: indigo 050` takes a palette and up to two shades')
+    await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: indigo 550; }')).rejects.toThrow('`primary: indigo 550` takes a palette and two shades')
+    await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: indigo 050; }')).rejects.toThrow('`primary: indigo 050` takes a palette and two shades')
+    await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: indigo 600; }')).rejects.toThrow('`primary: indigo 600` takes a palette and two shades')
+    await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: black; }')).rejects.toThrow('`primary: black` takes a palette and two shades')
   })
 
   it('gives an alias on a gray palette neutral\'s surface roles', async () => {
