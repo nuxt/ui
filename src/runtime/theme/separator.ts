@@ -15,21 +15,21 @@ export default defineTheme({
     orientation: {
       horizontal: {
         root: 'w-full flex-row',
-        border: 'w-full',
+        border: 'w-full border-t-(length:--ui-control-thickness)',
         container: 'whitespace-nowrap'
       },
       vertical: {
         root: 'h-full flex-col',
-        border: 'h-full',
+        border: 'h-full border-s-(length:--ui-control-thickness)',
         container: ''
       }
     },
     size: {
-      xs: '',
-      sm: '',
-      md: '',
-      lg: '',
-      xl: ''
+      xs: { root: '[--ui-control-thickness:1px]' },
+      sm: { root: '[--ui-control-thickness:2px]' },
+      md: { root: '[--ui-control-thickness:3px]' },
+      lg: { root: '[--ui-control-thickness:4px]' },
+      xl: { root: '[--ui-control-thickness:5px]' }
     },
     position: {
       start: '',
@@ -72,46 +72,6 @@ export default defineTheme({
     orientation: 'vertical',
     position: 'end',
     class: { container: 'mt-2' }
-  }, {
-    orientation: 'horizontal',
-    size: 'xs',
-    class: { border: 'border-t' }
-  }, {
-    orientation: 'horizontal',
-    size: 'sm',
-    class: { border: 'border-t-[2px]' }
-  }, {
-    orientation: 'horizontal',
-    size: 'md',
-    class: { border: 'border-t-[3px]' }
-  }, {
-    orientation: 'horizontal',
-    size: 'lg',
-    class: { border: 'border-t-[4px]' }
-  }, {
-    orientation: 'horizontal',
-    size: 'xl',
-    class: { border: 'border-t-[5px]' }
-  }, {
-    orientation: 'vertical',
-    size: 'xs',
-    class: { border: 'border-s' }
-  }, {
-    orientation: 'vertical',
-    size: 'sm',
-    class: { border: 'border-s-[2px]' }
-  }, {
-    orientation: 'vertical',
-    size: 'md',
-    class: { border: 'border-s-[3px]' }
-  }, {
-    orientation: 'vertical',
-    size: 'lg',
-    class: { border: 'border-s-[4px]' }
-  }, {
-    orientation: 'vertical',
-    size: 'xl',
-    class: { border: 'border-s-[5px]' }
   }],
   defaultVariants: {
     color: 'neutral',

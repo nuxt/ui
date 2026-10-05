@@ -529,11 +529,11 @@ exports[`AuthForm > renders with providers correctly 1`] = `
         <!--v-if-->
       </button></div>
     <!---->
-    <div data-orientation="horizontal" role="separator" data-slot="auth-form-separator" class="flex items-center text-center [--ui-accent:var(--ui-neutral)] w-full flex-row">
+    <div data-orientation="horizontal" role="separator" data-slot="auth-form-separator" class="flex items-center text-center [--ui-accent:var(--ui-neutral)] w-full flex-row [--ui-control-thickness:1px]">
       <!--v-if-->
-      <div data-slot="separator-border" class="border-accent-default w-full border-solid border-t"></div>
+      <div data-slot="separator-border" class="border-accent-default w-full border-t-(length:--ui-control-thickness) border-solid"></div>
       <div data-slot="separator-container" class="font-medium text-default flex whitespace-nowrap mx-3"><span data-slot="separator-label" class="text-sm">or</span></div>
-      <div data-slot="separator-border" class="border-accent-default w-full border-solid border-t"></div>
+      <div data-slot="separator-border" class="border-accent-default w-full border-t-(length:--ui-control-thickness) border-solid"></div>
       <!--v-if-->
     </div>
     <form id="v-0" method="post" data-slot="auth-form-form" class="space-y-5">
