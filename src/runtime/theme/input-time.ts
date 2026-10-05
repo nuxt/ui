@@ -16,22 +16,27 @@ export default extendTheme(input, {
     color: () => colorVariant({ base: '' }),
     size: {
       xs: {
+        root: () => undefined,
         base: (prev: string) => [prev, input.variants.size.xs.root, 'gap-0.25'],
         segment: 'not-data-[segment=literal]:w-8'
       },
       sm: {
+        root: () => undefined,
         base: (prev: string) => [prev, input.variants.size.sm.root, 'gap-0.5'],
         segment: 'not-data-[segment=literal]:w-8'
       },
       md: {
+        root: () => undefined,
         base: (prev: string) => [prev, input.variants.size.md.root, 'gap-0.5'],
         segment: 'not-data-[segment=literal]:w-9'
       },
       lg: {
+        root: () => undefined,
         base: (prev: string) => [prev, input.variants.size.lg.root, 'gap-0.75'],
         segment: 'not-data-[segment=literal]:w-9'
       },
       xl: {
+        root: () => undefined,
         base: (prev: string) => [prev, input.variants.size.xl.root, 'gap-0.75'],
         segment: 'not-data-[segment=literal]:w-10'
       }

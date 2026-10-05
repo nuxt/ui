@@ -41,6 +41,7 @@ export default extendTheme(input, {
     }),
     size: {
       xs: {
+        root: () => undefined,
         base: (prev: string) => [prev, input.variants.size.xs.root],
         label: 'p-1 text-[10px]/3 gap-1',
         item: 'p-1 text-xs gap-1',
@@ -50,6 +51,7 @@ export default extendTheme(input, {
         empty: 'p-2 text-xs'
       },
       sm: {
+        root: () => undefined,
         base: (prev: string) => [prev, input.variants.size.sm.root],
         label: 'p-1.5 text-[10px]/3 gap-1.5',
         item: 'p-1.5 text-xs gap-1.5',
@@ -59,6 +61,7 @@ export default extendTheme(input, {
         empty: 'p-2.5 text-xs'
       },
       md: {
+        root: () => undefined,
         base: (prev: string) => [prev, input.variants.size.md.root],
         label: 'p-1.5 text-xs gap-1.5',
         item: 'p-1.5 text-sm gap-1.5',
@@ -68,6 +71,7 @@ export default extendTheme(input, {
         empty: 'p-2.5 text-sm'
       },
       lg: {
+        root: () => undefined,
         base: (prev: string) => [prev, input.variants.size.lg.root],
         label: 'p-2 text-xs gap-2',
         item: 'p-2 text-sm gap-2',
@@ -77,6 +81,7 @@ export default extendTheme(input, {
         empty: 'p-3 text-sm'
       },
       xl: {
+        root: () => undefined,
         base: (prev: string) => [prev, input.variants.size.xl.root],
         label: 'p-2 text-sm gap-2',
         item: 'p-2 text-base gap-2',

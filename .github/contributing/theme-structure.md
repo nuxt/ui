@@ -17,15 +17,36 @@ Classes in `variants` and `compoundVariants` are always given per slot, as an ob
 ```ts
 variants: {
   size: {
-    md: { base: 'px-2.5 py-1.5', leadingIcon: 'size-5' }
+    md: { base: 'text-sm', leadingIcon: 'size-5' }
   }
 },
 compoundVariants: [{
-  size: 'xs',
-  square: true,
-  class: { base: 'p-1' }
+  loading: true,
+  leading: true,
+  class: { leadingIcon: 'animate-spin' }
 }]
 ```
+
+## Control tokens
+
+A control, a Button, a Badge or a field, does not write the padding, gap and icon size of a `size` as classes. The size sets four variables on the outermost slot, `root` where the theme has one and `base` otherwise, and plain classes read them:
+
+```ts
+slots: {
+  base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)',
+  leadingIcon: 'shrink-0 size-(--ui-control-icon)'
+},
+variants: {
+  size: {
+    md: { base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] text-sm' }
+  },
+  leading: {
+    true: { base: 'ps-[calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]' }
+  }
+}
+```
+
+Reach for this before a `size` × something compound: the size writes a value, another variant picks the property that reads it. A compound is hard to override from an app config, a token is one class. A theme that extends Input and drops its `root` (Select, InputDate, InputTime) appends the tokens to `base`.
 
 ## Static Theme
 
@@ -202,11 +223,11 @@ compoundVariants: [
     class: { base: 'bg-primary text-contrast' }
   },
   
-  // Size + boolean
+  // Variant + boolean
   {
-    size: 'sm',
-    square: true,
-    class: { base: 'p-1' }
+    loading: true,
+    leading: true,
+    class: { leadingIcon: 'animate-spin' }
   },
   
   // Multiple slots

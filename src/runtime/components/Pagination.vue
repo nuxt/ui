@@ -171,9 +171,8 @@ const ui = computed(() => tv(theme, overrides.value)())
               :variant="page === item.value ? props.activeVariant : props.variant"
               :size="props.size"
               :label="String(item.value)"
-              :ui="{ label: ui.label() }"
+              :ui="{ label: ui.label(), base: prefix('px-(--ui-control-py)') }"
               :to="props.to?.(item.value)"
-              :class="prefix('px-(--ui-control-py)')"
             />
           </slot>
         </PaginationListItem>
