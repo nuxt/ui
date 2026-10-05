@@ -293,7 +293,6 @@ const noUnresolvedFormFieldRefs = {
 }
 
 const themeClassMatchers = [
-  { type: 'objectValues', path: '^base.*$' },
   { type: 'objectValues', path: '^slots(?!.*Size$).*$' },
   { type: 'objectValues', path: '^variants(?!.*Size$).*$' },
   { type: 'objectValues', path: '^compoundVariants\\[\\d+\\]\\.class.*$' }
@@ -581,24 +580,14 @@ export default createConfigForNuxt({
 ).append(
   betterTailwindcssConfig(['playgrounds/vue/src/**/*.vue'], 'playgrounds/vue/src/assets/css/main.css')
 ).append(
-  // Theme files are `export default {...}` or `export default (options) => ({...})`. Only the tv
-  // class paths are checked, minus the `*Size` slots which hold a size prop for a nested component.
-  betterTailwindcssConfig(['src/theme/**/*.ts'], 'playgrounds/nuxt/app/assets/css/main.css', {
+  // Theme files are `export default defineTheme({...})` or `export default extendTheme(base, {...})`.
+  // Only the tv class paths are checked, minus the `*Size` slots which hold a size prop for a nested component.
+  betterTailwindcssConfig(['src/runtime/theme/**/*.ts'], 'playgrounds/nuxt/app/assets/css/main.css', {
     settings: {
       selectors: [
         ...getDefaultSelectors(),
-        {
-          kind: 'variable',
-          name: '^default$',
-          match: [...themeClassMatchers, { type: 'anonymousFunctionReturn', match: themeClassMatchers }]
-        },
-        // Themes extending another one: `(options) => defuFn({...}, input(options))`
-        { kind: 'callee', name: '^defu(Fn)?$', match: themeClassMatchers }
+        { kind: 'callee', name: '^(define|extend)Theme$', match: themeClassMatchers }
       ]
-    },
-    rules: {
-      // Classes built from `options.theme.colors` or a variant prefix are written out in full in the generated theme.
-      'better-tailwindcss/no-concatenated-classes': 'off'
     }
   })
 ).append({
