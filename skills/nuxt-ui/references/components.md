@@ -57,9 +57,12 @@ Quick-reference index of all 125+ components. For full API docs (props, slots, e
 | `USelectMenu` | Rich searchable dropdown, multi-select, groups |
 | `UInputMenu` | Autocomplete / combobox |
 | `UInputNumber` | Numeric input with +/- controls |
+| `UInputRating` | Rating input |
 | `UInputDate` | Date picker with calendar |
 | `UInputTime` | Time picker (12/24h) |
 | `UInputTags` | Tag/chip input |
+| `UListbox` | Selectable list with search and virtualization |
+| `ULocaleSelect` | Select to switch between locales |
 | `UPinInput` | Verification code input |
 | `UCheckbox` | Single boolean checkbox |
 | `UCheckboxGroup` | Multiple checkboxes |
