@@ -36,6 +36,11 @@ export default defineNuxtConfig({
   $production: {
     site: {
       url: 'https://ui.nuxt.com'
+    },
+    // Server sourcemaps cost the final Nitro bundle about 1 GB of heap while
+    // bundling. Build only, so `nuxt dev` keeps Nuxt's defaults.
+    sourcemap: {
+      server: false
     }
   },
 
@@ -417,6 +422,11 @@ export default defineNuxtConfig({
       prefix: 'custom',
       dir: resolve('./app/assets/icons')
     }],
+    // Keep the icon collections as JSON files next to the server instead of
+    // inlining them, Rollup spends about 1 GB of heap parsing them otherwise.
+    serverBundle: {
+      externalizeIconsJson: true
+    },
     clientBundle: {
       // `ProseCodeIcon` resolves through Nuxt UI's code icon map and falls back to
       // `i-vscode-icons-file-type-{extension}`, and `ProsePrompt` hardcodes one logo per

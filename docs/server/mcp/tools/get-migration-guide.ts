@@ -1,7 +1,7 @@
 import { queryCollection } from '@nuxt/content/server'
 
 export default defineMcpTool({
-  description: 'Retrieves the migration guide and upgrade instructions for this version of Nuxt UI',
+  description: 'Returns the full guide for migrating an application from the previous major version of Nuxt UI to this one, as Markdown with its title, description and URL. Takes no parameters and covers that single upgrade only. The page is large. To read part of it, call `get-documentation-page` with `/docs/getting-started/migration` and a `headings` list.',
   annotations: {
     readOnlyHint: true,
     destructiveHint: false,

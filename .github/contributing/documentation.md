@@ -359,12 +359,12 @@ Configure icons in your Vite config.
 
 | Category | Components |
 |----------|------------|
-| `element` | Button, Badge, Icon, Avatar, etc. |
+| `element` | Button, Badge, Icon, Avatar, Card, Separator, Calendar, etc. |
 | `form` | Input, Select, Checkbox, Form, etc. |
 | `overlay` | Modal, Slideover, Popover, Toast, etc. |
 | `navigation` | NavigationMenu, Breadcrumb, Tabs, etc. |
-| `layout` | Card, Container, Separator, etc. |
-| `data` | Table, Tree, Calendar, etc. |
+| `layout` | Container, etc. |
+| `data` | Table, Tree, etc. |
 | `page` | PageHero, PageSection, PageCard, etc. |
 | `dashboard` | DashboardGroup, DashboardSidebar, DashboardPanel, etc. |
 | `chat` | ChatMessages, ChatPrompt, ChatPalette, etc. |

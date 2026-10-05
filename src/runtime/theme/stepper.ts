@@ -7,7 +7,7 @@ export default defineTheme({
     header: 'flex',
     item: 'group text-center relative w-full',
     container: 'relative',
-    trigger: 'rounded-full font-medium text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus',
+    trigger: 'rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus',
     indicator: 'flex items-center justify-center size-full',
     icon: 'shrink-0',
     separator: 'absolute rounded-full group-data-[disabled]:opacity-75 bg-strong group-data-[state=completed]:bg-accent',

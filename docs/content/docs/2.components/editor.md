@@ -511,19 +511,19 @@ You need to install these dependencies first to use this example:
 ::code-group{sync="pm"}
 
 ```bash [pnpm]
-pnpm add ai @ai-sdk/gateway @ai-sdk/vue
+pnpm add ai @ai-sdk/vue
 ```
 
 ```bash [yarn]
-yarn add ai @ai-sdk/gateway @ai-sdk/vue
+yarn add ai @ai-sdk/vue
 ```
 
 ```bash [npm]
-npm install ai @ai-sdk/gateway @ai-sdk/vue
+npm install ai @ai-sdk/vue
 ```
 
 ```bash [bun]
-bun add ai @ai-sdk/gateway @ai-sdk/vue
+bun add ai @ai-sdk/vue
 ```
 
 ::
@@ -559,7 +559,6 @@ lang: 'ts'
 
 ```ts [server/api/completion.post.ts]
 import { streamText, createTextStreamResponse } from 'ai'
-import { gateway } from '@ai-sdk/gateway'
 
 export default defineEventHandler(async (event) => {
   const { prompt, mode, language } = await readBody(event)
@@ -611,7 +610,7 @@ CRITICAL RULES:
   }
 
   const result = streamText({
-    model: gateway('anthropic/claude-haiku-4.5'),
+    model: 'anthropic/claude-haiku-4.5',
     instructions,
     prompt,
     maxOutputTokens

@@ -11,7 +11,7 @@ export default defineTheme({
     title: 'truncate',
     trailing: 'ms-auto inline-flex gap-1.5 items-center',
     trailingIcon: 'size-5 transform transition-transform duration-200 ease-out motion-reduce:transition-none shrink-0 group-data-[state=open]:rotate-180 lg:hidden',
-    content: 'relative data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden focus:outline-none lg:min-h-[min(var(--list-height,8rem),8rem)] lg:overflow-y-auto lg:scrollbar-none',
+    content: 'relative data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden focus:outline-none lg:min-h-[min(var(--list-height,8rem),16rem)] lg:overflow-y-auto lg:scrollbar-none',
     list: 'min-w-0',
     listWithChildren: 'ms-3',
     item: 'min-w-0',

@@ -188,6 +188,7 @@ export type TVReturnType<T> = (props?: TVVariantProps<T>) => TVSlotFunctions<T>
 /**
  * The theme's own `compoundVariants` and `defaultVariants` checked against its
  * `variants`, the part of a literal theme inference alone doesn't validate.
+ * @internal
  */
 export type TVThemeCheck<T> = {
   compoundVariants?: TVCompoundVariants<T>
@@ -198,6 +199,7 @@ export type TVThemeCheck<T> = {
  * A theme as `defineTheme` returns it: checked, and with each default typed as
  * any value its variant accepts, the way app code reads it
  * (`reactive({ color: [theme.defaultVariants.color] })`).
+ * @internal
  */
 export type DefinedTheme<T> = {
   [K in keyof T]: K extends 'defaultVariants'
@@ -210,6 +212,7 @@ export type DefinedTheme<T> = {
  * A component's resolved overrides, as `useComponentOverrides` returns them:
  * its `app.config.ui.<c>` typed after the theme and the app's own config, so the
  * variant values the app adds (a custom `color`) reach the built component.
+ * @internal
  */
 export type { ComponentOverrides }
 
@@ -218,6 +221,7 @@ export type { ComponentOverrides }
  * component out. A component passes its `ComponentOverrides`, accepted as is
  * and widening the variant props; overrides written inline are checked
  * against the theme.
+ * @internal
  */
 export type TV = {
   <T extends TVTheme, O extends Record<string, any>>(theme: T & TVThemeCheck<T>, overrides: ComponentOverrides<O> | undefined): TVReturnType<T & O>

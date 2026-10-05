@@ -43,7 +43,7 @@ export interface FileUploadProps<M extends boolean = false> extends /** @vue-ign
   /**
    * The layout of how files are displayed.
    * Only works when `variant` is `area`.
-   * @defaultValue 'list'
+   * @defaultValue 'grid'
    */
   layout?: FileUpload['variants']['layout']
   /**
