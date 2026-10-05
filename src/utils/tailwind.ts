@@ -1,4 +1,5 @@
 import { readFile } from 'node:fs/promises'
+import { dirname, resolve } from 'pathe'
 
 const COMMENT = /\/\*[\s\S]*?\*\//g
 const IMPORT = /@import\s+(?:url\(\s*)?["']([^"']+)["']\s*\)?([^;]*)/g
@@ -8,6 +9,7 @@ const THEME = /^tailwindcss(?:\/(?:index|theme)(?:\.css)?)?$/
 const PREFIX = /\bprefix\(\s*([\w-]+)\s*\)/
 const WHOLE = /^tailwindcss(?:\/index\.css)?$/
 const LAYER = /\blayer\(\s*([\w.-]+)\s*\)/
+const RELATIVE = /^\.{1,2}\//
 
 /**
  * The prefix a stylesheet gives Tailwind CSS, `@import "tailwindcss" prefix(tw)`.
@@ -46,17 +48,43 @@ export function getTailwindLayer(css: string): string | undefined {
   }
 }
 
+type TailwindImport = { path: string, prefix: string | null, layer?: string }
+
+// A stylesheet often leaves the import to one it imports, `@import "./tailwind.css"`.
+// Only relative imports are followed: an alias or a package needs the bundler to resolve.
+async function readTailwindImport(path: string, seen: Set<string>): Promise<TailwindImport | undefined> {
+  if (seen.has(path)) {
+    return
+  }
+  seen.add(path)
+  const css = await readFile(path, 'utf8').catch(() => undefined)
+  if (css === undefined) {
+    return
+  }
+  const prefix = getTailwindPrefix(css)
+  if (prefix !== undefined) {
+    return { path, prefix, layer: getTailwindLayer(css) }
+  }
+  for (const [, specifier] of css.replace(COMMENT, '').matchAll(IMPORT)) {
+    const found = RELATIVE.test(specifier!) ? await readTailwindImport(resolve(dirname(path), specifier!), seen) : undefined
+    if (found) {
+      return found
+    }
+  }
+}
+
 /**
- * Reads the Tailwind CSS prefix of the first stylesheet that imports Tailwind CSS.
+ * Reads the Tailwind CSS prefix of the first stylesheet that imports Tailwind CSS,
+ * itself or through a relative `@import`.
  * @param paths - The stylesheets, in order
  * @returns The stylesheet, its prefix and the layer it imports Tailwind CSS into, or `undefined` when none imports Tailwind CSS
  */
-export async function findTailwindPrefix(paths: string[]): Promise<{ path: string, prefix: string | null, layer?: string } | undefined> {
+export async function findTailwindPrefix(paths: string[]): Promise<TailwindImport | undefined> {
+  const seen = new Set<string>()
   for (const path of paths) {
-    const css = await readFile(path, 'utf8').catch(() => undefined)
-    const prefix = css === undefined ? undefined : getTailwindPrefix(css)
-    if (prefix !== undefined) {
-      return { path, prefix, layer: getTailwindLayer(css!) }
+    const found = await readTailwindImport(path, seen)
+    if (found) {
+      return found
     }
   }
 }
