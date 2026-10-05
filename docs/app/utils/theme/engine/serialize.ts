@@ -48,7 +48,7 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explici
     // A mode left unset keeps the alias's default shade
     const defaults = tokenShadeDefaults(token)
     const shades = [lightShade ?? String(defaults.light), darkShade ?? String(defaults.dark)]
-    aliasShades[alias] = shades[0] === shades[1] ? shades[0]! : shades.join(' ')
+    aliasShades[alias] = shades.join(' ')
     Reflect.deleteProperty(light, token)
     Reflect.deleteProperty(dark, token)
   }

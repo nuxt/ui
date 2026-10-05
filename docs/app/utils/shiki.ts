@@ -38,8 +38,9 @@ function detectPaletteUsage(code: string): PaletteUsage[] {
       if (isShade(palette)) continue
 
       const defaults = alias === 'neutral' ? ['900', '50'] : ['500', '400']
-      const [light = defaults[0]!, dark = rest.trim() ? light : defaults[1]!] = rest.trim() ? rest.trim().split(/\s+/) : []
-      if (!isShade(light) || !isShade(dark)) continue
+      // Shades come in pairs, light then dark, or not at all
+      const [light, dark, ...extra] = rest.trim() ? rest.trim().split(/\s+/) : defaults
+      if (!light || !dark || extra.length || !isShade(light) || !isShade(dark)) continue
 
       // A palette declared in the same block's `@theme` counts too
       const value = (shade: string) => shade === 'black' || shade === 'white'
