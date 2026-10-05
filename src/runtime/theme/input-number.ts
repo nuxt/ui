@@ -61,13 +61,14 @@ export default defineTheme({
     fixed: {
       false: ''
     },
-    // Room for the button: the padding, the icon and the gap
+    // Room for the button: the padding, the icon and the gap. Behind `:has()` so a
+    // padding set on the field leaves it in place: it is changed through the tokens
     increment: {
-      true: { base: 'pe-[calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]' },
+      true: { base: 'has-[~[data-slot$=-increment],>[data-slot$=-increment]]:pe-[calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]' },
       false: ''
     },
     decrement: {
-      true: { base: 'ps-[calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]' },
+      true: { base: 'has-[~[data-slot$=-decrement],>[data-slot$=-decrement]]:ps-[calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]' },
       false: ''
     }
   },
