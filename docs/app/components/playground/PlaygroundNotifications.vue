@@ -27,8 +27,8 @@ const settings = ref({
       </div>
     </div>
 
-    <div class="flex justify-end border-t border-default p-3">
-      <UButton label="Save preferences" @click="toast.add({ title: 'Preferences saved' })" />
+    <div class="flex justify-start border-t border-default px-4 py-3">
+      <UButton label="Save preferences" variant="outline" @click="toast.add({ title: 'Preferences saved' })" />
     </div>
   </div>
 </template>

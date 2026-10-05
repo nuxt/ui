@@ -181,14 +181,14 @@ function onSubmit(event: FormSubmitEvent<Schema>) {
 const form = useTemplateRef('form')
 
 async function validateAndSubmit() {
-  const result = await form.value?.validate()
+  const result = await form.value?.validate({ silent: true })
   if (result) {
     // valid — submit
   }
 }
 
 async function validateEmail() {
-  await form.value?.validate({ name: 'email' })
+  await form.value?.validate({ name: 'email', silent: true })
 }
 
 function setServerError() {
@@ -198,7 +198,7 @@ function setServerError() {
 }
 
 function resetErrors() {
-  form.value?.clearErrors()
+  form.value?.clear()
 }
 </script>
 
@@ -208,6 +208,8 @@ function resetErrors() {
   </UForm>
 </template>
 ```
+
+By default, `validate()` throws a `FormValidationException` when validation fails. Pass `{ silent: true }` when you want it to return `false` instead. Use `clear()` to remove validation errors.
 
 ## Form in a modal
 

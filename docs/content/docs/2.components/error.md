@@ -19,8 +19,11 @@ The Error component uses the `--ui-header-height` CSS variable to position itsel
 
 Use the `error` prop to display an error message.
 
+::framework-only
+#nuxt
 ::note{to="https://nuxt.com/docs/guide/directory-structure/error" target="_blank"}
 In most cases, you will receive the `error` prop in your `error.vue` file.
+::
 ::
 
 ::component-code

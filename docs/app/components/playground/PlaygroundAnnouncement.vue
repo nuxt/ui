@@ -20,7 +20,7 @@ const studioIcons = useStudioIcons()
       </div>
     </div>
 
-    <div class="flex items-center justify-end gap-2 border-t border-default p-3">
+    <div class="flex items-center justify-end gap-2 border-t border-default px-4 py-3">
       <UButton label="Dismiss" color="neutral" variant="ghost" />
       <UButton
         label="Learn more"

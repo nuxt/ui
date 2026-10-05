@@ -12,17 +12,17 @@ const claudeInChrome = ref(true)
 const webSearch = ref(true)
 
 const models = [
-  { value: 'opus-5', label: 'Opus 5', description: 'Deep reasoning and hard problems' },
-  { value: 'sonnet-5', label: 'Sonnet 5', description: 'Balanced speed and intelligence' },
+  { value: 'opus-5-5', label: 'Opus 5.5', description: 'Deep reasoning and hard problems' },
+  { value: 'sonnet-5-5', label: 'Sonnet 5.5', description: 'Balanced speed and intelligence' },
   { value: 'haiku-4-5', label: 'Haiku 4.5', description: 'Fastest for everyday tasks' }
 ]
 const legacyModels = [
-  { value: 'opus-4-8', label: 'Opus 4.8' },
-  { value: 'sonnet-4-6', label: 'Sonnet 4.6' }
+  { value: 'opus-5', label: 'Opus 5' },
+  { value: 'sonnet-5', label: 'Sonnet 5' }
 ]
 const efforts = ['Low', 'Medium', 'High', 'Max']
 
-const model = ref('opus-5')
+const model = ref('opus-5-5')
 const effort = ref('High')
 
 const activeModel = computed(() => [...models, ...legacyModels].find(m => m.value === model.value))
@@ -81,16 +81,16 @@ const items = computed<DropdownMenuItem[][]>(() => [
   [
     {
       label: 'Skills',
-      icon: 'i-lucide-shapes',
+      icon: studioIcons.shapes,
       children: [
         { label: 'Canvas design', icon: studioIcons.palette },
-        { label: 'Slides', icon: 'i-lucide-presentation' },
+        { label: 'Slides', icon: studioIcons.presentation },
         { label: 'PDF', icon: appConfig.ui.icons.file }
       ]
     },
     {
       label: 'Connectors',
-      icon: 'i-lucide-blocks',
+      icon: studioIcons.grid,
       children: [
         [
           { label: 'Add connector', icon: appConfig.ui.icons.plus },
@@ -123,11 +123,21 @@ const items = computed<DropdownMenuItem[][]>(() => [
         ]
       ]
     },
-    { label: 'Add plugins…', icon: 'i-lucide-plug' }
+    { label: 'Add plugins…', icon: studioIcons.plug }
   ],
   [
-    { label: 'Ask Vercel', icon: 'i-simple-icons-vercel' },
-    { label: 'Research', icon: 'i-lucide-activity' },
+    { label: 'Ask Vercel',
+      icon: 'i-simple-icons-vercel',
+      onSelect(e: Event) {
+        e.preventDefault()
+      }
+    },
+    {
+      label: 'Research', icon: studioIcons.activity,
+      onSelect(e: Event) {
+        e.preventDefault()
+      }
+    },
     {
       label: 'Web search',
       icon: studioIcons.globe,
@@ -135,6 +145,9 @@ const items = computed<DropdownMenuItem[][]>(() => [
       checked: webSearch.value,
       onUpdateChecked(checked: boolean) {
         webSearch.value = checked
+      },
+      onSelect(e: Event) {
+        e.preventDefault()
       }
     }
   ]
@@ -152,43 +165,44 @@ function onSubmit() {
   <UChatPrompt
     v-model="input"
     variant="naked"
-    size="md"
     :rows="3"
     autoresize
     :autofocus="false"
     placeholder="Paste a doc, an email, or a question to get started"
-    :ui="{ root: 'rounded-none p-2.5 backdrop-filter-none', body: 'p-1.5', base: 'px-0' }"
+    :ui="{ root: 'rounded-none p-2.5 backdrop-filter-none', body: 'p-1.5', base: 'p-0' }"
     @submit="onSubmit"
   >
     <template #footer>
-      <div class="flex items-center justify-between gap-2 w-full">
+      <div class="flex items-center justify-between gap-1.5 w-full">
         <div class="flex items-center gap-1">
-          <UDropdownMenu :items="items" :content="{ align: 'start', side: 'top' }" :ui="{ content: 'w-60' }" size="sm">
-            <UButton
-              :icon="appConfig.ui.icons.plus"
-              color="neutral"
-              variant="ghost"
-              size="sm"
-              square
-              aria-label="Add content"
-            />
+          <UDropdownMenu :items="items" :content="{ align: 'start', side: 'top' }" :modal="false">
+            <template #default="{ open }">
+              <UButton
+                :icon="appConfig.ui.icons.plus"
+                color="neutral"
+                variant="ghost"
+                aria-label="Add content"
+                :class="[open && 'bg-elevated']"
+              />
+            </template>
 
             <template #switch-trailing="{ item }">
-              <USwitch :model-value="(item as DropdownMenuItem).checked" size="sm" tabindex="-1" />
+              <USwitch :model-value="(item as DropdownMenuItem).checked" tabindex="-1" />
             </template>
           </UDropdownMenu>
 
-          <UDropdownMenu :items="modelItems" :content="{ align: 'start', side: 'top' }" :ui="{ content: 'w-72' }" size="sm">
-            <UButton
-              color="neutral"
-              variant="ghost"
-              size="sm"
-              :trailing-icon="appConfig.ui.icons.chevronDown"
-              class="group"
-              :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
-            >
-              {{ activeModel?.label }} <span class="text-dimmed">{{ effort }}</span>
-            </UButton>
+          <UDropdownMenu :items="modelItems" :content="{ align: 'start', side: 'top' }" :modal="false">
+            <template #default="{ open }">
+              <UButton
+                color="neutral"
+                variant="ghost"
+                :trailing-icon="appConfig.ui.icons.chevronDown"
+                :class="['group', open && 'bg-elevated']"
+                :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+              >
+                {{ activeModel?.label }} <span class="text-dimmed">{{ effort }}</span>
+              </UButton>
+            </template>
 
             <template #effort-trailing="{ ui }">
               <span class="text-dimmed">{{ effort }}</span>
@@ -198,29 +212,22 @@ function onSubmit() {
         </div>
 
         <div class="flex items-center gap-1">
+          <UButton :icon="studioIcons.mic" color="neutral" variant="ghost" square aria-label="Dictate" />
           <UButton
-            :icon="studioIcons.mic"
-            color="neutral"
-            variant="ghost"
-            size="sm"
-            square
-            aria-label="Dictate"
-          />
-          <UButton
-            icon="i-lucide-audio-lines"
-            color="neutral"
-            variant="ghost"
-            size="sm"
-            square
-            aria-label="Voice mode"
-          />
-          <UButton
+            v-if="input.trim()"
             :icon="appConfig.ui.icons.arrowUp"
             color="primary"
-            size="sm"
             square
             aria-label="Send"
             @click="onSubmit"
+          />
+          <UButton
+            v-else
+            :icon="studioIcons.audioLines"
+            color="neutral"
+            variant="ghost"
+            square
+            aria-label="Voice mode"
           />
         </div>
       </div>

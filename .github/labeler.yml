@@ -6,3 +6,6 @@ v3:
 
 v4:
   - base-branch: 'v4'
+
+v5:
+  - base-branch: 'v5'

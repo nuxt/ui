@@ -141,18 +141,16 @@ export default defineNuxtPlugin({
               function num(v, lo, hi) { var n = parseFloat(v); return isFinite(n) ? Math.min(hi, Math.max(lo, n)) : undefined; }
               function set(id, css) { var el = document.getElementById(id); if (el) { el.textContent = css; } }
 
-              var primaryColor = SAFE.test(T.primary || '') ? T.primary : undefined;
-              var neutralColor = SAFE.test(T.neutral || '') ? T.neutral : undefined;
-              if (primaryColor || neutralColor) {
+              var saved = Object.create(null);
+              var aliases = (T.colors && typeof T.colors === 'object') ? T.colors : {};
+              for (var alias in aliases) { if (alias !== 'primary' && alias !== 'neutral' && SAFE.test(aliases[alias] || '')) { saved[alias] = aliases[alias]; } }
+              if (SAFE.test(T.primary || '') && T.primary !== 'black') { saved.primary = T.primary; }
+              if (SAFE.test(T.neutral || '')) { saved.neutral = T.neutral; }
+              if (Object.keys(saved).length) {
                 var swapColors = function(el) {
-                  var html = el.innerHTML;
-                  if (primaryColor && primaryColor !== 'black') {
-                    html = html.replace(/(--ui-color-primary-\\d{2,3}:\\s*var\\(--color-)${appConfig.ui.colors.primary}(-\\d{2,3}.*?\\))/g, '$1' + primaryColor + '$2');
-                  }
-                  if (neutralColor) {
-                    html = html.replace(/(--ui-color-neutral-\\d{2,3}:\\s*var\\(--color-)${appConfig.ui.colors.neutral}(-\\d{2,3}.*?\\))/g, '$1' + (neutralColor === 'neutral' ? 'old-neutral' : neutralColor) + '$2');
-                  }
-                  el.innerHTML = html;
+                  el.innerHTML = el.innerHTML.replace(/(--ui-color-([\\w-]+?)-\\d{2,3}:\\s*var\\(--color-)[\\w-]+?(-\\d{2,3}[,)])/g, function(match, head, alias, tail) {
+                    return saved[alias] ? head + (saved[alias] === 'neutral' ? 'old-neutral' : saved[alias]) + tail : match;
+                  });
                 };
                 var colorsEl = document.querySelector('style#nuxt-ui-colors');
                 if (colorsEl) { swapColors(colorsEl); }

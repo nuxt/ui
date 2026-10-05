@@ -7,23 +7,23 @@ const studioIcons = useStudioIcons()
 // Replicates the Nuxt UI Portfolio template home page: floating pill nav,
 // avatar hero with polaroid marquee, about + work experience columns,
 // blog list, testimonial carousel, FAQ tabs and footer.
-const navItems: NavigationMenuItem[] = [
+const navItems = computed<NavigationMenuItem[]>(() => [
   { label: 'Home', icon: studioIcons.home, active: true },
   { label: 'Projects', icon: appConfig.ui.icons.folder },
   { label: 'Blog', icon: appConfig.ui.icons.file },
   { label: 'Speaking', icon: studioIcons.mic },
   { label: 'About', icon: studioIcons.user }
-]
+])
 
 const socialLinks = [
   { 'icon': 'i-simple-icons-discord', 'aria-label': 'Discord' },
   { 'icon': 'i-simple-icons-x', 'aria-label': 'X' },
-  { 'icon': studioIcons.github, 'aria-label': 'GitHub' }
+  { 'icon': 'i-simple-icons-github', 'aria-label': 'GitHub' }
 ]
 
 // The template scrolls travel photos in a marquee; gradient polaroids stand in
 // because a tinted surface tracks the theme and a photo does not.
-const heroImages = [
+const heroImages = computed(() => [
   { icon: studioIcons.mountain, label: 'Alps, 2024' },
   { icon: studioIcons.coffee, label: 'Café sketching' },
   { icon: studioIcons.bike, label: 'Canal ride' },
@@ -33,7 +33,7 @@ const heroImages = [
   { icon: studioIcons.palette, label: 'Color studies' },
   { icon: studioIcons.ferrisWheel, label: 'Rotterdam fair' },
   { icon: studioIcons.waves, label: 'North Sea' }
-]
+])
 
 const about = {
   title: 'About Me',
@@ -41,7 +41,7 @@ const about = {
   description: 'I\'m an English designer and developer based in Amsterdam. I sit right between design and engineering, which means both teams assume I\'m the other team\'s problem.'
 }
 
-const experience = [{
+const experience = computed(() => [{
   date: '2025 - Present',
   position: 'Public Contributor for',
   company: { name: 'Nuxt UI', logo: 'i-simple-icons-nuxtdotjs' }
@@ -57,7 +57,7 @@ const experience = [{
   date: '1995 - Present',
   position: 'Human person on',
   company: { name: 'Earth', logo: studioIcons.globe }
-}]
+}])
 
 const posts = [{
   title: 'Twelve Identical Greys: A Field Guide to Choosing Your Neutral',
@@ -173,7 +173,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
           container: 'py-18 sm:py-24 lg:py-32',
           headline: 'flex items-center justify-center',
           title: 'text-shadow-md max-w-lg mx-auto text-pretty text-3xl sm:text-4xl lg:text-5xl',
-          description: 'mt-2 text-md mx-auto max-w-2xl text-pretty sm:text-md text-muted',
+          description: 'mt-2 text-base mx-auto max-w-2xl text-pretty sm:text-base text-muted',
           links: 'mt-4 flex-col justify-center items-center'
         }"
       >
@@ -189,7 +189,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
 
         <template #links>
           <div class="flex items-center gap-2">
-            <UButton :icon="studioIcons.github" label="View Github" color="neutral" to="https://github.com/mikenewbon/" target="_blank" />
+            <UButton icon="i-simple-icons-github" label="View Github" color="neutral" to="https://github.com/mikenewbon/" target="_blank" />
             <UButton color="success" variant="ghost" class="gap-2" label="Always online">
               <template #leading>
                 <span class="relative flex size-2">
@@ -234,7 +234,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
           :ui="{
             container: 'p-0!',
             title: 'text-left text-xl sm:text-xl lg:text-2xl font-medium',
-            description: 'text-left mt-3 text-sm sm:text-md lg:text-sm text-muted whitespace-pre-line'
+            description: 'text-left mt-3 text-sm sm:text-base lg:text-sm text-muted whitespace-pre-line'
           }"
         />
 
@@ -276,7 +276,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
         :ui="{
           container: 'px-0 pt-0! sm:gap-6 lg:gap-8',
           title: 'text-left text-xl sm:text-xl lg:text-2xl font-medium',
-          description: 'text-left mt-2 text-sm sm:text-md lg:text-sm text-muted'
+          description: 'text-left mt-2 text-sm sm:text-base lg:text-sm text-muted'
         }"
       >
         <UBlogPosts orientation="vertical" class="gap-4 lg:gap-y-4">
@@ -340,7 +340,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
         :ui="{
           container: 'px-0 pt-0! gap-4 sm:gap-4',
           title: 'text-left text-xl sm:text-xl lg:text-2xl font-medium',
-          description: 'text-left mt-2 text-sm sm:text-md lg:text-sm text-muted'
+          description: 'text-left mt-2 text-sm sm:text-base lg:text-sm text-muted'
         }"
       >
         <UTabs

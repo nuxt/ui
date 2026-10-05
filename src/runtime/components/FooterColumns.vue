@@ -15,7 +15,7 @@ export interface FooterColumnLink extends Omit<LinkProps, 'custom'> {
    */
   icon?: IconProps['name']
   class?: any
-  ui?: Pick<FooterColumns['slots'], 'item' | 'link' | 'linkLabel' | 'linkLabelExternalIcon' | 'linkLeadingIcon'>
+  ui?: Partial<Pick<FooterColumns['slots'], 'item' | 'link' | 'linkLabel' | 'linkLabelExternalIcon' | 'linkLeadingIcon'>>
 }
 
 export interface FooterColumn<T extends FooterColumnLink = FooterColumnLink> {

@@ -61,8 +61,10 @@ html[data-framework="vue"] .nuxt-only {
   display: none;
 }
 
-/* Comark Shiki dark mode styles */
-html.dark .shiki span {
+/* Shiki dark mode styles. A colour swatch keeps the background and contrast
+   foreground the transformer wrote, inline with Comark or as a generated
+   class with the content pipeline. */
+html.dark .shiki span:not([style*="background-color"], .shiki-color-highlight) {
   color: var(--shiki-dark) !important;
   background-color: var(--shiki-dark-bg) !important;
   font-style: var(--shiki-dark-font-style) !important;

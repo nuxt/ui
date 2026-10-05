@@ -29,14 +29,21 @@ const link = 'https://app.nuxt.com/invite/x8f2k'
 
       <div class="space-y-2">
         <div v-for="(member, index) in members" :key="index" class="flex items-center gap-2">
-          <UInput v-model="member.email" type="email" class="flex-1" />
-          <USelect v-model="member.role" :items="roles" class="w-28" />
+          <UInput v-model="member.email" type="email" color="neutral" class="flex-1" />
+          <USelect v-model="member.role" :items="roles" color="neutral" class="w-28" :content="{ position: 'item-aligned' }" />
         </div>
       </div>
 
       <USeparator label="Or share a link" />
 
-      <UInput :model-value="link" readonly class="w-full">
+      <UInput
+        :model-value="link"
+        variant="subtle"
+        color="neutral"
+        readonly
+        class="w-full"
+        :ui="{ trailing: 'pe-1' }"
+      >
         <template #trailing>
           <UButton
             :icon="appConfig.ui.icons.copy"
@@ -50,8 +57,8 @@ const link = 'https://app.nuxt.com/invite/x8f2k'
       </UInput>
     </div>
 
-    <div class="flex justify-end border-t border-default p-3">
-      <UButton label="Send invites" @click="toast.add({ title: 'Invites sent' })" />
+    <div class="flex justify-end border-t border-default px-4 py-3">
+      <UButton label="Send invites" color="neutral" @click="toast.add({ title: 'Invites sent' })" />
     </div>
   </div>
 </template>

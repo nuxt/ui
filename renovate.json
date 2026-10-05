@@ -1,17 +1,10 @@
 {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "github>nuxt/renovate-config-nuxt"
   ],
-  "timezone": "Europe/Paris",
-  "schedule": ["* 6-9 * * 1"],
-  "lockFileMaintenance": {
-    "enabled": true
-  },
   "baseBranchPatterns": [
     "v4"
-  ],
-  "ignoreDeps": [
-    "actions/stale"
   ],
   "packageRules": [
     {
@@ -44,15 +37,6 @@
         "peerDependencies"
       ],
       "enabled": false
-    },
-    {
-      "matchDepTypes": [
-        "resolutions"
-      ],
-      "enabled": false
     }
-  ],
-  "postUpdateOptions": [
-    "pnpmDedupe"
   ]
 }

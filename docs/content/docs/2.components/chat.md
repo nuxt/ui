@@ -30,7 +30,7 @@ Check out the [`Nuxt`](https://github.com/nuxt-ui-templates/chat) and [`Vue`](ht
 
 ## Installation
 
-The Chat components are designed to be used with the [Vercel AI SDK](https://ai-sdk.dev/), specifically the [`Chat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-chat) class for managing chat state and streaming responses.
+The Chat components are designed to be used with the [Vercel AI SDK](https://ai-sdk.dev/), specifically the [`Chat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-chat) class for managing chat state and streaming responses. The examples on this page target AI SDK v7.
 
 Install the required dependencies:
 
@@ -41,19 +41,19 @@ Install the required dependencies:
 ::::code-group{sync="pm"}
 
 ```bash [pnpm]
-pnpm add ai @ai-sdk/gateway @ai-sdk/vue @comark/nuxt
+pnpm add ai @ai-sdk/vue @comark/nuxt
 ```
 
 ```bash [yarn]
-yarn add ai @ai-sdk/gateway @ai-sdk/vue @comark/nuxt
+yarn add ai @ai-sdk/vue @comark/nuxt
 ```
 
 ```bash [npm]
-npm install ai @ai-sdk/gateway @ai-sdk/vue @comark/nuxt
+npm install ai @ai-sdk/vue @comark/nuxt
 ```
 
 ```bash [bun]
-bun add ai @ai-sdk/gateway @ai-sdk/vue @comark/nuxt
+bun add ai @ai-sdk/vue @comark/nuxt
 ```
 
 ::::
@@ -81,19 +81,19 @@ export default defineNuxtConfig({
 ::::code-group{sync="pm"}
 
 ```bash [pnpm]
-pnpm add ai @ai-sdk/gateway @ai-sdk/vue @comark/vue
+pnpm add ai @ai-sdk/vue @comark/vue
 ```
 
 ```bash [yarn]
-yarn add ai @ai-sdk/gateway @ai-sdk/vue @comark/vue
+yarn add ai @ai-sdk/vue @comark/vue
 ```
 
 ```bash [npm]
-npm install ai @ai-sdk/gateway @ai-sdk/vue @comark/vue
+npm install ai @ai-sdk/vue @comark/vue
 ```
 
 ```bash [bun]
-bun add ai @ai-sdk/gateway @ai-sdk/vue @comark/vue
+bun add ai @ai-sdk/vue @comark/vue
 ```
 
 ::::
@@ -128,13 +128,12 @@ Create a server API endpoint to handle chat requests using [`streamText`](https:
 
 ```ts [server/api/chat.post.ts]
 import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
-import { gateway } from '@ai-sdk/gateway'
 
 export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
   const result = streamText({
-    model: gateway('anthropic/claude-sonnet-5'),
+    model: 'anthropic/claude-sonnet-5.5',
     maxOutputTokens: 10000,
     instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages)
@@ -151,13 +150,12 @@ To enable [reasoning](https://ai-sdk.dev/docs/ai-sdk-ui/chatbot#reasoning), conf
 
 ```ts [server/api/chat.post.ts]
 import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
-import { gateway } from '@ai-sdk/gateway'
 
 export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
   const result = streamText({
-    model: gateway('anthropic/claude-sonnet-5'),
+    model: 'anthropic/claude-sonnet-5.5',
     maxOutputTokens: 10000,
     instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages),
@@ -195,17 +193,16 @@ Some providers offer built-in web search tools: [Anthropic](https://ai-sdk.dev/p
 ```ts [Anthropic]
 import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
 import { anthropic } from '@ai-sdk/anthropic'
-import { gateway } from '@ai-sdk/gateway'
 
 export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
   const result = streamText({
-    model: gateway('anthropic/claude-sonnet-5'),
+    model: 'anthropic/claude-sonnet-5.5',
     instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages),
     tools: {
-      web_search: anthropic.tools.webSearch_20250305({})
+      web_search: anthropic.tools.webSearch_20260209({})
     }
   })
 
@@ -217,13 +214,12 @@ export default defineEventHandler(async (event) => {
 ```ts [Google]
 import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
 import { google } from '@ai-sdk/google'
-import { gateway } from '@ai-sdk/gateway'
 
 export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
   const result = streamText({
-    model: gateway('google/gemini-3-flash'),
+    model: 'google/gemini-3-flash',
     instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages),
     tools: {
@@ -239,13 +235,12 @@ export default defineEventHandler(async (event) => {
 ```ts [OpenAI]
 import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
 import { openai } from '@ai-sdk/openai'
-import { gateway } from '@ai-sdk/gateway'
 
 export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
   const result = streamText({
-    model: gateway('openai/gpt-5-nano'),
+    model: 'openai/gpt-5-nano',
     instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages),
     tools: {
@@ -287,7 +282,6 @@ Then, configure your server endpoint to use MCP tools:
 ```ts [server/api/chat.post.ts]
 import { streamText, convertToModelMessages, isStepCount, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
 import { createMCPClient } from '@ai-sdk/mcp'
-import { gateway } from '@ai-sdk/gateway'
 
 export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
@@ -299,7 +293,7 @@ export default defineEventHandler(async (event) => {
     const tools = await httpClient.tools()
 
     const result = streamText({
-      model: gateway('anthropic/claude-sonnet-5'),
+      model: 'anthropic/claude-sonnet-5.5',
       maxOutputTokens: 10000,
       instructions: 'You are a helpful assistant. Use your tools to search for relevant information before answering questions.',
       messages: await convertToModelMessages(messages),
@@ -330,14 +324,13 @@ Require a user confirmation before a tool runs with the [`toolApproval`](https:/
 
 ```ts [server/api/chat.post.ts]
 import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse, tool } from 'ai'
-import { gateway } from '@ai-sdk/gateway'
 import { z } from 'zod'
 
 export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
   const result = streamText({
-    model: gateway('anthropic/claude-sonnet-5'),
+    model: 'anthropic/claude-sonnet-5.5',
     maxOutputTokens: 10000,
     instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages),
@@ -370,6 +363,8 @@ import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName, lastAssista
 import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 import shiki from '@comark/nuxt/plugins/shiki'
+
+const plugins = [shiki()]
 
 const input = ref('')
 
@@ -405,7 +400,7 @@ function onSubmit() {
           <Markdown
             :value="part.text"
             :streaming="isPartStreaming(part)"
-            :plugins="[shiki()]"
+            :plugins="plugins"
             class="*:first:mt-0 *:last:mb-0"
           />
         </UChatReasoning>
@@ -425,7 +420,7 @@ function onSubmit() {
             v-if="message.role === 'assistant'"
             :value="part.text"
             :streaming="isPartStreaming(part)"
-            :plugins="[shiki()]"
+            :plugins="plugins"
             class="*:first:mt-0 *:last:mb-0"
           />
           <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
@@ -460,6 +455,8 @@ import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 import { Markdown } from '@comark/vue'
 import shiki from '@comark/vue/plugins/shiki'
 
+const plugins = [shiki()]
+
 const input = ref('')
 
 const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
@@ -494,7 +491,7 @@ function onSubmit() {
           <Markdown
             :value="part.text"
             :streaming="isPartStreaming(part)"
-            :plugins="[shiki()]"
+            :plugins="plugins"
             class="*:first:mt-0 *:last:mb-0"
           />
         </UChatReasoning>
@@ -514,7 +511,7 @@ function onSubmit() {
             v-if="message.role === 'assistant'"
             :value="part.text"
             :streaming="isPartStreaming(part)"
-            :plugins="[shiki()]"
+            :plugins="plugins"
             class="*:first:mt-0 *:last:mb-0"
           />
           <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">

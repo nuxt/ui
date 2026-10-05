@@ -28,11 +28,11 @@ const to = ref('savings')
       </UFormField>
 
       <UFormField label="From">
-        <USelect v-model="from" :items="accounts" class="w-full" />
+        <USelect v-model="from" :items="accounts" class="w-full" :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }" />
       </UFormField>
 
       <UFormField label="To">
-        <USelect v-model="to" :items="accounts" class="w-full" />
+        <USelect v-model="to" :items="accounts" class="w-full" :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }" />
       </UFormField>
 
       <div class="space-y-1.5 text-sm">
@@ -47,7 +47,7 @@ const to = ref('savings')
       </div>
     </div>
 
-    <div class="flex justify-end border-t border-default p-3">
+    <div class="flex justify-end border-t border-default px-4 py-3">
       <UButton label="Confirm transfer" @click="toast.add({ title: 'Transfer confirmed' })" />
     </div>
   </div>

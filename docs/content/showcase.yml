@@ -2,11 +2,17 @@ title: Showcase
 description: Check out some of the amazing projects built with Nuxt UI.
 navigation: false
 hero:
-  title: Showcase
-  description: Discover our selection of projects built with Nuxt UI.
+  badge:
+    label: Live in production
+    icon: i-lucide-globe
+  lead: Built with
+  accent: Nuxt UI
+  description: Sites and apps teams have shipped with Nuxt UI, from documentation and dashboards to storefronts. Built one? Add it to the list.
 items:
   - name: Ace
     url: https://acecompany.nl/
+  - name: Avelune Online
+    url: https://avelune-online.vercel.app/
   - name: Brusnika.LMS
     url: https://brusnika-lms.com/
     screenshotOptions:
@@ -27,6 +33,8 @@ items:
     url: https://elevenspectacles.com/
   - name: Espace Asso by Benevolt
     url: https://asso.benevolt.fr/
+  - name: Fontnode
+    url: https://fontnode.com/
   - name: FrameZero
     url: https://www.framezero.app/
   - name: JSON DeepL
@@ -49,6 +57,10 @@ items:
     url: https://mawrble.com/
   - name: Meet Sponsors
     url: https://meetsponsors.com/
+  - name: Milo Studio
+    url: https://milostudio.app/
+  - name: Neleto
+    url: https://neleto.io/
   - name: Ovatu
     url: https://ovatu.com/
   - name: Pallyy

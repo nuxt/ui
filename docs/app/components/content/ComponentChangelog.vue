@@ -8,9 +8,9 @@ interface Commit {
 }
 
 interface Release {
-  tag_name: string
-  published_at: string
-  html_url: string
+  tag: string
+  date: string
+  url: string
 }
 
 interface ReleaseGroup {
@@ -53,8 +53,8 @@ const groupedByRelease = computed<ReleaseGroup[]>(() => {
   if (!commits.value?.length) return []
 
   const sortedReleases = (releases.value ?? [])
-    .filter(r => r.published_at)
-    .sort((a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime())
+    .filter(r => r.date)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
   const releasesOldestFirst = [...sortedReleases].reverse()
   const groups: ReleaseGroup[] = []
@@ -62,18 +62,18 @@ const groupedByRelease = computed<ReleaseGroup[]>(() => {
 
   for (const commit of commits.value) {
     const commitDate = new Date(commit.date).getTime()
-    const release = releasesOldestFirst.find(r => new Date(r.published_at).getTime() >= commitDate)
+    const release = releasesOldestFirst.find(r => new Date(r.date).getTime() >= commitDate)
 
     if (release) {
-      const majorTag = release.tag_name.replace(/-(alpha|beta|rc)\.\d+$/, '')
+      const majorTag = release.tag.replace(/-(alpha|beta|rc)\.\d+$/, '')
       let group = groups.find(g => g.tag === majorTag)
       if (!group) {
-        group = { tag: majorTag, title: majorTag, icon: studioIcons.tag, published_at: release.published_at, url: release.html_url, commits: [] }
+        group = { tag: majorTag, title: majorTag, icon: studioIcons.tag, published_at: release.date, url: release.url, commits: [] }
         groups.push(group)
       }
-      if (new Date(release.published_at) > new Date(group.published_at!)) {
-        group.published_at = release.published_at
-        group.url = release.html_url
+      if (new Date(release.date) > new Date(group.published_at!)) {
+        group.published_at = release.date
+        group.url = release.url
       }
       group.commits.push(commit)
     } else {
@@ -86,7 +86,7 @@ const groupedByRelease = computed<ReleaseGroup[]>(() => {
     result.push({ tag: 'unreleased', title: 'Soon', icon: studioIcons.tag, commits: unreleased })
   }
 
-  const uniqueTags = [...new Set(sortedReleases.map(r => r.tag_name.replace(/-(alpha|beta|rc)\.\d+$/, '')))]
+  const uniqueTags = [...new Set(sortedReleases.map(r => r.tag.replace(/-(alpha|beta|rc)\.\d+$/, '')))]
   groups.sort((a, b) => uniqueTags.indexOf(a.tag) - uniqueTags.indexOf(b.tag))
   result.push(...groups)
 
@@ -128,7 +128,7 @@ function normalizeCommitMessage(commit: Commit) {
     <template #description="{ item }">
       <ul class="flex flex-col gap-1.5">
         <li v-for="commit of item.commits" :key="commit.sha">
-          <MDC :value="normalizeCommitMessage(commit)" class="text-sm [&_code]:text-xs" unwrap="p" />
+          <DocsMarkdown :value="normalizeCommitMessage(commit)" class="text-sm [&_code]:text-xs" unwrap="p" />
         </li>
       </ul>
     </template>

@@ -22,9 +22,10 @@ const { presets, selectedPreset, applyPreset, selectPalette, isCustomPalette, ne
 // "changed from the preset" per control, the cue the studio toolbar carries
 const { groupDirtyFlags } = useThemeStudioToolbar()
 
-// The persisted theme is client-only, resolve after mount so hydration
-// matches the server's fallback (the stock preset).
-const mounted = useMounted()
+// The persisted theme is client-only, resolve once the client has it so
+// hydration matches the server's fallback (the stock preset). Shared, or the
+// copy the mobile menu mounts would flash the fallback.
+const mounted = useThemeMounted()
 
 const preset = computed(() => (mounted.value ? presets.find(entry => entry.id === selectedPreset.value) : presets[0]))
 // the color mode preference is client-only too
@@ -76,10 +77,12 @@ const submenu = { content: { class: 'w-auto' } }
 
 /**
  * A setting row: its value and swatch ride the trailing slot, its options the
- * submenu. A value changed from the preset shows in primary.
+ * submenu. A value changed from the preset shows in primary. The label keeps
+ * its width (the menu's label wrapper is flex-1, it would give way first),
+ * a long value ("Saturated mauve") is the part that truncates.
  */
 function setting(row: { label: string, icon: string, value: string, dot?: string, dirty?: boolean, children: NonNullable<DropdownMenuItem['children']> }): DropdownMenuItem {
-  return { ...row, ...submenu, slot: 'setting' }
+  return { ...row, ...submenu, slot: 'setting', ui: { itemWrapper: 'flex-none', itemTrailing: 'min-w-0' } }
 }
 
 /** A font as a menu option, previewing its own face through the `font` slot. */
@@ -225,7 +228,7 @@ watch(open, (isOpen) => {
   <UDropdownMenu
     v-model:open="open"
     :items="items"
-    :content="{ align: 'end', alignOffset: -4, onInteractOutside: keepPanels }"
+    :content="{ align: 'start', alignOffset: -4, onInteractOutside: keepPanels }"
     :ui="{ content: 'w-56 min-w-36 max-h-98', label: 'text-xs' }"
   >
     <UTooltip :text="name" ignore-non-keyboard-focus>
@@ -239,9 +242,9 @@ watch(open, (isOpen) => {
     </UTooltip>
 
     <template #setting-trailing="{ item }">
-      <span class="flex items-center gap-1.5" :class="asRow(item).dirty ? 'text-primary' : 'text-muted'">
-        <span v-if="asRow(item).dot" class="size-2 rounded-full" :style="{ backgroundColor: asRow(item).dot }" />
-        {{ asRow(item).value }}
+      <span class="flex items-center gap-1.5 min-w-0" :class="asRow(item).dirty ? 'text-primary' : 'text-muted'">
+        <span v-if="asRow(item).dot" class="size-2 shrink-0 rounded-full" :style="{ backgroundColor: asRow(item).dot }" />
+        <span class="truncate">{{ asRow(item).value }}</span>
       </span>
 
       <UIcon :name="appConfig.ui.icons.chevronRight" class="size-5 shrink-0 text-dimmed" />

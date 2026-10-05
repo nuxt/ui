@@ -35,18 +35,5 @@ export default defineNuxtConfig({
         'vaul-vue'
       ]
     }
-  },
-
-  typescript: {
-    tsConfig: {
-      compilerOptions: {
-        paths: {
-          // The docs examples imported in `pages/components/form.vue` resolve
-          // `@nuxt/ui` and `zod` from `docs/`, which the isolated CI install can't reach.
-          '@nuxt/ui': ['../node_modules/@nuxt/ui/dist/module.d.mts'],
-          'zod': ['../node_modules/zod']
-        }
-      }
-    }
   }
 })

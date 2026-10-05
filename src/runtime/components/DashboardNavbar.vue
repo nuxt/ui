@@ -102,7 +102,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.dashboardNavbar 
           <UIcon v-if="props.icon" :name="props.icon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
         </slot>
 
-        <h1 data-slot="title" :class="ui.title({ class: props.ui?.title })">
+        <h1 v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
           <slot name="title">
             {{ props.title }}
           </slot>

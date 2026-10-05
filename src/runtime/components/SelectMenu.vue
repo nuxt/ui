@@ -36,7 +36,7 @@ export type SelectMenuItem = SelectMenuValue | {
   disabled?: boolean
   onSelect?: (e: Event) => void
   class?: any
-  ui?: Pick<SelectMenu['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>
+  ui?: Partial<Pick<SelectMenu['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>>
   [key: string]: any
 }
 
@@ -491,6 +491,19 @@ function onUpdateOpen(value: boolean) {
   }
 }
 
+// `ComboboxTrigger` only toggles on click, unlike `ComboboxInput` which opens on arrow keys.
+// Since the trigger is the focusable element here, replicate the same behavior.
+function onTriggerKeydown(e: KeyboardEvent) {
+  if (isOpen.value) {
+    return
+  }
+
+  const trigger = e.currentTarget as HTMLElement
+
+  e.preventDefault()
+  trigger.click()
+}
+
 function onCreate(e: Event) {
   e.preventDefault()
   e.stopPropagation()
@@ -523,12 +536,26 @@ function isModelValueEmpty(modelValue: ApplyModifiers<GetModelValue<T, VK, M, Ex
 }
 
 function onClear() {
+  if (disabled.value) {
+    return
+  }
+
   emits('clear')
 }
 
 function onMountAutoFocus(event: Event) {
   // Prevent the `FocusScope` from focusing the search input on open when its autofocus is disabled.
   if (searchInputProps.value.autofocus === false) {
+    event.preventDefault()
+  }
+}
+
+// The `FocusScope` uses `loop` instead of `trapped`: a trapped scope pulls focus back while the menu is closing,
+// so focusing another element on select never lands. An enclosing Modal's trap is still paused by the scope stack.
+function onUnmountAutoFocus(event: Event) {
+  // Keep the focus where it was moved on select instead of restoring it to the trigger after the close animation.
+  const activeElement = document.activeElement
+  if (activeElement && activeElement !== document.body && !(event.target as HTMLElement).contains(activeElement)) {
     event.preventDefault()
   }
 }
@@ -648,7 +675,9 @@ defineExpose({
         data-slot="base"
         :class="ui.base({ class: [props.ui?.base, props.class] })"
         tabindex="0"
-        v-bind="{ ...$attrs, ...ariaAttrs }"
+        v-bind="{ 'aria-label': undefined, ...$attrs, ...ariaAttrs }"
+        @keydown.down="onTriggerKeydown"
+        @keydown.up="onTriggerKeydown"
       >
         <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
           <slot name="leading" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
@@ -670,7 +699,7 @@ defineExpose({
 
         <span v-if="isTrailing || !!slots.trailing || !!props.clear" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
           <slot name="trailing" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
-            <ComboboxCancel v-if="!!props.clear && !isModelValueEmpty(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" as-child>
+            <ComboboxCancel v-if="!!props.clear && !disabled && !isModelValueEmpty(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" as-child>
               <UButton
                 as="span"
                 :icon="props.clearIcon || appConfig.ui.icons.close"
@@ -694,7 +723,7 @@ defineExpose({
     <ComboboxPortal v-bind="portalProps">
       <FieldGroupReset>
         <ComboboxContent data-slot="content" :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
-          <FocusScope trapped data-slot="focusScope" :class="ui.focusScope({ class: props.ui?.focusScope })" @mount-auto-focus="onMountAutoFocus">
+          <FocusScope loop data-slot="focusScope" :class="ui.focusScope({ class: props.ui?.focusScope })" @mount-auto-focus="onMountAutoFocus" @unmount-auto-focus="onUnmountAutoFocus">
             <slot name="content-top" />
 
             <ComboboxInput v-if="!!props.searchInput" v-model="searchTerm" :display-value="() => searchTerm" as-child>

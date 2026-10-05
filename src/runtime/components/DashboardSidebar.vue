@@ -94,7 +94,7 @@ const open = defineModel<boolean>('open', { default: false })
 const collapsed = defineModel<boolean>('collapsed', { default: false })
 
 const route = useRoute()
-const { t } = useLocale()
+const { t, locale } = useLocale()
 const appConfig = useAppConfig() as DashboardSidebar['AppConfig']
 
 const dashboardContext = useDashboard({
@@ -202,8 +202,8 @@ function toggleOpen() {
 
   <Menu
     v-model:open="open"
-    :title="t('dashboardSidebar.title')"
-    :description="t('dashboardSidebar.description')"
+    :title="locale.messages.dashboardSidebar?.title || t('dashboardSidebarToggle.open')"
+    :description="locale.messages.dashboardSidebar?.description"
     v-bind="menuProps"
     :ui="{
       overlay: ui.overlay({ class: props.ui?.overlay }),

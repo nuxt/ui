@@ -1,9 +1,13 @@
 seo:
   title: Blog
-  description: Tutorials, guides, and insights to help you build beautiful applications with Nuxt UI.
+  description: Tutorials and guides on building with Nuxt UI, written by the team and the people who use it, with the story behind each release.
 title: Blog
 description: Tutorials, guides, and insights to help you build beautiful applications with Nuxt UI.
 hero:
-  title: Nuxt [UI]{.text-primary} Blog
+  badge:
+    label: Tutorials and release notes
+    icon: i-lucide-book-open
+  lead: Nuxt UI
+  accent: Blog
   description: Tutorials, guides, and insights to help you build beautiful applications with Nuxt UI.
 navigation: false

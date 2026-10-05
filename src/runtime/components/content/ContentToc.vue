@@ -11,7 +11,7 @@ type ContentToc = ComponentConfig<typeof theme, AppConfig, 'contentToc'>
 
 export type ContentTocLink = TocLink & {
   class?: any
-  ui?: Pick<ContentToc['slots'], 'item' | 'itemWithChildren' | 'link' | 'linkText'>
+  ui?: Partial<Pick<ContentToc['slots'], 'item' | 'itemWithChildren' | 'link' | 'linkText'>>
 }
 
 export interface ContentTocProps<T extends ContentTocLink = ContentTocLink> extends Pick<CollapsibleRootProps, 'defaultOpen' | 'open'> {
