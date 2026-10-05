@@ -1023,7 +1023,7 @@ exports[`NavigationMenu > renders with orientation vertical correctly 1`] = `
 "<nav data-slot="navigation-menu" class="relative flex gap-1.5 [&amp;>div]:min-w-0 flex-col" data-orientation="vertical" dir="ltr" data-reka-navigation-menu="">
   <ul data-slot="navigation-menu-list" class="isolate min-w-0">
     <li data-state="closed" data-orientation="vertical" data-slot="navigation-menu-item" class="min-w-0">
-      <div data-slot="navigation-menu-label" class="w-full flex items-center gap-1.5 font-semibold text-xs/5 text-strong px-2.5 py-1.5">
+      <div data-slot="navigation-menu-label" class="w-full flex items-center [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) font-semibold text-xs/5 text-strong">
         <!--v-if--><span data-slot="navigation-menu-linkLabel" class="truncate">Links<!--v-if--></span>
         <!--v-if-->
       </div>
