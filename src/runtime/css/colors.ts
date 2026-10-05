@@ -6,7 +6,7 @@ import type { Color } from '../theme/color'
 
 const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
 
-/** A palette name, optionally followed by the light and dark shades the alias uses. */
+/** A palette name, optionally followed by the two shades the alias uses, for light then dark mode. */
 export type ColorsOptions = Partial<Record<Color, string>>
 
 // Compared as written: `050` would pass as a number but name no variable
@@ -80,8 +80,8 @@ function closestPalette(name: string, shadesByName: unknown) {
  *
  * The shades an alias uses follow the palette, `500` in light mode and `400`
  * in dark mode by default (`900` and `50` for `neutral`): `primary: neutral
- * 900 200` picks others, a single shade applies to both, `black` and `white`
- * work as shades, and shades alone (`primary: black white`) keep the palette.
+ * 900 200` picks others, always both, `black` and `white` work as shades,
+ * and shades alone (`primary: black white`) keep the palette.
  *
  * The defaults are plain CSS in `base.css`, at zero specificity, so the
  * aliases you set win wherever you register it.
@@ -108,13 +108,14 @@ const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugi
     const words = String(value).replace(/["']/g, '').trim().split(/\s+/)
     // The palette is optional: shades alone keep the alias's palette
     const palette = isShade(words[0]!) ? undefined : words.shift()
-    const [lightShade, darkShade = lightShade, ...rest] = words
+    const [lightShade, darkShade, ...rest] = words
     if (lightShade) {
-      if (rest.length || ![lightShade, darkShade].every(shade => isShade(shade!))) {
-        throw new Error(`[@nuxt/ui] \`${alias}: ${value}\` takes a palette and up to two shades, for light and dark mode, from ${shades.join(', ')}, \`black\` or \`white\`, like \`${alias}: indigo 600 300\`.`)
+      // Both or none: a shade that suits one mode rarely suits the other
+      if (!darkShade || rest.length || ![lightShade, darkShade].every(shade => isShade(shade))) {
+        throw new Error(`[@nuxt/ui] \`${alias}: ${value}\` takes a palette and two shades, for light then dark mode, from ${shades.join(', ')}, \`black\` or \`white\`, like \`${alias}: indigo 600 300\`.`)
       }
       light[`--ui-${alias}`] = shadeValue(alias, lightShade)
-      dark[`--ui-${alias}`] = shadeValue(alias, darkShade!)
+      dark[`--ui-${alias}`] = shadeValue(alias, darkShade)
     }
     if (!palette) {
       continue
