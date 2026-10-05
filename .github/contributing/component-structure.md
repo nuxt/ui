@@ -178,7 +178,7 @@ const _props = withDefaults(defineProps<AccordionProps<T>>(), {
   collapsible: true
 })
 
-const props = useComponentProps<AccordionProps<T>>('accordion', _props)
+const props = useComponentProps<AccordionProps<T>>('accordion', _props, theme)
 </script>
 ```
 
