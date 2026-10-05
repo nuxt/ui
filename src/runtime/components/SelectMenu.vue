@@ -544,8 +544,24 @@ function onClear() {
   emits('clear')
 }
 
+const focusScopeRef = useTemplateRef('focusScopeRef')
+
 // The `FocusScope` uses `loop` instead of `trapped`: a trapped scope pulls focus back while the menu is closing,
-// so focusing another element on select never lands.
+// so focusing another element on select never lands. Pull it back here instead, only while the menu is open,
+// otherwise anything taking the focus outside closes it, like another overlay restoring focus to its trigger.
+function onFocusOutside(event: Event) {
+  const el = focusScopeRef.value?.$el as HTMLElement | undefined
+  if (event.defaultPrevented || el?.parentElement?.dataset.state !== 'open') {
+    return
+  }
+
+  event.preventDefault()
+
+  const input = searchInputProps.value.autofocus !== false ? el.querySelector<HTMLElement>('[data-slot="input"] input') : null
+  const target = input ?? el
+  target.focus({ preventScroll: true })
+}
+
 function onMountAutoFocus(event: Event) {
   // Prevent the `FocusScope` from focusing the search input on open when its autofocus is disabled.
   if (searchInputProps.value.autofocus === false) {
@@ -715,8 +731,15 @@ defineExpose({
 
     <ComboboxPortal v-bind="portalProps">
       <FieldGroupReset>
-        <ComboboxContent data-slot="content" :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
-          <FocusScope loop data-slot="focusScope" :class="ui.focusScope({ class: props.ui?.focusScope })" @mount-auto-focus="onMountAutoFocus" @unmount-auto-focus="closeAutoFocus">
+        <ComboboxContent data-slot="content" :class="ui.content({ class: props.ui?.content })" v-bind="contentProps" @focus-outside="onFocusOutside">
+          <FocusScope
+            ref="focusScopeRef"
+            loop
+            data-slot="focusScope"
+            :class="ui.focusScope({ class: props.ui?.focusScope })"
+            @mount-auto-focus="onMountAutoFocus"
+            @unmount-auto-focus="closeAutoFocus"
+          >
             <slot name="content-top" />
 
             <ComboboxInput v-if="!!props.searchInput" v-model="searchTerm" :display-value="() => searchTerm" as-child>
