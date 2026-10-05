@@ -58,12 +58,13 @@ export default defineTheme({
       none: { base: 'bg-transparent focus:outline-none' }
     },
     color: colorVariant({ root: '' }),
-    // Room for the icon: the padding, the icon and the gap
+    // Room for the icon: the padding, the icon and the gap. Behind `:has()` so a
+    // padding set on the field leaves it in place: it is changed through the tokens
     leading: {
-      true: { base: 'ps-[calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]' }
+      true: { base: 'has-[~[data-slot$=-leading],>[data-slot$=-leading]]:ps-[calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]' }
     },
     trailing: {
-      true: { base: 'pe-[calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]' }
+      true: { base: 'has-[~[data-slot$=-trailing],>[data-slot$=-trailing]]:pe-[calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]' }
     },
     loading: {
       true: ''

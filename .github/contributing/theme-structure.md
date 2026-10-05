@@ -41,12 +41,12 @@ variants: {
     md: { base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] text-sm' }
   },
   leading: {
-    true: { base: 'ps-[calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]' }
+    true: { base: 'has-[~[data-slot$=-leading],>[data-slot$=-leading]]:ps-[calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]' }
   }
 }
 ```
 
-Reach for this before a `size` × something compound: the size writes a value, another variant picks the property that reads it. A compound is hard to override from an app config, a token is one class. A theme that extends Input and drops its `root` (Select, InputDate, InputTime) appends the tokens to `base`.
+Reach for this before a `size` × something compound: the size writes a value, another variant picks the property that reads it. A compound is hard to override from an app config, a token is one class. The room a field makes for an icon sits behind `:has()` on purpose: it is the one class a padding set by an app must not replace. A theme that extends Input and drops its `root` (Select, InputDate, InputTime) appends the tokens to `base`.
 
 ## Static Theme
 
