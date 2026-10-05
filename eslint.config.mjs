@@ -532,6 +532,8 @@ function betterTailwindcssConfig(files, entryPoint, { ignore = [], settings = {}
       'better-tailwindcss/no-unknown-classes': ['error', { ignore }],
       // Tailwind keeps the v3 names working, so nothing breaks until it doesn't.
       'better-tailwindcss/no-deprecated-classes': 'error',
+      // One spelling per utility: `size-full` over `w-full h-full`, `z-1` over `z-[1]`.
+      'better-tailwindcss/enforce-canonical-classes': 'error',
       ...rules
     }
   }

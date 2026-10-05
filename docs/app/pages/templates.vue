@@ -73,7 +73,7 @@ if (import.meta.server) {
                   {{ template.title }}
                 </h2>
 
-                <p class="max-w-130 text-base leading-relaxed text-muted text-pretty">
+                <p class="max-w-130 text-base/relaxed  text-muted text-pretty">
                   {{ template.description }}
                 </p>
 

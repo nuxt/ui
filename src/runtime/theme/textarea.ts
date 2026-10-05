@@ -3,8 +3,8 @@ import { extendTheme } from '../utils/theme'
 
 export default extendTheme(input, {
   slots: {
-    leading: 'absolute start-0 flex items-start',
-    trailing: 'absolute end-0 flex items-start'
+    leading: 'absolute inset-s-0 flex items-start',
+    trailing: 'absolute inset-e-0 flex items-start'
   },
   variants: {
     autoresize: {

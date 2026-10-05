@@ -346,7 +346,7 @@ onMounted(() => {
       <!-- Template's ImagePlaceholder: a framed card with a diagonal-stripes pattern. -->
       <UPageCard variant="subtle">
         <div class="relative overflow-hidden rounded-sm border border-dashed border-strong opacity-75 px-4 flex items-center justify-center aspect-video">
-          <svg class="absolute inset-0 h-full w-full stroke-neutral/10" fill="none">
+          <svg class="absolute inset-0 size-full  stroke-neutral/10" fill="none">
             <defs>
               <pattern
                 :id="`saas-stripes-${index}`"

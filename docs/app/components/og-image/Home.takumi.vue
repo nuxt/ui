@@ -95,7 +95,7 @@ const pill = (id: keyof typeof PRESETS.light) => ({ backgroundColor: `${preset(i
     <div class="absolute left-[562px] top-[84px] w-[604px] h-[450px] flex flex-col rounded-2xl border-2 border-solid p-3" :style="{ backgroundColor: c.card, borderColor: c.border }">
       <div class="flex flex-row items-center">
         <div class="flex flex-row items-center h-[36px] px-3 rounded-lg text-[16px] font-medium" :style="{ backgroundColor: c.tab, color: c.text }">
-          <div class="flex items-center justify-center w-[18px] h-[18px] rounded-[4px] mr-2 text-[8px] font-bold text-white bg-[#7c3aed]">
+          <div class="flex items-center justify-center size-[18px]  rounded-[4px] mr-2 text-[8px] font-bold text-white bg-[#7c3aed]">
             css
           </div>
           main.css
@@ -124,17 +124,17 @@ const pill = (id: keyof typeof PRESETS.light) => ({ backgroundColor: `${preset(i
         </div>
       </div>
       <div class="flex flex-row items-center mt-3 px-1" style="gap: 12px">
-        <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': true }" :style="pill('default')">
-          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('default') }"><path fill="currentColor" d="M13.464 19.83h8.922c.283 0 .562-.073.807-.21a1.6 1.6 0 0 0 .591-.574a1.53 1.53 0 0 0 .216-.783a1.53 1.53 0 0 0-.217-.782L17.792 7.414a1.6 1.6 0 0 0-.591-.573a1.65 1.65 0 0 0-.807-.21c-.283 0-.562.073-.807.21a1.6 1.6 0 0 0-.59.573L13.463 9.99L10.47 4.953a1.6 1.6 0 0 0-.591-.573a1.65 1.65 0 0 0-.807-.21c-.284 0-.562.073-.807.21a1.6 1.6 0 0 0-.591.573L.216 17.481a1.53 1.53 0 0 0-.217.782c0 .275.074.545.216.783a1.6 1.6 0 0 0 .59.574c.246.137.525.21.808.21h5.6c2.22 0 3.856-.946 4.982-2.79l2.733-4.593l1.464-2.457l4.395 7.382h-5.859Zm-6.341-2.46l-3.908-.002l5.858-9.842l2.923 4.921l-1.957 3.29c-.748 1.196-1.597 1.632-2.916 1.632" /></svg>
+        <div class="flex items-center justify-center size-[36px]  rounded-full" :class="{ 'border-2 border-solid': true }" :style="pill('default')">
+          <svg class="size-[18px] " viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('default') }"><path fill="currentColor" d="M13.464 19.83h8.922c.283 0 .562-.073.807-.21a1.6 1.6 0 0 0 .591-.574a1.53 1.53 0 0 0 .216-.783a1.53 1.53 0 0 0-.217-.782L17.792 7.414a1.6 1.6 0 0 0-.591-.573a1.65 1.65 0 0 0-.807-.21c-.283 0-.562.073-.807.21a1.6 1.6 0 0 0-.59.573L13.463 9.99L10.47 4.953a1.6 1.6 0 0 0-.591-.573a1.65 1.65 0 0 0-.807-.21c-.284 0-.562.073-.807.21a1.6 1.6 0 0 0-.591.573L.216 17.481a1.53 1.53 0 0 0-.217.782c0 .275.074.545.216.783a1.6 1.6 0 0 0 .59.574c.246.137.525.21.808.21h5.6c2.22 0 3.856-.946 4.982-2.79l2.733-4.593l1.464-2.457l4.395 7.382h-5.859Zm-6.341-2.46l-3.908-.002l5.858-9.842l2.923 4.921l-1.957 3.29c-.748 1.196-1.597 1.632-2.916 1.632" /></svg>
         </div>
-        <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('mono')">
-          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('mono') }"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="10" /><path d="M12 18a6 6 0 0 0 0-12z" /></g></svg>
+        <div class="flex items-center justify-center size-[36px]  rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('mono')">
+          <svg class="size-[18px] " viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('mono') }"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="10" /><path d="M12 18a6 6 0 0 0 0-12z" /></g></svg>
         </div>
-        <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('cobalt')">
-          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('cobalt') }"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M10.5 3L8 9l4 13l4-13l-2.5-6" /><path d="M17 3a2 2 0 0 1 1.6.8l3 4a2 2 0 0 1 .013 2.382l-7.99 10.986a2 2 0 0 1-3.247 0l-7.99-10.986A2 2 0 0 1 2.4 7.8l2.998-3.997A2 2 0 0 1 7 3zM2 9h20" /></g></svg>
+        <div class="flex items-center justify-center size-[36px]  rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('cobalt')">
+          <svg class="size-[18px] " viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('cobalt') }"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M10.5 3L8 9l4 13l4-13l-2.5-6" /><path d="M17 3a2 2 0 0 1 1.6.8l3 4a2 2 0 0 1 .013 2.382l-7.99 10.986a2 2 0 0 1-3.247 0l-7.99-10.986A2 2 0 0 1 2.4 7.8l2.998-3.997A2 2 0 0 1 7 3zM2 9h20" /></g></svg>
         </div>
-        <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('signal')">
-          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('signal') }"><path
+        <div class="flex items-center justify-center size-[36px]  rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('signal')">
+          <svg class="size-[18px] " viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('signal') }"><path
             fill="none"
             stroke="currentColor"
             stroke-linecap="round"
@@ -143,14 +143,14 @@ const pill = (id: keyof typeof PRESETS.light) => ({ backgroundColor: `${preset(i
             d="M2 10v3m4-7v11m4-14v18m4-13v7m4-10v13m4-8v3"
           /></svg>
         </div>
-        <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('mint')">
-          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('mint') }"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M11 20a10 10 0 0 0 10-10a25.9 25.9 0 0 0-1.04-7.281a1 1 0 0 0-1.755-.325C15.833 5.5 13 5.5 9.8 6.1A7 7 0 0 0 11 20" /><path d="M2 21a5 5 0 0 1 2.911-4.544C7.613 15.212 8.351 15.24 11 13" /></g></svg>
+        <div class="flex items-center justify-center size-[36px]  rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('mint')">
+          <svg class="size-[18px] " viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('mint') }"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M11 20a10 10 0 0 0 10-10a25.9 25.9 0 0 0-1.04-7.281a1 1 0 0 0-1.755-.325C15.833 5.5 13 5.5 9.8 6.1A7 7 0 0 0 11 20" /><path d="M2 21a5 5 0 0 1 2.911-4.544C7.613 15.212 8.351 15.24 11 13" /></g></svg>
         </div>
-        <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('iris')">
-          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('iris') }"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="3" /><path d="M12 16.5A4.5 4.5 0 1 1 7.5 12A4.5 4.5 0 1 1 12 7.5a4.5 4.5 0 1 1 4.5 4.5a4.5 4.5 0 1 1-4.5 4.5m0-9V9m-4.5 3H9m7.5 0H15m-3 4.5V15M8 8l1.88 1.88m4.24 0L16 8m-8 8l1.88-1.88m4.24 0L16 16" /></g></svg>
+        <div class="flex items-center justify-center size-[36px]  rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('iris')">
+          <svg class="size-[18px] " viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('iris') }"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="3" /><path d="M12 16.5A4.5 4.5 0 1 1 7.5 12A4.5 4.5 0 1 1 12 7.5a4.5 4.5 0 1 1 4.5 4.5a4.5 4.5 0 1 1-4.5 4.5m0-9V9m-4.5 3H9m7.5 0H15m-3 4.5V15M8 8l1.88 1.88m4.24 0L16 8m-8 8l1.88-1.88m4.24 0L16 16" /></g></svg>
         </div>
-        <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('crimson')">
-          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('crimson') }"><path
+        <div class="flex items-center justify-center size-[36px]  rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('crimson')">
+          <svg class="size-[18px] " viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('crimson') }"><path
             fill="none"
             stroke="currentColor"
             stroke-linecap="round"
@@ -159,8 +159,8 @@ const pill = (id: keyof typeof PRESETS.light) => ({ backgroundColor: `${preset(i
             d="m12.296 3.464l3.02 3.956M20.2 6L3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3zM3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zm3.18-5.724l3.1 3.899"
           /></svg>
         </div>
-        <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('coral')">
-          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('coral') }"><path
+        <div class="flex items-center justify-center size-[36px]  rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('coral')">
+          <svg class="size-[18px] " viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('coral') }"><path
             fill="none"
             stroke="currentColor"
             stroke-linecap="round"
@@ -169,8 +169,8 @@ const pill = (id: keyof typeof PRESETS.light) => ({ backgroundColor: `${preset(i
             d="M14 11a2 2 0 1 1-4 0a4 4 0 0 1 8 0a6 6 0 0 1-12 0a8 8 0 0 1 16 0a10 10 0 1 1-20 0a11.93 11.93 0 0 1 2.42-7.22a2 2 0 1 1 3.16 2.44"
           /></svg>
         </div>
-        <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('sunset')">
-          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('sunset') }"><path
+        <div class="flex items-center justify-center size-[36px]  rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('sunset')">
+          <svg class="size-[18px] " viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('sunset') }"><path
             fill="none"
             stroke="currentColor"
             stroke-linecap="round"
@@ -179,8 +179,8 @@ const pill = (id: keyof typeof PRESETS.light) => ({ backgroundColor: `${preset(i
             d="M12 10V2m-7.07 8.93l1.41 1.41M2 18h2m16 0h2m-2.93-7.07l-1.41 1.41M22 22H2M16 6l-4 4l-4-4m8 12a4 4 0 0 0-8 0"
           /></svg>
         </div>
-        <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('carbon')">
-          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('carbon') }"><path
+        <div class="flex items-center justify-center size-[36px]  rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('carbon')">
+          <svg class="size-[18px] " viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('carbon') }"><path
             fill="none"
             stroke="currentColor"
             stroke-linecap="round"
@@ -189,11 +189,11 @@ const pill = (id: keyof typeof PRESETS.light) => ({ backgroundColor: `${preset(i
             d="M15.914 4a1.5 1.5 0 0 0-2.474-1.561l-9 9A1.5 1.5 0 0 0 5.5 14h4.002a.5.5 0 0 1 .471.666L8.086 20a1.5 1.5 0 0 0 2.475 1.56l9-9A1.5 1.5 0 0 0 18.5 10h-3.997a.5.5 0 0 1-.472-.667z"
           /></svg>
         </div>
-        <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('bubblegum')">
-          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('bubblegum') }"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M10 7v10.9m4-11.8V17m2-10V3a1 1 0 0 1 1.707-.707a2.5 2.5 0 0 0 2.152.717a1 1 0 0 1 1.131 1.131a2.5 2.5 0 0 0 .717 2.152A1 1 0 0 1 21 8h-4" /><path d="M16.536 7.465a5 5 0 0 0-7.072 0l-2 2a5 5 0 0 0 0 7.07a5 5 0 0 0 7.072 0l2-2a5 5 0 0 0 0-7.07" /><path d="M8 17v4a1 1 0 0 1-1.707.707a2.5 2.5 0 0 0-2.152-.717a1 1 0 0 1-1.131-1.131a2.5 2.5 0 0 0-.717-2.152A1 1 0 0 1 3 16h4" /></g></svg>
+        <div class="flex items-center justify-center size-[36px]  rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('bubblegum')">
+          <svg class="size-[18px] " viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('bubblegum') }"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M10 7v10.9m4-11.8V17m2-10V3a1 1 0 0 1 1.707-.707a2.5 2.5 0 0 0 2.152.717a1 1 0 0 1 1.131 1.131a2.5 2.5 0 0 0 .717 2.152A1 1 0 0 1 21 8h-4" /><path d="M16.536 7.465a5 5 0 0 0-7.072 0l-2 2a5 5 0 0 0 0 7.07a5 5 0 0 0 7.072 0l2-2a5 5 0 0 0 0-7.07" /><path d="M8 17v4a1 1 0 0 1-1.707.707a2.5 2.5 0 0 0-2.152-.717a1 1 0 0 1-1.131-1.131a2.5 2.5 0 0 0-.717-2.152A1 1 0 0 1 3 16h4" /></g></svg>
         </div>
-        <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('parchment')">
-          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('parchment') }"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M15 12h-5m5-4h-5m9 9V5a2 2 0 0 0-2-2H4" /><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3" /></g></svg>
+        <div class="flex items-center justify-center size-[36px]  rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('parchment')">
+          <svg class="size-[18px] " viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('parchment') }"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M15 12h-5m5-4h-5m9 9V5a2 2 0 0 0-2-2H4" /><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3" /></g></svg>
         </div>
       </div>
     </div>

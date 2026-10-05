@@ -4,7 +4,7 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-accent-soft',
-    image: 'h-full w-full rounded-[inherit] object-cover',
+    image: 'size-full  rounded-[inherit] object-cover',
     fallback: 'font-medium truncate text-accent-muted',
     icon: 'shrink-0 text-accent-muted'
   },

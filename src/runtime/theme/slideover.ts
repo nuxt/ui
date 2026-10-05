@@ -10,7 +10,7 @@ export default defineTheme({
     footer: 'flex items-center gap-1.5 p-4 sm:px-6',
     title: 'text-strong font-semibold',
     description: 'mt-1 text-muted text-sm',
-    close: 'absolute top-4 end-4'
+    close: 'absolute top-4 inset-e-4'
   },
   variants: {
     side: {

@@ -118,7 +118,7 @@ const ui = {
   <UDashboardGroup
     unit="rem"
     :persistent="false"
-    class="relative inset-auto h-full w-full bg-tint"
+    class="relative inset-auto size-full  bg-tint"
   >
     <UDashboardSidebar
       collapsible

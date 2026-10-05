@@ -54,7 +54,7 @@ export default defineTheme({
       item: '-ms-px',
       indicator: 'absolute ms-2.5 transition-[translate,height] duration-200 ease-out motion-reduce:transition-none h-(--indicator-size) translate-y-(--indicator-position) w-px rounded-full',
       indicatorLine: 'hidden',
-      indicatorActive: 'w-full h-full'
+      indicatorActive: 'size-full '
     }
   }, {
     highlight: true,
@@ -63,7 +63,7 @@ export default defineTheme({
       list: 'ps-6.5',
       item: '-ms-px',
       itemWithChildren: 'ps-px',
-      indicator: 'absolute ms-2.5 start-0 top-0 rtl:-scale-x-100',
+      indicator: 'absolute ms-2.5 inset-s-0 top-0 rtl:-scale-x-100',
       indicatorLine: 'absolute inset-0 bg-border',
       indicatorActive: 'absolute w-full h-(--indicator-size) translate-y-(--indicator-position) transition-[translate,height] duration-200 ease-out motion-reduce:transition-none'
     }
