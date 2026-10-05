@@ -1,4 +1,4 @@
-import { mkdtempSync, rmSync, writeFileSync } from 'node:fs'
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'pathe'
 import { describe, it, expect, afterAll } from 'vitest'
@@ -55,6 +55,15 @@ describe('findTailwindPrefix', () => {
     const other = file('other.css', '@import "tailwindcss";')
 
     expect(await findTailwindPrefix([fonts, join(dir, 'missing.css'), main, other])).toEqual({ path: main, prefix: 'tw' })
+  })
+
+  it('follows relative imports', async () => {
+    mkdirSync(join(dir, 'nested'), { recursive: true })
+    const tailwind = file('nested/tailwind.css', '@import "tailwindcss" prefix(tw);')
+    file('nested/index.css', '@import "../loop.css";\n@import "./tailwind.css";')
+    const loop = file('loop.css', '@import "~/assets/alias.css";\n@import "./nested/index.css";')
+
+    expect(await findTailwindPrefix([loop])).toEqual({ path: tailwind, prefix: 'tw' })
   })
 
   it('is undefined when no stylesheet imports Tailwind CSS', async () => {
