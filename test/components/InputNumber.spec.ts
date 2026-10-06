@@ -53,6 +53,16 @@ describe('InputNumber', () => {
     expect(wrapper.emitted('update:modelValue')).toEqual([[18]])
   })
 
+  it('keeps an out of range typed value with allowInvalid', async () => {
+    const wrapper = await mountSuspended(InputNumber, { props: { max: 10, allowInvalid: true } })
+
+    const input = wrapper.find('input')
+    await input.setValue('15')
+    await input.trigger('blur')
+
+    expect(wrapper.emitted('update:modelValue')).toEqual([[15]])
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(InputNumber, {
       props: {
