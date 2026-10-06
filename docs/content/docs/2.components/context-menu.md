@@ -315,6 +315,21 @@ name: 'context-menu-checkbox-items-example'
 To ensure reactivity for the `checked` state of items, it's recommended to wrap your `items` array inside a `computed`.
 ::
 
+### Control open state :badge{label="Soon" class="align-text-top"}
+
+You can control the open state by using the `v-model:open` directive.
+
+::component-example
+---
+collapse: true
+name: 'context-menu-open-example'
+---
+::
+
+::note
+In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcuts), you can toggle the ContextMenu by pressing :kbd{value="O"}.
+::
+
 ### With color items
 
 You can use the `color` property to highlight certain items with a color.
