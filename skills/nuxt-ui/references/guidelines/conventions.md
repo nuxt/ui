@@ -290,9 +290,9 @@ export default defineNuxtConfig({
   modules: ['@nuxt/ui', '@nuxtjs/i18n'],
   i18n: {
     locales: [
-      { code: 'en', name: 'English' },
-      { code: 'fr', name: 'Français' },
-      { code: 'ar', name: 'العربية' }
+      { code: 'en', language: 'en', name: 'English' },
+      { code: 'fr', language: 'fr', name: 'Français' },
+      { code: 'ar', language: 'ar', dir: 'rtl', name: 'العربية' }
     ]
   }
 })
@@ -300,26 +300,21 @@ export default defineNuxtConfig({
 
 ```vue
 <script setup lang="ts">
-import * as locales from '@nuxt/ui/locale'
+const head = useLocaleHead()
 
-const { locale } = useI18n()
-
-const lang = computed(() => locales[locale.value]?.code)
-const dir = computed(() => locales[locale.value]?.dir)
-
-useHead({
-  htmlAttrs: { lang, dir }
-})
+useHead(() => ({
+  htmlAttrs: head.value.htmlAttrs
+}))
 </script>
 
 <template>
-  <UApp :locale="locales[locale]">
+  <UApp>
     <NuxtPage />
   </UApp>
 </template>
 ```
 
-Each locale has a `dir` property (`'ltr'` or `'rtl'`). `UApp` uses it to set directionality on all components. Use `useHead` to propagate `lang` and `dir` to the `<html>` element.
+With `@nuxtjs/i18n` installed, `UApp` follows the current i18n locale and only bundles the Nuxt UI locales matching `i18n.locales`. Don't use `import * as locales from '@nuxt/ui/locale'`: it bundles every locale. Use `useLocaleHead` to propagate `lang` and `dir` to the `<html>` element.
 
 ## Color mode
 
