@@ -3,10 +3,10 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'relative group/blog-post flex flex-col rounded-lg overflow-hidden',
-    header: 'relative overflow-hidden aspect-[16/9] w-full pointer-events-none',
+    header: 'relative overflow-hidden aspect-video w-full pointer-events-none',
     body: 'min-w-0 flex-1 flex flex-col',
     footer: '',
-    image: 'object-cover object-top w-full h-full',
+    image: 'object-cover object-top size-full',
     title: 'text-xl text-pretty font-semibold text-strong',
     description: 'mt-1 text-base text-pretty',
     authors: 'pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5',
