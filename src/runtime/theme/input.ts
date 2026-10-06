@@ -19,10 +19,10 @@ export default defineTheme({
   slots: {
     root: 'relative inline-flex items-center',
     base: 'w-full rounded-md border-0 appearance-none text-strong placeholder:text-faint disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
-    leading: 'absolute inset-y-0 start-0 flex items-center ps-(--ui-control-px)',
+    leading: 'absolute inset-y-0 inset-s-0 flex items-center ps-(--ui-control-px)',
     leadingIcon: 'shrink-0 text-faint size-(--ui-control-icon)',
     leadingAvatar: 'shrink-0',
-    trailing: 'absolute inset-y-0 end-0 flex items-center pe-(--ui-control-px)',
+    trailing: 'absolute inset-y-0 inset-e-0 flex items-center pe-(--ui-control-px)',
     trailingIcon: 'shrink-0 text-faint size-(--ui-control-icon)'
   },
   variants: {

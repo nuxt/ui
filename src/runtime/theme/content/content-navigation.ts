@@ -53,7 +53,7 @@ export default defineTheme({
     highlight: true,
     level: true,
     class: {
-      link: 'after:absolute after:-start-1.5 after:inset-y-0.5 after:block after:w-px after:rounded-full after:transition-colors'
+      link: 'after:absolute after:-inset-s-1.5 after:inset-y-0.5 after:block after:w-px after:rounded-full after:transition-colors'
     }
   }, {
     disabled: false,

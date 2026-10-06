@@ -172,7 +172,7 @@ watch(open, (isOpen) => {
           color="neutral"
           variant="outline"
           size="sm"
-          class="px-(--ui-control-py) absolute -top-[13px] -right-[13px] z-1 rounded-full lg:opacity-0 lg:group-hover/component:opacity-100 ring-default transition-opacity duration-200"
+          class="px-(--ui-control-py) absolute top-[-13px] right-[-13px] z-1 rounded-full lg:opacity-0 lg:group-hover/component:opacity-100 ring-default transition-opacity duration-200"
           :class="[open && 'lg:opacity-100 bg-soft']"
           tabindex="-1"
         >

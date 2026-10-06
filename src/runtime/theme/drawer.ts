@@ -4,7 +4,7 @@ export default defineTheme({
   slots: {
     overlay: 'fixed inset-0 bg-backdrop',
     content: 'fixed bg-default ring ring-default flex focus:outline-none',
-    handle: 'shrink-0 !bg-strong transition-opacity ease-out',
+    handle: 'shrink-0 bg-strong! transition-opacity ease-out',
     container: 'w-full flex flex-col gap-4 p-4 overflow-y-auto',
     header: 'flex items-center gap-1.5 min-h-8',
     wrapper: 'min-w-0 flex-1',
@@ -19,19 +19,19 @@ export default defineTheme({
     direction: {
       top: {
         content: 'mb-24 flex-col-reverse h-auto max-h-[96%]',
-        handle: 'mb-4 !w-12 !h-1.5 mx-auto'
+        handle: 'mb-4 w-12! h-1.5! mx-auto'
       },
       right: {
         content: 'flex-row rtl:flex-row-reverse w-auto max-w-[calc(100%-2rem)]',
-        handle: '!ml-4 !h-12 !w-1.5 mt-auto mb-auto'
+        handle: 'ml-4! h-12! w-1.5! my-auto'
       },
       bottom: {
         content: 'mt-24 flex-col h-auto max-h-[96%]',
-        handle: 'mt-4 !w-12 !h-1.5 mx-auto'
+        handle: 'mt-4 w-12! h-1.5! mx-auto'
       },
       left: {
         content: 'flex-row-reverse rtl:flex-row w-auto max-w-[calc(100%-2rem)]',
-        handle: '!mr-4 !h-12 !w-1.5 mt-auto mb-auto'
+        handle: 'mr-4! h-12! w-1.5! my-auto'
       }
     },
     inset: {

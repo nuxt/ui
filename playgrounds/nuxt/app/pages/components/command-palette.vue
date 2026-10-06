@@ -236,7 +236,7 @@ defineShortcuts({
     </UCommandPalette>
   </DefineTemplate>
 
-  <UCard :ui="{ body: '!p-0' }" class="w-xl">
+  <UCard :ui="{ body: 'p-0!' }" class="w-xl">
     <UCommandPalette
       v-if="virtualize"
       virtualize

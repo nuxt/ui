@@ -25,12 +25,12 @@ export default defineTheme({
     },
     side: {
       left: {
-        container: 'start-0 border-e border-default',
-        rail: 'end-0 translate-x-1/2 rtl:-translate-x-1/2'
+        container: 'inset-s-0 border-e border-default',
+        rail: 'inset-e-0 translate-x-1/2 rtl:-translate-x-1/2'
       },
       right: {
-        container: 'end-0 border-s border-default',
-        rail: '-start-px -translate-x-1/2 rtl:translate-x-1/2'
+        container: 'inset-e-0 border-s border-default',
+        rail: '-inset-s-px -translate-x-1/2 rtl:translate-x-1/2'
       }
     },
     collapsible: {
@@ -91,20 +91,20 @@ export default defineTheme({
     side: 'left',
     collapsible: 'offcanvas',
     class: {
-      container: 'data-[state=collapsed]:-start-(--sidebar-width)'
+      container: 'data-[state=collapsed]:-inset-s-(--sidebar-width)'
     }
   }, {
     side: 'right',
     collapsible: 'offcanvas',
     class: {
-      container: 'data-[state=collapsed]:-end-(--sidebar-width)'
+      container: 'data-[state=collapsed]:-inset-e-(--sidebar-width)'
     }
   }, {
     variant: 'floating',
     collapsible: 'icon',
     class: {
-      gap: 'data-[state=collapsed]:w-[calc(var(--sidebar-width-icon)+--spacing(8))]',
-      container: 'data-[state=collapsed]:w-[calc(var(--sidebar-width-icon)+--spacing(8)+2px)]'
+      gap: 'data-[state=collapsed]:w-[calc(var(--sidebar-width-icon)+(--spacing(8)))]',
+      container: 'data-[state=collapsed]:w-[calc(var(--sidebar-width-icon)+(--spacing(8))+2px)]'
     }
   }, {
     variant: 'floating',
@@ -122,13 +122,13 @@ export default defineTheme({
     variant: 'floating',
     side: 'left',
     class: {
-      rail: 'end-4'
+      rail: 'inset-e-4'
     }
   }, {
     variant: 'floating',
     side: 'right',
     class: {
-      rail: 'start-[calc(--spacing(4)-1px)]'
+      rail: 'inset-s-[calc(--spacing(4)-1px)]'
     }
   }]
 })

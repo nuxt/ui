@@ -141,7 +141,7 @@ onBeforeUnmount(() => observer?.disconnect())
         Accent roles
       </h2>
       <div class="overflow-x-auto">
-        <div class="grid w-max items-center gap-x-2 gap-y-2 grid-cols-[6rem_repeat(10,8.5rem)]">
+        <div class="grid w-max items-center gap-2 grid-cols-[6rem_repeat(10,8.5rem)]">
           <span />
           <span v-for="role in [...accentFills, ...accentTexts, ...accentBorders]" :key="role" class="font-mono text-xs text-muted">{{ role.replace('accent-', '') }}</span>
           <template v-for="color in colors" :key="color.name">

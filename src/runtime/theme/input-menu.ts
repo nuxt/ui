@@ -5,7 +5,7 @@ import { extendTheme } from '../utils/theme'
 export default extendTheme(input, {
   slots: {
     base: () => 'rounded-md text-strong transition-colors',
-    trailing: 'group absolute inset-y-0 end-0 flex items-center pe-(--ui-control-px) disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none',
+    trailing: 'group absolute inset-y-0 inset-e-0 flex items-center pe-(--ui-control-px) disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none',
     trailingClear: 'p-0',
     arrow: 'fill-bg stroke-default',
     content: 'max-h-[min(15rem,var(--reka-combobox-content-available-height,15rem))] w-(--reka-combobox-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-combobox-content-transform-origin) pointer-events-auto flex flex-col',

@@ -39,7 +39,7 @@ export default defineTheme({
       },
       hidden: {
         base: 'sr-only',
-        icon: 'size-[calc(var(--ui-control-icon)+--spacing(0.5))]',
+        icon: 'size-[calc(var(--ui-control-icon)+(--spacing(0.5)))]',
         wrapper: 'flex flex-col items-center gap-1 text-center'
       }
     },

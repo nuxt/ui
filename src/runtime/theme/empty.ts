@@ -63,7 +63,7 @@ export default defineTheme({
     },
     loading: {
       true: {
-        avatar: '[&>[data-slot=avatar-icon]]:animate-spin'
+        avatar: '*:data-[slot=avatar-icon]:animate-spin'
       }
     }
   },

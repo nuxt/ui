@@ -29,7 +29,7 @@ export default defineTheme({
       },
       table: {
         // Each item is a Checkbox, which writes the tokens of its size
-        item: `px-(--ui-control-px) py-(--ui-control-py) border border-default hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors ${focusCard} has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent/50 has-data-[state=checked]:z-[2]`
+        item: `px-(--ui-control-px) py-(--ui-control-py) border border-default hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors ${focusCard} has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent/50 has-data-[state=checked]:z-2`
       }
     },
     size: {
@@ -72,7 +72,7 @@ export default defineTheme({
       variant: 'table',
       highlight: false,
       class: {
-        item: 'hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:z-[1]'
+        item: 'hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:z-1'
       }
     },
     {
