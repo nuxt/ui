@@ -10,7 +10,7 @@ export default defineTheme({
     body: 'text-sm pb-3.5',
     leadingIcon: 'shrink-0 size-5',
     trailingIcon: 'shrink-0 size-5 ms-auto group-data-[state=open]:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none',
-    label: 'text-start break-words'
+    label: 'text-start wrap-break-word'
   },
   variants: {
     disabled: {
