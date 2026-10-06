@@ -52,8 +52,10 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
    * - under the title and description when orientation is `vertical`
    * - next to the close button when orientation is `horizontal`
    * `{ size: 'xs' }`{lang="ts-type"}
+   *
+   * Set `closeOnClick` to `false` on an action to keep the toast open when it's clicked.
    */
-  actions?: ButtonProps[]
+  actions?: (ButtonProps & { closeOnClick?: boolean })[]
   /**
    * The time in milliseconds before the toast automatically closes. Overrides the global `toaster.duration`.
    *
@@ -171,7 +173,14 @@ defineExpose({
 
       <div v-if="props.orientation === 'vertical' && (props.actions?.length || !!slots.actions)" data-slot="actions" :class="ui.actions({ class: props.ui?.actions })">
         <slot name="actions">
-          <ToastAction v-for="(action, index) in props.actions" :key="index" :alt-text="action.label || 'Action'" as-child @click.stop>
+          <ToastAction
+            v-for="({ closeOnClick, ...action }, index) in props.actions"
+            :key="index"
+            :alt-text="action.label || 'Action'"
+            :close-on-click="closeOnClick"
+            as-child
+            @click.stop
+          >
             <UButton size="xs" :color="props.color" v-bind="action" />
           </ToastAction>
         </slot>
@@ -181,7 +190,14 @@ defineExpose({
     <div v-if="(props.orientation === 'horizontal' && (props.actions?.length || !!slots.actions)) || props.close" data-slot="actions" :class="ui.actions({ class: props.ui?.actions, orientation: 'horizontal' })">
       <template v-if="props.orientation === 'horizontal' && (props.actions?.length || !!slots.actions)">
         <slot name="actions">
-          <ToastAction v-for="(action, index) in props.actions" :key="index" :alt-text="action.label || 'Action'" as-child @click.stop>
+          <ToastAction
+            v-for="({ closeOnClick, ...action }, index) in props.actions"
+            :key="index"
+            :alt-text="action.label || 'Action'"
+            :close-on-click="closeOnClick"
+            as-child
+            @click.stop
+          >
             <UButton size="xs" :color="props.color" v-bind="action" />
           </ToastAction>
         </slot>
