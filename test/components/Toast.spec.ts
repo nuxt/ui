@@ -95,19 +95,6 @@ describe('Toast', () => {
         actions: [{ label: 'Action' }]
       }
     })
-    expect(await axe(wrapper.element, {
-      rules: {
-        // "ARIA role should be appropriate for the element (aria-allowed-role)"
-
-        // Fix any of the following:
-        //   ARIA role alert is not allowed for given element
-        'aria-allowed-role': { enabled: false },
-        // "<ul> and <ol> must only directly contain <li>, <script> or <template> elements (list)"
-
-        // Fix all of the following:
-        //   List element has direct children that are not allowed: [role=alert]
-        'list': { enabled: false }
-      }
-    })).toHaveNoViolations()
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })
