@@ -399,7 +399,7 @@ const codeColors = buttonColors
         Separator
       </h2>
       <div class="overflow-x-auto">
-        <div class="grid gap-x-3 gap-y-3 items-center w-max" :style="gridStyle(separatorColors.length)">
+        <div class="grid gap-3 items-center w-max" :style="gridStyle(separatorColors.length)">
           <div />
           <div v-for="color in separatorColors" :key="color" class="text-xs font-medium text-muted text-center capitalize">
             {{ color }}
@@ -565,7 +565,7 @@ const codeColors = buttonColors
         Slider
       </h2>
       <div class="overflow-x-auto">
-        <div class="grid gap-x-3 gap-y-3 items-center w-max" :style="gridStyle(sliderColors.length)">
+        <div class="grid gap-3 items-center w-max" :style="gridStyle(sliderColors.length)">
           <div />
           <div v-for="color in sliderColors" :key="color" class="text-xs font-medium text-muted text-center capitalize">
             {{ color }}
@@ -586,7 +586,7 @@ const codeColors = buttonColors
         Progress
       </h2>
       <div class="overflow-x-auto">
-        <div class="grid gap-x-3 gap-y-3 items-center w-max" :style="gridStyle(progressColors.length)">
+        <div class="grid gap-3 items-center w-max" :style="gridStyle(progressColors.length)">
           <div />
           <div v-for="color in progressColors" :key="color" class="text-xs font-medium text-muted text-center capitalize">
             {{ color }}
@@ -615,7 +615,7 @@ const codeColors = buttonColors
         Stepper
       </h2>
       <div class="overflow-x-auto">
-        <div class="grid gap-x-3 gap-y-3 items-center w-max" :style="gridStyle(stepperColors.length)">
+        <div class="grid gap-3 items-center w-max" :style="gridStyle(stepperColors.length)">
           <div />
           <div v-for="color in stepperColors" :key="color" class="text-xs font-medium text-muted text-center capitalize">
             {{ color }}
@@ -636,7 +636,7 @@ const codeColors = buttonColors
         Timeline
       </h2>
       <div class="overflow-x-auto">
-        <div class="grid gap-x-3 gap-y-3 items-start w-max" :style="gridStyle(timelineColors.length)">
+        <div class="grid gap-3 items-start w-max" :style="gridStyle(timelineColors.length)">
           <div />
           <div v-for="color in timelineColors" :key="color" class="text-xs font-medium text-muted text-center capitalize">
             {{ color }}
@@ -657,7 +657,7 @@ const codeColors = buttonColors
         Tabs
       </h2>
       <div class="overflow-x-auto">
-        <div class="grid gap-x-3 gap-y-3 items-center w-max" :style="gridStyle(tabsColors.length)">
+        <div class="grid gap-3 items-center w-max" :style="gridStyle(tabsColors.length)">
           <div />
           <div v-for="color in tabsColors" :key="color" class="text-xs font-medium text-muted text-center capitalize">
             {{ color }}
@@ -680,7 +680,7 @@ const codeColors = buttonColors
         Calendar
       </h2>
       <div class="overflow-x-auto">
-        <div class="grid gap-x-3 gap-y-3 items-start w-max" :style="gridStyle(calendarColors.length)">
+        <div class="grid gap-3 items-start w-max" :style="gridStyle(calendarColors.length)">
           <div />
           <div v-for="color in calendarColors" :key="color" class="text-xs font-medium text-muted text-center capitalize">
             {{ color }}
@@ -772,7 +772,7 @@ const codeColors = buttonColors
         PageCard
       </h2>
       <div class="overflow-x-auto">
-        <div class="grid gap-x-3 gap-y-3 items-center w-max" :style="gridStyle(pageCardHighlightColors.length)">
+        <div class="grid gap-3 items-center w-max" :style="gridStyle(pageCardHighlightColors.length)">
           <div />
           <div v-for="color in pageCardHighlightColors" :key="color" class="text-xs font-medium text-muted text-center capitalize">
             {{ color }}
@@ -801,7 +801,7 @@ const codeColors = buttonColors
         ChatMessage
       </h2>
       <div class="overflow-x-auto">
-        <div class="grid gap-x-3 gap-y-3 items-start w-max" :style="gridStyle(chatMessageColors.length)">
+        <div class="grid gap-3 items-start w-max" :style="gridStyle(chatMessageColors.length)">
           <div />
           <div v-for="color in chatMessageColors" :key="color" class="text-xs font-medium text-muted text-center capitalize">
             {{ color }}
@@ -903,7 +903,7 @@ const codeColors = buttonColors
         ChatPrompt
       </h2>
       <div class="overflow-x-auto">
-        <div class="grid gap-x-3 gap-y-3 items-start w-max" :style="gridStyle(chatPromptColors.length)">
+        <div class="grid gap-3 items-start w-max" :style="gridStyle(chatPromptColors.length)">
           <div />
           <div v-for="color in chatPromptColors" :key="color" class="text-xs font-medium text-muted text-center capitalize">
             {{ color }}
@@ -926,7 +926,7 @@ const codeColors = buttonColors
         InputRating, Listbox, ProgressGroup, AvatarGroup
       </h2>
       <div class="overflow-x-auto">
-        <div class="grid gap-x-3 gap-y-3 items-center w-max" :style="gridStyle(inputRatingColors.length)">
+        <div class="grid gap-3 items-center w-max" :style="gridStyle(inputRatingColors.length)">
           <div />
           <div v-for="color in inputRatingColors" :key="color" class="text-xs font-medium text-muted text-center capitalize">
             {{ color }}

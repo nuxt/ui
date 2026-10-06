@@ -627,7 +627,7 @@ exports[`PricingPlan > renders with price slot correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with scale correctly 1`] = `
-"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default lg:scale-[1.1] lg:z-[1]">
+"<div data-slot="pricing-plan" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default lg:scale-[1.1] lg:z-1">
   <!--v-if-->
   <div data-slot="pricing-plan-body" class="flex flex-col min-w-0">
     <div data-slot="pricing-plan-titleWrapper" class="flex items-center gap-3">

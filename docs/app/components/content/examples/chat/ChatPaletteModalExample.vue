@@ -50,7 +50,7 @@ const ui = {
 </script>
 
 <template>
-  <UModal open :ui="{ content: 'sm:max-w-3xl sm:h-[28rem]' }">
+  <UModal open :ui="{ content: 'sm:max-w-3xl sm:h-112' }">
     <template #content>
       <UTheme :ui="ui">
         <UChatPalette>

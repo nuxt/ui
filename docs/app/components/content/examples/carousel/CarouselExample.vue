@@ -21,8 +21,8 @@ const items = [
     :items="items"
     :ui="{
       item: 'basis-1/3 ps-0',
-      prev: 'sm:start-8',
-      next: 'sm:end-8',
+      prev: 'sm:inset-s-8',
+      next: 'sm:inset-e-8',
       container: 'ms-0'
     }"
   >
