@@ -43,7 +43,7 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custo
   [key: string]: any
 }
 
-export interface ContextMenuProps<T extends ArrayOrNested<ContextMenuItem> = ArrayOrNested<ContextMenuItem>> extends Omit<ContextMenuRootProps, 'dir'> {
+export interface ContextMenuProps<T extends ArrayOrNested<ContextMenuItem> = ArrayOrNested<ContextMenuItem>> extends Omit<ContextMenuRootProps, 'dir' | 'open'> {
   /**
    * @defaultValue 'md'
    */
@@ -137,7 +137,7 @@ const props = useComponentProps<ContextMenuProps<T>>('contextMenu', _props)
 
 const appConfig = useAppConfig() as ContextMenu['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'open', 'modal'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'modal'), emits)
 const contentProps = toRef(() => props.content)
 const getProxySlots = () => omit(slots, ['default'])
 
