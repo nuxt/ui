@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Sulge'
     },
+    pagination: {
+      first: 'Esimene lehekülg',
+      last: 'Viimane lehekülg',
+      next: 'Järgmine lehekülg',
+      page: 'Lehekülg {page}',
+      prev: 'Eelmine lehekülg'
+    },
     pricingTable: {
       caption: 'Hinna plaanide võrdlus'
     },

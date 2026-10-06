@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Закрыць'
     },
+    pagination: {
+      first: 'Першая старонка',
+      last: 'Апошняя старонка',
+      next: 'Наступная старонка',
+      page: 'Старонка {page}',
+      prev: 'Папярэдняя старонка'
+    },
     pricingTable: {
       caption: 'Параўнанне платных планаў'
     },

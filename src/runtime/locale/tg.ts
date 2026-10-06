@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Бастан'
     },
+    pagination: {
+      first: 'Саҳифаи аввал',
+      last: 'Саҳифаи охирин',
+      next: 'Саҳифаи баъдӣ',
+      page: 'Саҳифаи {page}',
+      prev: 'Саҳифаи қаблӣ'
+    },
     pricingTable: {
       caption: 'Ҷадвали нархҳо'
     },

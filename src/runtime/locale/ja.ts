@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
     modal: {
       close: '閉じる'
     },
+    pagination: {
+      first: '最初のページ',
+      last: '最後のページ',
+      next: '次のページ',
+      page: '{page}ページ',
+      prev: '前のページ'
+    },
     pricingTable: {
       caption: '価格プランの比較'
     },

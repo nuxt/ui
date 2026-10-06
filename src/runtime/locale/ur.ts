@@ -113,6 +113,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'بند کریں'
     },
+    pagination: {
+      first: 'پہلا صفحہ',
+      last: 'آخری صفحہ',
+      next: 'اگلا صفحہ',
+      page: 'صفحہ {page}',
+      prev: 'پچھلا صفحہ'
+    },
     pricingTable: {
       caption: 'قیمت پلنز کی مقایسہ'
     },

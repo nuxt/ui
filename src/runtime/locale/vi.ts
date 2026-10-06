@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Đóng'
     },
+    pagination: {
+      first: 'Trang đầu tiên',
+      last: 'Trang cuối cùng',
+      next: 'Trang tiếp theo',
+      page: 'Trang {page}',
+      prev: 'Trang trước'
+    },
     pricingTable: {
       caption: 'So sánh các kế hoạch giá'
     },

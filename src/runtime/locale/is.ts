@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Loka'
     },
+    pagination: {
+      first: 'Fyrsta síða',
+      last: 'Síðasta síða',
+      next: 'Næsta síða',
+      page: 'Síða {page}',
+      prev: 'Fyrri síða'
+    },
     pricingTable: {
       caption: 'Samanburður verðflokka'
     },

@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
     modal: {
       close: '닫기'
     },
+    pagination: {
+      first: '첫 페이지',
+      last: '마지막 페이지',
+      next: '다음 페이지',
+      page: '{page} 페이지',
+      prev: '이전 페이지'
+    },
     pricingTable: {
       caption: '가격 플랜 비교'
     },

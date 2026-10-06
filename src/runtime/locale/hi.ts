@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'बंद करें'
     },
+    pagination: {
+      first: 'पहला पृष्ठ',
+      last: 'अंतिम पृष्ठ',
+      next: 'अगला पृष्ठ',
+      page: 'पृष्ठ {page}',
+      prev: 'पिछला पृष्ठ'
+    },
     pricingTable: {
       caption: 'कीमत योजनाओं की तुलना'
     },

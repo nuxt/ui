@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Zoumaachen'
     },
+    pagination: {
+      first: 'Éischt Säit',
+      last: 'Lescht Säit',
+      next: 'Nächst Säit',
+      page: 'Säit {page}',
+      prev: 'Vireg Säit'
+    },
     pricingTable: {
       caption: 'Vergläich vun de Präispläng'
     },

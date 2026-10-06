@@ -113,6 +113,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'סגור'
     },
+    pagination: {
+      first: 'עמוד ראשון',
+      last: 'עמוד אחרון',
+      next: 'עמוד הבא',
+      page: 'עמוד {page}',
+      prev: 'עמוד הקודם'
+    },
     pricingTable: {
       caption: 'שיפור מחירון'
     },

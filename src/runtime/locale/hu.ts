@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Bezárás'
     },
+    pagination: {
+      first: 'Első oldal',
+      last: 'Utolsó oldal',
+      next: 'Következő oldal',
+      page: '{page}. oldal',
+      prev: 'Előző oldal'
+    },
     pricingTable: {
       caption: 'Árlista összehasonlítása'
     },

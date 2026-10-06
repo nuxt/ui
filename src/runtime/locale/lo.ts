@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'ປິດ'
     },
+    pagination: {
+      first: 'ໜ້າທຳອິດ',
+      last: 'ໜ້າສຸດທ້າຍ',
+      next: 'ໜ້າຕໍ່ໄປ',
+      page: 'ໜ້າ {page}',
+      prev: 'ໜ້າກ່ອນໜ້າ'
+    },
     pricingTable: {
       caption: 'ປຽບທຽບແພັກເກັດລາຄາ'
     },

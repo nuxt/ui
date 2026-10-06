@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Хаах'
     },
+    pagination: {
+      first: 'Эхний хуудас',
+      last: 'Сүүлийн хуудас',
+      next: 'Дараах хуудас',
+      page: 'Хуудас {page}',
+      prev: 'Өмнөх хуудас'
+    },
     pricingTable: {
       caption: 'Үнийн төлөвлөгөөний харьцуулалт'
     },

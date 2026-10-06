@@ -113,6 +113,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'إغلاق'
     },
+    pagination: {
+      first: 'الصفحة الأولى',
+      last: 'الصفحة الأخيرة',
+      next: 'الصفحة التالية',
+      page: 'الصفحة {page}',
+      prev: 'الصفحة السابقة'
+    },
     pricingTable: {
       caption: 'مقارنة الخطط السعرية'
     },

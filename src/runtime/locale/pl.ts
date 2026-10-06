@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Zamknij'
     },
+    pagination: {
+      first: 'Pierwsza strona',
+      last: 'Ostatnia strona',
+      next: 'Następna strona',
+      page: 'Strona {page}',
+      prev: 'Poprzednia strona'
+    },
     pricingTable: {
       caption: 'Porównanie planów cenowych'
     },

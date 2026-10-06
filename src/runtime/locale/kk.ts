@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Жабу'
     },
+    pagination: {
+      first: 'Бірінші бет',
+      last: 'Соңғы бет',
+      next: 'Келесі бет',
+      page: '{page}-бет',
+      prev: 'Алдыңғы бет'
+    },
     pricingTable: {
       caption: 'Баға кестесі'
     },

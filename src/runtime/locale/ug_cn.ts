@@ -113,6 +113,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'تاقاش'
     },
+    pagination: {
+      first: 'بىرىنچى بەت',
+      last: 'ئاخىرقى بەت',
+      next: 'كېيىنكى بەت',
+      page: '{page}-بەت',
+      prev: 'ئالدىنقى بەت'
+    },
     pricingTable: {
       caption: 'باھا جەدۋىلى'
     },

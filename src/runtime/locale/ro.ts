@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Închide'
     },
+    pagination: {
+      first: 'Prima pagină',
+      last: 'Ultima pagină',
+      next: 'Pagina următoare',
+      page: 'Pagina {page}',
+      prev: 'Pagina anterioară'
+    },
     pricingTable: {
       caption: 'Comparare prețuri'
     },

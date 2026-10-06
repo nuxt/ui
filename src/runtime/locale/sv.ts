@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Stäng'
     },
+    pagination: {
+      first: 'Första sidan',
+      last: 'Sista sidan',
+      next: 'Nästa sida',
+      page: 'Sida {page}',
+      prev: 'Föregående sida'
+    },
     pricingTable: {
       caption: 'Prisplanering'
     },

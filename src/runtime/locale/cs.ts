@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Zavřít'
     },
+    pagination: {
+      first: 'První stránka',
+      last: 'Poslední stránka',
+      next: 'Další stránka',
+      page: 'Stránka {page}',
+      prev: 'Předchozí stránka'
+    },
     pricingTable: {
       caption: 'Porovnání cenových plánů'
     },
