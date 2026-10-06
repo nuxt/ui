@@ -266,6 +266,7 @@ defineExpose({
         v-slot="{ isExpanded, isSelected, isIndeterminate, handleSelect, handleToggle }"
         :level="level"
         :value="item"
+        :disabled="item.disabled"
         as-child
         @toggle="(item.onToggle ?? props.onToggle)?.($event, item)"
         @select="(item.onSelect ?? props.onSelect)?.($event, item)"
