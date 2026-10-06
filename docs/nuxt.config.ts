@@ -1,7 +1,7 @@
 import { createResolver } from '@nuxt/kit'
-import pkg from '../package.json'
-import { WHEN_TO_USE_SECTION } from './server/utils/llms'
-import { SITE_URL } from './server/utils/site'
+import pkg from '../package.json' with { type: 'json' }
+import { WHEN_TO_USE_SECTION } from './server/utils/llms.ts'
+import { SITE_URL } from './server/utils/site.ts'
 
 const { resolve } = createResolver(import.meta.url)
 

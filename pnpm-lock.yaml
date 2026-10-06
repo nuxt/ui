@@ -425,6 +425,9 @@ catalogs:
     hookable:
       specifier: ^6.1.2
       version: 6.1.2
+    jiti:
+      specifier: ^2.7.0
+      version: 2.7.0
     joi:
       specifier: ^18.2.9
       version: 18.2.9
@@ -841,6 +844,9 @@ importers:
       happy-dom:
         specifier: 'catalog:'
         version: 20.14.5
+      jiti:
+        specifier: 'catalog:'
+        version: 2.7.0
       nuxt:
         specifier: 'catalog:'
         version: 4.6.0(8bb376ef402c8e8645adc6ff3dd6547b)

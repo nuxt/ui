@@ -209,6 +209,7 @@
     "eslint": "catalog:",
     "eslint-plugin-better-tailwindcss": "catalog:",
     "happy-dom": "catalog:",
+    "jiti": "catalog:",
     "nuxt": "catalog:",
     "release-it": "catalog:",
     "unbuild": "catalog:",
