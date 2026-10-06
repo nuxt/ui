@@ -409,7 +409,7 @@ const tools = {
 }
 
 export type DocsChatTools = InferUITools<typeof tools>
-export type DocsChatMessage = UIMessage<unknown, never, DocsChatTools>
+export type DocsChatMessage = UIMessage<{ currentPage?: string }, never, DocsChatTools>
 
 function buildInstructions(framework: 'nuxt' | 'vue') {
   return `You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue. Nuxt UI includes \`@nuxt/fonts\` and \`@nuxt/icon\` as built-in dependencies — never tell users to install them separately. Use your knowledge base tools to search for relevant information before answering questions.
@@ -420,7 +420,7 @@ Guidelines:
 - For documentation questions, ALWAYS use tools to search for information. Never rely on pre-trained knowledge for Nuxt UI APIs, props, or usage.
 - For questions about how to customize themes (e.g. "how do I customize colors?", "how does theming work?"), search the documentation like any other docs question.
 - When users ask you to APPLY a theme change live (e.g. "make it blue", "create a sakura theme", "change the font"), call \`getThemeGuide\` first for detailed instructions, then use \`applyTheme\` / \`resetTheme\`. Use your own judgment on aesthetics, color theory, and design — no need to search docs for that. Be decisive: pick colors/fonts/radius confidently and apply them. Only when the user names one of the built-in presets, or asks for "the <name> look", use \`applyPreset\` instead: a described aesthetic is yours to design, not a preset to match.
-- If a question is unrelated to Nuxt UI (e.g. general coding, off-topic), briefly answer if you can, but don't waste tool calls searching docs for it.
+- If a question is unrelated to Nuxt UI (e.g. general coding, off-topic), answer it briefly without searching the docs.
 - If no relevant information is found after searching, respond with "Sorry, I couldn't find information about that in the documentation."
 - Be concise and direct in your responses.
 
@@ -441,7 +441,6 @@ Guidelines:
 - Reference specific component names, props, or APIs when applicable.
 - If a question is ambiguous, ask for clarification rather than guessing.
 - When multiple relevant items are found, list them clearly using bullet points.
-- You have up to 5 tool calls to find the answer, so be strategic: start broad, then get specific if needed.
 - Format responses in a conversational way, not as documentation sections.
     `
 }
@@ -460,34 +459,38 @@ const anthropicOptions = {
   effort: 'low'
 } satisfies AnthropicLanguageModelOptions
 
+// The page path reaches the model as a marker, so it is an indirect prompt-injection
+// surface (a crafted /docs/... link can smuggle newlines and instructions via Vue Router's
+// path decoding). Accept it only when it is a plain site path with no control characters.
+function safePagePath(path: unknown) {
+  return typeof path === 'string'
+    && path.length <= 128
+    && !/[\r\n]/.test(path)
+    && /^\/[\w/-]*$/.test(path)
+    ? path
+    : null
+}
+
 export default defineEventHandler(async (event) => {
-  const { messages, framework, currentPage } = await readBody(event)
+  const { messages, framework } = await readBody(event)
 
   if (!messages || !Array.isArray(messages)) {
     throw createError({ statusCode: 400, message: 'Invalid or missing messages array.' })
   }
 
-  // `currentPage` reaches the model as a marker on the last user message, so it is an
-  // indirect prompt-injection surface (a crafted /docs/... link can smuggle newlines and
-  // instructions via Vue Router's path decoding). Accept it only when it is a plain docs
-  // path with no control characters; otherwise drop it.
-  const safeCurrentPage = typeof currentPage === 'string'
-    && currentPage.length <= 128
-    && !/[\r\n]/.test(currentPage)
-    && /^\/docs\/[\w/-]*$/.test(currentPage)
-    ? currentPage
-    : null
-
-  // Page context belongs to the turn it was sent with, not to the thread: it is appended
-  // here and never persisted client-side, so a stale path can't leak into a later answer.
-  const uiMessages = messages.map((message: UIMessage, index: number) => {
-    if (!safeCurrentPage || index !== messages.length - 1 || message.role !== 'user') {
+  // Each user message carries the page it was sent from in its metadata, and every one
+  // gets its marker back on each request: the history stays byte-identical across turns,
+  // so the cached prompt prefix covers the earlier tool results. The instructions tell
+  // the model only the latest marker counts.
+  const uiMessages = messages.map((message: DocsChatMessage) => {
+    const currentPage = message.role === 'user' ? safePagePath(message.metadata?.currentPage) : null
+    if (!currentPage) {
       return message
     }
 
     return {
       ...message,
-      parts: [...(message.parts || []), { type: 'text' as const, text: `[Context: the user is currently viewing ${safeCurrentPage}]` }]
+      parts: [...(message.parts || []), { type: 'text' as const, text: `[Context: the user is currently viewing ${currentPage}]` }]
     }
   })
 
@@ -495,7 +498,7 @@ export default defineEventHandler(async (event) => {
   event.node.req.on('close', () => abortController.abort())
 
   const agent = new ToolLoopAgent({
-    model: 'anthropic/claude-sonnet-5',
+    model: 'anthropic/claude-sonnet-5.5',
     instructions: framework === 'vue' ? instructions.vue : instructions.nuxt,
     maxOutputTokens: 8000,
     stopWhen: isStepCount(6),
@@ -507,7 +510,7 @@ export default defineEventHandler(async (event) => {
         user: getChatUser(event),
         tags: ['docs-chat'],
         // Same tier as the primary so the adaptive thinking options stay supported.
-        models: ['anthropic/claude-sonnet-4.6']
+        models: ['anthropic/claude-sonnet-5']
       } satisfies GatewayProviderOptions
     }
   })

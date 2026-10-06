@@ -18,21 +18,33 @@ export async function appendFile(path, contents) {
 
 /**
  * Insert a `key?: Partial<ComponentTypes.XProps>` entry into the `ThemeDefaults`
- * interface in `src/runtime/composables/useComponentProps.ts`, keeping entries
- * sorted alphabetically and avoiding duplicates.
+ * interface in `src/runtime/types/theme.ts` before the first top-level entry
+ * that sorts after it, so comments and nested blocks stay where they are.
  */
 export async function appendThemeDefault(path, key, propsType) {
   const file = await fsp.readFile(path, 'utf-8')
   const entry = `  ${key}?: Partial<ComponentTypes.${propsType}>`
 
   const match = file.match(/(export interface ThemeDefaults \{\n)([\s\S]*?)(\n\})/)
-  if (!match) return
+  if (!match) {
+    console.warn(`Could not find the \`ThemeDefaults\` interface in ${path}, add \`${key}\` manually.`)
+    return
+  }
 
   const [, header, body, footer] = match
-  if (body.split('\n').includes(entry)) return
+  const lines = body.split('\n')
+  if (lines.includes(entry)) return
 
-  const sorted = [...body.split('\n'), entry].sort().join('\n')
-  await fsp.writeFile(path, file.replace(match[0], header + sorted + footer))
+  let index = lines.findIndex(line => /^ {2}\w+\?:/.test(line) && line > entry)
+  if (index === -1) {
+    index = lines.length
+  } else {
+    // keep a comment attached to the entry it documents
+    while (index > 0 && /^ {2}(?:\/\/|\/\*\*| \*)/.test(lines[index - 1])) index--
+  }
+
+  lines.splice(index, 0, entry)
+  await fsp.writeFile(path, file.replace(match[0], header + lines.join('\n') + footer))
 }
 
 export function normalizeLocale(locale) {

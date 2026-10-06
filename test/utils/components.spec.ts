@@ -39,7 +39,8 @@ afterAll(() => {
   }
 })
 
-describe('detectUsedComponents', () => {
+// Scanning the fixtures is far slower on the Windows runners.
+describe('detectUsedComponents', { timeout: 20000 }, () => {
   it('detects used components and resolves their dependencies', async () => {
     const detected = await detectUsedComponents([fixtureUsing('<UButton label="x" />')], 'U', componentDir)
 
@@ -119,6 +120,18 @@ describe('detectUsedComponents', () => {
     const detected = await detectUsedComponents([fixtureUsing('<nx-alert title="x" />')], 'Nx', componentDir)
 
     expect(detected).toContain('Alert')
+    expect(detected).toContain('Button')
+  })
+
+  it('detects kebab-case tags in Pug templates', async () => {
+    const dir = fixtureUsing('<UIcon name="x" />')
+    writeFileSync(join(dir, 'Pug.vue'), `<template lang="pug">\nu-accordion(:items="items")\n  u-card: u-badge(label="x")\n  p This has a #[u-button Click me]\n</template>\n`)
+
+    const detected = await detectUsedComponents([dir], 'U', componentDir)
+
+    expect(detected).toContain('Accordion')
+    expect(detected).toContain('Card')
+    expect(detected).toContain('Badge')
     expect(detected).toContain('Button')
   })
 

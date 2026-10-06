@@ -68,6 +68,13 @@ jobs:
           - name: Build Vue playground
             run: pnpm run dev:vue:build
 
+      # Runs against the built package: with the stub from `dev:prepare`, the playground
+      # would typecheck all of `src/` outside of Nuxt instead of the published declarations.
+      # Only on ubuntu: types don't depend on the OS, and on Windows `app.vue` loses its auto-imports
+      - name: Typecheck Vue playground
+        if: matrix.os == 'ubuntu-latest'
+        run: pnpm --filter './playgrounds/vue' typecheck
+
       - name: Publish
         # Only publish preview package on ubuntu, and skip forks of the repo (pkg-pr-new still runs on fork PRs against nuxt/ui)
         if: matrix.os == 'ubuntu-latest' && github.repository_owner == 'nuxt'

@@ -202,6 +202,20 @@ describe('SelectMenu', () => {
     })
   })
 
+  describe('clear', () => {
+    it('does not render the clear button when disabled', () => {
+      const wrapper = mount(SelectMenu, { props: { items, modelValue: items[0]!, clear: true, disabled: true } })
+
+      expect(wrapper.find('[data-slot="trailingClear"]').exists()).toBe(false)
+    })
+
+    it('renders the clear button when not disabled', () => {
+      const wrapper = mount(SelectMenu, { props: { items, modelValue: items[0]!, clear: true } })
+
+      expect(wrapper.find('[data-slot="trailingClear"]').exists()).toBe(true)
+    })
+  })
+
   describe('keyboard', () => {
     test.each(['ArrowDown', 'ArrowUp'])('opens the menu on %s', async (key) => {
       const wrapper = mount(SelectMenu, { attachTo: document.body, props: { portal: false, items } })
@@ -252,6 +266,49 @@ describe('SelectMenu', () => {
       expect(document.activeElement).not.toBe(input.element)
 
       wrapper.unmount()
+    })
+  })
+
+  describe('focus', () => {
+    test('keeps the focus moved on select', async () => {
+      const input = document.createElement('input')
+      document.body.appendChild(input)
+
+      const wrapper = mount(SelectMenu, { attachTo: document.body, props: { 'defaultOpen': true, 'portal': false, items, 'onUpdate:modelValue': () => input.focus() } })
+
+      await flushPromises()
+      await new Promise(resolve => setTimeout(resolve))
+
+      await wrapper.findAll('[role="option"]')[1]!.trigger('click')
+      await flushPromises()
+      await new Promise(resolve => setTimeout(resolve))
+
+      expect(document.activeElement).toBe(input)
+
+      wrapper.unmount()
+      input.remove()
+    })
+
+    test('stays open when focus moves outside', async () => {
+      const button = document.createElement('button')
+      document.body.appendChild(button)
+
+      const wrapper = mount(SelectMenu, { attachTo: document.body, props: { defaultOpen: true, portal: false, items } })
+
+      await flushPromises()
+      await new Promise(resolve => setTimeout(resolve))
+
+      const input = wrapper.find('[data-slot="input"] input')
+
+      button.focus()
+      await flushPromises()
+      await new Promise(resolve => setTimeout(resolve))
+
+      expect(wrapper.findAll('[role="option"]').length).toBe(items.length)
+      expect(document.activeElement).toBe(input.element)
+
+      wrapper.unmount()
+      button.remove()
     })
   })
 

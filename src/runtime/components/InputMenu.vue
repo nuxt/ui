@@ -36,7 +36,7 @@ export type InputMenuItem = InputMenuValue | {
   disabled?: boolean
   onSelect?: (e: Event) => void
   class?: any
-  ui?: Pick<InputMenu['slots'], 'tagsItem' | 'tagsItemText' | 'tagsItemDelete' | 'tagsItemDeleteIcon' | 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChip' | 'itemLeadingChipSize' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>
+  ui?: Partial<Pick<InputMenu['slots'], 'tagsItem' | 'tagsItemText' | 'tagsItemDelete' | 'tagsItemDeleteIcon' | 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChip' | 'itemLeadingChipSize' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>>
   [key: string]: any
 }
 
@@ -286,6 +286,8 @@ const appConfig = useAppConfig() as InputMenu['AppConfig']
 const { filterGroups } = useFilter()
 
 const isAutocomplete = computed(() => props.mode === 'autocomplete')
+// `multiple` doesn't apply in autocomplete mode.
+const isMultiple = computed(() => !!props.multiple && !isAutocomplete.value)
 
 const rootPropsPick = reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'highlightOnHover', 'openOnClick', 'openOnFocus', 'by')
 const rootPropsOmitted = reactiveOmit(rootPropsPick, 'multiple', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'by')
@@ -299,7 +301,7 @@ const attrs = useAttrs()
 // merge. `Anchor` is then the effective root, so it reads the caller's `data-slot`
 // itself. In every other mode `Root` renders its own element (and receives the
 // caller's value through its own binding), so `Anchor` keeps its `base` label.
-const baseDataSlot = computed(() => props.multiple && !isAutocomplete.value
+const baseDataSlot = computed(() => isMultiple.value
   ? ((attrs['data-slot'] as string | undefined) ?? 'base')
   : 'base')
 const portalProps = usePortal(toRef(() => props.portal))
@@ -364,7 +366,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.inputMenu || {})
   fixed: props.fixed,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
-  multiple: props.multiple,
+  multiple: isMultiple.value,
   fieldGroup: orientation.value,
   virtualize: !!props.virtualize
 }))
@@ -572,7 +574,23 @@ function isModelValueEmpty(modelValue: ApplyModifiers<GetModelValue<T, VK, M, Ex
 }
 
 function onClear() {
+  if (disabled.value) {
+    return
+  }
+
   emits('clear')
+}
+
+function onTagsInputKeydown(event: KeyboardEvent) {
+  // `TagsInputInput` adds the search term as a tag on `Enter`, but `TagsInputRoot` is driven by
+  // the combobox so the tag never reaches `modelValue` and renders a chip that isn't selected.
+  // It bails out when the event is already prevented, which is also what the combobox does
+  // when an item is highlighted.
+  if (event.isComposing || !searchTerm.value) {
+    return
+  }
+
+  event.preventDefault()
 }
 
 const viewportRef = useTemplateRef('viewportRef')
@@ -680,14 +698,14 @@ defineExpose({
     :disabled="disabled"
     :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
-    :as-child="!!props.multiple && !isAutocomplete"
+    :as-child="isMultiple"
     ignore-filter
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
   >
-    <Component.Anchor :as-child="!props.multiple" :data-slot="baseDataSlot" :class="ui.base({ class: props.ui?.base })">
+    <Component.Anchor :as-child="!isMultiple" :data-slot="baseDataSlot" :class="ui.base({ class: props.ui?.base })">
       <TagsInputRoot
-        v-if="props.multiple && !isAutocomplete"
+        v-if="isMultiple"
         v-slot="{ modelValue: tags }"
         :model-value="(modelValue as string[])"
         :disabled="disabled"
@@ -721,6 +739,7 @@ defineExpose({
             data-slot="tagsInput"
             :class="ui.tagsInput({ class: props.ui?.tagsInput })"
             @change.stop
+            @keydown.enter="onTagsInputKeydown"
           />
         </Component.Input>
       </TagsInputRoot>
@@ -730,7 +749,7 @@ defineExpose({
         :id="id"
         ref="inputRef"
         v-bind="{ ...(!isAutocomplete ? { displayValue } : {}), ...$attrs, ...ariaAttrs }"
-        :data-slot="props.multiple ? undefined : 'base'"
+        data-slot="base"
         :type="props.type"
         :placeholder="props.placeholder"
         :required="props.required"
@@ -751,7 +770,7 @@ defineExpose({
 
       <Component.Trigger v-if="isTrailing || !!slots.trailing || !!props.clear" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
         <slot name="trailing" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
-          <Component.Cancel v-if="!!props.clear && !isModelValueEmpty(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" as-child>
+          <Component.Cancel v-if="!!props.clear && !disabled && !isModelValueEmpty(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" as-child>
             <UButton
               as="span"
               :icon="props.clearIcon || appConfig.ui.icons.close"

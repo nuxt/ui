@@ -56,6 +56,17 @@ describe('DashboardSidebar', () => {
     }
   )
 
+  it('labels the menu dialog with the translated toggle label', async () => {
+    const wrapper = await mountSuspended(DashboardWrapper, { props: { open: true, menu: { portal: false } } })
+
+    const dialog = wrapper.find('[role="dialog"]')
+    const title = wrapper.find(`#${dialog.attributes('aria-labelledby')}`)
+    expect(title.text()).toBe('Open sidebar')
+    expect(wrapper.html()).not.toContain('dashboardSidebar.')
+
+    wrapper.unmount()
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(DashboardWrapper, {
       props: {

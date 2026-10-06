@@ -20,7 +20,7 @@ export interface BreadcrumbItem extends Omit<LinkProps, 'raw' | 'custom'> {
   avatar?: AvatarProps
   slot?: string
   class?: any
-  ui?: Pick<Breadcrumb['slots'], 'item' | 'link' | 'linkLeadingIcon' | 'linkLeadingAvatar' | 'linkLabel' | 'separator' | 'separatorIcon'>
+  ui?: Partial<Pick<Breadcrumb['slots'], 'item' | 'link' | 'linkLeadingIcon' | 'linkLeadingAvatar' | 'linkLabel' | 'separator' | 'separatorIcon'>>
   [key: string]: any
 }
 

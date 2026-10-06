@@ -11,6 +11,8 @@ hero:
 items:
   - name: Ace
     url: https://acecompany.nl/
+  - name: Avelune Online
+    url: https://avelune-online.vercel.app/
   - name: Brusnika.LMS
     url: https://brusnika-lms.com/
     screenshotOptions:
@@ -55,6 +57,10 @@ items:
     url: https://mawrble.com/
   - name: Meet Sponsors
     url: https://meetsponsors.com/
+  - name: Milo Studio
+    url: https://milostudio.app/
+  - name: Neleto
+    url: https://neleto.io/
   - name: Ovatu
     url: https://ovatu.com/
   - name: Pallyy

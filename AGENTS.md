@@ -18,6 +18,7 @@ src/
 ├── theme/              # Tailwind Variants themes (kebab-case.ts)
 └── module.ts
 test/
+├── bundle/             # Bundle size fixtures (`pnpm run size`)
 ├── components/         # Component tests (*.spec.ts)
 │   └── __snapshots__/  # Auto-generated snapshots
 └── component-render.ts
@@ -33,12 +34,13 @@ playgrounds/
 pnpm run dev:prepare  # Generate type stubs (run after install)
 pnpm run dev          # Nuxt playground
 pnpm run dev:vue      # Vue playground
-pnpm run dev:repl     # REPL playground
+pnpm run repl         # REPL playground
 pnpm run docs         # Documentation site
 pnpm run lint         # Check linting
 pnpm run lint:fix     # Fix linting
 pnpm run typecheck    # Type checking
 pnpm run test         # Run tests
+pnpm run size         # Build test/bundle apps and print their JS/CSS sizes
 ```
 
 ## CLI for Scaffolding
@@ -104,7 +106,7 @@ Progress:
 - [ ] 2. Implement component in src/runtime/components/
 - [ ] 3. Create theme in src/theme/
 - [ ] 4. Export types from src/runtime/types/index.ts
-- [ ] 5. Register in ThemeDefaults interface (src/runtime/composables/useComponentProps.ts)
+- [ ] 5. Register in ThemeDefaults interface (src/runtime/types/theme.ts)
 - [ ] 6. Write tests in test/components/
 - [ ] 7. Create docs in docs/content/docs/2.components/
 - [ ] 8. Add playground page

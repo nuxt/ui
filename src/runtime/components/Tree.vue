@@ -27,7 +27,7 @@ export type TreeItem = {
   onToggle?: (e: TreeItemToggleEvent<TreeItem>) => void
   onSelect?: (e: TreeItemSelectEvent<TreeItem>) => void
   class?: any
-  ui?: Pick<Tree['slots'], 'item' | 'itemWithChildren' | 'link' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren'>
+  ui?: Partial<Pick<Tree['slots'], 'item' | 'itemWithChildren' | 'link' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren'>>
   [key: string]: any
 }
 

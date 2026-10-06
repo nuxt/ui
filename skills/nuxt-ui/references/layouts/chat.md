@@ -15,13 +15,13 @@ Build AI chat interfaces with message streams, reasoning, tool calling, and Verc
 **Nuxt:**
 
 ```bash
-pnpm add ai @ai-sdk/gateway @ai-sdk/vue @comark/nuxt
+pnpm add ai @ai-sdk/vue @comark/nuxt
 ```
 
 **Vue (Vite):**
 
 ```bash
-pnpm add ai @ai-sdk/gateway @ai-sdk/vue @comark/vue
+pnpm add ai @ai-sdk/vue @comark/vue
 ```
 
 ### Register Comark module
@@ -57,17 +57,18 @@ html.dark .shiki span {
 
 ### Server endpoint
 
+These examples target AI SDK v7 (`instructions`, `toUIMessageStream`).
+
 Using [Vercel AI Gateway](https://vercel.com/ai-gateway) (recommended):
 
 ```ts [server/api/chat.post.ts]
 import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
-import { gateway } from '@ai-sdk/gateway'
 
 export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
   const result = streamText({
-    model: gateway('anthropic/claude-sonnet-5'),
+    model: 'anthropic/claude-sonnet-5.5',
     instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages)
   })
