@@ -295,7 +295,9 @@ function onInteraction() {
 
   // Same key as NuxtLink: the hash does not affect what is fetched.
   const { pathname, search } = new URL(prefetchApi.fullPath, window.location.href)
-  nuxtApp._prefetch?.promote(pathname + search)
+  // Typed here since `_prefetch` is internal and absent from older Nuxt types.
+  const scheduler = (nuxtApp as { _prefetch?: { promote?: (group: string) => void } })._prefetch
+  scheduler?.promote?.(pathname + search)
 }
 
 function getPrefetchListeners({ prefetch, shouldPrefetch, prefetched, isExternal }: NuxtLinkDefaultSlotProps, attrs: Record<string, unknown>, linkRoute?: { fullPath?: string }) {
