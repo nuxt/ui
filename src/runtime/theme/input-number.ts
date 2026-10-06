@@ -61,16 +61,13 @@ export default defineTheme({
     fixed: {
       false: ''
     },
-    // Room for the button: the padding, the icon and the gap.
-    // Written as the property itself: a padding shorthand set on the field, like
-    // `px-3`, neither merges it away nor comes after it in the CSS, and `ps-*` or
-    // `pe-*` still replaces it
+    // Room for the button: the padding, the icon and the gap
     increment: {
-      true: { base: '[padding-inline-end:calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]' },
+      true: { base: 'pe-[calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]' },
       false: ''
     },
     decrement: {
-      true: { base: '[padding-inline-start:calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]' },
+      true: { base: 'ps-[calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]' },
       false: ''
     }
   },
