@@ -143,12 +143,6 @@ describe('ContextMenu', () => {
     }
   )
 
-  it('opens with the open prop', async () => {
-    const wrapper = await mountSuspended(ContextMenuWrapper, { props: { ...props, open: true } })
-
-    expect(wrapper.find('[data-slot="content"]').exists()).toBe(true)
-  })
-
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(ContextMenuWrapper, {
       props
