@@ -33,6 +33,8 @@ export interface InputDateProps<R extends boolean = false> extends UseComponentI
    * @defaultValue 'md'
    */
   size?: InputDate['variants']['size']
+  /** Render the input with equal padding on all sides. */
+  square?: boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   /** Keep the mobile text size on all breakpoints. */
@@ -119,6 +121,7 @@ const avatarSize = computed(() => getAvatarSize(size.value))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
+  square: props.square,
   color: color.value,
   variant: props.variant,
   size: size.value,

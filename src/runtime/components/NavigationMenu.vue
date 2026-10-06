@@ -167,6 +167,8 @@ export interface NavigationMenuProps<
   popover?: boolean | PopoverProps
   /** Display a line next to the active item. */
   highlight?: boolean
+  /** Render the links with equal padding on all sides. */
+  square?: boolean
   /**
    * @defaultValue 'primary'
    */
@@ -303,7 +305,8 @@ const ui = computed(() => tv(theme, overrides.value)({
   color: props.color,
   variant: props.variant,
   highlight: props.highlight,
-  highlightColor: props.highlightColor || props.color
+  highlightColor: props.highlightColor || props.color,
+  square: props.square
 }))
 
 const lists = computed<NavigationMenuItem[][]>(() =>

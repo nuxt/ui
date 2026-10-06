@@ -109,6 +109,7 @@ describe('NavigationMenu', () => {
     ['without externalIcon', { props: { ...props, externalIcon: false } }],
     ['with unmountOnHide', { props: { ...props, unmountOnHide: false } }],
     ['with as', { props: { ...props, as: 'section' } }],
+    ['with square', { props: { ...props, square: true } }],
     ['with class', { props: { ...props, class: 'w-48' } }],
     ['with ui', { props: { ...props, ui: { itemLeadingIcon: 'size-4' } } }],
     // Slots

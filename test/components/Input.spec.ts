@@ -18,6 +18,7 @@ describe('Input', () => {
     ['with name', { props: { name: 'name' } }],
     ['with type', { props: { type: 'password' } }],
     ['with placeholder', { props: { placeholder: 'Search...' } }],
+    ['with square', { props: { square: true } }],
     ['with disabled', { props: { disabled: true } }],
     ['with required', { props: { required: true } }],
     ['with file type', { props: { type: 'file' } }],

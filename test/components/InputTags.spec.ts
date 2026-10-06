@@ -16,6 +16,7 @@ describe('InputTags', () => {
     ['with id', { props: { id: 'id' } }],
     ['with name', { props: { name: 'name' } }],
     ['with placeholder', { props: { placeholder: 'Search...' } }],
+    ['with square', { props: { square: true } }],
     ['with disabled', { props: { disabled: true } }],
     ['with required', { props: { required: true } }],
     ['with icon', { props: { icon: 'i-lucide-search' } }],

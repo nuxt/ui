@@ -31,6 +31,7 @@ describe('InputDate', () => {
     ['with range', { props: { range: true } }],
     ['with range and modelValue', { props: { range: true, modelValue: { start: new CalendarDate(2025, 1, 1), end: new CalendarDate(2025, 1, 15) } } }],
     ['with range and defaultValue', { props: { range: true, defaultValue: { start: new CalendarDate(2025, 1, 1), end: new CalendarDate(2025, 1, 15) } } }],
+    ['with square', { props: { square: true } }],
     ['with disabled', { props: { disabled: true } }],
     ['with readonly', { props: { readonly: true } }],
     ['with isDateUnavailable', { props: { isDateUnavailable: () => true } }],

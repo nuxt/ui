@@ -35,6 +35,10 @@ export default defineTheme({
         base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base'
       }
     },
+    // Equal padding. Before `increment` and `decrement`, so the room for a button stays
+    square: {
+      true: { base: 'px-(--ui-control-py)' }
+    },
     variant: {
       ...input.variants.variant
     },

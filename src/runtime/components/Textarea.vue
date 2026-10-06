@@ -33,6 +33,8 @@ export interface TextareaProps<T extends TextareaValue = TextareaValue, Mod exte
    * @defaultValue 'md'
    */
   size?: Textarea['variants']['size']
+  /** Render the textarea with equal padding on all sides. */
+  square?: boolean
   required?: boolean
   autofocus?: boolean
   autofocusDelay?: number
@@ -112,6 +114,7 @@ const avatarSize = computed(() => getAvatarSize(size.value))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
+  square: props.square,
   color: color.value,
   variant: props.variant,
   size: size.value,

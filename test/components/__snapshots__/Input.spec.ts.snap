@@ -309,6 +309,13 @@ exports[`Input > renders with size xs correctly 1`] = `
 </div>"
 `;
 
+exports[`Input > renders with square correctly 1`] = `
+"<div data-slot="input" class="relative inline-flex items-center [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] [--ui-accent:var(--ui-primary)]"><input type="text" class="w-full rounded-md border-0 appearance-none text-strong placeholder:text-faint disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-(--ui-control-py) gap-(--ui-control-gap) text-base/5 px-(--ui-control-py) bg-default ring ring-inset ring-strong outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent md:text-sm" autocomplete="off" data-slot="input-base">
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
 exports[`Input > renders with trailing and icon correctly 1`] = `
 "<div data-slot="input" class="relative inline-flex items-center [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] [--ui-accent:var(--ui-primary)]"><input type="text" class="w-full rounded-md border-0 appearance-none text-strong placeholder:text-faint disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base/5 bg-default ring ring-inset ring-strong outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent pe-[calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))] md:text-sm" autocomplete="off" data-slot="input-base">
   <!--v-if--><span data-slot="input-trailing" class="absolute inset-y-0 inset-e-0 flex items-center pe-(--ui-control-px)"><span class="iconify i-lucide:arrow-right shrink-0 text-faint size-(--ui-control-icon)" aria-hidden="true" data-slot="input-trailingIcon"></span></span>

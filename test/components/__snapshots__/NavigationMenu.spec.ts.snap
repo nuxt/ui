@@ -1256,6 +1256,54 @@ exports[`NavigationMenu > renders with primary variant pill highlight correctly 
 </nav>"
 `;
 
+exports[`NavigationMenu > renders with square correctly 1`] = `
+"<nav data-slot="navigation-menu" class="relative flex gap-1.5 [&amp;>div]:min-w-0 items-center justify-between" data-orientation="horizontal" dir="ltr" data-reka-navigation-menu="">
+  <div style="position: relative;">
+    <ul data-slot="navigation-menu-list" class="isolate min-w-0 flex items-center" data-orientation="horizontal">
+      <li data-menu-item="" data-slot="navigation-menu-item" class="min-w-0 py-2"></li>
+      <li data-menu-item="" data-slot="navigation-menu-item" class="min-w-0 py-2"><button type="button" data-reka-collection-item="" id="reka-navigation-menu-v-0-0-0-trigger-group-0-item-1" data-state="closed" data-navigation-menu-trigger="" aria-expanded="false" aria-controls="reka-navigation-menu-v-0-0-0-content-group-0-item-1" data-slot="navigation-menu-link" class="group relative w-full flex items-center [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] py-(--ui-control-py) gap-(--ui-control-gap) font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3 before:outline-accent-focus [--ui-accent:var(--ui-primary)] [--ui-highlight:var(--ui-primary)] px-(--ui-control-py) before:inset-x-px before:inset-y-0 text-muted hover:text-strong hover:before:bg-tint transition-colors before:transition-colors data-[state=open]:text-strong data-[state=open]:before:bg-tint"><span class="iconify i-lucide:book-open shrink-0 size-(--ui-control-icon) text-faint group-hover:text-default transition-colors group-data-[state=open]:text-default" aria-hidden="true" data-slot="navigation-menu-linkLeadingIcon"></span><span data-slot="navigation-menu-linkLabel" class="truncate">Documentation<!--v-if--></span><span data-slot="navigation-menu-linkTrailing" class="group ms-auto inline-flex gap-1.5 items-center"><span data-slot="navigation-menu-linkTrailingBadge" class="font-medium inline-flex items-center px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-neutral)] text-accent-default bg-default ring ring-inset ring-accent-strong text-[10px]/3 [--ui-control-px:--spacing(1.5)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(3)] rounded-sm shrink-0"><!--v-if--><span data-slot="badge-label" class="truncate">10</span>
+          <!--v-if--></span><span class="iconify i-lucide:chevron-down size-5 transform shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none" aria-hidden="true" data-slot="navigation-menu-linkTrailingIcon"></span></span>
+        </button>
+        <!--v-if-->
+        <!--teleport start-->
+        <!---->
+        <!--teleport end-->
+        <!--v-if-->
+      </li>
+      <li data-menu-item="" data-slot="navigation-menu-item" class="min-w-0 py-2"><button type="button" data-reka-collection-item="" id="reka-navigation-menu-v-0-0-0-trigger-group-0-item-2" data-state="closed" data-navigation-menu-trigger="" aria-expanded="false" aria-controls="reka-navigation-menu-v-0-0-0-content-group-0-item-2" data-slot="navigation-menu-link" class="group relative w-full flex items-center [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] py-(--ui-control-py) gap-(--ui-control-gap) font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3 before:outline-accent-focus [--ui-accent:var(--ui-primary)] [--ui-highlight:var(--ui-primary)] px-(--ui-control-py) before:inset-x-px before:inset-y-0 text-accent before:bg-soft"><span class="iconify i-lucide:box shrink-0 size-(--ui-control-icon) text-accent group-data-[state=open]:text-accent" aria-hidden="true" data-slot="navigation-menu-linkLeadingIcon"></span><span data-slot="navigation-menu-linkLabel" class="truncate">Components<!--v-if--></span><span data-slot="navigation-menu-linkTrailing" class="group ms-auto inline-flex gap-1.5 items-center"><!--v-if--><span class="iconify i-lucide:chevron-down size-5 transform shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none" aria-hidden="true" data-slot="navigation-menu-linkTrailingIcon"></span></span></button>
+        <!--v-if-->
+        <!--teleport start-->
+        <!---->
+        <!--teleport end-->
+        <!--v-if-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <div style="position: relative;">
+    <ul data-slot="navigation-menu-list" class="isolate min-w-0 flex items-center" data-orientation="horizontal">
+      <li data-menu-item="" data-slot="navigation-menu-item" class="min-w-0 py-2"><a href="https://github.com/nuxt/ui" rel="noopener noreferrer" target="_blank" data-reka-collection-item="" data-slot="navigation-menu-link" class="group relative w-full flex items-center [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] py-(--ui-control-py) gap-(--ui-control-gap) font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3 before:outline-accent-focus [--ui-accent:var(--ui-primary)] [--ui-highlight:var(--ui-primary)] px-(--ui-control-py) before:inset-x-px before:inset-y-0 text-muted hover:text-strong hover:before:bg-tint transition-colors before:transition-colors data-[state=open]:text-strong data-[state=open]:before:bg-tint"><span class="iconify i-simple-icons:github shrink-0 size-(--ui-control-icon) text-faint group-hover:text-default transition-colors group-data-[state=open]:text-default" aria-hidden="true" data-slot="navigation-menu-linkLeadingIcon"></span><span data-slot="navigation-menu-linkLabel" class="truncate">GitHub<span class="iconify i-lucide:arrow-up-right inline-block size-3 align-top text-faint" aria-hidden="true" data-slot="navigation-menu-linkLabelExternalIcon"></span></span>
+          <!--v-if-->
+        </a>
+        <!--v-if-->
+        <!--v-if-->
+      </li>
+      <li data-menu-item="" data-slot="navigation-menu-item" class="min-w-0 py-2"><button type="button" disabled="" data-reka-collection-item="" data-slot="navigation-menu-link" class="group relative w-full flex items-center [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] py-(--ui-control-py) gap-(--ui-control-gap) font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3 before:outline-accent-focus [--ui-accent:var(--ui-primary)] [--ui-highlight:var(--ui-primary)] px-(--ui-control-py) before:inset-x-px before:inset-y-0 text-muted cursor-not-allowed opacity-75"><span class="iconify i-lucide:circle-help shrink-0 size-(--ui-control-icon) text-faint" aria-hidden="true" data-slot="navigation-menu-linkLeadingIcon"></span><span data-slot="navigation-menu-linkLabel" class="truncate">Help<!--v-if--></span>
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+        <!--v-if-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <div data-slot="navigation-menu-viewportWrapper" class="absolute top-full inset-s-0 flex w-full justify-center">
+    <!--v-if-->
+    <!---->
+  </div>
+</nav>"
+`;
+
 exports[`NavigationMenu > renders with trailingIcon correctly 1`] = `
 "<nav data-slot="navigation-menu" class="relative flex gap-1.5 [&amp;>div]:min-w-0 items-center justify-between" data-orientation="horizontal" dir="ltr" data-reka-navigation-menu="">
   <div style="position: relative;">

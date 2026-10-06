@@ -50,6 +50,10 @@ export default defineTheme({
         base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base'
       }
     },
+    // Equal padding. Before `leading` and `trailing`, so the room for an icon stays
+    square: {
+      true: { base: 'px-(--ui-control-py)' }
+    },
     variant: {
       outline: { base: 'bg-default ring ring-inset ring-strong outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent' },
       soft: { base: 'bg-tint hover:bg-soft focus:bg-soft disabled:bg-tint outline-accent-focus focus-visible:outline-3' },

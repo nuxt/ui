@@ -35,6 +35,10 @@ export default defineTheme({
   variants: {
     color: colorVariant({ link: '', childLink: '' }),
     highlightColor: highlightColorVariant({ link: '' }),
+    // Equal padding, to keep a link in place while a sidebar collapses
+    square: {
+      true: { link: 'px-(--ui-control-py)' }
+    },
     variant: {
       pill: '',
       link: ''
