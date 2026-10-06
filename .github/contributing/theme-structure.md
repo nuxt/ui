@@ -131,7 +131,7 @@ Always use semantic colors, never Tailwind palette colors:
 
 ### Border Colors
 - `border-default` - Standard borders
-- `ring-default` - Focus rings
+- `ring-default` - Standard rings used as borders (`ring ring-inset ring-default`)
 - `ring-accented` - Accented rings
 - `divide-default` - Dividers
 
@@ -189,11 +189,11 @@ slots: {
 Common animation classes:
 ```ts
 // Accordion expand/collapse
-content: 'data-[state=open]:animate-[accordion-down_200ms_ease-out] data-[state=closed]:animate-[accordion-up_200ms_ease-out]'
+content: 'data-[state=open]:animate-[accordion-down_200ms_var(--ease-out)] data-[state=closed]:animate-[accordion-up_200ms_var(--ease-out)]'
 
 // Modal fade/scale
-overlay: 'data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]'
-content: 'data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in]'
+overlay: 'data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)]'
+content: 'data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)]'
 
 // Loading spinner
 leadingIcon: 'animate-spin'

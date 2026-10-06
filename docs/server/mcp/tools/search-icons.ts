@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 export default defineMcpTool({
-  description: 'Search for icons across Iconify collections. Returns matching icon names in the `i-{prefix}-{name}` format used by Nuxt UI. Default collection is `lucide`.',
+  description: 'Searches one Iconify collection for icons matching a keyword. One collection is searched per call, `lucide` by default, so repeat the call to try another. Returns each match as a `name` in the `i-{prefix}-{name}` format used by Nuxt UI with a `preview` SVG URL, plus the total match count.',
   annotations: {
     readOnlyHint: true,
     destructiveHint: false,

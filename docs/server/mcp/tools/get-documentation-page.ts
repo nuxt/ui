@@ -2,7 +2,7 @@ import { z } from 'zod'
 import { getAgentDocument } from '#agent-discovery'
 
 export default defineMcpTool({
-  description: 'Retrieves documentation page content by URL path. Use the `headings` parameter to fetch only specific h2 sections to reduce response size.',
+  description: 'Returns the Markdown content of one documentation page by its URL path, as found in the `path` field of `search-documentation`. Pass `headings` to return only the named h2 sections and reduce response size. The result is the Markdown string only, with no metadata. A path that names a section resolves to its first page. For a component, `get-component` returns the same content with metadata. Fails when no page exists at the path.',
   annotations: {
     readOnlyHint: true,
     destructiveHint: false,
