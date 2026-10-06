@@ -24,8 +24,8 @@ export default defineTheme({
       horizontal: {
         container: 'flex-row -ms-4',
         item: 'ps-4',
-        prev: 'start-4 sm:-start-12 top-1/2 -translate-y-1/2',
-        next: 'end-4 sm:-end-12 top-1/2 -translate-y-1/2'
+        prev: 'inset-s-4 sm:-inset-s-12 top-1/2 -translate-y-1/2',
+        next: 'inset-e-4 sm:-inset-e-12 top-1/2 -translate-y-1/2'
       }
     },
     active: {

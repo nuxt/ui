@@ -50,7 +50,7 @@ exports[`InputTags > renders with disabled correctly 1`] = `
 `;
 
 exports[`InputTags > renders with icon correctly 1`] = `
-"<div data-slot="input-tags" class="relative inline-flex items-center flex-wrap [--ui-accent:var(--ui-primary)] rounded-md text-strong transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 bg-default ring ring-inset ring-strong outline-accent-focus has-focus-visible:outline-3 has-focus-visible:ring-accent ps-9 md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input-tags-input" class="flex-1 border-0 bg-transparent placeholder:text-faint focus:outline-none disabled:cursor-not-allowed disabled:opacity-75"><span data-slot="input-tags-leading" class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-faint size-5" aria-hidden="true" data-slot="input-tags-leadingIcon"></span></span>
+"<div data-slot="input-tags" class="relative inline-flex items-center flex-wrap [--ui-accent:var(--ui-primary)] rounded-md text-strong transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 bg-default ring ring-inset ring-strong outline-accent-focus has-focus-visible:outline-3 has-focus-visible:ring-accent ps-9 md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input-tags-input" class="flex-1 border-0 bg-transparent placeholder:text-faint focus:outline-none disabled:cursor-not-allowed disabled:opacity-75"><span data-slot="input-tags-leading" class="absolute inset-y-0 inset-s-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-faint size-5" aria-hidden="true" data-slot="input-tags-leadingIcon"></span></span>
   <!--v-if-->
   <!--v-if-->
 </div>"
@@ -81,14 +81,14 @@ exports[`InputTags > renders with item-text slot correctly 1`] = `
 `;
 
 exports[`InputTags > renders with leading slot correctly 1`] = `
-"<div data-slot="input-tags" class="relative inline-flex items-center flex-wrap [--ui-accent:var(--ui-primary)] rounded-md text-strong transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 bg-default ring ring-inset ring-strong outline-accent-focus has-focus-visible:outline-3 has-focus-visible:ring-accent ps-9 md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input-tags-input" class="flex-1 border-0 bg-transparent placeholder:text-faint focus:outline-none disabled:cursor-not-allowed disabled:opacity-75"><span data-slot="input-tags-leading" class="absolute inset-y-0 start-0 flex items-center ps-2.5">Leading slot</span>
+"<div data-slot="input-tags" class="relative inline-flex items-center flex-wrap [--ui-accent:var(--ui-primary)] rounded-md text-strong transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 bg-default ring ring-inset ring-strong outline-accent-focus has-focus-visible:outline-3 has-focus-visible:ring-accent ps-9 md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input-tags-input" class="flex-1 border-0 bg-transparent placeholder:text-faint focus:outline-none disabled:cursor-not-allowed disabled:opacity-75"><span data-slot="input-tags-leading" class="absolute inset-y-0 inset-s-0 flex items-center ps-2.5">Leading slot</span>
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`InputTags > renders with loading correctly 1`] = `
-"<div data-slot="input-tags" class="relative inline-flex items-center flex-wrap [--ui-accent:var(--ui-primary)] rounded-md text-strong transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 bg-default ring ring-inset ring-strong outline-accent-focus has-focus-visible:outline-3 has-focus-visible:ring-accent ps-9 md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input-tags-input" class="flex-1 border-0 bg-transparent placeholder:text-faint focus:outline-none disabled:cursor-not-allowed disabled:opacity-75"><span data-slot="input-tags-leading" class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:loader-circle shrink-0 text-faint size-5 animate-spin" aria-hidden="true" data-slot="input-tags-leadingIcon"></span></span>
+"<div data-slot="input-tags" class="relative inline-flex items-center flex-wrap [--ui-accent:var(--ui-primary)] rounded-md text-strong transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 bg-default ring ring-inset ring-strong outline-accent-focus has-focus-visible:outline-3 has-focus-visible:ring-accent ps-9 md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input-tags-input" class="flex-1 border-0 bg-transparent placeholder:text-faint focus:outline-none disabled:cursor-not-allowed disabled:opacity-75"><span data-slot="input-tags-leading" class="absolute inset-y-0 inset-s-0 flex items-center ps-2.5"><span class="iconify i-lucide:loader-circle shrink-0 text-faint size-5 animate-spin" aria-hidden="true" data-slot="input-tags-leadingIcon"></span></span>
   <!--v-if-->
   <!--v-if-->
 </div>"
@@ -96,13 +96,13 @@ exports[`InputTags > renders with loading correctly 1`] = `
 
 exports[`InputTags > renders with loading trailing correctly 1`] = `
 "<div data-slot="input-tags" class="relative inline-flex items-center flex-wrap [--ui-accent:var(--ui-primary)] rounded-md text-strong transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 bg-default ring ring-inset ring-strong outline-accent-focus has-focus-visible:outline-3 has-focus-visible:ring-accent pe-9 md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input-tags-input" class="flex-1 border-0 bg-transparent placeholder:text-faint focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
-  <!--v-if--><span data-slot="input-tags-trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:loader-circle shrink-0 text-faint size-5 animate-spin" aria-hidden="true" data-slot="input-tags-trailingIcon"></span></span>
+  <!--v-if--><span data-slot="input-tags-trailing" class="absolute inset-y-0 inset-e-0 flex items-center pe-2.5"><span class="iconify i-lucide:loader-circle shrink-0 text-faint size-5 animate-spin" aria-hidden="true" data-slot="input-tags-trailingIcon"></span></span>
   <!--v-if-->
 </div>"
 `;
 
 exports[`InputTags > renders with loadingIcon correctly 1`] = `
-"<div data-slot="input-tags" class="relative inline-flex items-center flex-wrap [--ui-accent:var(--ui-primary)] rounded-md text-strong transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 bg-default ring ring-inset ring-strong outline-accent-focus has-focus-visible:outline-3 has-focus-visible:ring-accent ps-9 md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input-tags-input" class="flex-1 border-0 bg-transparent placeholder:text-faint focus:outline-none disabled:cursor-not-allowed disabled:opacity-75"><span data-slot="input-tags-leading" class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:loader shrink-0 text-faint size-5 animate-spin" aria-hidden="true" data-slot="input-tags-leadingIcon"></span></span>
+"<div data-slot="input-tags" class="relative inline-flex items-center flex-wrap [--ui-accent:var(--ui-primary)] rounded-md text-strong transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 bg-default ring ring-inset ring-strong outline-accent-focus has-focus-visible:outline-3 has-focus-visible:ring-accent ps-9 md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input-tags-input" class="flex-1 border-0 bg-transparent placeholder:text-faint focus:outline-none disabled:cursor-not-allowed disabled:opacity-75"><span data-slot="input-tags-leading" class="absolute inset-y-0 inset-s-0 flex items-center ps-2.5"><span class="iconify i-lucide:loader shrink-0 text-faint size-5 animate-spin" aria-hidden="true" data-slot="input-tags-leadingIcon"></span></span>
   <!--v-if-->
   <!--v-if-->
 </div>"
@@ -343,21 +343,21 @@ exports[`InputTags > renders with size xs correctly 1`] = `
 
 exports[`InputTags > renders with trailing and icon correctly 1`] = `
 "<div data-slot="input-tags" class="relative inline-flex items-center flex-wrap [--ui-accent:var(--ui-primary)] rounded-md text-strong transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 bg-default ring ring-inset ring-strong outline-accent-focus has-focus-visible:outline-3 has-focus-visible:ring-accent pe-9 md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input-tags-input" class="flex-1 border-0 bg-transparent placeholder:text-faint focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
-  <!--v-if--><span data-slot="input-tags-trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:arrow-right shrink-0 text-faint size-5" aria-hidden="true" data-slot="input-tags-trailingIcon"></span></span>
+  <!--v-if--><span data-slot="input-tags-trailing" class="absolute inset-y-0 inset-e-0 flex items-center pe-2.5"><span class="iconify i-lucide:arrow-right shrink-0 text-faint size-5" aria-hidden="true" data-slot="input-tags-trailingIcon"></span></span>
   <!--v-if-->
 </div>"
 `;
 
 exports[`InputTags > renders with trailing slot correctly 1`] = `
 "<div data-slot="input-tags" class="relative inline-flex items-center flex-wrap [--ui-accent:var(--ui-primary)] rounded-md text-strong transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 bg-default ring ring-inset ring-strong outline-accent-focus has-focus-visible:outline-3 has-focus-visible:ring-accent pe-9 md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input-tags-input" class="flex-1 border-0 bg-transparent placeholder:text-faint focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
-  <!--v-if--><span data-slot="input-tags-trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5">Trailing slot</span>
+  <!--v-if--><span data-slot="input-tags-trailing" class="absolute inset-y-0 inset-e-0 flex items-center pe-2.5">Trailing slot</span>
   <!--v-if-->
 </div>"
 `;
 
 exports[`InputTags > renders with trailingIcon correctly 1`] = `
 "<div data-slot="input-tags" class="relative inline-flex items-center flex-wrap [--ui-accent:var(--ui-primary)] rounded-md text-strong transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 bg-default ring ring-inset ring-strong outline-accent-focus has-focus-visible:outline-3 has-focus-visible:ring-accent pe-9 md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input-tags-input" class="flex-1 border-0 bg-transparent placeholder:text-faint focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
-  <!--v-if--><span data-slot="input-tags-trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:arrow-right shrink-0 text-faint size-5" aria-hidden="true" data-slot="input-tags-trailingIcon"></span></span>
+  <!--v-if--><span data-slot="input-tags-trailing" class="absolute inset-y-0 inset-e-0 flex items-center pe-2.5"><span class="iconify i-lucide:arrow-right shrink-0 text-faint size-5" aria-hidden="true" data-slot="input-tags-trailingIcon"></span></span>
   <!--v-if-->
 </div>"
 `;

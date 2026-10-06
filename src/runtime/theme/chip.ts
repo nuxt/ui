@@ -39,11 +39,11 @@ export default defineTheme({
   }, {
     position: 'bottom-right',
     inset: false,
-    class: { base: 'translate-y-1/2 translate-x-1/2 transform' }
+    class: { base: 'translate-1/2 transform' }
   }, {
     position: 'top-left',
     inset: false,
-    class: { base: '-translate-y-1/2 -translate-x-1/2 transform' }
+    class: { base: '-translate-1/2 transform' }
   }, {
     position: 'bottom-left',
     inset: false,
