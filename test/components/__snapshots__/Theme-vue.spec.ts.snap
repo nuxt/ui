@@ -1,14 +1,14 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Theme > renders with empty ui correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] text-sm">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Theme > renders with nested theme overriding outer theme correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center py-(--ui-control-py) gap-(--ui-control-gap) disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] text-sm px-[2.234rem]">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] py-(--ui-control-py) gap-(--ui-control-gap) text-sm px-[2.234rem]">
   <!--v-if--><span data-slot="button-label" class="truncate text-[#000]">Button</span>
   <!--v-if-->
 </button>"
@@ -27,35 +27,35 @@ exports[`Theme > renders with theme applied to alert correctly 1`] = `
 `;
 
 exports[`Theme > renders with theme applied to badge correctly 1`] = `
-"<span data-slot="badge" class="font-medium inline-flex items-center px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-[1.234rem]"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-[1.234rem]"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
 <!--v-if--></span>"
 `;
 
 exports[`Theme > renders with theme applied to button base slot correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center py-(--ui-control-py) gap-(--ui-control-gap) disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] text-sm px-[1.234rem]">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] py-(--ui-control-py) gap-(--ui-control-gap) text-sm px-[1.234rem]">
   <!--v-if--><span data-slot="button-label" class="truncate text-[#ff0]">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Theme > renders with theme applied to multiple component types correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center py-(--ui-control-py) gap-(--ui-control-gap) disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] text-sm px-[1.234rem]">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] py-(--ui-control-py) gap-(--ui-control-gap) text-sm px-[1.234rem]">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>
-<span data-slot="badge" class="font-medium inline-flex items-center px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-[1.234rem]"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-[1.234rem]"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
 <!--v-if--></span>"
 `;
 
 exports[`Theme > renders with theme not affecting unrelated component correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] text-sm">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Theme > renders with ui prop taking priority over theme correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center py-(--ui-control-py) gap-(--ui-control-gap) disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] text-sm px-[2.234rem]">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] py-(--ui-control-py) gap-(--ui-control-gap) text-sm px-[2.234rem]">
   <!--v-if--><span data-slot="button-label" class="truncate text-[#ff0]">Button</span>
   <!--v-if-->
 </button>"

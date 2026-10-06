@@ -4,11 +4,11 @@ import { defineTheme } from '../utils/theme'
 
 export default defineTheme({
   slots: {
-    base: 'rounded-md font-medium inline-flex items-center px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3',
+    base: 'rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3',
     label: 'truncate',
-    leadingIcon: 'shrink-0 size-(--ui-control-icon)',
+    leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
-    trailingIcon: 'shrink-0 size-(--ui-control-icon)'
+    trailingIcon: 'shrink-0'
   },
   variants: {
     ...fieldGroupVariant,
@@ -35,19 +35,29 @@ export default defineTheme({
     },
     size: {
       xs: {
-        base: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] text-xs'
+        base: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-xs',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)'
       },
       sm: {
-        base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)] text-xs'
+        base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-xs',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)'
       },
       md: {
-        base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] text-sm'
+        base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)'
       },
       lg: {
-        base: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)] text-sm'
+        base: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)'
       },
       xl: {
-        base: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)] text-base'
+        base: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)'
       }
     },
     block: {

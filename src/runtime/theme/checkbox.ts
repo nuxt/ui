@@ -13,7 +13,7 @@ export default defineTheme({
     container: 'flex items-center',
     base: 'rounded-sm ring ring-inset ring-strong overflow-hidden focus-visible:outline-none',
     indicator: 'flex items-center justify-center size-full text-accent-contrast bg-accent',
-    icon: 'shrink-0 size-(--ui-control-icon)',
+    icon: 'shrink-0',
     wrapper: 'w-full',
     label: 'block font-medium text-default',
     description: 'text-muted'
@@ -39,7 +39,6 @@ export default defineTheme({
       },
       hidden: {
         base: 'sr-only',
-        icon: 'size-[calc(var(--ui-control-icon)+(--spacing(0.5)))]',
         wrapper: 'flex flex-col items-center gap-1 text-center'
       }
     },
@@ -47,30 +46,35 @@ export default defineTheme({
       xs: {
         root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(2.5)] [--ui-control-icon:--spacing(2.5)]',
         base: 'size-3',
+        icon: 'size-(--ui-control-icon)',
         container: 'h-4',
         wrapper: 'text-xs'
       },
       sm: {
         root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(3)] [--ui-control-icon:--spacing(3)]',
         base: 'size-3.5',
+        icon: 'size-(--ui-control-icon)',
         container: 'h-4',
         wrapper: 'text-xs'
       },
       md: {
         root: '[--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]',
         base: 'size-4',
+        icon: 'size-(--ui-control-icon)',
         container: 'h-5',
         wrapper: 'text-sm'
       },
       lg: {
         root: '[--ui-control-px:--spacing(4)] [--ui-control-py:--spacing(4)] [--ui-control-icon:--spacing(4)]',
         base: 'size-4.5',
+        icon: 'size-(--ui-control-icon)',
         container: 'h-5',
         wrapper: 'text-sm'
       },
       xl: {
         root: '[--ui-control-px:--spacing(4.5)] [--ui-control-py:--spacing(4.5)] [--ui-control-icon:--spacing(4.5)]',
         base: 'size-5',
+        icon: 'size-(--ui-control-icon)',
         container: 'h-6',
         wrapper: 'text-base'
       }
@@ -102,7 +106,8 @@ export default defineTheme({
     {
       indicator: 'hidden',
       class: {
-        container: 'h-auto'
+        container: 'h-auto',
+        icon: 'size-[calc(var(--ui-control-icon)+(--spacing(0.5)))]'
       }
     },
     {

@@ -33,18 +33,23 @@ A control, a Button, a Badge or a field, does not write the padding, gap and ico
 
 ```ts
 slots: {
-  base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)',
-  leadingIcon: 'shrink-0 size-(--ui-control-icon)'
+  base: 'inline-flex items-center',
+  leadingIcon: 'shrink-0'
 },
 variants: {
   size: {
-    md: { base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] text-sm' }
+    md: {
+      base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm',
+      leadingIcon: 'size-(--ui-control-icon)'
+    }
   },
   leading: {
     true: { base: 'ps-[calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]' }
   }
 }
 ```
+
+The classes that read the variables stay in the `size` entry, next to the ones that write them. In the slot they would be dropped by a function slot from an app, and applied to a size an app adds without the variables.
 
 Reach for this before a `size` × something compound: the size writes a value, another variant picks the property that reads it. A compound is hard to override from an app config, a token is one class. A theme that extends Input and drops its `root` (Select, InputDate, InputTime) appends the tokens to `base`.
 
@@ -101,8 +106,8 @@ export default defineTheme({
       soft: { base: 'text-accent-default bg-accent-soft' }
     },
     size: {
-      xs: { base: 'text-xs px-2 py-1', leadingIcon: 'size-3' },
-      md: { base: 'text-sm px-2.5 py-1.5', leadingIcon: 'size-5' }
+      xs: { base: 'text-xs' },
+      md: { base: 'text-sm' }
     }
   },
   defaultVariants: {

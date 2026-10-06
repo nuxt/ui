@@ -1,138 +1,138 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Badge > renders with as correctly 1`] = `
-"<div data-slot="badge" class="font-medium inline-flex items-center px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md">
+"<div data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md">
   <!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Badge > renders with avatar and leadingIcon correctly 1`] = `
-"<span data-slot="badge" class="font-medium inline-flex items-center py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md px-(--ui-control-py)"><span class="iconify i-lucide:arrow-left shrink-0 size-(--ui-control-icon)" aria-hidden="true" data-slot="badge-leadingIcon"></span>
+"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] py-(--ui-control-py) gap-(--ui-control-gap) rounded-md px-(--ui-control-py)"><span class="iconify i-lucide:arrow-left shrink-0 size-(--ui-control-icon)" aria-hidden="true" data-slot="badge-leadingIcon"></span>
 <!--v-if-->
 <!--v-if--></span>"
 `;
 
 exports[`Badge > renders with avatar and trailingIcon correctly 1`] = `
-"<span data-slot="badge" class="font-medium inline-flex items-center py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md px-(--ui-control-py)"><span data-slot="badge-leadingAvatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-4 text-[8px] shrink-0"><img src="https://github.com/benjamincanac.png" width="16" height="16" data-slot="avatar-image" class="size-full rounded-[inherit] object-cover"></span>
+"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] py-(--ui-control-py) gap-(--ui-control-gap) rounded-md px-(--ui-control-py)"><span data-slot="badge-leadingAvatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-4 text-[8px] shrink-0"><img src="https://github.com/benjamincanac.png" width="16" height="16" data-slot="avatar-image" class="size-full rounded-[inherit] object-cover"></span>
 <!--v-if--><span class="iconify i-lucide:arrow-right shrink-0 size-(--ui-control-icon)" aria-hidden="true" data-slot="badge-trailingIcon"></span></span>"
 `;
 
 exports[`Badge > renders with avatar correctly 1`] = `
-"<span data-slot="badge" class="font-medium inline-flex items-center py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md px-(--ui-control-py)"><span data-slot="badge-leadingAvatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-4 text-[8px] shrink-0"><img src="https://github.com/benjamincanac.png" width="16" height="16" data-slot="avatar-image" class="size-full rounded-[inherit] object-cover"></span>
+"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] py-(--ui-control-py) gap-(--ui-control-gap) rounded-md px-(--ui-control-py)"><span data-slot="badge-leadingAvatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-4 text-[8px] shrink-0"><img src="https://github.com/benjamincanac.png" width="16" height="16" data-slot="avatar-image" class="size-full rounded-[inherit] object-cover"></span>
 <!--v-if-->
 <!--v-if--></span>"
 `;
 
 exports[`Badge > renders with class correctly 1`] = `
-"<span data-slot="badge" class="inline-flex items-center px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-full font-bold"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+"<span data-slot="badge" class="inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-full font-bold"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
 <!--v-if--></span>"
 `;
 
-exports[`Badge > renders with default slot correctly 1`] = `"<span data-slot="badge" class="font-medium inline-flex items-center px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md"><!--v-if-->Default slot<!--v-if--></span>"`;
+exports[`Badge > renders with default slot correctly 1`] = `"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md"><!--v-if-->Default slot<!--v-if--></span>"`;
 
 exports[`Badge > renders with icon correctly 1`] = `
-"<span data-slot="badge" class="font-medium inline-flex items-center py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md px-(--ui-control-py)"><span class="iconify i-lucide:rocket shrink-0 size-(--ui-control-icon)" aria-hidden="true" data-slot="badge-leadingIcon"></span>
+"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] py-(--ui-control-py) gap-(--ui-control-gap) rounded-md px-(--ui-control-py)"><span class="iconify i-lucide:rocket shrink-0 size-(--ui-control-icon)" aria-hidden="true" data-slot="badge-leadingIcon"></span>
 <!--v-if-->
 <!--v-if--></span>"
 `;
 
 exports[`Badge > renders with label correctly 1`] = `
-"<span data-slot="badge" class="font-medium inline-flex items-center px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
 <!--v-if--></span>"
 `;
 
 exports[`Badge > renders with leading and icon correctly 1`] = `
-"<span data-slot="badge" class="font-medium inline-flex items-center py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md px-(--ui-control-py)"><span class="iconify i-lucide:arrow-left shrink-0 size-(--ui-control-icon)" aria-hidden="true" data-slot="badge-leadingIcon"></span>
+"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] py-(--ui-control-py) gap-(--ui-control-gap) rounded-md px-(--ui-control-py)"><span class="iconify i-lucide:arrow-left shrink-0 size-(--ui-control-icon)" aria-hidden="true" data-slot="badge-leadingIcon"></span>
 <!--v-if-->
 <!--v-if--></span>"
 `;
 
-exports[`Badge > renders with leading slot correctly 1`] = `"<span data-slot="badge" class="font-medium inline-flex items-center py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md px-(--ui-control-py)">Leading slot<!--v-if--><!--v-if--></span>"`;
+exports[`Badge > renders with leading slot correctly 1`] = `"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] py-(--ui-control-py) gap-(--ui-control-gap) rounded-md px-(--ui-control-py)">Leading slot<!--v-if--><!--v-if--></span>"`;
 
 exports[`Badge > renders with leadingIcon correctly 1`] = `
-"<span data-slot="badge" class="font-medium inline-flex items-center py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md px-(--ui-control-py)"><span class="iconify i-lucide:arrow-left shrink-0 size-(--ui-control-icon)" aria-hidden="true" data-slot="badge-leadingIcon"></span>
+"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] py-(--ui-control-py) gap-(--ui-control-gap) rounded-md px-(--ui-control-py)"><span class="iconify i-lucide:arrow-left shrink-0 size-(--ui-control-icon)" aria-hidden="true" data-slot="badge-leadingIcon"></span>
 <!--v-if-->
 <!--v-if--></span>"
 `;
 
 exports[`Badge > renders with neutral variant outline correctly 1`] = `
-"<span data-slot="badge" class="font-medium inline-flex items-center px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-neutral)] text-accent-default bg-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-neutral)] text-accent-default bg-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
 <!--v-if--></span>"
 `;
 
 exports[`Badge > renders with neutral variant soft correctly 1`] = `
-"<span data-slot="badge" class="font-medium inline-flex items-center px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-neutral)] bg-accent-soft text-accent-default text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-neutral)] bg-accent-soft text-accent-default text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
 <!--v-if--></span>"
 `;
 
 exports[`Badge > renders with neutral variant solid correctly 1`] = `
-"<span data-slot="badge" class="font-medium inline-flex items-center px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-neutral)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-neutral)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
 <!--v-if--></span>"
 `;
 
 exports[`Badge > renders with neutral variant subtle correctly 1`] = `
-"<span data-slot="badge" class="font-medium inline-flex items-center px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-neutral)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-neutral)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
 <!--v-if--></span>"
 `;
 
 exports[`Badge > renders with primary variant outline correctly 1`] = `
-"<span data-slot="badge" class="font-medium inline-flex items-center px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] text-accent-default bg-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] text-accent-default bg-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
 <!--v-if--></span>"
 `;
 
 exports[`Badge > renders with primary variant soft correctly 1`] = `
-"<span data-slot="badge" class="font-medium inline-flex items-center px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
 <!--v-if--></span>"
 `;
 
 exports[`Badge > renders with primary variant solid correctly 1`] = `
-"<span data-slot="badge" class="font-medium inline-flex items-center px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
 <!--v-if--></span>"
 `;
 
 exports[`Badge > renders with primary variant subtle correctly 1`] = `
-"<span data-slot="badge" class="font-medium inline-flex items-center px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
 <!--v-if--></span>"
 `;
 
 exports[`Badge > renders with size lg correctly 1`] = `
-"<span data-slot="badge" class="font-medium inline-flex items-center px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-sm [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-sm [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
 <!--v-if--></span>"
 `;
 
 exports[`Badge > renders with size md correctly 1`] = `
-"<span data-slot="badge" class="font-medium inline-flex items-center px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
 <!--v-if--></span>"
 `;
 
 exports[`Badge > renders with size sm correctly 1`] = `
-"<span data-slot="badge" class="font-medium inline-flex items-center px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-[10px]/3 [--ui-control-px:--spacing(1.5)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(3)] rounded-sm"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-[10px]/3 [--ui-control-px:--spacing(1.5)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(3)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-sm"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
 <!--v-if--></span>"
 `;
 
 exports[`Badge > renders with size xl correctly 1`] = `
-"<span data-slot="badge" class="font-medium inline-flex items-center px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-base [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(6)] rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-base [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(6)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
 <!--v-if--></span>"
 `;
 
 exports[`Badge > renders with size xs correctly 1`] = `
-"<span data-slot="badge" class="font-medium inline-flex items-center px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-[8px]/3 [--ui-control-px:--spacing(1)] [--ui-control-py:--spacing(0.5)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(3)] rounded-sm"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-[8px]/3 [--ui-control-px:--spacing(1)] [--ui-control-py:--spacing(0.5)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(3)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-sm"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
 <!--v-if--></span>"
 `;
 
 exports[`Badge > renders with square correctly 1`] = `
-"<span data-slot="badge" class="font-medium inline-flex items-center py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md px-(--ui-control-py)"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] py-(--ui-control-py) gap-(--ui-control-gap) rounded-md px-(--ui-control-py)"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
 <!--v-if--></span>"
 `;
 
-exports[`Badge > renders with trailing and icon correctly 1`] = `"<span data-slot="badge" class="font-medium inline-flex items-center py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md px-(--ui-control-py)"><!--v-if--><!--v-if--><span class="iconify i-lucide:arrow-right shrink-0 size-(--ui-control-icon)" aria-hidden="true" data-slot="badge-trailingIcon"></span></span>"`;
+exports[`Badge > renders with trailing and icon correctly 1`] = `"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] py-(--ui-control-py) gap-(--ui-control-gap) rounded-md px-(--ui-control-py)"><!--v-if--><!--v-if--><span class="iconify i-lucide:arrow-right shrink-0 size-(--ui-control-icon)" aria-hidden="true" data-slot="badge-trailingIcon"></span></span>"`;
 
-exports[`Badge > renders with trailing slot correctly 1`] = `"<span data-slot="badge" class="font-medium inline-flex items-center py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md px-(--ui-control-py)"><!--v-if--><!--v-if-->Trailing slot</span>"`;
+exports[`Badge > renders with trailing slot correctly 1`] = `"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] py-(--ui-control-py) gap-(--ui-control-gap) rounded-md px-(--ui-control-py)"><!--v-if--><!--v-if-->Trailing slot</span>"`;
 
-exports[`Badge > renders with trailingIcon correctly 1`] = `"<span data-slot="badge" class="font-medium inline-flex items-center py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md px-(--ui-control-py)"><!--v-if--><!--v-if--><span class="iconify i-lucide:arrow-right shrink-0 size-(--ui-control-icon)" aria-hidden="true" data-slot="badge-trailingIcon"></span></span>"`;
+exports[`Badge > renders with trailingIcon correctly 1`] = `"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] py-(--ui-control-py) gap-(--ui-control-gap) rounded-md px-(--ui-control-py)"><!--v-if--><!--v-if--><span class="iconify i-lucide:arrow-right shrink-0 size-(--ui-control-icon)" aria-hidden="true" data-slot="badge-trailingIcon"></span></span>"`;
 
 exports[`Badge > renders with ui correctly 1`] = `
-"<span data-slot="badge" class="font-medium inline-flex items-center px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate font-bold">Badge</span>
+"<span data-slot="badge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md"><!--v-if--><span data-slot="badge-label" class="truncate font-bold">Badge</span>
 <!--v-if--></span>"
 `;

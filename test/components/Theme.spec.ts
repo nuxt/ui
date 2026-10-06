@@ -190,7 +190,7 @@ describe('Theme', () => {
 
     const classes = wrapper.find('button').classes()
     expect(classes).toContain('p-3')
-    expect(classes).not.toContain('p-1.5')
+    expect(classes).not.toContain('px-(--ui-control-py)')
   })
 
   test('a nested :variants wins over an outer :ui', async () => {

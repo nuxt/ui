@@ -19,11 +19,11 @@ export default defineTheme({
   slots: {
     root: 'relative inline-flex items-center',
     base: 'w-full rounded-md border-0 appearance-none text-strong placeholder:text-faint disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
-    leading: 'absolute inset-y-0 inset-s-0 flex items-center ps-(--ui-control-px)',
-    leadingIcon: 'shrink-0 text-faint size-(--ui-control-icon)',
+    leading: 'absolute inset-y-0 inset-s-0 flex items-center',
+    leadingIcon: 'shrink-0 text-faint',
     leadingAvatar: 'shrink-0',
-    trailing: 'absolute inset-y-0 inset-e-0 flex items-center pe-(--ui-control-px)',
-    trailingIcon: 'shrink-0 text-faint size-(--ui-control-icon)'
+    trailing: 'absolute inset-y-0 inset-e-0 flex items-center',
+    trailingIcon: 'shrink-0 text-faint'
   },
   variants: {
     ...fieldGroupVariantWithRoot,
@@ -31,23 +31,43 @@ export default defineTheme({
     size: {
       xs: {
         root: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)]',
-        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm/4'
+        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm/4',
+        leading: 'ps-(--ui-control-px)',
+        trailing: 'pe-(--ui-control-px)',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)'
       },
       sm: {
         root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)]',
-        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm/4'
+        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm/4',
+        leading: 'ps-(--ui-control-px)',
+        trailing: 'pe-(--ui-control-px)',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)'
       },
       md: {
         root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)]',
-        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base/5'
+        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base/5',
+        leading: 'ps-(--ui-control-px)',
+        trailing: 'pe-(--ui-control-px)',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)'
       },
       lg: {
         root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)]',
-        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base/5'
+        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base/5',
+        leading: 'ps-(--ui-control-px)',
+        trailing: 'pe-(--ui-control-px)',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)'
       },
       xl: {
         root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)]',
-        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base'
+        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base',
+        leading: 'ps-(--ui-control-px)',
+        trailing: 'pe-(--ui-control-px)',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)'
       }
     },
     // Equal padding. Before `leading` and `trailing`, so the room for an icon stays
