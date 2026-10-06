@@ -456,8 +456,8 @@ catalogs:
       specifier: ^0.7.0
       version: 0.7.0
     nuxt-component-meta:
-      specifier: https://pkg.pr.new/nuxt-component-meta@9f64248
-      version: https://pkg.pr.new/nuxt-component-meta@9f64248
+      specifier: ^0.18.0
+      version: 0.18.0
     nuxt-llms:
       specifier: ^0.2.0
       version: 0.2.0
@@ -990,7 +990,7 @@ importers:
         version: 0.7.0(db86f642c91c683ac4a15c3cb7b78e81)
       nuxt-component-meta:
         specifier: 'catalog:'
-        version: https://pkg.pr.new/nuxt-component-meta@9f64248(@nuxt/schema@4.6.0)(@oxc-project/types@0.151.0)(confbox@0.3.1)(dotenv@17.4.2)(esbuild@0.28.0)(giget@3.3.1)(rolldown@1.2.11)(rollup@4.60.4)(vite@8.3.2(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.1))
+        version: 0.18.0(@nuxt/schema@4.6.0)(@oxc-project/types@0.151.0)(confbox@0.3.1)(dotenv@17.4.2)(esbuild@0.28.0)(giget@3.3.1)(rolldown@1.2.11)(rollup@4.60.4)(vite@8.3.2(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.1))
       nuxt-llms:
         specifier: 'catalog:'
         version: 0.2.0(@nuxt/schema@4.6.0)(confbox@0.3.1)(dotenv@17.4.2)(giget@3.3.1)(jiti@2.7.0)(magic-string@1.4.2)(mlly@1.8.2)(oxc-parser@0.151.0)(rolldown@1.2.11)(unplugin@3.4.0(esbuild@0.28.0)(rolldown@1.2.11)(rollup@4.60.4)(vite@8.3.2(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.1)))
@@ -7837,11 +7837,6 @@ packages:
     resolution: {integrity: sha512-Lo++ctinehNtQvU1SdYdIfYvhUqFtP5nOQsMvbrpFYh53TqwoS97BrS/tjWQe68cfXQaerzhKPFY1Xb1EH4mJg==}
     hasBin: true
 
-  nuxt-component-meta@https://pkg.pr.new/nuxt-component-meta@9f64248:
-    resolution: {integrity: sha512-TW7jD8bbUyhSKsVQNBqihwdLXvvHpWZwKfhsUXdpLgnc1654zFs6ybdenXS2udPD41mSxPr6jM3IvMo6wvMPnw==, tarball: https://pkg.pr.new/nuxt-component-meta@9f64248}
-    version: 0.18.0
-    hasBin: true
-
   nuxt-llms@0.2.0:
     resolution: {integrity: sha512-GoEW00x8zaZ1wS0R0aOYptt3b54JEaRwlyVtuAiQoH51BwYdjN5/3+00/+4wi39M5cT4j5XcnGwOxJ7v4WVb9A==}
 
@@ -10647,7 +10642,7 @@ snapshots:
       birpc: 4.0.0
       destr: 2.0.5
       devframe: 0.7.14(@modelcontextprotocol/sdk@1.32.0(supports-color@10.2.2)(zod@4.6.5))(cac@6.7.14)(srvx@0.11.22)(typescript@6.0.3)
-      nostics: 1.2.0
+      nostics: 1.3.0
       pathe: 2.0.3
       perfect-debounce: 2.1.0
       tinyexec: 1.3.1
@@ -10658,7 +10653,7 @@ snapshots:
     dependencies:
       '@json-render/core': 0.19.0(zod@4.6.5)
       devframe: 0.7.14(@modelcontextprotocol/sdk@1.32.0(supports-color@10.2.2)(zod@4.6.5))(cac@6.7.14)(srvx@0.11.22)(typescript@6.0.3)
-      nostics: 1.2.0
+      nostics: 1.3.0
       zod: 4.6.5
     optionalDependencies:
       '@devframes/hub': 0.7.14(devframe@0.7.14(@modelcontextprotocol/sdk@1.32.0(supports-color@10.2.2)(zod@4.6.5))(cac@6.7.14)(srvx@0.11.22)(typescript@6.0.3))
@@ -11579,7 +11574,7 @@ snapshots:
       scule: 1.3.0
       semver: 7.8.5
       srvx: 0.11.22
-      std-env: 4.2.0
+      std-env: 4.3.0
       tinyclip: 0.1.15
       tinyexec: 1.3.1
       ufo: 1.6.4
@@ -14773,7 +14768,7 @@ snapshots:
       devframe: 0.7.14(@modelcontextprotocol/sdk@1.32.0(supports-color@10.2.2)(zod@4.6.5))(cac@6.7.14)(srvx@0.11.22)(typescript@6.0.3)
       local-pkg: 1.2.1
       mlly: 1.8.2
-      nostics: 1.2.0
+      nostics: 1.3.0
       nypm: 0.6.10
       vite: 8.3.2(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.1)
     transitivePeerDependencies:
@@ -14790,7 +14785,7 @@ snapshots:
       devframe: 0.7.14(@modelcontextprotocol/sdk@1.32.0(supports-color@10.2.2)(zod@4.6.5))(cac@7.0.0)(srvx@0.11.22)(typescript@6.0.3)
       local-pkg: 1.2.1
       mlly: 1.8.2
-      nostics: 1.2.0
+      nostics: 1.3.0
       nypm: 0.6.10
       vite: 8.3.2(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.1)
     transitivePeerDependencies:
@@ -15972,7 +15967,7 @@ snapshots:
       destr: 2.0.5
       h3: 1.15.11
       mrmime: 2.0.1
-      nostics: 1.2.0
+      nostics: 1.3.0
       pathe: 2.0.3
       ufo: 1.6.4
       valibot: 1.5.0(typescript@6.0.3)
@@ -15992,7 +15987,7 @@ snapshots:
       destr: 2.0.5
       h3: 1.15.11
       mrmime: 2.0.1
-      nostics: 1.2.0
+      nostics: 1.3.0
       pathe: 2.0.3
       ufo: 1.6.4
       valibot: 1.5.0(typescript@6.0.3)
@@ -18709,40 +18704,6 @@ snapshots:
       - unplugin
 
   nuxt-component-meta@0.18.0(@nuxt/schema@4.6.0)(@oxc-project/types@0.151.0)(confbox@0.3.1)(dotenv@17.4.2)(esbuild@0.28.0)(giget@3.3.1)(rolldown@1.2.11)(rollup@4.60.4)(vite@8.3.2(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.1)):
-    dependencies:
-      '@nuxt/kit': 4.6.0(@nuxt/schema@4.6.0)(confbox@0.3.1)(dotenv@17.4.2)(giget@3.3.1)(jiti@2.7.0)(magic-string@0.30.21)(mlly@1.8.2)(oxc-parser@0.139.0)(rolldown@1.2.11)(unplugin@3.4.0(esbuild@0.28.0)(rolldown@1.2.11)(rollup@4.60.4)(vite@8.3.2(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.1)))
-      citty: 0.2.2
-      defu: 6.1.7
-      jiti: 2.7.0
-      magic-string: 0.30.21
-      mlly: 1.8.2
-      ohash: 2.0.12
-      oxc-parser: 0.139.0
-      oxc-walker: 1.1.1(@oxc-project/types@0.151.0)(oxc-parser@0.139.0)(rolldown@1.2.11)
-      pathe: 2.0.3
-      scule: 1.3.0
-      typescript: 6.0.3
-      ufo: 1.6.4
-      unplugin: 3.4.0(esbuild@0.28.0)(rolldown@1.2.11)(rollup@4.60.4)(vite@8.3.2(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.1))
-      vue-component-meta: 3.3.12(typescript@6.0.3)
-    transitivePeerDependencies:
-      - '@farmfe/core'
-      - '@nuxt/schema'
-      - '@oxc-project/types'
-      - '@rsbuild/core'
-      - '@rspack/core'
-      - bun-types-no-globals
-      - confbox
-      - dotenv
-      - esbuild
-      - giget
-      - rolldown
-      - rollup
-      - unloader
-      - vite
-      - webpack
-
-  nuxt-component-meta@https://pkg.pr.new/nuxt-component-meta@9f64248(@nuxt/schema@4.6.0)(@oxc-project/types@0.151.0)(confbox@0.3.1)(dotenv@17.4.2)(esbuild@0.28.0)(giget@3.3.1)(rolldown@1.2.11)(rollup@4.60.4)(vite@8.3.2(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.1)):
     dependencies:
       '@nuxt/kit': 4.6.0(@nuxt/schema@4.6.0)(confbox@0.3.1)(dotenv@17.4.2)(giget@3.3.1)(jiti@2.7.0)(magic-string@0.30.21)(mlly@1.8.2)(oxc-parser@0.139.0)(rolldown@1.2.11)(unplugin@3.4.0(esbuild@0.28.0)(rolldown@1.2.11)(rollup@4.60.4)(vite@8.3.2(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.1)))
       citty: 0.2.2
