@@ -167,10 +167,6 @@ name: 'toast-actions-example'
 ---
 ::
 
-::tip
-Set `closeOnClick: false` on an action to keep the Toast open when it's clicked. :badge{label="Soon"}
-::
-
 ### Duration
 
 Pass a `duration` field to the `toast.add` method to change how long the Toast remains visible (in milliseconds). Defaults to `5000`.
