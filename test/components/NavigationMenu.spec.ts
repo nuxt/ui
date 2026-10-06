@@ -1,3 +1,4 @@
+import { nextTick } from 'vue'
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
@@ -146,6 +147,22 @@ describe('NavigationMenu', () => {
 
     await wrapper.find('[data-slot="linkTrailing"]').trigger('click')
     expect(wrapper.find('[data-slot="content"]').attributes('data-state')).toBe('open')
+  })
+
+  it('toggles a horizontal item with `to` from its trailing area without navigating', async () => {
+    const wrapper = await mountSuspended(NavigationMenu, {
+      props: {
+        orientation: 'horizontal',
+        items: [{ label: 'Group', to: '/group', children: [{ label: 'Child', to: '/child' }] }]
+      }
+    })
+
+    const event = new MouseEvent('click', { bubbles: true, cancelable: true })
+    wrapper.find('[data-slot="linkTrailing"]').element.dispatchEvent(event)
+    await nextTick()
+
+    expect(event.defaultPrevented).toBe(true)
+    expect(wrapper.find('[data-slot="link"]').attributes('data-state')).toBe('open')
   })
 
   it('passes accessibility tests', async () => {
