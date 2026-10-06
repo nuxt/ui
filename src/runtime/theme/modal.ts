@@ -10,7 +10,7 @@ export default defineTheme({
     footer: 'flex items-center gap-1.5 p-4 sm:px-6',
     title: 'text-strong font-semibold',
     description: 'mt-1 text-muted text-sm',
-    close: 'absolute top-4 end-4'
+    close: 'absolute top-4 inset-e-4'
   },
   variants: {
     transition: {
@@ -53,7 +53,7 @@ export default defineTheme({
     scrollable: false,
     fullscreen: false,
     class: {
-      content: 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden'
+      content: 'top-1/2 left-1/2 -translate-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden'
     }
   }]
 })

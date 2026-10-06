@@ -69,7 +69,7 @@ export default defineTheme({
       grid: {
         fileWrapper: 'hidden',
         fileLeadingAvatar: 'size-full rounded-lg',
-        fileTrailingButton: 'absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg'
+        fileTrailingButton: 'absolute -top-1.5 -inset-e-1.5 p-0 rounded-full border-2 border-bg'
       }
     },
     position: {

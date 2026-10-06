@@ -19,10 +19,10 @@ export default defineTheme({
   slots: {
     root: 'relative inline-flex items-center',
     base: 'w-full rounded-md border-0 appearance-none text-strong placeholder:text-faint disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
-    leading: 'absolute inset-y-0 start-0 flex items-center',
+    leading: 'absolute inset-y-0 inset-s-0 flex items-center',
     leadingIcon: 'shrink-0 text-faint',
     leadingAvatar: 'shrink-0',
-    trailing: 'absolute inset-y-0 end-0 flex items-center',
+    trailing: 'absolute inset-y-0 inset-e-0 flex items-center',
     trailingIcon: 'shrink-0 text-faint'
   },
   variants: {

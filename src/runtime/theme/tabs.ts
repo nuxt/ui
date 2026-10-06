@@ -94,8 +94,8 @@ export default defineTheme({
     variant: 'link',
     class: {
       list: 'border-s -ms-px',
-      indicator: '-start-px w-px',
-      trigger: 'in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:inset-y-0 in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:-start-[calc(var(--spacing)+1px)] in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:w-px'
+      indicator: '-inset-s-px w-px',
+      trigger: 'in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:inset-y-0 in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:-inset-s-[calc(var(--spacing)+1px)] in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:w-px'
     }
   }],
   defaultVariants: {

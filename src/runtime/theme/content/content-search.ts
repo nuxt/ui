@@ -8,7 +8,7 @@ export default defineTheme({
   variants: {
     fullscreen: {
       false: {
-        modal: 'sm:max-w-3xl h-full sm:h-[28rem]'
+        modal: 'sm:max-w-3xl h-full sm:h-112'
       }
     },
     size: {

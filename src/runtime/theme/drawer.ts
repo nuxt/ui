@@ -4,7 +4,7 @@ export default defineTheme({
   slots: {
     overlay: 'fixed inset-0 bg-backdrop',
     content: 'fixed bg-default ring ring-default flex focus:outline-none',
-    handle: 'shrink-0 !bg-strong transition-opacity ease-out',
+    handle: 'shrink-0 bg-strong! transition-opacity ease-out',
     container: 'w-full flex flex-col gap-4 p-4 overflow-y-auto',
     header: 'flex items-center gap-1.5 min-h-8',
     wrapper: 'min-w-0 flex-1',
@@ -23,7 +23,7 @@ export default defineTheme({
       },
       right: {
         content: 'flex-row rtl:flex-row-reverse',
-        handle: '!ml-4'
+        handle: 'ml-4!'
       },
       bottom: {
         content: 'mt-24 flex-col',
@@ -31,7 +31,7 @@ export default defineTheme({
       },
       left: {
         content: 'flex-row-reverse rtl:flex-row',
-        handle: '!mr-4'
+        handle: 'mr-4!'
       }
     },
     inset: {
@@ -47,7 +47,7 @@ export default defineTheme({
     direction: ['top', 'bottom'],
     class: {
       content: 'h-auto max-h-[96%]',
-      handle: '!w-12 !h-1.5 mx-auto'
+      handle: 'w-12! h-1.5! mx-auto'
     }
   }, {
     direction: ['top', 'bottom'],
@@ -59,7 +59,7 @@ export default defineTheme({
     direction: ['right', 'left'],
     class: {
       content: 'w-auto max-w-[calc(100%-2rem)]',
-      handle: '!h-12 !w-1.5 mt-auto mb-auto'
+      handle: 'h-12! w-1.5! my-auto'
     }
   }, {
     direction: ['right', 'left'],

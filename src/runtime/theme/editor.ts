@@ -31,7 +31,7 @@ export default defineTheme({
       '[&_h3>code]:text-lg/5',
       // Blockquote & HR
       '[&_blockquote]:border-s-4 [&_blockquote]:border-strong [&_blockquote]:ps-4 [&_blockquote]:italic',
-      '[&_[data-type=horizontalRule]]:my-8 [&_[data-type=horizontalRule]]:py-2',
+      '**:data-[type=horizontalRule]:my-8 **:data-[type=horizontalRule]:py-2',
       '[&_hr]:border-t [&_hr]:border-default',
       // Code blocks
       '[&_pre]:text-sm/6 [&_pre]:border [&_pre]:border-default [&_pre]:bg-tint [&_pre]:rounded-md [&_pre]:px-4 [&_pre]:py-3 [&_pre]:whitespace-pre-wrap [&_pre]:wrap-break-word [&_pre]:overflow-x-auto',

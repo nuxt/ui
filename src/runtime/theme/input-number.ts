@@ -32,12 +32,12 @@ export default defineTheme({
     orientation: {
       horizontal: {
         base: 'text-center',
-        increment: 'inset-y-0 end-0 pe-1',
-        decrement: 'inset-y-0 start-0 ps-1'
+        increment: 'inset-y-0 inset-e-0 pe-1',
+        decrement: 'inset-y-0 inset-s-0 ps-1'
       },
       vertical: {
-        increment: 'top-0 end-0 pe-1 [&>button]:py-0 scale-80',
-        decrement: 'bottom-0 end-0 pe-1 [&>button]:py-0 scale-80'
+        increment: 'top-0 inset-e-0 pe-1 [&>button]:py-0 scale-80',
+        decrement: 'bottom-0 inset-e-0 pe-1 [&>button]:py-0 scale-80'
       }
     },
     highlight: {
