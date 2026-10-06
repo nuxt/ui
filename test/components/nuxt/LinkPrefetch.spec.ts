@@ -50,6 +50,7 @@ function waitForObserver() {
 describe('Link prefetch', () => {
   let wrapper: Awaited<ReturnType<typeof mountSuspended>> | undefined
   let unhook: (() => void) | undefined
+  let restoreScheduler: (() => void) | undefined
 
   function spyOnPrefetch() {
     const spy = vi.fn()
@@ -60,6 +61,8 @@ describe('Link prefetch', () => {
   afterEach(() => {
     wrapper?.unmount()
     unhook?.()
+    restoreScheduler?.()
+    restoreScheduler = undefined
     vi.unstubAllGlobals()
     MockIntersectionObserver.instances = []
   })
@@ -122,6 +125,9 @@ describe('Link prefetch', () => {
     const scheduler = nuxtApp._prefetch
     const promote = vi.fn()
     nuxtApp._prefetch = { promote } as unknown as typeof scheduler
+    restoreScheduler = () => {
+      nuxtApp._prefetch = scheduler
+    }
     const spy = spyOnPrefetch()
     wrapper = await mountSuspended(Link, { props: { to: '/about?tab=1#team' }, slots: { default: () => 'About' } })
     const link = wrapper.get('a')
@@ -136,8 +142,6 @@ describe('Link prefetch', () => {
     await link.trigger('pointerenter')
     await link.trigger('focus')
     await link.trigger('pointerdown')
-
-    nuxtApp._prefetch = scheduler
 
     expect(spy).toHaveBeenCalledTimes(1)
     expect(promote).toHaveBeenCalledTimes(3)
