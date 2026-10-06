@@ -69,6 +69,23 @@ describe('Toast', () => {
     toast.clear()
   })
 
+  it('marks stacked toasts as collapsed', async () => {
+    const toast = useToast()
+    toast.clear()
+
+    const wrapper = await mountSuspended(Toaster, { props: { portal: false, expand: false } })
+    toast.add({ title: 'Back' })
+    toast.add({ title: 'Front' })
+
+    await vi.waitFor(() => expect(wrapper.findAll('li[data-slot="base"]')).toHaveLength(2), { timeout: 4000 })
+    const [back, front] = wrapper.findAll('li[data-slot="base"]')
+
+    expect([back!.attributes('data-collapsed'), back!.attributes('data-front')]).toEqual(['true', 'false'])
+    expect([front!.attributes('data-collapsed'), front!.attributes('data-front')]).toEqual(['true', 'true'])
+
+    toast.clear()
+  })
+
   it('keeps the toast open when an action has closeOnClick false', async () => {
     const wrapper = await mountSuspended(ToastWrapper, {
       props: { title: 'Toast', actions: [{ label: 'Keep', closeOnClick: false }, { label: 'Close' }] }
@@ -100,11 +117,6 @@ describe('Toast', () => {
         // Fix any of the following:
         //   ARIA role alert is not allowed for given element
         'aria-allowed-role': { enabled: false },
-        // "ARIA hidden element must not be focusable or contain focusable elements (aria-hidden-focus)"
-
-        // Fix all of the following:
-        //   Focusable content should have tabindex="-1" or be removed from the DOM
-        'aria-hidden-focus': { enabled: false },
         // "<ul> and <ol> must only directly contain <li>, <script> or <template> elements (list)"
 
         // Fix all of the following:
