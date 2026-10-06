@@ -113,7 +113,7 @@ catalog:
   mlly: ^1.8.2
   motion-v: ^2.5.2
   nuxt: ^4.6.0
-  nuxt-agent-discovery: ^0.7.0
+  nuxt-agent-discovery: ^0.7.1
   nuxt-component-meta: ^0.18.0
   nuxt-llms: ^0.2.0
   nuxt-og-image: ^6.10.3
@@ -197,3 +197,4 @@ minimumReleaseAgeExclude:
   - "@nuxt/vite-builder@4.6.0"
   - "@nuxt/vite-server@4.6.0"
   - nuxt@4.6.0
+  - nuxt-agent-discovery@0.7.1
