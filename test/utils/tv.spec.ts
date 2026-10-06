@@ -5,6 +5,8 @@ import type { TVTheme, VariantProps } from '../../src/runtime/types/tv'
 import { extendTheme } from '../../src/runtime/utils/theme'
 import buttonTheme from '../../src/runtime/theme/button'
 import selectTheme from '../../src/runtime/theme/select'
+import inputTheme from '../../src/runtime/theme/input'
+import inputNumberTheme from '../../src/runtime/theme/input-number'
 import stepsTheme from '../../src/runtime/theme/prose/steps'
 
 // Cast to a permissive local signature: the strongly-typed `tv` is what
@@ -633,6 +635,38 @@ describe('tv override layers', () => {
 
   it('keeps the theme variants on top of an override slot replacer', () => {
     expect(tvt(theme, { slots: { label: () => 'font-bold text-default' } })().label()).toBe('font-bold text-faint')
+  })
+})
+
+describe('tv control room', () => {
+  // The room a field makes for an icon has to survive a padding an app sets, and
+  // still give way to the side padding itself
+  const start = '[padding-inline-start:calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]'
+  const end = '[padding-inline-end:calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]'
+  const base = (theme: any, overrides: any, props: any, cls?: string) => ((tv as any)(theme, overrides)(props).base(cls ? { class: cls } : undefined) as string).split(' ')
+
+  it('keeps the icon room under a padding shorthand from any override', () => {
+    for (const classes of [
+      base(inputTheme, { variants: { size: { md: { base: 'px-3' } } } }, { leading: true, trailing: true }),
+      base(inputTheme, { slots: { base: 'px-3' } }, { leading: true, trailing: true }),
+      base(inputTheme, undefined, { leading: true, trailing: true }, 'px-3'),
+      base(selectTheme, { slots: { base: 'p-4' } }, { leading: true, trailing: true })
+    ]) {
+      expect(classes).toEqual(expect.arrayContaining([start, end]))
+    }
+    expect(base(inputNumberTheme, { slots: { base: 'px-3' } }, { increment: true, decrement: true })).toEqual(expect.arrayContaining([start, end, 'px-3']))
+  })
+
+  it('lets the side padding come after the room', () => {
+    // Tailwind emits `ps-*` after an arbitrary `padding-inline-start`, so it wins in the CSS
+    const classes = base(inputTheme, { slots: { base: 'ps-12' } }, { leading: true })
+    expect(classes.indexOf('ps-12')).toBeGreaterThan(classes.indexOf(start))
+  })
+
+  it('leaves a field without an icon alone', () => {
+    const classes = base(inputTheme, undefined, {})
+    expect(classes).not.toContain(start)
+    expect(classes).not.toContain(end)
   })
 })
 
