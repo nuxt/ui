@@ -7,7 +7,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Toaster = ComponentConfig<typeof theme, AppConfig, 'toaster'>
 
-export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'> {
+export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection' | 'limit' | 'toastManager'> {
   /**
    * The position on the screen to display the toasts.
    * @defaultValue 'bottom-right'
@@ -67,6 +67,9 @@ const _props = withDefaults(defineProps<ToasterProps>(), {
   max: 5
 })
 defineSlots<ToasterSlots>()
+
+// `ToastProvider` is the root, attributes would fall through as its props (`limit`, `toastManager`).
+defineOptions({ inheritAttrs: false })
 
 const props = useComponentProps('toaster', _props)
 
@@ -132,7 +135,7 @@ function getOffset(index: number) {
       :progress="props.progress"
       v-bind="omit(toast, ['id', 'close', '_duplicate', '_updated', 'onClick'])"
       :close="(toast.close as boolean)"
-      :data-expanded="expanded"
+      :data-collapsed="!expanded"
       :data-front="!expanded && index === toasts.length - 1"
       :data-pulsing="toast._duplicate ? (toast._duplicate % 2 === 0 ? 'even' : 'odd') : undefined"
       :style="{

@@ -72,7 +72,7 @@ exports[`Checkbox > renders with description slot correctly 1`] = `
 
 exports[`Checkbox > renders with disabled correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row opacity-75">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 cursor-not-allowed outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-disabled="" disabled="">
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 cursor-not-allowed outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" aria-disabled="true" data-disabled="" disabled="">
       <!---->
     </button>
     <!--v-if-->
