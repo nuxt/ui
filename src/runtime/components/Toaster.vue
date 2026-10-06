@@ -68,6 +68,9 @@ const _props = withDefaults(defineProps<ToasterProps>(), {
 })
 defineSlots<ToasterSlots>()
 
+// `ToastProvider` is the root, attributes would fall through as its props (`limit`, `toastManager`).
+defineOptions({ inheritAttrs: false })
+
 const props = useComponentProps('toaster', _props)
 
 const { toasts, remove } = useToast()
