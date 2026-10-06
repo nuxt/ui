@@ -257,7 +257,7 @@
     "embla-carousel-wheel-gestures": "^8",
     "joi": "^18",
     "superstruct": "^2",
-    "tailwindcss": "^4",
+    "tailwindcss": "^4.2",
     "typescript": "^5.6.3 || ^6 || ^7",
     "valibot": "^1",
     "vue-router": "^4.5.0 || ^5",
