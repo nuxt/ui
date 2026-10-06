@@ -352,7 +352,8 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem, trailingTrigger
   }
 }
 
-// Bound on the link so it runs after the trigger's click handler, which ignores prevented events
+// Bound on the link so it runs after the trigger's click handler, which ignores prevented events,
+// and before `LinkBase` calls `navigate`, which bails out on a prevented event.
 function onLinkClick(e: Event) {
   if (trailingClicks.has(e)) {
     e.preventDefault()

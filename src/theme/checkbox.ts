@@ -1,7 +1,7 @@
 import type { ModuleOptions } from '../module'
 
 // Shared with `checkbox-group` and `radio-group`, which style the same states on their own slots.
-export const hover = 'hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:'
+export const hover = 'hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:'
 
 // `list` puts focus on the control, which is the click target there. `card` and `table`
 // render the root as a label wrapping everything, so focus belongs on the card itself,

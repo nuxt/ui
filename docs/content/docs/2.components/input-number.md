@@ -78,6 +78,40 @@ props:
 ---
 ::
 
+### Starting Value :badge{label="Soon" class="align-text-top"}
+
+Use the `starting-value` prop to set the value of the first increment or decrement when the InputNumber is empty. Defaults to `min`, or `0` when `min` is not set.
+
+::component-code
+---
+props:
+  startingValue: 18
+  placeholder: 'Age'
+---
+::
+
+### Allow Invalid :badge{label="Soon" class="align-text-top"}
+
+Use the `allow-invalid` prop to keep a typed value that is out of the `min` / `max` range or off the `step` grid. The increment and decrement buttons still clamp and snap the value.
+
+::component-code
+---
+ignore:
+  - modelValue
+external:
+  - modelValue
+props:
+  modelValue: 5
+  min: 0
+  max: 10
+  allowInvalid: true
+---
+::
+
+::note
+The InputNumber doesn't flag the value as invalid, validating it is up to you.
+::
+
 ### Orientation
 
 Use the `orientation` prop to change the orientation of the InputNumber.

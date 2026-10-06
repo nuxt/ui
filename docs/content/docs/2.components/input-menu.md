@@ -339,6 +339,35 @@ props:
 ---
 ::
 
+### Unmount :badge{label="Soon" class="align-text-top"}
+
+Use the `unmount-on-hide` prop to prevent the content from being unmounted when the InputMenu is closed. Defaults to `true`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+  - unmountOnHide
+external:
+  - items
+  - modelValue
+props:
+  modelValue: 'Backlog'
+  unmountOnHide: false
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+---
+::
+
+::note
+This prop has no effect when `mode` is set to `autocomplete`.
+::
+
 ### Color
 
 Use the `color` prop to change the ring color when the InputMenu is focused.

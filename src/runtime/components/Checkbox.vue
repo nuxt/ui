@@ -64,12 +64,13 @@ export interface CheckboxSlots {
 
 <script setup lang="ts" generic="T = boolean">
 import { computed, useAttrs, useId } from 'vue'
-import { Primitive, CheckboxRoot, CheckboxIndicator, Label } from 'reka-ui'
+import { Primitive, CheckboxRoot, CheckboxIndicator, Label, injectCheckboxGroupRootContext } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useFormField } from '../composables/useFormField'
+import { compare } from '../utils'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
@@ -97,6 +98,18 @@ const size = computed(() => formFieldSize.value ?? props.size)
 
 const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
+// Once a CheckboxGroup reaches its `max`, the unchecked checkboxes stay focusable but can't be checked.
+const checkboxGroupContext = injectCheckboxGroupRootContext(null)
+const maxReached = computed(() => {
+  const max = checkboxGroupContext?.max.value
+  if (!checkboxGroupContext || max === null || max === undefined) {
+    return false
+  }
+
+  const values = checkboxGroupContext.modelValue.value ?? []
+  return values.length >= max && !values.some(value => compare(value, props.value))
+})
+
 // When the indicator is hidden the checked icon is never visible, so `icon` renders above the
 // label instead. No `appConfig` fallback here, an unset `icon` must render nothing.
 const labelIcon = computed(() => props.indicator === 'hidden' ? props.icon : undefined)
@@ -117,7 +130,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.checkbox || {}) 
   indicator: props.indicator,
   highlight: highlight.value,
   required: props.required,
-  disabled: disabled.value
+  disabled: disabled.value || maxReached.value
 }))
 
 function onUpdate(value: any) {
