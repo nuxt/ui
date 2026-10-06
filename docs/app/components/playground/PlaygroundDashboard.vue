@@ -42,6 +42,7 @@ const progress = ref(75)
             color="neutral"
             variant="ghost"
             size="sm"
+            square
             aria-label="Actions"
           />
         </UDropdownMenu>

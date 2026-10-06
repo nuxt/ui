@@ -26,6 +26,8 @@ export interface BadgeProps extends Omit<UseComponentIconsProps, 'loading' | 'lo
    * @defaultValue 'md'
    */
   size?: Badge['variants']['size']
+  /** Render the badge with equal padding on all sides. */
+  square?: boolean
   class?: any
   ui?: Badge['slots']
 }
@@ -67,7 +69,7 @@ const ui = computed(() => tv(theme, overrides.value)({
   color: props.color,
   variant: props.variant,
   size: fieldGroupSize.value ?? props.size,
-  square: !slots.default && !props.label,
+  square: props.square || (!slots.default && !props.label),
   fieldGroup: orientation.value
 }))
 </script>

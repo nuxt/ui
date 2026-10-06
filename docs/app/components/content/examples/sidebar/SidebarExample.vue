@@ -153,7 +153,8 @@ defineShortcuts(extractShortcuts(teamsItems.value))
             trailing-icon="i-lucide-chevrons-up-down"
             color="neutral"
             variant="ghost"
-            class="w-full data-[state=open]:bg-soft overflow-hidden px-(--ui-control-py)"
+            square
+            class="w-full data-[state=open]:bg-soft overflow-hidden"
             :ui="{
               trailingIcon: 'text-faint ms-auto'
             }"
@@ -182,7 +183,8 @@ defineShortcuts(extractShortcuts(teamsItems.value))
             trailing-icon="i-lucide-chevrons-up-down"
             color="neutral"
             variant="ghost"
-            class="w-full data-[state=open]:bg-soft overflow-hidden px-(--ui-control-py)"
+            square
+            class="w-full data-[state=open]:bg-soft overflow-hidden"
             :ui="{
               trailingIcon: 'text-faint ms-auto'
             }"

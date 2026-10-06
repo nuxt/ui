@@ -183,7 +183,7 @@ describe('Theme', () => {
       components: { Theme, Button },
       template: `
         <Theme :ui="{ button: { base: 'p-3' } }">
-          <Button icon="i-lucide-plus" />
+          <Button icon="i-lucide-plus" square />
         </Theme>
       `
     })

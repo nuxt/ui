@@ -24,6 +24,8 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
    * @defaultValue 'md'
    */
   size?: Button['variants']['size']
+  /** Render the button with equal padding on all sides. */
+  square?: boolean
   /** Render the button full width. */
   block?: boolean
   /** Set loading state automatically based on the `@click` promise state */
@@ -112,7 +114,7 @@ const ui = computed(() => tv(theme, overrides.value)({
   size: buttonSize.value ?? props.size,
   loading: isLoading.value,
   block: props.block,
-  square: !slots.default && !props.label,
+  square: props.square || (!slots.default && !props.label),
   leading: isLeading.value,
   trailing: isTrailing.value,
   fieldGroup: orientation.value

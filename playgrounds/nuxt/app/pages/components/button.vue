@@ -34,7 +34,7 @@ function onClick() {
     <UButton label="Icon" icon="i-lucide-rocket" v-bind="props" />
     <UButton label="Icon" icon="i-lucide-chevron-down" trailing v-bind="props" />
     <UButton label="Avatar" :avatar="{ src: 'https://github.com/benjamincanac.png' }" v-bind="props" />
-    <UButton icon="i-lucide-rocket" v-bind="props" />
-    <UButton :avatar="{ src: 'https://github.com/benjamincanac.png' }" v-bind="props" />
+    <UButton icon="i-lucide-rocket" v-bind="props" square />
+    <UButton :avatar="{ src: 'https://github.com/benjamincanac.png' }" v-bind="props" square />
   </Matrix>
 </template>

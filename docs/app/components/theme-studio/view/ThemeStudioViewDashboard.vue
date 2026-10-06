@@ -550,6 +550,7 @@ const pageTitles: Record<Page, string> = {
             color="neutral"
             variant="ghost"
             block
+            :square="collapsed"
             class="data-[state=open]:bg-soft"
             :class="[!collapsed && 'py-2']"
             :ui="{ trailingIcon: 'text-faint' }"
@@ -592,6 +593,7 @@ const pageTitles: Record<Page, string> = {
             color="neutral"
             variant="ghost"
             block
+            :square="collapsed"
             class="data-[state=open]:bg-soft"
             :ui="{ trailingIcon: 'text-faint' }"
           />
@@ -762,7 +764,7 @@ const pageTitles: Record<Page, string> = {
 
           <template #right>
             <UTooltip text="Notifications" :shortcuts="['N']">
-              <UButton color="neutral" variant="ghost" class="px-(--ui-control-py)" aria-label="Notifications">
+              <UButton color="neutral" variant="ghost" square aria-label="Notifications">
                 <UChip color="error" inset>
                   <UIcon :name="studioIcons.bell" class="size-5 shrink-0" />
                 </UChip>

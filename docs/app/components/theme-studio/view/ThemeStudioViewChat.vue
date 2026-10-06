@@ -193,6 +193,7 @@ const ui = {
             color="neutral"
             variant="ghost"
             block
+            :square="collapsed"
             class="data-[state=open]:bg-soft"
             :ui="{ trailingIcon: 'ms-auto text-faint' }"
           />
@@ -227,7 +228,7 @@ const ui = {
 
             <template #right>
               <UTooltip text="Share chat">
-                <UButton :icon="studioIcons.share" color="neutral" variant="ghost" aria-label="Share chat" />
+                <UButton :icon="studioIcons.share" color="neutral" variant="ghost" square aria-label="Share chat" />
               </UTooltip>
             </template>
           </UDashboardNavbar>
@@ -281,6 +282,7 @@ const ui = {
                       color="neutral"
                       variant="ghost"
                       size="sm"
+                      square
                       aria-label="Attach file"
                     />
                   </UTooltip>

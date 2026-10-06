@@ -531,6 +531,7 @@ function resetEffects() {
                   <UButton
                     size="xs"
                     color="neutral"
+                    square
                     variant="ghost"
                     :ui="{ leadingIcon: 'size-3' }"
                     :icon="shadeCopied && copiedShade === swatchDetail.shade ? appConfig.ui.icons.copyCheck : appConfig.ui.icons.copy"
@@ -543,6 +544,7 @@ function resetEffects() {
                   <UButton
                     size="xs"
                     color="neutral"
+                    square
                     variant="ghost"
                     active-color="primary"
                     active-variant="ghost"

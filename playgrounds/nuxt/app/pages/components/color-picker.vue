@@ -19,7 +19,7 @@ function handleColorChange(event: Event) {
     <USelect v-model="attrs.size" :items="sizes" multiple />
 
     <UFieldGroup>
-      <UButton color="neutral" variant="outline" class="px-(--ui-control-py)">
+      <UButton color="neutral" variant="outline" square>
         <span :style="{ backgroundColor: colorHex }" class="inline-flex size-5 rounded-sm" />
       </UButton>
       <UInput :model-value="colorHex" @change="handleColorChange" />

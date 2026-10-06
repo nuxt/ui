@@ -35,7 +35,7 @@ const state = computed(() => props.open ? 'close' : 'normal')
     size="sm"
     variant="ghost"
     color="neutral"
-    class="px-(--ui-control-py)"
+    square
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"

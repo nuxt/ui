@@ -107,6 +107,7 @@ const ui = computed(() => tv(theme, overrides.value)({
       v-bind="{
         ...buttonProps,
         ...(props.collapsed ? {
+          'square': true,
           'aria-label': props.label || t('dashboardSearchButton.label')
         } : {}),
         ...$attrs

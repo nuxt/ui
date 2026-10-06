@@ -50,6 +50,7 @@ const items: NavigationMenuItem[][] = [[{
         color="neutral"
         variant="outline"
         block
+        :square="collapsed"
       >
         <template v-if="!collapsed" #trailing>
           <div class="flex items-center gap-0.5 ms-auto">

@@ -35,7 +35,7 @@ const selectItems = ['Apple', 'Banana', 'Cherry']
         <div class="flex items-center gap-2">
           <UButton label="Themed" />
           <UButton label="Themed with icon" icon="i-lucide-rocket" />
-          <UButton label="Themed square" icon="i-lucide-star" class="px-(--ui-control-py)" />
+          <UButton label="Themed square" icon="i-lucide-star" square />
         </div>
       </UTheme>
     </div>

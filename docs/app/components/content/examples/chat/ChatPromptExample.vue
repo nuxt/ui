@@ -28,6 +28,7 @@ function onSubmit() {
           placeholder="Select a model"
           variant="ghost"
           size="sm"
+          square
         />
 
         <UChatPromptSubmit size="sm" />

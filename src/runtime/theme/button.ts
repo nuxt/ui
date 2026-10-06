@@ -56,7 +56,7 @@ export default defineTheme({
         trailingIcon: 'ms-auto'
       }
     },
-    // Set by the component when it renders an icon and nothing else
+    // Equal padding, for `square` or an icon and nothing else
     square: {
       true: {
         base: 'px-(--ui-control-py)'

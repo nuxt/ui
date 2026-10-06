@@ -44,7 +44,7 @@ export default defineTheme({
         base: 'text-base [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(6)] rounded-md'
       }
     },
-    // Set by the component when it renders an icon and nothing else
+    // Equal padding, for `square` or an icon and nothing else
     square: {
       true: {
         base: 'px-(--ui-control-py)'

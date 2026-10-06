@@ -121,6 +121,11 @@ exports[`Badge > renders with size xs correctly 1`] = `
 <!--v-if--></span>"
 `;
 
+exports[`Badge > renders with square correctly 1`] = `
+"<span data-slot="badge" class="font-medium inline-flex items-center py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md px-(--ui-control-py)"><!--v-if--><span data-slot="badge-label" class="truncate">Badge</span>
+<!--v-if--></span>"
+`;
+
 exports[`Badge > renders with trailing and icon correctly 1`] = `"<span data-slot="badge" class="font-medium inline-flex items-center py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md px-(--ui-control-py)"><!--v-if--><!--v-if--><span class="iconify i-lucide:arrow-right shrink-0 size-(--ui-control-icon)" aria-hidden="true" data-slot="badge-trailingIcon"></span></span>"`;
 
 exports[`Badge > renders with trailing slot correctly 1`] = `"<span data-slot="badge" class="font-medium inline-flex items-center py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] bg-accent text-accent-contrast text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] rounded-md px-(--ui-control-py)"><!--v-if--><!--v-if-->Trailing slot</span>"`;
