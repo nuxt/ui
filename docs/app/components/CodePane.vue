@@ -31,7 +31,7 @@ onMounted(async () => {
   syncTokenKeys = core.syncTokenKeys
   // the renderer only moves the elements it created
   container.value.replaceChildren()
-  renderer.value = new MagicMoveRenderer(container.value, {
+  const instance = new MagicMoveRenderer(container.value, {
     // the pane is a fixed box with ProsePre's own background
     animateContainer: false,
     containerStyle: false,
@@ -43,6 +43,33 @@ onMounted(async () => {
     delayEnter: 0,
     easing: 'var(--ease-out)'
   })
+
+  // The renderer asks every token for its own animations to learn when it is
+  // done, and each call recomputes the styles of the page: a second of blocked
+  // main thread on the home page for a file of 500 tokens. One call on the
+  // container answers for the whole pass, the callbacks of a pass are all
+  // registered in the same tick.
+  const el = container.value
+  let finished: Promise<unknown> | undefined
+  Object.assign(instance, {
+    registerTransitionEnd: (_token: HTMLElement, callback: () => void) => () => {
+      if (!finished) {
+        finished = Promise.allSettled(el.getAnimations({ subtree: true }).map(animation => animation.finished))
+        queueMicrotask(() => finished = undefined)
+      }
+
+      let done = false
+      const resolve = () => {
+        if (done) return
+        done = true
+        callback()
+      }
+      // the next pass resolves the ones it interrupts
+      return Object.assign(finished.then(resolve), { resolve })
+    }
+  })
+
+  renderer.value = instance
 })
 
 watch([renderer, () => props.tokens], ([renderer, tokens]) => {
