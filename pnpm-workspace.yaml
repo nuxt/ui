@@ -32,9 +32,9 @@ catalog:
   "@nuxt/fonts": ^0.14.0
   "@nuxt/icon": ^2.5.1
   "@nuxt/image": ^2.0.0
-  "@nuxt/kit": ^4.5.2
+  "@nuxt/kit": ^4.6.0
   "@nuxt/module-builder": ^1.0.3
-  "@nuxt/schema": ^4.5.2
+  "@nuxt/schema": ^4.6.0
   "@nuxt/test-utils": ^4.3.3
   "@nuxt/ui": workspace:*
   "@nuxtjs/color-mode": ^4.0.1
@@ -112,7 +112,7 @@ catalog:
   minimark: ^0.2.0
   mlly: ^1.8.2
   motion-v: ^2.5.2
-  nuxt: ^4.5.2
+  nuxt: ^4.6.0
   nuxt-agent-discovery: ^0.7.0
   nuxt-component-meta: ^0.18.0
   nuxt-llms: ^0.2.0
@@ -160,7 +160,7 @@ overrides:
   # the whole vite peer group down to vitest's vite 7. The plugin only ever runs
   # inside vitest's own vite, so the wider range is bookkeeping, not runtime.
   "@codspeed/vitest-plugin>vite": ^7.0.0 || ^8.0.0
-  "@nuxt/kit": ^4.5.2
+  "@nuxt/kit": ^4.6.0
   "@nuxt/ui": workspace:*
   # `@nuxt/image` 2.1.0 depends on `ipx` 4.0.0-beta.1, which pulls a second sharp
   # alongside 0.34.5 and kills the docs prerender as soon as it hits `/_ipx`.
@@ -190,3 +190,10 @@ allowBuilds:
 minimumReleaseAgeExclude:
   - 'exsolve@1.1.3'
   - 'eslint-plugin-better-tailwindcss@4.8.0'
+  - "@nuxt/cli@4.0.0"
+  - "@nuxt/kit@4.6.0"
+  - "@nuxt/nitro-server@4.6.0"
+  - "@nuxt/schema@4.6.0"
+  - "@nuxt/vite-builder@4.6.0"
+  - "@nuxt/vite-server@4.6.0"
+  - nuxt@4.6.0
