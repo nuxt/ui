@@ -157,6 +157,29 @@ describe('useTour', () => {
       expect(tour.reference.value).toBe(el)
     })
 
+    it('resolves any CSS selector target', () => {
+      const el = document.createElement('button')
+      el.setAttribute('data-tour', 'step')
+      document.body.appendChild(el)
+
+      const tour = useTour([{ target: 'button[data-tour="step"]' }])
+      tour.start()
+
+      expect(tour.reference.value).toBe(el)
+    })
+
+    it('prefers a bare id over a matching tag name', () => {
+      const tag = document.createElement('header')
+      const el = document.createElement('div')
+      el.id = 'header'
+      document.body.append(tag, el)
+
+      const tour = useTour([{ target: 'header' }])
+      tour.start()
+
+      expect(tour.reference.value).toBe(el)
+    })
+
     it('is undefined for a non-matching selector', () => {
       const tour = useTour([{ target: '#no-such-id' }])
       tour.start()

@@ -5,7 +5,7 @@ import type { ReferenceElement } from 'reka-ui'
 export interface TourStep {
   /**
    * The element this step points to. Accepts:
-   * - a CSS selector (`'#id'`, `'.class'`, or a bare id resolved as `#id`)
+   * - a bare id (`'id'`) or any CSS selector (`'#id'`, `'.class'`, `'[data-tour="step"]'`, …)
    * - an element or a virtual element (anything with `getBoundingClientRect`)
    * - a ref or a getter returning any of the above
    *
@@ -124,9 +124,13 @@ export function useTour(steps: MaybeRefOrGetter<TourStep[]>, options: UseTourOpt
     }
 
     if (typeof target === 'string') {
-      const selector = target.startsWith('#') || target.startsWith('.') ? target : `#${target}`
+      // A bare id takes precedence so `'header'` still resolves to `#header` rather than `<header>`.
+      const byId = document.getElementById(target)
+      if (byId) {
+        return byId
+      }
       try {
-        return (document.querySelector(selector) as ReferenceElement | null) ?? undefined
+        return (document.querySelector(target) as ReferenceElement | null) ?? undefined
       } catch {
         // Ignore malformed selectors and leave the step unanchored.
         return undefined
