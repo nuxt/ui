@@ -180,6 +180,19 @@ describe('useTour', () => {
       expect(tour.reference.value).toBe(el)
     })
 
+    it('does not treat an explicit selector as a literal id', () => {
+      const literal = document.createElement('div')
+      literal.id = '#cta'
+      const el = document.createElement('div')
+      el.id = 'cta'
+      document.body.append(literal, el)
+
+      const tour = useTour([{ target: '#cta' }])
+      tour.start()
+
+      expect(tour.reference.value).toBe(el)
+    })
+
     it('is undefined for a non-matching selector', () => {
       const tour = useTour([{ target: '#no-such-id' }])
       tour.start()
