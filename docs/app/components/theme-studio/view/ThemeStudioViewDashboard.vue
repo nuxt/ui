@@ -527,7 +527,7 @@ const pageTitles: Record<Page, string> = {
   <UDashboardGroup
     unit="rem"
     :persistent="false"
-    class="relative inset-auto h-full w-full"
+    class="relative inset-auto size-full"
   >
     <UDashboardSidebar
       collapsible
