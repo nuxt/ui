@@ -363,7 +363,7 @@ export default createConfigForNuxt({
   // Hook classes styled in scoped `<style>` blocks or `main.css`, not Tailwind utilities.
   ignore: [
     '^nuxi-', '^landing-', '^(nuxt|vue)-only$', '^(playground-)?wall$', '^horizon$', '^twinkle$',
-    '^stars?$', '^star-layer$', '^dice-rolling$', '^squircle$', '^carbon$', '^example$', '^my-table-tbody$'
+    '^stars?$', '^star-layer$', '^dice-rolling$', '^squircle$', '^carbon$', '^example$', '^my-table-tbody$', '^shiki(-magic-move-.+)?$'
   ]
 })).append(
   betterTailwindcssConfig(['playgrounds/nuxt/app/**/*.vue'], 'playgrounds/nuxt/app/assets/css/main.css')

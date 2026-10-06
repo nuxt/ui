@@ -1,7 +1,11 @@
 import { createMarkdownParser, defineComarkPlugin } from '@comark/vue/parse'
 import shiki, { getHighlighter } from '@comark/vue/plugins/shiki'
 import type { ShikiOptions } from '@comark/vue/plugins/shiki'
-import { codeToTokens, getTokenStyleObject, stringifyTokenStyle } from 'shiki/core'
+import { codeToHast, codeToTokens, getTokenStyleObject, stringifyTokenStyle } from 'shiki/core'
+import type { ThemedToken } from 'shiki/core'
+import { toKeyedTokens } from '@shikijs/magic-move/core'
+import type { KeyedToken, KeyedTokensInfo } from '@shikijs/magic-move/types'
+import { parseIconName } from 'shiki-transformer-icon-highlight'
 import type { ComarkParsePostState } from '@comark/vue'
 import toc from '@comark/vue/plugins/toc'
 import emoji from '@comark/vue/plugins/emoji'
@@ -176,7 +180,46 @@ export function parseMarkdownDoc(markdown: string): Promise<MarkdownDoc> {
   return doc
 }
 
-/** A generated file as a highlighted document, rendered by CodePane. */
-export function parseCode(code: string, lang: 'css' | 'ts'): Promise<MarkdownDoc> {
-  return parse(`\`\`\`${lang}\n${code}\n\`\`\``)
+/**
+ * A generated file as keyed tokens, rendered by CodePane, which moves the ones
+ * two versions of the file share. The tokens are read off the hast pass rather
+ * than `codeToTokens`, which runs no transformer and would lose the swatches.
+ * The icon transformer writes its glyph on the hast itself, so each one comes
+ * back here as an empty token ahead of the name.
+ */
+export async function highlightCode(code: string, lang: 'css' | 'ts'): Promise<KeyedTokensInfo> {
+  const highlighter = await getHighlighter(SHIKI_OPTIONS)
+
+  let lines: ThemedToken[][] = []
+  codeToHast(highlighter, code, {
+    lang,
+    themes: THEMES,
+    transformers: [...shikiTransformers(), {
+      name: 'keyed-tokens',
+      tokens(tokens) {
+        lines = tokens
+      }
+    }]
+  })
+
+  const keyed = toKeyedTokens(code, lines, lang)
+  // The key is the whole hash of the file on every token, and the home page
+  // carries two files in its payload.
+  const prefix = keyed.hash.slice(0, 8)
+  const tokens = keyed.tokens.flatMap((token): KeyedToken[] => {
+    const icon = parseIconName(token.content)
+    if (!icon) return [token]
+
+    return [{
+      key: '',
+      content: '',
+      offset: token.offset,
+      htmlClass: 'shiki-icon-highlight',
+      // the transformer's own default source
+      htmlStyle: { '--shiki-icon-url': `url(https://api.iconify.design/${icon.collection}:${icon.name}.svg?color=%23000)` }
+    }, token]
+  })
+  tokens.forEach((token, index) => token.key = `${prefix}-${index}`)
+
+  return { ...keyed, tokens, lang }
 }

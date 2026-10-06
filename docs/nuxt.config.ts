@@ -260,6 +260,8 @@ export default defineNuxtConfig({
         'tailwind-variants',
         '@comark/vue',
         '@comark/vue/plugins/shiki',
+        '@shikijs/magic-move/core',
+        '@shikijs/magic-move/renderer',
         'vaul-vue',
         '@vueuse/integrations/useFuse',
         '@floating-ui/dom',

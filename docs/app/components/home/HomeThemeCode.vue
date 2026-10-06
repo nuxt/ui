@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { MarkdownDoc } from '../../utils/markdown'
+import type { KeyedTokensInfo } from '@shikijs/magic-move/types'
 
 /**
  * The theme as the files you would ship, for the home hero's right half:
@@ -14,7 +14,7 @@ const { framework } = useFrameworks()
 interface Pane {
   key: 'css' | 'config'
   filename: string
-  doc: MarkdownDoc
+  tokens: KeyedTokensInfo
 }
 
 // the doc reads every theme ref, the framework picks the config file
@@ -26,16 +26,16 @@ const large = useMediaQuery('(min-width: 64rem)')
 async function generate(): Promise<{ key: string, panes: Pane[] }> {
   const key = themeKey()
   // loaded here so shiki and its grammars stay out of the landing's entry chunk
-  const { parseCode } = await import('../../utils/markdown')
+  const { highlightCode } = await import('../../utils/markdown')
   // explicit: the stock theme is a pair of files too, not an empty diff
   const [css, config] = await Promise.all([exportCSS({ explicit: true }), exportConfig({ explicit: true })])
-  const [cssDoc, configDoc] = await Promise.all([parseCode(css, 'css'), parseCode(config, 'ts')])
+  const [cssTokens, configTokens] = await Promise.all([highlightCode(css, 'css'), highlightCode(config, 'ts')])
 
   return {
     key,
     panes: [
-      { key: 'css', filename: 'main.css', doc: cssDoc },
-      { key: 'config', filename: configLabel.value, doc: configDoc }
+      { key: 'css', filename: 'main.css', tokens: cssTokens },
+      { key: 'config', filename: configLabel.value, tokens: configTokens }
     ]
   }
 }
@@ -101,7 +101,7 @@ const pane = computed(() => panes.value.find(entry => entry.key === tab.value) ?
          The tabs above are its header, so the filename stays off the block. -->
     <CodePane
       v-if="pane"
-      :doc="pane.doc"
+      :tokens="pane.tokens"
       :ui="{ root: 'my-0', base: 'h-74 whitespace-pre text-xs/5 bg-default/50 border-0 rounded-lg shadow-sm backdrop-blur-xs' }"
     />
 

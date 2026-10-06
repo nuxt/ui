@@ -27,6 +27,7 @@
     "@octokit/rest": "catalog:",
     "@regle/core": "catalog:",
     "@regle/rules": "catalog:",
+    "@shikijs/magic-move": "catalog:",
     "@takumi-rs/core": "catalog:",
     "@tiptap/extension-emoji": "catalog:",
     "@tiptap/extension-text-align": "catalog:",

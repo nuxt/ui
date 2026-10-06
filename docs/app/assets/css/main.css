@@ -64,12 +64,18 @@ html[data-framework="vue"] .nuxt-only {
 /* Shiki dark mode styles. A colour swatch keeps the background and contrast
    foreground the transformer wrote, inline with Comark or as a generated
    class with the content pipeline. */
-html.dark .shiki span:not([style*="background-color"], .shiki-color-highlight) {
+html.dark .shiki span:not([style*="background-color"], .shiki-color-highlight, .shiki-icon-highlight) {
   color: var(--shiki-dark) !important;
   background-color: var(--shiki-dark-bg) !important;
   font-style: var(--shiki-dark-font-style) !important;
   font-weight: var(--shiki-dark-font-weight) !important;
   text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+/* Magic move keeps a colour transition on every token at rest, which would
+   fade the code through a colour mode switch while the pane around it snaps. */
+.shiki-magic-move-item:not(.shiki-magic-move-move, .shiki-magic-move-enter-active, .shiki-magic-move-leave-active) {
+  transition: none;
 }
 
 /* Shiki icon highlight transformer styles */

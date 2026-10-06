@@ -46,6 +46,7 @@ catalog:
   "@regle/core": ^1.29.4
   "@regle/rules": ^1.29.4
   "@release-it/conventional-changelog": ^12.0.2
+  "@shikijs/magic-move": ^4.5.0
   "@shikijs/types": ^4.5.0
   "@standard-schema/spec": ^1.1.0
   "@tailwindcss/postcss": ^4.3.3

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useClipboard } from '@vueuse/core'
 import { encodeThemeDoc } from '../../utils/theme/link'
-import { parseCode } from '../../utils/markdown'
-import type { MarkdownDoc } from '../../utils/markdown'
+import type { KeyedTokensInfo } from '@shikijs/magic-move/types'
+import { highlightCode } from '../../utils/markdown'
 
 /**
  * The export modal: a link that carries the whole theme, then the generated
@@ -43,7 +43,7 @@ function copyThemeLink() {
 }
 
 // the pane shows the plain file for the frame the highlighter takes to arrive
-const docs = shallowRef<Partial<Record<'css' | 'config', MarkdownDoc>>>({})
+const tokens = shallowRef<Partial<Record<'css' | 'config', KeyedTokensInfo>>>({})
 
 const panes = computed(() => [
   { key: 'css' as const, filename: 'main.css', code: css.value },
@@ -78,19 +78,19 @@ watch([open, framework], async ([isOpen]) => {
   const current = ++version
   css.value = ''
   config.value = ''
-  docs.value = {}
+  tokens.value = {}
 
   if (!isOpen) {
     return
   }
 
   const [nextCss, nextConfig] = await Promise.all([exportCSS(), exportConfig()])
-  const [cssDoc, configDoc] = await Promise.all([parseCode(nextCss, 'css'), parseCode(nextConfig, 'ts')])
+  const [cssTokens, configTokens] = await Promise.all([highlightCode(nextCss, 'css'), highlightCode(nextConfig, 'ts')])
   if (current !== version) return
 
   css.value = nextCss
   config.value = nextConfig
-  docs.value = { css: cssDoc, config: configDoc }
+  tokens.value = { css: cssTokens, config: configTokens }
 })
 
 // The theme can't change while the modal covers the studio, so the link is
@@ -180,8 +180,8 @@ watch(open, async (isOpen) => {
         <!-- A fixed pane height: the files and the highlighter both land after
              the modal paints, a box that sized to them would jump. -->
         <CodePane
-          v-if="docs[pane.key]"
-          :doc="docs[pane.key]!"
+          v-if="tokens[pane.key]"
+          :tokens="tokens[pane.key]!"
           :ui="{ root: 'my-0', base: 'h-96 whitespace-pre text-xs/5' }"
         />
         <ProsePre
