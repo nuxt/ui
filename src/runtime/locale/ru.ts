@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Далее',
       prev: 'Назад'
     },
+    chatMessages: {
+      autoScroll: 'Прокрутить вниз'
+    },
     chatPrompt: {
       placeholder: 'Введите ваше сообщение здесь…'
     },
     chatPromptSubmit: {
-      label: 'Отправить'
+      label: 'Отправить',
+      reload: 'Повторить',
+      stop: 'Остановить генерацию'
     },
     chatReasoning: {
       thinking: 'Размышляет…',

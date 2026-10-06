@@ -22,11 +22,16 @@ export type Messages = {
     next: string
     prev: string
   }
+  chatMessages: {
+    autoScroll: string
+  }
   chatPrompt: {
     placeholder: string
   }
   chatPromptSubmit: {
     label: string
+    reload: string
+    stop: string
   }
   colorMode: {
     dark: string

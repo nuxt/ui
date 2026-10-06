@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Tjetri',
       prev: 'Para'
     },
+    chatMessages: {
+      autoScroll: 'Lëviz poshtë'
+    },
     chatPrompt: {
       placeholder: 'Shkruaj mesazhin tënd këtu…'
     },
     chatPromptSubmit: {
-      label: 'Dërgo mesazhin'
+      label: 'Dërgo mesazhin',
+      reload: 'Provo përsëri',
+      stop: 'Ndalo gjenerimin'
     },
     chatReasoning: {
       thinking: 'Po mendon…',

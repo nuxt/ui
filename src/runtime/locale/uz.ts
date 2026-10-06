@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Oldinga',
       prev: 'Ortga'
     },
+    chatMessages: {
+      autoScroll: 'Pastga aylantirish'
+    },
     chatPrompt: {
       placeholder: 'Bu yerda savolingizni yozing…'
     },
     chatPromptSubmit: {
-      label: 'Jo\'natish'
+      label: 'Jo\'natish',
+      reload: 'Qayta urinish',
+      stop: 'Generatsiyani to\'xtatish'
     },
     chatReasoning: {
       thinking: 'O\'ylayapti…',

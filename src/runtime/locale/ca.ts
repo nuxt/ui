@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Següent',
       prev: 'Anterior'
     },
+    chatMessages: {
+      autoScroll: 'Desplaça cap avall'
+    },
     chatPrompt: {
       placeholder: 'Escriu el teu missatge aquí…'
     },
     chatPromptSubmit: {
-      label: 'Enviar'
+      label: 'Enviar',
+      reload: 'Torna-ho a provar',
+      stop: 'Atura la generació'
     },
     chatReasoning: {
       thinking: 'Pensant…',

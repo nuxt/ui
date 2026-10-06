@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'अगला',
       prev: 'पिछला'
     },
+    chatMessages: {
+      autoScroll: 'नीचे स्क्रॉल करें'
+    },
     chatPrompt: {
       placeholder: 'यहाँ आपका संदेश लिखें…'
     },
     chatPromptSubmit: {
-      label: 'भेजें'
+      label: 'भेजें',
+      reload: 'फिर से कोशिश करें',
+      stop: 'जनरेट करना रोकें'
     },
     chatReasoning: {
       thinking: 'सोच रहा है…',

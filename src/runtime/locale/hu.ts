@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Következő',
       prev: 'Előző'
     },
+    chatMessages: {
+      autoScroll: 'Görgetés az aljára'
+    },
     chatPrompt: {
       placeholder: 'Írd be a kérdésedet itt…'
     },
     chatPromptSubmit: {
-      label: 'Küldés'
+      label: 'Küldés',
+      reload: 'Újrapróbálás',
+      stop: 'Generálás leállítása'
     },
     chatReasoning: {
       thinking: 'Gondolkodik…',

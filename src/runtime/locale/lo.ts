@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'ຕໍ່ໄປ',
       prev: 'ກ່ອນໜ້າ'
     },
+    chatMessages: {
+      autoScroll: 'ເລື່ອນລົງລຸ່ມສຸດ'
+    },
     chatPrompt: {
       placeholder: 'ພິມຂໍ້ຄວາມຂອງທ່ານທີ່ນີ້…'
     },
     chatPromptSubmit: {
-      label: 'ສົ່ງຄຳສັ່ງ'
+      label: 'ສົ່ງຄຳສັ່ງ',
+      reload: 'ລອງໃໝ່',
+      stop: 'ຢຸດການສ້າງ'
     },
     chatReasoning: {
       thinking: 'ກຳລັງຄິດ…',

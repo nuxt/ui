@@ -29,11 +29,16 @@ export default defineLocale<Messages>({
       next: 'اگلا',
       prev: 'پچھلا'
     },
+    chatMessages: {
+      autoScroll: 'نیچے سکرول کریں'
+    },
     chatPrompt: {
       placeholder: 'یہاں اپنا پیغام لکھیں'
     },
     chatPromptSubmit: {
-      label: 'پیغام بھیجیں'
+      label: 'پیغام بھیجیں',
+      reload: 'دوبارہ کوشش کریں',
+      stop: 'تخلیق روکیں'
     },
     chatReasoning: {
       thinking: 'سوچ رہا ہے…',

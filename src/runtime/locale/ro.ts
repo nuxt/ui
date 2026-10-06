@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Următor',
       prev: 'Anterior'
     },
+    chatMessages: {
+      autoScroll: 'Derulează în jos'
+    },
     chatPrompt: {
       placeholder: 'Scrieți mesajul dvs. aici…'
     },
     chatPromptSubmit: {
-      label: 'Trimite'
+      label: 'Trimite',
+      reload: 'Încearcă din nou',
+      stop: 'Oprește generarea'
     },
     chatReasoning: {
       thinking: 'Se gândește…',
