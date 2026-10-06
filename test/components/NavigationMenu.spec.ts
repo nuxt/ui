@@ -153,7 +153,7 @@ describe('NavigationMenu', () => {
     const wrapper = await mountSuspended(NavigationMenu, {
       props: {
         orientation: 'horizontal',
-        items: [{ label: 'Group', to: '/group', children: [{ label: 'Child', to: '/child' }] }]
+        items: [{ label: 'Group', to: 'https://nuxt.com', children: [{ label: 'Child', to: '/child' }] }]
       }
     })
 

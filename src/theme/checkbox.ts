@@ -177,7 +177,7 @@ export default (options: Required<ModuleOptions>) => ({
       indicator: 'hidden',
       highlight: true,
       class: {
-        root: `not-has-disabled:border-${color} not-has-disabled:has-data-[state=checked]:border-${color}`
+        root: `not-has-disabled:not-has-aria-disabled:border-${color} not-has-disabled:not-has-aria-disabled:has-data-[state=checked]:border-${color}`
       }
     })),
     {
@@ -185,7 +185,7 @@ export default (options: Required<ModuleOptions>) => ({
       indicator: 'hidden',
       highlight: true,
       class: {
-        root: 'not-has-disabled:border-inverted not-has-disabled:has-data-[state=checked]:border-inverted'
+        root: 'not-has-disabled:not-has-aria-disabled:border-inverted not-has-disabled:not-has-aria-disabled:has-data-[state=checked]:border-inverted'
       }
     },
     ...(options.theme.colors || []).map((color: string) => ({
