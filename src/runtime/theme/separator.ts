@@ -79,7 +79,7 @@ export default defineTheme({
   }, {
     orientation: 'horizontal',
     size: 'sm',
-    class: { border: 'border-t-[2px]' }
+    class: { border: 'border-t-2' }
   }, {
     orientation: 'horizontal',
     size: 'md',
@@ -87,7 +87,7 @@ export default defineTheme({
   }, {
     orientation: 'horizontal',
     size: 'lg',
-    class: { border: 'border-t-[4px]' }
+    class: { border: 'border-t-4' }
   }, {
     orientation: 'horizontal',
     size: 'xl',
@@ -99,7 +99,7 @@ export default defineTheme({
   }, {
     orientation: 'vertical',
     size: 'sm',
-    class: { border: 'border-s-[2px]' }
+    class: { border: 'border-s-2' }
   }, {
     orientation: 'vertical',
     size: 'md',
@@ -107,7 +107,7 @@ export default defineTheme({
   }, {
     orientation: 'vertical',
     size: 'lg',
-    class: { border: 'border-s-[4px]' }
+    class: { border: 'border-s-4' }
   }, {
     orientation: 'vertical',
     size: 'xl',
