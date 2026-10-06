@@ -2,6 +2,7 @@ import { defineComponent } from 'vue'
 import { describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { ToastProvider } from 'reka-ui'
 import { renderEach } from '../component-render'
 import Toaster from '../../src/runtime/components/Toaster.vue'
 import Toast from '../../src/runtime/components/Toast.vue'
@@ -84,6 +85,12 @@ describe('Toast', () => {
     expect([front!.attributes('data-collapsed'), front!.attributes('data-front')]).toEqual(['true', 'true'])
 
     toast.clear()
+  })
+
+  it('does not pass attributes down to the provider', async () => {
+    const wrapper = await mountSuspended(Toaster, { props: { portal: false }, attrs: { limit: 1 } })
+
+    expect(wrapper.findComponent(ToastProvider).props('limit')).toBeUndefined()
   })
 
   it('passes accessibility tests', async () => {
