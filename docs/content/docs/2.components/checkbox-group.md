@@ -363,6 +363,30 @@ props:
 ---
 ::
 
+### Max :badge{label="Soon" class="align-text-top"}
+
+Use the `max` prop to limit the number of items that can be checked. Once the limit is reached, the unchecked items can't be checked anymore.
+
+::component-code
+---
+prettier: true
+ignore:
+  - defaultValue
+  - items
+external:
+  - items
+props:
+  max: 2
+  defaultValue:
+    - 'System'
+    - 'Light'
+  items:
+    - 'System'
+    - 'Light'
+    - 'Dark'
+---
+::
+
 ## API
 
 ### Props
