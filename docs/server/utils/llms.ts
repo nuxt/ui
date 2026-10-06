@@ -1,4 +1,4 @@
-import { SITE_URL } from './site'
+import { SITE_URL } from './site.ts'
 
 /**
  * "When to use" guidance for agents, rendered as the first section of
