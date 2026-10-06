@@ -149,7 +149,7 @@ describe('NavigationMenu', () => {
     expect(wrapper.find('[data-slot="content"]').attributes('data-state')).toBe('open')
   })
 
-  it('toggles a horizontal item with `to` from its trailing area without navigating', async () => {
+  it('toggles a horizontal item with `to` from its trailing area', async () => {
     const wrapper = await mountSuspended(NavigationMenu, {
       props: {
         orientation: 'horizontal',

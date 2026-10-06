@@ -155,6 +155,12 @@ describe('InputMenu', () => {
     expect(withMultiple.html()).toBe(autocomplete.html())
   })
 
+  it('keeps the content mounted when closed with unmountOnHide false', async () => {
+    const wrapper = await mountSuspended(InputMenu, { props: { items, portal: false, unmountOnHide: false } })
+
+    expect(wrapper.findAll('[data-slot="item"]')).toHaveLength(items.length)
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(InputMenu, {
       props: {
