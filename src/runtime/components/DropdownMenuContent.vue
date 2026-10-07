@@ -205,6 +205,7 @@ const hasFilteredItems = computed(() => filteredGroups.value.some(group => group
 
                 <UDropdownMenuContent
                   sub
+                  :loop="loop"
                   :class="item.ui?.content"
                   :ui="ui"
                   :ui-override="uiOverride"

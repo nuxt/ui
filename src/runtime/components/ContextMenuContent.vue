@@ -146,6 +146,7 @@ const groups = computed<ContextMenuItem[][]>(() =>
 
                 <UContextMenuContent
                   sub
+                  :loop="loop"
                   :class="item.ui?.content"
                   :ui="ui"
                   :ui-override="uiOverride"
