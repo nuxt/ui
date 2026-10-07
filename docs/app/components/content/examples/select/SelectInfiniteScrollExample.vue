@@ -56,7 +56,6 @@ onMounted(() => {
     ref="select"
     placeholder="Select user"
     :items="users"
-    :content="{ loop: false }"
     @update:open="onOpen"
   />
 </template>

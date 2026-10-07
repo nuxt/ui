@@ -55,9 +55,7 @@ import UIcon from './Icon.vue'
 import UKbd from './Kbd.vue'
 import UContextMenuContent from './ContextMenuContent.vue'
 
-const props = withDefaults(defineProps<ContextMenuContentProps<T>>(), {
-  loop: true
-})
+const props = defineProps<ContextMenuContentProps<T>>()
 const emits = defineEmits<ContextMenuContentEmits>()
 const slots = defineSlots<ContextMenuSlots<T>>()
 
@@ -146,7 +144,6 @@ const groups = computed<ContextMenuItem[][]>(() =>
 
                 <UContextMenuContent
                   sub
-                  :loop="loop"
                   :class="item.ui?.content"
                   :ui="ui"
                   :ui-override="uiOverride"

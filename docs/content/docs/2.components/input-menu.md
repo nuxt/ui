@@ -935,10 +935,6 @@ name: 'input-menu-infinite-scroll-example'
 ::
 
 ::note
-In this example, the `loop` prop is set to `false` so the keyboard navigation doesn't go back to the first item when reaching the last loaded one.
-::
-
-::note
 This example uses `useLazyFetch` with `immediate: false` so data is only loaded as the user scrolls.
 ::
 

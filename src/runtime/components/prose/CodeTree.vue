@@ -268,7 +268,6 @@ onBeforeUpdate(() => rerenderCount.value++)
       :class="ui.list({ class: props.ui?.list })"
       :items="items"
       :get-key="(item) => item.path"
-      loop
     >
       <ReuseTreeTemplate :items="items" :level="1" />
     </TreeRoot>
