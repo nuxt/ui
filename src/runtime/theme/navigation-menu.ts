@@ -7,7 +7,7 @@ export default defineTheme({
     list: 'isolate min-w-0',
     label: 'w-full flex items-center [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) font-semibold text-xs/5 text-strong',
     item: 'min-w-0',
-    link: 'group relative w-full flex items-center [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] gap-(--ui-control-gap) font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3 before:outline-accent-focus',
+    link: 'group relative w-full flex items-center gap-(--ui-control-gap) font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3 before:outline-accent-focus',
     linkLeadingIcon: 'shrink-0 size-(--ui-control-icon)',
     linkLeadingAvatar: 'shrink-0',
     linkLeadingChip: '',
@@ -35,10 +35,6 @@ export default defineTheme({
   variants: {
     color: colorVariant({ link: '', childLink: '' }),
     highlightColor: highlightColorVariant({ link: '' }),
-    // Equal padding, to keep a link in place while a sidebar collapses
-    square: {
-      true: { link: 'px-(--ui-control-py)' }
-    },
     variant: {
       pill: '',
       link: ''
@@ -48,7 +44,7 @@ export default defineTheme({
         root: 'items-center justify-between',
         list: 'flex items-center',
         item: 'py-2',
-        link: 'px-(--ui-control-px) py-(--ui-control-py) before:inset-x-px before:inset-y-0',
+        link: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) before:inset-x-px before:inset-y-0',
         childList: 'grid p-2',
         childLink: 'px-3 py-2 gap-2 before:inset-x-px before:inset-y-0',
         childLinkLabel: 'font-medium',
@@ -56,10 +52,15 @@ export default defineTheme({
       },
       vertical: {
         root: 'flex-col',
-        link: 'flex-row px-(--ui-control-px) py-(--ui-control-py) before:inset-y-px before:inset-x-0',
+        link: 'flex-row [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) before:inset-y-px before:inset-x-0',
         childLabel: 'px-1.5 py-0.5',
         childLink: 'p-1.5 gap-1.5 before:inset-y-px before:inset-x-0'
       }
+    },
+    // Equal padding, to keep a link in place while a sidebar collapses. After
+    // `orientation`, which sets the horizontal padding
+    square: {
+      true: { link: 'px-(--ui-control-py)' }
     },
     contentOrientation: {
       horizontal: {

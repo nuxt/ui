@@ -49,7 +49,9 @@ variants: {
 }
 ```
 
-The classes that read the variables stay in the `size` entry, next to the ones that write them. In the slot they would be dropped by a function slot from an app, and applied to a size an app adds without the variables.
+The classes that read the padding, the gap and the icon size stay in the `size` entry, next to the ones that write them. In the slot they would be dropped by a function slot from an app, and applied to a size an app adds without the variables. A theme without `size`, like NavigationMenu, writes and reads them in the same variant entry.
+
+A variant that reads a variable for another purpose, `square`, `leading`, `orientation`, has to be declared after the one that sets the same property, since the last variant wins: `square` after what sets the horizontal padding, `leading` and `trailing` after `square` so the room for an icon stays.
 
 Reach for this before a `size` × something compound: the size writes a value, another variant picks the property that reads it. A compound is hard to override from an app config, a token is one class. A theme that extends Input and drops its `root` (Select, InputDate, InputTime) appends the tokens to `base`.
 
