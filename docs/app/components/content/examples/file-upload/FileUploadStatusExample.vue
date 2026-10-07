@@ -6,7 +6,7 @@ interface UploadFileItem extends FileUploadItem {
   progress: number
 }
 
-const files = ref<UploadFileItem[]>([{
+const files = ref<(File | UploadFileItem)[]>([{
   name: 'nuxt.png',
   size: 1000,
   type: 'image/png',
@@ -25,7 +25,7 @@ let completedTicks = 0
 useIntervalFn(() => {
   const file = files.value[0]
 
-  if (!file || typeof file.progress !== 'number' || !file.status) {
+  if (!file || !('status' in file)) {
     return
   }
 
@@ -71,13 +71,13 @@ useIntervalFn(() => {
     <template #file-trailing="{ file, index, removeFile }">
       <div class="ms-auto flex items-center gap-2">
         <UProgress
-          v-if="file.status === 'uploading'"
+          v-if="'status' in file && file.status === 'uploading'"
           :model-value="file.progress"
           size="xs"
           class="w-20"
         />
         <UIcon
-          v-else-if="file.status === 'complete'"
+          v-else-if="'status' in file && file.status === 'complete'"
           name="i-lucide-circle-check"
           class="size-5 text-success"
         />
