@@ -92,7 +92,7 @@ props:
 
 ### Allow Invalid :badge{label="Soon" class="align-text-top"}
 
-Use the `allow-invalid` prop to keep a typed value that is out of the `min` / `max` range or off the `step` grid. Stepping still brings the value back in range and on the `step` grid.
+Use the `allow-invalid` prop to keep a typed value that is out of the `min` / `max` range or off the `step` grid. Stepping towards the range still brings the value back in range and on the `step` grid.
 
 ::component-code
 ---
