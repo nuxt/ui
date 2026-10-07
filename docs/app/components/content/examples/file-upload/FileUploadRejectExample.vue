@@ -18,7 +18,7 @@ function onReject(files: File[]) {
     accept="image/*"
     icon="i-lucide-image"
     label="Drop your images here"
-    description="SVG, PNG, JPG or GIF (max. 2MB)"
+    description="SVG, PNG, JPG or GIF"
     multiple
     class="w-96 min-h-48"
     @reject="onReject"
