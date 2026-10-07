@@ -47,7 +47,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, toRef, provide } from 'vue'
+import { ref, computed, defineAsyncComponent, toRef, provide } from 'vue'
 import { ToastProvider, ToastViewport, ToastPortal } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -55,9 +55,9 @@ import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useToast, toastMaxInjectionKey } from '../composables/useToast'
 import { usePortal } from '../composables/usePortal'
+import { usePreloadOnIdle } from '../composables/useLazyOverlay'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
-import UToast from './Toast.vue'
 
 const _props = withDefaults(defineProps<ToasterProps>(), {
   expand: true,
@@ -72,6 +72,12 @@ defineSlots<ToasterSlots>()
 defineOptions({ inheritAttrs: false })
 
 const props = useComponentProps('toaster', _props)
+
+const loadToast = () => import('./Toast.vue')
+
+const UToast = defineAsyncComponent(loadToast)
+
+usePreloadOnIdle(loadToast)
 
 const { toasts, remove } = useToast()
 const appConfig = useAppConfig() as Toaster['AppConfig']
