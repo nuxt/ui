@@ -17,6 +17,7 @@ describe('useKbd', () => {
     afterEach(() => {
       wrapper?.unmount()
       setUserAgent(originalUserAgent)
+      document.documentElement.classList.remove('ui-macos')
     })
 
     async function mountKbd() {
@@ -36,6 +37,7 @@ describe('useKbd', () => {
       const kbd = await mountKbd()
 
       expect(kbd.macOS.value).toBeTruthy()
+      expect(document.documentElement.classList.contains('ui-macos')).toBe(true)
       expect(kbd.getKbdKey('meta')).toBe('⌘')
       expect(kbd.getKbdKey('ctrl')).toBe('⌃')
       expect(kbd.getKbdKey('alt')).toBe('⌥')
@@ -46,6 +48,7 @@ describe('useKbd', () => {
       const kbd = await mountKbd()
 
       expect(kbd.macOS.value).toBeFalsy()
+      expect(document.documentElement.classList.contains('ui-macos')).toBe(false)
       expect(kbd.getKbdKey('meta')).toBe('Ctrl')
       expect(kbd.getKbdKey('ctrl')).toBe('Ctrl')
       expect(kbd.getKbdKey('alt')).toBe('Alt')
