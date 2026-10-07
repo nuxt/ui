@@ -78,9 +78,7 @@ import UInput from './Input.vue'
 import UKbd from './Kbd.vue'
 import UDropdownMenuContent from './DropdownMenuContent.vue'
 
-const props = withDefaults(defineProps<DropdownMenuContentProps<T>>(), {
-  loop: true
-})
+const props = defineProps<DropdownMenuContentProps<T>>()
 const emits = defineEmits<DropdownMenuContentEmits>()
 const slots = defineSlots<DropdownMenuContentSlots<T>>()
 
@@ -205,7 +203,6 @@ const hasFilteredItems = computed(() => filteredGroups.value.some(group => group
 
                 <UDropdownMenuContent
                   sub
-                  :loop="loop"
                   :class="item.ui?.content"
                   :ui="ui"
                   :ui-override="uiOverride"
