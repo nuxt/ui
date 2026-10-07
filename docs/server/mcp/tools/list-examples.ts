@@ -1,3 +1,4 @@
+import { defineMcpTool } from '@nuxtjs/mcp-toolkit/server'
 // @ts-expect-error - no types available
 import { listComponentExamples } from '#component-example/nitro'
 

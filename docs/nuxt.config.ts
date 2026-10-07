@@ -225,9 +225,6 @@ export default defineNuxtConfig({
     // the case for the client build too once the Vite Environment API is on.
     // Remove once nuxt-content/nuxt-component-meta#128 is released.
     viteEnvironmentApi: false,
-    // `compatibilityVersion: 5` turns these off. The handlers that stay on h3 and Nitro still
-    // rely on them, and so do the `server/utils` and module helpers they call.
-    nitroAutoImports: true,
     defaults: {
       nuxtLink: {
         externalRelAttribute: 'noopener'

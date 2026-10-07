@@ -1,3 +1,4 @@
+import { defineEventHandler } from 'h3'
 // This route will be pre-rendered as /api/navigation.json
 import { queryCollectionNavigation } from '@nuxt/content/server'
 

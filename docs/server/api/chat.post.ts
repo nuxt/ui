@@ -2,6 +2,7 @@ import { defineEventHandler, readBody } from 'nuxt/server'
 import type { UIMessage } from 'ai'
 import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
 import type { GatewayProviderOptions } from '@ai-sdk/gateway'
+import { getChatUser } from '../utils/chatUser'
 
 export default defineEventHandler(async (event) => {
   const { messages } = await readBody<{ messages: UIMessage[] }>(event)

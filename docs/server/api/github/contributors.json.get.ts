@@ -1,3 +1,4 @@
+import { defineCachedFunction } from 'nitropack/runtime'
 import { defineEventHandler } from 'nuxt/server'
 import { Octokit } from '@octokit/rest'
 
