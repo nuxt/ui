@@ -137,7 +137,11 @@ describe('ContentSearch', () => {
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ['with ui', { props: { ...props, ui: { input: '[&>input]:text-lg' } } }],
     ['with class', { props: { ...props, class: 'sm:max-w-5xl' } }]
-  ])
+  ], async (_, options) => {
+    const wrapper = await mountSuspended(ContentSearch, options)
+    await vi.dynamicImportSettled()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 
   it('labels the dialog with the translated search label', async () => {
     const wrapper = await mountSuspended(ContentSearch, { props })
