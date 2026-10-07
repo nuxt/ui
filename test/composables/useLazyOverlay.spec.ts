@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect, vi, afterEach } from 'vitest'
 import { defineComponent, h, nextTick, ref } from 'vue'
 import { mount } from '@vue/test-utils'
 import { useLazyOverlay } from '../../src/runtime/composables/useLazyOverlay'
@@ -17,6 +17,10 @@ function mountWith(open: () => boolean, preload = vi.fn(() => Promise.resolve())
 }
 
 describe('useLazyOverlay', () => {
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
   it('stays rendered once opened', async () => {
     const open = ref(false)
     const { rendered } = mountWith(() => open.value)
@@ -47,8 +51,6 @@ describe('useLazyOverlay', () => {
 
     await vi.runAllTimersAsync()
     expect(preload).toHaveBeenCalledOnce()
-
-    vi.useRealTimers()
   })
 
   it('does not preload when unmounted before idle', async () => {
@@ -59,7 +61,5 @@ describe('useLazyOverlay', () => {
 
     await vi.runAllTimersAsync()
     expect(preload).not.toHaveBeenCalled()
-
-    vi.useRealTimers()
   })
 })
