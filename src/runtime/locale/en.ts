@@ -108,11 +108,11 @@ export default defineLocale<Messages>({
       close: 'Close'
     },
     pagination: {
-      first: 'First Page',
-      last: 'Last Page',
-      next: 'Next Page',
+      first: 'First page',
+      last: 'Last page',
+      next: 'Next page',
       page: 'Page {page}',
-      prev: 'Previous Page'
+      prev: 'Previous page'
     },
     pricingTable: {
       caption: 'Pricing plan comparison'
