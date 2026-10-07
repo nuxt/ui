@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Näch.',
       prev: 'Präz.'
     },
+    chatMessages: {
+      autoScroll: 'No ënnen scrollen'
+    },
     chatPrompt: {
       placeholder: 'Tippt hei Äre Message…'
     },
     chatPromptSubmit: {
-      label: 'Prompt schécken'
+      label: 'Prompt schécken',
+      reload: 'Nach eng Kéier probéieren',
+      stop: 'Generéieren stoppen'
     },
     chatReasoning: {
       thinking: 'Denkt no…',
@@ -111,6 +116,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Zoumaachen'
+    },
+    pagination: {
+      first: 'Éischt Säit',
+      last: 'Lescht Säit',
+      next: 'Nächst Säit',
+      page: 'Säit {page}',
+      prev: 'Vireg Säit'
     },
     pricingTable: {
       caption: 'Vergläich vun de Präispläng'
