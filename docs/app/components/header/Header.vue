@@ -39,7 +39,7 @@ function toggleChat() {
     <UNavigationMenu :items="desktopLinks" variant="link" content-orientation="vertical" />
 
     <template #right>
-      <!-- below `lg` the GitHub button is gone and Ask AI moves up beside search -->
+      <!-- below `lg` the GitHub button is gone and Ask moves up beside search -->
       <UTooltip text="Search" :kbds="['meta', 'K']" class="max-lg:order-first" ignore-non-keyboard-focus>
         <UContentSearchButton />
       </UTooltip>
@@ -68,7 +68,7 @@ function toggleChat() {
       <UButton
         color="neutral"
         variant="ghost"
-        aria-label="Ask AI"
+        aria-label="Ask"
         class="lg:hidden -order-1"
         @click="toggleChat"
       >
@@ -77,12 +77,12 @@ function toggleChat() {
         </template>
       </UButton>
 
-      <UTooltip text="Ask AI" :kbds="['meta', 'I']" class="hidden lg:flex" ignore-non-keyboard-focus>
+      <UTooltip text="Ask" :kbds="['meta', 'I']" class="hidden lg:flex" ignore-non-keyboard-focus>
         <UButton
           color="neutral"
           variant="outline"
-          label="Ask AI"
-          aria-label="Ask AI"
+          label="Ask"
+          aria-label="Ask"
           @click="toggleChat"
         >
           <template #leading>

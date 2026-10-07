@@ -14,7 +14,7 @@ name: 'use-tour-example'
 ---
 ::
 
-Each step requires a `target` that the popover anchors to. It accepts a CSS selector, an element, a virtual element (anything with `getBoundingClientRect`), or a ref/getter returning one of those. Pass `null` to anchor the step to the center of the viewport. Any other field on a step (`title`, `body`, `side`, …) is passed through untouched and available via `current`.
+Each step requires a `target` that the popover anchors to. It accepts a bare id (a plain word is always treated as an id, never as a tag selector) or any CSS selector, an element, a virtual element (anything with `getBoundingClientRect`), or a ref/getter returning one of those. Pass `null` to anchor the step to the center of the viewport. Any other field on a step (`title`, `body`, `side`, …) is passed through untouched and available via `current`.
 
 ```vue
 <script setup lang="ts">
@@ -59,7 +59,7 @@ const tour = useTour([
 
       ::field-group
         ::field{name="target" type="MaybeRefOrGetter<string | ReferenceElement | null | undefined>"}
-        The element the step anchors to. Accepts a CSS selector (`'#id'`, `'.class'`, or a bare id resolved as `#id`), an element, a virtual element, or a ref/getter returning one. Use `null` to center the step in the viewport.
+        The element the step anchors to. Accepts a bare id (`'id'` — a plain word is always treated as an id, never as a tag selector) or any CSS selector (`'#id'`, `'.class'`, `'[data-tour="step"]'`, …), an element, a virtual element, or a ref/getter returning one. Use `null` to center the step in the viewport.
         ::
 
         ::field{name="[key: string]" type="any"}
