@@ -30,6 +30,10 @@ describe('RadioGroup', () => {
     ['with descriptionKey', { props: { ...props, descriptionKey: 'value' } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with description', { props: { items: items.map((opt, count) => ({ ...opt, description: `Description ${count}` })) } }],
+    ['with icon', { props: { items: items.map(opt => ({ ...opt, icon: 'i-lucide-rocket' })), indicator: 'hidden' } }],
+    ['with icon card', { props: { items: items.map(opt => ({ ...opt, icon: 'i-lucide-rocket' })), indicator: 'hidden', variant: 'card', defaultValue: '1' } }],
+    ['with icon table', { props: { items: items.map(opt => ({ ...opt, icon: 'i-lucide-rocket' })), indicator: 'hidden', variant: 'table', defaultValue: '1' } }],
+    ['with highlight indicator hidden', { props: { ...props, indicator: 'hidden', variant: 'card', highlight: true, defaultValue: '1' } }],
     ['with required', { props: { ...props, legend: 'Legend', required: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size, defaultValue: '1' } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant, defaultValue: '1' } }]),
@@ -51,6 +55,36 @@ describe('RadioGroup', () => {
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(RadioGroup, {
       props
+    })
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  it('renders an item icon next to the label only when the indicator is hidden', async () => {
+    const items = [{ value: '1', label: 'Option 1', icon: 'i-lucide-rocket' }]
+
+    const wrapper = await mountSuspended(RadioGroup, { props: { items } })
+    expect(wrapper.find('[data-slot="wrapper"] [data-slot="icon"]').exists()).toBe(false)
+
+    const hidden = await mountSuspended(RadioGroup, { props: { items, indicator: 'hidden' } })
+    expect(hidden.find('[data-slot="wrapper"] [data-slot="icon"]').exists()).toBe(true)
+  })
+
+  it('renders an item icon without a label', async () => {
+    const wrapper = await mountSuspended(RadioGroup, {
+      props: { items: [{ value: 'table', icon: 'i-lucide-table' }], indicator: 'hidden' }
+    })
+    expect(wrapper.find('[data-slot="wrapper"] [data-slot="icon"]').exists()).toBe(true)
+  })
+
+  it('passes accessibility tests with icon items', async () => {
+    const wrapper = await mountSuspended(RadioGroup, {
+      props: {
+        items: [{ value: 'system', label: 'System', icon: 'i-lucide-monitor' }, { value: 'light', label: 'Light', icon: 'i-lucide-sun' }],
+        variant: 'table',
+        indicator: 'hidden',
+        orientation: 'horizontal',
+        defaultValue: 'system'
+      }
     })
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })

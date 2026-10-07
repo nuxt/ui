@@ -6,6 +6,7 @@ const colors = Object.keys(theme.variants.color)
 const variants = Object.keys(theme.variants.variant)
 const orientations = Object.keys(theme.variants.orientation)
 const contentOrientations = Object.keys(theme.variants.contentOrientation)
+const viewportAligns = ['start', 'center', 'end']
 
 const attrs = reactive({
   color: [theme.defaultVariants.color],
@@ -16,6 +17,7 @@ const highlight = ref(true)
 const highlightColor = ref()
 const orientation = ref('horizontal' as keyof typeof theme.variants.orientation)
 const contentOrientation = ref('horizontal' as keyof typeof theme.variants.contentOrientation)
+const viewportAlign = ref('center' as 'start' | 'center' | 'end')
 const collapsed = ref(false)
 const arrow = ref(false)
 
@@ -107,6 +109,7 @@ const items = [
     <USelect v-model="attrs.variant" :items="variants" placeholder="Variant" multiple />
     <USelect v-model="orientation" :items="orientations" placeholder="Orientation" />
     <USelect v-model="contentOrientation" :items="contentOrientations" placeholder="Content orientation" />
+    <USelect v-model="viewportAlign" :items="viewportAligns" placeholder="Viewport align" />
     <USwitch v-model="highlight" label="Highlight" />
     <USelect v-model="highlightColor" :items="colors" placeholder="Highlight color" />
     <USwitch v-model="collapsed" label="Collapsed" />
@@ -122,6 +125,7 @@ const items = [
       :items="items"
       :orientation="orientation"
       :content-orientation="contentOrientation"
+      :viewport="{ align: viewportAlign }"
       :highlight="highlight"
       :highlight-color="highlightColor"
       v-bind="props"

@@ -1,5 +1,5 @@
 import { streamText, createTextStreamResponse } from 'ai'
-import { gateway } from '@ai-sdk/gateway'
+import type { GatewayProviderOptions } from '@ai-sdk/gateway'
 
 export default defineEventHandler(async (event) => {
   const { prompt, mode, language } = await readBody(event)
@@ -51,10 +51,17 @@ CRITICAL RULES:
   }
 
   const result = streamText({
-    model: gateway('anthropic/claude-haiku-4.5'),
+    model: 'anthropic/claude-haiku-4.5',
     instructions,
     prompt,
-    maxOutputTokens
+    maxOutputTokens,
+    providerOptions: {
+      gateway: {
+        caching: 'auto',
+        user: getChatUser(event),
+        tags: ['docs-completion']
+      } satisfies GatewayProviderOptions
+    }
   })
 
   return createTextStreamResponse({ stream: result.textStream })

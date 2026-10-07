@@ -11,7 +11,7 @@ export default (options: Required<ModuleOptions>) => {
       value: 'truncate pointer-events-none',
       placeholder: 'truncate text-dimmed',
       arrow: 'fill-bg stroke-default',
-      content: 'max-h-[min(15rem,var(--reka-select-content-available-height,15rem))] w-(--reka-select-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden origin-(--reka-select-content-transform-origin) pointer-events-auto flex flex-col',
+      content: 'max-h-[min(15rem,var(--reka-select-content-available-height,15rem))] w-(--reka-select-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden origin-(--reka-select-content-transform-origin) pointer-events-auto data-[state=closed]:pointer-events-none! flex flex-col',
       viewport: 'relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1',
       group: 'p-1 isolate',
       empty: 'text-center text-muted',
@@ -38,7 +38,6 @@ export default (options: Required<ModuleOptions>) => {
       }),
       size: {
         xs: {
-          base: 'px-2 py-1 text-xs gap-1',
           label: 'p-1 text-[10px]/3 gap-1',
           item: 'p-1 text-xs gap-1',
           itemLeadingIcon: 'size-4',
@@ -49,7 +48,6 @@ export default (options: Required<ModuleOptions>) => {
           empty: 'p-2 text-xs'
         },
         sm: {
-          base: 'px-2.5 py-1.5 text-xs gap-1.5',
           label: 'p-1.5 text-[10px]/3 gap-1.5',
           item: 'p-1.5 text-xs gap-1.5',
           itemLeadingIcon: 'size-4',
@@ -60,7 +58,6 @@ export default (options: Required<ModuleOptions>) => {
           empty: 'p-2.5 text-xs'
         },
         md: {
-          base: 'px-2.5 py-1.5 text-sm gap-1.5',
           label: 'p-1.5 text-xs gap-1.5',
           item: 'p-1.5 text-sm gap-1.5',
           itemLeadingIcon: 'size-5',
@@ -71,7 +68,6 @@ export default (options: Required<ModuleOptions>) => {
           empty: 'p-2.5 text-sm'
         },
         lg: {
-          base: 'px-3 py-2 text-sm gap-2',
           label: 'p-2 text-xs gap-2',
           item: 'p-2 text-sm gap-2',
           itemLeadingIcon: 'size-5',
@@ -82,7 +78,6 @@ export default (options: Required<ModuleOptions>) => {
           empty: 'p-3 text-sm'
         },
         xl: {
-          base: 'px-3 py-2 text-base gap-2',
           label: 'p-2 text-sm gap-2',
           item: 'p-2 text-base gap-2',
           itemLeadingIcon: 'size-6',
@@ -95,7 +90,7 @@ export default (options: Required<ModuleOptions>) => {
       },
       position: {
         'popper': {
-          content: 'data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]'
+          content: 'data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)]'
         },
         'item-aligned': {
           content: ''

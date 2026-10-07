@@ -53,6 +53,7 @@ export interface PinInputProps<T extends PinInputType = 'text'> extends Pick<Pin
 export type PinInputEmits<T extends PinInputType = 'text'> = PinInputRootEmits<T> & {
   change: [event: Event]
   blur: [event: Event]
+  focus: [event: Event]
 }
 
 export interface PinInputSlots {
@@ -61,7 +62,7 @@ export interface PinInputSlots {
 </script>
 
 <script setup lang="ts" generic="T extends PinInputType">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onScopeDispose } from 'vue'
 import { PinInputInput, PinInputRoot } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
@@ -85,14 +86,23 @@ const appConfig = useAppConfig() as PinInput['AppConfig']
 
 const rootProps = useForwardProps(reactivePick(props, 'disabled', 'id', 'mask', 'name', 'otp', 'required', 'type'), emits)
 
-const { emitFormInput, emitFormFocus, emitFormChange, emitFormBlur, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField<PinInputProps>(_props)
+const { emitFormInput, emitFormFocus, emitFormChange, emitFormBlur, size: formFieldSize, color: formFieldColor, id, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<PinInputProps>(_props)
+
+// eslint-disable-next-line vue/no-dupe-keys
+const color = computed(() => formFieldColor.value ?? props.color)
+// eslint-disable-next-line vue/no-dupe-keys
+const highlight = computed(() => formFieldHighlight.value ?? props.highlight)
+// eslint-disable-next-line vue/no-dupe-keys
+const size = computed(() => formFieldSize.value ?? props.size)
+
+const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pinInput || {}) })({
-  color: color.value ?? props.color,
+  color: color.value,
   variant: props.variant,
-  size: size.value ?? props.size,
-  highlight: highlight.value ?? props.highlight,
+  size: size.value,
+  highlight: highlight.value,
   fixed: props.fixed
 }))
 
@@ -103,7 +113,6 @@ function setInputRef(index: number, el: Element | ComponentPublicInstance | null
   inputsRef.value[index] = el
 }
 
-const completed = ref(false)
 function onComplete(value: string[] | number[]) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
@@ -111,11 +120,22 @@ function onComplete(value: string[] | number[]) {
   emitFormChange()
 }
 
-function onBlur(event: FocusEvent) {
-  if (!event.relatedTarget || completed.value) {
-    emits('blur', event)
-    emitFormBlur()
+function onFocusOut(event: FocusEvent) {
+  if (event.relatedTarget && (event.currentTarget as HTMLElement).contains(event.relatedTarget as Node)) {
+    return
   }
+
+  emits('blur', event)
+  emitFormBlur()
+}
+
+function onFocusIn(event: FocusEvent) {
+  if (event.relatedTarget && (event.currentTarget as HTMLElement).contains(event.relatedTarget as Node)) {
+    return
+  }
+
+  emits('focus', event)
+  emitFormFocus()
 }
 
 function autoFocus() {
@@ -142,11 +162,15 @@ function shouldInsertSeparator(index: number) {
   return Number.isInteger(separator) && separator > 0 && position % separator === 0
 }
 
+let autofocusTimeoutId: ReturnType<typeof setTimeout> | undefined
+
 onMounted(() => {
-  setTimeout(() => {
+  autofocusTimeoutId = setTimeout(() => {
     autoFocus()
   }, props.autofocusDelay)
 })
+
+onScopeDispose(() => clearTimeout(autofocusTimeoutId))
 
 defineExpose({
   inputsRef
@@ -165,6 +189,8 @@ defineExpose({
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="emitFormInput()"
     @complete="onComplete"
+    @focusout="onFocusOut"
+    @focusin="onFocusIn"
   >
     <template v-for="(ids, index) in looseToNumber(props.length)" :key="ids">
       <PinInputInput
@@ -173,8 +199,6 @@ defineExpose({
         data-slot="base"
         :class="ui.base({ class: props.ui?.base })"
         :disabled="disabled"
-        @blur="onBlur"
-        @focus="emitFormFocus"
       />
       <span
         v-if="shouldInsertSeparator(index as number)"

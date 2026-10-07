@@ -64,7 +64,6 @@ export interface PopoverSlots<M extends PopoverMode = PopoverMode> {
 <script setup lang="ts" generic="M extends PopoverMode">
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
-import { } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { Popover, HoverCard } from 'reka-ui/namespaced'
 import { reactivePick } from '@vueuse/core'

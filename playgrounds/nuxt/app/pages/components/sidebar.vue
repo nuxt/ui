@@ -108,7 +108,6 @@ function onSubmit() {
           :error="error"
           variant="subtle"
           size="sm"
-          :ui="{ base: 'px-0' }"
           @submit="onSubmit"
         >
           <UChatPromptSubmit size="sm" :status="status" @stop="stop()" @reload="regenerate()" />

@@ -16,6 +16,10 @@ The ChatShimmer component renders an element with an animated shimmer gradient o
 This component is automatically used by the [`ChatTool`](/docs/components/chat-tool) and [`ChatReasoning`](/docs/components/chat-reasoning) components when streaming.
 ::
 
+::tip
+The animation is automatically disabled when the user prefers reduced motion, the text is displayed as static muted text instead.
+::
+
 ### Text
 
 Use the `text` prop to set the shimmer text.

@@ -1,6 +1,9 @@
 ---
 description: An indicator of a numeric value or a state.
 category: element
+keywords:
+  - notification dot
+  - status dot
 links:
   - label: GitHub
     icon: i-simple-icons-github

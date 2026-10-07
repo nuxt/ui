@@ -318,7 +318,7 @@ exports[`PricingPlans > renders with orientation vertical correctly 1`] = `
   <!---->
   <div data-slot="root" data-orientation="horizontal" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 grid-cols-1 lg:grid-cols-3 justify-between divide-y lg:divide-y-0 lg:divide-x divide-default bg-default ring ring-default">
     <!--v-if-->
-    <div data-slot="body" class="flex flex-col min-w-0 lg:col-span-2 pb-6 lg:pb-0 lg:pr-6 justify-center">
+    <div data-slot="body" class="flex flex-col min-w-0 lg:col-span-2 pb-6 lg:pb-0 lg:pe-6 justify-center">
       <div data-slot="titleWrapper" class="flex items-center gap-3">
         <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
         <!--v-if-->
@@ -345,7 +345,7 @@ exports[`PricingPlans > renders with orientation vertical correctly 1`] = `
   <!---->
   <div data-slot="root" data-orientation="horizontal" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 grid-cols-1 lg:grid-cols-3 justify-between divide-y lg:divide-y-0 lg:divide-x divide-default bg-default ring ring-default">
     <!--v-if-->
-    <div data-slot="body" class="flex flex-col min-w-0 lg:col-span-2 pb-6 lg:pb-0 lg:pr-6 justify-center">
+    <div data-slot="body" class="flex flex-col min-w-0 lg:col-span-2 pb-6 lg:pb-0 lg:pe-6 justify-center">
       <div data-slot="titleWrapper" class="flex items-center gap-3">
         <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
         <!--v-if-->
@@ -372,7 +372,7 @@ exports[`PricingPlans > renders with orientation vertical correctly 1`] = `
   <!---->
   <div data-slot="root" data-orientation="horizontal" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 grid-cols-1 lg:grid-cols-3 justify-between divide-y lg:divide-y-0 lg:divide-x divide-default bg-default ring ring-default">
     <!--v-if-->
-    <div data-slot="body" class="flex flex-col min-w-0 lg:col-span-2 pb-6 lg:pb-0 lg:pr-6 justify-center">
+    <div data-slot="body" class="flex flex-col min-w-0 lg:col-span-2 pb-6 lg:pb-0 lg:pe-6 justify-center">
       <div data-slot="titleWrapper" class="flex items-center gap-3">
         <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
         <!--v-if-->

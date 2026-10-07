@@ -109,7 +109,7 @@ const date = computed(() => {
   }
 
   try {
-    return formatter.custom(new Date(props.date), { dateStyle: 'medium' })
+    return formatter.custom(new Date(props.date), { dateStyle: 'medium', timeZone: 'UTC' })
   } catch {
     return props.date
   }

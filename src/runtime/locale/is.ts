@@ -2,7 +2,7 @@ import type { Messages } from '../types/locale'
 import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
-  name: 'Icelandic',
+  name: 'Íslenska',
   code: 'is',
   messages: {
     alert: {
@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Næsta',
       prev: 'Fyrri'
     },
+    chatMessages: {
+      autoScroll: 'Skruna niður'
+    },
     chatPrompt: {
       placeholder: 'Skrifaðu skilaboðin þín hér…'
     },
     chatPromptSubmit: {
-      label: 'Senda fyrirspurn'
+      label: 'Senda fyrirspurn',
+      reload: 'Reyna aftur',
+      stop: 'Stöðva myndun'
     },
     chatReasoning: {
       thinking: 'Hugsar…',
@@ -111,6 +116,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Loka'
+    },
+    pagination: {
+      first: 'Fyrsta síða',
+      last: 'Síðasta síða',
+      next: 'Næsta síða',
+      page: 'Síða {page}',
+      prev: 'Fyrri síða'
     },
     pricingTable: {
       caption: 'Samanburður verðflokka'

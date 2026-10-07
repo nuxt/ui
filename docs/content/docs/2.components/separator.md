@@ -1,6 +1,10 @@
 ---
 description: Separates content horizontally or vertically.
 category: element
+keywords:
+  - divider
+  - hr
+  - horizontal rule
 links:
   - label: Separator
     icon: i-custom-reka-ui

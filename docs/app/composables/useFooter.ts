@@ -1,17 +1,23 @@
 export function useFooter() {
-  const links = [{
+  const route = useRoute()
+
+  const links = computed(() => [{
+    label: 'Community',
+    to: '/community',
+    active: route.path.startsWith('/community')
+  }, {
     label: 'Blog',
-    to: '/blog'
+    to: '/blog',
+    active: route.path.startsWith('/blog')
   }, {
-    label: 'Templates',
-    to: '/templates'
-  }, {
-    label: 'Showcase',
-    to: '/showcase'
+    label: 'Contribution',
+    to: '/docs/getting-started/contribution',
+    active: route.path === '/docs/getting-started/contribution'
   }, {
     label: 'Team',
-    to: '/team'
-  }]
+    to: '/team',
+    active: route.path.startsWith('/team')
+  }])
 
   return {
     links

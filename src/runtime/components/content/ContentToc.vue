@@ -11,7 +11,7 @@ type ContentToc = ComponentConfig<typeof theme, AppConfig, 'contentToc'>
 
 export type ContentTocLink = TocLink & {
   class?: any
-  ui?: Pick<ContentToc['slots'], 'item' | 'itemWithChildren' | 'link' | 'linkText'>
+  ui?: Partial<Pick<ContentToc['slots'], 'item' | 'itemWithChildren' | 'link' | 'linkText'>>
 }
 
 export interface ContentTocProps<T extends ContentTocLink = ContentTocLink> extends Pick<CollapsibleRootProps, 'defaultOpen' | 'open'> {
@@ -149,6 +149,12 @@ const activeIndex = computed(() => {
 
   return flattenLinks(props.links || []).findIndex(link => activeHeadings.value.includes(link.id))
 })
+
+// The natural height of the list, so the theme can floor how far the list may
+// shrink without inflating a short one: `min(var(--list-height), <floor>)`.
+const listStyle = computed(() => ({
+  '--list-height': `${flattenLinks(props.links || []).length * linkHeight}rem`
+}))
 
 const indicatorStyle = computed(() => {
   if (!activeHeadings.value?.length) {
@@ -315,7 +321,7 @@ onUnmounted(() => {
           <ReuseTriggerTemplate :open="open" />
         </p>
 
-        <div ref="contentRef" data-slot="content" :class="ui.content({ class: [props.ui?.content, prefix('hidden lg:flex')] })" :style="scrollShadowStyle">
+        <div ref="contentRef" data-slot="content" :class="ui.content({ class: [props.ui?.content, prefix('hidden lg:flex')] })" :style="[listStyle, scrollShadowStyle]">
           <ReuseContentTemplate />
         </div>
       </template>

@@ -1,5 +1,4 @@
 ---
-title: Main
 description: 'A main element that fills the available viewport height.'
 category: layout
 links:

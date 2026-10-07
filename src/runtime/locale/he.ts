@@ -2,7 +2,7 @@ import type { Messages } from '../types/locale'
 import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
-  name: 'Hebrew',
+  name: 'עברית',
   code: 'he',
   dir: 'rtl',
   messages: {
@@ -29,11 +29,16 @@ export default defineLocale<Messages>({
       next: 'הבא',
       prev: 'הקודם'
     },
+    chatMessages: {
+      autoScroll: 'גלול למטה'
+    },
     chatPrompt: {
       placeholder: 'כתוב את ההודעה שלך כאן…'
     },
     chatPromptSubmit: {
-      label: 'שלח'
+      label: 'שלח',
+      reload: 'נסה שוב',
+      stop: 'עצור את היצירה'
     },
     chatReasoning: {
       thinking: 'חושב…',
@@ -112,6 +117,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'סגור'
+    },
+    pagination: {
+      first: 'עמוד ראשון',
+      last: 'עמוד אחרון',
+      next: 'עמוד הבא',
+      page: 'עמוד {page}',
+      prev: 'עמוד הקודם'
     },
     pricingTable: {
       caption: 'שיפור מחירון'

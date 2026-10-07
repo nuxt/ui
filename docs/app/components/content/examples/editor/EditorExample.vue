@@ -545,20 +545,20 @@ const mentionItems: EditorMentionMenuItem[] = [{
   label: 'HugoRCD',
   avatar: { src: 'https://avatars.githubusercontent.com/u/71938701?v=4', loading: 'lazy' as const }
 }, {
+  label: 'atinux',
+  avatar: { src: 'https://avatars.githubusercontent.com/u/904724?v=4', loading: 'lazy' as const }
+}, {
   label: 'romhml',
   avatar: { src: 'https://avatars.githubusercontent.com/u/25613751?v=4', loading: 'lazy' as const }
 }, {
   label: 'sandros94',
   avatar: { src: 'https://avatars.githubusercontent.com/u/13056429?v=4', loading: 'lazy' as const }
 }, {
-  label: 'hywax',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/149865959?v=4', loading: 'lazy' as const }
-}, {
   label: 'J-Michalek',
   avatar: { src: 'https://avatars.githubusercontent.com/u/71264422?v=4', loading: 'lazy' as const }
 }, {
-  label: 'genu',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/928780?v=4', loading: 'lazy' as const }
+  label: 'hywax',
+  avatar: { src: 'https://avatars.githubusercontent.com/u/149865959?v=4', loading: 'lazy' as const }
 }]
 
 const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.name.startsWith('regional_indicator_'))

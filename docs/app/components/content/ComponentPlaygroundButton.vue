@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { track } = useAnalytics()
+const studioIcons = useStudioIcons()
 
 const props = defineProps<{
   to: string
@@ -12,7 +13,7 @@ const props = defineProps<{
     <UButton
       :to="props.to"
       target="_blank"
-      icon="i-lucide-play"
+      :icon="studioIcons.play"
       color="neutral"
       variant="outline"
       size="sm"

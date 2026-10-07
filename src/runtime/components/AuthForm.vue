@@ -13,7 +13,7 @@ import type { SelectMenuProps } from './SelectMenu.vue'
 import type { PinInputProps } from './PinInput.vue'
 import type { IconProps } from './Icon.vue'
 import type { LinkPropsKeys } from './Link.vue'
-import type { FormSchema, FormSubmitEvent, InferInput } from '../types/form'
+import type { FormData, FormSchema, FormSubmitEvent, InferInput } from '../types/form'
 import type { FormHTMLAttributes } from '../types/html'
 import type { NonUnion } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
@@ -151,7 +151,7 @@ const state = reactive<FormStateType>((_props.fields as TypedAuthFormField[] || 
   return acc
 }, {} as FormStateType))
 
-defineEmits<AuthFormEmits<typeof state>>()
+defineEmits<AuthFormEmits<FormData<T>>>()
 const slots = defineSlots<AuthFormSlots<typeof state, F>>()
 
 const props = useComponentProps<AuthFormProps<T, F>>('authForm', _props)

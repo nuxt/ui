@@ -2,7 +2,7 @@ import type { Messages } from '../types/locale'
 import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
-  name: 'Schweizerdeutsch',
+  name: 'Schweizer Hochdeutsch',
   code: 'de-CH',
   messages: {
     alert: {
@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Weiter',
       prev: 'Zurück'
     },
+    chatMessages: {
+      autoScroll: 'Nach unten scrollen'
+    },
     chatPrompt: {
       placeholder: 'Hier schreiben Sie Ihre Nachricht…'
     },
     chatPromptSubmit: {
-      label: 'Senden'
+      label: 'Senden',
+      reload: 'Erneut versuchen',
+      stop: 'Generierung stoppen'
     },
     chatReasoning: {
       thinking: 'Denkt nach…',
@@ -111,6 +116,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Schliessen'
+    },
+    pagination: {
+      first: 'Erste Seite',
+      last: 'Letzte Seite',
+      next: 'Nächste Seite',
+      page: 'Seite {page}',
+      prev: 'Vorherige Seite'
     },
     pricingTable: {
       caption: 'Preisplanvergleich'

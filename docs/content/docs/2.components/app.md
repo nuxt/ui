@@ -1,6 +1,5 @@
 ---
-title: App
-description: Wraps your app to provide global configurations and more.
+description: A wrapper to provide global configuration, toasts and tooltips to your app.
 category: layout
 links:
   - label: GitHub

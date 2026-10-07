@@ -21,7 +21,7 @@ type Carousel = ComponentConfig<typeof theme, AppConfig, 'carousel'>
 export type CarouselValue = AcceptableValue
 export type CarouselItem = CarouselValue | {
   class?: any
-  ui?: Pick<Carousel['slots'], 'item'>
+  ui?: Partial<Pick<Carousel['slots'], 'item'>>
   [key: string]: any
 }
 
@@ -71,32 +71,32 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Om
   items?: T[]
   /**
    * Enable Autoplay plugin
-   * @see https://www.embla-carousel.com/plugins/autoplay/
+   * @see https://www.embla-carousel.com/docs/v8/plugins/autoplay
    */
   autoplay?: boolean | AutoplayOptionsType
   /**
    * Enable Auto Scroll plugin
-   * @see https://www.embla-carousel.com/plugins/auto-scroll/
+   * @see https://www.embla-carousel.com/docs/v8/plugins/auto-scroll
    */
   autoScroll?: boolean | AutoScrollOptionsType
   /**
    * Enable Auto Height plugin
-   * @see https://www.embla-carousel.com/plugins/auto-height/
+   * @see https://www.embla-carousel.com/docs/v8/plugins/auto-height
    */
   autoHeight?: boolean | AutoHeightOptionsType
   /**
    * Enable Class Names plugin
-   * @see https://www.embla-carousel.com/plugins/class-names/
+   * @see https://www.embla-carousel.com/docs/v8/plugins/class-names
    */
   classNames?: boolean | ClassNamesOptionsType
   /**
    * Enable Fade plugin
-   * @see https://www.embla-carousel.com/plugins/fade/
+   * @see https://www.embla-carousel.com/docs/v8/plugins/fade
    */
   fade?: boolean | FadeOptionsType
   /**
    * Enable Wheel Gestures plugin
-   * @see https://www.embla-carousel.com/plugins/wheel-gestures/
+   * @see https://www.embla-carousel.com/docs/v8/plugins/wheel-gestures
    */
   wheelGestures?: boolean | WheelGesturesPluginOptions
   class?: any
@@ -238,10 +238,12 @@ async function loadPlugins() {
   plugins.value = emblaPlugins
 }
 
-watch(() => [props.autoplay, props.autoScroll, props.autoHeight, props.classNames, props.fade, props.wheelGestures], async () => {
-  await loadPlugins()
-  emblaApi.value?.reInit(options.value, plugins.value)
-}, { immediate: true })
+// Rebuild the plugins array whenever a plugin prop changes. `useEmblaCarousel`
+// watches the `plugins` ref and reinitializes through its own `arePluginsEqual`
+// guard, so we must not reinitialize here: plugin props passed as inline objects
+// (e.g. `:autoplay="{ delay: 5000 }"`) get a new reference on every parent render,
+// which would otherwise reinitialize the carousel and reset it to the first slide.
+watch(() => [props.autoplay, props.autoScroll, props.autoHeight, props.classNames, props.fade, props.wheelGestures], loadPlugins, { immediate: true })
 
 const [emblaRef, emblaApi] = useEmblaCarousel(options, plugins)
 

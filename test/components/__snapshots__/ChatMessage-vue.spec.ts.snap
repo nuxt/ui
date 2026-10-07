@@ -7,7 +7,7 @@ exports[`ChatMessage > renders with actions slot correctly 1`] = `
     <!--v-if-->
     <div data-slot="body" class="min-w-0 w-full">
       <div data-slot="content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 w-full">Hello, how are you?</div>
-      <div data-slot="actions" class="[@media(hover:hover)]:opacity-0 group-hover/message:opacity-100 absolute bottom-0 flex items-center transition-opacity">Actions slot</div>
+      <div data-slot="actions" class="[@media(hover:hover)]:opacity-0 group-hover/message:opacity-100 absolute bottom-0 flex items-center transition-opacity ease-out">Actions slot</div>
     </div>
   </div>
 </article>"

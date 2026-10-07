@@ -2,6 +2,10 @@
 title: ScrollArea
 description: A flexible scroll container with virtualization support.
 category: data
+keywords:
+  - scrollbar
+  - overflow
+  - scrolling
 links:
   - label: TanStack Virtual
     avatar:
@@ -153,7 +157,7 @@ class: '!p-0'
 ---
 ::
 
-### With external scroll element :badge{label="Soon" class="align-text-top"}
+### With external scroll element :badge{label="4.10+" class="align-text-top"}
 
 Pass a `getScrollElement` function in the `virtualize` prop to virtualize against an ancestor scroll container instead of the component's own viewport. Set `scrollMargin` to the list's offset from the scroll element's start (e.g. the height of the content above it).
 

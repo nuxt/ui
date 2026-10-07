@@ -1,43 +1,35 @@
-import { z } from 'zod'
 import { queryCollection } from '@nuxt/content/server'
 
 export default defineMcpTool({
-  description: 'Retrieves version-specific migration guides and upgrade instructions',
+  description: 'Returns the full guide for migrating an application from the previous major version of Nuxt UI to this one, as Markdown with its title, description and URL. Takes no parameters and covers that single upgrade only. The page is large. To read part of it, call `get-documentation-page` with `/docs/getting-started/migration` and a `headings` list.',
   annotations: {
     readOnlyHint: true,
     destructiveHint: false,
     idempotentHint: true,
     openWorldHint: false
   },
-  inputSchema: {
-    version: z.enum(['v3', 'v4']).describe('The migration version (e.g., v4, v3)')
-  },
-  inputExamples: [
-    { version: 'v4' }
-  ],
   cache: '30m',
-  async handler({ version }) {
+  async handler() {
     const event = useEvent()
 
     const page = await queryCollection(event, 'docs')
-      .where('path', 'LIKE', `%/migration/${version}`)
+      .where('path', '=', '/docs/getting-started/migration')
       .where('extension', '=', 'md')
       .select('title', 'description', 'path')
       .first()
 
     if (!page) {
-      throw createError({ statusCode: 404, message: `Migration guide for '${version}' not found` })
+      throw createError({ statusCode: 404, message: 'Migration guide not found' })
     }
 
     const documentation = await $fetch<string>(`/raw${page.path}.md`)
 
     return {
-      version,
       title: page.title,
       description: page.description,
       path: page.path,
       documentation,
-      url: `https://ui.nuxt.com${page.path}`
+      url: `${SITE_URL}${page.path}`
     }
   }
 })

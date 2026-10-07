@@ -95,6 +95,18 @@ export function applyUnstyled(result: any, unstyled?: boolean): any {
     ? Object.fromEntries(Object.keys(value as Record<string, unknown>).map(slot => [slot, '']))
     : ''
 
+  // Copy before reassigning: object-shaped themes are the shared module export
+  // (function-shaped ones produce a fresh object per call), and blanking the
+  // shared object in place would blank every later read — the Vue dev server
+  // re-generates themes as component detection grows.
+  result = { ...result }
+
+  // Single-element components have no `slots`: their classes live in a
+  // top-level `base` string (or array, when parts are conditional).
+  if (result.base) {
+    result.base = ''
+  }
+
   if (result.slots) {
     result.slots = Object.fromEntries(Object.keys(result.slots).map(slot => [slot, '']))
   }

@@ -7,7 +7,7 @@ exports[`PricingTable > renders with as correctly 1`] = `
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Free</div>
@@ -26,7 +26,7 @@ exports[`PricingTable > renders with as correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Pro</div><span data-slot="tierBadge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25 truncate"><!--v-if--><span data-slot="label" class="truncate">Most popular</span>
@@ -45,7 +45,7 @@ exports[`PricingTable > renders with as correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Enterprise</div>
@@ -68,7 +68,7 @@ exports[`PricingTable > renders with as correctly 1`] = `
     </thead>
     <tbody data-slot="tbody" class="">
       <tr data-slot="tr" class="">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Features</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -76,7 +76,7 @@ exports[`PricingTable > renders with as correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited projects</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -90,7 +90,7 @@ exports[`PricingTable > renders with as correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited members</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -104,7 +104,7 @@ exports[`PricingTable > renders with as correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited integrations</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -118,7 +118,7 @@ exports[`PricingTable > renders with as correctly 1`] = `
         </td>
       </tr>
       <tr data-slot="tr" class="*:pt-8">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -126,7 +126,7 @@ exports[`PricingTable > renders with as correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Email support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -140,7 +140,7 @@ exports[`PricingTable > renders with as correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">24/7 support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -302,7 +302,7 @@ exports[`PricingTable > renders with caption correctly 1`] = `
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Free</div>
@@ -321,7 +321,7 @@ exports[`PricingTable > renders with caption correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Pro</div><span data-slot="tierBadge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25 truncate"><!--v-if--><span data-slot="label" class="truncate">Most popular</span>
@@ -340,7 +340,7 @@ exports[`PricingTable > renders with caption correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Enterprise</div>
@@ -363,7 +363,7 @@ exports[`PricingTable > renders with caption correctly 1`] = `
     </thead>
     <tbody data-slot="tbody" class="">
       <tr data-slot="tr" class="">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Features</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -371,7 +371,7 @@ exports[`PricingTable > renders with caption correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited projects</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -385,7 +385,7 @@ exports[`PricingTable > renders with caption correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited members</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -399,7 +399,7 @@ exports[`PricingTable > renders with caption correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited integrations</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -413,7 +413,7 @@ exports[`PricingTable > renders with caption correctly 1`] = `
         </td>
       </tr>
       <tr data-slot="tr" class="*:pt-8">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -421,7 +421,7 @@ exports[`PricingTable > renders with caption correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Email support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -435,7 +435,7 @@ exports[`PricingTable > renders with caption correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">24/7 support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -597,7 +597,7 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Free</div>
@@ -616,7 +616,7 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Pro</div><span data-slot="tierBadge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25 truncate"><!--v-if--><span data-slot="label" class="truncate">Most popular</span>
@@ -635,7 +635,7 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Enterprise</div>
@@ -658,7 +658,7 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
     </thead>
     <tbody data-slot="tbody" class="">
       <tr data-slot="tr" class="">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Features</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -666,7 +666,7 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited projects</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -680,7 +680,7 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited members</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -694,7 +694,7 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited integrations</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -708,7 +708,7 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
         </td>
       </tr>
       <tr data-slot="tr" class="*:pt-8">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -716,7 +716,7 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Email support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -730,7 +730,7 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">24/7 support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -892,7 +892,7 @@ exports[`PricingTable > renders with class correctly 1`] = `
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Free</div>
@@ -911,7 +911,7 @@ exports[`PricingTable > renders with class correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Pro</div><span data-slot="tierBadge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25 truncate"><!--v-if--><span data-slot="label" class="truncate">Most popular</span>
@@ -930,7 +930,7 @@ exports[`PricingTable > renders with class correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Enterprise</div>
@@ -953,7 +953,7 @@ exports[`PricingTable > renders with class correctly 1`] = `
     </thead>
     <tbody data-slot="tbody" class="">
       <tr data-slot="tr" class="">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Features</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -961,7 +961,7 @@ exports[`PricingTable > renders with class correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited projects</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -975,7 +975,7 @@ exports[`PricingTable > renders with class correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited members</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -989,7 +989,7 @@ exports[`PricingTable > renders with class correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited integrations</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -1003,7 +1003,7 @@ exports[`PricingTable > renders with class correctly 1`] = `
         </td>
       </tr>
       <tr data-slot="tr" class="*:pt-8">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -1011,7 +1011,7 @@ exports[`PricingTable > renders with class correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Email support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -1025,7 +1025,7 @@ exports[`PricingTable > renders with class correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">24/7 support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -1187,20 +1187,20 @@ exports[`PricingTable > renders with tier slot correctly 1`] = `
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">Tier slot</div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">Tier slot</div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">Tier slot</div>
         </th>
       </tr>
     </thead>
     <tbody data-slot="tbody" class="">
       <tr data-slot="tr" class="">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Features</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -1208,7 +1208,7 @@ exports[`PricingTable > renders with tier slot correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited projects</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -1222,7 +1222,7 @@ exports[`PricingTable > renders with tier slot correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited members</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -1236,7 +1236,7 @@ exports[`PricingTable > renders with tier slot correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited integrations</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -1250,7 +1250,7 @@ exports[`PricingTable > renders with tier slot correctly 1`] = `
         </td>
       </tr>
       <tr data-slot="tr" class="*:pt-8">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -1258,7 +1258,7 @@ exports[`PricingTable > renders with tier slot correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Email support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -1272,7 +1272,7 @@ exports[`PricingTable > renders with tier slot correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">24/7 support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -1386,7 +1386,7 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Free</div>Tier badge slot
@@ -1404,7 +1404,7 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Pro</div>Tier badge slot
@@ -1422,7 +1422,7 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Enterprise</div>Tier badge slot
@@ -1444,7 +1444,7 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
     </thead>
     <tbody data-slot="tbody" class="">
       <tr data-slot="tr" class="">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Features</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -1452,7 +1452,7 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited projects</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -1466,7 +1466,7 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited members</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -1480,7 +1480,7 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited integrations</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -1494,7 +1494,7 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
         </td>
       </tr>
       <tr data-slot="tr" class="*:pt-8">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -1502,7 +1502,7 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Email support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -1516,7 +1516,7 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">24/7 support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -1675,7 +1675,7 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Free</div>
@@ -1694,7 +1694,7 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Pro</div><span data-slot="tierBadge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25 truncate"><!--v-if--><span data-slot="label" class="truncate">Most popular</span>
@@ -1713,7 +1713,7 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Enterprise</div>
@@ -1736,7 +1736,7 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
     </thead>
     <tbody data-slot="tbody" class="">
       <tr data-slot="tr" class="">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Features</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -1744,7 +1744,7 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited projects</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -1758,7 +1758,7 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited members</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -1772,7 +1772,7 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited integrations</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -1786,7 +1786,7 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
         </td>
       </tr>
       <tr data-slot="tr" class="*:pt-8">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -1794,7 +1794,7 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Email support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -1808,7 +1808,7 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">24/7 support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -1970,7 +1970,7 @@ exports[`PricingTable > renders with tier-button slot correctly 1`] = `
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Free</div>
@@ -1985,7 +1985,7 @@ exports[`PricingTable > renders with tier-button slot correctly 1`] = `
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6">Tier button slot</div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Pro</div><span data-slot="tierBadge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25 truncate"><!--v-if--><span data-slot="label" class="truncate">Most popular</span>
@@ -2000,7 +2000,7 @@ exports[`PricingTable > renders with tier-button slot correctly 1`] = `
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6">Tier button slot</div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Enterprise</div>
@@ -2019,7 +2019,7 @@ exports[`PricingTable > renders with tier-button slot correctly 1`] = `
     </thead>
     <tbody data-slot="tbody" class="">
       <tr data-slot="tr" class="">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Features</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -2027,7 +2027,7 @@ exports[`PricingTable > renders with tier-button slot correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited projects</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -2041,7 +2041,7 @@ exports[`PricingTable > renders with tier-button slot correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited members</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -2055,7 +2055,7 @@ exports[`PricingTable > renders with tier-button slot correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited integrations</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -2069,7 +2069,7 @@ exports[`PricingTable > renders with tier-button slot correctly 1`] = `
         </td>
       </tr>
       <tr data-slot="tr" class="*:pt-8">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -2077,7 +2077,7 @@ exports[`PricingTable > renders with tier-button slot correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Email support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -2091,7 +2091,7 @@ exports[`PricingTable > renders with tier-button slot correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">24/7 support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -2241,7 +2241,7 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Free</div>
@@ -2260,7 +2260,7 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Pro</div><span data-slot="tierBadge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25 truncate"><!--v-if--><span data-slot="label" class="truncate">Most popular</span>
@@ -2279,7 +2279,7 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Enterprise</div>
@@ -2302,7 +2302,7 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
     </thead>
     <tbody data-slot="tbody" class="">
       <tr data-slot="tr" class="">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Features</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -2310,7 +2310,7 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited projects</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -2324,7 +2324,7 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited members</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -2338,7 +2338,7 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited integrations</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -2352,7 +2352,7 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
         </td>
       </tr>
       <tr data-slot="tr" class="*:pt-8">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -2360,7 +2360,7 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Email support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -2374,7 +2374,7 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">24/7 support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -2536,7 +2536,7 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Free</div>
@@ -2555,7 +2555,7 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Pro</div><span data-slot="tierBadge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25 truncate"><!--v-if--><span data-slot="label" class="truncate">Most popular</span>
@@ -2574,7 +2574,7 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Enterprise</div>
@@ -2597,7 +2597,7 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
     </thead>
     <tbody data-slot="tbody" class="">
       <tr data-slot="tr" class="">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Features</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -2605,7 +2605,7 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited projects</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -2619,7 +2619,7 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited members</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -2633,7 +2633,7 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited integrations</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -2647,7 +2647,7 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
         </td>
       </tr>
       <tr data-slot="tr" class="*:pt-8">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -2655,7 +2655,7 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Email support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -2669,7 +2669,7 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">24/7 support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -2831,7 +2831,7 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Free</div>
@@ -2850,7 +2850,7 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Pro</div><span data-slot="tierBadge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25 truncate"><!--v-if--><span data-slot="label" class="truncate">Most popular</span>
@@ -2869,7 +2869,7 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Enterprise</div>
@@ -2892,7 +2892,7 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
     </thead>
     <tbody data-slot="tbody" class="">
       <tr data-slot="tr" class="">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Features</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -2900,7 +2900,7 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited projects</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -2914,7 +2914,7 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited members</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -2928,7 +2928,7 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited integrations</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -2942,7 +2942,7 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
         </td>
       </tr>
       <tr data-slot="tr" class="*:pt-8">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -2950,7 +2950,7 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Email support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -2964,7 +2964,7 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">24/7 support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -3126,7 +3126,7 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Tier title slot</div>
@@ -3145,7 +3145,7 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Tier title slot</div><span data-slot="tierBadge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25 truncate"><!--v-if--><span data-slot="label" class="truncate">Most popular</span>
@@ -3164,7 +3164,7 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Tier title slot</div>
@@ -3187,7 +3187,7 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
     </thead>
     <tbody data-slot="tbody" class="">
       <tr data-slot="tr" class="">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Features</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -3195,7 +3195,7 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited projects</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -3209,7 +3209,7 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited members</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -3223,7 +3223,7 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited integrations</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -3237,7 +3237,7 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
         </td>
       </tr>
       <tr data-slot="tr" class="*:pt-8">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -3245,7 +3245,7 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Email support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -3259,7 +3259,7 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">24/7 support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -3421,7 +3421,7 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Free</div>
@@ -3440,7 +3440,7 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Pro</div><span data-slot="tierBadge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25 truncate"><!--v-if--><span data-slot="label" class="truncate">Most popular</span>
@@ -3459,7 +3459,7 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Enterprise</div>
@@ -3482,7 +3482,7 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
     </thead>
     <tbody data-slot="tbody" class="">
       <tr data-slot="tr" class="">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Features</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -3490,7 +3490,7 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited projects</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -3504,7 +3504,7 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited members</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -3518,7 +3518,7 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited integrations</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -3532,7 +3532,7 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
         </td>
       </tr>
       <tr data-slot="tr" class="*:pt-8">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -3540,7 +3540,7 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Email support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -3554,7 +3554,7 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">24/7 support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -3716,7 +3716,7 @@ exports[`PricingTable > renders with ui correctly 1`] = `
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Free</div>
@@ -3735,7 +3735,7 @@ exports[`PricingTable > renders with ui correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Pro</div><span data-slot="tierBadge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25 truncate"><!--v-if--><span data-slot="label" class="truncate">Most popular</span>
@@ -3754,7 +3754,7 @@ exports[`PricingTable > renders with ui correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left rtl:text-right font-normal align-top h-full">
+        <th scope="col" data-slot="tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Enterprise</div>
@@ -3777,7 +3777,7 @@ exports[`PricingTable > renders with ui correctly 1`] = `
     </thead>
     <tbody data-slot="tbody" class="">
       <tr data-slot="tr" class="">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Features</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -3785,7 +3785,7 @@ exports[`PricingTable > renders with ui correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited projects</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -3799,7 +3799,7 @@ exports[`PricingTable > renders with ui correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited members</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -3813,7 +3813,7 @@ exports[`PricingTable > renders with ui correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Unlimited integrations</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -3827,7 +3827,7 @@ exports[`PricingTable > renders with ui correctly 1`] = `
         </td>
       </tr>
       <tr data-slot="tr" class="*:pt-8">
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="sectionTitle" class="font-semibold text-sm text-highlighted">Support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
@@ -3835,7 +3835,7 @@ exports[`PricingTable > renders with ui correctly 1`] = `
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default"></td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">Email support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">
@@ -3849,7 +3849,7 @@ exports[`PricingTable > renders with ui correctly 1`] = `
         </td>
       </tr>
       <tr>
-        <th scope="row" data-slot="th" class="py-4 font-normal text-left rtl:text-right border-b border-default">
+        <th scope="row" data-slot="th" class="py-4 font-normal text-start border-b border-default">
           <div data-slot="featureTitle" class="text-sm text-default">24/7 support</div>
         </th>
         <td data-slot="td" class="px-6 py-4 text-center border-b border-default">

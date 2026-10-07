@@ -1,47 +1,9 @@
 import { reactivePick } from '@vueuse/core'
 import { isEqual, diff } from 'ohash/utils'
 import type { LinkProps } from '../components/Link.vue'
+import { linkKeys } from './link-keys'
 
-export const linkKeys = [
-  'active',
-  'activeClass',
-  'ariaCurrentValue',
-  'as',
-  'disabled',
-  'download',
-  'exact',
-  'exactActiveClass',
-  'exactHash',
-  'exactQuery',
-  'external',
-  'form',
-  'formaction',
-  'formenctype',
-  'formmethod',
-  'formnovalidate',
-  'formtarget',
-  'href',
-  'hreflang',
-  'inactiveClass',
-  'locale',
-  'media',
-  'noPrefetch',
-  'noRel',
-  'onClick',
-  'ping',
-  'prefetch',
-  'prefetchOn',
-  'prefetchedClass',
-  'referrerpolicy',
-  'rel',
-  'replace',
-  'target',
-  'title',
-  'to',
-  'trailingSlash',
-  'type',
-  'viewTransition'
-] as const
+export { linkKeys }
 
 export function pickLinkProps(link: LinkProps & { [key: string]: any }) {
   const keys = Object.keys(link)

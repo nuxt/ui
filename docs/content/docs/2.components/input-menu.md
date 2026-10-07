@@ -2,6 +2,10 @@
 title: InputMenu
 description: An autocomplete input with real-time suggestions.
 category: form
+keywords:
+  - combobox
+  - typeahead
+  - autosuggest
 links:
   - label: Combobox
     icon: i-custom-reka-ui
@@ -715,22 +719,25 @@ externalTypes:
 props:
   modelValue: 'Apple'
   items:
-    - type: 'label'
-      label: 'Fruits'
-    - Apple
-    - Banana
-    - Blueberry
-    - Grapes
-    - Pineapple
-    - type: 'separator'
-    - type: 'label'
-      label: 'Vegetables'
-    - Aubergine
-    - Broccoli
-    - Carrot
-    - Courgette
-    - Leek
+    - - type: 'label'
+        label: 'Fruits'
+      - Apple
+      - Banana
+      - Blueberry
+      - Grapes
+      - Pineapple
+    - - type: 'label'
+        label: 'Vegetables'
+      - Aubergine
+      - Broccoli
+      - Carrot
+      - Courgette
+      - Leek
 ---
+::
+
+::note
+When using `label` items as group headings, pass an array of arrays so a label gets filtered out together with its group when searching.
 ::
 
 ### With icon in items
@@ -819,6 +826,16 @@ Here is an example with a rotating icon that indicates the open state of the Inp
 ::component-example
 ---
 name: 'input-menu-icon-example'
+---
+::
+
+### With floating label :badge{label="Soon" class="align-text-top"}
+
+You can use the `#default` slot to add a floating label to the InputMenu.
+
+::component-example
+---
+name: 'input-menu-floating-label-example'
 ---
 ::
 

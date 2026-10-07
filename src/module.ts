@@ -118,7 +118,7 @@ export interface ModuleOptions {
      * - `string[]`: Enable detection and include additional components (useful for dynamic components)
      * @defaultValue false
      * @example true
-     * @example ['Modal', 'Dropdown']
+     * @example ['Modal', 'DropdownMenu']
      */
     componentDetection?: boolean | string[]
   }
@@ -257,6 +257,8 @@ export default defineNuxtModule<ModuleOptions>({
         path: resolve('./runtime/components/prose'),
         pathPrefix: false,
         prefix: 'Prose',
+        // Skip the `index` barrel
+        extensions: ['vue'],
         global: true
       })
     }

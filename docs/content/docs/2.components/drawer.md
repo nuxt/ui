@@ -1,6 +1,10 @@
 ---
-description: A drawer that smoothly slides in & out of the screen.
+description: A drawer that smoothly slides in and out of the screen.
 category: overlay
+keywords:
+  - bottom sheet
+  - action sheet
+  - mobile sheet
 links:
   - label: Drawer
     icon: i-custom-reka-ui
@@ -90,7 +94,7 @@ slots:
 :placeholder{class="h-48"}
 ::
 
-### Close :badge{label="Soon" class="align-text-top"}
+### Close :badge{label="4.10+" class="align-text-top"}
 
 Use the `close` prop to display a close button in the Drawer. Defaults to `false`.
 
@@ -125,7 +129,7 @@ slots:
 :placeholder{class="h-48"}
 ::
 
-### Close Icon :badge{label="Soon" class="align-text-top"}
+### Close Icon :badge{label="4.10+" class="align-text-top"}
 
 Use the `close-icon` prop to customize the close button [Icon](/docs/components/icon). Defaults to `i-lucide-x`.
 
@@ -400,7 +404,7 @@ In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcu
 ::
 
 ::tip
-This allows you to move the trigger outside of the Drawer or remove it entirely.
+This lets you move the trigger outside of the Drawer or remove it entirely.
 ::
 
 ### Responsive drawer

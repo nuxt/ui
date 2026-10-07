@@ -1,6 +1,10 @@
 ---
 description: An input element to toggle between checked and unchecked states.
 category: form
+keywords:
+  - tickbox
+  - check
+  - boolean
 links:
   - label: Checkbox
     icon: i-custom-reka-ui
@@ -194,14 +198,21 @@ props:
 
 Use the `indicator` prop to change the position or hide the indicator. Defaults to `start`.
 
+::note
+When `indicator` is `hidden`, the icon is displayed above the label instead.
+::
+
 ::component-code
 ---
+prettier: true
 ignore:
   - label
+  - icon
   - defaultValue
 props:
-  indicator: 'end'
+  indicator: 'hidden'
   variant: 'card'
+  icon: 'i-lucide-heart'
   defaultValue: true
   label: Check me
 ---

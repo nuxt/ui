@@ -13,30 +13,26 @@ function escapeHTML(str: string): string {
   return str.replace(/[&<>"']/g, char => htmlEscapes[char]!)
 }
 
-// Check if string is already HTML-escaped to avoid double-escaping
-function isAlreadyEscaped(str: string): boolean {
-  return /&(?:amp|lt|gt|quot|#39);/.test(str)
-}
-
-function sanitize(str: string): string {
-  if (isAlreadyEscaped(str)) {
-    return str
-  }
-  return escapeHTML(str)
-}
-
 function truncateHTMLFromStart(html: string, maxLength: number) {
   let truncated = ''
   let totalLength = 0
   let insideTag = false
 
-  // Iterate through the HTML string in reverse order
-  for (let i = html.length - 1; i >= 0; i--) {
-    if (html[i] === '>') {
+  // Iterate through the HTML string in reverse order, one code point at a time.
+  // Indexing by UTF-16 code unit would slice an astral character (emoji, most
+  // CJK extension blocks) in half when the truncation boundary lands between
+  // its surrogates, emitting an unpaired surrogate that renders as `�`.
+  // `<` and `>` are always single code units, so tag tracking is unaffected.
+  const chars = Array.from(html)
+
+  for (let i = chars.length - 1; i >= 0; i--) {
+    const char = chars[i]!
+
+    if (char === '>') {
       insideTag = true
-    } else if (html[i] === '<') {
+    } else if (char === '<') {
       insideTag = false
-      truncated = html[i] + truncated
+      truncated = char + truncated
       continue
     }
 
@@ -45,7 +41,7 @@ function truncateHTMLFromStart(html: string, maxLength: number) {
     }
 
     if (totalLength <= maxLength) {
-      truncated = html[i] + truncated
+      truncated = char + truncated
     } else {
       // If we've reached the max length, we break out of the loop
       // to prevent further processing of the string
@@ -93,20 +89,23 @@ export function highlight<T>(item: T & { matches?: FuseResult<T>['matches'] }, s
       const isMatched = (lastIndiceNextIndex - region[0]) >= minTokenLength
 
       content += [
-        sanitize(value.substring(nextUnhighlightedRegionStartingIndex, region[0])),
+        escapeHTML(value.substring(nextUnhighlightedRegionStartingIndex, region[0])),
         isMatched && `<mark>`,
-        sanitize(value.substring(region[0], lastIndiceNextIndex)),
+        escapeHTML(value.substring(region[0], lastIndiceNextIndex)),
         isMatched && '</mark>'
       ].filter(Boolean).join('')
 
       nextUnhighlightedRegionStartingIndex = lastIndiceNextIndex
     })
 
-    content += sanitize(value.substring(nextUnhighlightedRegionStartingIndex))
+    content += escapeHTML(value.substring(nextUnhighlightedRegionStartingIndex))
 
     const markIndex = content.indexOf('<mark>')
     if (markIndex !== -1) {
-      content = truncateHTMLFromStart(content, content.length - markIndex)
+      // Measure the budget in code points too, so it stays in the same units as
+      // the counter inside `truncateHTMLFromStart`. Identical to `.length` for
+      // BMP-only content.
+      content = truncateHTMLFromStart(content, Array.from(content.slice(markIndex)).length)
     }
 
     return content

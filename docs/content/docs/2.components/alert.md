@@ -1,6 +1,9 @@
 ---
-description: A callout to draw user's attention.
+description: A callout to draw the user's attention.
 category: element
+keywords:
+  - notice
+  - inline notification
 links:
   - label: GitHub
     icon: i-simple-icons-github

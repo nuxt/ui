@@ -1,6 +1,9 @@
 ---
 description: A select element to choose from a list of options.
 category: form
+keywords:
+  - dropdown
+  - picker
 links:
   - label: Select
     icon: i-custom-reka-ui

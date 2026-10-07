@@ -36,11 +36,11 @@ authors:
     to: https://x.com/atinux
     target: _blank
   - name: Hugo Richard
-    description: '@hugorcd__'
+    description: '@hugorcd'
     avatar:
       src: https://github.com/hugorcd.png
       loading: lazy
-    to: https://x.com/hugorcd__
+    to: https://x.com/hugorcd
     target: _blank
 to: 'https://nuxt.com/blog/nuxt-ui-v3'
 target: '_blank'
@@ -254,11 +254,11 @@ props:
       to: https://x.com/atinux
       target: _blank
     - name: Hugo Richard
-      description: '@hugorcd__'
+      description: '@hugorcd'
       avatar:
         src: https://github.com/hugorcd.png
         loading: lazy
-      to: https://x.com/hugorcd__
+      to: https://x.com/hugorcd
       target: _blank
   class: 'w-full'
   ui.container: 'max-w-lg'
@@ -331,7 +331,7 @@ When the `indicator` prop is `false`, the date will be displayed over the title.
 
 You can use the `body` slot to display custom content between the image and the authors with:
 
-- the [MDC](https://github.com/nuxt-content/mdc?tab=readme-ov-file#mdc) component from `@nuxtjs/mdc` to display some markdown.
+- the [Markdown](https://comark.dev/rendering/vue) component from `@comark/vue` to display some markdown.
 - the [ContentRenderer](https://content.nuxt.com/docs/components/content-renderer) component from `@nuxt/content` to render the content of the page or list.
 - or use the `:u-changelog-version` component directly in your content with markdown inside the `body` slot as Nuxt UI provides pre-styled prose components.
 

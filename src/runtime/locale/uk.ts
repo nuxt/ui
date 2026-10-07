@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Далі',
       prev: 'Назад'
     },
+    chatMessages: {
+      autoScroll: 'Прокрутити вниз'
+    },
     chatPrompt: {
       placeholder: 'Введіть ваше повідомлення тут…'
     },
     chatPromptSubmit: {
-      label: 'Відправити'
+      label: 'Відправити',
+      reload: 'Повторити',
+      stop: 'Зупинити генерацію'
     },
     chatReasoning: {
       thinking: 'Думає…',
@@ -111,6 +116,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Закрити'
+    },
+    pagination: {
+      first: 'Перша сторінка',
+      last: 'Остання сторінка',
+      next: 'Наступна сторінка',
+      page: 'Сторінка {page}',
+      prev: 'Попередня сторінка'
     },
     pricingTable: {
       caption: 'Порівняння планів цін'

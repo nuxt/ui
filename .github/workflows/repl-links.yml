@@ -1,0 +1,203 @@
+name: repl-links
+
+on:
+  # Never checks out or runs code from the pull request, it only reads its body and the linked issues
+  pull_request_target:
+    types:
+      - opened
+      - edited
+      - reopened
+      - synchronize
+
+permissions:
+  contents: read
+  deployments: read
+  issues: read
+  pull-requests: write
+  statuses: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  comment:
+    if: github.event.action != 'edited' || github.event.changes.body
+
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 20
+
+    steps:
+      - name: Update comment
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const { owner, repo } = context.repo
+            const pull = context.payload.pull_request
+            const marker = '<!-- repl-links -->'
+            const environment = 'Preview – ui-repl'
+            const reproRegex = /https:\/\/play\.ui\.nuxt\.com\/?#([A-Za-z0-9+/=]+)/g
+
+            // Linked issues: closing references first, then plain references in the body
+            const { repository } = await github.graphql(`
+              query ($owner: String!, $repo: String!, $number: Int!) {
+                repository(owner: $owner, name: $repo) {
+                  pullRequest(number: $number) {
+                    closingIssuesReferences(first: 10) {
+                      nodes { number repository { nameWithOwner } }
+                    }
+                  }
+                }
+              }
+            `, { owner, repo, number: pull.number })
+
+            const numbers = new Set(repository.pullRequest.closingIssuesReferences.nodes
+              .filter(node => node.repository.nameWithOwner === `${owner}/${repo}`)
+              .map(node => node.number))
+
+            // Only read the template's "Linked issue" section, without its HTML comment that contains an example "Resolves #123"
+            const body = (pull.body || '').replace(/<!--[\s\S]*?-->/g, '').match(/#+[^\n]*Linked issue[^\n]*\n([\s\S]*?)(?=\n#+ |$)/i)?.[1] || ''
+            const refRegex = new RegExp(`(?:^|[\\s(])(?:${owner}/${repo})?#(\\d+)\\b|github\\.com/${owner}/${repo}/issues/(\\d+)`, 'g')
+            for (const match of body.matchAll(refRegex)) {
+              numbers.add(Number(match[1] || match[2]))
+            }
+
+            const sections = []
+            const seen = new Set()
+            for (const issue_number of [...numbers].slice(0, 5)) {
+              let issue
+              try {
+                ({ data: issue } = await github.rest.issues.get({ owner, repo, issue_number }))
+              } catch (error) {
+                if (error.status === 404 || error.status === 410) {
+                  continue
+                }
+                throw error
+              }
+              if (issue.pull_request) {
+                continue
+              }
+
+              const comments = await github.paginate(github.rest.issues.listComments, {
+                owner,
+                repo,
+                issue_number,
+                per_page: 100
+              })
+              const sources = [
+                { label: 'Open', body: issue.body },
+                ...comments.map(comment => ({ label: `Open (comment by ${comment.user?.login})`, body: comment.body }))
+              ]
+
+              const links = []
+              for (const source of sources) {
+                for (const [, hash] of (source.body || '').matchAll(reproRegex)) {
+                  if (!seen.has(hash)) {
+                    seen.add(hash)
+                    links.push({ label: source.label, hash })
+                  }
+                }
+              }
+              if (links.length) {
+                sections.push({ number: issue_number, links })
+              }
+            }
+
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner,
+              repo,
+              issue_number: pull.number,
+              per_page: 100
+            })
+            const previous = comments.find(comment => comment.user?.login === 'github-actions[bot]' && comment.body?.includes(marker))
+
+            if (!sections.length) {
+              if (previous) {
+                await github.rest.issues.deleteComment({ owner, repo, comment_id: previous.id })
+              }
+              return
+            }
+
+            // Wait for Vercel to build or skip the playground for the head commit. Its status shows up within seconds,
+            // or never on fork pull requests it isn't authorized to build
+            const start = Date.now()
+            let status
+            while (true) {
+              const { data: statuses } = await github.rest.repos.listCommitStatusesForRef({
+                owner,
+                repo,
+                ref: pull.head.sha,
+                per_page: 100
+              })
+              status = statuses.find(status => status.context === 'Vercel – ui-repl')
+              if (status && status.state !== 'pending') {
+                break
+              }
+              if (Date.now() - start > (status ? 15 : 5) * 60 * 1000) {
+                core.info(`Vercel did not build the playground for ${pull.head.sha}.`)
+                return
+              }
+              await new Promise(resolve => setTimeout(resolve, 30 * 1000))
+            }
+
+            async function getDeploymentUrl(sha) {
+              const { data: deployments } = await github.rest.repos.listDeployments({ owner, repo, sha, environment, per_page: 1 })
+              if (!deployments.length) {
+                return
+              }
+              const { data: statuses } = await github.rest.repos.listDeploymentStatuses({
+                owner,
+                repo,
+                deployment_id: deployments[0].id,
+                per_page: 10
+              })
+              return statuses.find(status => status.state === 'success')?.environment_url
+            }
+
+            // The deployment status can land a few seconds after the commit status
+            let url
+            if (status.state === 'success' && !status.description?.includes('Ignored Build Step')) {
+              for (let attempt = 0; !url && attempt < 6; attempt++) {
+                url = await getDeploymentUrl(pull.head.sha)
+                if (!url) {
+                  await new Promise(resolve => setTimeout(resolve, 10 * 1000))
+                }
+              }
+            }
+
+            // The Ignored Build Step skips commits that don't touch the library, fall back to the latest deployed one
+            if (!url) {
+              const commits = await github.paginate(github.rest.pulls.listCommits, {
+                owner,
+                repo,
+                pull_number: pull.number,
+                per_page: 100
+              })
+              for (const commit of commits.reverse().slice(0, 20)) {
+                url = await getDeploymentUrl(commit.sha)
+                if (url) {
+                  break
+                }
+              }
+            }
+
+            if (!url) {
+              core.info(`No successful ${environment} deployment for #${pull.number}.`)
+              return
+            }
+
+            let text = `${marker}\nLinked issue reproductions on this pull request playground.\n\n| Issue | Reproduction |\n| --- | --- |\n`
+            for (const { number, links } of sections) {
+              const line = `| #${number} | ${links.map(({ label, hash }) => `[${label}](${url}/#${hash})`).join(' · ')} |\n`
+              if (text.length + line.length > 60000) {
+                break
+              }
+              text += line
+            }
+
+            if (previous) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: previous.id, body: text })
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number: pull.number, body: text })
+            }

@@ -2,6 +2,8 @@
 title: ContextMenu
 description: A menu to display actions when right-clicking on an element.
 category: overlay
+keywords:
+  - right click menu
 links:
   - label: ContextMenu
     icon: i-custom-reka-ui

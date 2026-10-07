@@ -15,13 +15,17 @@ interface Module {
     stars: number
   }
   contributors: {
+    id: number
     username: string
+    contributions: number
   }[]
 }
 
 export default defineCachedEventHandler(async () => {
-  const team = await $fetch<TeamMember[]>('https://nuxt.com/api/v1/teams/ui')
-  const { stats, contributors } = await $fetch<Module>('https://nuxt.com/api/v1/modules/ui')
+  const [team, { stats, contributors }] = await Promise.all([
+    $fetch<TeamMember[]>('https://nuxt.com/api/v1/teams/ui'),
+    $fetch<Module>('https://nuxt.com/api/v1/modules/ui')
+  ])
 
   return {
     team,

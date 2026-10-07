@@ -36,7 +36,7 @@ export type SelectMenuItem = SelectMenuValue | {
   disabled?: boolean
   onSelect?: (e: Event) => void
   class?: any
-  ui?: Pick<SelectMenu['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>
+  ui?: Partial<Pick<SelectMenu['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>>
   [key: string]: any
 }
 
@@ -45,7 +45,7 @@ type IsClearUsed<M extends boolean, C extends boolean | object> = M extends fals
   ? (C extends true ? null : C extends object ? null : never)
   : never
 
-export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'resetModelValueOnClear' | 'highlightOnHover' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
+export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'resetModelValueOnClear' | 'highlightOnHover' | 'loop' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
@@ -53,6 +53,7 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
    * Whether to display the search input or not.
    * Can be an object to pass additional props to the input.
    * `{ placeholder: 'Search...', variant: 'none' }`{lang="ts-type"}
+   * Set `autofocus: false` to prevent the search input from being focused when the menu opens (e.g. to avoid opening the virtual keyboard on touch devices).
    * @defaultValue true
    */
   searchInput?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
@@ -151,6 +152,8 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
   multiple?: M & boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
+  /** Keep the mobile text size on all breakpoints. */
+  fixed?: boolean
   /**
    * Determines if custom user input that does not exist in options can be added.
    * @defaultValue false
@@ -230,7 +233,7 @@ export interface SelectMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false">
-import { useTemplateRef, computed, ref, onMounted, toRef, toRaw, watch, nextTick } from 'vue'
+import { useTemplateRef, computed, ref, onMounted, onScopeDispose, toRef, toRaw, watch, nextTick } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxCancel, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxVirtualizer, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, FocusScope } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
@@ -275,7 +278,7 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 const { t } = useLocale()
 const appConfig = useAppConfig() as SelectMenu['AppConfig']
 const { filterGroups } = useFilter()
-const rootProps = useForwardProps(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'highlightOnHover', 'by'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'highlightOnHover', 'loop', 'by'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as ComboboxArrowProps)
@@ -285,16 +288,36 @@ const virtualizerProps = toRef(() => {
   if (!props.virtualize) return false
 
   return defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
-    estimateSize: getEstimateSize(filteredItems.value, selectSize.value || 'md', props.descriptionKey as string, !!slots['item-description'])
+    estimateSize: getEstimateSize(filteredItems.value, size.value ?? 'md', props.descriptionKey as string, !!slots['item-description'])
   })
 })
-const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: t('selectMenu.search'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
+const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: t('selectMenu.search'), variant: 'none', fixed: props.fixed }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
 
-const { emitFormBlur, emitFormFocus, emitFormInput, emitFormChange, size: formFieldSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(_props)
+const { emitFormBlur, emitFormFocus, emitFormInput, emitFormChange, size: formFieldSize, color: formFieldColor, id, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<InputProps>(_props)
+
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(_props)
-const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
+// Pass only the props the composable reads: `defu(props, ...)` copied every prop
+// through the `useComponentProps` proxy and subscribed this computed (and `ui`,
+// which reads `isLeading`/`isTrailing`) to all of them, re-running the whole tv
+// pipeline on unrelated prop changes.
+const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(computed(() => ({
+  icon: props.icon,
+  leading: props.leading,
+  leadingIcon: props.leadingIcon,
+  trailing: props.trailing,
+  trailingIcon: props.trailingIcon ?? appConfig.ui.icons.chevronDown,
+  loading: props.loading,
+  loadingIcon: props.loadingIcon
+})))
 
-const selectSize = computed(() => fieldGroupSize.value || formFieldSize.value)
+// eslint-disable-next-line vue/no-dupe-keys
+const color = computed(() => formFieldColor.value ?? props.color)
+// eslint-disable-next-line vue/no-dupe-keys
+const highlight = computed(() => formFieldHighlight.value ?? props.highlight)
+// eslint-disable-next-line vue/no-dupe-keys
+const size = computed(() => fieldGroupSize.value ?? formFieldSize.value ?? props.size)
+
+const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
 const [DefineCreateItemTemplate, ReuseCreateItemTemplate] = createReusableTemplate()
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: SelectMenuItem, index: number }>({
@@ -312,11 +335,12 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: S
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.selectMenu || {}) })({
-  color: color.value ?? props.color,
+  color: color.value,
   variant: props.variant,
-  size: selectSize?.value ?? props.size,
+  size: size.value,
   loading: props.loading,
-  highlight: highlight.value ?? props.highlight,
+  highlight: highlight.value,
+  fixed: props.fixed,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   fieldGroup: orientation.value,
@@ -394,11 +418,15 @@ function autoFocus() {
   }
 }
 
+let autofocusTimeoutId: ReturnType<typeof setTimeout> | undefined
+
 onMounted(() => {
-  setTimeout(() => {
+  autofocusTimeoutId = setTimeout(() => {
     autoFocus()
   }, props.autofocusDelay)
 })
+
+onScopeDispose(() => clearTimeout(autofocusTimeoutId))
 
 function onUpdate(value: any) {
   if (toRaw(props.modelValue) === value) {
@@ -433,10 +461,12 @@ function onUpdate(value: any) {
 }
 
 const isOpen = ref(false)
+let timeoutId: ReturnType<typeof setTimeout> | undefined
+
+onScopeDispose(() => clearTimeout(timeoutId))
+
 function onUpdateOpen(value: boolean) {
   isOpen.value = value
-
-  let timeoutId
 
   if (!value) {
     const event = new FocusEvent('blur')
@@ -459,6 +489,19 @@ function onUpdateOpen(value: boolean) {
     emitFormFocus()
     clearTimeout(timeoutId)
   }
+}
+
+// `ComboboxTrigger` only toggles on click, unlike `ComboboxInput` which opens on arrow keys.
+// Since the trigger is the focusable element here, replicate the same behavior.
+function onTriggerKeydown(e: KeyboardEvent) {
+  if (isOpen.value) {
+    return
+  }
+
+  const trigger = e.currentTarget as HTMLElement
+
+  e.preventDefault()
+  trigger.click()
 }
 
 function onCreate(e: Event) {
@@ -493,7 +536,44 @@ function isModelValueEmpty(modelValue: ApplyModifiers<GetModelValue<T, VK, M, Ex
 }
 
 function onClear() {
+  if (disabled.value) {
+    return
+  }
+
   emits('clear')
+}
+
+function onMountAutoFocus(event: Event) {
+  // Prevent the `FocusScope` from focusing the search input on open when its autofocus is disabled.
+  if (searchInputProps.value.autofocus === false) {
+    event.preventDefault()
+  }
+}
+
+const focusScopeRef = useTemplateRef('focusScopeRef')
+
+// The `FocusScope` uses `loop` instead of `trapped`: a trapped scope pulls focus back while the menu is closing,
+// so focusing another element on select never lands. Pull it back here instead, only while the menu is open,
+// otherwise anything taking the focus outside closes it, like another overlay restoring focus to its trigger.
+function onFocusOutside(event: Event) {
+  const el = focusScopeRef.value?.$el as HTMLElement | undefined
+  if (event.defaultPrevented || el?.parentElement?.dataset.state !== 'open') {
+    return
+  }
+
+  event.preventDefault()
+
+  const input = searchInputProps.value.autofocus !== false ? el.querySelector<HTMLElement>('[data-slot="input"] input') : null
+  const target = input ?? el
+  target.focus({ preventScroll: true })
+}
+
+function onUnmountAutoFocus(event: Event) {
+  // Keep the focus where it was moved on select instead of restoring it to the trigger after the close animation.
+  const activeElement = document.activeElement
+  if (activeElement && activeElement !== document.body && !(event.target as HTMLElement).contains(activeElement)) {
+    event.preventDefault()
+  }
 }
 
 const viewportRef = useTemplateRef('viewportRef')
@@ -611,7 +691,9 @@ defineExpose({
         data-slot="base"
         :class="ui.base({ class: [props.ui?.base, props.class] })"
         tabindex="0"
-        v-bind="{ ...$attrs, ...ariaAttrs }"
+        v-bind="{ 'aria-label': undefined, ...$attrs, ...ariaAttrs }"
+        @keydown.down="onTriggerKeydown"
+        @keydown.up="onTriggerKeydown"
       >
         <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
           <slot name="leading" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
@@ -633,11 +715,11 @@ defineExpose({
 
         <span v-if="isTrailing || !!slots.trailing || !!props.clear" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
           <slot name="trailing" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
-            <ComboboxCancel v-if="!!props.clear && !isModelValueEmpty(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" as-child>
+            <ComboboxCancel v-if="!!props.clear && !disabled && !isModelValueEmpty(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" as-child>
               <UButton
                 as="span"
                 :icon="props.clearIcon || appConfig.ui.icons.close"
-                :size="selectSize"
+                :size="size"
                 variant="link"
                 color="neutral"
                 tabindex="-1"
@@ -656,15 +738,22 @@ defineExpose({
 
     <ComboboxPortal v-bind="portalProps">
       <FieldGroupReset>
-        <ComboboxContent data-slot="content" :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
-          <FocusScope trapped data-slot="focusScope" :class="ui.focusScope({ class: props.ui?.focusScope })">
+        <ComboboxContent data-slot="content" :class="ui.content({ class: props.ui?.content })" v-bind="contentProps" @focus-outside="onFocusOutside">
+          <FocusScope
+            ref="focusScopeRef"
+            loop
+            data-slot="focusScope"
+            :class="ui.focusScope({ class: props.ui?.focusScope })"
+            @mount-auto-focus="onMountAutoFocus"
+            @unmount-auto-focus="onUnmountAutoFocus"
+          >
             <slot name="content-top" />
 
             <ComboboxInput v-if="!!props.searchInput" v-model="searchTerm" :display-value="() => searchTerm" as-child>
               <UInput
                 autofocus
                 autocomplete="off"
-                :size="selectSize"
+                :size="size"
                 v-bind="searchInputProps"
                 :model-modifiers="{
                   trim: props.modelModifiers?.trim

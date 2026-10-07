@@ -1,12 +1,22 @@
-import { streamText, convertToModelMessages, smoothStream, jsonSchema, isStepCount, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
+import type { UIMessage, InferUITools, Tool } from 'ai'
+import { ToolLoopAgent, createAgentUIStreamResponse, tool, dynamicTool, jsonSchema, smoothStream, isStepCount, consumeStream, APICallError } from 'ai'
 import type { AnthropicLanguageModelOptions } from '@ai-sdk/anthropic'
-import { gateway } from '@ai-sdk/gateway'
+import type { GatewayProviderOptions } from '@ai-sdk/gateway'
 import { z } from 'zod'
 import { tools as mcpToolDefinitions } from '#nuxt-mcp-toolkit/tools.mjs'
-import { themeIcons, cssVariableDefaults } from '../../app/utils/theme'
+import * as theme from '../../.nuxt/ui'
+import { themeIcons } from '../../app/utils/theme/icons'
+import { cssVariableDefaults } from '../../app/utils/theme/tokens'
+// The presets file itself, not the engine barrel: its only import is a type,
+// so this costs nothing beyond the preset data.
+import { presets } from '../../app/utils/theme/engine/presets'
+import { FONTS } from '../../app/utils/theme/studio'
+import type { FontCategory } from '../../app/utils/theme/studio'
+
+const componentNames = Object.keys(theme)
 
 function mcpToolsToAiTools() {
-  const aiTools: Record<string, { description: string, inputSchema: ReturnType<typeof jsonSchema>, execute: (args: any) => Promise<any> }> = {}
+  const aiTools: Record<string, Tool> = {}
 
   for (const def of mcpToolDefinitions as any[]) {
     const filename = def._meta?.filename as string | undefined
@@ -19,7 +29,7 @@ function mcpToolsToAiTools() {
       ? z.toJSONSchema(z.object(def.inputSchema)) as Record<string, unknown>
       : { type: 'object' as const, properties: {} }
 
-    aiTools[name] = {
+    aiTools[name] = dynamicTool({
       description: def.description || '',
       inputSchema: jsonSchema(schema),
       execute: async (args: any) => {
@@ -29,15 +39,39 @@ function mcpToolsToAiTools() {
           return { error: error.statusCode ? `[${error.statusCode}] ${error.message}` : error.message || String(error) }
         }
       }
-    }
+    })
   }
 
   return aiTools
 }
 
-const applyTheme = {
+export interface ApplyThemeSettings {
+  primary?: string
+  neutral?: string
+  secondary?: string
+  success?: string
+  info?: string
+  warning?: string
+  error?: string
+  radius?: number
+  /** Tailwind's three stacks. Headings follow serif, code follows mono. */
+  fontSans?: string
+  fontSerif?: string
+  fontMono?: string
+  blackAsPrimary?: boolean
+  icons?: string
+  customColors?: Record<string, Record<string, string>>
+  cssVariables?: { light?: Record<string, string>, dark?: Record<string, string> }
+  ui?: Record<string, any>
+}
+
+// Written as a raw JSON Schema rather than zod on purpose: the SDK's zod conversion rewrites
+// `additionalProperties` to `false` on every object, which strips the value schema off
+// `z.record()` and would tell the model that `customColors`, `cssVariables` and `ui` accept
+// no keys at all. The `jsonSchema<T>()` generic still gives us the input type.
+const applyTheme = tool({
   description: 'Apply theme settings live on the docs site. Call this when users ask to change colors, radius, font, or other theme properties. Only include properties that changed.',
-  inputSchema: jsonSchema<Record<string, any>>({
+  inputSchema: jsonSchema<ApplyThemeSettings>({
     type: 'object' as const,
     properties: {
       primary: { type: 'string', description: 'Primary color name (e.g., green, blue, red, indigo)' },
@@ -47,13 +81,15 @@ const applyTheme = {
       info: { type: 'string', description: 'Info color name' },
       warning: { type: 'string', description: 'Warning color name' },
       error: { type: 'string', description: 'Error color name' },
-      radius: { type: 'number', description: 'Border radius in rem: 0, 0.125, 0.25, 0.375, 0.5' },
-      font: { type: 'string', description: 'Font family name — any Google Font works (e.g. Public Sans, DM Sans, Geist, Inter, Poppins, Outfit, Raleway, Playfair Display, Nunito, JetBrains Mono, etc.)' },
+      radius: { type: 'number', description: 'Border radius in rem: 0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75' },
+      fontSans: { type: 'string', description: 'Body font family (tailwind\'s --font-sans), the one every element inherits. Any Google Font works, and it does not have to be a sans (e.g. Public Sans, DM Sans, Geist, Inter, Poppins, Outfit, Playfair Display).' },
+      fontSerif: { type: 'string', description: 'Heading font family (tailwind\'s --font-serif; h1–h6 follow it). Any Google Font. Omit to keep headings on the body font.' },
+      fontMono: { type: 'string', description: 'Code font family (tailwind\'s --font-mono; code, kbd, pre and samp follow it). Any Google Font.' },
       blackAsPrimary: { type: 'boolean', description: 'Use solid black/white as primary color for a monochrome look' },
-      icons: { type: 'string', description: 'Icon set for live preview: lucide (default), phosphor, or tabler. For exported code, any Iconify icon set can be suggested.' },
+      icons: { type: 'string', description: 'Icon set for live preview: lucide (default), bootstrap, heroicons, iconoir, material, phosphor, pixelarticons, remix or tabler. For exported code, any Iconify icon set can be suggested.' },
       customColors: {
         type: 'object',
-        description: 'Custom color palettes with shades 50-950 as hex values',
+        description: 'Custom color palettes with shades 50-950 as oklch(L% C H) values (e.g. oklch(62.3% 0.214 259.815)); hex also accepted',
         additionalProperties: {
           type: 'object',
           additionalProperties: { type: 'string' }
@@ -82,29 +118,75 @@ const applyTheme = {
       }
     }
   }),
-  execute: async (settings: Record<string, any>) => ({ applied: true, ...settings })
-}
+  execute: async settings => ({ applied: true, ...settings })
+})
 
-const resetTheme = {
+const resetTheme = tool({
   description: 'Reset the theme back to defaults (primary: green, neutral: slate, radius: 0.25rem, font: Public Sans). Call this when users ask to reset, revert, or restore the default theme.',
-  inputSchema: jsonSchema<Record<string, never>>({
-    type: 'object' as const,
-    properties: {}
-  }),
+  inputSchema: z.object({}),
   execute: async () => ({ reset: true })
-}
+})
 
-const getThemeGuide = {
-  description: 'Get detailed instructions for applying live theme changes. Call this ONLY when you are about to use applyTheme (e.g. user says "make it blue", "create a dark theme"). Do NOT call for documentation questions about theming — search docs instead.',
-  inputSchema: jsonSchema<Record<string, never>>({
-    type: 'object' as const,
-    properties: {}
+const presetIds = presets.map(preset => preset.id) as [string, ...string[]]
+
+const applyPreset = tool({
+  description: `Apply one of the docs' built-in theme presets, whole and live. Use this ONLY when the user names a preset or asks for "the <name> look"; for any other theme request (a described aesthetic, a colour, a mood) design it yourself with \`applyTheme\` instead. A preset carries a full palette, token shades and component defaults that an \`applyTheme\` payload cannot express, so never try to rebuild one by hand. You can call \`applyTheme\` afterwards to tweak a preset you just applied. Available presets: ${presets.map(preset => `${preset.id} (${preset.name}: ${preset.description})`).join('; ')}.`,
+  inputSchema: z.object({
+    preset: z.enum(presetIds).describe('Id of the preset to apply.')
   }),
+  execute: async ({ preset }) => ({ applied: true, preset })
+})
+
+const getComponentTheme = tool({
+  description: 'Get the theme definition (slots, variants, compoundVariants, defaultVariants) for a specific Nuxt UI component. Call this when you need to know the available slots and customization options to suggest component-level theming.',
+  inputSchema: z.object({
+    componentName: z.string().describe(`Component name in camelCase. Available: ${componentNames.join(', ')}`)
+  }),
+  execute: async ({ componentName }) => {
+    const componentTheme = (theme as Record<string, unknown>)[componentName]
+    if (!componentTheme) {
+      return { error: `Component "${componentName}" not found`, availableComponents: componentNames }
+    }
+    return { componentName, theme: componentTheme }
+  }
+})
+
+// Google's own category names, the catalog route passes them through as is.
+const FONT_CATEGORIES = ['Sans Serif', 'Serif', 'Display', 'Handwriting', 'Monospace'] as const
+// the shortlist speaks the studio's three, mapped so one response uses one vocabulary
+const CURATED_CATEGORY: Record<FontCategory, typeof FONT_CATEGORIES[number]> = { Sans: 'Sans Serif', Serif: 'Serif', Mono: 'Monospace' }
+
+const searchFonts = tool({
+  description: `Browse fonts for \`applyTheme\`'s fontSans / fontSerif / fontMono. Returns the studio's curated shortlist (safe, proven faces) and the best matches from the full Google Fonts catalog (1900+ families, most popular first), each with its category. Call it when designing a theme whose personality the shortlist doesn't cover (editorial, playful, brutalist, retro, luxury...) and pick from the results rather than from memory. Filter by category (${FONT_CATEGORIES.join(', ')}) and/or search by name. Display and Handwriting faces suit headings (fontSerif) far better than body text.`,
+  inputSchema: z.object({
+    query: z.string().optional().describe('Part of a family name, e.g. "grotesk", "serif", "mono"'),
+    category: z.enum(FONT_CATEGORIES).optional().describe('Restrict to one Google Fonts category'),
+    limit: z.number().int().min(1).max(50).optional().describe('Matches to return, 20 by default')
+  }),
+  execute: async ({ query, category, limit = 20 }) => {
+    // the docs' own cached copy of the catalog, popularity-ordered
+    const catalog = await $fetch<Array<{ name: string, category: string }>>('/api/fonts.json')
+    const q = query?.trim().toLowerCase()
+    const keep = (font: { name: string, category: string }) => (!category || font.category === category) && (!q || font.name.toLowerCase().includes(q))
+    const curated = FONTS.map(font => ({ name: font.name, category: CURATED_CATEGORY[font.category] })).filter(keep)
+    const matches = catalog.filter(keep).slice(0, limit)
+
+    return {
+      curated,
+      matches,
+      note: 'Any Google Font works in applyTheme; @nuxt/fonts loads it. Popularity order is a proxy for how well a face reads at body sizes.'
+    }
+  }
+})
+
+const getThemeGuide = tool({
+  description: 'Get detailed instructions for applying live theme changes. Call this ONLY when you are about to use applyTheme (e.g. user says "make it blue", "create a dark theme"). Do NOT call for documentation questions about theming — search docs instead.',
+  inputSchema: z.object({}),
   execute: async () => ({
     guide: `When users ask to change the theme, customize colors, or modify the appearance, use the \`applyTheme\` tool to apply changes live on this docs site. Only include properties that changed.
 
-When users ask for a complete theme, to change "all colors", or describe a broad aesthetic (e.g. "sakura-inspired theme"), you MUST set ALL of: primary, neutral, secondary, success, info, warning, error, radius, and font. You can change the icon set (lucide, phosphor, or tabler) if it really enhances the theme, but prefer keeping lucide as the default — it works well with most themes. You can optionally include component-level \`ui\` overrides for a more polished result — if you do, look up the component theme first with \`getComponentTheme\` and prefer \`defaultVariants\` (e.g. button size or variant) over slot class overrides. Create a cohesive design system, not just random colors:
-- Pick a **primary** that embodies the theme's identity. If no standard Tailwind color fits, use \`customColors\` to define a bespoke palette with all shades 50-950 as hex values — this is encouraged for creative/unique themes.
+When users ask for a complete theme, to change "all colors", or describe a broad aesthetic (e.g. "sakura-inspired theme"), you MUST set ALL of: primary, neutral, secondary, success, info, warning, error, radius, and fontSans. You can change the icon set (lucide, bootstrap, heroicons, iconoir, material, phosphor, pixelarticons, remix or tabler) if it really enhances the theme, but prefer keeping lucide as the default — it works well with most themes. You can optionally include component-level \`ui\` overrides for a more polished result — if you do, look up the component theme first with \`getComponentTheme\` and prefer \`defaultVariants\` (e.g. button size or variant) over slot class overrides. Create a cohesive design system, not just random colors:
+- Pick a **primary** that embodies the theme's identity. If no standard Tailwind color fits, use \`customColors\` to define a bespoke palette with all shades 50-950 as \`oklch(L% C H)\` values, tailwind v4's native format, e.g. \`oklch(62.3% 0.214 259.815)\`. This is encouraged for creative/unique themes.
 - Pick a **secondary** that complements the primary (analogous or contrasting on the color wheel). Can also be a custom palette.
 - Pick **success/info/warning/error** that feel harmonious with the palette while staying semantically meaningful (success = green-ish, error = red-ish, warning = amber/yellow-ish, info = blue/cyan-ish). You can shift hues — e.g. \`lime\` for success in a nature theme, \`rose\` for error in a warm theme — but keep them recognizable.
 - For monochrome/black-and-white themes, keep semantic colors meaningful. Only primary, secondary, and neutral should go monochrome. Use \`blackAsPrimary: true\` for monochrome primary.
@@ -215,14 +297,21 @@ For Nuxt, wrap in \`defineAppConfig({ ui: { ... } })\`. For Vue, pass as \`ui({ 
   - **0.125** — subtle, minimal softness
   - **0.25** — balanced, default
   - **0.375** — rounded, friendly
-  - **0.5** — pill-like, playful, soft
-- Font: any Google Font works, \`@nuxt/fonts\` auto-loads it. Pick a font that matches the theme's personality:
+  - **0.5** — soft, playful
+  - **0.625** — very rounded
+  - **0.75** — pill-like
+- Fonts: three independent stacks, any Google Font works and \`@nuxt/fonts\` auto-loads it.
+  - \`fontSans\` — the body face everything inherits. Despite the name it takes any face, a serif body is a valid choice.
+  - \`fontSerif\` — headings (h1–h6) follow it. Set it only when you want headings to differ from the body; omit it and they match.
+  - \`fontMono\` — code, kbd, pre and samp follow it.
+  Pick faces that match the theme's personality:
   - Sans-serif (clean/modern): Inter, DM Sans, Geist, Public Sans, Outfit, Plus Jakarta Sans, Space Grotesk
-  - Serif (elegant/editorial): Playfair Display, Lora, Merriweather, Fraunces, Newsreader
+  - Serif (elegant/editorial): Playfair Display, Lora, Merriweather, Fraunces, Newsreader, Source Serif 4
   - Rounded (friendly/playful): Nunito, Quicksand, Varela Round
-  - Monospace (techy/dev): JetBrains Mono, Fira Code, IBM Plex Mono
-  ALWAYS change the font when creating a complete theme — don't leave the default unless it genuinely fits.
-- Icons: lucide (default), phosphor, or tabler for live preview. Any Iconify icon set works in the exported config. When suggesting a non-default icon set, include the FULL \`ui.icons\` mapping in the exported config and tell the user to install \`@iconify-json/{collection}\` (e.g. \`@iconify-json/ph\` for Phosphor). Required keys: ${Object.keys(themeIcons.phosphor).join(', ')}. Values use \`i-<set>-<name>\` format.
+  - Monospace (techy/dev): JetBrains Mono, Fira Code, IBM Plex Mono, Geist Mono
+  For anything with a stronger personality (editorial, playful, brutalist, retro, luxury), call \`searchFonts\` and choose from the catalog rather than reusing the faces above: a distinctive type pairing is what makes a theme feel unique.
+  ALWAYS set \`fontSans\` when creating a complete theme — don't leave the default unless it genuinely fits. Pairing a display \`fontSerif\` with a plain body is the highest-leverage type choice available.
+- Icons: lucide (default), bootstrap, heroicons, iconoir, material, phosphor, pixelarticons, remix or tabler for live preview. Any Iconify icon set works in the exported config. When suggesting a non-default icon set, include the FULL \`ui.icons\` mapping in the exported config and tell the user to install \`@iconify-json/{collection}\` (e.g. \`@iconify-json/ph\` for Phosphor). Required keys: ${Object.keys(themeIcons.phosphor).join(', ')}. Values use \`i-<set>-<name>\` format.
 
 **Component Theme Lookup:**
 
@@ -247,7 +336,16 @@ CRITICAL rules for component \`ui\` overrides:
 @import "@nuxt/ui";
 
 @theme {
-  --font-sans: 'FontName', sans-serif; /* only if font changed */
+  --font-sans: 'FontName', sans-serif; /* only if the body font changed */
+  --font-serif: 'FontName', serif;     /* only if headings differ from the body */
+  --font-mono: 'FontName', monospace;  /* only if the code font changed */
+}
+
+/* ONLY when --font-serif is set: nothing in tailwind consumes it, so headings
+   need this one rule. Omit the whole block otherwise, or every heading falls
+   back to Georgia. --font-sans and --font-mono need no rule at all. */
+@layer base {
+  h1, h2, h3, h4, h5, h6 { font-family: var(--font-serif); }
 }
 
 @theme static {
@@ -298,64 +396,38 @@ export default defineConfig({
 
 NEVER recommend \`appConfig.theme.*\` properties (like \`blackAsPrimary\`, \`radius\`, \`font\`) — those are internal to the docs site. Users should use CSS variables in main.css for radius, fonts, and monochrome primary.`
   })
+})
+
+const tools = {
+  ...mcpToolsToAiTools(),
+  getThemeGuide,
+  searchFonts,
+  applyTheme,
+  applyPreset,
+  resetTheme,
+  getComponentTheme
 }
 
-export default defineEventHandler(async (event) => {
-  const { messages, theme, framework, currentPage } = await readBody(event)
+export type DocsChatTools = InferUITools<typeof tools>
+export type DocsChatMessage = UIMessage<{ currentPage?: string }, never, DocsChatTools>
 
-  if (!messages || !Array.isArray(messages)) {
-    throw createError({ statusCode: 400, message: 'Invalid or missing messages array.' })
-  }
-
-  // `currentPage` is interpolated verbatim into the system prompt below, so it is an
-  // indirect prompt-injection surface (a crafted /docs/... link can smuggle newlines and
-  // instructions via Vue Router's path decoding). Accept it only when it is a plain docs
-  // path with no control characters; otherwise drop it.
-  const safeCurrentPage = typeof currentPage === 'string'
-    && currentPage.length <= 128
-    && !/[\r\n]/.test(currentPage)
-    && /^\/docs\/[\w/-]*$/.test(currentPage)
-    ? currentPage
-    : null
-
-  const componentNames = theme ? Object.keys(theme) : []
-
-  const getComponentTheme = {
-    description: 'Get the theme definition (slots, variants, compoundVariants, defaultVariants) for a specific Nuxt UI component. Call this when you need to know the available slots and customization options to suggest component-level theming.',
-    inputSchema: jsonSchema<{ componentName: string }>({
-      type: 'object' as const,
-      properties: {
-        componentName: {
-          type: 'string',
-          description: `Component name in camelCase. Available: ${componentNames.join(', ')}`
-        }
-      },
-      required: ['componentName']
-    }),
-    execute: async ({ componentName }: { componentName: string }) => {
-      if (!theme?.[componentName]) {
-        return { error: `Component "${componentName}" not found`, availableComponents: componentNames }
-      }
-      return { componentName, theme: theme[componentName] }
-    }
-  }
-
-  const mcpTools = mcpToolsToAiTools()
-
-  const abortController = new AbortController()
-  event.node.req.on('close', () => abortController.abort())
-
-  const instructions = `You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue. Nuxt UI includes \`@nuxt/fonts\` and \`@nuxt/icon\` as built-in dependencies — never tell users to install them separately. Use your knowledge base tools to search for relevant information before answering questions.
+function buildInstructions(framework: 'nuxt' | 'vue') {
+  return `You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue. Nuxt UI includes \`@nuxt/fonts\` and \`@nuxt/icon\` as built-in dependencies — never tell users to install them separately. Use your knowledge base tools to search for relevant information before answering questions.
 
 The user is using **${framework === 'vue' ? 'Vue' : 'Nuxt'}**. Tailor your answers accordingly — ${framework === 'vue' ? 'use the Vite plugin setup, Vue Router, and vite.config.ts instead of Nuxt-specific features like modules or app.config.ts. IMPORTANT: The Vite plugin auto-imports components and Nuxt UI composables, but Vue core APIs and VueUse must be explicitly imported — always include these in code examples (e.g. `import { ref, computed } from \'vue\'`, `import { useColorMode } from \'@vueuse/core\'`).' : 'use Nuxt modules, auto-imports, app.config.ts, and other Nuxt-specific features. Nuxt auto-imports Vue APIs (ref, computed, etc.), composables, and components — do not include these imports in code examples.'}
-${safeCurrentPage ? `\nThe user is currently viewing the documentation page at \`${safeCurrentPage}\`. Use this context to provide more relevant answers (e.g. read that page first if the question seems related), but don't limit yourself to that page if the question is broader or unrelated.\n` : ''}
+
 Guidelines:
 - For documentation questions, ALWAYS use tools to search for information. Never rely on pre-trained knowledge for Nuxt UI APIs, props, or usage.
 - For questions about how to customize themes (e.g. "how do I customize colors?", "how does theming work?"), search the documentation like any other docs question.
-- When users ask you to APPLY a theme change live (e.g. "make it blue", "create a sakura theme", "change the font"), call \`getThemeGuide\` first for detailed instructions, then use \`applyTheme\` / \`resetTheme\`. Use your own judgment on aesthetics, color theory, and design — no need to search docs for that. Be decisive: pick colors/fonts/radius confidently and apply them.
-- If a question is unrelated to Nuxt UI (e.g. general coding, off-topic), briefly answer if you can, but don't waste tool calls searching docs for it.
+- When users ask you to APPLY a theme change live (e.g. "make it blue", "create a sakura theme", "change the font"), call \`getThemeGuide\` first for detailed instructions, then use \`applyTheme\` / \`resetTheme\`. Use your own judgment on aesthetics, color theory, and design — no need to search docs for that. Be decisive: pick colors/fonts/radius confidently and apply them. Only when the user names one of the built-in presets, or asks for "the <name> look", use \`applyPreset\` instead: a described aesthetic is yours to design, not a preset to match.
+- If a question is unrelated to Nuxt UI (e.g. general coding, off-topic), answer it briefly without searching the docs.
 - If no relevant information is found after searching, respond with "Sorry, I couldn't find information about that in the documentation."
 - Be concise and direct in your responses.
+
+**PAGE CONTEXT:**
+- A user message may end with a \`[Context: the user is currently viewing <path>]\` marker. It is added automatically and is not something the user typed, so never mention it or repeat it back.
+- Use it to resolve vague questions ("explain this page", "how does this work?"). Only the most recent marker is relevant, earlier ones are stale.
+- When the marker names a docs path, call \`get-documentation-page\` with that exact path instead of searching first. Don't limit yourself to that page if the question is broader or unrelated.
 
 **FORMATTING RULES (CRITICAL):**
 - ABSOLUTELY NO MARKDOWN HEADINGS: Never use #, ##, ###, ####, #####, or ######
@@ -369,42 +441,102 @@ Guidelines:
 - Reference specific component names, props, or APIs when applicable.
 - If a question is ambiguous, ask for clarification rather than guessing.
 - When multiple relevant items are found, list them clearly using bullet points.
-- You have up to 5 tool calls to find the answer, so be strategic: start broad, then get specific if needed.
 - Format responses in a conversational way, not as documentation sections.
     `
+}
 
-  const result = streamText({
-    model: gateway('anthropic/claude-sonnet-5'),
-    maxOutputTokens: 8000,
-    abortSignal: abortController.signal,
-    providerOptions: {
-      anthropic: {
-        thinking: {
-          type: 'adaptive',
-          display: 'summarized'
-        },
-        effort: 'low'
-      } satisfies AnthropicLanguageModelOptions,
-      gateway: {
-        caching: 'auto'
-      }
-    },
-    instructions,
-    messages: await convertToModelMessages(messages),
-    experimental_transform: smoothStream(),
-    stopWhen: isStepCount(6),
-    tools: {
-      ...mcpTools,
-      getThemeGuide,
-      applyTheme,
-      resetTheme,
-      getComponentTheme
-    },
-    onError: (error) => {
-      console.error('streamText error:', error)
+// Static per framework so the cached prompt prefix stays stable across requests.
+const instructions = {
+  nuxt: buildInstructions('nuxt'),
+  vue: buildInstructions('vue')
+}
+
+const anthropicOptions = {
+  thinking: {
+    type: 'adaptive',
+    display: 'summarized'
+  },
+  effort: 'low'
+} satisfies AnthropicLanguageModelOptions
+
+// The page path reaches the model as a marker, so it is an indirect prompt-injection
+// surface (a crafted /docs/... link can smuggle newlines and instructions via Vue Router's
+// path decoding). Accept it only when it is a plain site path with no control characters.
+function safePagePath(path: unknown) {
+  return typeof path === 'string'
+    && path.length <= 128
+    && !/[\r\n]/.test(path)
+    && /^\/[\w/-]*$/.test(path)
+    ? path
+    : null
+}
+
+export default defineEventHandler(async (event) => {
+  const { messages, framework } = await readBody(event)
+
+  if (!messages || !Array.isArray(messages)) {
+    throw createError({ statusCode: 400, message: 'Invalid or missing messages array.' })
+  }
+
+  // Each user message carries the page it was sent from in its metadata, and every one
+  // gets its marker back on each request: the history stays byte-identical across turns,
+  // so the cached prompt prefix covers the earlier tool results. The instructions tell
+  // the model only the latest marker counts.
+  const uiMessages = messages.map((message: DocsChatMessage) => {
+    const currentPage = message.role === 'user' ? safePagePath(message.metadata?.currentPage) : null
+    if (!currentPage) {
+      return message
+    }
+
+    return {
+      ...message,
+      parts: [...(message.parts || []), { type: 'text' as const, text: `[Context: the user is currently viewing ${currentPage}]` }]
     }
   })
 
-  const stream = toUIMessageStream({ stream: result.stream })
-  return createUIMessageStreamResponse({ stream })
+  const abortController = new AbortController()
+  event.node.req.on('close', () => abortController.abort())
+
+  const agent = new ToolLoopAgent({
+    model: 'anthropic/claude-sonnet-5.5',
+    instructions: framework === 'vue' ? instructions.vue : instructions.nuxt,
+    maxOutputTokens: 8000,
+    stopWhen: isStepCount(6),
+    tools,
+    providerOptions: {
+      anthropic: anthropicOptions,
+      gateway: {
+        caching: 'auto',
+        user: getChatUser(event),
+        tags: ['docs-chat'],
+        // Same tier as the primary so the adaptive thinking options stay supported.
+        models: ['anthropic/claude-sonnet-5']
+      } satisfies GatewayProviderOptions
+    }
+  })
+
+  return createAgentUIStreamResponse({
+    agent,
+    uiMessages,
+    abortSignal: abortController.signal,
+    experimental_transform: smoothStream(),
+    consumeSseStream: consumeStream,
+    onError: (error) => {
+      // Provider errors carry the outgoing prompt in `requestBodyValues` and the raw
+      // `responseBody`, so log identifying fields only and keep chat content out of the logs.
+      const statusCode = APICallError.isInstance(error) ? error.statusCode : undefined
+
+      console.error('[api/ai] stream error:', {
+        name: error instanceof Error ? error.name : 'UnknownError',
+        message: error instanceof Error ? error.message : String(error),
+        statusCode
+      })
+
+      if (statusCode === 429) {
+        return 'You have reached the message limit for now. Please try again later.'
+      }
+
+      return 'An error occurred.'
+    }
+  })
 })

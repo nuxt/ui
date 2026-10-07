@@ -25,9 +25,10 @@ export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' |
    */
   size?: Progress['variants']['size']
   /**
+   * Any theme color, or any CSS color value for palettes outside the theme.
    * @defaultValue 'primary'
    */
-  color?: Progress['variants']['color']
+  color?: Progress['variants']['color'] | (string & {})
   /**
    * The orientation of the progress bar.
    * @defaultValue 'horizontal'
@@ -126,10 +127,9 @@ const indicatorStyle = computed(() => {
   }
 })
 
-const statusStyle = computed(() => {
-  const value = `${Math.max(percent.value ?? 0, 0)}%`
-  return props.orientation === 'vertical' ? { height: value } : { width: value }
-})
+// The theme reads the size off `--percent` so `ui.status` can override it, an inline
+// `width` would win over the class.
+const statusStyle = computed(() => ({ '--percent': `${Math.max(percent.value ?? 0, 0)}%` }))
 
 function isActive(index: number) {
   return index === Number(props.modelValue)
@@ -165,10 +165,16 @@ function stepVariant(index: number | string) {
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.progress || {}) })({
   animation: props.animation,
   size: props.size,
-  color: props.color,
+  color: props.color as Progress['variants']['color'],
   orientation: props.orientation,
   inverted: props.inverted
 }))
+
+// `tv` skips a color it doesn't know, so a value outside the theme palette adds no class
+// and is applied inline instead.
+const themeColors = computed(() => Object.keys({ ...theme.variants?.color, ...appConfig.ui?.progress?.variants?.color }))
+
+const customColor = computed(() => props.color && !themeColors.value.includes(props.color) ? props.color : undefined)
 </script>
 
 <template>
@@ -180,10 +186,10 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.progress || {}) 
     </div>
 
     <ProgressRoot v-bind="rootProps" :max="realMax" data-slot="base" :class="ui.base({ class: props.ui?.base })" style="transform: translateZ(0)">
-      <ProgressIndicator data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })" :style="indicatorStyle" />
+      <ProgressIndicator data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })" :style="[indicatorStyle, customColor ? { backgroundColor: customColor } : undefined]" />
     </ProgressRoot>
 
-    <div v-if="hasSteps" data-slot="steps" :class="ui.steps({ class: props.ui?.steps })">
+    <div v-if="hasSteps" data-slot="steps" :class="ui.steps({ class: props.ui?.steps })" :style="customColor ? { color: customColor } : undefined">
       <div v-for="(step, index) in props.max" :key="index" data-slot="step" :class="ui.step({ class: props.ui?.step, step: stepVariant(index) })">
         <slot :name="`step-${index}`" :step="step">
           {{ step }}

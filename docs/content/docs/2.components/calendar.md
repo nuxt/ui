@@ -1,7 +1,10 @@
 ---
-title: Calendar
 description: A calendar component for selecting single dates, multiple dates or date ranges.
 category: element
+keywords:
+  - date picker
+  - datepicker
+  - schedule
 links:
   - label: Calendar
     icon: i-custom-reka-ui
@@ -259,6 +262,20 @@ props:
   viewControl:
     color: primary
     variant: soft
+---
+::
+
+### Years Per Page :badge{label="Soon" class="align-text-top"}
+
+Use the `years-per-page` prop to change the number of years displayed in the year view. Defaults to `12`.
+
+::component-code
+---
+ignore:
+  - type
+props:
+  type: year
+  yearsPerPage: 20
 ---
 ::
 
