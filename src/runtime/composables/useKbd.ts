@@ -35,25 +35,28 @@ export const kbdKeysMap = {
 export type KbdKey = keyof typeof kbdKeysMap
 export type KbdKeySpecific = keyof KbdKeysSpecificMap
 
+export const kbdKeysPlatformMap: Record<KbdKeySpecific, { macos: string, other: string }> = {
+  meta: { macos: kbdKeysMap.command, other: 'Ctrl' },
+  ctrl: { macos: kbdKeysMap.control, other: 'Ctrl' },
+  alt: { macos: kbdKeysMap.option, other: 'Alt' }
+}
+
 const _useKbd = () => {
   const macOS = computed(() => import.meta.client && navigator && navigator.userAgent && navigator.userAgent.match(/Macintosh;/))
 
-  const kbdKeysSpecificMap = computed<KbdKeysSpecificMap>(() => ({
-    meta: macOS.value ? kbdKeysMap.command : 'Ctrl',
-    ctrl: macOS.value ? kbdKeysMap.control : 'Ctrl',
-    alt: macOS.value ? kbdKeysMap.option : 'Alt'
-  }))
+  if (import.meta.client && macOS.value) {
+    document.documentElement.classList.add('ui-macos')
+  }
 
   return {
-    macOS,
-    kbdKeysSpecificMap
+    macOS
   }
 }
 
 const useSharedKbd = /* @__PURE__ */ createSharedComposable(_useKbd)
 
 export function useKbd() {
-  const { macOS, kbdKeysSpecificMap } = useSharedKbd()
+  const { macOS } = useSharedKbd()
   // Platform-specific keys resolve after mount to match the server-rendered placeholder.
   const mounted = useMounted()
 
@@ -63,7 +66,7 @@ export function useKbd() {
     }
 
     if (['meta', 'alt', 'ctrl'].includes(value)) {
-      return mounted.value ? kbdKeysSpecificMap.value[value as KbdKeySpecific] : ' '
+      return mounted.value ? kbdKeysPlatformMap[value as KbdKeySpecific][macOS.value ? 'macos' : 'other'] : ' '
     }
 
     return kbdKeysMap[value as KbdKey] || value

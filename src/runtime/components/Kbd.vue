@@ -2,7 +2,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '../theme/kbd'
-import type { KbdKey } from '../composables/useKbd'
+import type { KbdKey, KbdKeySpecific } from '../composables/useKbd'
 import type { ComponentConfig } from '../types/tv'
 
 type Kbd = ComponentConfig<typeof theme, AppConfig, 'kbd'>
@@ -38,7 +38,8 @@ export interface KbdSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useKbd } from '../composables/useKbd'
+import { useHead } from '#imports'
+import { useKbd, kbdKeysPlatformMap } from '../composables/useKbd'
 import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 
@@ -52,6 +53,18 @@ const props = useComponentProps('kbd', _props, theme)
 const { getKbdKey } = useKbd()
 const overrides = useComponentOverrides((ui: Kbd['AppConfig']['ui']) => ui.kbd)
 
+const platformKey = computed(() => props.value && Object.hasOwn(kbdKeysPlatformMap, props.value) ? kbdKeysPlatformMap[props.value as KbdKeySpecific] : undefined)
+
+if (!import.meta.client && platformKey.value) {
+  useHead({
+    script: [{
+      key: 'ui-kbd-macos',
+      innerHTML: `/Macintosh;/.test(navigator.userAgent)&&document.documentElement.classList.add('ui-macos')`,
+      tagPosition: 'head'
+    }]
+  })
+}
+
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
   color: props.color,
@@ -63,7 +76,13 @@ const ui = computed(() => tv(theme, overrides.value)({
 <template>
   <Primitive :as="props.as" data-slot="kbd" :class="ui.base({ class: [props.ui?.base, props.class] })">
     <slot>
-      {{ getKbdKey(props.value) }}
+      <template v-if="platformKey">
+        <span data-slot="kbd-macos" :class="ui.macos({ class: props.ui?.macos })">{{ platformKey.macos }}</span>
+        <span data-slot="kbd-other" :class="ui.other({ class: props.ui?.other })">{{ platformKey.other }}</span>
+      </template>
+      <template v-else>
+        {{ getKbdKey(props.value) }}
+      </template>
     </slot>
   </Primitive>
 </template>

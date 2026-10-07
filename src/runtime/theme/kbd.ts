@@ -3,7 +3,9 @@ import { defineTheme } from '../utils/theme'
 
 export default defineTheme({
   slots: {
-    base: 'inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase'
+    base: 'inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase',
+    macos: 'hidden in-[.ui-macos]:inline',
+    other: 'in-[.ui-macos]:hidden'
   },
   variants: {
     color: colorVariant({ base: '' }),
