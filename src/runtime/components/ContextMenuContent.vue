@@ -55,7 +55,9 @@ import UIcon from './Icon.vue'
 import UKbd from './Kbd.vue'
 import UContextMenuContent from './ContextMenuContent.vue'
 
-const props = defineProps<ContextMenuContentProps<T>>()
+const props = withDefaults(defineProps<ContextMenuContentProps<T>>(), {
+  loop: true
+})
 const emits = defineEmits<ContextMenuContentEmits>()
 const slots = defineSlots<ContextMenuSlots<T>>()
 
