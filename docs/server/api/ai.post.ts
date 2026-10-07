@@ -383,7 +383,6 @@ For **Vue** — \`vite.config.ts\`:
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import ui from '@nuxt/ui/vite'
-import { getChatUser } from '../utils/chatUser'
 
 export default defineConfig({
   plugins: [
