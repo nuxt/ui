@@ -117,6 +117,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Փակել'
     },
+    pagination: {
+      first: 'Առաջին էջ',
+      last: 'Վերջին էջ',
+      next: 'Հաջորդ էջ',
+      page: 'Էջ {page}',
+      prev: 'Նախորդ էջ'
+    },
     pricingTable: {
       caption: 'Գնումների համեմատություն'
     },

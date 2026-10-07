@@ -117,6 +117,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Κλείσιμο'
     },
+    pagination: {
+      first: 'Πρώτη σελίδα',
+      last: 'Τελευταία σελίδα',
+      next: 'Επόμενη σελίδα',
+      page: 'Σελίδα {page}',
+      prev: 'Προηγούμενη σελίδα'
+    },
     pricingTable: {
       caption: 'Σύγκριση προγραμμάτων τιμολόγησης'
     },

@@ -118,6 +118,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'بستن'
     },
+    pagination: {
+      first: 'صفحه‌ی اول',
+      last: 'صفحه‌ی آخر',
+      next: 'صفحه‌ی بعد',
+      page: 'صفحه‌ی {page}',
+      prev: 'صفحه‌ی قبلی'
+    },
     pricingTable: {
       caption: 'مقایسه طرح قیمت'
     },

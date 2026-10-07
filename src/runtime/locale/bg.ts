@@ -117,6 +117,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Затворете'
     },
+    pagination: {
+      first: 'Първа страница',
+      last: 'Последна страница',
+      next: 'Следваща страница',
+      page: 'Страница {page}',
+      prev: 'Предишна страница'
+    },
     pricingTable: {
       caption: 'Ценова таблица'
     },

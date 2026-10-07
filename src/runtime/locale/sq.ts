@@ -117,6 +117,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Mbyll'
     },
+    pagination: {
+      first: 'Faqja e parë',
+      last: 'Faqja e fundit',
+      next: 'Faqja tjetër',
+      page: 'Faqja {page}',
+      prev: 'Faqja e mëparshme'
+    },
     pricingTable: {
       caption: 'Krahasimi i planeve të çmimeve'
     },

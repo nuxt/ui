@@ -117,6 +117,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'বন্ধ করুন'
     },
+    pagination: {
+      first: 'প্রথম পৃষ্ঠা',
+      last: 'শেষ পৃষ্ঠা',
+      next: 'পরবর্তী পৃষ্ঠা',
+      page: 'পৃষ্ঠা {page}',
+      prev: 'পূর্ববর্তী পৃষ্ঠা'
+    },
     pricingTable: {
       caption: 'প্রাইসিং প্ল্যানের তুলনা'
     },

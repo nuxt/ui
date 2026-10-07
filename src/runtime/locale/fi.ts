@@ -117,6 +117,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Sulje'
     },
+    pagination: {
+      first: 'Ensimmäinen sivu',
+      last: 'Viimeinen sivu',
+      next: 'Seuraava sivu',
+      page: 'Sivu {page}',
+      prev: 'Edellinen sivu'
+    },
     pricingTable: {
       caption: 'Hinnoitellut suunnitelmat'
     },

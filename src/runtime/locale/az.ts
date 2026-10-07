@@ -117,6 +117,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Bağla'
     },
+    pagination: {
+      first: 'İlk səhifə',
+      last: 'Son səhifə',
+      next: 'Növbəti səhifə',
+      page: 'Səhifə {page}',
+      prev: 'Əvvəlki səhifə'
+    },
     pricingTable: {
       caption: 'Qiymət planlarının müqayisəsi'
     },

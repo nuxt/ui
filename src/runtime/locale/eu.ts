@@ -117,6 +117,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Itxi'
     },
+    pagination: {
+      first: 'Lehen orria',
+      last: 'Azken orria',
+      next: 'Hurrengo orria',
+      page: '{page}. orria',
+      prev: 'Aurreko orria'
+    },
     pricingTable: {
       caption: 'Prezio-plana alderatzea'
     },

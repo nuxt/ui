@@ -117,6 +117,13 @@ export default defineLocale<Messages>({
     modal: {
       close: '关闭'
     },
+    pagination: {
+      first: '第一页',
+      last: '最后一页',
+      next: '下一页',
+      page: '第 {page} 页',
+      prev: '上一页'
+    },
     pricingTable: {
       caption: '价格计划比较'
     },

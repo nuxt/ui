@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Aizvērt'
     },
+    pagination: {
+      first: 'Pirmā lapa',
+      last: 'Pēdējā lapa',
+      next: 'Nākamā lapa',
+      page: 'Lapa {page}',
+      prev: 'Iepriekšējā lapa'
+    },
     pricingTable: {
       caption: 'Cenu salīdzinājums'
     },

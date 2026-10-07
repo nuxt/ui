@@ -117,6 +117,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Lukk'
     },
+    pagination: {
+      first: 'Første side',
+      last: 'Siste side',
+      next: 'Neste side',
+      page: 'Side {page}',
+      prev: 'Forrige side'
+    },
     pricingTable: {
       caption: 'Prisplaneringssammenligning'
     },

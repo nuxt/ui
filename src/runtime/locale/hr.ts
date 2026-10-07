@@ -117,6 +117,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Zatvori'
     },
+    pagination: {
+      first: 'Prva stranica',
+      last: 'Posljednja stranica',
+      next: 'Sljedeća stranica',
+      page: 'Stranica {page}',
+      prev: 'Prethodna stranica'
+    },
     pricingTable: {
       caption: 'Usporedba cjenovnih planova'
     },

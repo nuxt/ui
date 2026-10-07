@@ -117,6 +117,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Жабуу'
     },
+    pagination: {
+      first: 'Биринчи бет',
+      last: 'Акыркы бет',
+      next: 'Кийинки бет',
+      page: '{page}-бет',
+      prev: 'Алдыңкы бет'
+    },
     pricingTable: {
       caption: 'Баалардын салыштыруу таблицасы'
     },

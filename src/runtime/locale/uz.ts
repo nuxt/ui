@@ -117,6 +117,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Yopish'
     },
+    pagination: {
+      first: 'Birinchi sahifa',
+      last: 'Oxirgi sahifa',
+      next: 'Keyingi sahifa',
+      page: '{page}-sahifa',
+      prev: 'Oldingi sahifa'
+    },
     pricingTable: {
       caption: 'Narx planlarini taqqoslash'
     },

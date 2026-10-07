@@ -119,6 +119,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'დახურვა'
     },
+    pagination: {
+      first: 'პირველი გვერდი',
+      last: 'ბოლო გვერდი',
+      next: 'შემდეგი გვერდი',
+      page: 'გვერდი {page}',
+      prev: 'წინა გვერდი'
+    },
     pricingTable: {
       caption: 'ფასის გეგმების შედარება'
     },

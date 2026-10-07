@@ -117,6 +117,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Uždaryti'
     },
+    pagination: {
+      first: 'Pirmas puslapis',
+      last: 'Paskutinis puslapis',
+      next: 'Kitas puslapis',
+      page: 'Puslapis {page}',
+      prev: 'Ankstesnis puslapis'
+    },
     pricingTable: {
       caption: 'Kainų planų palyginimas'
     },

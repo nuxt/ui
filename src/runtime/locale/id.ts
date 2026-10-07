@@ -117,6 +117,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Tutup'
     },
+    pagination: {
+      first: 'Halaman pertama',
+      last: 'Halaman terakhir',
+      next: 'Halaman selanjutnya',
+      page: 'Halaman {page}',
+      prev: 'Halaman sebelumnya'
+    },
     pricingTable: {
       caption: 'Perbandingan Harga'
     },

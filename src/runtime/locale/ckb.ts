@@ -118,6 +118,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'داخستن'
     },
+    pagination: {
+      first: 'پەڕەی یەکەم',
+      last: 'پەڕەی کۆتایی',
+      next: 'پەڕەی دواتر',
+      page: 'پەڕە {page}',
+      prev: 'پەڕەی پێشوو'
+    },
     pricingTable: {
       caption: 'بەراورکردنی پلانی نرخدانان'
     },

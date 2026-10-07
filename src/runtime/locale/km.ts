@@ -117,6 +117,13 @@ export default defineLocale<Messages>({
     modal: {
       close: 'បិទ'
     },
+    pagination: {
+      first: 'ទំព័រដំបូង',
+      last: 'ទំព័រចុងក្រោយ',
+      next: 'ទំព័របន្ទាប់',
+      page: 'ទំព័រ {page}',
+      prev: 'ទំព័រមុន'
+    },
     pricingTable: {
       caption: 'បញ្ជីតម្លៃបន្ទប់បន្ទប់'
     },
