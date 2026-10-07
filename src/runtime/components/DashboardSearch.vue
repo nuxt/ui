@@ -73,17 +73,17 @@ export type DashboardSearchSlots = CommandPaletteSlots<CommandPaletteItem> & {
 </script>
 
 <script setup lang="ts">
-import { computed, useTemplateRef } from 'vue'
+import { computed, defineAsyncComponent, useTemplateRef } from 'vue'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig, useColorMode, defineShortcuts, useRuntimeHook } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useLocale } from '../composables/useLocale'
+import { useLazyOverlay } from '../composables/useLazyOverlay'
+import { lazyOverlays, loadOverlay } from '../utils/lazy-overlay'
 import { omit, transformUI } from '../utils'
 import { tv } from '../utils/tv'
-import UCommandPalette from './CommandPalette.vue'
-import UModal from './Modal.vue'
 
 const _props = withDefaults(defineProps<DashboardSearchProps>(), {
   shortcut: 'meta_k',
@@ -169,6 +169,13 @@ const groups = computed(() => {
   return groups
 })
 
+const loadCommandPalette = () => import('./CommandPalette.vue')
+
+const UModal = lazyOverlays.modal
+const UCommandPalette = defineAsyncComponent(loadCommandPalette)
+
+const renderModal = useLazyOverlay(() => open.value || props.unmountOnHide === false, () => Promise.all([loadOverlay('modal'), loadCommandPalette()]))
+
 const commandPaletteRef = useTemplateRef('commandPaletteRef')
 
 function onSelect(item: CommandPaletteItem) {
@@ -196,6 +203,7 @@ defineExpose({
 
 <template>
   <UModal
+    v-if="renderModal"
     v-model:open="open"
     :title="props.title || locale.messages.dashboardSearch?.title || t('dashboardSearchButton.label')"
     :description="props.description || locale.messages.dashboardSearch?.description"
