@@ -111,6 +111,8 @@ export default defineNuxtConfig({
     // the Figma guide lives with the kit now; the docs entry is a link, not a page
     '/figma': { redirect: { to: 'https://go.nuxt.com/figma-ui', statusCode: 301 }, prerender: false },
     '/docs/getting-started/figma': { redirect: { to: 'https://go.nuxt.com/figma-ui', statusCode: 301 }, prerender: false },
+    // same for the playground entry
+    '/docs/getting-started/playground': { redirect: { to: 'https://play.ui.nuxt.com', statusCode: 302 }, prerender: false },
     '/docs/getting-started/integrations': { redirect: '/docs/getting-started/integrations/icons', prerender: false },
     '/docs/getting-started/ai': { redirect: '/docs/getting-started/ai/mcp', prerender: false },
     '/docs/composables': { redirect: '/docs/composables/define-shortcuts', prerender: false },
@@ -295,9 +297,9 @@ export default defineNuxtConfig({
       { path: '/', raw: '/raw/index.md' },
       '/docs/**'
     ],
-    // the Figma entry links out (routeRules above) and the release pages are Vue
-    // pages built from the GitHub API, neither has a Markdown twin to list or serve
-    excludePrefixes: { extend: ['/docs/getting-started/figma', '/docs/releases'] },
+    // the Figma and playground entries link out (routeRules above) and the release pages are
+    // Vue pages built from the GitHub API, none has a Markdown twin to list or serve
+    excludePrefixes: { extend: ['/docs/getting-started/figma', '/docs/getting-started/playground', '/docs/releases'] },
     sitemap: {
       markdown: {
         // Split `/docs/**` into a section per area; `/blog/**` stays whole.

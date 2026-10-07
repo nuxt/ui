@@ -57,6 +57,11 @@ export function useSearch() {
     to: '/docs/releases',
     active: route.path.startsWith('/docs/releases')
   }, {
+    label: 'Theme',
+    description: 'Customize the theme and preview it live.',
+    icon: studioIcons.palette,
+    to: '/theme'
+  }, {
     label: 'Templates',
     description: 'Explore official starter templates.',
     icon: studioIcons.templates,
@@ -78,6 +83,11 @@ export function useSearch() {
     to: '/blog',
     active: route.path.startsWith('/blog')
   }, {
+    label: 'Contribution',
+    description: 'Learn how to contribute to the project.',
+    icon: studioIcons.heart,
+    to: '/docs/getting-started/contribution'
+  }, {
     label: 'Team',
     description: 'Meet the team behind the project.',
     icon: studioIcons.users,
@@ -86,7 +96,7 @@ export function useSearch() {
     label: 'Playground',
     description: 'Try components live in your browser.',
     icon: studioIcons.terminal,
-    to: '/play',
+    to: 'https://play.ui.nuxt.com',
     target: '_blank'
   }, {
     label: 'Figma',
@@ -98,7 +108,7 @@ export function useSearch() {
     label: 'GitHub',
     description: 'Check out the repository on GitHub.',
     icon: 'i-simple-icons-github',
-    to: 'https://github.com/nuxt/ui/releases',
+    to: 'https://github.com/nuxt/ui',
     target: '_blank'
   }])
 
