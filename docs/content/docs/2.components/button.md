@@ -243,9 +243,9 @@ export default defineAppConfig({
 ```
 ::
 
-### Link with external icon
+### Link with external icon :badge{label="Soon" class="align-text-top"}
 
-You can display an external icon with the `external-icon` prop to indicate that the link will be open in a new tab.
+Use the `external-icon` prop to display an icon when the link opens in a new tab.
 
 ::component-code
 ---
@@ -260,7 +260,7 @@ slots:
 ---
 ::
 
-The default icon for external link (`appConfig.ui.icons.external`) can be replaced with any [Icon](/docs/components/icon).
+You can also pass any [Icon](/docs/components/icon) name to replace the default one.
 
 ::component-code
 ---

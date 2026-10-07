@@ -175,9 +175,7 @@ const ui = computed(() => tv({
         </span>
       </slot>
 
-      <div v-if="props.target === '_blank' && props.externalIcon !== false" data-slot="externalIconContainer" :class="ui.externalIconContainer({ class: props.ui?.externalIconContainer, active })">
-        <UIcon :name="typeof props.externalIcon === 'string' ? props.externalIcon : appConfig.ui.icons.external" data-slot="externalIcon" :class="ui.externalIcon({ class: props.ui?.externalIcon, active })" />
-      </div>
+      <UIcon v-if="props.target === '_blank' && props.externalIcon !== false" :name="typeof props.externalIcon === 'string' ? props.externalIcon : appConfig.ui.icons.external" data-slot="externalIcon" :class="ui.externalIcon({ class: props.ui?.externalIcon, active })" />
 
       <slot name="trailing" :ui="ui">
         <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, active })" />
