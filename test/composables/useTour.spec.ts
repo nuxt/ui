@@ -180,6 +180,16 @@ describe('useTour', () => {
       expect(tour.reference.value).toBe(el)
     })
 
+    it('does not fall back to a tag when a plain word matches no id', () => {
+      const tag = document.createElement('header')
+      document.body.appendChild(tag)
+
+      const tour = useTour([{ target: 'header' }])
+      tour.start()
+
+      expect(tour.reference.value).toBeUndefined()
+    })
+
     it('does not treat an explicit selector as a literal id', () => {
       const literal = document.createElement('div')
       literal.id = '#cta'

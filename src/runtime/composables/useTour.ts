@@ -5,7 +5,8 @@ import type { ReferenceElement } from 'reka-ui'
 export interface TourStep {
   /**
    * The element this step points to. Accepts:
-   * - a bare id (`'id'`) or any CSS selector (`'#id'`, `'.class'`, `'[data-tour="step"]'`, …)
+   * - a bare id (`'id'`) — a plain word is always treated as an id, never as a tag selector
+   * - any CSS selector (`'#id'`, `'.class'`, `'[data-tour="step"]'`, …)
    * - an element or a virtual element (anything with `getBoundingClientRect`)
    * - a ref or a getter returning any of the above
    *
@@ -124,12 +125,9 @@ export function useTour(steps: MaybeRefOrGetter<TourStep[]>, options: UseTourOpt
     }
 
     if (typeof target === 'string') {
-      // A bare id takes precedence so `'header'` still resolves to `#header` rather than `<header>`.
-      if (!target.startsWith('#') && !target.startsWith('.')) {
-        const byId = document.getElementById(target)
-        if (byId) {
-          return byId
-        }
+      // A plain word is id-only so `'header'` means `#header`, never the `<header>` tag.
+      if (/^[\w-]+$/.test(target)) {
+        return document.getElementById(target) ?? undefined
       }
       try {
         return (document.querySelector(target) as ReferenceElement | null) ?? undefined
