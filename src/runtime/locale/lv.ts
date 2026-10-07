@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Nākamais',
       prev: 'Iepriekšējais'
     },
+    chatMessages: {
+      autoScroll: 'Ritināt uz leju'
+    },
     chatPrompt: {
       placeholder: 'Raksti savu ziņu šeit…'
     },
     chatPromptSubmit: {
-      label: 'Sūtīt ziņu'
+      label: 'Sūtīt ziņu',
+      reload: 'Mēģināt vēlreiz',
+      stop: 'Apturēt ģenerēšanu'
     },
     colorMode: {
       dark: 'Tumšs',
@@ -106,6 +111,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Aizvērt'
+    },
+    pagination: {
+      first: 'Pirmā lapa',
+      last: 'Pēdējā lapa',
+      next: 'Nākamā lapa',
+      page: 'Lapa {page}',
+      prev: 'Iepriekšējā lapa'
     },
     pricingTable: {
       caption: 'Cenu salīdzinājums'

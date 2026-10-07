@@ -111,6 +111,8 @@ export default defineNuxtConfig({
     // the Figma guide lives with the kit now; the docs entry is a link, not a page
     '/figma': { redirect: { to: 'https://go.nuxt.com/figma-ui', statusCode: 301 }, prerender: false },
     '/docs/getting-started/figma': { redirect: { to: 'https://go.nuxt.com/figma-ui', statusCode: 301 }, prerender: false },
+    // same for the playground entry
+    '/docs/getting-started/playground': { redirect: { to: 'https://play.ui.nuxt.com', statusCode: 302 }, prerender: false },
     '/docs/getting-started/integrations': { redirect: '/docs/getting-started/integrations/icons', prerender: false },
     '/docs/getting-started/ai': { redirect: '/docs/getting-started/ai/mcp', prerender: false },
     '/docs/composables': { redirect: '/docs/composables/define-shortcuts', prerender: false },
@@ -263,9 +265,24 @@ export default defineNuxtConfig({
         'vaul-vue',
         '@vueuse/integrations/useFuse',
         '@floating-ui/dom',
+        '@tiptap/core',
         '@tiptap/vue-3',
+        '@tiptap/vue-3/menus',
         '@tiptap/suggestion',
         '@tiptap/pm/state',
+        '@tiptap/pm/view',
+        '@tiptap/starter-kit',
+        '@tiptap/markdown',
+        '@tiptap/extension-code',
+        '@tiptap/extension-drag-handle-vue-3',
+        '@tiptap/extension-emoji',
+        '@tiptap/extension-horizontal-rule',
+        '@tiptap/extension-image',
+        '@tiptap/extension-mention',
+        '@tiptap/extension-placeholder',
+        '@tiptap/extension-text-align',
+        'tiptap-extension-code-block-shiki',
+        'zod',
         'shiki-transformer-color-highlight',
         'json5',
         '@internationalized/date',
@@ -295,9 +312,9 @@ export default defineNuxtConfig({
       { path: '/', raw: '/raw/index.md' },
       '/docs/**'
     ],
-    // the Figma entry links out (routeRules above) and the release pages are Vue
-    // pages built from the GitHub API, neither has a Markdown twin to list or serve
-    excludePrefixes: { extend: ['/docs/getting-started/figma', '/docs/releases'] },
+    // the Figma and playground entries link out (routeRules above) and the release pages are
+    // Vue pages built from the GitHub API, none has a Markdown twin to list or serve
+    excludePrefixes: { extend: ['/docs/getting-started/figma', '/docs/getting-started/playground', '/docs/releases'] },
     sitemap: {
       markdown: {
         // Split `/docs/**` into a section per area; `/blog/**` stays whole.

@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'পরবর্তী',
       prev: 'পূর্ববর্তী'
     },
+    chatMessages: {
+      autoScroll: 'নিচে স্ক্রোল করুন'
+    },
     chatPrompt: {
       placeholder: 'এখানে আপনার বার্তা লিখুন…'
     },
     chatPromptSubmit: {
-      label: 'প্রেরণ করুন'
+      label: 'প্রেরণ করুন',
+      reload: 'আবার চেষ্টা করুন',
+      stop: 'তৈরি করা বন্ধ করুন'
     },
     chatReasoning: {
       thinking: 'ভাবছে…',
@@ -111,6 +116,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'বন্ধ করুন'
+    },
+    pagination: {
+      first: 'প্রথম পৃষ্ঠা',
+      last: 'শেষ পৃষ্ঠা',
+      next: 'পরবর্তী পৃষ্ঠা',
+      page: 'পৃষ্ঠা {page}',
+      prev: 'পূর্ববর্তী পৃষ্ঠা'
     },
     pricingTable: {
       caption: 'প্রাইসিং প্ল্যানের তুলনা'

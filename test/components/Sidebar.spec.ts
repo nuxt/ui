@@ -9,12 +9,14 @@ describe('Sidebar', () => {
   const variants = Object.keys(theme.variants.variant) as any
   const collapsibles = Object.keys(theme.variants.collapsible) as any
   const sides = Object.keys(theme.variants.side) as any
+  const breakpoints = Object.keys(theme.variants.breakpoint) as any
 
   renderEach(Sidebar, [
     // Props
     ...variants.map((variant: string) => [`with variant ${variant}`, { props: { variant } }]),
     ...collapsibles.map((collapsible: string) => [`with collapsible ${collapsible}`, { props: { collapsible } }]),
     ...sides.map((side: string) => [`with side ${side}`, { props: { side } }]),
+    ...breakpoints.map((breakpoint: string) => [`with breakpoint ${breakpoint}`, { props: { breakpoint } }]),
     ['with title', { props: { title: 'Sidebar Title' } }],
     ['with description', { props: { title: 'Sidebar Title', description: 'Sidebar Description' } }],
     ['with close', { props: { title: 'Sidebar Title', close: true, collapsible: 'icon' as const } }],

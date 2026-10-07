@@ -53,6 +53,8 @@ items:
       removeElements: ['[id^="piano"]']
   - name: LearnVue
     url: https://learnvue.co/
+  - name: Linkedis
+    url: https://linked.is/
   - name: LunixPOS
     url: https://lunixpos.com/
   - name: Mawrble
