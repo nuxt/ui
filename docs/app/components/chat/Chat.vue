@@ -271,6 +271,7 @@ function clearMessages() {
     side="right"
     title="Ask"
     rail
+    breakpoint="xl"
     :style="{ '--sidebar-width': '24rem' }"
     :ui="{ footer: 'p-0', actions: 'gap-0.5' }"
     class="bg-default"
