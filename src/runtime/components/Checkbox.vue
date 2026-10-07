@@ -106,9 +106,10 @@ const maxReached = computed(() => {
     return false
   }
 
-  // Same check as Reka UI, which falls back to `on` when the checkbox has no `value`.
+  // Same check as Reka UI, whose `value` prop defaults to `on`.
   const values = checkboxGroupContext.modelValue.value ?? []
-  return values.length >= max && !values.some(value => isEqual(value, props.value ?? 'on'))
+  const checkboxValue = props.value === undefined ? 'on' : props.value
+  return values.length >= max && !values.some(value => isEqual(value, checkboxValue))
 })
 
 // When the indicator is hidden the checked icon is never visible, so `icon` renders above the
