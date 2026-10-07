@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Дараах',
       prev: 'Өмнөх'
     },
+    chatMessages: {
+      autoScroll: 'Доош гүйлгэх'
+    },
     chatPrompt: {
       placeholder: 'Энд мессежээ бичнэ үү…'
     },
     chatPromptSubmit: {
-      label: 'Мессеж илгээх'
+      label: 'Мессеж илгээх',
+      reload: 'Дахин оролдох',
+      stop: 'Үүсгэхийг зогсоох'
     },
     chatReasoning: {
       thinking: 'Бодож байна…',
@@ -111,6 +116,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Хаах'
+    },
+    pagination: {
+      first: 'Эхний хуудас',
+      last: 'Сүүлийн хуудас',
+      next: 'Дараах хуудас',
+      page: 'Хуудас {page}',
+      prev: 'Өмнөх хуудас'
     },
     pricingTable: {
       caption: 'Үнийн төлөвлөгөөний харьцуулалт'

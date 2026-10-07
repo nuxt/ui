@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Pirmyn',
       prev: 'Atgal'
     },
+    chatMessages: {
+      autoScroll: 'Slinkti žemyn'
+    },
     chatPrompt: {
       placeholder: 'Įveskite savo žinutę čia…'
     },
     chatPromptSubmit: {
-      label: 'Siųsti žinutę'
+      label: 'Siųsti žinutę',
+      reload: 'Bandyti dar kartą',
+      stop: 'Sustabdyti generavimą'
     },
     chatReasoning: {
       thinking: 'Mąsto…',
@@ -111,6 +116,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Uždaryti'
+    },
+    pagination: {
+      first: 'Pirmas puslapis',
+      last: 'Paskutinis puslapis',
+      next: 'Kitas puslapis',
+      page: 'Puslapis {page}',
+      prev: 'Ankstesnis puslapis'
     },
     pricingTable: {
       caption: 'Kainų planų palyginimas'
