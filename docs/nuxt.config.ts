@@ -237,18 +237,6 @@ export default defineNuxtConfig({
   nitro: {
     experimental: {
       asyncContext: true
-    },
-    prerender: {
-      routes: [
-        '/',
-        '/docs/getting-started',
-        '/openapi.json',
-        '/api/countries.json',
-        '/api/phone-codes.json',
-        '/api/locales.json',
-        '/api/module.json'
-      ],
-      crawlLinks: true
     }
   },
 
@@ -553,6 +541,19 @@ export default defineNuxtConfig({
     security: {
       renderTimeout: 60000
     }
+  },
+
+  prerender: {
+    routes: [
+      '/',
+      '/docs/getting-started',
+      '/openapi.json',
+      '/api/countries.json',
+      '/api/phone-codes.json',
+      '/api/locales.json',
+      '/api/module.json'
+    ],
+    crawlLinks: true
   },
 
   robots: {

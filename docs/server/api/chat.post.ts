@@ -1,8 +1,10 @@
+import { defineEventHandler, readBody } from 'nuxt/server'
+import type { UIMessage } from 'ai'
 import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
 import type { GatewayProviderOptions } from '@ai-sdk/gateway'
 
 export default defineEventHandler(async (event) => {
-  const { messages } = await readBody(event)
+  const { messages } = await readBody<{ messages: UIMessage[] }>(event)
 
   const result = streamText({
     model: 'anthropic/claude-haiku-4.5',
