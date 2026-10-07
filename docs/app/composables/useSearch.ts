@@ -19,7 +19,7 @@ export function useSearch() {
   }
 
   const links = computed(() => [{
-    label: 'Ask AI',
+    label: 'Ask',
     icon: 'i-custom-nuxi',
     kbds: ['meta', 'i'],
     ui: {
@@ -118,7 +118,7 @@ export function useSearch() {
       return items
     },
     items: [{
-      label: 'Ask AI',
+      label: 'Ask',
       icon: 'i-custom-nuxi',
       ui: {
         itemLeadingIcon: 'group-data-highlighted:not-group-data-disabled:text-primary'
