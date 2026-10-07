@@ -259,9 +259,9 @@ export default defineNuxtModule<ModuleOptions>({
         filename: 'ui-i18n.mjs',
         getContents: () => {
           // Resolved by `@nuxtjs/i18n`, including layers
-          const { locales = [] } = (nuxt.options.runtimeConfig.public.i18n || {}) as { locales?: I18nLocale[] }
+          const { locales } = (nuxt.options.runtimeConfig.public.i18n || {}) as { locales?: I18nLocale[] }
 
-          return generateI18nPlugin(locales, getLocaleKeys(resolve('./runtime/locale')), resolve('./runtime'))
+          return generateI18nPlugin(Array.isArray(locales) ? locales : [], getLocaleKeys(resolve('./runtime/locale')), resolve('./runtime'))
         }
       })
     }
