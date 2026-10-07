@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
       prev: 'הקודם'
     },
     chatMessages: {
-      autoScroll: 'גלילה למטה'
+      autoScroll: 'גלול למטה'
     },
     chatPrompt: {
       placeholder: 'כתוב את ההודעה שלך כאן…'
@@ -38,7 +38,7 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'שלח',
       reload: 'נסה שוב',
-      stop: 'עצירת היצירה'
+      stop: 'עצור את היצירה'
     },
     chatReasoning: {
       thinking: 'חושב…',
