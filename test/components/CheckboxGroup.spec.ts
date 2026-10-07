@@ -55,6 +55,16 @@ describe('CheckboxGroup', () => {
     ['with description slot', { props, slots: { description: () => 'Description slot' } }]
   ])
 
+  it('keeps a checked item without value enabled when max is reached', async () => {
+    const wrapper = await mountSuspended(CheckboxGroup, {
+      props: { items: [null, 'a'] as any, max: 1, defaultValue: ['on'] as any }
+    })
+
+    const [checked, blocked] = wrapper.findAll('[data-slot="item"]')
+    expect(checked!.classes()).not.toContain('opacity-75')
+    expect(blocked!.classes()).toContain('opacity-75')
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(CheckboxGroup, {
       props: {
