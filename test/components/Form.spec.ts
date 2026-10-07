@@ -827,7 +827,9 @@ describe('Form', () => {
         file: z.file(),
         count: z.number(),
         date: z.date(),
-        items: z.array(z.object({ quantity: z.number(), price: z.number() }))
+        items: z.array(z.object({ quantity: z.number(), price: z.number() })),
+        tags: z.array(z.string()).readonly(),
+        range: z.tuple([z.number(), z.number()])
       })
 
       expect(defineProps({
@@ -836,7 +838,9 @@ describe('Form', () => {
           file: null as File | null,
           count: '' as number | '',
           date: undefined as Date | undefined,
-          items: [{ quantity: undefined, price: null }]
+          items: [{ quantity: undefined, price: null }],
+          tags: [] as readonly string[],
+          range: [0, ''] as [number, number | '']
         })
       })).toBeDefined()
     })
@@ -857,7 +861,8 @@ describe('Form', () => {
       const schema = z.object({
         name: z.string(),
         count: z.number(),
-        items: z.array(z.object({ quantity: z.number() }))
+        items: z.array(z.object({ quantity: z.number() })),
+        pair: z.tuple([z.string(), z.number()])
       })
 
       // @ts-expect-error a string is not assignable to a number field
@@ -866,6 +871,8 @@ describe('Form', () => {
       expect(defineProps({ schema, state: reactive({ name: { first: '' } }) })).toBeDefined()
       // @ts-expect-error an object is not assignable to an array field
       expect(defineProps({ schema, state: reactive({ items: { quantity: 1 } }) })).toBeDefined()
+      // @ts-expect-error a number is not assignable to the string position of a tuple
+      expect(defineProps({ schema, state: reactive({ pair: [1, 1] as [number, number] }) })).toBeDefined()
     })
   })
 
