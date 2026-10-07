@@ -97,7 +97,6 @@ import { tv } from '../utils/tv'
 import UCheckbox from './Checkbox.vue'
 
 const _props = withDefaults(defineProps<CheckboxGroupProps<T, VK>>(), {
-  loop: true,
   labelKey: 'label',
   descriptionKey: 'description',
   valueKey: 'value' as never,
