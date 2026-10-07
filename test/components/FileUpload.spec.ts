@@ -8,7 +8,12 @@ import FileUpload from '../../src/runtime/components/FileUpload.vue'
 import type { FileUploadItem } from '../../src/runtime/components/FileUpload.vue'
 import type { FormInputEvents } from '../../src/module'
 import { renderForm } from '../utils/form'
+import { expectEmitPayloadType, expectSlotProps } from '../utils/types'
 import theme from '#build/ui/file-upload'
+
+interface CustomFileUploadItem extends FileUploadItem {
+  id: string
+}
 
 // Mock URL.createObjectURL to return deterministic blob URLs
 URL.createObjectURL = vi.fn((file: File | Blob) => {
@@ -33,6 +38,28 @@ async function setFilesOnInput(input: any, files: File[]) {
 }
 
 describe('FileUpload', () => {
+  test('preserves native file types by default', () => {
+    expectEmitPayloadType('update:modelValue', () => FileUpload({})).toEqualTypeOf<[File | null | undefined]>()
+    expectEmitPayloadType('update:modelValue', () => FileUpload({ multiple: true })).toEqualTypeOf<[File[] | null | undefined]>()
+    expectSlotProps('file', () => FileUpload({})).toEqualTypeOf<{
+      file: File
+      index: number
+      removeFile: (index?: number) => void
+    }>()
+  })
+
+  test('infers custom item types alongside native files', () => {
+    const item: CustomFileUploadItem = { name: 'existing.png', id: 'file-1' }
+
+    expectEmitPayloadType('update:modelValue', () => FileUpload({ modelValue: item })).toEqualTypeOf<[CustomFileUploadItem | File | null | undefined]>()
+    expectEmitPayloadType('update:modelValue', () => FileUpload({ modelValue: [item], multiple: true })).toEqualTypeOf<[(CustomFileUploadItem | File)[] | null | undefined]>()
+    expectSlotProps('file', () => FileUpload({ modelValue: item })).toEqualTypeOf<{
+      file: CustomFileUploadItem | File
+      index: number
+      removeFile: (index?: number) => void
+    }>()
+  })
+
   const sizes = Object.keys(theme.variants.size) as any
   const variants = Object.keys(theme.variants.variant) as any
   const layouts = Object.keys(theme.variants.layout) as any
@@ -200,10 +227,6 @@ describe('FileUpload', () => {
   })
 
   it('preserves custom file items when adding files', async () => {
-    interface CustomFileUploadItem extends FileUploadItem {
-      id: string
-    }
-
     const item: CustomFileUploadItem = {
       id: 'file-1',
       name: 'existing.png',

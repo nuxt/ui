@@ -17,10 +17,9 @@ export interface FileUploadItem {
   size?: number
   type?: string
   avatar?: AvatarProps
-  [key: string]: any
 }
 
-export interface FileUploadProps<M extends boolean = false> extends /** @vue-ignore */ Pick<InputHTMLAttributes, 'form' | 'formaction' | 'formenctype' | 'formmethod' | 'formnovalidate' | 'formtarget'> {
+export interface FileUploadProps<M extends boolean = false, T extends FileUploadItem = File> extends /** @vue-ignore */ Pick<InputHTMLAttributes, 'form' | 'formaction' | 'formenctype' | 'formmethod' | 'formnovalidate' | 'formtarget'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -69,6 +68,7 @@ export interface FileUploadProps<M extends boolean = false> extends /** @vue-ign
    * @defaultValue '*'
    */
   accept?: string
+  modelValue?: FileUploadFiles<T, M>
   multiple?: M & boolean
   /**
    * Reset the file input when the dialog is opened.
@@ -124,9 +124,9 @@ export interface FileUploadEmits {
   change: [event: Event]
 }
 
-type FileUploadFiles<M> = (M extends true ? FileUploadItem[] : FileUploadItem) | null
+type FileUploadFiles<T, M> = (M extends true ? T[] : T) | null
 
-export interface FileUploadSlots<M extends boolean = false> {
+export interface FileUploadSlots<M extends boolean = false, T extends FileUploadItem = File> {
   'default'?(props: {
     open: UseFileDialogReturn['open']
     removeFile: (index?: number) => void
@@ -135,19 +135,19 @@ export interface FileUploadSlots<M extends boolean = false> {
   'leading'?(props: { ui: FileUpload['ui'] }): VNode[]
   'label'?(props?: {}): VNode[]
   'description'?(props?: {}): VNode[]
-  'actions'?(props: { files: FileUploadFiles<M> | undefined, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): VNode[]
-  'files'?(props: { files: FileUploadFiles<M>, removeFile: (index?: number) => void }): VNode[]
-  'files-top'?(props: { files: FileUploadFiles<M>, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): VNode[]
-  'files-bottom'?(props: { files: FileUploadFiles<M>, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): VNode[]
-  'file'?(props: { file: FileUploadItem, index: number, removeFile: (index?: number) => void }): VNode[]
-  'file-leading'?(props: { file: FileUploadItem, index: number, ui: FileUpload['ui'] }): VNode[]
-  'file-name'?(props: { file: FileUploadItem, index: number }): VNode[]
-  'file-size'?(props: { file: FileUploadItem, index: number }): VNode[]
-  'file-trailing'?(props: { file: FileUploadItem, index: number, ui: FileUpload['ui'], removeFile: (index?: number) => void }): VNode[]
+  'actions'?(props: { files: FileUploadFiles<T | File, M> | undefined, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): VNode[]
+  'files'?(props: { files: FileUploadFiles<T | File, M>, removeFile: (index?: number) => void }): VNode[]
+  'files-top'?(props: { files: FileUploadFiles<T | File, M>, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): VNode[]
+  'files-bottom'?(props: { files: FileUploadFiles<T | File, M>, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): VNode[]
+  'file'?(props: { file: T | File, index: number, removeFile: (index?: number) => void }): VNode[]
+  'file-leading'?(props: { file: T | File, index: number, ui: FileUpload['ui'] }): VNode[]
+  'file-name'?(props: { file: T | File, index: number }): VNode[]
+  'file-size'?(props: { file: T | File, index: number }): VNode[]
+  'file-trailing'?(props: { file: T | File, index: number, ui: FileUpload['ui'], removeFile: (index?: number) => void }): VNode[]
 }
 </script>
 
-<script setup lang="ts" generic="M extends boolean = false">
+<script setup lang="ts" generic="M extends boolean = false, T extends FileUploadItem = File">
 import { computed, toRef, toRefs, watch } from 'vue'
 import { Primitive, VisuallyHidden } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
@@ -163,7 +163,7 @@ import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const _props = withDefaults(defineProps<FileUploadProps<M>>(), {
+const _props = withDefaults(defineProps<FileUploadProps<M, T>>(), {
   accept: '*',
   multiple: false as never,
   reset: false,
@@ -176,11 +176,12 @@ const _props = withDefaults(defineProps<FileUploadProps<M>>(), {
   fileImage: true
 })
 const emits = defineEmits<FileUploadEmits>()
-const slots = defineSlots<FileUploadSlots<M>>()
+const slots = defineSlots<FileUploadSlots<M, T>>()
 
-const modelValue = defineModel<FileUploadFiles<M>>()
+// eslint-disable-next-line vue/no-dupe-keys
+const modelValue = defineModel<FileUploadFiles<T | File, M>>()
 
-const props = useComponentProps<FileUploadProps<M>>('fileUpload', _props)
+const props = useComponentProps<FileUploadProps<M, T>>('fileUpload', _props)
 
 const appConfig = useAppConfig() as FileUpload['AppConfig']
 
@@ -237,6 +238,10 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.fileUpload || {}
   disabled: disabled.value
 }))
 
+function getFileAvatar(file: FileUploadItem): AvatarProps | undefined {
+  return props.fileImage ? file.avatar : undefined
+}
+
 function getFilePreview(file: FileUploadItem): string | undefined {
   if (!props.fileImage) return undefined
   if (file.avatar?.src) return file.avatar.src
@@ -261,11 +266,11 @@ function formatFileSize(bytes?: number): string | undefined {
   return `${formattedSize}${sizes[i]}`
 }
 
-function setModelValue(value: FileUploadItem | FileUploadItem[] | null) {
-  modelValue.value = value as FileUploadFiles<M>
+function setModelValue(value: T | File | (T | File)[] | null) {
+  modelValue.value = value as FileUploadFiles<T | File, M>
 }
 
-function onUpdate(files: FileUploadItem[], reset = false) {
+function onUpdate(files: (T | File)[], reset = false) {
   // `useDropZone` is registered on mount regardless of state, so a disabled
   // control would still accept dropped files without this guard.
   if (disabled.value) {
@@ -273,7 +278,7 @@ function onUpdate(files: FileUploadItem[], reset = false) {
   }
 
   if (props.multiple) {
-    const existingFiles = reset ? [] : (modelValue.value as FileUploadItem[]) || []
+    const existingFiles = reset ? [] : (modelValue.value as (T | File)[]) || []
     setModelValue([...existingFiles, ...files])
   } else {
     setModelValue(files[0] ?? null)
@@ -298,7 +303,7 @@ function removeFile(index?: number) {
     return
   }
 
-  const files = [...modelValue.value as FileUploadItem[]]
+  const files = [...modelValue.value as (T | File)[]]
   files.splice(index, 1)
 
   onUpdate(files, true)
@@ -307,7 +312,7 @@ function removeFile(index?: number) {
 }
 
 watch(modelValue, (newValue) => {
-  const hasModelReset = props.multiple ? !(newValue as FileUploadItem[])?.length : !newValue
+  const hasModelReset = props.multiple ? !(newValue as (T | File)[])?.length : !newValue
 
   if (hasModelReset && inputRef.value?.$el) {
     inputRef.value.$el.value = ''
@@ -335,7 +340,7 @@ defineExpose({
                   :alt="file.name"
                   :icon="props.fileIcon || appConfig.ui.icons.file"
                   :size="size"
-                  v-bind="props.fileImage ? file.avatar : undefined"
+                  v-bind="getFileAvatar(file)"
                   :src="getFilePreview(file)"
                   data-slot="fileLeadingAvatar"
                   :class="ui.fileLeadingAvatar({ class: props.ui?.fileLeadingAvatar })"
@@ -405,7 +410,7 @@ defineExpose({
       >
         <ReuseFilesTemplate v-if="position === 'inside'" />
 
-        <div v-if="position === 'inside' ? (!props.preview || (multiple ? !(modelValue as FileUploadItem[])?.length : !modelValue)) : true" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+        <div v-if="position === 'inside' ? (!props.preview || (multiple ? !(modelValue as (T | File)[])?.length : !modelValue)) : true" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
           <slot name="leading" :ui="ui">
             <template v-if="props.icon !== false">
               <UIcon v-if="variant === 'button'" :name="props.icon ?? appConfig.ui.icons.upload" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
