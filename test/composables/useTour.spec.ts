@@ -157,6 +157,52 @@ describe('useTour', () => {
       expect(tour.reference.value).toBe(el)
     })
 
+    it('resolves any CSS selector target', () => {
+      const el = document.createElement('button')
+      el.setAttribute('data-tour', 'step')
+      document.body.appendChild(el)
+
+      const tour = useTour([{ target: 'button[data-tour="step"]' }])
+      tour.start()
+
+      expect(tour.reference.value).toBe(el)
+    })
+
+    it('prefers a bare id over a matching tag name', () => {
+      const tag = document.createElement('header')
+      const el = document.createElement('div')
+      el.id = 'header'
+      document.body.append(tag, el)
+
+      const tour = useTour([{ target: 'header' }])
+      tour.start()
+
+      expect(tour.reference.value).toBe(el)
+    })
+
+    it('does not fall back to a tag when a plain word matches no id', () => {
+      const tag = document.createElement('header')
+      document.body.appendChild(tag)
+
+      const tour = useTour([{ target: 'header' }])
+      tour.start()
+
+      expect(tour.reference.value).toBeUndefined()
+    })
+
+    it('does not treat an explicit selector as a literal id', () => {
+      const literal = document.createElement('div')
+      literal.id = '#cta'
+      const el = document.createElement('div')
+      el.id = 'cta'
+      document.body.append(literal, el)
+
+      const tour = useTour([{ target: '#cta' }])
+      tour.start()
+
+      expect(tour.reference.value).toBe(el)
+    })
+
     it('is undefined for a non-matching selector', () => {
       const tour = useTour([{ target: '#no-such-id' }])
       tour.start()

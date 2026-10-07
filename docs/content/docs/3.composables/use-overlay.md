@@ -5,7 +5,7 @@ description: 'A composable to programmatically control overlays.'
 
 ## Usage
 
-Use the auto-imported `useOverlay` composable to programmatically control [Modal](/docs/components/modal) and [Slideover](/docs/components/slideover) components.
+Use the auto-imported `useOverlay` composable to programmatically control [Modal](/docs/components/modal), [Slideover](/docs/components/slideover) and [Drawer](/docs/components/drawer) components.
 
 ::component-example
 ---

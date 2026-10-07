@@ -73,6 +73,11 @@ export interface SidebarProps<T extends SidebarMode = SidebarMode> {
    */
   transition?: boolean
   /**
+   * The breakpoint below which the sidebar renders as a menu.
+   * @defaultValue 'lg'
+   */
+  breakpoint?: Sidebar['variants']['breakpoint']
+  /**
    * The mode of the sidebar menu on mobile.
    * @defaultValue 'slideover'
    */
@@ -122,6 +127,7 @@ const _props = withDefaults(defineProps<SidebarProps<T>>(), {
   close: false,
   transition: true,
   rail: false,
+  breakpoint: 'lg',
   mode: 'slideover' as never
 })
 const slots = defineSlots<SidebarSlots>()
@@ -131,12 +137,15 @@ const props = useComponentProps<SidebarProps<T>>('sidebar', _props)
 const [DefineInnerTemplate, ReuseInnerTemplate] = createReusableTemplate()
 const [DefineContentTemplate, ReuseContentTemplate] = createReusableTemplate()
 
-const mediaQuery = useMediaQuery('(max-width: 1023px)')
+// Same values as the Tailwind CSS variants in the theme, in rem
+const breakpoints = { 'sm': 40, 'md': 48, 'lg': 64, 'xl': 80, '2xl': 96 }
+
+const mediaQuery = useMediaQuery(() => `(min-width: ${breakpoints[props.breakpoint || 'lg']}rem)`)
 const isMounted = ref(false)
 onMounted(() => {
   isMounted.value = true
 })
-const isMobile = computed(() => isMounted.value && mediaQuery.value)
+const isMobile = computed(() => isMounted.value && !mediaQuery.value)
 
 // Viewport-aware open model: on desktop controls expanded/collapsed, on mobile controls the sheet
 const modelOpen = defineModel<boolean>('open', { default: true })
@@ -201,6 +210,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.sidebar || {}) }
   side: props.side,
   variant: props.variant,
   collapsible: props.collapsible,
+  breakpoint: props.breakpoint,
   transition: props.transition
 }))
 

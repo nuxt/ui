@@ -2,7 +2,7 @@ import { useAnimate } from 'motion-v'
 import { useElementVisibility, useEventListener, useRafFn } from '@vueuse/core'
 
 /**
- * Nuxi, the Nuxt mascot, as the Ask AI glyph. Ported from nuxt.com: the face
+ * Nuxi, the Nuxt mascot, as the Ask glyph. Ported from nuxt.com: the face
  * lives in a mask over the Nuxt mark, so the eyes and mouth are holes that
  * blink, look around and follow the pointer, and the body rides a keyframe
  * per mood.
@@ -476,7 +476,7 @@ export function useNuxiIcon(props: NuxiIconProps, emit?: EmitFn) {
       isWinking.value = true
       later(() => (isWinking.value = false), 300)
     } else if (clickCount >= 4) {
-      // the svg sits inside the Ask AI button, so the click keeps bubbling
+      // the svg sits inside the Ask button, so the click keeps bubbling
       doWobble()
       clickCount = 0
     }
