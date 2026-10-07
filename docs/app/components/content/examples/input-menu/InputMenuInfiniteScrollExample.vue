@@ -56,6 +56,7 @@ onMounted(() => {
     ref="inputMenu"
     placeholder="Select user"
     :items="users"
+    :loop="false"
     @update:open="onOpen"
   />
 </template>
