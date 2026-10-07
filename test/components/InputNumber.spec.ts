@@ -43,6 +43,26 @@ describe('InputNumber', () => {
     ['with decrement slot', { slots: { decrement: () => '-' } }]
   ])
 
+  it.each(['increment', 'decrement'])('starts from startingValue on the first %s of an empty field', async (slot) => {
+    const wrapper = await mountSuspended(InputNumber, { props: { startingValue: 18 } })
+
+    const button = wrapper.find(`[data-slot="${slot}"] button`)
+    await button.trigger('pointerdown', { button: 0, pointerType: 'mouse' })
+    await button.trigger('pointerup', { button: 0, pointerType: 'mouse' })
+
+    expect(wrapper.emitted('update:modelValue')).toEqual([[18]])
+  })
+
+  it('keeps an out of range typed value with allowInvalid', async () => {
+    const wrapper = await mountSuspended(InputNumber, { props: { max: 10, allowInvalid: true } })
+
+    const input = wrapper.find('input')
+    await input.setValue('15')
+    await input.trigger('blur')
+
+    expect(wrapper.emitted('update:modelValue')).toEqual([[15]])
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(InputNumber, {
       props: {
