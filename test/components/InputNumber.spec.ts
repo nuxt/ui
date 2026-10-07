@@ -43,12 +43,12 @@ describe('InputNumber', () => {
     ['with decrement slot', { slots: { decrement: () => '-' } }]
   ])
 
-  it('starts from startingValue when incrementing an empty field', async () => {
+  it.each(['increment', 'decrement'])('starts from startingValue on the first %s of an empty field', async (slot) => {
     const wrapper = await mountSuspended(InputNumber, { props: { startingValue: 18 } })
 
-    const increment = wrapper.find('[data-slot="increment"] button')
-    await increment.trigger('pointerdown', { button: 0, pointerType: 'mouse' })
-    await increment.trigger('pointerup', { button: 0, pointerType: 'mouse' })
+    const button = wrapper.find(`[data-slot="${slot}"] button`)
+    await button.trigger('pointerdown', { button: 0, pointerType: 'mouse' })
+    await button.trigger('pointerup', { button: 0, pointerType: 'mouse' })
 
     expect(wrapper.emitted('update:modelValue')).toEqual([[18]])
   })
