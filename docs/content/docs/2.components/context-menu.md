@@ -326,6 +326,21 @@ name: 'context-menu-color-items-example'
 ---
 ::
 
+### Control open state :badge{label="Soon" class="align-text-top"}
+
+You can control the open state by using the `v-model:open` directive. When opened programmatically, the menu is anchored to the trigger instead of the cursor.
+
+::component-example
+---
+collapse: true
+name: 'context-menu-open-example'
+---
+::
+
+::note
+In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcuts), you can toggle the ContextMenu by pressing :kbd{value="O"}.
+::
+
 ### With custom slot
 
 Use the `slot` property to customize a specific item.
