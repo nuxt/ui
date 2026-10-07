@@ -157,6 +157,7 @@ import UIcon from './Icon.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<TreeProps<T, M>>(), {
+  loop: true,
   labelKey: 'label',
   nested: true,
   virtualize: false
@@ -266,6 +267,7 @@ defineExpose({
         v-slot="{ isExpanded, isSelected, isIndeterminate, handleSelect, handleToggle }"
         :level="level"
         :value="item"
+        :disabled="item.disabled"
         as-child
         @toggle="(item.onToggle ?? props.onToggle)?.($event, item)"
         @select="(item.onSelect ?? props.onSelect)?.($event, item)"

@@ -1,6 +1,7 @@
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { DropdownMenuContent } from 'reka-ui'
 import { renderEach } from '../component-render'
 import type { AppConfig } from '@nuxt/schema'
 import DropdownMenu from '../../src/runtime/components/DropdownMenu.vue'
@@ -142,6 +143,14 @@ describe('DropdownMenu', () => {
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
   ])
+
+  it('loops keyboard navigation by default', async () => {
+    const wrapper = await mountSuspended(DropdownMenu, { props })
+    expect(wrapper.findComponent(DropdownMenuContent).props('loop')).toBe(true)
+
+    await wrapper.setProps({ content: { loop: false } })
+    expect(wrapper.findComponent(DropdownMenuContent).props('loop')).toBe(false)
+  })
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(DropdownMenu, {

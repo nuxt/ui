@@ -89,6 +89,15 @@ describe('Listbox', () => {
     }
   )
 
+  it('loops keyboard navigation by default', async () => {
+    const wrapper = await mountSuspended(Listbox, { props: { items } })
+    const root = wrapper.findComponent({ name: 'ListboxRoot' })
+    expect(root.props('loop')).toBe(true)
+
+    await wrapper.setProps({ loop: false })
+    expect(root.props('loop')).toBe(false)
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Listbox, {
       props: {

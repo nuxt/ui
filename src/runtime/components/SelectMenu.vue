@@ -258,6 +258,7 @@ import UInput from './Input.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<SelectMenuProps<T, VK, M, Mod, C>>(), {
+  loop: true,
   portal: true,
   searchInput: true,
   labelKey: 'label',

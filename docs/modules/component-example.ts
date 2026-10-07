@@ -95,7 +95,11 @@ export default defineNuxtModule({
         name: 'component-example',
         enforce: 'post',
         async buildStart() {
-          if (_configResolved?.build.ssr) {
+          // With the Vite Environment API the client and server builds share one
+          // config, so `build.ssr` is set for both and only the environment tells
+          // them apart.
+          const environment = (this as any).environment?.name as string | undefined
+          if (environment ? environment !== 'client' : _configResolved?.build.ssr) {
             return
           }
           await fetchComponents()
