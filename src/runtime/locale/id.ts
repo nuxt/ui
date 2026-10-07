@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Berikutnya',
       prev: 'Sebelumnya'
     },
+    chatMessages: {
+      autoScroll: 'Gulir ke bawah'
+    },
     chatPrompt: {
       placeholder: 'Tulis pesan Anda di sini…'
     },
     chatPromptSubmit: {
-      label: 'Kirim'
+      label: 'Kirim',
+      reload: 'Coba lagi',
+      stop: 'Hentikan pembuatan'
     },
     chatReasoning: {
       thinking: 'Berpikir…',

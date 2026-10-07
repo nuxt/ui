@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Další',
       prev: 'Předchozí'
     },
+    chatMessages: {
+      autoScroll: 'Posunout dolů'
+    },
     chatPrompt: {
       placeholder: 'Zde napište svůj text…'
     },
     chatPromptSubmit: {
-      label: 'Odeslat'
+      label: 'Odeslat',
+      reload: 'Zkusit znovu',
+      stop: 'Zastavit generování'
     },
     chatReasoning: {
       thinking: 'Přemýšlí…',

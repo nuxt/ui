@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Առաջ',
       prev: 'Հետ'
     },
+    chatMessages: {
+      autoScroll: 'Ոլորել ներքև'
+    },
     chatPrompt: {
       placeholder: 'Շարունակել'
     },
     chatPromptSubmit: {
-      label: 'Շարունակել'
+      label: 'Շարունակել',
+      reload: 'Կրկին փորձել',
+      stop: 'Դադարեցնել ստեղծումը'
     },
     chatReasoning: {
       thinking: 'Մտածում է…',

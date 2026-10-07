@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Επόμενο',
       prev: 'Προηγούμενο'
     },
+    chatMessages: {
+      autoScroll: 'Κύλιση προς τα κάτω'
+    },
     chatPrompt: {
       placeholder: 'Εδώ γράψτε το μήνυμά σας…'
     },
     chatPromptSubmit: {
-      label: 'Αποστολή'
+      label: 'Αποστολή',
+      reload: 'Επανάληψη',
+      stop: 'Διακοπή δημιουργίας'
     },
     chatReasoning: {
       thinking: 'Σκέφτεται…',

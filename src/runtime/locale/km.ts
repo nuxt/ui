@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'បន្ទាប់',
       prev: 'មុន'
     },
+    chatMessages: {
+      autoScroll: 'រំកិលចុះក្រោម'
+    },
     chatPrompt: {
       placeholder: 'សួរស្រឡាញ់មួយបីនេះមានប្រភេទបានទាមទារទេ…'
     },
     chatPromptSubmit: {
-      label: 'សាក់'
+      label: 'សាក់',
+      reload: 'ព្យាយាមម្តងទៀត',
+      stop: 'បញ្ឈប់ការបង្កើត'
     },
     chatReasoning: {
       thinking: 'កំពុងគិត…',

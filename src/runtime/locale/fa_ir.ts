@@ -29,11 +29,16 @@ export default defineLocale<Messages>({
       next: 'بعدی',
       prev: 'قبلی'
     },
+    chatMessages: {
+      autoScroll: 'پیمایش به پایین'
+    },
     chatPrompt: {
       placeholder: 'اینجا پیام خود را بنویسید…'
     },
     chatPromptSubmit: {
-      label: 'ارسال'
+      label: 'ارسال',
+      reload: 'تلاش دوباره',
+      stop: 'توقف تولید'
     },
     chatReasoning: {
       thinking: 'در حال فکر کردن…',

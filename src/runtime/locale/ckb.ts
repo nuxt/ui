@@ -29,11 +29,16 @@ export default defineLocale<Messages>({
       next: 'دواتر',
       prev: 'پێشتر'
     },
+    chatMessages: {
+      autoScroll: 'بۆ خوارەوە بڕۆ'
+    },
     chatPrompt: {
       placeholder: 'نامەکەت لێرە بنوسە…'
     },
     chatPromptSubmit: {
-      label: 'ناردن'
+      label: 'ناردن',
+      reload: 'دووبارە هەوڵبدەرەوە',
+      stop: 'وەستاندنی دروستکردن'
     },
     chatReasoning: {
       thinking: 'بیرکردنەوە…',

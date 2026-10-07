@@ -29,11 +29,16 @@ export default defineLocale<Messages>({
       next: 'הבא',
       prev: 'הקודם'
     },
+    chatMessages: {
+      autoScroll: 'גלול למטה'
+    },
     chatPrompt: {
       placeholder: 'כתוב את ההודעה שלך כאן…'
     },
     chatPromptSubmit: {
-      label: 'שלח'
+      label: 'שלח',
+      reload: 'נסה שוב',
+      stop: 'עצור את היצירה'
     },
     chatReasoning: {
       thinking: 'חושב…',

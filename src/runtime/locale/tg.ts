@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Баъдӣ',
       prev: 'Қаблӣ'
     },
+    chatMessages: {
+      autoScroll: 'Ба поён ҳаракат додан'
+    },
     chatPrompt: {
       placeholder: 'Пайём ворид кунед…'
     },
     chatPromptSubmit: {
-      label: 'Фиристодан'
+      label: 'Фиристодан',
+      reload: 'Аз нав кӯшиш кардан',
+      stop: 'Қатъ кардани эҷод'
     },
     chatReasoning: {
       thinking: 'Фикр мекунад…',

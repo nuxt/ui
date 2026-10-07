@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Hurrengoa',
       prev: 'Aurretikoa'
     },
+    chatMessages: {
+      autoScroll: 'Korritu behera'
+    },
     chatPrompt: {
       placeholder: 'Idatzi zure mezua hemen…'
     },
     chatPromptSubmit: {
-      label: 'Bidali'
+      label: 'Bidali',
+      reload: 'Saiatu berriro',
+      stop: 'Gelditu sortzea'
     },
     chatReasoning: {
       thinking: 'Pentsatzen…',

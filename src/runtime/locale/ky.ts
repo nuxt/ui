@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Кийинки',
       prev: 'Алдыңкы'
     },
+    chatMessages: {
+      autoScroll: 'Ылдый жылдыруу'
+    },
     chatPrompt: {
       placeholder: 'Бул жерге билдирүүңүздү жазыңыз…'
     },
     chatPromptSubmit: {
-      label: 'Билдирүү жөнөтүү'
+      label: 'Билдирүү жөнөтүү',
+      reload: 'Кайра аракет кылуу',
+      stop: 'Генерацияны токтотуу'
     },
     chatReasoning: {
       thinking: 'Ойлонуда…',

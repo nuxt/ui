@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Nākamais',
       prev: 'Iepriekšējais'
     },
+    chatMessages: {
+      autoScroll: 'Ritināt uz leju'
+    },
     chatPrompt: {
       placeholder: 'Raksti savu ziņu šeit…'
     },
     chatPromptSubmit: {
-      label: 'Sūtīt ziņu'
+      label: 'Sūtīt ziņu',
+      reload: 'Mēģināt vēlreiz',
+      stop: 'Apturēt ģenerēšanu'
     },
     colorMode: {
       dark: 'Tumšs',
