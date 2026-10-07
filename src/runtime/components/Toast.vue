@@ -52,10 +52,14 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
    * - under the title and description when orientation is `vertical`
    * - next to the close button when orientation is `horizontal`
    * `{ size: 'xs' }`{lang="ts-type"}
-   *
-   * Set `closeOnClick` to `false` on an action to keep the toast open when it's clicked.
    */
-  actions?: (ButtonProps & { closeOnClick?: boolean })[]
+  actions?: (ButtonProps & {
+    /**
+     * Whether the toast closes when the action is clicked.
+     * @defaultValue true
+     */
+    closeOnClick?: boolean
+  })[]
   /**
    * The time in milliseconds before the toast automatically closes. Overrides the global `toaster.duration`.
    *
