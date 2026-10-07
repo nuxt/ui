@@ -29,7 +29,11 @@ describe('Header', () => {
     ['with bottom slot', { slots: { bottom: () => 'Bottom slot' } }],
     ['with body slot', { slots: { body: () => 'Body slot' } }],
     ['with content slot', { slots: { content: () => 'Content slot' } }]
-  ])
+  ], async (_, options) => {
+    const wrapper = await mountSuspended(Header, options)
+    await vi.dynamicImportSettled()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 
   it('labels the menu dialog with the translated toggle label', async () => {
     const wrapper = await mountSuspended(Header, { props: { open: true, menu: { portal: false } } })
