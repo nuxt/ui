@@ -71,7 +71,7 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
   selectedIcon?: IconProps['name']
   /**
    * The content of the menu.
-   * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }
+   * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper', loop: true }
    */
   content?: Omit<SelectContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<SelectContentEmits>>
   /**
@@ -189,7 +189,7 @@ const appConfig = useAppConfig() as Select['AppConfig']
 const rootProps = useForwardProps(reactivePick(props, 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple', 'nullableValue'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const position = computed(() => props.content?.position ?? appConfig.ui?.select?.defaultVariants?.position ?? theme.defaultVariants?.position)
-const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: position.value }) as SelectContentProps)
+const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: position.value, loop: true }) as SelectContentProps)
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as SelectArrowProps)
 
 const { emitFormChange, emitFormInput, emitFormBlur, emitFormFocus, size: formFieldSize, color: formFieldColor, id, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<InputProps>(_props)

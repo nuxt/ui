@@ -1,7 +1,7 @@
 import { createResolver } from '@nuxt/kit'
-import pkg from '../package.json'
-import { WHEN_TO_USE_SECTION } from './server/utils/llms'
-import { SITE_URL } from './server/utils/site'
+import pkg from '../package.json' with { type: 'json' }
+import { WHEN_TO_USE_SECTION } from './server/utils/llms.ts'
+import { SITE_URL } from './server/utils/site.ts'
 
 const { resolve } = createResolver(import.meta.url)
 
@@ -214,7 +214,15 @@ export default defineNuxtConfig({
     '/getting-started/shortcuts': { redirect: { to: '/composables/define-shortcuts', statusCode: 301 }, prerender: false }
   },
 
+  future: {
+    compatibilityVersion: 5
+  },
+
   experimental: {
+    // `nuxt-component-meta` skips its output when `build.ssr` is set, which is
+    // the case for the client build too once the Vite Environment API is on.
+    // Remove once nuxt-content/nuxt-component-meta#128 is released.
+    viteEnvironmentApi: false,
     defaults: {
       nuxtLink: {
         externalRelAttribute: 'noopener'

@@ -255,6 +255,7 @@ import UKbd from './Kbd.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
+  loop: true,
   labelKey: 'label',
   descriptionKey: 'description',
   input: true,
