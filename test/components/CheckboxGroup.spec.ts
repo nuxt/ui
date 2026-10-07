@@ -32,6 +32,7 @@ describe('CheckboxGroup', () => {
     ['with descriptionKey', { props: { ...props, descriptionKey: 'value' } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with max', { props: { ...props, max: 1, defaultValue: ['1'] } }],
+    ['with max variant table', { props: { ...props, variant: 'table', max: 1, defaultValue: ['1'] } }],
     ['with description', { props: { items: items.map((opt, count) => ({ ...opt, description: `Description ${count}` })) } }],
     ['with icon', { props: { items: items.map(opt => ({ ...opt, icon: 'i-lucide-rocket' })), indicator: 'hidden' } }],
     ['with icon card', { props: { items: items.map(opt => ({ ...opt, icon: 'i-lucide-rocket' })), indicator: 'hidden', variant: 'card', defaultValue: ['1'] } }],
@@ -55,9 +56,12 @@ describe('CheckboxGroup', () => {
     ['with description slot', { props, slots: { description: () => 'Description slot' } }]
   ])
 
-  it('keeps a checked item without value enabled when max is reached', async () => {
+  it.each([
+    ['without value', null, 'on'],
+    ['with a null value', { label: 'Null', value: null }, null]
+  ])('keeps a checked item %s enabled when max is reached', async (_, item, value) => {
     const wrapper = await mountSuspended(CheckboxGroup, {
-      props: { items: [null, 'a'] as any, max: 1, defaultValue: ['on'] as any }
+      props: { items: [item, 'a'] as any, max: 1, defaultValue: [value] as any }
     })
 
     const [checked, blocked] = wrapper.findAll('[data-slot="item"]')
