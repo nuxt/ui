@@ -74,7 +74,7 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
   externalIcon?: boolean | IconProps['name']
   /**
    * The content of the menu.
-   * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8 }
+   * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8, loop: true }
    */
   content?: Omit<DropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DropdownMenuContentEmits>>
   /**

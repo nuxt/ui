@@ -68,7 +68,10 @@ export interface ContextMenuProps<T extends ArrayOrNested<ContextMenuItem> = Arr
    * @IconifyIcon
    */
   externalIcon?: boolean | IconProps['name']
-  /** The content of the menu. */
+  /**
+   * The content of the menu.
+   * @defaultValue { loop: true }
+   */
   content?: Omit<ContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<ContextMenuContentEmits>>
   /**
    * Render the menu in a portal.

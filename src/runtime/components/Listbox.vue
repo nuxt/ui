@@ -181,6 +181,7 @@ import UInput from './Input.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<ListboxProps<T, VK, M, Mod>>(), {
+  loop: true,
   labelKey: 'label',
   descriptionKey: 'description',
   highlightOnHover: true,

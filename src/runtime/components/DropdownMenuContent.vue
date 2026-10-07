@@ -78,7 +78,9 @@ import UInput from './Input.vue'
 import UKbd from './Kbd.vue'
 import UDropdownMenuContent from './DropdownMenuContent.vue'
 
-const props = defineProps<DropdownMenuContentProps<T>>()
+const props = withDefaults(defineProps<DropdownMenuContentProps<T>>(), {
+  loop: true
+})
 const emits = defineEmits<DropdownMenuContentEmits>()
 const slots = defineSlots<DropdownMenuContentSlots<T>>()
 
