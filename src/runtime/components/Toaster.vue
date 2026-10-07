@@ -55,7 +55,6 @@ import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useToast, toastMaxInjectionKey } from '../composables/useToast'
 import { usePortal } from '../composables/usePortal'
-import { usePreloadOnIdle } from '../composables/useLazyOverlay'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
 
@@ -73,11 +72,7 @@ defineOptions({ inheritAttrs: false })
 
 const props = useComponentProps('toaster', _props)
 
-const loadToast = () => import('./Toast.vue')
-
-const UToast = defineAsyncComponent(loadToast)
-
-usePreloadOnIdle(loadToast)
+const UToast = defineAsyncComponent(() => import('./Toast.vue'))
 
 const { toasts, remove } = useToast()
 const appConfig = useAppConfig() as Toaster['AppConfig']
