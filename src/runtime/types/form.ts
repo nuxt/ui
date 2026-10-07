@@ -33,6 +33,17 @@ export type InferOutput<Schema> = Schema extends StandardSchemaV1 ? StandardSche
   : Schema extends SuperstructSchema<infer O, any> ? O
     : never
 
+type FormStateLeaf = Date | Blob | RegExp | Map<any, any> | Set<any> | ((...args: any[]) => any)
+
+type FormStateValue<T> = T extends FormStateLeaf ? T | null | undefined
+  : T extends readonly (infer U)[] ? FormStateValue<U>[] | null | undefined
+    : T extends object ? { [K in keyof T]?: FormStateValue<T[K]> } | null | undefined
+      : T extends number | bigint ? T | '' | null | undefined
+        : T | null | undefined
+
+// The state holds the fields before validation: any value can be empty and a cleared number input holds an empty string
+export type FormState<S extends FormSchema> = NonNullable<FormStateValue<InferInput<S>>>
+
 export type FormData<S extends FormSchema, T extends boolean = true> = T extends true ? InferOutput<S> : InferInput<S>
 
 export type FormInputEvents = 'input' | 'blur' | 'change' | 'focus'
