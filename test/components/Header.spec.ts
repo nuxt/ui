@@ -1,8 +1,9 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import Header from '../../src/runtime/components/Header.vue'
+import Modal from '../../src/runtime/components/Modal.vue'
 
 describe('Header', () => {
   renderEach(Header, [
@@ -32,6 +33,7 @@ describe('Header', () => {
 
   it('labels the menu dialog with the translated toggle label', async () => {
     const wrapper = await mountSuspended(Header, { props: { open: true, menu: { portal: false } } })
+    await vi.dynamicImportSettled()
 
     const dialog = wrapper.find('[role="dialog"]')
     const title = wrapper.find(`#${dialog.attributes('aria-labelledby')}`)
@@ -39,6 +41,24 @@ describe('Header', () => {
     expect(wrapper.html()).not.toContain('header.')
 
     wrapper.unmount()
+  })
+
+  it('mounts the menu once opened', async () => {
+    const wrapper = await mountSuspended(Header, { props: { menu: { portal: false } }, slots: { body: () => 'Body slot' } })
+
+    expect(wrapper.findComponent(Modal).exists()).toBe(false)
+
+    await wrapper.find('[data-slot="toggle"]').trigger('click')
+    await vi.dynamicImportSettled()
+
+    expect(wrapper.find('[role="dialog"]').text()).toContain('Body slot')
+  })
+
+  it('mounts the menu before opening with `unmountOnHide: false`', async () => {
+    const wrapper = await mountSuspended(Header, { props: { menu: { portal: false, unmountOnHide: false } }, slots: { body: () => 'Body slot' } })
+    await vi.dynamicImportSettled()
+
+    expect(wrapper.find('[role="dialog"]').text()).toContain('Body slot')
   })
 
   it('passes accessibility tests', async () => {

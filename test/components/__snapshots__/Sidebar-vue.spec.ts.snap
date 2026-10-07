@@ -46,9 +46,7 @@ exports[`Sidebar > renders with breakpoint 2xl correctly 1`] = `
   </div>
 </aside>
 <!-- Mobile menu -->
-<!--v-if-->
-<!--teleport start-->
-<!--teleport end-->"
+<!--v-if-->"
 `;
 
 exports[`Sidebar > renders with breakpoint lg correctly 1`] = `
@@ -130,9 +128,7 @@ exports[`Sidebar > renders with breakpoint xl correctly 1`] = `
   </div>
 </aside>
 <!-- Mobile menu -->
-<!--v-if-->
-<!--teleport start-->
-<!--teleport end-->"
+<!--v-if-->"
 `;
 
 exports[`Sidebar > renders with class correctly 1`] = `

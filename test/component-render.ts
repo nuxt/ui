@@ -1,6 +1,6 @@
 import path from 'node:path'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { it, expect } from 'vitest'
+import { it, expect, vi } from 'vitest'
 
 type MountSuspendedOptions<T> = Parameters<typeof mountSuspended<T>>[1]
 
@@ -15,9 +15,11 @@ async function componentRender<T>(nameOrHtml: string, options: MountSuspendedOpt
       components: { [`U${name}`]: component }
     }
     const result = await mountSuspended(app)
+    await vi.dynamicImportSettled()
     html = result.html()
   } else {
     const cResult = await mountSuspended<T>(component, options)
+    await vi.dynamicImportSettled()
     html = cResult.html()
   }
   return html
