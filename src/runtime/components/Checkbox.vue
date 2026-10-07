@@ -66,11 +66,11 @@ export interface CheckboxSlots {
 import { computed, useAttrs, useId } from 'vue'
 import { Primitive, CheckboxRoot, CheckboxIndicator, Label, injectCheckboxGroupRootContext } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
+import { isEqual } from 'ohash/utils'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useFormField } from '../composables/useFormField'
-import { compare } from '../utils'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
@@ -106,8 +106,9 @@ const maxReached = computed(() => {
     return false
   }
 
+  // Same check as Reka UI, which falls back to `on` when the checkbox has no `value`.
   const values = checkboxGroupContext.modelValue.value ?? []
-  return values.length >= max && !values.some(value => compare(value, props.value))
+  return values.length >= max && !values.some(value => isEqual(value, props.value ?? 'on'))
 })
 
 // When the indicator is hidden the checked icon is never visible, so `icon` renders above the
