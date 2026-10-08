@@ -166,6 +166,16 @@ describe('FileUpload', () => {
       await setFilesOnInput(input, [file1, file2])
       expect(wrapper.emitted('change')).toBeTruthy()
     })
+
+    test('reject event', async () => {
+      const wrapper = mount(FileUpload, { props: { accept: 'image/*' }, attachTo: document.body })
+      const file = new File(['foo'], 'file.pdf', { type: 'application/pdf' })
+      const dataTransfer = { items: [{ kind: 'file', type: file.type }], files: [file] }
+      await wrapper.find('[data-slot="file-upload-base"]').trigger('drop', { dataTransfer })
+      expect(wrapper.emitted('reject')?.[0]).toEqual([[file]])
+      expect(wrapper.emitted('update:modelValue')).toBeFalsy()
+      wrapper.unmount()
+    })
   })
 
   describe('form integration', async () => {

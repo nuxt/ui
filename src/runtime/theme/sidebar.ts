@@ -4,7 +4,7 @@ export default defineTheme({
   slots: {
     root: 'peer [--sidebar-width:16rem] [--sidebar-width-icon:4rem]',
     gap: 'relative w-(--sidebar-width) bg-transparent',
-    container: 'fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) lg:flex',
+    container: 'fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width)',
     inner: 'flex size-full flex-col overflow-hidden divide-y divide-default',
     header: 'flex items-center gap-1.5 overflow-hidden px-4 min-h-(--ui-header-height)',
     wrapper: 'min-w-0 flex-1',
@@ -14,7 +14,7 @@ export default defineTheme({
     close: '',
     body: 'flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4',
     footer: 'flex items-center gap-1.5 overflow-hidden p-4',
-    rail: 'absolute inset-y-0 z-20 hidden w-4 after:absolute after:inset-y-0 after:left-1/2 after:w-px lg:flex hover:after:bg-(--ui-border-strong) after:transition-colors'
+    rail: 'absolute inset-y-0 z-20 hidden w-4 after:absolute after:inset-y-0 after:left-1/2 after:w-px hover:after:bg-(--ui-border-strong) after:transition-colors'
   },
   variants: {
     transition: {
@@ -23,23 +23,45 @@ export default defineTheme({
         container: 'transition-[inset-inline-start,inset-inline-end,width] duration-200 ease-out motion-reduce:transition-none'
       }
     },
+    breakpoint: {
+      'sm': {
+        container: 'sm:flex',
+        rail: 'sm:flex'
+      },
+      'md': {
+        container: 'md:flex',
+        rail: 'md:flex'
+      },
+      'lg': {
+        container: 'lg:flex',
+        rail: 'lg:flex'
+      },
+      'xl': {
+        container: 'xl:flex',
+        rail: 'xl:flex'
+      },
+      '2xl': {
+        container: '2xl:flex',
+        rail: '2xl:flex'
+      }
+    },
     side: {
       left: {
-        container: 'start-0 border-e border-default',
-        rail: 'end-0 translate-x-1/2 rtl:-translate-x-1/2'
+        container: 'inset-s-0 border-e border-default',
+        rail: 'inset-e-0 translate-x-1/2 rtl:-translate-x-1/2'
       },
       right: {
-        container: 'end-0 border-s border-default',
-        rail: '-start-px -translate-x-1/2 rtl:translate-x-1/2'
+        container: 'inset-e-0 border-s border-default',
+        rail: '-inset-s-px -translate-x-1/2 rtl:translate-x-1/2'
       }
     },
     collapsible: {
       offcanvas: {
-        root: 'group/sidebar hidden lg:block',
+        root: 'group/sidebar hidden',
         gap: 'data-[state=collapsed]:w-0'
       },
       icon: {
-        root: 'group/sidebar hidden lg:block',
+        root: 'group/sidebar hidden',
         gap: 'data-[state=collapsed]:w-(--sidebar-width-icon)',
         container: 'data-[state=collapsed]:w-(--sidebar-width-icon)',
         actions: 'group-data-[state=collapsed]/sidebar:hidden',
@@ -64,6 +86,36 @@ export default defineTheme({
     }
   },
   compoundVariants: [{
+    breakpoint: 'sm',
+    collapsible: ['offcanvas', 'icon'],
+    class: {
+      root: 'sm:block'
+    }
+  }, {
+    breakpoint: 'md',
+    collapsible: ['offcanvas', 'icon'],
+    class: {
+      root: 'md:block'
+    }
+  }, {
+    breakpoint: 'lg',
+    collapsible: ['offcanvas', 'icon'],
+    class: {
+      root: 'lg:block'
+    }
+  }, {
+    breakpoint: 'xl',
+    collapsible: ['offcanvas', 'icon'],
+    class: {
+      root: 'xl:block'
+    }
+  }, {
+    breakpoint: '2xl',
+    collapsible: ['offcanvas', 'icon'],
+    class: {
+      root: '2xl:block'
+    }
+  }, {
     side: 'left',
     collapsible: ['offcanvas', 'icon'],
     class: {
@@ -91,20 +143,20 @@ export default defineTheme({
     side: 'left',
     collapsible: 'offcanvas',
     class: {
-      container: 'data-[state=collapsed]:-start-(--sidebar-width)'
+      container: 'data-[state=collapsed]:-inset-s-(--sidebar-width)'
     }
   }, {
     side: 'right',
     collapsible: 'offcanvas',
     class: {
-      container: 'data-[state=collapsed]:-end-(--sidebar-width)'
+      container: 'data-[state=collapsed]:-inset-e-(--sidebar-width)'
     }
   }, {
     variant: 'floating',
     collapsible: 'icon',
     class: {
-      gap: 'data-[state=collapsed]:w-[calc(var(--sidebar-width-icon)+--spacing(8))]',
-      container: 'data-[state=collapsed]:w-[calc(var(--sidebar-width-icon)+--spacing(8)+2px)]'
+      gap: 'data-[state=collapsed]:w-[calc(var(--sidebar-width-icon)+(--spacing(8)))]',
+      container: 'data-[state=collapsed]:w-[calc(var(--sidebar-width-icon)+(--spacing(8))+2px)]'
     }
   }, {
     variant: 'floating',
@@ -122,13 +174,13 @@ export default defineTheme({
     variant: 'floating',
     side: 'left',
     class: {
-      rail: 'end-4'
+      rail: 'inset-e-4'
     }
   }, {
     variant: 'floating',
     side: 'right',
     class: {
-      rail: 'start-[calc(--spacing(4)-1px)]'
+      rail: 'inset-s-[calc(--spacing(4)-1px)]'
     }
   }]
 })

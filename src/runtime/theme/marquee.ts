@@ -21,7 +21,7 @@ export default defineTheme({
     },
     reverse: {
       true: {
-        content: '![animation-direction:reverse]'
+        content: '[animation-direction:reverse]!'
       }
     },
     overlay: {
@@ -40,13 +40,13 @@ export default defineTheme({
     orientation: 'horizontal',
     overlay: true,
     class: {
-      root: 'before:inset-y-0 before:start-0 before:h-full before:w-1/3 before:bg-linear-to-r rtl:before:bg-linear-to-l after:inset-y-0 after:end-0 after:h-full after:w-1/3 after:bg-linear-to-l rtl:after:bg-linear-to-r backface-hidden'
+      root: 'before:inset-y-0 before:inset-s-0 before:h-full before:w-1/3 before:bg-linear-to-r rtl:before:bg-linear-to-l after:inset-y-0 after:inset-e-0 after:h-full after:w-1/3 after:bg-linear-to-l rtl:after:bg-linear-to-r backface-hidden'
     }
   }, {
     orientation: 'vertical',
     class: {
       root: 'flex-col',
-      content: 'flex-col motion-safe:animate-[marquee-vertical_var(--duration)_linear_infinite] h-[fit-content] backface-hidden'
+      content: 'flex-col motion-safe:animate-[marquee-vertical_var(--duration)_linear_infinite] h-fit backface-hidden'
     }
   }, {
     orientation: 'vertical',

@@ -7,7 +7,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Toaster = ComponentConfig<typeof theme, AppConfig, 'toaster'>
 
-export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'> {
+export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection' | 'limit' | 'toastManager'> {
   /**
    * The position on the screen to display the toasts.
    * @defaultValue 'bottom-right'
@@ -47,7 +47,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, toRef, provide } from 'vue'
+import { ref, computed, defineAsyncComponent, toRef, provide, onMounted, onBeforeUnmount } from 'vue'
 import { ToastProvider, ToastViewport, ToastPortal } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
@@ -55,8 +55,8 @@ import { useForwardProps } from '../composables/useForwardProps'
 import { useToast, toastMaxInjectionKey } from '../composables/useToast'
 import { usePortal } from '../composables/usePortal'
 import { omit } from '../utils'
+import { requestIdleCallback, cancelIdleCallback } from '../utils/prefetch'
 import { tv } from '../utils/tv'
-import UToast from './Toast.vue'
 
 const _props = withDefaults(defineProps<ToasterProps>(), {
   expand: true,
@@ -67,7 +67,27 @@ const _props = withDefaults(defineProps<ToasterProps>(), {
 })
 defineSlots<ToasterSlots>()
 
+// `ToastProvider` is the root, attributes would fall through as its props (`limit`, `toastManager`).
+defineOptions({ inheritAttrs: false })
+
 const props = useComponentProps('toaster', _props, theme)
+
+const loadToast = () => import('./Toast.vue')
+
+const UToast = defineAsyncComponent(loadToast)
+
+// Preload once idle: a toast is often shown when the network just failed.
+let idleId: ReturnType<typeof requestIdleCallback>
+
+onMounted(() => {
+  idleId = requestIdleCallback(() => {
+    loadToast().catch(() => {})
+  })
+})
+
+onBeforeUnmount(() => {
+  cancelIdleCallback(idleId)
+})
 
 const { toasts, remove } = useToast()
 const overrides = useComponentOverrides((ui: Toaster['AppConfig']['ui']) => ui.toaster)
@@ -131,7 +151,7 @@ function getOffset(index: number) {
       :progress="props.progress"
       v-bind="omit(toast, ['id', 'close', '_duplicate', '_updated', 'onClick'])"
       :close="(toast.close as boolean)"
-      :data-expanded="expanded"
+      :data-collapsed="!expanded"
       :data-front="!expanded && index === toasts.length - 1"
       :data-pulsing="toast._duplicate ? (toast._duplicate % 2 === 0 ? 'even' : 'odd') : undefined"
       :style="{

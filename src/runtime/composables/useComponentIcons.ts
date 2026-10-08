@@ -42,7 +42,8 @@ export function useComponentIcons(componentProps: MaybeRefOrGetter<UseComponentI
   const props = computed(() => toValue(componentProps))
 
   const isLeading = computed(() => (props.value.icon && props.value.leading) || (props.value.icon && !props.value.trailing) || (props.value.loading && !props.value.trailing) || !!props.value.leadingIcon)
-  const isTrailing = computed(() => (props.value.icon && props.value.trailing) || (props.value.loading && props.value.trailing) || (!!props.value.trailingIcon && props.value.trailing !== false))
+  // Same `!isLeading` guard as `trailingIconName`, the loading icon only goes to one side.
+  const isTrailing = computed(() => (props.value.icon && props.value.trailing) || (props.value.loading && props.value.trailing && !isLeading.value) || (!!props.value.trailingIcon && props.value.trailing !== false))
 
   const leadingIconName = computed(() => {
     if (props.value.loading) {

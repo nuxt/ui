@@ -90,6 +90,7 @@ import { Presence } from 'reka-ui'
 import { defu } from 'defu'
 import { useElementBounding, useEventListener, useMutationObserver, watchThrottled } from '@vueuse/core'
 import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useLocale } from '../composables/useLocale'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UChatMessage from './ChatMessage.vue'
@@ -122,6 +123,7 @@ function showIndicator() {
   return lastMessage?.role === 'assistant' && !lastMessage.parts?.length
 }
 
+const { t } = useLocale()
 const appConfig = useThemeConfig() as ChatMessages['AppConfig']
 const overrides = useComponentOverrides((ui: ChatMessages['AppConfig']['ui']) => ui.chatMessages)
 
@@ -373,6 +375,7 @@ defineExpose({
             :icon="props.autoScrollIcon || appConfig.ui.icons.arrowDown"
             color="neutral"
             variant="outline"
+            :aria-label="t('chatMessages.autoScroll')"
             v-bind="(typeof props.autoScroll === 'object' ? props.autoScroll : {})"
             data-slot="chat-messages-autoScroll"
             :class="ui.autoScroll({ class: props.ui?.autoScroll })"

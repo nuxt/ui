@@ -30,7 +30,7 @@ type CalendarModelValue<R extends boolean = false, M extends boolean = false> = 
 type _CalendarRootProps = Omit<CalendarRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'calendarLabel' | 'multiple'>
 type _RangeCalendarRootProps = Omit<RangeCalendarRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'calendarLabel' | 'multiple'>
 type _MonthPickerRootProps = Pick<MonthPickerRootProps, 'isMonthDisabled' | 'isMonthUnavailable'>
-type _YearPickerRootProps = Pick<YearPickerRootProps, 'isYearDisabled' | 'isYearUnavailable'>
+type _YearPickerRootProps = Pick<YearPickerRootProps, 'isYearDisabled' | 'isYearUnavailable' | 'yearsPerPage'>
 
 export interface CalendarProps<R extends boolean = false, M extends boolean = false> extends _RangeCalendarRootProps, _CalendarRootProps, _MonthPickerRootProps, _YearPickerRootProps {
   /**
@@ -260,7 +260,7 @@ const omittedProps = ['type', 'placeholder', 'range', 'modelValue', 'defaultValu
 // Only declared by the day `Calendar` / `RangeCalendar` primitives, omitted in other views to avoid fallthrough attributes.
 const dayOnlyProps = ['pagedNavigation', 'weekStartsOn', 'weekdayFormat', 'fixedWeeks', 'numberOfMonths', 'isDateDisabled', 'isDateUnavailable', 'isDateHighlightable', 'disableDaysOutsideCurrentView', 'maximumDays']
 const monthOnlyProps = ['isMonthDisabled', 'isMonthUnavailable']
-const yearOnlyProps = ['isYearDisabled', 'isYearUnavailable']
+const yearOnlyProps = ['isYearDisabled', 'isYearUnavailable', 'yearsPerPage']
 // Only declared by the range pickers, omitted when drilling above the terminal view since the picker is not a range picker there.
 const rangeOnlyProps = ['allowNonContiguousRanges', 'fixedDate']
 

@@ -1,5 +1,9 @@
+import { defineNitroPlugin } from 'nitropack/runtime'
 import { queryCollection } from '@nuxt/content/server'
 import { rawUrl } from '#agent-discovery'
+import { transformMDC } from '../utils/transformMDC'
+import { renderLlmsSection, WHEN_TO_USE_SECTION } from '../utils/llms'
+import { SITE_URL } from '../utils/site'
 
 /**
  * What `nuxt-agent-discovery` cannot know on its own.

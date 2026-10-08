@@ -228,7 +228,7 @@ defineExpose({
 
     <span v-if="isTrailing || !!slots.trailing" data-slot="input-tags-trailing" :class="ui.trailing({ class: props.ui?.trailing })">
       <slot name="trailing" :ui="ui">
-        <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="input-tags-trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+        <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="input-tags-trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, leading: isLeading })" />
       </slot>
     </span>
   </TagsInputRoot>

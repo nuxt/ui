@@ -260,7 +260,7 @@ function resolveLinkClass({ route, isActive, isExactActive, prefetched }: any = 
 // observing on their own.
 const instance = getCurrentInstance()
 
-let prefetchApi: Pick<NuxtLinkDefaultSlotProps, 'prefetch' | 'shouldPrefetch'> | undefined
+let prefetchApi: Pick<NuxtLinkDefaultSlotProps, 'prefetch' | 'shouldPrefetch' | 'prefetched'> & { fullPath?: string } | undefined
 
 // Called with the app explicitly: NuxtLink's `prefetch` takes an optional
 // `nuxtApp` and would otherwise receive the event.
@@ -268,21 +268,45 @@ function onPrefetch() {
   prefetchApi?.prefetch?.(nuxtApp)
 }
 
-function getPrefetchListeners({ prefetch, shouldPrefetch }: NuxtLinkDefaultSlotProps, attrs: Record<string, unknown>) {
+// Since Nuxt 4.6, prefetch work is queued and NuxtLink moves a link's queued
+// work to the front when the user reaches for it. It only does so for
+// non-custom links and exposes nothing to the slot, so this goes through the
+// scheduler it keeps on the app. Older Nuxt versions have none.
+function onInteraction() {
+  if (!prefetchApi?.prefetched) {
+    if (prefetchApi?.shouldPrefetch?.('interaction')) {
+      onPrefetch()
+    }
+    return
+  }
+
+  if (prefetchApi.fullPath === undefined) {
+    return
+  }
+
+  // Same key as NuxtLink: the hash does not affect what is fetched.
+  const { pathname, search } = new URL(prefetchApi.fullPath, window.location.href)
+  // Typed here since `_prefetch` is internal and absent from older Nuxt types.
+  const scheduler = (nuxtApp as { _prefetch?: { promote?: (group: string) => void } })._prefetch
+  scheduler?.promote?.(pathname + search)
+}
+
+function getPrefetchListeners({ prefetch, shouldPrefetch, prefetched, isExternal }: NuxtLinkDefaultSlotProps, attrs: Record<string, unknown>, linkRoute?: { fullPath?: string }) {
   if (!prefetch || !shouldPrefetch) {
     return undefined
   }
 
-  prefetchApi = { prefetch, shouldPrefetch }
+  prefetchApi = { prefetch, shouldPrefetch, prefetched, fullPath: isExternal ? undefined : linkRoute?.fullPath }
 
-  if (!shouldPrefetch('interaction')) {
+  // Before prefetching, only interaction mode has anything to do on these events.
+  if (!prefetched && !shouldPrefetch('interaction')) {
     return undefined
   }
 
   // Callers may listen to the same events on the link, keep their handlers.
   return mergeProps(
-    { onPointerenter: attrs.onPointerenter, onFocus: attrs.onFocus },
-    { onPointerenter: onPrefetch, onFocus: onPrefetch }
+    { onPointerenter: attrs.onPointerenter, onFocus: attrs.onFocus, onPointerdown: attrs.onPointerdown },
+    { onPointerenter: onInteraction, onFocus: onInteraction, onPointerdown: onInteraction }
   )
 }
 
@@ -304,9 +328,9 @@ onMounted(() => {
     return
   }
 
-  // Like NuxtLink, wait for hydration: the payload plugin only registers its
-  // `link:prefetch` listener `onNuxtReady`, and `prefetch` marks the link as
-  // prefetched even when nobody listens.
+  // Like NuxtLink, wait for hydration: before Nuxt 4.6 the payload plugin only
+  // registers its `link:prefetch` listener `onNuxtReady`, and `prefetch` marks
+  // the link as prefetched even when nobody listens.
   onNuxtReady(() => {
     if (unmounted) {
       return
@@ -338,7 +362,7 @@ onBeforeUnmount(() => {
           ...$attrs,
           ...(exact && isExactActive ? { 'aria-current': props.ariaCurrentValue } : {}),
           ...((rest as NuxtLinkDefaultSlotProps).prefetched && prefetchedClass ? { class: prefetchedClass } : {}),
-          ...getPrefetchListeners(rest as NuxtLinkDefaultSlotProps, $attrs),
+          ...getPrefetchListeners(rest as NuxtLinkDefaultSlotProps, $attrs, linkRoute),
           as,
           type,
           disabled,
@@ -365,7 +389,7 @@ onBeforeUnmount(() => {
         rel,
         target: (rest as NuxtLinkDefaultSlotProps).target,
         isExternal: (rest as NuxtLinkDefaultSlotProps).isExternal,
-        ...getPrefetchListeners(rest as NuxtLinkDefaultSlotProps, $attrs)
+        ...getPrefetchListeners(rest as NuxtLinkDefaultSlotProps, $attrs, linkRoute)
       }"
       :class="resolveLinkClass({ route: linkRoute, isActive, isExactActive, prefetched: (rest as NuxtLinkDefaultSlotProps).prefetched })"
     >

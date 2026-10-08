@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Järg',
       prev: 'Eel'
     },
+    chatMessages: {
+      autoScroll: 'Keri alla'
+    },
     chatPrompt: {
       placeholder: 'Siia kirjutage oma sõnum…'
     },
     chatPromptSubmit: {
-      label: 'Saada'
+      label: 'Saada',
+      reload: 'Proovi uuesti',
+      stop: 'Peata genereerimine'
     },
     chatReasoning: {
       thinking: 'Mõtleb…',
@@ -111,6 +116,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Sulge'
+    },
+    pagination: {
+      first: 'Esimene lehekülg',
+      last: 'Viimane lehekülg',
+      next: 'Järgmine lehekülg',
+      page: 'Lehekülg {page}',
+      prev: 'Eelmine lehekülg'
     },
     pricingTable: {
       caption: 'Hinna plaanide võrdlus'

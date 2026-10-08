@@ -6,7 +6,7 @@ const searchTermDebounced = refDebounced(searchTerm, 200)
 
 const { data: users, status, execute } = await useLazyFetch('https://jsonplaceholder.typicode.com/users', {
   key: 'input-menu-users-search',
-  params: { q: searchTermDebounced },
+  query: { q: searchTermDebounced },
   transform: (data: { id: number, name: string }[]) => {
     return data?.map(user => ({
       label: user.name,

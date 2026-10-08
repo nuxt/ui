@@ -65,7 +65,7 @@ export default defineTheme({
     },
     scale: {
       true: {
-        root: 'lg:scale-[1.1] lg:z-[1]'
+        root: 'lg:scale-[1.1] lg:z-1'
       }
     }
   },

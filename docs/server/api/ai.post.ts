@@ -1,3 +1,4 @@
+import { defineEventHandler, readBody, createError } from 'h3'
 import type { UIMessage, InferUITools, Tool } from 'ai'
 import { ToolLoopAgent, createAgentUIStreamResponse, tool, dynamicTool, jsonSchema, smoothStream, isStepCount, consumeStream, APICallError } from 'ai'
 import type { AnthropicLanguageModelOptions } from '@ai-sdk/anthropic'
@@ -13,6 +14,7 @@ import { DEFAULT_COLORS } from '../../app/utils/theme/engine/types'
 import { presets } from '../../app/utils/theme/engine/presets'
 import { FONTS } from '../../app/utils/theme/studio'
 import type { FontCategory } from '../../app/utils/theme/studio'
+import { getChatUser } from '../utils/chatUser'
 
 const componentNames = Object.keys(theme)
 

@@ -55,6 +55,7 @@ import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArrow, injectTooltipProviderContext } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
+import { useKbd } from '../composables/useKbd'
 import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { FieldGroupReset } from '../composables/useFieldGroup'
@@ -79,6 +80,15 @@ const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, providerContext.content.value, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as TooltipContentProps)
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as TooltipArrowProps)
 
+const { getKbdKey } = useKbd()
+const ariaLabel = computed(() => {
+  if (contentProps.value.ariaLabel || slots.content) {
+    return contentProps.value.ariaLabel
+  }
+
+  return [props.text, ...(props.kbds || []).map(kbd => getKbdKey(typeof kbd === 'object' ? kbd.value : kbd))].filter(Boolean).join(' ')
+})
+
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)())
 </script>
@@ -91,7 +101,7 @@ const ui = computed(() => tv(theme, overrides.value)())
 
     <TooltipPortal v-bind="portalProps">
       <FieldGroupReset>
-        <TooltipContent v-bind="contentProps" data-slot="tooltip-content" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })">
+        <TooltipContent v-bind="contentProps" :aria-label="ariaLabel" data-slot="tooltip-content" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })">
           <slot name="content" :ui="ui">
             <span v-if="props.text" data-slot="tooltip-text" :class="ui.text({ class: props.ui?.text })">{{ props.text }}</span>
 

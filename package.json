@@ -37,6 +37,10 @@
       "types": "./vue-plugin.d.ts"
     },
     "./runtime/*": "./dist/runtime/*",
+    "./components/prose": {
+      "types": "./dist/runtime/components/prose/index.d.ts",
+      "import": "./dist/runtime/components/prose/index.js"
+    },
     "./components/*": "./dist/runtime/components/*",
     "./composables": {
       "types": "./dist/runtime/composables/index.d.ts",
@@ -78,6 +82,9 @@
       ],
       "runtime/*": [
         "./dist/runtime/*"
+      ],
+      "components/prose": [
+        "./dist/runtime/components/prose/index.d.ts"
       ],
       "components/*": [
         "./dist/runtime/components/*"
@@ -216,6 +223,7 @@
     "eslint": "catalog:",
     "eslint-plugin-better-tailwindcss": "catalog:",
     "happy-dom": "catalog:",
+    "jiti": "catalog:",
     "nuxt": "catalog:",
     "release-it": "catalog:",
     "unbuild": "catalog:",
@@ -257,7 +265,7 @@
     "embla-carousel-wheel-gestures": "^8",
     "joi": "^18",
     "superstruct": "^2",
-    "tailwindcss": "^4",
+    "tailwindcss": "^4.2",
     "typescript": "^5.6.3 || ^6 || ^7",
     "valibot": "^1",
     "vue-router": "^4.5.0 || ^5",
