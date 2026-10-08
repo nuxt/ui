@@ -23,7 +23,7 @@ const items: ContextMenuItem[] = [
 
 <template>
   <UContextMenu v-model:open="open" :items="items" :ui="{ content: 'w-48' }">
-    <div class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72">
+    <div class="flex items-center justify-center rounded-md border border-dashed border-strong text-sm aspect-video w-72">
       Right click here
     </div>
   </UContextMenu>

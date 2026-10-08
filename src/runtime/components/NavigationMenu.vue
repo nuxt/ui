@@ -473,11 +473,11 @@ function onLinkClick(e: Event) {
             </template>
           </UPopover>
           <UTooltip v-else-if="(props.orientation === 'vertical' && props.collapsed && (!!props.tooltip || !!item.tooltip)) || (props.orientation === 'horizontal' && !!item.tooltip)" :text="get(item, props.labelKey as string)" v-bind="{ ...tooltipProps, ...(typeof item.tooltip === 'boolean' ? {} : item.tooltip || {}) }">
-            <ULinkBase v-bind="slotProps" data-slot="link" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })" @click="onLinkClick">
+            <ULinkBase v-bind="slotProps" data-slot="navigation-menu-link" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })" @click="onLinkClick">
               <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" :trailing-trigger="!!(slotProps as any).href" />
             </ULinkBase>
           </UTooltip>
-          <ULinkBase v-else v-bind="slotProps" data-slot="link" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: props.orientation === 'horizontal' || level > 0 })" @click="onLinkClick">
+          <ULinkBase v-else v-bind="slotProps" data-slot="navigation-menu-link" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: props.orientation === 'horizontal' || level > 0 })" @click="onLinkClick">
             <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" :trailing-trigger="!!(slotProps as any).href" />
           </ULinkBase>
         </component>
@@ -583,7 +583,7 @@ function onLinkClick(e: Event) {
         <div data-slot="navigation-menu-arrow" :class="ui.arrow({ class: props.ui?.arrow })" />
       </NavigationMenuIndicator>
 
-      <NavigationMenuViewport v-bind="viewportProps" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })" />
+      <NavigationMenuViewport v-bind="viewportProps" data-slot="navigation-menu-viewport" :class="ui.viewport({ class: props.ui?.viewport })" />
     </div>
   </NavigationMenuRoot>
 </template>

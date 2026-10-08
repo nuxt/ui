@@ -52,7 +52,7 @@ describe('ChatMessage', () => {
       }
     }))
 
-    expect(wrapper.find('[data-slot="actions"] button').attributes('aria-label')).toBe('Copy')
+    expect(wrapper.find('[data-slot="chat-message-actions"] button').attributes('aria-label')).toBe('Copy')
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 

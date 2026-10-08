@@ -78,7 +78,7 @@ props:
 ---
 ::
 
-### Starting Value :badge{label="Soon" class="align-text-top"}
+### Starting Value
 
 Use the `starting-value` prop to set the value of the first increment or decrement when the InputNumber is empty. It is clamped to `min` / `max` but not snapped to `step`. Defaults to `min`, or `0` when `min` is not set.
 
@@ -90,7 +90,7 @@ props:
 ---
 ::
 
-### Allow Invalid :badge{label="Soon" class="align-text-top"}
+### Allow Invalid
 
 Use the `allow-invalid` prop to keep a typed value that is out of the `min` / `max` range or off the `step` grid. Stepping towards the range still brings the value back in range and on the `step` grid.
 

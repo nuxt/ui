@@ -281,7 +281,7 @@ name: 'file-upload-form-validation-example'
 ---
 ::
 
-### With rejected files :badge{label="Soon" class="align-text-top"}
+### With rejected files
 
 Dropped files that do not match the `accept` prop are ignored. Listen to the `reject` event to display an error message.
 

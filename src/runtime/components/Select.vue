@@ -397,7 +397,7 @@ defineExpose({
 
       <span v-if="isTrailing || !!slots.trailing" data-slot="select-trailing" :class="ui.trailing({ class: props.ui?.trailing })">
         <slot name="trailing" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
-          <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, leading: isLeading })" />
+          <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="select-trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, leading: isLeading })" />
         </slot>
       </span>
     </SelectTrigger>

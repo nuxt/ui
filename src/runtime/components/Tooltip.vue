@@ -101,7 +101,7 @@ const ui = computed(() => tv(theme, overrides.value)())
 
     <TooltipPortal v-bind="portalProps">
       <FieldGroupReset>
-        <TooltipContent v-bind="contentProps" :aria-label="ariaLabel" data-slot="content" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })">
+        <TooltipContent v-bind="contentProps" :aria-label="ariaLabel" data-slot="tooltip-content" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })">
           <slot name="content" :ui="ui">
             <span v-if="props.text" data-slot="tooltip-text" :class="ui.text({ class: props.ui?.text })">{{ props.text }}</span>
 
