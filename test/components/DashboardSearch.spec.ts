@@ -1,9 +1,11 @@
 import { defineComponent } from 'vue'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import DashboardGroup from '../../src/runtime/components/DashboardGroup.vue'
 import DashboardSearch from '../../src/runtime/components/DashboardSearch.vue'
+import Modal from '../../src/runtime/components/Modal.vue'
+import CommandPalette from '../../src/runtime/components/CommandPalette.vue'
 import { renderEach } from '../component-render'
 import theme from '#build/ui/dashboard-search'
 
@@ -53,14 +55,34 @@ describe('DashboardSearch', () => {
     ],
     async (_, options) => {
       const wrapper = await mountSuspended(DashboardWrapper, options)
+      await vi.dynamicImportSettled()
       expect(wrapper.html()).toMatchSnapshot()
     }
   )
+
+  it('mounts the modal once opened', async () => {
+    const wrapper = await mountSuspended(DashboardWrapper, { props: { ...props, open: false } })
+
+    expect(wrapper.findComponent(Modal).exists()).toBe(false)
+
+    await wrapper.setProps({ open: true } as any)
+    await vi.dynamicImportSettled()
+
+    expect(wrapper.findComponent(CommandPalette).text()).toContain('Home')
+  })
+
+  it('mounts the modal before opening with `unmountOnHide: false`', async () => {
+    const wrapper = await mountSuspended(DashboardWrapper, { props: { ...props, open: false, unmountOnHide: false } })
+    await vi.dynamicImportSettled()
+
+    expect(wrapper.findComponent(CommandPalette).text()).toContain('Home')
+  })
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(DashboardWrapper, {
       props
     })
+    await vi.dynamicImportSettled()
 
     expect(await axe(wrapper.element, {
       // "ARIA input fields must have an accessible name (aria-input-field-name)"

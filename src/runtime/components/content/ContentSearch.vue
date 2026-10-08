@@ -136,7 +136,7 @@ export type ContentSearchSlots = CommandPaletteSlots<ContentSearchItem> & {
 </script>
 
 <script setup lang="ts" generic="T extends ContentSearchLink">
-import { computed, shallowRef, useTemplateRef, watch } from 'vue'
+import { computed, defineAsyncComponent, shallowRef, useAttrs, useTemplateRef, watch } from 'vue'
 import { defu } from 'defu'
 import { reactivePick, refDebounced } from '@vueuse/core'
 import { useAppConfig, useColorMode, defineShortcuts } from '#imports'
@@ -144,10 +144,10 @@ import { useComponentProps } from '../../composables/useComponentProps'
 import { useForwardProps } from '../../composables/useForwardProps'
 import { useContentSearch } from '../../composables/useContentSearch'
 import { useLocale } from '../../composables/useLocale'
+import { useLazyOverlay } from '../../composables/useLazyOverlay'
+import { lazyOverlays, loadOverlay } from '../../utils/lazy-overlay'
 import { omit, transformUI } from '../../utils'
 import { tv } from '../../utils/tv'
-import UModal from '../Modal.vue'
-import UCommandPalette from '../CommandPalette.vue'
 
 const _props = withDefaults(defineProps<ContentSearchProps<T>>(), {
   shortcut: 'meta_k',
@@ -193,6 +193,15 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.contentSearch ||
   size: props.size,
   fullscreen: props.fullscreen
 }))
+
+const attrs = useAttrs()
+
+const loadCommandPalette = () => import('../CommandPalette.vue')
+
+const UModal = lazyOverlays.modal
+const UCommandPalette = defineAsyncComponent(loadCommandPalette)
+
+const renderModal = useLazyOverlay(() => open.value || (attrs.open !== undefined && attrs.open !== false) || props.unmountOnHide === false, () => Promise.all([loadOverlay('modal'), loadCommandPalette()]))
 
 const commandPaletteRef = useTemplateRef('commandPaletteRef')
 
@@ -353,6 +362,7 @@ defineExpose({
 
 <template>
   <UModal
+    v-if="renderModal"
     v-model:open="open"
     :title="props.title || locale.messages.contentSearch?.title || t('contentSearchButton.label')"
     :description="props.description || locale.messages.contentSearch?.description"

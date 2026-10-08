@@ -122,6 +122,7 @@ export interface FileUploadProps<M extends boolean = false, T extends FileUpload
 
 export interface FileUploadEmits {
   change: [event: Event]
+  reject: [files: File[]]
 }
 
 type FileUploadFiles<T, M> = (M extends true ? T[] : T) | null
@@ -196,7 +197,8 @@ const { isDragging, open, inputRef, dropzoneRef } = useFileUpload({
   reset,
   multiple: multiple as MaybeRef<boolean>,
   dropzone: props.dropzone,
-  onUpdate
+  onUpdate,
+  onReject
 })
 const { emitFormInput, emitFormChange, id, name, size: formFieldSize, color: formFieldColor, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<FileUploadProps>(_props)
 
@@ -289,6 +291,14 @@ function onUpdate(files: (T | File)[], reset = false) {
   emits('change', event)
   emitFormChange()
   emitFormInput()
+}
+
+function onReject(files: File[]) {
+  if (disabled.value) {
+    return
+  }
+
+  emits('reject', files)
 }
 
 function removeFile(index?: number) {
