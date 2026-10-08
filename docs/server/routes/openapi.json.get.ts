@@ -1,6 +1,10 @@
+import { defineEventHandler, setResponseHeader } from 'h3'
+import { useRuntimeConfig } from 'nitropack/runtime'
 import { agentDiscoveryOpenApi } from '#agent-discovery'
+import { createOpenApiDocument } from '../utils/openapi'
+import { SITE_URL } from '../utils/site'
 
-// Prerendered (see `nitro.prerender.routes`), so there is nothing to cache at
+// Prerendered (see `prerender.routes`), so there is nothing to cache at
 // runtime. A `defineCachedEventHandler` here would also be a trap: with `swr`
 // the prerenderer is served the previous build's cached body whenever the
 // build cache in `node_modules/.cache` survives between builds.

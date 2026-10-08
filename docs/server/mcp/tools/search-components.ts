@@ -1,5 +1,9 @@
+import { defineMcpTool } from '@nuxtjs/mcp-toolkit/server'
+import { useEvent } from 'nitropack/runtime'
 import { z } from 'zod'
 import { queryCollection } from '@nuxt/content/server'
+import { SITE_URL } from '../../utils/site'
+import { scoreComponent } from '../../utils/searchComponents'
 
 export default defineMcpTool({
   description: 'Search components by name, category, or intent. Matches alternate names from other ecosystems (e.g. "segmented control" finds FieldGroup, "combobox" finds InputMenu, "dialog" finds Modal). Results are ranked by relevance',

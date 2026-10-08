@@ -1,3 +1,5 @@
+import { defineMcpPrompt } from '@nuxtjs/mcp-toolkit/server'
+import { useEvent } from 'nitropack/runtime'
 import { z } from 'zod'
 import { queryCollection } from '@nuxt/content/server'
 
