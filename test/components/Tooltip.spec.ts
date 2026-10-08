@@ -69,6 +69,14 @@ describe('Tooltip', () => {
     expect(content.attributes('data-side')).toBe('top')
   })
 
+  it('labels the tooltip with the text and resolved kbds', async () => {
+    const wrapper = await mountSuspended(TooltipWrapper, {
+      props: { ...props, kbds: ['meta', 'K'] }
+    })
+
+    expect(wrapper.find('[role="tooltip"]').text()).toBe('Tooltip Ctrl K')
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(TooltipWrapper, {
       props: {
