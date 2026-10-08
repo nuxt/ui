@@ -57,7 +57,7 @@ describe('ChatReasoning', () => {
       props: { text: 'Thinking...', streaming: false, autoOpen: false }
     })
 
-    const root = wrapper.find('[data-slot="root"]')
+    const root = wrapper.find('[data-slot="chat-reasoning"]')
     expect(root.attributes('data-state')).toBe('closed')
 
     await wrapper.setProps({ streaming: true })
