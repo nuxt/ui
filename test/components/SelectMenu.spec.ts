@@ -1,4 +1,4 @@
-import { describe, it, expect, test } from 'vitest'
+import { describe, it, expect, test, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
@@ -128,6 +128,33 @@ describe('SelectMenu', () => {
 
     expect(wrapper.find('[data-slot="trailing"]').exists()).toBe(false)
     expect(wrapper.find('[data-slot="trailingIcon"]').exists()).toBe(false)
+  })
+
+  describe('unmountOnHide false', () => {
+    it('keeps the content mounted when closed', async () => {
+      const wrapper = await mountSuspended(SelectMenu, { props: { items, portal: false, unmountOnHide: false } })
+
+      expect(wrapper.findAll('[data-slot="item"]')).toHaveLength(items.length)
+    })
+
+    it('moves the focus on every open and close', async () => {
+      const wrapper = mount(SelectMenu, { attachTo: document.body, props: { items, portal: false, unmountOnHide: false } })
+      const trigger = wrapper.find('[data-slot="base"]')
+
+      await flushPromises()
+      const input = wrapper.find('[data-slot="input"] input')
+      expect(document.activeElement).not.toBe(input.element)
+
+      for (let i = 0; i < 2; i++) {
+        await trigger.trigger('click')
+        await vi.waitFor(() => expect(document.activeElement).toBe(input.element))
+
+        await input.trigger('keydown', { key: 'Escape' })
+        await vi.waitFor(() => expect(document.activeElement).toBe(trigger.element))
+      }
+
+      wrapper.unmount()
+    })
   })
 
   it('passes accessibility tests', async () => {

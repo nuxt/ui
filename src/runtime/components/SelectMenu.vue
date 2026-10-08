@@ -45,7 +45,7 @@ type IsClearUsed<M extends boolean, C extends boolean | object> = M extends fals
   ? (C extends true ? null : C extends object ? null : never)
   : never
 
-export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'resetModelValueOnClear' | 'highlightOnHover' | 'loop' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
+export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'resetModelValueOnClear' | 'highlightOnHover' | 'loop' | 'unmountOnHide' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
@@ -266,6 +266,7 @@ const _props = withDefaults(defineProps<SelectMenuProps<T, VK, M, Mod, C>>(), {
   resetSearchTermOnSelect: true,
   resetModelValueOnClear: true,
   autofocusDelay: 0,
+  unmountOnHide: true,
   virtualize: false
 })
 const emits = defineEmits<SelectMenuEmits<T, VK, M, Mod, C>>()
@@ -278,7 +279,7 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 const { t } = useLocale()
 const appConfig = useAppConfig() as SelectMenu['AppConfig']
 const { filterGroups } = useFilter()
-const rootProps = useForwardProps(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'highlightOnHover', 'loop', 'by'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'highlightOnHover', 'loop', 'unmountOnHide', 'by'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as ComboboxArrowProps)
@@ -489,6 +490,11 @@ function onUpdateOpen(value: boolean) {
     emitFormFocus()
     clearTimeout(timeoutId)
   }
+
+  // The `FocusScope` only moves the focus when it mounts and unmounts, which happens once when the content stays mounted.
+  if (!props.unmountOnHide) {
+    nextTick(() => value ? focusContent() : restoreFocus())
+  }
 }
 
 // `ComboboxTrigger` only toggles on click, unlike `ComboboxInput` which opens on arrow keys.
@@ -544,13 +550,31 @@ function onClear() {
 }
 
 function onMountAutoFocus(event: Event) {
-  // Prevent the `FocusScope` from focusing the search input on open when its autofocus is disabled.
-  if (searchInputProps.value.autofocus === false) {
+  // Prevent the `FocusScope` from focusing the search input on open when its autofocus is disabled,
+  // or when the content mounts while the menu is closed.
+  const content = (event.target as HTMLElement | null)?.parentElement
+  if (searchInputProps.value.autofocus === false || (!props.unmountOnHide && content?.dataset.state !== 'open')) {
     event.preventDefault()
   }
 }
 
 const focusScopeRef = useTemplateRef('focusScopeRef')
+
+function focusContent() {
+  const el = focusScopeRef.value?.$el as HTMLElement | undefined
+  const input = searchInputProps.value.autofocus !== false ? el?.querySelector<HTMLElement>('[data-slot="input"] input') : null
+  const target = input ?? el
+  target?.focus({ preventScroll: true })
+}
+
+function restoreFocus() {
+  // Keep the focus where it was moved on select, only take it back from the hidden content.
+  const el = focusScopeRef.value?.$el as HTMLElement | undefined
+  const activeElement = document.activeElement
+  if (!activeElement || activeElement === document.body || el?.contains(activeElement)) {
+    triggerRef.value?.$el?.focus({ preventScroll: true })
+  }
+}
 
 // The `FocusScope` uses `loop` instead of `trapped`: a trapped scope pulls focus back while the menu is closing,
 // so focusing another element on select never lands. Pull it back here instead, only while the menu is open,
@@ -563,9 +587,7 @@ function onFocusOutside(event: Event) {
 
   event.preventDefault()
 
-  const input = searchInputProps.value.autofocus !== false ? el.querySelector<HTMLElement>('[data-slot="input"] input') : null
-  const target = input ?? el
-  target.focus({ preventScroll: true })
+  focusContent()
 }
 
 function onUnmountAutoFocus(event: Event) {
@@ -751,7 +773,7 @@ defineExpose({
 
             <ComboboxInput v-if="!!props.searchInput" v-model="searchTerm" :display-value="() => searchTerm" as-child>
               <UInput
-                autofocus
+                :autofocus="props.unmountOnHide"
                 autocomplete="off"
                 :size="size"
                 v-bind="searchInputProps"
