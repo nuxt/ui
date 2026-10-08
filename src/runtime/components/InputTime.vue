@@ -81,9 +81,8 @@ export interface InputTimeSlots {
 
 <script setup lang="ts" generic="R extends boolean">
 import { computed, onMounted, onScopeDispose, ref } from 'vue'
-import { TimeRangeFieldRoot, TimeRangeFieldInput } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { TimeField as SingleTimeField } from 'reka-ui/namespaced'
+import { TimeField as SingleTimeField, TimeRangeField as RangeTimeField } from 'reka-ui/namespaced'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
@@ -141,9 +140,6 @@ const [DefineSegmentsTemplate, ReuseSegmentsTemplate] = createReusableTemplate<{
 }>()
 
 const inputsRef = ref<ComponentPublicInstance[]>([])
-
-// FIXME: Move to namespaced when exported in `reka-ui`
-const RangeTimeField = { Root: TimeRangeFieldRoot, Input: TimeRangeFieldInput }
 
 const TimeField = computed(() => props.range ? RangeTimeField : SingleTimeField)
 

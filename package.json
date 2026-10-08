@@ -1,8 +1,8 @@
 {
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
-  "version": "4.11.2",
-  "packageManager": "pnpm@12.5.1",
+  "version": "4.11.3",
+  "packageManager": "pnpm@12.9.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nuxt/ui.git"
@@ -31,6 +31,10 @@
       "types": "./vue-plugin.d.ts"
     },
     "./runtime/*": "./dist/runtime/*",
+    "./components/prose": {
+      "types": "./dist/runtime/components/prose/index.d.ts",
+      "import": "./dist/runtime/components/prose/index.js"
+    },
     "./components/*": "./dist/runtime/components/*",
     "./composables": {
       "types": "./dist/runtime/composables/index.d.ts",
@@ -69,6 +73,9 @@
       ],
       "runtime/*": [
         "./dist/runtime/*"
+      ],
+      "components/prose": [
+        "./dist/runtime/components/prose/index.d.ts"
       ],
       "components/*": [
         "./dist/runtime/components/*"
@@ -120,11 +127,12 @@
     "docs:build": "nuxt build docs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "typecheck": "vue-tsc --noEmit && nuxt typecheck playgrounds/nuxt && nuxt typecheck docs && cd playgrounds/vue && vue-tsc --noEmit",
+    "typecheck": "vue-tsc --noEmit && nuxt typecheck playgrounds/nuxt && nuxt typecheck docs",
     "test": "vitest",
     "test:vue": "vitest --project vue",
     "test:nuxt": "vitest --project nuxt",
     "bench": "vitest bench --project vue",
+    "size": "node test/bundle/size.mjs",
     "release": "release-it"
   },
   "dependencies": {
@@ -208,6 +216,7 @@
     "eslint": "catalog:",
     "eslint-plugin-better-tailwindcss": "catalog:",
     "happy-dom": "catalog:",
+    "jiti": "catalog:",
     "nuxt": "catalog:",
     "release-it": "catalog:",
     "unbuild": "catalog:",

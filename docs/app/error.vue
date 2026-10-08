@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { NuxtError } from '#app'
+import type { ContentNavigationItem } from '@nuxt/content'
 
 const props = defineProps<{
   error: NuxtError
@@ -35,7 +36,7 @@ defineShortcuts({
   }
 })
 
-const { data: navigation } = await useFetch('/api/navigation.json')
+const { data: navigation } = await useFetch<ContentNavigationItem[]>('/api/navigation.json')
 
 useHead({
   meta: [

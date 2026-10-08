@@ -257,6 +257,8 @@ export default defineNuxtModule<ModuleOptions>({
         path: resolve('./runtime/components/prose'),
         pathPrefix: false,
         prefix: 'Prose',
+        // Skip the `index` barrel
+        extensions: ['vue'],
         global: true
       })
     }

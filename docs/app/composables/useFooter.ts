@@ -10,13 +10,13 @@ export function useFooter() {
     to: '/blog',
     active: route.path.startsWith('/blog')
   }, {
+    label: 'Contribution',
+    to: '/docs/getting-started/contribution',
+    active: route.path === '/docs/getting-started/contribution'
+  }, {
     label: 'Team',
     to: '/team',
     active: route.path.startsWith('/team')
-  }, {
-    label: 'Playground',
-    to: '/play',
-    target: '_blank'
   }])
 
   return {

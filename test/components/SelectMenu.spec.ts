@@ -269,6 +269,49 @@ describe('SelectMenu', () => {
     })
   })
 
+  describe('focus', () => {
+    test('keeps the focus moved on select', async () => {
+      const input = document.createElement('input')
+      document.body.appendChild(input)
+
+      const wrapper = mount(SelectMenu, { attachTo: document.body, props: { 'defaultOpen': true, 'portal': false, items, 'onUpdate:modelValue': () => input.focus() } })
+
+      await flushPromises()
+      await new Promise(resolve => setTimeout(resolve))
+
+      await wrapper.findAll('[role="option"]')[1]!.trigger('click')
+      await flushPromises()
+      await new Promise(resolve => setTimeout(resolve))
+
+      expect(document.activeElement).toBe(input)
+
+      wrapper.unmount()
+      input.remove()
+    })
+
+    test('stays open when focus moves outside', async () => {
+      const button = document.createElement('button')
+      document.body.appendChild(button)
+
+      const wrapper = mount(SelectMenu, { attachTo: document.body, props: { defaultOpen: true, portal: false, items } })
+
+      await flushPromises()
+      await new Promise(resolve => setTimeout(resolve))
+
+      const input = wrapper.find('[data-slot="input"] input')
+
+      button.focus()
+      await flushPromises()
+      await new Promise(resolve => setTimeout(resolve))
+
+      expect(wrapper.findAll('[role="option"]').length).toBe(items.length)
+      expect(document.activeElement).toBe(input.element)
+
+      wrapper.unmount()
+      button.remove()
+    })
+  })
+
   describe('create-item', () => {
     // With `create-item`, the create item is always registered so reka-ui's collection
     // never goes from empty to non-empty, leaving the highlight stale when async items load.
