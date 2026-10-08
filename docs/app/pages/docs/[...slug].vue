@@ -124,9 +124,9 @@ const links = computed(() => [{
   to: `https://github.com/nuxt/ui/edit/v5/docs/content/${page?.value?.stem}.md`,
   target: '_blank'
 }, {
-  // Nuxi, the same mark every Ask AI trigger wears, so it doesn't skin with the pack
+  // Nuxi, the same mark every Ask trigger wears, so it doesn't skin with the pack
   icon: 'i-custom-nuxi',
-  label: 'Explain with AI',
+  label: 'Explain this page',
   onClick: () => ask('Read this documentation page and summarize it. I want to ask questions about it.')
 }])
 </script>

@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Sonraki',
       prev: 'Önceki'
     },
+    chatMessages: {
+      autoScroll: 'Aşağı kaydır'
+    },
     chatPrompt: {
       placeholder: 'Buraya mesajınızı yazın…'
     },
     chatPromptSubmit: {
-      label: 'Gönder'
+      label: 'Gönder',
+      reload: 'Tekrar dene',
+      stop: 'Oluşturmayı durdur'
     },
     chatReasoning: {
       thinking: 'Düşünüyor…',
@@ -111,6 +116,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Kapat'
+    },
+    pagination: {
+      first: 'İlk sayfa',
+      last: 'Son sayfa',
+      next: 'Sonraki sayfa',
+      page: 'Sayfa {page}',
+      prev: 'Önceki sayfa'
     },
     pricingTable: {
       caption: 'Fiyat planlarını karşılaştır'

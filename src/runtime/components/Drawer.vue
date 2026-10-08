@@ -64,7 +64,7 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
 }
 
 export interface DrawerEmits extends DrawerRootEmits {
-  (e: 'close:prevent'): void
+  (e: 'after:leave' | 'after:enter' | 'close:prevent'): void
 }
 
 export interface DrawerSlots {
@@ -132,6 +132,18 @@ const contentEvents = computed(() => {
   }
 })
 
+// vaul also fires `animationEnd(false)` when a closed drawer mounts, so only a real close emits `after:leave`
+let entered = false
+function onAnimationEnd(open: boolean) {
+  if (open) {
+    entered = true
+    emits('after:enter')
+  } else if (entered) {
+    entered = false
+    emits('after:leave')
+  }
+}
+
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
   direction: props.direction,
@@ -141,7 +153,7 @@ const ui = computed(() => tv(theme, overrides.value)({
 </script>
 
 <template>
-  <component :is="props.nested ? DrawerRootNested : DrawerRoot" v-bind="rootProps">
+  <component :is="props.nested ? DrawerRootNested : DrawerRoot" v-bind="rootProps" @animation-end="onAnimationEnd">
     <DrawerTrigger v-if="!!slots.default" as-child :class="props.class">
       <slot />
     </DrawerTrigger>

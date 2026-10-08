@@ -141,7 +141,7 @@ watch(messages, (newMessages) => {
 })
 
 // A question asked before the panel existed (its first open, from the search
-// palette or "Explain with AI") is already in the seeded messages, the
+// palette or "Explain this page") is already in the seeded messages, the
 // watcher above never saw it arrive. Only that one: a dangling user turn
 // restored from a past session must not re-send itself on every load.
 onMounted(() => {
@@ -269,8 +269,9 @@ function clearMessages() {
   <USidebar
     v-model:open="panelOpen"
     side="right"
-    title="Ask AI"
+    title="Ask"
     rail
+    breakpoint="xl"
     :style="{ '--sidebar-width': '24rem' }"
     :ui="{ footer: 'p-0', actions: 'gap-0.5' }"
     class="bg-default"

@@ -31,7 +31,7 @@ export type TreeItem = {
   [key: string]: any
 }
 
-export interface TreeProps<T extends TreeItem[] = TreeItem[], M extends boolean = false> extends Pick<TreeRootProps<T>, 'expanded' | 'defaultExpanded' | 'selectionBehavior' | 'propagateSelect' | 'disabled' | 'bubbleSelect'> {
+export interface TreeProps<T extends TreeItem[] = TreeItem[], M extends boolean = false> extends Pick<TreeRootProps<T>, 'expanded' | 'defaultExpanded' | 'selectionBehavior' | 'propagateSelect' | 'disabled' | 'bubbleSelect' | 'loop'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'ul'
@@ -168,7 +168,7 @@ const props = useComponentProps<TreeProps<T, M>>('tree', _props, theme)
 const appConfig = useThemeConfig() as Tree['AppConfig']
 const overrides = useComponentOverrides((ui: Tree['AppConfig']['ui']) => ui.tree)
 
-const rootProps = useForwardProps(reactivePick(props, 'items', 'multiple', 'expanded', 'disabled', 'propagateSelect', 'bubbleSelect'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'items', 'multiple', 'expanded', 'disabled', 'propagateSelect', 'bubbleSelect', 'loop'), emits)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const as = computed(() => {
@@ -267,6 +267,7 @@ defineExpose({
         v-slot="{ isExpanded, isSelected, isIndeterminate, handleSelect, handleToggle }"
         :level="level"
         :value="item"
+        :disabled="item.disabled"
         as-child
         @toggle="(item.onToggle ?? props.onToggle)?.($event, item)"
         @select="(item.onSelect ?? props.onSelect)?.($event, item)"

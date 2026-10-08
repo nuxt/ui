@@ -18,13 +18,13 @@ export default defineTheme({
         content: ''
       },
       right: {
-        content: 'max-w-md'
+        content: 'sm:max-w-md'
       },
       bottom: {
         content: ''
       },
       left: {
-        content: 'max-w-md'
+        content: 'sm:max-w-md'
       }
     },
     inset: {

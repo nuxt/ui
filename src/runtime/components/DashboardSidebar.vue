@@ -63,13 +63,12 @@ import { useRuntimeHook, useRoute } from '#imports'
 import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useResizable } from '../composables/useResizable'
 import { useLocale } from '../composables/useLocale'
+import { useLazyOverlay } from '../composables/useLazyOverlay'
+import { lazyOverlays, loadOverlay } from '../utils/lazy-overlay'
 import { useDashboard } from '../utils/dashboard'
 import { tv } from '../utils/tv'
 import UDashboardResizeHandle from './DashboardResizeHandle.vue'
 import UDashboardSidebarToggle from './DashboardSidebarToggle.vue'
-import USlideover from './Slideover.vue'
-import UModal from './Modal.vue'
-import UDrawer from './Drawer.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -133,6 +132,8 @@ const ui = computed(() => tv(theme, overrides.value)({
   side: props.side
 }))
 
+const { slideover: USlideover, modal: UModal, drawer: UDrawer } = lazyOverlays
+
 const Menu = computed(() => ({
   slideover: USlideover,
   modal: UModal,
@@ -140,6 +141,8 @@ const Menu = computed(() => ({
 })[props.mode as DashboardSidebarMode])
 
 const menuProps = toRef(() => defu(props.menu, {}, props.mode === 'modal' ? { fullscreen: true, transition: false } : props.mode === 'slideover' ? { side: 'left' } : {}) as DashboardSidebarMenu<T>)
+
+const renderMenu = useLazyOverlay(() => open.value || (props.menu as ModalProps | undefined)?.unmountOnHide === false, () => loadOverlay(props.mode as DashboardSidebarMode))
 
 function toggleOpen() {
   open.value = !open.value
@@ -201,6 +204,7 @@ function toggleOpen() {
   <ReuseResizeHandleTemplate v-if="props.side === 'left'" />
 
   <Menu
+    v-if="renderMenu"
     v-model:open="open"
     :title="locale.messages.dashboardSidebar?.title || t('dashboardSidebarToggle.open')"
     :description="locale.messages.dashboardSidebar?.description"

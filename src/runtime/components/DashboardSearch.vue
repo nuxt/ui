@@ -13,7 +13,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type DashboardSearch = ComponentConfig<typeof theme, AppConfig, 'dashboardSearch'>
 
-export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPaletteItem> extends Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal' | 'unmountOnHide'>, Pick<CommandPaletteProps<CommandPaletteGroup<T>, T>, 'icon' | 'trailingIcon' | 'selectedIcon' | 'childrenIcon' | 'placeholder' | 'autofocus' | 'loading' | 'loadingIcon' | 'closeIcon' | 'back' | 'backIcon' | 'disabled' | 'highlightOnHover' | 'labelKey' | 'descriptionKey' | 'preserveGroupOrder' | 'virtualize' | 'groups'> {
+export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPaletteItem> extends Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal' | 'unmountOnHide'>, Pick<CommandPaletteProps<CommandPaletteGroup<T>, T>, 'icon' | 'trailingIcon' | 'selectedIcon' | 'childrenIcon' | 'placeholder' | 'autofocus' | 'loading' | 'loadingIcon' | 'closeIcon' | 'back' | 'backIcon' | 'disabled' | 'highlightOnHover' | 'loop' | 'labelKey' | 'descriptionKey' | 'preserveGroupOrder' | 'virtualize' | 'groups'> {
   /**
    * @defaultValue 'md'
    */
@@ -73,17 +73,17 @@ export type DashboardSearchSlots = CommandPaletteSlots<CommandPaletteItem> & {
 </script>
 
 <script setup lang="ts">
-import { computed, useTemplateRef } from 'vue'
+import { computed, defineAsyncComponent, useTemplateRef } from 'vue'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useColorMode, defineShortcuts, useRuntimeHook } from '#imports'
 import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useLocale } from '../composables/useLocale'
+import { useLazyOverlay } from '../composables/useLazyOverlay'
+import { lazyOverlays, loadOverlay } from '../utils/lazy-overlay'
 import { omit, transformUI } from '../utils'
 import { tv } from '../utils/tv'
-import UCommandPalette from './CommandPalette.vue'
-import UModal from './Modal.vue'
 
 const _props = withDefaults(defineProps<DashboardSearchProps>(), {
   shortcut: 'meta_k',
@@ -109,7 +109,7 @@ const colorMode = useColorMode()
 const appConfig = useThemeConfig() as DashboardSearch['AppConfig']
 const overrides = useComponentOverrides((ui: DashboardSearch['AppConfig']['ui']) => ui.dashboardSearch)
 
-const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'trailingIcon', 'selectedIcon', 'childrenIcon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon', 'back', 'backIcon', 'disabled', 'highlightOnHover', 'labelKey', 'descriptionKey', 'preserveGroupOrder', 'virtualize', 'searchDelay'))
+const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'trailingIcon', 'selectedIcon', 'childrenIcon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon', 'back', 'backIcon', 'disabled', 'highlightOnHover', 'loop', 'labelKey', 'descriptionKey', 'preserveGroupOrder', 'virtualize', 'searchDelay'))
 const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal', 'unmountOnHide'))
 const inputProps = computed(() => {
   if (props.input === false) {
@@ -170,6 +170,13 @@ const groups = computed(() => {
   return groups
 })
 
+const loadCommandPalette = () => import('./CommandPalette.vue')
+
+const UModal = lazyOverlays.modal
+const UCommandPalette = defineAsyncComponent(loadCommandPalette)
+
+const renderModal = useLazyOverlay(() => open.value || props.unmountOnHide === false, () => Promise.all([loadOverlay('modal'), loadCommandPalette()]))
+
 const commandPaletteRef = useTemplateRef('commandPaletteRef')
 
 function onSelect(item: CommandPaletteItem) {
@@ -197,6 +204,7 @@ defineExpose({
 
 <template>
   <UModal
+    v-if="renderModal"
     v-model:open="open"
     :title="props.title || locale.messages.dashboardSearch?.title || t('dashboardSearchButton.label')"
     :description="props.description || locale.messages.dashboardSearch?.description"

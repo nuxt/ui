@@ -1,3 +1,5 @@
+import { defineCachedEventHandler } from 'nitropack/runtime'
+import { getQuery, createError } from 'h3'
 import { Octokit } from '@octokit/rest'
 
 export default defineCachedEventHandler(async (event) => {

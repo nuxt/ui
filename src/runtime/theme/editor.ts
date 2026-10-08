@@ -9,10 +9,10 @@ export default defineTheme({
       // Paragraph
       '[&_p]:leading-7',
       // Links
-      '[&_a]:text-primary [&_a]:border-b [&_a]:border-transparent [&_a]:hover:border-primary [&_a]:font-medium',
+      '[&_a]:text-primary [&_a]:border-b [&_a]:border-transparent [&_a]:hover:border-primary [&_a]:focus-visible:border-transparent [&_a]:font-medium [&_a]:focus-visible:rounded-xs [&_a]:outline-focus [&_a]:focus-visible:outline-3 [&_a:has(>code)]:focus-visible:outline-0',
       '[&_a]:transition-colors',
       // Code inside links
-      '[&_a>code]:border-dashed [&_a:hover>code]:border-primary [&_a:hover>code]:text-primary',
+      '[&_a:has(>code)]:border-b-0 [&_a>code]:border-dashed [&_a>code]:outline-focus [&_a:focus-visible>code]:outline-3 [&_a:hover>code]:border-primary [&_a:hover>code]:text-primary [&_a:focus-visible>code]:border-primary [&_a:focus-visible>code]:text-primary',
       '[&_a>code]:transition-colors',
       // Mentions
       '[&_.mention]:text-primary [&_.mention]:font-medium',

@@ -48,6 +48,10 @@ export function useHeader() {
     to: '/docs/releases',
     active: route.path.startsWith('/docs/releases')
   }, {
+    label: 'Theme',
+    icon: studioIcons.palette,
+    to: '/theme'
+  }, {
     label: 'Templates',
     icon: studioIcons.templates,
     to: '/templates'
@@ -65,13 +69,17 @@ export function useHeader() {
     to: '/blog',
     active: route.path.startsWith('/blog')
   }, {
+    label: 'Contribution',
+    icon: studioIcons.heart,
+    to: '/docs/getting-started/contribution'
+  }, {
     label: 'Team',
     icon: studioIcons.users,
     to: '/team'
   }, {
     label: 'Playground',
     icon: studioIcons.terminal,
-    to: '/play',
+    to: 'https://play.ui.nuxt.com',
     target: '_blank'
   }, {
     label: 'Figma',
