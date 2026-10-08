@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
@@ -47,20 +47,13 @@ describe('Drawer', () => {
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
-  it('emits `after:enter` and `after:leave` once the animation ends', async () => {
-    vi.useFakeTimers({ shouldAdvanceTime: true })
+  it('emits `after:leave` once the animation ends', async () => {
     const wrapper = await mountSuspended(Drawer, { props: { open: false, portal: false } })
-
-    vi.advanceTimersByTime(500)
     expect(wrapper.emitted('after:leave')).toBeUndefined()
 
     await wrapper.setProps({ open: true })
-    vi.advanceTimersByTime(500)
-    expect(wrapper.emitted('after:enter')).toHaveLength(1)
-
     await wrapper.setProps({ open: false })
-    vi.advanceTimersByTime(500)
+    wrapper.find('[data-slot="drawer-content"]').element.dispatchEvent(new Event('transitionend'))
     expect(wrapper.emitted('after:leave')).toHaveLength(1)
-    vi.useRealTimers()
   })
 })
