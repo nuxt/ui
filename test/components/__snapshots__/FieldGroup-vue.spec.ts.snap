@@ -8,6 +8,7 @@ exports[`FieldGroup > renders orientation vertical with default slot correctly 1
   </div> <button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors not-only:first:rounded-b-none not-only:last:rounded-t-none not-last:not-first:rounded-none focus-visible:z-[1] px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
     <!--v-if--> Click me!
     <!--v-if-->
+    <!--v-if-->
   </button>
 </div>"
 `;
@@ -24,6 +25,7 @@ exports[`FieldGroup > renders with default slot correctly 1`] = `
   </div> <button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none focus-visible:z-[1] px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
     <!--v-if--> Click me!
     <!--v-if-->
+    <!--v-if-->
   </button>
 </div>"
 `;
@@ -35,6 +37,7 @@ exports[`FieldGroup > renders with size lg correctly 1`] = `
     <!--v-if-->
   </div> <button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none focus-visible:z-[1] px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
     <!--v-if--> Click me!
+    <!--v-if-->
     <!--v-if-->
   </button>
 </div>"
@@ -48,6 +51,7 @@ exports[`FieldGroup > renders with size md correctly 1`] = `
   </div> <button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none focus-visible:z-[1] px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
     <!--v-if--> Click me!
     <!--v-if-->
+    <!--v-if-->
   </button>
 </div>"
 `;
@@ -59,6 +63,7 @@ exports[`FieldGroup > renders with size sm correctly 1`] = `
     <!--v-if-->
   </div> <button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none focus-visible:z-[1] px-2.5 py-1.5 text-xs gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
     <!--v-if--> Click me!
+    <!--v-if-->
     <!--v-if-->
   </button>
 </div>"
@@ -72,6 +77,7 @@ exports[`FieldGroup > renders with size xl correctly 1`] = `
   </div> <button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none focus-visible:z-[1] px-3 py-2 text-base gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
     <!--v-if--> Click me!
     <!--v-if-->
+    <!--v-if-->
   </button>
 </div>"
 `;
@@ -83,6 +89,7 @@ exports[`FieldGroup > renders with size xs correctly 1`] = `
     <!--v-if-->
   </div> <button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none focus-visible:z-[1] px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
     <!--v-if--> Click me!
+    <!--v-if-->
     <!--v-if-->
   </button>
 </div>"

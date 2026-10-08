@@ -4,12 +4,14 @@ exports[`Theme > renders with empty ui correctly 1`] = `
 "<button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
   <!--v-if--><span data-slot="label" class="truncate">Button</span>
   <!--v-if-->
+  <!--v-if-->
 </button>"
 `;
 
 exports[`Theme > renders with nested theme overriding outer theme correctly 1`] = `
 "<button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3 px-[2.234rem]">
   <!--v-if--><span data-slot="label" class="truncate text-[#000]">Button</span>
+  <!--v-if-->
   <!--v-if-->
 </button>"
 `;
@@ -35,12 +37,14 @@ exports[`Theme > renders with theme applied to button base slot correctly 1`] = 
 "<button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3 px-[1.234rem]">
   <!--v-if--><span data-slot="label" class="truncate text-[#ff0]">Button</span>
   <!--v-if-->
+  <!--v-if-->
 </button>"
 `;
 
 exports[`Theme > renders with theme applied to multiple component types correctly 1`] = `
 "<button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3 px-[1.234rem]">
   <!--v-if--><span data-slot="label" class="truncate">Button</span>
+  <!--v-if-->
   <!--v-if-->
 </button>
 <span data-slot="base" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-primary text-inverted rounded-[1.234rem]"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
@@ -51,12 +55,14 @@ exports[`Theme > renders with theme not affecting unrelated component correctly 
 "<button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
   <!--v-if--><span data-slot="label" class="truncate">Button</span>
   <!--v-if-->
+  <!--v-if-->
 </button>"
 `;
 
 exports[`Theme > renders with ui prop taking priority over theme correctly 1`] = `
 "<button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3 px-[2.234rem]">
   <!--v-if--><span data-slot="label" class="truncate text-[#ff0]">Button</span>
+  <!--v-if-->
   <!--v-if-->
 </button>"
 `;

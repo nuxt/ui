@@ -10,8 +10,10 @@ exports[`ChatTool > renders with actions and content correctly 1`] = `
   <div data-slot="actions" data-state="open" class="flex items-center justify-end gap-1.5 pt-2"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Approve</span>
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Deny</span>
+      <!--v-if-->
       <!--v-if-->
     </button></div>
 </div>"
@@ -28,8 +30,10 @@ exports[`ChatTool > renders with actions correctly 1`] = `
   <div data-slot="actions" data-state="closed" class="flex items-center justify-end gap-1.5 pt-2"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Approve</span>
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-default bg-elevated hover:bg-accented/75 active:bg-accented/75 outline-inverted/25 focus-visible:outline-3 disabled:bg-elevated aria-disabled:bg-elevated">
       <!--v-if--><span data-slot="label" class="truncate">Deny</span>
+      <!--v-if-->
       <!--v-if-->
     </button></div>
 </div>"
@@ -58,8 +62,10 @@ exports[`ChatTool > renders with actions variant card correctly 1`] = `
   <div data-slot="actions" data-state="closed" class="flex items-center justify-end gap-1.5 border-t border-default p-2"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Approve</span>
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Deny</span>
+      <!--v-if-->
       <!--v-if-->
     </button></div>
 </div>"

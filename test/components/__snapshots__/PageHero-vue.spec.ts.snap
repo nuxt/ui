@@ -126,6 +126,7 @@ exports[`PageHero > renders with links correctly 1`] = `
         <div data-slot="links" class="flex flex-wrap gap-x-6 gap-y-3 justify-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-base gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
+            <!--v-if-->
           </button></div>
       </div>
     </div>
@@ -167,6 +168,7 @@ exports[`PageHero > renders with orientation horizontal links correctly 1`] = `
       <div data-slot="footer" class="mt-10">
         <div data-slot="links" class="flex flex-wrap gap-x-6 gap-y-3"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-base gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
+            <!--v-if-->
             <!--v-if-->
           </button></div>
       </div>

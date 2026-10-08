@@ -5,6 +5,7 @@ import theme from '#build/ui/button'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { LinkProps } from './Link.vue'
 import type { AvatarProps } from './Avatar.vue'
+import type { IconProps } from './Icon.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type Button = ComponentConfig<typeof theme, AppConfig, 'button'>
@@ -21,6 +22,13 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
    */
   variant?: Button['variants']['variant']
   activeVariant?: Button['variants']['variant']
+  /**
+   * The icon displayed when the button is an external link.
+   * Set to `true` to show the external icon.
+   * @defaultValue false
+   * @IconifyIcon
+   */
+  externalIcon?: boolean | IconProps['name']
   /**
    * @defaultValue 'md'
    */
@@ -60,7 +68,9 @@ import UAvatar from './Avatar.vue'
 import ULink from './Link.vue'
 import ULinkBase from './LinkBase.vue'
 
-const _props = defineProps<ButtonProps>()
+const _props = withDefaults(defineProps<ButtonProps>(), {
+  externalIcon: false
+})
 const slots = defineSlots<ButtonSlots>()
 
 const props = useComponentProps('button', _props)
@@ -164,6 +174,8 @@ const ui = computed(() => tv({
           {{ props.label }}
         </span>
       </slot>
+
+      <UIcon v-if="props.target === '_blank' && props.externalIcon !== false" :name="typeof props.externalIcon === 'string' ? props.externalIcon : appConfig.ui.icons.external" data-slot="externalIcon" :class="ui.externalIcon({ class: props.ui?.externalIcon, active })" />
 
       <slot name="trailing" :ui="ui">
         <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, active })" />

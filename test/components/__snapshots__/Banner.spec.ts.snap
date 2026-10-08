@@ -8,7 +8,8 @@ exports[`Banner > renders with actions correctly 1`] = `
     <div data-slot="center" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:rocket size-5 shrink-0 text-inverted pointer-events-none" aria-hidden="true" data-slot="icon"></span>
       <div data-slot="title" class="text-sm text-inverted font-medium truncate">Title</div>
       <div data-slot="actions" class="flex gap-1.5 shrink-0 isolate"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3">
-          <!--v-if--><span data-slot="label" class="truncate">Learn more</span><span class="iconify i-lucide:arrow-right shrink-0 size-4" aria-hidden="true" data-slot="trailingIcon"></span>
+          <!--v-if--><span data-slot="label" class="truncate">Learn more</span>
+          <!--v-if--><span class="iconify i-lucide:arrow-right shrink-0 size-4" aria-hidden="true" data-slot="trailingIcon"></span>
         </button></div>
     </div>
     <div data-slot="right" class="lg:flex-1 flex items-center justify-end">
@@ -80,6 +81,7 @@ exports[`Banner > renders with close correctly 1`] = `
       <!--v-if-->
     </div>
     <div data-slot="right" class="lg:flex-1 flex items-center justify-end"><button type="button" data-slot="close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 text-inverted hover:bg-default/10 focus-visible:bg-default/10 -me-1.5 lg:me-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
         <!--v-if-->
         <!--v-if-->
       </button></div>

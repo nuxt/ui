@@ -22,6 +22,7 @@ exports[`PricingTable > renders with as correctly 1`] = `
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
                 <!--v-if--><span data-slot="label" class="truncate">Get started</span>
                 <!--v-if-->
+                <!--v-if-->
               </button></div>
           </div>
         </th>
@@ -40,6 +41,7 @@ exports[`PricingTable > renders with as correctly 1`] = `
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
                 <!--v-if--><span data-slot="label" class="truncate">Get started</span>
                 <!--v-if-->
+                <!--v-if-->
               </button></div>
           </div>
         </th>
@@ -57,6 +59,7 @@ exports[`PricingTable > renders with as correctly 1`] = `
             </div>
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
                 <!--v-if--><span data-slot="label" class="truncate">Contact us</span>
+                <!--v-if-->
                 <!--v-if-->
               </button></div>
           </div>
@@ -168,6 +171,7 @@ exports[`PricingTable > renders with as correctly 1`] = `
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
+            <!--v-if-->
           </button></div>
       </div>
       <div data-slot="section" class="mt-6 flex flex-col gap-2">
@@ -212,6 +216,7 @@ exports[`PricingTable > renders with as correctly 1`] = `
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
+            <!--v-if-->
           </button></div>
       </div>
       <div data-slot="section" class="mt-6 flex flex-col gap-2">
@@ -255,6 +260,7 @@ exports[`PricingTable > renders with as correctly 1`] = `
         </div>
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
             <!--v-if--><span data-slot="label" class="truncate">Contact us</span>
+            <!--v-if-->
             <!--v-if-->
           </button></div>
       </div>
@@ -311,6 +317,7 @@ exports[`PricingTable > renders with caption correctly 1`] = `
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
                 <!--v-if--><span data-slot="label" class="truncate">Get started</span>
                 <!--v-if-->
+                <!--v-if-->
               </button></div>
           </div>
         </th>
@@ -329,6 +336,7 @@ exports[`PricingTable > renders with caption correctly 1`] = `
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
                 <!--v-if--><span data-slot="label" class="truncate">Get started</span>
                 <!--v-if-->
+                <!--v-if-->
               </button></div>
           </div>
         </th>
@@ -346,6 +354,7 @@ exports[`PricingTable > renders with caption correctly 1`] = `
             </div>
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
                 <!--v-if--><span data-slot="label" class="truncate">Contact us</span>
+                <!--v-if-->
                 <!--v-if-->
               </button></div>
           </div>
@@ -457,6 +466,7 @@ exports[`PricingTable > renders with caption correctly 1`] = `
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
+            <!--v-if-->
           </button></div>
       </div>
       <div data-slot="section" class="mt-6 flex flex-col gap-2">
@@ -501,6 +511,7 @@ exports[`PricingTable > renders with caption correctly 1`] = `
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
+            <!--v-if-->
           </button></div>
       </div>
       <div data-slot="section" class="mt-6 flex flex-col gap-2">
@@ -544,6 +555,7 @@ exports[`PricingTable > renders with caption correctly 1`] = `
         </div>
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
             <!--v-if--><span data-slot="label" class="truncate">Contact us</span>
+            <!--v-if-->
             <!--v-if-->
           </button></div>
       </div>
@@ -600,6 +612,7 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
                 <!--v-if--><span data-slot="label" class="truncate">Get started</span>
                 <!--v-if-->
+                <!--v-if-->
               </button></div>
           </div>
         </th>
@@ -618,6 +631,7 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
                 <!--v-if--><span data-slot="label" class="truncate">Get started</span>
                 <!--v-if-->
+                <!--v-if-->
               </button></div>
           </div>
         </th>
@@ -635,6 +649,7 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
             </div>
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
                 <!--v-if--><span data-slot="label" class="truncate">Contact us</span>
+                <!--v-if-->
                 <!--v-if-->
               </button></div>
           </div>
@@ -746,6 +761,7 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
+            <!--v-if-->
           </button></div>
       </div>
       <div data-slot="section" class="mt-6 flex flex-col gap-2">
@@ -790,6 +806,7 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
+            <!--v-if-->
           </button></div>
       </div>
       <div data-slot="section" class="mt-6 flex flex-col gap-2">
@@ -833,6 +850,7 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
         </div>
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
             <!--v-if--><span data-slot="label" class="truncate">Contact us</span>
+            <!--v-if-->
             <!--v-if-->
           </button></div>
       </div>
@@ -889,6 +907,7 @@ exports[`PricingTable > renders with class correctly 1`] = `
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
                 <!--v-if--><span data-slot="label" class="truncate">Get started</span>
                 <!--v-if-->
+                <!--v-if-->
               </button></div>
           </div>
         </th>
@@ -907,6 +926,7 @@ exports[`PricingTable > renders with class correctly 1`] = `
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
                 <!--v-if--><span data-slot="label" class="truncate">Get started</span>
                 <!--v-if-->
+                <!--v-if-->
               </button></div>
           </div>
         </th>
@@ -924,6 +944,7 @@ exports[`PricingTable > renders with class correctly 1`] = `
             </div>
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
                 <!--v-if--><span data-slot="label" class="truncate">Contact us</span>
+                <!--v-if-->
                 <!--v-if-->
               </button></div>
           </div>
@@ -1035,6 +1056,7 @@ exports[`PricingTable > renders with class correctly 1`] = `
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
+            <!--v-if-->
           </button></div>
       </div>
       <div data-slot="section" class="mt-6 flex flex-col gap-2">
@@ -1079,6 +1101,7 @@ exports[`PricingTable > renders with class correctly 1`] = `
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
+            <!--v-if-->
           </button></div>
       </div>
       <div data-slot="section" class="mt-6 flex flex-col gap-2">
@@ -1122,6 +1145,7 @@ exports[`PricingTable > renders with class correctly 1`] = `
         </div>
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
             <!--v-if--><span data-slot="label" class="truncate">Contact us</span>
+            <!--v-if-->
             <!--v-if-->
           </button></div>
       </div>
@@ -1376,6 +1400,7 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
                 <!--v-if--><span data-slot="label" class="truncate">Get started</span>
                 <!--v-if-->
+                <!--v-if-->
               </button></div>
           </div>
         </th>
@@ -1393,6 +1418,7 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
                 <!--v-if--><span data-slot="label" class="truncate">Get started</span>
                 <!--v-if-->
+                <!--v-if-->
               </button></div>
           </div>
         </th>
@@ -1409,6 +1435,7 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
             </div>
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
                 <!--v-if--><span data-slot="label" class="truncate">Contact us</span>
+                <!--v-if-->
                 <!--v-if-->
               </button></div>
           </div>
@@ -1519,6 +1546,7 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
+            <!--v-if-->
           </button></div>
       </div>
       <div data-slot="section" class="mt-6 flex flex-col gap-2">
@@ -1562,6 +1590,7 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
+            <!--v-if-->
           </button></div>
       </div>
       <div data-slot="section" class="mt-6 flex flex-col gap-2">
@@ -1604,6 +1633,7 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
         </div>
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
             <!--v-if--><span data-slot="label" class="truncate">Contact us</span>
+            <!--v-if-->
             <!--v-if-->
           </button></div>
       </div>
@@ -1660,6 +1690,7 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
                 <!--v-if--><span data-slot="label" class="truncate">Get started</span>
                 <!--v-if-->
+                <!--v-if-->
               </button></div>
           </div>
         </th>
@@ -1678,6 +1709,7 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
                 <!--v-if--><span data-slot="label" class="truncate">Get started</span>
                 <!--v-if-->
+                <!--v-if-->
               </button></div>
           </div>
         </th>
@@ -1695,6 +1727,7 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
             </div>
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
                 <!--v-if--><span data-slot="label" class="truncate">Contact us</span>
+                <!--v-if-->
                 <!--v-if-->
               </button></div>
           </div>
@@ -1806,6 +1839,7 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
+            <!--v-if-->
           </button></div>
       </div>
       <div data-slot="section" class="mt-6 flex flex-col gap-2">
@@ -1850,6 +1884,7 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
+            <!--v-if-->
           </button></div>
       </div>
       <div data-slot="section" class="mt-6 flex flex-col gap-2">
@@ -1893,6 +1928,7 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
         </div>
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
             <!--v-if--><span data-slot="label" class="truncate">Contact us</span>
+            <!--v-if-->
             <!--v-if-->
           </button></div>
       </div>
@@ -2220,6 +2256,7 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
                 <!--v-if--><span data-slot="label" class="truncate">Get started</span>
                 <!--v-if-->
+                <!--v-if-->
               </button></div>
           </div>
         </th>
@@ -2238,6 +2275,7 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
                 <!--v-if--><span data-slot="label" class="truncate">Get started</span>
                 <!--v-if-->
+                <!--v-if-->
               </button></div>
           </div>
         </th>
@@ -2255,6 +2293,7 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
             </div>
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
                 <!--v-if--><span data-slot="label" class="truncate">Contact us</span>
+                <!--v-if-->
                 <!--v-if-->
               </button></div>
           </div>
@@ -2366,6 +2405,7 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
+            <!--v-if-->
           </button></div>
       </div>
       <div data-slot="section" class="mt-6 flex flex-col gap-2">
@@ -2410,6 +2450,7 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
+            <!--v-if-->
           </button></div>
       </div>
       <div data-slot="section" class="mt-6 flex flex-col gap-2">
@@ -2453,6 +2494,7 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
         </div>
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
             <!--v-if--><span data-slot="label" class="truncate">Contact us</span>
+            <!--v-if-->
             <!--v-if-->
           </button></div>
       </div>
@@ -2509,6 +2551,7 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
                 <!--v-if--><span data-slot="label" class="truncate">Get started</span>
                 <!--v-if-->
+                <!--v-if-->
               </button></div>
           </div>
         </th>
@@ -2527,6 +2570,7 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
                 <!--v-if--><span data-slot="label" class="truncate">Get started</span>
                 <!--v-if-->
+                <!--v-if-->
               </button></div>
           </div>
         </th>
@@ -2544,6 +2588,7 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
             </div>
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
                 <!--v-if--><span data-slot="label" class="truncate">Contact us</span>
+                <!--v-if-->
                 <!--v-if-->
               </button></div>
           </div>
@@ -2655,6 +2700,7 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
+            <!--v-if-->
           </button></div>
       </div>
       <div data-slot="section" class="mt-6 flex flex-col gap-2">
@@ -2699,6 +2745,7 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
+            <!--v-if-->
           </button></div>
       </div>
       <div data-slot="section" class="mt-6 flex flex-col gap-2">
@@ -2742,6 +2789,7 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
         </div>
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
             <!--v-if--><span data-slot="label" class="truncate">Contact us</span>
+            <!--v-if-->
             <!--v-if-->
           </button></div>
       </div>
@@ -2798,6 +2846,7 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
                 <!--v-if--><span data-slot="label" class="truncate">Get started</span>
                 <!--v-if-->
+                <!--v-if-->
               </button></div>
           </div>
         </th>
@@ -2816,6 +2865,7 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
                 <!--v-if--><span data-slot="label" class="truncate">Get started</span>
                 <!--v-if-->
+                <!--v-if-->
               </button></div>
           </div>
         </th>
@@ -2833,6 +2883,7 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
             </div>
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
                 <!--v-if--><span data-slot="label" class="truncate">Contact us</span>
+                <!--v-if-->
                 <!--v-if-->
               </button></div>
           </div>
@@ -2944,6 +2995,7 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
+            <!--v-if-->
           </button></div>
       </div>
       <div data-slot="section" class="mt-6 flex flex-col gap-2">
@@ -2988,6 +3040,7 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
+            <!--v-if-->
           </button></div>
       </div>
       <div data-slot="section" class="mt-6 flex flex-col gap-2">
@@ -3031,6 +3084,7 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
         </div>
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
             <!--v-if--><span data-slot="label" class="truncate">Contact us</span>
+            <!--v-if-->
             <!--v-if-->
           </button></div>
       </div>
@@ -3087,6 +3141,7 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
                 <!--v-if--><span data-slot="label" class="truncate">Get started</span>
                 <!--v-if-->
+                <!--v-if-->
               </button></div>
           </div>
         </th>
@@ -3105,6 +3160,7 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
                 <!--v-if--><span data-slot="label" class="truncate">Get started</span>
                 <!--v-if-->
+                <!--v-if-->
               </button></div>
           </div>
         </th>
@@ -3122,6 +3178,7 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
             </div>
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
                 <!--v-if--><span data-slot="label" class="truncate">Contact us</span>
+                <!--v-if-->
                 <!--v-if-->
               </button></div>
           </div>
@@ -3233,6 +3290,7 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
+            <!--v-if-->
           </button></div>
       </div>
       <div data-slot="section" class="mt-6 flex flex-col gap-2">
@@ -3277,6 +3335,7 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
+            <!--v-if-->
           </button></div>
       </div>
       <div data-slot="section" class="mt-6 flex flex-col gap-2">
@@ -3320,6 +3379,7 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
         </div>
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
             <!--v-if--><span data-slot="label" class="truncate">Contact us</span>
+            <!--v-if-->
             <!--v-if-->
           </button></div>
       </div>
@@ -3376,6 +3436,7 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
                 <!--v-if--><span data-slot="label" class="truncate">Get started</span>
                 <!--v-if-->
+                <!--v-if-->
               </button></div>
           </div>
         </th>
@@ -3394,6 +3455,7 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
                 <!--v-if--><span data-slot="label" class="truncate">Get started</span>
                 <!--v-if-->
+                <!--v-if-->
               </button></div>
           </div>
         </th>
@@ -3411,6 +3473,7 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
             </div>
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
                 <!--v-if--><span data-slot="label" class="truncate">Contact us</span>
+                <!--v-if-->
                 <!--v-if-->
               </button></div>
           </div>
@@ -3522,6 +3585,7 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
+            <!--v-if-->
           </button></div>
       </div>
       <div data-slot="section" class="mt-6 flex flex-col gap-2">
@@ -3566,6 +3630,7 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
+            <!--v-if-->
           </button></div>
       </div>
       <div data-slot="section" class="mt-6 flex flex-col gap-2">
@@ -3609,6 +3674,7 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
         </div>
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
             <!--v-if--><span data-slot="label" class="truncate">Contact us</span>
+            <!--v-if-->
             <!--v-if-->
           </button></div>
       </div>
@@ -3665,6 +3731,7 @@ exports[`PricingTable > renders with ui correctly 1`] = `
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
                 <!--v-if--><span data-slot="label" class="truncate">Get started</span>
                 <!--v-if-->
+                <!--v-if-->
               </button></div>
           </div>
         </th>
@@ -3683,6 +3750,7 @@ exports[`PricingTable > renders with ui correctly 1`] = `
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
                 <!--v-if--><span data-slot="label" class="truncate">Get started</span>
                 <!--v-if-->
+                <!--v-if-->
               </button></div>
           </div>
         </th>
@@ -3700,6 +3768,7 @@ exports[`PricingTable > renders with ui correctly 1`] = `
             </div>
             <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
                 <!--v-if--><span data-slot="label" class="truncate">Contact us</span>
+                <!--v-if-->
                 <!--v-if-->
               </button></div>
           </div>
@@ -3811,6 +3880,7 @@ exports[`PricingTable > renders with ui correctly 1`] = `
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
+            <!--v-if-->
           </button></div>
       </div>
       <div data-slot="section" class="mt-6 flex flex-col gap-2">
@@ -3855,6 +3925,7 @@ exports[`PricingTable > renders with ui correctly 1`] = `
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
+            <!--v-if-->
           </button></div>
       </div>
       <div data-slot="section" class="mt-6 flex flex-col gap-2">
@@ -3898,6 +3969,7 @@ exports[`PricingTable > renders with ui correctly 1`] = `
         </div>
         <div data-slot="tierButton" class="mt-6 md:mt-auto md:pt-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary">
             <!--v-if--><span data-slot="label" class="truncate">Contact us</span>
+            <!--v-if-->
             <!--v-if-->
           </button></div>
       </div>

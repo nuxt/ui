@@ -243,6 +243,38 @@ export default defineAppConfig({
 ```
 ::
 
+### Link with external icon :badge{label="Soon" class="align-text-top"}
+
+Use the `external-icon` prop to display an icon when the link opens in a new tab.
+
+::component-code
+---
+ignore:
+  - target
+props:
+  to: https://github.com/nuxt/ui
+  target: _blank
+  externalIcon: true
+slots:
+  default: Button
+---
+::
+
+You can also pass any [Icon](/docs/components/icon) name to replace the default one.
+
+::component-code
+---
+ignore:
+  - target
+props:
+  to: https://github.com/nuxt/ui
+  target: _blank
+  externalIcon: i-lucide-external-link
+slots:
+  default: Button
+---
+::
+
 ### Loading
 
 Use the `loading` prop to show a loading icon and disable the Button.

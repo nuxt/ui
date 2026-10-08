@@ -9,6 +9,7 @@ exports[`Error > renders with as correctly 1`] = `
   <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
       <!--v-if-->
+      <!--v-if-->
     </button></div>
 </section>"
 `;
@@ -21,6 +22,7 @@ exports[`Error > renders with class correctly 1`] = `
   <p data-slot="message" class="mt-4 text-lg text-muted text-balance">The page you are looking for does not exist.</p>
   <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
+      <!--v-if-->
       <!--v-if-->
     </button></div>
 </main>"
@@ -35,6 +37,7 @@ exports[`Error > renders with clear correctly 1`] = `
   <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Home</span>
       <!--v-if-->
+      <!--v-if-->
     </button></div>
 </main>"
 `;
@@ -47,6 +50,7 @@ exports[`Error > renders with default slot correctly 1`] = `
   <p data-slot="message" class="mt-4 text-lg text-muted text-balance">The page you are looking for does not exist.</p>
   <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
+      <!--v-if-->
       <!--v-if-->
     </button></div>
 </main>"
@@ -61,6 +65,7 @@ exports[`Error > renders with error correctly 1`] = `
   <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
       <!--v-if-->
+      <!--v-if-->
     </button></div>
 </main>"
 `;
@@ -73,6 +78,7 @@ exports[`Error > renders with error using status/statusText correctly 1`] = `
   <p data-slot="message" class="mt-4 text-lg text-muted text-balance">Something went wrong.</p>
   <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
+      <!--v-if-->
       <!--v-if-->
     </button></div>
 </main>"
@@ -87,6 +93,7 @@ exports[`Error > renders with icon correctly 1`] = `
   <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
       <!--v-if-->
+      <!--v-if-->
     </button></div>
 </main>"
 `;
@@ -99,6 +106,7 @@ exports[`Error > renders with leading slot correctly 1`] = `
   <p data-slot="message" class="mt-4 text-lg text-muted text-balance">The page you are looking for does not exist.</p>
   <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
+      <!--v-if-->
       <!--v-if-->
     </button></div>
 </main>"
@@ -123,6 +131,7 @@ exports[`Error > renders with message slot correctly 1`] = `
   <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
       <!--v-if-->
+      <!--v-if-->
     </button></div>
 </main>"
 `;
@@ -135,6 +144,7 @@ exports[`Error > renders with redirect correctly 1`] = `
   <p data-slot="message" class="mt-4 text-lg text-muted text-balance">The page you are looking for does not exist.</p>
   <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
+      <!--v-if-->
       <!--v-if-->
     </button></div>
 </main>"
@@ -149,6 +159,7 @@ exports[`Error > renders with statusCode slot correctly 1`] = `
   <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
       <!--v-if-->
+      <!--v-if-->
     </button></div>
 </main>"
 `;
@@ -162,6 +173,7 @@ exports[`Error > renders with statusMessage slot correctly 1`] = `
   <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
       <!--v-if-->
+      <!--v-if-->
     </button></div>
 </main>"
 `;
@@ -174,6 +186,7 @@ exports[`Error > renders with ui correctly 1`] = `
   <p data-slot="message" class="mt-4 text-lg text-muted text-balance">The page you are looking for does not exist.</p>
   <div data-slot="links" class="flex items-center justify-center gap-6 mt-16"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
+      <!--v-if-->
       <!--v-if-->
     </button></div>
 </main>"
