@@ -42,7 +42,7 @@ export const kbdKeysPlatformMap: Record<KbdKeySpecific, { macos: string, other: 
 }
 
 const _useKbd = () => {
-  const macOS = computed(() => import.meta.client && navigator && navigator.userAgent && navigator.userAgent.match(/Macintosh;/))
+  const macOS = computed(() => import.meta.client && typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.match(/Macintosh;/))
 
   if (import.meta.client && macOS.value) {
     document.documentElement.classList.add('ui-macos')
