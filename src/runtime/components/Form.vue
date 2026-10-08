@@ -19,7 +19,7 @@ export type FormProps<S extends FormSchema, T extends boolean = true, N extends 
    * @param state - The current state of the form.
    * @returns A promise that resolves to an array of FormError objects, or an array of FormError objects directly.
    */
-  validate?: (state: FormState<S>) => Promise<FormError[]> | FormError[]
+  validate?: (state: Partial<InferInput<S>>) => Promise<FormError[]> | FormError[]
 
   /**
    * The list of input events that trigger the form validation.

@@ -857,6 +857,16 @@ describe('Form', () => {
       })).toBeDefined()
     })
 
+    it('keeps the schema input on the validate param', () => {
+      const schema = z.object({ current: z.string(), new: z.string() })
+
+      function validate(state: Partial<z.input<typeof schema>>) {
+        return state.current === state.new ? [{ name: 'new', message: 'Must be different' }] : []
+      }
+
+      expect(defineProps({ schema, validate, state: reactive({ current: undefined, new: undefined }) })).toBeDefined()
+    })
+
     it('rejects values of another shape', () => {
       const schema = z.object({
         name: z.string(),
