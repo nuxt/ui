@@ -177,6 +177,7 @@ const _props = withDefaults(defineProps<FileUploadProps<M, T>>(), {
 })
 const emits = defineEmits<FileUploadEmits>()
 const slots = defineSlots<FileUploadSlots<M, T>>()
+const fileKeys = new WeakMap<FileUploadItem, symbol>()
 
 // eslint-disable-next-line vue/no-dupe-keys
 const modelValue = defineModel<FileUploadFiles<T | File, M>>()
@@ -237,6 +238,15 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.fileUpload || {}
   highlight: highlight.value,
   disabled: disabled.value
 }))
+
+function getFileKey(file: FileUploadItem): symbol {
+  let key = fileKeys.get(file)
+  if (!key) {
+    key = Symbol(file.name)
+    fileKeys.set(file, key)
+  }
+  return key
+}
 
 function getFileAvatar(file: FileUploadItem): AvatarProps | undefined {
   return props.fileImage ? file.avatar : undefined
@@ -332,7 +342,7 @@ defineExpose({
 
       <div data-slot="files" :class="ui.files({ class: props.ui?.files })">
         <slot name="files" :files="modelValue" :remove-file="removeFile">
-          <div v-for="(file, index) in Array.isArray(modelValue) ? modelValue : [modelValue]" :key="file.name" data-slot="file" :class="ui.file({ class: props.ui?.file })">
+          <div v-for="(file, index) in Array.isArray(modelValue) ? modelValue : [modelValue]" :key="getFileKey(file)" data-slot="file" :class="ui.file({ class: props.ui?.file })">
             <slot name="file" :file="file" :index="index" :remove-file="removeFile">
               <slot name="file-leading" :file="file" :index="index" :ui="ui">
                 <UAvatar

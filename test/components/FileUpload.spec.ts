@@ -3,6 +3,7 @@ import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import { mount } from '@vue/test-utils'
+import { h } from 'vue'
 import Avatar from '../../src/runtime/components/Avatar.vue'
 import FileUpload from '../../src/runtime/components/FileUpload.vue'
 import type { FileUploadItem } from '../../src/runtime/components/FileUpload.vue'
@@ -38,6 +39,23 @@ async function setFilesOnInput(input: any, files: File[]) {
 }
 
 describe('FileUpload', () => {
+  it('preserves row state when files with duplicate names are reordered', async () => {
+    const first = { name: 'image.png' }
+    const second = { name: 'image.png' }
+    const wrapper = mount(FileUpload, {
+      props: { modelValue: [first, second], multiple: true },
+      slots: { file: () => h('input', { 'data-test': 'file-state' }) }
+    })
+
+    const inputs = wrapper.findAll<HTMLInputElement>('[data-test="file-state"]')
+    await inputs[0]!.setValue('first file')
+    await inputs[1]!.setValue('second file')
+
+    await wrapper.setProps({ modelValue: [second, first] })
+
+    expect(wrapper.findAll<HTMLInputElement>('[data-test="file-state"]').map(input => input.element.value)).toEqual(['second file', 'first file'])
+  })
+
   test('preserves native file types by default', () => {
     expectEmitPayloadType('update:modelValue', () => FileUpload({})).toEqualTypeOf<[File | null | undefined]>()
     expectEmitPayloadType('update:modelValue', () => FileUpload({ multiple: true })).toEqualTypeOf<[File[] | null | undefined]>()
