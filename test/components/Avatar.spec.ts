@@ -24,6 +24,7 @@ describe('Avatar', () => {
     ['with class', { props: { class: 'bg-default' } }],
     ['with ui', { props: { ui: { fallback: 'font-bold' } } }],
     ['with custom size', { props: { class: 'size-100', src: 'https://github.com/benjamincanac.png' } }],
+    ['with custom size token', { props: { class: '[--ui-control-size:--spacing(20)]', src: 'https://github.com/benjamincanac.png' } }],
     // Slots
     ['with default slot', { slots: { default: '🇫🇷' } }]
   ])

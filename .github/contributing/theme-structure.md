@@ -55,7 +55,7 @@ A variant that reads a variable for another purpose, `square`, `leading`, `orien
 
 Reach for this before a `size` × something compound: the size writes a value, another variant picks the property that reads it. A compound is hard to override from an app config, a token is one class. A theme that extends Input and drops its `root` (Select, InputDate, InputTime) appends the tokens to `base`.
 
-A slot rendered in a portal does not inherit from the trigger. A menu writes the tokens of its items on `content` in the same `size` entry, with its own values. A box size goes through `--ui-control-size`, and a second number that is not an exact `calc()` of a token for every size stays a class: the horizontal separators of Stepper keep their compounds for that reason. Avatar keeps `size-*` classes, the component reads them to size the image.
+A slot rendered in a portal does not inherit from the trigger. A menu writes the tokens of its items on `content` in the same `size` entry, with its own values. A box size goes through `--ui-control-size`, and a second number that is not an exact `calc()` of a token for every size stays a class: the horizontal separators of Stepper keep their compounds for that reason. Avatar reads `--ui-control-size` from its class to set the `width` and `height` of the image, so its value stays a `--spacing()` one.
 
 ## Static Theme
 

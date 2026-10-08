@@ -737,8 +737,8 @@ describe('Theme', () => {
     const avatars = wrapper.findAll('span[data-slot="avatar-group-base"]')
     expect(avatars.length).toBeGreaterThan(0)
     avatars.forEach((avatar) => {
-      expect(avatar.classes()).toContain('size-10')
-      expect(avatar.classes()).not.toContain('size-6')
+      expect(avatar.classes()).toContain('[--ui-control-size:--spacing(10)]')
+      expect(avatar.classes()).not.toContain('[--ui-control-size:--spacing(6)]')
     })
   })
 

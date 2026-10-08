@@ -12,31 +12,31 @@ export default defineTheme({
     color: colorVariant({ root: '' }),
     size: {
       '3xs': {
-        root: 'size-4 text-[8px]'
+        root: '[--ui-control-size:--spacing(4)] size-(--ui-control-size) text-[8px]'
       },
       '2xs': {
-        root: 'size-5 text-[10px]'
+        root: '[--ui-control-size:--spacing(5)] size-(--ui-control-size) text-[10px]'
       },
       'xs': {
-        root: 'size-6 text-xs'
+        root: '[--ui-control-size:--spacing(6)] size-(--ui-control-size) text-xs'
       },
       'sm': {
-        root: 'size-7 text-sm'
+        root: '[--ui-control-size:--spacing(7)] size-(--ui-control-size) text-sm'
       },
       'md': {
-        root: 'size-8 text-base'
+        root: '[--ui-control-size:--spacing(8)] size-(--ui-control-size) text-base'
       },
       'lg': {
-        root: 'size-9 text-lg'
+        root: '[--ui-control-size:--spacing(9)] size-(--ui-control-size) text-lg'
       },
       'xl': {
-        root: 'size-10 text-xl'
+        root: '[--ui-control-size:--spacing(10)] size-(--ui-control-size) text-xl'
       },
       '2xl': {
-        root: 'size-11 text-[22px]'
+        root: '[--ui-control-size:--spacing(11)] size-(--ui-control-size) text-[22px]'
       },
       '3xl': {
-        root: 'size-12 text-2xl'
+        root: '[--ui-control-size:--spacing(12)] size-(--ui-control-size) text-2xl'
       }
     }
   },

@@ -6,7 +6,7 @@ exports[`Separator > renders with avatar correctly 1`] = `
 "<div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center text-center [--ui-accent:var(--ui-neutral)] w-full flex-row [--ui-control-thickness:1px]">
   <!--v-if-->
   <div data-slot="separator-border" class="border-accent-default w-full border-t-(length:--ui-control-thickness) border-solid"></div>
-  <div data-slot="separator-container" class="font-medium text-default flex whitespace-nowrap mx-3"><span data-slot="separator-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" width="20" height="20" data-slot="avatar-image" class="size-full rounded-[inherit] object-cover"></span></div>
+  <div data-slot="separator-container" class="font-medium text-default flex whitespace-nowrap mx-3"><span data-slot="separator-avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] [--ui-control-size:--spacing(5)] size-(--ui-control-size) text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" width="20" height="20" data-slot="avatar-image" class="size-full rounded-[inherit] object-cover"></span></div>
   <div data-slot="separator-border" class="border-accent-default w-full border-t-(length:--ui-control-thickness) border-solid"></div>
   <!--v-if-->
 </div>"

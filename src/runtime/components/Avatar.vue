@@ -82,13 +82,12 @@ const ui = computed(() => tv(theme, overrides.value)({
 const rootClass = computed(() => ui.value.root({ class: [props.ui?.root, props.class] }))
 
 const sizePx = computed(() => {
-  const sizeClass = (rootClass.value || '').split(' ').find(c => /^size-\d+$/.test(c))
-  if (sizeClass) {
-    const num = Number.parseFloat(sizeClass.split('-')[1] ?? '')
-    if (!Number.isNaN(num)) return num * 4
-  }
+  const classes = (rootClass.value || '').split(' ')
+  // The token only counts while the class that reads it is there, a `size-*` class replaces it
+  const match = classes.map(c => /^size-(\d+)$/.exec(c)).find(Boolean)
+    ?? (classes.includes('size-(--ui-control-size)') ? classes.map(c => /^\[--ui-control-size:--spacing\((\d+(?:\.\d+)?)\)\]$/.exec(c)).find(Boolean) : undefined)
 
-  return null
+  return match ? Number.parseFloat(match[1]!) * 4 : null
 })
 
 const error = ref(false)
