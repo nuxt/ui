@@ -118,7 +118,13 @@ watch(() => route.fullPath, () => {
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.header || {}) })())
 
-const Menu = computed(() => lazyOverlays[props.mode as HeaderMode])
+const { slideover: USlideover, modal: UModal, drawer: UDrawer } = lazyOverlays
+
+const Menu = computed(() => ({
+  slideover: USlideover,
+  modal: UModal,
+  drawer: UDrawer
+})[props.mode as HeaderMode])
 
 const menuProps = toRef(() => defu(props.menu, {}, props.mode === 'modal' ? { fullscreen: true, transition: false } : {}) as HeaderMenu<T>)
 

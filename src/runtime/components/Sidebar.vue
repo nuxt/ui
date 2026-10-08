@@ -213,7 +213,13 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.sidebar || {}) }
   transition: props.transition
 }))
 
-const Menu = computed(() => lazyOverlays[props.mode as SidebarMode])
+const { slideover: USlideover, modal: UModal, drawer: UDrawer } = lazyOverlays
+
+const Menu = computed(() => ({
+  slideover: USlideover,
+  modal: UModal,
+  drawer: UDrawer
+})[props.mode as SidebarMode])
 
 const menuProps = toRef(() => defu(props.menu, {
   title: props.title,
