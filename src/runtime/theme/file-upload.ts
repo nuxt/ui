@@ -6,13 +6,13 @@ export default defineTheme({
     root: 'relative flex flex-col',
     base: 'w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-3 transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent',
     wrapper: 'flex flex-col items-center justify-center text-center',
-    icon: 'shrink-0',
+    icon: 'shrink-0 size-(--ui-control-icon)',
     avatar: 'shrink-0',
     label: 'font-medium text-default mt-2',
     description: 'text-muted mt-1',
     actions: 'flex flex-wrap gap-1.5 shrink-0 mt-4',
     files: '',
-    file: 'relative',
+    file: 'relative px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)',
     fileLeadingAvatar: 'shrink-0',
     fileWrapper: 'flex flex-col min-w-0',
     fileName: 'text-default truncate',
@@ -34,35 +34,30 @@ export default defineTheme({
       xs: {
         root: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)]',
         base: 'text-xs',
-        icon: 'size-(--ui-control-icon)',
-        file: 'text-xs px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)',
+        file: 'text-xs',
         fileWrapper: 'flex-row gap-1'
       },
       sm: {
         root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)]',
         base: 'text-xs',
-        icon: 'size-(--ui-control-icon)',
-        file: 'text-xs px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)',
+        file: 'text-xs',
         fileWrapper: 'flex-row gap-1'
       },
       md: {
         root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)]',
         base: 'text-sm',
-        icon: 'size-(--ui-control-icon)',
-        file: 'text-xs px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)'
+        file: 'text-xs'
       },
       lg: {
         root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)]',
         base: 'text-sm',
-        icon: 'size-(--ui-control-icon)',
-        file: 'text-sm px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)',
+        file: 'text-sm',
         fileSize: 'text-xs'
       },
       xl: {
         root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)]',
         base: 'text-base',
-        icon: 'size-(--ui-control-icon)',
-        file: 'text-sm px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)'
+        file: 'text-sm'
       }
     },
     layout: {

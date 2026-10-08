@@ -7,7 +7,7 @@ export default defineTheme({
     list: 'isolate min-w-0',
     label: 'w-full flex items-center [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) font-semibold text-xs/5 text-strong',
     item: 'min-w-0',
-    link: 'group relative w-full flex items-center gap-(--ui-control-gap) font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3 before:outline-accent-focus',
+    link: 'group relative w-full flex items-center [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3 before:outline-accent-focus',
     linkLeadingIcon: 'shrink-0 size-(--ui-control-icon)',
     linkLeadingAvatar: 'shrink-0',
     linkLeadingChip: '',
@@ -19,7 +19,7 @@ export default defineTheme({
     childList: 'isolate',
     childLabel: 'text-xs text-strong',
     childItem: '',
-    childLink: 'group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3 before:outline-accent-focus',
+    childLink: 'group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3 before:outline-accent-focus px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)',
     childLinkWrapper: 'min-w-0',
     childLinkIcon: 'size-(--ui-control-icon) shrink-0',
     childLinkLabel: 'truncate',
@@ -44,17 +44,17 @@ export default defineTheme({
         root: 'items-center justify-between',
         list: 'flex items-center',
         item: 'py-2',
-        link: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) before:inset-x-px before:inset-y-0',
+        link: 'before:inset-x-px before:inset-y-0',
         childList: 'grid p-2',
-        childLink: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) before:inset-x-px before:inset-y-0',
+        childLink: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)] before:inset-x-px before:inset-y-0',
         childLinkLabel: 'font-medium',
         content: 'absolute top-0 inset-s-0 w-full max-h-[70vh] overflow-y-auto'
       },
       vertical: {
         root: 'flex-col',
-        link: 'flex-row [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) before:inset-y-px before:inset-x-0',
+        link: 'flex-row before:inset-y-px before:inset-x-0',
         childLabel: 'px-1.5 py-0.5',
-        childLink: '[--ui-control-px:--spacing(1.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) before:inset-y-px before:inset-x-0'
+        childLink: '[--ui-control-px:--spacing(1.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] before:inset-y-px before:inset-x-0'
       }
     },
     // Equal padding, to keep a link in place while a sidebar collapses. After

@@ -6,7 +6,7 @@ import { focusCard } from './checkbox'
 export default defineTheme({
   slots: {
     root: 'relative',
-    fieldset: 'flex gap-x-2',
+    fieldset: 'flex gap-x-2 gap-y-(--ui-control-gap)',
     legend: 'mb-1 block font-medium text-default',
     item: ''
   },
@@ -34,23 +34,23 @@ export default defineTheme({
     },
     size: {
       xs: {
-        fieldset: '[--ui-control-gap:--spacing(0.5)] gap-y-(--ui-control-gap)',
+        fieldset: '[--ui-control-gap:--spacing(0.5)]',
         legend: 'text-xs'
       },
       sm: {
-        fieldset: '[--ui-control-gap:--spacing(0.5)] gap-y-(--ui-control-gap)',
+        fieldset: '[--ui-control-gap:--spacing(0.5)]',
         legend: 'text-xs'
       },
       md: {
-        fieldset: '[--ui-control-gap:--spacing(1)] gap-y-(--ui-control-gap)',
+        fieldset: '[--ui-control-gap:--spacing(1)]',
         legend: 'text-sm'
       },
       lg: {
-        fieldset: '[--ui-control-gap:--spacing(1)] gap-y-(--ui-control-gap)',
+        fieldset: '[--ui-control-gap:--spacing(1)]',
         legend: 'text-sm'
       },
       xl: {
-        fieldset: '[--ui-control-gap:--spacing(1.5)] gap-y-(--ui-control-gap)',
+        fieldset: '[--ui-control-gap:--spacing(1.5)]',
         legend: 'text-base'
       }
     },

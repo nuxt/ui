@@ -3,7 +3,7 @@ import { defineTheme } from '../utils/theme'
 
 export default defineTheme({
   slots: {
-    base: 'inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase'
+    base: 'inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase h-(--ui-control-size)'
   },
   variants: {
     color: colorVariant({ base: '' }),
@@ -22,9 +22,9 @@ export default defineTheme({
       }
     },
     size: {
-      sm: { base: '[--ui-control-size:--spacing(4)] h-(--ui-control-size) min-w-[16px] text-[10px]' },
-      md: { base: '[--ui-control-size:--spacing(5)] h-(--ui-control-size) min-w-[20px] text-[11px]' },
-      lg: { base: '[--ui-control-size:--spacing(6)] h-(--ui-control-size) min-w-[24px] text-[12px]' }
+      sm: { base: '[--ui-control-size:--spacing(4)] min-w-[16px] text-[10px]' },
+      md: { base: '[--ui-control-size:--spacing(5)] min-w-[20px] text-[11px]' },
+      lg: { base: '[--ui-control-size:--spacing(6)] min-w-[24px] text-[12px]' }
     }
   },
   defaultVariants: {

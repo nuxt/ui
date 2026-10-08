@@ -4,9 +4,9 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'relative flex items-start',
-    base: 'inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-3 data-[state=unchecked]:bg-strong transition-[background] duration-200 ease-out data-[state=checked]:bg-accent outline-accent-focus',
+    base: 'inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-3 data-[state=unchecked]:bg-strong transition-[background] duration-200 ease-out data-[state=checked]:bg-accent outline-accent-focus w-[calc(var(--ui-control-size)*2+(--spacing(1)))]',
     container: 'flex items-center',
-    thumb: 'group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 ease-out motion-reduce:transition-none data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:translate-x-0 flex items-center justify-center',
+    thumb: 'group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 ease-out motion-reduce:transition-none data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:translate-x-0 flex items-center justify-center size-(--ui-control-size) data-[state=checked]:translate-x-(--ui-control-size) data-[state=checked]:rtl:-translate-x-(--ui-control-size)',
     icon: 'absolute shrink-0 group-data-[state=unchecked]:text-faint opacity-0 size-10/12 transition-[color,opacity] duration-200 ease-out group-data-[state=checked]:text-accent',
     wrapper: 'ms-2',
     label: 'block font-medium text-default',
@@ -16,33 +16,23 @@ export default defineTheme({
     color: colorVariant({ root: '' }),
     size: {
       xs: {
-        base: 'w-[calc(var(--ui-control-size)*2+(--spacing(1)))]',
         container: '[--ui-control-size:--spacing(3)] h-4',
-        thumb: 'size-(--ui-control-size) data-[state=checked]:translate-x-(--ui-control-size) data-[state=checked]:rtl:-translate-x-(--ui-control-size)',
         wrapper: 'text-xs'
       },
       sm: {
-        base: 'w-[calc(var(--ui-control-size)*2+(--spacing(1)))]',
         container: '[--ui-control-size:--spacing(3.5)] h-4',
-        thumb: 'size-(--ui-control-size) data-[state=checked]:translate-x-(--ui-control-size) data-[state=checked]:rtl:-translate-x-(--ui-control-size)',
         wrapper: 'text-xs'
       },
       md: {
-        base: 'w-[calc(var(--ui-control-size)*2+(--spacing(1)))]',
         container: '[--ui-control-size:--spacing(4)] h-5',
-        thumb: 'size-(--ui-control-size) data-[state=checked]:translate-x-(--ui-control-size) data-[state=checked]:rtl:-translate-x-(--ui-control-size)',
         wrapper: 'text-sm'
       },
       lg: {
-        base: 'w-[calc(var(--ui-control-size)*2+(--spacing(1)))]',
         container: '[--ui-control-size:--spacing(4.5)] h-5',
-        thumb: 'size-(--ui-control-size) data-[state=checked]:translate-x-(--ui-control-size) data-[state=checked]:rtl:-translate-x-(--ui-control-size)',
         wrapper: 'text-sm'
       },
       xl: {
-        base: 'w-[calc(var(--ui-control-size)*2+(--spacing(1)))]',
         container: '[--ui-control-size:--spacing(5)] h-6',
-        thumb: 'size-(--ui-control-size) data-[state=checked]:translate-x-(--ui-control-size) data-[state=checked]:rtl:-translate-x-(--ui-control-size)',
         wrapper: 'text-base'
       }
     },

@@ -4,9 +4,9 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: '',
-    item: 'relative inline-block cursor-pointer select-none rounded-sm has-focus-visible:outline-3 transition outline-accent-focus',
+    item: 'relative inline-block cursor-pointer select-none rounded-sm has-focus-visible:outline-3 transition outline-accent-focus size-(--ui-control-size)',
     indicator: 'absolute inset-0 overflow-hidden outline-none text-transparent w-(--reka-rating-item-step-width) opacity-(--reka-rating-item-step-opacity) z-(--reka-rating-item-step-z-index) data-[state=active]:text-accent',
-    icon: 'block',
+    icon: 'block size-(--ui-control-size)',
     emptyIcon: 'block size-full text-muted pointer-events-none'
   },
   variants: {
@@ -20,24 +20,19 @@ export default defineTheme({
     },
     size: {
       xs: {
-        item: '[--ui-control-size:--spacing(3)] size-(--ui-control-size)',
-        icon: 'size-(--ui-control-size)'
+        item: '[--ui-control-size:--spacing(3)]'
       },
       sm: {
-        item: '[--ui-control-size:--spacing(4)] size-(--ui-control-size)',
-        icon: 'size-(--ui-control-size)'
+        item: '[--ui-control-size:--spacing(4)]'
       },
       md: {
-        item: '[--ui-control-size:--spacing(5)] size-(--ui-control-size)',
-        icon: 'size-(--ui-control-size)'
+        item: '[--ui-control-size:--spacing(5)]'
       },
       lg: {
-        item: '[--ui-control-size:--spacing(6)] size-(--ui-control-size)',
-        icon: 'size-(--ui-control-size)'
+        item: '[--ui-control-size:--spacing(6)]'
       },
       xl: {
-        item: '[--ui-control-size:--spacing(7)] size-(--ui-control-size)',
-        icon: 'size-(--ui-control-size)'
+        item: '[--ui-control-size:--spacing(7)]'
       }
     },
     color: colorVariant({ root: '' }),

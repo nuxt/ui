@@ -10,8 +10,8 @@ export default defineTheme({
     status: 'flex text-faint duration-200 ease-out motion-reduce:transition-none',
     list: 'flex flex-col gap-1',
     item: 'flex items-center gap-1.5 min-w-0',
-    itemLeadingIcon: 'shrink-0',
-    itemLeadingDot: 'shrink-0 rounded-full',
+    itemLeadingIcon: 'shrink-0 size-(--ui-control-icon)',
+    itemLeadingDot: 'shrink-0 rounded-full size-(--ui-control-size)',
     itemLabel: 'truncate',
     itemTrailing: 'ms-auto shrink-0 text-faint'
   },
@@ -21,51 +21,37 @@ export default defineTheme({
       '2xs': {
         root: '[--ui-control-thickness:1px] [--ui-control-icon:--spacing(3)] [--ui-control-size:--spacing(1.5)]',
         status: 'text-xs',
-        list: 'text-xs',
-        itemLeadingIcon: 'size-(--ui-control-icon)',
-        itemLeadingDot: 'size-(--ui-control-size)'
+        list: 'text-xs'
       },
       'xs': {
         root: '[--ui-control-thickness:--spacing(0.5)] [--ui-control-icon:--spacing(3)] [--ui-control-size:--spacing(1.5)]',
         status: 'text-xs',
-        list: 'text-xs',
-        itemLeadingIcon: 'size-(--ui-control-icon)',
-        itemLeadingDot: 'size-(--ui-control-size)'
+        list: 'text-xs'
       },
       'sm': {
         root: '[--ui-control-thickness:--spacing(1)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)]',
         status: 'text-sm',
-        list: 'text-sm',
-        itemLeadingIcon: 'size-(--ui-control-icon)',
-        itemLeadingDot: 'size-(--ui-control-size)'
+        list: 'text-sm'
       },
       'md': {
         root: '[--ui-control-thickness:--spacing(2)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)]',
         status: 'text-sm',
-        list: 'text-sm',
-        itemLeadingIcon: 'size-(--ui-control-icon)',
-        itemLeadingDot: 'size-(--ui-control-size)'
+        list: 'text-sm'
       },
       'lg': {
         root: '[--ui-control-thickness:--spacing(3)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)]',
         status: 'text-sm',
-        list: 'text-sm',
-        itemLeadingIcon: 'size-(--ui-control-icon)',
-        itemLeadingDot: 'size-(--ui-control-size)'
+        list: 'text-sm'
       },
       'xl': {
         root: '[--ui-control-thickness:--spacing(4)] [--ui-control-icon:--spacing(5)] [--ui-control-size:--spacing(2.5)]',
         status: 'text-base',
-        list: 'text-base',
-        itemLeadingIcon: 'size-(--ui-control-icon)',
-        itemLeadingDot: 'size-(--ui-control-size)'
+        list: 'text-base'
       },
       '2xl': {
         root: '[--ui-control-thickness:--spacing(5)] [--ui-control-icon:--spacing(5)] [--ui-control-size:--spacing(2.5)]',
         status: 'text-base',
-        list: 'text-base',
-        itemLeadingIcon: 'size-(--ui-control-icon)',
-        itemLeadingDot: 'size-(--ui-control-size)'
+        list: 'text-base'
       }
     },
     orientation: {

@@ -132,7 +132,7 @@ exports[`Checkbox > renders with indicator end correctly 1`] = `
 
 exports[`Checkbox > renders with indicator hidden correctly 1`] = `
 "<div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)] [--ui-control-size:--spacing(4)] outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1]">
-  <div data-slot="checkbox-container" class="flex items-center h-auto"><button data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden focus-visible:outline-none sr-only size-(--ui-control-size)" id="v-0-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"></button>
+  <div data-slot="checkbox-container" class="flex items-center h-auto"><button data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden focus-visible:outline-none size-(--ui-control-size) sr-only" id="v-0-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"></button>
     <!--v-if-->
   </div>
   <!--v-if-->

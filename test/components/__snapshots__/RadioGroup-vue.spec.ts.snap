@@ -2,7 +2,7 @@
 
 exports[`RadioGroup > renders with ariaLabel correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" aria-label="Aria label" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start flex-row text-sm">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden size-(--ui-control-size) outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1">
@@ -44,7 +44,7 @@ exports[`RadioGroup > renders with ariaLabel correctly 1`] = `
 
 exports[`RadioGroup > renders with as correctly 1`] = `
 "<section id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start flex-row text-sm">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden size-(--ui-control-size) outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1">
@@ -86,7 +86,7 @@ exports[`RadioGroup > renders with as correctly 1`] = `
 
 exports[`RadioGroup > renders with class correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="[--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)] absolute" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start flex-row text-sm">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden size-(--ui-control-size) outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1">
@@ -128,7 +128,7 @@ exports[`RadioGroup > renders with class correctly 1`] = `
 
 exports[`RadioGroup > renders with defaultValue correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start flex-row text-sm">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden size-(--ui-control-size) outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-1.5"></span></button>
@@ -168,7 +168,7 @@ exports[`RadioGroup > renders with defaultValue correctly 1`] = `
 
 exports[`RadioGroup > renders with description correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start flex-row text-sm">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden size-(--ui-control-size) outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1">
@@ -210,7 +210,7 @@ exports[`RadioGroup > renders with description correctly 1`] = `
 
 exports[`RadioGroup > renders with description slot correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start flex-row text-sm">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden size-(--ui-control-size) outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1">
@@ -252,7 +252,7 @@ exports[`RadioGroup > renders with description slot correctly 1`] = `
 
 exports[`RadioGroup > renders with descriptionKey correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start flex-row text-sm">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden size-(--ui-control-size) outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1">
@@ -294,7 +294,7 @@ exports[`RadioGroup > renders with descriptionKey correctly 1`] = `
 
 exports[`RadioGroup > renders with disabled correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="-1" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" data-disabled="" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start flex-row text-sm opacity-75">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" data-disabled="" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden size-(--ui-control-size) cursor-not-allowed outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1">
@@ -336,9 +336,9 @@ exports[`RadioGroup > renders with disabled correctly 1`] = `
 
 exports[`RadioGroup > renders with highlight indicator hidden correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if--><label data-slot="radio-group-item" class="flex items-start px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] text-sm not-has-disabled:border-accent not-has-disabled:has-data-[state=checked]:border-accent">
-      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-none sr-only size-(--ui-control-size) ring-accent" value="1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-1.5"></span></button>
+      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-none size-(--ui-control-size) sr-only ring-accent" value="1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-1.5"></span></button>
         <!--v-if-->
       </div>
       <div data-slot="radio-group-wrapper" class="w-full flex flex-col items-center gap-1 text-center">
@@ -347,7 +347,7 @@ exports[`RadioGroup > renders with highlight indicator hidden correctly 1`] = `
         <!--v-if-->
       </div>
     </label><label data-slot="radio-group-item" class="flex items-start px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] text-sm not-has-disabled:border-accent not-has-disabled:has-data-[state=checked]:border-accent">
-      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-none sr-only size-(--ui-control-size) ring-accent" value="2">
+      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-none size-(--ui-control-size) sr-only ring-accent" value="2">
           <!---->
         </button>
         <!--v-if-->
@@ -358,7 +358,7 @@ exports[`RadioGroup > renders with highlight indicator hidden correctly 1`] = `
         <!--v-if-->
       </div>
     </label><label data-slot="radio-group-item" class="flex items-start px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] text-sm not-has-disabled:border-accent not-has-disabled:has-data-[state=checked]:border-accent">
-      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-none sr-only size-(--ui-control-size) ring-accent" value="3">
+      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-none size-(--ui-control-size) sr-only ring-accent" value="3">
           <!---->
         </button>
         <!--v-if-->
@@ -376,7 +376,7 @@ exports[`RadioGroup > renders with highlight indicator hidden correctly 1`] = `
 
 exports[`RadioGroup > renders with horizontal variant card correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="horizontal" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-row gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-row">
     <!--v-if--><label data-slot="radio-group-item" class="flex items-start px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] flex-row text-sm hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:z-1">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none size-(--ui-control-size)" value="1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-1.5"></span></button>
         <!--v-if-->
@@ -416,7 +416,7 @@ exports[`RadioGroup > renders with horizontal variant card correctly 1`] = `
 
 exports[`RadioGroup > renders with horizontal variant list correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="horizontal" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-row gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-row">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start flex-row text-sm">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden size-(--ui-control-size) outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-1.5"></span></button>
@@ -496,9 +496,9 @@ exports[`RadioGroup > renders with horizontal variant table correctly 1`] = `
 
 exports[`RadioGroup > renders with icon card correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if--><label data-slot="radio-group-item" class="flex items-start px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] text-sm hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:z-1">
-      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none sr-only size-(--ui-control-size)" value="1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-1.5"></span></button>
+      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none size-(--ui-control-size) sr-only" value="1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-1.5"></span></button>
         <!--v-if-->
       </div>
       <div data-slot="radio-group-wrapper" class="w-full flex flex-col items-center gap-1 text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="radio-group-icon" class="shrink-0 size-(--ui-control-icon)"></svg>
@@ -506,7 +506,7 @@ exports[`RadioGroup > renders with icon card correctly 1`] = `
         <!--v-if-->
       </div>
     </label><label data-slot="radio-group-item" class="flex items-start px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] text-sm hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:z-1">
-      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none sr-only size-(--ui-control-size)" value="2">
+      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none size-(--ui-control-size) sr-only" value="2">
           <!---->
         </button>
         <!--v-if-->
@@ -516,7 +516,7 @@ exports[`RadioGroup > renders with icon card correctly 1`] = `
         <!--v-if-->
       </div>
     </label><label data-slot="radio-group-item" class="flex items-start px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] text-sm hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:z-1">
-      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none sr-only size-(--ui-control-size)" value="3">
+      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none size-(--ui-control-size) sr-only" value="3">
           <!---->
         </button>
         <!--v-if-->
@@ -533,10 +533,10 @@ exports[`RadioGroup > renders with icon card correctly 1`] = `
 
 exports[`RadioGroup > renders with icon correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start text-sm outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1]">
-      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none sr-only size-(--ui-control-size)" value="1">
+      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none size-(--ui-control-size) sr-only" value="1">
           <!---->
         </button>
         <!--v-if-->
@@ -546,7 +546,7 @@ exports[`RadioGroup > renders with icon correctly 1`] = `
       </div>
     </div>
     <div data-slot="radio-group-item" class="flex items-start text-sm outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1]">
-      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none sr-only size-(--ui-control-size)" value="2">
+      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none size-(--ui-control-size) sr-only" value="2">
           <!---->
         </button>
         <!--v-if-->
@@ -556,7 +556,7 @@ exports[`RadioGroup > renders with icon correctly 1`] = `
       </div>
     </div>
     <div data-slot="radio-group-item" class="flex items-start text-sm outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1]">
-      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none sr-only size-(--ui-control-size)" value="3">
+      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none size-(--ui-control-size) sr-only" value="3">
           <!---->
         </button>
         <!--v-if-->
@@ -574,7 +574,7 @@ exports[`RadioGroup > renders with icon table correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
   <fieldset data-slot="radio-group-fieldset" class="flex flex-col gap-0 -space-y-px">
     <!--v-if--><label data-slot="radio-group-item" class="flex items-start px-(--ui-control-px) py-(--ui-control-py) border border-default hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent/50 has-data-[state=checked]:z-2 outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] text-sm hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:z-1 first-of-type:rounded-t-lg last-of-type:rounded-b-lg">
-      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none sr-only size-(--ui-control-size)" value="1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-1.5"></span></button>
+      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none size-(--ui-control-size) sr-only" value="1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-1.5"></span></button>
         <!--v-if-->
       </div>
       <div data-slot="radio-group-wrapper" class="w-full flex flex-col items-center gap-1 text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="radio-group-icon" class="shrink-0 size-(--ui-control-icon)"></svg>
@@ -582,7 +582,7 @@ exports[`RadioGroup > renders with icon table correctly 1`] = `
         <!--v-if-->
       </div>
     </label><label data-slot="radio-group-item" class="flex items-start px-(--ui-control-px) py-(--ui-control-py) border border-default hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent/50 has-data-[state=checked]:z-2 outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] text-sm hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:z-1 first-of-type:rounded-t-lg last-of-type:rounded-b-lg">
-      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none sr-only size-(--ui-control-size)" value="2">
+      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none size-(--ui-control-size) sr-only" value="2">
           <!---->
         </button>
         <!--v-if-->
@@ -592,7 +592,7 @@ exports[`RadioGroup > renders with icon table correctly 1`] = `
         <!--v-if-->
       </div>
     </label><label data-slot="radio-group-item" class="flex items-start px-(--ui-control-px) py-(--ui-control-py) border border-default hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent/50 has-data-[state=checked]:z-2 outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] text-sm hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:z-1 first-of-type:rounded-t-lg last-of-type:rounded-b-lg">
-      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none sr-only size-(--ui-control-size)" value="3">
+      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none size-(--ui-control-size) sr-only" value="3">
           <!---->
         </button>
         <!--v-if-->
@@ -609,7 +609,7 @@ exports[`RadioGroup > renders with icon table correctly 1`] = `
 
 exports[`RadioGroup > renders with indicator end correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start flex-row-reverse text-sm">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden size-(--ui-control-size) outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-1.5"></span></button>
@@ -649,10 +649,10 @@ exports[`RadioGroup > renders with indicator end correctly 1`] = `
 
 exports[`RadioGroup > renders with indicator hidden correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start text-sm outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1]">
-      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none sr-only size-(--ui-control-size)" value="1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-1.5"></span></button>
+      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none size-(--ui-control-size) sr-only" value="1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-1.5"></span></button>
         <!--v-if-->
       </div>
       <div data-slot="radio-group-wrapper" class="w-full flex flex-col items-center gap-1 text-center">
@@ -661,7 +661,7 @@ exports[`RadioGroup > renders with indicator hidden correctly 1`] = `
       </div>
     </div>
     <div data-slot="radio-group-item" class="flex items-start text-sm outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1]">
-      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none sr-only size-(--ui-control-size)" value="2">
+      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none size-(--ui-control-size) sr-only" value="2">
           <!---->
         </button>
         <!--v-if-->
@@ -672,7 +672,7 @@ exports[`RadioGroup > renders with indicator hidden correctly 1`] = `
       </div>
     </div>
     <div data-slot="radio-group-item" class="flex items-start text-sm outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1]">
-      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none sr-only size-(--ui-control-size)" value="3">
+      <div data-slot="radio-group-container" class="flex items-center h-auto"><button id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none size-(--ui-control-size) sr-only" value="3">
           <!---->
         </button>
         <!--v-if-->
@@ -689,7 +689,7 @@ exports[`RadioGroup > renders with indicator hidden correctly 1`] = `
 
 exports[`RadioGroup > renders with indicator start correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start flex-row text-sm">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden size-(--ui-control-size) outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-1.5"></span></button>
@@ -729,7 +729,7 @@ exports[`RadioGroup > renders with indicator start correctly 1`] = `
 
 exports[`RadioGroup > renders with items correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start flex-row text-sm">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden size-(--ui-control-size) outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1">
@@ -771,7 +771,7 @@ exports[`RadioGroup > renders with items correctly 1`] = `
 
 exports[`RadioGroup > renders with label slot correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start flex-row text-sm">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden size-(--ui-control-size) outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1">
@@ -813,7 +813,7 @@ exports[`RadioGroup > renders with label slot correctly 1`] = `
 
 exports[`RadioGroup > renders with labelKey correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start flex-row text-sm">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden size-(--ui-control-size) outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1">
@@ -855,7 +855,7 @@ exports[`RadioGroup > renders with labelKey correctly 1`] = `
 
 exports[`RadioGroup > renders with legend slot correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start flex-row text-sm">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden size-(--ui-control-size) outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1">
@@ -897,7 +897,7 @@ exports[`RadioGroup > renders with legend slot correctly 1`] = `
 
 exports[`RadioGroup > renders with modelValue correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start flex-row text-sm">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden size-(--ui-control-size) outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-1.5"></span></button>
@@ -937,7 +937,7 @@ exports[`RadioGroup > renders with modelValue correctly 1`] = `
 
 exports[`RadioGroup > renders with neutral variant card correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-neutral)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if--><label data-slot="radio-group-item" class="flex items-start px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] flex-row text-sm hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:z-1">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none size-(--ui-control-size)" value="1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-1.5"></span></button>
         <!--v-if-->
@@ -977,7 +977,7 @@ exports[`RadioGroup > renders with neutral variant card correctly 1`] = `
 
 exports[`RadioGroup > renders with neutral variant card highlight correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-neutral)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if--><label data-slot="radio-group-item" class="flex items-start px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] flex-row text-sm">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-none size-(--ui-control-size) ring-accent" value="1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-1.5"></span></button>
         <!--v-if-->
@@ -1017,7 +1017,7 @@ exports[`RadioGroup > renders with neutral variant card highlight correctly 1`] 
 
 exports[`RadioGroup > renders with neutral variant list correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-neutral)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start flex-row text-sm">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden size-(--ui-control-size) outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-1.5"></span></button>
@@ -1057,7 +1057,7 @@ exports[`RadioGroup > renders with neutral variant list correctly 1`] = `
 
 exports[`RadioGroup > renders with neutral variant list highlight correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-neutral)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start flex-row text-sm">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset overflow-hidden size-(--ui-control-size) ring-accent outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-1.5"></span></button>
@@ -1177,7 +1177,7 @@ exports[`RadioGroup > renders with neutral variant table highlight correctly 1`]
 
 exports[`RadioGroup > renders with primary variant card correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if--><label data-slot="radio-group-item" class="flex items-start px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] flex-row text-sm hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:z-1">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden focus-visible:outline-none size-(--ui-control-size)" value="1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-1.5"></span></button>
         <!--v-if-->
@@ -1217,7 +1217,7 @@ exports[`RadioGroup > renders with primary variant card correctly 1`] = `
 
 exports[`RadioGroup > renders with primary variant card highlight correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if--><label data-slot="radio-group-item" class="flex items-start px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] flex-row text-sm">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-none size-(--ui-control-size) ring-accent" value="1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-1.5"></span></button>
         <!--v-if-->
@@ -1257,7 +1257,7 @@ exports[`RadioGroup > renders with primary variant card highlight correctly 1`] 
 
 exports[`RadioGroup > renders with primary variant list correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start flex-row text-sm">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden size-(--ui-control-size) outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-1.5"></span></button>
@@ -1297,7 +1297,7 @@ exports[`RadioGroup > renders with primary variant list correctly 1`] = `
 
 exports[`RadioGroup > renders with primary variant list highlight correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start flex-row text-sm">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset overflow-hidden size-(--ui-control-size) ring-accent outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-1.5"></span></button>
@@ -1417,7 +1417,7 @@ exports[`RadioGroup > renders with primary variant table highlight correctly 1`]
 
 exports[`RadioGroup > renders with required correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="true">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <legend data-slot="radio-group-legend" class="mb-1 block font-medium text-default text-sm after:content-['*'] after:ms-0.5 after:text-error">Legend</legend>
     <div data-slot="radio-group-item" class="flex items-start flex-row text-sm">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="true" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden size-(--ui-control-size) outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1">
@@ -1459,7 +1459,7 @@ exports[`RadioGroup > renders with required correctly 1`] = `
 
 exports[`RadioGroup > renders with size lg correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(4)] [--ui-control-py:--spacing(4)] [--ui-control-icon:--spacing(4.5)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4.5)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start flex-row text-sm">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden size-(--ui-control-size) outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-1.5"></span></button>
@@ -1499,7 +1499,7 @@ exports[`RadioGroup > renders with size lg correctly 1`] = `
 
 exports[`RadioGroup > renders with size md correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start flex-row text-sm">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden size-(--ui-control-size) outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-1.5"></span></button>
@@ -1539,7 +1539,7 @@ exports[`RadioGroup > renders with size md correctly 1`] = `
 
 exports[`RadioGroup > renders with size sm correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(3)] [--ui-control-icon:--spacing(3.5)] [--ui-control-gap:--spacing(0.5)] [--ui-control-size:--spacing(3.5)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start flex-row text-xs">
       <div data-slot="radio-group-container" class="flex items-center h-4"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden size-(--ui-control-size) outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-1"></span></button>
@@ -1579,7 +1579,7 @@ exports[`RadioGroup > renders with size sm correctly 1`] = `
 
 exports[`RadioGroup > renders with size xl correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(4.5)] [--ui-control-py:--spacing(4.5)] [--ui-control-icon:--spacing(5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-size:--spacing(5)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start flex-row text-base">
       <div data-slot="radio-group-container" class="flex items-center h-6"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden size-(--ui-control-size) outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-2"></span></button>
@@ -1619,7 +1619,7 @@ exports[`RadioGroup > renders with size xl correctly 1`] = `
 
 exports[`RadioGroup > renders with size xs correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(2.5)] [--ui-control-icon:--spacing(3)] [--ui-control-gap:--spacing(0.5)] [--ui-control-size:--spacing(3)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start flex-row text-xs">
       <div data-slot="radio-group-container" class="flex items-center h-4"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden size-(--ui-control-size) outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-1"></span></button>
@@ -1659,7 +1659,7 @@ exports[`RadioGroup > renders with size xs correctly 1`] = `
 
 exports[`RadioGroup > renders with ui correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start flex-row text-sm">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden size-(--ui-control-size) outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="1">
@@ -1701,7 +1701,7 @@ exports[`RadioGroup > renders with ui correctly 1`] = `
 
 exports[`RadioGroup > renders with valueKey correctly 1`] = `
 "<div id="v-0" data-slot="radio-group" class="relative [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
-  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-(--ui-control-gap)">
+  <fieldset data-slot="radio-group-fieldset" class="flex gap-x-2 gap-y-(--ui-control-gap) flex-wrap flex-col">
     <!--v-if-->
     <div data-slot="radio-group-item" class="flex items-start flex-row text-sm">
       <div data-slot="radio-group-container" class="flex items-center h-5"><button id="v-0:Option 1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="radio-group-base" class="rounded-full ring ring-inset ring-strong overflow-hidden size-(--ui-control-size) outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" value="Option 1"><span data-state="checked" data-slot="radio-group-indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-accent after:size-1.5"></span></button>

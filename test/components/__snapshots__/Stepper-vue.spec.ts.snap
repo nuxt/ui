@@ -7,7 +7,7 @@ exports[`Stepper > renders with as correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="active" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-0" data-slot="stepper-title" class="font-medium text-default text-sm">Address</div>
         <div id="reka-stepper-item-description-v-1" data-slot="stepper-description" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
@@ -16,7 +16,7 @@ exports[`Stepper > renders with as correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="inactive" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-2" data-slot="stepper-title" class="font-medium text-default text-sm">Shipping</div>
         <div id="reka-stepper-item-description-v-3" data-slot="stepper-description" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
@@ -25,7 +25,7 @@ exports[`Stepper > renders with as correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-5" aria-labelledby="reka-stepper-item-title-v-4" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full">3</span></button>
         <!--v-if-->
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-4" data-slot="stepper-title" class="font-medium text-default text-sm">Checkout</div>
         <div id="reka-stepper-item-description-v-5" data-slot="stepper-description" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
@@ -43,7 +43,7 @@ exports[`Stepper > renders with class correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="active" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-0" data-slot="stepper-title" class="font-medium text-default text-sm">Address</div>
         <div id="reka-stepper-item-description-v-1" data-slot="stepper-description" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
@@ -52,7 +52,7 @@ exports[`Stepper > renders with class correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="inactive" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-2" data-slot="stepper-title" class="font-medium text-default text-sm">Shipping</div>
         <div id="reka-stepper-item-description-v-3" data-slot="stepper-description" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
@@ -61,7 +61,7 @@ exports[`Stepper > renders with class correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-5" aria-labelledby="reka-stepper-item-title-v-4" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full">3</span></button>
         <!--v-if-->
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-4" data-slot="stepper-title" class="font-medium text-default text-sm">Checkout</div>
         <div id="reka-stepper-item-description-v-5" data-slot="stepper-description" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
@@ -79,7 +79,7 @@ exports[`Stepper > renders with content slot correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="active" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-0" data-slot="stepper-title" class="font-medium text-default text-sm">Address</div>
         <div id="reka-stepper-item-description-v-1" data-slot="stepper-description" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
@@ -88,7 +88,7 @@ exports[`Stepper > renders with content slot correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="inactive" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-2" data-slot="stepper-title" class="font-medium text-default text-sm">Shipping</div>
         <div id="reka-stepper-item-description-v-3" data-slot="stepper-description" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
@@ -97,7 +97,7 @@ exports[`Stepper > renders with content slot correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-5" aria-labelledby="reka-stepper-item-title-v-4" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full">3</span></button>
         <!--v-if-->
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-4" data-slot="stepper-title" class="font-medium text-default text-sm">Checkout</div>
         <div id="reka-stepper-item-description-v-5" data-slot="stepper-description" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
@@ -115,7 +115,7 @@ exports[`Stepper > renders with custom slot correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="completed" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="completed" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-0" data-slot="stepper-title" class="font-medium text-default text-sm">Address</div>
         <div id="reka-stepper-item-description-v-1" data-slot="stepper-description" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
@@ -124,7 +124,7 @@ exports[`Stepper > renders with custom slot correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="completed" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="completed" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-2" data-slot="stepper-title" class="font-medium text-default text-sm">Shipping</div>
         <div id="reka-stepper-item-description-v-3" data-slot="stepper-description" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
@@ -133,7 +133,7 @@ exports[`Stepper > renders with custom slot correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-5" aria-labelledby="reka-stepper-item-title-v-4" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full">3</span></button>
         <!--v-if-->
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-4" data-slot="stepper-title" class="font-medium text-default text-sm">Checkout</div>
         <div id="reka-stepper-item-description-v-5" data-slot="stepper-description" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
@@ -151,7 +151,7 @@ exports[`Stepper > renders with custom-wrapper slot correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="active" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-0" data-slot="stepper-title" class="font-medium text-default text-sm">Address</div>
         <div id="reka-stepper-item-description-v-1" data-slot="stepper-description" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
@@ -160,7 +160,7 @@ exports[`Stepper > renders with custom-wrapper slot correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="inactive" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-2" data-slot="stepper-title" class="font-medium text-default text-sm">Shipping</div>
         <div id="reka-stepper-item-description-v-3" data-slot="stepper-description" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
@@ -169,7 +169,7 @@ exports[`Stepper > renders with custom-wrapper slot correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-5" aria-labelledby="reka-stepper-item-title-v-4" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full">3</span></button>
         <!--v-if-->
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">Custom wrapper slot</div>
+      <div data-slot="stepper-wrapper" class="mt-1">Custom wrapper slot</div>
     </div>
   </div>
   <!--v-if-->
@@ -184,7 +184,7 @@ exports[`Stepper > renders with default slot correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="active" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-0" data-slot="stepper-title" class="font-medium text-default text-sm">Address</div>
         <div id="reka-stepper-item-description-v-1" data-slot="stepper-description" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
@@ -193,7 +193,7 @@ exports[`Stepper > renders with default slot correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="inactive" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-2" data-slot="stepper-title" class="font-medium text-default text-sm">Shipping</div>
         <div id="reka-stepper-item-description-v-3" data-slot="stepper-description" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
@@ -202,7 +202,7 @@ exports[`Stepper > renders with default slot correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-5" aria-labelledby="reka-stepper-item-title-v-4" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full">3</span></button>
         <!--v-if-->
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-4" data-slot="stepper-title" class="font-medium text-default text-sm">Checkout</div>
         <div id="reka-stepper-item-description-v-5" data-slot="stepper-description" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
@@ -220,7 +220,7 @@ exports[`Stepper > renders with defaultValue correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="completed" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="completed" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-0" data-slot="stepper-title" class="font-medium text-default text-sm">Address</div>
         <div id="reka-stepper-item-description-v-1" data-slot="stepper-description" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
@@ -229,7 +229,7 @@ exports[`Stepper > renders with defaultValue correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="active" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-2" data-slot="stepper-title" class="font-medium text-default text-sm">Shipping</div>
         <div id="reka-stepper-item-description-v-3" data-slot="stepper-description" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
@@ -238,7 +238,7 @@ exports[`Stepper > renders with defaultValue correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-5" aria-labelledby="reka-stepper-item-title-v-4" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full">3</span></button>
         <!--v-if-->
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-4" data-slot="stepper-title" class="font-medium text-default text-sm">Checkout</div>
         <div id="reka-stepper-item-description-v-5" data-slot="stepper-description" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
@@ -256,7 +256,7 @@ exports[`Stepper > renders with description slot correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="active" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-0" data-slot="stepper-title" class="font-medium text-default text-sm">Address</div>
         <div id="reka-stepper-item-description-v-1" data-slot="stepper-description" class="text-muted text-wrap text-sm">Description slot</div>
       </div>
@@ -265,7 +265,7 @@ exports[`Stepper > renders with description slot correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="inactive" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-2" data-slot="stepper-title" class="font-medium text-default text-sm">Shipping</div>
         <div id="reka-stepper-item-description-v-3" data-slot="stepper-description" class="text-muted text-wrap text-sm">Description slot</div>
       </div>
@@ -274,7 +274,7 @@ exports[`Stepper > renders with description slot correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-5" aria-labelledby="reka-stepper-item-title-v-4" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full">3</span></button>
         <!--v-if-->
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-4" data-slot="stepper-title" class="font-medium text-default text-sm">Checkout</div>
         <div id="reka-stepper-item-description-v-5" data-slot="stepper-description" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
@@ -292,7 +292,7 @@ exports[`Stepper > renders with indicator slot correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full">Indicator slot</span></button>
         <div data-orientation="horizontal" role="none" data-state="active" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-0" data-slot="stepper-title" class="font-medium text-default text-sm">Address</div>
         <div id="reka-stepper-item-description-v-1" data-slot="stepper-description" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
@@ -301,7 +301,7 @@ exports[`Stepper > renders with indicator slot correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full">Indicator slot</span></button>
         <div data-orientation="horizontal" role="none" data-state="inactive" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-2" data-slot="stepper-title" class="font-medium text-default text-sm">Shipping</div>
         <div id="reka-stepper-item-description-v-3" data-slot="stepper-description" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
@@ -310,7 +310,7 @@ exports[`Stepper > renders with indicator slot correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-5" aria-labelledby="reka-stepper-item-title-v-4" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full">Indicator slot</span></button>
         <!--v-if-->
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-4" data-slot="stepper-title" class="font-medium text-default text-sm">Checkout</div>
         <div id="reka-stepper-item-description-v-5" data-slot="stepper-description" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
@@ -328,7 +328,7 @@ exports[`Stepper > renders with items correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="active" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-0" data-slot="stepper-title" class="font-medium text-default text-sm">Address</div>
         <div id="reka-stepper-item-description-v-1" data-slot="stepper-description" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
@@ -337,7 +337,7 @@ exports[`Stepper > renders with items correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="inactive" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-2" data-slot="stepper-title" class="font-medium text-default text-sm">Shipping</div>
         <div id="reka-stepper-item-description-v-3" data-slot="stepper-description" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
@@ -346,7 +346,7 @@ exports[`Stepper > renders with items correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-5" aria-labelledby="reka-stepper-item-title-v-4" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full">3</span></button>
         <!--v-if-->
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-4" data-slot="stepper-title" class="font-medium text-default text-sm">Checkout</div>
         <div id="reka-stepper-item-description-v-5" data-slot="stepper-description" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
@@ -364,7 +364,7 @@ exports[`Stepper > renders with modelValue correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="completed" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="completed" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-0" data-slot="stepper-title" class="font-medium text-default text-sm">Address</div>
         <div id="reka-stepper-item-description-v-1" data-slot="stepper-description" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
@@ -373,7 +373,7 @@ exports[`Stepper > renders with modelValue correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="active" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-2" data-slot="stepper-title" class="font-medium text-default text-sm">Shipping</div>
         <div id="reka-stepper-item-description-v-3" data-slot="stepper-description" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
@@ -382,7 +382,7 @@ exports[`Stepper > renders with modelValue correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-5" aria-labelledby="reka-stepper-item-title-v-4" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full">3</span></button>
         <!--v-if-->
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-4" data-slot="stepper-title" class="font-medium text-default text-sm">Checkout</div>
         <div id="reka-stepper-item-description-v-5" data-slot="stepper-description" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
@@ -400,7 +400,7 @@ exports[`Stepper > renders with neutral color correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="active" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-0" data-slot="stepper-title" class="font-medium text-default text-sm">Address</div>
         <div id="reka-stepper-item-description-v-1" data-slot="stepper-description" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
@@ -409,7 +409,7 @@ exports[`Stepper > renders with neutral color correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="inactive" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-2" data-slot="stepper-title" class="font-medium text-default text-sm">Shipping</div>
         <div id="reka-stepper-item-description-v-3" data-slot="stepper-description" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
@@ -418,7 +418,7 @@ exports[`Stepper > renders with neutral color correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-5" aria-labelledby="reka-stepper-item-title-v-4" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full">3</span></button>
         <!--v-if-->
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-4" data-slot="stepper-title" class="font-medium text-default text-sm">Checkout</div>
         <div id="reka-stepper-item-description-v-5" data-slot="stepper-description" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
@@ -436,7 +436,7 @@ exports[`Stepper > renders with size lg horizontal correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-lg"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="active" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+32px)] inset-e-[calc(-50%+32px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-0" data-slot="stepper-title" class="font-medium text-default text-base">Address</div>
         <div id="reka-stepper-item-description-v-1" data-slot="stepper-description" class="text-muted text-wrap text-base">Add your address here</div>
       </div>
@@ -445,7 +445,7 @@ exports[`Stepper > renders with size lg horizontal correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-lg"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="inactive" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+32px)] inset-e-[calc(-50%+32px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-2" data-slot="stepper-title" class="font-medium text-default text-base">Shipping</div>
         <div id="reka-stepper-item-description-v-3" data-slot="stepper-description" class="text-muted text-wrap text-base">Set your preferred shipping method</div>
       </div>
@@ -454,7 +454,7 @@ exports[`Stepper > renders with size lg horizontal correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-5" aria-labelledby="reka-stepper-item-title-v-4" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-lg"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full">3</span></button>
         <!--v-if-->
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-4" data-slot="stepper-title" class="font-medium text-default text-base">Checkout</div>
         <div id="reka-stepper-item-description-v-5" data-slot="stepper-description" class="text-muted text-wrap text-base">Confirm your order</div>
       </div>
@@ -508,7 +508,7 @@ exports[`Stepper > renders with size md horizontal correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="active" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-0" data-slot="stepper-title" class="font-medium text-default text-sm">Address</div>
         <div id="reka-stepper-item-description-v-1" data-slot="stepper-description" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
@@ -517,7 +517,7 @@ exports[`Stepper > renders with size md horizontal correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="inactive" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-2" data-slot="stepper-title" class="font-medium text-default text-sm">Shipping</div>
         <div id="reka-stepper-item-description-v-3" data-slot="stepper-description" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
@@ -526,7 +526,7 @@ exports[`Stepper > renders with size md horizontal correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-5" aria-labelledby="reka-stepper-item-title-v-4" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full">3</span></button>
         <!--v-if-->
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-4" data-slot="stepper-title" class="font-medium text-default text-sm">Checkout</div>
         <div id="reka-stepper-item-description-v-5" data-slot="stepper-description" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
@@ -580,7 +580,7 @@ exports[`Stepper > renders with size sm horizontal correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-sm"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="active" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+20px)] inset-e-[calc(-50%+20px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-0" data-slot="stepper-title" class="font-medium text-default text-xs">Address</div>
         <div id="reka-stepper-item-description-v-1" data-slot="stepper-description" class="text-muted text-wrap text-xs">Add your address here</div>
       </div>
@@ -589,7 +589,7 @@ exports[`Stepper > renders with size sm horizontal correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-sm"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="inactive" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+20px)] inset-e-[calc(-50%+20px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-2" data-slot="stepper-title" class="font-medium text-default text-xs">Shipping</div>
         <div id="reka-stepper-item-description-v-3" data-slot="stepper-description" class="text-muted text-wrap text-xs">Set your preferred shipping method</div>
       </div>
@@ -598,7 +598,7 @@ exports[`Stepper > renders with size sm horizontal correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-5" aria-labelledby="reka-stepper-item-title-v-4" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-sm"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full">3</span></button>
         <!--v-if-->
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-4" data-slot="stepper-title" class="font-medium text-default text-xs">Checkout</div>
         <div id="reka-stepper-item-description-v-5" data-slot="stepper-description" class="text-muted text-wrap text-xs">Confirm your order</div>
       </div>
@@ -652,7 +652,7 @@ exports[`Stepper > renders with size xl horizontal correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-xl"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="active" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+36px)] inset-e-[calc(-50%+36px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-0" data-slot="stepper-title" class="font-medium text-default text-lg">Address</div>
         <div id="reka-stepper-item-description-v-1" data-slot="stepper-description" class="text-muted text-wrap text-lg">Add your address here</div>
       </div>
@@ -661,7 +661,7 @@ exports[`Stepper > renders with size xl horizontal correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-xl"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="inactive" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+36px)] inset-e-[calc(-50%+36px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-2" data-slot="stepper-title" class="font-medium text-default text-lg">Shipping</div>
         <div id="reka-stepper-item-description-v-3" data-slot="stepper-description" class="text-muted text-wrap text-lg">Set your preferred shipping method</div>
       </div>
@@ -670,7 +670,7 @@ exports[`Stepper > renders with size xl horizontal correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-5" aria-labelledby="reka-stepper-item-title-v-4" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-xl"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full">3</span></button>
         <!--v-if-->
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-4" data-slot="stepper-title" class="font-medium text-default text-lg">Checkout</div>
         <div id="reka-stepper-item-description-v-5" data-slot="stepper-description" class="text-muted text-wrap text-lg">Confirm your order</div>
       </div>
@@ -724,7 +724,7 @@ exports[`Stepper > renders with size xs horizontal correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-xs"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="active" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+16px)] inset-e-[calc(-50%+16px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-0" data-slot="stepper-title" class="font-medium text-default text-xs">Address</div>
         <div id="reka-stepper-item-description-v-1" data-slot="stepper-description" class="text-muted text-wrap text-xs">Add your address here</div>
       </div>
@@ -733,7 +733,7 @@ exports[`Stepper > renders with size xs horizontal correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-xs"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="inactive" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+16px)] inset-e-[calc(-50%+16px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-2" data-slot="stepper-title" class="font-medium text-default text-xs">Shipping</div>
         <div id="reka-stepper-item-description-v-3" data-slot="stepper-description" class="text-muted text-wrap text-xs">Set your preferred shipping method</div>
       </div>
@@ -742,7 +742,7 @@ exports[`Stepper > renders with size xs horizontal correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-5" aria-labelledby="reka-stepper-item-title-v-4" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-xs"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full">3</span></button>
         <!--v-if-->
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-4" data-slot="stepper-title" class="font-medium text-default text-xs">Checkout</div>
         <div id="reka-stepper-item-description-v-5" data-slot="stepper-description" class="text-muted text-wrap text-xs">Confirm your order</div>
       </div>
@@ -796,7 +796,7 @@ exports[`Stepper > renders with title slot correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="active" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-0" data-slot="stepper-title" class="font-medium text-default text-sm">Title slot</div>
         <div id="reka-stepper-item-description-v-1" data-slot="stepper-description" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
@@ -805,7 +805,7 @@ exports[`Stepper > renders with title slot correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="inactive" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-2" data-slot="stepper-title" class="font-medium text-default text-sm">Title slot</div>
         <div id="reka-stepper-item-description-v-3" data-slot="stepper-description" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
@@ -814,7 +814,7 @@ exports[`Stepper > renders with title slot correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-5" aria-labelledby="reka-stepper-item-title-v-4" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full">3</span></button>
         <!--v-if-->
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-4" data-slot="stepper-title" class="font-medium text-default text-sm">Checkout</div>
         <div id="reka-stepper-item-description-v-5" data-slot="stepper-description" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
@@ -832,7 +832,7 @@ exports[`Stepper > renders with ui correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="active" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-0" data-slot="stepper-title" class="text-default text-sm font-bold">Address</div>
         <div id="reka-stepper-item-description-v-1" data-slot="stepper-description" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
@@ -841,7 +841,7 @@ exports[`Stepper > renders with ui correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="inactive" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-2" data-slot="stepper-title" class="text-default text-sm font-bold">Shipping</div>
         <div id="reka-stepper-item-description-v-3" data-slot="stepper-description" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
@@ -850,7 +850,7 @@ exports[`Stepper > renders with ui correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-5" aria-labelledby="reka-stepper-item-title-v-4" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full">3</span></button>
         <!--v-if-->
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-4" data-slot="stepper-title" class="text-default text-sm font-bold">Checkout</div>
         <div id="reka-stepper-item-description-v-5" data-slot="stepper-description" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
@@ -868,7 +868,7 @@ exports[`Stepper > renders with valueKey correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="active" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-0" data-slot="stepper-title" class="font-medium text-default text-sm">Address</div>
         <div id="reka-stepper-item-description-v-1" data-slot="stepper-description" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
@@ -877,7 +877,7 @@ exports[`Stepper > renders with valueKey correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="inactive" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-2" data-slot="stepper-title" class="font-medium text-default text-sm">Shipping</div>
         <div id="reka-stepper-item-description-v-3" data-slot="stepper-description" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
@@ -886,7 +886,7 @@ exports[`Stepper > renders with valueKey correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-5" aria-labelledby="reka-stepper-item-title-v-4" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full">3</span></button>
         <!--v-if-->
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-4" data-slot="stepper-title" class="font-medium text-default text-sm">Checkout</div>
         <div id="reka-stepper-item-description-v-5" data-slot="stepper-description" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
@@ -904,19 +904,19 @@ exports[`Stepper > renders with wrapper slot correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="active" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">Wrapper slot</div>
+      <div data-slot="stepper-wrapper" class="mt-1">Wrapper slot</div>
     </div>
     <div data-state="inactive" data-orientation="horizontal" data-slot="stepper-item" class="group text-center relative w-full">
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="inactive" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">Wrapper slot</div>
+      <div data-slot="stepper-wrapper" class="mt-1">Wrapper slot</div>
     </div>
     <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" data-slot="stepper-item" class="group text-center relative w-full">
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-5" aria-labelledby="reka-stepper-item-title-v-4" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full">3</span></button>
         <!--v-if-->
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-4" data-slot="stepper-title" class="font-medium text-default text-sm">Checkout</div>
         <div id="reka-stepper-item-description-v-5" data-slot="stepper-description" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
@@ -934,7 +934,7 @@ exports[`Stepper > renders without linear correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="active" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-0" data-slot="stepper-title" class="font-medium text-default text-sm">Address</div>
         <div id="reka-stepper-item-description-v-1" data-slot="stepper-description" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
@@ -943,7 +943,7 @@ exports[`Stepper > renders without linear correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="stepper-icon" class="shrink-0 size-(--ui-control-icon)"></svg></span></button>
         <div data-orientation="horizontal" role="none" data-state="inactive" data-slot="stepper-separator" class="absolute rounded-full group-data-disabled:opacity-75 bg-strong group-data-[state=completed]:bg-accent top-[calc(50%-2px)] h-0.5 inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]"></div>
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-2" data-slot="stepper-title" class="font-medium text-default text-sm">Shipping</div>
         <div id="reka-stepper-item-description-v-3" data-slot="stepper-description" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
@@ -952,7 +952,7 @@ exports[`Stepper > renders without linear correctly 1`] = `
       <div data-slot="stepper-container" class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-5" aria-labelledby="reka-stepper-item-title-v-4" data-slot="stepper-trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-accent-contrast group-data-[state=active]:text-accent-contrast text-muted bg-soft focus-visible:outline-3 group-data-[state=completed]:bg-accent group-data-[state=active]:bg-accent outline-accent-focus size-(--ui-control-size) text-base"><span data-slot="stepper-indicator" class="flex items-center justify-center size-full">3</span></button>
         <!--v-if-->
       </div>
-      <div data-slot="stepper-wrapper" class="mt-(--ui-control-gap)">
+      <div data-slot="stepper-wrapper" class="mt-1">
         <div id="reka-stepper-item-title-v-4" data-slot="stepper-title" class="font-medium text-default text-sm">Checkout</div>
         <div id="reka-stepper-item-description-v-5" data-slot="stepper-description" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>

@@ -29,18 +29,17 @@ compoundVariants: [{
 
 ## Control tokens
 
-A control, a Button, a Badge or a field, does not write the padding, gap and icon size of a `size` as classes. The size sets four variables on the outermost slot, `root` where the theme has one and `base` otherwise, and plain classes read them:
+A component with a `size` does not write its padding, gap, icon size or box size as classes per size. Each `size` entry writes variables on the outermost slot, `root` where the theme has one and `base` otherwise, and the slots read them once:
 
 ```ts
 slots: {
-  base: 'inline-flex items-center',
-  leadingIcon: 'shrink-0'
+  base: 'inline-flex items-center px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)',
+  leadingIcon: 'shrink-0 size-(--ui-control-icon)'
 },
 variants: {
   size: {
     md: {
-      base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm',
-      leadingIcon: 'size-(--ui-control-icon)'
+      base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] text-sm'
     }
   },
   leading: {
@@ -49,7 +48,7 @@ variants: {
 }
 ```
 
-The classes that read the padding, the gap and the icon size stay in the `size` entry, next to the ones that write them. In the slot they would be dropped by a function slot from an app, and applied to a size an app adds without the variables. A theme without `size`, like NavigationMenu, writes and reads them in the same variant entry.
+A `size` entry holds values, never a class that reads them. A theme that extends another and replaces a slot with a function or a string has to write the readers again, since it drops the ones of the base: Select, InputMenu, InputTags, InputDate and InputTime do it for `base`. A theme without `size`, like NavigationMenu, writes the values in the slot too.
 
 A variant that reads a variable for another purpose, `square`, `leading`, `orientation`, has to be declared after the one that sets the same property, since the last variant wins: `square` after what sets the horizontal padding, `leading` and `trailing` after `square` so the room for an icon stays.
 

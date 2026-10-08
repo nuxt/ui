@@ -11,8 +11,8 @@ export default defineTheme({
     root: 'flex items-center gap-2',
     list: 'relative flex p-1 group',
     indicator: 'absolute bg-accent transition-[translate,width] duration-200 ease-out motion-reduce:transition-none',
-    trigger: 'group relative inline-flex items-center min-w-0 data-[state=inactive]:text-muted hover:data-[state=inactive]:not-disabled:text-default font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3',
-    leadingIcon: 'shrink-0',
+    trigger: 'group relative inline-flex items-center min-w-0 data-[state=inactive]:text-muted hover:data-[state=inactive]:not-disabled:text-default font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)',
+    leadingIcon: 'shrink-0 size-(--ui-control-icon)',
     leadingAvatar: 'shrink-0',
     label: 'truncate',
     trailingBadge: 'shrink-0',
@@ -46,24 +46,19 @@ export default defineTheme({
     },
     size: {
       xs: {
-        trigger: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-xs',
-        leadingIcon: 'size-(--ui-control-icon)'
+        trigger: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] text-xs'
       },
       sm: {
-        trigger: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-xs',
-        leadingIcon: 'size-(--ui-control-icon)'
+        trigger: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)] text-xs'
       },
       md: {
-        trigger: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm',
-        leadingIcon: 'size-(--ui-control-icon)'
+        trigger: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] text-sm'
       },
       lg: {
-        trigger: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm',
-        leadingIcon: 'size-(--ui-control-icon)'
+        trigger: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)] text-sm'
       },
       xl: {
-        trigger: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base',
-        leadingIcon: 'size-(--ui-control-icon)'
+        trigger: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)] text-base'
       }
     }
   },

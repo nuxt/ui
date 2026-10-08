@@ -6,13 +6,13 @@ export default defineTheme({
     content: 'min-w-32 max-h-(--reka-context-menu-content-available-height) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-context-menu-content-transform-origin) flex flex-col',
     viewport: 'relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1',
     group: 'p-1 isolate',
-    label: 'w-full flex items-center font-semibold text-strong',
+    label: 'w-full flex items-center font-semibold text-strong px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)',
     separator: '-mx-1 my-1 h-px bg-border',
-    item: 'group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75',
-    itemLeadingIcon: 'shrink-0',
+    item: 'group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)',
+    itemLeadingIcon: 'shrink-0 size-(--ui-control-icon)',
     itemLeadingAvatar: 'shrink-0',
     itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
-    itemTrailingIcon: 'shrink-0',
+    itemTrailingIcon: 'shrink-0 size-(--ui-control-icon)',
     itemTrailingKbds: 'hidden lg:inline-flex items-center shrink-0',
     itemWrapper: 'flex-1 flex flex-col text-start min-w-0',
     itemLabel: 'truncate',
@@ -39,42 +39,32 @@ export default defineTheme({
     size: {
       xs: {
         content: '[--ui-control-px:--spacing(1)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)]',
-        label: 'px-(--ui-control-px) py-(--ui-control-py) text-xs gap-(--ui-control-gap)',
-        item: 'px-(--ui-control-px) py-(--ui-control-py) text-xs gap-(--ui-control-gap)',
-        itemLeadingIcon: 'size-(--ui-control-icon)',
-        itemTrailingIcon: 'size-(--ui-control-icon)',
+        label: 'text-xs',
+        item: 'text-xs',
         itemTrailingKbds: 'gap-0.5'
       },
       sm: {
         content: '[--ui-control-px:--spacing(1.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)]',
-        label: 'px-(--ui-control-px) py-(--ui-control-py) text-xs gap-(--ui-control-gap)',
-        item: 'px-(--ui-control-px) py-(--ui-control-py) text-xs gap-(--ui-control-gap)',
-        itemLeadingIcon: 'size-(--ui-control-icon)',
-        itemTrailingIcon: 'size-(--ui-control-icon)',
+        label: 'text-xs',
+        item: 'text-xs',
         itemTrailingKbds: 'gap-0.5'
       },
       md: {
         content: '[--ui-control-px:--spacing(1.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)]',
-        label: 'px-(--ui-control-px) py-(--ui-control-py) text-sm gap-(--ui-control-gap)',
-        item: 'px-(--ui-control-px) py-(--ui-control-py) text-sm gap-(--ui-control-gap)',
-        itemLeadingIcon: 'size-(--ui-control-icon)',
-        itemTrailingIcon: 'size-(--ui-control-icon)',
+        label: 'text-sm',
+        item: 'text-sm',
         itemTrailingKbds: 'gap-0.5'
       },
       lg: {
         content: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)]',
-        label: 'px-(--ui-control-px) py-(--ui-control-py) text-sm gap-(--ui-control-gap)',
-        item: 'px-(--ui-control-px) py-(--ui-control-py) text-sm gap-(--ui-control-gap)',
-        itemLeadingIcon: 'size-(--ui-control-icon)',
-        itemTrailingIcon: 'size-(--ui-control-icon)',
+        label: 'text-sm',
+        item: 'text-sm',
         itemTrailingKbds: 'gap-1'
       },
       xl: {
         content: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)]',
-        label: 'px-(--ui-control-px) py-(--ui-control-py) text-base gap-(--ui-control-gap)',
-        item: 'px-(--ui-control-px) py-(--ui-control-py) text-base gap-(--ui-control-gap)',
-        itemLeadingIcon: 'size-(--ui-control-icon)',
-        itemTrailingIcon: 'size-(--ui-control-icon)',
+        label: 'text-base',
+        item: 'text-base',
         itemTrailingKbds: 'gap-1'
       }
     }
