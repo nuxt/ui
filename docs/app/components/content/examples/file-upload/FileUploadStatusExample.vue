@@ -2,82 +2,85 @@
 import type { FileUploadItem } from '@nuxt/ui'
 
 interface UploadFileItem extends FileUploadItem {
-  status: 'uploading' | 'complete'
   progress: number
+  preview: string
 }
 
-const files = ref<(File | UploadFileItem)[]>([{
+const uploadingAvatar = {
+  icon: 'i-lucide-loader-circle',
+  ui: { icon: 'animate-spin' }
+}
+const files = ref<UploadFileItem[]>([{
   name: 'nuxt.png',
   size: 1000,
   type: 'image/png',
-  status: 'uploading',
   progress: 0,
-  avatar: {
-    icon: 'i-lucide-loader-circle',
-    ui: {
-      icon: 'animate-spin'
-    }
-  }
+  preview: 'https://github.com/nuxt.png',
+  avatar: uploadingAvatar
 }])
+const objectUrls = new Set<string>()
 
-let completedTicks = 0
+function onUpdateFiles(value: (File | UploadFileItem)[] | null | undefined) {
+  files.value = (value || []).map((file) => {
+    if (!(file instanceof File)) return file
+
+    const preview = URL.createObjectURL(file)
+    objectUrls.add(preview)
+
+    return {
+      name: file.name,
+      size: file.size,
+      type: file.type,
+      progress: 0,
+      preview,
+      avatar: uploadingAvatar
+    }
+  })
+
+  for (const url of objectUrls) {
+    if (files.value.some(file => file.preview === url)) continue
+    URL.revokeObjectURL(url)
+    objectUrls.delete(url)
+  }
+}
 
 useIntervalFn(() => {
-  const file = files.value[0]
+  for (const file of files.value) {
+    if (file.progress === 100) continue
 
-  if (!file || !('status' in file)) {
-    return
-  }
-
-  if (file.status === 'complete') {
-    completedTicks += 1
-
-    if (completedTicks < 20) {
-      return
-    }
-
-    completedTicks = 0
-    file.status = 'uploading'
-    file.progress = 0
-    file.avatar = {
-      icon: 'i-lucide-loader-circle',
-      ui: { icon: 'animate-spin' }
-    }
-    return
-  }
-
-  file.progress += 2
-
-  if (file.progress >= 100) {
-    file.status = 'complete'
-    file.avatar = {
-      src: 'https://github.com/nuxt.png',
-      alt: 'Nuxt'
+    file.progress = Math.min(file.progress + 2, 100)
+    if (file.progress === 100) {
+      file.avatar = { src: file.preview, alt: file.name }
     }
   }
 }, 100)
+
+onScopeDispose(() => {
+  for (const url of objectUrls) URL.revokeObjectURL(url)
+})
 </script>
 
 <template>
   <UFileUpload
-    v-model="files"
+    :model-value="files"
     layout="list"
     label="Drop your images here"
     description="SVG, PNG, JPG or GIF"
     accept="image/*"
     multiple
     class="w-96 min-h-48"
+    @update:model-value="onUpdateFiles"
   >
     <template #file-trailing="{ file, index, removeFile }">
       <div class="ms-auto flex items-center gap-2">
         <UProgress
-          v-if="'status' in file && file.status === 'uploading'"
+          v-if="'progress' in file && file.progress < 100"
           :model-value="file.progress"
           size="xs"
           class="w-20"
         />
         <UIcon
-          v-else-if="'status' in file && file.status === 'complete'"
+          v-else-if="'progress' in file && file.progress === 100"
           name="i-lucide-circle-check"
           class="size-5 text-success"
         />

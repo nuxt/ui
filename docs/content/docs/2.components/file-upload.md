@@ -292,7 +292,7 @@ collapse: true
 
 ### With upload status :badge{label="Soon" class="align-text-top"}
 
-Extend `FileUploadItem` with custom fields and use the file slots to display upload progress or other asynchronous states. This example simulates progress for the initial custom item; newly selected files remain native `File` objects.
+Extend `FileUploadItem` with custom fields and use the file slots to display upload progress or other asynchronous states. This example converts selected files into custom items, simulates upload progress, and displays their image previews when complete.
 
 ::component-example
 ---
