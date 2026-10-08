@@ -16,33 +16,33 @@ export default defineTheme({
     color: colorVariant({ root: '' }),
     size: {
       xs: {
-        base: 'w-7',
-        container: 'h-4',
-        thumb: 'size-3 data-[state=checked]:translate-x-3 data-[state=checked]:rtl:-translate-x-3',
+        base: 'w-[calc(var(--ui-control-size)*2+(--spacing(1)))]',
+        container: '[--ui-control-size:--spacing(3)] h-4',
+        thumb: 'size-(--ui-control-size) data-[state=checked]:translate-x-(--ui-control-size) data-[state=checked]:rtl:-translate-x-(--ui-control-size)',
         wrapper: 'text-xs'
       },
       sm: {
-        base: 'w-8',
-        container: 'h-4',
-        thumb: 'size-3.5 data-[state=checked]:translate-x-3.5 data-[state=checked]:rtl:-translate-x-3.5',
+        base: 'w-[calc(var(--ui-control-size)*2+(--spacing(1)))]',
+        container: '[--ui-control-size:--spacing(3.5)] h-4',
+        thumb: 'size-(--ui-control-size) data-[state=checked]:translate-x-(--ui-control-size) data-[state=checked]:rtl:-translate-x-(--ui-control-size)',
         wrapper: 'text-xs'
       },
       md: {
-        base: 'w-9',
-        container: 'h-5',
-        thumb: 'size-4 data-[state=checked]:translate-x-4 data-[state=checked]:rtl:-translate-x-4',
+        base: 'w-[calc(var(--ui-control-size)*2+(--spacing(1)))]',
+        container: '[--ui-control-size:--spacing(4)] h-5',
+        thumb: 'size-(--ui-control-size) data-[state=checked]:translate-x-(--ui-control-size) data-[state=checked]:rtl:-translate-x-(--ui-control-size)',
         wrapper: 'text-sm'
       },
       lg: {
-        base: 'w-10',
-        container: 'h-5',
-        thumb: 'size-4.5 data-[state=checked]:translate-x-4.5 data-[state=checked]:rtl:-translate-x-4.5',
+        base: 'w-[calc(var(--ui-control-size)*2+(--spacing(1)))]',
+        container: '[--ui-control-size:--spacing(4.5)] h-5',
+        thumb: 'size-(--ui-control-size) data-[state=checked]:translate-x-(--ui-control-size) data-[state=checked]:rtl:-translate-x-(--ui-control-size)',
         wrapper: 'text-sm'
       },
       xl: {
-        base: 'w-11',
-        container: 'h-6',
-        thumb: 'size-5 data-[state=checked]:translate-x-5 data-[state=checked]:rtl:-translate-x-5',
+        base: 'w-[calc(var(--ui-control-size)*2+(--spacing(1)))]',
+        container: '[--ui-control-size:--spacing(5)] h-6',
+        thumb: 'size-(--ui-control-size) data-[state=checked]:translate-x-(--ui-control-size) data-[state=checked]:rtl:-translate-x-(--ui-control-size)',
         wrapper: 'text-base'
       }
     },

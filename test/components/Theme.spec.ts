@@ -551,8 +551,8 @@ describe('Theme', () => {
     // FormField-injected `size` (xl) wins over `<UTheme :props>` size (xs).
     // `useFormField` reads `_props.size` (raw, undefined here) so it falls back
     // to the FormField context — proving the proxy isn't shadowing field injection.
-    expect(wrapper.find('button[role="checkbox"]').classes()).toContain('size-5')
-    expect(wrapper.find('button[role="checkbox"]').classes()).not.toContain('size-3')
+    expect(wrapper.html()).toContain('[--ui-control-size:--spacing(5)]')
+    expect(wrapper.html()).not.toContain('[--ui-control-size:--spacing(3)]')
   })
 
   // FormField validation errors must always win over `<UTheme :props>` color.

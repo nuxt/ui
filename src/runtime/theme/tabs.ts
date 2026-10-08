@@ -46,24 +46,24 @@ export default defineTheme({
     },
     size: {
       xs: {
-        trigger: 'px-2 py-1 text-xs gap-1',
-        leadingIcon: 'size-4'
+        trigger: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-xs',
+        leadingIcon: 'size-(--ui-control-icon)'
       },
       sm: {
-        trigger: 'px-2.5 py-1.5 text-xs gap-1.5',
-        leadingIcon: 'size-4'
+        trigger: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-xs',
+        leadingIcon: 'size-(--ui-control-icon)'
       },
       md: {
-        trigger: 'px-3 py-1.5 text-sm gap-1.5',
-        leadingIcon: 'size-5'
+        trigger: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm',
+        leadingIcon: 'size-(--ui-control-icon)'
       },
       lg: {
-        trigger: 'px-3 py-2 text-sm gap-2',
-        leadingIcon: 'size-5'
+        trigger: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm',
+        leadingIcon: 'size-(--ui-control-icon)'
       },
       xl: {
-        trigger: 'px-3 py-2 text-base gap-2',
-        leadingIcon: 'size-6'
+        trigger: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base',
+        leadingIcon: 'size-(--ui-control-icon)'
       }
     }
   },

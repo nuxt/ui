@@ -13,7 +13,7 @@ export default defineTheme({
     linkLeadingChip: '',
     linkTrailing: 'group ms-auto inline-flex gap-1.5 items-center',
     linkTrailingBadge: 'shrink-0',
-    linkTrailingIcon: 'size-5 transform shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none',
+    linkTrailingIcon: 'size-(--ui-control-icon) transform shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none',
     linkLabel: 'truncate',
     linkLabelExternalIcon: 'inline-block size-3 align-top text-faint',
     childList: 'isolate',
@@ -21,7 +21,7 @@ export default defineTheme({
     childItem: '',
     childLink: 'group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3 before:outline-accent-focus',
     childLinkWrapper: 'min-w-0',
-    childLinkIcon: 'size-5 shrink-0',
+    childLinkIcon: 'size-(--ui-control-icon) shrink-0',
     childLinkLabel: 'truncate',
     childLinkLabelExternalIcon: 'inline-block size-3 align-top text-faint',
     childLinkDescription: 'text-muted',
@@ -46,7 +46,7 @@ export default defineTheme({
         item: 'py-2',
         link: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) before:inset-x-px before:inset-y-0',
         childList: 'grid p-2',
-        childLink: 'px-3 py-2 gap-2 before:inset-x-px before:inset-y-0',
+        childLink: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) before:inset-x-px before:inset-y-0',
         childLinkLabel: 'font-medium',
         content: 'absolute top-0 inset-s-0 w-full max-h-[70vh] overflow-y-auto'
       },
@@ -54,7 +54,7 @@ export default defineTheme({
         root: 'flex-col',
         link: 'flex-row [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) before:inset-y-px before:inset-x-0',
         childLabel: 'px-1.5 py-0.5',
-        childLink: 'p-1.5 gap-1.5 before:inset-y-px before:inset-x-0'
+        childLink: '[--ui-control-px:--spacing(1.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) before:inset-y-px before:inset-x-0'
       }
     },
     // Equal padding, to keep a link in place while a sidebar collapses. After

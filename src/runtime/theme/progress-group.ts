@@ -19,53 +19,53 @@ export default defineTheme({
     color: colorVariant({ indicator: 'bg-accent', itemLeadingIcon: 'text-accent', itemLeadingDot: 'bg-accent' }),
     size: {
       '2xs': {
-        root: '[--ui-control-thickness:1px]',
+        root: '[--ui-control-thickness:1px] [--ui-control-icon:--spacing(3)] [--ui-control-size:--spacing(1.5)]',
         status: 'text-xs',
         list: 'text-xs',
-        itemLeadingIcon: 'size-3',
-        itemLeadingDot: 'size-1.5'
+        itemLeadingIcon: 'size-(--ui-control-icon)',
+        itemLeadingDot: 'size-(--ui-control-size)'
       },
       'xs': {
-        root: '[--ui-control-thickness:--spacing(0.5)]',
+        root: '[--ui-control-thickness:--spacing(0.5)] [--ui-control-icon:--spacing(3)] [--ui-control-size:--spacing(1.5)]',
         status: 'text-xs',
         list: 'text-xs',
-        itemLeadingIcon: 'size-3',
-        itemLeadingDot: 'size-1.5'
+        itemLeadingIcon: 'size-(--ui-control-icon)',
+        itemLeadingDot: 'size-(--ui-control-size)'
       },
       'sm': {
-        root: '[--ui-control-thickness:--spacing(1)]',
+        root: '[--ui-control-thickness:--spacing(1)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)]',
         status: 'text-sm',
         list: 'text-sm',
-        itemLeadingIcon: 'size-4',
-        itemLeadingDot: 'size-2'
+        itemLeadingIcon: 'size-(--ui-control-icon)',
+        itemLeadingDot: 'size-(--ui-control-size)'
       },
       'md': {
-        root: '[--ui-control-thickness:--spacing(2)]',
+        root: '[--ui-control-thickness:--spacing(2)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)]',
         status: 'text-sm',
         list: 'text-sm',
-        itemLeadingIcon: 'size-4',
-        itemLeadingDot: 'size-2'
+        itemLeadingIcon: 'size-(--ui-control-icon)',
+        itemLeadingDot: 'size-(--ui-control-size)'
       },
       'lg': {
-        root: '[--ui-control-thickness:--spacing(3)]',
+        root: '[--ui-control-thickness:--spacing(3)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)]',
         status: 'text-sm',
         list: 'text-sm',
-        itemLeadingIcon: 'size-4',
-        itemLeadingDot: 'size-2'
+        itemLeadingIcon: 'size-(--ui-control-icon)',
+        itemLeadingDot: 'size-(--ui-control-size)'
       },
       'xl': {
-        root: '[--ui-control-thickness:--spacing(4)]',
+        root: '[--ui-control-thickness:--spacing(4)] [--ui-control-icon:--spacing(5)] [--ui-control-size:--spacing(2.5)]',
         status: 'text-base',
         list: 'text-base',
-        itemLeadingIcon: 'size-5',
-        itemLeadingDot: 'size-2.5'
+        itemLeadingIcon: 'size-(--ui-control-icon)',
+        itemLeadingDot: 'size-(--ui-control-size)'
       },
       '2xl': {
-        root: '[--ui-control-thickness:--spacing(5)]',
+        root: '[--ui-control-thickness:--spacing(5)] [--ui-control-icon:--spacing(5)] [--ui-control-size:--spacing(2.5)]',
         status: 'text-base',
         list: 'text-base',
-        itemLeadingIcon: 'size-5',
-        itemLeadingDot: 'size-2.5'
+        itemLeadingIcon: 'size-(--ui-control-icon)',
+        itemLeadingDot: 'size-(--ui-control-size)'
       }
     },
     orientation: {

@@ -43,52 +43,57 @@ export default extendTheme(input, {
       xs: {
         root: () => undefined,
         base: (prev: string) => [prev, input.variants.size.xs.root],
-        label: 'p-1 text-[10px]/3 gap-1',
-        item: 'p-1 text-xs gap-1',
-        itemLeadingIcon: 'size-4',
-        itemLeadingChip: 'size-4',
-        itemTrailingIcon: 'size-4',
-        empty: 'p-2 text-xs'
+        content: '[--ui-control-px:--spacing(1)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)]',
+        label: 'px-(--ui-control-px) py-(--ui-control-py) text-[10px]/3 gap-(--ui-control-gap)',
+        item: 'px-(--ui-control-px) py-(--ui-control-py) text-xs gap-(--ui-control-gap)',
+        itemLeadingIcon: 'size-(--ui-control-icon)',
+        itemLeadingChip: 'size-(--ui-control-icon)',
+        itemTrailingIcon: 'size-(--ui-control-icon)',
+        empty: 'px-[calc(var(--ui-control-px)+(--spacing(1)))] py-[calc(var(--ui-control-py)+(--spacing(1)))] text-xs'
       },
       sm: {
         root: () => undefined,
         base: (prev: string) => [prev, input.variants.size.sm.root],
-        label: 'p-1.5 text-[10px]/3 gap-1.5',
-        item: 'p-1.5 text-xs gap-1.5',
-        itemLeadingIcon: 'size-4',
-        itemLeadingChip: 'size-4',
-        itemTrailingIcon: 'size-4',
-        empty: 'p-2.5 text-xs'
+        content: '[--ui-control-px:--spacing(1.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)]',
+        label: 'px-(--ui-control-px) py-(--ui-control-py) text-[10px]/3 gap-(--ui-control-gap)',
+        item: 'px-(--ui-control-px) py-(--ui-control-py) text-xs gap-(--ui-control-gap)',
+        itemLeadingIcon: 'size-(--ui-control-icon)',
+        itemLeadingChip: 'size-(--ui-control-icon)',
+        itemTrailingIcon: 'size-(--ui-control-icon)',
+        empty: 'px-[calc(var(--ui-control-px)+(--spacing(1)))] py-[calc(var(--ui-control-py)+(--spacing(1)))] text-xs'
       },
       md: {
         root: () => undefined,
         base: (prev: string) => [prev, input.variants.size.md.root],
-        label: 'p-1.5 text-xs gap-1.5',
-        item: 'p-1.5 text-sm gap-1.5',
-        itemLeadingIcon: 'size-5',
-        itemLeadingChip: 'size-5',
-        itemTrailingIcon: 'size-5',
-        empty: 'p-2.5 text-sm'
+        content: '[--ui-control-px:--spacing(1.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)]',
+        label: 'px-(--ui-control-px) py-(--ui-control-py) text-xs gap-(--ui-control-gap)',
+        item: 'px-(--ui-control-px) py-(--ui-control-py) text-sm gap-(--ui-control-gap)',
+        itemLeadingIcon: 'size-(--ui-control-icon)',
+        itemLeadingChip: 'size-(--ui-control-icon)',
+        itemTrailingIcon: 'size-(--ui-control-icon)',
+        empty: 'px-[calc(var(--ui-control-px)+(--spacing(1)))] py-[calc(var(--ui-control-py)+(--spacing(1)))] text-sm'
       },
       lg: {
         root: () => undefined,
         base: (prev: string) => [prev, input.variants.size.lg.root],
-        label: 'p-2 text-xs gap-2',
-        item: 'p-2 text-sm gap-2',
-        itemLeadingIcon: 'size-5',
-        itemLeadingChip: 'size-5',
-        itemTrailingIcon: 'size-5',
-        empty: 'p-3 text-sm'
+        content: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)]',
+        label: 'px-(--ui-control-px) py-(--ui-control-py) text-xs gap-(--ui-control-gap)',
+        item: 'px-(--ui-control-px) py-(--ui-control-py) text-sm gap-(--ui-control-gap)',
+        itemLeadingIcon: 'size-(--ui-control-icon)',
+        itemLeadingChip: 'size-(--ui-control-icon)',
+        itemTrailingIcon: 'size-(--ui-control-icon)',
+        empty: 'px-[calc(var(--ui-control-px)+(--spacing(1)))] py-[calc(var(--ui-control-py)+(--spacing(1)))] text-sm'
       },
       xl: {
         root: () => undefined,
         base: (prev: string) => [prev, input.variants.size.xl.root],
-        label: 'p-2 text-sm gap-2',
-        item: 'p-2 text-base gap-2',
-        itemLeadingIcon: 'size-6',
-        itemLeadingChip: 'size-6',
-        itemTrailingIcon: 'size-6',
-        empty: 'p-3 text-base'
+        content: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)]',
+        label: 'px-(--ui-control-px) py-(--ui-control-py) text-sm gap-(--ui-control-gap)',
+        item: 'px-(--ui-control-px) py-(--ui-control-py) text-base gap-(--ui-control-gap)',
+        itemLeadingIcon: 'size-(--ui-control-icon)',
+        itemLeadingChip: 'size-(--ui-control-icon)',
+        itemTrailingIcon: 'size-(--ui-control-icon)',
+        empty: 'px-[calc(var(--ui-control-px)+(--spacing(1)))] py-[calc(var(--ui-control-py)+(--spacing(1)))] text-base'
       }
     },
     position: {

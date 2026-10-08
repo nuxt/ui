@@ -117,7 +117,7 @@ describe('\'*\' default variants', () => {
     })
 
     expect(wrapper.find('[data-slot="button"]').classes()).toContain('text-base')
-    expect(wrapper.find('[data-slot="kbd"]').classes()).toContain('h-5')
+    expect(wrapper.find('[data-slot="kbd"]').classes()).toContain('[--ui-control-size:--spacing(5)]')
   })
 
   it('reaches components with generic props', async () => {

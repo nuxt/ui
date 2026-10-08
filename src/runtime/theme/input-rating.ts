@@ -20,24 +20,24 @@ export default defineTheme({
     },
     size: {
       xs: {
-        item: 'size-3',
-        icon: 'size-3'
+        item: '[--ui-control-size:--spacing(3)] size-(--ui-control-size)',
+        icon: 'size-(--ui-control-size)'
       },
       sm: {
-        item: 'size-4',
-        icon: 'size-4'
+        item: '[--ui-control-size:--spacing(4)] size-(--ui-control-size)',
+        icon: 'size-(--ui-control-size)'
       },
       md: {
-        item: 'size-5',
-        icon: 'size-5'
+        item: '[--ui-control-size:--spacing(5)] size-(--ui-control-size)',
+        icon: 'size-(--ui-control-size)'
       },
       lg: {
-        item: 'size-6',
-        icon: 'size-6'
+        item: '[--ui-control-size:--spacing(6)] size-(--ui-control-size)',
+        icon: 'size-(--ui-control-size)'
       },
       xl: {
-        item: 'size-7',
-        icon: 'size-7'
+        item: '[--ui-control-size:--spacing(7)] size-(--ui-control-size)',
+        icon: 'size-(--ui-control-size)'
       }
     },
     color: colorVariant({ root: '' }),

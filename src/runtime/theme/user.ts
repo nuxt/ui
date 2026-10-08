@@ -31,50 +31,50 @@ export default defineTheme({
     },
     size: {
       '3xs': {
-        root: 'gap-1',
-        wrapper: 'flex items-center gap-1',
+        root: '[--ui-control-gap:--spacing(1)] gap-(--ui-control-gap)',
+        wrapper: 'flex items-center gap-(--ui-control-gap)',
         name: 'text-xs',
         description: 'text-xs'
       },
       '2xs': {
-        root: 'gap-1.5',
-        wrapper: 'flex items-center gap-1.5',
+        root: '[--ui-control-gap:--spacing(1.5)] gap-(--ui-control-gap)',
+        wrapper: 'flex items-center gap-(--ui-control-gap)',
         name: 'text-xs',
         description: 'text-xs'
       },
       'xs': {
-        root: 'gap-1.5',
-        wrapper: 'flex items-center gap-1.5',
+        root: '[--ui-control-gap:--spacing(1.5)] gap-(--ui-control-gap)',
+        wrapper: 'flex items-center gap-(--ui-control-gap)',
         name: 'text-xs',
         description: 'text-xs'
       },
       'sm': {
-        root: 'gap-2',
+        root: '[--ui-control-gap:--spacing(2)] gap-(--ui-control-gap)',
         name: 'text-xs',
         description: 'text-xs'
       },
       'md': {
-        root: 'gap-2',
+        root: '[--ui-control-gap:--spacing(2)] gap-(--ui-control-gap)',
         name: 'text-sm',
         description: 'text-xs'
       },
       'lg': {
-        root: 'gap-2.5',
+        root: '[--ui-control-gap:--spacing(2.5)] gap-(--ui-control-gap)',
         name: 'text-sm',
         description: 'text-sm'
       },
       'xl': {
-        root: 'gap-2.5',
+        root: '[--ui-control-gap:--spacing(2.5)] gap-(--ui-control-gap)',
         name: 'text-base',
         description: 'text-sm'
       },
       '2xl': {
-        root: 'gap-3',
+        root: '[--ui-control-gap:--spacing(3)] gap-(--ui-control-gap)',
         name: 'text-base',
         description: 'text-base'
       },
       '3xl': {
-        root: 'gap-3',
+        root: '[--ui-control-gap:--spacing(3)] gap-(--ui-control-gap)',
         name: 'text-lg',
         description: 'text-base'
       }

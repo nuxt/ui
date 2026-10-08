@@ -23,33 +23,33 @@ export default defineTheme({
     size: {
       xs: {
         listWithChildren: 'ms-4',
-        link: 'px-2 py-1 text-xs gap-1',
-        linkLeadingIcon: 'size-4',
-        linkTrailingIcon: 'size-4'
+        link: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-xs',
+        linkLeadingIcon: 'size-(--ui-control-icon)',
+        linkTrailingIcon: 'size-(--ui-control-icon)'
       },
       sm: {
         listWithChildren: 'ms-4.5',
-        link: 'px-2.5 py-1.5 text-xs gap-1.5',
-        linkLeadingIcon: 'size-4',
-        linkTrailingIcon: 'size-4'
+        link: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-xs',
+        linkLeadingIcon: 'size-(--ui-control-icon)',
+        linkTrailingIcon: 'size-(--ui-control-icon)'
       },
       md: {
         listWithChildren: 'ms-5',
-        link: 'px-2.5 py-1.5 text-sm gap-1.5',
-        linkLeadingIcon: 'size-5',
-        linkTrailingIcon: 'size-5'
+        link: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm',
+        linkLeadingIcon: 'size-(--ui-control-icon)',
+        linkTrailingIcon: 'size-(--ui-control-icon)'
       },
       lg: {
         listWithChildren: 'ms-5.5',
-        link: 'px-3 py-2 text-sm gap-2',
-        linkLeadingIcon: 'size-5',
-        linkTrailingIcon: 'size-5'
+        link: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm',
+        linkLeadingIcon: 'size-(--ui-control-icon)',
+        linkTrailingIcon: 'size-(--ui-control-icon)'
       },
       xl: {
         listWithChildren: 'ms-6',
-        link: 'px-3 py-2 text-base gap-2',
-        linkLeadingIcon: 'size-6',
-        linkTrailingIcon: 'size-6'
+        link: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base',
+        linkLeadingIcon: 'size-(--ui-control-icon)',
+        linkTrailingIcon: 'size-(--ui-control-icon)'
       }
     },
     selected: {

@@ -10,19 +10,19 @@ export default defineTheme({
   variants: {
     size: {
       xs: {
-        base: 'size-6 text-sm/4'
+        base: '[--ui-control-size:--spacing(6)] size-(--ui-control-size) text-sm/4'
       },
       sm: {
-        base: 'size-7 text-sm/4'
+        base: '[--ui-control-size:--spacing(7)] size-(--ui-control-size) text-sm/4'
       },
       md: {
-        base: 'size-8 text-base/5'
+        base: '[--ui-control-size:--spacing(8)] size-(--ui-control-size) text-base/5'
       },
       lg: {
-        base: 'size-9 text-base/5'
+        base: '[--ui-control-size:--spacing(9)] size-(--ui-control-size) text-base/5'
       },
       xl: {
-        base: 'size-10 text-base'
+        base: '[--ui-control-size:--spacing(10)] size-(--ui-control-size) text-base'
       }
     },
     variant: {

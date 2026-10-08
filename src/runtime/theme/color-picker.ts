@@ -13,24 +13,29 @@ export default defineTheme({
   variants: {
     size: {
       xs: {
-        selector: 'size-38',
-        track: 'h-38'
+        root: '[--ui-control-size:--spacing(38)]',
+        selector: 'size-(--ui-control-size)',
+        track: 'h-(--ui-control-size)'
       },
       sm: {
-        selector: 'size-40',
-        track: 'h-40'
+        root: '[--ui-control-size:--spacing(40)]',
+        selector: 'size-(--ui-control-size)',
+        track: 'h-(--ui-control-size)'
       },
       md: {
-        selector: 'size-42',
-        track: 'h-42'
+        root: '[--ui-control-size:--spacing(42)]',
+        selector: 'size-(--ui-control-size)',
+        track: 'h-(--ui-control-size)'
       },
       lg: {
-        selector: 'size-44',
-        track: 'h-44'
+        root: '[--ui-control-size:--spacing(44)]',
+        selector: 'size-(--ui-control-size)',
+        track: 'h-(--ui-control-size)'
       },
       xl: {
-        selector: 'size-46',
-        track: 'h-46'
+        root: '[--ui-control-size:--spacing(46)]',
+        selector: 'size-(--ui-control-size)',
+        track: 'h-(--ui-control-size)'
       }
     }
   },

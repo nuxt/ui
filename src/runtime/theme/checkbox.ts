@@ -44,36 +44,36 @@ export default defineTheme({
     },
     size: {
       xs: {
-        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(2.5)] [--ui-control-icon:--spacing(2.5)]',
-        base: 'size-3',
+        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(2.5)] [--ui-control-icon:--spacing(2.5)] [--ui-control-size:--spacing(3)]',
+        base: 'size-(--ui-control-size)',
         icon: 'size-(--ui-control-icon)',
         container: 'h-4',
         wrapper: 'text-xs'
       },
       sm: {
-        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(3)] [--ui-control-icon:--spacing(3)]',
-        base: 'size-3.5',
+        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(3)] [--ui-control-icon:--spacing(3)] [--ui-control-size:--spacing(3.5)]',
+        base: 'size-(--ui-control-size)',
         icon: 'size-(--ui-control-icon)',
         container: 'h-4',
         wrapper: 'text-xs'
       },
       md: {
-        root: '[--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]',
-        base: 'size-4',
+        root: '[--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)] [--ui-control-size:--spacing(4)]',
+        base: 'size-(--ui-control-size)',
         icon: 'size-(--ui-control-icon)',
         container: 'h-5',
         wrapper: 'text-sm'
       },
       lg: {
-        root: '[--ui-control-px:--spacing(4)] [--ui-control-py:--spacing(4)] [--ui-control-icon:--spacing(4)]',
-        base: 'size-4.5',
+        root: '[--ui-control-px:--spacing(4)] [--ui-control-py:--spacing(4)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(4.5)]',
+        base: 'size-(--ui-control-size)',
         icon: 'size-(--ui-control-icon)',
         container: 'h-5',
         wrapper: 'text-sm'
       },
       xl: {
-        root: '[--ui-control-px:--spacing(4.5)] [--ui-control-py:--spacing(4.5)] [--ui-control-icon:--spacing(4.5)]',
-        base: 'size-5',
+        root: '[--ui-control-px:--spacing(4.5)] [--ui-control-py:--spacing(4.5)] [--ui-control-icon:--spacing(4.5)] [--ui-control-size:--spacing(5)]',
+        base: 'size-(--ui-control-size)',
         icon: 'size-(--ui-control-icon)',
         container: 'h-6',
         wrapper: 'text-base'

@@ -56,46 +56,46 @@ export default defineTheme({
     },
     size: {
       xs: {
-        fieldset: 'gap-y-0.5',
-        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(2.5)] [--ui-control-icon:--spacing(3)]',
+        fieldset: 'gap-y-(--ui-control-gap)',
+        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(2.5)] [--ui-control-icon:--spacing(3)] [--ui-control-gap:--spacing(0.5)] [--ui-control-size:--spacing(3)]',
         legend: 'text-xs',
-        base: 'size-3',
+        base: 'size-(--ui-control-size)',
         item: 'text-xs',
         container: 'h-4',
         indicator: 'after:size-1'
       },
       sm: {
-        fieldset: 'gap-y-0.5',
-        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(3)] [--ui-control-icon:--spacing(3.5)]',
+        fieldset: 'gap-y-(--ui-control-gap)',
+        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(3)] [--ui-control-icon:--spacing(3.5)] [--ui-control-gap:--spacing(0.5)] [--ui-control-size:--spacing(3.5)]',
         legend: 'text-xs',
-        base: 'size-3.5',
+        base: 'size-(--ui-control-size)',
         item: 'text-xs',
         container: 'h-4',
         indicator: 'after:size-1'
       },
       md: {
-        fieldset: 'gap-y-1',
-        root: '[--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)]',
+        fieldset: 'gap-y-(--ui-control-gap)',
+        root: '[--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4)]',
         legend: 'text-sm',
-        base: 'size-4',
+        base: 'size-(--ui-control-size)',
         item: 'text-sm',
         container: 'h-5',
         indicator: 'after:size-1.5'
       },
       lg: {
-        fieldset: 'gap-y-1',
-        root: '[--ui-control-px:--spacing(4)] [--ui-control-py:--spacing(4)] [--ui-control-icon:--spacing(4.5)]',
+        fieldset: 'gap-y-(--ui-control-gap)',
+        root: '[--ui-control-px:--spacing(4)] [--ui-control-py:--spacing(4)] [--ui-control-icon:--spacing(4.5)] [--ui-control-gap:--spacing(1)] [--ui-control-size:--spacing(4.5)]',
         legend: 'text-sm',
-        base: 'size-4.5',
+        base: 'size-(--ui-control-size)',
         item: 'text-sm',
         container: 'h-5',
         indicator: 'after:size-1.5'
       },
       xl: {
-        fieldset: 'gap-y-1.5',
-        root: '[--ui-control-px:--spacing(4.5)] [--ui-control-py:--spacing(4.5)] [--ui-control-icon:--spacing(5)]',
+        fieldset: 'gap-y-(--ui-control-gap)',
+        root: '[--ui-control-px:--spacing(4.5)] [--ui-control-py:--spacing(4.5)] [--ui-control-icon:--spacing(5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-size:--spacing(5)]',
         legend: 'text-base',
-        base: 'size-5',
+        base: 'size-(--ui-control-size)',
         item: 'text-base',
         container: 'h-6',
         indicator: 'after:size-2'

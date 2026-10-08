@@ -34,23 +34,23 @@ export default defineTheme({
     },
     size: {
       xs: {
-        fieldset: 'gap-y-0.5',
+        fieldset: '[--ui-control-gap:--spacing(0.5)] gap-y-(--ui-control-gap)',
         legend: 'text-xs'
       },
       sm: {
-        fieldset: 'gap-y-0.5',
+        fieldset: '[--ui-control-gap:--spacing(0.5)] gap-y-(--ui-control-gap)',
         legend: 'text-xs'
       },
       md: {
-        fieldset: 'gap-y-1',
+        fieldset: '[--ui-control-gap:--spacing(1)] gap-y-(--ui-control-gap)',
         legend: 'text-sm'
       },
       lg: {
-        fieldset: 'gap-y-1',
+        fieldset: '[--ui-control-gap:--spacing(1)] gap-y-(--ui-control-gap)',
         legend: 'text-sm'
       },
       xl: {
-        fieldset: 'gap-y-1.5',
+        fieldset: '[--ui-control-gap:--spacing(1.5)] gap-y-(--ui-control-gap)',
         legend: 'text-base'
       }
     },

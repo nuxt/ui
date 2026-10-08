@@ -18,29 +18,34 @@ export default defineTheme({
   variants: {
     size: {
       xs: {
-        label: 'p-1 text-[10px]/3 gap-1',
-        item: 'p-1 text-xs gap-1',
-        itemLeadingIcon: 'size-4 text-sm'
+        content: '[--ui-control-px:--spacing(1)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)]',
+        label: 'px-(--ui-control-px) py-(--ui-control-py) text-[10px]/3 gap-(--ui-control-gap)',
+        item: 'px-(--ui-control-px) py-(--ui-control-py) text-xs gap-(--ui-control-gap)',
+        itemLeadingIcon: 'size-(--ui-control-icon) text-sm'
       },
       sm: {
-        label: 'p-1.5 text-[10px]/3 gap-1.5',
-        item: 'p-1.5 text-xs gap-1.5',
-        itemLeadingIcon: 'size-4 text-sm'
+        content: '[--ui-control-px:--spacing(1.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)]',
+        label: 'px-(--ui-control-px) py-(--ui-control-py) text-[10px]/3 gap-(--ui-control-gap)',
+        item: 'px-(--ui-control-px) py-(--ui-control-py) text-xs gap-(--ui-control-gap)',
+        itemLeadingIcon: 'size-(--ui-control-icon) text-sm'
       },
       md: {
-        label: 'p-1.5 text-xs gap-1.5',
-        item: 'p-1.5 text-sm gap-1.5',
-        itemLeadingIcon: 'size-5 text-base'
+        content: '[--ui-control-px:--spacing(1.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)]',
+        label: 'px-(--ui-control-px) py-(--ui-control-py) text-xs gap-(--ui-control-gap)',
+        item: 'px-(--ui-control-px) py-(--ui-control-py) text-sm gap-(--ui-control-gap)',
+        itemLeadingIcon: 'size-(--ui-control-icon) text-base'
       },
       lg: {
-        label: 'p-2 text-xs gap-2',
-        item: 'p-2 text-sm gap-2',
-        itemLeadingIcon: 'size-5 text-base'
+        content: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)]',
+        label: 'px-(--ui-control-px) py-(--ui-control-py) text-xs gap-(--ui-control-gap)',
+        item: 'px-(--ui-control-px) py-(--ui-control-py) text-sm gap-(--ui-control-gap)',
+        itemLeadingIcon: 'size-(--ui-control-icon) text-base'
       },
       xl: {
-        label: 'p-2 text-sm gap-2',
-        item: 'p-2 text-base gap-2',
-        itemLeadingIcon: 'size-6 text-xl'
+        content: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)]',
+        label: 'px-(--ui-control-px) py-(--ui-control-py) text-sm gap-(--ui-control-gap)',
+        item: 'px-(--ui-control-px) py-(--ui-control-py) text-base gap-(--ui-control-gap)',
+        itemLeadingIcon: 'size-(--ui-control-icon) text-xl'
       }
     },
     active: {
