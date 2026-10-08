@@ -93,6 +93,21 @@ describe('Toast', () => {
     expect(wrapper.findComponent(ToastProvider).props('limit')).toBeUndefined()
   })
 
+  it.each(['vertical', 'horizontal'] as const)('keeps the toast open when an action has closeOnClick false with orientation %s', async (orientation) => {
+    const wrapper = await mountSuspended(ToastWrapper, {
+      props: { title: 'Toast', orientation, actions: [{ label: 'Keep', closeOnClick: false }, { label: 'Close' }] }
+    })
+
+    const [keep, close] = wrapper.findAll('[data-slot="actions"] button')
+    expect(keep!.attributes('closeonclick')).toBeUndefined()
+
+    await keep!.trigger('click')
+    expect(wrapper.findComponent(Toast).emitted('update:open')).toBeUndefined()
+
+    await close!.trigger('click')
+    expect(wrapper.findComponent(Toast).emitted('update:open')).toEqual([[false]])
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(ToastWrapper, {
       props: {

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { ContentNavigationItem } from '@nuxt/content'
+
 const route = useRoute()
 
 const { open: chatOpen } = useChat()
@@ -45,7 +47,7 @@ defineShortcuts({
   }
 })
 
-const { data: navigation } = await useFetch('/api/navigation.json')
+const { data: navigation } = await useFetch<ContentNavigationItem[]>('/api/navigation.json')
 
 useHead({
   meta: [
