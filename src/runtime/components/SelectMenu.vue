@@ -601,7 +601,7 @@ function onFocusOutside(event: Event) {
 
   event.preventDefault()
 
-  const input = searchInputProps.value.autofocus !== false ? el.querySelector<HTMLElement>('[data-slot="input"] input') : null
+  const input = searchInputProps.value.autofocus !== false ? el.querySelector<HTMLElement>('[data-slot="select-menu-input"] input') : null
   const target = input ?? el
   target.focus({ preventScroll: true })
 }
@@ -772,7 +772,7 @@ defineExpose({
               />
             </ComboboxCancel>
 
-            <UIcon v-else-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, leading: isLeading })" />
+            <UIcon v-else-if="trailingIconName" :name="trailingIconName" data-slot="select-menu-trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, leading: isLeading })" />
           </slot>
         </span>
       </ComboboxTrigger>
@@ -781,7 +781,7 @@ defineExpose({
     <ComboboxPortal v-bind="portalProps">
       <FieldGroupReset>
         <ComboboxContent
-          data-slot="content"
+          data-slot="select-menu-content"
           :class="ui.content({ class: props.ui?.content })"
           v-bind="contentProps"
           :role="undefined"
@@ -792,7 +792,7 @@ defineExpose({
           <FocusScope
             ref="focusScopeRef"
             loop
-            data-slot="focusScope"
+            data-slot="select-menu-focusScope"
             :class="ui.focusScope({ class: props.ui?.focusScope })"
             @mount-auto-focus="onMountAutoFocus"
             @unmount-auto-focus="onUnmountAutoFocus"

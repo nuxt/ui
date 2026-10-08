@@ -46,7 +46,7 @@ describe('InputNumber', () => {
   it.each(['increment', 'decrement'])('starts from startingValue on the first %s of an empty field', async (slot) => {
     const wrapper = await mountSuspended(InputNumber, { props: { startingValue: 18 } })
 
-    const button = wrapper.find(`[data-slot="${slot}"] button`)
+    const button = wrapper.find(`[data-slot="input-number-${slot}"] button`)
     await button.trigger('pointerdown', { button: 0, pointerType: 'mouse' })
     await button.trigger('pointerup', { button: 0, pointerType: 'mouse' })
 
