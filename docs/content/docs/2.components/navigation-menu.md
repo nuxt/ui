@@ -901,7 +901,7 @@ props:
 ---
 ::
 
-### Viewport :badge{label="Soon" class="align-text-top"}
+### Viewport
 
 Use the `viewport` prop to control how the NavigationMenu viewport is rendered, like its `align` for example.
 

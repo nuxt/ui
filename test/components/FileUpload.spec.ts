@@ -295,7 +295,7 @@ describe('FileUpload', () => {
       const wrapper = mount(FileUpload, { props: { accept: 'image/*' }, attachTo: document.body })
       const file = new File(['foo'], 'file.pdf', { type: 'application/pdf' })
       const dataTransfer = { items: [{ kind: 'file', type: file.type }], files: [file] }
-      await wrapper.find('[data-slot="base"]').trigger('drop', { dataTransfer })
+      await wrapper.find('[data-slot="file-upload-base"]').trigger('drop', { dataTransfer })
       expect(wrapper.emitted('reject')?.[0]).toEqual([[file]])
       expect(wrapper.emitted('update:modelValue')).toBeFalsy()
       wrapper.unmount()

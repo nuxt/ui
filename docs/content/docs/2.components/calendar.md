@@ -265,7 +265,7 @@ props:
 ---
 ::
 
-### Years Per Page :badge{label="Soon" class="align-text-top"}
+### Years Per Page
 
 Use the `years-per-page` prop to change the number of years displayed in the year view. Defaults to `12`.
 

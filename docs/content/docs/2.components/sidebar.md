@@ -277,7 +277,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.cl
 :::
 ::
 
-### Breakpoint :badge{label="Soon" class="align-text-top"}
+### Breakpoint
 
 Use the `breakpoint` prop to change the breakpoint below which the sidebar renders as a menu. Defaults to `lg`.
 

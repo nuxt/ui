@@ -298,7 +298,7 @@ describe('SelectMenu', () => {
       await flushPromises()
       await new Promise(resolve => setTimeout(resolve))
 
-      const input = wrapper.find('[data-slot="input"] input')
+      const input = wrapper.find('[data-slot="select-menu-input"] input')
 
       button.focus()
       await flushPromises()

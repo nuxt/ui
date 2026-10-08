@@ -78,8 +78,8 @@ describe('Toast', () => {
     toast.add({ title: 'Back' })
     toast.add({ title: 'Front' })
 
-    await vi.waitFor(() => expect(wrapper.findAll('li[data-slot="base"]')).toHaveLength(2), { timeout: 4000 })
-    const [back, front] = wrapper.findAll('li[data-slot="base"]')
+    await vi.waitFor(() => expect(wrapper.findAll('li[data-slot="toaster-base"]')).toHaveLength(2), { timeout: 4000 })
+    const [back, front] = wrapper.findAll('li[data-slot="toaster-base"]')
 
     expect([back!.attributes('data-collapsed'), back!.attributes('data-front')]).toEqual(['true', 'false'])
     expect([front!.attributes('data-collapsed'), front!.attributes('data-front')]).toEqual(['true', 'true'])
@@ -98,7 +98,7 @@ describe('Toast', () => {
       props: { title: 'Toast', orientation, actions: [{ label: 'Keep', closeOnClick: false }, { label: 'Close' }] }
     })
 
-    const [keep, close] = wrapper.findAll('[data-slot="actions"] button')
+    const [keep, close] = wrapper.findAll('[data-slot="toast-actions"] button')
     expect(keep!.attributes('closeonclick')).toBeUndefined()
 
     await keep!.trigger('click')

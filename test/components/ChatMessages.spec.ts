@@ -60,7 +60,7 @@ describe('ChatMessages', () => {
     wrapper.element.dispatchEvent(new Event('scroll'))
     await nextTick()
 
-    const button = wrapper.find('[data-slot="autoScroll"]')
+    const button = wrapper.find('[data-slot="chat-messages-autoScroll"]')
     expect(button.attributes('aria-label')).toBe('Scroll to bottom')
     expect(await axe(wrapper.element)).toHaveNoViolations()
 

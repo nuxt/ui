@@ -52,7 +52,7 @@ describe('Header', () => {
 
     expect(wrapper.findComponent(Modal).exists()).toBe(false)
 
-    await wrapper.find('[data-slot="toggle"]').trigger('click')
+    await wrapper.find('[data-slot="header-toggle"]').trigger('click')
     await vi.dynamicImportSettled()
 
     expect(wrapper.find('[role="dialog"]').text()).toContain('Body slot')
