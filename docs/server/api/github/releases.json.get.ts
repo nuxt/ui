@@ -1,3 +1,6 @@
+import { defineCachedEventHandler } from 'nitropack/runtime'
+import { fetchReleases } from '../../utils/releases'
+
 /** Every release of nuxt/ui, newest first, v2 left out. The notes are served per release by releases/[tag]. */
 export default defineCachedEventHandler(async () => {
   return (await fetchReleases()).map(({ markdown, ...release }) => release)

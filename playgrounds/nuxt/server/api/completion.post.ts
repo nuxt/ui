@@ -1,9 +1,10 @@
+import { defineEventHandler, readBody, createError } from 'nuxt/server'
 import { streamText, createTextStreamResponse } from 'ai'
 
 export default defineEventHandler(async (event) => {
-  const { prompt, mode, language } = await readBody(event)
+  const { prompt, mode, language } = await readBody<{ prompt?: string, mode?: string, language?: string }>(event)
   if (!prompt) {
-    throw createError({ statusCode: 400, message: 'Prompt is required' })
+    throw createError({ status: 400, message: 'Prompt is required' })
   }
 
   let instructions: string

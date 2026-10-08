@@ -1,6 +1,12 @@
+import { defineMcpTool } from '@nuxtjs/mcp-toolkit/server'
+import { useEvent } from 'nitropack/runtime'
+import { createError } from 'h3'
 import { z } from 'zod'
 import { kebabCase } from 'scule'
 import { queryCollection } from '@nuxt/content/server'
+import { normalizeComponentName } from '../../utils/normalizeComponentName'
+import { fetchComponentMetadata } from '../../utils/componentMeta'
+import { SITE_URL } from '../../utils/site'
 
 export default defineMcpTool({
   description: 'Retrieves metadata for a Nuxt UI component including props, slots, and events. Props are compact by default, pass `full: true` to get the raw recursive prop schemas (very large). Use this over `get-component` when you need structured props, slots and events rather than prose documentation.',

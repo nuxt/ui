@@ -12,6 +12,7 @@ import { compactProps, getDefaultVariants, hasLinkPassthrough, partitionLinkProp
 import { fencedBlock, pipeTable } from './markdown'
 // @ts-expect-error - no types available
 import { getComponentExample } from '#component-example/nitro'
+import { SITE_URL } from './site'
 
 type ComponentAttributes = {
   'slug'?: string
