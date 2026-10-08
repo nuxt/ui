@@ -704,7 +704,7 @@ defineExpose({
               />
             </ComboboxCancel>
 
-            <UIcon v-else-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+            <UIcon v-else-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, leading: isLeading })" />
           </slot>
         </span>
       </ComboboxTrigger>
