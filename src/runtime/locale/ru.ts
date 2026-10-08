@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Далее',
       prev: 'Назад'
     },
+    chatMessages: {
+      autoScroll: 'Прокрутить вниз'
+    },
     chatPrompt: {
       placeholder: 'Введите ваше сообщение здесь…'
     },
     chatPromptSubmit: {
-      label: 'Отправить'
+      label: 'Отправить',
+      reload: 'Повторить',
+      stop: 'Остановить генерацию'
     },
     chatReasoning: {
       thinking: 'Размышляет…',
@@ -111,6 +116,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Закрыть'
+    },
+    pagination: {
+      first: 'Первая страница',
+      last: 'Последняя страница',
+      next: 'Следующая страница',
+      page: 'Страница {page}',
+      prev: 'Предыдущая страница'
     },
     pricingTable: {
       caption: 'Сравнение ценных планов'

@@ -152,6 +152,13 @@ const statusButtonProps = computed(() => ({
   }
 } satisfies { [key: string]: ButtonProps })[props.status])
 
+const ariaLabel = computed(() => ({
+  ready: t('chatPromptSubmit.label'),
+  submitted: t('chatPromptSubmit.stop'),
+  streaming: t('chatPromptSubmit.stop'),
+  error: t('chatPromptSubmit.reload')
+})[props.status])
+
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)())
 </script>
@@ -163,7 +170,7 @@ const ui = computed(() => tv(theme, overrides.value)())
       ...buttonProps,
       ...statusButtonProps,
       disabled,
-      'aria-label': t('chatPromptSubmit.label'),
+      'aria-label': ariaLabel,
       ...$attrs
     }"
     :class="ui.base({ class: [props.ui?.base, props.class] })"

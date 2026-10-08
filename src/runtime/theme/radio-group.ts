@@ -25,10 +25,10 @@ export default defineTheme({
       },
       card: {
         fieldset: 'flex-wrap',
-        item: `border border-default rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft`
+        item: `border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft`
       },
       table: {
-        item: `border border-default hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent/50 has-data-[state=checked]:z-[2]`
+        item: `border border-default hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent/50 has-data-[state=checked]:z-2`
       }
     },
     orientation: {
@@ -126,7 +126,7 @@ export default defineTheme({
       variant: ['card', 'table'],
       highlight: false,
       class: {
-        item: 'hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:z-[1]'
+        item: 'hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:z-1'
       }
     },
     { size: 'xs', indicator: 'hidden', class: { icon: 'size-3' } },

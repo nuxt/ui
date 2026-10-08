@@ -46,4 +46,14 @@ describe('Drawer', () => {
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
+
+  it('emits `after:leave` once the animation ends', async () => {
+    const wrapper = await mountSuspended(Drawer, { props: { open: false, portal: false } })
+    expect(wrapper.emitted('after:leave')).toBeUndefined()
+
+    await wrapper.setProps({ open: true })
+    await wrapper.setProps({ open: false })
+    wrapper.find('[data-slot="drawer-content"]').element.dispatchEvent(new Event('transitionend'))
+    expect(wrapper.emitted('after:leave')).toHaveLength(1)
+  })
 })

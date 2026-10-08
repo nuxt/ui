@@ -1,9 +1,12 @@
 import { h, defineComponent } from 'vue'
-import { describe, it, expect, test } from 'vitest'
+import { describe, it, expect, test, expectTypeOf } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import type { AppConfig } from '@nuxt/schema'
+import { ContextMenuRoot } from 'reka-ui'
 import ContextMenu from '../../src/runtime/components/ContextMenu.vue'
+import type { ContextMenuProps } from '../../src/runtime/components/ContextMenu.vue'
+import Theme from '../../src/runtime/components/Theme.vue'
 import type { ComponentConfig } from '../../src/runtime/types/tv'
 import { expectSlotProps } from '../utils/types'
 import { renderEach } from '../component-render'
@@ -143,6 +146,17 @@ describe('ContextMenu', () => {
     }
   )
 
+  it('resolves open and pressOpenDelay from Theme props', async () => {
+    const wrapper = await mountSuspended({
+      components: { UTheme: Theme, ContextMenuWrapper },
+      setup: () => ({ props }),
+      template: `<UTheme :props="{ contextMenu: { open: true, pressOpenDelay: 100 } }"><ContextMenuWrapper v-bind="props" /></UTheme>`
+    })
+
+    expect(wrapper.find('[data-slot="context-menu-content"]').exists()).toBe(true)
+    expect(wrapper.findComponent(ContextMenuRoot).props('pressOpenDelay')).toBe(100)
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(ContextMenuWrapper, {
       props
@@ -154,6 +168,9 @@ describe('ContextMenu', () => {
   })
 
   test('should have the correct types', () => {
+    expectTypeOf<ContextMenuProps['open']>().toEqualTypeOf<boolean | undefined>()
+    expectTypeOf<ContextMenuProps['pressOpenDelay']>().toEqualTypeOf<number | undefined>()
+
     // normal
     expectSlotProps('item', () => ContextMenu({
       items: [{ label: 'foo', value: 'bar' }]

@@ -213,7 +213,7 @@ onMounted(() => {
           orientation="vertical"
           :links="introLinks"
           :ui="{
-            root: 'border-b border-default xl:border-b-0 xl:sticky xl:top-0 xl:h-[calc(100dvh_-_var(--ui-header-height)_*_2_-_0.5rem)] overflow-hidden',
+            root: 'border-b border-default xl:border-b-0 xl:sticky xl:top-0 xl:h-[calc(100dvh-var(--ui-header-height)*2-0.5rem)] overflow-hidden',
             container: 'h-full items-center justify-center',
             wrapper: 'flex flex-col',
             headline: 'mb-6',

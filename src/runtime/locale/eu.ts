@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Hurrengoa',
       prev: 'Aurretikoa'
     },
+    chatMessages: {
+      autoScroll: 'Korritu behera'
+    },
     chatPrompt: {
       placeholder: 'Idatzi zure mezua hemen…'
     },
     chatPromptSubmit: {
-      label: 'Bidali'
+      label: 'Bidali',
+      reload: 'Saiatu berriro',
+      stop: 'Gelditu sortzea'
     },
     chatReasoning: {
       thinking: 'Pentsatzen…',
@@ -111,6 +116,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Itxi'
+    },
+    pagination: {
+      first: 'Lehen orria',
+      last: 'Azken orria',
+      next: 'Hurrengo orria',
+      page: '{page}. orria',
+      prev: 'Aurreko orria'
     },
     pricingTable: {
       caption: 'Prezio-plana alderatzea'

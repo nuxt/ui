@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Seguinte',
       prev: 'Anterior'
     },
+    chatMessages: {
+      autoScroll: 'Desprazar cara abaixo'
+    },
     chatPrompt: {
       placeholder: 'Escribe a túa mensaxe aquí…'
     },
     chatPromptSubmit: {
-      label: 'Enviar'
+      label: 'Enviar',
+      reload: 'Tentar de novo',
+      stop: 'Deter a xeración'
     },
     chatReasoning: {
       thinking: 'Pensando…',
@@ -111,6 +116,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Pechar'
+    },
+    pagination: {
+      first: 'Primeira páxina',
+      last: 'Última páxina',
+      next: 'Páxina seguinte',
+      page: 'Páxina {page}',
+      prev: 'Páxina anterior'
     },
     pricingTable: {
       caption: 'Comparación de plans de prezos'

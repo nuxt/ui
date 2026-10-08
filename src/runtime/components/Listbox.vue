@@ -35,7 +35,7 @@ export interface ListboxItem {
   [key: string]: any
 }
 
-export interface ListboxProps<T extends ArrayOrNested<ListboxItem> = ArrayOrNested<ListboxItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>> extends Pick<ListboxRootProps, 'by' | 'disabled' | 'highlightOnHover' | 'name' | 'orientation' | 'required' | 'selectionBehavior'> {
+export interface ListboxProps<T extends ArrayOrNested<ListboxItem> = ArrayOrNested<ListboxItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>> extends Pick<ListboxRootProps, 'by' | 'disabled' | 'highlightOnHover' | 'loop' | 'name' | 'orientation' | 'required' | 'selectionBehavior'> {
   id?: string
   /**
    * The element or component this component should render as.
@@ -200,7 +200,7 @@ const appConfig = useThemeConfig() as Listbox['AppConfig']
 const overrides = useComponentOverrides((ui: Listbox['AppConfig']['ui']) => ui.listbox)
 const { filterGroups } = useFilter()
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'multiple', 'selectionBehavior', 'highlightOnHover', 'by', 'orientation', 'required'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'multiple', 'selectionBehavior', 'highlightOnHover', 'loop', 'by', 'orientation', 'required'), emits)
 
 const virtualizerProps = toRef(() => {
   if (!props.virtualize) return false

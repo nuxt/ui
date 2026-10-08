@@ -3,8 +3,8 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     overlay: 'fixed inset-0 bg-backdrop data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)]',
-    content: 'fixed bg-default ring ring-default flex focus:outline-none will-change-transform transition-transform ease-out data-[swiping]:duration-0',
-    handle: 'shrink-0 !bg-strong transition-opacity ease-out',
+    content: 'fixed bg-default ring ring-default flex focus:outline-none will-change-transform transition-transform ease-out data-swiping:duration-0',
+    handle: 'shrink-0 bg-strong! transition-opacity ease-out',
     container: 'w-full flex flex-col gap-4 p-4 overflow-y-auto',
     header: 'flex items-center gap-1.5 min-h-8',
     wrapper: 'min-w-0 flex-1',
@@ -23,7 +23,7 @@ export default defineTheme({
       },
       right: {
         content: 'flex-row rtl:flex-row-reverse translate-x-[calc(var(--drawer-swipe-movement-x,0px)+var(--drawer-snap-point-offset,0px))] data-[state=open]:animate-[slide-in-from-right_200ms_var(--ease-out)] data-[state=closed]:animate-[slide-out-to-right_200ms_var(--ease-out)]',
-        handle: '!ml-4'
+        handle: 'ml-4!'
       },
       bottom: {
         content: 'mt-24 flex-col translate-y-[calc(var(--drawer-swipe-movement-y,0px)+var(--drawer-snap-point-offset,0px))] data-[state=open]:animate-[slide-in-from-bottom_200ms_var(--ease-out)] data-[state=closed]:animate-[slide-out-to-bottom_200ms_var(--ease-out)]',
@@ -31,7 +31,7 @@ export default defineTheme({
       },
       left: {
         content: 'flex-row-reverse rtl:flex-row translate-x-[calc(var(--drawer-swipe-movement-x,0px)+var(--drawer-snap-point-offset,0px))] data-[state=open]:animate-[slide-in-from-left_200ms_var(--ease-out)] data-[state=closed]:animate-[slide-out-to-left_200ms_var(--ease-out)]',
-        handle: '!mr-4'
+        handle: 'mr-4!'
       }
     },
     inset: {
@@ -47,7 +47,7 @@ export default defineTheme({
     direction: ['top', 'bottom'],
     class: {
       content: 'h-auto max-h-[96%]',
-      handle: '!w-12 !h-1.5 mx-auto'
+      handle: 'w-12! h-1.5! mx-auto'
     }
   }, {
     direction: ['top', 'bottom'],
@@ -59,7 +59,7 @@ export default defineTheme({
     direction: ['right', 'left'],
     class: {
       content: 'w-auto max-w-[calc(100%-2rem)]',
-      handle: '!h-12 !w-1.5 mt-auto mb-auto'
+      handle: 'h-12! w-1.5! my-auto'
     }
   }, {
     direction: ['right', 'left'],

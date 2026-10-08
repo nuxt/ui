@@ -13,6 +13,7 @@ describe('ChatReasoning', () => {
     // Props
     ['with text', { props }],
     ['with streaming', { props: { streaming: true } }],
+    ['with streaming and autoOpen false', { props: { streaming: true, autoOpen: false } }],
     ['with duration', { props: { ...props, duration: 5 } }],
     ['with icon', { props: { ...props, icon: 'i-lucide-brain' } }],
     ['with defaultOpen', { props: { ...props, defaultOpen: true } }],
@@ -48,6 +49,18 @@ describe('ChatReasoning', () => {
     vi.advanceTimersByTime(500)
     vi.useRealTimers()
     await wrapper.vm.$nextTick()
+    expect(root.attributes('data-state')).toBe('closed')
+  })
+
+  it('does not auto-open when streaming starts with autoOpen false', async () => {
+    const wrapper = await mountSuspended(ChatReasoning, {
+      props: { text: 'Thinking...', streaming: false, autoOpen: false }
+    })
+
+    const root = wrapper.find('[data-slot="chat-reasoning"]')
+    expect(root.attributes('data-state')).toBe('closed')
+
+    await wrapper.setProps({ streaming: true })
     expect(root.attributes('data-state')).toBe('closed')
   })
 })

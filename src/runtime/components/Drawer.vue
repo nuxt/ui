@@ -69,6 +69,8 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'modal' | 'open' | 'd
 
 export interface DrawerEmits extends DrawerRootEmits {
   'close:prevent': []
+  'after:enter': []
+  'after:leave': []
 }
 
 export interface DrawerSlots {
@@ -137,8 +139,8 @@ const openModel = computed({
 })
 
 const ALLOWED_CLOSE_REASONS = new Set(['close-press', 'cancel'])
-function onOpenChange(value: boolean, details?: DrawerOpenChangeDetails) {
-  if (!value && !props.dismissible && !ALLOWED_CLOSE_REASONS.has(details?.reason ?? '')) {
+function onOpenChange(value: boolean, details: DrawerOpenChangeDetails) {
+  if (!value && !props.dismissible && !ALLOWED_CLOSE_REASONS.has(details.reason ?? '')) {
     emits('close:prevent')
     return
   }
@@ -161,9 +163,18 @@ const rawRootProps = useForwardProps(computed(() => ({
   swipeDirection: swipeDirection.value
 })), emits)
 const rootProps = computed(() => {
-  const { 'onUpdate:open': _onUpdateOpen, 'onClose:prevent': _onClosePrevent, ...rest } = rawRootProps.value as Record<string, unknown>
+  const { 'onUpdate:open': _onUpdateOpen, 'onClose:prevent': _onClosePrevent, 'onAfter:enter': _onAfterEnter, 'onAfter:leave': _onAfterLeave, ...rest } = rawRootProps.value as Record<string, unknown>
   return rest
 })
+
+function onOpenComplete(value: boolean) {
+  if (value) {
+    emits('after:enter')
+  } else {
+    emits('after:leave')
+  }
+}
+
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => props.content)
 const contentEvents = computed(() => ({
@@ -179,7 +190,7 @@ const ui = computed(() => tv(theme, overrides.value)({
 </script>
 
 <template>
-  <DrawerRoot v-bind="rootProps" :open="openModel" @update:open="onOpenChange">
+  <DrawerRoot v-bind="rootProps" :open="openModel" @update:open="onOpenChange" @update:open-complete="onOpenComplete">
     <DrawerTrigger v-if="!!slots.default" as-child :class="props.class">
       <slot />
     </DrawerTrigger>

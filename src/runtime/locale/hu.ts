@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Következő',
       prev: 'Előző'
     },
+    chatMessages: {
+      autoScroll: 'Görgetés az aljára'
+    },
     chatPrompt: {
       placeholder: 'Írd be a kérdésedet itt…'
     },
     chatPromptSubmit: {
-      label: 'Küldés'
+      label: 'Küldés',
+      reload: 'Újrapróbálás',
+      stop: 'Generálás leállítása'
     },
     chatReasoning: {
       thinking: 'Gondolkodik…',
@@ -111,6 +116,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Bezárás'
+    },
+    pagination: {
+      first: 'Első oldal',
+      last: 'Utolsó oldal',
+      next: 'Következő oldal',
+      page: '{page}. oldal',
+      prev: 'Előző oldal'
     },
     pricingTable: {
       caption: 'Árlista összehasonlítása'

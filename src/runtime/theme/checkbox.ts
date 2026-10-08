@@ -25,7 +25,7 @@ export default defineTheme({
         root: ''
       },
       card: {
-        root: `border border-default rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors ${focusCard} has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft`
+        root: `border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors ${focusCard} has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft`
       }
     },
     indicator: {
@@ -108,7 +108,7 @@ export default defineTheme({
       variant: 'card',
       highlight: false,
       class: {
-        root: 'hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong'
+        root: 'hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong'
       }
     },
     { size: 'xs', indicator: 'hidden', class: { icon: 'size-3' } },
@@ -146,7 +146,7 @@ export default defineTheme({
       indicator: 'hidden',
       highlight: true,
       class: {
-        root: 'not-has-disabled:border-accent not-has-disabled:has-data-[state=checked]:border-accent'
+        root: 'not-has-disabled:not-has-aria-disabled:border-accent not-has-disabled:not-has-aria-disabled:has-data-[state=checked]:border-accent'
       }
     }
   ],

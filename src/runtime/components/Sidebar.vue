@@ -73,6 +73,11 @@ export interface SidebarProps<T extends SidebarMode = SidebarMode> {
    */
   transition?: boolean
   /**
+   * The breakpoint below which the sidebar renders as a menu.
+   * @defaultValue 'lg'
+   */
+  breakpoint?: Sidebar['variants']['breakpoint']
+  /**
    * The mode of the sidebar menu on mobile.
    * @defaultValue 'slideover'
    */
@@ -105,11 +110,10 @@ import { defu } from 'defu'
 import { createReusableTemplate, useMediaQuery } from '@vueuse/core'
 import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
+import { useLazyOverlay } from '../composables/useLazyOverlay'
+import { lazyOverlays, loadOverlay } from '../utils/lazy-overlay'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
-import USlideover from './Slideover.vue'
-import UModal from './Modal.vue'
-import UDrawer from './Drawer.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -121,6 +125,7 @@ const _props = withDefaults(defineProps<SidebarProps<T>>(), {
   close: false,
   transition: true,
   rail: false,
+  breakpoint: 'lg',
   mode: 'slideover' as never
 })
 const slots = defineSlots<SidebarSlots>()
@@ -130,12 +135,15 @@ const props = useComponentProps<SidebarProps<T>>('sidebar', _props, theme)
 const [DefineInnerTemplate, ReuseInnerTemplate] = createReusableTemplate()
 const [DefineContentTemplate, ReuseContentTemplate] = createReusableTemplate()
 
-const mediaQuery = useMediaQuery('(max-width: 1023px)')
+// Same values as the Tailwind CSS variants in the theme, in rem
+const breakpoints = { 'sm': 40, 'md': 48, 'lg': 64, 'xl': 80, '2xl': 96 }
+
+const mediaQuery = useMediaQuery(() => `(min-width: ${breakpoints[props.breakpoint || 'lg']}rem)`)
 const isMounted = ref(false)
 onMounted(() => {
   isMounted.value = true
 })
-const isMobile = computed(() => isMounted.value && mediaQuery.value)
+const isMobile = computed(() => isMounted.value && !mediaQuery.value)
 
 // Viewport-aware open model: on desktop controls expanded/collapsed, on mobile controls the sheet
 const modelOpen = defineModel<boolean>('open', { default: true })
@@ -201,8 +209,11 @@ const ui = computed(() => tv(theme, overrides.value)({
   side: props.side,
   variant: props.variant,
   collapsible: props.collapsible,
+  breakpoint: props.breakpoint,
   transition: props.transition
 }))
+
+const { slideover: USlideover, modal: UModal, drawer: UDrawer } = lazyOverlays
 
 const Menu = computed(() => ({
   slideover: USlideover,
@@ -216,6 +227,12 @@ const menuProps = toRef(() => defu(props.menu, {
   close: props.close,
   closeIcon: props.closeIcon
 }, props.mode === 'modal' ? { } : props.mode === 'slideover' ? { side: props.side, inset: props.variant === 'inset' } : {}) as SidebarMenu<T>)
+
+const renderMenu = useLazyOverlay(() => openMobile.value || (props.menu as ModalProps | undefined)?.unmountOnHide === false, async () => {
+  if (isMobile.value) {
+    await loadOverlay(props.mode as SidebarMode)
+  }
+})
 </script>
 
 <template>
@@ -325,7 +342,7 @@ const menuProps = toRef(() => defu(props.menu, {
 
     <!-- Mobile menu -->
     <Menu
-      v-if="isMobile"
+      v-if="isMobile && renderMenu"
       v-model:open="openMobile"
       v-bind="menuProps"
     >

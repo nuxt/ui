@@ -117,12 +117,12 @@ const shareOpen = ref(false)
       <ThemeStudioViewSwitcher />
 
       <template #right>
-        <UTooltip text="Ask AI" :kbds="['meta', 'I']" ignore-non-keyboard-focus>
+        <UTooltip text="Ask" :kbds="['meta', 'I']" ignore-non-keyboard-focus>
           <UButton
             color="neutral"
             variant="outline"
-            label="Ask AI"
-            aria-label="Ask AI for help"
+            label="Ask"
+            aria-label="Ask for help"
             class="hidden lg:inline-flex"
             @click="toggleChat"
           >

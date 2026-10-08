@@ -1,3 +1,5 @@
+import { defineCachedEventHandler } from 'nitropack/runtime'
+
 interface TeamMember {
   name: string
   login: string
