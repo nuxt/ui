@@ -818,7 +818,7 @@ describe('Form', () => {
   })
 
   describe('state type', () => {
-    function defineProps<S extends z.ZodType<object, object>>(props: FormProps<S>) {
+    function defineFormProps<S extends z.ZodType<object, object>>(props: FormProps<S>) {
       return props
     }
 
@@ -832,7 +832,7 @@ describe('Form', () => {
         range: z.tuple([z.number(), z.number()])
       })
 
-      expect(defineProps({
+      expect(defineFormProps({
         schema,
         state: reactive({
           file: null as File | null,
@@ -851,7 +851,7 @@ describe('Form', () => {
         z.object({ type: z.literal('b'), b: z.number() })
       ])
 
-      expect(defineProps({
+      expect(defineFormProps({
         schema,
         state: reactive({ type: 'a' as 'a' | 'b', a: '', b: undefined as number | undefined })
       })).toBeDefined()
@@ -864,7 +864,7 @@ describe('Form', () => {
         return state.current === state.new ? [{ name: 'new', message: 'Must be different' }] : []
       }
 
-      expect(defineProps({ schema, validate, state: reactive({ current: undefined, new: undefined }) })).toBeDefined()
+      expect(defineFormProps({ schema, validate, state: reactive({ current: undefined, new: undefined }) })).toBeDefined()
     })
 
     it('rejects values of another shape', () => {
@@ -876,13 +876,13 @@ describe('Form', () => {
       })
 
       // @ts-expect-error a string is not assignable to a number field
-      expect(defineProps({ schema, state: reactive({ count: 'abc' as string }) })).toBeDefined()
+      expect(defineFormProps({ schema, state: reactive({ count: 'abc' as string }) })).toBeDefined()
       // @ts-expect-error an object is not assignable to a string field
-      expect(defineProps({ schema, state: reactive({ name: { first: '' } }) })).toBeDefined()
+      expect(defineFormProps({ schema, state: reactive({ name: { first: '' } }) })).toBeDefined()
       // @ts-expect-error an object is not assignable to an array field
-      expect(defineProps({ schema, state: reactive({ items: { quantity: 1 } }) })).toBeDefined()
+      expect(defineFormProps({ schema, state: reactive({ items: { quantity: 1 } }) })).toBeDefined()
       // @ts-expect-error a number is not assignable to the string position of a tuple
-      expect(defineProps({ schema, state: reactive({ pair: [1, 1] as [number, number] }) })).toBeDefined()
+      expect(defineFormProps({ schema, state: reactive({ pair: [1, 1] as [number, number] }) })).toBeDefined()
     })
   })
 
