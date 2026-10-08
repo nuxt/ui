@@ -158,11 +158,11 @@ describe('NavigationMenu', () => {
     })
 
     const event = new MouseEvent('click', { bubbles: true, cancelable: true })
-    wrapper.find('[data-slot="linkTrailing"]').element.dispatchEvent(event)
+    wrapper.find('[data-slot="navigation-menu-linkTrailing"]').element.dispatchEvent(event)
     await nextTick()
 
     expect(event.defaultPrevented).toBe(true)
-    expect(wrapper.find('[data-slot="link"]').attributes('data-state')).toBe('open')
+    expect(wrapper.find('[data-slot="navigation-menu-link"]').attributes('data-state')).toBe('open')
   })
 
   it('passes accessibility tests', async () => {

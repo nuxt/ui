@@ -768,7 +768,7 @@ defineExpose({
 
       <slot :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui" />
 
-      <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+      <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="input-menu-leading" :class="ui.leading({ class: props.ui?.leading })">
         <slot name="leading" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
           <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="input-menu-leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
           <UAvatar v-else-if="!!props.avatar" :size="avatarSize" v-bind="props.avatar" data-slot="input-menu-itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
@@ -792,7 +792,7 @@ defineExpose({
             />
           </Component.Cancel>
 
-          <UIcon v-else-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, leading: isLeading })" />
+          <UIcon v-else-if="trailingIconName" :name="trailingIconName" data-slot="input-menu-trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, leading: isLeading })" />
         </slot>
       </Component.Trigger>
     </Component.Anchor>
