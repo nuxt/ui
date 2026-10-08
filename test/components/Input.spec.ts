@@ -47,6 +47,7 @@ describe('Input', () => {
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with leading slot', { slots: { leading: () => 'Leading slot' } }],
+    ['with loading trailing and leading slot', { props: { loading: true, trailing: true }, slots: { leading: () => 'Leading slot' } }],
     ['with trailing slot', { slots: { trailing: () => 'Trailing slot' } }]
   ])
 
