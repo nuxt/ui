@@ -41,8 +41,7 @@ describe('Kbd', () => {
     const html = await renderToString(createSSRApp(() => h(Kbd, { value: 'meta' })))
     const container = document.createElement('div')
     container.innerHTML = html
-    expect(container.querySelector('[data-slot=macos]')?.textContent).toBe('⌘')
-    expect(container.querySelector('[data-slot=other]')?.textContent).toBe('Ctrl')
+    expect(Array.from(container.querySelectorAll('kbd > span'), span => span.textContent)).toEqual(['⌘', 'Ctrl'])
 
     const app = createSSRApp(() => h(Kbd, { value: 'meta' }))
     app.mount(container)

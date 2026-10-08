@@ -27,7 +27,7 @@ export interface KbdProps {
    */
   size?: Kbd['variants']['size']
   class?: any
-  ui?: Kbd['slots']
+  ui?: { base?: any }
 }
 
 export interface KbdSlots {
@@ -41,6 +41,7 @@ import { Primitive } from 'reka-ui'
 import { useAppConfig, useHead } from '#imports'
 import { useKbd, kbdKeysPlatformMap } from '../composables/useKbd'
 import { useComponentProps } from '../composables/useComponentProps'
+import { usePrefix } from '../composables/usePrefix'
 import { tv } from '../utils/tv'
 
 const _props = withDefaults(defineProps<KbdProps>(), {
@@ -52,6 +53,7 @@ const props = useComponentProps('kbd', _props)
 
 const { getKbdKey } = useKbd()
 const appConfig = useAppConfig() as Kbd['AppConfig']
+const prefix = usePrefix()
 
 const platformKey = computed(() => props.value && Object.hasOwn(kbdKeysPlatformMap, props.value) ? kbdKeysPlatformMap[props.value as KbdKeySpecific] : undefined)
 
@@ -66,19 +68,15 @@ if (!import.meta.client && platformKey.value) {
 }
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.kbd || {}) })({
-  color: props.color,
-  variant: props.variant,
-  size: props.size
-}))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.kbd || {}) }))
 </script>
 
 <template>
-  <Primitive :as="props.as" :class="ui.base({ class: [props.ui?.base, props.class] })">
+  <Primitive :as="props.as" :class="ui({ class: [props.ui?.base, props.class], color: props.color, variant: props.variant, size: props.size })">
     <slot>
       <template v-if="platformKey">
-        <span data-slot="macos" :class="ui.macos({ class: props.ui?.macos })">{{ platformKey.macos }}</span>
-        <span data-slot="other" :class="ui.other({ class: props.ui?.other })">{{ platformKey.other }}</span>
+        <span :class="prefix('hidden in-[.ui-macos]:inline')">{{ platformKey.macos }}</span>
+        <span :class="prefix('in-[.ui-macos]:hidden')">{{ platformKey.other }}</span>
       </template>
       <template v-else>
         {{ getKbdKey(props.value) }}

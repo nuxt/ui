@@ -1,4 +1,4 @@
-import { computed } from 'vue'
+import { computed, shallowRef, getCurrentInstance } from 'vue'
 import { createSharedComposable, useMounted } from '@vueuse/core'
 
 type KbdKeysSpecificMap = {
@@ -58,7 +58,8 @@ const useSharedKbd = /* @__PURE__ */ createSharedComposable(_useKbd)
 export function useKbd() {
   const { macOS } = useSharedKbd()
   // Platform-specific keys resolve after mount to match the server-rendered placeholder.
-  const mounted = useMounted()
+  // Outside of a component there is no mount to wait for.
+  const mounted = getCurrentInstance() ? useMounted() : shallowRef(import.meta.client)
 
   function getKbdKey(value?: KbdKey | string) {
     if (!value) {

@@ -1,11 +1,7 @@
 import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
-  slots: {
-    base: 'inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase',
-    macos: 'hidden in-[.ui-macos]:inline',
-    other: 'in-[.ui-macos]:hidden'
-  },
+  base: 'inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase',
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
