@@ -137,7 +137,7 @@ const props = useComponentProps<ContextMenuProps<T>>('contextMenu', _props)
 
 const appConfig = useAppConfig() as ContextMenu['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'modal'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'open', 'pressOpenDelay', 'modal'), emits)
 const contentProps = toRef(() => props.content)
 const getProxySlots = () => omit(slots, ['default'])
 

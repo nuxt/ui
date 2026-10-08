@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { NavigationMenuRootProps, NavigationMenuContentProps, NavigationMenuContentEmits, AccordionRootProps } from 'reka-ui'
+import type { NavigationMenuRootProps, NavigationMenuContentProps, NavigationMenuContentEmits, NavigationMenuViewportProps, AccordionRootProps } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/navigation-menu'
@@ -180,6 +180,12 @@ export interface NavigationMenuProps<
    */
   contentOrientation?: NavigationMenu['variants']['contentOrientation']
   /**
+   * The viewport of the menu.
+   * Only works when `orientation` is `horizontal` and `contentOrientation` is `vertical`.
+   * `{ align: 'center' }`{lang="ts-type"}
+   */
+  viewport?: Omit<NavigationMenuViewportProps, 'as' | 'asChild' | 'forceMount'>
+  /**
    * Display an arrow alongside the menu.
    * @defaultValue false
    */
@@ -282,6 +288,7 @@ const rootProps = useForwardProps(computed(() => ({
 })), emits)
 const accordionProps = useForwardProps(reactivePick(props, 'collapsible', 'disabled', 'type', 'unmountOnHide'), emits)
 const contentProps = toRef(() => props.content)
+const viewportProps = toRef(() => props.viewport)
 const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : props.tooltip, { ...(props.orientation === 'vertical' && { delayDuration: 0, content: { side: 'right' } }) }) as TooltipProps)
 const popoverProps = toRef(() => defu(typeof props.popover === 'boolean' ? {} : props.popover, { mode: 'hover', content: { side: 'right', align: 'start', alignOffset: 2 } }) as PopoverProps)
 
@@ -330,16 +337,26 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0, listInd
   return props.type === 'single' ? indexes[0] : indexes
 }
 
+const trailingClicks = new WeakSet<Event>()
+
 function onLinkTrailingClick(e: Event, item: NavigationMenuItem, trailingTrigger?: boolean) {
   if (!item.children?.length) {
     return
   }
 
   if (props.orientation === 'horizontal') {
-    e.preventDefault()
+    trailingClicks.add(e)
   } else if (props.orientation === 'vertical' && !props.collapsed && trailingTrigger) {
     e.preventDefault()
     e.stopPropagation()
+  }
+}
+
+// Bound on the link so it runs after the trigger's click handler, which ignores prevented events,
+// and before `LinkBase` calls `navigate`.
+function onLinkClick(e: Event) {
+  if (trailingClicks.has(e)) {
+    e.preventDefault()
   }
 }
 </script>
@@ -455,11 +472,11 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem, trailingTrigger
             </template>
           </UPopover>
           <UTooltip v-else-if="(props.orientation === 'vertical' && props.collapsed && (!!props.tooltip || !!item.tooltip)) || (props.orientation === 'horizontal' && !!item.tooltip)" :text="get(item, props.labelKey as string)" v-bind="{ ...tooltipProps, ...(typeof item.tooltip === 'boolean' ? {} : item.tooltip || {}) }">
-            <ULinkBase v-bind="slotProps" data-slot="link" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })">
+            <ULinkBase v-bind="slotProps" data-slot="link" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })" @click="onLinkClick">
               <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" :trailing-trigger="!!(slotProps as any).href" />
             </ULinkBase>
           </UTooltip>
-          <ULinkBase v-else v-bind="slotProps" data-slot="link" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: props.orientation === 'horizontal' || level > 0 })">
+          <ULinkBase v-else v-bind="slotProps" data-slot="link" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: props.orientation === 'horizontal' || level > 0 })" @click="onLinkClick">
             <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" :trailing-trigger="!!(slotProps as any).href" />
           </ULinkBase>
         </component>
@@ -565,7 +582,7 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem, trailingTrigger
         <div data-slot="arrow" :class="ui.arrow({ class: props.ui?.arrow })" />
       </NavigationMenuIndicator>
 
-      <NavigationMenuViewport data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })" />
+      <NavigationMenuViewport v-bind="viewportProps" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })" />
     </div>
   </NavigationMenuRoot>
 </template>

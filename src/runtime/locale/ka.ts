@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'შემდეგი',
       prev: 'წინა'
     },
+    chatMessages: {
+      autoScroll: 'ქვემოთ გადახვევა'
+    },
     chatPrompt: {
       placeholder: 'დაწერეთ თქვენი მესიჯი აქ…'
     },
     chatPromptSubmit: {
-      label: 'შეტყობინების გაგზავნა'
+      label: 'შეტყობინების გაგზავნა',
+      reload: 'ხელახლა ცდა',
+      stop: 'გენერირების შეჩერება'
     },
     chatReasoning: {
       thinking: 'ფიქრობს…',
@@ -113,6 +118,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'დახურვა'
+    },
+    pagination: {
+      first: 'პირველი გვერდი',
+      last: 'ბოლო გვერდი',
+      next: 'შემდეგი გვერდი',
+      page: 'გვერდი {page}',
+      prev: 'წინა გვერდი'
     },
     pricingTable: {
       caption: 'ფასის გეგმების შედარება'

@@ -43,7 +43,7 @@ export interface FileUploadProps<M extends boolean = false> extends /** @vue-ign
   /**
    * The layout of how files are displayed.
    * Only works when `variant` is `area`.
-   * @defaultValue 'list'
+   * @defaultValue 'grid'
    */
   layout?: FileUpload['variants']['layout']
   /**
@@ -113,6 +113,7 @@ export interface FileUploadProps<M extends boolean = false> extends /** @vue-ign
 
 export interface FileUploadEmits {
   change: [event: Event]
+  reject: [files: File[]]
 }
 
 type FileUploadFiles<M> = (M extends true ? File[] : File) | null
@@ -186,7 +187,8 @@ const { isDragging, open, inputRef, dropzoneRef } = useFileUpload({
   reset,
   multiple: multiple as MaybeRef<boolean>,
   dropzone: props.dropzone,
-  onUpdate
+  onUpdate,
+  onReject
 })
 const { emitFormInput, emitFormChange, id, name, size: formFieldSize, color: formFieldColor, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<FileUploadProps>(_props)
 
@@ -271,6 +273,14 @@ function onUpdate(files: File[], reset = false) {
   emits('change', event)
   emitFormChange()
   emitFormInput()
+}
+
+function onReject(files: File[]) {
+  if (disabled.value) {
+    return
+  }
+
+  emits('reject', files)
 }
 
 function removeFile(index?: number) {

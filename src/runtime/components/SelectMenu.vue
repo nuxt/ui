@@ -45,7 +45,7 @@ type IsClearUsed<M extends boolean, C extends boolean | object> = M extends fals
   ? (C extends true ? null : C extends object ? null : never)
   : never
 
-export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'resetModelValueOnClear' | 'highlightOnHover' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
+export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'resetModelValueOnClear' | 'highlightOnHover' | 'loop' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
@@ -278,7 +278,7 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 const { t } = useLocale()
 const appConfig = useAppConfig() as SelectMenu['AppConfig']
 const { filterGroups } = useFilter()
-const rootProps = useForwardProps(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'highlightOnHover', 'by'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'highlightOnHover', 'loop', 'by'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as ComboboxArrowProps)
@@ -550,6 +550,32 @@ function onMountAutoFocus(event: Event) {
   }
 }
 
+const focusScopeRef = useTemplateRef('focusScopeRef')
+
+// The `FocusScope` uses `loop` instead of `trapped`: a trapped scope pulls focus back while the menu is closing,
+// so focusing another element on select never lands. Pull it back here instead, only while the menu is open,
+// otherwise anything taking the focus outside closes it, like another overlay restoring focus to its trigger.
+function onFocusOutside(event: Event) {
+  const el = focusScopeRef.value?.$el as HTMLElement | undefined
+  if (event.defaultPrevented || el?.parentElement?.dataset.state !== 'open') {
+    return
+  }
+
+  event.preventDefault()
+
+  const input = searchInputProps.value.autofocus !== false ? el.querySelector<HTMLElement>('[data-slot="input"] input') : null
+  const target = input ?? el
+  target.focus({ preventScroll: true })
+}
+
+function onUnmountAutoFocus(event: Event) {
+  // Keep the focus where it was moved on select instead of restoring it to the trigger after the close animation.
+  const activeElement = document.activeElement
+  if (activeElement && activeElement !== document.body && !(event.target as HTMLElement).contains(activeElement)) {
+    event.preventDefault()
+  }
+}
+
 const viewportRef = useTemplateRef('viewportRef')
 
 const comboboxRootRef = useTemplateRef('comboboxRootRef')
@@ -712,8 +738,15 @@ defineExpose({
 
     <ComboboxPortal v-bind="portalProps">
       <FieldGroupReset>
-        <ComboboxContent data-slot="content" :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
-          <FocusScope trapped data-slot="focusScope" :class="ui.focusScope({ class: props.ui?.focusScope })" @mount-auto-focus="onMountAutoFocus">
+        <ComboboxContent data-slot="content" :class="ui.content({ class: props.ui?.content })" v-bind="contentProps" @focus-outside="onFocusOutside">
+          <FocusScope
+            ref="focusScopeRef"
+            loop
+            data-slot="focusScope"
+            :class="ui.focusScope({ class: props.ui?.focusScope })"
+            @mount-auto-focus="onMountAutoFocus"
+            @unmount-auto-focus="onUnmountAutoFocus"
+          >
             <slot name="content-top" />
 
             <ComboboxInput v-if="!!props.searchInput" v-model="searchTerm" :display-value="() => searchTerm" as-child>

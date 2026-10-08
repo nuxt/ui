@@ -1,7 +1,7 @@
 import { createResolver } from '@nuxt/kit'
-import pkg from '../package.json'
-import { WHEN_TO_USE_SECTION } from './server/utils/llms'
-import { SITE_URL } from './server/utils/site'
+import pkg from '../package.json' with { type: 'json' }
+import { WHEN_TO_USE_SECTION } from './server/utils/llms.ts'
+import { SITE_URL } from './server/utils/site.ts'
 
 const { resolve } = createResolver(import.meta.url)
 
@@ -36,6 +36,11 @@ export default defineNuxtConfig({
   $production: {
     site: {
       url: 'https://ui.nuxt.com'
+    },
+    // Server sourcemaps cost the final Nitro bundle about 1 GB of heap while
+    // bundling. Build only, so `nuxt dev` keeps Nuxt's defaults.
+    sourcemap: {
+      server: false
     }
   },
 
@@ -106,6 +111,8 @@ export default defineNuxtConfig({
     // the Figma guide lives with the kit now; the docs entry is a link, not a page
     '/figma': { redirect: { to: 'https://go.nuxt.com/figma-ui', statusCode: 301 }, prerender: false },
     '/docs/getting-started/figma': { redirect: { to: 'https://go.nuxt.com/figma-ui', statusCode: 301 }, prerender: false },
+    // same for the playground entry
+    '/docs/getting-started/playground': { redirect: { to: 'https://play.ui.nuxt.com', statusCode: 302 }, prerender: false },
     '/docs/getting-started/integrations': { redirect: '/docs/getting-started/integrations/icons', prerender: false },
     '/docs/getting-started/ai': { redirect: '/docs/getting-started/ai/mcp', prerender: false },
     '/docs/composables': { redirect: '/docs/composables/define-shortcuts', prerender: false },
@@ -209,7 +216,15 @@ export default defineNuxtConfig({
     '/getting-started/shortcuts': { redirect: { to: '/composables/define-shortcuts', statusCode: 301 }, prerender: false }
   },
 
+  future: {
+    compatibilityVersion: 5
+  },
+
   experimental: {
+    // `nuxt-component-meta` skips its output when `build.ssr` is set, which is
+    // the case for the client build too once the Vite Environment API is on.
+    // Remove once nuxt-content/nuxt-component-meta#128 is released.
+    viteEnvironmentApi: false,
     defaults: {
       nuxtLink: {
         externalRelAttribute: 'noopener'
@@ -250,9 +265,24 @@ export default defineNuxtConfig({
         'vaul-vue',
         '@vueuse/integrations/useFuse',
         '@floating-ui/dom',
+        '@tiptap/core',
         '@tiptap/vue-3',
+        '@tiptap/vue-3/menus',
         '@tiptap/suggestion',
         '@tiptap/pm/state',
+        '@tiptap/pm/view',
+        '@tiptap/starter-kit',
+        '@tiptap/markdown',
+        '@tiptap/extension-code',
+        '@tiptap/extension-drag-handle-vue-3',
+        '@tiptap/extension-emoji',
+        '@tiptap/extension-horizontal-rule',
+        '@tiptap/extension-image',
+        '@tiptap/extension-mention',
+        '@tiptap/extension-placeholder',
+        '@tiptap/extension-text-align',
+        'tiptap-extension-code-block-shiki',
+        'zod',
         'shiki-transformer-color-highlight',
         'json5',
         '@internationalized/date',
@@ -282,9 +312,9 @@ export default defineNuxtConfig({
       { path: '/', raw: '/raw/index.md' },
       '/docs/**'
     ],
-    // the Figma entry links out (routeRules above) and the release pages are Vue
-    // pages built from the GitHub API, neither has a Markdown twin to list or serve
-    excludePrefixes: { extend: ['/docs/getting-started/figma', '/docs/releases'] },
+    // the Figma and playground entries link out (routeRules above) and the release pages are
+    // Vue pages built from the GitHub API, none has a Markdown twin to list or serve
+    excludePrefixes: { extend: ['/docs/getting-started/figma', '/docs/getting-started/playground', '/docs/releases'] },
     sitemap: {
       markdown: {
         // Split `/docs/**` into a section per area; `/blog/**` stays whole.
@@ -411,6 +441,11 @@ export default defineNuxtConfig({
       prefix: 'custom',
       dir: resolve('./app/assets/icons')
     }],
+    // Keep the icon collections as JSON files next to the server instead of
+    // inlining them, Rollup spends about 1 GB of heap parsing them otherwise.
+    serverBundle: {
+      externalizeIconsJson: true
+    },
     clientBundle: {
       // `ProseCodeIcon` resolves through Nuxt UI's code icon map and falls back to
       // `i-vscode-icons-file-type-{extension}`, and `ProsePrompt` hardcodes one logo per

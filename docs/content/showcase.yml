@@ -11,6 +11,8 @@ hero:
 items:
   - name: Ace
     url: https://acecompany.nl/
+  - name: Avelune Online
+    url: https://avelune-online.vercel.app/
   - name: Brusnika.LMS
     url: https://brusnika-lms.com/
     screenshotOptions:
@@ -23,6 +25,8 @@ items:
     url: https://benevolat.croix-rouge.fr/
     screenshotOptions:
       cookies: ['OptanonAlertBoxClosed=2026-05-26T13:44:13.050Z;OptanonConsent=isGpcEnabled=0;']
+  - name: Cosmic Stays
+    url: https://www.cosmicstays.com/
   - name: DefenceMore
     url: https://defencemore.com/
   - name: Directus Docs
@@ -49,12 +53,16 @@ items:
       removeElements: ['[id^="piano"]']
   - name: LearnVue
     url: https://learnvue.co/
+  - name: Linkedis
+    url: https://linked.is/
   - name: LunixPOS
     url: https://lunixpos.com/
   - name: Mawrble
     url: https://mawrble.com/
   - name: Meet Sponsors
     url: https://meetsponsors.com/
+  - name: Milo Studio
+    url: https://milostudio.app/
   - name: Neleto
     url: https://neleto.io/
   - name: Ovatu

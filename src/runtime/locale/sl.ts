@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Naprej',
       prev: 'Nazaj'
     },
+    chatMessages: {
+      autoScroll: 'Pomakni na dno'
+    },
     chatPrompt: {
       placeholder: 'Tukaj napišite svoje sporočilo…'
     },
     chatPromptSubmit: {
-      label: 'Pošlji sporočilo'
+      label: 'Pošlji sporočilo',
+      reload: 'Poskusi znova',
+      stop: 'Ustavi generiranje'
     },
     chatReasoning: {
       thinking: 'Razmišlja…',
@@ -111,6 +116,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Zapri'
+    },
+    pagination: {
+      first: 'Prva stran',
+      last: 'Zadnja stran',
+      next: 'Naslednja stran',
+      page: 'Stran {page}',
+      prev: 'Prejšnja stran'
     },
     pricingTable: {
       caption: 'Primerjava cenovnih načrtov'
