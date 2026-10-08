@@ -39,9 +39,9 @@ async function setFilesOnInput(input: any, files: File[]) {
 }
 
 describe('FileUpload', () => {
-  it('preserves row state when files with duplicate names are reordered', async () => {
-    const first = { name: 'image.png' }
-    const second = { name: 'image.png' }
+  it('preserves row state when file items are copied and reordered', async () => {
+    const first = { name: 'first.png', progress: 0 }
+    const second = { name: 'second.png', progress: 0 }
     const wrapper = mount(FileUpload, {
       props: { modelValue: [first, second], multiple: true },
       slots: { file: () => h('input', { 'data-test': 'file-state' }) }
@@ -51,9 +51,12 @@ describe('FileUpload', () => {
     await inputs[0]!.setValue('first file')
     await inputs[1]!.setValue('second file')
 
-    await wrapper.setProps({ modelValue: [second, first] })
+    await wrapper.setProps({ modelValue: [{ ...second, progress: 50 }, { ...first, progress: 50 }] })
 
-    expect(wrapper.findAll<HTMLInputElement>('[data-test="file-state"]').map(input => input.element.value)).toEqual(['second file', 'first file'])
+    const updatedInputs = wrapper.findAll<HTMLInputElement>('[data-test="file-state"]')
+    expect(updatedInputs.map(input => input.element.value)).toEqual(['second file', 'first file'])
+    expect(updatedInputs[0]!.element).toBe(inputs[1]!.element)
+    expect(updatedInputs[1]!.element).toBe(inputs[0]!.element)
   })
 
   test('preserves native file types by default', () => {
