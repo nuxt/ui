@@ -5,7 +5,6 @@ import type { TVTheme, VariantProps } from '../../src/runtime/types/tv'
 import { extendTheme } from '../../src/runtime/utils/theme'
 import buttonTheme from '../../src/runtime/theme/button'
 import selectTheme from '../../src/runtime/theme/select'
-import inputTheme from '../../src/runtime/theme/input'
 import navigationMenuTheme from '../../src/runtime/theme/navigation-menu'
 import stepsTheme from '../../src/runtime/theme/prose/steps'
 
@@ -642,19 +641,12 @@ describe('tv square', () => {
   // `square` has to come after what sets the horizontal padding in each theme
   it.each([
     ['button', buttonTheme, 'base', {}],
-    ['input', inputTheme, 'base', {}],
-    ['select', selectTheme, 'base', {}],
     ['navigation-menu, vertical', navigationMenuTheme, 'link', { orientation: 'vertical' }],
     ['navigation-menu, horizontal', navigationMenuTheme, 'link', { orientation: 'horizontal' }]
   ] as const)('reads the vertical padding on %s', (_, theme, slot, props) => {
     const classes = ((tv as any)(theme)({ ...props, square: true })[slot]() as string).split(' ')
     expect(classes).toContain('px-(--ui-control-py)')
     expect(classes).not.toContain('px-(--ui-control-px)')
-  })
-
-  it('keeps the room for an icon on a field', () => {
-    const classes = ((tv as any)(inputTheme)({ square: true, leading: true }).base() as string).split(' ')
-    expect(classes).toEqual(expect.arrayContaining(['px-(--ui-control-py)', 'ps-[calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]']))
   })
 })
 

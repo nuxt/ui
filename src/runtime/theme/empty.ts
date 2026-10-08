@@ -14,27 +14,27 @@ export default defineTheme({
   variants: {
     size: {
       xs: {
-        avatar: '[--ui-control-size:--spacing(8)] text-base',
+        avatar: 'size-8 text-base',
         title: 'text-sm',
         description: 'text-xs'
       },
       sm: {
-        avatar: '[--ui-control-size:--spacing(9)] text-lg',
+        avatar: 'size-9 text-lg',
         title: 'text-sm',
         description: 'text-xs'
       },
       md: {
-        avatar: '[--ui-control-size:--spacing(10)] text-xl',
+        avatar: 'size-10 text-xl',
         title: 'text-base',
         description: 'text-sm'
       },
       lg: {
-        avatar: '[--ui-control-size:--spacing(11)] text-[22px]',
+        avatar: 'size-11 text-[22px]',
         title: 'text-base',
         description: 'text-sm'
       },
       xl: {
-        avatar: '[--ui-control-size:--spacing(12)] text-2xl',
+        avatar: 'size-12 text-2xl',
         title: 'text-lg',
         description: 'text-base'
       }

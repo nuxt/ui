@@ -6,7 +6,7 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'relative inline-flex items-center',
-    base: 'w-full rounded-md border-0 text-strong placeholder:text-faint disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)',
+    base: 'w-full rounded-md border-0 text-strong placeholder:text-faint disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
     increment: 'absolute flex items-center',
     decrement: 'absolute flex items-center'
   },
@@ -16,28 +16,24 @@ export default defineTheme({
     size: {
       xs: {
         root: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)]',
-        base: 'text-sm/4'
+        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm/4'
       },
       sm: {
         root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)]',
-        base: 'text-sm/4'
+        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm/4'
       },
       md: {
         root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)]',
-        base: 'text-base/5'
+        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base/5'
       },
       lg: {
         root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)]',
-        base: 'text-base/5'
+        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base/5'
       },
       xl: {
         root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)]',
-        base: 'text-base'
+        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base'
       }
-    },
-    // Equal padding. Before `increment` and `decrement`, so the room for a button stays
-    square: {
-      true: { base: 'px-(--ui-control-py)' }
     },
     variant: {
       ...input.variants.variant

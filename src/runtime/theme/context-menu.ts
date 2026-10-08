@@ -6,13 +6,13 @@ export default defineTheme({
     content: 'min-w-32 max-h-(--reka-context-menu-content-available-height) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-context-menu-content-transform-origin) flex flex-col',
     viewport: 'relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1',
     group: 'p-1 isolate',
-    label: 'w-full flex items-center font-semibold text-strong px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)',
+    label: 'w-full flex items-center font-semibold text-strong',
     separator: '-mx-1 my-1 h-px bg-border',
-    item: 'group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)',
-    itemLeadingIcon: 'shrink-0 size-(--ui-control-icon)',
+    item: 'group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75',
+    itemLeadingIcon: 'shrink-0',
     itemLeadingAvatar: 'shrink-0',
     itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
-    itemTrailingIcon: 'shrink-0 size-(--ui-control-icon)',
+    itemTrailingIcon: 'shrink-0',
     itemTrailingKbds: 'hidden lg:inline-flex items-center shrink-0',
     itemWrapper: 'flex-1 flex flex-col text-start min-w-0',
     itemLabel: 'truncate',
@@ -38,33 +38,38 @@ export default defineTheme({
     },
     size: {
       xs: {
-        content: '[--ui-control-px:--spacing(1)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)]',
-        label: 'text-xs',
-        item: 'text-xs',
+        label: 'p-1 text-xs gap-1',
+        item: 'p-1 text-xs gap-1',
+        itemLeadingIcon: 'size-4',
+        itemTrailingIcon: 'size-4',
         itemTrailingKbds: 'gap-0.5'
       },
       sm: {
-        content: '[--ui-control-px:--spacing(1.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)]',
-        label: 'text-xs',
-        item: 'text-xs',
+        label: 'p-1.5 text-xs gap-1.5',
+        item: 'p-1.5 text-xs gap-1.5',
+        itemLeadingIcon: 'size-4',
+        itemTrailingIcon: 'size-4',
         itemTrailingKbds: 'gap-0.5'
       },
       md: {
-        content: '[--ui-control-px:--spacing(1.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)]',
-        label: 'text-sm',
-        item: 'text-sm',
+        label: 'p-1.5 text-sm gap-1.5',
+        item: 'p-1.5 text-sm gap-1.5',
+        itemLeadingIcon: 'size-5',
+        itemTrailingIcon: 'size-5',
         itemTrailingKbds: 'gap-0.5'
       },
       lg: {
-        content: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)]',
-        label: 'text-sm',
-        item: 'text-sm',
+        label: 'p-2 text-sm gap-2',
+        item: 'p-2 text-sm gap-2',
+        itemLeadingIcon: 'size-5',
+        itemTrailingIcon: 'size-5',
         itemTrailingKbds: 'gap-1'
       },
       xl: {
-        content: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)]',
-        label: 'text-base',
-        item: 'text-base',
+        label: 'p-2 text-base gap-2',
+        item: 'p-2 text-base gap-2',
+        itemLeadingIcon: 'size-6',
+        itemTrailingIcon: 'size-6',
         itemTrailingKbds: 'gap-1'
       }
     }

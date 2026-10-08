@@ -33,8 +33,6 @@ export interface InputDateProps<R extends boolean = false> extends UseComponentI
    * @defaultValue 'md'
    */
   size?: InputDate['variants']['size']
-  /** Render the input with equal padding on all sides. */
-  square?: boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   /** Keep the mobile text size on all breakpoints. */
@@ -97,7 +95,7 @@ const props = useComponentProps<InputDateProps<R>>('inputDate', _props, theme)
 const appConfig = useThemeConfig() as InputDate['AppConfig']
 const overrides = useComponentOverrides((ui: InputDate['AppConfig']['ui']) => ui.inputDate)
 
-const rootProps = useForwardProps(reactiveOmit(props, 'id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'square', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'ui'), emits)
+const rootProps = useForwardProps(reactiveOmit(props, 'id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'ui'), emits)
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formFieldSize, color: formFieldColor, id, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<InputDateProps<R>>(_props)
 
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputDateProps<R>>(_props)
@@ -121,7 +119,6 @@ const avatarSize = computed(() => getAvatarSize(size.value))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
-  square: props.square,
   color: color.value,
   variant: props.variant,
   size: size.value,

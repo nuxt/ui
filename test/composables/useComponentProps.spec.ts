@@ -117,7 +117,7 @@ describe('\'*\' default variants', () => {
     })
 
     expect(wrapper.find('[data-slot="button"]').classes()).toContain('text-base')
-    expect(wrapper.find('[data-slot="kbd"]').classes()).toContain('[--ui-control-size:--spacing(5)]')
+    expect(wrapper.find('[data-slot="kbd"]').classes()).toContain('h-5')
   })
 
   it('reaches components with generic props', async () => {
@@ -180,7 +180,7 @@ describe('\'*\' default variants', () => {
 
     expect(wrapper.find('[data-slot="input-base"]').classes()).toContain('text-base')
     expect(wrapper.find('[data-slot="button"]').classes()).toContain('text-base')
-    expect(wrapper.find('[data-slot="avatar-group-base"]').classes()).toContain('[--ui-control-size:--spacing(10)]')
+    expect(wrapper.find('[data-slot="avatar-group-base"]').classes()).toContain('size-10')
   })
 
   it('still reaches a child through a group', async () => {

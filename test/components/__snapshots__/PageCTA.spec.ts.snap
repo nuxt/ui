@@ -104,7 +104,7 @@ exports[`PageCTA > renders with links correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <div data-slot="page-cta-footer" class="mt-8">
-        <div data-slot="page-cta-links" class="flex flex-wrap gap-x-6 gap-y-3 justify-center"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)] text-sm">
+        <div data-slot="page-cta-links" class="flex flex-wrap gap-x-6 gap-y-3 justify-center"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
             <!--v-if--><span data-slot="button-label" class="truncate">Get started</span>
             <!--v-if-->
           </button></div>
@@ -146,7 +146,7 @@ exports[`PageCTA > renders with orientation horizontal links correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <div data-slot="page-cta-footer" class="mt-8">
-        <div data-slot="page-cta-links" class="flex flex-wrap gap-x-6 gap-y-3"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)] text-sm">
+        <div data-slot="page-cta-links" class="flex flex-wrap gap-x-6 gap-y-3"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
             <!--v-if--><span data-slot="button-label" class="truncate">Get started</span>
             <!--v-if-->
           </button></div>

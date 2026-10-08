@@ -38,8 +38,6 @@ export interface InputTimeProps<R extends boolean = false> extends UseComponentI
    * @defaultValue 'md'
    */
   size?: InputTime['variants']['size']
-  /** Render the input with equal padding on all sides. */
-  square?: boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   /** Keep the mobile text size on all breakpoints. */
@@ -107,7 +105,7 @@ const props = useComponentProps<InputTimeProps<R>>('inputTime', _props, theme)
 const appConfig = useThemeConfig() as InputTime['AppConfig']
 const overrides = useComponentOverrides((ui: InputTime['AppConfig']['ui']) => ui.inputTime)
 
-const rootProps = useForwardProps(reactiveOmit(props, 'id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'square', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'ui'), emits)
+const rootProps = useForwardProps(reactiveOmit(props, 'id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'ui'), emits)
 
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color: formFieldColor, size: formFieldSize, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<InputTimeProps<R>>(_props)
 
@@ -127,7 +125,6 @@ const avatarSize = computed(() => getAvatarSize(size.value))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
-  square: props.square,
   color: color.value,
   variant: props.variant,
   size: size.value,

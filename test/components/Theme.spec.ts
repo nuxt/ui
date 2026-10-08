@@ -551,8 +551,8 @@ describe('Theme', () => {
     // FormField-injected `size` (xl) wins over `<UTheme :props>` size (xs).
     // `useFormField` reads `_props.size` (raw, undefined here) so it falls back
     // to the FormField context — proving the proxy isn't shadowing field injection.
-    expect(wrapper.html()).toContain('[--ui-control-size:--spacing(5)]')
-    expect(wrapper.html()).not.toContain('[--ui-control-size:--spacing(3)]')
+    expect(wrapper.find('button[role="checkbox"]').classes()).toContain('size-5')
+    expect(wrapper.find('button[role="checkbox"]').classes()).not.toContain('size-3')
   })
 
   // FormField validation errors must always win over `<UTheme :props>` color.
@@ -737,8 +737,8 @@ describe('Theme', () => {
     const avatars = wrapper.findAll('span[data-slot="avatar-group-base"]')
     expect(avatars.length).toBeGreaterThan(0)
     avatars.forEach((avatar) => {
-      expect(avatar.classes()).toContain('[--ui-control-size:--spacing(10)]')
-      expect(avatar.classes()).not.toContain('[--ui-control-size:--spacing(6)]')
+      expect(avatar.classes()).toContain('size-10')
+      expect(avatar.classes()).not.toContain('size-6')
     })
   })
 

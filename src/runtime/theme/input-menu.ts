@@ -4,22 +4,22 @@ import { extendTheme } from '../utils/theme'
 
 export default extendTheme(input, {
   slots: {
-    base: () => 'rounded-md text-strong transition-colors px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)',
-    trailing: 'group absolute inset-y-0 inset-e-0 flex items-center disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none pe-(--ui-control-px)',
+    base: () => 'rounded-md text-strong transition-colors',
+    trailing: 'group absolute inset-y-0 inset-e-0 flex items-center disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none',
     trailingClear: 'p-0',
     arrow: 'fill-bg stroke-default',
     content: 'max-h-[min(15rem,var(--reka-combobox-content-available-height,15rem))] w-(--reka-combobox-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-combobox-content-transform-origin) pointer-events-auto flex flex-col',
     viewport: 'relative scroll-py-1 overflow-y-auto flex-1',
     group: 'p-1 isolate',
-    empty: 'text-center text-muted px-[calc(var(--ui-control-px)+(--spacing(1)))] py-[calc(var(--ui-control-py)+(--spacing(1)))]',
-    label: 'font-semibold text-strong px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)',
+    empty: 'text-center text-muted',
+    label: 'font-semibold text-strong',
     separator: '-mx-1 my-1 h-px bg-border',
-    item: 'group relative w-full flex items-start text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-strong data-highlighted:not-data-disabled:before:bg-tint transition-colors before:transition-colors px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)',
-    itemLeadingIcon: 'shrink-0 text-faint group-data-highlighted:not-group-data-disabled:text-default transition-colors size-(--ui-control-icon)',
+    item: 'group relative w-full flex items-start gap-1.5 p-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-strong data-highlighted:not-data-disabled:before:bg-tint transition-colors before:transition-colors',
+    itemLeadingIcon: 'shrink-0 text-faint group-data-highlighted:not-group-data-disabled:text-default transition-colors',
     itemLeadingAvatar: 'shrink-0',
-    itemLeadingChip: 'shrink-0 size-(--ui-control-icon)',
+    itemLeadingChip: 'shrink-0',
     itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
-    itemTrailingIcon: 'shrink-0 size-(--ui-control-icon)',
+    itemTrailingIcon: 'shrink-0',
     itemWrapper: 'flex-1 flex flex-col min-w-0',
     itemLabel: 'truncate',
     itemDescription: 'truncate text-muted',
@@ -56,44 +56,54 @@ export default extendTheme(input, {
     },
     size: {
       xs: {
-        content: '[--ui-control-px:--spacing(1)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)]',
-        label: 'text-[10px]/3',
-        item: 'text-xs',
+        label: 'p-1 text-[10px]/3 gap-1',
+        item: 'p-1 text-xs gap-1',
+        itemLeadingIcon: 'size-4',
+        itemLeadingChip: 'size-4',
+        itemTrailingIcon: 'size-4',
         tagsItem: 'text-[10px]/3',
         tagsItemDeleteIcon: 'size-3',
-        empty: 'text-xs'
+        empty: 'p-2 text-xs'
       },
       sm: {
-        content: '[--ui-control-px:--spacing(1.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)]',
-        label: 'text-[10px]/3',
-        item: 'text-xs',
+        label: 'p-1.5 text-[10px]/3 gap-1.5',
+        item: 'p-1.5 text-xs gap-1.5',
+        itemLeadingIcon: 'size-4',
+        itemLeadingChip: 'size-4',
+        itemTrailingIcon: 'size-4',
         tagsItem: 'text-[10px]/3',
         tagsItemDeleteIcon: 'size-3',
-        empty: 'text-xs'
+        empty: 'p-2.5 text-xs'
       },
       md: {
-        content: '[--ui-control-px:--spacing(1.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)]',
-        label: 'text-xs',
-        item: 'text-sm',
+        label: 'p-1.5 text-xs gap-1.5',
+        item: 'p-1.5 text-sm gap-1.5',
+        itemLeadingIcon: 'size-5',
+        itemLeadingChip: 'size-5',
+        itemTrailingIcon: 'size-5',
         tagsItem: 'text-xs',
         tagsItemDeleteIcon: 'size-3.5',
-        empty: 'text-sm'
+        empty: 'p-2.5 text-sm'
       },
       lg: {
-        content: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)]',
-        label: 'text-xs',
-        item: 'text-sm',
+        label: 'p-2 text-xs gap-2',
+        item: 'p-2 text-sm gap-2',
+        itemLeadingIcon: 'size-5',
+        itemLeadingChip: 'size-5',
+        itemTrailingIcon: 'size-5',
         tagsItem: 'text-xs',
         tagsItemDeleteIcon: 'size-3.5',
-        empty: 'text-sm'
+        empty: 'p-3 text-sm'
       },
       xl: {
-        content: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)]',
-        label: 'text-sm',
-        item: 'text-base',
+        label: 'p-2 text-sm gap-2',
+        item: 'p-2 text-base gap-2',
+        itemLeadingIcon: 'size-6',
+        itemLeadingChip: 'size-6',
+        itemTrailingIcon: 'size-6',
         tagsItem: 'text-sm',
         tagsItemDeleteIcon: 'size-4',
-        empty: 'text-base'
+        empty: 'p-3 text-base'
       }
     }
   },

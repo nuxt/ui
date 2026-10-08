@@ -10,8 +10,8 @@ export default defineTheme({
     status: 'flex text-faint duration-200 ease-out motion-reduce:transition-none',
     list: 'flex flex-col gap-1',
     item: 'flex items-center gap-1.5 min-w-0',
-    itemLeadingIcon: 'shrink-0 size-(--ui-control-icon)',
-    itemLeadingDot: 'shrink-0 rounded-full size-(--ui-control-size)',
+    itemLeadingIcon: 'shrink-0',
+    itemLeadingDot: 'shrink-0 rounded-full',
     itemLabel: 'truncate',
     itemTrailing: 'ms-auto shrink-0 text-faint'
   },
@@ -19,39 +19,53 @@ export default defineTheme({
     color: colorVariant({ indicator: 'bg-accent', itemLeadingIcon: 'text-accent', itemLeadingDot: 'bg-accent' }),
     size: {
       '2xs': {
-        root: '[--ui-control-thickness:1px] [--ui-control-icon:--spacing(3)] [--ui-control-size:--spacing(1.5)]',
+        root: '[--ui-control-thickness:1px]',
         status: 'text-xs',
-        list: 'text-xs'
+        list: 'text-xs',
+        itemLeadingIcon: 'size-3',
+        itemLeadingDot: 'size-1.5'
       },
       'xs': {
-        root: '[--ui-control-thickness:--spacing(0.5)] [--ui-control-icon:--spacing(3)] [--ui-control-size:--spacing(1.5)]',
+        root: '[--ui-control-thickness:--spacing(0.5)]',
         status: 'text-xs',
-        list: 'text-xs'
+        list: 'text-xs',
+        itemLeadingIcon: 'size-3',
+        itemLeadingDot: 'size-1.5'
       },
       'sm': {
-        root: '[--ui-control-thickness:--spacing(1)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)]',
+        root: '[--ui-control-thickness:--spacing(1)]',
         status: 'text-sm',
-        list: 'text-sm'
+        list: 'text-sm',
+        itemLeadingIcon: 'size-4',
+        itemLeadingDot: 'size-2'
       },
       'md': {
-        root: '[--ui-control-thickness:--spacing(2)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)]',
+        root: '[--ui-control-thickness:--spacing(2)]',
         status: 'text-sm',
-        list: 'text-sm'
+        list: 'text-sm',
+        itemLeadingIcon: 'size-4',
+        itemLeadingDot: 'size-2'
       },
       'lg': {
-        root: '[--ui-control-thickness:--spacing(3)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)]',
+        root: '[--ui-control-thickness:--spacing(3)]',
         status: 'text-sm',
-        list: 'text-sm'
+        list: 'text-sm',
+        itemLeadingIcon: 'size-4',
+        itemLeadingDot: 'size-2'
       },
       'xl': {
-        root: '[--ui-control-thickness:--spacing(4)] [--ui-control-icon:--spacing(5)] [--ui-control-size:--spacing(2.5)]',
+        root: '[--ui-control-thickness:--spacing(4)]',
         status: 'text-base',
-        list: 'text-base'
+        list: 'text-base',
+        itemLeadingIcon: 'size-5',
+        itemLeadingDot: 'size-2.5'
       },
       '2xl': {
-        root: '[--ui-control-thickness:--spacing(5)] [--ui-control-icon:--spacing(5)] [--ui-control-size:--spacing(2.5)]',
+        root: '[--ui-control-thickness:--spacing(5)]',
         status: 'text-base',
-        list: 'text-base'
+        list: 'text-base',
+        itemLeadingIcon: 'size-5',
+        itemLeadingDot: 'size-2.5'
       }
     },
     orientation: {

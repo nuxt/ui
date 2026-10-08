@@ -53,7 +53,6 @@ describe('Select', () => {
     ['with id', { props: { ...props, id: 'id' } }],
     ['with name', { props: { ...props, name: 'name' } }],
     ['with placeholder', { props: { ...props, placeholder: 'Search...' } }],
-    ['with square', { props: { ...props, square: true } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with required', { props: { ...props, required: true } }],
     ['with icon', { props: { icon: 'i-lucide-search' } }],

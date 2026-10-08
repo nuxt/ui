@@ -32,7 +32,6 @@ describe('InputTime', () => {
     ['with range', { props: { range: true } }],
     ['with range and modelValue', { props: { range: true, modelValue: { start: new Time(12, 30), end: new Time(14, 30) } } }],
     ['with range and defaultValue', { props: { range: true, defaultValue: { start: new Time(12, 30), end: new Time(14, 30) } } }],
-    ['with square', { props: { square: true, modelValue: new Time(12, 30) } }],
     ['with disabled', { props: { disabled: true, modelValue: new Time(12, 30) } }],
     ['with required', { props: { required: true, modelValue: new Time(12, 30) } }],
     ['with readonly', { props: { readonly: true, modelValue: new Time(12, 30) } }],

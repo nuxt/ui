@@ -18,7 +18,6 @@ describe('Textarea', () => {
     ['with name', { props: { name: 'name' } }],
     ['with placeholder', { props: { placeholder: 'Search...' } }],
     ['with required', { props: { required: true } }],
-    ['with square', { props: { square: true } }],
     ['with disabled', { props: { disabled: true } }],
     ['with rows', { props: { rows: 5 } }],
     ['with autoresize', { props: { autoresize: true } }],

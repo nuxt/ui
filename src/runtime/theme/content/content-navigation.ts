@@ -3,18 +3,18 @@ import { defineTheme } from '../../utils/theme'
 
 export default defineTheme({
   slots: {
-    root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)]',
+    root: '',
     content: 'data-[state=open]:animate-[accordion-down_200ms_var(--ease-out)] data-[state=closed]:animate-[accordion-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden focus:outline-none',
-    list: 'isolate -mx-(--ui-control-px) -mt-(--ui-control-py)',
+    list: 'isolate -mx-2.5 -mt-1.5',
     item: '',
     listWithChildren: 'ms-5 border-s border-default',
     itemWithChildren: 'flex flex-col data-[state=open]:mb-1.5',
     trigger: 'font-semibold',
-    link: 'group relative w-full px-(--ui-control-px) py-(--ui-control-py) before:inset-y-px before:inset-x-0 flex items-center gap-(--ui-control-gap) text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3 before:outline-accent-focus',
-    linkLeadingIcon: 'shrink-0 size-(--ui-control-icon)',
+    link: 'group relative w-full px-2.5 py-1.5 before:inset-y-px before:inset-x-0 flex items-center gap-1.5 text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3 before:outline-accent-focus',
+    linkLeadingIcon: 'shrink-0 size-5',
     linkTrailing: 'ms-auto inline-flex gap-1.5 items-center',
     linkTrailingBadge: 'shrink-0',
-    linkTrailingIcon: 'size-(--ui-control-icon) transform transition-transform duration-200 ease-out motion-reduce:transition-none shrink-0 group-data-[state=open]:rotate-180',
+    linkTrailingIcon: 'size-5 transform transition-transform duration-200 ease-out motion-reduce:transition-none shrink-0 group-data-[state=open]:rotate-180',
     linkTitle: 'truncate',
     linkTitleExternalIcon: 'size-3 align-top text-faint'
   },

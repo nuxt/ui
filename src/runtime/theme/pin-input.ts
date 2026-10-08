@@ -4,25 +4,25 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'relative inline-flex items-center gap-1.5',
-    base: 'rounded-md border-0 text-strong placeholder:text-faint text-center disabled:cursor-not-allowed disabled:opacity-75 transition-colors size-(--ui-control-size)',
+    base: 'rounded-md border-0 text-strong placeholder:text-faint text-center disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
     separator: 'text-faint flex items-center justify-center'
   },
   variants: {
     size: {
       xs: {
-        base: '[--ui-control-size:--spacing(6)] text-sm/4'
+        base: 'size-6 text-sm/4'
       },
       sm: {
-        base: '[--ui-control-size:--spacing(7)] text-sm/4'
+        base: 'size-7 text-sm/4'
       },
       md: {
-        base: '[--ui-control-size:--spacing(8)] text-base/5'
+        base: 'size-8 text-base/5'
       },
       lg: {
-        base: '[--ui-control-size:--spacing(9)] text-base/5'
+        base: 'size-9 text-base/5'
       },
       xl: {
-        base: '[--ui-control-size:--spacing(10)] text-base'
+        base: 'size-10 text-base'
       }
     },
     variant: {

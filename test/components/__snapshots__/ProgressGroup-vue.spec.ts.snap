@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`ProgressGroup > renders with as correctly 1`] = `
-"<section data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)] w-full flex flex-col">
+"<section data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] w-full flex flex-col">
   <!--v-if-->
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
@@ -18,16 +18,16 @@ exports[`ProgressGroup > renders with as correctly 1`] = `
     </div>
   </div>
   <ul data-slot="progress-group-list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-neutral)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-error)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-warning)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-success)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-neutral)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-error)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-warning)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-success)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
   </ul>
 </section>"
 `;
 
 exports[`ProgressGroup > renders with class correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)] flex flex-col w-48">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] flex flex-col w-48">
   <!--v-if-->
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
@@ -44,16 +44,16 @@ exports[`ProgressGroup > renders with class correctly 1`] = `
     </div>
   </div>
   <ul data-slot="progress-group-list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-neutral)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-error)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-warning)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-success)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-neutral)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-error)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-warning)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-success)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
   </ul>
 </div>"
 `;
 
 exports[`ProgressGroup > renders with color correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)] w-full flex flex-col">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] w-full flex flex-col">
   <!--v-if-->
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
@@ -64,14 +64,14 @@ exports[`ProgressGroup > renders with color correctly 1`] = `
     </div>
   </div>
   <ul data-slot="progress-group-list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-neutral)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-neutral)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-neutral)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-neutral)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
   </ul>
 </div>"
 `;
 
 exports[`ProgressGroup > renders with custom color correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)] w-full flex flex-col">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] w-full flex flex-col">
   <!--v-if-->
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
@@ -82,14 +82,14 @@ exports[`ProgressGroup > renders with custom color correctly 1`] = `
     </div>
   </div>
   <ul data-slot="progress-group-list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size)" style="background-color: #8b5cf6;"></span><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size)" style="background-color: var(--color-green-400);"></span><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-2" style="background-color: #8b5cf6;"></span><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-2" style="background-color: var(--color-green-400);"></span><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
   </ul>
 </div>"
 `;
 
 exports[`ProgressGroup > renders with invalid max correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)] w-full flex flex-col">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] w-full flex flex-col">
   <!--v-if-->
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row">
     <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="100" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 24%;">
@@ -106,16 +106,16 @@ exports[`ProgressGroup > renders with invalid max correctly 1`] = `
     </div>
   </div>
   <ul data-slot="progress-group-list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-neutral)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">24% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-error)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">8% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-warning)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">12% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-success)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">42% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-neutral)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">24% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-error)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">8% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-warning)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">12% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-success)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">42% </span></li>
   </ul>
 </div>"
 `;
 
 exports[`ProgressGroup > renders with item class correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)] w-full flex flex-col">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] w-full flex flex-col">
   <!--v-if-->
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
@@ -123,13 +123,13 @@ exports[`ProgressGroup > renders with item class correctly 1`] = `
     </div>
   </div>
   <ul data-slot="progress-group-list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0 font-bold"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-primary)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0 font-bold"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-primary)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
   </ul>
 </div>"
 `;
 
 exports[`ProgressGroup > renders with item slot correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)] w-full flex flex-col">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] w-full flex flex-col">
   <!--v-if-->
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
@@ -143,7 +143,7 @@ exports[`ProgressGroup > renders with item slot correctly 1`] = `
 `;
 
 exports[`ProgressGroup > renders with item slot correctly 2`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)] w-full flex flex-col">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] w-full flex flex-col">
   <!--v-if-->
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
@@ -169,7 +169,7 @@ exports[`ProgressGroup > renders with item slot correctly 2`] = `
 `;
 
 exports[`ProgressGroup > renders with item ui correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)] w-full flex flex-col">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] w-full flex flex-col">
   <!--v-if-->
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
@@ -177,13 +177,13 @@ exports[`ProgressGroup > renders with item ui correctly 1`] = `
     </div>
   </div>
   <ul data-slot="progress-group-list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-primary)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate font-bold">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-primary)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate font-bold">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
   </ul>
 </div>"
 `;
 
 exports[`ProgressGroup > renders with item-label slot correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)] w-full flex flex-col">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] w-full flex flex-col">
   <!--v-if-->
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
@@ -200,16 +200,16 @@ exports[`ProgressGroup > renders with item-label slot correctly 1`] = `
     </div>
   </div>
   <ul data-slot="progress-group-list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-neutral)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">Label slot</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-error)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">Label slot</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-warning)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Label slot</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-success)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Label slot</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-neutral)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">Label slot</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-error)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">Label slot</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-warning)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Label slot</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-success)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Label slot</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
   </ul>
 </div>"
 `;
 
 exports[`ProgressGroup > renders with item-leading slot correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)] w-full flex flex-col">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] w-full flex flex-col">
   <!--v-if-->
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
@@ -235,7 +235,7 @@ exports[`ProgressGroup > renders with item-leading slot correctly 1`] = `
 `;
 
 exports[`ProgressGroup > renders with item-trailing slot correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)] w-full flex flex-col">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] w-full flex flex-col">
   <!--v-if-->
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
@@ -252,16 +252,16 @@ exports[`ProgressGroup > renders with item-trailing slot correctly 1`] = `
     </div>
   </div>
   <ul data-slot="progress-group-list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-neutral)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">Trailing slot</span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-error)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">Trailing slot</span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-warning)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">Trailing slot</span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-success)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">Trailing slot</span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-neutral)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">Trailing slot</span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-error)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">Trailing slot</span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-warning)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">Trailing slot</span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-success)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">Trailing slot</span></li>
   </ul>
 </div>"
 `;
 
 exports[`ProgressGroup > renders with items correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)] w-full flex flex-col">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] w-full flex flex-col">
   <!--v-if-->
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row">
     <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="100" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 24%;">
@@ -278,16 +278,16 @@ exports[`ProgressGroup > renders with items correctly 1`] = `
     </div>
   </div>
   <ul data-slot="progress-group-list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-neutral)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">24% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-error)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">8% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-warning)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">12% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-success)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">42% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-neutral)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">24% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-error)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">8% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-warning)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">12% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-success)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">42% </span></li>
   </ul>
 </div>"
 `;
 
 exports[`ProgressGroup > renders with max correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)] w-full flex flex-col">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] w-full flex flex-col">
   <!--v-if-->
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
@@ -304,16 +304,16 @@ exports[`ProgressGroup > renders with max correctly 1`] = `
     </div>
   </div>
   <ul data-slot="progress-group-list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-neutral)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-error)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-warning)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-success)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-neutral)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-error)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-warning)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-success)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
   </ul>
 </div>"
 `;
 
 exports[`ProgressGroup > renders with orientation horizontal correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)] w-full flex flex-col">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] w-full flex flex-col">
   <div data-slot="progress-group-status" class="flex text-faint duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">67% </div>
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
@@ -330,16 +330,16 @@ exports[`ProgressGroup > renders with orientation horizontal correctly 1`] = `
     </div>
   </div>
   <ul data-slot="progress-group-list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-neutral)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-error)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-warning)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-success)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-neutral)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-error)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-warning)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-success)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
   </ul>
 </div>"
 `;
 
 exports[`ProgressGroup > renders with orientation vertical correctly 1`] = `
-"<div data-orientation="vertical" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)] h-full flex flex-row">
+"<div data-orientation="vertical" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] h-full flex flex-row">
   <div data-slot="progress-group-status" class="flex text-faint duration-200 ease-out motion-reduce:transition-none text-sm flex-col justify-end h-(--percent) min-h-fit transition-[height]" style="--percent: 67%;">67% </div>
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong h-full w-(--ui-control-thickness) flex-col">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none w-full transition-[height]" style="height: 18.75%;">
@@ -356,16 +356,16 @@ exports[`ProgressGroup > renders with orientation vertical correctly 1`] = `
     </div>
   </div>
   <ul data-slot="progress-group-list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-neutral)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-error)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-warning)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-success)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-neutral)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-error)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-warning)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-success)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
   </ul>
 </div>"
 `;
 
 exports[`ProgressGroup > renders with size 2xl correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(5)] [--ui-control-icon:--spacing(5)] [--ui-control-size:--spacing(2.5)] w-full flex flex-col">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(5)] w-full flex flex-col">
   <div data-slot="progress-group-status" class="flex text-faint duration-200 ease-out motion-reduce:transition-none text-base flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">67% </div>
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
@@ -382,16 +382,16 @@ exports[`ProgressGroup > renders with size 2xl correctly 1`] = `
     </div>
   </div>
   <ul data-slot="progress-group-list" class="flex flex-col gap-1 text-base">
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-neutral)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-error)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-warning)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-success)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-neutral)] text-accent size-5"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-error)] text-accent size-5"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-warning)] bg-accent size-2.5"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-success)] bg-accent size-2.5"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
   </ul>
 </div>"
 `;
 
 exports[`ProgressGroup > renders with size 2xs correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:1px] [--ui-control-icon:--spacing(3)] [--ui-control-size:--spacing(1.5)] w-full flex flex-col">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:1px] w-full flex flex-col">
   <div data-slot="progress-group-status" class="flex text-faint duration-200 ease-out motion-reduce:transition-none text-xs flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">67% </div>
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
@@ -408,16 +408,16 @@ exports[`ProgressGroup > renders with size 2xs correctly 1`] = `
     </div>
   </div>
   <ul data-slot="progress-group-list" class="flex flex-col gap-1 text-xs">
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-neutral)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-error)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-warning)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-success)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-neutral)] text-accent size-3"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-error)] text-accent size-3"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-warning)] bg-accent size-1.5"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-success)] bg-accent size-1.5"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
   </ul>
 </div>"
 `;
 
 exports[`ProgressGroup > renders with size lg correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(3)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)] w-full flex flex-col">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(3)] w-full flex flex-col">
   <div data-slot="progress-group-status" class="flex text-faint duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">67% </div>
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
@@ -434,16 +434,16 @@ exports[`ProgressGroup > renders with size lg correctly 1`] = `
     </div>
   </div>
   <ul data-slot="progress-group-list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-neutral)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-error)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-warning)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-success)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-neutral)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-error)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-warning)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-success)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
   </ul>
 </div>"
 `;
 
 exports[`ProgressGroup > renders with size md correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)] w-full flex flex-col">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] w-full flex flex-col">
   <div data-slot="progress-group-status" class="flex text-faint duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">67% </div>
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
@@ -460,16 +460,16 @@ exports[`ProgressGroup > renders with size md correctly 1`] = `
     </div>
   </div>
   <ul data-slot="progress-group-list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-neutral)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-error)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-warning)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-success)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-neutral)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-error)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-warning)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-success)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
   </ul>
 </div>"
 `;
 
 exports[`ProgressGroup > renders with size sm correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(1)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)] w-full flex flex-col">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(1)] w-full flex flex-col">
   <div data-slot="progress-group-status" class="flex text-faint duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">67% </div>
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
@@ -486,16 +486,16 @@ exports[`ProgressGroup > renders with size sm correctly 1`] = `
     </div>
   </div>
   <ul data-slot="progress-group-list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-neutral)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-error)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-warning)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-success)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-neutral)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-error)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-warning)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-success)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
   </ul>
 </div>"
 `;
 
 exports[`ProgressGroup > renders with size xl correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(4)] [--ui-control-icon:--spacing(5)] [--ui-control-size:--spacing(2.5)] w-full flex flex-col">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(4)] w-full flex flex-col">
   <div data-slot="progress-group-status" class="flex text-faint duration-200 ease-out motion-reduce:transition-none text-base flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">67% </div>
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
@@ -512,16 +512,16 @@ exports[`ProgressGroup > renders with size xl correctly 1`] = `
     </div>
   </div>
   <ul data-slot="progress-group-list" class="flex flex-col gap-1 text-base">
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-neutral)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-error)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-warning)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-success)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-neutral)] text-accent size-5"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-error)] text-accent size-5"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-warning)] bg-accent size-2.5"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-success)] bg-accent size-2.5"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
   </ul>
 </div>"
 `;
 
 exports[`ProgressGroup > renders with size xs correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(0.5)] [--ui-control-icon:--spacing(3)] [--ui-control-size:--spacing(1.5)] w-full flex flex-col">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(0.5)] w-full flex flex-col">
   <div data-slot="progress-group-status" class="flex text-faint duration-200 ease-out motion-reduce:transition-none text-xs flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">67% </div>
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
@@ -538,16 +538,16 @@ exports[`ProgressGroup > renders with size xs correctly 1`] = `
     </div>
   </div>
   <ul data-slot="progress-group-list" class="flex flex-col gap-1 text-xs">
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-neutral)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-error)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-warning)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-success)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-neutral)] text-accent size-3"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-error)] text-accent size-3"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-warning)] bg-accent size-1.5"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-success)] bg-accent size-1.5"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
   </ul>
 </div>"
 `;
 
 exports[`ProgressGroup > renders with status correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)] w-full flex flex-col">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] w-full flex flex-col">
   <div data-slot="progress-group-status" class="flex text-faint duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">67% </div>
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
@@ -564,16 +564,16 @@ exports[`ProgressGroup > renders with status correctly 1`] = `
     </div>
   </div>
   <ul data-slot="progress-group-list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-neutral)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-error)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-warning)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-success)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-neutral)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-error)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-warning)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-success)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
   </ul>
 </div>"
 `;
 
 exports[`ProgressGroup > renders with status slot correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)] w-full flex flex-col">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] w-full flex flex-col">
   <div data-slot="progress-group-status" class="flex text-faint duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">Status slot</div>
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
@@ -590,16 +590,16 @@ exports[`ProgressGroup > renders with status slot correctly 1`] = `
     </div>
   </div>
   <ul data-slot="progress-group-list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-neutral)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-error)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-warning)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-success)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-neutral)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-error)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-warning)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-success)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
   </ul>
 </div>"
 `;
 
 exports[`ProgressGroup > renders with ui correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)] w-full flex flex-col">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] w-full flex flex-col">
   <!--v-if-->
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full w-full h-(--ui-control-thickness) flex-row bg-default">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
@@ -616,16 +616,16 @@ exports[`ProgressGroup > renders with ui correctly 1`] = `
     </div>
   </div>
   <ul data-slot="progress-group-list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-neutral)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 size-(--ui-control-icon) [--ui-accent:var(--ui-error)] text-accent"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-warning)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-success)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-neutral)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">19% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="progress-group-itemLeadingIcon" class="shrink-0 [--ui-accent:var(--ui-error)] text-accent size-4"></svg><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">6% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-warning)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Documents</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">9% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-success)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Multimedia</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">33% </span></li>
   </ul>
 </div>"
 `;
 
 exports[`ProgressGroup > renders with value out of bounds correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)] w-full flex flex-col">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] w-full flex flex-col">
   <!--v-if-->
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="0" aria-label="System" role="progressbar" data-state="loading" data-value="0" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 0%;">
@@ -636,14 +636,14 @@ exports[`ProgressGroup > renders with value out of bounds correctly 1`] = `
     </div>
   </div>
   <ul data-slot="progress-group-list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-primary)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">0% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-primary)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">100% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-primary)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">0% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-primary)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">100% </span></li>
   </ul>
 </div>"
 `;
 
 exports[`ProgressGroup > renders with values above max correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)] w-full flex flex-col">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] w-full flex flex-col">
   <div data-slot="progress-group-status" class="flex text-faint duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 100%;">100% </div>
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="96" aria-label="System" role="progressbar" data-state="loading" data-value="96" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 75%;">
@@ -654,14 +654,14 @@ exports[`ProgressGroup > renders with values above max correctly 1`] = `
     </div>
   </div>
   <ul data-slot="progress-group-list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-primary)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">75% </span></li>
-    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full size-(--ui-control-size) [--ui-accent:var(--ui-primary)] bg-accent"></span><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">50% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-primary)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">System</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">75% </span></li>
+    <li data-slot="progress-group-item" class="flex items-center gap-1.5 min-w-0"><span data-slot="progress-group-itemLeadingDot" class="shrink-0 rounded-full [--ui-accent:var(--ui-primary)] bg-accent size-2"></span><span data-slot="progress-group-itemLabel" class="truncate">Apps</span><span data-slot="progress-group-itemTrailing" class="ms-auto shrink-0 text-faint">50% </span></li>
   </ul>
 </div>"
 `;
 
 exports[`ProgressGroup > renders without items correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)] w-full flex flex-col">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] w-full flex flex-col">
   <!--v-if-->
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row"></div>
   <!--v-if-->
@@ -669,7 +669,7 @@ exports[`ProgressGroup > renders without items correctly 1`] = `
 `;
 
 exports[`ProgressGroup > renders without labels correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] [--ui-control-icon:--spacing(4)] [--ui-control-size:--spacing(2)] w-full flex flex-col">
+"<div data-orientation="horizontal" data-slot="progress-group" class="gap-2 [--ui-control-thickness:--spacing(2)] w-full flex flex-col">
   <!--v-if-->
   <div data-slot="progress-group-base" class="flex overflow-hidden rounded-full bg-strong w-full h-(--ui-control-thickness) flex-row">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="19%" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="progress-group-segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">

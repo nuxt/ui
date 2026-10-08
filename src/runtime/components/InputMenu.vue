@@ -67,8 +67,6 @@ export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOr
    * @defaultValue 'md'
    */
   size?: InputMenu['variants']['size']
-  /** Render the input with equal padding on all sides. */
-  square?: boolean
   required?: boolean
   autofocus?: boolean
   autofocusDelay?: number
@@ -365,7 +363,6 @@ const itemSize = computed(() => getItemSize(size.value))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
-  square: props.square,
   color: color.value,
   variant: props.variant,
   size: size.value,

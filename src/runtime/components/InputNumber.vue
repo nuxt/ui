@@ -29,8 +29,6 @@ export interface InputNumberProps<T extends InputNumberValue = InputNumberValue,
   color?: InputNumber['variants']['color']
   variant?: InputNumber['variants']['variant']
   size?: InputNumber['variants']['size']
-  /** Render the input with equal padding on all sides. */
-  square?: boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   /** Keep the mobile text size on all breakpoints. */
@@ -133,7 +131,6 @@ const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
-  square: props.square,
   color: color.value,
   variant: props.variant,
   size: size.value,

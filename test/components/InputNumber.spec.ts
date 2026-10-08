@@ -17,7 +17,6 @@ describe('InputNumber', () => {
     // Props
     ['with name', { props: { name: 'name' } }],
     ['with placeholder', { props: { placeholder: 'Number...' } }],
-    ['with square', { props: { square: true } }],
     ['with disabled', { props: { disabled: true } }],
     ['with required', { props: { required: true } }],
     ['with orientation vertical', { props: { orientation: 'vertical' } }],

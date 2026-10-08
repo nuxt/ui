@@ -34,8 +34,6 @@ export interface InputTagsProps<T extends InputTagItem = InputTagItem> extends P
    * @defaultValue 'md'
    */
   size?: InputTags['variants']['size']
-  /** Render the input with equal padding on all sides. */
-  square?: boolean
   autofocus?: boolean
   autofocusDelay?: number
   /**
@@ -117,7 +115,6 @@ const avatarSize = computed(() => getAvatarSize(size.value))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
-  square: props.square,
   color: color.value,
   variant: props.variant,
   size: size.value,

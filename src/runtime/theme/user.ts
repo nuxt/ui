@@ -2,7 +2,7 @@ import { defineTheme } from '../utils/theme'
 
 export default defineTheme({
   slots: {
-    root: 'relative group/user gap-(--ui-control-gap)',
+    root: 'relative group/user',
     wrapper: '',
     name: 'font-medium',
     description: 'text-muted',
@@ -31,50 +31,50 @@ export default defineTheme({
     },
     size: {
       '3xs': {
-        root: '[--ui-control-gap:--spacing(1)]',
-        wrapper: 'flex items-center gap-(--ui-control-gap)',
+        root: 'gap-1',
+        wrapper: 'flex items-center gap-1',
         name: 'text-xs',
         description: 'text-xs'
       },
       '2xs': {
-        root: '[--ui-control-gap:--spacing(1.5)]',
-        wrapper: 'flex items-center gap-(--ui-control-gap)',
+        root: 'gap-1.5',
+        wrapper: 'flex items-center gap-1.5',
         name: 'text-xs',
         description: 'text-xs'
       },
       'xs': {
-        root: '[--ui-control-gap:--spacing(1.5)]',
-        wrapper: 'flex items-center gap-(--ui-control-gap)',
+        root: 'gap-1.5',
+        wrapper: 'flex items-center gap-1.5',
         name: 'text-xs',
         description: 'text-xs'
       },
       'sm': {
-        root: '[--ui-control-gap:--spacing(2)]',
+        root: 'gap-2',
         name: 'text-xs',
         description: 'text-xs'
       },
       'md': {
-        root: '[--ui-control-gap:--spacing(2)]',
+        root: 'gap-2',
         name: 'text-sm',
         description: 'text-xs'
       },
       'lg': {
-        root: '[--ui-control-gap:--spacing(2.5)]',
+        root: 'gap-2.5',
         name: 'text-sm',
         description: 'text-sm'
       },
       'xl': {
-        root: '[--ui-control-gap:--spacing(2.5)]',
+        root: 'gap-2.5',
         name: 'text-base',
         description: 'text-sm'
       },
       '2xl': {
-        root: '[--ui-control-gap:--spacing(3)]',
+        root: 'gap-3',
         name: 'text-base',
         description: 'text-base'
       },
       '3xl': {
-        root: '[--ui-control-gap:--spacing(3)]',
+        root: 'gap-3',
         name: 'text-lg',
         description: 'text-base'
       }

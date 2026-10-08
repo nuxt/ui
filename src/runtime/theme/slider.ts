@@ -6,25 +6,30 @@ export default defineTheme({
     root: 'relative flex items-center select-none touch-none',
     track: 'relative bg-strong overflow-hidden rounded-full grow',
     range: 'absolute rounded-full bg-accent',
-    thumb: 'rounded-full bg-default ring-2 focus-visible:outline-3 focus-visible:outline-offset-2 ring-accent outline-accent-focus size-(--ui-control-size)'
+    thumb: 'rounded-full bg-default ring-2 focus-visible:outline-3 focus-visible:outline-offset-2 ring-accent outline-accent-focus'
   },
   variants: {
     color: colorVariant({ root: '' }),
     size: {
       xs: {
-        root: '[--ui-control-thickness:6px] [--ui-control-size:--spacing(3)]'
+        root: '[--ui-control-thickness:6px]',
+        thumb: 'size-3'
       },
       sm: {
-        root: '[--ui-control-thickness:7px] [--ui-control-size:--spacing(3.5)]'
+        root: '[--ui-control-thickness:7px]',
+        thumb: 'size-3.5'
       },
       md: {
-        root: '[--ui-control-thickness:8px] [--ui-control-size:--spacing(4)]'
+        root: '[--ui-control-thickness:8px]',
+        thumb: 'size-4'
       },
       lg: {
-        root: '[--ui-control-thickness:9px] [--ui-control-size:--spacing(4.5)]'
+        root: '[--ui-control-thickness:9px]',
+        thumb: 'size-4.5'
       },
       xl: {
-        root: '[--ui-control-thickness:10px] [--ui-control-size:--spacing(5)]'
+        root: '[--ui-control-thickness:10px]',
+        thumb: 'size-5'
       }
     },
     orientation: {

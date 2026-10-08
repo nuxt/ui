@@ -11,8 +11,8 @@ export default defineTheme({
     root: 'flex items-center gap-2',
     list: 'relative flex p-1 group',
     indicator: 'absolute bg-accent transition-[translate,width] duration-200 ease-out motion-reduce:transition-none',
-    trigger: 'group relative inline-flex items-center min-w-0 data-[state=inactive]:text-muted hover:data-[state=inactive]:not-disabled:text-default font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)',
-    leadingIcon: 'shrink-0 size-(--ui-control-icon)',
+    trigger: 'group relative inline-flex items-center min-w-0 data-[state=inactive]:text-muted hover:data-[state=inactive]:not-disabled:text-default font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3',
+    leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
     label: 'truncate',
     trailingBadge: 'shrink-0',
@@ -46,19 +46,24 @@ export default defineTheme({
     },
     size: {
       xs: {
-        trigger: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] text-xs'
+        trigger: 'px-2 py-1 text-xs gap-1',
+        leadingIcon: 'size-4'
       },
       sm: {
-        trigger: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)] text-xs'
+        trigger: 'px-2.5 py-1.5 text-xs gap-1.5',
+        leadingIcon: 'size-4'
       },
       md: {
-        trigger: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] text-sm'
+        trigger: 'px-3 py-1.5 text-sm gap-1.5',
+        leadingIcon: 'size-5'
       },
       lg: {
-        trigger: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)] text-sm'
+        trigger: 'px-3 py-2 text-sm gap-2',
+        leadingIcon: 'size-5'
       },
       xl: {
-        trigger: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)] text-base'
+        trigger: 'px-3 py-2 text-base gap-2',
+        leadingIcon: 'size-6'
       }
     }
   },

@@ -35,8 +35,6 @@ export interface InputProps<T extends InputValue = InputValue, Mod extends Model
    * @defaultValue 'md'
    */
   size?: Input['variants']['size']
-  /** Render the input with equal padding on all sides. */
-  square?: boolean
   required?: boolean
   autocomplete?: InputHTMLAttributes['autocomplete']
   autofocus?: boolean
@@ -115,7 +113,6 @@ const avatarSize = computed(() => getAvatarSize(size.value))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
-  square: props.square,
   type: props.type as Input['variants']['type'],
   color: color.value,
   variant: props.variant,

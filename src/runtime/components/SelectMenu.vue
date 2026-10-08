@@ -69,8 +69,6 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
    * @defaultValue 'md'
    */
   size?: SelectMenu['variants']['size']
-  /** Render the select with equal padding on all sides. */
-  square?: boolean
   required?: boolean
   /**
    * The icon displayed to open the menu.
@@ -341,7 +339,6 @@ const itemSize = computed(() => getItemSize(size.value))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
-  square: props.square,
   color: color.value,
   variant: props.variant,
   size: size.value,
