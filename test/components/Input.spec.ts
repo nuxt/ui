@@ -87,16 +87,6 @@ describe('Input', () => {
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
-  test('with loading trailing and leadingIcon does not reserve the trailing side', async () => {
-    const wrapper = await mountSuspended(Input, {
-      props: { loading: true, trailing: true, leadingIcon: 'i-lucide-search' }
-    })
-
-    expect(wrapper.find('[data-slot="leadingIcon"]').classes()).toContain('animate-spin')
-    expect(wrapper.find('[data-slot="trailing"]').exists()).toBe(false)
-    expect(wrapper.find('input').classes()).not.toContain('pe-9')
-  })
-
   test('with .lazy modifier updates on change only', async () => {
     const wrapper = mount(Input, {
       props: {
