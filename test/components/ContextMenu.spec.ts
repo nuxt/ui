@@ -153,7 +153,7 @@ describe('ContextMenu', () => {
       template: `<UTheme :props="{ contextMenu: { open: true, pressOpenDelay: 100 } }"><ContextMenuWrapper v-bind="props" /></UTheme>`
     })
 
-    expect(wrapper.find('[data-slot="content"]').exists()).toBe(true)
+    expect(wrapper.find('[data-slot="context-menu-content"]').exists()).toBe(true)
     expect(wrapper.findComponent(ContextMenuRoot).props('pressOpenDelay')).toBe(100)
   })
 
