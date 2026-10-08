@@ -72,7 +72,7 @@ exports[`Checkbox > renders with description slot correctly 1`] = `
 
 exports[`Checkbox > renders with disabled correctly 1`] = `
 "<div data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row opacity-75">
-  <div data-slot="checkbox-container" class="flex items-center h-5"><button data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 cursor-not-allowed outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-disabled="" disabled="">
+  <div data-slot="checkbox-container" class="flex items-center h-5"><button data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 cursor-not-allowed outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" aria-disabled="true" data-disabled="" disabled="">
       <!---->
     </button>
     <!--v-if-->
@@ -197,7 +197,7 @@ exports[`Checkbox > renders with name correctly 1`] = `
 `;
 
 exports[`Checkbox > renders with neutral variant card correctly 1`] = `
-"<label data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-neutral)] border border-default rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft flex-row hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong p-3.5">
+"<label data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-neutral)] border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft flex-row hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong p-3.5">
   <div data-slot="checkbox-container" class="flex items-center h-5"><button data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden focus-visible:outline-none size-4" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="checkbox-indicator" class="flex items-center justify-center size-full text-accent-contrast bg-accent"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="checkbox-icon" class="shrink-0 size-3.5"></svg></span></button>
     <!--v-if-->
   </div>
@@ -206,7 +206,7 @@ exports[`Checkbox > renders with neutral variant card correctly 1`] = `
 `;
 
 exports[`Checkbox > renders with neutral variant card highlight correctly 1`] = `
-"<label data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-neutral)] border border-default rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft flex-row p-3.5">
+"<label data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-neutral)] border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft flex-row p-3.5">
   <div data-slot="checkbox-container" class="flex items-center h-5"><button data-slot="checkbox-base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-none size-4 ring-accent" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="checkbox-indicator" class="flex items-center justify-center size-full text-accent-contrast bg-accent"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="checkbox-icon" class="shrink-0 size-3.5"></svg></span></button>
     <!--v-if-->
   </div>
@@ -233,7 +233,7 @@ exports[`Checkbox > renders with neutral variant list highlight correctly 1`] = 
 `;
 
 exports[`Checkbox > renders with primary variant card correctly 1`] = `
-"<label data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] border border-default rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft flex-row hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong p-3.5">
+"<label data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft flex-row hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong p-3.5">
   <div data-slot="checkbox-container" class="flex items-center h-5"><button data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden focus-visible:outline-none size-4" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="checkbox-indicator" class="flex items-center justify-center size-full text-accent-contrast bg-accent"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="checkbox-icon" class="shrink-0 size-3.5"></svg></span></button>
     <!--v-if-->
   </div>
@@ -242,7 +242,7 @@ exports[`Checkbox > renders with primary variant card correctly 1`] = `
 `;
 
 exports[`Checkbox > renders with primary variant card highlight correctly 1`] = `
-"<label data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] border border-default rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft flex-row p-3.5">
+"<label data-slot="checkbox" class="relative flex items-start [--ui-accent:var(--ui-primary)] border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft flex-row p-3.5">
   <div data-slot="checkbox-container" class="flex items-center h-5"><button data-slot="checkbox-base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-none size-4 ring-accent" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="checkbox-indicator" class="flex items-center justify-center size-full text-accent-contrast bg-accent"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="checkbox-icon" class="shrink-0 size-3.5"></svg></span></button>
     <!--v-if-->
   </div>
