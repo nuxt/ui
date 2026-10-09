@@ -1,13 +1,14 @@
 import { describe, it, expect, afterEach } from 'vitest'
-import { defineComponent, h, shallowRef } from 'vue'
+import { defineComponent, h, provide, shallowRef } from 'vue'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { useLocale } from '../../src/runtime/composables/useLocale'
+import { localeContextInjectionKey, useLocale } from '../../src/runtime/composables/useLocale'
 import UApp from '../../src/runtime/components/App.vue'
 import UButton from '../../src/runtime/components/Button.vue'
 import UPagination from '../../src/runtime/components/Pagination.vue'
 import type { AppProps } from '../../src/runtime/components/App.vue'
 import ar from '../../src/runtime/locale/ar'
 import de from '../../src/runtime/locale/de'
+import en from '../../src/runtime/locale/en'
 
 const teardowns: Array<() => void> = []
 
@@ -15,7 +16,7 @@ afterEach(() => {
   teardowns.splice(0).forEach(fn => fn())
 })
 
-async function mountDir(appProps?: Pick<AppProps, 'dir' | 'locale'>, localeOverride?: typeof ar) {
+async function mountDir(appProps?: Pick<AppProps, 'dir' | 'locale'>, localeOverride?: typeof ar, providedLocale?: typeof ar) {
   let dir: string | undefined
 
   const Probe = defineComponent({
@@ -26,6 +27,11 @@ async function mountDir(appProps?: Pick<AppProps, 'dir' | 'locale'>, localeOverr
   })
 
   const wrapper = await mountSuspended(defineComponent({
+    setup: () => {
+      if (providedLocale) {
+        provide(localeContextInjectionKey, shallowRef(providedLocale))
+      }
+    },
     render: () => appProps ? h(UApp, appProps, () => h(Probe)) : h(Probe)
   }))
   teardowns.push(() => wrapper.unmount())
@@ -48,6 +54,14 @@ describe('useLocale', () => {
 
   it('lets the App dir prop override the locale dir', async () => {
     expect(await mountDir({ locale: ar, dir: 'ltr' })).toBe('ltr')
+  })
+
+  it('follows a locale provided above the App', async () => {
+    expect(await mountDir({}, undefined, ar)).toBe('rtl')
+  })
+
+  it('lets the App locale prop override a locale provided above it', async () => {
+    expect(await mountDir({ locale: en }, undefined, ar)).toBe('ltr')
   })
 
   it('keeps the dir of a locale passed to useLocale without an App', async () => {
