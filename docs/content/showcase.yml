@@ -103,6 +103,8 @@ items:
     url: https://volta.net/
   - name: whichcoding.tools
     url: https://whichcoding.tools/
+  - name: WhatsBox
+    url: https://www.whatsbox.io/
   - name: Wiredash
     url: https://wiredash.com/
   - name: Zielgestalt
