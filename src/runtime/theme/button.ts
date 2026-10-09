@@ -78,8 +78,12 @@ export default defineTheme({
     trailing: {
       true: ''
     },
+    // The component turns it off on the trailing icon when the leading one is the loading icon
     loading: {
-      true: ''
+      true: {
+        leadingIcon: 'animate-spin',
+        trailingIcon: 'animate-spin'
+      }
     },
     active: {
       true: {
@@ -90,20 +94,6 @@ export default defineTheme({
       }
     }
   },
-  compoundVariants: [{
-    loading: true,
-    leading: true,
-    class: {
-      leadingIcon: 'animate-spin'
-    }
-  }, {
-    loading: true,
-    leading: false,
-    trailing: true,
-    class: {
-      trailingIcon: 'animate-spin'
-    }
-  }],
   defaultVariants: {
     color: 'primary',
     variant: 'solid',
