@@ -17,15 +17,43 @@ Classes in `variants` and `compoundVariants` are always given per slot, as an ob
 ```ts
 variants: {
   size: {
-    md: { base: 'px-2.5 py-1.5', leadingIcon: 'size-5' }
+    md: { base: 'text-sm', leadingIcon: 'size-5' }
   }
 },
 compoundVariants: [{
-  size: 'xs',
-  square: true,
-  class: { base: 'p-1' }
+  loading: true,
+  leading: true,
+  class: { leadingIcon: 'animate-spin' }
 }]
 ```
+
+## Control tokens
+
+A control, a Button, a Badge or a field, does not write the padding, gap and icon size of a `size` as classes. The size sets four variables on the outermost slot, `root` where the theme has one and `base` otherwise, and plain classes read them:
+
+```ts
+slots: {
+  base: 'inline-flex items-center',
+  leadingIcon: 'shrink-0'
+},
+variants: {
+  size: {
+    md: {
+      base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm',
+      leadingIcon: 'size-(--ui-control-icon)'
+    }
+  },
+  leading: {
+    true: { base: 'ps-[calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]' }
+  }
+}
+```
+
+The classes that read the padding, the gap and the icon size stay in the `size` entry, next to the ones that write them. In the slot they would be dropped by a function slot from an app, and applied to a size an app adds without the variables. A theme without `size`, like NavigationMenu, writes and reads them in the same variant entry.
+
+A variant that reads a variable for another purpose, `square`, `leading`, `orientation`, has to be declared after the one that sets the same property, since the last variant wins: `square` after what sets the horizontal padding.
+
+Reach for this before a `size` × something compound: the size writes a value, another variant picks the property that reads it. A compound is hard to override from an app config, a token is one class. A theme that extends Input and drops its `root` (Select, InputDate, InputTime) appends the tokens to `base`.
 
 ## Static Theme
 
@@ -80,8 +108,8 @@ export default defineTheme({
       soft: { base: 'text-accent-default bg-accent-soft' }
     },
     size: {
-      xs: { base: 'text-xs px-2 py-1', leadingIcon: 'size-3' },
-      md: { base: 'text-sm px-2.5 py-1.5', leadingIcon: 'size-5' }
+      xs: { base: 'text-xs' },
+      md: { base: 'text-sm' }
     }
   },
   defaultVariants: {
@@ -202,11 +230,11 @@ compoundVariants: [
     class: { base: 'bg-primary text-contrast' }
   },
   
-  // Size + boolean
+  // Variant + boolean
   {
-    size: 'sm',
-    square: true,
-    class: { base: 'p-1' }
+    loading: true,
+    leading: true,
+    class: { leadingIcon: 'animate-spin' }
   },
   
   // Multiple slots

@@ -27,46 +27,51 @@ export default defineTheme({
       },
       vertical: {
         header: 'flex-col gap-4',
-        item: 'flex text-start',
-        separator: 'inset-s-[calc(50%-1px)] bottom-[-10px] w-0.5'
+        item: 'flex text-start gap-(--ui-control-gap)',
+        separator: 'inset-s-[calc(50%-1px)] top-[calc(var(--ui-control-size)+6px)] bottom-[-10px] w-0.5'
       }
     },
 
     size: {
       xs: {
-        trigger: 'size-6 text-xs',
-        icon: 'size-3',
+        root: '[--ui-control-size:--spacing(6)] [--ui-control-icon:--spacing(3)] [--ui-control-gap:--spacing(1.5)]',
+        trigger: 'size-(--ui-control-size) text-xs',
+        icon: 'size-(--ui-control-icon)',
         title: 'text-xs',
         description: 'text-xs',
-        wrapper: 'mt-1.5'
+        wrapper: 'mt-(--ui-control-gap)'
       },
       sm: {
-        trigger: 'size-8 text-sm',
-        icon: 'size-4',
+        root: '[--ui-control-size:--spacing(8)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(2)]',
+        trigger: 'size-(--ui-control-size) text-sm',
+        icon: 'size-(--ui-control-icon)',
         title: 'text-xs',
         description: 'text-xs',
-        wrapper: 'mt-2'
+        wrapper: 'mt-(--ui-control-gap)'
       },
       md: {
-        trigger: 'size-10 text-base',
-        icon: 'size-5',
+        root: '[--ui-control-size:--spacing(10)] [--ui-control-icon:--spacing(5)] [--ui-control-gap:--spacing(2.5)]',
+        trigger: 'size-(--ui-control-size) text-base',
+        icon: 'size-(--ui-control-icon)',
         title: 'text-sm',
         description: 'text-sm',
-        wrapper: 'mt-2.5'
+        wrapper: 'mt-(--ui-control-gap)'
       },
       lg: {
-        trigger: 'size-12 text-lg',
-        icon: 'size-6',
+        root: '[--ui-control-size:--spacing(12)] [--ui-control-icon:--spacing(6)] [--ui-control-gap:--spacing(3)]',
+        trigger: 'size-(--ui-control-size) text-lg',
+        icon: 'size-(--ui-control-icon)',
         title: 'text-base',
         description: 'text-base',
-        wrapper: 'mt-3'
+        wrapper: 'mt-(--ui-control-gap)'
       },
       xl: {
-        trigger: 'size-14 text-xl',
-        icon: 'size-7',
+        root: '[--ui-control-size:--spacing(14)] [--ui-control-icon:--spacing(7)] [--ui-control-gap:--spacing(3.5)]',
+        trigger: 'size-(--ui-control-size) text-xl',
+        icon: 'size-(--ui-control-icon)',
         title: 'text-lg',
         description: 'text-lg',
-        wrapper: 'mt-3.5'
+        wrapper: 'mt-(--ui-control-gap)'
       }
     },
 
@@ -93,26 +98,6 @@ export default defineTheme({
     orientation: 'horizontal',
     size: 'xl',
     class: { separator: 'inset-s-[calc(50%+36px)] inset-e-[calc(-50%+36px)]' }
-  }, {
-    orientation: 'vertical',
-    size: 'xs',
-    class: { separator: 'top-[30px]', item: 'gap-1.5' }
-  }, {
-    orientation: 'vertical',
-    size: 'sm',
-    class: { separator: 'top-[38px]', item: 'gap-2' }
-  }, {
-    orientation: 'vertical',
-    size: 'md',
-    class: { separator: 'top-[46px]', item: 'gap-2.5' }
-  }, {
-    orientation: 'vertical',
-    size: 'lg',
-    class: { separator: 'top-[54px]', item: 'gap-3' }
-  }, {
-    orientation: 'vertical',
-    size: 'xl',
-    class: { separator: 'top-[62px]', item: 'gap-3.5' }
   }],
 
   defaultVariants: {

@@ -12,28 +12,35 @@ export default defineTheme({
     color: colorVariant({ root: '' }),
     size: {
       xs: {
+        root: '[--ui-control-thickness:6px]',
         thumb: 'size-3'
       },
       sm: {
+        root: '[--ui-control-thickness:7px]',
         thumb: 'size-3.5'
       },
       md: {
+        root: '[--ui-control-thickness:8px]',
         thumb: 'size-4'
       },
       lg: {
+        root: '[--ui-control-thickness:9px]',
         thumb: 'size-4.5'
       },
       xl: {
+        root: '[--ui-control-thickness:10px]',
         thumb: 'size-5'
       }
     },
     orientation: {
       horizontal: {
         root: 'w-full',
+        track: 'h-(--ui-control-thickness)',
         range: 'h-full'
       },
       vertical: {
         root: 'flex-col h-full',
+        track: 'w-(--ui-control-thickness)',
         range: 'w-full'
       }
     },
@@ -43,67 +50,6 @@ export default defineTheme({
       }
     }
   },
-  compoundVariants: [{
-    orientation: 'horizontal',
-    size: 'xs',
-    class: {
-      track: 'h-[6px]'
-    }
-  }, {
-    orientation: 'horizontal',
-    size: 'sm',
-    class: {
-      track: 'h-[7px]'
-    }
-  }, {
-    orientation: 'horizontal',
-    size: 'md',
-    class: {
-      track: 'h-[8px]'
-    }
-  }, {
-    orientation: 'horizontal',
-    size: 'lg',
-    class: {
-      track: 'h-[9px]'
-    }
-  }, {
-    orientation: 'horizontal',
-    size: 'xl',
-    class: {
-      track: 'h-[10px]'
-    }
-  }, {
-    orientation: 'vertical',
-    size: 'xs',
-    class: {
-      track: 'w-[6px]'
-    }
-  }, {
-    orientation: 'vertical',
-    size: 'sm',
-    class: {
-      track: 'w-[7px]'
-    }
-  }, {
-    orientation: 'vertical',
-    size: 'md',
-    class: {
-      track: 'w-[8px]'
-    }
-  }, {
-    orientation: 'vertical',
-    size: 'lg',
-    class: {
-      track: 'w-[9px]'
-    }
-  }, {
-    orientation: 'vertical',
-    size: 'xl',
-    class: {
-      track: 'w-[10px]'
-    }
-  }],
   defaultVariants: {
     size: 'md',
     color: 'primary'

@@ -14,11 +14,26 @@ export default defineTheme({
     ...fieldGroupVariantWithRoot,
     color: colorVariant({ root: '' }),
     size: {
-      xs: { base: 'px-2 py-1 text-sm/4 gap-1' },
-      sm: { base: 'px-2.5 py-1.5 text-sm/4 gap-1.5' },
-      md: { base: 'px-2.5 py-1.5 text-base/5 gap-1.5' },
-      lg: { base: 'px-3 py-2 text-base/5 gap-2' },
-      xl: { base: 'px-3 py-2 text-base gap-2' }
+      xs: {
+        root: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)]',
+        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm/4'
+      },
+      sm: {
+        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)]',
+        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm/4'
+      },
+      md: {
+        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)]',
+        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base/5'
+      },
+      lg: {
+        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)]',
+        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base/5'
+      },
+      xl: {
+        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)]',
+        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base'
+      }
     },
     variant: {
       ...input.variants.variant
@@ -46,63 +61,20 @@ export default defineTheme({
     fixed: {
       false: ''
     },
+    // Room for the button: the padding, the icon and the gap
     increment: {
+      true: { base: 'pe-[calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]' },
       false: ''
     },
     decrement: {
+      true: { base: 'ps-[calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]' },
       false: ''
     }
   },
   compoundVariants: [{
-    variant: ['outline', 'subtle'],
-    class: { base: 'outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent' }
-  }, {
-    variant: ['soft', 'ghost'],
-    class: { base: 'outline-accent-focus focus-visible:outline-3' }
-  }, {
     orientation: 'horizontal',
     decrement: false,
     class: { base: 'text-start' }
-  }, {
-    decrement: true,
-    size: 'xs',
-    class: { base: 'ps-7' }
-  }, {
-    decrement: true,
-    size: 'sm',
-    class: { base: 'ps-8' }
-  }, {
-    decrement: true,
-    size: 'md',
-    class: { base: 'ps-9' }
-  }, {
-    decrement: true,
-    size: 'lg',
-    class: { base: 'ps-10' }
-  }, {
-    decrement: true,
-    size: 'xl',
-    class: { base: 'ps-11' }
-  }, {
-    increment: true,
-    size: 'xs',
-    class: { base: 'pe-7' }
-  }, {
-    increment: true,
-    size: 'sm',
-    class: { base: 'pe-8' }
-  }, {
-    increment: true,
-    size: 'md',
-    class: { base: 'pe-9' }
-  }, {
-    increment: true,
-    size: 'lg',
-    class: { base: 'pe-10' }
-  }, {
-    increment: true,
-    size: 'xl',
-    class: { base: 'pe-11' }
   }, {
     fixed: false,
     size: 'xs',
