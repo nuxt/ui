@@ -249,6 +249,12 @@ describe('getSlotChildrenMarkdown', () => {
     ].join('\n\n'))
   })
 
+  it('keeps the code of a block as is', () => {
+    expect(getSlotChildrenMarkdown([
+      h('pre', [h('code', 'a\n```\nb')])
+    ])).toBe('````\na\n```\nb\n````')
+  })
+
   it('reads the tag and the slots of prose components rendered by MDC', () => {
     const prose = (tag: string, children: any[]) => h({ tag, render: () => null } as any, null, { default: () => children })
 

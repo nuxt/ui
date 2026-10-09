@@ -268,8 +268,9 @@ function getMarkdownBlocks(children: any[]): string[] {
         push(content().join('\n\n').replace(/^/gm, '> '))
         break
       case 'pre': {
-        const code = String(node.props?.code ?? content().join('\n')).replace(/\n$/, '')
-        const fence = code.includes('```') ? '````' : '```'
+        const code = String(node.props?.code ?? getSlotChildrenText([node])).replace(/\n$/, '')
+        // The fence has to be longer than any run of backticks in the code.
+        const fence = '`'.repeat(Math.max(3, ...(code.match(/`+/g) || []).map(run => run.length + 1)))
         push(`${fence}${node.props?.language ?? ''}\n${code}\n${fence}`)
         break
       }
