@@ -792,7 +792,7 @@ defineExpose({
             />
           </Component.Cancel>
 
-          <UIcon v-else-if="trailingIconName" :name="trailingIconName" data-slot="input-menu-trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, leading: isLeading })" />
+          <UIcon v-else-if="trailingIconName" :name="trailingIconName" data-slot="input-menu-trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, loading: props.loading && !isLeading })" />
         </slot>
       </Component.Trigger>
     </Component.Anchor>
