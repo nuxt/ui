@@ -101,6 +101,8 @@ items:
     url: https://uneed.best/
   - name: Volta
     url: https://volta.net/
+  - name: WhatsBox
+    url: https://www.whatsbox.io/
   - name: whichcoding.tools
     url: https://whichcoding.tools/
   - name: Wiredash
