@@ -79,7 +79,7 @@ if (import.meta.server) {
             <template v-if="view === 'grid'">
               <div aria-hidden="true" class="absolute inset-0 -z-10 rounded-xl border border-default bg-elevated/50 mask-b-from-25%" />
 
-              <LazyPlayground static hydrate-on-visible />
+              <PlaygroundWall />
             </template>
 
             <!-- [contain:paint]: Chromium won't clip nested composited layers
