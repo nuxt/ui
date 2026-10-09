@@ -85,8 +85,12 @@ export default defineTheme({
     trailing: {
       true: { base: 'pe-[calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]' }
     },
+    // The component turns it off on the trailing icon when the leading one is the loading icon
     loading: {
-      true: ''
+      true: {
+        leadingIcon: 'animate-spin',
+        trailingIcon: 'animate-spin'
+      }
     },
     highlight: {
       true: { base: 'ring ring-inset ring-accent' }
@@ -99,19 +103,6 @@ export default defineTheme({
     }
   },
   compoundVariants: [{
-    loading: true,
-    leading: true,
-    class: {
-      leadingIcon: 'animate-spin'
-    }
-  }, {
-    loading: true,
-    leading: false,
-    trailing: true,
-    class: {
-      trailingIcon: 'animate-spin'
-    }
-  }, {
     fixed: false,
     size: 'xs',
     class: { base: 'md:text-xs' }
