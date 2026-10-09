@@ -785,6 +785,15 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
     }
   })
 
+  // A prompt written in the `prompt` prop has no children, so minimark would
+  // write it as one inline attribute. It becomes its label and a fenced block.
+  visitAndReplace(doc, 'prompt', (node) => {
+    const attrs = node[1] || {}
+    if (typeof attrs.prompt !== 'string') return
+
+    replaceNodeWithMarkdown(node, [attrs.description, fencedBlock(attrs.prompt, 'md')].filter(Boolean).join('\n\n'))
+  })
+
   // Transform badge to inline text
   visitAndReplace(doc, 'badge', (node) => {
     const attrs = node[1] || {}
