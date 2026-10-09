@@ -35,29 +35,29 @@ export default defineTheme({
     },
     size: {
       xs: {
-        base: 'px-2 py-1 text-xs gap-1',
-        leadingIcon: 'size-4',
-        trailingIcon: 'size-4'
+        base: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-xs',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)'
       },
       sm: {
-        base: 'px-2.5 py-1.5 text-xs gap-1.5',
-        leadingIcon: 'size-4',
-        trailingIcon: 'size-4'
+        base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-xs',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)'
       },
       md: {
-        base: 'px-2.5 py-1.5 text-sm gap-1.5',
-        leadingIcon: 'size-5',
-        trailingIcon: 'size-5'
+        base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)'
       },
       lg: {
-        base: 'px-3 py-2 text-sm gap-2',
-        leadingIcon: 'size-5',
-        trailingIcon: 'size-5'
+        base: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)'
       },
       xl: {
-        base: 'px-3 py-2 text-base gap-2',
-        leadingIcon: 'size-6',
-        trailingIcon: 'size-6'
+        base: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)'
       }
     },
     block: {
@@ -66,8 +66,11 @@ export default defineTheme({
         trailingIcon: 'ms-auto'
       }
     },
+    // Equal padding, for `square` or an icon and nothing else
     square: {
-      true: ''
+      true: {
+        base: 'px-(--ui-control-py)'
+      }
     },
     leading: {
       true: ''
@@ -88,26 +91,6 @@ export default defineTheme({
     }
   },
   compoundVariants: [{
-    size: 'xs',
-    square: true,
-    class: { base: 'p-1' }
-  }, {
-    size: 'sm',
-    square: true,
-    class: { base: 'p-1.5' }
-  }, {
-    size: 'md',
-    square: true,
-    class: { base: 'p-1.5' }
-  }, {
-    size: 'lg',
-    square: true,
-    class: { base: 'p-2' }
-  }, {
-    size: 'xl',
-    square: true,
-    class: { base: 'p-2' }
-  }, {
     loading: true,
     leading: true,
     class: {

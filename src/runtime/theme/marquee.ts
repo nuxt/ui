@@ -8,10 +8,12 @@ export default defineTheme({
   variants: {
     orientation: {
       horizontal: {
-        content: 'w-full'
+        root: 'flex-row',
+        content: 'w-full flex-row motion-safe:animate-[marquee_var(--duration)_linear_infinite] motion-safe:rtl:animate-[marquee-rtl_var(--duration)_linear_infinite] backface-hidden'
       },
       vertical: {
-        content: 'h-full'
+        root: 'flex-col',
+        content: 'flex-col motion-safe:animate-[marquee-vertical_var(--duration)_linear_infinite] h-fit backface-hidden'
       }
     },
     pauseOnHover: {
@@ -32,21 +34,9 @@ export default defineTheme({
   },
   compoundVariants: [{
     orientation: 'horizontal',
-    class: {
-      root: 'flex-row',
-      content: 'flex-row motion-safe:animate-[marquee_var(--duration)_linear_infinite] motion-safe:rtl:animate-[marquee-rtl_var(--duration)_linear_infinite] backface-hidden'
-    }
-  }, {
-    orientation: 'horizontal',
     overlay: true,
     class: {
       root: 'before:inset-y-0 before:inset-s-0 before:h-full before:w-1/3 before:bg-linear-to-r rtl:before:bg-linear-to-l after:inset-y-0 after:inset-e-0 after:h-full after:w-1/3 after:bg-linear-to-l rtl:after:bg-linear-to-r backface-hidden'
-    }
-  }, {
-    orientation: 'vertical',
-    class: {
-      root: 'flex-col',
-      content: 'flex-col motion-safe:animate-[marquee-vertical_var(--duration)_linear_infinite] h-fit backface-hidden'
     }
   }, {
     orientation: 'vertical',

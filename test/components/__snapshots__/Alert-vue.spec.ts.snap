@@ -6,7 +6,7 @@ exports[`Alert > renders with actions correctly 1`] = `
   <div data-slot="alert-wrapper" class="min-w-0 flex-1 flex flex-col">
     <div data-slot="alert-title" class="text-sm font-medium">Alert</div>
     <!--v-if-->
-    <div data-slot="alert-actions" class="flex flex-wrap gap-1.5 shrink-0 items-start mt-2.5"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent px-2 py-1 text-xs gap-1">
+    <div data-slot="alert-actions" class="flex flex-wrap gap-1.5 shrink-0 items-start mt-2.5"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-xs">
         <!--v-if--><span data-slot="button-label" class="truncate">Action</span>
         <!--v-if-->
       </button></div>
@@ -59,7 +59,7 @@ exports[`Alert > renders with close correctly 1`] = `
     <!--v-if-->
   </div>
   <div data-slot="alert-actions" class="flex flex-wrap gap-1.5 shrink-0 items-center">
-    <!--v-if--><button type="button" data-slot="alert-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-neutral)] text-accent-muted hover:text-accent-default active:text-accent-default disabled:text-accent-muted aria-disabled:text-accent-muted text-sm gap-1.5 p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-5"></svg>
+    <!--v-if--><button type="button" data-slot="alert-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-neutral)] text-accent-muted hover:text-accent-default active:text-accent-default disabled:text-accent-muted aria-disabled:text-accent-muted [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] gap-(--ui-control-gap) text-sm p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-(--ui-control-icon)"></svg>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -88,7 +88,7 @@ exports[`Alert > renders with closeIcon correctly 1`] = `
     <!--v-if-->
   </div>
   <div data-slot="alert-actions" class="flex flex-wrap gap-1.5 shrink-0 items-center">
-    <!--v-if--><button type="button" data-slot="alert-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-neutral)] text-accent-muted hover:text-accent-default active:text-accent-default disabled:text-accent-muted aria-disabled:text-accent-muted text-sm gap-1.5 p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-5"></svg>
+    <!--v-if--><button type="button" data-slot="alert-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-neutral)] text-accent-muted hover:text-accent-default active:text-accent-default disabled:text-accent-muted aria-disabled:text-accent-muted [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] gap-(--ui-control-gap) text-sm p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-(--ui-control-icon)"></svg>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -198,7 +198,7 @@ exports[`Alert > renders with orientation horizontal correctly 1`] = `
     <div data-slot="alert-description" class="text-sm opacity-90 mt-1">This is a description</div>
     <!--v-if-->
   </div>
-  <div data-slot="alert-actions" class="flex flex-wrap gap-1.5 shrink-0 items-center"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent px-2 py-1 text-xs gap-1">
+  <div data-slot="alert-actions" class="flex flex-wrap gap-1.5 shrink-0 items-center"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-xs">
       <!--v-if--><span data-slot="button-label" class="truncate">Action</span>
       <!--v-if-->
     </button>
@@ -212,7 +212,7 @@ exports[`Alert > renders with orientation vertical correctly 1`] = `
   <div data-slot="alert-wrapper" class="min-w-0 flex-1 flex flex-col">
     <div data-slot="alert-title" class="text-sm font-medium">Alert</div>
     <div data-slot="alert-description" class="text-sm opacity-90 mt-1">This is a description</div>
-    <div data-slot="alert-actions" class="flex flex-wrap gap-1.5 shrink-0 items-start mt-2.5"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent px-2 py-1 text-xs gap-1">
+    <div data-slot="alert-actions" class="flex flex-wrap gap-1.5 shrink-0 items-start mt-2.5"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-xs">
         <!--v-if--><span data-slot="button-label" class="truncate">Action</span>
         <!--v-if-->
       </button></div>

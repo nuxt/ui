@@ -25,10 +25,10 @@ export default defineTheme({
       },
       card: {
         fieldset: 'flex-wrap',
-        item: `border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft`
+        item: `px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft ${focusCard}`
       },
       table: {
-        item: `border border-default hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent/50 has-data-[state=checked]:z-2`
+        item: `px-(--ui-control-px) py-(--ui-control-py) border border-default hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent/50 has-data-[state=checked]:z-2 ${focusCard}`
       }
     },
     orientation: {
@@ -49,6 +49,7 @@ export default defineTheme({
         wrapper: 'me-2'
       },
       hidden: {
+        icon: 'size-(--ui-control-icon)',
         base: 'sr-only',
         wrapper: 'flex flex-col items-center gap-1 text-center'
       }
@@ -56,6 +57,7 @@ export default defineTheme({
     size: {
       xs: {
         fieldset: 'gap-y-0.5',
+        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(2.5)] [--ui-control-icon:--spacing(3)]',
         legend: 'text-xs',
         base: 'size-3',
         item: 'text-xs',
@@ -64,6 +66,7 @@ export default defineTheme({
       },
       sm: {
         fieldset: 'gap-y-0.5',
+        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(3)] [--ui-control-icon:--spacing(3.5)]',
         legend: 'text-xs',
         base: 'size-3.5',
         item: 'text-xs',
@@ -72,6 +75,7 @@ export default defineTheme({
       },
       md: {
         fieldset: 'gap-y-1',
+        root: '[--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)]',
         legend: 'text-sm',
         base: 'size-4',
         item: 'text-sm',
@@ -80,6 +84,7 @@ export default defineTheme({
       },
       lg: {
         fieldset: 'gap-y-1',
+        root: '[--ui-control-px:--spacing(4)] [--ui-control-py:--spacing(4)] [--ui-control-icon:--spacing(4.5)]',
         legend: 'text-sm',
         base: 'size-4.5',
         item: 'text-sm',
@@ -88,6 +93,7 @@ export default defineTheme({
       },
       xl: {
         fieldset: 'gap-y-1.5',
+        root: '[--ui-control-px:--spacing(4.5)] [--ui-control-py:--spacing(4.5)] [--ui-control-icon:--spacing(5)]',
         legend: 'text-base',
         base: 'size-5',
         item: 'text-base',
@@ -129,16 +135,6 @@ export default defineTheme({
         item: 'hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:z-1'
       }
     },
-    { size: 'xs', indicator: 'hidden', class: { icon: 'size-3' } },
-    { size: 'sm', indicator: 'hidden', class: { icon: 'size-3.5' } },
-    { size: 'md', indicator: 'hidden', class: { icon: 'size-4' } },
-    { size: 'lg', indicator: 'hidden', class: { icon: 'size-4.5' } },
-    { size: 'xl', indicator: 'hidden', class: { icon: 'size-5' } },
-    { size: 'xs', variant: ['card', 'table'], class: { item: 'p-2.5' } },
-    { size: 'sm', variant: ['card', 'table'], class: { item: 'p-3' } },
-    { size: 'md', variant: ['card', 'table'], class: { item: 'p-3.5' } },
-    { size: 'lg', variant: ['card', 'table'], class: { item: 'p-4' } },
-    { size: 'xl', variant: ['card', 'table'], class: { item: 'p-4.5' } },
     {
       orientation: 'horizontal',
       variant: 'table',
@@ -160,12 +156,6 @@ export default defineTheme({
       indicator: ['start', 'end'],
       class: {
         base: focusControl
-      }
-    },
-    {
-      variant: ['card', 'table'],
-      class: {
-        item: focusCard
       }
     },
     {

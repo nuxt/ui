@@ -27,36 +27,42 @@ export default defineTheme({
         base: 'p-4'
       },
       button: {
+        base: 'p-(--ui-control-py)'
       }
     },
     size: {
       xs: {
+        root: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)]',
         base: 'text-xs',
-        icon: 'size-4',
-        file: 'text-xs px-2 py-1 gap-1',
+        icon: 'size-(--ui-control-icon)',
+        file: 'text-xs px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)',
         fileWrapper: 'flex-row gap-1'
       },
       sm: {
+        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)]',
         base: 'text-xs',
-        icon: 'size-4',
-        file: 'text-xs px-2.5 py-1.5 gap-1.5',
+        icon: 'size-(--ui-control-icon)',
+        file: 'text-xs px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)',
         fileWrapper: 'flex-row gap-1'
       },
       md: {
+        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)]',
         base: 'text-sm',
-        icon: 'size-5',
-        file: 'text-xs px-2.5 py-1.5 gap-1.5'
+        icon: 'size-(--ui-control-icon)',
+        file: 'text-xs px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)'
       },
       lg: {
+        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)]',
         base: 'text-sm',
-        icon: 'size-5',
-        file: 'text-sm px-3 py-2 gap-2',
+        icon: 'size-(--ui-control-icon)',
+        file: 'text-sm px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)',
         fileSize: 'text-xs'
       },
       xl: {
+        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)]',
         base: 'text-base',
-        icon: 'size-6',
-        file: 'text-sm px-3 py-2 gap-2'
+        icon: 'size-(--ui-control-icon)',
+        file: 'text-sm px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)'
       }
     },
     layout: {
@@ -121,36 +127,6 @@ export default defineTheme({
     layout: 'list',
     class: {
       fileTrailingButton: '-me-2'
-    }
-  }, {
-    variant: 'button',
-    size: 'xs',
-    class: {
-      base: 'p-1'
-    }
-  }, {
-    variant: 'button',
-    size: 'sm',
-    class: {
-      base: 'p-1.5'
-    }
-  }, {
-    variant: 'button',
-    size: 'md',
-    class: {
-      base: 'p-1.5'
-    }
-  }, {
-    variant: 'button',
-    size: 'lg',
-    class: {
-      base: 'p-2'
-    }
-  }, {
-    variant: 'button',
-    size: 'xl',
-    class: {
-      base: 'p-2'
     }
   }, {
     layout: 'grid',
