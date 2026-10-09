@@ -1,341 +1,341 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Button > renders with active variant ghost correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with active variant link correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-muted hover:text-accent-default active:text-accent-default disabled:text-accent-muted aria-disabled:text-accent-muted px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-muted hover:text-accent-default active:text-accent-default disabled:text-accent-muted aria-disabled:text-accent-muted [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with active variant outline correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] ring ring-inset ring-accent-strong text-accent-default bg-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-default aria-disabled:bg-default focus-visible:ring-accent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] ring ring-inset ring-accent-strong text-accent-default bg-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-default aria-disabled:bg-default focus-visible:ring-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with active variant soft correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-default bg-accent-soft hover:bg-accent-strong active:bg-accent-strong disabled:bg-accent-soft aria-disabled:bg-accent-soft px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-default bg-accent-soft hover:bg-accent-strong active:bg-accent-strong disabled:bg-accent-soft aria-disabled:bg-accent-soft [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with active variant solid correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with active variant subtle correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-default ring ring-inset ring-accent-strong bg-accent-soft hover:bg-accent-strong active:bg-accent-strong disabled:bg-accent-soft aria-disabled:bg-accent-soft focus-visible:ring-accent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-default ring ring-inset ring-accent-strong bg-accent-soft hover:bg-accent-strong active:bg-accent-strong disabled:bg-accent-soft aria-disabled:bg-accent-soft focus-visible:ring-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with activeClass correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent px-2.5 py-1.5 text-sm gap-1.5 font-bold">
+"<button type="button" data-slot="button" class="rounded-md inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm font-bold">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with as correctly 1`] = `
-"<div data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent px-2.5 py-1.5 text-sm gap-1.5">
+"<div data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Button > renders with avatar and leadingIcon correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent text-sm gap-1.5 p-1.5"><span class="iconify i-lucide:arrow-left shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] py-(--ui-control-py) gap-(--ui-control-gap) text-sm px-(--ui-control-py)"><span class="iconify i-lucide:arrow-left shrink-0 size-(--ui-control-icon)" aria-hidden="true" data-slot="button-leadingIcon"></span>
   <!--v-if-->
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with avatar and trailingIcon correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent text-sm gap-1.5 p-1.5"><span data-slot="button-leadingAvatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" width="20" height="20" data-slot="avatar-image" class="size-full rounded-[inherit] object-cover"></span>
-  <!--v-if--><span class="iconify i-lucide:arrow-right shrink-0 size-5" aria-hidden="true" data-slot="button-trailingIcon"></span>
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] py-(--ui-control-py) gap-(--ui-control-gap) text-sm px-(--ui-control-py)"><span data-slot="button-leadingAvatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" width="20" height="20" data-slot="avatar-image" class="size-full rounded-[inherit] object-cover"></span>
+  <!--v-if--><span class="iconify i-lucide:arrow-right shrink-0 size-(--ui-control-icon)" aria-hidden="true" data-slot="button-trailingIcon"></span>
 </button>"
 `;
 
 exports[`Button > renders with avatar correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent text-sm gap-1.5 p-1.5"><span data-slot="button-leadingAvatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" width="20" height="20" data-slot="avatar-image" class="size-full rounded-[inherit] object-cover"></span>
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] py-(--ui-control-py) gap-(--ui-control-gap) text-sm px-(--ui-control-py)"><span data-slot="button-leadingAvatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" width="20" height="20" data-slot="avatar-image" class="size-full rounded-[inherit] object-cover"></span>
   <!--v-if-->
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with block correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm w-full justify-center">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with class correctly 1`] = `
-"<button type="button" data-slot="button" class="inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent px-2.5 py-1.5 text-sm gap-1.5 rounded-full font-bold">
+"<button type="button" data-slot="button" class="inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm rounded-full font-bold">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with default slot correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if-->Default slot
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with disabled and with link correctly 1`] = `
-"<a aria-disabled="true" role="link" tabindex="-1" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent px-2.5 py-1.5 text-sm gap-1.5">
+"<a aria-disabled="true" role="link" tabindex="-1" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </a>"
 `;
 
 exports[`Button > renders with disabled correctly 1`] = `
-"<button type="button" disabled="" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" disabled="" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with icon correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent text-sm gap-1.5 p-1.5"><span class="iconify i-lucide:rocket shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] py-(--ui-control-py) gap-(--ui-control-gap) text-sm px-(--ui-control-py)"><span class="iconify i-lucide:rocket shrink-0 size-(--ui-control-icon)" aria-hidden="true" data-slot="button-leadingIcon"></span>
   <!--v-if-->
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with inactiveClass correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent px-2.5 py-1.5 text-sm gap-1.5 font-light">
+"<button type="button" data-slot="button" class="rounded-md inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm font-light">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with label correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with leading and icon correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent text-sm gap-1.5 p-1.5"><span class="iconify i-lucide:arrow-left shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] py-(--ui-control-py) gap-(--ui-control-gap) text-sm px-(--ui-control-py)"><span class="iconify i-lucide:arrow-left shrink-0 size-(--ui-control-icon)" aria-hidden="true" data-slot="button-leadingIcon"></span>
   <!--v-if-->
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with leading slot correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent text-sm gap-1.5 p-1.5">Leading slot
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] py-(--ui-control-py) gap-(--ui-control-gap) text-sm px-(--ui-control-py)">Leading slot
   <!--v-if-->
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with leadingIcon correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent text-sm gap-1.5 p-1.5"><span class="iconify i-lucide:arrow-left shrink-0 size-5" aria-hidden="true" data-slot="button-leadingIcon"></span>
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] py-(--ui-control-py) gap-(--ui-control-gap) text-sm px-(--ui-control-py)"><span class="iconify i-lucide:arrow-left shrink-0 size-(--ui-control-icon)" aria-hidden="true" data-slot="button-leadingIcon"></span>
   <!--v-if-->
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with loading and avatar correctly 1`] = `
-"<button type="button" disabled="" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent text-sm gap-1.5 p-1.5"><span class="iconify i-lucide:loader-circle shrink-0 size-5 animate-spin" aria-hidden="true" data-slot="button-leadingIcon"></span>
+"<button type="button" disabled="" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] py-(--ui-control-py) gap-(--ui-control-gap) text-sm px-(--ui-control-py)"><span class="iconify i-lucide:loader-circle shrink-0 size-(--ui-control-icon) animate-spin" aria-hidden="true" data-slot="button-leadingIcon"></span>
   <!--v-if-->
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with loading correctly 1`] = `
-"<button type="button" disabled="" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent text-sm gap-1.5 p-1.5"><span class="iconify i-lucide:loader-circle shrink-0 size-5 animate-spin" aria-hidden="true" data-slot="button-leadingIcon"></span>
+"<button type="button" disabled="" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] py-(--ui-control-py) gap-(--ui-control-gap) text-sm px-(--ui-control-py)"><span class="iconify i-lucide:loader-circle shrink-0 size-(--ui-control-icon) animate-spin" aria-hidden="true" data-slot="button-leadingIcon"></span>
   <!--v-if-->
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with loading trailing and avatar correctly 1`] = `
-"<button type="button" disabled="" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent text-sm gap-1.5 p-1.5"><span data-slot="button-leadingAvatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" width="20" height="20" data-slot="avatar-image" class="size-full rounded-[inherit] object-cover"></span>
-  <!--v-if--><span class="iconify i-lucide:loader-circle shrink-0 size-5 animate-spin" aria-hidden="true" data-slot="button-trailingIcon"></span>
+"<button type="button" disabled="" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] py-(--ui-control-py) gap-(--ui-control-gap) text-sm px-(--ui-control-py)"><span data-slot="button-leadingAvatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-accent-soft [--ui-accent:var(--ui-neutral)] size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" width="20" height="20" data-slot="avatar-image" class="size-full rounded-[inherit] object-cover"></span>
+  <!--v-if--><span class="iconify i-lucide:loader-circle shrink-0 size-(--ui-control-icon) animate-spin" aria-hidden="true" data-slot="button-trailingIcon"></span>
 </button>"
 `;
 
 exports[`Button > renders with loading trailing correctly 1`] = `
-"<button type="button" disabled="" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent text-sm gap-1.5 p-1.5">
+"<button type="button" disabled="" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] py-(--ui-control-py) gap-(--ui-control-gap) text-sm px-(--ui-control-py)">
   <!--v-if-->
-  <!--v-if--><span class="iconify i-lucide:loader-circle shrink-0 size-5 animate-spin" aria-hidden="true" data-slot="button-trailingIcon"></span>
+  <!--v-if--><span class="iconify i-lucide:loader-circle shrink-0 size-(--ui-control-icon) animate-spin" aria-hidden="true" data-slot="button-trailingIcon"></span>
 </button>"
 `;
 
 exports[`Button > renders with loadingIcon correctly 1`] = `
-"<button type="button" disabled="" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent text-sm gap-1.5 p-1.5"><span class="iconify i-lucide:loader shrink-0 size-5 animate-spin" aria-hidden="true" data-slot="button-leadingIcon"></span>
+"<button type="button" disabled="" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] py-(--ui-control-py) gap-(--ui-control-gap) text-sm px-(--ui-control-py)"><span class="iconify i-lucide:loader shrink-0 size-(--ui-control-icon) animate-spin" aria-hidden="true" data-slot="button-leadingIcon"></span>
   <!--v-if-->
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with neutral variant ghost correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with neutral variant link correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-neutral)] text-accent-muted hover:text-accent-default active:text-accent-default disabled:text-accent-muted aria-disabled:text-accent-muted px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-neutral)] text-accent-muted hover:text-accent-default active:text-accent-default disabled:text-accent-muted aria-disabled:text-accent-muted [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with neutral variant outline correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-neutral)] ring ring-inset ring-accent-strong text-accent-default bg-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-default aria-disabled:bg-default focus-visible:ring-accent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-neutral)] ring ring-inset ring-accent-strong text-accent-default bg-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-default aria-disabled:bg-default focus-visible:ring-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with neutral variant soft correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-neutral)] text-accent-default bg-accent-soft hover:bg-accent-strong active:bg-accent-strong disabled:bg-accent-soft aria-disabled:bg-accent-soft px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-neutral)] text-accent-default bg-accent-soft hover:bg-accent-strong active:bg-accent-strong disabled:bg-accent-soft aria-disabled:bg-accent-soft [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with neutral variant solid correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-neutral)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-neutral)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with neutral variant subtle correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-neutral)] text-accent-default ring ring-inset ring-accent-strong bg-accent-soft hover:bg-accent-strong active:bg-accent-strong disabled:bg-accent-soft aria-disabled:bg-accent-soft focus-visible:ring-accent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-neutral)] text-accent-default ring ring-inset ring-accent-strong bg-accent-soft hover:bg-accent-strong active:bg-accent-strong disabled:bg-accent-soft aria-disabled:bg-accent-soft focus-visible:ring-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with primary variant ghost correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with primary variant link correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-muted hover:text-accent-default active:text-accent-default disabled:text-accent-muted aria-disabled:text-accent-muted px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-muted hover:text-accent-default active:text-accent-default disabled:text-accent-muted aria-disabled:text-accent-muted [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with primary variant outline correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] ring ring-inset ring-accent-strong text-accent-default bg-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-default aria-disabled:bg-default focus-visible:ring-accent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] ring ring-inset ring-accent-strong text-accent-default bg-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-default aria-disabled:bg-default focus-visible:ring-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with primary variant soft correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-default bg-accent-soft hover:bg-accent-strong active:bg-accent-strong disabled:bg-accent-soft aria-disabled:bg-accent-soft px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-default bg-accent-soft hover:bg-accent-strong active:bg-accent-strong disabled:bg-accent-soft aria-disabled:bg-accent-soft [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with primary variant solid correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with primary variant subtle correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-default ring ring-inset ring-accent-strong bg-accent-soft hover:bg-accent-strong active:bg-accent-strong disabled:bg-accent-soft aria-disabled:bg-accent-soft focus-visible:ring-accent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-default ring ring-inset ring-accent-strong bg-accent-soft hover:bg-accent-strong active:bg-accent-strong disabled:bg-accent-soft aria-disabled:bg-accent-soft focus-visible:ring-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with size lg correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent px-3 py-2 text-sm gap-2">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with size md correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with size sm correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent px-2.5 py-1.5 text-xs gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-xs">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with size xl correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent px-3 py-2 text-base gap-2">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with size xs correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent px-2 py-1 text-xs gap-1">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-xs">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with square correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent text-sm gap-1.5 p-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] py-(--ui-control-py) gap-(--ui-control-gap) text-sm px-(--ui-control-py)">
   <!--v-if--><span data-slot="button-label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with trailing and icon correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent text-sm gap-1.5 p-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] py-(--ui-control-py) gap-(--ui-control-gap) text-sm px-(--ui-control-py)">
   <!--v-if-->
-  <!--v-if--><span class="iconify i-lucide:arrow-right shrink-0 size-5" aria-hidden="true" data-slot="button-trailingIcon"></span>
+  <!--v-if--><span class="iconify i-lucide:arrow-right shrink-0 size-(--ui-control-icon)" aria-hidden="true" data-slot="button-trailingIcon"></span>
 </button>"
 `;
 
 exports[`Button > renders with trailing slot correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent text-sm gap-1.5 p-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] py-(--ui-control-py) gap-(--ui-control-gap) text-sm px-(--ui-control-py)">
   <!--v-if-->
   <!--v-if-->Trailing slot
 </button>"
 `;
 
 exports[`Button > renders with trailingIcon correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent text-sm gap-1.5 p-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] py-(--ui-control-py) gap-(--ui-control-gap) text-sm px-(--ui-control-py)">
   <!--v-if-->
-  <!--v-if--><span class="iconify i-lucide:arrow-right shrink-0 size-5" aria-hidden="true" data-slot="button-trailingIcon"></span>
+  <!--v-if--><span class="iconify i-lucide:arrow-right shrink-0 size-(--ui-control-icon)" aria-hidden="true" data-slot="button-trailingIcon"></span>
 </button>"
 `;
 
 exports[`Button > renders with ui correctly 1`] = `
-"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent px-2.5 py-1.5 text-sm gap-1.5">
+"<button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm">
   <!--v-if--><span data-slot="button-label" class="truncate font-bold">Button</span>
   <!--v-if-->
 </button>"

@@ -13,24 +13,20 @@ export default defineTheme({
     color: colorVariant({ root: '' }),
     variant: {
       outline: {
-        root: 'bg-default/75 ring ring-default'
+        root: 'bg-default/75 ring ring-default outline-accent-focus has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-accent has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-accent'
       },
       // Highlight the prompt like a focused input when the text surface (native textarea or editor's contenteditable) is focused, without reacting to header/footer controls.
       soft: {
         root: 'bg-tint outline-accent-focus has-[textarea:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:outline-3'
       },
       subtle: {
-        root: 'bg-tint ring ring-default'
+        root: 'bg-tint ring ring-default outline-accent-focus has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-accent has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-accent'
       },
       naked: {
         root: ''
       }
     }
   },
-  compoundVariants: [{
-    variant: ['outline', 'subtle'],
-    class: { root: 'outline-accent-focus has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-accent has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-accent' }
-  }],
   defaultVariants: {
     color: 'primary',
     variant: 'outline'
