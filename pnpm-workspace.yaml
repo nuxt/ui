@@ -115,7 +115,7 @@ catalog:
   motion-v: ^2.5.2
   nuxt: ^4.6.0
   nuxt-agent-discovery: ^0.7.1
-  nuxt-component-meta: ^0.18.0
+  nuxt-component-meta: https://pkg.pr.new/nuxt-component-meta@63afeb3
   nuxt-llms: ^0.2.0
   nuxt-og-image: ^6.10.3
   nuxt-schema-org: ^6.4.3
