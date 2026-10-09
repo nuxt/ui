@@ -204,8 +204,8 @@ describe('FileUpload', () => {
       props: { modelValue: item }
     })
 
-    expect(wrapper.get('[data-slot="fileName"]').text()).toBe(item.name)
-    expect(wrapper.get('[data-slot="fileLeadingAvatar"] img').attributes()).toMatchObject({
+    expect(wrapper.get('[data-slot="file-upload-fileName"]').text()).toBe(item.name)
+    expect(wrapper.get('[data-slot="file-upload-fileLeadingAvatar"] img').attributes()).toMatchObject({
       src: item.avatar?.src,
       alt: item.avatar?.alt
     })
@@ -221,7 +221,7 @@ describe('FileUpload', () => {
       }
     })
 
-    expect(wrapper.get('[data-slot="fileLeadingAvatar"] img').attributes('alt')).toBe('avatar.png')
+    expect(wrapper.get('[data-slot="file-upload-fileLeadingAvatar"] img').attributes('alt')).toBe('avatar.png')
   })
 
   it('hides custom item previews when fileImage is false', async () => {
@@ -240,9 +240,9 @@ describe('FileUpload', () => {
       }
     })
 
-    const fileAvatar = wrapper.findAllComponents(Avatar).find(component => component.attributes('data-slot') === 'fileLeadingAvatar')
+    const fileAvatar = wrapper.findAllComponents(Avatar).find(component => component.attributes('data-slot') === 'file-upload-fileLeadingAvatar')
 
-    expect(wrapper.find('[data-slot="fileLeadingAvatar"] img').exists()).toBe(false)
+    expect(wrapper.find('[data-slot="file-upload-fileLeadingAvatar"] img').exists()).toBe(false)
     expect(fileAvatar?.props('icon')).toBe('i-lucide-file-text')
     expect(wrapper.text()).not.toContain('UA')
   })
