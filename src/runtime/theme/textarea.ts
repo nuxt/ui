@@ -14,24 +14,24 @@ export default extendTheme(input, {
     },
     size: {
       xs: {
-        leading: 'ps-2 inset-y-1',
-        trailing: 'pe-2 inset-y-1'
+        leading: (prev: string) => [prev, 'inset-y-(--ui-control-py)'],
+        trailing: (prev: string) => [prev, 'inset-y-(--ui-control-py)']
       },
       sm: {
-        leading: 'ps-2.5 inset-y-1.5',
-        trailing: 'pe-2.5 inset-y-1.5'
+        leading: (prev: string) => [prev, 'inset-y-(--ui-control-py)'],
+        trailing: (prev: string) => [prev, 'inset-y-(--ui-control-py)']
       },
       md: {
-        leading: 'ps-2.5 inset-y-1.5',
-        trailing: 'pe-2.5 inset-y-1.5'
+        leading: (prev: string) => [prev, 'inset-y-(--ui-control-py)'],
+        trailing: (prev: string) => [prev, 'inset-y-(--ui-control-py)']
       },
       lg: {
-        leading: 'ps-3 inset-y-2',
-        trailing: 'pe-3 inset-y-2'
+        leading: (prev: string) => [prev, 'inset-y-(--ui-control-py)'],
+        trailing: (prev: string) => [prev, 'inset-y-(--ui-control-py)']
       },
       xl: {
-        leading: 'ps-3 inset-y-2',
-        trailing: 'pe-3 inset-y-2'
+        leading: (prev: string) => [prev, 'inset-y-(--ui-control-py)'],
+        trailing: (prev: string) => [prev, 'inset-y-(--ui-control-py)']
       }
     }
   }

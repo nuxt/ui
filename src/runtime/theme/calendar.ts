@@ -1,22 +1,6 @@
 import { colorVariant } from './color'
 import { defineTheme } from '../utils/theme'
 
-const daySizes = {
-  xs: 'size-6',
-  sm: 'size-7',
-  md: 'size-8',
-  lg: 'size-9',
-  xl: 'size-10'
-}
-
-const pickerSizes = {
-  xs: 'h-6 px-2',
-  sm: 'h-7 px-2',
-  md: 'h-8 px-3',
-  lg: 'h-9 px-4',
-  xl: 'h-10 px-5'
-}
-
 export default defineTheme({
   slots: {
     root: '',
@@ -52,6 +36,7 @@ export default defineTheme({
     },
     size: {
       xs: {
+        root: '[--ui-control-size:--spacing(6)] [--ui-control-px:--spacing(2)]',
         headingLabel: 'text-xs',
         cell: 'text-xs',
         cellWeek: 'text-xs',
@@ -60,6 +45,7 @@ export default defineTheme({
         body: 'space-y-2 pt-2'
       },
       sm: {
+        root: '[--ui-control-size:--spacing(7)] [--ui-control-px:--spacing(2)]',
         headingLabel: 'text-xs',
         headCell: 'text-xs',
         headCellWeek: 'text-xs',
@@ -67,6 +53,7 @@ export default defineTheme({
         cell: 'text-xs'
       },
       md: {
+        root: '[--ui-control-size:--spacing(8)] [--ui-control-px:--spacing(3)]',
         headingLabel: 'text-sm',
         headCell: 'text-xs',
         headCellWeek: 'text-xs',
@@ -74,6 +61,7 @@ export default defineTheme({
         cell: 'text-sm'
       },
       lg: {
+        root: '[--ui-control-size:--spacing(9)] [--ui-control-px:--spacing(4)]',
         headingLabel: 'text-base',
         headCell: 'text-base',
         headCellWeek: 'text-base',
@@ -81,6 +69,7 @@ export default defineTheme({
         cell: 'text-base'
       },
       xl: {
+        root: '[--ui-control-size:--spacing(10)] [--ui-control-px:--spacing(5)]',
         headingLabel: 'text-lg',
         headCell: 'text-lg',
         headCellWeek: 'text-lg',
@@ -91,15 +80,15 @@ export default defineTheme({
     view: {
       day: {
         gridRow: 'grid-cols-7 place-items-center',
-        cellTrigger: 'rounded-full data-outside-view:text-muted'
+        cellTrigger: 'size-(--ui-control-size) rounded-full data-outside-view:text-muted'
       },
       month: {
         gridRow: 'grid-cols-4',
-        cellTrigger: 'rounded-md'
+        cellTrigger: 'h-(--ui-control-size) px-(--ui-control-px) rounded-md'
       },
       year: {
         gridRow: 'grid-cols-4',
-        cellTrigger: 'rounded-md'
+        cellTrigger: 'h-(--ui-control-size) px-(--ui-control-px) rounded-md'
       }
     },
     weekNumbers: {
@@ -107,16 +96,6 @@ export default defineTheme({
     }
   },
   compoundVariants: [
-    ...(Object.entries(daySizes) as [keyof typeof daySizes, string][]).map(([size, cellTrigger]) => ({
-      size,
-      view: 'day' as const,
-      class: { cellTrigger }
-    })),
-    ...(Object.entries(pickerSizes) as [keyof typeof pickerSizes, string][]).map(([size, cellTrigger]) => ({
-      size,
-      view: ['month' as const, 'year' as const],
-      class: { cellTrigger }
-    })),
     {
       view: 'day',
       weekNumbers: true,
