@@ -296,9 +296,13 @@ function getMarkdownBlocks(children: any[]): string[] {
         inline += `${delimiter}${space}${code}${space}${delimiter}`
         break
       }
-      case 'a':
-        inline += node.props?.href ? `[${content().join('')}](${node.props.href})` : content().join('')
+      case 'a': {
+        const href = String(node.props?.href ?? '')
+        // A destination with a space or a parenthesis is only read whole between angle brackets.
+        const destination = /[\s()]/.test(href) ? `<${href.replace(/[<>]/g, '\\$&')}>` : href
+        inline += href ? `[${content().join('')}](${destination})` : content().join('')
         break
+      }
       case 'strong':
       case 'b':
         inline += `**${content().join('')}**`

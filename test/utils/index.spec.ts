@@ -261,6 +261,12 @@ describe('getSlotChildrenMarkdown', () => {
     ])).toBe('Use ``a `b` c`` or `` `d` ``.')
   })
 
+  it('wraps a link destination with a space or a parenthesis', () => {
+    expect(getSlotChildrenMarkdown([
+      h('p', [h('a', { href: '/docs/a b' }, 'a'), ' ', h('a', { href: '/docs/c)' }, 'c')])
+    ])).toBe('[a](</docs/a b>) [c](</docs/c)>)')
+  })
+
   it('reads the tag and the slots of prose components rendered by MDC', () => {
     const prose = (tag: string, children: any[]) => h({ tag, render: () => null } as any, null, { default: () => children })
 
