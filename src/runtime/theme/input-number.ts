@@ -1,5 +1,5 @@
 import { colorVariant } from './color'
-import input from './input'
+import input from './input-legacy'
 import { fieldGroupVariantWithRoot } from './field-group'
 import { defineTheme } from '../utils/theme'
 

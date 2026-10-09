@@ -1,4 +1,4 @@
-import input from './input'
+import input from './input-legacy'
 import { extendTheme } from '../utils/theme'
 
 export default extendTheme(input, {

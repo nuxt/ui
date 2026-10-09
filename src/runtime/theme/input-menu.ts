@@ -1,4 +1,4 @@
-import input from './input'
+import input from './input-legacy'
 import { fieldGroupVariant, fieldGroupVariantWithRoot } from './field-group'
 import { extendTheme } from '../utils/theme'
 

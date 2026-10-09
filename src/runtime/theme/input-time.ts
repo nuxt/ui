@@ -1,4 +1,4 @@
-import input, { replaceFocus } from './input'
+import input, { replaceFocus } from './input-legacy'
 import { colorVariant } from './color'
 import { fieldGroupVariant } from './field-group'
 import { extendTheme } from '../utils/theme'
