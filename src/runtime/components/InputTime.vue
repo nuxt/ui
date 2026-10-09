@@ -82,7 +82,7 @@ export interface InputTimeSlots {
 <script setup lang="ts" generic="R extends boolean">
 import { computed, onMounted, onScopeDispose, ref } from 'vue'
 import { useForwardProps } from '../composables/useForwardProps'
-import { TimeField as SingleTimeField, TimeRangeField as RangeTimeField } from 'reka-ui/namespaced'
+import { TimeFieldRoot, TimeFieldInput, TimeRangeFieldRoot, TimeRangeFieldInput } from 'reka-ui'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
@@ -92,6 +92,9 @@ import { useFormField } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
+
+const SingleTimeField = { Root: TimeFieldRoot, Input: TimeFieldInput }
+const RangeTimeField = { Root: TimeRangeFieldRoot, Input: TimeRangeFieldInput }
 
 defineOptions({ inheritAttrs: false })
 
