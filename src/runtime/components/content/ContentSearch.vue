@@ -337,8 +337,9 @@ const groups = computed(() => {
   return groups
 })
 
-function onSelect(item: ContentSearchItem) {
-  if (item.disabled) {
+function onSelect(item: ContentSearchItem | undefined) {
+  // `selectionBehavior: 'toggle'` emits `undefined` when the selected item is selected again
+  if (!item || item.disabled) {
     return
   }
 
