@@ -13,7 +13,7 @@ exports[`DashboardSearch > renders with class correctly 1`] = `
         <!--v-if-->
         <!--v-if--></button></span>
       </div>
-      <div data-slot="content" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
+      <div data-slot="content" aria-label="Type a command or search…" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
         <div role="presentation" data-slot="viewport" class="relative scroll-py-1 overflow-y-auto flex-1 focus:outline-none divide-y divide-default">
           <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0-0-0" data-slot="group" class="p-1 isolate">
             <div id="reka-listbox-group-v-0-0-0-0-0" data-slot="label" class="font-semibold text-highlighted p-1.5 text-xs gap-1.5">Go to</div><a href="/" role="option" tabindex="-1" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0-0-1" aria-selected="false" data-state="unchecked" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 p-1.5 text-sm gap-1.5 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors" data-highlighted="">
@@ -57,7 +57,7 @@ exports[`DashboardSearch > renders with fullscreen correctly 1`] = `
         <!--v-if-->
         <!--v-if--></button></span>
       </div>
-      <div data-slot="content" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
+      <div data-slot="content" aria-label="Type a command or search…" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
         <div role="presentation" data-slot="viewport" class="relative scroll-py-1 overflow-y-auto flex-1 focus:outline-none divide-y divide-default">
           <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0-0-0" data-slot="group" class="p-1 isolate">
             <div id="reka-listbox-group-v-0-0-0-0-0" data-slot="label" class="font-semibold text-highlighted p-1.5 text-xs gap-1.5">Go to</div><a href="/" role="option" tabindex="-1" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0-0-1" aria-selected="false" data-state="unchecked" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 p-1.5 text-sm gap-1.5 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors" data-highlighted="">
@@ -101,7 +101,7 @@ exports[`DashboardSearch > renders with groups correctly 1`] = `
         <!--v-if-->
         <!--v-if--></button></span>
       </div>
-      <div data-slot="content" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
+      <div data-slot="content" aria-label="Type a command or search…" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
         <div role="presentation" data-slot="viewport" class="relative scroll-py-1 overflow-y-auto flex-1 focus:outline-none divide-y divide-default">
           <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0-0-0" data-slot="group" class="p-1 isolate">
             <div id="reka-listbox-group-v-0-0-0-0-0" data-slot="label" class="font-semibold text-highlighted p-1.5 text-xs gap-1.5">Go to</div><a href="/" role="option" tabindex="-1" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0-0-1" aria-selected="false" data-state="unchecked" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 p-1.5 text-sm gap-1.5 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors" data-highlighted="">
@@ -145,7 +145,7 @@ exports[`DashboardSearch > renders with icon correctly 1`] = `
         <!--v-if-->
         <!--v-if--></button></span>
       </div>
-      <div data-slot="content" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
+      <div data-slot="content" aria-label="Type a command or search…" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
         <div role="presentation" data-slot="viewport" class="relative scroll-py-1 overflow-y-auto flex-1 focus:outline-none divide-y divide-default">
           <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0-0-0" data-slot="group" class="p-1 isolate">
             <div id="reka-listbox-group-v-0-0-0-0-0" data-slot="label" class="font-semibold text-highlighted p-1.5 text-xs gap-1.5">Go to</div><a href="/" role="option" tabindex="-1" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0-0-1" aria-selected="false" data-state="unchecked" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 p-1.5 text-sm gap-1.5 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors" data-highlighted="">
@@ -189,7 +189,7 @@ exports[`DashboardSearch > renders with loading correctly 1`] = `
         <!--v-if-->
         <!--v-if--></button></span>
       </div>
-      <div data-slot="content" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
+      <div data-slot="content" aria-label="Type a command or search…" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
         <div role="presentation" data-slot="viewport" class="relative scroll-py-1 overflow-y-auto flex-1 focus:outline-none divide-y divide-default">
           <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0-0-0" data-slot="group" class="p-1 isolate">
             <div id="reka-listbox-group-v-0-0-0-0-0" data-slot="label" class="font-semibold text-highlighted p-1.5 text-xs gap-1.5">Go to</div><a href="/" role="option" tabindex="-1" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0-0-1" aria-selected="false" data-state="unchecked" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 p-1.5 text-sm gap-1.5 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors" data-highlighted="">
@@ -233,7 +233,7 @@ exports[`DashboardSearch > renders with loadingIcon correctly 1`] = `
         <!--v-if-->
         <!--v-if--></button></span>
       </div>
-      <div data-slot="content" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
+      <div data-slot="content" aria-label="Type a command or search…" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
         <div role="presentation" data-slot="viewport" class="relative scroll-py-1 overflow-y-auto flex-1 focus:outline-none divide-y divide-default">
           <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0-0-0" data-slot="group" class="p-1 isolate">
             <div id="reka-listbox-group-v-0-0-0-0-0" data-slot="label" class="font-semibold text-highlighted p-1.5 text-xs gap-1.5">Go to</div><a href="/" role="option" tabindex="-1" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0-0-1" aria-selected="false" data-state="unchecked" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 p-1.5 text-sm gap-1.5 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors" data-highlighted="">
@@ -277,7 +277,7 @@ exports[`DashboardSearch > renders with placeholder correctly 1`] = `
         <!--v-if-->
         <!--v-if--></button></span>
       </div>
-      <div data-slot="content" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
+      <div data-slot="content" aria-label="Search" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
         <div role="presentation" data-slot="viewport" class="relative scroll-py-1 overflow-y-auto flex-1 focus:outline-none divide-y divide-default">
           <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0-0-0" data-slot="group" class="p-1 isolate">
             <div id="reka-listbox-group-v-0-0-0-0-0" data-slot="label" class="font-semibold text-highlighted p-1.5 text-xs gap-1.5">Go to</div><a href="/" role="option" tabindex="-1" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0-0-1" aria-selected="false" data-state="unchecked" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 p-1.5 text-sm gap-1.5 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors" data-highlighted="">
@@ -321,7 +321,7 @@ exports[`DashboardSearch > renders with size lg correctly 1`] = `
         <!--v-if-->
         <!--v-if--></button></span>
       </div>
-      <div data-slot="content" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
+      <div data-slot="content" aria-label="Type a command or search…" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
         <div role="presentation" data-slot="viewport" class="relative scroll-py-1 overflow-y-auto flex-1 focus:outline-none divide-y divide-default">
           <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0-0-0" data-slot="group" class="p-1 isolate">
             <div id="reka-listbox-group-v-0-0-0-0-0" data-slot="label" class="font-semibold text-highlighted p-2 text-xs gap-2">Go to</div><a href="/" role="option" tabindex="-1" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0-0-1" aria-selected="false" data-state="unchecked" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 p-2 text-sm gap-2 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors" data-highlighted="">
@@ -365,7 +365,7 @@ exports[`DashboardSearch > renders with size md correctly 1`] = `
         <!--v-if-->
         <!--v-if--></button></span>
       </div>
-      <div data-slot="content" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
+      <div data-slot="content" aria-label="Type a command or search…" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
         <div role="presentation" data-slot="viewport" class="relative scroll-py-1 overflow-y-auto flex-1 focus:outline-none divide-y divide-default">
           <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0-0-0" data-slot="group" class="p-1 isolate">
             <div id="reka-listbox-group-v-0-0-0-0-0" data-slot="label" class="font-semibold text-highlighted p-1.5 text-xs gap-1.5">Go to</div><a href="/" role="option" tabindex="-1" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0-0-1" aria-selected="false" data-state="unchecked" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 p-1.5 text-sm gap-1.5 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors" data-highlighted="">
@@ -409,7 +409,7 @@ exports[`DashboardSearch > renders with size sm correctly 1`] = `
         <!--v-if-->
         <!--v-if--></button></span>
       </div>
-      <div data-slot="content" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
+      <div data-slot="content" aria-label="Type a command or search…" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
         <div role="presentation" data-slot="viewport" class="relative scroll-py-1 overflow-y-auto flex-1 focus:outline-none divide-y divide-default">
           <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0-0-0" data-slot="group" class="p-1 isolate">
             <div id="reka-listbox-group-v-0-0-0-0-0" data-slot="label" class="font-semibold text-highlighted p-1.5 text-[10px]/3 gap-1.5">Go to</div><a href="/" role="option" tabindex="-1" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0-0-1" aria-selected="false" data-state="unchecked" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 p-1.5 text-xs gap-1.5 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors" data-highlighted="">
@@ -453,7 +453,7 @@ exports[`DashboardSearch > renders with size xl correctly 1`] = `
         <!--v-if-->
         <!--v-if--></button></span>
       </div>
-      <div data-slot="content" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
+      <div data-slot="content" aria-label="Type a command or search…" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
         <div role="presentation" data-slot="viewport" class="relative scroll-py-1 overflow-y-auto flex-1 focus:outline-none divide-y divide-default">
           <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0-0-0" data-slot="group" class="p-1 isolate">
             <div id="reka-listbox-group-v-0-0-0-0-0" data-slot="label" class="font-semibold text-highlighted p-2 text-sm gap-2">Go to</div><a href="/" role="option" tabindex="-1" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0-0-1" aria-selected="false" data-state="unchecked" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 p-2 text-base gap-2 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors" data-highlighted="">
@@ -497,7 +497,7 @@ exports[`DashboardSearch > renders with size xs correctly 1`] = `
         <!--v-if-->
         <!--v-if--></button></span>
       </div>
-      <div data-slot="content" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
+      <div data-slot="content" aria-label="Type a command or search…" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
         <div role="presentation" data-slot="viewport" class="relative scroll-py-1 overflow-y-auto flex-1 focus:outline-none divide-y divide-default">
           <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0-0-0" data-slot="group" class="p-1 isolate">
             <div id="reka-listbox-group-v-0-0-0-0-0" data-slot="label" class="font-semibold text-highlighted p-1 text-[10px]/3 gap-1">Go to</div><a href="/" role="option" tabindex="-1" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0-0-1" aria-selected="false" data-state="unchecked" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 p-1 text-xs gap-1 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors" data-highlighted="">
@@ -541,7 +541,7 @@ exports[`DashboardSearch > renders with ui correctly 1`] = `
         <!--v-if-->
         <!--v-if--></button></span>
       </div>
-      <div data-slot="content" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
+      <div data-slot="content" aria-label="Type a command or search…" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
         <div role="presentation" data-slot="viewport" class="relative scroll-py-1 overflow-y-auto flex-1 focus:outline-none divide-y divide-default">
           <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0-0-0" data-slot="group" class="p-1 isolate">
             <div id="reka-listbox-group-v-0-0-0-0-0" data-slot="label" class="font-semibold text-highlighted p-1.5 text-xs gap-1.5">Go to</div><a href="/" role="option" tabindex="-1" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0-0-1" aria-selected="false" data-state="unchecked" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 p-1.5 text-sm gap-1.5 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors" data-highlighted="">
@@ -585,7 +585,7 @@ exports[`DashboardSearch > renders without colorMode correctly 1`] = `
         <!--v-if-->
         <!--v-if--></button></span>
       </div>
-      <div data-slot="content" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
+      <div data-slot="content" aria-label="Type a command or search…" class="relative overflow-hidden flex flex-col" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
         <div role="presentation" data-slot="viewport" class="relative scroll-py-1 overflow-y-auto flex-1 focus:outline-none divide-y divide-default">
           <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0-0-0" data-slot="group" class="p-1 isolate">
             <div id="reka-listbox-group-v-0-0-0-0-0" data-slot="label" class="font-semibold text-highlighted p-1.5 text-xs gap-1.5">Go to</div><a href="/" role="option" tabindex="-1" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0-0-1" aria-selected="false" data-state="unchecked" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 p-1.5 text-sm gap-1.5 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors" data-highlighted="">
