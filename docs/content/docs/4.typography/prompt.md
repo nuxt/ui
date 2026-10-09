@@ -90,6 +90,42 @@ slots:
 ---
 ::
 
+### Prompt :badge{label="Soon" class="align-text-top"}
+
+The default slot is copied as plain text: its line breaks, list markers and inline code are lost. Use the `prompt` prop to copy the prompt as it is written.
+
+::code-preview
+
+:::prompt{class="w-full my-0"}
+---
+description: Add a contact form.
+prompt: |
+  Add a contact form to my Nuxt app.
+
+  1. Create a `ContactForm.vue` component with `UForm` and a Zod schema.
+  2. Add the `name`, `email` and `message` fields with `UFormField`.
+  3. Show a `UToast` notification on submit.
+---
+:::
+
+#code
+
+```mdc
+::prompt
+---
+description: Add a contact form.
+prompt: |
+  Add a contact form to my Nuxt app.
+
+  1. Create a `ContactForm.vue` component with `UForm` and a Zod schema.
+  2. Add the `name`, `email` and `message` fields with `UFormField`.
+  3. Show a `UToast` notification on submit.
+---
+::
+```
+
+::
+
 ## API
 
 ### Props

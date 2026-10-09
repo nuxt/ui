@@ -10,6 +10,11 @@ type ProsePrompt = ComponentConfig<typeof theme, AppConfig, 'prompt', 'ui.prose'
 export interface ProsePromptProps {
   description?: string
   /**
+   * The prompt to copy, kept as written.
+   * The default slot is copied as plain text when not set.
+   */
+  prompt?: string
+  /**
    * @IconifyIcon
    */
   icon?: IconProps['name']
@@ -33,7 +38,7 @@ import { useClipboard } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../../composables/useComponentProps'
 import { useLocale } from '../../composables/useLocale'
-import { getSlotChildrenMarkdown } from '../../utils'
+import { getSlotChildrenText } from '../../utils'
 import { tv } from '../../utils/tv'
 import UIcon from '../Icon.vue'
 import UButton from '../Button.vue'
@@ -58,8 +63,12 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.prompt ||
 const actions = computed(() => [...new Set(['copy', ...props.actions])])
 
 function getPromptText() {
+  if (props.prompt) {
+    return props.prompt.trim()
+  }
+
   const children = slots.default?.()
-  return children ? getSlotChildrenMarkdown(children) : ''
+  return children ? getSlotChildrenText(children).trim() : ''
 }
 
 function copyPrompt() {
