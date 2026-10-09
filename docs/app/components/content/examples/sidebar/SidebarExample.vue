@@ -167,7 +167,8 @@ defineShortcuts(extractShortcuts(teamsItems.value))
           :key="state"
           :items="getItems(state)"
           orientation="vertical"
-          :ui="{ link: 'p-1.5 overflow-hidden' }"
+          square
+          :ui="{ link: 'overflow-hidden' }"
         />
       </template>
 

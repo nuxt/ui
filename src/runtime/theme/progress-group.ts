@@ -19,42 +19,49 @@ export default defineTheme({
     color: colorVariant({ indicator: 'bg-accent', itemLeadingIcon: 'text-accent', itemLeadingDot: 'bg-accent' }),
     size: {
       '2xs': {
+        root: '[--ui-control-thickness:1px]',
         status: 'text-xs',
         list: 'text-xs',
         itemLeadingIcon: 'size-3',
         itemLeadingDot: 'size-1.5'
       },
       'xs': {
+        root: '[--ui-control-thickness:--spacing(0.5)]',
         status: 'text-xs',
         list: 'text-xs',
         itemLeadingIcon: 'size-3',
         itemLeadingDot: 'size-1.5'
       },
       'sm': {
+        root: '[--ui-control-thickness:--spacing(1)]',
         status: 'text-sm',
         list: 'text-sm',
         itemLeadingIcon: 'size-4',
         itemLeadingDot: 'size-2'
       },
       'md': {
+        root: '[--ui-control-thickness:--spacing(2)]',
         status: 'text-sm',
         list: 'text-sm',
         itemLeadingIcon: 'size-4',
         itemLeadingDot: 'size-2'
       },
       'lg': {
+        root: '[--ui-control-thickness:--spacing(3)]',
         status: 'text-sm',
         list: 'text-sm',
         itemLeadingIcon: 'size-4',
         itemLeadingDot: 'size-2'
       },
       'xl': {
+        root: '[--ui-control-thickness:--spacing(4)]',
         status: 'text-base',
         list: 'text-base',
         itemLeadingIcon: 'size-5',
         itemLeadingDot: 'size-2.5'
       },
       '2xl': {
+        root: '[--ui-control-thickness:--spacing(5)]',
         status: 'text-base',
         list: 'text-base',
         itemLeadingIcon: 'size-5',
@@ -64,75 +71,18 @@ export default defineTheme({
     orientation: {
       horizontal: {
         root: 'w-full flex flex-col',
-        base: 'w-full flex-row',
+        base: 'w-full h-(--ui-control-thickness) flex-row',
         segment: 'h-full transition-[width]',
         status: 'flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]'
       },
       vertical: {
         root: 'h-full flex flex-row',
-        base: 'h-full flex-col',
+        base: 'h-full w-(--ui-control-thickness) flex-col',
         segment: 'w-full transition-[height]',
         status: 'flex-col justify-end h-(--percent) min-h-fit transition-[height]'
       }
     }
   },
-  compoundVariants: [{
-    orientation: 'horizontal',
-    size: '2xs',
-    class: { base: 'h-px' }
-  }, {
-    orientation: 'horizontal',
-    size: 'xs',
-    class: { base: 'h-0.5' }
-  }, {
-    orientation: 'horizontal',
-    size: 'sm',
-    class: { base: 'h-1' }
-  }, {
-    orientation: 'horizontal',
-    size: 'md',
-    class: { base: 'h-2' }
-  }, {
-    orientation: 'horizontal',
-    size: 'lg',
-    class: { base: 'h-3' }
-  }, {
-    orientation: 'horizontal',
-    size: 'xl',
-    class: { base: 'h-4' }
-  }, {
-    orientation: 'horizontal',
-    size: '2xl',
-    class: { base: 'h-5' }
-  }, {
-    orientation: 'vertical',
-    size: '2xs',
-    class: { base: 'w-px' }
-  }, {
-    orientation: 'vertical',
-    size: 'xs',
-    class: { base: 'w-0.5' }
-  }, {
-    orientation: 'vertical',
-    size: 'sm',
-    class: { base: 'w-1' }
-  }, {
-    orientation: 'vertical',
-    size: 'md',
-    class: { base: 'w-2' }
-  }, {
-    orientation: 'vertical',
-    size: 'lg',
-    class: { base: 'w-3' }
-  }, {
-    orientation: 'vertical',
-    size: 'xl',
-    class: { base: 'w-4' }
-  }, {
-    orientation: 'vertical',
-    size: '2xl',
-    class: { base: 'w-5' }
-  }],
   defaultVariants: {
     color: 'primary',
     size: 'md'
