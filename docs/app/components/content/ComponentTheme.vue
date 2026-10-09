@@ -14,52 +14,12 @@ const route = useRoute()
 const name = props.slug ?? route.path.split('/').pop() ?? ''
 const camelName = camelCase(name)
 
-const strippedCompoundVariants = ref(false)
-
 const computedTheme = computed(() => props.prose ? theme.prose : theme)
-
-const strippedTheme = computed(() => {
-  const strippedTheme = {
-    ...(computedTheme.value as any)[camelName]
-  }
-
-  if (strippedTheme?.compoundVariants) {
-    strippedTheme.compoundVariants = strippedTheme.compoundVariants.filter((compoundVariant: any) => {
-      if (compoundVariant.color) {
-        if (!['primary', 'neutral'].includes(compoundVariant.color)) {
-          strippedCompoundVariants.value = true
-
-          return false
-        }
-      }
-
-      if (compoundVariant.highlightColor) {
-        if (!['primary', 'neutral'].includes(compoundVariant.highlightColor)) {
-          strippedCompoundVariants.value = true
-
-          return false
-        }
-      }
-
-      if (compoundVariant.loadingColor) {
-        if (!['primary', 'neutral'].includes(compoundVariant.loadingColor)) {
-          strippedCompoundVariants.value = true
-
-          return false
-        }
-      }
-
-      return true
-    })
-  }
-
-  return strippedTheme
-})
 
 const component = computed(() => {
   const content = props.prose
-    ? { prose: { [camelName]: strippedTheme.value } }
-    : { [camelName]: strippedTheme.value }
+    ? { prose: { [camelName]: (computedTheme.value as any)[camelName] } }
+    : { [camelName]: (computedTheme.value as any)[camelName] }
 
   if (props.extra?.length) {
     props.extra.forEach((extra) => {
@@ -71,12 +31,6 @@ const component = computed(() => {
   return {
     ui: content
   }
-})
-
-const themeLink = computed(() => {
-  const slug = name.startsWith('content') ? `content/${name}` : name
-
-  return `https://github.com/nuxt/ui/blob/v5/src/runtime/theme/${slug}.ts`
 })
 
 const markdown = computed(() => `
@@ -107,13 +61,6 @@ export default defineConfig({
 \`\`\`
 
 ::
-
-${strippedCompoundVariants.value
-  ? `
-::callout{icon="i-simple-icons-github" to="${themeLink.value}" title="Compound variants"}
-Some colors in \`compoundVariants\` are omitted for readability. Check out the source code on GitHub.
-::`
-  : ''}
 `)
 </script>
 
