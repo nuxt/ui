@@ -26,11 +26,11 @@ export default defineTheme({
     color: colorVariant({ item: '', label: '' }),
     active: {
       true: {
-        item: 'text-accent before:bg-accent-soft',
+        item: 'text-accent-strong before:bg-accent-soft',
         itemLeadingIcon: 'text-accent-default'
       },
       false: {
-        item: 'text-accent-default data-highlighted:text-accent data-[state=open]:text-accent data-highlighted:before:bg-accent-tint data-[state=open]:before:bg-accent-tint transition-colors before:transition-colors',
+        item: 'text-accent-default data-highlighted:text-accent-strong data-[state=open]:text-accent-strong data-highlighted:before:bg-accent-tint data-[state=open]:before:bg-accent-tint transition-colors before:transition-colors',
         itemLeadingIcon: 'text-accent-faint group-data-highlighted:text-accent-default group-data-[state=open]:text-accent-default transition-colors'
       }
     },

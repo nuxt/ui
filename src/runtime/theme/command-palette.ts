@@ -22,10 +22,10 @@ export default defineTheme({
     itemTrailingKbds: 'hidden lg:inline-flex items-center shrink-0',
     itemWrapper: 'flex-1 flex flex-col text-start min-w-0',
     itemLabel: 'truncate space-x-1 text-faint',
-    itemLabelBase: 'text-strong [&>mark]:text-primary [&>mark]:bg-primary/15',
+    itemLabelBase: 'text-strong [&>mark]:text-primary-default [&>mark]:bg-primary/15',
     itemLabelPrefix: 'text-default',
-    itemLabelSuffix: 'text-faint [&>mark]:text-primary [&>mark]:bg-primary/15',
-    itemDescription: 'truncate text-muted [&>mark]:text-primary [&>mark]:bg-primary/15'
+    itemLabelSuffix: 'text-faint [&>mark]:text-primary-default [&>mark]:bg-primary/15',
+    itemDescription: 'truncate text-muted [&>mark]:text-primary-default [&>mark]:bg-primary/15'
   },
   variants: {
     virtualize: {

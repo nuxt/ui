@@ -17,7 +17,7 @@ export default defineTheme({
   variants: {
     active: {
       true: {
-        link: 'text-primary font-medium'
+        link: 'text-primary-strong font-medium'
       },
       false: {
         link: 'text-muted hover:text-default transition-colors'
