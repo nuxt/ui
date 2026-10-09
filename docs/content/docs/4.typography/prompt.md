@@ -13,7 +13,7 @@ links:
 
 Use the `prompt` component to display a pre-built AI prompt that users can copy to their clipboard or open directly in their IDE.
 
-### Prompt :badge{label="Soon" class="align-text-top"}
+### Prompt
 
 Use the `prompt` prop to set the text that gets copied. The `description` prop is shown as the visible label.
 
