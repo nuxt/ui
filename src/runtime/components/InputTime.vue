@@ -89,6 +89,7 @@ import { useComponentProps } from '../composables/useComponentProps'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
+import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
@@ -103,6 +104,7 @@ const slots = defineSlots<InputTimeSlots>()
 
 const props = useComponentProps<InputTimeProps<R>>('inputTime', _props)
 
+const { t } = useLocale()
 const appConfig = useAppConfig() as InputTime['AppConfig']
 
 const rootProps = useForwardProps(reactiveOmit(props, 'id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'ui'), emits)
@@ -146,6 +148,11 @@ const TimeField = computed(() => props.range ? RangeTimeField : SingleTimeField)
 function setInputRef(index: number, el: Element | ComponentPublicInstance | null) {
   // @ts-expect-error - ComponentPublicInstance type mismatch in Nuxt module augmentation
   inputsRef.value[index] = el
+}
+
+// Literal segments are hidden from assistive technologies.
+function segmentLabel(part: SegmentPart) {
+  return part !== 'literal' ? t(`inputTime.${part}`) : undefined
 }
 
 function onUpdate(value: any) {
@@ -207,6 +214,7 @@ defineExpose({
       data-slot="segment"
       :class="ui.segment({ class: props.ui?.segment })"
       :data-segment="segment.part"
+      :aria-label="segmentLabel(segment.part)"
     >
       {{ segment.value.trim() }}
     </TimeField.Input>

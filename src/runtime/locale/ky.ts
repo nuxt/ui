@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Жабуу'
     },
+    breadcrumb: {
+      label: 'навигациялык жол'
+    },
     calendar: {
+      label: 'Иш-чаранын күнү',
+      monthPicker: 'Айды тандоо',
       nextMonth: 'Кийинки ай',
       nextYear: 'Кийинки жыл',
       prevMonth: 'Алдыңкы ай',
-      prevYear: 'Алдыңкы жыл'
+      prevYear: 'Алдыңкы жыл',
+      yearPicker: 'Жылды тандоо'
     },
     carousel: {
       dots: 'Көрсөтүү үчүн слайдды тандаңыз',
       goto: '{slide} слайдга өтүү',
       next: 'Кийинки',
-      prev: 'Алдыңкы'
+      prev: 'Алдыңкы',
+      roledescription: 'карусель',
+      slide: 'слайд'
     },
     chatMessages: {
       autoScroll: 'Ылдый жылдыруу'
@@ -100,6 +108,17 @@ export default defineLocale<Messages>({
       close: 'Менюну жабуу',
       open: 'Менюну ачуу'
     },
+    inputDate: {
+      day: 'күн',
+      dayPeriod: 'AM/PM',
+      era: 'заман',
+      hour: 'саат',
+      minute: 'мүнөт',
+      month: 'ай',
+      second: 'секунд',
+      timeZoneName: 'убакыт алкагы',
+      year: 'жыл'
+    },
     inputMenu: {
       create: '"{label}" жасоо',
       noData: 'Маалымат жок',
@@ -108,6 +127,16 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Азайтуу',
       increment: 'Кошуу'
+    },
+    inputRating: {
+      rate: '{length} ичинен {value} деп баалоо'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'саат',
+      minute: 'мүнөт',
+      second: 'секунд',
+      timeZoneName: 'убакыт алкагы'
     },
     listbox: {
       noData: 'Маалымат жок',
@@ -123,6 +152,9 @@ export default defineLocale<Messages>({
       next: 'Кийинки бет',
       page: '{page}-бет',
       prev: 'Алдыңкы бет'
+    },
+    pinInput: {
+      input: 'PIN код, {length} ичинен {index}-белги'
     },
     pricingTable: {
       caption: 'Баалардын салыштыруу таблицасы'
@@ -156,14 +188,27 @@ export default defineLocale<Messages>({
       noMatch: 'Сүйлөшкөн маалыматтар жок',
       search: 'Издөө…'
     },
+    skeleton: {
+      label: 'жүктөлүүдө'
+    },
     slideover: {
       close: 'Жабуу'
+    },
+    slider: {
+      max: 'Максимум',
+      min: 'Минимум',
+      thumb: 'Сыдырма',
+      value: '{total} ичинен {index}-маани'
     },
     table: {
       noData: 'Маалымат жок'
     },
     toast: {
       close: 'Жабуу'
+    },
+    toaster: {
+      label: 'Билдирме',
+      viewport: 'Билдирмелер ({hotkey})'
     }
   }
 })

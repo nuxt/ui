@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Затвори'
     },
+    breadcrumb: {
+      label: 'навигационна пътека'
+    },
     calendar: {
+      label: 'Дата на събитието',
+      monthPicker: 'Избор на месец',
       nextMonth: 'Следващ месец',
       nextYear: 'Следваща година',
       prevMonth: 'Предишен месец',
-      prevYear: 'Предишна година'
+      prevYear: 'Предишна година',
+      yearPicker: 'Избор на година'
     },
     carousel: {
       dots: 'Изберете слайд за показване',
       goto: 'Отидете на слайд {slide}',
       next: 'Напред',
-      prev: 'Назад'
+      prev: 'Назад',
+      roledescription: 'карусел',
+      slide: 'слайд'
     },
     chatMessages: {
       autoScroll: 'Превърти надолу'
@@ -100,6 +108,17 @@ export default defineLocale<Messages>({
       close: 'Затвори',
       open: 'Отвори'
     },
+    inputDate: {
+      day: 'ден',
+      dayPeriod: 'AM/PM',
+      era: 'ера',
+      hour: 'час',
+      minute: 'минута',
+      month: 'месец',
+      second: 'секунда',
+      timeZoneName: 'часова зона',
+      year: 'година'
+    },
     inputMenu: {
       create: 'Създайте "{label}"',
       noData: 'Няма данни',
@@ -108,6 +127,16 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Намаляване',
       increment: 'Увеличаване'
+    },
+    inputRating: {
+      rate: 'Оценка {value} от {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'час',
+      minute: 'минута',
+      second: 'секунда',
+      timeZoneName: 'часова зона'
     },
     listbox: {
       noData: 'Няма данни',
@@ -123,6 +152,9 @@ export default defineLocale<Messages>({
       next: 'Следваща страница',
       page: 'Страница {page}',
       prev: 'Предишна страница'
+    },
+    pinInput: {
+      input: 'ПИН код, символ {index} от {length}'
     },
     pricingTable: {
       caption: 'Ценова таблица'
@@ -156,14 +188,27 @@ export default defineLocale<Messages>({
       noMatch: 'Няма съвпадение на данни',
       search: 'Потърсете…'
     },
+    skeleton: {
+      label: 'зареждане'
+    },
     slideover: {
       close: 'Затворете'
+    },
+    slider: {
+      max: 'Максимум',
+      min: 'Минимум',
+      thumb: 'Плъзгач',
+      value: 'Стойност {index} от {total}'
     },
     table: {
       noData: 'Няма данни'
     },
     toast: {
       close: 'Затворете'
+    },
+    toaster: {
+      label: 'Известие',
+      viewport: 'Известия ({hotkey})'
     }
   }
 })

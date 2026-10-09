@@ -41,6 +41,13 @@ describe('Carousel', () => {
     ['with ui', { props: { ...props, ui: { viewport: 'h-[320px]' } } }]
   ])
 
+  it('describes the carousel and its slides', async () => {
+    const wrapper = await mountSuspended(CarouselWrapper, { props })
+
+    expect(wrapper.get('[data-slot="root"]').attributes('aria-roledescription')).toBe('carousel')
+    expect(wrapper.findAll('[data-slot="item"]').map(item => item.attributes('aria-roledescription'))).toStrictEqual(items.map(() => 'slide'))
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(CarouselWrapper, {
       props: {

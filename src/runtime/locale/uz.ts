@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Yopish'
     },
+    breadcrumb: {
+      label: 'navigatsiya zanjiri'
+    },
     calendar: {
+      label: 'Tadbir sanasi',
+      monthPicker: 'Oy tanlash',
       nextMonth: 'Keyingi oy',
       nextYear: 'Keyingi yil',
       prevMonth: 'Oldingi oy',
-      prevYear: 'Oldingi yil'
+      prevYear: 'Oldingi yil',
+      yearPicker: 'Yil tanlash'
     },
     carousel: {
       dots: 'Koʻrsatish uchun slaydni tanlang',
       goto: '{slide}-slaydga o\'tish',
       next: 'Oldinga',
-      prev: 'Ortga'
+      prev: 'Ortga',
+      roledescription: 'karusel',
+      slide: 'slayd'
     },
     chatMessages: {
       autoScroll: 'Pastga aylantirish'
@@ -100,6 +108,17 @@ export default defineLocale<Messages>({
       close: 'Menyuni yopish',
       open: 'Menyuni ochish'
     },
+    inputDate: {
+      day: 'kun',
+      dayPeriod: 'AM/PM',
+      era: 'era',
+      hour: 'soat',
+      minute: 'daqiqa',
+      month: 'oy',
+      second: 'soniya',
+      timeZoneName: 'vaqt mintaqasi',
+      year: 'yil'
+    },
     inputMenu: {
       create: '"{label}" yaratish',
       noData: 'Maʼlumot yoʻq',
@@ -108,6 +127,16 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Ayirish',
       increment: 'Qoʻshish'
+    },
+    inputRating: {
+      rate: '{length} dan {value} baho qoʻyish'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'soat',
+      minute: 'daqiqa',
+      second: 'soniya',
+      timeZoneName: 'vaqt mintaqasi'
     },
     listbox: {
       noData: 'Maʼlumot yoʻq',
@@ -123,6 +152,9 @@ export default defineLocale<Messages>({
       next: 'Keyingi sahifa',
       page: '{page}-sahifa',
       prev: 'Oldingi sahifa'
+    },
+    pinInput: {
+      input: 'PIN-kod, {index}-belgi, jami {length}'
     },
     pricingTable: {
       caption: 'Narx planlarini taqqoslash'
@@ -156,14 +188,27 @@ export default defineLocale<Messages>({
       noMatch: 'Mos keluvchi natija topilmadi',
       search: 'Qidirish…'
     },
+    skeleton: {
+      label: 'yuklanmoqda'
+    },
     slideover: {
       close: 'Yopish'
+    },
+    slider: {
+      max: 'Maksimum',
+      min: 'Minimum',
+      thumb: 'Surgich',
+      value: '{index}-qiymat, jami {total}'
     },
     table: {
       noData: 'Maʼlumot yoʻq'
     },
     toast: {
       close: 'Yopish'
+    },
+    toaster: {
+      label: 'Bildirishnoma',
+      viewport: 'Bildirishnomalar ({hotkey})'
     }
   }
 })

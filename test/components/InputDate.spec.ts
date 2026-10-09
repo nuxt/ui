@@ -56,6 +56,19 @@ describe('InputDate', () => {
     ['with separator slot', { slots: { separator: () => '=' } }]
   ])
 
+  describe('aria', () => {
+    test('labels each segment', async () => {
+      const wrapper = await mountSuspended(InputDate, { props: { range: true } })
+
+      const labels = (part: string) => wrapper.findAll(`[data-segment="${part}"]`).map(segment => segment.attributes('aria-label'))
+
+      expect(labels('day')).toStrictEqual(['day', 'day'])
+      expect(labels('month')).toStrictEqual(['month', 'month'])
+      expect(labels('year')).toStrictEqual(['year', 'year'])
+      expect(labels('literal').every(label => label === undefined)).toBe(true)
+    })
+  })
+
   describe('emits', () => {
     test('update:modelValue event', async () => {
       const wrapper = await mountSuspended(InputDate)

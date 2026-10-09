@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Kapat'
     },
+    breadcrumb: {
+      label: 'içerik haritası'
+    },
     calendar: {
+      label: 'Etkinlik tarihi',
+      monthPicker: 'Ay seçici',
       nextMonth: 'Sonraki ay',
       nextYear: 'Sonraki yıl',
       prevMonth: 'Önceki ay',
-      prevYear: 'Önceki yıl'
+      prevYear: 'Önceki yıl',
+      yearPicker: 'Yıl seçici'
     },
     carousel: {
       dots: 'Görüntülenecek slaydı seçin',
       goto: '{slide}. slayda git',
       next: 'Sonraki',
-      prev: 'Önceki'
+      prev: 'Önceki',
+      roledescription: 'karusel',
+      slide: 'slayt'
     },
     chatMessages: {
       autoScroll: 'Aşağı kaydır'
@@ -100,6 +108,17 @@ export default defineLocale<Messages>({
       close: 'Menüyü kapat',
       open: 'Menüyü aç'
     },
+    inputDate: {
+      day: 'gün',
+      dayPeriod: 'ÖÖ/ÖS',
+      era: 'çağ',
+      hour: 'saat',
+      minute: 'dakika',
+      month: 'ay',
+      second: 'saniye',
+      timeZoneName: 'saat dilimi',
+      year: 'yıl'
+    },
     inputMenu: {
       create: '"{label}" oluştur',
       noData: 'Veri yok',
@@ -108,6 +127,16 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Azalt',
       increment: 'Arttır'
+    },
+    inputRating: {
+      rate: '{length} üzerinden {value} puan ver'
+    },
+    inputTime: {
+      dayPeriod: 'ÖÖ/ÖS',
+      hour: 'saat',
+      minute: 'dakika',
+      second: 'saniye',
+      timeZoneName: 'saat dilimi'
     },
     listbox: {
       noData: 'Veri yok',
@@ -123,6 +152,9 @@ export default defineLocale<Messages>({
       next: 'Sonraki sayfa',
       page: 'Sayfa {page}',
       prev: 'Önceki sayfa'
+    },
+    pinInput: {
+      input: 'PIN kodu, {index}. karakter (toplam {length})'
     },
     pricingTable: {
       caption: 'Fiyat planlarını karşılaştır'
@@ -156,14 +188,27 @@ export default defineLocale<Messages>({
       noMatch: 'Eşleşen veri yok',
       search: 'Ara…'
     },
+    skeleton: {
+      label: 'yükleniyor'
+    },
     slideover: {
       close: 'Kapat'
+    },
+    slider: {
+      max: 'Maksimum',
+      min: 'Minimum',
+      thumb: 'Kaydırıcı',
+      value: '{index}. değer (toplam {total})'
     },
     table: {
       noData: 'Veri yok'
     },
     toast: {
       close: 'Kapat'
+    },
+    toaster: {
+      label: 'Bildirim',
+      viewport: 'Bildirimler ({hotkey})'
     }
   }
 })

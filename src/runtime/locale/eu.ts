@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Itxi'
     },
+    breadcrumb: {
+      label: 'nabigazio-bidea'
+    },
     calendar: {
+      label: 'Gertaeraren data',
+      monthPicker: 'Hilabete-hautatzailea',
       nextMonth: 'Hurrengo hilabetea',
       nextYear: 'Hurrengo urtea',
       prevMonth: 'Aurretiko hilabetea',
-      prevYear: 'Aurretiko urtea'
+      prevYear: 'Aurretiko urtea',
+      yearPicker: 'Urte-hautatzailea'
     },
     carousel: {
       dots: 'Erakutsi beharreko diapositiba aukeratu',
       goto: 'Joan diapositibara {slide}',
       next: 'Hurrengoa',
-      prev: 'Aurretikoa'
+      prev: 'Aurretikoa',
+      roledescription: 'karrusela',
+      slide: 'diapositiba'
     },
     chatMessages: {
       autoScroll: 'Korritu behera'
@@ -100,6 +108,17 @@ export default defineLocale<Messages>({
       close: 'Menua itxi',
       open: 'Menua zabaldu'
     },
+    inputDate: {
+      day: 'eguna',
+      dayPeriod: 'AM/PM',
+      era: 'aroa',
+      hour: 'ordua',
+      minute: 'minutua',
+      month: 'hilabetea',
+      second: 'segundoa',
+      timeZoneName: 'ordu-zona',
+      year: 'urtea'
+    },
     inputMenu: {
       create: 'Sortu {label}',
       noData: 'Daturik gabe',
@@ -108,6 +127,16 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Murriztu',
       increment: 'Handitu'
+    },
+    inputRating: {
+      rate: 'Baloratu {length}(e)tik {value}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'ordua',
+      minute: 'minutua',
+      second: 'segundoa',
+      timeZoneName: 'ordu-zona'
     },
     listbox: {
       noData: 'Daturik gabe',
@@ -123,6 +152,9 @@ export default defineLocale<Messages>({
       next: 'Hurrengo orria',
       page: '{page}. orria',
       prev: 'Aurreko orria'
+    },
+    pinInput: {
+      input: 'PIN kodea, {length}(e)tik {index}. karakterea'
     },
     pricingTable: {
       caption: 'Prezio-plana alderatzea'
@@ -156,14 +188,27 @@ export default defineLocale<Messages>({
       noMatch: 'Ez da datu bat ere aurkitu',
       search: 'Bilatu…'
     },
+    skeleton: {
+      label: 'kargatzen'
+    },
     slideover: {
       close: 'Itxi'
+    },
+    slider: {
+      max: 'Maximoa',
+      min: 'Minimoa',
+      thumb: 'Graduatzailea',
+      value: '{total}(e)tik {index}. balioa'
     },
     table: {
       noData: 'Daturik gabe'
     },
     toast: {
       close: 'Itxi'
+    },
+    toaster: {
+      label: 'Jakinarazpena',
+      viewport: 'Jakinarazpenak ({hotkey})'
     }
   }
 })

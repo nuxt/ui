@@ -17,17 +17,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'داخستن'
     },
+    breadcrumb: {
+      label: 'ڕێڕەوی پەڕەکان'
+    },
     calendar: {
+      label: 'بەرواری ڕووداو',
+      monthPicker: 'هەڵبژاردنی مانگ',
       nextMonth: 'مانگی داهاتوو',
       nextYear: 'ساڵی داهاتوو',
       prevMonth: 'مانگی پێشوو',
-      prevYear: 'ساڵی پێشوو'
+      prevYear: 'ساڵی پێشوو',
+      yearPicker: 'هەڵبژاردنی ساڵ'
     },
     carousel: {
       dots: 'سلایدێک هەڵبژێرە بۆ پیشاندان',
       goto: 'بڕۆ بۆ سلایدی {slide}',
       next: 'دواتر',
-      prev: 'پێشتر'
+      prev: 'پێشتر',
+      roledescription: 'کارۆسێل',
+      slide: 'سلاید'
     },
     chatMessages: {
       autoScroll: 'بۆ خوارەوە بڕۆ'
@@ -101,6 +109,17 @@ export default defineLocale<Messages>({
       close: 'داخستنی پێڕست',
       open: 'کردنەوەی پێڕست'
     },
+    inputDate: {
+      day: 'ڕۆژ',
+      dayPeriod: 'AM/PM',
+      era: 'سەردەم',
+      hour: 'کاتژمێر',
+      minute: 'خولەک',
+      month: 'مانگ',
+      second: 'چرکە',
+      timeZoneName: 'ناوچەی کات',
+      year: 'ساڵ'
+    },
     inputMenu: {
       create: '"{label}" زیادکردنی',
       noData: 'هیچ داتایەک نییە',
@@ -109,6 +128,16 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'کەمکردنەوە',
       increment: 'زیادکردن'
+    },
+    inputRating: {
+      rate: 'هەڵسەنگاندن بە {value} لە {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'کاتژمێر',
+      minute: 'خولەک',
+      second: 'چرکە',
+      timeZoneName: 'ناوچەی کات'
     },
     listbox: {
       noData: 'هیچ داتایەک نییە',
@@ -124,6 +153,9 @@ export default defineLocale<Messages>({
       next: 'پەڕەی دواتر',
       page: 'پەڕە {page}',
       prev: 'پەڕەی پێشوو'
+    },
+    pinInput: {
+      input: 'کۆدی PIN، پیتی {index} لە {length}'
     },
     pricingTable: {
       caption: 'بەراورکردنی پلانی نرخدانان'
@@ -157,14 +189,27 @@ export default defineLocale<Messages>({
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
       search: 'گەڕان…'
     },
+    skeleton: {
+      label: 'بارکردن'
+    },
     slideover: {
       close: 'داخستن'
+    },
+    slider: {
+      max: 'زۆرترین',
+      min: 'کەمترین',
+      thumb: 'دەستگرە',
+      value: 'بەهای {index} لە {total}'
     },
     table: {
       noData: 'هیچ داتایەک نییە'
     },
     toast: {
       close: 'داخستن'
+    },
+    toaster: {
+      label: 'ئاگادارکردنەوە',
+      viewport: 'ئاگادارکردنەوەکان ({hotkey})'
     }
   }
 })

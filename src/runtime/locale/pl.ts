@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Zamknij'
     },
+    breadcrumb: {
+      label: 'ścieżka nawigacji'
+    },
     calendar: {
+      label: 'Data wydarzenia',
+      monthPicker: 'Wybór miesiąca',
       nextMonth: 'Przyszły miesiąc',
       nextYear: 'Przyszły rok',
       prevMonth: 'Poprzedni miesiąc',
-      prevYear: 'Poprzedni rok'
+      prevYear: 'Poprzedni rok',
+      yearPicker: 'Wybór roku'
     },
     carousel: {
       dots: 'Wybierz slajd do wyświetlenia',
       goto: 'Idź do {slide}',
       next: 'Następny',
-      prev: 'Poprzedni'
+      prev: 'Poprzedni',
+      roledescription: 'karuzela',
+      slide: 'slajd'
     },
     chatMessages: {
       autoScroll: 'Przewiń na dół'
@@ -100,6 +108,17 @@ export default defineLocale<Messages>({
       close: 'Zamknij menu',
       open: 'Otwórz menu'
     },
+    inputDate: {
+      day: 'dzień',
+      dayPeriod: 'AM/PM',
+      era: 'era',
+      hour: 'godzina',
+      minute: 'minuta',
+      month: 'miesiąc',
+      second: 'sekunda',
+      timeZoneName: 'strefa czasowa',
+      year: 'rok'
+    },
     inputMenu: {
       create: 'Utwórz "{label}"',
       noData: 'Brak danych',
@@ -108,6 +127,16 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Zmniejsz',
       increment: 'Zwiększ'
+    },
+    inputRating: {
+      rate: 'Oceń na {value} z {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'godzina',
+      minute: 'minuta',
+      second: 'sekunda',
+      timeZoneName: 'strefa czasowa'
     },
     listbox: {
       noData: 'Brak danych',
@@ -123,6 +152,9 @@ export default defineLocale<Messages>({
       next: 'Następna strona',
       page: 'Strona {page}',
       prev: 'Poprzednia strona'
+    },
+    pinInput: {
+      input: 'kod PIN, znak {index} z {length}'
     },
     pricingTable: {
       caption: 'Porównanie planów cenowych'
@@ -156,14 +188,27 @@ export default defineLocale<Messages>({
       noMatch: 'Brak pasujących danych',
       search: 'Szukaj…'
     },
+    skeleton: {
+      label: 'ładowanie'
+    },
     slideover: {
       close: 'Zamknij'
+    },
+    slider: {
+      max: 'Maksimum',
+      min: 'Minimum',
+      thumb: 'Suwak',
+      value: 'Wartość {index} z {total}'
     },
     table: {
       noData: 'Brak danych'
     },
     toast: {
       close: 'Zamknij'
+    },
+    toaster: {
+      label: 'Powiadomienie',
+      viewport: 'Powiadomienia ({hotkey})'
     }
   }
 })

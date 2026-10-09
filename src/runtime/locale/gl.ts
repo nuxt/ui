@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Pechar'
     },
+    breadcrumb: {
+      label: 'ruta de navegación'
+    },
     calendar: {
+      label: 'Data do evento',
+      monthPicker: 'Selector de mes',
       nextMonth: 'Mes seguinte',
       nextYear: 'Ano seguinte',
       prevMonth: 'Mes anterior',
-      prevYear: 'Ano anterior'
+      prevYear: 'Ano anterior',
+      yearPicker: 'Selector de ano'
     },
     carousel: {
       dots: 'Escoller diapositiva a amostrar',
       goto: 'Ir á diapositiva {slide}',
       next: 'Seguinte',
-      prev: 'Anterior'
+      prev: 'Anterior',
+      roledescription: 'carrusel',
+      slide: 'diapositiva'
     },
     chatMessages: {
       autoScroll: 'Desprazar cara abaixo'
@@ -100,6 +108,17 @@ export default defineLocale<Messages>({
       close: 'Pechar menú',
       open: 'Abrir menú'
     },
+    inputDate: {
+      day: 'día',
+      dayPeriod: 'AM/PM',
+      era: 'era',
+      hour: 'hora',
+      minute: 'minuto',
+      month: 'mes',
+      second: 'segundo',
+      timeZoneName: 'fuso horario',
+      year: 'ano'
+    },
     inputMenu: {
       create: 'Crear "{label}"',
       noData: 'Sen datos',
@@ -108,6 +127,16 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Diminuír',
       increment: 'Aumentar'
+    },
+    inputRating: {
+      rate: 'Valorar {value} de {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'hora',
+      minute: 'minuto',
+      second: 'segundo',
+      timeZoneName: 'fuso horario'
     },
     listbox: {
       noData: 'Sen datos',
@@ -123,6 +152,9 @@ export default defineLocale<Messages>({
       next: 'Páxina seguinte',
       page: 'Páxina {page}',
       prev: 'Páxina anterior'
+    },
+    pinInput: {
+      input: 'código PIN, carácter {index} de {length}'
     },
     pricingTable: {
       caption: 'Comparación de plans de prezos'
@@ -156,14 +188,27 @@ export default defineLocale<Messages>({
       noMatch: 'Non hai datos coincidentes',
       search: 'Buscar…'
     },
+    skeleton: {
+      label: 'cargando'
+    },
     slideover: {
       close: 'Pechar'
+    },
+    slider: {
+      max: 'Máximo',
+      min: 'Mínimo',
+      thumb: 'Control desprazable',
+      value: 'Valor {index} de {total}'
     },
     table: {
       noData: 'Sen datos'
     },
     toast: {
       close: 'Pechar'
+    },
+    toaster: {
+      label: 'Notificación',
+      viewport: 'Notificacións ({hotkey})'
     }
   }
 })

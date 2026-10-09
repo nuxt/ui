@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'ปิด'
     },
+    breadcrumb: {
+      label: 'เส้นทางนำทาง'
+    },
     calendar: {
+      label: 'วันที่ของกิจกรรม',
+      monthPicker: 'ตัวเลือกเดือน',
       nextMonth: 'เดือนถัดไป',
       nextYear: 'ปีถัดไป',
       prevMonth: 'เดือนก่อนหน้า',
-      prevYear: 'ปีก่อนหน้า'
+      prevYear: 'ปีก่อนหน้า',
+      yearPicker: 'ตัวเลือกปี'
     },
     carousel: {
       dots: 'เลือกสไลด์ที่จะแสดง',
       goto: 'ไปที่ {slide}',
       next: 'ถัดไป',
-      prev: 'ย้อนกลับ'
+      prev: 'ย้อนกลับ',
+      roledescription: 'ภาพหมุนเวียน',
+      slide: 'สไลด์'
     },
     chatMessages: {
       autoScroll: 'เลื่อนลงล่างสุด'
@@ -95,6 +103,17 @@ export default defineLocale<Messages>({
       close: 'ปิดเมนู',
       open: 'เปิดเมนู'
     },
+    inputDate: {
+      day: 'วัน',
+      dayPeriod: 'ก่อนเที่ยง/หลังเที่ยง',
+      era: 'สมัย',
+      hour: 'ชั่วโมง',
+      minute: 'นาที',
+      month: 'เดือน',
+      second: 'วินาที',
+      timeZoneName: 'เขตเวลา',
+      year: 'ปี'
+    },
     inputMenu: {
       create: 'สร้าง "{label}"',
       noData: 'ไม่มีข้อมูล',
@@ -103,6 +122,16 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'ลด',
       increment: 'เพิ่ม'
+    },
+    inputRating: {
+      rate: 'ให้คะแนน {value} จาก {length}'
+    },
+    inputTime: {
+      dayPeriod: 'ก่อนเที่ยง/หลังเที่ยง',
+      hour: 'ชั่วโมง',
+      minute: 'นาที',
+      second: 'วินาที',
+      timeZoneName: 'เขตเวลา'
     },
     listbox: {
       noData: 'ไม่มีข้อมูล',
@@ -118,6 +147,9 @@ export default defineLocale<Messages>({
       next: 'หน้าต่อไป',
       page: 'หน้า {page}',
       prev: 'หน้าที่แล้ว'
+    },
+    pinInput: {
+      input: 'รหัส PIN ตัวที่ {index} จาก {length}'
     },
     pricingTable: {
       caption: 'การเปรียบเทียบราคา'
@@ -156,14 +188,27 @@ export default defineLocale<Messages>({
       noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
       search: 'ค้นหา…'
     },
+    skeleton: {
+      label: 'กำลังโหลด'
+    },
     slideover: {
       close: 'ปิด'
+    },
+    slider: {
+      max: 'สูงสุด',
+      min: 'ต่ำสุด',
+      thumb: 'ตัวเลื่อน',
+      value: 'ค่าที่ {index} จาก {total}'
     },
     table: {
       noData: 'ไม่มีข้อมูล'
     },
     toast: {
       close: 'ปิด'
+    },
+    toaster: {
+      label: 'การแจ้งเตือน',
+      viewport: 'การแจ้งเตือน ({hotkey})'
     }
   }
 })

@@ -61,6 +61,15 @@ describe('InputTime', () => {
     ['with separator slot', { slots: { separator: () => '=' } }]
   ])
 
+  describe('aria', () => {
+    test('labels each segment', async () => {
+      const wrapper = await mountSuspended(InputTime, { props: { granularity: 'second', hourCycle: 12 } })
+
+      expect(['hour', 'minute', 'second', 'dayPeriod'].map(part => wrapper.get(`[data-segment="${part}"]`).attributes('aria-label'))).toStrictEqual(['hour', 'minute', 'second', 'AM/PM'])
+      expect(wrapper.findAll('[data-segment="literal"]').every(segment => segment.attributes('aria-label') === undefined)).toBe(true)
+    })
+  })
+
   describe('emits', () => {
     test('update:modelValue event', async () => {
       const wrapper = await mountSuspended(InputTime)

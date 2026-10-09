@@ -40,6 +40,14 @@ describe('PinInput', () => {
     ['with separator slot', { props: { lenght: 6, separator: 3 }, slots: { separator: () => '=' } }]
   ])
 
+  describe('aria', () => {
+    test('labels each input', async () => {
+      const wrapper = await mountSuspended(PinInput, { props: { length: 3 } })
+
+      expect(wrapper.findAll('input[data-slot="base"]').map(input => input.attributes('aria-label'))).toStrictEqual(['pin input 1 of 3', 'pin input 2 of 3', 'pin input 3 of 3'])
+    })
+  })
+
   describe('emits', () => {
     test('update:modelValue event', async () => {
       const wrapper = mount(PinInput)
@@ -71,7 +79,7 @@ describe('PinInput', () => {
 
     test('blur event', async () => {
       const wrapper = mount(PinInput)
-      const lastPin = wrapper.find('input[aria-label="pin input 5 of 0"]')
+      const lastPin = wrapper.find('input[aria-label="pin input 5 of 5"]')
       lastPin.element.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: null }))
       await flushPromises()
 

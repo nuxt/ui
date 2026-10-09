@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Bezárás'
     },
+    breadcrumb: {
+      label: 'navigációs útvonal'
+    },
     calendar: {
+      label: 'Esemény dátuma',
+      monthPicker: 'Hónapválasztó',
       nextMonth: 'Következő hónap',
       nextYear: 'Következő év',
       prevMonth: 'Előző hónap',
-      prevYear: 'Előző év'
+      prevYear: 'Előző év',
+      yearPicker: 'Évválasztó'
     },
     carousel: {
       dots: 'Válassza ki a megjelenítendő diát',
       goto: 'Ugrás ide {slide}',
       next: 'Következő',
-      prev: 'Előző'
+      prev: 'Előző',
+      roledescription: 'körhinta',
+      slide: 'dia'
     },
     chatMessages: {
       autoScroll: 'Görgetés az aljára'
@@ -100,6 +108,17 @@ export default defineLocale<Messages>({
       close: 'Menü bezárása',
       open: 'Menü megnyitása'
     },
+    inputDate: {
+      day: 'nap',
+      dayPeriod: 'AM/PM',
+      era: 'korszak',
+      hour: 'óra',
+      minute: 'perc',
+      month: 'hónap',
+      second: 'másodperc',
+      timeZoneName: 'időzóna',
+      year: 'év'
+    },
     inputMenu: {
       create: '"{label}" létrehozása',
       noData: 'Nincs adat',
@@ -108,6 +127,16 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Csökkent',
       increment: 'Növel'
+    },
+    inputRating: {
+      rate: 'Értékelés: {value} / {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'óra',
+      minute: 'perc',
+      second: 'másodperc',
+      timeZoneName: 'időzóna'
     },
     listbox: {
       noData: 'Nincs adat',
@@ -123,6 +152,9 @@ export default defineLocale<Messages>({
       next: 'Következő oldal',
       page: '{page}. oldal',
       prev: 'Előző oldal'
+    },
+    pinInput: {
+      input: 'PIN-kód, {index}. karakter (összesen {length})'
     },
     pricingTable: {
       caption: 'Árlista összehasonlítása'
@@ -156,14 +188,27 @@ export default defineLocale<Messages>({
       noMatch: 'Nincs találat',
       search: 'Keresés…'
     },
+    skeleton: {
+      label: 'betöltés'
+    },
     slideover: {
       close: 'Bezárás'
+    },
+    slider: {
+      max: 'Maximum',
+      min: 'Minimum',
+      thumb: 'Csúszka',
+      value: '{index}. érték (összesen {total})'
     },
     table: {
       noData: 'Nincs adat'
     },
     toast: {
       close: 'Bezárás'
+    },
+    toaster: {
+      label: 'Értesítés',
+      viewport: 'Értesítések ({hotkey})'
     }
   }
 })

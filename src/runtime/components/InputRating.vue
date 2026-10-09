@@ -67,6 +67,7 @@ import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useFormField } from '../composables/useFormField'
+import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
@@ -86,6 +87,7 @@ defineSlots<InputRatingSlots>()
 
 const props = useComponentProps<InputRatingProps>('inputRating', _props)
 
+const { t } = useLocale()
 const appConfig = useAppConfig() as InputRating['AppConfig']
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'length', 'step', 'hoverable', 'clearable', 'required', 'modelValue', 'defaultValue'), emits)
@@ -156,7 +158,7 @@ function onUpdate(value: number) {
         v-for="step in steps"
         :key="step"
         :step="step"
-        :aria-label="`Rate ${step} out of ${props.length}`"
+        :aria-label="t('inputRating.rate', { value: step, length: props.length! })"
         data-slot="indicator"
         :class="ui.indicator({ class: props.ui?.indicator })"
       >

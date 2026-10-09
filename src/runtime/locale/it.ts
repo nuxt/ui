@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Chiudi'
     },
+    breadcrumb: {
+      label: 'percorso di navigazione'
+    },
     calendar: {
+      label: 'Data dell\'evento',
+      monthPicker: 'Selettore del mese',
       nextMonth: 'Mese successivo',
       nextYear: 'Anno successivo',
       prevMonth: 'Mese precedente',
-      prevYear: 'Anno precedente'
+      prevYear: 'Anno precedente',
+      yearPicker: 'Selettore dell\'anno'
     },
     carousel: {
       dots: 'Scegli diapositiva da visualizzare',
       goto: 'Vai alla slide {slide}',
       next: 'Successiva',
-      prev: 'Precedente'
+      prev: 'Precedente',
+      roledescription: 'carosello',
+      slide: 'diapositiva'
     },
     chatMessages: {
       autoScroll: 'Scorri in fondo'
@@ -100,6 +108,17 @@ export default defineLocale<Messages>({
       close: 'Chiudi menu',
       open: 'Apri menu'
     },
+    inputDate: {
+      day: 'giorno',
+      dayPeriod: 'AM/PM',
+      era: 'era',
+      hour: 'ora',
+      minute: 'minuto',
+      month: 'mese',
+      second: 'secondo',
+      timeZoneName: 'fuso orario',
+      year: 'anno'
+    },
     inputMenu: {
       create: 'Crea "{label}"',
       noData: 'Nessun dato',
@@ -108,6 +127,16 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Diminuisci',
       increment: 'Aumenta'
+    },
+    inputRating: {
+      rate: 'Valuta {value} su {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'ora',
+      minute: 'minuto',
+      second: 'secondo',
+      timeZoneName: 'fuso orario'
     },
     listbox: {
       noData: 'Nessun dato',
@@ -123,6 +152,9 @@ export default defineLocale<Messages>({
       next: 'Pagina seguente',
       page: 'Pagina {page}',
       prev: 'Pagina precedente'
+    },
+    pinInput: {
+      input: 'codice PIN, carattere {index} di {length}'
     },
     pricingTable: {
       caption: 'Confronto dei piani di prezzo'
@@ -156,14 +188,27 @@ export default defineLocale<Messages>({
       noMatch: 'Nessun dato corrispondente',
       search: 'Cerca…'
     },
+    skeleton: {
+      label: 'caricamento'
+    },
     slideover: {
       close: 'Chiudi'
+    },
+    slider: {
+      max: 'Massimo',
+      min: 'Minimo',
+      thumb: 'Cursore',
+      value: 'Valore {index} di {total}'
     },
     table: {
       noData: 'Nessun dato'
     },
     toast: {
       close: 'Chiudi'
+    },
+    toaster: {
+      label: 'Notifica',
+      viewport: 'Notifiche ({hotkey})'
     }
   }
 })
