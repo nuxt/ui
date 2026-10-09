@@ -12,61 +12,41 @@ export default extendTheme(input, {
   },
   variants: {
     ...fieldGroupVariant,
-    // No `root` slot here, so the color scopes `base`
+    // No `root` slot here, so the color and the size tokens go on `base`
     color: () => colorVariant({ base: '' }),
     size: {
       xs: {
-        base: (prev: string) => [prev, 'gap-0.25'],
+        root: () => undefined,
+        base: (prev: string) => [prev, input.variants.size.xs.root, 'gap-0.25'],
         segment: 'data-[segment=day]:w-8 data-[segment=month]:w-8 data-[segment=year]:w-10'
       },
       sm: {
-        base: (prev: string) => [prev, 'gap-0.5'],
+        root: () => undefined,
+        base: (prev: string) => [prev, input.variants.size.sm.root, 'gap-0.5'],
         segment: 'data-[segment=day]:w-8 data-[segment=month]:w-8 data-[segment=year]:w-10'
       },
       md: {
-        base: (prev: string) => [prev, 'gap-0.5'],
+        root: () => undefined,
+        base: (prev: string) => [prev, input.variants.size.md.root, 'gap-0.5'],
         segment: 'data-[segment=day]:w-9 data-[segment=month]:w-9 data-[segment=year]:w-11'
       },
       lg: {
-        base: (prev: string) => [prev, 'gap-0.75'],
+        root: () => undefined,
+        base: (prev: string) => [prev, input.variants.size.lg.root, 'gap-0.75'],
         segment: 'data-[segment=day]:w-9 data-[segment=month]:w-9 data-[segment=year]:w-11'
       },
       xl: {
-        base: (prev: string) => [prev, 'gap-0.75'],
+        root: () => undefined,
+        base: (prev: string) => [prev, input.variants.size.xl.root, 'gap-0.75'],
         segment: 'data-[segment=day]:w-10 data-[segment=month]:w-10 data-[segment=year]:w-12'
       }
     },
     variant: (prev: typeof input.variants.variant) => Object.fromEntries(
-      Object.entries(prev).map(([key, value]) => [key, { base: replaceFocus(value.base) }])
-    ) as typeof prev
+      Object.entries(prev).map(([key, value]) => [key, { base: replaceFocus(value.base), segment: key === 'outline' || key === 'none' ? 'focus:bg-soft' : 'focus:bg-strong' }])
+    ) as Record<keyof typeof prev, { base: string, segment: string }>
   },
   compoundVariants: (prev: typeof input.compoundVariants) => [...prev.map(item => ({
     ...item,
     class: typeof item.class.base === 'string' ? { ...item.class, base: replaceFocus(item.class.base) } : item.class
-  })), ...[{
-    variant: 'outline',
-    class: {
-      segment: 'focus:bg-soft'
-    }
-  }, {
-    variant: 'soft',
-    class: {
-      segment: 'focus:bg-strong'
-    }
-  }, {
-    variant: 'subtle',
-    class: {
-      segment: 'focus:bg-strong'
-    }
-  }, {
-    variant: 'ghost',
-    class: {
-      segment: 'focus:bg-strong'
-    }
-  }, {
-    variant: 'none',
-    class: {
-      segment: 'focus:bg-soft'
-    }
-  }] as const]
+  }))]
 })
