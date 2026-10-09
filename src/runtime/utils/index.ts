@@ -199,6 +199,117 @@ export function getSlotChildrenText(children: any) {
   }).join('')
 }
 
+// A native element has its tag as `type`, a prose component rendered by MDC carries it as `type.tag`.
+function getNodeTag(node: any): string | undefined {
+  return typeof node.type === 'string' ? node.type : node.type?.tag
+}
+
+function getNodeBlocks(node: any): string[] {
+  if (typeof node.children === 'string') return [node.children]
+  if (Array.isArray(node.children)) return getMarkdownBlocks(node.children)
+  if (typeof node.children?.default === 'function') return getMarkdownBlocks(node.children.default())
+  return []
+}
+
+function getListMarkdown(node: any, ordered: boolean) {
+  const start = Number(node.props?.start) || 1
+  // Each `li` is one block.
+  return getNodeBlocks(node).map((item, index) => {
+    const marker = ordered ? `${start + index}. ` : '- '
+    return marker + item.replace(/\n(?!\n)/g, `\n${' '.repeat(marker.length)}`)
+  }).join('\n')
+}
+
+function getMarkdownBlocks(children: any[]): string[] {
+  const blocks: string[] = []
+  let inline = ''
+
+  function flush() {
+    if (inline.trim()) blocks.push(inline.trim())
+    inline = ''
+  }
+
+  function push(block: string) {
+    flush()
+    if (block) blocks.push(block)
+  }
+
+  for (const node of children) {
+    if (!node) continue
+    if (typeof node === 'string') {
+      inline += node
+      continue
+    }
+
+    const tag = getNodeTag(node)
+    const content = () => getNodeBlocks(node)
+
+    switch (tag) {
+      case 'p':
+        push(content().join('\n\n'))
+        break
+      case 'h1':
+      case 'h2':
+      case 'h3':
+      case 'h4':
+      case 'h5':
+      case 'h6':
+        push(`${'#'.repeat(Number(tag[1]))} ${content().join(' ')}`)
+        break
+      case 'ul':
+      case 'ol':
+        push(getListMarkdown(node, tag === 'ol'))
+        break
+      case 'li':
+        // A nested list follows its item without a blank line.
+        push(content().reduce((item, block) => item + (/^(?:-|\d+\.) /.test(block) ? '\n' : '\n\n') + block, '').trim())
+        break
+      case 'blockquote':
+        push(content().join('\n\n').replace(/^/gm, '> '))
+        break
+      case 'pre': {
+        const code = String(node.props?.code ?? content().join('\n')).replace(/\n$/, '')
+        const fence = code.includes('```') ? '````' : '```'
+        push(`${fence}${node.props?.language ?? ''}\n${code}\n${fence}`)
+        break
+      }
+      case 'code':
+        inline += `\`${content().join('')}\``
+        break
+      case 'a':
+        inline += node.props?.href ? `[${content().join('')}](${node.props.href})` : content().join('')
+        break
+      case 'strong':
+      case 'b':
+        inline += `**${content().join('')}**`
+        break
+      case 'em':
+      case 'i':
+        inline += `*${content().join('')}*`
+        break
+      case 'br':
+        inline += '\n'
+        break
+      default: {
+        const [first = '', ...rest] = content()
+        inline += first
+        rest.forEach(push)
+      }
+    }
+  }
+
+  flush()
+
+  return blocks
+}
+
+/**
+ * Serializes the vnodes of a slot back to Markdown: paragraphs, headings, lists, blockquotes, code blocks, inline code, links and emphasis.
+ */
+export function getSlotChildrenMarkdown(children: any[]) {
+  return getMarkdownBlocks(children).join('\n\n')
+}
+
 export function transformUI(ui: any, uiProp?: any) {
   return Object.entries(ui).reduce((acc, [key, value]) => {
     acc[key] = typeof value === 'function' ? value({ class: uiProp?.[key] }) : value

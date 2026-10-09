@@ -33,7 +33,7 @@ import { useClipboard } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../../composables/useComponentProps'
 import { useLocale } from '../../composables/useLocale'
-import { getSlotChildrenText } from '../../utils'
+import { getSlotChildrenMarkdown } from '../../utils'
 import { tv } from '../../utils/tv'
 import UIcon from '../Icon.vue'
 import UButton from '../Button.vue'
@@ -59,7 +59,7 @@ const actions = computed(() => [...new Set(['copy', ...props.actions])])
 
 function getPromptText() {
   const children = slots.default?.()
-  return children ? getSlotChildrenText(children).trim() : ''
+  return children ? getSlotChildrenMarkdown(children) : ''
 }
 
 function copyPrompt() {

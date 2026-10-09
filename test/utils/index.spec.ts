@@ -1,4 +1,5 @@
 import { describe, it, expect, afterEach } from 'vitest'
+import { h } from 'vue'
 import {
   pick,
   omit,
@@ -11,6 +12,7 @@ import {
   isArrayOfArray,
   mergeClasses,
   getSlotChildrenText,
+  getSlotChildrenMarkdown,
   transformUI,
   resolveBaseURL
 } from '../../src/runtime/utils'
@@ -226,6 +228,34 @@ describe('getSlotChildrenText', () => {
       { children: { default: () => [{ children: '!' }] } },
       { children: null }
     ])).toBe('Hello World!')
+  })
+})
+
+describe('getSlotChildrenMarkdown', () => {
+  it('keeps paragraphs, lists and inline syntax', () => {
+    expect(getSlotChildrenMarkdown([
+      h('p', ['Install ', h('code', '@nuxt/ui'), ' from the ', h('a', { href: '/docs' }, 'docs'), ', ', h('strong', 'then'), ':']),
+      h('ol', [
+        h('li', 'Add the module.'),
+        h('li', ['Import the styles:', h('ul', [h('li', [h('code', 'tailwindcss')]), h('li', [h('code', '@nuxt/ui')])])])
+      ]),
+      h('pre', { language: 'bash', code: 'pnpm add @nuxt/ui\n' }),
+      h('p', 'List what you changed.')
+    ])).toBe([
+      'Install `@nuxt/ui` from the [docs](/docs), **then**:',
+      '1. Add the module.\n2. Import the styles:\n   - `tailwindcss`\n   - `@nuxt/ui`',
+      '```bash\npnpm add @nuxt/ui\n```',
+      'List what you changed.'
+    ].join('\n\n'))
+  })
+
+  it('reads the tag and the slots of prose components rendered by MDC', () => {
+    const prose = (tag: string, children: any[]) => h({ tag, render: () => null } as any, null, { default: () => children })
+
+    expect(getSlotChildrenMarkdown([
+      prose('p', ['Before making any change:']),
+      prose('ol', [prose('li', ['Read ', prose('code', ['package.json']), '.']), prose('li', ['Stop.'])])
+    ])).toBe('Before making any change:\n\n1. Read `package.json`.\n2. Stop.')
   })
 })
 
