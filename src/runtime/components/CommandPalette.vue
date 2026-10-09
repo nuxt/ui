@@ -640,7 +640,7 @@ function onSelect(e: Event, item: T) {
       </UInput>
     </ListboxFilter>
 
-    <ListboxContent data-slot="content" :class="ui.content({ class: props.ui?.content })">
+    <ListboxContent data-slot="content" :aria-label="(typeof props.input === 'object' && props.input.placeholder) || placeholder" :class="ui.content({ class: props.ui?.content })">
       <div v-if="filteredGroups?.length" role="presentation" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
         <ListboxVirtualizer
           v-if="!!props.virtualize"
