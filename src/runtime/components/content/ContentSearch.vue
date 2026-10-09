@@ -338,8 +338,9 @@ const groups = computed(() => {
 })
 
 function onSelect(item: ContentSearchItem | undefined) {
-  // `selectionBehavior: 'toggle'` emits `undefined` when the selected item is selected again
-  if (!item || item.disabled) {
+  // `selectionBehavior: 'toggle'` emits `undefined` when the selected item is selected again,
+  // treat it as a regular selection and close the modal
+  if (item?.disabled) {
     return
   }
 
