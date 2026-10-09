@@ -152,7 +152,7 @@ const ui = computed(() => tv(theme, overrides.value)({
       </slot>
 
       <slot name="trailing" :ui="ui">
-        <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" data-slot="button-trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, active })" />
+        <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" data-slot="button-trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, active, loading: isLoading && !isLeading })" />
       </slot>
     </ULinkBase>
   </ULink>

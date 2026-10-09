@@ -1,4 +1,4 @@
-import { colorVariant, colors } from './color'
+import { colorVariant } from './color'
 import { defineTheme } from '../utils/theme'
 
 export default defineTheme({
@@ -23,12 +23,12 @@ export default defineTheme({
     color: colorVariant({ item: '', label: '' }),
     active: {
       true: {
-        item: 'text-strong before:bg-soft',
-        itemLeadingIcon: 'text-default'
+        item: 'text-accent-strong before:bg-accent-soft',
+        itemLeadingIcon: 'text-accent-default'
       },
       false: {
-        item: 'text-default data-highlighted:text-strong data-[state=open]:text-strong data-highlighted:before:bg-tint data-[state=open]:before:bg-tint transition-colors before:transition-colors',
-        itemLeadingIcon: 'text-faint group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors'
+        item: 'text-accent-default data-highlighted:text-accent-strong data-[state=open]:text-accent-strong data-highlighted:before:bg-accent-tint data-[state=open]:before:bg-accent-tint transition-colors before:transition-colors',
+        itemLeadingIcon: 'text-accent-faint group-data-highlighted:text-accent-default group-data-[state=open]:text-accent-default transition-colors'
       }
     },
     loading: {
@@ -74,22 +74,8 @@ export default defineTheme({
       }
     }
   },
-  compoundVariants: [{
-    color: [...colors],
-    active: false,
-    class: {
-      item: 'text-accent-default data-highlighted:text-accent-strong data-highlighted:before:bg-accent-tint data-[state=open]:before:bg-accent-tint',
-      itemLeadingIcon: 'text-accent-faint group-data-highlighted:text-accent-default group-data-[state=open]:text-accent-default'
-    }
-  }, {
-    color: [...colors],
-    active: true,
-    class: {
-      item: 'text-accent-strong before:bg-accent-soft',
-      itemLeadingIcon: 'text-accent-default'
-    }
-  }],
   defaultVariants: {
-    size: 'md'
+    size: 'md',
+    color: 'neutral'
   }
 })

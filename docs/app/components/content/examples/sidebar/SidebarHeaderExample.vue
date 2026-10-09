@@ -43,7 +43,8 @@ const items: NavigationMenuItem[] = [{
         <UNavigationMenu
           :items="items"
           orientation="vertical"
-          :ui="{ link: 'p-1.5 overflow-hidden' }"
+          square
+          :ui="{ link: 'overflow-hidden' }"
         />
       </USidebar>
 

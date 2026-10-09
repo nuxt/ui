@@ -38,8 +38,7 @@ interface ContextMenuContentEmits extends RekaContextMenuContentEmits {}
 
 <script setup lang="ts" generic="T extends ArrayOrNested<ContextMenuItem>">
 import { computed, toRef } from 'vue'
-import { ContextMenu } from 'reka-ui/namespaced'
-import { useForwardPropsEmits } from 'reka-ui'
+import { ContextMenuPortal, ContextMenuContent, ContextMenuItem as RekaContextMenuItem, ContextMenuGroup, ContextMenuSeparator, ContextMenuCheckboxItem, ContextMenuItemIndicator, ContextMenuLabel, ContextMenuSub, ContextMenuSubContent, ContextMenuSubTrigger, useForwardPropsEmits } from 'reka-ui'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { FieldGroupReset } from '../composables/useFieldGroup'
 import { useLocale } from '../composables/useLocale'
@@ -54,6 +53,8 @@ import UIcon from './Icon.vue'
 import UKbd from './Kbd.vue'
 import UContextMenuContent from './ContextMenuContent.vue'
 import { useThemeConfig } from '../composables/useComponentProps'
+
+const ContextMenu = { Portal: ContextMenuPortal, Content: ContextMenuContent, Item: RekaContextMenuItem, Group: ContextMenuGroup, Separator: ContextMenuSeparator, CheckboxItem: ContextMenuCheckboxItem, ItemIndicator: ContextMenuItemIndicator, Label: ContextMenuLabel, Sub: ContextMenuSub, SubContent: ContextMenuSubContent, SubTrigger: ContextMenuSubTrigger }
 
 const props = defineProps<ContextMenuContentProps<T>>()
 const emits = defineEmits<ContextMenuContentEmits>()

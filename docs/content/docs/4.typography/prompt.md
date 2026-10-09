@@ -11,17 +11,22 @@ links:
 
 ## Usage
 
-Use the `prompt` component to display a pre-built AI prompt that users can copy to their clipboard or open directly in their IDE. The `description` prop is shown as the visible label, while the default slot contains the prompt text that gets copied.
+Use the `prompt` component to display a pre-built AI prompt that users can copy to their clipboard or open directly in their IDE.
+
+### Prompt
+
+Use the `prompt` prop to set the text that gets copied. The `description` prop is shown as the visible label.
 
 ::component-code{slug="prompt" prose}
 ---
+ignore:
+  - prompt
+hide:
+  - class
 props:
   description: Build a dashboard layout with Nuxt UI.
   class: 'w-full my-0'
-hide:
-  - class
-slots:
-  default: |
+  prompt: |
     You are a Nuxt UI expert. Help me build a dashboard layout with a collapsible sidebar and a sticky top navbar.
 
     Requirements:
@@ -33,6 +38,10 @@ slots:
 ---
 ::
 
+::note
+The prompt can also be written in the default slot. It is then copied as plain text, without its line breaks, list markers and inline code.
+::
+
 ### Icon
 
 Use the `icon` prop to display an icon next to the description.
@@ -41,14 +50,14 @@ Use the `icon` prop to display an icon next to the description.
 ---
 ignore:
   - description
+  - prompt
 hide:
   - class
 props:
   description: Create a form with validation.
   icon: i-lucide-file-pen-line
   class: 'w-full my-0'
-slots:
-  default: |
+  prompt: |
     Create a registration form using Nuxt UI with Zod schema validation.
 
     Requirements:
@@ -69,6 +78,7 @@ Use the `actions` prop to display additional buttons. The `copy` button is alway
 ignore:
   - description
   - icon
+  - prompt
 hide:
   - class
 props:
@@ -78,8 +88,7 @@ props:
     - cursor
     - claude
   class: 'w-full my-0'
-slots:
-  default: |
+  prompt: |
     Add a color mode toggle to my Nuxt app.
 
     Requirements:

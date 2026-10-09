@@ -178,7 +178,7 @@ describe('Theme', () => {
     expect(classes).not.toContain('rounded-full')
   })
 
-  test(':ui wins over the theme compounds', async () => {
+  test(':ui wins over the equal padding of an icon-only button', async () => {
     const wrapper = await mountSuspended({
       components: { Theme, Button },
       template: `
@@ -190,7 +190,7 @@ describe('Theme', () => {
 
     const classes = wrapper.find('button').classes()
     expect(classes).toContain('p-3')
-    expect(classes).not.toContain('p-1.5')
+    expect(classes).not.toContain('px-(--ui-control-py)')
   })
 
   test('a nested :variants wins over an outer :ui', async () => {

@@ -238,9 +238,8 @@ export interface InputMenuSlots<
 
 <script setup lang="ts" generic="T extends ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false">
 import { computed, ref, useAttrs, useTemplateRef, toRef, onMounted, onScopeDispose, toRaw, nextTick, watch } from 'vue'
-import { TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput } from 'reka-ui'
+import { TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, ComboboxRoot, ComboboxInput, ComboboxAnchor, ComboboxEmpty, ComboboxTrigger, ComboboxCancel, ComboboxGroup, ComboboxLabel, ComboboxContent, ComboboxVirtualizer, ComboboxItem, ComboboxItemIndicator, ComboboxSeparator, ComboboxArrow, ComboboxPortal, AutocompleteRoot, AutocompleteInput, AutocompleteAnchor, AutocompleteEmpty, AutocompleteTrigger, AutocompleteCancel, AutocompleteGroup, AutocompleteLabel, AutocompleteContent, AutocompleteVirtualizer, AutocompleteItem, AutocompleteItemIndicator, AutocompleteSeparator, AutocompleteArrow, AutocompletePortal } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { Combobox, Autocomplete } from 'reka-ui/namespaced'
 import { defu } from 'defu'
 import { isEqual } from 'ohash/utils'
 import { reactivePick, reactiveOmit, createReusableTemplate } from '@vueuse/core'
@@ -259,6 +258,9 @@ import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UButton from './Button.vue'
 import UChip from './Chip.vue'
+
+const Combobox = { Root: ComboboxRoot, Input: ComboboxInput, Anchor: ComboboxAnchor, Empty: ComboboxEmpty, Trigger: ComboboxTrigger, Cancel: ComboboxCancel, Group: ComboboxGroup, Label: ComboboxLabel, Content: ComboboxContent, Virtualizer: ComboboxVirtualizer, Item: ComboboxItem, ItemIndicator: ComboboxItemIndicator, Separator: ComboboxSeparator, Arrow: ComboboxArrow, Portal: ComboboxPortal }
+const Autocomplete = { Root: AutocompleteRoot, Input: AutocompleteInput, Anchor: AutocompleteAnchor, Empty: AutocompleteEmpty, Trigger: AutocompleteTrigger, Cancel: AutocompleteCancel, Group: AutocompleteGroup, Label: AutocompleteLabel, Content: AutocompleteContent, Virtualizer: AutocompleteVirtualizer, Item: AutocompleteItem, ItemIndicator: AutocompleteItemIndicator, Separator: AutocompleteSeparator, Arrow: AutocompleteArrow, Portal: AutocompletePortal }
 
 defineOptions({ inheritAttrs: false })
 
@@ -790,7 +792,7 @@ defineExpose({
             />
           </Component.Cancel>
 
-          <UIcon v-else-if="trailingIconName" :name="trailingIconName" data-slot="input-menu-trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, leading: isLeading })" />
+          <UIcon v-else-if="trailingIconName" :name="trailingIconName" data-slot="input-menu-trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, loading: props.loading && !isLeading })" />
         </slot>
       </Component.Trigger>
     </Component.Anchor>

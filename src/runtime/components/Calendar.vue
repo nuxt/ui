@@ -143,12 +143,19 @@ export interface CalendarSlots {
 <script setup lang="ts" generic="R extends boolean, M extends boolean">
 import { computed, ref, shallowRef, watch } from 'vue'
 import { useForwardProps } from '../composables/useForwardProps'
-import { Calendar as SingleCalendar, RangeCalendar, MonthPicker, MonthRangePicker, YearPicker, YearRangePicker } from 'reka-ui/namespaced'
+import { CalendarRoot, CalendarHeader, CalendarHeading, CalendarGrid, CalendarCell, CalendarHeadCell, CalendarNext, CalendarPrev, CalendarGridHead, CalendarGridBody, CalendarGridRow, CalendarCellTrigger, RangeCalendarRoot, RangeCalendarHeader, RangeCalendarHeading, RangeCalendarGrid, RangeCalendarCell, RangeCalendarHeadCell, RangeCalendarNext, RangeCalendarPrev, RangeCalendarGridHead, RangeCalendarGridBody, RangeCalendarGridRow, RangeCalendarCellTrigger, MonthPickerRoot, MonthPickerHeader, MonthPickerHeading, MonthPickerGrid, MonthPickerCell, MonthPickerNext, MonthPickerPrev, MonthPickerGridBody, MonthPickerGridRow, MonthPickerCellTrigger, MonthRangePickerRoot, MonthRangePickerHeader, MonthRangePickerHeading, MonthRangePickerGrid, MonthRangePickerCell, MonthRangePickerNext, MonthRangePickerPrev, MonthRangePickerGridBody, MonthRangePickerGridRow, MonthRangePickerCellTrigger, YearPickerRoot, YearPickerHeader, YearPickerHeading, YearPickerGrid, YearPickerCell, YearPickerNext, YearPickerPrev, YearPickerGridBody, YearPickerGridRow, YearPickerCellTrigger, YearRangePickerRoot, YearRangePickerHeader, YearRangePickerHeading, YearRangePickerGrid, YearRangePickerCell, YearRangePickerNext, YearRangePickerPrev, YearRangePickerGridBody, YearRangePickerGridRow, YearRangePickerCellTrigger } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
 import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
+
+const SingleCalendar = { Root: CalendarRoot, Header: CalendarHeader, Heading: CalendarHeading, Grid: CalendarGrid, Cell: CalendarCell, HeadCell: CalendarHeadCell, Next: CalendarNext, Prev: CalendarPrev, GridHead: CalendarGridHead, GridBody: CalendarGridBody, GridRow: CalendarGridRow, CellTrigger: CalendarCellTrigger }
+const RangeCalendar = { Root: RangeCalendarRoot, Header: RangeCalendarHeader, Heading: RangeCalendarHeading, Grid: RangeCalendarGrid, Cell: RangeCalendarCell, HeadCell: RangeCalendarHeadCell, Next: RangeCalendarNext, Prev: RangeCalendarPrev, GridHead: RangeCalendarGridHead, GridBody: RangeCalendarGridBody, GridRow: RangeCalendarGridRow, CellTrigger: RangeCalendarCellTrigger }
+const MonthPicker = { Root: MonthPickerRoot, Header: MonthPickerHeader, Heading: MonthPickerHeading, Grid: MonthPickerGrid, Cell: MonthPickerCell, Next: MonthPickerNext, Prev: MonthPickerPrev, GridBody: MonthPickerGridBody, GridRow: MonthPickerGridRow, CellTrigger: MonthPickerCellTrigger }
+const MonthRangePicker = { Root: MonthRangePickerRoot, Header: MonthRangePickerHeader, Heading: MonthRangePickerHeading, Grid: MonthRangePickerGrid, Cell: MonthRangePickerCell, Next: MonthRangePickerNext, Prev: MonthRangePickerPrev, GridBody: MonthRangePickerGridBody, GridRow: MonthRangePickerGridRow, CellTrigger: MonthRangePickerCellTrigger }
+const YearPicker = { Root: YearPickerRoot, Header: YearPickerHeader, Heading: YearPickerHeading, Grid: YearPickerGrid, Cell: YearPickerCell, Next: YearPickerNext, Prev: YearPickerPrev, GridBody: YearPickerGridBody, GridRow: YearPickerGridRow, CellTrigger: YearPickerCellTrigger }
+const YearRangePicker = { Root: YearRangePickerRoot, Header: YearRangePickerHeader, Heading: YearRangePickerHeading, Grid: YearRangePickerGrid, Cell: YearRangePickerCell, Next: YearRangePickerNext, Prev: YearRangePickerPrev, GridBody: YearRangePickerGridBody, GridRow: YearRangePickerGridRow, CellTrigger: YearRangePickerCellTrigger }
 
 const _props = withDefaults(defineProps<CalendarProps<R, M>>(), {
   type: 'date',

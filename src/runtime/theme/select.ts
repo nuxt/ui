@@ -28,7 +28,7 @@ export default extendTheme(input, {
   },
   variants: {
     ...fieldGroupVariant,
-    // No `root` slot here, so the color scopes `base`
+    // No `root` slot here, so the color and the size tokens go on `base`
     color: () => colorVariant({ base: '' }),
     variant: (prev: typeof input.variants.variant) => ({
       ...prev,
@@ -41,6 +41,8 @@ export default extendTheme(input, {
     }),
     size: {
       xs: {
+        root: () => undefined,
+        base: (prev: string) => [prev, input.variants.size.xs.root],
         label: 'p-1 text-[10px]/3 gap-1',
         item: 'p-1 text-xs gap-1',
         itemLeadingIcon: 'size-4',
@@ -49,6 +51,8 @@ export default extendTheme(input, {
         empty: 'p-2 text-xs'
       },
       sm: {
+        root: () => undefined,
+        base: (prev: string) => [prev, input.variants.size.sm.root],
         label: 'p-1.5 text-[10px]/3 gap-1.5',
         item: 'p-1.5 text-xs gap-1.5',
         itemLeadingIcon: 'size-4',
@@ -57,6 +61,8 @@ export default extendTheme(input, {
         empty: 'p-2.5 text-xs'
       },
       md: {
+        root: () => undefined,
+        base: (prev: string) => [prev, input.variants.size.md.root],
         label: 'p-1.5 text-xs gap-1.5',
         item: 'p-1.5 text-sm gap-1.5',
         itemLeadingIcon: 'size-5',
@@ -65,6 +71,8 @@ export default extendTheme(input, {
         empty: 'p-2.5 text-sm'
       },
       lg: {
+        root: () => undefined,
+        base: (prev: string) => [prev, input.variants.size.lg.root],
         label: 'p-2 text-xs gap-2',
         item: 'p-2 text-sm gap-2',
         itemLeadingIcon: 'size-5',
@@ -73,6 +81,8 @@ export default extendTheme(input, {
         empty: 'p-3 text-sm'
       },
       xl: {
+        root: () => undefined,
+        base: (prev: string) => [prev, input.variants.size.xl.root],
         label: 'p-2 text-sm gap-2',
         item: 'p-2 text-base gap-2',
         itemLeadingIcon: 'size-6',

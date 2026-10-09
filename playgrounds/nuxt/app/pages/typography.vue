@@ -323,13 +323,16 @@ Press :kbd{value="meta"} :kbd{value="K"} to open the command palette.
 ### Prompt
 
 ::prompt{description="Build a dashboard layout with Nuxt UI." icon="i-lucide-layout-dashboard" actions='["cursor", "claude"]'}
-You are a Nuxt UI expert. Help me build a dashboard layout with a collapsible sidebar and a sticky top navbar.
+---
+prompt: |
+  You are a Nuxt UI expert. Help me build a dashboard layout with a collapsible sidebar and a sticky top navbar.
 
-Requirements:
-- Use \`UDashboardPanel\`, \`UDashboardSidebar\` and \`UDashboardNavbar\`
-- Use semantic color tokens like \`bg-soft\` and \`text-muted\`
-- The sidebar should include navigation links with icons using \`UNavigationMenu\`
-- The layout must collapse the sidebar on mobile
+  Requirements:
+  - Use \`UDashboardPanel\`, \`UDashboardSidebar\` and \`UDashboardNavbar\`
+  - Use semantic color tokens like \`bg-soft\` and \`text-muted\`
+  - The sidebar should include navigation links with icons using \`UNavigationMenu\`
+  - The layout must collapse the sidebar on mobile
+---
 ::
 
 ### Steps

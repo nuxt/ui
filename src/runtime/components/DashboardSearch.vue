@@ -179,8 +179,10 @@ const renderModal = useLazyOverlay(() => open.value || props.unmountOnHide === f
 
 const commandPaletteRef = useTemplateRef('commandPaletteRef')
 
-function onSelect(item: CommandPaletteItem) {
-  if (item.disabled) {
+function onSelect(item: CommandPaletteItem | undefined) {
+  // `selectionBehavior: 'toggle'` emits `undefined` when the selected item is selected again,
+  // treat it as a regular selection and close the modal
+  if (item?.disabled) {
     return
   }
 
