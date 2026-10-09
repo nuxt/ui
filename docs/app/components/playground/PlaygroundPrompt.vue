@@ -200,12 +200,12 @@ function onSubmit() {
                 :class="['group', open && 'bg-elevated']"
                 :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
               >
-                {{ activeModel?.label }} <span class="text-dimmed">{{ effort }}</span>
+                {{ activeModel?.label }} <span class="text-muted">{{ effort }}</span>
               </UButton>
             </template>
 
             <template #effort-trailing="{ ui }">
-              <span class="text-dimmed">{{ effort }}</span>
+              <span class="text-muted">{{ effort }}</span>
               <UIcon :name="appConfig.ui.icons.chevronRight" :class="ui.itemTrailingIcon()" />
             </template>
           </UDropdownMenu>
