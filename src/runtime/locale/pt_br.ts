@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Fechar'
     },
+    breadcrumb: {
+      label: 'trilha de navegação'
+    },
     calendar: {
+      label: 'Data do evento',
+      monthPicker: 'Seletor de mês',
       nextMonth: 'Próximo mês',
       nextYear: 'Próximo ano',
       prevMonth: 'Mês anterior',
-      prevYear: 'Ano anterior'
+      prevYear: 'Ano anterior',
+      yearPicker: 'Seletor de ano'
     },
     carousel: {
       dots: 'Escolher slide para exibir',
       goto: 'Ir para a slide {slide}',
       next: 'Próximo',
-      prev: 'Anterior'
+      prev: 'Anterior',
+      roledescription: 'carrossel',
+      slide: 'slide'
     },
     chatMessages: {
       autoScroll: 'Rolar para baixo'
@@ -100,6 +108,17 @@ export default defineLocale<Messages>({
       close: 'Fechar menu',
       open: 'Abrir menu'
     },
+    inputDate: {
+      day: 'dia',
+      dayPeriod: 'AM/PM',
+      era: 'era',
+      hour: 'hora',
+      minute: 'minuto',
+      month: 'mês',
+      second: 'segundo',
+      timeZoneName: 'fuso horário',
+      year: 'ano'
+    },
     inputMenu: {
       create: 'Criar "{label}"',
       noData: 'Nenhum dado',
@@ -108,6 +127,16 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Decrementar',
       increment: 'Incrementar'
+    },
+    inputRating: {
+      rate: 'Avaliar com {value} de {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'hora',
+      minute: 'minuto',
+      second: 'segundo',
+      timeZoneName: 'fuso horário'
     },
     listbox: {
       noData: 'Nenhum dado',
@@ -123,6 +152,9 @@ export default defineLocale<Messages>({
       next: 'Próxima página',
       page: 'Página {page}',
       prev: 'Página anterior'
+    },
+    pinInput: {
+      input: 'código PIN, caractere {index} de {length}'
     },
     pricingTable: {
       caption: 'Comparação de planos de preços'
@@ -156,14 +188,27 @@ export default defineLocale<Messages>({
       noMatch: 'Nenhum dado correspondente',
       search: 'Pesquisar…'
     },
+    skeleton: {
+      label: 'carregando'
+    },
     slideover: {
       close: 'Fechar'
+    },
+    slider: {
+      max: 'Máximo',
+      min: 'Mínimo',
+      thumb: 'Cursor',
+      value: 'Valor {index} de {total}'
     },
     table: {
       noData: 'Nenhum dado'
     },
     toast: {
       close: 'Fechar'
+    },
+    toaster: {
+      label: 'Notificação',
+      viewport: 'Notificações ({hotkey})'
     }
   }
 })

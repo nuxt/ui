@@ -11,6 +11,12 @@ describe('Skeleton', () => {
     ['with class', { props: { class: 'rounded-full size-12' } }]
   ])
 
+  it('labels the loading state', async () => {
+    const wrapper = await mountSuspended(Skeleton)
+
+    expect(wrapper.attributes('aria-label')).toBe('loading')
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Skeleton, {
       props: {

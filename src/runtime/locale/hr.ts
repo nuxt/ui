@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Zatvori'
     },
+    breadcrumb: {
+      label: 'navigacijski put'
+    },
     calendar: {
+      label: 'Datum događaja',
+      monthPicker: 'Odabir mjeseca',
       nextMonth: 'Sljedeći mjesec',
       nextYear: 'Sljedeća godina',
       prevMonth: 'Prethodni mjesec',
-      prevYear: 'Prethodna godina'
+      prevYear: 'Prethodna godina',
+      yearPicker: 'Odabir godine'
     },
     carousel: {
       dots: 'Odaberite slajd za prikaz',
       goto: 'Idi na slajd {slide}',
       next: 'Sljedeći',
-      prev: 'Prethodni'
+      prev: 'Prethodni',
+      roledescription: 'vrtuljak',
+      slide: 'slajd'
     },
     chatMessages: {
       autoScroll: 'Pomakni na dno'
@@ -100,6 +108,17 @@ export default defineLocale<Messages>({
       close: 'Zatvori izbornik',
       open: 'Otvori izbornik'
     },
+    inputDate: {
+      day: 'dan',
+      dayPeriod: 'AM/PM',
+      era: 'era',
+      hour: 'sat',
+      minute: 'minuta',
+      month: 'mjesec',
+      second: 'sekunda',
+      timeZoneName: 'vremenska zona',
+      year: 'godina'
+    },
     inputMenu: {
       create: 'Stvori "{label}"',
       noData: 'Nema podataka',
@@ -108,6 +127,16 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Smanji',
       increment: 'Povećaj'
+    },
+    inputRating: {
+      rate: 'Ocijeni {value} od {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'sat',
+      minute: 'minuta',
+      second: 'sekunda',
+      timeZoneName: 'vremenska zona'
     },
     listbox: {
       noData: 'Nema podataka',
@@ -123,6 +152,9 @@ export default defineLocale<Messages>({
       next: 'Sljedeća stranica',
       page: 'Stranica {page}',
       prev: 'Prethodna stranica'
+    },
+    pinInput: {
+      input: 'PIN kod, znak {index} od {length}'
     },
     pricingTable: {
       caption: 'Usporedba cjenovnih planova'
@@ -156,14 +188,27 @@ export default defineLocale<Messages>({
       noMatch: 'Nema odgovarajućih podataka',
       search: 'Pretraživanje…'
     },
+    skeleton: {
+      label: 'učitavanje'
+    },
     slideover: {
       close: 'Zatvori'
+    },
+    slider: {
+      max: 'Maksimum',
+      min: 'Minimum',
+      thumb: 'Klizač',
+      value: 'Vrijednost {index} od {total}'
     },
     table: {
       noData: 'Nema podataka'
     },
     toast: {
       close: 'Zatvori'
+    },
+    toaster: {
+      label: 'Obavijest',
+      viewport: 'Obavijesti ({hotkey})'
     }
   }
 })

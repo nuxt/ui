@@ -99,6 +99,14 @@ describe('InputRating', () => {
     })
   })
 
+  describe('aria', () => {
+    test('labels each value', async () => {
+      const wrapper = await mountSuspended(InputRating, { props: { length: 3 } })
+
+      expect(wrapper.findAll('[data-slot="indicator"]').map(indicator => indicator.attributes('aria-label'))).toStrictEqual(['Rate 1 out of 3', 'Rate 2 out of 3', 'Rate 3 out of 3'])
+    })
+  })
+
   describe('readonly behavior', () => {
     test('does not emit events when readonly', async () => {
       const wrapper = mount(InputRating, {

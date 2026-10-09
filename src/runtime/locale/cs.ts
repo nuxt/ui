@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Zavřít'
     },
+    breadcrumb: {
+      label: 'drobečková navigace'
+    },
     calendar: {
+      label: 'Datum události',
+      monthPicker: 'Výběr měsíce',
       nextMonth: 'Další měsíc',
       nextYear: 'Další rok',
       prevMonth: 'Předchozí měsíc',
-      prevYear: 'Předchozí rok'
+      prevYear: 'Předchozí rok',
+      yearPicker: 'Výběr roku'
     },
     carousel: {
       dots: 'Vyberte snímek k zobrazení',
       goto: 'Přejít na {slide}',
       next: 'Další',
-      prev: 'Předchozí'
+      prev: 'Předchozí',
+      roledescription: 'karusel',
+      slide: 'snímek'
     },
     chatMessages: {
       autoScroll: 'Posunout dolů'
@@ -100,6 +108,17 @@ export default defineLocale<Messages>({
       close: 'Zavřít menu',
       open: 'Otevřít menu'
     },
+    inputDate: {
+      day: 'den',
+      dayPeriod: 'AM/PM',
+      era: 'letopočet',
+      hour: 'hodina',
+      minute: 'minuta',
+      month: 'měsíc',
+      second: 'sekunda',
+      timeZoneName: 'časové pásmo',
+      year: 'rok'
+    },
     inputMenu: {
       create: 'Vytvořit "{label}"',
       noData: 'Žádná data',
@@ -108,6 +127,16 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Snížit',
       increment: 'Zvýšit'
+    },
+    inputRating: {
+      rate: 'Ohodnotit {value} z {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'hodina',
+      minute: 'minuta',
+      second: 'sekunda',
+      timeZoneName: 'časové pásmo'
     },
     listbox: {
       noData: 'Žádná data',
@@ -123,6 +152,9 @@ export default defineLocale<Messages>({
       next: 'Další stránka',
       page: 'Stránka {page}',
       prev: 'Předchozí stránka'
+    },
+    pinInput: {
+      input: 'PIN kód, znak {index} z {length}'
     },
     pricingTable: {
       caption: 'Porovnání cenových plánů'
@@ -156,14 +188,27 @@ export default defineLocale<Messages>({
       noMatch: 'Žádná shoda',
       search: 'Hledat…'
     },
+    skeleton: {
+      label: 'načítání'
+    },
     slideover: {
       close: 'Zavřít'
+    },
+    slider: {
+      max: 'Maximum',
+      min: 'Minimum',
+      thumb: 'Posuvník',
+      value: 'Hodnota {index} z {total}'
     },
     table: {
       noData: 'Žádná data'
     },
     toast: {
       close: 'Zavřít'
+    },
+    toaster: {
+      label: 'Oznámení',
+      viewport: 'Oznámení ({hotkey})'
     }
   }
 })

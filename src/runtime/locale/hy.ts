@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Փակել'
     },
+    breadcrumb: {
+      label: 'նավիգացիոն ուղի'
+    },
     calendar: {
+      label: 'Իրադարձության ամսաթիվ',
+      monthPicker: 'Ամսի ընտրիչ',
       nextMonth: 'Հաջորդ ամիս',
       nextYear: 'Հաջորդ տարի',
       prevMonth: 'Նախորդ ամիս',
-      prevYear: 'Նախորդ տարի'
+      prevYear: 'Նախորդ տարի',
+      yearPicker: 'Տարվա ընտրիչ'
     },
     carousel: {
       dots: 'Ընտրեք ցուցադրելու սլայդը',
       goto: 'Անցնել {slide}-ին',
       next: 'Առաջ',
-      prev: 'Հետ'
+      prev: 'Հետ',
+      roledescription: 'կարուսել',
+      slide: 'սլայդ'
     },
     chatMessages: {
       autoScroll: 'Ոլորել ներքև'
@@ -100,6 +108,17 @@ export default defineLocale<Messages>({
       close: 'Փակել ընտրացանկը',
       open: 'Բացել ընտրացանկը'
     },
+    inputDate: {
+      day: 'օր',
+      dayPeriod: 'AM/PM',
+      era: 'դարաշրջան',
+      hour: 'ժամ',
+      minute: 'րոպե',
+      month: 'ամիս',
+      second: 'վայրկյան',
+      timeZoneName: 'ժամային գոտի',
+      year: 'տարի'
+    },
     inputMenu: {
       create: 'Ստեղծել "{label}"',
       noData: 'Տվյալներ չկան',
@@ -108,6 +127,16 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Պակասեցնել',
       increment: 'Ավելացնել'
+    },
+    inputRating: {
+      rate: 'Գնահատել {value}՝ {length}-ից'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'ժամ',
+      minute: 'րոպե',
+      second: 'վայրկյան',
+      timeZoneName: 'ժամային գոտի'
     },
     listbox: {
       noData: 'Տվյալներ չկան',
@@ -123,6 +152,9 @@ export default defineLocale<Messages>({
       next: 'Հաջորդ էջ',
       page: 'Էջ {page}',
       prev: 'Նախորդ էջ'
+    },
+    pinInput: {
+      input: 'PIN կոդ, նիշ {index}՝ {length}-ից'
     },
     pricingTable: {
       caption: 'Գնումների համեմատություն'
@@ -156,14 +188,27 @@ export default defineLocale<Messages>({
       noMatch: 'Համընկնումներ չեն գտնվել',
       search: 'Որոնում…'
     },
+    skeleton: {
+      label: 'բեռնում'
+    },
     slideover: {
       close: 'Փակել'
+    },
+    slider: {
+      max: 'Առավելագույն',
+      min: 'Նվազագույն',
+      thumb: 'Սահիչ',
+      value: 'Արժեք {index}՝ {total}-ից'
     },
     table: {
       noData: 'Տվյալներ չկան'
     },
     toast: {
       close: 'Փակել'
+    },
+    toaster: {
+      label: 'Ծանուցում',
+      viewport: 'Ծանուցումներ ({hotkey})'
     }
   }
 })

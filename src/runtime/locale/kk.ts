@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Жабу'
     },
+    breadcrumb: {
+      label: 'навигациялық жол'
+    },
     calendar: {
+      label: 'Оқиға күні',
+      monthPicker: 'Айды таңдау',
       nextMonth: 'Келесі ай',
       nextYear: 'Келесі жыл',
       prevMonth: 'Алдыңғы ай',
-      prevYear: 'Алдыңғы жыл'
+      prevYear: 'Алдыңғы жыл',
+      yearPicker: 'Жылды таңдау'
     },
     carousel: {
       dots: 'Көрсету үшін слайдты таңдаңыз',
       goto: '{slide} слайдқа өту',
       next: 'Келесі',
-      prev: 'Алдыңғы'
+      prev: 'Алдыңғы',
+      roledescription: 'карусель',
+      slide: 'слайд'
     },
     chatMessages: {
       autoScroll: 'Төмен айналдыру'
@@ -100,6 +108,17 @@ export default defineLocale<Messages>({
       close: 'Жабу',
       open: 'Ашу'
     },
+    inputDate: {
+      day: 'күн',
+      dayPeriod: 'AM/PM',
+      era: 'дәуір',
+      hour: 'сағат',
+      minute: 'минут',
+      month: 'ай',
+      second: 'секунд',
+      timeZoneName: 'уақыт белдеуі',
+      year: 'жыл'
+    },
     inputMenu: {
       create: '"{label}" жасау',
       noData: 'Деректер жоқ',
@@ -108,6 +127,16 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Азайту',
       increment: 'Арттыру'
+    },
+    inputRating: {
+      rate: '{length} ішінен {value} деп бағалау'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'сағат',
+      minute: 'минут',
+      second: 'секунд',
+      timeZoneName: 'уақыт белдеуі'
     },
     listbox: {
       noData: 'Деректер жоқ',
@@ -123,6 +152,9 @@ export default defineLocale<Messages>({
       next: 'Келесі бет',
       page: '{page}-бет',
       prev: 'Алдыңғы бет'
+    },
+    pinInput: {
+      input: 'PIN код, {length} ішінен {index}-таңба'
     },
     pricingTable: {
       caption: 'Баға кестесі'
@@ -156,14 +188,27 @@ export default defineLocale<Messages>({
       noMatch: 'Сәйкес келетін деректер жоқ',
       search: 'Іздеу…'
     },
+    skeleton: {
+      label: 'жүктелуде'
+    },
     slideover: {
       close: 'Жабу'
+    },
+    slider: {
+      max: 'Максимум',
+      min: 'Минимум',
+      thumb: 'Жүгірткі',
+      value: '{total} ішінен {index}-мән'
     },
     table: {
       noData: 'Деректер жоқ'
     },
     toast: {
       close: 'Жабу'
+    },
+    toaster: {
+      label: 'Хабарландыру',
+      viewport: 'Хабарландырулар ({hotkey})'
     }
   }
 })

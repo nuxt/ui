@@ -43,6 +43,12 @@ describe('Breadcrumb', () => {
     ['with separator slot', { props, slots: { separator: () => '/' } }]
   ])
 
+  it('labels the navigation', async () => {
+    const wrapper = await mountSuspended(Breadcrumb, { props })
+
+    expect(wrapper.attributes('aria-label')).toBe('breadcrumb')
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Breadcrumb, {
       props

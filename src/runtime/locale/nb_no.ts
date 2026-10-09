@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Lukk'
     },
+    breadcrumb: {
+      label: 'brødsmulesti'
+    },
     calendar: {
+      label: 'Hendelsesdato',
+      monthPicker: 'Månedsvelger',
       nextMonth: 'Neste måned',
       nextYear: 'Neste år',
       prevMonth: 'Forrige måned',
-      prevYear: 'Forrige år'
+      prevYear: 'Forrige år',
+      yearPicker: 'Årsvelger'
     },
     carousel: {
       dots: 'Velg lysbilde som skal vises',
       goto: 'Gå til lysbilde {slide}',
       next: 'Neste',
-      prev: 'Forrige'
+      prev: 'Forrige',
+      roledescription: 'karusell',
+      slide: 'lysbilde'
     },
     chatMessages: {
       autoScroll: 'Rull til bunnen'
@@ -100,6 +108,17 @@ export default defineLocale<Messages>({
       close: 'Lukk meny',
       open: 'Åpne meny'
     },
+    inputDate: {
+      day: 'dag',
+      dayPeriod: 'AM/PM',
+      era: 'tidsalder',
+      hour: 'time',
+      minute: 'minutt',
+      month: 'måned',
+      second: 'sekund',
+      timeZoneName: 'tidssone',
+      year: 'år'
+    },
     inputMenu: {
       create: 'Opprett "{label}"',
       noData: 'Ingen data',
@@ -108,6 +127,16 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Reduser',
       increment: 'Øk'
+    },
+    inputRating: {
+      rate: 'Gi {value} av {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'time',
+      minute: 'minutt',
+      second: 'sekund',
+      timeZoneName: 'tidssone'
     },
     listbox: {
       noData: 'Ingen data',
@@ -123,6 +152,9 @@ export default defineLocale<Messages>({
       next: 'Neste side',
       page: 'Side {page}',
       prev: 'Forrige side'
+    },
+    pinInput: {
+      input: 'PIN-kode, tegn {index} av {length}'
     },
     pricingTable: {
       caption: 'Prisplaneringssammenligning'
@@ -156,14 +188,27 @@ export default defineLocale<Messages>({
       noMatch: 'Ingen samsvarende data',
       search: 'Søk…'
     },
+    skeleton: {
+      label: 'laster inn'
+    },
     slideover: {
       close: 'Lukk'
+    },
+    slider: {
+      max: 'Maksimum',
+      min: 'Minimum',
+      thumb: 'Glidebryter',
+      value: 'Verdi {index} av {total}'
     },
     table: {
       noData: 'Ingen data'
     },
     toast: {
       close: 'Lukk'
+    },
+    toaster: {
+      label: 'Varsel',
+      viewport: 'Varsler ({hotkey})'
     }
   }
 })

@@ -87,6 +87,19 @@ describe('Toast', () => {
     toast.clear()
   })
 
+  it('labels the toasts and the viewport', async () => {
+    const wrapper = await mountSuspended(Toaster, { props: { portal: false } })
+
+    expect(wrapper.findComponent(ToastProvider).props('label')).toBe('Notification')
+    expect(wrapper.get('[role="region"]').attributes('aria-label')).toBe('Notifications (F8)')
+  })
+
+  it('labels the toasts with the label prop', async () => {
+    const wrapper = await mountSuspended(Toaster, { props: { portal: false, label: 'Alert' } })
+
+    expect(wrapper.findComponent(ToastProvider).props('label')).toBe('Alert')
+  })
+
   it('does not pass attributes down to the provider', async () => {
     const wrapper = await mountSuspended(Toaster, { props: { portal: false }, attrs: { limit: 1 } })
 

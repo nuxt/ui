@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: '关闭'
     },
+    breadcrumb: {
+      label: '面包屑导航'
+    },
     calendar: {
+      label: '事件日期',
+      monthPicker: '月份选择器',
       nextMonth: '下个月',
       nextYear: '明年',
       prevMonth: '上个月',
-      prevYear: '去年'
+      prevYear: '去年',
+      yearPicker: '年份选择器'
     },
     carousel: {
       dots: '选择要显示的幻灯片',
       goto: '跳转到第 {slide} 页',
       next: '下一页',
-      prev: '上一页'
+      prev: '上一页',
+      roledescription: '轮播',
+      slide: '幻灯片'
     },
     chatMessages: {
       autoScroll: '滚动到底部'
@@ -100,6 +108,17 @@ export default defineLocale<Messages>({
       close: '关闭菜单',
       open: '打开菜单'
     },
+    inputDate: {
+      day: '日',
+      dayPeriod: '上午/下午',
+      era: '纪元',
+      hour: '小时',
+      minute: '分钟',
+      month: '月',
+      second: '秒',
+      timeZoneName: '时区',
+      year: '年'
+    },
     inputMenu: {
       create: '创建 "{label}"',
       noData: '没有数据',
@@ -108,6 +127,16 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: '减少',
       increment: '增加'
+    },
+    inputRating: {
+      rate: '评分 {value} 分，满分 {length} 分'
+    },
+    inputTime: {
+      dayPeriod: '上午/下午',
+      hour: '小时',
+      minute: '分钟',
+      second: '秒',
+      timeZoneName: '时区'
     },
     listbox: {
       noData: '没有数据',
@@ -123,6 +152,9 @@ export default defineLocale<Messages>({
       next: '下一页',
       page: '第 {page} 页',
       prev: '上一页'
+    },
+    pinInput: {
+      input: 'PIN 码，第 {index} 位，共 {length} 位'
     },
     pricingTable: {
       caption: '价格计划比较'
@@ -156,14 +188,27 @@ export default defineLocale<Messages>({
       noMatch: '没有匹配的数据',
       search: '搜索…'
     },
+    skeleton: {
+      label: '加载中'
+    },
     slideover: {
       close: '关闭'
+    },
+    slider: {
+      max: '最大值',
+      min: '最小值',
+      thumb: '滑块',
+      value: '第 {index} 个值，共 {total} 个'
     },
     table: {
       noData: '没有数据'
     },
     toast: {
       close: '关闭'
+    },
+    toaster: {
+      label: '通知',
+      viewport: '通知（{hotkey}）'
     }
   }
 })

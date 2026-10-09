@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Close'
     },
+    breadcrumb: {
+      label: 'breadcrumb'
+    },
     calendar: {
+      label: 'Event Date',
+      monthPicker: 'Month Picker',
       nextMonth: 'Next month',
       nextYear: 'Next year',
       prevMonth: 'Previous month',
-      prevYear: 'Previous year'
+      prevYear: 'Previous year',
+      yearPicker: 'Year Picker'
     },
     carousel: {
       dots: 'Choose slide to display',
       goto: 'Go to slide {slide}',
       next: 'Next',
-      prev: 'Prev'
+      prev: 'Prev',
+      roledescription: 'carousel',
+      slide: 'slide'
     },
     chatMessages: {
       autoScroll: 'Scroll to bottom'
@@ -95,6 +103,17 @@ export default defineLocale<Messages>({
       close: 'Close menu',
       open: 'Open menu'
     },
+    inputDate: {
+      day: 'day',
+      dayPeriod: 'AM/PM',
+      era: 'era',
+      hour: 'hour',
+      minute: 'minute',
+      month: 'month',
+      second: 'second',
+      timeZoneName: 'timezone',
+      year: 'year'
+    },
     inputMenu: {
       create: 'Create "{label}"',
       noData: 'No data',
@@ -103,6 +122,16 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Decrement',
       increment: 'Increment'
+    },
+    inputRating: {
+      rate: 'Rate {value} out of {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'hour',
+      minute: 'minute',
+      second: 'second',
+      timeZoneName: 'timezone'
     },
     listbox: {
       noData: 'No data',
@@ -118,6 +147,9 @@ export default defineLocale<Messages>({
       next: 'Next page',
       page: 'Page {page}',
       prev: 'Previous page'
+    },
+    pinInput: {
+      input: 'pin input {index} of {length}'
     },
     pricingTable: {
       caption: 'Pricing plan comparison'
@@ -156,14 +188,27 @@ export default defineLocale<Messages>({
       noMatch: 'No matching data',
       search: 'Search…'
     },
+    skeleton: {
+      label: 'loading'
+    },
     slideover: {
       close: 'Close'
+    },
+    slider: {
+      max: 'Maximum',
+      min: 'Minimum',
+      thumb: 'Thumb',
+      value: 'Value {index} of {total}'
     },
     table: {
       noData: 'No data'
     },
     toast: {
       close: 'Close'
+    },
+    toaster: {
+      label: 'Notification',
+      viewport: 'Notifications ({hotkey})'
     }
   }
 })

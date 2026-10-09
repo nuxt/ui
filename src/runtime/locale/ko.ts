@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: '닫기'
     },
+    breadcrumb: {
+      label: '탐색 경로'
+    },
     calendar: {
+      label: '이벤트 날짜',
+      monthPicker: '월 선택',
       nextMonth: '다음 달',
       nextYear: '다음 해',
       prevMonth: '이전 달',
-      prevYear: '이전 해'
+      prevYear: '이전 해',
+      yearPicker: '연도 선택'
     },
     carousel: {
       dots: '표시할 슬라이드 선택',
       goto: '{slide} 페이지로 이동',
       next: '다음',
-      prev: '이전'
+      prev: '이전',
+      roledescription: '캐러셀',
+      slide: '슬라이드'
     },
     chatMessages: {
       autoScroll: '맨 아래로 스크롤'
@@ -100,6 +108,17 @@ export default defineLocale<Messages>({
       close: '메뉴 닫기',
       open: '메뉴 열기'
     },
+    inputDate: {
+      day: '일',
+      dayPeriod: '오전/오후',
+      era: '연호',
+      hour: '시',
+      minute: '분',
+      month: '월',
+      second: '초',
+      timeZoneName: '시간대',
+      year: '연도'
+    },
     inputMenu: {
       create: '"{label}" 생성',
       noData: '데이터가 없습니다.',
@@ -108,6 +127,16 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: '감소',
       increment: '증가'
+    },
+    inputRating: {
+      rate: '{length}점 중 {value}점으로 평가'
+    },
+    inputTime: {
+      dayPeriod: '오전/오후',
+      hour: '시',
+      minute: '분',
+      second: '초',
+      timeZoneName: '시간대'
     },
     listbox: {
       noData: '데이터가 없습니다.',
@@ -123,6 +152,9 @@ export default defineLocale<Messages>({
       next: '다음 페이지',
       page: '{page} 페이지',
       prev: '이전 페이지'
+    },
+    pinInput: {
+      input: 'PIN 코드, {length}자 중 {index}번째 문자'
     },
     pricingTable: {
       caption: '가격 플랜 비교'
@@ -156,14 +188,27 @@ export default defineLocale<Messages>({
       noMatch: '일치하는 데이터가 없습니다.',
       search: '검색…'
     },
+    skeleton: {
+      label: '로딩 중'
+    },
     slideover: {
       close: '닫기'
+    },
+    slider: {
+      max: '최대',
+      min: '최소',
+      thumb: '핸들',
+      value: '{total}개 중 {index}번째 값'
     },
     table: {
       noData: '데이터가 없습니다.'
     },
     toast: {
       close: '닫기'
+    },
+    toaster: {
+      label: '알림',
+      viewport: '알림 ({hotkey})'
     }
   }
 })
