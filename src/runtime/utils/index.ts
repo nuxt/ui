@@ -199,9 +199,24 @@ export function getSlotChildrenText(children: any) {
   }).join('')
 }
 
+// A code delimiter has to be longer than any run of backticks in the code.
+function getBackticks(code: string, min: number) {
+  return '`'.repeat(Math.max(min, ...(code.match(/`+/g) || []).map(run => run.length + 1)))
+}
+
 // A native element has its tag as `type`, a prose component rendered by MDC carries it as `type.tag`.
 function getNodeTag(node: any): string | undefined {
   return typeof node.type === 'string' ? node.type : node.type?.tag
+}
+
+// The text of a node without any formatting, for code.
+function getNodeText(node: any): string {
+  if (!node) return ''
+  if (typeof node === 'string') return node
+  if (typeof node.children === 'string') return node.children
+  if (Array.isArray(node.children)) return node.children.map(getNodeText).join('')
+  if (typeof node.children?.default === 'function') return node.children.default().map(getNodeText).join('')
+  return ''
 }
 
 function getNodeBlocks(node: any): string[] {
@@ -268,15 +283,19 @@ function getMarkdownBlocks(children: any[]): string[] {
         push(content().join('\n\n').replace(/^/gm, '> '))
         break
       case 'pre': {
-        const code = String(node.props?.code ?? getSlotChildrenText([node])).replace(/\n$/, '')
-        // The fence has to be longer than any run of backticks in the code.
-        const fence = '`'.repeat(Math.max(3, ...(code.match(/`+/g) || []).map(run => run.length + 1)))
+        const code = String(node.props?.code ?? getNodeText(node)).replace(/\n$/, '')
+        const fence = getBackticks(code, 3)
         push(`${fence}${node.props?.language ?? ''}\n${code}\n${fence}`)
         break
       }
-      case 'code':
-        inline += `\`${content().join('')}\``
+      case 'code': {
+        const code = getNodeText(node)
+        const delimiter = getBackticks(code, 1)
+        // A space keeps a leading or trailing backtick apart from the delimiter.
+        const space = code.startsWith('`') || code.endsWith('`') ? ' ' : ''
+        inline += `${delimiter}${space}${code}${space}${delimiter}`
         break
+      }
       case 'a':
         inline += node.props?.href ? `[${content().join('')}](${node.props.href})` : content().join('')
         break
