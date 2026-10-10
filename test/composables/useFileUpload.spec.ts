@@ -227,6 +227,33 @@ describe('useFileUpload', () => {
 
       expect(vueuse.dropOptions).toBeUndefined()
     })
+
+    it('registers the drop zone once dropzone is enabled', async () => {
+      const dropzone = ref(false)
+      await mountUpload({ onUpdate: vi.fn(), dropzone })
+
+      expect(vueuse.dropOptions).toBeUndefined()
+
+      dropzone.value = true
+      await nextTick()
+
+      expect(vueuse.dropOptions).toBeDefined()
+    })
+
+    it('stops dragging when dropzone is disabled mid-drag', async () => {
+      const dropzone = ref(true)
+      const { api } = await mountUpload({ onUpdate: vi.fn(), dropzone })
+
+      vueuse.isOver!.value = true
+      await nextTick()
+
+      expect(api.isDragging.value).toBe(true)
+
+      dropzone.value = false
+      await nextTick()
+
+      expect(api.isDragging.value).toBe(false)
+    })
   })
 
   describe('refs', () => {
