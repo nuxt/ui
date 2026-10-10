@@ -147,6 +147,13 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.radioGroup || {}
   indicator: props.indicator
 }))
 
+// `list` (and the default) renders the item as a plain wrapper with a `<Label>`
+// around the text, so clicking the text toggles the radio. Every other variant
+// renders the whole item as the `<Label>` and only needs a generic block wrapper
+// for the text — using `<p>` there made browsers close the tag as soon as a slot
+// put a block-level element inside it, which broke hydration (see #6033).
+const isListVariant = computed(() => !props.variant || props.variant === 'list')
+
 function normalizeItem(item: any) {
   if (item === null) {
     return {
@@ -220,7 +227,7 @@ function onUpdate(value: any) {
         </slot>
       </legend>
 
-      <component :is="(!props.variant || props.variant === 'list') ? 'div' : Label" v-for="item in normalizedItems" :key="item.value" data-slot="item" :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class], disabled: item.disabled || disabled })">
+      <component :is="isListVariant ? 'div' : Label" v-for="item in normalizedItems" :key="item.value" data-slot="item" :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class], disabled: item.disabled || disabled })">
         <div data-slot="container" :class="ui.container({ class: [props.ui?.container, item.ui?.container] })">
           <RRadioGroupItem
             :id="item.id"
@@ -235,7 +242,7 @@ function onUpdate(value: any) {
 
         <div v-if="labelIcon(item) || (item.label || !!slots.label) || (item.description || !!slots.description)" data-slot="wrapper" :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">
           <UIcon v-if="labelIcon(item)" :name="labelIcon(item)" data-slot="icon" :class="ui.icon({ class: [props.ui?.icon, item.ui?.icon] })" />
-          <component :is="(!props.variant || props.variant === 'list') ? Label : 'p'" v-if="item.label || !!slots.label" :for="item.id" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label], disabled: item.disabled || disabled })">
+          <component :is="isListVariant ? Label : 'div'" v-if="item.label || !!slots.label" :for="isListVariant ? item.id : undefined" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label], disabled: item.disabled || disabled })">
             <slot name="label" :item="item" :model-value="(props.modelValue as RadioGroupValue)">
               {{ item.label }}
             </slot>
