@@ -20,8 +20,8 @@ export default (options: Required<ModuleOptions>) => ({
         icon: 'text-muted'
       },
       auto: {
-        fallback: 'text-inverted',
-        icon: 'text-inverted'
+        fallback: '',
+        icon: ''
       }
     },
     size: {

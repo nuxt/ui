@@ -127,16 +127,21 @@ props:
 ---
 ::
 
-Use the `colorSeed` prop to generate the color from a different value, or the `colorGenerator` prop to customize the generated color.
+Use the `colorSeed` prop to generate the color from a different value, or the `colorGenerator` prop to customize the generated background and foreground colors.
 
 ```vue
 <UAvatar
   color="auto"
   color-seed="user-42"
-  :color-generator="({ seed }) => `oklch(65% 0.15 ${seed.length * 30})`"
+  :color-generator="({ seed }) => ({
+    background: `oklch(65% 0.15 ${seed.length * 30})`,
+    foreground: 'white'
+  })"
   alt="Benjamin Canac"
 />
 ```
+
+The `colorGenerator` must return both a `background` and a `foreground` color. When providing custom colors, make sure they meet the required contrast ratio.
 
 You can also define a global color generator in your `app.config.ts`:
 
@@ -144,7 +149,10 @@ You can also define a global color generator in your `app.config.ts`:
 export default defineAppConfig({
   ui: {
     avatar: {
-      colorGenerator: ({ seed }) => `oklch(65% 0.15 ${seed.length * 30})`
+      colorGenerator: ({ seed }) => ({
+        background: `oklch(65% 0.15 ${seed.length * 30})`,
+        foreground: 'white'
+      })
     }
   }
 })

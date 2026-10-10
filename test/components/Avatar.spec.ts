@@ -50,7 +50,22 @@ describe('Avatar', () => {
       }
     })
 
-    expect(wrapper.attributes('style')).toBe('background-color: hsl(226, 68%, 60%);')
+    expect(wrapper.attributes('style')).toBe('background-color: hsl(226, 68%, 25%); color: white;')
+  })
+
+  it('uses a contrasting foreground for every generated hue', async () => {
+    const wrapper = await mountSuspended({
+      render: () => h('div', Array.from({ length: 360 }, (_, hue) => h(Avatar, {
+        alt: String.fromCharCode(hue),
+        color: 'auto'
+      })))
+    })
+    const avatars = wrapper.findAll('[data-slot="root"]')
+
+    expect(avatars).toHaveLength(360)
+    avatars.forEach((avatar, hue) => {
+      expect(avatar.attributes('style')).toBe(`background-color: hsl(${hue}, 68%, 25%); color: white;`)
+    })
   })
 
   it('keeps an explicit background color when using auto color', async () => {
@@ -62,11 +77,14 @@ describe('Avatar', () => {
       }
     })
 
-    expect(wrapper.attributes('style')).toBe('background-color: red;')
+    expect(wrapper.attributes('style')).toBe('background-color: red; color: white;')
   })
 
   it('uses a custom color generator and seed', async () => {
-    const colorGenerator: AvatarColorGenerator = vi.fn(({ seed, text, alt }) => `rgb(${seed.length}, ${text?.length}, ${alt?.length})`)
+    const colorGenerator: AvatarColorGenerator = vi.fn(({ seed, text, alt }) => ({
+      background: `rgb(${seed.length}, ${text?.length}, ${alt?.length})`,
+      foreground: 'black'
+    }))
     const wrapper = await mountSuspended(Avatar, {
       props: {
         alt: 'Benjamin Canac',
@@ -77,7 +95,7 @@ describe('Avatar', () => {
       }
     })
 
-    expect(wrapper.attributes('style')).toBe('background-color: rgb(7, 2, 14);')
+    expect(wrapper.attributes('style')).toBe('background-color: rgb(7, 2, 14); color: black;')
     expect(colorGenerator).toHaveBeenCalledWith({ seed: 'user-42', text: 'BC', alt: 'Benjamin Canac' })
   })
 
@@ -86,7 +104,10 @@ describe('Avatar', () => {
       props: {
         props: {
           avatar: {
-            colorGenerator: () => 'rgb(1, 2, 3)'
+            colorGenerator: () => ({
+              background: 'rgb(1, 2, 3)',
+              foreground: 'white'
+            })
           }
         }
       },
@@ -95,6 +116,6 @@ describe('Avatar', () => {
       }
     })
 
-    expect(wrapper.find('[data-slot="root"]').attributes('style')).toBe('background-color: rgb(1, 2, 3);')
+    expect(wrapper.find('[data-slot="root"]').attributes('style')).toBe('background-color: rgb(1, 2, 3); color: white;')
   })
 })

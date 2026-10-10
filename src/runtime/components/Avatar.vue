@@ -15,7 +15,12 @@ export interface AvatarColorGeneratorContext {
   alt?: string
 }
 
-export type AvatarColorGenerator = (context: AvatarColorGeneratorContext) => string
+export interface AvatarColor {
+  background: string
+  foreground: string
+}
+
+export type AvatarColorGenerator = (context: AvatarColorGeneratorContext) => AvatarColor
 
 export interface AvatarProps extends /** @vue-ignore */ Omit<ImgHTMLAttributes, 'src' | 'alt'> {
   /**
@@ -44,8 +49,8 @@ export interface AvatarProps extends /** @vue-ignore */ Omit<ImgHTMLAttributes, 
    */
   colorSeed?: string
   /**
-   * A function used to generate the automatic background color.
-   * @defaultValue A deterministic HSL color generated from `colorSeed`.
+   * A function used to generate the automatic background and foreground colors.
+   * @defaultValue A deterministic HSL background color with a contrasting white foreground generated from `colorSeed`.
    */
   colorGenerator?: AvatarColorGenerator
   chip?: boolean | ChipProps
@@ -129,7 +134,10 @@ const error = ref(false)
 const defaultColorGenerator: AvatarColorGenerator = ({ seed }) => {
   const hue = [...seed].reduce((acc, char) => acc + char.charCodeAt(0), 0) % 360
 
-  return `hsl(${hue}, 68%, 60%)`
+  return {
+    background: `hsl(${hue}, 68%, 25%)`,
+    foreground: 'white'
+  }
 }
 
 const colorGenerator = computed(() => props.colorGenerator ?? appConfig.ui?.avatar?.colorGenerator ?? defaultColorGenerator)
@@ -143,13 +151,13 @@ const backgroundStyle = computed(() => {
   }
 
   const seed = props.colorSeed || props.text || props.alt || ''
-  const backgroundColor = colorGenerator.value({
+  const { background, foreground } = colorGenerator.value({
     seed,
     text: props.text,
     alt: props.alt
   })
 
-  return [{ backgroundColor }, props.style]
+  return [{ backgroundColor: background, color: foreground }, props.style]
 })
 
 watch(() => props.src, () => {
