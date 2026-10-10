@@ -150,8 +150,15 @@ const decrementIcon = computed(() => props.decrementIcon || (props.orientation =
 const inputRef = useTemplateRef('inputRef')
 
 function onUpdate(value: ApplyModifiers<T, Mod> | undefined) {
+  // reka reports unparseable text ("." / "-") and a cleared input the same way; text left in the field means unparseable, and it restores the display itself
+  if (value === undefined && inputRef.value?.$el?.value) {
+    return
+  }
+
   if (props.modelModifiers?.optional) {
     value = value ?? undefined
+  } else {
+    value = (value ?? null) as ApplyModifiers<T, Mod>
   }
 
   // In controlled mode reka emits on every write, even when nothing changed (blur, Enter, stepping at a bound).
