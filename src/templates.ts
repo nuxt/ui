@@ -334,7 +334,7 @@ ${themeBlocks}`
       const iconUnion = iconKeys.length ? iconKeys.map(i => JSON.stringify(i)).join(' | ') : 'string'
 
       return `import * as ui from '#build/ui'
-import type { TVConfig, DeepRequired } from '@nuxt/ui'
+import type { AvatarColorGenerator, TVConfig, DeepRequired } from '@nuxt/ui'
 import type { defaultConfig } from 'tailwind-variants'
 import colors from 'tailwindcss/colors'
 
@@ -342,6 +342,9 @@ type IconsConfig = Record<${iconUnion} | (string & {}), string>
 
 type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone' | 'taupe' | 'mauve' | 'mist' | 'olive'
 type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
+type AvatarConfig = NonNullable<TVConfig<typeof ui>['avatar']> & {
+  colorGenerator?: AvatarColorGenerator
+}
 
 type AppConfigUI = {
   colors?: {
@@ -351,9 +354,14 @@ type AppConfigUI = {
   icons?: Partial<IconsConfig>
   prefix?: string
   tv?: typeof defaultConfig
-} & TVConfig<typeof ui>
+  avatar?: AvatarConfig
+} & Omit<TVConfig<typeof ui>, 'avatar'>
 
-type AppConfigRuntimeUI = DeepRequired<Pick<AppConfigUI, 'colors' | 'icons' | 'tv'>> & typeof ui
+type AppConfigRuntimeUI = DeepRequired<Pick<AppConfigUI, 'colors' | 'icons' | 'tv'>> & Omit<typeof ui, 'avatar'> & {
+  avatar: typeof ui.avatar & {
+    colorGenerator?: AvatarColorGenerator
+  }
+}
 
 declare module '@nuxt/schema' {
   interface AppConfigInput {

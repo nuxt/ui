@@ -9,6 +9,19 @@ import type { ComponentConfig } from '../types/tv'
 
 type Avatar = ComponentConfig<typeof theme, AppConfig, 'avatar'>
 
+export interface AvatarColorGeneratorContext {
+  seed: string
+  text?: string
+  alt?: string
+}
+
+export interface AvatarColor {
+  background: string
+  foreground: string
+}
+
+export type AvatarColorGenerator = (context: AvatarColorGeneratorContext) => AvatarColor
+
 export interface AvatarProps extends /** @vue-ignore */ Omit<ImgHTMLAttributes, 'src' | 'alt'> {
   /**
    * The element or component this component should render as.
@@ -30,6 +43,16 @@ export interface AvatarProps extends /** @vue-ignore */ Omit<ImgHTMLAttributes, 
    * @defaultValue 'neutral'
    */
   color?: Avatar['variants']['color']
+  /**
+   * The seed used to generate the automatic background color.
+   * @defaultValue `text` or `alt`
+   */
+  colorSeed?: string
+  /**
+   * A function used to generate the automatic background and foreground colors.
+   * @defaultValue A deterministic HSL background color with a contrasting white foreground generated from `colorSeed`.
+   */
+  colorGenerator?: AvatarColorGenerator
   chip?: boolean | ChipProps
   class?: any
   style?: any
@@ -70,12 +93,26 @@ const as = computed(() => {
 
 const fallback = computed(() => props.text || (props.alt || '').split(' ').map(word => word.charAt(0)).join('').substring(0, 2))
 
-const appConfig = useAppConfig() as Avatar['AppConfig']
+type AvatarAppConfig = Avatar['AppConfig'] & {
+  ui: Avatar['AppConfig']['ui'] & {
+    avatar?: {
+      colorGenerator?: AvatarColorGenerator
+    }
+  }
+}
+
+const appConfig = useAppConfig() as AvatarAppConfig
 
 const { size, color } = useAvatarGroup(_props)
 
+const avatarTheme = computed(() => {
+  const { colorGenerator: _, ...themeConfig } = appConfig.ui?.avatar || {}
+
+  return themeConfig
+})
+
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.avatar || {}) })({
+const ui = computed(() => tv({ extend: theme, ...avatarTheme.value })({
   size: size.value ?? props.size,
   color: color.value ?? props.color
 }))
@@ -93,6 +130,35 @@ const sizePx = computed(() => {
 })
 
 const error = ref(false)
+
+const defaultColorGenerator: AvatarColorGenerator = ({ seed }) => {
+  const hue = [...seed].reduce((acc, char) => acc + char.charCodeAt(0), 0) % 360
+
+  return {
+    background: `hsl(${hue}, 68%, 25%)`,
+    foreground: 'white'
+  }
+}
+
+const colorGenerator = computed(() => props.colorGenerator ?? appConfig.ui?.avatar?.colorGenerator ?? defaultColorGenerator)
+
+const backgroundStyle = computed(() => {
+  const avatarColor = color.value ?? props.color
+  const hasFallback = !props.src || error.value
+
+  if (avatarColor !== 'auto' || !hasFallback) {
+    return props.style
+  }
+
+  const seed = props.colorSeed || props.text || props.alt || ''
+  const { background, foreground } = colorGenerator.value({
+    seed,
+    text: props.text,
+    alt: props.alt
+  })
+
+  return [{ backgroundColor: background, color: foreground }, props.style]
+})
 
 watch(() => props.src, () => {
   if (error.value) {
@@ -112,7 +178,7 @@ function onError() {
     v-bind="props.chip ? (typeof props.chip === 'object' ? { inset: true, ...props.chip } : { inset: true }) : {}"
     :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
     :class="rootClass"
-    :style="props.style"
+    :style="backgroundStyle"
   >
     <component
       :is="as.img || ImageComponent"

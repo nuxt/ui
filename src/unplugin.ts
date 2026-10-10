@@ -25,16 +25,21 @@ import AutoImportPlugin from './plugins/auto-import'
 import IconsPlugin from './plugins/icons'
 
 import type { TVConfig } from './runtime/types/tv'
+import type { AvatarColorGenerator } from './runtime/components/Avatar.vue'
 
 type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone' | 'taupe' | 'mauve' | 'mist' | 'olive'
 type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
+type AvatarConfig = NonNullable<TVConfig<typeof ui>['avatar']> & {
+  colorGenerator?: AvatarColorGenerator
+}
 
 type AppConfigUI = {
   // TODO: add type hinting for colors from `options.theme.colors`
   colors?: Record<string, Color> & { neutral?: NeutralColor }
   icons?: Partial<typeof icons>
   prefix?: string
-} & TVConfig<typeof ui>
+  avatar?: AvatarConfig
+} & Omit<TVConfig<typeof ui>, 'avatar'>
 
 export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode' | 'content'> {
   /** Whether to generate declaration files for auto-imported components. */

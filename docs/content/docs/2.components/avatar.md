@@ -117,6 +117,47 @@ props:
 ---
 ::
 
+Use `auto` to generate a deterministic background color from the `text` or `alt` prop. This is useful when displaying fallback initials for multiple users.
+
+::component-code
+---
+props:
+  color: auto
+  alt: 'Benjamin Canac'
+---
+::
+
+Use the `colorSeed` prop to generate the color from a different value, or the `colorGenerator` prop to customize the generated background and foreground colors.
+
+```vue
+<UAvatar
+  color="auto"
+  color-seed="user-42"
+  :color-generator="({ seed }) => ({
+    background: `oklch(65% 0.15 ${seed.length * 30})`,
+    foreground: 'white'
+  })"
+  alt="Benjamin Canac"
+/>
+```
+
+The `colorGenerator` must return both a `background` and a `foreground` color. When providing custom colors, make sure they meet the required contrast ratio.
+
+You can also define a global color generator in your `app.config.ts`:
+
+```ts [app.config.ts]
+export default defineAppConfig({
+  ui: {
+    avatar: {
+      colorGenerator: ({ seed }) => ({
+        background: `oklch(65% 0.15 ${seed.length * 30})`,
+        foreground: 'white'
+      })
+    }
+  }
+})
+```
+
 ### Chip
 
 Use the `chip` prop to display a chip around the Avatar.
