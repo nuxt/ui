@@ -1,8 +1,11 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { h } from 'vue'
 import { renderEach } from '../component-render'
 import Avatar from '../../src/runtime/components/Avatar.vue'
+import type { AvatarColorGenerator } from '../../src/runtime/components/Avatar.vue'
+import Theme from '../../src/runtime/components/Theme.vue'
 import theme from '#build/ui/avatar'
 
 describe('Avatar', () => {
@@ -60,5 +63,38 @@ describe('Avatar', () => {
     })
 
     expect(wrapper.attributes('style')).toBe('background-color: red;')
+  })
+
+  it('uses a custom color generator and seed', async () => {
+    const colorGenerator: AvatarColorGenerator = vi.fn(({ seed, text, alt }) => `rgb(${seed.length}, ${text?.length}, ${alt?.length})`)
+    const wrapper = await mountSuspended(Avatar, {
+      props: {
+        alt: 'Benjamin Canac',
+        text: 'BC',
+        color: 'auto',
+        colorSeed: 'user-42',
+        colorGenerator
+      }
+    })
+
+    expect(wrapper.attributes('style')).toBe('background-color: rgb(7, 2, 14);')
+    expect(colorGenerator).toHaveBeenCalledWith({ seed: 'user-42', text: 'BC', alt: 'Benjamin Canac' })
+  })
+
+  it('uses a color generator from the nearest theme', async () => {
+    const wrapper = await mountSuspended(Theme, {
+      props: {
+        props: {
+          avatar: {
+            colorGenerator: () => 'rgb(1, 2, 3)'
+          }
+        }
+      },
+      slots: {
+        default: () => h(Avatar, { alt: 'Benjamin Canac', color: 'auto' })
+      }
+    })
+
+    expect(wrapper.find('[data-slot="root"]').attributes('style')).toBe('background-color: rgb(1, 2, 3);')
   })
 })

@@ -127,6 +127,29 @@ props:
 ---
 ::
 
+Use the `colorSeed` prop to generate the color from a different value, or the `colorGenerator` prop to customize the generated color.
+
+```vue
+<UAvatar
+  color="auto"
+  color-seed="user-42"
+  :color-generator="({ seed }) => `oklch(65% 0.15 ${seed.length * 30})`"
+  alt="Benjamin Canac"
+/>
+```
+
+You can also define a global color generator in your `app.config.ts`:
+
+```ts [app.config.ts]
+export default defineAppConfig({
+  ui: {
+    avatar: {
+      colorGenerator: ({ seed }) => `oklch(65% 0.15 ${seed.length * 30})`
+    }
+  }
+})
+```
+
 ### Chip
 
 Use the `chip` prop to display a chip around the Avatar.
