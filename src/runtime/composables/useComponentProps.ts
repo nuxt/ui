@@ -73,6 +73,10 @@ export function useComponentProps<T extends object>(name: string, props: T): T {
 
       const raw = Reflect.get(target, prop, receiver)
       if (typeof prop !== 'string') return raw
+      // Vue probes internal flags (`__v_isReadonly`, `__v_isRef`, `__v_skip`, ...)
+      // on reactive objects. They are never props, so skip the theme and
+      // app.config lookups below, which run case conversions on every read.
+      if (prop.startsWith('__v_')) return raw
 
       // Support dotted-path names (e.g. `prose.p`, `prose.code`) so prose
       // components can pull from the same nested `ThemeContext.defaults` shape
