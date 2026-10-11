@@ -43,6 +43,30 @@ const tour = useTour([
 - Built on the Popover's reactive `reference` prop, so the popover smoothly repositions when the active step changes.
 - The active target is scrolled into view automatically when a step becomes active.
 - Since you render the content yourself, there is no extra theme or locale to maintain.
+- The `rect` return value exposes the viewport-relative box of the current target, so you can build overlays around it.
+
+### Spotlight :badge{label="Soon" class="align-text-top"}
+
+Use `rect` to dim the page around the current target. The target stays clickable while the rest of the page is blocked, and a step without a target dims the whole page. Setting it up takes three steps:
+
+1. Copy the overlay component below into your app. It draws a `clip-path` backdrop with a cutout and a ring around the target.
+2. Render `<UseTourSpotlight :tour="tour" />` next to your `<UPopover>`. Pass it `tour`, not `tour.rect.value`: `rect` updates on every scroll frame, so only the overlay should read it, otherwise the whole parent re-renders while scrolling.
+3. Give the popover `:ui="{ content: 'z-50' }"` so it stays above the backdrop (`z-40`), and a `sideOffset` of `16` so it clears the cutout padding.
+
+::component-example
+---
+collapse: true
+name: 'use-tour-spotlight'
+preview: false
+---
+::
+
+::component-example
+---
+collapse: true
+name: 'use-tour-spotlight-example'
+---
+::
 
 ## API
 
@@ -109,6 +133,10 @@ const tour = useTour([
 
   ::field{name="reference" type="ComputedRef<ReferenceElement | undefined>"}
   The resolved anchor for the current step, to pass to `<UPopover :reference>`.
+  ::
+
+  ::field{name="rect" type="Readonly<Ref<TourRect | null>>"}
+  The viewport-relative box of the current target (`top`, `left`, `width`, `height`), or `null` when the tour is closed, the step is centered or the target is not found. It is kept in sync on scroll and resize.
   ::
 
   ::field{name="total" type="ComputedRef<number>"}
