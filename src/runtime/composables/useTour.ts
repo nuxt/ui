@@ -158,7 +158,8 @@ export function useTour(steps: MaybeRefOrGetter<TourStep[]>, options: UseTourOpt
   function updateRect() {
     const el = reference.value
     // The center anchor only positions the popover, there is no target to highlight.
-    if (!el || el === centerAnchor) {
+    // A cached target removed from the DOM would measure as an empty box at the origin.
+    if (!el || el === centerAnchor || (el instanceof Element && !el.isConnected)) {
       rect.value = null
       return
     }

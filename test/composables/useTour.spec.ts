@@ -308,6 +308,21 @@ describe('useTour', () => {
       expect(tour.rect.value).toBeNull()
     })
 
+    it('is null once a resolved target is removed from the DOM', async () => {
+      const el = document.createElement('div')
+      el.id = 'removed-target'
+      document.body.appendChild(el)
+      mockBox(el, { top: 10, left: 20, width: 100, height: 40 })
+      const tour = withScope(() => useTour([{ target: '#removed-target' }], { scrollIntoView: false }))
+
+      tour.start()
+      await nextTick()
+      el.remove()
+      window.dispatchEvent(new Event('resize'))
+
+      expect(tour.rect.value).toBeNull()
+    })
+
     it('is null when the target cannot be resolved', async () => {
       const tour = withScope(() => useTour([{ target: '#no-such-id' }]))
 
