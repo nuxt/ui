@@ -13,7 +13,7 @@ export default extendTheme(input, {
     trailing: 'group flex items-center pe-(--ui-control-px) disabled:cursor-not-allowed focus:outline-none',
     trailingClear: 'p-0',
     arrow: 'fill-bg stroke-default',
-    content: 'max-h-[min(15rem,var(--reka-combobox-content-available-height,15rem))] w-(--reka-combobox-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-combobox-content-transform-origin) pointer-events-auto flex flex-col',
+    content: 'max-h-[min(15rem,var(--reka-combobox-content-available-height,15rem))] w-(--reka-combobox-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-combobox-content-transform-origin) pointer-events-auto flex flex-col cursor-default',
     viewport: 'relative scroll-py-1 overflow-y-auto flex-1',
     group: 'p-1 isolate',
     empty: 'text-center text-muted',
@@ -31,11 +31,10 @@ export default extendTheme(input, {
     tagsItem: 'px-1.5 py-0.5 rounded-sm font-medium inline-flex items-center gap-0.5 ring ring-inset ring-strong bg-soft text-default data-disabled:cursor-not-allowed',
     tagsItemText: 'truncate',
     tagsItemDelete: 'inline-flex items-center rounded-xs text-faint hover:text-default hover:bg-strong disabled:pointer-events-none transition-colors',
-    tagsItemDeleteIcon: 'shrink-0',
-    tagsInput: 'flex-1 border-0 bg-transparent text-strong placeholder:text-faint focus:outline-none disabled:cursor-not-allowed'
+    tagsItemDeleteIcon: 'shrink-0'
   },
   variants: {
-    // The input or the tags take the focus, up to two levels down from the box
+    // The input takes the focus, up to two levels down from the box
     fieldGroup: (prev: typeof input.variants.fieldGroup) => Object.fromEntries(
       Object.entries(prev).map(([key, value]) => [key, { root: withinFocus(value.root) }])
     ) as typeof prev,
@@ -57,8 +56,10 @@ export default extendTheme(input, {
         viewport: 'divide-y divide-default'
       }
     },
+    // With `multiple`, the tags container has the padding and the input wraps
+    // under the tags when it runs out of room
     multiple: {
-      true: '',
+      true: { base: 'p-0 min-w-auto' },
       false: ''
     },
     size: {

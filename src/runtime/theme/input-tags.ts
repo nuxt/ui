@@ -46,7 +46,7 @@ export default extendTheme(input, {
         itemDeleteIcon: 'size-4'
       }
     },
-    // The tags and the input take the focus, two levels down from the box
+    // The input takes the focus, two levels down from the box
     fieldGroup: (prev: typeof input.variants.fieldGroup) => Object.fromEntries(
       Object.entries(prev).map(([key, value]) => [key, { root: withinFocus(value.root) }])
     ) as typeof prev,

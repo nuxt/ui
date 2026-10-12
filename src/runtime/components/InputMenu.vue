@@ -759,8 +759,8 @@ defineExpose({
             ref="inputRef"
             v-bind="{ ...$attrs, ...ariaAttrs }"
             :placeholder="props.placeholder"
-            data-slot="input-menu-tagsInput"
-            :class="ui.tagsInput({ class: props.ui?.tagsInput })"
+            data-slot="input-menu-base"
+            :class="ui.base({ class: props.ui?.base })"
             @change.stop
             @keydown.enter="onTagsInputKeydown"
           />

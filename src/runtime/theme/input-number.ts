@@ -7,7 +7,7 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: input.slots.root,
-    base: 'w-full min-w-0 flex-1 border-0 bg-transparent text-strong outline-none placeholder:text-faint px-(--ui-control-px) py-(--ui-control-py) disabled:cursor-not-allowed',
+    base: 'w-full min-w-0 flex-1 self-stretch border-0 bg-transparent text-strong outline-none placeholder:text-faint px-(--ui-control-px) py-(--ui-control-py) disabled:cursor-not-allowed',
     increment: 'flex items-center',
     decrement: 'flex items-center'
   },
