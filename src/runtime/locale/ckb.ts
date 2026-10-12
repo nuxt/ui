@@ -124,11 +124,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: '"{label}" زیادکردنی',
       noData: 'هیچ داتایەک نییە',
-      noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە'
+      noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
+      trigger: 'پیشاندانی هەڵبژاردەکان'
     },
     inputNumber: {
       decrement: 'کەمکردنەوە',
-      increment: 'زیادکردن'
+      increment: 'زیادکردن',
+      roledescription: 'خانەی ژمارە'
     },
     inputRating: {
       rate: 'هەڵسەنگاندن بە {value} لە {length}'
@@ -201,6 +203,9 @@ export default defineLocale<Messages>({
       min: 'کەمترین',
       thumb: 'دەستگرە',
       value: 'بەهای {index} لە {total}'
+    },
+    stepper: {
+      label: 'پێشکەوتن'
     },
     table: {
       noData: 'هیچ داتایەک نییە'

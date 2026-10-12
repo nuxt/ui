@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'Crear "{label}"',
       noData: 'Sen datos',
-      noMatch: 'Non hai datos coincidentes'
+      noMatch: 'Non hai datos coincidentes',
+      trigger: 'Mostrar opcións'
     },
     inputNumber: {
       decrement: 'Diminuír',
-      increment: 'Aumentar'
+      increment: 'Aumentar',
+      roledescription: 'campo numérico'
     },
     inputRating: {
       rate: 'Valorar {value} de {length}'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Mínimo',
       thumb: 'Control desprazable',
       value: 'Valor {index} de {total}'
+    },
+    stepper: {
+      label: 'progreso'
     },
     table: {
       noData: 'Sen datos'

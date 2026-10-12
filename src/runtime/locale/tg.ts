@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: '"{label}" созед',
       noData: 'Маълумот нест',
-      noMatch: 'Маълумоти мувофиқ ёфт нашуд'
+      noMatch: 'Маълумоти мувофиқ ёфт нашуд',
+      trigger: 'Нишон додани имконот'
     },
     inputNumber: {
       decrement: 'Кам кардан',
-      increment: 'Зиёд кардан'
+      increment: 'Зиёд кардан',
+      roledescription: 'майдони рақамӣ'
     },
     inputRating: {
       rate: '{value} аз {length} баҳо додан'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Ҳадди ақал',
       thumb: 'Дастак',
       value: 'Қимати {index} аз {total}'
+    },
+    stepper: {
+      label: 'пешрафт'
     },
     table: {
       noData: 'Маълумот нест'

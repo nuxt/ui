@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'Buat "{label}"',
       noData: 'Tidak ada data',
-      noMatch: 'Tidak ada data yang cocok'
+      noMatch: 'Tidak ada data yang cocok',
+      trigger: 'Tampilkan opsi'
     },
     inputNumber: {
       decrement: 'Kurangi',
-      increment: 'Tambah'
+      increment: 'Tambah',
+      roledescription: 'bidang angka'
     },
     inputRating: {
       rate: 'Beri nilai {value} dari {length}'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Minimum',
       thumb: 'Penggeser',
       value: 'Nilai {index} dari {total}'
+    },
+    stepper: {
+      label: 'kemajuan'
     },
     table: {
       noData: 'Tidak ada data'

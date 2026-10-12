@@ -124,11 +124,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'ایجاد "{label}"',
       noData: 'داده‌ای موجود نیست',
-      noMatch: 'داده‌ای یافت نشد'
+      noMatch: 'داده‌ای یافت نشد',
+      trigger: 'نمایش گزینه‌ها'
     },
     inputNumber: {
       decrement: 'کاهش',
-      increment: 'افزایش'
+      increment: 'افزایش',
+      roledescription: 'فیلد عددی'
     },
     inputRating: {
       rate: 'امتیاز {value} از {length}'
@@ -201,6 +203,9 @@ export default defineLocale<Messages>({
       min: 'حداقل',
       thumb: 'دستگیره',
       value: 'مقدار {index} از {total}'
+    },
+    stepper: {
+      label: 'پیشرفت'
     },
     table: {
       noData: 'داده‌ای موجود نیست'

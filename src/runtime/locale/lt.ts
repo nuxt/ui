@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'Sukurti „{label}"',
       noData: 'Nėra duomenų',
-      noMatch: 'Nėra atitinkančių duomenų'
+      noMatch: 'Nėra atitinkančių duomenų',
+      trigger: 'Rodyti parinktis'
     },
     inputNumber: {
       decrement: 'Sumažinti',
-      increment: 'Padidinti'
+      increment: 'Padidinti',
+      roledescription: 'skaičių laukas'
     },
     inputRating: {
       rate: 'Įvertinti {value} iš {length}'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Minimumas',
       thumb: 'Slankiklis',
       value: 'Reikšmė {index} iš {total}'
+    },
+    stepper: {
+      label: 'eiga'
     },
     table: {
       noData: 'Nėra duomenų'

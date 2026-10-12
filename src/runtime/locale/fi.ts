@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'Luo "{label}"',
       noData: 'Ei tietoja',
-      noMatch: 'Ei vastaavia tietoja'
+      noMatch: 'Ei vastaavia tietoja',
+      trigger: 'Näytä vaihtoehdot'
     },
     inputNumber: {
       decrement: 'Vähennä',
-      increment: 'Kasvata'
+      increment: 'Kasvata',
+      roledescription: 'numerokenttä'
     },
     inputRating: {
       rate: 'Anna arvosana {value}/{length}'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Minimi',
       thumb: 'Liukusäädin',
       value: 'Arvo {index}/{total}'
+    },
+    stepper: {
+      label: 'edistyminen'
     },
     table: {
       noData: 'Ei tietoja'

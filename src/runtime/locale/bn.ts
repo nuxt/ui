@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: '"{label}" তৈরি করুন',
       noData: 'কোন তথ্য নেই',
-      noMatch: 'কোন মিল পাওয়া যায়নি'
+      noMatch: 'কোন মিল পাওয়া যায়নি',
+      trigger: 'বিকল্পগুলি দেখান'
     },
     inputNumber: {
       decrement: 'হ্রাস করুন',
-      increment: 'বৃদ্ধি করুন'
+      increment: 'বৃদ্ধি করুন',
+      roledescription: 'সংখ্যা ক্ষেত্র'
     },
     inputRating: {
       rate: '{length}-এর মধ্যে {value} রেটিং দিন'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'সর্বনিম্ন',
       thumb: 'হ্যান্ডেল',
       value: '{total}-এর মধ্যে মান {index}'
+    },
+    stepper: {
+      label: 'অগ্রগতি'
     },
     table: {
       noData: 'কোন তথ্য নেই'

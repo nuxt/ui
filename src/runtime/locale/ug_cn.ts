@@ -124,11 +124,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: '"{label}" نى قۇرۇش',
       noData: 'سانلىق مەلۇمات يوق',
-      noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق'
+      noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
+      trigger: 'تاللانمىلارنى كۆرسىتىش'
     },
     inputNumber: {
       decrement: 'ئازايتىش',
-      increment: 'كۆپەيتىش'
+      increment: 'كۆپەيتىش',
+      roledescription: 'سان بۆلىكى'
     },
     inputRating: {
       rate: '{value} نومۇر بېرىش، جەمئىي {length}'
@@ -201,6 +203,9 @@ export default defineLocale<Messages>({
       min: 'ئەڭ كىچىك',
       thumb: 'سىيرىغۇچ',
       value: '{index}-قىممەت، جەمئىي {total}'
+    },
+    stepper: {
+      label: 'ئىلگىرىلەش'
     },
     table: {
       noData: 'سانلىق مەلۇمات يوق'

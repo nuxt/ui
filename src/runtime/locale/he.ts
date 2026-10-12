@@ -124,11 +124,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'צור "{label}"',
       noData: 'אין נתונים',
-      noMatch: 'אין התאמה'
+      noMatch: 'אין התאמה',
+      trigger: 'הצגת אפשרויות'
     },
     inputNumber: {
       decrement: 'הפחת',
-      increment: 'הוסף'
+      increment: 'הוסף',
+      roledescription: 'שדה מספרי'
     },
     inputRating: {
       rate: 'דירוג {value} מתוך {length}'
@@ -201,6 +203,9 @@ export default defineLocale<Messages>({
       min: 'מינימום',
       thumb: 'מחוון',
       value: 'ערך {index} מתוך {total}'
+    },
+    stepper: {
+      label: 'התקדמות'
     },
     table: {
       noData: 'אין נתונים להצגה'

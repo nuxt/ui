@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'Krijo "{label}"',
       noData: 'Nuk ka të dhëna',
-      noMatch: 'Nuk ka të dhëna që përputhen'
+      noMatch: 'Nuk ka të dhëna që përputhen',
+      trigger: 'Shfaq opsionet'
     },
     inputNumber: {
       decrement: 'Zvogëlo',
-      increment: 'Rrit'
+      increment: 'Rrit',
+      roledescription: 'fushë numerike'
     },
     inputRating: {
       rate: 'Vlerëso me {value} nga {length}'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Minimumi',
       thumb: 'Rrëshqitësi',
       value: 'Vlera {index} nga {total}'
+    },
+    stepper: {
+      label: 'përparimi'
     },
     table: {
       noData: 'Nuk ka të dhëna'

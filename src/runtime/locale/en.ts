@@ -118,11 +118,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'Create "{label}"',
       noData: 'No data',
-      noMatch: 'No matching data'
+      noMatch: 'No matching data',
+      trigger: 'Show options'
     },
     inputNumber: {
       decrement: 'Decrement',
-      increment: 'Increment'
+      increment: 'Increment',
+      roledescription: 'number field'
     },
     inputRating: {
       rate: 'Rate {value} out of {length}'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Minimum',
       thumb: 'Thumb',
       value: 'Value {index} of {total}'
+    },
+    stepper: {
+      label: 'progress'
     },
     table: {
       noData: 'No data'

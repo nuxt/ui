@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: '"{label}" létrehozása',
       noData: 'Nincs adat',
-      noMatch: 'Nincs találat'
+      noMatch: 'Nincs találat',
+      trigger: 'Lehetőségek megjelenítése'
     },
     inputNumber: {
       decrement: 'Csökkent',
-      increment: 'Növel'
+      increment: 'Növel',
+      roledescription: 'számmező'
     },
     inputRating: {
       rate: 'Értékelés: {value} / {length}'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Minimum',
       thumb: 'Csúszka',
       value: '{index}. érték (összesen {total})'
+    },
+    stepper: {
+      label: 'előrehaladás'
     },
     table: {
       noData: 'Nincs adat'

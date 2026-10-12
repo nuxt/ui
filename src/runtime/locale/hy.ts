@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'Ստեղծել "{label}"',
       noData: 'Տվյալներ չկան',
-      noMatch: 'Համընկնումներ չեն գտնվել'
+      noMatch: 'Համընկնումներ չեն գտնվել',
+      trigger: 'Ցույց տալ տարբերակները'
     },
     inputNumber: {
       decrement: 'Պակասեցնել',
-      increment: 'Ավելացնել'
+      increment: 'Ավելացնել',
+      roledescription: 'թվային դաշտ'
     },
     inputRating: {
       rate: 'Գնահատել {value}՝ {length}-ից'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Նվազագույն',
       thumb: 'Սահիչ',
       value: 'Արժեք {index}՝ {total}-ից'
+    },
+    stepper: {
+      label: 'առաջընթաց'
     },
     table: {
       noData: 'Տվյալներ չկան'

@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: '"{label}" үүсгэх',
       noData: 'Мэдээлэл байхгүй',
-      noMatch: 'Тохирох мэдээлэл олдсонгүй'
+      noMatch: 'Тохирох мэдээлэл олдсонгүй',
+      trigger: 'Сонголтуудыг харуулах'
     },
     inputNumber: {
       decrement: 'Хасах',
-      increment: 'Нэмэх'
+      increment: 'Нэмэх',
+      roledescription: 'тоон талбар'
     },
     inputRating: {
       rate: '{value}/{length} гэж үнэлэх'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Хамгийн бага',
       thumb: 'Гулсуур',
       value: '{total} утгын {index}-р утга'
+    },
+    stepper: {
+      label: 'явц'
     },
     table: {
       noData: 'Мэдээлэл байхгүй'

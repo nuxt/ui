@@ -11,12 +11,15 @@ import UButton from '../../src/runtime/components/Button.vue'
 import UCalendar from '../../src/runtime/components/Calendar.vue'
 import UCarousel from '../../src/runtime/components/Carousel.vue'
 import UInputDate from '../../src/runtime/components/InputDate.vue'
+import UInputMenu from '../../src/runtime/components/InputMenu.vue'
+import UInputNumber from '../../src/runtime/components/InputNumber.vue'
 import UInputRating from '../../src/runtime/components/InputRating.vue'
 import UInputTime from '../../src/runtime/components/InputTime.vue'
 import UPagination from '../../src/runtime/components/Pagination.vue'
 import UPinInput from '../../src/runtime/components/PinInput.vue'
 import USkeleton from '../../src/runtime/components/Skeleton.vue'
 import USlider from '../../src/runtime/components/Slider.vue'
+import UStepper from '../../src/runtime/components/Stepper.vue'
 import type { AppProps } from '../../src/runtime/components/App.vue'
 import ar from '../../src/runtime/locale/ar'
 import de from '../../src/runtime/locale/de'
@@ -142,6 +145,18 @@ describe('useLocale', () => {
     expect(['day', 'month', 'year'].map(part => wrapper.get(`[data-segment="${part}"]`).attributes('aria-label'))).toEqual(['jour', 'mois', 'année'])
   })
 
+  it('labels the InputMenu trigger in the App locale', async () => {
+    const wrapper = await mountInApp({ locale: fr }, () => h(UInputMenu, { items: ['A'] }))
+
+    expect(wrapper.get('[data-slot="trailing"]').attributes('aria-label')).toBe('Afficher les options')
+  })
+
+  it('describes InputNumber in the App locale', async () => {
+    const wrapper = await mountInApp({ locale: fr }, () => h(UInputNumber))
+
+    expect(wrapper.get('input').attributes('aria-roledescription')).toBe('champ numérique')
+  })
+
   it('labels InputRating values in the App locale', async () => {
     const wrapper = await mountInApp({ locale: fr }, () => h(UInputRating, { length: 3 }))
 
@@ -177,6 +192,12 @@ describe('useLocale', () => {
     const wrapper = await mountInApp({ locale: fr }, () => h(USlider, { modelValue }))
 
     expect(wrapper.findAll('[role="slider"]').map(thumb => thumb.attributes('aria-label'))).toEqual(labels)
+  })
+
+  it('labels Stepper in the App locale', async () => {
+    const wrapper = await mountInApp({ locale: fr }, () => h(UStepper, { items: [{ title: 'A' }] }))
+
+    expect(wrapper.findComponent(UStepper).attributes('aria-label')).toBe('progression')
   })
 
   it('labels Toaster in the App locale', async () => {

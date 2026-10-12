@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: '"{label}" बनाएँ',
       noData: 'कोई डेटा नहीं',
-      noMatch: 'कोई मेल खाता डेटा नहीं'
+      noMatch: 'कोई मेल खाता डेटा नहीं',
+      trigger: 'विकल्प दिखाएं'
     },
     inputNumber: {
       decrement: 'घटाना',
-      increment: 'बढ़ाना'
+      increment: 'बढ़ाना',
+      roledescription: 'संख्या फ़ील्ड'
     },
     inputRating: {
       rate: '{length} में से {value} रेटिंग दें'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'न्यूनतम',
       thumb: 'हैंडल',
       value: '{total} में से मान {index}'
+    },
+    stepper: {
+      label: 'प्रगति'
     },
     table: {
       noData: 'कोई डेटा नहीं'

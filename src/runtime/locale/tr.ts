@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: '"{label}" oluştur',
       noData: 'Veri yok',
-      noMatch: 'Eşleşen veri yok'
+      noMatch: 'Eşleşen veri yok',
+      trigger: 'Seçenekleri göster'
     },
     inputNumber: {
       decrement: 'Azalt',
-      increment: 'Arttır'
+      increment: 'Arttır',
+      roledescription: 'sayı alanı'
     },
     inputRating: {
       rate: '{length} üzerinden {value} puan ver'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Minimum',
       thumb: 'Kaydırıcı',
       value: '{index}. değer (toplam {total})'
+    },
+    stepper: {
+      label: 'ilerleme'
     },
     table: {
       noData: 'Veri yok'

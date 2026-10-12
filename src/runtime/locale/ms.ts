@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'Cipta "{label}"',
       noData: 'Tiada data',
-      noMatch: 'Tiada data yang sepadan'
+      noMatch: 'Tiada data yang sepadan',
+      trigger: 'Tunjukkan pilihan'
     },
     inputNumber: {
       decrement: 'Kurangkan',
-      increment: 'Naikkan'
+      increment: 'Naikkan',
+      roledescription: 'medan nombor'
     },
     inputRating: {
       rate: 'Beri nilai {value} daripada {length}'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Minimum',
       thumb: 'Peluncur',
       value: 'Nilai {index} daripada {total}'
+    },
+    stepper: {
+      label: 'kemajuan'
     },
     table: {
       noData: 'Tiada data'

@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'Skapa "{label}"',
       noData: 'Inga data',
-      noMatch: 'Inga matchande data'
+      noMatch: 'Inga matchande data',
+      trigger: 'Visa alternativ'
     },
     inputNumber: {
       decrement: 'Minska',
-      increment: 'Öka'
+      increment: 'Öka',
+      roledescription: 'sifferfält'
     },
     inputRating: {
       rate: 'Betygsätt {value} av {length}'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Minimum',
       thumb: 'Reglage',
       value: 'Värde {index} av {total}'
+    },
+    stepper: {
+      label: 'förlopp'
     },
     table: {
       noData: 'Inga data'

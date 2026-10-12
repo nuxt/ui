@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'Loo "{label}"',
       noData: 'Pole andmeid',
-      noMatch: 'Pole vastavaid andmeid'
+      noMatch: 'Pole vastavaid andmeid',
+      trigger: 'Kuva valikud'
     },
     inputNumber: {
       decrement: 'Vähenda',
-      increment: 'Suurenda'
+      increment: 'Suurenda',
+      roledescription: 'numbriväli'
     },
     inputRating: {
       rate: 'Hinnang {value} {length}-st'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Miinimum',
       thumb: 'Liugur',
       value: 'Väärtus {index} {total}-st'
+    },
+    stepper: {
+      label: 'edenemine'
     },
     table: {
       noData: 'Pole andmeid'

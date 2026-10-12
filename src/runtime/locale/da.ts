@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'Opret "{label}"',
       noData: 'Ingen data',
-      noMatch: 'Ingen matchende data'
+      noMatch: 'Ingen matchende data',
+      trigger: 'Vis muligheder'
     },
     inputNumber: {
       decrement: 'Reducer',
-      increment: 'Øg'
+      increment: 'Øg',
+      roledescription: 'talfelt'
     },
     inputRating: {
       rate: 'Bedøm {value} ud af {length}'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Minimum',
       thumb: 'Skyder',
       value: 'Værdi {index} af {total}'
+    },
+    stepper: {
+      label: 'fremskridt'
     },
     table: {
       noData: 'Ingen data'

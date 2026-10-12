@@ -118,11 +118,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'Izveidot "{label}"',
       noData: 'Nav datu',
-      noMatch: 'Nav atbilstošu datu'
+      noMatch: 'Nav atbilstošu datu',
+      trigger: 'Rādīt opcijas'
     },
     inputNumber: {
       decrement: 'Samazināt',
-      increment: 'Palielināt'
+      increment: 'Palielināt',
+      roledescription: 'skaitļu lauks'
     },
     inputRating: {
       rate: 'Novērtēt ar {value} no {length}'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Minimums',
       thumb: 'Slīdnis',
       value: 'Vērtība {index} no {total}'
+    },
+    stepper: {
+      label: 'norise'
     },
     table: {
       noData: 'Nav datu'

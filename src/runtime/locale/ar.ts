@@ -124,11 +124,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'إنشاء "{label}"',
       noData: 'لا توجد بيانات',
-      noMatch: 'لا توجد نتائج مطابقة'
+      noMatch: 'لا توجد نتائج مطابقة',
+      trigger: 'إظهار الخيارات'
     },
     inputNumber: {
       decrement: 'تقليل',
-      increment: 'زيادة'
+      increment: 'زيادة',
+      roledescription: 'حقل رقمي'
     },
     inputRating: {
       rate: 'تقييم {value} من {length}'
@@ -201,6 +203,9 @@ export default defineLocale<Messages>({
       min: 'الحد الأدنى',
       thumb: 'مقبض',
       value: 'القيمة {index} من {total}'
+    },
+    stepper: {
+      label: 'التقدم'
     },
     table: {
       noData: 'لا توجد بيانات'

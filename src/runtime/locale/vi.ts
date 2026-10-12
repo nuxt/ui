@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'Tạo "{label}"',
       noData: 'Không có dữ liệu',
-      noMatch: 'Không có kết quả phù hợp'
+      noMatch: 'Không có kết quả phù hợp',
+      trigger: 'Hiển thị tùy chọn'
     },
     inputNumber: {
       decrement: 'Giảm',
-      increment: 'Tăng'
+      increment: 'Tăng',
+      roledescription: 'trường số'
     },
     inputRating: {
       rate: 'Đánh giá {value} trên {length}'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Tối thiểu',
       thumb: 'Con trượt',
       value: 'Giá trị {index} trên {total}'
+    },
+    stepper: {
+      label: 'tiến trình'
     },
     table: {
       noData: 'Không có dữ liệu'

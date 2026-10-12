@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'Opprett "{label}"',
       noData: 'Ingen data',
-      noMatch: 'Ingen samsvarende data'
+      noMatch: 'Ingen samsvarende data',
+      trigger: 'Vis alternativer'
     },
     inputNumber: {
       decrement: 'Reduser',
-      increment: 'Øk'
+      increment: 'Øk',
+      roledescription: 'tallfelt'
     },
     inputRating: {
       rate: 'Gi {value} av {length}'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Minimum',
       thumb: 'Glidebryter',
       value: 'Verdi {index} av {total}'
+    },
+    stepper: {
+      label: 'fremdrift'
     },
     table: {
       noData: 'Ingen data'

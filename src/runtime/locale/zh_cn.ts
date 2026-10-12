@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: '创建 "{label}"',
       noData: '没有数据',
-      noMatch: '没有匹配的数据'
+      noMatch: '没有匹配的数据',
+      trigger: '显示选项'
     },
     inputNumber: {
       decrement: '减少',
-      increment: '增加'
+      increment: '增加',
+      roledescription: '数字输入框'
     },
     inputRating: {
       rate: '评分 {value} 分，满分 {length} 分'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: '最小值',
       thumb: '滑块',
       value: '第 {index} 个值，共 {total} 个'
+    },
+    stepper: {
+      label: '进度'
     },
     table: {
       noData: '没有数据'

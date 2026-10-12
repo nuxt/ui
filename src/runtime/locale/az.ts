@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: '"{label}" yarat',
       noData: 'Məlumat yoxdur',
-      noMatch: 'Uyğun məlumat tapılmadı'
+      noMatch: 'Uyğun məlumat tapılmadı',
+      trigger: 'Seçimləri göstər'
     },
     inputNumber: {
       decrement: 'Azalt',
-      increment: 'Artır'
+      increment: 'Artır',
+      roledescription: 'rəqəm sahəsi'
     },
     inputRating: {
       rate: '{length} üzərindən {value} qiymət ver'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Minimum',
       thumb: 'Tutacaq',
       value: 'Dəyər {index} / {total}'
+    },
+    stepper: {
+      label: 'irəliləyiş'
     },
     table: {
       noData: 'Məlumat yoxdur'

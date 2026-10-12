@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'Creează "{label}"',
       noData: 'Nu există date',
-      noMatch: 'Nu există date corespunzătoare'
+      noMatch: 'Nu există date corespunzătoare',
+      trigger: 'Afișează opțiunile'
     },
     inputNumber: {
       decrement: 'Scade',
-      increment: 'Crește'
+      increment: 'Crește',
+      roledescription: 'câmp numeric'
     },
     inputRating: {
       rate: 'Evaluează cu {value} din {length}'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Minim',
       thumb: 'Cursor',
       value: 'Valoarea {index} din {total}'
+    },
+    stepper: {
+      label: 'progres'
     },
     table: {
       noData: 'Nu există date'

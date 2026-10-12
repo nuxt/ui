@@ -123,10 +123,12 @@ export type Messages = {
     create: string
     noData: string
     noMatch: string
+    trigger: string
   }
   inputNumber: {
     decrement: string
     increment: string
+    roledescription: string
   }
   inputRating: {
     rate: string
@@ -204,6 +206,9 @@ export type Messages = {
     min: string
     thumb: string
     value: string
+  }
+  stepper: {
+    label: string
   }
   table: {
     noData: string

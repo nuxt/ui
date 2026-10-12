@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: '"{label}" yaratish',
       noData: 'Maʼlumot yoʻq',
-      noMatch: 'Mos keluvchi natija topilmadi'
+      noMatch: 'Mos keluvchi natija topilmadi',
+      trigger: 'Variantlarni koʻrsatish'
     },
     inputNumber: {
       decrement: 'Ayirish',
-      increment: 'Qoʻshish'
+      increment: 'Qoʻshish',
+      roledescription: 'raqamli maydon'
     },
     inputRating: {
       rate: '{length} dan {value} baho qoʻyish'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Minimum',
       thumb: 'Surgich',
       value: '{index}-qiymat, jami {total}'
+    },
+    stepper: {
+      label: 'jarayon'
     },
     table: {
       noData: 'Maʼlumot yoʻq'

@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'ສ້າງ "{label}"',
       noData: 'ບໍ່ມີຂໍ້ມູນ',
-      noMatch: 'ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ'
+      noMatch: 'ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ',
+      trigger: 'ສະແດງຕົວເລືອກ'
     },
     inputNumber: {
       decrement: 'ຫຼຸດລົງ',
-      increment: 'ເພີ່ມຂຶ້ນ'
+      increment: 'ເພີ່ມຂຶ້ນ',
+      roledescription: 'ຊ່ອງຕົວເລກ'
     },
     inputRating: {
       rate: 'ໃຫ້ຄະແນນ {value} ຈາກ {length}'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'ຕ່ຳສຸດ',
       thumb: 'ຕົວເລື່ອນ',
       value: 'ຄ່າທີ {index} ຈາກ {total}'
+    },
+    stepper: {
+      label: 'ຄວາມຄືບໜ້າ'
     },
     table: {
       noData: 'ບໍ່ມີຂໍ້ມູນ'

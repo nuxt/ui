@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: '"{label}" creëren',
       noData: 'Geen gegevens',
-      noMatch: 'Geen overeenkomende gegevens'
+      noMatch: 'Geen overeenkomende gegevens',
+      trigger: 'Opties tonen'
     },
     inputNumber: {
       decrement: 'Verlagen',
-      increment: 'Verhogen'
+      increment: 'Verhogen',
+      roledescription: 'getalveld'
     },
     inputRating: {
       rate: 'Beoordeel met {value} van {length}'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Minimum',
       thumb: 'Schuifregelaar',
       value: 'Waarde {index} van {total}'
+    },
+    stepper: {
+      label: 'voortgang'
     },
     table: {
       noData: 'Geen gegevens'

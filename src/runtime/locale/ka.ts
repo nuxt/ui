@@ -125,11 +125,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'შექმენი "{label}"',
       noData: 'მონაცემები არ არის',
-      noMatch: 'შესატყვისი მონაცემები არ არის'
+      noMatch: 'შესატყვისი მონაცემები არ არის',
+      trigger: 'ვარიანტების ჩვენება'
     },
     inputNumber: {
       decrement: 'დაკლება',
-      increment: 'დამატება'
+      increment: 'დამატება',
+      roledescription: 'რიცხვითი ველი'
     },
     inputRating: {
       rate: 'შეფასება {value} {length}-დან'
@@ -202,6 +204,9 @@ export default defineLocale<Messages>({
       min: 'მინიმუმი',
       thumb: 'სახელური',
       value: 'მნიშვნელობა {index} {total}-დან'
+    },
+    stepper: {
+      label: 'პროგრესი'
     },
     table: {
       noData: 'მონაცემები არ არის'

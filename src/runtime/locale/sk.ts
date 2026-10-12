@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'Vytvoriť "{label}"',
       noData: 'Žiadne dáta',
-      noMatch: 'Žiadna zhoda'
+      noMatch: 'Žiadna zhoda',
+      trigger: 'Zobraziť možnosti'
     },
     inputNumber: {
       decrement: 'Znížiť',
-      increment: 'Zvýšiť'
+      increment: 'Zvýšiť',
+      roledescription: 'číselné pole'
     },
     inputRating: {
       rate: 'Ohodnotiť na {value} z {length}'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Minimum',
       thumb: 'Posúvač',
       value: 'Hodnota {index} z {total}'
+    },
+    stepper: {
+      label: 'priebeh'
     },
     table: {
       noData: 'Žiadne dáta'

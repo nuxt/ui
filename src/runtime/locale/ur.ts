@@ -124,11 +124,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: '"{label}" بنائیں',
       noData: 'کوئی ڈیٹا نہیں',
-      noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا'
+      noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
+      trigger: 'اختیارات دکھائیں'
     },
     inputNumber: {
       decrement: 'کمی',
-      increment: 'اضافہ'
+      increment: 'اضافہ',
+      roledescription: 'عددی فیلڈ'
     },
     inputRating: {
       rate: '{length} میں سے {value} کی درجہ بندی کریں'
@@ -201,6 +203,9 @@ export default defineLocale<Messages>({
       min: 'کم سے کم',
       thumb: 'ہینڈل',
       value: '{total} میں سے قدر {index}'
+    },
+    stepper: {
+      label: 'پیش رفت'
     },
     table: {
       noData: 'کوئی ڈیٹا نہیں'

@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'Sortu {label}',
       noData: 'Daturik gabe',
-      noMatch: 'Ez da datu bat ere aurkitu'
+      noMatch: 'Ez da datu bat ere aurkitu',
+      trigger: 'Erakutsi aukerak'
     },
     inputNumber: {
       decrement: 'Murriztu',
-      increment: 'Handitu'
+      increment: 'Handitu',
+      roledescription: 'zenbaki-eremua'
     },
     inputRating: {
       rate: 'Baloratu {length}(e)tik {value}'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Minimoa',
       thumb: 'Graduatzailea',
       value: '{total}(e)tik {index}. balioa'
+    },
+    stepper: {
+      label: 'aurrerapena'
     },
     table: {
       noData: 'Daturik gabe'

@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'Δημιουργία "{label}"',
       noData: 'Δεν υπάρχουν δεδομένα',
-      noMatch: 'Δεν βρέθηκαν δεδομένα'
+      noMatch: 'Δεν βρέθηκαν δεδομένα',
+      trigger: 'Εμφάνιση επιλογών'
     },
     inputNumber: {
       decrement: 'Μείωση',
-      increment: 'Αύξηση'
+      increment: 'Αύξηση',
+      roledescription: 'αριθμητικό πεδίο'
     },
     inputRating: {
       rate: 'Βαθμολόγηση {value} από {length}'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Ελάχιστο',
       thumb: 'Ρυθμιστικό',
       value: 'Τιμή {index} από {total}'
+    },
+    stepper: {
+      label: 'πρόοδος'
     },
     table: {
       noData: 'Δεν υπάρχουν δεδομένα'

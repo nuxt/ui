@@ -118,11 +118,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'สร้าง "{label}"',
       noData: 'ไม่มีข้อมูล',
-      noMatch: 'ไม่พบข้อมูลที่ตรงกัน'
+      noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
+      trigger: 'แสดงตัวเลือก'
     },
     inputNumber: {
       decrement: 'ลด',
-      increment: 'เพิ่ม'
+      increment: 'เพิ่ม',
+      roledescription: 'ช่องตัวเลข'
     },
     inputRating: {
       rate: 'ให้คะแนน {value} จาก {length}'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'ต่ำสุด',
       thumb: 'ตัวเลื่อน',
       value: 'ค่าที่ {index} จาก {total}'
+    },
+    stepper: {
+      label: 'ความคืบหน้า'
     },
     table: {
       noData: 'ไม่มีข้อมูล'

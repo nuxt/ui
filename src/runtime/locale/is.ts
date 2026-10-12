@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'Búa til "{label}"',
       noData: 'Engin gögn',
-      noMatch: 'Engin gögn fundust'
+      noMatch: 'Engin gögn fundust',
+      trigger: 'Sýna valkosti'
     },
     inputNumber: {
       decrement: 'Minnka',
-      increment: 'Auka'
+      increment: 'Auka',
+      roledescription: 'talnareitur'
     },
     inputRating: {
       rate: 'Gefa einkunnina {value} af {length}'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Lágmark',
       thumb: 'Sleði',
       value: 'Gildi {index} af {total}'
+    },
+    stepper: {
+      label: 'framvinda'
     },
     table: {
       noData: 'Engin gögn'

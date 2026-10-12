@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'Ustvari "{label}"',
       noData: 'Ni podatkov',
-      noMatch: 'Ni ujemanj'
+      noMatch: 'Ni ujemanj',
+      trigger: 'Prikaži možnosti'
     },
     inputNumber: {
       decrement: 'Zmanjšaj',
-      increment: 'Povišaj'
+      increment: 'Povišaj',
+      roledescription: 'številsko polje'
     },
     inputRating: {
       rate: 'Oceni z {value} od {length}'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Minimum',
       thumb: 'Drsnik',
       value: 'Vrednost {index} od {total}'
+    },
+    stepper: {
+      label: 'napredek'
     },
     table: {
       noData: 'Ni podatkov'

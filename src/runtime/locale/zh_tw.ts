@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: '建立「{label}」',
       noData: '沒有資料',
-      noMatch: '沒有相符的資料'
+      noMatch: '沒有相符的資料',
+      trigger: '顯示選項'
     },
     inputNumber: {
       decrement: '減少',
-      increment: '增加'
+      increment: '增加',
+      roledescription: '數字輸入欄位'
     },
     inputRating: {
       rate: '評分 {value} 分，滿分 {length} 分'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: '最小值',
       thumb: '滑桿',
       value: '第 {index} 個值，共 {total} 個'
+    },
+    stepper: {
+      label: '進度'
     },
     table: {
       noData: '沒有資料'

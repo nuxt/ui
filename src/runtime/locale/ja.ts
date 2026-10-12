@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: '"{label}"を作成',
       noData: 'データがありません',
-      noMatch: '一致するデータがありません'
+      noMatch: '一致するデータがありません',
+      trigger: 'オプションを表示'
     },
     inputNumber: {
       decrement: '減らす',
-      increment: '増やす'
+      increment: '増やす',
+      roledescription: '数値フィールド'
     },
     inputRating: {
       rate: '{length}段階中{value}で評価'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: '最小',
       thumb: 'つまみ',
       value: '{total}個中{index}番目の値'
+    },
+    stepper: {
+      label: '進捗'
     },
     table: {
       noData: 'データがありません'

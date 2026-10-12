@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: '"{label}" erstellen',
       noData: 'Keng Donnéeën',
-      noMatch: 'Keng entspriechend Donnéeën'
+      noMatch: 'Keng entspriechend Donnéeën',
+      trigger: 'Optiounen uweisen'
     },
     inputNumber: {
       decrement: 'Dekrementéieren',
-      increment: 'Inkrementéieren'
+      increment: 'Inkrementéieren',
+      roledescription: 'Zuelefeld'
     },
     inputRating: {
       rate: '{value} vu {length} bewäerten'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Minimum',
       thumb: 'Regler',
       value: 'Wäert {index} vu {total}'
+    },
+    stepper: {
+      label: 'Fortschrëtt'
     },
     table: {
       noData: 'Keng Donnéeën'

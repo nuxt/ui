@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: '"{label}" жасау',
       noData: 'Деректер жоқ',
-      noMatch: 'Сәйкес келетін деректер жоқ'
+      noMatch: 'Сәйкес келетін деректер жоқ',
+      trigger: 'Нұсқаларды көрсету'
     },
     inputNumber: {
       decrement: 'Азайту',
-      increment: 'Арттыру'
+      increment: 'Арттыру',
+      roledescription: 'сандық өріс'
     },
     inputRating: {
       rate: '{length} ішінен {value} деп бағалау'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Минимум',
       thumb: 'Жүгірткі',
       value: '{total} ішінен {index}-мән'
+    },
+    stepper: {
+      label: 'прогресс'
     },
     table: {
       noData: 'Деректер жоқ'

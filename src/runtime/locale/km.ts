@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'បង្កើត "{label}"',
       noData: 'មិនមានទិន្នន័យ',
-      noMatch: 'មិនមានទិន្នន័យដែលត្រូវគ្នាទេ'
+      noMatch: 'មិនមានទិន្នន័យដែលត្រូវគ្នាទេ',
+      trigger: 'បង្ហាញជម្រើស'
     },
     inputNumber: {
       decrement: 'បន្ថយ',
-      increment: 'បង្កើន'
+      increment: 'បង្កើន',
+      roledescription: 'វាលលេខ'
     },
     inputRating: {
       rate: 'វាយតម្លៃ {value} ក្នុងចំណោម {length}'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'អប្បបរមា',
       thumb: 'ចំណុចរំកិល',
       value: 'តម្លៃទី {index} នៃ {total}'
+    },
+    stepper: {
+      label: 'វឌ្ឍនភាព'
     },
     table: {
       noData: 'មិនមានទិន្នន័យ'

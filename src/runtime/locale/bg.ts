@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'Създайте "{label}"',
       noData: 'Няма данни',
-      noMatch: 'Няма съвпадение на данни'
+      noMatch: 'Няма съвпадение на данни',
+      trigger: 'Показване на опциите'
     },
     inputNumber: {
       decrement: 'Намаляване',
-      increment: 'Увеличаване'
+      increment: 'Увеличаване',
+      roledescription: 'числово поле'
     },
     inputRating: {
       rate: 'Оценка {value} от {length}'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: 'Минимум',
       thumb: 'Плъзгач',
       value: 'Стойност {index} от {total}'
+    },
+    stepper: {
+      label: 'напредък'
     },
     table: {
       noData: 'Няма данни'

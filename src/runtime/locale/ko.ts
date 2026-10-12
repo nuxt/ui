@@ -123,11 +123,13 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: '"{label}" 생성',
       noData: '데이터가 없습니다.',
-      noMatch: '일치하는 데이터가 없습니다.'
+      noMatch: '일치하는 데이터가 없습니다.',
+      trigger: '옵션 표시'
     },
     inputNumber: {
       decrement: '감소',
-      increment: '증가'
+      increment: '증가',
+      roledescription: '숫자 필드'
     },
     inputRating: {
       rate: '{length}점 중 {value}점으로 평가'
@@ -200,6 +202,9 @@ export default defineLocale<Messages>({
       min: '최소',
       thumb: '핸들',
       value: '{total}개 중 {index}번째 값'
+    },
+    stepper: {
+      label: '진행 상황'
     },
     table: {
       noData: '데이터가 없습니다.'
