@@ -17,17 +17,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'إغلاق'
     },
+    breadcrumb: {
+      label: 'مسار التنقل'
+    },
     calendar: {
+      label: 'تاريخ الحدث',
+      monthPicker: 'منتقي الشهر',
       nextMonth: 'الشهر المقبل',
       nextYear: 'السنة المقبلة',
       prevMonth: 'الشهر السابق',
-      prevYear: 'السنة السابقة'
+      prevYear: 'السنة السابقة',
+      yearPicker: 'منتقي السنة'
     },
     carousel: {
       dots: 'اختر الشريحة المراد عرضها',
       goto: 'الذهاب إلى شريحة {slide}',
       next: 'التالي',
-      prev: 'السابق'
+      prev: 'السابق',
+      roledescription: 'عرض شرائح',
+      slide: 'شريحة'
     },
     chatMessages: {
       autoScroll: 'التمرير إلى الأسفل'
@@ -57,7 +65,8 @@ export default defineLocale<Messages>({
       close: 'إغلاق',
       noData: 'لا توجد بيانات',
       noMatch: 'لا توجد نتائج مطابقة',
-      placeholder: 'اكتب أمرًا أو ابحث…'
+      placeholder: 'اكتب أمرًا أو ابحث…',
+      results: 'النتائج'
     },
     contentSearch: {
       links: 'الروابط',
@@ -101,14 +110,37 @@ export default defineLocale<Messages>({
       close: 'إغلاق القائمة',
       open: 'فتح القائمة'
     },
+    inputDate: {
+      day: 'اليوم',
+      dayPeriod: 'ص/م',
+      era: 'العصر',
+      hour: 'الساعة',
+      minute: 'الدقيقة',
+      month: 'الشهر',
+      second: 'الثانية',
+      timeZoneName: 'المنطقة الزمنية',
+      year: 'السنة'
+    },
     inputMenu: {
       create: 'إنشاء "{label}"',
       noData: 'لا توجد بيانات',
-      noMatch: 'لا توجد نتائج مطابقة'
+      noMatch: 'لا توجد نتائج مطابقة',
+      trigger: 'إظهار الخيارات'
     },
     inputNumber: {
       decrement: 'تقليل',
-      increment: 'زيادة'
+      increment: 'زيادة',
+      roledescription: 'حقل رقمي'
+    },
+    inputRating: {
+      rate: 'تقييم {value} من {length}'
+    },
+    inputTime: {
+      dayPeriod: 'ص/م',
+      hour: 'الساعة',
+      minute: 'الدقيقة',
+      second: 'الثانية',
+      timeZoneName: 'المنطقة الزمنية'
     },
     listbox: {
       noData: 'لا توجد بيانات',
@@ -124,6 +156,9 @@ export default defineLocale<Messages>({
       next: 'الصفحة التالية',
       page: 'الصفحة {page}',
       prev: 'الصفحة السابقة'
+    },
+    pinInput: {
+      input: 'رمز PIN، الخانة {index} من {length}'
     },
     pricingTable: {
       caption: 'مقارنة الخطط السعرية'
@@ -157,14 +192,30 @@ export default defineLocale<Messages>({
       noMatch: 'لا توجد نتائج مطابقة',
       search: 'بحث…'
     },
+    skeleton: {
+      label: 'جارٍ التحميل'
+    },
     slideover: {
       close: 'إغلاق'
+    },
+    slider: {
+      max: 'الحد الأقصى',
+      min: 'الحد الأدنى',
+      thumb: 'مقبض',
+      value: 'القيمة {index} من {total}'
+    },
+    stepper: {
+      label: 'التقدم'
     },
     table: {
       noData: 'لا توجد بيانات'
     },
     toast: {
       close: 'إغلاق'
+    },
+    toaster: {
+      label: 'إشعار',
+      viewport: 'الإشعارات ({hotkey})'
     }
   }
 })

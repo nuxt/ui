@@ -300,6 +300,7 @@ const prevMonthIcon = computed(() => props.prevMonthIcon || (dir.value === 'rtl'
 
 const prevLabel = computed(() => view.value === 'day' ? t('calendar.prevMonth') : t('calendar.prevYear'))
 const nextLabel = computed(() => view.value === 'day' ? t('calendar.nextMonth') : t('calendar.nextYear'))
+const calendarLabel = computed(() => view.value === 'year' ? t('calendar.yearPicker') : view.value === 'month' ? t('calendar.monthPicker') : t('calendar.label'))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.calendar || {}) })({
@@ -315,6 +316,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.calendar || {}) 
   <Picker.Root
     v-slot="{ weekDays, grid, date }"
     v-bind="rootProps"
+    :calendar-label="calendarLabel"
     :model-value="(isMinView ? (props.modelValue as DateValue | DateValue[] | DateRange) : undefined)"
     :default-value="(isMinView ? (props.defaultValue as DateValue | DateValue[] | DateRange) : undefined)"
     :placeholder="placeholder"
