@@ -170,7 +170,7 @@ import { useComponentProps } from '../composables/useComponentProps'
 import { useFilter } from '../composables/useFilter'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
-import { get, isArrayOfArray, looseToNumber, omit } from '../utils'
+import { get, isArrayOfArray, looseToNumber, omit, pick } from '../utils'
 import { getEstimateSize } from '../utils/virtualizer'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -201,6 +201,7 @@ const { filterGroups } = useFilter()
 
 // `role="listbox"` is on the content, not on the root.
 const labelAttrs = ['aria-label', 'aria-labelledby']
+const fieldAttrs = ['aria-describedby', 'aria-invalid']
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'multiple', 'selectionBehavior', 'highlightOnHover', 'loop', 'by', 'orientation', 'required'), emits)
 
@@ -370,7 +371,7 @@ const filteredItems = computed(() => filteredGroups.value.flatMap(group => group
   <ListboxRoot
     :id="id"
     data-slot="root"
-    v-bind="{ ...rootProps, ...omit($attrs, labelAttrs) }"
+    v-bind="{ ...rootProps, ...omit($attrs, [...labelAttrs, ...fieldAttrs]) }"
     :disabled="disabled"
     :name="name"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
@@ -389,7 +390,7 @@ const filteredItems = computed(() => filteredGroups.value.flatMap(group => group
 
     <ListboxContent
       data-slot="content"
-      v-bind="ariaAttrs"
+      v-bind="{ ...pick($attrs, fieldAttrs), ...ariaAttrs }"
       :aria-required="props.required || undefined"
       :aria-label="($attrs['aria-label'] as string | undefined)"
       :aria-labelledby="($attrs['aria-labelledby'] as string | undefined) ?? ($attrs['aria-label'] ? undefined : labelId)"

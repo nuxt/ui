@@ -96,9 +96,16 @@ describe('Listbox', () => {
         modelValue: items[0]
       },
       attrs: {
-        'aria-label': 'Countries'
+        'aria-label': 'Countries',
+        'aria-describedby': 'countries-hint'
       }
     })
+
+    const listbox = wrapper.find('[role="listbox"]')
+    expect(listbox.attributes('aria-label')).toBe('Countries')
+    expect(listbox.attributes('aria-describedby')).toBe('countries-hint')
+    expect(wrapper.attributes('aria-label')).toBeUndefined()
+    expect(wrapper.attributes('aria-describedby')).toBeUndefined()
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
