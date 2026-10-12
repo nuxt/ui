@@ -61,6 +61,10 @@ class: '!px-0 !pt-0'
 ---
 ::
 
+::tip
+The title is rendered as an `h1` by default. Use the `as` prop with an object to change it, for example `:as="{ title: 'h2' }"`{lang="ts-type"}. You can also set the root element this way: `:as="{ root: 'section', title: 'h2' }"`{lang="ts-type"}.
+::
+
 ### Icon
 
 Use the `icon` prop to set the icon of the navbar.

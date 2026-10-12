@@ -46,6 +46,7 @@ describe('BlogPost', () => {
     ...variants.map((variant: string) => [`with variant ${variant}`, { props: { ...props, variant } }]),
     ...orientations.map((orientation: string) => [`with orientation ${orientation}`, { props: { ...props, orientation } }]),
     ['with as', { props: { ...props, as: 'section' } }],
+    ['with as object', { props: { ...props, as: { root: 'section', title: 'h3' } } }],
     ['with class', { props: { ...props, class: 'absolute' } }],
     ['with ui', { props: { ...props, ui: { wrapper: 'items-center' } } }],
     // Slots
