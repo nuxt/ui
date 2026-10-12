@@ -87,10 +87,10 @@ describe('Calendar', () => {
 
   describe('aria', () => {
     test.each([
-      ['date', {}, 'Event Date'],
-      ['range', { range: true }, 'Event Date'],
-      ['month', { type: 'month' as const }, 'Month Picker'],
-      ['year', { type: 'year' as const }, 'Year Picker']
+      ['date', {}, 'Event date'],
+      ['range', { range: true }, 'Event date'],
+      ['month', { type: 'month' as const }, 'Month picker'],
+      ['year', { type: 'year' as const }, 'Year picker']
     ])('labels the %s calendar', async (_, props, label) => {
       const wrapper = await mountSuspended(Calendar, { props })
 
@@ -101,10 +101,10 @@ describe('Calendar', () => {
       const wrapper = await mountSuspended(Calendar)
 
       await wrapper.find('[data-slot="heading"] button').trigger('click')
-      expect(wrapper.get('[data-slot="root"]').attributes('aria-label')).toMatch(/^Month Picker, /)
+      expect(wrapper.get('[data-slot="root"]').attributes('aria-label')).toMatch(/^Month picker, /)
 
       await wrapper.find('[data-slot="heading"] button').trigger('click')
-      expect(wrapper.get('[data-slot="root"]').attributes('aria-label')).toMatch(/^Year Picker, /)
+      expect(wrapper.get('[data-slot="root"]').attributes('aria-label')).toMatch(/^Year picker, /)
     })
   })
 

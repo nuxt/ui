@@ -20,13 +20,13 @@ export default defineLocale<Messages>({
       label: 'breadcrumb'
     },
     calendar: {
-      label: 'Event Date',
-      monthPicker: 'Month Picker',
+      label: 'Event date',
+      monthPicker: 'Month picker',
       nextMonth: 'Next month',
       nextYear: 'Next year',
       prevMonth: 'Previous month',
       prevYear: 'Previous year',
-      yearPicker: 'Year Picker'
+      yearPicker: 'Year picker'
     },
     carousel: {
       dots: 'Choose slide to display',

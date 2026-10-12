@@ -20,13 +20,13 @@ export default defineLocale<Messages>({
       label: 'jejak navigasi'
     },
     calendar: {
-      label: 'Tarikh Acara',
-      monthPicker: 'Pemilih Bulan',
+      label: 'Tarikh acara',
+      monthPicker: 'Pemilih bulan',
       nextMonth: 'Bulan seterusnya',
       nextYear: 'Tahun seterusnya',
       prevMonth: 'Bulan sebelum',
       prevYear: 'Tahun sebelum',
-      yearPicker: 'Pemilih Tahun'
+      yearPicker: 'Pemilih tahun'
     },
     carousel: {
       dots: 'Pilih slaid untuk dipaparkan',
