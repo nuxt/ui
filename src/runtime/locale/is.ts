@@ -64,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Loka',
       noData: 'Engin gögn',
       noMatch: 'Engin gögn fundust',
-      placeholder: 'Sláðu inn skipun eða leitaðu…'
+      placeholder: 'Sláðu inn skipun eða leitaðu…',
+      results: 'Niðurstöður'
     },
     contentSearch: {
       links: 'Tenglar',

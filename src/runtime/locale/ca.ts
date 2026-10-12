@@ -64,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Tancar',
       noData: 'Sense dades',
       noMatch: 'No hi ha dades coincidents',
-      placeholder: 'Escriu una ordre o cerca…'
+      placeholder: 'Escriu una ordre o cerca…',
+      results: 'Resultats'
     },
     contentSearch: {
       links: 'Enllaços',

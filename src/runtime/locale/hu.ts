@@ -64,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Bezárás',
       noData: 'Nincs adat',
       noMatch: 'Nincs találat',
-      placeholder: 'Írjon be egy parancsot vagy keressen…'
+      placeholder: 'Írjon be egy parancsot vagy keressen…',
+      results: 'Eredmények'
     },
     contentSearch: {
       links: 'Linkek',

@@ -64,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Zoumaachen',
       noData: 'Keng Donnéeën',
       noMatch: 'Keng entspriechend Donnéeën',
-      placeholder: 'Tippt e Befeel oder sicht…'
+      placeholder: 'Tippt e Befeel oder sicht…',
+      results: 'Resultater'
     },
     contentSearch: {
       links: 'Linken',

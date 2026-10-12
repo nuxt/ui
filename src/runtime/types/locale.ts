@@ -54,6 +54,7 @@ export type Messages = {
     noData: string
     noMatch: string
     placeholder: string
+    results: string
   }
   contentSearch: {
     description?: string

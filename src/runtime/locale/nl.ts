@@ -64,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Sluiten',
       noData: 'Geen gegevens',
       noMatch: 'Geen overeenkomende gegevens',
-      placeholder: 'Typ een commando of zoek…'
+      placeholder: 'Typ een commando of zoek…',
+      results: 'Resultaten'
     },
     contentSearch: {
       links: 'Links',

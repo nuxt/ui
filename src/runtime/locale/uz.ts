@@ -64,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Yopish',
       noData: 'Maʼlumot yoʻq',
       noMatch: 'Mos keluvchi natija topilmadi',
-      placeholder: 'Buyruq kiriting yoki qidiring…'
+      placeholder: 'Buyruq kiriting yoki qidiring…',
+      results: 'Natijalar'
     },
     contentSearch: {
       links: 'Havolalar',

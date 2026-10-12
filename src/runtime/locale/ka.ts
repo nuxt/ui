@@ -64,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'დახურვა',
       noData: 'მონაცემები არ არის',
       noMatch: 'შესატყვისი მონაცემები არ არის',
-      placeholder: 'ჩაწერეთ ბრძანება ან ძიება…'
+      placeholder: 'ჩაწერეთ ბრძანება ან ძიება…',
+      results: 'შედეგები'
     },
     contentSearch: {
       links: 'ბმულები',

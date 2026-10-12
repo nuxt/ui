@@ -64,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Bağla',
       noData: 'Məlumat yoxdur',
       noMatch: 'Uyğun məlumat tapılmadı',
-      placeholder: 'Əmr daxil edin və ya axtarın…'
+      placeholder: 'Əmr daxil edin və ya axtarın…',
+      results: 'Nəticələr'
     },
     contentSearch: {
       links: 'Bağlantılar',

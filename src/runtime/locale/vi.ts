@@ -64,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Đóng',
       noData: 'Không có dữ liệu',
       noMatch: 'Không có kết quả phù hợp',
-      placeholder: 'Nhập lệnh hoặc tìm kiếm…'
+      placeholder: 'Nhập lệnh hoặc tìm kiếm…',
+      results: 'Kết quả'
     },
     contentSearch: {
       links: 'Liên kết',

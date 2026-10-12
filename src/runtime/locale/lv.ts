@@ -59,7 +59,8 @@ export default defineLocale<Messages>({
       close: 'Aizvērt',
       noData: 'Nav datu',
       noMatch: 'Nav atbilstošu datu',
-      placeholder: 'Ievadi komandu vai meklē…'
+      placeholder: 'Ievadi komandu vai meklē…',
+      results: 'Rezultāti'
     },
     contentSearch: {
       links: 'Saites',

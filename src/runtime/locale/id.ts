@@ -64,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Tutup',
       noData: 'Tidak ada data',
       noMatch: 'Tidak ada data yang cocok',
-      placeholder: 'Ketik perintah atau cari…'
+      placeholder: 'Ketik perintah atau cari…',
+      results: 'Hasil'
     },
     contentSearch: {
       links: 'Tautan',

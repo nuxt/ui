@@ -64,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'বন্ধ করুন',
       noData: 'কোন তথ্য নেই',
       noMatch: 'কোন মিল পাওয়া যায়নি',
-      placeholder: 'কমান্ড টাইপ করুন বা অনুসন্ধান করুন…'
+      placeholder: 'কমান্ড টাইপ করুন বা অনুসন্ধান করুন…',
+      results: 'ফলাফল'
     },
     contentSearch: {
       links: 'লিংকসমূহ',

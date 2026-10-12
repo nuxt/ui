@@ -64,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Itxi',
       noData: 'Daturik gabe',
       noMatch: 'Ez da datu bat ere aurkitu',
-      placeholder: 'Idatzi komando bat edo bilatu…'
+      placeholder: 'Idatzi komando bat edo bilatu…',
+      results: 'Emaitzak'
     },
     contentSearch: {
       links: 'Estekak',

@@ -65,7 +65,8 @@ export default defineLocale<Messages>({
       close: 'تاقاش',
       noData: 'سانلىق مەلۇمات يوق',
       noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
-      placeholder: 'بۇيرۇق كىرگۈزۈڭ ياكى ئىزدەڭ…'
+      placeholder: 'بۇيرۇق كىرگۈزۈڭ ياكى ئىزدەڭ…',
+      results: 'نەتىجىلەر'
     },
     contentSearch: {
       links: 'ئۇلانمىلار',

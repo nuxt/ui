@@ -59,7 +59,8 @@ export default defineLocale<Messages>({
       close: 'Close',
       noData: 'No data',
       noMatch: 'No matching data',
-      placeholder: 'Type a command or search…'
+      placeholder: 'Type a command or search…',
+      results: 'Results'
     },
     contentSearch: {
       links: 'Links',

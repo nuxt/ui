@@ -65,7 +65,8 @@ export default defineLocale<Messages>({
       close: 'סגור',
       noData: 'אין נתונים זמינים',
       noMatch: 'לא נמצאה התאמה',
-      placeholder: 'הקלד פקודה…'
+      placeholder: 'הקלד פקודה…',
+      results: 'תוצאות'
     },
     contentSearch: {
       links: 'קישורים',

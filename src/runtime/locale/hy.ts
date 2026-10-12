@@ -64,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Փակել',
       noData: 'Տվյալներ չկան',
       noMatch: 'Համընկնումներ չեն գտնվել',
-      placeholder: 'Մուտքագրեք հրաման կամ որոնեք…'
+      placeholder: 'Մուտքագրեք հրաման կամ որոնեք…',
+      results: 'Արդյունքներ'
     },
     contentSearch: {
       links: 'Հղումներ',

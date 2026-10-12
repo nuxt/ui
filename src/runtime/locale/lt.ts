@@ -64,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Uždaryti',
       noData: 'Nėra duomenų',
       noMatch: 'Nėra atitinkančių duomenų',
-      placeholder: 'Įveskite komandą arba ieškokite…'
+      placeholder: 'Įveskite komandą arba ieškokite…',
+      results: 'Rezultatai'
     },
     contentSearch: {
       links: 'Nuorodos',

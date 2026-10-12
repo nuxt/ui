@@ -64,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'ປິດ',
       noData: 'ບໍ່ມີຂໍ້ມູນ',
       noMatch: 'ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ',
-      placeholder: 'ພິມຄຳສັ່ງ ຫຼື ຄົ້ນຫາ…'
+      placeholder: 'ພິມຄຳສັ່ງ ຫຼື ຄົ້ນຫາ…',
+      results: 'ຜົນໄດ້ຮັບ'
     },
     contentSearch: {
       links: 'ລິ້ງ',

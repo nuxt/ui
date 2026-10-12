@@ -65,7 +65,8 @@ export default defineLocale<Messages>({
       close: 'بند کریں',
       noData: 'کوئی ڈیٹا نہیں',
       noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
-      placeholder: 'کمانڈ ٹائپ کریں یا تلاش کریں…'
+      placeholder: 'کمانڈ ٹائپ کریں یا تلاش کریں…',
+      results: 'نتائج'
     },
     contentSearch: {
       links: 'لنکس',

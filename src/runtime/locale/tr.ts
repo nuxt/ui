@@ -64,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Kapat',
       noData: 'Veri yok',
       noMatch: 'Eşleşen veri yok',
-      placeholder: 'Bir komut yazın veya arama yapın…'
+      placeholder: 'Bir komut yazın veya arama yapın…',
+      results: 'Sonuçlar'
     },
     contentSearch: {
       links: 'Bağlantılar',

@@ -64,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Zatvori',
       noData: 'Nema podataka',
       noMatch: 'Nema odgovarajućih podataka',
-      placeholder: 'Upišite naredbu ili pretraživanje…'
+      placeholder: 'Upišite naredbu ili pretraživanje…',
+      results: 'Rezultati'
     },
     contentSearch: {
       links: 'Poveznice',

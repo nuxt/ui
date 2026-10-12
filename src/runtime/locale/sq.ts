@@ -64,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Mbyll',
       noData: 'Nuk ka të dhëna',
       noMatch: 'Nuk ka të dhëna që përputhen',
-      placeholder: 'Shkruaj një komandë ose kërko…'
+      placeholder: 'Shkruaj një komandë ose kërko…',
+      results: 'Rezultatet'
     },
     contentSearch: {
       links: 'Lidhje',
