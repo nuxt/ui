@@ -1,58 +1,72 @@
 import { colorVariant } from './color'
-import input from './input-legacy'
-import { fieldGroupVariantWithRoot } from './field-group'
+import field from './field'
+import input from './input'
 import { defineTheme } from '../utils/theme'
 
+// Same box as Input: the root element is the box, the native input sits in it
+// with the padding of the size, and the buttons are in its flow.
 export default defineTheme({
   slots: {
     root: 'relative inline-flex items-center',
-    base: 'w-full rounded-md border-0 text-strong placeholder:text-faint disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
-    increment: 'absolute flex items-center',
-    decrement: 'absolute flex items-center'
+    base: 'rounded-md cursor-text text-strong has-[>:disabled]:cursor-not-allowed has-[>:disabled]:opacity-75 transition-colors',
+    input: 'w-full min-w-0 flex-1 border-0 bg-transparent outline-none placeholder:text-faint disabled:cursor-not-allowed',
+    increment: 'flex items-center',
+    decrement: 'flex items-center'
   },
   variants: {
-    ...fieldGroupVariantWithRoot,
+    fieldGroup: input.variants.fieldGroup,
     color: colorVariant({ root: '' }),
     size: {
       xs: {
-        root: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)]',
-        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm/4'
+        root: field.variants.size.xs.root,
+        base: 'text-sm/4',
+        input: 'px-(--ui-control-px) py-(--ui-control-py)'
       },
       sm: {
-        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)]',
-        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm/4'
+        root: field.variants.size.sm.root,
+        base: 'text-sm/4',
+        input: 'px-(--ui-control-px) py-(--ui-control-py)'
       },
       md: {
-        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)]',
-        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base/5'
+        root: field.variants.size.md.root,
+        base: 'text-base/5',
+        input: 'px-(--ui-control-px) py-(--ui-control-py)'
       },
       lg: {
-        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)]',
-        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base/5'
+        root: field.variants.size.lg.root,
+        base: 'text-base/5',
+        input: 'px-(--ui-control-px) py-(--ui-control-py)'
       },
       xl: {
-        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)]',
-        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base'
+        root: field.variants.size.xl.root,
+        base: 'text-base',
+        input: 'px-(--ui-control-px) py-(--ui-control-py)'
       }
     },
     variant: {
       ...input.variants.variant
     },
+    // The box dims as a whole, so its buttons don't dim a second time
     disabled: {
       true: {
-        increment: 'opacity-75 cursor-not-allowed',
-        decrement: 'opacity-75 cursor-not-allowed'
+        increment: 'cursor-not-allowed [&>button]:disabled:opacity-100',
+        decrement: 'cursor-not-allowed [&>button]:disabled:opacity-100'
       }
     },
     orientation: {
+      // The decrement comes after the input in the DOM, so the input keeps the first tab stop
       horizontal: {
-        base: 'text-center',
-        increment: 'inset-y-0 inset-e-0 pe-1',
-        decrement: 'inset-y-0 inset-s-0 ps-1'
+        input: 'text-center',
+        increment: 'pe-1',
+        decrement: `order-first ps-1 before:content-['x'] before:w-0 before:invisible`
       },
+      // Both buttons share a column at the end. Each is taller than its half of the
+      // box, so a negative margin lets them overlap without making the box taller.
       vertical: {
-        increment: 'top-0 inset-e-0 pe-1 [&>button]:py-0 scale-80',
-        decrement: 'bottom-0 inset-e-0 pe-1 [&>button]:py-0 scale-80'
+        root: 'inline-grid grid-cols-[1fr_auto] grid-rows-2',
+        input: 'row-span-2',
+        increment: 'col-start-2 row-start-1 self-start mb-[calc(var(--ui-control-py)-var(--ui-control-icon)/2)] pe-1 [&>button]:py-0 scale-80',
+        decrement: 'col-start-2 row-start-2 self-end mt-[calc(var(--ui-control-py)-var(--ui-control-icon)/2)] pe-1 [&>button]:py-0 scale-80'
       }
     },
     highlight: {
@@ -61,20 +75,20 @@ export default defineTheme({
     fixed: {
       false: ''
     },
-    // Room for the button: the padding, the icon and the gap
+    // Next to a button, the input gives up its padding: the button brings its own
     increment: {
-      true: { base: 'pe-[calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]' },
+      true: { input: 'pe-0' },
       false: ''
     },
     decrement: {
-      true: { base: 'ps-[calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]' },
+      true: { input: 'ps-0' },
       false: ''
     }
   },
   compoundVariants: [{
     orientation: 'horizontal',
     decrement: false,
-    class: { base: 'text-start' }
+    class: { input: 'text-start' }
   }, {
     fixed: false,
     size: 'xs',

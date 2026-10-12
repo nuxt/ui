@@ -1,11 +1,19 @@
-import input from './input-legacy'
-import { fieldGroupVariant, fieldGroupVariantWithRoot } from './field-group'
+import input, { replaceFocus } from './field'
+import { fieldGroupVariant } from './field-group'
 import { extendTheme } from '../utils/theme'
 
 export default extendTheme(input, {
   slots: {
+    // The box: the root element without `multiple`, the anchor with it
     base: () => 'rounded-md text-strong transition-colors',
-    trailing: 'group absolute inset-y-0 inset-e-0 flex items-center disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none',
+    // The native input without `multiple`. It carries the padding of the size, so it fills the box.
+    input: 'w-full min-w-0 flex-1 border-0 bg-transparent outline-none placeholder:text-faint px-(--ui-control-px) py-(--ui-control-py) disabled:cursor-not-allowed',
+    // The tags wrap in their own container, so the leading and the trailing stay
+    // centered on the box whatever its number of lines
+    tags: 'flex flex-wrap items-center flex-1 min-w-0 gap-(--ui-control-gap)',
+    // After the input in the DOM, so the input keeps the first tab stop
+    leading: `order-first flex items-center before:content-['x'] before:w-0 before:invisible`,
+    trailing: 'group ms-auto flex items-center disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none',
     trailingClear: 'p-0',
     arrow: 'fill-bg stroke-default',
     content: 'max-h-[min(15rem,var(--reka-combobox-content-available-height,15rem))] w-(--reka-combobox-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-combobox-content-transform-origin) pointer-events-auto flex flex-col',
@@ -30,13 +38,18 @@ export default extendTheme(input, {
     tagsInput: 'flex-1 border-0 bg-transparent placeholder:text-faint focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
   },
   variants: {
-    // `root` and `base` are the same element in `multiple` mode, so the
-    // `group-*` rounding utilities inherited from `input` never match there.
-    // Keep the `group` marker here and pick the right rounding in
-    // `compoundVariants` depending on `multiple`.
-    fieldGroup: {
-      horizontal: () => ({ root: fieldGroupVariantWithRoot.fieldGroup.horizontal.root }),
-      vertical: () => ({ root: fieldGroupVariantWithRoot.fieldGroup.vertical.root })
+    // The box is a direct child of the group in both modes
+    ...fieldGroupVariant,
+    // The box holds what takes the focus, it never has it itself
+    variant: (prev: typeof input.variants.variant) => Object.fromEntries(
+      Object.entries(prev).map(([key, value]) => [key, { base: replaceFocus(value.base) }])
+    ) as typeof prev,
+    // Next to a leading or a trailing, the padding of the input is the gap to it
+    leading: {
+      true: { input: 'ps-(--ui-control-gap)' }
+    },
+    trailing: {
+      true: { input: 'pe-(--ui-control-gap)' }
     },
     virtualize: {
       true: {
@@ -46,12 +59,14 @@ export default extendTheme(input, {
         viewport: 'divide-y divide-default'
       }
     },
+    // Without `multiple`, the box has no padding: the input, the leading and the
+    // trailing bring their own. The box dims as a whole when the input is disabled.
     multiple: {
-      true: {
-        root: 'flex-wrap'
-      },
+      true: '',
       false: {
-        base: 'w-full border-0 placeholder:text-faint disabled:cursor-not-allowed disabled:opacity-75'
+        base: 'p-0 gap-0 has-[>input:disabled]:cursor-not-allowed has-[>input:disabled]:opacity-75',
+        leading: 'ps-(--ui-control-px)',
+        trailing: 'pe-(--ui-control-px) disabled:opacity-100'
       }
     },
     size: {
@@ -106,34 +121,5 @@ export default extendTheme(input, {
         empty: 'p-3 text-base'
       }
     }
-  },
-  compoundVariants: [{
-    multiple: false,
-    fieldGroup: 'horizontal',
-    class: { base: fieldGroupVariantWithRoot.fieldGroup.horizontal.base }
-  }, {
-    multiple: false,
-    fieldGroup: 'vertical',
-    class: { base: fieldGroupVariantWithRoot.fieldGroup.vertical.base }
-  }, {
-    multiple: true,
-    fieldGroup: 'horizontal',
-    class: fieldGroupVariant.fieldGroup.horizontal
-  }, {
-    multiple: true,
-    fieldGroup: 'vertical',
-    class: fieldGroupVariant.fieldGroup.vertical
-  }, {
-    variant: 'soft',
-    multiple: true,
-    class: { base: 'has-focus:bg-soft has-focus-visible:outline-3' }
-  }, {
-    variant: 'ghost',
-    multiple: true,
-    class: { base: 'has-focus:bg-soft has-focus-visible:outline-3' }
-  }, {
-    multiple: true,
-    variant: ['outline', 'subtle'],
-    class: { base: 'has-focus-visible:outline-3 has-focus-visible:ring-accent' }
-  }]
+  }
 })

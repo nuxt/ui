@@ -237,7 +237,7 @@ export interface InputMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false">
-import { computed, ref, useAttrs, useTemplateRef, toRef, onMounted, onScopeDispose, toRaw, nextTick, watch } from 'vue'
+import { computed, ref, useAttrs, useTemplateRef, toRef, onMounted, onScopeDispose, toRaw, nextTick, watch, shallowRef, watchPostEffect } from 'vue'
 import { TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, ComboboxRoot, ComboboxInput, ComboboxAnchor, ComboboxEmpty, ComboboxTrigger, ComboboxCancel, ComboboxGroup, ComboboxLabel, ComboboxContent, ComboboxVirtualizer, ComboboxItem, ComboboxItemIndicator, ComboboxSeparator, ComboboxArrow, ComboboxPortal, AutocompleteRoot, AutocompleteInput, AutocompleteAnchor, AutocompleteEmpty, AutocompleteTrigger, AutocompleteCancel, AutocompleteGroup, AutocompleteLabel, AutocompleteContent, AutocompleteVirtualizer, AutocompleteItem, AutocompleteItemIndicator, AutocompleteSeparator, AutocompleteArrow, AutocompletePortal } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
@@ -251,6 +251,7 @@ import { useFilter } from '../composables/useFilter'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
 import { compare, get, getDisplayValue, isArrayOfArray, looseToNumber } from '../utils'
+import { isFieldClick } from '../utils/field'
 import { getEstimateSize } from '../utils/virtualizer'
 import { tv } from '../utils/tv'
 import { getAvatarSize, getItemSize } from '../utils/size'
@@ -301,13 +302,13 @@ const attrs = useAttrs()
 
 // In multiple non-autocomplete mode `Root` is `as-child`: it renders no element and
 // merges its attributes onto `Anchor`, where the child's own `data-slot` wins the
-// merge. `Anchor` is then the effective root, so it reads the caller's `data-slot`
-// itself, and is named after the component like any outermost element. In every
-// other mode `Root` renders its own element (and receives the caller's value
-// through its own binding), so `Anchor` keeps its `base` label.
+// merge. `Anchor` is then the box, so it reads the caller's `data-slot` itself, and
+// is named after the component like any outermost element. In every other mode
+// `Root` renders the box and `Anchor` merges onto the input, which the menu would
+// then be aligned to: `reference` points it back at the box.
 const baseDataSlot = computed(() => isMultiple.value
   ? ((attrs['data-slot'] as string | undefined) ?? 'input-menu')
-  : 'input-menu-base')
+  : undefined)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as ComboboxArrowProps)
@@ -603,6 +604,19 @@ function onTagsInputKeydown(event: KeyboardEvent) {
 const viewportRef = useTemplateRef('viewportRef')
 
 const comboboxRootRef = useTemplateRef('comboboxRootRef')
+// Without `multiple`, the box is the parent of the input
+const rootElement = shallowRef<HTMLElement>()
+watchPostEffect(() => {
+  rootElement.value = isMultiple.value ? undefined : (inputRef.value?.$el?.parentElement ?? undefined)
+})
+
+// The box looks like the input, so a click on its padding, on an icon or on plain
+// leading content goes to the input. A tag or a control in there keeps its own click.
+function onRootClick(event: MouseEvent) {
+  if (isFieldClick(event)) {
+    inputRef.value?.$el?.focus()
+  }
+}
 
 // reka-ui only re-highlights the first item when the list goes from empty to non-empty.
 // With `create-item`, the create item is always registered so the count never drops to 0,
@@ -704,13 +718,14 @@ defineExpose({
     :name="name"
     :disabled="disabled"
     :data-slot="($attrs['data-slot'] as string | undefined) ?? 'input-menu'"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :class="ui.root({ class: [!isMultiple && ui.base({ class: props.ui?.base }), props.ui?.root, props.class] })"
     :as-child="isMultiple"
     ignore-filter
+    @click="onRootClick"
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
   >
-    <Component.Anchor :as-child="!isMultiple" :data-slot="baseDataSlot" :class="ui.base({ class: props.ui?.base })">
+    <Component.Anchor :as-child="!isMultiple" :reference="isMultiple ? undefined : rootElement" :data-slot="baseDataSlot" :class="isMultiple ? ui.base({ class: props.ui?.base }) : undefined">
       <TagsInputRoot
         v-if="isMultiple"
         v-slot="{ modelValue: tags }"
@@ -718,7 +733,8 @@ defineExpose({
         :disabled="disabled"
         :required="props.required"
         delimiter=""
-        as-child
+        data-slot="input-menu-tags"
+        :class="ui.tags({ class: props.ui?.tags })"
         @blur="onBlur"
         @focus="onFocus"
         @remove-tag="onRemoveTag($event, modelValue as GetModelValue<T, VK, true, ExcludeItem>)"
@@ -756,7 +772,8 @@ defineExpose({
         :id="id"
         ref="inputRef"
         v-bind="{ ...(!isAutocomplete ? { displayValue } : {}), ...$attrs, ...ariaAttrs }"
-        data-slot="input-menu-base"
+        data-slot="input-menu-input"
+        :class="ui.input({ class: props.ui?.input })"
         :type="props.type"
         :placeholder="props.placeholder"
         :required="props.required"

@@ -136,6 +136,7 @@ const ui = computed(() => tv(theme, overrides.value)({
   size: size.value,
   highlight: highlight.value,
   fixed: props.fixed,
+  disabled: disabled.value,
   orientation: props.orientation,
   fieldGroup: orientation.value,
   increment: props.orientation === 'vertical' ? (!!props.increment || !!props.decrement) : !!props.increment,
@@ -205,7 +206,7 @@ defineExpose({
     :max="props.max"
     :step="props.step"
     :data-slot="($attrs['data-slot'] as string | undefined) ?? 'input-number'"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :class="ui.root({ class: [ui.base({ class: props.ui?.base }), props.ui?.root, props.class] })"
     :name="name"
     :disabled="disabled"
     @update:model-value="(val) => onUpdate(val as ApplyModifiers<T, Mod>)"
@@ -215,8 +216,8 @@ defineExpose({
       ref="inputRef"
       :placeholder="props.placeholder"
       :required="props.required"
-      data-slot="input-number-base"
-      :class="ui.base({ class: props.ui?.base })"
+      data-slot="input-number-input"
+      :class="ui.input({ class: props.ui?.input })"
       @blur="onBlur"
       @focus="emitFormFocus"
     />

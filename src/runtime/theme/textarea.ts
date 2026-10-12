@@ -4,7 +4,7 @@ import { extendTheme } from '../utils/theme'
 export default extendTheme(input, {
   slots: {
     root: 'relative inline-flex items-start',
-    leading: 'order-first flex items-start',
+    leading: `order-first flex items-start before:content-['x'] before:w-0 before:invisible`,
     trailing: 'flex items-start'
   },
   variants: {

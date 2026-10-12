@@ -2,8 +2,10 @@ import { colorVariant } from './color'
 import { fieldGroupVariantWithRoot } from './field-group'
 import { defineTheme } from '../utils/theme'
 
-// Frozen copy of the Input theme before its box moved to the root, for the
-// fields that still extend it. Goes away once each of them is migrated.
+// What the fields share: the tokens and text size of each `size`, the look of
+// each `variant`, and a leading and a trailing in the flow of the box. Here the
+// box is `base` and takes the focus itself, like the trigger of a Select. Input
+// and Textarea wrap a native element instead and have their own theme.
 
 // The focus classes below, for a container whose segments or items take the focus
 // (InputDate, InputTime, InputTags), spelled out so Tailwind finds them
@@ -22,10 +24,14 @@ export default defineTheme({
   slots: {
     root: 'relative inline-flex items-center',
     base: 'w-full rounded-md border-0 appearance-none text-strong placeholder:text-faint disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
-    leading: 'absolute inset-y-0 inset-s-0 flex items-center',
+    // The box sits on a line of text by its first item. An invisible character
+    // gives the leading the baseline of the text next to it, so an icon there
+    // doesn't move the box.
+    leading: `flex items-center before:content-['x'] before:w-0 before:invisible`,
     leadingIcon: 'shrink-0 text-faint',
     leadingAvatar: 'shrink-0',
-    trailing: 'absolute inset-y-0 inset-e-0 flex items-center',
+    // At the end of the box, whatever sits between the two
+    trailing: 'ms-auto flex items-center',
     trailingIcon: 'shrink-0 text-faint'
   },
   variants: {
@@ -35,40 +41,30 @@ export default defineTheme({
       xs: {
         root: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)]',
         base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm/4',
-        leading: 'ps-(--ui-control-px)',
-        trailing: 'pe-(--ui-control-px)',
         leadingIcon: 'size-(--ui-control-icon)',
         trailingIcon: 'size-(--ui-control-icon)'
       },
       sm: {
         root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)]',
         base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm/4',
-        leading: 'ps-(--ui-control-px)',
-        trailing: 'pe-(--ui-control-px)',
         leadingIcon: 'size-(--ui-control-icon)',
         trailingIcon: 'size-(--ui-control-icon)'
       },
       md: {
         root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)]',
         base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base/5',
-        leading: 'ps-(--ui-control-px)',
-        trailing: 'pe-(--ui-control-px)',
         leadingIcon: 'size-(--ui-control-icon)',
         trailingIcon: 'size-(--ui-control-icon)'
       },
       lg: {
         root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)]',
         base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base/5',
-        leading: 'ps-(--ui-control-px)',
-        trailing: 'pe-(--ui-control-px)',
         leadingIcon: 'size-(--ui-control-icon)',
         trailingIcon: 'size-(--ui-control-icon)'
       },
       xl: {
         root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)]',
         base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base',
-        leading: 'ps-(--ui-control-px)',
-        trailing: 'pe-(--ui-control-px)',
         leadingIcon: 'size-(--ui-control-icon)',
         trailingIcon: 'size-(--ui-control-icon)'
       }
@@ -81,12 +77,11 @@ export default defineTheme({
       none: { base: 'bg-transparent focus:outline-none' }
     },
     color: colorVariant({ root: '' }),
-    // Room for the icon: the padding, the icon and the gap
     leading: {
-      true: { base: 'ps-[calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]' }
+      true: ''
     },
     trailing: {
-      true: { base: 'pe-[calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]' }
+      true: ''
     },
     // The component turns it off on the trailing icon when the leading one is the loading icon
     loading: {

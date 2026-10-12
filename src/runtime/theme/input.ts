@@ -1,4 +1,5 @@
 import { colorVariant } from './color'
+import field from './field'
 import { defineTheme } from '../utils/theme'
 
 // The box is the root element, styled by the `root` and `base` slots, and has no
@@ -15,7 +16,9 @@ export default defineTheme({
     base: 'rounded-md cursor-text text-strong has-[>:autofill]:bg-accent-soft has-[>:disabled]:cursor-not-allowed has-[>:disabled]:opacity-75 transition-colors',
     input: 'w-full min-w-0 flex-1 border-0 appearance-none bg-transparent bg-clip-text outline-none placeholder:text-faint disabled:cursor-not-allowed',
     // After the input in the DOM, so the input keeps the first tab stop
-    leading: 'order-first flex items-center',
+    // The box sits on a line of text by its first item: an invisible character
+    // gives the leading the baseline of the text, so an icon doesn't move the box
+    leading: `order-first flex items-center before:content-['x'] before:w-0 before:invisible`,
     leadingIcon: 'shrink-0 text-faint',
     leadingAvatar: 'shrink-0',
     trailing: 'flex items-center',
@@ -28,7 +31,7 @@ export default defineTheme({
     },
     size: {
       xs: {
-        root: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)]',
+        root: field.variants.size.xs.root,
         base: 'text-sm/4',
         input: 'px-(--ui-control-px) py-(--ui-control-py)',
         leading: 'ps-(--ui-control-px)',
@@ -37,7 +40,7 @@ export default defineTheme({
         trailingIcon: 'size-(--ui-control-icon)'
       },
       sm: {
-        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)]',
+        root: field.variants.size.sm.root,
         base: 'text-sm/4',
         input: 'px-(--ui-control-px) py-(--ui-control-py)',
         leading: 'ps-(--ui-control-px)',
@@ -46,7 +49,7 @@ export default defineTheme({
         trailingIcon: 'size-(--ui-control-icon)'
       },
       md: {
-        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)]',
+        root: field.variants.size.md.root,
         base: 'text-base/5',
         input: 'px-(--ui-control-px) py-(--ui-control-py)',
         leading: 'ps-(--ui-control-px)',
@@ -55,7 +58,7 @@ export default defineTheme({
         trailingIcon: 'size-(--ui-control-icon)'
       },
       lg: {
-        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)]',
+        root: field.variants.size.lg.root,
         base: 'text-base/5',
         input: 'px-(--ui-control-px) py-(--ui-control-py)',
         leading: 'ps-(--ui-control-px)',
@@ -64,7 +67,7 @@ export default defineTheme({
         trailingIcon: 'size-(--ui-control-icon)'
       },
       xl: {
-        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)]',
+        root: field.variants.size.xl.root,
         base: 'text-base',
         input: 'px-(--ui-control-px) py-(--ui-control-py)',
         leading: 'ps-(--ui-control-px)',

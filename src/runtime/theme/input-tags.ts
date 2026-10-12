@@ -1,11 +1,15 @@
-import input, { replaceFocus } from './input-legacy'
+import input, { replaceFocus } from './field'
 import { fieldGroupVariant } from './field-group'
 import { extendTheme } from '../utils/theme'
 
 export default extendTheme(input, {
   slots: {
-    root: (prev: string) => [prev, 'flex-wrap'],
     base: () => 'rounded-md text-strong transition-colors',
+    // The tags wrap in their own container, so the leading and the trailing stay
+    // centered on the box whatever its number of lines
+    tags: 'flex flex-wrap items-center flex-1 min-w-0 gap-(--ui-control-gap)',
+    // After the tags in the DOM, so the input keeps the first tab stop
+    leading: `order-first flex items-center before:content-['x'] before:w-0 before:invisible`,
     item: 'px-1.5 py-0.5 rounded-sm font-medium inline-flex items-center gap-0.5 ring ring-inset ring-strong bg-soft text-default data-disabled:cursor-not-allowed data-disabled:opacity-75 wrap-anywhere data-[state=active]:bg-strong',
     itemText: '',
     itemDelete: 'inline-flex items-center rounded-xs text-faint hover:text-default hover:bg-strong disabled:pointer-events-none transition-colors',
