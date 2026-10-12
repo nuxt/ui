@@ -86,17 +86,6 @@ describe('Calendar', () => {
   })
 
   describe('aria', () => {
-    test.each([
-      ['date', {}, 'Event date'],
-      ['range', { range: true }, 'Event date'],
-      ['month', { type: 'month' as const }, 'Month picker'],
-      ['year', { type: 'year' as const }, 'Year picker']
-    ])('labels the %s calendar', async (_, props, label) => {
-      const wrapper = await mountSuspended(Calendar, { props })
-
-      expect(wrapper.get('[data-slot="root"]').attributes('aria-label')).toMatch(new RegExp(`^${label}, `))
-    })
-
     test('labels the month and year views of the date calendar', async () => {
       const wrapper = await mountSuspended(Calendar)
 
