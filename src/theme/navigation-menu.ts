@@ -11,6 +11,7 @@ export default (options: Required<ModuleOptions>) => ({
     linkLeadingAvatar: 'shrink-0',
     linkLeadingAvatarSize: '2xs',
     linkLeadingChipSize: 'sm',
+    linkWrapper: 'relative flex items-center gap-1.5 pe-2.5',
     linkTrailing: 'group ms-auto inline-flex gap-1.5 items-center',
     linkTrailingBadge: 'shrink-0',
     linkTrailingBadgeSize: 'sm',
@@ -101,6 +102,12 @@ export default (options: Required<ModuleOptions>) => ({
     },
     level: {
       true: ''
+    },
+    trailingTrigger: {
+      true: {
+        link: 'static flex-1 min-w-0 pe-0',
+        linkTrailing: 'rounded-sm focus-visible:outline-3'
+      }
     },
     collapsed: {
       true: ''
@@ -246,6 +253,18 @@ export default (options: Required<ModuleOptions>) => ({
     class: {
       link: 'text-highlighted',
       linkLeadingIcon: 'text-highlighted group-data-[state=open]:text-highlighted'
+    }
+  }, ...(options.theme.colors || []).map((color: string) => ({
+    color,
+    trailingTrigger: true,
+    class: {
+      linkTrailing: `outline-${color}/25`
+    }
+  })), {
+    color: 'neutral',
+    trailingTrigger: true,
+    class: {
+      linkTrailing: 'outline-inverted/25'
     }
   }, ...(options.theme.colors || []).map((highlightColor: string) => ({
     highlightColor,

@@ -143,9 +143,17 @@ describe('NavigationMenu', () => {
       }
     })
 
-    expect(wrapper.find('[data-slot="link"]').element.tagName).toBe('A')
+    const link = wrapper.find('[data-slot="link"]')
+    const trigger = wrapper.find('[data-slot="linkTrailing"]')
 
-    await wrapper.find('[data-slot="linkTrailing"]').trigger('click')
+    expect(link.element.tagName).toBe('A')
+    expect(trigger.element.tagName).toBe('BUTTON')
+    expect(trigger.attributes('aria-label')).toBe('Group')
+    expect(trigger.attributes('aria-expanded')).toBe('false')
+    expect(link.element.contains(trigger.element)).toBe(false)
+
+    await trigger.trigger('click')
+    expect(trigger.attributes('aria-expanded')).toBe('true')
     expect(wrapper.find('[data-slot="content"]').attributes('data-state')).toBe('open')
   })
 
@@ -170,6 +178,21 @@ describe('NavigationMenu', () => {
       props: {
         items,
         modelValue: 'item-0'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  it('passes accessibility tests with orientation vertical', async () => {
+    const wrapper = await mountSuspended(NavigationMenu, {
+      props: {
+        orientation: 'vertical',
+        items: [
+          { label: 'Group', children: [{ label: 'Child', to: '/child' }] },
+          { label: 'Link', to: '/link', badge: 4, defaultOpen: true, children: [{ label: 'Child', to: '/child' }] },
+          { label: 'Label', type: 'label' as const, children: [{ label: 'Child', to: '/child' }] }
+        ]
       }
     })
 

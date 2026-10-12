@@ -72,7 +72,7 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
   open?: boolean
   onSelect?: (e: Event) => void
   class?: any
-  ui?: Partial<Pick<NavigationMenu['slots'], 'item' | 'linkLeadingAvatarSize' | 'linkLeadingAvatar' | 'linkLeadingIcon' | 'linkLeadingChipSize' | 'linkLabel' | 'linkLabelExternalIcon' | 'linkTrailing' | 'linkTrailingBadgeSize' | 'linkTrailingBadge' | 'linkTrailingIcon' | 'label' | 'link' | 'content' | 'childList' | 'childLabel' | 'childItem' | 'childLink' | 'childLinkIcon' | 'childLinkWrapper' | 'childLinkLabel' | 'childLinkLabelExternalIcon' | 'childLinkDescription'>>
+  ui?: Partial<Pick<NavigationMenu['slots'], 'item' | 'linkLeadingAvatarSize' | 'linkLeadingAvatar' | 'linkLeadingIcon' | 'linkLeadingChipSize' | 'linkLabel' | 'linkLabelExternalIcon' | 'linkWrapper' | 'linkTrailing' | 'linkTrailingBadgeSize' | 'linkTrailingBadge' | 'linkTrailingIcon' | 'label' | 'link' | 'content' | 'childList' | 'childLabel' | 'childItem' | 'childLink' | 'childLinkIcon' | 'childLinkWrapper' | 'childLinkLabel' | 'childLinkLabelExternalIcon' | 'childLinkDescription'>>
   [key: string]: any
 }
 
@@ -292,7 +292,15 @@ const viewportProps = toRef(() => props.viewport)
 const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : props.tooltip, { ...(props.orientation === 'vertical' && { delayDuration: 0, content: { side: 'right' } }) }) as TooltipProps)
 const popoverProps = toRef(() => defu(typeof props.popover === 'boolean' ? {} : props.popover, { mode: 'hover', content: { side: 'right', align: 'start', alignOffset: 2 } }) as PopoverProps)
 
-const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, active?: boolean, trailingTrigger?: boolean }>()
+const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, active?: boolean, trailing?: boolean, trailingTrigger?: boolean }>()
+const [DefineLinkTrailingTemplate, ReuseLinkTrailingTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, active?: boolean, trigger?: boolean }>({
+  props: {
+    item: Object,
+    index: Number,
+    active: Boolean,
+    trigger: Boolean
+  }
+})
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, level?: number, listIndex?: number }>({
   props: {
     item: Object,
@@ -339,16 +347,9 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0, listInd
 
 const trailingClicks = new WeakSet<Event>()
 
-function onLinkTrailingClick(e: Event, item: NavigationMenuItem, trailingTrigger?: boolean) {
-  if (!item.children?.length) {
-    return
-  }
-
-  if (props.orientation === 'horizontal') {
+function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
+  if (props.orientation === 'horizontal' && item.children?.length) {
     trailingClicks.add(e)
-  } else if (props.orientation === 'vertical' && !props.collapsed && trailingTrigger) {
-    e.preventDefault()
-    e.stopPropagation()
   }
 }
 
@@ -362,7 +363,33 @@ function onLinkClick(e: Event) {
 </script>
 
 <template>
-  <DefineLinkTemplate v-slot="{ item, active, index, trailingTrigger }">
+  <DefineLinkTrailingTemplate v-slot="{ item, active, index, trigger }">
+    <component
+      :is="trigger && item.children?.length ? AccordionTrigger : 'span'"
+      v-if="(item.badge || item.badge === 0) || (props.orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) || (props.orientation === 'vertical' && item.children?.length) || item.trailingIcon || !!slots[(item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof NavigationMenuSlots<T>]"
+      :aria-label="trigger && item.children?.length ? get(item, props.labelKey as string) : undefined"
+      data-slot="linkTrailing"
+      :class="ui.linkTrailing({ class: [props.ui?.linkTrailing, item.ui?.linkTrailing], trailingTrigger: !!trigger && !!item.children?.length })"
+      @click="(e: Event) => onLinkTrailingClick(e, item)"
+    >
+      <slot :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof NavigationMenuSlots<T>)" :item="item" :active="active" :index="index" :ui="ui">
+        <UBadge
+          v-if="item.badge || item.badge === 0"
+          color="neutral"
+          variant="outline"
+          :size="((item.ui?.linkTrailingBadgeSize || props.ui?.linkTrailingBadgeSize || ui.linkTrailingBadgeSize()) as BadgeProps['size'])"
+          v-bind="(typeof item.badge === 'string' || typeof item.badge === 'number') ? { label: item.badge } : item.badge"
+          data-slot="linkTrailingBadge"
+          :class="ui.linkTrailingBadge({ class: [props.ui?.linkTrailingBadge, item.ui?.linkTrailingBadge] })"
+        />
+
+        <UIcon v-if="(props.orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) || (props.orientation === 'vertical' && item.children?.length)" :name="item.trailingIcon || props.trailingIcon || appConfig.ui.icons.chevronDown" data-slot="linkTrailingIcon" :class="ui.linkTrailingIcon({ class: [props.ui?.linkTrailingIcon, item.ui?.linkTrailingIcon], active })" />
+        <UIcon v-else-if="item.trailingIcon" :name="item.trailingIcon" data-slot="linkTrailingIcon" :class="ui.linkTrailingIcon({ class: [props.ui?.linkTrailingIcon, item.ui?.linkTrailingIcon], active })" />
+      </slot>
+    </component>
+  </DefineLinkTrailingTemplate>
+
+  <DefineLinkTemplate v-slot="{ item, active, index, trailing, trailingTrigger }">
     <slot :name="((item.slot || 'item') as keyof NavigationMenuSlots<T>)" :item="item" :index="index" :active="active" :ui="ui">
       <slot :name="((item.slot ? `${item.slot}-leading` : 'item-leading') as keyof NavigationMenuSlots<T>)" :item="item" :active="active" :index="index" :ui="ui">
         <UAvatar v-if="item.avatar" :size="((item.ui?.linkLeadingAvatarSize || props.ui?.linkLeadingAvatarSize || ui.linkLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="linkLeadingAvatar" :class="ui.linkLeadingAvatar({ class: [props.ui?.linkLeadingAvatar, item.ui?.linkLeadingAvatar], active, disabled: !!item.disabled })" />
@@ -390,29 +417,7 @@ function onLinkClick(e: Event) {
         <UIcon v-if="item.target === '_blank' && props.externalIcon !== false" :name="typeof props.externalIcon === 'string' ? props.externalIcon : appConfig.ui.icons.external" data-slot="linkLabelExternalIcon" :class="ui.linkLabelExternalIcon({ class: [props.ui?.linkLabelExternalIcon, item.ui?.linkLabelExternalIcon], active })" />
       </span>
 
-      <component
-        :is="props.orientation === 'vertical' && item.children?.length && !props.collapsed && trailingTrigger ? AccordionTrigger : 'span'"
-        v-if="(item.badge || item.badge === 0) || (props.orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) || (props.orientation === 'vertical' && item.children?.length) || item.trailingIcon || !!slots[(item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof NavigationMenuSlots<T>]"
-        :as="props.orientation === 'vertical' && item.children?.length && !props.collapsed && trailingTrigger ? 'span' : undefined"
-        data-slot="linkTrailing"
-        :class="ui.linkTrailing({ class: [props.ui?.linkTrailing, item.ui?.linkTrailing] })"
-        @click="(e: Event) => onLinkTrailingClick(e, item, trailingTrigger)"
-      >
-        <slot :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof NavigationMenuSlots<T>)" :item="item" :active="active" :index="index" :ui="ui">
-          <UBadge
-            v-if="item.badge || item.badge === 0"
-            color="neutral"
-            variant="outline"
-            :size="((item.ui?.linkTrailingBadgeSize || props.ui?.linkTrailingBadgeSize || ui.linkTrailingBadgeSize()) as BadgeProps['size'])"
-            v-bind="(typeof item.badge === 'string' || typeof item.badge === 'number') ? { label: item.badge } : item.badge"
-            data-slot="linkTrailingBadge"
-            :class="ui.linkTrailingBadge({ class: [props.ui?.linkTrailingBadge, item.ui?.linkTrailingBadge] })"
-          />
-
-          <UIcon v-if="(props.orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) || (props.orientation === 'vertical' && item.children?.length)" :name="item.trailingIcon || props.trailingIcon || appConfig.ui.icons.chevronDown" data-slot="linkTrailingIcon" :class="ui.linkTrailingIcon({ class: [props.ui?.linkTrailingIcon, item.ui?.linkTrailingIcon], active })" />
-          <UIcon v-else-if="item.trailingIcon" :name="item.trailingIcon" data-slot="linkTrailingIcon" :class="ui.linkTrailingIcon({ class: [props.ui?.linkTrailingIcon, item.ui?.linkTrailingIcon], active })" />
-        </slot>
-      </component>
+      <ReuseLinkTrailingTemplate v-if="trailing !== false" :item="item" :active="active" :index="index" :trigger="trailingTrigger" />
     </slot>
   </DefineLinkTemplate>
 
@@ -427,8 +432,18 @@ function onLinkClick(e: Event) {
         <ReuseLinkTemplate :item="item" :index="index" :trailing-trigger="true" />
       </div>
       <ULink v-else-if="item.type !== 'label'" v-slot="{ active, ...slotProps }" v-bind="(props.orientation === 'vertical' && item.children?.length && !props.collapsed && item.type === 'trigger') ? {} : pickLinkProps(item as Omit<NavigationMenuItem, 'type'>)" custom>
+        <div v-if="props.orientation === 'vertical' && item.children?.length && !props.collapsed && (slotProps as any).href" data-slot="linkWrapper" :class="ui.linkWrapper({ class: [props.ui?.linkWrapper, item.ui?.linkWrapper] })">
+          <NavigationMenuLink as-child :active="active || item.active" @select="item.onSelect">
+            <ULinkBase v-bind="slotProps" data-slot="link" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0, trailingTrigger: true })">
+              <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" :trailing="false" />
+            </ULinkBase>
+          </NavigationMenuLink>
+
+          <ReuseLinkTrailingTemplate :item="item" :active="active || item.active" :index="index" trigger />
+        </div>
         <component
           :is="(props.orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) ? NavigationMenuTrigger : ((props.orientation === 'vertical' && item.children?.length && !props.collapsed && !(slotProps as any).href) ? AccordionTrigger : NavigationMenuLink)"
+          v-else
           as-child
           :active="active || item.active"
           :disabled="item.disabled"
@@ -436,7 +451,7 @@ function onLinkClick(e: Event) {
         >
           <UPopover v-if="props.orientation === 'vertical' && props.collapsed && item.children?.length && (!!props.popover || !!item.popover)" v-bind="{ ...popoverProps, ...(typeof item.popover === 'boolean' ? {} : item.popover || {}) }" :ui="{ content: ui.content({ class: [props.ui?.content, item.ui?.content] }) }">
             <ULinkBase v-bind="slotProps" data-slot="link" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })">
-              <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" :trailing-trigger="!!(slotProps as any).href" />
+              <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" />
             </ULinkBase>
 
             <template #content="{ close }">
@@ -473,11 +488,11 @@ function onLinkClick(e: Event) {
           </UPopover>
           <UTooltip v-else-if="(props.orientation === 'vertical' && props.collapsed && (!!props.tooltip || !!item.tooltip)) || (props.orientation === 'horizontal' && !!item.tooltip)" :text="get(item, props.labelKey as string)" v-bind="{ ...tooltipProps, ...(typeof item.tooltip === 'boolean' ? {} : item.tooltip || {}) }">
             <ULinkBase v-bind="slotProps" data-slot="link" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })" @click="onLinkClick">
-              <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" :trailing-trigger="!!(slotProps as any).href" />
+              <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" />
             </ULinkBase>
           </UTooltip>
           <ULinkBase v-else v-bind="slotProps" data-slot="link" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: props.orientation === 'horizontal' || level > 0 })" @click="onLinkClick">
-            <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" :trailing-trigger="!!(slotProps as any).href" />
+            <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" />
           </ULinkBase>
         </component>
 
