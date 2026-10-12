@@ -149,7 +149,7 @@ import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { defu } from 'defu'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
-import { get } from '../utils'
+import { get, resolveAs } from '../utils'
 import { getEstimateSize } from '../utils/virtualizer'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -171,13 +171,7 @@ const appConfig = useAppConfig() as Tree['AppConfig']
 const rootProps = useForwardProps(reactivePick(props, 'items', 'multiple', 'expanded', 'disabled', 'propagateSelect', 'bubbleSelect', 'loop'), emits)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const as = computed(() => {
-  if (typeof props.as === 'string' || typeof props.as?.render === 'function') {
-    return { root: props.as, link: 'button' }
-  }
-
-  return defu(props.as, { root: 'ul', link: 'button' })
-})
+const as = computed(() => resolveAs(props.as, { root: 'ul', link: 'button' }))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const nested = computed(() => props.virtualize ? false : props.nested)
