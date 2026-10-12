@@ -26,7 +26,7 @@ export interface FooterColumn<T extends FooterColumnLink = FooterColumnLink> {
 export interface FooterColumnsProps<T extends FooterColumnLink = FooterColumnLink> {
   /**
    * The element or component this component should render as.
-   * @defaultValue 'div'
+   * @defaultValue 'nav'
    */
   as?: any | { root?: any, label?: any }
   class?: any
