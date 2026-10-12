@@ -151,7 +151,7 @@ catalog:
   vue-component-meta: ^3.3.13
   vue-component-type-helpers: ^3.3.13
   vue-router: ^5.4.0
-  vue-tsc: ^3.3.13
+  vue-tsc: ^3.3.11
   yup: ^1.7.1
   zod: ^4.6.5
 
