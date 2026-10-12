@@ -47,7 +47,7 @@ async function mountDir(appProps?: Pick<AppProps, 'dir' | 'locale' | 'toaster'>,
   return dir
 }
 
-async function mountInApp(appProps: AppProps, render: () => VNode) {
+async function mountInApp(appProps: Pick<AppProps, 'locale' | 'toaster'>, render: () => VNode) {
   const wrapper = await mountSuspended(defineComponent({
     render: () => h(UApp, appProps, render)
   }))
