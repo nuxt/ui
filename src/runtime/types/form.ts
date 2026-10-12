@@ -110,6 +110,7 @@ export interface FormFieldInjectedOptions<T> {
   description?: string
   help?: string
   ariaId: string
+  labelId?: string
 }
 
 export interface ValidateReturnSchema<T> {
