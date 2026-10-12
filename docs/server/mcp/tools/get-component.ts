@@ -1,7 +1,12 @@
+import { defineMcpTool } from '@nuxtjs/mcp-toolkit/server'
+import { useEvent } from 'nitropack/runtime'
+import { createError } from 'h3'
 import { z } from 'zod'
 import { kebabCase } from 'scule'
 import { queryCollection } from '@nuxt/content/server'
 import { getAgentDocument } from '#agent-discovery'
+import { normalizeComponentName } from '../../utils/normalizeComponentName'
+import { SITE_URL } from '../../utils/site'
 
 const sectionEnum = z.enum(['usage', 'examples', 'api', 'theme', 'changelog'])
 
@@ -14,7 +19,7 @@ export default defineMcpTool({
     openWorldHint: false
   },
   inputSchema: {
-    componentName: z.string().describe('The name of the component (PascalCase)'),
+    componentName: z.string().describe('Component name. Accepts `Button`, `UButton`, `button` or `u-button`.'),
     sections: z.array(sectionEnum).optional().describe('Specific sections to return: usage, examples, api, theme, changelog. If omitted, returns full documentation.')
   },
   inputExamples: [

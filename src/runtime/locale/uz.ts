@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Oldinga',
       prev: 'Ortga'
     },
+    chatMessages: {
+      autoScroll: 'Pastga aylantirish'
+    },
     chatPrompt: {
       placeholder: 'Bu yerda savolingizni yozing…'
     },
     chatPromptSubmit: {
-      label: 'Jo\'natish'
+      label: 'Jo\'natish',
+      reload: 'Qayta urinish',
+      stop: 'Generatsiyani to\'xtatish'
     },
     chatReasoning: {
       thinking: 'O\'ylayapti…',
@@ -111,6 +116,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Yopish'
+    },
+    pagination: {
+      first: 'Birinchi sahifa',
+      last: 'Oxirgi sahifa',
+      next: 'Keyingi sahifa',
+      page: '{page}-sahifa',
+      prev: 'Oldingi sahifa'
     },
     pricingTable: {
       caption: 'Narx planlarini taqqoslash'

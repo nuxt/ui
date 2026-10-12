@@ -1,4 +1,4 @@
-import { nextTick, watch } from 'vue'
+import { nextTick, reactive, watch } from 'vue'
 import { describe, expect, it, beforeEach, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { flushPromises } from '@vue/test-utils'
@@ -10,6 +10,7 @@ import { object, string, nonempty, refine } from 'superstruct'
 import { renderEach } from '../component-render'
 import { renderForm } from '../utils/form'
 import UForm from '../../src/runtime/components/Form.vue'
+import type { FormProps } from '../../src/runtime/components/Form.vue'
 
 describe('Form', () => {
   const props = { state: {} }
@@ -814,6 +815,75 @@ describe('Form', () => {
     expect(wrapper.html()).toContain('Error on field1')
     expect(wrapper.html()).toContain('Error on field2')
     expect(wrapper.html()).toContain('General error')
+  })
+
+  describe('state type', () => {
+    function defineFormProps<S extends z.ZodType<object, object>>(props: FormProps<S>) {
+      return props
+    }
+
+    it('accepts empty values', () => {
+      const schema = z.object({
+        file: z.file(),
+        count: z.number(),
+        date: z.date(),
+        items: z.array(z.object({ quantity: z.number(), price: z.number() })),
+        tags: z.array(z.string()).readonly(),
+        range: z.tuple([z.number(), z.number()])
+      })
+
+      expect(defineFormProps({
+        schema,
+        state: reactive({
+          file: null as File | null,
+          count: '' as number | '',
+          date: undefined as Date | undefined,
+          items: [{ quantity: undefined, price: null }],
+          tags: [] as readonly string[],
+          range: [0, ''] as [number, number | '']
+        })
+      })).toBeDefined()
+    })
+
+    it('accepts the fields of every member of a union', () => {
+      const schema = z.discriminatedUnion('type', [
+        z.object({ type: z.literal('a'), a: z.string() }),
+        z.object({ type: z.literal('b'), b: z.number() })
+      ])
+
+      expect(defineFormProps({
+        schema,
+        state: reactive({ type: 'a' as 'a' | 'b', a: '', b: undefined as number | undefined })
+      })).toBeDefined()
+    })
+
+    it('keeps the schema input on the validate param', () => {
+      const schema = z.object({ current: z.string(), new: z.string() })
+
+      function validate(state: Partial<z.input<typeof schema>>) {
+        return state.current === state.new ? [{ name: 'new', message: 'Must be different' }] : []
+      }
+
+      expect(defineFormProps({ schema, validate, state: reactive({ current: undefined, new: undefined }) })).toBeDefined()
+    })
+
+    it('rejects values of another shape', () => {
+      const schema = z.object({
+        name: z.string(),
+        count: z.number(),
+        items: z.array(z.object({ quantity: z.number() })),
+        pair: z.tuple([z.string(), z.number()])
+      })
+
+      // @ts-expect-error a string is not assignable to a number field
+      expect(defineFormProps({ schema, state: reactive({ count: 'abc' as string }) })).toBeDefined()
+      // @ts-expect-error an object is not assignable to a string field
+      expect(defineFormProps({ schema, state: reactive({ name: { first: '' } }) })).toBeDefined()
+      // @ts-expect-error an object is not assignable to an array field
+      expect(defineFormProps({ schema, state: reactive({ items: { quantity: 1 } }) })).toBeDefined()
+      // @ts-expect-error a number is not assignable to the string position of a tuple
+      expect(defineFormProps({ schema, state: reactive({ pair: [1, 1] as [number, number] }) })).toBeDefined()
+    })
   })
 
   describe('HTML5 validation', () => {

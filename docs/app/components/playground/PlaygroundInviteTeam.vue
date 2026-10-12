@@ -29,8 +29,15 @@ const link = 'https://app.nuxt.com/invite/x8f2k'
 
       <div class="space-y-2">
         <div v-for="(member, index) in members" :key="index" class="flex items-center gap-2">
-          <UInput v-model="member.email" type="email" color="neutral" class="flex-1" />
-          <USelect v-model="member.role" :items="roles" color="neutral" class="w-28" :content="{ position: 'item-aligned' }" />
+          <UInput v-model="member.email" type="email" color="neutral" class="flex-1" :aria-label="`Email of member ${index + 1}`" />
+          <USelect
+            v-model="member.role"
+            :items="roles"
+            color="neutral"
+            class="w-28"
+            :content="{ position: 'item-aligned' }"
+            :aria-label="`Role of member ${index + 1}`"
+          />
         </div>
       </div>
 
@@ -41,6 +48,7 @@ const link = 'https://app.nuxt.com/invite/x8f2k'
         variant="subtle"
         color="neutral"
         readonly
+        aria-label="Invite link"
         class="w-full"
         :ui="{ trailing: 'pe-1' }"
       >

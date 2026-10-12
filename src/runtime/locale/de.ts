@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Weiter',
       prev: 'Zurück'
     },
+    chatMessages: {
+      autoScroll: 'Nach unten scrollen'
+    },
     chatPrompt: {
       placeholder: 'Hier schreiben Sie Ihre Nachricht…'
     },
     chatPromptSubmit: {
-      label: 'Senden'
+      label: 'Senden',
+      reload: 'Erneut versuchen',
+      stop: 'Generierung stoppen'
     },
     chatReasoning: {
       thinking: 'Denkt nach…',
@@ -111,6 +116,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Schließen'
+    },
+    pagination: {
+      first: 'Erste Seite',
+      last: 'Letzte Seite',
+      next: 'Nächste Seite',
+      page: 'Seite {page}',
+      prev: 'Vorherige Seite'
     },
     pricingTable: {
       caption: 'Preisplanvergleich'

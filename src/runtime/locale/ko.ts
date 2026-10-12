@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: '다음',
       prev: '이전'
     },
+    chatMessages: {
+      autoScroll: '맨 아래로 스크롤'
+    },
     chatPrompt: {
       placeholder: '여기에 메시지를 입력하세요…'
     },
     chatPromptSubmit: {
-      label: '전송'
+      label: '전송',
+      reload: '다시 시도',
+      stop: '생성 중지'
     },
     chatReasoning: {
       thinking: '생각하는 중…',
@@ -111,6 +116,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: '닫기'
+    },
+    pagination: {
+      first: '첫 페이지',
+      last: '마지막 페이지',
+      next: '다음 페이지',
+      page: '{page} 페이지',
+      prev: '이전 페이지'
     },
     pricingTable: {
       caption: '가격 플랜 비교'

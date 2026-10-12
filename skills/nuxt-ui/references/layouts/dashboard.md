@@ -123,7 +123,8 @@ Root wrapper. Manages sidebar state and persistence.
 
 | Prop | Default | Purpose |
 |---|---|---|
-| `storage` | `'cookie'` | `'cookie'`, `'localStorage'`, `false` |
+| `storage` | `'cookie'` | `'cookie'` or `'local'` |
+| `persistent` | `true` | Set to `false` to stop saving sizes |
 | `storage-key` | `'dashboard'` | Storage key name |
 
 ### DashboardSidebar

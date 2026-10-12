@@ -1,3 +1,5 @@
+import { getCookie, setCookie } from 'nuxt/server'
+import type { RequestEvent } from 'nuxt/server'
 import type { H3Event } from 'h3'
 
 const COOKIE_NAME = 'nuxt-ui-chat-user'
@@ -14,7 +16,10 @@ const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
  * still be rotated. Gateway per-user limits keyed on this only bound honest traffic. Real
  * throttling has to be enforced server-side on something the caller can't rotate.
  */
-export function getChatUser(event: H3Event): string {
+export function getChatUser(_event: RequestEvent | H3Event): string {
+  // `api/ai.post.ts` still runs on h3 for `event.node`. The cookie helpers accept both events
+  // on Nitro 2, where the `nuxt/server` event wraps the h3 one.
+  const event = _event as RequestEvent
   const existing = getCookie(event, COOKIE_NAME)
   if (existing && UUID_RE.test(existing)) {
     return existing

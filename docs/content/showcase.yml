@@ -25,6 +25,8 @@ items:
     url: https://benevolat.croix-rouge.fr/
     screenshotOptions:
       cookies: ['OptanonAlertBoxClosed=2026-05-26T13:44:13.050Z;OptanonConsent=isGpcEnabled=0;']
+  - name: Cosmic Stays
+    url: https://www.cosmicstays.com/
   - name: DefenceMore
     url: https://defencemore.com/
   - name: Directus Docs
@@ -33,8 +35,6 @@ items:
     url: https://elevenspectacles.com/
   - name: Espace Asso by Benevolt
     url: https://asso.benevolt.fr/
-  - name: Fontnode
-    url: https://fontnode.com/
   - name: FrameZero
     url: https://www.framezero.app/
   - name: JSON DeepL
@@ -51,6 +51,8 @@ items:
       removeElements: ['[id^="piano"]']
   - name: LearnVue
     url: https://learnvue.co/
+  - name: Linkedis
+    url: https://linked.is/
   - name: LunixPOS
     url: https://lunixpos.com/
   - name: Mawrble

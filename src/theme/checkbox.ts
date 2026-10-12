@@ -1,7 +1,7 @@
 import type { ModuleOptions } from '../module'
 
 // Shared with `checkbox-group` and `radio-group`, which style the same states on their own slots.
-export const hover = 'hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:'
+export const hover = 'hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:'
 
 // `list` puts focus on the control, which is the click target there. `card` and `table`
 // render the root as a label wrapping everything, so focus belongs on the card itself,
@@ -177,7 +177,7 @@ export default (options: Required<ModuleOptions>) => ({
       indicator: 'hidden',
       highlight: true,
       class: {
-        root: `not-has-disabled:border-${color} not-has-disabled:has-data-[state=checked]:border-${color}`
+        root: `not-has-disabled:not-has-aria-disabled:border-${color} not-has-disabled:not-has-aria-disabled:has-data-[state=checked]:border-${color}`
       }
     })),
     {
@@ -185,7 +185,7 @@ export default (options: Required<ModuleOptions>) => ({
       indicator: 'hidden',
       highlight: true,
       class: {
-        root: 'not-has-disabled:border-inverted not-has-disabled:has-data-[state=checked]:border-inverted'
+        root: 'not-has-disabled:not-has-aria-disabled:border-inverted not-has-disabled:not-has-aria-disabled:has-data-[state=checked]:border-inverted'
       }
     },
     ...(options.theme.colors || []).map((color: string) => ({

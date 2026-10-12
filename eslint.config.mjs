@@ -1,6 +1,7 @@
 import { createConfigForNuxt } from '@nuxt/eslint-config/flat'
 import { fileURLToPath } from 'node:url'
 import betterTailwindcss from 'eslint-plugin-better-tailwindcss'
+import { getDefaultSelectors } from 'eslint-plugin-better-tailwindcss/defaults'
 
 /**
  * Flag bare prop references in templates of components that use
@@ -291,12 +292,18 @@ const noUnresolvedFormFieldRefs = {
   }
 }
 
+const themeClassMatchers = [
+  { type: 'objectValues', path: '^base.*$' },
+  { type: 'objectValues', path: '^slots(?!.*Size$).*$' },
+  { type: 'objectValues', path: '^variants(?!.*Size$).*$' },
+  { type: 'objectValues', path: '^compoundVariants\\[\\d+\\]\\.class.*$' }
+]
+
 /**
- * Tailwind class checks for the apps in this repo (docs and playgrounds).
- * `src/theme` is not covered yet: the plugin skips `export default (options) => ({...})`
- * until https://github.com/schoero/eslint-plugin-better-tailwindcss/pull/397 ships.
+ * Tailwind class checks for the apps in this repo (docs and playgrounds) and
+ * for the theme files in `src/theme`.
  */
-function betterTailwindcssConfig(files, entryPoint, ignore = []) {
+function betterTailwindcssConfig(files, entryPoint, { ignore = [], settings = {}, rules = {} } = {}) {
   // Absolute so editor ESLint servers running from a subfolder resolve it too.
   entryPoint = fileURLToPath(new URL(entryPoint, import.meta.url))
   return {
@@ -310,12 +317,14 @@ function betterTailwindcssConfig(files, entryPoint, ignore = []) {
         attributes: [
           '^(v-bind:|:)?class$',
           ['^(v-bind:|:)?ui$', [{ match: 'objectValues' }]]
-        ]
+        ],
+        ...settings
       }
     },
     rules: {
       ...betterTailwindcss.configs['correctness-error'].rules,
-      'better-tailwindcss/no-unknown-classes': ['error', { ignore }]
+      'better-tailwindcss/no-unknown-classes': ['error', { ignore }],
+      ...rules
     }
   }
 }
@@ -350,14 +359,37 @@ export default createConfigForNuxt({
     'nuxt-ui/no-bare-prop-refs': 'error',
     'nuxt-ui/no-unresolved-form-field-refs': 'error'
   }
-}).append(betterTailwindcssConfig(['docs/app/**/*.vue'], 'docs/app/assets/css/main.css', [
+}).append(betterTailwindcssConfig(['docs/app/**/*.vue'], 'docs/app/assets/css/main.css', {
   // Hook classes styled in scoped `<style>` blocks or `main.css`, not Tailwind utilities.
-  '^nuxi-', '^landing-', '^(nuxt|vue)-only$', '^(playground-)?wall$', '^horizon$', '^twinkle$',
-  '^stars?$', '^star-layer$', '^dice-rolling$', '^squircle$', '^carbon$', '^example$', '^my-table-tbody$'
-])).append(
+  ignore: [
+    '^nuxi-', '^landing-', '^(nuxt|vue)-only$', '^(playground-)?wall$', '^horizon$', '^twinkle$',
+    '^stars?$', '^star-layer$', '^dice-rolling$', '^squircle$', '^carbon$', '^example$', '^my-table-tbody$'
+  ]
+})).append(
   betterTailwindcssConfig(['playgrounds/nuxt/app/**/*.vue'], 'playgrounds/nuxt/app/assets/css/main.css')
 ).append(
   betterTailwindcssConfig(['playgrounds/vue/src/**/*.vue'], 'playgrounds/vue/src/assets/css/main.css')
+).append(
+  // Theme files are `export default {...}` or `export default (options) => ({...})`. Only the tv
+  // class paths are checked, minus the `*Size` slots which hold a size prop for a nested component.
+  betterTailwindcssConfig(['src/theme/**/*.ts'], 'playgrounds/nuxt/app/assets/css/main.css', {
+    settings: {
+      selectors: [
+        ...getDefaultSelectors(),
+        {
+          kind: 'variable',
+          name: '^default$',
+          match: [...themeClassMatchers, { type: 'anonymousFunctionReturn', match: themeClassMatchers }]
+        },
+        // Themes extending another one: `(options) => defuFn({...}, input(options))`
+        { kind: 'callee', name: '^defu(Fn)?$', match: themeClassMatchers }
+      ]
+    },
+    rules: {
+      // Classes built from `options.theme.colors` or a variant prefix are written out in full in the generated theme.
+      'better-tailwindcss/no-concatenated-classes': 'off'
+    }
+  })
 ).append({
   files: ['src/runtime/components/**/*.vue', 'src/runtime/composables/**/*.ts'],
   rules: {

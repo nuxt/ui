@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Další',
       prev: 'Předchozí'
     },
+    chatMessages: {
+      autoScroll: 'Posunout dolů'
+    },
     chatPrompt: {
       placeholder: 'Zde napište svůj text…'
     },
     chatPromptSubmit: {
-      label: 'Odeslat'
+      label: 'Odeslat',
+      reload: 'Zkusit znovu',
+      stop: 'Zastavit generování'
     },
     chatReasoning: {
       thinking: 'Přemýšlí…',
@@ -111,6 +116,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Zavřít'
+    },
+    pagination: {
+      first: 'První stránka',
+      last: 'Poslední stránka',
+      next: 'Další stránka',
+      page: 'Stránka {page}',
+      prev: 'Předchozí stránka'
     },
     pricingTable: {
       caption: 'Porovnání cenových plánů'

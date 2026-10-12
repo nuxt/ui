@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Кийинки',
       prev: 'Алдыңкы'
     },
+    chatMessages: {
+      autoScroll: 'Ылдый жылдыруу'
+    },
     chatPrompt: {
       placeholder: 'Бул жерге билдирүүңүздү жазыңыз…'
     },
     chatPromptSubmit: {
-      label: 'Билдирүү жөнөтүү'
+      label: 'Билдирүү жөнөтүү',
+      reload: 'Кайра аракет кылуу',
+      stop: 'Генерацияны токтотуу'
     },
     chatReasoning: {
       thinking: 'Ойлонуда…',
@@ -111,6 +116,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Жабуу'
+    },
+    pagination: {
+      first: 'Биринчи бет',
+      last: 'Акыркы бет',
+      next: 'Кийинки бет',
+      page: '{page}-бет',
+      prev: 'Алдыңкы бет'
     },
     pricingTable: {
       caption: 'Баалардын салыштыруу таблицасы'

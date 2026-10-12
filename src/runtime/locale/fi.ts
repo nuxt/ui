@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Seuraava',
       prev: 'Edellinen'
     },
+    chatMessages: {
+      autoScroll: 'Vieritä alas'
+    },
     chatPrompt: {
       placeholder: 'Kirjoita viestisi tähän…'
     },
     chatPromptSubmit: {
-      label: 'Lähetä'
+      label: 'Lähetä',
+      reload: 'Yritä uudelleen',
+      stop: 'Lopeta generointi'
     },
     chatReasoning: {
       thinking: 'Ajattelee…',
@@ -111,6 +116,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Sulje'
+    },
+    pagination: {
+      first: 'Ensimmäinen sivu',
+      last: 'Viimeinen sivu',
+      next: 'Seuraava sivu',
+      page: 'Sivu {page}',
+      prev: 'Edellinen sivu'
     },
     pricingTable: {
       caption: 'Hinnoitellut suunnitelmat'

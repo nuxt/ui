@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Далей',
       prev: 'Назад'
     },
+    chatMessages: {
+      autoScroll: 'Пракруціць уніз'
+    },
     chatPrompt: {
       placeholder: 'Увядзіце сваё паведамленне тут…'
     },
     chatPromptSubmit: {
-      label: 'Адправіць'
+      label: 'Адправіць',
+      reload: 'Паўтарыць',
+      stop: 'Спыніць генерацыю'
     },
     chatReasoning: {
       thinking: 'Думае…',
@@ -111,6 +116,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Закрыць'
+    },
+    pagination: {
+      first: 'Першая старонка',
+      last: 'Апошняя старонка',
+      next: 'Наступная старонка',
+      page: 'Старонка {page}',
+      prev: 'Папярэдняя старонка'
     },
     pricingTable: {
       caption: 'Параўнанне платных планаў'

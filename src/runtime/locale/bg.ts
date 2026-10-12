@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Напред',
       prev: 'Назад'
     },
+    chatMessages: {
+      autoScroll: 'Превърти надолу'
+    },
     chatPrompt: {
       placeholder: 'Въведете съобщение…'
     },
     chatPromptSubmit: {
-      label: 'Изпрати'
+      label: 'Изпрати',
+      reload: 'Опитай отново',
+      stop: 'Спри генерирането'
     },
     chatReasoning: {
       thinking: 'Мисли…',
@@ -111,6 +116,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Затворете'
+    },
+    pagination: {
+      first: 'Първа страница',
+      last: 'Последна страница',
+      next: 'Следваща страница',
+      page: 'Страница {page}',
+      prev: 'Предишна страница'
     },
     pricingTable: {
       caption: 'Ценова таблица'

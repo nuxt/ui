@@ -29,11 +29,16 @@ export default defineLocale<Messages>({
       next: 'دواتر',
       prev: 'پێشتر'
     },
+    chatMessages: {
+      autoScroll: 'بۆ خوارەوە بڕۆ'
+    },
     chatPrompt: {
       placeholder: 'نامەکەت لێرە بنوسە…'
     },
     chatPromptSubmit: {
-      label: 'ناردن'
+      label: 'ناردن',
+      reload: 'دووبارە هەوڵبدەرەوە',
+      stop: 'وەستاندنی دروستکردن'
     },
     chatReasoning: {
       thinking: 'بیرکردنەوە…',
@@ -112,6 +117,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'داخستن'
+    },
+    pagination: {
+      first: 'پەڕەی یەکەم',
+      last: 'پەڕەی کۆتایی',
+      next: 'پەڕەی دواتر',
+      page: 'پەڕە {page}',
+      prev: 'پەڕەی پێشوو'
     },
     pricingTable: {
       caption: 'بەراورکردنی پلانی نرخدانان'

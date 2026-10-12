@@ -41,6 +41,11 @@ export interface ChatReasoningProps extends Pick<CollapsibleRootProps, 'defaultO
    */
   chevronIcon?: IconProps['name']
   /**
+   * Whether to automatically open when streaming starts.
+   * @defaultValue true
+   */
+  autoOpen?: boolean
+  /**
    * The delay in milliseconds before auto-closing when streaming ends.
    * Set to `0` to disable auto-close.
    * @defaultValue 500
@@ -79,6 +84,7 @@ const _props = withDefaults(defineProps<ChatReasoningProps>(), {
   streaming: false,
   chevron: 'trailing',
   unmountOnHide: false,
+  autoOpen: true,
   autoCloseDelay: 500
 })
 const emits = defineEmits<ChatReasoningEmits>()
@@ -96,7 +102,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatReasoning ||
 }))
 
 const isControlled = computed(() => props.open !== undefined)
-const internalOpen = ref(props.defaultOpen ?? props.streaming)
+const internalOpen = ref(props.defaultOpen ?? (props.streaming && props.autoOpen))
 const startTime = ref<number | null>(props.streaming ? Date.now() : null)
 const internalDuration = ref<number | undefined>(undefined)
 const autoCloseTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
@@ -108,7 +114,9 @@ watch(() => props.streaming, (streaming, wasStreaming) => {
       autoCloseTimeout.value = null
     }
     if (!wasStreaming) {
-      setOpen(true)
+      if (props.autoOpen) {
+        setOpen(true)
+      }
       startTime.value = Date.now()
     }
   } else if (wasStreaming) {

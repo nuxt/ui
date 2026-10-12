@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Nästa',
       prev: 'Föregående'
     },
+    chatMessages: {
+      autoScroll: 'Scrolla längst ned'
+    },
     chatPrompt: {
       placeholder: 'Skriv ditt meddelande här…'
     },
     chatPromptSubmit: {
-      label: 'Skicka'
+      label: 'Skicka',
+      reload: 'Försök igen',
+      stop: 'Stoppa generering'
     },
     chatReasoning: {
       thinking: 'Tänker…',
@@ -111,6 +116,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Stäng'
+    },
+    pagination: {
+      first: 'Första sidan',
+      last: 'Sista sidan',
+      next: 'Nästa sida',
+      page: 'Sida {page}',
+      prev: 'Föregående sida'
     },
     pricingTable: {
       caption: 'Prisplanering'

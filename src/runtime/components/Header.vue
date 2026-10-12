@@ -71,14 +71,13 @@ import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig, useRoute } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
+import { useLazyOverlay } from '../composables/useLazyOverlay'
+import { lazyOverlays, loadOverlay } from '../utils/lazy-overlay'
 import { getSlotChildrenText } from '../utils'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 import ULink from './Link.vue'
 import UContainer from './Container.vue'
-import USlideover from './Slideover.vue'
-import UModal from './Modal.vue'
-import UDrawer from './Drawer.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -119,6 +118,8 @@ watch(() => route.fullPath, () => {
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.header || {}) })())
 
+const { slideover: USlideover, modal: UModal, drawer: UDrawer } = lazyOverlays
+
 const Menu = computed(() => ({
   slideover: USlideover,
   modal: UModal,
@@ -126,6 +127,8 @@ const Menu = computed(() => ({
 })[props.mode as HeaderMode])
 
 const menuProps = toRef(() => defu(props.menu, {}, props.mode === 'modal' ? { fullscreen: true, transition: false } : {}) as HeaderMenu<T>)
+
+const renderMenu = useLazyOverlay(() => open.value || (props.menu as ModalProps | undefined)?.unmountOnHide === false, () => loadOverlay(props.mode as HeaderMode))
 
 function toggleOpen() {
   open.value = !open.value
@@ -188,6 +191,7 @@ function toggleOpen() {
   </Primitive>
 
   <Menu
+    v-if="renderMenu"
     v-model:open="open"
     :title="locale.messages.header?.title || t('header.open')"
     :description="locale.messages.header?.description"

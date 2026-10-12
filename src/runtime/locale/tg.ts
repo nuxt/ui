@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Баъдӣ',
       prev: 'Қаблӣ'
     },
+    chatMessages: {
+      autoScroll: 'Ба поён ҳаракат додан'
+    },
     chatPrompt: {
       placeholder: 'Пайём ворид кунед…'
     },
     chatPromptSubmit: {
-      label: 'Фиристодан'
+      label: 'Фиристодан',
+      reload: 'Аз нав кӯшиш кардан',
+      stop: 'Қатъ кардани эҷод'
     },
     chatReasoning: {
       thinking: 'Фикр мекунад…',
@@ -111,6 +116,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Бастан'
+    },
+    pagination: {
+      first: 'Саҳифаи аввал',
+      last: 'Саҳифаи охирин',
+      next: 'Саҳифаи баъдӣ',
+      page: 'Саҳифаи {page}',
+      prev: 'Саҳифаи қаблӣ'
     },
     pricingTable: {
       caption: 'Ҷадвали нархҳо'

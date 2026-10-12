@@ -29,11 +29,16 @@ export default defineLocale<Messages>({
       next: 'كېيىنكى بەت',
       prev: 'ئالدىنقى بەت'
     },
+    chatMessages: {
+      autoScroll: 'ئاستىغا سۈرۈش'
+    },
     chatPrompt: {
       placeholder: 'خەت كىرگۈزۈڭ…'
     },
     chatPromptSubmit: {
-      label: 'يوللاش'
+      label: 'يوللاش',
+      reload: 'قايتا سىناش',
+      stop: 'ھاسىل قىلىشنى توختىتىش'
     },
     chatReasoning: {
       thinking: 'ئويلاۋاتىدۇ…',
@@ -112,6 +117,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'تاقاش'
+    },
+    pagination: {
+      first: 'بىرىنچى بەت',
+      last: 'ئاخىرقى بەت',
+      next: 'كېيىنكى بەت',
+      page: '{page}-بەت',
+      prev: 'ئالدىنقى بەت'
     },
     pricingTable: {
       caption: 'باھا جەدۋىلى'

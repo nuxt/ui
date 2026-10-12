@@ -28,11 +28,16 @@ export default defineLocale<Messages>({
       next: 'Sau',
       prev: 'Trước'
     },
+    chatMessages: {
+      autoScroll: 'Cuộn xuống dưới'
+    },
     chatPrompt: {
       placeholder: 'Nhập tin nhắn của bạn ở đây…'
     },
     chatPromptSubmit: {
-      label: 'Gửi'
+      label: 'Gửi',
+      reload: 'Thử lại',
+      stop: 'Dừng tạo'
     },
     chatReasoning: {
       thinking: 'Đang suy nghĩ…',
@@ -111,6 +116,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Đóng'
+    },
+    pagination: {
+      first: 'Trang đầu tiên',
+      last: 'Trang cuối cùng',
+      next: 'Trang tiếp theo',
+      page: 'Trang {page}',
+      prev: 'Trang trước'
     },
     pricingTable: {
       caption: 'So sánh các kế hoạch giá'

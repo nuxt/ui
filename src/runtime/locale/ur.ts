@@ -29,11 +29,16 @@ export default defineLocale<Messages>({
       next: 'اگلا',
       prev: 'پچھلا'
     },
+    chatMessages: {
+      autoScroll: 'نیچے سکرول کریں'
+    },
     chatPrompt: {
       placeholder: 'یہاں اپنا پیغام لکھیں'
     },
     chatPromptSubmit: {
-      label: 'پیغام بھیجیں'
+      label: 'پیغام بھیجیں',
+      reload: 'دوبارہ کوشش کریں',
+      stop: 'تخلیق روکیں'
     },
     chatReasoning: {
       thinking: 'سوچ رہا ہے…',
@@ -112,6 +117,13 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'بند کریں'
+    },
+    pagination: {
+      first: 'پہلا صفحہ',
+      last: 'آخری صفحہ',
+      next: 'اگلا صفحہ',
+      page: 'صفحہ {page}',
+      prev: 'پچھلا صفحہ'
     },
     pricingTable: {
       caption: 'قیمت پلنز کی مقایسہ'
