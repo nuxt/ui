@@ -3,6 +3,8 @@ import { extendTheme } from '../utils/theme'
 
 export default extendTheme(input, {
   slots: {
+    // With `multiple`, the disabled state is on the tags container
+    root: (prev: string) => [prev, 'has-[>[data-disabled]]:cursor-not-allowed has-[>[data-disabled]]:opacity-75'],
     // The tags wrap in their own container, so the leading and the trailing stay
     // centered on the box whatever its number of lines. It has the padding of the
     // size in place of the input.
@@ -34,6 +36,9 @@ export default extendTheme(input, {
   },
   variants: {
     // The input or the tags take the focus, up to two levels down from the box
+    fieldGroup: (prev: typeof input.variants.fieldGroup) => Object.fromEntries(
+      Object.entries(prev).map(([key, value]) => [key, { root: withinFocus(value.root) }])
+    ) as typeof prev,
     variant: (prev: typeof input.variants.variant) => Object.fromEntries(
       Object.entries(prev).map(([key, value]) => [key, { root: withinFocus(value.root) }])
     ) as typeof prev,

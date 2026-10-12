@@ -6,6 +6,7 @@ import { defineTheme } from '../utils/theme'
 const withinFocusMap: Record<string, string> = {
   'has-[>:focus]:bg-soft': 'has-focus:bg-soft',
   'has-[>:focus-visible]:outline-3': 'has-focus-visible:outline-3',
+  'has-[>:focus-visible]:z-1': 'has-focus-visible:z-1',
   'has-[>:focus-visible]:ring-accent': 'has-focus-visible:ring-accent'
 }
 
