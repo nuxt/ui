@@ -3,37 +3,15 @@ import { extendTheme } from '../utils/theme'
 
 export default extendTheme(input, {
   slots: {
-    root: 'relative inline-flex items-start',
-    leading: `order-first flex items-start before:content-['x'] before:w-0 before:invisible`,
-    trailing: 'flex items-start'
+    // The leading and the trailing line up with the first line of text
+    root: (prev: string) => [prev, 'items-start'],
+    leading: (prev: string) => [prev, 'items-start pt-(--ui-control-py)'],
+    trailing: (prev: string) => [prev, 'items-start pt-(--ui-control-py)']
   },
   variants: {
     autoresize: {
       true: {
-        input: 'resize-none'
-      }
-    },
-    // The leading and the trailing line up with the first line of text
-    size: {
-      xs: {
-        leading: (prev: string) => [prev, 'pt-(--ui-control-py)'],
-        trailing: (prev: string) => [prev, 'pt-(--ui-control-py)']
-      },
-      sm: {
-        leading: (prev: string) => [prev, 'pt-(--ui-control-py)'],
-        trailing: (prev: string) => [prev, 'pt-(--ui-control-py)']
-      },
-      md: {
-        leading: (prev: string) => [prev, 'pt-(--ui-control-py)'],
-        trailing: (prev: string) => [prev, 'pt-(--ui-control-py)']
-      },
-      lg: {
-        leading: (prev: string) => [prev, 'pt-(--ui-control-py)'],
-        trailing: (prev: string) => [prev, 'pt-(--ui-control-py)']
-      },
-      xl: {
-        leading: (prev: string) => [prev, 'pt-(--ui-control-py)'],
-        trailing: (prev: string) => [prev, 'pt-(--ui-control-py)']
+        base: 'resize-none'
       }
     }
   }

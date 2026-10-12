@@ -208,7 +208,7 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'input'" :class="ui.root({ class: [ui.base({ class: props.ui?.base }), props.ui?.root, props.class] })" @click="onRootClick">
+  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'input'" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="onRootClick">
     <input
       :id="id"
       ref="inputRef"
@@ -216,12 +216,12 @@ defineExpose({
       :value="modelValue"
       :name="name"
       :placeholder="props.placeholder"
-      :class="ui.input({ class: props.ui?.input })"
+      :class="ui.base({ class: props.ui?.base })"
       :disabled="disabled"
       :required="props.required"
       :autocomplete="props.autocomplete"
       v-bind="{ ...$attrs, ...ariaAttrs }"
-      data-slot="input-input"
+      data-slot="input-base"
       @input="onInput"
       @blur="onBlur"
       @change="onChange"

@@ -718,14 +718,14 @@ defineExpose({
     :name="name"
     :disabled="disabled"
     :data-slot="($attrs['data-slot'] as string | undefined) ?? 'input-menu'"
-    :class="ui.root({ class: [!isMultiple && ui.base({ class: props.ui?.base }), props.ui?.root, props.class] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
     :as-child="isMultiple"
     ignore-filter
     @click="onRootClick"
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
   >
-    <Component.Anchor :as-child="!isMultiple" :reference="isMultiple ? undefined : rootElement" :data-slot="baseDataSlot" :class="isMultiple ? ui.base({ class: props.ui?.base }) : undefined">
+    <Component.Anchor :as-child="!isMultiple" :reference="isMultiple ? undefined : rootElement" :data-slot="baseDataSlot">
       <TagsInputRoot
         v-if="isMultiple"
         v-slot="{ modelValue: tags }"
@@ -772,8 +772,8 @@ defineExpose({
         :id="id"
         ref="inputRef"
         v-bind="{ ...(!isAutocomplete ? { displayValue } : {}), ...$attrs, ...ariaAttrs }"
-        data-slot="input-menu-input"
-        :class="ui.input({ class: props.ui?.input })"
+        data-slot="input-menu-base"
+        :class="ui.base({ class: props.ui?.base })"
         :type="props.type"
         :placeholder="props.placeholder"
         :required="props.required"

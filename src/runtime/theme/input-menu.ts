@@ -1,19 +1,14 @@
-import input, { replaceFocus } from './field'
-import { fieldGroupVariant } from './field-group'
+import input, { withinFocus } from './input'
 import { extendTheme } from '../utils/theme'
 
 export default extendTheme(input, {
   slots: {
-    // The box: the root element without `multiple`, the anchor with it
-    base: () => 'rounded-md text-strong transition-colors',
-    // The native input without `multiple`. It carries the padding of the size, so it fills the box.
-    input: 'w-full min-w-0 flex-1 border-0 bg-transparent outline-none placeholder:text-faint px-(--ui-control-px) py-(--ui-control-py) disabled:cursor-not-allowed',
     // The tags wrap in their own container, so the leading and the trailing stay
-    // centered on the box whatever its number of lines
-    tags: 'flex flex-wrap items-center flex-1 min-w-0 gap-(--ui-control-gap)',
-    // After the input in the DOM, so the input keeps the first tab stop
-    leading: `order-first flex items-center before:content-['x'] before:w-0 before:invisible`,
-    trailing: 'group ms-auto flex items-center disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none',
+    // centered on the box whatever its number of lines. It has the padding of the
+    // size in place of the input.
+    tags: 'flex flex-wrap items-center flex-1 min-w-0 gap-(--ui-control-gap) px-(--ui-control-px) py-(--ui-control-py)',
+    // The box dims as a whole, so its trigger doesn't dim a second time
+    trailing: 'group flex items-center pe-(--ui-control-px) disabled:cursor-not-allowed focus:outline-none',
     trailingClear: 'p-0',
     arrow: 'fill-bg stroke-default',
     content: 'max-h-[min(15rem,var(--reka-combobox-content-available-height,15rem))] w-(--reka-combobox-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-combobox-content-transform-origin) pointer-events-auto flex flex-col',
@@ -31,25 +26,23 @@ export default extendTheme(input, {
     itemWrapper: 'flex-1 flex flex-col min-w-0',
     itemLabel: 'truncate',
     itemDescription: 'truncate text-muted',
-    tagsItem: 'px-1.5 py-0.5 rounded-sm font-medium inline-flex items-center gap-0.5 ring ring-inset ring-strong bg-soft text-default data-disabled:cursor-not-allowed data-disabled:opacity-75',
+    tagsItem: 'px-1.5 py-0.5 rounded-sm font-medium inline-flex items-center gap-0.5 ring ring-inset ring-strong bg-soft text-default data-disabled:cursor-not-allowed',
     tagsItemText: 'truncate',
     tagsItemDelete: 'inline-flex items-center rounded-xs text-faint hover:text-default hover:bg-strong disabled:pointer-events-none transition-colors',
     tagsItemDeleteIcon: 'shrink-0',
-    tagsInput: 'flex-1 border-0 bg-transparent placeholder:text-faint focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
+    tagsInput: 'flex-1 border-0 bg-transparent text-strong placeholder:text-faint focus:outline-none disabled:cursor-not-allowed'
   },
   variants: {
-    // The box is a direct child of the group in both modes
-    ...fieldGroupVariant,
-    // The box holds what takes the focus, it never has it itself
+    // The input or the tags take the focus, up to two levels down from the box
     variant: (prev: typeof input.variants.variant) => Object.fromEntries(
-      Object.entries(prev).map(([key, value]) => [key, { base: replaceFocus(value.base) }])
+      Object.entries(prev).map(([key, value]) => [key, { root: withinFocus(value.root) }])
     ) as typeof prev,
-    // Next to a leading or a trailing, the padding of the input is the gap to it
+    // Next to a leading or a trailing, the padding of the container is the gap to it
     leading: {
-      true: { input: 'ps-(--ui-control-gap)' }
+      true: { tags: 'ps-(--ui-control-gap)' }
     },
     trailing: {
-      true: { input: 'pe-(--ui-control-gap)' }
+      true: { tags: 'pe-(--ui-control-gap)' }
     },
     virtualize: {
       true: {
@@ -59,15 +52,9 @@ export default extendTheme(input, {
         viewport: 'divide-y divide-default'
       }
     },
-    // Without `multiple`, the box has no padding: the input, the leading and the
-    // trailing bring their own. The box dims as a whole when the input is disabled.
     multiple: {
       true: '',
-      false: {
-        base: 'p-0 gap-0 has-[>input:disabled]:cursor-not-allowed has-[>input:disabled]:opacity-75',
-        leading: 'ps-(--ui-control-px)',
-        trailing: 'pe-(--ui-control-px) disabled:opacity-100'
-      }
+      false: ''
     },
     size: {
       xs: {

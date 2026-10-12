@@ -59,11 +59,11 @@ Reach for this before a `size` × something compound: the size writes a value, a
 
 The box of a field is its outermost element, and what it holds is in its flow. Nothing floats over the input, so a theme never reserves a padding for an icon: the `leading` and the `trailing` take the room of their content.
 
-- Input, Textarea, InputNumber and InputMenu wrap a native element. The root element takes the `root` and `base` slots and has no padding. The native element has the `input` slot with the padding of the size, and the `leading` and the `trailing` bring their own. Next to one of them, the padding of the input on that side is the gap. This way the input covers the box wherever there is no `leading` or `trailing`, and a click or a text selection starts on it.
-- The box follows the state of its direct child: `has-[>:focus-visible]`, `has-[>:disabled]`. A button in the `leading` or the `trailing` is one level down and doesn't light it.
-- Select, SelectMenu, InputDate and InputTime are the box themselves (`base`), with the padding and the gap of the size. They extend `field.ts`, which also holds the tokens and the variants every field shares.
+- Input, Textarea, InputNumber, InputMenu and InputTags wrap a native element. `root` is the box and has no padding. `base` is the native element with the padding of the size, and the `leading` and the `trailing` bring their own. Next to one of them, the padding of the input on that side is the gap. This way the input covers the box wherever there is no `leading` or `trailing`, and a click or a text selection starts on it.
+- The box follows the state of its direct child: `has-[>:focus-visible]`, `has-[>:disabled]`. A button in the `leading` or the `trailing` is one level down and doesn't light it. InputTags and InputMenu map those to `has-focus-visible:` with `withinFocus`, since their tags are two levels down.
+- Select, SelectMenu, InputDate and InputTime are the box themselves (`base`), with the padding and the gap of the size. They extend `field.ts`.
 - The `leading` comes after the native element in the DOM and is placed with `order-first`, so the input keeps the first tab stop. It starts with an invisible character (`before:content-['x'] before:w-0 before:invisible`): an inline box sits on a line of text by its first item, and this gives the `leading` the baseline of the text instead of the bottom of an icon.
-- A field whose content wraps (InputTags, InputMenu with `multiple`) puts it in a `tags` container, so the `leading` and the `trailing` stay centered on the box.
+- A field whose content wraps (InputTags, InputMenu with `multiple`) puts it in a `tags` container, which takes the padding of the size in place of the input, so the `leading` and the `trailing` stay centered on the box.
 
 ## Static Theme
 

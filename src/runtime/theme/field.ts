@@ -2,10 +2,10 @@ import { colorVariant } from './color'
 import { fieldGroupVariantWithRoot } from './field-group'
 import { defineTheme } from '../utils/theme'
 
-// What the fields share: the tokens and text size of each `size`, the look of
-// each `variant`, and a leading and a trailing in the flow of the box. Here the
-// box is `base` and takes the focus itself, like the trigger of a Select. Input
-// and Textarea wrap a native element instead and have their own theme.
+// The fields that are a single element: the trigger of a Select, the group of
+// an InputDate. `base` is the box, with the padding and the gap of the size, and
+// the leading and the trailing are in its flow. Input and the fields that wrap
+// a native element have their own theme, where `root` is the box.
 
 // The focus classes below, for a container whose segments or items take the focus
 // (InputDate, InputTime, InputTags), spelled out so Tailwind finds them

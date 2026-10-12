@@ -244,7 +244,7 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'textarea'" :class="ui.root({ class: [ui.base({ class: props.ui?.base }), props.ui?.root, props.class] })" @click="onRootClick">
+  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'textarea'" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="onRootClick">
     <textarea
       :id="id"
       ref="textareaRef"
@@ -252,11 +252,11 @@ defineExpose({
       :name="name"
       :rows="props.rows"
       :placeholder="props.placeholder"
-      :class="ui.input({ class: props.ui?.input })"
+      :class="ui.base({ class: props.ui?.base })"
       :disabled="disabled"
       :required="props.required"
       v-bind="{ ...$attrs, ...ariaAttrs }"
-      data-slot="textarea-input"
+      data-slot="textarea-base"
       @input="onInput"
       @blur="onBlur"
       @change="onChange"

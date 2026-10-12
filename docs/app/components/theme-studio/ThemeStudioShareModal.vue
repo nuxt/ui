@@ -123,7 +123,7 @@ watch(open, async (isOpen) => {
             :model-value="link"
             readonly
             class="flex-1 min-w-0"
-            :ui="{ base: 'font-mono text-xs', input: 'py-2' }"
+            :ui="{ base: 'font-mono text-xs py-2' }"
             aria-label="Link to this theme"
             @focus="($event.target as HTMLInputElement).select()"
           />

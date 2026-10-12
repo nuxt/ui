@@ -733,7 +733,7 @@ const pageTitles: Record<Page, string> = {
                 placeholder="Write your reply..."
                 :rows="4"
                 class="w-full"
-                :ui="{ input: 'p-0 resize-none' }"
+                :ui="{ base: 'p-0 resize-none' }"
               />
 
               <div class="flex items-center justify-between">
