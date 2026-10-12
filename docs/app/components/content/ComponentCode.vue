@@ -468,7 +468,7 @@ const { data: markdown } = useAsyncData(codeKey, async () => {
               :model-value="getComponentProp(option.name)"
               color="neutral"
               variant="soft"
-              :ui="{ root: 'rounded-sm rounded-l-none min-w-12' }"
+              class="rounded-sm rounded-l-none min-w-12"
               @update:model-value="setComponentProp(option.name, $event)"
             />
           </UFormField>

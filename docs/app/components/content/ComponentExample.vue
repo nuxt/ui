@@ -232,7 +232,7 @@ const urlSearchParams = computed(() => {
                 :type="option.type"
                 color="neutral"
                 variant="soft"
-                :ui="{ root: 'rounded-sm rounded-l-none min-w-12' }"
+                class="rounded-sm rounded-l-none min-w-12"
                 @update:model-value="set(optionsValues, option.name, $event)"
               />
             </UFormField>

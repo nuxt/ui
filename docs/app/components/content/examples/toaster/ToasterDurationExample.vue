@@ -18,7 +18,7 @@ const appConfig = useAppConfig()
         v-model="appConfig.toaster.duration"
         color="neutral"
         variant="soft"
-        :ui="{ root: 'rounded-sm rounded-l-none min-w-12' }"
+        class="rounded-sm rounded-l-none min-w-12"
       />
     </UFormField>
   </div>
