@@ -96,14 +96,10 @@ describe('Listbox', () => {
         modelValue: items[0]
       },
       attrs: {
-        ariaLabel: 'Countries'
+        'aria-label': 'Countries'
       }
     })
-    expect(await axe(wrapper.element, {
-      rules: {
-        'aria-input-field-name': { enabled: false }
-      }
-    })).toHaveNoViolations()
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
   describe('emits', () => {
@@ -173,6 +169,14 @@ describe('Listbox', () => {
       input.setValue([item2])
       await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
+    })
+
+    test('is labelled by the form field label', async () => {
+      const { wrapper } = await createForm(['change'])
+
+      const label = wrapper.find('label')
+      expect(label.attributes('id')).toBeTruthy()
+      expect(wrapper.find('[role="listbox"]').attributes('aria-labelledby')).toBe(label.attributes('id'))
     })
 
     test('should have the correct types', () => {
