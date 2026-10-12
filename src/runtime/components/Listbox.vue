@@ -370,7 +370,7 @@ const filteredItems = computed(() => filteredGroups.value.flatMap(group => group
   <ListboxRoot
     :id="id"
     data-slot="root"
-    v-bind="{ ...rootProps, ...omit($attrs, labelAttrs), ...ariaAttrs }"
+    v-bind="{ ...rootProps, ...omit($attrs, labelAttrs) }"
     :disabled="disabled"
     :name="name"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
@@ -389,6 +389,8 @@ const filteredItems = computed(() => filteredGroups.value.flatMap(group => group
 
     <ListboxContent
       data-slot="content"
+      v-bind="ariaAttrs"
+      :aria-required="props.required || undefined"
       :aria-label="($attrs['aria-label'] as string | undefined)"
       :aria-labelledby="($attrs['aria-labelledby'] as string | undefined) ?? ($attrs['aria-label'] ? undefined : labelId)"
       :class="ui.content({ class: props.ui?.content })"

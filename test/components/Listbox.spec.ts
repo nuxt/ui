@@ -179,6 +179,17 @@ describe('Listbox', () => {
       expect(wrapper.find('[role="listbox"]').attributes('aria-labelledby')).toBe(label.attributes('id'))
     })
 
+    test('is described by the form field error', async () => {
+      const { input, wrapper } = await createForm(['change'])
+
+      input.setValue([item1])
+      await flushPromises()
+
+      const listbox = wrapper.find('[role="listbox"]')
+      expect(listbox.attributes('aria-invalid')).toBe('true')
+      expect(wrapper.find(`[id="${listbox.attributes('aria-describedby')}"]`).text()).toBe('Error message')
+    })
+
     test('should have the correct types', () => {
       // with object item
       expectEmitPayloadType('update:modelValue', () => Listbox({
