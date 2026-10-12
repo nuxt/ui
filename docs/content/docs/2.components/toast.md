@@ -280,6 +280,18 @@ name: 'toast-example'
 :toaster-duration-example
 ::
 
+### Disable pausing on interaction :badge{label="Soon" class="align-text-top"}
+
+By default, the toast timeout pauses while the viewport is hovered or focused, or while the window is blurred. Set `toaster.pauseOnInteraction` to `false` on the [App](/docs/components/app#props) component to keep the timeout running during these interactions.
+
+```vue [app.vue]
+<template>
+  <UApp :toaster="{ pauseOnInteraction: false }">
+    <NuxtPage />
+  </UApp>
+</template>
+```
+
 
 ### Change global max :badge{label="4.1+" class="align-text-top"}
 
@@ -325,7 +337,7 @@ const toaster = { expand: true }
 ```
 
 ::tip
-You can hover over the toasts to expand them. This will also pause the timer of the toasts.
+You can hover over the toasts to expand them. This also pauses their timers by default; set `toaster.pauseOnInteraction` to `false` to keep them running.
 ::
 
 ::component-example

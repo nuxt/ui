@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue'
+import { defineComponent, h } from 'vue'
 import { describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
@@ -27,8 +27,37 @@ const ToastWrapper = defineComponent({
 </UToaster>`
 })
 
+const ToastProviderStub = defineComponent({
+  name: 'ToastProvider',
+  props: {
+    pauseOnInteraction: Boolean
+  },
+  setup(_, { slots }) {
+    return () => h('div', slots.default?.())
+  }
+})
+
 describe('Toast', () => {
   const props = { title: 'Toast' }
+
+  it('forwards pauseOnInteraction to ToastProvider', async () => {
+    const wrapper = await mountSuspended(defineComponent({
+      components: {
+        UToaster: Toaster
+      },
+      template: '<UToaster :portal="false" :pause-on-interaction="false" />'
+    }), {
+      global: {
+        stubs: {
+          ToastProvider: ToastProviderStub,
+          ToastPortal: true,
+          ToastViewport: true
+        }
+      }
+    })
+
+    expect(wrapper.findComponent(ToastProviderStub).props('pauseOnInteraction')).toBe(false)
+  })
 
   renderEach(ToastWrapper, [
     // Props

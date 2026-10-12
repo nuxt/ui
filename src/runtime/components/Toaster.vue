@@ -7,7 +7,12 @@ import type { ComponentConfig } from '../types/tv'
 
 type Toaster = ComponentConfig<typeof theme, AppConfig, 'toaster'>
 
-export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection' | 'limit' | 'toastManager'> {
+export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection' | 'limit' | 'toastManager' | 'pauseOnInteraction'> {
+  /**
+   * Whether to pause the toast duration while the viewport is hovered, focused, or the window is blurred.
+   * @defaultValue true
+   */
+  pauseOnInteraction?: boolean
   /**
    * The position on the screen to display the toasts.
    * @defaultValue 'bottom-right'
@@ -95,7 +100,7 @@ const appConfig = useAppConfig() as Toaster['AppConfig']
 
 provide(toastMaxInjectionKey, toRef(() => props.max))
 
-const providerProps = useForwardProps(reactivePick(props, 'duration', 'label', 'swipeThreshold', 'disableSwipe'))
+const providerProps = useForwardProps(reactivePick(props, 'duration', 'label', 'swipeThreshold', 'disableSwipe', 'pauseOnInteraction'))
 const portalProps = usePortal(toRef(() => props.portal))
 
 const swipeDirection = computed(() => {
