@@ -146,7 +146,7 @@ describe('useLocale', () => {
   })
 
   it('labels the InputMenu trigger in the App locale', async () => {
-    const wrapper = await mountInApp({ locale: fr }, () => h(UInputMenu, { items: ['A'] }))
+    const wrapper = await mountInApp({ locale: fr }, () => h(UInputMenu))
 
     expect(wrapper.get('[data-slot="trailing"]').attributes('aria-label')).toBe('Afficher les options')
   })
