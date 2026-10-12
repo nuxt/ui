@@ -267,8 +267,8 @@ How you achieve it depends on how the root receives attributes:
 - **`inheritAttrs: false`, `$attrs` forwarded to an inner element** (Avatar, Input, Checkbox, Switch, …): the root never receives `$attrs`, so read the caller's value on the root explicitly, and keep each inner element's own `data-slot` *after* its `$attrs` spread so the caller's value does not leak onto it:
 
   ```vue
-  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'input'" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <input v-bind="{ ...$attrs, ...ariaAttrs }" data-slot="input-base" :class="ui.base({ class: props.ui?.base })">
+  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'input'" :class="ui.root({ class: [ui.base({ class: props.ui?.base }), props.ui?.root, props.class] })">
+    <input v-bind="{ ...$attrs, ...ariaAttrs }" data-slot="input-input" :class="ui.input({ class: props.ui?.input })">
   </Primitive>
   ```
 
