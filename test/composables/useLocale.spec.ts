@@ -1,15 +1,15 @@
 import { describe, it, expect, afterEach } from 'vitest'
 import { defineComponent, h, shallowRef } from 'vue'
-import type { VNode } from 'vue'
+import type { Component, VNode } from 'vue'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { ToastProvider } from 'reka-ui'
 import { useLocale } from '../../src/runtime/composables/useLocale'
-import { extendLocale } from '../../src/runtime/composables/defineLocale'
 import UApp from '../../src/runtime/components/App.vue'
 import UBreadcrumb from '../../src/runtime/components/Breadcrumb.vue'
 import UButton from '../../src/runtime/components/Button.vue'
 import UCalendar from '../../src/runtime/components/Calendar.vue'
 import UCarousel from '../../src/runtime/components/Carousel.vue'
+import UCommandPalette from '../../src/runtime/components/CommandPalette.vue'
 import UInputDate from '../../src/runtime/components/InputDate.vue'
 import UInputMenu from '../../src/runtime/components/InputMenu.vue'
 import UInputNumber from '../../src/runtime/components/InputNumber.vue'
@@ -23,7 +23,6 @@ import UStepper from '../../src/runtime/components/Stepper.vue'
 import type { AppProps } from '../../src/runtime/components/App.vue'
 import ar from '../../src/runtime/locale/ar'
 import de from '../../src/runtime/locale/de'
-import en from '../../src/runtime/locale/en'
 import fr from '../../src/runtime/locale/fr'
 
 const teardowns: Array<() => void> = []
@@ -139,6 +138,12 @@ describe('useLocale', () => {
     expect(wrapper.findAll('[data-slot="item"]').map(item => item.attributes('aria-roledescription'))).toEqual(['diapositive', 'diapositive'])
   })
 
+  it('labels the CommandPalette listbox in the App locale', async () => {
+    const wrapper = await mountInApp({ locale: fr }, () => h(UCommandPalette as Component))
+
+    expect(wrapper.get('[role="listbox"]').attributes('aria-label')).toBe('Résultats')
+  })
+
   it('labels InputDate segments in the App locale', async () => {
     const wrapper = await mountInApp({ locale: fr }, () => h(UInputDate))
 
@@ -201,10 +206,9 @@ describe('useLocale', () => {
   })
 
   it('labels Toaster in the App locale', async () => {
-    const locale = extendLocale(en, { messages: { toaster: { label: 'Alerte', viewport: 'Alertes ({hotkey})' } } })
-    const wrapper = await mountInApp({ locale, toaster: { portal: false } }, () => h('div'))
+    const wrapper = await mountInApp({ locale: de, toaster: { portal: false } }, () => h('div'))
 
-    expect(wrapper.findComponent(ToastProvider).props('label')).toBe('Alerte')
-    expect(wrapper.get('[role="region"]').attributes('aria-label')).toBe('Alertes (F8)')
+    expect(wrapper.findComponent(ToastProvider).props('label')).toBe('Benachrichtigung')
+    expect(wrapper.get('[role="region"]').attributes('aria-label')).toBe('Benachrichtigungen (F8)')
   })
 })
