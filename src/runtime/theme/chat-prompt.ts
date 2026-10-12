@@ -7,7 +7,8 @@ export default defineTheme({
     header: 'flex items-center gap-1.5',
     body: 'items-start gap-1.5',
     footer: 'flex items-center justify-between gap-1.5',
-    base: 'px-0'
+    base: '',
+    input: 'px-0'
   },
   variants: {
     color: colorVariant({ root: '' }),

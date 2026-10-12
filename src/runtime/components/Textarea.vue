@@ -73,6 +73,7 @@ import { useComponentProps, useComponentOverrides } from '../composables/useComp
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { isEmpty, looseToNumber } from '../utils'
+import { isFieldClick } from '../utils/field'
 import { tv } from '../utils/tv'
 import { getAvatarSize } from '../utils/size'
 import UIcon from './Icon.vue'
@@ -183,6 +184,14 @@ function autoFocus() {
   }
 }
 
+// The box looks like the textarea, so a click on an icon or on plain leading or
+// trailing content goes to the textarea. A control in there keeps its own click.
+function onRootClick(event: MouseEvent) {
+  if (isFieldClick(event)) {
+    textareaRef.value?.focus()
+  }
+}
+
 function autoResize() {
   if (props.autoresize && textareaRef.value) {
     textareaRef.value.rows = props.rows!
@@ -235,7 +244,7 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'textarea'" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'textarea'" :class="ui.root({ class: [ui.base({ class: props.ui?.base }), props.ui?.root, props.class] })" @click="onRootClick">
     <textarea
       :id="id"
       ref="textareaRef"
@@ -243,11 +252,11 @@ defineExpose({
       :name="name"
       :rows="props.rows"
       :placeholder="props.placeholder"
-      :class="ui.base({ class: props.ui?.base })"
+      :class="ui.input({ class: props.ui?.input })"
       :disabled="disabled"
       :required="props.required"
       v-bind="{ ...$attrs, ...ariaAttrs }"
-      data-slot="textarea-base"
+      data-slot="textarea-input"
       @input="onInput"
       @blur="onBlur"
       @change="onChange"

@@ -1,37 +1,39 @@
-import input from './input-legacy'
+import input from './input'
 import { extendTheme } from '../utils/theme'
 
 export default extendTheme(input, {
   slots: {
-    leading: 'absolute inset-s-0 flex items-start',
-    trailing: 'absolute inset-e-0 flex items-start'
+    root: 'relative inline-flex items-start',
+    leading: 'order-first flex items-start',
+    trailing: 'flex items-start'
   },
   variants: {
     autoresize: {
       true: {
-        base: 'resize-none'
+        input: 'resize-none'
       }
     },
+    // The leading and the trailing line up with the first line of text
     size: {
       xs: {
-        leading: (prev: string) => [prev, 'inset-y-(--ui-control-py)'],
-        trailing: (prev: string) => [prev, 'inset-y-(--ui-control-py)']
+        leading: (prev: string) => [prev, 'pt-(--ui-control-py)'],
+        trailing: (prev: string) => [prev, 'pt-(--ui-control-py)']
       },
       sm: {
-        leading: (prev: string) => [prev, 'inset-y-(--ui-control-py)'],
-        trailing: (prev: string) => [prev, 'inset-y-(--ui-control-py)']
+        leading: (prev: string) => [prev, 'pt-(--ui-control-py)'],
+        trailing: (prev: string) => [prev, 'pt-(--ui-control-py)']
       },
       md: {
-        leading: (prev: string) => [prev, 'inset-y-(--ui-control-py)'],
-        trailing: (prev: string) => [prev, 'inset-y-(--ui-control-py)']
+        leading: (prev: string) => [prev, 'pt-(--ui-control-py)'],
+        trailing: (prev: string) => [prev, 'pt-(--ui-control-py)']
       },
       lg: {
-        leading: (prev: string) => [prev, 'inset-y-(--ui-control-py)'],
-        trailing: (prev: string) => [prev, 'inset-y-(--ui-control-py)']
+        leading: (prev: string) => [prev, 'pt-(--ui-control-py)'],
+        trailing: (prev: string) => [prev, 'pt-(--ui-control-py)']
       },
       xl: {
-        leading: (prev: string) => [prev, 'inset-y-(--ui-control-py)'],
-        trailing: (prev: string) => [prev, 'inset-y-(--ui-control-py)']
+        leading: (prev: string) => [prev, 'pt-(--ui-control-py)'],
+        trailing: (prev: string) => [prev, 'pt-(--ui-control-py)']
       }
     }
   }

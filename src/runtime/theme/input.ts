@@ -5,13 +5,14 @@ import { defineTheme } from '../utils/theme'
 // padding of its own. The native input sits in it with the padding of the size,
 // in flow with the leading and the trailing, which bring their own: whatever
 // they hold takes its own room, and the input gives up its padding on that side
-// for the gap.
+// for the gap. The box follows the state of its direct child, the native element:
+// a button in the leading or the trailing is one level down and doesn't count.
 export default defineTheme({
   slots: {
     root: 'relative inline-flex items-center',
     // The browser paints its autofill tint on the input alone: `bg-clip-text` keeps
     // it behind the glyphs, and the box takes a tint of its own
-    base: 'rounded-md cursor-text text-strong has-[>input:autofill]:bg-accent-soft has-[>input:disabled]:cursor-not-allowed has-[>input:disabled]:opacity-75 transition-colors',
+    base: 'rounded-md cursor-text text-strong has-[>:autofill]:bg-accent-soft has-[>:disabled]:cursor-not-allowed has-[>:disabled]:opacity-75 transition-colors',
     input: 'w-full min-w-0 flex-1 border-0 appearance-none bg-transparent bg-clip-text outline-none placeholder:text-faint disabled:cursor-not-allowed',
     // After the input in the DOM, so the input keeps the first tab stop
     leading: 'order-first flex items-center',
@@ -22,8 +23,8 @@ export default defineTheme({
   },
   variants: {
     fieldGroup: {
-      horizontal: { base: 'not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none has-[>input:focus-visible]:z-1' },
-      vertical: { base: 'not-only:first:rounded-b-none not-only:last:rounded-t-none not-last:not-first:rounded-none has-[>input:focus-visible]:z-1' }
+      horizontal: { base: 'not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none has-[>:focus-visible]:z-1' },
+      vertical: { base: 'not-only:first:rounded-b-none not-only:last:rounded-t-none not-last:not-first:rounded-none has-[>:focus-visible]:z-1' }
     },
     size: {
       xs: {
@@ -73,10 +74,10 @@ export default defineTheme({
       }
     },
     variant: {
-      outline: { base: 'bg-default ring ring-inset ring-strong outline-accent-focus has-[>input:focus-visible]:outline-3 has-[>input:focus-visible]:ring-accent' },
-      soft: { base: 'bg-tint hover:bg-soft has-[>input:focus]:bg-soft has-[>input:disabled]:bg-tint outline-accent-focus has-[>input:focus-visible]:outline-3' },
-      subtle: { base: 'bg-soft ring ring-inset ring-strong outline-accent-focus has-[>input:focus-visible]:outline-3 has-[>input:focus-visible]:ring-accent' },
-      ghost: { base: 'bg-transparent hover:bg-soft has-[>input:focus]:bg-soft has-[>input:disabled]:bg-transparent dark:has-[>input:disabled]:bg-transparent outline-accent-focus has-[>input:focus-visible]:outline-3' },
+      outline: { base: 'bg-default ring ring-inset ring-strong outline-accent-focus has-[>:focus-visible]:outline-3 has-[>:focus-visible]:ring-accent' },
+      soft: { base: 'bg-tint hover:bg-soft has-[>:focus]:bg-soft has-[>:disabled]:bg-tint outline-accent-focus has-[>:focus-visible]:outline-3' },
+      subtle: { base: 'bg-soft ring ring-inset ring-strong outline-accent-focus has-[>:focus-visible]:outline-3 has-[>:focus-visible]:ring-accent' },
+      ghost: { base: 'bg-transparent hover:bg-soft has-[>:focus]:bg-soft has-[>:disabled]:bg-transparent dark:has-[>:disabled]:bg-transparent outline-accent-focus has-[>:focus-visible]:outline-3' },
       none: { base: 'bg-transparent' }
     },
     color: colorVariant({ root: '' }),
