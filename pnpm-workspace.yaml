@@ -174,7 +174,7 @@ overrides:
   tailwind-variants: 3.2.2
   unplugin: ^3.4.0
   c12: ^3.3.4
-  h3: 1.15.11
+  h3: 2.0.2
   typescript: ^6.0.3
 
 allowBuilds:
