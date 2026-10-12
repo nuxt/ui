@@ -7,8 +7,8 @@ export default extendTheme(input, {
   slots: {
     root: () => undefined,
     base: () => 'relative group rounded-md inline-flex items-center text-strong disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
-    value: 'flex-1 min-w-0 text-start truncate pointer-events-none',
-    placeholder: 'flex-1 min-w-0 text-start truncate text-faint',
+    value: 'truncate pointer-events-none',
+    placeholder: 'truncate text-faint',
     arrow: 'fill-bg stroke-default',
     content: 'max-h-[min(15rem,var(--reka-select-content-available-height,15rem))] w-(--reka-select-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden origin-(--reka-select-content-transform-origin) pointer-events-auto data-[state=closed]:pointer-events-none! flex flex-col',
     viewport: 'relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1',

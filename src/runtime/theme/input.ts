@@ -29,10 +29,11 @@ export default defineTheme({
     // After the input in the DOM, so the input keeps the first tab stop.
     // The box sits on a line of text by its first item: an invisible character
     // gives the leading the baseline of the text, so an icon doesn't move the box
-    leading: `order-first flex items-center ps-(--ui-control-px) before:content-['x'] before:w-0 before:invisible`,
+    leading: `order-first flex items-center ps-(--ui-control-px) has-[>button]:ps-1 before:content-['x'] before:w-0 before:invisible`,
     leadingIcon: 'shrink-0 text-faint',
     leadingAvatar: 'shrink-0',
-    trailing: 'flex items-center pe-(--ui-control-px)',
+    // A button has its own padding, so it sits closer to the edge
+    trailing: 'flex items-center pe-(--ui-control-px) has-[>button]:pe-1',
     trailingIcon: 'shrink-0 text-faint'
   },
   variants: {
