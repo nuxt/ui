@@ -248,6 +248,7 @@ ignore:
   - data
   - index
   - categories
+  - colors
 props:
   colors:
     - success
