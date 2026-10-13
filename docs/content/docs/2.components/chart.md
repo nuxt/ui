@@ -20,9 +20,11 @@ navigation.badge: Soon
 
 ## Usage
 
-The Chart component is built on top of [TanStack Charts](https://tanstack.com/charts/latest). It renders an SVG on the server and follows your theme and color mode.
+The Chart component is built on top of [TanStack Charts](https://tanstack.com/charts/latest) and renders an SVG on the server.
 
-Install the `@tanstack/charts` package to use it:
+::note
+You need to install the `@tanstack/charts` package to use this component.
+::
 
 ::code-group{sync="pm"}
 
@@ -48,7 +50,9 @@ bun add @tanstack/charts
 
 Use the `data` prop to pass an array of objects, the `index` prop to set the key used for the x axis and the `categories` prop to set the keys plotted as series.
 
-Use the `aria-label` prop to name the chart for assistive technologies. It defaults to the categories.
+::tip
+Use the `aria-label` prop to name the chart for assistive technologies.
+::
 
 ::component-code
 ---
@@ -87,9 +91,11 @@ props:
 
 ### Type
 
-Use the `type` prop to change the type of chart, `line`, `area`, `bar` or `donut`. Defaults to `line`.
+Use the `type` prop to change the type of chart. Defaults to `line`.
 
-With `donut`, each row of `data` is a slice: `index` sets its label and the first key of `categories` its value.
+::note
+With `donut`, each row of `data` is a slice. The `index` sets its label and the first key of `categories` its value.
+::
 
 ::component-code
 ---
@@ -135,7 +141,11 @@ props:
 
 ### Stacked
 
-Use the `stacked` prop to stack the series on top of each other. Only applies to `area` and `bar` types.
+Use the `stacked` prop to stack the series on top of each other.
+
+::note
+This only applies to the `area` and `bar` types.
+::
 
 ::component-code
 ---
@@ -176,7 +186,11 @@ props:
 
 ### Curve
 
-Use the `curve` prop to change the shape of the line between values, `linear`, `monotone` or `step`. Only applies to `line` and `area` types. Defaults to `linear`.
+Use the `curve` prop to change the shape of the line between values. Defaults to `linear`.
+
+::note
+This only applies to the `line` and `area` types.
+::
 
 ::component-code
 ---
@@ -216,7 +230,15 @@ props:
 
 ### Colors
 
-Use the `colors` prop to set the color of each series, in `categories` order, or of each slice in `data` order with `donut`. It accepts theme colors or any CSS color. Defaults to the [`--ui-chart-*`](/docs/getting-started/theme/css-variables#chart) CSS variables. When there are more series than colors, the colors repeat as lighter tints.
+Use the `colors` prop to set the color of each series with theme colors or any CSS color.
+
+::tip{to="/docs/getting-started/theme/css-variables#chart"}
+The colors default to the `--ui-chart-*` CSS variables, which you can customize in your `main.css` file.
+::
+
+::note
+The colors follow the `categories` order, or the `data` order with `donut`. When there are more series than colors, they repeat as lighter tints.
+::
 
 ::component-code
 ---
@@ -258,7 +280,11 @@ props:
 
 ### Points
 
-Use the `points` prop to draw a dot at each value. Only applies to the `line` type.
+Use the `points` prop to draw a dot at each value.
+
+::note
+This only applies to the `line` type.
+::
 
 ::component-code
 ---
@@ -378,7 +404,11 @@ props:
 
 ### Legend
 
-Use the `legend` prop to toggle the legend. Defaults to `true` when there is more than one category, or more than one slice with `donut`.
+Use the `legend` prop to toggle the legend.
+
+::note
+The legend is displayed by default when there is more than one category, or more than one slice with `donut`.
+::
 
 ::component-code
 ---
@@ -418,7 +448,11 @@ props:
 
 ### Tooltip
 
-A [Tooltip](/docs/components/tooltip) shows the focused values on hover and keyboard navigation. Use the `tooltip` prop to customize it with any of its props, or set it to `false` to hide it.
+Use the `tooltip` prop to customize or hide the [Tooltip](/docs/components/tooltip) displayed on the focused values. Defaults to `true`.
+
+::tip{to="#with-custom-tooltip"}
+You can also use the `#tooltip` slot to replace its content.
+::
 
 ::component-code
 ---
@@ -458,7 +492,11 @@ props:
 
 ### Thickness
 
-Use the `thickness` prop to set the width of the ring in pixels. Only applies to the `donut` type. Defaults to `24`.
+Use the `thickness` prop to set the width of the ring in pixels. Defaults to `24`.
+
+::note
+This only applies to the `donut` type.
+::
 
 ::component-code
 ---
@@ -499,9 +537,11 @@ props:
 
 ### Size
 
-The chart follows the width of its container. Use the `height` prop to set its height in pixels, it defaults to `300`.
+Use the `height` prop to set the height of the chart in pixels. Defaults to `300`.
 
-Use the `aspect-ratio` prop to derive the height from the width, or the `width` prop to set a fixed width in pixels.
+::tip
+The chart follows the width of its container. Use the `aspect-ratio` prop to derive the height from the width, or the `width` prop to set a fixed width.
+::
 
 ::component-code
 ---
@@ -576,9 +616,11 @@ name: 'chart-tooltip-slot-example'
 
 ### With a chart definition
 
-Use the `definition` prop to pass a complete [TanStack Charts definition](https://tanstack.com/charts/latest/docs/concepts/chart-definitions) when the other props are not enough. A definition from the [TanStack Charts](https://tanstack.com/charts/latest) examples renders as is, with the tooltip and the responsive sizing applied. Series without an explicit color use the [`--ui-chart-*`](/docs/getting-started/theme/css-variables#chart) CSS variables, colors set in the definition are kept.
+Use the `definition` prop to pass a complete [TanStack Charts definition](https://tanstack.com/charts/latest/docs/concepts/chart-definitions) when the other props are not enough.
 
-Use the `select`, `focus-change` and `focus-group-change` events to react to the focused points.
+::note{to="https://tanstack.com/charts/latest" target="_blank"}
+A definition from the TanStack Charts examples renders as is, with the tooltip and the responsive sizing applied.
+::
 
 ::component-example
 ---
@@ -587,8 +629,16 @@ name: 'chart-definition-example'
 ---
 ::
 
-::note
-When the definition brings its own `tooltip`, it is displayed in place of the `tooltip` prop. Examples importing `d3-*` packages need them installed in your project.
+::tip{to="/docs/getting-started/theme/css-variables#chart"}
+Series without an explicit color use the `--ui-chart-*` CSS variables. Colors set in the definition are kept.
+::
+
+::caution
+When the definition brings its own `tooltip`, it is displayed in place of the `tooltip` prop.
+::
+
+::warning
+Examples importing `d3-*` packages need them installed in your project.
 ::
 
 ## API
