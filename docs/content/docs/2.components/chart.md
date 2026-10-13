@@ -1,12 +1,13 @@
 ---
 title: Chart
-description: A chart to visualize data as lines, areas or bars.
+description: A chart to visualize data as lines, areas, bars or a donut.
 category: data
 keywords:
   - graph
   - line chart
   - bar chart
   - area chart
+  - donut chart
 links:
   - label: TanStack Charts
     icon: i-simple-icons-tanstack
@@ -46,6 +47,8 @@ bun add @tanstack/charts
 ### Data
 
 Use the `data` prop to pass an array of objects, the `index` prop to set the key used for the x axis and the `categories` prop to set the keys plotted as series.
+
+Use the `aria-label` prop to name the chart for assistive technologies. It defaults to the categories.
 
 ::component-code
 ---
@@ -213,7 +216,7 @@ props:
 
 ### Colors
 
-Use the `colors` prop to set the color of each series, in `categories` order. It accepts theme colors or any CSS color. Defaults to the [`--ui-chart-*`](/docs/getting-started/theme/css-variables#chart) CSS variables. When there are more series than colors, the colors repeat as lighter tints.
+Use the `colors` prop to set the color of each series, in `categories` order, or of each slice in `data` order with `donut`. It accepts theme colors or any CSS color. Defaults to the [`--ui-chart-*`](/docs/getting-started/theme/css-variables#chart) CSS variables. When there are more series than colors, the colors repeat as lighter tints.
 
 ::component-code
 ---
@@ -494,9 +497,11 @@ props:
 ---
 ::
 
-### Height
+### Size
 
-Use the `height` prop to set the height of the chart in pixels. Defaults to `300`.
+The chart follows the width of its container. Use the `height` prop to set its height in pixels, it defaults to `300`.
+
+Use the `aspect-ratio` prop to derive the height from the width, or the `width` prop to set a fixed width in pixels.
 
 ::component-code
 ---
@@ -573,7 +578,7 @@ name: 'chart-tooltip-slot-example'
 
 Use the `definition` prop to pass a complete [TanStack Charts definition](https://tanstack.com/charts/latest/docs/concepts/chart-definitions) when the other props are not enough. A definition from the [TanStack Charts](https://tanstack.com/charts/latest) examples renders as is, with the tooltip and the responsive sizing applied. Series without an explicit color use the [`--ui-chart-*`](/docs/getting-started/theme/css-variables#chart) CSS variables, colors set in the definition are kept.
 
-Use the `height`, `aspect-ratio` and `width` props to size it, and the `select`, `focus-change` and `focus-group-change` events to react to the focused points.
+Use the `select`, `focus-change` and `focus-group-change` events to react to the focused points.
 
 ::component-example
 ---
