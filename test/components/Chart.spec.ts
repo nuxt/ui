@@ -1,4 +1,5 @@
-import { ref } from 'vue'
+import { defineComponent, ref } from 'vue'
+import { TooltipProvider } from 'reka-ui'
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
@@ -19,7 +20,9 @@ describe('Chart', () => {
     ],
     index: 'month',
     categories: ['desktop', 'mobile'],
-    ariaLabel: 'Visitors'
+    ariaLabel: 'Visitors',
+    // `UTooltip` needs the `TooltipProvider` from `UApp`, covered on its own below.
+    tooltip: false
   }
 
   // First in the file and unmounted after: `useLocale` is shared on the client, so a
@@ -40,8 +43,8 @@ describe('Chart', () => {
   renderEach(Chart, [
     // Props
     ...types.map((type: string) => [`with type ${type}`, { props: { ...props, type } }]),
-    ['with type donut and center slot', { props: { data: props.data, type: 'donut', index: 'month', categories: ['desktop'], thickness: 12, ariaLabel: 'Desktop' }, slots: { center: () => 'Center slot' } }],
-    ['with type donut and legend', { props: { data: props.data, type: 'donut', index: 'month', categories: ['desktop'], legend: true, ariaLabel: 'Desktop' } }],
+    ['with type donut and center slot', { props: { tooltip: false, data: props.data, type: 'donut', index: 'month', categories: ['desktop'], thickness: 12, ariaLabel: 'Desktop' }, slots: { center: () => 'Center slot' } }],
+    ['with type donut and legend', { props: { tooltip: false, data: props.data, type: 'donut', index: 'month', categories: ['desktop'], legend: true, ariaLabel: 'Desktop' } }],
     ['with stacked bar', { props: { ...props, type: 'bar', stacked: true } }],
     ['with stacked area', { props: { ...props, type: 'area', stacked: true } }],
     ['with curve monotone', { props: { ...props, curve: 'monotone' } }],
@@ -54,12 +57,23 @@ describe('Chart', () => {
     ['with colors', { props: { ...props, colors: ['success', '#8b5cf6'] } }],
     ['with neutral color', { props: { ...props, colors: ['neutral', 'primary'] } }],
     ['with empty colors', { props: { ...props, colors: [] } }],
-    ['with definition only', { props: { definition: defineChart({ marks: [], scales: { x: null, y: null } }) } }],
+    ['with definition only', { props: { tooltip: false, definition: defineChart({ marks: [], scales: { x: null, y: null } }) } }],
     ['with format', { props: { ...props, format: (value: number) => `$${value}` } }],
     ['with height', { props: { ...props, height: 200 } }],
     ['with class', { props: { ...props, class: 'max-w-lg' } }],
     ['with ui', { props: { ...props, ui: { base: 'rounded-md' } } }]
   ])
+
+  it('renders with a tooltip inside a tooltip provider', async () => {
+    const wrapper = await mountSuspended(defineComponent({
+      components: { TooltipProvider, Chart },
+      setup: () => ({ props: { ...props, tooltip: true } }),
+      template: '<TooltipProvider><Chart v-bind="props" /></TooltipProvider>'
+    }))
+
+    expect(wrapper.find('svg.ts-chart').exists()).toBe(true)
+    expect(wrapper.find('.ts-chart-tooltip').exists()).toBe(false)
+  })
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Chart, {

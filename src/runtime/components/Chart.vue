@@ -1,13 +1,22 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import type { ChartDefinition, ChartPoint, ChartTooltipBodySlotContext } from '@tanstack/charts/vue'
+import type { ChartDefinition, ChartPoint } from '@tanstack/charts/vue'
 import theme from '#build/ui/chart'
+import type { TooltipProps } from './Tooltip.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type Chart = ComponentConfig<typeof theme, AppConfig, 'chart'>
 
 export type ChartDatum = Record<string, any>
+
+export interface ChartTooltipRow {
+  label: string
+  value: string
+  color?: string
+  /** Whether this row is the point under the pointer. */
+  active?: boolean
+}
 
 export interface ChartProps<T extends ChartDatum = ChartDatum> {
   /**
@@ -58,6 +67,12 @@ export interface ChartProps<T extends ChartDatum = ChartDatum> {
   /** Format the values on the y axis and in the tooltip. */
   format?: (value: number) => string
   /**
+   * Display a tooltip on the focused values.
+   * `{ content: { side: 'top', sideOffset: 12 } }`{lang="ts-type"}
+   * @defaultValue true
+   */
+  tooltip?: boolean | TooltipProps
+  /**
    * The width of the ring in pixels. Only applies to `donut`.
    * @defaultValue 24
    */
@@ -84,20 +99,19 @@ export interface ChartProps<T extends ChartDatum = ChartDatum> {
 }
 
 export interface ChartSlots {
-  tooltip?(props: ChartTooltipBodySlotContext<any, any, any>): VNode[]
+  tooltip?(props: { title?: string, rows: ChartTooltipRow[], points: ChartPoint<any>[], primaryPoint: ChartPoint<any> }): VNode[]
   center?(props?: {}): VNode[]
 }
 </script>
 
 <script setup lang="ts" generic="T extends ChartDatum">
-import { computed } from 'vue'
+import { computed, shallowRef, useTemplateRef } from 'vue'
 import { Chart as TanStackChart } from '@tanstack/charts/vue'
 import { areaY, barY, colorLegend, colorLegendItems, defineChart, group, lineY, ruleY } from '@tanstack/charts'
 import { scaleBand } from '@tanstack/charts/scales/band'
 import { scaleLinear } from '@tanstack/charts/scales/linear'
 import { scaleOrdinal } from '@tanstack/charts/scales/ordinal'
 import { scalePoint } from '@tanstack/charts/scales/point'
-import { tooltip } from '@tanstack/charts/tooltip'
 import { crosshair } from '@tanstack/charts/crosshair'
 import { pie, polar, radialArc } from '@tanstack/charts/polar'
 import { useAppConfig } from '#imports'
@@ -105,6 +119,7 @@ import { useComponentProps } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { chartCurves } from '../utils/chart'
 import { tv } from '../utils/tv'
+import UTooltip from './Tooltip.vue'
 
 const _props = withDefaults(defineProps<ChartProps<T>>(), {
   type: 'line',
@@ -113,6 +128,7 @@ const _props = withDefaults(defineProps<ChartProps<T>>(), {
   grid: true,
   xAxis: true,
   yAxis: true,
+  tooltip: true,
   thickness: 24,
   height: 300,
   initialWidth: 640
@@ -186,16 +202,6 @@ const donutDefinition = computed(() => {
         .domain(labels)
         .range(labels.map((_, i) => `var(--ts-chart-${(i % seriesColors.value.length) + 1})`)),
       legend: props.legend ? legendGuide : undefined
-    },
-    tooltip: {
-      use: tooltip,
-      content: (points: readonly ChartPoint<any>[]) => ({
-        rows: points.map(point => ({
-          label: String(point.datum[props.index!]),
-          value: formatValue(point.datum.value),
-          color: point.color
-        }))
-      })
     }
   } as any)
 })
@@ -260,28 +266,69 @@ const generatedDefinition = computed(() => {
       scale: color,
       legend: (props.legend ?? multiple) ? legendGuide : undefined
     },
-    focus: 'group-x',
-    // The default content labels the rows of a single series with channel names (`x`, `y`).
-    tooltip: {
-      use: tooltip,
-      content: (points: readonly ChartPoint<any>[], { primaryPoint }: { primaryPoint?: ChartPoint }) => ({
-        title: String(points[0]?.datum.x ?? ''),
-        rows: points.map(point => ({
-          label: point.datum.category,
-          value: formatValue(point.datum.value),
-          color: point.color,
-          active: points.length > 1 && point === primaryPoint
-        }))
-      })
-    }
+    focus: 'group-x'
   } as any)
 })
+
+// TanStack Charts reports the focused points and the tooltip is ours: a `UTooltip` anchored on the primary point.
+const rootRef = useTemplateRef('rootRef')
+const primaryPoint = shallowRef<ChartPoint<any> | null>(null)
+const groupPoints = shallowRef<readonly ChartPoint<any>[]>([])
+
+const tooltipPoints = computed(() => {
+  if (!primaryPoint.value) {
+    return []
+  }
+
+  return groupPoints.value.includes(primaryPoint.value) ? [...groupPoints.value] : [primaryPoint.value]
+})
+
+const tooltipContent = computed<{ title?: string, rows: ChartTooltipRow[] }>(() => {
+  const points = tooltipPoints.value
+  const generated = !props.definition
+
+  if (generated && props.type === 'donut') {
+    return {
+      rows: points.map(point => ({ label: String(point.datum[props.index!]), value: formatValue(point.datum.value), color: point.color }))
+    }
+  }
+
+  return {
+    title: String((generated ? points[0]?.datum.x : points[0]?.xValue) ?? ''),
+    rows: points.map(point => ({
+      label: generated ? String(point.datum.category) : point.groupLabel,
+      value: generated ? formatValue(point.datum.value) : String(point.yValue),
+      color: point.color,
+      active: points.length > 1 && point === primaryPoint.value
+    }))
+  }
+})
+
+// Point coordinates are in scene pixels, which match the host box. The reference keeps its identity
+// and reads the last focused point: Reka remounts the content when the reference changes.
+let anchor = { x: 0, y: 0 }
+const tooltipReference = {
+  getBoundingClientRect: () => {
+    if (primaryPoint.value) {
+      anchor = { x: primaryPoint.value.x, y: primaryPoint.value.y }
+    }
+
+    const rect = rootRef.value?.getBoundingClientRect()
+
+    return DOMRect.fromRect({ x: (rect?.left ?? 0) + anchor.x, y: (rect?.top ?? 0) + anchor.y, width: 0, height: 0 })
+  }
+}
+
+const tooltipProps = computed(() => typeof props.tooltip === 'object' ? props.tooltip : {})
+
+// Reka keeps a visually hidden copy of the content for assistive technologies and does not update it from the slot.
+const tooltipLabel = computed(() => [tooltipContent.value.title, ...tooltipContent.value.rows.map(row => `${row.label} ${row.value}`)].filter(Boolean).join(', '))
 
 const chartDefinition = computed(() => (props.definition ?? generatedDefinition.value) as ChartDefinition<any, any, any>)
 </script>
 
 <template>
-  <div data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" :style="style">
+  <div ref="rootRef" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" :style="style">
     <TanStackChart
       :definition="chartDefinition"
       :aria-label="props.ariaLabel || seriesKeys.join(', ') || 'Chart'"
@@ -289,13 +336,39 @@ const chartDefinition = computed(() => (props.definition ?? generatedDefinition.
       :initial-width="props.initialWidth"
       :style="{ height: `${props.height}px` }"
       :class="ui.base({ class: props.ui?.base })"
+      :on-focus-change="(point: ChartPoint<any> | null) => primaryPoint = point"
+      :on-focus-group-change="(points: readonly ChartPoint<any>[]) => groupPoints = points"
+    />
+
+    <UTooltip
+      v-if="!!props.tooltip"
+      :open="!!primaryPoint"
+      :reference="tooltipReference"
+      :portal="false"
+      v-bind="tooltipProps"
+      :content="{ side: 'top', sideOffset: 12, updatePositionStrategy: 'always', ariaLabel: tooltipLabel, ...tooltipProps.content }"
+      :ui="{ ...tooltipProps.ui, content: ui.tooltip({ class: [tooltipProps.ui?.content, props.ui?.tooltip] }) }"
     >
-      <template v-if="!!slots.tooltip" #tooltipBody="slotProps">
-        <div data-slot="tooltip" :class="ui.tooltip({ class: props.ui?.tooltip })">
-          <slot name="tooltip" v-bind="slotProps" />
-        </div>
+      <template #content>
+        <slot v-if="primaryPoint" name="tooltip" v-bind="tooltipContent" :points="tooltipPoints" :primary-point="primaryPoint">
+          <p v-if="tooltipContent.title" data-slot="tooltipTitle" :class="ui.tooltipTitle({ class: props.ui?.tooltipTitle })">
+            {{ tooltipContent.title }}
+          </p>
+
+          <div
+            v-for="(row, rowIndex) in tooltipContent.rows"
+            :key="rowIndex"
+            data-slot="tooltipRow"
+            :data-active="row.active === true"
+            :class="ui.tooltipRow({ class: props.ui?.tooltipRow })"
+          >
+            <span data-slot="tooltipIndicator" :class="ui.tooltipIndicator({ class: props.ui?.tooltipIndicator })" :style="{ backgroundColor: row.color }" />
+            <span data-slot="tooltipLabel" :class="ui.tooltipLabel({ class: props.ui?.tooltipLabel })">{{ row.label }}</span>
+            <span data-slot="tooltipValue" :class="ui.tooltipValue({ class: props.ui?.tooltipValue })">{{ row.value }}</span>
+          </div>
+        </slot>
       </template>
-    </TanStackChart>
+    </UTooltip>
 
     <div v-if="!!slots.center" data-slot="center" :class="ui.center({ class: props.ui?.center })">
       <slot name="center" />
