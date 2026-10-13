@@ -7,7 +7,7 @@ import { defineTheme } from '../utils/theme'
 // segments take the focus, so the box follows it with `has-focus`.
 export default defineTheme({
   slots: {
-    root: 'group relative inline-flex items-center rounded-md select-none text-strong transition-colors',
+    root: 'group relative inline-flex items-center rounded-md select-none text-strong data-disabled:cursor-not-allowed transition-colors',
     segment: 'rounded-sm text-center outline-hidden data-placeholder:text-faint data-[segment=literal]:text-muted data-invalid:text-error data-disabled:cursor-not-allowed data-disabled:opacity-75 transition-colors',
     // After the segments in the DOM, so they keep the first tab stops.
     // The box sits on a line of text by its first item: an invisible character
@@ -60,9 +60,9 @@ export default defineTheme({
     },
     variant: {
       outline: { root: 'bg-default ring ring-inset ring-strong outline-accent-focus has-focus-visible:outline-3 has-focus-visible:ring-accent', segment: 'focus:bg-soft' },
-      soft: { root: 'bg-tint hover:bg-soft has-focus:bg-soft disabled:bg-tint outline-accent-focus has-focus-visible:outline-3', segment: 'focus:bg-strong' },
+      soft: { root: 'bg-tint hover:bg-soft has-focus:bg-soft data-disabled:bg-tint outline-accent-focus has-focus-visible:outline-3', segment: 'focus:bg-strong' },
       subtle: { root: 'bg-soft ring ring-inset ring-strong outline-accent-focus has-focus-visible:outline-3 has-focus-visible:ring-accent', segment: 'focus:bg-strong' },
-      ghost: { root: 'bg-transparent hover:bg-soft has-focus:bg-soft disabled:bg-transparent dark:disabled:bg-transparent outline-accent-focus has-focus-visible:outline-3', segment: 'focus:bg-strong' },
+      ghost: { root: 'bg-transparent hover:bg-soft has-focus:bg-soft data-disabled:bg-transparent dark:data-disabled:bg-transparent outline-accent-focus has-focus-visible:outline-3', segment: 'focus:bg-strong' },
       none: { root: 'bg-transparent has-focus:outline-none', segment: 'focus:bg-soft' }
     },
     color: colorVariant({ root: '' }),
