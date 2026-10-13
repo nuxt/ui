@@ -4,6 +4,7 @@ import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Chart from '../../src/runtime/components/Chart.vue'
 import { renderEach } from '../component-render'
+import { defineChart } from '@tanstack/charts'
 import theme from '#build/ui/chart'
 import ar from '../../src/runtime/locale/ar'
 
@@ -51,6 +52,9 @@ describe('Chart', () => {
     ['without axes', { props: { ...props, xAxis: false, yAxis: false } }],
     ['without legend', { props: { ...props, legend: false } }],
     ['with colors', { props: { ...props, colors: ['success', '#8b5cf6'] } }],
+    ['with neutral color', { props: { ...props, colors: ['neutral', 'primary'] } }],
+    ['with empty colors', { props: { ...props, colors: [] } }],
+    ['with definition only', { props: { definition: defineChart({ marks: [], scales: { x: null, y: null } }) } }],
     ['with format', { props: { ...props, format: (value: number) => `$${value}` } }],
     ['with height', { props: { ...props, height: 200 } }],
     ['with class', { props: { ...props, class: 'max-w-lg' } }],

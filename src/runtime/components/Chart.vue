@@ -72,7 +72,7 @@ export interface ChartProps<T extends ChartDatum = ChartDatum> {
    * @defaultValue 640
    */
   initialWidth?: number
-  /** The accessible name of the chart. Defaults to the categories. */
+  /** The accessible name of the chart. Defaults to the categories, set it when using `definition`. */
   ariaLabel?: string
   /**
    * A complete TanStack Charts definition. Takes precedence over `data`, `index` and `categories`.
@@ -129,16 +129,22 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chart || {}) })(
   type: props.type
 }))
 
-const themeColors = computed(() => ['neutral', ...Object.keys(appConfig.ui?.colors || {})])
+const themeColors = computed(() => Object.keys(appConfig.ui?.colors || {}))
 
-const seriesColors = computed(() => props.colors ?? ['primary', 'secondary', 'warning', 'error', 'info', 'success'])
+const seriesColors = computed(() => props.colors?.length ? props.colors : ['primary', 'secondary', 'warning', 'error', 'info', 'success'])
+
+function resolveColor(color: string) {
+  // `neutral` has no `--ui-neutral` variable, the theme paints it with the inverted background.
+  if (color === 'neutral') {
+    return 'var(--ui-bg-inverted)'
+  }
+
+  return themeColors.value.includes(color) ? `var(--ui-${color})` : color
+}
 
 // Series paint resolves through `--ts-chart-*` so it follows the theme and color mode
 // without rebuilding the definition.
-const style = computed(() => Object.fromEntries(seriesColors.value.map((color, i) => [
-  `--ts-chart-${i + 1}`,
-  themeColors.value.includes(color) ? `var(--ui-${color})` : color
-])))
+const style = computed(() => Object.fromEntries(seriesColors.value.map((color, i) => [`--ts-chart-${i + 1}`, resolveColor(color)])))
 
 const seriesKeys = computed(() => props.categories ?? [])
 
@@ -149,7 +155,6 @@ const rows = computed(() => (props.data ?? []).flatMap(datum => seriesKeys.value
   value: datum[category] as number
 }))))
 
-// The default tooltip labels its rows with channel names (`x`, `y`) for a single series.
 function formatValue(value: number) {
   return props.format ? props.format(value) : new Intl.NumberFormat(code.value).format(value)
 }
@@ -256,6 +261,7 @@ const generatedDefinition = computed(() => {
       legend: (props.legend ?? multiple) ? legendGuide : undefined
     },
     focus: 'group-x',
+    // The default content labels the rows of a single series with channel names (`x`, `y`).
     tooltip: {
       use: tooltip,
       content: (points: readonly ChartPoint<any>[], { primaryPoint }: { primaryPoint?: ChartPoint }) => ({
@@ -278,7 +284,7 @@ const chartDefinition = computed(() => (props.definition ?? generatedDefinition.
   <div data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" :style="style">
     <TanStackChart
       :definition="chartDefinition"
-      :aria-label="props.ariaLabel ?? seriesKeys.join(', ')"
+      :aria-label="props.ariaLabel || seriesKeys.join(', ') || 'Chart'"
       :height="props.height"
       :initial-width="props.initialWidth"
       :style="{ height: `${props.height}px` }"
