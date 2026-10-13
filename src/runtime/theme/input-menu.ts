@@ -6,10 +6,8 @@ export default extendTheme(input, {
     // With `multiple`, the disabled state is on the tags container
     root: (prev: string) => [prev, 'has-[>[data-disabled]]:cursor-not-allowed has-[>[data-disabled]]:opacity-75'],
     // The tags wrap in their own container, so the leading and the trailing stay
-    // centered on the box whatever its number of lines. It has the padding of the
-    // size in place of the input.
+    // centered on the box whatever its number of lines
     tags: 'flex flex-wrap items-center flex-1 min-w-0 gap-(--ui-control-gap) px-(--ui-control-px) py-(--ui-control-py)',
-    // The box dims as a whole, so its trigger doesn't dim a second time
     trailing: 'group flex items-center pe-(--ui-control-px) disabled:cursor-not-allowed focus:outline-none',
     trailingClear: 'p-0',
     arrow: 'fill-bg stroke-default',

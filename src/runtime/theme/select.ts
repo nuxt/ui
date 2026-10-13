@@ -2,17 +2,14 @@ import { colorVariant } from './color'
 import { fieldGroupVariant } from './field-group'
 import { defineTheme } from '../utils/theme'
 
-// The trigger is a single `<button>`: `base` is the box, with the tokens, the
-// padding and the gap of the size, and the leading and the trailing in its flow
+// `base` is the box, the `<button>` of the trigger
 export default defineTheme({
   slots: {
     base: 'group relative inline-flex items-center rounded-md text-strong disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
-    // The box sits on a line of text by its first item: an invisible character
-    // gives the leading the baseline of the text, so an icon doesn't move the box
+    // The invisible character gives the leading the baseline of the text, see `input.ts`
     leading: `flex items-center before:content-['x'] before:w-0 before:invisible`,
     leadingIcon: 'shrink-0 text-faint',
     leadingAvatar: 'shrink-0',
-    // At the end of the box, whatever sits between the two
     trailing: 'ms-auto flex items-center',
     trailingIcon: 'shrink-0 text-faint',
     value: 'truncate pointer-events-none',
