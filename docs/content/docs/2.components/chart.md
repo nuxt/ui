@@ -213,7 +213,7 @@ props:
 
 ### Colors
 
-Use the `colors` prop to set the color of each series, in `categories` order. It accepts theme colors or any CSS color. Defaults to `['primary', 'secondary', 'warning', 'error', 'info', 'success']`.
+Use the `colors` prop to set the color of each series, in `categories` order. It accepts theme colors or any CSS color. Defaults to `['primary', 'secondary', 'warning', 'error', 'neutral']`. When there are more series than colors, the colors repeat as lighter tints.
 
 ::component-code
 ---

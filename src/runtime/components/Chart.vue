@@ -32,7 +32,8 @@ export interface ChartProps<T extends ChartDatum = ChartDatum> {
   categories?: (keyof T & string)[]
   /**
    * The series colors, in `categories` order, or in `data` order with `donut`. Accepts theme colors or any CSS color.
-   * @defaultValue ['primary', 'secondary', 'warning', 'error', 'info', 'success']
+   * When there are more series than colors, the colors repeat as lighter tints.
+   * @defaultValue ['primary', 'secondary', 'warning', 'error', 'neutral']
    */
   colors?: string[]
   /** Stack the series on top of each other. Only applies to `area` and `bar`. */
@@ -147,7 +148,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chart || {}) })(
 
 const themeColors = computed(() => Object.keys(appConfig.ui?.colors || {}))
 
-const seriesColors = computed(() => props.colors?.length ? props.colors : ['primary', 'secondary', 'warning', 'error', 'info', 'success'])
+const seriesColors = computed(() => props.colors?.length ? props.colors : ['primary', 'secondary', 'warning', 'error', 'neutral'])
 
 function resolveColor(color: string) {
   // `neutral` has no `--ui-neutral` variable, the theme paints it with the inverted background.
@@ -158,11 +159,20 @@ function resolveColor(color: string) {
   return themeColors.value.includes(color) ? `var(--ui-${color})` : color
 }
 
-// Series paint resolves through `--ts-chart-*` so it follows the theme and color mode
-// without rebuilding the definition.
-const style = computed(() => Object.fromEntries(seriesColors.value.map((color, i) => [`--ts-chart-${i + 1}`, resolveColor(color)])))
-
 const seriesKeys = computed(() => props.categories ?? [])
+
+// A donut has one color per row, the other types one per category.
+const seriesCount = computed(() => props.type === 'donut' ? (props.data?.length ?? 0) : seriesKeys.value.length)
+
+// Series paint resolves through `--ts-chart-*` so it follows the theme and color mode
+// without rebuilding the definition. Past the last color, each round is a lighter tint
+// of the same colors so two series never share one.
+const style = computed(() => Object.fromEntries(Array.from({ length: Math.max(seriesCount.value, seriesColors.value.length) }, (_, i) => {
+  const color = resolveColor(seriesColors.value[i % seriesColors.value.length]!)
+  const round = Math.floor(i / seriesColors.value.length)
+
+  return [`--ts-chart-${i + 1}`, round ? `color-mix(in oklab, ${color} ${Math.max(100 - round * 35, 25)}%, var(--ui-bg))` : color]
+})))
 
 // One row per (x, category) pair so a single mark can group, stack and color by series.
 const rows = computed(() => (props.data ?? []).flatMap(datum => seriesKeys.value.map(category => ({
@@ -200,7 +210,7 @@ const donutDefinition = computed(() => {
     color: {
       scale: scaleOrdinal<string, string>()
         .domain(labels)
-        .range(labels.map((_, i) => `var(--ts-chart-${(i % seriesColors.value.length) + 1})`)),
+        .range(labels.map((_, i) => `var(--ts-chart-${i + 1})`)),
       legend: props.legend ? legendGuide : undefined
     }
   } as any)
@@ -214,7 +224,7 @@ const generatedDefinition = computed(() => {
   const multiple = seriesKeys.value.length > 1
   const color = scaleOrdinal<string, string>()
     .domain(seriesKeys.value)
-    .range(seriesKeys.value.map((_, i) => `var(--ts-chart-${(i % seriesColors.value.length) + 1})`))
+    .range(seriesKeys.value.map((_, i) => `var(--ts-chart-${i + 1})`))
 
   const channels = { x: 'x', y: 'value', z: 'category', color: 'category' } as const
   const curve = props.curve === 'linear' ? undefined : chartCurves[props.curve!]
