@@ -148,6 +148,16 @@ exports[`Chart > renders with curve monotone area correctly 1`] = `
 "<div data-slot="root" class="relative w-full text-xs text-muted **:data-reka-popper-content-wrapper:pointer-events-none [--ts-chart-tooltip-background:var(--ui-bg)] [--ts-chart-tooltip-color:var(--ui-text-highlighted)] [--ts-chart-tooltip-border:1px_solid_var(--ui-border)] [--ts-chart-tooltip-border-radius:var(--radius-sm)] [--ts-chart-tooltip-shadow:var(--shadow-sm)] [--ts-chart-tooltip-padding:--spacing(1.5)_--spacing(2.5)] [--ts-chart-tooltip-font:inherit]" style="--ts-chart-1: var(--ui-chart-1); --ts-chart-2: var(--ui-chart-2); --ts-chart-3: var(--ui-chart-3); --ts-chart-4: var(--ui-chart-4); --ts-chart-5: var(--ui-chart-5); --ts-chart-6: var(--ui-chart-6);">
   <div class="ts-chart-host [&amp;_.ts-chart]:rounded-md [&amp;_.ts-chart]:outline-0 [&amp;_.ts-chart]:outline-primary/25 [&amp;_.ts-chart:focus-visible]:outline-3 [&amp;_.ts-chart:focus-visible]:ring [&amp;_.ts-chart:focus-visible]:ring-primary" style="position: relative; height: 300px;">
     <div class="ts-chart-surface" style="width: 100%; height: 100%; position: relative;"><svg class="ts-chart" width="100%" height="100%" viewBox="0 0 640 300" role="img" aria-roledescription="chart" aria-label="Visitors" tabindex="0" style="display:block;overflow:visible">
+        <defs data-ts-key="gradients">
+          <linearGradient data-ts-key="gradient:area-1" id="ts-chart-v-0-area-1" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop data-ts-key="gradient:area-1:stop:0" offset="0%" stop-color="var(--ts-chart-1)" stop-opacity="0.4"></stop>
+            <stop data-ts-key="gradient:area-1:stop:1" offset="100%" stop-color="var(--ts-chart-1)" stop-opacity="0.05"></stop>
+          </linearGradient>
+          <linearGradient data-ts-key="gradient:area-2" id="ts-chart-v-0-area-2" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop data-ts-key="gradient:area-2:stop:0" offset="0%" stop-color="var(--ts-chart-2)" stop-opacity="0.4"></stop>
+            <stop data-ts-key="gradient:area-2:stop:1" offset="100%" stop-color="var(--ts-chart-2)" stop-opacity="0.05"></stop>
+          </linearGradient>
+        </defs>
         <g data-ts-key="grid" class="ts-chart__grid" aria-hidden="true" stroke="currentColor" stroke-opacity="0.11" stroke-width="1">
           <line data-ts-key="y-grid:number:0" x1="30.48" y1="277" x2="625.11" y2="277"></line>
           <line data-ts-key="y-grid:number:50" x1="30.48" y1="242.71" x2="625.11" y2="242.71"></line>
@@ -160,10 +170,16 @@ exports[`Chart > renders with curve monotone area correctly 1`] = `
         </g>
         <g data-ts-key="marks" class="ts-chart__marks">
           <g data-ts-key="area-y-0" class="ts-chart__area" aria-hidden="true">
-            <path data-ts-key="area-y-0:string:7:desktop:segment:0" fill="var(--ts-chart-1)" fill-opacity="0.2" d="M30.48,149.46C129.59,108.66,228.69,67.86,327.8,67.86C426.9,67.86,526.01,91.17,625.11,114.49L625.11,277C526.01,277,426.9,277,327.8,277C228.69,277,129.59,277,30.48,277Z" vector-effect="non-scaling-stroke"></path>
+            <path data-ts-key="area-y-0:string:7:desktop:segment:0" fill="url(#ts-chart-v-0-area-1)" fill-opacity="1" d="M30.48,149.46C129.59,108.66,228.69,67.86,327.8,67.86C426.9,67.86,526.01,91.17,625.11,114.49L625.11,277C526.01,277,426.9,277,327.8,277C228.69,277,129.59,277,30.48,277Z" vector-effect="non-scaling-stroke"></path>
           </g>
-          <g data-ts-key="area-y-1" class="ts-chart__area" aria-hidden="true">
-            <path data-ts-key="area-y-1:string:6:mobile:segment:0" fill="var(--ts-chart-2)" fill-opacity="0.2" d="M30.48,222.14C129.59,181,228.69,139.86,327.8,139.86C426.9,139.86,526.01,167.29,625.11,194.71L625.11,277C526.01,277,426.9,277,327.8,277C228.69,277,129.59,277,30.48,277Z" vector-effect="non-scaling-stroke"></path>
+          <g data-ts-key="line-1:string:7:desktop" class="ts-chart__line" aria-hidden="true">
+            <path data-ts-key="line-1:string:7:desktop:segment:0" fill="none" stroke="var(--ts-chart-1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M30.48,149.46C129.59,108.66,228.69,67.86,327.8,67.86C426.9,67.86,526.01,91.17,625.11,114.49" vector-effect="non-scaling-stroke"></path>
+          </g>
+          <g data-ts-key="area-y-2" class="ts-chart__area" aria-hidden="true">
+            <path data-ts-key="area-y-2:string:6:mobile:segment:0" fill="url(#ts-chart-v-0-area-2)" fill-opacity="1" d="M30.48,222.14C129.59,181,228.69,139.86,327.8,139.86C426.9,139.86,526.01,167.29,625.11,194.71L625.11,277C526.01,277,426.9,277,327.8,277C228.69,277,129.59,277,30.48,277Z" vector-effect="non-scaling-stroke"></path>
+          </g>
+          <g data-ts-key="line-3:string:6:mobile" class="ts-chart__line" aria-hidden="true">
+            <path data-ts-key="line-3:string:6:mobile:segment:0" fill="none" stroke="var(--ts-chart-2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M30.48,222.14C129.59,181,228.69,139.86,327.8,139.86C426.9,139.86,526.01,167.29,625.11,194.71" vector-effect="non-scaling-stroke"></path>
           </g>
         </g>
         <g data-ts-key="axes" class="ts-chart__axes" aria-hidden="true">
@@ -185,8 +201,8 @@ exports[`Chart > renders with curve monotone area correctly 1`] = `
           <circle data-ts-key="legend-dot:string:7:desktop" fill="var(--ts-chart-1)" cx="273.07" cy="10" r="4"></circle><text data-ts-key="legend-label:string:7:desktop" fill="currentColor" fill-opacity="0.76" x="282.07" y="10" text-anchor="start" dominant-baseline="middle" font-size="11" font-family="inherit">desktop</text>
           <circle data-ts-key="legend-dot:string:6:mobile" fill="var(--ts-chart-2)" cx="343.65" cy="10" r="4"></circle><text data-ts-key="legend-label:string:6:mobile" fill="currentColor" fill-opacity="0.76" x="352.65" y="10" text-anchor="start" dominant-baseline="middle" font-size="11" font-family="inherit">mobile</text>
         </g>
-        <g data-ts-key="default-focus:area-y-0" class="ts-chart__focus-layer ts-chart__focus-layer--default" aria-hidden="true" data-ts-focus-layer="over" visibility="hidden"></g>
-        <g data-ts-key="default-focus:area-y-1" class="ts-chart__focus-layer ts-chart__focus-layer--default" aria-hidden="true" data-ts-focus-layer="over" visibility="hidden"></g>
+        <g data-ts-key="default-focus:line-1" class="ts-chart__focus-layer ts-chart__focus-layer--default" aria-hidden="true" data-ts-focus-layer="over" visibility="hidden"></g>
+        <g data-ts-key="default-focus:line-3" class="ts-chart__focus-layer ts-chart__focus-layer--default" aria-hidden="true" data-ts-focus-layer="over" visibility="hidden"></g>
       </svg></div>
   </div>
   <!---->
@@ -546,6 +562,16 @@ exports[`Chart > renders with stacked area correctly 1`] = `
 "<div data-slot="root" class="relative w-full text-xs text-muted **:data-reka-popper-content-wrapper:pointer-events-none [--ts-chart-tooltip-background:var(--ui-bg)] [--ts-chart-tooltip-color:var(--ui-text-highlighted)] [--ts-chart-tooltip-border:1px_solid_var(--ui-border)] [--ts-chart-tooltip-border-radius:var(--radius-sm)] [--ts-chart-tooltip-shadow:var(--shadow-sm)] [--ts-chart-tooltip-padding:--spacing(1.5)_--spacing(2.5)] [--ts-chart-tooltip-font:inherit]" style="--ts-chart-1: var(--ui-chart-1); --ts-chart-2: var(--ui-chart-2); --ts-chart-3: var(--ui-chart-3); --ts-chart-4: var(--ui-chart-4); --ts-chart-5: var(--ui-chart-5); --ts-chart-6: var(--ui-chart-6);">
   <div class="ts-chart-host [&amp;_.ts-chart]:rounded-md [&amp;_.ts-chart]:outline-0 [&amp;_.ts-chart]:outline-primary/25 [&amp;_.ts-chart:focus-visible]:outline-3 [&amp;_.ts-chart:focus-visible]:ring [&amp;_.ts-chart:focus-visible]:ring-primary" style="position: relative; height: 300px;">
     <div class="ts-chart-surface" style="width: 100%; height: 100%; position: relative;"><svg class="ts-chart" width="100%" height="100%" viewBox="0 0 640 300" role="img" aria-roledescription="chart" aria-label="Visitors" tabindex="0" style="display:block;overflow:visible">
+        <defs data-ts-key="gradients">
+          <linearGradient data-ts-key="gradient:area-1" id="ts-chart-v-0-area-1" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop data-ts-key="gradient:area-1:stop:0" offset="0%" stop-color="var(--ts-chart-1)" stop-opacity="0.4"></stop>
+            <stop data-ts-key="gradient:area-1:stop:1" offset="100%" stop-color="var(--ts-chart-1)" stop-opacity="0.05"></stop>
+          </linearGradient>
+          <linearGradient data-ts-key="gradient:area-2" id="ts-chart-v-0-area-2" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop data-ts-key="gradient:area-2:stop:0" offset="0%" stop-color="var(--ts-chart-2)" stop-opacity="0.4"></stop>
+            <stop data-ts-key="gradient:area-2:stop:1" offset="100%" stop-color="var(--ts-chart-2)" stop-opacity="0.05"></stop>
+          </linearGradient>
+        </defs>
         <g data-ts-key="grid" class="ts-chart__grid" aria-hidden="true" stroke="currentColor" stroke-opacity="0.11" stroke-width="1">
           <line data-ts-key="y-grid:number:0" x1="30.48" y1="277" x2="625.11" y2="277"></line>
           <line data-ts-key="y-grid:number:100" x1="30.48" y1="237" x2="625.11" y2="237"></line>
@@ -557,8 +583,16 @@ exports[`Chart > renders with stacked area correctly 1`] = `
         </g>
         <g data-ts-key="marks" class="ts-chart__marks">
           <g data-ts-key="area-y-0" class="ts-chart__area" aria-hidden="true">
-            <path data-ts-key="area-y-0:string:7:desktop:segment:0" fill="var(--ts-chart-1)" fill-opacity="0.2" d="M30.48,202.6L327.8,155L625.11,182.2L625.11,277L327.8,277L30.48,277Z" vector-effect="non-scaling-stroke"></path>
-            <path data-ts-key="area-y-0:string:6:mobile:segment:0" fill="var(--ts-chart-2)" fill-opacity="0.2" d="M30.48,170.6L327.8,75L625.11,134.2L625.11,182.2L327.8,155L30.48,202.6Z" vector-effect="non-scaling-stroke"></path>
+            <path data-ts-key="area-y-0:string:7:desktop:segment:0" fill="url(#ts-chart-v-0-area-1)" fill-opacity="1" d="M30.48,202.6L327.8,155L625.11,182.2L625.11,277L327.8,277L30.48,277Z" vector-effect="non-scaling-stroke"></path>
+          </g>
+          <g data-ts-key="line-1:string:7:desktop" class="ts-chart__line" aria-hidden="true">
+            <path data-ts-key="line-1:string:7:desktop:segment:0" fill="none" stroke="var(--ts-chart-1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M30.48,202.6L327.8,155L625.11,182.2" vector-effect="non-scaling-stroke"></path>
+          </g>
+          <g data-ts-key="area-y-2" class="ts-chart__area" aria-hidden="true">
+            <path data-ts-key="area-y-2:string:6:mobile:segment:0" fill="url(#ts-chart-v-0-area-2)" fill-opacity="1" d="M30.48,170.6L327.8,75L625.11,134.2L625.11,182.2L327.8,155L30.48,202.6Z" vector-effect="non-scaling-stroke"></path>
+          </g>
+          <g data-ts-key="line-3:string:6:mobile" class="ts-chart__line" aria-hidden="true">
+            <path data-ts-key="line-3:string:6:mobile:segment:0" fill="none" stroke="var(--ts-chart-2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M30.48,170.6L327.8,75L625.11,134.2" vector-effect="non-scaling-stroke"></path>
           </g>
         </g>
         <g data-ts-key="axes" class="ts-chart__axes" aria-hidden="true">
@@ -579,7 +613,8 @@ exports[`Chart > renders with stacked area correctly 1`] = `
           <circle data-ts-key="legend-dot:string:7:desktop" fill="var(--ts-chart-1)" cx="273.07" cy="10" r="4"></circle><text data-ts-key="legend-label:string:7:desktop" fill="currentColor" fill-opacity="0.76" x="282.07" y="10" text-anchor="start" dominant-baseline="middle" font-size="11" font-family="inherit">desktop</text>
           <circle data-ts-key="legend-dot:string:6:mobile" fill="var(--ts-chart-2)" cx="343.65" cy="10" r="4"></circle><text data-ts-key="legend-label:string:6:mobile" fill="currentColor" fill-opacity="0.76" x="352.65" y="10" text-anchor="start" dominant-baseline="middle" font-size="11" font-family="inherit">mobile</text>
         </g>
-        <g data-ts-key="default-focus:area-y-0" class="ts-chart__focus-layer ts-chart__focus-layer--default" aria-hidden="true" data-ts-focus-layer="over" visibility="hidden"></g>
+        <g data-ts-key="default-focus:line-1" class="ts-chart__focus-layer ts-chart__focus-layer--default" aria-hidden="true" data-ts-focus-layer="over" visibility="hidden"></g>
+        <g data-ts-key="default-focus:line-3" class="ts-chart__focus-layer ts-chart__focus-layer--default" aria-hidden="true" data-ts-focus-layer="over" visibility="hidden"></g>
       </svg></div>
   </div>
   <!---->
@@ -645,6 +680,16 @@ exports[`Chart > renders with type area correctly 1`] = `
 "<div data-slot="root" class="relative w-full text-xs text-muted **:data-reka-popper-content-wrapper:pointer-events-none [--ts-chart-tooltip-background:var(--ui-bg)] [--ts-chart-tooltip-color:var(--ui-text-highlighted)] [--ts-chart-tooltip-border:1px_solid_var(--ui-border)] [--ts-chart-tooltip-border-radius:var(--radius-sm)] [--ts-chart-tooltip-shadow:var(--shadow-sm)] [--ts-chart-tooltip-padding:--spacing(1.5)_--spacing(2.5)] [--ts-chart-tooltip-font:inherit]" style="--ts-chart-1: var(--ui-chart-1); --ts-chart-2: var(--ui-chart-2); --ts-chart-3: var(--ui-chart-3); --ts-chart-4: var(--ui-chart-4); --ts-chart-5: var(--ui-chart-5); --ts-chart-6: var(--ui-chart-6);">
   <div class="ts-chart-host [&amp;_.ts-chart]:rounded-md [&amp;_.ts-chart]:outline-0 [&amp;_.ts-chart]:outline-primary/25 [&amp;_.ts-chart:focus-visible]:outline-3 [&amp;_.ts-chart:focus-visible]:ring [&amp;_.ts-chart:focus-visible]:ring-primary" style="position: relative; height: 300px;">
     <div class="ts-chart-surface" style="width: 100%; height: 100%; position: relative;"><svg class="ts-chart" width="100%" height="100%" viewBox="0 0 640 300" role="img" aria-roledescription="chart" aria-label="Visitors" tabindex="0" style="display:block;overflow:visible">
+        <defs data-ts-key="gradients">
+          <linearGradient data-ts-key="gradient:area-1" id="ts-chart-v-0-area-1" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop data-ts-key="gradient:area-1:stop:0" offset="0%" stop-color="var(--ts-chart-1)" stop-opacity="0.4"></stop>
+            <stop data-ts-key="gradient:area-1:stop:1" offset="100%" stop-color="var(--ts-chart-1)" stop-opacity="0.05"></stop>
+          </linearGradient>
+          <linearGradient data-ts-key="gradient:area-2" id="ts-chart-v-0-area-2" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop data-ts-key="gradient:area-2:stop:0" offset="0%" stop-color="var(--ts-chart-2)" stop-opacity="0.4"></stop>
+            <stop data-ts-key="gradient:area-2:stop:1" offset="100%" stop-color="var(--ts-chart-2)" stop-opacity="0.05"></stop>
+          </linearGradient>
+        </defs>
         <g data-ts-key="grid" class="ts-chart__grid" aria-hidden="true" stroke="currentColor" stroke-opacity="0.11" stroke-width="1">
           <line data-ts-key="y-grid:number:0" x1="30.48" y1="277" x2="625.11" y2="277"></line>
           <line data-ts-key="y-grid:number:50" x1="30.48" y1="242.71" x2="625.11" y2="242.71"></line>
@@ -657,10 +702,16 @@ exports[`Chart > renders with type area correctly 1`] = `
         </g>
         <g data-ts-key="marks" class="ts-chart__marks">
           <g data-ts-key="area-y-0" class="ts-chart__area" aria-hidden="true">
-            <path data-ts-key="area-y-0:string:7:desktop:segment:0" fill="var(--ts-chart-1)" fill-opacity="0.2" d="M30.48,149.46L327.8,67.86L625.11,114.49L625.11,277L327.8,277L30.48,277Z" vector-effect="non-scaling-stroke"></path>
+            <path data-ts-key="area-y-0:string:7:desktop:segment:0" fill="url(#ts-chart-v-0-area-1)" fill-opacity="1" d="M30.48,149.46L327.8,67.86L625.11,114.49L625.11,277L327.8,277L30.48,277Z" vector-effect="non-scaling-stroke"></path>
           </g>
-          <g data-ts-key="area-y-1" class="ts-chart__area" aria-hidden="true">
-            <path data-ts-key="area-y-1:string:6:mobile:segment:0" fill="var(--ts-chart-2)" fill-opacity="0.2" d="M30.48,222.14L327.8,139.86L625.11,194.71L625.11,277L327.8,277L30.48,277Z" vector-effect="non-scaling-stroke"></path>
+          <g data-ts-key="line-1:string:7:desktop" class="ts-chart__line" aria-hidden="true">
+            <path data-ts-key="line-1:string:7:desktop:segment:0" fill="none" stroke="var(--ts-chart-1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M30.48,149.46L327.8,67.86L625.11,114.49" vector-effect="non-scaling-stroke"></path>
+          </g>
+          <g data-ts-key="area-y-2" class="ts-chart__area" aria-hidden="true">
+            <path data-ts-key="area-y-2:string:6:mobile:segment:0" fill="url(#ts-chart-v-0-area-2)" fill-opacity="1" d="M30.48,222.14L327.8,139.86L625.11,194.71L625.11,277L327.8,277L30.48,277Z" vector-effect="non-scaling-stroke"></path>
+          </g>
+          <g data-ts-key="line-3:string:6:mobile" class="ts-chart__line" aria-hidden="true">
+            <path data-ts-key="line-3:string:6:mobile:segment:0" fill="none" stroke="var(--ts-chart-2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M30.48,222.14L327.8,139.86L625.11,194.71" vector-effect="non-scaling-stroke"></path>
           </g>
         </g>
         <g data-ts-key="axes" class="ts-chart__axes" aria-hidden="true">
@@ -682,8 +733,8 @@ exports[`Chart > renders with type area correctly 1`] = `
           <circle data-ts-key="legend-dot:string:7:desktop" fill="var(--ts-chart-1)" cx="273.07" cy="10" r="4"></circle><text data-ts-key="legend-label:string:7:desktop" fill="currentColor" fill-opacity="0.76" x="282.07" y="10" text-anchor="start" dominant-baseline="middle" font-size="11" font-family="inherit">desktop</text>
           <circle data-ts-key="legend-dot:string:6:mobile" fill="var(--ts-chart-2)" cx="343.65" cy="10" r="4"></circle><text data-ts-key="legend-label:string:6:mobile" fill="currentColor" fill-opacity="0.76" x="352.65" y="10" text-anchor="start" dominant-baseline="middle" font-size="11" font-family="inherit">mobile</text>
         </g>
-        <g data-ts-key="default-focus:area-y-0" class="ts-chart__focus-layer ts-chart__focus-layer--default" aria-hidden="true" data-ts-focus-layer="over" visibility="hidden"></g>
-        <g data-ts-key="default-focus:area-y-1" class="ts-chart__focus-layer ts-chart__focus-layer--default" aria-hidden="true" data-ts-focus-layer="over" visibility="hidden"></g>
+        <g data-ts-key="default-focus:line-1" class="ts-chart__focus-layer ts-chart__focus-layer--default" aria-hidden="true" data-ts-focus-layer="over" visibility="hidden"></g>
+        <g data-ts-key="default-focus:line-3" class="ts-chart__focus-layer ts-chart__focus-layer--default" aria-hidden="true" data-ts-focus-layer="over" visibility="hidden"></g>
       </svg></div>
   </div>
   <!---->

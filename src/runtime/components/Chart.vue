@@ -129,6 +129,7 @@ import { scaleLinear } from '@tanstack/charts/scales/linear'
 import { scaleOrdinal } from '@tanstack/charts/scales/ordinal'
 import { scalePoint } from '@tanstack/charts/scales/point'
 import { crosshair } from '@tanstack/charts/crosshair'
+import { decorative } from '@tanstack/charts/mark/decorative'
 import { pie, polar, radialArc } from '@tanstack/charts/polar'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
@@ -191,11 +192,18 @@ const style = computed(() => Object.fromEntries(Array.from({ length: Math.max(se
 })))
 
 // One row per (x, category) pair so a single mark can group, stack and color by series.
-const rows = computed(() => (props.data ?? []).flatMap(datum => seriesKeys.value.map(category => ({
-  x: datum[props.index!],
-  category,
-  value: datum[category] as number
-}))))
+const rows = computed(() => (props.data ?? []).flatMap((datum) => {
+  let sum = 0
+
+  return seriesKeys.value.map((category) => {
+    const value = datum[category] as number
+    // The bounds of the series as an area: stacked on the previous ones, or from the baseline.
+    const base = props.stacked ? sum : 0
+    sum += value
+
+    return { x: datum[props.index!], category, value, base, top: base + value }
+  })
+}))
 
 function formatValue(value: number) {
   return props.format ? props.format(value) : new Intl.NumberFormat(code.value).format(value)
@@ -232,6 +240,19 @@ const donutDefinition = computed(() => {
   } as any)
 })
 
+// The fill fades from the series color under the line to the baseline.
+const areaGradients = computed(() => seriesKeys.value.map((_, i) => ({
+  id: `area-${i + 1}`,
+  x1: 0,
+  y1: 0,
+  x2: 0,
+  y2: 1,
+  stops: [
+    { offset: 0, color: `var(--ts-chart-${i + 1})`, opacity: 0.4 },
+    { offset: 1, color: `var(--ts-chart-${i + 1})`, opacity: 0.05 }
+  ]
+})))
+
 const generatedDefinition = computed(() => {
   if (props.type === 'donut') {
     return donutDefinition.value
@@ -254,11 +275,17 @@ const generatedDefinition = computed(() => {
       ]
       break
     case 'area':
-      // Repeated x positions stack inside one area mark, so overlapping areas need a mark per series.
+      // One area per series with explicit bounds, so each one gets its own gradient. The line on top
+      // owns the focus, its points carry the series color where the area ones carry the gradient.
       marks = [
-        ...(props.stacked
-          ? [areaY(rows.value, { ...channels, curve, fillOpacity: 0.2 } as any)]
-          : seriesKeys.value.map(category => areaY(rows.value.filter(row => row.category === category), { ...channels, curve, fillOpacity: 0.2 } as any))),
+        ...seriesKeys.value.flatMap((category, i) => {
+          const series = rows.value.filter(row => row.category === category)
+
+          return [
+            decorative(areaY(series, { x: 'x', y1: 'base', y2: 'top', z: 'category', color: 'category', curve, fill: `url(#${areaGradients.value[i]!.id})`, fillOpacity: 1 } as any)),
+            lineY(series, { x: 'x', y: 'top', z: 'category', color: 'category', curve, strokeWidth: 2 } as any)
+          ]
+        }),
         crosshair({ x: true, y: false })
       ]
       break
@@ -292,6 +319,7 @@ const generatedDefinition = computed(() => {
       scale: color,
       legend: (props.legend ?? multiple) ? legendGuide : undefined
     },
+    gradients: props.type === 'area' ? areaGradients.value : undefined,
     focus: 'group-x',
     // The default only focuses a point within 48 pixels, which leaves dead zones between sparse x values.
     maxFocusDistance: Number.POSITIVE_INFINITY
