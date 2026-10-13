@@ -1,7 +1,11 @@
 export default {
   slots: {
     // The tooltip can sit under the pointer, and its popper wrapper would take the hover away from the chart.
-    root: 'relative w-full text-xs text-muted **:data-reka-popper-content-wrapper:pointer-events-none',
+    root: [
+      'relative w-full text-xs text-muted **:data-reka-popper-content-wrapper:pointer-events-none',
+      // The surface of the TanStack Charts tooltip, shown when a `definition` brings its own.
+      '[--ts-chart-tooltip-background:var(--ui-bg)] [--ts-chart-tooltip-color:var(--ui-text-highlighted)] [--ts-chart-tooltip-border:1px_solid_var(--ui-border)] [--ts-chart-tooltip-border-radius:var(--radius-sm)] [--ts-chart-tooltip-shadow:var(--shadow-sm)] [--ts-chart-tooltip-padding:--spacing(1.5)_--spacing(2.5)] [--ts-chart-tooltip-font:inherit]'
+    ],
     // The chart surface is focusable for keyboard navigation between points.
     base: '[&_.ts-chart]:rounded-md [&_.ts-chart:focus-visible]:outline-2 [&_.ts-chart:focus-visible]:outline-offset-2 [&_.ts-chart:focus-visible]:outline-primary',
     tooltip: 'flex-col items-stretch gap-1 h-auto min-w-32 py-1.5 pointer-events-none',

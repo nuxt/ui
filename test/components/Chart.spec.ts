@@ -60,6 +60,8 @@ describe('Chart', () => {
     ['with definition only', { props: { tooltip: false, definition: defineChart({ marks: [], scales: { x: null, y: null } }) } }],
     ['with format', { props: { ...props, format: (value: number) => `$${value}` } }],
     ['with height', { props: { ...props, height: 200 } }],
+    ['with aspectRatio', { props: { ...props, aspectRatio: 2 } }],
+    ['with width', { props: { ...props, width: 400 } }],
     ['with class', { props: { ...props, class: 'max-w-lg' } }],
     ['with ui', { props: { ...props, ui: { base: 'rounded-md' } } }]
   ])

@@ -33,7 +33,7 @@ export interface ChartProps<T extends ChartDatum = ChartDatum> {
   /**
    * The series colors, in `categories` order, or in `data` order with `donut`. Accepts theme colors or any CSS color.
    * When there are more series than colors, the colors repeat as lighter tints.
-   * @defaultValue ['primary', 'secondary', 'warning', 'error', 'neutral']
+   * Defaults to the `--ui-chart-1` to `--ui-chart-6` CSS variables.
    */
   colors?: string[]
   /** Stack the series on top of each other. Only applies to `area` and `bar`. */
@@ -79,10 +79,13 @@ export interface ChartProps<T extends ChartDatum = ChartDatum> {
    */
   thickness?: number
   /**
-   * The height of the chart in pixels.
-   * @defaultValue 300
+   * The height of the chart in pixels. Defaults to `300` unless `aspectRatio` is set.
    */
   height?: number
+  /** The width over height ratio of the chart, used when `height` is not set. */
+  aspectRatio?: number
+  /** A fixed width in pixels. The chart follows its container by default. */
+  width?: number
   /**
    * The width used on the server and before the container is measured.
    * @defaultValue 640
@@ -90,13 +93,25 @@ export interface ChartProps<T extends ChartDatum = ChartDatum> {
   initialWidth?: number
   /** The accessible name of the chart. Defaults to the categories, set it when using `definition`. */
   ariaLabel?: string
+  /** A longer description of the chart for assistive technologies. */
+  ariaDescription?: string
   /**
    * A complete TanStack Charts definition. Takes precedence over `data`, `index` and `categories`.
+   * When it has its own `tooltip`, that one is used in place of the `tooltip` prop.
    * @see https://tanstack.com/charts/latest/docs/concepts/chart-definitions
    */
   definition?: ChartDefinition<any, any, any>
   class?: any
   ui?: Chart['slots']
+}
+
+export interface ChartEmits {
+  /** A point is selected with a click, Enter or Space. */
+  select: [point: ChartPoint<any> | null]
+  /** The focused point changes, with the pointer or the keyboard. */
+  focusChange: [point: ChartPoint<any> | null]
+  /** The points sharing the focused position change. */
+  focusGroupChange: [points: readonly ChartPoint<any>[]]
 }
 
 export interface ChartSlots {
@@ -131,9 +146,9 @@ const _props = withDefaults(defineProps<ChartProps<T>>(), {
   yAxis: true,
   tooltip: true,
   thickness: 24,
-  height: 300,
   initialWidth: 640
 })
+const emits = defineEmits<ChartEmits>()
 const slots = defineSlots<ChartSlots>()
 
 const props = useComponentProps<ChartProps<T>>('chart', _props)
@@ -148,7 +163,8 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chart || {}) })(
 
 const themeColors = computed(() => Object.keys(appConfig.ui?.colors || {}))
 
-const seriesColors = computed(() => props.colors?.length ? props.colors : ['primary', 'secondary', 'warning', 'error', 'neutral'])
+// The default palette lives in CSS so it can be themed and follows the color mode.
+const seriesColors = computed(() => props.colors?.length ? props.colors : Array.from({ length: 6 }, (_, i) => `var(--ui-chart-${i + 1})`))
 
 function resolveColor(color: string) {
   // `neutral` has no `--ui-neutral` variable, the theme paints it with the inverted background.
@@ -331,6 +347,27 @@ const tooltipReference = {
 
 const tooltipProps = computed(() => typeof props.tooltip === 'object' ? props.tooltip : {})
 
+// A definition can bring the TanStack Charts tooltip with its own content, two tooltips would show.
+const hasTooltip = computed(() => !!props.tooltip && !(props.definition as { tooltip?: unknown } | undefined)?.tooltip)
+
+const chartHeight = computed(() => props.height ?? (props.aspectRatio ? undefined : 300))
+
+// The Vue adapter sets both sizes without a unit on its host, which the browser drops.
+const chartStyle = computed(() => ({
+  height: chartHeight.value ? `${chartHeight.value}px` : undefined,
+  width: props.width ? `${props.width}px` : undefined
+}))
+
+function onFocusChange(point: ChartPoint<any> | null) {
+  primaryPoint.value = point
+  emits('focusChange', point)
+}
+
+function onFocusGroupChange(points: readonly ChartPoint<any>[]) {
+  groupPoints.value = points
+  emits('focusGroupChange', points)
+}
+
 // Reka keeps a visually hidden copy of the content for assistive technologies and does not update it from the slot.
 const tooltipLabel = computed(() => [tooltipContent.value.title, ...tooltipContent.value.rows.map(row => `${row.label} ${row.value}`)].filter(Boolean).join(', '))
 
@@ -342,16 +379,20 @@ const chartDefinition = computed(() => (props.definition ?? generatedDefinition.
     <TanStackChart
       :definition="chartDefinition"
       :aria-label="props.ariaLabel || seriesKeys.join(', ') || 'Chart'"
-      :height="props.height"
+      :aria-description="props.ariaDescription"
+      :height="chartHeight"
+      :aspect-ratio="props.aspectRatio"
+      :width="props.width"
       :initial-width="props.initialWidth"
-      :style="{ height: `${props.height}px` }"
+      :style="chartStyle"
       :class="ui.base({ class: props.ui?.base })"
-      :on-focus-change="(point: ChartPoint<any> | null) => primaryPoint = point"
-      :on-focus-group-change="(points: readonly ChartPoint<any>[]) => groupPoints = points"
+      :on-focus-change="onFocusChange"
+      :on-focus-group-change="onFocusGroupChange"
+      :on-select="(point: ChartPoint<any> | null) => emits('select', point)"
     />
 
     <UTooltip
-      v-if="!!props.tooltip"
+      v-if="hasTooltip"
       :open="!!primaryPoint"
       :reference="tooltipReference"
       :portal="false"
