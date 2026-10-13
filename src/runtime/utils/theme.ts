@@ -37,14 +37,3 @@ export type ExtendedTheme<T, B>
 export function extendTheme<B extends TVTheme, const T extends Record<string, any>>(base: B, theme: T): DefinedTheme<ExtendedTheme<T, B>> {
   return defuFn(theme, base) as DefinedTheme<ExtendedTheme<T, B>>
 }
-
-/**
- * A theme without some of its variants, for a component that extends another
- * and has no use for them, like Textarea with the `type` of an Input.
- * @internal
- */
-export function omitVariants<T extends TVTheme, K extends string>(theme: T, ...names: K[]): { [P in keyof T]: P extends 'variants' ? Omit<T[P], K> : T[P] } {
-  const variants = Object.fromEntries(Object.entries((theme as any).variants || {}).filter(([name]) => !names.includes(name as K)))
-
-  return { ...theme, variants } as any
-}
