@@ -1,3 +1,7 @@
+import { defineCachedEventHandler } from 'nitropack/runtime'
+import { getRouterParam, createError } from 'h3'
+import { fetchReleases } from '../../../utils/releases'
+
 /** One release with its notes, which the list route leaves out. */
 export default defineCachedEventHandler(async (event) => {
   const tag = getRouterParam(event, 'tag')

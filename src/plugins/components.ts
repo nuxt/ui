@@ -1,5 +1,5 @@
 import { defu } from 'defu'
-import { join, normalize } from 'pathe'
+import { dirname, join, normalize, resolve } from 'pathe'
 import { globSync } from 'tinyglobby'
 import type { UnpluginContextMeta, UnpluginOptions } from 'unplugin'
 import AutoImportComponents from 'unplugin-vue-components'
@@ -90,6 +90,18 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
       }
 
       if (!RELATIVE_IMPORT_RE.test(id)) {
+        return
+      }
+
+      // A relative import that lands in the components directory resolves by its path there, so that
+      // `./Icon.vue` from the prose barrel stays `prose/Icon.vue` instead of matching `Icon.vue`.
+      const resolvedId = resolve(dirname(normalize(importer).split('?')[0]!), id)
+      if (resolvedId.startsWith(componentsDir)) {
+        const relativePath = resolvedId.slice(componentsDir.length)
+        for (const source of overrideSources) {
+          const resolved = source.resolvePath(relativePath)
+          if (resolved) return resolved
+        }
         return
       }
 

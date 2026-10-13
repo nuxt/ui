@@ -1,3 +1,5 @@
+import { defineMcpResource } from '@nuxtjs/mcp-toolkit/server'
+import { useEvent } from 'nitropack/runtime'
 import { queryCollection } from '@nuxt/content/server'
 
 export default defineMcpResource({

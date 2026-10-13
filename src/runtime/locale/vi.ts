@@ -16,23 +16,36 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Đóng'
     },
+    breadcrumb: {
+      label: 'đường dẫn điều hướng'
+    },
     calendar: {
+      label: 'Ngày sự kiện',
+      monthPicker: 'Bộ chọn tháng',
       nextMonth: 'Tháng sau',
       nextYear: 'Năm sau',
       prevMonth: 'Tháng trước',
-      prevYear: 'Năm trước'
+      prevYear: 'Năm trước',
+      yearPicker: 'Bộ chọn năm'
     },
     carousel: {
       dots: 'Chọn slide để hiển thị',
       goto: 'Đi tới ô {slide}',
       next: 'Sau',
-      prev: 'Trước'
+      prev: 'Trước',
+      roledescription: 'băng chuyền',
+      slide: 'slide'
+    },
+    chatMessages: {
+      autoScroll: 'Cuộn xuống dưới'
     },
     chatPrompt: {
       placeholder: 'Nhập tin nhắn của bạn ở đây…'
     },
     chatPromptSubmit: {
-      label: 'Gửi'
+      label: 'Gửi',
+      reload: 'Thử lại',
+      stop: 'Dừng tạo'
     },
     chatReasoning: {
       thinking: 'Đang suy nghĩ…',
@@ -51,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Đóng',
       noData: 'Không có dữ liệu',
       noMatch: 'Không có kết quả phù hợp',
-      placeholder: 'Nhập lệnh hoặc tìm kiếm…'
+      placeholder: 'Nhập lệnh hoặc tìm kiếm…',
+      results: 'Kết quả'
     },
     contentSearch: {
       links: 'Liên kết',
@@ -95,14 +109,37 @@ export default defineLocale<Messages>({
       close: 'Đóng menu',
       open: 'Mở menu'
     },
+    inputDate: {
+      day: 'ngày',
+      dayPeriod: 'SA/CH',
+      era: 'kỷ nguyên',
+      hour: 'giờ',
+      minute: 'phút',
+      month: 'tháng',
+      second: 'giây',
+      timeZoneName: 'múi giờ',
+      year: 'năm'
+    },
     inputMenu: {
       create: 'Tạo "{label}"',
       noData: 'Không có dữ liệu',
-      noMatch: 'Không có kết quả phù hợp'
+      noMatch: 'Không có kết quả phù hợp',
+      trigger: 'Hiển thị tùy chọn'
     },
     inputNumber: {
       decrement: 'Giảm',
-      increment: 'Tăng'
+      increment: 'Tăng',
+      roledescription: 'trường số'
+    },
+    inputRating: {
+      rate: 'Đánh giá {value} trên {length}'
+    },
+    inputTime: {
+      dayPeriod: 'SA/CH',
+      hour: 'giờ',
+      minute: 'phút',
+      second: 'giây',
+      timeZoneName: 'múi giờ'
     },
     listbox: {
       noData: 'Không có dữ liệu',
@@ -111,6 +148,16 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Đóng'
+    },
+    pagination: {
+      first: 'Trang đầu tiên',
+      last: 'Trang cuối cùng',
+      next: 'Trang tiếp theo',
+      page: 'Trang {page}',
+      prev: 'Trang trước'
+    },
+    pinInput: {
+      input: 'mã PIN, ký tự {index} trên {length}'
     },
     pricingTable: {
       caption: 'So sánh các kế hoạch giá'
@@ -144,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: 'Không có kết quả phù hợp',
       search: 'Tìm kiếm…'
     },
+    skeleton: {
+      label: 'đang tải'
+    },
     slideover: {
       close: 'Đóng'
+    },
+    slider: {
+      max: 'Tối đa',
+      min: 'Tối thiểu',
+      thumb: 'Con trượt',
+      value: 'Giá trị {index} trên {total}'
+    },
+    stepper: {
+      label: 'tiến trình'
     },
     table: {
       noData: 'Không có dữ liệu'
     },
     toast: {
       close: 'Đóng'
+    },
+    toaster: {
+      label: 'Thông báo',
+      viewport: 'Thông báo ({hotkey})'
     }
   }
 })

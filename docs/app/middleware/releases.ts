@@ -4,8 +4,9 @@
  */
 export default defineNuxtRouteMiddleware(async (to) => {
   const releases = useReleases()
+  const tag = 'tag' in to.params ? to.params.tag : undefined
   // a tag the list doesn't know may have been published since it was loaded
-  const known = !to.params.tag || releases.value.some(release => release.tag === to.params.tag)
+  const known = !tag || releases.value.some(release => release.tag === tag)
   if (!releases.value.length || !known) {
     try {
       // typed explicitly: assigning the route's inferred type straight to the
@@ -23,7 +24,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
 
   // The latest release lives on the section root, the nav links it there.
   // Its tagged URL is the same page under a path the nav never lights up.
-  if (to.params.tag && to.params.tag === releases.value[0]?.tag) {
+  if (tag && tag === releases.value[0]?.tag) {
     return navigateTo('/docs/releases', { redirectCode: 302, replace: true })
   }
 })

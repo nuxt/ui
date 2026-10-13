@@ -62,6 +62,7 @@ describe('Tree', () => {
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ['with neutral color', { props: { ...props, color: 'neutral' } }],
     ['with as', { props: { ...props, as: 'div' } }],
+    ['with as object', { props: { ...props, as: { root: 'div', link: 'a' } } }],
     ['with class', { props: { ...props, class: 'absolute' } }],
     ['with ui', { props: { ...props, ui: { link: 'font-bold' } } }],
     // Slots

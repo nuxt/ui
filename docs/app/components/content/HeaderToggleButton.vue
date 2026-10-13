@@ -36,6 +36,7 @@ const state = computed(() => props.open ? 'close' : 'normal')
     variant="ghost"
     color="neutral"
     square
+    :aria-label="open ? 'Close menu' : 'Open menu'"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"

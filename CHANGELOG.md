@@ -1,5 +1,29 @@
 # Changelog
 
+## [4.11.3](https://github.com/nuxt/ui/compare/v4.11.2...v4.11.3) (2026-10-01)
+
+### Bug Fixes
+
+* **App:** apply the `dir` prop to the provided locale ([#6767](https://github.com/nuxt/ui/issues/6767)) ([93c40df](https://github.com/nuxt/ui/commit/93c40df0a7ed2cffad2b86f81cc27f9c5c038d41))
+* **ChatPrompt:** add `method="post"` to prevent input leaking via GET before hydration ([#7078](https://github.com/nuxt/ui/issues/7078)) ([57f7699](https://github.com/nuxt/ui/commit/57f7699315833854a4f4421c60763d365805e0e7))
+* **CheckboxGroup/RadioGroup:** lift a hovered table item above its neighbors ([#7073](https://github.com/nuxt/ui/issues/7073)) ([926097a](https://github.com/nuxt/ui/commit/926097afa3f5d06b896675fd29289e495ac3741d))
+* **ContentSearch/DashboardSearch:** use translated search label as dialog title ([#7062](https://github.com/nuxt/ui/issues/7062)) ([3c55cf2](https://github.com/nuxt/ui/commit/3c55cf230dc623bdbfd1918357ec04f137afd290))
+* **DashboardSidebar/Header:** use translated toggle label as menu dialog title ([#7082](https://github.com/nuxt/ui/issues/7082)) ([51e98da](https://github.com/nuxt/ui/commit/51e98da7f9707e112bb6a7b61bb3a9cca4139dd3))
+* **EditorToolbar:** use tooltip text as `aria-label` on icon-only buttons ([#7009](https://github.com/nuxt/ui/issues/7009)) ([7f0250e](https://github.com/nuxt/ui/commit/7f0250eab69d04c42e137aa85c103e3dc83eec60))
+* **Form:** include nested forms in parent `dirty` state ([#6545](https://github.com/nuxt/ui/issues/6545)) ([8977394](https://github.com/nuxt/ui/commit/897739491a24642c6678cf6ce10e1638ff883d35))
+* **Form:** keep dirty state and validation in sync with input ([#7033](https://github.com/nuxt/ui/issues/7033)) ([56b1156](https://github.com/nuxt/ui/commit/56b1156a9abaeb587221ac018d6c335c58a353be))
+* **Form:** merge unnamed nested forms into a parent without schema ([#7034](https://github.com/nuxt/ui/issues/7034)) ([384fdc1](https://github.com/nuxt/ui/commit/384fdc12591a3124653438ec361438610b3dfe07))
+* **module:** detect kebab-case components in Pug templates ([#7045](https://github.com/nuxt/ui/issues/7045)) ([42ba532](https://github.com/nuxt/ui/commit/42ba53272e84a316d6ea06ef7ab9a56b8afcb1ef))
+* **module:** generate classes prefixed by `usePrefix` ([#7074](https://github.com/nuxt/ui/issues/7074)) ([77c92de](https://github.com/nuxt/ui/commit/77c92de2e52cbe247986c53cb25334d7fe4202ec))
+* **module:** use `@custom-variant` for `light` and `dark` variants ([#7023](https://github.com/nuxt/ui/issues/7023)) ([584016b](https://github.com/nuxt/ui/commit/584016bdec75b1eb799d30ec95eb85ed3b49d38b))
+* **ProseA:** only round corners on focus ([3da141c](https://github.com/nuxt/ui/commit/3da141cbd174c28c46d9209872a0693ee6ede01e))
+* **Select/SelectMenu:** keep focus moved on selection ([#7083](https://github.com/nuxt/ui/issues/7083)) ([6138bf0](https://github.com/nuxt/ui/commit/6138bf09d8c9a4e7d971cb76a88fbe6b67619c8e))
+* **Table:** keep footer separator above pinned columns ([#7047](https://github.com/nuxt/ui/issues/7047)) ([e8756fd](https://github.com/nuxt/ui/commit/e8756fd3a8aaab3cb434f1dfe8d32559330f38a9))
+* **theme:** drop double quotes from class strings ([#7039](https://github.com/nuxt/ui/issues/7039)) ([5a04c6c](https://github.com/nuxt/ui/commit/5a04c6c432be5b6e793366a9338b83f20c7847b7))
+* **useFilter:** keep labels and separators in place while sorting ([#6995](https://github.com/nuxt/ui/issues/6995)) ([032a152](https://github.com/nuxt/ui/commit/032a152119530795d39d1f97458baf375ff7ee5e))
+* **useOverlay:** resolve every pending promise when reopened ([#7057](https://github.com/nuxt/ui/issues/7057)) ([2f50c2e](https://github.com/nuxt/ui/commit/2f50c2ed57df88224d0580995e5155025e282b7c))
+* **utils:** prevent prototype pollution in `set` and `setAtPath` ([#7077](https://github.com/nuxt/ui/issues/7077)) ([4bfd115](https://github.com/nuxt/ui/commit/4bfd115418fdbd2c4419bac1b53aa7dcdc7e8f8a))
+
 ## [4.11.2](https://github.com/nuxt/ui/compare/v4.11.1...v4.11.2) (2026-09-22)
 
 ### Bug Fixes

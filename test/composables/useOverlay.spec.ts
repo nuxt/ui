@@ -156,6 +156,17 @@ describe('useOverlay', () => {
     expect(result).toBe('test-result')
   })
 
+  it('should resolve every pending promise when opened again before closing', async () => {
+    const modal = overlay.create(MockModal)
+    const first = modal.open()
+    const second = modal.open({ title: 'again' })
+
+    modal.close('test-result')
+
+    expect(await Promise.race([first, 'pending'])).toBe('test-result')
+    expect(await Promise.race([second, 'pending'])).toBe('test-result')
+  })
+
   it('should close an overlay', () => {
     const modal = overlay.create(MockModal)
 

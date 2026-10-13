@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@ai-sdk/anthropic": "catalog:",
-    "@ai-sdk/gateway": "catalog:",
     "@ai-sdk/vue": "catalog:",
     "@comark/vue": "catalog:",
     "@iconify-json/lucide": "catalog:",

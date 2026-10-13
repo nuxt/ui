@@ -1,3 +1,5 @@
+import { defineCachedFunction } from 'nitropack/runtime'
+import { defineEventHandler } from 'nuxt/server'
 import { Octokit } from '@octokit/rest'
 
 /** A row of the team page: the GitHub count plus whatever the profile makes public. */
@@ -183,7 +185,7 @@ export default defineEventHandler(async (event): Promise<Contributors> => {
   })()
 
   // the header the cached handler used to write, following whichever source answered
-  setResponseHeader(event, 'cache-control', `max-age=${contributors.total === null ? 600 : 3600}`)
+  event.res.headers.set('cache-control', `max-age=${contributors.total === null ? 600 : 3600}`)
 
   return contributors
 })

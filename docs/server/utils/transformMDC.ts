@@ -5,11 +5,14 @@ import { visit } from '@nuxt/content/runtime'
 import { textContent } from 'minimark'
 import { queryCollection } from '@nuxt/content/server'
 import * as theme from '../../.nuxt/ui'
-import meta from '#nuxt-component-meta'
+// the alias nuxt-component-meta's own route imports, so the server bundles the meta once
+// @ts-expect-error - no types available
+import meta from '#nuxt-component-meta/nitro'
 import { compactProps, getDefaultVariants, hasLinkPassthrough, partitionLinkProps } from './componentMeta'
 import { fencedBlock, pipeTable } from './markdown'
 // @ts-expect-error - no types available
 import { getComponentExample } from '#component-example/nitro'
+import { SITE_URL } from './site'
 
 type ComponentAttributes = {
   'slug'?: string
@@ -405,12 +408,24 @@ const generateComponentCode = ({
   const pascalCaseName = componentName.charAt(0).toUpperCase() + componentName.slice(1)
 
   if (prose) {
-    const proseProps = Object.entries(props)
+    const entries = Object.entries(props)
       .filter(([key, value]) => !hide.includes(key) && value !== undefined && value !== null && value !== '')
-      .map(([key, value]) => `${key}="${value}"`)
-      .join(' ')
+
+    // A multiline value can't be written inline, it goes in the YAML block.
+    const isMultiline = (value: unknown) => typeof value === 'string' && value.includes('\n')
+
+    const proseProps = entries.filter(([, value]) => !isMultiline(value)).map(([key, value]) => `${key}="${value}"`).join(' ')
+    const blockProps = entries.filter(([, value]) => isMultiline(value)).map(([key, value]) => {
+      return `${key}: |\n${value.trim().replace(/^(?=.)/gm, '  ')}`
+    }).join('\n')
     const defaultSlot = slots?.default?.trim() ?? ''
-    return `::${componentName}${proseProps ? `{${proseProps}}` : ''}\n${defaultSlot}\n::`
+
+    return [
+      `::${componentName}${proseProps ? `{${proseProps}}` : ''}`,
+      blockProps && `---\n${blockProps}\n---`,
+      defaultSlot,
+      '::'
+    ].filter(Boolean).join('\n')
   }
 
   const externalSet = new Set(external)

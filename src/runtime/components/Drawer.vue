@@ -64,7 +64,7 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
 }
 
 export interface DrawerEmits extends DrawerRootEmits {
-  (e: 'close:prevent'): void
+  (e: 'after:leave' | 'after:enter' | 'close:prevent'): void
 }
 
 export interface DrawerSlots {
@@ -113,7 +113,8 @@ const appConfig = useAppConfig() as Drawer['AppConfig']
 
 const rootProps = useForwardProps(reactivePick(props, 'activeSnapPoint', 'closeThreshold', 'shouldScaleBackground', 'setBackgroundColorOnScale', 'scrollLockTimeout', 'fixed', 'dismissible', 'modal', 'open', 'defaultOpen', 'nested', 'direction', 'noBodyStyles', 'handleOnly', 'preventScrollRestoration', 'snapPoints'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
-const contentProps = toRef(() => props.content)
+// reka-ui sets `pointer-events: none` on `<body>` for modal dialogs, so `noBodyStyles` must opt out of it too
+const contentProps = toRef(() => props.noBodyStyles ? { disableOutsidePointerEvents: false, ...props.content } : props.content)
 const contentEvents = computed(() => {
   if (!props.dismissible) {
     const events = ['interactOutside', 'escapeKeyDown']
@@ -132,6 +133,18 @@ const contentEvents = computed(() => {
   }
 })
 
+// vaul also fires `animationEnd(false)` when a closed drawer mounts, so only a real close emits `after:leave`
+let entered = false
+function onAnimationEnd(open: boolean) {
+  if (open) {
+    entered = true
+    emits('after:enter')
+  } else if (entered) {
+    entered = false
+    emits('after:leave')
+  }
+}
+
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.drawer || {}) })({
   direction: props.direction,
@@ -141,7 +154,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.drawer || {}) })
 </script>
 
 <template>
-  <component :is="props.nested ? DrawerRootNested : DrawerRoot" v-bind="rootProps">
+  <component :is="props.nested ? DrawerRootNested : DrawerRoot" v-bind="rootProps" @animation-end="onAnimationEnd">
     <DrawerTrigger v-if="!!slots.default" as-child :class="props.class">
       <slot />
     </DrawerTrigger>

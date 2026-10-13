@@ -60,7 +60,7 @@ export interface ContentSearchItem extends Omit<LinkProps, 'custom'>, CommandPal
   icon?: IconProps['name']
 }
 
-export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchLink> extends Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal' | 'unmountOnHide'>, Pick<CommandPaletteProps<CommandPaletteGroup<ContentSearchItem>, ContentSearchItem>, 'icon' | 'trailingIcon' | 'selectedIcon' | 'childrenIcon' | 'placeholder' | 'autofocus' | 'loading' | 'loadingIcon' | 'closeIcon' | 'back' | 'backIcon' | 'disabled' | 'highlightOnHover' | 'labelKey' | 'descriptionKey' | 'preserveGroupOrder' | 'virtualize' | 'groups'> {
+export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchLink> extends Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal' | 'unmountOnHide'>, Pick<CommandPaletteProps<CommandPaletteGroup<ContentSearchItem>, ContentSearchItem>, 'icon' | 'trailingIcon' | 'selectedIcon' | 'childrenIcon' | 'placeholder' | 'autofocus' | 'loading' | 'loadingIcon' | 'closeIcon' | 'back' | 'backIcon' | 'disabled' | 'highlightOnHover' | 'loop' | 'labelKey' | 'descriptionKey' | 'preserveGroupOrder' | 'virtualize' | 'groups'> {
   /**
    * @defaultValue 'md'
    */
@@ -136,7 +136,7 @@ export type ContentSearchSlots = CommandPaletteSlots<ContentSearchItem> & {
 </script>
 
 <script setup lang="ts" generic="T extends ContentSearchLink">
-import { computed, shallowRef, useTemplateRef, watch } from 'vue'
+import { computed, defineAsyncComponent, shallowRef, useAttrs, useTemplateRef, watch } from 'vue'
 import { defu } from 'defu'
 import { reactivePick, refDebounced } from '@vueuse/core'
 import { useAppConfig, useColorMode, defineShortcuts } from '#imports'
@@ -144,10 +144,10 @@ import { useComponentProps } from '../../composables/useComponentProps'
 import { useForwardProps } from '../../composables/useForwardProps'
 import { useContentSearch } from '../../composables/useContentSearch'
 import { useLocale } from '../../composables/useLocale'
+import { useLazyOverlay } from '../../composables/useLazyOverlay'
+import { lazyOverlays, loadOverlay } from '../../utils/lazy-overlay'
 import { omit, transformUI } from '../../utils'
 import { tv } from '../../utils/tv'
-import UModal from '../Modal.vue'
-import UCommandPalette from '../CommandPalette.vue'
 
 const _props = withDefaults(defineProps<ContentSearchProps<T>>(), {
   shortcut: 'meta_k',
@@ -162,13 +162,13 @@ const props = useComponentProps<ContentSearchProps<T>>('contentSearch', _props)
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
-const { t } = useLocale()
+const { t, locale } = useLocale()
 const { open, mapNavigationItems, mapLinks, mapSearchResults, postFilter } = useContentSearch()
 // eslint-disable-next-line vue/no-dupe-keys
 const colorMode = useColorMode()
 const appConfig = useAppConfig() as ContentSearch['AppConfig']
 
-const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'trailingIcon', 'selectedIcon', 'childrenIcon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon', 'back', 'backIcon', 'disabled', 'highlightOnHover', 'labelKey', 'descriptionKey', 'preserveGroupOrder', 'virtualize', 'searchDelay'))
+const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'trailingIcon', 'selectedIcon', 'childrenIcon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon', 'back', 'backIcon', 'disabled', 'highlightOnHover', 'loop', 'labelKey', 'descriptionKey', 'preserveGroupOrder', 'virtualize', 'searchDelay'))
 const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal', 'unmountOnHide'))
 const inputProps = computed(() => {
   if (props.input === false) {
@@ -193,6 +193,15 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.contentSearch ||
   size: props.size,
   fullscreen: props.fullscreen
 }))
+
+const attrs = useAttrs()
+
+const loadCommandPalette = () => import('../CommandPalette.vue')
+
+const UModal = lazyOverlays.modal
+const UCommandPalette = defineAsyncComponent(loadCommandPalette)
+
+const renderModal = useLazyOverlay(() => open.value || (attrs.open !== undefined && attrs.open !== false) || props.unmountOnHide === false, () => Promise.all([loadOverlay('modal'), loadCommandPalette()]))
 
 const commandPaletteRef = useTemplateRef('commandPaletteRef')
 
@@ -328,8 +337,10 @@ const groups = computed(() => {
   return groups
 })
 
-function onSelect(item: ContentSearchItem) {
-  if (item.disabled) {
+function onSelect(item: ContentSearchItem | undefined) {
+  // `selectionBehavior: 'toggle'` emits `undefined` when the selected item is selected again,
+  // treat it as a regular selection and close the modal
+  if (item?.disabled) {
     return
   }
 
@@ -353,9 +364,10 @@ defineExpose({
 
 <template>
   <UModal
+    v-if="renderModal"
     v-model:open="open"
-    :title="props.title || t('contentSearch.title')"
-    :description="props.description || t('contentSearch.description')"
+    :title="props.title || locale.messages.contentSearch?.title || t('contentSearchButton.label')"
+    :description="props.description || locale.messages.contentSearch?.description"
     v-bind="modalProps"
     data-slot="modal"
     :class="ui.modal({ class: [props.ui?.modal, props.class] })"

@@ -1,3 +1,4 @@
+import { getHeader, createError } from 'h3'
 import { defineMcpHandler, getMcpTools, listMcpTools } from '@nuxtjs/mcp-toolkit/server'
 
 export default defineMcpHandler({

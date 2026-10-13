@@ -97,5 +97,15 @@ describe('form utils', () => {
       const result = setAtPath(obj, 'foo.bar', 'baz')
       expect(result).toBe(obj)
     })
+
+    it('does not pollute the prototype', () => {
+      try {
+        setAtPath({}, '__proto__.polluted', true)
+        setAtPath({}, 'constructor.prototype.polluted', true)
+        expect(({} as any).polluted).toBeUndefined()
+      } finally {
+        delete (Object.prototype as any).polluted
+      }
+    })
   })
 })

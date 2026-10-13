@@ -19,6 +19,10 @@ export default defineNuxtConfig({
     '/docs/components/**': { redirect: { to: '/components/**', statusCode: 301 }, prerender: false }
   },
 
+  future: {
+    compatibilityVersion: 5
+  },
+
   compatibilityDate: '2024-07-09',
 
   vite: {

@@ -16,23 +16,36 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Schließen'
     },
+    breadcrumb: {
+      label: 'Brotkrümelnavigation'
+    },
     calendar: {
+      label: 'Ereignisdatum',
+      monthPicker: 'Monatsauswahl',
       nextMonth: 'Nächster Monat',
       nextYear: 'Nächstes Jahr',
       prevMonth: 'Vorheriger Monat',
-      prevYear: 'Vorheriges Jahr'
+      prevYear: 'Vorheriges Jahr',
+      yearPicker: 'Jahresauswahl'
     },
     carousel: {
       dots: 'Folie zur Anzeige auswählen',
       goto: 'Gehe zu {slide}',
       next: 'Weiter',
-      prev: 'Zurück'
+      prev: 'Zurück',
+      roledescription: 'Karussell',
+      slide: 'Folie'
+    },
+    chatMessages: {
+      autoScroll: 'Nach unten scrollen'
     },
     chatPrompt: {
       placeholder: 'Hier schreiben Sie Ihre Nachricht…'
     },
     chatPromptSubmit: {
-      label: 'Senden'
+      label: 'Senden',
+      reload: 'Erneut versuchen',
+      stop: 'Generierung stoppen'
     },
     chatReasoning: {
       thinking: 'Denkt nach…',
@@ -51,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Schließen',
       noData: 'Keine Daten',
       noMatch: 'Nichts gefunden',
-      placeholder: 'Geben Sie einen Befehl ein oder suchen Sie…'
+      placeholder: 'Geben Sie einen Befehl ein oder suchen Sie…',
+      results: 'Ergebnisse'
     },
     contentSearch: {
       links: 'Links',
@@ -95,14 +109,37 @@ export default defineLocale<Messages>({
       close: 'Menü schließen',
       open: 'Menü öffnen'
     },
+    inputDate: {
+      day: 'Tag',
+      dayPeriod: 'AM/PM',
+      era: 'Epoche',
+      hour: 'Stunde',
+      minute: 'Minute',
+      month: 'Monat',
+      second: 'Sekunde',
+      timeZoneName: 'Zeitzone',
+      year: 'Jahr'
+    },
     inputMenu: {
       create: '"{label}" erstellen',
       noData: 'Keine Daten',
-      noMatch: 'Nichts gefunden'
+      noMatch: 'Nichts gefunden',
+      trigger: 'Optionen anzeigen'
     },
     inputNumber: {
       decrement: 'Verringern',
-      increment: 'Erhöhen'
+      increment: 'Erhöhen',
+      roledescription: 'Zahlenfeld'
+    },
+    inputRating: {
+      rate: 'Mit {value} von {length} bewerten'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'Stunde',
+      minute: 'Minute',
+      second: 'Sekunde',
+      timeZoneName: 'Zeitzone'
     },
     listbox: {
       noData: 'Keine Daten',
@@ -111,6 +148,16 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Schließen'
+    },
+    pagination: {
+      first: 'Erste Seite',
+      last: 'Letzte Seite',
+      next: 'Nächste Seite',
+      page: 'Seite {page}',
+      prev: 'Vorherige Seite'
+    },
+    pinInput: {
+      input: 'PIN-Code, Zeichen {index} von {length}'
     },
     pricingTable: {
       caption: 'Preisplanvergleich'
@@ -144,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: 'Nichts gefunden',
       search: 'Suchen…'
     },
+    skeleton: {
+      label: 'wird geladen'
+    },
     slideover: {
       close: 'Schließen'
+    },
+    slider: {
+      max: 'Maximum',
+      min: 'Minimum',
+      thumb: 'Schieberegler',
+      value: 'Wert {index} von {total}'
+    },
+    stepper: {
+      label: 'Fortschritt'
     },
     table: {
       noData: 'Keine Daten'
     },
     toast: {
       close: 'Schließen'
+    },
+    toaster: {
+      label: 'Benachrichtigung',
+      viewport: 'Benachrichtigungen ({hotkey})'
     }
   }
 })

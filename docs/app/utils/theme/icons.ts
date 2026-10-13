@@ -397,7 +397,7 @@ export function iconSetSamples(setName: string): string[] {
 
 /**
  * Every glyph the studio renders outside the 43 semantic keys: its own chrome
- * (toolbar, preset picker, Ask AI panel), the view switcher and the demo content.
+ * (toolbar, preset picker, Ask panel), the view switcher and the demo content.
  * Lucide is the default, `studioIconOverrides` swaps in a pack's own glyph
  * where it has one. Kept out of `themeIcons` on purpose, none of this rides
  * the export's icon config. Import and the group-picker chevron reuse the
@@ -418,7 +418,7 @@ export const studioIcons = {
   dice: 'i-lucide-dices',
   templates: 'i-lucide-layout-template',
   layers: 'i-lucide-layers',
-  // the Ask AI panel: its close, clear and thinking glyphs
+  // the Ask panel: its close, clear and thinking glyphs
   panelRightClose: 'i-lucide-panel-right-close',
   clear: 'i-lucide-list-x',
   brain: 'i-lucide-brain',
@@ -547,7 +547,7 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     curve: 'i-bi-graph-up',
     proportions: 'i-bi-aspect-ratio',
     layers: 'i-bi-layers',
-    // the Ask AI panel: its close, clear and thinking glyphs
+    // the Ask panel: its close, clear and thinking glyphs
     panelRightClose: 'i-bi-arrow-bar-right',
     clear: 'i-bi-eraser',
     brain: 'i-bi-lightbulb',
@@ -658,7 +658,7 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     curve: 'i-heroicons-chart-bar',
     proportions: 'i-heroicons-rectangle-group',
     layers: 'i-heroicons-square-3-stack-3d',
-    // the Ask AI panel: its close, clear and thinking glyphs
+    // the Ask panel: its close, clear and thinking glyphs
     panelRightClose: 'i-heroicons-chevron-right',
     clear: 'i-heroicons-x-circle',
     brain: 'i-heroicons-light-bulb',
@@ -769,7 +769,7 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     curve: 'i-iconoir-graph-up',
     proportions: 'i-iconoir-frame',
     layers: 'i-iconoir-multiple-pages',
-    // the Ask AI panel: its close, clear and thinking glyphs
+    // the Ask panel: its close, clear and thinking glyphs
     panelRightClose: 'i-iconoir-sidebar-expand',
     clear: 'i-iconoir-erase',
     brain: 'i-iconoir-brain',
@@ -880,7 +880,7 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     curve: 'i-material-symbols-timeline-rounded',
     proportions: 'i-material-symbols-aspect-ratio-outline-rounded',
     layers: 'i-material-symbols-layers-outline-rounded',
-    // the Ask AI panel: its close, clear and thinking glyphs
+    // the Ask panel: its close, clear and thinking glyphs
     panelRightClose: 'i-material-symbols-right-panel-close-outline-rounded',
     clear: 'i-material-symbols-playlist-remove-rounded',
     brain: 'i-material-symbols-neurology-outline-rounded',
@@ -991,7 +991,7 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     curve: 'i-ph-chart-line',
     proportions: 'i-ph-rectangle',
     layers: 'i-ph-stack',
-    // the Ask AI panel: its close, clear and thinking glyphs
+    // the Ask panel: its close, clear and thinking glyphs
     panelRightClose: 'i-ph-caret-right',
     clear: 'i-ph-eraser',
     brain: 'i-ph-brain',
@@ -1102,7 +1102,7 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     curve: 'i-ri-line-chart-line',
     proportions: 'i-ri-aspect-ratio-line',
     layers: 'i-ri-stack-line',
-    // the Ask AI panel: its close, clear and thinking glyphs
+    // the Ask panel: its close, clear and thinking glyphs
     panelRightClose: 'i-ri-sidebar-unfold-line',
     clear: 'i-ri-eraser-line',
     brain: 'i-ri-brain-line',
@@ -1213,7 +1213,7 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     curve: 'i-tabler-chart-line',
     proportions: 'i-tabler-aspect-ratio',
     layers: 'i-tabler-stack-2',
-    // the Ask AI panel: its close, clear and thinking glyphs
+    // the Ask panel: its close, clear and thinking glyphs
     panelRightClose: 'i-tabler-layout-sidebar-right-collapse',
     clear: 'i-tabler-clear-all',
     brain: 'i-tabler-brain',
@@ -1330,7 +1330,7 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     curve: 'i-pixelarticons-chart-line',
     proportions: 'i-pixelarticons-aspect-ratio',
     layers: 'i-pixelarticons-blocks',
-    // the Ask AI panel: its close, clear and thinking glyphs
+    // the Ask panel: its close, clear and thinking glyphs
     panelRightClose: 'i-pixelarticons-chevron-right',
     clear: 'i-pixelarticons-notes-delete',
     brain: 'i-pixelarticons-lightbulb',

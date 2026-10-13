@@ -60,8 +60,7 @@ type DropdownMenuContentSlots<
 <script setup lang="ts" generic="T extends ArrayOrNested<DropdownMenuItem>">
 import { computed, ref, toRef } from 'vue'
 import { defu } from 'defu'
-import { DropdownMenu } from 'reka-ui/namespaced'
-import { useForwardPropsEmits } from 'reka-ui'
+import { DropdownMenuPortal, DropdownMenuContent, DropdownMenuItem as RekaDropdownMenuItem, DropdownMenuGroup, DropdownMenuSeparator, DropdownMenuCheckboxItem, DropdownMenuItemIndicator, DropdownMenuLabel, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuFilter, useForwardPropsEmits } from 'reka-ui'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { FieldGroupReset } from '../composables/useFieldGroup'
@@ -77,6 +76,8 @@ import UIcon from './Icon.vue'
 import UInput from './Input.vue'
 import UKbd from './Kbd.vue'
 import UDropdownMenuContent from './DropdownMenuContent.vue'
+
+const DropdownMenu = { Portal: DropdownMenuPortal, Content: DropdownMenuContent, Item: RekaDropdownMenuItem, Group: DropdownMenuGroup, Separator: DropdownMenuSeparator, CheckboxItem: DropdownMenuCheckboxItem, ItemIndicator: DropdownMenuItemIndicator, Label: DropdownMenuLabel, Sub: DropdownMenuSub, SubContent: DropdownMenuSubContent, SubTrigger: DropdownMenuSubTrigger, Filter: DropdownMenuFilter }
 
 const props = defineProps<DropdownMenuContentProps<T>>()
 const emits = defineEmits<DropdownMenuContentEmits>()

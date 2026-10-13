@@ -29,7 +29,13 @@ describe('mount', () => {
   })
 })
 
-// Re-render cost: a full on/off `loading` cycle per iteration (deterministic,
+// CodSpeed measures a single call of the bench body, and the runtime adds a
+// fixed ~150µs to that call on some runs. On a ~1ms body that alone crosses the
+// 10% regression threshold, so every rung repeats its cycle enough to absorb
+// it. Scaling every rung by the same factor keeps the differences above.
+const CYCLES = 10
+
+// Re-render cost: full on/off `loading` cycles per iteration (deterministic,
 // ends in the initial state), re-rendering the whole subtree.
 function reRenderBench(name: string, comp: any, props: Record<string, any> = {}) {
   describe(`re-render: ${name}`, () => {
@@ -39,8 +45,10 @@ function reRenderBench(name: string, comp: any, props: Record<string, any> = {})
     // bench function without tinybench's `setup`/`teardown` options.
     bench(name, async () => {
       wrapper ??= await mountSuspended(comp, { props })
-      await wrapper.setProps({ loading: true })
-      await wrapper.setProps({ loading: false })
+      for (let i = 0; i < CYCLES; i++) {
+        await wrapper.setProps({ loading: true })
+        await wrapper.setProps({ loading: false })
+      }
     })
   })
 }
