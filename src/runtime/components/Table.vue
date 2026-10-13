@@ -262,8 +262,13 @@ const appConfig = useAppConfig() as Table['AppConfig']
 const data = createRef(props.data ?? [], props.watchOptions?.deep !== false)
 // eslint-disable-next-line vue/no-dupe-keys
 const meta = computed(() => props.meta ?? {})
+// TanStack resolves each column as `{ ...defaultColumn, ...columnDef }`, so any key set here shadows `defaultColumn`.
+// The fallback `header` and `cell` are only injected when `defaultColumn` doesn't provide its own.
 // eslint-disable-next-line vue/no-dupe-keys
-const columns = computed<TableColumn<T>[]>(() => processColumns(props.columns ?? Object.keys(data.value[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) }))))
+const columns = computed<TableColumn<T>[]>(() => processColumns(props.columns ?? Object.keys(data.value[0] ?? {}).map((accessorKey: string) => ({
+  accessorKey,
+  ...(props.defaultColumn?.header === undefined && { header: upperFirst(accessorKey) })
+}))))
 
 function processColumns(columns: TableColumn<T>[]): TableColumn<T>[] {
   return columns.map((column) => {
@@ -273,7 +278,7 @@ function processColumns(columns: TableColumn<T>[]): TableColumn<T>[] {
       col.columns = processColumns(col.columns as TableColumn<T>[])
     }
 
-    if (!col.cell) {
+    if (!col.cell && !props.defaultColumn?.cell) {
       col.cell = ({ getValue }) => {
         const value = getValue()
         if (value === '' || value === null || value === undefined) {
