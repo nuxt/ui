@@ -292,7 +292,9 @@ const generatedDefinition = computed(() => {
       scale: color,
       legend: (props.legend ?? multiple) ? legendGuide : undefined
     },
-    focus: 'group-x'
+    focus: 'group-x',
+    // The default only focuses a point within 48 pixels, which leaves dead zones between sparse x values.
+    maxFocusDistance: Number.POSITIVE_INFINITY
   } as any)
 })
 
@@ -306,7 +308,15 @@ const tooltipPoints = computed(() => {
     return []
   }
 
-  return groupPoints.value.includes(primaryPoint.value) ? [...groupPoints.value] : [primaryPoint.value]
+  const points = groupPoints.value.includes(primaryPoint.value) ? [...groupPoints.value] : [primaryPoint.value]
+
+  // TanStack Charts orders a group by position on the chart, which changes from one x value
+  // to the next. Rows follow `categories` like the legend does.
+  if (!props.definition && props.type !== 'donut') {
+    points.sort((a, b) => seriesKeys.value.indexOf(a.datum.category) - seriesKeys.value.indexOf(b.datum.category))
+  }
+
+  return points
 })
 
 const tooltipContent = computed<{ title?: string, rows: ChartTooltipRow[] }>(() => {
