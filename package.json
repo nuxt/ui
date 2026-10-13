@@ -232,7 +232,7 @@
     "@internationalized/date": "^3",
     "@internationalized/number": "^3",
     "@nuxt/content": "^3",
-    "@tanstack/charts": "^0.18.0",
+    "@tanstack/charts": "^1",
     "@tiptap/core": "^3",
     "@tiptap/extension-bubble-menu": "^3",
     "@tiptap/extension-code": "^3",
