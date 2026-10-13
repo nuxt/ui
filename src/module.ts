@@ -1,10 +1,12 @@
 import { defu } from 'defu'
-import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addPlugin, hasNuxtModule } from '@nuxt/kit'
+import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addPlugin, addPluginTemplate, hasNuxtModule } from '@nuxt/kit'
 import type { HookResult, ModuleDependencies } from '@nuxt/schema'
 import { addTemplates } from './templates'
 import { publicComposables } from './imports'
 import { defaultOptions, getDefaultConfig, resolveColors } from './utils/defaults'
 import { getClientBundleIcons } from './utils/icons'
+import { generateI18nPlugin, getLocaleKeys } from './utils/locales'
+import type { I18nLocale } from './utils/locales'
 import { name, version } from '../package.json'
 
 export type * from './runtime/types'
@@ -251,6 +253,18 @@ export default defineNuxtModule<ModuleOptions>({
     }
 
     addPlugin({ src: resolve('./runtime/plugins/colors') })
+
+    if (hasNuxtModule('@nuxtjs/i18n')) {
+      addPluginTemplate({
+        filename: 'ui-i18n.mjs',
+        getContents: () => {
+          // Resolved by `@nuxtjs/i18n`, including layers
+          const { locales } = (nuxt.options.runtimeConfig.public.i18n || {}) as { locales?: I18nLocale[] }
+
+          return generateI18nPlugin(Array.isArray(locales) ? locales : [], getLocaleKeys(resolve('./runtime/locale')), resolve('./runtime'))
+        }
+      })
+    }
 
     if (options.prose || options.mdc || options.content || hasNuxtModule('@nuxtjs/mdc') || hasNuxtModule('@nuxt/content')) {
       addComponentsDir({
