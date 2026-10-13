@@ -36,7 +36,7 @@ describe('i18n plugin', () => {
         "en-US": en
       }
       export default defineNuxtPlugin((nuxtApp) => {
-        nuxtApp.vueApp.provide(localeContextInjectionKey, computed(() => locales[unref(nuxtApp.$i18n.locale)]))
+        nuxtApp.vueApp.provide(localeContextInjectionKey, computed(() => locales[unref(nuxtApp.$i18n?.locale)]))
       })"
     `)
   })
