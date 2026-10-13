@@ -447,7 +447,6 @@ const { data: markdown } = useAsyncData(codeKey, async () => {
               color="neutral"
               variant="soft"
               class="rounded-sm rounded-l-none min-w-12"
-              :class="[option.name.toLowerCase().endsWith('color') && 'pl-6']"
               :ui="{ itemLeadingChip: 'w-2' }"
               @update:model-value="setComponentProp(option.name, $event)"
             >

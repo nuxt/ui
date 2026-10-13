@@ -212,7 +212,6 @@ const urlSearchParams = computed(() => {
                 variant="soft"
                 class="rounded-sm rounded-l-none min-w-12"
                 :multiple="option.multiple"
-                :class="[option.name.toLowerCase().endsWith('color') && 'pl-6']"
                 :ui="{ itemLeadingChip: 'w-2' }"
                 @update:model-value="set(optionsValues, option.name, $event)"
               >
