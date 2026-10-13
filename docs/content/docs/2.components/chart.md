@@ -507,6 +507,17 @@ name: 'chart-donut-example'
 ---
 ::
 
+### With formatted values
+
+Use the `format` prop to format the values on the y axis and in the tooltip.
+
+::component-example
+---
+collapse: true
+name: 'chart-format-example'
+---
+::
+
 ### With custom tooltip
 
 Use the `#tooltip` slot to replace the tooltip content. It receives the hovered `points`, each with the `datum` it comes from and its `color`.
