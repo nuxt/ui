@@ -60,6 +60,10 @@ ignore:
   - data
   - index
   - categories
+external:
+  - data
+externalTypes:
+  - ChartDatum[]
 props:
   data:
     - month: January
@@ -109,6 +113,10 @@ items:
     - area
     - bar
     - donut
+external:
+  - data
+externalTypes:
+  - ChartDatum[]
 props:
   type: bar
   data:
@@ -153,6 +161,10 @@ ignore:
   - data
   - index
   - categories
+external:
+  - data
+externalTypes:
+  - ChartDatum[]
 props:
   type: area
   stacked: true
@@ -198,6 +210,10 @@ ignore:
   - data
   - index
   - categories
+external:
+  - data
+externalTypes:
+  - ChartDatum[]
 props:
   curve: monotone
   data:
@@ -247,6 +263,10 @@ ignore:
   - index
   - categories
   - colors
+external:
+  - data
+externalTypes:
+  - ChartDatum[]
 props:
   colors:
     - success
@@ -293,6 +313,10 @@ ignore:
   - data
   - index
   - categories
+external:
+  - data
+externalTypes:
+  - ChartDatum[]
 props:
   points: true
   data:
@@ -333,6 +357,10 @@ ignore:
   - data
   - index
   - categories
+external:
+  - data
+externalTypes:
+  - ChartDatum[]
 props:
   grid: false
   data:
@@ -373,6 +401,10 @@ ignore:
   - data
   - index
   - categories
+external:
+  - data
+externalTypes:
+  - ChartDatum[]
 props:
   yAxis: false
   data:
@@ -417,6 +449,10 @@ ignore:
   - data
   - index
   - categories
+external:
+  - data
+externalTypes:
+  - ChartDatum[]
 props:
   legend: false
   data:
@@ -461,6 +497,10 @@ ignore:
   - data
   - index
   - categories
+external:
+  - data
+externalTypes:
+  - ChartDatum[]
 props:
   tooltip: false
   data:
@@ -505,6 +545,10 @@ ignore:
   - data
   - index
   - categories
+external:
+  - data
+externalTypes:
+  - ChartDatum[]
 props:
   type: donut
   thickness: 12
@@ -550,6 +594,10 @@ ignore:
   - data
   - index
   - categories
+external:
+  - data
+externalTypes:
+  - ChartDatum[]
 props:
   height: 200
   data:
