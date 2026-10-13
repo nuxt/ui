@@ -6,7 +6,7 @@ export default (options: Required<ModuleOptions>) => ({
     icon: 'size-6 mb-2 block',
     title: 'text-highlighted font-semibold',
     description: 'text-[15px] text-muted *:first:mt-0 *:last:mb-0 *:my-1',
-    externalIcon: ['size-4 align-top absolute right-2 top-2 text-dimmed pointer-events-none', options.theme.transitions && 'transition-colors']
+    externalIcon: ['size-4 align-top absolute end-2 top-2 text-dimmed pointer-events-none', options.theme.transitions && 'transition-colors']
   },
   variants: {
     color: {
@@ -30,14 +30,14 @@ export default (options: Required<ModuleOptions>) => ({
     color,
     to: true,
     class: {
-      base: `hover:bg-${color}/10 hover:border-${color} has-focus-visible:border-${color}`,
+      base: `hover:bg-${color}/10 hover:border-${color} outline-${color}/25 has-[>a:focus-visible]:outline-3 has-[>a:focus-visible]:border-${color}`,
       externalIcon: `group-hover:text-${color}`
     }
   })), {
     color: 'neutral',
     to: true,
     class: {
-      base: 'hover:bg-elevated/50 hover:border-inverted has-focus-visible:border-inverted',
+      base: 'hover:bg-elevated/50 hover:border-inverted outline-inverted/25 has-[>a:focus-visible]:outline-3 has-[>a:focus-visible]:border-inverted',
       externalIcon: 'group-hover:text-highlighted'
     }
   }],

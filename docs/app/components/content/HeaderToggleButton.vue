@@ -36,6 +36,7 @@ const state = computed(() => props.open ? 'close' : 'normal')
     variant="ghost"
     color="neutral"
     square
+    :aria-label="open ? 'Close menu' : 'Open menu'"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +56,8 @@ const state = computed(() => props.open ? 'close' : 'normal')
         :variants="variants"
         :animate="state"
         :custom="1"
-        class="outline-none"
+        tabindex="-1"
+        class="outline-hidden"
       />
       <motion.line
         x1="4"
@@ -65,7 +67,8 @@ const state = computed(() => props.open ? 'close' : 'normal')
         :variants="variants"
         :animate="state"
         :custom="2"
-        class="outline-none"
+        tabindex="-1"
+        class="outline-hidden"
       />
       <motion.line
         x1="4"
@@ -75,7 +78,8 @@ const state = computed(() => props.open ? 'close' : 'normal')
         :variants="variants"
         :animate="state"
         :custom="3"
-        class="outline-none"
+        tabindex="-1"
+        class="outline-hidden"
       />
     </svg>
   </UButton>

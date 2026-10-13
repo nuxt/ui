@@ -2,7 +2,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/prompt'
-import type { IconProps } from '../../types'
+import type { IconProps } from '../Icon.vue'
 import type { ComponentConfig } from '../../types/tv'
 
 type ProsePrompt = ComponentConfig<typeof theme, AppConfig, 'prompt', 'ui.prose'>
@@ -10,13 +10,19 @@ type ProsePrompt = ComponentConfig<typeof theme, AppConfig, 'prompt', 'ui.prose'
 export interface ProsePromptProps {
   description?: string
   /**
+   * The prompt to copy, kept as written.
+   * The default slot is copied as plain text when not set.
+   */
+  prompt?: string
+  /**
    * @IconifyIcon
    */
   icon?: IconProps['name']
   /**
+   * The `copy` action is always displayed, list any additional actions to show alongside it.
    * @defaultValue ['copy']
    */
-  actions?: ('copy' | 'cursor' | 'windsurf')[]
+  actions?: ('copy' | 'cursor' | 'windsurf' | 'claude')[]
   class?: any
   ui?: ProsePrompt['slots']
 }
@@ -30,7 +36,7 @@ export interface ProsePromptSlots {
 import { computed } from 'vue'
 import { useClipboard } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../../composables/useComponentUI'
+import { useComponentProps } from '../../composables/useComponentProps'
 import { useLocale } from '../../composables/useLocale'
 import { getSlotChildrenText } from '../../utils'
 import { tv } from '../../utils/tv'
@@ -39,20 +45,28 @@ import UButton from '../Button.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<ProsePromptProps>(), {
-  actions: () => ['copy']
+const _props = withDefaults(defineProps<ProsePromptProps>(), {
+  actions: () => []
 })
 const slots = defineSlots<ProsePromptSlots>()
+
+const props = useComponentProps('prose.prompt', _props)
 
 const { t } = useLocale()
 const { copy, copied } = useClipboard()
 const appConfig = useAppConfig() as ProsePrompt['AppConfig']
-const uiProp = useComponentUI('prose.prompt', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.prompt || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.prompt || {}) })())
+
+// eslint-disable-next-line vue/no-dupe-keys
+const actions = computed(() => [...new Set(['copy', ...props.actions])])
 
 function getPromptText() {
+  if (props.prompt) {
+    return props.prompt.trim()
+  }
+
   const children = slots.default?.()
   return children ? getSlotChildrenText(children).trim() : ''
 }
@@ -62,31 +76,29 @@ function copyPrompt() {
 }
 
 function openInCursor() {
-  const url = new URL('cursor://anysphere.cursor-deeplink/prompt')
-  url.searchParams.set('text', getPromptText())
-
-  window.open(url.toString(), '_self')
+  window.open(`cursor://anysphere.cursor-deeplink/prompt?text=${encodeURIComponent(getPromptText())}`, '_self')
 }
 
 function openInWindsurf() {
-  const url = new URL('windsurf://cascade/newChat')
-  url.searchParams.set('prompt', getPromptText())
+  window.open(`windsurf://cascade/newChat?prompt=${encodeURIComponent(getPromptText())}`, '_self')
+}
 
-  window.open(url.toString(), '_self')
+function openInClaude() {
+  window.open(`claude://code/new?q=${encodeURIComponent(getPromptText())}`, '_self')
 }
 </script>
 
 <template>
-  <div :class="ui.root({ class: [uiProp?.root, props.class] })" v-bind="$attrs">
-    <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: uiProp?.icon })" />
+  <div :class="ui.root({ class: [props.ui?.root, props.class] })" v-bind="$attrs">
+    <UIcon v-if="props.icon" :name="props.icon" :class="ui.icon({ class: props.ui?.icon })" />
 
-    <div :class="ui.content({ class: uiProp?.content })">
-      <p v-if="description" :class="ui.description({ class: uiProp?.description })">
-        {{ description }}
+    <div :class="ui.content({ class: props.ui?.content })">
+      <p v-if="props.description" :class="ui.description({ class: props.ui?.description })">
+        {{ props.description }}
       </p>
     </div>
 
-    <div :class="ui.actions({ class: uiProp?.actions })">
+    <div :class="ui.actions({ class: props.ui?.actions })">
       <UButton
         v-if="actions.includes('copy')"
         :icon="copied ? appConfig.ui.icons.copyCheck : appConfig.ui.icons.copy"
@@ -113,6 +125,16 @@ function openInWindsurf() {
         size="sm"
         :label="t('prose.prompt.openIn', { name: 'Windsurf' })"
         @click="openInWindsurf"
+      />
+
+      <UButton
+        v-if="actions.includes('claude')"
+        icon="i-simple-icons-claude"
+        color="neutral"
+        variant="outline"
+        size="sm"
+        :label="t('prose.prompt.openIn', { name: 'Claude' })"
+        @click="openInClaude"
       />
     </div>
   </div>

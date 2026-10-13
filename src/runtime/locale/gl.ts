@@ -1,4 +1,4 @@
-import type { Messages } from '../types'
+import type { Messages } from '../types/locale'
 import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
@@ -16,23 +16,36 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Pechar'
     },
+    breadcrumb: {
+      label: 'ruta de navegación'
+    },
     calendar: {
+      label: 'Data do evento',
+      monthPicker: 'Selector de mes',
       nextMonth: 'Mes seguinte',
       nextYear: 'Ano seguinte',
       prevMonth: 'Mes anterior',
-      prevYear: 'Ano anterior'
+      prevYear: 'Ano anterior',
+      yearPicker: 'Selector de ano'
     },
     carousel: {
       dots: 'Escoller diapositiva a amostrar',
       goto: 'Ir á diapositiva {slide}',
       next: 'Seguinte',
-      prev: 'Anterior'
+      prev: 'Anterior',
+      roledescription: 'carrusel',
+      slide: 'diapositiva'
+    },
+    chatMessages: {
+      autoScroll: 'Desprazar cara abaixo'
     },
     chatPrompt: {
       placeholder: 'Escribe a túa mensaxe aquí…'
     },
     chatPromptSubmit: {
-      label: 'Enviar'
+      label: 'Enviar',
+      reload: 'Tentar de novo',
+      stop: 'Deter a xeración'
     },
     chatReasoning: {
       thinking: 'Pensando…',
@@ -51,10 +64,12 @@ export default defineLocale<Messages>({
       close: 'Pechar',
       noData: 'Sen datos',
       noMatch: 'Non hai datos coincidentes',
-      placeholder: 'Escribe un comando ou busca…'
+      placeholder: 'Escribe un comando ou busca…',
+      results: 'Resultados'
     },
     contentSearch: {
       links: 'Ligazóns',
+      search: 'Resultados',
       theme: 'Tema'
     },
     contentSearchButton: {
@@ -81,6 +96,9 @@ export default defineLocale<Messages>({
       close: 'Pechar barra lateral',
       open: 'Abrir barra lateral'
     },
+    drawer: {
+      close: 'Pechar'
+    },
     error: {
       clear: 'Volver ao inicio'
     },
@@ -91,17 +109,55 @@ export default defineLocale<Messages>({
       close: 'Pechar menú',
       open: 'Abrir menú'
     },
+    inputDate: {
+      day: 'día',
+      dayPeriod: 'AM/PM',
+      era: 'era',
+      hour: 'hora',
+      minute: 'minuto',
+      month: 'mes',
+      second: 'segundo',
+      timeZoneName: 'fuso horario',
+      year: 'ano'
+    },
     inputMenu: {
       create: 'Crear "{label}"',
       noData: 'Sen datos',
-      noMatch: 'Non hai datos coincidentes'
+      noMatch: 'Non hai datos coincidentes',
+      trigger: 'Mostrar opcións'
     },
     inputNumber: {
       decrement: 'Diminuír',
-      increment: 'Aumentar'
+      increment: 'Aumentar',
+      roledescription: 'campo numérico'
+    },
+    inputRating: {
+      rate: 'Valorar {value} de {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'hora',
+      minute: 'minuto',
+      second: 'segundo',
+      timeZoneName: 'fuso horario'
+    },
+    listbox: {
+      noData: 'Sen datos',
+      noMatch: 'Non hai datos coincidentes',
+      search: 'Buscar…'
     },
     modal: {
       close: 'Pechar'
+    },
+    pagination: {
+      first: 'Primeira páxina',
+      last: 'Última páxina',
+      next: 'Páxina seguinte',
+      page: 'Páxina {page}',
+      prev: 'Páxina anterior'
+    },
+    pinInput: {
+      input: 'código PIN, carácter {index} de {length}'
     },
     pricingTable: {
       caption: 'Comparación de plans de prezos'
@@ -135,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: 'Non hai datos coincidentes',
       search: 'Buscar…'
     },
+    skeleton: {
+      label: 'cargando'
+    },
     slideover: {
       close: 'Pechar'
+    },
+    slider: {
+      max: 'Máximo',
+      min: 'Mínimo',
+      thumb: 'Control desprazable',
+      value: 'Valor {index} de {total}'
+    },
+    stepper: {
+      label: 'progreso'
     },
     table: {
       noData: 'Sen datos'
     },
     toast: {
       close: 'Pechar'
+    },
+    toaster: {
+      label: 'Notificación',
+      viewport: 'Notificacións ({hotkey})'
     }
   }
 })

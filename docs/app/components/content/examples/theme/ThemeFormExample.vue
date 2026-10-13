@@ -25,6 +25,10 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
 <template>
   <UTheme
+    :props="{
+      input: { size: 'lg' },
+      textarea: { size: 'lg' }
+    }"
     :ui="{
       formField: {
         root: 'flex max-sm:flex-col justify-between gap-4',

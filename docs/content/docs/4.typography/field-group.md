@@ -1,7 +1,8 @@
 ---
-title: FieldGroup
+title: ProseFieldGroup
 description: 'Group related fields together for comprehensive API documentation.'
 category: components
+navigation.title: FieldGroup
 links:
   - label: GitHub
     icon: i-simple-icons-github
@@ -17,19 +18,19 @@ Group fields together in a list.
 ::field-group{class="my-0"}
 
   ::field{name="analytics" type="boolean"}
-  Default to `false` - Enables analytics for your project (coming soon).
+  Defaults to `false`. Enables analytics for your project (coming soon).
   ::
 
   ::field{name="blob" type="boolean"}
-  Default to `false` - Enables blob storage to store static assets, such as images, videos and more.
+  Defaults to `false`. Enables blob storage to store static assets, such as images, videos and more.
   ::
 
   ::field{name="cache" type="boolean"}
-  Default to `false` - Enables cache storage to cache your server route responses or functions using Nitro's `cachedEventHandler` and `cachedFunction`
+  Defaults to `false`. Enables cache storage to cache your server route responses or functions using Nitro's `cachedEventHandler` and `cachedFunction`.
   ::
 
   ::field{name="database" type="boolean"}
-  Default to `false` - Enables SQL database to store your application's data.
+  Defaults to `false`. Enables SQL database to store your application's data.
   ::
 
 ::
@@ -39,19 +40,19 @@ Group fields together in a list.
 ```mdc
 ::field-group
   ::field{name="analytics" type="boolean"}
-    Default to `false` - Enables analytics for your project (coming soon).
+    Defaults to `false`. Enables analytics for your project (coming soon).
   ::
 
   ::field{name="blob" type="boolean"}
-    Default to `false` - Enables blob storage to store static assets, such as images, videos and more.
+    Defaults to `false`. Enables blob storage to store static assets, such as images, videos and more.
   ::
 
   ::field{name="cache" type="boolean"}
-    Default to `false` - Enables cache storage to cache your server route responses or functions using Nitro's `cachedEventHandler` and `cachedFunction`
+    Defaults to `false`. Enables cache storage to cache your server route responses or functions using Nitro's `cachedEventHandler` and `cachedFunction`.
   ::
 
   ::field{name="database" type="boolean"}
-    Default to `false` - Enables SQL database to store your application's data.
+    Defaults to `false`. Enables SQL database to store your application's data.
   ::
 ::
 ```

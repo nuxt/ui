@@ -2,6 +2,10 @@
 title: ScrollArea
 description: A flexible scroll container with virtualization support.
 category: data
+keywords:
+  - scrollbar
+  - overflow
+  - scrolling
 links:
   - label: TanStack Virtual
     avatar:
@@ -91,6 +95,21 @@ options:
 ---
 ::
 
+### Shadow :badge{label="4.9+" class="align-text-top"}
+
+Use the `shadow` prop to display fade shadows on the scrollable edges, indicating that more content is available in the scroll direction. The fade automatically follows the `orientation` and only appears when the content overflows.
+
+::component-example
+---
+collapse: true
+name: 'scroll-area-shadow-example'
+---
+::
+
+::tip
+Pass an object to the `shadow` prop to configure the fade size, e.g. `:shadow="{ size: 48 }"`.
+::
+
 ## Examples
 
 ### As masonry layout
@@ -136,6 +155,35 @@ overflowHidden: true
 name: 'scroll-area-responsive-lanes-example'
 class: '!p-0'
 ---
+::
+
+### With external scroll element :badge{label="4.10+" class="align-text-top"}
+
+Pass a `getScrollElement` function in the `virtualize` prop to virtualize against an ancestor scroll container instead of the component's own viewport. Set `scrollMargin` to the list's offset from the scroll element's start (e.g. the height of the content above it).
+
+::component-example
+---
+prettier: true
+collapse: true
+overflowHidden: true
+name: 'scroll-area-external-scroll-example'
+class: '!p-0'
+options:
+  - name: orientation
+    label: orientation
+    default: vertical
+    items:
+      - vertical
+      - horizontal
+---
+::
+
+::note
+Because the container owns the scroll, the toolbar's find and "Top" buttons scroll it directly with `container.scrollTo`.
+::
+
+::caution
+The `shadow` prop has no effect in this mode, since the root no longer owns the scroll. Apply your own fade to the scroll container instead.
 ::
 
 ### With programmatic scroll

@@ -58,6 +58,11 @@ export default {
       naked: {
         description: 'text-muted'
       }
+    },
+    loading: {
+      true: {
+        avatar: '[&>[data-slot=icon]]:animate-spin'
+      }
     }
   },
   defaultVariants: {

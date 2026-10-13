@@ -2,7 +2,12 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/sidebar'
-import type { ButtonProps, DrawerProps, IconProps, ModalProps, SlideoverProps, LinkPropsKeys } from '../types'
+import type { ButtonProps } from './Button.vue'
+import type { DrawerProps } from './Drawer.vue'
+import type { IconProps } from './Icon.vue'
+import type { ModalProps } from './Modal.vue'
+import type { SlideoverProps } from './Slideover.vue'
+import type { LinkPropsKeys } from './Link.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type Sidebar = ComponentConfig<typeof theme, AppConfig, 'sidebar'>
@@ -63,6 +68,16 @@ export interface SidebarProps<T extends SidebarMode = SidebarMode> {
    */
   rail?: boolean
   /**
+   * Animate the sidebar when collapsing or expanding.
+   * @defaultValue true
+   */
+  transition?: boolean
+  /**
+   * The breakpoint below which the sidebar renders as a menu.
+   * @defaultValue 'lg'
+   */
+  breakpoint?: Sidebar['variants']['breakpoint']
+  /**
    * The mode of the sidebar menu on mobile.
    * @defaultValue 'slideover'
    */
@@ -94,36 +109,42 @@ import { Primitive } from 'reka-ui'
 import { defu } from 'defu'
 import { createReusableTemplate, useMediaQuery } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
+import { useLazyOverlay } from '../composables/useLazyOverlay'
+import { lazyOverlays, loadOverlay } from '../utils/lazy-overlay'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
-import USlideover from './Slideover.vue'
-import UModal from './Modal.vue'
-import UDrawer from './Drawer.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<SidebarProps<T>>(), {
+const _props = withDefaults(defineProps<SidebarProps<T>>(), {
   as: 'aside',
   variant: 'sidebar',
   collapsible: 'offcanvas',
   side: 'left',
   close: false,
+  transition: true,
   rail: false,
+  breakpoint: 'lg',
   mode: 'slideover' as never
 })
 const slots = defineSlots<SidebarSlots>()
 
+const props = useComponentProps<SidebarProps<T>>('sidebar', _props)
+
 const [DefineInnerTemplate, ReuseInnerTemplate] = createReusableTemplate()
 const [DefineContentTemplate, ReuseContentTemplate] = createReusableTemplate()
 
-const mediaQuery = useMediaQuery('(max-width: 1023px)')
+// Same values as the Tailwind CSS variants in the theme, in rem
+const breakpoints = { 'sm': 40, 'md': 48, 'lg': 64, 'xl': 80, '2xl': 96 }
+
+const mediaQuery = useMediaQuery(() => `(min-width: ${breakpoints[props.breakpoint || 'lg']}rem)`)
 const isMounted = ref(false)
 onMounted(() => {
   isMounted.value = true
 })
-const isMobile = computed(() => isMounted.value && mediaQuery.value)
+const isMobile = computed(() => isMounted.value && !mediaQuery.value)
 
 // Viewport-aware open model: on desktop controls expanded/collapsed, on mobile controls the sheet
 const modelOpen = defineModel<boolean>('open', { default: true })
@@ -171,7 +192,6 @@ watch(openMobile, (value) => {
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Sidebar['AppConfig']
-const uiProp = useComponentUI('sidebar', props)
 
 const state = computed<SidebarState>(() => open.value ? 'expanded' : 'collapsed')
 
@@ -184,11 +204,16 @@ function closeSidebar() {
 
 const hasHeader = computed(() => !!slots.header || props.title || !!slots.title || props.description || !!slots.description || !!slots.actions || canClose.value || !!slots.close)
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.sidebar || {}) })({
+// eslint-disable-next-line vue/no-dupe-keys
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.sidebar || {}) })({
   side: props.side,
   variant: props.variant,
-  collapsible: props.collapsible
+  collapsible: props.collapsible,
+  breakpoint: props.breakpoint,
+  transition: props.transition
 }))
+
+const { slideover: USlideover, modal: UModal, drawer: UDrawer } = lazyOverlays
 
 const Menu = computed(() => ({
   slideover: USlideover,
@@ -202,39 +227,45 @@ const menuProps = toRef(() => defu(props.menu, {
   close: props.close,
   closeIcon: props.closeIcon
 }, props.mode === 'modal' ? { } : props.mode === 'slideover' ? { side: props.side, inset: props.variant === 'inset' } : {}) as SidebarMenu<T>)
+
+const renderMenu = useLazyOverlay(() => openMobile.value || (props.menu as ModalProps | undefined)?.unmountOnHide === false, async () => {
+  if (isMobile.value) {
+    await loadOverlay(props.mode as SidebarMode)
+  }
+})
 </script>
 
 <template>
   <DefineContentTemplate>
-    <div v-if="hasHeader" data-slot="header" :class="ui.header({ class: uiProp?.header })">
+    <div v-if="hasHeader" data-slot="header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header" :state="state" :open="open" :close="closeSidebar">
-        <div v-if="title || !!slots.title || description || !!slots.description" data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
-          <p v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
+        <div v-if="props.title || !!slots.title || props.description || !!slots.description" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+          <p v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
             <slot name="title" :state="state">
-              {{ title }}
+              {{ props.title }}
             </slot>
           </p>
 
-          <p v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
+          <p v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
             <slot name="description" :state="state">
-              {{ description }}
+              {{ props.description }}
             </slot>
           </p>
         </div>
 
-        <div v-if="!!slots.actions || canClose" data-slot="actions" :class="ui.actions({ class: uiProp?.actions })">
+        <div v-if="!!slots.actions || canClose" data-slot="actions" :class="ui.actions({ class: props.ui?.actions })">
           <slot name="actions" :state="state" />
 
           <slot name="close" :state="state" :ui="ui">
             <UButton
               v-if="canClose"
-              :icon="closeIcon || appConfig.ui.icons.close"
+              :icon="props.closeIcon || appConfig.ui.icons.close"
               color="neutral"
               variant="ghost"
               :aria-label="t('sidebar.close')"
               v-bind="(typeof props.close === 'object' ? props.close : {})"
               data-slot="close"
-              :class="ui.close({ class: uiProp?.close })"
+              :class="ui.close({ class: props.ui?.close })"
               @click="closeSidebar"
             />
           </slot>
@@ -242,29 +273,29 @@ const menuProps = toRef(() => defu(props.menu, {
       </slot>
     </div>
 
-    <div data-slot="body" :class="ui.body({ class: uiProp?.body })">
+    <div data-slot="body" :class="ui.body({ class: props.ui?.body })">
       <slot :state="state" :open="open" :close="closeSidebar" />
     </div>
 
-    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer })">
+    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
       <slot name="footer" :state="state" :open="open" :close="closeSidebar" />
     </div>
   </DefineContentTemplate>
 
   <DefineInnerTemplate>
-    <div data-slot="inner" :class="ui.inner({ class: uiProp?.inner })">
+    <div data-slot="inner" :class="ui.inner({ class: props.ui?.inner })">
       <ReuseContentTemplate />
     </div>
   </DefineInnerTemplate>
 
   <!-- Non-collapsible: simple inline sidebar -->
   <Primitive
-    v-if="collapsible === 'none'"
-    :as="as"
-    v-bind="$attrs"
+    v-if="props.collapsible === 'none'"
+    :as="props.as"
     data-slot="root"
-    :data-variant="variant"
-    :class="ui.root({ class: [uiProp?.root, props.class] })"
+    v-bind="$attrs"
+    :data-variant="props.variant"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
   >
     <ReuseInnerTemplate />
   </Primitive>
@@ -272,37 +303,37 @@ const menuProps = toRef(() => defu(props.menu, {
   <!-- Collapsible: fixed sidebar with gap spacer + mobile menu -->
   <template v-else>
     <Primitive
-      :as="as"
-      v-bind="$attrs"
+      :as="props.as"
       data-slot="root"
+      v-bind="$attrs"
       :data-state="state"
-      :data-collapsible="state === 'collapsed' ? collapsible : undefined"
-      :data-variant="variant"
-      :data-side="side"
-      :class="ui.root({ class: [uiProp?.root, props.class] })"
+      :data-collapsible="state === 'collapsed' ? props.collapsible : undefined"
+      :data-variant="props.variant"
+      :data-side="props.side"
+      :class="ui.root({ class: [props.ui?.root, props.class] })"
     >
       <!-- Gap spacer: reserves layout space for the fixed sidebar -->
       <div
         data-slot="gap"
         :data-state="state"
-        :class="ui.gap({ class: uiProp?.gap })"
+        :class="ui.gap({ class: props.ui?.gap })"
       />
 
       <!-- Fixed container: the actual visible sidebar -->
       <div
         data-slot="container"
         :data-state="state"
-        :class="ui.container({ class: uiProp?.container })"
+        :class="ui.container({ class: props.ui?.container })"
       >
         <ReuseInnerTemplate />
 
-        <slot v-if="rail" name="rail" :state="state" :ui="ui">
+        <slot v-if="props.rail" name="rail" :state="state" :ui="ui">
           <button
             data-slot="rail"
             :data-state="state"
             :aria-label="t('sidebar.toggle')"
             :tabindex="-1"
-            :class="ui.rail({ class: uiProp?.rail })"
+            :class="ui.rail({ class: props.ui?.rail })"
             @click="open = !open"
           />
         </slot>
@@ -311,7 +342,7 @@ const menuProps = toRef(() => defu(props.menu, {
 
     <!-- Mobile menu -->
     <Menu
-      v-if="isMobile"
+      v-if="isMobile && renderMenu"
       v-model:open="openMobile"
       v-bind="menuProps"
     >

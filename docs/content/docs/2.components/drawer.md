@@ -1,6 +1,10 @@
 ---
-description: A drawer that smoothly slides in & out of the screen.
+description: A drawer that smoothly slides in and out of the screen.
 category: overlay
+keywords:
+  - bottom sheet
+  - action sheet
+  - mobile sheet
 links:
   - label: Drawer
     icon: i-custom-reka-ui
@@ -74,6 +78,70 @@ ignore:
 props:
   title: 'Drawer with description'
   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+
+  body: |
+
+    <Placeholder class="h-48" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+
+#body
+:placeholder{class="h-48"}
+::
+
+### Close :badge{label="4.10+" class="align-text-top"}
+
+Use the `close` prop to display a close button in the Drawer. Defaults to `false`.
+
+You can pass any property from the [Button](/docs/components/button) component to customize it.
+
+::component-code
+---
+prettier: true
+ignore:
+  - title
+  - close.color
+  - close.variant
+props:
+  title: 'Drawer with close button'
+  close:
+    color: primary
+    variant: outline
+    class: 'rounded-full'
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+
+  body: |
+
+    <Placeholder class="h-48" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+
+#body
+:placeholder{class="h-48"}
+::
+
+### Close Icon :badge{label="4.10+" class="align-text-top"}
+
+Use the `close-icon` prop to customize the close button [Icon](/docs/components/icon). Defaults to `i-lucide-x`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - title
+props:
+  title: 'Drawer with close button'
+  close: true
+  closeIcon: 'i-lucide-arrow-right'
 slots:
   default: |
 
@@ -318,6 +386,36 @@ export default defineNuxtConfig({
 
 ::
 
+### No Body Styles :badge{label="Soon" class="align-text-top"}
+
+Use the `no-body-styles` prop to prevent the Drawer from applying styles to the `<body>` element, such as `pointer-events: none` which blocks interaction with the page while the Drawer is open.
+
+::note
+When `overlay` is enabled, it still locks the body scroll. Combine `no-body-styles` with `overlay: false` to keep the page interactive.
+::
+
+::component-code
+---
+prettier: true
+props:
+  noBodyStyles: true
+  overlay: false
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+
+  content: |
+
+    <Placeholder class="h-48 m-4" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+
+#content
+:placeholder{class="h-48 m-4"}
+::
+
 ## Examples
 
 ### Control open state
@@ -336,7 +434,7 @@ In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcu
 ::
 
 ::tip
-This allows you to move the trigger outside of the Drawer or remove it entirely.
+This lets you move the trigger outside of the Drawer or remove it entirely.
 ::
 
 ### Responsive drawer

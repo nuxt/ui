@@ -17,6 +17,10 @@ export interface AvatarGroupProps {
    */
   size?: AvatarGroup['variants']['size']
   /**
+   * @defaultValue 'neutral'
+   */
+  color?: AvatarGroup['variants']['color']
+  /**
    * The maximum number of avatars to display.
    */
   max?: number | string
@@ -26,7 +30,7 @@ export interface AvatarGroupProps {
 
 export interface AvatarGroupSlots {
   default?(props?: {}): VNode[]
-  overflow?(props: { hiddenCount: number, avatarProps: { text: string, class: any } }): VNode[]
+  overflow?(props: { hiddenCount: number }): VNode[]
 }
 </script>
 
@@ -34,42 +38,47 @@ export interface AvatarGroupSlots {
 import { computed, provide } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { avatarGroupInjectionKey } from '../composables/useAvatarGroup'
 import { tv } from '../utils/tv'
 import UAvatar from './Avatar.vue'
 
-const props = defineProps<AvatarGroupProps>()
+const _props = defineProps<AvatarGroupProps>()
 const slots = defineSlots<AvatarGroupSlots>()
 
-const appConfig = useAppConfig() as AvatarGroup['AppConfig']
-const uiProp = useComponentUI('avatarGroup', props)
+const props = useComponentProps('avatarGroup', _props)
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.avatarGroup || {}) })({
-  size: props.size
+const appConfig = useAppConfig() as AvatarGroup['AppConfig']
+
+// eslint-disable-next-line vue/no-dupe-keys
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.avatarGroup || {}) })({
+  size: props.size,
+  color: props.color
 }))
 
+// eslint-disable-next-line vue/no-dupe-keys
 const max = computed(() => typeof props.max === 'string' ? Number.parseInt(props.max, 10) : props.max)
 
-const children = computed(() => {
-  let children = slots.default?.()
-  if (children?.length) {
-    children = children.flatMap((child: any) => {
-      if (typeof child.type === 'symbol') {
-        // `v-if="false"` or commented node
-        if (typeof child.children === 'string') {
-          return
-        }
-
-        return child.children
-      }
-
-      return child
-    }).filter(Boolean)
+function flattenNodes(nodes?: VNode[]): VNode[] {
+  if (!nodes?.length) {
+    return []
   }
 
-  return children || []
-})
+  return nodes.flatMap((node: any) => {
+    if (typeof node.type === 'symbol') {
+      // `v-if="false"` or commented node
+      if (typeof node.children === 'string') {
+        return
+      }
+
+      return node.children
+    }
+
+    return node
+  }).filter(Boolean)
+}
+
+const children = computed(() => flattenNodes(slots.default?.()))
 
 const visibleAvatars = computed(() => {
   if (!children.value.length) {
@@ -91,21 +100,18 @@ const hiddenCount = computed(() => {
   return children.value.length - visibleAvatars.value.length
 })
 
-const overflowAvatarProps = computed(() => ({
-  text: `+${hiddenCount.value}`,
-  class: ui.value.base({ class: uiProp.value?.base })
-}))
+const overflow = computed(() => hiddenCount.value > 0 ? flattenNodes(slots.overflow?.({ hiddenCount: hiddenCount.value })) : [])
 
 provide(avatarGroupInjectionKey, computed(() => ({
-  size: props.size
+  size: props.size,
+  color: props.color
 })))
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
-    <slot v-if="hiddenCount > 0" name="overflow" :hidden-count="hiddenCount" :avatar-props="overflowAvatarProps">
-      <UAvatar v-bind="overflowAvatarProps" data-slot="base" />
-    </slot>
-    <component :is="avatar" v-for="(avatar, count) in visibleAvatars" :key="count" data-slot="base" :class="ui.base({ class: uiProp?.base })" />
+  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <component :is="node" v-for="(node, index) in overflow" :key="`overflow-${index}`" data-slot="base" :class="ui.base({ class: props.ui?.base })" />
+    <UAvatar v-if="hiddenCount > 0 && !overflow.length" :text="`+${hiddenCount}`" data-slot="base" :class="ui.base({ class: props.ui?.base })" />
+    <component :is="avatar" v-for="(avatar, count) in visibleAvatars" :key="count" data-slot="base" :class="ui.base({ class: props.ui?.base })" />
   </Primitive>
 </template>

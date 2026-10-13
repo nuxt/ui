@@ -8,8 +8,6 @@ import { CalendarDate, Time } from '@internationalized/date'
 import * as theme from '#build/ui'
 import { get, set } from '#ui/utils'
 
-const { track } = useAnalytics()
-
 interface CastImport {
   name: string
   from: string
@@ -191,10 +189,13 @@ const options = computed(() => {
             chip: key.toLowerCase().endsWith('color') ? { color: variant } : undefined
           }))
 
+    const type = props?.cast?.[key] ?? prop?.type
+
     return {
       name: key,
       label: key,
-      type: props?.cast?.[key] ?? prop?.type,
+      // Determined from the original value so clearing a number input doesn't turn it into a text one
+      inputType: type?.includes('number') && typeof get(props.props, key) === 'number' ? 'number' : 'text',
       items
     }
   })
@@ -207,20 +208,35 @@ function buildCode() {
     code += `\`\`\`mdc
 ::${camelName}`
 
-    const proseProps = Object.entries(componentProps).map(([key, value]) => {
-      if (value === undefined || value === null || value === '' || props.hide?.includes(key)) {
-        return
-      }
+    const entries = Object.entries(componentProps).filter(([key, value]) => {
+      return value !== undefined && value !== null && value !== '' && !props.hide?.includes(key)
+    })
 
-      return `${key}="${value}"`
-    }).filter(Boolean).join(' ')
+    // A multiline value can't be written inline, it goes in the YAML block.
+    const isMultiline = (value: unknown) => typeof value === 'string' && value.includes('\n')
+
+    const proseProps = entries.filter(([, value]) => !isMultiline(value)).map(([key, value]) => `${key}="${value}"`).join(' ')
+    const blockProps = entries.filter(([, value]) => isMultiline(value)).map(([key, value]) => {
+      return `${key}: |\n${value.trim().replace(/^(?=.)/gm, '  ')}`
+    }).join('\n')
 
     if (proseProps.length) {
       code += `{${proseProps}}`
     }
 
+    if (blockProps.length) {
+      code += `
+---
+${blockProps}
+---`
+    }
+
+    if (props.slots?.default) {
+      code += `
+${props.slots.default}`
+    }
+
     code += `
-${props.slots?.default}
 ::
 \`\`\``
 
@@ -388,9 +404,9 @@ const codeKey = computed(() => `component-code-${name}-${hash(props)}`)
 const wrapperContainer = ref<HTMLElement | null>(null)
 const componentContainer = ref<HTMLElement | null>(null)
 
-const { data: ast } = useAsyncData(codeKey, async () => {
+const { data: markdown } = useAsyncData(codeKey, async () => {
   if (!props.prettier) {
-    return cachedParseMarkdown(code.value)
+    return code.value
   }
 
   let formatted = ''
@@ -405,7 +421,7 @@ const { data: ast } = useAsyncData(codeKey, async () => {
     formatted = code.value
   }
 
-  return cachedParseMarkdown(formatted)
+  return formatted
 }, { lazy: import.meta.client, watch: [code] })
 </script>
 
@@ -449,7 +465,7 @@ const { data: ast } = useAsyncData(codeKey, async () => {
             </USelect>
             <UInput
               v-else
-              :type="option.type?.includes('number') && typeof getComponentProp(option.name) === 'number' ? 'number' : 'text'"
+              :type="option.inputType"
               :model-value="getComponentProp(option.name)"
               color="neutral"
               variant="soft"
@@ -464,26 +480,14 @@ const { data: ast } = useAsyncData(codeKey, async () => {
         <component :is="component" v-bind="{ ...componentProps, ...componentEvents }">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
             <slot :name="slot" mdc-unwrap="p">
-              {{ slots?.[slot] }}
+              {{ typeof slots?.[slot] === 'string' ? slots[slot].trim() : slots?.[slot] }}
             </slot>
           </template>
         </component>
       </div>
 
       <ClientOnly>
-        <UTooltip v-if="playgroundUrl" text="Open in playground" :content="{ side: 'right' }">
-          <UButton
-            :to="playgroundUrl"
-            target="_blank"
-            icon="i-lucide-play"
-            color="neutral"
-            variant="outline"
-            size="sm"
-            class="absolute -bottom-[13px] -right-[13px] z-1 rounded-full lg:opacity-0 lg:group-hover/component:opacity-100 ring-muted transition-opacity duration-200"
-            aria-label="Open in playground"
-            @click="track('Playground Opened', { component: camelName, source: 'code' })"
-          />
-        </UTooltip>
+        <ComponentPlaygroundButton v-if="playgroundUrl" :to="playgroundUrl" :component="camelName" />
 
         <LazyComponentThemeVisualizer
           :container="componentContainer"
@@ -494,6 +498,6 @@ const { data: ast } = useAsyncData(codeKey, async () => {
       </ClientOnly>
     </div>
 
-    <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" class="[&_pre]:rounded-t-none! [&_div.my-5]:mt-0!" />
+    <DocsMarkdown v-if="markdown" :value="markdown" class="[&_pre]:rounded-t-none! [&_div.my-5]:mt-0!" />
   </div>
 </template>

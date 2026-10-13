@@ -1,6 +1,10 @@
 ---
 description: A dialog that slides in from any side of the screen.
 category: overlay
+keywords:
+  - sheet
+  - side panel
+  - off-canvas
 links:
   - label: Dialog
     icon: i-custom-reka-ui
@@ -351,6 +355,42 @@ slots:
 :placeholder{class="h-full"}
 ::
 
+### Unmount :badge{label="4.10+" class="align-text-top"}
+
+Use the `unmount-on-hide` prop to prevent the Slideover's content from being unmounted when it is closed. Defaults to `true`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - title
+props:
+  unmountOnHide: false
+  title: 'Slideover'
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" />
+
+  body: |
+
+    <Placeholder class="h-full" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle"}
+
+#body
+:placeholder{class="h-full"}
+::
+
+::note
+You can inspect the DOM to see the Slideover's content being rendered even while it is closed.
+::
+
+::tip
+When the `portal` prop is set to `false`, the content is also rendered on the server. This is useful to render an open Slideover during SSR without a flash on page load, or to expose its content for SEO.
+::
+
 ## Examples
 
 ### Control open state
@@ -368,7 +408,7 @@ In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcu
 ::
 
 ::tip
-This allows you to move the trigger outside of the Slideover or remove it entirely.
+This lets you move the trigger outside of the Slideover or remove it entirely.
 ::
 
 ### Programmatic usage
@@ -390,7 +430,7 @@ preview: false
 ::
 
 ::note
-We are emitting a `close` event when the slideover is closed or dismissed here. You can emit any data through the `close` event, however, the event must be emitted in order to capture the return value.
+We are emitting a `close` event when the slideover is closed or dismissed here. You can emit any data through the `close` event, and that data becomes the resolved value of `open()`. The event must be emitted for the promise to resolve.
 ::
 
 Then, use it in your app:

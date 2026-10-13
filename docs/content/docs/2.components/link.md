@@ -1,6 +1,10 @@
 ---
-description: A wrapper around <NuxtLink> with extra props.
+description: A wrapper around NuxtLink with extra props.
 category: navigation
+keywords:
+  - anchor
+  - href
+  - navigation
 links:
   - label: GitHub
     icon: i-simple-icons-github
@@ -88,7 +92,7 @@ If you're using the [Tailwind CSS IntelliSense](https://marketplace.visualstudio
 ```
 ::
 
-### Locale :badge{label="Soon" class="align-text-top"}
+### Locale :badge{label="4.7+" class="align-text-top"}
 
 The Link component automatically integrates with [`@nuxtjs/i18n`](https://i18n.nuxtjs.org/) when installed. Internal links are automatically localized using the `$localePath` helper without requiring manual wrapping.
 

@@ -25,9 +25,10 @@ export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' |
    */
   size?: Progress['variants']['size']
   /**
+   * Any theme color, or any CSS color value for palettes outside the theme.
    * @defaultValue 'primary'
    */
-  color?: Progress['variants']['color']
+  color?: Progress['variants']['color'] | (string & {})
   /**
    * The orientation of the progress bar.
    * @defaultValue 'horizontal'
@@ -54,14 +55,15 @@ export type ProgressSlots = {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Primitive, ProgressRoot, ProgressIndicator, useForwardPropsEmits } from 'reka-ui'
+import { Primitive, ProgressRoot, ProgressIndicator } from 'reka-ui'
+import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 
-const props = withDefaults(defineProps<ProgressProps>(), {
+const _props = withDefaults(defineProps<ProgressProps>(), {
   inverted: false,
   modelValue: null,
   orientation: 'horizontal'
@@ -69,11 +71,12 @@ const props = withDefaults(defineProps<ProgressProps>(), {
 const emits = defineEmits<ProgressEmits>()
 const slots = defineSlots<ProgressSlots>()
 
+const props = useComponentProps('progress', _props)
+
 const { dir } = useLocale()
 const appConfig = useAppConfig() as Progress['AppConfig']
-const uiProp = useComponentUI('progress', props)
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'getValueLabel', 'getValueText', 'modelValue'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'getValueLabel', 'getValueText', 'modelValue'), emits)
 
 const isIndeterminate = computed(() => rootProps.value.modelValue === null)
 const hasSteps = computed(() => Array.isArray(props.max))
@@ -124,10 +127,9 @@ const indicatorStyle = computed(() => {
   }
 })
 
-const statusStyle = computed(() => {
-  const value = `${Math.max(percent.value ?? 0, 0)}%`
-  return props.orientation === 'vertical' ? { height: value } : { width: value }
-})
+// The theme reads the size off `--percent` so `ui.status` can override it, an inline
+// `width` would win over the class.
+const statusStyle = computed(() => ({ '--percent': `${Math.max(percent.value ?? 0, 0)}%` }))
 
 function isActive(index: number) {
   return index === Number(props.modelValue)
@@ -159,29 +161,36 @@ function stepVariant(index: number | string) {
   return 'other'
 }
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.progress || {}) })({
+// eslint-disable-next-line vue/no-dupe-keys
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.progress || {}) })({
   animation: props.animation,
   size: props.size,
-  color: props.color,
+  color: props.color as Progress['variants']['color'],
   orientation: props.orientation,
   inverted: props.inverted
 }))
+
+// `tv` skips a color it doesn't know, so a value outside the theme palette adds no class
+// and is applied inline instead.
+const themeColors = computed(() => Object.keys({ ...theme.variants?.color, ...appConfig.ui?.progress?.variants?.color }))
+
+const customColor = computed(() => props.color && !themeColors.value.includes(props.color) ? props.color : undefined)
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
-    <div v-if="!isIndeterminate && (status || !!slots.status)" data-slot="status" :class="ui.status({ class: uiProp?.status })" :style="statusStyle">
+  <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div v-if="!isIndeterminate && (props.status || !!slots.status)" data-slot="status" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
       <slot name="status" :percent="percent">
         {{ percent }}%
       </slot>
     </div>
 
-    <ProgressRoot v-bind="rootProps" :max="realMax" data-slot="base" :class="ui.base({ class: uiProp?.base })" style="transform: translateZ(0)">
-      <ProgressIndicator data-slot="indicator" :class="ui.indicator({ class: uiProp?.indicator })" :style="indicatorStyle" />
+    <ProgressRoot v-bind="rootProps" :max="realMax" data-slot="base" :class="ui.base({ class: props.ui?.base })" style="transform: translateZ(0)">
+      <ProgressIndicator data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })" :style="[indicatorStyle, customColor ? { backgroundColor: customColor } : undefined]" />
     </ProgressRoot>
 
-    <div v-if="hasSteps" data-slot="steps" :class="ui.steps({ class: uiProp?.steps })">
-      <div v-for="(step, index) in max" :key="index" data-slot="step" :class="ui.step({ class: uiProp?.step, step: stepVariant(index) })">
+    <div v-if="hasSteps" data-slot="steps" :class="ui.steps({ class: props.ui?.steps })" :style="customColor ? { color: customColor } : undefined">
+      <div v-for="(step, index) in props.max" :key="index" data-slot="step" :class="ui.step({ class: props.ui?.step, step: stepVariant(index) })">
         <slot :name="`step-${index}`" :step="step">
           {{ step }}
         </slot>

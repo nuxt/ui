@@ -6,7 +6,7 @@ export default (options: Required<ModuleOptions>) => ({
     list: 'isolate min-w-0',
     label: 'w-full flex items-center gap-1.5 font-semibold text-xs/5 text-highlighted px-2.5 py-1.5',
     item: 'min-w-0',
-    link: 'group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
+    link: 'group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3',
     linkLeadingIcon: 'shrink-0 size-5',
     linkLeadingAvatar: 'shrink-0',
     linkLeadingAvatarSize: '2xs',
@@ -14,34 +14,34 @@ export default (options: Required<ModuleOptions>) => ({
     linkTrailing: 'group ms-auto inline-flex gap-1.5 items-center',
     linkTrailingBadge: 'shrink-0',
     linkTrailingBadgeSize: 'sm',
-    linkTrailingIcon: 'size-5 transform shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200',
+    linkTrailingIcon: 'size-5 transform shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none',
     linkLabel: 'truncate',
     linkLabelExternalIcon: 'inline-block size-3 align-top text-dimmed',
     childList: 'isolate',
     childLabel: 'text-xs text-highlighted',
     childItem: '',
-    childLink: 'group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
+    childLink: 'group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3',
     childLinkWrapper: 'min-w-0',
     childLinkIcon: 'size-5 shrink-0',
     childLinkLabel: 'truncate',
     childLinkLabelExternalIcon: 'inline-block size-3 align-top text-dimmed',
     childLinkDescription: 'text-muted',
     separator: 'px-2 h-px bg-border',
-    viewportWrapper: 'absolute top-full left-0 flex w-full',
-    viewport: 'relative overflow-hidden bg-default shadow-lg rounded-md ring ring-default h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left,right] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] z-1',
+    viewportWrapper: 'absolute top-full start-0 flex w-full',
+    viewport: 'relative overflow-hidden bg-default shadow-lg rounded-md ring ring-default h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left,right] duration-200 ease-out motion-reduce:transition-none origin-[top_center] data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] z-1',
     content: '',
-    indicator: 'absolute left-0 data-[state=visible]:animate-[fade-in_100ms_ease-out] data-[state=hidden]:animate-[fade-out_100ms_ease-in] data-[state=hidden]:opacity-0 bottom-0 z-2 w-(--reka-navigation-menu-indicator-size) translate-x-(--reka-navigation-menu-indicator-position) flex h-2.5 items-end justify-center overflow-hidden transition-[translate,width] duration-200',
+    indicator: 'absolute left-0 data-[state=visible]:animate-[fade-in_100ms_var(--ease-out)] data-[state=hidden]:animate-[fade-out_100ms_var(--ease-out)] data-[state=hidden]:opacity-0 bottom-0 z-2 w-(--reka-navigation-menu-indicator-size) translate-x-(--reka-navigation-menu-indicator-position) flex h-2.5 items-end justify-center overflow-hidden transition-[translate,width] duration-200 ease-out motion-reduce:transition-none',
     arrow: 'relative top-[50%] size-2.5 rotate-45 border border-default bg-default z-1 rounded-xs'
   },
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        link: `focus-visible:before:ring-${color}`,
-        childLink: `focus-visible:before:ring-${color}`
+        link: `before:outline-${color}/25`,
+        childLink: `before:outline-${color}/25`
       }])),
       neutral: {
-        link: 'focus-visible:before:ring-inverted',
-        childLink: 'focus-visible:before:ring-inverted'
+        link: 'before:outline-inverted/25',
+        childLink: 'before:outline-inverted/25'
       }
     },
     highlightColor: {
@@ -61,7 +61,7 @@ export default (options: Required<ModuleOptions>) => ({
         childList: 'grid p-2',
         childLink: 'px-3 py-2 gap-2 before:inset-x-px before:inset-y-0',
         childLinkLabel: 'font-medium',
-        content: 'absolute top-0 left-0 w-full max-h-[70vh] overflow-y-auto'
+        content: 'absolute top-0 start-0 w-full max-h-[70vh] overflow-y-auto'
       },
       vertical: {
         root: 'flex-col',
@@ -73,7 +73,7 @@ export default (options: Required<ModuleOptions>) => ({
     contentOrientation: {
       horizontal: {
         viewportWrapper: 'justify-center',
-        content: 'data-[motion=from-start]:animate-[enter-from-left_200ms_ease] data-[motion=from-end]:animate-[enter-from-right_200ms_ease] data-[motion=to-start]:animate-[exit-to-left_200ms_ease] data-[motion=to-end]:animate-[exit-to-right_200ms_ease]'
+        content: 'data-[motion=from-start]:animate-[enter-from-left_200ms_var(--ease-out)] data-[motion=from-end]:animate-[enter-from-right_200ms_var(--ease-out)] data-[motion=to-start]:animate-[exit-to-left_200ms_var(--ease-out)] data-[motion=to-end]:animate-[exit-to-right_200ms_var(--ease-out)]'
       },
       vertical: {
         viewport: 'sm:w-(--reka-navigation-menu-viewport-width) left-(--reka-navigation-menu-viewport-left) rtl:left-auto rtl:right-[calc(100%-var(--reka-navigation-menu-viewport-left)-var(--reka-navigation-menu-viewport-width))]'
@@ -125,7 +125,7 @@ export default (options: Required<ModuleOptions>) => ({
     class: {
       childList: 'ms-5 border-s border-default',
       childItem: 'ps-1.5 -ms-px',
-      content: 'data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden'
+      content: 'data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden'
     }
   }, {
     orientation: 'vertical',

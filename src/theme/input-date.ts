@@ -8,7 +8,7 @@ export default (options: Required<ModuleOptions>) => {
     slots: {
       root: () => undefined,
       base: () => ['group relative inline-flex items-center rounded-md select-none', options.theme.transitions && 'transition-colors'],
-      segment: ['rounded text-center outline-hidden data-placeholder:text-dimmed data-[segment=literal]:text-muted data-invalid:text-error data-disabled:cursor-not-allowed data-disabled:opacity-75', options.theme.transitions && 'transition-colors'],
+      segment: ['rounded-sm text-center outline-hidden data-placeholder:text-dimmed data-[segment=literal]:text-muted data-invalid:text-error data-disabled:cursor-not-allowed data-disabled:opacity-75', options.theme.transitions && 'transition-colors'],
       separatorIcon: 'shrink-0 size-4 text-muted'
     },
     variants: {
@@ -34,9 +34,15 @@ export default (options: Required<ModuleOptions>) => {
           base: (prev: string) => [prev, 'gap-0.75'],
           segment: 'data-[segment=day]:w-10 data-[segment=month]:w-10 data-[segment=year]:w-12'
         }
-      }
+      },
+      variant: (prev: Record<string, string>) => Object.fromEntries(
+        Object.entries(prev).map(([key, value]) => [key, replaceFocus(value)])
+      )
     },
-    compoundVariants: [{
+    compoundVariants: (prev: Record<string, any>[]) => [...prev.map(item => ({
+      ...item,
+      class: typeof item.class === 'string' ? replaceFocus(item.class) : item.class
+    })), {
       variant: 'outline',
       class: {
         segment: 'focus:bg-elevated'
@@ -63,4 +69,10 @@ export default (options: Required<ModuleOptions>) => {
       }
     }]
   }, input(options))
+}
+
+function replaceFocus(str: string): string {
+  return str
+    .replace(/focus:/g, 'has-focus:')
+    .replace(/focus-visible:/g, 'has-focus-visible:')
 }

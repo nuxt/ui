@@ -1,12 +1,8 @@
 import { defineConfig } from '@nuxtjs/mdc/config'
-import { transformerColorHighlight } from 'shiki-transformer-color-highlight'
-import { transformerIconHighlight } from './utils/shiki-transformer-icon-highlight'
+import { shikiTransformers } from './utils/shiki'
 
 export default defineConfig({
   shiki: {
-    transformers: [
-      transformerColorHighlight(),
-      transformerIconHighlight()
-    ]
+    transformers: shikiTransformers()
   }
 })

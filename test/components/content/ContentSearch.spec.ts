@@ -1,6 +1,10 @@
-import { describe } from 'vitest'
+import { describe, it, expect, vi, afterEach } from 'vitest'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../../component-render'
 import ContentSearch from '../../../src/runtime/components/content/ContentSearch.vue'
+import Modal from '../../../src/runtime/components/Modal.vue'
+import CommandPalette from '../../../src/runtime/components/CommandPalette.vue'
+import { useContentSearch } from '../../../src/runtime/composables/useContentSearch'
 import theme from '#build/ui/content/content-search'
 
 describe('ContentSearch', () => {
@@ -129,8 +133,178 @@ describe('ContentSearch', () => {
     ['with loadingIcon', { props: { ...props, loading: true, loadingIcon: 'i-lucide-loading' } }],
     ['without colorMode', { props: { ...props, colorMode: false } }],
     ['with fullscreen', { props: { ...props, fullscreen: true } }],
+    ['with search function', { props: { ...props, search: async () => [], files: undefined } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ['with ui', { props: { ...props, ui: { input: '[&>input]:text-lg' } } }],
     ['with class', { props: { ...props, class: 'sm:max-w-5xl' } }]
-  ])
+  ], async (_, options) => {
+    const wrapper = await mountSuspended(ContentSearch, options)
+    await vi.dynamicImportSettled()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('labels the dialog with the translated search label', async () => {
+    const wrapper = await mountSuspended(ContentSearch, { props })
+    await vi.dynamicImportSettled()
+
+    const dialog = wrapper.find('[role="dialog"]')
+    const title = wrapper.find(`#${dialog.attributes('aria-labelledby')}`)
+    expect(title.text()).toBe('Search…')
+    expect(wrapper.html()).not.toContain('contentSearch.')
+
+    wrapper.unmount()
+  })
+
+  it('mounts the modal once opened', async () => {
+    const { open } = useContentSearch()
+    const wrapper = await mountSuspended(ContentSearch, { props: { links, navigation, files, portal: false } })
+
+    expect(wrapper.findComponent(Modal).exists()).toBe(false)
+
+    open.value = true
+    await vi.dynamicImportSettled()
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.findComponent(CommandPalette).text()).toContain('Docs')
+
+    open.value = false
+  })
+
+  it('mounts the modal before opening with `unmountOnHide: false`', async () => {
+    const wrapper = await mountSuspended(ContentSearch, { props: { links, navigation, files, portal: false, unmountOnHide: false } })
+    await vi.dynamicImportSettled()
+
+    expect(wrapper.findComponent(CommandPalette).text()).toContain('Docs')
+  })
+
+  it('closes the modal on an `undefined` selection when an item is toggled off', async () => {
+    const { open } = useContentSearch()
+    const wrapper = await mountSuspended(ContentSearch, { props: { links, navigation, files, portal: false, unmountOnHide: false } })
+    await vi.dynamicImportSettled()
+
+    open.value = true
+    await wrapper.vm.$nextTick()
+
+    const commandPalette = wrapper.findComponent({ name: 'CommandPalette' })
+    expect(() => commandPalette.vm.$emit('update:modelValue', undefined)).not.toThrow()
+    await wrapper.vm.$nextTick()
+
+    expect(open.value).toBe(false)
+  })
+
+  describe('async search', () => {
+    afterEach(() => {
+      vi.useRealTimers()
+    })
+
+    it('debounces and re-triggers when searchStatus becomes ready', async () => {
+      vi.useFakeTimers({ shouldAdvanceTime: true })
+      const search = vi.fn(async () => [])
+
+      const wrapper = await mountSuspended(ContentSearch, {
+        props: {
+          open: true,
+          portal: false,
+          navigation,
+          search,
+          searchTerm: ''
+        }
+      })
+
+      await wrapper.setProps({ searchTerm: 'foo' })
+      expect(search).not.toHaveBeenCalled()
+
+      await vi.advanceTimersByTimeAsync(150)
+      expect(search).toHaveBeenCalledTimes(1)
+      expect(search).toHaveBeenLastCalledWith('foo', expect.objectContaining({
+        snippet: { columns: ['title', 'content'], around: 20 }
+      }))
+
+      await wrapper.setProps({ searchStatus: 'ready' })
+      await vi.advanceTimersByTimeAsync(0)
+      expect(search).toHaveBeenCalledTimes(2)
+
+      wrapper.unmount()
+    })
+
+    // Regression test: results whose path matches a section root (e.g. an
+    // `index.md` page) used to drop the section name from the prefix because
+    // `findNavItem` returns the top-level node with `parent: undefined`.
+    it('includes the section title in the prefix for index-page results', async () => {
+      vi.useFakeTimers({ shouldAdvanceTime: true })
+      const search = vi.fn(async () => [{
+        id: '/getting-started#some-section',
+        title: 'Some Section',
+        titles: ['Introduction', 'Usage'],
+        level: 3,
+        content: 'lorem ipsum'
+      }])
+
+      const wrapper = await mountSuspended(ContentSearch, {
+        props: {
+          open: true,
+          portal: false,
+          navigation,
+          search,
+          searchTerm: ''
+        }
+      })
+
+      await wrapper.setProps({ searchTerm: 'lorem' })
+      await vi.advanceTimersByTimeAsync(150)
+      await wrapper.vm.$nextTick()
+
+      expect(wrapper.text()).toContain('Getting Started > Introduction > Usage >')
+
+      wrapper.unmount()
+    })
+
+    // Regression test: results more than two nav levels deep used to drop
+    // every intermediate ancestor because `findNavItem` only tracked the
+    // top-level root and the immediate parent.
+    it('includes every intermediate ancestor in the prefix for deeply nested results', async () => {
+      vi.useFakeTimers({ shouldAdvanceTime: true })
+      const deepNavigation = [{
+        title: 'Docs',
+        path: '/docs',
+        children: [{
+          title: 'Guide',
+          path: '/docs/guide',
+          children: [{
+            title: 'Best Practices',
+            path: '/docs/guide/best-practices',
+            children: [{
+              title: 'Nuxt Plugins',
+              path: '/docs/guide/best-practices/plugins'
+            }]
+          }]
+        }]
+      }]
+      const search = vi.fn(async () => [{
+        id: '/docs/guide/best-practices/plugins',
+        title: 'Nuxt Plugins',
+        titles: [],
+        level: 1,
+        content: 'lorem ipsum'
+      }])
+
+      const wrapper = await mountSuspended(ContentSearch, {
+        props: {
+          open: true,
+          portal: false,
+          navigation: deepNavigation,
+          search,
+          searchTerm: ''
+        }
+      })
+
+      await wrapper.setProps({ searchTerm: 'lorem' })
+      await vi.advanceTimersByTimeAsync(150)
+      await wrapper.vm.$nextTick()
+
+      expect(wrapper.text()).toContain('Docs > Guide > Best Practices >')
+
+      wrapper.unmount()
+    })
+  })
 })

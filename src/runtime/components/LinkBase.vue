@@ -1,12 +1,12 @@
 <script lang="ts">
-import type { LinkProps } from '../types'
+import type { LinkProps } from './Link.vue'
 
 export interface LinkBaseProps {
   as?: string
   type?: string
   disabled?: boolean
-  onClick?: ((e: MouseEvent) => void | Promise<void>) | Array<((e: MouseEvent) => void | Promise<void>)>
-  href?: string
+  onClick?: ((e: MouseEvent) => void) | Array<((e: MouseEvent) => void)>
+  href?: string | null
   navigate?: (e: MouseEvent) => void
   target?: LinkProps['target']
   rel?: LinkProps['rel']
@@ -30,15 +30,20 @@ function onClickWrapper(e: MouseEvent) {
     return
   }
 
+  const results: unknown[] = []
+
   if (props.onClick) {
     for (const onClick of Array.isArray(props.onClick) ? props.onClick : [props.onClick]) {
-      onClick(e)
+      results.push(onClick(e))
     }
   }
 
   if (props.href && props.navigate && !props.isExternal) {
     props.navigate(e)
   }
+
+  // Returned so Vue routes async handler errors to `onErrorCaptured`
+  return Promise.all(results)
 }
 </script>
 

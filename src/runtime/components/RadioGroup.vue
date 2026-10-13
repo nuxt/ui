@@ -3,6 +3,7 @@ import type { RadioGroupRootProps, RadioGroupRootEmits } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/radio-group'
+import type { IconProps } from './Icon.vue'
 import type { AcceptableValue, GetItemKeys, GetModelValue, GetModelValueEmits } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -15,8 +16,13 @@ export type RadioGroupItem = RadioGroupValue | {
   description?: string
   disabled?: boolean
   value?: RadioGroupValue
+  /**
+   * The icon displayed above the label when `indicator` is `hidden`.
+   * @IconifyIcon
+   */
+  icon?: IconProps['name']
   class?: any
-  ui?: Pick<RadioGroup['slots'], 'item' | 'container' | 'base' | 'indicator' | 'wrapper' | 'label' | 'description'>
+  ui?: Partial<Pick<RadioGroup['slots'], 'item' | 'container' | 'base' | 'indicator' | 'wrapper' | 'label' | 'icon' | 'description'>>
   [key: string]: any
 }
 
@@ -59,6 +65,8 @@ export interface RadioGroupProps<T extends RadioGroupItem[] = RadioGroupItem[], 
    * @defaultValue 'primary'
    */
   color?: RadioGroup['variants']['color']
+  /** Highlight the ring color like a focus state. */
+  highlight?: boolean
   /**
    * The orientation the radio buttons are laid out.
    * @defaultValue 'vertical'
@@ -90,16 +98,17 @@ export interface RadioGroupSlots<T extends RadioGroupItem[] = RadioGroupItem[]> 
 
 <script setup lang="ts" generic="T extends RadioGroupItem[], VK extends GetItemKeys<T> = 'value'">
 import { computed, useId } from 'vue'
-import { RadioGroupRoot, RadioGroupItem as RRadioGroupItem, RadioGroupIndicator, Label, useForwardPropsEmits } from 'reka-ui'
+import { RadioGroupRoot, RadioGroupItem as RRadioGroupItem, RadioGroupIndicator, Label } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
-import { useResolvedVariants } from '../composables/useResolvedVariants'
+import { useComponentProps } from '../composables/useComponentProps'
+import { useForwardProps } from '../composables/useForwardProps'
 import { useFormField } from '../composables/useFormField'
 import { get } from '../utils'
 import { tv } from '../utils/tv'
+import UIcon from './Icon.vue'
 
-const props = withDefaults(defineProps<RadioGroupProps<T, VK>>(), {
+const _props = withDefaults(defineProps<RadioGroupProps<T, VK>>(), {
   valueKey: 'value' as never,
   labelKey: 'label',
   descriptionKey: 'description',
@@ -108,23 +117,33 @@ const props = withDefaults(defineProps<RadioGroupProps<T, VK>>(), {
 const emits = defineEmits<RadioGroupEmits<T, VK>>()
 const slots = defineSlots<RadioGroupSlots<T>>()
 
+const props = useComponentProps<RadioGroupProps<T, VK>>('radioGroup', _props)
+
 const appConfig = useAppConfig() as RadioGroup['AppConfig']
-const uiProp = useComponentUI('radioGroup', props)
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'loop', 'required'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'as', 'loop', 'required'), emits)
 
-const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled, ariaAttrs } = useFormField<RadioGroupProps<T>>(props, { bind: false })
+const { emitFormChange, emitFormInput, color: formFieldColor, name, size: formFieldSize, highlight: formFieldHighlight, id: _id, disabled: formFieldDisabled, ariaAttrs } = useFormField<RadioGroupProps<T>>(_props, { bind: false })
 const id = _id.value ?? useId()
 
-const { variant } = useResolvedVariants('radioGroup', props, theme, ['variant'])
+// eslint-disable-next-line vue/no-dupe-keys
+const color = computed(() => formFieldColor.value ?? props.color)
+// eslint-disable-next-line vue/no-dupe-keys
+const highlight = computed(() => formFieldHighlight.value ?? props.highlight)
+// eslint-disable-next-line vue/no-dupe-keys
+const size = computed(() => formFieldSize.value ?? props.size)
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.radioGroup || {}) })({
+const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
+
+// eslint-disable-next-line vue/no-dupe-keys
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.radioGroup || {}) })({
   size: size.value,
   color: color.value,
+  highlight: highlight.value,
   disabled: disabled.value,
   required: props.required,
   orientation: props.orientation,
-  variant: variant.value,
+  variant: props.variant,
   indicator: props.indicator
 }))
 
@@ -166,6 +185,12 @@ const normalizedItems = computed(() => {
   return props.items.map(normalizeItem)
 })
 
+// Mirrors `Checkbox`'s `labelIcon`: with the indicator hidden the icon has no box to sit in,
+// so it renders above the label instead.
+function labelIcon(item: any) {
+  return props.indicator === 'hidden' ? item.icon : undefined
+}
+
 function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
@@ -179,43 +204,44 @@ function onUpdate(value: any) {
   <RadioGroupRoot
     :id="id"
     v-bind="rootProps"
-    :model-value="(modelValue as Exclude<RadioGroupItem, boolean> | Exclude<RadioGroupItem, boolean>[])"
-    :default-value="(defaultValue as Exclude<RadioGroupItem, boolean> | Exclude<RadioGroupItem, boolean>[])"
-    :orientation="orientation"
+    :model-value="(props.modelValue as Exclude<RadioGroupItem, boolean> | Exclude<RadioGroupItem, boolean>[])"
+    :default-value="(props.defaultValue as Exclude<RadioGroupItem, boolean> | Exclude<RadioGroupItem, boolean>[])"
+    :orientation="props.orientation"
     :name="name"
     :disabled="disabled"
     data-slot="root"
-    :class="ui.root({ class: [uiProp?.root, props.class] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="onUpdate"
   >
-    <fieldset data-slot="fieldset" :class="ui.fieldset({ class: uiProp?.fieldset })" v-bind="ariaAttrs">
-      <legend v-if="legend || !!slots.legend" data-slot="legend" :class="ui.legend({ class: uiProp?.legend })">
+    <fieldset data-slot="fieldset" :class="ui.fieldset({ class: props.ui?.fieldset })" v-bind="ariaAttrs">
+      <legend v-if="props.legend || !!slots.legend" data-slot="legend" :class="ui.legend({ class: props.ui?.legend })">
         <slot name="legend">
-          {{ legend }}
+          {{ props.legend }}
         </slot>
       </legend>
 
-      <component :is="variant === 'list' ? 'div' : Label" v-for="item in normalizedItems" :key="item.value" data-slot="item" :class="ui.item({ class: [uiProp?.item, item.ui?.item, item.class], disabled: item.disabled || disabled })">
-        <div data-slot="container" :class="ui.container({ class: [uiProp?.container, item.ui?.container] })">
+      <component :is="(!props.variant || props.variant === 'list') ? 'div' : Label" v-for="item in normalizedItems" :key="item.value" data-slot="item" :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class], disabled: item.disabled || disabled })">
+        <div data-slot="container" :class="ui.container({ class: [props.ui?.container, item.ui?.container] })">
           <RRadioGroupItem
             :id="item.id"
             :value="item.value"
             :disabled="item.disabled || disabled"
             data-slot="base"
-            :class="ui.base({ class: [uiProp?.base, item.ui?.base], disabled: item.disabled || disabled })"
+            :class="ui.base({ class: [props.ui?.base, item.ui?.base], disabled: item.disabled || disabled })"
           >
-            <RadioGroupIndicator data-slot="indicator" :class="ui.indicator({ class: [uiProp?.indicator, item.ui?.indicator] })" />
+            <RadioGroupIndicator data-slot="indicator" :class="ui.indicator({ class: [props.ui?.indicator, item.ui?.indicator] })" />
           </RRadioGroupItem>
         </div>
 
-        <div v-if="(item.label || !!slots.label) || (item.description || !!slots.description)" data-slot="wrapper" :class="ui.wrapper({ class: [uiProp?.wrapper, item.ui?.wrapper] })">
-          <component :is="variant === 'list' ? Label : 'p'" v-if="item.label || !!slots.label" :for="item.id" data-slot="label" :class="ui.label({ class: [uiProp?.label, item.ui?.label], disabled: item.disabled || disabled })">
-            <slot name="label" :item="item" :model-value="(modelValue as RadioGroupValue)">
+        <div v-if="labelIcon(item) || (item.label || !!slots.label) || (item.description || !!slots.description)" data-slot="wrapper" :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">
+          <UIcon v-if="labelIcon(item)" :name="labelIcon(item)" data-slot="icon" :class="ui.icon({ class: [props.ui?.icon, item.ui?.icon] })" />
+          <component :is="(!props.variant || props.variant === 'list') ? Label : 'p'" v-if="item.label || !!slots.label" :for="item.id" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label], disabled: item.disabled || disabled })">
+            <slot name="label" :item="item" :model-value="(props.modelValue as RadioGroupValue)">
               {{ item.label }}
             </slot>
           </component>
-          <p v-if="item.description || !!slots.description" data-slot="description" :class="ui.description({ class: [uiProp?.description, item.ui?.description], disabled: item.disabled || disabled })">
-            <slot name="description" :item="item" :model-value="(modelValue as RadioGroupValue)">
+          <p v-if="item.description || !!slots.description" data-slot="description" :class="ui.description({ class: [props.ui?.description, item.ui?.description], disabled: item.disabled || disabled })">
+            <slot name="description" :item="item" :model-value="(props.modelValue as RadioGroupValue)">
               {{ item.description }}
             </slot>
           </p>

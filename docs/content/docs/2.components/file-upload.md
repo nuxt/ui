@@ -2,6 +2,10 @@
 title: FileUpload
 description: 'An input element to upload files.'
 category: form
+keywords:
+  - dropzone
+  - drag and drop
+  - file input
 links:
   - label: GitHub
     icon: i-simple-icons-github
@@ -11,6 +15,15 @@ links:
 ## Usage
 
 Use the `v-model` directive to control the value of the FileUpload.
+
+The model accepts native [`File`](https://developer.mozilla.org/en-US/docs/Web/API/File) objects or custom [`FileUploadItem`](#with-custom-file-items) objects with the following properties:
+
+- `name: string`{lang="ts-type"}
+- `size?: number`{lang="ts-type"}
+- `type?: string`{lang="ts-type"}
+- `avatar?: AvatarProps`{lang="ts-type"}
+
+The item type defaults to `File` and is inferred from your model when using custom items. You can extend `FileUploadItem` with custom properties for your application.
 
 ::component-code
 ---
@@ -73,7 +86,7 @@ props:
 
 ### Accept
 
-Use the `accept` prop to specify the allowed file types for the input. Provide a comma-separated list of [MIME types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/MIME_types) or file extensions (e.g., `image/png,application/pdf,.jpg`). Defaults to `*` (all file types).
+Use the `accept` prop to specify the allowed file types for the input. Provide a comma-separated list of [MIME types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/MIME_types) or file extensions (e.g. `image/png,application/pdf,.jpg`). Defaults to `*` (all file types).
 
 ::component-code
 ---
@@ -265,6 +278,30 @@ props:
 
 ## Examples
 
+### With custom file items :badge{label="Soon" class="align-text-top"}
+
+Use an object with a `name`, optional file metadata and an [Avatar](/docs/components/avatar) to display an existing file. Native files selected by the user are added to the same model. Models and file slots include `File` alongside your custom item type, so narrow the item before accessing custom properties.
+
+::component-example
+---
+name: 'file-upload-items-example'
+prettier: true
+collapse: true
+---
+::
+
+### With upload status :badge{label="Soon" class="align-text-top"}
+
+Extend `FileUploadItem` with custom fields and use the file slots to display upload progress or other asynchronous states. This example converts selected files into custom items, simulates upload progress, and displays their image previews when complete.
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'file-upload-status-example'
+---
+::
+
 ### With Form validation
 
 You can use the FileUpload within a [Form](/docs/components/form) and [FormField](/docs/components/form-field) components to handle validation and error handling.
@@ -274,6 +311,18 @@ You can use the FileUpload within a [Form](/docs/components/form) and [FormField
 prettier: true
 collapse: true
 name: 'file-upload-form-validation-example'
+---
+::
+
+### With rejected files :badge{label="Soon" class="align-text-top"}
+
+Dropped files that do not match the `accept` prop are ignored. Listen to the `reject` event to display an error message.
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'file-upload-reject-example'
 ---
 ::
 

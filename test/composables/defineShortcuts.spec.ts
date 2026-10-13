@@ -19,6 +19,8 @@ describe('defineShortcuts', () => {
 
   afterEach(() => {
     wrapper?.unmount()
+    // Failure-safe teardown for tests that focus an input, so a thrown assertion can't leak focus.
+    document.body.innerHTML = ''
   })
 
   async function registerShortcuts(config: ShortcutsConfig, options?: ShortcutsOptions) {
@@ -215,7 +217,15 @@ describe('defineShortcuts', () => {
       const handler = vi.fn()
       await registerShortcuts({ alt_k: handler })
 
-      fireKeydown('k', { altKey: true })
+      fireKeydown('k', { altKey: true, code: 'KeyK' })
+      expect(handler).toHaveBeenCalledOnce()
+    })
+
+    it('alt_k triggers when Alt produces a special character (macOS)', async () => {
+      const handler = vi.fn()
+      await registerShortcuts({ alt_k: handler })
+
+      fireKeydown('˚', { altKey: true, code: 'KeyK' })
       expect(handler).toHaveBeenCalledOnce()
     })
 
@@ -223,7 +233,7 @@ describe('defineShortcuts', () => {
       const handler = vi.fn()
       await registerShortcuts({ k: handler })
 
-      fireKeydown('k', { altKey: true })
+      fireKeydown('˚', { altKey: true, code: 'KeyK' })
       expect(handler).not.toHaveBeenCalled()
     })
 
@@ -231,7 +241,7 @@ describe('defineShortcuts', () => {
       const handler = vi.fn()
       await registerShortcuts({ alt_k: handler })
 
-      fireKeydown('k')
+      fireKeydown('k', { code: 'KeyK' })
       expect(handler).not.toHaveBeenCalled()
     })
   })
@@ -294,6 +304,22 @@ describe('defineShortcuts', () => {
       fireKeydown('Escape', { shiftKey: true })
       expect(handler).toHaveBeenCalledOnce()
     })
+
+    it('shift_arrowdown triggers with Shift+ArrowDown', async () => {
+      const handler = vi.fn()
+      await registerShortcuts({ shift_arrowdown: handler })
+
+      fireKeydown('ArrowDown', { shiftKey: true })
+      expect(handler).toHaveBeenCalledOnce()
+    })
+
+    it('arrowdown does NOT trigger with Shift+ArrowDown', async () => {
+      const handler = vi.fn()
+      await registerShortcuts({ arrowdown: handler })
+
+      fireKeydown('ArrowDown', { shiftKey: true })
+      expect(handler).not.toHaveBeenCalled()
+    })
   })
 
   describe('chained shortcuts', () => {
@@ -329,6 +355,86 @@ describe('defineShortcuts', () => {
       fireKeydown('i')
       fireKeydown('g')
       expect(handler).not.toHaveBeenCalled()
+    })
+  })
+
+  describe('chained shortcut sharing a prefix with a standalone (#5654)', () => {
+    it('fires the chain, not the standalone, when the sequence completes', async () => {
+      const f = vi.fn()
+      const fh = vi.fn()
+      const h = vi.fn()
+      await registerShortcuts({ f, 'f-h': fh, h })
+
+      fireKeydown('f')
+      fireKeydown('h')
+
+      expect(fh).toHaveBeenCalledOnce()
+      expect(f).not.toHaveBeenCalled()
+      expect(h).not.toHaveBeenCalled()
+    })
+
+    it('fires the standalone alone once the chain delay elapses', async () => {
+      const f = vi.fn()
+      const fh = vi.fn()
+      await registerShortcuts({ f, 'f-h': fh }, { chainDelay: 50 })
+
+      fireKeydown('f')
+      // Deferred: the standalone waits in case a chain follows.
+      expect(f).not.toHaveBeenCalled()
+
+      await new Promise(resolve => setTimeout(resolve, 80))
+
+      expect(f).toHaveBeenCalledOnce()
+      expect(fh).not.toHaveBeenCalled()
+    })
+
+    it('fires the pending standalone then the next key when the sequence does not complete', async () => {
+      const f = vi.fn()
+      const fh = vi.fn()
+      const x = vi.fn()
+      await registerShortcuts({ f, 'f-h': fh, x }, { chainDelay: 50 })
+
+      fireKeydown('f')
+      fireKeydown('x')
+
+      expect(f).toHaveBeenCalledOnce()
+      expect(x).toHaveBeenCalledOnce()
+      expect(f).toHaveBeenCalledBefore(x)
+      expect(fh).not.toHaveBeenCalled()
+    })
+
+    it('fires the held standalone when the completing chain is disabled', async () => {
+      const f = vi.fn()
+      const fh = vi.fn()
+      // The standalone stays enabled inside inputs, the chain does not.
+      await registerShortcuts({ 'f': { handler: f, usingInput: true }, 'f-h': fh }, { chainDelay: 50 })
+
+      const input = document.createElement('input')
+      document.body.appendChild(input)
+      input.focus()
+
+      fireKeydown('f')
+      fireKeydown('h')
+
+      expect(f).toHaveBeenCalledOnce()
+      expect(fh).not.toHaveBeenCalled()
+    })
+
+    it('does not fire a held standalone that got disabled before the delay elapsed', async () => {
+      const f = vi.fn()
+      const fh = vi.fn()
+      await registerShortcuts({ f, 'f-h': fh }, { chainDelay: 50 })
+
+      fireKeydown('f')
+
+      // Moving focus into an input disables the shortcut while it's still held back.
+      const input = document.createElement('input')
+      document.body.appendChild(input)
+      input.focus()
+
+      await new Promise(resolve => setTimeout(resolve, 80))
+
+      expect(f).not.toHaveBeenCalled()
     })
   })
 

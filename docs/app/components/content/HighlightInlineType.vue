@@ -21,16 +21,10 @@ const type = computed(() => {
   return type
 })
 
-const ast = ref<any>(null)
-
-onMounted(async () => {
-  ast.value = await cachedParseMarkdown(`\`\` ${type.value} \`\`{lang="ts-type"}`)
-})
+// inline code carrying the type, which resolves to ProseCode
+const markdown = computed(() => `\`\` ${type.value} \`\`{lang="ts-type"}`)
 </script>
 
 <template>
-  <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" />
-  <ProseCode v-else>
-    {{ type }}
-  </ProseCode>
+  <DocsMarkdown :value="markdown" unwrap="p" />
 </template>

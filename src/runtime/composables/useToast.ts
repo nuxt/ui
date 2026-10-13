@@ -1,7 +1,7 @@
 import type { Ref, InjectionKey } from 'vue'
 import { ref, nextTick, inject } from 'vue'
 import { useState } from '#imports'
-import type { ToastProps, ToastEmits } from '../types'
+import type { ToastProps, ToastEmits } from '../components/Toast.vue'
 import type { EmitsToProps } from '../types/utils'
 
 export const toastMaxInjectionKey: InjectionKey<Ref<number | undefined>> = Symbol('nuxt-ui.toast-max')
@@ -13,7 +13,12 @@ export interface Toast extends Omit<ToastProps, 'defaultOpen'>, EmitsToProps<Toa
   _duplicate?: number
   /** @internal */
   _updated?: boolean
+  /** @internal */
+  _animatedAt?: number
 }
+
+// Matches the slide-in and pulse animation durations in the `toaster` theme.
+const ANIMATION_DURATION = 200
 
 export function useToast() {
   const toasts = useState<Toast[]>('toasts', () => [])
@@ -24,6 +29,20 @@ export function useToast() {
 
   const generateId = () => `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`
 
+  function mergeDuplicate(index: number, toast: Toast) {
+    const existing = toasts.value[index] as Toast
+    const now = Date.now()
+    // The pulse replaces the slide-in, and two pulses in the same tick cancel each other out, so skip it while the toast is still animating.
+    const animating = now - (existing._animatedAt || 0) < ANIMATION_DURATION
+
+    toasts.value[index] = {
+      ...existing,
+      ...toast,
+      _duplicate: animating ? existing._duplicate : (existing._duplicate || 0) + 1,
+      _animatedAt: animating ? existing._animatedAt : now
+    }
+  }
+
   async function processQueue() {
     if (running.value || queue.length === 0) {
       return
@@ -32,11 +51,25 @@ export function useToast() {
     running.value = true
 
     while (queue.length > 0) {
-      const toast = queue.shift()!
-
       await nextTick()
 
-      toasts.value = [...toasts.value, toast].slice(-(max?.value ?? 5))
+      const toast = queue.shift()!
+      const maxValue = max?.value ?? 5
+      if (maxValue <= 0) {
+        if (toasts.value.length) {
+          toasts.value = []
+        }
+        continue
+      }
+
+      // Dedupe at display time so duplicate ids merge no matter which `useToast()` instance queued them.
+      const existingIndex = toasts.value.findIndex((t: Toast) => t.id === toast.id)
+      if (existingIndex !== -1) {
+        mergeDuplicate(existingIndex, toast)
+        continue
+      }
+
+      toasts.value = [...toasts.value, { ...toast, _animatedAt: Date.now() }].slice(-maxValue)
     }
 
     running.value = false
@@ -51,11 +84,7 @@ export function useToast() {
 
     const existingIndex = toasts.value.findIndex((t: Toast) => t.id === body.id)
     if (existingIndex !== -1) {
-      toasts.value[existingIndex] = {
-        ...toasts.value[existingIndex] as Toast,
-        ...body,
-        _duplicate: ((toasts.value[existingIndex] as Toast)._duplicate || 0) + 1
-      }
+      mergeDuplicate(existingIndex, body)
 
       return body
     }

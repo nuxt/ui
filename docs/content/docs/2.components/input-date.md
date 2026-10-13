@@ -2,6 +2,10 @@
 title: InputDate
 description: 'An input component for date selection.'
 category: form
+keywords:
+  - date picker
+  - datepicker
+  - calendar input
 links:
   - label: DateField
     icon: i-custom-reka-ui

@@ -1,4 +1,4 @@
-import type { Messages } from '../types'
+import type { Messages } from '../types/locale'
 import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
@@ -16,23 +16,36 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Zatvori'
     },
+    breadcrumb: {
+      label: 'navigacijski put'
+    },
     calendar: {
+      label: 'Datum događaja',
+      monthPicker: 'Odabir mjeseca',
       nextMonth: 'Sljedeći mjesec',
       nextYear: 'Sljedeća godina',
       prevMonth: 'Prethodni mjesec',
-      prevYear: 'Prethodna godina'
+      prevYear: 'Prethodna godina',
+      yearPicker: 'Odabir godine'
     },
     carousel: {
       dots: 'Odaberite slajd za prikaz',
       goto: 'Idi na slajd {slide}',
       next: 'Sljedeći',
-      prev: 'Prethodni'
+      prev: 'Prethodni',
+      roledescription: 'vrtuljak',
+      slide: 'slajd'
+    },
+    chatMessages: {
+      autoScroll: 'Pomakni na dno'
     },
     chatPrompt: {
       placeholder: 'Upišite svoju poruku ovdje…'
     },
     chatPromptSubmit: {
-      label: 'Pošalji upit'
+      label: 'Pošalji upit',
+      reload: 'Pokušaj ponovno',
+      stop: 'Zaustavi generiranje'
     },
     chatReasoning: {
       thinking: 'Razmišlja…',
@@ -51,10 +64,12 @@ export default defineLocale<Messages>({
       close: 'Zatvori',
       noData: 'Nema podataka',
       noMatch: 'Nema odgovarajućih podataka',
-      placeholder: 'Upišite naredbu ili pretraživanje…'
+      placeholder: 'Upišite naredbu ili pretraživanje…',
+      results: 'Rezultati'
     },
     contentSearch: {
       links: 'Poveznice',
+      search: 'Rezultati',
       theme: 'Tema'
     },
     contentSearchButton: {
@@ -81,6 +96,9 @@ export default defineLocale<Messages>({
       close: 'Zatvori bočnu traku',
       open: 'Otvori bočnu traku'
     },
+    drawer: {
+      close: 'Zatvori'
+    },
     error: {
       clear: 'Natrag na početnu'
     },
@@ -91,17 +109,55 @@ export default defineLocale<Messages>({
       close: 'Zatvori izbornik',
       open: 'Otvori izbornik'
     },
+    inputDate: {
+      day: 'dan',
+      dayPeriod: 'AM/PM',
+      era: 'era',
+      hour: 'sat',
+      minute: 'minuta',
+      month: 'mjesec',
+      second: 'sekunda',
+      timeZoneName: 'vremenska zona',
+      year: 'godina'
+    },
     inputMenu: {
       create: 'Stvori "{label}"',
       noData: 'Nema podataka',
-      noMatch: 'Nema odgovarajućih podataka'
+      noMatch: 'Nema odgovarajućih podataka',
+      trigger: 'Prikaži opcije'
     },
     inputNumber: {
       decrement: 'Smanji',
-      increment: 'Povećaj'
+      increment: 'Povećaj',
+      roledescription: 'brojčano polje'
+    },
+    inputRating: {
+      rate: 'Ocijeni {value} od {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'sat',
+      minute: 'minuta',
+      second: 'sekunda',
+      timeZoneName: 'vremenska zona'
+    },
+    listbox: {
+      noData: 'Nema podataka',
+      noMatch: 'Nema odgovarajućih podataka',
+      search: 'Pretraživanje…'
     },
     modal: {
       close: 'Zatvori'
+    },
+    pagination: {
+      first: 'Prva stranica',
+      last: 'Posljednja stranica',
+      next: 'Sljedeća stranica',
+      page: 'Stranica {page}',
+      prev: 'Prethodna stranica'
+    },
+    pinInput: {
+      input: 'PIN kod, znak {index} od {length}'
     },
     pricingTable: {
       caption: 'Usporedba cjenovnih planova'
@@ -135,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: 'Nema odgovarajućih podataka',
       search: 'Pretraživanje…'
     },
+    skeleton: {
+      label: 'učitavanje'
+    },
     slideover: {
       close: 'Zatvori'
+    },
+    slider: {
+      max: 'Maksimum',
+      min: 'Minimum',
+      thumb: 'Klizač',
+      value: 'Vrijednost {index} od {total}'
+    },
+    stepper: {
+      label: 'napredak'
     },
     table: {
       noData: 'Nema podataka'
     },
     toast: {
       close: 'Zatvori'
+    },
+    toaster: {
+      label: 'Obavijest',
+      viewport: 'Obavijesti ({hotkey})'
     }
   }
 })

@@ -1,7 +1,8 @@
 ---
-title: Callout
+title: ProseCallout
 description: 'Highlight important information with eye-catching colored boxes and icons.'
 category: components
+navigation.title: Callout
 links:
   - label: GitHub
     icon: i-simple-icons-github

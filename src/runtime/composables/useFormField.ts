@@ -1,8 +1,8 @@
-import { inject, computed, provide } from 'vue'
+import { inject, computed, provide, getCurrentScope, onScopeDispose } from 'vue'
 import type { InjectionKey, Ref, ComputedRef } from 'vue'
 import { useDebounceFn } from '@vueuse/core'
 import type { UseEventBusReturn } from '@vueuse/core'
-import type { FormFieldProps } from '../types'
+import type { FormFieldProps } from '../components/FormField.vue'
 import type { FormErrorWithId, FormEvent, FormInputEvents, FormFieldInjectedOptions, FormInjectedOptions } from '../types/form'
 import type { GetObjectField } from '../types/utils'
 
@@ -24,6 +24,32 @@ export const formInputsInjectionKey: InjectionKey<Ref<Record<string, { id?: stri
 export const formLoadingInjectionKey: InjectionKey<Readonly<Ref<boolean>>> = Symbol('nuxt-ui.form-loading')
 export const formErrorsInjectionKey: InjectionKey<Readonly<Ref<FormErrorWithId[]>>> = Symbol('nuxt-ui.form-errors')
 
+/**
+ * Wires an input to its wrapping `<UFormField>` (id/name/aria, validation events, error-driven color).
+ *
+ * **Always pass the raw `_props`, never the `useComponentProps` proxy.**
+ * The internal fallback `props?.x ?? formField?.value.x` must distinguish
+ * "explicit prop" from "theme default" — passing the proxy would leak
+ * `<UTheme :props>` defaults into the explicit slot and let theme size/color
+ * silently override the wrapping field (regression-tested in `Theme.spec.ts`).
+ *
+ * To get `<UTheme :props>` to apply when no `<UFormField>` wraps the input,
+ * fall back to the proxy at the `tv()` call site:
+ *
+ * ```ts
+ * size: size.value ?? props.size,
+ * color: color.value ?? props.color,
+ * highlight: highlight.value ?? props.highlight,
+ * disabled: disabled.value ?? props.disabled
+ * ```
+ *
+ * `highlight` and `disabled` are Boolean props, which Vue auto-casts to `false`
+ * when unset, so they are normalized back to `undefined` here. Otherwise the
+ * `??` above would short-circuit on `false` and the proxy would never be read.
+ *
+ * Final precedence: `explicit > FormField > <UTheme :props> > app.config > withDefaults > tv defaults`,
+ * matching what `useComponentProps` resolves.
+ */
 export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, deferInputValidation?: boolean }) {
   const formOptions = inject(formOptionsInjectionKey, undefined)
   const formBus = inject(formBusInjectionKey, undefined)
@@ -43,9 +69,9 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
     }
   }
 
-  function emitFormEvent(type: FormInputEvents, name?: string, eager?: boolean) {
+  function emitFormEvent(type: FormInputEvents, name?: string, flags?: { eager?: boolean, track?: boolean, validate?: boolean }) {
     if (formBus && formField && name) {
-      formBus.emit({ type, name, eager })
+      formBus.emit({ type, name, ...flags })
     }
   }
 
@@ -61,20 +87,39 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
     emitFormEvent('change', formField?.value.name)
   }
 
-  const emitFormInput = useDebounceFn(
+  // The trailing call still fires after teardown, which would validate a field
+  // that is no longer rendered when the input unmounts inside the debounce window.
+  let disposed = false
+  if (getCurrentScope()) {
+    onScopeDispose(() => {
+      disposed = true
+    })
+  }
+
+  // Only the validation is debounced: the form tracks the input right away so a
+  // submit within the delay isn't followed by a late dirty or validation.
+  const validateInput = useDebounceFn(
     () => {
-      emitFormEvent('input', formField?.value.name, !opts?.deferInputValidation || formField?.value.eagerValidation)
+      if (disposed) return
+
+      emitFormEvent('input', formField?.value.name, { eager: !opts?.deferInputValidation || formField?.value.eagerValidation, track: false })
     },
     formField?.value.validateOnInputDelay ?? formOptions?.value.validateOnInputDelay ?? 0
   )
 
+  function emitFormInput() {
+    emitFormEvent('input', formField?.value.name, { validate: false })
+    return validateInput()
+  }
+
   return {
     id: computed(() => props?.id ?? inputId?.value),
+    labelId: computed(() => formField?.value.labelId),
     name: computed(() => props?.name ?? formField?.value.name),
     size: computed(() => props?.size ?? formField?.value.size),
     color: computed(() => formField?.value.error ? 'error' : props?.color),
-    highlight: computed(() => formField?.value.error ? true : props?.highlight),
-    disabled: computed(() => formOptions?.value.disabled || props?.disabled),
+    highlight: computed(() => formField?.value.error ? true : (props?.highlight || undefined)),
+    disabled: computed(() => formOptions?.value.disabled || props?.disabled || undefined),
     emitFormBlur,
     emitFormInput,
     emitFormChange,

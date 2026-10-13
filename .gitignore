@@ -18,8 +18,10 @@ logs
 
 # Misc
 .DS_Store
+.cursor
 .fleet
 .idea
+.claude
 
 # Local env files
 .env
@@ -36,3 +38,6 @@ playgrounds/repl/auto-imports.d.ts
 playgrounds/repl/components.d.ts
 playgrounds/repl/public/nuxt-ui.*
 playgrounds/repl/dist/
+
+# VSC
+.history

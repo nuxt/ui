@@ -1,6 +1,10 @@
 ---
 description: A set of tab panels that are displayed one at a time.
 category: navigation
+keywords:
+  - tabbed
+  - panels
+  - sections
 links:
   - label: Tabs
     icon: i-custom-reka-ui
@@ -12,7 +16,7 @@ links:
 
 ## Usage
 
-Use the Tabs component to display a list of items in a tabs.
+Use the Tabs component to display a list of items in tabs.
 
 ::component-example
 ---
@@ -62,7 +66,7 @@ props:
 
 ### Content
 
-Set the `content` prop to `false` to turn the Tabs into a toggle-only control without displaying any content. Defaults to `true`.
+Set the `content` prop to `false` to render the triggers without any panels. Defaults to `true`.
 
 ::component-code
 ---
@@ -240,6 +244,17 @@ You can control the active item by a URL query parameter, using `route.query.tab
 Use the `#content` slot to customize the content of each item.
 
 :component-example{name="tabs-content-slot-example"}
+
+### With bottom tab bar
+
+Use the `ui` prop to transform the Tabs into a mobile-style bottom tab bar with icons and small labels, similar to YouTube or Instagram.
+
+::component-example
+---
+collapse: true
+name: 'tabs-bottom-tab-bar-example'
+---
+::
 
 ### With custom slot
 

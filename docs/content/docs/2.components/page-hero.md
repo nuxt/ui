@@ -22,8 +22,7 @@ description: 'A Nuxt/Vue-integrated UI library providing a rich set of fully-sty
 
 ::::u-page-card{variant="subtle" class="rounded-lg"}
 
-#default{unwrap="p"}
-![App screenshot](/blocks/image4.png){width="4804" height="3000" class="rounded-sm shadow-2xl ring ring-default"}
+![App screenshot](/blocks/image4.png){width="960" height="540" class="rounded-sm shadow-2xl ring ring-default"}
 
 ::::
 
@@ -40,6 +39,10 @@ Use the `title` prop to set the title of the hero.
 props:
   title: 'Ultimate Vue UI library'
 ---
+::
+
+::tip
+The title is rendered as an `h1` by default. Use the `as` prop with an object to change it, for example `:as="{ title: 'h2' }"`{lang="ts-type"}. You can also set the root element this way: `:as="{ root: 'section', title: 'h2' }"`{lang="ts-type"}.
 ::
 
 ### Description

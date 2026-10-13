@@ -2,15 +2,35 @@ title: Showcase
 description: Check out some of the amazing projects built with Nuxt UI.
 navigation: false
 hero:
-  title: Showcase
-  description: Discover our selection of projects built with Nuxt UI.
+  badge:
+    label: Live in production
+    icon: i-lucide-globe
+  lead: Built with
+  accent: Nuxt UI
+  description: Sites and apps teams have shipped with Nuxt UI, from documentation and dashboards to storefronts. Built one? Add it to the list.
 items:
+  - name: Ace
+    url: https://acecompany.nl/
+  - name: Annuaire TSA
+    url: https://annuaire-tsa.fr/
+  - name: Avelune Online
+    url: https://avelune-online.vercel.app/
+  - name: Brusnika.LMS
+    url: https://brusnika-lms.com/
+    screenshotOptions:
+      cookies: ['cookie-consent=accepted']
+  - name: Codemo
+    url: https://codemo.dev/
   - name: CodeSnap
     url: https://codesnap.dev/
+  - name: Cosmic Stays
+    url: https://www.cosmicstays.com/
+  - name: Croix-Rouge française - Devenir bénévole
+    url: https://benevolat.croix-rouge.fr/
+    screenshotOptions:
+      cookies: ['OptanonAlertBoxClosed=2026-05-26T13:44:13.050Z;OptanonConsent=isGpcEnabled=0;']
   - name: DefenceMore
     url: https://defencemore.com/
-  - name: Details
-    url: https://details.team/
   - name: Directus Docs
     url: https://docs.directus.io/
   - name: Eleven Spectacles
@@ -19,30 +39,42 @@ items:
     url: https://asso.benevolt.fr/
   - name: FrameZero
     url: https://www.framezero.app/
+  - name: Idlen - AI Ads
+    url: https://www.idlen.io
   - name: JSON DeepL
     url: https://jsondeepl.com/
   - name: Juno.one
     url: https://www.juno.one/
   - name: Kassebil
     url: https://kassebil.dk/
+  - name: Kleine Zeitung
+    url: https://www.kleinezeitung.at/
+    screenshotOptions:
+      width: 1024
+      delay: 5
+      removeElements: ['[id^="piano"]']
   - name: LearnVue
     url: https://learnvue.co/
+  - name: Linkedis
+    url: https://linked.is/
   - name: LunixPOS
     url: https://lunixpos.com/
   - name: Mawrble
     url: https://mawrble.com/
   - name: Meet Sponsors
     url: https://meetsponsors.com/
-  - name: NuxtStart
-    url: https://www.nuxtstart.com/
+  - name: Milo Studio
+    url: https://milostudio.app/
+  - name: Neleto
+    url: https://neleto.io/
   - name: Ovatu
     url: https://ovatu.com/
   - name: Pallyy
     url: https://pallyy.com/
-  - name: Passionate People
-    url: https://passionatepeople.io/
   - name: Pingschools
     url: https://pingschools.com/
+  - name: Pitchwall
+    url: https://pitchwall.co/
   - name: Readyy
     url: https://readyy.app/
   - name: RevX
@@ -53,6 +85,10 @@ items:
     url: https://shelve.cloud/
   - name: Sigxel
     url: https://sigxel.com/
+  - name: Sirawit Jewelry
+    url: https://sirawit-jewelry.com/
+    screenshotOptions:
+      cookies: ['hide_home_popup=true']
   - name: Speaker Bot
     url: https://speaker.bot/
   - name: Super SaaS
@@ -61,10 +97,22 @@ items:
     url: https://www.thecompaniesapi.com/
   - name: Thuprai
     url: https://thuprai.com/
+  - name: Ticket.kg
+    url: https://ticket.kg/
+  - name: TickServ
+    url: https://tickserv.com/
   - name: TresJS
     url: https://tresjs.org/
+  - name: Triad Trainer
+    url: https://triadtrainer.vercel.app/
   - name: Uneed
     url: https://uneed.best/
+  - name: Volta
+    url: https://volta.net/
+  - name: WhatsBox
+    url: https://www.whatsbox.io/
+  - name: whichcoding.tools
+    url: https://whichcoding.tools/
   - name: Wiredash
     url: https://wiredash.com/
   - name: Zielgestalt

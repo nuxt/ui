@@ -1,4 +1,4 @@
-import type { Messages } from '../types'
+import type { Messages } from '../types/locale'
 import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
@@ -16,23 +16,36 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Stäng'
     },
+    breadcrumb: {
+      label: 'brödsmulor'
+    },
     calendar: {
+      label: 'Händelsedatum',
+      monthPicker: 'Månadsväljare',
       nextMonth: 'Nästa månad',
       nextYear: 'Nästa år',
       prevMonth: 'Föregående månad',
-      prevYear: 'Föregående år'
+      prevYear: 'Föregående år',
+      yearPicker: 'Årsväljare'
     },
     carousel: {
       dots: 'Välj bild att visa',
       goto: 'Gå till {slide}',
       next: 'Nästa',
-      prev: 'Föregående'
+      prev: 'Föregående',
+      roledescription: 'karusell',
+      slide: 'bild'
+    },
+    chatMessages: {
+      autoScroll: 'Scrolla längst ned'
     },
     chatPrompt: {
       placeholder: 'Skriv ditt meddelande här…'
     },
     chatPromptSubmit: {
-      label: 'Skicka'
+      label: 'Skicka',
+      reload: 'Försök igen',
+      stop: 'Stoppa generering'
     },
     chatReasoning: {
       thinking: 'Tänker…',
@@ -51,10 +64,12 @@ export default defineLocale<Messages>({
       close: 'Stäng',
       noData: 'Inga data',
       noMatch: 'Inga matchande data',
-      placeholder: 'Skriv ett kommando eller sök…'
+      placeholder: 'Skriv ett kommando eller sök…',
+      results: 'Resultat'
     },
     contentSearch: {
       links: 'Länkar',
+      search: 'Resultat',
       theme: 'Tema'
     },
     contentSearchButton: {
@@ -81,6 +96,9 @@ export default defineLocale<Messages>({
       close: 'Stäng sidofältet',
       open: 'Öppna sidofältet'
     },
+    drawer: {
+      close: 'Stäng'
+    },
     error: {
       clear: 'Tillbaka till startsidan'
     },
@@ -91,17 +109,55 @@ export default defineLocale<Messages>({
       close: 'Stäng menyn',
       open: 'Öppna menyn'
     },
+    inputDate: {
+      day: 'dag',
+      dayPeriod: 'fm/em',
+      era: 'era',
+      hour: 'timme',
+      minute: 'minut',
+      month: 'månad',
+      second: 'sekund',
+      timeZoneName: 'tidszon',
+      year: 'år'
+    },
     inputMenu: {
       create: 'Skapa "{label}"',
       noData: 'Inga data',
-      noMatch: 'Inga matchande data'
+      noMatch: 'Inga matchande data',
+      trigger: 'Visa alternativ'
     },
     inputNumber: {
       decrement: 'Minska',
-      increment: 'Öka'
+      increment: 'Öka',
+      roledescription: 'sifferfält'
+    },
+    inputRating: {
+      rate: 'Betygsätt {value} av {length}'
+    },
+    inputTime: {
+      dayPeriod: 'fm/em',
+      hour: 'timme',
+      minute: 'minut',
+      second: 'sekund',
+      timeZoneName: 'tidszon'
+    },
+    listbox: {
+      noData: 'Inga data',
+      noMatch: 'Inga matchande data',
+      search: 'Sök…'
     },
     modal: {
       close: 'Stäng'
+    },
+    pagination: {
+      first: 'Första sidan',
+      last: 'Sista sidan',
+      next: 'Nästa sida',
+      page: 'Sida {page}',
+      prev: 'Föregående sida'
+    },
+    pinInput: {
+      input: 'PIN-kod, tecken {index} av {length}'
     },
     pricingTable: {
       caption: 'Prisplanering'
@@ -135,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: 'Inga matchande data',
       search: 'Sök…'
     },
+    skeleton: {
+      label: 'laddar'
+    },
     slideover: {
       close: 'Stäng'
+    },
+    slider: {
+      max: 'Maximum',
+      min: 'Minimum',
+      thumb: 'Reglage',
+      value: 'Värde {index} av {total}'
+    },
+    stepper: {
+      label: 'förlopp'
     },
     table: {
       noData: 'Inga data'
     },
     toast: {
       close: 'Stäng'
+    },
+    toaster: {
+      label: 'Avisering',
+      viewport: 'Aviseringar ({hotkey})'
     }
   }
 })

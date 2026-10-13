@@ -21,25 +21,28 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
+import { useLocale } from '../composables/useLocale'
 
-const props = defineProps<SkeletonProps>()
+const _props = defineProps<SkeletonProps>()
 
+const props = useComponentProps('skeleton', _props)
+
+const { t } = useLocale()
 const appConfig = useAppConfig() as Skeleton['AppConfig']
-const uiProp = useComponentUI('skeleton', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.skeleton || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.skeleton || {}) }))
 </script>
 
 <template>
   <Primitive
-    :as="as"
+    :as="props.as"
     aria-busy="true"
-    aria-label="loading"
+    :aria-label="t('skeleton.label')"
     aria-live="polite"
     role="alert"
-    :class="ui({ class: [uiProp?.base, props.class] })"
+    :class="ui({ class: [props.ui?.base, props.class] })"
   >
     <slot />
   </Primitive>

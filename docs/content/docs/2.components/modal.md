@@ -1,6 +1,11 @@
 ---
 description: A dialog window that can be used to display a message or request user input.
 category: overlay
+keywords:
+  - dialog
+  - popup
+  - confirm
+  - alert dialog
 links:
   - label: Dialog
     icon: i-custom-reka-ui
@@ -360,6 +365,42 @@ slots:
 :placeholder{class="h-full"}
 ::
 
+### Unmount :badge{label="4.10+" class="align-text-top"}
+
+Use the `unmount-on-hide` prop to prevent the Modal's content from being unmounted when it is closed. Defaults to `true`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - title
+props:
+  unmountOnHide: false
+  title: 'Modal'
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" />
+
+  body: |
+
+    <Placeholder class="h-48" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle"}
+
+#body
+:placeholder{class="h-48"}
+::
+
+::note
+You can inspect the DOM to see the Modal's content being rendered even while it is closed.
+::
+
+::tip
+When the `portal` prop is set to `false`, the content is also rendered on the server. This is useful to render an open Modal during SSR without a flash on page load, or to expose its content for SEO.
+::
+
 ## Examples
 
 ### Control open state
@@ -377,7 +418,7 @@ In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcu
 ::
 
 ::tip
-This allows you to move the trigger outside of the Modal or remove it entirely.
+This lets you move the trigger outside of the Modal or remove it entirely.
 ::
 
 ### Programmatic usage
@@ -399,7 +440,7 @@ preview: false
 ::
 
 ::note
-We are emitting a `close` event when the modal is closed or dismissed here. You can emit any data through the `close` event, however, the event must be emitted in order to capture the return value.
+We are emitting a `close` event when the modal is closed or dismissed here. You can emit any data through the `close` event, and that data becomes the resolved value of `open()`. The event must be emitted for the promise to resolve.
 ::
 
 Then, use it in your app:

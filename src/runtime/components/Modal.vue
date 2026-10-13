@@ -3,7 +3,9 @@ import type { DialogRootProps, DialogRootEmits, DialogContentProps, DialogConten
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/modal'
-import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
+import type { ButtonProps } from './Button.vue'
+import type { IconProps } from './Icon.vue'
+import type { LinkPropsKeys } from './Link.vue'
 import type { EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -61,7 +63,9 @@ export interface ModalProps extends DialogRootProps {
 }
 
 export interface ModalEmits extends DialogRootEmits {
+  'leave': []
   'after:leave': []
+  'enter': []
   'after:enter': []
   'close:prevent': []
 }
@@ -81,10 +85,11 @@ export interface ModalSlots {
 
 <script setup lang="ts">
 import { computed, toRef } from 'vue'
-import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, VisuallyHidden, useForwardPropsEmits } from 'reka-ui'
+import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, VisuallyHidden } from 'reka-ui'
+import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { FieldGroupReset } from '../composables/useFieldGroup'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
@@ -92,7 +97,7 @@ import { pointerDownOutside } from '../utils/overlay'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
-const props = withDefaults(defineProps<ModalProps>(), {
+const _props = withDefaults(defineProps<ModalProps>(), {
   close: true,
   portal: true,
   overlay: true,
@@ -103,11 +108,12 @@ const props = withDefaults(defineProps<ModalProps>(), {
 const emits = defineEmits<ModalEmits>()
 const slots = defineSlots<ModalSlots>()
 
+const props = useComponentProps('modal', _props)
+
 const { t } = useLocale()
 const appConfig = useAppConfig() as Modal['AppConfig']
-const uiProp = useComponentUI('modal', props)
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'open', 'defaultOpen', 'modal', 'unmountOnHide'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => props.content)
 const contentEvents = computed(() => {
@@ -130,12 +136,13 @@ const contentEvents = computed(() => {
 
 const [DefineContentTemplate, ReuseContentTemplate] = createReusableTemplate()
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {}) })({
+// eslint-disable-next-line vue/no-dupe-keys
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.modal || {}) })({
   transition: props.transition,
   fullscreen: props.fullscreen,
   overlay: props.overlay,
   scrollable: props.scrollable
-} as any))
+}))
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->
@@ -144,41 +151,43 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
     <DefineContentTemplate>
       <DialogContent
         data-slot="content"
-        :class="ui.content({ class: [!slots.default && props.class, uiProp?.content] })"
+        :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
         v-bind="contentProps"
-        @after-enter="emits('after:enter')"
-        @after-leave="emits('after:leave')"
+        @enter="!props.scrollable && emits('enter')"
+        @after-enter="!props.scrollable && emits('after:enter')"
+        @leave="!props.scrollable && emits('leave')"
+        @after-leave="!props.scrollable && emits('after:leave')"
         v-on="contentEvents"
       >
-        <VisuallyHidden v-if="(!title && !slots.title) || (!description && !slots.description) || !!slots.content">
-          <DialogTitle v-if="!title && !slots.title" />
+        <VisuallyHidden v-if="(!props.title && !slots.title) || (!props.description && !slots.description) || !!slots.content">
+          <DialogTitle v-if="!props.title && !slots.title" />
           <DialogTitle v-else-if="!!slots.content">
             <slot name="title">
-              {{ title }}
+              {{ props.title }}
             </slot>
           </DialogTitle>
 
-          <DialogDescription v-if="!description && !slots.description" />
+          <DialogDescription v-if="!props.description && !slots.description" />
           <DialogDescription v-else-if="!!slots.content">
             <slot name="description">
-              {{ description }}
+              {{ props.description }}
             </slot>
           </DialogDescription>
         </VisuallyHidden>
 
         <slot name="content" :close="close">
-          <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (props.close || !!slots.close)" data-slot="header" :class="ui.header({ class: uiProp?.header })">
+          <div v-if="!!slots.header || (props.title || !!slots.title) || (props.description || !!slots.description) || (props.close || !!slots.close)" data-slot="header" :class="ui.header({ class: props.ui?.header })">
             <slot name="header" :close="close">
-              <div data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
-                <DialogTitle v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
+              <div v-if="props.title || !!slots.title || props.description || !!slots.description" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+                <DialogTitle v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
                   <slot name="title">
-                    {{ title }}
+                    {{ props.title }}
                   </slot>
                 </DialogTitle>
 
-                <DialogDescription v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
+                <DialogDescription v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
                   <slot name="description">
-                    {{ description }}
+                    {{ props.description }}
                   </slot>
                 </DialogDescription>
               </div>
@@ -189,24 +198,24 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
                 <slot name="close" :ui="ui">
                   <UButton
                     v-if="props.close"
-                    :icon="closeIcon || appConfig.ui.icons.close"
+                    :icon="props.closeIcon || appConfig.ui.icons.close"
                     color="neutral"
                     variant="ghost"
                     :aria-label="t('modal.close')"
                     v-bind="(typeof props.close === 'object' ? props.close : {})"
                     data-slot="close"
-                    :class="ui.close({ class: uiProp?.close })"
+                    :class="ui.close({ class: props.ui?.close })"
                   />
                 </slot>
               </DialogClose>
             </slot>
           </div>
 
-          <div v-if="!!slots.body" data-slot="body" :class="ui.body({ class: uiProp?.body })">
+          <div v-if="!!slots.body" data-slot="body" :class="ui.body({ class: props.ui?.body })">
             <slot name="body" :close="close" />
           </div>
 
-          <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer })">
+          <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
             <slot name="footer" :close="close" />
           </div>
         </slot>
@@ -217,16 +226,23 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
       <slot :open="open" />
     </DialogTrigger>
 
-    <DialogPortal v-bind="portalProps">
+    <DialogPortal v-bind="portalProps" :force-mount="(portalProps.disabled && props.unmountOnHide === false) || undefined">
       <FieldGroupReset>
-        <template v-if="scrollable">
-          <DialogOverlay data-slot="overlay" :class="ui.overlay({ class: uiProp?.overlay })">
+        <template v-if="props.scrollable">
+          <DialogOverlay
+            data-slot="overlay"
+            :class="ui.overlay({ class: props.ui?.overlay })"
+            @enter="emits('enter')"
+            @after-enter="emits('after:enter')"
+            @leave="emits('leave')"
+            @after-leave="emits('after:leave')"
+          >
             <ReuseContentTemplate />
           </DialogOverlay>
         </template>
 
         <template v-else>
-          <DialogOverlay v-if="overlay" data-slot="overlay" :class="ui.overlay({ class: uiProp?.overlay })" />
+          <DialogOverlay v-if="props.overlay" data-slot="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
           <ReuseContentTemplate />
         </template>

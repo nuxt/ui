@@ -1,4 +1,5 @@
-import { describe } from 'vitest'
+import { describe, it, expect } from 'vitest'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import ContentNavigation from '../../../src/runtime/components/content/ContentNavigation.vue'
 import { renderEach } from '../../component-render'
 import theme from '#build/ui/content/content-navigation'
@@ -68,4 +69,32 @@ describe('ContentNavigation', () => {
     ['with link-title slot', { props, slots: { 'link-title': () => 'Link title slot' } }],
     ['with link-trailing slot', { props, slots: { 'link-trailing': () => 'Link trailing slot' } }]
   ])
+
+  // Regression: navigating between routes (swapping `navigation`) must not morph the leading icon
+  // in place, otherwise the reused element flashes a solid gray box for one frame while the new
+  // icon's mask is injected. The fix keys items by identity so changed items remount.
+  it('replaces leading icon nodes when navigation changes (no flash)', async () => {
+    const navA = [
+      { title: 'Alpha', path: '/alpha', icon: 'i-lucide-folder' },
+      { title: 'Beta', path: '/beta', icon: 'i-lucide-file' }
+    ]
+    const navB = [
+      { title: 'Gamma', path: '/gamma', icon: 'i-lucide-bot' },
+      { title: 'Delta', path: '/delta', icon: 'i-lucide-cog' }
+    ]
+
+    const wrapper = await mountSuspended(ContentNavigation, { props: { navigation: navA } })
+
+    const before = wrapper.find('[data-slot="linkLeadingIcon"]').element
+    expect(before).toBeTruthy()
+
+    await wrapper.setProps({ navigation: navB })
+    await wrapper.vm.$nextTick()
+
+    const after = wrapper.find('[data-slot="linkLeadingIcon"]').element
+    expect(after).toBeTruthy()
+
+    // Different DOM node => the item was remounted rather than patched in place.
+    expect(after).not.toBe(before)
+  })
 })

@@ -103,7 +103,7 @@ props:
 ::
 
 ::note
-Here's the detail of the different statuses from the AI SDK Chat class:
+Here's the detail of the different statuses from the AI SDK `useChat` composable:
 
 - `submitted`: The message has been sent to the API and we're awaiting the start of the response stream.
 - `streaming`: The response is actively streaming in from the API, receiving chunks of data.
@@ -411,7 +411,7 @@ collapse: true
 :component-slots
 
 ::tip
-You can use all the slots of the [`ChatMessage`](/docs/components/chat-message#slots) component inside ChatMessages, they are automatically forwarded allowing you to customize individual messages when using the `messages` prop.
+You can use all the slots of the [`ChatMessage`](/docs/components/chat-message#slots) component inside ChatMessages, they are automatically forwarded so you can customize individual messages when using the `messages` prop.
 
 ```vue{7-15}
 <script setup lang="ts">
@@ -434,6 +434,14 @@ import { isTextUIPart } from 'ai'
 </template>
 ```
 ::
+
+### Expose
+
+When accessing the component via a template ref, you can use the following:
+
+| Name | Type |
+| ---- | ---- |
+| `registerMessageRef(id: string, element: ComponentPublicInstance \| null)`{lang="ts-type"} | `void`{lang="ts-type"} |
 
 ## Theme
 

@@ -1,6 +1,10 @@
 ---
 description: Separates content horizontally or vertically.
 category: element
+keywords:
+  - divider
+  - hr
+  - horizontal rule
 links:
   - label: Separator
     icon: i-custom-reka-ui
@@ -43,6 +47,21 @@ Use the `label` prop to display a label in the middle of the Separator.
 ---
 class: 'p-8'
 props:
+  label: 'Hello World'
+---
+::
+
+### Position :badge{label="4.8+" class="align-text-top"}
+
+Use the `position` prop to change the position of the content of the Separator. Defaults to `center`.
+
+::component-code
+---
+ignore:
+  - class
+class: 'p-8'
+props:
+  position: start
   label: 'Hello World'
 ---
 ::

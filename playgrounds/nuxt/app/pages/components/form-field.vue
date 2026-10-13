@@ -6,7 +6,7 @@ const orientations = Object.keys(theme.variants.orientation)
 
 const attrs = reactive({
   size: [theme.defaultVariants.size],
-  orientation: [theme.defaultVariants.orientation]
+  orientation: ['vertical' as const]
 })
 
 const feedbacks = [

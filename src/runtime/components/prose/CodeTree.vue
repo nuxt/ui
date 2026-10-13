@@ -49,32 +49,32 @@ export interface ProseCodeTreeSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, watch, onBeforeUpdate, ref } from 'vue'
+import { computed, watch, onBeforeUpdate, onMounted, ref } from 'vue'
 import { TreeRoot, TreeItem } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../../composables/useComponentUI'
+import { useComponentProps } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 import UCodeIcon from './CodeIcon.vue'
 import UIcon from '../Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = defineProps<ProseCodeTreeProps>()
+const _props = defineProps<ProseCodeTreeProps>()
 const emits = defineEmits<ProseCodeTreeEmits>()
 const slots = defineSlots<ProseCodeTreeSlots>()
 
+const props = useComponentProps('prose.codeTree', _props)
+
 const appConfig = useAppConfig() as ProseCodeTree['AppConfig']
-const uiProp = useComponentUI('prose.codeTree', props)
 
 const [DefineTreeTemplate, ReuseTreeTemplate] = createReusableTemplate<{ items: TreeNode[], level: number }>()
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.codeTree || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.codeTree || {}) })())
 
 const initialPath = props.modelValue ?? props.defaultValue
 const model = ref(initialPath ? { path: initialPath } : undefined)
-const lastSelectedItem = ref()
 
 watch(model, (value) => {
   if (value?.path !== props.modelValue) {
@@ -85,13 +85,14 @@ watch(() => props.modelValue, (value) => {
   if (value === model.value?.path) return
 
   model.value = value ? { path: value } : undefined
-  // Expand the tree to show the selected item
-  const pathsToExpand = getExpandedPaths(value)
-  for (const path of pathsToExpand) {
-    if (!expanded.value.includes(path)) {
-      expanded.value.push(path)
+  // Expand the tree to show the selected item, keeping paths already expanded
+  const next = [...expanded.value]
+  for (const path of getExpandedPaths(value)) {
+    if (!next.includes(path)) {
+      next.push(path)
     }
   }
+  expanded.value = next
 })
 const rerenderCount = ref(1)
 
@@ -168,27 +169,41 @@ function getExpandedPaths(path?: string) {
   return parts.slice(0, -1).map((_, index) => parts.slice(0, index + 1).join('/'))
 }
 
-const expanded = ref(getExpandedPaths(model.value?.path))
-
-// Re-expand all when flatItems actually change and expandAll is true
-watch(flatItems, (newItems, oldItems) => {
-  if (!props.expandAll) return
-
-  // Compare labels to detect actual changes (not just re-renders from rerenderCount)
-  const newLabels = newItems.map(i => i.label).join('\n')
-  const oldLabels = oldItems?.map(i => i.label).join('\n') ?? ''
-
-  if (newLabels !== oldLabels) {
-    expanded.value = getExpandedPaths()
-  }
+const expandedOverride = ref<string[] | null>(props.expandAll ? null : getExpandedPaths(model.value?.path))
+const expanded = computed<string[]>({
+  get: () => expandedOverride.value ?? getExpandedPaths(),
+  set: (value) => { expandedOverride.value = value }
 })
 
-watch(model, (value) => {
-  const item = flatItems.value.find(item => value?.path === item.label)
+watch(() => props.expandAll, (value) => {
+  expandedOverride.value = value ? null : getExpandedPaths(model.value?.path)
+})
+
+// Re-expand all when flatItems actually change and expandAll is true.
+// Registered post-mount: `watch` evaluates its source eagerly, which would invoke the slot from setup.
+// By then `flatItems` is still cached from the first render, so the slot is not invoked from the hook either.
+onMounted(() => {
+  watch(flatItems, (newItems, oldItems) => {
+    if (!props.expandAll) return
+
+    // Compare labels to detect actual changes (not just re-renders from rerenderCount)
+    const newLabels = newItems.map(i => i.label).join('\n')
+    const oldLabels = oldItems?.map(i => i.label).join('\n') ?? ''
+
+    if (newLabels !== oldLabels) {
+      expandedOverride.value = null
+    }
+  })
+})
+
+let lastFile: TreeItem | undefined
+const currentFile = computed(() => {
+  const item = flatItems.value.find(item => model.value?.path === item.label)
   if (item?.component) {
-    lastSelectedItem.value = item
+    lastFile = item
   }
-}, { immediate: true })
+  return lastFile
+})
 
 onBeforeUpdate(() => rerenderCount.value++)
 </script>
@@ -200,7 +215,7 @@ onBeforeUpdate(() => rerenderCount.value++)
       v-for="(item, index) in items"
       :key="`${level}-${index}`"
       role="presentation"
-      :class="level > 1 ? ui.itemWithChildren({ class: uiProp?.itemWithChildren }) : ui.item({ class: uiProp?.item })"
+      :class="level > 1 ? ui.itemWithChildren({ class: props.ui?.itemWithChildren }) : ui.item({ class: props.ui?.item })"
     >
       <TreeItem
         v-slot="{ isExpanded, isSelected }"
@@ -210,27 +225,27 @@ onBeforeUpdate(() => rerenderCount.value++)
       >
         <button
           type="button"
-          :class="ui.link({ class: uiProp?.link, active: isSelected })"
+          :class="ui.link({ class: props.ui?.link, active: isSelected })"
         >
           <UIcon
             v-if="item.children?.length"
             :name="isExpanded ? appConfig.ui.icons.folderOpen : appConfig.ui.icons.folder"
-            :class="ui.linkLeadingIcon({ class: uiProp?.linkLeadingIcon })"
+            :class="ui.linkLeadingIcon({ class: props.ui?.linkLeadingIcon })"
           />
           <UCodeIcon
             v-else
             :filename="item.label"
-            :class="ui.linkLeadingIcon({ class: uiProp?.linkLeadingIcon })"
+            :class="ui.linkLeadingIcon({ class: props.ui?.linkLeadingIcon })"
           />
 
-          <span :class="ui.linkLabel({ class: uiProp?.linkLabel })">
+          <span :class="ui.linkLabel({ class: props.ui?.linkLabel })">
             {{ item.label }}
           </span>
 
-          <span v-if="item.children?.length" :class="ui.linkTrailing({ class: uiProp?.linkTrailing })">
+          <span v-if="item.children?.length" :class="ui.linkTrailing({ class: props.ui?.linkTrailing })">
             <UIcon
               :name="appConfig.ui.icons.chevronDown"
-              :class="ui.linkTrailingIcon({ class: uiProp?.linkTrailingIcon })"
+              :class="ui.linkTrailingIcon({ class: props.ui?.linkTrailingIcon })"
             />
           </span>
         </button>
@@ -238,7 +253,7 @@ onBeforeUpdate(() => rerenderCount.value++)
         <ul
           v-if="item.children?.length && isExpanded"
           role="group"
-          :class="ui.listWithChildren({ class: uiProp?.listWithChildren })"
+          :class="ui.listWithChildren({ class: props.ui?.listWithChildren })"
         >
           <ReuseTreeTemplate :items="item.children" :level="level + 1" />
         </ul>
@@ -246,19 +261,19 @@ onBeforeUpdate(() => rerenderCount.value++)
     </li>
   </DefineTreeTemplate>
 
-  <div v-bind="$attrs" :class="ui.root({ class: [uiProp?.root, props.class] })">
+  <div v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <TreeRoot
       v-model="model"
       v-model:expanded="expanded"
-      :class="ui.list({ class: uiProp?.list })"
+      :class="ui.list({ class: props.ui?.list })"
       :items="items"
       :get-key="(item) => item.path"
     >
       <ReuseTreeTemplate :items="items" :level="1" />
     </TreeRoot>
 
-    <div :class="ui.content({ class: uiProp?.content })">
-      <component :is="lastSelectedItem?.component" />
+    <div :class="ui.content({ class: props.ui?.content })">
+      <component :is="currentFile?.component" />
     </div>
   </div>
 </template>

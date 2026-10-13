@@ -1,4 +1,4 @@
-import type { Messages } from '../types'
+import type { Messages } from '../types/locale'
 import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
@@ -16,23 +16,36 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Bezárás'
     },
+    breadcrumb: {
+      label: 'navigációs útvonal'
+    },
     calendar: {
+      label: 'Esemény dátuma',
+      monthPicker: 'Hónapválasztó',
       nextMonth: 'Következő hónap',
       nextYear: 'Következő év',
       prevMonth: 'Előző hónap',
-      prevYear: 'Előző év'
+      prevYear: 'Előző év',
+      yearPicker: 'Évválasztó'
     },
     carousel: {
       dots: 'Válassza ki a megjelenítendő diát',
       goto: 'Ugrás ide {slide}',
       next: 'Következő',
-      prev: 'Előző'
+      prev: 'Előző',
+      roledescription: 'körhinta',
+      slide: 'dia'
+    },
+    chatMessages: {
+      autoScroll: 'Görgetés az aljára'
     },
     chatPrompt: {
       placeholder: 'Írd be a kérdésedet itt…'
     },
     chatPromptSubmit: {
-      label: 'Küldés'
+      label: 'Küldés',
+      reload: 'Újrapróbálás',
+      stop: 'Generálás leállítása'
     },
     chatReasoning: {
       thinking: 'Gondolkodik…',
@@ -51,10 +64,12 @@ export default defineLocale<Messages>({
       close: 'Bezárás',
       noData: 'Nincs adat',
       noMatch: 'Nincs találat',
-      placeholder: 'Írjon be egy parancsot vagy keressen…'
+      placeholder: 'Írjon be egy parancsot vagy keressen…',
+      results: 'Eredmények'
     },
     contentSearch: {
       links: 'Linkek',
+      search: 'Eredmények',
       theme: 'Téma'
     },
     contentSearchButton: {
@@ -81,6 +96,9 @@ export default defineLocale<Messages>({
       close: 'Oldalsáv bezárása',
       open: 'Oldalsáv megnyitása'
     },
+    drawer: {
+      close: 'Bezárás'
+    },
     error: {
       clear: 'Vissza a főoldalra'
     },
@@ -91,17 +109,55 @@ export default defineLocale<Messages>({
       close: 'Menü bezárása',
       open: 'Menü megnyitása'
     },
+    inputDate: {
+      day: 'nap',
+      dayPeriod: 'AM/PM',
+      era: 'korszak',
+      hour: 'óra',
+      minute: 'perc',
+      month: 'hónap',
+      second: 'másodperc',
+      timeZoneName: 'időzóna',
+      year: 'év'
+    },
     inputMenu: {
       create: '"{label}" létrehozása',
       noData: 'Nincs adat',
-      noMatch: 'Nincs találat'
+      noMatch: 'Nincs találat',
+      trigger: 'Lehetőségek megjelenítése'
     },
     inputNumber: {
       decrement: 'Csökkent',
-      increment: 'Növel'
+      increment: 'Növel',
+      roledescription: 'számmező'
+    },
+    inputRating: {
+      rate: 'Értékelés: {value} / {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'óra',
+      minute: 'perc',
+      second: 'másodperc',
+      timeZoneName: 'időzóna'
+    },
+    listbox: {
+      noData: 'Nincs adat',
+      noMatch: 'Nincs találat',
+      search: 'Keresés…'
     },
     modal: {
       close: 'Bezárás'
+    },
+    pagination: {
+      first: 'Első oldal',
+      last: 'Utolsó oldal',
+      next: 'Következő oldal',
+      page: '{page}. oldal',
+      prev: 'Előző oldal'
+    },
+    pinInput: {
+      input: 'PIN-kód, {index}. karakter (összesen {length})'
     },
     pricingTable: {
       caption: 'Árlista összehasonlítása'
@@ -135,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: 'Nincs találat',
       search: 'Keresés…'
     },
+    skeleton: {
+      label: 'betöltés'
+    },
     slideover: {
       close: 'Bezárás'
+    },
+    slider: {
+      max: 'Maximum',
+      min: 'Minimum',
+      thumb: 'Csúszka',
+      value: '{index}. érték (összesen {total})'
+    },
+    stepper: {
+      label: 'előrehaladás'
     },
     table: {
       noData: 'Nincs adat'
     },
     toast: {
       close: 'Bezárás'
+    },
+    toaster: {
+      label: 'Értesítés',
+      viewport: 'Értesítések ({hotkey})'
     }
   }
 })

@@ -1,4 +1,4 @@
-import type { Messages } from '../types'
+import type { Messages } from '../types/locale'
 import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
@@ -17,23 +17,36 @@ export default defineLocale<Messages>({
     banner: {
       close: 'تاقاش'
     },
+    breadcrumb: {
+      label: 'يېتەكلەش يولى'
+    },
     calendar: {
+      label: 'پائالىيەت چېسلاسى',
+      monthPicker: 'ئاي تاللىغۇچ',
       nextMonth: 'كېلەر ئاي',
       nextYear: 'كېلەر يىل',
       prevMonth: 'ئالدىنقى ئاي',
-      prevYear: 'ئالدىنقى يىل'
+      prevYear: 'ئالدىنقى يىل',
+      yearPicker: 'يىل تاللىغۇچ'
     },
     carousel: {
       dots: 'كۆرسىتىدىغان سلايدنى تاللاڭ',
       goto: '{slide}-بەتكە ئاتلاش',
       next: 'كېيىنكى بەت',
-      prev: 'ئالدىنقى بەت'
+      prev: 'ئالدىنقى بەت',
+      roledescription: 'ئايلانما كۆرسەتكۈچ',
+      slide: 'سلايد'
+    },
+    chatMessages: {
+      autoScroll: 'ئاستىغا سۈرۈش'
     },
     chatPrompt: {
       placeholder: 'خەت كىرگۈزۈڭ…'
     },
     chatPromptSubmit: {
-      label: 'يوللاش'
+      label: 'يوللاش',
+      reload: 'قايتا سىناش',
+      stop: 'ھاسىل قىلىشنى توختىتىش'
     },
     chatReasoning: {
       thinking: 'ئويلاۋاتىدۇ…',
@@ -52,10 +65,12 @@ export default defineLocale<Messages>({
       close: 'تاقاش',
       noData: 'سانلىق مەلۇمات يوق',
       noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
-      placeholder: 'بۇيرۇق كىرگۈزۈڭ ياكى ئىزدەڭ…'
+      placeholder: 'بۇيرۇق كىرگۈزۈڭ ياكى ئىزدەڭ…',
+      results: 'نەتىجىلەر'
     },
     contentSearch: {
       links: 'ئۇلانمىلار',
+      search: 'نەتىجىلەر',
       theme: 'تېما'
     },
     contentSearchButton: {
@@ -82,6 +97,9 @@ export default defineLocale<Messages>({
       close: 'تاقاش',
       open: 'ئېچىش'
     },
+    drawer: {
+      close: 'تاقاش'
+    },
     error: {
       clear: 'تازىلاش'
     },
@@ -92,17 +110,55 @@ export default defineLocale<Messages>({
       close: 'تاقاش',
       open: 'ئېچىش'
     },
+    inputDate: {
+      day: 'كۈن',
+      dayPeriod: 'AM/PM',
+      era: 'دەۋر',
+      hour: 'سائەت',
+      minute: 'مىنۇت',
+      month: 'ئاي',
+      second: 'سېكۇنت',
+      timeZoneName: 'ۋاقىت رايونى',
+      year: 'يىل'
+    },
     inputMenu: {
       create: '"{label}" نى قۇرۇش',
       noData: 'سانلىق مەلۇمات يوق',
-      noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق'
+      noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
+      trigger: 'تاللانمىلارنى كۆرسىتىش'
     },
     inputNumber: {
       decrement: 'ئازايتىش',
-      increment: 'كۆپەيتىش'
+      increment: 'كۆپەيتىش',
+      roledescription: 'سان بۆلىكى'
+    },
+    inputRating: {
+      rate: '{value} نومۇر بېرىش، جەمئىي {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'سائەت',
+      minute: 'مىنۇت',
+      second: 'سېكۇنت',
+      timeZoneName: 'ۋاقىت رايونى'
+    },
+    listbox: {
+      noData: 'سانلىق مەلۇمات يوق',
+      noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
+      search: 'ئىزدەش…'
     },
     modal: {
       close: 'تاقاش'
+    },
+    pagination: {
+      first: 'بىرىنچى بەت',
+      last: 'ئاخىرقى بەت',
+      next: 'كېيىنكى بەت',
+      page: '{page}-بەت',
+      prev: 'ئالدىنقى بەت'
+    },
+    pinInput: {
+      input: 'PIN كودى، {index}-ھەرپ، جەمئىي {length}'
     },
     pricingTable: {
       caption: 'باھا جەدۋىلى'
@@ -136,14 +192,30 @@ export default defineLocale<Messages>({
       noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
       search: 'ئىزدەش…'
     },
+    skeleton: {
+      label: 'يۈكلىنىۋاتىدۇ'
+    },
     slideover: {
       close: 'تاقاش'
+    },
+    slider: {
+      max: 'ئەڭ چوڭ',
+      min: 'ئەڭ كىچىك',
+      thumb: 'سىيرىغۇچ',
+      value: '{index}-قىممەت، جەمئىي {total}'
+    },
+    stepper: {
+      label: 'ئىلگىرىلەش'
     },
     table: {
       noData: 'سانلىق مەلۇمات يوق'
     },
     toast: {
       close: 'تاقاش'
+    },
+    toaster: {
+      label: 'ئۇقتۇرۇش',
+      viewport: 'ئۇقتۇرۇشلار ({hotkey})'
     }
   }
 })

@@ -2,6 +2,10 @@
 title: InputNumber
 description: An input for numerical values with a customizable range.
 category: form
+keywords:
+  - number field
+  - spinbutton
+  - counter
 links:
   - label: NumberField
     icon: i-custom-reka-ui
@@ -72,6 +76,40 @@ props:
   modelValue: 5
   step: 2
 ---
+::
+
+### Starting Value :badge{label="Soon" class="align-text-top"}
+
+Use the `starting-value` prop to set the value of the first increment or decrement when the InputNumber is empty. It is clamped to `min` / `max` but not snapped to `step`. Defaults to `min`, or `0` when `min` is not set.
+
+::component-code
+---
+props:
+  startingValue: 18
+  placeholder: 'Age'
+---
+::
+
+### Allow Invalid :badge{label="Soon" class="align-text-top"}
+
+Use the `allow-invalid` prop to keep a typed value that is out of the `min` / `max` range or off the `step` grid. Stepping towards the range still brings the value back in range and on the `step` grid.
+
+::component-code
+---
+ignore:
+  - modelValue
+external:
+  - modelValue
+props:
+  modelValue: 5
+  min: 0
+  max: 10
+  allowInvalid: true
+---
+::
+
+::note
+The InputNumber doesn't flag the value as invalid, validating it is up to you.
 ::
 
 ### Orientation

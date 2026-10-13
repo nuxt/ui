@@ -6,6 +6,24 @@ exports[`PageSection > renders with as correctly 1`] = `
 </div>"
 `;
 
+exports[`PageSection > renders with as object correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative isolate">
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16" data-slot="container">
+    <div data-slot="wrapper" class="">
+      <div data-slot="header" class="">
+        <!--v-if-->
+        <!--v-if-->
+        <h3 data-slot="title" class="text-3xl sm:text-4xl lg:text-5xl text-pretty tracking-tight font-bold text-highlighted text-center">Title</h3>
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
 exports[`PageSection > renders with body slot correctly 1`] = `
 "<section data-orientation="vertical" data-slot="root" class="relative isolate">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16" data-slot="container">
@@ -288,7 +306,7 @@ exports[`PageSection > renders with links and features correctly 1`] = `
         </ul>
       </div>
       <div data-slot="footer" class="mt-16">
-        <div data-slot="links" class="flex flex-wrap gap-x-6 gap-y-3 justify-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <div data-slot="links" class="flex flex-wrap gap-x-6 gap-y-3 justify-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
           </button></div>
@@ -306,7 +324,7 @@ exports[`PageSection > renders with links correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <div data-slot="footer" class="mt-8">
-        <div data-slot="links" class="flex flex-wrap gap-x-6 gap-y-3 justify-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <div data-slot="links" class="flex flex-wrap gap-x-6 gap-y-3 justify-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
           </button></div>
@@ -372,7 +390,7 @@ exports[`PageSection > renders with orientation horizontal links correctly 1`] =
       <!--v-if-->
       <!--v-if-->
       <div data-slot="footer" class="mt-8">
-        <div data-slot="links" class="flex flex-wrap gap-x-6 gap-y-3"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <div data-slot="links" class="flex flex-wrap gap-x-6 gap-y-3"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
           </button></div>

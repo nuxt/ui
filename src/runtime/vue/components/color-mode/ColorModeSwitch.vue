@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { SwitchProps } from '../../../types'
+import type { SwitchProps } from '../../../components/Switch.vue'
 
 export interface ColorModeSwitchProps extends Omit<SwitchProps, 'checkedIcon' | 'uncheckedIcon' | 'modelValue'> {
 }

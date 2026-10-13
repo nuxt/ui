@@ -1,4 +1,4 @@
-import type { Messages } from '../types'
+import type { Messages } from '../types/locale'
 import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
@@ -16,23 +16,36 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Κλείσιμο'
     },
+    breadcrumb: {
+      label: 'διαδρομή πλοήγησης'
+    },
     calendar: {
+      label: 'Ημερομηνία συμβάντος',
+      monthPicker: 'Επιλογέας μήνα',
       nextMonth: 'Επόμενος μήνας',
       nextYear: 'Επόμενο έτος',
       prevMonth: 'Προηγούμενος μήνας',
-      prevYear: 'Προηγούμενο έτος'
+      prevYear: 'Προηγούμενο έτος',
+      yearPicker: 'Επιλογέας έτους'
     },
     carousel: {
       dots: 'Επιλέξτε διαφάνεια για εμφάνιση',
       goto: 'Μετάβαση στη διαφάνεια {slide}',
       next: 'Επόμενο',
-      prev: 'Προηγούμενο'
+      prev: 'Προηγούμενο',
+      roledescription: 'καρουζέλ',
+      slide: 'διαφάνεια'
+    },
+    chatMessages: {
+      autoScroll: 'Κύλιση προς τα κάτω'
     },
     chatPrompt: {
       placeholder: 'Εδώ γράψτε το μήνυμά σας…'
     },
     chatPromptSubmit: {
-      label: 'Αποστολή'
+      label: 'Αποστολή',
+      reload: 'Επανάληψη',
+      stop: 'Διακοπή δημιουργίας'
     },
     chatReasoning: {
       thinking: 'Σκέφτεται…',
@@ -51,10 +64,12 @@ export default defineLocale<Messages>({
       close: 'Κλείσιμο',
       noData: 'Δεν υπάρχουν δεδομένα',
       noMatch: 'Δεν βρέθηκαν δεδομένα',
-      placeholder: 'Πληκτρολογήστε μια εντολή ή αναζητήστε…'
+      placeholder: 'Πληκτρολογήστε μια εντολή ή αναζητήστε…',
+      results: 'Αποτελέσματα'
     },
     contentSearch: {
       links: 'Σύνδεσμοι',
+      search: 'Αποτελέσματα',
       theme: 'Θέμα'
     },
     contentSearchButton: {
@@ -81,6 +96,9 @@ export default defineLocale<Messages>({
       close: 'Κλείσιμο πλευρικής μπάρας',
       open: 'Άνοιγμα πλευρικής μπάρας'
     },
+    drawer: {
+      close: 'Κλείσιμο'
+    },
     error: {
       clear: 'Επιστροφή στην αρχική'
     },
@@ -91,17 +109,55 @@ export default defineLocale<Messages>({
       close: 'Κλείσιμο μενού',
       open: 'Άνοιγμα μενού'
     },
+    inputDate: {
+      day: 'ημέρα',
+      dayPeriod: 'πμ/μμ',
+      era: 'περίοδος',
+      hour: 'ώρα',
+      minute: 'λεπτό',
+      month: 'μήνας',
+      second: 'δευτερόλεπτο',
+      timeZoneName: 'ζώνη ώρας',
+      year: 'έτος'
+    },
     inputMenu: {
       create: 'Δημιουργία "{label}"',
       noData: 'Δεν υπάρχουν δεδομένα',
-      noMatch: 'Δεν βρέθηκαν δεδομένα'
+      noMatch: 'Δεν βρέθηκαν δεδομένα',
+      trigger: 'Εμφάνιση επιλογών'
     },
     inputNumber: {
       decrement: 'Μείωση',
-      increment: 'Αύξηση'
+      increment: 'Αύξηση',
+      roledescription: 'αριθμητικό πεδίο'
+    },
+    inputRating: {
+      rate: 'Βαθμολόγηση {value} από {length}'
+    },
+    inputTime: {
+      dayPeriod: 'πμ/μμ',
+      hour: 'ώρα',
+      minute: 'λεπτό',
+      second: 'δευτερόλεπτο',
+      timeZoneName: 'ζώνη ώρας'
+    },
+    listbox: {
+      noData: 'Δεν υπάρχουν δεδομένα',
+      noMatch: 'Δεν βρέθηκαν δεδομένα',
+      search: 'Αναζήτηση…'
     },
     modal: {
       close: 'Κλείσιμο'
+    },
+    pagination: {
+      first: 'Πρώτη σελίδα',
+      last: 'Τελευταία σελίδα',
+      next: 'Επόμενη σελίδα',
+      page: 'Σελίδα {page}',
+      prev: 'Προηγούμενη σελίδα'
+    },
+    pinInput: {
+      input: 'κωδικός PIN, χαρακτήρας {index} από {length}'
     },
     pricingTable: {
       caption: 'Σύγκριση προγραμμάτων τιμολόγησης'
@@ -135,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: 'Δεν βρέθηκαν δεδομένα',
       search: 'Αναζήτηση…'
     },
+    skeleton: {
+      label: 'φόρτωση'
+    },
     slideover: {
       close: 'Κλείσιμο'
+    },
+    slider: {
+      max: 'Μέγιστο',
+      min: 'Ελάχιστο',
+      thumb: 'Ρυθμιστικό',
+      value: 'Τιμή {index} από {total}'
+    },
+    stepper: {
+      label: 'πρόοδος'
     },
     table: {
       noData: 'Δεν υπάρχουν δεδομένα'
     },
     toast: {
       close: 'Κλείσιμο'
+    },
+    toaster: {
+      label: 'Ειδοποίηση',
+      viewport: 'Ειδοποιήσεις ({hotkey})'
     }
   }
 })

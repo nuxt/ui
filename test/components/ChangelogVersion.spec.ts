@@ -18,6 +18,7 @@ describe('ChangelogVersion', () => {
     ['with authors', { props: { authors: [{ name: 'Benjamin Canac', description: 'benjamincanac', avatar: { src: 'https://github.com/benjamincanac.png', alt: 'benjamincanac' } }] } }],
     ['without indicator', { props: { indicator: false } }],
     ['with as', { props: { as: 'section' } }],
+    ['with as object', { props: { title: 'Title', as: { root: 'section', title: 'h3' } } }],
     ['with class', { props: { class: 'absolute' } }],
     ['with ui', { props: { ui: { container: 'max-w-xl' } } }],
     // Slots
@@ -51,5 +52,25 @@ describe('ChangelogVersion', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  it('forwards attrs to root when `to` prop is absent', async () => {
+    const wrapper = await mountSuspended(ChangelogVersion, {
+      props: { title: 'v1.0.0' },
+      attrs: { 'aria-label': 'test-label', 'data-testid': 'test-id' }
+    })
+    // Root is a fragment (DefineTemplate blocks render leading comments), so target the root element directly
+    const root = wrapper.find('[data-slot="root"]')
+    expect(root.attributes('aria-label')).toBe('test-label')
+    expect(root.attributes('data-testid')).toBe('test-id')
+  })
+
+  it('forwards attrs to link when `to` prop is set', async () => {
+    const wrapper = await mountSuspended(ChangelogVersion, {
+      props: { title: 'v1.0.0', to: 'https://github.com/benjamincanac' },
+      attrs: { 'aria-label': 'test-label' }
+    })
+    expect(wrapper.find('[data-slot="root"]').attributes('aria-label')).toBeUndefined()
+    expect(wrapper.find('a').attributes('aria-label')).toBe('test-label')
   })
 })

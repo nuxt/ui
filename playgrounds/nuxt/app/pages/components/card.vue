@@ -14,15 +14,17 @@ const attrs = reactive({
   </Navbar>
 
   <Matrix v-slot="props" :attrs="attrs">
-    <UCard v-bind="props" class="w-80">
-      <template #header>
-        <Placeholder class="h-8" />
-      </template>
-
+    <UCard
+      title="Card title"
+      description="A short description for the card."
+      v-bind="props"
+      :ui="{ footer: 'flex justify-end' }"
+      class="w-80"
+    >
       <Placeholder class="h-24" />
 
       <template #footer>
-        <Placeholder class="h-8" />
+        <UButton label="Save" color="neutral" />
       </template>
     </UCard>
   </Matrix>

@@ -11,13 +11,17 @@ import {
   UCheckbox,
   USelect,
   USelectMenu,
+  UInputDate,
   UInputMenu,
   UInputNumber,
+  UInputTime,
   USwitch,
   USlider,
   UPinInput,
   UCheckboxGroup,
-  UFileUpload
+  UFileUpload,
+  UInputRating,
+  UListbox
 } from '#components'
 
 export async function renderForm(options: {
@@ -57,13 +61,17 @@ export async function renderForm(options: {
           UCheckbox,
           USelect,
           USelectMenu,
+          UInputDate,
           UInputMenu,
           UInputNumber,
+          UInputTime,
           USwitch,
           USlider,
           UPinInput,
           UCheckboxGroup,
-          UFileUpload
+          UFileUpload,
+          UInputRating,
+          UListbox
         },
         template: options.slotTemplate
       }

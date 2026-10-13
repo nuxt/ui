@@ -4,7 +4,11 @@ import type { DropdownMenuContentProps as RekaDropdownMenuContentProps, Dropdown
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type theme from '#build/ui/dropdown-menu'
-import type { KbdProps, AvatarProps, DropdownMenuItem, DropdownMenuSlots, IconProps, InputProps } from '../types'
+import type { KbdProps } from './Kbd.vue'
+import type { AvatarProps } from './Avatar.vue'
+import type { DropdownMenuItem, DropdownMenuSlots } from './DropdownMenu.vue'
+import type { IconProps } from './Icon.vue'
+import type { InputProps } from './Input.vue'
 import type { ArrayOrNested, GetItemKeys, NestedItem, DynamicSlots, MergeTypes } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -56,8 +60,7 @@ type DropdownMenuContentSlots<
 <script setup lang="ts" generic="T extends ArrayOrNested<DropdownMenuItem>">
 import { computed, ref, toRef } from 'vue'
 import { defu } from 'defu'
-import { DropdownMenu } from 'reka-ui/namespaced'
-import { useForwardPropsEmits } from 'reka-ui'
+import { DropdownMenuPortal, DropdownMenuContent, DropdownMenuItem as RekaDropdownMenuItem, DropdownMenuGroup, DropdownMenuSeparator, DropdownMenuCheckboxItem, DropdownMenuItemIndicator, DropdownMenuLabel, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuFilter, useForwardPropsEmits } from 'reka-ui'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { FieldGroupReset } from '../composables/useFieldGroup'
@@ -73,6 +76,8 @@ import UIcon from './Icon.vue'
 import UInput from './Input.vue'
 import UKbd from './Kbd.vue'
 import UDropdownMenuContent from './DropdownMenuContent.vue'
+
+const DropdownMenu = { Portal: DropdownMenuPortal, Content: DropdownMenuContent, Item: RekaDropdownMenuItem, Group: DropdownMenuGroup, Separator: DropdownMenuSeparator, CheckboxItem: DropdownMenuCheckboxItem, ItemIndicator: DropdownMenuItemIndicator, Label: DropdownMenuLabel, Sub: DropdownMenuSub, SubContent: DropdownMenuSubContent, SubTrigger: DropdownMenuSubTrigger, Filter: DropdownMenuFilter }
 
 const props = defineProps<DropdownMenuContentProps<T>>()
 const emits = defineEmits<DropdownMenuContentEmits>()

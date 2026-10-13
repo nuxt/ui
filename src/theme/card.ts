@@ -2,13 +2,17 @@ export default {
   slots: {
     root: 'rounded-lg overflow-hidden',
     header: 'p-4 sm:px-6',
+    title: 'text-highlighted font-semibold',
+    description: 'mt-1 text-muted text-sm',
     body: 'p-4 sm:p-6',
     footer: 'p-4 sm:px-6'
   },
   variants: {
     variant: {
       solid: {
-        root: 'bg-inverted text-inverted'
+        root: 'bg-inverted text-inverted',
+        title: 'text-inverted',
+        description: 'text-dimmed'
       },
       outline: {
         root: 'bg-default ring ring-default divide-y divide-default'

@@ -31,6 +31,11 @@ const itemsWithDescription = [
   { value: '2', label: 'Option 2', description: 'Description 2' },
   { value: '3', label: 'Option 3', description: 'Description 3' }
 ]
+const itemsWithIcon = [
+  { value: '1', label: 'System', icon: 'i-lucide-monitor' },
+  { value: '2', label: 'Light', icon: 'i-lucide-sun' },
+  { value: '3', label: 'Dark', icon: 'i-lucide-moon' }
+]
 </script>
 
 <template>
@@ -46,6 +51,7 @@ const itemsWithDescription = [
     <URadioGroup :items="items" default-value="1" :orientation="orientation" v-bind="props" />
     <URadioGroup :items="itemsLiteral" default-value="Option 1" :orientation="orientation" v-bind="props" />
     <URadioGroup :items="itemsWithDescription" :orientation="orientation" v-bind="props" />
+    <URadioGroup :items="itemsWithIcon" :orientation="orientation" v-bind="props" />
     <URadioGroup :items="items" disabled :orientation="orientation" v-bind="props" />
     <URadioGroup :items="items" legend="Legend" :orientation="orientation" v-bind="props" />
     <URadioGroup :items="items" legend="Legend" required :orientation="orientation" v-bind="props" />

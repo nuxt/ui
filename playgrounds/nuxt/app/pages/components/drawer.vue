@@ -9,7 +9,7 @@ const inset = ref(false)
   </Navbar>
 
   <div class="flex flex-col gap-2 min-h-0">
-    <UDrawer v-model:open="open" title="Drawer with v-model" description="This is useful to control the state yourself." :inset="inset">
+    <UDrawer v-model:open="open" title="Drawer with v-model" :inset="inset" close>
       <UButton color="neutral" variant="outline" label="Open with v-model" />
 
       <template #body>
@@ -22,7 +22,7 @@ const inset = ref(false)
       </template>
     </UDrawer>
 
-    <UDrawer should-scale-background title="Drawer with `should-scale-background`" description="You need to add the `data-vaul-drawer-wrapper` directive to your content to make it work." :inset="inset">
+    <UDrawer should-scale-background title="Drawer with `should-scale-background`" description="You need to add the `data-vaul-drawer-wrapper` directive to your content to make it work." :inset="inset" close>
       <UButton color="neutral" variant="outline" label="Open with scale" />
 
       <template #body>
@@ -30,7 +30,7 @@ const inset = ref(false)
       </template>
     </UDrawer>
 
-    <UDrawer title="Drawer with nested" :inset="inset" :ui="{ content: 'h-full' }" should-scale-background>
+    <UDrawer title="Drawer with nested" :inset="inset" :ui="{ content: 'h-full' }" should-scale-background close>
       <UButton color="neutral" variant="outline" label="Open nested" />
 
       <template #footer>
@@ -51,6 +51,7 @@ const inset = ref(false)
       :modal="false"
       :overlay="false"
       :inset="inset"
+      close
     >
       <UButton label="Open unclosable" color="neutral" variant="outline" />
 
@@ -59,7 +60,7 @@ const inset = ref(false)
       </template>
     </UDrawer>
 
-    <UDrawer title="Drawer with bottom direction" direction="bottom" :inset="inset">
+    <UDrawer title="Drawer with bottom direction" direction="bottom" :inset="inset" close>
       <UButton color="neutral" variant="outline" label="Open on bottom" />
 
       <template #body>
@@ -67,7 +68,7 @@ const inset = ref(false)
       </template>
     </UDrawer>
 
-    <UDrawer title="Drawer with left direction" direction="left" :inset="inset">
+    <UDrawer title="Drawer with left direction" direction="left" :inset="inset" close>
       <UButton color="neutral" variant="outline" label="Open on left" />
 
       <template #body>
@@ -75,7 +76,7 @@ const inset = ref(false)
       </template>
     </UDrawer>
 
-    <UDrawer title="Drawer with top direction" direction="top" :inset="inset">
+    <UDrawer title="Drawer with top direction" direction="top" :inset="inset" close>
       <UButton color="neutral" variant="outline" label="Open on top" />
 
       <template #body>
@@ -83,7 +84,7 @@ const inset = ref(false)
       </template>
     </UDrawer>
 
-    <UDrawer title="Drawer with right direction" direction="right" :inset="inset">
+    <UDrawer title="Drawer with right direction" direction="right" :inset="inset" close>
       <UButton color="neutral" variant="outline" label="Open on right" />
 
       <template #body>

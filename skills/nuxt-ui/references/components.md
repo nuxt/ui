@@ -1,6 +1,6 @@
 # Components
 
-Quick-reference index of all 125+ components. For full API docs (props, slots, events, examples), use the MCP `get_component` or `get_component_metadata` tools.
+Quick-reference index of all 125+ components. For full API docs (props, slots, events, examples), use the MCP `get-component` or `get-component-metadata` tools.
 
 ## Layout
 
@@ -12,6 +12,7 @@ Quick-reference index of all 125+ components. For full API docs (props, slots, e
 | `UFooterColumns` | Multi-column footer with link groups |
 | `UMain` | Main content area |
 | `UContainer` | Centered max-width container |
+| `USplitter` | Resizable panels separated by draggable handles |
 | `ULink` | Enhanced link — NuxtLink/RouterLink with active states |
 
 ## Element
@@ -31,6 +32,7 @@ Quick-reference index of all 125+ components. For full API docs (props, slots, e
 | `USeparator` | Divider line with optional label |
 | `USkeleton` | Loading placeholder |
 | `UProgress` | Progress bar |
+| `UProgressGroup` | Segmented progress bar with a list of items |
 | `UToast` | Toast notification (shown via `useToast`) |
 | `UCalendar` | Date calendar (single, range, multiple) |
 | `UCollapsible` | Animated expand/collapse |
@@ -42,7 +44,7 @@ Quick-reference index of all 125+ components. For full API docs (props, slots, e
 | `UScrollArea` | Scrollable area with custom scrollbar |
 | `UTimeline` | Timeline display for events and activity |
 | `UUser` | User display — avatar + name + description |
-| `UTheme` | Theme provider — scoped color overrides for children |
+| `UTheme` | Scoped `ui` class overrides and prop defaults for a subtree |
 
 ## Form
 
@@ -55,9 +57,12 @@ Quick-reference index of all 125+ components. For full API docs (props, slots, e
 | `USelectMenu` | Rich searchable dropdown, multi-select, groups |
 | `UInputMenu` | Autocomplete / combobox |
 | `UInputNumber` | Numeric input with +/- controls |
+| `UInputRating` | Rating input |
 | `UInputDate` | Date picker with calendar |
 | `UInputTime` | Time picker (12/24h) |
 | `UInputTags` | Tag/chip input |
+| `UListbox` | Selectable list with search and virtualization |
+| `ULocaleSelect` | Select to switch between locales |
 | `UPinInput` | Verification code input |
 | `UCheckbox` | Single boolean checkbox |
 | `UCheckboxGroup` | Multiple checkboxes |
@@ -152,6 +157,51 @@ Quick-reference index of all 125+ components. For full API docs (props, slots, e
 | `UPricingPlans` | Pricing plan cards |
 | `UPricingPlan` | Individual pricing plan card |
 | `UPricingTable` | Feature comparison table |
+
+## Prose — Base Typography
+
+Standard Markdown elements auto-resolved by Comark/Content/MDC. No `::` prefix needed — they map directly from markdown syntax (`# Heading` → `ProseH1`, `**bold**` → `ProseStrong`, etc.). Themed via `appConfig.ui.prose.<name>`.
+
+| Component | Renders | Notable |
+|---|---|---|
+| `H1` `H2` `H3` `H4` | Headings | H1–H3 get anchor links + TOC entries |
+| `P` | Paragraph | |
+| `A` | Link | External links get target/rel handling |
+| `Strong` | Bold | |
+| `Em` | Italic | |
+| `Blockquote` | Blockquote | |
+| `Hr` | Horizontal rule | |
+| `Ul` `Ol` `Li` | Lists | Supports nesting and mixed lists |
+| `Table` `Thead` `Tbody` `Tr` `Th` `Td` | Tables | |
+| `Img` | Image | Zoom on click (`:zoom="false"` to disable), `@nuxt/image` support |
+| `Pre` | Code block | Copy button, filename + icon, line highlighting (`{2,4-6}`), diff |
+| `Code` | Inline code | `color` and `lang` props |
+
+## Prose — Feature Components
+
+Nuxt UI-specific Prose components. In markdown files they are used **without the `Prose` prefix** (e.g. `::callout`, `::steps`). In Vue they are referenced as `ProseCallout`, `ProseSteps`, etc. Comark resolves them automatically when `@nuxt/ui` is installed.
+
+Nuxt UI also registers shorthand aliases for `Callout`: `::note`, `::tip`, `::warning`, `::caution` (preset `color` + `icon`).
+
+| Component | Purpose |
+|---|---|
+| `Callout` | Highlighted note/warning/tip (`color`, `icon`, `to`) |
+| `Badge` | Inline badge/tag |
+| `Kbd` | Keyboard key |
+| `Icon` | Inline Iconify icon |
+| `Prompt` | Terminal prompt block |
+| `Card` `CardGroup` | Content card and card grid |
+| `Steps` | Numbered step list (`level` prop sets heading depth) |
+| `Tabs` `TabsItem` | Tabbed content (`sync` for localStorage, `hash` for scroll-on-change) |
+| `Accordion` `AccordionItem` | Collapsible accordion sections |
+| `Collapsible` | Single collapsible section |
+| `Field` `FieldGroup` | Form field display |
+| `CodeGroup` | Tabbed code blocks |
+| `CodeCollapse` | Collapsible code block |
+| `CodeIcon` | File-type icon in code headers |
+| `CodePreview` | Code + live rendered preview side by side |
+| `CodeTree` | File tree display |
+| `Script` | Script injection |
 
 ## Content (Nuxt Content)
 

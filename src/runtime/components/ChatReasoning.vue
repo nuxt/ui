@@ -3,7 +3,7 @@ import type { CollapsibleRootProps } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/chat-reasoning'
-import type { IconProps } from '../types'
+import type { IconProps } from './Icon.vue'
 import type { ChatShimmerProps } from './ChatShimmer.vue'
 import type { ComponentConfig } from '../types/tv'
 
@@ -41,6 +41,11 @@ export interface ChatReasoningProps extends Pick<CollapsibleRootProps, 'defaultO
    */
   chevronIcon?: IconProps['name']
   /**
+   * Whether to automatically open when streaming starts.
+   * @defaultValue true
+   */
+  autoOpen?: boolean
+  /**
    * The delay in milliseconds before auto-closing when streaming ends.
    * Set to `0` to disable auto-close.
    * @defaultValue 500
@@ -67,33 +72,37 @@ export interface ChatReasoningSlots {
 import { ref, computed, watch, onUnmounted, nextTick, useTemplateRef } from 'vue'
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { useScrollShadow } from '../composables/useScrollShadow'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UChatShimmer from './ChatShimmer.vue'
 
-const props = withDefaults(defineProps<ChatReasoningProps>(), {
+const _props = withDefaults(defineProps<ChatReasoningProps>(), {
   open: undefined,
   streaming: false,
   chevron: 'trailing',
   unmountOnHide: false,
+  autoOpen: true,
   autoCloseDelay: 500
 })
 const emits = defineEmits<ChatReasoningEmits>()
+
 defineSlots<ChatReasoningSlots>()
+
+const props = useComponentProps('chatReasoning', _props)
 
 const { t, code } = useLocale()
 const appConfig = useAppConfig() as ChatReasoning['AppConfig']
-const uiProp = useComponentUI('chatReasoning', props)
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatReasoning || {}) })({
+// eslint-disable-next-line vue/no-dupe-keys
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatReasoning || {}) })({
   chevron: props.chevron
 }))
 
 const isControlled = computed(() => props.open !== undefined)
-const internalOpen = ref(props.defaultOpen ?? props.streaming)
+const internalOpen = ref(props.defaultOpen ?? (props.streaming && props.autoOpen))
 const startTime = ref<number | null>(props.streaming ? Date.now() : null)
 const internalDuration = ref<number | undefined>(undefined)
 const autoCloseTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
@@ -105,7 +114,9 @@ watch(() => props.streaming, (streaming, wasStreaming) => {
       autoCloseTimeout.value = null
     }
     if (!wasStreaming) {
-      setOpen(true)
+      if (props.autoOpen) {
+        setOpen(true)
+      }
       startTime.value = Date.now()
     }
   } else if (wasStreaming) {
@@ -182,49 +193,49 @@ watch(() => props.text, () => {
     v-if="hasContent"
     v-slot="{ open: isOpen }"
     :open="resolvedOpen"
-    :disabled="disabled"
-    :unmount-on-hide="unmountOnHide"
+    :disabled="props.disabled"
+    :unmount-on-hide="props.unmountOnHide"
     data-slot="root"
-    :class="ui.root({ class: [uiProp?.root, props.class] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:open="setOpen"
   >
     <CollapsibleTrigger as-child :disabled="!hasContent">
       <button
         type="button"
         data-slot="trigger"
-        :class="ui.trigger({ class: uiProp?.trigger })"
+        :class="ui.trigger({ class: props.ui?.trigger })"
       >
-        <span v-if="icon || (hasContent && chevron === 'leading')" data-slot="leading" :class="ui.leading({ class: uiProp?.leading })">
+        <span v-if="props.icon || (hasContent && props.chevron === 'leading')" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
           <UIcon
-            v-if="icon"
-            :name="icon"
+            v-if="props.icon"
+            :name="props.icon"
             data-slot="leadingIcon"
-            :class="ui.leadingIcon({ class: uiProp?.leadingIcon, alone: !(hasContent && chevron === 'leading') })"
+            :class="ui.leadingIcon({ class: props.ui?.leadingIcon, alone: !(hasContent && props.chevron === 'leading') })"
           />
           <UIcon
-            v-if="hasContent && chevron === 'leading'"
+            v-if="hasContent && props.chevron === 'leading'"
             :name="chevronIconName"
             data-slot="chevronIcon"
-            :class="ui.chevronIcon({ class: uiProp?.chevronIcon, alone: !icon })"
+            :class="ui.chevronIcon({ class: props.ui?.chevronIcon, alone: !props.icon })"
           />
         </span>
 
-        <UChatShimmer v-if="streaming" :text="thinkingText" v-bind="props.shimmer" data-slot="label" :class="ui.label({ class: uiProp?.label })" />
-        <span v-else data-slot="label" :class="ui.label({ class: uiProp?.label })">{{ thinkingText }}</span>
+        <UChatShimmer v-if="props.streaming" :text="thinkingText" v-bind="props.shimmer" data-slot="label" :class="ui.label({ class: props.ui?.label })" />
+        <span v-else data-slot="label" :class="ui.label({ class: props.ui?.label })">{{ thinkingText }}</span>
 
         <UIcon
-          v-if="hasContent && chevron === 'trailing'"
+          v-if="hasContent && props.chevron === 'trailing'"
           :name="chevronIconName"
           data-slot="trailingIcon"
-          :class="ui.trailingIcon({ class: uiProp?.trailingIcon })"
+          :class="ui.trailingIcon({ class: props.ui?.trailingIcon })"
         />
       </button>
     </CollapsibleTrigger>
 
-    <CollapsibleContent data-slot="content" :class="ui.content({ class: uiProp?.content })">
-      <div ref="bodyRef" data-slot="body" :class="ui.body({ class: uiProp?.body })" :style="scrollShadowStyle">
+    <CollapsibleContent data-slot="content" :class="ui.content({ class: props.ui?.content })">
+      <div ref="bodyRef" data-slot="body" :class="ui.body({ class: props.ui?.body })" :style="scrollShadowStyle">
         <slot :open="isOpen">
-          {{ text }}
+          {{ props.text }}
         </slot>
       </div>
     </CollapsibleContent>

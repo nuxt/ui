@@ -2,6 +2,8 @@
 title: ContextMenu
 description: A menu to display actions when right-clicking on an element.
 category: overlay
+keywords:
+  - right click menu
 links:
   - label: ContextMenu
     icon: i-custom-reka-ui
@@ -322,6 +324,21 @@ You can use the `color` property to highlight certain items with a color.
 collapse: true
 name: 'context-menu-color-items-example'
 ---
+::
+
+### Control open state :badge{label="Soon" class="align-text-top"}
+
+You can control the open state by using the `v-model:open` directive. When opened programmatically, the menu is anchored to the trigger instead of the cursor.
+
+::component-example
+---
+collapse: true
+name: 'context-menu-open-example'
+---
+::
+
+::note
+In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcuts), you can toggle the ContextMenu by pressing :kbd{value="O"}.
 ::
 
 ### With custom slot

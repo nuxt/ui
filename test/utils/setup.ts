@@ -12,6 +12,21 @@ window.IntersectionObserver = class IntersectionObserver {
   disconnect() {}
 }
 
+// Icons render through `@iconify/vue`, which fetches icon data from the Iconify
+// API. In this happy-dom environment those requests never resolve within a test
+// and stay in-flight until happy-dom aborts them while tearing down the window.
+// vitest 4 surfaces that abort as an unhandled `AbortError`, failing otherwise
+// passing suites. Stub `fetch` so icon requests resolve instantly with an empty
+// icon set: nothing stays pending, and since the icons never resolved anyway the
+// rendered output (and snapshots) are unchanged. `@iconify/vue` captures the
+// global `fetch` on import, which happens after this setup file runs.
+globalThis.fetch = () => Promise.resolve(
+  new Response(JSON.stringify({ icons: {} }), {
+    status: 200,
+    headers: { 'content-type': 'application/json' }
+  })
+)
+
 configureAxe({
   globalOptions: {
     rules: [{

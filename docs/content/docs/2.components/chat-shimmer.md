@@ -6,7 +6,6 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/ChatShimmer.vue
-navigation.badge: New
 ---
 
 ## Usage
@@ -15,6 +14,10 @@ The ChatShimmer component renders an element with an animated shimmer gradient o
 
 ::note
 This component is automatically used by the [`ChatTool`](/docs/components/chat-tool) and [`ChatReasoning`](/docs/components/chat-reasoning) components when streaming.
+::
+
+::tip
+The animation is automatically disabled when the user prefers reduced motion, the text is displayed as static muted text instead.
 ::
 
 ### Text

@@ -1,4 +1,4 @@
-import type { Messages } from '../types'
+import type { Messages } from '../types/locale'
 import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
@@ -16,23 +16,36 @@ export default defineLocale<Messages>({
     banner: {
       close: 'დახურვა'
     },
+    breadcrumb: {
+      label: 'ნავიგაციის ბილიკი'
+    },
     calendar: {
+      label: 'მოვლენის თარიღი',
+      monthPicker: 'თვის ამრჩევი',
       nextMonth: 'შემდეგი თვე',
       nextYear: 'შემდეგი წელი',
       prevMonth: 'წინა თვე',
-      prevYear: 'წინა წელი'
+      prevYear: 'წინა წელი',
+      yearPicker: 'წლის ამრჩევი'
     },
     carousel: {
       dots: 'აირჩიეთ სლაიდი საჩვენებლად',
       goto: 'გადასვლა სლაიდ {slide}-ზე',
       next: 'შემდეგი',
-      prev: 'წინა'
+      prev: 'წინა',
+      roledescription: 'კარუსელი',
+      slide: 'სლაიდი'
+    },
+    chatMessages: {
+      autoScroll: 'ქვემოთ გადახვევა'
     },
     chatPrompt: {
       placeholder: 'დაწერეთ თქვენი მესიჯი აქ…'
     },
     chatPromptSubmit: {
-      label: 'შეტყობინების გაგზავნა'
+      label: 'შეტყობინების გაგზავნა',
+      reload: 'ხელახლა ცდა',
+      stop: 'გენერირების შეჩერება'
     },
     chatReasoning: {
       thinking: 'ფიქრობს…',
@@ -51,10 +64,12 @@ export default defineLocale<Messages>({
       close: 'დახურვა',
       noData: 'მონაცემები არ არის',
       noMatch: 'შესატყვისი მონაცემები არ არის',
-      placeholder: 'ჩაწერეთ ბრძანება ან ძიება…'
+      placeholder: 'ჩაწერეთ ბრძანება ან ძიება…',
+      results: 'შედეგები'
     },
     contentSearch: {
       links: 'ბმულები',
+      search: 'შედეგები',
       theme: 'თემა'
     },
     contentSearchButton: {
@@ -81,6 +96,9 @@ export default defineLocale<Messages>({
       close: 'გვერდითი ზოლის დახურვა',
       open: 'გვერდითი ზოლის გახსნა'
     },
+    drawer: {
+      close: 'დახურვა'
+    },
     error: {
       // While "home" translates as "სახლი", I chose to use "მთავარი" (meaning "main") as contextually this sounds better.
       // If any Georgian prefers literal translation, please submit patch.
@@ -93,17 +111,55 @@ export default defineLocale<Messages>({
       close: 'მენიუს დახურვა',
       open: 'მენიუს გახსნა'
     },
+    inputDate: {
+      day: 'დღე',
+      dayPeriod: 'AM/PM',
+      era: 'ეპოქა',
+      hour: 'საათი',
+      minute: 'წუთი',
+      month: 'თვე',
+      second: 'წამი',
+      timeZoneName: 'სასაათო სარტყელი',
+      year: 'წელი'
+    },
     inputMenu: {
       create: 'შექმენი "{label}"',
       noData: 'მონაცემები არ არის',
-      noMatch: 'შესატყვისი მონაცემები არ არის'
+      noMatch: 'შესატყვისი მონაცემები არ არის',
+      trigger: 'ვარიანტების ჩვენება'
     },
     inputNumber: {
       decrement: 'დაკლება',
-      increment: 'დამატება'
+      increment: 'დამატება',
+      roledescription: 'რიცხვითი ველი'
+    },
+    inputRating: {
+      rate: 'შეფასება {value} {length}-დან'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'საათი',
+      minute: 'წუთი',
+      second: 'წამი',
+      timeZoneName: 'სასაათო სარტყელი'
+    },
+    listbox: {
+      noData: 'მონაცემები არ არის',
+      noMatch: 'შესატყვისი მონაცემები არ არის',
+      search: 'ძიება…'
     },
     modal: {
       close: 'დახურვა'
+    },
+    pagination: {
+      first: 'პირველი გვერდი',
+      last: 'ბოლო გვერდი',
+      next: 'შემდეგი გვერდი',
+      page: 'გვერდი {page}',
+      prev: 'წინა გვერდი'
+    },
+    pinInput: {
+      input: 'PIN კოდი, სიმბოლო {index} {length}-დან'
     },
     pricingTable: {
       caption: 'ფასის გეგმების შედარება'
@@ -137,14 +193,30 @@ export default defineLocale<Messages>({
       noMatch: 'შესატყვისი მონაცემები არ არის',
       search: 'ძიება…'
     },
+    skeleton: {
+      label: 'იტვირთება'
+    },
     slideover: {
       close: 'დახურვა'
+    },
+    slider: {
+      max: 'მაქსიმუმი',
+      min: 'მინიმუმი',
+      thumb: 'სახელური',
+      value: 'მნიშვნელობა {index} {total}-დან'
+    },
+    stepper: {
+      label: 'პროგრესი'
     },
     table: {
       noData: 'მონაცემები არ არის'
     },
     toast: {
       close: 'დახურვა'
+    },
+    toaster: {
+      label: 'შეტყობინება',
+      viewport: 'შეტყობინებები ({hotkey})'
     }
   }
 })

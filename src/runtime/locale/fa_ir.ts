@@ -1,4 +1,4 @@
-import type { Messages } from '../types'
+import type { Messages } from '../types/locale'
 import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
@@ -17,23 +17,36 @@ export default defineLocale<Messages>({
     banner: {
       close: 'بستن'
     },
+    breadcrumb: {
+      label: 'مسیر ناوبری'
+    },
     calendar: {
+      label: 'تاریخ رویداد',
+      monthPicker: 'انتخابگر ماه',
       nextMonth: 'ماه آینده',
       nextYear: 'سال آینده',
       prevMonth: 'ماه گذشته',
-      prevYear: 'سال گذشته'
+      prevYear: 'سال گذشته',
+      yearPicker: 'انتخابگر سال'
     },
     carousel: {
       dots: 'اسلاید مورد نظر برای نمایش را انتخاب کنید',
       goto: 'رفتن به اسلاید {slide}',
       next: 'بعدی',
-      prev: 'قبلی'
+      prev: 'قبلی',
+      roledescription: 'کاروسل',
+      slide: 'اسلاید'
+    },
+    chatMessages: {
+      autoScroll: 'پیمایش به پایین'
     },
     chatPrompt: {
       placeholder: 'اینجا پیام خود را بنویسید…'
     },
     chatPromptSubmit: {
-      label: 'ارسال'
+      label: 'ارسال',
+      reload: 'تلاش دوباره',
+      stop: 'توقف تولید'
     },
     chatReasoning: {
       thinking: 'در حال فکر کردن…',
@@ -52,10 +65,12 @@ export default defineLocale<Messages>({
       close: 'بستن',
       noData: 'داده‌ای موجود نیست',
       noMatch: 'داده‌ای یافت نشد',
-      placeholder: 'یک دستور وارد کنید یا جستجو کنید…'
+      placeholder: 'یک دستور وارد کنید یا جستجو کنید…',
+      results: 'نتایج'
     },
     contentSearch: {
       links: 'پیوندها',
+      search: 'نتایج',
       theme: 'تم'
     },
     contentSearchButton: {
@@ -82,6 +97,9 @@ export default defineLocale<Messages>({
       close: 'بستن نوار کناری',
       open: 'باز کردن نوار کناری'
     },
+    drawer: {
+      close: 'بستن'
+    },
     error: {
       clear: 'بازگشت به صفحه اصلی'
     },
@@ -92,17 +110,55 @@ export default defineLocale<Messages>({
       close: 'بستن منو',
       open: 'باز کردن منو'
     },
+    inputDate: {
+      day: 'روز',
+      dayPeriod: 'ق.ظ/ب.ظ',
+      era: 'دوره',
+      hour: 'ساعت',
+      minute: 'دقیقه',
+      month: 'ماه',
+      second: 'ثانیه',
+      timeZoneName: 'منطقه زمانی',
+      year: 'سال'
+    },
     inputMenu: {
       create: 'ایجاد "{label}"',
       noData: 'داده‌ای موجود نیست',
-      noMatch: 'داده‌ای یافت نشد'
+      noMatch: 'داده‌ای یافت نشد',
+      trigger: 'نمایش گزینه‌ها'
     },
     inputNumber: {
       decrement: 'کاهش',
-      increment: 'افزایش'
+      increment: 'افزایش',
+      roledescription: 'فیلد عددی'
+    },
+    inputRating: {
+      rate: 'امتیاز {value} از {length}'
+    },
+    inputTime: {
+      dayPeriod: 'ق.ظ/ب.ظ',
+      hour: 'ساعت',
+      minute: 'دقیقه',
+      second: 'ثانیه',
+      timeZoneName: 'منطقه زمانی'
+    },
+    listbox: {
+      noData: 'داده‌ای موجود نیست',
+      noMatch: 'داده‌ای یافت نشد',
+      search: 'جستجو…'
     },
     modal: {
       close: 'بستن'
+    },
+    pagination: {
+      first: 'صفحه‌ی اول',
+      last: 'صفحه‌ی آخر',
+      next: 'صفحه‌ی بعد',
+      page: 'صفحه‌ی {page}',
+      prev: 'صفحه‌ی قبلی'
+    },
+    pinInput: {
+      input: 'کد PIN، نویسه {index} از {length}'
     },
     pricingTable: {
       caption: 'مقایسه طرح قیمت'
@@ -136,14 +192,30 @@ export default defineLocale<Messages>({
       noMatch: 'داده‌ای یافت نشد',
       search: 'جستجو…'
     },
+    skeleton: {
+      label: 'در حال بارگذاری'
+    },
     slideover: {
       close: 'بستن'
+    },
+    slider: {
+      max: 'حداکثر',
+      min: 'حداقل',
+      thumb: 'دستگیره',
+      value: 'مقدار {index} از {total}'
+    },
+    stepper: {
+      label: 'پیشرفت'
     },
     table: {
       noData: 'داده‌ای موجود نیست'
     },
     toast: {
       close: 'بستن'
+    },
+    toaster: {
+      label: 'اعلان',
+      viewport: 'اعلان‌ها ({hotkey})'
     }
   }
 })

@@ -1,8 +1,8 @@
-import type { Messages } from '../types'
+import type { Messages } from '../types/locale'
 import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
-  name: 'Euskera',
+  name: 'Euskara',
   code: 'eu',
   messages: {
     alert: {
@@ -16,23 +16,36 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Itxi'
     },
+    breadcrumb: {
+      label: 'nabigazio-bidea'
+    },
     calendar: {
+      label: 'Gertaeraren data',
+      monthPicker: 'Hilabete-hautatzailea',
       nextMonth: 'Hurrengo hilabetea',
       nextYear: 'Hurrengo urtea',
       prevMonth: 'Aurretiko hilabetea',
-      prevYear: 'Aurretiko urtea'
+      prevYear: 'Aurretiko urtea',
+      yearPicker: 'Urte-hautatzailea'
     },
     carousel: {
       dots: 'Erakutsi beharreko diapositiba aukeratu',
       goto: 'Joan diapositibara {slide}',
       next: 'Hurrengoa',
-      prev: 'Aurretikoa'
+      prev: 'Aurretikoa',
+      roledescription: 'karrusela',
+      slide: 'diapositiba'
+    },
+    chatMessages: {
+      autoScroll: 'Korritu behera'
     },
     chatPrompt: {
-      placeholder: 'Idatzi zure mezua hemen...'
+      placeholder: 'Idatzi zure mezua hemen…'
     },
     chatPromptSubmit: {
-      label: 'Bidali'
+      label: 'Bidali',
+      reload: 'Saiatu berriro',
+      stop: 'Gelditu sortzea'
     },
     chatReasoning: {
       thinking: 'Pentsatzen…',
@@ -51,10 +64,12 @@ export default defineLocale<Messages>({
       close: 'Itxi',
       noData: 'Daturik gabe',
       noMatch: 'Ez da datu bat ere aurkitu',
-      placeholder: 'Idatzi komando bat edo bilatu...'
+      placeholder: 'Idatzi komando bat edo bilatu…',
+      results: 'Emaitzak'
     },
     contentSearch: {
       links: 'Estekak',
+      search: 'Emaitzak',
       theme: 'Gaia'
     },
     contentSearchButton: {
@@ -81,6 +96,9 @@ export default defineLocale<Messages>({
       close: 'Alboko barra itxi',
       open: 'Alboko barra zabaldu'
     },
+    drawer: {
+      close: 'Itxi'
+    },
     error: {
       clear: 'Hasierara itzuli'
     },
@@ -91,17 +109,55 @@ export default defineLocale<Messages>({
       close: 'Menua itxi',
       open: 'Menua zabaldu'
     },
+    inputDate: {
+      day: 'eguna',
+      dayPeriod: 'AM/PM',
+      era: 'aroa',
+      hour: 'ordua',
+      minute: 'minutua',
+      month: 'hilabetea',
+      second: 'segundoa',
+      timeZoneName: 'ordu-zona',
+      year: 'urtea'
+    },
     inputMenu: {
       create: 'Sortu {label}',
       noData: 'Daturik gabe',
-      noMatch: 'Ez da datu bat ere aurkitu'
+      noMatch: 'Ez da datu bat ere aurkitu',
+      trigger: 'Erakutsi aukerak'
     },
     inputNumber: {
       decrement: 'Murriztu',
-      increment: 'Handitu'
+      increment: 'Handitu',
+      roledescription: 'zenbaki-eremua'
+    },
+    inputRating: {
+      rate: 'Baloratu {length}(e)tik {value}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'ordua',
+      minute: 'minutua',
+      second: 'segundoa',
+      timeZoneName: 'ordu-zona'
+    },
+    listbox: {
+      noData: 'Daturik gabe',
+      noMatch: 'Ez da datu bat ere aurkitu',
+      search: 'Bilatu…'
     },
     modal: {
       close: 'Itxi'
+    },
+    pagination: {
+      first: 'Lehen orria',
+      last: 'Azken orria',
+      next: 'Hurrengo orria',
+      page: '{page}. orria',
+      prev: 'Aurreko orria'
+    },
+    pinInput: {
+      input: 'PIN kodea, {length}(e)tik {index}. karakterea'
     },
     pricingTable: {
       caption: 'Prezio-plana alderatzea'
@@ -135,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: 'Ez da datu bat ere aurkitu',
       search: 'Bilatu…'
     },
+    skeleton: {
+      label: 'kargatzen'
+    },
     slideover: {
       close: 'Itxi'
+    },
+    slider: {
+      max: 'Maximoa',
+      min: 'Minimoa',
+      thumb: 'Graduatzailea',
+      value: '{total}(e)tik {index}. balioa'
+    },
+    stepper: {
+      label: 'aurrerapena'
     },
     table: {
       noData: 'Daturik gabe'
     },
     toast: {
       close: 'Itxi'
+    },
+    toaster: {
+      label: 'Jakinarazpena',
+      viewport: 'Jakinarazpenak ({hotkey})'
     }
   }
 })

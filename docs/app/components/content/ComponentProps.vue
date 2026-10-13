@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { upperFirst, camelCase, kebabCase } from 'scule'
+import { upperFirst, camelCase } from 'scule'
 import type { ComponentMeta } from 'vue-component-meta'
 import * as theme from '#build/ui'
 
@@ -66,6 +66,8 @@ const metaProps: ComputedRef<ComponentMeta['props']> = computed(() => {
 
     // @ts-expect-error - Type is not correct
     prop.type = !prop.type.startsWith('boolean') && prop.schema?.kind === 'enum' && Object.keys(prop.schema.schema)?.length ? Object.values(prop.schema.schema).map(schema => schema?.type ? schema.type : schema).join(' | ') : prop.type
+    // `(string & {})` widens a literal union while keeping autocompletion, display it as plain `string`
+    prop.type = prop.type.replace(/\(?string & \{\}\)?/g, 'string')
     return prop
   }).sort((a, b) => {
     if (a.name === 'as') {
@@ -117,7 +119,7 @@ const metaProps: ComputedRef<ComponentMeta['props']> = computed(() => {
         <ProseTd>
           <HighlightInlineType v-if="prop.type" :type="prop.type" />
 
-          <MDC v-if="prop.description" :value="prop.description" class="text-toned mt-1" :cache-key="`${kebabCase(route.path)}-${prop.name}-description`" />
+          <DocsMarkdown v-if="prop.description" :value="prop.description" class="text-toned mt-1" />
 
           <ComponentPropsLinks v-if="prop.tags?.length" :prop="prop" />
           <ComponentPropsSchema v-if="prop.schema" :prop="prop" :ignore="ignore" />

@@ -1,7 +1,8 @@
 ---
-title: Kbd
+title: ProseKbd
 description: 'Display keyboard shortcuts and key combinations with proper styling.'
 category: components
+navigation.title: Kbd
 links:
   - label: GitHub
     icon: i-simple-icons-github
@@ -28,6 +29,10 @@ Use the `kbd` component to display a [Kbd](/docs/components/kbd) in your content
 ### Props
 
 :component-props{prose}
+
+### Slots
+
+:component-slots{prose}
 
 ## Theme
 

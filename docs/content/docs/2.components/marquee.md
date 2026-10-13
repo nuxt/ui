@@ -1,7 +1,10 @@
 ---
-title: Marquee
 description: 'A component to create infinite scrolling content.'
 category: data
+keywords:
+  - ticker
+  - scroller
+  - carousel
 links:
   - label: GitHub
     icon: i-simple-icons-github
@@ -31,6 +34,10 @@ slots:
 :u-icon{name="i-simple-icons-instagram" class="size-10 shrink-0"}
 :u-icon{name="i-simple-icons-linkedin" class="size-10 shrink-0"}
 :u-icon{name="i-simple-icons-facebook" class="size-10 shrink-0"}
+::
+
+::tip
+The animation is automatically disabled when the user prefers reduced motion, the content is displayed statically instead.
 ::
 
 ### Pause on Hover

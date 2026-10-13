@@ -56,9 +56,9 @@ export default (options: Required<ModuleOptions>) => ({
     },
     to: {
       true: {
-        root: ['has-focus-visible:ring-2 has-focus-visible:ring-primary', options.theme.transitions && 'transition'],
-        image: 'transform transition-transform duration-200 group-hover/blog-post:scale-110',
-        avatar: 'transform transition-transform duration-200 hover:scale-115 focus-visible:outline-primary'
+        root: ['outline-primary/25 has-[>a:focus-visible]:outline-3', options.theme.transitions && 'transition'],
+        image: 'transform transition-transform ease-out motion-reduce:transition-none group-hover/blog-post:scale-110',
+        avatar: 'inline-flex transform transition-transform ease-out motion-reduce:transition-none hover:scale-115 rounded-full outline-primary/25 focus-visible:outline-3'
       }
     },
     image: {
@@ -84,11 +84,17 @@ export default (options: Required<ModuleOptions>) => ({
       root: 'hover:bg-elevated hover:ring-accented'
     }
   }, {
+    variant: ['outline', 'subtle'],
+    to: true,
+    class: {
+      root: 'has-[>a:focus-visible]:ring-primary'
+    }
+  }, {
     variant: 'ghost',
     to: true,
     class: {
       root: 'hover:bg-elevated/50',
-      header: ['group-hover/blog-post:shadow-none', options.theme.transitions && 'transition-all']
+      header: ['group-hover/blog-post:shadow-none', options.theme.transitions && 'transition-[box-shadow,border-radius] ease-out']
     }
   }, {
     variant: 'ghost',
@@ -102,7 +108,7 @@ export default (options: Required<ModuleOptions>) => ({
     to: true,
     orientation: 'horizontal',
     class: {
-      header: 'group-hover/blog-post:rounded-r-none'
+      header: 'group-hover/blog-post:rounded-e-none'
     }
   }, {
     orientation: 'vertical',

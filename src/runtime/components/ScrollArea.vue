@@ -9,8 +9,14 @@ type ScrollArea = ComponentConfig<typeof theme, AppConfig, 'scrollArea'>
 
 export interface ScrollAreaVirtualizeOptions extends Partial<Omit<
   VirtualizerOptions<Element, Element>,
-  'count' | 'getScrollElement' | 'horizontal' | 'isRtl' | 'estimateSize' | 'lanes' | 'enabled'
+  'count' | 'horizontal' | 'isRtl' | 'estimateSize' | 'lanes' | 'enabled'
 >> {
+  /**
+   * Virtualize against an external scroll element instead of the component's own root.
+   * Pair with `scrollMargin` set to the content's offset from the scroll element's start.
+   * @defaultValue undefined
+   */
+  getScrollElement?: () => Element | null
   /**
    * Estimated size (in px) of each item along the scroll axis. Can be a number or a function.
    * @defaultValue 100
@@ -59,6 +65,12 @@ export interface ScrollAreaProps<T extends ScrollAreaItem = ScrollAreaItem> {
    * @defaultValue false
    */
   virtualize?: boolean | ScrollAreaVirtualizeOptions
+  /**
+   * Display fade shadows on the scrollable edges to indicate more content.
+   * Pass an object to configure the shadow size (in px).
+   * @defaultValue false
+   */
+  shadow?: boolean | { size?: number }
   class?: any
   ui?: ScrollArea['slots']
 }
@@ -81,35 +93,56 @@ export interface ScrollAreaEmits {
 </script>
 
 <script setup lang="ts" generic="T extends ScrollAreaItem">
-import { computed, onMounted, onUnmounted, toRef, useTemplateRef, watch } from 'vue'
+import { computed, onUnmounted, toRef, useTemplateRef, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { defu } from 'defu'
 import { useVirtualizer } from '@tanstack/vue-virtual'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 import { useLocale } from '../composables/useLocale'
+import { useScrollShadow } from '../composables/useScrollShadow'
 
-const props = withDefaults(defineProps<ScrollAreaProps<T>>(), {
+const _props = withDefaults(defineProps<ScrollAreaProps<T>>(), {
   orientation: 'vertical',
-  virtualize: false
+  virtualize: false,
+  shadow: false
 })
 defineSlots<ScrollAreaSlots<T>>()
 const emits = defineEmits<ScrollAreaEmits>()
 
+const props = useComponentProps<ScrollAreaProps<T>>('scrollArea', _props)
+
 const { dir } = useLocale()
 const appConfig = useAppConfig() as ScrollArea['AppConfig']
-const uiProp = useComponentUI('scrollArea', props)
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.scrollArea || {}) })({
-  orientation: props.orientation
+// When an external scroll element is provided, it owns the scroll (the root grows inline).
+const isExternalScroll = computed(() => typeof props.virtualize === 'object' && !!props.virtualize.getScrollElement)
+
+// eslint-disable-next-line vue/no-dupe-keys
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.scrollArea || {}) })({
+  orientation: props.orientation,
+  externalScroll: isExternalScroll.value
 }))
 
 const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef')
 
+const scrollShadowStyle = props.shadow
+  ? useScrollShadow(
+    computed(() => rootRef.value?.$el as HTMLElement | undefined),
+    {
+      orientation: () => props.orientation ?? 'vertical',
+      size: typeof props.shadow === 'object' ? props.shadow.size : undefined
+    }
+  ).style
+  : undefined
+
 const isRtl = computed(() => dir.value === 'rtl')
 const isHorizontal = computed(() => props.orientation === 'horizontal')
 const isVertical = computed(() => !isHorizontal.value)
+
+// The scroll viewport: the external element when provided, otherwise the component's root.
+const getScrollElement = () => (isExternalScroll.value ? virtualizerProps.value.getScrollElement?.() : rootRef.value?.$el) ?? null
 
 const virtualizerProps = toRef(() => {
   const options = typeof props.virtualize === 'boolean' ? {} : props.virtualize
@@ -159,7 +192,7 @@ const virtualizer = !!props.virtualize && useVirtualizer({
   get count() {
     return props.items?.length || 0
   },
-  getScrollElement: () => rootRef.value?.$el,
+  getScrollElement,
   get horizontal() {
     return isHorizontal.value
   },
@@ -182,6 +215,8 @@ function getVirtualItemStyle(virtualItem: VirtualItem): CSSProperties {
   const hasLanes = lanes.value !== undefined && lanes.value > 1
   const lane = virtualItem.lane
   const gap = virtualizerProps.value.gap ?? 0
+  // `start` includes `scrollMargin`; subtract it so items sit inline (0 unless set).
+  const offset = virtualItem.start - virtualizerProps.value.scrollMargin
 
   // For cross-axis gaps: calculate size and position accounting for gaps between lanes
   // laneSize = (100% - (lanes - 1) * gap) / lanes
@@ -200,30 +235,33 @@ function getVirtualItemStyle(virtualItem: VirtualItem): CSSProperties {
     blockSize: isHorizontal.value ? (hasLanes ? laneSize : '100%') : undefined,
     inlineSize: isVertical.value ? (hasLanes ? laneSize : '100%') : undefined,
     transform: isHorizontal.value
-      ? `translateX(${isRtl.value ? -virtualItem.start : virtualItem.start}px)`
-      : `translateY(${virtualItem.start}px)`
+      ? `translateX(${isRtl.value ? -offset : offset}px)`
+      : `translateY(${offset}px)`
   }
 }
 
-// Recalculate layout on container resize (e.g. estimateSize depends on lane width)
+// Recalculate layout when the scroll viewport resizes (e.g. estimateSize depends on lane width).
+// Re-observe if the scroll element changes.
 let resizeObserver: ResizeObserver | null = null
 let rafId: number | null = null
 
-onMounted(() => {
-  if (virtualizer) {
-    const el = rootRef.value?.$el
-    if (el) {
-      resizeObserver = new ResizeObserver(() => {
-        if (rafId !== null) return
-        rafId = requestAnimationFrame(() => {
-          rafId = null
-          virtualizer.value.measure()
-        })
+watch(
+  getScrollElement,
+  (el) => {
+    resizeObserver?.disconnect()
+    resizeObserver = null
+    if (!virtualizer || !el) return
+    resizeObserver = new ResizeObserver(() => {
+      if (rafId !== null) return
+      rafId = requestAnimationFrame(() => {
+        rafId = null
+        virtualizer.value.measure()
       })
-      resizeObserver.observe(el)
-    }
-  }
-})
+    })
+    resizeObserver.observe(el)
+  },
+  { immediate: true }
+)
 
 onUnmounted(() => {
   if (rafId !== null) {
@@ -267,15 +305,16 @@ defineExpose({
 <template>
   <Primitive
     ref="rootRef"
-    :as="as"
+    :as="props.as"
     data-slot="root"
-    :data-orientation="orientation"
-    :class="ui.root({ class: [uiProp?.root, props.class] })"
+    :data-orientation="props.orientation"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :style="scrollShadowStyle"
   >
     <template v-if="virtualizer">
       <div
         data-slot="viewport"
-        :class="ui.viewport({ class: uiProp?.viewport })"
+        :class="ui.viewport({ class: props.ui?.viewport })"
         :style="virtualViewportStyle"
       >
         <div
@@ -284,11 +323,11 @@ defineExpose({
           :ref="measureElement"
           :data-index="virtualItem.index"
           data-slot="item"
-          :class="ui.item({ class: uiProp?.item })"
+          :class="ui.item({ class: props.ui?.item })"
           :style="getVirtualItemStyle(virtualItem)"
         >
           <slot
-            :item="(items?.[virtualItem.index] as T)"
+            :item="(props.items?.[virtualItem.index] as T)"
             :index="virtualItem.index"
             :virtual-item="virtualItem"
           />
@@ -297,13 +336,13 @@ defineExpose({
     </template>
 
     <template v-else>
-      <div data-slot="viewport" :class="ui.viewport({ class: uiProp?.viewport })">
-        <template v-if="items">
+      <div data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
+        <template v-if="props.items">
           <div
-            v-for="(item, index) in items"
+            v-for="(item, index) in props.items"
             :key="getItemKey(item, index)"
             data-slot="item"
-            :class="ui.item({ class: uiProp?.item })"
+            :class="ui.item({ class: props.ui?.item })"
           >
             <slot :item="item" :index="index" />
           </div>

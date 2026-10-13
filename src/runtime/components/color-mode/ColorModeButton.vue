@@ -1,5 +1,6 @@
 <script lang="ts">
-import type { ButtonProps, LinkPropsKeys } from '../../types'
+import type { ButtonProps } from '../Button.vue'
+import type { LinkPropsKeys } from '../Link.vue'
 
 export interface ColorModeButtonProps extends Omit<ButtonProps, LinkPropsKeys | 'color' | 'variant'> {
   /**
@@ -15,31 +16,37 @@ export interface ColorModeButtonProps extends Omit<ButtonProps, LinkPropsKeys | 
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useForwardProps } from 'reka-ui'
-import { reactiveOmit } from '@vueuse/core'
+import { reactiveOmit, useMounted } from '@vueuse/core'
 import { useColorMode, useAppConfig } from '#imports'
-import { useComponentUI } from '../../composables/useComponentUI'
+import { useComponentProps } from '../../composables/useComponentProps'
+import { useForwardProps } from '../../composables/useForwardProps'
 import { useLocale } from '../../composables/useLocale'
+import { usePrefix } from '../../composables/usePrefix'
 import UButton from '../Button.vue'
 import UIcon from '../Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<ColorModeButtonProps>(), {
+const _props = withDefaults(defineProps<ColorModeButtonProps>(), {
   color: 'neutral',
   variant: 'ghost'
 })
 
+const props = useComponentProps('button', _props)
+
 const { t } = useLocale()
 const colorMode = useColorMode()
 const appConfig = useAppConfig()
-const uiProp = useComponentUI('button', props)
+const prefix = usePrefix()
 
 const buttonProps = useForwardProps(reactiveOmit(props, 'icon'))
 
+// The resolved color mode is only known on the client, so the label matches the server until mounted.
+const mounted = useMounted()
+
 const isDark = computed({
   get() {
-    return colorMode.value === 'dark'
+    return mounted.value && colorMode.value === 'dark'
   },
   set(_isDark: boolean) {
     colorMode.preference = _isDark ? 'dark' : 'light'
@@ -57,8 +64,8 @@ const isDark = computed({
     @click="isDark = !isDark"
   >
     <template #leading="{ ui }">
-      <UIcon :class="ui.leadingIcon({ class: [uiProp?.leadingIcon, 'hidden dark:inline-block'] })" :name="appConfig.ui.icons.dark" />
-      <UIcon :class="ui.leadingIcon({ class: [uiProp?.leadingIcon, 'dark:hidden'] })" :name="appConfig.ui.icons.light" />
+      <UIcon :class="ui.leadingIcon({ class: [props.ui?.leadingIcon, prefix('hidden dark:inline-block')] })" :name="appConfig.ui.icons.dark" />
+      <UIcon :class="ui.leadingIcon({ class: [props.ui?.leadingIcon, prefix('dark:hidden')] })" :name="appConfig.ui.icons.light" />
     </template>
   </UButton>
 </template>

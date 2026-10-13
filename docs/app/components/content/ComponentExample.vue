@@ -5,8 +5,6 @@ import { hash } from 'ohash'
 import { useElementSize } from '@vueuse/core'
 import { get, set } from '#ui/utils'
 
-const { track } = useAnalytics()
-
 const props = withDefaults(defineProps<{
   name: string
   class?: any
@@ -130,9 +128,9 @@ const code = computed(() => {
   return buildCodeBlock(rawCode)
 })
 
-const { data: ast } = useAsyncData(`component-example-${camelName}${hash({ props: componentProps, collapse: props.collapse })}`, async () => {
+const { data: markdown } = useAsyncData(`component-example-${camelName}${hash({ props: componentProps, collapse: props.collapse })}`, async () => {
   if (!props.prettier) {
-    return cachedParseMarkdown(code.value)
+    return code.value
   }
 
   let formatted = ''
@@ -147,7 +145,7 @@ const { data: ast } = useAsyncData(`component-example-${camelName}${hash({ props
     formatted = code.value
   }
 
-  return cachedParseMarkdown(formatted)
+  return formatted
 }, { lazy: import.meta.client, watch: [code] })
 
 const optionsValues = ref(props.options?.reduce((acc, option) => {
@@ -254,19 +252,7 @@ const urlSearchParams = computed(() => {
         </div>
 
         <ClientOnly>
-          <UTooltip v-if="playgroundUrl" text="Open in playground" :content="{ side: 'right' }">
-            <UButton
-              :to="playgroundUrl"
-              target="_blank"
-              icon="i-lucide-play"
-              color="neutral"
-              variant="outline"
-              size="sm"
-              class="absolute -bottom-[13px] -right-[13px] z-1 rounded-full lg:opacity-0 lg:group-hover/component:opacity-100 ring-muted transition-opacity duration-200"
-              aria-label="Open in playground"
-              @click="track('Playground Opened', { component: camelName, source: 'example' })"
-            />
-          </UTooltip>
+          <ComponentPlaygroundButton v-if="playgroundUrl" :to="playgroundUrl" :component="camelName" />
 
           <LazyComponentThemeVisualizer
             :container="componentContainer"
@@ -280,7 +266,7 @@ const urlSearchParams = computed(() => {
       <div v-if="!!slots.code" class="[&_pre]:rounded-t-none! [&_div.my-5]:mt-0!">
         <slot name="code" />
       </div>
-      <MDCRenderer v-else-if="ast" :body="ast.body" :data="ast.data" class="[&_pre]:rounded-t-none! [&_div.my-5]:mt-0!" />
+      <DocsMarkdown v-else-if="markdown" :value="markdown" class="[&_pre]:rounded-t-none! [&_div.my-5]:mt-0!" />
     </template>
   </div>
 </template>

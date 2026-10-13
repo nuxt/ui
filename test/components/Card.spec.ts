@@ -11,12 +11,17 @@ describe('Card', () => {
   renderEach(Card, [
     // Props
     ['with as', { props: { as: 'section' } }],
+    ['with title', { props: { title: 'Title' } }],
+    ['with description', { props: { description: 'Description' } }],
+    ['with title and description', { props: { title: 'Title', description: 'Description' } }],
     ...variants.map((variant: string) => [`with variant ${variant}`, { props: { variant } }]),
     ['with class', { props: { class: 'rounded-xl' } }],
     ['with ui', { props: { ui: { body: 'font-bold' } } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with header slot', { slots: { header: () => 'Header slot' } }],
+    ['with title slot', { slots: { title: () => 'Title slot' } }],
+    ['with description slot', { slots: { description: () => 'Description slot' } }],
     ['with footer slot', { slots: { footer: () => 'Footer slot' } }]
   ])
 

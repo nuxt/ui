@@ -19,11 +19,15 @@ describe('Empty', () => {
   renderEach(Empty, [
     // Props
     ['with as', { props: { as: 'section' } }],
+    ['with as object', { props: { title: 'Title', as: { root: 'section', title: 'h3' } } }],
     ['with icon', { props: { icon: 'i-lucide-file' } }],
     ['with avatar', { props: { avatar: { src: 'https://github.com/benjamincanac.png' } } }],
     ['with title', { props: { icon: 'i-lucide-file', title: 'Title' } }],
     ['with description', { props: { icon: 'i-lucide-file', title: 'Title', description: 'Description' } }],
     ['with actions', { props: { icon: 'i-lucide-file', title: 'Title', description: 'Description', actions: [{ icon: 'i-lucide-plus', label: 'Add' }] } }],
+    ['with loading', { props: { icon: 'i-lucide-file', title: 'Title', loading: true } }],
+    ['with loading without icon', { props: { title: 'Title', loading: true } }],
+    ['with loadingIcon', { props: { icon: 'i-lucide-file', title: 'Title', loading: true, loadingIcon: 'i-lucide-loader' } }],
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ['with class', { props: { ...props, class: 'gap-6' } }],

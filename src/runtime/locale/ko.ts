@@ -1,4 +1,4 @@
-import type { Messages } from '../types'
+import type { Messages } from '../types/locale'
 import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
@@ -16,23 +16,36 @@ export default defineLocale<Messages>({
     banner: {
       close: '닫기'
     },
+    breadcrumb: {
+      label: '탐색 경로'
+    },
     calendar: {
+      label: '이벤트 날짜',
+      monthPicker: '월 선택',
       nextMonth: '다음 달',
       nextYear: '다음 해',
       prevMonth: '이전 달',
-      prevYear: '이전 해'
+      prevYear: '이전 해',
+      yearPicker: '연도 선택'
     },
     carousel: {
       dots: '표시할 슬라이드 선택',
       goto: '{slide} 페이지로 이동',
       next: '다음',
-      prev: '이전'
+      prev: '이전',
+      roledescription: '캐러셀',
+      slide: '슬라이드'
+    },
+    chatMessages: {
+      autoScroll: '맨 아래로 스크롤'
     },
     chatPrompt: {
       placeholder: '여기에 메시지를 입력하세요…'
     },
     chatPromptSubmit: {
-      label: '전송'
+      label: '전송',
+      reload: '다시 시도',
+      stop: '생성 중지'
     },
     chatReasoning: {
       thinking: '생각하는 중…',
@@ -51,10 +64,12 @@ export default defineLocale<Messages>({
       close: '닫기',
       noData: '데이터가 없습니다.',
       noMatch: '일치하는 데이터가 없습니다.',
-      placeholder: '명령을 입력하거나 검색…'
+      placeholder: '명령을 입력하거나 검색…',
+      results: '결과'
     },
     contentSearch: {
       links: '링크',
+      search: '결과',
       theme: '테마'
     },
     contentSearchButton: {
@@ -81,6 +96,9 @@ export default defineLocale<Messages>({
       close: '사이드바 닫기',
       open: '사이드바 열기'
     },
+    drawer: {
+      close: '닫기'
+    },
     error: {
       clear: '홈으로 돌아가기'
     },
@@ -91,17 +109,55 @@ export default defineLocale<Messages>({
       close: '메뉴 닫기',
       open: '메뉴 열기'
     },
+    inputDate: {
+      day: '일',
+      dayPeriod: '오전/오후',
+      era: '연호',
+      hour: '시',
+      minute: '분',
+      month: '월',
+      second: '초',
+      timeZoneName: '시간대',
+      year: '연도'
+    },
     inputMenu: {
       create: '"{label}" 생성',
       noData: '데이터가 없습니다.',
-      noMatch: '일치하는 데이터가 없습니다.'
+      noMatch: '일치하는 데이터가 없습니다.',
+      trigger: '옵션 표시'
     },
     inputNumber: {
       decrement: '감소',
-      increment: '증가'
+      increment: '증가',
+      roledescription: '숫자 필드'
+    },
+    inputRating: {
+      rate: '{length}점 중 {value}점으로 평가'
+    },
+    inputTime: {
+      dayPeriod: '오전/오후',
+      hour: '시',
+      minute: '분',
+      second: '초',
+      timeZoneName: '시간대'
+    },
+    listbox: {
+      noData: '데이터가 없습니다.',
+      noMatch: '일치하는 데이터가 없습니다.',
+      search: '검색…'
     },
     modal: {
       close: '닫기'
+    },
+    pagination: {
+      first: '첫 페이지',
+      last: '마지막 페이지',
+      next: '다음 페이지',
+      page: '{page} 페이지',
+      prev: '이전 페이지'
+    },
+    pinInput: {
+      input: 'PIN 코드, {length}자 중 {index}번째 문자'
     },
     pricingTable: {
       caption: '가격 플랜 비교'
@@ -135,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: '일치하는 데이터가 없습니다.',
       search: '검색…'
     },
+    skeleton: {
+      label: '로딩 중'
+    },
     slideover: {
       close: '닫기'
+    },
+    slider: {
+      max: '최대',
+      min: '최소',
+      thumb: '핸들',
+      value: '{total}개 중 {index}번째 값'
+    },
+    stepper: {
+      label: '진행 상황'
     },
     table: {
       noData: '데이터가 없습니다.'
     },
     toast: {
       close: '닫기'
+    },
+    toaster: {
+      label: '알림',
+      viewport: '알림 ({hotkey})'
     }
   }
 })

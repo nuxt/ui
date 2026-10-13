@@ -2,7 +2,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-cta'
-import type { ButtonProps } from '../types'
+import type { ButtonProps } from './Button.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type PageCTA = ComponentConfig<typeof theme, AppConfig, 'pageCTA'>
@@ -12,7 +12,7 @@ export interface PageCTAProps {
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: any
+  as?: any | { root?: any, title?: any }
   class?: any
   title?: string
   description?: string
@@ -55,21 +55,29 @@ export interface PageCTASlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
+import { usePrefix } from '../composables/usePrefix'
+import { resolveAs } from '../utils'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 import UContainer from './Container.vue'
 
-const props = withDefaults(defineProps<PageCTAProps>(), {
+const _props = withDefaults(defineProps<PageCTAProps>(), {
   orientation: 'vertical',
   reverse: false
 })
 const slots = defineSlots<PageCTASlots>()
 
-const appConfig = useAppConfig() as PageCTA['AppConfig']
-const uiProp = useComponentUI('pageCTA', props)
+const props = useComponentProps('pageCTA', _props)
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageCTA || {}) })({
+const appConfig = useAppConfig() as PageCTA['AppConfig']
+const prefix = usePrefix()
+
+// eslint-disable-next-line vue/no-dupe-keys
+const as = computed(() => resolveAs(props.as, { root: 'div', title: 'h2' }))
+
+// eslint-disable-next-line vue/no-dupe-keys
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageCTA || {}) })({
   variant: props.variant,
   orientation: props.orientation,
   reverse: props.reverse,
@@ -78,36 +86,36 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageCTA || {
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+  <Primitive :as="as.root" :data-orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot name="top" />
 
-    <UContainer data-slot="container" :class="ui.container({ class: uiProp?.container })">
-      <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || !!slots.body || !!slots.footer || (links?.length || !!slots.links)" data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
-        <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description)" data-slot="header" :class="ui.header({ class: uiProp?.header })">
+    <UContainer data-slot="container" :class="ui.container({ class: props.ui?.container })">
+      <div v-if="!!slots.header || (props.title || !!slots.title) || (props.description || !!slots.description) || !!slots.body || !!slots.footer || (props.links?.length || !!slots.links)" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+        <div v-if="!!slots.header || (props.title || !!slots.title) || (props.description || !!slots.description)" data-slot="header" :class="ui.header({ class: props.ui?.header })">
           <slot name="header">
-            <h2 v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
+            <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
               <slot name="title">
-                {{ title }}
+                {{ props.title }}
               </slot>
-            </h2>
+            </Primitive>
 
-            <div v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
+            <div v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
               <slot name="description">
-                {{ description }}
+                {{ props.description }}
               </slot>
             </div>
           </slot>
         </div>
 
-        <div v-if="!!slots.body" data-slot="body" :class="ui.body({ class: uiProp?.body })">
+        <div v-if="!!slots.body" data-slot="body" :class="ui.body({ class: props.ui?.body })">
           <slot name="body" />
         </div>
 
-        <div v-if="!!slots.footer || (links?.length || !!slots.links)" data-slot="footer" :class="ui.footer({ class: uiProp?.footer })">
+        <div v-if="!!slots.footer || (props.links?.length || !!slots.links)" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
           <slot name="footer">
-            <div v-if="links?.length || !!slots.links" data-slot="links" :class="ui.links({ class: uiProp?.links })">
+            <div v-if="props.links?.length || !!slots.links" data-slot="links" :class="ui.links({ class: props.ui?.links })">
               <slot name="links">
-                <UButton v-for="(link, index) in links" :key="index" size="lg" v-bind="link" />
+                <UButton v-for="(link, index) in props.links" :key="index" size="lg" v-bind="link" />
               </slot>
             </div>
           </slot>
@@ -115,7 +123,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageCTA || {
       </div>
 
       <slot v-if="!!slots.default" />
-      <div v-else-if="orientation === 'horizontal'" class="hidden lg:block" />
+      <div v-else-if="props.orientation === 'horizontal'" :class="prefix('hidden lg:block')" />
     </UContainer>
 
     <slot name="bottom" />

@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import type { UIMessage } from 'ai'
-import { Chat } from '@ai-sdk/vue'
+import { useChat } from '@ai-sdk/vue'
 
-const messages: UIMessage[] = [{
+const initialMessages: UIMessage[] = [{
   id: '1',
   role: 'user',
   parts: [{ type: 'text', text: 'Hello! Can you help me with something?' }]
 }]
 
-const chat = new Chat({
-  messages
+const { messages } = useChat({
+  messages: initialMessages
 })
 
 const size = 4
@@ -98,7 +98,7 @@ onUnmounted(() => {
 
 <template>
   <UChatMessages
-    :messages="chat.messages"
+    :messages="messages"
     status="submitted"
     :should-scroll-to-bottom="false"
   >

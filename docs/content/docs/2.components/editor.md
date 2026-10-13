@@ -1,5 +1,4 @@
 ---
-title: Editor
 description: A rich text editor component based on TipTap with support for markdown, HTML, and JSON content types.
 category: editor
 links:
@@ -233,6 +232,10 @@ const value = ref('<h1>Hello World</h1>\n')
 </template>
 ```
 
+::tip
+Set `starter-kit` to `false` for a plain text editor. It keeps the essential nodes (paragraph, text, history) and disables every formatting feature such as bold, italic, headings, lists, code, blockquote, links and horizontal rules.
+::
+
 ::callout{icon="i-custom-tiptap" to="https://tiptap.dev/docs/editor/extensions/functionality/starterkit" target="_blank"}
 Learn more about StarterKit extension in the TipTap documentation.
 ::
@@ -305,7 +308,7 @@ const items: EditorToolbarItem[] = [
 
 #### Custom handlers
 
-Use the `handlers` prop to extend or override the default handlers. Custom handlers are merged with the default handlers, allowing you to add new actions or modify existing behavior.
+Use the `handlers` prop to extend or override the default handlers. Custom handlers are merged with the default handlers, so you can add new actions or modify existing behavior.
 
 Each handler implements the `EditorHandler`{lang="ts-type"} interface:
 
@@ -486,19 +489,19 @@ You need to install these dependencies first to use this example:
 ::code-group{sync="pm"}
 
 ```bash [pnpm]
-pnpm add ai @ai-sdk/gateway @ai-sdk/vue
+pnpm add ai @ai-sdk/vue
 ```
 
 ```bash [yarn]
-yarn add ai @ai-sdk/gateway @ai-sdk/vue
+yarn add ai @ai-sdk/vue
 ```
 
 ```bash [npm]
-npm install ai @ai-sdk/gateway @ai-sdk/vue
+npm install ai @ai-sdk/vue
 ```
 
 ```bash [bun]
-bun add ai @ai-sdk/gateway @ai-sdk/vue
+bun add ai @ai-sdk/vue
 ```
 
 ::
@@ -533,8 +536,7 @@ lang: 'ts'
 ::code-collapse
 
 ```ts [server/api/completion.post.ts]
-import { streamText } from 'ai'
-import { gateway } from '@ai-sdk/gateway'
+import { streamText, createTextStreamResponse } from 'ai'
 
 export default defineEventHandler(async (event) => {
   const { prompt, mode, language } = await readBody(event)
@@ -542,39 +544,39 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, message: 'Prompt is required' })
   }
 
-  let system: string
+  let instructions: string
   let maxOutputTokens: number
 
   const preserveMarkdown = 'IMPORTANT: Preserve all markdown formatting (bold, italic, links, etc.) exactly as in the original.'
 
   switch (mode) {
     case 'fix':
-      system = `You are a writing assistant. Fix all spelling and grammar errors in the given text. ${preserveMarkdown} Only output the corrected text, nothing else.`
+      instructions = `You are a writing assistant. Fix all spelling and grammar errors in the given text. ${preserveMarkdown} Only output the corrected text, nothing else.`
       maxOutputTokens = 500
       break
     case 'extend':
-      system = `You are a writing assistant. Extend the given text with more details, examples, and explanations while maintaining the same style. ${preserveMarkdown} Only output the extended text, nothing else.`
+      instructions = `You are a writing assistant. Extend the given text with more details, examples, and explanations while maintaining the same style. ${preserveMarkdown} Only output the extended text, nothing else.`
       maxOutputTokens = 500
       break
     case 'reduce':
-      system = `You are a writing assistant. Make the given text more concise by removing unnecessary words while keeping the meaning. ${preserveMarkdown} Only output the reduced text, nothing else.`
+      instructions = `You are a writing assistant. Make the given text more concise by removing unnecessary words while keeping the meaning. ${preserveMarkdown} Only output the reduced text, nothing else.`
       maxOutputTokens = 300
       break
     case 'simplify':
-      system = `You are a writing assistant. Simplify the given text to make it easier to understand, using simpler words and shorter sentences. ${preserveMarkdown} Only output the simplified text, nothing else.`
+      instructions = `You are a writing assistant. Simplify the given text to make it easier to understand, using simpler words and shorter sentences. ${preserveMarkdown} Only output the simplified text, nothing else.`
       maxOutputTokens = 400
       break
     case 'summarize':
-      system = 'You are a writing assistant. Summarize the given text concisely while keeping the key points. Only output the summary, nothing else.'
+      instructions = 'You are a writing assistant. Summarize the given text concisely while keeping the key points. Only output the summary, nothing else.'
       maxOutputTokens = 200
       break
     case 'translate':
-      system = `You are a writing assistant. Translate the given text to ${language || 'English'}. ${preserveMarkdown} Only output the translated text, nothing else.`
+      instructions = `You are a writing assistant. Translate the given text to ${language || 'English'}. ${preserveMarkdown} Only output the translated text, nothing else.`
       maxOutputTokens = 500
       break
     case 'continue':
     default:
-      system = `You are a writing assistant providing inline autocompletions.
+      instructions = `You are a writing assistant providing inline autocompletions.
 CRITICAL RULES:
 - Output ONLY the NEW text that comes AFTER the user's input
 - NEVER repeat any words from the end of the user's text
@@ -585,12 +587,14 @@ CRITICAL RULES:
       break
   }
 
-  return streamText({
-    model: gateway('anthropic/claude-haiku-4.5'),
-    system,
+  const result = streamText({
+    model: 'anthropic/claude-haiku-4.5',
+    instructions,
     prompt,
     maxOutputTokens
-  }).toTextStreamResponse()
+  })
+
+  return createTextStreamResponse({ stream: result.textStream })
 })
 ```
 

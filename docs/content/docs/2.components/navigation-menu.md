@@ -2,6 +2,10 @@
 title: NavigationMenu
 description: A list of links that can be displayed horizontally or vertically.
 category: navigation
+keywords:
+  - navbar
+  - menubar
+  - sidebar navigation
 links:
   - label: NavigationMenu
     icon: i-custom-reka-ui
@@ -238,6 +242,10 @@ Use the `orientation` prop to change the orientation of the NavigationMenu.
 
 ::note
 When orientation is `vertical`, an [Accordion](/docs/components/accordion) component is used to display each group. You can control the open state of each item using the `open` and `defaultOpen` properties and change the behavior using the [`collapsible`](/docs/components/accordion#collapsible) and [`type`](/docs/components/accordion#multiple) props.
+::
+
+::note
+When orientation is `vertical` and the menu is not `collapsed`, children are rendered recursively as items, so `ui.link` styles them. `ui.childLink` only applies to the `content` displayed in `horizontal` orientation and to the [popover](#with-popover-in-items) when `collapsed`.
 ::
 
 ::component-code
@@ -836,6 +844,92 @@ external:
 externalTypes:
   - NavigationMenuItem[]
 props:
+  arrow: true
+  contentOrientation: 'vertical'
+  items:
+    - label: Guide
+      icon: i-lucide-book-open
+      to: /docs/getting-started
+      children:
+        - label: Introduction
+          description: Fully styled and customizable components for Nuxt.
+          icon: i-lucide-house
+        - label: Installation
+          description: Learn how to install and configure Nuxt UI in your application.
+          icon: i-lucide-cloud-download
+        - label: 'Icons'
+          icon: 'i-lucide-smile'
+          description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
+    - label: Composables
+      icon: i-lucide-database
+      to: /docs/composables
+      children:
+        - label: defineShortcuts
+          icon: i-lucide-file-text
+          description: Define shortcuts for your application.
+          to: /docs/composables/define-shortcuts
+        - label: useOverlay
+          icon: i-lucide-file-text
+          description: Display a modal/slideover within your application.
+          to: /docs/composables/use-overlay
+        - label: useToast
+          icon: i-lucide-file-text
+          description: Display a toast within your application.
+          to: /docs/composables/use-toast
+    - label: Components
+      icon: i-lucide-box
+      to: /docs/components
+      active: true
+      children:
+        - label: Link
+          icon: i-lucide-file-text
+          description: Use NuxtLink with superpowers.
+          to: /docs/components/link
+        - label: Modal
+          icon: i-lucide-file-text
+          description: Display a modal within your application.
+          to: /docs/components/modal
+        - label: NavigationMenu
+          icon: i-lucide-file-text
+          description: Display a list of links.
+          to: /docs/components/navigation-menu
+        - label: Pagination
+          icon: i-lucide-file-text
+          description: Display a list of pages.
+          to: /docs/components/pagination
+  class: 'w-full justify-center'
+---
+::
+
+### Viewport :badge{label="Soon" class="align-text-top"}
+
+Use the `viewport` prop to control how the NavigationMenu viewport is rendered, like its `align` for example.
+
+::warning
+This prop only works when `orientation` is `horizontal` and `content-orientation` is `vertical`.
+::
+
+::component-code
+---
+collapse: true
+prettier: true
+ignore:
+  - items
+  - arrow
+  - contentOrientation
+  - class
+external:
+  - items
+externalTypes:
+  - NavigationMenuItem[]
+items:
+  viewport.align:
+    - start
+    - center
+    - end
+props:
+  viewport:
+    align: start
   arrow: true
   contentOrientation: 'vertical'
   items:

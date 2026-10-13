@@ -38,7 +38,7 @@ const items = computed(() => {
       variant="subtle"
       :trailing-icon="appConfig.ui.icons.chevronDown"
       size="xs"
-      class="-mb-[6px] font-semibold rounded-full truncate"
+      class="-mb-[6px] font-semibold rounded-xl truncate"
       :class="[open && 'bg-primary/15']"
       :ui="{
         trailingIcon: ['transition-transform duration-200', open ? 'rotate-180' : undefined].filter(Boolean).join(' ')

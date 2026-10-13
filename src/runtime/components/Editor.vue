@@ -29,10 +29,11 @@ export interface EditorProps<T extends Content = Content, H extends EditorCustom
   contentType?: EditorContentType
   /**
    * The starter kit options to configure the editor.
+   * Set to `false` for a plain-text editor: keeps the essential nodes (paragraph, text, history) and disables all rich-text formatting.
    * @defaultValue { horizontalRule: false, link: { openOnClick: false }, dropcursor: { color: 'var(--ui-primary)', width: 2 } }
    * @see https://tiptap.dev/docs/editor/extensions/functionality/starterkit
    */
-  starterKit?: Partial<StarterKitOptions>
+  starterKit?: boolean | Partial<StarterKitOptions>
   /**
    * The placeholder text to show in empty paragraphs. Can be a string or PlaceholderOptions from `@tiptap/extension-placeholder`.
    * @defaultValue { showOnlyWhenEditable: false, showOnlyCurrent: true, mode: 'everyLine' }
@@ -87,7 +88,7 @@ export interface EditorSlots<H extends EditorCustomHandlers = EditorCustomHandle
 <script setup lang="ts" generic="T extends Content, H extends EditorCustomHandlers">
 import { computed, provide, useAttrs, watch } from 'vue'
 import { defu } from 'defu'
-import { Primitive, useForwardProps } from 'reka-ui'
+import { Primitive } from 'reka-ui'
 import { mergeAttributes } from '@tiptap/core'
 import Code from '@tiptap/extension-code'
 import HorizontalRule from '@tiptap/extension-horizontal-rule'
@@ -99,25 +100,31 @@ import StarterKit from '@tiptap/starter-kit'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
+import { useForwardProps } from '../composables/useForwardProps'
+import { omit } from '../utils'
 import { createHandlers } from '../utils/editor'
 import { tv } from '../utils/tv'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<EditorProps<T, H>>(), {
+const _props = withDefaults(defineProps<EditorProps<T, H>>(), {
   image: true,
-  mention: true
+  mention: true,
+  starterKit: true
 })
 const emits = defineEmits<EditorEmits<T>>()
+
 defineSlots<EditorSlots<H>>()
+
+const props = useComponentProps<EditorProps<T, H>>('editor', _props)
 
 const attrs = useAttrs()
 
 const appConfig = useAppConfig() as Editor['AppConfig']
-const uiProp = useComponentUI('editor', props)
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editor || {}) })({
+// eslint-disable-next-line vue/no-dupe-keys
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.editor || {}) })({
   placeholderMode: typeof props.placeholder === 'object' ? props.placeholder.mode : undefined
 }))
 
@@ -128,22 +135,52 @@ const editorProps = computed(() => defu(props.editorProps, {
     autocomplete: 'off',
     autocorrect: 'off',
     autocapitalize: 'off',
-    ...attrs,
-    class: ui.value.base({ class: uiProp.value?.base })
+    ...omit(attrs, ['data-slot']),
+    class: ui.value.base({ class: props.ui?.base })
   }
 } as EditorOptions['editorProps']))
+// eslint-disable-next-line vue/no-dupe-keys
 const contentType = computed(() => props.contentType || (typeof props.modelValue === 'string' ? 'html' : 'json'))
-const starterKit = computed(() => defu(props.starterKit, {
-  code: false,
-  horizontalRule: false,
-  dropcursor: {
-    color: 'var(--ui-primary)',
-    width: 2
-  },
-  link: {
-    openOnClick: false
-  }
-} as Partial<StarterKitOptions>))
+// eslint-disable-next-line vue/no-dupe-keys
+const starterKit = computed(() => {
+  const options: Partial<StarterKitOptions> = typeof props.starterKit === 'boolean' ? {} : (props.starterKit ?? {})
+
+  // When disabled, keep a plain-text editor: document, paragraph, text, hard break and history remain, all formatting is turned off
+  const plainText: Partial<StarterKitOptions> = props.starterKit === false
+    ? {
+        blockquote: false,
+        bold: false,
+        bulletList: false,
+        code: false,
+        codeBlock: false,
+        dropcursor: false,
+        gapcursor: false,
+        heading: false,
+        horizontalRule: false,
+        italic: false,
+        listItem: false,
+        listKeymap: false,
+        link: false,
+        orderedList: false,
+        strike: false,
+        underline: false,
+        trailingNode: false
+      }
+    : {}
+
+  return defu(options, plainText, {
+    code: false,
+    horizontalRule: false,
+    dropcursor: {
+      color: 'var(--ui-primary)',
+      width: 2
+    },
+    link: {
+      openOnClick: false
+    }
+  } as Partial<StarterKitOptions>)
+})
+// eslint-disable-next-line vue/no-dupe-keys
 const placeholder = computed(() => {
   const options = typeof props.placeholder === 'string' ? { placeholder: props.placeholder } : props.placeholder
   const { mode, ...rest } = options || {}
@@ -153,12 +190,15 @@ const placeholder = computed(() => {
     showOnlyCurrent: true
   } as Partial<PlaceholderOptions>)
 })
+// eslint-disable-next-line vue/no-dupe-keys
 const markdown = computed(() => defu(props.markdown, {
   markedOptions: {
     gfm: true
   }
 } as Partial<MarkdownExtensionOptions>))
+// eslint-disable-next-line vue/no-dupe-keys
 const image = computed(() => typeof props.image === 'boolean' ? {} : props.image)
+// eslint-disable-next-line vue/no-dupe-keys
 const mention = computed(() => defu(typeof props.mention === 'boolean' ? {} : props.mention, {
   HTMLAttributes: {
     class: 'mention'
@@ -178,10 +218,10 @@ const mention = computed(() => defu(typeof props.mention === 'boolean' ? {} : pr
 const extensions = computed(() => [
   contentType.value === 'markdown' && Markdown.configure(markdown.value),
   StarterKit.configure(starterKit.value),
-  Code.extend({
+  props.starterKit !== false && Code.extend({
     excludes: 'code'
   }),
-  HorizontalRule.extend({
+  props.starterKit !== false && HorizontalRule.extend({
     renderHTML() {
       return [
         'div',
@@ -208,7 +248,11 @@ const editor = useEditor({
       editor.view.dispatch(editor.state.tr)
     }
   },
-  onUpdate: ({ editor }) => {
+  onUpdate: ({ editor, transaction, appendedTransactions }) => {
+    if (!transaction.docChanged && !appendedTransactions.some(tr => tr.docChanged)) {
+      return
+    }
+
     let value
     try {
       if (contentType.value === 'html') {
@@ -259,6 +303,7 @@ watch(() => props.modelValue, (newVal) => {
   }
 })
 
+// eslint-disable-next-line vue/no-dupe-keys
 const handlers = computed(() => ({
   ...createHandlers(),
   ...props.handlers
@@ -272,7 +317,7 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <template v-if="editor">
       <slot :editor="editor" :handlers="handlers" />
 
@@ -280,7 +325,7 @@ defineExpose({
         role="presentation"
         :editor="editor"
         data-slot="content"
-        :class="ui.content({ class: uiProp?.content })"
+        :class="ui.content({ class: props.ui?.content })"
       />
     </template>
   </Primitive>

@@ -1,7 +1,8 @@
 ---
-title: CodeCollapse
+title: ProseCodeCollapse
 description: 'Make long code blocks collapsible to save space and improve readability.'
 category: components
+navigation.title: CodeCollapse
 links:
   - label: GitHub
     icon: i-simple-icons-github

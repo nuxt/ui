@@ -1,4 +1,4 @@
-import type { Messages } from '../types'
+import type { Messages } from '../types/locale'
 import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
@@ -16,23 +16,36 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Zatvoriť'
     },
+    breadcrumb: {
+      label: 'navigačná cesta'
+    },
     calendar: {
+      label: 'Dátum udalosti',
+      monthPicker: 'Výber mesiaca',
       nextMonth: 'Nasledujúci mesiac',
       nextYear: 'Nasledujúci rok',
       prevMonth: 'Predchádzajúci mesiac',
-      prevYear: 'Predchádzajúci rok'
+      prevYear: 'Predchádzajúci rok',
+      yearPicker: 'Výber roka'
     },
     carousel: {
       dots: 'Vyberte snímku na zobrazenie',
       goto: 'Prejsť na {slide}',
       next: 'Nasledujúci',
-      prev: 'Predchádzajúci'
+      prev: 'Predchádzajúci',
+      roledescription: 'karusel',
+      slide: 'snímka'
+    },
+    chatMessages: {
+      autoScroll: 'Posunúť nadol'
     },
     chatPrompt: {
       placeholder: 'Tu napíšte svoje správu…'
     },
     chatPromptSubmit: {
-      label: 'Odoslať'
+      label: 'Odoslať',
+      reload: 'Skúsiť znova',
+      stop: 'Zastaviť generovanie'
     },
     chatReasoning: {
       thinking: 'Premýšľa…',
@@ -51,10 +64,12 @@ export default defineLocale<Messages>({
       close: 'Zavrieť',
       noData: 'Žiadne dáta',
       noMatch: 'Žiadna zhoda',
-      placeholder: 'Zadajte príkaz alebo vyhľadajte…'
+      placeholder: 'Zadajte príkaz alebo vyhľadajte…',
+      results: 'Výsledky'
     },
     contentSearch: {
       links: 'Odkazy',
+      search: 'Výsledky',
       theme: 'Farebný režim'
     },
     contentSearchButton: {
@@ -81,6 +96,9 @@ export default defineLocale<Messages>({
       close: 'Zatvoriť bočný panel',
       open: 'Otvoriť bočný panel'
     },
+    drawer: {
+      close: 'Zatvoriť'
+    },
     error: {
       clear: 'Späť na domovskú stránku'
     },
@@ -91,17 +109,55 @@ export default defineLocale<Messages>({
       close: 'Zatvoriť menu',
       open: 'Otvoriť menu'
     },
+    inputDate: {
+      day: 'deň',
+      dayPeriod: 'AM/PM',
+      era: 'letopočet',
+      hour: 'hodina',
+      minute: 'minúta',
+      month: 'mesiac',
+      second: 'sekunda',
+      timeZoneName: 'časové pásmo',
+      year: 'rok'
+    },
     inputMenu: {
       create: 'Vytvoriť "{label}"',
       noData: 'Žiadne dáta',
-      noMatch: 'Žiadna zhoda'
+      noMatch: 'Žiadna zhoda',
+      trigger: 'Zobraziť možnosti'
     },
     inputNumber: {
       decrement: 'Znížiť',
-      increment: 'Zvýšiť'
+      increment: 'Zvýšiť',
+      roledescription: 'číselné pole'
+    },
+    inputRating: {
+      rate: 'Ohodnotiť na {value} z {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'hodina',
+      minute: 'minúta',
+      second: 'sekunda',
+      timeZoneName: 'časové pásmo'
+    },
+    listbox: {
+      noData: 'Žiadne dáta',
+      noMatch: 'Žiadna zhoda',
+      search: 'Hľadať…'
     },
     modal: {
       close: 'Zatvoriť'
+    },
+    pagination: {
+      first: 'Prvá stránka',
+      last: 'Posledná stránka',
+      next: 'Ďalšia stránka',
+      page: 'Stránka {page}',
+      prev: 'Predchádzajúca stránka'
+    },
+    pinInput: {
+      input: 'PIN kód, znak {index} z {length}'
     },
     pricingTable: {
       caption: 'Porovnanie cien'
@@ -135,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: 'Žiadna zhoda',
       search: 'Hľadať…'
     },
+    skeleton: {
+      label: 'načítava sa'
+    },
     slideover: {
       close: 'Zatvoriť'
+    },
+    slider: {
+      max: 'Maximum',
+      min: 'Minimum',
+      thumb: 'Posúvač',
+      value: 'Hodnota {index} z {total}'
+    },
+    stepper: {
+      label: 'priebeh'
     },
     table: {
       noData: 'Žiadne dáta'
     },
     toast: {
       close: 'Zatvoriť'
+    },
+    toaster: {
+      label: 'Oznámenie',
+      viewport: 'Oznámenia ({hotkey})'
     }
   }
 })

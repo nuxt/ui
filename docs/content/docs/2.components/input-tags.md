@@ -2,6 +2,9 @@
 title: InputTags
 description: An input element that displays interactive tags.
 category: form
+keywords:
+  - chips input
+  - multi value
 links:
   - label: InputTags
     icon: i-custom-reka-ui

@@ -2,7 +2,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/form'
-import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId, InferInput, InferOutput, FormData } from '../types/form'
+import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId, FormState, InferInput, InferOutput, FormData } from '../types/form'
 import type { FormHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
@@ -13,7 +13,7 @@ export type FormProps<S extends FormSchema, T extends boolean = true, N extends 
   /** Schema to validate the form state. Supports Standard Schema objects, Yup, Joi, and Superstructs. */
   schema?: S
   /** An object representing the current state of the form. */
-  state?: N extends false ? Partial<InferInput<S>> : never
+  state?: N extends false ? FormState<S> : never
   /**
    * Custom validation function to validate the form state.
    * @param state - The current state of the form.
@@ -32,10 +32,10 @@ export type FormProps<S extends FormSchema, T extends boolean = true, N extends 
   disabled?: boolean
 
   /**
-   * Path of the form's state within it's parent form.
-   * Used for nesting forms. Only available if `nested` is true.
+   * The `name` attribute of the form element.
+   * For nested forms (`nested` is true), this is also used as the path of the form's state within its parent form.
    */
-  name?: N extends true ? string : never
+  name?: string
 
   /**
    * Delay in milliseconds before validating the form on input events.
@@ -62,7 +62,7 @@ export type FormProps<S extends FormSchema, T extends boolean = true, N extends 
   loadingAuto?: boolean
   class?: any
   ui?: { base?: any }
-  onSubmit?: ((event: FormSubmitEvent<FormData<S, T>>) => void | Promise<void>) | (() => void | Promise<void>)
+  onSubmit?: ((event: FormSubmitEvent<FormData<S, T>>) => void) | (() => void)
 } & /** @vue-ignore */ Omit<FormHTMLAttributes, 'name'>
 
 export interface FormEmits<S extends FormSchema, T extends boolean = true> {
@@ -71,24 +71,24 @@ export interface FormEmits<S extends FormSchema, T extends boolean = true> {
 }
 
 export interface FormSlots {
-  default?(props: { errors: FormError[], loading: boolean }): VNode[]
+  default?(props: { errors: FormErrorWithId[], loading: boolean }): VNode[]
 }
 </script>
 
 <script lang="ts" setup generic="S extends FormSchema, T extends boolean = true, N extends boolean = false">
-import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly, reactive, useTemplateRef } from 'vue'
+import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly, reactive, useTemplateRef, unref, toRaw } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey, formErrorsInjectionKey, formStateInjectionKey } from '../composables/useFormField'
 import { tv } from '../utils/tv'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { validateSchema, getAtPath, setAtPath } from '../utils/form'
 import { FormValidationException } from '../types/form'
 
 type I = InferInput<S>
 type O = InferOutput<S>
 
-const props = withDefaults(defineProps<FormProps<S, T, N>>(), {
+const _props = withDefaults(defineProps<FormProps<S, T, N>>(), {
   validateOn() {
     return ['input', 'blur', 'change'] as FormInputEvents[]
   },
@@ -100,11 +100,12 @@ const props = withDefaults(defineProps<FormProps<S, T, N>>(), {
 const emits = defineEmits<FormEmits<S, T>>()
 defineSlots<FormSlots>()
 
+const props = useComponentProps<FormProps<S, T, N>>('form', _props)
+
 const appConfig = useAppConfig() as FormConfig['AppConfig']
-const uiProp = useComponentUI('form', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.form || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.form || {}) }))
 
 const formId = props.id ?? useId() as string
 const formRef = useTemplateRef('formRef')
@@ -117,6 +118,7 @@ const parentBus = props.nested === true && inject(
 )
 
 const parentState = props.nested === true ? inject(formStateInjectionKey, undefined) : undefined
+// eslint-disable-next-line vue/no-dupe-keys
 const state = computed(() => {
   if (parentState?.value) {
     return props.name ? getAtPath(parentState.value, props.name) : parentState.value
@@ -127,12 +129,12 @@ const state = computed(() => {
 provide(formBusInjectionKey, bus)
 provide(formStateInjectionKey, state)
 
-const nestedForms = ref<Map<string | number, { validate: typeof _validate, name?: string, api: Form<any> }>>(new Map())
+const nestedForms = ref<Map<string | number, { validate: typeof _validate, clearDirty: () => void, name?: string, api: Form<any> }>>(new Map())
 
 onMounted(async () => {
   if (parentBus) {
     await nextTick()
-    parentBus.emit({ type: 'attach', validate: _validate, formId, name: props.name, api })
+    parentBus.emit({ type: 'attach', validate: _validate, clearDirty, formId, name: props.name, api })
   }
 })
 
@@ -146,28 +148,45 @@ onUnmounted(() => {
 onMounted(async () => {
   bus.on(async (event) => {
     if (event.type === 'attach') {
-      nestedForms.value.set(event.formId, { validate: event.validate, name: event.name, api: event.api as any })
-    } else if (event.type === 'detach') {
+      nestedForms.value.set(event.formId, { validate: event.validate, clearDirty: event.clearDirty, name: event.name, api: event.api as any })
+      return
+    }
+
+    if (event.type === 'detach') {
       nestedForms.value.delete(event.formId)
-    } else if (props.validateOn?.includes(event.type) && !loading.value) {
-      if (event.type !== 'input') {
-        await _validate({ name: event.name, silent: true, nested: false })
-      } else if (event.eager || blurredFields.has(event.name)) {
-        await _validate({ name: event.name, silent: true, nested: false })
+      return
+    }
+
+    if (event.track !== false) {
+      if (event.type === 'blur') {
+        blurredFields.add(event.name)
       }
-    }
 
-    if (event.type === 'blur') {
-      blurredFields.add(event.name)
-    }
+      if (event.type === 'change' || event.type === 'input') {
+        dirtyFields.add(event.name)
+        dirtyEpochs.set(event.name, epoch)
+      }
 
-    if (event.type === 'change' || event.type === 'input' || event.type === 'blur' || event.type === 'focus') {
+      if (event.type === 'input') {
+        inputEpochs.set(event.name, epoch)
+      }
+
       touchedFields.add(event.name)
     }
 
-    if (event.type === 'change' || event.type === 'input') {
-      dirtyFields.add(event.name)
-    }
+    if (event.validate === false || !props.validateOn?.includes(event.type) || loading.value) return
+    if (event.type === 'input' && (inputEpochs.get(event.name) !== epoch || !(event.eager || blurredFields.has(event.name)))) return
+
+    const run = (validationRuns.get(event.name) ?? 0) + 1
+    validationRuns.set(event.name, run)
+    const startEpoch = epoch
+
+    await _validate({
+      name: event.name,
+      silent: true,
+      nested: false,
+      isCurrent: () => validationRuns.get(event.name) === run && epoch === startEpoch
+    })
   })
 })
 
@@ -181,6 +200,23 @@ provide(formInputsInjectionKey, inputs as any)
 const dirtyFields: Set<keyof I> = reactive(new Set<keyof I>())
 const touchedFields: Set<keyof I> = reactive(new Set<keyof I>())
 const blurredFields: Set<keyof I> = reactive(new Set<keyof I>())
+
+// Bumped on every full validation (submit, `validate()`, a parent validating its nested forms):
+// input typed and field validations started before it are stale.
+let epoch = 0
+const inputEpochs = new Map<keyof I, number>()
+const validationRuns = new Map<keyof I, number>()
+const dirtyEpochs = new Map<keyof I, number>()
+
+function clearDirty() {
+  // Fields edited since the last full validation (during an async `onSubmit`) stay dirty
+  for (const field of dirtyFields) {
+    if (dirtyEpochs.get(field) !== epoch) dirtyFields.delete(field)
+  }
+  for (const form of nestedForms.value.values()) {
+    form.clearDirty()
+  }
+}
 
 function resolveErrorIds(errs: FormError[]): FormErrorWithId[] {
   return errs.map(err => ({
@@ -206,11 +242,12 @@ async function getErrors(): Promise<FormErrorWithId[]> {
   return resolveErrorIds(errs)
 }
 
-type ValidateOpts<Silent extends boolean, Transform extends boolean> = { name?: keyof I | (keyof I)[], silent?: Silent, nested?: boolean, transform?: Transform }
+type ValidateOpts<Silent extends boolean, Transform extends boolean> = { name?: keyof I | (keyof I)[], silent?: Silent, nested?: boolean, transform?: Transform, isCurrent?: () => boolean }
 async function _validate<T extends boolean>(opts: ValidateOpts<false, T>): Promise<FormData<S, T>>
 async function _validate<T extends boolean>(opts: ValidateOpts<true, T>): Promise<FormData<S, T> | false>
 async function _validate<T extends boolean>(opts: ValidateOpts<boolean, boolean> = { silent: false, nested: false, transform: false }): Promise<FormData<S, T> | false> {
   const names = opts.name && !Array.isArray(opts.name) ? [opts.name] : opts.name as (keyof O)[]
+  if (!names) epoch++
 
   // Validate nested forms if needed
   let nestedResults: any[] = []
@@ -231,31 +268,38 @@ async function _validate<T extends boolean>(opts: ValidateOpts<boolean, boolean>
 
   // Get all errors
   const currentErrors = await getErrors()
+  if (opts.isCurrent?.() === false) return false
+
   const allErrors = [...currentErrors, ...nestedErrors]
 
-  // Filter by field names if specified
+  // Only the targeted fields decide the result, errors on other fields are kept as is
+  let failedErrors = allErrors
   if (names) {
-    errors.value = filterErrorsByNames(allErrors, names)
+    const matchesNames = nameMatcher(names)
+    failedErrors = allErrors.filter(matchesNames)
+    errors.value = [...errors.value.filter(error => !matchesNames(error)), ...failedErrors]
   } else {
     errors.value = allErrors
   }
 
   // Handle validation failure
-  if (errors.value?.length) {
+  if (failedErrors.length) {
     if (opts.silent) return false
-    throw new FormValidationException(formId, errors.value)
+    throw new FormValidationException(formId, failedErrors)
   }
 
   // Apply transformations
   if (opts.transform) {
+    let output = transformedState.value
     nestedResults.forEach((result) => {
       if (result.name) {
         setAtPath(transformedState.value, result.name, result.output)
       } else {
-        Object.assign(transformedState.value, result.output)
+        // A parent without a schema has no output yet, merge into a copy of the state
+        output = Object.assign(output ?? { ...toRaw(state.value) }, result.output)
       }
     })
-    return transformedState.value ?? state.value
+    return output ?? state.value
   }
 
   return state.value as FormData<S, T>
@@ -265,14 +309,14 @@ const loading = ref(false)
 provide(formLoadingInjectionKey, readonly(loading))
 
 async function onSubmitWrapper(payload: Event) {
-  loading.value = props.loadingAuto && true
+  loading.value = !!props.loadingAuto
 
   const event = payload as FormSubmitEvent<FormData<S, T>>
 
   try {
     event.data = await _validate({ nested: true, transform: props.transform })
     await props.onSubmit?.(event)
-    dirtyFields.clear()
+    clearDirty()
   } catch (error) {
     if (!(error instanceof FormValidationException)) {
       throw error
@@ -288,6 +332,7 @@ async function onSubmitWrapper(payload: Event) {
   }
 }
 
+// eslint-disable-next-line vue/no-dupe-keys
 const disabled = computed(() => props.disabled || loading.value)
 
 provide(formOptionsInjectionKey, computed(() => ({
@@ -348,22 +393,17 @@ function getNestedTarget(target: keyof I | string | RegExp | undefined, formPath
   return target
 }
 
-function filterErrorsByNames(allErrors: FormErrorWithId[], names: (keyof O)[]): FormErrorWithId[] {
+function nameMatcher(names: (keyof O)[]): (error: FormErrorWithId) => boolean {
   const nameSet = new Set(names)
   const patterns = names
     .map(name => inputs.value?.[name]?.pattern)
     .filter(Boolean) as RegExp[]
 
-  const matchesNames = (error: FormErrorWithId): boolean => {
+  return (error) => {
     if (!error.name) return false
     if (nameSet.has(error.name)) return true
     return patterns.some(pattern => pattern.test(error.name!))
   }
-
-  const keepErrors = errors.value.filter(error => !matchesNames(error))
-  const newErrors = allErrors.filter(matchesNames)
-
-  return [...keepErrors, ...newErrors]
 }
 
 function filterErrorsByTarget(currentErrors: FormErrorWithId[], target: keyof I | string | RegExp): FormErrorWithId[] {
@@ -436,7 +476,9 @@ const api = {
     // Clear from nested forms and collect remaining errors
     const nestedErrors: FormError[] = []
     for (const form of nestedForms.value.values()) {
-      if (matchesTarget(name, form.name)) form.api.clear()
+      // A RegExp is written against the parent's prefixed names, so it cannot be
+      // re-tested inside the nested form and clears it whole.
+      if (matchesTarget(name, form.name)) form.api.clear(name instanceof RegExp ? undefined : getNestedTarget(name, form.name || ''))
       nestedErrors.push(...getFormErrors(form as any))
     }
 
@@ -445,7 +487,7 @@ const api = {
 
   disabled,
   loading,
-  dirty: computed(() => !!dirtyFields.size),
+  dirty: computed(() => !!dirtyFields.size || Array.from(nestedForms.value.values()).some(form => unref(form.api.dirty))),
   dirtyFields: readonly(dirtyFields),
   blurredFields: readonly(blurredFields),
   touchedFields: readonly(touchedFields)
@@ -459,7 +501,9 @@ defineExpose(api)
     :is="parentBus ? 'div' : 'form'"
     :id="formId"
     ref="formRef"
-    :class="ui({ class: [uiProp?.base, props.class] })"
+    :name="parentBus ? undefined : props.name"
+    :method="parentBus ? undefined : 'post'"
+    :class="ui({ class: [props.ui?.base, props.class] })"
     @submit.prevent="onSubmitWrapper"
   >
     <slot :errors="errors" :loading="loading" />

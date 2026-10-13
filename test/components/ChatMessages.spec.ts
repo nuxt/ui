@@ -1,8 +1,9 @@
 import { describe, it, expect } from 'vitest'
+import { defineComponent, h, nextTick, ref, shallowRef, triggerRef } from 'vue'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
-import ChatMessages from '../../src/runtime/components/ChatMessages.vue'
+import ChatMessages, { type ChatMessagesSlots } from '../../src/runtime/components/ChatMessages.vue'
 
 describe('ChatMessages', () => {
   const statuses = ['ready', 'submitted', 'streaming', 'error'] as any
@@ -42,5 +43,119 @@ describe('ChatMessages', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  it('sets aria-label on the auto scroll button', async () => {
+    const Parent = defineComponent({
+      setup() {
+        return () => h('div', { style: 'overflow-y: auto' }, [h(ChatMessages, { ...props, shouldScrollToBottom: false })])
+      }
+    })
+
+    const wrapper = await mountSuspended(Parent, { attachTo: document.body })
+    Object.defineProperties(wrapper.element, {
+      scrollHeight: { value: 1000 },
+      clientHeight: { value: 100 }
+    })
+    wrapper.element.dispatchEvent(new Event('scroll'))
+    await nextTick()
+
+    const button = wrapper.find('[data-slot="autoScroll"]')
+    expect(button.attributes('aria-label')).toBe('Scroll to bottom')
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+
+    wrapper.unmount()
+  })
+
+  it('forwards content slot props together with `message`', async () => {
+    const messages = [
+      { id: 'm-1', role: 'user' as const, parts: [{ type: 'text' as const, text: 'a' }], metadata: { foo: 'bar' } },
+      { id: 'm-2', role: 'assistant' as const, parts: [{ type: 'text' as const, text: 'b' }] }
+    ]
+    const captured: Parameters<Exclude<ChatMessagesSlots['content'], undefined>>[0][] = []
+    await mountSuspended(ChatMessages, {
+      props: { messages },
+      slots: {
+        content: (slotProps) => {
+          captured.push(slotProps)
+          return 'x'
+        }
+      }
+    })
+
+    expect(captured).toHaveLength(2)
+    expect(captured[0]).toMatchObject({
+      id: 'm-1',
+      role: 'user',
+      parts: messages[0]!.parts,
+      metadata: { foo: 'bar' },
+      message: messages[0]
+    })
+    expect(captured[1]).toMatchObject({
+      id: 'm-2',
+      role: 'assistant',
+      parts: messages[1]!.parts,
+      message: messages[1]
+    })
+  })
+
+  it('hides the streaming indicator once the assistant message produces parts', async () => {
+    // Reproduces the `@ai-sdk/vue` reactivity model: messages live in a `shallowRef`
+    // and grow via in-place mutation + `triggerRef`, so neither the array nor the
+    // message objects ever change identity. When the server assigns the assistant
+    // message id, an empty assistant message is flushed before any content, so the
+    // indicator must appear then disappear as soon as parts stream in.
+    const messages = shallowRef<any[]>([
+      { id: 'u1', role: 'user', parts: [{ type: 'text', text: 'hi' }] },
+      { id: 'a1', role: 'assistant', parts: [] }
+    ])
+    // A separate reactive value bound to a prop, used only to force ChatMessages to
+    // re-render on each tick, mimicking how streamed content forces re-renders in a
+    // real app (dynamic slots / non-static prop references).
+    const tick = ref(0)
+
+    const Parent = defineComponent({
+      setup() {
+        return () => h(ChatMessages, { messages: messages.value, status: 'streaming', spacingOffset: tick.value })
+      }
+    })
+
+    const wrapper = await mountSuspended(Parent)
+
+    // Empty assistant message -> indicator visible.
+    expect(wrapper.find('[data-slot="indicator"]').exists()).toBe(true)
+
+    // Stream the first part in place + triggerRef, and force a re-render.
+    messages.value[1]!.parts.push({ type: 'text', text: 'Hello' })
+    triggerRef(messages)
+    tick.value++
+    await nextTick()
+
+    // A cached `computed` would stay stuck on its first `streaming` result here;
+    // the indicator must now be gone.
+    expect(wrapper.find('[data-slot="indicator"]').exists()).toBe(false)
+  })
+
+  it('forwards `message` to the actions slot', async () => {
+    const captured: Parameters<Exclude<ChatMessagesSlots['actions'], undefined>>[0][] = []
+    await mountSuspended(ChatMessages, {
+      props: {
+        ...props,
+        user: { actions: [{ icon: 'i-lucide-copy', label: 'Copy' }] },
+        assistant: { actions: [{ icon: 'i-lucide-copy', label: 'Copy' }] }
+      },
+      slots: {
+        actions: (slotProps) => {
+          captured.push(slotProps)
+          return 'x'
+        }
+      }
+    })
+
+    expect(captured.length).toBeGreaterThan(0)
+    for (const p of captured) {
+      expect(p).toHaveProperty('message')
+      expect(p).toHaveProperty('actions')
+    }
   })
 })

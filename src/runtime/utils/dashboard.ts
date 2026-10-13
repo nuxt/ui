@@ -2,7 +2,7 @@ import type { Ref } from 'vue'
 import { createContext } from 'reka-ui'
 import type { UseResizableProps } from '../composables/useResizable'
 
-export interface DashboardContext extends Pick<UseResizableProps, 'storage' | 'storageKey' | 'persistent' | 'unit'> {
+export interface DashboardContext extends Pick<UseResizableProps, 'storage' | 'storageKey' | 'storageOptions' | 'persistent' | 'unit'> {
   sidebarOpen?: Ref<boolean>
   sidebarCollapsed?: Ref<boolean>
   toggleSearch?: () => void

@@ -1,6 +1,6 @@
 export default {
   slots: {
-    root: 'relative',
+    root: 'relative outline-primary/25 focus-visible:outline-3',
     viewport: 'relative flex',
     item: ''
   },
@@ -15,6 +15,11 @@ export default {
         root: 'overflow-x-auto overflow-y-hidden',
         viewport: 'flex-row',
         item: ''
+      }
+    },
+    externalScroll: {
+      true: {
+        root: 'overflow-visible'
       }
     }
   }

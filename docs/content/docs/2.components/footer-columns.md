@@ -2,6 +2,10 @@
 title: FooterColumns
 description: 'A list of links as columns to display in your Footer.'
 category: navigation
+keywords:
+  - footer links
+  - sitemap
+  - columns
 links:
   - label: GitHub
     icon: i-simple-icons-github
@@ -50,6 +54,10 @@ class: 'p-8'
 props:
   class: 'w-full'
 ---
+::
+
+::tip
+The column label is rendered as an `h3` by default. Use the `as` prop with an object to change it, for example `:as="{ label: 'h4' }"`{lang="ts-type"}. You can also set the root element this way: `:as="{ root: 'div', label: 'h4' }"`{lang="ts-type"}.
 ::
 
 ## API

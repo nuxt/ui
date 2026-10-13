@@ -1,6 +1,5 @@
 ---
-title: Header
-description: 'A responsive header component.'
+description: 'A responsive header for your site navigation.'
 category: layout
 links:
   - label: GitHub

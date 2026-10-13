@@ -72,6 +72,7 @@ const columns: TableColumn<Payment>[] = [{
 
 <template>
   <UTable
+    sticky
     virtualize
     :data="data"
     :columns="columns"

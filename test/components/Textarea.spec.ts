@@ -36,7 +36,9 @@ describe('Textarea', () => {
     ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-lucide-loader' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { variant } }]),
+    ...variants.map((variant: string) => [`with primary variant ${variant} highlight`, { props: { variant, highlight: true } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { variant, color: 'neutral' } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant} highlight`, { props: { variant, color: 'neutral', highlight: true } }]),
     ['with ariaLabel', { attrs: { 'aria-label': 'Aria label' } }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'w-48' } }],
@@ -67,7 +69,11 @@ describe('Textarea', () => {
       ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 }],
       ['with .lazy modifier', { props: { modelModifiers: { lazy: true } } }, { input: 'input', expected: 'input' }],
       ['with .nullable modifier', { props: { modelModifiers: { nullable: true } } }, { input: '', expected: null }],
-      ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: '', expected: undefined }]
+      ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: '', expected: undefined }],
+      ['with .number and .nullable modifiers', { props: { modelModifiers: { number: true, nullable: true } } }, { input: '0', expected: 0 }],
+      ['with .number and .optional modifiers', { props: { modelModifiers: { number: true, optional: true } } }, { input: '0', expected: 0 }],
+      ['with .number and .nullable modifiers on an empty value', { props: { modelModifiers: { number: true, nullable: true } } }, { input: '', expected: null }],
+      ['with .number and .optional modifiers on an empty value', { props: { modelModifiers: { number: true, optional: true } } }, { input: '', expected: undefined }]
     ],
     '%s works',
     async (_, options, spec) => {

@@ -7,6 +7,7 @@ import theme from '#build/ui/avatar'
 
 describe('Avatar', () => {
   const sizes = Object.keys(theme.variants.size) as any
+  const colors = Object.keys(theme.variants.color) as any
 
   renderEach(Avatar, [
     // Props
@@ -16,6 +17,7 @@ describe('Avatar', () => {
     ['with icon', { props: { icon: 'i-lucide-image' } }],
     ['with chip', { props: { chip: { text: '1' } } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { src: 'https://github.com/benjamincanac.png', size } }]),
+    ...colors.map((color: string) => [`with color ${color}`, { props: { alt: 'Benjamin Canac', color } }]),
     ['with as', { props: { as: 'section' } }],
     ['with as (object)', { props: { src: 'https://github.com/benjamincanac.png', as: { root: 'section', img: 'p' } } }],
     ['with as (partial object)', { props: { src: 'https://github.com/benjamincanac.png', as: { img: 'p' } } }],

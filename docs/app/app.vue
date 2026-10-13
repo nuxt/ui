@@ -1,47 +1,84 @@
 <script setup lang="ts">
-import { withoutTrailingSlash } from 'ufo'
-import colors from 'tailwindcss/colors'
+import type { ContentNavigationItem } from '@nuxt/content'
 
 const route = useRoute()
-const appConfig = useAppConfig()
-const colorMode = useColorMode()
-const { style, link } = useTheme()
 
-const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs', ['framework', 'category', 'description']))
-const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs', {
-  ignoredTags: ['style']
-}), {
-  server: false
+const { open: chatOpen } = useChat()
+const chatSeen = ref(false)
+watch(chatOpen, (value) => {
+  if (value) chatSeen.value = true
+}, { immediate: true })
+
+// ⌘I lives here rather than in Chat.vue: the chat only mounts once it has been
+// opened, so a binding inside it would never exist on the fresh load where the
+// command palette still advertises the shortcut.
+const { open: searchOpen } = useContentSearch()
+
+defineShortcuts({
+  meta_i: {
+    handler: () => {
+      if (searchOpen.value) {
+        searchOpen.value = false
+        chatOpen.value = true
+      } else {
+        chatOpen.value = !chatOpen.value
+      }
+    },
+    usingInput: true
+  }
 })
 
-const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
+const appConfig = useAppConfig()
+const { style, link, color } = useTheme()
+
+const colorMode = useColorMode()
+
+// Bare `d`, site-wide since the color mode button sits in the header on every
+// page. defineShortcuts disables single-key bindings while an input or a
+// contenteditable is focused, so it never eats a typed 'd'. Reads `.value`,
+// not `.preference`, so toggling out of `system` flips away from what's
+// currently on screen rather than to it.
+// Not in the example iframes: those pin their mode from ?theme= to match
+// the page embedding them.
+defineShortcuts({
+  d: () => {
+    if (route.path.startsWith('/examples')) return
+    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+  }
+})
+
+const { data: navigation } = await useFetch<ContentNavigationItem[]>('/api/navigation.json')
 
 useHead({
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     { key: 'theme-color', name: 'theme-color', content: color }
   ],
-  link: computed(() => [
-    // { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
-    { rel: 'canonical', href: `https://ui.nuxt.com${withoutTrailingSlash(route.path)}` },
-    ...link.value
-  ]),
-  style,
-  htmlAttrs: {
-    lang: 'en'
-  }
+  link,
+  style
 })
 
-useServerSeoMeta({
-  ogSiteName: 'Nuxt UI',
-  twitterCard: 'summary_large_image'
-})
+if (import.meta.server) {
+  useSeoMeta({
+    ogSiteName: 'Nuxt UI',
+    ogType: 'website',
+    twitterCard: 'summary_large_image'
+  })
+
+  useSchemaOrg([
+    defineWebSite({
+      name: useSiteConfig().name
+    })
+  ])
+}
 
 useFaviconFromTheme()
 
 const { rootNavigation, navigationByFramework } = useNavigation(navigation)
 
 provide('navigation', rootNavigation)
+
+const showLayout = computed(() => !route.path.startsWith('/examples') && !route.path.startsWith('/theme'))
 </script>
 
 <template>
@@ -50,7 +87,7 @@ provide('navigation', rootNavigation)
 
     <div class="flex">
       <div class="flex-1 min-w-0" :class="[route.path.startsWith('/docs/') && 'root']">
-        <template v-if="!route.path.startsWith('/examples')">
+        <template v-if="showLayout">
           <!-- <Banner /> -->
 
           <Header />
@@ -60,18 +97,19 @@ provide('navigation', rootNavigation)
           <NuxtPage />
         </NuxtLayout>
 
-        <template v-if="!route.path.startsWith('/examples')">
+        <template v-if="showLayout">
           <Footer />
-
-          <ClientOnly>
-            <Search :files="files" :navigation="navigationByFramework" />
-          </ClientOnly>
         </template>
       </div>
 
       <template v-if="!route.path.startsWith('/examples')">
         <ClientOnly>
-          <Chat />
+          <!-- mounted on first open (state persists, so a kept-open chat
+               remounts on load): the AI SDK and the chat UI stay out of the
+               entry chunk, which every plain docs visit can skip downloading -->
+          <LazyChat v-if="chatSeen" />
+
+          <Search :navigation="navigationByFramework" />
         </ClientOnly>
       </template>
     </div>

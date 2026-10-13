@@ -84,6 +84,15 @@ export interface LinkProps extends NuxtLinkProps, /** @vue-ignore */ Omit<Button
   custom?: boolean
   /** When `true`, only styles from `class`, `activeClass`, and `inactiveClass` will be applied. */
   raw?: boolean
+  /**
+   * Control i18n auto-localization when `@nuxtjs/i18n` is installed.
+   * - `undefined` / `true` (default): auto-localizes to the current locale using `$localePath`.
+   *   Paths already carrying a locale prefix (from e.g. `switchLocalePath()`) are detected
+   *   and left untouched to prevent double-prefixing.
+   * - `false`: explicitly disables auto-localization.
+   * - `string`: localizes to a specific locale (e.g. `'fr'`).
+   */
+  locale?: boolean | string
   class?: any
 }
 
@@ -91,7 +100,7 @@ export interface LinkProps extends NuxtLinkProps, /** @vue-ignore */ Omit<Button
  * Link-related props that can be omitted from ButtonProps when link functionality is not needed.
  * Use this with `Omit<ButtonProps, LinkPropsKeys>` in components where buttons should not act as links.
  */
-export type LinkPropsKeys = 'to' | 'href' | 'target' | 'rel' | 'noRel' | 'external' | 'prefetch' | 'prefetchOn' | 'prefetchedClass' | 'noPrefetch' | 'trailingSlash' | 'replace' | 'ariaCurrentValue' | 'active' | 'activeClass' | 'exact' | 'exactQuery' | 'exactHash' | 'inactiveClass' | 'download' | 'ping' | 'referrerpolicy' | 'hreflang' | 'media'
+export type LinkPropsKeys = 'to' | 'href' | 'target' | 'rel' | 'noRel' | 'external' | 'prefetch' | 'prefetchOn' | 'prefetchedClass' | 'noPrefetch' | 'trailingSlash' | 'replace' | 'ariaCurrentValue' | 'active' | 'activeClass' | 'exact' | 'exactQuery' | 'exactHash' | 'inactiveClass' | 'locale' | 'download' | 'ping' | 'referrerpolicy' | 'hreflang' | 'media'
 
 export interface LinkSlots {
   default?(props: { active: boolean }): VNode[]
@@ -102,20 +111,25 @@ interface NuxtLinkDefaultSlotProps {
   rel: string | null
   target: '_blank' | '_parent' | '_self' | '_top' | (string & {}) | null
   isExternal: boolean
+  // exposed since Nuxt 4.5, which stopped prefetching `custom` links itself
+  prefetch?: (nuxtApp?: any) => Promise<void>
+  prefetched?: boolean
+  shouldPrefetch?: (mode: 'visibility' | 'interaction') => boolean
 }
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, getCurrentInstance, mergeProps, onMounted, onBeforeUnmount } from 'vue'
 import { isEqual } from 'ohash/utils'
 import { useForwardProps, Slot } from 'reka-ui'
 import { defu } from 'defu'
 import { hasProtocol } from 'ufo'
 import { reactiveOmit } from '@vueuse/core'
-import { useRoute, useAppConfig, useNuxtApp } from '#imports'
+import { useRoute, useAppConfig, useNuxtApp, onNuxtReady } from '#imports'
 import { mergeClasses } from '../utils'
 import { tv } from '../utils/tv'
 import { isPartiallyEqual } from '../utils/link'
+import { requestIdleCallback, cancelIdleCallback, observeIntersection } from '../utils/prefetch'
 import ULinkBase from './LinkBase.vue'
 
 defineOptions({ inheritAttrs: false })
@@ -124,7 +138,8 @@ const props = withDefaults(defineProps<LinkProps>(), {
   as: 'button',
   type: 'button',
   ariaCurrentValue: 'page',
-  active: undefined
+  active: undefined,
+  locale: undefined
 })
 defineSlots<LinkSlots>()
 
@@ -132,10 +147,10 @@ const route = useRoute()
 const appConfig = useAppConfig() as Link['AppConfig']
 const nuxtApp = useNuxtApp()
 
-const nuxtLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class'))
+const nuxtLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'locale', 'class'))
 
 const ui = computed(() => tv({
-  extend: tv(theme),
+  extend: theme,
   ...defu({
     variants: {
       active: {
@@ -150,21 +165,30 @@ const to = computed(() => {
   const path = props.to ?? props.href
   if (!path) return path
 
-  // Only localize string paths, leave route objects untouched to preserve state/params
   if (typeof path !== 'string') return path
 
-  // Skip external links and absolute URLs
   if (props.external || hasProtocol(path, { acceptRelative: true })) {
     return path
   }
 
-  // Use `$localePath` from `@nuxtjs/i18n` if available
-  const localePath = nuxtApp.$localePath as ((route: RouteLocationRaw, locale?: string) => string) | undefined
-  if (localePath) {
-    return localePath(path)
+  if (props.locale === false) {
+    return path
   }
 
-  return path
+  const localePath = nuxtApp.$localePath as ((route: RouteLocationRaw, locale?: string) => string) | undefined
+  if (!localePath) {
+    return path
+  }
+
+  const i18n = nuxtApp.$i18n as { localeCodes?: { value: string[] } } | undefined
+  const codes = i18n?.localeCodes?.value
+  if (codes?.length && new RegExp(`^/(${codes.join('|')})($|[/?#])`).test(path)) {
+    return path
+  }
+
+  const localizedPath = localePath(path, typeof props.locale === 'string' ? props.locale : undefined)
+
+  return localizedPath || path
 })
 
 const isInternalLink = computed(() => {
@@ -176,10 +200,25 @@ const isInternalLink = computed(() => {
   return true
 })
 
-const externalRel = computed(() => {
-  if (props.noRel) return null
-  if (props.rel) return props.rel
-  return 'noopener noreferrer'
+// NuxtLink strips `rel` from its slot props when rendered with `custom`, so
+// the prop is applied here for every branch instead of read from the slot.
+const rel = computed(() => {
+  // If noRel is explicitly set, return null
+  if (props.noRel) {
+    return null
+  }
+
+  // If rel is explicitly set, use it
+  if (props.rel !== undefined) {
+    return props.rel || null
+  }
+
+  // Default to "noopener noreferrer" for external links or links with target
+  if (!isInternalLink.value || (props.target && props.target !== '_self')) {
+    return 'noopener noreferrer'
+  }
+
+  return null
 })
 
 function isLinkActive({ route: linkRoute, isActive, isExactActive }: any = {}) {
@@ -212,15 +251,116 @@ function isLinkActive({ route: linkRoute, isActive, isExactActive }: any = {}) {
   return false
 }
 
-function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
+function resolveLinkClass({ route, isActive, isExactActive, prefetched }: any = {}) {
   const active = isLinkActive({ route, isActive, isExactActive })
+  const prefetchedClass = prefetched ? props.prefetchedClass : undefined
 
   if (props.raw) {
-    return [props.class, active ? props.activeClass : props.inactiveClass]
+    return [props.class, active ? props.activeClass : props.inactiveClass, prefetchedClass]
   }
 
-  return ui.value({ class: props.class, active, disabled: props.disabled })
+  return ui.value({ class: prefetchedClass ? [props.class, prefetchedClass] : props.class, active, disabled: props.disabled })
 }
+
+// Since Nuxt 4.5, NuxtLink no longer prefetches `custom` links itself and
+// exposes `prefetch` / `shouldPrefetch` to the slot instead. Both triggers are
+// wired here on the rendered element, whether it is our own `ULinkBase` or the
+// element a custom slot renders. Older Nuxt versions pass neither and keep
+// observing on their own.
+const instance = getCurrentInstance()
+
+let prefetchApi: Pick<NuxtLinkDefaultSlotProps, 'prefetch' | 'shouldPrefetch' | 'prefetched'> & { fullPath?: string } | undefined
+
+// Called with the app explicitly: NuxtLink's `prefetch` takes an optional
+// `nuxtApp` and would otherwise receive the event.
+function onPrefetch() {
+  prefetchApi?.prefetch?.(nuxtApp)
+}
+
+// Since Nuxt 4.6, prefetch work is queued and NuxtLink moves a link's queued
+// work to the front when the user reaches for it. It only does so for
+// non-custom links and exposes nothing to the slot, so this goes through the
+// scheduler it keeps on the app. Older Nuxt versions have none.
+function onInteraction() {
+  if (!prefetchApi?.prefetched) {
+    if (prefetchApi?.shouldPrefetch?.('interaction')) {
+      onPrefetch()
+    }
+    return
+  }
+
+  if (prefetchApi.fullPath === undefined) {
+    return
+  }
+
+  // Same key as NuxtLink: the hash does not affect what is fetched.
+  const { pathname, search } = new URL(prefetchApi.fullPath, window.location.href)
+  // Typed here since `_prefetch` is internal and absent from older Nuxt types.
+  const scheduler = (nuxtApp as { _prefetch?: { promote?: (group: string) => void } })._prefetch
+  scheduler?.promote?.(pathname + search)
+}
+
+function getPrefetchListeners({ prefetch, shouldPrefetch, prefetched, isExternal }: NuxtLinkDefaultSlotProps, attrs: Record<string, unknown>, linkRoute?: { fullPath?: string }) {
+  if (!prefetch || !shouldPrefetch) {
+    return undefined
+  }
+
+  prefetchApi = { prefetch, shouldPrefetch, prefetched, fullPath: isExternal ? undefined : linkRoute?.fullPath }
+
+  // Before prefetching, only interaction mode has anything to do on these events.
+  if (!prefetched && !shouldPrefetch('interaction')) {
+    return undefined
+  }
+
+  // Callers may listen to the same events on the link, keep their handlers.
+  return mergeProps(
+    { onPointerenter: attrs.onPointerenter, onFocus: attrs.onFocus, onPointerdown: attrs.onPointerdown },
+    { onPointerenter: onInteraction, onFocus: onInteraction, onPointerdown: onInteraction }
+  )
+}
+
+let idleId: ReturnType<typeof requestIdleCallback>
+let unobserve: (() => void) | null = null
+let unmounted = false
+
+onMounted(() => {
+  if (!prefetchApi?.shouldPrefetch?.('visibility')) {
+    return
+  }
+
+  // Our root is the custom NuxtLink's fragment anchor, so the rendered element
+  // is its next sibling. This is the element NuxtLink itself observed for
+  // custom links before 4.5.
+  const root = instance?.proxy?.$el as Element | CharacterData | null
+  const el = root instanceof Element ? root : root?.nextElementSibling
+  if (!el) {
+    return
+  }
+
+  // Like NuxtLink, wait for hydration: before Nuxt 4.6 the payload plugin only
+  // registers its `link:prefetch` listener `onNuxtReady`, and `prefetch` marks
+  // the link as prefetched even when nobody listens.
+  onNuxtReady(() => {
+    if (unmounted) {
+      return
+    }
+
+    idleId = requestIdleCallback(() => {
+      unobserve = observeIntersection(el, () => {
+        unobserve?.()
+        unobserve = null
+        onPrefetch()
+      })
+    })
+  })
+})
+
+onBeforeUnmount(() => {
+  unmounted = true
+  cancelIdleCallback(idleId)
+  unobserve?.()
+  unobserve = null
+})
 </script>
 
 <template>
@@ -230,12 +370,14 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
         v-bind="{
           ...$attrs,
           ...(exact && isExactActive ? { 'aria-current': props.ariaCurrentValue } : {}),
+          ...((rest as NuxtLinkDefaultSlotProps).prefetched && prefetchedClass ? { class: prefetchedClass } : {}),
+          ...getPrefetchListeners(rest as NuxtLinkDefaultSlotProps, $attrs, linkRoute),
           as,
           type,
           disabled,
           href,
           navigate,
-          rel: (rest as NuxtLinkDefaultSlotProps).rel,
+          rel,
           target: (rest as NuxtLinkDefaultSlotProps).target,
           isExternal: (rest as NuxtLinkDefaultSlotProps).isExternal,
           active: isLinkActive({ route: linkRoute, isActive, isExactActive })
@@ -252,11 +394,12 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
         disabled,
         href,
         navigate,
-        rel: (rest as NuxtLinkDefaultSlotProps).rel,
+        rel,
         target: (rest as NuxtLinkDefaultSlotProps).target,
-        isExternal: (rest as NuxtLinkDefaultSlotProps).isExternal
+        isExternal: (rest as NuxtLinkDefaultSlotProps).isExternal,
+        ...getPrefetchListeners(rest as NuxtLinkDefaultSlotProps, $attrs, linkRoute)
       }"
-      :class="resolveLinkClass({ route: linkRoute, isActive, isExactActive })"
+      :class="resolveLinkClass({ route: linkRoute, isActive, isExactActive, prefetched: (rest as NuxtLinkDefaultSlotProps).prefetched })"
     >
       <slot :active="isLinkActive({ route: linkRoute, isActive, isExactActive })" />
     </ULinkBase>
@@ -269,7 +412,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
         as,
         type,
         disabled,
-        ...(to ? { href: String(to), target: props.target, rel: externalRel, isExternal: true } : {}),
+        ...(to ? { href: String(to), target: props.target, rel, isExternal: true } : {}),
         active: active ?? false
       }"
     />
@@ -281,7 +424,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
       as,
       type,
       disabled,
-      ...(to ? { href: String(to), target: props.target, rel: externalRel, isExternal: true } : {})
+      ...(to ? { href: String(to), target: props.target, rel, isExternal: true } : {})
     }"
     :class="resolveLinkClass()"
   >

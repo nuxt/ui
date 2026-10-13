@@ -18,6 +18,7 @@ src/
 ├── theme/              # Tailwind Variants themes (kebab-case.ts)
 └── module.ts
 test/
+├── bundle/             # Bundle size fixtures (`pnpm run size`)
 ├── components/         # Component tests (*.spec.ts)
 │   └── __snapshots__/  # Auto-generated snapshots
 └── component-render.ts
@@ -33,26 +34,21 @@ playgrounds/
 pnpm run dev:prepare  # Generate type stubs (run after install)
 pnpm run dev          # Nuxt playground
 pnpm run dev:vue      # Vue playground
-pnpm run dev:repl     # REPL playground
+pnpm run repl         # REPL playground
 pnpm run docs         # Documentation site
 pnpm run lint         # Check linting
 pnpm run lint:fix     # Fix linting
 pnpm run typecheck    # Type checking
 pnpm run test         # Run tests
+pnpm run size         # Build test/bundle apps and print their JS/CSS sizes
 ```
 
 ## CLI for Scaffolding
 
-Link the CLI first (one-time setup):
+Use the CLI to create new components:
 
 ```bash
-npm link
-```
-
-Then use it to create new components:
-
-```bash
-nuxt-ui make component <name> [options]
+pnpm cli make component <name> [options]
 ```
 
 Options:
@@ -66,6 +62,7 @@ Options:
 - **Conventional commits**: All commit messages must follow [conventional commits](https://conventionalcommits.org) (e.g. `fix(Button): resolve hover state`, `feat(Modal): add fullscreen prop`).
 - **Semantic colors**: Use `text-default`, `bg-elevated`, etc. — never raw Tailwind palette colors like `text-gray-500`.
 - **`Soon` badge on docs headings**: PRs that introduce a new feature or fix often add `:badge{label="Soon" class="align-text-top"}` to the relevant docs heading. This is intentional: the docs site redeploys on merge, but the feature only ships on the next npm release — the badge bridges that gap. Do NOT flag this as inconsistent in reviews. See [documentation.md](.github/contributing/documentation.md) for details.
+- **Two build adapters**: Build-side changes (templates, auto-imports, icons, component detection, build plugins) must be checked against both adapters: `src/module.ts` for Nuxt, `src/unplugin.ts` and `src/plugins/*` for Vue. Shared logic belongs in `src/utils/`. In code that runs from the published build, only the two entry files may resolve paths from `import.meta.url`, since bundled files can land in any output chunk. Everything else anchors on `runtimeDir`.
 
 ## Library Source (`src/` and `test/`)
 
@@ -89,12 +86,14 @@ Load these based on your task. **Do not load all files at once** — only load w
 | Type imports | Always separate: `import type { X }` on its own line |
 | Props defaults | Use `withDefaults()` for runtime, JSDoc `@defaultValue` for docs |
 | Template slots | Add `data-slot="name"` attributes on all elements |
+| `data-slot` on root | A caller-supplied `data-slot` must win on the component's **root** (component's own value as fallback); inner elements keep theirs. Single-root components with default `inheritAttrs` get this free via Vue fallthrough. For `inheritAttrs: false`, place the default before the root's `v-bind` (`data-slot="root" v-bind="$attrs"`), or read `($attrs['data-slot'] as string \| undefined) ?? 'root'` on the root when `$attrs` is forwarded to an inner element. See [component-structure.md](.github/contributing/component-structure.md#data-slot-on-the-root). |
 | Computed ui | Always use `computed(() => tv(...))` for reactive theming |
-| Theme support | Use `useComponentUI(name, props)` to merge Theme context with component `ui` prop |
+| Theme defaults | Wrap raw props with `useComponentProps(name, _props)` to resolve the priority chain (explicit prop > `<UTheme :props>` > `withDefaults` > `app.config.ui.<name>.defaultVariants`). The proxy deep-merges `ui` automatically — read `props.ui?.<slot>` in templates. `theme.defaultVariants` is **not** read by the proxy — it only feeds `tv()` class resolution. Pass the **raw** `_props` (not the proxy) to `useFormField` / `useFieldGroup` / `useAvatarGroup` so their injection precedence (closer context wins) stays correct. |
+| Form/group fallback | When consuming `size` / `color` / `highlight` from `useFormField`, `useFieldGroup`, or `useAvatarGroup`, always fall back to the proxy in `tv()` calls: `size: size.value ?? props.size`, `color: color.value ?? props.color`, `highlight: highlight.value ?? props.highlight`. This gives the full precedence `explicit > group/formField > <UTheme :props> > undefined`. Without the `?? props.X` fallback, `<UTheme :props>` is silently dropped when the closer context (FormField/FieldGroup/AvatarGroup) is absent. |
 | Semantic colors | Use `text-default`, `bg-elevated`, etc. - never Tailwind palette |
-| Reka UI props | Use `reactivePick` + `useForwardPropsEmits` to forward props |
+| Logical properties (RTL) | Use logical utilities (`ms/me`, `ps/pe`, `start/end`, `text-start/end`, `border-s/e`, `rounded-s/e`) not physical (`ml/mr`, `left/right`, `text-left/right`) so components work in RTL by default. `transform`/`cursor`/gradients/transitions need explicit `rtl:` counterparts. See [theme-structure.md](.github/contributing/theme-structure.md#logical-properties-rtl). |
+| Reka UI props | Use `reactivePick` + `useForwardProps(source, emits?)` from `composables/useForwardProps` to forward props (proxy-aware; reka-ui's `useForwardProps` / `useForwardPropsEmits` filter out `<UTheme :props>` defaults) |
 | Form components | Use `useFormField` and `useFieldGroup` composables |
-| Variant in template logic | Use `useResolvedVariants(name, props, theme, ['variant'])` when variant values are consumed in template logic (`<component :is>`, `v-if`, computed) — `tv()` `defaultVariants` only affect classes, not runtime checks |
 
 ## Component Creation Workflow
 
@@ -103,16 +102,17 @@ Copy this checklist and track progress when creating a new component:
 ```
 Component: [name]
 Progress:
-- [ ] 1. Scaffold with CLI: nuxt-ui make component <name>
+- [ ] 1. Scaffold with CLI: pnpm cli make component <name>
 - [ ] 2. Implement component in src/runtime/components/
 - [ ] 3. Create theme in src/theme/
 - [ ] 4. Export types from src/runtime/types/index.ts
-- [ ] 5. Write tests in test/components/
-- [ ] 6. Create docs in docs/content/docs/2.components/
-- [ ] 7. Add playground page
-- [ ] 8. Run pnpm run lint
-- [ ] 9. Run pnpm run typecheck
-- [ ] 10. Run pnpm run test
+- [ ] 5. Register in ThemeDefaults interface (src/runtime/types/theme.ts)
+- [ ] 6. Write tests in test/components/
+- [ ] 7. Create docs in docs/content/docs/2.components/
+- [ ] 8. Add playground page
+- [ ] 9. Run pnpm run lint
+- [ ] 10. Run pnpm run typecheck
+- [ ] 11. Run pnpm run test
 ```
 
 ### PR Review Checklist
@@ -139,6 +139,7 @@ PR Review:
 - [ ] `pnpm run test` passes
 - [ ] Documentation is updated if applicable
 - [ ] Commit message follows conventional commits
+- [ ] PR description follows [.github/PULL_REQUEST_TEMPLATE.md](.github/PULL_REQUEST_TEMPLATE.md) (linked issue, type of change, description, checklist)
 
 Multiple commits are fine — PRs are squash merged, so no need to rebase or force push.
 

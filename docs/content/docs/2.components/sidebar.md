@@ -1,12 +1,10 @@
 ---
-title: Sidebar
 description: 'A collapsible sidebar with multiple visual variants.'
 category: layout
 links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Sidebar.vue
-navigation.badge: New
 ---
 
 ## Usage
@@ -25,7 +23,7 @@ collapse: true
 prettier: true
 name: 'sidebar-example'
 overflowHidden: true
-class: '!p-0 !justify-start h-[500px] contain-[paint]'
+class: '!p-0 !justify-start h-[500px] contain-[paint] transform-gpu'
 ---
 ::
 
@@ -47,7 +45,7 @@ options:
       - floating
       - inset
     default: 'inset'
-class: '!p-0 !justify-start h-[500px] contain-[paint]'
+class: '!p-0 !justify-start h-[500px] contain-[paint] transform-gpu'
 ---
 ::
 
@@ -80,7 +78,7 @@ options:
       - floating
       - inset
     default: 'sidebar'
-class: '!p-0 !justify-start h-[500px] contain-[paint]'
+class: '!p-0 !justify-start h-[500px] contain-[paint] transform-gpu'
 ---
 ::
 
@@ -105,7 +103,7 @@ options:
       - left
       - right
     default: 'right'
-class: '!p-0 !justify-start h-[500px] contain-[paint]'
+class: '!p-0 !justify-start h-[500px] contain-[paint] transform-gpu'
 ---
 ::
 
@@ -129,7 +127,7 @@ slots:
   default: |
 
     <Placeholder class="h-full" />
-class: '!p-0 !justify-start h-[500px] contain-[paint]'
+class: '!p-0 !justify-start h-[500px] contain-[paint] transform-gpu'
 ---
 
 :placeholder{class="h-full"}
@@ -157,7 +155,7 @@ slots:
   default: |
 
     <Placeholder class="h-full" />
-class: '!p-0 !justify-start h-[500px] contain-[paint]'
+class: '!p-0 !justify-start h-[500px] contain-[paint] transform-gpu'
 ---
 
 :placeholder{class="h-full"}
@@ -185,7 +183,7 @@ slots:
   default: |
 
     <Placeholder class="h-full" />
-class: '!p-0 !justify-start h-[500px] contain-[paint]'
+class: '!p-0 !justify-start h-[500px] contain-[paint] transform-gpu'
 ---
 
 :placeholder{class="h-full"}
@@ -222,7 +220,7 @@ slots:
   default: |
 
     <Placeholder class="h-full" />
-class: '!p-0 !justify-start h-[500px] contain-[paint]'
+class: '!p-0 !justify-start h-[500px] contain-[paint] transform-gpu'
 ---
 
 :placeholder{class="h-full"}
@@ -261,7 +259,7 @@ slots:
   default: |
 
     <Placeholder class="h-full" />
-class: '!p-0 !justify-start h-[500px] contain-[paint]'
+class: '!p-0 !justify-start h-[500px] contain-[paint] transform-gpu'
 ---
 
 :placeholder{class="h-full"}
@@ -277,6 +275,20 @@ You can customize this icon globally in your `app.config.ts` under `ui.icons.clo
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
 :::
+::
+
+### Breakpoint :badge{label="Soon" class="align-text-top"}
+
+Use the `breakpoint` prop to change the breakpoint below which the sidebar renders as a menu. Defaults to `lg`.
+
+```vue
+<template>
+  <USidebar breakpoint="xl" />
+</template>
+```
+
+::note
+The values follow the default Tailwind CSS breakpoints. Custom `--breakpoint-*` values are not picked up.
 ::
 
 ### Mode
@@ -320,7 +332,7 @@ collapse: true
 prettier: true
 name: 'sidebar-open-example'
 overflowHidden: true
-class: '!p-0 !justify-start h-[500px] contain-[paint]'
+class: '!p-0 !justify-start h-[500px] contain-[paint] transform-gpu'
 ---
 ::
 
@@ -338,7 +350,7 @@ collapse: true
 prettier: true
 name: 'sidebar-persist-example'
 overflowHidden: true
-class: '!p-0 !justify-start h-[500px] contain-[paint]'
+class: '!p-0 !justify-start h-[500px] contain-[paint] transform-gpu'
 ---
 ::
 
@@ -358,7 +370,7 @@ collapse: true
 prettier: true
 name: 'sidebar-width-example'
 overflowHidden: true
-class: '!p-0 !justify-start h-[500px] contain-[paint]'
+class: '!p-0 !justify-start h-[500px] contain-[paint] transform-gpu'
 ---
 ::
 
@@ -372,7 +384,7 @@ collapse: true
 prettier: true
 name: 'sidebar-header-example'
 overflowHidden: true
-class: '!p-0 !justify-start h-[500px] contain-[paint]'
+class: '!p-0 !justify-start h-[500px] contain-[paint] transform-gpu'
 ---
 ::
 
@@ -390,7 +402,7 @@ collapse: true
 prettier: true
 name: 'sidebar-chat-example'
 overflowHidden: true
-class: '!p-0 !justify-start h-[500px] contain-[paint]'
+class: '!p-0 !justify-start h-[500px] contain-[paint] transform-gpu'
 ---
 ::
 

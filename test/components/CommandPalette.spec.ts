@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
@@ -146,6 +146,14 @@ describe('CommandPalette', () => {
     ['with footer slot', { props, slots: { footer: () => 'Footer slot' } }]
   ])
 
+  it('hides the input icon when icon is false', async () => {
+    const withIcon = await mountSuspended(CommandPalette, { props })
+    expect(withIcon.find('[data-slot="leadingIcon"]').exists()).toBe(true)
+
+    const withoutIcon = await mountSuspended(CommandPalette, { props: { ...props, icon: false } })
+    expect(withoutIcon.find('[data-slot="leadingIcon"]').exists()).toBe(false)
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(CommandPalette, {
       props: {
@@ -156,15 +164,44 @@ describe('CommandPalette', () => {
       }
     })
 
-    expect(await axe(wrapper.element, {
-      rules: {
-        // ARIA input fields must have an accessible name (aria-input-field-name)"
-        // Fix any of the following:
-        //   aria-label attribute does not exist or is empty
-        //   aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty
-        //   Element has no title attribute
-        'aria-input-field-name': { enabled: false }
-      }
-    })).toHaveNoViolations()
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  // Results arriving after mount (e.g. `useLazyFetch({ server: false })`) must
+  // re-highlight the first item without scrolling the whole page to a palette
+  // that is below the fold and was never interacted with.
+  it('re-highlights without scrolling the page when results arrive without focus', async () => {
+    const scrollSpy = vi.fn()
+    const original = window.HTMLElement.prototype.scrollIntoView
+    window.HTMLElement.prototype.scrollIntoView = scrollSpy
+
+    try {
+      const wrapper = await mountSuspended(CommandPalette, {
+        props: { groups: [{ id: 'users', items: [] }], autofocus: false } as any,
+        attachTo: document.body
+      })
+      await new Promise(resolve => setTimeout(resolve, 60))
+
+      // Items arrive asynchronously while the palette is not focused
+      await wrapper.setProps({
+        groups: [{ id: 'users', items: Array.from({ length: 10 }, (_, i) => ({ label: `User ${i}` })) }]
+      } as any)
+      await new Promise(resolve => setTimeout(resolve, 60))
+
+      // First item is highlighted for keyboard entry, but the page was not scrolled to it.
+      expect(wrapper.find('[data-highlighted]').exists()).toBe(true)
+      expect(scrollSpy).not.toHaveBeenCalled()
+
+      // Once the palette has focus, a results change scrolls the highlight into view.
+      ;(wrapper.find('input').element as HTMLInputElement).focus()
+      await wrapper.setProps({
+        groups: [{ id: 'users', items: Array.from({ length: 8 }, (_, i) => ({ label: `Person ${i}` })) }]
+      } as any)
+      await new Promise(resolve => setTimeout(resolve, 60))
+
+      expect(scrollSpy).toHaveBeenCalled()
+    } finally {
+      window.HTMLElement.prototype.scrollIntoView = original
+    }
   })
 })

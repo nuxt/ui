@@ -1,4 +1,4 @@
-import type { Messages } from '../types'
+import type { Messages } from '../types/locale'
 import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
@@ -16,23 +16,36 @@ export default defineLocale<Messages>({
     banner: {
       close: '關閉'
     },
+    breadcrumb: {
+      label: '導覽路徑'
+    },
     calendar: {
+      label: '事件日期',
+      monthPicker: '月份選擇器',
       nextMonth: '下個月',
       nextYear: '明年',
       prevMonth: '上個月',
-      prevYear: '去年'
+      prevYear: '去年',
+      yearPicker: '年份選擇器'
     },
     carousel: {
       dots: '選擇要顯示的投影片',
       goto: '跳轉到第 {slide} 頁',
       next: '下一頁',
-      prev: '上一頁'
+      prev: '上一頁',
+      roledescription: '輪播',
+      slide: '投影片'
+    },
+    chatMessages: {
+      autoScroll: '捲動到底部'
     },
     chatPrompt: {
       placeholder: '在這裡輸入你的消息…'
     },
     chatPromptSubmit: {
-      label: '發送'
+      label: '發送',
+      reload: '重試',
+      stop: '停止生成'
     },
     chatReasoning: {
       thinking: '思考中…',
@@ -51,10 +64,12 @@ export default defineLocale<Messages>({
       close: '關閉',
       noData: '沒有資料',
       noMatch: '沒有相符的資料',
-      placeholder: '輸入命令或搜尋…'
+      placeholder: '輸入命令或搜尋…',
+      results: '搜尋結果'
     },
     contentSearch: {
       links: '連結',
+      search: '搜尋結果',
       theme: '主題'
     },
     contentSearchButton: {
@@ -81,6 +96,9 @@ export default defineLocale<Messages>({
       close: '關閉側邊欄',
       open: '開啟側邊欄'
     },
+    drawer: {
+      close: '關閉'
+    },
     error: {
       clear: '返回首頁'
     },
@@ -91,17 +109,55 @@ export default defineLocale<Messages>({
       close: '關閉選單',
       open: '開啟選單'
     },
+    inputDate: {
+      day: '日',
+      dayPeriod: '上午/下午',
+      era: '紀元',
+      hour: '小時',
+      minute: '分鐘',
+      month: '月',
+      second: '秒',
+      timeZoneName: '時區',
+      year: '年'
+    },
     inputMenu: {
       create: '建立「{label}」',
       noData: '沒有資料',
-      noMatch: '沒有相符的資料'
+      noMatch: '沒有相符的資料',
+      trigger: '顯示選項'
     },
     inputNumber: {
       decrement: '減少',
-      increment: '增加'
+      increment: '增加',
+      roledescription: '數字輸入欄位'
+    },
+    inputRating: {
+      rate: '評分 {value} 分，滿分 {length} 分'
+    },
+    inputTime: {
+      dayPeriod: '上午/下午',
+      hour: '小時',
+      minute: '分鐘',
+      second: '秒',
+      timeZoneName: '時區'
+    },
+    listbox: {
+      noData: '沒有資料',
+      noMatch: '沒有相符的資料',
+      search: '搜尋…'
     },
     modal: {
       close: '關閉'
+    },
+    pagination: {
+      first: '第一頁',
+      last: '最後一頁',
+      next: '下一頁',
+      page: '第 {page} 頁',
+      prev: '上一頁'
+    },
+    pinInput: {
+      input: 'PIN 碼，第 {index} 位，共 {length} 位'
     },
     pricingTable: {
       caption: '價格計畫比較'
@@ -135,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: '沒有相符的資料',
       search: '搜尋…'
     },
+    skeleton: {
+      label: '載入中'
+    },
     slideover: {
       close: '關閉'
+    },
+    slider: {
+      max: '最大值',
+      min: '最小值',
+      thumb: '滑桿',
+      value: '第 {index} 個值，共 {total} 個'
+    },
+    stepper: {
+      label: '進度'
     },
     table: {
       noData: '沒有資料'
     },
     toast: {
       close: '關閉'
+    },
+    toaster: {
+      label: '通知',
+      viewport: '通知（{hotkey}）'
     }
   }
 })

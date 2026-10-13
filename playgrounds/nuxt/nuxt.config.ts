@@ -9,9 +9,35 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
+  content: {
+    experimental: {
+      sqliteConnector: 'native'
+    }
+  },
+
   routeRules: {
     '/docs/components/**': { redirect: { to: '/components/**', statusCode: 301 }, prerender: false }
   },
 
-  compatibilityDate: '2024-07-09'
+  future: {
+    compatibilityVersion: 5
+  },
+
+  compatibilityDate: '2024-07-09',
+
+  vite: {
+    optimizeDeps: {
+      include: [
+        '@ai-sdk/vue',
+        '@comark/vue',
+        '@comark/vue/plugins/shiki',
+        '@vueuse/core',
+        '@vueuse/integrations/useFuse',
+        'ai',
+        'tailwind-variants',
+        'tailwindcss/colors',
+        'vaul-vue'
+      ]
+    }
+  }
 })

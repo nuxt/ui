@@ -1,27 +1,32 @@
 ---
-title: Prompt
+title: ProsePrompt
 description: 'Display pre-built AI prompts with one-click copy and IDE integration.'
 category: components
+navigation.title: Prompt
 links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/prose/Prompt.vue
-navigation.badge: Soon
 ---
 
 ## Usage
 
-Use the `prompt` component to display a pre-built AI prompt that users can copy to their clipboard or open directly in their IDE. The `description` prop is shown as the visible label, while the default slot contains the prompt text that gets copied.
+Use the `prompt` component to display a pre-built AI prompt that users can copy to their clipboard or open directly in their IDE.
+
+### Prompt :badge{label="Soon" class="align-text-top"}
+
+Use the `prompt` prop to set the text that gets copied. The `description` prop is shown as the visible label.
 
 ::component-code{slug="prompt" prose}
 ---
+ignore:
+  - prompt
+hide:
+  - class
 props:
   description: Build a dashboard layout with Nuxt UI.
   class: 'w-full my-0'
-hide:
-  - class
-slots:
-  default: |
+  prompt: |
     You are a Nuxt UI expert. Help me build a dashboard layout with a collapsible sidebar and a sticky top navbar.
 
     Requirements:
@@ -33,6 +38,10 @@ slots:
 ---
 ::
 
+::note
+The prompt can also be written in the default slot. It is then copied as plain text, without its line breaks, list markers and inline code.
+::
+
 ### Icon
 
 Use the `icon` prop to display an icon next to the description.
@@ -41,14 +50,14 @@ Use the `icon` prop to display an icon next to the description.
 ---
 ignore:
   - description
+  - prompt
 hide:
   - class
 props:
   description: Create a form with validation.
   icon: i-lucide-file-pen-line
   class: 'w-full my-0'
-slots:
-  default: |
+  prompt: |
     Create a registration form using Nuxt UI with Zod schema validation.
 
     Requirements:
@@ -62,25 +71,24 @@ slots:
 
 ### Actions
 
-Use the `actions` prop to control which buttons are displayed. Defaults to `["copy"]`. Available actions are `copy`, `cursor` and `windsurf`.
+Use the `actions` prop to display additional buttons. The `copy` button is always displayed. The available actions are `cursor`, `windsurf` and `claude`.
 
 ::component-code{slug="prompt" prose}
 ---
 ignore:
   - description
   - icon
+  - prompt
 hide:
   - class
 props:
   description: Add a color mode toggle.
   icon: i-lucide-sun-moon
   actions:
-    - copy
     - cursor
-    - windsurf
+    - claude
   class: 'w-full my-0'
-slots:
-  default: |
+  prompt: |
     Add a color mode toggle to my Nuxt app.
 
     Requirements:

@@ -5,17 +5,17 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'relative flex items-center select-none touch-none',
     track: 'relative bg-accented overflow-hidden rounded-full grow',
     range: 'absolute rounded-full',
-    thumb: 'rounded-full bg-default ring-2 focus-visible:outline-2 focus-visible:outline-offset-2'
+    thumb: 'rounded-full bg-default ring-2 focus-visible:outline-3 focus-visible:outline-offset-2'
   },
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
         range: `bg-${color}`,
-        thumb: `ring-${color} focus-visible:outline-${color}/50`
+        thumb: `ring-${color} outline-${color}/25`
       }])),
       neutral: {
         range: 'bg-inverted',
-        thumb: 'ring-inverted focus-visible:outline-inverted/50'
+        thumb: 'ring-inverted outline-inverted/25'
       }
     },
     size: {

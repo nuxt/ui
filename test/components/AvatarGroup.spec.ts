@@ -28,21 +28,21 @@ const AvatarGroupOverflowTooltipWrapper = defineComponent({
   <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" />
   <UAvatar src="https://github.com/romhml.png" alt="Romain Hamel" />
   <UAvatar src="https://github.com/noook.png" alt="Neil Richter" />
-  <template #overflow="{ hiddenCount, avatarProps }">
-    <span :data-hidden-count="hiddenCount">
-      <UAvatar v-bind="avatarProps" />
-    </span>
+  <template #overflow="{ hiddenCount }">
+    <span :data-hidden-count="hiddenCount">+{{ hiddenCount }}</span>
   </template>
 </UAvatarGroup>`
 })
 
 describe('AvatarGroup', () => {
   const sizes = Object.keys(theme.variants.size) as any
+  const colors = Object.keys(theme.variants.color) as any
 
   renderEach(AvatarGroupWrapper, [
     // Props
     ['with max', { props: { max: 2 } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
+    ...colors.map((color: string) => [`with color ${color}`, { props: { color, max: 1 } }]),
     ['with as', { props: { as: 'span' } }],
     ['with class', { props: { class: 'justify-start' } }],
     ['with ui', { props: { ui: { base: 'rounded-lg' } } }],
@@ -53,7 +53,10 @@ describe('AvatarGroup', () => {
   it('exposes the hidden count to the overflow slot', async () => {
     const wrapper = await mountSuspended(AvatarGroupOverflowTooltipWrapper)
 
-    expect(wrapper.find('[data-hidden-count="1"]').exists()).toBe(true)
+    const overflow = wrapper.find('[data-hidden-count="1"]')
+    expect(overflow.exists()).toBe(true)
+    expect(overflow.attributes('data-slot')).toBe('base')
+    expect(overflow.text()).toBe('+1')
   })
 
   it('passes accessibility tests', async () => {

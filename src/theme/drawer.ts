@@ -4,13 +4,16 @@ export default (options: Required<ModuleOptions>) => ({
   slots: {
     overlay: 'fixed inset-0 bg-elevated/75',
     content: 'fixed bg-default ring ring-default flex focus:outline-none',
-    handle: ['shrink-0 !bg-accented', options.theme.transitions && 'transition-opacity'],
+    handle: ['shrink-0 !bg-accented', options.theme.transitions && 'transition-opacity ease-out'],
     container: 'w-full flex flex-col gap-4 p-4 overflow-y-auto',
-    header: '',
+    header: 'flex items-center gap-1.5 min-h-8',
+    wrapper: 'min-w-0 flex-1',
     title: 'text-highlighted font-semibold',
     description: 'mt-1 text-muted text-sm',
+    actions: 'flex items-center gap-1.5 shrink-0 ms-auto',
     body: 'flex-1',
-    footer: 'flex flex-col gap-1.5'
+    footer: 'flex flex-col gap-1.5',
+    close: ''
   },
   variants: {
     direction: {
@@ -19,7 +22,7 @@ export default (options: Required<ModuleOptions>) => ({
         handle: 'mb-4'
       },
       right: {
-        content: 'flex-row',
+        content: 'flex-row rtl:flex-row-reverse',
         handle: '!ml-4'
       },
       bottom: {
@@ -27,7 +30,7 @@ export default (options: Required<ModuleOptions>) => ({
         handle: 'mt-4'
       },
       left: {
-        content: 'flex-row-reverse',
+        content: 'flex-row-reverse rtl:flex-row',
         handle: '!mr-4'
       }
     },

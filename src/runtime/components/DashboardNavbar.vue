@@ -3,7 +3,9 @@ import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-navbar'
 import type { DashboardContext } from '../utils/dashboard'
-import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
+import type { ButtonProps } from './Button.vue'
+import type { IconProps } from './Icon.vue'
+import type { LinkPropsKeys } from './Link.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type DashboardNavbar = ComponentConfig<typeof theme, AppConfig, 'dashboardNavbar'>
@@ -13,7 +15,7 @@ export interface DashboardNavbarProps {
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: any
+  as?: any | { root?: any, title?: any }
   /**
    * The icon displayed next to the title.
    * @IconifyIcon
@@ -53,70 +55,75 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { useDashboard } from '../utils/dashboard'
+import { resolveAs } from '../utils'
 import { tv } from '../utils/tv'
 import UDashboardSidebarToggle from './DashboardSidebarToggle.vue'
 import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<DashboardNavbarProps>(), {
+const _props = withDefaults(defineProps<DashboardNavbarProps>(), {
   toggle: true,
   toggleSide: 'left'
 })
 const slots = defineSlots<DashboardNavbarSlots>()
 
+const props = useComponentProps('dashboardNavbar', _props)
+
 const appConfig = useAppConfig() as DashboardNavbar['AppConfig']
-const uiProp = useComponentUI('dashboardNavbar', props)
 const dashboardContext = useDashboard({})
 
 const [DefineToggleTemplate, ReuseToggleTemplate] = createReusableTemplate()
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardNavbar || {}) })())
+const as = computed(() => resolveAs(props.as, { root: 'div', title: 'h1' }))
+
+// eslint-disable-next-line vue/no-dupe-keys
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.dashboardNavbar || {}) })())
 </script>
 
 <template>
   <DefineToggleTemplate>
     <slot name="toggle" v-bind="{ ...dashboardContext, ui }">
       <UDashboardSidebarToggle
-        v-if="toggle"
-        v-bind="(typeof toggle === 'object' ? toggle : {})"
-        :side="toggleSide"
+        v-if="props.toggle"
+        v-bind="(typeof props.toggle === 'object' ? props.toggle : {})"
+        :side="props.toggleSide"
         data-slot="toggle"
-        :class="ui.toggle({ class: uiProp?.toggle, toggleSide })"
+        :class="ui.toggle({ class: props.ui?.toggle, toggleSide: props.toggleSide })"
       />
     </slot>
   </DefineToggleTemplate>
 
-  <Primitive :as="as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
-    <div data-slot="left" :class="ui.left({ class: uiProp?.left })">
-      <ReuseToggleTemplate v-if="toggleSide === 'left'" />
+  <Primitive :as="as.root" data-slot="root" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div data-slot="left" :class="ui.left({ class: props.ui?.left })">
+      <ReuseToggleTemplate v-if="props.toggleSide === 'left'" />
 
       <slot name="left" v-bind="dashboardContext">
         <slot name="leading" v-bind="{ ...dashboardContext, ui }">
-          <UIcon v-if="icon" :name="icon" data-slot="icon" :class="ui.icon({ class: uiProp?.icon })" />
+          <UIcon v-if="props.icon" :name="props.icon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
         </slot>
 
-        <h1 data-slot="title" :class="ui.title({ class: uiProp?.title })">
+        <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
           <slot name="title">
-            {{ title }}
+            {{ props.title }}
           </slot>
-        </h1>
+        </Primitive>
 
         <slot name="trailing" v-bind="{ ...dashboardContext, ui }" />
       </slot>
     </div>
 
-    <div v-if="!!slots.default" data-slot="center" :class="ui.center({ class: uiProp?.center })">
+    <div v-if="!!slots.default" data-slot="center" :class="ui.center({ class: props.ui?.center })">
       <slot v-bind="dashboardContext" />
     </div>
 
-    <div data-slot="right" :class="ui.right({ class: uiProp?.right })">
+    <div data-slot="right" :class="ui.right({ class: props.ui?.right })">
       <slot name="right" v-bind="dashboardContext" />
 
-      <ReuseToggleTemplate v-if="toggleSide === 'right'" />
+      <ReuseToggleTemplate v-if="props.toggleSide === 'right'" />
     </div>
   </Primitive>
 </template>

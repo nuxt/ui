@@ -3,30 +3,28 @@ import type { ModuleOptions } from '../../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: '',
-    content: 'data-[state=open]:animate-[accordion-down_200ms_ease-out] data-[state=closed]:animate-[accordion-up_200ms_ease-out] overflow-hidden focus:outline-none',
+    content: 'data-[state=open]:animate-[accordion-down_200ms_var(--ease-out)] data-[state=closed]:animate-[accordion-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden focus:outline-none',
     list: 'isolate -mx-2.5 -mt-1.5',
     item: '',
     listWithChildren: 'ms-5 border-s border-default',
     itemWithChildren: 'flex flex-col data-[state=open]:mb-1.5',
     trigger: 'font-semibold',
-    link: 'group relative w-full px-2.5 py-1.5 before:inset-y-px before:inset-x-0 flex items-center gap-1.5 text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
+    link: 'group relative w-full px-2.5 py-1.5 before:inset-y-px before:inset-x-0 flex items-center gap-1.5 text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3',
     linkLeadingIcon: 'shrink-0 size-5',
     linkTrailing: 'ms-auto inline-flex gap-1.5 items-center',
     linkTrailingBadge: 'shrink-0',
     linkTrailingBadgeSize: 'sm',
-    linkTrailingIcon: 'size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180',
+    linkTrailingIcon: 'size-5 transform transition-transform duration-200 ease-out motion-reduce:transition-none shrink-0 group-data-[state=open]:rotate-180',
     linkTitle: 'truncate',
     linkTitleExternalIcon: 'size-3 align-top text-dimmed'
   },
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        trigger: `focus-visible:ring-${color}`,
-        link: `focus-visible:before:ring-${color}`
+        link: `before:outline-${color}/25`
       }])),
       neutral: {
-        trigger: 'focus-visible:ring-inverted',
-        link: 'focus-visible:before:ring-inverted'
+        link: 'before:outline-inverted/25'
       }
     },
     highlightColor: {
@@ -65,7 +63,7 @@ export default (options: Required<ModuleOptions>) => ({
     highlight: true,
     level: true,
     class: {
-      link: ['after:absolute after:-left-1.5 after:inset-y-0.5 after:block after:w-px after:rounded-full', options.theme.transitions && 'after:transition-colors']
+      link: ['after:absolute after:-start-1.5 after:inset-y-0.5 after:block after:w-px after:rounded-full', options.theme.transitions && 'after:transition-colors']
     }
   }, {
     disabled: false,

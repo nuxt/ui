@@ -50,7 +50,7 @@ const searchTerm = ref('')
 const searchTermDebounced = refDebounced(searchTerm, 200)
 
 const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
-  params: { q: searchTermDebounced },
+  query: { q: searchTermDebounced },
   transform: (data: User[]) => {
     return data?.map(user => ({ id: user.id, label: user.name, avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` } })) || []
   },
@@ -80,6 +80,7 @@ const valueMultiple = ref([fruits[0]!, vegetables[0]!])
       v-bind="props"
       clear
     />
+    <UInputMenu placeholder="Autocomplete" mode="autocomplete" :items="items" v-bind="props" />
     <UInputMenu placeholder="Highlight" highlight :items="items" v-bind="props" />
     <UInputMenu placeholder="Disabled" disabled :items="items" v-bind="props" />
     <UInputMenu placeholder="Required" required :items="items" v-bind="props" />

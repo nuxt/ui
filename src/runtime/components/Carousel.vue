@@ -10,7 +10,9 @@ import type { ClassNamesOptionsType } from 'embla-carousel-class-names'
 import type { FadeOptionsType } from 'embla-carousel-fade'
 import type { WheelGesturesPluginOptions } from 'embla-carousel-wheel-gestures'
 import theme from '#build/ui/carousel'
-import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
+import type { ButtonProps } from './Button.vue'
+import type { IconProps } from './Icon.vue'
+import type { LinkPropsKeys } from './Link.vue'
 import type { AcceptableValue } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -19,7 +21,7 @@ type Carousel = ComponentConfig<typeof theme, AppConfig, 'carousel'>
 export type CarouselValue = AcceptableValue
 export type CarouselItem = CarouselValue | {
   class?: any
-  ui?: Pick<Carousel['slots'], 'item'>
+  ui?: Partial<Pick<Carousel['slots'], 'item'>>
   [key: string]: any
 }
 
@@ -69,32 +71,32 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Om
   items?: T[]
   /**
    * Enable Autoplay plugin
-   * @see https://www.embla-carousel.com/plugins/autoplay/
+   * @see https://www.embla-carousel.com/docs/v8/plugins/autoplay
    */
   autoplay?: boolean | AutoplayOptionsType
   /**
    * Enable Auto Scroll plugin
-   * @see https://www.embla-carousel.com/plugins/auto-scroll/
+   * @see https://www.embla-carousel.com/docs/v8/plugins/auto-scroll
    */
   autoScroll?: boolean | AutoScrollOptionsType
   /**
    * Enable Auto Height plugin
-   * @see https://www.embla-carousel.com/plugins/auto-height/
+   * @see https://www.embla-carousel.com/docs/v8/plugins/auto-height
    */
   autoHeight?: boolean | AutoHeightOptionsType
   /**
    * Enable Class Names plugin
-   * @see https://www.embla-carousel.com/plugins/class-names/
+   * @see https://www.embla-carousel.com/docs/v8/plugins/class-names
    */
   classNames?: boolean | ClassNamesOptionsType
   /**
    * Enable Fade plugin
-   * @see https://www.embla-carousel.com/plugins/fade/
+   * @see https://www.embla-carousel.com/docs/v8/plugins/fade
    */
   fade?: boolean | FadeOptionsType
   /**
    * Enable Wheel Gestures plugin
-   * @see https://www.embla-carousel.com/plugins/wheel-gestures/
+   * @see https://www.embla-carousel.com/docs/v8/plugins/wheel-gestures
    */
   wheelGestures?: boolean | WheelGesturesPluginOptions
   class?: any
@@ -117,15 +119,16 @@ export interface CarouselEmits {
 <script setup lang="ts" generic="T extends CarouselItem">
 import { computed, ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import useEmblaCarousel from 'embla-carousel-vue'
-import { Primitive, useForwardProps } from 'reka-ui'
+import { Primitive } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
+import { useForwardProps } from '../composables/useForwardProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
-const props = withDefaults(defineProps<CarouselProps<T>>(), {
+const _props = withDefaults(defineProps<CarouselProps<T>>(), {
   orientation: 'horizontal',
   arrows: false,
   dots: false,
@@ -157,13 +160,16 @@ const props = withDefaults(defineProps<CarouselProps<T>>(), {
 defineSlots<CarouselSlots<T>>()
 const emits = defineEmits<CarouselEmits>()
 
+const props = useComponentProps<CarouselProps<T>>('carousel', _props)
+
 const { dir, t } = useLocale()
 const appConfig = useAppConfig() as Carousel['AppConfig']
-const uiProp = useComponentUI('carousel', props)
 
 const rootProps = useForwardProps(reactivePick(props, 'active', 'align', 'breakpoints', 'containScroll', 'dragFree', 'dragThreshold', 'duration', 'inViewThreshold', 'loop', 'skipSnaps', 'slidesToScroll', 'startIndex', 'watchDrag', 'watchResize', 'watchSlides', 'watchFocus'))
 
+// eslint-disable-next-line vue/no-dupe-keys
 const prevIcon = computed(() => props.prevIcon || (dir.value === 'rtl' ? appConfig.ui.icons.arrowRight : appConfig.ui.icons.arrowLeft))
+// eslint-disable-next-line vue/no-dupe-keys
 const nextIcon = computed(() => props.nextIcon || (dir.value === 'rtl' ? appConfig.ui.icons.arrowLeft : appConfig.ui.icons.arrowRight))
 
 const stopAutoplayOnInteraction = computed(() => {
@@ -171,7 +177,7 @@ const stopAutoplayOnInteraction = computed(() => {
     return true
   }
 
-  return props.autoplay.stopOnInteraction ?? true
+  return props.autoplay?.stopOnInteraction ?? true
 })
 
 const stopAutoScrollOnInteraction = computed(() => {
@@ -179,10 +185,11 @@ const stopAutoScrollOnInteraction = computed(() => {
     return true
   }
 
-  return props.autoScroll.stopOnInteraction ?? true
+  return props.autoScroll?.stopOnInteraction ?? true
 })
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.carousel || {}) })({
+// eslint-disable-next-line vue/no-dupe-keys
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.carousel || {}) })({
   orientation: props.orientation
 }))
 
@@ -231,10 +238,12 @@ async function loadPlugins() {
   plugins.value = emblaPlugins
 }
 
-watch(() => [props.autoplay, props.autoScroll, props.autoHeight, props.classNames, props.fade, props.wheelGestures], async () => {
-  await loadPlugins()
-  emblaApi.value?.reInit(options.value, plugins.value)
-}, { immediate: true })
+// Rebuild the plugins array whenever a plugin prop changes. `useEmblaCarousel`
+// watches the `plugins` ref and reinitializes through its own `arePluginsEqual`
+// guard, so we must not reinitialize here: plugin props passed as inline objects
+// (e.g. `:autoplay="{ delay: 5000 }"`) get a new reference on every parent render,
+// which would otherwise reinitialize the carousel and reset it to the first slide.
+watch(() => [props.autoplay, props.autoScroll, props.autoHeight, props.classNames, props.fade, props.wheelGestures], loadPlugins, { immediate: true })
 
 const [emblaRef, emblaApi] = useEmblaCarousel(options, plugins)
 
@@ -343,40 +352,40 @@ defineExpose({
 
 <template>
   <Primitive
-    :as="as"
+    :as="props.as"
     role="region"
-    aria-roledescription="carousel"
-    :data-orientation="orientation"
+    :aria-roledescription="t('carousel.roledescription')"
+    :data-orientation="props.orientation"
     tabindex="0"
     data-slot="root"
-    :class="ui.root({ class: [uiProp?.root, props.class] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
     @keydown="onKeyDown"
   >
-    <div ref="emblaRef" data-slot="viewport" :class="ui.viewport({ class: uiProp?.viewport })">
-      <div data-slot="container" :class="ui.container({ class: uiProp?.container })">
+    <div ref="emblaRef" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
+      <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
         <div
-          v-for="(item, index) in items"
+          v-for="(item, index) in props.items"
           :key="index"
-          v-bind="dots ? { role: 'tabpanel' } : { 'role': 'group', 'aria-roledescription': 'slide' }"
+          v-bind="props.dots ? { role: 'tabpanel' } : { 'role': 'group', 'aria-roledescription': t('carousel.slide') }"
           data-slot="item"
-          :class="ui.item({ class: [uiProp?.item, isCarouselItem(item) && item.ui?.item, isCarouselItem(item) && item.class] })"
+          :class="ui.item({ class: [props.ui?.item, isCarouselItem(item) && item.ui?.item, isCarouselItem(item) && item.class] })"
         >
           <slot :item="item" :index="index" />
         </div>
       </div>
     </div>
 
-    <div v-if="arrows || dots" data-slot="controls" :class="ui.controls({ class: uiProp?.controls })">
-      <div v-if="arrows" data-slot="arrows" :class="ui.arrows({ class: uiProp?.arrows })">
+    <div v-if="props.arrows || props.dots" data-slot="controls" :class="ui.controls({ class: props.ui?.controls })">
+      <div v-if="props.arrows" data-slot="arrows" :class="ui.arrows({ class: props.ui?.arrows })">
         <UButton
           :disabled="!canScrollPrev"
           :icon="prevIcon"
           color="neutral"
           variant="outline"
           :aria-label="t('carousel.prev')"
-          v-bind="typeof prev === 'object' ? prev : undefined"
+          v-bind="typeof props.prev === 'object' ? props.prev : undefined"
           data-slot="prev"
-          :class="ui.prev({ class: uiProp?.prev })"
+          :class="ui.prev({ class: props.ui?.prev })"
           @click="scrollPrev"
         />
         <UButton
@@ -385,14 +394,14 @@ defineExpose({
           color="neutral"
           variant="outline"
           :aria-label="t('carousel.next')"
-          v-bind="typeof next === 'object' ? next : undefined"
+          v-bind="typeof props.next === 'object' ? props.next : undefined"
           data-slot="next"
-          :class="ui.next({ class: uiProp?.next })"
+          :class="ui.next({ class: props.ui?.next })"
           @click="scrollNext"
         />
       </div>
 
-      <div v-if="dots" role="tablist" :aria-label="t('carousel.dots')" data-slot="dots" :class="ui.dots({ class: uiProp?.dots })">
+      <div v-if="props.dots" role="tablist" :aria-label="t('carousel.dots')" data-slot="dots" :class="ui.dots({ class: props.ui?.dots })">
         <template v-for="(_, index) in scrollSnaps" :key="index">
           <button
             type="button"
@@ -400,7 +409,7 @@ defineExpose({
             :aria-label="t('carousel.goto', { slide: index + 1 })"
             :aria-selected="selectedIndex === index"
             data-slot="dot"
-            :class="ui.dot({ class: uiProp?.dot, active: selectedIndex === index })"
+            :class="ui.dot({ class: props.ui?.dot, active: selectedIndex === index })"
             :data-state="selectedIndex === index ? 'active' : undefined"
             @click="scrollTo(index)"
           />

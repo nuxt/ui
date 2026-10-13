@@ -2,7 +2,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-logos'
-import type { MarqueeProps } from '../types'
+import type { MarqueeProps } from './Marquee.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type PageLogos = ComponentConfig<typeof theme, AppConfig, 'pageLogos'>
@@ -17,7 +17,7 @@ export interface PageLogosProps {
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: any
+  as?: any | { root?: any, title?: any }
   title?: string
   items?: PageLogosItem[]
   marquee?: boolean | MarqueeProps
@@ -35,7 +35,8 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
+import { resolveAs } from '../utils'
 import { tv } from '../utils/tv'
 import UMarquee from './Marquee.vue'
 import UAvatar from './Avatar.vue'
@@ -45,55 +46,59 @@ defineOptions({ inheritAttrs: false })
 
 const [DefineCreateItemTemplate, ReuseCreateItemTemplate] = createReusableTemplate()
 
-const props = withDefaults(defineProps<PageLogosProps>(), {
+const _props = withDefaults(defineProps<PageLogosProps>(), {
   marquee: false
 })
 const slots = defineSlots<PageLogosSlots>()
 
+const props = useComponentProps('pageLogos', _props)
+
 const appConfig = useAppConfig() as PageLogos['AppConfig']
-const uiProp = useComponentUI('pageLogos', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageLogos || {}) })())
+const as = computed(() => resolveAs(props.as, { root: 'div', title: 'h2' }))
+
+// eslint-disable-next-line vue/no-dupe-keys
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageLogos || {}) })())
 </script>
 
 <template>
   <DefineCreateItemTemplate>
     <slot v-if="!!slots.default" />
-    <template v-else-if="items?.length">
-      <template v-for="(item, index) in items" :key="index">
+    <template v-else-if="props.items?.length">
+      <template v-for="(item, index) in props.items" :key="index">
         <UAvatar
           v-if="typeof item === 'object'"
           :src="item.src"
           :alt="item.alt"
           data-slot="logo"
-          :class="ui.logo({ class: uiProp?.logo })"
+          :class="ui.logo({ class: props.ui?.logo })"
         />
         <UIcon
           v-else
           :name="item"
           data-slot="logo"
-          :class="ui.logo({ class: uiProp?.logo })"
+          :class="ui.logo({ class: props.ui?.logo })"
         />
       </template>
     </template>
   </DefineCreateItemTemplate>
 
-  <Primitive :as="as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
-    <h2 v-if="title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
-      {{ title }}
-    </h2>
+  <Primitive :as="as.root" data-slot="root" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <Primitive v-if="props.title" :as="as.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+      {{ props.title }}
+    </Primitive>
 
     <UMarquee
-      v-if="marquee"
-      v-bind="typeof marquee === 'object' ? marquee : {}"
+      v-if="props.marquee"
+      v-bind="typeof props.marquee === 'object' ? props.marquee : {}"
       data-slot="logos"
-      :class="ui.logos({ class: uiProp?.logos, marquee: true })"
+      :class="ui.logos({ class: props.ui?.logos, marquee: true })"
     >
-      <ReuseCreateItemTemplate :items="items" />
+      <ReuseCreateItemTemplate :items="props.items" />
     </UMarquee>
-    <div v-else data-slot="logos" :class="ui.logos({ class: uiProp?.logos })">
-      <ReuseCreateItemTemplate :items="items" />
+    <div v-else data-slot="logos" :class="ui.logos({ class: props.ui?.logos })">
+      <ReuseCreateItemTemplate :items="props.items" />
     </div>
   </Primitive>
 </template>

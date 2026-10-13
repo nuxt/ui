@@ -1,7 +1,3 @@
-<script setup lang="ts">
-const getOverflowTooltip = (hiddenCount: number) => `${hiddenCount} more teammates`
-</script>
-
 <template>
   <UAvatarGroup :max="2">
     <UAvatar
@@ -22,9 +18,9 @@ const getOverflowTooltip = (hiddenCount: number) => `${hiddenCount} more teammat
       loading="lazy"
     />
 
-    <template #overflow="{ hiddenCount, avatarProps }">
-      <UTooltip :text="getOverflowTooltip(hiddenCount)">
-        <UAvatar v-bind="avatarProps" />
+    <template #overflow="{ hiddenCount }">
+      <UTooltip :text="`${hiddenCount} more teammate${hiddenCount === 1 ? '' : 's'}`">
+        <UAvatar :text="`+${hiddenCount}`" />
       </UTooltip>
     </template>
   </UAvatarGroup>

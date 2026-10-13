@@ -58,6 +58,34 @@ describe('ChatPromptSubmit', () => {
     expect(wrapper.find('button').attributes('disabled')).toBeUndefined()
   })
 
+  it('hides the icon when icon is false', async () => {
+    const withIcon = await mountSuspended(ChatPromptSubmit)
+    expect(withIcon.find('[data-slot="leadingIcon"]').exists()).toBe(true)
+
+    const withoutIcon = await mountSuspended(ChatPromptSubmit, { props: { icon: false } })
+    expect(withoutIcon.find('[data-slot="leadingIcon"]').exists()).toBe(false)
+  })
+
+  it.each([
+    ['ready', 'Send prompt'],
+    ['submitted', 'Stop generating'],
+    ['streaming', 'Stop generating'],
+    ['error', 'Retry']
+  ] as const)('sets aria-label when status is %s', async (status, label) => {
+    const wrapper = await mountSuspended(ChatPromptSubmit, { props: { status } })
+
+    expect(wrapper.find('button').attributes('aria-label')).toBe(label)
+  })
+
+  it('allows overriding aria-label through attrs', async () => {
+    const wrapper = await mountSuspended(ChatPromptSubmit, {
+      props: { status: 'streaming' },
+      attrs: { 'aria-label': 'Cancel' }
+    })
+
+    expect(wrapper.find('button').attributes('aria-label')).toBe('Cancel')
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(ChatPromptSubmit, {
       props: {

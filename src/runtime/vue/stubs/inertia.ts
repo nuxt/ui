@@ -6,7 +6,9 @@ export const useRoute = () => {
   const page = usePage()
 
   return {
-    fullPath: page.url
+    get fullPath() {
+      return page.url
+    }
   }
 }
 

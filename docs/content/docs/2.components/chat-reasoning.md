@@ -9,7 +9,6 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/ChatReasoning.vue
-navigation.badge: New
 ---
 
 ## Usage
@@ -60,6 +59,10 @@ props:
   text: 'The user is asking about Vue components...'
   class: 'w-60'
 ---
+::
+
+::tip
+Set the `auto-open` prop to `false` to keep the component closed when streaming starts, and `auto-close-delay` to `0` to keep it open when streaming ends.
 ::
 
 ::tip
