@@ -2,20 +2,6 @@ import { colorVariant } from './color'
 import { fieldGroupVariantRoot } from './field-group'
 import { defineTheme } from '../utils/theme'
 
-// The focus classes below, for a box whose native input is not always its direct
-// child (InputTags, InputMenu), spelled out so Tailwind finds them. They follow
-// the input alone, so a button in the leading or the trailing doesn't light the box
-const withinFocusMap: Record<string, string> = {
-  'has-[>:focus]:bg-soft': 'has-[input:focus]:bg-soft',
-  'has-[>:focus-visible]:outline-3': 'has-[input:focus-visible]:outline-3',
-  'has-[>:focus-visible]:z-1': 'has-[input:focus-visible]:z-1',
-  'has-[>:focus-visible]:ring-accent': 'has-[input:focus-visible]:ring-accent'
-}
-
-export function withinFocus(classes: string): string {
-  return classes.split(' ').map(cls => withinFocusMap[cls] ?? cls).join(' ')
-}
-
 // `root` is the box and has no padding: `base`, the native input, has the one of
 // the size, and the leading and the trailing bring their own. The box follows the
 // state of its direct children, so a button in the leading doesn't light it.
