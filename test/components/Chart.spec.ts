@@ -44,7 +44,8 @@ describe('Chart', () => {
     // Props
     ...types.map((type: string) => [`with type ${type}`, { props: { ...props, type } }]),
     ['with type donut and center slot', { props: { tooltip: false, data: props.data, type: 'donut', index: 'month', categories: ['desktop'], thickness: 12, ariaLabel: 'Desktop' }, slots: { center: () => 'Center slot' } }],
-    ['with type donut and legend', { props: { tooltip: false, data: props.data, type: 'donut', index: 'month', categories: ['desktop'], legend: true, ariaLabel: 'Desktop' } }],
+    ['with type donut without legend', { props: { tooltip: false, data: props.data, type: 'donut', index: 'month', categories: ['desktop'], legend: false, ariaLabel: 'Desktop' } }],
+    ['with type donut and repeated colors', { props: { tooltip: false, data: [...props.data, ...props.data.map(row => ({ ...row, month: `${row.month} 2` }))], type: 'donut', index: 'month', categories: ['desktop'], colors: ['primary'], ariaLabel: 'Desktop' } }],
     ['with stacked bar', { props: { ...props, type: 'bar', stacked: true } }],
     ['with stacked area', { props: { ...props, type: 'area', stacked: true } }],
     ['with curve monotone', { props: { ...props, curve: 'monotone' } }],

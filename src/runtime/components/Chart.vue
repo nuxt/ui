@@ -63,7 +63,7 @@ export interface ChartProps<T extends ChartDatum = ChartDatum> {
    * @defaultValue true
    */
   yAxis?: boolean
-  /** Display a legend. Defaults to `true` when there is more than one category. */
+  /** Display a legend. Defaults to `true` when there is more than one category, or more than one slice with `donut`. */
   legend?: boolean
   /** Format the values on the y axis and in the tooltip. */
   format?: (value: number) => string
@@ -187,7 +187,7 @@ const style = computed(() => Object.fromEntries(Array.from({ length: Math.max(se
   const color = resolveColor(seriesColors.value[i % seriesColors.value.length]!)
   const round = Math.floor(i / seriesColors.value.length)
 
-  return [`--ts-chart-${i + 1}`, round ? `color-mix(in oklab, ${color} ${Math.max(100 - round * 35, 25)}%, var(--ui-bg))` : color]
+  return [`--ts-chart-${i + 1}`, round ? `color-mix(in oklab, ${color} ${Math.round(100 * 0.65 ** round)}%, var(--ui-bg))` : color]
 })))
 
 // One row per (x, category) pair so a single mark can group, stack and color by series.
@@ -227,7 +227,7 @@ const donutDefinition = computed(() => {
       scale: scaleOrdinal<string, string>()
         .domain(labels)
         .range(labels.map((_, i) => `var(--ts-chart-${i + 1})`)),
-      legend: props.legend ? legendGuide : undefined
+      legend: (props.legend ?? labels.length > 1) ? legendGuide : undefined
     }
   } as any)
 })
