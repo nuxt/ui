@@ -2,7 +2,6 @@
 import { defineChart, lineY, ruleY } from '@tanstack/charts'
 import { scaleLinear } from '@tanstack/charts/scales/linear'
 import { scalePoint } from '@tanstack/charts/scales/point'
-import { tooltip } from '@tanstack/charts/tooltip'
 
 const data = [
   { month: 'January', revenue: 186 },
@@ -21,8 +20,7 @@ const definition = defineChart({
   scales: {
     x: { scale: () => scalePoint<string>().padding(0.2) },
     y: { scale: scaleLinear, nice: true, grid: true }
-  },
-  tooltip
+  }
 })
 </script>
 

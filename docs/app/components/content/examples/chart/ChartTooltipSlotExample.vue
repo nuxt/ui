@@ -17,15 +17,15 @@ const data = [
     curve="monotone"
     aria-label="Visitors by device"
   >
-    <template #tooltip="{ points }">
-      <p class="font-medium text-highlighted mb-1">
-        {{ points[0]?.datum.x }}
+    <template #tooltip="{ title, rows }">
+      <p class="font-medium text-highlighted">
+        {{ title }}
       </p>
 
-      <div v-for="point in points" :key="point.key" class="flex items-center gap-2">
-        <span class="size-2 rounded-full" :style="{ backgroundColor: point.color }" />
-        <span class="capitalize text-muted">{{ point.datum.category }}</span>
-        <span class="ms-auto font-medium text-highlighted tabular-nums">{{ point.datum.value }}</span>
+      <div v-for="row in rows" :key="row.label" class="flex items-center gap-2">
+        <span class="size-2 rounded-full" :style="{ backgroundColor: row.color }" />
+        <span class="capitalize text-muted">{{ row.label }}</span>
+        <span class="ms-auto font-medium tabular-nums">{{ row.value }} visitors</span>
       </div>
     </template>
   </UChart>

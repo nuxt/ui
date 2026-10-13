@@ -413,6 +413,46 @@ props:
 ---
 ::
 
+### Tooltip
+
+A [Tooltip](/docs/components/tooltip) shows the focused values on hover and keyboard navigation. Use the `tooltip` prop to customize it with any of its props, or set it to `false` to hide it.
+
+::component-code
+---
+prettier: true
+collapse: true
+ignore:
+  - data
+  - index
+  - categories
+props:
+  tooltip: false
+  data:
+    - month: January
+      desktop: 186
+      mobile: 80
+    - month: February
+      desktop: 305
+      mobile: 200
+    - month: March
+      desktop: 237
+      mobile: 120
+    - month: April
+      desktop: 73
+      mobile: 190
+    - month: May
+      desktop: 209
+      mobile: 130
+    - month: June
+      desktop: 214
+      mobile: 140
+  index: month
+  categories:
+    - desktop
+    - mobile
+---
+::
+
 ### Thickness
 
 Use the `thickness` prop to set the width of the ring in pixels. Only applies to the `donut` type. Defaults to `24`.
@@ -520,7 +560,7 @@ name: 'chart-format-example'
 
 ### With custom tooltip
 
-Use the `#tooltip` slot to replace the tooltip content. It receives the hovered `points`, each with the `datum` it comes from and its `color`.
+Use the `#tooltip` slot to replace the tooltip content. It receives the `title`, the `rows` with their `label`, `value` and `color`, and the focused `points`.
 
 ::component-example
 ---
