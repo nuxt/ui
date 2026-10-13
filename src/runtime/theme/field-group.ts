@@ -10,12 +10,11 @@ export const fieldGroupVariant = {
   }
 }
 
-// For a field whose `root` is a box around what takes the focus: a native
-// element, or the segments of an InputDate
+// For a field whose `root` is a box around what takes the focus
 export const fieldGroupVariantRoot = {
   fieldGroup: {
-    horizontal: { root: `${horizontal} has-[>:focus-visible]:z-1` },
-    vertical: { root: `${vertical} has-[>:focus-visible]:z-1` }
+    horizontal: { root: `${horizontal} has-focus-visible:z-1` },
+    vertical: { root: `${vertical} has-focus-visible:z-1` }
   }
 }
 
