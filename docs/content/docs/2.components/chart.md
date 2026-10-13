@@ -375,7 +375,7 @@ props:
 
 ### Legend
 
-Use the `legend` prop to toggle the legend. Defaults to `true` when there is more than one category.
+Use the `legend` prop to toggle the legend. Defaults to `true` when there is more than one category, or more than one slice with `donut`.
 
 ::component-code
 ---
@@ -571,7 +571,7 @@ name: 'chart-tooltip-slot-example'
 
 ### With a chart definition
 
-Use the `definition` prop to pass a complete [TanStack Charts definition](https://tanstack.com/charts/latest/docs/concepts/chart-definitions) when the other props are not enough. A definition from the [TanStack Charts](https://tanstack.com/charts/latest) examples renders as is, with the theme colors, the tooltip and the responsive sizing applied.
+Use the `definition` prop to pass a complete [TanStack Charts definition](https://tanstack.com/charts/latest/docs/concepts/chart-definitions) when the other props are not enough. A definition from the [TanStack Charts](https://tanstack.com/charts/latest) examples renders as is, with the tooltip and the responsive sizing applied. Series without an explicit color use the [`--ui-chart-*`](/docs/getting-started/theme/css-variables#chart) CSS variables, colors set in the definition are kept.
 
 Use the `height`, `aspect-ratio` and `width` props to size it, and the `select`, `focus-change` and `focus-group-change` events to react to the focused points.
 

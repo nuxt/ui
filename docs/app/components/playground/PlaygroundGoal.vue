@@ -20,6 +20,7 @@ const data = [
       index="label"
       :categories="['amount']"
       :colors="['primary', 'var(--ui-bg-accented)']"
+      :legend="false"
       :thickness="12"
       :height="128"
       :initial-width="128"
