@@ -2,20 +2,17 @@ import { colorVariant } from './color'
 import { fieldGroupVariantRoot } from './field-group'
 import { defineTheme } from '../utils/theme'
 
-// The box is a `div` around the segments: `root` has the tokens, the padding and
-// the gap of the size, and the leading and the trailing are in its flow. The
-// segments take the focus, so the box follows it with `has-focus`.
+// `root` is the box, a `div` around the segments. They take the focus, so the
+// box follows it with `has-focus`.
 export default defineTheme({
   slots: {
     root: 'group relative inline-flex items-center rounded-md select-none text-strong data-disabled:cursor-not-allowed transition-colors',
     segment: 'rounded-sm text-center outline-hidden data-placeholder:text-faint data-[segment=literal]:text-muted data-invalid:text-error data-disabled:cursor-not-allowed data-disabled:opacity-75 transition-colors',
-    // After the segments in the DOM, so they keep the first tab stops.
-    // The box sits on a line of text by its first item: an invisible character
-    // gives the leading the baseline of the text, so an icon doesn't move the box
+    // After the segments in the DOM, so they keep the first tab stops. The invisible
+    // character gives the leading the baseline of the text, see `input.ts`
     leading: `order-first flex items-center before:content-['x'] before:w-0 before:invisible`,
     leadingIcon: 'shrink-0 text-faint',
     leadingAvatar: 'shrink-0',
-    // At the end of the box, whatever sits between the two
     trailing: 'ms-auto flex items-center',
     trailingIcon: 'shrink-0 text-faint',
     separatorIcon: 'shrink-0 size-4 text-muted'

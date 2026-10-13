@@ -2,8 +2,6 @@ import { colorVariant } from './color'
 import input from './input'
 import { defineTheme } from '../utils/theme'
 
-// Same box as Input: `root` is the box, `base` the native input with the padding
-// of the size, and the buttons are in the flow of the box.
 export default defineTheme({
   slots: {
     root: input.slots.root,
