@@ -60,9 +60,6 @@ export default defineTheme({
     highlight: {
       true: { root: 'ring ring-inset ring-accent' }
     },
-    fixed: {
-      false: ''
-    },
     // Next to a button, the input gives up its padding: the button brings its own
     increment: {
       true: { base: 'pe-0' },
@@ -77,22 +74,6 @@ export default defineTheme({
     orientation: 'horizontal',
     decrement: false,
     class: { base: 'text-start' }
-  }, {
-    fixed: false,
-    size: 'xs',
-    class: { root: 'md:text-xs' }
-  }, {
-    fixed: false,
-    size: 'sm',
-    class: { root: 'md:text-xs' }
-  }, {
-    fixed: false,
-    size: 'md',
-    class: { root: 'md:text-sm' }
-  }, {
-    fixed: false,
-    size: 'lg',
-    class: { root: 'md:text-sm' }
   }],
   defaultVariants: {
     size: 'md',
