@@ -62,7 +62,7 @@ export type RenamedSlot<T, From extends string, To extends string> = {
 
 /**
  * Give a slot of a theme another name, like the box of the field theme, which
- * is `base` on a Select and `root` on an InputDate.
+ * is `root` on an InputDate and `base` on a Select.
  * @internal
  */
 export function renameSlot<T extends TVTheme, From extends string, To extends string>(theme: T, from: From, to: To): RenamedSlot<T, From, To> {
