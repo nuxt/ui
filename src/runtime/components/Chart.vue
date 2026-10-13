@@ -23,7 +23,7 @@ export interface ChartProps<T extends ChartDatum = ChartDatum> {
   categories?: (keyof T & string)[]
   /**
    * The series colors, in `categories` order, or in `data` order with `donut`. Accepts theme colors or any CSS color.
-   * @defaultValue ['primary', 'secondary', 'info', 'success', 'warning', 'error']
+   * @defaultValue ['primary', 'secondary', 'warning', 'error', 'info', 'success']
    */
   colors?: string[]
   /** Stack the series on top of each other. Only applies to `area` and `bar`. */
@@ -92,7 +92,7 @@ export interface ChartSlots {
 <script setup lang="ts" generic="T extends ChartDatum">
 import { computed } from 'vue'
 import { Chart as TanStackChart } from '@tanstack/charts/vue'
-import { areaY, barY, colorLegend, defineChart, group, lineY, ruleY } from '@tanstack/charts'
+import { areaY, barY, colorLegend, colorLegendItems, defineChart, group, lineY, ruleY } from '@tanstack/charts'
 import { scaleBand } from '@tanstack/charts/scales/band'
 import { scaleLinear } from '@tanstack/charts/scales/linear'
 import { scaleOrdinal } from '@tanstack/charts/scales/ordinal'
@@ -131,7 +131,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chart || {}) })(
 
 const themeColors = computed(() => ['neutral', ...Object.keys(appConfig.ui?.colors || {})])
 
-const seriesColors = computed(() => props.colors ?? ['primary', 'secondary', 'info', 'success', 'warning', 'error'])
+const seriesColors = computed(() => props.colors ?? ['primary', 'secondary', 'warning', 'error', 'info', 'success'])
 
 // Series paint resolves through `--ts-chart-*` so it follows the theme and color mode
 // without rebuilding the definition.
@@ -148,6 +148,9 @@ const rows = computed(() => (props.data ?? []).flatMap(datum => seriesKeys.value
   category,
   value: datum[category] as number
 }))))
+
+// The default legend stretches its items over the full width.
+const legendGuide = colorLegend({ items: colorLegendItems({ justify: 'center', gap: 16 }) })
 
 // Slices are colored by label rather than by series.
 const donutDefinition = computed(() => {
@@ -172,7 +175,7 @@ const donutDefinition = computed(() => {
       scale: scaleOrdinal<string, string>()
         .domain(labels)
         .range(labels.map((_, i) => `var(--ts-chart-${(i % seriesColors.value.length) + 1})`)),
-      legend: props.legend ? colorLegend() : undefined
+      legend: props.legend ? legendGuide : undefined
     },
     tooltip
   } as any)
@@ -236,7 +239,7 @@ const generatedDefinition = computed(() => {
     },
     color: {
       scale: color,
-      legend: (props.legend ?? multiple) ? colorLegend() : undefined
+      legend: (props.legend ?? multiple) ? legendGuide : undefined
     },
     focus: multiple ? 'group-x' : undefined,
     tooltip
@@ -257,7 +260,9 @@ const chartDefinition = computed(() => (props.definition ?? generatedDefinition.
       :class="ui.base({ class: props.ui?.base })"
     >
       <template v-if="!!slots.tooltip" #tooltipBody="slotProps">
-        <slot name="tooltip" v-bind="slotProps" />
+        <div data-slot="tooltip" :class="ui.tooltip({ class: props.ui?.tooltip })">
+          <slot name="tooltip" v-bind="slotProps" />
+        </div>
       </template>
     </TanStackChart>
 

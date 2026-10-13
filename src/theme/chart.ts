@@ -11,6 +11,7 @@ export default {
       '[--ts-chart-tooltip-font:inherit]'
     ],
     base: '',
+    tooltip: 'rounded-md bg-default ring ring-default shadow-lg p-2 text-xs text-muted',
     center: 'absolute inset-0 flex flex-col items-center justify-center pointer-events-none'
   },
   variants: {
