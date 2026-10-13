@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import type { ChartDefinition, ChartTooltipBodySlotContext } from '@tanstack/charts/vue'
+import type { ChartDefinition, ChartPoint, ChartTooltipBodySlotContext } from '@tanstack/charts/vue'
 import theme from '#build/ui/chart'
 import type { ComponentConfig } from '../types/tv'
 
@@ -55,7 +55,7 @@ export interface ChartProps<T extends ChartDatum = ChartDatum> {
   yAxis?: boolean
   /** Display a legend. Defaults to `true` when there is more than one category. */
   legend?: boolean
-  /** Format the y axis ticks. */
+  /** Format the values on the y axis and in the tooltip. */
   format?: (value: number) => string
   /**
    * The width of the ring in pixels. Only applies to `donut`.
@@ -121,7 +121,7 @@ const slots = defineSlots<ChartSlots>()
 
 const props = useComponentProps<ChartProps<T>>('chart', _props)
 
-const { dir } = useLocale()
+const { dir, code } = useLocale()
 const appConfig = useAppConfig() as Chart['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -148,6 +148,11 @@ const rows = computed(() => (props.data ?? []).flatMap(datum => seriesKeys.value
   category,
   value: datum[category] as number
 }))))
+
+// The default tooltip labels its rows with channel names (`x`, `y`) for a single series.
+function formatValue(value: number) {
+  return props.format ? props.format(value) : new Intl.NumberFormat(code.value).format(value)
+}
 
 // The default legend stretches its items over the full width.
 const legendGuide = colorLegend({ items: colorLegendItems({ justify: 'center', gap: 16 }) })
@@ -177,7 +182,16 @@ const donutDefinition = computed(() => {
         .range(labels.map((_, i) => `var(--ts-chart-${(i % seriesColors.value.length) + 1})`)),
       legend: props.legend ? legendGuide : undefined
     },
-    tooltip
+    tooltip: {
+      use: tooltip,
+      content: (points: readonly ChartPoint<any>[]) => ({
+        rows: points.map(point => ({
+          label: String(point.datum[props.index!]),
+          value: formatValue(point.datum.value),
+          color: point.color
+        }))
+      })
+    }
   } as any)
 })
 
@@ -241,8 +255,19 @@ const generatedDefinition = computed(() => {
       scale: color,
       legend: (props.legend ?? multiple) ? legendGuide : undefined
     },
-    focus: multiple ? 'group-x' : undefined,
-    tooltip
+    focus: 'group-x',
+    tooltip: {
+      use: tooltip,
+      content: (points: readonly ChartPoint<any>[], { primaryPoint }: { primaryPoint?: ChartPoint }) => ({
+        title: String(points[0]?.datum.x ?? ''),
+        rows: points.map(point => ({
+          label: point.datum.category,
+          value: formatValue(point.datum.value),
+          color: point.color,
+          active: points.length > 1 && point === primaryPoint
+        }))
+      })
+    }
   } as any)
 })
 
