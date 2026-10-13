@@ -37,6 +37,8 @@ items:
     url: https://asso.benevolt.fr/
   - name: FrameZero
     url: https://www.framezero.app/
+  - name: Idlen - AI Ads
+    url: https://www.idlen.io
   - name: JSON DeepL
     url: https://jsondeepl.com/
   - name: Juno.one
@@ -105,5 +107,3 @@ items:
     url: https://wiredash.com/
   - name: Zielgestalt
     url: https://zielgestalt.de/
-  - name: Idlen - AI Ads
-    url: https://www.idlen.io
