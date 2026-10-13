@@ -156,6 +156,23 @@ describe('Tree', () => {
     expect(wrapper.get('[role="treeitem"]').attributes('aria-expanded')).toBe('true')
   })
 
+  it('keeps an empty string value as the item key', async () => {
+    const wrapper = await mountSuspended(Tree, {
+      props: {
+        expanded: [''],
+        items: [
+          {
+            label: 'references',
+            value: '',
+            children: [{ label: 'nuxt.md', value: 'nuxt.md' }]
+          }
+        ]
+      }
+    })
+
+    expect(wrapper.get('[role="treeitem"]').attributes('aria-expanded')).toBe('true')
+  })
+
   it('falls back to label when value is not provided', async () => {
     const wrapper = await mountSuspended(Tree, {
       props: {
