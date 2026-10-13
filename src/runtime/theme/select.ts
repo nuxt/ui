@@ -1,7 +1,10 @@
 import field from './field'
-import { extendTheme } from '../utils/theme'
+import { extendTheme, renameSlot } from '../utils/theme'
 
-export default extendTheme(field, {
+// The box is a `<button>`, so it is `base`
+const theme = renameSlot(field, 'root', 'base')
+
+export default extendTheme(theme, {
   slots: {
     base: (prev: string) => [prev, 'disabled:cursor-not-allowed disabled:opacity-75'],
     value: 'truncate pointer-events-none',
@@ -24,7 +27,7 @@ export default extendTheme(field, {
     itemDescription: 'truncate text-muted'
   },
   variants: {
-    variant: (prev: typeof field.variants.variant) => ({
+    variant: (prev: typeof theme.variants.variant) => ({
       ...prev,
       outline: {
         base: [prev.outline!.base, 'hover:bg-soft disabled:bg-default'].join(' ')

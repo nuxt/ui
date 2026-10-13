@@ -1,10 +1,7 @@
 import field, { replaceFocus } from './field'
-import { extendTheme, renameSlot } from '../utils/theme'
+import { extendTheme } from '../utils/theme'
 
-// The box is a `div` around the segments, so it is `root`
-const theme = renameSlot(field, 'base', 'root')
-
-export default extendTheme(theme, {
+export default extendTheme(field, {
   slots: {
     root: (prev: string) => [prev, 'select-none'],
     segment: 'rounded-sm text-center outline-hidden data-placeholder:text-faint data-[segment=literal]:text-muted data-invalid:text-error data-disabled:cursor-not-allowed data-disabled:opacity-75 transition-colors',
@@ -36,7 +33,7 @@ export default extendTheme(theme, {
         segment: 'data-[segment=day]:w-10 data-[segment=month]:w-10 data-[segment=year]:w-12'
       }
     },
-    variant: (prev: typeof theme.variants.variant) => Object.fromEntries(
+    variant: (prev: typeof field.variants.variant) => Object.fromEntries(
       Object.entries(prev).map(([key, value]) => [key, { root: replaceFocus(value.root), segment: key === 'outline' || key === 'none' ? 'focus:bg-soft' : 'focus:bg-strong' }])
     ) as Record<keyof typeof prev, { root: string, segment: string }>
   }
