@@ -213,7 +213,7 @@ props:
 
 ### Colors
 
-Use the `colors` prop to set the color of each series, in `categories` order. It accepts theme colors or any CSS color. Defaults to `['primary', 'secondary', 'warning', 'error', 'neutral']`. When there are more series than colors, the colors repeat as lighter tints.
+Use the `colors` prop to set the color of each series, in `categories` order. It accepts theme colors or any CSS color. Defaults to the [`--ui-chart-*`](/docs/getting-started/theme/css-variables#chart) CSS variables. When there are more series than colors, the colors repeat as lighter tints.
 
 ::component-code
 ---
@@ -571,13 +571,19 @@ name: 'chart-tooltip-slot-example'
 
 ### With a chart definition
 
-Use the `definition` prop to pass a complete [TanStack Charts definition](https://tanstack.com/charts/latest/docs/concepts/chart-definitions) when the other props are not enough. The component still applies the theme and keeps the chart responsive.
+Use the `definition` prop to pass a complete [TanStack Charts definition](https://tanstack.com/charts/latest/docs/concepts/chart-definitions) when the other props are not enough. A definition from the [TanStack Charts](https://tanstack.com/charts/latest) examples renders as is, with the theme colors, the tooltip and the responsive sizing applied.
+
+Use the `height`, `aspect-ratio` and `width` props to size it, and the `select`, `focus-change` and `focus-group-change` events to react to the focused points.
 
 ::component-example
 ---
 collapse: true
 name: 'chart-definition-example'
 ---
+::
+
+::note
+When the definition brings its own `tooltip`, it is displayed in place of the `tooltip` prop. Examples importing `d3-*` packages need them installed in your project.
 ::
 
 ## API
@@ -589,6 +595,10 @@ name: 'chart-definition-example'
 ### Slots
 
 :component-slots
+
+### Emits
+
+:component-emits
 
 ## Theme
 
