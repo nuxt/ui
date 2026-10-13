@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { hash } from 'ohash'
 import { MarkdownDocument } from '@comark/vue'
-import { parseMarkdownDoc } from '../../utils/markdown'
 import type { MarkdownDoc } from '../../utils/markdown'
 
 /**
@@ -16,14 +16,22 @@ const props = defineProps<{
   unwrap?: boolean | string
 }>()
 
-async function resolve(value: string | MarkdownDoc | undefined) {
-  if (!value) {
-    return null
+// Loaded on demand: the parser, the highlighter and its grammars stay out of
+// every page's own chunks, the client only needs them once a value changes.
+async function parse(value: string): Promise<MarkdownDoc> {
+  try {
+    const { parseMarkdownDoc } = await import('../../utils/markdown')
+    return await parseMarkdownDoc(value)
+  } catch (error) {
+    console.warn('[markdown] could not parse', error)
+    // the source as plain text, so a broken string never fails the page
+    return { frontmatter: {}, meta: {}, nodes: [['p', {}, value]] } as unknown as MarkdownDoc
   }
+}
 
-  const doc = typeof value === 'string' ? await parseMarkdownDoc(value) : value
-  if (!props.unwrap) {
-    return doc
+function unwrapDoc(doc: MarkdownDoc | null | undefined) {
+  if (!doc || !props.unwrap) {
+    return doc ?? null
   }
 
   const tags = props.unwrap === true ? ['p'] : String(props.unwrap).split(' ')
@@ -34,28 +42,29 @@ async function resolve(value: string | MarkdownDoc | undefined) {
 
 const doc = shallowRef<MarkdownDoc | null>(null)
 
+// The server parses and the payload carries the result, keyed by the source
+// so a description repeated down a table is stored once: hydrating a page
+// would otherwise parse and highlight every block on it a second time.
+if (typeof props.value === 'string' && props.value) {
+  const source = props.value
+  const { data } = await useAsyncData(`docs-markdown-${hash(source)}`, () => parse(source), { deep: false })
+  doc.value = unwrapDoc(data.value)
+} else {
+  doc.value = unwrapDoc(props.value as MarkdownDoc | undefined)
+}
+
 // the last change wins: a parse for a value that has moved on is dropped
 let version = 0
 async function update() {
   const current = ++version
-  let next: MarkdownDoc | null
-  try {
-    next = await resolve(props.value)
-  } catch (error) {
-    console.warn('[markdown] could not parse', error)
-    // the source as plain text, so a broken string never fails the page
-    const fallback = { frontmatter: {}, meta: {}, nodes: [['p', {}, props.value]] } as unknown as MarkdownDoc
-    next = await resolve(fallback)
-  }
+  const value = props.value
+  const next = unwrapDoc(typeof value === 'string' ? (value ? await parse(value) : null) : value)
   if (current === version) {
     doc.value = next
   }
 }
 
 watch(() => [props.value, props.unwrap], update)
-
-// awaited so the server renders it
-await update()
 </script>
 
 <template>

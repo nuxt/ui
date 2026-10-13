@@ -51,6 +51,16 @@ describe('detectUsedComponents', { timeout: 20000 }, () => {
     expect(detected!.size).toBeLessThan(10)
   })
 
+  it('resolves the lazy loaded overlays of menu components', async () => {
+    for (const component of ['Header', 'DashboardSidebar', 'Sidebar']) {
+      const detected = await detectUsedComponents([fixtureUsing(`<U${component} />`)], 'U', componentDir)
+
+      expect(detected).toContain('Modal')
+      expect(detected).toContain('Slideover')
+      expect(detected).toContain('Drawer')
+    }
+  })
+
   it('detects lazy components', async () => {
     const detected = await detectUsedComponents([fixtureUsing('<LazyUTooltip text="x" />')], 'U', componentDir)
 

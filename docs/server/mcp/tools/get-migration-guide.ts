@@ -1,4 +1,8 @@
+import { defineMcpTool } from '@nuxtjs/mcp-toolkit/server'
+import { useEvent } from 'nitropack/runtime'
+import { createError } from 'h3'
 import { queryCollection } from '@nuxt/content/server'
+import { SITE_URL } from '../../utils/site'
 
 export default defineMcpTool({
   description: 'Returns the full guide for migrating an application from the previous major version of Nuxt UI to this one, as Markdown with its title, description and URL. Takes no parameters and covers that single upgrade only. The page is large. To read part of it, call `get-documentation-page` with `/docs/getting-started/migration` and a `headings` list.',

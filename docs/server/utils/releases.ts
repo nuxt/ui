@@ -1,3 +1,5 @@
+import { defineCachedFunction } from 'nitropack/runtime'
+
 export interface Release {
   tag: string
   /** The release name, its tag when it has none. */

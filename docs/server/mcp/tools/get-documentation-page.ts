@@ -1,3 +1,6 @@
+import { defineMcpTool } from '@nuxtjs/mcp-toolkit/server'
+import { useEvent } from 'nitropack/runtime'
+import { createError } from 'h3'
 import { z } from 'zod'
 import { getAgentDocument } from '#agent-discovery'
 

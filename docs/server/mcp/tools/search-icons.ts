@@ -1,3 +1,4 @@
+import { defineMcpTool } from '@nuxtjs/mcp-toolkit/server'
 import { z } from 'zod'
 
 export default defineMcpTool({

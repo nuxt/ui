@@ -114,6 +114,7 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
 
   return {
     id: computed(() => props?.id ?? inputId?.value),
+    labelId: computed(() => formField?.value.labelId),
     name: computed(() => props?.name ?? formField?.value.name),
     size: computed(() => props?.size ?? formField?.value.size),
     color: computed(() => formField?.value.error ? 'error' : props?.color),

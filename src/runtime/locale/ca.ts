@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Tancar'
     },
+    breadcrumb: {
+      label: 'ruta de navegació'
+    },
     calendar: {
+      label: 'Data de l\'esdeveniment',
+      monthPicker: 'Selector de mes',
       nextMonth: 'Mes següent',
       nextYear: 'Any següent',
       prevMonth: 'Mes anterior',
-      prevYear: 'Any anterior'
+      prevYear: 'Any anterior',
+      yearPicker: 'Selector d\'any'
     },
     carousel: {
       dots: 'Tria la diapositiva a mostrar',
       goto: 'Anar a la diapositiva {slide}',
       next: 'Següent',
-      prev: 'Anterior'
+      prev: 'Anterior',
+      roledescription: 'carrusel',
+      slide: 'diapositiva'
     },
     chatMessages: {
       autoScroll: 'Desplaçar cap avall'
@@ -56,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Tancar',
       noData: 'Sense dades',
       noMatch: 'No hi ha dades coincidents',
-      placeholder: 'Escriu una ordre o cerca…'
+      placeholder: 'Escriu una ordre o cerca…',
+      results: 'Resultats'
     },
     contentSearch: {
       links: 'Enllaços',
@@ -100,14 +109,37 @@ export default defineLocale<Messages>({
       close: 'Tancar menú',
       open: 'Obrir menú'
     },
+    inputDate: {
+      day: 'dia',
+      dayPeriod: 'AM/PM',
+      era: 'era',
+      hour: 'hora',
+      minute: 'minut',
+      month: 'mes',
+      second: 'segon',
+      timeZoneName: 'zona horària',
+      year: 'any'
+    },
     inputMenu: {
       create: 'Crear "{label}"',
       noData: 'Sense dades',
-      noMatch: 'No hi ha dades coincidents'
+      noMatch: 'No hi ha dades coincidents',
+      trigger: 'Mostra les opcions'
     },
     inputNumber: {
       decrement: 'Decrementar',
-      increment: 'Incrementar'
+      increment: 'Incrementar',
+      roledescription: 'camp numèric'
+    },
+    inputRating: {
+      rate: 'Valorar {value} de {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'hora',
+      minute: 'minut',
+      second: 'segon',
+      timeZoneName: 'zona horària'
     },
     listbox: {
       noData: 'Sense dades',
@@ -123,6 +155,9 @@ export default defineLocale<Messages>({
       next: 'Pàgina següent',
       page: 'Pàgina {page}',
       prev: 'Pàgina anterior'
+    },
+    pinInput: {
+      input: 'codi PIN, caràcter {index} de {length}'
     },
     pricingTable: {
       caption: 'Comparació de plans de preu'
@@ -156,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: 'No hi ha dades coincidents',
       search: 'Cerca…'
     },
+    skeleton: {
+      label: 'carregant'
+    },
     slideover: {
       close: 'Tancar'
+    },
+    slider: {
+      max: 'Màxim',
+      min: 'Mínim',
+      thumb: 'Cursor',
+      value: 'Valor {index} de {total}'
+    },
+    stepper: {
+      label: 'progrés'
     },
     table: {
       noData: 'Sense dades'
     },
     toast: {
       close: 'Tancar'
+    },
+    toaster: {
+      label: 'Notificació',
+      viewport: 'Notificacions ({hotkey})'
     }
   }
 })

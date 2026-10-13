@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Sluiten'
     },
+    breadcrumb: {
+      label: 'kruimelpad'
+    },
     calendar: {
+      label: 'Evenementdatum',
+      monthPicker: 'Maandkiezer',
       nextMonth: 'Volgende maand',
       nextYear: 'Volgend jaar',
       prevMonth: 'Vorige maand',
-      prevYear: 'Vorig jaar'
+      prevYear: 'Vorig jaar',
+      yearPicker: 'Jaarkiezer'
     },
     carousel: {
       dots: 'Kies dia om weer te geven',
       goto: 'Ga naar dia {slide}',
       next: 'Volgende',
-      prev: 'Vorige'
+      prev: 'Vorige',
+      roledescription: 'carrousel',
+      slide: 'dia'
     },
     chatMessages: {
       autoScroll: 'Naar beneden scrollen'
@@ -56,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Sluiten',
       noData: 'Geen gegevens',
       noMatch: 'Geen overeenkomende gegevens',
-      placeholder: 'Typ een commando of zoek…'
+      placeholder: 'Typ een commando of zoek…',
+      results: 'Resultaten'
     },
     contentSearch: {
       links: 'Links',
@@ -100,14 +109,37 @@ export default defineLocale<Messages>({
       close: 'Menu sluiten',
       open: 'Menu openen'
     },
+    inputDate: {
+      day: 'dag',
+      dayPeriod: 'AM/PM',
+      era: 'tijdperk',
+      hour: 'uur',
+      minute: 'minuut',
+      month: 'maand',
+      second: 'seconde',
+      timeZoneName: 'tijdzone',
+      year: 'jaar'
+    },
     inputMenu: {
       create: '"{label}" creëren',
       noData: 'Geen gegevens',
-      noMatch: 'Geen overeenkomende gegevens'
+      noMatch: 'Geen overeenkomende gegevens',
+      trigger: 'Opties tonen'
     },
     inputNumber: {
       decrement: 'Verlagen',
-      increment: 'Verhogen'
+      increment: 'Verhogen',
+      roledescription: 'getalveld'
+    },
+    inputRating: {
+      rate: 'Beoordeel met {value} van {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'uur',
+      minute: 'minuut',
+      second: 'seconde',
+      timeZoneName: 'tijdzone'
     },
     listbox: {
       noData: 'Geen gegevens',
@@ -123,6 +155,9 @@ export default defineLocale<Messages>({
       next: 'Volgende pagina',
       page: 'Pagina {page}',
       prev: 'Vorige pagina'
+    },
+    pinInput: {
+      input: 'pincode, teken {index} van {length}'
     },
     pricingTable: {
       caption: 'Prijsplanvergelijking'
@@ -156,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: 'Geen overeenkomende gegevens',
       search: 'Zoeken…'
     },
+    skeleton: {
+      label: 'laden'
+    },
     slideover: {
       close: 'Sluiten'
+    },
+    slider: {
+      max: 'Maximum',
+      min: 'Minimum',
+      thumb: 'Schuifregelaar',
+      value: 'Waarde {index} van {total}'
+    },
+    stepper: {
+      label: 'voortgang'
     },
     table: {
       noData: 'Geen gegevens'
     },
     toast: {
       close: 'Sluiten'
+    },
+    toaster: {
+      label: 'Melding',
+      viewport: 'Meldingen ({hotkey})'
     }
   }
 })

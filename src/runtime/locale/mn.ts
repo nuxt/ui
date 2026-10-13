@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Хаах'
     },
+    breadcrumb: {
+      label: 'навигацийн зам'
+    },
     calendar: {
+      label: 'Үйл явдлын огноо',
+      monthPicker: 'Сар сонгогч',
       nextMonth: 'Дараа сар',
       nextYear: 'Дараа жил',
       prevMonth: 'Өмнөх сар',
-      prevYear: 'Өмнөх жил'
+      prevYear: 'Өмнөх жил',
+      yearPicker: 'Он сонгогч'
     },
     carousel: {
       dots: 'Харуулах слайдыг сонгоно уу',
       goto: '{slide}-р хуудсанд шилжих',
       next: 'Дараах',
-      prev: 'Өмнөх'
+      prev: 'Өмнөх',
+      roledescription: 'карусель',
+      slide: 'слайд'
     },
     chatMessages: {
       autoScroll: 'Доош гүйлгэх'
@@ -56,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Хаах',
       noData: 'Мэдээлэл байхгүй',
       noMatch: 'Тохирох мэдээлэл олдсонгүй',
-      placeholder: 'Комманд бичих эсвэл хайлт хийх…'
+      placeholder: 'Комманд бичих эсвэл хайлт хийх…',
+      results: 'Үр дүн'
     },
     contentSearch: {
       links: 'Холбоосууд',
@@ -100,14 +109,37 @@ export default defineLocale<Messages>({
       close: 'Цэсийг хаах',
       open: 'Цэсийг нээх'
     },
+    inputDate: {
+      day: 'өдөр',
+      dayPeriod: 'AM/PM',
+      era: 'эрин',
+      hour: 'цаг',
+      minute: 'минут',
+      month: 'сар',
+      second: 'секунд',
+      timeZoneName: 'цагийн бүс',
+      year: 'жил'
+    },
     inputMenu: {
       create: '"{label}" үүсгэх',
       noData: 'Мэдээлэл байхгүй',
-      noMatch: 'Тохирох мэдээлэл олдсонгүй'
+      noMatch: 'Тохирох мэдээлэл олдсонгүй',
+      trigger: 'Сонголтуудыг харуулах'
     },
     inputNumber: {
       decrement: 'Хасах',
-      increment: 'Нэмэх'
+      increment: 'Нэмэх',
+      roledescription: 'тоон талбар'
+    },
+    inputRating: {
+      rate: '{value}/{length} гэж үнэлэх'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'цаг',
+      minute: 'минут',
+      second: 'секунд',
+      timeZoneName: 'цагийн бүс'
     },
     listbox: {
       noData: 'Мэдээлэл байхгүй',
@@ -123,6 +155,9 @@ export default defineLocale<Messages>({
       next: 'Дараах хуудас',
       page: 'Хуудас {page}',
       prev: 'Өмнөх хуудас'
+    },
+    pinInput: {
+      input: 'PIN код, {length} тэмдэгтийн {index}-р тэмдэгт'
     },
     pricingTable: {
       caption: 'Үнийн төлөвлөгөөний харьцуулалт'
@@ -156,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: 'Тохирох мэдээлэл олдсонгүй',
       search: 'Хайх…'
     },
+    skeleton: {
+      label: 'ачаалж байна'
+    },
     slideover: {
       close: 'Хаах'
+    },
+    slider: {
+      max: 'Хамгийн их',
+      min: 'Хамгийн бага',
+      thumb: 'Гулсуур',
+      value: '{total} утгын {index}-р утга'
+    },
+    stepper: {
+      label: 'явц'
     },
     table: {
       noData: 'Мэдээлэл байхгүй'
     },
     toast: {
       close: 'Хаах'
+    },
+    toaster: {
+      label: 'Мэдэгдэл',
+      viewport: 'Мэдэгдлүүд ({hotkey})'
     }
   }
 })

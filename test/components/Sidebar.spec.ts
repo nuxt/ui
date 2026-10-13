@@ -1,7 +1,8 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Sidebar from '../../src/runtime/components/Sidebar.vue'
+import Slideover from '../../src/runtime/components/Slideover.vue'
 import { renderEach } from '../component-render'
 import theme from '#build/ui/sidebar'
 
@@ -34,6 +35,24 @@ describe('Sidebar', () => {
     ['with footer slot', { slots: { footer: () => 'Footer slot' } }],
     ['with content slot', { slots: { content: () => 'Content slot' } }]
   ])
+
+  it('mounts the mobile menu once opened', async () => {
+    const wrapper = await mountSuspended(Sidebar, { props: { open: false, breakpoint: '2xl', menu: { portal: false } }, slots: { default: () => 'Default slot' } })
+
+    expect(wrapper.findComponent(Slideover).exists()).toBe(false)
+
+    await wrapper.setProps({ open: true })
+    await vi.dynamicImportSettled()
+
+    expect(wrapper.find('[role="dialog"]').text()).toContain('Default slot')
+  })
+
+  it('mounts the mobile menu before opening with `unmountOnHide: false`', async () => {
+    const wrapper = await mountSuspended(Sidebar, { props: { breakpoint: '2xl', menu: { portal: false, unmountOnHide: false } }, slots: { default: () => 'Default slot' } })
+    await vi.dynamicImportSettled()
+
+    expect(wrapper.find('[role="dialog"]').text()).toContain('Default slot')
+  })
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Sidebar, {

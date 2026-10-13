@@ -133,12 +133,10 @@ const ui = {
 /* A vivid primary has a chroma around 0.2 in oklch, black and white have
    none: both alphas follow it from a floor, so a colored theme keeps about
    the 15% wash it had and a mono theme gets a hint of one rather than a
-   gray band. `min()` rather than `calc()`: an alpha is capped at 1 anyway and
-   cssnano's calc pass can't parse the `c` channel keyword, it warns on each
-   build. */
+   gray band. */
 .horizon {
-  --horizon-glow: oklch(from var(--ui-primary) l c h / min(0.06 + c * 0.45, 1));
-  --horizon-line: oklch(from var(--ui-primary) l c h / min(0.35 + c * 3, 1));
+  --horizon-glow: oklch(from var(--ui-primary) l c h / calc(0.06 + c * 0.45));
+  --horizon-line: oklch(from var(--ui-primary) l c h / calc(0.35 + c * 3));
 }
 
 .twinkle {

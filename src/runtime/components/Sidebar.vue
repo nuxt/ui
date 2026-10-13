@@ -111,11 +111,10 @@ import { createReusableTemplate, useMediaQuery } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
+import { useLazyOverlay } from '../composables/useLazyOverlay'
+import { lazyOverlays, loadOverlay } from '../utils/lazy-overlay'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
-import USlideover from './Slideover.vue'
-import UModal from './Modal.vue'
-import UDrawer from './Drawer.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -214,6 +213,8 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.sidebar || {}) }
   transition: props.transition
 }))
 
+const { slideover: USlideover, modal: UModal, drawer: UDrawer } = lazyOverlays
+
 const Menu = computed(() => ({
   slideover: USlideover,
   modal: UModal,
@@ -226,6 +227,12 @@ const menuProps = toRef(() => defu(props.menu, {
   close: props.close,
   closeIcon: props.closeIcon
 }, props.mode === 'modal' ? { } : props.mode === 'slideover' ? { side: props.side, inset: props.variant === 'inset' } : {}) as SidebarMenu<T>)
+
+const renderMenu = useLazyOverlay(() => openMobile.value || (props.menu as ModalProps | undefined)?.unmountOnHide === false, async () => {
+  if (isMobile.value) {
+    await loadOverlay(props.mode as SidebarMode)
+  }
+})
 </script>
 
 <template>
@@ -335,7 +342,7 @@ const menuProps = toRef(() => defu(props.menu, {
 
     <!-- Mobile menu -->
     <Menu
-      v-if="isMobile"
+      v-if="isMobile && renderMenu"
       v-model:open="openMobile"
       v-bind="menuProps"
     >

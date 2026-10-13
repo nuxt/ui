@@ -1,10 +1,12 @@
+import { defineEventHandler, readBody } from 'nuxt/server'
+import type { UIMessage } from 'ai'
 import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse, tool } from 'ai'
 import { anthropic } from '@ai-sdk/anthropic'
 import type { AnthropicLanguageModelOptions } from '@ai-sdk/anthropic'
 import { z } from 'zod'
 
 export default defineEventHandler(async (event) => {
-  const { messages } = await readBody(event)
+  const { messages } = await readBody<{ messages: UIMessage[] }>(event)
 
   const result = streamText({
     model: 'anthropic/claude-sonnet-5.5',

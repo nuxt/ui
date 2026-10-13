@@ -1,5 +1,8 @@
+import { defineMcpTool } from '@nuxtjs/mcp-toolkit/server'
+import { useEvent } from 'nitropack/runtime'
 import { z } from 'zod'
 import { queryCollection } from '@nuxt/content/server'
+import { SITE_URL } from '../../utils/site'
 
 export default defineMcpTool({
   description: 'Finds Nuxt UI composables such as `useToast` or `useOverlay`. `search` is a case-insensitive substring match on the name, title and description, checked against the whole string, so pass one keyword rather than a sentence. With no `search` it lists every composable. Returns name, title, description, path and URL for each match, sorted by name. It does not return usage or signatures. Read a result with `get-documentation-page` using its `path`.',
