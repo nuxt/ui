@@ -50,6 +50,7 @@ Use the `data` prop to pass an array of objects, the `index` prop to set the key
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - data
   - index
@@ -90,6 +91,7 @@ With `donut`, each row of `data` is a slice: `index` sets its label and the firs
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - data
   - index
@@ -135,6 +137,7 @@ Use the `stacked` prop to stack the series on top of each other. Only applies to
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - data
   - index
@@ -175,6 +178,7 @@ Use the `curve` prop to change the shape of the line between values, `linear`, `
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - data
   - index
@@ -214,6 +218,7 @@ Use the `colors` prop to set the color of each series, in `categories` order. It
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - data
   - index
@@ -255,6 +260,7 @@ Use the `points` prop to draw a dot at each value. Only applies to the `line` ty
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - data
   - index
@@ -294,6 +300,7 @@ Use the `grid` prop to toggle the horizontal grid lines. Defaults to `true`.
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - data
   - index
@@ -333,6 +340,7 @@ Use the `x-axis` and `y-axis` props to toggle each axis. Both default to `true`.
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - data
   - index
@@ -372,6 +380,7 @@ Use the `legend` prop to toggle the legend. Defaults to `true` when there is mor
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - data
   - index
@@ -411,6 +420,7 @@ Use the `thickness` prop to set the width of the ring in pixels. Only applies to
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - data
   - index
@@ -451,6 +461,7 @@ Use the `height` prop to set the height of the chart in pixels. Defaults to `300
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - data
   - index
@@ -491,6 +502,7 @@ Use the `#center` slot to display content in the middle of a `donut` chart.
 
 ::component-example
 ---
+collapse: true
 name: 'chart-donut-example'
 ---
 ::
@@ -501,6 +513,7 @@ Use the `#tooltip` slot to replace the tooltip content. It receives the hovered 
 
 ::component-example
 ---
+collapse: true
 name: 'chart-tooltip-slot-example'
 ---
 ::
@@ -511,6 +524,7 @@ Use the `definition` prop to pass a complete [TanStack Charts definition](https:
 
 ::component-example
 ---
+collapse: true
 name: 'chart-definition-example'
 ---
 ::
