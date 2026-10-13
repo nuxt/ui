@@ -83,6 +83,10 @@ items:
     url: https://shelve.cloud/
   - name: Sigxel
     url: https://sigxel.com/
+  - name: Sirawit Jewelry
+    url: https://sirawit-jewelry.com/
+    screenshotOptions:
+      cookies: ['hide_home_popup=true']
   - name: Speaker Bot
     url: https://speaker.bot/
   - name: Super SaaS
