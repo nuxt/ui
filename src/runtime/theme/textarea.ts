@@ -1,7 +1,8 @@
 import input from './input'
-import { extendTheme } from '../utils/theme'
+import { extendTheme, omitVariants } from '../utils/theme'
 
-export default extendTheme(input, {
+// A Textarea has no `type` and takes no part in a FieldGroup
+export default extendTheme(omitVariants(input, 'type', 'fieldGroup'), {
   slots: {
     // The leading and the trailing line up with the first line of text
     root: (prev: string) => [prev, 'items-start'],

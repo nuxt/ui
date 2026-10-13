@@ -1,9 +1,9 @@
 import input, { withinFocus } from './input'
-import { extendTheme } from '../utils/theme'
+import { extendTheme, omitVariants } from '../utils/theme'
 
 // Same box as Input, with the tags and the native input in a container that
 // has the padding of the size in place of the input
-export default extendTheme(input, {
+export default extendTheme(omitVariants(input, 'type'), {
   slots: {
     // The box dims as a whole, so its tags and its input don't dim a second time
     root: (prev: string) => [prev, 'data-disabled:cursor-not-allowed data-disabled:opacity-75'],

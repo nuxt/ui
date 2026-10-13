@@ -79,3 +79,14 @@ export function renameSlot<T extends TVTheme, From extends string, To extends st
     ...(compoundVariants && { compoundVariants: compoundVariants.map(item => ({ ...item, class: rename(item.class) })) })
   } as RenamedSlot<T, From, To>
 }
+
+/**
+ * A theme without some of its variants, for a component that extends another
+ * and has no use for them, like Textarea with the `type` of an Input.
+ * @internal
+ */
+export function omitVariants<T extends TVTheme, K extends string>(theme: T, ...names: K[]): { [P in keyof T]: P extends 'variants' ? Omit<T[P], K> : T[P] } {
+  const variants = Object.fromEntries(Object.entries((theme as any).variants || {}).filter(([name]) => !names.includes(name as K)))
+
+  return { ...theme, variants } as any
+}

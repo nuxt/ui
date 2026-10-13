@@ -10,7 +10,6 @@ export default extendTheme(field, {
     content: 'max-h-[min(15rem,var(--reka-select-content-available-height,15rem))] w-(--reka-select-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden origin-(--reka-select-content-transform-origin) pointer-events-auto data-[state=closed]:pointer-events-none! flex flex-col',
     viewport: 'relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1',
     group: 'p-1 isolate',
-    empty: 'text-center text-muted',
     label: 'font-semibold text-strong',
     separator: '-mx-1 my-1 h-px bg-border',
     item: 'group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-strong data-highlighted:not-data-disabled:before:bg-tint transition-colors before:transition-colors',
@@ -39,40 +38,35 @@ export default extendTheme(field, {
         item: 'p-1 text-xs gap-1',
         itemLeadingIcon: 'size-4',
         itemLeadingChip: 'size-4',
-        itemTrailingIcon: 'size-4',
-        empty: 'p-2 text-xs'
+        itemTrailingIcon: 'size-4'
       },
       sm: {
         label: 'p-1.5 text-[10px]/3 gap-1.5',
         item: 'p-1.5 text-xs gap-1.5',
         itemLeadingIcon: 'size-4',
         itemLeadingChip: 'size-4',
-        itemTrailingIcon: 'size-4',
-        empty: 'p-2.5 text-xs'
+        itemTrailingIcon: 'size-4'
       },
       md: {
         label: 'p-1.5 text-xs gap-1.5',
         item: 'p-1.5 text-sm gap-1.5',
         itemLeadingIcon: 'size-5',
         itemLeadingChip: 'size-5',
-        itemTrailingIcon: 'size-5',
-        empty: 'p-2.5 text-sm'
+        itemTrailingIcon: 'size-5'
       },
       lg: {
         label: 'p-2 text-xs gap-2',
         item: 'p-2 text-sm gap-2',
         itemLeadingIcon: 'size-5',
         itemLeadingChip: 'size-5',
-        itemTrailingIcon: 'size-5',
-        empty: 'p-3 text-sm'
+        itemTrailingIcon: 'size-5'
       },
       xl: {
         label: 'p-2 text-sm gap-2',
         item: 'p-2 text-base gap-2',
         itemLeadingIcon: 'size-6',
         itemLeadingChip: 'size-6',
-        itemTrailingIcon: 'size-6',
-        empty: 'p-3 text-base'
+        itemTrailingIcon: 'size-6'
       }
     },
     position: {
