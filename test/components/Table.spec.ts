@@ -478,6 +478,46 @@ describe('Table', () => {
     expect(idTh!.attributes('aria-sort')).toBe('none')
   })
 
+  describe('defaultColumn', () => {
+    const defaultColumn = {
+      header: ({ column }: any) => `H:${column.id}`,
+      cell: ({ getValue }: any) => `C:${getValue()}`
+    }
+
+    it('applies cell and header with explicit columns', async () => {
+      const wrapper = await mountSuspended(Table, {
+        props: { data: [{ id: 1 }], columns: [{ accessorKey: 'id' }], defaultColumn }
+      })
+
+      expect(wrapper.find('th').text()).toBe('H:id')
+      expect(wrapper.find('td').text()).toBe('C:1')
+    })
+
+    it('applies header with auto-generated columns', async () => {
+      const wrapper = await mountSuspended(Table, {
+        props: { data: [{ id: 1 }], defaultColumn: { header: defaultColumn.header } }
+      })
+
+      expect(wrapper.find('th').text()).toBe('H:id')
+    })
+
+    it('applies cell with auto-generated columns', async () => {
+      const wrapper = await mountSuspended(Table, {
+        props: { data: [{ id: 1 }], defaultColumn: { cell: defaultColumn.cell } }
+      })
+
+      expect(wrapper.find('td').text()).toBe('C:1')
+    })
+
+    it('lets a column\'s own cell win over defaultColumn', async () => {
+      const wrapper = await mountSuspended(Table, {
+        props: { data: [{ id: 1 }], columns: [{ accessorKey: 'id', cell: () => 'own' }], defaultColumn }
+      })
+
+      expect(wrapper.find('td').text()).toBe('own')
+    })
+  })
+
   it('reactive columns', async () => {
     const wrapper = await mountSuspended({
       components: { Table },
