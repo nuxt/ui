@@ -47,9 +47,5 @@ export default extendTheme(field, {
     variant: (prev: typeof field.variants.variant) => Object.fromEntries(
       Object.entries(prev).map(([key, value]) => [key, { base: replaceFocus(value.base), segment: key === 'outline' || key === 'none' ? 'focus:bg-soft' : 'focus:bg-strong' }])
     ) as Record<keyof typeof prev, { base: string, segment: string }>
-  },
-  compoundVariants: (prev: typeof field.compoundVariants) => [...prev.map(item => ({
-    ...item,
-    class: typeof item.class.base === 'string' ? { ...item.class, base: replaceFocus(item.class.base) } : item.class
-  }))]
+  }
 })
