@@ -1,5 +1,5 @@
 import { describe, expectTypeOf, it, expect, test, beforeAll, afterAll, vi } from 'vitest'
-import { defineComponent, h, isReadonly, isRef } from 'vue'
+import { defineComponent, h, isReadonly, isRef, isShallow } from 'vue'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { useAppConfig } from '#imports'
 import { UFormField } from '#components'
@@ -83,6 +83,7 @@ describe('app.config defaultVariants', () => {
 describe('Vue internal flags', () => {
   it('reads `__v_*` flags without resolving theme defaults', async () => {
     let calls = -1
+    let flags: boolean[] = []
 
     const Probe = defineComponent({
       props: { color: String },
@@ -90,8 +91,7 @@ describe('Vue internal flags', () => {
         const props = useComponentProps('button', rawProps)
         const replace = vi.spyOn(String.prototype, 'replace')
         try {
-          isReadonly(props)
-          isRef(props)
+          flags = [isReadonly(props), isShallow(props), isRef(props)]
           calls = replace.mock.calls.length
         } finally {
           replace.mockRestore()
@@ -102,5 +102,7 @@ describe('Vue internal flags', () => {
 
     await mountSuspended(Probe)
     expect(calls).toBe(0)
+    // the proxy only advertises itself as reactive, not readonly or shallow
+    expect(flags).toEqual([false, false, false])
   })
 })
