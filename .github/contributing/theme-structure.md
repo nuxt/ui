@@ -53,7 +53,7 @@ The classes that read the padding, the gap and the icon size stay in the `size` 
 
 A variant that reads a variable for another purpose, `square`, `leading`, `orientation`, has to be declared after the one that sets the same property, since the last variant wins: `square` after what sets the horizontal padding.
 
-Reach for this before a `size` × something compound: the size writes a value, another variant picks the property that reads it. A compound is hard to override from an app config, a token is one class. A theme that extends `field.ts` and drops its `root` (Select, InputDate, InputTime) appends the tokens to `base`.
+Reach for this before a `size` × something compound: the size writes a value, another variant picks the property that reads it. A compound is hard to override from an app config, a token is one class.
 
 ## Fields
 
