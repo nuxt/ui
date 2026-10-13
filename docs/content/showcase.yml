@@ -21,12 +21,12 @@ items:
     url: https://codemo.dev/
   - name: CodeSnap
     url: https://codesnap.dev/
+  - name: Cosmic Stays
+    url: https://www.cosmicstays.com/
   - name: Croix-Rouge française - Devenir bénévole
     url: https://benevolat.croix-rouge.fr/
     screenshotOptions:
       cookies: ['OptanonAlertBoxClosed=2026-05-26T13:44:13.050Z;OptanonConsent=isGpcEnabled=0;']
-  - name: Cosmic Stays
-    url: https://www.cosmicstays.com/
   - name: DefenceMore
     url: https://defencemore.com/
   - name: Directus Docs
