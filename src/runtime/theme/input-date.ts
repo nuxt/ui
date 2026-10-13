@@ -14,36 +14,25 @@ export default extendTheme(theme, {
   },
   variants: {
     size: {
-      // The gap of the box is the one between segments: the leading and the trailing
-      // make up the difference to the gap of the size
+      // The segments sit closer than the content of another field
       xs: {
-        root: (prev: string) => [prev, 'gap-0.25'],
-        leading: 'me-[calc(var(--ui-control-gap)-(--spacing(0.25)))]',
-        trailing: 'ps-[calc(var(--ui-control-gap)-(--spacing(0.25)))]',
+        root: (prev: string) => [prev, '[--ui-control-gap:--spacing(0.25)]'],
         segment: 'data-[segment=day]:w-8 data-[segment=month]:w-8 data-[segment=year]:w-10'
       },
       sm: {
-        root: (prev: string) => [prev, 'gap-0.5'],
-        leading: 'me-[calc(var(--ui-control-gap)-(--spacing(0.5)))]',
-        trailing: 'ps-[calc(var(--ui-control-gap)-(--spacing(0.5)))]',
+        root: (prev: string) => [prev, '[--ui-control-gap:--spacing(0.5)]'],
         segment: 'data-[segment=day]:w-8 data-[segment=month]:w-8 data-[segment=year]:w-10'
       },
       md: {
-        root: (prev: string) => [prev, 'gap-0.5'],
-        leading: 'me-[calc(var(--ui-control-gap)-(--spacing(0.5)))]',
-        trailing: 'ps-[calc(var(--ui-control-gap)-(--spacing(0.5)))]',
+        root: (prev: string) => [prev, '[--ui-control-gap:--spacing(0.5)]'],
         segment: 'data-[segment=day]:w-9 data-[segment=month]:w-9 data-[segment=year]:w-11'
       },
       lg: {
-        root: (prev: string) => [prev, 'gap-0.75'],
-        leading: 'me-[calc(var(--ui-control-gap)-(--spacing(0.75)))]',
-        trailing: 'ps-[calc(var(--ui-control-gap)-(--spacing(0.75)))]',
+        root: (prev: string) => [prev, '[--ui-control-gap:--spacing(0.75)]'],
         segment: 'data-[segment=day]:w-9 data-[segment=month]:w-9 data-[segment=year]:w-11'
       },
       xl: {
-        root: (prev: string) => [prev, 'gap-0.75'],
-        leading: 'me-[calc(var(--ui-control-gap)-(--spacing(0.75)))]',
-        trailing: 'ps-[calc(var(--ui-control-gap)-(--spacing(0.75)))]',
+        root: (prev: string) => [prev, '[--ui-control-gap:--spacing(0.75)]'],
         segment: 'data-[segment=day]:w-10 data-[segment=month]:w-10 data-[segment=year]:w-12'
       }
     },
