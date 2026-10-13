@@ -1,36 +1,30 @@
 import { colorVariant } from './color'
-import input from './input'
+import { fieldGroupVariantRoot } from './field-group'
 import { defineTheme } from '../utils/theme'
 
 export default defineTheme({
   slots: {
-    root: input.slots.root,
+    root: 'relative inline-flex items-center rounded-md cursor-text has-[>:autofill]:bg-accent-soft has-[>:disabled]:cursor-not-allowed has-[>:disabled]:opacity-75 transition-colors',
     base: 'w-full min-w-0 flex-1 self-stretch border-0 bg-transparent text-strong outline-none placeholder:text-faint px-(--ui-control-px) py-(--ui-control-py) disabled:cursor-not-allowed',
     increment: 'flex items-center',
     decrement: 'flex items-center'
   },
   variants: {
-    fieldGroup: input.variants.fieldGroup,
+    ...fieldGroupVariantRoot,
     color: colorVariant({ root: '' }),
     size: {
-      xs: {
-        root: input.variants.size.xs.root
-      },
-      sm: {
-        root: input.variants.size.sm.root
-      },
-      md: {
-        root: input.variants.size.md.root
-      },
-      lg: {
-        root: input.variants.size.lg.root
-      },
-      xl: {
-        root: input.variants.size.xl.root
-      }
+      xs: { root: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] text-sm/4' },
+      sm: { root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)] text-sm/4' },
+      md: { root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] text-base/5' },
+      lg: { root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)] text-base/5' },
+      xl: { root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)] text-base' }
     },
     variant: {
-      ...input.variants.variant
+      outline: { root: 'bg-default ring ring-inset ring-strong outline-accent-focus has-[>:focus-visible]:outline-3 has-[>:focus-visible]:ring-accent' },
+      soft: { root: 'bg-tint hover:bg-soft has-[>:focus]:bg-soft has-[>:disabled]:bg-tint outline-accent-focus has-[>:focus-visible]:outline-3' },
+      subtle: { root: 'bg-soft ring ring-inset ring-strong outline-accent-focus has-[>:focus-visible]:outline-3 has-[>:focus-visible]:ring-accent' },
+      ghost: { root: 'bg-transparent hover:bg-soft has-[>:focus]:bg-soft has-[>:disabled]:bg-transparent dark:has-[>:disabled]:bg-transparent outline-accent-focus has-[>:focus-visible]:outline-3' },
+      none: { root: 'bg-transparent' }
     },
     // The box dims as a whole, so its buttons don't dim a second time
     disabled: {

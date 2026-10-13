@@ -1,4 +1,4 @@
-import input, { withinFocus } from './input'
+import input from './input'
 import { extendTheme } from '../utils/theme'
 
 export default extendTheme(input, {
@@ -33,12 +33,16 @@ export default extendTheme(input, {
   },
   variants: {
     // The input takes the focus, up to two levels down from the box
-    fieldGroup: (prev: typeof input.variants.fieldGroup) => Object.fromEntries(
-      Object.entries(prev).map(([key, value]) => [key, { root: withinFocus(value.root) }])
-    ) as typeof prev,
-    variant: (prev: typeof input.variants.variant) => Object.fromEntries(
-      Object.entries(prev).map(([key, value]) => [key, { root: withinFocus(value.root) }])
-    ) as typeof prev,
+    fieldGroup: {
+      horizontal: { root: (prev: string) => [prev, 'has-[input:focus-visible]:z-1'] },
+      vertical: { root: (prev: string) => [prev, 'has-[input:focus-visible]:z-1'] }
+    },
+    variant: {
+      outline: { root: 'bg-default ring ring-inset ring-strong outline-accent-focus has-[input:focus-visible]:outline-3 has-[input:focus-visible]:ring-accent' },
+      soft: { root: 'bg-tint hover:bg-soft has-[input:focus]:bg-soft has-[input:disabled]:bg-tint outline-accent-focus has-[input:focus-visible]:outline-3' },
+      subtle: { root: 'bg-soft ring ring-inset ring-strong outline-accent-focus has-[input:focus-visible]:outline-3 has-[input:focus-visible]:ring-accent' },
+      ghost: { root: 'bg-transparent hover:bg-soft has-[input:focus]:bg-soft has-[input:disabled]:bg-transparent dark:has-[input:disabled]:bg-transparent outline-accent-focus has-[input:focus-visible]:outline-3' }
+    },
     // Next to a leading or a trailing, the padding of the container is the gap to it
     leading: {
       true: { tags: 'ps-(--ui-control-gap)' }
