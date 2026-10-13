@@ -21,8 +21,26 @@ navigation.badge: Soon
 
 The Chart component is built on top of [TanStack Charts](https://tanstack.com/charts/latest). It renders an SVG on the server and follows your theme and color mode.
 
-::warning
-TanStack Charts is still in alpha, its API may change between minor releases.
+Install the `@tanstack/charts` package to use it:
+
+::code-group{sync="pm"}
+
+```bash [pnpm]
+pnpm add @tanstack/charts
+```
+
+```bash [yarn]
+yarn add @tanstack/charts
+```
+
+```bash [npm]
+npm install @tanstack/charts
+```
+
+```bash [bun]
+bun add @tanstack/charts
+```
+
 ::
 
 ### Data
