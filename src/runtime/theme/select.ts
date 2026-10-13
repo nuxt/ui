@@ -1,12 +1,20 @@
-import field from './field'
-import { extendTheme, renameSlot } from '../utils/theme'
+import { colorVariant } from './color'
+import { fieldGroupVariant } from './field-group'
+import { defineTheme } from '../utils/theme'
 
-// The box is a `<button>`, so it is `base`
-const theme = renameSlot(field, 'root', 'base')
-
-export default extendTheme(theme, {
+// The trigger is a single `<button>`: `base` is the box, with the tokens, the
+// padding and the gap of the size, and the leading and the trailing in its flow
+export default defineTheme({
   slots: {
-    base: (prev: string) => [prev, 'disabled:cursor-not-allowed disabled:opacity-75'],
+    base: 'group relative inline-flex items-center rounded-md text-strong disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
+    // The box sits on a line of text by its first item: an invisible character
+    // gives the leading the baseline of the text, so an icon doesn't move the box
+    leading: `flex items-center before:content-['x'] before:w-0 before:invisible`,
+    leadingIcon: 'shrink-0 text-faint',
+    leadingAvatar: 'shrink-0',
+    // At the end of the box, whatever sits between the two
+    trailing: 'ms-auto flex items-center',
+    trailingIcon: 'shrink-0 text-faint',
     value: 'truncate pointer-events-none',
     placeholder: 'truncate text-faint',
     arrow: 'fill-bg stroke-default',
@@ -26,17 +34,20 @@ export default extendTheme(theme, {
     itemDescription: 'truncate text-muted'
   },
   variants: {
-    variant: (prev: typeof theme.variants.variant) => ({
-      ...prev,
-      outline: {
-        base: [prev.outline!.base, 'hover:bg-soft disabled:bg-default'].join(' ')
-      },
-      subtle: {
-        base: [prev.subtle!.base, 'hover:bg-strong/75 disabled:bg-soft'].join(' ')
-      }
-    }),
+    ...fieldGroupVariant,
+    variant: {
+      outline: { base: 'bg-default hover:bg-soft disabled:bg-default ring ring-inset ring-strong outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent' },
+      soft: { base: 'bg-tint hover:bg-soft focus:bg-soft disabled:bg-tint outline-accent-focus focus-visible:outline-3' },
+      subtle: { base: 'bg-soft hover:bg-strong/75 disabled:bg-soft ring ring-inset ring-strong outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent' },
+      ghost: { base: 'bg-transparent hover:bg-soft focus:bg-soft disabled:bg-transparent dark:disabled:bg-transparent outline-accent-focus focus-visible:outline-3' },
+      none: { base: 'bg-transparent focus:outline-none' }
+    },
+    color: colorVariant({ base: '' }),
     size: {
       xs: {
+        base: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--text-xs)+var(--ui-control-text-step,0px))]/4',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)',
         label: 'p-1 text-[10px]/3 gap-1',
         item: 'p-1 text-xs gap-1',
         itemLeadingIcon: 'size-4',
@@ -44,6 +55,9 @@ export default extendTheme(theme, {
         itemTrailingIcon: 'size-4'
       },
       sm: {
+        base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--text-xs)+var(--ui-control-text-step,0px))]/4',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)',
         label: 'p-1.5 text-[10px]/3 gap-1.5',
         item: 'p-1.5 text-xs gap-1.5',
         itemLeadingIcon: 'size-4',
@@ -51,6 +65,9 @@ export default extendTheme(theme, {
         itemTrailingIcon: 'size-4'
       },
       md: {
+        base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--text-sm)+var(--ui-control-text-step,0px))]/5',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)',
         label: 'p-1.5 text-xs gap-1.5',
         item: 'p-1.5 text-sm gap-1.5',
         itemLeadingIcon: 'size-5',
@@ -58,6 +75,9 @@ export default extendTheme(theme, {
         itemTrailingIcon: 'size-5'
       },
       lg: {
+        base: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--text-sm)+var(--ui-control-text-step,0px))]/5',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)',
         label: 'p-2 text-xs gap-2',
         item: 'p-2 text-sm gap-2',
         itemLeadingIcon: 'size-5',
@@ -65,6 +85,9 @@ export default extendTheme(theme, {
         itemTrailingIcon: 'size-5'
       },
       xl: {
+        base: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)',
         label: 'p-2 text-sm gap-2',
         item: 'p-2 text-base gap-2',
         itemLeadingIcon: 'size-6',
@@ -82,9 +105,28 @@ export default extendTheme(theme, {
     },
     multiple: {
       true: ''
+    },
+    leading: {
+      true: ''
+    },
+    trailing: {
+      true: ''
+    },
+    // The component turns it off on the trailing icon when the leading one is the loading icon
+    loading: {
+      true: {
+        leadingIcon: 'animate-spin',
+        trailingIcon: 'animate-spin'
+      }
+    },
+    highlight: {
+      true: { base: 'ring ring-inset ring-accent' }
     }
   },
   defaultVariants: {
+    size: 'md',
+    color: 'primary',
+    variant: 'outline',
     position: 'popper'
   }
 })
