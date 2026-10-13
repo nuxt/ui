@@ -15,7 +15,7 @@ export interface PageAnchor extends Omit<LinkProps, 'custom'> {
    */
   icon?: IconProps['name']
   class?: any
-  ui?: Pick<PageAnchors['slots'], 'item' | 'link' | 'linkLabel' | 'linkLabelExternalIcon' | 'linkLeading' | 'linkLeadingIcon'>
+  ui?: Partial<Pick<PageAnchors['slots'], 'item' | 'link' | 'linkLabel' | 'linkLabelExternalIcon' | 'linkLeading' | 'linkLeadingIcon'>>
 }
 
 export interface PageAnchorsProps<T extends PageAnchor = PageAnchor> {

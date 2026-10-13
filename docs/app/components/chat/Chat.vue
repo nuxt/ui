@@ -9,8 +9,7 @@ const input = ref('')
 
 const toast = useToast()
 const { track } = useAnalytics()
-const route = useRoute()
-const { open, messages, pending } = useChat()
+const { open, messages, pending, currentPage } = useChat()
 const { framework } = useFrameworks()
 const { resetTheme, applyThemeSettings, hasChanges: hasThemeChanges } = useTheme()
 // A preset is a whole ThemeDoc, so it rides applyDoc (reset, style axis, class
@@ -35,6 +34,18 @@ const panelOpen = computed({
 
 let _skipSync = false
 const _themeApplied = new Set<string>()
+
+// The conversation is restored from a past session with its tool calls in
+// it. Those were applied back then and the theme they produced persists on
+// its own, so they count as seen from the start: otherwise the next answer's
+// stream would replay every one of them over whatever theme is on screen
+// now, a shared link's for one.
+for (const message of messages.value) {
+  for (const part of message.parts || []) {
+    if (isToolUIPart(part)) _themeApplied.add(part.toolCallId)
+  }
+}
+
 function processThemeToolCalls() {
   for (const message of chatMessages.value) {
     if (message.role !== 'assistant') continue
@@ -67,7 +78,7 @@ const { messages: chatMessages, status, error, sendMessage, regenerate, stop } =
   messages: messages.value,
   transport: new DefaultChatTransport<DocsChatMessage>({
     api: '/api/ai',
-    body: () => ({ framework: framework.value, currentPage: route.path.startsWith('/docs/') ? route.path : null })
+    body: () => ({ framework: framework.value })
   }),
   onError: (error) => {
     let message = error.message
@@ -111,7 +122,7 @@ function onSubmit() {
 
   track('AI Chat Message Sent')
 
-  sendMessage({ text: input.value })
+  sendMessage({ text: input.value, metadata: { currentPage: currentPage.value } })
 
   input.value = ''
 }
@@ -130,7 +141,7 @@ watch(messages, (newMessages) => {
 })
 
 // A question asked before the panel existed (its first open, from the search
-// palette or "Explain with AI") is already in the seeded messages, the
+// palette or "Explain this page") is already in the seeded messages, the
 // watcher above never saw it arrive. Only that one: a dangling user turn
 // restored from a past session must not re-send itself on every load.
 onMounted(() => {
@@ -158,11 +169,12 @@ function getToolMessage(state: ToolState, toolName: string, input: Record<string
     'list-templates': `${searchVerb} templates${input.category ? ` in ${input.category} category` : ''}`,
     'get-template': `${readVerb} template ${upperName(input.templateName || '')}`,
     'get-documentation-page': `${readVerb} ${input.path || ''} page`,
-    'get-migration-guide': `${readVerb} migration guide${input.version ? ` for ${input.version}` : ''}`,
+    'get-migration-guide': `${readVerb} migration guide`,
     'list-examples': `${searchVerb} examples`,
     'get-example': `${readVerb} ${upperName(input.exampleName || '')} example`,
     'getComponentTheme': `${readVerb} ${upperName(input.componentName || '')} theme`,
     'getThemeGuide': `${readVerb} theme guide`,
+    'searchFonts': `${searchVerb} fonts${input.category ? ` (${input.category})` : ''}${input.query ? ` for "${input.query}"` : ''}`,
     'applyTheme': `${applyVerb} theme changes`,
     // a preset carries its own display name; upperName is for camelCase
     // component ids and would mangle a hyphenated one
@@ -191,6 +203,7 @@ function getToolIcon(part: ToolPart): string {
     'get-example': appConfig.ui.icons.file,
     'getComponentTheme': appConfig.ui.icons.file,
     'getThemeGuide': studioIcons.palette,
+    'searchFonts': studioIcons.text,
     'applyTheme': studioIcons.palette,
     'applyPreset': studioIcons.palette,
     'resetTheme': studioIcons.reset
@@ -256,8 +269,9 @@ function clearMessages() {
   <USidebar
     v-model:open="panelOpen"
     side="right"
-    title="Ask AI"
+    title="Ask"
     rail
+    breakpoint="xl"
     :style="{ '--sidebar-width': '24rem' }"
     :ui="{ footer: 'p-0', actions: 'gap-0.5' }"
     class="bg-default"
@@ -278,7 +292,7 @@ function clearMessages() {
 
       <UTooltip v-if="canClear" text="Clear messages">
         <UButton
-          icon="i-lucide-list-x"
+          :icon="studioIcons.clear"
           color="neutral"
           variant="ghost"
           @click="clearMessages"
@@ -289,7 +303,7 @@ function clearMessages() {
     <template #close>
       <UTooltip text="Close" :kbds="['meta', 'i']">
         <UButton
-          icon="i-lucide-panel-right-close"
+          :icon="studioIcons.panelRightClose"
           color="neutral"
           variant="ghost"
           aria-label="Close"
@@ -334,7 +348,7 @@ function clearMessages() {
         :user="{ ui: { container: 'max-w-full' } }"
       >
         <template #indicator>
-          <UChatTool icon="i-lucide-brain" text="Thinking..." streaming />
+          <UChatTool :icon="studioIcons.brain" text="Thinking..." streaming />
         </template>
 
         <template #content="{ message }">
@@ -343,7 +357,7 @@ function clearMessages() {
               v-if="isReasoningUIPart(part)"
               :text="part.text"
               :streaming="isPartStreaming(part)"
-              icon="i-lucide-brain"
+              :icon="studioIcons.brain"
             >
               <ChatMarkdown
                 :value="part.text"

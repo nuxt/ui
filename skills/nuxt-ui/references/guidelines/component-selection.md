@@ -16,7 +16,7 @@ Decision matrices for choosing the right component. When in doubt, use the MCP `
 - Use `UModal` for destructive confirmations ("Are you sure you want to delete?")
 - Use `USlideover` for detail views in dashboards (email preview, user profile)
 - Use `UDrawer` for mobile navigation or action sheets
-- Modal and Slideover support `mode="drawer"` for automatic mobile drawer behavior
+- Use `UDashboardSidebar` with `mode="drawer"` for a drawer-based mobile menu; `UModal` and `USlideover` don't expose a `mode` prop
 - For programmatic overlays, use `useOverlay()` instead of `v-model:open`
 - Never put interactive content (buttons, links) inside `UTooltip`
 

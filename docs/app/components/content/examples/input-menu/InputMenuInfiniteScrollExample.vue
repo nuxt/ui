@@ -16,7 +16,7 @@ const skip = ref(0)
 
 const { data, status, execute } = await useLazyFetch('https://dummyjson.com/users?limit=10&select=firstName', {
   key: 'input-menu-users-infinite-scroll',
-  params: { skip },
+  query: { skip },
   transform: (data?: UserResponse) => {
     return data?.users.map(user => user.firstName)
   },

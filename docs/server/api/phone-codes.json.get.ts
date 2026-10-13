@@ -1,3 +1,5 @@
+import { defineEventHandler } from 'nuxt/server'
+
 type PhoneCode = {
   name: string
   code: string
@@ -201,4 +203,4 @@ const phoneCodes: PhoneCode[] = [
   { name: 'Zimbabwe', code: 'ZW', emoji: '\u{1F1FF}\u{1F1FC}', dialCode: '+263', mask: '## ### ####' }
 ]
 
-export default eventHandler(async () => phoneCodes)
+export default defineEventHandler(async () => phoneCodes)

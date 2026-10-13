@@ -93,14 +93,13 @@ const components = [
   'toast',
   'tooltip',
   'tree',
-  'typography',
   'user'
 ].map(component => ({ label: upperName(component.split('/').pop() as string), icon: 'i-lucide-box', to: `/components/${component}` }))
 
 export const useNavigation = () => {
   const appConfig = useAppConfig()
 
-  const items = [{ label: 'Home', icon: 'i-lucide-home', to: '/' }, { label: 'Chat', icon: 'i-lucide-message-circle', to: '/chat' }]
+  const items = [{ label: 'Home', icon: 'i-lucide-home', to: '/' }, { label: 'Chat', icon: 'i-lucide-message-circle', to: '/chat' }, { label: 'Typography', icon: 'i-lucide-type', to: '/typography' }]
   const groups = computed(() => [
     { id: 'links', items },
     { id: 'components', label: 'Components', items: components },

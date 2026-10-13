@@ -65,7 +65,7 @@ export interface PopoverSlots<M extends PopoverMode = PopoverMode> {
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { useForwardProps } from '../composables/useForwardProps'
-import { Popover, HoverCard } from 'reka-ui/namespaced'
+import { PopoverRoot, PopoverTrigger, PopoverPortal, PopoverContent, PopoverArrow, PopoverAnchor, HoverCardRoot, HoverCardTrigger, HoverCardPortal, HoverCardContent, HoverCardArrow } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
@@ -73,6 +73,9 @@ import { FieldGroupReset } from '../composables/useFieldGroup'
 import { usePortal } from '../composables/usePortal'
 import { pointerDownOutside } from '../utils/overlay'
 import { tv } from '../utils/tv'
+
+const Popover = { Root: PopoverRoot, Trigger: PopoverTrigger, Portal: PopoverPortal, Content: PopoverContent, Arrow: PopoverArrow, Anchor: PopoverAnchor }
+const HoverCard = { Root: HoverCardRoot, Trigger: HoverCardTrigger, Portal: HoverCardPortal, Content: HoverCardContent, Arrow: HoverCardArrow }
 
 const _props = withDefaults(defineProps<PopoverProps<M>>(), {
   portal: true,

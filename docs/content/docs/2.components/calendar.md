@@ -265,6 +265,20 @@ props:
 ---
 ::
 
+### Years Per Page :badge{label="Soon" class="align-text-top"}
+
+Use the `years-per-page` prop to change the number of years displayed in the year view. Defaults to `12`.
+
+::component-code
+---
+ignore:
+  - type
+props:
+  type: year
+  yearsPerPage: 20
+---
+::
+
 ### Fixed Weeks
 
 Use the `fixed-weeks` prop to display the calendar with fixed weeks.

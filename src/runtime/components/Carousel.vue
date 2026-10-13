@@ -21,7 +21,7 @@ type Carousel = ComponentConfig<typeof theme, AppConfig, 'carousel'>
 export type CarouselValue = AcceptableValue
 export type CarouselItem = CarouselValue | {
   class?: any
-  ui?: Pick<Carousel['slots'], 'item'>
+  ui?: Partial<Pick<Carousel['slots'], 'item'>>
   [key: string]: any
 }
 
@@ -354,7 +354,7 @@ defineExpose({
   <Primitive
     :as="props.as"
     role="region"
-    aria-roledescription="carousel"
+    :aria-roledescription="t('carousel.roledescription')"
     :data-orientation="props.orientation"
     tabindex="0"
     data-slot="root"
@@ -366,7 +366,7 @@ defineExpose({
         <div
           v-for="(item, index) in props.items"
           :key="index"
-          v-bind="props.dots ? { role: 'tabpanel' } : { 'role': 'group', 'aria-roledescription': 'slide' }"
+          v-bind="props.dots ? { role: 'tabpanel' } : { 'role': 'group', 'aria-roledescription': t('carousel.slide') }"
           data-slot="item"
           :class="ui.item({ class: [props.ui?.item, isCarouselItem(item) && item.ui?.item, isCarouselItem(item) && item.class] })"
         >

@@ -1,3 +1,5 @@
+import { defineEventHandler } from 'nuxt/server'
+
 const locales: Record<string, string> = {
   'aa': '🇪🇷',
   'aa-ER': '🇪🇷',
@@ -502,4 +504,4 @@ const locales: Record<string, string> = {
   'zu-ZA': '🇿🇦'
 }
 
-export default eventHandler(async () => locales)
+export default defineEventHandler(async () => locales)

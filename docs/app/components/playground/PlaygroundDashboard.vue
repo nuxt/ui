@@ -5,7 +5,7 @@ const toast = useToast()
 const appConfig = useAppConfig()
 const studioIcons = useStudioIcons()
 
-const items: DropdownMenuItem[][] = [
+const items = computed<DropdownMenuItem[][]>(() => [
   [
     { label: 'View report', icon: appConfig.ui.icons.eye, onSelect: () => toast.add({ title: 'View report' }) },
     { label: 'Export as CSV', icon: studioIcons.download, onSelect: () => toast.add({ title: 'Exporting…' }) },
@@ -14,7 +14,7 @@ const items: DropdownMenuItem[][] = [
   [
     { label: 'Delete', icon: studioIcons.trash, color: 'error', onSelect: () => toast.add({ title: 'Deleted', color: 'error' }) }
   ]
-]
+])
 
 const progress = ref(75)
 </script>
@@ -60,12 +60,12 @@ const progress = ref(75)
     <USeparator />
 
     <div class="flex items-center justify-between">
-      <UAvatarGroup size="xs">
+      <UAvatarGroup size="sm">
         <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" loading="lazy" />
-        <UAvatar src="https://github.com/romhml.png" alt="Romain Hamel" loading="lazy" />
-        <UAvatar src="https://github.com/noook.png" alt="Neil Richter" loading="lazy" />
+        <UAvatar src="https://github.com/HugoRCD.png" alt="Hugo Richard" loading="lazy" />
+        <UAvatar src="https://github.com/atinux.png" alt="Sébastien Chopin" loading="lazy" />
       </UAvatarGroup>
-      <span class="text-xs text-muted">+8 active now</span>
+      <span class="text-[13px] italic text-muted">+8 active now</span>
     </div>
   </div>
 </template>

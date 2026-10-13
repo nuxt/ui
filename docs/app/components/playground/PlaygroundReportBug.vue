@@ -38,10 +38,10 @@ const steps = ref('')
 
       <div class="grid grid-cols-2 gap-3">
         <UFormField label="Severity">
-          <USelect v-model="severity" :items="severities" class="w-full" />
+          <USelect v-model="severity" :items="severities" :content="{ position: 'item-aligned' }" class="w-full" />
         </UFormField>
         <UFormField label="Component">
-          <USelect v-model="component" :items="components" class="w-full" />
+          <USelect v-model="component" :items="components" :content="{ position: 'item-aligned' }" class="w-full" />
         </UFormField>
       </div>
 
@@ -50,9 +50,9 @@ const steps = ref('')
       </UFormField>
     </div>
 
-    <div class="flex items-center justify-between border-t border-default p-3">
-      <UButton label="Attach file" :icon="studioIcons.paperclip" color="neutral" variant="ghost" />
-      <UButton label="Submit bug" @click="toast.add({ title: 'Bug reported' })" />
+    <div class="flex items-center justify-between border-t border-default px-4 py-3">
+      <UButton label="Attach file" :icon="studioIcons.paperclip" color="neutral" variant="soft" />
+      <UButton label="Submit bug" variant="subtle" @click="toast.add({ title: 'Bug reported' })" />
     </div>
   </div>
 </template>

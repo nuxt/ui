@@ -56,6 +56,10 @@ props:
 ---
 ::
 
+::tip
+The title is rendered as an `h2` by default. Use the `as` prop with an object to change it, for example `:as="{ title: 'h3' }"`{lang="ts-type"}. You can also set the root element this way: `:as="{ root: 'section', title: 'h3' }"`{lang="ts-type"}.
+::
+
 ### Items
 
 You can display logos in two ways:

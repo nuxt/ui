@@ -5,7 +5,11 @@ import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming } from '@nuxt/ui/utils/ai'
 import { Markdown } from '@comark/vue'
 import shiki from '@comark/vue/plugins/shiki'
+import security from '@comark/vue/plugins/security'
 import type { DropdownMenuItem, NavigationMenuItem } from '@nuxt/ui'
+
+// built once: in the template it would be a new plugin on every render
+const plugins = [shiki(), security({ blockedTags: ['script', 'style', 'iframe', 'object', 'embed', 'form'] })]
 
 const appConfig = useAppConfig()
 const studioIcons = useStudioIcons()
@@ -51,21 +55,21 @@ function newChat() {
   input.value = ''
 }
 
-const menuItems: NavigationMenuItem[] = [
+const menuItems = computed<NavigationMenuItem[]>(() => [
   { label: 'New chat', icon: appConfig.ui.icons.plus, kbds: ['meta', 'o'], onSelect: () => newChat() },
   { label: 'Search', icon: appConfig.ui.icons.search, kbds: ['meta', 'k'] }
-]
+])
 
 // The per-chat menu, on the sidebar rows and behind the navbar title.
-const chatActions: DropdownMenuItem[] = [
+const chatActions = computed<DropdownMenuItem[]>(() => [
   { label: 'Rename', icon: studioIcons.pencil },
   { label: 'Delete', icon: studioIcons.trash, color: 'error' }
-]
+])
 
-const userItems: DropdownMenuItem[][] = [
+const userItems = computed<DropdownMenuItem[][]>(() => [
   [{ label: 'Benjamin Canac', avatar: { src: 'https://github.com/benjamincanac.png', alt: 'Benjamin Canac' }, type: 'label' }],
   [{ label: 'Settings', icon: studioIcons.settings }, { label: 'Log out', icon: studioIcons.logout }]
-]
+])
 
 const historyItems: NavigationMenuItem[] = [
   { label: 'Today', type: 'label' },
@@ -248,7 +252,7 @@ const ui = {
                         v-if="message.role === 'assistant'"
                         :value="part.text"
                         :streaming="isPartStreaming(part)"
-                        :plugins="[shiki()]"
+                        :plugins="plugins"
                         class="*:first:mt-0 *:last:mb-0"
                       />
                       <p v-else class="whitespace-pre-wrap leading-6">

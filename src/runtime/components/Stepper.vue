@@ -22,7 +22,7 @@ export interface StepperItem {
   content?: string
   disabled?: boolean
   class?: any
-  ui?: Pick<Stepper['slots'], 'item' | 'container' | 'trigger' | 'indicator' | 'icon' | 'separator' | 'wrapper' | 'title' | 'description'>
+  ui?: Partial<Pick<Stepper['slots'], 'item' | 'container' | 'trigger' | 'indicator' | 'icon' | 'separator' | 'wrapper' | 'title' | 'description'>>
   [key: string]: any
 }
 
@@ -84,6 +84,7 @@ import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
+import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import { get } from '../utils'
 import UIcon from './Icon.vue'
@@ -100,6 +101,7 @@ const props = useComponentProps<StepperProps<T>>('stepper', _props)
 
 const modelValue = defineModel<string | number>()
 
+const { t } = useLocale()
 const appConfig = useAppConfig() as Stepper['AppConfig']
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'linear'))
@@ -147,7 +149,14 @@ defineExpose({
 </script>
 
 <template>
-  <StepperRoot v-bind="rootProps" v-model="currentStepIndex" :orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <StepperRoot
+    v-bind="rootProps"
+    v-model="currentStepIndex"
+    :orientation="props.orientation"
+    :aria-label="t('stepper.label')"
+    data-slot="root"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
+  >
     <div data-slot="header" :class="ui.header({ class: props.ui?.header })">
       <StepperItem
         v-for="(item, count) in props.items"

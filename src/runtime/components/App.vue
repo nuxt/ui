@@ -28,17 +28,18 @@ import { localeContextInjectionKey } from '../composables/useLocale'
 import { portalTargetInjectionKey } from '../composables/usePortal'
 import UToaster from './Toaster.vue'
 import UOverlayProvider from './OverlayProvider.vue'
+import en from '../locale/en'
 
 const props = withDefaults(defineProps<AppProps<T>>(), {
   portal: 'body'
 })
 defineSlots<AppSlots>()
 
-const configProviderProps = useForwardProps(reactivePick(props, 'scrollBody'))
+const configProviderProps = useForwardProps(reactivePick(props, 'scrollBody', 'nonce'))
 const tooltipProps = toRef(() => props.tooltip)
 const toasterProps = toRef(() => props.toaster)
 
-const locale = toRef(() => props.locale)
+const locale = toRef(() => props.dir ? { ...(props.locale || en), dir: props.dir } : props.locale)
 provide(localeContextInjectionKey, locale)
 
 const portal = toRef(() => props.portal)

@@ -1,10 +1,15 @@
 <script setup lang="ts">
+const appConfig = useAppConfig()
+
 const { data: page } = await useAsyncData('showcase', () => queryCollection('showcase').first())
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
-const appConfig = useAppConfig()
+/** The site behind a project, as its second line. */
+function hostname(url: string) {
+  return url.replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/$/, '')
+}
 
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI',
@@ -25,56 +30,59 @@ if (import.meta.server) {
 </script>
 
 <template>
-  <main v-if="page">
-    <UPageHero
-      :title="page.hero.title"
-      :description="page.hero.description"
-      :links="page.hero.links"
-      :ui="{ container: 'relative py-10 sm:py-16 lg:py-24' }"
-    >
-      <template #top>
-        <div class="absolute z-[-1] rounded-full bg-primary blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
-      </template>
+  <UMain v-if="page">
+    <PageHero v-bind="page.hero" />
 
-      <LazyStarsBg />
-
-      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
-    </UPageHero>
-
-    <UPageSection :ui="{ container: '!pt-0 relative' }">
-      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
-
-      <div class="border-l border-t border-default">
-        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-start justify-center divide-y divide-x divide-default">
-          <li
-            v-for="item in page.items"
-            :key="item.name"
-            class="group relative flex items-center justify-center flex-1 size-full p-2 last:border-r last:border-b border-default overflow-hidden"
-          >
-            <NuxtLink class="inset-0 absolute" :to="item.url" target="_blank">
-              <span class="sr-only">Go to {{ item.name }}</span>
-            </NuxtLink>
-
-            <NuxtImg
-              :src="`/assets/showcase/${item.name.toLowerCase().replace(/\s/g, '-')}.png`"
-              :alt="`Screenshot of ${item.name}`"
-              width="327"
-              height="184"
-              :modifiers="{
-                position: 'top'
-              }"
-              class="aspect-video size-full opacity-75 group-hover:opacity-100 group-hover:scale-110 duration-200 transition-[scale,opacity] pointer-events-none"
+    <UContainer>
+      <UPage>
+        <UPageBody class="space-y-0">
+          <PageSectionHeading title="Selected projects">
+            <UButton
+              to="https://github.com/nuxt/ui/edit/v4/docs/content/showcase.yml"
+              target="_blank"
+              label="Submit yours"
+              color="neutral"
+              variant="link"
+              size="xs"
+              class="font-mono text-dimmed tracking-wide text-[13px]"
+              :trailing-icon="appConfig.ui.icons.plus"
             />
+          </PageSectionHeading>
 
-            <div class="absolute flex items-center px-2.5 py-0.75 gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none bg-black/90 rounded-full">
-              <span class="text-sm text-white font-medium">
-                {{ item.name }}
-              </span>
-              <UIcon :name="appConfig.ui.icons.external" class="size-4 shrink-0 text-white" />
-            </div>
-          </li>
-        </ul>
-      </div>
-    </UPageSection>
-  </main>
+          <UPageGrid class="lg:grid-cols-4 gap-x-4 gap-y-6">
+            <UPageCard
+              v-for="item in page.items"
+              :key="item.name"
+              :to="item.url"
+              target="_blank"
+              :title="item.name"
+              :description="hostname(item.url)"
+              variant="outline"
+              class="group overflow-hidden"
+              :ui="{
+                container: 'p-0 sm:p-0',
+                wrapper: 'items-stretch',
+                header: 'mb-0 border-b border-default overflow-hidden bg-muted/40',
+                body: 'p-3 text-center',
+                title: 'text-sm',
+                description: 'text-sm'
+              }"
+            >
+              <template #header>
+                <NuxtImg
+                  :src="`/assets/showcase/${item.name.toLowerCase().replace(/\s/g, '-')}.png`"
+                  :alt="`Screenshot of ${item.name}`"
+                  width="327"
+                  height="184"
+                  :modifiers="{ position: 'top' }"
+                  loading="lazy"
+                  class="aspect-video w-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-300"
+                />
+              </template>
+            </UPageCard>
+          </UPageGrid>
+        </UPageBody>
+      </UPage>
+    </UContainer>
+  </UMain>
 </template>

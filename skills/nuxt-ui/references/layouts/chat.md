@@ -15,13 +15,13 @@ Build AI chat interfaces with message streams, reasoning, tool calling, and Verc
 **Nuxt:**
 
 ```bash
-pnpm add ai @ai-sdk/gateway @ai-sdk/vue @comark/nuxt
+pnpm add ai @ai-sdk/vue @comark/nuxt
 ```
 
 **Vue (Vite):**
 
 ```bash
-pnpm add ai @ai-sdk/gateway @ai-sdk/vue @comark/vue
+pnpm add ai @ai-sdk/vue @comark/vue
 ```
 
 ### Register Comark module
@@ -57,17 +57,18 @@ html.dark .shiki span {
 
 ### Server endpoint
 
+These examples target AI SDK v7 (`instructions`, `toUIMessageStream`).
+
 Using [Vercel AI Gateway](https://vercel.com/ai-gateway) (recommended):
 
 ```ts [server/api/chat.post.ts]
 import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
-import { gateway } from '@ai-sdk/gateway'
 
 export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
   const result = streamText({
-    model: gateway('anthropic/claude-sonnet-5'),
+    model: 'anthropic/claude-sonnet-5.5',
     instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages)
   })
@@ -200,7 +201,7 @@ function onSubmit() {
 - `UChatMessage` — individual bubble. Props: `message`, `side` (`'left'`/`'right'`).
 - `UChatReasoning` — collapsible reasoning block. Auto-opens during streaming, auto-closes when done. Use `isPartStreaming(part)` from `@nuxt/ui/utils/ai`.
 - `UChatTool` — tool invocation status. Use `isToolStreaming(part)`. Variants: `'inline'` (default), `'card'`.
-- `UChatPrompt` — enhanced textarea. Accepts all Textarea props + `error` prop.
+- `UChatPrompt` — enhanced textarea for chat. Its typed API exposes a selected subset of `UTextarea` props, forwards additional attributes to the underlying textarea, and adds chat-specific props such as `error` and `submitOnEnter`.
 - `UChatPromptSubmit` — submit button with automatic status handling (send/stop/reload).
 - `UChatPalette` — layout wrapper for chat inside overlays.
 

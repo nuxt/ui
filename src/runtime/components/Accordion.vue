@@ -31,7 +31,7 @@ export interface AccordionItem {
   value?: string
   disabled?: boolean
   class?: any
-  ui?: Pick<Accordion['slots'], 'item' | 'header' | 'trigger' | 'leadingIcon' | 'label' | 'trailingIcon' | 'content' | 'body'>
+  ui?: Partial<Pick<Accordion['slots'], 'item' | 'header' | 'trigger' | 'leadingIcon' | 'label' | 'trailingIcon' | 'content' | 'body'>>
   [key: string]: any
 }
 

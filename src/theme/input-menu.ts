@@ -1,6 +1,7 @@
 import { defuFn } from 'defu'
 import type { ModuleOptions } from '../module'
 import input from './input'
+import { fieldGroupVariant, fieldGroupVariantWithRoot } from './field-group'
 
 export default (options: Required<ModuleOptions>) => {
   return defuFn({
@@ -33,6 +34,14 @@ export default (options: Required<ModuleOptions>) => {
       tagsInput: 'flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
     },
     variants: {
+      // `root` and `base` are the same element in `multiple` mode, so the
+      // `group-*` rounding utilities inherited from `input` never match there.
+      // Keep the `group` marker here and pick the right rounding in
+      // `compoundVariants` depending on `multiple`.
+      fieldGroup: {
+        horizontal: () => ({ root: fieldGroupVariantWithRoot.fieldGroup.horizontal.root }),
+        vertical: () => ({ root: fieldGroupVariantWithRoot.fieldGroup.vertical.root })
+      },
       virtualize: {
         true: {
           viewport: 'p-1 isolate'
@@ -113,6 +122,22 @@ export default (options: Required<ModuleOptions>) => {
       }
     },
     compoundVariants: [{
+      multiple: false,
+      fieldGroup: 'horizontal',
+      class: { base: fieldGroupVariantWithRoot.fieldGroup.horizontal.base }
+    }, {
+      multiple: false,
+      fieldGroup: 'vertical',
+      class: { base: fieldGroupVariantWithRoot.fieldGroup.vertical.base }
+    }, {
+      multiple: true,
+      fieldGroup: 'horizontal',
+      class: { base: fieldGroupVariant.fieldGroup.horizontal }
+    }, {
+      multiple: true,
+      fieldGroup: 'vertical',
+      class: { base: fieldGroupVariant.fieldGroup.vertical }
+    }, {
       variant: 'soft',
       multiple: true,
       class: 'has-focus:bg-elevated has-focus-visible:outline-3'

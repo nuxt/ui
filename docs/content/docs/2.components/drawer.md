@@ -386,6 +386,36 @@ export default defineNuxtConfig({
 
 ::
 
+### No Body Styles :badge{label="Soon" class="align-text-top"}
+
+Use the `no-body-styles` prop to prevent the Drawer from applying styles to the `<body>` element, such as `pointer-events: none` which blocks interaction with the page while the Drawer is open.
+
+::note
+When `overlay` is enabled, it still locks the body scroll. Combine `no-body-styles` with `overlay: false` to keep the page interactive.
+::
+
+::component-code
+---
+prettier: true
+props:
+  noBodyStyles: true
+  overlay: false
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+
+  content: |
+
+    <Placeholder class="h-48 m-4" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+
+#content
+:placeholder{class="h-48 m-4"}
+::
+
 ## Examples
 
 ### Control open state

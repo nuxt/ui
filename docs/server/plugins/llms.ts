@@ -1,4 +1,6 @@
+import { defineNitroPlugin } from 'nitropack/runtime'
 import { rawUrl } from '#agent-discovery'
+import { renderLlmsSection, WHEN_TO_USE_SECTION } from '../utils/llms'
 
 export default defineNitroPlugin((nitroApp) => {
   // `nuxt-llms` unshifts its "Documentation Sets" section, which is a single

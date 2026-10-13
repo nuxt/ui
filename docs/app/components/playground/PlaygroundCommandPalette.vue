@@ -1,10 +1,11 @@
 <script setup lang="ts">
-const studioIcons = useStudioIcons()
 import type { CommandPaletteGroup, CommandPaletteItem } from '@nuxt/ui'
+
+const studioIcons = useStudioIcons()
 
 const toast = useToast()
 
-const groups = ref<CommandPaletteGroup<CommandPaletteItem>[]>([
+const groups = computed<CommandPaletteGroup<CommandPaletteItem>[]>(() => [
   {
     id: 'users',
     label: 'Users',
@@ -12,17 +13,17 @@ const groups = ref<CommandPaletteGroup<CommandPaletteItem>[]>([
       {
         label: 'Benjamin Canac',
         suffix: 'benjamincanac',
-        avatar: { src: 'https://github.com/benjamincanac.png', loading: 'lazy' }
+        avatar: { src: 'https://github.com/benjamincanac.png', alt: 'Benjamin Canac', loading: 'lazy' }
       },
       {
-        label: 'Romain Hamel',
-        suffix: 'romhml',
-        avatar: { src: 'https://github.com/romhml.png', loading: 'lazy' }
+        label: 'Hugo Richard',
+        suffix: 'HugoRCD',
+        avatar: { src: 'https://github.com/HugoRCD.png', alt: 'Hugo Richard', loading: 'lazy' }
       },
       {
-        label: 'Neil Richter',
-        suffix: 'noook',
-        avatar: { src: 'https://github.com/noook.png', loading: 'lazy' }
+        label: 'Sébastien Chopin',
+        suffix: 'atinux',
+        avatar: { src: 'https://github.com/atinux.png', alt: 'Sébastien Chopin', loading: 'lazy' }
       }
     ]
   },
@@ -62,5 +63,11 @@ const groups = ref<CommandPaletteGroup<CommandPaletteItem>[]>([
 </script>
 
 <template>
-  <UCommandPalette :groups="groups" placeholder="Search users and actions..." :autofocus="false" class="h-80" />
+  <UCommandPalette
+    :groups="groups"
+    placeholder="Search users and actions..."
+    :autofocus="false"
+    class="h-71.5"
+    :ui="{ itemLabelSuffix: 'text-muted' }"
+  />
 </template>

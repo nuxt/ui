@@ -1,8 +1,11 @@
+import { defineMcpTool } from '@nuxtjs/mcp-toolkit/server'
+import { useEvent } from 'nitropack/runtime'
+import { createError } from 'h3'
 import { z } from 'zod'
 import { queryCollection } from '@nuxt/content/server'
 
 export default defineMcpTool({
-  description: 'Retrieves template details and setup instructions',
+  description: 'Retrieves a template by its title (case-insensitive): description, framework, features, and links to its live preview and GitHub repository. Does not include setup instructions or source code. Use `list-templates` to find the exact title.',
   annotations: {
     readOnlyHint: true,
     destructiveHint: false,

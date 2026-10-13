@@ -1,3 +1,6 @@
+import { defineCachedEventHandler } from 'nitropack/runtime'
+import { createError } from 'h3'
+
 type GoogleFont = {
   name: string
   category: string

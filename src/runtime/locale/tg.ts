@@ -16,23 +16,36 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Пӯшидан'
     },
+    breadcrumb: {
+      label: 'занҷираи навигатсия'
+    },
     calendar: {
+      label: 'Санаи чорабинӣ',
+      monthPicker: 'Интихоби моҳ',
       nextMonth: 'Моҳи оянда',
       nextYear: 'Соли оянда',
       prevMonth: 'Моҳи гузашта',
-      prevYear: 'Соли гузашта'
+      prevYear: 'Соли гузашта',
+      yearPicker: 'Интихоби сол'
     },
     carousel: {
       dots: 'Слайдро барои намоиш интихоб кунед',
       goto: 'Ба слайди {slide} гузаред',
       next: 'Баъдӣ',
-      prev: 'Қаблӣ'
+      prev: 'Қаблӣ',
+      roledescription: 'карусел',
+      slide: 'слайд'
+    },
+    chatMessages: {
+      autoScroll: 'Ба поён ҳаракат додан'
     },
     chatPrompt: {
       placeholder: 'Пайём ворид кунед…'
     },
     chatPromptSubmit: {
-      label: 'Фиристодан'
+      label: 'Фиристодан',
+      reload: 'Аз нав кӯшиш кардан',
+      stop: 'Қатъ кардани эҷод'
     },
     chatReasoning: {
       thinking: 'Фикр мекунад…',
@@ -51,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Бастан',
       noData: 'Маълумот нест',
       noMatch: 'Маълумоти мувофиқ ёфт нашуд',
-      placeholder: 'Фармонро нависед ё ҷустуҷӯ кунед…'
+      placeholder: 'Фармонро нависед ё ҷустуҷӯ кунед…',
+      results: 'Натиҷаҳо'
     },
     contentSearch: {
       links: 'Пайвандҳо',
@@ -95,14 +109,37 @@ export default defineLocale<Messages>({
       close: 'Пӯшидан',
       open: 'Кушодан'
     },
+    inputDate: {
+      day: 'рӯз',
+      dayPeriod: 'AM/PM',
+      era: 'давра',
+      hour: 'соат',
+      minute: 'дақиқа',
+      month: 'моҳ',
+      second: 'сония',
+      timeZoneName: 'минтақаи вақт',
+      year: 'сол'
+    },
     inputMenu: {
       create: '"{label}" созед',
       noData: 'Маълумот нест',
-      noMatch: 'Маълумоти мувофиқ ёфт нашуд'
+      noMatch: 'Маълумоти мувофиқ ёфт нашуд',
+      trigger: 'Нишон додани имконот'
     },
     inputNumber: {
       decrement: 'Кам кардан',
-      increment: 'Зиёд кардан'
+      increment: 'Зиёд кардан',
+      roledescription: 'майдони рақамӣ'
+    },
+    inputRating: {
+      rate: '{value} аз {length} баҳо додан'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'соат',
+      minute: 'дақиқа',
+      second: 'сония',
+      timeZoneName: 'минтақаи вақт'
     },
     listbox: {
       noData: 'Маълумот нест',
@@ -111,6 +148,16 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Бастан'
+    },
+    pagination: {
+      first: 'Саҳифаи аввал',
+      last: 'Саҳифаи охирин',
+      next: 'Саҳифаи баъдӣ',
+      page: 'Саҳифаи {page}',
+      prev: 'Саҳифаи қаблӣ'
+    },
+    pinInput: {
+      input: 'рамзи PIN, аломати {index} аз {length}'
     },
     pricingTable: {
       caption: 'Ҷадвали нархҳо'
@@ -144,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: 'Маълумоти мувофиқ ёфт нашуд',
       search: 'Ҷустуҷӯ…'
     },
+    skeleton: {
+      label: 'боргирӣ'
+    },
     slideover: {
       close: 'Бастан'
+    },
+    slider: {
+      max: 'Ҳадди аксар',
+      min: 'Ҳадди ақал',
+      thumb: 'Дастак',
+      value: 'Қимати {index} аз {total}'
+    },
+    stepper: {
+      label: 'пешрафт'
     },
     table: {
       noData: 'Маълумот нест'
     },
     toast: {
       close: 'Бастан'
+    },
+    toaster: {
+      label: 'Огоҳинома',
+      viewport: 'Огоҳиномаҳо ({hotkey})'
     }
   }
 })

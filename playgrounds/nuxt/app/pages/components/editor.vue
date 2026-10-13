@@ -454,7 +454,7 @@ const searchTerm = ref('')
 const searchTermDebounced = refDebounced(searchTerm, 200)
 
 const { data: mentionItems } = await useFetch('https://dummyjson.com/users/search?limit=10', {
-  params: { q: searchTermDebounced },
+  query: { q: searchTermDebounced },
   transform: (data: { users: { id: number, firstName: string, lastName: string, image: string }[] }) => {
     return data.users?.map(user => ({ id: user.id, label: `${user.firstName} ${user.lastName}`, avatar: { src: user.image } })) || []
   },
