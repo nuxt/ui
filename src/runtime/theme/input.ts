@@ -16,22 +16,18 @@ export function withinFocus(classes: string): string {
   return classes.split(' ').map(cls => withinFocusMap[cls] ?? cls).join(' ')
 }
 
-// `root` is the box and has no padding of its own. `base` is the native input,
-// in the flow of the box with the leading and the trailing: it has the padding
-// of the size and they bring their own, so whatever they hold takes its own
-// room, and next to one of them the padding of the input is the gap. The box
-// follows the state of its direct children, the native element and what the
-// default slot holds: a button in the leading or the trailing is one level down
-// and doesn't count.
+// `root` is the box and has no padding: `base`, the native input, has the one of
+// the size, and the leading and the trailing bring their own. The box follows the
+// state of its direct children, so a button in the leading doesn't light it.
 export default defineTheme({
   slots: {
     // The browser paints its autofill tint on the input alone: `bg-clip-text` keeps
     // it behind the glyphs, and the box takes a tint of its own
     root: 'relative inline-flex items-center rounded-md cursor-text has-[>:autofill]:bg-accent-soft has-[>:disabled]:cursor-not-allowed has-[>:disabled]:opacity-75 transition-colors',
     base: 'w-full min-w-0 flex-1 self-stretch border-0 appearance-none bg-transparent bg-clip-text text-strong outline-none placeholder:text-faint px-(--ui-control-px) py-(--ui-control-py) disabled:cursor-not-allowed',
-    // After the input in the DOM, so the input keeps the first tab stop.
-    // The box sits on a line of text by its first item: an invisible character
-    // gives the leading the baseline of the text, so an icon doesn't move the box
+    // After the input in the DOM, so the input keeps the first tab stop. An inline
+    // box sits on a line of text by its first item: the invisible character gives
+    // the leading the baseline of the text, so an icon doesn't move the box
     leading: `order-first flex items-center ps-(--ui-control-px) has-[>button]:ps-1 before:content-['x'] before:w-0 before:invisible`,
     leadingIcon: 'shrink-0 text-faint',
     leadingAvatar: 'shrink-0',
