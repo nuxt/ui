@@ -3,7 +3,9 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative',
-    container: 'flex flex-col mx-auto max-w-2xl',
+    // Keep the container centered, but never let its start edge slide under the indicator (`w-32`).
+    // Keyed on the indicator's `absolute` class so an in-flow override (e.g. `sticky`) drops the gutter.
+    container: `flex flex-col mx-auto max-w-2xl lg:peer-[${options.theme.prefix ? `[class~='${options.theme.prefix}:absolute']` : '.absolute'}]/indicator:ms-[max(--spacing(32),calc((100%-var(--container-2xl))/2))]`,
     header: '',
     meta: 'flex items-center gap-3 mb-2',
     date: 'text-sm/6 text-toned truncate',
@@ -14,7 +16,7 @@ export default (options: Required<ModuleOptions>) => ({
     image: 'object-cover object-top w-full h-full',
     authors: 'flex flex-wrap gap-x-4 gap-y-1.5',
     footer: 'border-t border-default pt-5 flex items-center justify-between',
-    indicator: 'absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0',
+    indicator: 'peer/indicator absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0',
     dot: 'size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1',
     dotInner: 'size-2 rounded-full bg-primary'
   },
@@ -38,15 +40,6 @@ export default (options: Required<ModuleOptions>) => ({
     hidden: {
       true: {
         date: 'lg:hidden'
-      }
-    },
-    indicator: {
-      true: {
-        // Reserve the indicator gutter (`w-32`) on both sides so the centered container
-        // never slides under the absolutely positioned indicator on narrow containers.
-        // The `50%` floor keeps the container from collapsing to `0` when the root is
-        // narrower than the reservation itself.
-        container: 'lg:w-[max(50%,calc(100%-16rem))]'
       }
     }
   }

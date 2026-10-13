@@ -101,8 +101,7 @@ const as = computed(() => resolveAs(props.as, { root: 'article', title: 'h2' }))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.changelogVersion || {}) })({
-  to: !!props.to || !!props.onClick,
-  indicator: !!props.indicator || !!slots.indicator
+  to: !!props.to || !!props.onClick
 }))
 
 // eslint-disable-next-line vue/no-dupe-keys
