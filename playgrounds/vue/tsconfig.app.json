@@ -26,6 +26,9 @@
     "paths": {
       "#build/ui/*": [
         "./node_modules/.nuxt-ui/ui/*"
+      ],
+      "#imports": [
+        "./node_modules/@nuxt/ui/dist/runtime/vue/stubs/vue-router"
       ]
     }
   },

@@ -129,7 +129,7 @@ const slots = defineSlots<PaginationSlots>()
 
 const props = useComponentProps('pagination', _props)
 
-const { dir } = useLocale()
+const { dir, t } = useLocale()
 const appConfig = useAppConfig() as Pagination['AppConfig']
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'defaultPage', 'disabled', 'itemsPerPage', 'page', 'showEdges', 'siblingCount', 'total'), emits)
@@ -150,19 +150,26 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pagination || {}
 <template>
   <PaginationRoot v-slot="{ page, pageCount }" v-bind="(rootProps as any)" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <PaginationList v-slot="{ items }" data-slot="list" :class="ui.list({ class: props.ui?.list })">
-      <PaginationFirst v-if="props.showControls || !!slots.first" as-child data-slot="first" :class="ui.first({ class: props.ui?.first })">
+      <PaginationFirst v-if="props.showControls || !!slots.first" as-child :aria-label="t('pagination.first')" data-slot="first" :class="ui.first({ class: props.ui?.first })">
         <slot name="first">
           <UButton :color="props.color" :variant="props.variant" :size="props.size" :icon="firstIcon" :to="props.to?.(1)" />
         </slot>
       </PaginationFirst>
-      <PaginationPrev v-if="props.showControls || !!slots.prev" as-child data-slot="prev" :class="ui.prev({ class: props.ui?.prev })">
+      <PaginationPrev v-if="props.showControls || !!slots.prev" as-child :aria-label="t('pagination.prev')" data-slot="prev" :class="ui.prev({ class: props.ui?.prev })">
         <slot name="prev">
           <UButton :color="props.color" :variant="props.variant" :size="props.size" :icon="prevIcon" :to="page > 1 ? props.to?.(page - 1) : undefined" />
         </slot>
       </PaginationPrev>
 
       <template v-for="(item, index) in items" :key="index">
-        <PaginationListItem v-if="item.type === 'page'" as-child :value="item.value" data-slot="item" :class="ui.item({ class: props.ui?.item })">
+        <PaginationListItem
+          v-if="item.type === 'page'"
+          as-child
+          :value="item.value"
+          :aria-label="t('pagination.page', { page: item.value })"
+          data-slot="item"
+          :class="ui.item({ class: props.ui?.item })"
+        >
           <slot name="item" v-bind="{ item, index, page, pageCount }">
             <UButton
               :color="page === item.value ? props.activeColor : props.color"
@@ -183,12 +190,12 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pagination || {}
         </PaginationEllipsis>
       </template>
 
-      <PaginationNext v-if="props.showControls || !!slots.next" as-child data-slot="next" :class="ui.next({ class: props.ui?.next })">
+      <PaginationNext v-if="props.showControls || !!slots.next" as-child :aria-label="t('pagination.next')" data-slot="next" :class="ui.next({ class: props.ui?.next })">
         <slot name="next">
           <UButton :color="props.color" :variant="props.variant" :size="props.size" :icon="nextIcon" :to="page < pageCount ? props.to?.(page + 1) : undefined" />
         </slot>
       </PaginationNext>
-      <PaginationLast v-if="props.showControls || !!slots.last" as-child data-slot="last" :class="ui.last({ class: props.ui?.last })">
+      <PaginationLast v-if="props.showControls || !!slots.last" as-child :aria-label="t('pagination.last')" data-slot="last" :class="ui.last({ class: props.ui?.last })">
         <slot name="last">
           <UButton :color="props.color" :variant="props.variant" :size="props.size" :icon="lastIcon" :to="props.to?.(pageCount)" />
         </slot>

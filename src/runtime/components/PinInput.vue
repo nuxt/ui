@@ -53,6 +53,7 @@ export interface PinInputProps<T extends PinInputType = 'text'> extends Pick<Pin
 export type PinInputEmits<T extends PinInputType = 'text'> = PinInputRootEmits<T> & {
   change: [event: Event]
   blur: [event: Event]
+  focus: [event: Event]
 }
 
 export interface PinInputSlots {
@@ -68,6 +69,7 @@ import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useFormField } from '../composables/useFormField'
+import { useLocale } from '../composables/useLocale'
 import { looseToNumber } from '../utils'
 import { tv } from '../utils/tv'
 
@@ -81,6 +83,7 @@ defineSlots<PinInputSlots>()
 
 const props = useComponentProps<PinInputProps<T>>('pinInput', _props)
 
+const { t } = useLocale()
 const appConfig = useAppConfig() as PinInput['AppConfig']
 
 const rootProps = useForwardProps(reactivePick(props, 'disabled', 'id', 'mask', 'name', 'otp', 'required', 'type'), emits)
@@ -119,11 +122,22 @@ function onComplete(value: string[] | number[]) {
   emitFormChange()
 }
 
-function onBlur(event: FocusEvent) {
-  if (!event.relatedTarget) {
-    emits('blur', event)
-    emitFormBlur()
+function onFocusOut(event: FocusEvent) {
+  if (event.relatedTarget && (event.currentTarget as HTMLElement).contains(event.relatedTarget as Node)) {
+    return
   }
+
+  emits('blur', event)
+  emitFormBlur()
+}
+
+function onFocusIn(event: FocusEvent) {
+  if (event.relatedTarget && (event.currentTarget as HTMLElement).contains(event.relatedTarget as Node)) {
+    return
+  }
+
+  emits('focus', event)
+  emitFormFocus()
 }
 
 function autoFocus() {
@@ -177,16 +191,17 @@ defineExpose({
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="emitFormInput()"
     @complete="onComplete"
+    @focusout="onFocusOut"
+    @focusin="onFocusIn"
   >
     <template v-for="(ids, index) in looseToNumber(props.length)" :key="ids">
       <PinInputInput
         :ref="el => setInputRef(index as number, el)"
         :index="(index as number)"
+        :aria-label="t('pinInput.input', { index: (index as number) + 1, length: looseToNumber(props.length) })"
         data-slot="base"
         :class="ui.base({ class: props.ui?.base })"
         :disabled="disabled"
-        @blur="onBlur"
-        @focus="emitFormFocus"
       />
       <span
         v-if="shouldInsertSeparator(index as number)"

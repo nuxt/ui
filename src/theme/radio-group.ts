@@ -26,9 +26,11 @@ export default (options: Required<ModuleOptions>) => ({
     },
     variant: {
       list: {
+        fieldset: 'flex-wrap',
         item: ''
       },
       card: {
+        fieldset: 'flex-wrap',
         item: [`border border-default rounded-lg ${hover}bg-elevated/50`, options.theme.transitions && 'transition-colors']
       },
       table: {
@@ -128,7 +130,7 @@ export default (options: Required<ModuleOptions>) => ({
       variant: ['card', 'table'],
       highlight: false,
       class: {
-        item: `${hover}border-accented`
+        item: `${hover}border-accented ${hover}z-[1]`
       }
     },
     { size: 'xs', indicator: 'hidden', class: { icon: 'size-3' } },
@@ -198,14 +200,14 @@ export default (options: Required<ModuleOptions>) => ({
       color,
       variant: 'table',
       class: {
-        item: `has-data-[state=checked]:bg-${color}/10 has-data-[state=checked]:border-${color}/50 has-data-[state=checked]:z-[1]`
+        item: `has-data-[state=checked]:bg-${color}/10 has-data-[state=checked]:border-${color}/50 has-data-[state=checked]:z-[2]`
       }
     })),
     {
       color: 'neutral',
       variant: 'table',
       class: {
-        item: 'has-data-[state=checked]:bg-elevated has-data-[state=checked]:border-inverted/50 has-data-[state=checked]:z-[1]'
+        item: 'has-data-[state=checked]:bg-elevated has-data-[state=checked]:border-inverted/50 has-data-[state=checked]:z-[2]'
       }
     },
     {

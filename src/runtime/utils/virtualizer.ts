@@ -8,30 +8,30 @@ function itemHasDescription(item: any, descriptionKey: string): boolean {
   return value !== undefined && value !== null && value !== ''
 }
 
-function getSize(size: 'xs' | 'sm' | 'md' | 'lg' | 'xl', hasDescription: boolean): number {
-  if (hasDescription) {
-    return ({
-      xs: 44,
-      sm: 48,
-      md: 52,
-      lg: 56,
-      xl: 60
-    })[size]
-  }
+function getSize(size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | (string & {}), hasDescription: boolean): number {
+  const sizes = hasDescription
+    ? {
+        xs: 44,
+        sm: 48,
+        md: 52,
+        lg: 56,
+        xl: 60
+      }
+    : {
+        xs: 24,
+        sm: 28,
+        md: 32,
+        lg: 36,
+        xl: 40
+      }
 
-  return ({
-    xs: 24,
-    sm: 28,
-    md: 32,
-    lg: 36,
-    xl: 40
-  })[size]
+  return sizes[size as keyof typeof sizes] ?? sizes.md
 }
 
 /**
  * Get estimate size for virtualizers that checks each item individually
  */
-export function getEstimateSize(items: any[], size: 'xs' | 'sm' | 'md' | 'lg' | 'xl', descriptionKey?: string, hasDescriptionSlot?: boolean): (index: number) => number {
+export function getEstimateSize(items: any[], size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | (string & {}), descriptionKey?: string, hasDescriptionSlot?: boolean): (index: number) => number {
   const sizeWithDescription = getSize(size, true)
   const sizeWithoutDescription = getSize(size, false)
 

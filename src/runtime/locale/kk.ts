@@ -16,23 +16,36 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Жабу'
     },
+    breadcrumb: {
+      label: 'навигациялық жол'
+    },
     calendar: {
+      label: 'Оқиға күні',
+      monthPicker: 'Айды таңдау',
       nextMonth: 'Келесі ай',
       nextYear: 'Келесі жыл',
       prevMonth: 'Алдыңғы ай',
-      prevYear: 'Алдыңғы жыл'
+      prevYear: 'Алдыңғы жыл',
+      yearPicker: 'Жылды таңдау'
     },
     carousel: {
       dots: 'Көрсету үшін слайдты таңдаңыз',
       goto: '{slide} слайдқа өту',
       next: 'Келесі',
-      prev: 'Алдыңғы'
+      prev: 'Алдыңғы',
+      roledescription: 'карусель',
+      slide: 'слайд'
+    },
+    chatMessages: {
+      autoScroll: 'Төмен айналдыру'
     },
     chatPrompt: {
       placeholder: 'Хабар енгізіңіз…'
     },
     chatPromptSubmit: {
-      label: 'Жіберу'
+      label: 'Жіберу',
+      reload: 'Қайталау',
+      stop: 'Генерацияны тоқтату'
     },
     chatReasoning: {
       thinking: 'Ойлануда…',
@@ -51,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Жабу',
       noData: 'Деректер жоқ',
       noMatch: 'Сәйкес келетін деректер жоқ',
-      placeholder: 'Команда енгізіңіз немесе іздеңіз…'
+      placeholder: 'Команда енгізіңіз немесе іздеңіз…',
+      results: 'Нәтижелер'
     },
     contentSearch: {
       links: 'Сілтемелер',
@@ -95,14 +109,37 @@ export default defineLocale<Messages>({
       close: 'Жабу',
       open: 'Ашу'
     },
+    inputDate: {
+      day: 'күн',
+      dayPeriod: 'AM/PM',
+      era: 'дәуір',
+      hour: 'сағат',
+      minute: 'минут',
+      month: 'ай',
+      second: 'секунд',
+      timeZoneName: 'уақыт белдеуі',
+      year: 'жыл'
+    },
     inputMenu: {
       create: '"{label}" жасау',
       noData: 'Деректер жоқ',
-      noMatch: 'Сәйкес келетін деректер жоқ'
+      noMatch: 'Сәйкес келетін деректер жоқ',
+      trigger: 'Нұсқаларды көрсету'
     },
     inputNumber: {
       decrement: 'Азайту',
-      increment: 'Арттыру'
+      increment: 'Арттыру',
+      roledescription: 'сандық өріс'
+    },
+    inputRating: {
+      rate: '{length} ішінен {value} деп бағалау'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'сағат',
+      minute: 'минут',
+      second: 'секунд',
+      timeZoneName: 'уақыт белдеуі'
     },
     listbox: {
       noData: 'Деректер жоқ',
@@ -111,6 +148,16 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Жабу'
+    },
+    pagination: {
+      first: 'Бірінші бет',
+      last: 'Соңғы бет',
+      next: 'Келесі бет',
+      page: '{page}-бет',
+      prev: 'Алдыңғы бет'
+    },
+    pinInput: {
+      input: 'PIN код, {length} ішінен {index}-таңба'
     },
     pricingTable: {
       caption: 'Баға кестесі'
@@ -144,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: 'Сәйкес келетін деректер жоқ',
       search: 'Іздеу…'
     },
+    skeleton: {
+      label: 'жүктелуде'
+    },
     slideover: {
       close: 'Жабу'
+    },
+    slider: {
+      max: 'Максимум',
+      min: 'Минимум',
+      thumb: 'Жүгірткі',
+      value: '{total} ішінен {index}-мән'
+    },
+    stepper: {
+      label: 'прогресс'
     },
     table: {
       noData: 'Деректер жоқ'
     },
     toast: {
       close: 'Жабу'
+    },
+    toaster: {
+      label: 'Хабарландыру',
+      viewport: 'Хабарландырулар ({hotkey})'
     }
   }
 })

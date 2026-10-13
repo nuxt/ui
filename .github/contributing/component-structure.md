@@ -177,10 +177,12 @@ export interface AccordionProps<T extends AccordionItem = AccordionItem> {
 </script>
 
 <script setup lang="ts" generic="T extends AccordionItem">
-const props = withDefaults(defineProps<AccordionProps<T>>(), {
+const _props = withDefaults(defineProps<AccordionProps<T>>(), {
   type: 'single',
   collapsible: true
 })
+
+const props = useComponentProps<AccordionProps<T>>('accordion', _props)
 </script>
 ```
 
@@ -335,7 +337,7 @@ export * from '../components/ComponentName.vue'
 
 ## Register in `ThemeDefaults`
 
-The `ThemeDefaults` interface in `src/runtime/composables/useComponentProps.ts` powers autocomplete inside `<UTheme :props="{ componentName: { … } }">`. The CLI scaffolder (`nuxt-ui make component`) auto-inserts the entry; only do this manually if you skipped the CLI:
+The `ThemeDefaults` interface in `src/runtime/types/theme.ts` powers autocomplete inside `<UTheme :props="{ componentName: { … } }">`. The CLI scaffolder (`pnpm cli make component`) auto-inserts the entry; only do this manually if you skipped the CLI:
 
 ```ts
 export interface ThemeDefaults {

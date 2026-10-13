@@ -1,3 +1,4 @@
+import { nextTick } from 'vue'
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
@@ -118,6 +119,51 @@ describe('NavigationMenu', () => {
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
   ])
+
+  it('renders a single accordion trigger for a vertical item without `to`', async () => {
+    const wrapper = await mountSuspended(NavigationMenu, {
+      props: {
+        orientation: 'vertical',
+        items: [{ label: 'Group', children: [{ label: 'Child', to: '/child' }] }]
+      }
+    })
+
+    const link = wrapper.find('[data-slot="link"]')
+    expect(wrapper.findAll(`[id="${link.attributes('id')}"]`)).toHaveLength(1)
+
+    await wrapper.find('[data-slot="linkTrailing"]').trigger('click')
+    expect(wrapper.find('[data-slot="link"]').attributes('data-state')).toBe('open')
+  })
+
+  it('keeps the trailing accordion trigger for a vertical item with `to`', async () => {
+    const wrapper = await mountSuspended(NavigationMenu, {
+      props: {
+        orientation: 'vertical',
+        items: [{ label: 'Group', to: '/group', children: [{ label: 'Child', to: '/child' }] }]
+      }
+    })
+
+    expect(wrapper.find('[data-slot="link"]').element.tagName).toBe('A')
+
+    await wrapper.find('[data-slot="linkTrailing"]').trigger('click')
+    expect(wrapper.find('[data-slot="content"]').attributes('data-state')).toBe('open')
+  })
+
+  it('toggles a horizontal item with `to` from its trailing area', async () => {
+    const wrapper = await mountSuspended(NavigationMenu, {
+      props: {
+        orientation: 'horizontal',
+        items: [{ label: 'Group', to: 'https://nuxt.com', children: [{ label: 'Child', to: '/child' }] }]
+      }
+    })
+
+    const event = new MouseEvent('click', { bubbles: true, cancelable: true })
+    wrapper.find('[data-slot="linkTrailing"]').element.dispatchEvent(event)
+    await nextTick()
+
+    expect(event.defaultPrevented).toBe(true)
+    expect(wrapper.find('[data-slot="link"]').attributes('data-state')).toBe('open')
+  })
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(NavigationMenu, {

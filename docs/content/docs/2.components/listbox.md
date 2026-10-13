@@ -497,15 +497,15 @@ props:
     - label: 'benjamincanac'
       avatar:
         src: 'https://github.com/benjamincanac.png'
-    - label: 'romhml'
-      avatar:
-        src: 'https://github.com/romhml.png'
-    - label: 'atinux'
-      avatar:
-        src: 'https://github.com/atinux.png'
     - label: 'HugoRCD'
       avatar:
         src: 'https://github.com/HugoRCD.png'
+    - label: 'atinux'
+      avatar:
+        src: 'https://github.com/atinux.png'
+    - label: 'romhml'
+      avatar:
+        src: 'https://github.com/romhml.png'
   class: 'w-full'
 ---
 ::

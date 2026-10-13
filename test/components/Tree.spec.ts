@@ -62,6 +62,7 @@ describe('Tree', () => {
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ['with neutral color', { props: { ...props, color: 'neutral' } }],
     ['with as', { props: { ...props, as: 'div' } }],
+    ['with as object', { props: { ...props, as: { root: 'div', link: 'a' } } }],
     ['with class', { props: { ...props, class: 'absolute' } }],
     ['with ui', { props: { ...props, ui: { link: 'font-bold' } } }],
     // Slots
@@ -72,6 +73,17 @@ describe('Tree', () => {
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'trailing slot' } }],
     ['with dynamic slot', { props, slots: { app: () => 'dynamic slot' } }]
   ])
+
+  it('does not throw when flattened with a custom theme size', async () => {
+    const wrapper = await mountSuspended(Tree, {
+      props: {
+        items: [{ label: 'app', defaultExpanded: true, children: items }],
+        nested: false,
+        size: 'xxs' as any
+      }
+    })
+    expect(wrapper.exists()).toBe(true)
+  })
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Tree, {

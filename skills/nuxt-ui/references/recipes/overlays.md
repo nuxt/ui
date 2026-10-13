@@ -144,7 +144,11 @@ const groups = [{
 <template>
   <UButton label="Search..." icon="i-lucide-search" color="neutral" variant="outline" @click="isOpen = true" />
 
-  <UCommandPalette v-model:open="isOpen" :groups="groups" placeholder="Type a command or search..." />
+  <UModal v-model:open="isOpen">
+    <template #content>
+      <UCommandPalette :groups="groups" placeholder="Type a command or search..." close @update:open="isOpen = $event" />
+    </template>
+  </UModal>
 </template>
 ```
 

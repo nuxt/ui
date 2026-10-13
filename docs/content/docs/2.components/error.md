@@ -19,8 +19,11 @@ The Error component uses the `--ui-header-height` CSS variable to position itsel
 
 Use the `error` prop to display an error message.
 
+::framework-only
+#nuxt
 ::note{to="https://nuxt.com/docs/guide/directory-structure/error" target="_blank"}
 In most cases, you will receive the `error` prop in your `error.vue` file.
+::
 ::
 
 ::component-code
@@ -35,6 +38,10 @@ props:
     message: 'The page you are looking for does not exist.'
   class: '!min-h-96'
 ---
+::
+
+::tip
+The status message is rendered as an `h1` by default. Use the `as` prop with an object to change it, for example `:as="{ statusMessage: 'h2' }"`{lang="ts-type"}. You can also set the root element this way: `:as="{ root: 'div', statusMessage: 'h2' }"`{lang="ts-type"}.
 ::
 
 ### Icon :badge{label="4.8+" class="align-text-top"}

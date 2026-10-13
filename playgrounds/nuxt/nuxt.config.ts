@@ -19,6 +19,10 @@ export default defineNuxtConfig({
     '/docs/components/**': { redirect: { to: '/components/**', statusCode: 301 }, prerender: false }
   },
 
+  future: {
+    compatibilityVersion: 5
+  },
+
   compatibilityDate: '2024-07-09',
 
   vite: {
@@ -34,18 +38,6 @@ export default defineNuxtConfig({
         'tailwindcss/colors',
         'vaul-vue'
       ]
-    }
-  },
-
-  typescript: {
-    tsConfig: {
-      compilerOptions: {
-        paths: {
-          // The docs examples imported in `pages/components/form.vue` resolve
-          // `@nuxt/ui` from `docs/`, which the isolated CI install can't reach.
-          '@nuxt/ui': ['../node_modules/@nuxt/ui/dist/module.d.mts']
-        }
-      }
     }
   }
 })

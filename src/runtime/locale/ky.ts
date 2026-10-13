@@ -16,23 +16,36 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Жабуу'
     },
+    breadcrumb: {
+      label: 'навигациялык жол'
+    },
     calendar: {
+      label: 'Иш-чаранын күнү',
+      monthPicker: 'Айды тандоо',
       nextMonth: 'Кийинки ай',
       nextYear: 'Кийинки жыл',
       prevMonth: 'Алдыңкы ай',
-      prevYear: 'Алдыңкы жыл'
+      prevYear: 'Алдыңкы жыл',
+      yearPicker: 'Жылды тандоо'
     },
     carousel: {
       dots: 'Көрсөтүү үчүн слайдды тандаңыз',
       goto: '{slide} слайдга өтүү',
       next: 'Кийинки',
-      prev: 'Алдыңкы'
+      prev: 'Алдыңкы',
+      roledescription: 'карусель',
+      slide: 'слайд'
+    },
+    chatMessages: {
+      autoScroll: 'Ылдый жылдыруу'
     },
     chatPrompt: {
       placeholder: 'Бул жерге билдирүүңүздү жазыңыз…'
     },
     chatPromptSubmit: {
-      label: 'Билдирүү жөнөтүү'
+      label: 'Билдирүү жөнөтүү',
+      reload: 'Кайра аракет кылуу',
+      stop: 'Генерацияны токтотуу'
     },
     chatReasoning: {
       thinking: 'Ойлонуда…',
@@ -51,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Жабуу',
       noData: 'Маалымат жок',
       noMatch: 'Эч нерсе табылган жок',
-      placeholder: 'Буйрук киргизиңиз же издөө…'
+      placeholder: 'Буйрук киргизиңиз же издөө…',
+      results: 'Жыйынтыктар'
     },
     contentSearch: {
       links: 'Шилтемелер',
@@ -95,14 +109,37 @@ export default defineLocale<Messages>({
       close: 'Менюну жабуу',
       open: 'Менюну ачуу'
     },
+    inputDate: {
+      day: 'күн',
+      dayPeriod: 'AM/PM',
+      era: 'заман',
+      hour: 'саат',
+      minute: 'мүнөт',
+      month: 'ай',
+      second: 'секунд',
+      timeZoneName: 'убакыт алкагы',
+      year: 'жыл'
+    },
     inputMenu: {
       create: '"{label}" жасоо',
       noData: 'Маалымат жок',
-      noMatch: 'Эч нерсе табылган жок'
+      noMatch: 'Эч нерсе табылган жок',
+      trigger: 'Варианттарды көрсөтүү'
     },
     inputNumber: {
       decrement: 'Азайтуу',
-      increment: 'Кошуу'
+      increment: 'Кошуу',
+      roledescription: 'сандык талаа'
+    },
+    inputRating: {
+      rate: '{length} ичинен {value} деп баалоо'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'саат',
+      minute: 'мүнөт',
+      second: 'секунд',
+      timeZoneName: 'убакыт алкагы'
     },
     listbox: {
       noData: 'Маалымат жок',
@@ -111,6 +148,16 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Жабуу'
+    },
+    pagination: {
+      first: 'Биринчи бет',
+      last: 'Акыркы бет',
+      next: 'Кийинки бет',
+      page: '{page}-бет',
+      prev: 'Алдыңкы бет'
+    },
+    pinInput: {
+      input: 'PIN код, {length} ичинен {index}-белги'
     },
     pricingTable: {
       caption: 'Баалардын салыштыруу таблицасы'
@@ -144,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: 'Сүйлөшкөн маалыматтар жок',
       search: 'Издөө…'
     },
+    skeleton: {
+      label: 'жүктөлүүдө'
+    },
     slideover: {
       close: 'Жабуу'
+    },
+    slider: {
+      max: 'Максимум',
+      min: 'Минимум',
+      thumb: 'Сыдырма',
+      value: '{total} ичинен {index}-маани'
+    },
+    stepper: {
+      label: 'прогресс'
     },
     table: {
       noData: 'Маалымат жок'
     },
     toast: {
       close: 'Жабуу'
+    },
+    toaster: {
+      label: 'Билдирме',
+      viewport: 'Билдирмелер ({hotkey})'
     }
   }
 })

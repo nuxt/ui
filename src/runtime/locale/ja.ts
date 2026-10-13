@@ -16,23 +16,36 @@ export default defineLocale<Messages>({
     banner: {
       close: '閉じる'
     },
+    breadcrumb: {
+      label: 'パンくずリスト'
+    },
     calendar: {
+      label: 'イベントの日付',
+      monthPicker: '月の選択',
       nextMonth: '翌月',
       nextYear: '翌年',
       prevMonth: '前月',
-      prevYear: '前年'
+      prevYear: '前年',
+      yearPicker: '年の選択'
     },
     carousel: {
       dots: '表示するスライドを選択',
       goto: 'スライド {slide} に移動',
       next: '次へ',
-      prev: '前へ'
+      prev: '前へ',
+      roledescription: 'カルーセル',
+      slide: 'スライド'
+    },
+    chatMessages: {
+      autoScroll: '一番下までスクロール'
     },
     chatPrompt: {
       placeholder: 'ここにメッセージを入力してください…'
     },
     chatPromptSubmit: {
-      label: '送信'
+      label: '送信',
+      reload: '再試行',
+      stop: '生成を停止'
     },
     chatReasoning: {
       thinking: '考えています…',
@@ -51,7 +64,8 @@ export default defineLocale<Messages>({
       close: '閉じる',
       noData: 'データがありません',
       noMatch: '一致するデータがありません',
-      placeholder: 'コマンドを入力するか検索…'
+      placeholder: 'コマンドを入力するか検索…',
+      results: '検索結果'
     },
     contentSearch: {
       links: 'リンク',
@@ -95,14 +109,37 @@ export default defineLocale<Messages>({
       close: 'メニューを閉じる',
       open: 'メニューを開く'
     },
+    inputDate: {
+      day: '日',
+      dayPeriod: '午前/午後',
+      era: '時代',
+      hour: '時',
+      minute: '分',
+      month: '月',
+      second: '秒',
+      timeZoneName: 'タイムゾーン',
+      year: '年'
+    },
     inputMenu: {
       create: '"{label}"を作成',
       noData: 'データがありません',
-      noMatch: '一致するデータがありません'
+      noMatch: '一致するデータがありません',
+      trigger: 'オプションを表示'
     },
     inputNumber: {
       decrement: '減らす',
-      increment: '増やす'
+      increment: '増やす',
+      roledescription: '数値フィールド'
+    },
+    inputRating: {
+      rate: '{length}段階中{value}で評価'
+    },
+    inputTime: {
+      dayPeriod: '午前/午後',
+      hour: '時',
+      minute: '分',
+      second: '秒',
+      timeZoneName: 'タイムゾーン'
     },
     listbox: {
       noData: 'データがありません',
@@ -111,6 +148,16 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: '閉じる'
+    },
+    pagination: {
+      first: '最初のページ',
+      last: '最後のページ',
+      next: '次のページ',
+      page: '{page}ページ',
+      prev: '前のページ'
+    },
+    pinInput: {
+      input: 'PINコード、{length}文字中{index}文字目'
     },
     pricingTable: {
       caption: '価格プランの比較'
@@ -144,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: '一致するデータがありません',
       search: '検索…'
     },
+    skeleton: {
+      label: '読み込み中'
+    },
     slideover: {
       close: '閉じる'
+    },
+    slider: {
+      max: '最大',
+      min: '最小',
+      thumb: 'つまみ',
+      value: '{total}個中{index}番目の値'
+    },
+    stepper: {
+      label: '進捗'
     },
     table: {
       noData: 'データがありません'
     },
     toast: {
       close: '閉じる'
+    },
+    toaster: {
+      label: '通知',
+      viewport: '通知 ({hotkey})'
     }
   }
 })

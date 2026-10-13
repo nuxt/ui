@@ -74,7 +74,7 @@ import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
-import { looseToNumber } from '../utils'
+import { isEmpty, looseToNumber } from '../utils'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
@@ -134,12 +134,13 @@ function updateInput(value: string | null | undefined) {
     value = looseToNumber(value)
   }
 
-  if (props.modelModifiers?.nullable) {
-    value ||= null
+  // Only empty values are mapped, `0` is a value on its own with the `number` modifier
+  if (props.modelModifiers?.nullable && isEmpty(value)) {
+    value = null
   }
 
-  if (props.modelModifiers?.optional && !props.modelModifiers?.nullable && value !== null) {
-    value ||= undefined
+  if (props.modelModifiers?.optional && !props.modelModifiers?.nullable && value !== null && isEmpty(value)) {
+    value = undefined
   }
 
   modelValue.value = value as ApplyModifiers<T, Mod>
@@ -263,7 +264,7 @@ defineExpose({
 
     <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
       <slot name="trailing" :ui="ui">
-        <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+        <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, leading: isLeading })" />
       </slot>
     </span>
   </Primitive>

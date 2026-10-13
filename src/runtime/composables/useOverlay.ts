@@ -47,7 +47,7 @@ interface ManagedOverlayOptionsPrivate<T extends Component> {
   isMounted: boolean
   isOpen: boolean
   originalProps?: ComponentProps<T>
-  resolvePromise?: (value: any) => void
+  resolvers: ((value: any) => void)[]
 }
 export type Overlay = OverlayOptions<Component> & ManagedOverlayOptionsPrivate<Component>
 
@@ -58,7 +58,7 @@ type OverlayInstance<T extends Component> = Omit<ManagedOverlayOptionsPrivate<T>
   patch: (props: Partial<ComponentProps<T>>) => void
 }
 
-type OpenedOverlay<T extends Component> = Omit<OverlayInstance<T>, 'open' | 'close' | 'patch' | 'modelValue' | 'resolvePromise'> & {
+type OpenedOverlay<T extends Component> = Omit<OverlayInstance<T>, 'open' | 'close' | 'patch' | 'modelValue' | 'resolvers'> & {
   result: Promise<CloseEventArgType<ComponentEmit<T>>>
 } & Promise<CloseEventArgType<ComponentEmit<T>>>
 
@@ -75,7 +75,8 @@ function _useOverlay() {
       isMounted: !!defaultOpen,
       destroyOnClose: !!destroyOnClose,
       originalProps: props || {},
-      props: { ...props }
+      props: { ...props },
+      resolvers: []
     })
 
     overlays.push(options)
@@ -100,7 +101,7 @@ function _useOverlay() {
 
     overlay.isOpen = true
     overlay.isMounted = true
-    const result = new Promise<any>(resolve => overlay.resolvePromise = resolve)
+    const result = new Promise<any>(resolve => overlay.resolvers.push(resolve))
 
     return Object.assign(result, {
       id,
@@ -115,10 +116,9 @@ function _useOverlay() {
 
     overlay.isOpen = false
 
-    // Resolve the promise if it exists
-    if (overlay.resolvePromise) {
-      overlay.resolvePromise(value)
-      overlay.resolvePromise = undefined
+    // Resolve every promise returned by `open` since the last close
+    for (const resolve of overlay.resolvers.splice(0)) {
+      resolve(value)
     }
   }
 

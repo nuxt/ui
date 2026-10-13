@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { Ref, WatchOptions, ComponentPublicInstance, VNode } from 'vue'
+import type { AriaAttributes, Ref, WatchOptions, ComponentPublicInstance, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type {
   Cell,
@@ -477,13 +477,17 @@ function onRowSelect(e: Event, row: TableRow<T>) {
     return
   }
   const target = e.target as HTMLElement
-  const isInteractive = target.closest('button') || target.closest('a')
+  const isInteractive = target.closest('a, button, input, label, select, textarea')
   if (isInteractive) {
     return
   }
 
   e.preventDefault()
   e.stopPropagation()
+
+  if ((e as KeyboardEvent).repeat) {
+    return
+  }
 
   props.onSelect(e, row)
 }
@@ -529,6 +533,38 @@ function getColumnStyles(column: Column<T>): Record<string, string> {
   return styles
 }
 
+// `getCanSort()` is true for every accessor column, so it cannot tell a column that offers sort UI
+// from a plain one, and an explicit `enableSorting: true` can still come from `defaultColumn` or be
+// overridden by `sortingOptions`. A header is sortable only when both agree.
+function isSortable(column: Column<T, unknown>) {
+  return column.columnDef.enableSorting === true && column.getCanSort()
+}
+
+function getAriaSort(header: Header<T, unknown>): AriaAttributes['aria-sort'] {
+  if (header.isPlaceholder || !isSortable(header.column)) {
+    return undefined
+  }
+
+  const sorted = header.column.getIsSorted()
+  if (!sorted) {
+    return 'none'
+  }
+
+  // `aria-sort` is a single-column pattern, so the direction goes to the first sort key that has a
+  // header on screen. Keys for an unknown id, a hidden column or a column with no sort UI are
+  // skipped, otherwise every header would report `none` while the rows are sorted.
+  const sortableIds = new Set(tableApi.getVisibleLeafColumns()
+    .filter(isSortable)
+    .map(column => column.id))
+  const primary = tableApi.getState().sorting.find(({ id }) => sortableIds.has(id))
+
+  if (primary?.id !== header.column.id) {
+    return 'none'
+  }
+
+  return sorted === 'asc' ? 'ascending' : 'descending'
+}
+
 watch(() => props.data, () => {
   data.value = props.data ? [...props.data] : []
 }, props.watchOptions)
@@ -549,7 +585,6 @@ defineExpose({
       :data-selectable="!!props.onSelect || !!props.onHover || !!props.onContextmenu"
       :data-expanded="row.getIsExpanded()"
       :data-pinned="row.getIsPinned() || undefined"
-      :role="props.onSelect ? 'button' : undefined"
       :tabindex="props.onSelect ? 0 : undefined"
       data-slot="tr"
       :class="ui.tr({
@@ -560,6 +595,7 @@ defineExpose({
       })"
       :style="[resolveValue(tableApi.options.meta?.style?.tr, row), style]"
       @click="onRowSelect($event, row)"
+      @keydown.self.exact.enter.space="onRowSelect($event, row)"
       @pointerenter="onRowHover($event, row)"
       @pointerleave="onRowHover($event, null)"
       @contextmenu="onRowContextmenu($event, row)"
@@ -590,7 +626,7 @@ defineExpose({
     </tr>
 
     <tr v-if="row.getIsExpanded()" data-slot="tr" :class="ui.tr({ class: [props.ui?.tr] })">
-      <td :colspan="row.getAllCells().length" data-slot="td" :class="ui.td({ class: [props.ui?.td] })">
+      <td :colspan="row.getVisibleCells().length" data-slot="td" :class="ui.td({ class: [props.ui?.td] })">
         <slot name="expanded" :row="row" />
       </td>
     </tr>
@@ -613,6 +649,7 @@ defineExpose({
             :scope="header.colSpan > 1 ? 'colgroup' : 'col'"
             :colspan="header.colSpan > 1 ? header.colSpan : undefined"
             :rowspan="header.rowSpan > 1 ? header.rowSpan : undefined"
+            :aria-sort="getAriaSort(header)"
             data-slot="th"
             :class="ui.th({
               class: [
@@ -643,7 +680,7 @@ defineExpose({
 
           <template v-if="virtualizer">
             <tr v-if="virtualPaddingTop > 0" :style="{ height: `${virtualPaddingTop}px` }" aria-hidden="true">
-              <td :colspan="tableApi.getAllLeafColumns().length" />
+              <td :colspan="tableApi.getVisibleLeafColumns().length" />
             </tr>
             <template v-for="virtualRow in virtualItems" :key="centerRows[virtualRow.index]?.id ?? `virtual-${virtualRow.index}`">
               <ReuseRowTemplate
@@ -653,7 +690,7 @@ defineExpose({
               />
             </template>
             <tr v-if="virtualPaddingBottom > 0" :style="{ height: `${virtualPaddingBottom}px` }" aria-hidden="true">
-              <td :colspan="tableApi.getAllLeafColumns().length" />
+              <td :colspan="tableApi.getVisibleLeafColumns().length" />
             </tr>
           </template>
 
@@ -665,13 +702,13 @@ defineExpose({
         </template>
 
         <tr v-else-if="props.loading && !!slots['loading']">
-          <td :colspan="tableApi.getAllLeafColumns().length" data-slot="loading" :class="ui.loading({ class: props.ui?.loading })">
+          <td :colspan="tableApi.getVisibleLeafColumns().length" data-slot="loading" :class="ui.loading({ class: props.ui?.loading })">
             <slot name="loading" />
           </td>
         </tr>
 
         <tr v-else>
-          <td :colspan="tableApi.getAllLeafColumns().length" data-slot="empty" :class="ui.empty({ class: props.ui?.empty })">
+          <td :colspan="tableApi.getVisibleLeafColumns().length" data-slot="empty" :class="ui.empty({ class: props.ui?.empty })">
             <slot name="empty">
               {{ props.empty || t('table.noData') }}
             </slot>
