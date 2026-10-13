@@ -1,11 +1,8 @@
 import input, { withinFocus } from './input'
 import { extendTheme } from '../utils/theme'
 
-// Same box as Input, with the tags and the native input in a container that
-// has the padding of the size in place of the input
 export default extendTheme(input, {
   slots: {
-    // The box dims as a whole, so its tags and its input don't dim a second time
     root: (prev: string) => [prev, 'data-disabled:cursor-not-allowed data-disabled:opacity-75'],
     base: () => 'flex-1 border-0 bg-transparent text-strong placeholder:text-faint focus:outline-none disabled:cursor-not-allowed',
     // The tags wrap in their own container, so the leading and the trailing stay
