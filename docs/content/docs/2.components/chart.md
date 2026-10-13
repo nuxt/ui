@@ -22,9 +22,7 @@ navigation.badge: Soon
 
 The Chart component is built on top of [TanStack Charts](https://tanstack.com/charts/latest) and renders an SVG on the server.
 
-::note
-You need to install the `@tanstack/charts` package to use this component.
-::
+TanStack Charts is an optional peer dependency, install it first:
 
 ::code-group{sync="pm"}
 
