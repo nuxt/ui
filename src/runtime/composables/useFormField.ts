@@ -112,13 +112,15 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
     return validateInput()
   }
 
+  const invalid = computed(() => formField?.value?.invalid ?? !!formField?.value?.error)
+
   return {
     id: computed(() => props?.id ?? inputId?.value),
     labelId: computed(() => formField?.value.labelId),
     name: computed(() => props?.name ?? formField?.value.name),
     size: computed(() => props?.size ?? formField?.value.size),
-    color: computed(() => formField?.value.error ? 'error' : props?.color),
-    highlight: computed(() => formField?.value.error ? true : (props?.highlight || undefined)),
+    color: computed(() => invalid.value ? 'error' : props?.color),
+    highlight: computed(() => invalid.value ? true : (props?.highlight || undefined)),
     disabled: computed(() => formOptions?.value.disabled || props?.disabled || undefined),
     emitFormBlur,
     emitFormInput,
@@ -132,7 +134,7 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
         .map(type => `${formField?.value.ariaId}-${type}`) || []
 
       const attrs: Record<string, any> = {
-        'aria-invalid': !!formField?.value.error
+        'aria-invalid': invalid.value
       }
 
       if (descriptiveAttrs.length > 0) {
