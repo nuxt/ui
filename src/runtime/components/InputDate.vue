@@ -215,7 +215,7 @@ defineExpose({
     :default-value="(props.defaultValue as DateValue)"
     :name="name"
     :disabled="disabled"
-    :class="ui.base({ class: [props.ui?.base, props.class] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="onUpdate"
     @focusout="onFocusOut"
     @focusin="onFocusIn"

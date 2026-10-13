@@ -37,3 +37,45 @@ export type ExtendedTheme<T, B>
 export function extendTheme<B extends TVTheme, const T extends Record<string, any>>(base: B, theme: T): DefinedTheme<ExtendedTheme<T, B>> {
   return defuFn(theme, base) as DefinedTheme<ExtendedTheme<T, B>>
 }
+
+type RenamedKey<O, From extends string, To extends string> = O extends Record<string, any>
+  ? { [K in keyof O as K extends From ? To : K]: O[K] }
+  : O
+
+type RenamedCompound<C, From extends string, To extends string> = C extends { class: infer K }
+  ? Omit<C, 'class'> & { class: RenamedKey<K, From, To> }
+  : C
+
+/**
+ * A theme with one of its slots under another name, in its `slots`, its
+ * `variants` and the classes of its `compoundVariants`.
+ */
+export type RenamedSlot<T, From extends string, To extends string> = {
+  [K in keyof T]: K extends 'slots'
+    ? RenamedKey<T[K], From, To>
+    : K extends 'variants'
+      ? { [V in keyof T[K]]: { [O in keyof T[K][V]]: RenamedKey<T[K][V][O], From, To> } }
+      : K extends 'compoundVariants'
+        ? T[K] extends ReadonlyArray<infer C> ? Array<RenamedCompound<C, From, To>> : T[K]
+        : T[K]
+}
+
+/**
+ * Give a slot of a theme another name, like the box of the field theme, which
+ * is `base` on a Select and `root` on an InputDate.
+ * @internal
+ */
+export function renameSlot<T extends TVTheme, From extends string, To extends string>(theme: T, from: From, to: To): RenamedSlot<T, From, To> {
+  const rename = (value: any) => value && typeof value === 'object' && !Array.isArray(value)
+    ? Object.fromEntries(Object.entries(value).map(([key, item]) => [key === from ? to : key, item]))
+    : value
+  const variants = (theme as any).variants as Record<string, Record<string, any>> | undefined
+  const compoundVariants = (theme as any).compoundVariants as Array<Record<string, any>> | undefined
+
+  return {
+    ...theme,
+    ...((theme as any).slots && { slots: rename((theme as any).slots) }),
+    ...(variants && { variants: Object.fromEntries(Object.entries(variants).map(([name, options]) => [name, Object.fromEntries(Object.entries(options).map(([option, value]) => [option, rename(value)]))])) }),
+    ...(compoundVariants && { compoundVariants: compoundVariants.map(item => ({ ...item, class: rename(item.class) })) })
+  } as RenamedSlot<T, From, To>
+}
