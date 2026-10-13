@@ -1,14 +1,14 @@
 import { colorVariant } from './color'
-import { fieldGroupVariantWithRoot } from './field-group'
+import { fieldGroupVariant } from './field-group'
 import { defineTheme } from '../utils/theme'
 
 // The fields that are a single element: the trigger of a Select, the group of
-// an InputDate. `base` is the box, with the padding and the gap of the size, and
-// the leading and the trailing are in its flow. Input and the fields that wrap
-// a native element have their own theme, where `root` is the box.
+// an InputDate. `base` is the box, with the tokens, the padding and the gap of the
+// size, and the leading and the trailing are in its flow. Input and the fields
+// that wrap a native element have their own theme, where `root` is the box.
 
-// The focus classes below, for a container whose segments or items take the focus
-// (InputDate, InputTime, InputTags), spelled out so Tailwind finds them
+// The focus classes below, for a container whose segments take the focus
+// (InputDate, InputTime), spelled out so Tailwind finds them
 const containerFocus: Record<string, string> = {
   'focus:bg-soft': 'has-focus:bg-soft',
   'focus:outline-none': 'has-focus:outline-none',
@@ -22,8 +22,7 @@ export function replaceFocus(classes: string): string {
 
 export default defineTheme({
   slots: {
-    root: 'relative inline-flex items-center',
-    base: 'w-full rounded-md border-0 appearance-none text-strong placeholder:text-faint disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
+    base: 'group relative inline-flex items-center rounded-md text-strong transition-colors',
     // The box sits on a line of text by its first item. An invisible character
     // gives the leading the baseline of the text next to it, so an icon there
     // doesn't move the box.
@@ -35,36 +34,30 @@ export default defineTheme({
     trailingIcon: 'shrink-0 text-faint'
   },
   variants: {
-    ...fieldGroupVariantWithRoot,
-    // The tokens go on the outermost slot, so the icons next to the input read them
+    ...fieldGroupVariant,
     size: {
       xs: {
-        root: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)]',
-        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm/4',
+        base: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm/4',
         leadingIcon: 'size-(--ui-control-icon)',
         trailingIcon: 'size-(--ui-control-icon)'
       },
       sm: {
-        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)]',
-        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm/4',
+        base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm/4',
         leadingIcon: 'size-(--ui-control-icon)',
         trailingIcon: 'size-(--ui-control-icon)'
       },
       md: {
-        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)]',
-        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base/5',
+        base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base/5',
         leadingIcon: 'size-(--ui-control-icon)',
         trailingIcon: 'size-(--ui-control-icon)'
       },
       lg: {
-        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)]',
-        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base/5',
+        base: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base/5',
         leadingIcon: 'size-(--ui-control-icon)',
         trailingIcon: 'size-(--ui-control-icon)'
       },
       xl: {
-        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)]',
-        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base',
+        base: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base',
         leadingIcon: 'size-(--ui-control-icon)',
         trailingIcon: 'size-(--ui-control-icon)'
       }
@@ -76,7 +69,7 @@ export default defineTheme({
       ghost: { base: 'bg-transparent hover:bg-soft focus:bg-soft disabled:bg-transparent dark:disabled:bg-transparent outline-accent-focus focus-visible:outline-3' },
       none: { base: 'bg-transparent focus:outline-none' }
     },
-    color: colorVariant({ root: '' }),
+    color: colorVariant({ base: '' }),
     leading: {
       true: ''
     },
@@ -95,9 +88,6 @@ export default defineTheme({
     },
     fixed: {
       false: ''
-    },
-    type: {
-      file: { base: 'file:me-1.5 file:font-medium file:text-muted file:outline-none' }
     }
   },
   compoundVariants: [{

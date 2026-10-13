@@ -1,65 +1,54 @@
-import input, { replaceFocus } from './field'
-import { colorVariant } from './color'
-import { fieldGroupVariant } from './field-group'
+import field, { replaceFocus } from './field'
 import { extendTheme } from '../utils/theme'
 
-export default extendTheme(input, {
+export default extendTheme(field, {
   slots: {
-    root: () => undefined,
-    base: () => 'group relative inline-flex items-center rounded-md select-none text-strong transition-colors',
+    base: (prev: string) => [prev, 'select-none'],
     segment: 'rounded-sm text-center outline-hidden data-placeholder:text-faint data-[segment=literal]:text-muted data-invalid:text-error data-disabled:cursor-not-allowed data-disabled:opacity-75 transition-colors',
     // After the segments in the DOM, so they keep the first tab stops
-    leading: `order-first flex items-center before:content-['x'] before:w-0 before:invisible`,
+    leading: (prev: string) => [prev, 'order-first'],
     separatorIcon: 'shrink-0 size-4 text-muted'
   },
   variants: {
-    ...fieldGroupVariant,
-    // No `root` slot here, so the color and the size tokens go on `base`
-    color: () => colorVariant({ base: '' }),
     size: {
       // The gap of the box is the one between segments: the leading and the trailing
       // make up the difference to the gap of the size
       xs: {
-        root: () => undefined,
-        base: (prev: string) => [prev, input.variants.size.xs.root, 'gap-0.25'],
+        base: (prev: string) => [prev, 'gap-0.25'],
         leading: 'me-[calc(var(--ui-control-gap)-(--spacing(0.25)))]',
         trailing: 'ps-[calc(var(--ui-control-gap)-(--spacing(0.25)))]',
         segment: 'data-[segment=day]:w-8 data-[segment=month]:w-8 data-[segment=year]:w-10'
       },
       sm: {
-        root: () => undefined,
-        base: (prev: string) => [prev, input.variants.size.sm.root, 'gap-0.5'],
+        base: (prev: string) => [prev, 'gap-0.5'],
         leading: 'me-[calc(var(--ui-control-gap)-(--spacing(0.5)))]',
         trailing: 'ps-[calc(var(--ui-control-gap)-(--spacing(0.5)))]',
         segment: 'data-[segment=day]:w-8 data-[segment=month]:w-8 data-[segment=year]:w-10'
       },
       md: {
-        root: () => undefined,
-        base: (prev: string) => [prev, input.variants.size.md.root, 'gap-0.5'],
+        base: (prev: string) => [prev, 'gap-0.5'],
         leading: 'me-[calc(var(--ui-control-gap)-(--spacing(0.5)))]',
         trailing: 'ps-[calc(var(--ui-control-gap)-(--spacing(0.5)))]',
         segment: 'data-[segment=day]:w-9 data-[segment=month]:w-9 data-[segment=year]:w-11'
       },
       lg: {
-        root: () => undefined,
-        base: (prev: string) => [prev, input.variants.size.lg.root, 'gap-0.75'],
+        base: (prev: string) => [prev, 'gap-0.75'],
         leading: 'me-[calc(var(--ui-control-gap)-(--spacing(0.75)))]',
         trailing: 'ps-[calc(var(--ui-control-gap)-(--spacing(0.75)))]',
         segment: 'data-[segment=day]:w-9 data-[segment=month]:w-9 data-[segment=year]:w-11'
       },
       xl: {
-        root: () => undefined,
-        base: (prev: string) => [prev, input.variants.size.xl.root, 'gap-0.75'],
+        base: (prev: string) => [prev, 'gap-0.75'],
         leading: 'me-[calc(var(--ui-control-gap)-(--spacing(0.75)))]',
         trailing: 'ps-[calc(var(--ui-control-gap)-(--spacing(0.75)))]',
         segment: 'data-[segment=day]:w-10 data-[segment=month]:w-10 data-[segment=year]:w-12'
       }
     },
-    variant: (prev: typeof input.variants.variant) => Object.fromEntries(
+    variant: (prev: typeof field.variants.variant) => Object.fromEntries(
       Object.entries(prev).map(([key, value]) => [key, { base: replaceFocus(value.base), segment: key === 'outline' || key === 'none' ? 'focus:bg-soft' : 'focus:bg-strong' }])
     ) as Record<keyof typeof prev, { base: string, segment: string }>
   },
-  compoundVariants: (prev: typeof input.compoundVariants) => [...prev.map(item => ({
+  compoundVariants: (prev: typeof field.compoundVariants) => [...prev.map(item => ({
     ...item,
     class: typeof item.class.base === 'string' ? { ...item.class, base: replaceFocus(item.class.base) } : item.class
   }))]

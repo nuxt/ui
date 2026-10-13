@@ -1,4 +1,5 @@
 import { colorVariant } from './color'
+import { fieldGroupVariantRoot } from './field-group'
 import { defineTheme } from '../utils/theme'
 
 // The focus classes below, for a box whose native input is not always its direct
@@ -39,10 +40,7 @@ export default defineTheme({
     trailingIcon: 'shrink-0 text-faint'
   },
   variants: {
-    fieldGroup: {
-      horizontal: { root: 'not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none has-[>:focus-visible]:z-1' },
-      vertical: { root: 'not-only:first:rounded-b-none not-only:last:rounded-t-none not-last:not-first:rounded-none has-[>:focus-visible]:z-1' }
-    },
+    ...fieldGroupVariantRoot,
     size: {
       xs: {
         root: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] text-sm/4',

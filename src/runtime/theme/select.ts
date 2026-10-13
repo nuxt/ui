@@ -1,12 +1,9 @@
-import input from './field'
-import { colorVariant } from './color'
-import { fieldGroupVariant } from './field-group'
+import field from './field'
 import { extendTheme } from '../utils/theme'
 
-export default extendTheme(input, {
+export default extendTheme(field, {
   slots: {
-    root: () => undefined,
-    base: () => 'relative group rounded-md inline-flex items-center text-strong disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
+    base: (prev: string) => [prev, 'disabled:cursor-not-allowed disabled:opacity-75'],
     value: 'truncate pointer-events-none',
     placeholder: 'truncate text-faint',
     arrow: 'fill-bg stroke-default',
@@ -27,10 +24,7 @@ export default extendTheme(input, {
     itemDescription: 'truncate text-muted'
   },
   variants: {
-    ...fieldGroupVariant,
-    // No `root` slot here, so the color and the size tokens go on `base`
-    color: () => colorVariant({ base: '' }),
-    variant: (prev: typeof input.variants.variant) => ({
+    variant: (prev: typeof field.variants.variant) => ({
       ...prev,
       outline: {
         base: [prev.outline!.base, 'hover:bg-soft disabled:bg-default'].join(' ')
@@ -41,8 +35,6 @@ export default extendTheme(input, {
     }),
     size: {
       xs: {
-        root: () => undefined,
-        base: (prev: string) => [prev, input.variants.size.xs.root],
         label: 'p-1 text-[10px]/3 gap-1',
         item: 'p-1 text-xs gap-1',
         itemLeadingIcon: 'size-4',
@@ -51,8 +43,6 @@ export default extendTheme(input, {
         empty: 'p-2 text-xs'
       },
       sm: {
-        root: () => undefined,
-        base: (prev: string) => [prev, input.variants.size.sm.root],
         label: 'p-1.5 text-[10px]/3 gap-1.5',
         item: 'p-1.5 text-xs gap-1.5',
         itemLeadingIcon: 'size-4',
@@ -61,8 +51,6 @@ export default extendTheme(input, {
         empty: 'p-2.5 text-xs'
       },
       md: {
-        root: () => undefined,
-        base: (prev: string) => [prev, input.variants.size.md.root],
         label: 'p-1.5 text-xs gap-1.5',
         item: 'p-1.5 text-sm gap-1.5',
         itemLeadingIcon: 'size-5',
@@ -71,8 +59,6 @@ export default extendTheme(input, {
         empty: 'p-2.5 text-sm'
       },
       lg: {
-        root: () => undefined,
-        base: (prev: string) => [prev, input.variants.size.lg.root],
         label: 'p-2 text-xs gap-2',
         item: 'p-2 text-sm gap-2',
         itemLeadingIcon: 'size-5',
@@ -81,8 +67,6 @@ export default extendTheme(input, {
         empty: 'p-3 text-sm'
       },
       xl: {
-        root: () => undefined,
-        base: (prev: string) => [prev, input.variants.size.xl.root],
         label: 'p-2 text-sm gap-2',
         item: 'p-2 text-base gap-2',
         itemLeadingIcon: 'size-6',
