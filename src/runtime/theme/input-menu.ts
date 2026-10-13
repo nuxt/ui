@@ -33,10 +33,6 @@ export default extendTheme(input, {
   },
   variants: {
     // The input takes the focus, up to two levels down from the box
-    fieldGroup: {
-      horizontal: { root: (prev: string) => [prev, 'has-[input:focus-visible]:z-1'] },
-      vertical: { root: (prev: string) => [prev, 'has-[input:focus-visible]:z-1'] }
-    },
     variant: {
       outline: { root: 'bg-default ring ring-inset ring-strong outline-accent-focus has-[input:focus-visible]:outline-3 has-[input:focus-visible]:ring-accent' },
       soft: { root: 'bg-tint hover:bg-soft has-[input:focus]:bg-soft has-[input:disabled]:bg-tint outline-accent-focus has-[input:focus-visible]:outline-3' },
