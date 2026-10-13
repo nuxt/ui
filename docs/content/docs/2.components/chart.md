@@ -149,8 +149,8 @@ props:
 
 Use the `stacked` prop to stack the series on top of each other.
 
-::note
-This only applies to the `area` and `bar` types.
+::warning
+This prop only works when `type` is `area` or `bar`.
 ::
 
 ::component-code
@@ -198,8 +198,8 @@ props:
 
 Use the `curve` prop to change the shape of the line between values. Defaults to `linear`.
 
-::note
-This only applies to the `line` and `area` types.
+::warning
+This prop only works when `type` is `line` or `area`.
 ::
 
 ::component-code
@@ -301,8 +301,8 @@ props:
 
 Use the `points` prop to draw a dot at each value.
 
-::note
-This only applies to the `line` type.
+::warning
+This prop only works when `type` is `line`.
 ::
 
 ::component-code
@@ -533,8 +533,8 @@ props:
 
 Use the `thickness` prop to set the width of the ring in pixels. Defaults to `24`.
 
-::note
-This only applies to the `donut` type.
+::warning
+This prop only works when `type` is `donut`.
 ::
 
 ::component-code
