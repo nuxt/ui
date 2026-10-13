@@ -193,15 +193,29 @@ const style = computed(() => Object.fromEntries(Array.from({ length: Math.max(se
 
 // One row per (x, category) pair so a single mark can group, stack and color by series.
 const rows = computed(() => (props.data ?? []).flatMap((datum) => {
-  let sum = 0
+  // Positive and negative values stack on their own side of the baseline, like stacked bars do.
+  let positive = 0
+  let negative = 0
 
   return seriesKeys.value.map((category) => {
-    const value = datum[category] as number
-    // The bounds of the series as an area: stacked on the previous ones, or from the baseline.
-    const base = props.stacked ? sum : 0
-    sum += value
+    const x = datum[props.index!]
+    const value = datum[category] as number | null | undefined
 
-    return { x: datum[props.index!], category, value, base, top: base + value }
+    // A missing value is a gap: it has no bounds and leaves the stack untouched for the next series.
+    if (typeof value !== 'number' || !Number.isFinite(value)) {
+      return { x, category, value: undefined, base: undefined, top: undefined }
+    }
+
+    // The bounds of the series as an area: stacked on the previous ones, or from the baseline.
+    const base = props.stacked ? (value < 0 ? negative : positive) : 0
+
+    if (value < 0) {
+      negative += value
+    } else {
+      positive += value
+    }
+
+    return { x, category, value, base, top: base + value }
   })
 }))
 

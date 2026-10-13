@@ -78,6 +78,25 @@ describe('Chart', () => {
     expect(wrapper.find('.ts-chart-tooltip').exists()).toBe(false)
   })
 
+  it('stacks negative values below the baseline and skips missing ones', async () => {
+    const data = [
+      { month: 'Jan', desktop: 100, mobile: -40 },
+      { month: 'Feb', desktop: undefined, mobile: 60 },
+      { month: 'Mar', desktop: 80, mobile: -20 }
+    ]
+    const wrapper = await mountSuspended(Chart, { props: { ...props, data, type: 'area', stacked: true } })
+    const html = wrapper.html()
+
+    expect(html).not.toContain('NaN')
+    // The y axis reaches below zero for the negative series.
+    expect(wrapper.find('[data-ts-key^="y-tick-label:number:-"]').exists()).toBe(true)
+    // `mobile` starts from the baseline, not from the top of `desktop`: its lowest point is under zero.
+    const zero = Number(wrapper.find('[data-ts-key="y-tick-label:number:0"]').attributes('y'))
+    const mobile = wrapper.find('.ts-chart__line path[data-ts-key*=":mobile:segment"]').attributes('d')!
+    const ys = [...mobile.matchAll(/[ML][\d.]+,([\d.]+)/g)].map(match => Number(match[1]))
+    expect(Math.max(...ys)).toBeGreaterThan(zero)
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Chart, {
       props
