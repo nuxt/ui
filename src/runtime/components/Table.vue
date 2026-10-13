@@ -305,14 +305,14 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.table || {}) })(
 }))
 
 const [DefineTableTemplate, ReuseTableTemplate] = createReusableTemplate()
-const [DefineRowTemplate, ReuseRowTemplate] = createReusableTemplate<{ row: TableRow<T>, style?: Record<string, string> }>({
+const [DefineRowTemplate, ReuseRowTemplate] = createReusableTemplate<{ row: TableRow<T>, index?: number }>({
   props: {
     row: {
       type: Object,
       required: true
     },
-    style: {
-      type: Object,
+    index: {
+      type: Number,
       required: false
     }
   }
@@ -473,6 +473,13 @@ const virtualPaddingBottom = computed(() => {
   return virtualizer.value.getTotalSize() - (virtualItems.value[virtualItems.value.length - 1]?.end ?? 0) + scrollMargin.value
 })
 
+// Register each rendered row with the virtualizer so its actual height is measured (and re-measured on resize).
+function measureRow(el: Element | ComponentPublicInstance | null) {
+  if (el instanceof Element && virtualizer) {
+    virtualizer.value.measureElement(el)
+  }
+}
+
 function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
   ref.value = typeof updaterOrValue === 'function' ? updaterOrValue(ref.value) : updaterOrValue
 }
@@ -584,8 +591,10 @@ defineExpose({
 </script>
 
 <template>
-  <DefineRowTemplate v-slot="{ row, style }">
+  <DefineRowTemplate v-slot="{ row, index }">
     <tr
+      :ref="virtualizer ? measureRow : undefined"
+      :data-index="index"
       :data-selected="row.getIsSelected()"
       :data-selectable="!!props.onSelect || !!props.onHover || !!props.onContextmenu"
       :data-expanded="row.getIsExpanded()"
@@ -598,7 +607,7 @@ defineExpose({
           resolveValue(tableApi.options.meta?.class?.tr, row)
         ]
       })"
-      :style="[resolveValue(tableApi.options.meta?.style?.tr, row), style]"
+      :style="resolveValue(tableApi.options.meta?.style?.tr, row)"
       @click="onRowSelect($event, row)"
       @keydown.self.exact.enter.space="onRowSelect($event, row)"
       @pointerenter="onRowHover($event, row)"
@@ -691,7 +700,7 @@ defineExpose({
               <ReuseRowTemplate
                 v-if="centerRows[virtualRow.index]"
                 :row="centerRows[virtualRow.index]!"
-                :style="{ height: `${virtualRow.size}px` }"
+                :index="virtualRow.index"
               />
             </template>
             <tr v-if="virtualPaddingBottom > 0" :style="{ height: `${virtualPaddingBottom}px` }" aria-hidden="true">

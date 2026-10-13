@@ -577,4 +577,27 @@ describe('Table', () => {
 
     expect(expanded.findAll('td').find(td => td.text() === 'Expanded slot')?.attributes('colspan')).toBe(visibleColumns)
   })
+
+  it('measures virtualized rows', async () => {
+    const measureElement = vi.fn(() => 50)
+
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data,
+        // jsdom has no layout, so give the virtualizer a viewport to render rows into
+        virtualize: { observeElementRect: (_, cb) => cb({ width: 1000, height: 500 }), measureElement }
+      },
+      attachTo: document.body
+    })
+    await flushPromises()
+
+    const rows = wrapper.findAll('tbody tr[data-index]')
+
+    expect(rows.length).toBe(data.length)
+    expect(rows.map(row => row.attributes('data-index'))).toEqual(data.map((_, index) => String(index)))
+    expect(rows.every(row => !row.attributes('style')?.includes('height'))).toBe(true)
+    expect(measureElement).toHaveBeenCalled()
+
+    wrapper.unmount()
+  })
 })
