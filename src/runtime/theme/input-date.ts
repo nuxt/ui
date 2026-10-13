@@ -1,5 +1,5 @@
 import { colorVariant } from './color'
-import { fieldGroupVariant } from './field-group'
+import { fieldGroupVariantRoot } from './field-group'
 import { defineTheme } from '../utils/theme'
 
 // The box is a `div` around the segments: `root` has the tokens, the padding and
@@ -21,10 +21,7 @@ export default defineTheme({
     separatorIcon: 'shrink-0 size-4 text-muted'
   },
   variants: {
-    fieldGroup: {
-      horizontal: { root: fieldGroupVariant.fieldGroup.horizontal.base },
-      vertical: { root: fieldGroupVariant.fieldGroup.vertical.base }
-    },
+    ...fieldGroupVariantRoot,
     // The segments sit closer than the content of another field
     size: {
       xs: {
