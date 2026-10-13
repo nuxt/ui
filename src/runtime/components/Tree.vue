@@ -243,9 +243,7 @@ function getItemValueKey<Item extends T[number]>(item: Item): string | undefined
 }
 
 function getItemKey<Item extends T[number]>(item: Item): string {
-  return props.getKey
-    ? props.getKey(item) || getItemValueKey(item) || getItemLabel(item)
-    : getItemValueKey(item) || getItemLabel(item)
+  return props.getKey?.(item) || (getItemValueKey(item) ?? getItemLabel(item))
 }
 
 function getDefaultOpenedItems(item: T[number]): string[] {
