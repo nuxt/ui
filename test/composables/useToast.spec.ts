@@ -17,6 +17,15 @@ describe('useToast', () => {
   })
 
   describe('add', () => {
+    // Only `Date` is faked so the animation window does not depend on how long the test takes.
+    beforeEach(() => {
+      vi.useFakeTimers({ toFake: ['Date'] })
+    })
+
+    afterEach(() => {
+      vi.useRealTimers()
+    })
+
     it('returns a toast with a generated id and open state', () => {
       const body = toast.add({ title: 'Hello' })
 
@@ -41,7 +50,7 @@ describe('useToast', () => {
     it('increments _duplicate instead of adding a toast with an existing id', async () => {
       toast.add({ id: 'dup', title: 'First' })
       await vi.waitFor(() => expect(toast.toasts.value).toHaveLength(1))
-      await new Promise(resolve => setTimeout(resolve, 200))
+      vi.setSystemTime(Date.now() + 200)
 
       toast.add({ id: 'dup', title: 'Second' })
 
@@ -64,7 +73,7 @@ describe('useToast', () => {
     it('increments _duplicate once for a toast added twice in the same tick', async () => {
       toast.add({ id: 'dup', title: 'First' })
       await vi.waitFor(() => expect(toast.toasts.value).toHaveLength(1))
-      await new Promise(resolve => setTimeout(resolve, 200))
+      vi.setSystemTime(Date.now() + 200)
 
       // An even count would leave `data-pulsing` unchanged and the pulse would not replay.
       toast.add({ id: 'dup', title: 'Second' })
