@@ -126,7 +126,8 @@
      or on its own tint, and it follows the shade you pick for the solid. Dark
      mode leaves it unset, so the text is the color. The strong step goes
      further, toward shade `950` in light mode and `50` in dark mode, like
-     `text-strong` does for neutral. */
+     `text-strong` does for neutral. The ring of a color follows its text in
+     light mode, so a darker label keeps a ring of its own tone. */
   :where(:root, :host, .light) {
     --ui-primary: var(--ui-color-primary-500);
     --ui-secondary: var(--ui-color-secondary-500);
@@ -149,6 +150,13 @@
     --ui-info-text-strong: color-mix(in oklab, var(--ui-info) 35%, var(--ui-color-info-950));
     --ui-warning-text-strong: color-mix(in oklab, var(--ui-warning) 35%, var(--ui-color-warning-950));
     --ui-error-text-strong: color-mix(in oklab, var(--ui-error) 35%, var(--ui-color-error-950));
+
+    --ui-primary-border-strong: color-mix(in oklab, var(--ui-primary-text-default) 30%, transparent);
+    --ui-secondary-border-strong: color-mix(in oklab, var(--ui-secondary-text-default) 30%, transparent);
+    --ui-success-border-strong: color-mix(in oklab, var(--ui-success-text-default) 30%, transparent);
+    --ui-info-border-strong: color-mix(in oklab, var(--ui-info-text-default) 30%, transparent);
+    --ui-warning-border-strong: color-mix(in oklab, var(--ui-warning-text-default) 30%, transparent);
+    --ui-error-border-strong: color-mix(in oklab, var(--ui-error-text-default) 30%, transparent);
   }
 
   :where(.dark) {
@@ -173,6 +181,13 @@
     --ui-info-text-strong: color-mix(in oklab, var(--ui-info) 65%, var(--ui-color-info-50));
     --ui-warning-text-strong: color-mix(in oklab, var(--ui-warning) 65%, var(--ui-color-warning-50));
     --ui-error-text-strong: color-mix(in oklab, var(--ui-error) 65%, var(--ui-color-error-50));
+
+    --ui-primary-border-strong: initial;
+    --ui-secondary-border-strong: initial;
+    --ui-success-border-strong: initial;
+    --ui-info-border-strong: initial;
+    --ui-warning-border-strong: initial;
+    --ui-error-border-strong: initial;
   }
 }
 
