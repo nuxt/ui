@@ -22,25 +22,25 @@ export default defineTheme({
     // The segments sit closer than the content of another field
     size: {
       xs: {
-        root: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(0.25)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm/4',
+        root: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(0.25)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--text-xs)+var(--ui-control-text-step,0px))]/4',
         leadingIcon: 'size-(--ui-control-icon)',
         trailingIcon: 'size-(--ui-control-icon)',
         segment: 'data-[segment=day]:w-8 data-[segment=month]:w-8 data-[segment=year]:w-10'
       },
       sm: {
-        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(0.5)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm/4',
+        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(0.5)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--text-xs)+var(--ui-control-text-step,0px))]/4',
         leadingIcon: 'size-(--ui-control-icon)',
         trailingIcon: 'size-(--ui-control-icon)',
         segment: 'data-[segment=day]:w-8 data-[segment=month]:w-8 data-[segment=year]:w-10'
       },
       md: {
-        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(0.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base/5',
+        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(0.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--text-sm)+var(--ui-control-text-step,0px))]/5',
         leadingIcon: 'size-(--ui-control-icon)',
         trailingIcon: 'size-(--ui-control-icon)',
         segment: 'data-[segment=day]:w-9 data-[segment=month]:w-9 data-[segment=year]:w-11'
       },
       lg: {
-        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(0.75)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base/5',
+        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(0.75)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--text-sm)+var(--ui-control-text-step,0px))]/5',
         leadingIcon: 'size-(--ui-control-icon)',
         trailingIcon: 'size-(--ui-control-icon)',
         segment: 'data-[segment=day]:w-9 data-[segment=month]:w-9 data-[segment=year]:w-11'
@@ -75,28 +75,8 @@ export default defineTheme({
     },
     highlight: {
       true: { root: 'ring ring-inset ring-accent' }
-    },
-    fixed: {
-      false: ''
     }
   },
-  compoundVariants: [{
-    fixed: false,
-    size: 'xs',
-    class: { root: 'md:text-xs' }
-  }, {
-    fixed: false,
-    size: 'sm',
-    class: { root: 'md:text-xs' }
-  }, {
-    fixed: false,
-    size: 'md',
-    class: { root: 'md:text-sm' }
-  }, {
-    fixed: false,
-    size: 'lg',
-    class: { root: 'md:text-sm' }
-  }],
   defaultVariants: {
     size: 'md',
     color: 'primary',

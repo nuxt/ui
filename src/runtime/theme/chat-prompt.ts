@@ -15,7 +15,8 @@ export default defineTheme({
     queueItemLeading: 'shrink-0 size-3 rounded-full ring ring-strong',
     queueItemLabel: 'flex-1 min-w-0 truncate text-sm text-default',
     queueItemActions: 'flex items-center shrink-0 [@media(hover:hover)]:opacity-0 group-hover/queue:opacity-100 group-focus-within/queue:opacity-100 transition-opacity ease-out',
-    body: 'items-start gap-1.5',
+    // The prompt keeps the larger text of a field on every breakpoint
+    body: 'items-start gap-1.5 [--ui-control-text-step:0.125rem]',
     footer: 'flex items-center justify-between gap-1.5',
     base: 'px-0 rounded-none'
   },
