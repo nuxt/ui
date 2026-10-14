@@ -57,7 +57,7 @@ const currency = new Intl.NumberFormat('en-US', { style: 'currency', currency: '
         :thickness="thickness"
         :data="data"
         index="month"
-        :categories="['desktop', 'mobile', 'tablet']"
+        :categories="[{ key: 'desktop', label: 'Desktop' }, { key: 'mobile', label: 'Mobile' }, { key: 'tablet', label: 'Tablet' }]"
         aria-label="Visitors by device"
       />
     </UCard>
@@ -74,7 +74,7 @@ const currency = new Intl.NumberFormat('en-US', { style: 'currency', currency: '
         :thickness="thickness"
         :data="data"
         index="month"
-        :categories="['desktop']"
+        :categories="[{ key: 'desktop', label: 'Revenue' }]"
         :colors="isCartesian ? ['success'] : undefined"
         :format="value => currency.format(value)"
         aria-label="Revenue"
