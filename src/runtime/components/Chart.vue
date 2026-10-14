@@ -133,7 +133,8 @@ export interface ChartSlots {
 </script>
 
 <script setup lang="ts" generic="T extends ChartData">
-import { computed, shallowRef, useTemplateRef } from 'vue'
+import { computed, shallowRef, toRef, useTemplateRef } from 'vue'
+import { defu } from 'defu'
 import { Chart as TanStackChart } from '@tanstack/charts/vue'
 import { areaY, barY, colorLegend, colorLegendItems, defineChart, group, lineY, ruleY } from '@tanstack/charts'
 import { scaleBand } from '@tanstack/charts/scales/band'
@@ -434,7 +435,17 @@ const tooltipReference = {
   }
 }
 
-const tooltipProps = computed(() => typeof props.tooltip === 'object' ? props.tooltip : {})
+// Reka keeps a visually hidden copy of the content for assistive technologies and does not update it from the slot.
+const tooltipLabel = computed(() => [tooltipContent.value.title, ...tooltipContent.value.rows.map(row => `${row.label} ${row.value}`)].filter(Boolean).join(', '))
+
+// Rendered inside the root, which takes the pointer off the popper wrapper so the tooltip never steals the hover.
+const tooltipProps = toRef(() => defu(typeof props.tooltip === 'object' ? props.tooltip : {}, {
+  portal: false,
+  content: { side: 'top', sideOffset: 12, updatePositionStrategy: 'always', ariaLabel: tooltipLabel.value }
+}) as TooltipProps)
+
+// Bound on its own: the docs component meta rewrites every `ui` key in the source, which breaks an object literal.
+const tooltipUi = toRef(() => ({ ...tooltipProps.value.ui, content: ui.value.tooltip({ class: [tooltipProps.value.ui?.content, props.ui?.tooltip] }) }))
 
 // A definition can bring the TanStack Charts tooltip with its own content, two tooltips would show.
 const hasTooltip = computed(() => !!props.tooltip && !(props.definition as { tooltip?: unknown } | undefined)?.tooltip)
@@ -456,9 +467,6 @@ function onFocusGroupChange(points: readonly ChartPoint<any>[]) {
   groupPoints.value = points
   emits('focusGroupChange', points)
 }
-
-// Reka keeps a visually hidden copy of the content for assistive technologies and does not update it from the slot.
-const tooltipLabel = computed(() => [tooltipContent.value.title, ...tooltipContent.value.rows.map(row => `${row.label} ${row.value}`)].filter(Boolean).join(', '))
 
 const chartDefinition = computed(() => (props.definition ?? generatedDefinition.value) as ChartDefinition<any, any, any>)
 </script>
@@ -484,10 +492,8 @@ const chartDefinition = computed(() => (props.definition ?? generatedDefinition.
       v-if="hasTooltip"
       :open="!!primaryPoint"
       :reference="tooltipReference"
-      :portal="false"
       v-bind="tooltipProps"
-      :content="{ side: 'top', sideOffset: 12, updatePositionStrategy: 'always', ariaLabel: tooltipLabel, ...tooltipProps.content }"
-      :ui="{ ...tooltipProps.ui, content: ui.tooltip({ class: [tooltipProps.ui?.content, props.ui?.tooltip] }) }"
+      :ui="tooltipUi"
     >
       <template #content>
         <slot v-if="primaryPoint" name="tooltip" v-bind="tooltipContent" :points="tooltipPoints" :primary-point="primaryPoint">
