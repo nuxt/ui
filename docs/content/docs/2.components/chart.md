@@ -500,6 +500,58 @@ props:
 ---
 ::
 
+### Axis labels
+
+Use the `x-label` and `y-label` props to display a title along each axis.
+
+::component-code
+---
+prettier: true
+collapse: true
+ignore:
+  - data
+  - index
+  - categories
+external:
+  - data
+externalTypes:
+  - ChartData[]
+hide:
+  - aspectRatio
+  - initialWidth
+props:
+  aspectRatio: 2.77
+  initialWidth: 832
+  xLabel: Month
+  yLabel: Visitors
+  data:
+    - month: January
+      desktop: 186
+      mobile: 80
+    - month: February
+      desktop: 305
+      mobile: 200
+    - month: March
+      desktop: 237
+      mobile: 120
+    - month: April
+      desktop: 73
+      mobile: 190
+    - month: May
+      desktop: 209
+      mobile: 130
+    - month: June
+      desktop: 214
+      mobile: 140
+  index: month
+  categories:
+    - key: desktop
+      label: Desktop
+    - key: mobile
+      label: Mobile
+---
+::
+
 ### Legend
 
 Use the `legend` prop to toggle the legend.
