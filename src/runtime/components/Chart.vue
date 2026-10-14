@@ -18,6 +18,15 @@ export interface ChartTooltipRow {
   active?: boolean
 }
 
+export interface ChartCategory<T extends ChartData = ChartData> {
+  /** The key of each row holding the values of this series. */
+  key: keyof T & string
+  /** The name of the series in the legend and the tooltip. Defaults to the `key`. */
+  label?: string
+  /** The color of the series, a theme color or any CSS color. Takes precedence over `colors`. */
+  color?: string
+}
+
 export interface ChartProps<T extends ChartData = ChartData> {
   /**
    * The type of chart to render.
@@ -28,8 +37,11 @@ export interface ChartProps<T extends ChartData = ChartData> {
   data?: T[]
   /** The key of each row used for the x axis, or for the slice labels with `donut`. */
   index?: keyof T & string
-  /** The keys of each row plotted as series on the y axis. With `donut`, the first key sets the slice values. */
-  categories?: (keyof T & string)[]
+  /**
+   * The keys of each row plotted as series on the y axis, or objects to set their `label` and `color`.
+   * With `donut`, the first one sets the slice values.
+   */
+  categories?: ((keyof T & string) | ChartCategory<T>)[]
   /**
    * The series colors, in `categories` order, or in `data` order with `donut`. Accepts theme colors or any CSS color.
    * When there are more series than colors, the colors repeat as lighter tints.
@@ -176,7 +188,18 @@ function resolveColor(color: string) {
   return themeColors.value.includes(color) ? `var(--ui-${color})` : color
 }
 
-const seriesKeys = computed(() => props.categories ?? [])
+const series = computed(() => (props.categories ?? []).map(category => typeof category === 'string'
+  ? { key: category, label: category, color: undefined }
+  : { key: category.key, label: category.label ?? category.key, color: category.color }))
+
+// A series is identified by its key, so two of them can share a label. The label is only what a reader sees:
+// legend, tooltip and accessible name.
+const seriesKeys = computed(() => series.value.map(item => item.key))
+const seriesLabels = computed(() => series.value.map(item => item.label))
+
+function seriesLabel(key: string) {
+  return series.value.find(item => item.key === key)?.label ?? key
+}
 
 // A donut has one color per row, the other types one per category.
 const seriesCount = computed(() => props.type === 'donut' ? (props.data?.length ?? 0) : seriesKeys.value.length)
@@ -185,6 +208,12 @@ const seriesCount = computed(() => props.type === 'donut' ? (props.data?.length 
 // without rebuilding the definition. Past the last color, each round is a lighter tint
 // of the same colors so two series never share one.
 const style = computed(() => Object.fromEntries(Array.from({ length: Math.max(seriesCount.value, seriesColors.value.length) }, (_, i) => {
+  // A color set on the category itself is used as is, without the tint of the repeated palette.
+  const own = props.type !== 'donut' ? series.value[i]?.color : undefined
+  if (own) {
+    return [`--ts-chart-${i + 1}`, resolveColor(own)]
+  }
+
   const color = resolveColor(seriesColors.value[i % seriesColors.value.length]!)
   const round = Math.floor(i / seriesColors.value.length)
 
@@ -197,7 +226,7 @@ const rows = computed(() => (props.data ?? []).flatMap((datum) => {
   let positive = 0
   let negative = 0
 
-  return seriesKeys.value.map((category) => {
+  return series.value.map(({ key: category }) => {
     const x = datum[props.index!]
     const value = datum[category] as number | null | undefined
 
@@ -223,13 +252,13 @@ function formatValue(value: number) {
   return props.format ? props.format(value) : new Intl.NumberFormat(code.value).format(value)
 }
 
-// The default legend stretches its items over the full width.
-const legendGuide = colorLegend({ items: colorLegendItems({ justify: 'center', gap: 16 }) })
+// The default legend stretches its items over the full width. Its values are the series keys, shown as their label.
+const legendGuide = computed(() => colorLegend({ items: colorLegendItems({ justify: 'center', gap: 16, label: { format: value => seriesLabel(String(value)) } }) }))
 
 // Slices are colored by label rather than by series.
 const donutDefinition = computed(() => {
   const labels = (props.data ?? []).map(datum => String(datum[props.index!]))
-  const slices = pie(props.data ?? [], { value: seriesKeys.value[0]! } as any)
+  const slices = pie(props.data ?? [], { value: series.value[0]?.key } as any)
 
   return defineChart({
     marks: [
@@ -249,7 +278,7 @@ const donutDefinition = computed(() => {
       scale: scaleOrdinal<string, string>()
         .domain(labels)
         .range(labels.map((_, i) => `var(--ts-chart-${i + 1})`)),
-      legend: (props.legend ?? labels.length > 1) ? legendGuide : undefined
+      legend: (props.legend ?? labels.length > 1) ? legendGuide.value : undefined
     }
   } as any)
 })
@@ -331,7 +360,7 @@ const generatedDefinition = computed(() => {
     },
     color: {
       scale: color,
-      legend: (props.legend ?? multiple) ? legendGuide : undefined
+      legend: (props.legend ?? multiple) ? legendGuide.value : undefined
     },
     gradients: props.type === 'area' ? areaGradients.value : undefined,
     focus: 'group-x',
@@ -374,7 +403,7 @@ const tooltipContent = computed<{ title?: string, rows: ChartTooltipRow[] }>(() 
   return {
     title: String((generated ? points[0]?.datum.x : points[0]?.xValue) ?? ''),
     rows: points.map(point => ({
-      label: generated ? String(point.datum.category) : point.groupLabel,
+      label: generated ? seriesLabel(String(point.datum.category)) : point.groupLabel,
       value: generated ? formatValue(point.datum.value) : String(point.yValue),
       color: point.color,
       active: points.length > 1 && point === primaryPoint.value
@@ -430,7 +459,7 @@ const chartDefinition = computed(() => (props.definition ?? generatedDefinition.
   <div ref="rootRef" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" :style="style">
     <TanStackChart
       :definition="chartDefinition"
-      :aria-label="props.ariaLabel || seriesKeys.join(', ') || 'Chart'"
+      :aria-label="props.ariaLabel || seriesLabels.join(', ') || 'Chart'"
       :aria-description="props.ariaDescription"
       :height="chartHeight"
       :aspect-ratio="props.aspectRatio"

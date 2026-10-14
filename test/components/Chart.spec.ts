@@ -56,6 +56,7 @@ describe('Chart', () => {
     ['without axes', { props: { ...props, xAxis: false, yAxis: false } }],
     ['without legend', { props: { ...props, legend: false } }],
     ['with colors', { props: { ...props, colors: ['success', '#8b5cf6'] } }],
+    ['with categories objects', { props: { ...props, categories: ['desktop', { key: 'mobile', label: 'Mobile', color: 'error' }] } }],
     ['with neutral color', { props: { ...props, colors: ['neutral', 'primary'] } }],
     ['with empty colors', { props: { ...props, colors: [] } }],
     ['with definition only', { props: { tooltip: false, definition: defineChart({ marks: [], scales: { x: null, y: null } }) } }],
@@ -95,6 +96,21 @@ describe('Chart', () => {
     const mobile = wrapper.find('.ts-chart__line path[data-ts-key*=":mobile:segment"]').attributes('d')!
     const ys = [...mobile.matchAll(/[ML][\d.]+,([\d.]+)/g)].map(match => Number(match[1]))
     expect(Math.max(...ys)).toBeGreaterThan(zero)
+  })
+
+  it('names and colors the series from category objects', async () => {
+    const wrapper = await mountSuspended(Chart, { props: { ...props, categories: [{ key: 'desktop', label: 'Desktop' }, { key: 'mobile', label: 'Mobile', color: 'error' }] } })
+
+    expect(wrapper.findAll('[data-ts-key^="legend-label"]').map(label => label.text())).toEqual(['Desktop', 'Mobile'])
+    expect(wrapper.find('[data-slot="root"]').attributes('style')).toContain('--ts-chart-2: var(--ui-error)')
+    expect(wrapper.find('svg.ts-chart').attributes('aria-label')).toBe('Visitors')
+  })
+
+  it('keeps series apart when they share a label', async () => {
+    const wrapper = await mountSuspended(Chart, { props: { ...props, categories: [{ key: 'desktop', label: 'Users' }, { key: 'mobile', label: 'Users' }] } })
+    const strokes = wrapper.findAll('.ts-chart__line path').map(path => path.attributes('stroke'))
+
+    expect(new Set(strokes)).toEqual(new Set(['var(--ts-chart-1)', 'var(--ts-chart-2)']))
   })
 
   it('passes accessibility tests', async () => {
