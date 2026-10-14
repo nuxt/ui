@@ -1,12 +1,17 @@
-import input from './input'
 import { colorVariant } from './color'
 import { fieldGroupVariant } from './field-group'
-import { extendTheme } from '../utils/theme'
+import { defineTheme } from '../utils/theme'
 
-export default extendTheme(input, {
+// `base` is the box, the `<button>` of the trigger
+export default defineTheme({
   slots: {
-    root: () => undefined,
-    base: () => 'relative group rounded-md inline-flex items-center text-strong disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
+    base: 'group relative inline-flex items-center rounded-md text-strong disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
+    // The invisible character gives the leading the baseline of the text, see `input.ts`
+    leading: `flex items-center before:content-['x'] before:w-0 before:invisible`,
+    leadingIcon: 'shrink-0 text-faint',
+    leadingAvatar: 'shrink-0',
+    trailing: 'ms-auto flex items-center',
+    trailingIcon: 'shrink-0 text-faint',
     value: 'truncate pointer-events-none',
     placeholder: 'truncate text-faint',
     arrow: 'fill-bg stroke-default',
@@ -28,21 +33,19 @@ export default extendTheme(input, {
   },
   variants: {
     ...fieldGroupVariant,
-    // No `root` slot here, so the color and the size tokens go on `base`
-    color: () => colorVariant({ base: '' }),
-    variant: (prev: typeof input.variants.variant) => ({
-      ...prev,
-      outline: {
-        base: [prev.outline!.base, 'hover:bg-soft disabled:bg-default'].join(' ')
-      },
-      subtle: {
-        base: [prev.subtle!.base, 'hover:bg-strong/75 disabled:bg-soft'].join(' ')
-      }
-    }),
+    variant: {
+      outline: { base: 'bg-default hover:bg-soft disabled:bg-default ring ring-inset ring-strong outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent' },
+      soft: { base: 'bg-tint hover:bg-soft focus:bg-soft disabled:bg-tint outline-accent-focus focus-visible:outline-3' },
+      subtle: { base: 'bg-soft hover:bg-strong/75 disabled:bg-soft ring ring-inset ring-strong outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent' },
+      ghost: { base: 'bg-transparent hover:bg-soft focus:bg-soft disabled:bg-transparent dark:disabled:bg-transparent outline-accent-focus focus-visible:outline-3' },
+      none: { base: 'bg-transparent focus:outline-none' }
+    },
+    color: colorVariant({ base: '' }),
     size: {
       xs: {
-        root: () => undefined,
-        base: (prev: string) => [prev, input.variants.size.xs.root],
+        base: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm/4',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)',
         label: 'p-1 text-[10px]/3 gap-1',
         item: 'p-1 text-xs gap-1',
         itemLeadingIcon: 'size-4',
@@ -51,8 +54,9 @@ export default extendTheme(input, {
         empty: 'p-2 text-xs'
       },
       sm: {
-        root: () => undefined,
-        base: (prev: string) => [prev, input.variants.size.sm.root],
+        base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm/4',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)',
         label: 'p-1.5 text-[10px]/3 gap-1.5',
         item: 'p-1.5 text-xs gap-1.5',
         itemLeadingIcon: 'size-4',
@@ -61,8 +65,9 @@ export default extendTheme(input, {
         empty: 'p-2.5 text-xs'
       },
       md: {
-        root: () => undefined,
-        base: (prev: string) => [prev, input.variants.size.md.root],
+        base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base/5',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)',
         label: 'p-1.5 text-xs gap-1.5',
         item: 'p-1.5 text-sm gap-1.5',
         itemLeadingIcon: 'size-5',
@@ -71,8 +76,9 @@ export default extendTheme(input, {
         empty: 'p-2.5 text-sm'
       },
       lg: {
-        root: () => undefined,
-        base: (prev: string) => [prev, input.variants.size.lg.root],
+        base: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base/5',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)',
         label: 'p-2 text-xs gap-2',
         item: 'p-2 text-sm gap-2',
         itemLeadingIcon: 'size-5',
@@ -81,8 +87,9 @@ export default extendTheme(input, {
         empty: 'p-3 text-sm'
       },
       xl: {
-        root: () => undefined,
-        base: (prev: string) => [prev, input.variants.size.xl.root],
+        base: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)',
         label: 'p-2 text-sm gap-2',
         item: 'p-2 text-base gap-2',
         itemLeadingIcon: 'size-6',
@@ -101,9 +108,48 @@ export default extendTheme(input, {
     },
     multiple: {
       true: ''
+    },
+    leading: {
+      true: ''
+    },
+    trailing: {
+      true: ''
+    },
+    // The component turns it off on the trailing icon when the leading one is the loading icon
+    loading: {
+      true: {
+        leadingIcon: 'animate-spin',
+        trailingIcon: 'animate-spin'
+      }
+    },
+    highlight: {
+      true: { base: 'ring ring-inset ring-accent' }
+    },
+    fixed: {
+      false: ''
     }
   },
+  compoundVariants: [{
+    fixed: false,
+    size: 'xs',
+    class: { base: 'md:text-xs' }
+  }, {
+    fixed: false,
+    size: 'sm',
+    class: { base: 'md:text-xs' }
+  }, {
+    fixed: false,
+    size: 'md',
+    class: { base: 'md:text-sm' }
+  }, {
+    fixed: false,
+    size: 'lg',
+    class: { base: 'md:text-sm' }
+  }],
   defaultVariants: {
+    size: 'md',
+    color: 'primary',
+    variant: 'outline',
     position: 'popper'
   }
 })

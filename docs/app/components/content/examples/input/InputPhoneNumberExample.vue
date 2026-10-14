@@ -46,7 +46,6 @@ watch(countryCode, () => {
       :filter-fields="['name', 'code', 'dialCode']"
       :content="{ align: 'start' }"
       :ui="{
-        base: 'pe-8',
         content: 'w-48',
         placeholder: 'hidden',
         trailingIcon: 'size-4'
@@ -73,11 +72,7 @@ watch(countryCode, () => {
       v-model="phone"
       v-maska="mask"
       :placeholder="mask.replaceAll('#', '_')"
-      :style="{ '--dial-code-length': `${dialCode.length + 1.5}ch` }"
-      :ui="{
-        base: 'ps-(--dial-code-length)',
-        leading: 'pointer-events-none text-base md:text-sm text-muted'
-      }"
+      :ui="{ leading: 'text-muted' }"
     >
       <template #leading>
         {{ dialCode }}

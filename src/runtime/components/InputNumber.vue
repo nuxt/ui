@@ -136,6 +136,7 @@ const ui = computed(() => tv(theme, overrides.value)({
   size: size.value,
   highlight: highlight.value,
   fixed: props.fixed,
+  disabled: disabled.value,
   orientation: props.orientation,
   fieldGroup: orientation.value,
   increment: props.orientation === 'vertical' ? (!!props.increment || !!props.decrement) : !!props.increment,

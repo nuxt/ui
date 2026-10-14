@@ -110,7 +110,6 @@ watch(matches, () => {
           icon="i-lucide-search"
           aria-describedby="scroll-area-find-count"
           class="w-64"
-          :ui="{ trailing: 'pointer-events-none' }"
         >
           <template #trailing>
             <span

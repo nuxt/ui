@@ -3,7 +3,7 @@ import { extendTheme } from '../utils/theme'
 
 export default extendTheme(select, {
   slots: {
-    input: 'border-b border-default',
+    input: 'rounded-none border-b border-default',
     focusScope: 'flex flex-col min-h-0',
     viewport: 'relative scroll-py-1 overflow-y-auto flex-1',
     content: (content: string) => [content, 'max-h-[min(15rem,var(--reka-combobox-content-available-height,15rem))] origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)'],
