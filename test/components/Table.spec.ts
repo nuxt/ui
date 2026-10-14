@@ -578,23 +578,26 @@ describe('Table', () => {
     expect(expanded.findAll('td').find(td => td.text() === 'Expanded slot')?.attributes('colspan')).toBe(visibleColumns)
   })
 
-  it('measures virtualized rows', async () => {
+  it.each([
+    ['default index attribute', undefined, 'data-index'],
+    ['custom index attribute', 'data-row-index', 'data-row-index']
+  ])('measures virtualized rows with %s', async (_name: string, indexAttribute: string | undefined, attribute: string) => {
     const measureElement = vi.fn(() => 50)
 
     const wrapper = await mountSuspended(Table, {
       props: {
         data,
         // jsdom has no layout, so give the virtualizer a viewport to render rows into
-        virtualize: { observeElementRect: (_, cb) => cb({ width: 1000, height: 500 }), measureElement }
+        virtualize: { observeElementRect: (_, cb) => cb({ width: 1000, height: 500 }), measureElement, indexAttribute }
       },
       attachTo: document.body
     })
     await flushPromises()
 
-    const rows = wrapper.findAll('tbody tr[data-index]')
+    const rows = wrapper.findAll(`tbody tr[${attribute}]`)
 
     expect(rows.length).toBe(data.length)
-    expect(rows.map(row => row.attributes('data-index'))).toEqual(data.map((_, index) => String(index)))
+    expect(rows.map(row => row.attributes(attribute))).toEqual(data.map((_, index) => String(index)))
     expect(rows.every(row => !row.attributes('style')?.includes('height'))).toBe(true)
     expect(measureElement).toHaveBeenCalled()
 

@@ -444,6 +444,9 @@ const virtualizerProps = toRef(() => defu(typeof props.virtualize === 'boolean' 
   overscan: 12
 }))
 
+// Rows must carry the attribute the virtualizer reads their index from when measuring them.
+const indexAttribute = computed(() => virtualizerProps.value.indexAttribute ?? 'data-index')
+
 const getScrollElement = () => (isExternalScroll.value ? virtualizerProps.value.getScrollElement?.() : rootRef.value?.$el) ?? null
 // Offset applied to the spacer rows: `scrollMargin` is the table's offset within the scroll element (0 unless set).
 const scrollMargin = computed(() => virtualizerProps.value.scrollMargin ?? 0)
@@ -594,7 +597,7 @@ defineExpose({
   <DefineRowTemplate v-slot="{ row, index }">
     <tr
       :ref="virtualizer ? measureRow : undefined"
-      :data-index="index"
+      :[indexAttribute]="index"
       :data-selected="row.getIsSelected()"
       :data-selectable="!!props.onSelect || !!props.onHover || !!props.onContextmenu"
       :data-expanded="row.getIsExpanded()"
