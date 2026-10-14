@@ -7,6 +7,7 @@ import { renderEach } from '../component-render'
 import { UCheckbox, UButton, UBadge, UDropdownMenu } from '#components'
 import Table from '../../src/runtime/components/Table.vue'
 import type { TableColumn, TableRow } from '../../src/runtime/components/Table.vue'
+import type { Virtualizer } from '@tanstack/vue-virtual'
 import theme from '#build/ui/table'
 
 async function triggerKeydown(element: Element, init: KeyboardEventInit) {
@@ -602,5 +603,79 @@ describe('Table', () => {
     expect(measureElement).toHaveBeenCalled()
 
     wrapper.unmount()
+  })
+
+  it('keeps measured heights with their rows when sorting virtualized rows', async () => {
+    // Give each row its own height, read from the id it renders
+    const heights = Object.fromEntries(data.map((row, index) => [row.id, 40 + index * 10]))
+    const measureElement = (el: Element) => heights[data.find(row => el.textContent?.includes(row.id))!.id]!
+    let virtualizer: Virtualizer<Element, Element> | undefined
+
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data,
+        virtualize: {
+          observeElementRect: (_, cb) => cb({ width: 1000, height: 500 }),
+          measureElement,
+          onChange: (instance) => {
+            virtualizer = instance
+          }
+        }
+      },
+      attachTo: document.body
+    })
+    await flushPromises()
+
+    await wrapper.setProps({ sorting: [{ id: 'amount', desc: true }] })
+    await flushPromises()
+
+    const sorted = data.map((row, index) => ({ ...row, index })).sort((a, b) => b.amount - a.amount)
+    const items = virtualizer!.getVirtualItems()
+
+    expect(items.map(item => item.key)).toEqual(sorted.map(row => String(row.index)))
+    expect(items.map(item => item.size)).toEqual(sorted.map(row => heights[row.id]))
+
+    wrapper.unmount()
+  })
+
+  it('measures the expanded row along with its virtualized row', async () => {
+    // happy-dom has no layout: rows are 40px tall, expanded rows 100px
+    const offsetHeight = vi.spyOn(HTMLElement.prototype, 'offsetHeight', 'get').mockImplementation(function (this: HTMLElement) {
+      return this.tagName !== 'TR' ? 0 : this.hasAttribute('data-index') ? 40 : 100
+    })
+    let virtualizer: Virtualizer<Element, Element> | undefined
+
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data,
+        expanded: { 0: true },
+        virtualize: {
+          observeElementRect: (_, cb) => cb({ width: 1000, height: 500 }),
+          onChange: (instance) => {
+            virtualizer = instance
+          }
+        }
+      },
+      slots: { expanded: () => 'Expanded slot' },
+      attachTo: document.body
+    })
+    await flushPromises()
+
+    const sizes = () => virtualizer!.getVirtualItems().map(item => item.size)
+
+    expect(sizes()).toEqual([140, 40, 40, 40, 40])
+
+    await wrapper.setProps({ expanded: { 2: true } })
+    await flushPromises()
+
+    expect(sizes()).toEqual([40, 40, 140, 40, 40])
+
+    await wrapper.setProps({ expanded: {} })
+    await flushPromises()
+
+    expect(sizes()).toEqual([40, 40, 40, 40, 40])
+
+    wrapper.unmount()
+    offsetHeight.mockRestore()
   })
 })

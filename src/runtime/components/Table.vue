@@ -230,7 +230,7 @@ export type TableSlots<T extends TableData = TableData> = {
 </script>
 
 <script setup lang="ts" generic="T extends TableData">
-import { computed, useTemplateRef, watch, toRef } from 'vue'
+import { computed, useTemplateRef, watch, toRef, onBeforeUnmount } from 'vue'
 import { Primitive } from 'reka-ui'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
@@ -451,13 +451,24 @@ const getScrollElement = () => (isExternalScroll.value ? virtualizerProps.value.
 // Offset applied to the spacer rows: `scrollMargin` is the table's offset within the scroll element (0 unless set).
 const scrollMargin = computed(() => virtualizerProps.value.scrollMargin ?? 0)
 
+// Key measurements by row id so cached heights follow their rows through sorting and filtering.
+// The virtualizer memoizes measurements on the `getItemKey` reference, so a new function is created for each set of rows.
+const getItemKey = computed(() => {
+  const rows = centerRows.value
+  return (index: number) => rows[index]?.id ?? index
+})
+
 const virtualizer = !!props.virtualize && useVirtualizer({
+  measureElement: measureRowElement,
   ...virtualizerProps.value,
   get count() {
     return centerRows.value.length
   },
   get scrollMargin() {
     return scrollMargin.value
+  },
+  get getItemKey() {
+    return virtualizerProps.value.getItemKey ?? getItemKey.value
   },
   getScrollElement,
   estimateSize: (index: number) => {
@@ -482,6 +493,43 @@ function measureRow(el: Element | ComponentPublicInstance | null) {
     virtualizer.value.measureElement(el)
   }
 }
+
+// An expanded `<tr>` belongs to its row's virtual item, so its height is added to the row's. Maps it to its row's `<tr>`.
+const expandedRows = new WeakMap<Element, Element>()
+let expandedRowsObserver: ResizeObserver | undefined
+
+function measureRowElement(el: Element, entry: ResizeObserverEntry | undefined) {
+  const height = entry?.borderBoxSize?.[0]?.blockSize ?? (el as HTMLElement).offsetHeight
+  const expanded = el.nextElementSibling
+  return Math.round(height + (expanded && expandedRows.get(expanded) === el ? (expanded as HTMLElement).offsetHeight : 0))
+}
+
+function remeasureRow(el: Element | null | undefined) {
+  if (!el?.isConnected || !virtualizer) return
+  const instance = virtualizer.value
+  instance.resizeItem(instance.indexFromElement(el), instance.options.measureElement(el, undefined, instance))
+}
+
+function onExpandedRowMounted({ el }: VNode) {
+  if (!virtualizer || !(el instanceof Element) || !el.previousElementSibling) return
+  expandedRows.set(el, el.previousElementSibling)
+  remeasureRow(el.previousElementSibling)
+  if (typeof ResizeObserver === 'undefined') return
+  // Keep the row's size in sync when the expanded content resizes (e.g. async content).
+  expandedRowsObserver ??= new ResizeObserver(entries => entries.forEach(entry => remeasureRow(expandedRows.get(entry.target))))
+  expandedRowsObserver.observe(el)
+}
+
+function onExpandedRowUnmounted({ el }: VNode) {
+  if (!(el instanceof Element)) return
+  const row = expandedRows.get(el)
+  expandedRows.delete(el)
+  expandedRowsObserver?.unobserve(el)
+  // Collapsed while its row stays rendered: shrink it back to the row's own height.
+  remeasureRow(row)
+}
+
+onBeforeUnmount(() => expandedRowsObserver?.disconnect())
 
 function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
   ref.value = typeof updaterOrValue === 'function' ? updaterOrValue(ref.value) : updaterOrValue
@@ -642,7 +690,13 @@ defineExpose({
       </td>
     </tr>
 
-    <tr v-if="row.getIsExpanded()" data-slot="tr" :class="ui.tr({ class: [props.ui?.tr] })">
+    <tr
+      v-if="row.getIsExpanded()"
+      data-slot="tr"
+      :class="ui.tr({ class: [props.ui?.tr] })"
+      @vue:mounted="onExpandedRowMounted"
+      @vue:unmounted="onExpandedRowUnmounted"
+    >
       <td :colspan="row.getVisibleCells().length" data-slot="td" :class="ui.td({ class: [props.ui?.td] })">
         <slot name="expanded" :row="row" />
       </td>
