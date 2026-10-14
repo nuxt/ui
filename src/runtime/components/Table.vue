@@ -39,7 +39,7 @@ import type {
   VisibilityOptions,
   VisibilityState
 } from '@tanstack/vue-table'
-import type { VirtualizerOptions } from '@tanstack/vue-virtual'
+import type { Virtualizer, VirtualizerOptions } from '@tanstack/vue-virtual'
 import theme from '#build/ui/table'
 import type { TableHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
@@ -452,14 +452,14 @@ const getScrollElement = () => (isExternalScroll.value ? virtualizerProps.value.
 const scrollMargin = computed(() => virtualizerProps.value.scrollMargin ?? 0)
 
 // Key measurements by row id so cached heights follow their rows through sorting and filtering.
-// The virtualizer memoizes measurements on the `getItemKey` reference, so a new function is created for each set of rows.
+// The virtualizer memoizes measurements on the `getItemKey` reference, so a new function (wrapping a custom one too) is created for each set of rows.
 const getItemKey = computed(() => {
   const rows = centerRows.value
-  return (index: number) => rows[index]?.id ?? index
+  const getKey = virtualizerProps.value.getItemKey
+  return getKey ? (index: number) => getKey(index) : (index: number) => rows[index]?.id ?? index
 })
 
 const virtualizer = !!props.virtualize && useVirtualizer({
-  measureElement: measureRowElement,
   ...virtualizerProps.value,
   get count() {
     return centerRows.value.length
@@ -468,8 +468,9 @@ const virtualizer = !!props.virtualize && useVirtualizer({
     return scrollMargin.value
   },
   get getItemKey() {
-    return virtualizerProps.value.getItemKey ?? getItemKey.value
+    return getItemKey.value
   },
+  measureElement: measureRowElement,
   getScrollElement,
   estimateSize: (index: number) => {
     const estimate = virtualizerProps.value.estimateSize
@@ -494,12 +495,13 @@ function measureRow(el: Element | ComponentPublicInstance | null) {
   }
 }
 
-// An expanded `<tr>` belongs to its row's virtual item, so its height is added to the row's. Maps it to its row's `<tr>`.
+// An expanded `<tr>` belongs to its row's virtual item, so its height is added to the row's (measured by a custom `measureElement` if given). Maps it to its row's `<tr>`.
 const expandedRows = new WeakMap<Element, Element>()
 let expandedRowsObserver: ResizeObserver | undefined
 
-function measureRowElement(el: Element, entry: ResizeObserverEntry | undefined) {
-  const height = entry?.borderBoxSize?.[0]?.blockSize ?? (el as HTMLElement).offsetHeight
+function measureRowElement(el: Element, entry: ResizeObserverEntry | undefined, instance: Virtualizer<Element, Element>) {
+  const measure = virtualizerProps.value.measureElement
+  const height = measure ? measure(el, entry, instance) : entry?.borderBoxSize?.[0]?.blockSize ?? (el as HTMLElement).offsetHeight
   const expanded = el.nextElementSibling
   return Math.round(height + (expanded && expandedRows.get(expanded) === el ? (expanded as HTMLElement).offsetHeight : 0))
 }

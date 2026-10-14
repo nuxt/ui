@@ -605,10 +605,17 @@ describe('Table', () => {
     wrapper.unmount()
   })
 
-  it('keeps measured heights with their rows when sorting virtualized rows', async () => {
+  it.each([
+    ['default item key', false],
+    ['custom item key', true]
+  ])('keeps measured heights with their rows when sorting virtualized rows with %s', async (_name: string, customKey: boolean) => {
     // Give each row its own height, read from the id it renders
     const heights = Object.fromEntries(data.map((row, index) => [row.id, 40 + index * 10]))
     const measureElement = (el: Element) => heights[data.find(row => el.textContent?.includes(row.id))!.id]!
+    const sorted = data.map((row, index) => ({ ...row, index })).sort((a, b) => b.amount - a.amount)
+    // A custom key with a stable reference that reads the current order
+    let order = data.map((_, index) => index)
+    const getItemKey = customKey ? (index: number) => `key-${order[index]}` : undefined
     let virtualizer: Virtualizer<Element, Element> | undefined
 
     const wrapper = await mountSuspended(Table, {
@@ -617,6 +624,7 @@ describe('Table', () => {
         virtualize: {
           observeElementRect: (_, cb) => cb({ width: 1000, height: 500 }),
           measureElement,
+          getItemKey,
           onChange: (instance) => {
             virtualizer = instance
           }
@@ -626,19 +634,22 @@ describe('Table', () => {
     })
     await flushPromises()
 
+    order = sorted.map(row => row.index)
     await wrapper.setProps({ sorting: [{ id: 'amount', desc: true }] })
     await flushPromises()
 
-    const sorted = data.map((row, index) => ({ ...row, index })).sort((a, b) => b.amount - a.amount)
     const items = virtualizer!.getVirtualItems()
 
-    expect(items.map(item => item.key)).toEqual(sorted.map(row => String(row.index)))
+    expect(items.map(item => item.key)).toEqual(sorted.map(row => customKey ? `key-${row.index}` : String(row.index)))
     expect(items.map(item => item.size)).toEqual(sorted.map(row => heights[row.id]))
 
     wrapper.unmount()
   })
 
-  it('measures the expanded row along with its virtualized row', async () => {
+  it.each([
+    ['default measurement', undefined, 40],
+    ['custom measurement', (el: Element) => el.hasAttribute('data-index') ? 30 : 0, 30]
+  ])('measures the expanded row along with its virtualized row with %s', async (_name: string, measureElement: ((el: Element) => number) | undefined, rowHeight: number) => {
     // happy-dom has no layout: rows are 40px tall, expanded rows 100px
     const offsetHeight = vi.spyOn(HTMLElement.prototype, 'offsetHeight', 'get').mockImplementation(function (this: HTMLElement) {
       return this.tagName !== 'TR' ? 0 : this.hasAttribute('data-index') ? 40 : 100
@@ -651,6 +662,7 @@ describe('Table', () => {
         expanded: { 0: true },
         virtualize: {
           observeElementRect: (_, cb) => cb({ width: 1000, height: 500 }),
+          measureElement,
           onChange: (instance) => {
             virtualizer = instance
           }
@@ -661,19 +673,19 @@ describe('Table', () => {
     })
     await flushPromises()
 
-    const sizes = () => virtualizer!.getVirtualItems().map(item => item.size)
+    const sizes = () => virtualizer!.getVirtualItems().map(item => item.size - rowHeight)
 
-    expect(sizes()).toEqual([140, 40, 40, 40, 40])
+    expect(sizes()).toEqual([100, 0, 0, 0, 0])
 
     await wrapper.setProps({ expanded: { 2: true } })
     await flushPromises()
 
-    expect(sizes()).toEqual([40, 40, 140, 40, 40])
+    expect(sizes()).toEqual([0, 0, 100, 0, 0])
 
     await wrapper.setProps({ expanded: {} })
     await flushPromises()
 
-    expect(sizes()).toEqual([40, 40, 40, 40, 40])
+    expect(sizes()).toEqual([0, 0, 0, 0, 0])
 
     wrapper.unmount()
     offsetHeight.mockRestore()
