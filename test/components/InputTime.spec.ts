@@ -53,7 +53,7 @@ describe('InputTime', () => {
     ['with ariaLabel', { attrs: { 'aria-label': 'Aria label' } }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'max-w-sm' } }],
-    ['with ui', { props: { ui: { base: 'rounded-full' } } }],
+    ['with ui', { props: { ui: { root: 'rounded-full' } } }],
     // Slots
     ['with leading slot', { slots: { leading: () => 'Leading slot' } }],
     ['with default slot', { slots: { default: () => 'Default slot' } }],

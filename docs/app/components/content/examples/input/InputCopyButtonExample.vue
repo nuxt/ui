@@ -9,7 +9,6 @@ const { copy, copied } = useClipboard()
 <template>
   <UInput
     v-model="value"
-    :ui="{ trailing: 'pr-0.5' }"
   >
     <template v-if="value?.length" #trailing>
       <UTooltip text="Copy to clipboard" :content="{ side: 'right' }">

@@ -234,7 +234,7 @@ defineExpose({
     :disabled="disabled"
     :model-value="(props.modelValue as TimeValue)"
     :default-value="(props.defaultValue as TimeValue)"
-    :class="ui.base({ class: [props.ui?.base, props.class] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="onUpdate"
     @focusout="onFocusOut"
     @focusin="onFocusIn"

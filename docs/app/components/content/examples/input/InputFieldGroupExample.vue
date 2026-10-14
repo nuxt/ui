@@ -6,14 +6,7 @@ const domain = ref(domains[0])
 
 <template>
   <UFieldGroup>
-    <UInput
-      v-model="value"
-      placeholder="nuxt"
-      :ui="{
-        base: 'pl-14.5',
-        leading: 'pointer-events-none'
-      }"
-    >
+    <UInput v-model="value" placeholder="nuxt">
       <template #leading>
         <p class="text-sm text-muted">
           https://

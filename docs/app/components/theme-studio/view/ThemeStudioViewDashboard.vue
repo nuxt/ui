@@ -609,7 +609,7 @@ const pageTitles: Record<Page, string> = {
         :default-size="25"
         :min-size="25"
         :max-size="45"
-        :ui="{ root: 'min-h-0' }"
+        class="min-h-0"
       >
         <UDashboardNavbar title="Inbox">
           <template #leading>
@@ -661,7 +661,7 @@ const pageTitles: Record<Page, string> = {
         </div>
       </UDashboardPanel>
 
-      <UDashboardPanel v-if="selectedMail" id="theme-studio-inbox-mail" :ui="{ root: 'min-h-0' }">
+      <UDashboardPanel v-if="selectedMail" id="theme-studio-inbox-mail" class="min-h-0">
         <UDashboardNavbar :title="selectedMail.subject" :toggle="false">
           <template #leading>
             <UButton
@@ -755,7 +755,7 @@ const pageTitles: Record<Page, string> = {
       </div>
     </template>
 
-    <UDashboardPanel v-else :ui="{ root: 'min-h-0' }">
+    <UDashboardPanel v-else class="min-h-0">
       <template #header>
         <UDashboardNavbar :title="pageTitles[page]" :ui="{ right: 'gap-3' }">
           <template #leading>
