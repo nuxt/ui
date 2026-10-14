@@ -25,22 +25,22 @@ export default defineTheme({
     ...fieldGroupVariantRoot,
     size: {
       xs: {
-        root: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] text-sm/4',
+        root: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] text-[calc(var(--text-xs)+var(--ui-control-text-step,0px))]/4',
         leadingIcon: 'size-(--ui-control-icon)',
         trailingIcon: 'size-(--ui-control-icon)'
       },
       sm: {
-        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)] text-sm/4',
+        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)] text-[calc(var(--text-xs)+var(--ui-control-text-step,0px))]/4',
         leadingIcon: 'size-(--ui-control-icon)',
         trailingIcon: 'size-(--ui-control-icon)'
       },
       md: {
-        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] text-base/5',
+        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] text-[calc(var(--text-sm)+var(--ui-control-text-step,0px))]/5',
         leadingIcon: 'size-(--ui-control-icon)',
         trailingIcon: 'size-(--ui-control-icon)'
       },
       lg: {
-        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)] text-base/5',
+        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)] text-[calc(var(--text-sm)+var(--ui-control-text-step,0px))]/5',
         leadingIcon: 'size-(--ui-control-icon)',
         trailingIcon: 'size-(--ui-control-icon)'
       },
@@ -75,30 +75,10 @@ export default defineTheme({
     highlight: {
       true: { root: 'ring ring-inset ring-accent' }
     },
-    fixed: {
-      false: ''
-    },
     type: {
       file: { base: 'file:me-1.5 file:font-medium file:text-muted file:outline-none' }
     }
   },
-  compoundVariants: [{
-    fixed: false,
-    size: 'xs',
-    class: { root: 'md:text-xs' }
-  }, {
-    fixed: false,
-    size: 'sm',
-    class: { root: 'md:text-xs' }
-  }, {
-    fixed: false,
-    size: 'md',
-    class: { root: 'md:text-sm' }
-  }, {
-    fixed: false,
-    size: 'lg',
-    class: { root: 'md:text-sm' }
-  }],
   defaultVariants: {
     size: 'md',
     color: 'primary',
