@@ -737,10 +737,10 @@ defineExpose({
         @keydown.down="onTriggerKeydown"
         @keydown.up="onTriggerKeydown"
       >
-        <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+        <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="select-menu-leading" :class="ui.leading({ class: props.ui?.leading })">
           <slot name="leading" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :item="resolveSelectedItem('leading', modelValue)" :open="open" :ui="ui">
-            <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
-            <UAvatar v-else-if="!!props.avatar" :size="avatarSize" v-bind="props.avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
+            <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="select-menu-leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+            <UAvatar v-else-if="!!props.avatar" :size="avatarSize" v-bind="props.avatar" data-slot="select-menu-leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
           </slot>
         </span>
 
