@@ -8,7 +8,7 @@ const linkKeySet = new Set<string>(linkKeys)
 
 export function pickLinkProps(link: LinkProps & { [key: string]: any }) {
   const picked: Record<string, any> = {}
-  for (const key in link) {
+  for (const key of Object.keys(link)) {
     if (linkKeySet.has(key) || key.startsWith('aria-') || key.startsWith('data-')) {
       picked[key] = link[key]
     }
