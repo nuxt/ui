@@ -68,10 +68,9 @@ const props = useComponentProps('button', _props)
 const appConfig = useAppConfig() as Button['AppConfig']
 const { orientation, size: buttonSize } = useFieldGroup<ButtonProps>(_props)
 
-// Memoized: `omit` iterates every forwarded key through three proxy layers
-// (useForwardProps -> reactivePick -> useComponentProps), so doing it inline in
-// the template re-paid that walk on every render.
-const linkProps = useForwardProps(pickLinkProps(props))
+// Memoized: `omit` iterates every forwarded key through the `useComponentProps`
+// proxy, so doing it inline in the template re-paid that walk on every render.
+const linkProps = useForwardProps(computed(() => pickLinkProps(props)))
 const forwardedLinkProps = computed(() => omit(linkProps.value, ['type', 'disabled', 'onClick']))
 
 const loadingAutoState = ref(false)
