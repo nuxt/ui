@@ -13,10 +13,10 @@ export default defineTheme({
     ...fieldGroupVariantRoot,
     color: colorVariant({ root: '' }),
     size: {
-      xs: { root: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] text-sm/4' },
-      sm: { root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)] text-sm/4' },
-      md: { root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] text-base/5' },
-      lg: { root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)] text-base/5' },
+      xs: { root: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] text-[calc(var(--text-xs)+var(--ui-control-text-step,0px))]/4' },
+      sm: { root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)] text-[calc(var(--text-xs)+var(--ui-control-text-step,0px))]/4' },
+      md: { root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] text-[calc(var(--text-sm)+var(--ui-control-text-step,0px))]/5' },
+      lg: { root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)] text-[calc(var(--text-sm)+var(--ui-control-text-step,0px))]/5' },
       xl: { root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)] text-base' }
     },
     variant: {
@@ -52,9 +52,6 @@ export default defineTheme({
     highlight: {
       true: { root: 'ring ring-inset ring-accent' }
     },
-    fixed: {
-      false: ''
-    },
     // Next to a button, the input gives up its padding: the button brings its own
     increment: {
       true: { base: 'pe-0' },
@@ -69,22 +66,6 @@ export default defineTheme({
     orientation: 'horizontal',
     decrement: false,
     class: { base: 'text-start' }
-  }, {
-    fixed: false,
-    size: 'xs',
-    class: { root: 'md:text-xs' }
-  }, {
-    fixed: false,
-    size: 'sm',
-    class: { root: 'md:text-xs' }
-  }, {
-    fixed: false,
-    size: 'md',
-    class: { root: 'md:text-sm' }
-  }, {
-    fixed: false,
-    size: 'lg',
-    class: { root: 'md:text-sm' }
   }],
   defaultVariants: {
     size: 'md',
