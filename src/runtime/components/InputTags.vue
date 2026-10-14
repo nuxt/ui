@@ -44,8 +44,6 @@ export interface InputTagsProps<T extends InputTagItem = InputTagItem> extends P
   deleteIcon?: IconProps['name']
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
-  /** Keep the mobile text size on all breakpoints. */
-  fixed?: boolean
   class?: any
   ui?: InputTags['slots']
 }
@@ -121,7 +119,6 @@ const ui = computed(() => tv(theme, overrides.value)({
   size: size.value,
   loading: props.loading,
   highlight: highlight.value,
-  fixed: props.fixed,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   fieldGroup: orientation.value
