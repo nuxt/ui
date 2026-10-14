@@ -75,6 +75,10 @@ export interface ChartProps<T extends ChartData = ChartData> {
    * @defaultValue true
    */
   yAxis?: boolean
+  /** A title displayed along the x axis. */
+  xLabel?: string
+  /** A title displayed along the y axis. */
+  yLabel?: string
   /** Display a legend. Defaults to `true` when there is more than one category, or more than one slice with `donut`. */
   legend?: boolean
   /** Format the values on the y axis and in the tooltip. */
@@ -349,14 +353,14 @@ const generatedDefinition = computed(() => {
           : () => scalePoint<string>().padding(0),
         // Axis sides stay physical in a right-to-left container, so the range and the y axis flip here.
         reverse: dir.value === 'rtl',
-        axis: props.xAxis ? undefined : false
+        axis: props.xAxis ? { label: props.xLabel } : false
       },
       y: {
         scale: scaleLinear,
         nice: true,
         grid: props.grid,
         side: dir.value === 'rtl' ? 'right' : 'left',
-        axis: !props.yAxis ? false : props.format ? { ticks: { format: props.format } } : undefined
+        axis: props.yAxis ? { label: props.yLabel, ticks: props.format ? { format: props.format } : undefined } : false
       }
     },
     color: {

@@ -48,6 +48,50 @@ exports[`Chart > renders with aspectRatio correctly 1`] = `
 </div>"
 `;
 
+exports[`Chart > renders with axis labels correctly 1`] = `
+"<div data-slot="root" class="relative w-full text-xs text-muted **:data-reka-popper-content-wrapper:pointer-events-none [--ts-chart-tooltip-background:var(--ui-bg)] [--ts-chart-tooltip-color:var(--ui-text-highlighted)] [--ts-chart-tooltip-border:1px_solid_var(--ui-border)] [--ts-chart-tooltip-border-radius:var(--radius-sm)] [--ts-chart-tooltip-shadow:var(--shadow-sm)] [--ts-chart-tooltip-padding:--spacing(1.5)_--spacing(2.5)] [--ts-chart-tooltip-font:inherit]" style="--ts-chart-1: var(--ui-chart-1); --ts-chart-2: var(--ui-chart-2); --ts-chart-3: var(--ui-chart-3); --ts-chart-4: var(--ui-chart-4); --ts-chart-5: var(--ui-chart-5); --ts-chart-6: var(--ui-chart-6);">
+  <div class="ts-chart-host opacity-0 in-data-measured:opacity-100 transition-opacity duration-150 [&amp;_.ts-chart]:rounded-md [&amp;_.ts-chart]:outline-0 [&amp;_.ts-chart]:outline-primary/25 [&amp;_.ts-chart:focus-visible]:outline-3 [&amp;_.ts-chart:focus-visible]:ring [&amp;_.ts-chart:focus-visible]:ring-primary" style="position: relative; height: 300px;">
+    <div class="ts-chart-surface" style="width: 100%; height: 100%; position: relative;"><svg class="ts-chart" width="100%" height="100%" viewBox="0 0 640 300" role="img" aria-roledescription="chart" aria-label="Visitors" tabindex="0" style="display:block;overflow:visible">
+        <g data-ts-key="grid" class="ts-chart__grid" aria-hidden="true" stroke="currentColor" stroke-opacity="0.11" stroke-width="1">
+          <line data-ts-key="y-grid:number:0" x1="49.48" y1="258" x2="625.11" y2="258"></line>
+          <line data-ts-key="y-grid:number:100" x1="49.48" y1="202.75" x2="625.11" y2="202.75"></line>
+          <line data-ts-key="y-grid:number:200" x1="49.48" y1="147.5" x2="625.11" y2="147.5"></line>
+          <line data-ts-key="y-grid:number:300" x1="49.48" y1="92.25" x2="625.11" y2="92.25"></line>
+          <line data-ts-key="y-grid:number:400" x1="49.48" y1="37" x2="625.11" y2="37"></line>
+        </g>
+        <g data-ts-key="marks" class="ts-chart__marks">
+          <g data-ts-key="line-0:string:7:desktop" class="ts-chart__line" aria-hidden="true">
+            <path data-ts-key="line-0:string:7:desktop:segment:0" fill="none" stroke="var(--ts-chart-1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M49.48,155.24L337.3,89.49L625.11,127.06" vector-effect="non-scaling-stroke"></path>
+          </g>
+          <g data-ts-key="line-0:string:6:mobile" class="ts-chart__line" aria-hidden="true">
+            <path data-ts-key="line-0:string:6:mobile:segment:0" fill="none" stroke="var(--ts-chart-2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M49.48,213.8L337.3,147.5L625.11,191.7" vector-effect="non-scaling-stroke"></path>
+          </g>
+        </g>
+        <g data-ts-key="axes" class="ts-chart__axes" aria-hidden="true">
+          <line data-ts-key="x-axis" stroke="currentColor" stroke-opacity="0.28" x1="49.48" y1="258" x2="625.11" y2="258"></line>
+          <line data-ts-key="x-tick-rule:string:3:Jan" stroke="currentColor" stroke-opacity="0.28" x1="49.48" y1="258" x2="49.48" y2="262"></line>
+          <line data-ts-key="x-tick-rule:string:3:Feb" stroke="currentColor" stroke-opacity="0.28" x1="337.3" y1="258" x2="337.3" y2="262"></line>
+          <line data-ts-key="x-tick-rule:string:3:Mar" stroke="currentColor" stroke-opacity="0.28" x1="625.11" y1="258" x2="625.11" y2="262"></line><text data-ts-key="x-tick-label:string:3:Jan" fill="currentColor" fill-opacity="0.68" x="49.48" y="274.8" text-anchor="middle" font-size="11" font-family="inherit">Jan</text><text data-ts-key="x-tick-label:string:3:Feb" fill="currentColor" fill-opacity="0.68" x="337.3" y="274.8" text-anchor="middle" font-size="11" font-family="inherit">Feb</text><text data-ts-key="x-tick-label:string:3:Mar" fill="currentColor" fill-opacity="0.68" x="625.11" y="274.8" text-anchor="middle" font-size="11" font-family="inherit">Mar</text><text data-ts-key="x-label" fill="currentColor" fill-opacity="0.76" x="337.3" y="285" text-anchor="middle" dominant-baseline="hanging" font-size="11" font-weight="600" font-family="inherit">Month</text>
+          <line data-ts-key="y-axis" stroke="currentColor" stroke-opacity="0.28" x1="49.48" y1="37" x2="49.48" y2="258"></line>
+          <line data-ts-key="y-tick-rule:number:0" stroke="currentColor" stroke-opacity="0.28" x1="49.48" y1="258" x2="45.48" y2="258"></line>
+          <line data-ts-key="y-tick-rule:number:100" stroke="currentColor" stroke-opacity="0.28" x1="49.48" y1="202.75" x2="45.48" y2="202.75"></line>
+          <line data-ts-key="y-tick-rule:number:200" stroke="currentColor" stroke-opacity="0.28" x1="49.48" y1="147.5" x2="45.48" y2="147.5"></line>
+          <line data-ts-key="y-tick-rule:number:300" stroke="currentColor" stroke-opacity="0.28" x1="49.48" y1="92.25" x2="45.48" y2="92.25"></line>
+          <line data-ts-key="y-tick-rule:number:400" stroke="currentColor" stroke-opacity="0.28" x1="49.48" y1="37" x2="45.48" y2="37"></line><text data-ts-key="y-tick-label:number:0" fill="currentColor" fill-opacity="0.68" x="41.48" y="258" text-anchor="end" dominant-baseline="middle" font-size="11" font-family="inherit">0</text><text data-ts-key="y-tick-label:number:100" fill="currentColor" fill-opacity="0.68" x="41.48" y="202.75" text-anchor="end" dominant-baseline="middle" font-size="11" font-family="inherit">100</text><text data-ts-key="y-tick-label:number:200" fill="currentColor" fill-opacity="0.68" x="41.48" y="147.5" text-anchor="end" dominant-baseline="middle" font-size="11" font-family="inherit">200</text><text data-ts-key="y-tick-label:number:300" fill="currentColor" fill-opacity="0.68" x="41.48" y="92.25" text-anchor="end" dominant-baseline="middle" font-size="11" font-family="inherit">300</text><text data-ts-key="y-tick-label:number:400" fill="currentColor" fill-opacity="0.68" x="41.48" y="37" text-anchor="end" dominant-baseline="middle" font-size="11" font-family="inherit">400</text><text data-ts-key="y-label" fill="currentColor" fill-opacity="0.76" x="9.5" y="147.5" text-anchor="middle" dominant-baseline="middle" transform="rotate(-90 9.5 147.5)" font-size="11" font-weight="600" font-family="inherit">Visitors</text>
+        </g>
+        <g data-ts-key="legend" class="ts-chart__legend" aria-hidden="true">
+          <circle data-ts-key="legend-dot:string:7:desktop" fill="var(--ts-chart-1)" cx="282.57" cy="10" r="4"></circle><text data-ts-key="legend-label:string:7:desktop" fill="currentColor" fill-opacity="0.76" x="291.57" y="10" text-anchor="start" dominant-baseline="middle" font-size="11" font-family="inherit">desktop</text>
+          <circle data-ts-key="legend-dot:string:6:mobile" fill="var(--ts-chart-2)" cx="353.15" cy="10" r="4"></circle><text data-ts-key="legend-label:string:6:mobile" fill="currentColor" fill-opacity="0.76" x="362.15" y="10" text-anchor="start" dominant-baseline="middle" font-size="11" font-family="inherit">mobile</text>
+        </g>
+        <g data-ts-key="default-focus:line-0" class="ts-chart__focus-layer ts-chart__focus-layer--default" aria-hidden="true" data-ts-focus-layer="over" visibility="hidden"></g>
+      </svg></div>
+  </div>
+  <!---->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
 exports[`Chart > renders with categories objects correctly 1`] = `
 "<div data-slot="root" class="relative w-full text-xs text-muted **:data-reka-popper-content-wrapper:pointer-events-none [--ts-chart-tooltip-background:var(--ui-bg)] [--ts-chart-tooltip-color:var(--ui-text-highlighted)] [--ts-chart-tooltip-border:1px_solid_var(--ui-border)] [--ts-chart-tooltip-border-radius:var(--radius-sm)] [--ts-chart-tooltip-shadow:var(--shadow-sm)] [--ts-chart-tooltip-padding:--spacing(1.5)_--spacing(2.5)] [--ts-chart-tooltip-font:inherit]" style="--ts-chart-1: var(--ui-chart-1); --ts-chart-2: var(--ui-error); --ts-chart-3: var(--ui-chart-3); --ts-chart-4: var(--ui-chart-4); --ts-chart-5: var(--ui-chart-5); --ts-chart-6: var(--ui-chart-6);">
   <div class="ts-chart-host opacity-0 in-data-measured:opacity-100 transition-opacity duration-150 [&amp;_.ts-chart]:rounded-md [&amp;_.ts-chart]:outline-0 [&amp;_.ts-chart]:outline-primary/25 [&amp;_.ts-chart:focus-visible]:outline-3 [&amp;_.ts-chart:focus-visible]:ring [&amp;_.ts-chart:focus-visible]:ring-primary" style="position: relative; height: 300px;">

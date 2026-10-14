@@ -54,6 +54,7 @@ describe('Chart', () => {
     ['with points', { props: { ...props, points: true } }],
     ['without grid', { props: { ...props, grid: false } }],
     ['without axes', { props: { ...props, xAxis: false, yAxis: false } }],
+    ['with axis labels', { props: { ...props, xLabel: 'Month', yLabel: 'Visitors' } }],
     ['without legend', { props: { ...props, legend: false } }],
     ['with colors', { props: { ...props, colors: ['success', '#8b5cf6'] } }],
     ['with categories objects', { props: { ...props, categories: ['desktop', { key: 'mobile', label: 'Mobile', color: 'error' }] } }],
