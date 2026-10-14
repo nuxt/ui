@@ -458,6 +458,27 @@ const chartStyle = computed(() => ({
   width: props.width ? `${props.width}px` : undefined
 }))
 
+// The center slot covers the plot rather than the whole chart, which includes the legend.
+const plotInset = shallowRef<Record<string, string>>()
+
+function onRender({ scene }: { scene: { width: number, height: number, chart: { x: number, y: number, width: number, height: number } } }) {
+  if (!slots.center) {
+    return
+  }
+
+  const { x, y, width, height } = scene.chart
+  const inset = { top: `${y}px`, left: `${x}px`, right: `${scene.width - x - width}px`, bottom: `${scene.height - y - height}px` }
+
+  // Every render calls this, a new object each time would re-render the chart in a loop.
+  if (JSON.stringify(inset) !== JSON.stringify(plotInset.value)) {
+    plotInset.value = inset
+  }
+}
+
+function onSelect(point: ChartPoint<any> | null) {
+  emits('select', point)
+}
+
 function onFocusChange(point: ChartPoint<any> | null) {
   primaryPoint.value = point
   emits('focusChange', point)
@@ -485,7 +506,8 @@ const chartDefinition = computed(() => (props.definition ?? generatedDefinition.
       :class="ui.base({ class: props.ui?.base })"
       :on-focus-change="onFocusChange"
       :on-focus-group-change="onFocusGroupChange"
-      :on-select="(point: ChartPoint<any> | null) => emits('select', point)"
+      :on-select="onSelect"
+      :on-render="onRender"
     />
 
     <UTooltip
@@ -516,7 +538,7 @@ const chartDefinition = computed(() => (props.definition ?? generatedDefinition.
       </template>
     </UTooltip>
 
-    <div v-if="!!slots.center" data-slot="center" :class="ui.center({ class: props.ui?.center })">
+    <div v-if="!!slots.center" data-slot="center" :class="ui.center({ class: props.ui?.center })" :style="plotInset">
       <slot name="center" />
     </div>
   </div>
