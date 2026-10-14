@@ -349,7 +349,7 @@ export default defineNuxtConfig({
   componentMeta: {
     transformers: [(component, code) => {
       // Simplify ui in slot prop types: `leading(props: { ui: Button['ui'] })` -> `leading(props: { ui: object })`
-      code = code.replace(/ui:[^}]+(?=\})/g, 'ui: object')
+      code = code.replace(/\bui: \w+\['ui'\]/g, 'ui: object')
 
       return { component, code }
     }],
