@@ -73,10 +73,11 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
    */
   close?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
-   * Configure the input or hide it with `false`.
+   * Whether to display a filter input or not.
+   * Can be an object to pass additional props to the input.
    * @defaultValue true
    */
-  input?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
+  filter?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
   /**
    * Keyboard shortcut to open the search (used by [`defineShortcuts`](https://ui.nuxt.com/docs/composables/define-shortcuts))
    * @defaultValue 'meta_k'
@@ -170,11 +171,11 @@ const overrides = useComponentOverrides((ui: ContentSearch['AppConfig']['ui']) =
 
 const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'trailingIcon', 'selectedIcon', 'childrenIcon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon', 'back', 'backIcon', 'disabled', 'highlightOnHover', 'loop', 'labelKey', 'descriptionKey', 'preserveGroupOrder', 'virtualize', 'searchDelay'))
 const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal', 'unmountOnHide'))
-const inputProps = computed(() => {
-  if (props.input === false) {
+const filterProps = computed(() => {
+  if (props.filter === false) {
     return false
   }
-  return typeof props.input === 'object' ? props.input : {}
+  return typeof props.filter === 'object' ? props.filter : {}
 })
 
 const getProxySlots = () => omit(slots, ['content'])
@@ -380,7 +381,7 @@ defineExpose({
           v-bind="commandPaletteProps"
           :groups="groups"
           :fuse="fuse"
-          :input="inputProps"
+          :filter="filterProps"
           :ui="transformUI(omit(ui, ['modal']), props.ui)"
           @update:model-value="onSelect"
           @update:open="open = $event"

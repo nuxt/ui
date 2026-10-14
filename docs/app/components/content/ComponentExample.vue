@@ -206,7 +206,7 @@ const urlSearchParams = computed(() => {
                 v-if="option.items?.length"
                 :model-value="get(optionsValues, option.name)"
                 :items="option.items"
-                :search-input="false"
+                :filter="false"
                 :value-key="option.name.toLowerCase().endsWith('color') ? 'value' : undefined"
                 color="neutral"
                 variant="soft"

@@ -54,9 +54,9 @@ describe('SelectMenu', () => {
     ['with id', { props: { ...props, id: 'id' } }],
     ['with name', { props: { ...props, name: 'name' } }],
     ['with placeholder', { props: { ...props, placeholder: 'Search...' } }],
-    ['without searchInput', { props: { ...props, searchInput: false } }],
-    ['with searchInput placeholder', { props: { ...props, searchInput: { placeholder: 'Filter items...' } } }],
-    ['with searchInput icon', { props: { ...props, searchInput: { icon: 'i-lucide-search' } } }],
+    ['without filter', { props: { ...props, filter: false } }],
+    ['with filter placeholder', { props: { ...props, filter: { placeholder: 'Filter items...' } } }],
+    ['with filter icon', { props: { ...props, filter: { icon: 'i-lucide-search' } } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with required', { props: { ...props, required: true } }],
     ['with icon', { props: { icon: 'i-lucide-search' } }],
@@ -250,19 +250,19 @@ describe('SelectMenu', () => {
       // Input.vue's autofocus runs on a macrotask
       await new Promise(resolve => setTimeout(resolve))
 
-      const input = wrapper.find('[data-slot="select-menu-input"] input')
+      const input = wrapper.find('[data-slot="select-menu-filter"] input')
       expect(document.activeElement).toBe(input.element)
 
       wrapper.unmount()
     })
 
-    test('does not focus the search input with searchInput autofocus disabled', async () => {
-      const wrapper = mount(SelectMenu, { attachTo: document.body, props: { open: true, portal: false, items, searchInput: { autofocus: false } } })
+    test('does not focus the search input with filter autofocus disabled', async () => {
+      const wrapper = mount(SelectMenu, { attachTo: document.body, props: { open: true, portal: false, items, filter: { autofocus: false } } })
 
       await flushPromises()
       await new Promise(resolve => setTimeout(resolve))
 
-      const input = wrapper.find('[data-slot="select-menu-input"] input')
+      const input = wrapper.find('[data-slot="select-menu-filter"] input')
       expect(document.activeElement).not.toBe(input.element)
 
       wrapper.unmount()
@@ -298,7 +298,7 @@ describe('SelectMenu', () => {
       await flushPromises()
       await new Promise(resolve => setTimeout(resolve))
 
-      const input = wrapper.find('[data-slot="select-menu-input"] input')
+      const input = wrapper.find('[data-slot="select-menu-filter"] input')
 
       button.focus()
       await flushPromises()

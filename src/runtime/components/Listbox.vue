@@ -209,7 +209,7 @@ const virtualizerProps = toRef(() => {
     estimateSize: getEstimateSize(filteredItems.value, size.value ?? 'md', props.descriptionKey as string, !!slots['item-description'])
   })
 })
-const inputProps = toRef(() => defu(typeof props.filter === 'object' ? props.filter : {}, { placeholder: t('listbox.search'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
+const filterProps = toRef(() => defu(typeof props.filter === 'object' ? props.filter : {}, { placeholder: t('listbox.search'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
 
 const { emitFormChange, emitFormInput, name, size: formFieldSize, color: formFieldColor, id, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<InputProps>(_props, { bind: false })
 
@@ -382,9 +382,9 @@ const filteredItems = computed(() => filteredGroups.value.flatMap(group => group
         :autofocus="props.autofocus"
         :autofocus-delay="props.autofocusDelay"
         :size="size"
-        v-bind="inputProps"
-        data-slot="listbox-input"
-        :class="ui.input({ class: props.ui?.input })"
+        v-bind="filterProps"
+        data-slot="listbox-filter"
+        :class="ui.filter({ class: props.ui?.filter })"
       />
     </ListboxFilter>
 

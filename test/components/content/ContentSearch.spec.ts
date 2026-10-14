@@ -135,7 +135,7 @@ describe('ContentSearch', () => {
     ['with fullscreen', { props: { ...props, fullscreen: true } }],
     ['with search function', { props: { ...props, search: async () => [], files: undefined } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
-    ['with ui', { props: { ...props, ui: { input: '[&>input]:text-lg' } } }],
+    ['with ui', { props: { ...props, ui: { filter: '[&>input]:text-lg' } } }],
     ['with class', { props: { ...props, class: 'sm:max-w-5xl' } }]
   ], async (_, options) => {
     const wrapper = await mountSuspended(ContentSearch, options)

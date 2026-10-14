@@ -128,10 +128,10 @@ describe('CommandPalette', () => {
     ['with close', { props: { ...props, close: true } }],
     ['with closeIcon', { props: { ...props, close: true, closeIcon: 'i-lucide-trash' } }],
     ['with virtualize', { props: { ...props, virtualize: true } }],
-    ['without input', { props: { ...props, input: false } }],
+    ['without filter', { props: { ...props, filter: false } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'divide-strong' } }],
-    ['with ui', { props: { ...props, ui: { input: '[&>input]:h-10' } } }],
+    ['with ui', { props: { ...props, ui: { filter: '[&>input]:h-10' } } }],
     // Slots
     ['with empty slot', { props, slots: { empty: () => 'Empty slot' } }],
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],

@@ -136,10 +136,11 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    */
   backIcon?: IconProps['name']
   /**
-   * Configure the input or hide it with `false`.
+   * Whether to display a filter input or not.
+   * Can be an object to pass additional props to the input.
    * @defaultValue true
    */
-  input?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
+  filter?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
   groups?: G[]
   /**
    * Options for [useFuse](https://vueuse.org/integrations/useFuse).
@@ -257,7 +258,7 @@ defineOptions({ inheritAttrs: false })
 const _props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
   labelKey: 'label',
   descriptionKey: 'description',
-  input: true,
+  filter: true,
   autofocus: true,
   back: true,
   preserveGroupOrder: false,
@@ -594,7 +595,7 @@ function onSelect(e: Event, item: T) {
   </DefineItemTemplate>
 
   <ListboxRoot ref="rootRef" data-slot="command-palette" v-bind="{ ...rootProps, ...$attrs }" :selection-behavior="props.selectionBehavior" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <ListboxFilter v-if="props.input" v-model="searchTerm" as-child>
+    <ListboxFilter v-if="props.filter" v-model="searchTerm" as-child>
       <UInput
         variant="none"
         :size="props.size"
@@ -604,9 +605,9 @@ function onSelect(e: Event, item: T) {
         :loading-icon="props.loadingIcon"
         :trailing-icon="props.trailingIcon"
         :icon="props.icon === false ? undefined : (props.icon ?? appConfig.ui.icons.search)"
-        v-bind="typeof props.input === 'object' ? props.input : {}"
-        data-slot="command-palette-input"
-        :class="ui.input({ class: props.ui?.input })"
+        v-bind="typeof props.filter === 'object' ? props.filter : {}"
+        data-slot="command-palette-filter"
+        :class="ui.filter({ class: props.ui?.filter })"
         @keydown.backspace="onBackspace"
       >
         <template v-if="history?.length && (props.back || !!slots.back)" #leading>
