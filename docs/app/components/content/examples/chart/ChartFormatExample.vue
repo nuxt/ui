@@ -16,7 +16,7 @@ const currency = new Intl.NumberFormat('en-US', { style: 'currency', currency: '
     type="bar"
     :data="data"
     index="month"
-    :categories="['revenue']"
+    :categories="[{ key: 'revenue', label: 'Revenue' }]"
     :format="value => currency.format(value)"
     aria-label="Monthly revenue"
   />

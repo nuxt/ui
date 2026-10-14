@@ -46,11 +46,7 @@ bun add @tanstack/charts
 
 ### Data
 
-Use the `data` prop to pass an array of objects, the `index` prop to set the key used for the x axis and the `categories` prop to set the keys plotted as series.
-
-::tip
-Use the `aria-label` prop to name the chart for assistive technologies.
-::
+Use the `data` prop to pass an array of objects, the `index` prop to set the key used for the x axis and the `categories` prop to set the series, each with the `key` of its values and an optional `label` and `color`.
 
 ::component-code
 ---
@@ -64,7 +60,12 @@ external:
   - data
 externalTypes:
   - ChartData[]
+hide:
+  - aspectRatio
+  - initialWidth
 props:
+  aspectRatio: 2.77
+  initialWidth: 832
   data:
     - month: January
       desktop: 186
@@ -86,9 +87,19 @@ props:
       mobile: 140
   index: month
   categories:
-    - desktop
-    - mobile
+    - key: desktop
+      label: Desktop
+    - key: mobile
+      label: Mobile
 ---
+::
+
+::note
+You can also pass categories as strings, like `['desktop', 'mobile']`, when they read well as names.
+::
+
+::tip
+Use the `aria-label` prop to name the chart for assistive technologies.
 ::
 
 ### Type
@@ -117,8 +128,13 @@ external:
   - data
 externalTypes:
   - ChartData[]
+hide:
+  - aspectRatio
+  - initialWidth
 props:
-  type: bar
+  aspectRatio: 2.77
+  initialWidth: 832
+  type: donut
   data:
     - month: January
       desktop: 186
@@ -140,8 +156,10 @@ props:
       mobile: 140
   index: month
   categories:
-    - desktop
-    - mobile
+    - key: desktop
+      label: Desktop
+    - key: mobile
+      label: Mobile
 ---
 ::
 
@@ -165,8 +183,13 @@ external:
   - data
 externalTypes:
   - ChartData[]
+hide:
+  - aspectRatio
+  - initialWidth
 props:
-  type: area
+  aspectRatio: 2.77
+  initialWidth: 832
+  type: bar
   stacked: true
   data:
     - month: January
@@ -189,8 +212,10 @@ props:
       mobile: 140
   index: month
   categories:
-    - desktop
-    - mobile
+    - key: desktop
+      label: Desktop
+    - key: mobile
+      label: Mobile
 ---
 ::
 
@@ -210,11 +235,22 @@ ignore:
   - data
   - index
   - categories
+items:
+  curve:
+    - linear
+    - monotone
+    - step
 external:
   - data
 externalTypes:
   - ChartData[]
+hide:
+  - aspectRatio
+  - initialWidth
 props:
+  aspectRatio: 2.77
+  initialWidth: 832
+  type: line
   curve: monotone
   data:
     - month: January
@@ -237,8 +273,10 @@ props:
       mobile: 140
   index: month
   categories:
-    - desktop
-    - mobile
+    - key: desktop
+      label: Desktop
+    - key: mobile
+      label: Mobile
 ---
 ::
 
@@ -246,12 +284,8 @@ props:
 
 Use the `colors` prop to set the color of each series with theme colors or any CSS color.
 
-::tip{to="/docs/getting-started/theme/css-variables#chart"}
-The colors default to the `--ui-chart-*` CSS variables, which you can customize in your `main.css` file.
-::
-
 ::note
-The colors follow the `categories` order, or the `data` order with `donut`. When there are more series than colors, they repeat as lighter tints.
+The colors follow the `categories` order, or the `data` order with `donut`. A `color` set on a category takes precedence. When there are more series than colors, they repeat as lighter tints.
 ::
 
 ::component-code
@@ -267,7 +301,12 @@ external:
   - data
 externalTypes:
   - ChartData[]
+hide:
+  - aspectRatio
+  - initialWidth
 props:
+  aspectRatio: 2.77
+  initialWidth: 832
   colors:
     - success
     - '#8b5cf6'
@@ -292,9 +331,15 @@ props:
       mobile: 140
   index: month
   categories:
-    - desktop
-    - mobile
+    - key: desktop
+      label: Desktop
+    - key: mobile
+      label: Mobile
 ---
+::
+
+::tip{to="/docs/getting-started/theme/css-variables#chart"}
+The colors default to the `--ui-chart-*` CSS variables, which you can customize in your `main.css` file.
 ::
 
 ### Points
@@ -317,7 +362,12 @@ external:
   - data
 externalTypes:
   - ChartData[]
+hide:
+  - aspectRatio
+  - initialWidth
 props:
+  aspectRatio: 2.77
+  initialWidth: 832
   points: true
   data:
     - month: January
@@ -340,8 +390,10 @@ props:
       mobile: 140
   index: month
   categories:
-    - desktop
-    - mobile
+    - key: desktop
+      label: Desktop
+    - key: mobile
+      label: Mobile
 ---
 ::
 
@@ -361,7 +413,12 @@ external:
   - data
 externalTypes:
   - ChartData[]
+hide:
+  - aspectRatio
+  - initialWidth
 props:
+  aspectRatio: 2.77
+  initialWidth: 832
   grid: false
   data:
     - month: January
@@ -384,8 +441,10 @@ props:
       mobile: 140
   index: month
   categories:
-    - desktop
-    - mobile
+    - key: desktop
+      label: Desktop
+    - key: mobile
+      label: Mobile
 ---
 ::
 
@@ -405,7 +464,13 @@ external:
   - data
 externalTypes:
   - ChartData[]
+hide:
+  - aspectRatio
+  - initialWidth
 props:
+  aspectRatio: 2.77
+  initialWidth: 832
+  xAxis: false
   yAxis: false
   data:
     - month: January
@@ -428,8 +493,10 @@ props:
       mobile: 140
   index: month
   categories:
-    - desktop
-    - mobile
+    - key: desktop
+      label: Desktop
+    - key: mobile
+      label: Mobile
 ---
 ::
 
@@ -453,7 +520,12 @@ external:
   - data
 externalTypes:
   - ChartData[]
+hide:
+  - aspectRatio
+  - initialWidth
 props:
+  aspectRatio: 2.77
+  initialWidth: 832
   legend: false
   data:
     - month: January
@@ -476,8 +548,10 @@ props:
       mobile: 140
   index: month
   categories:
-    - desktop
-    - mobile
+    - key: desktop
+      label: Desktop
+    - key: mobile
+      label: Mobile
 ---
 ::
 
@@ -485,7 +559,7 @@ props:
 
 Use the `tooltip` prop to customize or hide the [Tooltip](/docs/components/tooltip) displayed on the focused values. Defaults to `true`.
 
-::tip{to="#with-custom-tooltip"}
+::tip{to="#with-tooltip-slot"}
 You can also use the `#tooltip` slot to replace its content.
 ::
 
@@ -501,7 +575,16 @@ external:
   - data
 externalTypes:
   - ChartData[]
+items:
+  tooltip:
+    - true
+    - false
+hide:
+  - aspectRatio
+  - initialWidth
 props:
+  aspectRatio: 2.77
+  initialWidth: 832
   tooltip: false
   data:
     - month: January
@@ -524,8 +607,10 @@ props:
       mobile: 140
   index: month
   categories:
-    - desktop
-    - mobile
+    - key: desktop
+      label: Desktop
+    - key: mobile
+      label: Mobile
 ---
 ::
 
@@ -549,7 +634,12 @@ external:
   - data
 externalTypes:
   - ChartData[]
+hide:
+  - aspectRatio
+  - initialWidth
 props:
+  aspectRatio: 2.77
+  initialWidth: 832
   type: donut
   thickness: 12
   data:
@@ -573,8 +663,10 @@ props:
       mobile: 140
   index: month
   categories:
-    - desktop
-    - mobile
+    - key: desktop
+      label: Desktop
+    - key: mobile
+      label: Mobile
 ---
 ::
 
@@ -584,6 +676,10 @@ Use the `height` prop to set the height of the chart in pixels. Defaults to `300
 
 ::tip
 The chart follows the width of its container. Use the `aspect-ratio` prop to derive the height from the width, or the `width` prop to set a fixed width.
+::
+
+::note
+With a fixed height, the chart fades in once its container is measured. With `aspect-ratio`, the chart rendered on the server is displayed right away.
 ::
 
 ::component-code
@@ -621,23 +717,14 @@ props:
       mobile: 140
   index: month
   categories:
-    - desktop
-    - mobile
+    - key: desktop
+      label: Desktop
+    - key: mobile
+      label: Mobile
 ---
 ::
 
 ## Examples
-
-### With center content
-
-Use the `#center` slot to display content in the middle of a `donut` chart.
-
-::component-example
----
-collapse: true
-name: 'chart-donut-example'
----
-::
 
 ### With formatted values
 
@@ -647,17 +734,6 @@ Use the `format` prop to format the values on the y axis and in the tooltip.
 ---
 collapse: true
 name: 'chart-format-example'
----
-::
-
-### With custom tooltip
-
-Use the `#tooltip` slot to replace the tooltip content. It receives the `title`, the `rows` with their `label`, `value` and `color`, and the focused `points`.
-
-::component-example
----
-collapse: true
-name: 'chart-tooltip-slot-example'
 ---
 ::
 
@@ -686,6 +762,28 @@ When the definition brings its own `tooltip`, it is displayed in place of the `t
 
 ::warning
 Examples importing `d3-*` packages need them installed in your project.
+::
+
+### With center slot
+
+Use the `#center` slot to display content in the middle of a `donut` chart.
+
+::component-example
+---
+collapse: true
+name: 'chart-center-slot-example'
+---
+::
+
+### With tooltip slot
+
+Use the `#tooltip` slot to replace the tooltip content. It receives the `title`, the `rows` with their `label`, `value` and `color`, and the focused `points`.
+
+::component-example
+---
+collapse: true
+name: 'chart-tooltip-slot-example'
+---
 ::
 
 ## API
