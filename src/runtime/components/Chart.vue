@@ -466,31 +466,20 @@ const chartStyle = computed(() => ({
 const plotInset = shallowRef<Record<string, string>>()
 
 // The server draws at `initialWidth` and the SVG keeps its proportions to fit its box. With a fixed height it would
-// show narrower than its container, so it stays hidden until a render at the measured width. With an aspect ratio
-// it already fills the container and shows right away.
+// show narrower than its container, so it stays hidden until the first render in the browser, which is already at
+// the measured width. With an aspect ratio it fills the container and shows right away.
 const measured = shallowRef(false)
 const revealed = computed(() => measured.value || (!props.height && !!props.aspectRatio))
 
-function onRender({ container, scene }: { container: HTMLElement, scene: { width: number, height: number, chart: { x: number, y: number, width: number, height: number } } }) {
-  if (!measured.value && Math.abs(scene.width - container.clientWidth) < 1) {
-    measured.value = true
-  }
+function onRender({ scene }: { scene: { width: number, height: number, chart: { x: number, y: number, width: number, height: number } } }) {
+  measured.value = true
 
   if (!slots.center) {
     return
   }
 
   const { x, y, width, height } = scene.chart
-  const inset = { top: `${y}px`, left: `${x}px`, right: `${scene.width - x - width}px`, bottom: `${scene.height - y - height}px` }
-
-  // Every render calls this, a new object each time would re-render the chart in a loop.
-  if (JSON.stringify(inset) !== JSON.stringify(plotInset.value)) {
-    plotInset.value = inset
-  }
-}
-
-function onSelect(point: ChartPoint<any> | null) {
-  emits('select', point)
+  plotInset.value = { top: `${y}px`, left: `${x}px`, right: `${scene.width - x - width}px`, bottom: `${scene.height - y - height}px` }
 }
 
 function onFocusChange(point: ChartPoint<any> | null) {
@@ -520,7 +509,7 @@ const chartDefinition = computed(() => (props.definition ?? generatedDefinition.
       :class="ui.base({ class: props.ui?.base })"
       :on-focus-change="onFocusChange"
       :on-focus-group-change="onFocusGroupChange"
-      :on-select="onSelect"
+      :on-select="(point: ChartPoint<any> | null) => emits('select', point)"
       :on-render="onRender"
     />
 
