@@ -6,7 +6,7 @@ export default defineTheme({
   },
   variants: {
     active: {
-      true: { base: '[--ui-accent:var(--ui-primary)] text-accent-strong' },
+      true: { base: 'text-primary' },
       false: { base: 'text-muted' }
     },
     disabled: {

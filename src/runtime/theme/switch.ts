@@ -68,7 +68,7 @@ export default defineTheme({
     },
     required: {
       true: {
-        label: `[--ui-accent:var(--ui-error)] after:content-['*'] after:ms-0.5 after:text-accent-default`
+        label: `after:content-['*'] after:ms-0.5 after:text-error`
       }
     },
     disabled: {

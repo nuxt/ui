@@ -8,7 +8,7 @@ export default defineTheme({
     label: 'block font-medium text-default',
     container: 'relative',
     description: 'text-muted',
-    error: 'mt-2 [--ui-accent:var(--ui-error)] text-accent-default',
+    error: 'mt-2 text-error',
     hint: 'text-muted',
     help: 'mt-2 text-muted'
   },
@@ -22,7 +22,7 @@ export default defineTheme({
     },
     required: {
       true: {
-        label: `[--ui-accent:var(--ui-error)] after:content-['*'] after:ms-0.5 after:text-accent-default`
+        label: `after:content-['*'] after:ms-0.5 after:text-error`
       }
     },
     orientation: {
