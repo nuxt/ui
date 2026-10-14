@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Închide',
       noData: 'Nu există date',
       noMatch: 'Nu există date corespunzătoare',
-      placeholder: 'Tastează o comandă sau caută…'
+      search: 'Tastează o comandă sau caută…'
     },
     contentSearch: {
       links: 'Linkuri',

@@ -8,12 +8,11 @@ import type { ButtonProps } from './Button.vue'
 import type { ModalProps } from './Modal.vue'
 import type { CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem } from './CommandPalette.vue'
 import type { LinkPropsKeys } from './Link.vue'
-import type { InputProps } from './Input.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type DashboardSearch = ComponentConfig<typeof theme, AppConfig, 'dashboardSearch'>
 
-export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPaletteItem> extends Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal' | 'unmountOnHide'>, Pick<CommandPaletteProps<CommandPaletteGroup<T>, T>, 'icon' | 'trailingIcon' | 'selectedIcon' | 'childrenIcon' | 'placeholder' | 'autofocus' | 'loading' | 'loadingIcon' | 'closeIcon' | 'back' | 'backIcon' | 'disabled' | 'highlightOnHover' | 'loop' | 'labelKey' | 'descriptionKey' | 'preserveGroupOrder' | 'virtualize' | 'groups'> {
+export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPaletteItem> extends Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal' | 'unmountOnHide'>, Pick<CommandPaletteProps<CommandPaletteGroup<T>, T>, 'selectedIcon' | 'childrenIcon' | 'loading' | 'loadingIcon' | 'closeIcon' | 'back' | 'backIcon' | 'disabled' | 'highlightOnHover' | 'loop' | 'labelKey' | 'descriptionKey' | 'preserveGroupOrder' | 'virtualize' | 'groups'> {
   /**
    * @defaultValue 'md'
    */
@@ -27,10 +26,11 @@ export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPale
   close?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
    * Whether to display a filter input or not.
-   * Can be an object to pass additional props to the input.
+   * Can be an object to pass additional props to the input, set `icon: false` to hide its icon.
+   * `{ placeholder: t('commandPalette.search'), icon: appConfig.ui.icons.search, autofocus: true, variant: 'none' }`{lang="ts-type"}
    * @defaultValue true
    */
-  filter?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
+  filter?: CommandPaletteProps['filter']
   /**
    * Keyboard shortcut to open the search (used by [`defineShortcuts`](https://ui.nuxt.com/docs/composables/define-shortcuts))
    * @defaultValue 'meta_k'
@@ -109,7 +109,7 @@ const colorMode = useColorMode()
 const appConfig = useThemeConfig() as DashboardSearch['AppConfig']
 const overrides = useComponentOverrides((ui: DashboardSearch['AppConfig']['ui']) => ui.dashboardSearch)
 
-const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'trailingIcon', 'selectedIcon', 'childrenIcon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon', 'back', 'backIcon', 'disabled', 'highlightOnHover', 'loop', 'labelKey', 'descriptionKey', 'preserveGroupOrder', 'virtualize', 'searchDelay'))
+const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'selectedIcon', 'childrenIcon', 'loading', 'loadingIcon', 'close', 'closeIcon', 'back', 'backIcon', 'disabled', 'highlightOnHover', 'loop', 'labelKey', 'descriptionKey', 'preserveGroupOrder', 'virtualize', 'searchDelay'))
 const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal', 'unmountOnHide'))
 const filterProps = computed(() => {
   if (props.filter === false) {

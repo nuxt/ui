@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'बंद करें',
       noData: 'कोई डेटा नहीं',
       noMatch: 'कोई मेल खाता डेटा नहीं',
-      placeholder: 'एक आदेश या खोज टाइप करें…'
+      search: 'एक आदेश या खोज टाइप करें…'
     },
     contentSearch: {
       links: 'लिंक्स',

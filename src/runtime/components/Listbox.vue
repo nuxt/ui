@@ -134,8 +134,6 @@ export interface ListboxProps<T extends ArrayOrNested<ListboxItem> = ArrayOrNest
   }
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
-  autofocus?: boolean
-  autofocusDelay?: number
   class?: any
   ui?: Listbox['slots']
 }
@@ -185,7 +183,6 @@ const _props = withDefaults(defineProps<ListboxProps<T, VK, M, Mod>>(), {
   descriptionKey: 'description',
   highlightOnHover: true,
   filter: false,
-  autofocusDelay: 0,
   virtualize: false
 })
 const emits = defineEmits<ListboxEmits<T, VK, M, Mod>>()
@@ -379,8 +376,6 @@ const filteredItems = computed(() => filteredGroups.value.flatMap(group => group
   >
     <ListboxFilter v-if="props.filter" v-model="searchTerm" as-child>
       <UInput
-        :autofocus="props.autofocus"
-        :autofocus-delay="props.autofocusDelay"
         :size="size"
         v-bind="filterProps"
         data-slot="listbox-filter"

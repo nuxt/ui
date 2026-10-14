@@ -57,7 +57,7 @@ export default defineLocale<Messages>({
       close: 'إغلاق',
       noData: 'لا توجد بيانات',
       noMatch: 'لا توجد نتائج مطابقة',
-      placeholder: 'اكتب أمرًا أو ابحث…'
+      search: 'اكتب أمرًا أو ابحث…'
     },
     contentSearch: {
       links: 'الروابط',

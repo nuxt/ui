@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: '關閉',
       noData: '沒有資料',
       noMatch: '沒有相符的資料',
-      placeholder: '輸入命令或搜尋…'
+      search: '輸入命令或搜尋…'
     },
     contentSearch: {
       links: '連結',

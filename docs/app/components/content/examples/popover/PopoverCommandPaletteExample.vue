@@ -41,7 +41,7 @@ const label = ref([])
       <UCommandPalette
         v-model="label"
         multiple
-        placeholder="Search labels..."
+        :filter="{ placeholder: 'Search labels...' }"
         :groups="[{ id: 'labels', items }]"
         :ui="{ filter: '[&>input]:h-8 [&>input]:text-sm' }"
       />

@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Закрыць',
       noData: 'Няма даных',
       noMatch: 'Супадзенняў не знойдзена',
-      placeholder: 'Увядзіце каманду або выканайце пошук…'
+      search: 'Увядзіце каманду або выканайце пошук…'
     },
     contentSearch: {
       links: 'Спасылкі',

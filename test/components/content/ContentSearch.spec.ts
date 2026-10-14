@@ -127,8 +127,8 @@ describe('ContentSearch', () => {
   renderEach(ContentSearch, [
     // Props
     ['with links', { props }],
-    ['with icon', { props: { ...props, icon: 'i-lucide-home' } }],
-    ['with placeholder', { props: { ...props, placeholder: 'Search' } }],
+    ['with filter icon', { props: { ...props, filter: { icon: 'i-lucide-home' } } }],
+    ['with filter placeholder', { props: { ...props, filter: { placeholder: 'Search' } } }],
     ['with loading', { props: { ...props, loading: true } }],
     ['with loadingIcon', { props: { ...props, loading: true, loadingIcon: 'i-lucide-loading' } }],
     ['without colorMode', { props: { ...props, colorMode: false } }],

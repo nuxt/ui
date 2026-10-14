@@ -117,10 +117,10 @@ describe('CommandPalette', () => {
     ['with by', { props: { ...props, by: 'label', defaultValue: groups[0]?.items[0] } }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
     ['with descriptionKey', { props: { groups: groupsWithDescription, descriptionKey: 'label' } }],
-    ['with placeholder', { props: { ...props, placeholder: 'Search...' } }],
+    ['with filter placeholder', { props: { ...props, filter: { placeholder: 'Search...' } } }],
     ['with disabled', { props: { ...props, disabled: true } }],
-    ['with icon', { props: { ...props, icon: 'i-lucide-terminal' } }],
-    ['with trailingIcon', { props: { ...props, trailingIcon: 'i-lucide-settings' } }],
+    ['with filter icon', { props: { ...props, filter: { icon: 'i-lucide-terminal' } } }],
+    ['with filter trailingIcon', { props: { ...props, filter: { trailingIcon: 'i-lucide-settings' } } }],
     ['with childrenIcon', { props: { ...props, childrenIcon: 'i-lucide-arrow-right' } }],
     ['with loading', { props: { ...props, loading: true } }],
     ['with loadingIcon', { props: { ...props, loading: true, loadingIcon: 'i-lucide-loader' } }],
@@ -146,11 +146,11 @@ describe('CommandPalette', () => {
     ['with footer slot', { props, slots: { footer: () => 'Footer slot' } }]
   ])
 
-  it('hides the input icon when icon is false', async () => {
+  it('hides the filter icon when icon is false', async () => {
     const withIcon = await mountSuspended(CommandPalette, { props })
     expect(withIcon.find('[data-slot="input-leadingIcon"]').exists()).toBe(true)
 
-    const withoutIcon = await mountSuspended(CommandPalette, { props: { ...props, icon: false } })
+    const withoutIcon = await mountSuspended(CommandPalette, { props: { ...props, filter: { icon: false } } })
     expect(withoutIcon.find('[data-slot="input-leadingIcon"]').exists()).toBe(false)
   })
 
@@ -186,7 +186,7 @@ describe('CommandPalette', () => {
 
     try {
       const wrapper = await mountSuspended(CommandPalette, {
-        props: { groups: [{ id: 'users', items: [] }], autofocus: false } as any,
+        props: { groups: [{ id: 'users', items: [] }], filter: { autofocus: false } } as any,
         attachTo: document.body
       })
       await new Promise(resolve => setTimeout(resolve, 60))

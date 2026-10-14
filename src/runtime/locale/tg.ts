@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Бастан',
       noData: 'Маълумот нест',
       noMatch: 'Маълумоти мувофиқ ёфт нашуд',
-      placeholder: 'Фармонро нависед ё ҷустуҷӯ кунед…'
+      search: 'Фармонро нависед ё ҷустуҷӯ кунед…'
     },
     contentSearch: {
       links: 'Пайвандҳо',

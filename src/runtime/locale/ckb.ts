@@ -57,7 +57,7 @@ export default defineLocale<Messages>({
       close: 'داخستن',
       noData: 'هیچ داتایەک نییە',
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
-      placeholder: 'فەرمانێک بنووسە یان بگەڕێ…'
+      search: 'فەرمانێک بنووسە یان بگەڕێ…'
     },
     contentSearch: {
       links: 'بەستەرەکان',

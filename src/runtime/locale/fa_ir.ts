@@ -57,7 +57,7 @@ export default defineLocale<Messages>({
       close: 'بستن',
       noData: 'داده‌ای موجود نیست',
       noMatch: 'داده‌ای یافت نشد',
-      placeholder: 'یک دستور وارد کنید یا جستجو کنید…'
+      search: 'یک دستور وارد کنید یا جستجو کنید…'
     },
     contentSearch: {
       links: 'پیوندها',

@@ -63,5 +63,5 @@ const groups = computed<CommandPaletteGroup<CommandPaletteItem>[]>(() => [
 </script>
 
 <template>
-  <UCommandPalette :groups="groups" placeholder="Search users and actions..." :autofocus="false" class="h-71.5" />
+  <UCommandPalette :groups="groups" :filter="{ placeholder: 'Search users and actions...', autofocus: false }" class="h-71.5" />
 </template>

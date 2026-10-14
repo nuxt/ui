@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Κλείσιμο',
       noData: 'Δεν υπάρχουν δεδομένα',
       noMatch: 'Δεν βρέθηκαν δεδομένα',
-      placeholder: 'Πληκτρολογήστε μια εντολή ή αναζητήστε…'
+      search: 'Πληκτρολογήστε μια εντολή ή αναζητήστε…'
     },
     contentSearch: {
       links: 'Σύνδεσμοι',

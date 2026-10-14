@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Жабуу',
       noData: 'Маалымат жок',
       noMatch: 'Эч нерсе табылган жок',
-      placeholder: 'Буйрук киргизиңиз же издөө…'
+      search: 'Буйрук киргизиңиз же издөө…'
     },
     contentSearch: {
       links: 'Шилтемелер',

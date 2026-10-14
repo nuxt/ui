@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Zavrieť',
       noData: 'Žiadne dáta',
       noMatch: 'Žiadna zhoda',
-      placeholder: 'Zadajte príkaz alebo vyhľadajte…'
+      search: 'Zadajte príkaz alebo vyhľadajte…'
     },
     contentSearch: {
       links: 'Odkazy',

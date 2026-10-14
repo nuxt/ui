@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Sulje',
       noData: 'Ei tietoja',
       noMatch: 'Ei vastaavia tietoja',
-      placeholder: 'Kirjoita komento tai hae…'
+      search: 'Kirjoita komento tai hae…'
     },
     contentSearch: {
       links: 'Linkit',

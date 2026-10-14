@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Хаах',
       noData: 'Мэдээлэл байхгүй',
       noMatch: 'Тохирох мэдээлэл олдсонгүй',
-      placeholder: 'Комманд бичих эсвэл хайлт хийх…'
+      search: 'Комманд бичих эсвэл хайлт хийх…'
     },
     contentSearch: {
       links: 'Холбоосууд',

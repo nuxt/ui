@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Tutup',
       noData: 'Tiada data',
       noMatch: 'Tiada data yang sepadan',
-      placeholder: 'Taip arahan atau carian…'
+      search: 'Taip arahan atau carian…'
     },
     contentSearch: {
       links: 'Pautan',

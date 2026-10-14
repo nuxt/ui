@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: '닫기',
       noData: '데이터가 없습니다.',
       noMatch: '일치하는 데이터가 없습니다.',
-      placeholder: '명령을 입력하거나 검색…'
+      search: '명령을 입력하거나 검색…'
     },
     contentSearch: {
       links: '링크',

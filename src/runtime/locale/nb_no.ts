@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Lukk',
       noData: 'Ingen data',
       noMatch: 'Ingen samsvarende data',
-      placeholder: 'Skriv inn en kommando eller søk…'
+      search: 'Skriv inn en kommando eller søk…'
     },
     contentSearch: {
       links: 'Lenker',

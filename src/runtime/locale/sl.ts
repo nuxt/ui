@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Zapri',
       noData: 'Ni podatkov',
       noMatch: 'Ni ujemanj',
-      placeholder: 'Vpiši ukaz ali išči…'
+      search: 'Vpiši ukaz ali išči…'
     },
     contentSearch: {
       links: 'Povezave',

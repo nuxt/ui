@@ -146,7 +146,7 @@ const groups = [{
 
   <UModal v-model:open="isOpen">
     <template #content>
-      <UCommandPalette :groups="groups" placeholder="Type a command or search..." close @update:open="isOpen = $event" />
+      <UCommandPalette :groups="groups" close @update:open="isOpen = $event" />
     </template>
   </UModal>
 </template>

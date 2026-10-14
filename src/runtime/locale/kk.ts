@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Жабу',
       noData: 'Деректер жоқ',
       noMatch: 'Сәйкес келетін деректер жоқ',
-      placeholder: 'Команда енгізіңіз немесе іздеңіз…'
+      search: 'Команда енгізіңіз немесе іздеңіз…'
     },
     contentSearch: {
       links: 'Сілтемелер',

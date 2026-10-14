@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: '閉じる',
       noData: 'データがありません',
       noMatch: '一致するデータがありません',
-      placeholder: 'コマンドを入力するか検索…'
+      search: 'コマンドを入力するか検索…'
     },
     contentSearch: {
       links: 'リンク',

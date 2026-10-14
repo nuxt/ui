@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Stäng',
       noData: 'Inga data',
       noMatch: 'Inga matchande data',
-      placeholder: 'Skriv ett kommando eller sök…'
+      search: 'Skriv ett kommando eller sök…'
     },
     contentSearch: {
       links: 'Länkar',

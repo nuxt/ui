@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Sulge',
       noData: 'Pole andmeid',
       noMatch: 'Pole vastavaid andmeid',
-      placeholder: 'Sisesta käsk või otsi…'
+      search: 'Sisesta käsk või otsi…'
     },
     contentSearch: {
       links: 'Lingid',

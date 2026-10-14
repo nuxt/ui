@@ -332,7 +332,15 @@ ${props.slots.default}`
 
       code += value ? ` ${name}` : ` :${name}="false"`
     } else if (typeof value === 'object') {
-      const parsedValue = !props.external?.includes(key) ? json5.stringify(value, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1') : key
+      // A hidden key of an object prop, like `filter.autofocus`, is left out of the code
+      const entries = Array.isArray(value) ? [] : Object.entries(value)
+      const visibleEntries = entries.filter(([subKey]) => !props.hide?.includes(`${key}.${subKey}`))
+      if (entries.length && !visibleEntries.length) {
+        continue
+      }
+
+      const visibleValue = visibleEntries.length < entries.length ? Object.fromEntries(visibleEntries) : value
+      const parsedValue = !props.external?.includes(key) ? json5.stringify(visibleValue, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1') : key
 
       code += ` :${name}="${parsedValue}"`
     } else {
