@@ -1,89 +1,69 @@
 import { colorVariant } from './color'
-import { fieldGroupVariantWithRoot } from './field-group'
+import { fieldGroupVariantRoot } from './field-group'
 import { defineTheme } from '../utils/theme'
 
-// The focus classes below, for a container whose segments or items take the focus
-// (InputDate, InputTime, InputTags), spelled out so Tailwind finds them
-const containerFocus: Record<string, string> = {
-  'focus:bg-soft': 'has-focus:bg-soft',
-  'focus:outline-none': 'has-focus:outline-none',
-  'focus-visible:outline-3': 'has-focus-visible:outline-3',
-  'focus-visible:ring-accent': 'has-focus-visible:ring-accent'
-}
-
-export function replaceFocus(classes: string): string {
-  return classes.split(' ').map(cls => containerFocus[cls] ?? cls).join(' ')
-}
-
+// `root` is the box and has no padding: `base`, the native input, has the one of
+// the size, and the leading and the trailing bring their own. The box follows the
+// state of its direct children, so a button in the leading doesn't light it.
 export default defineTheme({
   slots: {
-    root: 'relative inline-flex items-center',
-    base: 'w-full rounded-md border-0 appearance-none text-strong placeholder:text-faint disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
-    leading: 'absolute inset-y-0 inset-s-0 flex items-center',
+    // The browser paints its autofill tint on the input alone: `bg-clip-text` keeps
+    // it behind the glyphs, and the box takes a tint of its own
+    root: 'relative inline-flex items-center rounded-md cursor-text has-[>:autofill]:bg-accent-soft has-[>:disabled]:cursor-not-allowed has-[>:disabled]:opacity-75 transition-colors',
+    base: 'w-full min-w-0 flex-1 self-stretch border-0 appearance-none bg-transparent bg-clip-text text-strong outline-none placeholder:text-faint px-(--ui-control-px) py-(--ui-control-py) disabled:cursor-not-allowed',
+    // After the input in the DOM, so the input keeps the first tab stop. An inline
+    // box sits on a line of text by its first item: the invisible character gives
+    // the leading the baseline of the text, so an icon doesn't move the box
+    leading: `order-first flex items-center ps-(--ui-control-px) has-[>button]:ps-1 before:content-['x'] before:w-0 before:invisible`,
     leadingIcon: 'shrink-0 text-faint',
     leadingAvatar: 'shrink-0',
-    trailing: 'absolute inset-y-0 inset-e-0 flex items-center',
+    // A button has its own padding, so it sits closer to the edge
+    trailing: 'flex items-center pe-(--ui-control-px) has-[>button]:pe-1',
     trailingIcon: 'shrink-0 text-faint'
   },
   variants: {
-    ...fieldGroupVariantWithRoot,
-    // The tokens go on the outermost slot, so the icons next to the input read them
+    ...fieldGroupVariantRoot,
     size: {
       xs: {
-        root: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)]',
-        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm/4',
-        leading: 'ps-(--ui-control-px)',
-        trailing: 'pe-(--ui-control-px)',
+        root: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] text-sm/4',
         leadingIcon: 'size-(--ui-control-icon)',
         trailingIcon: 'size-(--ui-control-icon)'
       },
       sm: {
-        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)]',
-        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm/4',
-        leading: 'ps-(--ui-control-px)',
-        trailing: 'pe-(--ui-control-px)',
+        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)] text-sm/4',
         leadingIcon: 'size-(--ui-control-icon)',
         trailingIcon: 'size-(--ui-control-icon)'
       },
       md: {
-        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)]',
-        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base/5',
-        leading: 'ps-(--ui-control-px)',
-        trailing: 'pe-(--ui-control-px)',
+        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] text-base/5',
         leadingIcon: 'size-(--ui-control-icon)',
         trailingIcon: 'size-(--ui-control-icon)'
       },
       lg: {
-        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)]',
-        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base/5',
-        leading: 'ps-(--ui-control-px)',
-        trailing: 'pe-(--ui-control-px)',
+        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)] text-base/5',
         leadingIcon: 'size-(--ui-control-icon)',
         trailingIcon: 'size-(--ui-control-icon)'
       },
       xl: {
-        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)]',
-        base: 'px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base',
-        leading: 'ps-(--ui-control-px)',
-        trailing: 'pe-(--ui-control-px)',
+        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)] text-base',
         leadingIcon: 'size-(--ui-control-icon)',
         trailingIcon: 'size-(--ui-control-icon)'
       }
     },
     variant: {
-      outline: { base: 'bg-default ring ring-inset ring-strong outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent' },
-      soft: { base: 'bg-tint hover:bg-soft focus:bg-soft disabled:bg-tint outline-accent-focus focus-visible:outline-3' },
-      subtle: { base: 'bg-soft ring ring-inset ring-strong outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent' },
-      ghost: { base: 'bg-transparent hover:bg-soft focus:bg-soft disabled:bg-transparent dark:disabled:bg-transparent outline-accent-focus focus-visible:outline-3' },
-      none: { base: 'bg-transparent focus:outline-none' }
+      outline: { root: 'bg-default ring ring-inset ring-strong outline-accent-focus has-[>:focus-visible]:outline-3 has-[>:focus-visible]:ring-accent' },
+      soft: { root: 'bg-tint hover:bg-soft has-[>:focus]:bg-soft has-[>:disabled]:bg-tint outline-accent-focus has-[>:focus-visible]:outline-3' },
+      subtle: { root: 'bg-soft ring ring-inset ring-strong outline-accent-focus has-[>:focus-visible]:outline-3 has-[>:focus-visible]:ring-accent' },
+      ghost: { root: 'bg-transparent hover:bg-soft has-[>:focus]:bg-soft has-[>:disabled]:bg-transparent dark:has-[>:disabled]:bg-transparent outline-accent-focus has-[>:focus-visible]:outline-3' },
+      none: { root: 'bg-transparent' }
     },
     color: colorVariant({ root: '' }),
-    // Room for the icon: the padding, the icon and the gap
+    // Next to a leading or a trailing, the padding of the input is the gap to it
     leading: {
-      true: { base: 'ps-[calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]' }
+      true: { base: 'ps-(--ui-control-gap)' }
     },
     trailing: {
-      true: { base: 'pe-[calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]' }
+      true: { base: 'pe-(--ui-control-gap)' }
     },
     // The component turns it off on the trailing icon when the leading one is the loading icon
     loading: {
@@ -93,7 +73,7 @@ export default defineTheme({
       }
     },
     highlight: {
-      true: { base: 'ring ring-inset ring-accent' }
+      true: { root: 'ring ring-inset ring-accent' }
     },
     fixed: {
       false: ''
@@ -105,19 +85,19 @@ export default defineTheme({
   compoundVariants: [{
     fixed: false,
     size: 'xs',
-    class: { base: 'md:text-xs' }
+    class: { root: 'md:text-xs' }
   }, {
     fixed: false,
     size: 'sm',
-    class: { base: 'md:text-xs' }
+    class: { root: 'md:text-xs' }
   }, {
     fixed: false,
     size: 'md',
-    class: { base: 'md:text-sm' }
+    class: { root: 'md:text-sm' }
   }, {
     fixed: false,
     size: 'lg',
-    class: { base: 'md:text-sm' }
+    class: { root: 'md:text-sm' }
   }],
   defaultVariants: {
     size: 'md',

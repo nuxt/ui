@@ -155,7 +155,7 @@ describe('\'*\' default variants', () => {
     })
 
     expect(wrapper.find('[data-slot="input"]').classes()).toContain('[--ui-accent:var(--ui-error)]')
-    expect(wrapper.find('[data-slot="input-base"]').classes()).toContain('text-sm/4')
+    expect(wrapper.find('[data-slot="input"]').classes()).toContain('text-sm/4')
   })
 
   it('lets a component\'s own key win', async () => {
@@ -206,7 +206,7 @@ describe('\'*\' default variants', () => {
       `
     })
 
-    expect(wrapper.find('[data-slot="input-base"]').classes()).toContain('text-base')
+    expect(wrapper.find('[data-slot="input"]').classes()).toContain('text-base')
     expect(wrapper.find('[data-slot="button"]').classes()).toContain('text-base')
     expect(wrapper.find('[data-slot="avatar-group-base"]').classes()).toContain('size-10')
   })

@@ -43,8 +43,8 @@ variants: {
       leadingIcon: 'size-(--ui-control-icon)'
     }
   },
-  leading: {
-    true: { base: 'ps-[calc(var(--ui-control-px)+var(--ui-control-icon)+var(--ui-control-gap))]' }
+  square: {
+    true: { base: 'px-(--ui-control-py)' }
   }
 }
 ```
@@ -53,7 +53,17 @@ The classes that read the padding, the gap and the icon size stay in the `size` 
 
 A variant that reads a variable for another purpose, `square`, `leading`, `orientation`, has to be declared after the one that sets the same property, since the last variant wins: `square` after what sets the horizontal padding.
 
-Reach for this before a `size` × something compound: the size writes a value, another variant picks the property that reads it. A compound is hard to override from an app config, a token is one class. A theme that extends Input and drops its `root` (Select, InputDate, InputTime) appends the tokens to `base`.
+Reach for this before a `size` × something compound: the size writes a value, another variant picks the property that reads it. A compound is hard to override from an app config, a token is one class.
+
+## Fields
+
+The box of a field is its outermost element, and what it holds is in its flow. A `div` at the root is `root` and a native element is `base`. Nothing floats over the input, so a theme never reserves a padding for an icon: the `leading` and the `trailing` take the room of their content.
+
+- Input, Textarea, InputNumber, InputMenu and InputTags wrap a native element. `root` is the box and has no padding. `base` is the native element with the padding of the size, and the `leading` and the `trailing` bring their own. Next to one of them, the padding of the input on that side is the gap. This way the input covers the box wherever there is no `leading` or `trailing`, and a click or a text selection starts on it.
+- The box follows the state of its direct child: `has-[>:focus-visible]`, `has-[>:disabled]`. A button in the `leading` or the `trailing` is one level down and doesn't light it. InputTags and InputMenu use `has-[input:focus-visible]:` instead, since their input can be two levels down.
+- Select, SelectMenu, InputDate and InputTime are the box themselves, with the padding and the gap of the size. On Select and SelectMenu the box is a `<button>`, so it is `base`. On InputDate and InputTime it is a `div` around the segments, so it is `root`. Each has its own theme: SelectMenu extends Select and InputTime extends InputDate.
+- The `leading` comes after the native element in the DOM and is placed with `order-first`, so the input keeps the first tab stop. It starts with an invisible character (`before:content-['x'] before:w-0 before:invisible`): an inline box sits on a line of text by its first item, and this gives the `leading` the baseline of the text instead of the bottom of an icon.
+- A field whose content wraps (InputTags, InputMenu with `multiple`) puts it in a `tags` container, which takes the padding of the size in place of the input, so the `leading` and the `trailing` stay centered on the box.
 
 ## Static Theme
 

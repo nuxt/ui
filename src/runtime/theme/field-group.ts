@@ -1,25 +1,20 @@
 import { defineTheme } from '../utils/theme'
 
-const horizontal = 'not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none focus-visible:z-[1]'
-const vertical = 'not-only:first:rounded-b-none not-only:last:rounded-t-none not-last:not-first:rounded-none focus-visible:z-[1]'
+const horizontal = 'not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none'
+const vertical = 'not-only:first:rounded-b-none not-only:last:rounded-t-none not-last:not-first:rounded-none'
 
 export const fieldGroupVariant = {
   fieldGroup: {
-    horizontal: { base: horizontal },
-    vertical: { base: vertical }
+    horizontal: { base: `${horizontal} focus-visible:z-[1]` },
+    vertical: { base: `${vertical} focus-visible:z-[1]` }
   }
 }
 
-export const fieldGroupVariantWithRoot = {
+// For a field whose `root` is a box around what takes the focus
+export const fieldGroupVariantRoot = {
   fieldGroup: {
-    horizontal: {
-      root: 'group has-focus-visible:z-[1]',
-      base: 'group-not-only:group-first:rounded-e-none group-not-only:group-last:rounded-s-none group-not-last:group-not-first:rounded-none'
-    },
-    vertical: {
-      root: 'group has-focus-visible:z-[1]',
-      base: 'group-not-only:group-first:rounded-b-none group-not-only:group-last:rounded-t-none group-not-last:group-not-first:rounded-none'
-    }
+    horizontal: { root: `${horizontal} has-focus-visible:z-1` },
+    vertical: { root: `${vertical} has-focus-visible:z-1` }
   }
 }
 
