@@ -56,7 +56,7 @@ export default defineTheme({
     },
     required: {
       true: {
-        legend: `after:content-['*'] after:ms-0.5 after:text-error-default`
+        legend: `[--ui-accent:var(--ui-error)] after:content-['*'] after:ms-0.5 after:text-accent-default`
       }
     },
     highlight: {

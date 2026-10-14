@@ -7,7 +7,7 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'group relative inline-flex items-center rounded-md select-none text-strong data-disabled:cursor-not-allowed transition-colors',
-    segment: 'rounded-sm text-center outline-hidden data-placeholder:text-faint data-[segment=literal]:text-muted data-invalid:text-error-default data-disabled:cursor-not-allowed data-disabled:opacity-75 transition-colors',
+    segment: 'rounded-sm text-center outline-hidden data-placeholder:text-faint data-[segment=literal]:text-muted [--ui-accent:var(--ui-error)] data-invalid:text-accent-default data-disabled:cursor-not-allowed data-disabled:opacity-75 transition-colors',
     // After the segments in the DOM, so they keep the first tab stops. The invisible
     // character gives the leading the baseline of the text, see `input.ts`
     leading: `order-first flex items-center before:content-['x'] before:w-0 before:invisible`,
