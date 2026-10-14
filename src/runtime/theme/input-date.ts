@@ -1,52 +1,85 @@
-import input, { replaceFocus } from './input'
 import { colorVariant } from './color'
-import { fieldGroupVariant } from './field-group'
-import { extendTheme } from '../utils/theme'
+import { fieldGroupVariantRoot } from './field-group'
+import { defineTheme } from '../utils/theme'
 
-export default extendTheme(input, {
+// `root` is the box, a `div` around the segments. They take the focus, so the
+// box follows it with `has-focus`.
+export default defineTheme({
   slots: {
-    root: () => undefined,
-    base: () => 'group relative inline-flex items-center rounded-md select-none text-strong transition-colors',
+    root: 'group relative inline-flex items-center rounded-md select-none text-strong data-disabled:cursor-not-allowed transition-colors',
     segment: 'rounded-sm text-center outline-hidden data-placeholder:text-faint data-[segment=literal]:text-muted data-invalid:text-error-default data-disabled:cursor-not-allowed data-disabled:opacity-75 transition-colors',
+    // After the segments in the DOM, so they keep the first tab stops. The invisible
+    // character gives the leading the baseline of the text, see `input.ts`
+    leading: `order-first flex items-center before:content-['x'] before:w-0 before:invisible`,
+    leadingIcon: 'shrink-0 text-faint',
+    leadingAvatar: 'shrink-0',
+    trailing: 'ms-auto flex items-center',
+    trailingIcon: 'shrink-0 text-faint',
     separatorIcon: 'shrink-0 size-4 text-muted'
   },
   variants: {
-    ...fieldGroupVariant,
-    // No `root` slot here, so the color and the size tokens go on `base`
-    color: () => colorVariant({ base: '' }),
+    ...fieldGroupVariantRoot,
+    // The segments sit closer than the content of another field
     size: {
       xs: {
-        root: () => undefined,
-        base: (prev: string) => [prev, input.variants.size.xs.root, 'gap-0.25'],
+        root: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(0.25)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--text-xs)+var(--ui-control-text-step,0px))]/4',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)',
         segment: 'data-[segment=day]:w-8 data-[segment=month]:w-8 data-[segment=year]:w-10'
       },
       sm: {
-        root: () => undefined,
-        base: (prev: string) => [prev, input.variants.size.sm.root, 'gap-0.5'],
+        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(0.5)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--text-xs)+var(--ui-control-text-step,0px))]/4',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)',
         segment: 'data-[segment=day]:w-8 data-[segment=month]:w-8 data-[segment=year]:w-10'
       },
       md: {
-        root: () => undefined,
-        base: (prev: string) => [prev, input.variants.size.md.root, 'gap-0.5'],
+        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(0.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--text-sm)+var(--ui-control-text-step,0px))]/5',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)',
         segment: 'data-[segment=day]:w-9 data-[segment=month]:w-9 data-[segment=year]:w-11'
       },
       lg: {
-        root: () => undefined,
-        base: (prev: string) => [prev, input.variants.size.lg.root, 'gap-0.75'],
+        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(0.75)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--text-sm)+var(--ui-control-text-step,0px))]/5',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)',
         segment: 'data-[segment=day]:w-9 data-[segment=month]:w-9 data-[segment=year]:w-11'
       },
       xl: {
-        root: () => undefined,
-        base: (prev: string) => [prev, input.variants.size.xl.root, 'gap-0.75'],
+        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(0.75)] [--ui-control-icon:--spacing(6)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base',
+        leadingIcon: 'size-(--ui-control-icon)',
+        trailingIcon: 'size-(--ui-control-icon)',
         segment: 'data-[segment=day]:w-10 data-[segment=month]:w-10 data-[segment=year]:w-12'
       }
     },
-    variant: (prev: typeof input.variants.variant) => Object.fromEntries(
-      Object.entries(prev).map(([key, value]) => [key, { base: replaceFocus(value.base), segment: key === 'outline' || key === 'none' ? 'focus:bg-soft' : 'focus:bg-strong' }])
-    ) as Record<keyof typeof prev, { base: string, segment: string }>
+    variant: {
+      outline: { root: 'bg-default ring ring-inset ring-strong outline-accent-focus has-focus-visible:outline-3 has-focus-visible:ring-accent', segment: 'focus:bg-soft' },
+      soft: { root: 'bg-tint hover:bg-soft has-focus:bg-soft data-disabled:bg-tint outline-accent-focus has-focus-visible:outline-3', segment: 'focus:bg-strong' },
+      subtle: { root: 'bg-soft ring ring-inset ring-strong outline-accent-focus has-focus-visible:outline-3 has-focus-visible:ring-accent', segment: 'focus:bg-strong' },
+      ghost: { root: 'bg-transparent hover:bg-soft has-focus:bg-soft data-disabled:bg-transparent dark:data-disabled:bg-transparent outline-accent-focus has-focus-visible:outline-3', segment: 'focus:bg-strong' },
+      none: { root: 'bg-transparent has-focus:outline-none', segment: 'focus:bg-soft' }
+    },
+    color: colorVariant({ root: '' }),
+    leading: {
+      true: ''
+    },
+    trailing: {
+      true: ''
+    },
+    // The component turns it off on the trailing icon when the leading one is the loading icon
+    loading: {
+      true: {
+        leadingIcon: 'animate-spin',
+        trailingIcon: 'animate-spin'
+      }
+    },
+    highlight: {
+      true: { root: 'ring ring-inset ring-accent' }
+    }
   },
-  compoundVariants: (prev: typeof input.compoundVariants) => [...prev.map(item => ({
-    ...item,
-    class: typeof item.class.base === 'string' ? { ...item.class, base: replaceFocus(item.class.base) } : item.class
-  }))]
+  defaultVariants: {
+    size: 'md',
+    color: 'primary',
+    variant: 'outline'
+  }
 })

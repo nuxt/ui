@@ -42,8 +42,6 @@ export interface InputProps<T extends InputValue = InputValue, Mod extends Model
   disabled?: boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
-  /** Keep the mobile text size on all breakpoints. */
-  fixed?: boolean
   modelValue?: ApplyModifiers<T, Mod>
   defaultValue?: ApplyModifiers<T, Mod>
   modelModifiers?: Mod
@@ -73,6 +71,7 @@ import { useFieldGroup } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { isEmpty, looseToNumber } from '../utils'
+import { isFieldClick } from '../utils/field'
 import { tv } from '../utils/tv'
 import { getAvatarSize } from '../utils/size'
 import UIcon from './Icon.vue'
@@ -119,7 +118,6 @@ const ui = computed(() => tv(theme, overrides.value)({
   size: size.value,
   loading: props.loading,
   highlight: highlight.value,
-  fixed: props.fixed,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   fieldGroup: orientation.value
@@ -177,6 +175,14 @@ function onBlur(event: FocusEvent) {
   emits('blur', event)
 }
 
+// The box looks like the input, so a click on an icon or on plain leading or
+// trailing content goes to the input. A control in there keeps its own click.
+function onRootClick(event: MouseEvent) {
+  if (isFieldClick(event)) {
+    inputRef.value?.focus()
+  }
+}
+
 function autoFocus() {
   if (props.autofocus) {
     inputRef.value?.focus()
@@ -199,7 +205,7 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'input'" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'input'" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="onRootClick">
     <input
       :id="id"
       ref="inputRef"

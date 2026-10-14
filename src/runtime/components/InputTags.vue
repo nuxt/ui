@@ -44,8 +44,6 @@ export interface InputTagsProps<T extends InputTagItem = InputTagItem> extends P
   deleteIcon?: IconProps['name']
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
-  /** Keep the mobile text size on all breakpoints. */
-  fixed?: boolean
   class?: any
   ui?: InputTags['slots']
 }
@@ -76,6 +74,7 @@ import { useComponentProps, useComponentOverrides, useThemeConfig } from '../com
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
+import { isFieldClick } from '../utils/field'
 import { tv } from '../utils/tv'
 import { getAvatarSize } from '../utils/size'
 import UIcon from './Icon.vue'
@@ -120,7 +119,6 @@ const ui = computed(() => tv(theme, overrides.value)({
   size: size.value,
   loading: props.loading,
   highlight: highlight.value,
-  fixed: props.fixed,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   fieldGroup: orientation.value
@@ -155,6 +153,14 @@ function onUpdate(value: T[]) {
   emitFormInput()
 }
 
+// The box looks like the input, so a click on its padding, on an icon or on plain
+// leading or trailing content goes to the input. A tag keeps its own click.
+function onRootClick(event: MouseEvent) {
+  if (isFieldClick(event)) {
+    inputRef.value?.$el?.focus()
+  }
+}
+
 function onBlur(event: FocusEvent) {
   emits('blur', event)
   emitFormBlur()
@@ -178,44 +184,47 @@ defineExpose({
     :model-value="props.modelValue"
     :default-value="props.defaultValue"
     :data-slot="($attrs['data-slot'] as string | undefined) ?? 'input-tags'"
-    :class="ui.root({ class: [ui.base({ class: props.ui?.base }), props.ui?.root, props.class] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
     v-bind="rootProps"
     :name="name"
     :disabled="disabled"
     @update:model-value="onUpdate"
+    @click="onRootClick"
   >
-    <TagsInputItem
-      v-for="(item, index) in tags"
-      :key="index"
-      :value="item"
-      data-slot="input-tags-item"
-      :class="ui.item({ class: [props.ui?.item] })"
-    >
-      <TagsInputItemText data-slot="input-tags-itemText" :class="ui.itemText({ class: [props.ui?.itemText] })">
-        <slot v-if="!!slots['item-text']" name="item-text" :item="(item as T)" :index="index" :ui="ui" />
-      </TagsInputItemText>
-
-      <TagsInputItemDelete
-        data-slot="input-tags-itemDelete"
-        :class="ui.itemDelete({ class: [props.ui?.itemDelete] })"
-        :disabled="disabled"
+    <div data-slot="input-tags-tags" :class="ui.tags({ class: props.ui?.tags })">
+      <TagsInputItem
+        v-for="(item, index) in tags"
+        :key="index"
+        :value="item"
+        data-slot="input-tags-item"
+        :class="ui.item({ class: [props.ui?.item] })"
       >
-        <slot name="item-delete" :item="(item as T)" :index="index" :ui="ui">
-          <UIcon :name="props.deleteIcon || appConfig.ui.icons.close" data-slot="input-tags-itemDeleteIcon" :class="ui.itemDeleteIcon({ class: [props.ui?.itemDeleteIcon] })" />
-        </slot>
-      </TagsInputItemDelete>
-    </TagsInputItem>
+        <TagsInputItemText data-slot="input-tags-itemText" :class="ui.itemText({ class: [props.ui?.itemText] })">
+          <slot v-if="!!slots['item-text']" name="item-text" :item="(item as T)" :index="index" :ui="ui" />
+        </TagsInputItemText>
 
-    <TagsInputInput
-      ref="inputRef"
-      v-bind="{ ...$attrs, ...ariaAttrs }"
-      :placeholder="props.placeholder"
-      :max-length="props.maxLength"
-      data-slot="input-tags-input"
-      :class="ui.input({ class: props.ui?.input })"
-      @blur="onBlur"
-      @focus="onFocus"
-    />
+        <TagsInputItemDelete
+          data-slot="input-tags-itemDelete"
+          :class="ui.itemDelete({ class: [props.ui?.itemDelete] })"
+          :disabled="disabled"
+        >
+          <slot name="item-delete" :item="(item as T)" :index="index" :ui="ui">
+            <UIcon :name="props.deleteIcon || appConfig.ui.icons.close" data-slot="input-tags-itemDeleteIcon" :class="ui.itemDeleteIcon({ class: [props.ui?.itemDeleteIcon] })" />
+          </slot>
+        </TagsInputItemDelete>
+      </TagsInputItem>
+
+      <TagsInputInput
+        ref="inputRef"
+        v-bind="{ ...$attrs, ...ariaAttrs }"
+        :placeholder="props.placeholder"
+        :max-length="props.maxLength"
+        data-slot="input-tags-base"
+        :class="ui.base({ class: props.ui?.base })"
+        @blur="onBlur"
+        @focus="onFocus"
+      />
+    </div>
 
     <slot :ui="ui" />
 

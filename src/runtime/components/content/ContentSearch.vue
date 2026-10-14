@@ -74,7 +74,6 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
   close?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
    * Configure the input or hide it with `false`.
-   * `{ fixed: true }`{lang="ts-type"}
    * @defaultValue true
    */
   input?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
@@ -175,7 +174,7 @@ const inputProps = computed(() => {
   if (props.input === false) {
     return false
   }
-  return defu(typeof props.input === 'object' ? props.input : {}, { fixed: true })
+  return typeof props.input === 'object' ? props.input : {}
 })
 
 const getProxySlots = () => omit(slots, ['content'])

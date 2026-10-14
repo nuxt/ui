@@ -110,8 +110,6 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
   multiple?: M & boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
-  /** Keep the mobile text size on all breakpoints. */
-  fixed?: boolean
   autofocus?: boolean
   autofocusDelay?: number
   class?: any
@@ -231,7 +229,6 @@ const ui = computed(() => tv(theme, overrides.value)({
   size: size.value,
   loading: props.loading,
   highlight: highlight.value,
-  fixed: props.fixed,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   fieldGroup: orientation.value,
@@ -380,7 +377,7 @@ defineExpose({
       <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="select-leading" :class="ui.leading({ class: props.ui?.leading })">
         <slot name="leading" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
           <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="select-leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
-          <UAvatar v-else-if="!!props.avatar" :size="avatarSize" v-bind="props.avatar" data-slot="select-itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
+          <UAvatar v-else-if="!!props.avatar" :size="avatarSize" v-bind="props.avatar" data-slot="select-leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
         </slot>
       </span>
 

@@ -156,7 +156,6 @@ defineExpose({
         :placeholder="props.placeholder ?? t('chatPrompt.placeholder')"
         :disabled="Boolean(props.error) || props.disabled"
         variant="none"
-        fixed
         v-bind="{ ...textareaProps, ...$attrs }"
         :ui="transformUI(omit(ui, ['root', 'body', 'header', 'footer']), props.ui)"
         data-slot="chat-prompt-body"

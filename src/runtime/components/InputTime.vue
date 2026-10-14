@@ -40,8 +40,6 @@ export interface InputTimeProps<R extends boolean = false> extends UseComponentI
   size?: InputTime['variants']['size']
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
-  /** Keep the mobile text size on all breakpoints. */
-  fixed?: boolean
   autofocus?: boolean
   autofocusDelay?: number
   /**
@@ -108,7 +106,7 @@ const props = useComponentProps<InputTimeProps<R>>('inputTime', _props, theme)
 const appConfig = useThemeConfig() as InputTime['AppConfig']
 const overrides = useComponentOverrides((ui: InputTime['AppConfig']['ui']) => ui.inputTime)
 
-const rootProps = useForwardProps(reactiveOmit(props, 'id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'ui'), emits)
+const rootProps = useForwardProps(reactiveOmit(props, 'id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'ui'), emits)
 
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color: formFieldColor, size: formFieldSize, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<InputTimeProps<R>>(_props)
 
@@ -133,7 +131,6 @@ const ui = computed(() => tv(theme, overrides.value)({
   size: size.value,
   loading: props.loading,
   highlight: highlight.value,
-  fixed: props.fixed,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   fieldGroup: orientation.value
@@ -226,7 +223,7 @@ defineExpose({
     :disabled="disabled"
     :model-value="(props.modelValue as TimeValue)"
     :default-value="(props.defaultValue as TimeValue)"
-    :class="ui.base({ class: [props.ui?.base, props.class] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="onUpdate"
     @focusout="onFocusOut"
     @focusin="onFocusIn"

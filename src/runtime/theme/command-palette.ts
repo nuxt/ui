@@ -3,7 +3,8 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'flex flex-col min-h-0 min-w-0 divide-y divide-default',
-    input: '',
+    // The input sits flush in the palette, above a full-width divider
+    input: 'rounded-none',
     close: '',
     back: 'p-0',
     content: 'relative overflow-hidden flex flex-col',

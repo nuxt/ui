@@ -152,8 +152,6 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
   multiple?: M & boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
-  /** Keep the mobile text size on all breakpoints. */
-  fixed?: boolean
   /**
    * Determines if custom user input that does not exist in options can be added.
    * @defaultValue false
@@ -292,7 +290,7 @@ const virtualizerProps = toRef(() => {
     estimateSize: getEstimateSize(filteredItems.value, size.value ?? 'md', props.descriptionKey as string, !!slots['item-description'])
   })
 })
-const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: t('selectMenu.search'), variant: 'none', fixed: props.fixed }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
+const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: t('selectMenu.search'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
 
 const { emitFormBlur, emitFormFocus, emitFormInput, emitFormChange, size: formFieldSize, color: formFieldColor, id, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<InputProps>(_props)
 
@@ -344,7 +342,6 @@ const ui = computed(() => tv(theme, overrides.value)({
   size: size.value,
   loading: props.loading,
   highlight: highlight.value,
-  fixed: props.fixed,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   fieldGroup: orientation.value,
@@ -702,7 +699,7 @@ defineExpose({
         <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="select-menu-leading" :class="ui.leading({ class: props.ui?.leading })">
           <slot name="leading" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
             <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="select-menu-leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
-            <UAvatar v-else-if="!!props.avatar" :size="avatarSize" v-bind="props.avatar" data-slot="select-menu-itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
+            <UAvatar v-else-if="!!props.avatar" :size="avatarSize" v-bind="props.avatar" data-slot="select-menu-leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
           </slot>
         </span>
 

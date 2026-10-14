@@ -37,8 +37,6 @@ export interface PinInputProps<T extends PinInputType = 'text'> extends Pick<Pin
   autofocus?: boolean
   autofocusDelay?: number
   highlight?: boolean
-  /** Keep the mobile text size on all breakpoints. */
-  fixed?: boolean
   /**
    * Group inputs by inserting a separator between them.
    * Pass a number to insert one after every Nth input, or an array of positions to insert after specific inputs.
@@ -101,8 +99,7 @@ const ui = computed(() => tv(theme, overrides.value)({
   color: color.value,
   variant: props.variant,
   size: size.value,
-  highlight: highlight.value,
-  fixed: props.fixed
+  highlight: highlight.value
 }))
 
 const inputsRef = ref<ComponentPublicInstance[]>([])

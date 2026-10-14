@@ -43,8 +43,6 @@ export interface TextareaProps<T extends TextareaValue = TextareaValue, Mod exte
   maxrows?: number
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
-  /** Keep the mobile text size on all breakpoints. */
-  fixed?: boolean
   defaultValue?: ApplyModifiers<T, Mod>
   modelValue?: ApplyModifiers<T, Mod>
   modelModifiers?: Mod
@@ -73,6 +71,7 @@ import { useComponentProps, useComponentOverrides } from '../composables/useComp
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { isEmpty, looseToNumber } from '../utils'
+import { isFieldClick } from '../utils/field'
 import { tv } from '../utils/tv'
 import { getAvatarSize } from '../utils/size'
 import UIcon from './Icon.vue'
@@ -117,7 +116,6 @@ const ui = computed(() => tv(theme, overrides.value)({
   size: size.value,
   loading: props.loading,
   highlight: highlight.value,
-  fixed: props.fixed,
   autoresize: props.autoresize,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing
@@ -183,6 +181,14 @@ function autoFocus() {
   }
 }
 
+// The box looks like the textarea, so a click on an icon or on plain leading or
+// trailing content goes to the textarea. A control in there keeps its own click.
+function onRootClick(event: MouseEvent) {
+  if (isFieldClick(event)) {
+    textareaRef.value?.focus()
+  }
+}
+
 function autoResize() {
   if (props.autoresize && textareaRef.value) {
     textareaRef.value.rows = props.rows!
@@ -235,7 +241,7 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'textarea'" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'textarea'" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="onRootClick">
     <textarea
       :id="id"
       ref="textareaRef"
