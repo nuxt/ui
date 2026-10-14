@@ -29,7 +29,7 @@ export type ExtendedTheme<T, B>
         : T
 
 /**
- * Declare a theme that extends another, like Select extends Input. The
+ * Declare a theme that extends another, like Textarea extends Input. The
  * extension's values win, a function receives the base value and returns the
  * new one, and `compoundVariants` concatenate.
  * @internal

@@ -50,7 +50,6 @@ const link = 'https://app.nuxt.com/invite/x8f2k'
         readonly
         aria-label="Invite link"
         class="w-full"
-        :ui="{ trailing: 'pe-1' }"
       >
         <template #trailing>
           <UButton

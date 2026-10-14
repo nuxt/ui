@@ -7,7 +7,7 @@
     }"
     :ui="{
       button: { base: 'rounded-full' },
-      input: { base: 'rounded-full' },
+      input: { root: 'rounded-full' },
       select: { base: 'rounded-full' }
     }"
   >
