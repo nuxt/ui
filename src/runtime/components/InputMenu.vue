@@ -159,8 +159,6 @@ export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOr
   multiple?: M & boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
-  /** Keep the mobile text size on all breakpoints. */
-  fixed?: boolean
   /**
    * The behavior of the InputMenu.
    * - `combobox`: select one (or many) items from a list of suggestions.
@@ -371,7 +369,6 @@ const ui = computed(() => tv(theme, overrides.value)({
   size: size.value,
   loading: props.loading,
   highlight: highlight.value,
-  fixed: props.fixed,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   multiple: isMultiple.value,

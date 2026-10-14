@@ -10,16 +10,16 @@ export default defineTheme({
   variants: {
     size: {
       xs: {
-        base: 'size-6 text-sm/4'
+        base: 'size-6 text-[calc(var(--text-xs)+var(--ui-control-text-step,0px))]/4'
       },
       sm: {
-        base: 'size-7 text-sm/4'
+        base: 'size-7 text-[calc(var(--text-xs)+var(--ui-control-text-step,0px))]/4'
       },
       md: {
-        base: 'size-8 text-base/5'
+        base: 'size-8 text-[calc(var(--text-sm)+var(--ui-control-text-step,0px))]/5'
       },
       lg: {
-        base: 'size-9 text-base/5'
+        base: 'size-9 text-[calc(var(--text-sm)+var(--ui-control-text-step,0px))]/5'
       },
       xl: {
         base: 'size-10 text-base'
@@ -35,28 +35,8 @@ export default defineTheme({
     color: colorVariant({ root: '' }),
     highlight: {
       true: { base: 'ring ring-inset ring-accent' }
-    },
-    fixed: {
-      false: ''
     }
   },
-  compoundVariants: [{
-    fixed: false,
-    size: 'xs',
-    class: { base: 'md:text-xs' }
-  }, {
-    fixed: false,
-    size: 'sm',
-    class: { base: 'md:text-xs' }
-  }, {
-    fixed: false,
-    size: 'md',
-    class: { base: 'md:text-sm' }
-  }, {
-    fixed: false,
-    size: 'lg',
-    class: { base: 'md:text-sm' }
-  }],
   defaultVariants: {
     size: 'md',
     color: 'primary',
