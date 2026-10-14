@@ -155,7 +155,7 @@ describe('\'*\' default variants', () => {
     })
 
     expect(wrapper.find('[data-slot="input"]').classes()).toContain('[--ui-accent:var(--ui-error)]')
-    expect(wrapper.find('[data-slot="input"]').classes()).toContain('text-sm/4')
+    expect(wrapper.find('[data-slot="input"]').classes()).toContain('text-[calc(var(--text-xs)+var(--ui-control-text-step,0px))]/4')
   })
 
   it('lets a component\'s own key win', async () => {

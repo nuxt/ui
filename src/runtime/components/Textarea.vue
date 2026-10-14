@@ -43,8 +43,6 @@ export interface TextareaProps<T extends TextareaValue = TextareaValue, Mod exte
   maxrows?: number
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
-  /** Keep the mobile text size on all breakpoints. */
-  fixed?: boolean
   defaultValue?: ApplyModifiers<T, Mod>
   modelValue?: ApplyModifiers<T, Mod>
   modelModifiers?: Mod
@@ -118,7 +116,6 @@ const ui = computed(() => tv(theme, overrides.value)({
   size: size.value,
   loading: props.loading,
   highlight: highlight.value,
-  fixed: props.fixed,
   autoresize: props.autoresize,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing
