@@ -912,8 +912,8 @@ exports[`Chart > renders with type donut and center slot correctly 1`] = `
       </svg></div>
   </div>
   <!---->
-  <!--v-if-->
   <div data-slot="center" class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none opacity-0 in-data-measured:opacity-100 transition-opacity duration-150" style="top: 37px; left: 0px; right: 0px; bottom: 0px;">Center slot</div>
+  <!--v-if-->
 </div>"
 `;
 

@@ -517,6 +517,10 @@ const chartDefinition = computed(() => (props.definition ?? generatedDefinition.
       :on-render="onRender"
     />
 
+    <div v-if="!!slots.center" data-slot="center" :class="ui.center({ class: props.ui?.center })" :style="plotInset">
+      <slot name="center" />
+    </div>
+
     <UTooltip
       v-if="hasTooltip"
       :open="!!primaryPoint"
@@ -544,9 +548,5 @@ const chartDefinition = computed(() => (props.definition ?? generatedDefinition.
         </slot>
       </template>
     </UTooltip>
-
-    <div v-if="!!slots.center" data-slot="center" :class="ui.center({ class: props.ui?.center })" :style="plotInset">
-      <slot name="center" />
-    </div>
   </div>
 </template>
