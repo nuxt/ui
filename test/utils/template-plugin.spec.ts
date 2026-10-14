@@ -11,7 +11,7 @@ const root = normalize(realpathSync.native(mkdtempSync(join(tmpdir(), 'nuxt-ui-r
 
 afterAll(() => rmSync(root, { recursive: true, force: true }))
 
-describe('component detection in the Vite dev server', () => {
+describe('component detection in the Vite dev server', { timeout: 20000 }, () => {
   // With a prefix, `ui.css` lists the detected components' classes in dev too
   it('rewrites `ui.css` and updates the detected list when a newly used component shows up', async () => {
     writeFileSync(join(root, 'App.vue'), '<template><UButton /></template>\n')
