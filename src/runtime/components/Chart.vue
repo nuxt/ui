@@ -461,7 +461,17 @@ const chartStyle = computed(() => ({
 // The center slot covers the plot rather than the whole chart, which includes the legend.
 const plotInset = shallowRef<Record<string, string>>()
 
-function onRender({ scene }: { scene: { width: number, height: number, chart: { x: number, y: number, width: number, height: number } } }) {
+// The server draws at `initialWidth` and the SVG keeps its proportions to fit its box. With a fixed height it would
+// show narrower than its container, so it stays hidden until a render at the measured width. With an aspect ratio
+// it already fills the container and shows right away.
+const measured = shallowRef(false)
+const revealed = computed(() => measured.value || (!props.height && !!props.aspectRatio))
+
+function onRender({ container, scene }: { container: HTMLElement, scene: { width: number, height: number, chart: { x: number, y: number, width: number, height: number } } }) {
+  if (!measured.value && Math.abs(scene.width - container.clientWidth) < 1) {
+    measured.value = true
+  }
+
   if (!slots.center) {
     return
   }
@@ -493,7 +503,7 @@ const chartDefinition = computed(() => (props.definition ?? generatedDefinition.
 </script>
 
 <template>
-  <div ref="rootRef" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" :style="style">
+  <div ref="rootRef" data-slot="root" :data-measured="revealed || undefined" :class="ui.root({ class: [props.ui?.root, props.class] })" :style="style">
     <TanStackChart
       :definition="chartDefinition"
       :aria-label="props.ariaLabel || seriesLabels.join(', ') || 'Chart'"
