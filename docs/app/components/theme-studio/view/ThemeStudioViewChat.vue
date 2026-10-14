@@ -125,8 +125,7 @@ const ui = {
       resizable
       :min-size="12"
       :menu="{ inset: true }"
-      class="border-r-0 py-4"
-      :ui="{ root: 'flex min-h-0 bg-transparent' }"
+      class="flex min-h-0 bg-transparent border-r-0 py-4"
     >
       <template #header="{ collapsed }">
         <div v-if="!collapsed" class="flex items-center gap-1.5 px-2.5 py-1">
@@ -208,7 +207,7 @@ const ui = {
           <!-- Transparent and absolute, so the messages scroll under a blur.
                Rounded like the panel: a backdrop filter paints its own square
                corners past the parent's overflow clip. -->
-          <UDashboardNavbar :ui="{ root: 'absolute top-0 inset-x-0 rounded-t-lg border-b-0 z-10 backdrop-blur-sm sm:px-4' }">
+          <UDashboardNavbar class="absolute top-0 inset-x-0 rounded-t-lg border-b-0 z-10 backdrop-blur-sm sm:px-4">
             <template #leading>
               <span />
             </template>
