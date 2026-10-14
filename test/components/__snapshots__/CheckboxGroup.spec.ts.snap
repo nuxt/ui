@@ -1476,7 +1476,7 @@ exports[`CheckboxGroup > renders with primary variant table highlight correctly 
 exports[`CheckboxGroup > renders with required correctly 1`] = `
 "<div id="v-0-0" data-slot="checkbox-group" class="relative [--ui-accent:var(--ui-primary)]" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;">
   <fieldset data-slot="checkbox-group-fieldset" class="flex gap-x-2 flex-col flex-wrap gap-y-1">
-    <legend data-slot="checkbox-group-legend" class="mb-1 block font-medium text-default text-sm after:content-['*'] after:ms-0.5 after:text-error">Legend</legend>
+    <legend data-slot="checkbox-group-legend" class="mb-1 block font-medium text-default text-sm after:content-['*'] after:ms-0.5 after:text-error-default">Legend</legend>
     <div data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]">
       <div data-slot="checkbox-container" class="flex items-center h-5"><button data-slot="checkbox-base" class="rounded-sm ring ring-inset ring-strong overflow-hidden size-4 outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical">
           <!---->
