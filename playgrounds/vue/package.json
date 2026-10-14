@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@nuxt/ui": "catalog:",
+    "@tanstack/charts": "catalog:",
     "@tiptap/extension-emoji": "catalog:",
     "@tiptap/extension-text-align": "catalog:",
     "tailwindcss": "catalog:",
