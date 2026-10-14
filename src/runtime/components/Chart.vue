@@ -264,13 +264,16 @@ const legendGuide = computed(() => colorLegend({ items: colorLegendItems({ justi
 const donutDefinition = computed(() => {
   const labels = (props.data ?? []).map(datum => String(datum[props.index!]))
   const slices = pie(props.data ?? [], { value: series.value[0]?.key } as any)
+  // Read here so the definition changes with it: TanStack Charts only redraws on a new definition, size or font,
+  // so a value read later in `innerRadius` would not update the ring.
+  const thickness = props.thickness!
 
   return defineChart({
     marks: [
       polar({
         marks: [
           radialArc(slices, {
-            innerRadius: ({ radius }: { radius: number }) => Math.max(radius - props.thickness!, 0),
+            innerRadius: ({ radius }: { radius: number }) => Math.max(radius - thickness, 0),
             color: props.index,
             key: props.index
           } as any)
@@ -360,7 +363,8 @@ const generatedDefinition = computed(() => {
         nice: true,
         grid: props.grid,
         side: dir.value === 'rtl' ? 'right' : 'left',
-        axis: props.yAxis ? { label: props.yLabel, ticks: props.format ? { format: props.format } : undefined } : false
+        // Ticks use the same formatting as the tooltip values, in the locale of the app.
+        axis: props.yAxis ? { label: props.yLabel, ticks: { format: formatValue } } : false
       }
     },
     color: {
@@ -465,11 +469,11 @@ const chartStyle = computed(() => ({
 // The center slot covers the plot rather than the whole chart, which includes the legend.
 const plotInset = shallowRef<Record<string, string>>()
 
-// The server draws at `initialWidth` and the SVG keeps its proportions to fit its box. With a fixed height it would
-// show narrower than its container, so it stays hidden until the first render in the browser, which is already at
-// the measured width. With an aspect ratio it fills the container and shows right away.
+// The server draws at `initialWidth`, or at `width` when set, and the SVG keeps its proportions to fit its box.
+// A responsive chart with a fixed height would show narrower than its container, so it stays hidden until the first
+// render in the browser, which is already at the measured width. A fixed width or an aspect ratio shows right away.
 const measured = shallowRef(false)
-const revealed = computed(() => measured.value || (!props.height && !!props.aspectRatio))
+const revealed = computed(() => measured.value || !!props.width || (!props.height && !!props.aspectRatio))
 
 function onRender({ scene }: { scene: { width: number, height: number, chart: { x: number, y: number, width: number, height: number } } }) {
   measured.value = true
