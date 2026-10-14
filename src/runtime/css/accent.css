@@ -15,6 +15,7 @@
     --ui-accent-bg-strong: initial;
     --ui-accent-text-contrast: initial;
     --ui-accent-text-default: initial;
+    --ui-accent-text-strong: initial;
     --ui-accent-text-muted: initial;
     --ui-accent-text-faint: initial;
     --ui-accent-border-default: initial;
@@ -32,6 +33,7 @@
     --ui-accent-bg-strong: var(--ui-primary-bg-strong);
     --ui-accent-text-contrast: var(--ui-primary-text-contrast);
     --ui-accent-text-default: var(--ui-primary-text-default);
+    --ui-accent-text-strong: var(--ui-primary-text-strong);
     --ui-accent-text-muted: var(--ui-primary-text-muted);
     --ui-accent-text-faint: var(--ui-primary-text-faint);
     --ui-accent-border-default: var(--ui-primary-border-default);
@@ -46,6 +48,7 @@
     --ui-accent-bg-strong: var(--ui-secondary-bg-strong);
     --ui-accent-text-contrast: var(--ui-secondary-text-contrast);
     --ui-accent-text-default: var(--ui-secondary-text-default);
+    --ui-accent-text-strong: var(--ui-secondary-text-strong);
     --ui-accent-text-muted: var(--ui-secondary-text-muted);
     --ui-accent-text-faint: var(--ui-secondary-text-faint);
     --ui-accent-border-default: var(--ui-secondary-border-default);
@@ -60,6 +63,7 @@
     --ui-accent-bg-strong: var(--ui-success-bg-strong);
     --ui-accent-text-contrast: var(--ui-success-text-contrast);
     --ui-accent-text-default: var(--ui-success-text-default);
+    --ui-accent-text-strong: var(--ui-success-text-strong);
     --ui-accent-text-muted: var(--ui-success-text-muted);
     --ui-accent-text-faint: var(--ui-success-text-faint);
     --ui-accent-border-default: var(--ui-success-border-default);
@@ -74,6 +78,7 @@
     --ui-accent-bg-strong: var(--ui-info-bg-strong);
     --ui-accent-text-contrast: var(--ui-info-text-contrast);
     --ui-accent-text-default: var(--ui-info-text-default);
+    --ui-accent-text-strong: var(--ui-info-text-strong);
     --ui-accent-text-muted: var(--ui-info-text-muted);
     --ui-accent-text-faint: var(--ui-info-text-faint);
     --ui-accent-border-default: var(--ui-info-border-default);
@@ -88,6 +93,7 @@
     --ui-accent-bg-strong: var(--ui-warning-bg-strong);
     --ui-accent-text-contrast: var(--ui-warning-text-contrast);
     --ui-accent-text-default: var(--ui-warning-text-default);
+    --ui-accent-text-strong: var(--ui-warning-text-strong);
     --ui-accent-text-muted: var(--ui-warning-text-muted);
     --ui-accent-text-faint: var(--ui-warning-text-faint);
     --ui-accent-border-default: var(--ui-warning-border-default);
@@ -102,6 +108,7 @@
     --ui-accent-bg-strong: var(--ui-error-bg-strong);
     --ui-accent-text-contrast: var(--ui-error-text-contrast);
     --ui-accent-text-default: var(--ui-error-text-default);
+    --ui-accent-text-strong: var(--ui-error-text-strong);
     --ui-accent-text-muted: var(--ui-error-text-muted);
     --ui-accent-text-faint: var(--ui-error-text-faint);
     --ui-accent-border-default: var(--ui-error-border-default);
@@ -116,6 +123,7 @@
     --ui-accent-bg-strong: var(--ui-neutral-bg-strong, color-mix(in oklab, var(--ui-bg-strong) 75%, transparent));
     --ui-accent-text-contrast: var(--ui-neutral-text-contrast);
     --ui-accent-text-default: var(--ui-neutral-text-default, var(--ui-text-default));
+    --ui-accent-text-strong: var(--ui-neutral-text-strong, var(--ui-text-strong));
     --ui-accent-text-muted: var(--ui-neutral-text-muted, var(--ui-text-muted));
     --ui-accent-text-faint: var(--ui-neutral-text-faint, var(--ui-text-faint));
     --ui-accent-border-default: var(--ui-neutral-border-default, var(--ui-border-default));

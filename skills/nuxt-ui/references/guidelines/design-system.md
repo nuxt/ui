@@ -322,7 +322,7 @@ Nuxt UI exposes CSS variables you can override in `main.css`:
 
 ### Color shade overrides
 
-Each semantic color defaults to shade 500 in light mode, 400 in dark mode. Override per-mode:
+Each semantic color defaults to shade 500 in light mode, 400 in dark mode. Small colored text uses `text-<color>-default` (or `text-accent-default` inside a `color` scope) and the current or highlighted item `-strong`; `text-<color>` is the solid, for headlines and icons. `--ui-<color>-text-default` changes that text without touching the solid. Override per-mode:
 
 ```css
 :root {

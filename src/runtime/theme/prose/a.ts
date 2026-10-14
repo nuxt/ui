@@ -4,6 +4,6 @@ import { defineTheme } from '../../utils/theme'
 // link's underline doesn't show through it.
 export default defineTheme({
   slots: {
-    base: 'text-primary border-b border-transparent hover:border-primary focus-visible:border-transparent font-medium focus-visible:rounded-xs outline-focus focus-visible:outline-3 focus-visible:has-[>code]:outline-0 has-[>code]:border-b-0 [&>code]:border-dashed [&>code]:bg-default [&>code]:bg-linear-to-b [&>code]:from-tint [&>code]:to-tint [&>code]:outline-focus focus-visible:[&>code]:outline-3 hover:[&>code]:border-primary hover:[&>code]:text-primary focus-visible:[&>code]:border-primary focus-visible:[&>code]:text-primary transition-colors [&>code]:transition-colors'
+    base: 'text-primary-default border-b border-transparent hover:border-primary focus-visible:border-transparent font-medium focus-visible:rounded-xs outline-focus focus-visible:outline-3 focus-visible:has-[>code]:outline-0 has-[>code]:border-b-0 [&>code]:border-dashed [&>code]:bg-default [&>code]:bg-linear-to-b [&>code]:from-tint [&>code]:to-tint [&>code]:outline-focus focus-visible:[&>code]:outline-3 hover:[&>code]:border-primary hover:[&>code]:text-primary-default focus-visible:[&>code]:border-primary focus-visible:[&>code]:text-primary-default transition-colors [&>code]:transition-colors'
   }
 })
