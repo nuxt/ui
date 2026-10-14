@@ -19,12 +19,12 @@ const hasCurve = computed(() => type.value === 'line' || type.value === 'area')
 const hasStacked = computed(() => type.value === 'area' || type.value === 'bar')
 
 const data = [
-  { month: 'January', desktop: 186, mobile: 80, tablet: 40 },
-  { month: 'February', desktop: 305, mobile: 200, tablet: 90 },
-  { month: 'March', desktop: 237, mobile: 120, tablet: 75 },
-  { month: 'April', desktop: 73, mobile: 190, tablet: 60 },
-  { month: 'May', desktop: 209, mobile: 130, tablet: 110 },
-  { month: 'June', desktop: 214, mobile: 140, tablet: 95 }
+  { month: 'January', desktop: 186, mobile: 80, tablet: 40, revenue: 18600 },
+  { month: 'February', desktop: 305, mobile: 200, tablet: 90, revenue: 30500 },
+  { month: 'March', desktop: 237, mobile: 120, tablet: 75, revenue: 23700 },
+  { month: 'April', desktop: 73, mobile: 190, tablet: 60, revenue: 27300 },
+  { month: 'May', desktop: 209, mobile: 130, tablet: 110, revenue: 20900 },
+  { month: 'June', desktop: 214, mobile: 140, tablet: 95, revenue: 31400 }
 ]
 
 const currency = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', notation: 'compact' })
@@ -74,7 +74,7 @@ const currency = new Intl.NumberFormat('en-US', { style: 'currency', currency: '
         :thickness="thickness"
         :data="data"
         index="month"
-        :categories="[{ key: 'desktop', label: 'Revenue' }]"
+        :categories="[{ key: 'revenue', label: 'Revenue' }]"
         :colors="isCartesian ? ['success'] : undefined"
         :format="value => currency.format(value)"
         aria-label="Revenue"
