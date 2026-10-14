@@ -174,8 +174,7 @@ describe('InputMenu', () => {
     })
   })
 
-  // `root` and `base` are the same element in `multiple` mode, so the rounding
-  // has to come from the element's own position, not from a `group` ancestor.
+  // The box has the rounding in every mode, from its own position in the group.
   it('with multiple rounds its corners inside a FieldGroup', async () => {
     const wrapper = await mountSuspended({
       components: { UFieldGroup, UButton, UInputMenu: InputMenu },

@@ -1,14 +1,17 @@
 import input from './input'
-import { fieldGroupVariant, fieldGroupVariantWithRoot } from './field-group'
 import { extendTheme } from '../utils/theme'
 
 export default extendTheme(input, {
   slots: {
-    base: () => 'rounded-md text-strong transition-colors',
-    trailing: 'group absolute inset-y-0 inset-e-0 flex items-center disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none',
+    // With `multiple`, the disabled state is on the tags container
+    root: (prev: string) => [prev, 'has-[>[data-disabled]]:cursor-not-allowed has-[>[data-disabled]]:opacity-75'],
+    // The tags wrap in their own container, so the leading and the trailing stay
+    // centered on the box whatever its number of lines
+    tags: 'flex flex-wrap items-center flex-1 min-w-0 gap-(--ui-control-gap) px-(--ui-control-px) py-(--ui-control-py)',
+    trailing: 'group flex items-center pe-(--ui-control-px) disabled:cursor-not-allowed focus:outline-none',
     trailingClear: 'p-0',
     arrow: 'fill-bg stroke-default',
-    content: 'max-h-[min(15rem,var(--reka-combobox-content-available-height,15rem))] w-(--reka-combobox-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-combobox-content-transform-origin) pointer-events-auto flex flex-col',
+    content: 'max-h-[min(15rem,var(--reka-combobox-content-available-height,15rem))] w-(--reka-combobox-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-combobox-content-transform-origin) pointer-events-auto flex flex-col cursor-default',
     viewport: 'relative scroll-py-1 overflow-y-auto flex-1',
     group: 'p-1 isolate',
     empty: 'text-center text-muted',
@@ -23,20 +26,25 @@ export default extendTheme(input, {
     itemWrapper: 'flex-1 flex flex-col min-w-0',
     itemLabel: 'truncate',
     itemDescription: 'truncate text-muted',
-    tagsItem: 'px-1.5 py-0.5 rounded-sm font-medium inline-flex items-center gap-0.5 ring ring-inset ring-strong bg-soft text-default data-disabled:cursor-not-allowed data-disabled:opacity-75',
+    tagsItem: 'px-1.5 py-0.5 rounded-sm font-medium inline-flex items-center gap-0.5 ring ring-inset ring-strong bg-soft text-default data-disabled:cursor-not-allowed',
     tagsItemText: 'truncate',
     tagsItemDelete: 'inline-flex items-center rounded-xs text-faint hover:text-default hover:bg-strong disabled:pointer-events-none transition-colors',
-    tagsItemDeleteIcon: 'shrink-0',
-    tagsInput: 'flex-1 border-0 bg-transparent placeholder:text-faint focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
+    tagsItemDeleteIcon: 'shrink-0'
   },
   variants: {
-    // `root` and `base` are the same element in `multiple` mode, so the
-    // `group-*` rounding utilities inherited from `input` never match there.
-    // Keep the `group` marker here and pick the right rounding in
-    // `compoundVariants` depending on `multiple`.
-    fieldGroup: {
-      horizontal: () => ({ root: fieldGroupVariantWithRoot.fieldGroup.horizontal.root }),
-      vertical: () => ({ root: fieldGroupVariantWithRoot.fieldGroup.vertical.root })
+    // The input takes the focus, up to two levels down from the box
+    variant: {
+      outline: { root: 'bg-default ring ring-inset ring-strong outline-accent-focus has-[input:focus-visible]:outline-3 has-[input:focus-visible]:ring-accent' },
+      soft: { root: 'bg-tint hover:bg-soft has-[input:focus]:bg-soft has-[input:disabled]:bg-tint outline-accent-focus has-[input:focus-visible]:outline-3' },
+      subtle: { root: 'bg-soft ring ring-inset ring-strong outline-accent-focus has-[input:focus-visible]:outline-3 has-[input:focus-visible]:ring-accent' },
+      ghost: { root: 'bg-transparent hover:bg-soft has-[input:focus]:bg-soft has-[input:disabled]:bg-transparent dark:has-[input:disabled]:bg-transparent outline-accent-focus has-[input:focus-visible]:outline-3' }
+    },
+    // Next to a leading or a trailing, the padding of the container is the gap to it
+    leading: {
+      true: { tags: 'ps-(--ui-control-gap)' }
+    },
+    trailing: {
+      true: { tags: 'pe-(--ui-control-gap)' }
     },
     virtualize: {
       true: {
@@ -46,13 +54,11 @@ export default extendTheme(input, {
         viewport: 'divide-y divide-default'
       }
     },
+    // With `multiple`, the tags container has the padding and the input wraps
+    // under the tags when it runs out of room
     multiple: {
-      true: {
-        root: 'flex-wrap'
-      },
-      false: {
-        base: 'w-full border-0 placeholder:text-faint disabled:cursor-not-allowed disabled:opacity-75'
-      }
+      true: { base: 'p-0 min-w-auto' },
+      false: ''
     },
     size: {
       xs: {
@@ -106,34 +112,5 @@ export default extendTheme(input, {
         empty: 'p-3 text-base'
       }
     }
-  },
-  compoundVariants: [{
-    multiple: false,
-    fieldGroup: 'horizontal',
-    class: { base: fieldGroupVariantWithRoot.fieldGroup.horizontal.base }
-  }, {
-    multiple: false,
-    fieldGroup: 'vertical',
-    class: { base: fieldGroupVariantWithRoot.fieldGroup.vertical.base }
-  }, {
-    multiple: true,
-    fieldGroup: 'horizontal',
-    class: fieldGroupVariant.fieldGroup.horizontal
-  }, {
-    multiple: true,
-    fieldGroup: 'vertical',
-    class: fieldGroupVariant.fieldGroup.vertical
-  }, {
-    variant: 'soft',
-    multiple: true,
-    class: { base: 'has-focus:bg-soft has-focus-visible:outline-3' }
-  }, {
-    variant: 'ghost',
-    multiple: true,
-    class: { base: 'has-focus:bg-soft has-focus-visible:outline-3' }
-  }, {
-    multiple: true,
-    variant: ['outline', 'subtle'],
-    class: { base: 'has-focus-visible:outline-3 has-focus-visible:ring-accent' }
-  }]
+  }
 })

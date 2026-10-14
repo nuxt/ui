@@ -42,7 +42,6 @@ const text = computed(() => {
         :type="show ? 'text' : 'password'"
         :aria-invalid="score < 4"
         aria-describedby="password-strength"
-        :ui="{ trailing: 'pe-1' }"
         class="w-full"
       >
         <template #trailing>
