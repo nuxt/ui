@@ -19,7 +19,7 @@ const definition = defineChart({
   ],
   scales: {
     x: { scale: () => scalePoint<string>().padding(0.2) },
-    y: { scale: scaleLinear, nice: true, grid: true }
+    y: { scale: scaleLinear, nice: true, grid: true, axis: { label: 'Revenue' } }
   }
 })
 </script>

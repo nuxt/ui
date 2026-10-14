@@ -390,6 +390,13 @@ const tooltipPoints = computed(() => {
   return points
 })
 
+// The y axis title of a `definition`, as a string or as `{ text }`.
+const yAxisLabel = computed(() => {
+  const label = (props.definition as { scales?: { y?: { axis?: { label?: string | { text?: string } } } } } | undefined)?.scales?.y?.axis?.label
+
+  return (typeof label === 'object' ? label?.text : label) ?? ''
+})
+
 const tooltipContent = computed<{ title?: string, rows: ChartTooltipRow[] }>(() => {
   const points = tooltipPoints.value
   const generated = !props.definition
@@ -403,7 +410,8 @@ const tooltipContent = computed<{ title?: string, rows: ChartTooltipRow[] }>(() 
   return {
     title: String((generated ? points[0]?.datum.x : points[0]?.xValue) ?? ''),
     rows: points.map(point => ({
-      label: generated ? seriesLabel(String(point.datum.category)) : point.groupLabel,
+      // An ungrouped point gets its mark id as `groupLabel`, the y axis title reads better, like the TanStack Charts tooltip.
+      label: generated ? seriesLabel(String(point.datum.category)) : point.group == null ? yAxisLabel.value : point.groupLabel,
       value: generated ? formatValue(point.datum.value) : String(point.yValue),
       color: point.color,
       active: points.length > 1 && point === primaryPoint.value
