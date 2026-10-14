@@ -8,7 +8,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Chart = ComponentConfig<typeof theme, AppConfig, 'chart'>
 
-export type ChartDatum = Record<string, any>
+export type ChartData = Record<string, any>
 
 export interface ChartTooltipRow {
   label: string
@@ -18,7 +18,7 @@ export interface ChartTooltipRow {
   active?: boolean
 }
 
-export interface ChartProps<T extends ChartDatum = ChartDatum> {
+export interface ChartProps<T extends ChartData = ChartData> {
   /**
    * The type of chart to render.
    * @defaultValue 'line'
@@ -120,7 +120,7 @@ export interface ChartSlots {
 }
 </script>
 
-<script setup lang="ts" generic="T extends ChartDatum">
+<script setup lang="ts" generic="T extends ChartData">
 import { computed, shallowRef, useTemplateRef } from 'vue'
 import { Chart as TanStackChart } from '@tanstack/charts/vue'
 import { areaY, barY, colorLegend, colorLegendItems, defineChart, group, lineY, ruleY } from '@tanstack/charts'

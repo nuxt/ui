@@ -63,7 +63,7 @@ ignore:
 external:
   - data
 externalTypes:
-  - ChartDatum[]
+  - ChartData[]
 props:
   data:
     - month: January
@@ -116,7 +116,7 @@ items:
 external:
   - data
 externalTypes:
-  - ChartDatum[]
+  - ChartData[]
 props:
   type: bar
   data:
@@ -164,7 +164,7 @@ ignore:
 external:
   - data
 externalTypes:
-  - ChartDatum[]
+  - ChartData[]
 props:
   type: area
   stacked: true
@@ -213,7 +213,7 @@ ignore:
 external:
   - data
 externalTypes:
-  - ChartDatum[]
+  - ChartData[]
 props:
   curve: monotone
   data:
@@ -266,7 +266,7 @@ ignore:
 external:
   - data
 externalTypes:
-  - ChartDatum[]
+  - ChartData[]
 props:
   colors:
     - success
@@ -316,7 +316,7 @@ ignore:
 external:
   - data
 externalTypes:
-  - ChartDatum[]
+  - ChartData[]
 props:
   points: true
   data:
@@ -360,7 +360,7 @@ ignore:
 external:
   - data
 externalTypes:
-  - ChartDatum[]
+  - ChartData[]
 props:
   grid: false
   data:
@@ -404,7 +404,7 @@ ignore:
 external:
   - data
 externalTypes:
-  - ChartDatum[]
+  - ChartData[]
 props:
   yAxis: false
   data:
@@ -452,7 +452,7 @@ ignore:
 external:
   - data
 externalTypes:
-  - ChartDatum[]
+  - ChartData[]
 props:
   legend: false
   data:
@@ -500,7 +500,7 @@ ignore:
 external:
   - data
 externalTypes:
-  - ChartDatum[]
+  - ChartData[]
 props:
   tooltip: false
   data:
@@ -548,7 +548,7 @@ ignore:
 external:
   - data
 externalTypes:
-  - ChartDatum[]
+  - ChartData[]
 props:
   type: donut
   thickness: 12
@@ -597,7 +597,7 @@ ignore:
 external:
   - data
 externalTypes:
-  - ChartDatum[]
+  - ChartData[]
 props:
   height: 200
   data:
