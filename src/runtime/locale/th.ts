@@ -49,9 +49,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'ย้อนกลับ',
       close: 'ปิด',
+      filterPlaceholder: 'พิมพ์คำสั่งหรือค้นหา…',
       noData: 'ไม่มีข้อมูล',
-      noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
-      placeholder: 'พิมพ์คำสั่งหรือค้นหา…'
+      noMatch: 'ไม่พบข้อมูลที่ตรงกัน'
     },
     contentSearch: {
       links: 'ลิงก์',
@@ -65,8 +65,8 @@ export default defineLocale<Messages>({
       title: 'ในหน้านี้'
     },
     dropdownMenu: {
-      noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
-      placeholder: 'ค้นหา…'
+      filterPlaceholder: 'ค้นหา…',
+      noMatch: 'ไม่พบข้อมูลที่ตรงกัน'
     },
     dashboardSearch: {
       theme: 'ธีม'
@@ -105,9 +105,9 @@ export default defineLocale<Messages>({
       increment: 'เพิ่ม'
     },
     listbox: {
+      filterPlaceholder: 'ค้นหา…',
       noData: 'ไม่มีข้อมูล',
-      noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
-      placeholder: 'ค้นหา…'
+      noMatch: 'ไม่พบข้อมูลที่ตรงกัน'
     },
     modal: {
       close: 'ปิด'
@@ -152,9 +152,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'สร้าง "{label}"',
+      filterPlaceholder: 'ค้นหา…',
       noData: 'ไม่มีข้อมูล',
-      noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
-      placeholder: 'ค้นหา…'
+      noMatch: 'ไม่พบข้อมูลที่ตรงกัน'
     },
     slideover: {
       close: 'ปิด'

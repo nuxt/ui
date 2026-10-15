@@ -54,9 +54,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Zurück',
       close: 'Schließen',
+      filterPlaceholder: 'Geben Sie einen Befehl ein oder suchen Sie…',
       noData: 'Keine Daten',
-      noMatch: 'Nichts gefunden',
-      placeholder: 'Geben Sie einen Befehl ein oder suchen Sie…'
+      noMatch: 'Nichts gefunden'
     },
     contentSearch: {
       links: 'Links',
@@ -70,8 +70,8 @@ export default defineLocale<Messages>({
       title: 'Auf dieser Seite'
     },
     dropdownMenu: {
-      noMatch: 'Nichts gefunden',
-      placeholder: 'Suchen…'
+      filterPlaceholder: 'Suchen…',
+      noMatch: 'Nichts gefunden'
     },
     dashboardSearch: {
       theme: 'Thema'
@@ -110,9 +110,9 @@ export default defineLocale<Messages>({
       increment: 'Erhöhen'
     },
     listbox: {
+      filterPlaceholder: 'Suchen…',
       noData: 'Keine Daten',
-      noMatch: 'Nichts gefunden',
-      placeholder: 'Suchen…'
+      noMatch: 'Nichts gefunden'
     },
     modal: {
       close: 'Schließen'
@@ -152,9 +152,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: '"{label}" erstellen',
+      filterPlaceholder: 'Suchen…',
       noData: 'Keine Daten',
-      noMatch: 'Nichts gefunden',
-      placeholder: 'Suchen…'
+      noMatch: 'Nichts gefunden'
     },
     slideover: {
       close: 'Schließen'

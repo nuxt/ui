@@ -55,9 +55,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'חזור',
       close: 'סגור',
+      filterPlaceholder: 'הקלד פקודה…',
       noData: 'אין נתונים זמינים',
-      noMatch: 'לא נמצאה התאמה',
-      placeholder: 'הקלד פקודה…'
+      noMatch: 'לא נמצאה התאמה'
     },
     contentSearch: {
       links: 'קישורים',
@@ -71,8 +71,8 @@ export default defineLocale<Messages>({
       title: 'בדף זה'
     },
     dropdownMenu: {
-      noMatch: 'לא נמצאה התאמה',
-      placeholder: 'חפש…'
+      filterPlaceholder: 'חפש…',
+      noMatch: 'לא נמצאה התאמה'
     },
     dashboardSearch: {
       theme: 'ערכת נושא'
@@ -111,9 +111,9 @@ export default defineLocale<Messages>({
       increment: 'הוסף'
     },
     listbox: {
+      filterPlaceholder: 'חפש…',
       noData: 'אין נתונים',
-      noMatch: 'לא נמצאה התאמה',
-      placeholder: 'חפש…'
+      noMatch: 'לא נמצאה התאמה'
     },
     modal: {
       close: 'סגור'
@@ -153,9 +153,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'צור "{label}"',
+      filterPlaceholder: 'חפש…',
       noData: 'אין נתונים',
-      noMatch: 'לא נמצאה התאמה',
-      placeholder: 'חפש…'
+      noMatch: 'לא נמצאה התאמה'
     },
     slideover: {
       close: 'סגור'

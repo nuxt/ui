@@ -54,9 +54,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Zpět',
       close: 'Zavřít',
+      filterPlaceholder: 'Zadejte příkaz nebo hledejte…',
       noData: 'Žádná data',
-      noMatch: 'Žádná shoda',
-      placeholder: 'Zadejte příkaz nebo hledejte…'
+      noMatch: 'Žádná shoda'
     },
     contentSearch: {
       links: 'Odkazy',
@@ -70,8 +70,8 @@ export default defineLocale<Messages>({
       title: 'Na této stránce'
     },
     dropdownMenu: {
-      noMatch: 'Žádná shoda',
-      placeholder: 'Hledat…'
+      filterPlaceholder: 'Hledat…',
+      noMatch: 'Žádná shoda'
     },
     dashboardSearch: {
       theme: 'Barevný režim'
@@ -110,9 +110,9 @@ export default defineLocale<Messages>({
       increment: 'Zvýšit'
     },
     listbox: {
+      filterPlaceholder: 'Hledat…',
       noData: 'Žádná data',
-      noMatch: 'Žádná shoda',
-      placeholder: 'Hledat…'
+      noMatch: 'Žádná shoda'
     },
     modal: {
       close: 'Zavřít'
@@ -152,9 +152,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Vytvořit "{label}"',
+      filterPlaceholder: 'Hledat…',
       noData: 'Žádná data',
-      noMatch: 'Žádná shoda',
-      placeholder: 'Hledat…'
+      noMatch: 'Žádná shoda'
     },
     slideover: {
       close: 'Zavřít'

@@ -54,9 +54,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Geri',
       close: 'Kapat',
+      filterPlaceholder: 'Bir komut yazın veya arama yapın…',
       noData: 'Veri yok',
-      noMatch: 'Eşleşen veri yok',
-      placeholder: 'Bir komut yazın veya arama yapın…'
+      noMatch: 'Eşleşen veri yok'
     },
     contentSearch: {
       links: 'Bağlantılar',
@@ -70,8 +70,8 @@ export default defineLocale<Messages>({
       title: 'Bu sayfada'
     },
     dropdownMenu: {
-      noMatch: 'Eşleşen veri yok',
-      placeholder: 'Ara…'
+      filterPlaceholder: 'Ara…',
+      noMatch: 'Eşleşen veri yok'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -110,9 +110,9 @@ export default defineLocale<Messages>({
       increment: 'Arttır'
     },
     listbox: {
+      filterPlaceholder: 'Ara…',
       noData: 'Veri yok',
-      noMatch: 'Eşleşen veri yok',
-      placeholder: 'Ara…'
+      noMatch: 'Eşleşen veri yok'
     },
     modal: {
       close: 'Kapat'
@@ -152,9 +152,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: '"{label}" oluştur',
+      filterPlaceholder: 'Ara…',
       noData: 'Veri yok',
-      noMatch: 'Eşleşen veri yok',
-      placeholder: 'Ara…'
+      noMatch: 'Eşleşen veri yok'
     },
     slideover: {
       close: 'Kapat'

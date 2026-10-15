@@ -54,9 +54,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: '返回',
       close: '关闭',
+      filterPlaceholder: '输入命令或搜索…',
       noData: '没有数据',
-      noMatch: '没有匹配的数据',
-      placeholder: '输入命令或搜索…'
+      noMatch: '没有匹配的数据'
     },
     contentSearch: {
       links: '链接',
@@ -70,8 +70,8 @@ export default defineLocale<Messages>({
       title: '本页内容'
     },
     dropdownMenu: {
-      noMatch: '没有匹配的数据',
-      placeholder: '搜索…'
+      filterPlaceholder: '搜索…',
+      noMatch: '没有匹配的数据'
     },
     dashboardSearch: {
       theme: '主题'
@@ -110,9 +110,9 @@ export default defineLocale<Messages>({
       increment: '增加'
     },
     listbox: {
+      filterPlaceholder: '搜索…',
       noData: '没有数据',
-      noMatch: '没有匹配的数据',
-      placeholder: '搜索…'
+      noMatch: '没有匹配的数据'
     },
     modal: {
       close: '关闭'
@@ -152,9 +152,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: '创建 "{label}"',
+      filterPlaceholder: '搜索…',
       noData: '没有数据',
-      noMatch: '没有匹配的数据',
-      placeholder: '搜索…'
+      noMatch: '没有匹配的数据'
     },
     slideover: {
       close: '关闭'

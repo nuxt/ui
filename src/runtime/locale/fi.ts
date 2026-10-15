@@ -54,9 +54,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Takaisin',
       close: 'Sulje',
+      filterPlaceholder: 'Kirjoita komento tai hae…',
       noData: 'Ei tietoja',
-      noMatch: 'Ei vastaavia tietoja',
-      placeholder: 'Kirjoita komento tai hae…'
+      noMatch: 'Ei vastaavia tietoja'
     },
     contentSearch: {
       links: 'Linkit',
@@ -70,8 +70,8 @@ export default defineLocale<Messages>({
       title: 'Tällä sivulla'
     },
     dropdownMenu: {
-      noMatch: 'Ei vastaavia tietoja',
-      placeholder: 'Hae…'
+      filterPlaceholder: 'Hae…',
+      noMatch: 'Ei vastaavia tietoja'
     },
     dashboardSearch: {
       theme: 'Teema'
@@ -110,9 +110,9 @@ export default defineLocale<Messages>({
       increment: 'Kasvata'
     },
     listbox: {
+      filterPlaceholder: 'Hae…',
       noData: 'Ei tietoja',
-      noMatch: 'Ei vastaavia tietoja',
-      placeholder: 'Hae…'
+      noMatch: 'Ei vastaavia tietoja'
     },
     modal: {
       close: 'Sulje'
@@ -152,9 +152,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Luo "{label}"',
+      filterPlaceholder: 'Hae…',
       noData: 'Ei tietoja',
-      noMatch: 'Ei vastaavia tietoja',
-      placeholder: 'Hae…'
+      noMatch: 'Ei vastaavia tietoja'
     },
     slideover: {
       close: 'Sulje'

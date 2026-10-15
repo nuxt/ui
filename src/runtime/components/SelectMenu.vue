@@ -52,7 +52,7 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
   /**
    * Whether to display a filter input or not.
    * Can be an object to pass additional props to the input.
-   * `{ placeholder: t('selectMenu.placeholder'), autofocus: true, variant: 'none' }`{lang="ts-type"}
+   * `{ placeholder: t('selectMenu.filterPlaceholder'), autofocus: true, variant: 'none' }`{lang="ts-type"}
    * Set `autofocus: false` to prevent the filter input from being focused when the menu opens (e.g. to avoid opening the virtual keyboard on touch devices).
    * @defaultValue true
    */
@@ -290,7 +290,7 @@ const virtualizerProps = toRef(() => {
     estimateSize: getEstimateSize(filteredItems.value, size.value ?? 'md', props.descriptionKey as string, !!slots['item-description'])
   })
 })
-const filterProps = toRef(() => defu(props.filter, { placeholder: t('selectMenu.placeholder'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
+const filterProps = toRef(() => defu(props.filter, { placeholder: t('selectMenu.filterPlaceholder'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
 
 const { emitFormBlur, emitFormFocus, emitFormInput, emitFormChange, size: formFieldSize, color: formFieldColor, id, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<InputProps>(_props)
 

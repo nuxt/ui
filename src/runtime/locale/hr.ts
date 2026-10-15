@@ -54,9 +54,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Natrag',
       close: 'Zatvori',
+      filterPlaceholder: 'Upišite naredbu ili pretraživanje…',
       noData: 'Nema podataka',
-      noMatch: 'Nema odgovarajućih podataka',
-      placeholder: 'Upišite naredbu ili pretraživanje…'
+      noMatch: 'Nema odgovarajućih podataka'
     },
     contentSearch: {
       links: 'Poveznice',
@@ -70,8 +70,8 @@ export default defineLocale<Messages>({
       title: 'Na ovoj stranici'
     },
     dropdownMenu: {
-      noMatch: 'Nema odgovarajućih podataka',
-      placeholder: 'Pretraživanje…'
+      filterPlaceholder: 'Pretraživanje…',
+      noMatch: 'Nema odgovarajućih podataka'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -110,9 +110,9 @@ export default defineLocale<Messages>({
       increment: 'Povećaj'
     },
     listbox: {
+      filterPlaceholder: 'Pretraživanje…',
       noData: 'Nema podataka',
-      noMatch: 'Nema odgovarajućih podataka',
-      placeholder: 'Pretraživanje…'
+      noMatch: 'Nema odgovarajućih podataka'
     },
     modal: {
       close: 'Zatvori'
@@ -152,9 +152,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Stvori "{label}"',
+      filterPlaceholder: 'Pretraživanje…',
       noData: 'Nema podataka',
-      noMatch: 'Nema odgovarajućih podataka',
-      placeholder: 'Pretraživanje…'
+      noMatch: 'Nema odgovarajućih podataka'
     },
     slideover: {
       close: 'Zatvori'

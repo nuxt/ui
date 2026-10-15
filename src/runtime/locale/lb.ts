@@ -54,9 +54,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Zréck',
       close: 'Zoumaachen',
+      filterPlaceholder: 'Tippt e Befeel oder sicht…',
       noData: 'Keng Donnéeën',
-      noMatch: 'Keng entspriechend Donnéeën',
-      placeholder: 'Tippt e Befeel oder sicht…'
+      noMatch: 'Keng entspriechend Donnéeën'
     },
     contentSearch: {
       links: 'Linken',
@@ -70,8 +70,8 @@ export default defineLocale<Messages>({
       title: 'Op dëser Säit'
     },
     dropdownMenu: {
-      noMatch: 'Keng entspriechend Donnéeën',
-      placeholder: 'Sichen…'
+      filterPlaceholder: 'Sichen…',
+      noMatch: 'Keng entspriechend Donnéeën'
     },
     dashboardSearch: {
       theme: 'Thema'
@@ -110,9 +110,9 @@ export default defineLocale<Messages>({
       increment: 'Inkrementéieren'
     },
     listbox: {
+      filterPlaceholder: 'Sichen…',
       noData: 'Keng Donnéeën',
-      noMatch: 'Keng entspriechend Donnéeën',
-      placeholder: 'Sichen…'
+      noMatch: 'Keng entspriechend Donnéeën'
     },
     modal: {
       close: 'Zoumaachen'
@@ -152,9 +152,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: '"{label}" erstellen',
+      filterPlaceholder: 'Sichen…',
       noData: 'Keng Donnéeën',
-      noMatch: 'Keng entspriechend Donnéeën',
-      placeholder: 'Sichen…'
+      noMatch: 'Keng entspriechend Donnéeën'
     },
     slideover: {
       close: 'Zoumaachen'

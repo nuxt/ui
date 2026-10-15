@@ -54,9 +54,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Atgal',
       close: 'Uždaryti',
+      filterPlaceholder: 'Įveskite komandą arba ieškokite…',
       noData: 'Nėra duomenų',
-      noMatch: 'Nėra atitinkančių duomenų',
-      placeholder: 'Įveskite komandą arba ieškokite…'
+      noMatch: 'Nėra atitinkančių duomenų'
     },
     contentSearch: {
       links: 'Nuorodos',
@@ -70,8 +70,8 @@ export default defineLocale<Messages>({
       title: 'Šiame puslapyje'
     },
     dropdownMenu: {
-      noMatch: 'Nėra atitinkančių duomenų',
-      placeholder: 'Ieškoti…'
+      filterPlaceholder: 'Ieškoti…',
+      noMatch: 'Nėra atitinkančių duomenų'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -110,9 +110,9 @@ export default defineLocale<Messages>({
       increment: 'Padidinti'
     },
     listbox: {
+      filterPlaceholder: 'Ieškoti…',
       noData: 'Nėra duomenų',
-      noMatch: 'Nėra atitinkančių duomenų',
-      placeholder: 'Ieškoti…'
+      noMatch: 'Nėra atitinkančių duomenų'
     },
     modal: {
       close: 'Uždaryti'
@@ -152,9 +152,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Sukurti „{label}"',
+      filterPlaceholder: 'Ieškoti…',
       noData: 'Nėra duomenų',
-      noMatch: 'Nėra atitinkančių duomenų',
-      placeholder: 'Ieškoti…'
+      noMatch: 'Nėra atitinkančių duomenų'
     },
     slideover: {
       close: 'Uždaryti'

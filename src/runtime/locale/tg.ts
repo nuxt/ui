@@ -54,9 +54,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Бозгашт',
       close: 'Бастан',
+      filterPlaceholder: 'Фармонро нависед ё ҷустуҷӯ кунед…',
       noData: 'Маълумот нест',
-      noMatch: 'Маълумоти мувофиқ ёфт нашуд',
-      placeholder: 'Фармонро нависед ё ҷустуҷӯ кунед…'
+      noMatch: 'Маълумоти мувофиқ ёфт нашуд'
     },
     contentSearch: {
       links: 'Пайвандҳо',
@@ -70,8 +70,8 @@ export default defineLocale<Messages>({
       title: 'Мундариҷа'
     },
     dropdownMenu: {
-      noMatch: 'Маълумоти мувофиқ ёфт нашуд',
-      placeholder: 'Ҷустуҷӯ…'
+      filterPlaceholder: 'Ҷустуҷӯ…',
+      noMatch: 'Маълумоти мувофиқ ёфт нашуд'
     },
     dashboardSearch: {
       theme: 'Мавзӯъ'
@@ -110,9 +110,9 @@ export default defineLocale<Messages>({
       increment: 'Зиёд кардан'
     },
     listbox: {
+      filterPlaceholder: 'Ҷустуҷӯ…',
       noData: 'Маълумот нест',
-      noMatch: 'Маълумоти мувофиқ ёфт нашуд',
-      placeholder: 'Ҷустуҷӯ…'
+      noMatch: 'Маълумоти мувофиқ ёфт нашуд'
     },
     modal: {
       close: 'Бастан'
@@ -152,9 +152,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: '"{label}" созед',
+      filterPlaceholder: 'Ҷустуҷӯ…',
       noData: 'Маълумот нест',
-      noMatch: 'Маълумоти мувофиқ ёфт нашуд',
-      placeholder: 'Ҷустуҷӯ…'
+      noMatch: 'Маълумоти мувофиқ ёфт нашуд'
     },
     slideover: {
       close: 'Бастан'

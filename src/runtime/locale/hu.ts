@@ -54,9 +54,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Vissza',
       close: 'Bezárás',
+      filterPlaceholder: 'Írjon be egy parancsot vagy keressen…',
       noData: 'Nincs adat',
-      noMatch: 'Nincs találat',
-      placeholder: 'Írjon be egy parancsot vagy keressen…'
+      noMatch: 'Nincs találat'
     },
     contentSearch: {
       links: 'Linkek',
@@ -70,8 +70,8 @@ export default defineLocale<Messages>({
       title: 'Ezen az oldalon'
     },
     dropdownMenu: {
-      noMatch: 'Nincs találat',
-      placeholder: 'Keresés…'
+      filterPlaceholder: 'Keresés…',
+      noMatch: 'Nincs találat'
     },
     dashboardSearch: {
       theme: 'Téma'
@@ -110,9 +110,9 @@ export default defineLocale<Messages>({
       increment: 'Növel'
     },
     listbox: {
+      filterPlaceholder: 'Keresés…',
       noData: 'Nincs adat',
-      noMatch: 'Nincs találat',
-      placeholder: 'Keresés…'
+      noMatch: 'Nincs találat'
     },
     modal: {
       close: 'Bezárás'
@@ -152,9 +152,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: '"{label}" létrehozása',
+      filterPlaceholder: 'Keresés…',
       noData: 'Nincs adat',
-      noMatch: 'Nincs találat',
-      placeholder: 'Keresés…'
+      noMatch: 'Nincs találat'
     },
     slideover: {
       close: 'Bezárás'

@@ -54,9 +54,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Kembali',
       close: 'Tutup',
+      filterPlaceholder: 'Ketik perintah atau cari…',
       noData: 'Tidak ada data',
-      noMatch: 'Tidak ada data yang cocok',
-      placeholder: 'Ketik perintah atau cari…'
+      noMatch: 'Tidak ada data yang cocok'
     },
     contentSearch: {
       links: 'Tautan',
@@ -70,8 +70,8 @@ export default defineLocale<Messages>({
       title: 'Pada halaman ini'
     },
     dropdownMenu: {
-      noMatch: 'Tidak ada data yang cocok',
-      placeholder: 'Cari…'
+      filterPlaceholder: 'Cari…',
+      noMatch: 'Tidak ada data yang cocok'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -110,9 +110,9 @@ export default defineLocale<Messages>({
       increment: 'Tambah'
     },
     listbox: {
+      filterPlaceholder: 'Cari…',
       noData: 'Tidak ada data',
-      noMatch: 'Tidak ada data yang cocok',
-      placeholder: 'Cari…'
+      noMatch: 'Tidak ada data yang cocok'
     },
     modal: {
       close: 'Tutup'
@@ -152,9 +152,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Buat "{label}"',
+      filterPlaceholder: 'Cari…',
       noData: 'Tidak ada data',
-      noMatch: 'Tidak ada data yang cocok',
-      placeholder: 'Cari…'
+      noMatch: 'Tidak ada data yang cocok'
     },
     slideover: {
       close: 'Tutup'

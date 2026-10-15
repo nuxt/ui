@@ -49,9 +49,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Atpakaļ',
       close: 'Aizvērt',
+      filterPlaceholder: 'Ievadi komandu vai meklē…',
       noData: 'Nav datu',
-      noMatch: 'Nav atbilstošu datu',
-      placeholder: 'Ievadi komandu vai meklē…'
+      noMatch: 'Nav atbilstošu datu'
     },
     contentSearch: {
       links: 'Saites',
@@ -65,8 +65,8 @@ export default defineLocale<Messages>({
       title: 'Šajā lapā'
     },
     dropdownMenu: {
-      noMatch: 'Nav atbilstošu datu',
-      placeholder: 'Meklēt…'
+      filterPlaceholder: 'Meklēt…',
+      noMatch: 'Nav atbilstošu datu'
     },
     dashboardSearch: {
       theme: 'Tēma'
@@ -105,9 +105,9 @@ export default defineLocale<Messages>({
       increment: 'Palielināt'
     },
     listbox: {
+      filterPlaceholder: 'Meklēt…',
       noData: 'Nav datu',
-      noMatch: 'Nav atbilstošu datu',
-      placeholder: 'Meklēt…'
+      noMatch: 'Nav atbilstošu datu'
     },
     modal: {
       close: 'Aizvērt'
@@ -152,9 +152,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Izveidot "{label}"',
+      filterPlaceholder: 'Meklēt…',
       noData: 'Nav datu',
-      noMatch: 'Nav atbilstošu datu',
-      placeholder: 'Meklēt…'
+      noMatch: 'Nav atbilstošu datu'
     },
     slideover: {
       close: 'Aizvērt'

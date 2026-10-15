@@ -43,9 +43,9 @@ export type Messages = {
   commandPalette: {
     back: string
     close: string
+    filterPlaceholder: string
     noData: string
     noMatch: string
-    placeholder: string
   }
   contentSearch: {
     description?: string
@@ -61,8 +61,8 @@ export type Messages = {
     title: string
   }
   dropdownMenu: {
+    filterPlaceholder: string
     noMatch: string
-    placeholder: string
   }
   dashboardSearch: {
     description?: string
@@ -109,9 +109,9 @@ export type Messages = {
     increment: string
   }
   listbox: {
+    filterPlaceholder: string
     noData: string
     noMatch: string
-    placeholder: string
   }
   modal: {
     close: string
@@ -156,9 +156,9 @@ export type Messages = {
   }
   selectMenu: {
     create: string
+    filterPlaceholder: string
     noData: string
     noMatch: string
-    placeholder: string
   }
   slideover: {
     close: string

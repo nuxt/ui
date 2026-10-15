@@ -54,9 +54,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Atrás',
       close: 'Pechar',
+      filterPlaceholder: 'Escribe un comando ou busca…',
       noData: 'Sen datos',
-      noMatch: 'Non hai datos coincidentes',
-      placeholder: 'Escribe un comando ou busca…'
+      noMatch: 'Non hai datos coincidentes'
     },
     contentSearch: {
       links: 'Ligazóns',
@@ -70,8 +70,8 @@ export default defineLocale<Messages>({
       title: 'Nesta páxina'
     },
     dropdownMenu: {
-      noMatch: 'Non hai datos coincidentes',
-      placeholder: 'Buscar…'
+      filterPlaceholder: 'Buscar…',
+      noMatch: 'Non hai datos coincidentes'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -110,9 +110,9 @@ export default defineLocale<Messages>({
       increment: 'Aumentar'
     },
     listbox: {
+      filterPlaceholder: 'Buscar…',
       noData: 'Sen datos',
-      noMatch: 'Non hai datos coincidentes',
-      placeholder: 'Buscar…'
+      noMatch: 'Non hai datos coincidentes'
     },
     modal: {
       close: 'Pechar'
@@ -152,9 +152,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Crear "{label}"',
+      filterPlaceholder: 'Buscar…',
       noData: 'Sen datos',
-      noMatch: 'Non hai datos coincidentes',
-      placeholder: 'Buscar…'
+      noMatch: 'Non hai datos coincidentes'
     },
     slideover: {
       close: 'Pechar'

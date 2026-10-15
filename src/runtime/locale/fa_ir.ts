@@ -55,9 +55,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'بازگشت',
       close: 'بستن',
+      filterPlaceholder: 'یک دستور وارد کنید یا جستجو کنید…',
       noData: 'داده‌ای موجود نیست',
-      noMatch: 'داده‌ای یافت نشد',
-      placeholder: 'یک دستور وارد کنید یا جستجو کنید…'
+      noMatch: 'داده‌ای یافت نشد'
     },
     contentSearch: {
       links: 'پیوندها',
@@ -71,8 +71,8 @@ export default defineLocale<Messages>({
       title: 'در این صفحه'
     },
     dropdownMenu: {
-      noMatch: 'داده‌ای یافت نشد',
-      placeholder: 'جستجو…'
+      filterPlaceholder: 'جستجو…',
+      noMatch: 'داده‌ای یافت نشد'
     },
     dashboardSearch: {
       theme: 'تم'
@@ -111,9 +111,9 @@ export default defineLocale<Messages>({
       increment: 'افزایش'
     },
     listbox: {
+      filterPlaceholder: 'جستجو…',
       noData: 'داده‌ای موجود نیست',
-      noMatch: 'داده‌ای یافت نشد',
-      placeholder: 'جستجو…'
+      noMatch: 'داده‌ای یافت نشد'
     },
     modal: {
       close: 'بستن'
@@ -153,9 +153,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'ایجاد "{label}"',
+      filterPlaceholder: 'جستجو…',
       noData: 'داده‌ای موجود نیست',
-      noMatch: 'داده‌ای یافت نشد',
-      placeholder: 'جستجو…'
+      noMatch: 'داده‌ای یافت نشد'
     },
     slideover: {
       close: 'بستن'

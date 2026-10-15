@@ -54,9 +54,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Tilbage',
       close: 'Luk',
+      filterPlaceholder: 'Skriv en kommando eller søg…',
       noData: 'Ingen data',
-      noMatch: 'Ingen matchende data',
-      placeholder: 'Skriv en kommando eller søg…'
+      noMatch: 'Ingen matchende data'
     },
     contentSearch: {
       links: 'Links',
@@ -70,8 +70,8 @@ export default defineLocale<Messages>({
       title: 'På denne side'
     },
     dropdownMenu: {
-      noMatch: 'Ingen matchende data',
-      placeholder: 'Søg…'
+      filterPlaceholder: 'Søg…',
+      noMatch: 'Ingen matchende data'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -110,9 +110,9 @@ export default defineLocale<Messages>({
       increment: 'Øg'
     },
     listbox: {
+      filterPlaceholder: 'Søg…',
       noData: 'Ingen data',
-      noMatch: 'Ingen matchende data',
-      placeholder: 'Søg…'
+      noMatch: 'Ingen matchende data'
     },
     modal: {
       close: 'Luk'
@@ -152,9 +152,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Opret "{label}"',
+      filterPlaceholder: 'Søg…',
       noData: 'Ingen data',
-      noMatch: 'Ingen matchende data',
-      placeholder: 'Søg…'
+      noMatch: 'Ingen matchende data'
     },
     slideover: {
       close: 'Luk'

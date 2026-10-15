@@ -54,9 +54,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Atzera',
       close: 'Itxi',
+      filterPlaceholder: 'Idatzi komando bat edo bilatu…',
       noData: 'Daturik gabe',
-      noMatch: 'Ez da datu bat ere aurkitu',
-      placeholder: 'Idatzi komando bat edo bilatu…'
+      noMatch: 'Ez da datu bat ere aurkitu'
     },
     contentSearch: {
       links: 'Estekak',
@@ -70,8 +70,8 @@ export default defineLocale<Messages>({
       title: 'Orri honetan'
     },
     dropdownMenu: {
-      noMatch: 'Ez da datu bat ere aurkitu',
-      placeholder: 'Bilatu…'
+      filterPlaceholder: 'Bilatu…',
+      noMatch: 'Ez da datu bat ere aurkitu'
     },
     dashboardSearch: {
       theme: 'Gaia'
@@ -110,9 +110,9 @@ export default defineLocale<Messages>({
       increment: 'Handitu'
     },
     listbox: {
+      filterPlaceholder: 'Bilatu…',
       noData: 'Daturik gabe',
-      noMatch: 'Ez da datu bat ere aurkitu',
-      placeholder: 'Bilatu…'
+      noMatch: 'Ez da datu bat ere aurkitu'
     },
     modal: {
       close: 'Itxi'
@@ -152,9 +152,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Sortu {label}',
+      filterPlaceholder: 'Bilatu…',
       noData: 'Daturik gabe',
-      noMatch: 'Ez da datu bat ere aurkitu',
-      placeholder: 'Bilatu…'
+      noMatch: 'Ez da datu bat ere aurkitu'
     },
     slideover: {
       close: 'Itxi'

@@ -101,7 +101,7 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
   /**
    * Whether to display a filter input or not.
    * Can be an object to pass additional props to the input.
-   * `{ placeholder: t('dropdownMenu.placeholder'), autofocus: true, variant: 'none' }`{lang="ts-type"}
+   * `{ placeholder: t('dropdownMenu.filterPlaceholder'), autofocus: true, variant: 'none' }`{lang="ts-type"}
    * @defaultValue false
    */
   filter?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>

@@ -96,7 +96,7 @@ export interface ListboxProps<T extends ArrayOrNested<ListboxItem> = ArrayOrNest
   /**
    * Whether to display a filter input or not.
    * Can be an object to pass additional props to the input.
-   * `{ placeholder: t('listbox.placeholder'), variant: 'none' }`{lang="ts-type"}
+   * `{ placeholder: t('listbox.filterPlaceholder'), variant: 'none' }`{lang="ts-type"}
    * @defaultValue false
    */
   filter?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
@@ -206,7 +206,7 @@ const virtualizerProps = toRef(() => {
     estimateSize: getEstimateSize(filteredItems.value, size.value ?? 'md', props.descriptionKey as string, !!slots['item-description'])
   })
 })
-const filterProps = toRef(() => defu(typeof props.filter === 'object' ? props.filter : {}, { placeholder: t('listbox.placeholder'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
+const filterProps = toRef(() => defu(typeof props.filter === 'object' ? props.filter : {}, { placeholder: t('listbox.filterPlaceholder'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
 
 const { emitFormChange, emitFormInput, name, size: formFieldSize, color: formFieldColor, id, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<InputProps>(_props, { bind: false })
 

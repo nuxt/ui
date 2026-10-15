@@ -54,9 +54,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Kembali',
       close: 'Tutup',
+      filterPlaceholder: 'Taip arahan atau carian…',
       noData: 'Tiada data',
-      noMatch: 'Tiada data yang sepadan',
-      placeholder: 'Taip arahan atau carian…'
+      noMatch: 'Tiada data yang sepadan'
     },
     contentSearch: {
       links: 'Pautan',
@@ -70,8 +70,8 @@ export default defineLocale<Messages>({
       title: 'Di halaman ini'
     },
     dropdownMenu: {
-      noMatch: 'Tiada data yang sepadan',
-      placeholder: 'Cari…'
+      filterPlaceholder: 'Cari…',
+      noMatch: 'Tiada data yang sepadan'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -110,9 +110,9 @@ export default defineLocale<Messages>({
       increment: 'Naikkan'
     },
     listbox: {
+      filterPlaceholder: 'Cari…',
       noData: 'Tiada data',
-      noMatch: 'Tiada data yang sepadan',
-      placeholder: 'Cari…'
+      noMatch: 'Tiada data yang sepadan'
     },
     modal: {
       close: 'Tutup'
@@ -152,9 +152,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Cipta "{label}"',
+      filterPlaceholder: 'Cari…',
       noData: 'Tiada data',
-      noMatch: 'Tiada data yang sepadan',
-      placeholder: 'Cari…'
+      noMatch: 'Tiada data yang sepadan'
     },
     slideover: {
       close: 'Tutup'

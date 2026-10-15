@@ -54,9 +54,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: '뒤로',
       close: '닫기',
+      filterPlaceholder: '명령을 입력하거나 검색…',
       noData: '데이터가 없습니다.',
-      noMatch: '일치하는 데이터가 없습니다.',
-      placeholder: '명령을 입력하거나 검색…'
+      noMatch: '일치하는 데이터가 없습니다.'
     },
     contentSearch: {
       links: '링크',
@@ -70,8 +70,8 @@ export default defineLocale<Messages>({
       title: '이 페이지에서'
     },
     dropdownMenu: {
-      noMatch: '일치하는 데이터가 없습니다.',
-      placeholder: '검색…'
+      filterPlaceholder: '검색…',
+      noMatch: '일치하는 데이터가 없습니다.'
     },
     dashboardSearch: {
       theme: '테마'
@@ -110,9 +110,9 @@ export default defineLocale<Messages>({
       increment: '증가'
     },
     listbox: {
+      filterPlaceholder: '검색…',
       noData: '데이터가 없습니다.',
-      noMatch: '일치하는 데이터가 없습니다.',
-      placeholder: '검색…'
+      noMatch: '일치하는 데이터가 없습니다.'
     },
     modal: {
       close: '닫기'
@@ -152,9 +152,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: '"{label}" 생성',
+      filterPlaceholder: '검색…',
       noData: '데이터가 없습니다.',
-      noMatch: '일치하는 데이터가 없습니다.',
-      placeholder: '검색…'
+      noMatch: '일치하는 데이터가 없습니다.'
     },
     slideover: {
       close: '닫기'

@@ -54,9 +54,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Til baka',
       close: 'Loka',
+      filterPlaceholder: 'Sláðu inn skipun eða leitaðu…',
       noData: 'Engin gögn',
-      noMatch: 'Engin gögn fundust',
-      placeholder: 'Sláðu inn skipun eða leitaðu…'
+      noMatch: 'Engin gögn fundust'
     },
     contentSearch: {
       links: 'Tenglar',
@@ -70,8 +70,8 @@ export default defineLocale<Messages>({
       title: 'Á þessari síðu'
     },
     dropdownMenu: {
-      noMatch: 'Engin gögn fundust',
-      placeholder: 'Leita…'
+      filterPlaceholder: 'Leita…',
+      noMatch: 'Engin gögn fundust'
     },
     dashboardSearch: {
       theme: 'Þema'
@@ -110,9 +110,9 @@ export default defineLocale<Messages>({
       increment: 'Auka'
     },
     listbox: {
+      filterPlaceholder: 'Leita…',
       noData: 'Engin gögn',
-      noMatch: 'Engin gögn fundust',
-      placeholder: 'Leita…'
+      noMatch: 'Engin gögn fundust'
     },
     modal: {
       close: 'Loka'
@@ -152,9 +152,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Búa til "{label}"',
+      filterPlaceholder: 'Leita…',
       noData: 'Engin gögn',
-      noMatch: 'Engin gögn fundust',
-      placeholder: 'Leita…'
+      noMatch: 'Engin gögn fundust'
     },
     slideover: {
       close: 'Loka'

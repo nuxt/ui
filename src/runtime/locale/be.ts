@@ -54,9 +54,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Назад',
       close: 'Закрыць',
+      filterPlaceholder: 'Увядзіце каманду або выканайце пошук…',
       noData: 'Няма даных',
-      noMatch: 'Супадзенняў не знойдзена',
-      placeholder: 'Увядзіце каманду або выканайце пошук…'
+      noMatch: 'Супадзенняў не знойдзена'
     },
     contentSearch: {
       links: 'Спасылкі',
@@ -70,8 +70,8 @@ export default defineLocale<Messages>({
       title: 'На гэтай старонцы'
     },
     dropdownMenu: {
-      noMatch: 'Супадзенняў не знойдзена',
-      placeholder: 'Пошук…'
+      filterPlaceholder: 'Пошук…',
+      noMatch: 'Супадзенняў не знойдзена'
     },
     dashboardSearch: {
       theme: 'Тэма'
@@ -110,9 +110,9 @@ export default defineLocale<Messages>({
       increment: 'Павялічыць'
     },
     listbox: {
+      filterPlaceholder: 'Пошук…',
       noData: 'Няма даных',
-      noMatch: 'Супадзенняў не знойдзена',
-      placeholder: 'Пошук…'
+      noMatch: 'Супадзенняў не знойдзена'
     },
     modal: {
       close: 'Закрыць'
@@ -152,9 +152,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Стварыць "{label}"',
+      filterPlaceholder: 'Пошук…',
       noData: 'Няма даных',
-      noMatch: 'Супадзенняў не знойдзена',
-      placeholder: 'Пошук…'
+      noMatch: 'Супадзенняў не знойдзена'
     },
     slideover: {
       close: 'Закрыць'

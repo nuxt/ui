@@ -55,9 +55,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'قايتىش',
       close: 'تاقاش',
+      filterPlaceholder: 'بۇيرۇق كىرگۈزۈڭ ياكى ئىزدەڭ…',
       noData: 'سانلىق مەلۇمات يوق',
-      noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
-      placeholder: 'بۇيرۇق كىرگۈزۈڭ ياكى ئىزدەڭ…'
+      noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق'
     },
     contentSearch: {
       links: 'ئۇلانمىلار',
@@ -71,8 +71,8 @@ export default defineLocale<Messages>({
       title: 'مەزمۇن'
     },
     dropdownMenu: {
-      noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
-      placeholder: 'ئىزدەش…'
+      filterPlaceholder: 'ئىزدەش…',
+      noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق'
     },
     dashboardSearch: {
       theme: 'تېما'
@@ -111,9 +111,9 @@ export default defineLocale<Messages>({
       increment: 'كۆپەيتىش'
     },
     listbox: {
+      filterPlaceholder: 'ئىزدەش…',
       noData: 'سانلىق مەلۇمات يوق',
-      noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
-      placeholder: 'ئىزدەش…'
+      noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق'
     },
     modal: {
       close: 'تاقاش'
@@ -153,9 +153,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: '"{label}" نى قۇرۇش',
+      filterPlaceholder: 'ئىزدەش…',
       noData: 'سانلىق مەلۇمات يوق',
-      noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
-      placeholder: 'ئىزدەش…'
+      noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق'
     },
     slideover: {
       close: 'تاقاش'

@@ -54,9 +54,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Orqaga',
       close: 'Yopish',
+      filterPlaceholder: 'Buyruq kiriting yoki qidiring…',
       noData: 'Maʼlumot yoʻq',
-      noMatch: 'Mos keluvchi natija topilmadi',
-      placeholder: 'Buyruq kiriting yoki qidiring…'
+      noMatch: 'Mos keluvchi natija topilmadi'
     },
     contentSearch: {
       links: 'Havolalar',
@@ -70,8 +70,8 @@ export default defineLocale<Messages>({
       title: 'Ushbu sahifada'
     },
     dropdownMenu: {
-      noMatch: 'Mos keluvchi natija topilmadi',
-      placeholder: 'Qidirish…'
+      filterPlaceholder: 'Qidirish…',
+      noMatch: 'Mos keluvchi natija topilmadi'
     },
     dashboardSearch: {
       theme: 'Mavzu'
@@ -110,9 +110,9 @@ export default defineLocale<Messages>({
       increment: 'Qoʻshish'
     },
     listbox: {
+      filterPlaceholder: 'Qidirish…',
       noData: 'Maʼlumot yoʻq',
-      noMatch: 'Mos keluvchi natija topilmadi',
-      placeholder: 'Qidirish…'
+      noMatch: 'Mos keluvchi natija topilmadi'
     },
     modal: {
       close: 'Yopish'
@@ -152,9 +152,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: '"{label}" yaratish',
+      filterPlaceholder: 'Qidirish…',
       noData: 'Maʼlumot yoʻq',
-      noMatch: 'Mos keluvchi natija topilmadi',
-      placeholder: 'Qidirish…'
+      noMatch: 'Mos keluvchi natija topilmadi'
     },
     slideover: {
       close: 'Yopish'
