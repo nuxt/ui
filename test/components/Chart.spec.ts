@@ -103,7 +103,7 @@ describe('Chart', () => {
     const wrapper = await mountSuspended(Chart, { props: { ...props, categories: [{ key: 'desktop', label: 'Desktop' }, { key: 'mobile', label: 'Mobile', color: 'error' }] } })
 
     expect(wrapper.findAll('[data-ts-key^="legend-label"]').map(label => label.text())).toEqual(['Desktop', 'Mobile'])
-    expect(wrapper.find('[data-slot="root"]').attributes('style')).toContain('--ts-chart-2: var(--ui-error)')
+    expect(wrapper.find('[data-slot="chart"]').attributes('style')).toContain('--ts-chart-2: var(--ui-error)')
     expect(wrapper.find('svg.ts-chart').attributes('aria-label')).toBe('Visitors')
   })
 
