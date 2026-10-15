@@ -114,6 +114,17 @@ describe('colors plugin', () => {
     expect(rule(css, ':root, :host')).toContain(`--ui-color-secondary-500: ${colors.indigo[500]};`)
     expect(aliasRule(css, ':root, :host, .light', '--ui-primary: var(--ui-color-primary-900);')).toContain('--ui-secondary: var(--ui-color-secondary-600);')
     expect(aliasRule(css, '.dark', '--ui-primary: var(--ui-color-primary-200);')).toContain('--ui-secondary: var(--ui-color-secondary-600);')
+    // The text follows the shades picked, on a gray through neutral's roles
+    expect(aliasRule(css, ':root, :host, .light', '--ui-primary: var(--ui-color-primary-900);')).toContain('--ui-secondary-text: initial;')
+    expect(aliasRule(css, ':root, :host, .light', '--ui-primary: var(--ui-color-primary-900);')).not.toContain('--ui-primary-text: initial;')
+  })
+
+  it('gives each color a text darker than its solid in light mode', async () => {
+    const css = await build({})
+
+    expect(css).toContain('--ui-primary-text: color-mix(in oklab, var(--ui-color-primary-600) 75%, var(--ui-color-primary-700));')
+    expect(css).toContain('--ui-primary-text-muted: var(--ui-color-primary-600);')
+    expect(css).toContain('--ui-primary-text: initial;')
   })
 
   it('takes `black` and `white` as shades, and shades without a palette', async () => {
@@ -155,6 +166,8 @@ describe('colors plugin', () => {
     const gray = await build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: neutral 900 50; }')
     expect(gray).toContain(':root, :host, .light, .dark {')
     expect(gray).toContain('--ui-primary-bg-soft: var(--ui-bg-soft);')
+    // its text is the solid, like neutral's
+    expect(gray).toContain('--ui-primary-text: var(--ui-primary);')
     // neutral's hover mixes the color itself, so primary's mixes primary
     expect(gray).toContain('--ui-primary-bg-hover: color-mix(in oklab, var(--ui-primary) 90%, transparent);')
     // a role neutral leaves to its recipe stays on it

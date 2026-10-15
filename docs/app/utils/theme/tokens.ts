@@ -12,3 +12,11 @@ export const cssVariableDefaults = {
   light: withoutAliases(LIBRARY_TOKEN_DEFAULTS.light),
   dark: withoutAliases(LIBRARY_TOKEN_DEFAULTS.dark)
 }
+
+// A color alias on shades of your choice takes them for its text too, instead
+// of the darker default, like `@plugin "@nuxt/ui/colors"` does for the export
+export function aliasTextResets(tokens: Record<string, string> = {}): Record<string, string> {
+  return Object.fromEntries(Object.keys(DEFAULT_COLORS)
+    .filter(alias => alias !== 'neutral' && `--ui-${alias}` in tokens)
+    .flatMap(alias => [[`--ui-${alias}-text`, 'initial'], [`--ui-${alias}-text-muted`, 'initial']]))
+}

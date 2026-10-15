@@ -125,9 +125,9 @@ export const presets: ThemePreset[] = [{
     icons: 'bootstrap',
     style: {
       tokenShades: {
-        // Dark stays on the 500s rather than lifting to the 400s.
+        // Dark keeps the same brand colours rather than lifting to the 400s.
         '--ui-primary': { dark: 500 },
-        '--ui-secondary': { dark: 500 },
+        '--ui-secondary': { light: 600, dark: 500 },
         '--ui-success': { dark: 500 },
         '--ui-info': { dark: 500 },
         '--ui-warning': { dark: 500 },
@@ -268,8 +268,9 @@ export const presets: ThemePreset[] = [{
       defaults: { variants: { inputs: 'soft' } },
       tokenShades: {
         ...tintedNeutral(),
-        // Dark holds the deep cinema red rather than lifting to the salmon 400
-        '--ui-primary': { dark: 500 },
+        // 600 is the deep cinema red, 500 leans orange; dark holds it rather
+        // than lifting to the salmon 400
+        '--ui-primary': { light: 600, dark: 500 },
         // light restates tintedNeutral's step: this key replaces it wholesale
         '--ui-bg-default': { light: 50, dark: 950 },
         '--ui-bg-soft': { dark: 900 },
@@ -321,7 +322,9 @@ export const presets: ThemePreset[] = [{
     style: {
       defaults: { variants: { panels: 'subtle' } },
       tokenShades: {
-        ...tintedNeutral()
+        ...tintedNeutral(),
+        // orange-500 is too light to carry white text, 600 is the burnt stop
+        '--ui-primary': { light: 600 }
       }
     },
     components: {

@@ -14,6 +14,7 @@
     --ui-accent-bg-soft: initial;
     --ui-accent-bg-strong: initial;
     --ui-accent-text-contrast: initial;
+    --ui-accent-text: initial;
     --ui-accent-text-default: initial;
     --ui-accent-text-muted: initial;
     --ui-accent-text-faint: initial;
@@ -24,13 +25,15 @@
 
   /* A color's scope reads its roles from `--ui-<color>-<role>`. An unset variable
      leaves the role unset, so it keeps its recipe, or for neutral the neutral
-     token of the same name. */
+     token of the same name. `--ui-accent-text` is the color's text, which
+     `text-accent` reads before the solid: neutral's is the solid itself. */
   .\[--ui-accent\:var\(--ui-primary\)\] {
     --ui-accent-bg-hover: var(--ui-primary-bg-hover);
     --ui-accent-bg-tint: var(--ui-primary-bg-tint);
     --ui-accent-bg-soft: var(--ui-primary-bg-soft);
     --ui-accent-bg-strong: var(--ui-primary-bg-strong);
     --ui-accent-text-contrast: var(--ui-primary-text-contrast);
+    --ui-accent-text: var(--ui-primary-text);
     --ui-accent-text-default: var(--ui-primary-text-default);
     --ui-accent-text-muted: var(--ui-primary-text-muted);
     --ui-accent-text-faint: var(--ui-primary-text-faint);
@@ -45,6 +48,7 @@
     --ui-accent-bg-soft: var(--ui-secondary-bg-soft);
     --ui-accent-bg-strong: var(--ui-secondary-bg-strong);
     --ui-accent-text-contrast: var(--ui-secondary-text-contrast);
+    --ui-accent-text: var(--ui-secondary-text);
     --ui-accent-text-default: var(--ui-secondary-text-default);
     --ui-accent-text-muted: var(--ui-secondary-text-muted);
     --ui-accent-text-faint: var(--ui-secondary-text-faint);
@@ -59,6 +63,7 @@
     --ui-accent-bg-soft: var(--ui-success-bg-soft);
     --ui-accent-bg-strong: var(--ui-success-bg-strong);
     --ui-accent-text-contrast: var(--ui-success-text-contrast);
+    --ui-accent-text: var(--ui-success-text);
     --ui-accent-text-default: var(--ui-success-text-default);
     --ui-accent-text-muted: var(--ui-success-text-muted);
     --ui-accent-text-faint: var(--ui-success-text-faint);
@@ -73,6 +78,7 @@
     --ui-accent-bg-soft: var(--ui-info-bg-soft);
     --ui-accent-bg-strong: var(--ui-info-bg-strong);
     --ui-accent-text-contrast: var(--ui-info-text-contrast);
+    --ui-accent-text: var(--ui-info-text);
     --ui-accent-text-default: var(--ui-info-text-default);
     --ui-accent-text-muted: var(--ui-info-text-muted);
     --ui-accent-text-faint: var(--ui-info-text-faint);
@@ -87,6 +93,7 @@
     --ui-accent-bg-soft: var(--ui-warning-bg-soft);
     --ui-accent-bg-strong: var(--ui-warning-bg-strong);
     --ui-accent-text-contrast: var(--ui-warning-text-contrast);
+    --ui-accent-text: var(--ui-warning-text);
     --ui-accent-text-default: var(--ui-warning-text-default);
     --ui-accent-text-muted: var(--ui-warning-text-muted);
     --ui-accent-text-faint: var(--ui-warning-text-faint);
@@ -101,6 +108,7 @@
     --ui-accent-bg-soft: var(--ui-error-bg-soft);
     --ui-accent-bg-strong: var(--ui-error-bg-strong);
     --ui-accent-text-contrast: var(--ui-error-text-contrast);
+    --ui-accent-text: var(--ui-error-text);
     --ui-accent-text-default: var(--ui-error-text-default);
     --ui-accent-text-muted: var(--ui-error-text-muted);
     --ui-accent-text-faint: var(--ui-error-text-faint);
@@ -115,6 +123,7 @@
     --ui-accent-bg-soft: var(--ui-neutral-bg-soft, var(--ui-bg-soft));
     --ui-accent-bg-strong: var(--ui-neutral-bg-strong, color-mix(in oklab, var(--ui-bg-strong) 75%, transparent));
     --ui-accent-text-contrast: var(--ui-neutral-text-contrast);
+    --ui-accent-text: var(--ui-neutral-text, var(--ui-neutral));
     --ui-accent-text-default: var(--ui-neutral-text-default, var(--ui-text-default));
     --ui-accent-text-muted: var(--ui-neutral-text-muted, var(--ui-text-muted));
     --ui-accent-text-faint: var(--ui-neutral-text-faint, var(--ui-text-faint));

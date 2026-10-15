@@ -121,15 +121,32 @@
   /* Each color alias is a shade of its palette, lighter in dark mode, and
      `neutral` the ends of its own, which makes it the neutral solid. In `base` at zero
      specificity, like the palettes, so the shades `@plugin "@nuxt/ui/colors"`
-     picks win. */
+     picks win.
+     A color's text is darker than its solid in light mode, between shades `600`
+     and `700`, and its muted text on `600`, which keeps both above 3:1 on the
+     page and on the color's own fills. Unset in dark mode, they follow the
+     alias. */
   :where(:root, :host, .light) {
-    --ui-primary: var(--ui-color-primary-600);
-    --ui-secondary: var(--ui-color-secondary-600);
-    --ui-success: var(--ui-color-success-600);
-    --ui-info: var(--ui-color-info-600);
-    --ui-warning: var(--ui-color-warning-600);
-    --ui-error: var(--ui-color-error-600);
+    --ui-primary: var(--ui-color-primary-500);
+    --ui-secondary: var(--ui-color-secondary-500);
+    --ui-success: var(--ui-color-success-500);
+    --ui-info: var(--ui-color-info-500);
+    --ui-warning: var(--ui-color-warning-500);
+    --ui-error: var(--ui-color-error-500);
     --ui-neutral: var(--ui-color-neutral-900);
+
+    --ui-primary-text: color-mix(in oklab, var(--ui-color-primary-600) 75%, var(--ui-color-primary-700));
+    --ui-primary-text-muted: var(--ui-color-primary-600);
+    --ui-secondary-text: color-mix(in oklab, var(--ui-color-secondary-600) 75%, var(--ui-color-secondary-700));
+    --ui-secondary-text-muted: var(--ui-color-secondary-600);
+    --ui-success-text: color-mix(in oklab, var(--ui-color-success-600) 75%, var(--ui-color-success-700));
+    --ui-success-text-muted: var(--ui-color-success-600);
+    --ui-info-text: color-mix(in oklab, var(--ui-color-info-600) 75%, var(--ui-color-info-700));
+    --ui-info-text-muted: var(--ui-color-info-600);
+    --ui-warning-text: color-mix(in oklab, var(--ui-color-warning-600) 75%, var(--ui-color-warning-700));
+    --ui-warning-text-muted: var(--ui-color-warning-600);
+    --ui-error-text: color-mix(in oklab, var(--ui-color-error-600) 75%, var(--ui-color-error-700));
+    --ui-error-text-muted: var(--ui-color-error-600);
   }
 
   :where(.dark) {
@@ -140,6 +157,19 @@
     --ui-warning: var(--ui-color-warning-400);
     --ui-error: var(--ui-color-error-400);
     --ui-neutral: var(--ui-color-neutral-50);
+
+    --ui-primary-text: initial;
+    --ui-primary-text-muted: initial;
+    --ui-secondary-text: initial;
+    --ui-secondary-text-muted: initial;
+    --ui-success-text: initial;
+    --ui-success-text-muted: initial;
+    --ui-info-text: initial;
+    --ui-info-text-muted: initial;
+    --ui-warning-text: initial;
+    --ui-warning-text-muted: initial;
+    --ui-error-text: initial;
+    --ui-error-text-muted: initial;
   }
 }
 

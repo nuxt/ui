@@ -3,7 +3,7 @@ import { THEME_TAG_IDS, THEME_STATE_KEYS, clamped } from '../utils/theme/storage
 import type { FontPrefs } from '../utils/theme/storage'
 import { FONT_WEIGHT_DEFAULTS, FONTS, RADIUSES, NEUTRAL_COLORS, PRIMARY_COLORS } from '../utils/theme/studio'
 import { themeIcons, ICON_PACKS } from '../utils/theme/icons'
-import { cssVariableDefaults } from '../utils/theme/tokens'
+import { aliasTextResets, cssVariableDefaults } from '../utils/theme/tokens'
 import type { SerializeOptions } from '../utils/theme/engine/serialize'
 import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables } from '../utils/theme/sanitize'
 // Tables only, never the engine barrel: this composable rides the entry
@@ -210,7 +210,7 @@ export function useTheme() {
     const data = cssVariablesData.value
     const parts: string[] = []
     if (Object.keys(data.light || {}).length) {
-      const full = { ...cssVariableDefaults.light, ...data.light }
+      const full = { ...cssVariableDefaults.light, ...aliasTextResets(data.light), ...data.light }
       parts.push(`.light { ${Object.entries(full).map(([k, v]) => `${k}: ${v};`).join(' ')} }`)
     }
     if (Object.keys(data.dark || {}).length) {
