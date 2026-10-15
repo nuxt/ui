@@ -16,23 +16,36 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Zapri'
     },
+    breadcrumb: {
+      label: 'drobtinice'
+    },
     calendar: {
+      label: 'Datum dogodka',
+      monthPicker: 'Izbira meseca',
       nextMonth: 'Naslednji mesec',
       nextYear: 'Naslednje leto',
       prevMonth: 'Prejšnji mesec',
-      prevYear: 'Prejšnje leto'
+      prevYear: 'Prejšnje leto',
+      yearPicker: 'Izbira leta'
     },
     carousel: {
       dots: 'Izberite diapozitiv za prikaz',
       goto: 'Pojdi na {slide}',
       next: 'Naprej',
-      prev: 'Nazaj'
+      prev: 'Nazaj',
+      roledescription: 'vrtiljak',
+      slide: 'diapozitiv'
+    },
+    chatMessages: {
+      autoScroll: 'Pomakni na dno'
     },
     chatPrompt: {
       placeholder: 'Tukaj napišite svoje sporočilo…'
     },
     chatPromptSubmit: {
-      label: 'Pošlji sporočilo'
+      label: 'Pošlji sporočilo',
+      reload: 'Poskusi znova',
+      stop: 'Ustavi generiranje'
     },
     chatReasoning: {
       thinking: 'Razmišlja…',
@@ -51,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Zapri',
       noData: 'Ni podatkov',
       noMatch: 'Ni ujemanj',
-      placeholder: 'Vpiši ukaz ali išči…'
+      placeholder: 'Vpiši ukaz ali išči…',
+      results: 'Rezultati'
     },
     contentSearch: {
       links: 'Povezave',
@@ -95,14 +109,37 @@ export default defineLocale<Messages>({
       close: 'Zapri meni',
       open: 'Odpri meni'
     },
+    inputDate: {
+      day: 'dan',
+      dayPeriod: 'AM/PM',
+      era: 'doba',
+      hour: 'ura',
+      minute: 'minuta',
+      month: 'mesec',
+      second: 'sekunda',
+      timeZoneName: 'časovni pas',
+      year: 'leto'
+    },
     inputMenu: {
       create: 'Ustvari "{label}"',
       noData: 'Ni podatkov',
-      noMatch: 'Ni ujemanj'
+      noMatch: 'Ni ujemanj',
+      trigger: 'Prikaži možnosti'
     },
     inputNumber: {
       decrement: 'Zmanjšaj',
-      increment: 'Povišaj'
+      increment: 'Povišaj',
+      roledescription: 'številsko polje'
+    },
+    inputRating: {
+      rate: 'Oceni z {value} od {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'ura',
+      minute: 'minuta',
+      second: 'sekunda',
+      timeZoneName: 'časovni pas'
     },
     listbox: {
       noData: 'Ni podatkov',
@@ -111,6 +148,16 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Zapri'
+    },
+    pagination: {
+      first: 'Prva stran',
+      last: 'Zadnja stran',
+      next: 'Naslednja stran',
+      page: 'Stran {page}',
+      prev: 'Prejšnja stran'
+    },
+    pinInput: {
+      input: 'koda PIN, znak {index} od {length}'
     },
     pricingTable: {
       caption: 'Primerjava cenovnih načrtov'
@@ -144,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: 'Ni ujemanj',
       search: 'Išči…'
     },
+    skeleton: {
+      label: 'nalaganje'
+    },
     slideover: {
       close: 'Zapri'
+    },
+    slider: {
+      max: 'Maksimum',
+      min: 'Minimum',
+      thumb: 'Drsnik',
+      value: 'Vrednost {index} od {total}'
+    },
+    stepper: {
+      label: 'napredek'
     },
     table: {
       noData: 'Ni podatkov'
     },
     toast: {
       close: 'Zapri'
+    },
+    toaster: {
+      label: 'Obvestilo',
+      viewport: 'Obvestila ({hotkey})'
     }
   }
 })

@@ -67,6 +67,7 @@ import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useFormField } from '../composables/useFormField'
+import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
@@ -86,22 +87,29 @@ defineSlots<InputRatingSlots>()
 
 const props = useComponentProps<InputRatingProps>('inputRating', _props)
 
+const { t } = useLocale()
 const appConfig = useAppConfig() as InputRating['AppConfig']
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'length', 'step', 'hoverable', 'clearable', 'required', 'modelValue', 'defaultValue'), emits)
 
-const { id, emitFormChange, emitFormInput, size, color, name, disabled: formDisabled, ariaAttrs } = useFormField<InputRatingProps>(_props)
+const { id, emitFormChange, emitFormInput, size: formFieldSize, color: formFieldColor, name, disabled: formFieldDisabled, ariaAttrs } = useFormField<InputRatingProps>(_props)
 
+// eslint-disable-next-line vue/no-dupe-keys
+const color = computed(() => formFieldColor.value ?? props.color)
+// eslint-disable-next-line vue/no-dupe-keys
+const size = computed(() => formFieldSize.value ?? props.size)
+
+const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 // `readonly` blocks interaction too, but only an explicit `disabled` dims the control.
-const disabled = computed(() => formDisabled.value || props.readonly)
+const rootDisabled = computed(() => disabled.value || props.readonly)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.inputRating || {}) })({
-  size: size.value ?? props.size,
-  color: color.value ?? props.color,
+  size: size.value,
+  color: color.value,
   orientation: props.orientation,
-  readonly: props.readonly && !formDisabled.value,
-  disabled: formDisabled.value
+  readonly: props.readonly && !disabled.value,
+  disabled: disabled.value
 }))
 
 const starIcon = computed(() => props.icon ?? appConfig.ui.icons.star)
@@ -122,7 +130,7 @@ function onUpdate(value: number) {
     data-slot="root"
     v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
     :name="name"
-    :disabled="disabled"
+    :disabled="rootDisabled"
     :aria-readonly="props.readonly || undefined"
     :orientation="props.orientation"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
@@ -150,7 +158,7 @@ function onUpdate(value: number) {
         v-for="step in steps"
         :key="step"
         :step="step"
-        :aria-label="`Rate ${step} out of ${props.length}`"
+        :aria-label="t('inputRating.rate', { value: step, length: props.length! })"
         data-slot="indicator"
         :class="ui.indicator({ class: props.ui?.indicator })"
       >

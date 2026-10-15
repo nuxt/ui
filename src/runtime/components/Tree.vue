@@ -27,11 +27,11 @@ export type TreeItem = {
   onToggle?: (e: TreeItemToggleEvent<TreeItem>) => void
   onSelect?: (e: TreeItemSelectEvent<TreeItem>) => void
   class?: any
-  ui?: Pick<Tree['slots'], 'item' | 'itemWithChildren' | 'link' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren'>
+  ui?: Partial<Pick<Tree['slots'], 'item' | 'itemWithChildren' | 'link' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren'>>
   [key: string]: any
 }
 
-export interface TreeProps<T extends TreeItem[] = TreeItem[], M extends boolean = false> extends Pick<TreeRootProps<T>, 'expanded' | 'defaultExpanded' | 'selectionBehavior' | 'propagateSelect' | 'disabled' | 'bubbleSelect'> {
+export interface TreeProps<T extends TreeItem[] = TreeItem[], M extends boolean = false> extends Pick<TreeRootProps<T>, 'expanded' | 'defaultExpanded' | 'selectionBehavior' | 'propagateSelect' | 'disabled' | 'bubbleSelect' | 'loop'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'ul'
@@ -149,7 +149,7 @@ import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { defu } from 'defu'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
-import { get } from '../utils'
+import { get, resolveAs } from '../utils'
 import { getEstimateSize } from '../utils/virtualizer'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -168,16 +168,10 @@ const props = useComponentProps<TreeProps<T, M>>('tree', _props)
 
 const appConfig = useAppConfig() as Tree['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'items', 'multiple', 'expanded', 'disabled', 'propagateSelect', 'bubbleSelect'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'items', 'multiple', 'expanded', 'disabled', 'propagateSelect', 'bubbleSelect', 'loop'), emits)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const as = computed(() => {
-  if (typeof props.as === 'string' || typeof props.as?.render === 'function') {
-    return { root: props.as, link: 'button' }
-  }
-
-  return defu(props.as, { root: 'ul', link: 'button' })
-})
+const as = computed(() => resolveAs(props.as, { root: 'ul', link: 'button' }))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const nested = computed(() => props.virtualize ? false : props.nested)
@@ -190,7 +184,7 @@ const flattenedPaddingFormula = computed(() => {
     lg: { base: 3, perLevel: 7 }, // px-3, ms-5.5 + ps-1.5
     xl: { base: 3, perLevel: 7.5 } // px-3, ms-6 + ps-1.5
   }
-  const config = sizeConfig[props.size || 'md']
+  const config = sizeConfig[props.size as keyof typeof sizeConfig] ?? sizeConfig.md
   return (level: number) => `calc(var(--spacing) * ${(level - 1) * config.perLevel + config.base})`
 })
 
@@ -266,6 +260,7 @@ defineExpose({
         v-slot="{ isExpanded, isSelected, isIndeterminate, handleSelect, handleToggle }"
         :level="level"
         :value="item"
+        :disabled="item.disabled"
         as-child
         @toggle="(item.onToggle ?? props.onToggle)?.($event, item)"
         @select="(item.onSelect ?? props.onSelect)?.($event, item)"
@@ -281,7 +276,7 @@ defineExpose({
             :disabled="item.disabled || props.disabled"
             data-slot="link"
             :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], selected: isSelected, disabled: item.disabled || props.disabled })"
-            :style="!nested && level > 1 ? { paddingLeft: flattenedPaddingFormula(level) } : undefined"
+            :style="!nested && level > 1 ? { paddingInlineStart: flattenedPaddingFormula(level) } : undefined"
           >
             <slot
               :name="((item.slot || 'item') as keyof TreeSlots<T>)"

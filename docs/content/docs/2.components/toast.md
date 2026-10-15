@@ -1,6 +1,10 @@
 ---
 description: A succinct message to provide information or feedback to the user.
 category: overlay
+keywords:
+  - notification
+  - snackbar
+  - flash message
 links:
   - label: Toast
     icon: i-custom-reka-ui
@@ -125,7 +129,7 @@ name: 'toast-close-example'
 
 ### Close Icon
 
-Pass a `closeIcon` field to customize the close button [Icon](/docs/components/icon). Default to `i-lucide-x`.
+Pass a `closeIcon` field to customize the close button [Icon](/docs/components/icon). Defaults to `i-lucide-x`.
 
 ::component-example
 ---
@@ -219,7 +223,7 @@ name: 'toast-orientation-example'
 
 ## Examples
 
-::note{to="/components/app"}
+::note{to="/docs/components/app"}
 Nuxt UI provides an **App** component that wraps your app to provide global configurations.
 ::
 

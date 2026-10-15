@@ -1,5 +1,4 @@
 ---
-title: Sidebar
 description: 'A collapsible sidebar with multiple visual variants.'
 category: layout
 links:
@@ -276,6 +275,20 @@ You can customize this icon globally in your `app.config.ts` under `ui.icons.clo
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
 :::
+::
+
+### Breakpoint :badge{label="Soon" class="align-text-top"}
+
+Use the `breakpoint` prop to change the breakpoint below which the sidebar renders as a menu. Defaults to `lg`.
+
+```vue
+<template>
+  <USidebar breakpoint="xl" />
+</template>
+```
+
+::note
+The values follow the default Tailwind CSS breakpoints. Custom `--breakpoint-*` values are not picked up.
 ::
 
 ### Mode

@@ -7,7 +7,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Toaster = ComponentConfig<typeof theme, AppConfig, 'toaster'>
 
-export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'> {
+export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection' | 'limit' | 'toastManager'> {
   /**
    * The position on the screen to display the toasts.
    * @defaultValue 'bottom-right'
@@ -47,17 +47,18 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, toRef, provide } from 'vue'
+import { ref, computed, defineAsyncComponent, toRef, provide, onMounted, onBeforeUnmount } from 'vue'
 import { ToastProvider, ToastViewport, ToastPortal } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
+import { useLocale } from '../composables/useLocale'
 import { useToast, toastMaxInjectionKey } from '../composables/useToast'
 import { usePortal } from '../composables/usePortal'
 import { omit } from '../utils'
+import { requestIdleCallback, cancelIdleCallback } from '../utils/prefetch'
 import { tv } from '../utils/tv'
-import UToast from './Toast.vue'
 
 const _props = withDefaults(defineProps<ToasterProps>(), {
   expand: true,
@@ -68,14 +69,35 @@ const _props = withDefaults(defineProps<ToasterProps>(), {
 })
 defineSlots<ToasterSlots>()
 
+// `ToastProvider` is the root, attributes would fall through as its props (`limit`, `toastManager`).
+defineOptions({ inheritAttrs: false })
+
 const props = useComponentProps('toaster', _props)
 
+const loadToast = () => import('./Toast.vue')
+
+const UToast = defineAsyncComponent(loadToast)
+
+// Preload once idle: a toast is often shown when the network just failed.
+let idleId: ReturnType<typeof requestIdleCallback>
+
+onMounted(() => {
+  idleId = requestIdleCallback(() => {
+    loadToast().catch(() => {})
+  })
+})
+
+onBeforeUnmount(() => {
+  cancelIdleCallback(idleId)
+})
+
 const { toasts, remove } = useToast()
+const { t } = useLocale()
 const appConfig = useAppConfig() as Toaster['AppConfig']
 
 provide(toastMaxInjectionKey, toRef(() => props.max))
 
-const providerProps = useForwardProps(reactivePick(props, 'duration', 'label', 'swipeThreshold', 'disableSwipe'))
+const providerProps = useForwardProps(reactivePick(props, 'duration', 'swipeThreshold', 'disableSwipe'))
 const portalProps = usePortal(toRef(() => props.portal))
 
 const swipeDirection = computed(() => {
@@ -122,7 +144,7 @@ function getOffset(index: number) {
 </script>
 
 <template>
-  <ToastProvider :swipe-direction="swipeDirection" v-bind="providerProps">
+  <ToastProvider :swipe-direction="swipeDirection" :label="props.label ?? t('toaster.label')" v-bind="providerProps">
     <slot />
 
     <UToast
@@ -130,9 +152,9 @@ function getOffset(index: number) {
       :key="toast.id"
       ref="refs"
       :progress="props.progress"
-      v-bind="omit(toast, ['id', 'close', '_duplicate', '_updated'])"
+      v-bind="omit(toast, ['id', 'close', '_duplicate', '_updated', '_animatedAt', 'onClick'])"
       :close="(toast.close as boolean)"
-      :data-expanded="expanded"
+      :data-collapsed="!expanded"
       :data-front="!expanded && index === toasts.length - 1"
       :data-pulsing="toast._duplicate ? (toast._duplicate % 2 === 0 ? 'even' : 'odd') : undefined"
       :style="{
@@ -151,6 +173,7 @@ function getOffset(index: number) {
 
     <ToastPortal v-bind="portalProps">
       <ToastViewport
+        :label="t('toaster.viewport')"
         :data-expanded="expanded"
         data-slot="viewport"
         :class="ui.viewport({ class: [props.ui?.viewport, props.class] })"

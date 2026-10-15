@@ -2,6 +2,10 @@
 title: AvatarGroup
 description: Stack multiple avatars in a group.
 category: element
+keywords:
+  - stacked avatars
+  - faces
+  - members
 links:
   - label: GitHub
     icon: i-simple-icons-github
@@ -19,12 +23,12 @@ slots:
   default: |
 
     <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" />
-    <UAvatar src="https://github.com/romhml.png" alt="Romain Hamel" />
-    <UAvatar src="https://github.com/noook.png" alt="Neil Richter" />
+    <UAvatar src="https://github.com/HugoRCD.png" alt="Hugo Richard" />
+    <UAvatar src="https://github.com/atinux.png" alt="Sébastien Chopin" />
 ---
 :u-avatar{src="https://github.com/benjamincanac.png" alt="Benjamin Canac"}
-:u-avatar{src="https://github.com/romhml.png" alt="Romain Hamel"}
-:u-avatar{src="https://github.com/noook.png" alt="Neil Richter"}
+:u-avatar{src="https://github.com/HugoRCD.png" alt="Hugo Richard"}
+:u-avatar{src="https://github.com/atinux.png" alt="Sébastien Chopin"}
 ::
 
 ### Size
@@ -40,12 +44,12 @@ slots:
   default: |
 
     <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" loading="lazy" />
-    <UAvatar src="https://github.com/romhml.png" alt="Romain Hamel" loading="lazy" />
-    <UAvatar src="https://github.com/noook.png" alt="Neil Richter" loading="lazy" />
+    <UAvatar src="https://github.com/HugoRCD.png" alt="Hugo Richard" loading="lazy" />
+    <UAvatar src="https://github.com/atinux.png" alt="Sébastien Chopin" loading="lazy" />
 ---
 :u-avatar{src="https://github.com/benjamincanac.png" alt="Benjamin Canac" loading="lazy"}
-:u-avatar{src="https://github.com/romhml.png" alt="Romain Hamel" loading="lazy"}
-:u-avatar{src="https://github.com/noook.png" alt="Neil Richter" loading="lazy"}
+:u-avatar{src="https://github.com/HugoRCD.png" alt="Hugo Richard" loading="lazy"}
+:u-avatar{src="https://github.com/atinux.png" alt="Sébastien Chopin" loading="lazy"}
 ::
 
 ### Max
@@ -61,12 +65,12 @@ slots:
   default: |
 
     <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" loading="lazy" />
-    <UAvatar src="https://github.com/romhml.png" alt="Romain Hamel" loading="lazy" />
-    <UAvatar src="https://github.com/noook.png" alt="Neil Richter" loading="lazy" />
+    <UAvatar src="https://github.com/HugoRCD.png" alt="Hugo Richard" loading="lazy" />
+    <UAvatar src="https://github.com/atinux.png" alt="Sébastien Chopin" loading="lazy" />
 ---
 :u-avatar{src="https://github.com/benjamincanac.png" alt="Benjamin Canac" loading="lazy"}
-:u-avatar{src="https://github.com/romhml.png" alt="Romain Hamel" loading="lazy"}
-:u-avatar{src="https://github.com/noook.png" alt="Neil Richter" loading="lazy"}
+:u-avatar{src="https://github.com/HugoRCD.png" alt="Hugo Richard" loading="lazy"}
+:u-avatar{src="https://github.com/atinux.png" alt="Sébastien Chopin" loading="lazy"}
 ::
 
 ### Color :badge{label="4.8+" class="align-text-top"}
@@ -82,12 +86,12 @@ slots:
   default: |
 
     <UAvatar alt="Benjamin Canac" />
-    <UAvatar alt="Romain Hamel" />
-    <UAvatar alt="Neil Richter" />
+    <UAvatar alt="Hugo Richard" />
+    <UAvatar alt="Sébastien Chopin" />
 ---
 :u-avatar{alt="Benjamin Canac"}
-:u-avatar{alt="Romain Hamel"}
-:u-avatar{alt="Neil Richter"}
+:u-avatar{alt="Hugo Richard"}
+:u-avatar{alt="Sébastien Chopin"}
 ::
 
 ## Examples

@@ -1,7 +1,10 @@
 ---
-title: Empty
 description: 'A component to display an empty state.'
 category: data
+keywords:
+  - no data
+  - placeholder
+  - zero state
 links:
   - label: GitHub
     icon: i-simple-icons-github
@@ -9,6 +12,8 @@ links:
 ---
 
 ## Usage
+
+Use the Empty component to display a placeholder state when there is no content to show.
 
 ::code-preview
 
@@ -38,6 +43,10 @@ Use the `title` prop to set the title of the empty state.
 props:
   title: No projects found
 ---
+::
+
+::tip
+The title is rendered as an `h2` by default. Use the `as` prop with an object to change it, for example `:as="{ title: 'h3' }"`{lang="ts-type"}. You can also set the root element this way: `:as="{ root: 'section', title: 'h3' }"`{lang="ts-type"}.
 ::
 
 ### Description

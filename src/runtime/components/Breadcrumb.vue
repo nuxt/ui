@@ -20,7 +20,7 @@ export interface BreadcrumbItem extends Omit<LinkProps, 'raw' | 'custom'> {
   avatar?: AvatarProps
   slot?: string
   class?: any
-  ui?: Pick<Breadcrumb['slots'], 'item' | 'link' | 'linkLeadingIcon' | 'linkLeadingAvatar' | 'linkLabel' | 'separator' | 'separatorIcon'>
+  ui?: Partial<Pick<Breadcrumb['slots'], 'item' | 'link' | 'linkLeadingIcon' | 'linkLeadingAvatar' | 'linkLabel' | 'separator' | 'separatorIcon'>>
   [key: string]: any
 }
 
@@ -86,7 +86,7 @@ const slots = defineSlots<BreadcrumbSlots<T>>()
 
 const props = useComponentProps<BreadcrumbProps<T>>('breadcrumb', _props)
 
-const { dir } = useLocale()
+const { dir, t } = useLocale()
 const appConfig = useAppConfig() as Breadcrumb['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -99,7 +99,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.breadcrumb || {}
 </script>
 
 <template>
-  <Primitive :as="props.as" aria-label="breadcrumb" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" :aria-label="t('breadcrumb.label')" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <ol data-slot="list" :class="ui.list({ class: props.ui?.list })">
       <template v-for="(item, index) in props.items" :key="index">
         <li data-slot="item" :class="ui.item({ class: [props.ui?.item, item.ui?.item] })">

@@ -24,7 +24,7 @@ export default {
     },
     overlay: {
       true: {
-        root: 'before:absolute before:pointer-events-none before:content-[""] before:z-2 before:from-default before:to-transparent after:absolute after:pointer-events-none after:content-[""] after:z-2 after:from-default after:to-transparent'
+        root: 'before:absolute before:pointer-events-none before:content-[\'\'] before:z-2 before:from-default before:to-transparent after:absolute after:pointer-events-none after:content-[\'\'] after:z-2 after:from-default after:to-transparent'
       }
     }
   },
@@ -38,13 +38,13 @@ export default {
     orientation: 'horizontal',
     overlay: true,
     class: {
-      root: 'before:inset-y-0 before:left-0 before:h-full before:w-1/3 before:bg-gradient-to-r after:inset-y-0 after:right-0 after:h-full after:w-1/3 after:bg-gradient-to-l backface-hidden'
+      root: 'before:inset-y-0 before:start-0 before:h-full before:w-1/3 before:bg-gradient-to-r rtl:before:bg-gradient-to-l after:inset-y-0 after:end-0 after:h-full after:w-1/3 after:bg-gradient-to-l rtl:after:bg-gradient-to-r backface-hidden'
     }
   }, {
     orientation: 'vertical',
     class: {
       root: 'flex-col',
-      content: 'flex-col motion-safe:animate-[marquee-vertical_var(--duration)_linear_infinite] motion-safe:rtl:animate-[marquee-vertical-rtl_var(--duration)_linear_infinite] h-[fit-content] backface-hidden'
+      content: 'flex-col motion-safe:animate-[marquee-vertical_var(--duration)_linear_infinite] h-[fit-content] backface-hidden'
     }
   }, {
     orientation: 'vertical',

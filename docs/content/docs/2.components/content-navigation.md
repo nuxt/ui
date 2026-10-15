@@ -198,6 +198,8 @@ props:
 
 ### Trailing Icon
 
+Use the `trailing-icon` prop to customize the trailing [Icon](/docs/components/icon) of items that have children. Defaults to `i-lucide-chevron-down`.
+
 ::component-code{prefix="content"}
 ---
 prettier: true
@@ -231,6 +233,10 @@ props:
       - title: 'useModal'
         path: '#usemodal'
 ---
+::
+
+::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
+You can customize this icon globally in your `app.config.ts` under `ui.icons.chevronDown` key.
 ::
 
 ## Examples

@@ -21,7 +21,7 @@ type Carousel = ComponentConfig<typeof theme, AppConfig, 'carousel'>
 export type CarouselValue = AcceptableValue
 export type CarouselItem = CarouselValue | {
   class?: any
-  ui?: Pick<Carousel['slots'], 'item'>
+  ui?: Partial<Pick<Carousel['slots'], 'item'>>
   [key: string]: any
 }
 
@@ -71,32 +71,32 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Om
   items?: T[]
   /**
    * Enable Autoplay plugin
-   * @see https://www.embla-carousel.com/plugins/autoplay/
+   * @see https://www.embla-carousel.com/docs/v8/plugins/autoplay
    */
   autoplay?: boolean | AutoplayOptionsType
   /**
    * Enable Auto Scroll plugin
-   * @see https://www.embla-carousel.com/plugins/auto-scroll/
+   * @see https://www.embla-carousel.com/docs/v8/plugins/auto-scroll
    */
   autoScroll?: boolean | AutoScrollOptionsType
   /**
    * Enable Auto Height plugin
-   * @see https://www.embla-carousel.com/plugins/auto-height/
+   * @see https://www.embla-carousel.com/docs/v8/plugins/auto-height
    */
   autoHeight?: boolean | AutoHeightOptionsType
   /**
    * Enable Class Names plugin
-   * @see https://www.embla-carousel.com/plugins/class-names/
+   * @see https://www.embla-carousel.com/docs/v8/plugins/class-names
    */
   classNames?: boolean | ClassNamesOptionsType
   /**
    * Enable Fade plugin
-   * @see https://www.embla-carousel.com/plugins/fade/
+   * @see https://www.embla-carousel.com/docs/v8/plugins/fade
    */
   fade?: boolean | FadeOptionsType
   /**
    * Enable Wheel Gestures plugin
-   * @see https://www.embla-carousel.com/plugins/wheel-gestures/
+   * @see https://www.embla-carousel.com/docs/v8/plugins/wheel-gestures
    */
   wheelGestures?: boolean | WheelGesturesPluginOptions
   class?: any
@@ -354,7 +354,7 @@ defineExpose({
   <Primitive
     :as="props.as"
     role="region"
-    aria-roledescription="carousel"
+    :aria-roledescription="t('carousel.roledescription')"
     :data-orientation="props.orientation"
     tabindex="0"
     data-slot="root"
@@ -366,7 +366,7 @@ defineExpose({
         <div
           v-for="(item, index) in props.items"
           :key="index"
-          v-bind="props.dots ? { role: 'tabpanel' } : { 'role': 'group', 'aria-roledescription': 'slide' }"
+          v-bind="props.dots ? { role: 'tabpanel' } : { 'role': 'group', 'aria-roledescription': t('carousel.slide') }"
           data-slot="item"
           :class="ui.item({ class: [props.ui?.item, isCarouselItem(item) && item.ui?.item, isCarouselItem(item) && item.class] })"
         >

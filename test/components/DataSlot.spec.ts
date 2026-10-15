@@ -48,6 +48,7 @@ const skip: Record<string, string> = {
 
 // Minimal props for components that cannot render bare.
 const options: Record<string, { props?: any, slots?: any }> = {
+  Chart: { props: { tooltip: false } },
   ChatReasoning: { props: { text: 'Reasoning' } },
   ChatShimmer: { props: { text: 'Loading' } },
   Form: { props: { state: {} } },

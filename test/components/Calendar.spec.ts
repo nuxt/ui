@@ -47,6 +47,7 @@ describe('Calendar', () => {
     ['with type year and range', { props: { type: 'year', range: true, modelValue: { start: new CalendarDate(2024, 1, 1), end: new CalendarDate(2027, 1, 1) } } }],
     ['with type year and isYearDisabled', { props: { type: 'year', isYearDisabled: () => true } }],
     ['with type year and isYearUnavailable', { props: { type: 'year', isYearUnavailable: () => true } }],
+    ['with type year and yearsPerPage', { props: { type: 'year', yearsPerPage: 20 } }],
     ['without fixedWeeks', { props: { fixedWeeks: false } }],
     ['without monthControls', { props: { monthControls: false } }],
     ['without yearControls', { props: { yearControls: false } }],
@@ -81,6 +82,18 @@ describe('Calendar', () => {
 
       await wrapper.setValue(date)
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[date]] })
+    })
+  })
+
+  describe('aria', () => {
+    test('labels the month and year views of the date calendar', async () => {
+      const wrapper = await mountSuspended(Calendar)
+
+      await wrapper.find('[data-slot="heading"] button').trigger('click')
+      expect(wrapper.get('[data-slot="root"]').attributes('aria-label')).toMatch(/^Month picker, /)
+
+      await wrapper.find('[data-slot="heading"] button').trigger('click')
+      expect(wrapper.get('[data-slot="root"]').attributes('aria-label')).toMatch(/^Year picker, /)
     })
   })
 

@@ -51,12 +51,12 @@ export interface ChatMessagesProps<T extends UIMessage[] = UIMessage[]> {
    * The `user` messages props.
    * `{ side: 'right', variant: 'soft' }`{lang="ts-type"}
    */
-  user?: Pick<PropsBase<T>, 'icon' | 'avatar' | 'variant' | 'side' | 'actions' | 'ui'>
+  user?: Pick<PropsBase<T>, 'icon' | 'avatar' | 'variant' | 'side' | 'actions' | 'ui' | 'color'>
   /**
    * The `assistant` messages props.
    * `{ side: 'left', variant: 'naked' }`{lang="ts-type"}
    */
-  assistant?: Pick<PropsBase<T>, 'icon' | 'avatar' | 'variant' | 'side' | 'actions' | 'ui'>
+  assistant?: Pick<PropsBase<T>, 'icon' | 'avatar' | 'variant' | 'side' | 'actions' | 'ui' | 'color'>
   /**
    * Render the messages in a compact style.
    * This is done automatically when used inside a `UChatPalette`{lang="ts-type"}.
@@ -91,6 +91,7 @@ import { defu } from 'defu'
 import { useElementBounding, useEventListener, useMutationObserver, watchThrottled } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
+import { useLocale } from '../composables/useLocale'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UChatMessage from './ChatMessage.vue'
@@ -123,6 +124,7 @@ function showIndicator() {
   return lastMessage?.role === 'assistant' && !lastMessage.parts?.length
 }
 
+const { t } = useLocale()
 const appConfig = useAppConfig() as ChatMessages['AppConfig']
 
 const userProps = toRef(() => defu(props.user, { side: 'right' as const, variant: 'soft' as const }))
@@ -373,6 +375,7 @@ defineExpose({
             :icon="props.autoScrollIcon || appConfig.ui.icons.arrowDown"
             color="neutral"
             variant="outline"
+            :aria-label="t('chatMessages.autoScroll')"
             v-bind="(typeof props.autoScroll === 'object' ? props.autoScroll : {})"
             data-slot="autoScroll"
             :class="ui.autoScroll({ class: props.ui?.autoScroll })"

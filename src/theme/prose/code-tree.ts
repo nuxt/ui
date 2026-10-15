@@ -11,7 +11,7 @@ export default (options: Required<ModuleOptions>) => ({
     linkLeadingIcon: 'size-4 shrink-0',
     linkLabel: 'truncate',
     linkTrailing: 'ms-auto inline-flex gap-1.5 items-center',
-    linkTrailingIcon: 'size-5 transform transition-transform duration-200 ease-out shrink-0 group-data-expanded:rotate-180',
+    linkTrailingIcon: 'size-5 transform transition-transform duration-200 ease-out motion-reduce:transition-none shrink-0 group-data-expanded:rotate-180',
     content: 'overflow-hidden lg:col-span-2 flex flex-col [&>div]:my-0 [&>div]:flex-1 [&>div]:flex [&>div]:flex-col [&>div>div]:border-0 [&>div>pre]:border-b-0 [&>div>pre]:border-s-0 [&>div>pre]:border-e-0 [&>div>pre]:rounded-s-none [&>div>pre]:flex-1 [&>div]:overflow-y-auto'
   },
   variants: {

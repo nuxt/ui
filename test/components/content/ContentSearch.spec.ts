@@ -2,6 +2,9 @@ import { describe, it, expect, vi, afterEach } from 'vitest'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../../component-render'
 import ContentSearch from '../../../src/runtime/components/content/ContentSearch.vue'
+import Modal from '../../../src/runtime/components/Modal.vue'
+import CommandPalette from '../../../src/runtime/components/CommandPalette.vue'
+import { useContentSearch } from '../../../src/runtime/composables/useContentSearch'
 import theme from '#build/ui/content/content-search'
 
 describe('ContentSearch', () => {
@@ -134,7 +137,60 @@ describe('ContentSearch', () => {
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ['with ui', { props: { ...props, ui: { input: '[&>input]:text-lg' } } }],
     ['with class', { props: { ...props, class: 'sm:max-w-5xl' } }]
-  ])
+  ], async (_, options) => {
+    const wrapper = await mountSuspended(ContentSearch, options)
+    await vi.dynamicImportSettled()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('labels the dialog with the translated search label', async () => {
+    const wrapper = await mountSuspended(ContentSearch, { props })
+    await vi.dynamicImportSettled()
+
+    const dialog = wrapper.find('[role="dialog"]')
+    const title = wrapper.find(`#${dialog.attributes('aria-labelledby')}`)
+    expect(title.text()).toBe('Search…')
+    expect(wrapper.html()).not.toContain('contentSearch.')
+
+    wrapper.unmount()
+  })
+
+  it('mounts the modal once opened', async () => {
+    const { open } = useContentSearch()
+    const wrapper = await mountSuspended(ContentSearch, { props: { links, navigation, files, portal: false } })
+
+    expect(wrapper.findComponent(Modal).exists()).toBe(false)
+
+    open.value = true
+    await vi.dynamicImportSettled()
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.findComponent(CommandPalette).text()).toContain('Docs')
+
+    open.value = false
+  })
+
+  it('mounts the modal before opening with `unmountOnHide: false`', async () => {
+    const wrapper = await mountSuspended(ContentSearch, { props: { links, navigation, files, portal: false, unmountOnHide: false } })
+    await vi.dynamicImportSettled()
+
+    expect(wrapper.findComponent(CommandPalette).text()).toContain('Docs')
+  })
+
+  it('closes the modal on an `undefined` selection when an item is toggled off', async () => {
+    const { open } = useContentSearch()
+    const wrapper = await mountSuspended(ContentSearch, { props: { links, navigation, files, portal: false, unmountOnHide: false } })
+    await vi.dynamicImportSettled()
+
+    open.value = true
+    await wrapper.vm.$nextTick()
+
+    const commandPalette = wrapper.findComponent({ name: 'CommandPalette' })
+    expect(() => commandPalette.vm.$emit('update:modelValue', undefined)).not.toThrow()
+    await wrapper.vm.$nextTick()
+
+    expect(open.value).toBe(false)
+  })
 
   describe('async search', () => {
     afterEach(() => {

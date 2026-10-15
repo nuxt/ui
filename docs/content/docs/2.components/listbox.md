@@ -1,6 +1,10 @@
 ---
 description: A selectable list of items with search, virtualization and rich item rendering.
 category: form
+keywords:
+  - option list
+  - picker
+  - selection
 links:
   - label: Listbox
     icon: i-custom-reka-ui
@@ -493,15 +497,15 @@ props:
     - label: 'benjamincanac'
       avatar:
         src: 'https://github.com/benjamincanac.png'
-    - label: 'romhml'
-      avatar:
-        src: 'https://github.com/romhml.png'
-    - label: 'atinux'
-      avatar:
-        src: 'https://github.com/atinux.png'
     - label: 'HugoRCD'
       avatar:
         src: 'https://github.com/HugoRCD.png'
+    - label: 'atinux'
+      avatar:
+        src: 'https://github.com/atinux.png'
+    - label: 'romhml'
+      avatar:
+        src: 'https://github.com/romhml.png'
   class: 'w-full'
 ---
 ::
@@ -573,7 +577,7 @@ props:
 ---
 ::
 
-### Control selected items
+### Control selected item(s)
 
 You can control the selected item by using the `default-value` prop or the `v-model` directive.
 

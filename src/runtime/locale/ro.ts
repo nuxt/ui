@@ -16,23 +16,36 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Închide'
     },
+    breadcrumb: {
+      label: 'traseu de navigare'
+    },
     calendar: {
+      label: 'Data evenimentului',
+      monthPicker: 'Selector de lună',
       nextMonth: 'Luna următoare',
       nextYear: 'Anul următor',
       prevMonth: 'Luna precedentă',
-      prevYear: 'Anul precedent'
+      prevYear: 'Anul precedent',
+      yearPicker: 'Selector de an'
     },
     carousel: {
       dots: 'Alegeți diapozitivul de afișat',
       goto: 'Mergi la diapozitivul {slide}',
       next: 'Următor',
-      prev: 'Anterior'
+      prev: 'Anterior',
+      roledescription: 'carusel',
+      slide: 'diapozitiv'
+    },
+    chatMessages: {
+      autoScroll: 'Derulează în jos'
     },
     chatPrompt: {
       placeholder: 'Scrieți mesajul dvs. aici…'
     },
     chatPromptSubmit: {
-      label: 'Trimite'
+      label: 'Trimite',
+      reload: 'Încearcă din nou',
+      stop: 'Oprește generarea'
     },
     chatReasoning: {
       thinking: 'Se gândește…',
@@ -51,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Închide',
       noData: 'Nu există date',
       noMatch: 'Nu există date corespunzătoare',
-      placeholder: 'Tastează o comandă sau caută…'
+      placeholder: 'Tastează o comandă sau caută…',
+      results: 'Rezultate'
     },
     contentSearch: {
       links: 'Linkuri',
@@ -95,14 +109,37 @@ export default defineLocale<Messages>({
       close: 'Închide meniul',
       open: 'Deschide meniul'
     },
+    inputDate: {
+      day: 'zi',
+      dayPeriod: 'AM/PM',
+      era: 'eră',
+      hour: 'oră',
+      minute: 'minut',
+      month: 'lună',
+      second: 'secundă',
+      timeZoneName: 'fus orar',
+      year: 'an'
+    },
     inputMenu: {
       create: 'Creează "{label}"',
       noData: 'Nu există date',
-      noMatch: 'Nu există date corespunzătoare'
+      noMatch: 'Nu există date corespunzătoare',
+      trigger: 'Afișează opțiunile'
     },
     inputNumber: {
       decrement: 'Scade',
-      increment: 'Crește'
+      increment: 'Crește',
+      roledescription: 'câmp numeric'
+    },
+    inputRating: {
+      rate: 'Evaluează cu {value} din {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'oră',
+      minute: 'minut',
+      second: 'secundă',
+      timeZoneName: 'fus orar'
     },
     listbox: {
       noData: 'Nu există date',
@@ -111,6 +148,16 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Închide'
+    },
+    pagination: {
+      first: 'Prima pagină',
+      last: 'Ultima pagină',
+      next: 'Pagina următoare',
+      page: 'Pagina {page}',
+      prev: 'Pagina anterioară'
+    },
+    pinInput: {
+      input: 'cod PIN, caracterul {index} din {length}'
     },
     pricingTable: {
       caption: 'Comparare prețuri'
@@ -144,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: 'Nu există date corespunzătoare',
       search: 'Caută…'
     },
+    skeleton: {
+      label: 'se încarcă'
+    },
     slideover: {
       close: 'Închide'
+    },
+    slider: {
+      max: 'Maxim',
+      min: 'Minim',
+      thumb: 'Cursor',
+      value: 'Valoarea {index} din {total}'
+    },
+    stepper: {
+      label: 'progres'
     },
     table: {
       noData: 'Nu există date'
     },
     toast: {
       close: 'Închide'
+    },
+    toaster: {
+      label: 'Notificare',
+      viewport: 'Notificări ({hotkey})'
     }
   }
 })

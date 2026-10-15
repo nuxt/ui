@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { Ref, WatchOptions, ComponentPublicInstance, VNode } from 'vue'
+import type { AriaAttributes, Ref, WatchOptions, ComponentPublicInstance, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type {
   Cell,
@@ -39,7 +39,7 @@ import type {
   VisibilityOptions,
   VisibilityState
 } from '@tanstack/vue-table'
-import type { VirtualizerOptions } from '@tanstack/vue-virtual'
+import type { Virtualizer, VirtualizerOptions } from '@tanstack/vue-virtual'
 import theme from '#build/ui/table'
 import type { TableHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
@@ -230,7 +230,7 @@ export type TableSlots<T extends TableData = TableData> = {
 </script>
 
 <script setup lang="ts" generic="T extends TableData">
-import { computed, useTemplateRef, watch, toRef } from 'vue'
+import { computed, useTemplateRef, watch, toRef, onBeforeUnmount } from 'vue'
 import { Primitive } from 'reka-ui'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
@@ -262,8 +262,13 @@ const appConfig = useAppConfig() as Table['AppConfig']
 const data = createRef(props.data ?? [], props.watchOptions?.deep !== false)
 // eslint-disable-next-line vue/no-dupe-keys
 const meta = computed(() => props.meta ?? {})
+// TanStack resolves each column as `{ ...defaultColumn, ...columnDef }`, so any key set here shadows `defaultColumn`.
+// The fallback `header` and `cell` are only injected when `defaultColumn` doesn't provide its own.
 // eslint-disable-next-line vue/no-dupe-keys
-const columns = computed<TableColumn<T>[]>(() => processColumns(props.columns ?? Object.keys(data.value[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) }))))
+const columns = computed<TableColumn<T>[]>(() => processColumns(props.columns ?? Object.keys(data.value[0] ?? {}).map((accessorKey: string) => ({
+  accessorKey,
+  ...(props.defaultColumn?.header === undefined && { header: upperFirst(accessorKey) })
+}))))
 
 function processColumns(columns: TableColumn<T>[]): TableColumn<T>[] {
   return columns.map((column) => {
@@ -273,7 +278,7 @@ function processColumns(columns: TableColumn<T>[]): TableColumn<T>[] {
       col.columns = processColumns(col.columns as TableColumn<T>[])
     }
 
-    if (!col.cell) {
+    if (!col.cell && !props.defaultColumn?.cell) {
       col.cell = ({ getValue }) => {
         const value = getValue()
         if (value === '' || value === null || value === undefined) {
@@ -300,14 +305,14 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.table || {}) })(
 }))
 
 const [DefineTableTemplate, ReuseTableTemplate] = createReusableTemplate()
-const [DefineRowTemplate, ReuseRowTemplate] = createReusableTemplate<{ row: TableRow<T>, style?: Record<string, string> }>({
+const [DefineRowTemplate, ReuseRowTemplate] = createReusableTemplate<{ row: TableRow<T>, index?: number }>({
   props: {
     row: {
       type: Object,
       required: true
     },
-    style: {
-      type: Object,
+    index: {
+      type: Number,
       required: false
     }
   }
@@ -439,9 +444,20 @@ const virtualizerProps = toRef(() => defu(typeof props.virtualize === 'boolean' 
   overscan: 12
 }))
 
+// Rows must carry the attribute the virtualizer reads their index from when measuring them.
+const indexAttribute = computed(() => virtualizerProps.value.indexAttribute ?? 'data-index')
+
 const getScrollElement = () => (isExternalScroll.value ? virtualizerProps.value.getScrollElement?.() : rootRef.value?.$el) ?? null
 // Offset applied to the spacer rows: `scrollMargin` is the table's offset within the scroll element (0 unless set).
 const scrollMargin = computed(() => virtualizerProps.value.scrollMargin ?? 0)
+
+// Key measurements by row id so cached heights follow their rows through sorting and filtering.
+// The virtualizer memoizes measurements on the `getItemKey` reference, so a new function (wrapping a custom one too) is created for each set of rows.
+const getItemKey = computed(() => {
+  const rows = centerRows.value
+  const getKey = virtualizerProps.value.getItemKey
+  return getKey ? (index: number) => getKey(index) : (index: number) => rows[index]?.id ?? index
+})
 
 const virtualizer = !!props.virtualize && useVirtualizer({
   ...virtualizerProps.value,
@@ -451,6 +467,10 @@ const virtualizer = !!props.virtualize && useVirtualizer({
   get scrollMargin() {
     return scrollMargin.value
   },
+  get getItemKey() {
+    return getItemKey.value
+  },
+  measureElement: measureRowElement,
   getScrollElement,
   estimateSize: (index: number) => {
     const estimate = virtualizerProps.value.estimateSize
@@ -468,6 +488,51 @@ const virtualPaddingBottom = computed(() => {
   return virtualizer.value.getTotalSize() - (virtualItems.value[virtualItems.value.length - 1]?.end ?? 0) + scrollMargin.value
 })
 
+// Register each rendered row with the virtualizer so its actual height is measured (and re-measured on resize).
+function measureRow(el: Element | ComponentPublicInstance | null) {
+  if (el instanceof Element && virtualizer) {
+    virtualizer.value.measureElement(el)
+  }
+}
+
+// An expanded `<tr>` belongs to its row's virtual item, so its height is added to the row's (measured by a custom `measureElement` if given). Maps it to its row's `<tr>`.
+const expandedRows = new WeakMap<Element, Element>()
+let expandedRowsObserver: ResizeObserver | undefined
+
+function measureRowElement(el: Element, entry: ResizeObserverEntry | undefined, instance: Virtualizer<Element, Element>) {
+  const measure = virtualizerProps.value.measureElement
+  const height = measure ? measure(el, entry, instance) : entry?.borderBoxSize?.[0]?.blockSize ?? (el as HTMLElement).offsetHeight
+  const expanded = el.nextElementSibling
+  return Math.round(height + (expanded && expandedRows.get(expanded) === el ? (expanded as HTMLElement).offsetHeight : 0))
+}
+
+function remeasureRow(el: Element | null | undefined) {
+  if (!el?.isConnected || !virtualizer) return
+  const instance = virtualizer.value
+  instance.resizeItem(instance.indexFromElement(el), instance.options.measureElement(el, undefined, instance))
+}
+
+function onExpandedRowMounted({ el }: VNode) {
+  if (!virtualizer || !(el instanceof Element) || !el.previousElementSibling) return
+  expandedRows.set(el, el.previousElementSibling)
+  remeasureRow(el.previousElementSibling)
+  if (typeof ResizeObserver === 'undefined') return
+  // Keep the row's size in sync when the expanded content resizes (e.g. async content).
+  expandedRowsObserver ??= new ResizeObserver(entries => entries.forEach(entry => remeasureRow(expandedRows.get(entry.target))))
+  expandedRowsObserver.observe(el)
+}
+
+function onExpandedRowUnmounted({ el }: VNode) {
+  if (!(el instanceof Element)) return
+  const row = expandedRows.get(el)
+  expandedRows.delete(el)
+  expandedRowsObserver?.unobserve(el)
+  // Collapsed while its row stays rendered: shrink it back to the row's own height.
+  remeasureRow(row)
+}
+
+onBeforeUnmount(() => expandedRowsObserver?.disconnect())
+
 function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
   ref.value = typeof updaterOrValue === 'function' ? updaterOrValue(ref.value) : updaterOrValue
 }
@@ -477,13 +542,17 @@ function onRowSelect(e: Event, row: TableRow<T>) {
     return
   }
   const target = e.target as HTMLElement
-  const isInteractive = target.closest('button') || target.closest('a')
+  const isInteractive = target.closest('a, button, input, label, select, textarea')
   if (isInteractive) {
     return
   }
 
   e.preventDefault()
   e.stopPropagation()
+
+  if ((e as KeyboardEvent).repeat) {
+    return
+  }
 
   props.onSelect(e, row)
 }
@@ -529,6 +598,38 @@ function getColumnStyles(column: Column<T>): Record<string, string> {
   return styles
 }
 
+// `getCanSort()` is true for every accessor column, so it cannot tell a column that offers sort UI
+// from a plain one, and an explicit `enableSorting: true` can still come from `defaultColumn` or be
+// overridden by `sortingOptions`. A header is sortable only when both agree.
+function isSortable(column: Column<T, unknown>) {
+  return column.columnDef.enableSorting === true && column.getCanSort()
+}
+
+function getAriaSort(header: Header<T, unknown>): AriaAttributes['aria-sort'] {
+  if (header.isPlaceholder || !isSortable(header.column)) {
+    return undefined
+  }
+
+  const sorted = header.column.getIsSorted()
+  if (!sorted) {
+    return 'none'
+  }
+
+  // `aria-sort` is a single-column pattern, so the direction goes to the first sort key that has a
+  // header on screen. Keys for an unknown id, a hidden column or a column with no sort UI are
+  // skipped, otherwise every header would report `none` while the rows are sorted.
+  const sortableIds = new Set(tableApi.getVisibleLeafColumns()
+    .filter(isSortable)
+    .map(column => column.id))
+  const primary = tableApi.getState().sorting.find(({ id }) => sortableIds.has(id))
+
+  if (primary?.id !== header.column.id) {
+    return 'none'
+  }
+
+  return sorted === 'asc' ? 'ascending' : 'descending'
+}
+
 watch(() => props.data, () => {
   data.value = props.data ? [...props.data] : []
 }, props.watchOptions)
@@ -543,13 +644,14 @@ defineExpose({
 </script>
 
 <template>
-  <DefineRowTemplate v-slot="{ row, style }">
+  <DefineRowTemplate v-slot="{ row, index }">
     <tr
+      :ref="virtualizer ? measureRow : undefined"
+      :[indexAttribute]="index"
       :data-selected="row.getIsSelected()"
       :data-selectable="!!props.onSelect || !!props.onHover || !!props.onContextmenu"
       :data-expanded="row.getIsExpanded()"
       :data-pinned="row.getIsPinned() || undefined"
-      :role="props.onSelect ? 'button' : undefined"
       :tabindex="props.onSelect ? 0 : undefined"
       data-slot="tr"
       :class="ui.tr({
@@ -558,8 +660,9 @@ defineExpose({
           resolveValue(tableApi.options.meta?.class?.tr, row)
         ]
       })"
-      :style="[resolveValue(tableApi.options.meta?.style?.tr, row), style]"
+      :style="resolveValue(tableApi.options.meta?.style?.tr, row)"
       @click="onRowSelect($event, row)"
+      @keydown.self.exact.enter.space="onRowSelect($event, row)"
       @pointerenter="onRowHover($event, row)"
       @pointerleave="onRowHover($event, null)"
       @contextmenu="onRowContextmenu($event, row)"
@@ -589,8 +692,14 @@ defineExpose({
       </td>
     </tr>
 
-    <tr v-if="row.getIsExpanded()" data-slot="tr" :class="ui.tr({ class: [props.ui?.tr] })">
-      <td :colspan="row.getAllCells().length" data-slot="td" :class="ui.td({ class: [props.ui?.td] })">
+    <tr
+      v-if="row.getIsExpanded()"
+      data-slot="tr"
+      :class="ui.tr({ class: [props.ui?.tr] })"
+      @vue:mounted="onExpandedRowMounted"
+      @vue:unmounted="onExpandedRowUnmounted"
+    >
+      <td :colspan="row.getVisibleCells().length" data-slot="td" :class="ui.td({ class: [props.ui?.td] })">
         <slot name="expanded" :row="row" />
       </td>
     </tr>
@@ -613,6 +722,7 @@ defineExpose({
             :scope="header.colSpan > 1 ? 'colgroup' : 'col'"
             :colspan="header.colSpan > 1 ? header.colSpan : undefined"
             :rowspan="header.rowSpan > 1 ? header.rowSpan : undefined"
+            :aria-sort="getAriaSort(header)"
             data-slot="th"
             :class="ui.th({
               class: [
@@ -643,17 +753,17 @@ defineExpose({
 
           <template v-if="virtualizer">
             <tr v-if="virtualPaddingTop > 0" :style="{ height: `${virtualPaddingTop}px` }" aria-hidden="true">
-              <td :colspan="tableApi.getAllLeafColumns().length" />
+              <td :colspan="tableApi.getVisibleLeafColumns().length" />
             </tr>
             <template v-for="virtualRow in virtualItems" :key="centerRows[virtualRow.index]?.id ?? `virtual-${virtualRow.index}`">
               <ReuseRowTemplate
                 v-if="centerRows[virtualRow.index]"
                 :row="centerRows[virtualRow.index]!"
-                :style="{ height: `${virtualRow.size}px` }"
+                :index="virtualRow.index"
               />
             </template>
             <tr v-if="virtualPaddingBottom > 0" :style="{ height: `${virtualPaddingBottom}px` }" aria-hidden="true">
-              <td :colspan="tableApi.getAllLeafColumns().length" />
+              <td :colspan="tableApi.getVisibleLeafColumns().length" />
             </tr>
           </template>
 
@@ -665,13 +775,13 @@ defineExpose({
         </template>
 
         <tr v-else-if="props.loading && !!slots['loading']">
-          <td :colspan="tableApi.getAllLeafColumns().length" data-slot="loading" :class="ui.loading({ class: props.ui?.loading })">
+          <td :colspan="tableApi.getVisibleLeafColumns().length" data-slot="loading" :class="ui.loading({ class: props.ui?.loading })">
             <slot name="loading" />
           </td>
         </tr>
 
         <tr v-else>
-          <td :colspan="tableApi.getAllLeafColumns().length" data-slot="empty" :class="ui.empty({ class: props.ui?.empty })">
+          <td :colspan="tableApi.getVisibleLeafColumns().length" data-slot="empty" :class="ui.empty({ class: props.ui?.empty })">
             <slot name="empty">
               {{ props.empty || t('table.noData') }}
             </slot>

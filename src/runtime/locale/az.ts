@@ -16,23 +16,36 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Bağla'
     },
+    breadcrumb: {
+      label: 'naviqasiya yolu'
+    },
     calendar: {
+      label: 'Tədbir tarixi',
+      monthPicker: 'Ay seçimi',
       nextMonth: 'Növbəti ay',
       nextYear: 'Növbəti il',
       prevMonth: 'Əvvəlki ay',
-      prevYear: 'Əvvəlki il'
+      prevYear: 'Əvvəlki il',
+      yearPicker: 'İl seçimi'
     },
     carousel: {
       dots: 'Göstərmək üçün slayd seçin',
       goto: 'Slayd {slide} keç',
       next: 'Növbəti',
-      prev: 'Əvvəlki'
+      prev: 'Əvvəlki',
+      roledescription: 'karusel',
+      slide: 'slayd'
+    },
+    chatMessages: {
+      autoScroll: 'Aşağı sürüşdür'
     },
     chatPrompt: {
       placeholder: 'Buraya mesajınızı yazın…'
     },
     chatPromptSubmit: {
-      label: 'Göndər'
+      label: 'Göndər',
+      reload: 'Yenidən cəhd et',
+      stop: 'Yaratmanı dayandır'
     },
     chatReasoning: {
       thinking: 'Düşünür…',
@@ -51,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Bağla',
       noData: 'Məlumat yoxdur',
       noMatch: 'Uyğun məlumat tapılmadı',
-      placeholder: 'Əmr daxil edin və ya axtarın…'
+      placeholder: 'Əmr daxil edin və ya axtarın…',
+      results: 'Nəticələr'
     },
     contentSearch: {
       links: 'Bağlantılar',
@@ -95,14 +109,37 @@ export default defineLocale<Messages>({
       close: 'Menyunu bağla',
       open: 'Menyunu aç'
     },
+    inputDate: {
+      day: 'gün',
+      dayPeriod: 'AM/PM',
+      era: 'era',
+      hour: 'saat',
+      minute: 'dəqiqə',
+      month: 'ay',
+      second: 'saniyə',
+      timeZoneName: 'saat qurşağı',
+      year: 'il'
+    },
     inputMenu: {
       create: '"{label}" yarat',
       noData: 'Məlumat yoxdur',
-      noMatch: 'Uyğun məlumat tapılmadı'
+      noMatch: 'Uyğun məlumat tapılmadı',
+      trigger: 'Seçimləri göstər'
     },
     inputNumber: {
       decrement: 'Azalt',
-      increment: 'Artır'
+      increment: 'Artır',
+      roledescription: 'rəqəm sahəsi'
+    },
+    inputRating: {
+      rate: '{length} üzərindən {value} qiymət ver'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'saat',
+      minute: 'dəqiqə',
+      second: 'saniyə',
+      timeZoneName: 'saat qurşağı'
     },
     listbox: {
       noData: 'Məlumat yoxdur',
@@ -111,6 +148,16 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Bağla'
+    },
+    pagination: {
+      first: 'İlk səhifə',
+      last: 'Son səhifə',
+      next: 'Növbəti səhifə',
+      page: 'Səhifə {page}',
+      prev: 'Əvvəlki səhifə'
+    },
+    pinInput: {
+      input: 'PIN kod, simvol {index} / {length}'
     },
     pricingTable: {
       caption: 'Qiymət planlarının müqayisəsi'
@@ -144,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: 'Uyğun məlumat tapılmadı',
       search: 'Axtar…'
     },
+    skeleton: {
+      label: 'yüklənir'
+    },
     slideover: {
       close: 'Bağla'
+    },
+    slider: {
+      max: 'Maksimum',
+      min: 'Minimum',
+      thumb: 'Tutacaq',
+      value: 'Dəyər {index} / {total}'
+    },
+    stepper: {
+      label: 'irəliləyiş'
     },
     table: {
       noData: 'Məlumat yoxdur'
     },
     toast: {
       close: 'Bağla'
+    },
+    toaster: {
+      label: 'Bildiriş',
+      viewport: 'Bildirişlər ({hotkey})'
     }
   }
 })

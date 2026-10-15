@@ -1,6 +1,8 @@
 ---
 description: A textarea element to input multi-line text.
 category: form
+keywords:
+  - multiline
 links:
   - label: GitHub
     icon: i-simple-icons-github

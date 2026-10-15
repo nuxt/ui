@@ -24,12 +24,12 @@ claude mcp add --transport http nuxt-ui https://ui.nuxt.com/mcp
 ```
 
 Key MCP tools:
-- `search_components` — find components by name, description, or category (no params = list all)
-- `search_composables` — find composables by name or description (no params = list all)
-- `search_icons` — search Iconify icons (defaults to `lucide`), returns `i-{prefix}-{name}` names
-- `get_component` — full component documentation with usage examples
-- `get_component_metadata` — props, slots, events (lightweight, no docs content)
-- `get_example` — real-world code examples
+- `search-components` — find components by name, category, or intent (no params = list all)
+- `search-composables` — find composables by name or description (no params = list all)
+- `search-icons` — search Iconify icons (defaults to `lucide`), returns `i-{prefix}-{name}` names
+- `get-component` — full component documentation with usage examples
+- `get-component-metadata` — props, slots, events (lightweight, no docs content)
+- `get-example` — real-world code examples
 
 When you need to know **what a component accepts** or **how its API works**, use the MCP. This skill teaches you **when to use which component** and **how to build well**.
 
@@ -39,7 +39,7 @@ When you need to know **what a component accepts** or **how its API works**, use
 2. **Always use semantic colors** — `text-default`, `bg-elevated`, `border-muted`, etc. Never use raw Tailwind palette colors like `text-gray-500`.
 3. **Read generated theme files for slot names** — Nuxt: `.nuxt/ui/<component>.ts`, Vue: `node_modules/.nuxt-ui/ui/<component>.ts`. These show every slot, variant, and default class for any component.
 4. **Override priority** (highest wins): `ui` prop / `class` prop → global config → theme defaults.
-5. **Icons use `i-{collection}-{name}` format** — `lucide` is the default collection. Use the MCP `search_icons` tool to find icons, or browse at [icones.js.org](https://icones.js.org).
+5. **Icons use `i-{collection}-{name}` format** — `lucide` is the default collection. Use the MCP `search-icons` tool to find icons, or browse at [icones.js.org](https://icones.js.org).
 
 ## How to use this skill
 

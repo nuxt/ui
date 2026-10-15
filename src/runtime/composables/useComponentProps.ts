@@ -54,7 +54,7 @@ function propIsDefined(vnode: VNode | null | undefined, prop: string): boolean {
  * defaults. The component's tv() `defaultVariants` are intentionally left out
  * of the proxy fallback — they continue to drive `tv()`-internal class
  * resolution (the original semantics) without leaking into prop reads. The
- * `ui` prop is deep-merged (explicit slot classes override theme slot classes)
+ * `ui` and `class` props are merged (explicit classes override theme classes)
  * instead of being replaced.
  */
 export function useComponentProps<T extends object>(name: string, props: T): T {
@@ -71,6 +71,12 @@ export function useComponentProps<T extends object>(name: string, props: T): T {
       if (prop === '__v_isReactive') return true
       if (prop === '__v_raw') return target
 
+      // Vue probes internal flags (`__v_isReadonly`, `__v_isRef`, `__v_skip`, ...)
+      // on reactive objects. They are never props, so answer `undefined` (what
+      // the lookups below end up returning for them) without running the theme
+      // and app.config lookups, which do case conversions on every read.
+      if (typeof prop === 'string' && prop.startsWith('__v_')) return undefined
+
       const raw = Reflect.get(target, prop, receiver)
       if (typeof prop !== 'string') return raw
 
@@ -83,6 +89,16 @@ export function useComponentProps<T extends object>(name: string, props: T): T {
         const themeUi = themeEntry?.ui
         if (!raw && !themeUi) return raw
         return defu(raw ?? {}, themeUi ?? {})
+      }
+
+      // Like `ui`, `class` is merged instead of replaced so a component passing
+      // its own `class` still gets the theme classes. The explicit class comes
+      // last to win `twMerge`'s last-in-wins resolution.
+      if (prop === 'class') {
+        const themeClass = themeEntry?.class
+        if (themeClass === undefined) return raw
+        if (raw === undefined) return themeClass
+        return [themeClass, raw]
       }
 
       if (vm && propIsDefined(vm.vnode, prop)) return raw

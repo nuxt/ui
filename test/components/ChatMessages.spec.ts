@@ -45,6 +45,28 @@ describe('ChatMessages', () => {
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
+  it('sets aria-label on the auto scroll button', async () => {
+    const Parent = defineComponent({
+      setup() {
+        return () => h('div', { style: 'overflow-y: auto' }, [h(ChatMessages, { ...props, shouldScrollToBottom: false })])
+      }
+    })
+
+    const wrapper = await mountSuspended(Parent, { attachTo: document.body })
+    Object.defineProperties(wrapper.element, {
+      scrollHeight: { value: 1000 },
+      clientHeight: { value: 100 }
+    })
+    wrapper.element.dispatchEvent(new Event('scroll'))
+    await nextTick()
+
+    const button = wrapper.find('[data-slot="autoScroll"]')
+    expect(button.attributes('aria-label')).toBe('Scroll to bottom')
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+
+    wrapper.unmount()
+  })
+
   it('forwards content slot props together with `message`', async () => {
     const messages = [
       { id: 'm-1', role: 'user' as const, parts: [{ type: 'text' as const, text: 'a' }], metadata: { foo: 'bar' } },

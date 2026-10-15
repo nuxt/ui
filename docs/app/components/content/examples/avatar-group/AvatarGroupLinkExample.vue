@@ -14,27 +14,27 @@
     </ULink>
 
     <ULink
-      to="https://github.com/romhml"
+      to="https://github.com/HugoRCD"
       target="_blank"
       class="hover:ring-primary transition"
       raw
     >
       <UAvatar
-        src="https://github.com/romhml.png"
-        alt="Romain Hamel"
+        src="https://github.com/HugoRCD.png"
+        alt="Hugo Richard"
         loading="lazy"
       />
     </ULink>
 
     <ULink
-      to="https://github.com/noook"
+      to="https://github.com/atinux"
       target="_blank"
       class="hover:ring-primary transition"
       raw
     >
       <UAvatar
-        src="https://github.com/noook.png"
-        alt="Neil Richter"
+        src="https://github.com/atinux.png"
+        alt="Sébastien Chopin"
         loading="lazy"
       />
     </ULink>

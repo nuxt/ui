@@ -31,6 +31,10 @@ Use markdown in the default slot of the `badge` component to display a [Badge](/
 
 ## API
 
+### Props
+
+:component-props{prose}
+
 ### Slots
 
 :component-slots{prose}

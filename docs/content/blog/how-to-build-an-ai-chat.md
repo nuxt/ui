@@ -36,7 +36,7 @@ Check out the [`Nuxt`](https://github.com/nuxt-ui-templates/chat) and [`Vue`](ht
 
 Before we start, make sure you have:
 
-- Node.js 20+ installed
+- Node.js 22.19+ or 24.11+ installed
 - A [Vercel AI Gateway](https://vercel.com/docs/ai-gateway) API key (provides access to multiple AI providers through a single endpoint)
 
 ## Project setup
@@ -191,7 +191,7 @@ This section covers integrating AI on the server. The following API endpoints ha
 
 ### Creating a chat
 
-First, create the endpoint that initializes a new chat and saves the first message to the database. This uses the [`UIMessage`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/ui-message) type from the AI SDK:
+First, create the endpoint that initializes a new chat and saves the first message to the database. This uses the [`UIMessage`](https://ai-sdk.dev/docs/reference/ai-sdk-core/ui-message) type from the AI SDK:
 
 ::code-tree-intersection
 ```ts [server/api/chats.post.ts]
@@ -404,7 +404,7 @@ export default defineEventHandler(async (event) => {
 ```
 ::
 
-## Wire up the UI
+## Wiring up the UI
 
 Nuxt UI provides purpose-built components for AI chat interfaces: [`UChatPrompt`](/docs/components/chat-prompt) for the input area and [`UChatMessages`](/docs/components/chat-messages) for displaying the conversation.
 
@@ -471,20 +471,20 @@ The [`UChatPrompt`](/docs/components/chat-prompt) component automatically handle
 
 ### Setting up Markdown rendering
 
-AI models often respond with Markdown formatting (code blocks, lists, bold text, etc.). Before building the chat page, create a custom [`Comark`](https://comark.dev) component that will handle streaming Markdown rendering. Using [`defineComarkComponent`](https://comark.dev/rendering/vue#code-definecomarkcomponent), you can enable the `highlight` plugin for syntax highlighting in code blocks and register additional [Shiki](https://shiki.style) languages beyond the defaults (TypeScript, JavaScript, Vue, Shell, JSON, YAML, Markdown):
+AI models often respond with Markdown formatting (code blocks, lists, bold text, etc.). Before building the chat page, create a custom [`Comark`](https://comark.dev) component that will handle streaming Markdown rendering. Using [`defineMarkdownComponent`](https://comark.dev/rendering/vue#code-markdown-code-definemarkdowncomponent-code), you can enable the `shiki` plugin for syntax highlighting in code blocks and register additional [Shiki](https://shiki.style) languages beyond the defaults (TypeScript, JavaScript, Vue, Shell, JSON, YAML, Markdown):
 
 ::code-tree-intersection
-```ts [app/components/chat/Comark.ts]
-import highlight from '@comark/nuxt/plugins/highlight'
+```ts [app/components/chat/Markdown.ts]
+import shiki from '@comark/nuxt/plugins/shiki'
 import python from '@shikijs/langs/python'
 import sql from '@shikijs/langs/sql'
 import go from '@shikijs/langs/go'
 import rust from '@shikijs/langs/rust'
 
-export default defineComarkComponent({
-  name: 'ChatComark',
+export default defineMarkdownComponent({
+  name: 'ChatMarkdown',
   plugins: [
-    highlight({
+    shiki({
       languages: [python, sql, go, rust]
     })
   ],
@@ -493,7 +493,7 @@ export default defineComarkComponent({
 ```
 ::
 
-This creates a `<ChatComark>` component we'll use in the chat page to render assistant messages and reasoning content.
+This creates a `<ChatMarkdown>` component we'll use in the chat page to render assistant messages and reasoning content.
 
 Since Comark uses Shiki with dual themes, you need to add the following CSS to your stylesheet for dark mode support:
 
@@ -509,7 +509,7 @@ html.dark .shiki span {
 
 ## Creating the chat page
 
-The chat page is where the actual conversation happens. It integrates the AI SDK's [`Chat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/chat) class and [`DefaultChatTransport`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/default-chat-transport) for real-time streaming.
+The chat page is where the actual conversation happens. It integrates the AI SDK's [`useChat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-chat) composable and [`DefaultChatTransport`](https://ai-sdk.dev/docs/ai-sdk-ui/transport#default-transport) for real-time streaming.
 
 ::code-tree-intersection
 :::code-collapse
@@ -532,7 +532,7 @@ if (!chatData.value) {
 
 const input = ref('')
 
-// Initialize the Chat class from AI SDK
+// Initialize the useChat composable from AI SDK
 const { messages, status, error, sendMessage, regenerate, stop } = useChat({
   id: chatData.value.id,
   messages: chatData.value.messages,
@@ -587,16 +587,16 @@ onMounted(() => {
                 :text="part.text"
                 :streaming="isPartStreaming(part)"
               >
-                <ChatComark
-                  :markdown="part.text"
+                <ChatMarkdown
+                  :value="part.text"
                   :streaming="isPartStreaming(part)"
                 />
               </UChatReasoning>
 
               <template v-else-if="isTextUIPart(part)">
-                <ChatComark
+                <ChatMarkdown
                   v-if="message.role === 'assistant'"
-                  :markdown="part.text"
+                  :value="part.text"
                   :streaming="isPartStreaming(part)"
                 />
                 <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
@@ -632,7 +632,7 @@ onMounted(() => {
 
 Here's a breakdown of the key parts:
 
-**The Chat Class**
+**The `useChat` composable**
 
 The [`useChat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-chat) composable from `@ai-sdk/vue` manages the entire conversation state. It handles:
 - Message history with `messages`
@@ -641,7 +641,7 @@ The [`useChat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-chat) composable
 - Stopping generation with `stop()`
 - Regenerating responses with `regenerate()`
 
-The `onData` callback receives [custom data events](https://ai-sdk.dev/docs/ai-sdk-ui/streaming-data) from the server (like `data-chat-title`), allowing you to react to server-side events during streaming.
+The `onData` callback receives [custom data events](https://ai-sdk.dev/docs/ai-sdk-ui/streaming-data) from the server (like `data-chat-title`), so you can react to server-side events during streaming.
 
 **UChatMessages Component**
 
@@ -653,7 +653,7 @@ The [`UChatMessages`](/docs/components/chat-messages) component is purpose-built
 
 **Rendering Message Parts**
 
-We iterate over message `parts` using AI SDK helpers like `isTextUIPart` and `isReasoningUIPart`, rendering assistant text with the `<ChatComark>` component we created earlier and reasoning content with [`UChatReasoning`](/docs/components/chat-reasoning). The `isPartStreaming` utility from `@nuxt/ui/utils/ai` detects if a part is currently being streamed.
+We iterate over message `parts` using AI SDK helpers like `isTextUIPart` and `isReasoningUIPart`, rendering assistant text with the `<ChatMarkdown>` component we created earlier and reasoning content with [`UChatReasoning`](/docs/components/chat-reasoning). The `isPartStreaming` utility from `@nuxt/ui/utils/ai` detects if a part is currently being streamed.
 
 **UChatPromptSubmit Component**
 
@@ -810,7 +810,7 @@ if (!chatData.value) {
 
 const input = ref('')
 
-// Initialize the Chat class from AI SDK
+// Initialize the useChat composable from AI SDK
 const { messages, status, error, sendMessage, regenerate, stop } = useChat({
   id: chatData.value.id,
   messages: chatData.value.messages,
@@ -868,16 +868,16 @@ onMounted(() => {
                 :text="part.text"
                 :streaming="isPartStreaming(part)"
               >
-                <ChatComark
-                  :markdown="part.text"
+                <ChatMarkdown
+                  :value="part.text"
                   :streaming="isPartStreaming(part)"
                 />
               </UChatReasoning>
 
               <template v-else-if="isTextUIPart(part)">
-                <ChatComark
+                <ChatMarkdown
                   v-if="message.role === 'assistant'"
-                  :markdown="part.text"
+                  :value="part.text"
                   :streaming="isPartStreaming(part)"
                 />
                 <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
@@ -1053,16 +1053,16 @@ onMounted(() => {
                 :text="part.text"
                 :streaming="isPartStreaming(part)"
               >
-                <ChatComark
-                  :markdown="part.text"
+                <ChatMarkdown
+                  :value="part.text"
                   :streaming="isPartStreaming(part)"
                 />
               </UChatReasoning>
 
               <template v-else-if="isTextUIPart(part)">
-                <ChatComark
+                <ChatMarkdown
                   v-if="message.role === 'assistant'"
-                  :markdown="part.text"
+                  :value="part.text"
                   :streaming="isPartStreaming(part)"
                 />
                 <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
@@ -1141,7 +1141,9 @@ Then, in the Vercel dashboard:
 - Enable **AI Gateway** and add credits so requests can be processed.
 - Add a **Turso** database from the Vercel Marketplace and connect it to your project (it will provision the database and add the required environment variables automatically).
 
-> Note: On Vercel, you **don’t need to manually add `AI_GATEWAY_API_KEY`** — Vercel handles the gateway configuration for deployments. Keep using `.env` locally for development.
+::note
+On Vercel you don't need to manually add `AI_GATEWAY_API_KEY`. Vercel handles the gateway configuration for deployments. Keep using `.env` locally for development.
+::
 
 ::note{to="https://vercel.com/docs/ai-gateway" target="_blank"}
 Learn more about setting up AI Gateway in the **Vercel AI Gateway documentation**.
@@ -1161,7 +1163,7 @@ The combination of Nuxt's full-stack capabilities, Nuxt UI's purpose-built chat 
 
 **Resources:**
 
-- [Nuxt UI Chat Components](https://ui.nuxt.com/components/chat)
+- [Nuxt UI Chat Components](https://ui.nuxt.com/docs/components/chat)
 - [NuxtHub Database](https://hub.nuxt.com/docs/features/database)
 - [AI SDK Documentation](https://ai-sdk.dev)
 - [AI Gateway Documentation](https://vercel.com/docs/ai-gateway)

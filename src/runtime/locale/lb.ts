@@ -16,23 +16,36 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Zoumaachen'
     },
+    breadcrumb: {
+      label: 'Navigatiounswee'
+    },
     calendar: {
+      label: 'Datum vum Evenement',
+      monthPicker: 'Mountauswiel',
       nextMonth: 'Nächste Mount',
       nextYear: 'Nächst Joer',
       prevMonth: 'Virege Mount',
-      prevYear: 'Viregt Joer'
+      prevYear: 'Viregt Joer',
+      yearPicker: 'Joerauswiel'
     },
     carousel: {
       dots: 'Wielt Dia fir ze weisen',
-      goto: 'Gitt op d\'Slide {Slide}',
+      goto: 'Gitt op d\'Slide {slide}',
       next: 'Näch.',
-      prev: 'Präz.'
+      prev: 'Präz.',
+      roledescription: 'Karussell',
+      slide: 'Dia'
+    },
+    chatMessages: {
+      autoScroll: 'No ënnen scrollen'
     },
     chatPrompt: {
       placeholder: 'Tippt hei Äre Message…'
     },
     chatPromptSubmit: {
-      label: 'Prompt schécken'
+      label: 'Prompt schécken',
+      reload: 'Nach eng Kéier probéieren',
+      stop: 'Generéieren stoppen'
     },
     chatReasoning: {
       thinking: 'Denkt no…',
@@ -51,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Zoumaachen',
       noData: 'Keng Donnéeën',
       noMatch: 'Keng entspriechend Donnéeën',
-      placeholder: 'Tippt e Befeel oder sicht…'
+      placeholder: 'Tippt e Befeel oder sicht…',
+      results: 'Resultater'
     },
     contentSearch: {
       links: 'Linken',
@@ -95,14 +109,37 @@ export default defineLocale<Messages>({
       close: 'Menü zoumaachen',
       open: 'Menü opmaachen'
     },
+    inputDate: {
+      day: 'Dag',
+      dayPeriod: 'AM/PM',
+      era: 'Epoch',
+      hour: 'Stonn',
+      minute: 'Minutt',
+      month: 'Mount',
+      second: 'Sekonn',
+      timeZoneName: 'Zäitzon',
+      year: 'Joer'
+    },
     inputMenu: {
       create: '"{label}" erstellen',
       noData: 'Keng Donnéeën',
-      noMatch: 'Keng entspriechend Donnéeën'
+      noMatch: 'Keng entspriechend Donnéeën',
+      trigger: 'Optiounen uweisen'
     },
     inputNumber: {
       decrement: 'Dekrementéieren',
-      increment: 'Inkrementéieren'
+      increment: 'Inkrementéieren',
+      roledescription: 'Zuelefeld'
+    },
+    inputRating: {
+      rate: '{value} vu {length} bewäerten'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'Stonn',
+      minute: 'Minutt',
+      second: 'Sekonn',
+      timeZoneName: 'Zäitzon'
     },
     listbox: {
       noData: 'Keng Donnéeën',
@@ -111,6 +148,16 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Zoumaachen'
+    },
+    pagination: {
+      first: 'Éischt Säit',
+      last: 'Lescht Säit',
+      next: 'Nächst Säit',
+      page: 'Säit {page}',
+      prev: 'Vireg Säit'
+    },
+    pinInput: {
+      input: 'PIN-Code, Zeechen {index} vu {length}'
     },
     pricingTable: {
       caption: 'Vergläich vun de Präispläng'
@@ -144,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: 'Keng entspriechend Donnéeën',
       search: 'Sichen…'
     },
+    skeleton: {
+      label: 'Lueden'
+    },
     slideover: {
       close: 'Zoumaachen'
+    },
+    slider: {
+      max: 'Maximum',
+      min: 'Minimum',
+      thumb: 'Regler',
+      value: 'Wäert {index} vu {total}'
+    },
+    stepper: {
+      label: 'Fortschrëtt'
     },
     table: {
       noData: 'Keng Donnéeën'
     },
     toast: {
       close: 'Zoumaachen'
+    },
+    toaster: {
+      label: 'Notifikatioun',
+      viewport: 'Notifikatiounen ({hotkey})'
     }
   }
 })

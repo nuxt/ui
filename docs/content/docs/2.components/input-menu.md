@@ -2,6 +2,10 @@
 title: InputMenu
 description: An autocomplete input with real-time suggestions.
 category: form
+keywords:
+  - combobox
+  - typeahead
+  - autosuggest
 links:
   - label: Combobox
     icon: i-custom-reka-ui
@@ -822,6 +826,16 @@ Here is an example with a rotating icon that indicates the open state of the Inp
 ::component-example
 ---
 name: 'input-menu-icon-example'
+---
+::
+
+### With floating label :badge{label="Soon" class="align-text-top"}
+
+You can use the `#default` slot to add a floating label to the InputMenu.
+
+::component-example
+---
+name: 'input-menu-floating-label-example'
 ---
 ::
 

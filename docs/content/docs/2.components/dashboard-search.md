@@ -1,6 +1,6 @@
 ---
 title: DashboardSearch
-description: 'A ready to use CommandPalette to add to your dashboard.'
+description: 'A ready-to-use CommandPalette to add to your dashboard.'
 category: dashboard
 links:
   - label: CommandPalette

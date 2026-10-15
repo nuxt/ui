@@ -2,5 +2,9 @@ title: Team
 description: Nuxt UI is developed and maintained by a global community of passionate contributors.
 navigation: false
 hero:
-  title: Meet the Team
-  description: The development of Nuxt UI is led by a community of developers from all over the world.
+  badge:
+    label: 'Built in the open · MIT licensed'
+    icon: i-lucide-git-pull-request-arrow
+  lead: Meet the
+  accent: Team
+  description: Nuxt UI is built in the open by contributors from all over the world. Here is everyone who ships it, ranked by their contributions on GitHub.

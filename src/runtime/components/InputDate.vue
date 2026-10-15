@@ -27,7 +27,7 @@ export interface InputDateProps<R extends boolean = false> extends UseComponentI
    */
   color?: InputDate['variants']['color']
   /**
-   * @defaultValue 'solid'
+   * @defaultValue 'outline'
    */
   variant?: InputDate['variants']['variant']
   /**
@@ -70,19 +70,22 @@ export interface InputDateSlots {
 </script>
 
 <script setup lang="ts" generic="R extends boolean">
-import { computed, onMounted, ref } from 'vue'
-import { } from 'reka-ui'
+import { computed, onMounted, onScopeDispose, ref } from 'vue'
 import { useForwardProps } from '../composables/useForwardProps'
-import { DateField as SingleDateField, DateRangeField as RangeDateField } from 'reka-ui/namespaced'
+import { DateFieldRoot, DateFieldInput, DateRangeFieldRoot, DateRangeFieldInput } from 'reka-ui'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
+import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
+
+const SingleDateField = { Root: DateFieldRoot, Input: DateFieldInput }
+const RangeDateField = { Root: DateRangeFieldRoot, Input: DateRangeFieldInput }
 
 defineOptions({ inheritAttrs: false })
 
@@ -94,10 +97,12 @@ const slots = defineSlots<InputDateSlots>()
 
 const props = useComponentProps<InputDateProps<R>>('inputDate', _props)
 
+const { t } = useLocale()
 const appConfig = useAppConfig() as InputDate['AppConfig']
 
 const rootProps = useForwardProps(reactiveOmit(props, 'id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'ui'), emits)
-const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formFieldSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputDateProps<R>>(_props)
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formFieldSize, color: formFieldColor, id, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<InputDateProps<R>>(_props)
+
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputDateProps<R>>(_props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
@@ -106,14 +111,21 @@ const [DefineSegmentsTemplate, ReuseSegmentsTemplate] = createReusableTemplate<{
   type?: 'start' | 'end'
 }>()
 
-const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
+// eslint-disable-next-line vue/no-dupe-keys
+const color = computed(() => formFieldColor.value ?? props.color)
+// eslint-disable-next-line vue/no-dupe-keys
+const highlight = computed(() => formFieldHighlight.value ?? props.highlight)
+// eslint-disable-next-line vue/no-dupe-keys
+const size = computed(() => fieldGroupSize.value ?? formFieldSize.value ?? props.size)
+
+const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.inputDate || {}) })({
-  color: color.value ?? props.color,
+  color: color.value,
   variant: props.variant,
-  size: inputSize.value ?? props.size,
-  highlight: highlight.value ?? props.highlight,
+  size: size.value,
+  highlight: highlight.value,
   fixed: props.fixed,
   loading: props.loading,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
@@ -128,6 +140,11 @@ function setInputRef(index: number, el: Element | ComponentPublicInstance | null
   inputsRef.value[index] = el
 }
 
+// Literal segments are hidden from assistive technologies.
+function segmentLabel(part: SegmentPart) {
+  return part !== 'literal' ? t(`inputDate.${part}`) : undefined
+}
+
 function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
@@ -137,14 +154,22 @@ function onUpdate(value: any) {
   emitFormInput()
 }
 
-function onBlur(event: FocusEvent) {
-  emitFormBlur()
+function onFocusOut(event: FocusEvent) {
+  if (event.relatedTarget && (event.currentTarget as HTMLElement).contains(event.relatedTarget as Node)) {
+    return
+  }
+
   emits('blur', event)
+  emitFormBlur()
 }
 
-function onFocus(event: FocusEvent) {
-  emitFormFocus()
+function onFocusIn(event: FocusEvent) {
+  if (event.relatedTarget && (event.currentTarget as HTMLElement).contains(event.relatedTarget as Node)) {
+    return
+  }
+
   emits('focus', event)
+  emitFormFocus()
 }
 
 function autoFocus() {
@@ -153,11 +178,15 @@ function autoFocus() {
   }
 }
 
+let autofocusTimeoutId: ReturnType<typeof setTimeout> | undefined
+
 onMounted(() => {
-  setTimeout(() => {
+  autofocusTimeoutId = setTimeout(() => {
     autoFocus()
   }, props.autofocusDelay)
 })
+
+onScopeDispose(() => clearTimeout(autofocusTimeoutId))
 
 const DateField = computed(() => props.range ? RangeDateField : SingleDateField)
 
@@ -177,6 +206,7 @@ defineExpose({
       data-slot="segment"
       :class="ui.segment({ class: props.ui?.segment })"
       :data-segment="segment.part"
+      :aria-label="segmentLabel(segment.part)"
     >
       {{ segment.value.trim() }}
     </DateField.Input>
@@ -193,8 +223,8 @@ defineExpose({
     :disabled="disabled"
     :class="ui.base({ class: [props.ui?.base, props.class] })"
     @update:model-value="onUpdate"
-    @blur="onBlur"
-    @focus="onFocus"
+    @focusout="onFocusOut"
+    @focusin="onFocusIn"
   >
     <template v-if="Array.isArray(segments)">
       <ReuseSegmentsTemplate :segments="segments" />
@@ -218,7 +248,7 @@ defineExpose({
 
     <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
       <slot name="trailing" :ui="ui">
-        <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+        <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, leading: isLeading })" />
       </slot>
     </span>
   </DateField.Root>

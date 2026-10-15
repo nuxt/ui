@@ -1,6 +1,10 @@
 ---
 description: A short text to represent a status or a category.
 category: element
+keywords:
+  - tag
+  - pill
+  - label
 links:
   - label: GitHub
     icon: i-simple-icons-github

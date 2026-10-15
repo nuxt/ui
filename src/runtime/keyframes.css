@@ -594,16 +594,6 @@
   }
 }
 
-@keyframes marquee-vertical-rtl {
-  from {
-    transform: translate3d(0, calc(-100% - var(--gap)), 0);
-  }
-
-  to {
-    transform: translate3d(0, calc(-100% * var(--gap)), 0);
-  }
-}
-
 @keyframes shimmer {
   from {
     background-position: 100% center;

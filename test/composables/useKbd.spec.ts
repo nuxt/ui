@@ -10,14 +10,14 @@ function setUserAgent(ua: string) {
 }
 
 describe('useKbd', () => {
-  // These run first so the shared composable initializes inside a mounted
-  // component (its `onMounted` only fills the meta/ctrl/alt map when mounted).
+  // `getKbdKey` only resolves meta/ctrl/alt once the calling component has mounted.
   describe('platform-specific keys (meta/ctrl/alt)', () => {
     let wrapper: Awaited<ReturnType<typeof mountSuspended>>
 
     afterEach(() => {
       wrapper?.unmount()
       setUserAgent(originalUserAgent)
+      document.documentElement.classList.remove('ui-macos')
     })
 
     async function mountKbd() {
@@ -37,6 +37,7 @@ describe('useKbd', () => {
       const kbd = await mountKbd()
 
       expect(kbd.macOS.value).toBeTruthy()
+      expect(document.documentElement.classList.contains('ui-macos')).toBe(true)
       expect(kbd.getKbdKey('meta')).toBe('⌘')
       expect(kbd.getKbdKey('ctrl')).toBe('⌃')
       expect(kbd.getKbdKey('alt')).toBe('⌥')
@@ -47,9 +48,29 @@ describe('useKbd', () => {
       const kbd = await mountKbd()
 
       expect(kbd.macOS.value).toBeFalsy()
+      expect(document.documentElement.classList.contains('ui-macos')).toBe(false)
       expect(kbd.getKbdKey('meta')).toBe('Ctrl')
       expect(kbd.getKbdKey('ctrl')).toBe('Ctrl')
       expect(kbd.getKbdKey('alt')).toBe('Alt')
+    })
+
+    it('keeps meta/ctrl/alt as a placeholder until the calling component has mounted', async () => {
+      setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64)')
+      await mountKbd()
+
+      let beforeMount: string | undefined
+      let api!: ReturnType<typeof useKbd>
+      const second = await mountSuspended(defineComponent({
+        setup() {
+          api = useKbd()
+          beforeMount = api.getKbdKey('meta')
+          return () => null
+        }
+      }))
+
+      expect(beforeMount).toBe(' ')
+      expect(api.getKbdKey('meta')).toBe('Ctrl')
+      second.unmount()
     })
   })
 

@@ -13,6 +13,7 @@ const components = [
   'calendar',
   'card',
   'carousel',
+  'chart',
   'chat-message',
   'chat-prompt',
   'chat-reasoning',
@@ -71,6 +72,7 @@ const components = [
   'pricing-plan',
   'pricing-table',
   'progress',
+  'progress-group',
   'radio-group',
   'scroll-area',
   'select-menu',
@@ -81,6 +83,7 @@ const components = [
   'skeleton',
   'slideover',
   'slider',
+  'splitter',
   'stepper',
   'switch',
   'table',
@@ -97,7 +100,7 @@ const components = [
 export const useNavigation = () => {
   const appConfig = useAppConfig()
 
-  const items = [{ label: 'Home', icon: 'i-lucide-home', to: '/' }, { label: 'Chat', icon: 'i-lucide-message-circle', to: '/chat' }]
+  const items = [{ label: 'Home', icon: 'i-lucide-home', to: '/' }, { label: 'Chat', icon: 'i-lucide-message-circle', to: '/chat' }, { label: 'Typography', icon: 'i-lucide-type', to: '/typography' }]
   const groups = computed(() => [
     { id: 'links', items },
     { id: 'components', label: 'Components', items: components },

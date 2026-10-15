@@ -1,6 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { defineComponent, nextTick, ref, unref } from 'vue'
-import type { MaybeRef } from 'vue'
+import { defineComponent, nextTick, ref } from 'vue'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { useFileUpload } from '../../src/runtime/composables/useFileUpload'
 import type { UseFileUploadOptions } from '../../src/runtime/composables/useFileUpload'
@@ -8,7 +7,7 @@ import type { UseFileUploadOptions } from '../../src/runtime/composables/useFile
 // Captures the callbacks that `useFileUpload` registers with the VueUse hooks
 // inside `onMounted`, so the test can drive drops and dialog changes directly.
 const vueuse = vi.hoisted(() => ({
-  dropOptions: undefined as { dataTypes?: MaybeRef<readonly string[]>, onDrop: (files: File[] | FileList | null) => void } | undefined,
+  dropOptions: undefined as { onDrop: (files: File[] | FileList | null) => void } | undefined,
   onChangeCb: undefined as ((files: FileList | File[] | null) => void) | undefined,
   open: undefined as ReturnType<typeof vi.fn> | undefined,
   isOver: undefined as { value: boolean } | undefined
@@ -38,8 +37,8 @@ vi.mock('@vueuse/core', async () => {
   }
 })
 
-function file(name: string): File {
-  return new File(['data'], name, { type: 'text/plain' })
+function file(name: string, type = 'text/plain'): File {
+  return new File(['data'], name, { type })
 }
 
 async function mountUpload(options: UseFileUploadOptions) {
@@ -141,43 +140,83 @@ describe('useFileUpload', () => {
     })
   })
 
-  describe('accept parsing', () => {
-    it('passes wildcard MIME types to the drop zone as their base type', async () => {
-      await mountUpload({ onUpdate: vi.fn(), accept: 'image/*' })
+  describe('accept', () => {
+    it('rejects dropped files that do not match a wildcard MIME type', async () => {
+      const onUpdate = vi.fn()
+      const onReject = vi.fn()
+      await mountUpload({ onUpdate, onReject, accept: 'image/*' })
+      const pdf = file('a.pdf', 'application/pdf')
 
-      expect(unref(vueuse.dropOptions!.dataTypes)).toEqual(['image'])
+      vueuse.dropOptions!.onDrop([pdf])
+
+      expect(onUpdate).not.toHaveBeenCalled()
+      expect(onReject).toHaveBeenCalledWith([pdf])
     })
 
-    it('keeps full MIME types and drops extension filters', async () => {
-      // Drag items only expose MIME types, so `.pdf` can't be checked on drop.
-      await mountUpload({ onUpdate: vi.fn(), accept: '.pdf, image/png' })
+    it('matches full MIME types and extensions', async () => {
+      const onUpdate = vi.fn()
+      const onReject = vi.fn()
+      await mountUpload({ onUpdate, onReject, multiple: true, accept: '.pdf, image/png' })
+      const pdf = file('A.PDF', '')
+      const png = file('b.png', 'image/png')
+      const jpg = file('c.jpg', 'image/jpeg')
 
-      expect(unref(vueuse.dropOptions!.dataTypes)).toEqual(['image/png'])
+      vueuse.dropOptions!.onDrop([pdf, png, jpg])
+
+      expect(onUpdate).toHaveBeenCalledWith([pdf, png])
+      expect(onReject).toHaveBeenCalledWith([jpg])
     })
 
-    it('allows all types for the default accept', async () => {
-      // An empty list means no restriction for `useDropZone`.
-      await mountUpload({ onUpdate: vi.fn(), accept: '*' })
+    it('rejects before keeping the first file when not multiple', async () => {
+      const onUpdate = vi.fn()
+      const onReject = vi.fn()
+      await mountUpload({ onUpdate, onReject, accept: 'image/*' })
+      const pdf = file('a.pdf', 'application/pdf')
+      const png = file('b.png', 'image/png')
 
-      expect(unref(vueuse.dropOptions!.dataTypes)).toEqual([])
+      vueuse.dropOptions!.onDrop([pdf, png])
+
+      expect(onUpdate).toHaveBeenCalledWith([png])
+      expect(onReject).toHaveBeenCalledWith([pdf])
     })
 
-    it('allows all types when accept only contains extensions', async () => {
-      await mountUpload({ onUpdate: vi.fn(), accept: '.pdf,.docx' })
+    it('accepts every dropped file for the default accept', async () => {
+      const onUpdate = vi.fn()
+      const onReject = vi.fn()
+      await mountUpload({ onUpdate, onReject })
+      const pdf = file('a.pdf', 'application/pdf')
 
-      expect(unref(vueuse.dropOptions!.dataTypes)).toEqual([])
+      vueuse.dropOptions!.onDrop([pdf])
+
+      expect(onUpdate).toHaveBeenCalledWith([pdf])
+      expect(onReject).not.toHaveBeenCalled()
     })
 
-    it('keeps the drop zone filter reactive to accept changes', async () => {
+    it('follows accept changes', async () => {
       const accept = ref('image/*')
-      await mountUpload({ onUpdate: vi.fn(), accept })
+      const onUpdate = vi.fn()
+      const onReject = vi.fn()
+      await mountUpload({ onUpdate, onReject, accept })
+      const mp4 = file('a.mp4', 'video/mp4')
 
-      expect(unref(vueuse.dropOptions!.dataTypes)).toEqual(['image'])
+      vueuse.dropOptions!.onDrop([mp4])
+      expect(onReject).toHaveBeenCalledWith([mp4])
 
       accept.value = 'video/*'
-      await nextTick()
+      vueuse.dropOptions!.onDrop([mp4])
+      expect(onUpdate).toHaveBeenCalledWith([mp4])
+    })
 
-      expect(unref(vueuse.dropOptions!.dataTypes)).toEqual(['video'])
+    it('does not filter files selected from the dialog', async () => {
+      const onUpdate = vi.fn()
+      const onReject = vi.fn()
+      await mountUpload({ onUpdate, onReject, accept: 'image/*' })
+      const pdf = file('a.pdf', 'application/pdf')
+
+      vueuse.onChangeCb!([pdf])
+
+      expect(onUpdate).toHaveBeenCalledWith([pdf])
+      expect(onReject).not.toHaveBeenCalled()
     })
   })
 

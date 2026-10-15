@@ -2,7 +2,7 @@ import type { Messages } from '../types/locale'
 import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
-  name: 'Suomeksi',
+  name: 'Suomi',
   code: 'fi',
   messages: {
     alert: {
@@ -16,23 +16,36 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Sulje'
     },
+    breadcrumb: {
+      label: 'murupolku'
+    },
     calendar: {
+      label: 'Tapahtuman päivämäärä',
+      monthPicker: 'Kuukausivalitsin',
       nextMonth: 'Seuraava kuukausi',
       nextYear: 'Seuraava vuosi',
       prevMonth: 'Edellinen kuukausi',
-      prevYear: 'Edellinen vuosi'
+      prevYear: 'Edellinen vuosi',
+      yearPicker: 'Vuosivalitsin'
     },
     carousel: {
       dots: 'Valitse näytettävä dia',
       goto: 'Siirry sivulle {slide}',
       next: 'Seuraava',
-      prev: 'Edellinen'
+      prev: 'Edellinen',
+      roledescription: 'karuselli',
+      slide: 'dia'
+    },
+    chatMessages: {
+      autoScroll: 'Vieritä alas'
     },
     chatPrompt: {
       placeholder: 'Kirjoita viestisi tähän…'
     },
     chatPromptSubmit: {
-      label: 'Lähetä'
+      label: 'Lähetä',
+      reload: 'Yritä uudelleen',
+      stop: 'Lopeta generointi'
     },
     chatReasoning: {
       thinking: 'Ajattelee…',
@@ -51,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Sulje',
       noData: 'Ei tietoja',
       noMatch: 'Ei vastaavia tietoja',
-      placeholder: 'Kirjoita komento tai hae…'
+      placeholder: 'Kirjoita komento tai hae…',
+      results: 'Tulokset'
     },
     contentSearch: {
       links: 'Linkit',
@@ -95,14 +109,37 @@ export default defineLocale<Messages>({
       close: 'Sulje valikko',
       open: 'Avaa valikko'
     },
+    inputDate: {
+      day: 'päivä',
+      dayPeriod: 'AM/PM',
+      era: 'aikakausi',
+      hour: 'tunti',
+      minute: 'minuutti',
+      month: 'kuukausi',
+      second: 'sekunti',
+      timeZoneName: 'aikavyöhyke',
+      year: 'vuosi'
+    },
     inputMenu: {
       create: 'Luo "{label}"',
       noData: 'Ei tietoja',
-      noMatch: 'Ei vastaavia tietoja'
+      noMatch: 'Ei vastaavia tietoja',
+      trigger: 'Näytä vaihtoehdot'
     },
     inputNumber: {
       decrement: 'Vähennä',
-      increment: 'Kasvata'
+      increment: 'Kasvata',
+      roledescription: 'numerokenttä'
+    },
+    inputRating: {
+      rate: 'Anna arvosana {value}/{length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'tunti',
+      minute: 'minuutti',
+      second: 'sekunti',
+      timeZoneName: 'aikavyöhyke'
     },
     listbox: {
       noData: 'Ei tietoja',
@@ -111,6 +148,16 @@ export default defineLocale<Messages>({
     },
     modal: {
       close: 'Sulje'
+    },
+    pagination: {
+      first: 'Ensimmäinen sivu',
+      last: 'Viimeinen sivu',
+      next: 'Seuraava sivu',
+      page: 'Sivu {page}',
+      prev: 'Edellinen sivu'
+    },
+    pinInput: {
+      input: 'PIN-koodi, merkki {index}/{length}'
     },
     pricingTable: {
       caption: 'Hinnoitellut suunnitelmat'
@@ -144,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: 'Ei vastaavia tietoja',
       search: 'Hae…'
     },
+    skeleton: {
+      label: 'ladataan'
+    },
     slideover: {
       close: 'Sulje'
+    },
+    slider: {
+      max: 'Maksimi',
+      min: 'Minimi',
+      thumb: 'Liukusäädin',
+      value: 'Arvo {index}/{total}'
+    },
+    stepper: {
+      label: 'edistyminen'
     },
     table: {
       noData: 'Ei tietoja'
     },
     toast: {
       close: 'Sulje'
+    },
+    toaster: {
+      label: 'Ilmoitus',
+      viewport: 'Ilmoitukset ({hotkey})'
     }
   }
 })

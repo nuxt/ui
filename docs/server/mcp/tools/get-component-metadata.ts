@@ -1,9 +1,15 @@
+import { defineMcpTool } from '@nuxtjs/mcp-toolkit/server'
+import { useEvent } from 'nitropack/runtime'
+import { createError } from 'h3'
 import { z } from 'zod'
-import { camelCase, upperFirst, kebabCase } from 'scule'
+import { kebabCase } from 'scule'
 import { queryCollection } from '@nuxt/content/server'
+import { normalizeComponentName } from '../../utils/normalizeComponentName'
+import { fetchComponentMetadata } from '../../utils/componentMeta'
+import { SITE_URL } from '../../utils/site'
 
 export default defineMcpTool({
-  description: 'Retrieves detailed metadata for a Nuxt UI component including props, slots, and events',
+  description: 'Retrieves metadata for a Nuxt UI component including props, slots, and events. Props are compact by default, pass `full: true` to get the raw recursive prop schemas (very large). Use this over `get-component` when you need structured props, slots and events rather than prose documentation.',
   annotations: {
     readOnlyHint: true,
     destructiveHint: false,
@@ -11,14 +17,16 @@ export default defineMcpTool({
     openWorldHint: false
   },
   inputSchema: {
-    componentName: z.string().describe('The name of the component (PascalCase)')
+    componentName: z.string().describe('Component name. Accepts `Button`, `UButton`, `button` or `u-button`.'),
+    full: z.boolean().optional().describe('Return raw metadata with recursive prop schemas (very large). Defaults to false (compact props)')
   },
   inputExamples: [
     { componentName: 'Button' },
-    { componentName: 'UTable' }
+    { componentName: 'UTable' },
+    { componentName: 'Tabs', full: true }
   ],
   cache: '30m',
-  async handler({ componentName }) {
+  async handler({ componentName, full }) {
     const event = useEvent()
 
     // Normalize component name by removing "U" or "u-" prefix if present
@@ -38,14 +46,8 @@ export default defineMcpTool({
       throw createError({ statusCode: 404, message: `Component '${componentName}' not found in documentation` })
     }
 
-    // Use the same approach as the docs components for metadata
-    const camelName = camelCase(normalizedName)
-    const componentMetaName = `U${upperFirst(camelName)}`
-
-    let metadata
-    try {
-      metadata = await $fetch<Record<string, any>>(`/api/component-meta/${componentMetaName}.json`)
-    } catch {
+    const metadata = await fetchComponentMetadata(normalizedName, { full })
+    if (!metadata) {
       throw createError({ statusCode: 404, message: `Metadata for component '${componentName}' not available` })
     }
 
@@ -54,14 +56,8 @@ export default defineMcpTool({
       title: page.title,
       description: page.description,
       category: page.category,
-      documentation_url: `https://ui.nuxt.com${page.path}`,
-      metadata: {
-        pascalName: metadata.pascalName,
-        kebabName: metadata.kebabName,
-        props: metadata.meta.props,
-        slots: metadata.meta.slots,
-        emits: metadata.meta.emits
-      }
+      documentation_url: `${SITE_URL}${page.path}`,
+      metadata
     }
   }
 })

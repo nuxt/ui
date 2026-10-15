@@ -1,10 +1,22 @@
 <script setup lang="ts">
 const route = useRoute()
 const { links } = useFooter()
+const { frameworks } = useFrameworks()
 </script>
 
 <template>
-  <USeparator :icon="route.path === '/' ? undefined : 'i-simple-icons-nuxtdotjs'" class="h-px" />
+  <USeparator v-if="route.path === '/'" class="h-px" />
+  <!-- both icons render, the framework class shows one: the cookie is
+       invisible to the prerendered HTML and a class mismatch on a plain
+       element is not patched on hydration -->
+  <USeparator v-else class="h-px">
+    <UIcon
+      v-for="framework in frameworks"
+      :key="framework.value"
+      :name="framework.icon"
+      :class="[`${framework.value}-only`, 'shrink-0 size-5']"
+    />
+  </USeparator>
 
   <UFooter>
     <template #left>
@@ -13,7 +25,7 @@ const { links } = useFooter()
       </NuxtLink>
     </template>
 
-    <UNavigationMenu :items="links" variant="link" color="neutral" />
+    <UNavigationMenu :items="links" variant="link" color="neutral" :ui="{ list: 'flex-wrap justify-center' }" />
 
     <template #right>
       <UButton

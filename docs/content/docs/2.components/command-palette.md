@@ -2,6 +2,11 @@
 title: CommandPalette
 description: A command palette with full-text search powered by Fuse.js for efficient fuzzy matching.
 category: navigation
+keywords:
+  - command menu
+  - cmdk
+  - spotlight
+  - global search
 links:
   - label: Fuse.js
     icon: i-custom-fuse-js
@@ -46,40 +51,40 @@ props:
           avatar:
             src: 'https://github.com/benjamincanac.png'
             loading: lazy
-        - label: 'Romain Hamel'
-          suffix: 'romhml'
+        - label: 'Hugo Richard'
+          suffix: 'HugoRCD'
           avatar:
-            src: 'https://github.com/romhml.png'
+            src: 'https://github.com/HugoRCD.png'
             loading: lazy
         - label: 'Sébastien Chopin'
           suffix: 'atinux'
           avatar:
             src: 'https://github.com/atinux.png'
             loading: lazy
-        - label: 'Hugo Richard'
-          suffix: 'HugoRCD'
+        - label: 'Romain Hamel'
+          suffix: 'romhml'
           avatar:
-            src: 'https://github.com/HugoRCD.png'
+            src: 'https://github.com/romhml.png'
             loading: lazy
         - label: 'Sandro Circi'
           suffix: 'sandros94'
           avatar:
             src: 'https://github.com/sandros94.png'
             loading: lazy
-        - label: 'Daniel Roe'
-          suffix: 'danielroe'
-          avatar:
-            src: 'https://github.com/danielroe.png'
-            loading: lazy
         - label: 'Jakub Michálek'
           suffix: 'J-Michalek'
           avatar:
             src: 'https://github.com/J-Michalek.png'
             loading: lazy
-        - label: 'Eugen Istoc'
-          suffix: 'genu'
+        - label: 'Alex'
+          suffix: 'hywax'
           avatar:
-            src: 'https://github.com/genu.png'
+            src: 'https://github.com/hywax.png'
+            loading: lazy
+        - label: 'Maxime Pauvert'
+          suffix: 'maximepvrt'
+          avatar:
+            src: 'https://github.com/maximepvrt.png'
             loading: lazy
   class: 'flex-1 h-80'
 ---
@@ -153,40 +158,40 @@ props:
           avatar:
             src: 'https://github.com/benjamincanac.png'
             loading: lazy
-        - label: 'Romain Hamel'
-          suffix: 'romhml'
+        - label: 'Hugo Richard'
+          suffix: 'HugoRCD'
           avatar:
-            src: 'https://github.com/romhml.png'
+            src: 'https://github.com/HugoRCD.png'
             loading: lazy
         - label: 'Sébastien Chopin'
           suffix: 'atinux'
           avatar:
             src: 'https://github.com/atinux.png'
             loading: lazy
-        - label: 'Hugo Richard'
-          suffix: 'HugoRCD'
+        - label: 'Romain Hamel'
+          suffix: 'romhml'
           avatar:
-            src: 'https://github.com/HugoRCD.png'
+            src: 'https://github.com/romhml.png'
             loading: lazy
         - label: 'Sandro Circi'
           suffix: 'sandros94'
           avatar:
             src: 'https://github.com/sandros94.png'
             loading: lazy
-        - label: 'Daniel Roe'
-          suffix: 'danielroe'
-          avatar:
-            src: 'https://github.com/danielroe.png'
-            loading: lazy
         - label: 'Jakub Michálek'
           suffix: 'J-Michalek'
           avatar:
             src: 'https://github.com/J-Michalek.png'
             loading: lazy
-        - label: 'Eugen Istoc'
-          suffix: 'genu'
+        - label: 'Alex'
+          suffix: 'hywax'
           avatar:
-            src: 'https://github.com/genu.png'
+            src: 'https://github.com/hywax.png'
+            loading: lazy
+        - label: 'Maxime Pauvert'
+          suffix: 'maximepvrt'
+          avatar:
+            src: 'https://github.com/maximepvrt.png'
             loading: lazy
   class: 'flex-1'
 ---
@@ -229,40 +234,40 @@ props:
           avatar:
             src: 'https://github.com/benjamincanac.png'
             loading: lazy
-        - label: 'Romain Hamel'
-          suffix: 'romhml'
+        - label: 'Hugo Richard'
+          suffix: 'HugoRCD'
           avatar:
-            src: 'https://github.com/romhml.png'
+            src: 'https://github.com/HugoRCD.png'
             loading: lazy
         - label: 'Sébastien Chopin'
           suffix: 'atinux'
           avatar:
             src: 'https://github.com/atinux.png'
             loading: lazy
-        - label: 'Hugo Richard'
-          suffix: 'HugoRCD'
+        - label: 'Romain Hamel'
+          suffix: 'romhml'
           avatar:
-            src: 'https://github.com/HugoRCD.png'
+            src: 'https://github.com/romhml.png'
             loading: lazy
         - label: 'Sandro Circi'
           suffix: 'sandros94'
           avatar:
             src: 'https://github.com/sandros94.png'
             loading: lazy
-        - label: 'Daniel Roe'
-          suffix: 'danielroe'
-          avatar:
-            src: 'https://github.com/danielroe.png'
-            loading: lazy
         - label: 'Jakub Michálek'
           suffix: 'J-Michalek'
           avatar:
             src: 'https://github.com/J-Michalek.png'
             loading: lazy
-        - label: 'Eugen Istoc'
-          suffix: 'genu'
+        - label: 'Alex'
+          suffix: 'hywax'
           avatar:
-            src: 'https://github.com/genu.png'
+            src: 'https://github.com/hywax.png'
+            loading: lazy
+        - label: 'Maxime Pauvert'
+          suffix: 'maximepvrt'
+          avatar:
+            src: 'https://github.com/maximepvrt.png'
             loading: lazy
   class: 'flex-1'
 ---
@@ -422,40 +427,40 @@ props:
           avatar:
             src: 'https://github.com/benjamincanac.png'
             loading: lazy
-        - label: 'Romain Hamel'
-          suffix: 'romhml'
+        - label: 'Hugo Richard'
+          suffix: 'HugoRCD'
           avatar:
-            src: 'https://github.com/romhml.png'
+            src: 'https://github.com/HugoRCD.png'
             loading: lazy
         - label: 'Sébastien Chopin'
           suffix: 'atinux'
           avatar:
             src: 'https://github.com/atinux.png'
             loading: lazy
-        - label: 'Hugo Richard'
-          suffix: 'HugoRCD'
+        - label: 'Romain Hamel'
+          suffix: 'romhml'
           avatar:
-            src: 'https://github.com/HugoRCD.png'
+            src: 'https://github.com/romhml.png'
             loading: lazy
         - label: 'Sandro Circi'
           suffix: 'sandros94'
           avatar:
             src: 'https://github.com/sandros94.png'
             loading: lazy
-        - label: 'Daniel Roe'
-          suffix: 'danielroe'
-          avatar:
-            src: 'https://github.com/danielroe.png'
-            loading: lazy
         - label: 'Jakub Michálek'
           suffix: 'J-Michalek'
           avatar:
             src: 'https://github.com/J-Michalek.png'
             loading: lazy
-        - label: 'Eugen Istoc'
-          suffix: 'genu'
+        - label: 'Alex'
+          suffix: 'hywax'
           avatar:
-            src: 'https://github.com/genu.png'
+            src: 'https://github.com/hywax.png'
+            loading: lazy
+        - label: 'Maxime Pauvert'
+          suffix: 'maximepvrt'
+          avatar:
+            src: 'https://github.com/maximepvrt.png'
             loading: lazy
   class: 'flex-1'
 ---
@@ -978,7 +983,7 @@ You can use the `fuse` prop to override the options of [useFuse](https://vueuse.
 ```
 
 ::tip
-The `fuseOptions` are the options of [Fuse.js](https://www.fusejs.io/api/options.html), the `resultLimit` is the maximum number of results to return and the `matchAllWhenSearchEmpty` is a boolean to match all items when the search term is empty.
+The `fuseOptions` are the options of [Fuse.js](https://www.fusejs.io/), the `resultLimit` is the maximum number of results to return and the `matchAllWhenSearchEmpty` is a boolean to match all items when the search term is empty.
 ::
 
 You can for example set `{ fuseOptions: { includeMatches: true } }`{lang="ts-type"} to highlight the search term in the items.

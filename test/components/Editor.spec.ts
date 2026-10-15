@@ -19,10 +19,28 @@ describe('Editor', () => {
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Editor, {
-      props
+      props,
+      attrs: { 'aria-label': 'Editor' }
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+
+    wrapper.unmount()
+  })
+
+  it('does not update the model when the document is unchanged', async () => {
+    const wrapper = await mountSuspended(Editor, {
+      props: {
+        contentType: 'markdown',
+        modelValue: '# Building Modern Interfaces with Nuxt UI',
+        placeholder: 'Write something...'
+      }
+    })
+    const editor = wrapper.vm.editor!
+
+    editor.setEditable(false)
+
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined()
 
     wrapper.unmount()
   })

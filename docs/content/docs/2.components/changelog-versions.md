@@ -243,13 +243,13 @@ When using a custom `container`, make sure the container element is mounted befo
 :component-slots
 
 ::tip
-You can use all the slots of the [`ChangelogVersion`](/docs/components/changelog-version#slots) component inside ChangelogVersions, they are automatically forwarded allowing you to customize individual versions when using the `versions` prop.
+You can use all the slots of the [`ChangelogVersion`](/docs/components/changelog-version#slots) component inside ChangelogVersions, they are automatically forwarded so you can customize individual versions when using the `versions` prop.
 
 ```vue{3-5}
 <template>
   <UChangelogVersions :versions="versions">
     <template #body="{ version }">
-      <MDC v-if="version.content" :value="version.content" />
+      <Markdown :value="version.content" />
     </template>
   </UChangelogVersions>
 </template>
