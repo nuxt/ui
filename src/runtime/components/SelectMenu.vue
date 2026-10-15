@@ -52,7 +52,7 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
   /**
    * Whether to display a filter input or not.
    * Can be an object to pass additional props to the input.
-   * `{ placeholder: 'Search...', variant: 'none' }`{lang="ts-type"}
+   * `{ placeholder: t('selectMenu.placeholder'), autofocus: true, variant: 'none' }`{lang="ts-type"}
    * Set `autofocus: false` to prevent the filter input from being focused when the menu opens (e.g. to avoid opening the virtual keyboard on touch devices).
    * @defaultValue true
    */

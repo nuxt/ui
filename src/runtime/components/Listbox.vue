@@ -96,7 +96,7 @@ export interface ListboxProps<T extends ArrayOrNested<ListboxItem> = ArrayOrNest
   /**
    * Whether to display a filter input or not.
    * Can be an object to pass additional props to the input.
-   * `{ placeholder: 'Search...', variant: 'none' }`{lang="ts-type"}
+   * `{ placeholder: t('listbox.placeholder'), variant: 'none' }`{lang="ts-type"}
    * @defaultValue false
    */
   filter?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
