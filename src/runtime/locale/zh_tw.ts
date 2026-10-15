@@ -70,9 +70,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: '返回',
       close: '關閉',
+      filterPlaceholder: '輸入命令或搜尋…',
       noData: '沒有資料',
       noMatch: '沒有相符的資料',
-      placeholder: '輸入命令或搜尋…',
       results: '搜尋結果'
     },
     contentSearch: {
@@ -87,8 +87,8 @@ export default defineLocale<Messages>({
       title: '本頁內容'
     },
     dropdownMenu: {
-      noMatch: '沒有相符的資料',
-      search: '搜尋…'
+      filterPlaceholder: '搜尋…',
+      noMatch: '沒有相符的資料'
     },
     dashboardSearch: {
       theme: '主題'
@@ -150,9 +150,9 @@ export default defineLocale<Messages>({
       timeZoneName: '時區'
     },
     listbox: {
+      filterPlaceholder: '搜尋…',
       noData: '沒有資料',
-      noMatch: '沒有相符的資料',
-      search: '搜尋…'
+      noMatch: '沒有相符的資料'
     },
     modal: {
       close: '關閉'
@@ -195,9 +195,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: '建立「{label}」',
+      filterPlaceholder: '搜尋…',
       noData: '沒有資料',
-      noMatch: '沒有相符的資料',
-      search: '搜尋…'
+      noMatch: '沒有相符的資料'
     },
     skeleton: {
       label: '載入中'

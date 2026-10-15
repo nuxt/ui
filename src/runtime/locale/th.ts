@@ -65,9 +65,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'ย้อนกลับ',
       close: 'ปิด',
+      filterPlaceholder: 'พิมพ์คำสั่งหรือค้นหา…',
       noData: 'ไม่มีข้อมูล',
       noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
-      placeholder: 'พิมพ์คำสั่งหรือค้นหา…',
       results: 'ผลลัพธ์'
     },
     contentSearch: {
@@ -82,8 +82,8 @@ export default defineLocale<Messages>({
       title: 'ในหน้านี้'
     },
     dropdownMenu: {
-      noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
-      search: 'ค้นหา…'
+      filterPlaceholder: 'ค้นหา…',
+      noMatch: 'ไม่พบข้อมูลที่ตรงกัน'
     },
     dashboardSearch: {
       theme: 'ธีม'
@@ -145,9 +145,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'เขตเวลา'
     },
     listbox: {
+      filterPlaceholder: 'ค้นหา…',
       noData: 'ไม่มีข้อมูล',
-      noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
-      search: 'ค้นหา…'
+      noMatch: 'ไม่พบข้อมูลที่ตรงกัน'
     },
     modal: {
       close: 'ปิด'
@@ -195,9 +195,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'สร้าง "{label}"',
+      filterPlaceholder: 'ค้นหา…',
       noData: 'ไม่มีข้อมูล',
-      noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
-      search: 'ค้นหา…'
+      noMatch: 'ไม่พบข้อมูลที่ตรงกัน'
     },
     skeleton: {
       label: 'กำลังโหลด'

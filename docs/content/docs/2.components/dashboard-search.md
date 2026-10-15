@@ -13,7 +13,7 @@ links:
 
 ## Usage
 
-The DashboardSearch component extends the [CommandPalette](/docs/components/command-palette) component, so you can pass any property such as `icon`, `placeholder`, etc.
+The DashboardSearch component extends the [CommandPalette](/docs/components/command-palette) component, so you can pass any property such as `filter`, `back`, etc.
 
 Use it inside the default slot of the [DashboardGroup](/docs/components/dashboard-group) component:
 
