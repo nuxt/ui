@@ -166,7 +166,7 @@ function normalizePath(url: string) {
 
 const currentPath = computed(() => normalizePath(page.url) ?? '/')
 
-const targetPath = computed(() => href.value ? normalizePath(href.value) : undefined)
+const targetPath = computed(() => typeof href.value === 'string' ? normalizePath(href.value) : undefined)
 
 const isLinkExactActive = computed(() => !!href.value && page.url === href.value)
 
