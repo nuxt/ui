@@ -71,7 +71,7 @@ describe('PinInput', () => {
 
     test('blur event', async () => {
       const wrapper = mount(PinInput)
-      const lastPin = wrapper.find('input[aria-label="pin input 5 of 0"]')
+      const lastPin = wrapper.find('input[aria-label="pin input 5 of 5"]')
       lastPin.element.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: null }))
       await flushPromises()
 

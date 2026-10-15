@@ -177,6 +177,21 @@ describe('ContentSearch', () => {
     expect(wrapper.findComponent(CommandPalette).text()).toContain('Docs')
   })
 
+  it('closes the modal on an `undefined` selection when an item is toggled off', async () => {
+    const { open } = useContentSearch()
+    const wrapper = await mountSuspended(ContentSearch, { props: { links, navigation, files, portal: false, unmountOnHide: false } })
+    await vi.dynamicImportSettled()
+
+    open.value = true
+    await wrapper.vm.$nextTick()
+
+    const commandPalette = wrapper.findComponent({ name: 'CommandPalette' })
+    expect(() => commandPalette.vm.$emit('update:modelValue', undefined)).not.toThrow()
+    await wrapper.vm.$nextTick()
+
+    expect(open.value).toBe(false)
+  })
+
   describe('async search', () => {
     afterEach(() => {
       vi.useRealTimers()

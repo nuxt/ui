@@ -408,12 +408,24 @@ const generateComponentCode = ({
   const pascalCaseName = componentName.charAt(0).toUpperCase() + componentName.slice(1)
 
   if (prose) {
-    const proseProps = Object.entries(props)
+    const entries = Object.entries(props)
       .filter(([key, value]) => !hide.includes(key) && value !== undefined && value !== null && value !== '')
-      .map(([key, value]) => `${key}="${value}"`)
-      .join(' ')
+
+    // A multiline value can't be written inline, it goes in the YAML block.
+    const isMultiline = (value: unknown) => typeof value === 'string' && value.includes('\n')
+
+    const proseProps = entries.filter(([, value]) => !isMultiline(value)).map(([key, value]) => `${key}="${value}"`).join(' ')
+    const blockProps = entries.filter(([, value]) => isMultiline(value)).map(([key, value]) => {
+      return `${key}: |\n${value.trim().replace(/^(?=.)/gm, '  ')}`
+    }).join('\n')
     const defaultSlot = slots?.default?.trim() ?? ''
-    return `::${componentName}${proseProps ? `{${proseProps}}` : ''}\n${defaultSlot}\n::`
+
+    return [
+      `::${componentName}${proseProps ? `{${proseProps}}` : ''}`,
+      blockProps && `---\n${blockProps}\n---`,
+      defaultSlot,
+      '::'
+    ].filter(Boolean).join('\n')
   }
 
   const externalSet = new Set(external)

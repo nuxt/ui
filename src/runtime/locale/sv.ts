@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Stäng'
     },
+    breadcrumb: {
+      label: 'brödsmulor'
+    },
     calendar: {
+      label: 'Händelsedatum',
+      monthPicker: 'Månadsväljare',
       nextMonth: 'Nästa månad',
       nextYear: 'Nästa år',
       prevMonth: 'Föregående månad',
-      prevYear: 'Föregående år'
+      prevYear: 'Föregående år',
+      yearPicker: 'Årsväljare'
     },
     carousel: {
       dots: 'Välj bild att visa',
       goto: 'Gå till {slide}',
       next: 'Nästa',
-      prev: 'Föregående'
+      prev: 'Föregående',
+      roledescription: 'karusell',
+      slide: 'bild'
     },
     chatMessages: {
       autoScroll: 'Scrolla längst ned'
@@ -56,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Stäng',
       noData: 'Inga data',
       noMatch: 'Inga matchande data',
-      placeholder: 'Skriv ett kommando eller sök…'
+      placeholder: 'Skriv ett kommando eller sök…',
+      results: 'Resultat'
     },
     contentSearch: {
       links: 'Länkar',
@@ -100,14 +109,37 @@ export default defineLocale<Messages>({
       close: 'Stäng menyn',
       open: 'Öppna menyn'
     },
+    inputDate: {
+      day: 'dag',
+      dayPeriod: 'fm/em',
+      era: 'era',
+      hour: 'timme',
+      minute: 'minut',
+      month: 'månad',
+      second: 'sekund',
+      timeZoneName: 'tidszon',
+      year: 'år'
+    },
     inputMenu: {
       create: 'Skapa "{label}"',
       noData: 'Inga data',
-      noMatch: 'Inga matchande data'
+      noMatch: 'Inga matchande data',
+      trigger: 'Visa alternativ'
     },
     inputNumber: {
       decrement: 'Minska',
-      increment: 'Öka'
+      increment: 'Öka',
+      roledescription: 'sifferfält'
+    },
+    inputRating: {
+      rate: 'Betygsätt {value} av {length}'
+    },
+    inputTime: {
+      dayPeriod: 'fm/em',
+      hour: 'timme',
+      minute: 'minut',
+      second: 'sekund',
+      timeZoneName: 'tidszon'
     },
     listbox: {
       noData: 'Inga data',
@@ -123,6 +155,9 @@ export default defineLocale<Messages>({
       next: 'Nästa sida',
       page: 'Sida {page}',
       prev: 'Föregående sida'
+    },
+    pinInput: {
+      input: 'PIN-kod, tecken {index} av {length}'
     },
     pricingTable: {
       caption: 'Prisplanering'
@@ -156,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: 'Inga matchande data',
       search: 'Sök…'
     },
+    skeleton: {
+      label: 'laddar'
+    },
     slideover: {
       close: 'Stäng'
+    },
+    slider: {
+      max: 'Maximum',
+      min: 'Minimum',
+      thumb: 'Reglage',
+      value: 'Värde {index} av {total}'
+    },
+    stepper: {
+      label: 'förlopp'
     },
     table: {
       noData: 'Inga data'
     },
     toast: {
       close: 'Stäng'
+    },
+    toaster: {
+      label: 'Avisering',
+      viewport: 'Aviseringar ({hotkey})'
     }
   }
 })

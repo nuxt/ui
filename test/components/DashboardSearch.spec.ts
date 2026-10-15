@@ -78,22 +78,23 @@ describe('DashboardSearch', () => {
     expect(wrapper.findComponent(CommandPalette).text()).toContain('Home')
   })
 
+  it('closes the modal on an `undefined` selection when an item is toggled off', async () => {
+    const wrapper = await mountSuspended(DashboardWrapper, { props })
+    await vi.dynamicImportSettled()
+
+    const commandPalette = wrapper.findComponent({ name: 'CommandPalette' })
+    expect(() => commandPalette.vm.$emit('update:modelValue', undefined)).not.toThrow()
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.findComponent(Modal).props('open')).toBe(false)
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(DashboardWrapper, {
       props
     })
     await vi.dynamicImportSettled()
 
-    expect(await axe(wrapper.element, {
-      // "ARIA input fields must have an accessible name (aria-input-field-name)"
-      //
-      // Fix any of the following:
-      //  aria-label attribute does not exist or is empty
-      //  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty
-      //  Element has no title attribute
-      rules: {
-        'aria-input-field-name': { enabled: false }
-      }
-    })).toHaveNoViolations()
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

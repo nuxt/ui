@@ -17,17 +17,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'بند کریں'
     },
+    breadcrumb: {
+      label: 'نیویگیشن کا راستہ'
+    },
     calendar: {
+      label: 'تقریب کی تاریخ',
+      monthPicker: 'مہینے کا انتخاب',
       nextMonth: 'اگلا مہینہ',
       nextYear: 'اگلا سال',
       prevMonth: 'پچھلا مہینہ',
-      prevYear: 'پچھلا سال'
+      prevYear: 'پچھلا سال',
+      yearPicker: 'سال کا انتخاب'
     },
     carousel: {
       dots: 'دکھانے کے لیے سلائیڈ منتخب کریں',
       goto: 'سلائیڈ {slide} پر جائیں',
       next: 'اگلا',
-      prev: 'پچھلا'
+      prev: 'پچھلا',
+      roledescription: 'کیروسل',
+      slide: 'سلائیڈ'
     },
     chatMessages: {
       autoScroll: 'نیچے سکرول کریں'
@@ -57,7 +65,8 @@ export default defineLocale<Messages>({
       close: 'بند کریں',
       noData: 'کوئی ڈیٹا نہیں',
       noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
-      placeholder: 'کمانڈ ٹائپ کریں یا تلاش کریں…'
+      placeholder: 'کمانڈ ٹائپ کریں یا تلاش کریں…',
+      results: 'نتائج'
     },
     contentSearch: {
       links: 'لنکس',
@@ -101,14 +110,37 @@ export default defineLocale<Messages>({
       close: 'مینو بند کریں',
       open: 'مینو کھولیں'
     },
+    inputDate: {
+      day: 'دن',
+      dayPeriod: 'AM/PM',
+      era: 'دور',
+      hour: 'گھنٹہ',
+      minute: 'منٹ',
+      month: 'مہینہ',
+      second: 'سیکنڈ',
+      timeZoneName: 'ٹائم زون',
+      year: 'سال'
+    },
     inputMenu: {
       create: '"{label}" بنائیں',
       noData: 'کوئی ڈیٹا نہیں',
-      noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا'
+      noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
+      trigger: 'اختیارات دکھائیں'
     },
     inputNumber: {
       decrement: 'کمی',
-      increment: 'اضافہ'
+      increment: 'اضافہ',
+      roledescription: 'عددی فیلڈ'
+    },
+    inputRating: {
+      rate: '{length} میں سے {value} کی درجہ بندی کریں'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'گھنٹہ',
+      minute: 'منٹ',
+      second: 'سیکنڈ',
+      timeZoneName: 'ٹائم زون'
     },
     listbox: {
       noData: 'کوئی ڈیٹا نہیں',
@@ -124,6 +156,9 @@ export default defineLocale<Messages>({
       next: 'اگلا صفحہ',
       page: 'صفحہ {page}',
       prev: 'پچھلا صفحہ'
+    },
+    pinInput: {
+      input: 'PIN کوڈ، {length} میں سے حرف {index}'
     },
     pricingTable: {
       caption: 'قیمت پلنز کی مقایسہ'
@@ -157,14 +192,30 @@ export default defineLocale<Messages>({
       noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
       search: 'تلاش کریں…'
     },
+    skeleton: {
+      label: 'لوڈ ہو رہا ہے'
+    },
     slideover: {
       close: 'بند کریں'
+    },
+    slider: {
+      max: 'زیادہ سے زیادہ',
+      min: 'کم سے کم',
+      thumb: 'ہینڈل',
+      value: '{total} میں سے قدر {index}'
+    },
+    stepper: {
+      label: 'پیش رفت'
     },
     table: {
       noData: 'کوئی ڈیٹا نہیں'
     },
     toast: {
       close: 'بند کریں'
+    },
+    toaster: {
+      label: 'اطلاع',
+      viewport: 'اطلاعات ({hotkey})'
     }
   }
 })

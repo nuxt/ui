@@ -11,6 +11,8 @@ hero:
 items:
   - name: Ace
     url: https://acecompany.nl/
+  - name: Annuaire TSA
+    url: https://annuaire-tsa.fr/
   - name: Avelune Online
     url: https://avelune-online.vercel.app/
   - name: Brusnika.LMS
@@ -21,12 +23,12 @@ items:
     url: https://codemo.dev/
   - name: CodeSnap
     url: https://codesnap.dev/
+  - name: Cosmic Stays
+    url: https://www.cosmicstays.com/
   - name: Croix-Rouge française - Devenir bénévole
     url: https://benevolat.croix-rouge.fr/
     screenshotOptions:
       cookies: ['OptanonAlertBoxClosed=2026-05-26T13:44:13.050Z;OptanonConsent=isGpcEnabled=0;']
-  - name: Cosmic Stays
-    url: https://www.cosmicstays.com/
   - name: DefenceMore
     url: https://defencemore.com/
   - name: Directus Docs
@@ -35,10 +37,10 @@ items:
     url: https://elevenspectacles.com/
   - name: Espace Asso by Benevolt
     url: https://asso.benevolt.fr/
-  - name: Fontnode
-    url: https://fontnode.com/
   - name: FrameZero
     url: https://www.framezero.app/
+  - name: Idlen - AI Ads
+    url: https://www.idlen.io
   - name: JSON DeepL
     url: https://jsondeepl.com/
   - name: Juno.one
@@ -83,6 +85,10 @@ items:
     url: https://shelve.cloud/
   - name: Sigxel
     url: https://sigxel.com/
+  - name: Sirawit Jewelry
+    url: https://sirawit-jewelry.com/
+    screenshotOptions:
+      cookies: ['hide_home_popup=true']
   - name: Speaker Bot
     url: https://speaker.bot/
   - name: Super SaaS
@@ -91,6 +97,8 @@ items:
     url: https://www.thecompaniesapi.com/
   - name: Thuprai
     url: https://thuprai.com/
+  - name: Ticket.kg
+    url: https://ticket.kg/
   - name: TickServ
     url: https://tickserv.com/
   - name: TresJS
@@ -101,6 +109,8 @@ items:
     url: https://uneed.best/
   - name: Volta
     url: https://volta.net/
+  - name: WhatsBox
+    url: https://www.whatsbox.io/
   - name: whichcoding.tools
     url: https://whichcoding.tools/
   - name: Wiredash

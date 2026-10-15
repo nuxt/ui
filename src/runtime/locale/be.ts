@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Закрыць'
     },
+    breadcrumb: {
+      label: 'навігацыйны ланцужок'
+    },
     calendar: {
+      label: 'Дата падзеі',
+      monthPicker: 'Выбар месяца',
       nextMonth: 'Наступны месяц',
       nextYear: 'Наступны год',
       prevMonth: 'Папярэдні месяц',
-      prevYear: 'Папярэдні год'
+      prevYear: 'Папярэдні год',
+      yearPicker: 'Выбар года'
     },
     carousel: {
       dots: 'Выберыце слайд для адлюстравання',
       goto: 'Перайсці да {slide}',
       next: 'Далей',
-      prev: 'Назад'
+      prev: 'Назад',
+      roledescription: 'карусель',
+      slide: 'слайд'
     },
     chatMessages: {
       autoScroll: 'Пракруціць уніз'
@@ -56,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Закрыць',
       noData: 'Няма даных',
       noMatch: 'Супадзенняў не знойдзена',
-      placeholder: 'Увядзіце каманду або выканайце пошук…'
+      placeholder: 'Увядзіце каманду або выканайце пошук…',
+      results: 'Вынікі'
     },
     contentSearch: {
       links: 'Спасылкі',
@@ -100,14 +109,37 @@ export default defineLocale<Messages>({
       close: 'Закрыць меню',
       open: 'Адкрыць меню'
     },
+    inputDate: {
+      day: 'дзень',
+      dayPeriod: 'AM/PM',
+      era: 'эра',
+      hour: 'гадзіна',
+      minute: 'хвіліна',
+      month: 'месяц',
+      second: 'секунда',
+      timeZoneName: 'часавы пояс',
+      year: 'год'
+    },
     inputMenu: {
       create: 'Стварыць "{label}"',
       noData: 'Няма даных',
-      noMatch: 'Супадзенняў не знойдзена'
+      noMatch: 'Супадзенняў не знойдзена',
+      trigger: 'Паказаць варыянты'
     },
     inputNumber: {
       decrement: 'Паменшыць',
-      increment: 'Павялічыць'
+      increment: 'Павялічыць',
+      roledescription: 'лікавае поле'
+    },
+    inputRating: {
+      rate: 'Ацаніць на {value} з {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'гадзіна',
+      minute: 'хвіліна',
+      second: 'секунда',
+      timeZoneName: 'часавы пояс'
     },
     listbox: {
       noData: 'Няма даных',
@@ -123,6 +155,9 @@ export default defineLocale<Messages>({
       next: 'Наступная старонка',
       page: 'Старонка {page}',
       prev: 'Папярэдняя старонка'
+    },
+    pinInput: {
+      input: 'PIN-код, сімвал {index} з {length}'
     },
     pricingTable: {
       caption: 'Параўнанне платных планаў'
@@ -156,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: 'Супадзенняў не знойдзена',
       search: 'Пошук…'
     },
+    skeleton: {
+      label: 'загрузка'
+    },
     slideover: {
       close: 'Закрыць'
+    },
+    slider: {
+      max: 'Максімум',
+      min: 'Мінімум',
+      thumb: 'Паўзунок',
+      value: 'Значэнне {index} з {total}'
+    },
+    stepper: {
+      label: 'прагрэс'
     },
     table: {
       noData: 'Няма даных'
     },
     toast: {
       close: 'Закрыць'
+    },
+    toaster: {
+      label: 'Апавяшчэнне',
+      viewport: 'Апавяшчэнні ({hotkey})'
     }
   }
 })

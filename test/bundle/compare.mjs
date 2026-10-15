@@ -15,24 +15,28 @@ const { values: args } = parseArgs({
 const base = await readSizes(args.base)
 const head = await readSizes(args.head)
 
-const changed = JSON.stringify(base) !== JSON.stringify(head)
+// Only the fixtures whose sizes differ from the base get a row
+const names = Object.keys(head).filter(name => JSON.stringify(base[name]) !== JSON.stringify(head[name]))
+const changed = names.length > 0
 
-const lines = [
-  changed ? 'Client output of the apps in `test/bundle`, compared to the base branch.' : 'No change to the client output of the apps in `test/bundle`.',
-  '',
-  '| Fixture | JS (gzip) | CSS (gzip) |',
-  '| --- | --: | --: |',
-  ...Object.keys(head).map(name => `| \`${name}\` | ${formatCell(base[name]?.js.gzip, head[name].js.gzip)} | ${formatCell(base[name]?.css.gzip, head[name].css.gzip)} |`),
-  '',
-  '<details>',
-  '<summary>Raw sizes</summary>',
-  '',
-  '| Fixture | JS | CSS |',
-  '| --- | --: | --: |',
-  ...Object.keys(head).map(name => `| \`${name}\` | ${formatCell(base[name]?.js.raw, head[name].js.raw)} | ${formatCell(base[name]?.css.raw, head[name].css.raw)} |`),
-  '',
-  '</details>'
-]
+const lines = changed
+  ? [
+      'Client output of the apps in `test/bundle` that changed, compared to the base branch.',
+      '',
+      '| Fixture | JS (gzip) | CSS (gzip) |',
+      '| --- | --: | --: |',
+      ...names.map(name => `| \`${name}\` | ${formatCell(base[name]?.js.gzip, head[name].js.gzip)} | ${formatCell(base[name]?.css.gzip, head[name].css.gzip)} |`),
+      '',
+      '<details>',
+      '<summary>Raw sizes</summary>',
+      '',
+      '| Fixture | JS | CSS |',
+      '| --- | --: | --: |',
+      ...names.map(name => `| \`${name}\` | ${formatCell(base[name]?.js.raw, head[name].js.raw)} | ${formatCell(base[name]?.css.raw, head[name].css.raw)} |`),
+      '',
+      '</details>'
+    ]
+  : ['No change to the client output of the apps in `test/bundle`.']
 
 await writeFile(args.output, `${lines.join('\n')}\n`)
 

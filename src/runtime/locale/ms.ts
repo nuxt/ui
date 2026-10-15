@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Tutup'
     },
+    breadcrumb: {
+      label: 'jejak navigasi'
+    },
     calendar: {
+      label: 'Tarikh acara',
+      monthPicker: 'Pemilih bulan',
       nextMonth: 'Bulan seterusnya',
       nextYear: 'Tahun seterusnya',
       prevMonth: 'Bulan sebelum',
-      prevYear: 'Tahun sebelum'
+      prevYear: 'Tahun sebelum',
+      yearPicker: 'Pemilih tahun'
     },
     carousel: {
       dots: 'Pilih slaid untuk dipaparkan',
       goto: 'Pergi ke slaid {slide}',
       next: 'Seterusnya',
-      prev: 'Sebelum'
+      prev: 'Sebelum',
+      roledescription: 'karusel',
+      slide: 'slaid'
     },
     chatMessages: {
       autoScroll: 'Tatal ke bawah'
@@ -56,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Tutup',
       noData: 'Tiada data',
       noMatch: 'Tiada data yang sepadan',
-      placeholder: 'Taip arahan atau carian…'
+      placeholder: 'Taip arahan atau carian…',
+      results: 'Keputusan'
     },
     contentSearch: {
       links: 'Pautan',
@@ -100,14 +109,37 @@ export default defineLocale<Messages>({
       close: 'Tutup menu',
       open: 'Buka menu'
     },
+    inputDate: {
+      day: 'hari',
+      dayPeriod: 'AM/PM',
+      era: 'era',
+      hour: 'jam',
+      minute: 'minit',
+      month: 'bulan',
+      second: 'saat',
+      timeZoneName: 'zon waktu',
+      year: 'tahun'
+    },
     inputMenu: {
       create: 'Cipta "{label}"',
       noData: 'Tiada data',
-      noMatch: 'Tiada data yang sepadan'
+      noMatch: 'Tiada data yang sepadan',
+      trigger: 'Tunjukkan pilihan'
     },
     inputNumber: {
       decrement: 'Kurangkan',
-      increment: 'Naikkan'
+      increment: 'Naikkan',
+      roledescription: 'medan nombor'
+    },
+    inputRating: {
+      rate: 'Beri nilai {value} daripada {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'jam',
+      minute: 'minit',
+      second: 'saat',
+      timeZoneName: 'zon waktu'
     },
     listbox: {
       noData: 'Tiada data',
@@ -123,6 +155,9 @@ export default defineLocale<Messages>({
       next: 'Halaman seterusnya',
       page: 'Halaman {page}',
       prev: 'Halaman sebelumnya'
+    },
+    pinInput: {
+      input: 'kod PIN, aksara {index} daripada {length}'
     },
     pricingTable: {
       caption: 'Perbandingan pelan harga'
@@ -156,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: 'Tiada data yang sepadan',
       search: 'Cari…'
     },
+    skeleton: {
+      label: 'memuatkan'
+    },
     slideover: {
       close: 'Tutup'
+    },
+    slider: {
+      max: 'Maksimum',
+      min: 'Minimum',
+      thumb: 'Peluncur',
+      value: 'Nilai {index} daripada {total}'
+    },
+    stepper: {
+      label: 'kemajuan'
     },
     table: {
       noData: 'Tiada data'
     },
     toast: {
       close: 'Tutup'
+    },
+    toaster: {
+      label: 'Pemberitahuan',
+      viewport: 'Pemberitahuan ({hotkey})'
     }
   }
 })

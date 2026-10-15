@@ -233,7 +233,7 @@ export interface SelectMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false">
-import { useTemplateRef, computed, ref, onMounted, onScopeDispose, toRef, toRaw, watch, nextTick } from 'vue'
+import { useTemplateRef, useId, computed, ref, onMounted, onScopeDispose, toRef, toRaw, watch, nextTick } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxCancel, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxVirtualizer, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, FocusScope } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
@@ -577,6 +577,9 @@ function onUnmountAutoFocus(event: Event) {
 }
 
 const viewportRef = useTemplateRef('viewportRef')
+const selectMenuId = useId()
+const triggerId = computed(() => id.value ?? `select-menu-${selectMenuId}`)
+const listboxId = `select-menu-listbox-${selectMenuId}`
 
 const comboboxRootRef = useTemplateRef('comboboxRootRef')
 
@@ -686,12 +689,13 @@ defineExpose({
   >
     <ComboboxAnchor as-child>
       <ComboboxTrigger
-        :id="id"
+        :id="triggerId"
         ref="triggerRef"
         data-slot="base"
         :class="ui.base({ class: [props.ui?.base, props.class] })"
         tabindex="0"
         v-bind="{ 'aria-label': undefined, ...$attrs, ...ariaAttrs }"
+        :aria-controls="listboxId"
         @keydown.down="onTriggerKeydown"
         @keydown.up="onTriggerKeydown"
       >
@@ -738,7 +742,15 @@ defineExpose({
 
     <ComboboxPortal v-bind="portalProps">
       <FieldGroupReset>
-        <ComboboxContent data-slot="content" :class="ui.content({ class: props.ui?.content })" v-bind="contentProps" @focus-outside="onFocusOutside">
+        <ComboboxContent
+          data-slot="content"
+          :class="ui.content({ class: props.ui?.content })"
+          v-bind="contentProps"
+          :role="undefined"
+          :aria-orientation="undefined"
+          :aria-multiselectable="undefined"
+          @focus-outside="onFocusOutside"
+        >
           <FocusScope
             ref="focusScopeRef"
             loop
@@ -749,7 +761,7 @@ defineExpose({
           >
             <slot name="content-top" />
 
-            <ComboboxInput v-if="!!props.searchInput" v-model="searchTerm" :display-value="() => searchTerm" as-child>
+            <ComboboxInput v-if="!!props.searchInput" v-model="searchTerm" :display-value="() => searchTerm" :aria-controls="listboxId" as-child>
               <UInput
                 autofocus
                 autocomplete="off"
@@ -770,7 +782,16 @@ defineExpose({
               </slot>
             </ComboboxEmpty>
 
-            <div ref="viewportRef" role="presentation" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
+            <div
+              :id="listboxId"
+              ref="viewportRef"
+              role="listbox"
+              :aria-labelledby="triggerId"
+              :aria-multiselectable="!!props.multiple"
+              aria-orientation="vertical"
+              data-slot="viewport"
+              :class="ui.viewport({ class: props.ui?.viewport })"
+            >
               <template v-if="!!props.virtualize">
                 <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'top'" />
 

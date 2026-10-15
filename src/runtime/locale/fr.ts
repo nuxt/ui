@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Fermer'
     },
+    breadcrumb: {
+      label: 'fil d\'Ariane'
+    },
     calendar: {
+      label: 'Date de l\'événement',
+      monthPicker: 'Sélecteur de mois',
       nextMonth: 'Mois suivant',
       nextYear: 'Année suivante',
       prevMonth: 'Mois précédent',
-      prevYear: 'Année précédente'
+      prevYear: 'Année précédente',
+      yearPicker: 'Sélecteur d\'année'
     },
     carousel: {
       dots: 'Choisir la diapositive à afficher',
       goto: 'Aller à {slide}',
       next: 'Suivant',
-      prev: 'Précédent'
+      prev: 'Précédent',
+      roledescription: 'carrousel',
+      slide: 'diapositive'
     },
     chatMessages: {
       autoScroll: 'Défiler vers le bas'
@@ -56,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Fermer',
       noData: 'Aucune donnée',
       noMatch: 'Aucune donnée correspondante',
-      placeholder: 'Tapez une commande ou recherchez…'
+      placeholder: 'Tapez une commande ou recherchez…',
+      results: 'Résultats'
     },
     contentSearch: {
       links: 'Liens',
@@ -100,14 +109,37 @@ export default defineLocale<Messages>({
       close: 'Fermer le menu',
       open: 'Ouvrir le menu'
     },
+    inputDate: {
+      day: 'jour',
+      dayPeriod: 'AM/PM',
+      era: 'ère',
+      hour: 'heure',
+      minute: 'minute',
+      month: 'mois',
+      second: 'seconde',
+      timeZoneName: 'fuseau horaire',
+      year: 'année'
+    },
     inputMenu: {
       create: 'Créer "{label}"',
       noData: 'Aucune donnée',
-      noMatch: 'Aucune donnée correspondante'
+      noMatch: 'Aucune donnée correspondante',
+      trigger: 'Afficher les options'
     },
     inputNumber: {
       decrement: 'Diminuer',
-      increment: 'Augmenter'
+      increment: 'Augmenter',
+      roledescription: 'champ numérique'
+    },
+    inputRating: {
+      rate: 'Noter {value} sur {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'heure',
+      minute: 'minute',
+      second: 'seconde',
+      timeZoneName: 'fuseau horaire'
     },
     listbox: {
       noData: 'Aucune donnée',
@@ -123,6 +155,9 @@ export default defineLocale<Messages>({
       next: 'Page suivante',
       page: 'Page {page}',
       prev: 'Page précédente'
+    },
+    pinInput: {
+      input: 'code PIN, caractère {index} sur {length}'
     },
     pricingTable: {
       caption: 'Comparaison des plans de prix'
@@ -156,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: 'Aucune donnée correspondante',
       search: 'Rechercher…'
     },
+    skeleton: {
+      label: 'chargement'
+    },
     slideover: {
       close: 'Fermer'
+    },
+    slider: {
+      max: 'Maximum',
+      min: 'Minimum',
+      thumb: 'Curseur',
+      value: 'Valeur {index} sur {total}'
+    },
+    stepper: {
+      label: 'progression'
     },
     table: {
       noData: 'Aucune donnée'
     },
     toast: {
       close: 'Fermer'
+    },
+    toaster: {
+      label: 'Notification',
+      viewport: 'Notifications ({hotkey})'
     }
   }
 })

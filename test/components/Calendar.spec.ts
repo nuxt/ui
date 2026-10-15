@@ -85,6 +85,18 @@ describe('Calendar', () => {
     })
   })
 
+  describe('aria', () => {
+    test('labels the month and year views of the date calendar', async () => {
+      const wrapper = await mountSuspended(Calendar)
+
+      await wrapper.find('[data-slot="heading"] button').trigger('click')
+      expect(wrapper.get('[data-slot="root"]').attributes('aria-label')).toMatch(/^Month picker, /)
+
+      await wrapper.find('[data-slot="heading"] button').trigger('click')
+      expect(wrapper.get('[data-slot="root"]').attributes('aria-label')).toMatch(/^Year picker, /)
+    })
+  })
+
   describe('views', () => {
     test('heading button cycles through day, month and year views', async () => {
       const wrapper = await mountSuspended(Calendar)

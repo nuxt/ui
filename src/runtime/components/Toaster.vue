@@ -53,6 +53,7 @@ import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
+import { useLocale } from '../composables/useLocale'
 import { useToast, toastMaxInjectionKey } from '../composables/useToast'
 import { usePortal } from '../composables/usePortal'
 import { omit } from '../utils'
@@ -91,11 +92,12 @@ onBeforeUnmount(() => {
 })
 
 const { toasts, remove } = useToast()
+const { t } = useLocale()
 const appConfig = useAppConfig() as Toaster['AppConfig']
 
 provide(toastMaxInjectionKey, toRef(() => props.max))
 
-const providerProps = useForwardProps(reactivePick(props, 'duration', 'label', 'swipeThreshold', 'disableSwipe'))
+const providerProps = useForwardProps(reactivePick(props, 'duration', 'swipeThreshold', 'disableSwipe'))
 const portalProps = usePortal(toRef(() => props.portal))
 
 const swipeDirection = computed(() => {
@@ -142,7 +144,7 @@ function getOffset(index: number) {
 </script>
 
 <template>
-  <ToastProvider :swipe-direction="swipeDirection" v-bind="providerProps">
+  <ToastProvider :swipe-direction="swipeDirection" :label="props.label ?? t('toaster.label')" v-bind="providerProps">
     <slot />
 
     <UToast
@@ -150,7 +152,7 @@ function getOffset(index: number) {
       :key="toast.id"
       ref="refs"
       :progress="props.progress"
-      v-bind="omit(toast, ['id', 'close', '_duplicate', '_updated', 'onClick'])"
+      v-bind="omit(toast, ['id', 'close', '_duplicate', '_updated', '_animatedAt', 'onClick'])"
       :close="(toast.close as boolean)"
       :data-collapsed="!expanded"
       :data-front="!expanded && index === toasts.length - 1"
@@ -171,6 +173,7 @@ function getOffset(index: number) {
 
     <ToastPortal v-bind="portalProps">
       <ToastViewport
+        :label="t('toaster.viewport')"
         :data-expanded="expanded"
         data-slot="viewport"
         :class="ui.viewport({ class: [props.ui?.viewport, props.class] })"

@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Aizvērt'
     },
+    breadcrumb: {
+      label: 'navigācijas ceļš'
+    },
     calendar: {
+      label: 'Notikuma datums',
+      monthPicker: 'Mēneša atlasītājs',
       nextMonth: 'Nākamais mēnesis',
       nextYear: 'Nākamais gads',
       prevMonth: 'Iepriekšējais mēnesis',
-      prevYear: 'Iepriekšējais gads'
+      prevYear: 'Iepriekšējais gads',
+      yearPicker: 'Gada atlasītājs'
     },
     carousel: {
       dots: 'Izvēlies slaidu, ko rādīt',
       goto: 'Pāriet uz slaidu {slide}',
       next: 'Nākamais',
-      prev: 'Iepriekšējais'
+      prev: 'Iepriekšējais',
+      roledescription: 'karuselis',
+      slide: 'slaids'
     },
     chatMessages: {
       autoScroll: 'Ritināt uz leju'
@@ -51,7 +59,8 @@ export default defineLocale<Messages>({
       close: 'Aizvērt',
       noData: 'Nav datu',
       noMatch: 'Nav atbilstošu datu',
-      placeholder: 'Ievadi komandu vai meklē…'
+      placeholder: 'Ievadi komandu vai meklē…',
+      results: 'Rezultāti'
     },
     contentSearch: {
       links: 'Saites',
@@ -95,14 +104,37 @@ export default defineLocale<Messages>({
       close: 'Aizvērt izvēlni',
       open: 'Atvērt izvēlni'
     },
+    inputDate: {
+      day: 'diena',
+      dayPeriod: 'AM/PM',
+      era: 'ēra',
+      hour: 'stunda',
+      minute: 'minūte',
+      month: 'mēnesis',
+      second: 'sekunde',
+      timeZoneName: 'laika josla',
+      year: 'gads'
+    },
     inputMenu: {
       create: 'Izveidot "{label}"',
       noData: 'Nav datu',
-      noMatch: 'Nav atbilstošu datu'
+      noMatch: 'Nav atbilstošu datu',
+      trigger: 'Rādīt opcijas'
     },
     inputNumber: {
       decrement: 'Samazināt',
-      increment: 'Palielināt'
+      increment: 'Palielināt',
+      roledescription: 'skaitļu lauks'
+    },
+    inputRating: {
+      rate: 'Novērtēt ar {value} no {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'stunda',
+      minute: 'minūte',
+      second: 'sekunde',
+      timeZoneName: 'laika josla'
     },
     listbox: {
       noData: 'Nav datu',
@@ -118,6 +150,9 @@ export default defineLocale<Messages>({
       next: 'Nākamā lapa',
       page: 'Lapa {page}',
       prev: 'Iepriekšējā lapa'
+    },
+    pinInput: {
+      input: 'PIN kods, rakstzīme {index} no {length}'
     },
     pricingTable: {
       caption: 'Cenu salīdzinājums'
@@ -156,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: 'Nav atbilstošu datu',
       search: 'Meklēt…'
     },
+    skeleton: {
+      label: 'ielādē'
+    },
     slideover: {
       close: 'Aizvērt'
+    },
+    slider: {
+      max: 'Maksimums',
+      min: 'Minimums',
+      thumb: 'Slīdnis',
+      value: 'Vērtība {index} no {total}'
+    },
+    stepper: {
+      label: 'norise'
     },
     table: {
       noData: 'Nav datu'
     },
     toast: {
       close: 'Aizvērt'
+    },
+    toaster: {
+      label: 'Paziņojums',
+      viewport: 'Paziņojumi ({hotkey})'
     }
   }
 })

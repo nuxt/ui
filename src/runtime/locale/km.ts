@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'បិទ'
     },
+    breadcrumb: {
+      label: 'ផ្លូវរុករក'
+    },
     calendar: {
+      label: 'កាលបរិច្ឆេទព្រឹត្តិការណ៍',
+      monthPicker: 'ឧបករណ៍ជ្រើសរើសខែ',
       nextMonth: 'ខែបន្ទាប់',
       nextYear: 'ឆ្នាំបន្ទាប់',
       prevMonth: 'ខែមុន',
-      prevYear: 'ឆ្នាំមុន'
+      prevYear: 'ឆ្នាំមុន',
+      yearPicker: 'ឧបករណ៍ជ្រើសរើសឆ្នាំ'
     },
     carousel: {
       dots: 'ជ្រើសរើស​ស្លាយ​ដើម្បី​បង្ហាញ',
       goto: 'ឡើងទៅស្លាយ {slide}',
       next: 'បន្ទាប់',
-      prev: 'មុន'
+      prev: 'មុន',
+      roledescription: 'ការ៉ូសែល',
+      slide: 'ស្លាយ'
     },
     chatMessages: {
       autoScroll: 'រំកិលចុះក្រោម'
@@ -56,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'បិទ',
       noData: 'មិនមានទិន្នន័យ',
       noMatch: 'មិនមានទិន្នន័យដែលត្រូវគ្នាទេ',
-      placeholder: 'វាយពាក្យបញ្ជា ឬស្វែងរក…'
+      placeholder: 'វាយពាក្យបញ្ជា ឬស្វែងរក…',
+      results: 'លទ្ធផល'
     },
     contentSearch: {
       links: 'តំណភ្ជាប់',
@@ -100,14 +109,37 @@ export default defineLocale<Messages>({
       close: 'បិទម៉ឺនុយ',
       open: 'បើកម៉ឺនុយ'
     },
+    inputDate: {
+      day: 'ថ្ងៃ',
+      dayPeriod: 'AM/PM',
+      era: 'សករាជ',
+      hour: 'ម៉ោង',
+      minute: 'នាទី',
+      month: 'ខែ',
+      second: 'វិនាទី',
+      timeZoneName: 'ល្វែងម៉ោង',
+      year: 'ឆ្នាំ'
+    },
     inputMenu: {
       create: 'បង្កើត "{label}"',
       noData: 'មិនមានទិន្នន័យ',
-      noMatch: 'មិនមានទិន្នន័យដែលត្រូវគ្នាទេ'
+      noMatch: 'មិនមានទិន្នន័យដែលត្រូវគ្នាទេ',
+      trigger: 'បង្ហាញជម្រើស'
     },
     inputNumber: {
       decrement: 'បន្ថយ',
-      increment: 'បង្កើន'
+      increment: 'បង្កើន',
+      roledescription: 'វាលលេខ'
+    },
+    inputRating: {
+      rate: 'វាយតម្លៃ {value} ក្នុងចំណោម {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'ម៉ោង',
+      minute: 'នាទី',
+      second: 'វិនាទី',
+      timeZoneName: 'ល្វែងម៉ោង'
     },
     listbox: {
       noData: 'មិនមានទិន្នន័យ',
@@ -123,6 +155,9 @@ export default defineLocale<Messages>({
       next: 'ទំព័របន្ទាប់',
       page: 'ទំព័រ {page}',
       prev: 'ទំព័រមុន'
+    },
+    pinInput: {
+      input: 'លេខកូដ PIN តួអក្សរទី {index} នៃ {length}'
     },
     pricingTable: {
       caption: 'បញ្ជីតម្លៃបន្ទប់បន្ទប់'
@@ -156,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: 'មិនមានទិន្នន័យដែលត្រូវគ្នាទេ',
       search: 'ស្វែងរក…'
     },
+    skeleton: {
+      label: 'កំពុងផ្ទុក'
+    },
     slideover: {
       close: 'បិទ'
+    },
+    slider: {
+      max: 'អតិបរមា',
+      min: 'អប្បបរមា',
+      thumb: 'ចំណុចរំកិល',
+      value: 'តម្លៃទី {index} នៃ {total}'
+    },
+    stepper: {
+      label: 'វឌ្ឍនភាព'
     },
     table: {
       noData: 'មិនមានទិន្នន័យ'
     },
     toast: {
       close: 'បិទ'
+    },
+    toaster: {
+      label: 'ការជូនដំណឹង',
+      viewport: 'ការជូនដំណឹង ({hotkey})'
     }
   }
 })

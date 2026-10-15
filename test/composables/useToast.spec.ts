@@ -17,6 +17,15 @@ describe('useToast', () => {
   })
 
   describe('add', () => {
+    // Only `Date` is faked so the animation window does not depend on how long the test takes.
+    beforeEach(() => {
+      vi.useFakeTimers({ toFake: ['Date'] })
+    })
+
+    afterEach(() => {
+      vi.useRealTimers()
+    })
+
     it('returns a toast with a generated id and open state', () => {
       const body = toast.add({ title: 'Hello' })
 
@@ -41,11 +50,36 @@ describe('useToast', () => {
     it('increments _duplicate instead of adding a toast with an existing id', async () => {
       toast.add({ id: 'dup', title: 'First' })
       await vi.waitFor(() => expect(toast.toasts.value).toHaveLength(1))
+      vi.setSystemTime(Date.now() + 200)
 
       toast.add({ id: 'dup', title: 'Second' })
 
       expect(toast.toasts.value).toHaveLength(1)
       expect(toast.toasts.value[0]!.title).toBe('Second')
+      expect(toast.toasts.value[0]!._duplicate).toBe(1)
+    })
+
+    it('does not increment _duplicate while the toast is still entering', async () => {
+      toast.add({ id: 'dup', title: 'First' })
+      await vi.waitFor(() => expect(toast.toasts.value).toHaveLength(1))
+
+      toast.add({ id: 'dup', title: 'Second' })
+
+      expect(toast.toasts.value).toHaveLength(1)
+      expect(toast.toasts.value[0]!.title).toBe('Second')
+      expect(toast.toasts.value[0]!._duplicate).toBeUndefined()
+    })
+
+    it('increments _duplicate once for a toast added twice in the same tick', async () => {
+      toast.add({ id: 'dup', title: 'First' })
+      await vi.waitFor(() => expect(toast.toasts.value).toHaveLength(1))
+      vi.setSystemTime(Date.now() + 200)
+
+      // An even count would leave `data-pulsing` unchanged and the pulse would not replay.
+      toast.add({ id: 'dup', title: 'Second' })
+      toast.add({ id: 'dup', title: 'Third' })
+
+      expect(toast.toasts.value[0]!.title).toBe('Third')
       expect(toast.toasts.value[0]!._duplicate).toBe(1)
     })
 
@@ -59,7 +93,7 @@ describe('useToast', () => {
 
       expect(toast.toasts.value).toHaveLength(1)
       expect(toast.toasts.value[0]!.title).toBe('Second')
-      expect(toast.toasts.value[0]!._duplicate).toBe(1)
+      expect(toast.toasts.value[0]!._duplicate).toBeUndefined()
     })
 
     it('does not duplicate a toast added from two useToast instances in the same tick', async () => {
@@ -74,7 +108,7 @@ describe('useToast', () => {
 
       expect(toast.toasts.value).toHaveLength(1)
       expect(toast.toasts.value[0]!.title).toBe('Second')
-      expect(toast.toasts.value[0]!._duplicate).toBe(1)
+      expect(toast.toasts.value[0]!._duplicate).toBeUndefined()
     })
   })
 

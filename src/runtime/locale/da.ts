@@ -16,17 +16,25 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Luk'
     },
+    breadcrumb: {
+      label: 'brødkrummesti'
+    },
     calendar: {
+      label: 'Begivenhedsdato',
+      monthPicker: 'Månedsvælger',
       nextMonth: 'Næste måned',
       nextYear: 'Næste år',
       prevMonth: 'Forrige måned',
-      prevYear: 'Forrige år'
+      prevYear: 'Forrige år',
+      yearPicker: 'Årsvælger'
     },
     carousel: {
       dots: 'Vælg dias til visning',
       goto: 'Gå til slide {slide}',
       next: 'Næste',
-      prev: 'Forrige'
+      prev: 'Forrige',
+      roledescription: 'karrusel',
+      slide: 'dias'
     },
     chatMessages: {
       autoScroll: 'Rul til bunden'
@@ -56,7 +64,8 @@ export default defineLocale<Messages>({
       close: 'Luk',
       noData: 'Ingen data',
       noMatch: 'Ingen matchende data',
-      placeholder: 'Skriv en kommando eller søg…'
+      placeholder: 'Skriv en kommando eller søg…',
+      results: 'Resultater'
     },
     contentSearch: {
       links: 'Links',
@@ -100,14 +109,37 @@ export default defineLocale<Messages>({
       close: 'Luk menu',
       open: 'Åbn menu'
     },
+    inputDate: {
+      day: 'dag',
+      dayPeriod: 'AM/PM',
+      era: 'æra',
+      hour: 'time',
+      minute: 'minut',
+      month: 'måned',
+      second: 'sekund',
+      timeZoneName: 'tidszone',
+      year: 'år'
+    },
     inputMenu: {
       create: 'Opret "{label}"',
       noData: 'Ingen data',
-      noMatch: 'Ingen matchende data'
+      noMatch: 'Ingen matchende data',
+      trigger: 'Vis muligheder'
     },
     inputNumber: {
       decrement: 'Reducer',
-      increment: 'Øg'
+      increment: 'Øg',
+      roledescription: 'talfelt'
+    },
+    inputRating: {
+      rate: 'Bedøm {value} ud af {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'time',
+      minute: 'minut',
+      second: 'sekund',
+      timeZoneName: 'tidszone'
     },
     listbox: {
       noData: 'Ingen data',
@@ -123,6 +155,9 @@ export default defineLocale<Messages>({
       next: 'Næste side',
       page: 'Side {page}',
       prev: 'Forrige side'
+    },
+    pinInput: {
+      input: 'pinkode, tegn {index} af {length}'
     },
     pricingTable: {
       caption: 'Prisplaneringssammenligning'
@@ -156,14 +191,30 @@ export default defineLocale<Messages>({
       noMatch: 'Ingen matchende data',
       search: 'Søg…'
     },
+    skeleton: {
+      label: 'indlæser'
+    },
     slideover: {
       close: 'Luk'
+    },
+    slider: {
+      max: 'Maksimum',
+      min: 'Minimum',
+      thumb: 'Skyder',
+      value: 'Værdi {index} af {total}'
+    },
+    stepper: {
+      label: 'fremskridt'
     },
     table: {
       noData: 'Ingen data'
     },
     toast: {
       close: 'Luk'
+    },
+    toaster: {
+      label: 'Notifikation',
+      viewport: 'Notifikationer ({hotkey})'
     }
   }
 })

@@ -17,7 +17,7 @@ export interface PageLogosProps {
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: any
+  as?: any | { root?: any, title?: any }
   title?: string
   items?: PageLogosItem[]
   marquee?: boolean | MarqueeProps
@@ -36,6 +36,7 @@ import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
+import { resolveAs } from '../utils'
 import { tv } from '../utils/tv'
 import UMarquee from './Marquee.vue'
 import UAvatar from './Avatar.vue'
@@ -53,6 +54,9 @@ const slots = defineSlots<PageLogosSlots>()
 const props = useComponentProps('pageLogos', _props)
 
 const appConfig = useAppConfig() as PageLogos['AppConfig']
+
+// eslint-disable-next-line vue/no-dupe-keys
+const as = computed(() => resolveAs(props.as, { root: 'div', title: 'h2' }))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageLogos || {}) })())
@@ -80,10 +84,10 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageLogos || {})
     </template>
   </DefineCreateItemTemplate>
 
-  <Primitive :as="props.as" data-slot="root" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <h2 v-if="props.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+  <Primitive :as="as.root" data-slot="root" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <Primitive v-if="props.title" :as="as.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
       {{ props.title }}
-    </h2>
+    </Primitive>
 
     <UMarquee
       v-if="props.marquee"

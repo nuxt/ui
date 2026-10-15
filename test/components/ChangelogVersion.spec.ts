@@ -18,6 +18,7 @@ describe('ChangelogVersion', () => {
     ['with authors', { props: { authors: [{ name: 'Benjamin Canac', description: 'benjamincanac', avatar: { src: 'https://github.com/benjamincanac.png', alt: 'benjamincanac' } }] } }],
     ['without indicator', { props: { indicator: false } }],
     ['with as', { props: { as: 'section' } }],
+    ['with as object', { props: { title: 'Title', as: { root: 'section', title: 'h3' } } }],
     ['with class', { props: { class: 'absolute' } }],
     ['with ui', { props: { ui: { container: 'max-w-xl' } } }],
     // Slots
