@@ -78,7 +78,7 @@ function closestPalette(name: string, shadesByName: unknown) {
  * values, resolved when Tailwind compiles, so a prefixed or customized palette
  * works too.
  *
- * The shades an alias uses follow the palette, `500` in light mode and `400`
+ * The shades an alias uses follow the palette, `600` in light mode and `400`
  * in dark mode by default (`900` and `50` for `neutral`): `primary: neutral
  * 900 200` picks others, always both, `black` and `white` work as shades,
  * and shades alone (`primary: black white`) keep the palette.

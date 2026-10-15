@@ -54,7 +54,7 @@ export default defineTheme({
     },
     selected: {
       true: {
-        link: 'before:bg-soft text-accent-strong'
+        link: 'before:bg-soft text-accent'
       }
     },
     disabled: {

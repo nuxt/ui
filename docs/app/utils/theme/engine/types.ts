@@ -190,12 +190,12 @@ export const TOKEN_GROUPS: Array<{ key: TokenGroup, label: string }> = [
  * --ui-bg-default is `white`, not a ramp stop); `ramp` names the scale the slider walks.
  */
 export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, ramp: TokenRamp, group: TokenGroup, defaults: { light: ShadeStop, dark: ShadeStop } }> = [
-  { token: '--ui-primary', label: 'Primary', ramp: 'primary', group: 'colors', defaults: { light: 500, dark: 400 } },
-  { token: '--ui-secondary', label: 'Secondary', ramp: 'secondary', group: 'colors', defaults: { light: 500, dark: 400 } },
-  { token: '--ui-success', label: 'Success', ramp: 'success', group: 'colors', defaults: { light: 500, dark: 400 } },
-  { token: '--ui-info', label: 'Info', ramp: 'info', group: 'colors', defaults: { light: 500, dark: 400 } },
-  { token: '--ui-warning', label: 'Warning', ramp: 'warning', group: 'colors', defaults: { light: 500, dark: 400 } },
-  { token: '--ui-error', label: 'Error', ramp: 'error', group: 'colors', defaults: { light: 500, dark: 400 } },
+  { token: '--ui-primary', label: 'Primary', ramp: 'primary', group: 'colors', defaults: { light: 600, dark: 400 } },
+  { token: '--ui-secondary', label: 'Secondary', ramp: 'secondary', group: 'colors', defaults: { light: 600, dark: 400 } },
+  { token: '--ui-success', label: 'Success', ramp: 'success', group: 'colors', defaults: { light: 600, dark: 400 } },
+  { token: '--ui-info', label: 'Info', ramp: 'info', group: 'colors', defaults: { light: 600, dark: 400 } },
+  { token: '--ui-warning', label: 'Warning', ramp: 'warning', group: 'colors', defaults: { light: 600, dark: 400 } },
+  { token: '--ui-error', label: 'Error', ramp: 'error', group: 'colors', defaults: { light: 600, dark: 400 } },
   { token: '--ui-bg-default', label: 'Default', ramp: 'neutral', group: 'background', defaults: { light: 'white', dark: 900 } },
   { token: '--ui-bg-soft', label: 'Soft', ramp: 'neutral', group: 'background', defaults: { light: 100, dark: 800 } },
   { token: '--ui-bg-strong', label: 'Strong', ramp: 'neutral', group: 'background', defaults: { light: 200, dark: 700 } },
