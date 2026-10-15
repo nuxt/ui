@@ -11,6 +11,8 @@ const props = withDefaults(defineProps<{
   lead?: string
   accent?: string
   description?: string
+  /** Monthly npm downloads, already formatted. */
+  downloads?: string
   dark?: boolean
 }>(), {
   dark: false
@@ -28,7 +30,9 @@ const PRESETS = {
   dark: { default: '#00DC82', mono: '#ffffff', cobalt: '#3d8bfd', sky: '#00bcff', mint: '#00d5be', iris: '#a684ff', crimson: '#ff6467', coral: '#ff637e', sunset: '#ff8904', carbon: '#ffb900', bubblegum: '#fb64b6', parchment: '#dd9977' }
 }
 const preset = (id: keyof typeof PRESETS.light) => PRESETS[props.dark ? 'dark' : 'light'][id]
-const pill = (id: keyof typeof PRESETS.light) => ({ backgroundColor: `${preset(id)}26`, borderColor: preset(id) })
+const pill = (id: keyof typeof PRESETS.light) => ({ backgroundColor: `${preset(id)}26` })
+// the applied preset sits in the soft primary square its button gets on the landing
+const active = computed(() => ({ backgroundColor: `${c.value.primary}1a` }))
 </script>
 
 <template>
@@ -72,7 +76,7 @@ const pill = (id: keyof typeof PRESETS.light) => ({ backgroundColor: `${preset(i
       <rect y="628" width="1200" height="2" fill="url(#line)" />
     </svg>
 
-    <div class="absolute left-[64px] top-[150px] w-[470px] flex flex-col">
+    <div class="absolute left-[64px] top-[134px] w-[470px] flex flex-col">
       <svg class="w-[189px] h-[37px]" viewBox="0 0 1020 200" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M377 200C379.16 200 381 198.209 381 196V103C381 103 386 112 395 127L434 194C435.785 197.74 439.744 200 443 200H470V50H443C441.202 50 439 51.4941 439 54V148L421 116L385 55C383.248 51.8912 379.479 50 376 50H350V200H377Z" fill="currentColor" />
         <path d="M726 92H739C742.314 92 745 89.3137 745 86V60H773V92H800V116H773V159C773 169.5 778.057 174 787 174H800V200H783C759.948 200 745 185.071 745 160V116H726V92Z" fill="currentColor" />
@@ -82,13 +86,36 @@ const pill = (id: keyof typeof PRESETS.light) => ({ backgroundColor: `${preset(i
         <path d="M958 60.0001H938C933.524 60.0001 929.926 59.9395 927 63C924.074 65.8905 925 67.5792 925 72V141C925 151.372 923.648 156.899 919 162C914.352 166.931 908.468 169 899 169C889.705 169 882.648 166.931 878 162C873.352 156.899 873 151.372 873 141V72.0001C873 67.5793 872.926 65.8906 870 63.0001C867.074 59.9396 863.476 60.0001 859 60.0001H840V141C840 159.023 845.016 173.458 855 184C865.156 194.542 879.893 200 899 200C918.107 200 932.844 194.542 943 184C953.156 173.458 958 159.023 958 141V60.0001Z" fill="#00DC82" />
         <path fill-rule="evenodd" clip-rule="evenodd" d="M1000 60.0233L1020 60V77L1020 128V156.007L1020 181L1020 189.004C1020 192.938 1019.98 194.429 1017 197.001C1014.02 199.725 1009.56 200 1005 200H986.001V181.006L986 130.012V70.0215C986 66.1576 986.016 64.5494 989 62.023C991.819 59.6358 995.437 60.0233 1000 60.0233Z" fill="#00DC82" />
       </svg>
-      <h1 class="flex flex-col text-[66px] leading-[70px] font-medium mt-11 mb-0">
+      <h1 class="flex flex-col text-[60px] leading-[64px] font-medium mt-11 mb-0">
         <span>{{ lead }}</span>
         <span class="font-semibold" :style="{ color: c.primary }">{{ accent }}</span>
       </h1>
-      <p v-if="description" class="text-[23px] leading-[34px] mt-7 mb-0" :style="{ color: c.muted, lineClamp: 3, textOverflow: 'ellipsis' }">
+      <!-- narrower than the column: the first line ends on "on", so "Reka UI"
+           stays whole on the second -->
+      <p v-if="description" class="w-[430px] text-[23px] leading-[34px] mt-7 mb-0" :style="{ color: c.muted, lineClamp: 3, textOverflow: 'ellipsis' }">
         {{ description }}
       </p>
+      <!-- the hero's caption under its links, scaled with the description:
+           the logos in their own colors since the card has no hover to
+           bring them out, a hairline, then the npm downloads -->
+      <div class="flex flex-row items-center mt-7 text-[16px]" :style="{ color: c.muted, gap: '15px' }">
+        <div class="flex flex-row items-center" style="gap: 10px">
+          <span>Works with</span>
+          <div class="flex flex-row items-center" style="gap: 10px">
+            <svg class="w-[18px] h-[12px]" viewBox="0 0 256 168" xmlns="http://www.w3.org/2000/svg"><path fill="#00dc82" d="M143.618 167.029h95.166c3.023 0 5.992-.771 8.61-2.237a16.96 16.96 0 0 0 6.302-6.115a16.3 16.3 0 0 0 2.304-8.352c0-2.932-.799-5.811-2.312-8.35L189.778 34.6a16.97 16.97 0 0 0-6.301-6.113a17.6 17.6 0 0 0-8.608-2.238c-3.023 0-5.991.772-8.609 2.238a16.96 16.96 0 0 0-6.3 6.113l-16.342 27.473l-31.95-53.724a17 17 0 0 0-6.304-6.112A17.64 17.64 0 0 0 96.754 0c-3.022 0-5.992.772-8.61 2.237a17 17 0 0 0-6.303 6.112L2.31 141.975a16.3 16.3 0 0 0-2.31 8.35c0 2.932.793 5.813 2.304 8.352a16.96 16.96 0 0 0 6.302 6.115a17.6 17.6 0 0 0 8.61 2.237h59.737c23.669 0 41.123-10.084 53.134-29.758l29.159-48.983l15.618-26.215l46.874 78.742h-62.492zm-67.64-26.24l-41.688-.01L96.782 35.796l31.181 52.492l-20.877 35.084c-7.976 12.765-17.037 17.416-31.107 17.416" /></svg>
+            <svg class="w-[18px] h-[18px]" viewBox="0 0 256 257" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="vite-a" x1="-.828%" x2="57.636%" y1="7.652%" y2="78.411%"><stop offset="0%" stop-color="#41D1FF" /><stop offset="100%" stop-color="#BD34FE" /></linearGradient><linearGradient id="vite-b" x1="43.376%" x2="50.316%" y1="2.242%" y2="89.03%"><stop offset="0%" stop-color="#FFEA83" /><stop offset="8.333%" stop-color="#FFDD35" /><stop offset="100%" stop-color="#FFA800" /></linearGradient></defs><path fill="url(#vite-a)" d="M255.153 37.938L134.897 252.976c-2.483 4.44-8.862 4.466-11.382.048L.875 37.958c-2.746-4.814 1.371-10.646 6.827-9.67l120.385 21.517a6.5 6.5 0 0 0 2.322-.004l117.867-21.483c5.438-.991 9.574 4.796 6.877 9.62" /><path fill="url(#vite-b)" d="M185.432.063L96.44 17.501a3.27 3.27 0 0 0-2.634 3.014l-5.474 92.456a3.268 3.268 0 0 0 3.997 3.378l24.777-5.718c2.318-.535 4.413 1.507 3.936 3.838l-7.361 36.047c-.495 2.426 1.782 4.5 4.151 3.78l15.304-4.649c2.372-.72 4.652 1.36 4.15 3.788l-11.698 56.621c-.732 3.542 3.979 5.473 5.943 2.437l1.313-2.028l72.516-144.72c1.215-2.423-.88-5.186-3.54-4.672l-25.505 4.922c-2.396.462-4.435-1.77-3.759-4.114l16.646-57.705c.677-2.35-1.37-4.583-3.769-4.113" /></svg>
+            <svg class="w-[18px] h-[19px]" viewBox="0 0 256 264" xmlns="http://www.w3.org/2000/svg"><path fill="#ff2d20" d="M255.856 59.62c.095.351.144.713.144 1.077v56.568c0 1.478-.79 2.843-2.073 3.578L206.45 148.18v54.18a4.14 4.14 0 0 1-2.062 3.579l-99.108 57.053c-.227.128-.474.21-.722.299c-.093.03-.18.087-.278.113a4.15 4.15 0 0 1-2.114 0c-.114-.03-.217-.093-.325-.134c-.227-.083-.464-.155-.68-.278L2.073 205.938A4.13 4.13 0 0 1 0 202.36V32.656c0-.372.052-.733.144-1.083c.031-.119.103-.227.145-.346c.077-.216.15-.438.263-.639c.077-.134.19-.242.283-.366c.119-.165.227-.335.366-.48c.119-.118.274-.206.408-.309c.15-.124.283-.258.453-.356h.005L51.613.551a4.14 4.14 0 0 1 4.125 0l49.546 28.526h.01c.165.104.305.232.454.351c.134.103.284.196.402.31c.145.149.248.32.371.484c.088.124.207.232.279.366c.118.206.185.423.268.64c.041.118.113.226.144.35c.095.351.144.714.145 1.078V138.65l41.286-23.773V60.692c0-.36.052-.727.145-1.072c.036-.124.103-.232.144-.35c.083-.217.155-.44.268-.64c.077-.134.19-.242.279-.366c.123-.165.226-.335.37-.48c.12-.118.269-.206.403-.309c.155-.124.289-.258.454-.356h.005l49.551-28.526a4.13 4.13 0 0 1 4.125 0l49.546 28.526c.175.103.309.232.464.35c.128.104.278.197.397.31c.144.15.247.32.37.485c.094.124.207.232.28.366c.118.2.185.423.267.64c.047.118.114.226.145.35m-8.115 55.258v-47.04l-17.339 9.981l-23.953 13.792v47.04l41.297-23.773zm-49.546 85.095V152.9l-23.562 13.457l-67.281 38.4v47.514zM8.259 39.796v160.177l90.833 52.294v-47.505L51.64 177.906l-.015-.01l-.02-.01c-.16-.093-.295-.227-.444-.34c-.13-.104-.279-.186-.392-.3l-.01-.015c-.134-.129-.227-.289-.34-.433c-.104-.14-.227-.258-.31-.402l-.005-.016c-.093-.154-.15-.34-.217-.515c-.067-.155-.154-.3-.196-.464v-.005c-.051-.196-.061-.403-.082-.604c-.02-.154-.062-.309-.062-.464V63.57L25.598 49.772l-17.339-9.97zM53.681 8.893L12.399 32.656l41.272 23.762L94.947 32.65L53.671 8.893zm21.468 148.298l23.948-13.786V39.796L81.76 49.778L57.805 63.569v103.608zM202.324 36.935l-41.276 23.762l41.276 23.763l41.271-23.768zm-4.13 54.676l-23.953-13.792l-17.338-9.981v47.04l23.948 13.787l17.344 9.986zm-94.977 106.006l60.543-34.564l30.264-17.272l-41.246-23.747l-47.489 27.34l-43.282 24.918z" /></svg>
+            <svg class="w-[18px] h-[18px]" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><path fill="#5a46ff" d="M128 256C24.766 256 0 231.234 0 128S24.766 0 128 0s128 24.766 128 128s-24.766 128-128 128M91.764 63.348l-40.147 91.243c-1.825 4.432-3.389 10.166-3.389 15.12c0 22.68 15.902 38.583 38.582 38.583c7.433 0 13.605-1.953 19.88-3.938l.005-.003c6.489-2.053 13.089-4.141 21.305-4.141c8.312 0 14.754 2.07 21.118 4.114l.002.001c6.21 1.995 12.345 3.967 20.069 3.967c22.68 0 38.583-15.903 38.583-38.583c0-4.954-1.565-10.688-3.389-15.12l-40.146-91.243c-6.78-15.38-19.813-23.723-36.237-23.723s-29.458 8.342-36.236 23.723m-3.39 105.581L128 79.251l39.104 89.678c-11.21-5.474-25.287-8.081-39.104-8.081c-14.338 0-27.894 2.607-39.625 8.081" /></svg>
+          </div>
+        </div>
+        <template v-if="downloads">
+          <div class="w-[1px] h-[16px]" :style="{ backgroundColor: c.border }" />
+          <div class="flex flex-row items-center" style="gap: 8px">
+            <svg class="w-[18px] h-[18px]" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><path fill="#c12127" d="M0 256V0h256v256z" /><path fill="#fff" d="M48 48h160v160h-32V80h-48v128H48z" /></svg>
+            <span>{{ downloads }} monthly downloads</span>
+          </div>
+        </template>
+      </div>
     </div>
 
     <!-- takumi has no preflight reset: every border side is set explicitly -->
@@ -123,77 +150,101 @@ const pill = (id: keyof typeof PRESETS.light) => ({ backgroundColor: `${preset(i
           <span>}</span>
         </div>
       </div>
-      <div class="flex flex-row items-center mt-3 px-1" style="gap: 12px">
-        <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': true }" :style="pill('default')">
-          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('default') }"><path fill="currentColor" d="M13.464 19.83h8.922c.283 0 .562-.073.807-.21a1.6 1.6 0 0 0 .591-.574a1.53 1.53 0 0 0 .216-.783a1.53 1.53 0 0 0-.217-.782L17.792 7.414a1.6 1.6 0 0 0-.591-.573a1.65 1.65 0 0 0-.807-.21c-.283 0-.562.073-.807.21a1.6 1.6 0 0 0-.59.573L13.463 9.99L10.47 4.953a1.6 1.6 0 0 0-.591-.573a1.65 1.65 0 0 0-.807-.21c-.284 0-.562.073-.807.21a1.6 1.6 0 0 0-.591.573L.216 17.481a1.53 1.53 0 0 0-.217.782c0 .275.074.545.216.783a1.6 1.6 0 0 0 .59.574c.246.137.525.21.808.21h5.6c2.22 0 3.856-.946 4.982-2.79l2.733-4.593l1.464-2.457l4.395 7.382h-5.859Zm-6.341-2.46l-3.908-.002l5.858-9.842l2.923 4.921l-1.957 3.29c-.748 1.196-1.597 1.632-2.916 1.632" /></svg>
+      <div class="flex flex-row items-center mt-3 px-1" style="gap: 1px">
+        <div class="flex p-[5px] rounded-lg" :style="active">
+          <div class="flex items-center justify-center w-[27px] h-[27px] rounded-full" :style="pill('default')">
+            <svg class="w-[14px] h-[14px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('default') }"><path fill="currentColor" d="M13.464 19.83h8.922c.283 0 .562-.073.807-.21a1.6 1.6 0 0 0 .591-.574a1.53 1.53 0 0 0 .216-.783a1.53 1.53 0 0 0-.217-.782L17.792 7.414a1.6 1.6 0 0 0-.591-.573a1.65 1.65 0 0 0-.807-.21c-.283 0-.562.073-.807.21a1.6 1.6 0 0 0-.59.573L13.463 9.99L10.47 4.953a1.6 1.6 0 0 0-.591-.573a1.65 1.65 0 0 0-.807-.21c-.284 0-.562.073-.807.21a1.6 1.6 0 0 0-.591.573L.216 17.481a1.53 1.53 0 0 0-.217.782c0 .275.074.545.216.783a1.6 1.6 0 0 0 .59.574c.246.137.525.21.808.21h5.6c2.22 0 3.856-.946 4.982-2.79l2.733-4.593l1.464-2.457l4.395 7.382h-5.859Zm-6.341-2.46l-3.908-.002l5.858-9.842l2.923 4.921l-1.957 3.29c-.748 1.196-1.597 1.632-2.916 1.632" /></svg>
+          </div>
         </div>
-        <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('mono')">
-          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('mono') }"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="10" /><path d="M12 18a6 6 0 0 0 0-12z" /></g></svg>
+        <div class="flex p-[5px] rounded-lg">
+          <div class="flex items-center justify-center w-[27px] h-[27px] rounded-full" :style="pill('mono')">
+            <svg class="w-[14px] h-[14px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('mono') }"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="10" /><path d="M12 18a6 6 0 0 0 0-12z" /></g></svg>
+          </div>
         </div>
-        <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('cobalt')">
-          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('cobalt') }"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M10.5 3L8 9l4 13l4-13l-2.5-6" /><path d="M17 3a2 2 0 0 1 1.6.8l3 4a2 2 0 0 1 .013 2.382l-7.99 10.986a2 2 0 0 1-3.247 0l-7.99-10.986A2 2 0 0 1 2.4 7.8l2.998-3.997A2 2 0 0 1 7 3zM2 9h20" /></g></svg>
+        <div class="flex p-[5px] rounded-lg">
+          <div class="flex items-center justify-center w-[27px] h-[27px] rounded-full" :style="pill('cobalt')">
+            <svg class="w-[14px] h-[14px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('cobalt') }"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M10.5 3L8 9l4 13l4-13l-2.5-6" /><path d="M17 3a2 2 0 0 1 1.6.8l3 4a2 2 0 0 1 .013 2.382l-7.99 10.986a2 2 0 0 1-3.247 0l-7.99-10.986A2 2 0 0 1 2.4 7.8l2.998-3.997A2 2 0 0 1 7 3zM2 9h20" /></g></svg>
+          </div>
         </div>
-        <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('sky')">
-          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('sky') }"><path
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M12 2v2m-7.07.93l1.41 1.41M20 12h2m-2.93-7.07l-1.41 1.41m-1.713 6.31a4 4 0 0 0-5.925-4.128M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6"
-          /></svg>
+        <div class="flex p-[5px] rounded-lg">
+          <div class="flex items-center justify-center w-[27px] h-[27px] rounded-full" :style="pill('sky')">
+            <svg class="w-[14px] h-[14px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('sky') }"><path
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 2v2m-7.07.93l1.41 1.41M20 12h2m-2.93-7.07l-1.41 1.41m-1.713 6.31a4 4 0 0 0-5.925-4.128M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6"
+            /></svg>
+          </div>
         </div>
-        <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('mint')">
-          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('mint') }"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M11 20a10 10 0 0 0 10-10a25.9 25.9 0 0 0-1.04-7.281a1 1 0 0 0-1.755-.325C15.833 5.5 13 5.5 9.8 6.1A7 7 0 0 0 11 20" /><path d="M2 21a5 5 0 0 1 2.911-4.544C7.613 15.212 8.351 15.24 11 13" /></g></svg>
+        <div class="flex p-[5px] rounded-lg">
+          <div class="flex items-center justify-center w-[27px] h-[27px] rounded-full" :style="pill('mint')">
+            <svg class="w-[14px] h-[14px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('mint') }"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M11 20a10 10 0 0 0 10-10a25.9 25.9 0 0 0-1.04-7.281a1 1 0 0 0-1.755-.325C15.833 5.5 13 5.5 9.8 6.1A7 7 0 0 0 11 20" /><path d="M2 21a5 5 0 0 1 2.911-4.544C7.613 15.212 8.351 15.24 11 13" /></g></svg>
+          </div>
         </div>
-        <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('iris')">
-          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('iris') }"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="3" /><path d="M12 16.5A4.5 4.5 0 1 1 7.5 12A4.5 4.5 0 1 1 12 7.5a4.5 4.5 0 1 1 4.5 4.5a4.5 4.5 0 1 1-4.5 4.5m0-9V9m-4.5 3H9m7.5 0H15m-3 4.5V15M8 8l1.88 1.88m4.24 0L16 8m-8 8l1.88-1.88m4.24 0L16 16" /></g></svg>
+        <div class="flex p-[5px] rounded-lg">
+          <div class="flex items-center justify-center w-[27px] h-[27px] rounded-full" :style="pill('iris')">
+            <svg class="w-[14px] h-[14px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('iris') }"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="3" /><path d="M12 16.5A4.5 4.5 0 1 1 7.5 12A4.5 4.5 0 1 1 12 7.5a4.5 4.5 0 1 1 4.5 4.5a4.5 4.5 0 1 1-4.5 4.5m0-9V9m-4.5 3H9m7.5 0H15m-3 4.5V15M8 8l1.88 1.88m4.24 0L16 8m-8 8l1.88-1.88m4.24 0L16 16" /></g></svg>
+          </div>
         </div>
-        <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('crimson')">
-          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('crimson') }"><path
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="m12.296 3.464l3.02 3.956M20.2 6L3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3zM3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zm3.18-5.724l3.1 3.899"
-          /></svg>
+        <div class="flex p-[5px] rounded-lg">
+          <div class="flex items-center justify-center w-[27px] h-[27px] rounded-full" :style="pill('crimson')">
+            <svg class="w-[14px] h-[14px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('crimson') }"><path
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m12.296 3.464l3.02 3.956M20.2 6L3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3zM3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zm3.18-5.724l3.1 3.899"
+            /></svg>
+          </div>
         </div>
-        <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('coral')">
-          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('coral') }"><path
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M14 11a2 2 0 1 1-4 0a4 4 0 0 1 8 0a6 6 0 0 1-12 0a8 8 0 0 1 16 0a10 10 0 1 1-20 0a11.93 11.93 0 0 1 2.42-7.22a2 2 0 1 1 3.16 2.44"
-          /></svg>
+        <div class="flex p-[5px] rounded-lg">
+          <div class="flex items-center justify-center w-[27px] h-[27px] rounded-full" :style="pill('coral')">
+            <svg class="w-[14px] h-[14px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('coral') }"><path
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M14 11a2 2 0 1 1-4 0a4 4 0 0 1 8 0a6 6 0 0 1-12 0a8 8 0 0 1 16 0a10 10 0 1 1-20 0a11.93 11.93 0 0 1 2.42-7.22a2 2 0 1 1 3.16 2.44"
+            /></svg>
+          </div>
         </div>
-        <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('sunset')">
-          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('sunset') }"><path
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M12 10V2m-7.07 8.93l1.41 1.41M2 18h2m16 0h2m-2.93-7.07l-1.41 1.41M22 22H2M16 6l-4 4l-4-4m8 12a4 4 0 0 0-8 0"
-          /></svg>
+        <div class="flex p-[5px] rounded-lg">
+          <div class="flex items-center justify-center w-[27px] h-[27px] rounded-full" :style="pill('sunset')">
+            <svg class="w-[14px] h-[14px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('sunset') }"><path
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 10V2m-7.07 8.93l1.41 1.41M2 18h2m16 0h2m-2.93-7.07l-1.41 1.41M22 22H2M16 6l-4 4l-4-4m8 12a4 4 0 0 0-8 0"
+            /></svg>
+          </div>
         </div>
-        <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('carbon')">
-          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('carbon') }"><path
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M15.914 4a1.5 1.5 0 0 0-2.474-1.561l-9 9A1.5 1.5 0 0 0 5.5 14h4.002a.5.5 0 0 1 .471.666L8.086 20a1.5 1.5 0 0 0 2.475 1.56l9-9A1.5 1.5 0 0 0 18.5 10h-3.997a.5.5 0 0 1-.472-.667z"
-          /></svg>
+        <div class="flex p-[5px] rounded-lg">
+          <div class="flex items-center justify-center w-[27px] h-[27px] rounded-full" :style="pill('carbon')">
+            <svg class="w-[14px] h-[14px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('carbon') }"><path
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15.914 4a1.5 1.5 0 0 0-2.474-1.561l-9 9A1.5 1.5 0 0 0 5.5 14h4.002a.5.5 0 0 1 .471.666L8.086 20a1.5 1.5 0 0 0 2.475 1.56l9-9A1.5 1.5 0 0 0 18.5 10h-3.997a.5.5 0 0 1-.472-.667z"
+            /></svg>
+          </div>
         </div>
-        <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('bubblegum')">
-          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('bubblegum') }"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M10 7v10.9m4-11.8V17m2-10V3a1 1 0 0 1 1.707-.707a2.5 2.5 0 0 0 2.152.717a1 1 0 0 1 1.131 1.131a2.5 2.5 0 0 0 .717 2.152A1 1 0 0 1 21 8h-4" /><path d="M16.536 7.465a5 5 0 0 0-7.072 0l-2 2a5 5 0 0 0 0 7.07a5 5 0 0 0 7.072 0l2-2a5 5 0 0 0 0-7.07" /><path d="M8 17v4a1 1 0 0 1-1.707.707a2.5 2.5 0 0 0-2.152-.717a1 1 0 0 1-1.131-1.131a2.5 2.5 0 0 0-.717-2.152A1 1 0 0 1 3 16h4" /></g></svg>
+        <div class="flex p-[5px] rounded-lg">
+          <div class="flex items-center justify-center w-[27px] h-[27px] rounded-full" :style="pill('bubblegum')">
+            <svg class="w-[14px] h-[14px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('bubblegum') }"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M10 7v10.9m4-11.8V17m2-10V3a1 1 0 0 1 1.707-.707a2.5 2.5 0 0 0 2.152.717a1 1 0 0 1 1.131 1.131a2.5 2.5 0 0 0 .717 2.152A1 1 0 0 1 21 8h-4" /><path d="M16.536 7.465a5 5 0 0 0-7.072 0l-2 2a5 5 0 0 0 0 7.07a5 5 0 0 0 7.072 0l2-2a5 5 0 0 0 0-7.07" /><path d="M8 17v4a1 1 0 0 1-1.707.707a2.5 2.5 0 0 0-2.152-.717a1 1 0 0 1-1.131-1.131a2.5 2.5 0 0 0-.717-2.152A1 1 0 0 1 3 16h4" /></g></svg>
+          </div>
         </div>
-        <div class="flex items-center justify-center w-[36px] h-[36px] rounded-full" :class="{ 'border-2 border-solid': false }" :style="pill('parchment')">
-          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('parchment') }"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M15 12h-5m5-4h-5m9 9V5a2 2 0 0 0-2-2H4" /><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3" /></g></svg>
+        <div class="flex p-[5px] rounded-lg">
+          <div class="flex items-center justify-center w-[27px] h-[27px] rounded-full" :style="pill('parchment')">
+            <svg class="w-[14px] h-[14px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" :style="{ color: preset('parchment') }"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M15 12h-5m5-4h-5m9 9V5a2 2 0 0 0-2-2H4" /><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3" /></g></svg>
+          </div>
         </div>
       </div>
     </div>

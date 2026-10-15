@@ -39,7 +39,8 @@ if (import.meta.server) {
     lead: page.value.hero?.lead,
     accent: page.value.hero?.accent,
     // the card has room for the first sentence, the rest is the hero's
-    description: page.value.hero?.description?.split('. ')[0]?.concat('.')
+    description: page.value.hero?.description?.split('. ')[0]?.concat('.'),
+    downloads: downloads.value
   })
 
   useSchemaOrg([
@@ -80,7 +81,7 @@ if (import.meta.server) {
           <template v-if="downloads">
             <USeparator orientation="vertical" class="h-3" />
 
-            <ULink to="https://npm.chart.dev/@nuxt/ui" target="_blank" class="group inline-flex items-center gap-1.5 text-muted hover:text-default transition-colors">
+            <ULink to="https://npmx.dev/package-stats/@nuxt/ui/v/latest?granularity=monthly#trends" target="_blank" class="group inline-flex items-center gap-1.5 text-muted hover:text-default transition-colors">
               <UIcon name="i-logos-npm-icon" class="size-3.5 shrink-0 grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition" />
               {{ downloads }} monthly downloads
             </ULink>
