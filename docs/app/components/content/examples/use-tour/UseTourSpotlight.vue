@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { UseTourReturn } from '@nuxt/ui/composables'
-import { useWindowSize } from '@vueuse/core'
+import { useElementBounding, useWindowSize } from '@vueuse/core'
 
 const props = withDefaults(defineProps<{
   tour: UseTourReturn
@@ -9,27 +9,32 @@ const props = withDefaults(defineProps<{
   padding: 8
 })
 
+// Only real elements can be measured: a centered step anchors to a virtual element,
+// which `ResizeObserver` and `MutationObserver` reject.
+const target = computed(() => {
+  const el = props.tour.reference.value
+  return el && el instanceof Element ? el as HTMLElement : null
+})
+
+const { top, left, width: targetWidth, height: targetHeight } = useElementBounding(target)
 const { width, height } = useWindowSize()
 
 // The target's own corner radius, so the theme radius carries over. Read once per step, not per frame.
-const targetRadius = computed(() => {
-  const el = props.tour.reference.value
-  return el instanceof Element ? Number.parseFloat(getComputedStyle(el).borderTopLeftRadius) || 0 : 0
-})
+const targetRadius = computed(() => target.value ? Number.parseFloat(getComputedStyle(target.value).borderTopLeftRadius) || 0 : 0)
 
-// `rect` is physical even in RTL, hence `left-0` + `translate` on the ring below.
+// The box is physical even in RTL, hence `left-0` + `translate` on the ring below.
 const hole = computed(() => {
-  const rect = props.tour.rect.value
-  if (!rect) {
+  // A target removed from the DOM would measure as an empty box at the origin.
+  if (!target.value?.isConnected) {
     return null
   }
 
   const p = props.padding
-  const w = rect.width + p * 2
-  const h = rect.height + p * 2
+  const w = targetWidth.value + p * 2
+  const h = targetHeight.value + p * 2
   // Concentric corners: a rounded target gets its radius plus the padding, a square one stays square.
   const r = targetRadius.value > 0 ? targetRadius.value + p : 0
-  return { x: rect.left - p, y: rect.top - p, w, h, r: Math.min(r, w / 2, h / 2) }
+  return { x: left.value - p, y: top.value - p, w, h, r: Math.min(r, w / 2, h / 2) }
 })
 
 // Full-viewport backdrop minus a rounded cutout. `clip-path` also clips hit testing,
