@@ -2,7 +2,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ChartDefinition, ChartPoint } from '@tanstack/charts/vue'
-import theme from '#build/ui/chart'
+import theme from '../theme/chart'
 import type { TooltipProps } from './Tooltip.vue'
 import type { ComponentConfig } from '../types/tv'
 
@@ -148,11 +148,11 @@ import { scalePoint } from '@tanstack/charts/scales/point'
 import { crosshair } from '@tanstack/charts/crosshair'
 import { decorative } from '@tanstack/charts/mark/decorative'
 import { pie, polar, radialArc } from '@tanstack/charts/polar'
-import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { chartCurves } from '../utils/chart'
 import { tv } from '../utils/tv'
+import { colors as themeColors } from '../theme/color'
 import UTooltip from './Tooltip.vue'
 
 const _props = withDefaults(defineProps<ChartProps<T>>(), {
@@ -169,28 +169,21 @@ const _props = withDefaults(defineProps<ChartProps<T>>(), {
 const emits = defineEmits<ChartEmits>()
 const slots = defineSlots<ChartSlots>()
 
-const props = useComponentProps<ChartProps<T>>('chart', _props)
+const props = useComponentProps<ChartProps<T>>('chart', _props, theme)
 
 const { dir, code } = useLocale()
-const appConfig = useAppConfig() as Chart['AppConfig']
+const overrides = useComponentOverrides((ui: Chart['AppConfig']['ui']) => ui.chart)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chart || {}) })({
+const ui = computed(() => tv(theme, overrides.value)({
   type: props.type
 }))
-
-const themeColors = computed(() => Object.keys(appConfig.ui?.colors || {}))
 
 // The default palette lives in CSS so it can be themed and follows the color mode.
 const seriesColors = computed(() => props.colors?.length ? props.colors : Array.from({ length: 6 }, (_, i) => `var(--ui-chart-${i + 1})`))
 
 function resolveColor(color: string) {
-  // `neutral` has no `--ui-neutral` variable, the theme paints it with the inverted background.
-  if (color === 'neutral') {
-    return 'var(--ui-bg-inverted)'
-  }
-
-  return themeColors.value.includes(color) ? `var(--ui-${color})` : color
+  return (themeColors as readonly string[]).includes(color) ? `var(--ui-${color})` : color
 }
 
 const series = computed(() => (props.categories ?? []).map(category => typeof category === 'string'
@@ -222,7 +215,7 @@ const style = computed(() => Object.fromEntries(Array.from({ length: Math.max(se
   const color = resolveColor(seriesColors.value[i % seriesColors.value.length]!)
   const round = Math.floor(i / seriesColors.value.length)
 
-  return [`--ts-chart-${i + 1}`, round ? `color-mix(in oklab, ${color} ${Math.round(100 * 0.65 ** round)}%, var(--ui-bg))` : color]
+  return [`--ts-chart-${i + 1}`, round ? `color-mix(in oklab, ${color} ${Math.round(100 * 0.65 ** round)}%, var(--ui-bg-default))` : color]
 })))
 
 // One row per (x, category) pair so a single mark can group, stack and color by series.
@@ -500,7 +493,7 @@ const chartDefinition = computed(() => (props.definition ?? generatedDefinition.
 </script>
 
 <template>
-  <div ref="rootRef" data-slot="root" :data-measured="revealed || undefined" :class="ui.root({ class: [props.ui?.root, props.class] })" :style="style">
+  <div ref="rootRef" data-slot="chart" :data-measured="revealed || undefined" :class="ui.root({ class: [props.ui?.root, props.class] })" :style="style">
     <TanStackChart
       :definition="chartDefinition"
       :aria-label="props.ariaLabel || seriesLabels.join(', ') || 'Chart'"
@@ -510,6 +503,7 @@ const chartDefinition = computed(() => (props.definition ?? generatedDefinition.
       :width="props.width"
       :initial-width="props.initialWidth"
       :style="chartStyle"
+      data-slot="chart-base"
       :class="ui.base({ class: props.ui?.base })"
       :on-focus-change="onFocusChange"
       :on-focus-group-change="onFocusGroupChange"
@@ -517,7 +511,7 @@ const chartDefinition = computed(() => (props.definition ?? generatedDefinition.
       :on-render="onRender"
     />
 
-    <div v-if="!!slots.center" data-slot="center" :class="ui.center({ class: props.ui?.center })" :style="plotInset">
+    <div v-if="!!slots.center" data-slot="chart-center" :class="ui.center({ class: props.ui?.center })" :style="plotInset">
       <slot name="center" />
     </div>
 
@@ -530,20 +524,20 @@ const chartDefinition = computed(() => (props.definition ?? generatedDefinition.
     >
       <template #content>
         <slot v-if="primaryPoint" name="tooltip" v-bind="tooltipContent" :points="tooltipPoints" :primary-point="primaryPoint">
-          <p v-if="tooltipContent.title" data-slot="tooltipTitle" :class="ui.tooltipTitle({ class: props.ui?.tooltipTitle })">
+          <p v-if="tooltipContent.title" data-slot="chart-tooltipTitle" :class="ui.tooltipTitle({ class: props.ui?.tooltipTitle })">
             {{ tooltipContent.title }}
           </p>
 
           <div
             v-for="(row, rowIndex) in tooltipContent.rows"
             :key="rowIndex"
-            data-slot="tooltipRow"
+            data-slot="chart-tooltipRow"
             :data-active="row.active === true"
             :class="ui.tooltipRow({ class: props.ui?.tooltipRow })"
           >
-            <span data-slot="tooltipIndicator" :class="ui.tooltipIndicator({ class: props.ui?.tooltipIndicator })" :style="{ backgroundColor: row.color }" />
-            <span data-slot="tooltipLabel" :class="ui.tooltipLabel({ class: props.ui?.tooltipLabel })">{{ row.label }}</span>
-            <span data-slot="tooltipValue" :class="ui.tooltipValue({ class: props.ui?.tooltipValue })">{{ row.value }}</span>
+            <span data-slot="chart-tooltipIndicator" :class="ui.tooltipIndicator({ class: props.ui?.tooltipIndicator })" :style="{ backgroundColor: row.color }" />
+            <span data-slot="chart-tooltipLabel" :class="ui.tooltipLabel({ class: props.ui?.tooltipLabel })">{{ row.label }}</span>
+            <span data-slot="chart-tooltipValue" :class="ui.tooltipValue({ class: props.ui?.tooltipValue })">{{ row.value }}</span>
           </div>
         </slot>
       </template>
