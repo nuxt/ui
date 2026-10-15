@@ -177,8 +177,8 @@ const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugi
   // An alias on shades of your choice takes them for its text too, unless it's
   // on a gray, whose text the neutral roles above already set
   for (const alias of shaded) {
-    if (alias !== 'neutral' && !(`--ui-${alias}-text` in roles)) {
-      light[`--ui-${alias}-text`] = 'initial'
+    if (alias !== 'neutral' && !(`--ui-${alias}-text-strong` in roles)) {
+      light[`--ui-${alias}-text-default`] = 'initial'
       light[`--ui-${alias}-text-muted`] = 'initial'
     }
   }

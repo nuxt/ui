@@ -18,5 +18,5 @@ export const cssVariableDefaults = {
 export function aliasTextResets(tokens: Record<string, string> = {}): Record<string, string> {
   return Object.fromEntries(Object.keys(DEFAULT_COLORS)
     .filter(alias => alias !== 'neutral' && `--ui-${alias}` in tokens)
-    .flatMap(alias => [[`--ui-${alias}-text`, 'initial'], [`--ui-${alias}-text-muted`, 'initial']]))
+    .flatMap(alias => [[`--ui-${alias}-text-default`, 'initial'], [`--ui-${alias}-text-muted`, 'initial']]))
 }

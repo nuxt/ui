@@ -135,17 +135,17 @@
     --ui-error: var(--ui-color-error-500);
     --ui-neutral: var(--ui-color-neutral-900);
 
-    --ui-primary-text: color-mix(in oklab, var(--ui-color-primary-600) 75%, var(--ui-color-primary-700));
+    --ui-primary-text-default: color-mix(in oklab, var(--ui-color-primary-600) 75%, var(--ui-color-primary-700));
     --ui-primary-text-muted: var(--ui-color-primary-600);
-    --ui-secondary-text: color-mix(in oklab, var(--ui-color-secondary-600) 75%, var(--ui-color-secondary-700));
+    --ui-secondary-text-default: color-mix(in oklab, var(--ui-color-secondary-600) 75%, var(--ui-color-secondary-700));
     --ui-secondary-text-muted: var(--ui-color-secondary-600);
-    --ui-success-text: color-mix(in oklab, var(--ui-color-success-600) 75%, var(--ui-color-success-700));
+    --ui-success-text-default: color-mix(in oklab, var(--ui-color-success-600) 75%, var(--ui-color-success-700));
     --ui-success-text-muted: var(--ui-color-success-600);
-    --ui-info-text: color-mix(in oklab, var(--ui-color-info-600) 75%, var(--ui-color-info-700));
+    --ui-info-text-default: color-mix(in oklab, var(--ui-color-info-600) 75%, var(--ui-color-info-700));
     --ui-info-text-muted: var(--ui-color-info-600);
-    --ui-warning-text: color-mix(in oklab, var(--ui-color-warning-600) 75%, var(--ui-color-warning-700));
+    --ui-warning-text-default: color-mix(in oklab, var(--ui-color-warning-600) 75%, var(--ui-color-warning-700));
     --ui-warning-text-muted: var(--ui-color-warning-600);
-    --ui-error-text: color-mix(in oklab, var(--ui-color-error-600) 75%, var(--ui-color-error-700));
+    --ui-error-text-default: color-mix(in oklab, var(--ui-color-error-600) 75%, var(--ui-color-error-700));
     --ui-error-text-muted: var(--ui-color-error-600);
   }
 
@@ -158,17 +158,17 @@
     --ui-error: var(--ui-color-error-400);
     --ui-neutral: var(--ui-color-neutral-50);
 
-    --ui-primary-text: initial;
+    --ui-primary-text-default: initial;
     --ui-primary-text-muted: initial;
-    --ui-secondary-text: initial;
+    --ui-secondary-text-default: initial;
     --ui-secondary-text-muted: initial;
-    --ui-success-text: initial;
+    --ui-success-text-default: initial;
     --ui-success-text-muted: initial;
-    --ui-info-text: initial;
+    --ui-info-text-default: initial;
     --ui-info-text-muted: initial;
-    --ui-warning-text: initial;
+    --ui-warning-text-default: initial;
     --ui-warning-text-muted: initial;
-    --ui-error-text: initial;
+    --ui-error-text-default: initial;
     --ui-error-text-muted: initial;
   }
 }
