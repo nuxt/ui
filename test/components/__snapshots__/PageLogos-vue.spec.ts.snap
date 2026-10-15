@@ -10,9 +10,9 @@ exports[`PageLogos > renders with as correctly 1`] = `
 `;
 
 exports[`PageLogos > renders with as object correctly 1`] = `
-"<section data-slot="root" class="relative overflow-hidden">
-  <h3 data-slot="title" class="text-lg text-center font-semibold text-highlighted">Title</h3>
-  <div data-slot="logos" class="mt-10 flex items-center shrink-0 justify-around gap-(--gap) [--gap:--spacing(16)]">
+"<section data-slot="page-logos" class="relative overflow-hidden">
+  <h3 data-slot="page-logos-title" class="text-lg text-center font-semibold text-strong">Title</h3>
+  <div data-slot="page-logos-logos" class="mt-10 flex items-center shrink-0 justify-around gap-(--gap) [--gap:--spacing(16)]">
     <!--v-if-->
   </div>
 </section>"

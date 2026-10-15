@@ -81,7 +81,7 @@ const ui = computed(() => tv(theme, overrides.value)({
 </script>
 
 <template>
-  <Primitive :as="as.root" :data-orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="as.root" :data-orientation="props.orientation" data-slot="page-hero" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot name="top" />
 
     <UContainer data-slot="page-hero-container" :class="ui.container({ class: props.ui?.container })">
@@ -94,7 +94,7 @@ const ui = computed(() => tv(theme, overrides.value)({
               </slot>
             </div>
 
-            <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+            <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="page-hero-title" :class="ui.title({ class: props.ui?.title })">
               <slot name="title">
                 {{ props.title }}
               </slot>

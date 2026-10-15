@@ -20,18 +20,18 @@ exports[`DashboardNavbar > renders with as correctly 1`] = `
 `;
 
 exports[`DashboardNavbar > renders with as object correctly 1`] = `
-"<div class="fixed inset-0 flex overflow-hidden">
+"<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
-  <section data-slot="root" class="h-(--ui-header-height) shrink-0 flex items-center justify-between border-b border-default px-4 sm:px-6 gap-1.5">
-    <div data-slot="left" class="flex items-center gap-1.5 min-w-0"><button type="button" data-slot="toggle" aria-label="Open sidebar" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+  <section data-slot="dashboard-navbar" class="h-(--ui-header-height) shrink-0 flex items-center justify-between border-b border-default px-4 sm:px-6 gap-1.5">
+    <div data-slot="dashboard-navbar-left" class="flex items-center gap-1.5 min-w-0"><button type="button" data-slot="dashboard-navbar-toggle" aria-label="Open sidebar" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3 [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] py-(--ui-control-py) gap-(--ui-control-gap) text-sm px-(--ui-control-py) lg:hidden"><span class="iconify i-lucide:menu shrink-0 size-(--ui-control-icon)" aria-hidden="true" data-slot="button-leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
       </button>
       <!--v-if-->
-      <h2 data-slot="title" class="flex items-center gap-1.5 font-semibold text-highlighted truncate">Dashboard</h2>
+      <h2 data-slot="dashboard-navbar-title" class="flex items-center gap-1.5 font-semibold text-strong truncate">Dashboard</h2>
     </div>
     <!--v-if-->
-    <div data-slot="right" class="flex items-center shrink-0 gap-1.5">
+    <div data-slot="dashboard-navbar-right" class="flex items-center shrink-0 gap-1.5">
       <!--v-if-->
     </div>
   </section>

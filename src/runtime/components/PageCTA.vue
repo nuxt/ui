@@ -85,14 +85,14 @@ const ui = computed(() => tv(theme, overrides.value)({
 </script>
 
 <template>
-  <Primitive :as="as.root" :data-orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="as.root" :data-orientation="props.orientation" data-slot="page-cta" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot name="top" />
 
     <UContainer data-slot="page-cta-container" :class="ui.container({ class: props.ui?.container })">
       <div v-if="!!slots.header || (props.title || !!slots.title) || (props.description || !!slots.description) || !!slots.body || !!slots.footer || (props.links?.length || !!slots.links)" data-slot="page-cta-wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
         <div v-if="!!slots.header || (props.title || !!slots.title) || (props.description || !!slots.description)" data-slot="page-cta-header" :class="ui.header({ class: props.ui?.header })">
           <slot name="header">
-            <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+            <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="page-cta-title" :class="ui.title({ class: props.ui?.title })">
               <slot name="title">
                 {{ props.title }}
               </slot>

@@ -89,14 +89,14 @@ const ui = computed(() => tv(theme, overrides.value)({
 </script>
 
 <template>
-  <Primitive :as="as.root" :aria-busy="props.loading ? 'true' : undefined" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="!!slots.header || (iconName || props.avatar || !!slots.leading) || (props.title || !!slots.title) || (props.description || !!slots.description)" data-slot="header" :class="ui.header({ class: props.ui?.header })">
+  <Primitive :as="as.root" :aria-busy="props.loading ? 'true' : undefined" data-slot="empty" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div v-if="!!slots.header || (iconName || props.avatar || !!slots.leading) || (props.title || !!slots.title) || (props.description || !!slots.description)" data-slot="empty-header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header">
         <slot name="leading" :ui="ui">
           <UAvatar v-if="iconName || props.avatar" :icon="iconName" v-bind="typeof props.avatar === 'object' ? props.avatar : {}" data-slot="empty-avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
         </slot>
 
-        <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+        <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="empty-title" :class="ui.title({ class: props.ui?.title })">
           <slot name="title">
             {{ props.title }}
           </slot>

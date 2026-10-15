@@ -158,7 +158,7 @@ function onUpdate(value: number) {
         :key="step"
         :step="step"
         :aria-label="t('inputRating.rate', { value: step, length: props.length! })"
-        data-slot="indicator"
+        data-slot="input-rating-indicator"
         :class="ui.indicator({ class: props.ui?.indicator })"
       >
         <slot name="item" :index="item" :filled="true">

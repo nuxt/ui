@@ -37,10 +37,10 @@ exports[`Empty > renders with as correctly 1`] = `
 `;
 
 exports[`Empty > renders with as object correctly 1`] = `
-"<section data-slot="root" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-default ring ring-default">
-  <div data-slot="header" class="flex flex-col items-center gap-2 max-w-sm text-center">
+"<section data-slot="empty" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-default ring ring-default">
+  <div data-slot="empty-header" class="flex flex-col items-center gap-2 max-w-sm text-center">
     <!--v-if-->
-    <h3 data-slot="title" class="text-highlighted text-pretty font-medium text-base">Title</h3>
+    <h3 data-slot="empty-title" class="text-strong text-pretty font-medium text-base">Title</h3>
     <!--v-if-->
   </div>
   <!--v-if-->

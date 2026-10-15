@@ -75,15 +75,15 @@ const ui = computed(() => tv(theme, overrides.value)())
 </script>
 
 <template>
-  <Primitive :as="as.root" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="!!slots.left" data-slot="left" :class="ui.left({ class: props.ui?.left })">
+  <Primitive :as="as.root" data-slot="footer-columns" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div v-if="!!slots.left" data-slot="footer-columns-left" :class="ui.left({ class: props.ui?.left })">
       <slot name="left" />
     </div>
 
     <div v-if="!!slots.default || props.columns?.length" data-slot="footer-columns-center" :class="ui.center({ class: props.ui?.center })">
       <slot>
         <div v-for="(column, index) in props.columns" :key="index">
-          <Primitive :as="as.label" data-slot="label" :class="ui.label({ class: props.ui?.label })">
+          <Primitive :as="as.label" data-slot="footer-columns-label" :class="ui.label({ class: props.ui?.label })">
             <slot name="column-label" :column="column">
               {{ column.label }}
             </slot>

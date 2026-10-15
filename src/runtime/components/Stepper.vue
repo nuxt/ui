@@ -162,10 +162,10 @@ defineExpose({
     v-model="rootStep"
     :orientation="props.orientation"
     :aria-label="t('stepper.label')"
-    data-slot="root"
+    data-slot="stepper"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
   >
-    <div data-slot="header" :class="ui.header({ class: props.ui?.header })">
+    <div data-slot="stepper-header" :class="ui.header({ class: props.ui?.header })">
       <StepperItem
         v-for="(item, count) in props.items"
         :key="count"

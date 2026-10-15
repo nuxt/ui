@@ -83,8 +83,8 @@ const ui = computed(() => tv(theme, overrides.value)())
     </template>
   </DefineCreateItemTemplate>
 
-  <Primitive :as="as.root" data-slot="root" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <Primitive v-if="props.title" :as="as.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+  <Primitive :as="as.root" data-slot="page-logos" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <Primitive v-if="props.title" :as="as.title" data-slot="page-logos-title" :class="ui.title({ class: props.ui?.title })">
       {{ props.title }}
     </Primitive>
 
