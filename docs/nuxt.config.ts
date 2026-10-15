@@ -50,8 +50,7 @@ export default defineNuxtConfig({
       }
     },
     rootAttrs: {
-      'data-vaul-drawer-wrapper': '',
-      'class': 'bg-default'
+      class: 'bg-default'
     }
   },
 
@@ -275,7 +274,6 @@ export default defineNuxtConfig({
         'shiki/dist/langs/typescript.mjs',
         'shiki/dist/langs/vue.mjs',
         'shiki/dist/langs/yaml.mjs',
-        'vaul-vue',
         '@vueuse/integrations/useFuse',
         '@floating-ui/dom',
         '@tiptap/core',
