@@ -77,18 +77,6 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    */
   size?: CommandPalette['variants']['size']
   /**
-   * The icon displayed in the input. Set to `false` to hide the icon.
-   * @defaultValue appConfig.ui.icons.search
-   * @IconifyIcon
-   */
-  icon?: IconProps['name'] | false
-  /**
-   * The icon displayed on the right side of the input.
-   * @defaultValue appConfig.ui.icons.search
-   * @IconifyIcon
-   */
-  trailingIcon?: IconProps['name']
-  /**
    * The icon displayed when an item is selected.
    * @defaultValue appConfig.ui.icons.check
    * @IconifyIcon
@@ -100,16 +88,6 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    * @IconifyIcon
    */
   childrenIcon?: IconProps['name']
-  /**
-   * The placeholder text for the input.
-   * @defaultValue t('commandPalette.placeholder')
-   */
-  placeholder?: InputProps['placeholder']
-  /**
-   * Automatically focus the input when component is mounted.
-   * @defaultValue true
-   */
-  autofocus?: boolean
   /**
    * Display a close button in the input (useful when inside a Modal for example).
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
@@ -136,10 +114,12 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    */
   backIcon?: IconProps['name']
   /**
-   * Configure the input or hide it with `false`.
+   * Whether to display a filter input or not.
+   * Can be an object to pass additional props to the input, set `icon: false` to hide its icon.
+   * `{ placeholder: t('commandPalette.filterPlaceholder'), icon: appConfig.ui.icons.search, autofocus: true, variant: 'none' }`{lang="ts-type"}
    * @defaultValue true
    */
-  input?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
+  filter?: boolean | (Omit<InputProps, 'modelValue' | 'defaultValue' | 'icon'> & { icon?: IconProps['name'] | false })
   groups?: G[]
   /**
    * Options for [useFuse](https://vueuse.org/integrations/useFuse).
@@ -257,8 +237,7 @@ defineOptions({ inheritAttrs: false })
 const _props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
   labelKey: 'label',
   descriptionKey: 'description',
-  input: true,
-  autofocus: true,
+  filter: true,
   back: true,
   preserveGroupOrder: false,
   virtualize: false,
@@ -324,8 +303,13 @@ const fuse = computed(() => defu({}, props.fuse, {
 
 const history = ref<(CommandPaletteGroup & { placeholder?: string })[]>([])
 
-// eslint-disable-next-line vue/no-dupe-keys
-const placeholder = computed(() => history.value[history.value.length - 1]?.placeholder || props.placeholder || t('commandPalette.placeholder'))
+const filterProps = computed(() => {
+  const filter = typeof props.filter === 'object' ? props.filter : {}
+
+  return defu({ ...filter, icon: filter.icon === false ? undefined : (filter.icon ?? appConfig.ui.icons.search) }, { autofocus: true, variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>
+})
+
+const placeholder = computed(() => history.value[history.value.length - 1]?.placeholder || filterProps.value.placeholder || t('commandPalette.filterPlaceholder'))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const groups = computed(() => history.value?.length ? [history.value[history.value.length - 1] as G] : props.groups)
@@ -594,19 +578,15 @@ function onSelect(e: Event, item: T) {
   </DefineItemTemplate>
 
   <ListboxRoot ref="rootRef" data-slot="command-palette" v-bind="{ ...rootProps, ...$attrs }" :selection-behavior="props.selectionBehavior" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <ListboxFilter v-if="props.input" v-model="searchTerm" as-child>
+    <ListboxFilter v-if="props.filter" v-model="searchTerm" as-child>
       <UInput
-        variant="none"
         :size="props.size"
-        :placeholder="placeholder"
-        :autofocus="props.autofocus"
         :loading="props.loading"
         :loading-icon="props.loadingIcon"
-        :trailing-icon="props.trailingIcon"
-        :icon="props.icon === false ? undefined : (props.icon ?? appConfig.ui.icons.search)"
-        v-bind="typeof props.input === 'object' ? props.input : {}"
-        data-slot="command-palette-input"
-        :class="ui.input({ class: props.ui?.input })"
+        v-bind="filterProps"
+        :placeholder="placeholder"
+        data-slot="command-palette-filter"
+        :class="ui.filter({ class: props.ui?.filter })"
         @keydown.backspace="onBackspace"
       >
         <template v-if="history?.length && (props.back || !!slots.back)" #leading>

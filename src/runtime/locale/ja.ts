@@ -62,9 +62,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: '戻る',
       close: '閉じる',
+      filterPlaceholder: 'コマンドを入力するか検索…',
       noData: 'データがありません',
       noMatch: '一致するデータがありません',
-      placeholder: 'コマンドを入力するか検索…',
       results: '検索結果'
     },
     contentSearch: {
@@ -79,8 +79,8 @@ export default defineLocale<Messages>({
       title: 'このページ内'
     },
     dropdownMenu: {
-      noMatch: '一致するデータがありません',
-      search: '検索…'
+      filterPlaceholder: '検索…',
+      noMatch: '一致するデータがありません'
     },
     dashboardSearch: {
       theme: 'テーマ'
@@ -142,9 +142,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'タイムゾーン'
     },
     listbox: {
+      filterPlaceholder: '検索…',
       noData: 'データがありません',
-      noMatch: '一致するデータがありません',
-      search: '検索…'
+      noMatch: '一致するデータがありません'
     },
     modal: {
       close: '閉じる'
@@ -187,9 +187,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: '"{label}"を作成',
+      filterPlaceholder: '検索…',
       noData: 'データがありません',
-      noMatch: '一致するデータがありません',
-      search: '検索…'
+      noMatch: '一致するデータがありません'
     },
     skeleton: {
       label: '読み込み中'

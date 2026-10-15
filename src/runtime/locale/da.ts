@@ -62,9 +62,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Tilbage',
       close: 'Luk',
+      filterPlaceholder: 'Skriv en kommando eller søg…',
       noData: 'Ingen data',
       noMatch: 'Ingen matchende data',
-      placeholder: 'Skriv en kommando eller søg…',
       results: 'Resultater'
     },
     contentSearch: {
@@ -79,8 +79,8 @@ export default defineLocale<Messages>({
       title: 'På denne side'
     },
     dropdownMenu: {
-      noMatch: 'Ingen matchende data',
-      search: 'Søg…'
+      filterPlaceholder: 'Søg…',
+      noMatch: 'Ingen matchende data'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -142,9 +142,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'tidszone'
     },
     listbox: {
+      filterPlaceholder: 'Søg…',
       noData: 'Ingen data',
-      noMatch: 'Ingen matchende data',
-      search: 'Søg…'
+      noMatch: 'Ingen matchende data'
     },
     modal: {
       close: 'Luk'
@@ -187,9 +187,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Opret "{label}"',
+      filterPlaceholder: 'Søg…',
       noData: 'Ingen data',
-      noMatch: 'Ingen matchende data',
-      search: 'Søg…'
+      noMatch: 'Ingen matchende data'
     },
     skeleton: {
       label: 'indlæser'

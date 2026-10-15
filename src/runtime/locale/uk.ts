@@ -62,9 +62,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Назад',
       close: 'Закрити',
+      filterPlaceholder: 'Введіть команду або шукайте…',
       noData: 'Немає даних',
       noMatch: 'Збігів не знайдено',
-      placeholder: 'Введіть команду або шукайте…',
       results: 'Результати'
     },
     contentSearch: {
@@ -79,8 +79,8 @@ export default defineLocale<Messages>({
       title: 'На цій сторінці'
     },
     dropdownMenu: {
-      noMatch: 'Збігів не знайдено',
-      search: 'Пошук…'
+      filterPlaceholder: 'Пошук…',
+      noMatch: 'Збігів не знайдено'
     },
     dashboardSearch: {
       theme: 'Тема'
@@ -142,9 +142,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'часовий пояс'
     },
     listbox: {
+      filterPlaceholder: 'Пошук…',
       noData: 'Немає даних',
-      noMatch: 'Збігів не знайдено',
-      search: 'Пошук…'
+      noMatch: 'Збігів не знайдено'
     },
     modal: {
       close: 'Закрити'
@@ -187,9 +187,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Створити "{label}"',
+      filterPlaceholder: 'Пошук…',
       noData: 'Немає даних',
-      noMatch: 'Збігів не знайдено',
-      search: 'Пошук…'
+      noMatch: 'Збігів не знайдено'
     },
     skeleton: {
       label: 'завантаження'

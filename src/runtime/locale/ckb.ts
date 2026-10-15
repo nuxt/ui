@@ -63,9 +63,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'گەڕانەوە',
       close: 'داخستن',
+      filterPlaceholder: 'فەرمانێک بنووسە یان بگەڕێ…',
       noData: 'هیچ داتایەک نییە',
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
-      placeholder: 'فەرمانێک بنووسە یان بگەڕێ…',
       results: 'ئەنجامەکان'
     },
     contentSearch: {
@@ -80,8 +80,8 @@ export default defineLocale<Messages>({
       title: 'لەم پەڕەیەدا'
     },
     dropdownMenu: {
-      noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
-      search: 'گەڕان…'
+      filterPlaceholder: 'گەڕان…',
+      noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە'
     },
     dashboardSearch: {
       theme: 'ڕووکار'
@@ -143,9 +143,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'ناوچەی کات'
     },
     listbox: {
+      filterPlaceholder: 'گەڕان…',
       noData: 'هیچ داتایەک نییە',
-      noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
-      search: 'گەڕان…'
+      noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە'
     },
     modal: {
       close: 'داخستن'
@@ -188,9 +188,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: '"{label}" زیادکردنی',
+      filterPlaceholder: 'گەڕان…',
       noData: 'هیچ داتایەک نییە',
-      noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
-      search: 'گەڕان…'
+      noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە'
     },
     skeleton: {
       label: 'بارکردن'

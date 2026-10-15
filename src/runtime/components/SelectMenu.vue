@@ -50,13 +50,13 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
   /** The placeholder text when the select is empty. */
   placeholder?: string
   /**
-   * Whether to display the search input or not.
+   * Whether to display a filter input or not.
    * Can be an object to pass additional props to the input.
-   * `{ placeholder: 'Search...', variant: 'none' }`{lang="ts-type"}
-   * Set `autofocus: false` to prevent the search input from being focused when the menu opens (e.g. to avoid opening the virtual keyboard on touch devices).
+   * `{ placeholder: t('selectMenu.filterPlaceholder'), autofocus: true, variant: 'none' }`{lang="ts-type"}
+   * Set `autofocus: false` to prevent the filter input from being focused when the menu opens (e.g. to avoid opening the virtual keyboard on touch devices).
    * @defaultValue true
    */
-  searchInput?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
+  filter?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
   /**
    * @defaultValue 'primary'
    */
@@ -257,7 +257,7 @@ defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<SelectMenuProps<T, VK, M, Mod, C>>(), {
   portal: true,
-  searchInput: true,
+  filter: true,
   labelKey: 'label',
   descriptionKey: 'description',
   resetSearchTermOnBlur: true,
@@ -290,7 +290,7 @@ const virtualizerProps = toRef(() => {
     estimateSize: getEstimateSize(filteredItems.value, size.value ?? 'md', props.descriptionKey as string, !!slots['item-description'])
   })
 })
-const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: t('selectMenu.search'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
+const filterProps = toRef(() => defu(props.filter, { placeholder: t('selectMenu.filterPlaceholder'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
 
 const { emitFormBlur, emitFormFocus, emitFormInput, emitFormChange, size: formFieldSize, color: formFieldColor, id, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<InputProps>(_props)
 
@@ -545,8 +545,8 @@ function onClear() {
 }
 
 function onMountAutoFocus(event: Event) {
-  // Prevent the `FocusScope` from focusing the search input on open when its autofocus is disabled.
-  if (searchInputProps.value.autofocus === false) {
+  // Prevent the `FocusScope` from focusing the filter input on open when its autofocus is disabled.
+  if (filterProps.value.autofocus === false) {
     event.preventDefault()
   }
 }
@@ -564,7 +564,7 @@ function onFocusOutside(event: Event) {
 
   event.preventDefault()
 
-  const input = searchInputProps.value.autofocus !== false ? el.querySelector<HTMLElement>('[data-slot="select-menu-input"] input') : null
+  const input = filterProps.value.autofocus !== false ? el.querySelector<HTMLElement>('[data-slot="select-menu-filter"] input') : null
   const target = input ?? el
   target.focus({ preventScroll: true })
 }
@@ -762,17 +762,17 @@ defineExpose({
           >
             <slot name="content-top" />
 
-            <ComboboxInput v-if="!!props.searchInput" v-model="searchTerm" :display-value="() => searchTerm" :aria-controls="listboxId" as-child>
+            <ComboboxInput v-if="!!props.filter" v-model="searchTerm" :display-value="() => searchTerm" :aria-controls="listboxId" as-child>
               <UInput
                 autofocus
                 autocomplete="off"
                 :size="size"
-                v-bind="searchInputProps"
+                v-bind="filterProps"
                 :model-modifiers="{
                   trim: props.modelModifiers?.trim
                 }"
-                data-slot="select-menu-input"
-                :class="ui.input({ class: props.ui?.input })"
+                data-slot="select-menu-filter"
+                :class="ui.filter({ class: props.ui?.filter })"
                 @change.stop
               />
             </ComboboxInput>

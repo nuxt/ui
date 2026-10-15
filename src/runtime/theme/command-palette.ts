@@ -4,7 +4,7 @@ export default defineTheme({
   slots: {
     root: 'flex flex-col min-h-0 min-w-0 divide-y divide-default',
     // The input sits flush in the palette, above a full-width divider
-    input: 'rounded-none',
+    filter: 'rounded-none',
     close: '',
     back: 'p-0',
     content: 'relative overflow-hidden flex flex-col',
@@ -39,7 +39,7 @@ export default defineTheme({
     },
     size: {
       xs: {
-        input: '[&>input]:h-10',
+        filter: '[&>input]:h-10',
         empty: 'py-3 text-xs',
         label: 'p-1 text-[10px]/3 gap-1',
         item: 'p-1 text-xs gap-1',
@@ -51,7 +51,7 @@ export default defineTheme({
         itemTrailingKbds: 'gap-0.5'
       },
       sm: {
-        input: '[&>input]:h-11',
+        filter: '[&>input]:h-11',
         empty: 'py-4 text-xs',
         label: 'p-1.5 text-[10px]/3 gap-1.5',
         item: 'p-1.5 text-xs gap-1.5',
@@ -63,7 +63,7 @@ export default defineTheme({
         itemTrailingKbds: 'gap-0.5'
       },
       md: {
-        input: '[&>input]:h-12',
+        filter: '[&>input]:h-12',
         empty: 'py-6 text-sm',
         label: 'p-1.5 text-xs gap-1.5',
         item: 'p-1.5 text-sm gap-1.5',
@@ -75,7 +75,7 @@ export default defineTheme({
         itemTrailingKbds: 'gap-0.5'
       },
       lg: {
-        input: '[&>input]:h-13',
+        filter: '[&>input]:h-13',
         empty: 'py-7 text-sm',
         label: 'p-2 text-xs gap-2',
         item: 'p-2 text-sm gap-2',
@@ -87,7 +87,7 @@ export default defineTheme({
         itemTrailingKbds: 'gap-0.5'
       },
       xl: {
-        input: '[&>input]:h-14',
+        filter: '[&>input]:h-14',
         empty: 'py-8 text-base',
         label: 'p-2 text-sm gap-2',
         item: 'p-2 text-base gap-2',

@@ -62,9 +62,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'ត្រឡប់',
       close: 'បិទ',
+      filterPlaceholder: 'វាយពាក្យបញ្ជា ឬស្វែងរក…',
       noData: 'មិនមានទិន្នន័យ',
       noMatch: 'មិនមានទិន្នន័យដែលត្រូវគ្នាទេ',
-      placeholder: 'វាយពាក្យបញ្ជា ឬស្វែងរក…',
       results: 'លទ្ធផល'
     },
     contentSearch: {
@@ -79,8 +79,8 @@ export default defineLocale<Messages>({
       title: 'នៅលើទំព័រនេះ'
     },
     dropdownMenu: {
-      noMatch: 'មិនមានទិន្នន័យដែលត្រូវគ្នាទេ',
-      search: 'ស្វែងរក…'
+      filterPlaceholder: 'ស្វែងរក…',
+      noMatch: 'មិនមានទិន្នន័យដែលត្រូវគ្នាទេ'
     },
     dashboardSearch: {
       theme: 'រូបរាង'
@@ -142,9 +142,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'ល្វែងម៉ោង'
     },
     listbox: {
+      filterPlaceholder: 'ស្វែងរក…',
       noData: 'មិនមានទិន្នន័យ',
-      noMatch: 'មិនមានទិន្នន័យដែលត្រូវគ្នាទេ',
-      search: 'ស្វែងរក…'
+      noMatch: 'មិនមានទិន្នន័យដែលត្រូវគ្នាទេ'
     },
     modal: {
       close: 'បិទ'
@@ -187,9 +187,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'បង្កើត "{label}"',
+      filterPlaceholder: 'ស្វែងរក…',
       noData: 'មិនមានទិន្នន័យ',
-      noMatch: 'មិនមានទិន្នន័យដែលត្រូវគ្នាទេ',
-      search: 'ស្វែងរក…'
+      noMatch: 'មិនមានទិន្នន័យដែលត្រូវគ្នាទេ'
     },
     skeleton: {
       label: 'កំពុងផ្ទុក'

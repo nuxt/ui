@@ -62,9 +62,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Wstecz',
       close: 'Zamknij',
+      filterPlaceholder: 'Wpisz polecenie lub wyszukaj…',
       noData: 'Brak danych',
       noMatch: 'Brak pasujących danych',
-      placeholder: 'Wpisz polecenie lub wyszukaj…',
       results: 'Wyniki'
     },
     contentSearch: {
@@ -79,8 +79,8 @@ export default defineLocale<Messages>({
       title: 'Na tej stronie'
     },
     dropdownMenu: {
-      noMatch: 'Brak pasujących danych',
-      search: 'Szukaj…'
+      filterPlaceholder: 'Szukaj…',
+      noMatch: 'Brak pasujących danych'
     },
     dashboardSearch: {
       theme: 'Motyw'
@@ -142,9 +142,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'strefa czasowa'
     },
     listbox: {
+      filterPlaceholder: 'Szukaj…',
       noData: 'Brak danych',
-      noMatch: 'Brak pasujących danych',
-      search: 'Szukaj…'
+      noMatch: 'Brak pasujących danych'
     },
     modal: {
       close: 'Zamknij'
@@ -187,9 +187,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Utwórz "{label}"',
+      filterPlaceholder: 'Szukaj…',
       noData: 'Brak danych',
-      noMatch: 'Brak pasujących danych',
-      search: 'Szukaj…'
+      noMatch: 'Brak pasujących danych'
     },
     skeleton: {
       label: 'ładowanie'
