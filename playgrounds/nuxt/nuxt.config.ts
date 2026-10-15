@@ -42,8 +42,7 @@ export default defineNuxtConfig({
         'ai',
         'cn/engine',
         'cn/tables',
-        'tailwindcss/colors',
-        'vaul-vue'
+        'tailwindcss/colors'
       ]
     }
   }
