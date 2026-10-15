@@ -16,7 +16,10 @@ const props = withDefaults(defineProps<Omit<PageHeroProps, 'ui'> & {
   orientation: 'horizontal'
 })
 
-const slots = defineSlots<PageHeroSlots>()
+const slots = defineSlots<PageHeroSlots & {
+  /** A muted line under the links. */
+  caption?(): any
+}>()
 
 const heroProps = reactiveOmit(props, 'badge', 'lead', 'accent', 'breakLine')
 
@@ -26,9 +29,10 @@ const badge = computed(() => (typeof props.badge === 'string' ? { label: props.b
 // The library hero's slots pass through, only the ones given: forwarding a
 // slot that isn't there would still count as one for UPageHero and render
 // its wrapper. `top` and `bottom` are wrapped below, `headline` and `title`
-// only when the badge or the two-tone title doesn't take them.
+// only when the badge or the two-tone title doesn't take them, `caption` is
+// our own.
 const forwarded = computed(() => Object.keys(slots).filter(name =>
-  !['top', 'bottom'].includes(name)
+  !['top', 'bottom', 'caption'].includes(name)
   && !(name === 'headline' && badge.value)
   && !(name === 'title' && (props.lead || props.accent))
 ) as (keyof PageHeroSlots)[])
@@ -115,6 +119,18 @@ const ui = {
 
     <template v-if="lead || accent" #title>
       {{ leadText }}<br v-if="breakLine"><span class="text-primary font-semibold">{{ accent }}</span>
+    </template>
+
+    <!-- the library hero's footer only holds the links, so the caption
+         takes it over and lays the same buttons out above itself -->
+    <template v-if="slots.caption && !slots.footer" #footer>
+      <div v-if="links?.length" data-slot="links" class="flex flex-wrap gap-x-3 gap-y-3">
+        <UButton v-for="(link, index) in links" :key="index" size="xl" v-bind="link" />
+      </div>
+
+      <div class="mt-6 text-xs text-muted">
+        <slot name="caption" />
+      </div>
     </template>
 
     <template v-for="name in forwarded" #[name]="slotProps">

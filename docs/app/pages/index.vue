@@ -11,6 +11,19 @@ const appConfig = useAppConfig()
 // composable so the landing never pulls the studio engine to render it.
 const { view } = useThemeStudioView()
 
+// same key as the header's stars, so the payload only rides once
+const { data: module } = await useFetch('/api/module.json', { key: 'module', pick: ['stats'] })
+const { format } = Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 })
+const downloads = computed(() => module.value?.stats?.downloads ? format(module.value.stats.downloads) : undefined)
+
+// Vue is in the title, Laravel and AdonisJS stand for the Inertia setups
+const frameworks = [
+  { label: 'Nuxt', icon: 'i-logos-nuxt-icon', to: '/docs/getting-started/installation/nuxt' },
+  { label: 'Vite', icon: 'i-logos-vitejs', to: '/docs/getting-started/installation/vue' },
+  { label: 'Laravel', icon: 'i-logos-laravel', to: '/docs/getting-started/installation/vue' },
+  { label: 'AdonisJS', icon: 'i-logos-adonisjs-icon', to: '/docs/getting-started/installation/vue' }
+]
+
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI',
   title: page.value.title,
@@ -51,6 +64,29 @@ if (import.meta.server) {
       }"
     >
       <HomeThemeCode />
+
+      <template #caption>
+        <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
+          <div class="flex items-center gap-2">
+            Works with
+
+            <UTooltip v-for="framework in frameworks" :key="framework.label" :text="framework.label">
+              <ULink :to="framework.to" :aria-label="framework.label" class="flex grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition">
+                <UIcon :name="framework.icon" class="size-3.5" />
+              </ULink>
+            </UTooltip>
+          </div>
+
+          <template v-if="downloads">
+            <USeparator orientation="vertical" class="h-3" />
+
+            <ULink to="https://npm.chart.dev/@nuxt/ui" target="_blank" class="group inline-flex items-center gap-1.5 text-muted hover:text-default transition-colors">
+              <UIcon name="i-logos-npm-icon" class="size-3.5 shrink-0 grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition" />
+              {{ downloads }} monthly downloads
+            </ULink>
+          </template>
+        </div>
+      </template>
     </PageHero>
 
     <UContainer>
