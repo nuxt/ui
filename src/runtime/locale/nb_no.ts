@@ -70,9 +70,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Tilbake',
       close: 'Lukk',
+      filterPlaceholder: 'Skriv inn en kommando eller søk…',
       noData: 'Ingen data',
       noMatch: 'Ingen samsvarende data',
-      placeholder: 'Skriv inn en kommando eller søk…',
       results: 'Resultater'
     },
     contentSearch: {
@@ -87,8 +87,8 @@ export default defineLocale<Messages>({
       title: 'På denne siden'
     },
     dropdownMenu: {
-      noMatch: 'Ingen samsvarende data',
-      search: 'Søk…'
+      filterPlaceholder: 'Søk…',
+      noMatch: 'Ingen samsvarende data'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -150,9 +150,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'tidssone'
     },
     listbox: {
+      filterPlaceholder: 'Søk…',
       noData: 'Ingen data',
-      noMatch: 'Ingen samsvarende data',
-      search: 'Søk…'
+      noMatch: 'Ingen samsvarende data'
     },
     modal: {
       close: 'Lukk'
@@ -195,9 +195,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Opprett "{label}"',
+      filterPlaceholder: 'Søk…',
       noData: 'Ingen data',
-      noMatch: 'Ingen samsvarende data',
-      search: 'Søk…'
+      noMatch: 'Ingen samsvarende data'
     },
     skeleton: {
       label: 'laster inn'

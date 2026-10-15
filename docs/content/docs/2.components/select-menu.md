@@ -236,9 +236,9 @@ props:
 ---
 ::
 
-### Search Input
+### Filter
 
-Use the `search-input` prop to customize or hide the search input (with `false` value).
+Use the `filter` prop to customize or hide the filter input (with `false` value). Defaults to `true`.
 
 You can pass any property from the [Input](/docs/components/input) component to customize it.
 
@@ -259,7 +259,7 @@ props:
   modelValue:
     label: 'Backlog'
     icon: 'i-lucide-circle-help'
-  searchInput:
+  filter:
     placeholder: 'Filter...'
     icon: 'i-lucide-search'
   items:
@@ -276,11 +276,11 @@ props:
 ::
 
 ::tip
-You can set the `search-input` prop to `false` to hide the search input.
+You can set the `filter` prop to `false` to hide the filter input.
 ::
 
 ::note
-Use `:search-input="{ autofocus: false }"` to prevent the search input from being focused when the menu opens, e.g. to avoid opening the virtual keyboard on touch devices.
+Use `:filter="{ autofocus: false }"` to prevent the filter input from being focused when the menu opens, e.g. to avoid opening the virtual keyboard on touch devices.
 ::
 
 ### Content

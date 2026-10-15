@@ -71,9 +71,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'رجوع',
       close: 'إغلاق',
+      filterPlaceholder: 'اكتب أمرًا أو ابحث…',
       noData: 'لا توجد بيانات',
       noMatch: 'لا توجد نتائج مطابقة',
-      placeholder: 'اكتب أمرًا أو ابحث…',
       results: 'النتائج'
     },
     contentSearch: {
@@ -88,8 +88,8 @@ export default defineLocale<Messages>({
       title: 'في هذه الصفحة'
     },
     dropdownMenu: {
-      noMatch: 'لا توجد نتائج مطابقة',
-      search: 'بحث…'
+      filterPlaceholder: 'بحث…',
+      noMatch: 'لا توجد نتائج مطابقة'
     },
     dashboardSearch: {
       theme: 'السمة'
@@ -151,9 +151,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'المنطقة الزمنية'
     },
     listbox: {
+      filterPlaceholder: 'بحث…',
       noData: 'لا توجد بيانات',
-      noMatch: 'لا توجد نتائج مطابقة',
-      search: 'بحث…'
+      noMatch: 'لا توجد نتائج مطابقة'
     },
     modal: {
       close: 'إغلاق'
@@ -196,9 +196,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'إنشاء "{label}"',
+      filterPlaceholder: 'بحث…',
       noData: 'لا توجد بيانات',
-      noMatch: 'لا توجد نتائج مطابقة',
-      search: 'بحث…'
+      noMatch: 'لا توجد نتائج مطابقة'
     },
     skeleton: {
       label: 'جارٍ التحميل'

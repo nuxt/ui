@@ -70,9 +70,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Enrere',
       close: 'Tancar',
+      filterPlaceholder: 'Escriu una ordre o cerca…',
       noData: 'Sense dades',
       noMatch: 'No hi ha dades coincidents',
-      placeholder: 'Escriu una ordre o cerca…',
       results: 'Resultats'
     },
     contentSearch: {
@@ -87,8 +87,8 @@ export default defineLocale<Messages>({
       title: 'En aquesta pàgina'
     },
     dropdownMenu: {
-      noMatch: 'No hi ha dades coincidents',
-      search: 'Cerca…'
+      filterPlaceholder: 'Cerca…',
+      noMatch: 'No hi ha dades coincidents'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -150,9 +150,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'zona horària'
     },
     listbox: {
+      filterPlaceholder: 'Cerca…',
       noData: 'Sense dades',
-      noMatch: 'No hi ha dades coincidents',
-      search: 'Cerca…'
+      noMatch: 'No hi ha dades coincidents'
     },
     modal: {
       close: 'Tancar'
@@ -195,9 +195,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Crear "{label}"',
+      filterPlaceholder: 'Cerca…',
       noData: 'Sense dades',
-      noMatch: 'No hi ha dades coincidents',
-      search: 'Cerca…'
+      noMatch: 'No hi ha dades coincidents'
     },
     skeleton: {
       label: 'carregant'

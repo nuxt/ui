@@ -70,9 +70,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Retour',
       close: 'Fermer',
+      filterPlaceholder: 'Tapez une commande ou recherchez…',
       noData: 'Aucune donnée',
       noMatch: 'Aucune donnée correspondante',
-      placeholder: 'Tapez une commande ou recherchez…',
       results: 'Résultats'
     },
     contentSearch: {
@@ -87,8 +87,8 @@ export default defineLocale<Messages>({
       title: 'Sur cette page'
     },
     dropdownMenu: {
-      noMatch: 'Aucune donnée correspondante',
-      search: 'Rechercher…'
+      filterPlaceholder: 'Rechercher…',
+      noMatch: 'Aucune donnée correspondante'
     },
     dashboardSearch: {
       theme: 'Thème'
@@ -150,9 +150,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'fuseau horaire'
     },
     listbox: {
+      filterPlaceholder: 'Rechercher…',
       noData: 'Aucune donnée',
-      noMatch: 'Aucune donnée correspondante',
-      search: 'Rechercher…'
+      noMatch: 'Aucune donnée correspondante'
     },
     modal: {
       close: 'Fermer'
@@ -195,9 +195,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Créer "{label}"',
+      filterPlaceholder: 'Rechercher…',
       noData: 'Aucune donnée',
-      noMatch: 'Aucune donnée correspondante',
-      search: 'Rechercher…'
+      noMatch: 'Aucune donnée correspondante'
     },
     skeleton: {
       label: 'chargement'

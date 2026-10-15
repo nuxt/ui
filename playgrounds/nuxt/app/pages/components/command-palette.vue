@@ -188,7 +188,7 @@ defineShortcuts({
         <UCommandPalette
           v-model="label"
           :size="size"
-          placeholder="Search labels..."
+          :filter="{ placeholder: 'Search labels...' }"
           :groups="[{ id: 'labels', items: labels }]"
         />
       </template>
@@ -242,7 +242,7 @@ defineShortcuts({
       virtualize
       :size="size"
       :fuse="{ resultLimit: 1000 }"
-      placeholder="Search virtualized items..."
+      :filter="{ placeholder: 'Search virtualized items...' }"
       :groups="[{ id: 'items', items: Array(1000).fill(0).map((_, i) => ({ label: `item-${i}`, value: i, icon: 'i-lucide-file' })) }]"
       class="sm:max-h-96"
     />

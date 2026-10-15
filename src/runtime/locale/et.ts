@@ -70,9 +70,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Tagasi',
       close: 'Sulge',
+      filterPlaceholder: 'Sisesta käsk või otsi…',
       noData: 'Pole andmeid',
       noMatch: 'Pole vastavaid andmeid',
-      placeholder: 'Sisesta käsk või otsi…',
       results: 'Tulemused'
     },
     contentSearch: {
@@ -87,8 +87,8 @@ export default defineLocale<Messages>({
       title: 'Sellel lehel'
     },
     dropdownMenu: {
-      noMatch: 'Pole vastavaid andmeid',
-      search: 'Otsi…'
+      filterPlaceholder: 'Otsi…',
+      noMatch: 'Pole vastavaid andmeid'
     },
     dashboardSearch: {
       theme: 'Teema'
@@ -150,9 +150,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'ajavöönd'
     },
     listbox: {
+      filterPlaceholder: 'Otsi…',
       noData: 'Pole andmeid',
-      noMatch: 'Pole vastavaid andmeid',
-      search: 'Otsi…'
+      noMatch: 'Pole vastavaid andmeid'
     },
     modal: {
       close: 'Sulge'
@@ -195,9 +195,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Loo "{label}"',
+      filterPlaceholder: 'Otsi…',
       noData: 'Pole andmeid',
-      noMatch: 'Pole vastavaid andmeid',
-      search: 'Otsi…'
+      noMatch: 'Pole vastavaid andmeid'
     },
     skeleton: {
       label: 'laadimine'

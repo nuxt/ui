@@ -70,9 +70,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Späť',
       close: 'Zavrieť',
+      filterPlaceholder: 'Zadajte príkaz alebo vyhľadajte…',
       noData: 'Žiadne dáta',
       noMatch: 'Žiadna zhoda',
-      placeholder: 'Zadajte príkaz alebo vyhľadajte…',
       results: 'Výsledky'
     },
     contentSearch: {
@@ -87,8 +87,8 @@ export default defineLocale<Messages>({
       title: 'Na tejto stránke'
     },
     dropdownMenu: {
-      noMatch: 'Žiadna zhoda',
-      search: 'Hľadať…'
+      filterPlaceholder: 'Hľadať…',
+      noMatch: 'Žiadna zhoda'
     },
     dashboardSearch: {
       theme: 'Farebný režim'
@@ -150,9 +150,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'časové pásmo'
     },
     listbox: {
+      filterPlaceholder: 'Hľadať…',
       noData: 'Žiadne dáta',
-      noMatch: 'Žiadna zhoda',
-      search: 'Hľadať…'
+      noMatch: 'Žiadna zhoda'
     },
     modal: {
       close: 'Zatvoriť'
@@ -195,9 +195,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Vytvoriť "{label}"',
+      filterPlaceholder: 'Hľadať…',
       noData: 'Žiadne dáta',
-      noMatch: 'Žiadna zhoda',
-      search: 'Hľadať…'
+      noMatch: 'Žiadna zhoda'
     },
     skeleton: {
       label: 'načítava sa'
