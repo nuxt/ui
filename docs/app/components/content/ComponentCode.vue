@@ -335,7 +335,7 @@ ${props.slots.default}`
       // A hidden key of an object prop, like `filter.autofocus`, is left out of the code
       const entries = Array.isArray(value) ? [] : Object.entries(value)
       const visibleEntries = entries.filter(([subKey]) => !props.hide?.includes(`${key}.${subKey}`))
-      if (entries.length && !visibleEntries.length) {
+      if (entries.length && !visibleEntries.length && !props.external?.includes(key)) {
         continue
       }
 

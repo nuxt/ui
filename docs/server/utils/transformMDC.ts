@@ -458,7 +458,7 @@ const generateComponentCode = ({
       // A hidden key of an object prop, like `filter.autofocus`, is left out of the code
       const entries = Array.isArray(value) ? [] : Object.entries(value)
       const visibleEntries = entries.filter(([subKey]) => !hide.includes(`${key}.${subKey}`))
-      if (entries.length && !visibleEntries.length) continue
+      if (entries.length && !visibleEntries.length && !externalSet.has(key)) continue
 
       if (externalSet.has(key)) {
         propAttributes.push(`:${name}="${key}"`)
