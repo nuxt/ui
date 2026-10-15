@@ -40,7 +40,7 @@ export interface LinkProps extends Partial<Omit<InertiaLinkProps, 'href' | 'onCl
    */
   noRel?: boolean
   /**
-   * Value passed to the attribute `aria-current` when the link points at the current page.
+   * Value passed to the attribute `aria-current` when the link is exact active.
    *
    * @defaultValue `'page'`
    */
@@ -74,10 +74,11 @@ import { defu } from 'defu'
 import { useForwardProps, Slot } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
 import { usePage } from '@inertiajs/vue3'
-import { hasProtocol } from 'ufo'
+import { getQuery, hasProtocol } from 'ufo'
 import { useAppConfig } from '#imports'
 import { tv } from '../../../utils/tv'
 import { mergeClasses } from '../../../utils'
+import { isPartiallyEqual } from '../../../utils/link'
 import ULinkBase from './LinkBase.vue'
 
 defineOptions({ inheritAttrs: false })
@@ -167,39 +168,19 @@ const currentPath = computed(() => normalizePath(page.url) ?? '/')
 
 const targetPath = computed(() => href.value ? normalizePath(href.value) : undefined)
 
-/**
- * Whether the link points at the page currently being rendered, which is what
- * `aria-current` announces. Distinct from `isLinkActive`: a link to a section
- * index stays active while browsing that section, but it is not the current
- * page.
- */
-const isLinkCurrentPage = computed(() => {
-  if (!href.value) {
-    return false
-  }
-
-  if (props.exact) {
-    return page.url === href.value
-  }
-
-  if (!targetPath.value) {
-    return false
-  }
-
-  return currentPath.value === targetPath.value
-})
+const isLinkExactActive = computed(() => !!href.value && page.url === href.value)
 
 const isLinkActive = computed(() => {
   if (props.active !== undefined) {
     return props.active
   }
 
-  if (!targetPath.value) {
-    return false
+  if (props.exact) {
+    return isLinkExactActive.value
   }
 
-  if (props.exact) {
-    return page.url === href.value
+  if (!targetPath.value || !isPartiallyEqual(getQuery(href.value!), getQuery(page.url))) {
+    return false
   }
 
   return currentPath.value === targetPath.value
@@ -223,7 +204,7 @@ const linkClass = computed(() => {
       v-bind="{
         ...$attrs,
         ...routerLinkProps,
-        ...(isLinkCurrentPage ? { 'aria-current': props.ariaCurrentValue } : {}),
+        ...(exact && isLinkExactActive ? { 'aria-current': props.ariaCurrentValue } : {}),
         as,
         type,
         disabled,
@@ -240,7 +221,7 @@ const linkClass = computed(() => {
     v-bind="{
       ...$attrs,
       ...routerLinkProps,
-      ...(isLinkCurrentPage ? { 'aria-current': props.ariaCurrentValue } : {}),
+      ...(exact && isLinkExactActive ? { 'aria-current': props.ariaCurrentValue } : {}),
       as,
       type,
       disabled,

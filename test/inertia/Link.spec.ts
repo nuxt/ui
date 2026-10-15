@@ -11,11 +11,11 @@ describe('Link (inertia)', () => {
   })
 
   describe('aria-current', () => {
-    it('is set when the link points at the current page', async () => {
+    it('is set when the link is exact active', async () => {
       setPageUrl('/inventory')
 
       const wrapper = await mountSuspended(Link, {
-        props: { to: '/inventory' },
+        props: { to: '/inventory', exact: true },
         slots: { default: () => 'Inventory' }
       })
 
@@ -26,54 +26,40 @@ describe('Link (inertia)', () => {
       setPageUrl('/checkout/payment')
 
       const wrapper = await mountSuspended(Link, {
-        props: { to: '/checkout/payment', ariaCurrentValue: 'step' },
+        props: { to: '/checkout/payment', exact: true, ariaCurrentValue: 'step' },
         slots: { default: () => 'Payment' }
       })
 
       expect(wrapper.find('a').attributes('aria-current')).toBe('step')
     })
 
-    it('is absent — not "false" — when the link points elsewhere', async () => {
+    it('is not set without exact', async () => {
+      setPageUrl('/inventory')
+
+      const wrapper = await mountSuspended(Link, {
+        props: { to: '/inventory' },
+        slots: { default: () => 'Inventory' }
+      })
+
+      expect(wrapper.find('a').attributes('aria-current')).toBeUndefined()
+    })
+
+    it('is absent when the link points elsewhere', async () => {
       setPageUrl('/orders')
 
       const wrapper = await mountSuspended(Link, {
-        props: { to: '/inventory' },
+        props: { to: '/inventory', exact: true },
         slots: { default: () => 'Inventory' }
       })
 
       expect(wrapper.find('a').attributes('aria-current')).toBeUndefined()
-    })
-
-    it('is not set on a link to the section index from a page inside it', async () => {
-      setPageUrl('/inventory/create')
-
-      const wrapper = await mountSuspended(Link, {
-        props: { to: '/inventory', activeClass: 'is-active' },
-        slots: { default: () => 'Cancel' }
-      })
-
-      // The link is active — it is the section being browsed — but it is not
-      // the page the user is on, so it must not announce itself as current.
-      expect(wrapper.find('a').classes()).toContain('is-active')
-      expect(wrapper.find('a').attributes('aria-current')).toBeUndefined()
-    })
-
-    it('ignores the query string and hash of the current url', async () => {
-      setPageUrl('/inventory?search=x&page=2#results')
-
-      const wrapper = await mountSuspended(Link, {
-        props: { to: '/inventory' },
-        slots: { default: () => 'Inventory' }
-      })
-
-      expect(wrapper.find('a').attributes('aria-current')).toBe('page')
     })
 
     it('is exposed to the custom slot', async () => {
       setPageUrl('/inventory')
 
       const wrapper = await mountSuspended(Link, {
-        props: { to: '/inventory', custom: true },
+        props: { to: '/inventory', exact: true, custom: true },
         slots: { default: (props: any) => `aria-current: ${props['aria-current']}` }
       })
 
@@ -157,7 +143,6 @@ describe('Link (inertia)', () => {
       })
 
       expect(wrapper.find('a').classes()).toContain('is-active')
-      expect(wrapper.find('a').attributes('aria-current')).toBe('page')
     })
 
     it('keeps exact as a raw url comparison', async () => {
@@ -170,6 +155,21 @@ describe('Link (inertia)', () => {
 
       expect(wrapper.find('a').classes()).not.toContain('is-active')
       expect(wrapper.find('a').attributes('aria-current')).toBeUndefined()
+    })
+  })
+
+  describe('hrefs with a query', () => {
+    it('only matches the tab whose query is in the current url', async () => {
+      setPageUrl('/orders?tab=open&page=2')
+
+      const tabs = await Promise.all(['/orders?tab=open', '/orders?tab=refunds', '/orders'].map(to =>
+        mountSuspended(Link, {
+          props: { to, activeClass: 'is-active' },
+          slots: { default: () => to }
+        })
+      ))
+
+      expect(tabs.map(tab => tab.find('a').classes().includes('is-active'))).toEqual([true, false, true])
     })
   })
 
