@@ -624,8 +624,8 @@ function onSelect(e: Event, item: T) {
       </UInput>
     </ListboxFilter>
 
-    <ListboxContent data-slot="content" :aria-label="t('commandPalette.results')" :class="ui.content({ class: props.ui?.content })">
-      <div v-if="filteredGroups?.length" role="presentation" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
+    <ListboxContent data-slot="command-palette-content" :aria-label="t('commandPalette.results')" :class="ui.content({ class: props.ui?.content })">
+      <div v-if="filteredGroups?.length" role="presentation" data-slot="command-palette-viewport" :class="ui.viewport({ class: props.ui?.viewport })">
         <ListboxVirtualizer
           v-if="!!props.virtualize"
           v-slot="{ option: item, virtualItem }"

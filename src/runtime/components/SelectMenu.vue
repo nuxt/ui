@@ -790,7 +790,7 @@ defineExpose({
               :aria-labelledby="triggerId"
               :aria-multiselectable="!!props.multiple"
               aria-orientation="vertical"
-              data-slot="viewport"
+              data-slot="select-menu-viewport"
               :class="ui.viewport({ class: props.ui?.viewport })"
             >
               <template v-if="!!props.virtualize">

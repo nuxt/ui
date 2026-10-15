@@ -693,12 +693,12 @@ defineExpose({
 
     <tr
       v-if="row.getIsExpanded()"
-      data-slot="tr"
+      data-slot="table-tr"
       :class="ui.tr({ class: [props.ui?.tr] })"
       @vue:mounted="onExpandedRowMounted"
       @vue:unmounted="onExpandedRowUnmounted"
     >
-      <td :colspan="row.getVisibleCells().length" data-slot="td" :class="ui.td({ class: [props.ui?.td] })">
+      <td :colspan="row.getVisibleCells().length" data-slot="table-td" :class="ui.td({ class: [props.ui?.td] })">
         <slot name="expanded" :row="row" />
       </td>
     </tr>
