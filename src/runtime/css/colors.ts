@@ -81,9 +81,7 @@ function closestPalette(name: string, shadesByName: unknown) {
  * The shades an alias uses follow the palette, `500` in light mode and `400`
  * in dark mode by default (`900` and `50` for `neutral`): `primary: neutral
  * 900 200` picks others, always both, `black` and `white` work as shades,
- * and shades alone (`primary: black white`) keep the palette. Picked shades
- * also set the alias's text, which by default is darker than the solid in
- * light mode.
+ * and shades alone (`primary: black white`) keep the palette.
  *
  * The defaults are plain CSS in `base.css`, at zero specificity, so the
  * aliases you set win wherever you register it.
@@ -100,7 +98,6 @@ const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugi
   const declarations: Record<string, string> = {}
   const light: Record<string, string> = {}
   const dark: Record<string, string> = {}
-  const shaded: string[] = []
   for (const [alias, value] of Object.entries(aliases)) {
     if (!(colors as readonly string[]).includes(alias)) {
       throw new Error(`[@nuxt/ui] \`${alias}\` isn't a color alias. The \`@nuxt/ui/colors\` plugin takes ${colors.map(color => `\`${color}\``).join(', ')}.`)
@@ -119,7 +116,6 @@ const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugi
       }
       light[`--ui-${alias}`] = shadeValue(alias, lightShade)
       dark[`--ui-${alias}`] = shadeValue(alias, darkShade)
-      shaded.push(alias)
     }
     if (!palette) {
       continue
@@ -173,14 +169,6 @@ const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugi
   }
   if (Object.keys(roles).length) {
     addBase({ ':root, :host, .light, .dark': roles })
-  }
-  // An alias on shades of your choice takes them for its text too, unless it's
-  // on a gray, whose text the neutral roles above already set
-  for (const alias of shaded) {
-    if (alias !== 'neutral' && !(`--ui-${alias}-text-strong` in roles)) {
-      light[`--ui-${alias}-text-default`] = 'initial'
-      light[`--ui-${alias}-text-muted`] = 'initial'
-    }
   }
   // After the palettes, `.dark` last so it wins on a dark root
   if (Object.keys(light).length) {
