@@ -59,16 +59,16 @@ const ui = computed(() => tv(theme, overrides.value)({
 </script>
 
 <template>
-  <Primitive :as="as.root" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="props.headline || !!slots.headline" data-slot="headline" :class="ui.headline({ class: props.ui?.headline })">
+  <Primitive :as="as.root" data-slot="page-header" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div v-if="props.headline || !!slots.headline" data-slot="page-header-headline" :class="ui.headline({ class: props.ui?.headline })">
       <slot name="headline">
         {{ props.headline }}
       </slot>
     </div>
 
-    <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
-      <div data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
-        <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+    <div data-slot="page-header-container" :class="ui.container({ class: props.ui?.container })">
+      <div data-slot="page-header-wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+        <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="page-header-title" :class="ui.title({ class: props.ui?.title })">
           <slot name="title">
             {{ props.title }}
           </slot>

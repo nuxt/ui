@@ -96,8 +96,8 @@ const ui = computed(() => tv(theme, overrides.value)())
     </slot>
   </DefineToggleTemplate>
 
-  <Primitive :as="as.root" data-slot="root" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div data-slot="left" :class="ui.left({ class: props.ui?.left })">
+  <Primitive :as="as.root" data-slot="dashboard-navbar" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div data-slot="dashboard-navbar-left" :class="ui.left({ class: props.ui?.left })">
       <ReuseToggleTemplate v-if="props.toggleSide === 'left'" />
 
       <slot name="left" v-bind="dashboardContext">
@@ -105,7 +105,7 @@ const ui = computed(() => tv(theme, overrides.value)())
           <UIcon v-if="props.icon" :name="props.icon" data-slot="dashboard-navbar-icon" :class="ui.icon({ class: props.ui?.icon })" />
         </slot>
 
-        <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+        <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="dashboard-navbar-title" :class="ui.title({ class: props.ui?.title })">
           <slot name="title">
             {{ props.title }}
           </slot>

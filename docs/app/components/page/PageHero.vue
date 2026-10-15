@@ -124,7 +124,7 @@ const ui = {
     <!-- the library hero's footer only holds the links, so the caption
          takes it over and lays the same buttons out above itself -->
     <template v-if="slots.caption && !slots.footer" #footer>
-      <div v-if="links?.length" data-slot="links" class="flex flex-wrap gap-x-3 gap-y-3">
+      <div v-if="links?.length" data-slot="links" class="flex flex-wrap gap-3">
         <UButton v-for="(link, index) in links" :key="index" size="xl" v-bind="link" />
       </div>
 

@@ -89,11 +89,11 @@ describe('Calendar', () => {
     test('labels the month and year views of the date calendar', async () => {
       const wrapper = await mountSuspended(Calendar)
 
-      await wrapper.find('[data-slot="heading"] button').trigger('click')
-      expect(wrapper.get('[data-slot="root"]').attributes('aria-label')).toMatch(/^Month picker, /)
+      await wrapper.find('[data-slot="calendar-heading"] button').trigger('click')
+      expect(wrapper.get('[data-slot="calendar"]').attributes('aria-label')).toMatch(/^Month picker, /)
 
-      await wrapper.find('[data-slot="heading"] button').trigger('click')
-      expect(wrapper.get('[data-slot="root"]').attributes('aria-label')).toMatch(/^Year picker, /)
+      await wrapper.find('[data-slot="calendar-heading"] button').trigger('click')
+      expect(wrapper.get('[data-slot="calendar"]').attributes('aria-label')).toMatch(/^Year picker, /)
     })
   })
 

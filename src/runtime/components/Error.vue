@@ -80,8 +80,8 @@ function handleError() {
 </script>
 
 <template>
-  <Primitive :as="as.root" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="props.icon || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+  <Primitive :as="as.root" data-slot="error" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div v-if="props.icon || !!slots.leading" data-slot="error-leading" :class="ui.leading({ class: props.ui?.leading })">
       <slot name="leading" :ui="ui">
         <UIcon v-if="props.icon" :name="props.icon" data-slot="error-leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
       </slot>
@@ -91,12 +91,12 @@ function handleError() {
         {{ props.error?.statusCode || props.error?.status }}
       </slot>
     </p>
-    <Primitive v-if="!!props.error?.statusMessage || !!props.error?.statusText || !!slots.statusMessage" :as="as.statusMessage" data-slot="statusMessage" :class="ui.statusMessage({ class: props.ui?.statusMessage })">
+    <Primitive v-if="!!props.error?.statusMessage || !!props.error?.statusText || !!slots.statusMessage" :as="as.statusMessage" data-slot="error-statusMessage" :class="ui.statusMessage({ class: props.ui?.statusMessage })">
       <slot name="statusMessage">
         {{ props.error?.statusMessage || props.error?.statusText }}
       </slot>
     </Primitive>
-    <p v-if="(props.error?.message && props.error.message !== (props.error.statusMessage || props.error.statusText)) || !!slots.message" data-slot="message" :class="ui.message({ class: props.ui?.message })">
+    <p v-if="(props.error?.message && props.error.message !== (props.error.statusMessage || props.error.statusText)) || !!slots.message" data-slot="error-message" :class="ui.message({ class: props.ui?.message })">
       <slot name="message">
         {{ props.error?.message }}
       </slot>

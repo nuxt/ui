@@ -272,7 +272,7 @@ describe('FileUpload', () => {
     async function drag(wrapper: Awaited<ReturnType<typeof mountSuspended>>, types: string[]) {
       const data = new DataTransfer()
       data.items.add(file)
-      const base = wrapper.find('[data-slot="base"]').element
+      const base = wrapper.find('[data-slot="file-upload-base"]').element
 
       for (const type of types) {
         const event = new Event(type, { bubbles: true, cancelable: true })
@@ -302,7 +302,7 @@ describe('FileUpload', () => {
 
     it('clears the drag state when dropzone is disabled mid-drag', async () => {
       const wrapper = await mountSuspended(FileUpload, { props: { dropzone: true } })
-      const base = wrapper.find('[data-slot="base"]')
+      const base = wrapper.find('[data-slot="file-upload-base"]')
 
       await drag(wrapper, ['dragenter'])
       expect(base.attributes('data-dragging')).toBe('true')

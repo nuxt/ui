@@ -153,8 +153,8 @@ const ariaLabel = computed(() => {
     </time>
   </DefineDateTemplate>
 
-  <Primitive :as="as.root" v-bind="!props.to ? $attrs : {}" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="props.onClick">
-    <div v-if="!!props.indicator || !!slots.indicator" data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })">
+  <Primitive :as="as.root" v-bind="!props.to ? $attrs : {}" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'changelog-version'" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="props.onClick">
+    <div v-if="!!props.indicator || !!slots.indicator" data-slot="changelog-version-indicator" :class="ui.indicator({ class: props.ui?.indicator })">
       <slot name="indicator" :ui="ui">
         <ReuseDateTemplate />
 
@@ -182,7 +182,7 @@ const ariaLabel = computed(() => {
             <ReuseDateTemplate :hidden="!!props.indicator" />
           </div>
 
-          <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+          <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="changelog-version-title" :class="ui.title({ class: props.ui?.title })">
             <ReuseLinkTemplate />
 
             <slot name="title">
