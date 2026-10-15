@@ -367,7 +367,7 @@ defineExpose({
           v-for="(item, index) in props.items"
           :key="index"
           v-bind="props.dots ? { role: 'tabpanel' } : { 'role': 'group', 'aria-roledescription': t('carousel.slide') }"
-          data-slot="item"
+          data-slot="carousel-item"
           :class="ui.item({ class: [props.ui?.item, isCarouselItem(item) && item.ui?.item, isCarouselItem(item) && item.class] })"
         >
           <slot :item="item" :index="index" />

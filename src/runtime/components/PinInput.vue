@@ -195,7 +195,7 @@ defineExpose({
         :ref="el => setInputRef(index as number, el)"
         :index="(index as number)"
         :aria-label="t('pinInput.input', { index: (index as number) + 1, length: looseToNumber(props.length) })"
-        data-slot="base"
+        data-slot="pin-input-base"
         :class="ui.base({ class: props.ui?.base })"
         :disabled="disabled"
       />
