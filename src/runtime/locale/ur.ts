@@ -63,9 +63,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'واپس',
       close: 'بند کریں',
+      filterPlaceholder: 'کمانڈ ٹائپ کریں یا تلاش کریں…',
       noData: 'کوئی ڈیٹا نہیں',
       noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
-      placeholder: 'کمانڈ ٹائپ کریں یا تلاش کریں…',
       results: 'نتائج'
     },
     contentSearch: {
@@ -80,8 +80,8 @@ export default defineLocale<Messages>({
       title: 'اس صفحے پر'
     },
     dropdownMenu: {
-      noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
-      search: 'تلاش کریں…'
+      filterPlaceholder: 'تلاش کریں…',
+      noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا'
     },
     dashboardSearch: {
       theme: 'تھیم'
@@ -143,9 +143,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'ٹائم زون'
     },
     listbox: {
+      filterPlaceholder: 'تلاش کریں…',
       noData: 'کوئی ڈیٹا نہیں',
-      noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
-      search: 'تلاش کریں…'
+      noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا'
     },
     modal: {
       close: 'بند کریں'
@@ -188,9 +188,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: '"{label}" بنائیں',
+      filterPlaceholder: 'تلاش کریں…',
       noData: 'کوئی ڈیٹا نہیں',
-      noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
-      search: 'تلاش کریں…'
+      noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا'
     },
     skeleton: {
       label: 'لوڈ ہو رہا ہے'

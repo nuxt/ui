@@ -51,9 +51,9 @@ export type Messages = {
   commandPalette: {
     back: string
     close: string
+    filterPlaceholder: string
     noData: string
     noMatch: string
-    placeholder: string
     results: string
   }
   contentSearch: {
@@ -70,8 +70,8 @@ export type Messages = {
     title: string
   }
   dropdownMenu: {
+    filterPlaceholder: string
     noMatch: string
-    search: string
   }
   dashboardSearch: {
     description?: string
@@ -141,9 +141,9 @@ export type Messages = {
     timeZoneName: string
   }
   listbox: {
+    filterPlaceholder: string
     noData: string
     noMatch: string
-    search: string
   }
   modal: {
     close: string
@@ -191,9 +191,9 @@ export type Messages = {
   }
   selectMenu: {
     create: string
+    filterPlaceholder: string
     noData: string
     noMatch: string
-    search: string
   }
   skeleton: {
     label: string

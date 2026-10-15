@@ -62,9 +62,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Til baka',
       close: 'Loka',
+      filterPlaceholder: 'Sláðu inn skipun eða leitaðu…',
       noData: 'Engin gögn',
       noMatch: 'Engin gögn fundust',
-      placeholder: 'Sláðu inn skipun eða leitaðu…',
       results: 'Niðurstöður'
     },
     contentSearch: {
@@ -79,8 +79,8 @@ export default defineLocale<Messages>({
       title: 'Á þessari síðu'
     },
     dropdownMenu: {
-      noMatch: 'Engin gögn fundust',
-      search: 'Leita…'
+      filterPlaceholder: 'Leita…',
+      noMatch: 'Engin gögn fundust'
     },
     dashboardSearch: {
       theme: 'Þema'
@@ -142,9 +142,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'tímabelti'
     },
     listbox: {
+      filterPlaceholder: 'Leita…',
       noData: 'Engin gögn',
-      noMatch: 'Engin gögn fundust',
-      search: 'Leita…'
+      noMatch: 'Engin gögn fundust'
     },
     modal: {
       close: 'Loka'
@@ -187,9 +187,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Búa til "{label}"',
+      filterPlaceholder: 'Leita…',
       noData: 'Engin gögn',
-      noMatch: 'Engin gögn fundust',
-      search: 'Leita…'
+      noMatch: 'Engin gögn fundust'
     },
     skeleton: {
       label: 'hleður'

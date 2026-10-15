@@ -62,9 +62,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Quay lại',
       close: 'Đóng',
+      filterPlaceholder: 'Nhập lệnh hoặc tìm kiếm…',
       noData: 'Không có dữ liệu',
       noMatch: 'Không có kết quả phù hợp',
-      placeholder: 'Nhập lệnh hoặc tìm kiếm…',
       results: 'Kết quả'
     },
     contentSearch: {
@@ -79,8 +79,8 @@ export default defineLocale<Messages>({
       title: 'Trong trang này'
     },
     dropdownMenu: {
-      noMatch: 'Không có kết quả phù hợp',
-      search: 'Tìm kiếm…'
+      filterPlaceholder: 'Tìm kiếm…',
+      noMatch: 'Không có kết quả phù hợp'
     },
     dashboardSearch: {
       theme: 'Chủ đề'
@@ -142,9 +142,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'múi giờ'
     },
     listbox: {
+      filterPlaceholder: 'Tìm kiếm…',
       noData: 'Không có dữ liệu',
-      noMatch: 'Không có kết quả phù hợp',
-      search: 'Tìm kiếm…'
+      noMatch: 'Không có kết quả phù hợp'
     },
     modal: {
       close: 'Đóng'
@@ -187,9 +187,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Tạo "{label}"',
+      filterPlaceholder: 'Tìm kiếm…',
       noData: 'Không có dữ liệu',
-      noMatch: 'Không có kết quả phù hợp',
-      search: 'Tìm kiếm…'
+      noMatch: 'Không có kết quả phù hợp'
     },
     skeleton: {
       label: 'đang tải'

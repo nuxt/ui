@@ -62,9 +62,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Atrás',
       close: 'Pechar',
+      filterPlaceholder: 'Escribe un comando ou busca…',
       noData: 'Sen datos',
       noMatch: 'Non hai datos coincidentes',
-      placeholder: 'Escribe un comando ou busca…',
       results: 'Resultados'
     },
     contentSearch: {
@@ -79,8 +79,8 @@ export default defineLocale<Messages>({
       title: 'Nesta páxina'
     },
     dropdownMenu: {
-      noMatch: 'Non hai datos coincidentes',
-      search: 'Buscar…'
+      filterPlaceholder: 'Buscar…',
+      noMatch: 'Non hai datos coincidentes'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -142,9 +142,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'fuso horario'
     },
     listbox: {
+      filterPlaceholder: 'Buscar…',
       noData: 'Sen datos',
-      noMatch: 'Non hai datos coincidentes',
-      search: 'Buscar…'
+      noMatch: 'Non hai datos coincidentes'
     },
     modal: {
       close: 'Pechar'
@@ -187,9 +187,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Crear "{label}"',
+      filterPlaceholder: 'Buscar…',
       noData: 'Sen datos',
-      noMatch: 'Non hai datos coincidentes',
-      search: 'Buscar…'
+      noMatch: 'Non hai datos coincidentes'
     },
     skeleton: {
       label: 'cargando'

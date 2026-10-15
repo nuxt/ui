@@ -57,9 +57,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Atpakaļ',
       close: 'Aizvērt',
+      filterPlaceholder: 'Ievadi komandu vai meklē…',
       noData: 'Nav datu',
       noMatch: 'Nav atbilstošu datu',
-      placeholder: 'Ievadi komandu vai meklē…',
       results: 'Rezultāti'
     },
     contentSearch: {
@@ -74,8 +74,8 @@ export default defineLocale<Messages>({
       title: 'Šajā lapā'
     },
     dropdownMenu: {
-      noMatch: 'Nav atbilstošu datu',
-      search: 'Meklēt…'
+      filterPlaceholder: 'Meklēt…',
+      noMatch: 'Nav atbilstošu datu'
     },
     dashboardSearch: {
       theme: 'Tēma'
@@ -137,9 +137,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'laika josla'
     },
     listbox: {
+      filterPlaceholder: 'Meklēt…',
       noData: 'Nav datu',
-      noMatch: 'Nav atbilstošu datu',
-      search: 'Meklēt…'
+      noMatch: 'Nav atbilstošu datu'
     },
     modal: {
       close: 'Aizvērt'
@@ -187,9 +187,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Izveidot "{label}"',
+      filterPlaceholder: 'Meklēt…',
       noData: 'Nav datu',
-      noMatch: 'Nav atbilstošu datu',
-      search: 'Meklēt…'
+      noMatch: 'Nav atbilstošu datu'
     },
     skeleton: {
       label: 'ielādē'

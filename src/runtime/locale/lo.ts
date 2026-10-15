@@ -62,9 +62,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'ກັບຄືນ',
       close: 'ປິດ',
+      filterPlaceholder: 'ພິມຄຳສັ່ງ ຫຼື ຄົ້ນຫາ…',
       noData: 'ບໍ່ມີຂໍ້ມູນ',
       noMatch: 'ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ',
-      placeholder: 'ພິມຄຳສັ່ງ ຫຼື ຄົ້ນຫາ…',
       results: 'ຜົນໄດ້ຮັບ'
     },
     contentSearch: {
@@ -79,8 +79,8 @@ export default defineLocale<Messages>({
       title: 'ໃນໜ້ານີ້'
     },
     dropdownMenu: {
-      noMatch: 'ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ',
-      search: 'ຄົ້ນຫາ…'
+      filterPlaceholder: 'ຄົ້ນຫາ…',
+      noMatch: 'ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ'
     },
     dashboardSearch: {
       theme: 'ທີມ'
@@ -142,9 +142,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'ເຂດເວລາ'
     },
     listbox: {
+      filterPlaceholder: 'ຄົ້ນຫາ…',
       noData: 'ບໍ່ມີຂໍ້ມູນ',
-      noMatch: 'ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ',
-      search: 'ຄົ້ນຫາ…'
+      noMatch: 'ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ'
     },
     modal: {
       close: 'ປິດ'
@@ -187,9 +187,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'ສ້າງ "{label}"',
+      filterPlaceholder: 'ຄົ້ນຫາ…',
       noData: 'ບໍ່ມີຂໍ້ມູນ',
-      noMatch: 'ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ',
-      search: 'ຄົ້ນຫາ…'
+      noMatch: 'ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ'
     },
     skeleton: {
       label: 'ກຳລັງໂຫຼດ'

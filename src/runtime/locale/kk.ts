@@ -62,9 +62,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Артқа',
       close: 'Жабу',
+      filterPlaceholder: 'Команда енгізіңіз немесе іздеңіз…',
       noData: 'Деректер жоқ',
       noMatch: 'Сәйкес келетін деректер жоқ',
-      placeholder: 'Команда енгізіңіз немесе іздеңіз…',
       results: 'Нәтижелер'
     },
     contentSearch: {
@@ -79,8 +79,8 @@ export default defineLocale<Messages>({
       title: 'Мазмұны'
     },
     dropdownMenu: {
-      noMatch: 'Сәйкес келетін деректер жоқ',
-      search: 'Іздеу…'
+      filterPlaceholder: 'Іздеу…',
+      noMatch: 'Сәйкес келетін деректер жоқ'
     },
     dashboardSearch: {
       theme: 'Тақырып'
@@ -142,9 +142,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'уақыт белдеуі'
     },
     listbox: {
+      filterPlaceholder: 'Іздеу…',
       noData: 'Деректер жоқ',
-      noMatch: 'Сәйкес келетін деректер жоқ',
-      search: 'Іздеу…'
+      noMatch: 'Сәйкес келетін деректер жоқ'
     },
     modal: {
       close: 'Жабу'
@@ -187,9 +187,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: '"{label}" жасау',
+      filterPlaceholder: 'Іздеу…',
       noData: 'Деректер жоқ',
-      noMatch: 'Сәйкес келетін деректер жоқ',
-      search: 'Іздеу…'
+      noMatch: 'Сәйкес келетін деректер жоқ'
     },
     skeleton: {
       label: 'жүктелуде'

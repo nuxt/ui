@@ -62,9 +62,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Takaisin',
       close: 'Sulje',
+      filterPlaceholder: 'Kirjoita komento tai hae…',
       noData: 'Ei tietoja',
       noMatch: 'Ei vastaavia tietoja',
-      placeholder: 'Kirjoita komento tai hae…',
       results: 'Tulokset'
     },
     contentSearch: {
@@ -79,8 +79,8 @@ export default defineLocale<Messages>({
       title: 'Tällä sivulla'
     },
     dropdownMenu: {
-      noMatch: 'Ei vastaavia tietoja',
-      search: 'Hae…'
+      filterPlaceholder: 'Hae…',
+      noMatch: 'Ei vastaavia tietoja'
     },
     dashboardSearch: {
       theme: 'Teema'
@@ -142,9 +142,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'aikavyöhyke'
     },
     listbox: {
+      filterPlaceholder: 'Hae…',
       noData: 'Ei tietoja',
-      noMatch: 'Ei vastaavia tietoja',
-      search: 'Hae…'
+      noMatch: 'Ei vastaavia tietoja'
     },
     modal: {
       close: 'Sulje'
@@ -187,9 +187,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Luo "{label}"',
+      filterPlaceholder: 'Hae…',
       noData: 'Ei tietoja',
-      noMatch: 'Ei vastaavia tietoja',
-      search: 'Hae…'
+      noMatch: 'Ei vastaavia tietoja'
     },
     skeleton: {
       label: 'ladataan'

@@ -62,9 +62,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Tillbaka',
       close: 'Stäng',
+      filterPlaceholder: 'Skriv ett kommando eller sök…',
       noData: 'Inga data',
       noMatch: 'Inga matchande data',
-      placeholder: 'Skriv ett kommando eller sök…',
       results: 'Resultat'
     },
     contentSearch: {
@@ -79,8 +79,8 @@ export default defineLocale<Messages>({
       title: 'På denna sida'
     },
     dropdownMenu: {
-      noMatch: 'Inga matchande data',
-      search: 'Sök…'
+      filterPlaceholder: 'Sök…',
+      noMatch: 'Inga matchande data'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -142,9 +142,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'tidszon'
     },
     listbox: {
+      filterPlaceholder: 'Sök…',
       noData: 'Inga data',
-      noMatch: 'Inga matchande data',
-      search: 'Sök…'
+      noMatch: 'Inga matchande data'
     },
     modal: {
       close: 'Stäng'
@@ -187,9 +187,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Skapa "{label}"',
+      filterPlaceholder: 'Sök…',
       noData: 'Inga data',
-      noMatch: 'Inga matchande data',
-      search: 'Sök…'
+      noMatch: 'Inga matchande data'
     },
     skeleton: {
       label: 'laddar'
