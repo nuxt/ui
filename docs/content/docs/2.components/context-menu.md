@@ -326,7 +326,7 @@ name: 'context-menu-color-items-example'
 ---
 ::
 
-### Control open state :badge{label="Soon" class="align-text-top"}
+### Control open state :badge{label="4.12+" class="align-text-top"}
 
 You can control the open state by using the `v-model:open` directive. When opened programmatically, the menu is anchored to the trigger instead of the cursor.
 

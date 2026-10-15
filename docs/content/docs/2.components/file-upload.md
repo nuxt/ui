@@ -278,7 +278,7 @@ props:
 
 ## Examples
 
-### With custom file items :badge{label="Soon" class="align-text-top"}
+### With custom file items :badge{label="4.12+" class="align-text-top"}
 
 Use an object with a `name`, optional file metadata and an [Avatar](/docs/components/avatar) to display an existing file. Native files selected by the user are added to the same model. Models and file slots include `File` alongside your custom item type, so narrow the item before accessing custom properties.
 
@@ -290,7 +290,7 @@ collapse: true
 ---
 ::
 
-### With upload status :badge{label="Soon" class="align-text-top"}
+### With upload status :badge{label="4.12+" class="align-text-top"}
 
 Extend `FileUploadItem` with custom fields and use the file slots to display upload progress or other asynchronous states. This example converts selected files into custom items, simulates upload progress, and displays their image previews when complete.
 
@@ -314,7 +314,7 @@ name: 'file-upload-form-validation-example'
 ---
 ::
 
-### With rejected files :badge{label="Soon" class="align-text-top"}
+### With rejected files :badge{label="4.12+" class="align-text-top"}
 
 Dropped files that do not match the `accept` prop are ignored. Listen to the `reject` event to display an error message.
 

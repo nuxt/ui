@@ -829,7 +829,7 @@ name: 'input-menu-icon-example'
 ---
 ::
 
-### With floating label :badge{label="Soon" class="align-text-top"}
+### With floating label :badge{label="4.12+" class="align-text-top"}
 
 You can use the `#default` slot to add a floating label to the InputMenu.
 
