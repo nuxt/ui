@@ -142,14 +142,14 @@ describe('useLocale', () => {
   ] as const)('labels the %s Calendar in the App locale', async (type, label) => {
     const wrapper = await mountInApp({ locale: fr }, () => h(UCalendar, { type }))
 
-    expect(wrapper.get('[data-slot="root"]').attributes('aria-label')).toMatch(new RegExp(`^${label}, `))
+    expect(wrapper.get('[data-slot="calendar"]').attributes('aria-label')).toMatch(new RegExp(`^${label}, `))
   })
 
   it('describes Carousel and its slides in the App locale', async () => {
     const wrapper = await mountInApp({ locale: fr }, () => h(UCarousel, { items: [1, 2] }, { default: ({ item }: { item: number }) => h('span', item) }))
 
-    expect(wrapper.get('[data-slot="root"]').attributes('aria-roledescription')).toBe('carrousel')
-    expect(wrapper.findAll('[data-slot="item"]').map(item => item.attributes('aria-roledescription'))).toEqual(['diapositive', 'diapositive'])
+    expect(wrapper.get('[data-slot="carousel"]').attributes('aria-roledescription')).toBe('carrousel')
+    expect(wrapper.findAll('[data-slot="carousel-item"]').map(item => item.attributes('aria-roledescription'))).toEqual(['diapositive', 'diapositive'])
   })
 
   it('labels the CommandPalette listbox in the App locale', async () => {
@@ -167,7 +167,7 @@ describe('useLocale', () => {
   it('labels the InputMenu trigger in the App locale', async () => {
     const wrapper = await mountInApp({ locale: fr }, () => h(UInputMenu))
 
-    expect(wrapper.get('[data-slot="trailing"]').attributes('aria-label')).toBe('Afficher les options')
+    expect(wrapper.get('[data-slot="input-menu-trailing"]').attributes('aria-label')).toBe('Afficher les options')
   })
 
   it('describes InputNumber in the App locale', async () => {
@@ -179,7 +179,7 @@ describe('useLocale', () => {
   it('labels InputRating values in the App locale', async () => {
     const wrapper = await mountInApp({ locale: fr }, () => h(UInputRating, { length: 3 }))
 
-    expect(wrapper.findAll('[data-slot="indicator"]').map(indicator => indicator.attributes('aria-label'))).toEqual(['Noter 1 sur 3', 'Noter 2 sur 3', 'Noter 3 sur 3'])
+    expect(wrapper.findAll('[data-slot="input-rating-indicator"]').map(indicator => indicator.attributes('aria-label'))).toEqual(['Noter 1 sur 3', 'Noter 2 sur 3', 'Noter 3 sur 3'])
   })
 
   it('labels InputTime segments in the App locale', async () => {
@@ -191,7 +191,7 @@ describe('useLocale', () => {
   it('labels PinInput inputs in the App locale', async () => {
     const wrapper = await mountInApp({ locale: fr }, () => h(UPinInput, { length: 3 }))
 
-    expect(wrapper.findAll('input[data-slot="base"]').map(input => input.attributes('aria-label'))).toEqual([
+    expect(wrapper.findAll('input[data-slot="pin-input-base"]').map(input => input.attributes('aria-label'))).toEqual([
       'code PIN, caractère 1 sur 3',
       'code PIN, caractère 2 sur 3',
       'code PIN, caractère 3 sur 3'

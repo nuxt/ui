@@ -371,7 +371,7 @@ const filteredItems = computed(() => filteredGroups.value.flatMap(group => group
 
   <ListboxRoot
     :id="id"
-    data-slot="root"
+    data-slot="listbox"
     v-bind="{ ...rootProps, ...omit($attrs, [...labelAttrs, ...fieldAttrs]) }"
     :disabled="disabled"
     :name="name"
@@ -388,14 +388,14 @@ const filteredItems = computed(() => filteredGroups.value.flatMap(group => group
     </ListboxFilter>
 
     <ListboxContent
-      data-slot="content"
+      data-slot="listbox-content"
       v-bind="{ ...pick($attrs, fieldAttrs), ...ariaAttrs }"
       :aria-required="props.required || undefined"
       :aria-label="($attrs['aria-label'] as string | undefined)"
       :aria-labelledby="($attrs['aria-labelledby'] as string | undefined) ?? ($attrs['aria-label'] ? undefined : labelId)"
       :class="ui.content({ class: props.ui?.content })"
     >
-      <div v-if="props.loading" data-slot="loading" :class="ui.loading({ class: props.ui?.loading })">
+      <div v-if="props.loading" data-slot="listbox-loading" :class="ui.loading({ class: props.ui?.loading })">
         <slot name="loading">
           <UIcon :name="props.loadingIcon || appConfig.ui.icons.loading" data-slot="listbox-loadingIcon" :class="ui.loadingIcon({ class: props.ui?.loadingIcon })" />
         </slot>
