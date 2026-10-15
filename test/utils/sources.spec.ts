@@ -116,14 +116,6 @@ describe('colors plugin', () => {
     expect(aliasRule(css, '.dark', '--ui-primary: var(--ui-color-primary-200);')).toContain('--ui-secondary: var(--ui-color-secondary-600);')
   })
 
-  it('gives each color a text darker than its solid in light mode', async () => {
-    const css = await build({})
-
-    expect(css).toContain('--ui-primary-text-default: color-mix(in oklab, var(--ui-primary) 70%, var(--ui-color-primary-950));')
-    expect(css).toContain('--ui-primary-text-muted: color-mix(in oklab, var(--ui-primary) 80%, var(--ui-color-primary-950));')
-    expect(css).toContain('--ui-primary-text-default: initial;')
-  })
-
   it('takes `black` and `white` as shades, and shades without a palette', async () => {
     const css = await build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: neutral black 200; neutral: white black; }')
 

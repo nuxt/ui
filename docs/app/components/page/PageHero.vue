@@ -118,7 +118,7 @@ const ui = {
     </template>
 
     <template v-if="lead || accent" #title>
-      {{ leadText }}<br v-if="breakLine"><span class="text-(--ui-primary) font-semibold">{{ accent }}</span>
+      {{ leadText }}<br v-if="breakLine"><span class="text-primary font-semibold">{{ accent }}</span>
     </template>
 
     <!-- the library hero's footer only holds the links, so the caption
