@@ -28,7 +28,7 @@ Use the `v-model` directive to control the value of the CommandPalette or the `d
 ---
 collapse: true
 hide:
-  - autofocus
+  - filter.autofocus
 ignore:
   - groups
   - modelValue
@@ -41,7 +41,8 @@ externalTypes:
 class: '!p-0'
 props:
   modelValue: {}
-  autofocus: false
+  filter:
+    autofocus: false
   groups:
     - id: 'users'
       label: 'Users'
@@ -135,7 +136,7 @@ You can pass any property from the [Link](/docs/components/link#props) component
 ---
 collapse: true
 hide:
-  - autofocus
+  - filter.autofocus
 ignore:
   - groups
   - modelValue
@@ -148,7 +149,8 @@ externalTypes:
 class: '!p-0'
 props:
   modelValue: {}
-  autofocus: false
+  filter:
+    autofocus: false
   groups:
     - id: 'users'
       label: 'Users'
@@ -209,7 +211,7 @@ Use the `multiple` prop to allow multiple selections.
 ---
 collapse: true
 hide:
-  - autofocus
+  - filter.autofocus
 ignore:
   - groups
   - modelValue
@@ -223,7 +225,8 @@ externalTypes:
 class: '!p-0'
 props:
   multiple: true
-  autofocus: false
+  filter:
+    autofocus: false
   modelValue: []
   groups:
     - id: 'users'
@@ -277,15 +280,17 @@ props:
 Ensure to pass an array to the `default-value` prop or the `v-model` directive.
 ::
 
-### Placeholder
+### Filter
 
-Use the `placeholder` prop to change the placeholder text.
+Use the `filter` prop to customize or hide the filter input (with `false` value). Defaults to `true`.
+
+You can pass any property from the [Input](/docs/components/input) component to customize it, like its `placeholder` or its `icon`.
 
 ::component-code
 ---
 collapse: true
 hide:
-  - autofocus
+  - filter.autofocus
 ignore:
   - class
   - groups
@@ -295,8 +300,10 @@ externalTypes:
   - CommandPaletteGroup[]
 class: '!p-0'
 props:
-  autofocus: false
-  placeholder: 'Search an app...'
+  filter:
+    autofocus: false
+    placeholder: 'Search an app...'
+    icon: 'i-lucide-box'
   groups:
     - id: 'apps'
       items:
@@ -310,70 +317,8 @@ props:
 ---
 ::
 
-### Size :badge{label="4.4+" class="align-text-top"}
-
-Use the `size` prop to change the size of the CommandPalette.
-
-::component-code
----
-collapse: true
-hide:
-  - autofocus
-ignore:
-  - class
-  - groups
-external:
-  - groups
-externalTypes:
-  - CommandPaletteGroup[]
-class: '!p-0'
-props:
-  autofocus: false
-  size: 'xl'
-  groups:
-    - id: 'apps'
-      items:
-        - label: 'Calendar'
-          icon: 'i-lucide-calendar'
-        - label: 'Music'
-          icon: 'i-lucide-music'
-        - label: 'Maps'
-          icon: 'i-lucide-map'
-  class: 'flex-1'
----
-::
-
-### Icon
-
-Use the `icon` prop to customize the input [Icon](/docs/components/icon). Defaults to `i-lucide-search`.
-
-::component-code
----
-collapse: true
-hide:
-  - autofocus
-ignore:
-  - class
-  - groups
-external:
-  - groups
-externalTypes:
-  - CommandPaletteGroup[]
-class: '!p-0'
-props:
-  autofocus: false
-  icon: 'i-lucide-box'
-  groups:
-    - id: 'apps'
-      items:
-        - label: 'Calendar'
-          icon: 'i-lucide-calendar'
-        - label: 'Music'
-          icon: 'i-lucide-music'
-        - label: 'Maps'
-          icon: 'i-lucide-map'
-  class: 'flex-1'
----
+::tip
+The icon of the filter input defaults to `i-lucide-search`, set `icon: false` to hide it.
 ::
 
 ::framework-only
@@ -388,6 +333,40 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.se
 :::
 ::
 
+### Size :badge{label="4.4+" class="align-text-top"}
+
+Use the `size` prop to change the size of the CommandPalette.
+
+::component-code
+---
+collapse: true
+hide:
+  - filter.autofocus
+ignore:
+  - class
+  - groups
+external:
+  - groups
+externalTypes:
+  - CommandPaletteGroup[]
+class: '!p-0'
+props:
+  filter:
+    autofocus: false
+  size: 'xl'
+  groups:
+    - id: 'apps'
+      items:
+        - label: 'Calendar'
+          icon: 'i-lucide-calendar'
+        - label: 'Music'
+          icon: 'i-lucide-music'
+        - label: 'Maps'
+          icon: 'i-lucide-map'
+  class: 'flex-1'
+---
+::
+
 ### Selected Icon
 
 Use the `selected-icon` prop to customize the selected item [Icon](/docs/components/icon). Defaults to `i-lucide-check`.
@@ -396,7 +375,7 @@ Use the `selected-icon` prop to customize the selected item [Icon](/docs/compone
 ---
 collapse: true
 hide:
-  - autofocus
+  - filter.autofocus
 ignore:
   - groups
   - modelValue
@@ -410,7 +389,8 @@ externalTypes:
 class: '!p-0'
 props:
   multiple: true
-  autofocus: false
+  filter:
+    autofocus: false
   modelValue:
     - label: 'Benjamin Canac'
       suffix: 'benjamincanac'
@@ -478,16 +458,16 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 :::
 ::
 
-### Trailing Icon
+### Children Icon
 
-Use the `trailing-icon` prop to customize the trailing [Icon](/docs/components/icon) when an item has children. Defaults to `i-lucide-chevron-right`.
+Use the `children-icon` prop to customize the trailing [Icon](/docs/components/icon) when an item has children. Defaults to `i-lucide-chevron-right`.
 
 ::component-code
 ---
 collapse: true
 prettier: true
 hide:
-  - autofocus
+  - filter.autofocus
 ignore:
   - groups
   - class
@@ -497,8 +477,9 @@ externalTypes:
   - CommandPaletteGroup[]
 class: '!p-0'
 props:
-  autofocus: false
-  trailingIcon: 'i-lucide-arrow-right'
+  filter:
+    autofocus: false
+  childrenIcon: 'i-lucide-arrow-right'
   groups:
     - id: 'actions'
       items:
@@ -535,7 +516,7 @@ Use the `loading` prop to show a loading icon on the CommandPalette.
 ---
 collapse: true
 hide:
-  - autofocus
+  - filter.autofocus
 ignore:
   - class
   - groups
@@ -545,7 +526,8 @@ externalTypes:
   - CommandPaletteGroup[]
 class: '!p-0'
 props:
-  autofocus: false
+  filter:
+    autofocus: false
   loading: true
   groups:
     - id: 'apps'
@@ -568,7 +550,7 @@ Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide
 ---
 collapse: true
 hide:
-  - autofocus
+  - filter.autofocus
 ignore:
   - class
   - groups
@@ -578,7 +560,8 @@ externalTypes:
   - CommandPaletteGroup[]
 class: '!p-0'
 props:
-  autofocus: false
+  filter:
+    autofocus: false
   loading: true
   loadingIcon: 'i-lucide-loader'
   groups:
@@ -618,7 +601,7 @@ An `update:open` event will be emitted when the close button is clicked.
 ---
 collapse: true
 hide:
-  - autofocus
+  - filter.autofocus
 ignore:
   - class
   - groups
@@ -629,7 +612,8 @@ externalTypes:
   - CommandPaletteGroup[]
 class: '!p-0'
 props:
-  autofocus: false
+  filter:
+    autofocus: false
   close: true
   groups:
     - id: 'apps'
@@ -651,7 +635,7 @@ You can pass any property from the [Button](/docs/components/button) component t
 collapse: true
 prettier: true
 hide:
-  - autofocus
+  - filter.autofocus
 ignore:
   - close.color
   - close.variant
@@ -663,7 +647,8 @@ externalTypes:
   - CommandPaletteGroup[]
 class: '!p-0'
 props:
-  autofocus: false
+  filter:
+    autofocus: false
   close:
     color: primary
     variant: outline
@@ -689,7 +674,7 @@ Use the `close-icon` prop to customize the close button [Icon](/docs/components/
 ---
 collapse: true
 hide:
-  - autofocus
+  - filter.autofocus
 ignore:
   - class
   - groups
@@ -700,7 +685,8 @@ externalTypes:
   - CommandPaletteGroup[]
 class: '!p-0'
 props:
-  autofocus: false
+  filter:
+    autofocus: false
   close: true
   closeIcon: 'i-lucide-arrow-right'
   groups:
@@ -739,7 +725,7 @@ You can pass any property from the [Button](/docs/components/button) component t
 collapse: true
 prettier: true
 hide:
-  - autofocus
+  - filter.autofocus
 ignore:
   - back.color
   - groups
@@ -750,7 +736,8 @@ externalTypes:
   - CommandPaletteGroup[]
 class: '!p-0'
 props:
-  autofocus: false
+  filter:
+    autofocus: false
   back:
     color: primary
   groups:
@@ -777,7 +764,7 @@ Use the `back-icon` prop to customize the back button [Icon](/docs/components/ic
 ---
 collapse: true
 hide:
-  - autofocus
+  - filter.autofocus
 ignore:
   - class
   - groups
@@ -788,7 +775,8 @@ externalTypes:
   - CommandPaletteGroup[]
 class: '!p-0'
 props:
-  autofocus: false
+  filter:
+    autofocus: false
   back: true
   backIcon: 'i-lucide-house'
   groups:
@@ -827,7 +815,7 @@ Use the `disabled` prop to disable the CommandPalette.
 ---
 collapse: true
 hide:
-  - autofocus
+  - filter.autofocus
 ignore:
   - groups
   - class
@@ -837,7 +825,8 @@ externalTypes:
   - CommandPaletteGroup[]
 class: '!p-0'
 props:
-  autofocus: false
+  filter:
+    autofocus: false
   disabled: true
   groups:
     - id: 'apps'
@@ -864,7 +853,8 @@ collapse: true
 name: 'command-palette-select-example'
 class: '!p-0'
 props:
-  autofocus: false
+  filter:
+    autofocus: false
 ---
 ::
 
@@ -882,7 +872,8 @@ collapse: true
 name: 'command-palette-search-term-example'
 class: '!p-0'
 props:
-  autofocus: false
+  filter:
+    autofocus: false
 ---
 ::
 
@@ -901,7 +892,8 @@ prettier: true
 name: 'command-palette-items-children-example'
 class: '!p-0'
 props:
-  autofocus: false
+  filter:
+    autofocus: false
 ---
 ::
 
@@ -922,7 +914,8 @@ collapse: true
 name: 'command-palette-fetch-example'
 class: '!p-0'
 props:
-  autofocus: false
+  filter:
+    autofocus: false
 ---
 ::
 
@@ -940,7 +933,8 @@ collapse: true
 name: 'command-palette-ignore-filter-example'
 class: '!p-0'
 props:
-  autofocus: false
+  filter:
+    autofocus: false
 ---
 ::
 
@@ -962,7 +956,8 @@ collapse: true
 name: 'command-palette-post-filter-example'
 class: '!p-0'
 props:
-  autofocus: false
+  filter:
+    autofocus: false
 ---
 ::
 
@@ -998,7 +993,8 @@ collapse: true
 name: 'command-palette-fuse-example'
 class: '!p-0'
 props:
-  autofocus: false
+  filter:
+    autofocus: false
 ---
 ::
 
@@ -1016,7 +1012,8 @@ collapse: true
 name: 'command-palette-virtualize-example'
 class: '!p-0'
 props:
-  autofocus: false
+  filter:
+    autofocus: false
 ---
 ::
 
@@ -1029,7 +1026,8 @@ You can use the CommandPalette component inside a [Popover](/docs/components/pop
 collapse: true
 name: 'popover-command-palette-example'
 props:
-  autofocus: false
+  filter:
+    autofocus: false
 ---
 ::
 
@@ -1042,7 +1040,8 @@ You can use the CommandPalette component inside a [Modal](/docs/components/modal
 collapse: true
 name: 'modal-command-palette-example'
 props:
-  autofocus: false
+  filter:
+    autofocus: false
 ---
 ::
 
@@ -1059,7 +1058,8 @@ You can use the CommandPalette component inside a [Drawer](/docs/components/draw
 collapse: true
 name: 'drawer-command-palette-example'
 props:
-  autofocus: false
+  filter:
+    autofocus: false
 ---
 ::
 
@@ -1076,7 +1076,8 @@ When using the `close` prop, you can listen to the `update:open` event when the 
 collapse: true
 name: 'command-palette-open-example'
 props:
-  autofocus: false
+  filter:
+    autofocus: false
 ---
 ::
 
@@ -1094,7 +1095,8 @@ collapse: true
 name: 'command-palette-footer-slot-example'
 class: '!p-0'
 props:
-  autofocus: false
+  filter:
+    autofocus: false
 ---
 ::
 
@@ -1120,7 +1122,8 @@ collapse: true
 name: 'command-palette-custom-slot-example'
 class: '!p-0'
 props:
-  autofocus: false
+  filter:
+    autofocus: false
 ---
 ::
 

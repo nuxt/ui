@@ -4,7 +4,7 @@ export default defineTheme({
   slots: {
     modal: '',
     // The search keeps the larger text of a field on every breakpoint
-    input: '[--ui-control-text-step:0.125rem]'
+    filter: '[--ui-control-text-step:0.125rem]'
   },
   variants: {
     fullscreen: {

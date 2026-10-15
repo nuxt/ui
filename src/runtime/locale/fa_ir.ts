@@ -71,9 +71,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'بازگشت',
       close: 'بستن',
+      filterPlaceholder: 'یک دستور وارد کنید یا جستجو کنید…',
       noData: 'داده‌ای موجود نیست',
       noMatch: 'داده‌ای یافت نشد',
-      placeholder: 'یک دستور وارد کنید یا جستجو کنید…',
       results: 'نتایج'
     },
     contentSearch: {
@@ -88,8 +88,8 @@ export default defineLocale<Messages>({
       title: 'در این صفحه'
     },
     dropdownMenu: {
-      noMatch: 'داده‌ای یافت نشد',
-      search: 'جستجو…'
+      filterPlaceholder: 'جستجو…',
+      noMatch: 'داده‌ای یافت نشد'
     },
     dashboardSearch: {
       theme: 'تم'
@@ -151,9 +151,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'منطقه زمانی'
     },
     listbox: {
+      filterPlaceholder: 'جستجو…',
       noData: 'داده‌ای موجود نیست',
-      noMatch: 'داده‌ای یافت نشد',
-      search: 'جستجو…'
+      noMatch: 'داده‌ای یافت نشد'
     },
     modal: {
       close: 'بستن'
@@ -196,9 +196,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'ایجاد "{label}"',
+      filterPlaceholder: 'جستجو…',
       noData: 'داده‌ای موجود نیست',
-      noMatch: 'داده‌ای یافت نشد',
-      search: 'جستجو…'
+      noMatch: 'داده‌ای یافت نشد'
     },
     skeleton: {
       label: 'در حال بارگذاری'

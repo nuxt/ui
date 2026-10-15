@@ -70,9 +70,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Πίσω',
       close: 'Κλείσιμο',
+      filterPlaceholder: 'Πληκτρολογήστε μια εντολή ή αναζητήστε…',
       noData: 'Δεν υπάρχουν δεδομένα',
       noMatch: 'Δεν βρέθηκαν δεδομένα',
-      placeholder: 'Πληκτρολογήστε μια εντολή ή αναζητήστε…',
       results: 'Αποτελέσματα'
     },
     contentSearch: {
@@ -87,8 +87,8 @@ export default defineLocale<Messages>({
       title: 'Σε αυτή τη σελίδα'
     },
     dropdownMenu: {
-      noMatch: 'Δεν βρέθηκαν δεδομένα',
-      search: 'Αναζήτηση…'
+      filterPlaceholder: 'Αναζήτηση…',
+      noMatch: 'Δεν βρέθηκαν δεδομένα'
     },
     dashboardSearch: {
       theme: 'Θέμα'
@@ -150,9 +150,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'ζώνη ώρας'
     },
     listbox: {
+      filterPlaceholder: 'Αναζήτηση…',
       noData: 'Δεν υπάρχουν δεδομένα',
-      noMatch: 'Δεν βρέθηκαν δεδομένα',
-      search: 'Αναζήτηση…'
+      noMatch: 'Δεν βρέθηκαν δεδομένα'
     },
     modal: {
       close: 'Κλείσιμο'
@@ -195,9 +195,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Δημιουργία "{label}"',
+      filterPlaceholder: 'Αναζήτηση…',
       noData: 'Δεν υπάρχουν δεδομένα',
-      noMatch: 'Δεν βρέθηκαν δεδομένα',
-      search: 'Αναζήτηση…'
+      noMatch: 'Δεν βρέθηκαν δεδομένα'
     },
     skeleton: {
       label: 'φόρτωση'

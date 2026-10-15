@@ -70,9 +70,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Бозгашт',
       close: 'Бастан',
+      filterPlaceholder: 'Фармонро нависед ё ҷустуҷӯ кунед…',
       noData: 'Маълумот нест',
       noMatch: 'Маълумоти мувофиқ ёфт нашуд',
-      placeholder: 'Фармонро нависед ё ҷустуҷӯ кунед…',
       results: 'Натиҷаҳо'
     },
     contentSearch: {
@@ -87,8 +87,8 @@ export default defineLocale<Messages>({
       title: 'Мундариҷа'
     },
     dropdownMenu: {
-      noMatch: 'Маълумоти мувофиқ ёфт нашуд',
-      search: 'Ҷустуҷӯ…'
+      filterPlaceholder: 'Ҷустуҷӯ…',
+      noMatch: 'Маълумоти мувофиқ ёфт нашуд'
     },
     dashboardSearch: {
       theme: 'Мавзӯъ'
@@ -150,9 +150,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'минтақаи вақт'
     },
     listbox: {
+      filterPlaceholder: 'Ҷустуҷӯ…',
       noData: 'Маълумот нест',
-      noMatch: 'Маълумоти мувофиқ ёфт нашуд',
-      search: 'Ҷустуҷӯ…'
+      noMatch: 'Маълумоти мувофиқ ёфт нашуд'
     },
     modal: {
       close: 'Бастан'
@@ -195,9 +195,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: '"{label}" созед',
+      filterPlaceholder: 'Ҷустуҷӯ…',
       noData: 'Маълумот нест',
-      noMatch: 'Маълумоти мувофиқ ёфт нашуд',
-      search: 'Ҷустуҷӯ…'
+      noMatch: 'Маълумоти мувофиқ ёфт нашуд'
     },
     skeleton: {
       label: 'боргирӣ'

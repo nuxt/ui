@@ -44,7 +44,6 @@ const items = [
   <Matrix v-slot="props" :attrs="attrs" container-class="w-48">
     <UListbox
       v-model="value"
-      autofocus
       :items="virtualize ? virtualItems : items"
       :filter="filter"
       :disabled="disabled"

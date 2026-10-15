@@ -16,7 +16,7 @@ import { useThemeConfig } from '../../composables/useComponentProps'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<ColorModeSelectProps>(), {
-  searchInput: false
+  filter: false
 })
 
 const { t } = useLocale()

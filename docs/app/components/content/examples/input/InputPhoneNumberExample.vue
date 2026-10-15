@@ -38,7 +38,7 @@ watch(countryCode, () => {
       v-model="countryCode"
       :items="phoneCodes"
       value-key="code"
-      :search-input="{
+      :filter="{
         placeholder: 'Search country...',
         icon: 'i-lucide-search',
         loading: status === 'pending'

@@ -70,9 +70,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Înapoi',
       close: 'Închide',
+      filterPlaceholder: 'Tastează o comandă sau caută…',
       noData: 'Nu există date',
       noMatch: 'Nu există date corespunzătoare',
-      placeholder: 'Tastează o comandă sau caută…',
       results: 'Rezultate'
     },
     contentSearch: {
@@ -87,8 +87,8 @@ export default defineLocale<Messages>({
       title: 'Pe această pagină'
     },
     dropdownMenu: {
-      noMatch: 'Nu există date corespunzătoare',
-      search: 'Caută…'
+      filterPlaceholder: 'Caută…',
+      noMatch: 'Nu există date corespunzătoare'
     },
     dashboardSearch: {
       theme: 'Temă'
@@ -150,9 +150,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'fus orar'
     },
     listbox: {
+      filterPlaceholder: 'Caută…',
       noData: 'Nu există date',
-      noMatch: 'Nu există date corespunzătoare',
-      search: 'Caută…'
+      noMatch: 'Nu există date corespunzătoare'
     },
     modal: {
       close: 'Închide'
@@ -195,9 +195,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Creează "{label}"',
+      filterPlaceholder: 'Caută…',
       noData: 'Nu există date',
-      noMatch: 'Nu există date corespunzătoare',
-      search: 'Caută…'
+      noMatch: 'Nu există date corespunzătoare'
     },
     skeleton: {
       label: 'se încarcă'

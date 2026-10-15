@@ -455,10 +455,16 @@ const generateComponentCode = ({
     }
 
     if (typeof value === 'object') {
+      // A hidden key of an object prop, like `filter.autofocus`, is left out of the code
+      const entries = Array.isArray(value) ? [] : Object.entries(value)
+      const visibleEntries = entries.filter(([subKey]) => !hide.includes(`${key}.${subKey}`))
+      if (entries.length && !visibleEntries.length && !externalSet.has(key)) continue
+
       if (externalSet.has(key)) {
         propAttributes.push(`:${name}="${key}"`)
       } else {
-        propAttributes.push(`:${name}="${stringifyValue(value, '\'')}"`)
+        const visibleValue = visibleEntries.length < entries.length ? Object.fromEntries(visibleEntries) : value
+        propAttributes.push(`:${name}="${stringifyValue(visibleValue, '\'')}"`)
       }
       continue
     }

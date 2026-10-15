@@ -70,9 +70,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Indietro',
       close: 'Chiudi',
+      filterPlaceholder: 'Digita un comando o cerca…',
       noData: 'Nessun dato',
       noMatch: 'Nessun dato corrispondente',
-      placeholder: 'Digita un comando o cerca…',
       results: 'Risultati'
     },
     contentSearch: {
@@ -87,8 +87,8 @@ export default defineLocale<Messages>({
       title: 'In questa pagina'
     },
     dropdownMenu: {
-      noMatch: 'Nessun dato corrispondente',
-      search: 'Cerca…'
+      filterPlaceholder: 'Cerca…',
+      noMatch: 'Nessun dato corrispondente'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -150,9 +150,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'fuso orario'
     },
     listbox: {
+      filterPlaceholder: 'Cerca…',
       noData: 'Nessun dato',
-      noMatch: 'Nessun dato corrispondente',
-      search: 'Cerca…'
+      noMatch: 'Nessun dato corrispondente'
     },
     modal: {
       close: 'Chiudi'
@@ -195,9 +195,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Crea "{label}"',
+      filterPlaceholder: 'Cerca…',
       noData: 'Nessun dato',
-      noMatch: 'Nessun dato corrispondente',
-      search: 'Cerca…'
+      noMatch: 'Nessun dato corrispondente'
     },
     skeleton: {
       label: 'caricamento'

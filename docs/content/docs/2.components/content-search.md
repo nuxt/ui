@@ -18,7 +18,7 @@ This component is only available when the `@nuxt/content` module is installed.
 
 ## Usage
 
-The ContentSearch component extends the [CommandPalette](/docs/components/command-palette) component with built-in [`@nuxt/content`](https://content.nuxt.com) search support, navigation grouping and color mode commands. It supports both client-side [Fuse.js](https://www.fusejs.io/) filtering and server-side [FTS5 full-text search](https://www.sqlite.org/fts5.html). You can pass any CommandPalette property such as `icon`, `placeholder`, etc.
+The ContentSearch component extends the [CommandPalette](/docs/components/command-palette) component with built-in [`@nuxt/content`](https://content.nuxt.com) search support, navigation grouping and color mode commands. It supports both client-side [Fuse.js](https://www.fusejs.io/) filtering and server-side [FTS5 full-text search](https://www.sqlite.org/fts5.html). You can pass any CommandPalette property such as `filter`, `back`, etc.
 
 ::component-example
 ---

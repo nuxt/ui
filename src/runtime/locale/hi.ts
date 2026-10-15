@@ -70,9 +70,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'वापस',
       close: 'बंद करें',
+      filterPlaceholder: 'एक आदेश या खोज टाइप करें…',
       noData: 'कोई डेटा नहीं',
       noMatch: 'कोई मेल खाता डेटा नहीं',
-      placeholder: 'एक आदेश या खोज टाइप करें…',
       results: 'परिणाम'
     },
     contentSearch: {
@@ -87,8 +87,8 @@ export default defineLocale<Messages>({
       title: 'इस पृष्ठ पर'
     },
     dropdownMenu: {
-      noMatch: 'कोई मेल खाता डेटा नहीं',
-      search: 'खोजें…'
+      filterPlaceholder: 'खोजें…',
+      noMatch: 'कोई मेल खाता डेटा नहीं'
     },
     dashboardSearch: {
       theme: 'थीम'
@@ -150,9 +150,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'समय क्षेत्र'
     },
     listbox: {
+      filterPlaceholder: 'खोजें…',
       noData: 'कोई डेटा नहीं',
-      noMatch: 'कोई मेल खाता डेटा नहीं',
-      search: 'खोजें…'
+      noMatch: 'कोई मेल खाता डेटा नहीं'
     },
     modal: {
       close: 'बंद करें'
@@ -195,9 +195,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: '"{label}" बनाएँ',
+      filterPlaceholder: 'खोजें…',
       noData: 'कोई डेटा नहीं',
-      noMatch: 'कोई मेल खाता डेटा नहीं',
-      search: 'खोजें…'
+      noMatch: 'कोई मेल खाता डेटा नहीं'
     },
     skeleton: {
       label: 'लोड हो रहा है'
