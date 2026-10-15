@@ -110,8 +110,9 @@
   --text-color-info: var(--ui-info-text-strong, var(--ui-info-text-default, var(--ui-info)));
   --text-color-warning: var(--ui-warning-text-strong, var(--ui-warning-text-default, var(--ui-warning)));
   --text-color-error: var(--ui-error-text-strong, var(--ui-error-text-default, var(--ui-error)));
-  --text-color-neutral: var(--ui-neutral-text-strong, var(--ui-neutral));
-  --text-color-accent: var(--ui-accent-text-strong, var(--ui-accent));
+  --text-color-neutral: var(--ui-neutral-text-strong, var(--ui-text-strong));
+  --text-color-accent: var(--ui-accent-text-strong, var(--ui-accent-text-default, var(--ui-accent)));
+  --text-color-accent-strong: var(--ui-accent-text-strong, var(--ui-accent-text-default, var(--ui-accent)));
   --text-color-accent-default: var(--ui-accent-text-default, var(--ui-accent));
   --text-color-accent-muted: var(--ui-accent-text-muted, color-mix(in oklab, var(--ui-accent-text-default, var(--ui-accent)) 75%, transparent));
   --text-color-accent-faint: var(--ui-accent-text-faint, color-mix(in oklab, var(--ui-accent-text-default, var(--ui-accent)) 50%, transparent));

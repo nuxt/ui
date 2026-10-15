@@ -166,8 +166,8 @@ describe('colors plugin', () => {
     const gray = await build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: neutral 900 50; }')
     expect(gray).toContain(':root, :host, .light, .dark {')
     expect(gray).toContain('--ui-primary-bg-soft: var(--ui-bg-soft);')
-    // its text is the solid, like neutral's
-    expect(gray).toContain('--ui-primary-text-strong: var(--ui-primary);')
+    // its strong text is `text-strong`, like neutral's
+    expect(gray).toContain('--ui-primary-text-strong: var(--ui-text-strong);')
     // neutral's hover mixes the color itself, so primary's mixes primary
     expect(gray).toContain('--ui-primary-bg-hover: color-mix(in oklab, var(--ui-primary) 90%, transparent);')
     // a role neutral leaves to its recipe stays on it
