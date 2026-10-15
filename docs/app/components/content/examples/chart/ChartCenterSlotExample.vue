@@ -17,7 +17,7 @@ const data = [
     aria-label="Visitors by browser"
   >
     <template #center>
-      <span class="text-2xl font-semibold text-highlighted">835</span>
+      <span class="text-2xl font-semibold text-strong">835</span>
       <span class="text-xs text-muted">Visitors</span>
     </template>
   </UChart>

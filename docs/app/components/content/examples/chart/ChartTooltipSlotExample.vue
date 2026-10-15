@@ -27,7 +27,7 @@ function profit(month?: string) {
     aria-label="Revenue and expenses"
   >
     <template #tooltip="{ title, rows }">
-      <p class="font-medium text-highlighted">
+      <p class="font-medium text-strong">
         {{ title }}
       </p>
 
