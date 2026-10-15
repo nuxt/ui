@@ -7,6 +7,7 @@ import { renderEach } from '../component-render'
 import { UCheckbox, UButton, UBadge, UDropdownMenu } from '#components'
 import Table from '../../src/runtime/components/Table.vue'
 import type { TableColumn, TableRow } from '../../src/runtime/components/Table.vue'
+import type { Virtualizer } from '@tanstack/vue-virtual'
 import theme from '#build/ui/table'
 
 async function triggerKeydown(element: Element, init: KeyboardEventInit) {
@@ -576,5 +577,117 @@ describe('Table', () => {
     })
 
     expect(expanded.findAll('td').find(td => td.text() === 'Expanded slot')?.attributes('colspan')).toBe(visibleColumns)
+  })
+
+  it.each([
+    ['default index attribute', undefined, 'data-index'],
+    ['custom index attribute', 'data-row-index', 'data-row-index']
+  ])('measures virtualized rows with %s', async (_name: string, indexAttribute: string | undefined, attribute: string) => {
+    const measureElement = vi.fn(() => 50)
+
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data,
+        // jsdom has no layout, so give the virtualizer a viewport to render rows into
+        virtualize: { observeElementRect: (_, cb) => cb({ width: 1000, height: 500 }), measureElement, indexAttribute }
+      },
+      attachTo: document.body
+    })
+    await flushPromises()
+
+    const rows = wrapper.findAll(`tbody tr[${attribute}]`)
+
+    expect(rows.length).toBe(data.length)
+    expect(rows.map(row => row.attributes(attribute))).toEqual(data.map((_, index) => String(index)))
+    expect(rows.every(row => !row.attributes('style')?.includes('height'))).toBe(true)
+    expect(measureElement).toHaveBeenCalled()
+
+    wrapper.unmount()
+  })
+
+  it.each([
+    ['default item key', false],
+    ['custom item key', true]
+  ])('keeps measured heights with their rows when sorting virtualized rows with %s', async (_name: string, customKey: boolean) => {
+    // Give each row its own height, read from the id it renders
+    const heights = Object.fromEntries(data.map((row, index) => [row.id, 40 + index * 10]))
+    const measureElement = (el: Element) => heights[data.find(row => el.textContent?.includes(row.id))!.id]!
+    const sorted = data.map((row, index) => ({ ...row, index })).sort((a, b) => b.amount - a.amount)
+    // A custom key with a stable reference that reads the current order
+    let order = data.map((_, index) => index)
+    const getItemKey = customKey ? (index: number) => `key-${order[index]}` : undefined
+    let virtualizer: Virtualizer<Element, Element> | undefined
+
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data,
+        virtualize: {
+          observeElementRect: (_, cb) => cb({ width: 1000, height: 500 }),
+          measureElement,
+          getItemKey,
+          onChange: (instance) => {
+            virtualizer = instance
+          }
+        }
+      },
+      attachTo: document.body
+    })
+    await flushPromises()
+
+    order = sorted.map(row => row.index)
+    await wrapper.setProps({ sorting: [{ id: 'amount', desc: true }] })
+    await flushPromises()
+
+    const items = virtualizer!.getVirtualItems()
+
+    expect(items.map(item => item.key)).toEqual(sorted.map(row => customKey ? `key-${row.index}` : String(row.index)))
+    expect(items.map(item => item.size)).toEqual(sorted.map(row => heights[row.id]))
+
+    wrapper.unmount()
+  })
+
+  it.each([
+    ['default measurement', undefined, 40],
+    ['custom measurement', (el: Element) => el.hasAttribute('data-index') ? 30 : 0, 30]
+  ])('measures the expanded row along with its virtualized row with %s', async (_name: string, measureElement: ((el: Element) => number) | undefined, rowHeight: number) => {
+    // happy-dom has no layout: rows are 40px tall, expanded rows 100px
+    const offsetHeight = vi.spyOn(HTMLElement.prototype, 'offsetHeight', 'get').mockImplementation(function (this: HTMLElement) {
+      return this.tagName !== 'TR' ? 0 : this.hasAttribute('data-index') ? 40 : 100
+    })
+    let virtualizer: Virtualizer<Element, Element> | undefined
+
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data,
+        expanded: { 0: true },
+        virtualize: {
+          observeElementRect: (_, cb) => cb({ width: 1000, height: 500 }),
+          measureElement,
+          onChange: (instance) => {
+            virtualizer = instance
+          }
+        }
+      },
+      slots: { expanded: () => 'Expanded slot' },
+      attachTo: document.body
+    })
+    await flushPromises()
+
+    const sizes = () => virtualizer!.getVirtualItems().map(item => item.size - rowHeight)
+
+    expect(sizes()).toEqual([100, 0, 0, 0, 0])
+
+    await wrapper.setProps({ expanded: { 2: true } })
+    await flushPromises()
+
+    expect(sizes()).toEqual([0, 0, 100, 0, 0])
+
+    await wrapper.setProps({ expanded: {} })
+    await flushPromises()
+
+    expect(sizes()).toEqual([0, 0, 0, 0, 0])
+
+    wrapper.unmount()
+    offsetHeight.mockRestore()
   })
 })
