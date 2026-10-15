@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Хаах',
       noData: 'Мэдээлэл байхгүй',
       noMatch: 'Тохирох мэдээлэл олдсонгүй',
-      search: 'Комманд бичих эсвэл хайлт хийх…'
+      placeholder: 'Комманд бичих эсвэл хайлт хийх…'
     },
     contentSearch: {
       links: 'Холбоосууд',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Тохирох мэдээлэл олдсонгүй',
-      search: 'Хайх…'
+      placeholder: 'Хайх…'
     },
     dashboardSearch: {
       theme: 'Загвар'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Мэдээлэл байхгүй',
       noMatch: 'Тохирох мэдээлэл олдсонгүй',
-      search: 'Хайх…'
+      placeholder: 'Хайх…'
     },
     modal: {
       close: 'Хаах'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: '"{label}" үүсгэх',
       noData: 'Мэдээлэл байхгүй',
       noMatch: 'Тохирох мэдээлэл олдсонгүй',
-      search: 'Хайх…'
+      placeholder: 'Хайх…'
     },
     slideover: {
       close: 'Хаах'

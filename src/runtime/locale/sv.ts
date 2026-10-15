@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Stäng',
       noData: 'Inga data',
       noMatch: 'Inga matchande data',
-      search: 'Skriv ett kommando eller sök…'
+      placeholder: 'Skriv ett kommando eller sök…'
     },
     contentSearch: {
       links: 'Länkar',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Inga matchande data',
-      search: 'Sök…'
+      placeholder: 'Sök…'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Inga data',
       noMatch: 'Inga matchande data',
-      search: 'Sök…'
+      placeholder: 'Sök…'
     },
     modal: {
       close: 'Stäng'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: 'Skapa "{label}"',
       noData: 'Inga data',
       noMatch: 'Inga matchande data',
-      search: 'Sök…'
+      placeholder: 'Sök…'
     },
     slideover: {
       close: 'Stäng'

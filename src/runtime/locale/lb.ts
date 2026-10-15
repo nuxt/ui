@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Zoumaachen',
       noData: 'Keng Donnéeën',
       noMatch: 'Keng entspriechend Donnéeën',
-      search: 'Tippt e Befeel oder sicht…'
+      placeholder: 'Tippt e Befeel oder sicht…'
     },
     contentSearch: {
       links: 'Linken',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Keng entspriechend Donnéeën',
-      search: 'Sichen…'
+      placeholder: 'Sichen…'
     },
     dashboardSearch: {
       theme: 'Thema'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Keng Donnéeën',
       noMatch: 'Keng entspriechend Donnéeën',
-      search: 'Sichen…'
+      placeholder: 'Sichen…'
     },
     modal: {
       close: 'Zoumaachen'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: '"{label}" erstellen',
       noData: 'Keng Donnéeën',
       noMatch: 'Keng entspriechend Donnéeën',
-      search: 'Sichen…'
+      placeholder: 'Sichen…'
     },
     slideover: {
       close: 'Zoumaachen'

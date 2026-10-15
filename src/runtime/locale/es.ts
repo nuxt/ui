@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Cerrar',
       noData: 'Sin datos',
       noMatch: 'No hay datos coincidentes',
-      search: 'Escribe un comando o busca…'
+      placeholder: 'Escribe un comando o busca…'
     },
     contentSearch: {
       links: 'Enlaces',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'No hay datos coincidentes',
-      search: 'Buscar…'
+      placeholder: 'Buscar…'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Sin datos',
       noMatch: 'No hay datos coincidentes',
-      search: 'Buscar…'
+      placeholder: 'Buscar…'
     },
     modal: {
       close: 'Cerrar'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: 'Crear "{label}"',
       noData: 'Sin datos',
       noMatch: 'No hay datos coincidentes',
-      search: 'Buscar…'
+      placeholder: 'Buscar…'
     },
     slideover: {
       close: 'Cerrar'

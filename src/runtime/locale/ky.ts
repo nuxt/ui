@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Жабуу',
       noData: 'Маалымат жок',
       noMatch: 'Эч нерсе табылган жок',
-      search: 'Буйрук киргизиңиз же издөө…'
+      placeholder: 'Буйрук киргизиңиз же издөө…'
     },
     contentSearch: {
       links: 'Шилтемелер',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Сүйлөшкөн маалыматтар жок',
-      search: 'Издөө…'
+      placeholder: 'Издөө…'
     },
     dashboardSearch: {
       theme: 'Тема'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Маалымат жок',
       noMatch: 'Сүйлөшкөн маалыматтар жок',
-      search: 'Издөө…'
+      placeholder: 'Издөө…'
     },
     modal: {
       close: 'Жабуу'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: '"{label}" жасоо',
       noData: 'Маалымат жок',
       noMatch: 'Сүйлөшкөн маалыматтар жок',
-      search: 'Издөө…'
+      placeholder: 'Издөө…'
     },
     slideover: {
       close: 'Жабуу'

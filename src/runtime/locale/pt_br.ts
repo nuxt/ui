@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Fechar',
       noData: 'Nenhum dado',
       noMatch: 'Nenhum dado correspondente',
-      search: 'Digite um comando ou pesquise…'
+      placeholder: 'Digite um comando ou pesquise…'
     },
     contentSearch: {
       links: 'Links',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Nenhum dado correspondente',
-      search: 'Pesquisar…'
+      placeholder: 'Pesquisar…'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Nenhum dado',
       noMatch: 'Nenhum dado correspondente',
-      search: 'Pesquisar…'
+      placeholder: 'Pesquisar…'
     },
     modal: {
       close: 'Fechar'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: 'Criar "{label}"',
       noData: 'Nenhum dado',
       noMatch: 'Nenhum dado correspondente',
-      search: 'Pesquisar…'
+      placeholder: 'Pesquisar…'
     },
     slideover: {
       close: 'Fechar'

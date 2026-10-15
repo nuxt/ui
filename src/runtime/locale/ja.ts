@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: '閉じる',
       noData: 'データがありません',
       noMatch: '一致するデータがありません',
-      search: 'コマンドを入力するか検索…'
+      placeholder: 'コマンドを入力するか検索…'
     },
     contentSearch: {
       links: 'リンク',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: '一致するデータがありません',
-      search: '検索…'
+      placeholder: '検索…'
     },
     dashboardSearch: {
       theme: 'テーマ'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'データがありません',
       noMatch: '一致するデータがありません',
-      search: '検索…'
+      placeholder: '検索…'
     },
     modal: {
       close: '閉じる'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: '"{label}"を作成',
       noData: 'データがありません',
       noMatch: '一致するデータがありません',
-      search: '検索…'
+      placeholder: '検索…'
     },
     slideover: {
       close: '閉じる'

@@ -45,7 +45,7 @@ export type Messages = {
     close: string
     noData: string
     noMatch: string
-    search: string
+    placeholder: string
   }
   contentSearch: {
     description?: string
@@ -62,7 +62,7 @@ export type Messages = {
   }
   dropdownMenu: {
     noMatch: string
-    search: string
+    placeholder: string
   }
   dashboardSearch: {
     description?: string
@@ -111,7 +111,7 @@ export type Messages = {
   listbox: {
     noData: string
     noMatch: string
-    search: string
+    placeholder: string
   }
   modal: {
     close: string
@@ -158,7 +158,7 @@ export type Messages = {
     create: string
     noData: string
     noMatch: string
-    search: string
+    placeholder: string
   }
   slideover: {
     close: string

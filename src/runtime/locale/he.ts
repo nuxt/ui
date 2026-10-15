@@ -57,7 +57,7 @@ export default defineLocale<Messages>({
       close: 'סגור',
       noData: 'אין נתונים זמינים',
       noMatch: 'לא נמצאה התאמה',
-      search: 'הקלד פקודה…'
+      placeholder: 'הקלד פקודה…'
     },
     contentSearch: {
       links: 'קישורים',
@@ -72,7 +72,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'לא נמצאה התאמה',
-      search: 'חפש…'
+      placeholder: 'חפש…'
     },
     dashboardSearch: {
       theme: 'ערכת נושא'
@@ -113,7 +113,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'אין נתונים',
       noMatch: 'לא נמצאה התאמה',
-      search: 'חפש…'
+      placeholder: 'חפש…'
     },
     modal: {
       close: 'סגור'
@@ -155,7 +155,7 @@ export default defineLocale<Messages>({
       create: 'צור "{label}"',
       noData: 'אין נתונים',
       noMatch: 'לא נמצאה התאמה',
-      search: 'חפש…'
+      placeholder: 'חפש…'
     },
     slideover: {
       close: 'סגור'

@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Sluiten',
       noData: 'Geen gegevens',
       noMatch: 'Geen overeenkomende gegevens',
-      search: 'Typ een commando of zoek…'
+      placeholder: 'Typ een commando of zoek…'
     },
     contentSearch: {
       links: 'Links',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Geen overeenkomende gegevens',
-      search: 'Zoeken…'
+      placeholder: 'Zoeken…'
     },
     dashboardSearch: {
       theme: 'Thema'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Geen gegevens',
       noMatch: 'Geen overeenkomende gegevens',
-      search: 'Zoeken…'
+      placeholder: 'Zoeken…'
     },
     modal: {
       close: 'Sluiten'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: '"{label}" creëren',
       noData: 'Geen gegevens',
       noMatch: 'Geen overeenkomende gegevens',
-      search: 'Zoeken…'
+      placeholder: 'Zoeken…'
     },
     slideover: {
       close: 'Sluiten'

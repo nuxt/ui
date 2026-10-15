@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Schließen',
       noData: 'Keine Daten',
       noMatch: 'Nichts gefunden',
-      search: 'Geben Sie einen Befehl ein oder suchen Sie…'
+      placeholder: 'Geben Sie einen Befehl ein oder suchen Sie…'
     },
     contentSearch: {
       links: 'Links',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Nichts gefunden',
-      search: 'Suchen…'
+      placeholder: 'Suchen…'
     },
     dashboardSearch: {
       theme: 'Thema'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Keine Daten',
       noMatch: 'Nichts gefunden',
-      search: 'Suchen…'
+      placeholder: 'Suchen…'
     },
     modal: {
       close: 'Schließen'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: '"{label}" erstellen',
       noData: 'Keine Daten',
       noMatch: 'Nichts gefunden',
-      search: 'Suchen…'
+      placeholder: 'Suchen…'
     },
     slideover: {
       close: 'Schließen'

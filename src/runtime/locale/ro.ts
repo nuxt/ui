@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Închide',
       noData: 'Nu există date',
       noMatch: 'Nu există date corespunzătoare',
-      search: 'Tastează o comandă sau caută…'
+      placeholder: 'Tastează o comandă sau caută…'
     },
     contentSearch: {
       links: 'Linkuri',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Nu există date corespunzătoare',
-      search: 'Caută…'
+      placeholder: 'Caută…'
     },
     dashboardSearch: {
       theme: 'Temă'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Nu există date',
       noMatch: 'Nu există date corespunzătoare',
-      search: 'Caută…'
+      placeholder: 'Caută…'
     },
     modal: {
       close: 'Închide'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: 'Creează "{label}"',
       noData: 'Nu există date',
       noMatch: 'Nu există date corespunzătoare',
-      search: 'Caută…'
+      placeholder: 'Caută…'
     },
     slideover: {
       close: 'Închide'

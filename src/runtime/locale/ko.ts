@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: '닫기',
       noData: '데이터가 없습니다.',
       noMatch: '일치하는 데이터가 없습니다.',
-      search: '명령을 입력하거나 검색…'
+      placeholder: '명령을 입력하거나 검색…'
     },
     contentSearch: {
       links: '링크',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: '일치하는 데이터가 없습니다.',
-      search: '검색…'
+      placeholder: '검색…'
     },
     dashboardSearch: {
       theme: '테마'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: '데이터가 없습니다.',
       noMatch: '일치하는 데이터가 없습니다.',
-      search: '검색…'
+      placeholder: '검색…'
     },
     modal: {
       close: '닫기'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: '"{label}" 생성',
       noData: '데이터가 없습니다.',
       noMatch: '일치하는 데이터가 없습니다.',
-      search: '검색…'
+      placeholder: '검색…'
     },
     slideover: {
       close: '닫기'

@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'বন্ধ করুন',
       noData: 'কোন তথ্য নেই',
       noMatch: 'কোন মিল পাওয়া যায়নি',
-      search: 'কমান্ড টাইপ করুন বা অনুসন্ধান করুন…'
+      placeholder: 'কমান্ড টাইপ করুন বা অনুসন্ধান করুন…'
     },
     contentSearch: {
       links: 'লিংকসমূহ',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'কোন মিল পাওয়া যায়নি',
-      search: 'অনুসন্ধান করুন…'
+      placeholder: 'অনুসন্ধান করুন…'
     },
     dashboardSearch: {
       theme: 'থিম'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'কোন তথ্য নেই',
       noMatch: 'কোন মিল পাওয়া যায়নি',
-      search: 'অনুসন্ধান করুন…'
+      placeholder: 'অনুসন্ধান করুন…'
     },
     modal: {
       close: 'বন্ধ করুন'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: '"{label}" তৈরি করুন',
       noData: 'কোন তথ্য নেই',
       noMatch: 'কোন মিল পাওয়া যায়নি',
-      search: 'অনুসন্ধান করুন…'
+      placeholder: 'অনুসন্ধান করুন…'
     },
     slideover: {
       close: 'বন্ধ করুন'

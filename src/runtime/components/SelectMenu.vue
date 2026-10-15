@@ -290,7 +290,7 @@ const virtualizerProps = toRef(() => {
     estimateSize: getEstimateSize(filteredItems.value, size.value ?? 'md', props.descriptionKey as string, !!slots['item-description'])
   })
 })
-const filterProps = toRef(() => defu(props.filter, { placeholder: t('selectMenu.search'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
+const filterProps = toRef(() => defu(props.filter, { placeholder: t('selectMenu.placeholder'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
 
 const { emitFormBlur, emitFormFocus, emitFormInput, emitFormChange, size: formFieldSize, color: formFieldColor, id, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<InputProps>(_props)
 

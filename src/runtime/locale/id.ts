@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Tutup',
       noData: 'Tidak ada data',
       noMatch: 'Tidak ada data yang cocok',
-      search: 'Ketik perintah atau cari…'
+      placeholder: 'Ketik perintah atau cari…'
     },
     contentSearch: {
       links: 'Tautan',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Tidak ada data yang cocok',
-      search: 'Cari…'
+      placeholder: 'Cari…'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Tidak ada data',
       noMatch: 'Tidak ada data yang cocok',
-      search: 'Cari…'
+      placeholder: 'Cari…'
     },
     modal: {
       close: 'Tutup'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: 'Buat "{label}"',
       noData: 'Tidak ada data',
       noMatch: 'Tidak ada data yang cocok',
-      search: 'Cari…'
+      placeholder: 'Cari…'
     },
     slideover: {
       close: 'Tutup'

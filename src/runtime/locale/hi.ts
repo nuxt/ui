@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'बंद करें',
       noData: 'कोई डेटा नहीं',
       noMatch: 'कोई मेल खाता डेटा नहीं',
-      search: 'एक आदेश या खोज टाइप करें…'
+      placeholder: 'एक आदेश या खोज टाइप करें…'
     },
     contentSearch: {
       links: 'लिंक्स',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'कोई मेल खाता डेटा नहीं',
-      search: 'खोजें…'
+      placeholder: 'खोजें…'
     },
     dashboardSearch: {
       theme: 'थीम'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'कोई डेटा नहीं',
       noMatch: 'कोई मेल खाता डेटा नहीं',
-      search: 'खोजें…'
+      placeholder: 'खोजें…'
     },
     modal: {
       close: 'बंद करें'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: '"{label}" बनाएँ',
       noData: 'कोई डेटा नहीं',
       noMatch: 'कोई मेल खाता डेटा नहीं',
-      search: 'खोजें…'
+      placeholder: 'खोजें…'
     },
     slideover: {
       close: 'बंद करें'

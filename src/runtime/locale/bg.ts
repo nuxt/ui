@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Затворете',
       noData: 'Няма данни',
       noMatch: 'Няма съвпадение на данни',
-      search: 'Въведете команда или потърсете…'
+      placeholder: 'Въведете команда или потърсете…'
     },
     contentSearch: {
       links: 'Връзки',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Няма съвпадение на данни',
-      search: 'Потърсете…'
+      placeholder: 'Потърсете…'
     },
     dashboardSearch: {
       theme: 'Тема'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Няма данни',
       noMatch: 'Няма съвпадение на данни',
-      search: 'Потърсете…'
+      placeholder: 'Потърсете…'
     },
     modal: {
       close: 'Затворете'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: 'Създайте "{label}"',
       noData: 'Няма данни',
       noMatch: 'Няма съвпадение на данни',
-      search: 'Потърсете…'
+      placeholder: 'Потърсете…'
     },
     slideover: {
       close: 'Затворете'

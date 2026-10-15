@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Փակել',
       noData: 'Տվյալներ չկան',
       noMatch: 'Համընկնումներ չեն գտնվել',
-      search: 'Մուտքագրեք հրաման կամ որոնեք…'
+      placeholder: 'Մուտքագրեք հրաման կամ որոնեք…'
     },
     contentSearch: {
       links: 'Հղումներ',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Համընկնումներ չեն գտնվել',
-      search: 'Որոնում…'
+      placeholder: 'Որոնում…'
     },
     dashboardSearch: {
       theme: 'Թեմա'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Տվյալներ չկան',
       noMatch: 'Համընկնումներ չեն գտնվել',
-      search: 'Որոնում…'
+      placeholder: 'Որոնում…'
     },
     modal: {
       close: 'Փակել'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: 'Ստեղծել "{label}"',
       noData: 'Տվյալներ չկան',
       noMatch: 'Համընկնումներ չեն գտնվել',
-      search: 'Որոնում…'
+      placeholder: 'Որոնում…'
     },
     slideover: {
       close: 'Փակել'

@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'დახურვა',
       noData: 'მონაცემები არ არის',
       noMatch: 'შესატყვისი მონაცემები არ არის',
-      search: 'ჩაწერეთ ბრძანება ან ძიება…'
+      placeholder: 'ჩაწერეთ ბრძანება ან ძიება…'
     },
     contentSearch: {
       links: 'ბმულები',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'შესატყვისი მონაცემები არ არის',
-      search: 'ძიება…'
+      placeholder: 'ძიება…'
     },
     dashboardSearch: {
       theme: 'თემა'
@@ -114,7 +114,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'მონაცემები არ არის',
       noMatch: 'შესატყვისი მონაცემები არ არის',
-      search: 'ძიება…'
+      placeholder: 'ძიება…'
     },
     modal: {
       close: 'დახურვა'
@@ -156,7 +156,7 @@ export default defineLocale<Messages>({
       create: 'დაამატე "{label}"', // "Create" translates as "შექმნა", but since we are simply adding new choice, creating sounds wrong, thus I chose to use "დაამატე", meaning "add".
       noData: 'მონაცემები არ არის',
       noMatch: 'შესატყვისი მონაცემები არ არის',
-      search: 'ძიება…'
+      placeholder: 'ძიება…'
     },
     slideover: {
       close: 'დახურვა'

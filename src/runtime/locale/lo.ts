@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'ປິດ',
       noData: 'ບໍ່ມີຂໍ້ມູນ',
       noMatch: 'ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ',
-      search: 'ພິມຄຳສັ່ງ ຫຼື ຄົ້ນຫາ…'
+      placeholder: 'ພິມຄຳສັ່ງ ຫຼື ຄົ້ນຫາ…'
     },
     contentSearch: {
       links: 'ລິ້ງ',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ',
-      search: 'ຄົ້ນຫາ…'
+      placeholder: 'ຄົ້ນຫາ…'
     },
     dashboardSearch: {
       theme: 'ທີມ'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'ບໍ່ມີຂໍ້ມູນ',
       noMatch: 'ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ',
-      search: 'ຄົ້ນຫາ…'
+      placeholder: 'ຄົ້ນຫາ…'
     },
     modal: {
       close: 'ປິດ'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: 'ສ້າງ "{label}"',
       noData: 'ບໍ່ມີຂໍ້ມູນ',
       noMatch: 'ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ',
-      search: 'ຄົ້ນຫາ…'
+      placeholder: 'ຄົ້ນຫາ…'
     },
     slideover: {
       close: 'ປິດ'

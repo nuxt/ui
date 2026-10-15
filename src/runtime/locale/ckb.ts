@@ -57,7 +57,7 @@ export default defineLocale<Messages>({
       close: 'داخستن',
       noData: 'هیچ داتایەک نییە',
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
-      search: 'فەرمانێک بنووسە یان بگەڕێ…'
+      placeholder: 'فەرمانێک بنووسە یان بگەڕێ…'
     },
     contentSearch: {
       links: 'بەستەرەکان',
@@ -72,7 +72,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
-      search: 'گەڕان…'
+      placeholder: 'گەڕان…'
     },
     dashboardSearch: {
       theme: 'ڕووکار'
@@ -113,7 +113,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'هیچ داتایەک نییە',
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
-      search: 'گەڕان…'
+      placeholder: 'گەڕان…'
     },
     modal: {
       close: 'داخستن'
@@ -155,7 +155,7 @@ export default defineLocale<Messages>({
       create: '"{label}" زیادکردنی',
       noData: 'هیچ داتایەک نییە',
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
-      search: 'گەڕان…'
+      placeholder: 'گەڕان…'
     },
     slideover: {
       close: 'داخستن'

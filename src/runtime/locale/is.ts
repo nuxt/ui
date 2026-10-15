@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Loka',
       noData: 'Engin gögn',
       noMatch: 'Engin gögn fundust',
-      search: 'Sláðu inn skipun eða leitaðu…'
+      placeholder: 'Sláðu inn skipun eða leitaðu…'
     },
     contentSearch: {
       links: 'Tenglar',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Engin gögn fundust',
-      search: 'Leita…'
+      placeholder: 'Leita…'
     },
     dashboardSearch: {
       theme: 'Þema'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Engin gögn',
       noMatch: 'Engin gögn fundust',
-      search: 'Leita…'
+      placeholder: 'Leita…'
     },
     modal: {
       close: 'Loka'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: 'Búa til "{label}"',
       noData: 'Engin gögn',
       noMatch: 'Engin gögn fundust',
-      search: 'Leita…'
+      placeholder: 'Leita…'
     },
     slideover: {
       close: 'Loka'

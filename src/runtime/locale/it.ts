@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Chiudi',
       noData: 'Nessun dato',
       noMatch: 'Nessun dato corrispondente',
-      search: 'Digita un comando o cerca…'
+      placeholder: 'Digita un comando o cerca…'
     },
     contentSearch: {
       links: 'Collegamenti',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Nessun dato corrispondente',
-      search: 'Cerca…'
+      placeholder: 'Cerca…'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Nessun dato',
       noMatch: 'Nessun dato corrispondente',
-      search: 'Cerca…'
+      placeholder: 'Cerca…'
     },
     modal: {
       close: 'Chiudi'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: 'Crea "{label}"',
       noData: 'Nessun dato',
       noMatch: 'Nessun dato corrispondente',
-      search: 'Cerca…'
+      placeholder: 'Cerca…'
     },
     slideover: {
       close: 'Chiudi'

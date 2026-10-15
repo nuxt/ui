@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Sulge',
       noData: 'Pole andmeid',
       noMatch: 'Pole vastavaid andmeid',
-      search: 'Sisesta käsk või otsi…'
+      placeholder: 'Sisesta käsk või otsi…'
     },
     contentSearch: {
       links: 'Lingid',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Pole vastavaid andmeid',
-      search: 'Otsi…'
+      placeholder: 'Otsi…'
     },
     dashboardSearch: {
       theme: 'Teema'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Pole andmeid',
       noMatch: 'Pole vastavaid andmeid',
-      search: 'Otsi…'
+      placeholder: 'Otsi…'
     },
     modal: {
       close: 'Sulge'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: 'Loo "{label}"',
       noData: 'Pole andmeid',
       noMatch: 'Pole vastavaid andmeid',
-      search: 'Otsi…'
+      placeholder: 'Otsi…'
     },
     slideover: {
       close: 'Sulge'

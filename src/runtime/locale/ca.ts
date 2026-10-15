@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Tancar',
       noData: 'Sense dades',
       noMatch: 'No hi ha dades coincidents',
-      search: 'Escriu una ordre o cerca…'
+      placeholder: 'Escriu una ordre o cerca…'
     },
     contentSearch: {
       links: 'Enllaços',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'No hi ha dades coincidents',
-      search: 'Cerca…'
+      placeholder: 'Cerca…'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Sense dades',
       noMatch: 'No hi ha dades coincidents',
-      search: 'Cerca…'
+      placeholder: 'Cerca…'
     },
     modal: {
       close: 'Tancar'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: 'Crear "{label}"',
       noData: 'Sense dades',
       noMatch: 'No hi ha dades coincidents',
-      search: 'Cerca…'
+      placeholder: 'Cerca…'
     },
     slideover: {
       close: 'Tancar'

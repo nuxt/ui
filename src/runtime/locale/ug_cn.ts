@@ -57,7 +57,7 @@ export default defineLocale<Messages>({
       close: 'تاقاش',
       noData: 'سانلىق مەلۇمات يوق',
       noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
-      search: 'بۇيرۇق كىرگۈزۈڭ ياكى ئىزدەڭ…'
+      placeholder: 'بۇيرۇق كىرگۈزۈڭ ياكى ئىزدەڭ…'
     },
     contentSearch: {
       links: 'ئۇلانمىلار',
@@ -72,7 +72,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
-      search: 'ئىزدەش…'
+      placeholder: 'ئىزدەش…'
     },
     dashboardSearch: {
       theme: 'تېما'
@@ -113,7 +113,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'سانلىق مەلۇمات يوق',
       noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
-      search: 'ئىزدەش…'
+      placeholder: 'ئىزدەش…'
     },
     modal: {
       close: 'تاقاش'
@@ -155,7 +155,7 @@ export default defineLocale<Messages>({
       create: '"{label}" نى قۇرۇش',
       noData: 'سانلىق مەلۇمات يوق',
       noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
-      search: 'ئىزدەش…'
+      placeholder: 'ئىزدەش…'
     },
     slideover: {
       close: 'تاقاش'

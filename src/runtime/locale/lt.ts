@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Uždaryti',
       noData: 'Nėra duomenų',
       noMatch: 'Nėra atitinkančių duomenų',
-      search: 'Įveskite komandą arba ieškokite…'
+      placeholder: 'Įveskite komandą arba ieškokite…'
     },
     contentSearch: {
       links: 'Nuorodos',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Nėra atitinkančių duomenų',
-      search: 'Ieškoti…'
+      placeholder: 'Ieškoti…'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Nėra duomenų',
       noMatch: 'Nėra atitinkančių duomenų',
-      search: 'Ieškoti…'
+      placeholder: 'Ieškoti…'
     },
     modal: {
       close: 'Uždaryti'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: 'Sukurti „{label}"',
       noData: 'Nėra duomenų',
       noMatch: 'Nėra atitinkančių duomenų',
-      search: 'Ieškoti…'
+      placeholder: 'Ieškoti…'
     },
     slideover: {
       close: 'Uždaryti'

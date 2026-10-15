@@ -57,7 +57,7 @@ export default defineLocale<Messages>({
       close: 'بند کریں',
       noData: 'کوئی ڈیٹا نہیں',
       noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
-      search: 'کمانڈ ٹائپ کریں یا تلاش کریں…'
+      placeholder: 'کمانڈ ٹائپ کریں یا تلاش کریں…'
     },
     contentSearch: {
       links: 'لنکس',
@@ -72,7 +72,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
-      search: 'تلاش کریں…'
+      placeholder: 'تلاش کریں…'
     },
     dashboardSearch: {
       theme: 'تھیم'
@@ -113,7 +113,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'کوئی ڈیٹا نہیں',
       noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
-      search: 'تلاش کریں…'
+      placeholder: 'تلاش کریں…'
     },
     modal: {
       close: 'بند کریں'
@@ -155,7 +155,7 @@ export default defineLocale<Messages>({
       create: '"{label}" بنائیں',
       noData: 'کوئی ڈیٹا نہیں',
       noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
-      search: 'تلاش کریں…'
+      placeholder: 'تلاش کریں…'
     },
     slideover: {
       close: 'بند کریں'

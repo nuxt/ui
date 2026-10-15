@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Itxi',
       noData: 'Daturik gabe',
       noMatch: 'Ez da datu bat ere aurkitu',
-      search: 'Idatzi komando bat edo bilatu…'
+      placeholder: 'Idatzi komando bat edo bilatu…'
     },
     contentSearch: {
       links: 'Estekak',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Ez da datu bat ere aurkitu',
-      search: 'Bilatu…'
+      placeholder: 'Bilatu…'
     },
     dashboardSearch: {
       theme: 'Gaia'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Daturik gabe',
       noMatch: 'Ez da datu bat ere aurkitu',
-      search: 'Bilatu…'
+      placeholder: 'Bilatu…'
     },
     modal: {
       close: 'Itxi'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: 'Sortu {label}',
       noData: 'Daturik gabe',
       noMatch: 'Ez da datu bat ere aurkitu',
-      search: 'Bilatu…'
+      placeholder: 'Bilatu…'
     },
     slideover: {
       close: 'Itxi'

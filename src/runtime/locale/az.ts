@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Bağla',
       noData: 'Məlumat yoxdur',
       noMatch: 'Uyğun məlumat tapılmadı',
-      search: 'Əmr daxil edin və ya axtarın…'
+      placeholder: 'Əmr daxil edin və ya axtarın…'
     },
     contentSearch: {
       links: 'Bağlantılar',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Uyğun məlumat tapılmadı',
-      search: 'Axtar…'
+      placeholder: 'Axtar…'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Məlumat yoxdur',
       noMatch: 'Uyğun məlumat tapılmadı',
-      search: 'Axtar…'
+      placeholder: 'Axtar…'
     },
     modal: {
       close: 'Bağla'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: '"{label}" yarat',
       noData: 'Məlumat yoxdur',
       noMatch: 'Uyğun məlumat tapılmadı',
-      search: 'Axtar…'
+      placeholder: 'Axtar…'
     },
     slideover: {
       close: 'Bağla'

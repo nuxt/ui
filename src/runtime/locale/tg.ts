@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Бастан',
       noData: 'Маълумот нест',
       noMatch: 'Маълумоти мувофиқ ёфт нашуд',
-      search: 'Фармонро нависед ё ҷустуҷӯ кунед…'
+      placeholder: 'Фармонро нависед ё ҷустуҷӯ кунед…'
     },
     contentSearch: {
       links: 'Пайвандҳо',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Маълумоти мувофиқ ёфт нашуд',
-      search: 'Ҷустуҷӯ…'
+      placeholder: 'Ҷустуҷӯ…'
     },
     dashboardSearch: {
       theme: 'Мавзӯъ'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Маълумот нест',
       noMatch: 'Маълумоти мувофиқ ёфт нашуд',
-      search: 'Ҷустуҷӯ…'
+      placeholder: 'Ҷустуҷӯ…'
     },
     modal: {
       close: 'Бастан'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: '"{label}" созед',
       noData: 'Маълумот нест',
       noMatch: 'Маълумоти мувофиқ ёфт нашуд',
-      search: 'Ҷустуҷӯ…'
+      placeholder: 'Ҷустуҷӯ…'
     },
     slideover: {
       close: 'Бастан'

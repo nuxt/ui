@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Bezárás',
       noData: 'Nincs adat',
       noMatch: 'Nincs találat',
-      search: 'Írjon be egy parancsot vagy keressen…'
+      placeholder: 'Írjon be egy parancsot vagy keressen…'
     },
     contentSearch: {
       links: 'Linkek',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Nincs találat',
-      search: 'Keresés…'
+      placeholder: 'Keresés…'
     },
     dashboardSearch: {
       theme: 'Téma'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Nincs adat',
       noMatch: 'Nincs találat',
-      search: 'Keresés…'
+      placeholder: 'Keresés…'
     },
     modal: {
       close: 'Bezárás'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: '"{label}" létrehozása',
       noData: 'Nincs adat',
       noMatch: 'Nincs találat',
-      search: 'Keresés…'
+      placeholder: 'Keresés…'
     },
     slideover: {
       close: 'Bezárás'

@@ -95,7 +95,7 @@ const searchTerm = computed({
   }
 })
 
-const filterProps = toRef(() => defu(props.filter, { placeholder: t('dropdownMenu.search'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
+const filterProps = toRef(() => defu(props.filter, { placeholder: t('dropdownMenu.placeholder'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
 
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'descriptionKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'size', 'filter', 'filterFields', 'ignoreFilter', 'searchTerm', 'class', 'ui', 'uiOverride'), emits)

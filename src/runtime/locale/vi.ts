@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Đóng',
       noData: 'Không có dữ liệu',
       noMatch: 'Không có kết quả phù hợp',
-      search: 'Nhập lệnh hoặc tìm kiếm…'
+      placeholder: 'Nhập lệnh hoặc tìm kiếm…'
     },
     contentSearch: {
       links: 'Liên kết',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Không có kết quả phù hợp',
-      search: 'Tìm kiếm…'
+      placeholder: 'Tìm kiếm…'
     },
     dashboardSearch: {
       theme: 'Chủ đề'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Không có dữ liệu',
       noMatch: 'Không có kết quả phù hợp',
-      search: 'Tìm kiếm…'
+      placeholder: 'Tìm kiếm…'
     },
     modal: {
       close: 'Đóng'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: 'Tạo "{label}"',
       noData: 'Không có dữ liệu',
       noMatch: 'Không có kết quả phù hợp',
-      search: 'Tìm kiếm…'
+      placeholder: 'Tìm kiếm…'
     },
     slideover: {
       close: 'Đóng'

@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Sulje',
       noData: 'Ei tietoja',
       noMatch: 'Ei vastaavia tietoja',
-      search: 'Kirjoita komento tai hae…'
+      placeholder: 'Kirjoita komento tai hae…'
     },
     contentSearch: {
       links: 'Linkit',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Ei vastaavia tietoja',
-      search: 'Hae…'
+      placeholder: 'Hae…'
     },
     dashboardSearch: {
       theme: 'Teema'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Ei tietoja',
       noMatch: 'Ei vastaavia tietoja',
-      search: 'Hae…'
+      placeholder: 'Hae…'
     },
     modal: {
       close: 'Sulje'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: 'Luo "{label}"',
       noData: 'Ei tietoja',
       noMatch: 'Ei vastaavia tietoja',
-      search: 'Hae…'
+      placeholder: 'Hae…'
     },
     slideover: {
       close: 'Sulje'

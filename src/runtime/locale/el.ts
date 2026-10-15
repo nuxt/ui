@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Κλείσιμο',
       noData: 'Δεν υπάρχουν δεδομένα',
       noMatch: 'Δεν βρέθηκαν δεδομένα',
-      search: 'Πληκτρολογήστε μια εντολή ή αναζητήστε…'
+      placeholder: 'Πληκτρολογήστε μια εντολή ή αναζητήστε…'
     },
     contentSearch: {
       links: 'Σύνδεσμοι',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Δεν βρέθηκαν δεδομένα',
-      search: 'Αναζήτηση…'
+      placeholder: 'Αναζήτηση…'
     },
     dashboardSearch: {
       theme: 'Θέμα'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Δεν υπάρχουν δεδομένα',
       noMatch: 'Δεν βρέθηκαν δεδομένα',
-      search: 'Αναζήτηση…'
+      placeholder: 'Αναζήτηση…'
     },
     modal: {
       close: 'Κλείσιμο'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: 'Δημιουργία "{label}"',
       noData: 'Δεν υπάρχουν δεδομένα',
       noMatch: 'Δεν βρέθηκαν δεδομένα',
-      search: 'Αναζήτηση…'
+      placeholder: 'Αναζήτηση…'
     },
     slideover: {
       close: 'Κλείσιμο'

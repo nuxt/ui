@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Kapat',
       noData: 'Veri yok',
       noMatch: 'Eşleşen veri yok',
-      search: 'Bir komut yazın veya arama yapın…'
+      placeholder: 'Bir komut yazın veya arama yapın…'
     },
     contentSearch: {
       links: 'Bağlantılar',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Eşleşen veri yok',
-      search: 'Ara…'
+      placeholder: 'Ara…'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Veri yok',
       noMatch: 'Eşleşen veri yok',
-      search: 'Ara…'
+      placeholder: 'Ara…'
     },
     modal: {
       close: 'Kapat'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: '"{label}" oluştur',
       noData: 'Veri yok',
       noMatch: 'Eşleşen veri yok',
-      search: 'Ara…'
+      placeholder: 'Ara…'
     },
     slideover: {
       close: 'Kapat'

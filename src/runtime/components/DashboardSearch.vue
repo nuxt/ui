@@ -27,7 +27,7 @@ export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPale
   /**
    * Whether to display a filter input or not.
    * Can be an object to pass additional props to the input, set `icon: false` to hide its icon.
-   * `{ placeholder: t('commandPalette.search'), icon: appConfig.ui.icons.search, autofocus: true, variant: 'none' }`{lang="ts-type"}
+   * `{ placeholder: t('commandPalette.placeholder'), icon: appConfig.ui.icons.search, autofocus: true, variant: 'none' }`{lang="ts-type"}
    * @defaultValue true
    */
   filter?: CommandPaletteProps['filter']

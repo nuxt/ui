@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Mbyll',
       noData: 'Nuk ka të dhëna',
       noMatch: 'Nuk ka të dhëna që përputhen',
-      search: 'Shkruaj një komandë ose kërko…'
+      placeholder: 'Shkruaj një komandë ose kërko…'
     },
     contentSearch: {
       links: 'Lidhje',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Nuk ka të dhëna që përputhen',
-      search: 'Kërko…'
+      placeholder: 'Kërko…'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Nuk ka të dhëna',
       noMatch: 'Nuk ka të dhëna që përputhen',
-      search: 'Kërko…'
+      placeholder: 'Kërko…'
     },
     modal: {
       close: 'Mbyll'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: 'Krijo "{label}"',
       noData: 'Nuk ka të dhëna',
       noMatch: 'Nuk ka të dhëna që përputhen',
-      search: 'Kërko…'
+      placeholder: 'Kërko…'
     },
     slideover: {
       close: 'Mbyll'

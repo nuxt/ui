@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Yopish',
       noData: 'Maʼlumot yoʻq',
       noMatch: 'Mos keluvchi natija topilmadi',
-      search: 'Buyruq kiriting yoki qidiring…'
+      placeholder: 'Buyruq kiriting yoki qidiring…'
     },
     contentSearch: {
       links: 'Havolalar',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Mos keluvchi natija topilmadi',
-      search: 'Qidirish…'
+      placeholder: 'Qidirish…'
     },
     dashboardSearch: {
       theme: 'Mavzu'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Maʼlumot yoʻq',
       noMatch: 'Mos keluvchi natija topilmadi',
-      search: 'Qidirish…'
+      placeholder: 'Qidirish…'
     },
     modal: {
       close: 'Yopish'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: '"{label}" yaratish',
       noData: 'Maʼlumot yoʻq',
       noMatch: 'Mos keluvchi natija topilmadi',
-      search: 'Qidirish…'
+      placeholder: 'Qidirish…'
     },
     slideover: {
       close: 'Yopish'

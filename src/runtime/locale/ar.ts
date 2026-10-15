@@ -57,7 +57,7 @@ export default defineLocale<Messages>({
       close: 'إغلاق',
       noData: 'لا توجد بيانات',
       noMatch: 'لا توجد نتائج مطابقة',
-      search: 'اكتب أمرًا أو ابحث…'
+      placeholder: 'اكتب أمرًا أو ابحث…'
     },
     contentSearch: {
       links: 'الروابط',
@@ -72,7 +72,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'لا توجد نتائج مطابقة',
-      search: 'بحث…'
+      placeholder: 'بحث…'
     },
     dashboardSearch: {
       theme: 'السمة'
@@ -113,7 +113,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'لا توجد بيانات',
       noMatch: 'لا توجد نتائج مطابقة',
-      search: 'بحث…'
+      placeholder: 'بحث…'
     },
     modal: {
       close: 'إغلاق'
@@ -155,7 +155,7 @@ export default defineLocale<Messages>({
       create: 'إنشاء "{label}"',
       noData: 'لا توجد بيانات',
       noMatch: 'لا توجد نتائج مطابقة',
-      search: 'بحث…'
+      placeholder: 'بحث…'
     },
     slideover: {
       close: 'إغلاق'

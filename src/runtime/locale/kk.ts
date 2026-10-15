@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Жабу',
       noData: 'Деректер жоқ',
       noMatch: 'Сәйкес келетін деректер жоқ',
-      search: 'Команда енгізіңіз немесе іздеңіз…'
+      placeholder: 'Команда енгізіңіз немесе іздеңіз…'
     },
     contentSearch: {
       links: 'Сілтемелер',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Сәйкес келетін деректер жоқ',
-      search: 'Іздеу…'
+      placeholder: 'Іздеу…'
     },
     dashboardSearch: {
       theme: 'Тақырып'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Деректер жоқ',
       noMatch: 'Сәйкес келетін деректер жоқ',
-      search: 'Іздеу…'
+      placeholder: 'Іздеу…'
     },
     modal: {
       close: 'Жабу'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: '"{label}" жасау',
       noData: 'Деректер жоқ',
       noMatch: 'Сәйкес келетін деректер жоқ',
-      search: 'Іздеу…'
+      placeholder: 'Іздеу…'
     },
     slideover: {
       close: 'Жабу'

@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: '关闭',
       noData: '没有数据',
       noMatch: '没有匹配的数据',
-      search: '输入命令或搜索…'
+      placeholder: '输入命令或搜索…'
     },
     contentSearch: {
       links: '链接',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: '没有匹配的数据',
-      search: '搜索…'
+      placeholder: '搜索…'
     },
     dashboardSearch: {
       theme: '主题'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: '没有数据',
       noMatch: '没有匹配的数据',
-      search: '搜索…'
+      placeholder: '搜索…'
     },
     modal: {
       close: '关闭'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: '创建 "{label}"',
       noData: '没有数据',
       noMatch: '没有匹配的数据',
-      search: '搜索…'
+      placeholder: '搜索…'
     },
     slideover: {
       close: '关闭'

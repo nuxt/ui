@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: '關閉',
       noData: '沒有資料',
       noMatch: '沒有相符的資料',
-      search: '輸入命令或搜尋…'
+      placeholder: '輸入命令或搜尋…'
     },
     contentSearch: {
       links: '連結',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: '沒有相符的資料',
-      search: '搜尋…'
+      placeholder: '搜尋…'
     },
     dashboardSearch: {
       theme: '主題'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: '沒有資料',
       noMatch: '沒有相符的資料',
-      search: '搜尋…'
+      placeholder: '搜尋…'
     },
     modal: {
       close: '關閉'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: '建立「{label}」',
       noData: '沒有資料',
       noMatch: '沒有相符的資料',
-      search: '搜尋…'
+      placeholder: '搜尋…'
     },
     slideover: {
       close: '關閉'

@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       close: 'Lukk',
       noData: 'Ingen data',
       noMatch: 'Ingen samsvarende data',
-      search: 'Skriv inn en kommando eller søk…'
+      placeholder: 'Skriv inn en kommando eller søk…'
     },
     contentSearch: {
       links: 'Lenker',
@@ -71,7 +71,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Ingen samsvarende data',
-      search: 'Søk…'
+      placeholder: 'Søk…'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Ingen data',
       noMatch: 'Ingen samsvarende data',
-      search: 'Søk…'
+      placeholder: 'Søk…'
     },
     modal: {
       close: 'Lukk'
@@ -154,7 +154,7 @@ export default defineLocale<Messages>({
       create: 'Opprett "{label}"',
       noData: 'Ingen data',
       noMatch: 'Ingen samsvarende data',
-      search: 'Søk…'
+      placeholder: 'Søk…'
     },
     slideover: {
       close: 'Lukk'
