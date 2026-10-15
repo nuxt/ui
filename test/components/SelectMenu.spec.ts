@@ -144,10 +144,10 @@ describe('SelectMenu', () => {
 
   describe('listbox semantics', () => {
     it.each([
-      { searchInput: true, multiple: false },
-      { searchInput: false, multiple: false },
-      { searchInput: true, multiple: true },
-      { searchInput: false, multiple: true }
+      { filter: true, multiple: false },
+      { filter: false, multiple: false },
+      { filter: true, multiple: true },
+      { filter: false, multiple: true }
     ])('keeps controls outside the listbox with %j', async (options) => {
       const wrapper = await mountSuspended(SelectMenu, {
         props: { ...props, ...options, placeholder: 'Select a status' },
@@ -159,9 +159,9 @@ describe('SelectMenu', () => {
       expect(listbox.attributes('id')).toBeTruthy()
       expect(listbox.attributes('aria-multiselectable')).toBe(String(options.multiple))
       expect(listbox.find('input, button').exists()).toBe(false)
-      expect(wrapper.get('[data-slot="base"]').attributes('aria-controls')).toBe(listbox.attributes('id'))
+      expect(wrapper.get('[data-slot="select-menu"]').attributes('aria-controls')).toBe(listbox.attributes('id'))
 
-      if (options.searchInput) {
+      if (options.filter) {
         expect(wrapper.get('input').attributes('aria-controls')).toBe(listbox.attributes('id'))
       }
 

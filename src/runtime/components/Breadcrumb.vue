@@ -99,8 +99,8 @@ const ui = computed(() => tv(theme, overrides.value)({
 </script>
 
 <template>
-  <Primitive :as="props.as" :aria-label="t('breadcrumb.label')" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <ol data-slot="list" :class="ui.list({ class: props.ui?.list })">
+  <Primitive :as="props.as" :aria-label="t('breadcrumb.label')" data-slot="breadcrumb" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <ol data-slot="breadcrumb-list" :class="ui.list({ class: props.ui?.list })">
       <template v-for="(item, index) in props.items" :key="index">
         <li data-slot="breadcrumb-item" :class="ui.item({ class: [props.ui?.item, item.ui?.item] })">
           <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item)" custom>
