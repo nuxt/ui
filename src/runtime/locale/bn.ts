@@ -70,9 +70,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'ফিরে যান',
       close: 'বন্ধ করুন',
+      filterPlaceholder: 'কমান্ড টাইপ করুন বা অনুসন্ধান করুন…',
       noData: 'কোনো তথ্য নেই',
       noMatch: 'কোনো মিল পাওয়া যায়নি',
-      placeholder: 'কমান্ড টাইপ করুন বা অনুসন্ধান করুন…',
       results: 'ফলাফল'
     },
     contentSearch: {
@@ -87,8 +87,8 @@ export default defineLocale<Messages>({
       title: 'এই পৃষ্ঠায়'
     },
     dropdownMenu: {
-      noMatch: 'কোনো মিল পাওয়া যায়নি',
-      search: 'অনুসন্ধান করুন…'
+      filterPlaceholder: 'অনুসন্ধান করুন…',
+      noMatch: 'কোনো মিল পাওয়া যায়নি'
     },
     dashboardSearch: {
       theme: 'থিম'
@@ -159,9 +159,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'সময় অঞ্চল'
     },
     listbox: {
+      filterPlaceholder: 'অনুসন্ধান করুন…',
       noData: 'কোনো তথ্য নেই',
-      noMatch: 'কোনো মিল পাওয়া যায়নি',
-      search: 'অনুসন্ধান করুন…'
+      noMatch: 'কোনো মিল পাওয়া যায়নি'
     },
     modal: {
       close: 'বন্ধ করুন'
@@ -206,9 +206,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: '"{label}" তৈরি করুন',
+      filterPlaceholder: 'অনুসন্ধান করুন…',
       noData: 'কোনো তথ্য নেই',
-      noMatch: 'কোনো মিল পাওয়া যায়নি',
-      search: 'অনুসন্ধান করুন…'
+      noMatch: 'কোনো মিল পাওয়া যায়নি'
     },
     skeleton: {
       label: 'লোড হচ্ছে'

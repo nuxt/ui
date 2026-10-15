@@ -15,7 +15,7 @@ import USelectMenu from '../SelectMenu.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<LocaleSelectProps>(), {
-  searchInput: false,
+  filter: false,
   valueKey: 'code',
   labelKey: 'name'
 })

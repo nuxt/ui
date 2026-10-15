@@ -70,9 +70,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Geri',
       close: 'Bağla',
+      filterPlaceholder: 'Əmr daxil edin və ya axtarın…',
       noData: 'Məlumat yoxdur',
       noMatch: 'Uyğun məlumat tapılmadı',
-      placeholder: 'Əmr daxil edin və ya axtarın…',
       results: 'Nəticələr'
     },
     contentSearch: {
@@ -87,8 +87,8 @@ export default defineLocale<Messages>({
       title: 'Bu səhifədə'
     },
     dropdownMenu: {
-      noMatch: 'Uyğun məlumat tapılmadı',
-      search: 'Axtar…'
+      filterPlaceholder: 'Axtar…',
+      noMatch: 'Uyğun məlumat tapılmadı'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -159,9 +159,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'saat qurşağı'
     },
     listbox: {
+      filterPlaceholder: 'Axtar…',
       noData: 'Məlumat yoxdur',
-      noMatch: 'Uyğun məlumat tapılmadı',
-      search: 'Axtar…'
+      noMatch: 'Uyğun məlumat tapılmadı'
     },
     modal: {
       close: 'Bağla'
@@ -206,9 +206,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: '"{label}" yarat',
+      filterPlaceholder: 'Axtar…',
       noData: 'Məlumat yoxdur',
-      noMatch: 'Uyğun məlumat tapılmadı',
-      search: 'Axtar…'
+      noMatch: 'Uyğun məlumat tapılmadı'
     },
     skeleton: {
       label: 'yüklənir'

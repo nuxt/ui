@@ -70,9 +70,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Nazaj',
       close: 'Zapri',
+      filterPlaceholder: 'Vpiši ukaz ali išči…',
       noData: 'Ni podatkov',
       noMatch: 'Ni ujemanj',
-      placeholder: 'Vpiši ukaz ali išči…',
       results: 'Rezultati'
     },
     contentSearch: {
@@ -87,8 +87,8 @@ export default defineLocale<Messages>({
       title: 'Na tej strani'
     },
     dropdownMenu: {
-      noMatch: 'Ni ujemanj',
-      search: 'Išči…'
+      filterPlaceholder: 'Išči…',
+      noMatch: 'Ni ujemanj'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -159,9 +159,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'časovni pas'
     },
     listbox: {
+      filterPlaceholder: 'Išči…',
       noData: 'Ni podatkov',
-      noMatch: 'Ni ujemanj',
-      search: 'Išči…'
+      noMatch: 'Ni ujemanj'
     },
     modal: {
       close: 'Zapri'
@@ -206,9 +206,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Ustvari "{label}"',
+      filterPlaceholder: 'Išči…',
       noData: 'Ni podatkov',
-      noMatch: 'Ni ujemanj',
-      search: 'Išči…'
+      noMatch: 'Ni ujemanj'
     },
     skeleton: {
       label: 'nalaganje'

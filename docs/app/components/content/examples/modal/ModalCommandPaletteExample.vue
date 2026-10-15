@@ -38,7 +38,7 @@ function onOpen() {
         v-model:search-term="searchTerm"
         :loading="status === 'pending'"
         :groups="groups"
-        placeholder="Search users..."
+        :filter="{ placeholder: 'Search users...' }"
         class="h-80"
       />
     </template>

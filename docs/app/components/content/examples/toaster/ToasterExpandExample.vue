@@ -20,7 +20,7 @@ const appConfig = useAppConfig()
         color="neutral"
         variant="soft"
         class="rounded-sm rounded-l-none min-w-12"
-        :search-input="false"
+        :filter="false"
       />
     </UFormField>
   </div>

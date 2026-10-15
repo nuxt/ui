@@ -71,9 +71,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'חזור',
       close: 'סגור',
+      filterPlaceholder: 'הקלד פקודה או חפש…',
       noData: 'אין נתונים',
       noMatch: 'לא נמצאה התאמה',
-      placeholder: 'הקלד פקודה או חפש…',
       results: 'תוצאות'
     },
     contentSearch: {
@@ -88,8 +88,8 @@ export default defineLocale<Messages>({
       title: 'בדף זה'
     },
     dropdownMenu: {
-      noMatch: 'לא נמצאה התאמה',
-      search: 'חפש…'
+      filterPlaceholder: 'חפש…',
+      noMatch: 'לא נמצאה התאמה'
     },
     dashboardSearch: {
       theme: 'ערכת נושא'
@@ -160,9 +160,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'אזור זמן'
     },
     listbox: {
+      filterPlaceholder: 'חפש…',
       noData: 'אין נתונים',
-      noMatch: 'לא נמצאה התאמה',
-      search: 'חפש…'
+      noMatch: 'לא נמצאה התאמה'
     },
     modal: {
       close: 'סגור'
@@ -207,9 +207,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'צור "{label}"',
+      filterPlaceholder: 'חפש…',
       noData: 'אין נתונים',
-      noMatch: 'לא נמצאה התאמה',
-      search: 'חפש…'
+      noMatch: 'לא נמצאה התאמה'
     },
     skeleton: {
       label: 'טוען'

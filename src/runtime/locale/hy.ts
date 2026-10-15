@@ -70,9 +70,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Հետ',
       close: 'Փակել',
+      filterPlaceholder: 'Մուտքագրեք հրաման կամ որոնեք…',
       noData: 'Տվյալներ չկան',
       noMatch: 'Համընկնումներ չեն գտնվել',
-      placeholder: 'Մուտքագրեք հրաման կամ որոնեք…',
       results: 'Արդյունքներ'
     },
     contentSearch: {
@@ -87,8 +87,8 @@ export default defineLocale<Messages>({
       title: 'Այս էջում'
     },
     dropdownMenu: {
-      noMatch: 'Համընկնումներ չեն գտնվել',
-      search: 'Որոնում…'
+      filterPlaceholder: 'Որոնում…',
+      noMatch: 'Համընկնումներ չեն գտնվել'
     },
     dashboardSearch: {
       theme: 'Թեմա'
@@ -159,9 +159,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'ժամային գոտի'
     },
     listbox: {
+      filterPlaceholder: 'Որոնում…',
       noData: 'Տվյալներ չկան',
-      noMatch: 'Համընկնումներ չեն գտնվել',
-      search: 'Որոնում…'
+      noMatch: 'Համընկնումներ չեն գտնվել'
     },
     modal: {
       close: 'Փակել'
@@ -206,9 +206,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Ստեղծել "{label}"',
+      filterPlaceholder: 'Որոնում…',
       noData: 'Տվյալներ չկան',
-      noMatch: 'Համընկնումներ չեն գտնվել',
-      search: 'Որոնում…'
+      noMatch: 'Համընկնումներ չեն գտնվել'
     },
     skeleton: {
       label: 'բեռնում'

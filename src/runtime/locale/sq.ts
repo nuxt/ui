@@ -70,9 +70,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Prapa',
       close: 'Mbyll',
+      filterPlaceholder: 'Shkruaj një komandë ose kërko…',
       noData: 'Nuk ka të dhëna',
       noMatch: 'Nuk ka të dhëna që përputhen',
-      placeholder: 'Shkruaj një komandë ose kërko…',
       results: 'Rezultatet'
     },
     contentSearch: {
@@ -87,8 +87,8 @@ export default defineLocale<Messages>({
       title: 'Në këtë faqe'
     },
     dropdownMenu: {
-      noMatch: 'Nuk ka të dhëna që përputhen',
-      search: 'Kërko…'
+      filterPlaceholder: 'Kërko…',
+      noMatch: 'Nuk ka të dhëna që përputhen'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -159,9 +159,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'zona kohore'
     },
     listbox: {
+      filterPlaceholder: 'Kërko…',
       noData: 'Nuk ka të dhëna',
-      noMatch: 'Nuk ka të dhëna që përputhen',
-      search: 'Kërko…'
+      noMatch: 'Nuk ka të dhëna që përputhen'
     },
     modal: {
       close: 'Mbyll'
@@ -206,9 +206,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Krijo "{label}"',
+      filterPlaceholder: 'Kërko…',
       noData: 'Nuk ka të dhëna',
-      noMatch: 'Nuk ka të dhëna që përputhen',
-      search: 'Kërko…'
+      noMatch: 'Nuk ka të dhëna që përputhen'
     },
     skeleton: {
       label: 'po ngarkohet'

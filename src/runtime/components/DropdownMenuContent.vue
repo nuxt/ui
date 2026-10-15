@@ -95,7 +95,7 @@ const searchTerm = computed({
   }
 })
 
-const inputProps = toRef(() => defu(props.filter, { placeholder: t('dropdownMenu.search'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
+const filterProps = toRef(() => defu(props.filter, { placeholder: t('dropdownMenu.filterPlaceholder'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
 
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'descriptionKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'size', 'filter', 'filterFields', 'ignoreFilter', 'searchTerm', 'class', 'ui', 'uiOverride'), emits)
@@ -175,9 +175,9 @@ const itemSize = computed(() => getItemSize(props.size))
             autofocus
             autocomplete="off"
             :size="size"
-            v-bind="inputProps"
-            data-slot="dropdown-menu-input"
-            :class="ui.input({ class: uiOverride?.input })"
+            v-bind="filterProps"
+            data-slot="dropdown-menu-filter"
+            :class="ui.filter({ class: uiOverride?.filter })"
             @change.stop
           />
         </DropdownMenu.Filter>

@@ -137,7 +137,7 @@ function faceOf(value?: string) {
     value-key="value"
     ignore-filter
     :content="content"
-    :search-input="{ placeholder: 'Search Google Fonts…', icon: appConfig.ui.icons.search }"
+    :filter="{ placeholder: 'Search Google Fonts…', icon: appConfig.ui.icons.search }"
     :aria-label="ariaLabel"
     size="sm"
     class="w-full"

@@ -70,9 +70,10 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Артка',
       close: 'Жабуу',
+      filterPlaceholder: 'Буйрук киргизиңиз же издөө…',
       noData: 'Маалымат жок',
       noMatch: 'Эч нерсе табылган жок',
-      placeholder: 'Буйрук киргизиңиз же издеңиз…',
+
       results: 'Жыйынтыктар'
     },
     contentSearch: {
@@ -87,8 +88,8 @@ export default defineLocale<Messages>({
       title: 'Бул бетте'
     },
     dropdownMenu: {
-      noMatch: 'Эч нерсе табылган жок',
-      search: 'Издөө…'
+      filterPlaceholder: 'Издөө…',
+      noMatch: 'Эч нерсе табылган жок'
     },
     dashboardSearch: {
       theme: 'Тема'
@@ -159,9 +160,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'убакыт алкагы'
     },
     listbox: {
+      filterPlaceholder: 'Издөө…',
       noData: 'Маалымат жок',
-      noMatch: 'Эч нерсе табылган жок',
-      search: 'Издөө…'
+      noMatch: 'Эч нерсе табылган жок'
     },
     modal: {
       close: 'Жабуу'
@@ -206,9 +207,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: '"{label}" жасоо',
+      filterPlaceholder: 'Издөө…',
       noData: 'Маалымат жок',
-      noMatch: 'Эч нерсе табылган жок',
-      search: 'Издөө…'
+      noMatch: 'Эч нерсе табылган жок'
     },
     skeleton: {
       label: 'жүктөлүүдө'

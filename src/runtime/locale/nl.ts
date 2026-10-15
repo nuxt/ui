@@ -70,9 +70,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Terug',
       close: 'Sluiten',
+      filterPlaceholder: 'Typ een commando of zoek…',
       noData: 'Geen gegevens',
       noMatch: 'Geen overeenkomende gegevens',
-      placeholder: 'Typ een commando of zoek…',
       results: 'Resultaten'
     },
     contentSearch: {
@@ -87,8 +87,8 @@ export default defineLocale<Messages>({
       title: 'Op deze pagina'
     },
     dropdownMenu: {
-      noMatch: 'Geen overeenkomende gegevens',
-      search: 'Zoeken…'
+      filterPlaceholder: 'Zoeken…',
+      noMatch: 'Geen overeenkomende gegevens'
     },
     dashboardSearch: {
       theme: 'Thema'
@@ -159,9 +159,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'tijdzone'
     },
     listbox: {
+      filterPlaceholder: 'Zoeken…',
       noData: 'Geen gegevens',
-      noMatch: 'Geen overeenkomende gegevens',
-      search: 'Zoeken…'
+      noMatch: 'Geen overeenkomende gegevens'
     },
     modal: {
       close: 'Sluiten'
@@ -206,9 +206,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: '"{label}" creëren',
+      filterPlaceholder: 'Zoeken…',
       noData: 'Geen gegevens',
-      noMatch: 'Geen overeenkomende gegevens',
-      search: 'Zoeken…'
+      noMatch: 'Geen overeenkomende gegevens'
     },
     skeleton: {
       label: 'laden'

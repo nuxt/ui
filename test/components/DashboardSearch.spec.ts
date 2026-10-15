@@ -43,14 +43,14 @@ describe('DashboardSearch', () => {
     [
     // Props
       ['with groups', { props }],
-      ['with icon', { props: { ...props, icon: 'i-lucide-home' } }],
-      ['with placeholder', { props: { ...props, placeholder: 'Search' } }],
+      ['with filter icon', { props: { ...props, filter: { icon: 'i-lucide-home' } } }],
+      ['with filter placeholder', { props: { ...props, filter: { placeholder: 'Search' } } }],
       ['with loading', { props: { ...props, loading: true } }],
       ['with loadingIcon', { props: { ...props, loading: true, loadingIcon: 'i-lucide-loading' } }],
       ['without colorMode', { props: { ...props, colorMode: false } }],
       ['with fullscreen', { props: { ...props, fullscreen: true } }],
       ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
-      ['with ui', { props: { ...props, ui: { input: '[&>input]:text-lg' } } }],
+      ['with ui', { props: { ...props, ui: { filter: '[&>input]:text-lg' } } }],
       ['with class', { props: { ...props, class: 'sm:max-w-5xl' } }]
     ],
     async (_, options) => {

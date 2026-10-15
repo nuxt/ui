@@ -70,9 +70,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Atgal',
       close: 'Uždaryti',
+      filterPlaceholder: 'Įveskite komandą arba ieškokite…',
       noData: 'Nėra duomenų',
       noMatch: 'Nėra atitinkančių duomenų',
-      placeholder: 'Įveskite komandą arba ieškokite…',
       results: 'Rezultatai'
     },
     contentSearch: {
@@ -87,8 +87,8 @@ export default defineLocale<Messages>({
       title: 'Šiame puslapyje'
     },
     dropdownMenu: {
-      noMatch: 'Nėra atitinkančių duomenų',
-      search: 'Ieškoti…'
+      filterPlaceholder: 'Ieškoti…',
+      noMatch: 'Nėra atitinkančių duomenų'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -159,9 +159,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'laiko juosta'
     },
     listbox: {
+      filterPlaceholder: 'Ieškoti…',
       noData: 'Nėra duomenų',
-      noMatch: 'Nėra atitinkančių duomenų',
-      search: 'Ieškoti…'
+      noMatch: 'Nėra atitinkančių duomenų'
     },
     modal: {
       close: 'Uždaryti'
@@ -206,9 +206,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Sukurti „{label}“',
+      filterPlaceholder: 'Ieškoti…',
       noData: 'Nėra duomenų',
-      noMatch: 'Nėra atitinkančių duomenų',
-      search: 'Ieškoti…'
+      noMatch: 'Nėra atitinkančių duomenų'
     },
     skeleton: {
       label: 'įkeliama'

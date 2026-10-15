@@ -70,9 +70,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Назад',
       close: 'Закрыть',
+      filterPlaceholder: 'Введите команду или выполните поиск…',
       noData: 'Нет данных',
       noMatch: 'Совпадений не найдено',
-      placeholder: 'Введите команду или выполните поиск…',
       results: 'Результаты'
     },
     contentSearch: {
@@ -87,8 +87,8 @@ export default defineLocale<Messages>({
       title: 'На этой странице'
     },
     dropdownMenu: {
-      noMatch: 'Совпадений не найдено',
-      search: 'Поиск…'
+      filterPlaceholder: 'Поиск…',
+      noMatch: 'Совпадений не найдено'
     },
     dashboardSearch: {
       theme: 'Тема'
@@ -159,9 +159,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'часовой пояс'
     },
     listbox: {
+      filterPlaceholder: 'Поиск…',
       noData: 'Нет данных',
-      noMatch: 'Совпадений не найдено',
-      search: 'Поиск…'
+      noMatch: 'Совпадений не найдено'
     },
     modal: {
       close: 'Закрыть'
@@ -206,9 +206,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Создать "{label}"',
+      filterPlaceholder: 'Поиск…',
       noData: 'Нет данных',
-      noMatch: 'Совпадений не найдено',
-      search: 'Поиск…'
+      noMatch: 'Совпадений не найдено'
     },
     skeleton: {
       label: 'загрузка'

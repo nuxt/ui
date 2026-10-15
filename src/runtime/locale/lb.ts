@@ -70,9 +70,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Zréck',
       close: 'Zoumaachen',
+      filterPlaceholder: 'Tippt e Befeel oder sicht…',
       noData: 'Keng Donnéeën',
       noMatch: 'Keng entspriechend Donnéeën',
-      placeholder: 'Tippt e Befeel oder sicht…',
       results: 'Resultater'
     },
     contentSearch: {
@@ -87,8 +87,8 @@ export default defineLocale<Messages>({
       title: 'Op dëser Säit'
     },
     dropdownMenu: {
-      noMatch: 'Keng entspriechend Donnéeën',
-      search: 'Sichen…'
+      filterPlaceholder: 'Sichen…',
+      noMatch: 'Keng entspriechend Donnéeën'
     },
     dashboardSearch: {
       theme: 'Thema'
@@ -159,9 +159,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'Zäitzon'
     },
     listbox: {
+      filterPlaceholder: 'Sichen…',
       noData: 'Keng Donnéeën',
-      noMatch: 'Keng entspriechend Donnéeën',
-      search: 'Sichen…'
+      noMatch: 'Keng entspriechend Donnéeën'
     },
     modal: {
       close: 'Zoumaachen'
@@ -206,9 +206,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: '"{label}" erstellen',
+      filterPlaceholder: 'Sichen…',
       noData: 'Keng Donnéeën',
-      noMatch: 'Keng entspriechend Donnéeën',
-      search: 'Sichen…'
+      noMatch: 'Keng entspriechend Donnéeën'
     },
     skeleton: {
       label: 'Lueden'

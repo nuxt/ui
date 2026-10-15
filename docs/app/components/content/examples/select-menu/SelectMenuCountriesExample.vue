@@ -20,7 +20,7 @@ function onOpen() {
     :items="countries"
     :loading="status === 'pending'"
     label-key="name"
-    :search-input="{ icon: 'i-lucide-search' }"
+    :filter="{ icon: 'i-lucide-search' }"
     placeholder="Select country"
     class="w-48"
     @update:open="onOpen"
