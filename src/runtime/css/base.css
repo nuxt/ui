@@ -168,6 +168,8 @@
     --ui-bg-soft: var(--ui-color-neutral-100);
     --ui-bg-strong: var(--ui-color-neutral-200);
 
+    --ui-border-default: var(--ui-color-neutral-200);
+    --ui-border-strong: var(--ui-color-neutral-300);
 
     /* The literal values are the fallback when a Tailwind prefix renames the `--color-*` variables */
     --ui-chart-1: var(--ui-primary);
@@ -176,8 +178,6 @@
     --ui-chart-4: var(--color-amber-500, oklch(76.9% 0.188 70.08));
     --ui-chart-5: var(--color-rose-500, oklch(64.5% 0.246 16.439));
     --ui-chart-6: var(--color-cyan-500, oklch(71.5% 0.143 215.221));
-    --ui-border-default: var(--ui-color-neutral-200);
-    --ui-border-strong: var(--ui-color-neutral-300);
   }
 
   :where(.dark) {
@@ -191,6 +191,8 @@
     --ui-bg-soft: var(--ui-color-neutral-800);
     --ui-bg-strong: var(--ui-color-neutral-700);
 
+    --ui-border-default: var(--ui-color-neutral-800);
+    --ui-border-strong: var(--ui-color-neutral-700);
 
     --ui-chart-1: var(--ui-primary);
     --ui-chart-2: var(--color-blue-400, oklch(70.7% 0.165 254.624));
@@ -198,7 +200,5 @@
     --ui-chart-4: var(--color-amber-400, oklch(82.8% 0.189 84.429));
     --ui-chart-5: var(--color-rose-400, oklch(71.2% 0.194 13.428));
     --ui-chart-6: var(--color-cyan-400, oklch(78.9% 0.154 211.53));
-    --ui-border-default: var(--ui-color-neutral-800);
-    --ui-border-strong: var(--ui-color-neutral-700);
   }
 }
