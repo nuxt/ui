@@ -239,7 +239,11 @@ export default defineNuxtPlugin({
                 var aliases = ${JSON.stringify(Object.keys(DEFAULT_COLORS).filter(alias => alias !== 'neutral'))};
                 if (cssVars.light && Object.keys(cssVars.light).length) {
                   var lightVars = merge(defaults.light, cssVars.light);
-                  for (var i = 0; i < aliases.length; i++) { if (cssVars.light['--ui-' + aliases[i]]) { lightVars.push('--ui-' + aliases[i] + '-text-default: initial;', '--ui-' + aliases[i] + '-text-muted: initial;'); } }
+                  for (var i = 0; i < aliases.length; i++) {
+                    if (!cssVars.light['--ui-' + aliases[i]]) continue;
+                    var steps = ['-text-default', '-text-muted'];
+                    for (var j = 0; j < steps.length; j++) { if (!cssVars.light['--ui-' + aliases[i] + steps[j]]) { lightVars.push('--ui-' + aliases[i] + steps[j] + ': initial;'); } }
+                  }
                   parts.push('.light { ' + lightVars.join(' ') + ' }');
                 }
                 if (cssVars.dark && Object.keys(cssVars.dark).length) { parts.push('.dark { ' + merge(defaults.dark, cssVars.dark).join(' ') + ' }'); }
