@@ -1,6 +1,5 @@
-import { ref, shallowRef, computed, toValue, nextTick, watch } from 'vue'
+import { ref, computed, toValue, nextTick, watch } from 'vue'
 import type { MaybeRefOrGetter, Ref, ComputedRef } from 'vue'
-import { useEventListener, useResizeObserver } from '@vueuse/core'
 import type { ReferenceElement } from 'reka-ui'
 
 export interface TourStep {
@@ -40,13 +39,6 @@ export interface UseTourOptions {
   scrollIntoView?: boolean | ScrollIntoViewOptions
 }
 
-export interface TourRect {
-  top: number
-  left: number
-  width: number
-  height: number
-}
-
 export interface UseTourReturn {
   /** Whether the tour is currently open. */
   open: Ref<boolean>
@@ -56,11 +48,6 @@ export interface UseTourReturn {
   current: ComputedRef<TourStep | undefined>
   /** The resolved anchor for the current step, to pass to `<UPopover :reference>`. */
   reference: ComputedRef<ReferenceElement | undefined>
-  /**
-   * The viewport-relative box of the current target (same space as `position: fixed`), kept in sync
-   * on scroll and resize. `null` when the tour is closed, the step is centered or the target is not found.
-   */
-  rect: Readonly<Ref<TourRect | null>>
   /** Total number of steps. */
   total: ComputedRef<number>
   /** Whether a next step exists. */
@@ -153,31 +140,6 @@ export function useTour(steps: MaybeRefOrGetter<TourStep[]>, options: UseTourOpt
     return target
   })
 
-  const rect = shallowRef<TourRect | null>(null)
-
-  function updateRect() {
-    const el = reference.value
-    // The center anchor only positions the popover, there is no target to highlight.
-    // A cached target removed from the DOM would measure as an empty box at the origin.
-    if (!el || el === centerAnchor || (el instanceof Element && !el.isConnected)) {
-      rect.value = null
-      return
-    }
-    const { top, left, width, height } = el.getBoundingClientRect()
-    rect.value = { top, left, width, height }
-  }
-
-  // Track the target only while the tour is open. Scroll events do not bubble,
-  // so a capture listener on window is what catches scrolling of any container.
-  const listenerTarget = () => (open.value && typeof window !== 'undefined' ? window : undefined)
-  useEventListener(listenerTarget, 'scroll', updateRect, { capture: true, passive: true })
-  useEventListener(listenerTarget, 'resize', updateRect, { passive: true })
-  useResizeObserver(() => {
-    const el = reference.value
-    // Short-circuit before `instanceof`: `Element` does not exist during SSR, where `reference` is always undefined.
-    return el && el instanceof Element ? el as HTMLElement : undefined
-  }, updateRect)
-
   function scrollTargetIntoView() {
     if (!scrollIntoView) {
       return
@@ -235,15 +197,11 @@ export function useTour(steps: MaybeRefOrGetter<TourStep[]>, options: UseTourOpt
     }
   })
 
-  // Measure once the DOM reflects the new step.
-  watch([open, reference], updateRect, { flush: 'post' })
-
   return {
     open,
     index,
     current,
     reference,
-    rect,
     total,
     hasNext,
     hasPrev,
