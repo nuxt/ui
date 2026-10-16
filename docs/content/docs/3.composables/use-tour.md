@@ -44,6 +44,29 @@ const tour = useTour([
 - The active target is scrolled into view automatically when a step becomes active.
 - Since you render the content yourself, there is no extra theme or locale to maintain.
 
+### Spotlight :badge{label="Soon" class="align-text-top"}
+
+Combine `reference` with VueUse's [`useElementBounding`](https://vueuse.org/core/useElementBounding/) to dim the page around the current target. The target stays clickable while the rest of the page is blocked, and a step without a target dims the whole page. Setting it up takes three steps:
+
+1. Copy the overlay component below into your app. It measures the target with `useElementBounding` and draws a `clip-path` backdrop with a cutout and a ring around it.
+2. Render `<UseTourSpotlight :tour="tour" />` next to your `<UPopover>`. Keep the measuring inside the overlay: the box updates on every scroll frame, so reading it in the parent template would re-render the whole parent while scrolling.
+3. Give the popover `:ui="{ content: 'z-50' }"` so it stays above the backdrop (`z-40`), and a `sideOffset` of `16` so it clears the cutout padding.
+
+::component-example
+---
+collapse: true
+name: 'use-tour-spotlight'
+preview: false
+---
+::
+
+::component-example
+---
+collapse: true
+name: 'use-tour-spotlight-example'
+---
+::
+
 ## API
 
 `useTour(steps, options?)`{lang="ts-type"}
