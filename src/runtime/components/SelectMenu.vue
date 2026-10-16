@@ -550,7 +550,8 @@ function onMountAutoFocus(event: Event) {
   // so the focus still moves inside the menu without opening the virtual keyboard on touch devices.
   if (searchInputProps.value.autofocus === false) {
     event.preventDefault()
-    ;(focusScopeRef.value?.$el as HTMLElement | undefined)?.focus({ preventScroll: true })
+    const el = focusScopeRef.value?.$el as HTMLElement | undefined
+    el?.focus({ preventScroll: true })
   }
 }
 
