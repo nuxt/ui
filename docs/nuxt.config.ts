@@ -24,8 +24,7 @@ export default defineNuxtConfig({
     'nuxt-schema-org',
     'motion-v/nuxt',
     '@vercel/analytics',
-    '@vercel/speed-insights',
-    'botid/nuxt'
+    '@vercel/speed-insights'
   ],
 
   $development: {
@@ -238,6 +237,21 @@ export default defineNuxtConfig({
   nitro: {
     experimental: {
       asyncContext: true
+    },
+    // BotID challenge rewrites, set as Vercel routes because the `botid/nuxt` module
+    // registers them as `proxy` route rules, which run in the function and get every
+    // visitor flagged as a bot
+    vercel: {
+      config: {
+        routes: [{
+          src: '/149e9513-01fa-4fb0-aad4-566afd725d1b/2d206a39-8ed7-437e-a3be-862e0f06eea3/a-4-a/c.js',
+          dest: 'https://api.vercel.com/bot-protection/v1/challenge'
+        }, {
+          src: '/149e9513-01fa-4fb0-aad4-566afd725d1b/2d206a39-8ed7-437e-a3be-862e0f06eea3/(.*)',
+          dest: 'https://api.vercel.com/bot-protection/v1/proxy/$1',
+          headers: { 'X-Frame-Options': 'SAMEORIGIN' }
+        }]
+      }
     }
   },
 
