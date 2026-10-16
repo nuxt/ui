@@ -54,7 +54,7 @@ import { useFieldGroup } from '../composables/useFieldGroup'
 import { formLoadingInjectionKey } from '../composables/useFormField'
 import { omit, mergeClasses } from '../utils'
 import { tv } from '../utils/tv'
-import { pickLinkProps } from '../utils/link'
+import { pickLinkProps, LinkSlot } from '../utils/link'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import ULink from './Link.vue'
@@ -67,6 +67,9 @@ const props = useComponentProps('button', _props)
 
 const appConfig = useAppConfig() as Button['AppConfig']
 const { orientation, size: buttonSize } = useFieldGroup<ButtonProps>(_props)
+
+// Without `to` or `href`, `LinkSlot` stands in for the Link and these are never read
+const isLink = computed(() => !!(props.to ?? props.href))
 
 // Memoized: `omit` iterates every forwarded key through the `useComponentProps`
 // proxy, so doing it inline in the template re-paid that walk on every render.
@@ -135,11 +138,12 @@ const ui = computed(() => tv({
 </script>
 
 <template>
-  <ULink
+  <component
+    :is="isLink ? ULink : LinkSlot"
     v-slot="{ active, ...slotProps }"
     :type="props.type"
     :disabled="props.disabled || isLoading"
-    v-bind="forwardedLinkProps"
+    v-bind="isLink ? forwardedLinkProps : { as: props.as, active: props.active }"
     custom
   >
     <ULinkBase
@@ -168,5 +172,5 @@ const ui = computed(() => tv({
         <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, active })" />
       </slot>
     </ULinkBase>
-  </ULink>
+  </component>
 </template>

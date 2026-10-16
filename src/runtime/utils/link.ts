@@ -1,3 +1,4 @@
+import type { FunctionalComponent } from 'vue'
 import { isEqual, diff } from 'ohash/utils'
 import type { LinkProps } from '../components/Link.vue'
 import { linkKeys } from './link-keys'
@@ -15,6 +16,26 @@ export function pickLinkProps(link: LinkProps & { [key: string]: any }) {
   }
   return picked
 }
+
+/**
+ * Stands in for a `custom` Link that has no `to` or `href`: it passes its slot
+ * the props Link would, without Link's setup and router work. A single child is
+ * returned as is, so the parent's `$el` stays the element.
+ */
+export const LinkSlot: FunctionalComponent<{ as?: string, type?: string, disabled?: boolean, active?: boolean, custom?: boolean }> = (props, { attrs, slots }) => {
+  const children = slots.default?.({
+    ...attrs,
+    as: props.as,
+    type: props.type,
+    disabled: props.disabled,
+    active: props.active ?? false,
+    isExternal: false
+  })
+
+  return children?.length === 1 ? children[0] : children
+}
+LinkSlot.props = ['as', 'type', 'disabled', 'active', 'custom']
+LinkSlot.inheritAttrs = false
 
 export function isPartiallyEqual(item1: any, item2: any) {
   const diffedKeys = diff(item1, item2).reduce((filtered, q) => {
