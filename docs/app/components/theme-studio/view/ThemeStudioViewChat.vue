@@ -34,7 +34,7 @@ const initialMessages: UIMessage[] = [{
   parts: [{ type: 'text', text: 'Define your palette once in @theme and map it to the primary and neutral aliases in app.config.ts. Every component reads from those semantic tokens, so buttons, badges, inputs and even this chat pick up your brand automatically, exactly what this preview is showing you right now.' }]
 }]
 
-const { messages, status, sendMessage, regenerate, stop, clearError } = useChat({
+const { messages, status, error, sendMessage, regenerate, stop, clearError } = useChat({
   messages: initialMessages
 })
 
@@ -266,6 +266,7 @@ const ui = {
 
             <UChatPrompt
               v-model="input"
+              :error="error"
               color="neutral"
               variant="subtle"
               placeholder="Ask anything about Nuxt UI..."

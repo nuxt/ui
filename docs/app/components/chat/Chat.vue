@@ -74,7 +74,7 @@ function processThemeToolCalls() {
   }
 }
 
-const { messages: chatMessages, status, sendMessage, regenerate, stop } = useAIChat<DocsChatMessage>({
+const { messages: chatMessages, status, error, sendMessage, regenerate, stop } = useAIChat<DocsChatMessage>({
   messages: messages.value,
   transport: new DefaultChatTransport<DocsChatMessage>({
     api: '/api/ai',
@@ -400,6 +400,7 @@ function clearMessages() {
       <UChatPrompt
         ref="promptRef"
         v-model="input"
+        :error="error"
         placeholder="Ask me anything..."
         variant="naked"
         size="sm"

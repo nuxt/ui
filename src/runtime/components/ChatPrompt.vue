@@ -32,9 +32,6 @@ export interface ChatPromptProps extends Pick<TextareaProps, 'rows' | 'autofocus
    * @defaultValue true
    */
   submitOnEnter?: boolean
-  /**
-   * @deprecated The textarea no longer gets disabled on error, so a new message can be sent without retrying.
-   */
   error?: Error
   class?: any
   ui?: ChatPrompt['slots'] & TextareaProps['ui']
@@ -65,7 +62,6 @@ import { useForwardProps } from '../composables/useForwardProps'
 import { useIMEGuard } from '../composables/useIMEGuard'
 import { useLocale } from '../composables/useLocale'
 import { omit, transformUI } from '../utils'
-import { provideChatPromptContext } from '../utils/ai'
 import { tv } from '../utils/tv'
 import UTextarea from './Textarea.vue'
 
@@ -84,8 +80,6 @@ const slots = defineSlots<ChatPromptSlots>()
 const props = useComponentProps('chatPrompt', _props)
 
 const model = defineModel<string>({ default: '' })
-
-provideChatPromptContext({ model })
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as ChatPrompt['AppConfig']

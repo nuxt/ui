@@ -123,7 +123,7 @@ definePageMeta({ layout: 'dashboard' })
 
 const input = ref('')
 
-const { messages, status, sendMessage, stop, regenerate } = useChat({
+const { messages, status, error, sendMessage, stop, regenerate } = useChat({
   onError(error) {
     console.error(error)
   }
@@ -186,7 +186,7 @@ function onSubmit() {
 
     <template #footer>
       <UContainer class="pb-4 sm:pb-6">
-        <UChatPrompt v-model="input" @submit="onSubmit">
+        <UChatPrompt v-model="input" :error="error" @submit="onSubmit">
           <UChatPromptSubmit :status="status" @stop="stop()" @reload="regenerate()" />
         </UChatPrompt>
       </UContainer>
@@ -201,7 +201,7 @@ function onSubmit() {
 - `UChatMessage` — individual bubble. Props: `message`, `side` (`'left'`/`'right'`).
 - `UChatReasoning` — collapsible reasoning block. Auto-opens during streaming, auto-closes when done. Use `isPartStreaming(part)` from `@nuxt/ui/utils/ai`.
 - `UChatTool` — tool invocation status. Use `isToolStreaming(part)`. Variants: `'inline'` (default), `'card'`.
-- `UChatPrompt` — enhanced textarea for chat. Its typed API exposes a selected subset of `UTextarea` props, forwards additional attributes to the underlying textarea, and adds chat-specific props such as `submitOnEnter`.
+- `UChatPrompt` — enhanced textarea for chat. Its typed API exposes a selected subset of `UTextarea` props, forwards additional attributes to the underlying textarea, and adds chat-specific props such as `error` and `submitOnEnter`.
 - `UChatPromptSubmit` — submit button with automatic status handling (send/stop/reload).
 - `UChatPalette` — layout wrapper for chat inside overlays.
 

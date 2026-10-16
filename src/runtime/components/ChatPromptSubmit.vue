@@ -93,7 +93,6 @@ import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useLocale } from '../composables/useLocale'
 import { transformUI } from '../utils'
-import { injectChatPromptContext } from '../utils/ai'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
@@ -118,12 +117,7 @@ const appConfig = useAppConfig() as ChatPromptSubmit['AppConfig']
 
 const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'color', 'variant', 'status', 'disabled', 'streamingIcon', 'streamingColor', 'streamingVariant', 'submittedIcon', 'submittedColor', 'submittedVariant', 'errorIcon', 'errorColor', 'errorVariant', 'class', 'ui'))
 
-const chatPrompt = injectChatPromptContext(null)
-
-// After an error, a typed message is sent instead of retrying the failed one
-const currentStatus = computed(() => props.status === 'error' && chatPrompt?.model.value?.trim() ? 'ready' : props.status)
-
-const disabled = computed(() => currentStatus.value === 'ready' ? props.disabled : false)
+const disabled = computed(() => props.status === 'ready' ? props.disabled : false)
 
 const statusButtonProps = computed(() => ({
   ready: {
@@ -156,14 +150,14 @@ const statusButtonProps = computed(() => ({
       emits('reload', e)
     }
   }
-} satisfies { [key: string]: ButtonProps })[currentStatus.value])
+} satisfies { [key: string]: ButtonProps })[props.status])
 
 const ariaLabel = computed(() => ({
   ready: t('chatPromptSubmit.label'),
   submitted: t('chatPromptSubmit.stop'),
   streaming: t('chatPromptSubmit.stop'),
   error: t('chatPromptSubmit.reload')
-})[currentStatus.value])
+})[props.status])
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatPromptSubmit || {}) })())
