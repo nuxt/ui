@@ -371,6 +371,9 @@ catalogs:
     ai:
       specifier: ^7.0.137
       version: 7.0.137
+    botid:
+      specifier: ^1.5.11
+      version: 1.5.11
     capture-website:
       specifier: ^5.1.0
       version: 5.1.0
@@ -976,6 +979,9 @@ importers:
       ai:
         specifier: 'catalog:'
         version: 7.0.137(zod@4.6.5)
+      botid:
+        specifier: 'catalog:'
+        version: 1.5.11
       capture-website:
         specifier: 'catalog:'
         version: 5.1.0(supports-color@10.2.2)(typescript@6.0.3)
@@ -5310,6 +5316,17 @@ packages:
 
   boolbase@1.0.0:
     resolution: {integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==}
+
+  botid@1.5.11:
+    resolution: {integrity: sha512-KOO1A3+/vFVJk5aFoG3sNwiogKFPVR+x4aw4gQ1b2e0XoE+i5xp48/EZn+WqR07jRHeDGwHWQUOtV5WVm7xiww==}
+    peerDependencies:
+      next: '*'
+      react: ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      next:
+        optional: true
+      react:
+        optional: true
 
   brace-expansion@2.1.0:
     resolution: {integrity: sha512-TN1kCZAgdgweJhWWpgKYrQaMNHcDULHkWwQIspdtjV4Y5aurRdZpjAqn6yX3FPqTA9ngHCc4hJxMAMgGfve85w==}
@@ -15571,6 +15588,8 @@ snapshots:
       - supports-color
 
   boolbase@1.0.0: {}
+
+  botid@1.5.11: {}
 
   brace-expansion@2.1.0:
     dependencies:

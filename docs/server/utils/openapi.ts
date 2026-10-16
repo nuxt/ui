@@ -17,8 +17,8 @@ import { SITE_URL } from './site'
  * that mostly describes plumbing.
  *
  * The AI endpoints (`/api/ai`, `/api/chat`, `/api/completion`) are left out on
- * purpose: they back the documentation chat, are unauthenticated and metered
- * upstream, and documenting them would read as an invitation.
+ * purpose: they back the documentation chat, are unauthenticated, behind BotID
+ * and metered upstream, and documenting them would read as an invitation.
  *
  * Kept dependency-free on purpose: the fragments are passed in rather than
  * imported.

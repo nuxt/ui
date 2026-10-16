@@ -2,8 +2,11 @@ import { defineEventHandler, readBody, createError } from 'nuxt/server'
 import { streamText, createTextStreamResponse } from 'ai'
 import type { GatewayProviderOptions } from '@ai-sdk/gateway'
 import { getChatUser } from '../utils/chatUser'
+import { assertNotBot } from '../utils/botId'
 
 export default defineEventHandler(async (event) => {
+  await assertNotBot()
+
   const { prompt, mode, language } = await readBody<{ prompt?: string, mode?: string, language?: string }>(event)
   if (!prompt) {
     throw createError({ status: 400, message: 'Prompt is required' })

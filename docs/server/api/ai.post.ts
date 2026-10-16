@@ -14,6 +14,7 @@ import { presets } from '../../app/utils/theme/engine/presets'
 import { FONTS } from '../../app/utils/theme/studio'
 import type { FontCategory } from '../../app/utils/theme/studio'
 import { getChatUser } from '../utils/chatUser'
+import { assertNotBot } from '../utils/botId'
 
 const componentNames = Object.keys(theme)
 
@@ -474,6 +475,8 @@ function safePagePath(path: unknown) {
 }
 
 export default defineEventHandler(async (event) => {
+  await assertNotBot()
+
   const { messages, framework } = await readBody(event)
 
   if (!messages || !Array.isArray(messages)) {

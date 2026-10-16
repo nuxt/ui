@@ -24,7 +24,8 @@ export default defineNuxtConfig({
     'nuxt-schema-org',
     'motion-v/nuxt',
     '@vercel/analytics',
-    '@vercel/speed-insights'
+    '@vercel/speed-insights',
+    'botid/nuxt'
   ],
 
   $development: {

@@ -3,8 +3,11 @@ import type { UIMessage } from 'ai'
 import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
 import type { GatewayProviderOptions } from '@ai-sdk/gateway'
 import { getChatUser } from '../utils/chatUser'
+import { assertNotBot } from '../utils/botId'
 
 export default defineEventHandler(async (event) => {
+  await assertNotBot()
+
   const { messages } = await readBody<{ messages: UIMessage[] }>(event)
 
   const result = streamText({

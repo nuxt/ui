@@ -36,6 +36,7 @@
     "@vueuse/integrations": "catalog:",
     "@vueuse/nuxt": "catalog:",
     "ai": "catalog:",
+    "botid": "catalog:",
     "capture-website": "catalog:",
     "fflate": "catalog:",
     "joi": "catalog:",
