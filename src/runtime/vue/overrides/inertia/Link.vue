@@ -74,10 +74,11 @@ import { defu } from 'defu'
 import { useForwardProps, Slot } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
 import { usePage } from '@inertiajs/vue3'
-import { hasProtocol } from 'ufo'
+import { getQuery, hasProtocol } from 'ufo'
 import { useAppConfig } from '#imports'
 import { tv } from '../../../utils/tv'
 import { mergeClasses } from '../../../utils'
+import { isPartiallyEqual } from '../../../utils/link'
 import ULinkBase from './LinkBase.vue'
 
 defineOptions({ inheritAttrs: false })
@@ -94,7 +95,7 @@ const page = usePage()
 
 const appConfig = useAppConfig() as Link['AppConfig']
 
-const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class', 'target', 'rel', 'noRel'))
+const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class', 'target', 'rel', 'noRel', 'ariaCurrentValue'))
 
 const ui = computed(() => tv({
   extend: theme,
@@ -147,24 +148,43 @@ const rel = computed(() => {
   return null
 })
 
+/**
+ * Path portion of a url, without the query or hash and without a trailing
+ * slash. Returns `undefined` when there is no path at all — `?tab=orders` and
+ * `#section` address the current page rather than a path, so they have nothing
+ * to match against.
+ */
+function normalizePath(url: string) {
+  const path = url.split('#')[0]!.split('?')[0]!
+
+  if (!path) {
+    return undefined
+  }
+
+  return path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path
+}
+
+const currentPath = computed(() => normalizePath(page.url) ?? '/')
+
+const targetPath = computed(() => typeof href.value === 'string' ? normalizePath(href.value) : undefined)
+
+const isLinkExactActive = computed(() => !!href.value && page.url === href.value)
+
 const isLinkActive = computed(() => {
   if (props.active !== undefined) {
     return props.active
   }
 
-  if (!href.value) {
+  if (props.exact) {
+    return isLinkExactActive.value
+  }
+
+  if (!targetPath.value || !isPartiallyEqual(getQuery(href.value!), getQuery(page.url))) {
     return false
   }
 
-  if (props.exact && page.url === href.value) {
-    return true
-  }
-
-  if (!props.exact && page.url.startsWith(href.value)) {
-    return true
-  }
-
-  return false
+  return currentPath.value === targetPath.value
+    || currentPath.value.startsWith(targetPath.value === '/' ? '/' : `${targetPath.value}/`)
 })
 
 const linkClass = computed(() => {
@@ -184,6 +204,7 @@ const linkClass = computed(() => {
       v-bind="{
         ...$attrs,
         ...routerLinkProps,
+        ...(exact && isLinkExactActive ? { 'aria-current': props.ariaCurrentValue } : {}),
         as,
         type,
         disabled,
@@ -200,6 +221,7 @@ const linkClass = computed(() => {
     v-bind="{
       ...$attrs,
       ...routerLinkProps,
+      ...(exact && isLinkExactActive ? { 'aria-current': props.ariaCurrentValue } : {}),
       as,
       type,
       disabled,
