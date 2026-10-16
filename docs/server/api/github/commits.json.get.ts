@@ -1,21 +1,32 @@
 import { defineCachedEventHandler } from 'nitropack/runtime'
 import { getQuery, createError } from 'h3'
+import type { H3Event } from 'h3'
 import { Octokit } from '@octokit/rest'
+
+// The component changelog only asks for a component and its theme
+const MAX_PATHS = 2
+const PATH_RE = /^src\/(?:runtime\/components\/(?:[a-z-]+\/)?[A-Za-z0-9]+\.vue|theme\/(?:[a-z-]+\/)?[a-z0-9-]+\.ts)$/
+
+function getPaths(event: H3Event): string[] {
+  const query = getQuery(event) as { path?: string | string[] }
+  const paths = [...new Set([query.path ?? []].flat())].sort()
+
+  if (!paths.length || paths.length > MAX_PATHS || !paths.every(path => PATH_RE.test(path))) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: `Expected 1 to ${MAX_PATHS} component or theme paths`
+    })
+  }
+
+  return paths
+}
 
 export default defineCachedEventHandler(async (event) => {
   if (!process.env.NUXT_GITHUB_TOKEN) {
     return []
   }
 
-  const query = getQuery(event) as { path: string | string[] }
-  const paths = Array.isArray(query.path) ? query.path : [query.path]
-
-  if (!paths.length || !paths[0]) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: 'Path is required'
-    })
-  }
+  const paths = getPaths(event)
 
   const octokit = new Octokit({
     auth: process.env.NUXT_GITHUB_TOKEN,
@@ -50,9 +61,5 @@ export default defineCachedEventHandler(async (event) => {
   return Array.from(uniqueCommits.values()).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 }, {
   maxAge: 60 * 60, // 1 hour
-  getKey: (event) => {
-    const query = getQuery(event) as { path: string | string[] }
-    const paths = Array.isArray(query.path) ? query.path : [query.path]
-    return `commits-${paths.sort().join(',')}`
-  }
+  getKey: event => `commits-${getPaths(event).join(',')}`
 })
