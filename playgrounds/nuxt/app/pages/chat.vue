@@ -9,7 +9,7 @@ const toast = useToast()
 
 const input = ref('')
 
-const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
+const { messages, status, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
   sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses,
   onError(error) {
     let message = error.message
@@ -191,7 +191,6 @@ function generateMessages() {
 
     <UChatPrompt
       v-model="input"
-      :error="error"
       variant="subtle"
       class="sticky bottom-0"
       @submit="onSubmit"

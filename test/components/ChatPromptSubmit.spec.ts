@@ -1,8 +1,10 @@
 import { describe, it, expect } from 'vitest'
+import { h } from 'vue'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import ChatPromptSubmit from '../../src/runtime/components/ChatPromptSubmit.vue'
+import ChatPrompt from '../../src/runtime/components/ChatPrompt.vue'
 
 describe('ChatPromptSubmit', () => {
   const statuses = ['ready', 'submitted', 'streaming', 'error'] as any
@@ -56,6 +58,18 @@ describe('ChatPromptSubmit', () => {
     })
 
     expect(wrapper.find('button').attributes('disabled')).toBeUndefined()
+  })
+
+  it.each([
+    ['', 'Retry'],
+    ['Hello', 'Send prompt']
+  ])('inside a ChatPrompt with status error and value %j, sets aria-label to %s', async (modelValue, label) => {
+    const wrapper = await mountSuspended(ChatPrompt, {
+      props: { modelValue },
+      slots: { footer: () => h(ChatPromptSubmit, { status: 'error' }) }
+    })
+
+    expect(wrapper.find('button').attributes('aria-label')).toBe(label)
   })
 
   it('hides the icon when icon is false', async () => {

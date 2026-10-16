@@ -20,7 +20,7 @@ const initialMessages: UIMessage[] = [{
 }]
 const input = ref('')
 
-const { messages, status, error, sendMessage } = useChat({
+const { messages, status, sendMessage } = useChat({
   messages: initialMessages
 })
 
@@ -83,7 +83,6 @@ const ui = {
               v-model="input"
               icon="i-lucide-search"
               variant="naked"
-              :error="error"
               @submit="onSubmit"
             />
           </template>

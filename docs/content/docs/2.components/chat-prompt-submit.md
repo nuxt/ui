@@ -191,7 +191,7 @@ When its status is `error`{lang="ts-type"}, use the `error-color`, `error-varian
 - `errorIcon="i-lucide-rotate-ccw"`{lang="ts-type"}
 
 ::note
-The `reload` event is emitted when the user clicks on the Button.
+The `reload` event is emitted when the user clicks on the Button. Inside a [ChatPrompt](/docs/components/chat-prompt), the Button submits instead once the user types a new message. :badge{label="Soon" class="align-text-top"}
 ::
 
 ::component-code

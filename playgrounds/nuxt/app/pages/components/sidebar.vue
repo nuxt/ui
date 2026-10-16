@@ -21,7 +21,7 @@ const initialMessages: UIMessage[] = [{
   parts: [{ type: 'text', text: 'Nuxt UI is a Vue component library built on Reka UI, Tailwind CSS, and Tailwind Variants. It provides 125+ accessible components for building modern web apps.' }]
 }]
 
-const { messages, status, error, sendMessage, regenerate, stop } = useChat({
+const { messages, status, sendMessage, regenerate, stop } = useChat({
   messages: initialMessages,
   onError(error) {
     console.error(error)
@@ -105,7 +105,6 @@ function onSubmit() {
       <template #footer>
         <UChatPrompt
           v-model="input"
-          :error="error"
           variant="subtle"
           size="sm"
           @submit="onSubmit"

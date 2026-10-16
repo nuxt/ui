@@ -368,7 +368,7 @@ const plugins = [shiki()]
 
 const input = ref('')
 
-const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
+const { messages, status, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
   sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses,
   onError(error) {
     console.error(error)
@@ -433,7 +433,6 @@ function onSubmit() {
 
   <UChatPrompt
     v-model="input"
-    :error="error"
     @submit="onSubmit"
   >
     <UChatPromptSubmit
@@ -459,7 +458,7 @@ const plugins = [shiki()]
 
 const input = ref('')
 
-const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
+const { messages, status, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
   sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses,
   onError(error) {
     console.error(error)
@@ -524,7 +523,6 @@ function onSubmit() {
 
   <UChatPrompt
     v-model="input"
-    :error="error"
     @submit="onSubmit"
   >
     <UChatPromptSubmit

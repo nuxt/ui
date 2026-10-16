@@ -10,7 +10,7 @@ const plugins = [shiki(), security({ blockedTags: ['script', 'style', 'iframe', 
 
 const input = ref('')
 
-const { messages, status, error, sendMessage, regenerate } = useChat()
+const { messages, status, sendMessage, regenerate } = useChat()
 
 const groups = computed(() => [{
   id: 'ai',
@@ -104,7 +104,6 @@ const ui = {
               v-model="input"
               icon="i-lucide-search"
               variant="naked"
-              :error="error"
               @submit="onSubmit"
               @close="onClose"
             />

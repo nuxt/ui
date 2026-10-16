@@ -1,4 +1,6 @@
+import type { Ref } from 'vue'
 import type { UIMessage } from 'ai'
+import { createContext } from 'reka-ui'
 
 /**
  * Extracts and concatenates all text parts from a UIMessage.
@@ -59,3 +61,9 @@ export function isReasoningStreaming(
   }
   return true
 }
+
+export interface ChatPromptContext {
+  model: Ref<string>
+}
+
+export const [injectChatPromptContext, provideChatPromptContext] = createContext<ChatPromptContext>('ChatPrompt')
