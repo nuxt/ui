@@ -34,6 +34,14 @@ describe('ChatPrompt', () => {
     expect(wrapper.emitted('submit')).toHaveLength(1)
   })
 
+  it('keeps the textarea enabled when error is set', async () => {
+    const wrapper = await mountSuspended(ChatPrompt, {
+      props: { error: new Error('Error') }
+    })
+
+    expect(wrapper.find('textarea').attributes('disabled')).toBeUndefined()
+  })
+
   it('does not emit submit on Enter during composition', async () => {
     const wrapper = await mountSuspended(ChatPrompt, {
       props: { modelValue: 'Hello' }
