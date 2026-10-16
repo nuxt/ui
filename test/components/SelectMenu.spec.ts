@@ -284,6 +284,27 @@ describe('SelectMenu', () => {
 
       const input = wrapper.find('[data-slot="input"] input')
       expect(document.activeElement).not.toBe(input.element)
+      expect(wrapper.find('[data-slot="focusScope"]').element.contains(document.activeElement)).toBe(true)
+
+      wrapper.unmount()
+    })
+
+    test('navigates the items with the keyboard with searchInput autofocus disabled', async () => {
+      const wrapper = mount(SelectMenu, { attachTo: document.body, props: { open: true, portal: false, items, searchInput: { autofocus: false } } })
+
+      await flushPromises()
+      await new Promise(resolve => setTimeout(resolve))
+
+      const focusScope = wrapper.find('[data-slot="focusScope"]')
+      const options = wrapper.findAll('[role="option"]')
+      expect(options[0]!.attributes('data-highlighted')).toBeDefined()
+
+      await focusScope.trigger('keydown', { key: 'ArrowDown' })
+      expect(options[1]!.attributes('data-highlighted')).toBeDefined()
+
+      await focusScope.trigger('keydown', { key: 'Enter' })
+      await flushPromises()
+      expect(wrapper.emitted('update:modelValue')).toMatchObject([[items[1]]])
 
       wrapper.unmount()
     })
