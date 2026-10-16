@@ -149,7 +149,8 @@ describe('Checkbox', () => {
       expect(label.attributes('for')).toBeTruthy()
     })
 
-    test.each(['card', 'table'] as const)('is a <div> in the %s variant', async (variant) => {
+    // `Checkbox` only ships the `list` and `card` variants, `table` lives on `CheckboxGroup`.
+    test.each(['card'] as const)('is a <div> in the %s variant', async (variant) => {
       const wrapper = await mountSuspended(Checkbox, { props: { label: 'Label', variant } })
       const label = wrapper.find('[data-slot="label"]')
 
