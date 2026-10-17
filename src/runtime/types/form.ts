@@ -103,6 +103,7 @@ export interface FormFieldInjectedOptions<T> {
   name?: string
   size?: GetObjectField<T, 'size'>
   error?: string | boolean
+  invalid?: boolean
   eagerValidation?: boolean
   validateOnInputDelay?: number
   errorPattern?: RegExp

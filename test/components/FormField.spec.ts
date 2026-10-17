@@ -149,12 +149,22 @@ describe('FormField', () => {
 
     test('binds hints with aria-describedby', async () => {
       const wrapper = await renderFormField({
-        props: { hint: 'somehint' },
+        props: { label: 'Label', hint: 'somehint' },
         inputComponent
       })
 
       const attr = wrapper.find('[aria-describedby=v-0-0-hint]')
       expect(attr.exists()).toBe(true)
+    })
+
+    test('does not bind hint with aria-describedby without label', async () => {
+      const wrapper = await renderFormField({
+        props: { hint: 'somehint' },
+        inputComponent
+      })
+
+      const attr = wrapper.find('[aria-describedby*=v-0-0-hint]')
+      expect(attr.exists()).toBe(false)
     })
 
     test('binds description with aria-describedby', async () => {
@@ -184,6 +194,27 @@ describe('FormField', () => {
       })
 
       const attr = wrapper.find('[aria-invalid=true]')
+      expect(attr.exists()).toBe(true)
+    })
+
+    test('binds aria-invalid without aria-describedby when error is true', async () => {
+      const wrapper = await renderFormField({
+        props: { error: true },
+        inputComponent
+      })
+
+      const attr = wrapper.find('[aria-invalid=true]')
+      expect(attr.exists()).toBe(true)
+      expect(attr.attributes('aria-describedby')).toBeUndefined()
+    })
+
+    test('does not bind help with aria-describedby when error is shown', async () => {
+      const wrapper = await renderFormField({
+        props: { error: 'someerror', help: 'somehelp' },
+        inputComponent
+      })
+
+      const attr = wrapper.find('[aria-describedby=v-0-0-error]')
       expect(attr.exists()).toBe(true)
     })
 
