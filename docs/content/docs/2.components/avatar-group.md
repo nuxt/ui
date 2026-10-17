@@ -102,6 +102,12 @@ Wrap each avatar with a [Tooltip](/docs/components/tooltip) to display a tooltip
 
 :component-example{name="avatar-group-tooltip-example"}
 
+### With overflow tooltip :badge{label="Soon" class="align-text-top"}
+
+Use the `overflow` slot to customize the `+X` avatar displayed when using the `max` prop. It receives the `hiddenCount`, so you can wrap the overflow avatar with a [Tooltip](/docs/components/tooltip) for example.
+
+:component-example{name="avatar-group-overflow-tooltip-example"}
+
 ### With chip
 
 Wrap each avatar with a [Chip](/docs/components/chip) to display a chip around the avatar.
