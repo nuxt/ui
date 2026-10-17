@@ -67,7 +67,21 @@ function convertKeyToCode(key: string): string {
     arrowleft: 'ArrowLeft',
     arrowright: 'ArrowRight'
   }
-  return specialKeys[key.toLowerCase()] || key
+  // Handle standard punctuation keys
+  const punctuationKeys: Record<string, string> = {
+    '/': 'Slash',
+    '\\': 'Backslash',
+    '.': 'Period',
+    ',': 'Comma',
+    ';': 'Semicolon',
+    '\'': 'Quote',
+    '[': 'BracketLeft',
+    ']': 'BracketRight',
+    '-': 'Minus',
+    '=': 'Equal',
+    '`': 'Backquote'
+  }
+  return specialKeys[key.toLowerCase()] || punctuationKeys[key] || key
 }
 
 export function extractShortcuts(items: any[] | any[][], separator: '_' | '-' = '_') {
@@ -182,13 +196,12 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
         if (e.code !== shortcut.key) {
           continue
         }
-      } else if (shortcut.altKey && e.altKey) {
-        // Alt/Option modifies e.key on macOS (e.g. Alt+K → "˚"), so compare via e.code
-        if (e.code !== convertKeyToCode(shortcut.key)) {
-          continue
-        }
       } else {
-        if (e.key.toLowerCase() !== shortcut.key) {
+        const matchesKey = e.key.toLowerCase() === shortcut.key
+        // Alt/Option modifies e.key on macOS (e.g. Alt+K → "˚", Alt+/ → "÷"), so check e.code as fallback
+        const matchesAltCode = shortcut.altKey && e.altKey && e.code === convertKeyToCode(shortcut.key)
+
+        if (!matchesKey && !matchesAltCode) {
           continue
         }
       }
