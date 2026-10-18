@@ -63,7 +63,7 @@ export interface CheckboxSlots {
 </script>
 
 <script setup lang="ts" generic="T = boolean">
-import { computed, useAttrs, useId } from 'vue'
+import { computed, useId } from 'vue'
 import { Primitive, CheckboxRoot, CheckboxIndicator, Label, injectCheckboxGroupRootContext } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { isEqual } from 'ohash/utils'
@@ -71,6 +71,7 @@ import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useFormField } from '../composables/useFormField'
+import { pick, omit } from '../utils'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
@@ -116,13 +117,8 @@ const maxReached = computed(() => {
 // label instead. No `appConfig` fallback here, an unset `icon` must render nothing.
 const labelIcon = computed(() => props.indicator === 'hidden' ? props.icon : undefined)
 
-const attrs = useAttrs()
-
-// Omit `data-state` to prevent conflicts with parent components (e.g. TooltipTrigger)
-const forwardedAttrs = computed(() => {
-  const { 'data-state': _, ...rest } = attrs
-  return rest
-})
+// Hover handlers belong on the whole checkbox, including its label. Keep focus and aria attributes on the input.
+const rootAttrs = ['onPointermove', 'onPointerleave', 'data-grace-area-trigger']
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.checkbox || {}) })({
@@ -146,11 +142,11 @@ function onUpdate(value: any) {
 
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <Primitive :as="(!props.variant || props.variant === 'list') ? props.as : Label" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="(!props.variant || props.variant === 'list') ? props.as : Label" v-bind="pick($attrs, rootAttrs)" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
       <CheckboxRoot
         :id="id"
-        v-bind="{ ...rootProps, ...forwardedAttrs, ...ariaAttrs }"
+        v-bind="{ ...rootProps, ...omit($attrs, ['data-state', ...rootAttrs]), ...ariaAttrs }"
         :name="name"
         :disabled="disabled"
         data-slot="base"
