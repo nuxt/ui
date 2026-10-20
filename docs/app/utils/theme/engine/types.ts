@@ -228,6 +228,20 @@ interface ComponentFragment {
 
 type Fragments = Record<string, ComponentFragment>
 
+/**
+ * The overrides `<UTheme>` can take. An AI answer, a stored theme or an old
+ * link can still carry `compoundVariants`: dropped where they come in, so the
+ * preview never shows a style the `app.vue` export can't reproduce.
+ */
+export function withoutCompoundVariants<T extends Record<string, any> | undefined>(ui: T): T {
+  if (!ui) return ui
+  return Object.fromEntries(Object.entries(ui).map(([component, override]) => {
+    if (!override || typeof override !== 'object' || Array.isArray(override)) return [component, override]
+    const { compoundVariants: _, ...rest } = override as Record<string, any>
+    return [component, rest]
+  })) as T
+}
+
 /** Semantic token shades, the only CSS variables a style still emits. */
 export function styleTokens(style: StyleOptions): { light: Record<string, string>, dark: Record<string, string> } {
   const light: Record<string, string> = {}

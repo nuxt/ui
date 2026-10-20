@@ -9,7 +9,7 @@ import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables } from '../utils/
 // Tables only, never the engine barrel: this composable rides the entry
 // chunk on every page, and the barrel would drag presets, the palette math
 // and the serializer with it. The serializer loads on demand below.
-import { mergeUi, isDefaultStyle, isDefaultTheme, styleTokens, DEFAULT_COLORS, DEFAULT_PRESET_ID, THEME_DEFAULTS, SEMANTIC_ALIASES, LIBRARY_TOKEN_DEFAULTS, tokenShadeDefaults } from '../utils/theme/engine/types'
+import { mergeUi, isDefaultStyle, isDefaultTheme, styleTokens, DEFAULT_COLORS, DEFAULT_PRESET_ID, THEME_DEFAULTS, SEMANTIC_ALIASES, LIBRARY_TOKEN_DEFAULTS, tokenShadeDefaults, withoutCompoundVariants } from '../utils/theme/engine/types'
 import type { ThemeDoc, ThemePalette, StyleOptions, StoredPaletteParams } from '../utils/theme/engine'
 import colors from 'tailwindcss/colors'
 
@@ -448,7 +448,8 @@ export function useTheme() {
         // icons app-wide) and prototype-polluting keys
         if (key === 'colors' || key === 'icons' || key === '__proto__' || key === 'constructor' || key === 'prototype') continue
 
-        savedExtras.ui[key] = defu(value as Record<string, any>, savedExtras.ui[key] || {})
+        const override = withoutCompoundVariants({ [key]: value as Record<string, any> })[key]
+        savedExtras.ui[key] = defu(override, savedExtras.ui[key] || {})
       }
     }
 
