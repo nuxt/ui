@@ -240,8 +240,11 @@ export default defineNuxtModule<ModuleOptions>({
       }
 
       // `app.config.ts` is only evaluated at runtime, so the icons it sets never reach
-      // `nuxt.options.appConfig`. Read the icon names written in each layer's file instead.
-      const scanner = new IconUsageScanner(true)
+      // `nuxt.options.appConfig`. Read the icon names written in each layer's file instead,
+      // matching custom collections too, as `clientBundle.scan` does.
+      const scanner = new IconUsageScanner({
+        additionalCollections: ((nuxt.options.icon || {}).customCollections ?? []).map(collection => collection.prefix)
+      })
       for (const layer of nuxt.options._layers) {
         const path = await findPath(join(layer.config.srcDir, 'app.config'))
         if (path) {
