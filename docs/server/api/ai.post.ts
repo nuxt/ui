@@ -114,7 +114,7 @@ const applyTheme = tool({
       },
       ui: {
         type: 'object',
-        description: 'Component-level theme overrides. MUST include ALL component customizations here so they are applied live. Keys are camelCase component names (e.g. button, badge, popover). Values have slots, defaultVariants, variants, compoundVariants.',
+        description: 'Component-level theme overrides. MUST include ALL component customizations here so they are applied live. Keys are camelCase component names (e.g. button, badge, popover). Values have slots, defaultVariants and variants. Do not use compoundVariants, express a condition with a single variant value instead.',
         additionalProperties: true
       }
     }

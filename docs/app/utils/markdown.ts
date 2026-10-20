@@ -177,6 +177,6 @@ export function parseMarkdownDoc(markdown: string): Promise<MarkdownDoc> {
 }
 
 /** A generated file as a highlighted document, rendered by CodePane. */
-export function parseCode(code: string, lang: 'css' | 'ts'): Promise<MarkdownDoc> {
+export function parseCode(code: string, lang: 'css' | 'ts' | 'vue'): Promise<MarkdownDoc> {
   return parse(`\`\`\`${lang}\n${code}\n\`\`\``)
 }
