@@ -12,7 +12,7 @@ const open = defineModel<boolean>('open', { default: false })
 
 const appConfig = useAppConfig()
 const studioIcons = useStudioIcons()
-const { exportCSS, exportConfig, configLabel, currentDoc } = useTheme()
+const { exportCSS, exportApp, appLabel, currentDoc } = useTheme()
 const { presets, activePreset, dirty } = useThemeStudio()
 const { framework } = useFrameworks()
 const { track } = useAnalytics()
@@ -22,7 +22,7 @@ const { copy: copyToClipboard, copied: linkCopied } = useClipboard()
 const { copy: copyFileToClipboard, copied: fileCopied } = useClipboard()
 
 const css = ref('')
-const config = ref('')
+const app = ref('')
 const link = ref('')
 
 /** The URL the studio reads back on load, theme and all. */
@@ -43,20 +43,20 @@ function copyThemeLink() {
 }
 
 // the pane shows the plain file for the frame the highlighter takes to arrive
-const docs = shallowRef<Partial<Record<'css' | 'config', MarkdownDoc>>>({})
+const docs = shallowRef<Partial<Record<'css' | 'app', MarkdownDoc>>>({})
 
 const panes = computed(() => [
   { key: 'css' as const, filename: 'main.css', code: css.value },
-  { key: 'config' as const, filename: configLabel.value, code: config.value }
+  { key: 'app' as const, filename: appLabel.value, code: app.value }
 ])
 
-const tab = ref<'css' | 'config'>('css')
+const tab = ref<'css' | 'app'>('css')
 const pane = computed(() => panes.value.find(entry => entry.key === tab.value) ?? panes.value[0]!)
 
 /** Copy and Download both act on the file the tab is showing. */
 function copyFile() {
   copyFileToClipboard(pane.value.code)
-  track('Theme Exported', { type: pane.value.key === 'css' ? 'CSS' : 'Config', action: 'Copy' })
+  track('Theme Exported', { type: pane.value.key === 'css' ? 'CSS' : 'App', action: 'Copy' })
 }
 
 function downloadFile() {
@@ -68,7 +68,7 @@ function downloadFile() {
   anchor.click()
   anchor.remove()
   setTimeout(() => URL.revokeObjectURL(url), 0)
-  track('Theme Exported', { type: pane.value.key === 'css' ? 'CSS' : 'Config', action: 'Download' })
+  track('Theme Exported', { type: pane.value.key === 'css' ? 'CSS' : 'App', action: 'Download' })
 }
 
 // framework too: only one half of the export is framework-agnostic. The last
@@ -77,20 +77,20 @@ let version = 0
 watch([open, framework], async ([isOpen]) => {
   const current = ++version
   css.value = ''
-  config.value = ''
+  app.value = ''
   docs.value = {}
 
   if (!isOpen) {
     return
   }
 
-  const [nextCss, nextConfig] = await Promise.all([exportCSS(), exportConfig()])
-  const [cssDoc, configDoc] = await Promise.all([parseCode(nextCss, 'css'), parseCode(nextConfig, 'ts')])
+  const [nextCss, nextApp] = await Promise.all([exportCSS(), exportApp()])
+  const [cssDoc, appDoc] = await Promise.all([parseCode(nextCss, 'css'), parseCode(nextApp, 'vue')])
   if (current !== version) return
 
   css.value = nextCss
-  config.value = nextConfig
-  docs.value = { css: cssDoc, config: configDoc }
+  app.value = nextApp
+  docs.value = { css: cssDoc, app: appDoc }
 })
 
 // The theme can't change while the modal covers the studio, so the link is

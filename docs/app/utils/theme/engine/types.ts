@@ -222,7 +222,7 @@ function shadeRef(ramp: string, stop: ShadeStop | number): string {
 /** The `ui.<component>` override shape the studio and presets both speak. */
 interface ComponentFragment {
   slots?: Record<string, string>
-  compoundVariants?: Array<Record<string, unknown>>
+  variants?: Record<string, Record<string, Record<string, string>>>
   defaultVariants?: Record<string, string>
 }
 
@@ -303,9 +303,8 @@ export function styleComponents(style: StyleOptions): Fragments {
 
 /**
  * Merge two `ui.<component>` override fragments so both take effect: slot
- * class strings concatenate (extra last, winning the tailwind-merge),
- * compoundVariants append in the same order. A spread would silently drop
- * whichever side loses.
+ * and variant class strings concatenate (extra last, winning the merge). A
+ * spread would silently drop whichever side loses.
  */
 export function mergeComponentOverrides(
   base: Record<string, any> | undefined,
@@ -322,8 +321,6 @@ export function mergeComponentOverrides(
       result[key] = b
     } else if (b === undefined) {
       result[key] = a
-    } else if (key === 'compoundVariants' && Array.isArray(a) && Array.isArray(b)) {
-      result[key] = [...a, ...b]
     } else if (key === 'defaultVariants') {
       // variant NAMES, not class strings, later value replaces per key
       result[key] = { ...a, ...b }

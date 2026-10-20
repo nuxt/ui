@@ -3,21 +3,21 @@ import type { MarkdownDoc } from '../../utils/markdown'
 
 /**
  * The theme as the files you would ship, for the home hero's right half:
- * main.css and the config, one tab each, regenerated as the theme changes
+ * main.css and app.vue, one tab each, regenerated as the theme changes
  * through the preset pills below, the header menu or the studio. The server
  * renders the stock theme highlighted; the client takes over after mount,
  * once the persisted theme is on.
  */
-const { exportCSS, exportConfig, configLabel, currentDoc } = useTheme()
+const { exportCSS, exportApp, appLabel, currentDoc } = useTheme()
 const { framework } = useFrameworks()
 
 interface Pane {
-  key: 'css' | 'config'
+  key: 'css' | 'app'
   filename: string
   doc: MarkdownDoc
 }
 
-// the doc reads every theme ref, the framework picks the config file
+// the doc reads every theme ref, the framework picks the app file
 const themeKey = () => JSON.stringify(currentDoc()) + framework.value
 
 // the pane is desktop only, so a phone never parses the files
@@ -28,14 +28,14 @@ async function generate(): Promise<{ key: string, panes: Pane[] }> {
   // loaded here so shiki and its grammars stay out of the landing's entry chunk
   const { parseCode } = await import('../../utils/markdown')
   // explicit: the stock theme is a pair of files too, not an empty diff
-  const [css, config] = await Promise.all([exportCSS({ explicit: true }), exportConfig({ explicit: true })])
-  const [cssDoc, configDoc] = await Promise.all([parseCode(css, 'css'), parseCode(config, 'ts')])
+  const [css, app] = await Promise.all([exportCSS({ explicit: true }), exportApp({ explicit: true })])
+  const [cssDoc, appDoc] = await Promise.all([parseCode(css, 'css'), parseCode(app, 'vue')])
 
   return {
     key,
     panes: [
       { key: 'css', filename: 'main.css', doc: cssDoc },
-      { key: 'config', filename: configLabel.value, doc: configDoc }
+      { key: 'app', filename: appLabel.value, doc: appDoc }
     ]
   }
 }
