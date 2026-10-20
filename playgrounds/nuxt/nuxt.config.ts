@@ -23,6 +23,12 @@ export default defineNuxtConfig({
     compatibilityVersion: 5
   },
 
+  experimental: {
+    // `@nuxt/content` still imports Nitro helpers from `#imports`, which compat v5
+    // no longer provides. Remove once nuxt/content#3889 is released.
+    nitroAutoImports: true
+  },
+
   compatibilityDate: '2024-07-09',
 
   vite: {
