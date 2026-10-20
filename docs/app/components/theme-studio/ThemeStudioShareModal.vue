@@ -12,7 +12,7 @@ const open = defineModel<boolean>('open', { default: false })
 
 const appConfig = useAppConfig()
 const studioIcons = useStudioIcons()
-const { exportCSS, exportConfig, configLabel, currentDoc } = useTheme()
+const { exportCSS, exportApp, exportConfig, appLabel, configLabel, currentDoc } = useTheme()
 const { presets, activePreset, dirty } = useThemeStudio()
 const { framework } = useFrameworks()
 const { track } = useAnalytics()
@@ -22,6 +22,7 @@ const { copy: copyToClipboard, copied: linkCopied } = useClipboard()
 const { copy: copyFileToClipboard, copied: fileCopied } = useClipboard()
 
 const css = ref('')
+const app = ref('')
 const config = ref('')
 const link = ref('')
 
@@ -43,20 +44,26 @@ function copyThemeLink() {
 }
 
 // the pane shows the plain file for the frame the highlighter takes to arrive
-const docs = shallowRef<Partial<Record<'css' | 'config', MarkdownDoc>>>({})
+type PaneKey = 'css' | 'app' | 'config'
 
+const docs = shallowRef<Partial<Record<PaneKey, MarkdownDoc>>>({})
+
+// the app config only carries the icon set, so it only shows when that changes
 const panes = computed(() => [
   { key: 'css' as const, filename: 'main.css', code: css.value },
-  { key: 'config' as const, filename: configLabel.value, code: config.value }
+  { key: 'app' as const, filename: appLabel.value, code: app.value },
+  ...config.value ? [{ key: 'config' as const, filename: configLabel.value, code: config.value }] : []
 ])
 
-const tab = ref<'css' | 'config'>('css')
+const exportType: Record<PaneKey, string> = { css: 'CSS', app: 'App', config: 'Config' }
+
+const tab = ref<PaneKey>('css')
 const pane = computed(() => panes.value.find(entry => entry.key === tab.value) ?? panes.value[0]!)
 
 /** Copy and Download both act on the file the tab is showing. */
 function copyFile() {
   copyFileToClipboard(pane.value.code)
-  track('Theme Exported', { type: pane.value.key === 'css' ? 'CSS' : 'Config', action: 'Copy' })
+  track('Theme Exported', { type: exportType[pane.value.key], action: 'Copy' })
 }
 
 function downloadFile() {
@@ -68,7 +75,7 @@ function downloadFile() {
   anchor.click()
   anchor.remove()
   setTimeout(() => URL.revokeObjectURL(url), 0)
-  track('Theme Exported', { type: pane.value.key === 'css' ? 'CSS' : 'Config', action: 'Download' })
+  track('Theme Exported', { type: exportType[pane.value.key], action: 'Download' })
 }
 
 // framework too: only one half of the export is framework-agnostic. The last
@@ -77,6 +84,7 @@ let version = 0
 watch([open, framework], async ([isOpen]) => {
   const current = ++version
   css.value = ''
+  app.value = ''
   config.value = ''
   docs.value = {}
 
@@ -84,13 +92,14 @@ watch([open, framework], async ([isOpen]) => {
     return
   }
 
-  const [nextCss, nextConfig] = await Promise.all([exportCSS(), exportConfig()])
-  const [cssDoc, configDoc] = await Promise.all([parseCode(nextCss, 'css'), parseCode(nextConfig, 'ts')])
+  const [nextCss, nextApp, nextConfig] = await Promise.all([exportCSS(), exportApp(), exportConfig()])
+  const [cssDoc, appDoc, configDoc] = await Promise.all([parseCode(nextCss, 'css'), parseCode(nextApp, 'vue'), nextConfig ? parseCode(nextConfig, 'ts') : undefined])
   if (current !== version) return
 
   css.value = nextCss
+  app.value = nextApp
   config.value = nextConfig
-  docs.value = { css: cssDoc, config: configDoc }
+  docs.value = { css: cssDoc, app: appDoc, config: configDoc }
 })
 
 // The theme can't change while the modal covers the studio, so the link is
