@@ -48,13 +48,12 @@ import { computed, ref, inject } from 'vue'
 import { defu } from 'defu'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
-import { useForwardProps } from '../composables/useForwardProps'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { formLoadingInjectionKey } from '../composables/useFormField'
-import { omit, mergeClasses } from '../utils'
+import { mergeClasses } from '../utils'
 import { tv } from '../utils/tv'
-import { pickLinkProps, LinkSlot } from '../utils/link'
+import { linkKeys, LinkSlot } from '../utils/link'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import ULink from './Link.vue'
@@ -71,10 +70,17 @@ const { orientation, size: buttonSize } = useFieldGroup<ButtonProps>(_props)
 // Without `to` or `href`, `LinkSlot` stands in for the Link and these are never read
 const isLink = computed(() => !!(props.to ?? props.href))
 
-// Memoized: `omit` iterates every forwarded key through the `useComponentProps`
-// proxy, so doing it inline in the template re-paid that walk on every render.
-const linkProps = useForwardProps(computed(() => pickLinkProps(props)))
-const forwardedLinkProps = computed(() => omit(linkProps.value, ['type', 'disabled', 'onClick']))
+// Reads only the link props through the `useComponentProps` proxy, `type`,
+// `disabled` and `onClick` are bound separately
+const forwardedLinkProps = computed(() => {
+  const forwarded: Record<string, any> = {}
+  for (const key of linkKeys) {
+    if (key === 'type' || key === 'disabled' || key === 'onClick') continue
+    const value = props[key as keyof typeof props]
+    if (value !== undefined) forwarded[key] = value
+  }
+  return forwarded
+})
 
 const loadingAutoState = ref(false)
 const formLoading = inject<Ref<boolean> | undefined>(formLoadingInjectionKey, undefined)
