@@ -3,16 +3,16 @@ import type { MarkdownDoc } from '../../utils/markdown'
 
 /**
  * The theme as the files you would ship, for the home hero's right half:
- * main.css and app.vue, one tab each, regenerated as the theme changes
+ * main.css, app.vue and the app config when the icon set changes, one tab each, regenerated as the theme changes
  * through the preset pills below, the header menu or the studio. The server
  * renders the stock theme highlighted; the client takes over after mount,
  * once the persisted theme is on.
  */
-const { exportCSS, exportApp, appLabel, currentDoc } = useTheme()
+const { exportCSS, exportApp, exportConfig, appLabel, configLabel, currentDoc } = useTheme()
 const { framework } = useFrameworks()
 
 interface Pane {
-  key: 'css' | 'app'
+  key: 'css' | 'app' | 'config'
   filename: string
   doc: MarkdownDoc
 }
@@ -28,16 +28,18 @@ async function generate(): Promise<{ key: string, panes: Pane[] }> {
   // loaded here so shiki and its grammars stay out of the landing's entry chunk
   const { parseCode } = await import('../../utils/markdown')
   // explicit: the stock theme is a pair of files too, not an empty diff
-  const [css, app] = await Promise.all([exportCSS({ explicit: true }), exportApp({ explicit: true })])
-  const [cssDoc, appDoc] = await Promise.all([parseCode(css, 'css'), parseCode(app, 'vue')])
+  const [css, app, config] = await Promise.all([exportCSS({ explicit: true }), exportApp({ explicit: true }), exportConfig()])
+  const [cssDoc, appDoc, configDoc] = await Promise.all([parseCode(css, 'css'), parseCode(app, 'vue'), config ? parseCode(config, 'ts') : undefined])
 
-  return {
-    key,
-    panes: [
-      { key: 'css', filename: 'main.css', doc: cssDoc },
-      { key: 'app', filename: appLabel.value, doc: appDoc }
-    ]
+  const panes: Pane[] = [
+    { key: 'css', filename: 'main.css', doc: cssDoc },
+    { key: 'app', filename: appLabel.value, doc: appDoc }
+  ]
+  if (configDoc) {
+    panes.push({ key: 'config', filename: configLabel.value, doc: configDoc })
   }
+
+  return { key, panes }
 }
 
 // The payload carries the stock theme's files; the persisted theme is

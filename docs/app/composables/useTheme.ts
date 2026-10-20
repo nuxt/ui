@@ -326,6 +326,11 @@ export function useTheme() {
     return generateApp(currentDoc(), framework.value, options)
   }
 
+  async function exportConfig(): Promise<string> {
+    const { generateConfig } = await import('../utils/theme/engine/serialize')
+    return generateConfig(currentDoc(), framework.value)
+  }
+
   function injectCustomColors(customColors: Record<string, Record<string, string>>) {
     customColorsData.value = { ...customColorsData.value, ...customColors }
   }
@@ -545,6 +550,7 @@ export function useTheme() {
      */
     selectedPreset: computed(() => activePreset.value ?? (hasChanges.value ? undefined : DEFAULT_PRESET_ID)),
     appLabel: computed(() => framework.value === 'vue' ? 'App.vue' : 'app.vue'),
+    configLabel: computed(() => framework.value === 'vue' ? 'vite.config.ts' : 'app.config.ts'),
     currentDoc,
     cssVariablesData,
     customColorsData,
@@ -556,6 +562,7 @@ export function useTheme() {
     setStyleUi,
     exportCSS,
     exportApp,
+    exportConfig,
     applyThemeSettings,
     resetTheme
   }

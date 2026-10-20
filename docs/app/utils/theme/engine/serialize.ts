@@ -1,8 +1,9 @@
 /**
  * The theme's wire format: `generateCSS`/`generateApp` emit the minimal
- * `main.css` + `app.vue` pair for a doc. `explicit` writes the headline
- * settings (`primary`, `neutral`, the body font) even at their defaults, for
- * a pane that shows the theme rather than a diff to paste.
+ * `main.css` + `app.vue` pair for a doc, plus `generateConfig` when the icon
+ * set changes. `explicit` writes the headline settings (`primary`, `neutral`,
+ * the body font) even at their defaults, for a pane that shows the theme
+ * rather than a diff to paste.
  */
 export interface SerializeOptions {
   explicit?: boolean
@@ -175,8 +176,8 @@ function toObjectSource(value: Record<string, any>): string {
 /**
  * The `app.vue` side of the export: a `<UTheme>` around `<UApp>`, so overlays
  * and toasts take the theme too. Its `ui` holds the slot classes, `variants`
- * the variant classes, `props` the default variants, `'*'` for the app-wide
- * size and color, and `icons` the icon set.
+ * the variant classes and `props` the default variants, `'*'` for the app-wide
+ * size and color. The icon set goes to `generateConfig` instead.
  */
 export function generateApp(doc: ThemeDoc, framework: string = 'nuxt', _options: SerializeOptions = {}): string {
   const theme: Record<string, Record<string, any>> = {}
@@ -199,11 +200,7 @@ export function generateApp(doc: ThemeDoc, framework: string = 'nuxt', _options:
     set('props', component, override.defaultVariants)
   }
 
-  if (doc.icons && doc.icons !== THEME_DEFAULTS.icons && Object.hasOwn(themeIcons, doc.icons)) {
-    theme.icons = themeIcons[doc.icons as keyof typeof themeIcons]
-  }
-
-  const props = (['ui', 'variants', 'props', 'icons'] as const).filter(prop => theme[prop])
+  const props = (['ui', 'variants', 'props'] as const).filter(prop => theme[prop])
   const page = framework === 'vue' ? '<RouterView />' : '<NuxtPage />'
   const app = ['<UApp>', `  ${page}`, '</UApp>']
 
@@ -222,4 +219,34 @@ export function generateApp(doc: ThemeDoc, framework: string = 'nuxt', _options:
     '  </UTheme>',
     '</template>'
   ].join('\n')
+}
+
+/**
+ * The icon set, empty when the theme keeps the default one. It stays in the
+ * app config rather than on `<UTheme>`: Nuxt UI only adds the app config
+ * icons to the client bundle, and only they reach `error.vue`.
+ */
+export function generateConfig(doc: ThemeDoc, framework: string = 'nuxt'): string {
+  if (!doc.icons || doc.icons === THEME_DEFAULTS.icons || !Object.hasOwn(themeIcons, doc.icons)) {
+    return ''
+  }
+
+  const config = { ui: { icons: themeIcons[doc.icons as keyof typeof themeIcons] } }
+
+  if (framework === 'vue') {
+    return [
+      'import { defineConfig } from \'vite\'',
+      'import vue from \'@vitejs/plugin-vue\'',
+      'import ui from \'@nuxt/ui/vite\'',
+      '',
+      'export default defineConfig({',
+      '  plugins: [',
+      '    vue(),',
+      `    ui(${toObjectSource(config).split('\n').map((line, i) => i === 0 ? line : '    ' + line).join('\n')})`,
+      '  ]',
+      '})'
+    ].join('\n')
+  }
+
+  return `export default defineAppConfig(${toObjectSource(config)})`
 }
