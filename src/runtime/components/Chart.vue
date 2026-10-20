@@ -181,8 +181,9 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chart || {}) })(
 
 const themeColors = computed(() => Object.keys(appConfig.ui?.colors || {}))
 
-// The default palette lives in CSS so it can be themed and follows the color mode.
-const seriesColors = computed(() => props.colors?.length ? props.colors : Array.from({ length: 6 }, (_, i) => `var(--ui-chart-${i + 1})`))
+// The default palette lives in CSS so it can be themed and follows the color mode. The first color
+// falls back to `--ui-primary` here, so a `primary` overridden on a parent reaches the chart.
+const seriesColors = computed(() => props.colors?.length ? props.colors : Array.from({ length: 6 }, (_, i) => i === 0 ? 'var(--ui-chart-1, var(--ui-primary))' : `var(--ui-chart-${i + 1})`))
 
 function resolveColor(color: string) {
   // `neutral` has no `--ui-neutral` variable, the theme paints it with the inverted background.
