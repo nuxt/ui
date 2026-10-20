@@ -181,10 +181,17 @@ function toObjectSource(value: Record<string, any>): string {
  */
 export function generateApp(doc: ThemeDoc, framework: string = 'nuxt', _options: SerializeOptions = {}): string {
   const theme: Record<string, Record<string, any>> = {}
-  const set = (prop: string, key: string, value: unknown) => {
-    if (value && typeof value === 'object' && Object.keys(value).length) {
-      theme[prop] = { ...theme[prop], [key]: value }
-    }
+  // `path` is the component's key, or `['prose', 'p']` for a prose child
+  const set = (prop: string, path: string[], value: unknown) => {
+    if (!value || typeof value !== 'object' || !Object.keys(value).length) return
+    let target = (theme[prop] ||= {})
+    for (const key of path.slice(0, -1)) target = (target[key] ||= {})
+    target[path.at(-1)!] = value
+  }
+  const add = (path: string[], override: Record<string, any>) => {
+    set('ui', path, override.slots)
+    set('variants', path, override.variants)
+    set('props', path, override.defaultVariants)
   }
 
   // Explicit components merge INTO the style expansion (classes concatenate,
@@ -192,12 +199,14 @@ export function generateApp(doc: ThemeDoc, framework: string = 'nuxt', _options:
   const overrides = mergeUi(doc.style ? styleComponents(doc.style) : undefined, doc.components)
   for (const [component, override] of Object.entries(overrides)) {
     if (component === 'defaultVariants') {
-      set('props', '*', override)
-      continue
+      set('props', ['*'], override)
+    } else if (component === 'prose') {
+      for (const [child, childOverride] of Object.entries(override as Record<string, any>)) {
+        if (childOverride && typeof childOverride === 'object') add(['prose', child], childOverride)
+      }
+    } else {
+      add([component], override)
     }
-    set('ui', component, override.slots)
-    set('variants', component, override.variants)
-    set('props', component, override.defaultVariants)
   }
 
   const props = (['ui', 'variants', 'props'] as const).filter(prop => theme[prop])
