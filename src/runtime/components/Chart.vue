@@ -90,7 +90,7 @@ export interface ChartProps<T extends ChartData = ChartData> {
    */
   tooltip?: boolean | TooltipProps
   /**
-   * Animate the chart when its data changes.
+   * Animate the chart when its data changes. Does not apply to `definition`, set `svgAnimation` on it instead.
    * @defaultValue true
    */
   transition?: boolean
