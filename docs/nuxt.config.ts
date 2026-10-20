@@ -221,10 +221,10 @@ export default defineNuxtConfig({
   },
 
   experimental: {
-    // `nuxt-component-meta` skips its output when `build.ssr` is set, which is
-    // the case for the client build too once the Vite Environment API is on.
-    // Remove once nuxt-content/nuxt-component-meta#128 is released.
-    viteEnvironmentApi: false,
+    // `@nuxt/content`, `@nuxt/image` 2.0, `nuxt-llms` and `nuxt-agent-discovery`
+    // import Nitro helpers from `#imports`, which compat v5 no longer provides.
+    // Remove once they all import them explicitly.
+    nitroAutoImports: true,
     defaults: {
       nuxtLink: {
         externalRelAttribute: 'noopener'
