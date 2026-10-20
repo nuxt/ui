@@ -17,13 +17,13 @@ The Theme component doesn't render any HTML element, it only provides theme over
 
 ::framework-only
 #nuxt
-:::tip
-For app-level theme configuration, we recommend using the `app.config.ts` file instead.
+:::tip{to="/docs/getting-started/theme/components#theme-component"}
+Wrap `<UApp>` in a Theme in your `app.vue` to theme your whole app, overlays and toasts included. `error.vue` renders in place of `app.vue`, so wrap its content in the same Theme.
 :::
 
 #vue
-:::tip
-For app-level theme configuration, we recommend using the `vite.config.ts` file instead.
+:::tip{to="/docs/getting-started/theme/components#theme-component"}
+Wrap `<UApp>` in a Theme in your `App.vue` to theme your whole app, overlays and toasts included.
 :::
 ::
 
@@ -64,43 +64,12 @@ name: 'theme-default-variants-example'
 ::framework-only
 #nuxt
 :::tip
-Set `ui.defaultVariants` in your `app.config.ts` to apply them to your whole app:
-
-```ts [app.config.ts]
-export default defineAppConfig({
-  ui: {
-    defaultVariants: {
-      color: 'neutral',
-      size: 'sm'
-    }
-  }
-})
-```
+Set them on the Theme around `<UApp>` to apply them to your whole app, or in `ui.defaultVariants` of your `app.config.ts`.
 :::
 
 #vue
 :::tip
-Set `ui.defaultVariants` in your `vite.config.ts` to apply them to your whole app:
-
-```ts [vite.config.ts]
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import ui from '@nuxt/ui/vite'
-
-export default defineConfig({
-  plugins: [
-    vue(),
-    ui({
-      ui: {
-        defaultVariants: {
-          color: 'neutral',
-          size: 'sm'
-        }
-      }
-    })
-  ]
-})
-```
+Set them on the Theme around `<UApp>` to apply them to your whole app, or in `ui.defaultVariants` of your `vite.config.ts`.
 :::
 ::
 
@@ -118,16 +87,8 @@ name: 'theme-unstyled-example'
 This strips **structural** classes too (positioning, transitions, flex/grid), not just cosmetic ones. Layout-heavy components like `Modal`, `Drawer` or `Calendar` will need you to re-supply their layout.
 ::
 
-::framework-only
-#nuxt
-:::tip
-Set `ui.unstyled` in your `app.config.ts` to apply it to your whole app.
-:::
-
-#vue
-:::tip
-Set `ui.unstyled` in the `ui` options of your `vite.config.ts` to apply it to your whole app.
-:::
+::tip
+Set it on the Theme around `<UApp>` to apply it to your whole app.
 ::
 
 ### Variants
@@ -150,7 +111,7 @@ A value you add this way works at runtime, but it isn't part of the component's 
 
 ### Icons
 
-Use the `icons` prop to change the icons descendant components use, merged over `app.config.ui.icons`. The icons of ContentSearch's results are the exception: its search index is shared by the whole app, so they always come from `app.config.ui.icons`.
+Use the `icons` prop to change the icons descendant components use, merged over `app.config.ui.icons`. The icons of ContentSearch's results are the exception: its search index is shared by the whole app, so they always come from `app.config.ui.icons`. To change the icon set of your whole app, set it in your app config so ContentSearch uses it too.
 
 ::component-example
 ---
