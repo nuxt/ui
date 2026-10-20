@@ -219,7 +219,8 @@ export function generateApp(doc: ThemeDoc, framework: string = 'nuxt', _options:
 
   return [
     '<script setup lang="ts">',
-    props.map(prop => `const ${prop} = ${toObjectSource(theme[prop]!)}`).join('\n\n'),
+    // `as const` keeps `color: 'neutral'` a literal, a `string` fails the prop types
+    props.map(prop => `const ${prop} = ${toObjectSource(theme[prop]!)}${prop === 'props' ? ' as const' : ''}`).join('\n\n'),
     '</script>',
     '',
     '<template>',
@@ -232,8 +233,8 @@ export function generateApp(doc: ThemeDoc, framework: string = 'nuxt', _options:
 
 /**
  * The icon set, empty when the theme keeps the default one. It stays in the
- * app config rather than on `<UTheme>`: Nuxt UI only adds the app config
- * icons to the client bundle, and only they reach `error.vue`.
+ * app config rather than on `<UTheme>`, the only place ContentSearch and
+ * `error.vue` read icons from.
  */
 export function generateConfig(doc: ThemeDoc, framework: string = 'nuxt'): string {
   if (!doc.icons || doc.icons === THEME_DEFAULTS.icons || !Object.hasOwn(themeIcons, doc.icons)) {
