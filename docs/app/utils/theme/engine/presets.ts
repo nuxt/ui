@@ -299,10 +299,10 @@ export const presets: ThemePreset[] = [{
     },
     components: {
       // Cards float on a shadow instead of sitting in a ring. Dark keeps the
-      // ring, a shadow has nothing to fall on there. A compound entry rather
+      // ring, a shadow has nothing to fall on there. A variant entry rather
       // than the slot: the variant's own `ring` lands after the slot string
       // and would win the merge.
-      card: { compoundVariants: [{ variant: 'outline', class: { root: 'ring-0 dark:ring shadow-xl shadow-black/5' } }] }
+      card: { variants: { variant: { outline: { root: 'ring-0 dark:ring shadow-xl shadow-black/5' } } } }
     }
   }
 }, {
@@ -328,8 +328,8 @@ export const presets: ThemePreset[] = [{
       }
     },
     components: {
-      // solid primary actions cast a warm glow
-      button: { compoundVariants: [{ color: 'primary', variant: 'solid', class: { base: 'shadow-md shadow-primary/30' } }] }
+      // solid actions cast a glow of their own color
+      button: { variants: { variant: { solid: { base: 'shadow-md shadow-accent/30' } } } }
     }
   }
 }, {

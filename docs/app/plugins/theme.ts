@@ -5,7 +5,7 @@ import { themeIcons } from '../utils/theme/icons'
 import { cssVariableDefaults } from '../utils/theme/tokens'
 import { THEME_STATE_KEYS, THEME_STORAGE_KEY, clamped, readStoredTheme, snapshotStoredTheme, writeStoredTheme } from '../utils/theme/storage'
 import type { StoredTheme } from '../utils/theme/storage'
-import { mergeUi, styleComponents, DEFAULT_COLORS, THEME_DEFAULTS } from '../utils/theme/engine/types'
+import { mergeUi, styleComponents, withoutCompoundVariants, DEFAULT_COLORS, THEME_DEFAULTS } from '../utils/theme/engine/types'
 import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables } from '../utils/theme/sanitize'
 
 export default defineNuxtPlugin({
@@ -47,7 +47,7 @@ export default defineNuxtPlugin({
         useState(THEME_STATE_KEYS.themePreset).value = saved.preset
         useState<Record<string, any>>('nuxt-ui-ai-theme').value = {
           ...(saved.colors ? { colors: { ...saved.colors } } : {}),
-          ...(saved.components ? { ui: { ...saved.components } } : {})
+          ...(saved.components ? { ui: withoutCompoundVariants(saved.components) } : {})
         }
 
         // Same distribution order the per-key restores used, which carries
@@ -83,7 +83,7 @@ export default defineNuxtPlugin({
         defer(() => {
           // same order as the live path: style bundle first, explicit wins;
           // keys a previous distribution touched but this one doesn't reset
-          const merged = mergeUi(styleUi, saved.components || {})
+          const merged = mergeUi(styleUi, withoutCompoundVariants(saved.components) || {})
           for (const key of appliedUiKeys) {
             if (!(key in merged)) (appConfig.ui as any)[key] = undefined
           }
