@@ -488,12 +488,17 @@ const virtualPaddingBottom = computed(() => {
   return virtualizer.value.getTotalSize() - (virtualItems.value[virtualItems.value.length - 1]?.end ?? 0) + scrollMargin.value
 })
 
+// The instance never changes: reading it once keeps the row template from subscribing to every virtualizer update (e.g. on scroll).
+const virtualizerInstance = virtualizer ? virtualizer.value : undefined
+
 // Register each rendered row with the virtualizer so its actual height is measured (and re-measured on resize).
 function measureRow(el: Element | ComponentPublicInstance | null) {
-  if (el instanceof Element && virtualizer) {
-    virtualizer.value.measureElement(el)
+  if (el instanceof Element) {
+    virtualizerInstance?.measureElement(el)
   }
 }
+
+const measureRowRef = virtualizerInstance ? measureRow : undefined
 
 // An expanded `<tr>` belongs to its row's virtual item, so its height is added to the row's (measured by a custom `measureElement` if given). Maps it to its row's `<tr>`.
 const expandedRows = new WeakMap<Element, Element>()
@@ -646,7 +651,7 @@ defineExpose({
 <template>
   <DefineRowTemplate v-slot="{ row, index }">
     <tr
-      :ref="virtualizer ? measureRow : undefined"
+      :ref="measureRowRef"
       :[indexAttribute]="index"
       :data-selected="row.getIsSelected()"
       :data-selectable="!!props.onSelect || !!props.onHover || !!props.onContextmenu"
