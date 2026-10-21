@@ -8,7 +8,7 @@ import type { Nuxt, NuxtApp, NuxtPage, NuxtTemplate, NuxtTypeTemplate } from '@n
 import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
 import { getThemeClasses } from './utils/theme'
-import { detectUsedComponents } from './utils/components'
+import { detectUsedComponents, resolveExtraScanDirs } from './utils/components'
 import * as theme from './runtime/theme'
 import { colors } from './runtime/theme/color'
 import * as themeProse from './runtime/theme/prose'
@@ -78,28 +78,44 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     return nuxt ? (detection ??= detectComponents(app)) : Promise.resolve(vue?.detectedComponents)
   }
 
+  // Resolved once, so a package that can't be resolved warns once
+  let packageDirs: string[] | undefined
+
   async function detectComponents(app?: NuxtApp) {
     const layers = getLayerDirectories(nuxt!).map(layer => layer.app)
     if (!options.componentDetection || !layers.length) {
       return undefined
     }
 
+    // `scanPackages` packages live in `node_modules` or, linked from a
+    // workspace, outside the layers
+    packageDirs ??= resolveExtraScanDirs(nuxt!.options.rootDir, options.scanPackages)
+
     // Markdown content lives next to each layer's app dir, in `content/`
     const contentDirs = hasProse ? getLayerDirectories(nuxt!).map(layer => `${layer.root}content`).filter(dir => existsSync(dir)) : []
 
-    // Components and pages registered from outside the layers, by another
-    // `components.dirs` entry, a module or a package, render components too
+    // Components, pages and layouts registered from outside the layers, by
+    // another `components.dirs` entry, a module or a package, render components
+    // too. A layout a module adds with `addLayout` points at its `#build` copy.
     const runtimeDir = resolve('./runtime')
     const pageFiles = (pages: NuxtPage[] = []): string[] => pages.flatMap(page => [page.file, ...pageFiles(page.children)]).filter((file): file is string => !!file)
-    const files = [...(app?.components ?? []).map(component => component.filePath), ...pageFiles(app?.pages)]
-      .filter(file => !file.startsWith(runtimeDir) && !layers.some(layer => file.startsWith(layer)))
+    const layoutFiles = Object.values(app?.layouts ?? {}).map(layout => layout.file.startsWith('#build/')
+      ? app?.templates.find(template => template.filename === layout.file.slice('#build/'.length))?.src
+      : layout.file)
+    const files = [...(app?.components ?? []).map(component => component.filePath), ...pageFiles(app?.pages), ...layoutFiles]
+      .filter((file): file is string => !!file && !file.startsWith(runtimeDir) && !layers.some(layer => file.startsWith(layer)))
+
+    // `@nuxt/content` lists the components its collections render, whatever
+    // their `source`, where the `content/` scan only sees the default one
+    const contentComponents: string[] = app?.templates.find(template => template.filename === 'content/manifest.ts')?.options?.manifest?.components ?? []
+    const components = contentComponents.filter(component => component.startsWith(options.prefix!)).map(component => component.slice(options.prefix!.length))
 
     const detectedComponents = await detectUsedComponents(
       [...layers, ...contentDirs],
       options.prefix!,
       resolve('./runtime/components'),
       Array.isArray(options.componentDetection) ? options.componentDetection : undefined,
-      { prose: hasProse, files }
+      { prose: hasProse, files, packages: packageDirs, components }
     )
 
     if (detectedComponents && detectedComponents.size > 0) {
@@ -362,18 +378,46 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt, resolve: Resolv
       }
     })
 
-    nuxt.hook('builder:watch', async (_, path) => {
-      if (/\.(?:vue|ts|mts|js|mjs|cjs|tsx|jsx|md|html)$/.test(path)) {
-        const file = join(nuxt.options.buildDir, 'ui.css')
-        const before = await readFile(file, 'utf8').catch(() => '')
-        await updateTemplates({ filter: template => template.filename === 'ui.css' || template.filename === 'ui/detected.ts' })
+    async function update() {
+      const file = join(nuxt.options.buildDir, 'ui.css')
+      const before = await readFile(file, 'utf8').catch(() => '')
+      await updateTemplates({ filter: template => template.filename === 'ui.css' || template.filename === 'ui/detected.ts' })
 
-        // Vite doesn't watch the build dir, so tell it `ui.css` changed for
-        // Tailwind to rebuild the CSS importing it
-        if (watcher && await readFile(file, 'utf8').catch(() => '') !== before) {
-          watcher.emit('change', file)
+      // Vite doesn't watch the build dir, so tell it `ui.css` changed for
+      // Tailwind to rebuild the CSS importing it
+      if (watcher && await readFile(file, 'utf8').catch(() => '') !== before) {
+        watcher.emit('change', file)
+      }
+    }
+
+    // One run at a time: a save during a run schedules one more after it
+    let running = false
+    let pending = false
+    async function redetect() {
+      if (running) {
+        pending = true
+        return
+      }
+      running = true
+      do {
+        pending = false
+        try {
+          await update()
+        } catch (error) {
+          logger.error('Nuxt UI could not detect the components in use', error)
         }
+      } while (pending)
+      running = false
+    }
+
+    // A branch switch or a formatter run changes many files at once, they share one run
+    let timer: ReturnType<typeof setTimeout> | undefined
+    nuxt.hook('builder:watch', (_, path) => {
+      if (/\.(?:vue|ts|mts|js|mjs|cjs|tsx|jsx|md|html)$/.test(path)) {
+        clearTimeout(timer)
+        timer = setTimeout(redetect, 100)
       }
     })
+    nuxt.hook('close', () => clearTimeout(timer))
   }
 }
