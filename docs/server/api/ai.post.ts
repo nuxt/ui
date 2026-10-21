@@ -264,9 +264,9 @@ Colored text: \`--ui-<color>-text-default\` sets the text of a color (\`text-pri
 
 Do NOT use \`cssVariables\` for things achievable with \`primary\`, \`neutral\`, \`customColors\`, or component \`ui\` overrides.
 
-**2. Config (app.config.ts for Nuxt / vite.config.ts for Vue)**
+**2. Components (app.vue)**
 
-For component-level theming. Colors are NOT set here: they go in main.css through the \`@plugin "@nuxt/ui/colors"\` block. The \`ui\` object is the same for both frameworks:
+For component-level theming. Colors are NOT set here: they go in main.css through the \`@plugin "@nuxt/ui/colors"\` block. The \`ui\` property of \`applyTheme\` takes each component's \`slots\`, \`variants\` and \`defaultVariants\`:
 \`\`\`
 ui: {
   button: {
@@ -275,7 +275,7 @@ ui: {
   }
 }
 \`\`\`
-For Nuxt, wrap in \`defineAppConfig({ ui: { ... } })\`. For Vue, pass as \`ui({ ui: { ... } })\` in the Vite plugin.
+In the code you show, these go on a \`<UTheme>\` around \`<UApp>\` in \`app.vue\` (\`App.vue\` for Vue): slot classes in its \`ui\` prop, variant classes in \`variants\` and default variants in \`props\`, with \`'*'\` for the app-wide size and color.
 
 **Color options:**
 - Standard Tailwind: red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose
@@ -371,18 +371,42 @@ CRITICAL rules for component \`ui\` overrides:
 }
 \`\`\`
 
-3. Show the config code block if icons or component overrides changed (colors belong in main.css). Use **app.config.ts** for Nuxt or **vite.config.ts** for Vue (based on the user's framework). IMPORTANT: this must include ALL settings from the entire conversation — not just the current \`applyTheme\` call but also all previous calls (colors, icons with full \`ui.icons\` mapping, component \`ui\` overrides like button, popover, etc.). If a non-default icon set was chosen, the exported config MUST include the complete \`ui.icons\` object with every key mapped. Review earlier \`applyTheme\` calls in the conversation and merge everything into one complete config, without a \`colors\` key.
+3. Show the \`app.vue\` code block (\`App.vue\` for Vue) if component overrides changed. IMPORTANT: it must include ALL component overrides from the entire conversation, not just the current \`applyTheme\` call. Review earlier calls and merge everything into one \`<UTheme>\`. Write \`props\` with \`as const\`, so values like \`color: 'neutral'\` keep their literal type:
+\`\`\`vue
+<script setup lang="ts">
+const ui = {
+  button: { base: 'font-bold' }
+}
 
-For **Nuxt** — \`app.config.ts\`:
+const props = {
+  '*': { size: 'lg' }
+} as const
+</script>
+
+<template>
+  <UTheme :ui="ui" :props="props">
+    <UApp>
+      <NuxtPage />
+    </UApp>
+  </UTheme>
+</template>
+\`\`\`
+Use \`<RouterView />\` instead of \`<NuxtPage />\` for Vue.
+
+4. Show the config code block only if a non-default icon set was chosen: the icon set stays in **app.config.ts** for Nuxt or **vite.config.ts** for Vue, not on \`<UTheme>\`, so \`error.vue\` and ContentSearch use it too. It MUST include the complete \`ui.icons\` object with every key mapped, and nothing else.
+
+For **Nuxt**, \`app.config.ts\`:
 \`\`\`typescript
 export default defineAppConfig({
   ui: {
-    // ... ALL accumulated config from this conversation
+    icons: {
+      // ... every key of the chosen icon set
+    }
   }
 })
 \`\`\`
 
-For **Vue** — \`vite.config.ts\`:
+For **Vue**, \`vite.config.ts\`:
 \`\`\`typescript
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -393,7 +417,9 @@ export default defineConfig({
     vue(),
     ui({
       ui: {
-        // ... ALL accumulated config from this conversation
+        icons: {
+          // ... every key of the chosen icon set
+        }
       }
     })
   ]
