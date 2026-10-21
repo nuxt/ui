@@ -15,7 +15,7 @@ export default defineTheme({
     tier: 'p-6 text-start font-normal align-top h-full',
     tierWrapper: 'flex flex-col md:h-full',
     tierTitleWrapper: 'flex items-center gap-3',
-    tierTitle: 'text-lg font-semibold text-strong',
+    tierTitle: 'text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong',
     tierDescription: 'text-sm font-normal text-muted mt-1',
     tierBadge: 'truncate',
     tierPriceWrapper: 'flex items-center gap-1 mt-4',

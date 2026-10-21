@@ -18,7 +18,7 @@ exports[`PageHeader > renders with as object correctly 1`] = `
   <!--v-if-->
   <div data-slot="page-header-container" class="">
     <div data-slot="page-header-wrapper" class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-      <h2 data-slot="page-header-title" class="text-3xl sm:text-4xl text-pretty font-bold text-strong">Title</h2>
+      <h2 data-slot="page-header-title" class="text-3xl sm:text-4xl text-pretty font-heading font-(--ui-font-weight-heading,var(--font-weight-bold)) text-strong">Title</h2>
       <!--v-if-->
     </div>
     <!--v-if-->
@@ -137,7 +137,7 @@ exports[`PageHeader > renders with title correctly 1`] = `
   <!--v-if-->
   <div data-slot="page-header-container" class="">
     <div data-slot="page-header-wrapper" class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-      <h1 data-slot="page-header-title" class="text-3xl sm:text-4xl text-pretty font-bold text-strong">Title</h1>
+      <h1 data-slot="page-header-title" class="text-3xl sm:text-4xl text-pretty font-heading font-(--ui-font-weight-heading,var(--font-weight-bold)) text-strong">Title</h1>
       <!--v-if-->
     </div>
     <!--v-if-->
@@ -150,7 +150,7 @@ exports[`PageHeader > renders with title slot correctly 1`] = `
   <!--v-if-->
   <div data-slot="page-header-container" class="">
     <div data-slot="page-header-wrapper" class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-      <h1 data-slot="page-header-title" class="text-3xl sm:text-4xl text-pretty font-bold text-strong">Title slot</h1>
+      <h1 data-slot="page-header-title" class="text-3xl sm:text-4xl text-pretty font-heading font-(--ui-font-weight-heading,var(--font-weight-bold)) text-strong">Title slot</h1>
       <!--v-if-->
     </div>
     <!--v-if-->

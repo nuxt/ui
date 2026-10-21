@@ -10,7 +10,7 @@ exports[`PricingTable > renders with as correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Free</div>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Free</div>
               <!--v-if-->
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For personal and small teams</div>
@@ -28,7 +28,7 @@ exports[`PricingTable > renders with as correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full bg-tint border-x border-t border-default rounded-t-lg">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
               <!--v-if--></span>
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For medium and large teams</div>
@@ -46,7 +46,7 @@ exports[`PricingTable > renders with as correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Enterprise</div>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Enterprise</div>
               <!--v-if-->
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For large enterprises</div>
@@ -156,7 +156,7 @@ exports[`PricingTable > renders with as correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Free</div>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Free</div>
           <!--v-if-->
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For personal and small teams</div>
@@ -200,7 +200,7 @@ exports[`PricingTable > renders with as correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg bg-tint">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
           <!--v-if--></span>
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For medium and large teams</div>
@@ -244,7 +244,7 @@ exports[`PricingTable > renders with as correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Enterprise</div>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Enterprise</div>
           <!--v-if-->
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For large enterprises</div>
@@ -299,7 +299,7 @@ exports[`PricingTable > renders with caption correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Free</div>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Free</div>
               <!--v-if-->
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For personal and small teams</div>
@@ -317,7 +317,7 @@ exports[`PricingTable > renders with caption correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full bg-tint border-x border-t border-default rounded-t-lg">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
               <!--v-if--></span>
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For medium and large teams</div>
@@ -335,7 +335,7 @@ exports[`PricingTable > renders with caption correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Enterprise</div>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Enterprise</div>
               <!--v-if-->
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For large enterprises</div>
@@ -445,7 +445,7 @@ exports[`PricingTable > renders with caption correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Free</div>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Free</div>
           <!--v-if-->
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For personal and small teams</div>
@@ -489,7 +489,7 @@ exports[`PricingTable > renders with caption correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg bg-tint">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
           <!--v-if--></span>
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For medium and large teams</div>
@@ -533,7 +533,7 @@ exports[`PricingTable > renders with caption correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Enterprise</div>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Enterprise</div>
           <!--v-if-->
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For large enterprises</div>
@@ -588,7 +588,7 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Free</div>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Free</div>
               <!--v-if-->
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For personal and small teams</div>
@@ -606,7 +606,7 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full bg-tint border-x border-t border-default rounded-t-lg">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
               <!--v-if--></span>
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For medium and large teams</div>
@@ -624,7 +624,7 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Enterprise</div>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Enterprise</div>
               <!--v-if-->
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For large enterprises</div>
@@ -734,7 +734,7 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Free</div>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Free</div>
           <!--v-if-->
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For personal and small teams</div>
@@ -778,7 +778,7 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg bg-tint">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
           <!--v-if--></span>
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For medium and large teams</div>
@@ -822,7 +822,7 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Enterprise</div>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Enterprise</div>
           <!--v-if-->
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For large enterprises</div>
@@ -877,7 +877,7 @@ exports[`PricingTable > renders with class correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Free</div>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Free</div>
               <!--v-if-->
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For personal and small teams</div>
@@ -895,7 +895,7 @@ exports[`PricingTable > renders with class correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full bg-tint border-x border-t border-default rounded-t-lg">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
               <!--v-if--></span>
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For medium and large teams</div>
@@ -913,7 +913,7 @@ exports[`PricingTable > renders with class correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Enterprise</div>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Enterprise</div>
               <!--v-if-->
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For large enterprises</div>
@@ -1023,7 +1023,7 @@ exports[`PricingTable > renders with class correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Free</div>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Free</div>
           <!--v-if-->
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For personal and small teams</div>
@@ -1067,7 +1067,7 @@ exports[`PricingTable > renders with class correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg bg-tint">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
           <!--v-if--></span>
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For medium and large teams</div>
@@ -1111,7 +1111,7 @@ exports[`PricingTable > renders with class correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Enterprise</div>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Enterprise</div>
           <!--v-if-->
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For large enterprises</div>
@@ -1365,7 +1365,7 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Free</div>Tier badge slot
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Free</div>Tier badge slot
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For personal and small teams</div>
             <div data-slot="pricing-table-tierPriceWrapper" class="flex items-center gap-1 mt-4">
@@ -1382,7 +1382,7 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full bg-tint border-x border-t border-default rounded-t-lg">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Pro</div>Tier badge slot
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Pro</div>Tier badge slot
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For medium and large teams</div>
             <div data-slot="pricing-table-tierPriceWrapper" class="flex items-center gap-1 mt-4">
@@ -1399,7 +1399,7 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Enterprise</div>Tier badge slot
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Enterprise</div>Tier badge slot
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For large enterprises</div>
             <div data-slot="pricing-table-tierPriceWrapper" class="flex items-center gap-1 mt-4">
@@ -1508,7 +1508,7 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Free</div>Tier badge slot
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Free</div>Tier badge slot
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For personal and small teams</div>
         <div data-slot="pricing-table-tierPriceWrapper" class="flex items-center gap-1 mt-4">
@@ -1551,7 +1551,7 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg bg-tint">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Pro</div>Tier badge slot
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Pro</div>Tier badge slot
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For medium and large teams</div>
         <div data-slot="pricing-table-tierPriceWrapper" class="flex items-center gap-1 mt-4">
@@ -1594,7 +1594,7 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Enterprise</div>Tier badge slot
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Enterprise</div>Tier badge slot
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For large enterprises</div>
         <div data-slot="pricing-table-tierPriceWrapper" class="flex items-center gap-1 mt-4">
@@ -1648,7 +1648,7 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Free</div>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Free</div>
               <!--v-if-->
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For personal and small teams</div>
@@ -1666,7 +1666,7 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full bg-tint border-x border-t border-default rounded-t-lg">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
               <!--v-if--></span>
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For medium and large teams</div>
@@ -1684,7 +1684,7 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Enterprise</div>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Enterprise</div>
               <!--v-if-->
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For large enterprises</div>
@@ -1794,7 +1794,7 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Free</div>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Free</div>
           <!--v-if-->
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For personal and small teams</div>
@@ -1838,7 +1838,7 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg bg-tint">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
           <!--v-if--></span>
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For medium and large teams</div>
@@ -1882,7 +1882,7 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Enterprise</div>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Enterprise</div>
           <!--v-if-->
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For large enterprises</div>
@@ -1937,7 +1937,7 @@ exports[`PricingTable > renders with tier-button slot correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Free</div>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Free</div>
               <!--v-if-->
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For personal and small teams</div>
@@ -1952,7 +1952,7 @@ exports[`PricingTable > renders with tier-button slot correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full bg-tint border-x border-t border-default rounded-t-lg">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
               <!--v-if--></span>
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For medium and large teams</div>
@@ -1967,7 +1967,7 @@ exports[`PricingTable > renders with tier-button slot correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Enterprise</div>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Enterprise</div>
               <!--v-if-->
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For large enterprises</div>
@@ -2074,7 +2074,7 @@ exports[`PricingTable > renders with tier-button slot correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Free</div>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Free</div>
           <!--v-if-->
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For personal and small teams</div>
@@ -2115,7 +2115,7 @@ exports[`PricingTable > renders with tier-button slot correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg bg-tint">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
           <!--v-if--></span>
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For medium and large teams</div>
@@ -2156,7 +2156,7 @@ exports[`PricingTable > renders with tier-button slot correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Enterprise</div>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Enterprise</div>
           <!--v-if-->
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For large enterprises</div>
@@ -2208,7 +2208,7 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Free</div>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Free</div>
               <!--v-if-->
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">Tier description slot</div>
@@ -2226,7 +2226,7 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full bg-tint border-x border-t border-default rounded-t-lg">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
               <!--v-if--></span>
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">Tier description slot</div>
@@ -2244,7 +2244,7 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Enterprise</div>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Enterprise</div>
               <!--v-if-->
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">Tier description slot</div>
@@ -2354,7 +2354,7 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Free</div>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Free</div>
           <!--v-if-->
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">Tier description slot</div>
@@ -2398,7 +2398,7 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg bg-tint">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
           <!--v-if--></span>
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">Tier description slot</div>
@@ -2442,7 +2442,7 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Enterprise</div>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Enterprise</div>
           <!--v-if-->
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">Tier description slot</div>
@@ -2497,7 +2497,7 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Free</div>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Free</div>
               <!--v-if-->
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For personal and small teams</div>
@@ -2515,7 +2515,7 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full bg-tint border-x border-t border-default rounded-t-lg">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
               <!--v-if--></span>
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For medium and large teams</div>
@@ -2533,7 +2533,7 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Enterprise</div>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Enterprise</div>
               <!--v-if-->
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For large enterprises</div>
@@ -2643,7 +2643,7 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Free</div>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Free</div>
           <!--v-if-->
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For personal and small teams</div>
@@ -2687,7 +2687,7 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg bg-tint">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
           <!--v-if--></span>
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For medium and large teams</div>
@@ -2731,7 +2731,7 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Enterprise</div>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Enterprise</div>
           <!--v-if-->
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For large enterprises</div>
@@ -2786,7 +2786,7 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Free</div>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Free</div>
               <!--v-if-->
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For personal and small teams</div>
@@ -2804,7 +2804,7 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full bg-tint border-x border-t border-default rounded-t-lg">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
               <!--v-if--></span>
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For medium and large teams</div>
@@ -2822,7 +2822,7 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Enterprise</div>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Enterprise</div>
               <!--v-if-->
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For large enterprises</div>
@@ -2932,7 +2932,7 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Free</div>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Free</div>
           <!--v-if-->
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For personal and small teams</div>
@@ -2976,7 +2976,7 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg bg-tint">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
           <!--v-if--></span>
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For medium and large teams</div>
@@ -3020,7 +3020,7 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Enterprise</div>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Enterprise</div>
           <!--v-if-->
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For large enterprises</div>
@@ -3075,7 +3075,7 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Tier title slot</div>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Tier title slot</div>
               <!--v-if-->
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For personal and small teams</div>
@@ -3093,7 +3093,7 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full bg-tint border-x border-t border-default rounded-t-lg">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Tier title slot</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Tier title slot</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
               <!--v-if--></span>
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For medium and large teams</div>
@@ -3111,7 +3111,7 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Tier title slot</div>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Tier title slot</div>
               <!--v-if-->
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For large enterprises</div>
@@ -3221,7 +3221,7 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Tier title slot</div>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Tier title slot</div>
           <!--v-if-->
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For personal and small teams</div>
@@ -3265,7 +3265,7 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg bg-tint">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Tier title slot</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Tier title slot</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
           <!--v-if--></span>
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For medium and large teams</div>
@@ -3309,7 +3309,7 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Tier title slot</div>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Tier title slot</div>
           <!--v-if-->
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For large enterprises</div>
@@ -3364,7 +3364,7 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Free</div>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Free</div>
               <!--v-if-->
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For personal and small teams</div>
@@ -3382,7 +3382,7 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full bg-tint border-x border-t border-default rounded-t-lg">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
               <!--v-if--></span>
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For medium and large teams</div>
@@ -3400,7 +3400,7 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Enterprise</div>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Enterprise</div>
               <!--v-if-->
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For large enterprises</div>
@@ -3510,7 +3510,7 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Free</div>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Free</div>
           <!--v-if-->
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For personal and small teams</div>
@@ -3554,7 +3554,7 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg bg-tint">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
           <!--v-if--></span>
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For medium and large teams</div>
@@ -3598,7 +3598,7 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Enterprise</div>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Enterprise</div>
           <!--v-if-->
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For large enterprises</div>
@@ -3653,7 +3653,7 @@ exports[`PricingTable > renders with ui correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Free</div>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Free</div>
               <!--v-if-->
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For personal and small teams</div>
@@ -3671,7 +3671,7 @@ exports[`PricingTable > renders with ui correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full bg-tint border-x border-t border-default rounded-t-lg">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
               <!--v-if--></span>
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For medium and large teams</div>
@@ -3689,7 +3689,7 @@ exports[`PricingTable > renders with ui correctly 1`] = `
         <th scope="col" data-slot="pricing-table-tier" class="p-6 text-start font-normal align-top h-full">
           <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
             <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-              <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Enterprise</div>
+              <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Enterprise</div>
               <!--v-if-->
             </div>
             <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For large enterprises</div>
@@ -3799,7 +3799,7 @@ exports[`PricingTable > renders with ui correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Free</div>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Free</div>
           <!--v-if-->
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For personal and small teams</div>
@@ -3843,7 +3843,7 @@ exports[`PricingTable > renders with ui correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg bg-tint">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Pro</div><span data-slot="pricing-table-tierBadge" class="font-medium inline-flex items-center [--ui-accent:var(--ui-primary)] bg-accent-soft text-accent-default ring ring-inset ring-accent-strong text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md truncate"><!--v-if--><span data-slot="badge-label" class="truncate">Most popular</span>
           <!--v-if--></span>
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For medium and large teams</div>
@@ -3887,7 +3887,7 @@ exports[`PricingTable > renders with ui correctly 1`] = `
     <li data-slot="pricing-table-item" class="p-6 flex flex-col border border-default rounded-lg">
       <div data-slot="pricing-table-tierWrapper" class="flex flex-col md:h-full">
         <div data-slot="pricing-table-tierTitleWrapper" class="flex items-center gap-3">
-          <div data-slot="pricing-table-tierTitle" class="text-lg font-semibold text-strong">Enterprise</div>
+          <div data-slot="pricing-table-tierTitle" class="text-lg font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Enterprise</div>
           <!--v-if-->
         </div>
         <div data-slot="pricing-table-tierDescription" class="text-sm font-normal text-muted mt-1">For large enterprises</div>

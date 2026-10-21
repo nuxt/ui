@@ -18,6 +18,11 @@
     }
   }
 
+  /* `--ui-font-heading` is unset, so headings inherit the body font until it is set */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: --theme(--font-heading);
+  }
+
   /* Chromium applies an `outline-offset` on focused links, reset it so focus outlines hug elements consistently */
   a:focus-visible {
     outline-offset: 0;

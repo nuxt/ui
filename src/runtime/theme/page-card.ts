@@ -12,7 +12,7 @@ export default defineTheme({
     footer: 'pt-4 mt-auto',
     leading: 'inline-flex items-center mb-2.5',
     leadingIcon: 'size-5 shrink-0 text-primary',
-    title: 'text-base text-pretty font-semibold text-strong',
+    title: 'text-base text-pretty font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong',
     description: 'text-[15px] text-pretty'
   },
   variants: {

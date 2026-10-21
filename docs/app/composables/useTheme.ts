@@ -172,8 +172,8 @@ export function useTheme() {
     const prefs = fontPrefs.value
     const safeFont = prefs.sans && SAFE_NAME.test(prefs.sans) ? prefs.sans : 'Public Sans'
     const parts = [`:root { --font-sans: '${safeFont}', sans-serif; }`]
-    // The stacks themselves, so `font-serif` / `font-mono` follow the theme.
-    if (prefs.serif && SAFE_NAME.test(prefs.serif)) parts.push(`:root { --font-serif: '${prefs.serif}', serif; }`)
+    // The stacks themselves, so the headings and `font-mono` follow the theme.
+    if (prefs.serif && SAFE_NAME.test(prefs.serif)) parts.push(`:root { --ui-font-heading: '${prefs.serif}', var(--font-sans); }`)
     if (prefs.mono && SAFE_NAME.test(prefs.mono)) parts.push(`:root { --font-mono: '${prefs.mono}', monospace; }`)
     const weights = prefs.weights || {}
     const weightVars = (Object.keys(weights) as Array<keyof typeof weights>)
@@ -191,9 +191,7 @@ export function useTheme() {
       parts.push(`body { ${bodyRules.join(' ')} }`)
     }
     // No element rules here: preflight points `code`/`kbd`/`pre`/`samp` at
-    // --font-mono, and the h1–h6 rule that reads --font-serif lives in
-    // main.css, inside `@layer base` so `font-mono` on a heading still wins.
-    // Injected here it would be unlayered, and outrank every utility.
+    // --font-mono, and Nuxt UI points h1–h6 at --ui-font-heading.
     return parts.join(' ')
   })
   const customColorsStyle = computed(() => {

@@ -102,6 +102,7 @@
   --radius-xl: calc(var(--ui-radius) * 3);
   --radius-2xl: calc(var(--ui-radius) * 4);
   --radius-3xl: calc(var(--ui-radius) * 6);
+  --font-heading: var(--ui-font-heading);
   --text-color-strong: var(--ui-text-strong);
   --text-color-default: var(--ui-text-default);
   --text-color-muted: var(--ui-text-muted);

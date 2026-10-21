@@ -12,7 +12,7 @@ exports[`PageHero > renders with as object correctly 1`] = `
     <div data-slot="page-hero-wrapper" class="text-center">
       <div data-slot="page-hero-header" class="">
         <!--v-if-->
-        <h2 data-slot="page-hero-title" class="text-5xl sm:text-7xl text-pretty tracking-tight font-bold text-strong">Title</h2>
+        <h2 data-slot="page-hero-title" class="text-5xl sm:text-7xl text-pretty tracking-tight font-heading font-(--ui-font-weight-heading,var(--font-weight-bold)) text-strong">Title</h2>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -214,7 +214,7 @@ exports[`PageHero > renders with title correctly 1`] = `
     <div data-slot="page-hero-wrapper" class="text-center">
       <div data-slot="page-hero-header" class="">
         <!--v-if-->
-        <h1 data-slot="page-hero-title" class="text-5xl sm:text-7xl text-pretty tracking-tight font-bold text-strong">Title</h1>
+        <h1 data-slot="page-hero-title" class="text-5xl sm:text-7xl text-pretty tracking-tight font-heading font-(--ui-font-weight-heading,var(--font-weight-bold)) text-strong">Title</h1>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -231,7 +231,7 @@ exports[`PageHero > renders with title slot correctly 1`] = `
     <div data-slot="page-hero-wrapper" class="text-center">
       <div data-slot="page-hero-header" class="">
         <!--v-if-->
-        <h1 data-slot="page-hero-title" class="text-5xl sm:text-7xl text-pretty tracking-tight font-bold text-strong">Title slot</h1>
+        <h1 data-slot="page-hero-title" class="text-5xl sm:text-7xl text-pretty tracking-tight font-heading font-(--ui-font-weight-heading,var(--font-weight-bold)) text-strong">Title slot</h1>
         <!--v-if-->
       </div>
       <!--v-if-->

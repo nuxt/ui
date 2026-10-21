@@ -28,7 +28,7 @@ exports[`DashboardNavbar > renders with as object correctly 1`] = `
         <!--v-if-->
       </button>
       <!--v-if-->
-      <h2 data-slot="dashboard-navbar-title" class="flex items-center gap-1.5 font-semibold text-strong truncate">Dashboard</h2>
+      <h2 data-slot="dashboard-navbar-title" class="flex items-center gap-1.5 font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong truncate">Dashboard</h2>
     </div>
     <!--v-if-->
     <div data-slot="dashboard-navbar-right" class="flex items-center shrink-0 gap-1.5">
@@ -156,7 +156,7 @@ exports[`DashboardNavbar > renders with title correctly 1`] = `
         <!--v-if-->
       </button>
       <!--v-if-->
-      <h1 data-slot="dashboard-navbar-title" class="flex items-center gap-1.5 font-semibold text-strong truncate">Dashboard</h1>
+      <h1 data-slot="dashboard-navbar-title" class="flex items-center gap-1.5 font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong truncate">Dashboard</h1>
     </div>
     <!--v-if-->
     <div data-slot="dashboard-navbar-right" class="flex items-center shrink-0 gap-1.5">
@@ -175,7 +175,7 @@ exports[`DashboardNavbar > renders with title slot correctly 1`] = `
         <!--v-if-->
       </button>
       <!--v-if-->
-      <h1 data-slot="dashboard-navbar-title" class="flex items-center gap-1.5 font-semibold text-strong truncate">Title slot</h1>
+      <h1 data-slot="dashboard-navbar-title" class="flex items-center gap-1.5 font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong truncate">Title slot</h1>
     </div>
     <!--v-if-->
     <div data-slot="dashboard-navbar-right" class="flex items-center shrink-0 gap-1.5">

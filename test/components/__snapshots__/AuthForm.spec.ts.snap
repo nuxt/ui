@@ -793,7 +793,7 @@ exports[`AuthForm > renders with title correctly 1`] = `
 "<div data-slot="auth-form" class="w-full space-y-6">
   <div data-slot="auth-form-header" class="flex flex-col text-center">
     <!--v-if-->
-    <div data-slot="auth-form-title" class="text-xl text-pretty font-semibold text-strong">Title</div>
+    <div data-slot="auth-form-title" class="text-xl text-pretty font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Title</div>
     <!--v-if-->
   </div>
   <div data-slot="auth-form-body" class="gap-y-6 flex flex-col">
@@ -845,7 +845,7 @@ exports[`AuthForm > renders with title slot correctly 1`] = `
 "<div data-slot="auth-form" class="w-full space-y-6">
   <div data-slot="auth-form-header" class="flex flex-col text-center">
     <!--v-if-->
-    <div data-slot="auth-form-title" class="text-xl text-pretty font-semibold text-strong">Title</div>
+    <div data-slot="auth-form-title" class="text-xl text-pretty font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">Title</div>
     <!--v-if-->
   </div>
   <div data-slot="auth-form-body" class="gap-y-6 flex flex-col">

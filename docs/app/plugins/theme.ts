@@ -185,7 +185,7 @@ export default defineNuxtPlugin({
               var css = ':root { --font-sans: \\'' + font + '\\', sans-serif; }';
               var serif = (prefs.serif && SAFE.test(prefs.serif)) ? prefs.serif : undefined;
               var mono = (prefs.mono && SAFE.test(prefs.mono)) ? prefs.mono : undefined;
-              if (serif) { css += ' :root { --font-serif: \\'' + serif + '\\', serif; }'; }
+              if (serif) { css += ' :root { --ui-font-heading: \\'' + serif + '\\', var(--font-sans); }'; }
               if (mono) { css += ' :root { --font-mono: \\'' + mono + '\\', monospace; }'; }
               var w = prefs.weights || {};
               var wVars = Object.keys(w).map(function(step) { var n = num(w[step], 100, 900); return (SAFE.test(step) && n !== undefined) ? '--font-weight-' + step + ': ' + n + ';' : ''; }).filter(Boolean).join(' ');

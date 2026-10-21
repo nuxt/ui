@@ -8,8 +8,8 @@ import { THEME_DEFAULTS } from '../../../utils/theme/engine/types'
  * treatment that rides on them.
  *
  * The stacks are what tailwind reads. Mono needs nothing else (preflight
- * points `code`/`kbd`/`pre`/`samp` at it) and serif drives the h1–h6 rule in
- * main.css until v5 ships `--ui-font-heading`.
+ * points `code`/`kbd`/`pre`/`samp` at it) and the heading stack, stored as
+ * `serif`, sets `--ui-font-heading`.
  */
 const { fonts, font, fontPrefs, setFontPrefs, fontSize } = useTheme()
 

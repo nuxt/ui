@@ -7,7 +7,7 @@ export default defineTheme({
     wrapper: '',
     header: '',
     headline: 'mb-4',
-    title: 'text-5xl sm:text-7xl text-pretty tracking-tight font-bold text-strong',
+    title: 'text-5xl sm:text-7xl text-pretty tracking-tight font-heading font-(--ui-font-weight-heading,var(--font-weight-bold)) text-strong',
     description: 'text-lg sm:text-xl/8 text-muted',
     body: 'mt-10',
     footer: 'mt-10',
