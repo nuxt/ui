@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises'
 import { join } from 'pathe'
 import { defu } from 'defu'
-import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addPlugin, addPluginTemplate, findPath, hasNuxtModule } from '@nuxt/kit'
+import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addPlugin, addPluginTemplate, findPath, getLayerDirectories, hasNuxtModule } from '@nuxt/kit'
 import { IconUsageScanner } from '@nuxt/icon/utils'
 import type { HookResult, ModuleDependencies } from '@nuxt/schema'
 import { addTemplates } from './templates'
@@ -245,8 +245,8 @@ export default defineNuxtModule<ModuleOptions>({
       const scanner = new IconUsageScanner({
         additionalCollections: ((nuxt.options.icon || {}).customCollections ?? []).map(collection => collection.prefix)
       })
-      for (const layer of nuxt.options._layers) {
-        const path = await findPath(join(layer.config.srcDir, 'app.config'))
+      for (const layer of getLayerDirectories(nuxt)) {
+        const path = await findPath(join(layer.app, 'app.config'))
         if (path) {
           scanner.extractFromCode(await readFile(path, 'utf-8'), icons)
         }
