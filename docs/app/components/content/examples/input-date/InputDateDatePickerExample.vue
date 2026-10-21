@@ -16,7 +16,6 @@ const modelValue = shallowRef(new CalendarDate(2022, 1, 10))
           size="sm"
           icon="i-lucide-calendar"
           aria-label="Select a date"
-          class="px-0"
         />
 
         <template #content>

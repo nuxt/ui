@@ -19,7 +19,6 @@ const modelValue = shallowRef({
           size="sm"
           icon="i-lucide-calendar"
           aria-label="Select a date range"
-          class="px-0"
         />
 
         <template #content>
