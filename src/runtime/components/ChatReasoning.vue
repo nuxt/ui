@@ -47,7 +47,7 @@ export interface ChatReasoningProps extends Pick<CollapsibleRootProps, 'defaultO
   autoOpen?: boolean
   /**
    * The delay in milliseconds before auto-closing when streaming ends.
-   * Set to `0` to disable auto-close.
+   * Set to `0` to disable auto-close. Skipped when the user toggled it while streaming.
    * @defaultValue 500
    */
   autoCloseDelay?: number
