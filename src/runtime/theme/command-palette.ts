@@ -5,8 +5,10 @@ export default defineTheme({
     root: 'flex flex-col min-h-0 min-w-0 divide-y divide-default',
     // The input sits flush in the palette, above a full-width divider
     filter: 'rounded-none',
-    close: '',
-    back: 'p-0',
+    // The filter is taller than the button: the close keeps the same inset on
+    // every side, the back keeps its padding so its icon lines up with the items
+    close: 'me-1',
+    back: '',
     content: 'relative overflow-hidden flex flex-col',
     footer: 'p-1',
     viewport: 'relative scroll-py-1 overflow-y-auto flex-1 focus:outline-none',
