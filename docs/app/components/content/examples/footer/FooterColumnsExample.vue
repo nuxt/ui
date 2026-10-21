@@ -44,7 +44,7 @@ const columns: FooterColumn[] = [{
       <UFormField name="email" label="Subscribe to our newsletter" size="lg">
         <UInput type="email" class="w-full">
           <template #trailing>
-            <UButton type="submit" size="xs" color="neutral" label="Subscribe" />
+            <UButton type="submit" size="sm" color="neutral" label="Subscribe" />
           </template>
         </UInput>
       </UFormField>
