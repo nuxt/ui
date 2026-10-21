@@ -11,7 +11,7 @@ export default extendTheme(input, {
     trailing: 'group flex items-center pe-(--ui-control-px) disabled:cursor-not-allowed focus:outline-none',
     trailingClear: 'p-0',
     arrow: 'fill-bg stroke-default',
-    content: 'max-h-[min(15rem,var(--reka-combobox-content-available-height,15rem))] w-(--reka-combobox-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-combobox-content-transform-origin) pointer-events-auto flex flex-col cursor-default',
+    content: 'max-h-[min(15rem,var(--reka-combobox-content-available-height,15rem))] w-(--reka-combobox-trigger-width) bg-overlay shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-combobox-content-transform-origin) pointer-events-auto flex flex-col cursor-default',
     viewport: 'relative scroll-py-1 overflow-y-auto flex-1',
     group: 'p-1 isolate',
     empty: 'text-center text-muted',

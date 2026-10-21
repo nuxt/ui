@@ -6,7 +6,7 @@ export default defineTheme({
     root: [
       'relative w-full text-xs text-muted **:data-reka-popper-content-wrapper:pointer-events-none',
       // The surface of the TanStack Charts tooltip, shown when a `definition` brings its own.
-      '[--ts-chart-tooltip-background:var(--ui-bg-default)] [--ts-chart-tooltip-color:var(--ui-text-strong)] [--ts-chart-tooltip-border:1px_solid_var(--ui-border-default)] [--ts-chart-tooltip-border-radius:var(--radius-sm)] [--ts-chart-tooltip-shadow:var(--shadow-sm)] [--ts-chart-tooltip-padding:--spacing(1.5)_--spacing(2.5)] [--ts-chart-tooltip-font:inherit]'
+      '[--ts-chart-tooltip-background:var(--ui-bg-overlay,var(--ui-bg-default))] [--ts-chart-tooltip-color:var(--ui-text-strong)] [--ts-chart-tooltip-border:1px_solid_var(--ui-border-default)] [--ts-chart-tooltip-border-radius:var(--radius-sm)] [--ts-chart-tooltip-shadow:var(--shadow-sm)] [--ts-chart-tooltip-padding:--spacing(1.5)_--spacing(2.5)] [--ts-chart-tooltip-font:inherit]'
     ],
     // The chart surface is focusable for keyboard navigation between points. Browsers outline a focused
     // `<svg>` on click too, so its width is zero until keyboard focus.

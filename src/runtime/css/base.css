@@ -202,3 +202,12 @@
     --ui-chart-6: var(--color-cyan-400, oklch(78.9% 0.154 211.53));
   }
 }
+
+@layer base {
+  /* The backdrop of a Modal, a Slideover or a Drawer moves to `bg-default` at
+     75% once `--ui-bg-overlay` lifts the floating layers, so they keep their
+     edge on it. Mixing `--ui-bg-overlay` at 0% leaves it unset until then. */
+  :where(:root, :host, .light, .dark) {
+    --ui-bg-backdrop: color-mix(in oklab, var(--ui-bg-overlay) 0%, color-mix(in oklab, var(--ui-bg-default) 75%, transparent));
+  }
+}
