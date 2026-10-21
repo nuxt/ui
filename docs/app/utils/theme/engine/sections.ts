@@ -13,8 +13,11 @@ import { FONT_WEIGHT_DEFAULTS } from '../studio'
 /** Every colour alias owns its own slice, so one changed alias stays one. */
 export type ColorSection = 'primary' | 'neutral' | typeof SEMANTIC_ALIASES[number]
 
+/** The slices that own semantic tokens: each alias, plus the neutral surface tokens. */
+type TokenSection = ColorSection | 'surfaces'
+
 export type SectionKey
-  = | ColorSection
+  = | TokenSection
     | 'font' | 'type' | 'weights'
     | 'icons' | 'radius' | 'size' | 'buttons' | 'panels' | 'inputs'
 
@@ -32,14 +35,15 @@ export const SECTION_GROUPS: Record<'colors' | 'defaults', SectionKey[]> = {
 }
 
 /** Every section, for whole-document comparisons against the baseline. */
-export const ALL_SECTION_KEYS: SectionKey[] = [...SECTION_GROUPS.colors, ...SECTION_GROUPS.defaults, 'font', 'type', 'weights', 'icons', 'radius']
+export const ALL_SECTION_KEYS: SectionKey[] = [...SECTION_GROUPS.colors, ...SECTION_GROUPS.defaults, 'surfaces', 'font', 'type', 'weights', 'icons', 'radius']
 
-/** Which color section a semantic token (or token shade) belongs to. */
-function tokenSection(token: string): ColorSection {
+/** Which section a semantic token (or token shade) belongs to. */
+function tokenSection(token: string): TokenSection {
   if (token === '--ui-primary' || token.startsWith('--ui-primary-') || token.startsWith('--ui-color-primary')) return 'primary'
   // the alias itself or one of its roles, `--ui-success-text-default`
   const semantic = SEMANTIC_ALIASES.find(alias => token === `--ui-${alias}` || token.startsWith(`--ui-${alias}-`))
   if (semantic) return semantic
+  if (['--ui-bg-', '--ui-text-', '--ui-border-'].some(prefix => token.startsWith(prefix))) return 'surfaces'
   return 'neutral'
 }
 
@@ -65,7 +69,7 @@ export function promotedShades(doc: ThemeDoc): Record<string, { light?: ShadeSto
   return promoted
 }
 
-function ownedTokens(doc: ThemeDoc, section: ColorSection) {
+function ownedTokens(doc: ThemeDoc, section: TokenSection) {
   // tokens the doc's own style treatment emits are DERIVED, a live doc
   // carries them merged into tokens, a preset doc never does
   const derived = styleTokens(doc.style ?? {})
@@ -78,7 +82,7 @@ function ownedTokens(doc: ThemeDoc, section: ColorSection) {
   return { light: pickMode('light'), dark: pickMode('dark') }
 }
 
-function ownedTokenShades(doc: ThemeDoc, section: ColorSection) {
+function ownedTokenShades(doc: ThemeDoc, section: TokenSection) {
   return Object.fromEntries(Object.entries(canonicalTokenShades(doc)).filter(([token]) => tokenSection(token) === section))
 }
 
@@ -121,6 +125,8 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
         tokens: ownedTokens(doc, key),
         shades: ownedTokenShades(doc, key)
       }
+    case 'surfaces':
+      return { tokens: ownedTokens(doc, key), shades: ownedTokenShades(doc, key) }
     // Explicit stock values count as absent throughout: setFontPrefs strips
     // them on apply while a preset doc may spell them out, and a raw
     // comparison would read dirty forever, jamming the toolbar reset.
@@ -242,8 +248,8 @@ function mergeAlias(doc: ThemeDoc, base: ThemeDoc, name: keyof typeof DEFAULT_CO
   }
 }
 
-/** Swap a color section's tokens/token-shades for the base doc's. */
-function mergeColorExtras(doc: ThemeDoc, base: ThemeDoc, section: ColorSection) {
+/** Swap a token section's tokens/token-shades for the base doc's. */
+function mergeColorExtras(doc: ThemeDoc, base: ThemeDoc, section: TokenSection) {
   for (const mode of ['light', 'dark'] as const) {
     const kept = Object.entries(doc.tokens?.[mode] ?? {}).filter(([token]) => tokenSection(token) !== section)
     const added = Object.entries(base.tokens?.[mode] ?? {}).filter(([token]) => tokenSection(token) === section)
@@ -284,6 +290,9 @@ export function mergeSection(current: ThemeDoc, base: ThemeDoc, key: SectionKey)
     case 'warning':
     case 'error':
       mergeAlias(doc, base, key)
+      mergeColorExtras(doc, base, key)
+      break
+    case 'surfaces':
       mergeColorExtras(doc, base, key)
       break
     case 'font':

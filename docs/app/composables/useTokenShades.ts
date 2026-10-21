@@ -5,7 +5,7 @@ import { readableShade } from '../utils/theme/engine/palette'
 /**
  * Per-mode shade sliders for the semantic tokens riding one ramp, the accent
  * pair and text of a color alias, every neutral-ramped token for neutral.
- * Shared by the Colors panel section and the folded token groups.
+ * Shared by the Colors panel sections and the Surfaces panel.
  */
 export function useTokenShades(alias: ColorAlias) {
   const { style, setStyle, baselineDoc, paletteShades, rampChip } = useThemeStudio()

@@ -42,14 +42,14 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'p-3 flex 
 
     <template #content>
       <ThemeStudioColorSection alias="primary" section-key="primary" />
-      <ThemeStudioColorSection alias="neutral" section-key="neutral" />
-
       <ThemeStudioColorSection
         v-for="alias in SEMANTIC_ALIASES"
         :key="alias"
         :alias="alias"
         :section-key="alias"
       />
+
+      <ThemeStudioColorSection alias="neutral" section-key="neutral" />
     </template>
   </UPopover>
 </template>

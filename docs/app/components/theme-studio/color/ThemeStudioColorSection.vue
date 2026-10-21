@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { upperFirst } from 'scule'
-import { TOKEN_GROUPS } from '../../../utils/theme/engine'
 import type { ColorAlias, SectionKey } from '../../../utils/theme/engine'
 
 /**
  * One color alias: its picker, with the palette and shade editors folding out
- * under it. Aliases expose their accent pair; neutral its every token group.
+ * under it. Every alias exposes its solid, accents their text pair too.
  */
 const props = defineProps<{
   alias: ColorAlias
@@ -17,18 +16,15 @@ const props = defineProps<{
 }>()
 
 const { rampChip } = useThemeStudio()
-const { sections, readable, readableApplied, applyReadable } = useTokenShades(props.alias)
+const { sections: tokenSections, readable, readableApplied, applyReadable } = useTokenShades(props.alias)
 
 const title = computed(() => props.label ?? upperFirst(props.alias))
 
 const paletteEditor = ref(false)
 const shadeEditor = ref(false)
 
-// Neutral rides every semantic token, so its shades come grouped rather than
-// as one accent pair.
-const tokenGroups = TOKEN_GROUPS
-  .map(group => ({ ...group, sections: sections.filter(section => section.group === group.key) }))
-  .filter(group => group.sections.length)
+// Neutral's background, text and border shades have their own toolbar panel.
+const sections = tokenSections.filter(section => section.group === 'colors')
 
 const studioIcons = useStudioIcons()
 
@@ -58,7 +54,7 @@ const editorContent = { side: 'right' as const, align: 'start' as const, alignOf
         </UTooltip>
 
         <template #content>
-          <div v-if="alias !== 'neutral'" class="flex flex-col gap-2">
+          <div class="flex flex-col gap-2">
             <ThemeStudioColorShadeGroup
               v-for="section in sections"
               :key="section.token"
@@ -66,6 +62,11 @@ const editorContent = { side: 'right' as const, align: 'start' as const, alignOf
               :sliders="section.sliders"
               :chip="rampChip(alias)"
             />
+
+            <!-- neutral text is the page text, no pair of its own to show here -->
+            <p v-if="alias === 'neutral'" class="text-xs text-muted">
+              Neutral text, backgrounds and borders are set in Surfaces.
+            </p>
 
             <!-- The text sliders follow the solid until one is moved, this
                  picks the first shade that reads at 4.5:1 in light mode. -->
@@ -85,24 +86,6 @@ const editorContent = { side: 'right' as const, align: 'start' as const, alignOf
                 @click="applyReadable"
               />
             </UTooltip>
-          </div>
-
-          <!-- Every group keeps its name: a headerless section can't be
-               told apart from the rows above it. -->
-          <div v-else class="flex flex-col gap-2">
-            <ThemeStudioSection
-              v-for="tokenGroup in tokenGroups"
-              :key="tokenGroup.key"
-              :label="tokenGroup.label"
-            >
-              <ThemeStudioColorShadeGroup
-                v-for="section in tokenGroup.sections"
-                :key="section.token"
-                :label="`${tokenGroup.label.replace(/ shades$/, '')} ${section.label.toLowerCase()}`"
-                :sliders="section.sliders"
-                :chip="rampChip(section.ramp)"
-              />
-            </ThemeStudioSection>
           </div>
         </template>
       </UPopover>
