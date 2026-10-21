@@ -175,13 +175,13 @@ export const GROUP_STOCK_VARIANT: Record<VariantGroup, DefaultVariant> = {
 /** Color scale a token slider walks, neutral, or any semantic alias's ramp. */
 export type TokenRamp = 'neutral' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error'
 
+/** `colors` sliders sit under their alias in the Colors panel, the rest in the Surfaces panel. */
 export type TokenGroup = 'colors' | 'background' | 'text' | 'border'
 
-export const TOKEN_GROUPS: Array<{ key: TokenGroup, label: string }> = [
-  { key: 'colors', label: 'Color shades' },
-  { key: 'background', label: 'Background shades' },
-  { key: 'text', label: 'Text shades' },
-  { key: 'border', label: 'Border shades' }
+export const SURFACE_GROUPS: Array<{ key: Exclude<TokenGroup, 'colors'>, label: string }> = [
+  { key: 'background', label: 'Background' },
+  { key: 'text', label: 'Text' },
+  { key: 'border', label: 'Border' }
 ]
 
 /**
@@ -203,7 +203,7 @@ export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, ramp: To
   { token: '--ui-bg-strong', label: 'Strong', ramp: 'neutral', group: 'background', defaults: { light: 200, dark: 700 } },
   // The surface of the floating layers, `bg-default` until a shade is picked
   { token: '--ui-bg-overlay', label: 'Overlay', ramp: 'neutral', group: 'background', defaults: { light: 'white', dark: 900 }, follows: '--ui-bg-default' },
-  { token: '--ui-neutral', label: 'Solid', ramp: 'neutral', group: 'background', defaults: { light: 900, dark: 50 } },
+  { token: '--ui-neutral', label: 'Neutral', ramp: 'neutral', group: 'colors', defaults: { light: 900, dark: 50 } },
   { token: '--ui-text-faint', label: 'Faint', ramp: 'neutral', group: 'text', defaults: { light: 400, dark: 500 } },
   { token: '--ui-text-muted', label: 'Muted', ramp: 'neutral', group: 'text', defaults: { light: 500, dark: 400 } },
   { token: '--ui-text-default', label: 'Default', ramp: 'neutral', group: 'text', defaults: { light: 700, dark: 200 } },
@@ -213,8 +213,8 @@ export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, ramp: To
   { token: '--ui-border-strong', label: 'Strong', ramp: 'neutral', group: 'border', defaults: { light: 300, dark: 700 } },
   // The text of each color, `--ui-<color>-text-default` and its muted step
   ...(['primary', ...SEMANTIC_ALIASES] as const).flatMap(alias => [
-    { token: `--ui-${alias}-text-default`, label: 'Text', ramp: alias, group: 'text' as const, defaults: { light: 500, dark: 400 } as const, follows: `--ui-${alias}` },
-    { token: `--ui-${alias}-text-muted`, label: 'Muted text', ramp: alias, group: 'text' as const, defaults: { light: 500, dark: 400 } as const, follows: `--ui-${alias}` }
+    { token: `--ui-${alias}-text-default`, label: 'Text', ramp: alias, group: 'colors' as const, defaults: { light: 500, dark: 400 } as const, follows: `--ui-${alias}` },
+    { token: `--ui-${alias}-text-muted`, label: 'Muted text', ramp: alias, group: 'colors' as const, defaults: { light: 500, dark: 400 } as const, follows: `--ui-${alias}` }
   ])
 ]
 /**
