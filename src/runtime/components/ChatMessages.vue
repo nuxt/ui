@@ -181,7 +181,7 @@ function scrollToBottom(smooth: boolean = true) {
   }
 }
 
-watchThrottled([() => props.messages, () => props.status], ([_, status]) => {
+watchThrottled([() => props.messages, () => props.status], () => {
   if (!props.messages?.length) {
     showAutoScroll.value = false
     isAtBottom.value = true
@@ -191,13 +191,8 @@ watchThrottled([() => props.messages, () => props.status], ([_, status]) => {
     return
   }
 
-  if (status !== 'streaming') {
-    // Keep `isAtBottom` and the scroll button in sync when messages change outside a stream
-    nextTick(checkScrollPosition)
-    return
-  }
-
-  checkScrollPosition()
+  // Measure once the new content is rendered, so `isAtBottom` and the scroll button stay in sync
+  nextTick(checkScrollPosition)
 }, { deep: true, throttle: 50, leading: true })
 
 watch(() => props.status, (status) => {
