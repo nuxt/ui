@@ -154,7 +154,7 @@ describe('colors plugin', () => {
   it('gives an alias on a gray palette neutral\'s surface roles', async () => {
     const gray = await build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: neutral 900 50; }')
     expect(gray).toContain(':root, :host, .light, .dark {')
-    expect(gray).toContain('--ui-primary-bg-soft: var(--ui-layer-bg-soft, var(--ui-bg-soft));')
+    expect(gray).toContain('--ui-primary-bg-soft: var(--ui-bg-soft);')
     // its strong text is `text-strong`, like neutral's
     expect(gray).toContain('--ui-primary-text-strong: var(--ui-text-strong);')
     // neutral's hover mixes the color itself, so primary's mixes primary

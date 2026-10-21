@@ -5,10 +5,7 @@
    name with `accent-` in front, and `color="neutral"` resolves it to that
    token, except the focus outline and the two hovers, set in `accent.css`.
    `text-primary` and `text-accent` read the color's text before the color, so
-   text can be darker than the solid while `bg-primary` stays on it.
-   The neutral surfaces and borders read `--ui-layer-*` first, which only
-   `bg-overlay` sets: it points them at the overlay tokens on a floating layer,
-   and they fall through to the page tokens while those are unset. */
+   text can be darker than the solid while `bg-primary` stays on it. */
 @theme default inline {
   --color-primary-50: var(--ui-color-primary-50);
   --color-primary-100: var(--ui-color-primary-100);
@@ -120,40 +117,40 @@
   --text-color-accent-muted: var(--ui-accent-text-muted, color-mix(in oklab, var(--ui-accent-text-default, var(--ui-accent)) 75%, transparent));
   --text-color-accent-faint: var(--ui-accent-text-faint, color-mix(in oklab, var(--ui-accent-text-default, var(--ui-accent)) 50%, transparent));
   --text-color-accent-contrast: var(--ui-accent-text-contrast, var(--ui-text-contrast));
-  --background-color-default: var(--ui-layer-bg-default, var(--ui-bg-default));
-  --background-color-tint: var(--ui-bg-tint, color-mix(in oklab, var(--ui-layer-bg-soft, var(--ui-bg-soft)) 50%, transparent));
-  --background-color-backdrop: var(--ui-bg-backdrop, color-mix(in oklab, var(--ui-layer-bg-soft, var(--ui-bg-soft)) 75%, transparent));
-  --background-color-soft: var(--ui-layer-bg-soft, var(--ui-bg-soft));
-  --background-color-strong: var(--ui-layer-bg-strong, var(--ui-bg-strong));
+  --background-color-default: var(--ui-bg-default);
+  --background-color-tint: var(--ui-bg-tint, color-mix(in oklab, var(--ui-bg-soft) 50%, transparent));
+  --background-color-backdrop: var(--ui-bg-backdrop, color-mix(in oklab, var(--ui-bg-soft) 75%, transparent));
+  --background-color-soft: var(--ui-bg-soft);
+  --background-color-strong: var(--ui-bg-strong);
   --background-color-neutral-hover: var(--ui-neutral-bg-hover, color-mix(in oklab, var(--ui-neutral) 90%, transparent));
-  --background-color-border: var(--ui-layer-border-default, var(--ui-border-default));
+  --background-color-border: var(--ui-border-default);
   --background-color-accent-hover: var(--ui-accent-bg-hover, color-mix(in oklab, var(--ui-accent) 75%, transparent));
   --background-color-accent-tint: var(--ui-accent-bg-tint, color-mix(in oklab, var(--ui-accent) 5%, transparent));
   --background-color-accent-soft: var(--ui-accent-bg-soft, color-mix(in oklab, var(--ui-accent) 10%, transparent));
   --background-color-accent-strong: var(--ui-accent-bg-strong, color-mix(in oklab, var(--ui-accent) 15%, transparent));
-  --border-color-default: var(--ui-layer-border-default, var(--ui-border-default));
-  --border-color-strong: var(--ui-layer-border-strong, var(--ui-border-strong));
-  --border-color-bg: var(--ui-layer-bg-default, var(--ui-bg-default));
+  --border-color-default: var(--ui-border-default);
+  --border-color-strong: var(--ui-border-strong);
+  --border-color-bg: var(--ui-bg-default);
   --border-color-accent-default: var(--ui-accent-border-default, color-mix(in oklab, var(--ui-accent) 25%, transparent));
   --border-color-accent-strong: var(--ui-accent-border-strong, color-mix(in oklab, var(--ui-accent) 50%, transparent));
-  --ring-color-default: var(--ui-layer-border-default, var(--ui-border-default));
-  --ring-color-strong: var(--ui-layer-border-strong, var(--ui-border-strong));
-  --ring-color-bg: var(--ui-layer-bg-default, var(--ui-bg-default));
+  --ring-color-default: var(--ui-border-default);
+  --ring-color-strong: var(--ui-border-strong);
+  --ring-color-bg: var(--ui-bg-default);
   --ring-color-accent-default: var(--ui-accent-border-default, color-mix(in oklab, var(--ui-accent) 25%, transparent));
   --ring-color-accent-strong: var(--ui-accent-border-strong, color-mix(in oklab, var(--ui-accent) 50%, transparent));
-  --divide-color-default: var(--ui-layer-border-default, var(--ui-border-default));
-  --divide-color-strong: var(--ui-layer-border-strong, var(--ui-border-strong));
-  --divide-color-bg: var(--ui-layer-bg-default, var(--ui-bg-default));
+  --divide-color-default: var(--ui-border-default);
+  --divide-color-strong: var(--ui-border-strong);
+  --divide-color-bg: var(--ui-bg-default);
   --divide-color-accent-default: var(--ui-accent-border-default, color-mix(in oklab, var(--ui-accent) 25%, transparent));
   --divide-color-accent-strong: var(--ui-accent-border-strong, color-mix(in oklab, var(--ui-accent) 50%, transparent));
-  --ring-offset-color-default: var(--ui-layer-border-default, var(--ui-border-default));
-  --ring-offset-color-strong: var(--ui-layer-border-strong, var(--ui-border-strong));
-  --ring-offset-color-bg: var(--ui-layer-bg-default, var(--ui-bg-default));
-  --outline-color-default: var(--ui-layer-border-default, var(--ui-border-default));
+  --ring-offset-color-default: var(--ui-border-default);
+  --ring-offset-color-strong: var(--ui-border-strong);
+  --ring-offset-color-bg: var(--ui-bg-default);
+  --outline-color-default: var(--ui-border-default);
   --outline-color-focus: var(--ui-outline-focus, color-mix(in oklab, var(--ui-primary) 25%, transparent));
   --outline-color-accent-focus: var(--ui-accent-outline-focus, color-mix(in oklab, var(--ui-accent) 25%, transparent));
-  --stroke-bg: var(--ui-layer-bg-default, var(--ui-bg-default));
-  --stroke-default: var(--ui-layer-border-default, var(--ui-border-default));
-  --fill-bg: var(--ui-layer-bg-default, var(--ui-bg-default));
-  --fill-default: var(--ui-layer-border-default, var(--ui-border-default));
+  --stroke-bg: var(--ui-bg-default);
+  --stroke-default: var(--ui-border-default);
+  --fill-bg: var(--ui-bg-default);
+  --fill-default: var(--ui-border-default);
 }

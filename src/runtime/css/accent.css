@@ -119,16 +119,16 @@
 
   .\[--ui-accent\:var\(--ui-neutral\)\] {
     --ui-accent-bg-hover: var(--ui-neutral-bg-hover, color-mix(in oklab, var(--ui-neutral) 90%, transparent));
-    --ui-accent-bg-tint: var(--ui-neutral-bg-tint, var(--ui-bg-tint, color-mix(in oklab, var(--ui-layer-bg-soft, var(--ui-bg-soft)) 50%, transparent)));
-    --ui-accent-bg-soft: var(--ui-neutral-bg-soft, var(--ui-layer-bg-soft, var(--ui-bg-soft)));
-    --ui-accent-bg-strong: var(--ui-neutral-bg-strong, color-mix(in oklab, var(--ui-layer-bg-strong, var(--ui-bg-strong)) 75%, transparent));
+    --ui-accent-bg-tint: var(--ui-neutral-bg-tint, var(--ui-bg-tint, color-mix(in oklab, var(--ui-bg-soft) 50%, transparent)));
+    --ui-accent-bg-soft: var(--ui-neutral-bg-soft, var(--ui-bg-soft));
+    --ui-accent-bg-strong: var(--ui-neutral-bg-strong, color-mix(in oklab, var(--ui-bg-strong) 75%, transparent));
     --ui-accent-text-contrast: var(--ui-neutral-text-contrast);
     --ui-accent-text-strong: var(--ui-neutral-text-strong, var(--ui-text-strong));
     --ui-accent-text-default: var(--ui-neutral-text-default, var(--ui-text-default));
     --ui-accent-text-muted: var(--ui-neutral-text-muted, var(--ui-text-muted));
     --ui-accent-text-faint: var(--ui-neutral-text-faint, var(--ui-text-faint));
-    --ui-accent-border-default: var(--ui-neutral-border-default, var(--ui-layer-border-default, var(--ui-border-default)));
-    --ui-accent-border-strong: var(--ui-neutral-border-strong, var(--ui-layer-border-strong, var(--ui-border-strong)));
+    --ui-accent-border-default: var(--ui-neutral-border-default, var(--ui-border-default));
+    --ui-accent-border-strong: var(--ui-neutral-border-strong, var(--ui-border-strong));
     --ui-accent-outline-focus: var(--ui-neutral-outline-focus);
   }
 }
