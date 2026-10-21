@@ -3,7 +3,7 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     overlay: 'fixed inset-0 bg-backdrop',
-    content: 'fixed bg-default ring ring-default flex focus:outline-none',
+    content: 'fixed bg-overlay ring ring-default flex focus:outline-none',
     handle: 'shrink-0 bg-strong! transition-opacity ease-out',
     container: 'w-full flex flex-col gap-4 p-4 overflow-y-auto',
     header: 'flex items-center gap-1.5 min-h-8',

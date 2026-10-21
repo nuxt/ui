@@ -3,7 +3,7 @@ import { defineTheme } from '../utils/theme'
 
 export default defineTheme({
   slots: {
-    content: 'min-w-32 max-h-(--reka-dropdown-menu-content-available-height) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col',
+    content: 'min-w-32 max-h-(--reka-dropdown-menu-content-available-height) bg-overlay shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col',
     filter: 'rounded-none border-b border-default',
     empty: 'text-center text-muted',
     viewport: 'relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1',
