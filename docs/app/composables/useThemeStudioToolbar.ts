@@ -67,6 +67,7 @@ export function useThemeStudioToolbar() {
   const groupDirtyFlags = {
     colors: afterMount(groupDirty('colors')),
     defaults: afterMount(groupDirty('defaults')),
+    surfaces: afterMount(sectionDirty('surfaces')),
     font: afterMount(sectionDirty(['font', 'type', 'weights'])),
     icons: afterMount(sectionDirty('icons')),
     radius: afterMount(sectionDirty('radius'))

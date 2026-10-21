@@ -2,7 +2,7 @@
 /**
  * The one trigger every toolbar control opens from: a neutral outline button
  * whose dirty state reaches the ring, the label and both icons. Shared by the
- * six toolbar controls; width and aria-label ride the caller's attrs.
+ * seven toolbar controls; width and aria-label ride the caller's attrs.
  */
 defineProps<{
   label?: string
