@@ -79,6 +79,12 @@ export interface ModuleOptions {
    * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#componentdetection
    */
   componentDetection?: boolean | string[]
+
+  /**
+   * Additional packages to scan for components using Nuxt UI
+   * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#scanpackages
+   */
+  scanPackages?: string[]
 }
 
 declare module '#app' {

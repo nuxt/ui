@@ -196,6 +196,14 @@ describe('detectUsedComponents', { timeout: 20000 }, () => {
     expect(await detectUsedComponents([pkgDir], 'U', componentDir)).toContain('Chip')
   })
 
+  it('scans the dist directory of a workspace package outside node_modules', async () => {
+    const pkgDir = fixtureRoot()
+    mkdirSync(join(pkgDir, 'dist'), { recursive: true })
+    writeFileSync(join(pkgDir, 'dist', 'index.mjs'), `export const render = () => h(UChip)\n`)
+
+    expect(await detectUsedComponents([], 'U', componentDir, undefined, { packages: [pkgDir] })).toContain('Chip')
+  })
+
   it('skips files in nested node_modules and dist directories', async () => {
     const dir = fixtureUsing('<UButton label="x" />')
     const nested = join(dir, 'packages', 'foo', 'node_modules', 'pkg')
@@ -237,6 +245,17 @@ describe('detectUsedComponents', { timeout: 20000 }, () => {
     writeFileSync(join(outside, 'AcmeDate.vue'), '<template><UCalendar /></template>\n')
 
     expect(await detectUsedComponents([dir], 'U', componentDir, undefined, { files: [join(outside, 'AcmeDate.vue')] })).toContain('Calendar')
+  })
+
+  it('adds the components it is given, without warning about unknown names', async () => {
+    const warn = vi.spyOn(consola, 'warn').mockImplementation(() => {})
+    const dir = fixtureUsing('<UButton />')
+
+    const detected = await detectUsedComponents([dir], 'U', componentDir, undefined, { components: ['PricingPlans', 'Acme'] })
+    expect(detected).toContain('PricingPlan')
+    expect(detected).not.toContain('Acme')
+    expect(warn).not.toHaveBeenCalled()
+    warn.mockRestore()
   })
 
   it('detects components imported from their file', async () => {
