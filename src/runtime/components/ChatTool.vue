@@ -121,7 +121,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatTool || {}) 
   variant: props.variant,
   chevron: props.chevron,
   loading: props.loading,
-  error: props.error
+  error: props.error && !props.loading
 }))
 
 const isControlled = computed(() => props.open !== undefined)
