@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { VNode } from 'vue'
-import type { ListboxRootEmits, ListboxRootProps } from 'reka-ui'
+import type { ListboxRootEmits, ListboxRootProps, ListboxItemSelectEvent } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/listbox'
 import type { AvatarProps } from './Avatar.vue'
@@ -29,7 +29,7 @@ export interface ListboxItem {
    */
   type?: 'label' | 'separator' | 'item'
   disabled?: boolean
-  onSelect?: (e: Event) => void
+  onSelect?: (e: ListboxItemSelectEvent<unknown>) => void
   class?: any
   ui?: Partial<Pick<Listbox['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatar' | 'itemLeadingAvatarSize' | 'itemLeadingChip' | 'itemLeadingChipSize' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>>
   [key: string]: any
@@ -275,7 +275,7 @@ function onUpdate(value: any) {
   emitFormInput()
 }
 
-function onSelect(e: Event, item: ListboxItem) {
+function onSelect(e: ListboxItemSelectEvent<unknown>, item: ListboxItem) {
   if (item.disabled) {
     e.preventDefault()
     return
