@@ -1,6 +1,6 @@
 /* What Tailwind can't take inside a cascade layer: the sources it scans, the
-   `light` / `dark` variants, the theme tokens and the `bg-overlay` utility. Import it at the top level,
-   `@nuxt/ui` does both halves. */
+   `light` / `dark` variants, the theme tokens and the `bg-overlay` utility.
+   Import it at the top level, `@nuxt/ui` does both halves. */
 @import './sources.css';
 @import '#build/ui.css';
 @import './tokens.css';
