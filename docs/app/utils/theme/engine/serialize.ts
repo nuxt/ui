@@ -13,6 +13,7 @@ import {
   DEFAULT_COLORS,
   THEME_DEFAULTS,
   LIBRARY_TOKEN_DEFAULTS,
+  TOKEN_SHADE_TARGETS,
   tokenShadeDefaults,
   styleComponents,
   styleTokens,
@@ -148,10 +149,11 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explici
 
   // `:root, .light` matches `<html class="dark">` too and lands after the
   // library's `.dark` block, so a light-only override would win in dark mode.
-  // Restate the library's dark value so the `.dark` block wins it back.
+  // Restate the library's dark value so the `.dark` block wins it back, or
+  // `initial` for a token the library leaves unset, like a color's text.
   for (const [key, value] of Object.entries(light)) {
     if (key in dark) continue
-    const fallback = LIBRARY_TOKEN_DEFAULTS.dark[key]
+    const fallback = LIBRARY_TOKEN_DEFAULTS.dark[key] ?? (TOKEN_SHADE_TARGETS.some(target => target.token === key && target.follows) ? 'initial' : undefined)
     if (fallback && fallback !== value) {
       dark[key] = fallback
     }
