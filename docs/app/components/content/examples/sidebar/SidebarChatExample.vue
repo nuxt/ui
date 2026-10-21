@@ -101,7 +101,6 @@ const ui = {
       <template #footer>
         <UChatPrompt
           v-model="input"
-          :status="status"
           :error="error"
           :autofocus="false"
           variant="subtle"

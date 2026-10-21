@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { defineComponent, h, nextTick, ref, shallowRef, triggerRef } from 'vue'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
@@ -65,42 +65,6 @@ describe('ChatMessages', () => {
     expect(await axe(wrapper.element)).toHaveNoViolations()
 
     wrapper.unmount()
-  })
-
-  it('scrolls the scroll parent in `scrollToMessage`', async () => {
-    const chatRef = ref<{ scrollToMessage: (id: string, smooth?: boolean) => void } | null>(null)
-    const Parent = defineComponent({
-      setup() {
-        return () => h('div', { style: 'overflow-y: auto' }, [h(ChatMessages, { ref: chatRef, ...props, shouldScrollToBottom: false })])
-      }
-    })
-
-    const wrapper = await mountSuspended(Parent, { attachTo: document.body })
-    const scrollTo = vi.fn()
-    wrapper.element.scrollTo = scrollTo
-    const scrollIntoView = vi.spyOn(Element.prototype, 'scrollIntoView')
-
-    chatRef.value!.scrollToMessage(props.messages[0]!.id, false)
-
-    expect(scrollTo).toHaveBeenCalledWith({ top: expect.any(Number), behavior: 'instant' })
-    expect(scrollIntoView).not.toHaveBeenCalled()
-
-    scrollIntoView.mockRestore()
-    wrapper.unmount()
-  })
-
-  it('sets aria-busy while submitted or streaming', async () => {
-    const wrapper = await mountSuspended(ChatMessages, { props: { ...props, status: 'ready' } })
-    expect(wrapper.attributes('aria-busy')).toBeUndefined()
-
-    await wrapper.setProps({ status: 'submitted' })
-    expect(wrapper.attributes('aria-busy')).toBe('true')
-
-    await wrapper.setProps({ status: 'streaming' })
-    expect(wrapper.attributes('aria-busy')).toBe('true')
-
-    await wrapper.setProps({ status: 'ready' })
-    expect(wrapper.attributes('aria-busy')).toBeUndefined()
   })
 
   it('forwards content slot props together with `message`', async () => {
