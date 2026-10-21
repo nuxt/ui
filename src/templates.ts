@@ -231,16 +231,20 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     write: true,
     getContents: async ({ app }) => {
       if (!options.componentDetection || !isDev()) {
-        return 'export default null as Set<string> | null\n'
+        return 'export const themes = null as Set<string> | null\nexport default null as Set<string> | null\n'
       }
 
+      const themes = [...Object.keys(theme), ...(hasContent ? Object.keys(themeContent) : [])]
       const detectedComponents = await getDetectedComponents(app)
       // Nothing detected keeps every theme
       const names = detectedComponents?.size
         ? [...detectedComponents].map(component => camelCase(component))
-        : [...Object.keys(theme), ...(hasContent ? Object.keys(themeContent) : [])]
+        : themes
 
       return `const names: string[] = ${JSON.stringify(names)}
+
+// Every theme the library ships: a component of the app's own has none to miss
+export const themes = new Set(${JSON.stringify(themes)}) as Set<string> | null
 
 // Detection runs again as files change. Each version of this module refills the
 // one set components read, kept across updates in \`import.meta.hot.data\`
