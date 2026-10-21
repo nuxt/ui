@@ -375,6 +375,7 @@ function clearMessages() {
             :text="getToolText(part)"
             :icon="getToolIcon(part)"
             :streaming="isToolStreaming(part, streaming)"
+            :error="part.state === 'output-error'"
           />
         </template>
       </UChatMessages>
