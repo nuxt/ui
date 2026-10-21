@@ -97,7 +97,6 @@ const ui = {
               v-model="input"
               icon="i-lucide-search"
               variant="naked"
-              :status="status"
               :error="error"
               @submit="onSubmit"
               @close="onClose"

@@ -424,7 +424,6 @@ function onSubmit() {
 
   <UChatPrompt
     v-model="input"
-    :status="status"
     :error="error"
     @submit="onSubmit"
   >
@@ -507,7 +506,6 @@ function onSubmit() {
 
   <UChatPrompt
     v-model="input"
-    :status="status"
     :error="error"
     @submit="onSubmit"
   >

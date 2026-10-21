@@ -34,16 +34,6 @@ describe('ChatPrompt', () => {
     expect(wrapper.emitted('submit')).toHaveLength(1)
   })
 
-  it.each(['submitted', 'streaming'] as const)('does not emit submit on Enter while %s', async (status) => {
-    const wrapper = await mountSuspended(ChatPrompt, {
-      props: { modelValue: 'Hello', status }
-    })
-
-    await wrapper.find('textarea').trigger('keydown', { key: 'Enter' })
-
-    expect(wrapper.emitted('submit')).toBeUndefined()
-  })
-
   it('does not emit submit on Enter during composition', async () => {
     const wrapper = await mountSuspended(ChatPrompt, {
       props: { modelValue: 'Hello' }
