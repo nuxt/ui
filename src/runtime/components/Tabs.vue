@@ -136,6 +136,12 @@ const ui = computed(() => tv(theme, overrides.value)({
   orientation: props.orientation
 }))
 
+// reka-ui renders its indicator once it has measured the active trigger on the client,
+// this one anchors to the trigger in CSS until then and hides once reka's is in the DOM.
+const anchoredIndicatorStyle = computed(() => props.orientation === 'vertical'
+  ? 'position-anchor: --tabs-trigger; top: anchor(top); height: anchor-size(height)'
+  : 'position-anchor: --tabs-trigger; left: anchor(left); width: anchor-size(width)')
+
 const triggersRef = ref<ComponentPublicInstance[]>([])
 
 function setTriggerRef(index: number, el: Element | ComponentPublicInstance | null) {
@@ -160,6 +166,7 @@ defineExpose({
   >
     <TabsList data-slot="tabs-list" :class="ui.list({ class: props.ui?.list })">
       <TabsIndicator data-slot="tabs-indicator" :class="ui.indicator({ class: props.ui?.indicator })" />
+      <span data-slot="tabs-indicator" :style="anchoredIndicatorStyle" :class="ui.indicator({ class: props.ui?.indicator })" />
 
       <slot name="list-leading" />
 
