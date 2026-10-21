@@ -195,11 +195,13 @@ export async function detectUsedComponents(
   prefix: string,
   componentDir: string,
   includeComponents?: string[],
-  { prose = false, files = [], warn = true }: {
+  { prose = false, files = [], components = [], warn = true }: {
     /** Prose components render from Markdown, which can't be traced, so what they render is always included. */
     prose?: boolean
     /** Files to scan besides the dirs, like components registered from elsewhere. */
     files?: string[]
+    /** Prefix-less names found without scanning, like the components `@nuxt/content` renders. */
+    components?: string[]
     /** Warn about unknown `includeComponents` names. */
     warn?: boolean
   } = {}
@@ -214,6 +216,10 @@ export async function detectUsedComponents(
     for (const component of includeComponents) {
       detectedComponents.add(component)
     }
+  }
+
+  for (const component of components) {
+    detectedComponents.add(component)
   }
 
   const componentPattern = createComponentPattern(prefix)

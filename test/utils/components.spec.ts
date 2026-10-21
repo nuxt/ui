@@ -239,6 +239,17 @@ describe('detectUsedComponents', { timeout: 20000 }, () => {
     expect(await detectUsedComponents([dir], 'U', componentDir, undefined, { files: [join(outside, 'AcmeDate.vue')] })).toContain('Calendar')
   })
 
+  it('adds the components it is given, without warning about unknown names', async () => {
+    const warn = vi.spyOn(consola, 'warn').mockImplementation(() => {})
+    const dir = fixtureUsing('<UButton />')
+
+    const detected = await detectUsedComponents([dir], 'U', componentDir, undefined, { components: ['PricingPlans', 'Acme'] })
+    expect(detected).toContain('PricingPlan')
+    expect(detected).not.toContain('Acme')
+    expect(warn).not.toHaveBeenCalled()
+    warn.mockRestore()
+  })
+
   it('detects components imported from their file', async () => {
     const dir = fixtureRoot()
     writeFileSync(join(dir, 'App.vue'), [
