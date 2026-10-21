@@ -21,6 +21,7 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
 
   let root = ''
   let scanDirs: string[] = []
+  let packageDirs: string[] = []
   let templateFiles: Record<string, string> = {}
   // The files the last `writeTemplates` run changed
   let writtenFiles = new Set<string>()
@@ -32,7 +33,7 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
       options.prefix!,
       componentDir,
       Array.isArray(options.componentDetection) ? options.componentDetection : undefined,
-      { prose: !!(options.prose || options.mdc), warn }
+      { prose: !!(options.prose || options.mdc), packages: packageDirs, warn }
     )
   }
   const templateKeys = new Set(templates.map(t => `#build/${t.filename}`))
@@ -97,7 +98,8 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
           // `scanPackages` packages resolve Nuxt UI components from `node_modules`
           // and user component dirs can sit outside the root: detection has to
           // scan both or their components lose their theme CSS.
-          scanDirs = resolveExtraScanDirs(root, options.scanPackages, options.components ? options.components.dirs : undefined)
+          packageDirs = resolveExtraScanDirs(root, options.scanPackages)
+          scanDirs = resolveExtraScanDirs(root, undefined, options.components ? options.components.dirs : undefined)
           vue.detectedComponents = await detect()
 
           if (vue.detectedComponents?.size) {
@@ -175,7 +177,7 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
         // Vite only watches its own root: the scan root (`options.root`), component
         // dirs and linked packages outside it aren't watched otherwise
         const viteRoot = server.config.root
-        const outside = [root, ...scanDirs].filter(dir => dir !== viteRoot && !dir.startsWith(`${viteRoot}/`) && !dir.includes('/node_modules/'))
+        const outside = [root, ...scanDirs, ...packageDirs].filter(dir => dir !== viteRoot && !dir.startsWith(`${viteRoot}/`) && !dir.includes('/node_modules/'))
         if (outside.length) {
           server.watcher.add(outside)
         }
