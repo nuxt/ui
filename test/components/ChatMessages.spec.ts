@@ -99,6 +99,29 @@ describe('ChatMessages', () => {
     })
   })
 
+  it('passes `streaming` to forwarded slots for the last message only', async () => {
+    const messages = [
+      { id: 'm-1', role: 'user' as const, parts: [{ type: 'text' as const, text: 'a' }] },
+      { id: 'm-2', role: 'assistant' as const, parts: [{ type: 'text' as const, text: 'b' }] }
+    ]
+    const captured: Record<string, boolean>[] = []
+    const wrapper = await mountSuspended(ChatMessages, {
+      props: { messages, status: 'streaming' },
+      slots: {
+        content: ({ message, streaming }) => {
+          captured.push({ [message.role]: streaming })
+          return 'x'
+        }
+      }
+    })
+
+    expect(captured).toEqual([{ user: false }, { assistant: true }])
+
+    captured.length = 0
+    await wrapper.setProps({ status: 'ready' })
+    expect(captured).toEqual([{ user: false }, { assistant: false }])
+  })
+
   it('hides the streaming indicator once the assistant message produces parts', async () => {
     // Reproduces the `@ai-sdk/vue` reactivity model: messages live in a `shallowRef`
     // and grow via in-place mutation + `triggerRef`, so neither the array nor the
