@@ -1,5 +1,5 @@
 /* What Tailwind can't take inside a cascade layer: the sources it scans, the
-   `light` / `dark` variants and the theme tokens. Import it at the top level,
+   `light` / `dark` variants, the theme tokens and the `bg-overlay` utility. Import it at the top level,
    `@nuxt/ui` does both halves. */
 @import './sources.css';
 @import '#build/ui.css';
@@ -7,3 +7,17 @@
 
 @custom-variant light (&:where(.light, .light *));
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* The surface of the floating layers (menus, popovers, tooltips, modals...).
+   `--ui-bg-overlay` and the `--ui-overlay-*` roles are unset, so the layer
+   paints `bg-default` and keeps the page tokens inside. Set them together to
+   lift it off the page: `bg-soft`, `ring-default` and the rest on the layer and
+   its content then read the overlay roles. */
+@utility bg-overlay {
+  background-color: var(--ui-bg-overlay, var(--ui-bg-default));
+  --ui-layer-bg-default: var(--ui-bg-overlay);
+  --ui-layer-bg-soft: var(--ui-overlay-bg-soft);
+  --ui-layer-bg-strong: var(--ui-overlay-bg-strong);
+  --ui-layer-border-default: var(--ui-overlay-border-default);
+  --ui-layer-border-strong: var(--ui-overlay-border-strong);
+}
