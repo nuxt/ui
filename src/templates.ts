@@ -111,11 +111,11 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     const components = contentComponents.filter(component => component.startsWith(options.prefix!)).map(component => component.slice(options.prefix!.length))
 
     const detectedComponents = await detectUsedComponents(
-      [...layers, ...contentDirs, ...packageDirs],
+      [...layers, ...contentDirs],
       options.prefix!,
       resolve('./runtime/components'),
       Array.isArray(options.componentDetection) ? options.componentDetection : undefined,
-      { prose: hasProse, files, components }
+      { prose: hasProse, files, packages: packageDirs, components }
     )
 
     if (detectedComponents && detectedComponents.size > 0) {

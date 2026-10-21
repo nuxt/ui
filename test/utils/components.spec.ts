@@ -196,6 +196,14 @@ describe('detectUsedComponents', { timeout: 20000 }, () => {
     expect(await detectUsedComponents([pkgDir], 'U', componentDir)).toContain('Chip')
   })
 
+  it('scans the dist directory of a workspace package outside node_modules', async () => {
+    const pkgDir = fixtureRoot()
+    mkdirSync(join(pkgDir, 'dist'), { recursive: true })
+    writeFileSync(join(pkgDir, 'dist', 'index.mjs'), `export const render = () => h(UChip)\n`)
+
+    expect(await detectUsedComponents([], 'U', componentDir, undefined, { packages: [pkgDir] })).toContain('Chip')
+  })
+
   it('skips files in nested node_modules and dist directories', async () => {
     const dir = fixtureUsing('<UButton label="x" />')
     const nested = join(dir, 'packages', 'foo', 'node_modules', 'pkg')
