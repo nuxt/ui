@@ -204,24 +204,10 @@
 }
 
 @layer base {
-  /* The surface of the floating layers and the neutral tokens inside them,
-     which `bg-overlay` puts on the layer. They are the page tokens while
-     `--ui-bg-overlay` is unset. Once it is set, each one moves a step up the
-     ramp, so rings, separators and highlighted items don't match the new
-     surface: a step mixes in `--ui-bg-overlay` at 0%, or reads one that does,
-     and is unset while it is. It comes first so the fallback Tailwind writes
-     for browsers without `color-mix()`, the first color, stays unset as well.
-     Set an `--ui-overlay-*` token to replace it. */
+  /* The backdrop of a Modal, a Slideover or a Drawer moves to `bg-default` at
+     75% once `--ui-bg-overlay` lifts the floating layers, so they keep their
+     edge on it. Mixing `--ui-bg-overlay` at 0% leaves it unset until then. */
   :where(:root, :host, .light, .dark) {
-    --ui-overlay-step-bg-soft: color-mix(in oklab, var(--ui-bg-overlay) 0%, var(--ui-bg-strong));
-    --ui-overlay-step-bg-strong: color-mix(in oklab, var(--ui-overlay-step-bg-soft), var(--ui-text-strong) 10%);
-    --ui-overlay-step-border-default: color-mix(in oklab, var(--ui-bg-overlay) 0%, var(--ui-border-strong));
-    --ui-overlay-step-border-strong: color-mix(in oklab, var(--ui-overlay-step-border-default), var(--ui-text-strong) 10%);
-
-    --ui-overlay-bg-default: var(--ui-bg-overlay, var(--ui-bg-default));
-    --ui-overlay-bg-soft: var(--ui-overlay-step-bg-soft, var(--ui-bg-soft));
-    --ui-overlay-bg-strong: var(--ui-overlay-step-bg-strong, var(--ui-bg-strong));
-    --ui-overlay-border-default: var(--ui-overlay-step-border-default, var(--ui-border-default));
-    --ui-overlay-border-strong: var(--ui-overlay-step-border-strong, var(--ui-border-strong));
+    --ui-bg-backdrop: color-mix(in oklab, var(--ui-bg-overlay) 0%, color-mix(in oklab, var(--ui-bg-default) 75%, transparent));
   }
 }
