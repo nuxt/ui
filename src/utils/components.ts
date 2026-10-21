@@ -195,11 +195,15 @@ export async function detectUsedComponents(
   prefix: string,
   componentDir: string,
   includeComponents?: string[],
-  { prose = false, files = [], warn = true }: {
+  { prose = false, files = [], packages = [], components = [], warn = true }: {
     /** Prose components render from Markdown, which can't be traced, so what they render is always included. */
     prose?: boolean
     /** Files to scan besides the dirs, like components registered from elsewhere. */
     files?: string[]
+    /** `scanPackages` directories, scanned with their build output. */
+    packages?: string[]
+    /** Prefix-less names found without scanning, like the components `@nuxt/content` renders. */
+    components?: string[]
     /** Warn about unknown `includeComponents` names. */
     warn?: boolean
   } = {}
@@ -214,6 +218,10 @@ export async function detectUsedComponents(
     for (const component of includeComponents) {
       detectedComponents.add(component)
     }
+  }
+
+  for (const component of components) {
+    detectedComponents.add(component)
   }
 
   const componentPattern = createComponentPattern(prefix)
@@ -241,10 +249,11 @@ export async function detectUsedComponents(
   }
 
   // Scan all source files for component usage across all layers
-  for (const dir of dirs) {
+  for (const dir of [...dirs, ...packages]) {
     // `scanPackages` directories ship their code in `dist/` (and as
     // `.mjs`/`.cjs`), so the build-output ignores only apply to project dirs.
-    const isPackageDir = normalize(dir).includes('node_modules/')
+    // A workspace package resolves to its real path, outside `node_modules`.
+    const isPackageDir = packages.includes(dir) || normalize(dir).includes('node_modules/')
 
     const appFiles = globSync(['**/*.{vue,ts,mts,js,mjs,cjs,tsx,jsx,md,html}'], {
       cwd: dir,

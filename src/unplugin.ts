@@ -80,11 +80,6 @@ export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'
    */
   inertia?: boolean
   /**
-   * Additional packages to scan for components using Nuxt UI
-   * @see https://ui.nuxt.com/docs/getting-started/installation/vue#scanpackages
-   */
-  scanPackages?: string[]
-  /**
    * Root directory where the `.nuxt-ui` directory (`#build/ui.css` and `#build/ui/*`) is created.
    * Useful for setups like `electron-vite` where `config.root` points to a sub-directory
    * (e.g. `src/renderer`).
