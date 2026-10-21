@@ -143,7 +143,7 @@ function generateMessages() {
 
           <UChatTool
             v-else-if="isToolUIPart(part) && getToolName(part) === 'web_search'"
-            :text="isToolStreaming(part, streaming) ? 'Searching the web...' : 'Searched the web'"
+            :text="isToolStreaming(part, streaming) ? 'Searching the web...' : part.state === 'output-available' ? 'Searched the web' : 'Stopped searching the web'"
             :suffix="(part.input as { query?: string })?.query"
             :streaming="isToolStreaming(part, streaming)"
             chevron="leading"
