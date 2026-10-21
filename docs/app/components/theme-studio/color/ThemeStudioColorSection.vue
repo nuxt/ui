@@ -17,7 +17,7 @@ const props = defineProps<{
 }>()
 
 const { rampChip } = useThemeStudio()
-const { sections } = useTokenShades(props.alias)
+const { sections, readable, readableApplied, applyReadable } = useTokenShades(props.alias)
 
 const title = computed(() => props.label ?? upperFirst(props.alias))
 
@@ -58,12 +58,34 @@ const editorContent = { side: 'right' as const, align: 'start' as const, alignOf
         </UTooltip>
 
         <template #content>
-          <ThemeStudioColorShadeGroup
-            v-if="alias !== 'neutral'"
-            :label="`${title} shades`"
-            :sliders="sections[0]!.sliders"
-            :chip="rampChip(alias)"
-          />
+          <div v-if="alias !== 'neutral'" class="flex flex-col gap-2">
+            <ThemeStudioColorShadeGroup
+              v-for="section in sections"
+              :key="section.token"
+              :label="section.follows ? `${title} ${section.label.toLowerCase()}` : `${title} shades`"
+              :sliders="section.sliders"
+              :chip="rampChip(alias)"
+            />
+
+            <!-- The text sliders follow the solid until one is moved, this
+                 picks the first shade that reads at 4.5:1 in light mode. -->
+            <UTooltip
+              v-if="readable"
+              text="The lightest shade with 4.5:1 contrast on the page and on soft fills, in light mode"
+              ignore-non-keyboard-focus
+            >
+              <UButton
+                :label="readableApplied ? `AA text on ${readable}` : `Use AA text (${readable})`"
+                :icon="studioIcons.contrast"
+                color="neutral"
+                variant="soft"
+                size="sm"
+                block
+                :disabled="readableApplied"
+                @click="applyReadable"
+              />
+            </UTooltip>
+          </div>
 
           <!-- Every group keeps its name: a headerless section can't be
                told apart from the rows above it. -->
