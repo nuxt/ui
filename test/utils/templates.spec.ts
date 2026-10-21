@@ -83,7 +83,7 @@ describe('theme templates', () => {
     const run = async (detectedComponents: Set<string>) => {
       const code = await themeContents({ componentDetection: true }, { detectedComponents, dev: true })('ui/detected.ts')
       const js = ts.transpileModule(code, { compilerOptions: { target: ts.ScriptTarget.ESNext, module: ts.ModuleKind.ESNext } }).outputText
-      return new Function('hot', js.replaceAll('import.meta.hot', 'hot').replace('export default', 'return'))(hot) as Set<string>
+      return new Function('hot', js.replaceAll('import.meta.hot', 'hot').replace('export const', 'const').replace('export default', 'return'))(hot) as Set<string>
     }
 
     const first = await run(new Set(['Button']))
@@ -103,8 +103,9 @@ describe('theme templates', () => {
   it('leaves the detected themes out of the build and without detection', async () => {
     const detectedComponents = new Set(['Button'])
 
-    expect(await themeContents({ componentDetection: true }, { detectedComponents })('ui/detected.ts')).toBe('export default null as Set<string> | null\n')
-    expect(await themeContents({ componentDetection: false }, { detectedComponents, dev: true })('ui/detected.ts')).toBe('export default null as Set<string> | null\n')
+    const none = 'export const themes = null as Set<string> | null\nexport default null as Set<string> | null\n'
+    expect(await themeContents({ componentDetection: true }, { detectedComponents })('ui/detected.ts')).toBe(none)
+    expect(await themeContents({ componentDetection: false }, { detectedComponents, dev: true })('ui/detected.ts')).toBe(none)
   })
 
   it('generates only the sources', async () => {
