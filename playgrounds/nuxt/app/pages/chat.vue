@@ -112,17 +112,17 @@ function generateMessages() {
       :assistant="{ actions: [{ label: 'Edit', icon: 'i-lucide-pencil', onClick: () => console.log('edit') }] }"
       :user="{ actions: [{ label: 'Edit', icon: 'i-lucide-pencil', onClick: () => console.log('edit') }], icon: 'i-lucide-user' }"
     >
-      <template #content="{ message }">
+      <template #content="{ message, streaming }">
         <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
           <UChatReasoning
             v-if="isReasoningUIPart(part)"
             :text="part.text"
-            :streaming="isPartStreaming(part)"
+            :streaming="isPartStreaming(part, streaming)"
             chevron="leading"
           >
             <Markdown
               :value="part.text"
-              :streaming="isPartStreaming(part)"
+              :streaming="isPartStreaming(part, streaming)"
               :plugins="[shiki()]"
               class="*:first:mt-0 *:last:mb-0"
             />
@@ -132,7 +132,7 @@ function generateMessages() {
             <Markdown
               v-if="message.role === 'assistant'"
               :value="part.text"
-              :streaming="isPartStreaming(part)"
+              :streaming="isPartStreaming(part, streaming)"
               :plugins="[shiki()]"
               class="*:first:mt-0 *:last:mb-0"
             />
@@ -143,9 +143,9 @@ function generateMessages() {
 
           <UChatTool
             v-else-if="isToolUIPart(part) && getToolName(part) === 'web_search'"
-            :text="isToolStreaming(part) ? 'Searching the web...' : 'Searched the web'"
+            :text="isToolStreaming(part, streaming) ? 'Searching the web...' : part.state === 'output-available' ? 'Searched the web' : 'Stopped searching the web'"
             :suffix="(part.input as { query?: string })?.query"
-            :streaming="isToolStreaming(part)"
+            :streaming="isToolStreaming(part, streaming)"
             chevron="leading"
           >
             <div v-if="part.output && (part.output as any[]).length" class="p-1 border border-default rounded-md max-h-40 overflow-y-auto">
@@ -177,7 +177,7 @@ function generateMessages() {
             icon="i-lucide-mail"
             chevron="leading"
             variant="card"
-            :streaming="isToolStreaming(part)"
+            :streaming="isToolStreaming(part, streaming)"
             :actions="part.state === 'approval-requested' ? [
               { label: 'Approve', color: 'neutral', onClick: () => addToolApprovalResponse({ id: part.approval!.id, approved: true }) },
               { label: 'Deny', color: 'neutral', variant: 'soft', onClick: () => addToolApprovalResponse({ id: part.approval!.id, approved: false }) }
