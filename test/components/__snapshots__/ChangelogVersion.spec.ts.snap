@@ -43,7 +43,7 @@ exports[`ChangelogVersion > renders with as object correctly 1`] = `
   <div data-slot="changelog-version-container" class="flex flex-col mx-auto max-w-2xl">
     <div data-slot="changelog-version-header" class="">
       <!--v-if-->
-      <h3 data-slot="changelog-version-title" class="relative text-xl text-pretty font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">
+      <h3 data-slot="changelog-version-title" class="relative text-xl text-pretty font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold)) text-strong">
         <!--v-if-->Title
       </h3>
       <!--v-if-->
@@ -393,7 +393,7 @@ exports[`ChangelogVersion > renders with title correctly 1`] = `
   <div data-slot="changelog-version-container" class="flex flex-col mx-auto max-w-2xl">
     <div data-slot="changelog-version-header" class="">
       <!--v-if-->
-      <h2 data-slot="changelog-version-title" class="relative text-xl text-pretty font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">
+      <h2 data-slot="changelog-version-title" class="relative text-xl text-pretty font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold)) text-strong">
         <!--v-if-->Title
       </h2>
       <!--v-if-->
@@ -415,7 +415,7 @@ exports[`ChangelogVersion > renders with title slot correctly 1`] = `
   <div data-slot="changelog-version-container" class="flex flex-col mx-auto max-w-2xl">
     <div data-slot="changelog-version-header" class="">
       <!--v-if-->
-      <h2 data-slot="changelog-version-title" class="relative text-xl text-pretty font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">
+      <h2 data-slot="changelog-version-title" class="relative text-xl text-pretty font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold)) text-strong">
         <!--v-if-->Title slot
       </h2>
       <!--v-if-->
@@ -437,7 +437,7 @@ exports[`ChangelogVersion > renders with title slot correctly 2`] = `
   <div data-slot="changelog-version-container" class="flex flex-col mx-auto max-w-2xl">
     <div data-slot="changelog-version-header" class="">
       <!--v-if-->
-      <h2 data-slot="changelog-version-title" class="relative text-xl text-pretty font-heading font-(--ui-font-weight-heading,var(--font-weight-semibold)) text-strong">
+      <h2 data-slot="changelog-version-title" class="relative text-xl text-pretty font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold)) text-strong">
         <!--v-if-->Title slot
       </h2>
       <!--v-if-->

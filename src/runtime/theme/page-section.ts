@@ -9,7 +9,7 @@ export default defineTheme({
     leading: 'flex items-center mb-6',
     leadingIcon: 'size-10 shrink-0 text-primary',
     headline: 'mb-3',
-    title: 'text-3xl sm:text-4xl lg:text-5xl text-pretty tracking-tight font-heading font-(--ui-font-weight-heading,var(--font-weight-bold)) text-strong',
+    title: 'text-3xl sm:text-4xl lg:text-5xl text-pretty tracking-tight font-heading font-(--ui-font-weight-heading,--theme(--font-weight-bold)) text-strong',
     description: 'text-base sm:text-lg text-muted',
     body: 'mt-8',
     features: 'grid',
