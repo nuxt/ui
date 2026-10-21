@@ -36,8 +36,9 @@ export const ALL_SECTION_KEYS: SectionKey[] = [...SECTION_GROUPS.colors, ...SECT
 
 /** Which color section a semantic token (or token shade) belongs to. */
 function tokenSection(token: string): ColorSection {
-  if (token === '--ui-primary' || token.startsWith('--ui-color-primary')) return 'primary'
-  const semantic = SEMANTIC_ALIASES.find(alias => token === `--ui-${alias}`)
+  if (token === '--ui-primary' || token.startsWith('--ui-primary-') || token.startsWith('--ui-color-primary')) return 'primary'
+  // the alias itself or one of its roles, `--ui-success-text-default`
+  const semantic = SEMANTIC_ALIASES.find(alias => token === `--ui-${alias}` || token.startsWith(`--ui-${alias}-`))
   if (semantic) return semantic
   return 'neutral'
 }

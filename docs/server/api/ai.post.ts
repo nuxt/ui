@@ -260,6 +260,8 @@ ${Object.entries(cssVariableDefaults.dark).map(([k, v]) => `- \`${k}\`: \`${v}\`
 
 Semantic colors (\`--ui-primary\`, \`--ui-secondary\`, \`--ui-success\`, \`--ui-info\`, \`--ui-warning\`, \`--ui-error\`) default to shade 500 in light, 400 in dark.
 
+Colored text: \`--ui-<color>-text-default\` sets the text of a color (\`text-primary\` and the labels of the \`soft\`, \`subtle\`, \`outline\`, \`ghost\` and \`link\` variants) without changing its solid, \`--ui-<color>-text-muted\` its muted step. Both are unset by default, so the text follows the color. When the user asks for readable or accessible colored text, set both in \`light\` only to the same \`var(--ui-color-<color>-<shade>)\` and leave them out of \`dark\`, where the text keeps following the color. These shades reach 4.5:1 on the default palettes: primary 700, secondary 600, success 700, info 700, warning 800, error 700. For another palette, pick one of these shades or darker.
+
 Do NOT use \`cssVariables\` for things achievable with \`primary\`, \`neutral\`, \`customColors\`, or component \`ui\` overrides.
 
 **2. Config (app.config.ts for Nuxt / vite.config.ts for Vue)**
