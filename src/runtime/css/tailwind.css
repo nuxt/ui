@@ -1,9 +1,27 @@
 /* What Tailwind can't take inside a cascade layer: the sources it scans, the
-   `light` / `dark` variants and the theme tokens. Import it at the top level,
-   `@nuxt/ui` does both halves. */
+   `light` / `dark` variants, the theme tokens and the `bg-overlay` utility.
+   Import it at the top level, `@nuxt/ui` does both halves. */
 @import './sources.css';
 @import '#build/ui.css';
 @import './tokens.css';
 
 @custom-variant light (&:where(.light, .light *));
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* The surface of the floating layers (menus, popovers, tooltips, modals...).
+   `--ui-bg-overlay` is unset, so the layer paints `bg-default` and keeps the
+   page tokens inside. Once it is set, the neutral tokens on the layer and its
+   content move one step up the ramp through `--ui-layer-*`, which `tokens.css`
+   reads first, so rings, separators and highlighted items don't match the new
+   surface. A step mixes in `--ui-bg-overlay` at 0%, or reads one that does, so
+   it is unset while that is. `--ui-bg-overlay` comes first: the fallback
+   Tailwind writes for browsers without `color-mix()` keeps the first color.
+   Set an `--ui-overlay-*` token to pick a step yourself. */
+@utility bg-overlay {
+  background-color: var(--ui-bg-overlay, var(--ui-bg-default));
+  --ui-layer-bg-default: var(--ui-bg-overlay);
+  --ui-layer-bg-soft: var(--ui-overlay-bg-soft, color-mix(in oklab, var(--ui-bg-overlay) 0%, var(--ui-bg-strong)));
+  --ui-layer-bg-strong: var(--ui-overlay-bg-strong, color-mix(in oklab, var(--ui-layer-bg-soft), var(--ui-text-strong) 10%));
+  --ui-layer-border-default: var(--ui-overlay-border-default, color-mix(in oklab, var(--ui-bg-overlay) 0%, var(--ui-border-strong)));
+  --ui-layer-border-strong: var(--ui-overlay-border-strong, color-mix(in oklab, var(--ui-layer-border-default), var(--ui-text-strong) 10%));
+}
