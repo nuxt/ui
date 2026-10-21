@@ -26,9 +26,13 @@ export function isPartStreaming(part: { state?: string }): boolean {
  * and isn't paused waiting for a user approval).
  *
  * Terminal states are `output-available`, `output-error`, and `output-denied`,
- * `approval-requested` is a paused state.
+ * `approval-requested` is a paused state, and a denied `approval-responded` won't run.
  */
-export function isToolStreaming(part: { state: string }): boolean {
+export function isToolStreaming(part: { state: string, approval?: { approved?: boolean } }): boolean {
+  if (part.state === 'approval-responded') {
+    return part.approval?.approved !== false
+  }
+
   return !['approval-requested', 'output-available', 'output-error', 'output-denied'].includes(part.state)
 }
 
