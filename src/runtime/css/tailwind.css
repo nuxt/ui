@@ -9,15 +9,16 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* The surface of the floating layers (menus, popovers, tooltips, modals...).
-   `--ui-bg-overlay` and the `--ui-overlay-*` roles are unset, so the layer
-   paints `bg-default` and keeps the page tokens inside. Set them together to
-   lift it off the page: `bg-soft`, `ring-default` and the rest on the layer and
-   its content then read the overlay roles. */
+   `--ui-bg-overlay` is unset, so the layer paints `bg-default` and keeps the
+   page tokens inside. Once it is set, the neutral roles on the layer and its
+   content move one step up the ramp, so rings, separators and highlighted
+   items don't match the new surface. Each one mixes in `--ui-bg-overlay` at
+   0%, or reads a role that does, which leaves it unset while that is. */
 @utility bg-overlay {
   background-color: var(--ui-bg-overlay, var(--ui-bg-default));
   --ui-layer-bg-default: var(--ui-bg-overlay);
-  --ui-layer-bg-soft: var(--ui-overlay-bg-soft);
-  --ui-layer-bg-strong: var(--ui-overlay-bg-strong);
-  --ui-layer-border-default: var(--ui-overlay-border-default);
-  --ui-layer-border-strong: var(--ui-overlay-border-strong);
+  --ui-layer-bg-soft: color-mix(in oklab, var(--ui-bg-strong), var(--ui-bg-overlay) 0%);
+  --ui-layer-bg-strong: color-mix(in oklab, var(--ui-layer-bg-soft), var(--ui-text-strong) 10%);
+  --ui-layer-border-default: color-mix(in oklab, var(--ui-border-strong), var(--ui-bg-overlay) 0%);
+  --ui-layer-border-strong: color-mix(in oklab, var(--ui-layer-border-default), var(--ui-text-strong) 10%);
 }
