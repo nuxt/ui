@@ -188,8 +188,10 @@ export const TOKEN_GROUPS: Array<{ key: TokenGroup, label: string }> = [
  * Semantic tokens exposed as per-mode shade sliders. `defaults` are the
  * LIBRARY's real resting values, some are the literal ladder ends (light
  * --ui-bg-default is `white`, not a ramp stop); `ramp` names the scale the slider walks.
+ * A token with `follows` is unset in the library and takes the value of that
+ * token until a shade is picked, so it has no library default to diff against.
  */
-export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, ramp: TokenRamp, group: TokenGroup, defaults: { light: ShadeStop, dark: ShadeStop } }> = [
+export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, ramp: TokenRamp, group: TokenGroup, defaults: { light: ShadeStop, dark: ShadeStop }, follows?: string }> = [
   { token: '--ui-primary', label: 'Primary', ramp: 'primary', group: 'colors', defaults: { light: 500, dark: 400 } },
   { token: '--ui-secondary', label: 'Secondary', ramp: 'secondary', group: 'colors', defaults: { light: 500, dark: 400 } },
   { token: '--ui-success', label: 'Success', ramp: 'success', group: 'colors', defaults: { light: 500, dark: 400 } },
@@ -206,7 +208,12 @@ export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, ramp: To
   { token: '--ui-text-strong', label: 'Strong', ramp: 'neutral', group: 'text', defaults: { light: 900, dark: 'white' } },
   { token: '--ui-text-contrast', label: 'Contrast', ramp: 'neutral', group: 'text', defaults: { light: 'white', dark: 900 } },
   { token: '--ui-border-default', label: 'Default', ramp: 'neutral', group: 'border', defaults: { light: 200, dark: 800 } },
-  { token: '--ui-border-strong', label: 'Strong', ramp: 'neutral', group: 'border', defaults: { light: 300, dark: 700 } }
+  { token: '--ui-border-strong', label: 'Strong', ramp: 'neutral', group: 'border', defaults: { light: 300, dark: 700 } },
+  // The text of each color, `--ui-<color>-text-default` and its muted step
+  ...(['primary', ...SEMANTIC_ALIASES] as const).flatMap(alias => [
+    { token: `--ui-${alias}-text-default`, label: 'Text', ramp: alias, group: 'text' as const, defaults: { light: 500, dark: 400 } as const, follows: `--ui-${alias}` },
+    { token: `--ui-${alias}-text-muted`, label: 'Muted text', ramp: alias, group: 'text' as const, defaults: { light: 500, dark: 400 } as const, follows: `--ui-${alias}` }
+  ])
 ]
 /**
  * A ramp shade reference, or the literal for white/black. Only the 11 standard
@@ -388,8 +395,8 @@ export function isDefaultStyle(style: StyleOptions = {}): boolean {
  * exported theme must reproduce the preview on a stock library install.
  */
 export const LIBRARY_TOKEN_DEFAULTS: Record<'light' | 'dark', Record<string, string>> = {
-  light: Object.fromEntries(TOKEN_SHADE_TARGETS.map(target => [target.token, shadeRef(target.ramp, target.defaults.light)])),
-  dark: Object.fromEntries(TOKEN_SHADE_TARGETS.map(target => [target.token, shadeRef(target.ramp, target.defaults.dark)]))
+  light: Object.fromEntries(TOKEN_SHADE_TARGETS.filter(target => !target.follows).map(target => [target.token, shadeRef(target.ramp, target.defaults.light)])),
+  dark: Object.fromEntries(TOKEN_SHADE_TARGETS.filter(target => !target.follows).map(target => [target.token, shadeRef(target.ramp, target.defaults.dark)]))
 }
 
 /** The shade a token rests on per mode, for what restates a library default. */

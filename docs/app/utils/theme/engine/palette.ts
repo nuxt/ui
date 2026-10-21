@@ -598,3 +598,39 @@ export function fitPalette(shades: Partial<Record<Shade, string>>): PaletteCurve
     hue: fitCurve(stops.map((stop, i) => [stop.x, hues[i]!]))
   }
 }
+
+/* ------------------------------------------------------------ contrast -- */
+
+/** WCAG relative luminance of gamma-encoded sRGB channels. */
+function luminance([r, g, b]: [number, number, number]): number {
+  return 0.2126 * srgbToLinear(r) + 0.7152 * srgbToLinear(g) + 0.0722 * srgbToLinear(b)
+}
+
+/** WCAG contrast ratio between two sRGB colors. */
+export function contrastRatio(a: [number, number, number], b: [number, number, number]): number {
+  const [light, dark] = [luminance(a), luminance(b)].sort((x, y) => y - x) as [number, number]
+  return (light + 0.05) / (dark + 0.05)
+}
+
+/**
+ * The lightest shade of a ramp whose text reaches `target` on the page and on
+ * the soft and strong fills of the solid, the 10% and 15% tints behind `soft`
+ * and `subtle` labels and their hover. The tints are alpha over the page, so
+ * they blend in sRGB.
+ */
+export function readableShade(shades: Partial<Record<Shade, string>>, solid: string, page: string, target = 4.5): Shade | undefined {
+  const toRgb = (value: string) => {
+    const color = parseColor(value)
+    return color ? oklchToRgb(color) : undefined
+  }
+  const pageRgb = toRgb(page)
+  const solidRgb = toRgb(solid)
+  if (!pageRgb || !solidRgb) return undefined
+  const tint = (alpha: number) => pageRgb.map((channel, i) => channel * (1 - alpha) + solidRgb[i]! * alpha) as [number, number, number]
+  const surfaces = [pageRgb, tint(0.1), tint(0.15)]
+
+  return SHADES.find((shade) => {
+    const text = shades[shade] ? toRgb(shades[shade]!) : undefined
+    return text && surfaces.every(surface => contrastRatio(text, surface) >= target)
+  })
+}
