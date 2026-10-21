@@ -1,17 +1,12 @@
 import { colorVariant } from './color'
 import { defineTheme } from '../utils/theme'
-// Active-tab highlight shown before reka-ui's `TabsIndicator` mounts (SSR / pre-hydration).
-// reka-ui only renders the real indicator on the client (it needs DOM measurements), so the
-// `in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:` classes
-// gate a CSS-only pseudo-element fallback on the active trigger by the *absence* of the indicator
-// element — the instant reka's measured indicator appears, this selector stops matching.
 
 export default defineTheme({
   slots: {
     root: 'flex items-center gap-2',
     list: 'relative flex p-1 group',
-    indicator: 'absolute bg-accent transition-[translate,width] duration-200 ease-out motion-reduce:transition-none',
-    trigger: 'group relative inline-flex items-center min-w-0 data-[state=inactive]:text-muted hover:data-[state=inactive]:not-disabled:text-default font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3',
+    indicator: 'absolute [[data-slot=tabs-indicator]~&]:hidden bg-accent transition-[translate,width] duration-200 ease-out motion-reduce:transition-none',
+    trigger: 'group relative inline-flex items-center min-w-0 data-[state=active]:[anchor-name:--tabs-trigger] data-[state=inactive]:text-muted hover:data-[state=inactive]:not-disabled:text-default font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
     label: 'truncate',
@@ -23,13 +18,13 @@ export default defineTheme({
     variant: {
       pill: {
         list: 'bg-soft rounded-lg',
-        trigger: [`grow`, `in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:content-[''] in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:absolute in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:inset-0 in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:rounded-md in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:shadow-xs in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:-z-10 in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:isolate`, 'data-[state=active]:text-accent-contrast', 'in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:bg-accent'],
+        trigger: 'grow data-[state=active]:text-accent-contrast',
         indicator: 'rounded-md shadow-xs'
       },
       link: {
         list: 'border-default',
         indicator: 'rounded-full',
-        trigger: [`in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:content-[''] in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:absolute in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:rounded-full`, 'data-[state=active]:text-accent', 'in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:bg-accent']
+        trigger: 'data-[state=active]:text-accent'
       }
     },
     orientation: {
@@ -78,8 +73,7 @@ export default defineTheme({
     variant: 'link',
     class: {
       list: 'border-b -mb-px',
-      indicator: '-bottom-px h-px',
-      trigger: 'in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:inset-x-0 in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:-bottom-[calc(var(--spacing)+1px)] in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:h-px'
+      indicator: '-bottom-px h-px'
     }
   }, {
     orientation: 'vertical',
@@ -94,8 +88,7 @@ export default defineTheme({
     variant: 'link',
     class: {
       list: 'border-s -ms-px',
-      indicator: '-inset-s-px w-px',
-      trigger: 'in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:inset-y-0 in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:-inset-s-[calc(var(--spacing)+1px)] in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:after:w-px'
+      indicator: '-inset-s-px w-px'
     }
   }],
   defaultVariants: {
