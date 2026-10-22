@@ -31,6 +31,37 @@ exports[`PricingPlan > renders with as correctly 1`] = `
 </section>"
 `;
 
+exports[`PricingPlan > renders with as object correctly 1`] = `
+"<section data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+  <!--v-if-->
+  <div data-slot="body" class="flex flex-col min-w-0">
+    <div data-slot="titleWrapper" class="flex items-center gap-3">
+      <h3 data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</h3><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
+      <!--v-if--></span>
+    </div>
+    <div data-slot="description" class="text-muted text-base text-pretty mt-2">Description</div>
+    <div data-slot="priceWrapper" class="flex items-center gap-1 mt-6">
+      <div data-slot="discount" class="text-muted line-through text-xl sm:text-2xl">$249</div>
+      <div data-slot="price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$199</div>
+      <div data-slot="billing" class="flex flex-col justify-between min-w-0"><span data-slot="billingPeriod" class="text-toned truncate text-xs font-medium">billed annually</span><span data-slot="billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
+    </div>
+    <ul data-slot="features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
+      <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
+      <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 2</span></li>
+      <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 3</span></li>
+    </ul>
+  </div>
+  <div data-slot="footer" class="flex flex-col gap-6 items-center justify-end">
+    <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
+    <!--v-if--><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+      <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
+      <!--v-if-->
+    </button>
+    <div data-slot="terms" class="text-xs/5 text-muted text-center text-balance">Terms</div>
+  </div>
+</section>"
+`;
+
 exports[`PricingPlan > renders with badge correctly 1`] = `
 "<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
