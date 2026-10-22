@@ -17,7 +17,7 @@ export default defineTheme({
       // Mentions
       '[&_.mention]:text-primary [&_.mention]:font-medium',
       // Headings - shared styles
-      '[&_:is(h1,h2,h3,h4,h5,h6)]:text-strong [&_:is(h1,h2,h3,h4,h5,h6)]:font-bold',
+      '[&_:is(h1,h2,h3,h4,h5,h6)]:text-strong [&_:is(h1,h2,h3,h4,h5,h6)]:font-(--ui-font-weight-heading,--theme(--font-weight-bold))',
       // Headings - unique styles
       '[&_h1]:text-3xl',
       '[&_h2]:text-2xl',
@@ -26,7 +26,7 @@ export default defineTheme({
       '[&_h5]:text-base',
       '[&_h6]:text-base',
       // Code inside headings
-      '[&_:is(h1,h2,h3,h4,h5,h6)>code]:border-dashed [&_:is(h1,h2,h3,h4,h5,h6)>code]:font-bold',
+      '[&_:is(h1,h2,h3,h4,h5,h6)>code]:border-dashed [&_:is(h1,h2,h3,h4,h5,h6)>code]:font-(--ui-font-weight-heading,--theme(--font-weight-bold))',
       '[&_h2>code]:text-xl/6',
       '[&_h3>code]:text-lg/5',
       // Blockquote & HR

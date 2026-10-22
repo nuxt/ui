@@ -16,7 +16,7 @@ function format(amount: number) {
 <template>
   <div>
     <div class="p-4">
-      <p class="font-semibold text-strong">
+      <p class="font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold)) text-strong">
         Recent transactions
       </p>
       <p class="text-sm text-muted">
