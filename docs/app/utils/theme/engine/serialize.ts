@@ -110,14 +110,13 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explici
     lines.push('', '@layer base {', '  html {', `    font-size: ${doc.fontSize}px;`, '  }', '}')
   }
 
-  // Classless text has no utility to set its weight, and case/tracking/leading
-  // are inherited properties. These element rules ride
-  // `@layer base`: unlayered CSS outranks every layer, so a bare rule here
-  // would beat the utilities too and `<body class="tracking-tight">` could
-  // not override the tracking. In base they still beat preflight (same
-  // layer, later source order) while utilities keep winning.
+  // Case, tracking and leading are inherited properties with no Nuxt UI
+  // variable. These element rules ride `@layer base`: unlayered CSS outranks
+  // every layer, so a bare rule here would beat the utilities too and
+  // `<body class="tracking-tight">` could not override the tracking. In base
+  // they still beat preflight (same layer, later source order) while
+  // utilities keep winning.
   const bodyLines: string[] = []
-  if (doc.font?.weights?.body !== undefined) bodyLines.push(`  font-weight: ${doc.font.weights.body};`)
   if (doc.font?.uppercase) bodyLines.push('  text-transform: uppercase;')
   if (doc.font?.italic) bodyLines.push('  font-style: italic;')
   if (doc.font?.letterSpacing !== undefined) bodyLines.push(`  letter-spacing: ${doc.font.letterSpacing}em;`)
@@ -127,6 +126,7 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explici
   }
 
   const rootLines: string[] = []
+  if (doc.font?.weights?.body !== undefined) rootLines.push(`  --ui-font-weight-body: ${doc.font.weights.body};`)
   if (doc.font?.weights?.heading !== undefined) rootLines.push(`  --ui-font-weight-heading: ${doc.font.weights.heading};`)
   if (doc.radius !== undefined && doc.radius !== THEME_DEFAULTS.radius) rootLines.push(`  --ui-radius: ${doc.radius}rem;`)
   if (rootLines.length) {

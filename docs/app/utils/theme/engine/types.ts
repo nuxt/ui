@@ -70,8 +70,9 @@ export interface ThemeDoc {
     serif?: string
     mono?: string
     /**
-     * `body` is the weight of classless body text, `heading` sets
-     * `--ui-font-weight-heading`, which every title reads before its own step.
+     * `body` sets `--ui-font-weight-body`, the weight of the body text, and
+     * `heading` sets `--ui-font-weight-heading`, which every title reads
+     * before its own step.
      */
     weights?: { body?: number, heading?: number }
     uppercase?: boolean

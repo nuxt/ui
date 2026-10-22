@@ -188,11 +188,11 @@ export default defineNuxtPlugin({
               if (serif) { css += ' :root { --ui-font-heading: \\'' + serif + '\\', var(--font-sans); }'; }
               if (mono) { css += ' :root { --font-mono: \\'' + mono + '\\', monospace; }'; }
               var w = prefs.weights || {};
+              var wb = num(w.body, 100, 900);
               var wh = num(w.heading, 100, 900);
+              if (wb !== undefined) { css += ' :root { --ui-font-weight-body: ' + wb + '; }'; }
               if (wh !== undefined) { css += ' :root { --ui-font-weight-heading: ' + wh + '; }'; }
               var bodyRules = '';
-              var wn = num(w.body, 100, 900);
-              if (wn !== undefined) { bodyRules += 'font-weight: ' + wn + '; '; }
               if (prefs.uppercase) { bodyRules += 'text-transform: uppercase; '; }
               if (prefs.italic) { bodyRules += 'font-style: italic; '; }
               var ls = num(prefs.letterSpacing, -0.2, 1);

@@ -19,8 +19,8 @@ const fontLabel = computed(() => (mounted.value ? font.value : THEME_DEFAULTS.fo
 
 onMounted(() => loadFontPreviews(fonts.map(entry => entry.name)))
 
-// Body is the classless text, heading the `--ui-font-weight-heading` every
-// title reads. Unset, the heading row rests on semibold and each title keeps
+// Body is `--ui-font-weight-body`, heading the `--ui-font-weight-heading`
+// every title reads. Unset, the heading row rests on semibold and each title keeps
 // its own step, so it gets a reset rather than a stock value.
 function weightModel(key: keyof typeof FONT_WEIGHT_DEFAULTS) {
   return computed({

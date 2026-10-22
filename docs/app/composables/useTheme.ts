@@ -174,9 +174,11 @@ export function useTheme() {
     if (prefs.serif && SAFE_NAME.test(prefs.serif)) parts.push(`:root { --ui-font-heading: '${prefs.serif}', var(--font-sans); }`)
     if (prefs.mono && SAFE_NAME.test(prefs.mono)) parts.push(`:root { --font-mono: '${prefs.mono}', monospace; }`)
     const weights = prefs.weights || {}
-    if (weights.heading !== undefined) parts.push(`:root { --ui-font-weight-heading: ${weights.heading}; }`)
+    const weightVars: string[] = []
+    if (weights.body !== undefined) weightVars.push(`--ui-font-weight-body: ${weights.body};`)
+    if (weights.heading !== undefined) weightVars.push(`--ui-font-weight-heading: ${weights.heading};`)
+    if (weightVars.length) parts.push(`:root { ${weightVars.join(' ')} }`)
     const bodyRules: string[] = []
-    if (weights.body !== undefined) bodyRules.push(`font-weight: ${weights.body};`)
     if (prefs.uppercase) bodyRules.push('text-transform: uppercase;')
     if (prefs.italic) bodyRules.push('font-style: italic;')
     if (prefs.letterSpacing !== undefined) bodyRules.push(`letter-spacing: ${prefs.letterSpacing}em;`)

@@ -11,6 +11,8 @@
     -moz-osx-font-smoothing: grayscale;
     color: var(--ui-text-default);
     background-color: var(--ui-bg-default);
+    /* Unset, so the body keeps its inherited weight until it is set */
+    font-weight: var(--ui-font-weight-body);
     color-scheme: light;
 
     &:where(.dark, .dark *) {
