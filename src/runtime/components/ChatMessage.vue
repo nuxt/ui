@@ -133,15 +133,15 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatMessage || {
         <slot name="body" v-bind="{ ...messageProps }">
           <div v-if="hasContent" data-slot="content" :class="ui.content({ class: props.ui?.content })">
             <slot name="content" v-bind="{ ...messageProps, content: props.content }">
-              <template v-if="props.content">
-                {{ props.content }}
-              </template>
-              <template v-else-if="!!slots.part">
+              <template v-if="!!slots.part && props.parts?.length">
                 <template v-for="(part, index) in props.parts" :key="`${props.id}-${part.type}-${index}`">
                   <slot name="part" :part="part" :index="index" :message="messageProps">
                     <span v-if="isTextPart(part)" data-slot="text" :class="ui.text({ class: props.ui?.text })">{{ part.text }}</span>
                   </slot>
                 </template>
+              </template>
+              <template v-else-if="props.content">
+                {{ props.content }}
               </template>
               <template v-else>
                 <span v-for="(part, index) in textParts" :key="`${props.id}-${part.type}-${index}`" data-slot="text" :class="ui.text({ class: props.ui?.text })">{{ part.text }}</span>
