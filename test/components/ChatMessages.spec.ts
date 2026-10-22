@@ -71,18 +71,23 @@ describe('ChatMessages', () => {
     const chatRef = ref<{ scrollToMessage: (id: string, smooth?: boolean) => void } | null>(null)
     const Parent = defineComponent({
       setup() {
-        return () => h('div', { style: 'overflow-y: auto' }, [h(ChatMessages, { ref: chatRef, ...props, shouldScrollToBottom: false })])
+        return () => h('div', { style: 'overflow-y: auto; scroll-padding-top: 8px' }, [h(ChatMessages, { ref: chatRef, ...props, shouldScrollToBottom: false })])
       }
     })
 
     const wrapper = await mountSuspended(Parent, { attachTo: document.body })
+    vi.spyOn(wrapper.element, 'getBoundingClientRect').mockReturnValue({ top: 100 } as DOMRect)
+    for (const article of wrapper.findAll('article')) {
+      (article.element as HTMLElement).style.scrollMarginTop = '4px'
+      vi.spyOn(article.element, 'getBoundingClientRect').mockReturnValue({ top: 150 } as DOMRect)
+    }
     const scrollTo = vi.fn()
     wrapper.element.scrollTo = scrollTo
     const scrollIntoView = vi.spyOn(Element.prototype, 'scrollIntoView')
 
     chatRef.value!.scrollToMessage(props.messages[0]!.id, false)
 
-    expect(scrollTo).toHaveBeenCalledWith({ top: expect.any(Number), behavior: 'instant' })
+    expect(scrollTo).toHaveBeenCalledWith({ top: 38, behavior: 'instant' })
     expect(scrollIntoView).not.toHaveBeenCalled()
 
     scrollIntoView.mockRestore()
