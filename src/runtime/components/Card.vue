@@ -55,10 +55,10 @@ const ui = computed(() => tv(theme, overrides.value)({
 </script>
 
 <template>
-  <Primitive :as="as.root" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="!!slots.header || (props.title || !!slots.title) || (props.description || !!slots.description)" data-slot="header" :class="ui.header({ class: props.ui?.header })">
+  <Primitive :as="as.root" data-slot="card" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div v-if="!!slots.header || (props.title || !!slots.title) || (props.description || !!slots.description)" data-slot="card-header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header">
-        <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+        <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="card-title" :class="ui.title({ class: props.ui?.title })">
           <slot name="title">
             {{ props.title }}
           </slot>

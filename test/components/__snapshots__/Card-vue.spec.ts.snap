@@ -9,9 +9,9 @@ exports[`Card > renders with as correctly 1`] = `
 `;
 
 exports[`Card > renders with as object correctly 1`] = `
-"<section data-slot="root" class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
-  <div data-slot="header" class="p-4 sm:px-6">
-    <h3 data-slot="title" class="text-highlighted font-semibold">Title</h3>
+"<section data-slot="card" class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
+  <div data-slot="card-header" class="p-4 sm:px-6">
+    <h3 data-slot="card-title" class="text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold))">Title</h3>
     <!--v-if-->
   </div>
   <!--v-if-->
