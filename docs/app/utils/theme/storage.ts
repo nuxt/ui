@@ -111,22 +111,19 @@ function normalizeFont(raw: unknown): FontPrefs | undefined {
   const input = raw as Record<string, any>
   const font: FontPrefs = {}
 
-  // The heading family was stored as `serif` before, and `heading` was an
-  // object of h1–h6 treatment before that. Only the family survived, the
-  // rest is dropped rather than kept as dead weight that every dirty check
-  // would still measure.
+  // `heading` was an object of h1–h6 treatment before. Only the family
+  // survived, the rest is dropped rather than kept as dead weight that every
+  // dirty check would still measure.
   const family = (value: unknown) => typeof value === 'string' && SAFE_NAME.test(value) ? value : undefined
   const sans = family(input.sans)
   if (sans && sans !== THEME_DEFAULTS.font) font.sans = sans
-  const heading = family(input.heading) ?? family(input.serif) ?? family(input.heading?.font)
+  const heading = family(input.heading) ?? family(input.heading?.font)
   if (heading) font.heading = heading
   const mono = family(input.mono)
   if (mono) font.mono = mono
 
-  // `normal` is the body weight of the old four-step ladder, the other steps
-  // are dropped with it.
   const weights: NonNullable<FontPrefs['weights']> = {}
-  const body = clamped(input.weights?.body ?? input.weights?.normal, 100, 900)
+  const body = clamped(input.weights?.body, 100, 900)
   if (body !== undefined && body !== FONT_WEIGHT_DEFAULTS.body) weights.body = body
   const headingWeight = clamped(input.weights?.heading, 100, 900)
   if (headingWeight !== undefined) weights.heading = headingWeight

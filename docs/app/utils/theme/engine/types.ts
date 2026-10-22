@@ -443,11 +443,9 @@ export function resolveShade(doc: ThemeDoc, palette: string, shade: Shade): stri
 
 /** A document with no overrides means "stock Nuxt UI". */
 export function isDefaultTheme(doc: ThemeDoc): boolean {
-  // `serif` is the heading font of links made before `heading`, see docToSettings
-  const legacySerif = (doc.font as { serif?: string } | undefined)?.serif
   return !doc.palettes && !doc.colors && !doc.tokens
     && doc.radius === undefined && doc.fontSize === undefined
-    && !doc.font?.sans && !doc.font?.heading && !legacySerif && !doc.font?.mono && !doc.font?.weights
+    && !doc.font?.sans && !doc.font?.heading && !doc.font?.mono && !doc.font?.weights
     && !doc.font?.uppercase && !doc.font?.italic
     && doc.font?.letterSpacing === undefined && doc.font?.lineHeight === undefined
     && !doc.icons && !doc.components
@@ -469,13 +467,9 @@ export function docToSettings(doc: ThemeDoc): Record<string, any> {
   if (doc.radius !== undefined) settings.radius = doc.radius
   if (doc.fontSize !== undefined) settings.fontSize = doc.fontSize
   if (doc.font?.sans) settings.fontSans = doc.font.sans
-  // `serif` and the `normal` weight are how links made before the heading
-  // variables spell them
-  const legacy = doc.font as { serif?: string, weights?: { normal?: number } } | undefined
-  const heading = doc.font?.heading ?? legacy?.serif
-  if (heading) settings.fontHeading = heading
+  if (doc.font?.heading) settings.fontHeading = doc.font.heading
   if (doc.font?.mono) settings.fontMono = doc.font.mono
-  if (doc.font?.weights) settings.fontWeights = legacy?.weights?.normal !== undefined ? { body: legacy.weights.normal, ...doc.font.weights } : doc.font.weights
+  if (doc.font?.weights) settings.fontWeights = doc.font.weights
   if (doc.font?.uppercase || doc.font?.italic || doc.font?.letterSpacing !== undefined || doc.font?.lineHeight !== undefined) {
     settings.fontBody = { uppercase: doc.font.uppercase, italic: doc.font.italic, letterSpacing: doc.font.letterSpacing, lineHeight: doc.font.lineHeight }
   }
