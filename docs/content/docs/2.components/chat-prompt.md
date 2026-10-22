@@ -94,7 +94,7 @@ async function onSubmit() {
       <UContainer>
         <h1>How can I help you today?</h1>
 
-        <UChatPrompt v-model="input" @submit="onSubmit">
+        <UChatPrompt v-model="input" :status="status" @submit="onSubmit">
           <UChatPromptSubmit :status="status" />
         </UChatPrompt>
       </UContainer>
