@@ -443,9 +443,11 @@ export function resolveShade(doc: ThemeDoc, palette: string, shade: Shade): stri
 
 /** A document with no overrides means "stock Nuxt UI". */
 export function isDefaultTheme(doc: ThemeDoc): boolean {
+  // `serif` is the heading font of links made before `heading`, see docToSettings
+  const legacySerif = (doc.font as { serif?: string } | undefined)?.serif
   return !doc.palettes && !doc.colors && !doc.tokens
     && doc.radius === undefined && doc.fontSize === undefined
-    && !doc.font?.sans && !doc.font?.heading && !doc.font?.mono && !doc.font?.weights
+    && !doc.font?.sans && !doc.font?.heading && !legacySerif && !doc.font?.mono && !doc.font?.weights
     && !doc.font?.uppercase && !doc.font?.italic
     && doc.font?.letterSpacing === undefined && doc.font?.lineHeight === undefined
     && !doc.icons && !doc.components

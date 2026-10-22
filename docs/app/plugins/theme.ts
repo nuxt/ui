@@ -189,7 +189,7 @@ export default defineNuxtPlugin({
               if (heading) { css += ' :root { --font-heading: \\'' + heading + '\\', var(--font-sans); }'; }
               if (mono) { css += ' :root { --font-mono: \\'' + mono + '\\', monospace; }'; }
               var w = prefs.weights || {};
-              var wb = num(w.body, 100, 900);
+              var wb = num(w.body !== undefined ? w.body : w.normal, 100, 900);
               var wh = num(w.heading, 100, 900);
               if (wb !== undefined) { css += ' :root { --ui-font-weight-body: ' + wb + '; }'; }
               if (wh !== undefined) { css += ' :root { --ui-font-weight-heading: ' + wh + '; }'; }
