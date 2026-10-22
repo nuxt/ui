@@ -19,5 +19,9 @@
     <UTooltip text="Bottom" :kbds="['meta', 'B']" arrow>
       <UButton label="Bottom" color="neutral" variant="outline" block />
     </UTooltip>
+
+    <UTooltip text="Read the terms before continuing.">
+      <UCheckbox label="Accept terms" />
+    </UTooltip>
   </div>
 </template>
