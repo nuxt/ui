@@ -9,7 +9,7 @@ const value = ref<string[]>(['4', '3', '2'])
     <UIcon :name="studioIcons.shieldCheck" class="size-7 text-primary" />
 
     <div>
-      <p class="font-semibold text-strong">
+      <p class="font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold)) text-strong">
         Verify your account
       </p>
       <p class="text-sm text-muted">

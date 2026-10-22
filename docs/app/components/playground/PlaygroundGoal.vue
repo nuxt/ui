@@ -10,7 +10,7 @@ const data = [
 
 <template>
   <div class="flex flex-col items-center gap-4 p-4">
-    <p class="self-start font-semibold text-strong">
+    <p class="self-start font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold)) text-strong">
       Investment goal
     </p>
 
