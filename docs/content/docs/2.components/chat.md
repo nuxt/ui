@@ -603,6 +603,13 @@ const queue = ref<string[]>([])
 
 const { status, error, sendMessage, regenerate, stop } = useChat()
 
+function sendNext() {
+  const text = queue.value.shift()
+  if (text) {
+    sendMessage({ text })
+  }
+}
+
 function onSubmit() {
   const text = input.value.trim()
   if (!text) {
@@ -610,18 +617,16 @@ function onSubmit() {
   }
 
   input.value = ''
+  queue.value.push(text)
 
-  if (status.value === 'submitted' || status.value === 'streaming') {
-    queue.value.push(text)
-    return
+  if (status.value !== 'submitted' && status.value !== 'streaming') {
+    sendNext()
   }
-
-  sendMessage({ text })
 }
 
 watch(status, (value) => {
-  if (value === 'ready' && queue.value.length) {
-    sendMessage({ text: queue.value.shift()! })
+  if (value === 'ready') {
+    sendNext()
   }
 })
 </script>
@@ -660,6 +665,13 @@ const queue = ref<string[]>([])
 
 const { status, error, sendMessage, regenerate, stop } = useChat()
 
+function sendNext() {
+  const text = queue.value.shift()
+  if (text) {
+    sendMessage({ text })
+  }
+}
+
 function onSubmit() {
   const text = input.value.trim()
   if (!text) {
@@ -667,18 +679,16 @@ function onSubmit() {
   }
 
   input.value = ''
+  queue.value.push(text)
 
-  if (status.value === 'submitted' || status.value === 'streaming') {
-    queue.value.push(text)
-    return
+  if (status.value !== 'submitted' && status.value !== 'streaming') {
+    sendNext()
   }
-
-  sendMessage({ text })
 }
 
 watch(status, (value) => {
-  if (value === 'ready' && queue.value.length) {
-    sendMessage({ text: queue.value.shift()! })
+  if (value === 'ready') {
+    sendNext()
   }
 })
 </script>
@@ -707,7 +717,7 @@ watch(status, (value) => {
 ```
 ::
 
-Stopping the response sends the next queued message right away, while an `error` status keeps the queue until the chat is `ready` again.
+Every message goes through the queue, so a message sent after an `error` still waits behind the ones queued before it. Stopping the response sends the next queued message right away.
 
 ::note{to="/blog/how-to-build-an-ai-chat"}
 Read the full **Build an AI Chatbot** tutorial for a step-by-step guide.

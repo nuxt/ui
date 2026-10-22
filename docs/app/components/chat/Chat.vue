@@ -116,13 +116,19 @@ watchEffect(() => {
 const canClear = computed(() => messages.value.length > 0)
 
 // Messages sent while a response streams wait here, the AI SDK would
-// otherwise start a second request next to the current one.
-const queue = ref<string[]>([])
+// otherwise start a second request next to the current one. The page is
+// captured on submit so a queued question keeps the page it was asked on.
+const queue = ref<{ text: string, currentPage: string }[]>([])
 
-function send(text: string) {
+function sendNext() {
+  const next = queue.value.shift()
+  if (!next) {
+    return
+  }
+
   track('AI Chat Message Sent')
 
-  sendMessage({ text, metadata: { currentPage: currentPage.value } })
+  sendMessage({ text: next.text, metadata: { currentPage: next.currentPage } })
 }
 
 function onSubmit() {
@@ -132,18 +138,16 @@ function onSubmit() {
   }
 
   input.value = ''
+  queue.value.push({ text, currentPage: currentPage.value })
 
-  if (status.value === 'submitted' || status.value === 'streaming') {
-    queue.value.push(text)
-    return
+  if (status.value !== 'submitted' && status.value !== 'streaming') {
+    sendNext()
   }
-
-  send(text)
 }
 
 watch(status, (value) => {
-  if (value === 'ready' && queue.value.length) {
-    send(queue.value.shift()!)
+  if (value === 'ready') {
+    sendNext()
   }
 })
 
@@ -431,8 +435,8 @@ function clearMessages() {
       >
         <template v-if="queue.length" #header>
           <ul class="flex flex-col gap-1 w-full">
-            <li v-for="(text, index) in queue" :key="index" class="flex items-center gap-2 text-xs text-muted">
-              <span class="truncate flex-1">{{ text }}</span>
+            <li v-for="(item, index) in queue" :key="index" class="flex items-center gap-2 text-xs text-muted">
+              <span class="truncate flex-1">{{ item.text }}</span>
               <UButton
                 :icon="appConfig.ui.icons.close"
                 color="neutral"
