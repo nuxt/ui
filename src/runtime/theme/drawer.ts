@@ -8,7 +8,7 @@ export default defineTheme({
     container: 'w-full flex flex-col gap-4 p-4 overflow-y-auto',
     header: 'flex items-center gap-1.5 min-h-8',
     wrapper: 'min-w-0 flex-1',
-    title: 'text-strong font-semibold',
+    title: 'text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold))',
     description: 'mt-1 text-muted text-sm',
     actions: 'flex items-center gap-1.5 shrink-0 ms-auto',
     body: 'flex-1',
