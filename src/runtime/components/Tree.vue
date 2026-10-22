@@ -250,7 +250,7 @@ function getDefaultOpenedItems(item: T[number]): string[] {
   const currentItem = item.defaultExpanded ? getItemKey(item) : null
   const childItems = item.children?.flatMap((child: T[number]) => getDefaultOpenedItems(child)) ?? []
 
-  return [currentItem, ...childItems].filter(key => key !== null) as string[]
+  return [currentItem, ...childItems].filter(key => key !== null && key !== undefined) as string[]
 }
 
 const defaultExpanded = computed(() => props.defaultExpanded ?? props.items?.flatMap(item => getDefaultOpenedItems(item)))
