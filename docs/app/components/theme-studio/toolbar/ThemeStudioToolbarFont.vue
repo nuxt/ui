@@ -3,8 +3,8 @@ import { keepPanels, toolbarPanelClass, FONT_WEIGHT_DEFAULTS, loadFontPreviews }
 import { THEME_DEFAULTS } from '../../../utils/theme/engine/types'
 
 /**
- * Every typographic setting in one panel: the three stacks up top, then the
- * treatment that rides on them.
+ * Every typographic setting in one panel: the three stacks up top, their
+ * weights, then the treatment that rides on them.
  *
  * The stacks are what tailwind reads. Mono needs nothing else (preflight
  * points `code`/`kbd`/`pre`/`samp` at it) and the heading one sets
@@ -20,8 +20,10 @@ const fontLabel = computed(() => (mounted.value ? font.value : THEME_DEFAULTS.fo
 onMounted(() => loadFontPreviews(fonts.map(entry => entry.name)))
 
 // Body is `--ui-font-weight-body`, heading the `--ui-font-weight-heading`
-// every title reads. Unset, the heading row rests on semibold and each title keeps
-// its own step, so it gets a reset rather than a stock value.
+// every title reads. Unset, the heading row rests on semibold and each title
+// keeps its own step until the section reset clears it. Steps of 100 from 300
+// to 800: those are the faces the studio loads, a weight in between would
+// render as the nearest one.
 function weightModel(key: keyof typeof FONT_WEIGHT_DEFAULTS) {
   return computed({
     get: () => fontPrefs.value.weights?.[key] ?? FONT_WEIGHT_DEFAULTS[key],
@@ -31,11 +33,6 @@ function weightModel(key: keyof typeof FONT_WEIGHT_DEFAULTS) {
 
 const bodyWeight = weightModel('body')
 const headingWeight = weightModel('heading')
-const headingWeightSet = computed(() => fontPrefs.value.weights?.heading !== undefined)
-
-function resetHeadingWeight() {
-  setFontPrefs({ ...fontPrefs.value, weights: { ...fontPrefs.value.weights, heading: undefined } })
-}
 
 const uppercase = computed({
   get: () => !!fontPrefs.value.uppercase,
@@ -112,6 +109,26 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
         </ThemeStudioRow>
       </ThemeStudioSection>
 
+      <ThemeStudioSection label="Weights" section-key="weights">
+        <ThemeStudioRow
+          v-model="bodyWeight"
+          control="slider"
+          label="Body"
+          :min="300"
+          :max="800"
+          :step="100"
+        />
+
+        <ThemeStudioRow
+          v-model="headingWeight"
+          control="slider"
+          label="Heading"
+          :min="300"
+          :max="800"
+          :step="100"
+        />
+      </ThemeStudioSection>
+
       <ThemeStudioSection label="Treatment" section-key="type">
         <!-- font-size scales every rem metric, so it belongs with the type
            decisions rather than beside radius -->
@@ -148,29 +165,6 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
           v-model="uppercase"
           control="switch"
           label="Uppercase"
-        />
-      </ThemeStudioSection>
-
-      <ThemeStudioSection label="Weights" section-key="weights">
-        <ThemeStudioRow
-          v-model="bodyWeight"
-          control="slider"
-          label="Body"
-          :min="100"
-          :max="900"
-          :step="25"
-        />
-
-        <ThemeStudioRow
-          v-model="headingWeight"
-          control="slider"
-          label="Heading"
-          :min="100"
-          :max="900"
-          :step="25"
-          resettable
-          :dirty="headingWeightSet"
-          @reset="resetHeadingWeight"
         />
       </ThemeStudioSection>
     </template>
