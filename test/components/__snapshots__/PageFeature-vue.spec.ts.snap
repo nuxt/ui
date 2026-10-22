@@ -12,11 +12,11 @@ exports[`PageFeature > renders with as correctly 1`] = `
 `;
 
 exports[`PageFeature > renders with as object correctly 1`] = `
-"<section data-orientation="horizontal" data-slot="root" class="relative rounded-sm flex items-start gap-2.5">
+"<section data-orientation="horizontal" data-slot="page-feature" class="relative rounded-sm flex items-start gap-2.5">
   <!--v-if-->
-  <div data-slot="wrapper" class="">
+  <div data-slot="page-feature-wrapper" class="">
     <!--v-if-->
-    <h3 data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</h3>
+    <h3 data-slot="page-feature-title" class="text-base text-pretty font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold)) text-strong">Title</h3>
     <!--v-if-->
   </div>
 </section>"

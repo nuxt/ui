@@ -38,7 +38,7 @@ export default defineTheme({
       right: {
         container: 'justify-end ms-auto max-w-[75%]',
         header: 'justify-end',
-        actions: 'end-0'
+        actions: 'inset-e-0'
       }
     },
     leading: {

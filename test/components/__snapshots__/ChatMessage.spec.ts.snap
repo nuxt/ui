@@ -7,7 +7,7 @@ exports[`ChatMessage > renders with actions slot correctly 1`] = `
     <!--v-if-->
     <div data-slot="chat-message-body" class="min-w-0 w-full">
       <div data-slot="chat-message-content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 text-accent-default space-y-4 w-full">Hello, how are you?</div>
-      <div data-slot="chat-message-actions" class="[@media(hover:hover)]:opacity-0 group-hover/message:opacity-100 absolute bottom-0 flex items-center transition-opacity ease-out">Actions slot</div>
+      <div data-slot="chat-message-actions" class="[@media(hover:hover)]:opacity-0 group-hover/message:opacity-100 focus-within:opacity-100 absolute bottom-0 flex items-center transition-opacity ease-out">Actions slot</div>
     </div>
   </div>
 </article>"
@@ -94,7 +94,7 @@ exports[`ChatMessage > renders with content slot correctly 1`] = `
 exports[`ChatMessage > renders with files slot correctly 1`] = `
 "<article data-role="user" data-slot="chat-message" class="group/message relative w-full [--ui-accent:var(--ui-neutral)] scroll-mt-4 sm:scroll-mt-6">
   <div data-slot="chat-message-header" class="flex mb-1.5">
-    <div data-slot="chat-message-files" class="flex items-center gap-1.5">Files slot</div>
+    <div data-slot="chat-message-files" class="flex flex-wrap items-center gap-1.5">Files slot</div>
   </div>
   <div data-slot="chat-message-container" class="relative flex items-start gap-3 pb-8">
     <!--v-if-->
