@@ -1,6 +1,7 @@
 import type { ThemeDoc, StoredPaletteParams, StyleOptions } from './engine'
 import { DEFAULT_COLORS, THEME_DEFAULTS } from './engine/types'
 import { SAFE_NAME } from './sanitize'
+import { FONT_WEIGHT_DEFAULTS } from './studio'
 
 /**
  * The font document: all three stacks plus the body treatment, exactly the
@@ -110,22 +111,22 @@ function normalizeFont(raw: unknown): FontPrefs | undefined {
   const input = raw as Record<string, any>
   const font: FontPrefs = {}
 
-  // `heading` was the old h1–h6 treatment. Only the family survived the
-  // rework, as the serif stack; the rest is dropped rather than kept as dead
-  // weight that every dirty check would still measure.
+  // `heading` was an object of h1–h6 treatment before. Only the family
+  // survived, the rest is dropped rather than kept as dead weight that every
+  // dirty check would still measure.
   const family = (value: unknown) => typeof value === 'string' && SAFE_NAME.test(value) ? value : undefined
   const sans = family(input.sans)
   if (sans && sans !== THEME_DEFAULTS.font) font.sans = sans
-  const serif = family(input.serif) ?? family(input.heading?.font)
-  if (serif) font.serif = serif
+  const heading = family(input.heading) ?? family(input.heading?.font)
+  if (heading) font.heading = heading
   const mono = family(input.mono)
   if (mono) font.mono = mono
 
   const weights: NonNullable<FontPrefs['weights']> = {}
-  for (const step of ['normal', 'medium', 'semibold', 'bold'] as const) {
-    const weight = clamped(input.weights?.[step], 100, 900)
-    if (weight !== undefined) weights[step] = weight
-  }
+  const body = clamped(input.weights?.body, 100, 900)
+  if (body !== undefined && body !== FONT_WEIGHT_DEFAULTS.body) weights.body = body
+  const headingWeight = clamped(input.weights?.heading, 100, 900)
+  if (headingWeight !== undefined) weights.heading = headingWeight
   if (Object.keys(weights).length) font.weights = weights
 
   if (input.uppercase) font.uppercase = true

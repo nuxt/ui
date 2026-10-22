@@ -9,7 +9,7 @@ const studioIcons = useStudioIcons()
     <div class="p-4 flex items-start gap-3">
       <UAvatar :icon="studioIcons.radar" size="lg" class="rounded-lg" :ui="{ icon: 'size-5 text-primary' }" />
       <div>
-        <p class="font-semibold text-strong">
+        <p class="font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold)) text-strong">
           Observability Plus
         </p>
         <p class="text-sm text-muted">

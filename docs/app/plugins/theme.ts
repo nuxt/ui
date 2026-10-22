@@ -183,16 +183,16 @@ export default defineNuxtPlugin({
               var prefs = T.font || {};
               var font = (prefs.sans && SAFE.test(prefs.sans)) ? prefs.sans : 'Public Sans';
               var css = ':root { --font-sans: \\'' + font + '\\', sans-serif; }';
-              var serif = (prefs.serif && SAFE.test(prefs.serif)) ? prefs.serif : undefined;
+              var heading = (typeof prefs.heading === 'string' && SAFE.test(prefs.heading)) ? prefs.heading : undefined;
               var mono = (prefs.mono && SAFE.test(prefs.mono)) ? prefs.mono : undefined;
-              if (serif) { css += ' :root { --font-serif: \\'' + serif + '\\', serif; }'; }
+              if (heading) { css += ' :root { --font-heading: \\'' + heading + '\\', var(--font-sans); }'; }
               if (mono) { css += ' :root { --font-mono: \\'' + mono + '\\', monospace; }'; }
               var w = prefs.weights || {};
-              var wVars = Object.keys(w).map(function(step) { var n = num(w[step], 100, 900); return (SAFE.test(step) && n !== undefined) ? '--font-weight-' + step + ': ' + n + ';' : ''; }).filter(Boolean).join(' ');
-              if (wVars) { css += ' :root { ' + wVars + ' }'; }
+              var wb = num(w.body, 100, 900);
+              var wh = num(w.heading, 100, 900);
+              if (wb !== undefined) { css += ' :root { --ui-font-weight-body: ' + wb + '; }'; }
+              if (wh !== undefined) { css += ' :root { --ui-font-weight-heading: ' + wh + '; }'; }
               var bodyRules = '';
-              var wn = num(w.normal, 100, 900);
-              if (wn !== undefined) { bodyRules += 'font-weight: ' + wn + '; '; }
               if (prefs.uppercase) { bodyRules += 'text-transform: uppercase; '; }
               if (prefs.italic) { bodyRules += 'font-style: italic; '; }
               var ls = num(prefs.letterSpacing, -0.2, 1);
@@ -201,7 +201,7 @@ export default defineNuxtPlugin({
               if (lh !== undefined) { bodyRules += 'line-height: ' + lh + '; '; }
               if (bodyRules) { css += ' body { ' + bodyRules + '}'; }
               if (Object.keys(prefs).length) { set('nuxt-ui-font', css); }
-              [font, serif, mono].forEach(function(name) {
+              [font, heading, mono].forEach(function(name) {
                 if (!name || name === 'Public Sans') return;
                 var id = 'font-' + name.toLowerCase().replace(/\\s+/g, '-');
                 if (document.getElementById(id)) return;

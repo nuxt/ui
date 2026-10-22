@@ -62,18 +62,18 @@ export interface ThemeDoc {
   /** Root font size in px (`html { font-size }`), scales every rem-based metric */
   fontSize?: number
   font?: {
+    /** `--font-sans`, the body font. */
     sans?: string
-    /**
-     * Tailwind's other two stacks. `serif` doubles as the heading family,
-     * see generateCSS.
-     */
-    serif?: string
+    /** `--font-heading`, the font of the headings and component titles. */
+    heading?: string
+    /** `--font-mono`, the code font. */
     mono?: string
     /**
-     * Sparse overrides for tailwind's weight steps (`font-medium` compiles to
-     * `var(--font-weight-medium)`); normal also drives classless body text.
+     * `body` sets `--ui-font-weight-body`, the weight of the body text, and
+     * `heading` sets `--ui-font-weight-heading`, which every title reads
+     * before its own step.
      */
-    weights?: { normal?: number, medium?: number, semibold?: number, bold?: number }
+    weights?: { body?: number, heading?: number }
     uppercase?: boolean
     italic?: boolean
     /** Tracking in em. */
@@ -445,7 +445,7 @@ export function resolveShade(doc: ThemeDoc, palette: string, shade: Shade): stri
 export function isDefaultTheme(doc: ThemeDoc): boolean {
   return !doc.palettes && !doc.colors && !doc.tokens
     && doc.radius === undefined && doc.fontSize === undefined
-    && !doc.font?.sans && !doc.font?.serif && !doc.font?.mono && !doc.font?.weights
+    && !doc.font?.sans && !doc.font?.heading && !doc.font?.mono && !doc.font?.weights
     && !doc.font?.uppercase && !doc.font?.italic
     && doc.font?.letterSpacing === undefined && doc.font?.lineHeight === undefined
     && !doc.icons && !doc.components
@@ -467,7 +467,7 @@ export function docToSettings(doc: ThemeDoc): Record<string, any> {
   if (doc.radius !== undefined) settings.radius = doc.radius
   if (doc.fontSize !== undefined) settings.fontSize = doc.fontSize
   if (doc.font?.sans) settings.fontSans = doc.font.sans
-  if (doc.font?.serif) settings.fontSerif = doc.font.serif
+  if (doc.font?.heading) settings.fontHeading = doc.font.heading
   if (doc.font?.mono) settings.fontMono = doc.font.mono
   if (doc.font?.weights) settings.fontWeights = doc.font.weights
   if (doc.font?.uppercase || doc.font?.italic || doc.font?.letterSpacing !== undefined || doc.font?.lineHeight !== undefined) {

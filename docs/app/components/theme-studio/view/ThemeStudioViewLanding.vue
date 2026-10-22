@@ -130,7 +130,7 @@ const vReveal = {
       <template #left>
         <div class="flex items-center gap-1.5">
           <UIcon :name="studioIcons.activity" class="size-6 text-primary shrink-0" />
-          <span class="text-xl font-bold text-strong">Landing</span>
+          <span class="text-xl font-heading font-(--ui-font-weight-heading,--theme(--font-weight-bold)) text-strong">Landing</span>
         </div>
       </template>
 

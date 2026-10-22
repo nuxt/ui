@@ -162,8 +162,11 @@ export function toolbarPanelClass(vertical?: boolean): string[] {
   return [vertical ? 'w-(--reka-popper-anchor-width)' : 'w-64 max-w-[calc(100vw-2rem)]', 'max-h-[70vh] overflow-y-auto']
 }
 
-/** Tailwind's stock weight ladder, set steps are absences at these values. */
-export const FONT_WEIGHT_DEFAULTS = { normal: 400, medium: 500, semibold: 600, bold: 700 } as const
+/**
+ * The weights the sliders rest on. Body is an absence at 400; heading has no
+ * stock value, each title keeps its own step until it is set.
+ */
+export const FONT_WEIGHT_DEFAULTS = { body: 400, heading: 600 } as const
 
 // Families whose preview faces are already requested, Public Sans is
 // bundled. Module-level so the controls, the preset menu and every search

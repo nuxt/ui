@@ -9,7 +9,7 @@ const usernames = [
   <div class="p-4 space-y-4">
     <div class="flex items-start justify-between">
       <div>
-        <p class="font-semibold text-strong">
+        <p class="font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold)) text-strong">
           Contributors
         </p>
         <p class="text-sm text-muted">

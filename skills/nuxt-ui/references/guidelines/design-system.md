@@ -294,11 +294,17 @@ Customize Tailwind design tokens in `main.css`:
 ```css
 @theme {
   --font-sans: 'Public Sans', system-ui, sans-serif;
+  --font-heading: 'Outfit', var(--font-sans);
   --font-mono: 'JetBrains Mono', monospace;
+}
+
+:root {
+  --ui-font-weight-body: 450;
+  --ui-font-weight-heading: 500;
 }
 ```
 
-In Nuxt, fonts defined here are automatically loaded by `@nuxt/fonts`.
+`--font-heading` is Nuxt UI's: it sets the font of `h1` to `h6` and of the component titles (`font-heading` utility), and headings keep the body font while it's unset. `--ui-font-weight-heading` replaces the weight of the component titles and Prose headings (plain `h1` to `h6` only take the font), `--ui-font-weight-body` the body weight; both are unset by default. In Nuxt, fonts defined in `@theme` are automatically loaded by `@nuxt/fonts`.
 
 ### Breakpoints
 
@@ -322,7 +328,7 @@ Nuxt UI exposes CSS variables you can override in `main.css`:
 
 ### Color shade overrides
 
-Each semantic color defaults to shade 500 in light mode, 400 in dark mode. Override per-mode:
+Each semantic color defaults to shade 500 in light mode and 400 in dark mode, `neutral` to 900 and 50. Override per-mode:
 
 ```css
 :root {
