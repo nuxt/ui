@@ -11,8 +11,6 @@
     -moz-osx-font-smoothing: grayscale;
     color: var(--ui-text-default);
     background-color: var(--ui-bg-default);
-    /* Unset, so the body keeps its inherited weight until it is set */
-    font-weight: var(--ui-font-weight-body);
     color-scheme: light;
 
     &:where(.dark, .dark *) {
@@ -20,8 +18,14 @@
     }
   }
 
-  /* Headings inherit the body font until `--font-heading` is set */
-  h1, h2, h3, h4, h5, h6 {
+  /* Both variables are unset, which leaves the inherited weight and font. At
+     zero specificity, so an app's own `body` or `h1` rule in `base` wins
+     wherever it comes in the source. */
+  :where(body) {
+    font-weight: var(--ui-font-weight-body);
+  }
+
+  :where(h1, h2, h3, h4, h5, h6) {
     font-family: --theme(--font-heading);
   }
 
