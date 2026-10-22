@@ -326,6 +326,8 @@ onMounted(() => {
       if (props.shouldAutoScroll && props.status === 'streaming' && !userScrolledUp.value) {
         scrollToBottom(false)
       }
+
+      checkScrollPosition()
     }, { childList: true, subtree: true })
   }
 })
