@@ -191,6 +191,7 @@ function generateMessages() {
 
     <UChatPrompt
       v-model="input"
+      :status="status"
       :error="error"
       variant="subtle"
       class="sticky bottom-0"

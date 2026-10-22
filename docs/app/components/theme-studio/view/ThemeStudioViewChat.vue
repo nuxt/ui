@@ -266,6 +266,7 @@ const ui = {
 
             <UChatPrompt
               v-model="input"
+              :status="status"
               :error="error"
               color="neutral"
               variant="subtle"
