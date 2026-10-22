@@ -16,13 +16,13 @@ const { canReset, resetLabel, resetToBaseline } = useThemeStudioToolbar()
     <UButton
       :icon="studioIcons.reset"
       :label="vertical ? resetLabel : undefined"
-      color="neutral"
+      :color="canReset ? 'primary' : 'neutral'"
       :variant="vertical ? 'outline' : variant"
       :size="size"
       :block="vertical"
       :disabled="!canReset"
       :aria-label="resetLabel"
-      :ui="{ leadingIcon: vertical && 'text-faint' }"
+      :ui="{ leadingIcon: vertical && !canReset && 'text-faint' }"
       @click="resetToBaseline"
     />
   </UTooltip>
