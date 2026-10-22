@@ -180,15 +180,15 @@ const features = computed(() => props.features?.map(feature => typeof feature ==
     </div>
   </DefinePriceTemplate>
 
-  <Primitive :as="as.root" data-slot="root" v-bind="$attrs" :data-orientation="props.orientation" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="!!slots.header && props.orientation === 'vertical'" data-slot="header" :class="ui.header({ class: props.ui?.header })">
+  <Primitive :as="as.root" data-slot="pricing-plan" v-bind="$attrs" :data-orientation="props.orientation" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div v-if="!!slots.header && props.orientation === 'vertical'" data-slot="pricing-plan-header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header" />
     </div>
 
     <div data-slot="pricing-plan-body" :class="ui.body({ class: props.ui?.body })">
       <slot name="body">
-        <div data-slot="titleWrapper" :class="ui.titleWrapper({ class: props.ui?.titleWrapper })">
-          <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+        <div data-slot="pricing-plan-titleWrapper" :class="ui.titleWrapper({ class: props.ui?.titleWrapper })">
+          <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="pricing-plan-title" :class="ui.title({ class: props.ui?.title })">
             <slot name="title">
               {{ props.title }}
             </slot>

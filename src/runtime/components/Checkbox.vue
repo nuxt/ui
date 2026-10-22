@@ -152,8 +152,8 @@ function onUpdate(value: any) {
 
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <Primitive :as="isListVariant ? props.as : Label" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
+  <Primitive :as="isListVariant ? props.as : Label" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'checkbox'" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div data-slot="checkbox-container" :class="ui.container({ class: props.ui?.container })">
       <CheckboxRoot
         :id="id"
         v-bind="{ ...rootProps, ...forwardedAttrs, ...ariaAttrs }"
@@ -172,9 +172,9 @@ function onUpdate(value: any) {
       </CheckboxRoot>
     </div>
 
-    <div v-if="labelIcon || (props.label || !!slots.label) || (props.description || !!slots.description)" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
-      <UIcon v-if="labelIcon" :name="labelIcon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
-      <component :is="isListVariant ? Label : 'div'" v-if="props.label || !!slots.label" :for="isListVariant ? id : undefined" data-slot="label" :class="ui.label({ class: props.ui?.label })">
+    <div v-if="labelIcon || (props.label || !!slots.label) || (props.description || !!slots.description)" data-slot="checkbox-wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+      <UIcon v-if="labelIcon" :name="labelIcon" data-slot="checkbox-icon" :class="ui.icon({ class: props.ui?.icon })" />
+      <component :is="isListVariant ? Label : 'div'" v-if="props.label || !!slots.label" :for="isListVariant ? id : undefined" data-slot="checkbox-label" :class="ui.label({ class: props.ui?.label })">
         <slot name="label" :label="props.label">
           {{ props.label }}
         </slot>

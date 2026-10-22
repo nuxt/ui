@@ -158,7 +158,7 @@ const ariaLabel = computed(() => {
 
         <div v-if="!!slots.body || (props.title || !!slots.title) || (props.description || !!slots.description)" data-slot="page-card-body" :class="ui.body({ class: props.ui?.body })">
           <slot name="body">
-            <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+            <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="page-card-title" :class="ui.title({ class: props.ui?.title })">
               <slot name="title">
                 {{ props.title }}
               </slot>
