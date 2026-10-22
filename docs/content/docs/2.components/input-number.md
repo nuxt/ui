@@ -288,7 +288,7 @@ name: 'input-number-currency-example'
 
 ### With a unit
 
-Use the `#leading` and `#trailing` slots to display a unit that `format-options` doesn't cover. It stays out of the value.
+Use the `#leading` and `#trailing` slots to display a unit that `format-options` doesn't cover. It stays out of the value, so name the unit in the label of the input for screen readers.
 
 ::component-example
 ---
