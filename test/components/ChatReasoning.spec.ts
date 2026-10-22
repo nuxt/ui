@@ -69,8 +69,8 @@ describe('ChatReasoning', () => {
       props: { text: 'Thinking...', streaming: true, autoOpen: false }
     })
 
-    const root = wrapper.find('[data-slot="root"]')
-    await wrapper.find('[data-slot="trigger"]').trigger('click')
+    const root = wrapper.find('[data-slot="chat-reasoning"]')
+    await wrapper.find('[data-slot="chat-reasoning-trigger"]').trigger('click')
     expect(root.attributes('data-state')).toBe('open')
 
     vi.useFakeTimers()

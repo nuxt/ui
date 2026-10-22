@@ -284,7 +284,7 @@ describe('SelectMenu', () => {
 
       const input = wrapper.find('[data-slot="select-menu-filter"] input')
       expect(document.activeElement).not.toBe(input.element)
-      expect(wrapper.find('[data-slot="focusScope"]').element.contains(document.activeElement)).toBe(true)
+      expect(wrapper.find('[data-slot="select-menu-focusScope"]').element.contains(document.activeElement)).toBe(true)
 
       wrapper.unmount()
     })
@@ -295,7 +295,7 @@ describe('SelectMenu', () => {
       await flushPromises()
       await new Promise(resolve => setTimeout(resolve))
 
-      const focusScope = wrapper.find('[data-slot="focusScope"]')
+      const focusScope = wrapper.find('[data-slot="select-menu-focusScope"]')
       const options = wrapper.findAll('[role="option"]')
       expect(options[0]!.attributes('data-highlighted')).toBeDefined()
 
