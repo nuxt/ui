@@ -65,6 +65,7 @@ export interface ChatMessagesProps<T extends UIMessage[] = UIMessage[]> {
   compact?: boolean
   /**
    * The spacing offset for the last message in px. Can be useful when the prompt is sticky for example.
+   * The auto scroll button is kept above it.
    * @defaultValue 0
    */
   spacingOffset?: number
@@ -339,7 +340,7 @@ defineExpose({
     :data-status="props.status"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
-    :style="{ '--last-message-height': `${lastMessageHeight}px` }"
+    :style="{ '--last-message-height': `${lastMessageHeight}px`, '--bottom-offset': `${props.spacingOffset}px` }"
   >
     <slot :register-message-ref="registerMessageRef">
       <template v-for="message in props.messages" :key="message.id">
