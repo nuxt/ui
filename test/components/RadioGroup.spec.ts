@@ -171,7 +171,7 @@ describe('RadioGroup', () => {
   describe('label element', () => {
     test('is a <label> in the default (list) variant', async () => {
       const wrapper = await mountSuspended(RadioGroup, { props: { items, modelValue: '1' } })
-      const label = wrapper.find('[data-slot="label"]')
+      const label = wrapper.find('[data-slot="radio-group-label"]')
 
       expect(label.exists()).toBe(true)
       expect(label.element.tagName).toBe('LABEL')
@@ -180,7 +180,7 @@ describe('RadioGroup', () => {
 
     test.each(['card', 'table'] as const)('is a <div> in the %s variant', async (variant) => {
       const wrapper = await mountSuspended(RadioGroup, { props: { items, modelValue: '1', variant } })
-      const label = wrapper.find('[data-slot="label"]')
+      const label = wrapper.find('[data-slot="radio-group-label"]')
 
       expect(label.exists()).toBe(true)
       expect(label.element.tagName).toBe('DIV')
@@ -192,7 +192,7 @@ describe('RadioGroup', () => {
         props: { items, modelValue: '1', variant: 'card' },
         slots: { label: '<span data-testid="custom-label">Custom</span>' }
       })
-      const label = wrapper.find('[data-slot="label"]')
+      const label = wrapper.find('[data-slot="radio-group-label"]')
 
       expect(label.element.tagName).toBe('DIV')
       expect(label.attributes('for')).toBeUndefined()

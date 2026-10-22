@@ -171,9 +171,9 @@ describe('CommandPalette', () => {
   it('does not filter any group when ignoreFilter is set', async () => {
     const wrapper = await mountSuspended(CommandPalette, { props: { ...props, searchTerm: 'zzz', ignoreFilter: true } })
 
-    const labels = wrapper.findAll('[data-slot="itemLabelBase"]').map(label => label.text())
+    const labels = wrapper.findAll('[data-slot="command-palette-itemLabelBase"]').map(label => label.text())
     expect(labels).toEqual(groups.flatMap(group => group.items.map(item => item.label)))
-    expect(wrapper.find('[data-slot="empty"]').exists()).toBe(false)
+    expect(wrapper.find('[data-slot="command-palette-empty"]').exists()).toBe(false)
   })
 
   it('filters a group that sets ignoreFilter to false when ignoreFilter is set', async () => {
@@ -185,7 +185,7 @@ describe('CommandPalette', () => {
       }
     })
 
-    const labels = wrapper.findAll('[data-slot="itemLabelBase"]').map(label => label.text())
+    const labels = wrapper.findAll('[data-slot="command-palette-itemLabelBase"]').map(label => label.text())
     expect(labels).toEqual(['Add new folder', 'bug', 'feature', 'enhancement', 'benjamincanac'])
   })
 

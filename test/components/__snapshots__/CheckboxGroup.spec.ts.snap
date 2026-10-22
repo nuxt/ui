@@ -343,7 +343,7 @@ exports[`CheckboxGroup > renders with highlight indicator hidden correctly 1`] =
       </div>
       <div data-slot="checkbox-wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm">
         <!--v-if-->
-        <p for="v-0-0:1" data-slot="checkbox-label" class="block font-medium text-default">Option 1</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-primary)] px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)] not-has-disabled:not-has-aria-disabled:border-accent not-has-disabled:not-has-aria-disabled:has-data-[state=checked]:border-accent">
@@ -352,7 +352,7 @@ exports[`CheckboxGroup > renders with highlight indicator hidden correctly 1`] =
       </div>
       <div data-slot="checkbox-wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm">
         <!--v-if-->
-        <p for="v-0-0:2" data-slot="checkbox-label" class="block font-medium text-default">Option 2</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-primary)] px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)] not-has-disabled:not-has-aria-disabled:border-accent not-has-disabled:not-has-aria-disabled:has-data-[state=checked]:border-accent">
@@ -361,7 +361,7 @@ exports[`CheckboxGroup > renders with highlight indicator hidden correctly 1`] =
       </div>
       <div data-slot="checkbox-wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm">
         <!--v-if-->
-        <p for="v-0-0:3" data-slot="checkbox-label" class="block font-medium text-default">Option 3</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
       </div>
     </label>
@@ -379,7 +379,7 @@ exports[`CheckboxGroup > renders with horizontal variant card correctly 1`] = `
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:1" data-slot="checkbox-label" class="block font-medium text-default">Option 1</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-primary)] px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)] hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong">
@@ -390,7 +390,7 @@ exports[`CheckboxGroup > renders with horizontal variant card correctly 1`] = `
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:2" data-slot="checkbox-label" class="block font-medium text-default">Option 2</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-primary)] px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)] hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong">
@@ -401,7 +401,7 @@ exports[`CheckboxGroup > renders with horizontal variant card correctly 1`] = `
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:3" data-slot="checkbox-label" class="block font-medium text-default">Option 3</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
       </div>
     </label>
@@ -459,7 +459,7 @@ exports[`CheckboxGroup > renders with horizontal variant table correctly 1`] = `
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:1" data-slot="checkbox-label" class="block font-medium text-default">Option 1</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)] px-(--ui-control-px) py-(--ui-control-py) border border-default has-aria-disabled:cursor-not-allowed hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent/50 has-data-[state=checked]:z-2 hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:z-1 first-of-type:rounded-s-lg last-of-type:rounded-e-lg">
@@ -470,7 +470,7 @@ exports[`CheckboxGroup > renders with horizontal variant table correctly 1`] = `
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:2" data-slot="checkbox-label" class="block font-medium text-default">Option 2</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)] px-(--ui-control-px) py-(--ui-control-py) border border-default has-aria-disabled:cursor-not-allowed hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent/50 has-data-[state=checked]:z-2 hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:z-1 first-of-type:rounded-s-lg last-of-type:rounded-e-lg">
@@ -481,7 +481,7 @@ exports[`CheckboxGroup > renders with horizontal variant table correctly 1`] = `
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:3" data-slot="checkbox-label" class="block font-medium text-default">Option 3</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
       </div>
     </label>
@@ -498,7 +498,7 @@ exports[`CheckboxGroup > renders with icon card correctly 1`] = `
         <!--v-if-->
       </div>
       <div data-slot="checkbox-wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm"><span class="iconify i-lucide:rocket shrink-0 size-[calc(var(--ui-control-icon)+(--spacing(0.5)))]" aria-hidden="true" data-slot="checkbox-icon"></span>
-        <p for="v-0-0:1" data-slot="checkbox-label" class="block font-medium text-default">Option 1</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-primary)] px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)] hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong">
@@ -506,7 +506,7 @@ exports[`CheckboxGroup > renders with icon card correctly 1`] = `
         <!--v-if-->
       </div>
       <div data-slot="checkbox-wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm"><span class="iconify i-lucide:rocket shrink-0 size-[calc(var(--ui-control-icon)+(--spacing(0.5)))]" aria-hidden="true" data-slot="checkbox-icon"></span>
-        <p for="v-0-0:2" data-slot="checkbox-label" class="block font-medium text-default">Option 2</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-primary)] px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)] hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong">
@@ -514,7 +514,7 @@ exports[`CheckboxGroup > renders with icon card correctly 1`] = `
         <!--v-if-->
       </div>
       <div data-slot="checkbox-wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm"><span class="iconify i-lucide:rocket shrink-0 size-[calc(var(--ui-control-icon)+(--spacing(0.5)))]" aria-hidden="true" data-slot="checkbox-icon"></span>
-        <p for="v-0-0:3" data-slot="checkbox-label" class="block font-medium text-default">Option 3</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
       </div>
     </label>
@@ -564,7 +564,7 @@ exports[`CheckboxGroup > renders with icon table correctly 1`] = `
         <!--v-if-->
       </div>
       <div data-slot="checkbox-wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm"><span class="iconify i-lucide:rocket shrink-0 size-[calc(var(--ui-control-icon)+(--spacing(0.5)))]" aria-hidden="true" data-slot="checkbox-icon"></span>
-        <p for="v-0-0:1" data-slot="checkbox-label" class="block font-medium text-default">Option 1</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)] px-(--ui-control-px) py-(--ui-control-py) border border-default has-aria-disabled:cursor-not-allowed hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent/50 has-data-[state=checked]:z-2 hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:z-1 first-of-type:rounded-t-lg last-of-type:rounded-b-lg">
@@ -572,7 +572,7 @@ exports[`CheckboxGroup > renders with icon table correctly 1`] = `
         <!--v-if-->
       </div>
       <div data-slot="checkbox-wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm"><span class="iconify i-lucide:rocket shrink-0 size-[calc(var(--ui-control-icon)+(--spacing(0.5)))]" aria-hidden="true" data-slot="checkbox-icon"></span>
-        <p for="v-0-0:2" data-slot="checkbox-label" class="block font-medium text-default">Option 2</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-primary)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)] px-(--ui-control-px) py-(--ui-control-py) border border-default has-aria-disabled:cursor-not-allowed hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent/50 has-data-[state=checked]:z-2 hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:z-1 first-of-type:rounded-t-lg last-of-type:rounded-b-lg">
@@ -580,7 +580,7 @@ exports[`CheckboxGroup > renders with icon table correctly 1`] = `
         <!--v-if-->
       </div>
       <div data-slot="checkbox-wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm"><span class="iconify i-lucide:rocket shrink-0 size-[calc(var(--ui-control-icon)+(--spacing(0.5)))]" aria-hidden="true" data-slot="checkbox-icon"></span>
-        <p for="v-0-0:3" data-slot="checkbox-label" class="block font-medium text-default">Option 3</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
       </div>
     </label>
@@ -922,7 +922,7 @@ exports[`CheckboxGroup > renders with max variant table correctly 1`] = `
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:1" data-slot="checkbox-label" class="block font-medium text-default">Option 1</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)] opacity-75 px-(--ui-control-px) py-(--ui-control-py) border border-default has-aria-disabled:cursor-not-allowed hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent/50 has-data-[state=checked]:z-2 hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:z-1 first-of-type:rounded-t-lg last-of-type:rounded-b-lg">
@@ -933,7 +933,7 @@ exports[`CheckboxGroup > renders with max variant table correctly 1`] = `
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:2" data-slot="checkbox-label" class="block font-medium text-default cursor-not-allowed">Option 2</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default cursor-not-allowed">Option 2</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)] opacity-75 px-(--ui-control-px) py-(--ui-control-py) border border-default has-aria-disabled:cursor-not-allowed hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent/50 has-data-[state=checked]:z-2 hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:z-1 first-of-type:rounded-t-lg last-of-type:rounded-b-lg">
@@ -944,7 +944,7 @@ exports[`CheckboxGroup > renders with max variant table correctly 1`] = `
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:3" data-slot="checkbox-label" class="block font-medium text-default cursor-not-allowed">Option 3</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default cursor-not-allowed">Option 3</div>
         <!--v-if-->
       </div>
     </label>
@@ -1002,7 +1002,7 @@ exports[`CheckboxGroup > renders with neutral variant card correctly 1`] = `
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:1" data-slot="checkbox-label" class="block font-medium text-default">Option 1</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-neutral)] px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)] hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong">
@@ -1013,7 +1013,7 @@ exports[`CheckboxGroup > renders with neutral variant card correctly 1`] = `
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:2" data-slot="checkbox-label" class="block font-medium text-default">Option 2</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-neutral)] px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)] hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong">
@@ -1024,7 +1024,7 @@ exports[`CheckboxGroup > renders with neutral variant card correctly 1`] = `
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:3" data-slot="checkbox-label" class="block font-medium text-default">Option 3</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
       </div>
     </label>
@@ -1042,7 +1042,7 @@ exports[`CheckboxGroup > renders with neutral variant card highlight correctly 1
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:1" data-slot="checkbox-label" class="block font-medium text-default">Option 1</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-neutral)] px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]">
@@ -1053,7 +1053,7 @@ exports[`CheckboxGroup > renders with neutral variant card highlight correctly 1
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:2" data-slot="checkbox-label" class="block font-medium text-default">Option 2</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-neutral)] px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]">
@@ -1064,7 +1064,7 @@ exports[`CheckboxGroup > renders with neutral variant card highlight correctly 1
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:3" data-slot="checkbox-label" class="block font-medium text-default">Option 3</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
       </div>
     </label>
@@ -1162,7 +1162,7 @@ exports[`CheckboxGroup > renders with neutral variant table correctly 1`] = `
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:1" data-slot="checkbox-label" class="block font-medium text-default">Option 1</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-neutral)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)] px-(--ui-control-px) py-(--ui-control-py) border border-default has-aria-disabled:cursor-not-allowed hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent/50 has-data-[state=checked]:z-2 hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:z-1 first-of-type:rounded-t-lg last-of-type:rounded-b-lg">
@@ -1173,7 +1173,7 @@ exports[`CheckboxGroup > renders with neutral variant table correctly 1`] = `
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:2" data-slot="checkbox-label" class="block font-medium text-default">Option 2</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-neutral)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)] px-(--ui-control-px) py-(--ui-control-py) border border-default has-aria-disabled:cursor-not-allowed hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent/50 has-data-[state=checked]:z-2 hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:z-1 first-of-type:rounded-t-lg last-of-type:rounded-b-lg">
@@ -1184,7 +1184,7 @@ exports[`CheckboxGroup > renders with neutral variant table correctly 1`] = `
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:3" data-slot="checkbox-label" class="block font-medium text-default">Option 3</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
       </div>
     </label>
@@ -1202,7 +1202,7 @@ exports[`CheckboxGroup > renders with neutral variant table highlight correctly 
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:1" data-slot="checkbox-label" class="block font-medium text-default">Option 1</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-neutral)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)] px-(--ui-control-px) py-(--ui-control-py) border border-default has-aria-disabled:cursor-not-allowed hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent/50 has-data-[state=checked]:z-2 first-of-type:rounded-t-lg last-of-type:rounded-b-lg">
@@ -1213,7 +1213,7 @@ exports[`CheckboxGroup > renders with neutral variant table highlight correctly 
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:2" data-slot="checkbox-label" class="block font-medium text-default">Option 2</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-neutral)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)] px-(--ui-control-px) py-(--ui-control-py) border border-default has-aria-disabled:cursor-not-allowed hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent/50 has-data-[state=checked]:z-2 first-of-type:rounded-t-lg last-of-type:rounded-b-lg">
@@ -1224,7 +1224,7 @@ exports[`CheckboxGroup > renders with neutral variant table highlight correctly 
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:3" data-slot="checkbox-label" class="block font-medium text-default">Option 3</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
       </div>
     </label>
@@ -1242,7 +1242,7 @@ exports[`CheckboxGroup > renders with primary variant card correctly 1`] = `
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:1" data-slot="checkbox-label" class="block font-medium text-default">Option 1</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-primary)] px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)] hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong">
@@ -1253,7 +1253,7 @@ exports[`CheckboxGroup > renders with primary variant card correctly 1`] = `
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:2" data-slot="checkbox-label" class="block font-medium text-default">Option 2</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-primary)] px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)] hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong">
@@ -1264,7 +1264,7 @@ exports[`CheckboxGroup > renders with primary variant card correctly 1`] = `
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:3" data-slot="checkbox-label" class="block font-medium text-default">Option 3</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
       </div>
     </label>
@@ -1282,7 +1282,7 @@ exports[`CheckboxGroup > renders with primary variant card highlight correctly 1
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:1" data-slot="checkbox-label" class="block font-medium text-default">Option 1</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-primary)] px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]">
@@ -1293,7 +1293,7 @@ exports[`CheckboxGroup > renders with primary variant card highlight correctly 1
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:2" data-slot="checkbox-label" class="block font-medium text-default">Option 2</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-primary)] px-(--ui-control-px) py-(--ui-control-py) border border-default rounded-lg hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:border-accent/50 has-data-[state=checked]:bg-accent-soft flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)]">
@@ -1304,7 +1304,7 @@ exports[`CheckboxGroup > renders with primary variant card highlight correctly 1
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:3" data-slot="checkbox-label" class="block font-medium text-default">Option 3</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
       </div>
     </label>
@@ -1402,7 +1402,7 @@ exports[`CheckboxGroup > renders with primary variant table correctly 1`] = `
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:1" data-slot="checkbox-label" class="block font-medium text-default">Option 1</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)] px-(--ui-control-px) py-(--ui-control-py) border border-default has-aria-disabled:cursor-not-allowed hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent/50 has-data-[state=checked]:z-2 hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:z-1 first-of-type:rounded-t-lg last-of-type:rounded-b-lg">
@@ -1413,7 +1413,7 @@ exports[`CheckboxGroup > renders with primary variant table correctly 1`] = `
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:2" data-slot="checkbox-label" class="block font-medium text-default">Option 2</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)] px-(--ui-control-px) py-(--ui-control-py) border border-default has-aria-disabled:cursor-not-allowed hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent/50 has-data-[state=checked]:z-2 hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-strong hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:z-1 first-of-type:rounded-t-lg last-of-type:rounded-b-lg">
@@ -1424,7 +1424,7 @@ exports[`CheckboxGroup > renders with primary variant table correctly 1`] = `
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:3" data-slot="checkbox-label" class="block font-medium text-default">Option 3</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
       </div>
     </label>
@@ -1442,7 +1442,7 @@ exports[`CheckboxGroup > renders with primary variant table highlight correctly 
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:1" data-slot="checkbox-label" class="block font-medium text-default">Option 1</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)] px-(--ui-control-px) py-(--ui-control-py) border border-default has-aria-disabled:cursor-not-allowed hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent/50 has-data-[state=checked]:z-2 first-of-type:rounded-t-lg last-of-type:rounded-b-lg">
@@ -1453,7 +1453,7 @@ exports[`CheckboxGroup > renders with primary variant table highlight correctly 
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:2" data-slot="checkbox-label" class="block font-medium text-default">Option 2</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
       </div>
     </label><label data-slot="checkbox-group-item" class="relative flex items-start [--ui-accent:var(--ui-primary)] flex-row [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(3.5)] px-(--ui-control-px) py-(--ui-control-py) border border-default has-aria-disabled:cursor-not-allowed hover:not-has-disabled:not-has-aria-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-tint transition-colors outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1] has-data-[state=checked]:bg-accent-soft has-data-[state=checked]:border-accent/50 has-data-[state=checked]:z-2 first-of-type:rounded-t-lg last-of-type:rounded-b-lg">
@@ -1464,7 +1464,7 @@ exports[`CheckboxGroup > renders with primary variant table highlight correctly 
       </div>
       <div data-slot="checkbox-wrapper" class="w-full ms-2 text-sm">
         <!--v-if-->
-        <p for="v-0-0:3" data-slot="checkbox-label" class="block font-medium text-default">Option 3</p>
+        <div data-slot="checkbox-label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
       </div>
     </label>

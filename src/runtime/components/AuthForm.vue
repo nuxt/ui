@@ -210,8 +210,8 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="as.root" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="(props.icon || !!slots.leading) || (props.title || !!slots.title) || (props.description || !!slots.description) || !!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
+  <Primitive :as="as.root" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'auth-form'" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div v-if="(props.icon || !!slots.leading) || (props.title || !!slots.title) || (props.description || !!slots.description) || !!slots.header" data-slot="auth-form-header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header">
         <div v-if="props.icon || !!slots.leading" data-slot="auth-form-leading" :class="ui.leading({ class: props.ui?.leading })">
           <slot name="leading" :ui="ui">
@@ -219,7 +219,7 @@ defineExpose({
           </slot>
         </div>
 
-        <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+        <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="auth-form-title" :class="ui.title({ class: props.ui?.title })">
           <slot name="title">
             {{ props.title }}
           </slot>

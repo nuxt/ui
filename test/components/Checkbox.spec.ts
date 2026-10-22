@@ -142,7 +142,7 @@ describe('Checkbox', () => {
   describe('label element', () => {
     test('is a <label> in the default (list) variant', async () => {
       const wrapper = await mountSuspended(Checkbox, { props: { label: 'Label' } })
-      const label = wrapper.find('[data-slot="label"]')
+      const label = wrapper.find('[data-slot="checkbox-label"]')
 
       expect(label.exists()).toBe(true)
       expect(label.element.tagName).toBe('LABEL')
@@ -152,7 +152,7 @@ describe('Checkbox', () => {
     // `Checkbox` only ships the `list` and `card` variants, `table` lives on `CheckboxGroup`.
     test.each(['card'] as const)('is a <div> in the %s variant', async (variant) => {
       const wrapper = await mountSuspended(Checkbox, { props: { label: 'Label', variant } })
-      const label = wrapper.find('[data-slot="label"]')
+      const label = wrapper.find('[data-slot="checkbox-label"]')
 
       expect(label.exists()).toBe(true)
       expect(label.element.tagName).toBe('DIV')
@@ -164,7 +164,7 @@ describe('Checkbox', () => {
         props: { label: 'Label', variant: 'card' },
         slots: { label: '<span data-testid="custom-label">Custom</span>' }
       })
-      const label = wrapper.find('[data-slot="label"]')
+      const label = wrapper.find('[data-slot="checkbox-label"]')
 
       expect(label.element.tagName).toBe('DIV')
       expect(label.attributes('for')).toBeUndefined()
