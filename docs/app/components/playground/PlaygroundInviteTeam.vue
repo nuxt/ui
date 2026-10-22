@@ -19,7 +19,7 @@ const link = 'https://app.nuxt.com/invite/x8f2k'
   <div>
     <div class="p-4 space-y-4">
       <div>
-        <p class="font-semibold text-strong">
+        <p class="font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold)) text-strong">
           Invite your team
         </p>
         <p class="text-sm text-muted">

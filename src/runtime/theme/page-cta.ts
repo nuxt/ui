@@ -6,7 +6,7 @@ export default defineTheme({
     container: 'flex flex-col lg:grid px-6 py-12 sm:px-12 sm:py-24 lg:px-16 lg:py-24 gap-8 sm:gap-16',
     wrapper: '',
     header: '',
-    title: 'text-3xl sm:text-4xl text-pretty tracking-tight font-bold text-strong',
+    title: 'text-3xl sm:text-4xl text-pretty tracking-tight font-heading font-(--ui-font-weight-heading,--theme(--font-weight-bold)) text-strong',
     description: 'text-base sm:text-lg text-muted',
     body: 'mt-8',
     footer: 'mt-8',

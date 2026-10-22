@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import { upperFirst } from 'scule'
 import { keepPanels, toolbarPanelClass, FONT_WEIGHT_DEFAULTS, loadFontPreviews } from '../../../utils/theme/studio'
 import { THEME_DEFAULTS } from '../../../utils/theme/engine/types'
 
 /**
- * Every typographic setting in one panel: the three stacks up top, then the
- * treatment that rides on them.
+ * Every typographic setting in one panel: the three stacks up top, their
+ * weights, then the treatment that rides on them.
  *
  * The stacks are what tailwind reads. Mono needs nothing else (preflight
- * points `code`/`kbd`/`pre`/`samp` at it) and serif drives the h1–h6 rule in
- * main.css until v5 ships `--ui-font-heading`.
+ * points `code`/`kbd`/`pre`/`samp` at it) and the heading one sets
+ * `--font-heading`.
  */
 const { fonts, font, fontPrefs, setFontPrefs, fontSize } = useTheme()
 
@@ -20,18 +19,20 @@ const fontLabel = computed(() => (mounted.value ? font.value : THEME_DEFAULTS.fo
 
 onMounted(() => loadFontPreviews(fonts.map(entry => entry.name)))
 
-// One writable model per tailwind weight step, the knobs components
-// actually dereference at runtime.
-function weightStepModel(step: keyof typeof FONT_WEIGHT_DEFAULTS) {
+// Body is `--ui-font-weight-body`, heading the `--ui-font-weight-heading`
+// every title reads. Unset, the heading row rests on semibold and each title
+// keeps its own step until the section reset clears it. Steps of 100 from 300
+// to 800: those are the faces the studio loads, a weight in between would
+// render as the nearest one.
+function weightModel(key: keyof typeof FONT_WEIGHT_DEFAULTS) {
   return computed({
-    get: () => fontPrefs.value.weights?.[step] ?? FONT_WEIGHT_DEFAULTS[step],
-    set: (value: number) => setFontPrefs({ ...fontPrefs.value, weights: { ...fontPrefs.value.weights, [step]: value } })
+    get: () => fontPrefs.value.weights?.[key] ?? FONT_WEIGHT_DEFAULTS[key],
+    set: (value: number) => setFontPrefs({ ...fontPrefs.value, weights: { ...fontPrefs.value.weights, [key]: value } })
   })
 }
 
-const WEIGHT_STEPS = ['normal', 'medium', 'semibold', 'bold'] as const
-const weightSteps = Object.fromEntries(WEIGHT_STEPS.map(step => [step, weightStepModel(step)])) as Record<typeof WEIGHT_STEPS[number], ReturnType<typeof weightStepModel>>
-const weights = WEIGHT_STEPS.map(step => ({ label: upperFirst(step), model: weightSteps[step]! }))
+const bodyWeight = weightModel('body')
+const headingWeight = weightModel('heading')
 
 const uppercase = computed({
   get: () => !!fontPrefs.value.uppercase,
@@ -49,11 +50,10 @@ const lineHeight = computed({
 })
 
 /**
- * Tailwind's other two stacks, labelled by what they drive rather than by
- * their variable. `undefined` (not the string) is inherit, so an untouched
+ * The heading and code stacks. `undefined` (not the string) is inherit, so an untouched
  * row exports clean; the body stack always resolves, so it has no inherit.
  */
-function stackModel(key: 'serif' | 'mono') {
+function stackModel(key: 'heading' | 'mono') {
   return computed({
     get: () => fontPrefs.value[key] ?? 'inherit',
     set: (value: string) => setFontPrefs({ ...fontPrefs.value, [key]: value === 'inherit' ? undefined : value })
@@ -62,7 +62,7 @@ function stackModel(key: 'serif' | 'mono') {
 
 const stacks = [
   { label: 'Body', model: font, inherit: false, default: 'Public Sans', hint: 'Body font' },
-  { label: 'Heading', model: stackModel('serif'), inherit: true, default: undefined, hint: 'Heading font' },
+  { label: 'Heading', model: stackModel('heading'), inherit: true, default: undefined, hint: 'Heading font' },
   { label: 'Code', model: stackModel('mono'), inherit: true, default: undefined, hint: 'Code font' }
 ]
 
@@ -109,6 +109,26 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
         </ThemeStudioRow>
       </ThemeStudioSection>
 
+      <ThemeStudioSection label="Weights" section-key="weights">
+        <ThemeStudioRow
+          v-model="bodyWeight"
+          control="slider"
+          label="Body"
+          :min="300"
+          :max="800"
+          :step="100"
+        />
+
+        <ThemeStudioRow
+          v-model="headingWeight"
+          control="slider"
+          label="Heading"
+          :min="300"
+          :max="800"
+          :step="100"
+        />
+      </ThemeStudioSection>
+
       <ThemeStudioSection label="Treatment" section-key="type">
         <!-- font-size scales every rem metric, so it belongs with the type
            decisions rather than beside radius -->
@@ -145,19 +165,6 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
           v-model="uppercase"
           control="switch"
           label="Uppercase"
-        />
-      </ThemeStudioSection>
-
-      <ThemeStudioSection label="Weights" section-key="weights">
-        <ThemeStudioRow
-          v-for="weight in weights"
-          :key="weight.label"
-          v-model="weight.model.value"
-          control="slider"
-          :label="weight.label"
-          :min="100"
-          :max="900"
-          :step="25"
         />
       </ThemeStudioSection>
     </template>

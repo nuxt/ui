@@ -8,7 +8,7 @@ export default defineTheme({
     inner: 'flex size-full flex-col overflow-hidden divide-y divide-default',
     header: 'flex items-center gap-1.5 overflow-hidden px-4 min-h-(--ui-header-height)',
     wrapper: 'min-w-0 flex-1',
-    title: 'text-strong font-semibold truncate',
+    title: 'text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold)) truncate',
     description: 'text-muted text-sm truncate',
     actions: 'flex items-center gap-1.5 shrink-0',
     close: '',

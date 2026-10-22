@@ -247,7 +247,7 @@ onMounted(() => {
       <template #left>
         <div class="flex items-center gap-1.5">
           <UIcon :name="studioIcons.saas" class="size-6 text-primary shrink-0" />
-          <span class="text-xl font-bold text-strong">SaaS</span>
+          <span class="text-xl font-heading font-(--ui-font-weight-heading,--theme(--font-weight-bold)) text-strong">SaaS</span>
         </div>
       </template>
 

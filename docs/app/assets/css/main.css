@@ -12,22 +12,10 @@
   --container-8xl: 90rem;
 
   --font-sans: 'Public Sans', sans-serif;
-  /* Tailwind's preflight wires --font-sans and --font-mono itself, nothing
-     consumes --font-serif. Defaulting it to the body stack keeps the heading
-     rule below inert until the studio sets a serif of its own. */
-  --font-serif: var(--font-sans);
 }
 
 :root {
   --ui-container: var(--container-8xl);
-}
-
-/* The live counterpart of the export's heading rule, until v5 ships
-   --ui-font-heading. In `base` so `font-mono` on an h1 still wins. */
-@layer base {
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-serif);
-  }
 }
 
 /* The studio's canvas sits recessed behind the preview card. Mixed off
