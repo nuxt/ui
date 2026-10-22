@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { upperFirst } from 'scule'
 import { keepPanels, toolbarPanelClass, FONT_WEIGHT_DEFAULTS, loadFontPreviews } from '../../../utils/theme/studio'
 import { THEME_DEFAULTS } from '../../../utils/theme/engine/types'
 
@@ -20,18 +19,23 @@ const fontLabel = computed(() => (mounted.value ? font.value : THEME_DEFAULTS.fo
 
 onMounted(() => loadFontPreviews(fonts.map(entry => entry.name)))
 
-// One writable model per tailwind weight step, the knobs components
-// actually dereference at runtime.
-function weightStepModel(step: keyof typeof FONT_WEIGHT_DEFAULTS) {
+// Body is the classless text, heading the `--ui-font-weight-heading` every
+// title reads. Unset, the heading row rests on semibold and each title keeps
+// its own step, so it gets a reset rather than a stock value.
+function weightModel(key: keyof typeof FONT_WEIGHT_DEFAULTS) {
   return computed({
-    get: () => fontPrefs.value.weights?.[step] ?? FONT_WEIGHT_DEFAULTS[step],
-    set: (value: number) => setFontPrefs({ ...fontPrefs.value, weights: { ...fontPrefs.value.weights, [step]: value } })
+    get: () => fontPrefs.value.weights?.[key] ?? FONT_WEIGHT_DEFAULTS[key],
+    set: (value: number) => setFontPrefs({ ...fontPrefs.value, weights: { ...fontPrefs.value.weights, [key]: value } })
   })
 }
 
-const WEIGHT_STEPS = ['normal', 'medium', 'semibold', 'bold'] as const
-const weightSteps = Object.fromEntries(WEIGHT_STEPS.map(step => [step, weightStepModel(step)])) as Record<typeof WEIGHT_STEPS[number], ReturnType<typeof weightStepModel>>
-const weights = WEIGHT_STEPS.map(step => ({ label: upperFirst(step), model: weightSteps[step]! }))
+const bodyWeight = weightModel('body')
+const headingWeight = weightModel('heading')
+const headingWeightSet = computed(() => fontPrefs.value.weights?.heading !== undefined)
+
+function resetHeadingWeight() {
+  setFontPrefs({ ...fontPrefs.value, weights: { ...fontPrefs.value.weights, heading: undefined } })
+}
 
 const uppercase = computed({
   get: () => !!fontPrefs.value.uppercase,
@@ -150,14 +154,24 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
 
       <ThemeStudioSection label="Weights" section-key="weights">
         <ThemeStudioRow
-          v-for="weight in weights"
-          :key="weight.label"
-          v-model="weight.model.value"
+          v-model="bodyWeight"
           control="slider"
-          :label="weight.label"
+          label="Body"
           :min="100"
           :max="900"
           :step="25"
+        />
+
+        <ThemeStudioRow
+          v-model="headingWeight"
+          control="slider"
+          label="Heading"
+          :min="100"
+          :max="900"
+          :step="25"
+          resettable
+          :dirty="headingWeightSet"
+          @reset="resetHeadingWeight"
         />
       </ThemeStudioSection>
     </template>

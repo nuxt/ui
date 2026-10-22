@@ -1,6 +1,7 @@
 import type { ThemeDoc, StoredPaletteParams, StyleOptions } from './engine'
 import { DEFAULT_COLORS, THEME_DEFAULTS } from './engine/types'
 import { SAFE_NAME } from './sanitize'
+import { FONT_WEIGHT_DEFAULTS } from './studio'
 
 /**
  * The font document: all three stacks plus the body treatment, exactly the
@@ -121,11 +122,13 @@ function normalizeFont(raw: unknown): FontPrefs | undefined {
   const mono = family(input.mono)
   if (mono) font.mono = mono
 
+  // `normal` is the body weight of the old four-step ladder, the other steps
+  // are dropped with it.
   const weights: NonNullable<FontPrefs['weights']> = {}
-  for (const step of ['normal', 'medium', 'semibold', 'bold'] as const) {
-    const weight = clamped(input.weights?.[step], 100, 900)
-    if (weight !== undefined) weights[step] = weight
-  }
+  const body = clamped(input.weights?.body ?? input.weights?.normal, 100, 900)
+  if (body !== undefined && body !== FONT_WEIGHT_DEFAULTS.body) weights.body = body
+  const heading = clamped(input.weights?.heading, 100, 900)
+  if (heading !== undefined) weights.heading = heading
   if (Object.keys(weights).length) font.weights = weights
 
   if (input.uppercase) font.uppercase = true

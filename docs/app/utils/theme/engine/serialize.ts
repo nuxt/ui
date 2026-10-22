@@ -91,14 +91,6 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explici
   }
   if (doc.font?.serif) themeLines.push(`  --font-heading: '${doc.font.serif}', var(--font-sans);`)
   if (doc.font?.mono) themeLines.push(`  --font-mono: '${doc.font.mono}', monospace;`)
-  // Weight steps are live variables in tailwind v4, so remapping them
-  // reaches every component, not just inherited text.
-  for (const step of ['normal', 'medium', 'semibold', 'bold'] as const) {
-    const weight = doc.font?.weights?.[step]
-    if (weight !== undefined) {
-      themeLines.push(`  --font-weight-${step}: ${weight};`)
-    }
-  }
   if (themeLines.length) {
     lines.push('', '@theme {', ...themeLines, '}')
   }
@@ -118,14 +110,14 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explici
     lines.push('', '@layer base {', '  html {', `    font-size: ${doc.fontSize}px;`, '  }', '}')
   }
 
-  // Classless text has no utility to dereference the weight variable, and
-  // case/tracking/leading are inherited properties. These element rules ride
+  // Classless text has no utility to set its weight, and case/tracking/leading
+  // are inherited properties. These element rules ride
   // `@layer base`: unlayered CSS outranks every layer, so a bare rule here
   // would beat the utilities too and `<body class="tracking-tight">` could
   // not override the tracking. In base they still beat preflight (same
   // layer, later source order) while utilities keep winning.
   const bodyLines: string[] = []
-  if (doc.font?.weights?.normal !== undefined) bodyLines.push(`  font-weight: ${doc.font.weights.normal};`)
+  if (doc.font?.weights?.body !== undefined) bodyLines.push(`  font-weight: ${doc.font.weights.body};`)
   if (doc.font?.uppercase) bodyLines.push('  text-transform: uppercase;')
   if (doc.font?.italic) bodyLines.push('  font-style: italic;')
   if (doc.font?.letterSpacing !== undefined) bodyLines.push(`  letter-spacing: ${doc.font.letterSpacing}em;`)
@@ -134,8 +126,11 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explici
     lines.push('', '@layer base {', '  body {', ...bodyLines.map(line => `  ${line}`), '  }', '}')
   }
 
-  if (doc.radius !== undefined && doc.radius !== THEME_DEFAULTS.radius) {
-    lines.push('', ':root {', `  --ui-radius: ${doc.radius}rem;`, '}')
+  const rootLines: string[] = []
+  if (doc.font?.weights?.heading !== undefined) rootLines.push(`  --ui-font-weight-heading: ${doc.font.weights.heading};`)
+  if (doc.radius !== undefined && doc.radius !== THEME_DEFAULTS.radius) rootLines.push(`  --ui-radius: ${doc.radius}rem;`)
+  if (rootLines.length) {
+    lines.push('', ':root {', ...rootLines, '}')
   }
 
   // `:root, .light` matches `<html class="dark">` too and lands after the

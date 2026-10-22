@@ -77,10 +77,8 @@ export function useTheme() {
     if (next.serif) clean.serif = next.serif
     if (next.mono) clean.mono = next.mono
     const weights: NonNullable<FontPrefs['weights']> = {}
-    for (const step of ['normal', 'medium', 'semibold', 'bold'] as const) {
-      const weight = next.weights?.[step]
-      if (weight !== undefined && weight !== FONT_WEIGHT_DEFAULTS[step]) weights[step] = weight
-    }
+    if (next.weights?.body !== undefined && next.weights.body !== FONT_WEIGHT_DEFAULTS.body) weights.body = next.weights.body
+    if (next.weights?.heading !== undefined) weights.heading = next.weights.heading
     if (Object.keys(weights).length) clean.weights = weights
     if (next.uppercase) clean.uppercase = true
     if (next.italic) clean.italic = true
@@ -176,13 +174,9 @@ export function useTheme() {
     if (prefs.serif && SAFE_NAME.test(prefs.serif)) parts.push(`:root { --ui-font-heading: '${prefs.serif}', var(--font-sans); }`)
     if (prefs.mono && SAFE_NAME.test(prefs.mono)) parts.push(`:root { --font-mono: '${prefs.mono}', monospace; }`)
     const weights = prefs.weights || {}
-    const weightVars = (Object.keys(weights) as Array<keyof typeof weights>)
-      .map(step => `--font-weight-${step}: ${weights[step]};`)
-    if (weightVars.length) {
-      parts.push(`:root { ${weightVars.join(' ')} }`)
-    }
+    if (weights.heading !== undefined) parts.push(`:root { --ui-font-weight-heading: ${weights.heading}; }`)
     const bodyRules: string[] = []
-    if (weights.normal !== undefined) bodyRules.push(`font-weight: ${weights.normal};`)
+    if (weights.body !== undefined) bodyRules.push(`font-weight: ${weights.body};`)
     if (prefs.uppercase) bodyRules.push('text-transform: uppercase;')
     if (prefs.italic) bodyRules.push('font-style: italic;')
     if (prefs.letterSpacing !== undefined) bodyRules.push(`letter-spacing: ${prefs.letterSpacing}em;`)
@@ -410,13 +404,13 @@ export function useTheme() {
     if (settings.fontSans !== undefined || settings.fontSerif !== undefined || settings.fontMono !== undefined
       || settings.fontWeights !== undefined || settings.fontBody !== undefined) {
       const current = fontPrefs.value
-      // merged over the current map: a payload naming only `bold` must not clear the rest
+      // merged over the current map: a payload naming only `heading` must not clear the body
       const rawWeights = { ...current.weights, ...(settings.fontWeights && typeof settings.fontWeights === 'object' ? settings.fontWeights : {}) }
       const weights: NonNullable<FontPrefs['weights']> = {}
-      for (const step of ['normal', 'medium', 'semibold', 'bold'] as const) {
-        const weight = clamped(rawWeights[step], 100, 900)
-        if (weight !== undefined) weights[step] = weight
-      }
+      const bodyWeight = clamped(rawWeights.body, 100, 900)
+      if (bodyWeight !== undefined) weights.body = bodyWeight
+      const headingWeight = clamped(rawWeights.heading, 100, 900)
+      if (headingWeight !== undefined) weights.heading = headingWeight
       const body = settings.fontBody && typeof settings.fontBody === 'object' ? settings.fontBody : undefined
       // Absent OR unusable keeps what is set: a rejected name must not read
       // as "clear this slot".

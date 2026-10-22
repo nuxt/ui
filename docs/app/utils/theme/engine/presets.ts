@@ -215,8 +215,8 @@ export const presets: ThemePreset[] = [{
       neutral: 'olive'
     },
     radius: 0.75,
-    // a step heavier across the ladder, Nunito reads thin at stock weights
-    font: { sans: 'Nunito', weights: { normal: 500, medium: 600, semibold: 700, bold: 800 } },
+    // a step heavier, Nunito reads thin at stock weights
+    font: { sans: 'Nunito', weights: { body: 500, heading: 800 } },
     icons: 'iconoir',
     style: {
       defaults: { size: 'lg', variants: { inputs: 'soft' } },
@@ -262,7 +262,7 @@ export const presets: ThemePreset[] = [{
       neutral: 'neutral'
     },
     radius: 0,
-    font: { sans: 'Inter', weights: { semibold: 700, bold: 800 } },
+    font: { sans: 'Inter', weights: { heading: 700 } },
     icons: 'material',
     style: {
       defaults: { variants: { inputs: 'soft' } },

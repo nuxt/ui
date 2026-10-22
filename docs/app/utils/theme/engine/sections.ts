@@ -138,9 +138,13 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
         mono: font.mono ?? null
       }
     }
-    case 'weights':
-      return Object.fromEntries(Object.entries(doc.font?.weights ?? {})
-        .filter(([step, weight]) => weight !== FONT_WEIGHT_DEFAULTS[step as keyof typeof FONT_WEIGHT_DEFAULTS]))
+    case 'weights': {
+      const weights = doc.font?.weights ?? {}
+      return {
+        body: weights.body !== undefined && weights.body !== FONT_WEIGHT_DEFAULTS.body ? weights.body : null,
+        heading: weights.heading ?? null
+      }
+    }
     case 'type': {
       const font = doc.font ?? {}
       return {

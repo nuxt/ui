@@ -70,10 +70,10 @@ export interface ThemeDoc {
     serif?: string
     mono?: string
     /**
-     * Sparse overrides for tailwind's weight steps (`font-medium` compiles to
-     * `var(--font-weight-medium)`); normal also drives classless body text.
+     * `body` is the weight of classless body text, `heading` sets
+     * `--ui-font-weight-heading`, which every title reads before its own step.
      */
-    weights?: { normal?: number, medium?: number, semibold?: number, bold?: number }
+    weights?: { body?: number, heading?: number }
     uppercase?: boolean
     italic?: boolean
     /** Tracking in em. */

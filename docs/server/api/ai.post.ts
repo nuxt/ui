@@ -85,7 +85,7 @@ const applyTheme = tool({
       error: { type: 'string', description: 'Error color name' },
       radius: { type: 'number', description: 'Border radius in rem: 0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75' },
       fontSans: { type: 'string', description: 'Body font family (tailwind\'s --font-sans), the one every element inherits. Any Google Font works, and it does not have to be a sans (e.g. Public Sans, DM Sans, Geist, Inter, Poppins, Outfit, Playfair Display).' },
-      fontSerif: { type: 'string', description: 'Heading font family (tailwind\'s --font-serif; h1–h6 follow it). Any Google Font. Omit to keep headings on the body font.' },
+      fontSerif: { type: 'string', description: 'Heading font family (sets --font-heading; h1–h6 and component titles follow it). Any Google Font. Omit to keep headings on the body font.' },
       fontMono: { type: 'string', description: 'Code font family (tailwind\'s --font-mono; code, kbd, pre and samp follow it). Any Google Font.' },
       icons: { type: 'string', description: 'Icon set for live preview: lucide (default), bootstrap, heroicons, iconoir, material, phosphor, pixelarticons, remix or tabler. For exported code, any Iconify icon set can be suggested.' },
       customColors: {
@@ -303,7 +303,7 @@ In the code you show, these go on a \`<UTheme>\` around \`<UApp>\` in \`app.vue\
   - **0.75** — pill-like
 - Fonts: three independent stacks, any Google Font works and \`@nuxt/fonts\` auto-loads it.
   - \`fontSans\` — the body face everything inherits. Despite the name it takes any face, a serif body is a valid choice.
-  - \`fontSerif\` — headings (h1–h6) follow it. Set it only when you want headings to differ from the body; omit it and they match.
+  - \`fontSerif\` — headings (h1–h6 and component titles) follow it. Set it only when you want headings to differ from the body; omit it and they match.
   - \`fontMono\` — code, kbd, pre and samp follow it.
   Pick faces that match the theme's personality:
   - Sans-serif (clean/modern): Inter, DM Sans, Geist, Public Sans, Outfit, Plus Jakarta Sans, Space Grotesk
