@@ -65,23 +65,20 @@ export default defineTheme({
       true: { base: 'pe-0', trailing: 'pe-0' },
       false: ''
     },
+    // The value is centered between the two buttons only
     decrement: {
       true: { base: 'ps-0', leading: 'ps-0' },
-      false: ''
+      false: { base: 'text-start' }
     },
-    // Next to a leading or a trailing, the padding of the input is the gap to it
+    // Next to a leading or a trailing, the padding of the input is the gap to it,
+    // and the value sits against it
     leading: {
-      true: { base: 'ps-(--ui-control-gap)' }
+      true: { base: 'ps-(--ui-control-gap) text-start' }
     },
     trailing: {
-      true: { base: 'pe-(--ui-control-gap)' }
+      true: { base: 'pe-(--ui-control-gap) text-end' }
     }
   },
-  compoundVariants: [{
-    orientation: 'horizontal',
-    decrement: false,
-    class: { base: 'text-start' }
-  }],
   defaultVariants: {
     size: 'md',
     color: 'primary',
