@@ -115,17 +115,37 @@ watchEffect(() => {
 
 const canClear = computed(() => messages.value.length > 0)
 
+// Messages sent while a response streams wait here, the AI SDK would
+// otherwise start a second request next to the current one.
+const queue = ref<string[]>([])
+
+function send(text: string) {
+  track('AI Chat Message Sent')
+
+  sendMessage({ text, metadata: { currentPage: currentPage.value } })
+}
+
 function onSubmit() {
-  if (!input.value.trim()) {
+  const text = input.value.trim()
+  if (!text) {
     return
   }
 
-  track('AI Chat Message Sent')
-
-  sendMessage({ text: input.value, metadata: { currentPage: currentPage.value } })
-
   input.value = ''
+
+  if (status.value === 'submitted' || status.value === 'streaming') {
+    queue.value.push(text)
+    return
+  }
+
+  send(text)
 }
+
+watch(status, (value) => {
+  if (value === 'ready' && queue.value.length) {
+    send(queue.value.shift()!)
+  }
+})
 
 // Sync external messages (e.g. from search→chat flow) into the chat instance.
 // When the last synced message is from the user, auto-regenerate the assistant response.
@@ -261,6 +281,7 @@ function clearMessages() {
   }
   messages.value = []
   chatMessages.value = []
+  queue.value = []
   _themeApplied.clear()
 }
 </script>
@@ -400,7 +421,6 @@ function clearMessages() {
       <UChatPrompt
         ref="promptRef"
         v-model="input"
-        :status="status"
         :error="error"
         placeholder="Ask me anything..."
         variant="naked"
@@ -409,6 +429,22 @@ function clearMessages() {
         class="px-4"
         @submit="onSubmit"
       >
+        <template v-if="queue.length" #header>
+          <ul class="flex flex-col gap-1 w-full">
+            <li v-for="(text, index) in queue" :key="index" class="flex items-center gap-2 text-xs text-muted">
+              <span class="truncate flex-1">{{ text }}</span>
+              <UButton
+                :icon="appConfig.ui.icons.close"
+                color="neutral"
+                variant="ghost"
+                size="xs"
+                aria-label="Remove from queue"
+                @click="queue.splice(index, 1)"
+              />
+            </li>
+          </ul>
+        </template>
+
         <template #footer>
           <ULink to="https://vercel.com/ai-gateway" target="_blank" class="inline-flex items-center gap-1 text-xs text-dimmed hover:text-muted">
             Powered by <UIcon name="i-simple-icons-vercel" class="size-3" /> AI Gateway

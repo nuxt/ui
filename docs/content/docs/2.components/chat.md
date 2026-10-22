@@ -588,6 +588,127 @@ html.dark .shiki span {
 ```
 ::
 
+### Queued messages
+
+The AI SDK doesn't queue messages: calling `sendMessage` during a response starts a second request next to the current one. Passing `status` to `UChatPrompt` ignores submits while the chat is `submitted` or `streaming`. To let users send their next message anyway, leave it off, keep the text in a queue and send it once the chat is `ready` again:
+
+::framework-only
+#nuxt
+```vue
+<script setup lang="ts">
+import { useChat } from '@ai-sdk/vue'
+
+const input = ref('')
+const queue = ref<string[]>([])
+
+const { status, error, sendMessage, regenerate, stop } = useChat()
+
+function onSubmit() {
+  const text = input.value.trim()
+  if (!text) {
+    return
+  }
+
+  input.value = ''
+
+  if (status.value === 'submitted' || status.value === 'streaming') {
+    queue.value.push(text)
+    return
+  }
+
+  sendMessage({ text })
+}
+
+watch(status, (value) => {
+  if (value === 'ready' && queue.value.length) {
+    sendMessage({ text: queue.value.shift()! })
+  }
+})
+</script>
+
+<template>
+  <UChatPrompt v-model="input" :error="error" @submit="onSubmit">
+    <template v-if="queue.length" #header>
+      <ul class="flex flex-col gap-1 w-full">
+        <li v-for="(text, index) in queue" :key="index" class="flex items-center gap-2 text-sm text-muted">
+          <span class="truncate flex-1">{{ text }}</span>
+          <UButton
+            icon="i-lucide-x"
+            color="neutral"
+            variant="ghost"
+            size="xs"
+            aria-label="Remove from queue"
+            @click="queue.splice(index, 1)"
+          />
+        </li>
+      </ul>
+    </template>
+
+    <UChatPromptSubmit :status="status" @stop="stop()" @reload="regenerate()" />
+  </UChatPrompt>
+</template>
+```
+
+#vue
+```vue
+<script setup lang="ts">
+import { ref, watch } from 'vue'
+import { useChat } from '@ai-sdk/vue'
+
+const input = ref('')
+const queue = ref<string[]>([])
+
+const { status, error, sendMessage, regenerate, stop } = useChat()
+
+function onSubmit() {
+  const text = input.value.trim()
+  if (!text) {
+    return
+  }
+
+  input.value = ''
+
+  if (status.value === 'submitted' || status.value === 'streaming') {
+    queue.value.push(text)
+    return
+  }
+
+  sendMessage({ text })
+}
+
+watch(status, (value) => {
+  if (value === 'ready' && queue.value.length) {
+    sendMessage({ text: queue.value.shift()! })
+  }
+})
+</script>
+
+<template>
+  <UChatPrompt v-model="input" :error="error" @submit="onSubmit">
+    <template v-if="queue.length" #header>
+      <ul class="flex flex-col gap-1 w-full">
+        <li v-for="(text, index) in queue" :key="index" class="flex items-center gap-2 text-sm text-muted">
+          <span class="truncate flex-1">{{ text }}</span>
+          <UButton
+            icon="i-lucide-x"
+            color="neutral"
+            variant="ghost"
+            size="xs"
+            aria-label="Remove from queue"
+            @click="queue.splice(index, 1)"
+          />
+        </li>
+      </ul>
+    </template>
+
+    <UChatPromptSubmit :status="status" @stop="stop()" @reload="regenerate()" />
+  </UChatPrompt>
+</template>
+```
+::
+
+Stopping the response sends the next queued message right away, while an `error` status keeps the queue until the chat is `ready` again.
+
 ::note{to="/blog/how-to-build-an-ai-chat"}
 Read the full **Build an AI Chatbot** tutorial for a step-by-step guide.
 ::
