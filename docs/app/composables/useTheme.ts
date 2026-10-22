@@ -171,7 +171,7 @@ export function useTheme() {
     const safeFont = prefs.sans && SAFE_NAME.test(prefs.sans) ? prefs.sans : 'Public Sans'
     const parts = [`:root { --font-sans: '${safeFont}', sans-serif; }`]
     // The stacks themselves, so the headings and `font-mono` follow the theme.
-    if (prefs.heading && SAFE_NAME.test(prefs.heading)) parts.push(`:root { --ui-font-heading: '${prefs.heading}', var(--font-sans); }`)
+    if (prefs.heading && SAFE_NAME.test(prefs.heading)) parts.push(`:root { --font-heading: '${prefs.heading}', var(--font-sans); }`)
     if (prefs.mono && SAFE_NAME.test(prefs.mono)) parts.push(`:root { --font-mono: '${prefs.mono}', monospace; }`)
     const weights = prefs.weights || {}
     const weightVars: string[] = []
@@ -187,7 +187,7 @@ export function useTheme() {
       parts.push(`body { ${bodyRules.join(' ')} }`)
     }
     // No element rules here: preflight points `code`/`kbd`/`pre`/`samp` at
-    // --font-mono, and Nuxt UI points h1–h6 at --ui-font-heading.
+    // --font-mono, and Nuxt UI points h1–h6 at --font-heading.
     return parts.join(' ')
   })
   const customColorsStyle = computed(() => {

@@ -20,7 +20,7 @@
     }
   }
 
-  /* `--ui-font-heading` is unset, so headings inherit the body font until it is set */
+  /* Headings inherit the body font until `--font-heading` is set */
   h1, h2, h3, h4, h5, h6 {
     font-family: --theme(--font-heading);
   }

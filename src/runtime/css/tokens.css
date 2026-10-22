@@ -102,7 +102,6 @@
   --radius-xl: calc(var(--ui-radius) * 3);
   --radius-2xl: calc(var(--ui-radius) * 4);
   --radius-3xl: calc(var(--ui-radius) * 6);
-  --font-heading: var(--ui-font-heading);
   --text-color-strong: var(--ui-text-strong);
   --text-color-default: var(--ui-text-default);
   --text-color-muted: var(--ui-text-muted);
@@ -157,4 +156,11 @@
   --stroke-default: var(--ui-layer-border-default, var(--ui-border-default));
   --fill-bg: var(--ui-layer-bg-default, var(--ui-bg-default));
   --fill-default: var(--ui-layer-border-default, var(--ui-border-default));
+}
+
+/* Not inline, so `--font-heading` is a real variable an app can set at
+   runtime or on a part of the page. `--ui-font-heading` is never set: it
+   leaves `--font-heading` invalid, so headings inherit the body font. */
+@theme default {
+  --font-heading: var(--ui-font-heading);
 }

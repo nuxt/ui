@@ -186,7 +186,7 @@ export default defineNuxtPlugin({
               var headingName = typeof prefs.heading === 'string' ? prefs.heading : prefs.serif;
               var heading = (headingName && SAFE.test(headingName)) ? headingName : undefined;
               var mono = (prefs.mono && SAFE.test(prefs.mono)) ? prefs.mono : undefined;
-              if (heading) { css += ' :root { --ui-font-heading: \\'' + heading + '\\', var(--font-sans); }'; }
+              if (heading) { css += ' :root { --font-heading: \\'' + heading + '\\', var(--font-sans); }'; }
               if (mono) { css += ' :root { --font-mono: \\'' + mono + '\\', monospace; }'; }
               var w = prefs.weights || {};
               var wb = num(w.body, 100, 900);

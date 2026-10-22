@@ -8,7 +8,7 @@ import { THEME_DEFAULTS } from '../../../utils/theme/engine/types'
  *
  * The stacks are what tailwind reads. Mono needs nothing else (preflight
  * points `code`/`kbd`/`pre`/`samp` at it) and the heading one sets
- * `--ui-font-heading`.
+ * `--font-heading`.
  */
 const { fonts, font, fontPrefs, setFontPrefs, fontSize } = useTheme()
 
