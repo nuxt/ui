@@ -31,5 +31,14 @@ const value = ref(50)
     <UInputNumber placeholder="Highlight" highlight :orientation="orientation" v-bind="props" />
     <UInputNumber placeholder="Disabled" disabled :orientation="orientation" v-bind="props" />
     <UInputNumber placeholder="Required" required :orientation="orientation" v-bind="props" />
+    <UInputNumber :default-value="16" :orientation="orientation" v-bind="props">
+      <template #leading>
+        <UIcon name="i-lucide-ruler" class="size-(--ui-control-icon) text-faint" />
+      </template>
+
+      <template #trailing>
+        <span class="text-muted">px</span>
+      </template>
+    </UInputNumber>
   </Matrix>
 </template>

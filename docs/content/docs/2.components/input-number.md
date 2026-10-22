@@ -286,6 +286,16 @@ name: 'input-number-currency-example'
 ---
 ::
 
+### With a unit
+
+Use the `#leading` and `#trailing` slots to display a unit that `format-options` doesn't cover. It stays out of the value.
+
+::component-example
+---
+name: 'input-number-unit-example'
+---
+::
+
 ### Without buttons
 
 You can use the `increment` and `decrement` props to control visibility of the buttons.
