@@ -15,7 +15,7 @@ const to = ref('savings')
   <div>
     <div class="p-4 space-y-4">
       <div>
-        <p class="font-semibold text-strong">
+        <p class="font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold)) text-strong">
           Transfer funds
         </p>
         <p class="text-sm text-muted">

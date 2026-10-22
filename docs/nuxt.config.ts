@@ -427,7 +427,7 @@ export default defineNuxtConfig({
   // which takumi can't take, and the static fallback download never lands.
   fonts: {
     families: [
-      { name: 'Public Sans', provider: 'fontsource', weights: [400, 500, 600, 700], global: true },
+      { name: 'Public Sans', provider: 'fontsource', weights: [300, 400, 500, 600, 700, 800], global: true },
       { name: 'Geist Mono', provider: 'fontsource', weights: [400], global: true }
     ]
   },

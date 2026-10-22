@@ -74,13 +74,11 @@ export function useTheme() {
     // Normalize: defaults are absences, so hasChanges/export stay clean.
     const clean: FontPrefs = {}
     if (next.sans && next.sans !== THEME_DEFAULTS.font) clean.sans = next.sans
-    if (next.serif) clean.serif = next.serif
+    if (next.heading) clean.heading = next.heading
     if (next.mono) clean.mono = next.mono
     const weights: NonNullable<FontPrefs['weights']> = {}
-    for (const step of ['normal', 'medium', 'semibold', 'bold'] as const) {
-      const weight = next.weights?.[step]
-      if (weight !== undefined && weight !== FONT_WEIGHT_DEFAULTS[step]) weights[step] = weight
-    }
+    if (next.weights?.body !== undefined && next.weights.body !== FONT_WEIGHT_DEFAULTS.body) weights.body = next.weights.body
+    if (next.weights?.heading !== undefined) weights.heading = next.weights.heading
     if (Object.keys(weights).length) clean.weights = weights
     if (next.uppercase) clean.uppercase = true
     if (next.italic) clean.italic = true
@@ -172,17 +170,15 @@ export function useTheme() {
     const prefs = fontPrefs.value
     const safeFont = prefs.sans && SAFE_NAME.test(prefs.sans) ? prefs.sans : 'Public Sans'
     const parts = [`:root { --font-sans: '${safeFont}', sans-serif; }`]
-    // The stacks themselves, so `font-serif` / `font-mono` follow the theme.
-    if (prefs.serif && SAFE_NAME.test(prefs.serif)) parts.push(`:root { --font-serif: '${prefs.serif}', serif; }`)
+    // The stacks themselves, so the headings and `font-mono` follow the theme.
+    if (prefs.heading && SAFE_NAME.test(prefs.heading)) parts.push(`:root { --font-heading: '${prefs.heading}', var(--font-sans); }`)
     if (prefs.mono && SAFE_NAME.test(prefs.mono)) parts.push(`:root { --font-mono: '${prefs.mono}', monospace; }`)
     const weights = prefs.weights || {}
-    const weightVars = (Object.keys(weights) as Array<keyof typeof weights>)
-      .map(step => `--font-weight-${step}: ${weights[step]};`)
-    if (weightVars.length) {
-      parts.push(`:root { ${weightVars.join(' ')} }`)
-    }
+    const weightVars: string[] = []
+    if (weights.body !== undefined) weightVars.push(`--ui-font-weight-body: ${weights.body};`)
+    if (weights.heading !== undefined) weightVars.push(`--ui-font-weight-heading: ${weights.heading};`)
+    if (weightVars.length) parts.push(`:root { ${weightVars.join(' ')} }`)
     const bodyRules: string[] = []
-    if (weights.normal !== undefined) bodyRules.push(`font-weight: ${weights.normal};`)
     if (prefs.uppercase) bodyRules.push('text-transform: uppercase;')
     if (prefs.italic) bodyRules.push('font-style: italic;')
     if (prefs.letterSpacing !== undefined) bodyRules.push(`letter-spacing: ${prefs.letterSpacing}em;`)
@@ -191,9 +187,7 @@ export function useTheme() {
       parts.push(`body { ${bodyRules.join(' ')} }`)
     }
     // No element rules here: preflight points `code`/`kbd`/`pre`/`samp` at
-    // --font-mono, and the h1–h6 rule that reads --font-serif lives in
-    // main.css, inside `@layer base` so `font-mono` on a heading still wins.
-    // Injected here it would be unlayered, and outrank every utility.
+    // --font-mono, and Nuxt UI points h1–h6 at --font-heading.
     return parts.join(' ')
   })
   const customColorsStyle = computed(() => {
@@ -233,7 +227,7 @@ export function useTheme() {
   const link = computed(() => {
     // Same guard as fontStyle's, so a name the stylesheet refuses can't still
     // cost a Google Fonts request.
-    const names = new Set([fontPrefs.value.sans, fontPrefs.value.serif, fontPrefs.value.mono].filter((name): name is string => !!name && name !== 'Public Sans' && SAFE_NAME.test(name)))
+    const names = new Set([fontPrefs.value.sans, fontPrefs.value.heading, fontPrefs.value.mono].filter((name): name is string => !!name && name !== 'Public Sans' && SAFE_NAME.test(name)))
     return [...names].map(fontLink)
   })
 
@@ -409,16 +403,16 @@ export function useTheme() {
     // the payload leaves out has to fall back to what is already set. A
     // payload naming only the heading font would otherwise clear the rest,
     // the body family included.
-    if (settings.fontSans !== undefined || settings.fontSerif !== undefined || settings.fontMono !== undefined
+    if (settings.fontSans !== undefined || settings.fontHeading !== undefined || settings.fontMono !== undefined
       || settings.fontWeights !== undefined || settings.fontBody !== undefined) {
       const current = fontPrefs.value
-      // merged over the current map: a payload naming only `bold` must not clear the rest
+      // merged over the current map: a payload naming only `heading` must not clear the body
       const rawWeights = { ...current.weights, ...(settings.fontWeights && typeof settings.fontWeights === 'object' ? settings.fontWeights : {}) }
       const weights: NonNullable<FontPrefs['weights']> = {}
-      for (const step of ['normal', 'medium', 'semibold', 'bold'] as const) {
-        const weight = clamped(rawWeights[step], 100, 900)
-        if (weight !== undefined) weights[step] = weight
-      }
+      const bodyWeight = clamped(rawWeights.body, 100, 900)
+      if (bodyWeight !== undefined) weights.body = bodyWeight
+      const headingWeight = clamped(rawWeights.heading, 100, 900)
+      if (headingWeight !== undefined) weights.heading = headingWeight
       const body = settings.fontBody && typeof settings.fontBody === 'object' ? settings.fontBody : undefined
       // Absent OR unusable keeps what is set: a rejected name must not read
       // as "clear this slot".
@@ -426,7 +420,7 @@ export function useTheme() {
         typeof value === 'string' && SAFE_NAME.test(value) ? value : fallback
       setFontPrefs({
         sans: family(settings.fontSans, current.sans),
-        serif: family(settings.fontSerif, current.serif),
+        heading: family(settings.fontHeading, current.heading),
         mono: family(settings.fontMono, current.mono),
         weights,
         uppercase: body ? !!body.uppercase : current.uppercase,
