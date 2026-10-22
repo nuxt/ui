@@ -14,7 +14,8 @@ import type { SectionKey, ThemeDoc, ThemePreset, PaletteCurveParams, PaletteEffe
  * The library hardcodes three tokens to `white` (light `--ui-bg-default`
  * and `--ui-text-contrast`, dark `--ui-text-strong`), so a tinted neutral
  * ramp would never reach them. Choosing a neutral re-routes all three
- * through the ramp, with the values the presets' tintedNeutral carries.
+ * through the ramp, and steps the light surfaces one deeper to keep them off
+ * the tinted page, with the values the presets' tintedNeutral carries.
  */
 const NEUTRAL_TOKEN_REMAPS = styleTokens({ tokenShades: tintedNeutralBase })
 
@@ -60,8 +61,8 @@ export function useThemeStudio() {
     const previousStyle = style.value
     const previous = styleTokens(previousStyle)
     // Whether the neutral remaps are in effect, read BEFORE the removal
-    // below can take one of them out. Both modes are probed together: light
-    // has only two remapped tokens, and a user can own both.
+    // below can take one of them out. Both modes are probed together: a user
+    // can own every remapped token of one mode.
     const remapsActive = (['light', 'dark'] as const).some(neutralRemapsActive)
     style.value = { ...style.value, ...options }
 

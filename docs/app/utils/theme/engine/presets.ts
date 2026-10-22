@@ -11,10 +11,14 @@ export interface ThemePreset {
  * The three tokens the library pins to white, routed through the neutral ramp
  * the way picking a neutral in the studio does (selectPalette's remaps), so a
  * tinted ramp reaches the page and the export reproduces the preview. The
- * studio writes its remaps from this table too.
+ * light surfaces step one deeper with the page: on 50, the stock 100 is a
+ * shade or two of lightness off it, and the hover tint, soft at half
+ * opacity, disappears. The studio writes its remaps from this table too.
  */
 export const tintedNeutralBase = {
   '--ui-bg-default': { light: 50 },
+  '--ui-bg-soft': { light: 200 },
+  '--ui-bg-strong': { light: 300 },
   '--ui-text-contrast': { light: 50 },
   '--ui-text-strong': { dark: 50 }
 } satisfies StyleOptions['tokenShades']
@@ -53,7 +57,10 @@ export const presets: ThemePreset[] = [{
     style: {
       tokenShades: {
         '--ui-primary': { light: 'black', dark: 200 },
+        // dark surfaces step from the 950 page like Crimson's
         '--ui-bg-default': { dark: 950 },
+        '--ui-bg-soft': { dark: 900 },
+        '--ui-bg-strong': { dark: 800 },
         '--ui-text-default': { light: 'black', dark: 50 },
         '--ui-text-strong': { light: 'black', dark: 50 },
         '--ui-text-contrast': { light: 50 },
@@ -132,12 +139,15 @@ export const presets: ThemePreset[] = [{
         '--ui-info': { dark: 500 },
         '--ui-warning': { dark: 500 },
         '--ui-error': { dark: 500 },
-        // Light rides the gray ramp one step deeper than stock.
+        // Light rides the gray ramp one step deeper than stock, the text two
+        // for faint and muted: the ramp's mid stops are too light to read.
+        // Dark text steps the other way, those stops would put muted next to
+        // the default text.
         '--ui-bg-default': { light: 100 },
         '--ui-bg-soft': { light: 200 },
         '--ui-bg-strong': { light: 300 },
-        '--ui-text-faint': { light: 600 },
-        '--ui-text-muted': { light: 600 },
+        '--ui-text-faint': { light: 600, dark: 600 },
+        '--ui-text-muted': { light: 700, dark: 500 },
         '--ui-text-default': { light: 800, dark: 300 },
         '--ui-border-default': { light: 400 },
         // field outlines match the border, the stock 300 would be lighter than it
@@ -193,10 +203,13 @@ export const presets: ThemePreset[] = [{
     font: { sans: 'Figtree' },
     icons: 'material',
     style: {
+      // ink's 900 sits barely above its 950, so dark surfaces skip a step
       tokenShades: {
         '--ui-bg-default': { dark: 950 },
-        '--ui-bg-soft': { dark: 900 },
-        '--ui-bg-strong': { dark: 800 }
+        '--ui-bg-soft': { dark: 800 },
+        '--ui-bg-strong': { dark: 700 },
+        // field outlines match the border in light, ink's 300 is a big step darker
+        '--ui-border-strong': { light: 200 }
       }
     },
     // the radius ladder stops at 0.75rem, the pill has to come from the slot
@@ -271,10 +284,10 @@ export const presets: ThemePreset[] = [{
         // 600 is the deep cinema red, 500 leans orange; dark holds it rather
         // than lifting to the salmon 400
         '--ui-primary': { light: 600, dark: 500 },
-        // light restates tintedNeutral's step: this key replaces it wholesale
+        // light restates tintedNeutral's steps: these keys replace them wholesale
         '--ui-bg-default': { light: 50, dark: 950 },
-        '--ui-bg-soft': { dark: 900 },
-        '--ui-bg-strong': { dark: 800 }
+        '--ui-bg-soft': { light: 200, dark: 900 },
+        '--ui-bg-strong': { light: 300, dark: 800 }
       }
     }
   }
@@ -369,13 +382,13 @@ export const presets: ThemePreset[] = [{
       defaults: { variants: { panels: 'subtle', inputs: 'subtle' } },
       tokenShades: {
         '--ui-bg-default': { light: 50, dark: 800 },
-        '--ui-bg-soft': { light: 300, dark: 700 },
-        '--ui-bg-strong': { light: 400, dark: 600 },
+        '--ui-bg-soft': { light: 200, dark: 700 },
+        '--ui-bg-strong': { light: 300, dark: 600 },
         '--ui-text-contrast': { light: 50 },
-        '--ui-text-faint': { light: 500, dark: 400 },
-        '--ui-text-muted': { light: 800, dark: 300 },
-        '--ui-text-default': { light: 900 },
-        '--ui-text-strong': { light: 950, dark: 100 },
+        '--ui-text-faint': { light: 400, dark: 500 },
+        '--ui-text-muted': { light: 600, dark: 400 },
+        '--ui-text-default': { light: 800 },
+        '--ui-text-strong': { light: 950, dark: 50 },
         // Light keeps the ink hairline; dark has to run the other way, a
         // border below the surface's own lightness just reads as a seam.
         '--ui-border-default': { light: 950, dark: 600 },
@@ -415,7 +428,13 @@ export const presets: ThemePreset[] = [{
     font: { sans: 'Poppins' },
     icons: 'phosphor',
     style: {
-      tokenShades: tintedNeutral()
+      tokenShades: {
+        ...tintedNeutral(),
+        // the ramp's light end is spaced wider than tailwind's, the stock
+        // surfaces already sit clear of its 50
+        '--ui-bg-soft': { light: 100 },
+        '--ui-bg-strong': { light: 200 }
+      }
     }
   }
 }, {
@@ -469,14 +488,13 @@ export const presets: ThemePreset[] = [{
     // Surfaces and borders stepped one deeper to hold on the tinted cream
     // page. Soft has to stay below the page: the library's hover and
     // highlight tint is bg-soft at half opacity, a lighter soft vanishes
-    // into it. Dark holds the clay at 500 and keeps one flat surface: strong
-    // sits on the same 800 as soft.
+    // into it. Dark holds the clay at 500.
     style: {
       tokenShades: {
         '--ui-primary': { dark: 500 },
         '--ui-bg-default': { light: 100 },
         '--ui-bg-soft': { light: 200 },
-        '--ui-bg-strong': { light: 300, dark: 800 },
+        '--ui-bg-strong': { light: 300 },
         '--ui-border-default': { light: 300 },
         '--ui-border-strong': { light: 400 }
       }
