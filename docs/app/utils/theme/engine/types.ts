@@ -62,12 +62,11 @@ export interface ThemeDoc {
   /** Root font size in px (`html { font-size }`), scales every rem-based metric */
   fontSize?: number
   font?: {
+    /** `--font-sans`, the body font. */
     sans?: string
-    /**
-     * Tailwind's other two stacks. `serif` doubles as the heading family,
-     * see generateCSS.
-     */
-    serif?: string
+    /** `--font-heading`, the font of the headings and component titles. */
+    heading?: string
+    /** `--font-mono`, the code font. */
     mono?: string
     /**
      * `body` sets `--ui-font-weight-body`, the weight of the body text, and
@@ -446,7 +445,7 @@ export function resolveShade(doc: ThemeDoc, palette: string, shade: Shade): stri
 export function isDefaultTheme(doc: ThemeDoc): boolean {
   return !doc.palettes && !doc.colors && !doc.tokens
     && doc.radius === undefined && doc.fontSize === undefined
-    && !doc.font?.sans && !doc.font?.serif && !doc.font?.mono && !doc.font?.weights
+    && !doc.font?.sans && !doc.font?.heading && !doc.font?.mono && !doc.font?.weights
     && !doc.font?.uppercase && !doc.font?.italic
     && doc.font?.letterSpacing === undefined && doc.font?.lineHeight === undefined
     && !doc.icons && !doc.components
@@ -468,9 +467,13 @@ export function docToSettings(doc: ThemeDoc): Record<string, any> {
   if (doc.radius !== undefined) settings.radius = doc.radius
   if (doc.fontSize !== undefined) settings.fontSize = doc.fontSize
   if (doc.font?.sans) settings.fontSans = doc.font.sans
-  if (doc.font?.serif) settings.fontSerif = doc.font.serif
+  // `serif` and the `normal` weight are how links made before the heading
+  // variables spell them
+  const legacy = doc.font as { serif?: string, weights?: { normal?: number } } | undefined
+  const heading = doc.font?.heading ?? legacy?.serif
+  if (heading) settings.fontHeading = heading
   if (doc.font?.mono) settings.fontMono = doc.font.mono
-  if (doc.font?.weights) settings.fontWeights = doc.font.weights
+  if (doc.font?.weights) settings.fontWeights = legacy?.weights?.normal !== undefined ? { body: legacy.weights.normal, ...doc.font.weights } : doc.font.weights
   if (doc.font?.uppercase || doc.font?.italic || doc.font?.letterSpacing !== undefined || doc.font?.lineHeight !== undefined) {
     settings.fontBody = { uppercase: doc.font.uppercase, italic: doc.font.italic, letterSpacing: doc.font.letterSpacing, lineHeight: doc.font.lineHeight }
   }

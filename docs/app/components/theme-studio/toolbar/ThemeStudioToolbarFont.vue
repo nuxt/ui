@@ -7,8 +7,8 @@ import { THEME_DEFAULTS } from '../../../utils/theme/engine/types'
  * treatment that rides on them.
  *
  * The stacks are what tailwind reads. Mono needs nothing else (preflight
- * points `code`/`kbd`/`pre`/`samp` at it) and the heading stack, stored as
- * `serif`, sets `--ui-font-heading`.
+ * points `code`/`kbd`/`pre`/`samp` at it) and the heading one sets
+ * `--ui-font-heading`.
  */
 const { fonts, font, fontPrefs, setFontPrefs, fontSize } = useTheme()
 
@@ -53,11 +53,10 @@ const lineHeight = computed({
 })
 
 /**
- * Tailwind's other two stacks, labelled by what they drive rather than by
- * their variable. `undefined` (not the string) is inherit, so an untouched
+ * The heading and code stacks. `undefined` (not the string) is inherit, so an untouched
  * row exports clean; the body stack always resolves, so it has no inherit.
  */
-function stackModel(key: 'serif' | 'mono') {
+function stackModel(key: 'heading' | 'mono') {
   return computed({
     get: () => fontPrefs.value[key] ?? 'inherit',
     set: (value: string) => setFontPrefs({ ...fontPrefs.value, [key]: value === 'inherit' ? undefined : value })
@@ -66,7 +65,7 @@ function stackModel(key: 'serif' | 'mono') {
 
 const stacks = [
   { label: 'Body', model: font, inherit: false, default: 'Public Sans', hint: 'Body font' },
-  { label: 'Heading', model: stackModel('serif'), inherit: true, default: undefined, hint: 'Heading font' },
+  { label: 'Heading', model: stackModel('heading'), inherit: true, default: undefined, hint: 'Heading font' },
   { label: 'Code', model: stackModel('mono'), inherit: true, default: undefined, hint: 'Code font' }
 ]
 

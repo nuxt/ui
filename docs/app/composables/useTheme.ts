@@ -74,7 +74,7 @@ export function useTheme() {
     // Normalize: defaults are absences, so hasChanges/export stay clean.
     const clean: FontPrefs = {}
     if (next.sans && next.sans !== THEME_DEFAULTS.font) clean.sans = next.sans
-    if (next.serif) clean.serif = next.serif
+    if (next.heading) clean.heading = next.heading
     if (next.mono) clean.mono = next.mono
     const weights: NonNullable<FontPrefs['weights']> = {}
     if (next.weights?.body !== undefined && next.weights.body !== FONT_WEIGHT_DEFAULTS.body) weights.body = next.weights.body
@@ -171,7 +171,7 @@ export function useTheme() {
     const safeFont = prefs.sans && SAFE_NAME.test(prefs.sans) ? prefs.sans : 'Public Sans'
     const parts = [`:root { --font-sans: '${safeFont}', sans-serif; }`]
     // The stacks themselves, so the headings and `font-mono` follow the theme.
-    if (prefs.serif && SAFE_NAME.test(prefs.serif)) parts.push(`:root { --ui-font-heading: '${prefs.serif}', var(--font-sans); }`)
+    if (prefs.heading && SAFE_NAME.test(prefs.heading)) parts.push(`:root { --ui-font-heading: '${prefs.heading}', var(--font-sans); }`)
     if (prefs.mono && SAFE_NAME.test(prefs.mono)) parts.push(`:root { --font-mono: '${prefs.mono}', monospace; }`)
     const weights = prefs.weights || {}
     const weightVars: string[] = []
@@ -227,7 +227,7 @@ export function useTheme() {
   const link = computed(() => {
     // Same guard as fontStyle's, so a name the stylesheet refuses can't still
     // cost a Google Fonts request.
-    const names = new Set([fontPrefs.value.sans, fontPrefs.value.serif, fontPrefs.value.mono].filter((name): name is string => !!name && name !== 'Public Sans' && SAFE_NAME.test(name)))
+    const names = new Set([fontPrefs.value.sans, fontPrefs.value.heading, fontPrefs.value.mono].filter((name): name is string => !!name && name !== 'Public Sans' && SAFE_NAME.test(name)))
     return [...names].map(fontLink)
   })
 
@@ -403,7 +403,7 @@ export function useTheme() {
     // the payload leaves out has to fall back to what is already set. A
     // payload naming only the heading font would otherwise clear the rest,
     // the body family included.
-    if (settings.fontSans !== undefined || settings.fontSerif !== undefined || settings.fontMono !== undefined
+    if (settings.fontSans !== undefined || settings.fontHeading !== undefined || settings.fontMono !== undefined
       || settings.fontWeights !== undefined || settings.fontBody !== undefined) {
       const current = fontPrefs.value
       // merged over the current map: a payload naming only `heading` must not clear the body
@@ -420,7 +420,7 @@ export function useTheme() {
         typeof value === 'string' && SAFE_NAME.test(value) ? value : fallback
       setFontPrefs({
         sans: family(settings.fontSans, current.sans),
-        serif: family(settings.fontSerif, current.serif),
+        heading: family(settings.fontHeading, current.heading),
         mono: family(settings.fontMono, current.mono),
         weights,
         uppercase: body ? !!body.uppercase : current.uppercase,

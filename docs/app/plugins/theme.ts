@@ -183,9 +183,10 @@ export default defineNuxtPlugin({
               var prefs = T.font || {};
               var font = (prefs.sans && SAFE.test(prefs.sans)) ? prefs.sans : 'Public Sans';
               var css = ':root { --font-sans: \\'' + font + '\\', sans-serif; }';
-              var serif = (prefs.serif && SAFE.test(prefs.serif)) ? prefs.serif : undefined;
+              var headingName = typeof prefs.heading === 'string' ? prefs.heading : prefs.serif;
+              var heading = (headingName && SAFE.test(headingName)) ? headingName : undefined;
               var mono = (prefs.mono && SAFE.test(prefs.mono)) ? prefs.mono : undefined;
-              if (serif) { css += ' :root { --ui-font-heading: \\'' + serif + '\\', var(--font-sans); }'; }
+              if (heading) { css += ' :root { --ui-font-heading: \\'' + heading + '\\', var(--font-sans); }'; }
               if (mono) { css += ' :root { --font-mono: \\'' + mono + '\\', monospace; }'; }
               var w = prefs.weights || {};
               var wb = num(w.body, 100, 900);
@@ -201,7 +202,7 @@ export default defineNuxtPlugin({
               if (lh !== undefined) { bodyRules += 'line-height: ' + lh + '; '; }
               if (bodyRules) { css += ' body { ' + bodyRules + '}'; }
               if (Object.keys(prefs).length) { set('nuxt-ui-font', css); }
-              [font, serif, mono].forEach(function(name) {
+              [font, heading, mono].forEach(function(name) {
                 if (!name || name === 'Public Sans') return;
                 var id = 'font-' + name.toLowerCase().replace(/\\s+/g, '-');
                 if (document.getElementById(id)) return;

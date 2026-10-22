@@ -111,14 +111,15 @@ function normalizeFont(raw: unknown): FontPrefs | undefined {
   const input = raw as Record<string, any>
   const font: FontPrefs = {}
 
-  // `heading` was the old h1–h6 treatment. Only the family survived the
-  // rework, as the serif stack; the rest is dropped rather than kept as dead
-  // weight that every dirty check would still measure.
+  // The heading family was stored as `serif` before, and `heading` was an
+  // object of h1–h6 treatment before that. Only the family survived, the
+  // rest is dropped rather than kept as dead weight that every dirty check
+  // would still measure.
   const family = (value: unknown) => typeof value === 'string' && SAFE_NAME.test(value) ? value : undefined
   const sans = family(input.sans)
   if (sans && sans !== THEME_DEFAULTS.font) font.sans = sans
-  const serif = family(input.serif) ?? family(input.heading?.font)
-  if (serif) font.serif = serif
+  const heading = family(input.heading) ?? family(input.serif) ?? family(input.heading?.font)
+  if (heading) font.heading = heading
   const mono = family(input.mono)
   if (mono) font.mono = mono
 
@@ -127,8 +128,8 @@ function normalizeFont(raw: unknown): FontPrefs | undefined {
   const weights: NonNullable<FontPrefs['weights']> = {}
   const body = clamped(input.weights?.body ?? input.weights?.normal, 100, 900)
   if (body !== undefined && body !== FONT_WEIGHT_DEFAULTS.body) weights.body = body
-  const heading = clamped(input.weights?.heading, 100, 900)
-  if (heading !== undefined) weights.heading = heading
+  const headingWeight = clamped(input.weights?.heading, 100, 900)
+  if (headingWeight !== undefined) weights.heading = headingWeight
   if (Object.keys(weights).length) font.weights = weights
 
   if (input.uppercase) font.uppercase = true

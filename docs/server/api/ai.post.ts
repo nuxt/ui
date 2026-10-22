@@ -57,9 +57,9 @@ export interface ApplyThemeSettings {
   warning?: string
   error?: string
   radius?: number
-  /** Tailwind's three stacks. Headings follow serif, code follows mono. */
+  /** The body, heading and code fonts. */
   fontSans?: string
-  fontSerif?: string
+  fontHeading?: string
   fontMono?: string
   icons?: string
   customColors?: Record<string, Record<string, string>>
@@ -85,7 +85,7 @@ const applyTheme = tool({
       error: { type: 'string', description: 'Error color name' },
       radius: { type: 'number', description: 'Border radius in rem: 0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75' },
       fontSans: { type: 'string', description: 'Body font family (tailwind\'s --font-sans), the one every element inherits. Any Google Font works, and it does not have to be a sans (e.g. Public Sans, DM Sans, Geist, Inter, Poppins, Outfit, Playfair Display).' },
-      fontSerif: { type: 'string', description: 'Heading font family (sets --font-heading; h1–h6 and component titles follow it). Any Google Font. Omit to keep headings on the body font.' },
+      fontHeading: { type: 'string', description: 'Heading font family (sets --font-heading; h1–h6 and component titles follow it). Any Google Font. Omit to keep headings on the body font.' },
       fontMono: { type: 'string', description: 'Code font family (tailwind\'s --font-mono; code, kbd, pre and samp follow it). Any Google Font.' },
       icons: { type: 'string', description: 'Icon set for live preview: lucide (default), bootstrap, heroicons, iconoir, material, phosphor, pixelarticons, remix or tabler. For exported code, any Iconify icon set can be suggested.' },
       customColors: {
@@ -158,7 +158,7 @@ const FONT_CATEGORIES = ['Sans Serif', 'Serif', 'Display', 'Handwriting', 'Monos
 const CURATED_CATEGORY: Record<FontCategory, typeof FONT_CATEGORIES[number]> = { Sans: 'Sans Serif', Serif: 'Serif', Mono: 'Monospace' }
 
 const searchFonts = tool({
-  description: `Browse fonts for \`applyTheme\`'s fontSans / fontSerif / fontMono. Returns the studio's curated shortlist (safe, proven faces) and the best matches from the full Google Fonts catalog (1900+ families, most popular first), each with its category. Call it when designing a theme whose personality the shortlist doesn't cover (editorial, playful, brutalist, retro, luxury...) and pick from the results rather than from memory. Filter by category (${FONT_CATEGORIES.join(', ')}) and/or search by name. Display and Handwriting faces suit headings (fontSerif) far better than body text.`,
+  description: `Browse fonts for \`applyTheme\`'s fontSans / fontHeading / fontMono. Returns the studio's curated shortlist (safe, proven faces) and the best matches from the full Google Fonts catalog (1900+ families, most popular first), each with its category. Call it when designing a theme whose personality the shortlist doesn't cover (editorial, playful, brutalist, retro, luxury...) and pick from the results rather than from memory. Filter by category (${FONT_CATEGORIES.join(', ')}) and/or search by name. Display and Handwriting faces suit headings (fontHeading) far better than body text.`,
   inputSchema: z.object({
     query: z.string().optional().describe('Part of a family name, e.g. "grotesk", "serif", "mono"'),
     category: z.enum(FONT_CATEGORIES).optional().describe('Restrict to one Google Fonts category'),
@@ -303,7 +303,7 @@ In the code you show, these go on a \`<UTheme>\` around \`<UApp>\` in \`app.vue\
   - **0.75** — pill-like
 - Fonts: three independent stacks, any Google Font works and \`@nuxt/fonts\` auto-loads it.
   - \`fontSans\` — the body face everything inherits. Despite the name it takes any face, a serif body is a valid choice.
-  - \`fontSerif\` — headings (h1–h6 and component titles) follow it. Set it only when you want headings to differ from the body; omit it and they match.
+  - \`fontHeading\` — headings (h1–h6 and component titles) follow it. Set it only when you want headings to differ from the body; omit it and they match.
   - \`fontMono\` — code, kbd, pre and samp follow it.
   Pick faces that match the theme's personality:
   - Sans-serif (clean/modern): Inter, DM Sans, Geist, Public Sans, Outfit, Plus Jakarta Sans, Space Grotesk
@@ -311,7 +311,7 @@ In the code you show, these go on a \`<UTheme>\` around \`<UApp>\` in \`app.vue\
   - Rounded (friendly/playful): Nunito, Quicksand, Varela Round
   - Monospace (techy/dev): JetBrains Mono, Fira Code, IBM Plex Mono, Geist Mono
   For anything with a stronger personality (editorial, playful, brutalist, retro, luxury), call \`searchFonts\` and choose from the catalog rather than reusing the faces above: a distinctive type pairing is what makes a theme feel unique.
-  ALWAYS set \`fontSans\` when creating a complete theme — don't leave the default unless it genuinely fits. Pairing a display \`fontSerif\` with a plain body is the highest-leverage type choice available.
+  ALWAYS set \`fontSans\` when creating a complete theme — don't leave the default unless it genuinely fits. Pairing a display \`fontHeading\` with a plain body is the highest-leverage type choice available.
 - Icons: lucide (default), bootstrap, heroicons, iconoir, material, phosphor, pixelarticons, remix or tabler for live preview. Any Iconify icon set works in the exported config. When suggesting a non-default icon set, include the FULL \`ui.icons\` mapping in the exported config and tell the user to install \`@iconify-json/{collection}\` (e.g. \`@iconify-json/ph\` for Phosphor). Required keys: ${Object.keys(themeIcons.phosphor).join(', ')}. Values use \`i-<set>-<name>\` format.
 
 **Component Theme Lookup:**
@@ -338,15 +338,8 @@ CRITICAL rules for component \`ui\` overrides:
 
 @theme {
   --font-sans: 'FontName', sans-serif; /* only if the body font changed */
-  --font-serif: 'FontName', serif;     /* only if headings differ from the body */
+  --font-heading: 'FontName', var(--font-sans); /* only if headings differ from the body */
   --font-mono: 'FontName', monospace;  /* only if the code font changed */
-}
-
-/* ONLY when --font-serif is set: nothing in tailwind consumes it, so headings
-   need this one rule. Omit the whole block otherwise, or every heading falls
-   back to Georgia. --font-sans and --font-mono need no rule at all. */
-@layer base {
-  h1, h2, h3, h4, h5, h6 { font-family: var(--font-serif); }
 }
 
 @theme static {

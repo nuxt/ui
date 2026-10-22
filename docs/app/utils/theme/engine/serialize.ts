@@ -77,7 +77,7 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explici
     const sans = doc.font?.sans ?? THEME_DEFAULTS.font
     const families = [...new Set([
       explicit || sans !== THEME_DEFAULTS.font ? sans : undefined,
-      doc.font?.serif,
+      doc.font?.heading,
       doc.font?.mono
     ].filter((name): name is string => !!name))]
     for (const family of families) {
@@ -89,7 +89,7 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explici
   if (explicit || (doc.font?.sans && doc.font.sans !== THEME_DEFAULTS.font)) {
     themeLines.push(`  --font-sans: '${doc.font?.sans ?? THEME_DEFAULTS.font}', sans-serif;`)
   }
-  if (doc.font?.serif) themeLines.push(`  --font-heading: '${doc.font.serif}', var(--font-sans);`)
+  if (doc.font?.heading) themeLines.push(`  --font-heading: '${doc.font.heading}', var(--font-sans);`)
   if (doc.font?.mono) themeLines.push(`  --font-mono: '${doc.font.mono}', monospace;`)
   if (themeLines.length) {
     lines.push('', '@theme {', ...themeLines, '}')

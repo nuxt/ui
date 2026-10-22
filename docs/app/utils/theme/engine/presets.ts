@@ -464,7 +464,7 @@ export const presets: ThemePreset[] = [{
       neutral: 'parchment'
     },
     radius: 0.375,
-    font: { sans: 'DM Sans', serif: 'Source Serif 4' },
+    font: { sans: 'DM Sans', heading: 'Source Serif 4' },
     icons: 'heroicons',
     // Surfaces and borders stepped one deeper to hold on the tinted cream
     // page. Soft has to stay below the page: the library's hover and

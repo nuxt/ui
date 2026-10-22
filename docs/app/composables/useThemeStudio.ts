@@ -338,7 +338,7 @@ export function useThemeStudio() {
 
     // A serif heading is the boldest tasteful roll the type axis has.
     if (Math.random() < 0.2) {
-      doc.font!.serif = pick(theme.fonts.filter(entry => entry.category === 'Serif')).name
+      doc.font!.heading = pick(theme.fonts.filter(entry => entry.category === 'Serif')).name
     }
 
     // Variant re-rolls are the loud ones, so each group rolls rarely and

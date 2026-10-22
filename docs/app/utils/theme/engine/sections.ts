@@ -22,7 +22,7 @@ export type SectionKey
     | 'icons' | 'radius' | 'size' | 'buttons' | 'panels' | 'inputs'
 
 /** Which font fields the `font` and `type` sections each own. */
-const FONT_STACKS = ['sans', 'serif', 'mono'] as const
+const FONT_STACKS = ['sans', 'heading', 'mono'] as const
 const TYPE_FIELDS = ['uppercase', 'italic', 'letterSpacing', 'lineHeight'] as const
 
 /**
@@ -134,7 +134,7 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
       const font = doc.font ?? {}
       return {
         sans: font.sans && font.sans !== THEME_DEFAULTS.font ? font.sans : null,
-        serif: font.serif ?? null,
+        heading: font.heading ?? null,
         mono: font.mono ?? null
       }
     }
