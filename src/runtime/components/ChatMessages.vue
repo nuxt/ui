@@ -150,6 +150,8 @@ function registerMessageRef(id: string, element: ComponentPublicInstance | null)
   const elInstance = element?.$el
   if (elInstance) {
     messagesRefs.value.set(id, elInstance)
+  } else if (!element) {
+    messagesRefs.value.delete(id)
   }
 }
 
