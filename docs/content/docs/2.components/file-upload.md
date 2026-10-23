@@ -158,7 +158,7 @@ You can customize this icon globally in your `app.config.ts` under `ui.icons.upl
 
 #vue
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
-You can customize this icon globally in your `vite.config.ts` under `ui.icons.upload` key.
+You can customize this icon globally in your `vite.config.ts` under `icons.upload` key.
 :::
 ::
 

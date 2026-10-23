@@ -229,7 +229,7 @@ export function generateConfig(doc: ThemeDoc, framework: string = 'nuxt'): strin
     return ''
   }
 
-  const config = { ui: { icons: themeIcons[doc.icons as keyof typeof themeIcons] } }
+  const icons = themeIcons[doc.icons as keyof typeof themeIcons]
 
   if (framework === 'vue') {
     return [
@@ -240,11 +240,11 @@ export function generateConfig(doc: ThemeDoc, framework: string = 'nuxt'): strin
       'export default defineConfig({',
       '  plugins: [',
       '    vue(),',
-      `    ui(${toObjectSource(config).split('\n').map((line, i) => i === 0 ? line : '    ' + line).join('\n')})`,
+      `    ui(${toObjectSource({ icons }).split('\n').map((line, i) => i === 0 ? line : '    ' + line).join('\n')})`,
       '  ]',
       '})'
     ].join('\n')
   }
 
-  return `export default defineAppConfig(${toObjectSource(config)})`
+  return `export default defineAppConfig(${toObjectSource({ ui: { icons } })})`
 }

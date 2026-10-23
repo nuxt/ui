@@ -409,10 +409,8 @@ export default defineConfig({
   plugins: [
     vue(),
     ui({
-      ui: {
-        icons: {
-          // ... every key of the chosen icon set
-        }
+      icons: {
+        // ... every key of the chosen icon set
       }
     })
   ]
