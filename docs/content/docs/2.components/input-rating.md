@@ -117,7 +117,7 @@ You can customize the default star icon globally in your `app.config.ts` under `
 
 #vue
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
-You can customize the default star icon globally in your `vite.config.ts` under `ui.icons.star` key.
+You can customize the default star icon globally in your `vite.config.ts` under `icons.star` key.
 :::
 ::
 

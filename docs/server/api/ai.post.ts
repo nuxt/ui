@@ -312,7 +312,7 @@ In the code you show, these go under \`ui\` in \`app.config.ts\` for Nuxt, or in
   - Monospace (techy/dev): JetBrains Mono, Fira Code, IBM Plex Mono, Geist Mono
   For anything with a stronger personality (editorial, playful, brutalist, retro, luxury), call \`searchFonts\` and choose from the catalog rather than reusing the faces above: a distinctive type pairing is what makes a theme feel unique.
   ALWAYS set \`fontSans\` when creating a complete theme — don't leave the default unless it genuinely fits. Pairing a display \`fontHeading\` with a plain body is the highest-leverage type choice available.
-- Icons: lucide (default), bootstrap, heroicons, iconoir, material, phosphor, pixelarticons, remix or tabler for live preview. Any Iconify icon set works in the exported config. When suggesting a non-default icon set, include the FULL \`ui.icons\` mapping in the exported config and tell the user to install \`@iconify-json/{collection}\` (e.g. \`@iconify-json/ph\` for Phosphor). Required keys: ${Object.keys(themeIcons.phosphor).join(', ')}. Values use \`i-<set>-<name>\` format.
+- Icons: lucide (default), bootstrap, heroicons, iconoir, material, phosphor, pixelarticons, remix or tabler for live preview. Any Iconify icon set works in the exported config. When suggesting a non-default icon set, include the FULL icons mapping in the exported config and tell the user to install \`@iconify-json/{collection}\` (e.g. \`@iconify-json/ph\` for Phosphor). Required keys: ${Object.keys(themeIcons.phosphor).join(', ')}. Values use \`i-<set>-<name>\` format.
 
 **Component Theme Lookup:**
 
@@ -364,7 +364,7 @@ CRITICAL rules for component \`ui\` overrides:
 }
 \`\`\`
 
-3. Show the config code block if component overrides or the icon set changed. IMPORTANT: it must include ALL settings from the entire conversation, not just the current \`applyTheme\` call. Review earlier calls and merge everything into one config, without a \`colors\` key. If a non-default icon set was chosen, it MUST include the complete \`ui.icons\` object with every key mapped.
+3. Show the config code block if component overrides or the icon set changed. IMPORTANT: it must include ALL settings from the entire conversation, not just the current \`applyTheme\` call. Review earlier calls and merge everything into one config, without a \`colors\` key. If a non-default icon set was chosen, it MUST include the complete icons object with every key mapped (\`ui.icons\` in Nuxt's \`app.config.ts\`, \`icons\` in Vue's \`vite.config.ts\`).
 
 For **Nuxt**, \`app.config.ts\`, with the icon set in the same file:
 \`\`\`typescript
@@ -405,10 +405,8 @@ export default defineConfig({
   plugins: [
     vue(),
     ui({
-      ui: {
-        icons: {
-          // ... every key of the chosen icon set
-        }
+      icons: {
+        // ... every key of the chosen icon set
       }
     })
   ]

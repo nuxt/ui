@@ -156,7 +156,7 @@ You can customize this icon globally in your `app.config.ts` under `ui.icons.loa
 
 #vue
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
-You can customize this icon globally in your `vite.config.ts` under `ui.icons.loading` key.
+You can customize this icon globally in your `vite.config.ts` under `icons.loading` key.
 :::
 ::
 
@@ -217,7 +217,7 @@ You can customize this icon globally in your `app.config.ts` under `ui.icons.che
 
 #vue
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
-You can customize this icon globally in your `vite.config.ts` under `ui.icons.chevronDown` key.
+You can customize this icon globally in your `vite.config.ts` under `icons.chevronDown` key.
 :::
 ::
 

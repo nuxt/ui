@@ -202,7 +202,7 @@ export function generateConfig(doc: ThemeDoc, framework: string = 'nuxt', _optio
   return `export default defineAppConfig(${toObjectSource(Object.keys(ui).length ? { ui } : {})})`
 }
 
-/** The Vue icon set, in the `vite.config.ts` that bundles it. Empty with Nuxt or the default icons. */
+/** The Vue icons, in the `icons` option of the `vite.config.ts` that bundles them. Empty with Nuxt or the default icons. */
 export function generateViteConfig(doc: ThemeDoc, framework: string = 'nuxt'): string {
   const icons = iconSet(doc)
   if (framework !== 'vue' || !icons) {
@@ -217,7 +217,7 @@ export function generateViteConfig(doc: ThemeDoc, framework: string = 'nuxt'): s
     'export default defineConfig({',
     '  plugins: [',
     '    vue(),',
-    `    ui(${indentTail(toObjectSource({ ui: { icons } }), '    ')})`,
+    `    ui(${indentTail(toObjectSource({ icons }), '    ')})`,
     '  ]',
     '})'
   ].join('\n')

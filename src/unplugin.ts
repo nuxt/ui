@@ -38,11 +38,11 @@ export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'
   /** Whether to generate declaration files for auto-imported components. */
   dts?: boolean
   /**
-   * The icon set of your app, bundled at build time. The rest of the `ui` config goes to
-   * the Vue plugin: `app.use(ui, { ui })`.
+   * The icons components use, like `close` or `chevronDown`, bundled at build time. The rest
+   * of the theme goes to the Vue plugin: `app.use(ui, { ui })`.
    * @see https://ui.nuxt.com/docs/getting-started/integrations/icons/vue#theme
    */
-  ui?: Pick<AppConfigUI, 'icons'>
+  icons?: AppConfigUI['icons']
   /**
    * Default props for the `Icon` component, plus build-time icon bundling through
    * `clientBundle`, which mirrors [`@nuxt/icon`'s option](https://github.com/nuxt/icon#client-bundle)
@@ -98,7 +98,7 @@ export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'
 export interface NuxtUIPluginOptions {
   /**
    * The theme of your app, the Vue equivalent of the `ui` key in Nuxt's `app.config.ts`.
-   * The icon set goes to the `ui` option of the Vite plugin, which bundles it.
+   * The icons go to the `icons` option of the Vite plugin, which bundles them.
    * @see https://ui.nuxt.com/docs/getting-started/theme/components
    */
   ui?: Omit<AppConfigUI, 'icons'> & { icons?: never }
@@ -119,7 +119,7 @@ export const NuxtUIPlugin = createUnplugin<NuxtUIOptions | undefined>((_options 
   // `clientBundle` is a build-time concern, so keep it out of the runtime app config.
   const { clientBundle, ...icon } = options.icon || {}
   // The rest of the `ui` config reaches the app through `app.use(ui, { ui })`.
-  const appConfig = defu({ ui: { icons: options.ui?.icons }, colorMode: options.colorMode, icon }, { ui: getDefaultConfig(options.tailwindPrefix) })
+  const appConfig = defu({ ui: { icons: options.icons }, colorMode: options.colorMode, icon }, { ui: getDefaultConfig(options.tailwindPrefix) })
 
   return [
     NuxtEnvironmentPlugin(options),
