@@ -146,7 +146,7 @@ You can customize these icons globally in your `app.config.ts` under `ui.icons.a
 
 #vue
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
-You can customize these icons globally in your `vite.config.ts` under `ui.icons.arrowLeft` / `ui.icons.arrowRight` key.
+You can customize these icons globally in your `vite.config.ts` under `icons.arrowLeft` / `icons.arrowRight` key.
 :::
 ::
 

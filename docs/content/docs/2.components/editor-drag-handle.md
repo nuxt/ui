@@ -51,7 +51,7 @@ You can customize this icon globally in your `app.config.ts` under `ui.icons.dra
 
 #vue
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
-You can customize this icon globally in your `vite.config.ts` under `ui.icons.drag` key.
+You can customize this icon globally in your `vite.config.ts` under `icons.drag` key.
 :::
 ::
 

@@ -30,9 +30,7 @@ export default defineConfig({
   plugins: [
     vue(),
     ui(${json5.stringify({
-      ui: {
-        icons: icons.value
-      }
+      icons: icons.value
     }, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')
       .split('\n')
       .map((line, i) => i === 0 ? line : `    ${line}`)

@@ -19,7 +19,7 @@ Don't edit anything yet.
 
 1. Check that the working tree is clean and create a branch for the migration.
 2. Detect the package manager, whether the project is a Nuxt app or a Vue app using the `@nuxt/ui/vite` plugin, and the installed `@nuxt/ui` version. On v3 or older, stop and tell the user to migrate to v4 first.
-3. Find where Nuxt UI is configured: `nuxt.config.ts` or `vite.config.ts`, `app.config.ts`, and the CSS file that imports `@nuxt/ui`.
+3. Find where Nuxt UI is configured: `nuxt.config.ts` or `vite.config.ts`, `app.config.ts` or the `app.use(ui)` call of the entry file, and the CSS file that imports `@nuxt/ui`.
 4. Go through each section of "Changes from v4" and search the project for what it changes: props, slots, classes, CSS variables, options, imports. Search templates, scripts, CSS, config files, Markdown content and tests.
 5. Give the user a plan: the sections that apply with the files they touch, and the sections that don't apply. Wait for their go.
 
