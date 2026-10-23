@@ -437,7 +437,7 @@ defineExpose({
       </div>
     </Presence>
 
-    <div v-if="!!slots.footer" ref="footerRef" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
+    <div v-if="!!slots.footer" ref="footerRef" aria-live="off" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
       <slot name="footer" />
     </div>
   </div>

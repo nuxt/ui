@@ -172,7 +172,7 @@ exports[`ChatMessages > renders with footer slot correctly 1`] = `
   </article>
   <!--v-if-->
   <!---->
-  <div data-slot="footer" class="sticky bottom-0 z-10 mt-auto">Footer slot</div>
+  <div aria-live="off" data-slot="footer" class="sticky bottom-0 z-10 mt-auto">Footer slot</div>
 </div>"
 `;
 
