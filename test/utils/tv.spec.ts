@@ -309,3 +309,55 @@ describe('tv slot memoization', () => {
     expect(ui.label({})).toBe('truncate')
   })
 })
+
+describe('tv factory memoization', () => {
+  const theme = {
+    slots: { base: 'inline-flex text-sm', label: 'truncate' },
+    variants: {
+      color: {
+        primary: { base: 'bg-primary' },
+        secondary: { base: 'bg-secondary' }
+      }
+    },
+    defaultVariants: { color: 'primary' }
+  }
+
+  it('reuses the component for equal configs', () => {
+    expect(tvt({ extend: theme, slots: { base: 'p-2' } })).toBe(tvt({ extend: theme, slots: { base: 'p-2' } }))
+  })
+
+  it('does not share a component across configs', () => {
+    expect(tvt({ extend: theme, slots: { base: 'p-2' } })().base()).toContain('p-2')
+    expect(tvt({ extend: theme, slots: { base: 'p-4' } })().base()).toContain('p-4')
+  })
+
+  it('does not share a component across themes', () => {
+    expect(tvt({ extend: theme })().base()).toContain('inline-flex')
+    expect(tvt({ extend: { ...theme, slots: { base: 'block' } } })().base()).toContain('block')
+  })
+
+  it('keeps an undefined config value distinct from a missing one', () => {
+    expect(tvt({ extend: theme, defaultVariants: {} })().base()).toContain('bg-primary')
+    expect(tvt({ extend: theme, defaultVariants: { color: undefined } })().base()).not.toContain('bg-primary')
+  })
+
+  it('does not share a component between undefined and a string matching its key marker', () => {
+    expect(tvt({ extend: theme, slots: { label: undefined } })().label()).toBe('truncate')
+    expect(tvt({ extend: theme, slots: { label: '\0undefined' } })().label()).toBe('truncate \0undefined')
+  })
+
+  it('does not share a component across configs containing functions', () => {
+    expect(tvt({ extend: theme, slots: { label: () => 'text-xl' } })().label()).toBe('text-xl')
+    expect(tvt({ extend: theme, slots: { label: () => 'text-2xl' } })().label()).toBe('text-2xl')
+  })
+
+  it('does not share a component between non-finite numbers and null', () => {
+    expect(tvt({ extend: theme, slots: { label: null } })().label()).toBe('truncate')
+    expect(tvt({ extend: theme, slots: { label: Number.POSITIVE_INFINITY } })().label()).toBe('truncate Infinity')
+  })
+
+  it('does not key configs carrying inherited enumerable props as plain ones', () => {
+    expect(tvt({ extend: theme, variants: {} })().base()).not.toContain('p-4')
+    expect(tvt({ extend: theme, variants: Object.create({ color: { primary: { base: 'p-4' } } }) })().base()).toContain('p-4')
+  })
+})
