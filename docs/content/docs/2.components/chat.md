@@ -588,9 +588,13 @@ html.dark .shiki span {
 ```
 ::
 
+::note{to="/blog/how-to-build-an-ai-chat"}
+Read the full **Build an AI Chatbot** tutorial for a step-by-step guide.
+::
+
 ### Queued messages
 
-The AI SDK doesn't queue messages: calling `sendMessage` during a response starts a second request next to the current one. Passing `status` to `UChatPrompt` ignores submits while the chat is `submitted` or `streaming`. To let users send their next message anyway, leave it off, keep the text in a queue and send it once the chat is `ready` again:
+The AI SDK doesn't queue messages: calling `sendMessage` during a response starts a second request next to the current one. With `status`, `UChatPrompt` ignores submits while the chat is `submitted` or `streaming`. To let users send their next message anyway, leave it off, keep the text in a queue and send it once the chat is `ready` again:
 
 ::framework-only
 #nuxt
@@ -611,13 +615,8 @@ function sendNext() {
 }
 
 function onSubmit() {
-  const text = input.value.trim()
-  if (!text) {
-    return
-  }
-
+  queue.value.push(input.value)
   input.value = ''
-  queue.value.push(text)
 
   if (status.value !== 'submitted' && status.value !== 'streaming') {
     sendNext()
@@ -673,13 +672,8 @@ function sendNext() {
 }
 
 function onSubmit() {
-  const text = input.value.trim()
-  if (!text) {
-    return
-  }
-
+  queue.value.push(input.value)
   input.value = ''
-  queue.value.push(text)
 
   if (status.value !== 'submitted' && status.value !== 'streaming') {
     sendNext()
@@ -718,7 +712,3 @@ watch(status, (value) => {
 ::
 
 Every message goes through the queue, so a message sent after an `error` still waits behind the ones queued before it. Stopping the response sends the next queued message right away.
-
-::note{to="/blog/how-to-build-an-ai-chat"}
-Read the full **Build an AI Chatbot** tutorial for a step-by-step guide.
-::
