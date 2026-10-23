@@ -62,7 +62,7 @@ function getSources(message: ChatMessage) {
 </script>
 
 <template>
-  <UChatMessages :messages="messages" :should-scroll-to-bottom="false">
+  <UChatMessages :messages="messages" :should-scroll-to-bottom="false" :auto-scroll="false">
     <template #part="{ part, message }">
       <UChatReasoning
         v-if="isReasoningUIPart(part)"
