@@ -453,6 +453,9 @@ When accessing the component via a template ref, you can use the following:
 | Name | Type |
 | ---- | ---- |
 | `registerMessageRef(id: string, element: ComponentPublicInstance \| null)`{lang="ts-type"} | `void`{lang="ts-type"} |
+| `scrollToBottom(smooth?: boolean)`{lang="ts-type"} | `void`{lang="ts-type"} |
+| `scrollToMessage(id: string, smooth?: boolean)`{lang="ts-type"} | `void`{lang="ts-type"} |
+| `isAtBottom`{lang="ts-type"} | `Readonly<Ref<boolean>>`{lang="ts-type"} |
 
 ## Theme
 

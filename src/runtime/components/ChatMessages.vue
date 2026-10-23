@@ -90,7 +90,7 @@ export type ChatMessagesSlots<T extends UIMessage[] = UIMessage[]> = {
 </script>
 
 <script setup lang="ts" generic="T extends UIMessage[] = UIMessage[]">
-import { ref, computed, watch, nextTick, toRef, onMounted } from 'vue'
+import { ref, computed, watch, nextTick, toRef, readonly, onMounted, onBeforeUnmount } from 'vue'
 import { Presence } from 'reka-ui'
 import { defu } from 'defu'
 import { useEventListener, useMutationObserver, watchThrottled } from '@vueuse/core'
@@ -152,6 +152,7 @@ const parent = ref<HTMLElement | null>(null)
 const messagesRefs = ref(new Map<string, HTMLElement>())
 
 const showAutoScroll = ref(false)
+const isAtBottom = ref(true)
 const lastMessageHeight = ref(0)
 const lastMessageSubmitted = ref(false)
 const lastScrollTop = ref(0)
@@ -161,14 +162,25 @@ function registerMessageRef(id: string, element: ComponentPublicInstance | null)
   const elInstance = element?.$el
   if (elInstance) {
     messagesRefs.value.set(id, elInstance)
+  } else if (!element) {
+    messagesRefs.value.delete(id)
   }
 }
 
-function scrollToMessage(id: string) {
+function scrollToMessage(id: string, smooth: boolean = true) {
   const element = messagesRefs.value.get(id)
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  if (!element || !parent.value) {
+    return
   }
+
+  // Scroll the parent only, `scrollIntoView` would also scroll outer containers and move the page
+  const isDocument = parent.value === document.documentElement
+  const parentTop = isDocument ? 0 : parent.value.getBoundingClientRect().top + parent.value.clientTop
+  const scrollMarginTop = Number.parseFloat(window.getComputedStyle(element).scrollMarginTop) || 0
+  const scrollPaddingTop = Number.parseFloat(window.getComputedStyle(parent.value).scrollPaddingTop) || 0
+  const top = parent.value.scrollTop + element.getBoundingClientRect().top - parentTop - scrollMarginTop - scrollPaddingTop
+
+  parent.value.scrollTo({ top, behavior: smooth ? 'smooth' : 'instant' })
 }
 
 function scrollToBottom(smooth: boolean = true) {
@@ -183,20 +195,18 @@ function scrollToBottom(smooth: boolean = true) {
   }
 }
 
-watchThrottled([() => props.messages, () => props.status], ([_, status]) => {
+watchThrottled([() => props.messages, () => props.status], () => {
   if (!props.messages?.length) {
     showAutoScroll.value = false
+    isAtBottom.value = true
     userScrolledUp.value = false
     lastScrollTop.value = 0
     messagesRefs.value.clear()
     return
   }
 
-  if (status !== 'streaming') {
-    return
-  }
-
-  checkScrollPosition()
+  // Measure once the new content is rendered, so `isAtBottom` and the scroll button stay in sync
+  nextTick(checkScrollPosition)
 }, { deep: true, throttle: 50, leading: true })
 
 watch(() => props.status, (status) => {
@@ -232,9 +242,10 @@ function checkScrollPosition() {
   const threshold = 100
 
   showAutoScroll.value = (scrollHeight - scrollPosition) >= threshold
+  isAtBottom.value = (scrollHeight - scrollPosition) <= 1
 
   // Only resume following at the very bottom, otherwise streaming pulls the user back down
-  if ((scrollHeight - scrollPosition) <= 1) {
+  if (isAtBottom.value) {
     userScrolledUp.value = false
   } else if (parent.value.scrollTop < lastScrollTop.value) {
     userScrolledUp.value = true
@@ -325,22 +336,43 @@ onMounted(() => {
 
   // Watch for DOM changes (e.g. async code block rendering) and scroll to bottom
   if (el.value) {
+    let frame: number | undefined
+
     useMutationObserver(el, () => {
       if (props.shouldAutoScroll && props.status === 'streaming' && !userScrolledUp.value) {
         scrollToBottom(false)
       }
+
+      // Measure at most once per frame, streaming mutates the DOM many times per frame
+      if (frame === undefined) {
+        frame = requestAnimationFrame(() => {
+          frame = undefined
+          checkScrollPosition()
+        })
+      }
     }, { childList: true, subtree: true })
+
+    onBeforeUnmount(() => {
+      if (frame !== undefined) {
+        cancelAnimationFrame(frame)
+      }
+    })
   }
 })
 
 defineExpose({
-  registerMessageRef
+  registerMessageRef,
+  scrollToBottom,
+  scrollToMessage,
+  isAtBottom: readonly(isAtBottom)
 })
 </script>
 
 <template>
   <div
     ref="el"
+    role="log"
+    :aria-busy="props.status === 'submitted' || props.status === 'streaming' ? 'true' : undefined"
     :data-status="props.status"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"

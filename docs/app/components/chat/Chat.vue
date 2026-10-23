@@ -394,6 +394,7 @@ function clearMessages() {
       <UChatPrompt
         ref="promptRef"
         v-model="input"
+        :status="status"
         :error="error"
         placeholder="Ask me anything..."
         variant="naked"
