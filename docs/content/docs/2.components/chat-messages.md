@@ -417,7 +417,7 @@ Use the `#footer` slot to keep a [ChatPrompt](/docs/components/chat-prompt) stuc
 ```
 
 ::note
-The `#footer` slot replaces the `spacing-offset` prop for a sticky prompt, which needed its height by hand. A prompt outside the scroll container, like in the footer of a [DashboardPanel](/docs/components/dashboard-panel), needs neither.
+The `#footer` slot replaces the deprecated `spacing-offset` prop for a sticky prompt, which needed its height by hand. Render `UChatMessages` even when there are no messages yet, so the prompt in its footer stays visible. A prompt outside the scroll container, like in the footer of a [DashboardPanel](/docs/components/dashboard-panel), needs neither.
 ::
 
 ## API

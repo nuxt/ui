@@ -65,7 +65,8 @@ export interface ChatMessagesProps<T extends UIMessage[] = UIMessage[]> {
   compact?: boolean
   /**
    * The spacing offset for the last message in px. Can be useful when the prompt is sticky for example.
-   * The auto scroll button is kept above it. Prefer the `footer` slot for a sticky prompt, its height is measured automatically.
+   * The auto scroll button is kept above it.
+   * @deprecated Use the `footer` slot to render a sticky prompt, its height is measured automatically.
    * @defaultValue 0
    */
   spacingOffset?: number
