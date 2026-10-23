@@ -171,7 +171,7 @@ These files show every available slot name, variant combination, and default cla
 
 ### Global config
 
-Override `slots`, `variants`, `compoundVariants`, and `defaultVariants` globally in `app.config.ts` (Nuxt) or `vite.config.ts` (Vue):
+Override `slots`, `variants`, `compoundVariants`, and `defaultVariants` globally in `app.config.ts` (Nuxt) or the `ui` option of the Vue plugin, `app.use(ui, { ui })` in `main.ts` (Vue):
 
 ```ts
 // Nuxt — app.config.ts

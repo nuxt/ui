@@ -339,7 +339,7 @@ You can customize this icon globally in your `app.config.ts` under `ui.icons.che
 
 #vue
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
-You can customize this icon globally in your `vite.config.ts` under `ui.icons.chevronDown` key.
+You can customize this icon globally in your `vite.config.ts` under `icons.chevronDown` key.
 :::
 ::
 
@@ -394,7 +394,7 @@ You can customize these icons globally in your `app.config.ts` under `ui.icons.f
 
 #vue
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
-You can customize these icons globally in your `vite.config.ts` under `ui.icons.folder` and `ui.icons.folderOpen` keys.
+You can customize these icons globally in your `vite.config.ts` under `icons.folder` and `icons.folderOpen` keys.
 :::
 ::
 

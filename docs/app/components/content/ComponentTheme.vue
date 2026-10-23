@@ -44,20 +44,10 @@ export default defineAppConfig(${json5.stringify(component.value, null, 2).repla
 
 ::code-collapse{class="vue-only"}
 
-\`\`\`ts [vite.config.ts]
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import ui from '@nuxt/ui/vite'
+\`\`\`ts [main.ts]
+import ui from '@nuxt/ui/vue-plugin'
 
-export default defineConfig({
-  plugins: [
-    vue(),
-    ui(${json5.stringify(component.value, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')
-      .split('\n')
-      .map((line, i) => i === 0 ? line : `    ${line}`)
-      .join('\n')})
-  ]
-})
+app.use(ui, ${json5.stringify(component.value, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')})
 \`\`\`
 
 ::

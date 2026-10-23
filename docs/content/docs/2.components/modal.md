@@ -170,7 +170,7 @@ You can customize this icon globally in your `app.config.ts` under `ui.icons.clo
 
 #vue
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
-You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
+You can customize this icon globally in your `vite.config.ts` under `icons.close` key.
 :::
 ::
 
