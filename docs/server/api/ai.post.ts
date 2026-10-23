@@ -312,7 +312,7 @@ In the code you show, these go on a \`<UTheme>\` around \`<UApp>\` in \`app.vue\
   - Monospace (techy/dev): JetBrains Mono, Fira Code, IBM Plex Mono, Geist Mono
   For anything with a stronger personality (editorial, playful, brutalist, retro, luxury), call \`searchFonts\` and choose from the catalog rather than reusing the faces above: a distinctive type pairing is what makes a theme feel unique.
   ALWAYS set \`fontSans\` when creating a complete theme — don't leave the default unless it genuinely fits. Pairing a display \`fontHeading\` with a plain body is the highest-leverage type choice available.
-- Icons: lucide (default), bootstrap, heroicons, iconoir, material, phosphor, pixelarticons, remix or tabler for live preview. Any Iconify icon set works in the exported config. When suggesting a non-default icon set, include the FULL \`ui.icons\` mapping in the exported config and tell the user to install \`@iconify-json/{collection}\` (e.g. \`@iconify-json/ph\` for Phosphor). Required keys: ${Object.keys(themeIcons.phosphor).join(', ')}. Values use \`i-<set>-<name>\` format.
+- Icons: lucide (default), bootstrap, heroicons, iconoir, material, phosphor, pixelarticons, remix or tabler for live preview. Any Iconify icon set works in the exported config. When suggesting a non-default icon set, include the FULL icons mapping in the exported config and tell the user to install \`@iconify-json/{collection}\` (e.g. \`@iconify-json/ph\` for Phosphor). Required keys: ${Object.keys(themeIcons.phosphor).join(', ')}. Values use \`i-<set>-<name>\` format.
 
 **Component Theme Lookup:**
 
@@ -386,7 +386,7 @@ const props = {
 \`\`\`
 Use \`<RouterView />\` instead of \`<NuxtPage />\` for Vue.
 
-4. Show the config code block only if a non-default icon set was chosen: the icon set stays in **app.config.ts** for Nuxt or **vite.config.ts** for Vue, not on \`<UTheme>\`, so \`error.vue\` and ContentSearch use it too. It MUST include the complete \`ui.icons\` object with every key mapped, and nothing else.
+4. Show the config code block only if a non-default icon set was chosen: the icon set stays in **app.config.ts** for Nuxt or **vite.config.ts** for Vue, not on \`<UTheme>\`, so \`error.vue\` and ContentSearch use it too. It MUST include the complete icons object with every key mapped, and nothing else: \`ui.icons\` in Nuxt's \`app.config.ts\`, the top-level \`icons\` option in Vue's \`vite.config.ts\`.
 
 For **Nuxt**, \`app.config.ts\`:
 \`\`\`typescript
