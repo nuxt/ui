@@ -40,8 +40,12 @@ function kebabCase(str: string): string {
  */
 function propIsDefined(vnode: VNode | null | undefined, prop: string): boolean {
   if (!vnode || !vnode.props) return false
-  return vnode.props[camelCase(prop)] !== undefined
-    || vnode.props[kebabCase(prop)] !== undefined
+  // Props are read by their camelCase name, so the conversions only run when
+  // the name has a dash or an uppercase letter
+  const camel = prop.includes('-') ? camelCase(prop) : prop
+  if (vnode.props[camel] !== undefined) return true
+  const kebab = kebabCase(prop)
+  return kebab !== camel && vnode.props[kebab] !== undefined
 }
 
 /**
@@ -61,6 +65,7 @@ export function useComponentProps<T extends object>(name: string, props: T): T {
   const vm = getCurrentInstance()
   const { defaults } = injectThemeContext()
   const appConfig = useAppConfig() as { ui?: Record<string, any> }
+  const nested = name.includes('.')
 
   return new Proxy(props, {
     get(target, prop, receiver) {
@@ -83,7 +88,7 @@ export function useComponentProps<T extends object>(name: string, props: T): T {
       // Support dotted-path names (e.g. `prose.p`, `prose.code`) so prose
       // components can pull from the same nested `ThemeContext.defaults` shape
       // that `normalizeUi` produces in `<UTheme>`.
-      const themeEntry = name.includes('.') ? get(defaults.value, name) : defaults.value[name]
+      const themeEntry = nested ? get(defaults.value, name) : defaults.value[name]
 
       if (prop === 'ui') {
         const themeUi = themeEntry?.ui
@@ -101,19 +106,22 @@ export function useComponentProps<T extends object>(name: string, props: T): T {
         return [themeClass, raw]
       }
 
-      if (vm && propIsDefined(vm.vnode, prop)) return raw
-
       const themeValue = themeEntry?.[prop]
-      if (themeValue !== undefined) return themeValue
 
       // A global `app.config.ui.<name>.defaultVariants` value takes priority over
       // the component's `withDefaults` fallback. This keeps `defaultVariants`
       // working uniformly for every variant, including props a component pins in
       // `withDefaults` (e.g. `orientation`, kept defined so `:data-orientation`
       // always renders a value).
-      const appConfigEntry = name.includes('.') ? get(appConfig.ui ?? {}, name) : appConfig.ui?.[name]
-      const appConfigValue = appConfigEntry?.defaultVariants?.[prop]
-      if (appConfigValue !== undefined) return appConfigValue
+      let fallback = themeValue
+      if (fallback === undefined) {
+        const appConfigEntry = nested ? get(appConfig.ui ?? {}, name) : appConfig.ui?.[name]
+        fallback = appConfigEntry?.defaultVariants?.[prop]
+      }
+
+      if (fallback !== undefined) {
+        return vm && propIsDefined(vm.vnode, prop) ? raw : fallback
+      }
 
       // Only fall back to `raw` when `withDefaults` set an explicit default for
       // this prop. Otherwise Vue's runtime would auto-cast unset Boolean props
@@ -125,7 +133,11 @@ export function useComponentProps<T extends object>(name: string, props: T): T {
         return raw
       }
 
-      return undefined
+      // An unset prop without a default reads `undefined`, or `false` once Vue
+      // casts a Boolean, so any other value was passed by the parent
+      if (raw === undefined || (raw !== false && vm)) return raw
+
+      return vm && propIsDefined(vm.vnode, prop) ? raw : undefined
     },
     // `has`, `ownKeys`, and `getOwnPropertyDescriptor` reflect the underlying
     // `defineProps` schema only — theme defaults are NOT enumerable. As a
