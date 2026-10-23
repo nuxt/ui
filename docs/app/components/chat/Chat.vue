@@ -2,7 +2,7 @@
 import type { ToolUIPart, DynamicToolUIPart } from 'ai'
 import { DefaultChatTransport, isToolUIPart, isReasoningUIPart, isTextUIPart, getToolName } from 'ai'
 import { useChat as useAIChat } from '@ai-sdk/vue'
-import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
+import { getTextFromMessage, isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 import type { DocsChatMessage, DocsChatTools } from '~~/server/api/ai.post'
 
 const input = ref('')
@@ -115,23 +115,56 @@ watchEffect(() => {
 
 const canClear = computed(() => messages.value.length > 0)
 
-function onSubmit() {
-  if (!input.value.trim()) {
+// Messages sent while a response streams wait here, the AI SDK would
+// otherwise start a second request next to the current one. The page is
+// captured on submit so a queued question keeps the page it was asked on.
+const queue = ref<{ text: string, currentPage: string }[]>([])
+
+function sendNext() {
+  const next = queue.value.shift()
+  if (!next) {
     return
   }
 
   track('AI Chat Message Sent')
 
-  sendMessage({ text: input.value, metadata: { currentPage: currentPage.value } })
+  sendMessage({ text: next.text, metadata: { currentPage: next.currentPage } })
+}
+
+function onSubmit() {
+  const text = input.value.trim()
+  if (!text) {
+    return
+  }
 
   input.value = ''
+  queue.value.push({ text, currentPage: currentPage.value })
+
+  if (status.value !== 'submitted' && status.value !== 'streaming') {
+    sendNext()
+  }
 }
+
+watch(status, (value) => {
+  if (value === 'ready') {
+    sendNext()
+  }
+})
 
 // Sync external messages (e.g. from search→chat flow) into the chat instance.
 // When the last synced message is from the user, auto-regenerate the assistant response.
 // _skipSync prevents loops when onFinish writes back to the shared messages ref.
 watch(messages, (newMessages) => {
   if (_skipSync) return
+
+  // A question asked from the search palette or "Explain this page" while a
+  // response streams waits in the queue, syncing would restart the chat mid-answer
+  const last = newMessages.at(-1)
+  if (last?.role === 'user' && (status.value === 'submitted' || status.value === 'streaming')) {
+    pending.value = false
+    queue.value.push({ text: getTextFromMessage(last), currentPage: last.metadata?.currentPage ?? currentPage.value })
+    return
+  }
 
   chatMessages.value = newMessages
   if (chatMessages.value.at(-1)?.role === 'user') {
@@ -261,6 +294,7 @@ function clearMessages() {
   }
   messages.value = []
   chatMessages.value = []
+  queue.value = []
   _themeApplied.clear()
 }
 </script>
@@ -400,7 +434,6 @@ function clearMessages() {
       <UChatPrompt
         ref="promptRef"
         v-model="input"
-        :status="status"
         :error="error"
         placeholder="Ask me anything..."
         variant="naked"
@@ -409,6 +442,22 @@ function clearMessages() {
         class="px-4"
         @submit="onSubmit"
       >
+        <template v-if="queue.length" #header>
+          <ul class="flex flex-col gap-1 w-full">
+            <li v-for="(item, index) in queue" :key="index" class="flex items-center gap-2 text-xs text-muted">
+              <span class="truncate flex-1">{{ item.text }}</span>
+              <UButton
+                :icon="appConfig.ui.icons.close"
+                color="neutral"
+                variant="ghost"
+                size="xs"
+                aria-label="Remove from queue"
+                @click="queue.splice(index, 1)"
+              />
+            </li>
+          </ul>
+        </template>
+
         <template #footer>
           <ULink to="https://vercel.com/ai-gateway" target="_blank" class="inline-flex items-center gap-1 text-xs text-dimmed hover:text-muted">
             Powered by <UIcon name="i-simple-icons-vercel" class="size-3" /> AI Gateway
