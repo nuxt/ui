@@ -65,7 +65,6 @@ export interface ChatMessagesProps<T extends UIMessage[] = UIMessage[]> {
   compact?: boolean
   /**
    * The spacing offset for the last message in px. Can be useful when the prompt is sticky for example.
-   * The auto scroll button is kept above it.
    * @deprecated Use the `footer` slot to render a sticky prompt, its height is measured automatically.
    * @defaultValue 0
    */
@@ -145,7 +144,8 @@ const assistantProps = toRef(() => defu(props.assistant, { side: 'left' as const
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatMessages || {}) })({
-  compact: props.compact
+  compact: props.compact,
+  footer: !!slots.footer
 }))
 
 const el = ref<HTMLElement | null>(null)

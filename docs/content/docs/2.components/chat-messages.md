@@ -257,7 +257,7 @@ ignore:
   - autoScroll.color
   - autoScroll.variant
   - shouldScrollToBottom
-class: 'overflow-y-auto max-h-[341px]'
+class: 'overflow-y-auto max-h-[341px] static'
 props:
   autoScroll:
     color: neutral
@@ -312,7 +312,7 @@ ignore:
   - autoScroll.color
   - autoScroll.variant
   - shouldScrollToBottom
-class: 'overflow-y-auto max-h-[341px]'
+class: 'overflow-y-auto max-h-[341px] static'
 props:
   autoScrollIcon: 'i-lucide-chevron-down'
   shouldScrollToBottom: false

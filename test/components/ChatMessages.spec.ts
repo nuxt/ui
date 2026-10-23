@@ -68,6 +68,31 @@ describe('ChatMessages', () => {
     wrapper.unmount()
   })
 
+  it.each([
+    ['without', undefined, 'absolute'],
+    ['with', () => 'Prompt', 'sticky']
+  ])('positions the auto scroll button %s a footer', async (_, footer, position) => {
+    const Parent = defineComponent({
+      setup() {
+        return () => h('div', { style: 'overflow-y: auto' }, [h(ChatMessages, { ...props, shouldScrollToBottom: false }, footer ? { footer } : {})])
+      }
+    })
+
+    const wrapper = await mountSuspended(Parent, { attachTo: document.body })
+    Object.defineProperties(wrapper.element, {
+      scrollHeight: { value: 1000 },
+      clientHeight: { value: 100 }
+    })
+    wrapper.element.dispatchEvent(new Event('scroll'))
+    await nextTick()
+
+    const viewport = wrapper.find('[data-slot="viewport"]').classes()
+    expect(viewport).toContain(position)
+    expect(viewport.includes('top-[86%]')).toBe(position === 'absolute')
+
+    wrapper.unmount()
+  })
+
   it('scrolls the scroll parent in `scrollToMessage`', async () => {
     const chatRef = ref<{ scrollToMessage: (id: string, smooth?: boolean) => void } | null>(null)
     const Parent = defineComponent({
