@@ -126,7 +126,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `value?: string`{lang="ts-type"}
 - `disabled?: boolean`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
-- `onSelect?: (e: Event) => void`{lang="ts-type"}
+- `onSelect?: (e: CustomEvent<{ originalEvent: Event }>) => void`{lang="ts-type"}
 - `children?: NavigationMenuChildItem[]`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
 - `ui?: { linkLeadingAvatarSize?: ClassNameValue, linkLeadingAvatar?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLeadingChipSize?: ClassNameValue, linkLabel?: ClassNameValue, linkLabelExternalIcon?: ClassNameValue, linkTrailing?: ClassNameValue, linkTrailingBadgeSize?: ClassNameValue, linkTrailingBadge?: ClassNameValue, linkTrailingIcon?: ClassNameValue, label?: ClassNameValue, link?: ClassNameValue, content?: ClassNameValue, childList?: ClassNameValue, childLabel?: ClassNameValue, childItem?: ClassNameValue, childLink?: ClassNameValue, childLinkIcon?: ClassNameValue, childLinkWrapper?: ClassNameValue, childLinkLabel?: ClassNameValue, childLinkLabelExternalIcon?: ClassNameValue, childLinkDescription?: ClassNameValue }`{lang="ts-type"}
@@ -225,13 +225,17 @@ props:
 You can also pass an array of arrays to the `items` prop to display groups of items.
 ::
 
+::note
+The `onSelect` handler receives the `select` event from Reka UI's [NavigationMenuLink](https://reka-ui.com/docs/components/navigation-menu#link). Calling `event.preventDefault()` keeps the menu open, while calling `event.detail.originalEvent.preventDefault()` stops the link from navigating.
+::
+
 ::tip
 Each item can take a `children` array of objects with the following properties to create submenus:
 
 - `label: string`
 - `description?: string`
 - `icon?: string`
-- `onSelect?: (e: Event) => void`
+- `onSelect?: (e: CustomEvent<{ originalEvent: Event }>) => void`
 - `class?: any`
 
 ::

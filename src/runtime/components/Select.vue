@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { SelectRootProps, SelectRootEmits, SelectContentProps, SelectContentEmits, SelectArrowProps } from 'reka-ui'
+import type { SelectRootProps, SelectRootEmits, SelectContentProps, SelectContentEmits, SelectArrowProps, SelectItemSelectEvent } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/select'
@@ -33,7 +33,7 @@ export type SelectItem = SelectValue | {
   type?: 'label' | 'separator' | 'item'
   value?: SelectValue
   disabled?: boolean
-  onSelect?: (e: Event) => void
+  onSelect?: (e: SelectItemSelectEvent<unknown>) => void
   class?: any
   ui?: Partial<Pick<Select['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>>
   [key: string]: any
