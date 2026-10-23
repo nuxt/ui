@@ -75,11 +75,6 @@ export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'
    */
   router?: boolean | 'inertia'
   /**
-   * Enables compatibility layer for InertiaJS
-   * @deprecated Use `router: 'inertia'` instead
-   */
-  inertia?: boolean
-  /**
    * Root directory where the `.nuxt-ui` directory (`#build/ui.css` and `#build/ui/*`) is created.
    * Useful for setups like `electron-vite` where `config.root` points to a sub-directory
    * (e.g. `src/renderer`).
