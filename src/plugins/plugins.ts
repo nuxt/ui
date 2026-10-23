@@ -23,7 +23,7 @@ export default function PluginsPlugin(options: NuxtUIOptions) {
     plugins.push(resolvePathSync('./vue/plugins/color-mode', { extensions: ['.ts', '.mjs', '.js'], url: runtimeUrl }))
   }
 
-  const proseComponents = (options.prose || options.mdc)
+  const proseComponents = options.prose
     ? globSync(['**/*.vue'], { cwd: join(runtimeDir, 'components/prose'), absolute: true })
     : []
 
