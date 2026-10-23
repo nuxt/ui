@@ -163,6 +163,44 @@ describe('InputNumber', () => {
       await input.trigger('blur')
       expect(wrapper.emitted()).toMatchObject({ blur: [[{ type: 'blur' }]] })
     })
+
+    test.each([
+      ['controlled', { modelValue: 5 }],
+      ['uncontrolled', { defaultValue: 5 }]
+    ])('keeps the previous value when committing unparseable input %s', async (_, props) => {
+      const wrapper = await mountSuspended(InputNumber, { props })
+      const input = wrapper.find('input')
+
+      for (const text of ['.', '-']) {
+        await input.setValue(text)
+        await input.trigger('keydown', { key: 'Enter' })
+        await flushPromises()
+
+        expect((input.element as HTMLInputElement).value).toBe('5')
+      }
+
+      expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+    })
+
+    test('keeps the previous value when committing unparseable input after an undefined modelValue', async () => {
+      const wrapper = await mountSuspended(InputNumber, {
+        props: {
+          'modelValue': undefined,
+          'onUpdate:modelValue': (value: number | null | undefined) => wrapper.setProps({ modelValue: value })
+        }
+      })
+      const input = wrapper.find('input')
+
+      await input.setValue('7')
+      await input.trigger('keydown', { key: 'Enter' })
+      await flushPromises()
+      await input.setValue('.')
+      await input.trigger('keydown', { key: 'Enter' })
+      await flushPromises()
+
+      expect(wrapper.emitted('update:modelValue')).toEqual([[7]])
+      expect((input.element as HTMLInputElement).value).toBe('7')
+    })
   })
 
   describe('form integration', async () => {
