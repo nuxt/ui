@@ -85,7 +85,7 @@ export type ChatMessagesSlots<T extends UIMessage[] = UIMessage[]> = {
 </script>
 
 <script setup lang="ts" generic="T extends UIMessage[] = UIMessage[]">
-import { ref, computed, watch, nextTick, toRef, readonly, onMounted } from 'vue'
+import { ref, computed, watch, nextTick, toRef, readonly, onMounted, onBeforeUnmount } from 'vue'
 import { Presence } from 'reka-ui'
 import { defu } from 'defu'
 import { useEventListener, useMutationObserver, watchThrottled } from '@vueuse/core'
@@ -324,13 +324,27 @@ onMounted(() => {
 
   // Watch for DOM changes (e.g. async code block rendering) and scroll to bottom
   if (el.value) {
+    let frame: number | undefined
+
     useMutationObserver(el, () => {
       if (props.shouldAutoScroll && props.status === 'streaming' && !userScrolledUp.value) {
         scrollToBottom(false)
       }
 
-      checkScrollPosition()
+      // Measure at most once per frame, streaming mutates the DOM many times per frame
+      if (frame === undefined) {
+        frame = requestAnimationFrame(() => {
+          frame = undefined
+          checkScrollPosition()
+        })
+      }
     }, { childList: true, subtree: true })
+
+    onBeforeUnmount(() => {
+      if (frame !== undefined) {
+        cancelAnimationFrame(frame)
+      }
+    })
   }
 })
 
