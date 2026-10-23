@@ -6,7 +6,7 @@ import { defineTheme } from '../utils/theme'
 // container that has the padding of the size.
 export default defineTheme({
   slots: {
-    root: 'relative inline-flex items-center rounded-md cursor-text data-disabled:cursor-not-allowed data-disabled:opacity-75 transition-colors',
+    root: 'relative inline-flex items-center rounded-md cursor-text data-disabled:cursor-not-allowed data-disabled:opacity-(--ui-disabled-opacity) transition-colors',
     base: 'flex-1 border-0 bg-transparent text-strong placeholder:text-faint focus:outline-none disabled:cursor-not-allowed',
     // The tags wrap in their own container, so the leading and the trailing stay
     // centered on the box whatever its number of lines
@@ -64,10 +64,10 @@ export default defineTheme({
     },
     // The input takes the focus, two levels down from the box
     variant: {
-      outline: { root: 'bg-default ring ring-inset ring-strong outline-accent-focus has-[input:focus-visible]:outline-3 has-[input:focus-visible]:ring-accent' },
-      soft: { root: 'bg-tint hover:bg-soft has-[input:focus]:bg-soft data-disabled:bg-tint outline-accent-focus has-[input:focus-visible]:outline-3' },
-      subtle: { root: 'bg-soft ring ring-inset ring-strong outline-accent-focus has-[input:focus-visible]:outline-3 has-[input:focus-visible]:ring-accent' },
-      ghost: { root: 'bg-transparent hover:bg-soft has-[input:focus]:bg-soft data-disabled:bg-transparent dark:data-disabled:bg-transparent outline-accent-focus has-[input:focus-visible]:outline-3' },
+      outline: { root: 'bg-default ring ring-inset ring-strong outline-accent-focus has-[input:focus-visible]:outline-(length:--ui-focus-width) has-[input:focus-visible]:ring-accent' },
+      soft: { root: 'bg-tint hover:bg-soft has-[input:focus]:bg-soft data-disabled:bg-tint outline-accent-focus has-[input:focus-visible]:outline-(length:--ui-focus-width)' },
+      subtle: { root: 'bg-soft ring ring-inset ring-strong outline-accent-focus has-[input:focus-visible]:outline-(length:--ui-focus-width) has-[input:focus-visible]:ring-accent' },
+      ghost: { root: 'bg-transparent hover:bg-soft has-[input:focus]:bg-soft data-disabled:bg-transparent dark:data-disabled:bg-transparent outline-accent-focus has-[input:focus-visible]:outline-(length:--ui-focus-width)' },
       none: { root: 'bg-transparent' }
     },
     color: colorVariant({ root: '' }),

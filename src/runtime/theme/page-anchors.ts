@@ -6,7 +6,7 @@ export default defineTheme({
     root: '[--ui-accent:var(--ui-primary)]',
     list: '',
     item: 'relative',
-    link: 'group text-sm flex items-center gap-1.5 py-1 rounded-sm outline-accent-focus focus-visible:outline-3',
+    link: 'group text-sm flex items-center gap-1.5 py-1 rounded-sm outline-accent-focus focus-visible:outline-(length:--ui-focus-width)',
     linkLeading: 'rounded-md p-1 inline-flex ring-inset ring',
     linkLeadingIcon: 'size-4 shrink-0',
     linkLabel: 'truncate',

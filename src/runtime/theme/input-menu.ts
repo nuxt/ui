@@ -4,7 +4,7 @@ import { extendTheme } from '../utils/theme'
 export default extendTheme(input, {
   slots: {
     // With `multiple`, the disabled state is on the tags container
-    root: (prev: string) => [prev, 'has-[>[data-disabled]]:cursor-not-allowed has-[>[data-disabled]]:opacity-75'],
+    root: (prev: string) => [prev, 'has-[>[data-disabled]]:cursor-not-allowed has-[>[data-disabled]]:opacity-(--ui-disabled-opacity)'],
     // The tags wrap in their own container, so the leading and the trailing stay
     // centered on the box whatever its number of lines
     tags: 'flex flex-wrap items-center flex-1 min-w-0 gap-(--ui-control-gap) px-(--ui-control-px) py-(--ui-control-py)',
@@ -17,7 +17,7 @@ export default extendTheme(input, {
     empty: 'text-center text-muted',
     label: 'font-semibold text-strong',
     separator: '-mx-1 my-1 h-px bg-border',
-    item: 'group relative w-full flex items-start gap-1.5 p-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-strong data-highlighted:not-data-disabled:before:bg-tint transition-colors before:transition-colors',
+    item: 'group relative w-full flex items-start gap-1.5 p-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-(--ui-disabled-opacity) text-default data-highlighted:not-data-disabled:text-strong data-highlighted:not-data-disabled:before:bg-tint transition-colors before:transition-colors',
     itemLeadingIcon: 'shrink-0 text-faint group-data-highlighted:not-group-data-disabled:text-default transition-colors',
     itemLeadingAvatar: 'shrink-0',
     itemLeadingChip: 'shrink-0',
@@ -34,10 +34,10 @@ export default extendTheme(input, {
   variants: {
     // The input takes the focus, up to two levels down from the box
     variant: {
-      outline: { root: 'bg-default ring ring-inset ring-strong outline-accent-focus has-[input:focus-visible]:outline-3 has-[input:focus-visible]:ring-accent' },
-      soft: { root: 'bg-tint hover:bg-soft has-[input:focus]:bg-soft has-[input:disabled]:bg-tint outline-accent-focus has-[input:focus-visible]:outline-3' },
-      subtle: { root: 'bg-soft ring ring-inset ring-strong outline-accent-focus has-[input:focus-visible]:outline-3 has-[input:focus-visible]:ring-accent' },
-      ghost: { root: 'bg-transparent hover:bg-soft has-[input:focus]:bg-soft has-[input:disabled]:bg-transparent dark:has-[input:disabled]:bg-transparent outline-accent-focus has-[input:focus-visible]:outline-3' }
+      outline: { root: 'bg-default ring ring-inset ring-strong outline-accent-focus has-[input:focus-visible]:outline-(length:--ui-focus-width) has-[input:focus-visible]:ring-accent' },
+      soft: { root: 'bg-tint hover:bg-soft has-[input:focus]:bg-soft has-[input:disabled]:bg-tint outline-accent-focus has-[input:focus-visible]:outline-(length:--ui-focus-width)' },
+      subtle: { root: 'bg-soft ring ring-inset ring-strong outline-accent-focus has-[input:focus-visible]:outline-(length:--ui-focus-width) has-[input:focus-visible]:ring-accent' },
+      ghost: { root: 'bg-transparent hover:bg-soft has-[input:focus]:bg-soft has-[input:disabled]:bg-transparent dark:has-[input:disabled]:bg-transparent outline-accent-focus has-[input:focus-visible]:outline-(length:--ui-focus-width)' }
     },
     // Next to a leading or a trailing, the padding of the container is the gap to it
     leading: {

@@ -6,7 +6,7 @@ export default defineTheme({
     root: 'relative min-w-0',
     list: 'flex items-center gap-1.5',
     item: 'flex min-w-0',
-    link: 'group relative flex items-center gap-1.5 text-sm min-w-0 rounded-md outline-accent-focus focus-visible:outline-3',
+    link: 'group relative flex items-center gap-1.5 text-sm min-w-0 rounded-md outline-accent-focus focus-visible:outline-(length:--ui-focus-width)',
     linkLeadingIcon: 'shrink-0 size-5',
     linkLeadingAvatar: 'shrink-0',
     linkLabel: 'truncate',
@@ -24,7 +24,7 @@ export default defineTheme({
     },
     disabled: {
       true: {
-        link: 'cursor-not-allowed opacity-75'
+        link: 'cursor-not-allowed opacity-(--ui-disabled-opacity)'
       }
     },
     to: {
