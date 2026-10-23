@@ -137,9 +137,10 @@ function generateMessages() {
 
         <UChatTool
           v-else-if="isToolUIPart(part) && getToolName(part) === 'web_search'"
-          :text="isToolStreaming(part, streaming) ? 'Searching the web...' : part.state === 'output-available' ? 'Searched the web' : 'Stopped searching the web'"
+          :text="isToolStreaming(part, streaming) ? 'Searching the web...' : part.state === 'output-available' ? 'Searched the web' : part.state === 'output-error' ? 'Failed to search the web' : 'Stopped searching the web'"
           :suffix="(part.input as { query?: string })?.query"
           :streaming="isToolStreaming(part, streaming)"
+          :error="part.state === 'output-error'"
           chevron="leading"
         >
           <div v-if="part.output && (part.output as any[]).length" class="p-1 border border-default rounded-md max-h-40 overflow-y-auto">
@@ -172,6 +173,7 @@ function generateMessages() {
           chevron="leading"
           variant="card"
           :streaming="isToolStreaming(part, streaming)"
+          :error="part.state === 'output-error'"
           :actions="part.state === 'approval-requested' ? [
             { label: 'Approve', color: 'neutral', onClick: () => addToolApprovalResponse({ id: part.approval!.id, approved: true }) },
             { label: 'Deny', color: 'neutral', variant: 'soft', onClick: () => addToolApprovalResponse({ id: part.approval!.id, approved: false }) }
