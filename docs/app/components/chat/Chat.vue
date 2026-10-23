@@ -2,7 +2,7 @@
 import type { ToolUIPart, DynamicToolUIPart } from 'ai'
 import { DefaultChatTransport, isToolUIPart, isReasoningUIPart, isTextUIPart, getToolName } from 'ai'
 import { useChat as useAIChat } from '@ai-sdk/vue'
-import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
+import { getTextFromMessage, isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 import type { DocsChatMessage, DocsChatTools } from '~~/server/api/ai.post'
 
 const input = ref('')
@@ -156,6 +156,15 @@ watch(status, (value) => {
 // _skipSync prevents loops when onFinish writes back to the shared messages ref.
 watch(messages, (newMessages) => {
   if (_skipSync) return
+
+  // A question asked from the search palette or "Explain this page" while a
+  // response streams waits in the queue, syncing would restart the chat mid-answer
+  const last = newMessages.at(-1)
+  if (last?.role === 'user' && (status.value === 'submitted' || status.value === 'streaming')) {
+    pending.value = false
+    queue.value.push({ text: getTextFromMessage(last), currentPage: last.metadata?.currentPage ?? currentPage.value })
+    return
+  }
 
   chatMessages.value = newMessages
   if (chatMessages.value.at(-1)?.role === 'user') {
