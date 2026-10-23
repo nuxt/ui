@@ -1,10 +1,15 @@
+import { readFile } from 'node:fs/promises'
+import { join } from 'pathe'
 import { defu } from 'defu'
-import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addPlugin, hasNuxtModule } from '@nuxt/kit'
+import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addPlugin, addPluginTemplate, findPath, getLayerDirectories, hasNuxtModule } from '@nuxt/kit'
+import { IconUsageScanner } from '@nuxt/icon/utils'
 import type { HookResult, ModuleDependencies } from '@nuxt/schema'
 import { addTemplates } from './templates'
 import { publicComposables } from './imports'
 import { defaultOptions, getDefaultConfig, resolveColors } from './utils/defaults'
 import { getClientBundleIcons } from './utils/icons'
+import { generateI18nPlugin, getLocaleKeys } from './utils/locales'
+import type { I18nLocale } from './utils/locales'
 import { name, version } from '../package.json'
 
 export type * from './runtime/types'
@@ -229,9 +234,22 @@ export default defineNuxtModule<ModuleOptions>({
     // `@nuxt/icon` drops any name it can't resolve (collection not installed, icon
     // missing) and falls back to runtime loading instead of failing the build
     // (nuxt/icon#504), so we add them all and let it sort out what's available.
-    nuxt.hook('icon:clientBundleIcons', (icons) => {
+    nuxt.hook('icon:clientBundleIcons', async (icons) => {
       for (const name of getClientBundleIcons(nuxt.options.appConfig.ui?.icons)) {
         icons.add(name)
+      }
+
+      // `app.config.ts` is only evaluated at runtime, so the icons it sets never reach
+      // `nuxt.options.appConfig`. Read the icon names written in each layer's file instead,
+      // matching custom collections too, as `clientBundle.scan` does.
+      const scanner = new IconUsageScanner({
+        additionalCollections: ((nuxt.options.icon || {}).customCollections ?? []).map(collection => collection.prefix)
+      })
+      for (const layer of getLayerDirectories(nuxt)) {
+        const path = await findPath(join(layer.app, 'app.config'))
+        if (path) {
+          scanner.extractFromCode(await readFile(path, 'utf-8'), icons)
+        }
       }
     })
 
@@ -251,6 +269,18 @@ export default defineNuxtModule<ModuleOptions>({
     }
 
     addPlugin({ src: resolve('./runtime/plugins/colors') })
+
+    if (hasNuxtModule('@nuxtjs/i18n')) {
+      addPluginTemplate({
+        filename: 'ui-i18n.mjs',
+        getContents: () => {
+          // Resolved by `@nuxtjs/i18n`, including layers
+          const { locales } = (nuxt.options.runtimeConfig.public.i18n || {}) as { locales?: I18nLocale[] }
+
+          return generateI18nPlugin(Array.isArray(locales) ? locales : [], getLocaleKeys(resolve('./runtime/locale')), resolve('./runtime'))
+        }
+      })
+    }
 
     if (options.prose || options.mdc || options.content || hasNuxtModule('@nuxtjs/mdc') || hasNuxtModule('@nuxt/content')) {
       addComponentsDir({

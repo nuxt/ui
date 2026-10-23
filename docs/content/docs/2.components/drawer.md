@@ -386,7 +386,7 @@ export default defineNuxtConfig({
 
 ::
 
-### No Body Styles :badge{label="Soon" class="align-text-top"}
+### No Body Styles :badge{label="4.12+" class="align-text-top"}
 
 Use the `no-body-styles` prop to prevent the Drawer from applying styles to the `<body>` element, such as `pointer-events: none` which blocks interaction with the page while the Drawer is open.
 

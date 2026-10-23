@@ -65,7 +65,7 @@ You can use it with Nuxt i18n:
 
 ```vue
 <script setup lang="ts">
-import * as locales from '@nuxt/ui/locale'
+import { de, en, fr } from '@nuxt/ui/locale'
 
 const { locale, setLocale } = useI18n()
 </script>
@@ -73,7 +73,7 @@ const { locale, setLocale } = useI18n()
 <template>
   <ULocaleSelect
     :model-value="locale"
-    :locales="Object.values(locales)"
+    :locales="[de, en, fr]"
     @update:model-value="setLocale($event)"
   />
 </template>
@@ -88,7 +88,7 @@ You can use it with Vue i18n:
 ```vue
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import * as locales from '@nuxt/ui/locale'
+import { de, en } from '@nuxt/ui/locale'
 
 const { locale, setLocale } = useI18n()
 </script>
@@ -96,7 +96,7 @@ const { locale, setLocale } = useI18n()
 <template>
   <ULocaleSelect
     :model-value="locale"
-    :locales="Object.values(locales)"
+    :locales="[de, en]"
     @update:model-value="setLocale($event)"
   />
 </template>

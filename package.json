@@ -1,8 +1,8 @@
 {
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
-  "version": "4.11.3",
-  "packageManager": "pnpm@12.11.2",
+  "version": "4.12.0",
+  "packageManager": "pnpm@12.14.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nuxt/ui.git"
@@ -208,6 +208,7 @@
     "@nuxt/module-builder": "catalog:",
     "@nuxt/test-utils": "catalog:",
     "@release-it/conventional-changelog": "catalog:",
+    "@tanstack/charts": "catalog:",
     "@tanstack/table-core": "catalog:",
     "@vitejs/plugin-vue": "catalog:",
     "@vue/test-utils": "catalog:",
@@ -231,6 +232,7 @@
     "@internationalized/date": "^3",
     "@internationalized/number": "^3",
     "@nuxt/content": "^3",
+    "@tanstack/charts": "^1",
     "@tiptap/core": "^3",
     "@tiptap/extension-bubble-menu": "^3",
     "@tiptap/extension-code": "^3",
@@ -269,6 +271,9 @@
       "optional": true
     },
     "@nuxt/content": {
+      "optional": true
+    },
+    "@tanstack/charts": {
       "optional": true
     },
     "ai": {

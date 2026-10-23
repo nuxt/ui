@@ -72,7 +72,7 @@ props:
 ::
 
 ::tip
-Use the `isToolStreaming` utility from `@nuxt/ui/utils/ai` to determine if a tool part is still running. It returns `false` when the tool is waiting for a user approval.
+Use the `isToolStreaming` utility from `@nuxt/ui/utils/ai` to determine if a tool part is still running. It returns `false` when the tool is waiting for a user approval. Pass it the `streaming` slot prop of [ChatMessages](/docs/components/chat-messages#slots) so it stops when the chat is stopped.
 ::
 
 ### Shimmer

@@ -60,13 +60,13 @@ const ui = {
             :user="{ side: 'left', variant: 'naked', avatar: { src: 'https://github.com/benjamincanac.png', loading: 'lazy' as const } }"
             :assistant="{ icon: 'i-lucide-bot' }"
           >
-            <template #content="{ message }">
+            <template #content="{ message, streaming }">
               <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
                 <template v-if="isTextUIPart(part)">
                   <Markdown
                     v-if="message.role === 'assistant'"
                     :value="part.text"
-                    :streaming="isPartStreaming(part)"
+                    :streaming="isPartStreaming(part, streaming)"
                     :plugins="plugins"
                     class="*:first:mt-0 *:last:mb-0"
                   />
@@ -83,6 +83,7 @@ const ui = {
               v-model="input"
               icon="i-lucide-search"
               variant="naked"
+              :status="status"
               :error="error"
               @submit="onSubmit"
             />

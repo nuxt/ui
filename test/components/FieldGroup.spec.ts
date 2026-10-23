@@ -4,7 +4,7 @@ import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import FieldGroup from '../../src/runtime/components/FieldGroup.vue'
 import buttonTheme from '#build/ui/button'
-import { UInput, UButton } from '#components'
+import { UInput, UButton, USelect, USelectMenu } from '#components'
 
 describe('FieldGroup', () => {
   const sizes = Object.keys(buttonTheme.variants.size) as any
@@ -28,6 +28,23 @@ describe('FieldGroup', () => {
         default: {
           components: { UInput, UButton },
           template: `<UInput /> <UButton> Click me! </UButton>`
+        }
+      }
+    }],
+    ['with select and select menu in default slot', {
+      slots: {
+        default: {
+          components: { UButton, USelect, USelectMenu },
+          template: `<UButton> Click me! </UButton> <USelect name="select" /> <USelectMenu name="select-menu" />`
+        }
+      }
+    }],
+    ['orientation vertical with select and select menu in default slot', {
+      props: { orientation: 'vertical' },
+      slots: {
+        default: {
+          components: { UButton, USelect, USelectMenu },
+          template: `<UButton> Click me! </UButton> <USelect name="select" /> <USelectMenu name="select-menu" />`
         }
       }
     }],

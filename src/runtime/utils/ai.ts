@@ -16,8 +16,13 @@ export function getTextFromMessage(message: UIMessage) {
 
 /**
  * Checks if a text or reasoning part is currently being streamed.
+ *
+ * Pass the `streaming` slot prop of `UChatMessages` so parts stop streaming when the chat is stopped,
+ * the AI SDK leaves their state untouched on abort.
  */
-export function isPartStreaming(part: { state?: string }): boolean {
+export function isPartStreaming(part: { state?: string }, streaming?: boolean): boolean {
+  if (streaming === false) return false
+
   return part.state === 'streaming'
 }
 
@@ -26,9 +31,17 @@ export function isPartStreaming(part: { state?: string }): boolean {
  * and isn't paused waiting for a user approval).
  *
  * Terminal states are `output-available`, `output-error`, and `output-denied`,
- * `approval-requested` is a paused state.
+ * `approval-requested` is a paused state, and a denied `approval-responded` won't run.
+ *
+ * Pass the `streaming` slot prop of `UChatMessages` so tools stop streaming when the chat is stopped.
  */
-export function isToolStreaming(part: { state: string }): boolean {
+export function isToolStreaming(part: { state: string, approval?: { approved?: boolean } }, streaming?: boolean): boolean {
+  if (streaming === false) return false
+
+  if (part.state === 'approval-responded') {
+    return part.approval?.approved !== false
+  }
+
   return !['approval-requested', 'output-available', 'output-error', 'output-denied'].includes(part.state)
 }
 

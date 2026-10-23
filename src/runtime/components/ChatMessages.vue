@@ -78,7 +78,7 @@ export type ChatMessagesSlots<T extends UIMessage[] = UIMessage[]> = {
   viewport?(props: { ui: ChatMessages['ui'], onClick: () => void }): VNode[]
 } & {
   [K in keyof ChatMessageSlots]?: NonNullable<ChatMessageSlots[K]> extends (props: infer P) => VNode[]
-    ? (props: P & { message: MessageBase<T> }) => VNode[]
+    ? (props: P & { message: MessageBase<T>, streaming: boolean }) => VNode[]
     : never
 }
 
@@ -88,7 +88,7 @@ export type ChatMessagesSlots<T extends UIMessage[] = UIMessage[]> = {
 import { ref, computed, watch, nextTick, toRef, onMounted } from 'vue'
 import { Presence } from 'reka-ui'
 import { defu } from 'defu'
-import { useElementBounding, useEventListener, useMutationObserver, watchThrottled } from '@vueuse/core'
+import { useEventListener, useMutationObserver, watchThrottled } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
@@ -122,6 +122,13 @@ function showIndicator() {
 
   const lastMessage = props.messages?.[props.messages.length - 1]
   return lastMessage?.role === 'assistant' && !lastMessage.parts?.length
+}
+
+// Only the last message streams, and nothing does once the chat is stopped
+function isMessageStreaming(message: UIMessage) {
+  if (props.status !== 'submitted' && props.status !== 'streaming') return false
+
+  return message.id === props.messages?.[props.messages.length - 1]?.id
 }
 
 const { t } = useLocale()
@@ -221,11 +228,11 @@ function checkScrollPosition() {
 
   showAutoScroll.value = (scrollHeight - scrollPosition) >= threshold
 
-  // Detect user scrolling up
-  if (parent.value.scrollTop < lastScrollTop.value) {
-    userScrolledUp.value = true
-  } else if ((scrollHeight - scrollPosition) < threshold) {
+  // Only resume following at the very bottom, otherwise streaming pulls the user back down
+  if ((scrollHeight - scrollPosition) <= 1) {
     userScrolledUp.value = false
+  } else if (parent.value.scrollTop < lastScrollTop.value) {
+    userScrolledUp.value = true
   }
 
   lastScrollTop.value = parent.value.scrollTop
@@ -261,7 +268,7 @@ function updateLastMessageHeight() {
     return
   }
 
-  const { height: parentHeight } = useElementBounding(parent.value)
+  const parentHeight = parent.value.getBoundingClientRect().height
 
   const lastMessage = props.messages.findLast(m => m.role === 'user')
   if (!lastMessage) {
@@ -281,7 +288,7 @@ function updateLastMessageHeight() {
   spacingOffset += Number.parseFloat(parentComputedStyle.paddingTop) || 0
   spacingOffset += Number.parseFloat(parentComputedStyle.paddingBottom) || 0
 
-  lastMessageHeight.value = Math.max(parentHeight.value - lastMessageEl.offsetHeight - spacingOffset, 0)
+  lastMessageHeight.value = Math.max(parentHeight - lastMessageEl.offsetHeight - spacingOffset, 0)
 }
 
 onMounted(() => {
@@ -343,7 +350,7 @@ defineExpose({
           :compact="props.compact"
         >
           <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
-            <slot :name="name" v-bind="{ ...(slotData as any), message }" />
+            <slot :name="name" v-bind="{ ...(slotData as any), message, streaming: isMessageStreaming(message) }" />
           </template>
         </UChatMessage>
       </template>

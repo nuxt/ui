@@ -329,7 +329,7 @@ export function createOpenApiDocument(options: { version: string, url?: string, 
               name: 'path',
               in: 'query',
               required: true,
-              description: 'Repository path to look up. Repeat the parameter to query several paths at once.',
+              description: 'Component or theme file to look up, like `src/runtime/components/Button.vue` or `src/theme/button.ts`. Repeat the parameter to query both at once, at most 2 paths.',
               schema: {
                 oneOf: [
                   { type: 'string' },
