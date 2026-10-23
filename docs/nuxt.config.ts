@@ -36,11 +36,6 @@ export default defineNuxtConfig({
   $production: {
     site: {
       url: 'https://ui.nuxt.com'
-    },
-    // Server sourcemaps cost the final Nitro bundle about 1 GB of heap while
-    // bundling. Build only, so `nuxt dev` keeps Nuxt's defaults.
-    sourcemap: {
-      server: false
     }
   },
 
@@ -214,6 +209,13 @@ export default defineNuxtConfig({
     '/pro/components/pricing-switch': { redirect: { to: '/components/switch', statusCode: 301 }, prerender: false },
     '/pro/components/**': { redirect: { to: '/components/**', statusCode: 301 }, prerender: false },
     '/getting-started/shortcuts': { redirect: { to: '/composables/define-shortcuts', statusCode: 301 }, prerender: false }
+  },
+
+  // Server sourcemaps cost the final Nitro bundle about 1 GB of heap while
+  // bundling. In dev, the Nitro rebuild after saving two theme files peaked
+  // at 4.7 GB with them and ran out of memory, 1.6 GB without.
+  sourcemap: {
+    server: false
   },
 
   future: {

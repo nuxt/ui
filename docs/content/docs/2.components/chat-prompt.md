@@ -26,6 +26,7 @@ name: 'chat-prompt-example'
 The ChatPrompt handles the following events:
 
 - The form is submitted when the user presses :kbd{value="enter"} or when the user clicks on the submit button. Set the `submit-on-enter` prop to `false` to submit with :kbd{value="ctrl"} + :kbd{value="enter"} (or :kbd{value="cmd"} + :kbd{value="enter"} on macOS) instead, allowing :kbd{value="enter"} to insert a newline.
+- The form is not submitted while the `status` prop is `submitted` or `streaming`, so pressing :kbd{value="enter"} during a response doesn't send a second message.
 - The textarea is blurred when :kbd{value="escape"} is pressed and emits a `close` event.
 ::
 
@@ -93,7 +94,7 @@ async function onSubmit() {
       <UContainer>
         <h1>How can I help you today?</h1>
 
-        <UChatPrompt v-model="input" @submit="onSubmit">
+        <UChatPrompt v-model="input" :status="status" @submit="onSubmit">
           <UChatPromptSubmit :status="status" />
         </UChatPrompt>
       </UContainer>
