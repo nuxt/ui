@@ -125,7 +125,7 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
     [...colorModeIgnore, 'content/*.vue', 'prose/**/*.vue']
   )
 
-  const proseComponents = (options.prose !== false && (options.prose || options.mdc))
+  const proseComponents = options.prose
     ? createComponentSource(join(runtimeDir, 'components/prose'), 'Prose')
     : undefined
 

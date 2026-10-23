@@ -33,7 +33,7 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
       options.prefix!,
       componentDir,
       Array.isArray(options.componentDetection) ? options.componentDetection : undefined,
-      { prose: !!(options.prose || options.mdc), packages: packageDirs, warn }
+      { prose: !!options.prose, packages: packageDirs, warn }
     )
   }
   const templateKeys = new Set(templates.map(t => `#build/${t.filename}`))
