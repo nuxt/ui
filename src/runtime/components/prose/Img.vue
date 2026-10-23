@@ -53,7 +53,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.img || {}
   width: !!props.width
 }))
 
-const refinedSrc = computed(() => resolveBaseURL(props.src, useRuntimeConfig().app.baseURL))
+const refinedSrc = computed(() => typeof ImageComponent === 'string' ? resolveBaseURL(props.src, useRuntimeConfig().app.baseURL) : props.src)
 
 const layoutId = computed(() => `${refinedSrc.value}::${useId()}`)
 

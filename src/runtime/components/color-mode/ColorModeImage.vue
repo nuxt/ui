@@ -18,8 +18,8 @@ defineOptions({ inheritAttrs: false })
 
 const props = defineProps<ColorModeImageProps>()
 
-const refinedLight = computed(() => resolveBaseURL(props.light, useRuntimeConfig().app.baseURL))
-const refinedDark = computed(() => resolveBaseURL(props.dark, useRuntimeConfig().app.baseURL))
+const refinedLight = computed(() => typeof ImageComponent === 'string' ? resolveBaseURL(props.light, useRuntimeConfig().app.baseURL) : props.light)
+const refinedDark = computed(() => typeof ImageComponent === 'string' ? resolveBaseURL(props.dark, useRuntimeConfig().app.baseURL) : props.dark)
 const prefix = usePrefix()
 </script>
 
