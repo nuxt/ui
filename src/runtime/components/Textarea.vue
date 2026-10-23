@@ -182,6 +182,30 @@ function autoFocus() {
   }
 }
 
+const measuredProperties = [
+  'box-sizing',
+  'width',
+  'padding-top',
+  'padding-right',
+  'padding-bottom',
+  'padding-left',
+  'border-left-width',
+  'border-right-width',
+  'font-family',
+  'font-size',
+  'font-style',
+  'font-weight',
+  'letter-spacing',
+  'word-spacing',
+  'line-height',
+  'text-indent',
+  'text-transform',
+  'white-space',
+  'word-break',
+  'overflow-wrap',
+  'tab-size'
+]
+
 function autoResize() {
   if (props.autoresize && textareaRef.value) {
     const textarea = textareaRef.value
@@ -202,17 +226,18 @@ function autoResize() {
     measure.removeAttribute('form')
     measure.setAttribute('aria-hidden', 'true')
     measure.tabIndex = -1
-    Object.assign(measure.style, {
-      position: 'absolute',
-      top: '0',
-      left: '0',
-      width: styles.width,
-      height: '0',
-      minHeight: '0',
-      overflow: 'hidden',
-      visibility: 'hidden',
-      pointerEvents: 'none'
-    })
+    // The copy doesn't match `:focus`, `:hover` or `#id` rules, so pin what sizes its text to the textarea's values
+    measure.style.cssText = [
+      ...measuredProperties.map(property => `${property}: ${styles.getPropertyValue(property)}`),
+      'position: absolute',
+      'top: 0',
+      'left: 0',
+      'height: 0',
+      'min-height: 0',
+      'overflow: hidden',
+      'visibility: hidden',
+      'pointer-events: none'
+    ].map(declaration => `${declaration} !important`).join('; ')
     textarea.after(measure)
     const { scrollHeight } = measure
     measure.remove()

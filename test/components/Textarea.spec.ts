@@ -145,6 +145,34 @@ describe('Textarea', () => {
     }
   })
 
+  test('with autoresize measures with styles that only match the textarea', async () => {
+    // The measuring copy has no id, so `#autoresize` doesn't match it
+    const style = document.createElement('style')
+    style.textContent = 'textarea { line-height: 20px; padding: 0px } #autoresize { line-height: 40px }'
+    document.head.append(style)
+    Object.defineProperty(HTMLTextAreaElement.prototype, 'scrollHeight', {
+      configurable: true,
+      get() {
+        return this.value.split('\n').length * Number.parseFloat(window.getComputedStyle(this).lineHeight)
+      }
+    })
+
+    try {
+      const wrapper = mount(Textarea, {
+        props: { autoresize: true, rows: 1, id: 'autoresize' },
+        attachTo: document.body
+      })
+      const textarea = wrapper.find('textarea')
+      await textarea.setValue('line\nline\nline')
+      await flushPromises()
+      expect(Number(textarea.element.rows)).toBe(3)
+      wrapper.unmount()
+    } finally {
+      delete (HTMLTextAreaElement.prototype as any).scrollHeight
+      style.remove()
+    }
+  })
+
   describe('emits', () => {
     test('update:modelValue event', async () => {
       const wrapper = mount(Textarea)
