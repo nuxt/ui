@@ -46,6 +46,56 @@ exports[`AuthForm > renders with as correctly 1`] = `
 </section>"
 `;
 
+exports[`AuthForm > renders with as object correctly 1`] = `
+"<section data-slot="root" class="w-full space-y-6">
+  <div data-slot="header" class="flex flex-col text-center">
+    <!--v-if-->
+    <h3 data-slot="title" class="text-xl text-pretty font-semibold text-highlighted">Title</h3>
+    <!--v-if-->
+  </div>
+  <div data-slot="body" class="gap-y-6 flex flex-col">
+    <!--v-if-->
+    <!--v-if-->
+    <form id="v-0" method="post" class="space-y-5" data-slot="form">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
+        <div data-slot="wrapper" class="">
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-1" id="v-1-label" data-slot="label" class="block font-medium text-default">Email</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="relative mt-1">
+          <div data-slot="input" class="relative inline-flex items-center w-full"><input id="v-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default outline-error/25 focus-visible:outline-3 focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" data-slot="base" aria-invalid="true" aria-describedby="v-1-error">
+            <!--v-if-->
+            <!--v-if-->
+          </div>
+          <div id="v-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
+        </div>
+      </div>
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
+        <div data-slot="wrapper" class="">
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-2" id="v-2-label" data-slot="label" class="block font-medium text-default">Password</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="relative mt-1">
+          <div data-slot="password" class="relative inline-flex items-center w-full"><input id="v-2" type="password" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" data-slot="base" aria-invalid="false">
+            <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" data-slot="base" aria-label="Show password" aria-pressed="false" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5" aria-controls="v-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-4"></svg><!--v-if--><!--v-if--></button></span>
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <!--v-if--><button type="submit" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+        <!--v-if--><span data-slot="label" class="truncate">Continue</span>
+        <!--v-if-->
+      </button>
+    </form>
+  </div>
+  <!--v-if-->
+</section>"
+`;
+
 exports[`AuthForm > renders with class correctly 1`] = `
 "<div data-slot="root" class="w-full space-y-6 max-w-sm">
   <!--v-if-->
