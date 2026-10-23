@@ -46,7 +46,7 @@ export default defineAppConfig({
 
 #vue
 ::div
-Use the `vite.config.ts` to customize the icon with the `ui.icons` property:
+Use the `icons` option in your `vite.config.ts` to customize the icon:
 
 ```ts [vite.config.ts]
 import { defineConfig } from 'vite'
@@ -57,11 +57,9 @@ export default defineConfig({
   plugins: [
     vue(),
     ui({
-      ui: {
-        icons: {
-          light: 'i-lucide-sun-medium',
-          dark: 'i-lucide-moon-star'
-        }
+      icons: {
+        light: 'i-lucide-sun-medium',
+        dark: 'i-lucide-moon-star'
       }
     })
   ]
