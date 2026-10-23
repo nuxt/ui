@@ -87,8 +87,16 @@ name: 'theme-unstyled-example'
 This strips **structural** classes too (positioning, transitions, flex/grid), not just cosmetic ones. Layout-heavy components like `Modal`, `Drawer` or `Calendar` will need you to re-supply their layout.
 ::
 
-::tip
-To apply it to your whole app, set `ui.unstyled` in your app config.
+::framework-only
+#nuxt
+:::tip
+To apply it to your whole app, set `ui.unstyled` in your `app.config.ts`.
+:::
+
+#vue
+:::tip
+To apply it to your whole app, set `unstyled` in the `ui` option of the Vue plugin.
+:::
 ::
 
 ### Variants

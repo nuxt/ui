@@ -184,12 +184,28 @@ export function generateConfig(doc: ThemeDoc, framework: string = 'nuxt', _optio
   // explicit last), a spread would drop one side wholesale.
   const ui: Record<string, any> = { ...mergeUi(doc.style ? styleComponents(doc.style) : undefined, doc.components) }
 
+  // the whole entry file of the Vue installation guide, so a download runs as is
   if (framework === 'vue') {
     const options = Object.keys(ui).length ? `, ${toObjectSource({ ui })}` : ''
     return [
-      'import ui from \'@nuxt/ui/vue-plugin\'',
+      'import \'./assets/css/main.css\'',
       '',
-      `app.use(ui${options})`
+      'import { createApp } from \'vue\'',
+      'import { createRouter, createWebHistory } from \'vue-router\'',
+      'import ui from \'@nuxt/ui/vue-plugin\'',
+      'import App from \'./App.vue\'',
+      '',
+      'const app = createApp(App)',
+      '',
+      'const router = createRouter({',
+      '  routes: [],',
+      '  history: createWebHistory()',
+      '})',
+      '',
+      'app.use(router)',
+      `app.use(ui${options})`,
+      '',
+      'app.mount(\'#app\')'
     ].join('\n')
   }
 
