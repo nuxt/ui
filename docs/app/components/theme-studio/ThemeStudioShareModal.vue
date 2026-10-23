@@ -12,7 +12,7 @@ const open = defineModel<boolean>('open', { default: false })
 
 const appConfig = useAppConfig()
 const studioIcons = useStudioIcons()
-const { exportCSS, exportApp, exportConfig, appLabel, configLabel, currentDoc } = useTheme()
+const { exportCSS, exportConfig, exportViteConfig, configLabel, currentDoc } = useTheme()
 const { presets, activePreset, dirty } = useThemeStudio()
 const { framework } = useFrameworks()
 const { track } = useAnalytics()
@@ -22,8 +22,8 @@ const { copy: copyToClipboard, copied: linkCopied } = useClipboard()
 const { copy: copyFileToClipboard, copied: fileCopied } = useClipboard()
 
 const css = ref('')
-const app = ref('')
 const config = ref('')
+const vite = ref('')
 const link = ref('')
 
 /** The URL the studio reads back on load, theme and all. */
@@ -44,18 +44,18 @@ function copyThemeLink() {
 }
 
 // the pane shows the plain file for the frame the highlighter takes to arrive
-type PaneKey = 'css' | 'app' | 'config'
+type PaneKey = 'css' | 'config' | 'vite'
 
 const docs = shallowRef<Partial<Record<PaneKey, MarkdownDoc>>>({})
 
-// the app config only carries the icon set, so it only shows when that changes
+// the Vite config only carries a Vue icon set, so it only shows when that changes
 const panes = computed(() => [
   { key: 'css' as const, filename: 'main.css', code: css.value },
-  { key: 'app' as const, filename: appLabel.value, code: app.value },
-  ...config.value ? [{ key: 'config' as const, filename: configLabel.value, code: config.value }] : []
+  { key: 'config' as const, filename: configLabel.value, code: config.value },
+  ...vite.value ? [{ key: 'vite' as const, filename: 'vite.config.ts', code: vite.value }] : []
 ])
 
-const exportType: Record<PaneKey, string> = { css: 'CSS', app: 'App', config: 'Config' }
+const exportType: Record<PaneKey, string> = { css: 'CSS', config: 'Config', vite: 'Vite' }
 
 const tab = ref<PaneKey>('css')
 const pane = computed(() => panes.value.find(entry => entry.key === tab.value) ?? panes.value[0]!)
@@ -84,22 +84,22 @@ let version = 0
 watch([open, framework], async ([isOpen]) => {
   const current = ++version
   css.value = ''
-  app.value = ''
   config.value = ''
+  vite.value = ''
   docs.value = {}
 
   if (!isOpen) {
     return
   }
 
-  const [nextCss, nextApp, nextConfig] = await Promise.all([exportCSS(), exportApp(), exportConfig()])
-  const [cssDoc, appDoc, configDoc] = await Promise.all([parseCode(nextCss, 'css'), parseCode(nextApp, 'vue'), nextConfig ? parseCode(nextConfig, 'ts') : undefined])
+  const [nextCss, nextConfig, nextVite] = await Promise.all([exportCSS(), exportConfig(), exportViteConfig()])
+  const [cssDoc, configDoc, viteDoc] = await Promise.all([parseCode(nextCss, 'css'), parseCode(nextConfig, 'ts'), nextVite ? parseCode(nextVite, 'ts') : undefined])
   if (current !== version) return
 
   css.value = nextCss
-  app.value = nextApp
   config.value = nextConfig
-  docs.value = { css: cssDoc, app: appDoc, config: configDoc }
+  vite.value = nextVite
+  docs.value = { css: cssDoc, config: configDoc, vite: viteDoc }
 })
 
 // The theme can't change while the modal covers the studio, so the link is

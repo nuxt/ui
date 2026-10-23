@@ -315,14 +315,14 @@ export function useTheme() {
     return generateCSS(currentDoc(), framework.value, options)
   }
 
-  async function exportApp(options?: SerializeOptions): Promise<string> {
-    const { generateApp } = await import('../utils/theme/engine/serialize')
-    return generateApp(currentDoc(), framework.value, options)
+  async function exportConfig(options?: SerializeOptions): Promise<string> {
+    const { generateConfig } = await import('../utils/theme/engine/serialize')
+    return generateConfig(currentDoc(), framework.value, options)
   }
 
-  async function exportConfig(): Promise<string> {
-    const { generateConfig } = await import('../utils/theme/engine/serialize')
-    return generateConfig(currentDoc(), framework.value)
+  async function exportViteConfig(): Promise<string> {
+    const { generateViteConfig } = await import('../utils/theme/engine/serialize')
+    return generateViteConfig(currentDoc(), framework.value)
   }
 
   function injectCustomColors(customColors: Record<string, Record<string, string>>) {
@@ -543,8 +543,7 @@ export function useTheme() {
      * (the menu calls that 'Custom').
      */
     selectedPreset: computed(() => activePreset.value ?? (hasChanges.value ? undefined : DEFAULT_PRESET_ID)),
-    appLabel: computed(() => framework.value === 'vue' ? 'App.vue' : 'app.vue'),
-    configLabel: computed(() => framework.value === 'vue' ? 'vite.config.ts' : 'app.config.ts'),
+    configLabel: computed(() => framework.value === 'vue' ? 'main.ts' : 'app.config.ts'),
     currentDoc,
     cssVariablesData,
     customColorsData,
@@ -555,8 +554,8 @@ export function useTheme() {
     removeCSSVariables,
     setStyleUi,
     exportCSS,
-    exportApp,
     exportConfig,
+    exportViteConfig,
     applyThemeSettings,
     resetTheme
   }

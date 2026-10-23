@@ -3,21 +3,21 @@ import type { MarkdownDoc } from '../../utils/markdown'
 
 /**
  * The theme as the files you would ship, for the home hero's right half:
- * main.css, app.vue and the app config when the icon set changes, one tab each, regenerated as the theme changes
+ * main.css and the app config, plus the Vite config for a Vue icon set, one tab each, regenerated as the theme changes
  * through the preset pills below, the header menu or the studio. The server
  * renders the stock theme highlighted; the client takes over after mount,
  * once the persisted theme is on.
  */
-const { exportCSS, exportApp, exportConfig, appLabel, configLabel, currentDoc } = useTheme()
+const { exportCSS, exportConfig, exportViteConfig, configLabel, currentDoc } = useTheme()
 const { framework } = useFrameworks()
 
 interface Pane {
-  key: 'css' | 'app' | 'config'
+  key: 'css' | 'config' | 'vite'
   filename: string
   doc: MarkdownDoc
 }
 
-// the doc reads every theme ref, the framework picks the app file
+// the doc reads every theme ref, the framework picks the config file
 const themeKey = () => JSON.stringify(currentDoc()) + framework.value
 
 // the pane is desktop only, so a phone never parses the files
@@ -28,15 +28,15 @@ async function generate(): Promise<{ key: string, panes: Pane[] }> {
   // loaded here so shiki and its grammars stay out of the landing's entry chunk
   const { parseCode } = await import('../../utils/markdown')
   // explicit: the stock theme is a pair of files too, not an empty diff
-  const [css, app, config] = await Promise.all([exportCSS({ explicit: true }), exportApp({ explicit: true }), exportConfig()])
-  const [cssDoc, appDoc, configDoc] = await Promise.all([parseCode(css, 'css'), parseCode(app, 'vue'), config ? parseCode(config, 'ts') : undefined])
+  const [css, config, vite] = await Promise.all([exportCSS({ explicit: true }), exportConfig({ explicit: true }), exportViteConfig()])
+  const [cssDoc, configDoc, viteDoc] = await Promise.all([parseCode(css, 'css'), parseCode(config, 'ts'), vite ? parseCode(vite, 'ts') : undefined])
 
   const panes: Pane[] = [
     { key: 'css', filename: 'main.css', doc: cssDoc },
-    { key: 'app', filename: appLabel.value, doc: appDoc }
+    { key: 'config', filename: configLabel.value, doc: configDoc }
   ]
-  if (configDoc) {
-    panes.push({ key: 'config', filename: configLabel.value, doc: configDoc })
+  if (viteDoc) {
+    panes.push({ key: 'vite', filename: 'vite.config.ts', doc: viteDoc })
   }
 
   return { key, panes }
