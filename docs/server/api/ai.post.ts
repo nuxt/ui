@@ -264,7 +264,7 @@ Colored text: \`--ui-<color>-text-default\` sets the text of a color (\`text-pri
 
 Do NOT use \`cssVariables\` for things achievable with \`primary\`, \`neutral\`, \`customColors\`, or component \`ui\` overrides.
 
-**2. Components (app.vue)**
+**2. Components (app.config.ts for Nuxt / main.ts for Vue)**
 
 For component-level theming. Colors are NOT set here: they go in main.css through the \`@plugin "@nuxt/ui/colors"\` block. The \`ui\` property of \`applyTheme\` takes each component's \`slots\`, \`variants\` and \`defaultVariants\`:
 \`\`\`
@@ -275,7 +275,7 @@ ui: {
   }
 }
 \`\`\`
-In the code you show, these go on a \`<UTheme>\` around \`<UApp>\` in \`app.vue\` (\`App.vue\` for Vue): slot classes in its \`ui\` prop, variant classes in \`variants\` and default variants in \`props\`, with \`'*'\` for the app-wide size and color.
+In the code you show, these go under \`ui\` in \`app.config.ts\` for Nuxt, or in the \`ui\` option of the Vue plugin in \`main.ts\` for Vue, in the same shape. The app-wide size and color go in \`ui.defaultVariants\`.
 
 **Color options:**
 - Standard Tailwind: red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose
@@ -364,34 +364,16 @@ CRITICAL rules for component \`ui\` overrides:
 }
 \`\`\`
 
-3. Show the \`app.vue\` code block (\`App.vue\` for Vue) if component overrides changed. IMPORTANT: it must include ALL component overrides from the entire conversation, not just the current \`applyTheme\` call. Review earlier calls and merge everything into one \`<UTheme>\`. Write \`props\` with \`as const\`, so values like \`color: 'neutral'\` keep their literal type:
-\`\`\`vue
-<script setup lang="ts">
-const ui = {
-  button: { base: 'font-bold' }
-}
+3. Show the config code block if component overrides or the icon set changed. IMPORTANT: it must include ALL settings from the entire conversation, not just the current \`applyTheme\` call. Review earlier calls and merge everything into one config, without a \`colors\` key. If a non-default icon set was chosen, it MUST include the complete \`ui.icons\` object with every key mapped.
 
-const props = {
-  '*': { size: 'lg' }
-} as const
-</script>
-
-<template>
-  <UTheme :ui="ui" :props="props">
-    <UApp>
-      <NuxtPage />
-    </UApp>
-  </UTheme>
-</template>
-\`\`\`
-Use \`<RouterView />\` instead of \`<NuxtPage />\` for Vue.
-
-4. Show the config code block only if a non-default icon set was chosen: the icon set stays in **app.config.ts** for Nuxt or **vite.config.ts** for Vue, not on \`<UTheme>\`, so \`error.vue\` and ContentSearch use it too. It MUST include the complete \`ui.icons\` object with every key mapped, and nothing else.
-
-For **Nuxt**, \`app.config.ts\`:
+For **Nuxt**, \`app.config.ts\`, with the icon set in the same file:
 \`\`\`typescript
 export default defineAppConfig({
   ui: {
+    defaultVariants: { size: 'lg' },
+    button: {
+      slots: { base: 'font-bold' }
+    },
     icons: {
       // ... every key of the chosen icon set
     }
@@ -399,7 +381,21 @@ export default defineAppConfig({
 })
 \`\`\`
 
-For **Vue**, \`vite.config.ts\`:
+For **Vue**, the \`ui\` option of the Vue plugin in \`main.ts\`:
+\`\`\`typescript
+import ui from '@nuxt/ui/vue-plugin'
+
+app.use(ui, {
+  ui: {
+    defaultVariants: { size: 'lg' },
+    button: {
+      slots: { base: 'font-bold' }
+    }
+  }
+})
+\`\`\`
+
+With Vue, the icon set goes in \`vite.config.ts\` instead, which bundles it:
 \`\`\`typescript
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -439,7 +435,7 @@ export type DocsChatMessage = UIMessage<{ currentPage?: string }, never, DocsCha
 function buildInstructions(framework: 'nuxt' | 'vue') {
   return `You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue. Nuxt UI includes \`@nuxt/fonts\` and \`@nuxt/icon\` as built-in dependencies — never tell users to install them separately. Use your knowledge base tools to search for relevant information before answering questions.
 
-The user is using **${framework === 'vue' ? 'Vue' : 'Nuxt'}**. Tailor your answers accordingly — ${framework === 'vue' ? 'use the Vite plugin setup, Vue Router, and vite.config.ts instead of Nuxt-specific features like modules or app.config.ts. IMPORTANT: The Vite plugin auto-imports components and Nuxt UI composables, but Vue core APIs and VueUse must be explicitly imported — always include these in code examples (e.g. `import { ref, computed } from \'vue\'`, `import { useColorMode } from \'@vueuse/core\'`).' : 'use Nuxt modules, auto-imports, app.config.ts, and other Nuxt-specific features. Nuxt auto-imports Vue APIs (ref, computed, etc.), composables, and components — do not include these imports in code examples.'}
+The user is using **${framework === 'vue' ? 'Vue' : 'Nuxt'}**. Tailor your answers accordingly — ${framework === 'vue' ? 'use the Vite plugin setup, Vue Router, vite.config.ts and the options of the Vue plugin (`app.use(ui, { ui })`) instead of Nuxt-specific features like modules or app.config.ts. IMPORTANT: The Vite plugin auto-imports components and Nuxt UI composables, but Vue core APIs and VueUse must be explicitly imported — always include these in code examples (e.g. `import { ref, computed } from \'vue\'`, `import { useColorMode } from \'@vueuse/core\'`).' : 'use Nuxt modules, auto-imports, app.config.ts, and other Nuxt-specific features. Nuxt auto-imports Vue APIs (ref, computed, etc.), composables, and components — do not include these imports in code examples.'}
 
 Guidelines:
 - For documentation questions, ALWAYS use tools to search for information. Never rely on pre-trained knowledge for Nuxt UI APIs, props, or usage.

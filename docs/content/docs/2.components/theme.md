@@ -17,13 +17,13 @@ The Theme component doesn't render any HTML element, it only provides theme over
 
 ::framework-only
 #nuxt
-:::tip{to="/docs/getting-started/theme/components#theme-component"}
-Wrap `<UApp>` in a Theme in your `app.vue` to theme your whole app, overlays and toasts included. `error.vue` renders in place of `app.vue`, so wrap its content in the same Theme.
+:::tip{to="/docs/getting-started/theme/components#global-config"}
+To customize components across your whole app, use your `app.config.ts`, which also reaches `error.vue`. Use the Theme component for a part of your app, or to switch themes at runtime.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/theme/components#theme-component"}
-Wrap `<UApp>` in a Theme in your `App.vue` to theme your whole app, overlays and toasts included.
+:::tip{to="/docs/getting-started/theme/components#global-config"}
+To customize components across your whole app, use the `ui` option of the Vue plugin. Use the Theme component for a part of your app, or to switch themes at runtime.
 :::
 ::
 
@@ -64,12 +64,12 @@ name: 'theme-default-variants-example'
 ::framework-only
 #nuxt
 :::tip
-Set them on the Theme around `<UApp>` to apply them to your whole app, or in `ui.defaultVariants` of your `app.config.ts`.
+To change them for your whole app, set `ui.defaultVariants` in your `app.config.ts`.
 :::
 
 #vue
 :::tip
-Set them on the Theme around `<UApp>` to apply them to your whole app, or in `ui.defaultVariants` of your `vite.config.ts`.
+To change them for your whole app, set `defaultVariants` in the `ui` option of the Vue plugin.
 :::
 ::
 
@@ -88,7 +88,7 @@ This strips **structural** classes too (positioning, transitions, flex/grid), no
 ::
 
 ::tip
-Set it on the Theme around `<UApp>` to apply it to your whole app.
+To apply it to your whole app, set `ui.unstyled` in your app config.
 ::
 
 ### Variants
