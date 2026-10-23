@@ -65,6 +65,7 @@ export interface ChatMessagesProps<T extends UIMessage[] = UIMessage[]> {
   compact?: boolean
   /**
    * The spacing offset for the last message in px. Can be useful when the prompt is sticky for example.
+   * @deprecated Use the `footer` slot to render a sticky prompt, its height is measured automatically.
    * @defaultValue 0
    */
   spacingOffset?: number
@@ -76,6 +77,10 @@ export type ChatMessagesSlots<T extends UIMessage[] = UIMessage[]> = {
   default?(props: { registerMessageRef: (id: string, element: ComponentPublicInstance | null) => void }): VNode[]
   indicator?(props: { ui: ChatMessages['ui'] }): VNode[]
   viewport?(props: { ui: ChatMessages['ui'], onClick: () => void }): VNode[]
+  /**
+   * Render a sticky element at the bottom of the list, like a prompt. Its height is measured to keep room for the last message and the auto scroll button above it.
+   */
+  footer?(props?: {}): VNode[]
 } & {
   [K in keyof ChatMessageSlots]?: NonNullable<ChatMessageSlots[K]> extends (props: infer P) => VNode[]
     ? (props: P & { message: MessageBase<T>, streaming: boolean }) => VNode[]
@@ -88,7 +93,7 @@ export type ChatMessagesSlots<T extends UIMessage[] = UIMessage[]> = {
 import { ref, computed, watch, nextTick, toRef, readonly, onMounted, onBeforeUnmount } from 'vue'
 import { Presence } from 'reka-ui'
 import { defu } from 'defu'
-import { useEventListener, useMutationObserver, watchThrottled } from '@vueuse/core'
+import { useElementSize, useEventListener, useMutationObserver, watchThrottled } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
@@ -107,7 +112,7 @@ const slots = defineSlots<ChatMessagesSlots<T>>()
 
 const props = useComponentProps<ChatMessagesProps<T>>('chatMessages', _props)
 
-const getProxySlots = () => omit(slots, ['default', 'indicator', 'viewport'])
+const getProxySlots = () => omit(slots, ['default', 'indicator', 'viewport', 'footer'])
 
 // This is intentionally a function (not a `computed`) so it is re-evaluated on
 // every render. `@ai-sdk/vue` stores messages in a `shallowRef` and grows them
@@ -139,7 +144,8 @@ const assistantProps = toRef(() => defu(props.assistant, { side: 'left' as const
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatMessages || {}) })({
-  compact: props.compact
+  compact: props.compact,
+  footer: !!slots.footer
 }))
 
 const el = ref<HTMLElement | null>(null)
@@ -149,6 +155,9 @@ const messagesRefs = ref(new Map<string, HTMLElement>())
 const showAutoScroll = ref(false)
 const isAtBottom = ref(true)
 const lastMessageHeight = ref(0)
+const footerRef = ref<HTMLElement | null>(null)
+const { height: footerHeight } = useElementSize(footerRef, undefined, { box: 'border-box' })
+const bottomOffset = computed(() => (props.spacingOffset || 0) + footerHeight.value)
 const lastMessageSubmitted = ref(false)
 const lastScrollTop = ref(0)
 const userScrolledUp = ref(false)
@@ -291,16 +300,20 @@ function updateLastMessageHeight() {
     return
   }
 
-  let spacingOffset = props.spacingOffset || 0
+  let spacingOffset = bottomOffset.value
   const elComputedStyle = window.getComputedStyle(el.value)
   const parentComputedStyle = window.getComputedStyle(parent.value)
 
-  spacingOffset += Number.parseFloat(elComputedStyle.rowGap) || Number.parseFloat(elComputedStyle.gap) || 0
+  // One gap after the last message, two when the footer follows it in the flow
+  spacingOffset += (Number.parseFloat(elComputedStyle.rowGap) || Number.parseFloat(elComputedStyle.gap) || 0) * (slots.footer ? 2 : 1)
   spacingOffset += Number.parseFloat(parentComputedStyle.paddingTop) || 0
   spacingOffset += Number.parseFloat(parentComputedStyle.paddingBottom) || 0
 
   lastMessageHeight.value = Math.max(parentHeight - lastMessageEl.offsetHeight - spacingOffset, 0)
 }
+
+// Keep the room for the last message in sync when the footer grows (multiline prompt, attachments)
+watch(footerHeight, () => nextTick(updateLastMessageHeight))
 
 onMounted(() => {
   // Find first scrollable parent element
@@ -371,7 +384,7 @@ defineExpose({
     :data-status="props.status"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
-    :style="{ '--last-message-height': `${lastMessageHeight}px` }"
+    :style="{ '--last-message-height': `${lastMessageHeight}px`, '--bottom-offset': slots.footer ? `${bottomOffset}px` : undefined }"
   >
     <slot :register-message-ref="registerMessageRef">
       <template v-for="message in props.messages" :key="message.id">
@@ -423,5 +436,9 @@ defineExpose({
         </slot>
       </div>
     </Presence>
+
+    <div v-if="!!slots.footer" ref="footerRef" aria-live="off" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
+      <slot name="footer" />
+    </div>
   </div>
 </template>

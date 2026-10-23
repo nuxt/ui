@@ -242,8 +242,8 @@ const ui = {
                 :messages="messages"
                 :status="status"
                 should-auto-scroll
-                :spacing-offset="200"
-                class="pt-(--ui-header-height) pb-4 sm:pb-6"
+                class="pt-(--ui-header-height)"
+                :ui="{ footer: 'pt-4 sm:pt-6' }"
               >
                 <template #content="{ message, streaming }">
                   <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
@@ -261,55 +261,57 @@ const ui = {
                     </template>
                   </template>
                 </template>
+
+                <template #footer>
+                  <UChatPrompt
+                    v-model="input"
+                    :status="status"
+                    :error="error"
+                    color="neutral"
+                    variant="subtle"
+                    placeholder="Ask anything about Nuxt UI..."
+                    class="rounded-b-none"
+                    :ui="{ base: 'px-1.5' }"
+                    @submit="onSubmit"
+                  >
+                    <template #footer>
+                      <div class="flex items-center gap-1">
+                        <UTooltip text="Attach file" :content="{ side: 'top' }">
+                          <UButton
+                            :icon="studioIcons.paperclip"
+                            color="neutral"
+                            variant="ghost"
+                            size="sm"
+                            square
+                            aria-label="Attach file"
+                          />
+                        </UTooltip>
+
+                        <USelectMenu
+                          v-model="model"
+                          :items="models"
+                          :icon="activeModel?.icon"
+                          value-key="value"
+                          color="neutral"
+                          variant="ghost"
+                          size="sm"
+                          class="data-[state=open]:bg-elevated"
+                          :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                        />
+                      </div>
+
+                      <UChatPromptSubmit
+                        :status="status"
+                        color="neutral"
+                        size="sm"
+                        @stop="stop()"
+                        @reload="regenerate()"
+                      />
+                    </template>
+                  </UChatPrompt>
+                </template>
               </UChatMessages>
             </UTheme>
-
-            <UChatPrompt
-              v-model="input"
-              :status="status"
-              :error="error"
-              color="neutral"
-              variant="subtle"
-              placeholder="Ask anything about Nuxt UI..."
-              class="sticky bottom-0 rounded-b-none z-10"
-              :ui="{ base: 'px-1.5' }"
-              @submit="onSubmit"
-            >
-              <template #footer>
-                <div class="flex items-center gap-1">
-                  <UTooltip text="Attach file" :content="{ side: 'top' }">
-                    <UButton
-                      :icon="studioIcons.paperclip"
-                      color="neutral"
-                      variant="ghost"
-                      size="sm"
-                      square
-                      aria-label="Attach file"
-                    />
-                  </UTooltip>
-
-                  <USelectMenu
-                    v-model="model"
-                    :items="models"
-                    :icon="activeModel?.icon"
-                    value-key="value"
-                    color="neutral"
-                    variant="ghost"
-                    size="sm"
-                    class="data-[state=open]:bg-elevated"
-                    :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
-                  />
-                </div>
-
-                <UChatPromptSubmit
-                  :status="status"
-                  color="neutral"
-                  size="sm"
-                  @stop="stop()"
-                  @reload="regenerate()"
-                />
-              </template>
-            </UChatPrompt>
           </UContainer>
         </template>
       </UDashboardPanel>
