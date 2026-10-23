@@ -95,7 +95,7 @@ export interface ModuleOptions {
   /**
    * Force the import of prose components even if `@nuxtjs/mdc` or `@nuxt/content` are not installed
    * Set to `false` to skip them even when one of these modules is installed
-   * @defaultValue false
+   * @defaultValue undefined
    * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#prose
    */
   prose?: boolean
@@ -107,7 +107,7 @@ export interface ModuleOptions {
   mdc?: boolean
 
   /**
-   * Force the import of content & prose components even if `@nuxt/content` is not installed
+   * Force the import of content & prose components (unless `prose` is `false`) even if `@nuxt/content` is not installed
    * @defaultValue false
    * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#content
    */
