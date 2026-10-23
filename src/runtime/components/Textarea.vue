@@ -193,12 +193,13 @@ function autoResize() {
       return
     }
 
-    // Measure a hidden copy so the textarea itself only resizes when its row count changes:
-    // collapsing it on every keystroke reveals overlay scrollbars
+    // Measure a hidden copy: collapsing the textarea itself on every keystroke flashes overlay scrollbars
     const measure = textarea.cloneNode() as HTMLTextAreaElement
     measure.value = textarea.value
     measure.removeAttribute('id')
     measure.removeAttribute('name')
+    measure.removeAttribute('required')
+    measure.removeAttribute('form')
     measure.setAttribute('aria-hidden', 'true')
     measure.tabIndex = -1
     Object.assign(measure.style, {

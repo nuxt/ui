@@ -103,6 +103,48 @@ describe('Textarea', () => {
     expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [['']] })
   })
 
+  test('with autoresize keeps its rows while typing at maxrows', async () => {
+    // happy-dom has no layout: give each line of text a 20px height
+    Object.defineProperty(HTMLTextAreaElement.prototype, 'scrollHeight', {
+      configurable: true,
+      get() {
+        return this.value.split('\n').length * 20
+      }
+    })
+
+    try {
+      const wrapper = mount(Textarea, {
+        props: { autoresize: true, rows: 1, maxrows: 6 },
+        attrs: { style: 'line-height: 20px; padding: 0px' },
+        attachTo: document.body
+      })
+      const textarea = wrapper.find('textarea')
+      await textarea.setValue('line\n'.repeat(8) + 'line')
+      await flushPromises()
+      expect(Number(textarea.element.rows)).toBe(6)
+
+      const rows = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'rows')!
+      const writes: number[] = []
+      Object.defineProperty(textarea.element, 'rows', {
+        configurable: true,
+        get() {
+          return rows.get!.call(this)
+        },
+        set(value) {
+          writes.push(Number(value))
+          rows.set!.call(this, value)
+        }
+      })
+
+      await textarea.setValue(textarea.element.value + 'x')
+      await flushPromises()
+      expect(writes.filter(value => value !== 6)).toEqual([])
+      wrapper.unmount()
+    } finally {
+      delete (HTMLTextAreaElement.prototype as any).scrollHeight
+    }
+  })
+
   describe('emits', () => {
     test('update:modelValue event', async () => {
       const wrapper = mount(Textarea)
