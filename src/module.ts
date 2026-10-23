@@ -56,12 +56,6 @@ export interface ModuleOptions {
   prose?: boolean
 
   /**
-   * @deprecated Use `prose` instead
-   * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#mdc
-   */
-  mdc?: boolean
-
-  /**
    * Force the import of content & prose components (unless `prose` is `false`) even if `@nuxt/content` is not installed
    * @defaultValue false
    * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#content
@@ -139,7 +133,7 @@ export default defineNuxtModule<ModuleOptions>({
         }
       },
       '@nuxtjs/mdc': {
-        optional: !userUiOptions.mdc,
+        optional: true,
         defaults: {
           highlight: {
             theme: {
@@ -257,7 +251,7 @@ export default defineNuxtModule<ModuleOptions>({
       })
     }
 
-    if (options.prose !== false && (options.prose || options.mdc || options.content || hasNuxtModule('@nuxtjs/mdc') || hasNuxtModule('@nuxt/content'))) {
+    if (options.prose !== false && (options.prose || options.content || hasNuxtModule('@nuxtjs/mdc') || hasNuxtModule('@nuxt/content'))) {
       addComponentsDir({
         path: resolve('./runtime/components/prose'),
         pathPrefix: false,
