@@ -78,7 +78,6 @@ function getSources(message: ChatMessage) {
         icon="i-lucide-circle-check"
       >
         <ProsePre
-          :code="part.state === 'output-error' ? part.errorText : part.output?.stdout"
           :copy="false"
           :ui="{ root: 'my-0', base: 'text-xs/5' }"
         >
