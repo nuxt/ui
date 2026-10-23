@@ -81,7 +81,7 @@ const features = computed(() => [{
   icon: appConfig.ui.icons.success
 }, {
   title: 'Infinitely customizable',
-  description: 'Override any style with the ui prop, customize globally with the Theme component, or use Tailwind classes directly.',
+  description: 'Override any style with the ui prop, customize globally with AppConfig, or use Tailwind classes directly.',
   icon: studioIcons.settings
 }])
 
@@ -146,7 +146,7 @@ const testimonials = [{
   quote: 'We shipped our MVP in 2 weeks instead of 2 months. The authentication flows and form components saved us countless hours of development time.',
   user: { name: 'Marcus Rodriguez', description: 'VP of Engineering at DataFlow' }
 }, {
-  quote: 'The design system with the Theme component is brilliant. We maintain brand consistency across all our products while leveraging the full component library.',
+  quote: 'The design system with AppConfig is brilliant. We maintain brand consistency across all our products while leveraging the full component library.',
   user: { name: 'David Kumar', description: 'Security Director at SecureStack' }
 }, {
   quote: 'Perfect Lighthouse scores out of the box. Our Core Web Vitals improved dramatically just by switching to Nuxt UI components.',

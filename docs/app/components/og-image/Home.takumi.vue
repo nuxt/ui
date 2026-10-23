@@ -128,8 +128,8 @@ const active = computed(() => ({ backgroundColor: `${c.value.primary}1a` }))
           main.css
         </div>
         <div class="flex flex-row items-center h-[36px] px-3 text-[16px] font-medium" :style="{ color: c.text }">
-          <svg class="mr-2 w-[16px] h-[16px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#41b883" d="M2 3h3.5L12 15l6.5-12H22L12 21L2 3m4.5 0h3L12 7.58L14.5 3h3L12 13.08L6.5 3Z" /></svg>
-          app.vue
+          <span class="mr-2 text-[13px] font-bold text-[#3178c6]">TS</span>
+          app.config.ts
         </div>
       </div>
       <div class="flex flex-col flex-1 rounded-xl border-2 border-solid mt-3 px-5 py-4 text-[16px] leading-[27px]" :style="{ backgroundColor: c.code, borderColor: c.border, color: c.text, fontFamily: 'Geist Mono' }">
