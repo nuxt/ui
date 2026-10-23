@@ -34,6 +34,7 @@ describe('AuthForm', () => {
     ['with loading', { props: { ...props, loading: true } }],
     ['with submit', { props: { ...props, submit: { label: 'Submit' } } }],
     ['with as', { props: { ...props, as: 'section' } }],
+    ['with as object', { props: { ...props, title: 'Title', as: { root: 'section', title: 'h3' } } }],
     ['with class', { props: { ...props, class: 'max-w-sm' } }],
     ['with ui', { props: { ...props, ui: { title: 'text-2xl' } } }],
     // Slots
