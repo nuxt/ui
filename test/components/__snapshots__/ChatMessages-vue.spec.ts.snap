@@ -24,6 +24,7 @@ exports[`ChatMessages > renders with assistant correctly 1`] = `
   </article>
   <!--v-if-->
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -51,6 +52,7 @@ exports[`ChatMessages > renders with class correctly 1`] = `
   </article>
   <!--v-if-->
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -78,6 +80,7 @@ exports[`ChatMessages > renders with compact correctly 1`] = `
   </article>
   <!--v-if-->
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -105,6 +108,7 @@ exports[`ChatMessages > renders with content slot correctly 1`] = `
   </article>
   <!--v-if-->
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -112,6 +116,7 @@ exports[`ChatMessages > renders with default slot correctly 1`] = `
 "<div data-slot="root" class="w-full flex flex-col gap-1 flex-1 px-2.5 [&amp;>article]:last-of-type:min-h-(--last-message-height)" style="--last-message-height: 0px; --bottom-offset: 0px;">Default slot
   <!--v-if-->
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -139,6 +144,35 @@ exports[`ChatMessages > renders with files slot correctly 1`] = `
   </article>
   <!--v-if-->
   <!---->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`ChatMessages > renders with footer slot correctly 1`] = `
+"<div data-slot="root" class="w-full flex flex-col gap-1 flex-1 px-2.5 [&amp;>article]:last-of-type:min-h-(--last-message-height)" style="--last-message-height: 0px; --bottom-offset: 0px;">
+  <article data-role="user" data-slot="root" class="group/message relative w-full scroll-mt-4 sm:scroll-mt-6">
+    <!--v-if-->
+    <div data-slot="container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
+      <!--v-if-->
+      <div data-slot="body" class="min-w-0">
+        <div data-slot="content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Hello, how are you?</div>
+        <!--v-if-->
+      </div>
+    </div>
+  </article>
+  <article data-role="assistant" data-slot="root" class="group/message relative w-full scroll-mt-4 sm:scroll-mt-6">
+    <!--v-if-->
+    <div data-slot="container" class="relative flex items-start gap-3 pb-8">
+      <!--v-if-->
+      <div data-slot="body" class="min-w-0 w-full">
+        <div data-slot="content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 w-full">I am fine, thank you!</div>
+        <!--v-if-->
+      </div>
+    </div>
+  </article>
+  <!--v-if-->
+  <!---->
+  <div data-slot="footer" class="sticky bottom-0 z-10">Footer slot</div>
 </div>"
 `;
 
@@ -175,6 +209,7 @@ exports[`ChatMessages > renders with indicator slot correctly 1`] = `
     </div>
   </article>
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -202,6 +237,7 @@ exports[`ChatMessages > renders with messages correctly 1`] = `
   </article>
   <!--v-if-->
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -229,6 +265,7 @@ exports[`ChatMessages > renders with status error correctly 1`] = `
   </article>
   <!--v-if-->
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -256,6 +293,7 @@ exports[`ChatMessages > renders with status ready correctly 1`] = `
   </article>
   <!--v-if-->
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -283,6 +321,7 @@ exports[`ChatMessages > renders with status streaming correctly 1`] = `
   </article>
   <!--v-if-->
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -321,6 +360,7 @@ exports[`ChatMessages > renders with status submitted correctly 1`] = `
     </div>
   </article>
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -348,6 +388,7 @@ exports[`ChatMessages > renders with ui correctly 1`] = `
   </article>
   <!--v-if-->
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -375,6 +416,7 @@ exports[`ChatMessages > renders with user correctly 1`] = `
   </article>
   <!--v-if-->
   <!---->
+  <!--v-if-->
 </div>"
 `;
 
@@ -402,5 +444,6 @@ exports[`ChatMessages > renders with viewport slot correctly 1`] = `
   </article>
   <!--v-if-->
   <!---->
+  <!--v-if-->
 </div>"
 `;

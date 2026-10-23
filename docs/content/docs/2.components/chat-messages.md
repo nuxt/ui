@@ -400,6 +400,26 @@ collapse: true
 ---
 ::
 
+### With sticky prompt :badge{label="Soon" class="align-text-top"}
+
+Use the `#footer` slot to keep a [ChatPrompt](/docs/components/chat-prompt) stuck to the bottom of the list. Its height is measured, so the last message keeps enough room and the auto scroll button stays above it, even when the prompt grows.
+
+```vue
+<template>
+  <UChatMessages :messages="messages" :status="status">
+    <template #footer>
+      <UChatPrompt v-model="input" :status="status" @submit="onSubmit">
+        <UChatPromptSubmit :status="status" @stop="stop()" @reload="regenerate()" />
+      </UChatPrompt>
+    </template>
+  </UChatMessages>
+</template>
+```
+
+::note
+The `#footer` slot replaces the `spacing-offset` prop for a sticky prompt, which needed its height by hand. A prompt outside the scroll container, like in the footer of a [DashboardPanel](/docs/components/dashboard-panel), needs neither.
+::
+
 ## API
 
 ### Props
