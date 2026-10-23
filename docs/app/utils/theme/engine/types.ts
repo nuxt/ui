@@ -238,9 +238,10 @@ interface ComponentFragment {
 type Fragments = Record<string, ComponentFragment>
 
 /**
- * The overrides `<UTheme>` can take. An AI answer, a stored theme or an old
- * link can still carry `compoundVariants`: dropped where they come in, so the
- * preview never shows a style the `app.vue` export can't reproduce.
+ * The overrides the studio works with, `slots`, `variants` and
+ * `defaultVariants`. An AI answer, a stored theme or an old link can still
+ * carry `compoundVariants`: dropped where they come in, so the preview and the
+ * export stay in that shape.
  */
 export function withoutCompoundVariants<T extends Record<string, any> | undefined>(ui: T): T {
   if (!ui) return ui
