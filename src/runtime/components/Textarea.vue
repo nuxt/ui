@@ -184,23 +184,44 @@ function autoFocus() {
 
 function autoResize() {
   if (props.autoresize && textareaRef.value) {
-    textareaRef.value.rows = props.rows!
-    const overflow = textareaRef.value.style.overflow
-    textareaRef.value.style.overflow = 'hidden'
+    const textarea = textareaRef.value
+    const styles = window.getComputedStyle(textarea)
+    const padding = Number.parseFloat(styles.paddingTop) + Number.parseFloat(styles.paddingBottom)
+    const lineHeight = Number.parseFloat(styles.lineHeight)
 
-    const styles = window.getComputedStyle(textareaRef.value)
-    const paddingTop = Number.parseInt(styles.paddingTop)
-    const paddingBottom = Number.parseInt(styles.paddingBottom)
-    const padding = paddingTop + paddingBottom
-    const lineHeight = Number.parseInt(styles.lineHeight)
-    const { scrollHeight } = textareaRef.value
-    const newRows = (scrollHeight - padding) / lineHeight
-
-    if (newRows > props.rows!) {
-      textareaRef.value.rows = props.maxrows ? Math.min(newRows, props.maxrows) : newRows
+    if (!lineHeight) {
+      return
     }
 
-    textareaRef.value.style.overflow = overflow
+    // Measure a hidden copy so the textarea itself only resizes when its row count changes:
+    // collapsing it on every keystroke reveals overlay scrollbars
+    const measure = textarea.cloneNode() as HTMLTextAreaElement
+    measure.value = textarea.value
+    measure.removeAttribute('id')
+    measure.removeAttribute('name')
+    measure.setAttribute('aria-hidden', 'true')
+    measure.tabIndex = -1
+    Object.assign(measure.style, {
+      position: 'absolute',
+      top: '0',
+      left: '0',
+      width: styles.width,
+      height: '0',
+      minHeight: '0',
+      overflow: 'hidden',
+      visibility: 'hidden',
+      pointerEvents: 'none'
+    })
+    textarea.after(measure)
+    const { scrollHeight } = measure
+    measure.remove()
+
+    const newRows = Math.round((scrollHeight - padding) / lineHeight)
+    const rows = Math.max(props.rows!, props.maxrows ? Math.min(newRows, props.maxrows) : newRows)
+
+    if (textarea.rows !== rows) {
+      textarea.rows = rows
+    }
   }
 }
 
