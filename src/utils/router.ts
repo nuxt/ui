@@ -11,10 +11,5 @@ export function resolveRouterMode(options: NuxtUIOptions): RouterMode {
     return 'inertia'
   }
 
-  // we still handle deprecated inertia option
-  if (options.router === undefined && options.inertia === true) {
-    return 'inertia'
-  }
-
   return 'vue-router'
 }
