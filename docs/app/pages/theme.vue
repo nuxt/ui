@@ -108,7 +108,7 @@ const shareOpen = ref(false)
 </script>
 
 <template>
-  <main class="max-w-(--ui-container) mx-auto w-full">
+  <main class="max-w-(--ui-container-width) mx-auto w-full">
     <UHeader :menu="{ modal: false }" :ui="{ root: () => 'h-(--ui-header-height) border-b border-transparent' }">
       <template #left>
         <HeaderLogo />
