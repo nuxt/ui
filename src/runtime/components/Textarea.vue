@@ -148,11 +148,12 @@ function updateInput(value: string | null | undefined) {
 }
 
 function onInput(event: Event) {
-  autoResize()
-
   if (!props.modelModifiers?.lazy) {
     updateInput((event.target as HTMLInputElement).value)
   }
+
+  // Also covers `lazy`, uncontrolled use and values the modifiers leave unchanged, where the `modelValue` watcher doesn't run
+  queueAutoResize()
 }
 
 function onChange(event: Event) {
@@ -251,9 +252,22 @@ function autoResize() {
   }
 }
 
-watch(modelValue, () => {
-  nextTick(autoResize)
-})
+let autoResizeQueued = false
+
+// `onInput` and the `modelValue` watcher both fire for a keystroke with `v-model`, so measure once after the update
+function queueAutoResize() {
+  if (autoResizeQueued) {
+    return
+  }
+
+  autoResizeQueued = true
+  nextTick(() => {
+    autoResizeQueued = false
+    autoResize()
+  })
+}
+
+watch(modelValue, queueAutoResize)
 
 let autofocusTimeoutId: ReturnType<typeof setTimeout> | undefined
 let autoresizeTimeoutId: ReturnType<typeof setTimeout> | undefined
