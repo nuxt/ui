@@ -148,11 +148,12 @@ function updateInput(value: string | null | undefined) {
 }
 
 function onInput(event: Event) {
-  autoResize()
-
   if (!props.modelModifiers?.lazy) {
     updateInput((event.target as HTMLInputElement).value)
   }
+
+  // Also covers `lazy`, uncontrolled use and values the modifiers leave unchanged, where the `modelValue` watcher doesn't run
+  queueAutoResize()
 }
 
 function onChange(event: Event) {
@@ -182,31 +183,91 @@ function autoFocus() {
   }
 }
 
+const measuredProperties = [
+  'box-sizing',
+  'width',
+  'padding-top',
+  'padding-right',
+  'padding-bottom',
+  'padding-left',
+  'border-left-width',
+  'border-right-width',
+  'font-family',
+  'font-size',
+  'font-style',
+  'font-weight',
+  'letter-spacing',
+  'word-spacing',
+  'line-height',
+  'text-indent',
+  'text-transform',
+  'white-space',
+  'word-break',
+  'overflow-wrap',
+  'tab-size'
+]
+
 function autoResize() {
   if (props.autoresize && textareaRef.value) {
-    textareaRef.value.rows = props.rows!
-    const overflow = textareaRef.value.style.overflow
-    textareaRef.value.style.overflow = 'hidden'
+    const textarea = textareaRef.value
+    const styles = window.getComputedStyle(textarea)
+    const padding = Number.parseFloat(styles.paddingTop) + Number.parseFloat(styles.paddingBottom)
+    const lineHeight = Number.parseFloat(styles.lineHeight)
 
-    const styles = window.getComputedStyle(textareaRef.value)
-    const paddingTop = Number.parseInt(styles.paddingTop)
-    const paddingBottom = Number.parseInt(styles.paddingBottom)
-    const padding = paddingTop + paddingBottom
-    const lineHeight = Number.parseInt(styles.lineHeight)
-    const { scrollHeight } = textareaRef.value
-    const newRows = (scrollHeight - padding) / lineHeight
-
-    if (newRows > props.rows!) {
-      textareaRef.value.rows = props.maxrows ? Math.min(newRows, props.maxrows) : newRows
+    if (!lineHeight) {
+      return
     }
 
-    textareaRef.value.style.overflow = overflow
+    // Measure a hidden copy: collapsing the textarea itself on every keystroke flashes overlay scrollbars
+    const measure = textarea.cloneNode() as HTMLTextAreaElement
+    measure.value = textarea.value
+    measure.removeAttribute('id')
+    measure.removeAttribute('name')
+    measure.removeAttribute('required')
+    measure.removeAttribute('form')
+    measure.setAttribute('aria-hidden', 'true')
+    measure.tabIndex = -1
+    // The copy doesn't match `:focus`, `:hover` or `#id` rules, so pin what sizes its text to the textarea's values
+    measure.style.cssText = [
+      ...measuredProperties.map(property => `${property}: ${styles.getPropertyValue(property)}`),
+      'position: absolute',
+      'top: 0',
+      'left: 0',
+      'height: 0',
+      'min-height: 0',
+      'overflow: hidden',
+      'visibility: hidden',
+      'pointer-events: none'
+    ].map(declaration => `${declaration} !important`).join('; ')
+    textarea.after(measure)
+    const { scrollHeight } = measure
+    measure.remove()
+
+    const newRows = Math.round((scrollHeight - padding) / lineHeight)
+    const rows = Math.max(props.rows!, props.maxrows ? Math.min(newRows, props.maxrows) : newRows)
+
+    if (textarea.rows !== rows) {
+      textarea.rows = rows
+    }
   }
 }
 
-watch(modelValue, () => {
-  nextTick(autoResize)
-})
+let autoResizeQueued = false
+
+// `onInput` and the `modelValue` watcher both fire for a keystroke with `v-model`, so measure once after the update
+function queueAutoResize() {
+  if (autoResizeQueued) {
+    return
+  }
+
+  autoResizeQueued = true
+  nextTick(() => {
+    autoResizeQueued = false
+    autoResize()
+  })
+}
+
+watch(modelValue, queueAutoResize)
 
 let autofocusTimeoutId: ReturnType<typeof setTimeout> | undefined
 let autoresizeTimeoutId: ReturnType<typeof setTimeout> | undefined
