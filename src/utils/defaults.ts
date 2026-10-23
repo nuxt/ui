@@ -43,7 +43,7 @@ export const defaultOptions = {
     },
     prefix: undefined
   },
-  prose: false,
+  prose: undefined,
   mdc: false,
   content: false
 }
