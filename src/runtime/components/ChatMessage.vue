@@ -62,6 +62,7 @@ export interface ChatMessageSlots<TMetadata = unknown, TDataParts extends UIData
   content?(props: UIMessage<TMetadata, TDataParts, TTools> & { content?: string }): VNode[]
   /**
    * Render each part of the message, parts the slot doesn't render fall back to the default output.
+   * Ignored when the `content` slot is used.
    */
   part?(props: { part: UIMessage<TMetadata, TDataParts, TTools>['parts'][number], index: number, message: UIMessage<TMetadata, TDataParts, TTools> }): VNode[]
   actions?(props: UIMessage<TMetadata, TDataParts, TTools> & { actions: ChatMessageProps<TMetadata, TDataParts, TTools>['actions'] }): VNode[]
