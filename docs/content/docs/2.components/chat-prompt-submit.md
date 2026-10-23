@@ -76,7 +76,7 @@ You can customize this icon globally in your `app.config.ts` under `ui.icons.arr
 
 #vue
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
-You can customize this icon globally in your `vite.config.ts` under `ui.icons.arrowUp` key.
+You can customize this icon globally in your `vite.config.ts` under `icons.arrowUp` key.
 :::
 ::
 
@@ -127,7 +127,7 @@ You can customize this icon globally in your `app.config.ts` under `ui.icons.sto
 
 #vue
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
-You can customize this icon globally in your `vite.config.ts` under `ui.icons.stop` key.
+You can customize this icon globally in your `vite.config.ts` under `icons.stop` key.
 :::
 ::
 
@@ -178,7 +178,7 @@ You can customize this icon globally in your `app.config.ts` under `ui.icons.sto
 
 #vue
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
-You can customize this icon globally in your `vite.config.ts` under `ui.icons.stop` key.
+You can customize this icon globally in your `vite.config.ts` under `icons.stop` key.
 :::
 ::
 
@@ -229,7 +229,7 @@ You can customize this icon globally in your `app.config.ts` under `ui.icons.rel
 
 #vue
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
-You can customize this icon globally in your `vite.config.ts` under `ui.icons.reload` key.
+You can customize this icon globally in your `vite.config.ts` under `icons.reload` key.
 :::
 ::
 
