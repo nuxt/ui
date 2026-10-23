@@ -304,7 +304,8 @@ function updateLastMessageHeight() {
   const elComputedStyle = window.getComputedStyle(el.value)
   const parentComputedStyle = window.getComputedStyle(parent.value)
 
-  spacingOffset += Number.parseFloat(elComputedStyle.rowGap) || Number.parseFloat(elComputedStyle.gap) || 0
+  // One gap after the last message, two when the footer follows it in the flow
+  spacingOffset += (Number.parseFloat(elComputedStyle.rowGap) || Number.parseFloat(elComputedStyle.gap) || 0) * (slots.footer ? 2 : 1)
   spacingOffset += Number.parseFloat(parentComputedStyle.paddingTop) || 0
   spacingOffset += Number.parseFloat(parentComputedStyle.paddingBottom) || 0
 
@@ -383,7 +384,7 @@ defineExpose({
     :data-status="props.status"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
-    :style="{ '--last-message-height': `${lastMessageHeight}px`, '--bottom-offset': `${bottomOffset}px` }"
+    :style="{ '--last-message-height': `${lastMessageHeight}px`, '--bottom-offset': slots.footer ? `${bottomOffset}px` : undefined }"
   >
     <slot :register-message-ref="registerMessageRef">
       <template v-for="message in props.messages" :key="message.id">
