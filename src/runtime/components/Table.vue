@@ -3,41 +3,49 @@
 import type { AriaAttributes, Ref, WatchOptions, ComponentPublicInstance, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type {
+  BuiltInFilterFn,
+  BuiltInSortFn,
   Cell,
+  CellData,
   CellContext,
   Column,
   ColumnDef,
-  ColumnFiltersOptions,
   ColumnFiltersState,
   ColumnOrderState,
-  ColumnPinningOptions,
   ColumnPinningState,
-  ColumnSizingInfoState,
-  ColumnSizingOptions,
   ColumnSizingState,
-  CoreOptions,
-  ExpandedOptions,
+  ColumnVisibilityState,
   ExpandedState,
-  FacetedOptions,
-  GlobalFilterOptions,
-  GroupingOptions,
+  FilterFn,
   GroupingState,
   Header,
   HeaderContext,
-  PaginationOptions,
   PaginationState,
   Row,
   RowData,
-  RowPinningOptions,
   RowPinningState,
-  RowSelectionOptions,
   RowSelectionState,
-  SortingOptions,
+  SortFn,
   SortingState,
+  StockFeatures,
+  TableFeatures as TanStackTableFeatures,
   TableMeta,
+  TableOptions_ColumnFiltering,
+  TableOptions_ColumnGrouping,
+  TableOptions_ColumnPinning,
+  TableOptions_ColumnResizing,
+  TableOptions_ColumnSizing,
+  TableOptions_ColumnVisibility,
+  TableOptions_GlobalFiltering,
+  TableOptions_RowExpanding,
+  TableOptions_RowPagination,
+  TableOptions_RowPinning,
+  TableOptions_RowSelection,
+  TableOptions_RowSorting,
+  TableOptions_Table,
   Updater,
-  VisibilityOptions,
-  VisibilityState
+  VueTable,
+  columnResizingState
 } from '@tanstack/vue-table'
 import type { Virtualizer, VirtualizerOptions } from '@tanstack/vue-virtual'
 import theme from '../theme/table'
@@ -46,45 +54,65 @@ import type { ComponentConfig } from '../types/tv'
 
 declare module '@tanstack/table-core' {
 
-  interface ColumnMeta<TData extends RowData, TValue> {
+  interface ColumnMeta<TFeatures extends TanStackTableFeatures, TData extends RowData, TValue extends CellData> {
     class?: {
-      th?: string | ((cell: Header<TData, TValue>) => string)
-      td?: string | ((cell: Cell<TData, TValue>) => string)
+      th?: string | ((cell: Header<TFeatures, TData, TValue>) => string)
+      td?: string | ((cell: Cell<TFeatures, TData, TValue>) => string)
     }
     style?: {
-      th?: string | Record<string, string> | ((cell: Header<TData, TValue>) => string | Record<string, string>)
-      td?: string | Record<string, string> | ((cell: Cell<TData, TValue>) => string | Record<string, string>)
+      th?: string | Record<string, string> | ((cell: Header<TFeatures, TData, TValue>) => string | Record<string, string>)
+      td?: string | Record<string, string> | ((cell: Cell<TFeatures, TData, TValue>) => string | Record<string, string>)
     }
     colspan?: {
-      td?: string | ((cell: Cell<TData, TValue>) => string)
+      td?: string | ((cell: Cell<TFeatures, TData, TValue>) => string)
     }
     rowspan?: {
-      td?: string | ((cell: Cell<TData, TValue>) => string)
+      td?: string | ((cell: Cell<TFeatures, TData, TValue>) => string)
     }
 
   }
 
-  interface TableMeta<TData> {
+  interface TableMeta<TFeatures extends TanStackTableFeatures, TData extends RowData> {
     class?: {
-      tr?: string | ((row: Row<TData>) => string)
+      tr?: string | ((row: Row<TFeatures, TData>) => string)
     }
     style?: {
-      tr?: string | Record<string, string> | ((row: Row<TData>) => string | Record<string, string>)
+      tr?: string | Record<string, string> | ((row: Row<TFeatures, TData>) => string | Record<string, string>)
     }
   }
+
+  // The default features register every built-in sort and filter function, so their names stay valid on column definitions.
+  interface SortFns extends Record<BuiltInSortFn, SortFn<any, any>> {}
+  interface FilterFns extends Record<BuiltInFilterFn, FilterFn<any, any>> {}
 
 }
 
 type Table = ComponentConfig<typeof theme, AppConfig, 'table'>
 
-export type TableRow<T> = Row<T>
+/**
+ * The feature set the table types are written against. Every stock feature is included, so column
+ * definitions and `tableApi` expose the APIs of the features an app registers through the `features` prop.
+ */
+export type TableFeatures = StockFeatures
+export type TableRow<T extends TableData> = Row<TableFeatures, T>
 export type TableData = RowData
-export type TableColumn<T extends TableData, D = unknown> = ColumnDef<T, D>
+export type TableColumn<T extends TableData, D = unknown> = ColumnDef<TableFeatures, T, D>
 
-export interface TableOptions<T extends TableData = TableData> extends Omit<CoreOptions<T>, 'data' | 'columns' | 'getCoreRowModel' | 'state' | 'onStateChange' | 'renderFallbackValue'> {
-  state?: CoreOptions<T>['state']
-  onStateChange?: CoreOptions<T>['onStateChange']
-  renderFallbackValue?: CoreOptions<T>['renderFallbackValue']
+export interface TableOptions<T extends TableData = TableData> {
+  autoResetAll?: TableOptions_Table<TableFeatures, T>['autoResetAll']
+  initialState?: TableOptions_Table<TableFeatures, T>['initialState']
+  mergeOptions?: TableOptions_Table<TableFeatures, T>['mergeOptions']
+  state?: TableOptions_Table<TableFeatures, T>['state']
+  defaultColumn?: Partial<TableColumn<T>>
+  getRowId?: (originalRow: T, index: number, parent?: TableRow<T>) => string
+  getSubRows?: (originalRow: T, index: number) => undefined | ReadonlyArray<T>
+  renderFallbackValue?: any
+  debugAll?: boolean
+  debugCells?: boolean
+  debugColumns?: boolean
+  debugHeaders?: boolean
+  debugRows?: boolean
+  debugTable?: boolean
 }
 
 export interface TableProps<T extends TableData = TableData> extends TableOptions<T>, /** @vue-ignore */ TableHTMLAttributes {
@@ -96,7 +124,7 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
   data?: T[]
   columns?: TableColumn<T>[]
   caption?: string
-  meta?: TableMeta<T>
+  meta?: TableMeta<TableFeatures, T>
   /**
    * Enable virtualization for large datasets.
    * Note: row pinning is not supported when virtualization is enabled.
@@ -149,65 +177,67 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
    */
   watchOptions?: WatchOptions
   /**
-   * @see [API](https://tanstack.com/table/v8/docs/api/features/global-filtering#table-options)
-   * @see [Guide](https://tanstack.com/table/v8/docs/guide/global-filtering)
+   * Table features registered on top of the default ones (sorting, column and global filtering, expanding, row selection, column visibility, pinning and sizing, row pinning).
+   * Register pagination, grouping, faceting or column ordering here with their row models, e.g. `{ rowPaginationFeature, paginatedRowModel: createPaginatedRowModel() }`.
+   * Read once when the table is created.
+   * @see [Guide](https://tanstack.com/table/latest/docs/guide/features)
    */
-  globalFilterOptions?: Omit<GlobalFilterOptions<T>, 'onGlobalFilterChange'>
+  features?: TanStackTableFeatures
   /**
-   * @see [API](https://tanstack.com/table/v8/docs/api/features/column-filtering#table-options)
-   * @see [Guide](https://tanstack.com/table/v8/docs/guide/column-filtering)
+   * @see [API](https://tanstack.com/table/latest/docs/api/features/global-filtering#table-options)
+   * @see [Guide](https://tanstack.com/table/latest/docs/guide/global-filtering)
    */
-  columnFiltersOptions?: Omit<ColumnFiltersOptions<T>, 'getFilteredRowModel' | 'onColumnFiltersChange'>
+  globalFilterOptions?: Omit<TableOptions_GlobalFiltering<TableFeatures, T>, 'onGlobalFilterChange'>
   /**
-   * @see [API](https://tanstack.com/table/v8/docs/api/features/column-pinning#table-options)
-   * @see [Guide](https://tanstack.com/table/v8/docs/guide/column-pinning)
+   * @see [API](https://tanstack.com/table/latest/docs/api/features/column-filtering#table-options)
+   * @see [Guide](https://tanstack.com/table/latest/docs/guide/column-filtering)
    */
-  columnPinningOptions?: Omit<ColumnPinningOptions, 'onColumnPinningChange'>
+  columnFiltersOptions?: Omit<TableOptions_ColumnFiltering<TableFeatures, T>, 'onColumnFiltersChange'>
   /**
-   * @see [API](https://tanstack.com/table/v8/docs/api/features/column-sizing#table-options)
-   * @see [Guide](https://tanstack.com/table/v8/docs/guide/column-sizing)
+   * @see [API](https://tanstack.com/table/latest/docs/api/features/column-pinning#table-options)
+   * @see [Guide](https://tanstack.com/table/latest/docs/guide/column-pinning)
    */
-  columnSizingOptions?: Omit<ColumnSizingOptions, 'onColumnSizingChange' | 'onColumnSizingInfoChange'>
+  columnPinningOptions?: Omit<TableOptions_ColumnPinning, 'onColumnPinningChange'>
   /**
-   * @see [API](https://tanstack.com/table/v8/docs/api/features/column-visibility#table-options)
-   * @see [Guide](https://tanstack.com/table/v8/docs/guide/column-visibility)
+   * @see [API](https://tanstack.com/table/latest/docs/api/features/column-sizing#table-options)
+   * @see [Guide](https://tanstack.com/table/latest/docs/guide/column-sizing)
    */
-  visibilityOptions?: Omit<VisibilityOptions, 'onColumnVisibilityChange'>
+  columnSizingOptions?: Omit<TableOptions_ColumnSizing & TableOptions_ColumnResizing, 'onColumnSizingChange' | 'onColumnResizingChange'>
   /**
-   * @see [API](https://tanstack.com/table/v8/docs/api/features/sorting#table-options)
-   * @see [Guide](https://tanstack.com/table/v8/docs/guide/sorting)
+   * @see [API](https://tanstack.com/table/latest/docs/api/features/column-visibility#table-options)
+   * @see [Guide](https://tanstack.com/table/latest/docs/guide/column-visibility)
    */
-  sortingOptions?: Omit<SortingOptions<T>, 'getSortedRowModel' | 'onSortingChange'>
+  visibilityOptions?: Omit<TableOptions_ColumnVisibility, 'onColumnVisibilityChange'>
   /**
-   * @see [API](https://tanstack.com/table/v8/docs/api/features/grouping#table-options)
-   * @see [Guide](https://tanstack.com/table/v8/docs/guide/grouping)
+   * @see [API](https://tanstack.com/table/latest/docs/api/features/sorting#table-options)
+   * @see [Guide](https://tanstack.com/table/latest/docs/guide/sorting)
    */
-  groupingOptions?: Omit<GroupingOptions, 'onGroupingChange'>
+  sortingOptions?: Omit<TableOptions_RowSorting, 'onSortingChange'>
   /**
-   * @see [API](https://tanstack.com/table/v8/docs/api/features/expanding#table-options)
-   * @see [Guide](https://tanstack.com/table/v8/docs/guide/expanding)
+   * @see [API](https://tanstack.com/table/latest/docs/api/features/grouping#table-options)
+   * @see [Guide](https://tanstack.com/table/latest/docs/guide/grouping)
    */
-  expandedOptions?: Omit<ExpandedOptions<T>, 'getExpandedRowModel' | 'onExpandedChange'>
+  groupingOptions?: Omit<TableOptions_ColumnGrouping, 'onGroupingChange'>
   /**
-   * @see [API](https://tanstack.com/table/v8/docs/api/features/row-selection#table-options)
-   * @see [Guide](https://tanstack.com/table/v8/docs/guide/row-selection)
+   * @see [API](https://tanstack.com/table/latest/docs/api/features/expanding#table-options)
+   * @see [Guide](https://tanstack.com/table/latest/docs/guide/expanding)
    */
-  rowSelectionOptions?: Omit<RowSelectionOptions<T>, 'onRowSelectionChange'>
+  expandedOptions?: Omit<TableOptions_RowExpanding<TableFeatures, T>, 'onExpandedChange'>
   /**
-   * @see [API](https://tanstack.com/table/v8/docs/api/features/row-pinning#table-options)
-   * @see [Guide](https://tanstack.com/table/v8/docs/guide/row-pinning)
+   * @see [API](https://tanstack.com/table/latest/docs/api/features/row-selection#table-options)
+   * @see [Guide](https://tanstack.com/table/latest/docs/guide/row-selection)
    */
-  rowPinningOptions?: Omit<RowPinningOptions<T>, 'onRowPinningChange'>
+  rowSelectionOptions?: Omit<TableOptions_RowSelection<TableFeatures, T>, 'onRowSelectionChange'>
   /**
-   * @see [API](https://tanstack.com/table/v8/docs/api/features/pagination#table-options)
-   * @see [Guide](https://tanstack.com/table/v8/docs/guide/pagination)
+   * @see [API](https://tanstack.com/table/latest/docs/api/features/row-pinning#table-options)
+   * @see [Guide](https://tanstack.com/table/latest/docs/guide/row-pinning)
    */
-  paginationOptions?: Omit<PaginationOptions, 'onPaginationChange'>
+  rowPinningOptions?: Omit<TableOptions_RowPinning<TableFeatures, T>, 'onRowPinningChange'>
   /**
-   * @see [API](https://tanstack.com/table/v8/docs/api/features/column-faceting#table-options)
-   * @see [Guide](https://tanstack.com/table/v8/docs/guide/column-faceting)
+   * @see [API](https://tanstack.com/table/latest/docs/api/features/pagination#table-options)
+   * @see [Guide](https://tanstack.com/table/latest/docs/guide/pagination)
    */
-  facetedOptions?: FacetedOptions<T>
+  paginationOptions?: Omit<TableOptions_RowPagination, 'onPaginationChange'>
   onSelect?: (e: Event, row: TableRow<T>) => void
   onHover?: (e: Event, row: TableRow<T> | null) => void
   onContextmenu?: ((e: Event, row: TableRow<T>) => void) | Array<((e: Event, row: TableRow<T>) => void)>
@@ -215,11 +245,11 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
   ui?: Table['slots']
 }
 
-type DynamicHeaderFooterSlots<T, K = keyof T> = Record<`${K extends string ? K : never}-header` | `${K extends string ? K : never}-footer` | (string & {}), (props: HeaderContext<T, unknown>) => VNode[]>
-type DynamicCellSlots<T, K = keyof T> = Record<`${K extends string ? K : never}-cell` | (string & {}), (props: CellContext<T, unknown>) => VNode[]>
+type DynamicHeaderFooterSlots<T extends TableData, K = keyof T> = Record<`${K extends string ? K : never}-header` | `${K extends string ? K : never}-footer` | (string & {}), (props: HeaderContext<TableFeatures, T, unknown>) => VNode[]>
+type DynamicCellSlots<T extends TableData, K = keyof T> = Record<`${K extends string ? K : never}-cell` | (string & {}), (props: CellContext<TableFeatures, T, unknown>) => VNode[]>
 
 export type TableSlots<T extends TableData = TableData> = {
-  'expanded'?: (props: { row: Row<T> }) => VNode[]
+  'expanded'?: (props: { row: TableRow<T> }) => VNode[]
   'empty'?: (props?: {}) => VNode[]
   'loading'?: (props?: {}) => VNode[]
   'caption'?: (props?: {}) => VNode[]
@@ -230,11 +260,29 @@ export type TableSlots<T extends TableData = TableData> = {
 </script>
 
 <script setup lang="ts" generic="T extends TableData">
-import { computed, useTemplateRef, watch, toRef, onBeforeUnmount } from 'vue'
+import { computed, useTemplateRef, watch, toRef, onBeforeUnmount, h, isVNode } from 'vue'
 import { Primitive } from 'reka-ui'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
-import { FlexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, getExpandedRowModel, useVueTable } from '@tanstack/vue-table'
+import {
+  useTable,
+  tableFeatures,
+  columnFilteringFeature,
+  columnPinningFeature,
+  columnResizingFeature,
+  columnSizingFeature,
+  columnVisibilityFeature,
+  globalFilteringFeature,
+  rowExpandingFeature,
+  rowPinningFeature,
+  rowSelectionFeature,
+  rowSortingFeature,
+  createExpandedRowModel,
+  createFilteredRowModel,
+  createSortedRowModel,
+  filterFns,
+  sortFns
+} from '@tanstack/vue-table'
 import { useVirtualizer } from '@tanstack/vue-virtual'
 import { reactivePick, createReusableTemplate, createRef } from '@vueuse/core'
 import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
@@ -336,10 +384,10 @@ const hasFooter = computed(() => {
 const globalFilterState = defineModel<string>('globalFilter')
 const columnFiltersState = defineModel<ColumnFiltersState>('columnFilters')
 const columnOrderState = defineModel<ColumnOrderState>('columnOrder')
-const columnVisibilityState = defineModel<VisibilityState>('columnVisibility')
+const columnVisibilityState = defineModel<ColumnVisibilityState>('columnVisibility')
 const columnPinningState = defineModel<ColumnPinningState>('columnPinning')
 const columnSizingState = defineModel<ColumnSizingState>('columnSizing')
-const columnSizingInfoState = defineModel<ColumnSizingInfoState>('columnSizingInfo')
+const columnResizingState = defineModel<columnResizingState>('columnResizing')
 const rowSelectionState = defineModel<RowSelectionState>('rowSelection')
 const rowPinningState = defineModel<RowPinningState>('rowPinning')
 const sortingState = defineModel<SortingState>('sorting')
@@ -350,22 +398,65 @@ const paginationState = defineModel<PaginationState>('pagination')
 const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef')
 const tableRef = useTemplateRef<HTMLTableElement>('tableRef')
 
-const tableProps = useForwardProps(reactivePick(props, '_features', 'autoResetAll', 'debugAll', 'debugCells', 'debugColumns', 'debugHeaders', 'debugRows', 'debugTable', 'defaultColumn', 'getRowId', 'getSubRows', 'initialState', 'mergeOptions', 'renderFallbackValue'))
+const tableProps = useForwardProps(reactivePick(props, 'autoResetAll', 'debugAll', 'debugCells', 'debugColumns', 'debugHeaders', 'debugRows', 'debugTable', 'defaultColumn', 'getRowId', 'getSubRows', 'initialState', 'mergeOptions', 'renderFallbackValue'))
 
-const tableApi = useVueTable({
+// What the table renders itself. Pagination, grouping, faceting and column ordering are registered through the `features` prop.
+const defaultFeatures = {
+  columnFilteringFeature,
+  columnPinningFeature,
+  columnResizingFeature,
+  columnSizingFeature,
+  columnVisibilityFeature,
+  globalFilteringFeature,
+  rowExpandingFeature,
+  rowPinningFeature,
+  rowSelectionFeature,
+  rowSortingFeature,
+  filteredRowModel: createFilteredRowModel(),
+  sortedRowModel: createSortedRowModel(),
+  expandedRowModel: createExpandedRowModel(),
+  filterFns,
+  sortFns
+}
+
+const registeredFeatures = tableFeatures({ ...defaultFeatures, ...props.features }) as TableFeatures
+
+const models = {
+  globalFilter: globalFilterState,
+  columnFilters: columnFiltersState,
+  columnOrder: columnOrderState,
+  columnVisibility: columnVisibilityState,
+  columnPinning: columnPinningState,
+  columnSizing: columnSizingState,
+  columnResizing: columnResizingState,
+  rowSelection: rowSelectionState,
+  rowPinning: rowPinningState,
+  sorting: sortingState,
+  grouping: groupingState,
+  expanded: expandedState,
+  pagination: paginationState
+} as const
+
+// TanStack falls back to the initial state for a slice that is present but `undefined`, so only bound models are passed.
+const state = computed(() => {
+  const state: Record<string, unknown> = { ...props.state }
+  for (const [key, model] of Object.entries(models)) {
+    if (model.value !== undefined) {
+      state[key] = model.value
+    }
+  }
+  return state
+})
+
+const tableApi: VueTable<TableFeatures, T> = useTable<TableFeatures, T>({
   ...tableProps.value,
-  get data() {
-    return data.value
-  },
-  get columns() {
-    return columns.value
-  },
+  features: registeredFeatures,
+  data,
+  columns,
   meta: meta.value,
-  getCoreRowModel: getCoreRowModel(),
   ...(props.globalFilterOptions || {}),
   ...(globalFilterState.value !== undefined && { onGlobalFilterChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, globalFilterState) }),
   ...(props.columnFiltersOptions || {}),
-  getFilteredRowModel: getFilteredRowModel(),
   ...(columnFiltersState.value !== undefined && { onColumnFiltersChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnFiltersState) }),
   ...(columnOrderState.value !== undefined && { onColumnOrderChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnOrderState) }),
   ...(props.visibilityOptions || {}),
@@ -374,64 +465,21 @@ const tableApi = useVueTable({
   ...(columnPinningState.value !== undefined && { onColumnPinningChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnPinningState) }),
   ...(props.columnSizingOptions || {}),
   ...(columnSizingState.value !== undefined && { onColumnSizingChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnSizingState) }),
-  ...(columnSizingInfoState.value !== undefined && { onColumnSizingInfoChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnSizingInfoState) }),
+  ...(columnResizingState.value !== undefined && { onColumnResizingChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnResizingState) }),
   ...(props.rowSelectionOptions || {}),
   ...(rowSelectionState.value !== undefined && { onRowSelectionChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, rowSelectionState) }),
   ...(props.rowPinningOptions || {}),
   ...(rowPinningState.value !== undefined && { onRowPinningChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, rowPinningState) }),
   ...(props.sortingOptions || {}),
-  getSortedRowModel: getSortedRowModel(),
   ...(sortingState.value !== undefined && { onSortingChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, sortingState) }),
   ...(props.groupingOptions || {}),
   ...(groupingState.value !== undefined && { onGroupingChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, groupingState) }),
   ...(props.expandedOptions || {}),
-  getExpandedRowModel: getExpandedRowModel(),
   ...(expandedState.value !== undefined && { onExpandedChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, expandedState) }),
   ...(props.paginationOptions || {}),
   ...(paginationState.value !== undefined && { onPaginationChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, paginationState) }),
-  ...(props.facetedOptions || {}),
-  state: {
-    get globalFilter() {
-      return globalFilterState.value
-    },
-    get columnFilters() {
-      return columnFiltersState.value
-    },
-    get columnOrder() {
-      return columnOrderState.value
-    },
-    get columnVisibility() {
-      return columnVisibilityState.value
-    },
-    get columnPinning() {
-      return columnPinningState.value
-    },
-    get expanded() {
-      return expandedState.value
-    },
-    get rowSelection() {
-      return rowSelectionState.value
-    },
-    get sorting() {
-      return sortingState.value
-    },
-    get grouping() {
-      return groupingState.value
-    },
-    get rowPinning() {
-      return rowPinningState.value
-    },
-    get columnSizing() {
-      return columnSizingState.value
-    },
-    get columnSizingInfo() {
-      return columnSizingInfoState.value
-    },
-    get pagination() {
-      return paginationState.value
-    }
-  }
-})
+  state
+} as any)
 
 // TanStack fills the rows above a shallow column with placeholders and puts its header in the bottom row.
 // Keep only the top placeholder of each chain (header groups are numbered by column depth) and render the real header there with a `rowspan`.
@@ -555,6 +603,15 @@ function onExpandedRowUnmounted({ el }: VNode) {
 
 onBeforeUnmount(() => expandedRowsObserver?.disconnect())
 
+// TanStack's `FlexRender` passes an array returned by a column template to `h()` as if it were a component, so arrays are returned as they are.
+function FlexRender({ render, props }: { render: unknown, props: unknown }) {
+  const rendered = typeof render === 'function' ? render(props) : render
+  if (rendered === null || (typeof rendered !== 'object' && typeof rendered !== 'function') || Array.isArray(rendered) || isVNode(rendered)) {
+    return rendered
+  }
+  return h(rendered as any, props as any)
+}
+
 function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
   ref.value = typeof updaterOrValue === 'function' ? updaterOrValue(ref.value) : updaterOrValue
 }
@@ -607,14 +664,14 @@ function resolveValue<T, A = undefined>(prop: T | ((arg: A) => T), arg?: A): T |
   return prop
 }
 
-function getColumnStyles(column: Column<T>): Record<string, string> {
+function getColumnStyles(column: Column<TableFeatures, T, unknown>): Record<string, string> {
   const styles: Record<string, string> = {}
 
   const pinned = column.getIsPinned()
-  if (pinned === 'left') {
-    styles.left = `${column.getStart('left')}px`
-  } else if (pinned === 'right') {
-    styles.right = `${column.getAfter('right')}px`
+  if (pinned === 'start') {
+    styles.insetInlineStart = `${column.getStart('start')}px`
+  } else if (pinned === 'end') {
+    styles.insetInlineEnd = `${column.getAfter('end')}px`
   }
 
   return styles
@@ -623,11 +680,11 @@ function getColumnStyles(column: Column<T>): Record<string, string> {
 // `getCanSort()` is true for every accessor column, so it cannot tell a column that offers sort UI
 // from a plain one, and an explicit `enableSorting: true` can still come from `defaultColumn` or be
 // overridden by `sortingOptions`. A header is sortable only when both agree.
-function isSortable(column: Column<T, unknown>) {
+function isSortable(column: Column<TableFeatures, T, unknown>) {
   return column.columnDef.enableSorting === true && column.getCanSort()
 }
 
-function getAriaSort(header: Header<T, unknown>): AriaAttributes['aria-sort'] {
+function getAriaSort(header: Header<TableFeatures, T, unknown>): AriaAttributes['aria-sort'] {
   if (header.isPlaceholder || !isSortable(header.column)) {
     return undefined
   }
@@ -643,7 +700,7 @@ function getAriaSort(header: Header<T, unknown>): AriaAttributes['aria-sort'] {
   const sortableIds = new Set(tableApi.getVisibleLeafColumns()
     .filter(isSortable)
     .map(column => column.id))
-  const primary = tableApi.getState().sorting.find(({ id }) => sortableIds.has(id))
+  const primary = tableApi.atoms.sorting.get().find(({ id }) => sortableIds.has(id))
 
   if (primary?.id !== header.column.id) {
     return 'none'
