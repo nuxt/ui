@@ -287,6 +287,18 @@ describe('Form', () => {
       expect(passwordField.text()).toBe('Invalid input: expected string, received undefined')
     })
 
+    it('re-enables fields before emitting `error`', async () => {
+      let disabled: boolean[] = []
+      onError.mockImplementationOnce(() => {
+        disabled = wrapper.findAll('input').map((input: any) => input.element.disabled)
+      })
+
+      await form.submit()
+
+      expect(onError).toHaveBeenCalledTimes(1)
+      expect(disabled).toEqual([false, false])
+    })
+
     it('validate on submit works', async () => {
       state.email = 'bob@dylan.com'
       state.password = 'strongpassword'

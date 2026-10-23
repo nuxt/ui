@@ -326,6 +326,10 @@ async function onSubmitWrapper(payload: Event) {
       ...event,
       errors: error.errors
     }
+
+    // `loadingAuto` disables the fields, re-enable them first so the handler can focus one
+    loading.value = false
+    await nextTick()
     emits('error', errorEvent)
   } finally {
     loading.value = false
