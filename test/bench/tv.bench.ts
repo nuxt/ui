@@ -33,8 +33,8 @@ const tableProps = {
 const ITERATIONS = 100
 
 // Building the factory is the expensive step (deep-merges the whole variant
-// matrix, joins every slot, flattens compound variants). Today it happens inside
-// each component's `computed`, so every variant-prop change re-runs it.
+// matrix, joins every slot, flattens compound variants). `tv` memoizes it per
+// theme and config, so only the cold build below skips the cache.
 describe('factory build', () => {
   bench('button (~6 slots)', () => {
     for (let i = 0; i < ITERATIONS; i++) {
@@ -51,6 +51,13 @@ describe('factory build', () => {
   bench('navigation-menu (~31 slots)', () => {
     for (let i = 0; i < ITERATIONS; i++) {
       tv({ extend: navigationMenuTheme })
+    }
+  })
+
+  let cold = 0
+  bench('button (~6 slots, cold build)', () => {
+    for (let i = 0; i < ITERATIONS; i++) {
+      tv({ extend: buttonTheme, base: `cold-${cold++}` })
     }
   })
 })
