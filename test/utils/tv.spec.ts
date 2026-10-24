@@ -346,6 +346,19 @@ describe('tv factory memoization', () => {
     expect(tvt({ extend: theme, slots: { label: '\0undefined' } })().label()).toBe('truncate \0undefined')
   })
 
+  it('falls back to the uncached path for configs that cannot be serialized', () => {
+    const cyclic: any = {}
+    cyclic.self = cyclic
+    expect(tvt({ extend: theme, slots: { label: 10n } })().label()).toBe('truncate 10')
+    expect(tvt({ extend: theme, meta: cyclic })().label()).toBe('truncate')
+  })
+
+  it('does not key configs through `toJSON`', () => {
+    const variants = Object.defineProperty({ color: { primary: { base: 'p-4' } } }, 'toJSON', { value: () => ({}) })
+    expect(tvt({ extend: theme, variants: {} })().base()).not.toContain('p-4')
+    expect(tvt({ extend: theme, variants })().base()).toContain('p-4')
+  })
+
   it('does not share a component across configs containing functions', () => {
     expect(tvt({ extend: theme, slots: { label: () => 'text-xl' } })().label()).toBe('text-xl')
     expect(tvt({ extend: theme, slots: { label: () => 'text-2xl' } })().label()).toBe('text-2xl')

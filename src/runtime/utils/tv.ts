@@ -305,28 +305,42 @@ function resolveReplacers(componentConfig: any): any {
  */
 const componentCache = /* @__PURE__ */ new WeakMap<object, Map<string, any>>()
 
+const unmemoizable = Symbol('unmemoizable')
+
+/**
+ * Serializes everything but `extend`, or returns `undefined` when the config
+ * holds a value the key could not distinguish (functions, non-plain objects,
+ * `toJSON`, non-finite numbers, cycles, ...).
+ */
 function componentCacheKey(componentConfig: any): string | undefined {
-  let memoizable = true
-  const key = JSON.stringify(componentConfig, function (k, value) {
-    if (this === componentConfig && k === 'extend') {
-      return undefined
-    }
-    if (value === undefined) {
-      // An explicit `undefined` overrides the theme value (e.g. a default variant).
-      return '\0undefined'
-    }
-    const type = typeof value
-    if ((type === 'string' && value.startsWith('\0')) || type === 'function' || type === 'symbol' || type === 'bigint' || (type === 'number' && !Number.isFinite(value))) {
-      memoizable = false
-    } else if (type === 'object' && value && !Array.isArray(value)) {
-      const proto = Object.getPrototypeOf(value)
-      if (proto !== Object.prototype && proto !== null) {
-        memoizable = false
+  try {
+    return JSON.stringify(componentConfig, function (k, value) {
+      if (this === componentConfig && k === 'extend') {
+        return undefined
       }
-    }
-    return value
-  })
-  return memoizable ? key : undefined
+      // Differs only when `toJSON` replaced the value `tv` reads.
+      if (this[k] !== value) {
+        throw unmemoizable
+      }
+      if (value === undefined) {
+        // An explicit `undefined` overrides the theme value (e.g. a default variant).
+        return '\0undefined'
+      }
+      const type = typeof value
+      if ((type === 'string' && value.startsWith('\0')) || type === 'function' || type === 'symbol' || type === 'bigint' || (type === 'number' && !Number.isFinite(value))) {
+        throw unmemoizable
+      }
+      if (type === 'object' && value && !Array.isArray(value)) {
+        const proto = Object.getPrototypeOf(value)
+        if (proto !== Object.prototype && proto !== null) {
+          throw unmemoizable
+        }
+      }
+      return value
+    })
+  } catch {
+    return undefined
+  }
 }
 
 function createComponent(componentConfig?: any) {
