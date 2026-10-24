@@ -134,7 +134,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
 
 <template>
   <!-- A mini portfolio: the pane is the scroll container, so the pill nav sticks to it. -->
-  <div class="h-full overflow-y-auto bg-default" style="--ui-container: var(--container-4xl)">
+  <div class="h-full overflow-y-auto bg-default" style="--ui-container-width: var(--container-4xl)">
     <!-- Template's AppHeader: a floating centered pill navigation. -->
     <div class="sticky top-2 sm:top-4 z-10 h-0 flex items-start justify-center pointer-events-none">
       <UNavigationMenu
@@ -313,7 +313,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
           :autoplay="{ delay: 4000 }"
           loop
           dots
-          :ui="{ viewport: '-mx-4 sm:-mx-12 lg:-mx-16 bg-tint max-w-(--ui-container)' }"
+          :ui="{ viewport: '-mx-4 sm:-mx-12 lg:-mx-16 bg-tint max-w-(--ui-container-width)' }"
         >
           <UPageCTA
             :description="item.quote"
