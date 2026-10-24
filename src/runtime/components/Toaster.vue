@@ -15,7 +15,7 @@ export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection' 
   position?: Toaster['variants']['position']
   /**
    * Expand the toasts to show multiple toasts at once.
-   * @defaultValue true
+   * @defaultValue false
    */
   expand?: boolean
   /**
@@ -60,7 +60,7 @@ import { requestIdleCallback, cancelIdleCallback } from '../utils/prefetch'
 import { tv } from '../utils/tv'
 
 const _props = withDefaults(defineProps<ToasterProps>(), {
-  expand: true,
+  expand: false,
   portal: true,
   duration: 5000,
   progress: true,
