@@ -2,7 +2,7 @@ import { bench, describe } from 'vitest'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Button from '../../src/runtime/components/Button.vue'
 import Table from '../../src/runtime/components/Table.vue'
-import type { TableColumn } from '../../src/runtime/components/Table.vue'
+import type { TableColumn, TableData } from '../../src/runtime/components/Table.vue'
 
 // A toolbar of many buttons (the #6293 shape): each Button builds its own tv
 // factory on mount, and re-renders on every editor transaction. Labels only —
@@ -65,8 +65,8 @@ const columns: TableColumn<Row>[] = [
 ]
 
 // `mountSuspended` doesn't infer the Table's row generic, so the mounted prop
-// expects `TableColumn<unknown, unknown>[]` — cast the checked columns at use.
-const tableProps = (data: Row[]) => ({ data, columns: columns as unknown as TableColumn<unknown, unknown>[] })
+// expects `TableColumn<TableData>[]` — cast the checked columns at use.
+const tableProps = (data: Row[]) => ({ data, columns: columns as unknown as TableColumn<TableData>[] })
 
 // The per-cell `ui.td()` path at scale (200 rows x 5 columns = 1000 cells).
 describe('Table mount (200 x 5)', () => {
