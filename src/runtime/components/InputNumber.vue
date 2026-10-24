@@ -78,6 +78,8 @@ export interface InputNumberEmits<T extends InputNumberValue = InputNumberValue,
 }
 
 export interface InputNumberSlots {
+  leading?(props: { ui: InputNumber['ui'] }): VNode[]
+  trailing?(props: { ui: InputNumber['ui'] }): VNode[]
   increment?(props?: {}): VNode[]
   decrement?(props?: {}): VNode[]
 }
@@ -92,6 +94,7 @@ import { useComponentProps, useComponentOverrides, useThemeConfig } from '../com
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
+import { isFieldClick } from '../utils/field'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
@@ -104,7 +107,7 @@ const _props = withDefaults(defineProps<InputNumberProps<T, Mod>>(), {
 })
 const emits = defineEmits<InputNumberEmits<T, Mod>>()
 
-defineSlots<InputNumberSlots>()
+const slots = defineSlots<InputNumberSlots>()
 
 const props = useComponentProps<InputNumberProps<T, Mod>>('inputNumber', _props, theme)
 
@@ -137,7 +140,9 @@ const ui = computed(() => tv(theme, overrides.value)({
   orientation: props.orientation,
   fieldGroup: orientation.value,
   increment: props.orientation === 'vertical' ? (!!props.increment || !!props.decrement) : !!props.increment,
-  decrement: props.orientation === 'vertical' ? false : !!props.decrement
+  decrement: props.orientation === 'vertical' ? false : !!props.decrement,
+  leading: !!slots.leading,
+  trailing: !!slots.trailing
 }))
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -170,6 +175,14 @@ function onUpdate(value: ApplyModifiers<T, Mod> | undefined) {
 function onBlur(event: FocusEvent) {
   emitFormBlur()
   emits('blur', event)
+}
+
+// The box looks like the input, so a click on plain leading or trailing content
+// goes to the input. A control in there keeps its own click.
+function onRootClick(event: MouseEvent) {
+  if (isFieldClick(event)) {
+    inputRef.value?.$el?.focus()
+  }
 }
 
 function autoFocus() {
@@ -207,6 +220,7 @@ defineExpose({
     :name="name"
     :disabled="disabled"
     @update:model-value="(val) => onUpdate(val as ApplyModifiers<T, Mod>)"
+    @click="onRootClick"
   >
     <NumberFieldInput
       ref="inputRef"
@@ -219,6 +233,10 @@ defineExpose({
       @blur="onBlur"
       @focus="emitFormFocus"
     />
+
+    <span v-if="!!slots.trailing" data-slot="input-number-trailing" :class="ui.trailing({ class: props.ui?.trailing })">
+      <slot name="trailing" :ui="ui" />
+    </span>
 
     <div v-if="!!props.increment" data-slot="input-number-increment" :class="ui.increment({ class: props.ui?.increment })">
       <NumberFieldIncrement as-child :disabled="disabled || props.incrementDisabled">
@@ -249,5 +267,9 @@ defineExpose({
         </slot>
       </NumberFieldDecrement>
     </div>
+
+    <span v-if="!!slots.leading" data-slot="input-number-leading" :class="ui.leading({ class: props.ui?.leading })">
+      <slot name="leading" :ui="ui" />
+    </span>
   </NumberFieldRoot>
 </template>
