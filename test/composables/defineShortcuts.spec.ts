@@ -244,6 +244,54 @@ describe('defineShortcuts', () => {
       fireKeydown('k', { code: 'KeyK' })
       expect(handler).not.toHaveBeenCalled()
     })
+
+    it('alt_/ triggers with Alt+/', async () => {
+      const handler = vi.fn()
+      await registerShortcuts({ 'alt_/': handler })
+
+      fireKeydown('/', { altKey: true, code: 'Slash' })
+      expect(handler).toHaveBeenCalledOnce()
+    })
+
+    it('alt_/ triggers when Alt produces a special character (macOS)', async () => {
+      const handler = vi.fn()
+      await registerShortcuts({ 'alt_/': handler })
+
+      fireKeydown('÷', { altKey: true, code: 'Slash' })
+      expect(handler).toHaveBeenCalledOnce()
+    })
+
+    it('alt_/ triggers when keyboard layout produces / with a different code', async () => {
+      const handler = vi.fn()
+      await registerShortcuts({ 'alt_/': handler })
+
+      fireKeydown('/', { altKey: true, code: 'IntlRo' })
+      expect(handler).toHaveBeenCalledOnce()
+    })
+
+    it('/ does NOT trigger when Alt is pressed', async () => {
+      const handler = vi.fn()
+      await registerShortcuts({ '/': handler })
+
+      fireKeydown('÷', { altKey: true, code: 'Slash' })
+      expect(handler).not.toHaveBeenCalled()
+    })
+
+    it('alt_/ does NOT trigger without Alt', async () => {
+      const handler = vi.fn()
+      await registerShortcuts({ 'alt_/': handler })
+
+      fireKeydown('/', { code: 'Slash' })
+      expect(handler).not.toHaveBeenCalled()
+    })
+
+    it('alt_. triggers with Alt+.', async () => {
+      const handler = vi.fn()
+      await registerShortcuts({ 'alt_.': handler })
+
+      fireKeydown('.', { altKey: true, code: 'Period' })
+      expect(handler).toHaveBeenCalledOnce()
+    })
   })
 
   describe('ctrl modifier', () => {
