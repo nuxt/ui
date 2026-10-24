@@ -3,7 +3,7 @@ import { defineTheme } from '../utils/theme'
 
 export default defineTheme({
   slots: {
-    root: 'relative group overflow-hidden bg-overlay shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent',
+    root: 'relative group overflow-hidden bg-overlay shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 outline-accent-focus focus-visible:outline-(length:--ui-focus-width) focus-visible:ring-accent',
     wrapper: 'w-0 flex-1 flex flex-col',
     title: 'text-sm font-medium text-strong',
     description: 'text-sm text-muted',

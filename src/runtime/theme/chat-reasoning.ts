@@ -3,13 +3,13 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: '',
-    trigger: 'group flex w-full items-center gap-1.5 text-muted text-sm disabled:cursor-default disabled:hover:text-muted hover:text-default rounded-sm outline-focus focus-visible:outline-3 min-w-0 transition-colors',
+    trigger: 'group flex w-full items-center gap-1.5 text-muted text-sm disabled:cursor-default disabled:hover:text-muted hover:text-default rounded-sm outline-focus focus-visible:outline-(length:--ui-focus-width) min-w-0 transition-colors',
     leading: 'relative size-4 shrink-0',
     leadingIcon: 'size-4 shrink-0',
     chevronIcon: 'size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none',
     label: 'truncate',
     trailingIcon: 'size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none',
-    content: 'data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden rounded-sm outline-focus has-focus-visible:outline-3',
+    content: 'data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden rounded-sm outline-focus has-focus-visible:outline-(length:--ui-focus-width)',
     body: 'max-h-[200px] pt-2 overflow-y-auto text-sm text-faint whitespace-pre-wrap focus:outline-none'
   },
   variants: {

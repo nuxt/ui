@@ -14,14 +14,14 @@ export default defineTheme({
     color: colorVariant({ root: '' }),
     variant: {
       outline: {
-        root: 'bg-default/75 ring ring-default outline-accent-focus has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-accent has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-accent'
+        root: 'bg-default/75 ring ring-default outline-accent-focus has-[textarea:focus-visible]:outline-(length:--ui-focus-width) has-[textarea:focus-visible]:ring-accent has-[[contenteditable]:focus-visible]:outline-(length:--ui-focus-width) has-[[contenteditable]:focus-visible]:ring-accent'
       },
       // Highlight the prompt like a focused input when the text surface (native textarea or editor's contenteditable) is focused, without reacting to header/footer controls.
       soft: {
-        root: 'bg-tint outline-accent-focus has-[textarea:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:outline-3'
+        root: 'bg-tint outline-accent-focus has-[textarea:focus-visible]:outline-(length:--ui-focus-width) has-[[contenteditable]:focus-visible]:outline-(length:--ui-focus-width)'
       },
       subtle: {
-        root: 'bg-tint ring ring-default outline-accent-focus has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-accent has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-accent'
+        root: 'bg-tint ring ring-default outline-accent-focus has-[textarea:focus-visible]:outline-(length:--ui-focus-width) has-[textarea:focus-visible]:ring-accent has-[[contenteditable]:focus-visible]:outline-(length:--ui-focus-width) has-[[contenteditable]:focus-visible]:ring-accent'
       },
       naked: {
         root: ''
