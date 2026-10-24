@@ -17,6 +17,6 @@ export default defineAppConfig({
     position: 'bottom-right' as const,
     duration: 5000,
     max: 5,
-    expand: true
+    expand: false
   }
 })
