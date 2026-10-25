@@ -21,12 +21,12 @@ export interface ProseImgProps {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, useId } from 'vue'
+import { ref, computed, useAttrs, useId } from 'vue'
 import { DialogRoot, DialogPortal, DialogTrigger } from 'reka-ui'
 import { AnimatePresence, Motion } from 'motion-v'
 import { useEventListener, createReusableTemplate } from '@vueuse/core'
 import { useRuntimeConfig, useAppConfig } from '#imports'
-import ImageComponent from '#build/ui-image-component'
+import ImageComponent, { useImage } from '#build/ui-image-component'
 import { useComponentProps } from '../../composables/useComponentProps'
 import { resolveBaseURL } from '../../utils'
 import { tv } from '../../utils/tv'
@@ -53,7 +53,13 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.img || {}
   width: !!props.width
 }))
 
-const refinedSrc = computed(() => typeof ImageComponent === 'string' ? resolveBaseURL(props.src, useRuntimeConfig().app.baseURL) : props.src)
+const attrs = useAttrs()
+const image = useImage?.()
+
+const refinedSrc = computed(() => {
+  const provider = (attrs.provider as string | undefined) || image?.options.provider
+  return provider === 'ipx' || provider === 'ipxStatic' ? props.src : resolveBaseURL(props.src, useRuntimeConfig().app.baseURL)
+})
 
 const layoutId = computed(() => `${refinedSrc.value}::${useId()}`)
 
