@@ -80,7 +80,6 @@ export type AccordionSlots<T extends AccordionItem = AccordionItem> = {
 import { computed } from 'vue'
 import { AccordionRoot, AccordionItem, AccordionHeader, AccordionTrigger, AccordionContent } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { get } from '../utils'
@@ -101,7 +100,7 @@ const props = useComponentProps<AccordionProps<T>>('accordion', _props)
 
 const appConfig = useAppConfig() as Accordion['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'collapsible', 'defaultValue', 'disabled', 'modelValue', 'unmountOnHide'), emits)
+const rootProps = useForwardProps(props, ['as', 'collapsible', 'defaultValue', 'disabled', 'modelValue', 'unmountOnHide'], emits)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.accordion || {}) })({

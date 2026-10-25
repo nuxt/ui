@@ -65,7 +65,6 @@ export interface PinInputSlots {
 import { ref, computed, onMounted, onScopeDispose } from 'vue'
 import { PinInputInput, PinInputRoot } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useFormField } from '../composables/useFormField'
@@ -86,7 +85,7 @@ const props = useComponentProps<PinInputProps<T>>('pinInput', _props)
 const { t } = useLocale()
 const appConfig = useAppConfig() as PinInput['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'disabled', 'id', 'mask', 'name', 'otp', 'required', 'type'), emits)
+const rootProps = useForwardProps(props, ['disabled', 'id', 'mask', 'name', 'otp', 'required', 'type'], emits)
 
 const { emitFormInput, emitFormFocus, emitFormChange, emitFormBlur, size: formFieldSize, color: formFieldColor, id, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<PinInputProps>(_props)
 

@@ -239,7 +239,7 @@ import { computed, ref, useTemplateRef, toRef, watch, nextTick } from 'vue'
 import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxVirtualizer, ListboxItem, ListboxItemIndicator } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
-import { reactivePick, createReusableTemplate, refDebounced, refThrottled } from '@vueuse/core'
+import { createReusableTemplate, refDebounced, refThrottled } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
@@ -281,7 +281,7 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 const { t } = useLocale()
 const appConfig = useAppConfig() as CommandPalette['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover', 'loop', 'by'), emits)
+const rootProps = useForwardProps(props, ['as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover', 'loop', 'by'], emits)
 const virtualizerProps = toRef(() => {
   if (!props.virtualize) return false
 
