@@ -1,9 +1,25 @@
 import { describe, expect, it, vi } from 'vitest'
-import { h, createSSRApp } from 'vue'
+import { h, createSSRApp, defineComponent } from 'vue'
 import { renderToString } from 'vue/server-renderer'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { addIcon, setCustomIconLoader } from '@iconify/vue'
 import Icon from '../../src/runtime/vue/components/Icon.vue'
+import IconNuxt from '../../src/runtime/components/Icon.vue'
+
+vi.mock('@nuxt/icon/runtime/components/index.js', () => ({
+  default: defineComponent({
+    name: 'NuxtIcon',
+    props: {
+      name: { type: String, required: true },
+      mode: { type: String, default: null },
+      size: { type: [Number, String], default: null },
+      customize: { type: [Function, Boolean, null], default: null }
+    },
+    setup() {
+      return () => h('i')
+    }
+  })
+}))
 
 function renderIconToString(name: string) {
   return renderToString(createSSRApp({ render: () => h(Icon, { name, mode: 'svg' }) }))
@@ -58,5 +74,64 @@ describe('Icon', () => {
     await new Promise(resolve => setTimeout(resolve))
 
     expect(fetchIcon).not.toHaveBeenCalled()
+  })
+})
+
+describe('Icon NuxtIcon forwarding', () => {
+  it('forwards mode, size and customize when passed', async () => {
+    const customize = vi.fn()
+    const wrapper = await mountSuspended(IconNuxt, {
+      props: { name: 'i-test:icon', mode: 'css', size: 24, customize }
+    })
+
+    const nuxtIcon = wrapper.findComponent({ name: 'NuxtIcon' })
+
+    expect(nuxtIcon.props('mode')).toBe('css')
+    expect(nuxtIcon.props('size')).toBe(24)
+    expect(nuxtIcon.props('customize')).toBe(customize)
+  })
+
+  it('does not forward mode, size or customize when not passed', async () => {
+    const wrapper = await mountSuspended(IconNuxt, {
+      props: { name: 'i-test:icon' }
+    })
+
+    const nuxtIcon = wrapper.findComponent({ name: 'NuxtIcon' })
+
+    expect(nuxtIcon.props('mode')).toBeNull()
+    expect(nuxtIcon.props('size')).toBeNull()
+    // `customize` is Boolean-typed on `UIcon`, so Vue casts it to `false` when absent; it
+    // must not be forwarded over NuxtIcon's own default.
+    expect(nuxtIcon.props('customize')).toBeNull()
+  })
+
+  it('reacts to prop changes', async () => {
+    const wrapper = await mountSuspended(IconNuxt, {
+      props: { name: 'i-test:icon', mode: 'svg', size: 16 }
+    })
+
+    expect(wrapper.findComponent({ name: 'NuxtIcon' }).props('size')).toBe(16)
+    expect(wrapper.findComponent({ name: 'NuxtIcon' }).props('mode')).toBe('svg')
+
+    await wrapper.setProps({ mode: 'css', size: 24 })
+
+    expect(wrapper.findComponent({ name: 'NuxtIcon' }).props('mode')).toBe('css')
+    expect(wrapper.findComponent({ name: 'NuxtIcon' }).props('size')).toBe(24)
+  })
+
+  it('renders the component directly when name is not a string', async () => {
+    const CustomIcon = defineComponent({
+      name: 'CustomIcon',
+      setup() {
+        return () => h('svg', { 'data-icon': 'custom' })
+      }
+    })
+
+    const wrapper = await mountSuspended(IconNuxt, {
+      props: { name: CustomIcon }
+    })
+
+    expect(wrapper.findComponent({ name: 'NuxtIcon' }).exists()).toBe(false)
+    expect(wrapper.findComponent({ name: 'CustomIcon' }).exists()).toBe(true)
   })
 })
