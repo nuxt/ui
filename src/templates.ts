@@ -379,9 +379,10 @@ export {}
     getContents: ({ app }) => {
       const image = app?.components?.find(c => c.pascalName === 'NuxtImg' && !/nuxt(?:-nightly)?\/dist\/app/.test(c.filePath))
 
-      return image
-        ? [genExport(image.filePath, [{ name: image.export, as: 'default' }]), `export { useImage } from '#imports'`].join('\n')
-        : ['export default "img"', 'export const useImage = undefined as undefined | (() => { options: { provider?: string } })'].join('\n')
+      return [
+        image ? genExport(image.filePath, [{ name: image.export, as: 'default' }]) : 'export default "img"',
+        !!nuxt && hasNuxtModule('@nuxt/image', nuxt) ? `export { useImage } from '#imports'` : 'export const useImage = undefined as undefined | (() => { options: { provider?: string } })'
+      ].join('\n')
     }
   })
 
