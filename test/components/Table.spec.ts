@@ -3,6 +3,8 @@ import { describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { flushPromises } from '@vue/test-utils'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { stockFeatures } from '@tanstack/vue-table'
+import { upperFirst } from 'scule'
 import { renderEach } from '../component-render'
 import { UCheckbox, UButton, UBadge, UDropdownMenu } from '#components'
 import Table from '../../src/runtime/components/Table.vue'
@@ -51,7 +53,7 @@ describe('Table', () => {
   const columns: TableColumn<typeof data[number]>[] = [{
     id: 'select',
     header: ({ table }) => h(UCheckbox<boolean>, {
-      'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
+      'modelValue': table.getIsAllPageRowsSelected() ? true : table.getIsSomePageRowsSelected() ? 'indeterminate' : false,
       'onUpdate:modelValue': value => table.toggleAllPageRowsSelected(!!value),
       'label': 'Select all'
     }),
@@ -548,7 +550,7 @@ describe('Table', () => {
     ]
 
     const disabledWrapper = await mountSuspended(Table, {
-      props: { data, columns: sortableColumns as any, sortingOptions: { enableSorting: false } }
+      props: { data, columns: sortableColumns as any, options: { enableSorting: false } }
     })
 
     expect(disabledWrapper.findAll('th').every(th => th.attributes('aria-sort') === undefined)).toBe(true)
@@ -565,6 +567,38 @@ describe('Table', () => {
     const [actionsTh, idTh] = defaultColumnWrapper.findAll('th')
     expect(actionsTh!.attributes('aria-sort')).toBeUndefined()
     expect(idTh!.attributes('aria-sort')).toBe('none')
+  })
+
+  it.each([
+    ['globalFilter', '', 'carmella'],
+    ['columnFilters', [], [{ id: 'email', value: 'carmella' }]],
+    ['columnOrder', [], ['email', 'id']],
+    ['columnVisibility', {}, { email: false }],
+    ['columnPinning', { start: [], end: [] }, { start: ['id'], end: [] }],
+    ['columnSizing', {}, { id: 200 }],
+    ['columnResizing', {}, { columnSizingStart: [], deltaOffset: null, deltaPercentage: null, isResizingColumn: 'id', startOffset: null, startSize: null }],
+    ['rowSelection', {}, { 0: true }],
+    ['rowPinning', { top: [], bottom: [] }, { top: ['0'], bottom: [] }],
+    ['sorting', [], [{ id: 'id', desc: true }]],
+    ['grouping', [], ['status']],
+    ['expanded', {}, { 0: true }],
+    ['pagination', { pageIndex: 0, pageSize: 10 }, { pageIndex: 1, pageSize: 2 }]
+  ])('updates a bound %s model through TanStack', async (key, initial, value) => {
+    const onUpdate = vi.fn()
+    const wrapper = await mountSuspended(Table, {
+      props: { data, features: stockFeatures, [key]: initial, [`onUpdate:${key}`]: onUpdate }
+    })
+    ;(wrapper.vm as any).tableApi[`set${upperFirst(key)}`](value)
+
+    expect(onUpdate).toHaveBeenLastCalledWith(value)
+  })
+
+  it('keeps an unbound slice in TanStack state', async () => {
+    const wrapper = await mountSuspended(Table, { props: { data } })
+    ;(wrapper.vm as any).tableApi.setColumnVisibility({ email: false })
+    await flushPromises()
+
+    expect(wrapper.findAll('th').map(th => th.text())).not.toContain('Email')
   })
 
   describe('defaultColumn', () => {
