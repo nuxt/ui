@@ -146,6 +146,43 @@ slots:
 This sets the `color` to `error` on the form control. You can change it globally in your `app.config.ts`.
 ::
 
+### Error Prefix and Icon :badge{label="Soon" class="align-text-top"}
+
+Under [WCAG 2.2 Success Criterion 1.4.1 (Use of Color)](https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html), color must not be the sole visual means of communicating an error or state change.
+
+Use the `error-prefix` and `error-icon` props to provide non-color visual indicators such as an explicit text prefix or an icon alongside the error message. Both default to `undefined`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - label
+props:
+  label: Email
+  error: Please enter a valid email address.
+  errorPrefix: 'Error:'
+  errorIcon: i-lucide-circle-alert
+slots:
+  default: |
+
+    <UInput placeholder="Enter your email" class="w-full" />
+---
+
+:u-input{placeholder="Enter your email" class="w-full"}
+::
+
+You can also customize the icon using the `#error-icon` slot, which overrides the `error-icon` prop:
+
+```vue
+<UFormField label="Email" error="Please enter a valid email address.">
+  <UInput placeholder="Enter your email" class="w-full" />
+
+  <template #error-icon>
+    <UIcon name="i-lucide-triangle-alert" class="size-4 shrink-0" />
+  </template>
+</UFormField>
+```
+
 ### Error Pattern
 
 Use the `error-pattern` prop to match form errors with a regular expression. This is especially relevant for components with array values such as [InputTags](/docs/components/input-tags), where errors include array indices in their name (e.g. `tags.0`).

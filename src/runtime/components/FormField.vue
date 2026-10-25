@@ -2,6 +2,7 @@
 import type { Ref, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/form-field'
+import type { IconProps } from './Icon.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type FormField = ComponentConfig<typeof theme, AppConfig, 'formField'>
@@ -20,6 +21,15 @@ export interface FormFieldProps {
   description?: string
   help?: string
   error?: boolean | string
+  /**
+   * Text prepended to the error message.
+   */
+  errorPrefix?: string
+  /**
+   * The icon displayed next to the error message.
+   * @IconifyIcon
+   */
+  errorIcon?: IconProps['name']
   hint?: string
   /**
    * @defaultValue 'md'
@@ -43,12 +53,13 @@ export interface FormFieldProps {
 }
 
 export interface FormFieldSlots {
-  label?(props: { label: string | undefined }): VNode[]
-  hint?(props: { hint: string | undefined }): VNode[]
-  description?(props: { description: string | undefined }): VNode[]
-  help?(props: { help: string | undefined }): VNode[]
-  error?(props: { error: string | true | undefined }): VNode[]
-  default?(props: { error: string | true | undefined }): VNode[]
+  'label'?(props: { label: string | undefined }): VNode[]
+  'hint'?(props: { hint: string | undefined }): VNode[]
+  'description'?(props: { description: string | undefined }): VNode[]
+  'help'?(props: { help: string | undefined }): VNode[]
+  'error'?(props: { error: string | true | undefined }): VNode[]
+  'error-icon'?(props: { error: string | true | undefined }): VNode[]
+  'default'?(props: { error: string | true | undefined }): VNode[]
 }
 </script>
 
@@ -60,6 +71,7 @@ import { useComponentProps } from '../composables/useComponentProps'
 import { formFieldInjectionKey, inputIdInjectionKey, formErrorsInjectionKey, formInputsInjectionKey } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import type { FormError, FormFieldInjectedOptions } from '../types/form'
+import UIcon from './Icon.vue'
 
 const _props = withDefaults(defineProps<FormFieldProps>(), {
   error: undefined,
@@ -138,7 +150,15 @@ provide(formFieldInjectionKey, computed(() => ({
     <div :class="[(props.label || !!slots.label || props.description || !!slots.description) && ui.container({ class: props.ui?.container })]">
       <slot :error="error" />
       <div v-if="props.error !== false && ((typeof error === 'string' && error) || !!slots.error)" :id="`${ariaId}-error`" data-slot="error" :class="ui.error({ class: props.ui?.error })">
-        <slot name="error" :error="error">
+        <template v-if="props.errorIcon || !!slots['error-icon'] || props.errorPrefix">
+          <slot v-if="props.errorIcon || !!slots['error-icon']" name="error-icon" :error="error">
+            <UIcon v-if="props.errorIcon" :name="props.errorIcon" aria-hidden="true" data-slot="errorIcon" :class="ui.errorIcon({ class: props.ui?.errorIcon })" />
+          </slot>
+          <span v-if="props.errorPrefix" data-slot="errorPrefix" :class="ui.errorPrefix({ class: props.ui?.errorPrefix })">{{ props.errorPrefix }}</span>{{ props.errorPrefix && !props.errorPrefix.endsWith(' ') ? ' ' : '' }}<slot name="error" :error="error">
+            {{ error }}
+          </slot>
+        </template>
+        <slot v-else name="error" :error="error">
           {{ error }}
         </slot>
       </div>

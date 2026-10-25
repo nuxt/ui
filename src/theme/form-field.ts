@@ -7,16 +7,18 @@ export default {
     container: 'relative',
     description: 'text-muted',
     error: 'mt-2 text-error',
+    errorIcon: 'shrink-0 size-4 align-sub me-1.5 inline-block',
+    errorPrefix: 'font-medium',
     hint: 'text-muted',
     help: 'mt-2 text-muted'
   },
   variants: {
     size: {
-      xs: { root: 'text-xs' },
-      sm: { root: 'text-xs' },
-      md: { root: 'text-sm' },
-      lg: { root: 'text-sm' },
-      xl: { root: 'text-base' }
+      xs: { root: 'text-xs', errorIcon: 'size-3.5' },
+      sm: { root: 'text-xs', errorIcon: 'size-3.5' },
+      md: { root: 'text-sm', errorIcon: 'size-4' },
+      lg: { root: 'text-sm', errorIcon: 'size-4' },
+      xl: { root: 'text-base', errorIcon: 'size-5' }
     },
     required: {
       true: {
