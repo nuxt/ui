@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
 import { upperFirst } from 'scule'
-import type { TableColumn, TableRow } from '@nuxt/ui'
-import type { Column, RowPinningState } from '@tanstack/vue-table'
-import { getPaginationRowModel } from '@tanstack/vue-table'
+import type { TableColumn, TableFeatures, TableRow } from '@nuxt/ui'
+import type { Column, RowPinningState, RowSelectionState } from '@tanstack/vue-table'
+import { createPaginatedRowModel, rowPaginationFeature } from '@tanstack/vue-table'
 import { useClipboard, refDebounced } from '@vueuse/core'
 
 const UButton = resolveComponent('UButton')
@@ -97,7 +97,7 @@ const columns: TableColumn<Payment>[] = [{
 }, {
   id: 'select',
   header: ({ table }) => h(UCheckbox, {
-    'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
+    'modelValue': table.getIsAllPageRowsSelected() ? true : table.getIsSomePageRowsSelected() ? 'indeterminate' : false,
     'onUpdate:modelValue': (value: boolean | 'indeterminate') => table.toggleAllPageRowsSelected(!!value),
     'aria-label': 'Select all'
   }),
@@ -111,7 +111,7 @@ const columns: TableColumn<Payment>[] = [{
   size: 32
 }, {
   accessorKey: 'id',
-  header: ({ column }) => getPinnedHeader(column, '#', 'left'),
+  header: ({ column }) => getPinnedHeader(column, '#', 'start'),
   cell: ({ row }) => `#${row.getValue('id')}`,
   size: 84
 }, {
@@ -135,7 +135,7 @@ const columns: TableColumn<Payment>[] = [{
   }
 }, {
   accessorKey: 'status',
-  header: ({ column }) => getPinnedHeader(column, 'Status', 'left'),
+  header: ({ column }) => getPinnedHeader(column, 'Status', 'start'),
   cell: ({ row }) => {
     const color = ({
       paid: 'success' as const,
@@ -148,7 +148,7 @@ const columns: TableColumn<Payment>[] = [{
   size: 102
 }, {
   accessorKey: 'firstName',
-  header: ({ column }) => getPinnedHeader(column, 'First Name', 'left'),
+  header: ({ column }) => getPinnedHeader(column, 'First Name', 'start'),
   meta: {
     class: {
       td: 'capitalize'
@@ -157,7 +157,7 @@ const columns: TableColumn<Payment>[] = [{
   size: 128
 }, {
   accessorKey: 'lastName',
-  header: ({ column }) => getPinnedHeader(column, 'Last Name', 'left'),
+  header: ({ column }) => getPinnedHeader(column, 'Last Name', 'start'),
   meta: {
     class: {
       td: 'capitalize'
@@ -186,15 +186,15 @@ const columns: TableColumn<Payment>[] = [{
   }
 }, {
   accessorKey: 'amount',
-  header: ({ column }) => getPinnedHeader(column, 'Amount', 'right'),
+  header: ({ column }) => getPinnedHeader(column, 'Amount', 'end'),
   meta: {
     class: {
       th: 'text-right',
       td: 'text-right font-medium'
     }
   },
-  footer: ({ column }) => {
-    const total = column.getFacetedRowModel().rows.reduce((acc: number, row: TableRow<Payment>) => acc + Number.parseFloat(row.getValue('amount')), 0)
+  footer: ({ table }) => {
+    const total = table.getPreFilteredRowModel().rows.reduce((acc: number, row: TableRow<Payment>) => acc + Number.parseFloat(row.getValue('amount')), 0)
     const formatted = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'EUR'
@@ -234,7 +234,7 @@ const columns: TableColumn<Payment>[] = [{
   size: 64
 }]
 
-function getPinnedHeader(column: Column<Payment>, label: string, position: 'left' | 'right') {
+function getPinnedHeader(column: Column<TableFeatures, Payment>, label: string, position: 'start' | 'end') {
   const isPinned = column.getIsPinned()
 
   return h(UButton, {
@@ -251,9 +251,11 @@ function getPinnedHeader(column: Column<Payment>, label: string, position: 'left
 
 const loading = ref(true)
 const columnPinning = ref({
-  left: ['pin', 'select'],
-  right: ['actions']
+  start: ['pin', 'select'],
+  end: ['actions']
 })
+
+const paginationFeatures = { rowPaginationFeature, paginatedRowModel: createPaginatedRowModel() }
 
 const pagination = ref({
   pageIndex: 0,
@@ -269,13 +271,13 @@ function randomize() {
   data.value.sort(() => Math.random() - 0.5)
 }
 
-const rowSelection = ref<Record<string, boolean>>({})
+const rowSelection = ref<RowSelectionState>({})
 
 function onSelect(e: Event, row: TableRow<Payment>) {
   row.toggleSelected(!row.getIsSelected())
 }
 
-const contextmenuRow = ref<TableRow<Payment> | null>(null)
+const contextmenuRow = shallowRef<TableRow<Payment> | null>(null)
 const contextmenuItems = computed(() => contextmenuRow.value ? getRowItems(contextmenuRow.value) : [])
 
 function onContextmenu(e: Event, row: TableRow<Payment>) {
@@ -285,7 +287,7 @@ function onContextmenu(e: Event, row: TableRow<Payment>) {
 const popoverOpen = ref(false)
 const popoverOpenDebounced = refDebounced(popoverOpen, 1)
 const popoverAnchor = ref({ x: 0, y: 0 })
-const popoverRow = ref<TableRow<Payment> | null>(null)
+const popoverRow = shallowRef<TableRow<Payment> | null>(null)
 
 const reference = computed(() => ({
   getBoundingClientRect: () =>
@@ -357,19 +359,14 @@ onMounted(() => {
         ref="table"
         :key="String(virtualize)"
         v-model:row-pinning="rowPinning"
+        v-model:pagination="pagination"
         :data="data"
         :columns="columns"
         :column-pinning="columnPinning"
         :row-selection="rowSelection"
         :loading="loading"
         :virtualize="virtualize"
-        v-bind="virtualize ? {} : {
-          data,
-          pagination,
-          paginationOptions: {
-            getPaginationRowModel: getPaginationRowModel()
-          }
-        }"
+        :features="virtualize ? undefined : paginationFeatures"
         sticky
         class="border border-strong rounded-sm"
         @select="onSelect"
@@ -403,8 +400,8 @@ onMounted(() => {
       <div class="flex items-center gap-1.5">
         <UPagination
           :disabled="!!virtualize"
-          :page="(table?.tableApi?.getState().pagination.pageIndex ?? 0) + 1"
-          :items-per-page="table?.tableApi?.getState().pagination.pageSize ?? 10"
+          :page="pagination.pageIndex + 1"
+          :items-per-page="pagination.pageSize"
           :total="table?.tableApi?.getFilteredRowModel().rows.length || 0"
           @update:page="(p: number) => table?.tableApi?.setPageIndex(p - 1)"
         />
