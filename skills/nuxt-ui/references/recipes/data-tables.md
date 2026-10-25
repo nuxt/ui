@@ -100,12 +100,14 @@ const filteredRows = computed(() => {
 
 ## With row selection
 
-Row selection uses TanStack Table's `rowSelection` state, a `Record<string, boolean>` keyed by row ID. The default ID is the row index. Provide `getRowId` with a stable unique string ID when replacing data, filtering it before passing it to the table, or fetching server pages.
+Row selection uses TanStack Table's `rowSelection` state — a `Record<string, true>` keyed by row id (the row index unless `get-row-id` is set). Unselected rows are absent from it. Set `get-row-id` to a stable unique string ID when replacing data, filtering it before passing it to the table, or fetching server pages.
 
 ```vue
 <script setup lang="ts">
+import type { RowSelectionState } from '@tanstack/vue-table'
+
 const table = useTemplateRef('table')
-const rowSelection = ref<Record<string, boolean>>({})
+const rowSelection = ref<RowSelectionState>({})
 </script>
 
 <template>
@@ -120,7 +122,7 @@ const rowSelection = ref<Record<string, boolean>>({})
 
 This example assumes each record has a unique string `id`. With server-side pagination, selected row models only include records in the current input data. For cross-page bulk actions, keep the selected IDs in `rowSelection` rather than deriving the full selection from `getSelectedRowModel()` or `getFilteredSelectedRowModel()`. Decide whether page or filter changes should clear selection.
 
-Add a checkbox column using the `h` function. Use tri-state `modelValue` (`true`, `false`, or `'indeterminate'`) for the "select all" header:
+Add a checkbox column using the `h` function. Use tri-state `modelValue` (`true`, `false`, or `'indeterminate'`) for the "select all" header. `getIsSomePageRowsSelected()` is true as soon as one row is selected, so check `getIsAllPageRowsSelected()` first:
 
 ```ts
 import { h } from 'vue'
@@ -130,7 +132,7 @@ const UCheckbox = resolveComponent('UCheckbox')
 const columns: TableColumn[] = [{
   id: 'select',
   header: ({ table }) => h(UCheckbox, {
-    'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
+    'modelValue': table.getIsAllPageRowsSelected() ? true : table.getIsSomePageRowsSelected() ? 'indeterminate' : false,
     'onUpdate:modelValue': (value: boolean | 'indeterminate') => table.toggleAllPageRowsSelected(!!value),
     'aria-label': 'Select all'
   }),
@@ -146,13 +148,15 @@ const columns: TableColumn[] = [{
 
 ## With pagination
 
-Use `v-model:pagination` on `UTable` with TanStack's `getPaginationRowModel`, then wire `UPagination` to the table API. `UPagination`'s `total` is total **items** (not pages) — it calculates page count from `total / items-per-page`.
+Pagination is not in `UTable`'s default features: register `rowPaginationFeature` and a `paginatedRowModel` through the `features` prop (read once, so declare it in the script). Bind `v-model:pagination`, then wire `UPagination` to it and to the table API. `UPagination`'s `total` is total **items** (not pages) — it calculates page count from `total / items-per-page`.
 
 ```vue
 <script setup lang="ts">
-import { getPaginationRowModel } from '@tanstack/vue-table'
+import { createPaginatedRowModel, rowPaginationFeature } from '@tanstack/vue-table'
 
 const table = useTemplateRef('table')
+
+const features = { rowPaginationFeature, paginatedRowModel: createPaginatedRowModel() }
 
 const pagination = ref({
   pageIndex: 0,
@@ -166,13 +170,13 @@ const pagination = ref({
     v-model:pagination="pagination"
     :data="data"
     :columns="columns"
-    :pagination-options="{ getPaginationRowModel: getPaginationRowModel() }"
+    :features="features"
   />
 
   <div class="flex justify-end p-4">
     <UPagination
-      :page="(table?.tableApi?.getState().pagination.pageIndex || 0) + 1"
-      :items-per-page="table?.tableApi?.getState().pagination.pageSize"
+      :page="pagination.pageIndex + 1"
+      :items-per-page="pagination.pageSize"
       :total="table?.tableApi?.getFilteredRowModel().rows.length"
       @update:page="(p) => table?.tableApi?.setPageIndex(p - 1)"
     />
@@ -240,7 +244,10 @@ The separate `virtualize` option limits rendered rows for large datasets. It doe
 
 ## Tips
 
-- Table is built on [TanStack Table v8](https://tanstack.com/table/v8) — columns use `ColumnDef` format with `accessorKey`, `header`, `cell`
+- Table is built on [TanStack Table v9](https://tanstack.com/table/latest) — columns use `ColumnDef` format with `accessorKey`, `header`, `cell`
+- Sorting, filtering, expanding, row selection, column visibility, pinning and sizing, and row pinning are registered by default. Pagination, grouping and faceting go through the `features` prop
+- Feature options (`enableRowSelection`, `enableMultiSort`, `manualPagination`...) go in the `options` prop
+- Pinning uses `start` / `end`, not `left` / `right`
 - Use `#<column>-cell` and `#<column>-header` template slots to customize rendering with Vue templates
 - Alternatively, use the `h` function inside `header` and `cell` column properties for inline rendering
 - Row data in slots is accessed via `row.original` (not `row` directly)

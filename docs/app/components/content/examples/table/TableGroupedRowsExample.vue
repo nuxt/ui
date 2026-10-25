@@ -1,8 +1,15 @@
 <script setup lang="ts">
 import { resolveComponent } from 'vue'
+import {
+  aggregationFn_count,
+  aggregationFn_max,
+  aggregationFn_sum,
+  aggregationFn_uniqueCount,
+  columnGroupingFeature,
+  createGroupedRowModel,
+  rowAggregationFeature
+} from '@tanstack/vue-table'
 import type { TableColumn } from '@nuxt/ui'
-import { getGroupedRowModel } from '@tanstack/vue-table'
-import type { GroupingOptions } from '@tanstack/vue-table'
 
 const UBadge = resolveComponent('UBadge')
 
@@ -107,7 +114,8 @@ const columns: TableColumn<Payment>[] = [
     aggregationFn: 'count'
   },
   {
-    accessorKey: 'date',
+    id: 'date',
+    accessorFn: row => new Date(row.date),
     header: 'Date',
     cell: ({ row }) => {
       return new Date(row.getValue('date')).toLocaleString('en-US', {
@@ -158,10 +166,17 @@ const columns: TableColumn<Payment>[] = [
   }
 ]
 
-const grouping_options = ref<GroupingOptions>({
-  groupedColumnMode: 'remove',
-  getGroupedRowModel: getGroupedRowModel()
-})
+const features = {
+  columnGroupingFeature,
+  rowAggregationFeature,
+  groupedRowModel: createGroupedRowModel(),
+  aggregationFns: {
+    count: aggregationFn_count,
+    max: aggregationFn_max,
+    sum: aggregationFn_sum,
+    uniqueCount: aggregationFn_uniqueCount
+  }
+}
 </script>
 
 <template>
@@ -169,7 +184,8 @@ const grouping_options = ref<GroupingOptions>({
     :data="data"
     :columns="columns"
     :grouping="['account_id', 'status']"
-    :grouping-options="grouping_options"
+    :features="features"
+    :options="{ groupedColumnMode: 'remove' }"
     :ui="{
       root: 'min-w-full',
       td: 'empty:p-0' // helps with the colspaned row added for expand slot

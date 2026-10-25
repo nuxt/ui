@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
-import type { TableColumn } from '@nuxt/ui'
+import type { TableColumn, TableFeatures } from '@nuxt/ui'
 import type { Column } from '@tanstack/vue-table'
 
 const UBadge = resolveComponent('UBadge')
@@ -101,7 +101,7 @@ const columns: TableColumn<Payment>[] = [{
   }
 }]
 
-function getHeader(column: Column<Payment>, label: string) {
+function getHeader(column: Column<TableFeatures, Payment>, label: string) {
   const isSorted = column.getIsSorted()
 
   return h(UDropdownMenu, {

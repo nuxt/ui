@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TableColumn } from '@nuxt/ui'
+import type { TableColumn, TableFeatures } from '@nuxt/ui'
 import type { Cell } from '@tanstack/vue-table'
 
 type Product = {
@@ -17,7 +17,7 @@ const data = ref<Product[]>([
   { category: 'Clothing', name: 'Jeans', price: 59, stock: 150 }
 ])
 
-function getCategoryRowSpan(cell: Cell<Product, unknown>) {
+function getCategoryRowSpan(cell: Cell<TableFeatures, Product, unknown>) {
   const category = cell.row.original.category
   const rows = cell.getContext().table.getRowModel().rows
   const rowIndex = rows.findIndex((r: typeof rows[number]) => r.id === cell.row.id)
@@ -35,7 +35,7 @@ function getCategoryRowSpan(cell: Cell<Product, unknown>) {
   return `${span}`
 }
 
-function getCategoryClass(cell: Cell<Product, unknown>) {
+function getCategoryClass(cell: Cell<TableFeatures, Product, unknown>) {
   const category = cell.row.original.category
   const rows = cell.getContext().table.getRowModel().rows
   const rowIndex = rows.findIndex((r: typeof rows[number]) => r.id === cell.row.id)

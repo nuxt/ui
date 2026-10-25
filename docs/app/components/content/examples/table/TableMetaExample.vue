@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { TableColumn } from '@nuxt/ui'
-import type { TableMeta, Row } from '@tanstack/vue-table'
+import type { TableColumn, TableFeatures, TableRow } from '@nuxt/ui'
+import type { TableMeta } from '@tanstack/vue-table'
 
 type Payment = {
   id: string
@@ -109,9 +109,9 @@ const columns: TableColumn<Payment>[] = [{
   }
 }]
 
-const meta: TableMeta<Payment> = {
+const meta: TableMeta<TableFeatures, Payment> = {
   class: {
-    tr: (row: Row<Payment>) => {
+    tr: (row: TableRow<Payment>) => {
       if (row.original.status === 'failed') {
         return 'bg-error/10'
       }

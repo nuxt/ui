@@ -48,7 +48,7 @@ const data = ref<Payment[]>([{
 const columns: TableColumn<Payment>[] = [{
   id: 'select',
   header: ({ table }) => h(UCheckbox, {
-    'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
+    'modelValue': table.getIsAllPageRowsSelected() ? true : table.getIsSomePageRowsSelected() ? 'indeterminate' : false,
     'onUpdate:modelValue': (value: boolean | 'indeterminate') => table.toggleAllPageRowsSelected(!!value),
     'aria-label': 'Select all'
   }),
@@ -123,7 +123,7 @@ const reference = computed(() => ({
 
 const open = ref(false)
 const openDebounced = refDebounced(open, 10)
-const selectedRow = ref<TableRow<Payment> | null>(null)
+const selectedRow = shallowRef<TableRow<Payment> | null>(null)
 
 function onHover(_e: Event, row: TableRow<Payment> | null) {
   selectedRow.value = row
