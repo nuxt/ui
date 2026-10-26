@@ -162,7 +162,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.lo
 
 ### Error :badge{label="Soon" class="align-text-top"}
 
-Use the `error` prop to show that the tool call failed, for example when the part state is `output-error`. Use the `error-icon` prop to customize the icon. Defaults to `i-lucide-circle-x`.
+Use the `error` prop to show that the tool call failed, for example when the part state is `output-error`. Use the `error-icon` prop to customize the error icon.
 
 ::component-code
 ---
@@ -172,6 +172,24 @@ ignore:
   - text
 props:
   error: true
+  text: 'Failed to search components'
+  class: 'w-60'
+---
+::
+
+### Error Icon :badge{label="Soon" class="align-text-top"}
+
+Use the `error-icon` prop to customize the error icon. Defaults to `i-lucide-circle-x`.
+
+::component-code
+---
+hide:
+  - class
+ignore:
+  - text
+props:
+  error: true
+  errorIcon: 'i-lucide-circle-alert'
   text: 'Failed to search components'
   class: 'w-60'
 ---
