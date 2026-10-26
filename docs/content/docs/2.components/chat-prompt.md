@@ -56,7 +56,7 @@ name: 'chat-prompt-files-example'
 ::
 
 ::note
-Use the `accept` prop to restrict the file types and set `multiple` to `false` to keep a single file. The form is submitted with files even when the textarea is empty. While a file is dragged over the prompt, its root gets a `data-dragging` attribute you can style.
+Use the `accept` prop to restrict the file types and set `multiple` to `false` to keep a single file. The form is submitted with files even when the textarea is empty. While a file is dragged over the prompt, its root has `data-dragging="true"`, which you can style with `data-[dragging=true]:`.
 ::
 
 ::tip
