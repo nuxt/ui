@@ -405,6 +405,7 @@ function onSubmit() {
         v-else-if="isToolUIPart(part)"
         :text="getToolName(part)"
         :streaming="isToolStreaming(part, streaming)"
+        :error="part.state === 'output-error'"
         :actions="part.state === 'approval-requested' ? [
           { label: 'Approve', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: true }) },
           { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) }
@@ -487,6 +488,7 @@ function onSubmit() {
         v-else-if="isToolUIPart(part)"
         :text="getToolName(part)"
         :streaming="isToolStreaming(part, streaming)"
+        :error="part.state === 'output-error'"
         :actions="part.state === 'approval-requested' ? [
           { label: 'Approve', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: true }) },
           { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) }
