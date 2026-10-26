@@ -233,10 +233,17 @@ watch(() => props.status, (status) => {
   nextTick(() => {
     lastMessageSubmitted.value = true
 
-    updateLastMessageHeight()
+    // Measure on the next frame: the prompt shrinks once cleared and the previous answer can render again
+    // when it stops streaming, both move the layout the room and the scroll are measured against
+    requestAnimationFrame(() => {
+      const id = updateLastMessageHeight()
+      if (!id) {
+        return
+      }
 
-    nextTick(() => {
-      scrollToMessage(lastMessage.id)
+      nextTick(() => {
+        scrollToMessage(id)
+      })
     })
   })
 })
@@ -288,6 +295,7 @@ function getScrollParent(node: HTMLElement | null): HTMLElement {
   return document.documentElement
 }
 
+// Returns the id of the message the room was measured for, the one to scroll to after a submit
 function updateLastMessageHeight() {
   if (!el.value || !parent.value || !props.messages?.length || !lastMessageSubmitted.value) {
     return
@@ -305,7 +313,8 @@ function updateLastMessageHeight() {
     return
   }
 
-  let spacingOffset = bottomOffset.value
+  // Read the footer live, the prompt usually shrinks in the same render as the submit and the observed size lags a frame
+  let spacingOffset = (props.spacingOffset || 0) + (footerRef.value?.offsetHeight ?? 0)
   const elComputedStyle = window.getComputedStyle(el.value)
   const parentComputedStyle = window.getComputedStyle(parent.value)
 
@@ -317,6 +326,8 @@ function updateLastMessageHeight() {
   spacingOffset += Number.parseFloat(parentComputedStyle.scrollPaddingTop) || 0
 
   lastMessageHeight.value = Math.max(parentHeight - lastMessageEl.offsetHeight - spacingOffset, 0)
+
+  return lastMessage.id
 }
 
 // Keep the room for the last message in sync when the footer grows (multiline prompt, attachments)
