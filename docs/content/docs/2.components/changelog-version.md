@@ -183,7 +183,7 @@ props:
 Use the `image` prop to display an image in the BlogPost.
 
 ::note
-If [`@nuxt/image`](https://image.nuxt.com/get-started/installation) is installed, the `<NuxtImg>` component will be used instead of the native `img` tag.
+If [`@nuxt/image`](/docs/getting-started/integrations/image) is installed, the `<NuxtImg>` component will be used instead of the native `img` tag.
 ::
 
 ::component-code
