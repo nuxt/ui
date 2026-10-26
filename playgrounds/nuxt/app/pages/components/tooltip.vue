@@ -23,5 +23,9 @@
     <UTooltip text="Read the terms before continuing.">
       <UCheckbox label="Accept terms" />
     </UTooltip>
+
+    <UTooltip text="Receive occasional product updates.">
+      <USwitch label="Email notifications" />
+    </UTooltip>
   </div>
 </template>

@@ -71,7 +71,7 @@ import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useFormField } from '../composables/useFormField'
-import { pick, omit } from '../utils'
+import { getFormControlAttrs } from '../utils/attributes'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
@@ -123,9 +123,6 @@ const labelIcon = computed(() => props.indicator === 'hidden' ? props.icon : und
 // `<div>` inside it made the browser close the tag early and broke hydration. See #6033.
 const isListVariant = computed(() => !props.variant || props.variant === 'list')
 
-// Hover handlers belong on the whole checkbox, including its label. Keep focus and aria attributes on the input.
-const rootAttrs = ['onPointermove', 'onPointerleave', 'data-grace-area-trigger']
-
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.checkbox || {}) })({
   size: size.value,
@@ -148,11 +145,11 @@ function onUpdate(value: any) {
 
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <Primitive :as="isListVariant ? props.as : Label" v-bind="pick($attrs, rootAttrs)" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="isListVariant ? props.as : Label" v-bind="getFormControlAttrs($attrs, 'root')" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
       <CheckboxRoot
         :id="id"
-        v-bind="{ ...rootProps, ...omit($attrs, ['data-state', ...rootAttrs]), ...ariaAttrs }"
+        v-bind="{ ...rootProps, ...getFormControlAttrs($attrs, 'base'), ...ariaAttrs }"
         :name="name"
         :disabled="disabled"
         data-slot="base"
