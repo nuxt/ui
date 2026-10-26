@@ -490,7 +490,7 @@ function clearMessages() {
           />
 
           <template #content>
-            <ul>
+            <ul class="max-h-60 overflow-y-auto">
               <li v-for="(item, index) in queue" :key="index" class="group flex items-center gap-2 h-7 ps-2 pe-0.5 rounded-sm text-sm text-default hover:bg-elevated">
                 <span class="size-3 shrink-0 rounded-full ring ring-accented" />
                 <span class="truncate flex-1">{{ item.text }}</span>
