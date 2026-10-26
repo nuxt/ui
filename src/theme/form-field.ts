@@ -7,8 +7,8 @@ export default {
     container: 'relative',
     description: 'text-muted',
     error: 'mt-2 text-error',
-    errorIcon: 'shrink-0 size-4 align-sub me-1.5 inline-block',
-    errorPrefix: 'font-medium',
+    errorIcon: 'align-sub me-1.5 inline-block',
+    errorPrefix: 'font-medium me-1',
     hint: 'text-muted',
     help: 'mt-2 text-muted'
   },

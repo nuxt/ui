@@ -146,7 +146,7 @@ slots:
 This sets the `color` to `error` on the form control. You can change it globally in your `app.config.ts`.
 ::
 
-### Error Prefix and Icon :badge{label="Soon" class="align-text-top"}
+### Error prefix and icon :badge{label="Soon" class="align-text-top"}
 
 Under [WCAG 2.2 Success Criterion 1.4.1 (Use of Color)](https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html), color must not be the sole visual means of communicating an error or state change.
 
@@ -178,7 +178,7 @@ You can also customize the icon using the `#error-icon` slot, which overrides th
   <UInput placeholder="Enter your email" class="w-full" />
 
   <template #error-icon>
-    <UIcon name="i-lucide-triangle-alert" class="size-4 shrink-0" />
+    <UIcon name="i-lucide-triangle-alert" />
   </template>
 </UFormField>
 ```

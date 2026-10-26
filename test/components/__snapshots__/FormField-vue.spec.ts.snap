@@ -55,7 +55,10 @@ exports[`FormField > renders with error correctly 1`] = `
     <!--v-if-->
   </div>
   <div class="">
-    <div id="v-0-0-error" data-slot="error" class="mt-2 text-error">Username is already taken</div>
+    <div id="v-0-0-error" data-slot="error" class="mt-2 text-error">
+      <!--v-if-->
+      <!--v-if-->Username is already taken
+    </div>
   </div>
 </div>"
 `;
@@ -67,7 +70,10 @@ exports[`FormField > renders with error slot correctly 1`] = `
     <!--v-if-->
   </div>
   <div class="">
-    <div id="v-0-0-error" data-slot="error" class="mt-2 text-error">Error slot</div>
+    <div id="v-0-0-error" data-slot="error" class="mt-2 text-error">
+      <!--v-if-->
+      <!--v-if-->Error slot
+    </div>
   </div>
 </div>"
 `;
@@ -79,7 +85,7 @@ exports[`FormField > renders with error-icon slot correctly 1`] = `
     <!--v-if-->
   </div>
   <div class="">
-    <div id="v-0-0-error" data-slot="error" class="mt-2 text-error">Error icon slot
+    <div id="v-0-0-error" data-slot="error" class="mt-2 text-error"><span data-slot="errorIcon" class="align-sub me-1.5 inline-block size-4">Error icon slot</span>
       <!--v-if-->Username is already taken
     </div>
   </div>
@@ -93,7 +99,7 @@ exports[`FormField > renders with errorIcon correctly 1`] = `
     <!--v-if-->
   </div>
   <div class="">
-    <div id="v-0-0-error" data-slot="error" class="mt-2 text-error"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="errorIcon" class="shrink-0 align-sub me-1.5 inline-block size-4"></svg>
+    <div id="v-0-0-error" data-slot="error" class="mt-2 text-error"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="errorIcon" class="align-sub me-1.5 inline-block size-4"></svg>
       <!--v-if-->Username is already taken
     </div>
   </div>
@@ -107,7 +113,7 @@ exports[`FormField > renders with errorPrefix and errorIcon correctly 1`] = `
     <!--v-if-->
   </div>
   <div class="">
-    <div id="v-0-0-error" data-slot="error" class="mt-2 text-error"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="errorIcon" class="shrink-0 align-sub me-1.5 inline-block size-4"></svg><span data-slot="errorPrefix" class="font-medium">Error:</span> Username is already taken</div>
+    <div id="v-0-0-error" data-slot="error" class="mt-2 text-error"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="errorIcon" class="align-sub me-1.5 inline-block size-4"></svg><span data-slot="errorPrefix" class="font-medium me-1">Error:</span>Username is already taken</div>
   </div>
 </div>"
 `;
@@ -120,7 +126,7 @@ exports[`FormField > renders with errorPrefix correctly 1`] = `
   </div>
   <div class="">
     <div id="v-0-0-error" data-slot="error" class="mt-2 text-error">
-      <!--v-if--><span data-slot="errorPrefix" class="font-medium">Error:</span> Username is already taken
+      <!--v-if--><span data-slot="errorPrefix" class="font-medium me-1">Error:</span>Username is already taken
     </div>
   </div>
 </div>"
