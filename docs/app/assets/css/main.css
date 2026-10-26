@@ -15,7 +15,7 @@
 }
 
 :root {
-  --ui-container: var(--container-8xl);
+  --ui-container-width: var(--container-8xl);
 }
 
 /* The studio's canvas sits recessed behind the preview card. Mixed off

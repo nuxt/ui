@@ -32,36 +32,36 @@ export default defineTheme({
     },
     size: {
       xs: {
-        root: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)]',
+        root: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon-size:--spacing(4)]',
         base: 'text-xs',
-        icon: 'size-(--ui-control-icon)',
+        icon: 'size-(--ui-control-icon-size)',
         file: 'text-xs px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)',
         fileWrapper: 'flex-row gap-1'
       },
       sm: {
-        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)]',
+        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon-size:--spacing(4)]',
         base: 'text-xs',
-        icon: 'size-(--ui-control-icon)',
+        icon: 'size-(--ui-control-icon-size)',
         file: 'text-xs px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)',
         fileWrapper: 'flex-row gap-1'
       },
       md: {
-        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)]',
+        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon-size:--spacing(5)]',
         base: 'text-sm',
-        icon: 'size-(--ui-control-icon)',
+        icon: 'size-(--ui-control-icon-size)',
         file: 'text-xs px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)'
       },
       lg: {
-        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)]',
+        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon-size:--spacing(5)]',
         base: 'text-sm',
-        icon: 'size-(--ui-control-icon)',
+        icon: 'size-(--ui-control-icon-size)',
         file: 'text-sm px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)',
         fileSize: 'text-xs'
       },
       xl: {
-        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)]',
+        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon-size:--spacing(6)]',
         base: 'text-base',
-        icon: 'size-(--ui-control-icon)',
+        icon: 'size-(--ui-control-icon-size)',
         file: 'text-sm px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)'
       }
     },

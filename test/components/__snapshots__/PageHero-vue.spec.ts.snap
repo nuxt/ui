@@ -2,13 +2,13 @@
 
 exports[`PageHero > renders with as correctly 1`] = `
 "<section data-orientation="vertical" data-slot="page-hero" class="relative isolate">
-  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24"></div>
+  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container-width) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24"></div>
 </section>"
 `;
 
 exports[`PageHero > renders with as object correctly 1`] = `
 "<section data-orientation="vertical" data-slot="page-hero" class="relative isolate">
-  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24">
+  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container-width) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24">
     <div data-slot="page-hero-wrapper" class="text-center">
       <div data-slot="page-hero-header" class="">
         <!--v-if-->
@@ -25,7 +25,7 @@ exports[`PageHero > renders with as object correctly 1`] = `
 
 exports[`PageHero > renders with body slot correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-hero" class="relative isolate">
-  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24">
+  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container-width) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24">
     <div data-slot="page-hero-wrapper" class="text-center">
       <!--v-if-->
       <div data-slot="page-hero-body" class="mt-10">Body slot</div>
@@ -38,19 +38,19 @@ exports[`PageHero > renders with body slot correctly 1`] = `
 
 exports[`PageHero > renders with bottom slot correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-hero" class="relative isolate">
-  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24"></div>Bottom slot
+  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container-width) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24"></div>Bottom slot
 </div>"
 `;
 
 exports[`PageHero > renders with class correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-hero" class="isolate absolute">
-  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24"></div>
+  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container-width) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24"></div>
 </div>"
 `;
 
 exports[`PageHero > renders with default slot correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-hero" class="relative isolate">
-  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24">
+  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container-width) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24">
     <!--v-if-->Default slot
   </div>
 </div>"
@@ -58,7 +58,7 @@ exports[`PageHero > renders with default slot correctly 1`] = `
 
 exports[`PageHero > renders with description correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-hero" class="relative isolate">
-  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24">
+  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container-width) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24">
     <div data-slot="page-hero-wrapper" class="text-center">
       <div data-slot="page-hero-header" class="">
         <!--v-if-->
@@ -75,7 +75,7 @@ exports[`PageHero > renders with description correctly 1`] = `
 
 exports[`PageHero > renders with description slot correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-hero" class="relative isolate">
-  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24">
+  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container-width) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24">
     <div data-slot="page-hero-wrapper" class="text-center">
       <div data-slot="page-hero-header" class="">
         <!--v-if-->
@@ -92,7 +92,7 @@ exports[`PageHero > renders with description slot correctly 1`] = `
 
 exports[`PageHero > renders with footer slot correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-hero" class="relative isolate">
-  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24">
+  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container-width) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24">
     <div data-slot="page-hero-wrapper" class="text-center">
       <!--v-if-->
       <!--v-if-->
@@ -105,7 +105,7 @@ exports[`PageHero > renders with footer slot correctly 1`] = `
 
 exports[`PageHero > renders with header slot correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-hero" class="relative isolate">
-  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24">
+  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container-width) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24">
     <div data-slot="page-hero-wrapper" class="text-center">
       <div data-slot="page-hero-header" class="">Header slot</div>
       <!--v-if-->
@@ -118,7 +118,7 @@ exports[`PageHero > renders with header slot correctly 1`] = `
 
 exports[`PageHero > renders with headline slot correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-hero" class="relative isolate">
-  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24">
+  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container-width) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24">
     <div data-slot="page-hero-wrapper" class="text-center">
       <div data-slot="page-hero-header" class="">
         <div data-slot="page-hero-headline" class="mb-4 justify-center">Headline slot</div>
@@ -135,12 +135,12 @@ exports[`PageHero > renders with headline slot correctly 1`] = `
 
 exports[`PageHero > renders with links correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-hero" class="relative isolate">
-  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24">
+  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container-width) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24">
     <div data-slot="page-hero-wrapper" class="text-center">
       <!--v-if-->
       <!--v-if-->
       <div data-slot="page-hero-footer" class="mt-10">
-        <div data-slot="page-hero-links" class="flex flex-wrap gap-x-6 gap-y-3 justify-center"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base">
+        <div data-slot="page-hero-links" class="flex flex-wrap gap-x-6 gap-y-3 justify-center"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon-size:--spacing(6)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base">
             <!--v-if--><span data-slot="button-label" class="truncate">Get started</span>
             <!--v-if-->
           </button></div>
@@ -153,7 +153,7 @@ exports[`PageHero > renders with links correctly 1`] = `
 
 exports[`PageHero > renders with links slot correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-hero" class="relative isolate">
-  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24">
+  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container-width) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24">
     <div data-slot="page-hero-wrapper" class="text-center">
       <!--v-if-->
       <!--v-if-->
@@ -168,7 +168,7 @@ exports[`PageHero > renders with links slot correctly 1`] = `
 
 exports[`PageHero > renders with orientation horizontal correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="page-hero" class="relative isolate">
-  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24 lg:grid-cols-2 lg:items-center">
+  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container-width) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24 lg:grid-cols-2 lg:items-center">
     <!--v-if-->
     <div class="hidden lg:block"></div>
   </div>
@@ -177,12 +177,12 @@ exports[`PageHero > renders with orientation horizontal correctly 1`] = `
 
 exports[`PageHero > renders with orientation horizontal links correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="page-hero" class="relative isolate">
-  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24 lg:grid-cols-2 lg:items-center">
+  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container-width) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24 lg:grid-cols-2 lg:items-center">
     <div data-slot="page-hero-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
       <div data-slot="page-hero-footer" class="mt-10">
-        <div data-slot="page-hero-links" class="flex flex-wrap gap-x-6 gap-y-3"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base">
+        <div data-slot="page-hero-links" class="flex flex-wrap gap-x-6 gap-y-3"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon-size:--spacing(6)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base">
             <!--v-if--><span data-slot="button-label" class="truncate">Get started</span>
             <!--v-if-->
           </button></div>
@@ -195,7 +195,7 @@ exports[`PageHero > renders with orientation horizontal links correctly 1`] = `
 
 exports[`PageHero > renders with orientation horizontal reverse correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="page-hero" class="relative isolate">
-  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24 lg:grid-cols-2 lg:items-center">
+  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container-width) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24 lg:grid-cols-2 lg:items-center">
     <!--v-if-->
     <div class="hidden lg:block"></div>
   </div>
@@ -204,13 +204,13 @@ exports[`PageHero > renders with orientation horizontal reverse correctly 1`] = 
 
 exports[`PageHero > renders with reverse correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-hero" class="relative isolate">
-  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24"></div>
+  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container-width) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24"></div>
 </div>"
 `;
 
 exports[`PageHero > renders with title correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-hero" class="relative isolate">
-  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24">
+  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container-width) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24">
     <div data-slot="page-hero-wrapper" class="text-center">
       <div data-slot="page-hero-header" class="">
         <!--v-if-->
@@ -227,7 +227,7 @@ exports[`PageHero > renders with title correctly 1`] = `
 
 exports[`PageHero > renders with title slot correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-hero" class="relative isolate">
-  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24">
+  <div data-slot="page-hero-container" class="w-full max-w-(--ui-container-width) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24">
     <div data-slot="page-hero-wrapper" class="text-center">
       <div data-slot="page-hero-header" class="">
         <!--v-if-->
@@ -243,7 +243,7 @@ exports[`PageHero > renders with title slot correctly 1`] = `
 `;
 
 exports[`PageHero > renders with top slot correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-hero" class="relative isolate">Top slot<div data-slot="page-hero-container" class="w-full max-w-(--ui-container) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24"></div>
+"<div data-orientation="vertical" data-slot="page-hero" class="relative isolate">Top slot<div data-slot="page-hero-container" class="w-full max-w-(--ui-container-width) mx-auto px-(--ui-gutter) flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24"></div>
 </div>"
 `;
 

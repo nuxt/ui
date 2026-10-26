@@ -13,11 +13,11 @@ export default defineTheme({
     ...fieldGroupVariantRoot,
     color: colorVariant({ root: '' }),
     size: {
-      xs: { root: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] text-[calc(var(--text-xs)+var(--ui-control-text-step,0px))]/4' },
-      sm: { root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)] text-[calc(var(--text-xs)+var(--ui-control-text-step,0px))]/4' },
-      md: { root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] text-[calc(var(--text-sm)+var(--ui-control-text-step,0px))]/5' },
-      lg: { root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)] text-[calc(var(--text-sm)+var(--ui-control-text-step,0px))]/5' },
-      xl: { root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)] text-base' }
+      xs: { root: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon-size:--spacing(4)] text-[calc(var(--text-xs)+var(--ui-control-text-step,0px))]/4' },
+      sm: { root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon-size:--spacing(4)] text-[calc(var(--text-xs)+var(--ui-control-text-step,0px))]/4' },
+      md: { root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon-size:--spacing(5)] text-[calc(var(--text-sm)+var(--ui-control-text-step,0px))]/5' },
+      lg: { root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon-size:--spacing(5)] text-[calc(var(--text-sm)+var(--ui-control-text-step,0px))]/5' },
+      xl: { root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon-size:--spacing(6)] text-base' }
     },
     variant: {
       outline: { root: 'bg-default ring ring-inset ring-strong outline-accent-focus has-[>:focus-visible]:outline-(length:--ui-focus-width) has-[>:focus-visible]:ring-accent' },
@@ -45,8 +45,8 @@ export default defineTheme({
       vertical: {
         root: 'inline-grid grid-cols-[1fr_auto] grid-rows-2',
         base: 'row-span-2',
-        increment: 'col-start-2 row-start-1 self-start mb-[calc(var(--ui-control-py)-var(--ui-control-icon)/2)] pe-1 [&>button]:py-0 scale-80',
-        decrement: 'col-start-2 row-start-2 self-end mt-[calc(var(--ui-control-py)-var(--ui-control-icon)/2)] pe-1 [&>button]:py-0 scale-80'
+        increment: 'col-start-2 row-start-1 self-start mb-[calc(var(--ui-control-py)-var(--ui-control-icon-size)/2)] pe-1 [&>button]:py-0 scale-80',
+        decrement: 'col-start-2 row-start-2 self-end mt-[calc(var(--ui-control-py)-var(--ui-control-icon-size)/2)] pe-1 [&>button]:py-0 scale-80'
       }
     },
     highlight: {

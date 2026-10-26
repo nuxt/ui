@@ -49,7 +49,7 @@ export default defineTheme({
         wrapper: 'me-2'
       },
       hidden: {
-        icon: 'size-(--ui-control-icon)',
+        icon: 'size-(--ui-control-icon-size)',
         base: 'sr-only',
         wrapper: 'flex flex-col items-center gap-1 text-center'
       }
@@ -57,7 +57,7 @@ export default defineTheme({
     size: {
       xs: {
         fieldset: 'gap-y-0.5',
-        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(2.5)] [--ui-control-icon:--spacing(3)]',
+        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(2.5)] [--ui-control-icon-size:--spacing(3)]',
         legend: 'text-xs',
         base: 'size-3',
         item: 'text-xs',
@@ -66,7 +66,7 @@ export default defineTheme({
       },
       sm: {
         fieldset: 'gap-y-0.5',
-        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(3)] [--ui-control-icon:--spacing(3.5)]',
+        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(3)] [--ui-control-icon-size:--spacing(3.5)]',
         legend: 'text-xs',
         base: 'size-3.5',
         item: 'text-xs',
@@ -75,7 +75,7 @@ export default defineTheme({
       },
       md: {
         fieldset: 'gap-y-1',
-        root: '[--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon:--spacing(4)]',
+        root: '[--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon-size:--spacing(4)]',
         legend: 'text-sm',
         base: 'size-4',
         item: 'text-sm',
@@ -84,7 +84,7 @@ export default defineTheme({
       },
       lg: {
         fieldset: 'gap-y-1',
-        root: '[--ui-control-px:--spacing(4)] [--ui-control-py:--spacing(4)] [--ui-control-icon:--spacing(4.5)]',
+        root: '[--ui-control-px:--spacing(4)] [--ui-control-py:--spacing(4)] [--ui-control-icon-size:--spacing(4.5)]',
         legend: 'text-sm',
         base: 'size-4.5',
         item: 'text-sm',
@@ -93,7 +93,7 @@ export default defineTheme({
       },
       xl: {
         fieldset: 'gap-y-1.5',
-        root: '[--ui-control-px:--spacing(4.5)] [--ui-control-py:--spacing(4.5)] [--ui-control-icon:--spacing(5)]',
+        root: '[--ui-control-px:--spacing(4.5)] [--ui-control-py:--spacing(4.5)] [--ui-control-icon-size:--spacing(5)]',
         legend: 'text-base',
         base: 'size-5',
         item: 'text-base',

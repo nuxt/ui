@@ -23,33 +23,33 @@ export default defineTheme({
     // The segments sit closer than the content of another field
     size: {
       xs: {
-        root: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(0.25)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--text-xs)+var(--ui-control-text-step,0px))]/4',
-        leadingIcon: 'size-(--ui-control-icon)',
-        trailingIcon: 'size-(--ui-control-icon)',
+        root: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(0.25)] [--ui-control-icon-size:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--text-xs)+var(--ui-control-text-step,0px))]/4',
+        leadingIcon: 'size-(--ui-control-icon-size)',
+        trailingIcon: 'size-(--ui-control-icon-size)',
         segment: 'data-[segment=day]:w-8 data-[segment=month]:w-8 data-[segment=year]:w-10'
       },
       sm: {
-        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(0.5)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--text-xs)+var(--ui-control-text-step,0px))]/4',
-        leadingIcon: 'size-(--ui-control-icon)',
-        trailingIcon: 'size-(--ui-control-icon)',
+        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(0.5)] [--ui-control-icon-size:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--text-xs)+var(--ui-control-text-step,0px))]/4',
+        leadingIcon: 'size-(--ui-control-icon-size)',
+        trailingIcon: 'size-(--ui-control-icon-size)',
         segment: 'data-[segment=day]:w-8 data-[segment=month]:w-8 data-[segment=year]:w-10'
       },
       md: {
-        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(0.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--text-sm)+var(--ui-control-text-step,0px))]/5',
-        leadingIcon: 'size-(--ui-control-icon)',
-        trailingIcon: 'size-(--ui-control-icon)',
+        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(0.5)] [--ui-control-icon-size:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--text-sm)+var(--ui-control-text-step,0px))]/5',
+        leadingIcon: 'size-(--ui-control-icon-size)',
+        trailingIcon: 'size-(--ui-control-icon-size)',
         segment: 'data-[segment=day]:w-9 data-[segment=month]:w-9 data-[segment=year]:w-11'
       },
       lg: {
-        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(0.75)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--text-sm)+var(--ui-control-text-step,0px))]/5',
-        leadingIcon: 'size-(--ui-control-icon)',
-        trailingIcon: 'size-(--ui-control-icon)',
+        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(0.75)] [--ui-control-icon-size:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--text-sm)+var(--ui-control-text-step,0px))]/5',
+        leadingIcon: 'size-(--ui-control-icon-size)',
+        trailingIcon: 'size-(--ui-control-icon-size)',
         segment: 'data-[segment=day]:w-9 data-[segment=month]:w-9 data-[segment=year]:w-11'
       },
       xl: {
-        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(0.75)] [--ui-control-icon:--spacing(6)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base',
-        leadingIcon: 'size-(--ui-control-icon)',
-        trailingIcon: 'size-(--ui-control-icon)',
+        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(0.75)] [--ui-control-icon-size:--spacing(6)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base',
+        leadingIcon: 'size-(--ui-control-icon-size)',
+        trailingIcon: 'size-(--ui-control-icon-size)',
         segment: 'data-[segment=day]:w-10 data-[segment=month]:w-10 data-[segment=year]:w-12'
       }
     },

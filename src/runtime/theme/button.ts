@@ -35,29 +35,29 @@ export default defineTheme({
     },
     size: {
       xs: {
-        base: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-xs',
-        leadingIcon: 'size-(--ui-control-icon)',
-        trailingIcon: 'size-(--ui-control-icon)'
+        base: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon-size:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-xs',
+        leadingIcon: 'size-(--ui-control-icon-size)',
+        trailingIcon: 'size-(--ui-control-icon-size)'
       },
       sm: {
-        base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-xs',
-        leadingIcon: 'size-(--ui-control-icon)',
-        trailingIcon: 'size-(--ui-control-icon)'
+        base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon-size:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-xs',
+        leadingIcon: 'size-(--ui-control-icon-size)',
+        trailingIcon: 'size-(--ui-control-icon-size)'
       },
       md: {
-        base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm',
-        leadingIcon: 'size-(--ui-control-icon)',
-        trailingIcon: 'size-(--ui-control-icon)'
+        base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon-size:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm',
+        leadingIcon: 'size-(--ui-control-icon-size)',
+        trailingIcon: 'size-(--ui-control-icon-size)'
       },
       lg: {
-        base: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm',
-        leadingIcon: 'size-(--ui-control-icon)',
-        trailingIcon: 'size-(--ui-control-icon)'
+        base: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon-size:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm',
+        leadingIcon: 'size-(--ui-control-icon-size)',
+        trailingIcon: 'size-(--ui-control-icon-size)'
       },
       xl: {
-        base: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon:--spacing(6)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base',
-        leadingIcon: 'size-(--ui-control-icon)',
-        trailingIcon: 'size-(--ui-control-icon)'
+        base: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon-size:--spacing(6)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base',
+        leadingIcon: 'size-(--ui-control-icon-size)',
+        trailingIcon: 'size-(--ui-control-icon-size)'
       }
     },
     block: {
