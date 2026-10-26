@@ -4,7 +4,7 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'relative flex flex-col',
-    base: 'w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-3 transition-[background] ease-out outline-accent-focus focus-visible:outline-3 focus-visible:border-accent',
+    base: 'w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-(length:--ui-focus-width) transition-[background] ease-out outline-accent-focus focus-visible:outline-(length:--ui-focus-width) focus-visible:border-accent',
     wrapper: 'flex flex-col items-center justify-center text-center',
     icon: 'shrink-0',
     avatar: 'shrink-0',
@@ -95,7 +95,7 @@ export default defineTheme({
       true: ''
     },
     disabled: {
-      true: { base: 'cursor-not-allowed opacity-75' }
+      true: { base: 'cursor-not-allowed opacity-(--ui-disabled-opacity)' }
     }
   },
   compoundVariants: [{

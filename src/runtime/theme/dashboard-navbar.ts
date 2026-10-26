@@ -2,7 +2,7 @@ import { defineTheme } from '../utils/theme'
 
 export default defineTheme({
   slots: {
-    root: 'h-(--ui-header-height) shrink-0 flex items-center justify-between border-b border-default px-4 sm:px-6 gap-1.5',
+    root: 'h-(--ui-header-height) shrink-0 flex items-center justify-between border-b border-default px-(--ui-gutter) gap-1.5',
     left: 'flex items-center gap-1.5 min-w-0',
     icon: 'shrink-0 size-5 self-center me-1.5',
     title: 'flex items-center gap-1.5 font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold)) text-strong truncate',
