@@ -64,8 +64,12 @@ const columns: TableColumn<Row>[] = [
 // expects `TableColumn<unknown, unknown>[]` — cast the checked columns at use.
 const tableProps = (data: Row[]) => ({ data, columns: columns as unknown as TableColumn<unknown, unknown>[] })
 
+// Under CodSpeed's simulator each Table test runs well past the 60s timeout
+// Vitest gives benchmark projects, so it is disabled for them.
+const tableBench = { timeout: 0 }
+
 // The per-cell `ui.td()` path at scale (200 rows x 5 columns = 1000 cells).
-test('Table mount (200 x 5)', async ({ bench }) => {
+test('Table mount (200 x 5)', tableBench, async ({ bench }) => {
   const data = makeData(200)
 
   await bench('mount', async () => {
@@ -74,7 +78,7 @@ test('Table mount (200 x 5)', async ({ bench }) => {
   }).run()
 })
 
-test('Table re-render (new data identity)', async ({ bench }) => {
+test('Table re-render (new data identity)', tableBench, async ({ bench }) => {
   const wrapper = await mountSuspended(Table, { props: tableProps(makeData(200)) })
 
   await bench('set data', async () => {
