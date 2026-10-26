@@ -100,7 +100,7 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
   /**
    * Enable virtualization for large datasets.
    * Note: row pinning is not supported when virtualization is enabled.
-   * @see https://tanstack.com/virtual/latest/docs/api/virtualizer#options
+   * @see https://tanstack.com/virtual/v3/docs/api/virtualizer#options
    * @defaultValue false
    */
   virtualize?: boolean | (Partial<Omit<VirtualizerOptions<Element, Element>, 'count' | 'estimateSize' | 'overscan'>> & {
