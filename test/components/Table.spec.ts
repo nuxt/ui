@@ -690,4 +690,40 @@ describe('Table', () => {
     wrapper.unmount()
     offsetHeight.mockRestore()
   })
+
+  it('does not re-render virtualized rows when the visible range is unchanged', async () => {
+    const renderCell = vi.fn(() => 'cell')
+    let onScroll: ((offset: number, isScrolling: boolean) => void) | undefined
+    let virtualizer: Virtualizer<Element, Element> | undefined
+
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data,
+        virtualize: {
+          observeElementRect: (_, cb) => cb({ width: 1000, height: 500 }),
+          observeElementOffset: (_, cb) => {
+            onScroll = cb
+          },
+          onChange: (instance) => {
+            virtualizer = instance
+          }
+        }
+      },
+      slots: { 'id-cell': renderCell },
+      attachTo: document.body
+    })
+    await flushPromises()
+
+    const range = virtualizer!.getVirtualItems().map(item => item.index)
+    renderCell.mockClear()
+
+    // Starting to scroll notifies the virtualizer's listeners without changing the rendered rows
+    onScroll!(5, true)
+    await flushPromises()
+
+    expect(virtualizer!.getVirtualItems().map(item => item.index)).toEqual(range)
+    expect(renderCell).not.toHaveBeenCalled()
+
+    wrapper.unmount()
+  })
 })

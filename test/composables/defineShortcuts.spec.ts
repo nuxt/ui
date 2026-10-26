@@ -356,6 +356,24 @@ describe('defineShortcuts', () => {
       fireKeydown('g')
       expect(handler).not.toHaveBeenCalled()
     })
+
+    it('matches special keys in a sequence', async () => {
+      const handler = vi.fn()
+      await registerShortcuts({ 'g-arrowdown': handler })
+
+      fireKeydown('g')
+      fireKeydown('ArrowDown')
+      expect(handler).toHaveBeenCalledOnce()
+    })
+
+    it('is case-insensitive like single keys (e.g. with Caps Lock on)', async () => {
+      const handler = vi.fn()
+      await registerShortcuts({ 'g-i': handler })
+
+      fireKeydown('G')
+      fireKeydown('I')
+      expect(handler).toHaveBeenCalledOnce()
+    })
   })
 
   describe('chained shortcut sharing a prefix with a standalone (#5654)', () => {

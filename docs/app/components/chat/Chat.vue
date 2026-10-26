@@ -351,17 +351,17 @@ function clearMessages() {
           <UChatTool :icon="studioIcons.brain" text="Thinking..." streaming />
         </template>
 
-        <template #content="{ message }">
+        <template #content="{ message, streaming }">
           <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
             <UChatReasoning
               v-if="isReasoningUIPart(part)"
               :text="part.text"
-              :streaming="isPartStreaming(part)"
+              :streaming="isPartStreaming(part, streaming)"
               :icon="studioIcons.brain"
             >
               <ChatMarkdown
                 :value="part.text"
-                :streaming="isPartStreaming(part)"
+                :streaming="isPartStreaming(part, streaming)"
               />
             </UChatReasoning>
 
@@ -369,7 +369,7 @@ function clearMessages() {
               <ChatMarkdown
                 v-if="message.role === 'assistant'"
                 :value="part.text"
-                :streaming="isPartStreaming(part)"
+                :streaming="isPartStreaming(part, streaming)"
               />
               <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap text-sm/6">
                 {{ part.text }}
@@ -380,7 +380,7 @@ function clearMessages() {
               v-else-if="isToolUIPart(part)"
               :text="getToolText(part)"
               :icon="getToolIcon(part)"
-              :streaming="isToolStreaming(part)"
+              :streaming="isToolStreaming(part, streaming)"
             />
           </template>
         </template>
@@ -400,6 +400,7 @@ function clearMessages() {
       <UChatPrompt
         ref="promptRef"
         v-model="input"
+        :status="status"
         :error="error"
         placeholder="Ask me anything..."
         variant="naked"

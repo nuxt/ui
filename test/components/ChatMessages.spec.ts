@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { defineComponent, h, nextTick, ref, shallowRef, triggerRef } from 'vue'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
@@ -67,6 +67,47 @@ describe('ChatMessages', () => {
     wrapper.unmount()
   })
 
+  it('scrolls the scroll parent in `scrollToMessage`', async () => {
+    const chatRef = ref<{ scrollToMessage: (id: string, smooth?: boolean) => void } | null>(null)
+    const Parent = defineComponent({
+      setup() {
+        return () => h('div', { style: 'overflow-y: auto; scroll-padding-top: 8px' }, [h(ChatMessages, { ref: chatRef, ...props, shouldScrollToBottom: false })])
+      }
+    })
+
+    const wrapper = await mountSuspended(Parent, { attachTo: document.body })
+    vi.spyOn(wrapper.element, 'getBoundingClientRect').mockReturnValue({ top: 100 } as DOMRect)
+    for (const article of wrapper.findAll('article')) {
+      (article.element as HTMLElement).style.scrollMarginTop = '4px'
+      vi.spyOn(article.element, 'getBoundingClientRect').mockReturnValue({ top: 150 } as DOMRect)
+    }
+    const scrollTo = vi.fn()
+    wrapper.element.scrollTo = scrollTo
+    const scrollIntoView = vi.spyOn(Element.prototype, 'scrollIntoView')
+
+    chatRef.value!.scrollToMessage(props.messages[0]!.id, false)
+
+    expect(scrollTo).toHaveBeenCalledWith({ top: 38, behavior: 'instant' })
+    expect(scrollIntoView).not.toHaveBeenCalled()
+
+    scrollIntoView.mockRestore()
+    wrapper.unmount()
+  })
+
+  it('sets aria-busy while submitted or streaming', async () => {
+    const wrapper = await mountSuspended(ChatMessages, { props: { ...props, status: 'ready' } })
+    expect(wrapper.attributes('aria-busy')).toBeUndefined()
+
+    await wrapper.setProps({ status: 'submitted' })
+    expect(wrapper.attributes('aria-busy')).toBe('true')
+
+    await wrapper.setProps({ status: 'streaming' })
+    expect(wrapper.attributes('aria-busy')).toBe('true')
+
+    await wrapper.setProps({ status: 'ready' })
+    expect(wrapper.attributes('aria-busy')).toBeUndefined()
+  })
+
   it('forwards content slot props together with `message`', async () => {
     const messages = [
       { id: 'm-1', role: 'user' as const, parts: [{ type: 'text' as const, text: 'a' }], metadata: { foo: 'bar' } },
@@ -97,6 +138,29 @@ describe('ChatMessages', () => {
       parts: messages[1]!.parts,
       message: messages[1]
     })
+  })
+
+  it('passes `streaming` to forwarded slots for the last message only', async () => {
+    const messages = [
+      { id: 'm-1', role: 'user' as const, parts: [{ type: 'text' as const, text: 'a' }] },
+      { id: 'm-2', role: 'assistant' as const, parts: [{ type: 'text' as const, text: 'b' }] }
+    ]
+    const captured: Record<string, boolean>[] = []
+    const wrapper = await mountSuspended(ChatMessages, {
+      props: { messages, status: 'streaming' },
+      slots: {
+        content: ({ message, streaming }) => {
+          captured.push({ [message.role]: streaming })
+          return 'x'
+        }
+      }
+    })
+
+    expect(captured).toEqual([{ user: false }, { assistant: true }])
+
+    captured.length = 0
+    await wrapper.setProps({ status: 'ready' })
+    expect(captured).toEqual([{ user: false }, { assistant: false }])
   })
 
   it('hides the streaming indicator once the assistant message produces parts', async () => {

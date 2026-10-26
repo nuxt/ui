@@ -411,7 +411,7 @@ collapse: true
 :component-slots
 
 ::tip
-You can use all the slots of the [`ChatMessage`](/docs/components/chat-message#slots) component inside ChatMessages, they are automatically forwarded so you can customize individual messages when using the `messages` prop.
+You can use all the slots of the [`ChatMessage`](/docs/components/chat-message#slots) component inside ChatMessages, they are automatically forwarded so you can customize individual messages when using the `messages` prop. Each slot also receives the `message` and a `streaming` boolean, `true` only for the last message while the chat is submitted or streaming.
 
 ```vue{7-15}
 <script setup lang="ts">
@@ -442,6 +442,9 @@ When accessing the component via a template ref, you can use the following:
 | Name | Type |
 | ---- | ---- |
 | `registerMessageRef(id: string, element: ComponentPublicInstance \| null)`{lang="ts-type"} | `void`{lang="ts-type"} |
+| `scrollToBottom(smooth?: boolean)`{lang="ts-type"} | `void`{lang="ts-type"} |
+| `scrollToMessage(id: string, smooth?: boolean)`{lang="ts-type"} | `void`{lang="ts-type"} |
+| `isAtBottom`{lang="ts-type"} | `Readonly<Ref<boolean>>`{lang="ts-type"} |
 
 ## Theme
 

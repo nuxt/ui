@@ -1,5 +1,8 @@
+import { readFile } from 'node:fs/promises'
+import { join } from 'pathe'
 import { defu } from 'defu'
-import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addPlugin, addPluginTemplate, hasNuxtModule } from '@nuxt/kit'
+import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addPlugin, addPluginTemplate, findPath, getLayerDirectories, hasNuxtModule } from '@nuxt/kit'
+import { IconUsageScanner } from '@nuxt/icon/utils'
 import type { HookResult, ModuleDependencies } from '@nuxt/schema'
 import { addTemplates } from './templates'
 import { publicComposables } from './imports'
@@ -231,9 +234,22 @@ export default defineNuxtModule<ModuleOptions>({
     // `@nuxt/icon` drops any name it can't resolve (collection not installed, icon
     // missing) and falls back to runtime loading instead of failing the build
     // (nuxt/icon#504), so we add them all and let it sort out what's available.
-    nuxt.hook('icon:clientBundleIcons', (icons) => {
+    nuxt.hook('icon:clientBundleIcons', async (icons) => {
       for (const name of getClientBundleIcons(nuxt.options.appConfig.ui?.icons)) {
         icons.add(name)
+      }
+
+      // `app.config.ts` is only evaluated at runtime, so the icons it sets never reach
+      // `nuxt.options.appConfig`. Read the icon names written in each layer's file instead,
+      // matching custom collections too, as `clientBundle.scan` does.
+      const scanner = new IconUsageScanner({
+        additionalCollections: ((nuxt.options.icon || {}).customCollections ?? []).map(collection => collection.prefix)
+      })
+      for (const layer of getLayerDirectories(nuxt)) {
+        const path = await findPath(join(layer.app, 'app.config'))
+        if (path) {
+          scanner.extractFromCode(await readFile(path, 'utf-8'), icons)
+        }
       }
     })
 

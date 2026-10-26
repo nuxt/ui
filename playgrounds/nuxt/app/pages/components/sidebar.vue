@@ -105,6 +105,7 @@ function onSubmit() {
       <template #footer>
         <UChatPrompt
           v-model="input"
+          :status="status"
           :error="error"
           variant="subtle"
           size="sm"

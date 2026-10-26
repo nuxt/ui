@@ -193,6 +193,12 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    */
   preserveGroupOrder?: boolean
   /**
+   * When `true`, items will not be filtered which is useful for custom filtering (useAsyncData, useFetch, etc.).
+   * Applies to every group, unless the group sets its own `ignoreFilter` field.
+   * @defaultValue false
+   */
+  ignoreFilter?: boolean
+  /**
    * Delay (in milliseconds) before the search term is passed to Fuse (debounced).
    * Useful when indexing large datasets where fuzzy search becomes the bottleneck — the input stays responsive while Fuse and the result pipeline only re-run after typing settles.
    * Set to `0` (the default) to disable.
@@ -326,12 +332,16 @@ const placeholder = computed(() => history.value[history.value.length - 1]?.plac
 // eslint-disable-next-line vue/no-dupe-keys
 const groups = computed(() => history.value?.length ? [history.value[history.value.length - 1] as G] : props.groups)
 
+function isFilterIgnored(group: G) {
+  return group.ignoreFilter ?? props.ignoreFilter
+}
+
 const items = computed(() => groups.value?.filter((group) => {
   if (!group.id) {
     console.warn(`[@nuxt/ui] CommandPalette group is missing an \`id\` property`)
     return false
   }
-  if (group.ignoreFilter) {
+  if (isFilterIgnored(group)) {
     return false
   }
   return true
@@ -389,7 +399,7 @@ const filteredGroups = computed(() => {
         continue
       }
 
-      const items = group.ignoreFilter ? group.items : groupsById[group.id]
+      const items = isFilterIgnored(group) ? group.items : groupsById[group.id]
       if (!items?.length) {
         continue
       }
@@ -419,7 +429,7 @@ const filteredGroups = computed(() => {
   const result = [...fuseGroups]
 
   for (const group of currentGroups || []) {
-    if (!group.ignoreFilter || !group.items?.length) {
+    if (!isFilterIgnored(group) || !group.items?.length) {
       continue
     }
 

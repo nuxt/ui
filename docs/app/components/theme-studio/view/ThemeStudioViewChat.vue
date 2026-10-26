@@ -245,13 +245,13 @@ const ui = {
                 :spacing-offset="200"
                 class="pt-(--ui-header-height) pb-4 sm:pb-6"
               >
-                <template #content="{ message }">
+                <template #content="{ message, streaming }">
                   <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
                     <template v-if="isTextUIPart(part)">
                       <Markdown
                         v-if="message.role === 'assistant'"
                         :value="part.text"
-                        :streaming="isPartStreaming(part)"
+                        :streaming="isPartStreaming(part, streaming)"
                         :plugins="plugins"
                         class="*:first:mt-0 *:last:mb-0"
                       />
@@ -266,6 +266,7 @@ const ui = {
 
             <UChatPrompt
               v-model="input"
+              :status="status"
               :error="error"
               color="neutral"
               variant="subtle"

@@ -36,11 +36,6 @@ export default defineNuxtConfig({
   $production: {
     site: {
       url: 'https://ui.nuxt.com'
-    },
-    // Server sourcemaps cost the final Nitro bundle about 1 GB of heap while
-    // bundling. Build only, so `nuxt dev` keeps Nuxt's defaults.
-    sourcemap: {
-      server: false
     }
   },
 
@@ -216,15 +211,22 @@ export default defineNuxtConfig({
     '/getting-started/shortcuts': { redirect: { to: '/composables/define-shortcuts', statusCode: 301 }, prerender: false }
   },
 
+  // Server sourcemaps cost the final Nitro bundle about 1 GB of heap while
+  // bundling. In dev, the Nitro rebuild after saving two theme files peaked
+  // at 4.7 GB with them and ran out of memory, 1.6 GB without.
+  sourcemap: {
+    server: false
+  },
+
   future: {
     compatibilityVersion: 5
   },
 
   experimental: {
-    // `nuxt-component-meta` skips its output when `build.ssr` is set, which is
-    // the case for the client build too once the Vite Environment API is on.
-    // Remove once nuxt-content/nuxt-component-meta#128 is released.
-    viteEnvironmentApi: false,
+    // `@nuxt/content`, `@nuxt/image` 2.0, `nuxt-llms` and `nuxt-agent-discovery`
+    // import Nitro helpers from `#imports`, which compat v5 no longer provides.
+    // Remove once they all import them explicitly.
+    nitroAutoImports: true,
     defaults: {
       nuxtLink: {
         externalRelAttribute: 'noopener'

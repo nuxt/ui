@@ -117,6 +117,12 @@ const maxReached = computed(() => {
 // label instead. No `appConfig` fallback here, an unset `icon` must render nothing.
 const labelIcon = computed(() => props.indicator === 'hidden' ? props.icon : undefined)
 
+// `list` (and the default, which has no `variant`) renders the label as a `<Label>` tied to the
+// input. Every other variant renders the whole root as the `<Label>`, so the text only needs a
+// generic block wrapper there: a `<p>` cannot contain block-level content, so a slot that put a
+// `<div>` inside it made the browser close the tag early and broke hydration. See #6033.
+const isListVariant = computed(() => !props.variant || props.variant === 'list')
+
 // Hover handlers belong on the whole checkbox, including its label. Keep focus and aria attributes on the input.
 const rootAttrs = ['onPointermove', 'onPointerleave', 'data-grace-area-trigger']
 
@@ -142,7 +148,7 @@ function onUpdate(value: any) {
 
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <Primitive :as="(!props.variant || props.variant === 'list') ? props.as : Label" v-bind="pick($attrs, rootAttrs)" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="isListVariant ? props.as : Label" v-bind="pick($attrs, rootAttrs)" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
       <CheckboxRoot
         :id="id"
@@ -164,7 +170,7 @@ function onUpdate(value: any) {
 
     <div v-if="labelIcon || (props.label || !!slots.label) || (props.description || !!slots.description)" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
       <UIcon v-if="labelIcon" :name="labelIcon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
-      <component :is="(!props.variant || props.variant === 'list') ? Label : 'p'" v-if="props.label || !!slots.label" :for="id" data-slot="label" :class="ui.label({ class: props.ui?.label })">
+      <component :is="isListVariant ? Label : 'div'" v-if="props.label || !!slots.label" :for="isListVariant ? id : undefined" data-slot="label" :class="ui.label({ class: props.ui?.label })">
         <slot name="label" :label="props.label">
           {{ props.label }}
         </slot>

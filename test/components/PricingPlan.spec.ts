@@ -49,6 +49,7 @@ describe('PricingPlan', () => {
     ...variants.map((variant: string) => [`with variant ${variant}`, { props: { ...props, variant } }]),
     ...orientations.map((orientation: string) => [`with orientation ${orientation}`, { props: { ...props, orientation } }]),
     ['with as', { props: { ...props, as: 'section' } }],
+    ['with as object', { props: { ...props, title: 'Title', as: { root: 'section', title: 'h3' } } }],
     ['with class', { props: { ...props, class: 'rounded-xl' } }],
     ['with ui', { props: { ...props, ui: { footer: 'gap-12' } } }],
     // Slots
