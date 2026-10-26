@@ -627,7 +627,7 @@ watch(status, (value) => {
             color="neutral"
             variant="ghost"
             size="xs"
-            aria-label="Remove from queue"
+            :aria-label="`Remove ${text} from queue`"
             @click="queue.splice(index, 1)"
           />
         </li>
@@ -684,7 +684,7 @@ watch(status, (value) => {
             color="neutral"
             variant="ghost"
             size="xs"
-            aria-label="Remove from queue"
+            :aria-label="`Remove ${text} from queue`"
             @click="queue.splice(index, 1)"
           />
         </li>
