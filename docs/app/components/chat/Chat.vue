@@ -145,16 +145,9 @@ function onSubmit() {
   }
 }
 
-// Wait a frame: the finished answer's Markdown renders again once it stops
-// streaming, sending in the same tick would scroll to the new message before
-// that layout lands and stop short of it.
 watch(status, (value) => {
   if (value === 'ready') {
-    requestAnimationFrame(() => {
-      if (status.value === 'ready') {
-        sendNext()
-      }
-    })
+    sendNext()
   }
 })
 
@@ -294,9 +287,9 @@ function measureQueue() {
 }
 
 useResizeObserver(queueRef, measureQueue)
-// A resize observer reports a frame late. Sending a queued message removes a
-// row in the same render that `UChatMessages` measures the room for it, so the
-// height has to be up to date by then or the scroll lands short.
+// A resize observer reports after `UChatMessages` measures the room for a sent
+// message, so the row it removes from the queue is measured right after the
+// render or the scroll lands short.
 watch(() => queue.value.length, measureQueue, { flush: 'post' })
 
 watch(open, (value) => {
