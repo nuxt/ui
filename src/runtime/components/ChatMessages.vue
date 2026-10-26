@@ -22,6 +22,11 @@ type PropsBase<T extends UIMessage[]>
     ? ChatMessageProps<M, D, U>
     : never
 
+type SlotsBase<T extends UIMessage[]>
+  = MessageBase<T> extends UIMessage<infer M, infer D, infer U>
+    ? ChatMessageSlots<M, D, U>
+    : never
+
 export interface ChatMessagesProps<T extends UIMessage[] = UIMessage[]> {
   messages?: T
   status?: ChatStatus
@@ -82,7 +87,7 @@ export type ChatMessagesSlots<T extends UIMessage[] = UIMessage[]> = {
    */
   footer?(props?: {}): VNode[]
 } & {
-  [K in keyof ChatMessageSlots]?: NonNullable<ChatMessageSlots[K]> extends (props: infer P) => VNode[]
+  [K in keyof ChatMessageSlots]?: NonNullable<SlotsBase<T>[K]> extends (props: infer P) => VNode[]
     ? (props: P & { message: MessageBase<T>, streaming: boolean }) => VNode[]
     : never
 }

@@ -424,6 +424,17 @@ The `#footer` slot replaces the deprecated `spacing-offset` prop for a sticky pr
 When the prompt sits outside the scroll container, like in the footer of a [DashboardPanel](/docs/components/dashboard-panel) or a [Sidebar](/docs/components/sidebar), make the auto scroll button stick to the bottom of the scroll container with `:ui="{ viewport: 'sticky top-auto bottom-4 h-0' }"`.
 ::
 
+### With agent steps :badge{label="Soon" class="align-text-top"}
+
+Use the `#part` slot to render each step of an agent: [ChatReasoning](/docs/components/chat-reasoning) for reasoning, [ChatTool](/docs/components/chat-tool) for tool calls and sources, and markdown for the reply. Set the `error` prop on a failed tool call, and render its output with the prose components.
+
+::component-example
+---
+name: 'chat-messages-agent-steps-example'
+collapse: true
+---
+::
+
 ## API
 
 ### Props
@@ -437,22 +448,15 @@ When the prompt sits outside the scroll container, like in the footer of a [Dash
 ::tip
 You can use all the slots of the [`ChatMessage`](/docs/components/chat-message#slots) component inside ChatMessages, they are automatically forwarded so you can customize individual messages when using the `messages` prop. Each slot also receives the `message` and a `streaming` boolean, `true` only for the last message while the chat is submitted or streaming.
 
-```vue{7-15}
+```vue{7-9}
 <script setup lang="ts">
-import { isTextUIPart } from 'ai'
+import { isReasoningUIPart } from 'ai'
 </script>
 
 <template>
   <UChatMessages :messages="messages" :status="status">
-    <template #content="{ message }">
-      <template
-        v-for="(part, index) in message.parts"
-        :key="`${message.id}-${part.type}-${index}`"
-      >
-        <p v-if="isTextUIPart(part)" class="whitespace-pre-wrap">
-          {{ part.text }}
-        </p>
-      </template>
+    <template #part="{ part }">
+      <UChatReasoning v-if="isReasoningUIPart(part)" :text="part.text" />
     </template>
   </UChatMessages>
 </template>

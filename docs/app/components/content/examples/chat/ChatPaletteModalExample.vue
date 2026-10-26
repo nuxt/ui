@@ -57,24 +57,17 @@ const ui = {
           <UChatMessages
             :messages="messages"
             :status="status"
-            :user="{ side: 'left', variant: 'naked', avatar: { src: 'https://github.com/benjamincanac.png', loading: 'lazy' as const } }"
+            :user="{ side: 'left', variant: 'naked', avatar: { src: 'https://github.com/benjamincanac.png', loading: 'lazy' as const }, ui: { text: 'leading-6' } }"
             :assistant="{ icon: 'i-lucide-bot' }"
           >
-            <template #content="{ message, streaming }">
-              <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
-                <template v-if="isTextUIPart(part)">
-                  <Markdown
-                    v-if="message.role === 'assistant'"
-                    :value="part.text"
-                    :streaming="isPartStreaming(part, streaming)"
-                    :plugins="plugins"
-                    class="*:first:mt-0 *:last:mb-0"
-                  />
-                  <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap leading-6">
-                    {{ part.text }}
-                  </p>
-                </template>
-              </template>
+            <template #part="{ part, message, streaming }">
+              <Markdown
+                v-if="isTextUIPart(part) && message.role === 'assistant'"
+                :value="part.text"
+                :streaming="isPartStreaming(part, streaming)"
+                :plugins="plugins"
+                class="*:first:mt-0 *:last:mb-0"
+              />
             </template>
           </UChatMessages>
 

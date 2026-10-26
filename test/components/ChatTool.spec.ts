@@ -17,6 +17,8 @@ describe('ChatTool', () => {
     ['with icon', { props: { ...props, icon: 'i-lucide-search' } }],
     ['with loading', { props: { ...props, loading: true } }],
     ['with loading and loadingIcon', { props: { ...props, loading: true, loadingIcon: 'i-lucide-loader' } }],
+    ['with error', { props: { ...props, error: true } }],
+    ['with error and errorIcon', { props: { ...props, error: true, errorIcon: 'i-lucide-circle-alert' } }],
     ['with variant inline', { props: { ...props, variant: 'inline' } }],
     ['with variant card', { props: { ...props, variant: 'card' } }],
     ['with defaultOpen', { props: { ...props, defaultOpen: true } }],

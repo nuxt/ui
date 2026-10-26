@@ -131,7 +131,19 @@ function onUpdateOpen(value: boolean, id: string | number) {
 }
 
 const hovered = ref(false)
-const expanded = computed(() => props.expand || hovered.value)
+const focused = ref(false)
+const expanded = computed(() => props.expand || hovered.value || focused.value)
+
+// Only keyboard focus expands, a click on a toast is already covered by the hover.
+function onFocusin(event: FocusEvent) {
+  focused.value = (event.target as HTMLElement).matches(':focus-visible')
+}
+
+function onFocusout(event: FocusEvent) {
+  if (!(event.currentTarget as HTMLElement).contains(event.relatedTarget as Node | null)) {
+    focused.value = false
+  }
+}
 
 const refs = ref<{ height: number }[]>([])
 
@@ -186,6 +198,8 @@ function getOffset(index: number) {
         }"
         @mouseenter="hovered = true"
         @mouseleave="hovered = false"
+        @focusin="onFocusin"
+        @focusout="onFocusout"
       />
     </ToastPortal>
   </ToastProvider>
