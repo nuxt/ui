@@ -244,7 +244,7 @@ The separate `virtualize` option limits rendered rows for large datasets. It doe
 
 ## Tips
 
-- Table is built on [TanStack Table v9](https://tanstack.com/table/latest) — columns use `ColumnDef` format with `accessorKey`, `header`, `cell`
+- Table is built on [TanStack Table v9](https://tanstack.com/table/v9) — columns use `ColumnDef` format with `accessorKey`, `header`, `cell`
 - Sorting, filtering, expanding, row selection, column visibility, pinning and sizing, and row pinning are registered by default. Pagination, grouping and faceting go through the `features` prop
 - Feature options (`enableRowSelection`, `enableMultiSort`, `manualPagination`...) go in the `options` prop
 - Pinning uses `start` / `end`, not `left` / `right`

@@ -173,13 +173,13 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
    * Table features registered on top of the default ones (sorting, column and global filtering, expanding, row selection, column visibility, pinning and sizing, row pinning).
    * Register pagination, grouping, faceting or column ordering here with their row models, e.g. `{ rowPaginationFeature, paginatedRowModel: createPaginatedRowModel() }`.
    * Read once when the table is created.
-   * @see [Guide](https://tanstack.com/table/latest/docs/guide/features)
+   * @see [Guide](https://tanstack.com/table/v9/docs/guide/features)
    */
   features?: TanStackTableFeatures
   /**
    * Options of the registered features, e.g. `enableRowSelection`, `enableMultiSort` or `manualPagination`.
    * Read once when the table is created.
-   * @see [API](https://tanstack.com/table/latest/docs/api/core/table#options)
+   * @see [API](https://tanstack.com/table/v9/docs/reference/index/type-aliases/TableOptions)
    */
   options?: Partial<Omit<TanStackTableOptions<TableFeatures, T>, keyof TableOptions<T> | 'data' | 'columns' | 'features' | 'meta' | `on${string}Change`>>
   onSelect?: (e: Event, row: TableRow<T>) => void
