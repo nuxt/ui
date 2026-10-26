@@ -40,8 +40,8 @@ catalog:
   "@nuxtjs/color-mode": ^4.0.1
   "@nuxtjs/mcp-toolkit": ^0.24.2
   "@nuxtjs/mdc": ^0.23.2
-  "@nuxtjs/robots": ^6.2.4
-  "@nuxtjs/sitemap": ^8.6.2
+  "@nuxtjs/robots": ^7.0.2
+  "@nuxtjs/sitemap": ^9.1.0
   "@octokit/rest": ^22.0.1
   "@regle/core": ^1.29.5
   "@regle/rules": ^1.29.5
@@ -115,11 +115,11 @@ catalog:
   mlly: ^1.8.2
   motion-v: ^2.8.0
   nuxt: ^4.6.2
-  nuxt-agent-discovery: ^0.8.0
+  nuxt-agent-discovery: ^0.8.1
   nuxt-component-meta: ^0.19.0
   nuxt-llms: ^0.3.0
-  nuxt-og-image: ^6.10.4
-  nuxt-schema-org: ^6.4.3
+  nuxt-og-image: ^7.0.7
+  nuxt-schema-org: ^7.0.1
   ohash: ^2.0.12
   pathe: ^2.0.3
   prettier: ^3.9.10
@@ -195,4 +195,4 @@ minimumReleaseAgeExclude:
   - "@nuxt/vite-builder@4.6.0"
   - "@nuxt/vite-server@4.6.0"
   - nuxt@4.6.0
-  - nuxt-agent-discovery@0.7.1
+  - nuxt-agent-discovery@0.8.1
