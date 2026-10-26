@@ -155,9 +155,7 @@ provide(formFieldInjectionKey, computed(() => ({
         </span>
         <UIcon v-else-if="props.errorIcon" :name="props.errorIcon" aria-hidden="true" data-slot="errorIcon" :class="ui.errorIcon({ class: props.ui?.errorIcon })" />
 
-        <span v-if="props.errorPrefix" data-slot="errorPrefix" :class="ui.errorPrefix({ class: props.ui?.errorPrefix })">{{ props.errorPrefix }}</span>
-
-        <slot name="error" :error="error">
+        <span v-if="props.errorPrefix" data-slot="errorPrefix" :class="ui.errorPrefix({ class: props.ui?.errorPrefix })">{{ props.errorPrefix }}</span>{{ props.errorPrefix ? ' ' : '' }}<slot name="error" :error="error">
           {{ error }}
         </slot>
       </div>

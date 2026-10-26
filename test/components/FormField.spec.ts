@@ -128,7 +128,7 @@ describe('FormField', () => {
       expect(prefix.text()).toBe('Error:')
       expect(prefix.classes()).toContain('me-1')
       expect(wrapper.find('[data-slot="errorIcon"]').exists()).toBe(false)
-      expect(wrapper.find('[data-slot="error"]').text()).toBe('Error:Username is already taken')
+      expect(wrapper.find('[data-slot="error"]').text()).toBe('Error: Username is already taken')
     })
 
     it('renders with errorIcon only (prop)', async () => {
@@ -180,7 +180,7 @@ describe('FormField', () => {
       expect(prefix.exists()).toBe(true)
       expect(prefix.text()).toBe('Error:')
       expect(prefix.classes()).toContain('me-1')
-      expect(wrapper.find('[data-slot="error"]').text()).toBe('Error:Username is already taken')
+      expect(wrapper.find('[data-slot="error"]').text()).toBe('Error: Username is already taken')
     })
 
     it('renders unchanged output when neither errorPrefix nor errorIcon is set', async () => {
@@ -209,7 +209,7 @@ describe('FormField', () => {
 
       expect(wrapper.find('[data-slot="errorIcon"]').exists()).toBe(true)
       expect(wrapper.find('[data-slot="errorPrefix"]').text()).toBe('Error:')
-      expect(wrapper.find('[data-slot="error"]').text()).toBe('Error:Custom: Username is already taken')
+      expect(wrapper.find('[data-slot="error"]').text()).toBe('Error: Custom: Username is already taken')
     })
 
     it('renders prefix and icon when error is produced by form validation', async () => {
@@ -239,7 +239,7 @@ describe('FormField', () => {
       expect(errorEl.exists()).toBe(true)
       expect(wrapper.find('[data-slot="errorPrefix"]').text()).toBe('Error:')
       expect(wrapper.find('[data-slot="errorIcon"]').exists()).toBe(true)
-      expect(errorEl.text()).toContain('Error:Email is required')
+      expect(errorEl.text()).toContain('Error: Email is required')
     })
 
     it('passes accessibility tests with errorPrefix and errorIcon', async () => {
