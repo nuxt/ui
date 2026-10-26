@@ -23,6 +23,20 @@ name: 'chat-tool-example'
 ---
 ::
 
+::tip
+When the output arrives later, put the `v-if` on the slot itself rather than on its content. A slot that renders nothing still makes the block collapsible, with an empty panel.
+
+```vue
+<template>
+  <UChatTool :text="getToolName(part)" :streaming="isToolStreaming(part)">
+    <template v-if="part.state === 'output-available'" #default>
+      <pre>{{ part.output }}</pre>
+    </template>
+  </UChatTool>
+</template>
+```
+::
+
 ### Text
 
 Use the `text` prop to set the tool status text.
