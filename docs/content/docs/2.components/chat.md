@@ -578,7 +578,7 @@ html.dark .shiki span {
 Read the full **Build an AI Chatbot** tutorial for a step-by-step guide.
 ::
 
-### Queued messages
+### Queued messages :badge{label="Soon" class="align-text-top"}
 
 The AI SDK doesn't queue messages: calling `sendMessage` during a response starts a second request next to the current one. With `status`, `UChatPrompt` ignores submits while the chat is `submitted` or `streaming`. To let users send their next message anyway, leave it off, keep the text in a queue and send it once the chat is `ready` again:
 
