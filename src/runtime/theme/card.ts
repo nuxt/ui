@@ -3,11 +3,11 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'rounded-lg overflow-hidden',
-    header: 'p-4 sm:px-6',
+    header: 'px-(--ui-gutter) py-4',
     title: 'text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold))',
     description: 'mt-1 text-muted text-sm',
-    body: 'p-4 sm:p-6',
-    footer: 'p-4 sm:px-6'
+    body: 'p-(--ui-gutter)',
+    footer: 'px-(--ui-gutter) py-4'
   },
   variants: {
     variant: {

@@ -65,8 +65,8 @@ describe('CheckboxGroup', () => {
     })
 
     const [checked, blocked] = wrapper.findAll('[data-slot="checkbox-group-item"]')
-    expect(checked!.classes()).not.toContain('opacity-75')
-    expect(blocked!.classes()).toContain('opacity-75')
+    expect(checked!.classes()).not.toContain('opacity-(--ui-disabled-opacity)')
+    expect(blocked!.classes()).toContain('opacity-(--ui-disabled-opacity)')
   })
 
   it('passes accessibility tests', async () => {

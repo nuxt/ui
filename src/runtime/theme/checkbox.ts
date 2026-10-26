@@ -4,8 +4,8 @@ import { defineTheme } from '../utils/theme'
 // `list` puts focus on the control, which is the click target there. `card` and `table`
 // render the root as a label wrapping everything, so focus belongs on the card itself,
 // as it does whenever the control is `sr-only`.
-export const focusControl = 'outline-accent-focus focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-accent'
-export const focusCard = 'outline-accent-focus has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1]'
+export const focusControl = 'outline-accent-focus focus-visible:outline-solid focus-visible:outline-(length:--ui-focus-width) focus-visible:ring-accent'
+export const focusCard = 'outline-accent-focus has-focus-visible:outline-(length:--ui-focus-width) not-has-disabled:has-focus-visible:border-accent has-focus-visible:z-[1]'
 
 export default defineTheme({
   slots: {
@@ -86,7 +86,7 @@ export default defineTheme({
     },
     disabled: {
       true: {
-        root: 'opacity-75',
+        root: 'opacity-(--ui-disabled-opacity)',
         base: 'cursor-not-allowed',
         label: 'cursor-not-allowed',
         description: 'cursor-not-allowed'

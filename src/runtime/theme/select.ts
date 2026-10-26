@@ -5,7 +5,7 @@ import { defineTheme } from '../utils/theme'
 // `base` is the box, the `<button>` of the trigger
 export default defineTheme({
   slots: {
-    base: 'group relative inline-flex items-center rounded-md text-strong disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
+    base: 'group relative inline-flex items-center rounded-md text-strong disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) transition-colors',
     // The invisible character gives the leading the baseline of the text, see `input.ts`
     leading: `flex items-center before:content-['x'] before:w-0 before:invisible`,
     leadingIcon: 'shrink-0 text-faint',
@@ -20,7 +20,7 @@ export default defineTheme({
     group: 'p-1 isolate',
     label: 'font-semibold text-strong',
     separator: '-mx-1 my-1 h-px bg-border',
-    item: 'group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-strong data-highlighted:not-data-disabled:before:bg-tint transition-colors before:transition-colors',
+    item: 'group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-(--ui-disabled-opacity) text-default data-highlighted:not-data-disabled:text-strong data-highlighted:not-data-disabled:before:bg-tint transition-colors before:transition-colors',
     itemLeadingIcon: 'shrink-0 text-faint group-data-highlighted:not-group-data-disabled:text-default transition-colors',
     itemLeadingAvatar: 'shrink-0',
     itemLeadingChip: 'shrink-0',
@@ -33,10 +33,10 @@ export default defineTheme({
   variants: {
     ...fieldGroupVariantWithHiddenInput,
     variant: {
-      outline: { base: 'bg-default hover:bg-soft disabled:bg-default ring ring-inset ring-strong outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent' },
-      soft: { base: 'bg-tint hover:bg-soft focus:bg-soft disabled:bg-tint outline-accent-focus focus-visible:outline-3' },
-      subtle: { base: 'bg-soft hover:bg-strong/75 disabled:bg-soft ring ring-inset ring-strong outline-accent-focus focus-visible:outline-3 focus-visible:ring-accent' },
-      ghost: { base: 'bg-transparent hover:bg-soft focus:bg-soft disabled:bg-transparent dark:disabled:bg-transparent outline-accent-focus focus-visible:outline-3' },
+      outline: { base: 'bg-default hover:bg-soft disabled:bg-default ring ring-inset ring-strong outline-accent-focus focus-visible:outline-(length:--ui-focus-width) focus-visible:ring-accent' },
+      soft: { base: 'bg-tint hover:bg-soft focus:bg-soft disabled:bg-tint outline-accent-focus focus-visible:outline-(length:--ui-focus-width)' },
+      subtle: { base: 'bg-soft hover:bg-strong/75 disabled:bg-soft ring ring-inset ring-strong outline-accent-focus focus-visible:outline-(length:--ui-focus-width) focus-visible:ring-accent' },
+      ghost: { base: 'bg-transparent hover:bg-soft focus:bg-soft disabled:bg-transparent dark:disabled:bg-transparent outline-accent-focus focus-visible:outline-(length:--ui-focus-width)' },
       none: { base: 'bg-transparent focus:outline-none' }
     },
     color: colorVariant({ base: '' }),

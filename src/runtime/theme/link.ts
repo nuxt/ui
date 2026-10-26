@@ -2,7 +2,7 @@ import { defineTheme } from '../utils/theme'
 
 export default defineTheme({
   slots: {
-    base: 'outline-focus focus-visible:outline-3 rounded-md'
+    base: 'outline-focus focus-visible:outline-(length:--ui-focus-width) rounded-md'
   },
   variants: {
     active: {
@@ -10,7 +10,7 @@ export default defineTheme({
       false: { base: 'text-muted' }
     },
     disabled: {
-      true: { base: 'cursor-not-allowed opacity-75' }
+      true: { base: 'cursor-not-allowed opacity-(--ui-disabled-opacity)' }
     }
   },
   compoundVariants: [{

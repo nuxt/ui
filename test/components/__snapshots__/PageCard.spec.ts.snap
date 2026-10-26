@@ -3,7 +3,7 @@
 exports[`PageCard > renders with as correctly 1`] = `
 "<section data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -13,7 +13,7 @@ exports[`PageCard > renders with as correctly 1`] = `
 exports[`PageCard > renders with as object correctly 1`] = `
 "<section data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <!--v-if-->
@@ -31,7 +31,7 @@ exports[`PageCard > renders with as object correctly 1`] = `
 exports[`PageCard > renders with body slot correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -46,7 +46,7 @@ exports[`PageCard > renders with body slot correctly 1`] = `
 exports[`PageCard > renders with class correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] rounded-xl">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -64,7 +64,7 @@ exports[`PageCard > renders with class correctly 1`] = `
 exports[`PageCard > renders with default slot correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -82,7 +82,7 @@ exports[`PageCard > renders with default slot correctly 1`] = `
 exports[`PageCard > renders with description correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <!--v-if-->
@@ -100,7 +100,7 @@ exports[`PageCard > renders with description correctly 1`] = `
 exports[`PageCard > renders with description slot correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -118,7 +118,7 @@ exports[`PageCard > renders with description slot correctly 1`] = `
 exports[`PageCard > renders with footer slot correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -136,7 +136,7 @@ exports[`PageCard > renders with footer slot correctly 1`] = `
 exports[`PageCard > renders with header slot correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <div data-slot="page-card-header" class="mb-4">Header slot</div>
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -154,7 +154,7 @@ exports[`PageCard > renders with header slot correctly 1`] = `
 exports[`PageCard > renders with highlight color error correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring-2 ring-accent [--ui-accent:var(--ui-error)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -172,7 +172,7 @@ exports[`PageCard > renders with highlight color error correctly 1`] = `
 exports[`PageCard > renders with highlight color info correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring-2 ring-accent [--ui-accent:var(--ui-info)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -190,7 +190,7 @@ exports[`PageCard > renders with highlight color info correctly 1`] = `
 exports[`PageCard > renders with highlight color neutral correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring-2 ring-accent [--ui-accent:var(--ui-neutral)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -208,7 +208,7 @@ exports[`PageCard > renders with highlight color neutral correctly 1`] = `
 exports[`PageCard > renders with highlight color neutral correctly 2`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring-2 ring-accent [--ui-accent:var(--ui-neutral)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -226,7 +226,7 @@ exports[`PageCard > renders with highlight color neutral correctly 2`] = `
 exports[`PageCard > renders with highlight color primary correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring-2 ring-accent [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -244,7 +244,7 @@ exports[`PageCard > renders with highlight color primary correctly 1`] = `
 exports[`PageCard > renders with highlight color secondary correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring-2 ring-accent [--ui-accent:var(--ui-secondary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -262,7 +262,7 @@ exports[`PageCard > renders with highlight color secondary correctly 1`] = `
 exports[`PageCard > renders with highlight color success correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring-2 ring-accent [--ui-accent:var(--ui-success)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -280,7 +280,7 @@ exports[`PageCard > renders with highlight color success correctly 1`] = `
 exports[`PageCard > renders with highlight color warning correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring-2 ring-accent [--ui-accent:var(--ui-warning)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -298,7 +298,7 @@ exports[`PageCard > renders with highlight color warning correctly 1`] = `
 exports[`PageCard > renders with highlight correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring-2 ring-accent [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -316,7 +316,7 @@ exports[`PageCard > renders with highlight correctly 1`] = `
 exports[`PageCard > renders with icon correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -331,7 +331,7 @@ exports[`PageCard > renders with icon correctly 1`] = `
 exports[`PageCard > renders with leading slot correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5">Leading slot</div>
@@ -349,7 +349,7 @@ exports[`PageCard > renders with leading slot correctly 1`] = `
 exports[`PageCard > renders with orientation horizontal correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6 lg:grid-cols-2 lg:items-center">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter) lg:grid-cols-2 lg:items-center">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -367,7 +367,7 @@ exports[`PageCard > renders with orientation horizontal correctly 1`] = `
 exports[`PageCard > renders with orientation horizontal reverse correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6 lg:grid-cols-2 lg:items-center">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter) lg:grid-cols-2 lg:items-center">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start order-last">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -385,7 +385,7 @@ exports[`PageCard > renders with orientation horizontal reverse correctly 1`] = 
 exports[`PageCard > renders with orientation vertical correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -403,7 +403,7 @@ exports[`PageCard > renders with orientation vertical correctly 1`] = `
 exports[`PageCard > renders with orientation vertical reverse correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start order-last">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -421,7 +421,7 @@ exports[`PageCard > renders with orientation vertical reverse correctly 1`] = `
 exports[`PageCard > renders with spotlight color error correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-error)]">
   <div data-slot="page-card-spotlight" class="absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90"></div>
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -439,7 +439,7 @@ exports[`PageCard > renders with spotlight color error correctly 1`] = `
 exports[`PageCard > renders with spotlight color info correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-info)]">
   <div data-slot="page-card-spotlight" class="absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90"></div>
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -457,7 +457,7 @@ exports[`PageCard > renders with spotlight color info correctly 1`] = `
 exports[`PageCard > renders with spotlight color neutral correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-neutral)]">
   <div data-slot="page-card-spotlight" class="absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90"></div>
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -475,7 +475,7 @@ exports[`PageCard > renders with spotlight color neutral correctly 1`] = `
 exports[`PageCard > renders with spotlight color neutral correctly 2`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-neutral)]">
   <div data-slot="page-card-spotlight" class="absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90"></div>
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -493,7 +493,7 @@ exports[`PageCard > renders with spotlight color neutral correctly 2`] = `
 exports[`PageCard > renders with spotlight color primary correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <div data-slot="page-card-spotlight" class="absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90"></div>
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -511,7 +511,7 @@ exports[`PageCard > renders with spotlight color primary correctly 1`] = `
 exports[`PageCard > renders with spotlight color secondary correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-secondary)]">
   <div data-slot="page-card-spotlight" class="absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90"></div>
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -529,7 +529,7 @@ exports[`PageCard > renders with spotlight color secondary correctly 1`] = `
 exports[`PageCard > renders with spotlight color success correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-success)]">
   <div data-slot="page-card-spotlight" class="absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90"></div>
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -547,7 +547,7 @@ exports[`PageCard > renders with spotlight color success correctly 1`] = `
 exports[`PageCard > renders with spotlight color warning correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-warning)]">
   <div data-slot="page-card-spotlight" class="absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90"></div>
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -565,7 +565,7 @@ exports[`PageCard > renders with spotlight color warning correctly 1`] = `
 exports[`PageCard > renders with spotlight correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <div data-slot="page-card-spotlight" class="absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90"></div>
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -583,7 +583,7 @@ exports[`PageCard > renders with spotlight correctly 1`] = `
 exports[`PageCard > renders with title correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <!--v-if-->
@@ -601,7 +601,7 @@ exports[`PageCard > renders with title correctly 1`] = `
 exports[`PageCard > renders with title slot correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -617,9 +617,9 @@ exports[`PageCard > renders with title slot correctly 1`] = `
 `;
 
 exports[`PageCard > renders with to correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default outline-focus has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-tint has-[>a:focus-visible]:ring-primary">
+"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default outline-focus has-[>a:focus-visible]:outline-(length:--ui-focus-width) transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-tint has-[>a:focus-visible]:ring-primary">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <!--v-if-->
   </div><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Card link" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
 </div>"
@@ -628,7 +628,7 @@ exports[`PageCard > renders with to correctly 1`] = `
 exports[`PageCard > renders with ui correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -646,7 +646,7 @@ exports[`PageCard > renders with ui correctly 1`] = `
 exports[`PageCard > renders with variant ghost correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -664,7 +664,7 @@ exports[`PageCard > renders with variant ghost correctly 1`] = `
 exports[`PageCard > renders with variant ghost highlight correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg ring-2 ring-accent [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -680,9 +680,9 @@ exports[`PageCard > renders with variant ghost highlight correctly 1`] = `
 `;
 
 exports[`PageCard > renders with variant ghost to correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg outline-focus has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-tint">
+"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg outline-focus has-[>a:focus-visible]:outline-(length:--ui-focus-width) transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-tint">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -733,7 +733,7 @@ exports[`PageCard > renders with variant naked highlight correctly 1`] = `
 `;
 
 exports[`PageCard > renders with variant naked to correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg outline-focus has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
+"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg outline-focus has-[>a:focus-visible]:outline-(length:--ui-focus-width) transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
   <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-0 sm:p-0">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
@@ -752,7 +752,7 @@ exports[`PageCard > renders with variant naked to correctly 1`] = `
 exports[`PageCard > renders with variant outline correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -770,7 +770,7 @@ exports[`PageCard > renders with variant outline correctly 1`] = `
 exports[`PageCard > renders with variant outline highlight correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring-2 ring-accent [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -786,9 +786,9 @@ exports[`PageCard > renders with variant outline highlight correctly 1`] = `
 `;
 
 exports[`PageCard > renders with variant outline to correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default outline-focus has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-tint has-[>a:focus-visible]:ring-primary">
+"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-default ring ring-default outline-focus has-[>a:focus-visible]:outline-(length:--ui-focus-width) transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-tint has-[>a:focus-visible]:ring-primary">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -805,7 +805,7 @@ exports[`PageCard > renders with variant outline to correctly 1`] = `
 exports[`PageCard > renders with variant soft correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-tint [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -823,7 +823,7 @@ exports[`PageCard > renders with variant soft correctly 1`] = `
 exports[`PageCard > renders with variant soft highlight correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-tint ring-2 ring-accent [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -839,9 +839,9 @@ exports[`PageCard > renders with variant soft highlight correctly 1`] = `
 `;
 
 exports[`PageCard > renders with variant soft to correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-tint outline-focus has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-soft">
+"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-tint outline-focus has-[>a:focus-visible]:outline-(length:--ui-focus-width) transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-soft">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -858,7 +858,7 @@ exports[`PageCard > renders with variant soft to correctly 1`] = `
 exports[`PageCard > renders with variant solid correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-neutral text-contrast [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -876,7 +876,7 @@ exports[`PageCard > renders with variant solid correctly 1`] = `
 exports[`PageCard > renders with variant solid highlight correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-neutral text-contrast ring-2 ring-accent [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -892,9 +892,9 @@ exports[`PageCard > renders with variant solid highlight correctly 1`] = `
 `;
 
 exports[`PageCard > renders with variant solid to correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-neutral text-contrast outline-focus has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-neutral-hover">
+"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-neutral text-contrast outline-focus has-[>a:focus-visible]:outline-(length:--ui-focus-width) transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-neutral-hover">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -911,7 +911,7 @@ exports[`PageCard > renders with variant solid to correctly 1`] = `
 exports[`PageCard > renders with variant subtle correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-tint ring ring-default [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -929,7 +929,7 @@ exports[`PageCard > renders with variant subtle correctly 1`] = `
 exports[`PageCard > renders with variant subtle highlight correctly 1`] = `
 "<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-tint ring-2 ring-accent [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)]">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>
@@ -945,9 +945,9 @@ exports[`PageCard > renders with variant subtle highlight correctly 1`] = `
 `;
 
 exports[`PageCard > renders with variant subtle to correctly 1`] = `
-"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-tint ring ring-default outline-focus has-[>a:focus-visible]:outline-3 transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-soft hover:ring-strong has-[>a:focus-visible]:ring-primary">
+"<div data-orientation="vertical" data-slot="page-card" class="relative flex rounded-lg bg-tint ring ring-default outline-focus has-[>a:focus-visible]:outline-(length:--ui-focus-width) transition [--ui-accent:var(--ui-primary)] [--spotlight-color:var(--ui-primary)] hover:bg-soft hover:ring-strong has-[>a:focus-visible]:ring-primary">
   <!--v-if-->
-  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="page-card-container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)">
     <div data-slot="page-card-wrapper" class="flex flex-col flex-1 items-start">
       <!--v-if-->
       <div data-slot="page-card-leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-card-leadingIcon"></span></div>

@@ -4,7 +4,7 @@ import { defineTheme } from '../utils/theme'
 
 export default defineTheme({
   slots: {
-    base: 'rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors outline-accent-focus focus-visible:outline-3',
+    base: 'rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width)',
     label: 'truncate',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',

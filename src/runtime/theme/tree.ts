@@ -7,7 +7,7 @@ export default defineTheme({
     item: 'w-full',
     listWithChildren: 'border-s border-default',
     itemWithChildren: 'ps-1.5 -ms-px',
-    link: 'relative group w-full flex items-center text-sm select-none before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3 before:outline-accent-focus',
+    link: 'relative group w-full flex items-center text-sm select-none before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-(length:--ui-focus-width) before:outline-accent-focus',
     linkLeadingIcon: 'shrink-0 relative',
     linkLabel: 'truncate',
     linkTrailing: 'ms-auto inline-flex gap-1.5 items-center',
@@ -59,7 +59,7 @@ export default defineTheme({
     },
     disabled: {
       true: {
-        link: 'cursor-not-allowed opacity-75'
+        link: 'cursor-not-allowed opacity-(--ui-disabled-opacity)'
       }
     }
   },

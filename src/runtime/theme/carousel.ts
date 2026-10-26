@@ -11,7 +11,7 @@ export default defineTheme({
     prev: 'absolute rounded-full',
     next: 'absolute rounded-full',
     dots: 'absolute inset-x-0 -bottom-7 isolate flex flex-wrap items-center justify-center gap-3',
-    dot: 'relative cursor-pointer size-3 bg-strong rounded-full after:absolute after:-inset-1.5 after:-z-1 outline-focus focus-visible:outline-3 transition'
+    dot: 'relative cursor-pointer size-3 bg-strong rounded-full after:absolute after:-inset-1.5 after:-z-1 outline-focus focus-visible:outline-(length:--ui-focus-width) transition'
   },
   variants: {
     orientation: {
