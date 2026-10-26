@@ -8,8 +8,10 @@ import type {
   BuiltInFilterFn,
   BuiltInSortFn,
   Cell,
-  CellData,
   CellContext,
+  CellData,
+  CellSelectionDirection,
+  CellSelectionState,
   Column,
   ColumnDef,
   ColumnFiltersState,
@@ -34,6 +36,7 @@ import type {
   TableMeta,
   TableOptions as TanStackTableOptions,
   TableOptions_Table,
+  TableState,
   Updater,
   VueTable,
   columnResizingState
@@ -54,11 +57,9 @@ declare module '@tanstack/table-core' {
       th?: string | Record<string, string> | ((cell: Header<TFeatures, TData, TValue>) => string | Record<string, string>)
       td?: string | Record<string, string> | ((cell: Cell<TFeatures, TData, TValue>) => string | Record<string, string>)
     }
-    colspan?: {
-      td?: string | ((cell: Cell<TFeatures, TData, TValue>) => string)
-    }
-    rowspan?: {
-      td?: string | ((cell: Cell<TFeatures, TData, TValue>) => string)
+    attrs?: {
+      th?: Record<string, unknown> | ((cell: Header<TFeatures, TData, TValue>) => Record<string, unknown>)
+      td?: Record<string, unknown> | ((cell: Cell<TFeatures, TData, TValue>) => Record<string, unknown>)
     }
 
   }
@@ -69,6 +70,9 @@ declare module '@tanstack/table-core' {
     }
     style?: {
       tr?: string | Record<string, string> | ((row: Row<TFeatures, TData>) => string | Record<string, string>)
+    }
+    attrs?: {
+      tr?: Record<string, unknown> | ((row: Row<TFeatures, TData>) => Record<string, unknown>)
     }
   }
 
@@ -181,7 +185,7 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
    * Read once when the table is created.
    * @see [API](https://tanstack.com/table/v9/docs/reference/index/type-aliases/TableOptions)
    */
-  options?: Partial<Omit<TanStackTableOptions<TableFeatures, T>, keyof TableOptions<T> | 'data' | 'columns' | 'features' | 'meta' | `on${string}Change`>>
+  options?: Partial<Omit<TanStackTableOptions<TableFeatures, T>, keyof TableOptions<T> | 'data' | 'columns' | 'features' | 'meta' | `on${Capitalize<keyof TableState<TableFeatures>>}Change`>>
   onSelect?: (e: Event, row: TableRow<T>) => void
   onHover?: (e: Event, row: TableRow<T> | null) => void
   onContextmenu?: ((e: Event, row: TableRow<T>) => void) | Array<((e: Event, row: TableRow<T>) => void)>
@@ -204,7 +208,7 @@ export type TableSlots<T extends TableData = TableData> = {
 </script>
 
 <script setup lang="ts" generic="T extends TableData">
-import { computed, useTemplateRef, watch, toRef, onBeforeUnmount, h, isVNode } from 'vue'
+import { computed, useTemplateRef, watch, toRef, onBeforeUnmount, h, isVNode, nextTick } from 'vue'
 import { Primitive } from 'reka-ui'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
@@ -247,7 +251,7 @@ const slots = defineSlots<TableSlots<T>>()
 
 const props = useComponentProps<TableProps<T>>('table', _props, theme)
 
-const { t } = useLocale()
+const { t, dir } = useLocale()
 const overrides = useComponentOverrides((ui: Table['AppConfig']['ui']) => ui.table)
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -339,6 +343,7 @@ const sortingState = defineModel<SortingState>('sorting')
 const groupingState = defineModel<GroupingState>('grouping')
 const expandedState = defineModel<ExpandedState>('expanded')
 const paginationState = defineModel<PaginationState>('pagination')
+const cellSelectionState = defineModel<CellSelectionState>('cellSelection')
 
 const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef')
 const tableRef = useTemplateRef<HTMLTableElement>('tableRef')
@@ -366,8 +371,12 @@ const defaultFeatures = {
 
 const registeredFeatures = tableFeatures({ ...defaultFeatures, ...props.features }) as TableFeatures
 
+// The cell APIs of these features only exist once they are registered.
+const hasCellSelection = 'cellSelectionFeature' in registeredFeatures
+const hasCellSpanning = 'cellSpanningFeature' in registeredFeatures
+
 // Each model is a state slice with a matching `on<Slice>Change` option, so supporting a new slice only takes a `defineModel` and an entry here.
-const models = {
+const models: { [K in keyof TableState<TableFeatures>]-?: Ref<TableState<TableFeatures>[K] | undefined> } = {
   globalFilter: globalFilterState,
   columnFilters: columnFiltersState,
   columnOrder: columnOrderState,
@@ -380,7 +389,8 @@ const models = {
   sorting: sortingState,
   grouping: groupingState,
   expanded: expandedState,
-  pagination: paginationState
+  pagination: paginationState,
+  cellSelection: cellSelectionState
 }
 
 // TanStack falls back to the initial state for a slice that is present but `undefined`, so only bound models are passed.
@@ -402,6 +412,9 @@ const onChangeHandlers = Object.fromEntries(Object.entries(models).map(([key, mo
 
 const tableApi: VueTable<TableFeatures, T> = useTable<TableFeatures, T>({
   ...props.options,
+  // Columns resize while dragging, in the text direction.
+  columnResizeMode: toRef(() => props.options?.columnResizeMode ?? 'onChange'),
+  columnResizeDirection: toRef(() => props.options?.columnResizeDirection ?? dir.value),
   ...tableProps.value,
   ...onChangeHandlers,
   features: registeredFeatures,
@@ -534,7 +547,15 @@ function onExpandedRowUnmounted({ el }: VNode) {
 onBeforeUnmount(() => expandedRowsObserver?.disconnect())
 
 // TanStack's `FlexRender` passes an array returned by a column template to `h()` as if it were a component, so arrays are returned as they are.
-function FlexRender({ render, props }: { render: unknown, props: unknown }) {
+// A `cell` renders like TanStack's `<FlexRender :cell>`: `aggregatedCell` on aggregated cells, nothing on placeholder ones.
+function FlexRender({ render, props, cell }: { render?: unknown, props?: unknown, cell?: Cell<TableFeatures, T, unknown> }) {
+  if (cell) {
+    if (cell.getIsPlaceholder?.()) {
+      return null
+    }
+    render = cell.getIsAggregated?.() ? (cell.column.columnDef.aggregatedCell ?? cell.column.columnDef.cell) : cell.column.columnDef.cell
+    props = cell.getContext()
+  }
   const rendered = typeof render === 'function' ? render(props) : render
   if (rendered === null || (typeof rendered !== 'object' && typeof rendered !== 'function') || Array.isArray(rendered) || isVNode(rendered)) {
     return rendered
@@ -586,6 +607,98 @@ function onRowContextmenu(e: Event, row: TableRow<T>) {
   }
 }
 
+// A per-row `enableRowSelection` predicate also decides which rows look selectable.
+function isRowSelectable(row: TableRow<T>) {
+  if (!props.onSelect && !props.onHover && !props.onContextmenu) {
+    return false
+  }
+  return typeof tableApi.options.enableRowSelection !== 'function' || row.getCanSelect()
+}
+
+function isCellCovered(cell: Cell<TableFeatures, T, unknown>) {
+  return hasCellSpanning && cell.getIsCovered()
+}
+
+function getCellSpan(span: number) {
+  return span > 1 ? span : undefined
+}
+
+function isInteractive(target: EventTarget | null) {
+  return target instanceof Element && !!target.closest('a, button, input, label, select, textarea')
+}
+
+function onCellMousedown(e: MouseEvent, cell: Cell<TableFeatures, T, unknown>) {
+  if (e.button !== 0 || isInteractive(e.target)) {
+    return
+  }
+  // Keep the drag from selecting text, then focus the cell ourselves.
+  e.preventDefault()
+  cell.getSelectionStartHandler()(e)
+  ;(e.currentTarget as HTMLElement).focus()
+}
+
+const cellSelectionKeys: Record<string, CellSelectionDirection> = {
+  ArrowUp: 'up',
+  ArrowDown: 'down',
+  ArrowLeft: 'left',
+  ArrowRight: 'right'
+}
+
+function onCellKeydown(e: KeyboardEvent) {
+  let direction = cellSelectionKeys[e.key]
+  if (!direction || isInteractive(e.target)) {
+    return
+  }
+  // TanStack steps through the column order, which runs from the right in RTL.
+  if (dir.value === 'rtl' && (direction === 'left' || direction === 'right')) {
+    direction = direction === 'left' ? 'right' : 'left'
+  }
+  e.preventDefault()
+  if (e.shiftKey) {
+    tableApi.extendCellSelection(direction)
+  } else {
+    tableApi.moveCellSelection(direction)
+  }
+  nextTick(() => tableRef.value?.querySelector<HTMLElement>('td[tabindex="0"]')?.focus())
+}
+
+function getCellSelectionListeners(cell: Cell<TableFeatures, T, unknown>) {
+  if (!hasCellSelection) {
+    return {}
+  }
+  return {
+    mousedown: (e: MouseEvent) => onCellMousedown(e, cell),
+    mouseenter: cell.getSelectionExtendHandler(),
+    keydown: onCellKeydown
+  }
+}
+
+// Like sorting, a resize handle is only rendered for columns that opt in with `enableResizing: true`.
+function isColumnResizable(column: Column<TableFeatures, T, unknown>) {
+  return column.columnDef.enableResizing === true && column.getCanResize()
+}
+
+function isResizable(header: Header<TableFeatures, T, unknown>) {
+  return (!header.isPlaceholder || header.rowSpan > 1) && isColumnResizable(header.column)
+}
+
+// Once a column can be resized, every header and the table take their TanStack size.
+const hasResizableColumns = computed(() => tableApi.getAllLeafColumns().some(isColumnResizable))
+
+function getHeaderStyles(header: Header<TableFeatures, T, unknown>) {
+  const styles = getColumnStyles(header.column)
+  if (hasResizableColumns.value) {
+    styles.width = `${header.getSize()}px`
+  }
+  return styles
+}
+
+// A placeholder that spans the rows below it renders its column's header, under the column's slot name.
+// The headers it spans have a `rowSpan` of 0 and are not rendered.
+function getHeaderSlotId(header: Header<TableFeatures, T, unknown>) {
+  return header.isPlaceholder && header.rowSpan > 1 ? header.column.id : header.id
+}
+
 function resolveValue<T, A = undefined>(prop: T | ((arg: A) => T), arg?: A): T | undefined {
   if (typeof prop === 'function') {
     // @ts-expect-error: TS can't know if prop is a function here
@@ -615,7 +728,7 @@ function isSortable(column: Column<TableFeatures, T, unknown>) {
 }
 
 function getAriaSort(header: Header<TableFeatures, T, unknown>): AriaAttributes['aria-sort'] {
-  if (header.isPlaceholder || !isSortable(header.column)) {
+  if ((header.isPlaceholder && header.rowSpan <= 1) || !isSortable(header.column)) {
     return undefined
   }
 
@@ -658,7 +771,7 @@ defineExpose({
       :ref="measureRowRef"
       :[indexAttribute]="index"
       :data-selected="row.getIsSelected()"
-      :data-selectable="!!props.onSelect || !!props.onHover || !!props.onContextmenu"
+      :data-selectable="isRowSelectable(row)"
       :data-expanded="row.getIsExpanded()"
       :data-pinned="row.getIsPinned() || undefined"
       :tabindex="props.onSelect ? 0 : undefined"
@@ -670,35 +783,41 @@ defineExpose({
         ]
       })"
       :style="resolveValue(tableApi.options.meta?.style?.tr, row)"
+      v-bind="resolveValue(tableApi.options.meta?.attrs?.tr, row)"
       @click="onRowSelect($event, row)"
       @keydown.self.exact.enter.space="onRowSelect($event, row)"
       @pointerenter="onRowHover($event, row)"
       @pointerleave="onRowHover($event, null)"
       @contextmenu="onRowContextmenu($event, row)"
     >
-      <td
-        v-for="cell in row.getVisibleCells()"
-        :key="cell.id"
-        :data-pinned="cell.column.getIsPinned()"
-        :colspan="resolveValue(cell.column.columnDef.meta?.colspan?.td, cell)"
-        :rowspan="resolveValue(cell.column.columnDef.meta?.rowspan?.td, cell)"
-        data-slot="table-td"
-        :class="ui.td({
-          class: [
-            props.ui?.td,
-            resolveValue(cell.column.columnDef.meta?.class?.td, cell)
-          ],
-          pinned: !!cell.column.getIsPinned()
-        })"
-        :style="[
-          getColumnStyles(cell.column),
-          resolveValue(cell.column.columnDef.meta?.style?.td, cell)
-        ]"
-      >
-        <slot :name="`${cell.column.id}-cell`" v-bind="cell.getContext()">
-          <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
-        </slot>
-      </td>
+      <template v-for="cell in row.getVisibleCells()" :key="cell.id">
+        <td
+          v-if="!isCellCovered(cell)"
+          :data-pinned="cell.column.getIsPinned()"
+          :data-selected="hasCellSelection ? cell.getIsSelected() : undefined"
+          :tabindex="hasCellSelection ? cell.getTabIndex() : undefined"
+          :colspan="hasCellSpanning ? getCellSpan(cell.getColSpan()) : undefined"
+          :rowspan="hasCellSpanning ? getCellSpan(cell.getRowSpan()) : undefined"
+          data-slot="table-td"
+          :class="ui.td({
+            class: [
+              props.ui?.td,
+              resolveValue(cell.column.columnDef.meta?.class?.td, cell)
+            ],
+            pinned: !!cell.column.getIsPinned()
+          })"
+          :style="[
+            getColumnStyles(cell.column),
+            resolveValue(cell.column.columnDef.meta?.style?.td, cell)
+          ]"
+          v-bind="resolveValue(cell.column.columnDef.meta?.attrs?.td, cell)"
+          v-on="getCellSelectionListeners(cell)"
+        >
+          <slot :name="`${cell.column.id}-cell`" v-bind="cell.getContext()">
+            <FlexRender :cell="cell" />
+          </slot>
+        </td>
+      </template>
     </tr>
 
     <tr
@@ -715,7 +834,12 @@ defineExpose({
   </DefineRowTemplate>
 
   <DefineTableTemplate>
-    <table ref="tableRef" data-slot="table-base" :class="ui.base({ class: [props.ui?.base] })">
+    <table
+      ref="tableRef"
+      data-slot="table-base"
+      :class="ui.base({ class: [props.ui?.base] })"
+      :style="hasResizableColumns ? { width: `${tableApi.getTotalSize()}px` } : undefined"
+    >
       <caption v-if="props.caption || !!slots.caption" data-slot="table-caption" :class="ui.caption({ class: [props.ui?.caption] })">
         <slot name="caption">
           {{ props.caption }}
@@ -723,32 +847,45 @@ defineExpose({
       </caption>
 
       <thead data-slot="table-thead" :class="ui.thead({ class: [props.ui?.thead] })">
-        <tr v-for="headerGroup in headerGroups" :key="headerGroup.id" data-slot="table-tr" :class="ui.tr({ class: [props.ui?.tr] })">
-          <th
-            v-for="{ header, rowSpan } in headerGroup.headers"
-            :key="header.id"
-            :data-pinned="header.column.getIsPinned()"
-            :scope="header.colSpan > 1 ? 'colgroup' : 'col'"
-            :colspan="header.colSpan > 1 ? header.colSpan : undefined"
-            :rowspan="rowSpan > 1 ? rowSpan : undefined"
-            :aria-sort="getAriaSort(header)"
-            data-slot="table-th"
-            :class="ui.th({
-              class: [
-                props.ui?.th,
-                resolveValue(header.column.columnDef.meta?.class?.th, header)
-              ],
-              pinned: !!header.column.getIsPinned()
-            })"
-            :style="[
-              getColumnStyles(header.column),
-              resolveValue(header.column.columnDef.meta?.style?.th, header)
-            ]"
-          >
-            <slot :name="`${header.id}-header`" v-bind="header.getContext()">
-              <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header" :props="header.getContext()" />
-            </slot>
-          </th>
+        <tr v-for="headerGroup in tableApi.getHeaderGroups()" :key="headerGroup.id" data-slot="table-tr" :class="ui.tr({ class: [props.ui?.tr] })">
+          <template v-for="header in headerGroup.headers" :key="header.id">
+            <th
+              v-if="header.rowSpan !== 0"
+              :data-pinned="header.column.getIsPinned()"
+              :scope="header.colSpan > 1 ? 'colgroup' : 'col'"
+              :colspan="header.colSpan > 1 ? header.colSpan : undefined"
+              :rowspan="header.rowSpan > 1 ? header.rowSpan : undefined"
+              :aria-sort="getAriaSort(header)"
+              data-slot="table-th"
+              :class="ui.th({
+                class: [
+                  props.ui?.th,
+                  resolveValue(header.column.columnDef.meta?.class?.th, header)
+                ],
+                pinned: !!header.column.getIsPinned()
+              })"
+              :style="[
+                getHeaderStyles(header),
+                resolveValue(header.column.columnDef.meta?.style?.th, header)
+              ]"
+              v-bind="resolveValue(header.column.columnDef.meta?.attrs?.th, header)"
+            >
+              <slot :name="`${getHeaderSlotId(header)}-header`" v-bind="header.getContext()">
+                <FlexRender v-if="!header.isPlaceholder || header.rowSpan > 1" :render="header.column.columnDef.header" :props="header.getContext()" />
+              </slot>
+
+              <div
+                v-if="isResizable(header)"
+                aria-hidden="true"
+                :data-resizing="header.column.getIsResizing()"
+                data-slot="table-resizer"
+                :class="ui.resizer({ class: props.ui?.resizer })"
+                @mousedown="header.getResizeHandler()($event)"
+                @touchstart.passive="header.getResizeHandler()($event)"
+                @dblclick="header.column.resetSize()"
+              />
+            </th>
+          </template>
         </tr>
 
         <tr data-slot="table-separator" :class="ui.separator({ class: [props.ui?.separator] })" />
@@ -813,7 +950,6 @@ defineExpose({
             :key="header.id"
             :data-pinned="header.column.getIsPinned()"
             :colspan="header.colSpan > 1 ? header.colSpan : undefined"
-            :rowspan="header.rowSpan > 1 ? header.rowSpan : undefined"
             data-slot="table-th"
             :class="ui.th({
               class: [
@@ -826,6 +962,7 @@ defineExpose({
               getColumnStyles(header.column),
               resolveValue(header.column.columnDef.meta?.style?.th, header)
             ]"
+            v-bind="resolveValue(header.column.columnDef.meta?.attrs?.th, header)"
           >
             <slot :name="`${header.id}-footer`" v-bind="header.getContext()">
               <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.footer" :props="header.getContext()" />

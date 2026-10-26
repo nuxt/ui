@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { flushPromises } from '@vue/test-utils'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { stockFeatures } from '@tanstack/vue-table'
+import { aggregationFn_sum, cellSelectionFeature, cellSpanningFeature, columnGroupingFeature, createGroupedRowModel, rowAggregationFeature, stockFeatures } from '@tanstack/vue-table'
 import { upperFirst } from 'scule'
 import { renderEach } from '../component-render'
 import { UCheckbox, UButton, UBadge, UDropdownMenu } from '#components'
@@ -522,25 +522,28 @@ describe('Table', () => {
     expect(visibleThs[0]!.attributes('aria-sort')).toBe('descending')
   })
 
-  it('sets aria-sort on merged headers but not footer th elements', async () => {
+  it('spans a header over the placeholders above it', async () => {
     const groupedColumns: TableColumn<typeof data[number]>[] = [
       { header: 'Group', columns: [{ accessorKey: 'id', header: 'Id', footer: 'Id total', enableSorting: true }] },
       { accessorKey: 'email', header: 'Email', enableSorting: true }
     ]
 
     const wrapper = await mountSuspended(Table, {
-      props: { data, columns: groupedColumns as any, sorting: [{ id: 'email', desc: false }] }
+      props: { data, columns: groupedColumns as any, sorting: [{ id: 'email', desc: false }] },
+      slots: { 'email-header': () => 'Email slot' }
     })
 
-    const [, emailTh] = wrapper.findAll('thead th')
-    expect(emailTh!.text()).toBe('Email')
+    const [firstRow, secondRow] = wrapper.findAll('thead tr')
+    const [groupTh, emailTh] = firstRow!.findAll('th')
+    expect(groupTh!.attributes('aria-sort')).toBeUndefined()
     expect(emailTh!.attributes('rowspan')).toBe('2')
     expect(emailTh!.attributes('aria-sort')).toBe('ascending')
-    expect(wrapper.findAll('thead tr')[1]!.findAll('th').map(th => th.text())).toEqual(['Id'])
+    expect(emailTh!.text()).toBe('Email slot')
+    expect(secondRow!.findAll('th').map(th => th.text())).toEqual(['Id'])
 
     const footerThs = wrapper.findAll('tfoot th')
     expect(footerThs.length).toBeGreaterThan(0)
-    expect(footerThs.every(th => th.attributes('aria-sort') === undefined)).toBe(true)
+    expect(footerThs.every(th => th.attributes('aria-sort') === undefined && th.attributes('rowspan') === undefined)).toBe(true)
   })
 
   it('does not set aria-sort on th elements the table cannot sort', async () => {
@@ -582,7 +585,8 @@ describe('Table', () => {
     ['sorting', [], [{ id: 'id', desc: true }]],
     ['grouping', [], ['status']],
     ['expanded', {}, { 0: true }],
-    ['pagination', { pageIndex: 0, pageSize: 10 }, { pageIndex: 1, pageSize: 2 }]
+    ['pagination', { pageIndex: 0, pageSize: 10 }, { pageIndex: 1, pageSize: 2 }],
+    ['cellSelection', [], [{ anchorRowId: '0', anchorColumnId: 'id', focusRowId: '0', focusColumnId: 'id' }]]
   ])('updates a bound %s model through TanStack', async (key, initial, value) => {
     const onUpdate = vi.fn()
     const wrapper = await mountSuspended(Table, {
@@ -608,6 +612,109 @@ describe('Table', () => {
     await flushPromises()
 
     expect(wrapper.findAll('th').map(th => th.text())).not.toContain('Email')
+  })
+
+  it('renders aggregated cells with aggregatedCell and leaves placeholder cells empty', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data,
+        columns: [
+          { accessorKey: 'status', header: 'Status' },
+          { accessorKey: 'amount', header: 'Amount', aggregationFn: 'sum', aggregatedCell: ({ getValue }: any) => `Total ${getValue()}` }
+        ] as any,
+        grouping: ['status'],
+        expanded: true,
+        features: { columnGroupingFeature, rowAggregationFeature, groupedRowModel: createGroupedRowModel(), aggregationFns: { sum: aggregationFn_sum } }
+      }
+    })
+
+    const rows = wrapper.findAll('tbody tr')
+    const successTotal = data.filter(row => row.status === 'success').reduce((acc, row) => acc + row.amount, 0)
+    expect(rows[0]!.findAll('td').map(td => td.text())).toEqual(['success', `Total ${successTotal}`])
+    expect(rows[1]!.findAll('td')[0]!.text()).toBe('')
+  })
+
+  it('spans cells with the cell spanning feature', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data: [{ category: 'A', name: 'One', note: 'x' }, { category: 'A', name: 'Two', note: 'y' }, { category: 'B', name: 'Three', note: 'z' }],
+        columns: [
+          { accessorKey: 'category', header: 'Category', spanRows: true },
+          { accessorKey: 'name', header: 'Name', spanColumns: ({ row }: any) => row.original.category === 'B' ? 2 : 1 },
+          { accessorKey: 'note', header: 'Note' }
+        ] as any,
+        features: { cellSpanningFeature }
+      }
+    })
+
+    const rows = wrapper.findAll('tbody tr')
+    expect(rows[0]!.findAll('td')[0]!.attributes('rowspan')).toBe('2')
+    expect(rows[1]!.findAll('td').map(td => td.text())).toEqual(['Two', 'y'])
+    expect(rows[2]!.findAll('td').map(td => td.text())).toEqual(['B', 'Three'])
+    expect(rows[2]!.findAll('td')[1]!.attributes('colspan')).toBe('2')
+  })
+
+  it('selects cells with the pointer and the keyboard', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: { data: data.slice(0, 3), columns: [{ accessorKey: 'id' }, { accessorKey: 'email' }] as any, features: { cellSelectionFeature } },
+      attachTo: document.body
+    })
+
+    const firstCell = () => wrapper.findAll('tbody tr')[0]!.findAll('td')[0]!
+    await firstCell().trigger('mousedown', { button: 0 })
+    expect(firstCell().attributes('data-selected')).toBe('true')
+    expect(firstCell().attributes('tabindex')).toBe('0')
+
+    await firstCell().trigger('keydown', { key: 'ArrowDown', shiftKey: true })
+    expect(wrapper.findAll('tbody tr')[1]!.findAll('td')[0]!.attributes('data-selected')).toBe('true')
+    expect(firstCell().attributes('data-selected')).toBe('true')
+
+    await firstCell().trigger('keydown', { key: 'ArrowRight' })
+    expect(firstCell().attributes('data-selected')).toBe('false')
+    expect(wrapper.findAll('tbody tr')[0]!.findAll('td')[1]!.attributes('tabindex')).toBe('0')
+
+    wrapper.unmount()
+  })
+
+  it('renders a resize handle on columns that enable resizing', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: { data, columns: [{ accessorKey: 'id', header: 'Id', enableResizing: true, size: 120 }, { accessorKey: 'email', header: 'Email' }] as any }
+    })
+
+    const [idTh, emailTh] = wrapper.findAll('thead th')
+    expect(idTh!.find('[data-slot="table-resizer"]').exists()).toBe(true)
+    expect(idTh!.attributes('style')).toContain('width: 120px')
+    expect(emailTh!.find('[data-slot="table-resizer"]').exists()).toBe(false)
+  })
+
+  it('binds meta attrs on rows and cells', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data: data.slice(0, 1),
+        columns: [{ accessorKey: 'id', header: 'Id', meta: { attrs: { th: { 'data-th': 'id' }, td: (cell: any) => ({ 'data-td': cell.getValue() }) } } }] as any,
+        meta: { attrs: { tr: (row: any) => ({ 'data-id': row.original.id, 'tabindex': -1 }) } },
+        onSelect: () => {}
+      }
+    })
+
+    const tr = wrapper.find('tbody tr')
+    expect(tr.attributes('data-id')).toBe(data[0]!.id)
+    expect(tr.attributes('tabindex')).toBe('-1')
+    expect(tr.find('td').attributes('data-td')).toBe(data[0]!.id)
+    expect(wrapper.find('thead th').attributes('data-th')).toBe('id')
+  })
+
+  it('marks rows selectable from an enableRowSelection predicate', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data: data.slice(0, 2),
+        columns: [{ accessorKey: 'id' }] as any,
+        options: { enableRowSelection: (row: any) => row.index === 0 },
+        onSelect: () => {}
+      }
+    })
+
+    expect(wrapper.findAll('tbody tr').map(tr => tr.attributes('data-selectable'))).toEqual(['true', 'false'])
   })
 
   describe('defaultColumn', () => {
