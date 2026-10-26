@@ -697,4 +697,4 @@ watch(status, (value) => {
 ```
 ::
 
-Every message goes through the queue, so a message sent after an `error` still waits behind the ones queued before it. Stopping the response sends the next queued message right away.
+After an `error`, the queue waits until the chat is `ready` again, for example once the user reloads the failed response. Stopping the response sends the next queued message right away.
