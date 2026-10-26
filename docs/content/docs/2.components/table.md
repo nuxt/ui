@@ -365,7 +365,7 @@ You can group rows based on a given column value and show/hide sub rows via some
 #### Important parts
 
 * Add `grouping` prop with an array of column ids you want to group by.
-* Add `features` prop with `columnGroupingFeature`, `rowAggregationFeature`, a `groupedRowModel` and the `aggregationFns` your columns use, all imported from `@tanstack/vue-table`.
+* Add `features` prop with `columnGroupingFeature`, `rowAggregationFeature`, `groupedRowModel: createGroupedRowModel()` and an `aggregationFns` map of the aggregation functions your columns use, like `{ sum: aggregationFn_sum }`, all imported from `@tanstack/vue-table`.
 * Add `options` prop for the grouping options like `groupedColumnMode`.
 * Expand rows via `row.toggleExpanded()` method on any cell of the row. Keep in mind, it also toggles `#expanded` slot.
 * Use `aggregationFn` on column definition to define how to aggregate the rows.
