@@ -461,7 +461,7 @@ You can use this to navigate to a page, open a modal or even to select the row m
 ::
 
 ::note
-Clickable rows get `tabindex="0"` to be reachable with the keyboard. In a long table, you can take them out of the tab order with `:meta="{ attrs: { tr: { tabindex: -1 } } }"`.
+Clickable rows get `tabindex="0"` to be reachable with the keyboard. In a long table, you can take them out of the tab order with `:meta="{ attrs: { tr: { tabindex: -1 } } }"`. When `enableRowSelection` is a function in the `options` prop, the rows it rejects don't emit `select` and aren't styled as clickable.
 ::
 
 ### With row context menu event
