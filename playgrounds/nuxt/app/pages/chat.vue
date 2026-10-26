@@ -31,10 +31,13 @@ const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalR
 
 async function onSubmit() {
   const text = input.value
-  const parts = await toFileUIParts(files.value)
+  const submitted = files.value
 
+  // Cleared before the files are read, so a second submit meanwhile has nothing to send
   input.value = ''
   files.value = []
+
+  const parts = await toFileUIParts(submitted)
 
   // An empty text part is rejected by some providers, send the files alone
   sendMessage(text.trim() ? { text, files: parts } : { files: parts })

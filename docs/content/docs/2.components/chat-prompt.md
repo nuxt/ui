@@ -73,11 +73,14 @@ const files = ref<File[]>([])
 const { messages, status, sendMessage } = useChat()
 
 async function onSubmit() {
-  const parts = await toFileUIParts(files.value)
-  sendMessage(input.value.trim() ? { text: input.value, files: parts } : { files: parts })
+  const text = input.value
+  const submitted = files.value
 
   input.value = ''
   files.value = []
+
+  const parts = await toFileUIParts(submitted)
+  sendMessage(text.trim() ? { text, files: parts } : { files: parts })
 }
 </script>
 

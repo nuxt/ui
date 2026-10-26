@@ -126,6 +126,10 @@ const hasFiles = computed(() => files.value !== undefined)
 const canAttach = computed(() => hasFiles.value && !props.disabled && !props.error)
 
 function addFiles(newFiles: File[]) {
+  if (!canAttach.value) {
+    return
+  }
+
   files.value = props.multiple ? [...(files.value ?? []), ...newFiles] : newFiles.slice(0, 1)
 }
 
@@ -133,13 +137,19 @@ function removeFile(index: number) {
   files.value = files.value?.filter((_, i) => i !== index)
 }
 
-const { isDragging, open, dropzoneRef } = useFileUpload({
+const { isDragging, open: openFileDialog, dropzoneRef } = useFileUpload({
   accept: toRef(() => props.accept),
   multiple: toRef(() => props.multiple),
   dropzone: canAttach,
   reset: true,
   onUpdate: addFiles
 })
+
+function open() {
+  if (canAttach.value) {
+    openFileDialog()
+  }
+}
 
 // The root is the drop zone, `Primitive` hands back a component instance
 function setRoot(el: Element | ComponentPublicInstance | null) {

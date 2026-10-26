@@ -97,7 +97,7 @@ const fileType = computed(() => props.type ?? props.file?.type)
 // A `File` has no URL, preview it through an object URL released when the file changes
 const fileUrl = ref<string>()
 watchEffect((onCleanup) => {
-  if (props.url || !props.file?.type.startsWith('image/')) {
+  if (props.url || !props.file || !fileType.value?.startsWith('image/')) {
     fileUrl.value = undefined
     return
   }

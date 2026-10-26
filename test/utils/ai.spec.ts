@@ -37,4 +37,10 @@ describe('toFileUIParts', () => {
 
     expect(parts).toEqual([{ type: 'file', mediaType: 'text/plain', filename: 'hello.txt', url: 'data:text/plain;base64,aGVsbG8=' }])
   })
+
+  it('falls back to a generic media type', async () => {
+    const [part] = await toFileUIParts([new File(['hello'], 'hello')])
+
+    expect(part!.mediaType).toBe('application/octet-stream')
+  })
 })

@@ -60,7 +60,8 @@ export function isToolApprovalPending(part: { state: string }): boolean {
 export function toFileUIParts(files: File[]): Promise<FileUIPart[]> {
   return Promise.all(files.map(file => new Promise<FileUIPart>((resolve, reject) => {
     const reader = new FileReader()
-    reader.onload = () => resolve({ type: 'file', mediaType: file.type, filename: file.name, url: reader.result as string })
+    // A browser leaves `type` empty when it can't tell the media type
+    reader.onload = () => resolve({ type: 'file', mediaType: file.type || 'application/octet-stream', filename: file.name, url: reader.result as string })
     reader.onerror = () => reject(reader.error)
     reader.readAsDataURL(file)
   })))
