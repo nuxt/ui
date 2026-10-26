@@ -79,7 +79,7 @@ function getSources(message: ChatMessage) {
       >
         <ProsePre
           :copy="false"
-          :ui="{ root: 'my-0', base: 'text-xs/5' }"
+          :ui="{ root: 'my-0', base: 'text-xs/5 text-default' }"
         >
           {{ part.state === 'output-error' ? part.errorText : part.output?.stdout }}
         </ProsePre>
