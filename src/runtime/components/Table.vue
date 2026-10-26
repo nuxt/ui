@@ -424,22 +424,17 @@ const tableApi: VueTable<TableFeatures, T> = useTable<TableFeatures, T>({
   state
 })
 
-// TanStack fills the rows above a shallow column with placeholders and puts its header in the bottom row.
-// Keep only the top placeholder of each chain (header groups are numbered by column depth) and render the real header there with a `rowspan`.
+// TanStack gives a placeholder heading a chain of its column's headers the `rowSpan` of the chain, and the headers below it a `rowSpan` of 0.
+// The leaf at the end of the chain is rendered in the placeholder's cell, so slots, sorting and `aria-sort` get the real header.
 const headerGroups = computed(() => tableApi.getHeaderGroups().map(headerGroup => ({
-  ...headerGroup,
-  headers: headerGroup.headers
-    .filter(header => header.column.depth >= headerGroup.depth)
-    .map((header) => {
-      let rowSpan = 1
-
-      while (header.isPlaceholder && header.subHeaders[0]) {
-        rowSpan++
-        header = header.subHeaders[0]
-      }
-
-      return { header, rowSpan }
-    })
+  id: headerGroup.id,
+  headers: headerGroup.headers.filter(header => header.rowSpan !== 0).map((header) => {
+    const rowSpan = header.rowSpan
+    while (rowSpan > 1 && header.isPlaceholder && header.subHeaders[0]?.column === header.column) {
+      header = header.subHeaders[0]
+    }
+    return { header, rowSpan }
+  })
 })))
 
 const rows = computed(() => tableApi.getRowModel().rows)
@@ -568,7 +563,7 @@ function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
 }
 
 function onRowSelect(e: Event, row: TableRow<T>) {
-  if (!props.onSelect) {
+  if (!props.onSelect || !canSelectRow(row)) {
     return
   }
   const target = e.target as HTMLElement
@@ -607,12 +602,13 @@ function onRowContextmenu(e: Event, row: TableRow<T>) {
   }
 }
 
-// A per-row `enableRowSelection` predicate also decides which rows look selectable.
-function isRowSelectable(row: TableRow<T>) {
-  if (!props.onSelect && !props.onHover && !props.onContextmenu) {
-    return false
-  }
+// A per-row `enableRowSelection` predicate turns the rows it rejects inert: no selectable styles, no `tabindex` and no `select` event.
+function canSelectRow(row: TableRow<T>) {
   return typeof tableApi.options.enableRowSelection !== 'function' || row.getCanSelect()
+}
+
+function isRowSelectable(row: TableRow<T>) {
+  return (!!props.onSelect || !!props.onHover || !!props.onContextmenu) && canSelectRow(row)
 }
 
 function isCellCovered(cell: Cell<TableFeatures, T, unknown>) {
@@ -679,7 +675,7 @@ function isColumnResizable(column: Column<TableFeatures, T, unknown>) {
 }
 
 function isResizable(header: Header<TableFeatures, T, unknown>) {
-  return (!header.isPlaceholder || header.rowSpan > 1) && isColumnResizable(header.column)
+  return !header.isPlaceholder && isColumnResizable(header.column)
 }
 
 // Once a column can be resized, every header and the table take their TanStack size.
@@ -691,12 +687,6 @@ function getHeaderStyles(header: Header<TableFeatures, T, unknown>) {
     styles.width = `${header.getSize()}px`
   }
   return styles
-}
-
-// A placeholder that spans the rows below it renders its column's header, under the column's slot name.
-// The headers it spans have a `rowSpan` of 0 and are not rendered.
-function getHeaderSlotId(header: Header<TableFeatures, T, unknown>) {
-  return header.isPlaceholder && header.rowSpan > 1 ? header.column.id : header.id
 }
 
 function resolveValue<T, A = undefined>(prop: T | ((arg: A) => T), arg?: A): T | undefined {
@@ -728,7 +718,7 @@ function isSortable(column: Column<TableFeatures, T, unknown>) {
 }
 
 function getAriaSort(header: Header<TableFeatures, T, unknown>): AriaAttributes['aria-sort'] {
-  if ((header.isPlaceholder && header.rowSpan <= 1) || !isSortable(header.column)) {
+  if (header.isPlaceholder || !isSortable(header.column)) {
     return undefined
   }
 
@@ -774,7 +764,7 @@ defineExpose({
       :data-selectable="isRowSelectable(row)"
       :data-expanded="row.getIsExpanded()"
       :data-pinned="row.getIsPinned() || undefined"
-      :tabindex="props.onSelect ? 0 : undefined"
+      :tabindex="props.onSelect && canSelectRow(row) ? 0 : undefined"
       data-slot="table-tr"
       :class="ui.tr({
         class: [
@@ -847,45 +837,44 @@ defineExpose({
       </caption>
 
       <thead data-slot="table-thead" :class="ui.thead({ class: [props.ui?.thead] })">
-        <tr v-for="headerGroup in tableApi.getHeaderGroups()" :key="headerGroup.id" data-slot="table-tr" :class="ui.tr({ class: [props.ui?.tr] })">
-          <template v-for="header in headerGroup.headers" :key="header.id">
-            <th
-              v-if="header.rowSpan !== 0"
-              :data-pinned="header.column.getIsPinned()"
-              :scope="header.colSpan > 1 ? 'colgroup' : 'col'"
-              :colspan="header.colSpan > 1 ? header.colSpan : undefined"
-              :rowspan="header.rowSpan > 1 ? header.rowSpan : undefined"
-              :aria-sort="getAriaSort(header)"
-              data-slot="table-th"
-              :class="ui.th({
-                class: [
-                  props.ui?.th,
-                  resolveValue(header.column.columnDef.meta?.class?.th, header)
-                ],
-                pinned: !!header.column.getIsPinned()
-              })"
-              :style="[
-                getHeaderStyles(header),
-                resolveValue(header.column.columnDef.meta?.style?.th, header)
-              ]"
-              v-bind="resolveValue(header.column.columnDef.meta?.attrs?.th, header)"
-            >
-              <slot :name="`${getHeaderSlotId(header)}-header`" v-bind="header.getContext()">
-                <FlexRender v-if="!header.isPlaceholder || header.rowSpan > 1" :render="header.column.columnDef.header" :props="header.getContext()" />
-              </slot>
+        <tr v-for="headerGroup in headerGroups" :key="headerGroup.id" data-slot="table-tr" :class="ui.tr({ class: [props.ui?.tr] })">
+          <th
+            v-for="{ header, rowSpan } in headerGroup.headers"
+            :key="header.id"
+            :data-pinned="header.column.getIsPinned()"
+            :scope="header.colSpan > 1 ? 'colgroup' : 'col'"
+            :colspan="header.colSpan > 1 ? header.colSpan : undefined"
+            :rowspan="rowSpan > 1 ? rowSpan : undefined"
+            :aria-sort="getAriaSort(header)"
+            data-slot="table-th"
+            :class="ui.th({
+              class: [
+                props.ui?.th,
+                resolveValue(header.column.columnDef.meta?.class?.th, header)
+              ],
+              pinned: !!header.column.getIsPinned()
+            })"
+            :style="[
+              getHeaderStyles(header),
+              resolveValue(header.column.columnDef.meta?.style?.th, header)
+            ]"
+            v-bind="resolveValue(header.column.columnDef.meta?.attrs?.th, header)"
+          >
+            <slot :name="`${header.id}-header`" v-bind="header.getContext()">
+              <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header" :props="header.getContext()" />
+            </slot>
 
-              <div
-                v-if="isResizable(header)"
-                aria-hidden="true"
-                :data-resizing="header.column.getIsResizing()"
-                data-slot="table-resizer"
-                :class="ui.resizer({ class: props.ui?.resizer })"
-                @mousedown="header.getResizeHandler()($event)"
-                @touchstart.passive="header.getResizeHandler()($event)"
-                @dblclick="header.column.resetSize()"
-              />
-            </th>
-          </template>
+            <div
+              v-if="isResizable(header)"
+              aria-hidden="true"
+              :data-resizing="header.column.getIsResizing()"
+              data-slot="table-resizer"
+              :class="ui.resizer({ class: props.ui?.resizer })"
+              @mousedown="header.getResizeHandler()($event)"
+              @touchstart.passive="header.getResizeHandler()($event)"
+              @dblclick="header.column.resetSize()"
+            />
+          </th>
         </tr>
 
         <tr data-slot="table-separator" :class="ui.separator({ class: [props.ui?.separator] })" />

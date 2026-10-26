@@ -704,17 +704,25 @@ describe('Table', () => {
     expect(wrapper.find('thead th').attributes('data-th')).toBe('id')
   })
 
-  it('marks rows selectable from an enableRowSelection predicate', async () => {
+  it('makes the rows an enableRowSelection predicate rejects inert', async () => {
+    const onSelect = vi.fn()
     const wrapper = await mountSuspended(Table, {
       props: {
         data: data.slice(0, 2),
         columns: [{ accessorKey: 'id' }] as any,
         options: { enableRowSelection: (row: any) => row.index === 0 },
-        onSelect: () => {}
+        onSelect
       }
     })
 
-    expect(wrapper.findAll('tbody tr').map(tr => tr.attributes('data-selectable'))).toEqual(['true', 'false'])
+    const rows = wrapper.findAll('tbody tr')
+    expect(rows.map(tr => tr.attributes('data-selectable'))).toEqual(['true', 'false'])
+    expect(rows.map(tr => tr.attributes('tabindex'))).toEqual(['0', undefined])
+
+    await rows[1]!.trigger('click')
+    expect(onSelect).not.toHaveBeenCalled()
+    await rows[0]!.trigger('click')
+    expect(onSelect).toHaveBeenCalledOnce()
   })
 
   describe('defaultColumn', () => {
