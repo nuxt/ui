@@ -112,80 +112,75 @@ function generateMessages() {
       :assistant="{ actions: [{ label: 'Edit', icon: 'i-lucide-pencil', onClick: () => console.log('edit') }] }"
       :user="{ actions: [{ label: 'Edit', icon: 'i-lucide-pencil', onClick: () => console.log('edit') }], icon: 'i-lucide-user' }"
     >
-      <template #content="{ message, streaming }">
-        <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
-          <UChatReasoning
-            v-if="isReasoningUIPart(part)"
-            :text="part.text"
+      <template #part="{ part, message, streaming }">
+        <UChatReasoning
+          v-if="isReasoningUIPart(part)"
+          :text="part.text"
+          :streaming="isPartStreaming(part, streaming)"
+          chevron="leading"
+        >
+          <Markdown
+            :value="part.text"
             :streaming="isPartStreaming(part, streaming)"
-            chevron="leading"
-          >
-            <Markdown
-              :value="part.text"
-              :streaming="isPartStreaming(part, streaming)"
-              :plugins="[shiki()]"
-              class="*:first:mt-0 *:last:mb-0"
-            />
-          </UChatReasoning>
+            :plugins="[shiki()]"
+            class="*:first:mt-0 *:last:mb-0"
+          />
+        </UChatReasoning>
 
-          <template v-else-if="isTextUIPart(part)">
-            <Markdown
-              v-if="message.role === 'assistant'"
-              :value="part.text"
-              :streaming="isPartStreaming(part, streaming)"
-              :plugins="[shiki()]"
-              class="*:first:mt-0 *:last:mb-0"
-            />
-            <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
-              {{ part.text }}
-            </p>
-          </template>
+        <Markdown
+          v-else-if="isTextUIPart(part) && message.role === 'assistant'"
+          :value="part.text"
+          :streaming="isPartStreaming(part, streaming)"
+          :plugins="[shiki()]"
+          class="*:first:mt-0 *:last:mb-0"
+        />
 
-          <UChatTool
-            v-else-if="isToolUIPart(part) && getToolName(part) === 'web_search'"
-            :text="isToolStreaming(part, streaming) ? 'Searching the web...' : part.state === 'output-available' ? 'Searched the web' : 'Stopped searching the web'"
-            :suffix="(part.input as { query?: string })?.query"
-            :streaming="isToolStreaming(part, streaming)"
-            chevron="leading"
-          >
-            <div v-if="part.output && (part.output as any[]).length" class="p-1 border border-default rounded-md max-h-40 overflow-y-auto">
-              <a
-                v-for="source in (part.output as any[])"
-                :key="source.url"
-                :href="source.url"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex items-center gap-2 px-2 py-1 text-sm text-muted hover:text-default hover:bg-elevated/50 transition-colors min-w-0 rounded-md"
+        <UChatTool
+          v-else-if="isToolUIPart(part) && getToolName(part) === 'web_search'"
+          :text="isToolStreaming(part, streaming) ? 'Searching the web...' : part.state === 'output-available' ? 'Searched the web' : part.state === 'output-error' ? 'Failed to search the web' : 'Stopped searching the web'"
+          :suffix="(part.input as { query?: string })?.query"
+          :streaming="isToolStreaming(part, streaming)"
+          :error="part.state === 'output-error'"
+          chevron="leading"
+        >
+          <div v-if="part.output && (part.output as any[]).length" class="p-1 border border-default rounded-md max-h-40 overflow-y-auto">
+            <a
+              v-for="source in (part.output as any[])"
+              :key="source.url"
+              :href="source.url"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2 px-2 py-1 text-sm text-muted hover:text-default hover:bg-elevated/50 transition-colors min-w-0 rounded-md"
+            >
+              <img
+                :src="getFaviconUrl(source.url)"
+                :alt="getDomain(source.url)"
+                class="size-4 shrink-0 rounded-sm"
+                loading="lazy"
+                @error="($event.target as HTMLImageElement).style.display = 'none'"
               >
-                <img
-                  :src="getFaviconUrl(source.url)"
-                  :alt="getDomain(source.url)"
-                  class="size-4 shrink-0 rounded-sm"
-                  loading="lazy"
-                  @error="($event.target as HTMLImageElement).style.display = 'none'"
-                >
-                <span class="truncate">{{ source.title || source.url }}</span>
-                <span class="text-xs text-dimmed ms-auto shrink-0">{{ getDomain(source.url) }}</span>
-              </a>
-            </div>
-          </UChatTool>
+              <span class="truncate">{{ source.title || source.url }}</span>
+              <span class="text-xs text-dimmed ms-auto shrink-0">{{ getDomain(source.url) }}</span>
+            </a>
+          </div>
+        </UChatTool>
 
-          <UChatTool
-            v-else-if="isToolUIPart(part) && getToolName(part) === 'send_email'"
-            :text="getEmailToolText(part.state)"
-            :suffix="(part.input as { to?: string })?.to"
-            icon="i-lucide-mail"
-            chevron="leading"
-            variant="card"
-            :streaming="isToolStreaming(part, streaming)"
-            :actions="part.state === 'approval-requested' ? [
-              { label: 'Approve', color: 'neutral', onClick: () => addToolApprovalResponse({ id: part.approval!.id, approved: true }) },
-              { label: 'Deny', color: 'neutral', variant: 'soft', onClick: () => addToolApprovalResponse({ id: part.approval!.id, approved: false }) }
-            ] : undefined"
-          >
-            <pre class="text-xs whitespace-pre-wrap">{{ JSON.stringify(part.input, null, 2) }}</pre>
-          </UChatTool>
-        </template>
+        <UChatTool
+          v-else-if="isToolUIPart(part) && getToolName(part) === 'send_email'"
+          :text="getEmailToolText(part.state)"
+          :suffix="(part.input as { to?: string })?.to"
+          icon="i-lucide-mail"
+          chevron="leading"
+          variant="card"
+          :streaming="isToolStreaming(part, streaming)"
+          :error="part.state === 'output-error'"
+          :actions="part.state === 'approval-requested' ? [
+            { label: 'Approve', color: 'neutral', onClick: () => addToolApprovalResponse({ id: part.approval!.id, approved: true }) },
+            { label: 'Deny', color: 'neutral', variant: 'soft', onClick: () => addToolApprovalResponse({ id: part.approval!.id, approved: false }) }
+          ] : undefined"
+        >
+          <pre class="text-xs whitespace-pre-wrap">{{ JSON.stringify(part.input, null, 2) }}</pre>
+        </UChatTool>
       </template>
     </UChatMessages>
 

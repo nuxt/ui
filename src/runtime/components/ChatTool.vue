@@ -36,6 +36,17 @@ export interface ChatToolProps extends Pick<CollapsibleRootProps, 'defaultOpen' 
    */
   loadingIcon?: IconProps['name']
   /**
+   * Whether the tool call failed.
+   * @defaultValue false
+   */
+  error?: boolean
+  /**
+   * The icon displayed when the tool call failed.
+   * @defaultValue appConfig.ui.icons.error
+   * @IconifyIcon
+   */
+  errorIcon?: IconProps['name']
+  /**
    * Whether the tool content is currently streaming.
    * @defaultValue false
    */
@@ -92,6 +103,7 @@ import UChatShimmer from './ChatShimmer.vue'
 const _props = withDefaults(defineProps<ChatToolProps>(), {
   open: undefined,
   loading: false,
+  error: false,
   streaming: false,
   variant: 'inline',
   chevron: 'trailing',
@@ -108,7 +120,8 @@ const appConfig = useAppConfig() as ChatTool['AppConfig']
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatTool || {}) })({
   variant: props.variant,
   chevron: props.chevron,
-  loading: props.loading
+  loading: props.loading,
+  error: props.error && !props.loading
 }))
 
 const isControlled = computed(() => props.open !== undefined)
@@ -132,7 +145,12 @@ watch(() => !!props.actions?.length, (hasActions) => {
 }, { immediate: true })
 
 const resolvedLoadingIcon = computed(() => props.loadingIcon || appConfig.ui.icons?.loading)
-const resolvedIcon = computed(() => props.loading ? resolvedLoadingIcon.value : props.icon)
+const resolvedIcon = computed(() => {
+  if (props.loading) return resolvedLoadingIcon.value
+  if (props.error) return props.errorIcon || appConfig.ui.icons?.error
+
+  return props.icon
+})
 const chevronIconName = computed(() => props.chevronIcon || appConfig.ui.icons?.chevronDown)
 </script>
 
