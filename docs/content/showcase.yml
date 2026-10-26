@@ -95,6 +95,11 @@ items:
     url: https://supersaas.dev/
   - name: The Companies API
     url: https://www.thecompaniesapi.com/
+  - name: ThinkBIG Studio
+    url: https://www.thinkbig-studio.com/
+    screenshotOptions:
+      width: 1024
+      delay: 3
   - name: Thuprai
     url: https://thuprai.com/
   - name: Ticket.kg
