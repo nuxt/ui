@@ -234,8 +234,8 @@ const ui = {
         </template>
 
         <template #body>
-          <!-- The template caps the column at --ui-container: 3xl. -->
-          <UContainer class="flex-1 flex flex-col gap-4 sm:gap-6" style="--ui-container: var(--container-3xl)">
+          <!-- The template caps the column at --ui-container-width: 3xl. -->
+          <UContainer class="flex-1 flex flex-col gap-4 sm:gap-6" style="--ui-container-width: var(--container-3xl)">
             <UTheme :ui="ui">
               <UChatMessages
                 :messages="messages"
