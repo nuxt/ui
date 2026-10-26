@@ -2,7 +2,7 @@ import { fileURLToPath } from 'node:url'
 import { camelCase, kebabCase } from 'scule'
 import { genExport } from 'knitwork'
 import colors from 'tailwindcss/colors'
-import { addTemplate, addTypeTemplate, hasNuxtModule, logger, updateTemplates, getLayerDirectories } from '@nuxt/kit'
+import { addTemplate, addTypeTemplate, hasNuxtModule, logger, getLayerDirectories } from '@nuxt/kit'
 import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
 import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
@@ -15,6 +15,9 @@ import * as themeContent from './theme/content'
 // The classes components pass to `usePrefix`, which only adds the prefix at
 // runtime, so Tailwind never sees them prefixed
 export const prefixedClasses = ['absolute', 'dark:block', 'dark:hidden', 'dark:inline-block', 'focus:outline-none', 'hidden', 'in-[.ui-macos]:hidden', 'in-[.ui-macos]:inline', 'inset-0', 'lg:block', 'lg:flex', 'lg:hidden', 'peer', 'sm:block']
+
+// The files `experimental.componentDetection` scans for component usage
+const DETECTION_SOURCE_RE = /\.(?:vue|ts|mts|js|mjs|cjs|tsx|jsx)$/
 
 export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt?: Nuxt, resolve?: Resolver['resolve'], vue?: { detectedComponents?: Set<string> }) {
   const templates: NuxtTemplate[] = []
@@ -30,6 +33,8 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
       templates.push({
         filename: `ui/${path ? path + '/' : ''}${kebabCase(component)}.ts`,
         write: true,
+        // Built from the module options alone, so Nuxt can skip it when a file is edited
+        dependsOn: [],
         getContents: async () => {
           const template = (theme as any)[component]
           let result = typeof template === 'function' ? template(options) : template
@@ -115,6 +120,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     templates.push({
       filename: `ui/${path}/index.ts`,
       write: true,
+      dependsOn: [],
       getContents: () => Object.keys(themeProse).map(component => `export { default as ${component} } from './${kebabCase(component)}'`).join('\n')
     })
   }
@@ -289,6 +295,11 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   templates.push({
     filename: 'ui.css',
     write: true,
+    // With component detection, the sources depend on the contents of the layer files
+    // `detectUsedComponents` scans. Otherwise only on options and which layers exist.
+    dependsOn: options.experimental?.componentDetection && nuxt
+      ? ({ path }) => DETECTION_SOURCE_RE.test(path) && getLayerDirectories(nuxt).some(layer => path.startsWith(layer.app))
+      : [],
     getContents: async () => {
       const sources = await generateSources()
       const prefix = options.theme?.prefix ? `${options.theme.prefix}:` : ''
@@ -313,12 +324,14 @@ ${themeBlocks}`
   templates.push({
     filename: 'ui.static.css',
     write: true,
+    dependsOn: [],
     getContents: () => themeBlocks
   })
 
   templates.push({
     filename: 'ui/index.ts',
     write: true,
+    dependsOn: [],
     getContents: () => [
       ...Object.keys(theme).map(component => `export { default as ${component} } from './${kebabCase(component)}'`),
       ...(hasContent ? Object.keys(themeContent).map(component => `export { default as ${component} } from './content/${kebabCase(component)}'`) : []),
@@ -329,6 +342,7 @@ ${themeBlocks}`
   // FIXME: `typeof colors[number]` should include all colors from the theme
   templates.push({
     filename: 'types/ui.d.ts',
+    dependsOn: [],
     getContents: () => {
       const iconKeys = Object.keys(uiConfig?.icons || {})
       const iconUnion = iconKeys.length ? iconKeys.map(i => JSON.stringify(i)).join(' | ') : 'string'
@@ -376,6 +390,8 @@ export {}
   templates.push({
     filename: 'ui-image-component.ts',
     write: true,
+    // `app.components` only changes when a file is added or removed
+    dependsOn: [],
     getContents: ({ app }) => {
       const image = app?.components?.find(c => c.pascalName === 'NuxtImg' && !/nuxt(?:-nightly)?\/dist\/app/.test(c.filePath))
 
@@ -399,12 +415,4 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt, resolve: Resolv
   nuxt.hook('prepare:types', ({ references }) => {
     references.push({ path: resolve('./runtime/types/app.config.d.ts') })
   })
-
-  if (options.experimental?.componentDetection && nuxt.options.dev) {
-    nuxt.hook('builder:watch', async (_, path) => {
-      if (/\.(?:vue|ts|mts|js|mjs|cjs|tsx|jsx)$/.test(path)) {
-        await updateTemplates({ filter: template => template.filename === 'ui.css' })
-      }
-    })
-  }
 }
