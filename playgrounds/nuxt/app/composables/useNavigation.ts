@@ -14,6 +14,7 @@ const components = [
   'card',
   'carousel',
   'chart',
+  'chat-attachment',
   'chat-message',
   'chat-prompt',
   'chat-reasoning',

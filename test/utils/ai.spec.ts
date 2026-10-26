@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { isPartStreaming, isToolStreaming } from '../../src/runtime/utils/ai'
+import { isPartStreaming, isToolStreaming, toFileUIParts } from '../../src/runtime/utils/ai'
 
 describe('isToolStreaming', () => {
   it('is streaming until the tool reaches a terminal state', () => {
@@ -28,5 +28,13 @@ describe('isPartStreaming', () => {
     expect(isPartStreaming({ state: 'streaming' }, true)).toBe(true)
     expect(isPartStreaming({ state: 'streaming' }, false)).toBe(false)
     expect(isPartStreaming({ state: 'done' }, true)).toBe(false)
+  })
+})
+
+describe('toFileUIParts', () => {
+  it('converts files to data URL file parts', async () => {
+    const parts = await toFileUIParts([new File(['hello'], 'hello.txt', { type: 'text/plain' })])
+
+    expect(parts).toEqual([{ type: 'file', mediaType: 'text/plain', filename: 'hello.txt', url: 'data:text/plain;base64,aGVsbG8=' }])
   })
 })

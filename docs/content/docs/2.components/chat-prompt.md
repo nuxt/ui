@@ -44,6 +44,63 @@ props:
 ---
 ::
 
+### Files :badge{label="Soon" class="align-text-top"}
+
+Use the `v-model:files` directive to let users attach files. They can paste them in the textarea or drop them on the prompt, and each one shows above the textarea as a [ChatAttachment](/docs/components/chat-attachment) they can remove. The `#footer` slot receives an `open` function to pick files from a button.
+
+::component-example
+---
+collapse: true
+name: 'chat-prompt-files-example'
+---
+::
+
+::note
+Use the `accept` prop to restrict the file types and set `multiple` to `false` to keep a single file. The form is submitted with files even when the textarea is empty. While a file is dragged over the prompt, its root gets a `data-dragging` attribute you can style.
+::
+
+::tip
+Use the `toFileUIParts` utility from `@nuxt/ui/utils/ai` to send the files as data URLs with the AI SDK, and the `#files` slot of [ChatMessages](/docs/components/chat-messages) to display them in the conversation.
+
+```vue
+<script setup lang="ts">
+import { useChat } from '@ai-sdk/vue'
+import { toFileUIParts } from '@nuxt/ui/utils/ai'
+
+const input = ref('')
+const files = ref<File[]>([])
+
+const { messages, status, sendMessage } = useChat()
+
+async function onSubmit() {
+  const parts = await toFileUIParts(files.value)
+  sendMessage(input.value.trim() ? { text: input.value, files: parts } : { files: parts })
+
+  input.value = ''
+  files.value = []
+}
+</script>
+
+<template>
+  <UChatMessages :messages="messages" :status="status">
+    <template #files="{ parts }">
+      <UChatAttachment
+        v-for="(part, index) in parts"
+        :key="index"
+        :name="part.filename"
+        :type="part.mediaType"
+        :url="part.url"
+      />
+    </template>
+  </UChatMessages>
+
+  <UChatPrompt v-model="input" v-model:files="files" @submit="onSubmit">
+    <UChatPromptSubmit :status="status" />
+  </UChatPrompt>
+</template>
+```
+::
+
 ## Examples
 
 ::tip{to="/docs/components/chat"}
@@ -128,6 +185,7 @@ When accessing the component via a template ref, you can use the following:
 | Name | Type |
 | ---- | ---- |
 | `textareaRef`{lang="ts-type"} | `Ref<HTMLTextAreaElement \| null>`{lang="ts-type"} |
+| `open()`{lang="ts-type"} | `void`{lang="ts-type"} |
 
 ## Theme
 
