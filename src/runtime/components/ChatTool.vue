@@ -133,13 +133,14 @@ function setOpen(value: boolean) {
   emits('update:open', value)
 }
 
-const hasContent = computed(() => !!slots.default)
+// Read on every render, `slots` isn't reactive and a conditional default slot can appear later
+const hasContent = () => !!slots.default
 
 // Auto-open when actions first appear (e.g. a pending tool approval) so the content
 // is visible while the user decides. Uncontrolled only, respects an explicit `defaultOpen`,
 // and fires once so the user can still collapse it.
 watch(() => !!props.actions?.length, (hasActions) => {
-  if (hasActions && hasContent.value && props.open === undefined && props.defaultOpen === undefined) {
+  if (hasActions && hasContent() && props.open === undefined && props.defaultOpen === undefined) {
     internalOpen.value = true
   }
 }, { immediate: true })
@@ -164,21 +165,21 @@ const chevronIconName = computed(() => props.chevronIcon || appConfig.ui.icons?.
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:open="setOpen"
   >
-    <CollapsibleTrigger as-child :disabled="!hasContent">
+    <CollapsibleTrigger as-child :disabled="!hasContent()">
       <button
         type="button"
         data-slot="trigger"
         :class="ui.trigger({ class: props.ui?.trigger })"
       >
-        <span v-if="resolvedIcon || (hasContent && props.chevron === 'leading')" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+        <span v-if="resolvedIcon || (hasContent() && props.chevron === 'leading')" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
           <UIcon
             v-if="resolvedIcon"
             :name="resolvedIcon"
             data-slot="leadingIcon"
-            :class="ui.leadingIcon({ class: props.ui?.leadingIcon, alone: !(hasContent && props.chevron === 'leading') })"
+            :class="ui.leadingIcon({ class: props.ui?.leadingIcon, alone: !(hasContent() && props.chevron === 'leading') })"
           />
           <UIcon
-            v-if="hasContent && props.chevron === 'leading'"
+            v-if="hasContent() && props.chevron === 'leading'"
             :name="chevronIconName"
             data-slot="chevronIcon"
             :class="ui.chevronIcon({ class: props.ui?.chevronIcon, alone: !resolvedIcon })"
@@ -192,7 +193,7 @@ const chevronIconName = computed(() => props.chevronIcon || appConfig.ui.icons?.
         </span>
 
         <UIcon
-          v-if="hasContent && props.chevron === 'trailing'"
+          v-if="hasContent() && props.chevron === 'trailing'"
           :name="chevronIconName"
           data-slot="trailingIcon"
           :class="ui.trailingIcon({ class: props.ui?.trailingIcon })"
@@ -209,7 +210,7 @@ const chevronIconName = computed(() => props.chevronIcon || appConfig.ui.icons?.
     <div
       v-if="props.actions?.length || !!slots.actions"
       data-slot="actions"
-      :data-state="hasContent && isOpen ? 'open' : 'closed'"
+      :data-state="hasContent() && isOpen ? 'open' : 'closed'"
       :class="ui.actions({ class: props.ui?.actions })"
     >
       <slot name="actions">
