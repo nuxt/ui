@@ -697,4 +697,4 @@ watch(status, (value) => {
 ```
 ::
 
-After an `error`, the queue waits until the user reloads the failed response or sends another message, which joins the end of the queue. Stopping the response sends the next queued message right away.
+After an `error`, the prompt is disabled and the queue waits until the user reloads the failed response. Stopping the response sends the next queued message right away.
