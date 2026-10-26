@@ -5,7 +5,7 @@ export default defineTheme({
   slots: {
     root: 'relative flex rounded-lg',
     spotlight: 'absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90',
-    container: 'relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6',
+    container: 'relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-(--ui-gutter)',
     wrapper: 'flex flex-col flex-1 items-start',
     header: 'mb-4',
     body: 'flex-1',
@@ -57,7 +57,7 @@ export default defineTheme({
     },
     to: {
       true: {
-        root: 'outline-focus has-[>a:focus-visible]:outline-3 transition'
+        root: 'outline-focus has-[>a:focus-visible]:outline-(length:--ui-focus-width) transition'
       }
     },
     title: {

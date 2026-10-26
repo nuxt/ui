@@ -17,7 +17,7 @@ export default defineTheme({
     color: colorVariant({ root: '' }),
     to: {
       true: {
-        root: 'outline-(--ui-bg-default)/25 -outline-offset-3 has-[>a:focus-visible]:outline-3 hover:bg-accent-hover'
+        root: 'outline-(--ui-bg-default)/25 -outline-offset-(--ui-focus-width) has-[>a:focus-visible]:outline-(length:--ui-focus-width) hover:bg-accent-hover'
       }
     }
   },

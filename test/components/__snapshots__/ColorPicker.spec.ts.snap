@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`ColorPicker > renders with as correctly 1`] = `
-"<section data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-75">
+"<section data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-(--ui-disabled-opacity)">
   <div data-v-c9a043d6="" data-slot="color-picker-picker" class="flex gap-4">
     <div data-v-c9a043d6="" data-slot="color-picker-selector" class="rounded-md touch-none size-42" style="background-color: #FF0000;">
       <div data-v-c9a043d6="" data-slot="color-picker-selectorBackground" class="size-full relative rounded-md" data-color-picker-background="">
@@ -16,7 +16,7 @@ exports[`ColorPicker > renders with as correctly 1`] = `
 `;
 
 exports[`ColorPicker > renders with class correctly 1`] = `
-"<div data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-75 w-96">
+"<div data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-(--ui-disabled-opacity) w-96">
   <div data-v-c9a043d6="" data-slot="color-picker-picker" class="flex gap-4">
     <div data-v-c9a043d6="" data-slot="color-picker-selector" class="rounded-md touch-none size-42" style="background-color: #FF0000;">
       <div data-v-c9a043d6="" data-slot="color-picker-selectorBackground" class="size-full relative rounded-md" data-color-picker-background="">
@@ -31,7 +31,7 @@ exports[`ColorPicker > renders with class correctly 1`] = `
 `;
 
 exports[`ColorPicker > renders with disabled correctly 1`] = `
-"<div data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-75" data-disabled="true">
+"<div data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-(--ui-disabled-opacity)" data-disabled="true">
   <div data-v-c9a043d6="" data-slot="color-picker-picker" class="flex gap-4">
     <div data-v-c9a043d6="" data-slot="color-picker-selector" class="rounded-md touch-none size-42" style="background-color: #FF0000;">
       <div data-v-c9a043d6="" data-slot="color-picker-selectorBackground" class="size-full relative rounded-md" data-color-picker-background="">
@@ -46,7 +46,7 @@ exports[`ColorPicker > renders with disabled correctly 1`] = `
 `;
 
 exports[`ColorPicker > renders with format cmyk correctly 1`] = `
-"<div data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-75">
+"<div data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-(--ui-disabled-opacity)">
   <div data-v-c9a043d6="" data-slot="color-picker-picker" class="flex gap-4">
     <div data-v-c9a043d6="" data-slot="color-picker-selector" class="rounded-md touch-none size-42" style="background-color: #00FF8C;">
       <div data-v-c9a043d6="" data-slot="color-picker-selectorBackground" class="size-full relative rounded-md" data-color-picker-background="">
@@ -61,7 +61,7 @@ exports[`ColorPicker > renders with format cmyk correctly 1`] = `
 `;
 
 exports[`ColorPicker > renders with format hex correctly 1`] = `
-"<div data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-75">
+"<div data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-(--ui-disabled-opacity)">
   <div data-v-c9a043d6="" data-slot="color-picker-picker" class="flex gap-4">
     <div data-v-c9a043d6="" data-slot="color-picker-selector" class="rounded-md touch-none size-42" style="background-color: #00FF8C;">
       <div data-v-c9a043d6="" data-slot="color-picker-selectorBackground" class="size-full relative rounded-md" data-color-picker-background="">
@@ -76,7 +76,7 @@ exports[`ColorPicker > renders with format hex correctly 1`] = `
 `;
 
 exports[`ColorPicker > renders with format hsl correctly 1`] = `
-"<div data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-75">
+"<div data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-(--ui-disabled-opacity)">
   <div data-v-c9a043d6="" data-slot="color-picker-picker" class="flex gap-4">
     <div data-v-c9a043d6="" data-slot="color-picker-selector" class="rounded-md touch-none size-42" style="background-color: #00FF8C;">
       <div data-v-c9a043d6="" data-slot="color-picker-selectorBackground" class="size-full relative rounded-md" data-color-picker-background="">
@@ -91,7 +91,7 @@ exports[`ColorPicker > renders with format hsl correctly 1`] = `
 `;
 
 exports[`ColorPicker > renders with format lab correctly 1`] = `
-"<div data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-75">
+"<div data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-(--ui-disabled-opacity)">
   <div data-v-c9a043d6="" data-slot="color-picker-picker" class="flex gap-4">
     <div data-v-c9a043d6="" data-slot="color-picker-selector" class="rounded-md touch-none size-42" style="background-color: #00FF6F;">
       <div data-v-c9a043d6="" data-slot="color-picker-selectorBackground" class="size-full relative rounded-md" data-color-picker-background="">
@@ -106,7 +106,7 @@ exports[`ColorPicker > renders with format lab correctly 1`] = `
 `;
 
 exports[`ColorPicker > renders with format rgb correctly 1`] = `
-"<div data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-75">
+"<div data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-(--ui-disabled-opacity)">
   <div data-v-c9a043d6="" data-slot="color-picker-picker" class="flex gap-4">
     <div data-v-c9a043d6="" data-slot="color-picker-selector" class="rounded-md touch-none size-42" style="background-color: #00FF8C;">
       <div data-v-c9a043d6="" data-slot="color-picker-selectorBackground" class="size-full relative rounded-md" data-color-picker-background="">
@@ -121,7 +121,7 @@ exports[`ColorPicker > renders with format rgb correctly 1`] = `
 `;
 
 exports[`ColorPicker > renders with size lg correctly 1`] = `
-"<div data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-75">
+"<div data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-(--ui-disabled-opacity)">
   <div data-v-c9a043d6="" data-slot="color-picker-picker" class="flex gap-4">
     <div data-v-c9a043d6="" data-slot="color-picker-selector" class="rounded-md touch-none size-44" style="background-color: #FF0000;">
       <div data-v-c9a043d6="" data-slot="color-picker-selectorBackground" class="size-full relative rounded-md" data-color-picker-background="">
@@ -136,7 +136,7 @@ exports[`ColorPicker > renders with size lg correctly 1`] = `
 `;
 
 exports[`ColorPicker > renders with size md correctly 1`] = `
-"<div data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-75">
+"<div data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-(--ui-disabled-opacity)">
   <div data-v-c9a043d6="" data-slot="color-picker-picker" class="flex gap-4">
     <div data-v-c9a043d6="" data-slot="color-picker-selector" class="rounded-md touch-none size-42" style="background-color: #FF0000;">
       <div data-v-c9a043d6="" data-slot="color-picker-selectorBackground" class="size-full relative rounded-md" data-color-picker-background="">
@@ -151,7 +151,7 @@ exports[`ColorPicker > renders with size md correctly 1`] = `
 `;
 
 exports[`ColorPicker > renders with size sm correctly 1`] = `
-"<div data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-75">
+"<div data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-(--ui-disabled-opacity)">
   <div data-v-c9a043d6="" data-slot="color-picker-picker" class="flex gap-4">
     <div data-v-c9a043d6="" data-slot="color-picker-selector" class="rounded-md touch-none size-40" style="background-color: #FF0000;">
       <div data-v-c9a043d6="" data-slot="color-picker-selectorBackground" class="size-full relative rounded-md" data-color-picker-background="">
@@ -166,7 +166,7 @@ exports[`ColorPicker > renders with size sm correctly 1`] = `
 `;
 
 exports[`ColorPicker > renders with size xl correctly 1`] = `
-"<div data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-75">
+"<div data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-(--ui-disabled-opacity)">
   <div data-v-c9a043d6="" data-slot="color-picker-picker" class="flex gap-4">
     <div data-v-c9a043d6="" data-slot="color-picker-selector" class="rounded-md touch-none size-46" style="background-color: #FF0000;">
       <div data-v-c9a043d6="" data-slot="color-picker-selectorBackground" class="size-full relative rounded-md" data-color-picker-background="">
@@ -181,7 +181,7 @@ exports[`ColorPicker > renders with size xl correctly 1`] = `
 `;
 
 exports[`ColorPicker > renders with size xs correctly 1`] = `
-"<div data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-75">
+"<div data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-(--ui-disabled-opacity)">
   <div data-v-c9a043d6="" data-slot="color-picker-picker" class="flex gap-4">
     <div data-v-c9a043d6="" data-slot="color-picker-selector" class="rounded-md touch-none size-38" style="background-color: #FF0000;">
       <div data-v-c9a043d6="" data-slot="color-picker-selectorBackground" class="size-full relative rounded-md" data-color-picker-background="">
@@ -196,7 +196,7 @@ exports[`ColorPicker > renders with size xs correctly 1`] = `
 `;
 
 exports[`ColorPicker > renders with ui correctly 1`] = `
-"<div data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-75">
+"<div data-v-c9a043d6="" data-slot="color-picker" class="data-disabled:opacity-(--ui-disabled-opacity)">
   <div data-v-c9a043d6="" data-slot="color-picker-picker" class="flex gap-8">
     <div data-v-c9a043d6="" data-slot="color-picker-selector" class="rounded-md touch-none size-42" style="background-color: #FF0000;">
       <div data-v-c9a043d6="" data-slot="color-picker-selectorBackground" class="size-full relative rounded-md" data-color-picker-background="">

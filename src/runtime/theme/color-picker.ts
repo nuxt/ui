@@ -2,7 +2,7 @@ import { defineTheme } from '../utils/theme'
 
 export default defineTheme({
   slots: {
-    root: 'data-disabled:opacity-75',
+    root: 'data-disabled:opacity-(--ui-disabled-opacity)',
     picker: 'flex gap-4',
     selector: 'rounded-md touch-none',
     selectorBackground: 'size-full relative rounded-md',

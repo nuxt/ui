@@ -3,7 +3,7 @@ import { defineTheme } from '../utils/theme'
 
 export default defineTheme({
   slots: {
-    root: 'flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-accent-focus has-focus-visible:outline-3 has-focus-visible:ring-accent',
+    root: 'flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-accent-focus has-focus-visible:outline-(length:--ui-focus-width) has-focus-visible:ring-accent',
     filter: 'rounded-none border-b border-default',
     content: 'relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none',
     group: 'p-1 isolate',
@@ -12,7 +12,7 @@ export default defineTheme({
     empty: 'text-center text-muted',
     loading: 'flex items-center justify-center text-muted',
     loadingIcon: 'animate-spin shrink-0',
-    item: 'group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-strong data-highlighted:not-data-disabled:before:bg-tint transition-colors before:transition-colors',
+    item: 'group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-(--ui-disabled-opacity) text-default data-highlighted:not-data-disabled:text-strong data-highlighted:not-data-disabled:before:bg-tint transition-colors before:transition-colors',
     itemLeadingIcon: 'shrink-0 text-faint group-data-highlighted:not-group-data-disabled:text-default transition-colors',
     itemLeadingAvatar: 'shrink-0',
     itemLeadingChip: 'shrink-0',
@@ -87,7 +87,7 @@ export default defineTheme({
     },
     disabled: {
       true: {
-        root: 'opacity-75 cursor-not-allowed'
+        root: 'opacity-(--ui-disabled-opacity) cursor-not-allowed'
       }
     },
     highlight: {

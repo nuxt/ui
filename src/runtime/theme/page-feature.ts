@@ -21,7 +21,7 @@ export default defineTheme({
     },
     to: {
       true: {
-        root: 'outline-focus has-focus-visible:outline-3 transition'
+        root: 'outline-focus has-focus-visible:outline-(length:--ui-focus-width) transition'
       }
     },
     title: {

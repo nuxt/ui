@@ -7,7 +7,7 @@ export default defineTheme({
     group: 'p-1 isolate',
     label: 'w-full flex items-center font-semibold text-strong',
     separator: '-mx-1 my-1 h-px bg-border',
-    item: 'group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75',
+    item: 'group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-(--ui-disabled-opacity)',
     itemLeadingIcon: 'shrink-0 flex items-center justify-center',
     itemLeadingAvatar: 'shrink-0',
     itemWrapper: 'flex-1 flex flex-col text-start min-w-0',

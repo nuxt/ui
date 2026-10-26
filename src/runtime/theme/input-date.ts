@@ -7,7 +7,7 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'group relative inline-flex items-center rounded-md select-none text-strong data-disabled:cursor-not-allowed transition-colors',
-    segment: 'rounded-sm text-center outline-hidden data-placeholder:text-faint data-[segment=literal]:text-muted data-invalid:text-error data-disabled:cursor-not-allowed data-disabled:opacity-75 transition-colors',
+    segment: 'rounded-sm text-center outline-hidden data-placeholder:text-faint data-[segment=literal]:text-muted data-invalid:text-error data-disabled:cursor-not-allowed data-disabled:opacity-(--ui-disabled-opacity) transition-colors',
     // After the segments in the DOM, so they keep the first tab stops. The invisible
     // character gives the leading the baseline of the text, see `input.ts`. The box
     // has the padding here, so a button eats into it to sit as it does in an input
@@ -54,10 +54,10 @@ export default defineTheme({
       }
     },
     variant: {
-      outline: { root: 'bg-default ring ring-inset ring-strong outline-accent-focus has-focus-visible:outline-3 has-focus-visible:ring-accent', segment: 'focus:bg-soft' },
-      soft: { root: 'bg-tint hover:bg-soft has-focus:bg-soft data-disabled:bg-tint outline-accent-focus has-focus-visible:outline-3', segment: 'focus:bg-strong' },
-      subtle: { root: 'bg-soft ring ring-inset ring-strong outline-accent-focus has-focus-visible:outline-3 has-focus-visible:ring-accent', segment: 'focus:bg-strong' },
-      ghost: { root: 'bg-transparent hover:bg-soft has-focus:bg-soft data-disabled:bg-transparent dark:data-disabled:bg-transparent outline-accent-focus has-focus-visible:outline-3', segment: 'focus:bg-strong' },
+      outline: { root: 'bg-default ring ring-inset ring-strong outline-accent-focus has-focus-visible:outline-(length:--ui-focus-width) has-focus-visible:ring-accent', segment: 'focus:bg-soft' },
+      soft: { root: 'bg-tint hover:bg-soft has-focus:bg-soft data-disabled:bg-tint outline-accent-focus has-focus-visible:outline-(length:--ui-focus-width)', segment: 'focus:bg-strong' },
+      subtle: { root: 'bg-soft ring ring-inset ring-strong outline-accent-focus has-focus-visible:outline-(length:--ui-focus-width) has-focus-visible:ring-accent', segment: 'focus:bg-strong' },
+      ghost: { root: 'bg-transparent hover:bg-soft has-focus:bg-soft data-disabled:bg-transparent dark:data-disabled:bg-transparent outline-accent-focus has-focus-visible:outline-(length:--ui-focus-width)', segment: 'focus:bg-strong' },
       none: { root: 'bg-transparent has-focus:outline-none', segment: 'focus:bg-soft' }
     },
     color: colorVariant({ root: '' }),

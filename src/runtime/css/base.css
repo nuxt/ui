@@ -166,6 +166,13 @@
     --ui-header-height: 4rem;
     --ui-radius: 0.25rem;
     --ui-container: 80rem;
+    --ui-gutter: --spacing(4);
+    --ui-focus-width: 3px;
+    --ui-disabled-opacity: 75%;
+
+    @variant sm {
+      --ui-gutter: --spacing(6);
+    }
   }
 
   :where(:root, :host, .light) {

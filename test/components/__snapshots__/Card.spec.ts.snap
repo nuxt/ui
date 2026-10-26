@@ -10,7 +10,7 @@ exports[`Card > renders with as correctly 1`] = `
 
 exports[`Card > renders with as object correctly 1`] = `
 "<section data-slot="card" class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
-  <div data-slot="card-header" class="p-4 sm:px-6">
+  <div data-slot="card-header" class="px-(--ui-gutter) py-4">
     <h3 data-slot="card-title" class="text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold))">Title</h3>
     <!--v-if-->
   </div>
@@ -30,14 +30,14 @@ exports[`Card > renders with class correctly 1`] = `
 exports[`Card > renders with default slot correctly 1`] = `
 "<div data-slot="card" class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
   <!--v-if-->
-  <div data-slot="card-body" class="p-4 sm:p-6">Default slot</div>
+  <div data-slot="card-body" class="p-(--ui-gutter)">Default slot</div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Card > renders with description correctly 1`] = `
 "<div data-slot="card" class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
-  <div data-slot="card-header" class="p-4 sm:px-6">
+  <div data-slot="card-header" class="px-(--ui-gutter) py-4">
     <!--v-if-->
     <div data-slot="card-description" class="mt-1 text-muted text-sm">Description</div>
   </div>
@@ -48,7 +48,7 @@ exports[`Card > renders with description correctly 1`] = `
 
 exports[`Card > renders with description slot correctly 1`] = `
 "<div data-slot="card" class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
-  <div data-slot="card-header" class="p-4 sm:px-6">
+  <div data-slot="card-header" class="px-(--ui-gutter) py-4">
     <!--v-if-->
     <div data-slot="card-description" class="mt-1 text-muted text-sm">Description slot</div>
   </div>
@@ -61,13 +61,13 @@ exports[`Card > renders with footer slot correctly 1`] = `
 "<div data-slot="card" class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
   <!--v-if-->
   <!--v-if-->
-  <div data-slot="card-footer" class="p-4 sm:px-6">Footer slot</div>
+  <div data-slot="card-footer" class="px-(--ui-gutter) py-4">Footer slot</div>
 </div>"
 `;
 
 exports[`Card > renders with header slot correctly 1`] = `
 "<div data-slot="card" class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
-  <div data-slot="card-header" class="p-4 sm:px-6">Header slot</div>
+  <div data-slot="card-header" class="px-(--ui-gutter) py-4">Header slot</div>
   <!--v-if-->
   <!--v-if-->
 </div>"
@@ -75,7 +75,7 @@ exports[`Card > renders with header slot correctly 1`] = `
 
 exports[`Card > renders with title and description correctly 1`] = `
 "<div data-slot="card" class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
-  <div data-slot="card-header" class="p-4 sm:px-6">
+  <div data-slot="card-header" class="px-(--ui-gutter) py-4">
     <div data-slot="card-title" class="text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold))">Title</div>
     <div data-slot="card-description" class="mt-1 text-muted text-sm">Description</div>
   </div>
@@ -86,7 +86,7 @@ exports[`Card > renders with title and description correctly 1`] = `
 
 exports[`Card > renders with title correctly 1`] = `
 "<div data-slot="card" class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
-  <div data-slot="card-header" class="p-4 sm:px-6">
+  <div data-slot="card-header" class="px-(--ui-gutter) py-4">
     <div data-slot="card-title" class="text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold))">Title</div>
     <!--v-if-->
   </div>
@@ -97,7 +97,7 @@ exports[`Card > renders with title correctly 1`] = `
 
 exports[`Card > renders with title slot correctly 1`] = `
 "<div data-slot="card" class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
-  <div data-slot="card-header" class="p-4 sm:px-6">
+  <div data-slot="card-header" class="px-(--ui-gutter) py-4">
     <div data-slot="card-title" class="text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold))">Title slot</div>
     <!--v-if-->
   </div>

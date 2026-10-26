@@ -17,12 +17,12 @@ export default defineTheme({
   variants: {
     variant: {
       inline: {
-        trigger: 'rounded-sm outline-focus focus-visible:outline-3',
+        trigger: 'rounded-sm outline-focus focus-visible:outline-(length:--ui-focus-width)',
         body: 'pt-2',
         actions: 'pt-2'
       },
       card: {
-        root: 'rounded-md ring ring-default overflow-hidden outline-focus has-focus-visible:outline-3 has-focus-visible:ring-primary',
+        root: 'rounded-md ring ring-default overflow-hidden outline-focus has-focus-visible:outline-(length:--ui-focus-width) has-focus-visible:ring-primary',
         trigger: 'px-2 py-1 focus:outline-none',
         trailingIcon: 'ms-auto',
         body: 'border-t border-default p-2 max-h-[200px] overflow-y-auto focus:outline-none',

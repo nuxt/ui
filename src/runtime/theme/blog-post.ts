@@ -19,11 +19,11 @@ export default defineTheme({
     orientation: {
       horizontal: {
         root: 'lg:grid lg:grid-cols-2 lg:items-center gap-x-8',
-        body: 'justify-center p-4 sm:p-6 lg:px-0'
+        body: 'justify-center p-(--ui-gutter) lg:px-0'
       },
       vertical: {
         root: 'flex flex-col',
-        body: 'p-4 sm:p-6'
+        body: 'p-(--ui-gutter)'
       }
     },
     variant: {
@@ -56,9 +56,9 @@ export default defineTheme({
     },
     to: {
       true: {
-        root: 'outline-focus has-[>a:focus-visible]:outline-3 transition',
+        root: 'outline-focus has-[>a:focus-visible]:outline-(length:--ui-focus-width) transition',
         image: 'transform transition-transform ease-out motion-reduce:transition-none group-hover/blog-post:scale-110',
-        avatar: 'inline-flex transform transition-transform ease-out motion-reduce:transition-none hover:scale-115 rounded-full outline-focus focus-visible:outline-3'
+        avatar: 'inline-flex transform transition-transform ease-out motion-reduce:transition-none hover:scale-115 rounded-full outline-focus focus-visible:outline-(length:--ui-focus-width)'
       }
     },
     image: {
