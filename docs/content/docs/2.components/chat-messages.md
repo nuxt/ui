@@ -413,22 +413,15 @@ collapse: true
 ::tip
 You can use all the slots of the [`ChatMessage`](/docs/components/chat-message#slots) component inside ChatMessages, they are automatically forwarded so you can customize individual messages when using the `messages` prop. Each slot also receives the `message` and a `streaming` boolean, `true` only for the last message while the chat is submitted or streaming.
 
-```vue{7-15}
+```vue{7-9}
 <script setup lang="ts">
-import { isTextUIPart } from 'ai'
+import { isReasoningUIPart } from 'ai'
 </script>
 
 <template>
   <UChatMessages :messages="messages" :status="status">
-    <template #content="{ message }">
-      <template
-        v-for="(part, index) in message.parts"
-        :key="`${message.id}-${part.type}-${index}`"
-      >
-        <p v-if="isTextUIPart(part)" class="whitespace-pre-wrap">
-          {{ part.text }}
-        </p>
-      </template>
+    <template #part="{ part }">
+      <UChatReasoning v-if="isReasoningUIPart(part)" :text="part.text" />
     </template>
   </UChatMessages>
 </template>
