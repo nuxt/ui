@@ -109,7 +109,7 @@ export default defineTheme({
     },
     disabled: {
       true: {
-        item: 'opacity-75',
+        item: 'opacity-(--ui-disabled-opacity)',
         base: 'cursor-not-allowed',
         label: 'cursor-not-allowed',
         description: 'cursor-not-allowed'

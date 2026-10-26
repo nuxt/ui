@@ -31,7 +31,7 @@ export default defineTheme({
     },
     to: {
       true: {
-        title: 'outline-focus has-focus-visible:outline-3 rounded-xs transition',
+        title: 'outline-focus has-focus-visible:outline-(length:--ui-focus-width) rounded-xs transition',
         image: 'transform transition-transform ease-out motion-reduce:transition-none group-hover/changelog-version-image:scale-105 group-has-focus-visible/changelog-version-image:scale-105'
       }
     },

@@ -6,7 +6,7 @@ export default defineTheme({
     root: 'relative flex items-center select-none touch-none',
     track: 'relative bg-strong overflow-hidden rounded-full grow',
     range: 'absolute rounded-full bg-accent',
-    thumb: 'rounded-full bg-default ring-2 focus-visible:outline-3 focus-visible:outline-offset-2 ring-accent outline-accent-focus'
+    thumb: 'rounded-full bg-default ring-2 focus-visible:outline-(length:--ui-focus-width) focus-visible:outline-offset-2 ring-accent outline-accent-focus'
   },
   variants: {
     color: colorVariant({ root: '' }),
@@ -46,7 +46,7 @@ export default defineTheme({
     },
     disabled: {
       true: {
-        root: 'opacity-75 cursor-not-allowed'
+        root: 'opacity-(--ui-disabled-opacity) cursor-not-allowed'
       }
     }
   },

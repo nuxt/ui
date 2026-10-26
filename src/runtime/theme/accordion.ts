@@ -5,7 +5,7 @@ export default defineTheme({
     root: 'w-full',
     item: 'border-b border-default last:border-b-0',
     header: 'flex',
-    trigger: 'group flex-1 flex items-center gap-1.5 font-medium text-sm py-3.5 outline-focus focus-visible:outline-3 min-w-0 rounded-md',
+    trigger: 'group flex-1 flex items-center gap-1.5 font-medium text-sm py-3.5 outline-focus focus-visible:outline-(length:--ui-focus-width) min-w-0 rounded-md',
     content: 'data-[state=open]:animate-[accordion-down_200ms_var(--ease-out)] data-[state=closed]:animate-[accordion-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden focus:outline-none',
     body: 'text-sm pb-3.5',
     leadingIcon: 'shrink-0 size-5',
@@ -15,7 +15,7 @@ export default defineTheme({
   variants: {
     disabled: {
       true: {
-        trigger: 'cursor-not-allowed opacity-75'
+        trigger: 'cursor-not-allowed opacity-(--ui-disabled-opacity)'
       }
     }
   }

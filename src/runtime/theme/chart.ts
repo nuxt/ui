@@ -10,7 +10,7 @@ export default defineTheme({
     ],
     // The chart surface is focusable for keyboard navigation between points. Browsers outline a focused
     // `<svg>` on click too, so its width is zero until keyboard focus.
-    base: 'opacity-0 in-data-measured:opacity-100 transition-opacity duration-150 [&_.ts-chart]:rounded-md [&_.ts-chart]:outline-0 [&_.ts-chart]:outline-focus [&_.ts-chart:focus-visible]:outline-3 [&_.ts-chart:focus-visible]:ring [&_.ts-chart:focus-visible]:ring-primary',
+    base: 'opacity-0 in-data-measured:opacity-100 transition-opacity duration-150 [&_.ts-chart]:rounded-md [&_.ts-chart]:outline-0 [&_.ts-chart]:outline-focus [&_.ts-chart:focus-visible]:outline-(length:--ui-focus-width) [&_.ts-chart:focus-visible]:ring [&_.ts-chart:focus-visible]:ring-primary',
     tooltip: 'flex-col items-stretch gap-1 h-auto min-w-32 py-1.5 pointer-events-none',
     tooltipTitle: 'font-medium text-strong',
     tooltipRow: 'flex items-center gap-1.5 text-muted data-[active=true]:text-strong',
