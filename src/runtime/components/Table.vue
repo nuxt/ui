@@ -225,6 +225,7 @@ import {
   createFilteredRowModel,
   createSortedRowModel,
   filterFns,
+  makeStateUpdater,
   sortFns
 } from '@tanstack/vue-table'
 import { useVirtualizer } from '@tanstack/vue-virtual'
@@ -393,10 +394,11 @@ const state = computed(() => {
   return state
 })
 
-// The handlers are only set for bound models, otherwise TanStack keeps the slice in its own state.
-const onChangeHandlers = Object.fromEntries(Object.entries(models)
-  .filter(([, model]) => model.value !== undefined)
-  .map(([key, model]) => [`on${upperFirst(key)}Change`, (updaterOrValue: Updater<any>) => valueUpdater(updaterOrValue, model)]))
+// An unbound model leaves the slice in TanStack's own state, and a model bound after setup takes over from then on.
+const onChangeHandlers = Object.fromEntries(Object.entries(models).map(([key, model]) => [
+  `on${upperFirst(key)}Change`,
+  (updaterOrValue: Updater<any>) => model.value === undefined ? makeStateUpdater(key, tableApi)(updaterOrValue) : valueUpdater(updaterOrValue, model)
+]))
 
 const tableApi: VueTable<TableFeatures, T> = useTable<TableFeatures, T>({
   ...props.options,

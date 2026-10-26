@@ -593,6 +593,15 @@ describe('Table', () => {
     expect(onUpdate).toHaveBeenLastCalledWith(value)
   })
 
+  it('updates a model bound after setup', async () => {
+    const onUpdate = vi.fn()
+    const wrapper = await mountSuspended(Table, { props: { data, 'onUpdate:sorting': onUpdate } })
+    await wrapper.setProps({ sorting: [] })
+    ;(wrapper.vm as any).tableApi.setSorting([{ id: 'id', desc: true }])
+
+    expect(onUpdate).toHaveBeenLastCalledWith([{ id: 'id', desc: true }])
+  })
+
   it('keeps an unbound slice in TanStack state', async () => {
     const wrapper = await mountSuspended(Table, { props: { data } })
     ;(wrapper.vm as any).tableApi.setColumnVisibility({ email: false })
