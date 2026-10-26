@@ -33,6 +33,7 @@ describe('ChatMessages', () => {
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
     ['with indicator slot', { props: { ...props, status: 'submitted' }, slots: { indicator: () => 'Indicator slot' } }],
     ['with viewport slot', { props, slots: { viewport: () => 'Viewport slot' } }],
+    ['with footer slot', { props, slots: { footer: () => 'Footer slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }],
     ['with files slot', { props, slots: { files: () => 'Files slot' } }]
   ])
@@ -63,6 +64,31 @@ describe('ChatMessages', () => {
     const button = wrapper.find('[data-slot="autoScroll"]')
     expect(button.attributes('aria-label')).toBe('Scroll to bottom')
     expect(await axe(wrapper.element)).toHaveNoViolations()
+
+    wrapper.unmount()
+  })
+
+  it.each([
+    ['without', undefined, 'absolute'],
+    ['with', () => 'Prompt', 'sticky']
+  ])('positions the auto scroll button %s a footer', async (_, footer, position) => {
+    const Parent = defineComponent({
+      setup() {
+        return () => h('div', { style: 'overflow-y: auto' }, [h(ChatMessages, { ...props, shouldScrollToBottom: false }, footer ? { footer } : {})])
+      }
+    })
+
+    const wrapper = await mountSuspended(Parent, { attachTo: document.body })
+    Object.defineProperties(wrapper.element, {
+      scrollHeight: { value: 1000 },
+      clientHeight: { value: 100 }
+    })
+    wrapper.element.dispatchEvent(new Event('scroll'))
+    await nextTick()
+
+    const viewport = wrapper.find('[data-slot="viewport"]').classes()
+    expect(viewport).toContain(position)
+    expect(viewport.includes('top-[86%]')).toBe(position === 'absolute')
 
     wrapper.unmount()
   })

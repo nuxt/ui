@@ -108,7 +108,6 @@ function generateMessages() {
       should-auto-scroll
       :messages="messages"
       :status="status"
-      :spacing-offset="72"
       :assistant="{ actions: [{ label: 'Edit', icon: 'i-lucide-pencil', onClick: () => console.log('edit') }] }"
       :user="{ actions: [{ label: 'Edit', icon: 'i-lucide-pencil', onClick: () => console.log('edit') }], icon: 'i-lucide-user' }"
     >
@@ -182,17 +181,19 @@ function generateMessages() {
           <pre class="text-xs whitespace-pre-wrap">{{ JSON.stringify(part.input, null, 2) }}</pre>
         </UChatTool>
       </template>
-    </UChatMessages>
 
-    <UChatPrompt
-      v-model="input"
-      :status="status"
-      :error="error"
-      variant="subtle"
-      class="sticky bottom-0"
-      @submit="onSubmit"
-    >
-      <UChatPromptSubmit :status="status" @stop="stop()" @reload="regenerate()" />
-    </UChatPrompt>
+      <template #footer>
+        <UChatPrompt
+          v-model="input"
+          :status="status"
+          :error="error"
+          variant="subtle"
+          class="mt-4"
+          @submit="onSubmit"
+        >
+          <UChatPromptSubmit :status="status" @stop="stop()" @reload="regenerate()" />
+        </UChatPrompt>
+      </template>
+    </UChatMessages>
   </div>
 </template>

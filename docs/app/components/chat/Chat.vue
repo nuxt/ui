@@ -346,6 +346,7 @@ function clearMessages() {
         compact
         class="px-0 gap-2"
         :user="{ ui: { container: 'max-w-full', text: 'text-sm/6' } }"
+        :ui="{ viewport: 'sticky top-auto bottom-4 h-0' }"
       >
         <template #indicator>
           <UChatTool :icon="studioIcons.brain" text="Thinking..." streaming />

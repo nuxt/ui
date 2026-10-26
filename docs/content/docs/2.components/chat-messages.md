@@ -400,6 +400,30 @@ collapse: true
 ---
 ::
 
+### With sticky prompt :badge{label="Soon" class="align-text-top"}
+
+Use the `#footer` slot to keep a [ChatPrompt](/docs/components/chat-prompt) stuck to the bottom of the list. Its height is measured, so the last message keeps enough room and the auto scroll button stays above it, even when the prompt grows.
+
+```vue
+<template>
+  <UChatMessages :messages="messages" :status="status">
+    <template #footer>
+      <UChatPrompt v-model="input" :status="status" @submit="onSubmit">
+        <UChatPromptSubmit :status="status" @stop="stop()" @reload="regenerate()" />
+      </UChatPrompt>
+    </template>
+  </UChatMessages>
+</template>
+```
+
+::note
+The `#footer` slot replaces the deprecated `spacing-offset` prop for a sticky prompt, which needed its height by hand. Render `UChatMessages` even when there are no messages yet, so the prompt in its footer stays visible.
+::
+
+::tip
+When the prompt sits outside the scroll container, like in the footer of a [DashboardPanel](/docs/components/dashboard-panel) or a [Sidebar](/docs/components/sidebar), make the auto scroll button stick to the bottom of the scroll container with `:ui="{ viewport: 'sticky top-auto bottom-4 h-0' }"`.
+::
+
 ### With agent steps :badge{label="Soon" class="align-text-top"}
 
 Use the `#part` slot to render each step of an agent: [ChatReasoning](/docs/components/chat-reasoning) for reasoning, [ChatTool](/docs/components/chat-tool) for tool calls and sources, and markdown for the reply. Set the `error` prop on a failed tool call, and render its output with the prose components.
