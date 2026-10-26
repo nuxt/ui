@@ -567,7 +567,6 @@ export default defineNuxtConfig({
       '/node_modules/',
       '/docs/src/',
       '/home/',
-      '/_nuxt/',
       '/_plausible',
       '/dev/',
       '/api/'
