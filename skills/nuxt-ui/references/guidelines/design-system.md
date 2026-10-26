@@ -321,7 +321,7 @@ Nuxt UI exposes CSS variables you can override in `main.css`:
 ```css
 :root {
   --ui-radius: 0.25rem;
-  --ui-container: 80rem;
+  --ui-container-width: 80rem;
   --ui-header-height: 4rem;
 }
 ```

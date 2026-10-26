@@ -39,8 +39,8 @@ slots: {
 variants: {
   size: {
     md: {
-      base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm',
-      leadingIcon: 'size-(--ui-control-icon)'
+      base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon-size:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm',
+      leadingIcon: 'size-(--ui-control-icon-size)'
     }
   },
   square: {
@@ -54,6 +54,16 @@ The classes that read the padding, the gap and the icon size stay in the `size` 
 A variant that reads a variable for another purpose, `square`, `leading`, `orientation`, has to be declared after the one that sets the same property, since the last variant wins: `square` after what sets the horizontal padding.
 
 Reach for this before a `size` × something compound: the size writes a value, another variant picks the property that reads it. A compound is hard to override from an app config, a token is one class.
+
+## Variable Names
+
+Every CSS variable starts with `--ui-` and follows one of three shapes:
+
+- A family of named values puts the property first, like Tailwind's theme namespaces (`--font-weight-semibold`, `--radius-lg`): `--ui-bg-soft`, `--ui-text-muted`, `--ui-outline-focus`, `--ui-font-weight-heading`. A variable behind a utility is named like the utility.
+- A value that sizes one thing is `<subject>-<property>`: `--ui-header-height`, `--ui-container-width`, `--ui-control-px`, `--ui-control-icon-size`, `--ui-focus-width`, `--ui-disabled-opacity`.
+- A quantity on its own stays bare: `--ui-radius`, `--ui-gutter`.
+
+Write the default in the unit of the Tailwind scale it replaces, so an app that changes the scale moves it too: `--spacing(4)` for a padding, `3px` for an outline width, `75%` for an opacity.
 
 ## Fields
 

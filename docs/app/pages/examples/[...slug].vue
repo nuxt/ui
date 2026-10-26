@@ -41,7 +41,7 @@ const width = computed(() => route.query.width && Number.parseInt(route.query.wi
 <style scoped>
 @media (min-width: 1024px) {
   .example {
-    --ui-container: v-bind(width);
+    --ui-container-width: v-bind(width);
   }
 }
 </style>

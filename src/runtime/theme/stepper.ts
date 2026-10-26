@@ -34,41 +34,41 @@ export default defineTheme({
 
     size: {
       xs: {
-        root: '[--ui-control-size:--spacing(6)] [--ui-control-icon:--spacing(3)] [--ui-control-gap:--spacing(1.5)]',
+        root: '[--ui-control-size:--spacing(6)] [--ui-control-icon-size:--spacing(3)] [--ui-control-gap:--spacing(1.5)]',
         trigger: 'size-(--ui-control-size) text-xs',
-        icon: 'size-(--ui-control-icon)',
+        icon: 'size-(--ui-control-icon-size)',
         title: 'text-xs',
         description: 'text-xs',
         wrapper: 'mt-(--ui-control-gap)'
       },
       sm: {
-        root: '[--ui-control-size:--spacing(8)] [--ui-control-icon:--spacing(4)] [--ui-control-gap:--spacing(2)]',
+        root: '[--ui-control-size:--spacing(8)] [--ui-control-icon-size:--spacing(4)] [--ui-control-gap:--spacing(2)]',
         trigger: 'size-(--ui-control-size) text-sm',
-        icon: 'size-(--ui-control-icon)',
+        icon: 'size-(--ui-control-icon-size)',
         title: 'text-xs',
         description: 'text-xs',
         wrapper: 'mt-(--ui-control-gap)'
       },
       md: {
-        root: '[--ui-control-size:--spacing(10)] [--ui-control-icon:--spacing(5)] [--ui-control-gap:--spacing(2.5)]',
+        root: '[--ui-control-size:--spacing(10)] [--ui-control-icon-size:--spacing(5)] [--ui-control-gap:--spacing(2.5)]',
         trigger: 'size-(--ui-control-size) text-base',
-        icon: 'size-(--ui-control-icon)',
+        icon: 'size-(--ui-control-icon-size)',
         title: 'text-sm',
         description: 'text-sm',
         wrapper: 'mt-(--ui-control-gap)'
       },
       lg: {
-        root: '[--ui-control-size:--spacing(12)] [--ui-control-icon:--spacing(6)] [--ui-control-gap:--spacing(3)]',
+        root: '[--ui-control-size:--spacing(12)] [--ui-control-icon-size:--spacing(6)] [--ui-control-gap:--spacing(3)]',
         trigger: 'size-(--ui-control-size) text-lg',
-        icon: 'size-(--ui-control-icon)',
+        icon: 'size-(--ui-control-icon-size)',
         title: 'text-base',
         description: 'text-base',
         wrapper: 'mt-(--ui-control-gap)'
       },
       xl: {
-        root: '[--ui-control-size:--spacing(14)] [--ui-control-icon:--spacing(7)] [--ui-control-gap:--spacing(3.5)]',
+        root: '[--ui-control-size:--spacing(14)] [--ui-control-icon-size:--spacing(7)] [--ui-control-gap:--spacing(3.5)]',
         trigger: 'size-(--ui-control-size) text-xl',
-        icon: 'size-(--ui-control-icon)',
+        icon: 'size-(--ui-control-icon-size)',
         title: 'text-lg',
         description: 'text-lg',
         wrapper: 'mt-(--ui-control-gap)'
