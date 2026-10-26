@@ -203,7 +203,7 @@ const ui = {
 
     <!-- The template's signature: the conversation floats over the body. -->
     <div class="flex-1 flex m-4 lg:ms-0 rounded-lg ring ring-default bg-default/75 shadow-sm min-w-0 overflow-hidden">
-      <UDashboardPanel class="relative min-h-0" :ui="{ body: 'p-0 sm:p-0 overscroll-none' }">
+      <UDashboardPanel class="relative min-h-0" :ui="{ body: 'p-0 sm:p-0 overscroll-none scroll-pt-(--ui-header-height)' }">
         <template #header>
           <!-- Transparent and absolute, so the messages scroll under a blur.
                Rounded like the panel: a backdrop filter paints its own square

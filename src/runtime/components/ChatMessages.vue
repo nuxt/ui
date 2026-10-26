@@ -313,6 +313,8 @@ function updateLastMessageHeight() {
   spacingOffset += (Number.parseFloat(elComputedStyle.rowGap) || Number.parseFloat(elComputedStyle.gap) || 0) * (slots.footer ? 2 : 1)
   spacingOffset += Number.parseFloat(parentComputedStyle.paddingTop) || 0
   spacingOffset += Number.parseFloat(parentComputedStyle.paddingBottom) || 0
+  // `scrollToMessage` stops below the container's scroll padding (e.g. a floating header)
+  spacingOffset += Number.parseFloat(parentComputedStyle.scrollPaddingTop) || 0
 
   lastMessageHeight.value = Math.max(parentHeight - lastMessageEl.offsetHeight - spacingOffset, 0)
 }
