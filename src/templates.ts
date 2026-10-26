@@ -1,6 +1,8 @@
-import { fileURLToPath } from 'node:url'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 import { camelCase, kebabCase } from 'scule'
 import { genExport } from 'knitwork'
+import { resolvePathSync } from 'mlly'
+import { normalize } from 'pathe'
 import colors from 'tailwindcss/colors'
 import { addTemplate, addTypeTemplate, hasNuxtModule, logger, updateTemplates, getLayerDirectories } from '@nuxt/kit'
 import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
@@ -370,6 +372,27 @@ declare module '@nuxt/schema' {
 
 export {}
 `
+    }
+  })
+
+  // With SSR the client hydrates the server-rendered colors style, so the palette
+  // is only loaded once the colors change.
+  templates.push({
+    filename: 'ui-colors.ts',
+    write: true,
+    getContents: () => {
+      const id = JSON.stringify(resolve ? normalize(resolvePathSync('tailwindcss/colors', { url: pathToFileURL(`${resolve('./runtime')}/`).href })) : 'tailwindcss/colors')
+
+      return nuxt?.options.ssr
+        ? [
+            `export const colors = undefined`,
+            `export const loadColors = () => import(${id}).then(m => m.default)`
+          ].join('\n')
+        : [
+            `import colors from ${id}`,
+            `export { colors }`,
+            `export const loadColors = () => Promise.resolve(colors)`
+          ].join('\n')
     }
   })
 

@@ -1,48 +1,85 @@
-import { computed } from 'vue'
-import colors from 'tailwindcss/colors'
+import { computed, shallowRef } from 'vue'
 import type { UseHeadInput } from '@unhead/vue/types'
+import { colors as bundledColors, loadColors } from '#build/ui-colors'
 import { defineNuxtPlugin, injectHead, useAppConfig, useNuxtApp, useHead } from '#imports'
+
+type Colors = Awaited<ReturnType<typeof loadColors>>
 
 const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
 
-function getColor(color: keyof typeof colors, shade: typeof shades[number]): string {
-  if (color in colors && typeof colors[color] === 'object' && shade in colors[color]) {
+function getColor(colors: Colors | undefined, color: keyof Colors, shade: typeof shades[number]): string {
+  if (colors && color in colors && typeof colors[color] === 'object' && shade in colors[color]) {
     return colors[color][shade] as string
   }
   return ''
 }
 
-function generateShades(key: string, value: string, prefix?: string) {
+function generateShades(colors: Colors | undefined, key: string, value: string, prefix?: string) {
   const prefixStr = prefix ? `${prefix}-` : ''
-  return `${shades.map(shade => `--ui-color-${key}-${shade}: var(--${prefixStr}color-${value === 'neutral' ? 'old-neutral' : value}-${shade}, ${getColor(value as keyof typeof colors, shade)});`).join('\n  ')}`
+  return `${shades.map(shade => `--ui-color-${key}-${shade}: var(--${prefixStr}color-${value === 'neutral' ? 'old-neutral' : value}-${shade}, ${getColor(colors, value as keyof Colors, shade)});`).join('\n  ')}`
 }
 function generateColor(key: string, shade: number) {
   return `--ui-${key}: var(--ui-color-${key}-${shade});`
 }
 
+function generateRoot(colors: Colors | undefined, uiColors: Record<string, string>, prefix?: string) {
+  const { neutral, ...rest } = uiColors
+
+  return `@layer theme {
+  :root, :host {
+  ${Object.entries(uiColors).map(([key, value]) => generateShades(colors, key, value, prefix)).join('\n  ')}
+  }
+  :root, :host, .light {
+  ${Object.keys(rest).map(key => generateColor(key, 500)).join('\n  ')}
+  }
+  .dark {
+  ${Object.keys(rest).map(key => generateColor(key, 400)).join('\n  ')}
+  }
+}`
+}
+
+const FALLBACK_RE = /(var\(--[^,;]+,) [^;]*\);/g
+
 function removeTemporaryColorsStyle() {
   document.querySelector('[data-nuxt-ui-colors]')?.remove()
 }
 
-export default defineNuxtPlugin(() => {
+export default defineNuxtPlugin(async () => {
   const appConfig = useAppConfig()
   const nuxtApp = useNuxtApp()
+  const head = injectHead()
+
+  const ssrStyle = import.meta.client && !bundledColors && nuxtApp.isHydrating && nuxtApp.payload.serverRendered
+    ? document.getElementById('nuxt-ui-colors')?.textContent ?? undefined
+    : undefined
+  // Fallback values only depend on the palette, so comparing without them checks
+  // that the server rendered the same colors and prefix.
+  const ssrSkeleton = ssrStyle?.replace(FALLBACK_RE, '$1 );')
+
+  const colors = shallowRef(bundledColors ?? (ssrStyle === undefined ? await loadColors() : undefined))
+  let loading: Promise<void> | undefined
+
+  // Plugins running after this one can still change the colors before hydration ends.
+  const hydrated = shallowRef(false)
+  if (ssrStyle !== undefined) {
+    nuxtApp.hooks.hookOnce('app:suspense:resolve', () => {
+      hydrated.value = true
+    })
+  }
 
   const root = computed(() => {
-    const { neutral, ...colors } = appConfig.ui.colors
     const prefix = (appConfig.ui as { prefix?: string }).prefix
 
-    return `@layer theme {
-  :root, :host {
-  ${Object.entries(appConfig.ui.colors).map(([key, value]: [string, string]) => generateShades(key, value, prefix)).join('\n  ')}
-  }
-  :root, :host, .light {
-  ${Object.keys(colors).map(key => generateColor(key, 500)).join('\n  ')}
-  }
-  .dark {
-  ${Object.keys(colors).map(key => generateColor(key, 400)).join('\n  ')}
-  }
-}`
+    if (ssrStyle === undefined || colors.value) {
+      return generateRoot(colors.value, appConfig.ui.colors, prefix)
+    }
+
+    if (hydrated.value && generateRoot(undefined, appConfig.ui.colors, prefix) !== ssrSkeleton) {
+      loading ||= loadColors().then((loaded) => {
+        colors.value = loaded
+      })
+    }
+    return ssrStyle
   })
 
   // Head
@@ -64,12 +101,11 @@ export default defineNuxtPlugin(() => {
 
     // `hookOnce` is only available on unhead v2's `Hookable`. In v3 `hooks` is a `HookableCore`
     // that exposes `hook` only, so self-unhook to keep the once semantics across both versions.
-    const head = injectHead()
     const unhook = head.hooks?.hook('dom:rendered', () => {
       removeTemporaryColorsStyle()
       unhook?.()
     })
   }
 
-  useHead(headData)
+  useHead(headData, { head })
 })

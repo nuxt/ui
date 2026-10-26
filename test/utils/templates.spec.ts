@@ -1,9 +1,16 @@
 import { readFileSync } from 'node:fs'
+import { pathToFileURL } from 'node:url'
+import { resolvePathSync } from 'mlly'
 import { join } from 'pathe'
 import { globSync } from 'tinyglobby'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { getTemplates, prefixedClasses } from '../../src/templates'
 import { defaultOptions, getDefaultConfig, resolveColors } from '../../src/utils/defaults'
+
+vi.mock('@nuxt/kit', async importOriginal => ({
+  ...await importOriginal<typeof import('@nuxt/kit')>(),
+  hasNuxtModule: () => false
+}))
 
 function themeContents(overrides: Record<string, any>, vue?: { detectedComponents?: Set<string> }) {
   const options = { ...defaultOptions, ...overrides, theme: { ...defaultOptions.theme, colors: resolveColors(undefined), ...(overrides.theme || {}) } }
@@ -38,6 +45,29 @@ describe('theme templates', () => {
 
     expect(hasProse({ content: true })).toBe(true)
     expect(hasProse({ content: true, prose: false })).toBe(false)
+  })
+})
+
+describe('colors template', () => {
+  const srcDir = join(process.cwd(), 'src')
+  const colorsPath = JSON.stringify(resolvePathSync('tailwindcss/colors', { url: pathToFileURL(`${srcDir}/runtime/`).href }))
+
+  function colorsContents(nuxt?: { options: { ssr: boolean } }) {
+    const options = { ...defaultOptions, theme: { ...defaultOptions.theme, colors: resolveColors(undefined) } }
+    const templates = getTemplates(options as any, getDefaultConfig(options.theme), nuxt as any, id => join(srcDir, id))
+    return templates.find(template => template.filename === 'ui-colors.ts')!.getContents!({} as any)
+  }
+
+  it('loads the palette lazily with SSR', async () => {
+    const contents = await colorsContents({ options: { ssr: true } })
+
+    expect(contents).toContain(`import(${colorsPath})`)
+    expect(contents).not.toContain(`from ${colorsPath}`)
+  })
+
+  it('bundles the palette without SSR', async () => {
+    expect(await colorsContents({ options: { ssr: false } })).toContain(`import colors from ${colorsPath}`)
+    expect(await colorsContents()).toContain(`import colors from ${colorsPath}`)
   })
 })
 
