@@ -14,6 +14,7 @@
     "@comark/vue": "catalog:",
     "@iconify-json/lucide": "catalog:",
     "@iconify-json/simple-icons": "catalog:",
+    "@iconify-json/vscode-icons": "catalog:",
     "@internationalized/date": "catalog:",
     "@nuxt/content": "catalog:",
     "@nuxt/ui": "catalog:",

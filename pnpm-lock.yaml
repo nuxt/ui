@@ -1080,6 +1080,9 @@ importers:
       '@iconify-json/simple-icons':
         specifier: 'catalog:'
         version: 1.2.100
+      '@iconify-json/vscode-icons':
+        specifier: 'catalog:'
+        version: 1.2.93
       '@internationalized/date':
         specifier: 'catalog:'
         version: 3.12.4
