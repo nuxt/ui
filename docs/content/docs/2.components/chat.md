@@ -387,47 +387,38 @@ function onSubmit() {
     :messages="messages"
     :status="status"
   >
-    <template #content="{ message, streaming }">
-      <template
-        v-for="(part, index) in message.parts"
-        :key="`${message.id}-${part.type}-${index}`"
+    <template #part="{ part, message, streaming }">
+      <UChatReasoning
+        v-if="isReasoningUIPart(part)"
+        :text="part.text"
+        :streaming="isPartStreaming(part, streaming)"
       >
-        <UChatReasoning
-          v-if="isReasoningUIPart(part)"
-          :text="part.text"
+        <Markdown
+          :value="part.text"
           :streaming="isPartStreaming(part, streaming)"
-        >
-          <Markdown
-            :value="part.text"
-            :streaming="isPartStreaming(part, streaming)"
-            :plugins="plugins"
-            class="*:first:mt-0 *:last:mb-0"
-          />
-        </UChatReasoning>
-
-        <UChatTool
-          v-else-if="isToolUIPart(part)"
-          :text="getToolName(part)"
-          :streaming="isToolStreaming(part, streaming)"
-          :actions="part.state === 'approval-requested' ? [
-            { label: 'Approve', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: true }) },
-            { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) }
-          ] : undefined"
+          :plugins="plugins"
+          class="*:first:mt-0 *:last:mb-0"
         />
+      </UChatReasoning>
 
-        <template v-else-if="isTextUIPart(part)">
-          <Markdown
-            v-if="message.role === 'assistant'"
-            :value="part.text"
-            :streaming="isPartStreaming(part, streaming)"
-            :plugins="plugins"
-            class="*:first:mt-0 *:last:mb-0"
-          />
-          <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
-            {{ part.text }}
-          </p>
-        </template>
-      </template>
+      <UChatTool
+        v-else-if="isToolUIPart(part)"
+        :text="getToolName(part)"
+        :streaming="isToolStreaming(part, streaming)"
+        :error="part.state === 'output-error'"
+        :actions="part.state === 'approval-requested' ? [
+          { label: 'Approve', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: true }) },
+          { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) }
+        ] : undefined"
+      />
+
+      <Markdown
+        v-else-if="isTextUIPart(part) && message.role === 'assistant'"
+        :value="part.text"
+        :streaming="isPartStreaming(part, streaming)"
+        :plugins="plugins"
+        class="*:first:mt-0 *:last:mb-0"
+      />
     </template>
   </UChatMessages>
 
@@ -479,47 +470,38 @@ function onSubmit() {
     :messages="messages"
     :status="status"
   >
-    <template #content="{ message, streaming }">
-      <template
-        v-for="(part, index) in message.parts"
-        :key="`${message.id}-${part.type}-${index}`"
+    <template #part="{ part, message, streaming }">
+      <UChatReasoning
+        v-if="isReasoningUIPart(part)"
+        :text="part.text"
+        :streaming="isPartStreaming(part, streaming)"
       >
-        <UChatReasoning
-          v-if="isReasoningUIPart(part)"
-          :text="part.text"
+        <Markdown
+          :value="part.text"
           :streaming="isPartStreaming(part, streaming)"
-        >
-          <Markdown
-            :value="part.text"
-            :streaming="isPartStreaming(part, streaming)"
-            :plugins="plugins"
-            class="*:first:mt-0 *:last:mb-0"
-          />
-        </UChatReasoning>
-
-        <UChatTool
-          v-else-if="isToolUIPart(part)"
-          :text="getToolName(part)"
-          :streaming="isToolStreaming(part, streaming)"
-          :actions="part.state === 'approval-requested' ? [
-            { label: 'Approve', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: true }) },
-            { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) }
-          ] : undefined"
+          :plugins="plugins"
+          class="*:first:mt-0 *:last:mb-0"
         />
+      </UChatReasoning>
 
-        <template v-else-if="isTextUIPart(part)">
-          <Markdown
-            v-if="message.role === 'assistant'"
-            :value="part.text"
-            :streaming="isPartStreaming(part, streaming)"
-            :plugins="plugins"
-            class="*:first:mt-0 *:last:mb-0"
-          />
-          <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
-            {{ part.text }}
-          </p>
-        </template>
-      </template>
+      <UChatTool
+        v-else-if="isToolUIPart(part)"
+        :text="getToolName(part)"
+        :streaming="isToolStreaming(part, streaming)"
+        :error="part.state === 'output-error'"
+        :actions="part.state === 'approval-requested' ? [
+          { label: 'Approve', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: true }) },
+          { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) }
+        ] : undefined"
+      />
+
+      <Markdown
+        v-else-if="isTextUIPart(part) && message.role === 'assistant'"
+        :value="part.text"
+        :streaming="isPartStreaming(part, streaming)"
+        :plugins="plugins"
+        class="*:first:mt-0 *:last:mb-0"
+      />
     </template>
   </UChatMessages>
 
@@ -538,6 +520,10 @@ function onSubmit() {
 </template>
 ```
 
+::
+
+::note
+The `#part` slot is called once for each part of a message, with the `part`, its `index` and the `message`. A part the slot doesn't render, like the user's text above, falls back to the default output. Use the `#content` slot instead to render the whole message yourself.
 ::
 
 ::tip

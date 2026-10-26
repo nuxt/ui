@@ -379,44 +379,39 @@ function clearMessages() {
         :status="status"
         compact
         class="px-0 gap-2"
-        :user="{ ui: { container: 'max-w-full' } }"
+        :user="{ ui: { container: 'max-w-full', text: 'text-sm/6' } }"
+        :ui="{ viewport: 'sticky top-auto bottom-4 h-0' }"
       >
         <template #indicator>
           <UChatTool :icon="studioIcons.brain" text="Thinking..." streaming />
         </template>
 
-        <template #content="{ message, streaming }">
-          <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
-            <UChatReasoning
-              v-if="isReasoningUIPart(part)"
-              :text="part.text"
+        <template #part="{ part, message, streaming }">
+          <UChatReasoning
+            v-if="isReasoningUIPart(part)"
+            :text="part.text"
+            :streaming="isPartStreaming(part, streaming)"
+            :icon="studioIcons.brain"
+          >
+            <ChatMarkdown
+              :value="part.text"
               :streaming="isPartStreaming(part, streaming)"
-              :icon="studioIcons.brain"
-            >
-              <ChatMarkdown
-                :value="part.text"
-                :streaming="isPartStreaming(part, streaming)"
-              />
-            </UChatReasoning>
-
-            <template v-else-if="isTextUIPart(part) && part.text.length > 0">
-              <ChatMarkdown
-                v-if="message.role === 'assistant'"
-                :value="part.text"
-                :streaming="isPartStreaming(part, streaming)"
-              />
-              <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap text-sm/6">
-                {{ part.text }}
-              </p>
-            </template>
-
-            <UChatTool
-              v-else-if="isToolUIPart(part)"
-              :text="getToolText(part)"
-              :icon="getToolIcon(part)"
-              :streaming="isToolStreaming(part, streaming)"
             />
-          </template>
+          </UChatReasoning>
+
+          <ChatMarkdown
+            v-else-if="isTextUIPart(part) && part.text.length > 0 && message.role === 'assistant'"
+            :value="part.text"
+            :streaming="isPartStreaming(part, streaming)"
+          />
+
+          <UChatTool
+            v-else-if="isToolUIPart(part)"
+            :text="getToolText(part)"
+            :icon="getToolIcon(part)"
+            :streaming="isToolStreaming(part, streaming)"
+            :error="part.state === 'output-error'"
+          />
         </template>
       </UChatMessages>
 

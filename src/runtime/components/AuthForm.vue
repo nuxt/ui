@@ -55,7 +55,7 @@ export interface AuthFormProps<T extends FormSchema = FormSchema<object>, F exte
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: any
+  as?: any | { root?: any, title?: any }
   /**
    * The icon displayed above the title.
    * @IconifyIcon
@@ -119,7 +119,7 @@ import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
-import { omit, pick } from '../utils'
+import { omit, pick, resolveAs } from '../utils'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 import UIcon from './Icon.vue'
@@ -158,6 +158,9 @@ const props = useComponentProps<AuthFormProps<T, F>>('authForm', _props)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as AuthForm['AppConfig']
+
+// eslint-disable-next-line vue/no-dupe-keys
+const as = computed(() => resolveAs(props.as, { root: 'div', title: 'div' }))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.authForm || {}) })())
@@ -207,7 +210,7 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="as.root" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div v-if="(props.icon || !!slots.leading) || (props.title || !!slots.title) || (props.description || !!slots.description) || !!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header">
         <div v-if="props.icon || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
@@ -216,11 +219,11 @@ defineExpose({
           </slot>
         </div>
 
-        <div v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+        <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
           <slot name="title">
             {{ props.title }}
           </slot>
-        </div>
+        </Primitive>
 
         <div v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
           <slot name="description">
