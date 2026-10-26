@@ -29,7 +29,7 @@ catalog:
   "@internationalized/number": ^3.6.9
   "@nuxt/content": ^3.16.2
   "@nuxt/eslint-config": ^1.17.0
-  "@nuxt/fonts": ^0.14.0
+  "@nuxt/fonts": ^1.2.0
   "@nuxt/icon": ^2.6.1
   "@nuxt/image": ^2.2.0
   "@nuxt/kit": ^4.6.2
