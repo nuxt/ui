@@ -11,7 +11,7 @@ navigation.badge: Soon
 
 ## Usage
 
-The ChatAttachment component displays a file as a thumbnail when it is an image, or as its name with an icon otherwise.
+The ChatAttachment component displays a file with its name and a description, next to a thumbnail when it is an image or an icon otherwise.
 
 ::note
 This component is automatically used by the [`ChatPrompt`](/docs/components/chat-prompt#files) component to list the files bound with `v-model:files`.
@@ -19,7 +19,7 @@ This component is automatically used by the [`ChatPrompt`](/docs/components/chat
 
 ### File
 
-Use the `file` prop to display a `File`, such as one picked by the user. Its name and type are read from it and images are previewed through an object URL.
+Use the `file` prop to display a `File`, such as one picked by the user. Its name, type and size are read from it and images are previewed through an object URL.
 
 ```vue
 <script setup lang="ts">
@@ -78,9 +78,29 @@ Map a file part of a message to these props in the `#files` slot of [ChatMessage
 ```
 ::
 
+### Description
+
+Use the `description` prop to set the text under the name. Defaults to the file extension and, with the `file` prop, its size.
+
+::component-code
+---
+ignore:
+  - name
+  - type
+props:
+  description: 'Uploaded 2 minutes ago'
+  name: 'quarterly-report.pdf'
+  type: 'application/pdf'
+---
+::
+
 ### Status
 
 Use the `status` prop to show that the file is `uploading` or failed to upload with `error`. Defaults to `idle`.
+
+::note
+While `uploading`, the name shimmers and an image is dimmed. With `error`, pass the reason to the `description` prop.
+::
 
 ::component-code
 ---
@@ -89,6 +109,22 @@ ignore:
   - type
 props:
   status: 'uploading'
+  name: 'quarterly-report.pdf'
+  type: 'application/pdf'
+---
+::
+
+### Size
+
+Use the `size` prop to change the size of the attachment. Defaults to `md`.
+
+::component-code
+---
+ignore:
+  - name
+  - type
+props:
+  size: 'sm'
   name: 'quarterly-report.pdf'
   type: 'application/pdf'
 ---

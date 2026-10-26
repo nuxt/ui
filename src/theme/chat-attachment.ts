@@ -1,36 +1,49 @@
-import type { ModuleOptions } from '../module'
-
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
-    root: 'group/attachment relative flex items-center gap-2 shrink-0 h-14 rounded-md ring ring-default bg-elevated/50 overflow-hidden',
+    root: 'relative flex items-center min-w-0 max-w-full w-fit shrink-0 rounded-lg ring ring-default bg-default',
+    leading: 'relative flex items-center justify-center shrink-0 aspect-square overflow-hidden rounded-md bg-elevated text-muted',
+    leadingIcon: 'shrink-0',
     image: 'size-full object-cover',
-    overlay: 'absolute inset-0 flex items-center justify-center bg-default/60',
-    icon: 'shrink-0 size-5 text-muted',
-    name: 'min-w-0 truncate text-sm text-default',
-    remove: ['absolute top-1 end-1 inline-flex items-center justify-center rounded-full p-0.5 bg-inverted/75 text-inverted hover:bg-inverted focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-inverted [@media(hover:hover)]:opacity-0 group-hover/attachment:opacity-100 focus-visible:opacity-100', options.theme.transitions && 'transition-[opacity,background-color] ease-out'],
-    removeIcon: 'size-3'
+    wrapper: 'flex flex-col min-w-0 flex-1',
+    name: 'block truncate font-medium text-highlighted',
+    description: 'block truncate text-muted',
+    remove: 'shrink-0'
   },
   variants: {
-    image: {
-      true: {
-        root: 'w-14'
+    size: {
+      xs: {
+        root: 'p-1 pe-1.5 gap-1.5 text-xs',
+        leading: 'size-7',
+        leadingIcon: 'size-3.5',
+        description: 'text-[10px]/3'
       },
-      false: {
-        root: 'max-w-56 px-3 has-data-[slot=remove]:pe-7'
+      sm: {
+        root: 'p-1.5 pe-2 gap-2 text-xs',
+        leading: 'size-8',
+        leadingIcon: 'size-4',
+        description: 'text-xs/4'
+      },
+      md: {
+        root: 'p-2 pe-2.5 gap-2.5 text-sm',
+        leading: 'size-10',
+        leadingIcon: 'size-5',
+        description: 'mt-0.5 text-xs'
       }
     },
     status: {
       idle: '',
       uploading: {
-        icon: 'animate-spin'
+        image: 'opacity-60'
       },
       error: {
-        root: 'ring-error',
-        icon: 'text-error'
+        root: 'ring-error/40',
+        leading: 'bg-error/10 text-error',
+        description: 'text-error'
       }
     }
   },
   defaultVariants: {
+    size: 'md',
     status: 'idle'
   }
-})
+}

@@ -13,7 +13,7 @@ export interface ChatAttachmentProps {
    */
   as?: any
   /**
-   * The file to display, its `name`, `type` and a preview `url` are read from it.
+   * The file to display, its `name`, `type` and size are read from it and images are previewed.
    */
   file?: File
   /**
@@ -21,7 +21,7 @@ export interface ChatAttachmentProps {
    */
   name?: string
   /**
-   * The media type of the file, images are displayed as a thumbnail.
+   * The media type of the file, images are previewed.
    */
   type?: string
   /**
@@ -29,10 +29,18 @@ export interface ChatAttachmentProps {
    */
   url?: string
   /**
+   * The text displayed under the name. Defaults to the file extension and size.
+   */
+  description?: string
+  /**
    * The upload status of the file.
    * @defaultValue 'idle'
    */
   status?: 'idle' | 'uploading' | 'error'
+  /**
+   * @defaultValue 'md'
+   */
+  size?: ChatAttachment['variants']['size']
   /**
    * Display a button to remove the file.
    * @defaultValue false
@@ -44,12 +52,6 @@ export interface ChatAttachmentProps {
    * @IconifyIcon
    */
   icon?: IconProps['name']
-  /**
-   * The icon displayed while the file uploads.
-   * @defaultValue appConfig.ui.icons.loading
-   * @IconifyIcon
-   */
-  loadingIcon?: IconProps['name']
   /**
    * The icon displayed when the upload fails.
    * @defaultValue appConfig.ui.icons.error
@@ -77,8 +79,11 @@ import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
+import { formatFileSize } from '../utils/file'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
+import UButton from './Button.vue'
+import UChatShimmer from './ChatShimmer.vue'
 
 const _props = withDefaults(defineProps<ChatAttachmentProps>(), {
   as: 'div',
@@ -92,7 +97,7 @@ const { t } = useLocale()
 const appConfig = useAppConfig() as ChatAttachment['AppConfig']
 
 const fileName = computed(() => props.name ?? props.file?.name)
-const fileType = computed(() => props.type ?? props.file?.type)
+const fileType = computed(() => props.type || props.file?.type)
 
 // A `File` has no URL, preview it through an object URL released when the file changes
 const fileUrl = ref<string>()
@@ -110,45 +115,50 @@ watchEffect((onCleanup) => {
 const previewUrl = computed(() => props.url ?? fileUrl.value)
 const isImage = computed(() => !!previewUrl.value && !!fileType.value?.startsWith('image/'))
 
-const statusIcon = computed(() => {
-  if (props.status === 'uploading') return props.loadingIcon || appConfig.ui.icons.loading
-  if (props.status === 'error') return props.errorIcon || appConfig.ui.icons.error
+const fileDescription = computed(() => {
+  if (props.description !== undefined) return props.description
 
-  return undefined
+  const extension = fileName.value?.includes('.') ? fileName.value.split('.').pop()?.toUpperCase() : undefined
+
+  return [extension, formatFileSize(props.file?.size)].filter(Boolean).join(' · ')
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatAttachment || {}) })({
-  image: isImage.value,
+  size: props.size,
   status: props.status
 }))
 </script>
 
 <template>
   <Primitive :as="props.as" :data-status="props.status" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <template v-if="isImage">
-      <img :src="previewUrl" :alt="fileName" data-slot="image" :class="ui.image({ class: props.ui?.image })">
+    <div data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+      <img v-if="isImage" :src="previewUrl" :alt="fileName" data-slot="image" :class="ui.image({ class: props.ui?.image })">
+      <UIcon
+        v-else
+        :name="props.status === 'error' ? (props.errorIcon || appConfig.ui.icons.error) : (props.icon || appConfig.ui.icons.file)"
+        data-slot="leadingIcon"
+        :class="ui.leadingIcon({ class: props.ui?.leadingIcon })"
+      />
+    </div>
 
-      <div v-if="statusIcon" data-slot="overlay" :class="ui.overlay({ class: props.ui?.overlay })">
-        <UIcon :name="statusIcon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
-      </div>
-    </template>
+    <div data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+      <UChatShimmer v-if="props.status === 'uploading' && fileName" :text="fileName" data-slot="name" :class="ui.name({ class: props.ui?.name })" />
+      <span v-else data-slot="name" :class="ui.name({ class: props.ui?.name })">{{ fileName }}</span>
 
-    <template v-else>
-      <UIcon :name="statusIcon || props.icon || appConfig.ui.icons.file" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
+      <span v-if="fileDescription" data-slot="description" :class="ui.description({ class: props.ui?.description })">{{ fileDescription }}</span>
+    </div>
 
-      <span data-slot="name" :class="ui.name({ class: props.ui?.name })">{{ fileName }}</span>
-    </template>
-
-    <button
+    <UButton
       v-if="props.removable"
-      type="button"
+      :icon="props.removeIcon || appConfig.ui.icons.close"
+      color="neutral"
+      variant="ghost"
+      size="xs"
       :aria-label="t('fileUpload.removeFile', { filename: fileName ?? '' })"
       data-slot="remove"
       :class="ui.remove({ class: props.ui?.remove })"
       @click="emits('remove', $event)"
-    >
-      <UIcon :name="props.removeIcon || appConfig.ui.icons.close" data-slot="removeIcon" :class="ui.removeIcon({ class: props.ui?.removeIcon })" />
-    </button>
+    />
   </Primitive>
 </template>
