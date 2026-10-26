@@ -1,4 +1,4 @@
-import { bench, describe } from 'vitest'
+import { test } from 'vitest'
 import { defineComponent, h } from 'vue'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { useComponentProps } from '../../src/runtime/composables/useComponentProps'
@@ -15,16 +15,13 @@ const Probe = defineComponent({
 // A single read is far below CodSpeed's noise floor, so each iteration repeats it.
 const READS = 1000
 
-describe('useComponentProps prop reads', () => {
-  let props: Record<string, any> | undefined
+test('useComponentProps prop reads', async ({ bench }) => {
+  const props = (await mountSuspended(Probe, { props: { size: 'md' } }) as any).setupState.props
 
-  // Mounted lazily: CodSpeed's analysis runner invokes the bench function
-  // without tinybench's `setup`/`teardown` options.
-  bench(`passed + unset prop x${READS}`, async () => {
-    props ??= (await mountSuspended(Probe, { props: { size: 'md' } }) as any).setupState.props
+  await bench(`passed + unset prop x${READS}`, () => {
     for (let i = 0; i < READS; i++) {
-      void props!.size
-      void props!.color
+      void props.size
+      void props.color
     }
-  })
+  }).run()
 })
