@@ -654,6 +654,19 @@ describe('Table', () => {
     expect(rows[2]!.findAll('td')[1]!.attributes('colspan')).toBe('2')
   })
 
+  it('does not span cells in a virtualized table', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data: [{ category: 'A', name: 'One' }, { category: 'A', name: 'Two' }],
+        columns: [{ accessorKey: 'category', spanRows: true }, { accessorKey: 'name' }] as any,
+        features: { cellSpanningFeature },
+        virtualize: true
+      }
+    })
+
+    expect(wrapper.findAll('tbody td[rowspan]')).toHaveLength(0)
+  })
+
   it('selects cells with the pointer and the keyboard', async () => {
     const wrapper = await mountSuspended(Table, {
       props: { data: data.slice(0, 3), columns: [{ accessorKey: 'id' }, { accessorKey: 'email' }] as any, features: { cellSelectionFeature } },

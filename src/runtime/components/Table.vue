@@ -373,7 +373,8 @@ const registeredFeatures = tableFeatures({ ...defaultFeatures, ...props.features
 
 // The cell APIs of these features only exist once they are registered.
 const hasCellSelection = 'cellSelectionFeature' in registeredFeatures
-const hasCellSpanning = 'cellSpanningFeature' in registeredFeatures
+// A span can't reach a row the virtualizer doesn't render, so virtualized tables don't span cells.
+const hasCellSpanning = 'cellSpanningFeature' in registeredFeatures && !props.virtualize
 
 // Each model is a state slice with a matching `on<Slice>Change` option, so supporting a new slice only takes a `defineModel` and an entry here.
 const models: { [K in keyof TableState<TableFeatures>]-?: Ref<TableState<TableFeatures>[K] | undefined> } = {
@@ -655,7 +656,21 @@ function onCellKeydown(e: KeyboardEvent) {
   } else {
     tableApi.moveCellSelection(direction)
   }
-  nextTick(() => tableRef.value?.querySelector<HTMLElement>('td[tabindex="0"]')?.focus())
+  focusSelectedCell()
+}
+
+// Moves the focus to the active cell, scrolling a virtualized table to its row first.
+function focusSelectedCell() {
+  const focus = () => tableRef.value?.querySelector<HTMLElement>('td[tabindex="0"]')?.focus()
+  const rowId = tableApi.getFocusedCell()?.row.id
+  const index = virtualizerInstance && rowId !== undefined ? centerRows.value.findIndex(row => row.id === rowId) : -1
+  if (index >= 0) {
+    // `auto` only scrolls when the row is out of view, the row renders on the next frame.
+    virtualizerInstance!.scrollToIndex(index, { align: 'auto' })
+    requestAnimationFrame(() => nextTick(focus))
+    return
+  }
+  nextTick(focus)
 }
 
 function getCellSelectionListeners(cell: Cell<TableFeatures, T, unknown>) {
