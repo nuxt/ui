@@ -611,7 +611,12 @@ function onSubmit() {
 
 watch(status, (value) => {
   if (value === 'ready') {
-    sendNext()
+    // Wait a frame so the finished answer is laid out before the next message scrolls into view
+    requestAnimationFrame(() => {
+      if (status.value === 'ready') {
+        sendNext()
+      }
+    })
   }
 })
 </script>
@@ -668,7 +673,12 @@ function onSubmit() {
 
 watch(status, (value) => {
   if (value === 'ready') {
-    sendNext()
+    // Wait a frame so the finished answer is laid out before the next message scrolls into view
+    requestAnimationFrame(() => {
+      if (status.value === 'ready') {
+        sendNext()
+      }
+    })
   }
 })
 </script>

@@ -145,11 +145,41 @@ function onSubmit() {
   }
 }
 
+// Wait a frame: the finished answer's Markdown renders again once it stops
+// streaming, sending in the same tick would scroll to the new message before
+// that layout lands and stop short of it.
 watch(status, (value) => {
   if (value === 'ready') {
-    sendNext()
+    requestAnimationFrame(() => {
+      if (status.value === 'ready') {
+        sendNext()
+      }
+    })
   }
 })
+
+// Moves a queued message to the front and stops the current response, the
+// status watcher then sends it as soon as the chat is `ready`.
+function sendNow(index: number) {
+  queue.value.unshift(...queue.value.splice(index, 1))
+
+  if (status.value === 'submitted' || status.value === 'streaming') {
+    stop()
+  } else {
+    sendNext()
+  }
+}
+
+// Puts a queued message back in the prompt, ahead of any draft.
+function editQueued(index: number) {
+  const [item] = queue.value.splice(index, 1)
+  if (!item) {
+    return
+  }
+
+  input.value = input.value ? `${item.text}\n${input.value}` : item.text
+  promptRef.value?.textareaRef?.focus()
+}
 
 // Sync external messages (e.g. from search→chat flow) into the chat instance.
 // When the last synced message is from the user, auto-regenerate the assistant response.
@@ -253,6 +283,22 @@ function askQuestion(question: string) {
 // The sidebar keeps its content mounted when closed (offcanvas), so the prompt's
 // `autofocus` only fires once. Refocus it each time the sidebar reopens.
 const promptRef = useTemplateRef('promptRef')
+
+// The queue floats over the end of the messages, they get its height as room
+// at the bottom so the last one never hides behind it.
+const queueRef = useTemplateRef('queueRef')
+const queueHeight = ref(0)
+
+function measureQueue() {
+  queueHeight.value = queueRef.value?.offsetHeight ?? 0
+}
+
+useResizeObserver(queueRef, measureQueue)
+// A resize observer reports a frame late. Sending a queued message removes a
+// row in the same render that `UChatMessages` measures the room for it, so the
+// height has to be up to date by then or the scroll lands short.
+watch(() => queue.value.length, measureQueue, { flush: 'post' })
+
 watch(open, (value) => {
   if (value) {
     nextTick(() => {
@@ -306,8 +352,8 @@ function clearMessages() {
     title="Ask"
     rail
     breakpoint="xl"
-    :style="{ '--sidebar-width': '24rem' }"
-    :ui="{ footer: 'p-0', actions: 'gap-0.5' }"
+    :style="{ '--sidebar-width': '24rem', '--queue-height': `${queueHeight}px` }"
+    :ui="{ body: 'pb-[calc(--spacing(4)+var(--queue-height))]', footer: 'relative p-0 overflow-visible', actions: 'gap-0.5' }"
     class="bg-default"
   >
     <template #actions>
@@ -380,7 +426,7 @@ function clearMessages() {
         compact
         class="px-0 gap-2"
         :user="{ ui: { container: 'max-w-full', text: 'text-sm/6' } }"
-        :ui="{ viewport: 'sticky top-auto bottom-4 h-0' }"
+        :ui="{ viewport: 'sticky top-auto bottom-[calc(--spacing(4)+var(--queue-height))] h-0' }"
       >
         <template #indicator>
           <UChatTool :icon="studioIcons.brain" text="Thinking..." streaming />
@@ -426,6 +472,67 @@ function clearMessages() {
     </UTheme>
 
     <template #footer>
+      <div
+        v-if="queue.length"
+        ref="queueRef"
+        class="absolute bottom-full inset-x-3 z-10 rounded-t-lg border border-b-0 border-default bg-default overflow-hidden"
+      >
+        <UCollapsible default-open class="bg-elevated/50 px-1 pb-1 flex flex-col">
+          <UButton
+            :label="`${queue.length} queued ${queue.length === 1 ? 'message' : 'messages'}`"
+            :leading-icon="appConfig.ui.icons.chevronDown"
+            color="neutral"
+            variant="link"
+            size="sm"
+            square
+            class="text-muted hover:text-default group w-full"
+            :ui="{ leadingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+          />
+
+          <template #content>
+            <ul>
+              <li v-for="(item, index) in queue" :key="index" class="group flex items-center gap-2 h-7 ps-2 pe-0.5 rounded-sm text-sm text-default hover:bg-elevated">
+                <span class="size-3 shrink-0 rounded-full ring ring-accented" />
+                <span class="truncate flex-1">{{ item.text }}</span>
+
+                <div class="flex items-center opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 pointer-coarse:opacity-100">
+                  <UTooltip text="Send now">
+                    <UButton
+                      :icon="appConfig.ui.icons.arrowUp"
+                      color="neutral"
+                      variant="link"
+                      size="xs"
+                      :aria-label="`Send ${item.text} now`"
+                      @click="sendNow(index)"
+                    />
+                  </UTooltip>
+                  <UTooltip text="Edit">
+                    <UButton
+                      :icon="studioIcons.pencil"
+                      color="neutral"
+                      variant="link"
+                      size="xs"
+                      :aria-label="`Edit ${item.text}`"
+                      @click="editQueued(index)"
+                    />
+                  </UTooltip>
+                  <UTooltip text="Remove">
+                    <UButton
+                      :icon="studioIcons.trash"
+                      color="neutral"
+                      variant="link"
+                      size="xs"
+                      :aria-label="`Remove ${item.text} from queue`"
+                      @click="queue.splice(index, 1)"
+                    />
+                  </UTooltip>
+                </div>
+              </li>
+            </ul>
+          </template>
+        </UCollapsible>
+      </div>
+
       <UChatPrompt
         ref="promptRef"
         v-model="input"
@@ -437,22 +544,6 @@ function clearMessages() {
         class="px-4"
         @submit="onSubmit"
       >
-        <template v-if="queue.length" #header>
-          <ul class="flex flex-col gap-1 w-full">
-            <li v-for="(item, index) in queue" :key="index" class="flex items-center gap-2 text-xs text-muted">
-              <span class="truncate flex-1">{{ item.text }}</span>
-              <UButton
-                :icon="appConfig.ui.icons.close"
-                color="neutral"
-                variant="ghost"
-                size="xs"
-                :aria-label="`Remove ${item.text} from queue`"
-                @click="queue.splice(index, 1)"
-              />
-            </li>
-          </ul>
-        </template>
-
         <template #footer>
           <ULink to="https://vercel.com/ai-gateway" target="_blank" class="inline-flex items-center gap-1 text-xs text-dimmed hover:text-muted">
             Powered by <UIcon name="i-simple-icons-vercel" class="size-3" /> AI Gateway
