@@ -169,7 +169,7 @@ highlights:
 
 The table registers the TanStack Table features it renders: sorting, column and global filtering, expanding, row selection, column visibility, column pinning, sizing and resizing, and row pinning, along with their row models and every built-in sorting and filtering function.
 
-Use the `features` prop to register other [features](https://tanstack.com/table/v9/docs/guide/features) like [pagination](#with-pagination), [grouping](#with-grouped-rows), [cell selection](#with-cell-selection), [cell spanning](#with-column-span), faceting or column ordering, along with their row models. It is read once when the table is created, so declare it in your script.
+Use the `features` prop to register other [features](https://tanstack.com/table/v9/docs/guide/features) like [pagination](#with-pagination), [grouping](#with-grouped-rows), [cell selection](#with-cell-selection), [cell spanning](#with-column-span), [faceting](#with-column-faceting) or [column ordering](#with-column-ordering), along with their row models. It is read once when the table is created, so declare it in your script.
 
 ```vue
 <script setup lang="ts">
@@ -656,6 +656,23 @@ class: '!p-0'
 You can use the `column-visibility` prop to control the visibility state of the columns (can be bound with `v-model`).
 ::
 
+### With column ordering
+
+You can reorder the columns using the TanStack Table [Column Ordering APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/column-ordering) by registering `columnOrderingFeature` through the `features` prop. In this example, the buttons in each header move the column in the `column-order` array.
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-column-ordering-example'
+class: '!p-0'
+---
+::
+
+::tip
+You can use the `column-order` prop to control the order of the columns (can be bound with `v-model`).
+::
+
 ### With column filters
 
 You can use an [Input](/docs/components/input) component to filter per column the rows using the TanStack Table [Column Filtering APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/column-filtering).
@@ -693,6 +710,19 @@ highlights:
 
 ::tip
 You can use the `global-filter` prop to control the global filter state (can be bound with `v-model`).
+::
+
+### With column faceting
+
+You can list the values of a column and how many rows have each using the TanStack Table [Column Faceting APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/column-faceting). Register `columnFacetingFeature` with `createFacetedRowModel()` and `createFacetedUniqueValues()` through the `features` prop, then read `column.getFacetedUniqueValues()`. Add `createFacetedMinMaxValues()` for the range of a numeric column.
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-column-faceting-example'
+class: '!p-0'
+---
 ::
 
 ### With pagination
@@ -783,7 +813,7 @@ class: '!p-0'
 Use the `virtualize` prop to enable virtualization for large datasets as a boolean or an object with options like `{ estimateSize: 65, overscan: 12 }`. You can also pass other [TanStack Virtual options](https://tanstack.com/virtual/v3/docs/api/virtualizer#optional-options) to customize the virtualization behavior. The `sticky` prop works in combination with `virtualize` to keep the header or footer visible while scrolling through large datasets.
 
 ::warning
-Row pinning is not supported when virtualization is enabled.
+Row pinning and cell spanning are not supported when virtualization is enabled.
 ::
 
 ::component-example
