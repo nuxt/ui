@@ -29,29 +29,29 @@ export default defineTheme({
     },
     size: {
       xs: {
-        base: 'text-[8px]/3 [--ui-control-px:--spacing(1)] [--ui-control-py:--spacing(0.5)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(3)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-sm',
-        leadingIcon: 'size-(--ui-control-icon)',
-        trailingIcon: 'size-(--ui-control-icon)'
+        base: 'text-[8px]/3 [--ui-control-px:--spacing(1)] [--ui-control-py:--spacing(0.5)] [--ui-control-gap:--spacing(1)] [--ui-control-icon-size:--spacing(3)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-sm',
+        leadingIcon: 'size-(--ui-control-icon-size)',
+        trailingIcon: 'size-(--ui-control-icon-size)'
       },
       sm: {
-        base: 'text-[10px]/3 [--ui-control-px:--spacing(1.5)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(3)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-sm',
-        leadingIcon: 'size-(--ui-control-icon)',
-        trailingIcon: 'size-(--ui-control-icon)'
+        base: 'text-[10px]/3 [--ui-control-px:--spacing(1.5)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon-size:--spacing(3)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-sm',
+        leadingIcon: 'size-(--ui-control-icon-size)',
+        trailingIcon: 'size-(--ui-control-icon-size)'
       },
       md: {
-        base: 'text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md',
-        leadingIcon: 'size-(--ui-control-icon)',
-        trailingIcon: 'size-(--ui-control-icon)'
+        base: 'text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon-size:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md',
+        leadingIcon: 'size-(--ui-control-icon-size)',
+        trailingIcon: 'size-(--ui-control-icon-size)'
       },
       lg: {
-        base: 'text-sm [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md',
-        leadingIcon: 'size-(--ui-control-icon)',
-        trailingIcon: 'size-(--ui-control-icon)'
+        base: 'text-sm [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon-size:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md',
+        leadingIcon: 'size-(--ui-control-icon-size)',
+        trailingIcon: 'size-(--ui-control-icon-size)'
       },
       xl: {
-        base: 'text-base [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon:--spacing(6)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md',
-        leadingIcon: 'size-(--ui-control-icon)',
-        trailingIcon: 'size-(--ui-control-icon)'
+        base: 'text-base [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon-size:--spacing(6)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md',
+        leadingIcon: 'size-(--ui-control-icon-size)',
+        trailingIcon: 'size-(--ui-control-icon-size)'
       }
     },
     // Equal padding, for `square` or an icon and nothing else
