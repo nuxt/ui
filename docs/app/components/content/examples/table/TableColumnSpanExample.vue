@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { TableColumn, TableFeatures } from '@nuxt/ui'
-import type { Cell } from '@tanstack/vue-table'
+import { cellSpanningFeature } from '@tanstack/vue-table'
+import type { TableColumn } from '@nuxt/ui'
 
 type Product = {
   category: string
@@ -17,45 +17,15 @@ const data = ref<Product[]>([
   { category: 'Clothing', name: 'Jeans', price: 59, stock: 150 }
 ])
 
-function getCategoryRowSpan(cell: Cell<TableFeatures, Product, unknown>) {
-  const category = cell.row.original.category
-  const rows = cell.getContext().table.getRowModel().rows
-  const rowIndex = rows.findIndex((r: typeof rows[number]) => r.id === cell.row.id)
-
-  if (rowIndex > 0 && rows[rowIndex - 1]!.original.category === category) {
-    return '1'
-  }
-
-  let span = 1
-  for (let i = rowIndex + 1; i < rows.length; i++) {
-    if (rows[i]!.original.category === category) span++
-    else break
-  }
-
-  return `${span}`
-}
-
-function getCategoryClass(cell: Cell<TableFeatures, Product, unknown>) {
-  const category = cell.row.original.category
-  const rows = cell.getContext().table.getRowModel().rows
-  const rowIndex = rows.findIndex((r: typeof rows[number]) => r.id === cell.row.id)
-
-  if (rowIndex > 0 && rows[rowIndex - 1]!.original.category === category) {
-    return 'hidden'
-  }
-
-  return 'font-medium align-middle border-r border-default'
-}
+const features = { cellSpanningFeature }
 
 const columns: TableColumn<Product>[] = [{
   accessorKey: 'category',
   header: 'Category',
+  spanRows: true,
   meta: {
-    rowspan: {
-      td: getCategoryRowSpan
-    },
     class: {
-      td: getCategoryClass
+      td: 'font-medium align-middle border-e border-default'
     }
   }
 }, {
@@ -89,5 +59,5 @@ const columns: TableColumn<Product>[] = [{
 </script>
 
 <template>
-  <UTable :data="data" :columns="columns" class="flex-1" />
+  <UTable :data="data" :columns="columns" :features="features" class="flex-1" />
 </template>

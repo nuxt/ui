@@ -95,6 +95,23 @@ const data = ref<Payment[]>([
   }
 ])
 
+function formatDate(date: Date) {
+  return date.toLocaleString('en-US', {
+    day: 'numeric',
+    month: 'short',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  })
+}
+
+function formatAmount(amount: number) {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'EUR'
+  }).format(amount)
+}
+
 const columns: TableColumn<Payment>[] = [
   {
     id: 'title',
@@ -107,26 +124,17 @@ const columns: TableColumn<Payment>[] = [
   {
     accessorKey: 'id',
     header: '#',
-    cell: ({ row }) =>
-      row.getIsGrouped()
-        ? `${row.getValue('id')} records`
-        : `#${row.getValue('id')}`,
-    aggregationFn: 'count'
+    cell: ({ row }) => `#${row.getValue('id')}`,
+    aggregationFn: 'count',
+    aggregatedCell: ({ getValue }) => `${getValue()} records`
   },
   {
     id: 'date',
     accessorFn: row => new Date(row.date),
     header: 'Date',
-    cell: ({ row }) => {
-      return new Date(row.getValue('date')).toLocaleString('en-US', {
-        day: 'numeric',
-        month: 'short',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false
-      })
-    },
-    aggregationFn: 'max'
+    cell: ({ getValue }) => formatDate(getValue() as Date),
+    aggregationFn: 'max',
+    aggregatedCell: ({ getValue }) => formatDate(getValue() as Date)
   },
   {
     accessorKey: 'status',
@@ -140,11 +148,8 @@ const columns: TableColumn<Payment>[] = [
         td: 'w-full'
       }
     },
-    cell: ({ row }) =>
-      row.getIsGrouped()
-        ? `${row.getValue('email')} customers`
-        : row.getValue('email'),
-    aggregationFn: 'uniqueCount'
+    aggregationFn: 'uniqueCount',
+    aggregatedCell: ({ getValue }) => `${getValue()} customers`
   },
   {
     accessorKey: 'amount',
@@ -155,14 +160,9 @@ const columns: TableColumn<Payment>[] = [
         td: 'text-right font-medium'
       }
     },
-    cell: ({ row }) => {
-      const amount = Number.parseFloat(row.getValue('amount'))
-      return new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'EUR'
-      }).format(amount)
-    },
-    aggregationFn: 'sum'
+    cell: ({ getValue }) => formatAmount(getValue() as number),
+    aggregationFn: 'sum',
+    aggregatedCell: ({ getValue }) => formatAmount(getValue() as number)
   }
 ]
 

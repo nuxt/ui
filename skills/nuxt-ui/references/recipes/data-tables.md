@@ -245,7 +245,9 @@ The separate `virtualize` option limits rendered rows for large datasets. It doe
 ## Tips
 
 - Table is built on [TanStack Table v9](https://tanstack.com/table/v9) — columns use `ColumnDef` format with `accessorKey`, `header`, `cell`
-- Sorting, filtering, expanding, row selection, column visibility, pinning and sizing, and row pinning are registered by default. Pagination, grouping and faceting go through the `features` prop
+- Sorting, filtering, expanding, row selection, column visibility, pinning and sizing, and row pinning are registered by default. Pagination, grouping, faceting, cell selection (`cellSelectionFeature`) and cell spanning (`cellSpanningFeature`, `spanRows` / `spanColumns` on columns) go through the `features` prop
+- Set `enableResizing: true` on a column (or `default-column`) to get a resize handle
+- `meta.attrs` sets attributes on rows (`tr`) and cells (`th` / `td`), like `data-*` or `tabindex`
 - Feature options (`enableRowSelection`, `enableMultiSort`, `manualPagination`...) go in the `options` prop
 - Pinning uses `start` / `end`, not `left` / `right`
 - Use `#<column>-cell` and `#<column>-header` template slots to customize rendering with Vue templates

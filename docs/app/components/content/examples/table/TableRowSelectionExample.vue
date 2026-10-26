@@ -55,7 +55,8 @@ const columns: TableColumn<Payment>[] = [{
   }),
   cell: ({ row }) => h(UCheckbox, {
     'modelValue': row.getIsSelected(),
-    'onUpdate:modelValue': (value: boolean | 'indeterminate') => row.toggleSelected(!!value),
+    // TanStack reads the new state from `target.checked` and selects a range on shift-click.
+    'onClick': (e: MouseEvent) => row.getToggleSelectedHandler()({ shiftKey: e.shiftKey, target: { checked: !row.getIsSelected() } }),
     'aria-label': 'Select row'
   })
 }, {
