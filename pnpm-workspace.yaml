@@ -17,7 +17,7 @@ catalog:
   "@ai-sdk/anthropic": ^4.0.82
   "@ai-sdk/gateway": ^4.0.116
   "@ai-sdk/vue": ^4.0.143
-  "@codspeed/vitest-plugin": ^5.7.1
+  "@codspeed/vitest-plugin": ^6.1.0
   "@comark/vue": ^0.7.0
   "@floating-ui/dom": ^1.8.0
   "@iconify-json/logos": ^1.2.16
