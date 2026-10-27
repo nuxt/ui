@@ -33,6 +33,7 @@ describe('ChatMessages', () => {
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
     ['with indicator slot', { props: { ...props, status: 'submitted' }, slots: { indicator: () => 'Indicator slot' } }],
     ['with viewport slot', { props, slots: { viewport: () => 'Viewport slot' } }],
+    ['with footer slot', { props, slots: { footer: () => 'Footer slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }],
     ['with files slot', { props, slots: { files: () => 'Files slot' } }]
   ])
@@ -67,6 +68,31 @@ describe('ChatMessages', () => {
     wrapper.unmount()
   })
 
+  it.each([
+    ['without', undefined, 'absolute'],
+    ['with', () => 'Prompt', 'sticky']
+  ])('positions the auto scroll button %s a footer', async (_, footer, position) => {
+    const Parent = defineComponent({
+      setup() {
+        return () => h('div', { style: 'overflow-y: auto' }, [h(ChatMessages, { ...props, shouldScrollToBottom: false }, footer ? { footer } : {})])
+      }
+    })
+
+    const wrapper = await mountSuspended(Parent, { attachTo: document.body })
+    Object.defineProperties(wrapper.element, {
+      scrollHeight: { value: 1000 },
+      clientHeight: { value: 100 }
+    })
+    wrapper.element.dispatchEvent(new Event('scroll'))
+    await nextTick()
+
+    const viewport = wrapper.find('[data-slot="viewport"]').classes()
+    expect(viewport).toContain(position)
+    expect(viewport.includes('top-[86%]')).toBe(position === 'absolute')
+
+    wrapper.unmount()
+  })
+
   it('scrolls the scroll parent in `scrollToMessage`', async () => {
     const chatRef = ref<{ scrollToMessage: (id: string, smooth?: boolean) => void } | null>(null)
     const Parent = defineComponent({
@@ -91,6 +117,41 @@ describe('ChatMessages', () => {
     expect(scrollIntoView).not.toHaveBeenCalled()
 
     scrollIntoView.mockRestore()
+    wrapper.unmount()
+  })
+
+  it('measures the room and scrolls on the frame after a submit', async () => {
+    const messages = shallowRef([props.messages[1]!, { ...props.messages[0]!, id: 'm-user' }])
+    const status = ref<'ready' | 'submitted'>('ready')
+    const Parent = defineComponent({
+      setup() {
+        return () => h('div', { style: 'overflow-y: auto' }, [h(ChatMessages, { messages: messages.value, status: status.value, shouldScrollToBottom: false }, { footer: () => 'Prompt' })])
+      }
+    })
+
+    const wrapper = await mountSuspended(Parent, { attachTo: document.body })
+    vi.spyOn(wrapper.element, 'getBoundingClientRect').mockReturnValue({ top: 0, height: 500 } as DOMRect)
+    const scrollTo = vi.fn()
+    wrapper.element.scrollTo = scrollTo
+    const footer = wrapper.find('[data-slot="footer"]').element
+    const footerHeight = vi.spyOn(footer as HTMLElement, 'offsetHeight', 'get').mockReturnValue(200)
+    for (const article of wrapper.findAll('article')) {
+      vi.spyOn(article.element as HTMLElement, 'offsetHeight', 'get').mockReturnValue(50)
+    }
+
+    status.value = 'submitted'
+    await nextTick()
+    await nextTick()
+    expect(scrollTo).not.toHaveBeenCalled()
+
+    // The prompt shrinks once cleared, after the submit
+    footerHeight.mockReturnValue(100)
+    await new Promise(resolve => requestAnimationFrame(resolve))
+    await nextTick()
+
+    expect((wrapper.find('[role="log"]').element as HTMLElement).style.getPropertyValue('--last-message-height')).toBe('350px')
+    expect(scrollTo).toHaveBeenCalledOnce()
+
     wrapper.unmount()
   })
 

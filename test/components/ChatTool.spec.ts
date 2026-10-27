@@ -1,4 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
+import { defineComponent, h, nextTick, ref } from 'vue'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import ChatTool from '../../src/runtime/components/ChatTool.vue'
@@ -17,6 +18,8 @@ describe('ChatTool', () => {
     ['with icon', { props: { ...props, icon: 'i-lucide-search' } }],
     ['with loading', { props: { ...props, loading: true } }],
     ['with loading and loadingIcon', { props: { ...props, loading: true, loadingIcon: 'i-lucide-loader' } }],
+    ['with error', { props: { ...props, error: true } }],
+    ['with error and errorIcon', { props: { ...props, error: true, errorIcon: 'i-lucide-circle-alert' } }],
     ['with variant inline', { props: { ...props, variant: 'inline' } }],
     ['with variant card', { props: { ...props, variant: 'card' } }],
     ['with defaultOpen', { props: { ...props, defaultOpen: true } }],
@@ -77,6 +80,24 @@ describe('ChatTool', () => {
     })
 
     expect(wrapper.find('[data-slot="actions"]').exists()).toBe(false)
+  })
+
+  it('becomes collapsible when a conditional default slot appears', async () => {
+    const ready = ref(false)
+    const Parent = defineComponent({
+      setup() {
+        return () => h(ChatTool, { text: 'Searched the web' }, ready.value ? { default: () => 'Output' } : {})
+      }
+    })
+
+    const wrapper = await mountSuspended(Parent)
+    expect(wrapper.find('[data-slot="trailingIcon"]').exists()).toBe(false)
+
+    ready.value = true
+    await nextTick()
+
+    expect(wrapper.find('[data-slot="trailingIcon"]').exists()).toBe(true)
+    expect(wrapper.find('[data-slot="trigger"]').attributes('disabled')).toBeUndefined()
   })
 
   it('passes accessibility tests', async () => {

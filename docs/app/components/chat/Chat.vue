@@ -2,7 +2,7 @@
 import type { ToolUIPart, DynamicToolUIPart } from 'ai'
 import { DefaultChatTransport, isToolUIPart, isReasoningUIPart, isTextUIPart, getToolName } from 'ai'
 import { useChat as useAIChat } from '@ai-sdk/vue'
-import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
+import { getTextFromMessage, isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 import type { DocsChatMessage, DocsChatTools } from '~~/server/api/ai.post'
 
 const input = ref('')
@@ -115,16 +115,63 @@ watchEffect(() => {
 
 const canClear = computed(() => messages.value.length > 0)
 
-function onSubmit() {
-  if (!input.value.trim()) {
+// Messages sent while a response streams wait here, the AI SDK would
+// otherwise start a second request next to the current one. The page is
+// captured on submit so a queued question keeps the page it was asked on.
+const queue = ref<{ text: string, currentPage: string }[]>([])
+
+function sendNext() {
+  const next = queue.value.shift()
+  if (!next) {
     return
   }
 
   track('AI Chat Message Sent')
 
-  sendMessage({ text: input.value, metadata: { currentPage: currentPage.value } })
+  sendMessage({ text: next.text, metadata: { currentPage: next.currentPage } })
+}
+
+function onSubmit() {
+  const text = input.value.trim()
+  if (!text) {
+    return
+  }
 
   input.value = ''
+  queue.value.push({ text, currentPage: currentPage.value })
+
+  if (status.value !== 'submitted' && status.value !== 'streaming') {
+    sendNext()
+  }
+}
+
+watch(status, (value) => {
+  if (value === 'ready') {
+    sendNext()
+  }
+})
+
+// Moves a queued message to the front and stops the current response, the
+// status watcher then sends it as soon as the chat is `ready`.
+function sendNow(index: number) {
+  queue.value.unshift(...queue.value.splice(index, 1))
+
+  if (status.value === 'submitted' || status.value === 'streaming') {
+    stop()
+  } else {
+    sendNext()
+  }
+}
+
+// Puts a queued message back in the prompt, ahead of any draft.
+function editQueued(index: number) {
+  const [item] = queue.value.splice(index, 1)
+  if (!item) {
+    return
+  }
+
+  input.value = input.value ? `${item.text}\n${input.value}` : item.text
+  promptRef.value?.textareaRef?.focus()
 }
 
 // Sync external messages (e.g. from search→chat flow) into the chat instance.
@@ -132,6 +179,15 @@ function onSubmit() {
 // _skipSync prevents loops when onFinish writes back to the shared messages ref.
 watch(messages, (newMessages) => {
   if (_skipSync) return
+
+  // A question asked from the search palette or "Explain this page" while a
+  // response streams waits in the queue, syncing would restart the chat mid-answer
+  const last = newMessages.at(-1)
+  if (last?.role === 'user' && (status.value === 'submitted' || status.value === 'streaming')) {
+    pending.value = false
+    queue.value.push({ text: getTextFromMessage(last), currentPage: last.metadata?.currentPage ?? currentPage.value })
+    return
+  }
 
   chatMessages.value = newMessages
   if (chatMessages.value.at(-1)?.role === 'user') {
@@ -220,6 +276,22 @@ function askQuestion(question: string) {
 // The sidebar keeps its content mounted when closed (offcanvas), so the prompt's
 // `autofocus` only fires once. Refocus it each time the sidebar reopens.
 const promptRef = useTemplateRef('promptRef')
+
+// The queue floats over the end of the messages, they get its height as room
+// at the bottom so the last one never hides behind it.
+const queueRef = useTemplateRef('queueRef')
+const queueHeight = ref(0)
+
+function measureQueue() {
+  queueHeight.value = queueRef.value?.offsetHeight ?? 0
+}
+
+useResizeObserver(queueRef, measureQueue)
+// A resize observer reports after `UChatMessages` measures the room for a sent
+// message, so the row it removes from the queue is measured right after the
+// render or the scroll lands short.
+watch(() => queue.value.length, measureQueue, { flush: 'post' })
+
 watch(open, (value) => {
   if (value) {
     nextTick(() => {
@@ -261,6 +333,7 @@ function clearMessages() {
   }
   messages.value = []
   chatMessages.value = []
+  queue.value = []
   _themeApplied.clear()
 }
 </script>
@@ -272,8 +345,8 @@ function clearMessages() {
     title="Ask"
     rail
     breakpoint="xl"
-    :style="{ '--sidebar-width': '24rem' }"
-    :ui="{ footer: 'p-0', actions: 'gap-0.5' }"
+    :style="{ '--sidebar-width': '24rem', '--queue-height': `${queueHeight}px` }"
+    :ui="{ body: 'pb-[calc(--spacing(4)+var(--queue-height))]', footer: 'relative p-0 overflow-visible', actions: 'gap-0.5' }"
     class="bg-default"
   >
     <template #actions>
@@ -345,44 +418,39 @@ function clearMessages() {
         :status="status"
         compact
         class="px-0 gap-2"
-        :user="{ ui: { container: 'max-w-full' } }"
+        :user="{ ui: { container: 'max-w-full', text: 'text-sm/6' } }"
+        :ui="{ viewport: 'sticky top-auto bottom-[calc(--spacing(4)+var(--queue-height))] h-0' }"
       >
         <template #indicator>
           <UChatTool :icon="studioIcons.brain" text="Thinking..." streaming />
         </template>
 
-        <template #content="{ message, streaming }">
-          <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
-            <UChatReasoning
-              v-if="isReasoningUIPart(part)"
-              :text="part.text"
+        <template #part="{ part, message, streaming }">
+          <UChatReasoning
+            v-if="isReasoningUIPart(part)"
+            :text="part.text"
+            :streaming="isPartStreaming(part, streaming)"
+            :icon="studioIcons.brain"
+          >
+            <ChatMarkdown
+              :value="part.text"
               :streaming="isPartStreaming(part, streaming)"
-              :icon="studioIcons.brain"
-            >
-              <ChatMarkdown
-                :value="part.text"
-                :streaming="isPartStreaming(part, streaming)"
-              />
-            </UChatReasoning>
-
-            <template v-else-if="isTextUIPart(part) && part.text.length > 0">
-              <ChatMarkdown
-                v-if="message.role === 'assistant'"
-                :value="part.text"
-                :streaming="isPartStreaming(part, streaming)"
-              />
-              <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap text-sm/6">
-                {{ part.text }}
-              </p>
-            </template>
-
-            <UChatTool
-              v-else-if="isToolUIPart(part)"
-              :text="getToolText(part)"
-              :icon="getToolIcon(part)"
-              :streaming="isToolStreaming(part, streaming)"
             />
-          </template>
+          </UChatReasoning>
+
+          <ChatMarkdown
+            v-else-if="isTextUIPart(part) && part.text.length > 0 && message.role === 'assistant'"
+            :value="part.text"
+            :streaming="isPartStreaming(part, streaming)"
+          />
+
+          <UChatTool
+            v-else-if="isToolUIPart(part)"
+            :text="getToolText(part)"
+            :icon="getToolIcon(part)"
+            :streaming="isToolStreaming(part, streaming)"
+            :error="part.state === 'output-error'"
+          />
         </template>
       </UChatMessages>
 
@@ -397,10 +465,70 @@ function clearMessages() {
     </UTheme>
 
     <template #footer>
+      <div
+        v-if="queue.length"
+        ref="queueRef"
+        class="absolute bottom-full inset-x-3 z-10 rounded-t-lg border border-b-0 border-default bg-default overflow-hidden"
+      >
+        <UCollapsible default-open class="bg-elevated/50 px-1 pb-1 flex flex-col">
+          <UButton
+            :label="`${queue.length} queued ${queue.length === 1 ? 'message' : 'messages'}`"
+            :leading-icon="appConfig.ui.icons.chevronDown"
+            color="neutral"
+            variant="link"
+            size="sm"
+            square
+            class="text-muted hover:text-default group w-full"
+            :ui="{ leadingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+          />
+
+          <template #content>
+            <ul class="max-h-60 overflow-y-auto">
+              <li v-for="(item, index) in queue" :key="index" class="group flex items-center gap-2 h-7 ps-2 pe-0.5 rounded-sm text-sm text-default hover:bg-elevated">
+                <span class="size-3 shrink-0 rounded-full ring ring-accented" />
+                <span class="truncate flex-1">{{ item.text }}</span>
+
+                <div class="flex items-center opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 pointer-coarse:opacity-100">
+                  <UTooltip text="Send now">
+                    <UButton
+                      :icon="appConfig.ui.icons.arrowUp"
+                      color="neutral"
+                      variant="link"
+                      size="xs"
+                      :aria-label="`Send ${item.text} now`"
+                      @click="sendNow(index)"
+                    />
+                  </UTooltip>
+                  <UTooltip text="Edit">
+                    <UButton
+                      :icon="studioIcons.pencil"
+                      color="neutral"
+                      variant="link"
+                      size="xs"
+                      :aria-label="`Edit ${item.text}`"
+                      @click="editQueued(index)"
+                    />
+                  </UTooltip>
+                  <UTooltip text="Remove">
+                    <UButton
+                      :icon="studioIcons.trash"
+                      color="neutral"
+                      variant="link"
+                      size="xs"
+                      :aria-label="`Remove ${item.text} from queue`"
+                      @click="queue.splice(index, 1)"
+                    />
+                  </UTooltip>
+                </div>
+              </li>
+            </ul>
+          </template>
+        </UCollapsible>
+      </div>
+
       <UChatPrompt
         ref="promptRef"
         v-model="input"
-        :status="status"
         :error="error"
         placeholder="Ask me anything..."
         variant="naked"

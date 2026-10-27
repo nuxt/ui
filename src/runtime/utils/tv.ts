@@ -300,13 +300,50 @@ function resolveReplacers(componentConfig: any): any {
 }
 
 /**
- * Wraps `tailwind-variants`' `tv` so slot classes can be **replaced** (not just
- * merged) through a function form — `(defaults) => classes` — in `:ui`, the
- * `class` prop and `app.config.ui`. The wrapper is transparent for every other
- * usage: it preserves the `TVReturnType` (so `extend: theme` keeps working
- * via property reads) and only intercepts the slot functions on invocation.
+ * Built components keyed by the `extend` theme object, then by the serialized
+ * rest of the config, so a changed `app.config` or a reloaded theme rebuilds.
  */
-export const tv = ((componentConfig?: any) => {
+const componentCache = /* @__PURE__ */ new WeakMap<object, Map<string, any>>()
+
+const unmemoizable = Symbol('unmemoizable')
+
+/**
+ * Serializes everything but `extend`, or returns `undefined` when the config
+ * holds a value the key could not distinguish (functions, non-plain objects,
+ * `toJSON`, non-finite numbers, cycles, ...).
+ */
+function componentCacheKey(componentConfig: any): string | undefined {
+  try {
+    return JSON.stringify(componentConfig, function (k, value) {
+      if (this === componentConfig && k === 'extend') {
+        return undefined
+      }
+      // Differs only when `toJSON` replaced the value `tv` reads.
+      if (this[k] !== value) {
+        throw unmemoizable
+      }
+      if (value === undefined) {
+        // An explicit `undefined` overrides the theme value (e.g. a default variant).
+        return '\0undefined'
+      }
+      const type = typeof value
+      if ((type === 'string' && value.startsWith('\0')) || type === 'function' || type === 'symbol' || type === 'bigint' || (type === 'number' && !Number.isFinite(value))) {
+        throw unmemoizable
+      }
+      if (type === 'object' && value && !Array.isArray(value)) {
+        const proto = Object.getPrototypeOf(value)
+        if (proto !== Object.prototype && proto !== null) {
+          throw unmemoizable
+        }
+      }
+      return value
+    })
+  } catch {
+    return undefined
+  }
+}
+
+function createComponent(componentConfig?: any) {
   const component = baseTv(resolveReplacers(componentConfig))
 
   return new Proxy(component, {
@@ -330,4 +367,37 @@ export const tv = ((componentConfig?: any) => {
       return result
     }
   })
+}
+
+/**
+ * Wraps `tailwind-variants`' `tv` so slot classes can be **replaced** (not just
+ * merged) through a function form — `(defaults) => classes` — in `:ui`, the
+ * `class` prop and `app.config.ui`. The wrapper is transparent for every other
+ * usage: it preserves the `TVReturnType` (so `extend: theme` keeps working
+ * via property reads) and only intercepts the slot functions on invocation.
+ *
+ * Equal plain configs extending the same theme return the same component.
+ */
+export const tv = ((componentConfig?: any) => {
+  const extend = componentConfig?.extend
+  const key = extend && typeof extend === 'object' ? componentCacheKey(componentConfig) : undefined
+  if (key === undefined) {
+    return createComponent(componentConfig)
+  }
+
+  let cache = componentCache.get(extend)
+  if (!cache) {
+    cache = new Map()
+    componentCache.set(extend, cache)
+  }
+
+  let component = cache.get(key)
+  if (component === undefined) {
+    if (cache.size >= 500) {
+      cache.clear()
+    }
+    component = createComponent(componentConfig)
+    cache.set(key, component)
+  }
+  return component
 }) as unknown as WideTV

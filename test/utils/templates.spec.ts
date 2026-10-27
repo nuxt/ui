@@ -29,6 +29,16 @@ describe('theme templates', () => {
 
     expect(await contents('ui/skeleton.ts')).not.toContain('animate-pulse')
   })
+
+  it('skips prose themes with `prose: false`', () => {
+    const hasProse = (overrides: Record<string, any>) => {
+      const options = { ...defaultOptions, ...overrides, theme: { ...defaultOptions.theme, colors: resolveColors(undefined) } }
+      return getTemplates(options as any, getDefaultConfig(options.theme)).some(template => template.filename === 'ui/prose/index.ts')
+    }
+
+    expect(hasProse({ content: true })).toBe(true)
+    expect(hasProse({ content: true, prose: false })).toBe(false)
+  })
 })
 
 describe('prefixedClasses', () => {

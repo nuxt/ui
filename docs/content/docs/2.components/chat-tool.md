@@ -23,6 +23,20 @@ name: 'chat-tool-example'
 ---
 ::
 
+::tip
+When the output arrives later, put the `v-if` on the slot itself rather than on its content. A slot that renders nothing still makes the block collapsible, with an empty panel.
+
+```vue
+<template>
+  <UChatTool :text="getToolName(part)" :streaming="isToolStreaming(part)">
+    <template v-if="part.state === 'output-available'" #default>
+      <pre>{{ part.output }}</pre>
+    </template>
+  </UChatTool>
+</template>
+```
+::
+
 ### Text
 
 Use the `text` prop to set the tool status text.
@@ -157,6 +171,53 @@ You can customize this icon globally in your `app.config.ts` under `ui.icons.loa
 #vue
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.loading` key.
+:::
+::
+
+### Error :badge{label="Soon" class="align-text-top"}
+
+Use the `error` prop to show that the tool call failed, for example when the part state is `output-error`. Use the `error-icon` prop to customize the error icon.
+
+::component-code
+---
+hide:
+  - class
+ignore:
+  - text
+props:
+  error: true
+  text: 'Failed to search components'
+  class: 'w-60'
+---
+::
+
+### Error Icon :badge{label="Soon" class="align-text-top"}
+
+Use the `error-icon` prop to customize the error icon. Defaults to `i-lucide-circle-x`.
+
+::component-code
+---
+hide:
+  - class
+ignore:
+  - text
+props:
+  error: true
+  errorIcon: 'i-lucide-circle-alert'
+  text: 'Failed to search components'
+  class: 'w-60'
+---
+::
+
+::framework-only
+#nuxt
+:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
+You can customize this icon globally in your `app.config.ts` under `ui.icons.error` key.
+:::
+
+#vue
+:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.error` key.
 :::
 ::
 

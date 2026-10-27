@@ -38,6 +38,11 @@ export default (options: Required<ModuleOptions>) => ({
         leadingIcon: 'animate-spin'
       }
     },
+    error: {
+      true: {
+        trigger: 'text-error hover:text-error disabled:hover:text-error'
+      }
+    },
     alone: {
       false: {
         leadingIcon: ['absolute inset-0 group-hover:opacity-0 group-data-[state=open]:opacity-0', options.theme.transitions && 'transition-opacity duration-200 ease-out'],

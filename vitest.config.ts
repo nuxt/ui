@@ -17,9 +17,9 @@ export default defineConfig({
     silent: true,
     resolveSnapshotPath(path, extension, { config }) {
       if (config.name === 'vue') {
-        return path.replace(/\/([^/]+)\.spec\.ts$/, `/__snapshots__/$1-vue.spec.ts${extension}`)
+        return path.replace(/\/([^/]+)\.(spec|bench)\.ts$/, `/__snapshots__/$1-vue.$2.ts${extension}`)
       } else {
-        return path.replace(/\/([^/]+)\.spec\.ts$/, `/__snapshots__/$1.spec.ts${extension}`)
+        return path.replace(/\/([^/]+)\.(spec|bench)\.ts$/, `/__snapshots__/$1.$2.ts${extension}`)
       }
     },
     projects: [

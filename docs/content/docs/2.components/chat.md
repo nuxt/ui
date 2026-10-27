@@ -387,47 +387,38 @@ function onSubmit() {
     :messages="messages"
     :status="status"
   >
-    <template #content="{ message, streaming }">
-      <template
-        v-for="(part, index) in message.parts"
-        :key="`${message.id}-${part.type}-${index}`"
+    <template #part="{ part, message, streaming }">
+      <UChatReasoning
+        v-if="isReasoningUIPart(part)"
+        :text="part.text"
+        :streaming="isPartStreaming(part, streaming)"
       >
-        <UChatReasoning
-          v-if="isReasoningUIPart(part)"
-          :text="part.text"
+        <Markdown
+          :value="part.text"
           :streaming="isPartStreaming(part, streaming)"
-        >
-          <Markdown
-            :value="part.text"
-            :streaming="isPartStreaming(part, streaming)"
-            :plugins="plugins"
-            class="*:first:mt-0 *:last:mb-0"
-          />
-        </UChatReasoning>
-
-        <UChatTool
-          v-else-if="isToolUIPart(part)"
-          :text="getToolName(part)"
-          :streaming="isToolStreaming(part, streaming)"
-          :actions="part.state === 'approval-requested' ? [
-            { label: 'Approve', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: true }) },
-            { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) }
-          ] : undefined"
+          :plugins="plugins"
+          class="*:first:mt-0 *:last:mb-0"
         />
+      </UChatReasoning>
 
-        <template v-else-if="isTextUIPart(part)">
-          <Markdown
-            v-if="message.role === 'assistant'"
-            :value="part.text"
-            :streaming="isPartStreaming(part, streaming)"
-            :plugins="plugins"
-            class="*:first:mt-0 *:last:mb-0"
-          />
-          <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
-            {{ part.text }}
-          </p>
-        </template>
-      </template>
+      <UChatTool
+        v-else-if="isToolUIPart(part)"
+        :text="getToolName(part)"
+        :streaming="isToolStreaming(part, streaming)"
+        :error="part.state === 'output-error'"
+        :actions="part.state === 'approval-requested' ? [
+          { label: 'Approve', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: true }) },
+          { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) }
+        ] : undefined"
+      />
+
+      <Markdown
+        v-else-if="isTextUIPart(part) && message.role === 'assistant'"
+        :value="part.text"
+        :streaming="isPartStreaming(part, streaming)"
+        :plugins="plugins"
+        class="*:first:mt-0 *:last:mb-0"
+      />
     </template>
   </UChatMessages>
 
@@ -479,47 +470,38 @@ function onSubmit() {
     :messages="messages"
     :status="status"
   >
-    <template #content="{ message, streaming }">
-      <template
-        v-for="(part, index) in message.parts"
-        :key="`${message.id}-${part.type}-${index}`"
+    <template #part="{ part, message, streaming }">
+      <UChatReasoning
+        v-if="isReasoningUIPart(part)"
+        :text="part.text"
+        :streaming="isPartStreaming(part, streaming)"
       >
-        <UChatReasoning
-          v-if="isReasoningUIPart(part)"
-          :text="part.text"
+        <Markdown
+          :value="part.text"
           :streaming="isPartStreaming(part, streaming)"
-        >
-          <Markdown
-            :value="part.text"
-            :streaming="isPartStreaming(part, streaming)"
-            :plugins="plugins"
-            class="*:first:mt-0 *:last:mb-0"
-          />
-        </UChatReasoning>
-
-        <UChatTool
-          v-else-if="isToolUIPart(part)"
-          :text="getToolName(part)"
-          :streaming="isToolStreaming(part, streaming)"
-          :actions="part.state === 'approval-requested' ? [
-            { label: 'Approve', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: true }) },
-            { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) }
-          ] : undefined"
+          :plugins="plugins"
+          class="*:first:mt-0 *:last:mb-0"
         />
+      </UChatReasoning>
 
-        <template v-else-if="isTextUIPart(part)">
-          <Markdown
-            v-if="message.role === 'assistant'"
-            :value="part.text"
-            :streaming="isPartStreaming(part, streaming)"
-            :plugins="plugins"
-            class="*:first:mt-0 *:last:mb-0"
-          />
-          <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
-            {{ part.text }}
-          </p>
-        </template>
-      </template>
+      <UChatTool
+        v-else-if="isToolUIPart(part)"
+        :text="getToolName(part)"
+        :streaming="isToolStreaming(part, streaming)"
+        :error="part.state === 'output-error'"
+        :actions="part.state === 'approval-requested' ? [
+          { label: 'Approve', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: true }) },
+          { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) }
+        ] : undefined"
+      />
+
+      <Markdown
+        v-else-if="isTextUIPart(part) && message.role === 'assistant'"
+        :value="part.text"
+        :streaming="isPartStreaming(part, streaming)"
+        :plugins="plugins"
+        class="*:first:mt-0 *:last:mb-0"
+      />
     </template>
   </UChatMessages>
 
@@ -538,6 +520,10 @@ function onSubmit() {
 </template>
 ```
 
+::
+
+::note
+The `#part` slot is called once for each part of a message, with the `part`, its `index` and the `message`. A part the slot doesn't render, like the user's text above, falls back to the default output. Use the `#content` slot instead to render the whole message yourself.
 ::
 
 ::tip
@@ -591,3 +577,124 @@ html.dark .shiki span {
 ::note{to="/blog/how-to-build-an-ai-chat"}
 Read the full **Build an AI Chatbot** tutorial for a step-by-step guide.
 ::
+
+### Queued messages :badge{label="Soon" class="align-text-top"}
+
+The AI SDK doesn't queue messages: calling `sendMessage` during a response starts a second request next to the current one. With `status`, `UChatPrompt` ignores submits while the chat is `submitted` or `streaming`. To let users send their next message anyway, leave it off, keep the text in a queue and send it once the chat is `ready` again:
+
+::framework-only
+#nuxt
+```vue
+<script setup lang="ts">
+import { useChat } from '@ai-sdk/vue'
+
+const input = ref('')
+const queue = ref<string[]>([])
+
+const { status, error, sendMessage, regenerate, stop } = useChat()
+
+function sendNext() {
+  const text = queue.value.shift()
+  if (text) {
+    sendMessage({ text })
+  }
+}
+
+function onSubmit() {
+  queue.value.push(input.value)
+  input.value = ''
+
+  if (status.value !== 'submitted' && status.value !== 'streaming') {
+    sendNext()
+  }
+}
+
+watch(status, (value) => {
+  if (value === 'ready') {
+    sendNext()
+  }
+})
+</script>
+
+<template>
+  <UChatPrompt v-model="input" :error="error" @submit="onSubmit">
+    <template v-if="queue.length" #header>
+      <ul class="flex flex-col gap-1 w-full">
+        <li v-for="(text, index) in queue" :key="index" class="flex items-center gap-2 text-sm text-muted">
+          <span class="truncate flex-1">{{ text }}</span>
+          <UButton
+            icon="i-lucide-x"
+            color="neutral"
+            variant="ghost"
+            size="xs"
+            :aria-label="`Remove ${text} from queue`"
+            @click="queue.splice(index, 1)"
+          />
+        </li>
+      </ul>
+    </template>
+
+    <UChatPromptSubmit :status="status" @stop="stop()" @reload="regenerate()" />
+  </UChatPrompt>
+</template>
+```
+
+#vue
+```vue
+<script setup lang="ts">
+import { ref, watch } from 'vue'
+import { useChat } from '@ai-sdk/vue'
+
+const input = ref('')
+const queue = ref<string[]>([])
+
+const { status, error, sendMessage, regenerate, stop } = useChat()
+
+function sendNext() {
+  const text = queue.value.shift()
+  if (text) {
+    sendMessage({ text })
+  }
+}
+
+function onSubmit() {
+  queue.value.push(input.value)
+  input.value = ''
+
+  if (status.value !== 'submitted' && status.value !== 'streaming') {
+    sendNext()
+  }
+}
+
+watch(status, (value) => {
+  if (value === 'ready') {
+    sendNext()
+  }
+})
+</script>
+
+<template>
+  <UChatPrompt v-model="input" :error="error" @submit="onSubmit">
+    <template v-if="queue.length" #header>
+      <ul class="flex flex-col gap-1 w-full">
+        <li v-for="(text, index) in queue" :key="index" class="flex items-center gap-2 text-sm text-muted">
+          <span class="truncate flex-1">{{ text }}</span>
+          <UButton
+            icon="i-lucide-x"
+            color="neutral"
+            variant="ghost"
+            size="xs"
+            :aria-label="`Remove ${text} from queue`"
+            @click="queue.splice(index, 1)"
+          />
+        </li>
+      </ul>
+    </template>
+
+    <UChatPromptSubmit :status="status" @stop="stop()" @reload="regenerate()" />
+  </UChatPrompt>
+</template>
+```
+::
+
+After an `error`, the prompt is disabled and the queue waits until the user reloads the failed response. Stopping the response sends the next queued message right away.
