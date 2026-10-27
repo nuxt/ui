@@ -464,17 +464,16 @@ export default defineEventHandler(async (event) => {
       instructions: 'You are a helpful assistant. Use your tools to search for relevant information before answering questions.',
       messages: await convertToModelMessages(messages),
       stopWhen: isStepCount(6),
-      tools,
+      tools
+    })
+
+    const stream = toUIMessageStream({
+      stream: result.stream,
+      // Called once the stream ends, whether it finished, failed or was stopped
       onEnd: async () => {
-        await httpClient.close()
-      },
-      onError: async ({ error }) => {
-        console.error(error)
         await httpClient.close()
       }
     })
-
-    const stream = toUIMessageStream({ stream: result.stream })
     return createUIMessageStreamResponse({ stream })
   } catch (error) {
     // Close the MCP client if setup fails before streaming starts

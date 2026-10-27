@@ -1109,7 +1109,7 @@ Add the tools to `streamText` in the chat endpoint:
 ::code-tree-intersection
 :::code-collapse
 
-```ts [server/api/chats/[id].post.ts] {10,13,16-18,70-75,77-84,88,94-103,105-110,112-119,138-144,158-169}
+```ts [server/api/chats/[id].post.ts] {10,13,16-18,70-75,77-84,88,94-103,105-110,112-119,151-153,155-165}
 import { createError, defineEventHandler, getValidatedRouterParams, readValidatedBody } from 'h3'
 import { eq } from 'drizzle-orm'
 import { db, schema } from 'hub:db'
@@ -1209,7 +1209,7 @@ export default defineEventHandler(async (event) => {
           rename_chat: tool({
             description: 'Rename the current chat',
             inputSchema: z.object({
-              title: z.string().describe('A short title, max 30 characters')
+              title: z.string().trim().min(1).max(30).describe('The new title')
             }),
             execute: async ({ title }) => {
               await db.update(schema.chats).set({ title }).where(eq(schema.chats.id, id))
@@ -1246,13 +1246,6 @@ export default defineEventHandler(async (event) => {
             reasoningEffort: 'low',
             reasoningSummary: 'detailed'
           }
-        },
-        onEnd: async () => {
-          await mcpClient.close()
-        },
-        onError: async ({ error }) => {
-          console.error(error)
-          await mcpClient.close()
         }
       })
 
@@ -1268,6 +1261,9 @@ export default defineEventHandler(async (event) => {
       writer.merge(toUIMessageStream({ stream: result.stream }))
     },
     onEnd: async ({ responseMessage }) => {
+      // Called once the stream ends, whether it finished, failed or was stopped
+      await mcpClient.close()
+
       // A response continued after an approval keeps its id, so update it in place
       await db.insert(schema.messages).values({
         id: responseMessage.id,
@@ -1296,7 +1292,7 @@ Anthropic and OpenAI provide a built-in web search tool ([Anthropic](https://ai-
 
 **MCP tools**
 
-[`createMCPClient`](https://ai-sdk.dev/docs/ai-sdk-core/mcp-tools) connects to a [Model Context Protocol](https://modelcontextprotocol.io) server and turns its tools into AI SDK tools. Here the [Nuxt UI MCP server](/docs/getting-started/ai/mcp) lets the model search the Nuxt UI documentation. The client is closed if listing its tools fails, and once the response ends or fails.
+[`createMCPClient`](https://ai-sdk.dev/docs/ai-sdk-core/mcp-tools) connects to a [Model Context Protocol](https://modelcontextprotocol.io) server and turns its tools into AI SDK tools. Here the [Nuxt UI MCP server](/docs/getting-started/ai/mcp) lets the model search the Nuxt UI documentation. The client is closed if listing its tools fails, and in the `onEnd` callback of `createUIMessageStream`, which runs once the stream ends, whether it finished, failed or was stopped.
 
 **Tool approval**
 
@@ -1623,7 +1619,7 @@ Bind `v-model:files` on the prompt to let users attach images and PDFs. They can
 ::code-tree-intersection
 :::code-collapse
 
-```vue [app/pages/chat/[id].vue] {5,19-21,48-63,67-69,75,81,120-128,164-166,173-180}
+```vue [app/pages/chat/[id].vue] {5,19-21,48-69,72-74,80,86,125-133,169-171,178-185}
 <script setup lang="ts">
 import type { ChatPromptQueueItem } from '@nuxt/ui'
 import { DefaultChatTransport, getToolName, isReasoningUIPart, isTextUIPart, isToolUIPart, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
@@ -1685,6 +1681,11 @@ async function send({ text, files }: ChatPromptQueueItem) {
     })
   } finally {
     reading.value = false
+  }
+
+  // Nothing was sent if the files couldn't be read, move on to the queued messages
+  if (status.value === 'ready') {
+    sendNext()
   }
 }
 
