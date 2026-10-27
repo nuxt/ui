@@ -35,7 +35,7 @@ export interface AvatarGroupSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, provide } from 'vue'
+import { Text, computed, provide } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
@@ -59,7 +59,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.avatarGroup || {
 // eslint-disable-next-line vue/no-dupe-keys
 const max = computed(() => typeof props.max === 'string' ? Number.parseInt(props.max, 10) : props.max)
 
-function flattenNodes(nodes?: VNode[]): VNode[] {
+function flattenNodes(nodes?: VNode[], preserveText = false): VNode[] {
   if (!nodes?.length) {
     return []
   }
@@ -68,7 +68,7 @@ function flattenNodes(nodes?: VNode[]): VNode[] {
     if (typeof node.type === 'symbol') {
       // `v-if="false"` or commented node
       if (typeof node.children === 'string') {
-        return
+        return preserveText && node.type === Text ? node : undefined
       }
 
       return node.children
@@ -100,7 +100,7 @@ const hiddenCount = computed(() => {
   return children.value.length - visibleAvatars.value.length
 })
 
-const overflow = computed(() => hiddenCount.value > 0 ? flattenNodes(slots.overflow?.({ hiddenCount: hiddenCount.value })) : [])
+const overflow = computed(() => hiddenCount.value > 0 ? flattenNodes(slots.overflow?.({ hiddenCount: hiddenCount.value }), true) : [])
 
 provide(avatarGroupInjectionKey, computed(() => ({
   size: props.size,
