@@ -1448,7 +1448,7 @@ The AI SDK doesn't queue messages: calling `sendMessage` during a response start
 ::code-tree-intersection
 :::code-collapse
 
-```vue [app/pages/chat/[id].vue] {2,18,53-58,60-64,66-70,72-79,134,140}
+```vue [app/pages/chat/[id].vue] {2,18,45-46,56-59,61-65,67-71,73-80,135-136,141}
 <script setup lang="ts">
 import type { ChatPromptQueueItem } from '@nuxt/ui'
 import { DefaultChatTransport, getToolName, isReasoningUIPart, isTextUIPart, isToolUIPart, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
@@ -1493,6 +1493,9 @@ const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalR
   }
 })
 
+// A response waiting for a tool approval is `ready` too, a new message would leave it unanswered
+const awaitingApproval = computed(() => messages.value.at(-1)?.parts.some(part => isToolUIPart(part) && part.state === 'approval-requested') ?? false)
+
 function handleSubmit(e: Event) {
   e.preventDefault()
   if (input.value.trim()) {
@@ -1502,9 +1505,7 @@ function handleSubmit(e: Event) {
 }
 
 function sendNext() {
-  // A response waiting for a tool approval is `ready` too, a new message would leave it unanswered
-  const parts = messages.value.at(-1)?.parts
-  if (parts?.some(part => isToolUIPart(part) && part.state === 'approval-requested')) {
+  if (awaitingApproval.value) {
     return
   }
 
@@ -1583,7 +1584,7 @@ onMounted(() => {
         <UChatPrompt
           v-model="input"
           v-model:queue="queue"
-          :status="status"
+          :status="awaitingApproval ? 'submitted' : status"
           :error="error"
           variant="subtle"
           class="sticky bottom-0"
@@ -1610,7 +1611,7 @@ onMounted(() => {
 :::
 ::
 
-The prompt lists the queued messages in a panel above it, where users can send one now, put it back in the prompt to edit it, or remove it. Picking one to send now emits `send` with that message at the front of the queue, so `onSend` stops the current response and the `status` watcher sends it. A response waiting for a tool approval is `ready` too, so `sendNext` waits until the user answers. After an `error`, the prompt is disabled and the queue waits until the user reloads the failed response.
+The prompt lists the queued messages in a panel above it, where users can send one now, put it back in the prompt to edit it, or remove it. Picking one to send now emits `send` with that message at the front of the queue, so `onSend` stops the current response and the `status` watcher sends it. A response waiting for a tool approval is `ready` too, so the prompt gets the `submitted` status until the user answers, which keeps new messages in the queue, and `sendNext` waits as well. After an `error`, the prompt is disabled and the queue waits until the user reloads the failed response.
 
 ## Attaching files :badge{label="Soon" class="align-text-top"}
 
@@ -1619,7 +1620,7 @@ Bind `v-model:files` on the prompt to let users attach images and PDFs. They can
 ::code-tree-intersection
 :::code-collapse
 
-```vue [app/pages/chat/[id].vue] {5,19-21,48-69,72-74,80,86,125-133,169-171,178-185}
+```vue [app/pages/chat/[id].vue] {5,19-21,51-71,75-77,81,87,126-134,170-172,179-186}
 <script setup lang="ts">
 import type { ChatPromptQueueItem } from '@nuxt/ui'
 import { DefaultChatTransport, getToolName, isReasoningUIPart, isTextUIPart, isToolUIPart, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
@@ -1667,6 +1668,9 @@ const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalR
   }
 })
 
+// A response waiting for a tool approval is `ready` too, a new message would leave it unanswered
+const awaitingApproval = computed(() => messages.value.at(-1)?.parts.some(part => isToolUIPart(part) && part.state === 'approval-requested') ?? false)
+
 async function send({ text, files }: ChatPromptQueueItem) {
   reading.value = true
   try {
@@ -1697,9 +1701,7 @@ function handleSubmit(e: Event) {
 }
 
 function sendNext() {
-  // A response waiting for a tool approval is `ready` too, a new message would leave it unanswered
-  const parts = messages.value.at(-1)?.parts
-  if (reading.value || parts?.some(part => isToolUIPart(part) && part.state === 'approval-requested')) {
+  if (reading.value || awaitingApproval.value) {
     return
   }
 
@@ -1790,7 +1792,7 @@ onMounted(() => {
           v-model:queue="queue"
           v-model:files="files"
           accept="image/*,application/pdf"
-          :status="reading ? 'submitted' : status"
+          :status="reading || awaitingApproval ? 'submitted' : status"
           :error="error"
           variant="subtle"
           class="sticky bottom-0"
