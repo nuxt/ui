@@ -372,7 +372,7 @@ export function useEditorEmojis() {
 
 Extending the extension with a Markdown tokenizer makes a `:sparkles:` shortcode in the Markdown content show as an emoji, and writes the emoji back when the content is saved.
 
-### Displaying the menus
+### Displaying the mention and emoji menus
 
 Add both menus to the editor, and the emoji extension with the `extensions` prop, which adds Tiptap extensions on top of the StarterKit:
 
@@ -579,7 +579,7 @@ export function useEditorDragHandle() {
 :::
 ::
 
-### Displaying the menus
+### Displaying the slash commands and drag handle
 
 Add the suggestion menu and the drag handle to the editor:
 
@@ -2704,7 +2704,7 @@ Open [`localhost:3000/?room=my-room`](http://localhost:3000/?room=my-room) in tw
 
 ## Going further
 
-You now have a working Notion-like editor! To take it further, consider adding:
+You now have a working Notion-like editor. To take it further, consider adding:
 
 **Tables and code highlighting**
 
@@ -2779,5 +2779,3 @@ You've built a Notion-like editor with:
 - [AI SDK Documentation](https://ai-sdk.dev)
 - [PartyKit Documentation](https://docs.partykit.io)
 - [Nuxt Editor Template](https://github.com/nuxt-ui-templates/editor)
-
-We're excited to see what you'll build!
