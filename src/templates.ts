@@ -1,6 +1,6 @@
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { camelCase, kebabCase } from 'scule'
-import { genExport } from 'knitwork'
+import { genDynamicImport, genExport, genImport } from 'knitwork'
 import { resolvePathSync } from 'mlly'
 import { normalize } from 'pathe'
 import colors from 'tailwindcss/colors'
@@ -381,15 +381,15 @@ export {}
     filename: 'ui-colors.ts',
     write: true,
     getContents: () => {
-      const id = JSON.stringify(resolve ? normalize(resolvePathSync('tailwindcss/colors', { url: pathToFileURL(`${resolve('./runtime')}/`).href })) : 'tailwindcss/colors')
+      const id = resolve ? normalize(resolvePathSync('tailwindcss/colors', { url: pathToFileURL(`${resolve('./runtime')}/`).href })) : 'tailwindcss/colors'
 
       return nuxt?.options.ssr
         ? [
             `export const colors = undefined`,
-            `export const loadColors = () => import(${id}).then(m => m.default)`
+            `export const loadColors = () => ${genDynamicImport(id, { wrapper: false })}.then(m => m.default)`
           ].join('\n')
         : [
-            `import colors from ${id}`,
+            genImport(id, 'colors'),
             `export { colors }`,
             `export const loadColors = () => Promise.resolve(colors)`
           ].join('\n')
