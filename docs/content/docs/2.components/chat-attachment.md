@@ -11,7 +11,7 @@ navigation.badge: Soon
 
 ## Usage
 
-The ChatAttachment component displays a file with its name and a description, next to a thumbnail when it is an image or an icon otherwise.
+The ChatAttachment component displays an image as a thumbnail and any other file as its name and a description next to an icon.
 
 ::note
 This component is automatically used by the [`ChatPrompt`](/docs/components/chat-prompt#files) component to list the files bound with `v-model:files`.
@@ -47,7 +47,7 @@ props:
 
 ### Url
 
-Use the `url` prop to preview an image. The image is displayed when `type` is an image media type.
+Use the `url` prop to preview an image. The image is displayed when `type` is an image media type, and its `name` is used as the alternative text.
 
 ::component-code
 ---
@@ -80,7 +80,7 @@ Map a file part of a message to these props in the `#files` slot of [ChatMessage
 
 ### Description
 
-Use the `description` prop to set the text under the name. Defaults to the file extension and, with the `file` prop, its size.
+Use the `description` prop to set the text under the name of a file that is not an image. Defaults to the file extension and, with the `file` prop, its size.
 
 ::component-code
 ---
@@ -99,7 +99,7 @@ props:
 Use the `status` prop to show that the file is `uploading` or failed to upload with `error`. Defaults to `idle`.
 
 ::note
-While `uploading`, the name shimmers and an image is dimmed. With `error`, pass the reason to the `description` prop.
+While `uploading`, a spinner shows over the image or in place of the file icon. With `error`, pass the reason to the `description` prop.
 ::
 
 ::component-code
@@ -132,7 +132,7 @@ props:
 
 ### Removable
 
-Use the `removable` prop to display a button that emits a `remove` event.
+Use the `removable` prop to display a button that emits a `remove` event. It shows on hover or focus, and always on touch devices.
 
 ::component-code
 ---

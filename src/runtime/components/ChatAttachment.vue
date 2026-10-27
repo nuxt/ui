@@ -29,7 +29,7 @@ export interface ChatAttachmentProps {
    */
   url?: string
   /**
-   * The text displayed under the name. Defaults to the file extension and size.
+   * The text displayed under the name of a file that is not an image. Defaults to its extension and size.
    */
   description?: string
   /**
@@ -52,6 +52,12 @@ export interface ChatAttachmentProps {
    * @IconifyIcon
    */
   icon?: IconProps['name']
+  /**
+   * The icon displayed while the file uploads.
+   * @defaultValue appConfig.ui.icons.loading
+   * @IconifyIcon
+   */
+  loadingIcon?: IconProps['name']
   /**
    * The icon displayed when the upload fails.
    * @defaultValue appConfig.ui.icons.error
@@ -82,8 +88,6 @@ import { useLocale } from '../composables/useLocale'
 import { formatFileSize } from '../utils/file'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
-import UButton from './Button.vue'
-import UChatShimmer from './ChatShimmer.vue'
 
 const _props = withDefaults(defineProps<ChatAttachmentProps>(), {
   as: 'div',
@@ -123,42 +127,51 @@ const fileDescription = computed(() => {
   return [extension, formatFileSize(props.file?.size)].filter(Boolean).join(' · ')
 })
 
+const statusIcon = computed(() => {
+  if (props.status === 'uploading') return props.loadingIcon || appConfig.ui.icons.loading
+  if (props.status === 'error') return props.errorIcon || appConfig.ui.icons.error
+
+  return undefined
+})
+
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatAttachment || {}) })({
   size: props.size,
+  image: isImage.value,
   status: props.status
 }))
 </script>
 
 <template>
   <Primitive :as="props.as" :data-status="props.status" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
-      <img v-if="isImage" :src="previewUrl" :alt="fileName" data-slot="image" :class="ui.image({ class: props.ui?.image })">
-      <UIcon
-        v-else
-        :name="props.status === 'error' ? (props.errorIcon || appConfig.ui.icons.error) : (props.icon || appConfig.ui.icons.file)"
-        data-slot="leadingIcon"
-        :class="ui.leadingIcon({ class: props.ui?.leadingIcon })"
-      />
-    </div>
+    <template v-if="isImage">
+      <img :src="previewUrl" :alt="fileName" data-slot="image" :class="ui.image({ class: props.ui?.image })">
 
-    <div data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
-      <UChatShimmer v-if="props.status === 'uploading' && fileName" :text="fileName" data-slot="name" :class="ui.name({ class: props.ui?.name })" />
-      <span v-else data-slot="name" :class="ui.name({ class: props.ui?.name })">{{ fileName }}</span>
+      <div v-if="statusIcon" data-slot="overlay" :class="ui.overlay({ class: props.ui?.overlay })">
+        <UIcon :name="statusIcon" data-slot="overlayIcon" :class="ui.overlayIcon({ class: props.ui?.overlayIcon })" />
+      </div>
+    </template>
 
-      <span v-if="fileDescription" data-slot="description" :class="ui.description({ class: props.ui?.description })">{{ fileDescription }}</span>
-    </div>
+    <template v-else>
+      <div data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+        <UIcon :name="statusIcon || props.icon || appConfig.ui.icons.file" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+      </div>
 
-    <UButton
+      <div data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+        <span data-slot="name" :class="ui.name({ class: props.ui?.name })">{{ fileName }}</span>
+        <span v-if="fileDescription" data-slot="description" :class="ui.description({ class: props.ui?.description })">{{ fileDescription }}</span>
+      </div>
+    </template>
+
+    <button
       v-if="props.removable"
-      :icon="props.removeIcon || appConfig.ui.icons.close"
-      color="neutral"
-      variant="ghost"
-      size="xs"
+      type="button"
       :aria-label="t('fileUpload.removeFile', { filename: fileName ?? '' })"
       data-slot="remove"
       :class="ui.remove({ class: props.ui?.remove })"
       @click="emits('remove', $event)"
-    />
+    >
+      <UIcon :name="props.removeIcon || appConfig.ui.icons.close" data-slot="removeIcon" :class="ui.removeIcon({ class: props.ui?.removeIcon })" />
+    </button>
   </Primitive>
 </template>

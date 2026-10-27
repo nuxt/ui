@@ -1,132 +1,132 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`ChatAttachment > renders with as correctly 1`] = `
-"<li data-status="idle" data-slot="root" class="relative flex items-center min-w-0 max-w-full w-fit shrink-0 rounded-lg ring ring-default bg-default p-2 pe-2.5 gap-2.5 text-sm">
-  <div data-slot="leading" class="relative flex items-center justify-center shrink-0 aspect-square overflow-hidden rounded-md bg-elevated text-muted size-10"><span class="iconify i-lucide:file shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span></div>
+"<li data-status="idle" data-slot="root" class="group/attachment relative inline-flex items-center shrink-0 rounded-lg gap-2.5 text-sm has-data-[slot=leading]:p-2 has-data-[slot=leading]:pe-3 min-w-0 max-w-full ring ring-default bg-default">
+  <div data-slot="leading" class="flex items-center justify-center shrink-0 aspect-square rounded-md bg-elevated text-muted size-10"><span class="iconify i-lucide:file shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span></div>
   <div data-slot="wrapper" class="flex flex-col min-w-0 flex-1"><span data-slot="name" class="block truncate font-medium text-highlighted">report.pdf</span><span data-slot="description" class="block truncate text-muted mt-0.5 text-xs">PDF</span></div>
   <!--v-if-->
 </li>"
 `;
 
 exports[`ChatAttachment > renders with class correctly 1`] = `
-"<div data-status="idle" data-slot="root" class="relative flex items-center min-w-0 max-w-full shrink-0 rounded-lg ring ring-default bg-default p-2 pe-2.5 gap-2.5 text-sm w-40">
-  <div data-slot="leading" class="relative flex items-center justify-center shrink-0 aspect-square overflow-hidden rounded-md bg-elevated text-muted size-10"><span class="iconify i-lucide:file shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span></div>
+"<div data-status="idle" data-slot="root" class="group/attachment relative inline-flex items-center shrink-0 rounded-lg gap-2.5 text-sm has-data-[slot=leading]:p-2 has-data-[slot=leading]:pe-3 min-w-0 max-w-full ring ring-default bg-default w-40">
+  <div data-slot="leading" class="flex items-center justify-center shrink-0 aspect-square rounded-md bg-elevated text-muted size-10"><span class="iconify i-lucide:file shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span></div>
   <div data-slot="wrapper" class="flex flex-col min-w-0 flex-1"><span data-slot="name" class="block truncate font-medium text-highlighted">report.pdf</span><span data-slot="description" class="block truncate text-muted mt-0.5 text-xs">PDF</span></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`ChatAttachment > renders with description correctly 1`] = `
-"<div data-status="idle" data-slot="root" class="relative flex items-center min-w-0 max-w-full w-fit shrink-0 rounded-lg ring ring-default bg-default p-2 pe-2.5 gap-2.5 text-sm">
-  <div data-slot="leading" class="relative flex items-center justify-center shrink-0 aspect-square overflow-hidden rounded-md bg-elevated text-muted size-10"><span class="iconify i-lucide:file shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span></div>
+"<div data-status="idle" data-slot="root" class="group/attachment relative inline-flex items-center shrink-0 rounded-lg gap-2.5 text-sm has-data-[slot=leading]:p-2 has-data-[slot=leading]:pe-3 min-w-0 max-w-full ring ring-default bg-default">
+  <div data-slot="leading" class="flex items-center justify-center shrink-0 aspect-square rounded-md bg-elevated text-muted size-10"><span class="iconify i-lucide:file shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span></div>
   <div data-slot="wrapper" class="flex flex-col min-w-0 flex-1"><span data-slot="name" class="block truncate font-medium text-highlighted">report.pdf</span><span data-slot="description" class="block truncate text-muted mt-0.5 text-xs">Upload failed</span></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`ChatAttachment > renders with errorIcon correctly 1`] = `
-"<div data-status="error" data-slot="root" class="relative flex items-center min-w-0 max-w-full w-fit shrink-0 rounded-lg ring bg-default p-2 pe-2.5 gap-2.5 text-sm ring-error/40">
-  <div data-slot="leading" class="relative flex items-center justify-center shrink-0 aspect-square overflow-hidden rounded-md size-10 bg-error/10 text-error"><span class="iconify i-lucide:circle-x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span></div>
+"<div data-status="error" data-slot="root" class="group/attachment relative inline-flex items-center shrink-0 rounded-lg gap-2.5 text-sm has-data-[slot=leading]:p-2 has-data-[slot=leading]:pe-3 min-w-0 max-w-full ring bg-default ring-error/40">
+  <div data-slot="leading" class="flex items-center justify-center shrink-0 aspect-square rounded-md size-10 bg-error/10 text-error"><span class="iconify i-lucide:circle-x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span></div>
   <div data-slot="wrapper" class="flex flex-col min-w-0 flex-1"><span data-slot="name" class="block truncate font-medium text-highlighted">report.pdf</span><span data-slot="description" class="block truncate mt-0.5 text-xs text-error">PDF</span></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`ChatAttachment > renders with icon correctly 1`] = `
-"<div data-status="idle" data-slot="root" class="relative flex items-center min-w-0 max-w-full w-fit shrink-0 rounded-lg ring ring-default bg-default p-2 pe-2.5 gap-2.5 text-sm">
-  <div data-slot="leading" class="relative flex items-center justify-center shrink-0 aspect-square overflow-hidden rounded-md bg-elevated text-muted size-10"><span class="iconify i-lucide:file-text shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span></div>
+"<div data-status="idle" data-slot="root" class="group/attachment relative inline-flex items-center shrink-0 rounded-lg gap-2.5 text-sm has-data-[slot=leading]:p-2 has-data-[slot=leading]:pe-3 min-w-0 max-w-full ring ring-default bg-default">
+  <div data-slot="leading" class="flex items-center justify-center shrink-0 aspect-square rounded-md bg-elevated text-muted size-10"><span class="iconify i-lucide:file-text shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span></div>
   <div data-slot="wrapper" class="flex flex-col min-w-0 flex-1"><span data-slot="name" class="block truncate font-medium text-highlighted">report.pdf</span><span data-slot="description" class="block truncate text-muted mt-0.5 text-xs">PDF</span></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`ChatAttachment > renders with image correctly 1`] = `
-"<div data-status="idle" data-slot="root" class="relative flex items-center min-w-0 max-w-full w-fit shrink-0 rounded-lg ring ring-default bg-default p-2 pe-2.5 gap-2.5 text-sm">
-  <div data-slot="leading" class="relative flex items-center justify-center shrink-0 aspect-square overflow-hidden rounded-md bg-elevated text-muted size-10"><img src="https://picsum.photos/200" alt="photo.png" data-slot="image" class="size-full object-cover"></div>
-  <div data-slot="wrapper" class="flex flex-col min-w-0 flex-1"><span data-slot="name" class="block truncate font-medium text-highlighted">photo.png</span><span data-slot="description" class="block truncate text-muted mt-0.5 text-xs">PNG</span></div>
+"<div data-status="idle" data-slot="root" class="group/attachment relative inline-flex items-center shrink-0 rounded-lg gap-2.5 text-sm has-data-[slot=leading]:p-2 has-data-[slot=leading]:pe-3"><img src="https://picsum.photos/200" alt="photo.png" data-slot="image" class="block aspect-square rounded-lg object-cover ring ring-default size-14">
+  <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`ChatAttachment > renders with image status uploading correctly 1`] = `
-"<div data-status="uploading" data-slot="root" class="relative flex items-center min-w-0 max-w-full w-fit shrink-0 rounded-lg ring ring-default bg-default p-2 pe-2.5 gap-2.5 text-sm">
-  <div data-slot="leading" class="relative flex items-center justify-center shrink-0 aspect-square overflow-hidden rounded-md bg-elevated text-muted size-10"><img src="https://picsum.photos/200" alt="photo.png" data-slot="image" class="size-full object-cover opacity-60"></div>
-  <div data-slot="wrapper" class="flex flex-col min-w-0 flex-1"><span style="--spread: 18px; --duration: 2s;" data-slot="name" class="bg-clip-text bg-no-repeat bg-size-[calc(200%+var(--spread)*2+2px)_100%,auto] bg-[image:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--ui-text-highlighted),#0000_calc(50%+var(--spread))),linear-gradient(var(--ui-text-muted),var(--ui-text-muted))] motion-safe:animate-[shimmer_var(--duration)_linear_infinite] motion-safe:rtl:animate-[shimmer-rtl_var(--duration)_linear_infinite] will-change-[background-position] motion-reduce:bg-none motion-reduce:text-muted block truncate font-medium text-highlighted">photo.png</span><span data-slot="description" class="block truncate text-muted mt-0.5 text-xs">PNG</span></div>
+"<div data-status="uploading" data-slot="root" class="group/attachment relative inline-flex items-center shrink-0 rounded-lg gap-2.5 text-sm has-data-[slot=leading]:p-2 has-data-[slot=leading]:pe-3"><img src="https://picsum.photos/200" alt="photo.png" data-slot="image" class="block aspect-square rounded-lg object-cover ring ring-default size-14">
+  <div data-slot="overlay" class="absolute inset-0 flex items-center justify-center rounded-lg bg-default/50 backdrop-blur-xs"><span class="iconify i-lucide:loader-circle shrink-0 size-6 animate-spin text-default" aria-hidden="true" data-slot="overlayIcon"></span></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`ChatAttachment > renders with loadingIcon correctly 1`] = `
+"<div data-status="uploading" data-slot="root" class="group/attachment relative inline-flex items-center shrink-0 rounded-lg gap-2.5 text-sm has-data-[slot=leading]:p-2 has-data-[slot=leading]:pe-3 min-w-0 max-w-full ring ring-default bg-default">
+  <div data-slot="leading" class="flex items-center justify-center shrink-0 aspect-square rounded-md bg-elevated text-muted size-10"><span class="iconify i-lucide:loader shrink-0 size-5 animate-spin" aria-hidden="true" data-slot="leadingIcon"></span></div>
+  <div data-slot="wrapper" class="flex flex-col min-w-0 flex-1"><span data-slot="name" class="block truncate font-medium text-highlighted">report.pdf</span><span data-slot="description" class="block truncate text-muted mt-0.5 text-xs">PDF</span></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`ChatAttachment > renders with name correctly 1`] = `
-"<div data-status="idle" data-slot="root" class="relative flex items-center min-w-0 max-w-full w-fit shrink-0 rounded-lg ring ring-default bg-default p-2 pe-2.5 gap-2.5 text-sm">
-  <div data-slot="leading" class="relative flex items-center justify-center shrink-0 aspect-square overflow-hidden rounded-md bg-elevated text-muted size-10"><span class="iconify i-lucide:file shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span></div>
+"<div data-status="idle" data-slot="root" class="group/attachment relative inline-flex items-center shrink-0 rounded-lg gap-2.5 text-sm has-data-[slot=leading]:p-2 has-data-[slot=leading]:pe-3 min-w-0 max-w-full ring ring-default bg-default">
+  <div data-slot="leading" class="flex items-center justify-center shrink-0 aspect-square rounded-md bg-elevated text-muted size-10"><span class="iconify i-lucide:file shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span></div>
   <div data-slot="wrapper" class="flex flex-col min-w-0 flex-1"><span data-slot="name" class="block truncate font-medium text-highlighted">report.pdf</span><span data-slot="description" class="block truncate text-muted mt-0.5 text-xs">PDF</span></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`ChatAttachment > renders with removable correctly 1`] = `
-"<div data-status="idle" data-slot="root" class="relative flex items-center min-w-0 max-w-full w-fit shrink-0 rounded-lg ring ring-default bg-default p-2 pe-2.5 gap-2.5 text-sm">
-  <div data-slot="leading" class="relative flex items-center justify-center shrink-0 aspect-square overflow-hidden rounded-md bg-elevated text-muted size-10"><span class="iconify i-lucide:file shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span></div>
-  <div data-slot="wrapper" class="flex flex-col min-w-0 flex-1"><span data-slot="name" class="block truncate font-medium text-highlighted">report.pdf</span><span data-slot="description" class="block truncate text-muted mt-0.5 text-xs">PDF</span></div><button type="button" data-slot="remove" aria-label="Remove report.pdf" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1 shrink-0"><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
-    <!--v-if-->
-    <!--v-if-->
-  </button>
+"<div data-status="idle" data-slot="root" class="group/attachment relative inline-flex items-center shrink-0 rounded-lg gap-2.5 text-sm has-data-[slot=leading]:p-2 has-data-[slot=leading]:pe-3 min-w-0 max-w-full ring ring-default bg-default">
+  <div data-slot="leading" class="flex items-center justify-center shrink-0 aspect-square rounded-md bg-elevated text-muted size-10"><span class="iconify i-lucide:file shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span></div>
+  <div data-slot="wrapper" class="flex flex-col min-w-0 flex-1"><span data-slot="name" class="block truncate font-medium text-highlighted">report.pdf</span><span data-slot="description" class="block truncate text-muted mt-0.5 text-xs">PDF</span></div><button type="button" aria-label="Remove report.pdf" data-slot="remove" class="absolute -top-1.5 -end-1.5 z-1 inline-flex items-center justify-center size-5 rounded-full bg-inverted text-inverted ring-2 ring-bg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted [@media(hover:hover)]:opacity-0 group-hover/attachment:opacity-100 group-focus-within/attachment:opacity-100 transition-opacity ease-out"><span class="iconify i-lucide:x size-3" aria-hidden="true" data-slot="removeIcon"></span></button>
 </div>"
 `;
 
 exports[`ChatAttachment > renders with removeIcon correctly 1`] = `
-"<div data-status="idle" data-slot="root" class="relative flex items-center min-w-0 max-w-full w-fit shrink-0 rounded-lg ring ring-default bg-default p-2 pe-2.5 gap-2.5 text-sm">
-  <div data-slot="leading" class="relative flex items-center justify-center shrink-0 aspect-square overflow-hidden rounded-md bg-elevated text-muted size-10"><span class="iconify i-lucide:file shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span></div>
-  <div data-slot="wrapper" class="flex flex-col min-w-0 flex-1"><span data-slot="name" class="block truncate font-medium text-highlighted">report.pdf</span><span data-slot="description" class="block truncate text-muted mt-0.5 text-xs">PDF</span></div><button type="button" data-slot="remove" aria-label="Remove report.pdf" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1 shrink-0"><span class="iconify i-lucide:trash shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
-    <!--v-if-->
-    <!--v-if-->
-  </button>
+"<div data-status="idle" data-slot="root" class="group/attachment relative inline-flex items-center shrink-0 rounded-lg gap-2.5 text-sm has-data-[slot=leading]:p-2 has-data-[slot=leading]:pe-3 min-w-0 max-w-full ring ring-default bg-default">
+  <div data-slot="leading" class="flex items-center justify-center shrink-0 aspect-square rounded-md bg-elevated text-muted size-10"><span class="iconify i-lucide:file shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span></div>
+  <div data-slot="wrapper" class="flex flex-col min-w-0 flex-1"><span data-slot="name" class="block truncate font-medium text-highlighted">report.pdf</span><span data-slot="description" class="block truncate text-muted mt-0.5 text-xs">PDF</span></div><button type="button" aria-label="Remove report.pdf" data-slot="remove" class="absolute -top-1.5 -end-1.5 z-1 inline-flex items-center justify-center size-5 rounded-full bg-inverted text-inverted ring-2 ring-bg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted [@media(hover:hover)]:opacity-0 group-hover/attachment:opacity-100 group-focus-within/attachment:opacity-100 transition-opacity ease-out"><span class="iconify i-lucide:trash size-3" aria-hidden="true" data-slot="removeIcon"></span></button>
 </div>"
 `;
 
 exports[`ChatAttachment > renders with size md correctly 1`] = `
-"<div data-status="idle" data-slot="root" class="relative flex items-center min-w-0 max-w-full w-fit shrink-0 rounded-lg ring ring-default bg-default p-2 pe-2.5 gap-2.5 text-sm">
-  <div data-slot="leading" class="relative flex items-center justify-center shrink-0 aspect-square overflow-hidden rounded-md bg-elevated text-muted size-10"><span class="iconify i-lucide:file shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span></div>
+"<div data-status="idle" data-slot="root" class="group/attachment relative inline-flex items-center shrink-0 rounded-lg gap-2.5 text-sm has-data-[slot=leading]:p-2 has-data-[slot=leading]:pe-3 min-w-0 max-w-full ring ring-default bg-default">
+  <div data-slot="leading" class="flex items-center justify-center shrink-0 aspect-square rounded-md bg-elevated text-muted size-10"><span class="iconify i-lucide:file shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span></div>
   <div data-slot="wrapper" class="flex flex-col min-w-0 flex-1"><span data-slot="name" class="block truncate font-medium text-highlighted">report.pdf</span><span data-slot="description" class="block truncate text-muted mt-0.5 text-xs">PDF</span></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`ChatAttachment > renders with size sm correctly 1`] = `
-"<div data-status="idle" data-slot="root" class="relative flex items-center min-w-0 max-w-full w-fit shrink-0 rounded-lg ring ring-default bg-default p-1.5 pe-2 gap-2 text-xs">
-  <div data-slot="leading" class="relative flex items-center justify-center shrink-0 aspect-square overflow-hidden rounded-md bg-elevated text-muted size-8"><span class="iconify i-lucide:file shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span></div>
+"<div data-status="idle" data-slot="root" class="group/attachment relative inline-flex items-center shrink-0 rounded-lg gap-2 text-xs has-data-[slot=leading]:p-1.5 has-data-[slot=leading]:pe-2.5 min-w-0 max-w-full ring ring-default bg-default">
+  <div data-slot="leading" class="flex items-center justify-center shrink-0 aspect-square rounded-md bg-elevated text-muted size-8"><span class="iconify i-lucide:file shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span></div>
   <div data-slot="wrapper" class="flex flex-col min-w-0 flex-1"><span data-slot="name" class="block truncate font-medium text-highlighted">report.pdf</span><span data-slot="description" class="block truncate text-muted text-xs/4">PDF</span></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`ChatAttachment > renders with size xs correctly 1`] = `
-"<div data-status="idle" data-slot="root" class="relative flex items-center min-w-0 max-w-full w-fit shrink-0 rounded-lg ring ring-default bg-default p-1 pe-1.5 gap-1.5 text-xs">
-  <div data-slot="leading" class="relative flex items-center justify-center shrink-0 aspect-square overflow-hidden rounded-md bg-elevated text-muted size-7"><span class="iconify i-lucide:file shrink-0 size-3.5" aria-hidden="true" data-slot="leadingIcon"></span></div>
+"<div data-status="idle" data-slot="root" class="group/attachment relative inline-flex items-center shrink-0 rounded-lg gap-1.5 text-xs has-data-[slot=leading]:p-1 has-data-[slot=leading]:pe-2 min-w-0 max-w-full ring ring-default bg-default">
+  <div data-slot="leading" class="flex items-center justify-center shrink-0 aspect-square rounded-md bg-elevated text-muted size-7"><span class="iconify i-lucide:file shrink-0 size-3.5" aria-hidden="true" data-slot="leadingIcon"></span></div>
   <div data-slot="wrapper" class="flex flex-col min-w-0 flex-1"><span data-slot="name" class="block truncate font-medium text-highlighted">report.pdf</span><span data-slot="description" class="block truncate text-muted text-[10px]/3">PDF</span></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`ChatAttachment > renders with status error correctly 1`] = `
-"<div data-status="error" data-slot="root" class="relative flex items-center min-w-0 max-w-full w-fit shrink-0 rounded-lg ring bg-default p-2 pe-2.5 gap-2.5 text-sm ring-error/40">
-  <div data-slot="leading" class="relative flex items-center justify-center shrink-0 aspect-square overflow-hidden rounded-md size-10 bg-error/10 text-error"><span class="iconify i-lucide:circle-x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span></div>
+"<div data-status="error" data-slot="root" class="group/attachment relative inline-flex items-center shrink-0 rounded-lg gap-2.5 text-sm has-data-[slot=leading]:p-2 has-data-[slot=leading]:pe-3 min-w-0 max-w-full ring bg-default ring-error/40">
+  <div data-slot="leading" class="flex items-center justify-center shrink-0 aspect-square rounded-md size-10 bg-error/10 text-error"><span class="iconify i-lucide:circle-x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span></div>
   <div data-slot="wrapper" class="flex flex-col min-w-0 flex-1"><span data-slot="name" class="block truncate font-medium text-highlighted">report.pdf</span><span data-slot="description" class="block truncate mt-0.5 text-xs text-error">PDF</span></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`ChatAttachment > renders with status uploading correctly 1`] = `
-"<div data-status="uploading" data-slot="root" class="relative flex items-center min-w-0 max-w-full w-fit shrink-0 rounded-lg ring ring-default bg-default p-2 pe-2.5 gap-2.5 text-sm">
-  <div data-slot="leading" class="relative flex items-center justify-center shrink-0 aspect-square overflow-hidden rounded-md bg-elevated text-muted size-10"><span class="iconify i-lucide:file shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span></div>
-  <div data-slot="wrapper" class="flex flex-col min-w-0 flex-1"><span style="--spread: 20px; --duration: 2s;" data-slot="name" class="bg-clip-text bg-no-repeat bg-size-[calc(200%+var(--spread)*2+2px)_100%,auto] bg-[image:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--ui-text-highlighted),#0000_calc(50%+var(--spread))),linear-gradient(var(--ui-text-muted),var(--ui-text-muted))] motion-safe:animate-[shimmer_var(--duration)_linear_infinite] motion-safe:rtl:animate-[shimmer-rtl_var(--duration)_linear_infinite] will-change-[background-position] motion-reduce:bg-none motion-reduce:text-muted block truncate font-medium text-highlighted">report.pdf</span><span data-slot="description" class="block truncate text-muted mt-0.5 text-xs">PDF</span></div>
+"<div data-status="uploading" data-slot="root" class="group/attachment relative inline-flex items-center shrink-0 rounded-lg gap-2.5 text-sm has-data-[slot=leading]:p-2 has-data-[slot=leading]:pe-3 min-w-0 max-w-full ring ring-default bg-default">
+  <div data-slot="leading" class="flex items-center justify-center shrink-0 aspect-square rounded-md bg-elevated text-muted size-10"><span class="iconify i-lucide:loader-circle shrink-0 size-5 animate-spin" aria-hidden="true" data-slot="leadingIcon"></span></div>
+  <div data-slot="wrapper" class="flex flex-col min-w-0 flex-1"><span data-slot="name" class="block truncate font-medium text-highlighted">report.pdf</span><span data-slot="description" class="block truncate text-muted mt-0.5 text-xs">PDF</span></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`ChatAttachment > renders with ui correctly 1`] = `
-"<div data-status="idle" data-slot="root" class="relative flex items-center min-w-0 max-w-full w-fit shrink-0 rounded-lg ring ring-default bg-default p-2 pe-2.5 gap-2.5 text-sm">
-  <div data-slot="leading" class="relative flex items-center justify-center shrink-0 aspect-square overflow-hidden rounded-md bg-elevated text-muted size-10"><span class="iconify i-lucide:file shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span></div>
+"<div data-status="idle" data-slot="root" class="group/attachment relative inline-flex items-center shrink-0 rounded-lg gap-2.5 text-sm has-data-[slot=leading]:p-2 has-data-[slot=leading]:pe-3 min-w-0 max-w-full ring ring-default bg-default">
+  <div data-slot="leading" class="flex items-center justify-center shrink-0 aspect-square rounded-md bg-elevated text-muted size-10"><span class="iconify i-lucide:file shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span></div>
   <div data-slot="wrapper" class="flex flex-col min-w-0 flex-1"><span data-slot="name" class="block truncate text-highlighted font-medium">report.pdf</span><span data-slot="description" class="block truncate text-muted mt-0.5 text-xs">PDF</span></div>
   <!--v-if-->
 </div>"

@@ -23,6 +23,7 @@ describe('ChatAttachment', () => {
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ['with icon', { props: { ...props, icon: 'i-lucide-file-text' } }],
     ['with errorIcon', { props: { ...props, status: 'error', errorIcon: 'i-lucide-circle-x' } }],
+    ['with loadingIcon', { props: { ...props, status: 'uploading', loadingIcon: 'i-lucide-loader' } }],
     ['with removeIcon', { props: { ...props, removable: true, removeIcon: 'i-lucide-trash' } }],
     ['with as', { props: { ...props, as: 'li' } }],
     ['with class', { props: { ...props, class: 'w-40' } }],
