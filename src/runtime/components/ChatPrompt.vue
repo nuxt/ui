@@ -167,7 +167,7 @@ function onPaste(event: ClipboardEvent) {
     return
   }
 
-  event.preventDefault()
+  // Not prevented, a paste that also holds text still inserts it
   addFiles(pasted)
 }
 

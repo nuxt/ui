@@ -53,7 +53,6 @@ describe('ChatPrompt', () => {
     const event = paste([image, new File(['b'], 'notes.txt', { type: 'text/plain' })])
     wrapper.find('textarea').element.dispatchEvent(event)
 
-    expect(event.defaultPrevented).toBe(true)
     expect(wrapper.emitted('update:files')?.[0]).toEqual([[image]])
   })
 
