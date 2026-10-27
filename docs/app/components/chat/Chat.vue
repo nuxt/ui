@@ -136,7 +136,7 @@ function send(text: string, page: string) {
 function sendNext() {
   const next = queue.value.shift()
   if (next) {
-    send(next.text, next.currentPage)
+    send(next.text.trim(), next.currentPage)
   }
 }
 
