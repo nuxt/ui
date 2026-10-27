@@ -738,6 +738,25 @@ describe('Table', () => {
     expect(onSelect).toHaveBeenCalledOnce()
   })
 
+  it('makes every row inert when enableRowSelection is false', async () => {
+    const onSelect = vi.fn()
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data: data.slice(0, 2),
+        columns: [{ accessorKey: 'id' }] as any,
+        options: { enableRowSelection: false },
+        onSelect
+      }
+    })
+
+    const rows = wrapper.findAll('tbody tr')
+    expect(rows.map(tr => tr.attributes('data-selectable'))).toEqual(['false', 'false'])
+    expect(rows.map(tr => tr.attributes('tabindex'))).toEqual([undefined, undefined])
+
+    await rows[0]!.trigger('click')
+    expect(onSelect).not.toHaveBeenCalled()
+  })
+
   describe('defaultColumn', () => {
     const defaultColumn = {
       header: ({ column }: any) => `H:${column.id}`,

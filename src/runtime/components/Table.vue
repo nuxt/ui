@@ -564,7 +564,7 @@ function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
 }
 
 function onRowSelect(e: Event, row: TableRow<T>) {
-  if (!props.onSelect || !canSelectRow(row)) {
+  if (!props.onSelect || !row.getCanSelect()) {
     return
   }
   const target = e.target as HTMLElement
@@ -604,12 +604,8 @@ function onRowContextmenu(e: Event, row: TableRow<T>) {
 }
 
 // A per-row `enableRowSelection` predicate turns the rows it rejects inert: no selectable styles, no `tabindex` and no `select` event.
-function canSelectRow(row: TableRow<T>) {
-  return typeof tableApi.options.enableRowSelection !== 'function' || row.getCanSelect()
-}
-
 function isRowSelectable(row: TableRow<T>) {
-  return (!!props.onSelect || !!props.onHover || !!props.onContextmenu) && canSelectRow(row)
+  return (!!props.onSelect || !!props.onHover || !!props.onContextmenu) && row.getCanSelect()
 }
 
 function isCellCovered(cell: Cell<TableFeatures, T, unknown>) {
@@ -779,7 +775,7 @@ defineExpose({
       :data-selectable="isRowSelectable(row)"
       :data-expanded="row.getIsExpanded()"
       :data-pinned="row.getIsPinned() || undefined"
-      :tabindex="props.onSelect && canSelectRow(row) ? 0 : undefined"
+      :tabindex="props.onSelect && row.getCanSelect() ? 0 : undefined"
       data-slot="table-tr"
       :class="ui.tr({
         class: [
