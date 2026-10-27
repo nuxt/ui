@@ -16,6 +16,7 @@ By the end of this tutorial, you'll have a fully functional AI chatbot with:
 - **Server-side AI integration** using Nitro API routes and the AI SDK
 - **Tools** with web search, an MCP server and user approval
 - **Queued messages** so users can keep typing while a response streams
+- **File attachments** to send images and PDFs to the model
 
 ::callout{icon="i-simple-icons-github"}
 Check out the [`Nuxt`](https://github.com/nuxt-ui-templates/chat) and [`Vue`](https://github.com/nuxt-ui-templates/chat-vue) AI Chat templates on GitHub for production-ready implementations with authentication, database persistence, and more.
@@ -1615,6 +1616,219 @@ onMounted(() => {
 
 The prompt lists the queued messages in a panel above it, where users can send one now, put it back in the prompt to edit it, or remove it. Picking one to send now emits `send` with that message at the front of the queue, so `onSend` stops the current response and the `status` watcher sends it. A response waiting for a tool approval is `ready` too, so `sendNext` waits until the user answers. After an `error`, the prompt is disabled and the queue waits until the user reloads the failed response.
 
+## Attaching files :badge{label="Soon" class="align-text-top"}
+
+Bind `v-model:files` on the prompt to let users attach images and PDFs. They can paste them, drop them on the prompt or pick them with the button in the `#footer` slot:
+
+::code-tree-intersection
+:::code-collapse
+
+```vue [app/pages/chat/[id].vue] {5,19-21,48-63,67-69,75,81,120-128,164-166,173-180}
+<script setup lang="ts">
+import type { ChatPromptQueueItem } from '@nuxt/ui'
+import { DefaultChatTransport, getToolName, isReasoningUIPart, isTextUIPart, isToolUIPart, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
+import { useChat } from '@ai-sdk/vue'
+import { isPartStreaming, isToolStreaming, toFileUIParts } from '@nuxt/ui/utils/ai'
+
+const route = useRoute()
+const toast = useToast()
+const { model } = useModels()
+
+const { data: chatData } = await useFetch(`/api/chats/${route.params.id}`)
+
+if (!chatData.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Chat not found', fatal: true })
+}
+
+const input = ref('')
+const queue = ref<ChatPromptQueueItem[]>([])
+const files = ref<File[]>([])
+// Reading the files is async, the prompt queues new messages meanwhile
+const reading = ref(false)
+
+const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
+  id: chatData.value.id,
+  messages: chatData.value.messages,
+  transport: new DefaultChatTransport({
+    api: `/api/chats/${chatData.value.id}`,
+    body: () => ({
+      model: model.value // Read on every request so a model change applies
+    })
+  }),
+  // Send the approval responses back once every pending tool has one
+  sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses,
+  onData(dataPart) {
+    if (dataPart.type === 'data-chat-title') {
+      refreshNuxtData('chats')
+    }
+  },
+  onError(error) {
+    toast.add({
+      title: 'Error',
+      description: error.message,
+      color: 'error'
+    })
+  }
+})
+
+async function send({ text, files }: ChatPromptQueueItem) {
+  reading.value = true
+  try {
+    const parts = await toFileUIParts(files ?? [])
+    // An empty text part is rejected by some providers, send the files alone
+    sendMessage(text.trim() ? { text, files: parts } : { files: parts })
+  } catch (error) {
+    toast.add({
+      title: 'Error',
+      description: (error as Error).message,
+      color: 'error'
+    })
+  } finally {
+    reading.value = false
+  }
+}
+
+function handleSubmit(e: Event) {
+  e.preventDefault()
+  send({ text: input.value, files: files.value })
+  input.value = ''
+  files.value = []
+}
+
+function sendNext() {
+  // A response waiting for a tool approval is `ready` too, a new message would leave it unanswered
+  const parts = messages.value.at(-1)?.parts
+  if (reading.value || parts?.some(part => isToolUIPart(part) && part.state === 'approval-requested')) {
+    return
+  }
+
+  const item = queue.value.shift()
+  if (item) {
+    send(item)
+  }
+}
+
+watch(status, (value) => {
+  if (value === 'ready') {
+    sendNext()
+  }
+})
+
+// The message picked to be sent now is at the front of the queue
+function onSend() {
+  if (status.value === 'submitted' || status.value === 'streaming') {
+    stop()
+  } else {
+    sendNext()
+  }
+}
+
+onMounted(() => {
+  if (chatData.value?.messages.length === 1) {
+    regenerate()
+  }
+})
+</script>
+
+<template>
+  <UDashboardPanel :ui="{ body: 'p-0 sm:p-0' }">
+    <template #header>
+      <ChatsHistory />
+    </template>
+    <template #body>
+      <UContainer class="min-h-dvh flex flex-col py-4 sm:py-6">
+        <UChatMessages
+          :messages="messages"
+          :status="status"
+          should-auto-scroll
+          class="flex-1"
+        >
+          <template #files="{ parts }">
+            <UChatAttachment
+              v-for="(part, index) in parts"
+              :key="index"
+              :name="part.filename"
+              :type="part.mediaType"
+              :url="part.url"
+            />
+          </template>
+
+          <template #part="{ part, message, streaming }">
+            <UChatReasoning
+              v-if="isReasoningUIPart(part)"
+              :text="part.text"
+              :streaming="isPartStreaming(part, streaming)"
+            >
+              <ChatMarkdown
+                :value="part.text"
+                :streaming="isPartStreaming(part, streaming)"
+              />
+            </UChatReasoning>
+
+            <UChatTool
+              v-else-if="isToolUIPart(part)"
+              :text="getToolName(part)"
+              :streaming="isToolStreaming(part, streaming)"
+              :error="part.state === 'output-error'"
+              :actions="part.state === 'approval-requested' ? [
+                { label: 'Approve', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: true }) },
+                { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) }
+              ] : undefined"
+            />
+
+            <ChatMarkdown
+              v-else-if="isTextUIPart(part) && message.role === 'assistant'"
+              :value="part.text"
+              :streaming="isPartStreaming(part, streaming)"
+            />
+          </template>
+        </UChatMessages>
+
+        <UChatPrompt
+          v-model="input"
+          v-model:queue="queue"
+          v-model:files="files"
+          accept="image/*,application/pdf"
+          :status="reading ? 'submitted' : status"
+          :error="error"
+          variant="subtle"
+          class="sticky bottom-0"
+          @submit="handleSubmit"
+          @send="onSend"
+        >
+          <template #footer="{ open }">
+            <UButton
+              icon="i-lucide-paperclip"
+              color="neutral"
+              variant="ghost"
+              aria-label="Attach files"
+              @click="open"
+            />
+            <ModelSelect v-model="model" />
+          </template>
+
+          <UChatPromptSubmit
+            :status="status"
+            color="neutral"
+            @stop="stop()"
+            @reload="regenerate()"
+          />
+        </UChatPrompt>
+      </UContainer>
+    </template>
+  </UDashboardPanel>
+</template>
+```
+
+:::
+::
+
+Each file shows above the textarea as a [`UChatAttachment`](/docs/components/chat-attachment) until the message is sent. The `toFileUIParts` utility from `@nuxt/ui/utils/ai` reads the files as data URLs, which `sendMessage` sends as file parts the models can read. A queued message keeps its files, so `send` handles both the submitted and the queued ones. While the files are read, the prompt gets the `submitted` status, so a message sent meanwhile goes to the queue instead of starting a second request. In the conversation, the `#files` slot of [`UChatMessages`](/docs/components/chat-messages) renders the file parts of each message.
+
+::note
+The file parts are stored in the database with the rest of the message. For large files, upload them to a storage like [NuxtHub Blob](https://hub.nuxt.com/docs/blob) and send their URL instead.
+::
+
 ## Going further
 
 You now have a working AI chatbot with database persistence! To take it further, consider adding:
@@ -1653,6 +1867,7 @@ You've built a complete AI chatbot with:
 - **Streaming Markdown rendering** with Comark for rich content display
 - **Multi-model support** via AI Gateway
 - **Tools** with web search, MCP and user approval
+- **Queued messages and file attachments** in the prompt
 - **Database persistence** with SQLite (local) / Turso (production) and Drizzle ORM
 
 The combination of Nuxt's full-stack capabilities, Nuxt UI's purpose-built chat components, a local SQLite dev database with a production Turso database, and the AI SDK's streaming infrastructure makes building AI applications straightforward and enjoyable.
