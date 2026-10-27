@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { flushPromises } from '@vue/test-utils'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { aggregationFn_sum, cellSelectionFeature, cellSpanningFeature, columnGroupingFeature, createGroupedRowModel, rowAggregationFeature, stockFeatures } from '@tanstack/vue-table'
+import { aggregationFn_sum, cellSelectionFeature, cellSpanningFeature, columnGroupingFeature, columnOrderingFeature, createGroupedRowModel, rowAggregationFeature, stockFeatures } from '@tanstack/vue-table'
 import { upperFirst } from 'scule'
 import { renderEach } from '../component-render'
 import { UCheckbox, UButton, UBadge, UDropdownMenu } from '#components'
@@ -544,6 +544,96 @@ describe('Table', () => {
     const footerThs = wrapper.findAll('tfoot th')
     expect(footerThs.length).toBeGreaterThan(0)
     expect(footerThs.every(th => th.attributes('aria-sort') === undefined && th.attributes('rowspan') === undefined)).toBe(true)
+  })
+
+  describe('grouped headers with different depths', () => {
+    const groupedHeaderColumns: TableColumn<typeof data[number]>[] = [
+      { accessorKey: 'id', header: 'ID' },
+      {
+        header: 'Payment',
+        columns: [
+          { accessorKey: 'email', header: 'Email' },
+          {
+            header: 'Details',
+            columns: [
+              { accessorKey: 'status', header: 'Status' },
+              { accessorKey: 'amount', header: 'Amount' }
+            ]
+          }
+        ]
+      }
+    ]
+
+    it('merges each chain of placeholders into the real header', async () => {
+      const wrapper = await mountSuspended(Table, {
+        props: { data, columns: groupedHeaderColumns as any },
+        slots: { 'id-header': () => 'Custom ID' }
+      })
+
+      const rows = wrapper.findAll('thead tr[data-slot="table-tr"]')
+      expect(rows.map(row => row.findAll('th').map(th => th.text()))).toEqual([
+        ['Custom ID', 'Payment'],
+        ['Email', 'Details'],
+        ['Status', 'Amount']
+      ])
+      expect(rows[0]!.findAll('th')[0]!.attributes('rowspan')).toBe('3')
+      expect(rows[0]!.findAll('th')[1]!.attributes('colspan')).toBe('3')
+      expect(rows[1]!.findAll('th')[0]!.attributes('rowspan')).toBe('2')
+      expect(rows[1]!.findAll('th')[1]!.attributes('colspan')).toBe('2')
+      expect(await axe(wrapper.element)).toHaveNoViolations()
+    })
+
+    it('updates the merged headers when columns are hidden', async () => {
+      const wrapper = await mountSuspended(Table, {
+        props: { data, columns: groupedHeaderColumns as any }
+      })
+
+      await wrapper.setProps({ columnVisibility: { status: false, amount: false } })
+
+      const rows = wrapper.findAll('thead tr[data-slot="table-tr"]')
+      expect(rows.map(row => row.findAll('th').map(th => th.text()))).toEqual([
+        ['ID', 'Payment'],
+        ['Email']
+      ])
+      expect(rows[0]!.find('th').attributes('rowspan')).toBe('2')
+      expect(rows[0]!.findAll('th')[1]!.attributes('colspan')).toBeUndefined()
+
+      await wrapper.setProps({ columnVisibility: { email: false, status: false, amount: false } })
+
+      expect(wrapper.findAll('thead th').map(th => th.text())).toEqual(['ID'])
+      expect(wrapper.find('thead th').attributes('rowspan')).toBeUndefined()
+
+      await wrapper.setProps({ columnVisibility: {} })
+
+      expect(wrapper.find('thead th').attributes('rowspan')).toBe('3')
+      expect(wrapper.findAll('thead th')).toHaveLength(6)
+    })
+
+    it('keeps the merged headers aligned when columns are reordered and pinned', async () => {
+      const wrapper = await mountSuspended(Table, {
+        props: {
+          data,
+          columns: groupedHeaderColumns as any,
+          columnOrder: ['id', 'amount', 'email', 'status'],
+          columnPinning: { start: [], end: ['id'] },
+          features: { columnOrderingFeature }
+        }
+      })
+
+      const rows = wrapper.findAll('thead tr[data-slot="table-tr"]')
+      expect(rows.map(row => row.findAll('th').map(th => th.text()))).toEqual([
+        ['Payment', 'ID'],
+        ['Details', 'Email', 'Details'],
+        ['Amount', 'Status']
+      ])
+      const idTh = rows[0]!.findAll('th')[1]!
+      expect(idTh.attributes('rowspan')).toBe('3')
+      expect(idTh.attributes('data-pinned')).toBe('end')
+      expect(rows[1]!.findAll('th')[1]!.attributes('rowspan')).toBe('2')
+      expect(wrapper.find('tbody tr').findAll('td').map(td => td.text())).toEqual([
+        '316', 'ken99@yahoo.com', 'success', 'm5gr84i9'
+      ])
+    })
   })
 
   it('does not set aria-sort on th elements the table cannot sort', async () => {
