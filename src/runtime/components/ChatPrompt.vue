@@ -249,11 +249,15 @@ function sendQueued(index: number) {
     return
   }
 
-  const item = takeQueued(index)
-  if (item) {
-    queue.value = [item, ...(queue.value ?? [])]
-    emits('send', item)
+  // One update from a snapshot, a bound `v-model` only reflects the new queue after the parent renders
+  const current = queue.value ?? []
+  const item = current[index]
+  if (!item) {
+    return
   }
+
+  queue.value = [item, ...current.filter((_, i) => i !== index)]
+  emits('send', item)
 }
 
 // Puts a queued message back in the prompt, ahead of the current draft

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { h } from 'vue'
+import { defineComponent, h, ref } from 'vue'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
@@ -69,6 +69,18 @@ describe('ChatPrompt', () => {
 
       expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['Second\nDraft'])
       expect(wrapper.emitted('update:queue')?.[0]).toEqual([[queue[0]]])
+    })
+
+    it('moves the message to the front with a bound `v-model:queue`', async () => {
+      const model = ref([...queue])
+      const Parent = defineComponent({
+        setup: () => () => h(ChatPrompt, { 'queue': model.value, 'onUpdate:queue': (value?: typeof queue) => (model.value = value ?? []) })
+      })
+
+      const wrapper = await mountSuspended(Parent)
+      await wrapper.findAll('[data-slot="queueItem"]')[1]!.findAll('button').at(-2)!.trigger('click')
+
+      expect(model.value).toEqual([queue[1], queue[0]])
     })
 
     it('keeps the message while the chat errored', async () => {

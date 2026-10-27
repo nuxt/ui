@@ -39,6 +39,12 @@ async function onSubmit() {
   input.value = ''
   files.value = []
 
+  // A queued message whose files are still being read goes first
+  if (sending) {
+    queue.value.push({ text, files: submitted })
+    return
+  }
+
   await send(text, submitted)
 }
 
