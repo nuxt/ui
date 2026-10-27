@@ -57,6 +57,18 @@ describe('ChatPrompt', () => {
     expect(wrapper.emitted('update:files')?.[0]).toEqual([[image]])
   })
 
+  it('adds the files pasted in a custom body', async () => {
+    const wrapper = await mountSuspended(ChatPrompt, {
+      props: { files: [] },
+      slots: { body: () => h('div', { contenteditable: true }) }
+    })
+
+    const file = new File(['a'], 'notes.txt', { type: 'text/plain' })
+    wrapper.find('[contenteditable]').element.dispatchEvent(paste([file]))
+
+    expect(wrapper.emitted('update:files')?.[0]).toEqual([[file]])
+  })
+
   it('ignores pasted files without `v-model:files`', async () => {
     const wrapper = await mountSuspended(ChatPrompt)
 

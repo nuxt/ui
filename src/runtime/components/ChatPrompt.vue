@@ -157,7 +157,8 @@ function setRoot(el: Element | ComponentPublicInstance | null) {
 }
 
 function onPaste(event: ClipboardEvent) {
-  if (!canAttach.value || !event.clipboardData?.files.length) {
+  // Listened on the root so a custom `#body` like an editor gets it too, unless it handled the paste itself
+  if (event.defaultPrevented || !canAttach.value || !event.clipboardData?.files.length) {
     return
   }
 
@@ -221,6 +222,7 @@ defineExpose({
     :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @submit.prevent="submit"
+    @paste="onPaste"
   >
     <div v-if="!!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header" />
@@ -259,7 +261,6 @@ defineExpose({
         :class="ui.body({ class: props.ui?.body })"
         @keydown="onKeydown"
         @compositionend="onCompositionEnd"
-        @paste="onPaste"
       >
         <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
           <slot :name="name" v-bind="slotData" />
