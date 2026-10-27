@@ -350,39 +350,39 @@ defineExpose({
     :as="props.as"
     :method="props.as === 'form' ? 'post' : undefined"
     :data-dragging="hasFiles ? isDragging : undefined"
-    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
+    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'chat-prompt'"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :style="queueHeight ? { '--chat-prompt-queue-height': `${queueHeight}px` } : undefined"
     @submit.prevent="submit"
     @paste="onPaste"
   >
-    <div v-if="!!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
+    <div v-if="!!slots.header" data-slot="chat-prompt-header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header" />
     </div>
 
-    <div v-if="queue?.length" ref="queueRef" data-slot="queue" :class="ui.queue({ class: props.ui?.queue })">
+    <div v-if="queue?.length" ref="queueRef" data-slot="chat-prompt-queue" :class="ui.queue({ class: props.ui?.queue })">
       <slot name="queue" :queue="queue" :send="sendQueued" :edit="editQueued" :remove="removeQueued">
         <button
           type="button"
           :aria-expanded="queueOpen"
           :aria-controls="queueId"
-          data-slot="queueTrigger"
+          data-slot="chat-prompt-queueTrigger"
           :class="ui.queueTrigger({ class: props.ui?.queueTrigger })"
           @click="queueOpen = !queueOpen"
         >
-          <UIcon :name="props.queueIcon || appConfig.ui.icons.chevronDown" :data-state="queueOpen ? 'open' : 'closed'" data-slot="queueTriggerIcon" :class="ui.queueTriggerIcon({ class: props.ui?.queueTriggerIcon })" />
+          <UIcon :name="props.queueIcon || appConfig.ui.icons.chevronDown" :data-state="queueOpen ? 'open' : 'closed'" data-slot="chat-prompt-queueTriggerIcon" :class="ui.queueTriggerIcon({ class: props.ui?.queueTriggerIcon })" />
           <span>{{ t('chatPrompt.queue') }}</span>
-          <span data-slot="queueCount" :class="ui.queueCount({ class: props.ui?.queueCount })">{{ queue.length }}</span>
+          <span data-slot="chat-prompt-queueCount" :class="ui.queueCount({ class: props.ui?.queueCount })">{{ queue.length }}</span>
         </button>
 
-        <ul v-show="queueOpen" :id="queueId" data-slot="queueList" :class="ui.queueList({ class: props.ui?.queueList })">
-          <li v-for="(item, index) in queue" :key="getQueueKey(item)" data-slot="queueItem" :class="ui.queueItem({ class: props.ui?.queueItem })">
-            <span data-slot="queueItemLeading" :class="ui.queueItemLeading({ class: props.ui?.queueItemLeading })" />
-            <span :id="getQueueKey(item)" data-slot="queueItemLabel" :class="ui.queueItemLabel({ class: props.ui?.queueItemLabel })">
+        <ul v-show="queueOpen" :id="queueId" data-slot="chat-prompt-queueList" :class="ui.queueList({ class: props.ui?.queueList })">
+          <li v-for="(item, index) in queue" :key="getQueueKey(item)" data-slot="chat-prompt-queueItem" :class="ui.queueItem({ class: props.ui?.queueItem })">
+            <span data-slot="chat-prompt-queueItemLeading" :class="ui.queueItemLeading({ class: props.ui?.queueItemLeading })" />
+            <span :id="getQueueKey(item)" data-slot="chat-prompt-queueItemLabel" :class="ui.queueItemLabel({ class: props.ui?.queueItemLabel })">
               {{ item.text.trim() || item.files?.map(file => file.name).join(', ') }}
             </span>
 
-            <div data-slot="queueItemActions" :class="ui.queueItemActions({ class: props.ui?.queueItemActions })">
+            <div data-slot="chat-prompt-queueItemActions" :class="ui.queueItemActions({ class: props.ui?.queueItemActions })">
               <UButton
                 :icon="appConfig.ui.icons.arrowUp"
                 color="neutral"
@@ -418,7 +418,7 @@ defineExpose({
       </slot>
     </div>
 
-    <div v-if="files?.length" data-slot="files" :class="ui.files({ class: props.ui?.files })">
+    <div v-if="files?.length" data-slot="chat-prompt-files" :class="ui.files({ class: props.ui?.files })">
       <slot name="files" :files="files" :remove="removeFile">
         <UChatAttachment
           v-for="(file, index) in files"
@@ -447,7 +447,7 @@ defineExpose({
         variant="none"
         v-bind="{ ...textareaProps, ...$attrs }"
         :ui="transformUI(omit(ui, ['root', 'body', 'header', 'footer', 'files', 'queue', 'queueTrigger', 'queueTriggerIcon', 'queueCount', 'queueList', 'queueItem', 'queueItemLeading', 'queueItemLabel', 'queueItemActions']), props.ui)"
-        data-slot="body"
+        data-slot="chat-prompt-body"
         :class="ui.body({ class: props.ui?.body })"
         @keydown="onKeydown"
         @compositionend="onCompositionEnd"
@@ -458,7 +458,7 @@ defineExpose({
       </UTextarea>
     </slot>
 
-    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
+    <div v-if="!!slots.footer" data-slot="chat-prompt-footer" :class="ui.footer({ class: props.ui?.footer })">
       <slot name="footer" :open="open" />
     </div>
   </Primitive>

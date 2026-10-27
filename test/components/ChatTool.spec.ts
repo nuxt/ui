@@ -91,13 +91,13 @@ describe('ChatTool', () => {
     })
 
     const wrapper = await mountSuspended(Parent)
-    expect(wrapper.find('[data-slot="trailingIcon"]').exists()).toBe(false)
+    expect(wrapper.find('[data-slot="chat-tool-trailingIcon"]').exists()).toBe(false)
 
     ready.value = true
     await nextTick()
 
-    expect(wrapper.find('[data-slot="trailingIcon"]').exists()).toBe(true)
-    expect(wrapper.find('[data-slot="trigger"]').attributes('disabled')).toBeUndefined()
+    expect(wrapper.find('[data-slot="chat-tool-trailingIcon"]').exists()).toBe(true)
+    expect(wrapper.find('[data-slot="chat-tool-trigger"]').attributes('disabled')).toBeUndefined()
   })
 
   it('passes accessibility tests', async () => {
