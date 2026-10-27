@@ -3,6 +3,8 @@ const image = 'https://picsum.photos/id/1015/200'
 </script>
 
 <template>
+  <Navbar />
+
   <div class="flex flex-col gap-4">
     <div class="flex flex-wrap items-center gap-2">
       <UChatAttachment name="quarterly-report.pdf" type="application/pdf" />
