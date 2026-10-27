@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'karuzela',
       slide: 'slajd'
     },
+    chatAttachment: {
+      uploading: 'Przesyłanie',
+      error: 'Nie udało się przesłać'
+    },
     chatMessages: {
       autoScroll: 'Przewiń na dół'
     },

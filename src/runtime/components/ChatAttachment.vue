@@ -81,7 +81,7 @@ export interface ChatAttachmentEmits {
 
 <script setup lang="ts">
 import { computed, ref, watchEffect } from 'vue'
-import { Primitive } from 'reka-ui'
+import { Primitive, VisuallyHidden } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
@@ -162,6 +162,10 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatAttachment |
         <span v-if="fileDescription" data-slot="description" :class="ui.description({ class: props.ui?.description })">{{ fileDescription }}</span>
       </div>
     </template>
+
+    <VisuallyHidden aria-live="polite">
+      {{ props.status === 'idle' ? '' : t(`chatAttachment.${props.status}`) }}
+    </VisuallyHidden>
 
     <button
       v-if="props.removable"

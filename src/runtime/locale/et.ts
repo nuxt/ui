@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'karussell',
       slide: 'slaid'
     },
+    chatAttachment: {
+      uploading: 'Üleslaadimine',
+      error: 'Üleslaadimine ebaõnnestus'
+    },
     chatMessages: {
       autoScroll: 'Keri alla'
     },

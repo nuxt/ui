@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'კარუსელი',
       slide: 'სლაიდი'
     },
+    chatAttachment: {
+      uploading: 'იტვირთება',
+      error: 'ატვირთვა ვერ მოხერხდა'
+    },
     chatMessages: {
       autoScroll: 'ქვემოთ გადახვევა'
     },

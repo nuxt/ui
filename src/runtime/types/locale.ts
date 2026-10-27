@@ -30,6 +30,10 @@ export type Messages = {
     roledescription: string
     slide: string
   }
+  chatAttachment: {
+    uploading: string
+    error: string
+  }
   chatMessages: {
     autoScroll: string
   }

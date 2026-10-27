@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'karuselli',
       slide: 'dia'
     },
+    chatAttachment: {
+      uploading: 'Ladataan',
+      error: 'Lataus epäonnistui'
+    },
     chatMessages: {
       autoScroll: 'Vieritä alas'
     },

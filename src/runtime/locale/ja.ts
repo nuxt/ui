@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'カルーセル',
       slide: 'スライド'
     },
+    chatAttachment: {
+      uploading: 'アップロード中',
+      error: 'アップロードに失敗しました'
+    },
     chatMessages: {
       autoScroll: '一番下までスクロール'
     },

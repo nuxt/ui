@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: '캐러셀',
       slide: '슬라이드'
     },
+    chatAttachment: {
+      uploading: '업로드 중',
+      error: '업로드 실패'
+    },
     chatMessages: {
       autoScroll: '맨 아래로 스크롤'
     },

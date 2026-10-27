@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'karusel',
       slide: 'slaid'
     },
+    chatAttachment: {
+      uploading: 'Memuat naik',
+      error: 'Gagal memuat naik'
+    },
     chatMessages: {
       autoScroll: 'Tatal ke bawah'
     },

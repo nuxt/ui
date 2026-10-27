@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'karuselis',
       slide: 'slaids'
     },
+    chatAttachment: {
+      uploading: 'Augšupielādē',
+      error: 'Augšupielāde neizdevās'
+    },
     chatMessages: {
       autoScroll: 'Ritināt uz leju'
     },

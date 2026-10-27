@@ -37,6 +37,10 @@ export default defineLocale<Messages>({
       roledescription: 'کارۆسێل',
       slide: 'سلاید'
     },
+    chatAttachment: {
+      uploading: 'بارکردن',
+      error: 'بارکردن سەرکەوتوو نەبوو'
+    },
     chatMessages: {
       autoScroll: 'بۆ خوارەوە بڕۆ'
     },

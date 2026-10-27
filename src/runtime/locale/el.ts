@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'καρουζέλ',
       slide: 'διαφάνεια'
     },
+    chatAttachment: {
+      uploading: 'Μεταφόρτωση',
+      error: 'Η μεταφόρτωση απέτυχε'
+    },
     chatMessages: {
       autoScroll: 'Κύλιση προς τα κάτω'
     },

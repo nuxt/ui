@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'karusel',
       slide: 'slayd'
     },
+    chatAttachment: {
+      uploading: 'Yüklənir',
+      error: 'Yükləmə alınmadı'
+    },
     chatMessages: {
       autoScroll: 'Aşağı sürüşdür'
     },

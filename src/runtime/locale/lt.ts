@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'karuselė',
       slide: 'skaidrė'
     },
+    chatAttachment: {
+      uploading: 'Įkeliama',
+      error: 'Nepavyko įkelti'
+    },
     chatMessages: {
       autoScroll: 'Slinkti žemyn'
     },

@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'карусел',
       slide: 'слайд'
     },
+    chatAttachment: {
+      uploading: 'Боргузорӣ',
+      error: 'Боргузорӣ ноком шуд'
+    },
     chatMessages: {
       autoScroll: 'Ба поён ҳаракат додан'
     },

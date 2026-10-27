@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'Karussell',
       slide: 'Dia'
     },
+    chatAttachment: {
+      uploading: 'Gëtt eropgelueden',
+      error: 'Eropluede feelgeschloen'
+    },
     chatMessages: {
       autoScroll: 'No ënnen scrollen'
     },

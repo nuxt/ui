@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'karusel',
       slide: 'snímek'
     },
+    chatAttachment: {
+      uploading: 'Nahrávání',
+      error: 'Nahrání se nezdařilo'
+    },
     chatMessages: {
       autoScroll: 'Posunout dolů'
     },

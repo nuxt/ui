@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'karrusela',
       slide: 'diapositiba'
     },
+    chatAttachment: {
+      uploading: 'Igotzen',
+      error: 'Ezin izan da igo'
+    },
     chatMessages: {
       autoScroll: 'Korritu behera'
     },

@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'vrtiljak',
       slide: 'diapozitiv'
     },
+    chatAttachment: {
+      uploading: 'Nalaganje',
+      error: 'Nalaganje ni uspelo'
+    },
     chatMessages: {
       autoScroll: 'Pomakni na dno'
     },
