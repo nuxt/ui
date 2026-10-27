@@ -86,7 +86,7 @@ describe('ChatMessages', () => {
     wrapper.element.dispatchEvent(new Event('scroll'))
     await nextTick()
 
-    const viewport = wrapper.find('[data-slot="viewport"]').classes()
+    const viewport = wrapper.find('[data-slot="chat-messages-viewport"]').classes()
     expect(viewport).toContain(position)
     expect(viewport.includes('top-[86%]')).toBe(position === 'absolute')
 
@@ -133,7 +133,7 @@ describe('ChatMessages', () => {
     vi.spyOn(wrapper.element, 'getBoundingClientRect').mockReturnValue({ top: 0, height: 500 } as DOMRect)
     const scrollTo = vi.fn()
     wrapper.element.scrollTo = scrollTo
-    const footer = wrapper.find('[data-slot="footer"]').element
+    const footer = wrapper.find('[data-slot="chat-messages-footer"]').element
     const footerHeight = vi.spyOn(footer as HTMLElement, 'offsetHeight', 'get').mockReturnValue(200)
     for (const article of wrapper.findAll('article')) {
       vi.spyOn(article.element as HTMLElement, 'offsetHeight', 'get').mockReturnValue(50)

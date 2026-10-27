@@ -7,7 +7,7 @@ export default defineTheme({
     header: 'flex items-center gap-1.5',
     files: 'flex flex-wrap items-center gap-1.5 mt-0.5',
     queue: 'absolute bottom-full inset-x-[max(--spacing(2.5),calc(var(--ui-radius)*2))] z-10 flex flex-col px-1 rounded-t-lg border border-b-0 border-default bg-tint backdrop-blur-sm overflow-hidden',
-    queueTrigger: 'flex items-center gap-1.5 w-full p-1.5 text-xs font-medium text-muted hover:text-default focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-neutral rounded-md',
+    queueTrigger: 'flex items-center gap-1.5 w-full p-1.5 text-xs font-medium text-muted hover:text-default outline-focus focus-visible:outline-(length:--ui-focus-width) focus-visible:-outline-offset-(--ui-focus-width) rounded-md',
     queueTriggerIcon: 'shrink-0 size-4 data-[state=open]:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none',
     queueCount: 'text-faint tabular-nums',
     queueList: 'flex flex-col max-h-60 overflow-y-auto pb-1',

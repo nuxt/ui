@@ -229,7 +229,7 @@ describe('Table', () => {
       slots: { 'id-header': 'Custom ID' }
     })
 
-    const rows = wrapper.findAll('thead tr[data-slot="tr"]')
+    const rows = wrapper.findAll('thead tr[data-slot="table-tr"]')
     expect(rows.map(row => row.findAll('th').map(th => th.text()))).toEqual([
       ['Custom ID', 'Payment'],
       ['Email', 'Details'],
@@ -249,7 +249,7 @@ describe('Table', () => {
 
     await wrapper.setProps({ columnVisibility: { status: false, amount: false } })
 
-    const rows = wrapper.findAll('thead tr[data-slot="tr"]')
+    const rows = wrapper.findAll('thead tr[data-slot="table-tr"]')
     expect(rows.map(row => row.findAll('th').map(th => th.text()))).toEqual([
       ['ID', 'Payment'],
       ['Email']
@@ -278,7 +278,7 @@ describe('Table', () => {
       }
     })
 
-    const rows = wrapper.findAll('thead tr[data-slot="tr"]')
+    const rows = wrapper.findAll('thead tr[data-slot="table-tr"]')
     expect(rows.map(row => row.findAll('th').map(th => th.text()))).toEqual([
       ['Payment', 'ID'],
       ['Details', 'Email', 'Details'],

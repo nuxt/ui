@@ -39,8 +39,8 @@ describe('ChatAttachment', () => {
       props: { file: new File(['a'.repeat(2048)], 'notes.txt', { type: 'text/plain' }) }
     })
 
-    expect(wrapper.find('[data-slot="name"]').text()).toBe('notes.txt')
-    expect(wrapper.find('[data-slot="description"]').text()).toBe('TXT · 2KB')
+    expect(wrapper.find('[data-slot="chat-attachment-name"]').text()).toBe('notes.txt')
+    expect(wrapper.find('[data-slot="chat-attachment-description"]').text()).toBe('TXT · 2KB')
   })
 
   it('emits remove when the remove button is clicked', async () => {
@@ -48,7 +48,7 @@ describe('ChatAttachment', () => {
       props: { ...props, removable: true }
     })
 
-    const button = wrapper.find('[data-slot="remove"]')
+    const button = wrapper.find('[data-slot="chat-attachment-remove"]')
     expect(button.attributes('aria-label')).toBe('Remove report.pdf')
 
     await button.trigger('click')
