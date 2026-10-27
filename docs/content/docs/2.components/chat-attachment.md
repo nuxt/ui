@@ -51,6 +51,7 @@ Use the `url` prop to preview an image. The image is displayed when `type` is an
 
 ::component-code
 ---
+prettier: true
 props:
   name: 'landscape.jpg'
   type: 'image/jpeg'
@@ -84,6 +85,7 @@ Use the `description` prop to set the text under the name. Defaults to the file 
 
 ::component-code
 ---
+prettier: true
 ignore:
   - name
   - type
@@ -104,6 +106,7 @@ While `uploading`, the name shimmers, an image is dimmed and a file icon turns i
 
 ::component-code
 ---
+prettier: true
 ignore:
   - name
   - type
@@ -120,6 +123,7 @@ Use the `orientation` prop to change the layout of the attachment. Defaults to `
 
 ::component-code
 ---
+prettier: true
 ignore:
   - name
   - type
@@ -138,6 +142,7 @@ Use the `size` prop to change the size of the attachment. Defaults to `md`.
 
 ::component-code
 ---
+prettier: true
 ignore:
   - name
   - type
@@ -154,6 +159,7 @@ Use the `removable` prop to display a button that emits a `remove` event.
 
 ::component-code
 ---
+prettier: true
 ignore:
   - name
   - type
@@ -170,6 +176,7 @@ Use the `icon` prop to customize the [Icon](/docs/components/icon) displayed for
 
 ::component-code
 ---
+prettier: true
 ignore:
   - name
   - type
