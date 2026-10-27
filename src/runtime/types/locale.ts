@@ -39,6 +39,10 @@ export type Messages = {
   }
   chatPrompt: {
     placeholder: string
+    queue: string
+    sendNow: string
+    edit: string
+    remove: string
   }
   chatPromptSubmit: {
     label: string

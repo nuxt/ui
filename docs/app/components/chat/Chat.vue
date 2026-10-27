@@ -3,6 +3,7 @@ import type { ToolUIPart, DynamicToolUIPart } from 'ai'
 import { DefaultChatTransport, isToolUIPart, isReasoningUIPart, isTextUIPart, getToolName } from 'ai'
 import { useChat as useAIChat } from '@ai-sdk/vue'
 import { getTextFromMessage, isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
+import type { ChatPromptQueueItem } from '@nuxt/ui'
 import type { DocsChatMessage, DocsChatTools } from '~~/server/api/ai.post'
 
 const input = ref('')
@@ -115,20 +116,28 @@ watchEffect(() => {
 
 const canClear = computed(() => messages.value.length > 0)
 
-// Messages sent while a response streams wait here, the AI SDK would
-// otherwise start a second request next to the current one. The page is
-// captured on submit so a queued question keeps the page it was asked on.
-const queue = ref<{ text: string, currentPage: string }[]>([])
+// Messages sent while a response streams wait here: `UChatPrompt` queues a submit
+// while the chat is busy, the AI SDK would otherwise start a second request
+// next to the current one. A queued question keeps the page it was asked on.
+const queue = ref<ChatPromptQueueItem[]>([])
+
+watch(() => queue.value.length, () => {
+  for (const item of queue.value) {
+    item.currentPage ??= currentPage.value
+  }
+})
+
+function send(text: string, page: string) {
+  track('AI Chat Message Sent')
+
+  sendMessage({ text, metadata: { currentPage: page } })
+}
 
 function sendNext() {
   const next = queue.value.shift()
-  if (!next) {
-    return
+  if (next) {
+    send(next.text, next.currentPage)
   }
-
-  track('AI Chat Message Sent')
-
-  sendMessage({ text: next.text, metadata: { currentPage: next.currentPage } })
 }
 
 function onSubmit() {
@@ -138,11 +147,7 @@ function onSubmit() {
   }
 
   input.value = ''
-  queue.value.push({ text, currentPage: currentPage.value })
-
-  if (status.value !== 'submitted' && status.value !== 'streaming') {
-    sendNext()
-  }
+  send(text, currentPage.value)
 }
 
 watch(status, (value) => {
@@ -151,27 +156,14 @@ watch(status, (value) => {
   }
 })
 
-// Moves a queued message to the front and stops the current response, the
-// status watcher then sends it as soon as the chat is `ready`.
-function sendNow(index: number) {
-  queue.value.unshift(...queue.value.splice(index, 1))
-
+// A queued message picked to be sent now is at the front of the queue, it goes
+// out once the current response stops
+function onSendNow() {
   if (status.value === 'submitted' || status.value === 'streaming') {
     stop()
   } else {
     sendNext()
   }
-}
-
-// Puts a queued message back in the prompt, ahead of any draft.
-function editQueued(index: number) {
-  const [item] = queue.value.splice(index, 1)
-  if (!item) {
-    return
-  }
-
-  input.value = input.value ? `${item.text}\n${input.value}` : item.text
-  promptRef.value?.textareaRef?.focus()
 }
 
 // Sync external messages (e.g. from search→chat flow) into the chat instance.
@@ -277,21 +269,6 @@ function askQuestion(question: string) {
 // `autofocus` only fires once. Refocus it each time the sidebar reopens.
 const promptRef = useTemplateRef('promptRef')
 
-// The queue floats over the end of the messages, they get its height as room
-// at the bottom so the last one never hides behind it.
-const queueRef = useTemplateRef('queueRef')
-const queueHeight = ref(0)
-
-function measureQueue() {
-  queueHeight.value = queueRef.value?.offsetHeight ?? 0
-}
-
-useResizeObserver(queueRef, measureQueue)
-// A resize observer reports after `UChatMessages` measures the room for a sent
-// message, so the row it removes from the queue is measured right after the
-// render or the scroll lands short.
-watch(() => queue.value.length, measureQueue, { flush: 'post' })
-
 watch(open, (value) => {
   if (value) {
     nextTick(() => {
@@ -345,8 +322,8 @@ function clearMessages() {
     title="Ask"
     rail
     breakpoint="xl"
-    :style="{ '--sidebar-width': '24rem', '--queue-height': `${queueHeight}px` }"
-    :ui="{ body: 'pb-[calc(--spacing(4)+var(--queue-height))]', footer: 'relative p-0 overflow-visible', actions: 'gap-0.5' }"
+    :style="{ '--sidebar-width': '24rem' }"
+    :ui="{ footer: 'p-0', actions: 'gap-0.5' }"
     class="bg-default"
   >
     <template #actions>
@@ -419,7 +396,7 @@ function clearMessages() {
         compact
         class="px-0 gap-2"
         :user="{ ui: { container: 'max-w-full', text: 'text-sm/6' } }"
-        :ui="{ viewport: 'sticky top-auto bottom-[calc(--spacing(4)+var(--queue-height))] h-0' }"
+        :ui="{ viewport: 'sticky top-auto bottom-4 h-0' }"
       >
         <template #indicator>
           <UChatTool :icon="studioIcons.brain" text="Thinking..." streaming />
@@ -465,70 +442,11 @@ function clearMessages() {
     </UTheme>
 
     <template #footer>
-      <div
-        v-if="queue.length"
-        ref="queueRef"
-        class="absolute bottom-full inset-x-3 z-10 rounded-t-lg border border-b-0 border-default bg-default overflow-hidden"
-      >
-        <UCollapsible default-open class="bg-elevated/50 px-1 pb-1 flex flex-col">
-          <UButton
-            :label="`${queue.length} queued ${queue.length === 1 ? 'message' : 'messages'}`"
-            :leading-icon="appConfig.ui.icons.chevronDown"
-            color="neutral"
-            variant="link"
-            size="sm"
-            square
-            class="text-muted hover:text-default group w-full"
-            :ui="{ leadingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
-          />
-
-          <template #content>
-            <ul class="max-h-60 overflow-y-auto">
-              <li v-for="(item, index) in queue" :key="index" class="group flex items-center gap-2 h-7 ps-2 pe-0.5 rounded-sm text-sm text-default hover:bg-elevated">
-                <span class="size-3 shrink-0 rounded-full ring ring-accented" />
-                <span class="truncate flex-1">{{ item.text }}</span>
-
-                <div class="flex items-center opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 pointer-coarse:opacity-100">
-                  <UTooltip text="Send now">
-                    <UButton
-                      :icon="appConfig.ui.icons.arrowUp"
-                      color="neutral"
-                      variant="link"
-                      size="xs"
-                      :aria-label="`Send ${item.text} now`"
-                      @click="sendNow(index)"
-                    />
-                  </UTooltip>
-                  <UTooltip text="Edit">
-                    <UButton
-                      :icon="studioIcons.pencil"
-                      color="neutral"
-                      variant="link"
-                      size="xs"
-                      :aria-label="`Edit ${item.text}`"
-                      @click="editQueued(index)"
-                    />
-                  </UTooltip>
-                  <UTooltip text="Remove">
-                    <UButton
-                      :icon="studioIcons.trash"
-                      color="neutral"
-                      variant="link"
-                      size="xs"
-                      :aria-label="`Remove ${item.text} from queue`"
-                      @click="queue.splice(index, 1)"
-                    />
-                  </UTooltip>
-                </div>
-              </li>
-            </ul>
-          </template>
-        </UCollapsible>
-      </div>
-
       <UChatPrompt
         ref="promptRef"
         v-model="input"
+        v-model:queue="queue"
+        :status="status"
         :error="error"
         placeholder="Ask me anything..."
         variant="naked"
@@ -536,6 +454,7 @@ function clearMessages() {
         autofocus
         class="px-4"
         @submit="onSubmit"
+        @send="onSendNow"
       >
         <template #footer>
           <ULink to="https://vercel.com/ai-gateway" target="_blank" class="inline-flex items-center gap-1 text-xs text-dimmed hover:text-muted">

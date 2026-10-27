@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { ChatPromptQueueItem } from '@nuxt/ui'
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
 import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming, isToolApprovalPending, toFileUIParts } from '@nuxt/ui/utils/ai'
@@ -9,6 +10,7 @@ const toast = useToast()
 
 const input = ref('')
 const files = ref<File[]>([])
+const queue = ref<ChatPromptQueueItem[]>([])
 
 const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
   sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses,
@@ -37,10 +39,35 @@ async function onSubmit() {
   input.value = ''
   files.value = []
 
+  await send(text, submitted)
+}
+
+async function send(text: string, submitted: File[] = []) {
   const parts = await toFileUIParts(submitted)
 
   // An empty text part is rejected by some providers, send the files alone
   sendMessage(text.trim() ? { text, files: parts } : { files: parts })
+}
+
+function sendNext() {
+  const item = queue.value.shift()
+  if (item) {
+    send(item.text, item.files)
+  }
+}
+
+watch(status, (value) => {
+  if (value === 'ready') {
+    sendNext()
+  }
+})
+
+function onSendNow() {
+  if (status.value === 'submitted' || status.value === 'streaming') {
+    stop()
+  } else {
+    sendNext()
+  }
 }
 
 function clearMessages() {
@@ -203,12 +230,14 @@ function generateMessages() {
         <UChatPrompt
           v-model="input"
           v-model:files="files"
+          v-model:queue="queue"
           accept="image/*,application/pdf"
           :status="status"
           :error="error"
           variant="subtle"
           class="mt-4"
           @submit="onSubmit"
+          @send="onSendNow"
         >
           <template #footer="{ open }">
             <UButton

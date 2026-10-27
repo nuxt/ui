@@ -44,7 +44,11 @@ export default defineLocale<Messages>({
       autoScroll: 'Доош гүйлгэх'
     },
     chatPrompt: {
-      placeholder: 'Энд мессежээ бичнэ үү…'
+      placeholder: 'Энд мессежээ бичнэ үү…',
+      queue: 'Дараалалд буй мессежүүд',
+      sendNow: 'Одоо илгээх',
+      edit: 'Засах',
+      remove: 'Устгах'
     },
     chatPromptSubmit: {
       label: 'Мессеж илгээх',

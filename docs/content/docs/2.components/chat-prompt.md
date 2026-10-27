@@ -104,6 +104,21 @@ async function onSubmit() {
 ```
 ::
 
+### Queue :badge{label="Soon" class="align-text-top"}
+
+Use the `v-model:queue` directive to queue the messages submitted while the chat is `submitted` or `streaming` instead of ignoring them. They show above the textarea, where the user can send one now, put it back in the prompt by clicking it, or remove it. The `send` event is emitted when one is picked to be sent now, after it moved to the front of the queue.
+
+::component-example
+---
+collapse: true
+name: 'chat-prompt-queue-example'
+---
+::
+
+::tip{to="/docs/components/chat#queued-messages"}
+Sending the queued messages is up to you, check the **Chat** overview page for a recipe with the AI SDK.
+::
+
 ## Examples
 
 ::tip{to="/docs/components/chat"}

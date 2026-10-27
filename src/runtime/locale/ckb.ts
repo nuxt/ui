@@ -45,7 +45,11 @@ export default defineLocale<Messages>({
       autoScroll: 'بۆ خوارەوە بڕۆ'
     },
     chatPrompt: {
-      placeholder: 'نامەکەت لێرە بنوسە…'
+      placeholder: 'نامەکەت لێرە بنوسە…',
+      queue: 'نامە ڕیزکراوەکان',
+      sendNow: 'ئێستا بنێرە',
+      edit: 'دەستکاری',
+      remove: 'لابردن'
     },
     chatPromptSubmit: {
       label: 'ناردن',

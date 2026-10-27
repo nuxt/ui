@@ -3,10 +3,20 @@ import type { ComponentPublicInstance, VNode } from 'vue'
 import type { ChatStatus } from 'ai'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/chat-prompt'
+import type { IconProps } from './Icon.vue'
 import type { TextareaProps, TextareaSlots } from './Textarea.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type ChatPrompt = ComponentConfig<typeof theme, AppConfig, 'chatPrompt'>
+
+export interface ChatPromptQueueItem {
+  text: string
+  files?: File[]
+  /**
+   * Any other data the app keeps with the message, like the page it was asked on.
+   */
+  [key: string]: any
+}
 
 export interface ChatPromptProps extends Pick<TextareaProps, 'rows' | 'autofocus' | 'autofocusDelay' | 'autoresize' | 'autoresizeDelay' | 'maxrows' | 'icon' | 'avatar' | 'loading' | 'loadingIcon' | 'disabled'> {
   /**
@@ -49,6 +59,12 @@ export interface ChatPromptProps extends Pick<TextareaProps, 'rows' | 'autofocus
    * @defaultValue true
    */
   multiple?: boolean
+  /**
+   * The icon displayed to collapse the queue, used with `v-model:queue`.
+   * @defaultValue appConfig.ui.icons.chevronDown
+   * @IconifyIcon
+   */
+  queueIcon?: IconProps['name']
   class?: any
   ui?: ChatPrompt['slots'] & TextareaProps['ui']
 }
@@ -56,10 +72,18 @@ export interface ChatPromptProps extends Pick<TextareaProps, 'rows' | 'autofocus
 export interface ChatPromptEmits {
   submit: [event: Event]
   close: [event: Event]
+  /**
+   * Emitted when a queued message is picked to be sent now, after it moved to the front of `v-model:queue`.
+   */
+  send: [item: ChatPromptQueueItem]
 }
 
 export interface ChatPromptSlots extends TextareaSlots {
   header?(props?: {}): VNode[]
+  /**
+   * Replace the queued messages rendered above the textarea when using `v-model:queue`.
+   */
+  queue?(props: { queue: ChatPromptQueueItem[], send: (index: number) => void, edit: (index: number) => void, remove: (index: number) => void }): VNode[]
   /**
    * Replace the attachments rendered above the textarea when using `v-model:files`.
    */
@@ -73,7 +97,7 @@ export interface ChatPromptSlots extends TextareaSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, toRef, useTemplateRef } from 'vue'
+import { computed, ref, toRef, useId, useTemplateRef } from 'vue'
 import { Primitive } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -86,6 +110,8 @@ import { omit, transformUI } from '../utils'
 import { tv } from '../utils/tv'
 import UTextarea from './Textarea.vue'
 import UChatAttachment from './ChatAttachment.vue'
+import UButton from './Button.vue'
+import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -105,13 +131,14 @@ const props = useComponentProps('chatPrompt', _props)
 
 const model = defineModel<string>({ default: '' })
 const files = defineModel<File[]>('files')
+const queue = defineModel<ChatPromptQueueItem[]>('queue')
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as ChatPrompt['AppConfig']
 
 const textareaProps = useForwardProps(reactivePick(props, 'rows', 'autofocus', 'autofocusDelay', 'autoresize', 'autoresizeDelay', 'maxrows', 'icon', 'avatar', 'loading', 'loadingIcon'))
 
-const getProxySlots = () => omit(slots, ['header', 'footer', 'body', 'files'])
+const getProxySlots = () => omit(slots, ['header', 'footer', 'body', 'files', 'queue'])
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatPrompt || {}) })({
@@ -175,12 +202,64 @@ function onPaste(event: ClipboardEvent) {
   addFiles(pasted)
 }
 
+const isBusy = computed(() => props.status === 'submitted' || props.status === 'streaming')
+
 function submit(e?: Event) {
-  if ((model.value.trim() === '' && !files.value?.length) || props.status === 'submitted' || props.status === 'streaming') {
+  if (model.value.trim() === '' && !files.value?.length) {
+    return
+  }
+
+  if (isBusy.value) {
+    // Without `v-model:queue` a submit during a response is ignored, the AI SDK would start a second one
+    if (queue.value === undefined) {
+      return
+    }
+
+    queue.value = [...queue.value, { text: model.value, ...(files.value?.length ? { files: files.value } : {}) }]
+    model.value = ''
+    if (files.value) {
+      files.value = []
+    }
     return
   }
 
   emits('submit', e ?? new Event('submit'))
+}
+
+const queueOpen = ref(true)
+const queueId = useId()
+
+function takeQueued(index: number) {
+  const item = queue.value?.[index]
+  queue.value = queue.value?.filter((_, i) => i !== index)
+  return item
+}
+
+// Moves a queued message to the front, the app stops the current response and sends it
+function sendQueued(index: number) {
+  const item = takeQueued(index)
+  if (item) {
+    queue.value = [item, ...(queue.value ?? [])]
+    emits('send', item)
+  }
+}
+
+// Puts a queued message back in the prompt, ahead of the current draft
+function editQueued(index: number) {
+  const item = takeQueued(index)
+  if (!item) {
+    return
+  }
+
+  model.value = model.value ? `${item.text}\n${model.value}` : item.text
+  if (item.files?.length && files.value) {
+    files.value = [...item.files, ...files.value]
+  }
+  textareaRef.value?.textareaRef?.focus()
+}
+
+function removeQueued(index: number) {
+  takeQueued(index)
 }
 
 function blur(e?: Event) {
@@ -232,6 +311,60 @@ defineExpose({
       <slot name="header" />
     </div>
 
+    <div v-if="queue?.length" data-slot="queue" :class="ui.queue({ class: props.ui?.queue })">
+      <slot name="queue" :queue="queue" :send="sendQueued" :edit="editQueued" :remove="removeQueued">
+        <button
+          type="button"
+          :aria-expanded="queueOpen"
+          :aria-controls="queueId"
+          data-slot="queueTrigger"
+          :class="ui.queueTrigger({ class: props.ui?.queueTrigger })"
+          @click="queueOpen = !queueOpen"
+        >
+          <UIcon :name="props.queueIcon || appConfig.ui.icons.chevronDown" :data-state="queueOpen ? 'open' : 'closed'" data-slot="queueTriggerIcon" :class="ui.queueTriggerIcon({ class: props.ui?.queueTriggerIcon })" />
+          <span>{{ t('chatPrompt.queue') }}</span>
+          <span data-slot="queueCount" :class="ui.queueCount({ class: props.ui?.queueCount })">{{ queue.length }}</span>
+        </button>
+
+        <ul v-show="queueOpen" :id="queueId" data-slot="queueList" :class="ui.queueList({ class: props.ui?.queueList })">
+          <li v-for="(item, index) in queue" :key="index" data-slot="queueItem" :class="ui.queueItem({ class: props.ui?.queueItem })">
+            <span data-slot="queueItemLeading" :class="ui.queueItemLeading({ class: props.ui?.queueItemLeading })" />
+            <button
+              :id="`${queueId}-${index}`"
+              type="button"
+              :aria-description="t('chatPrompt.edit')"
+              data-slot="queueItemLabel"
+              :class="ui.queueItemLabel({ class: props.ui?.queueItemLabel })"
+              @click="editQueued(index)"
+            >
+              {{ item.text || item.files?.map(file => file.name).join(', ') }}
+            </button>
+
+            <div data-slot="queueItemActions" :class="ui.queueItemActions({ class: props.ui?.queueItemActions })">
+              <UButton
+                :icon="appConfig.ui.icons.arrowUp"
+                color="neutral"
+                variant="ghost"
+                size="xs"
+                :aria-label="t('chatPrompt.sendNow')"
+                :aria-describedby="`${queueId}-${index}`"
+                @click="sendQueued(index)"
+              />
+              <UButton
+                :icon="appConfig.ui.icons.close"
+                color="neutral"
+                variant="ghost"
+                size="xs"
+                :aria-label="t('chatPrompt.remove')"
+                :aria-describedby="`${queueId}-${index}`"
+                @click="removeQueued(index)"
+              />
+            </div>
+          </li>
+        </ul>
+      </slot>
+    </div>
+
     <div v-if="files?.length" data-slot="files" :class="ui.files({ class: props.ui?.files })">
       <slot name="files" :files="files" :remove="removeFile">
         <UChatAttachment
@@ -260,7 +393,7 @@ defineExpose({
         variant="none"
         fixed
         v-bind="{ ...textareaProps, ...$attrs }"
-        :ui="transformUI(omit(ui, ['root', 'body', 'header', 'footer', 'files']), props.ui)"
+        :ui="transformUI(omit(ui, ['root', 'body', 'header', 'footer', 'files', 'queue', 'queueTrigger', 'queueTriggerIcon', 'queueCount', 'queueList', 'queueItem', 'queueItemLeading', 'queueItemLabel', 'queueItemActions']), props.ui)"
         data-slot="body"
         :class="ui.body({ class: props.ui?.body })"
         @keydown="onKeydown"

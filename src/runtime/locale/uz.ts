@@ -44,7 +44,11 @@ export default defineLocale<Messages>({
       autoScroll: 'Pastga aylantirish'
     },
     chatPrompt: {
-      placeholder: 'Bu yerda savolingizni yozing…'
+      placeholder: 'Bu yerda savolingizni yozing…',
+      queue: 'Navbatdagi xabarlar',
+      sendNow: 'Hozir yuborish',
+      edit: 'Tahrirlash',
+      remove: 'Oʻchirish'
     },
     chatPromptSubmit: {
       label: 'Jo\'natish',

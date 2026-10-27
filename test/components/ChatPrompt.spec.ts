@@ -22,6 +22,8 @@ describe('ChatPrompt', () => {
     ['with footer slot', { slots: { footer: () => 'Footer slot' } }],
     ['with body slot', { slots: { body: () => 'Body slot' } }],
     ['with files', { props: { files: [new File(['a'], 'notes.txt', { type: 'text/plain' })] } }],
+    ['with queue', { props: { queue: [{ text: 'Next question' }, { text: '', files: [new File(['a'], 'notes.txt')] }] } }],
+    ['with queue slot', { props: { queue: [{ text: 'Next question' }] }, slots: { queue: () => 'Queue slot' } }],
     ['with files slot', { props: { files: [new File(['a'], 'notes.txt', { type: 'text/plain' })] }, slots: { files: () => 'Files slot' } }]
   ])
 
@@ -30,6 +32,53 @@ describe('ChatPrompt', () => {
     Object.defineProperty(event, 'clipboardData', { value: { files, getData: (type: string) => type === 'text/plain' ? text : '' } })
     return event
   }
+
+  it('queues a submit while streaming with `v-model:queue`', async () => {
+    const files = [new File(['a'], 'notes.txt')]
+    const wrapper = await mountSuspended(ChatPrompt, {
+      props: { modelValue: 'Next question', files, queue: [], status: 'streaming' }
+    })
+
+    await wrapper.find('textarea').trigger('keydown', { key: 'Enter' })
+
+    expect(wrapper.emitted('submit')).toBeUndefined()
+    expect(wrapper.emitted('update:queue')?.[0]).toEqual([[{ text: 'Next question', files }]])
+    expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([''])
+    expect(wrapper.emitted('update:files')?.[0]).toEqual([[]])
+  })
+
+  describe('queued messages', () => {
+    const queue = [{ text: 'First' }, { text: 'Second' }]
+
+    async function mountQueue() {
+      const wrapper = await mountSuspended(ChatPrompt, { props: { modelValue: 'Draft', queue } })
+      return { wrapper, item: wrapper.findAll('[data-slot="queueItem"]')[1]! }
+    }
+
+    it('moves the message to the front and emits send', async () => {
+      const { wrapper, item } = await mountQueue()
+      await item.findAll('button').at(-2)!.trigger('click')
+
+      expect(wrapper.emitted('send')?.[0]).toEqual([queue[1]])
+      expect(wrapper.emitted('update:queue')?.at(-1)).toEqual([[queue[1], queue[0]]])
+    })
+
+    it('puts the message back in the prompt on edit', async () => {
+      const { wrapper, item } = await mountQueue()
+      await item.find('[data-slot="queueItemLabel"]').trigger('click')
+
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['Second\nDraft'])
+      expect(wrapper.emitted('update:queue')?.[0]).toEqual([[queue[0]]])
+    })
+
+    it('removes the message', async () => {
+      const { wrapper, item } = await mountQueue()
+      await item.findAll('button').at(-1)!.trigger('click')
+
+      expect(wrapper.emitted('send')).toBeUndefined()
+      expect(wrapper.emitted('update:queue')?.[0]).toEqual([[queue[0]]])
+    })
+  })
 
   it('emits submit with files and no text', async () => {
     const wrapper = await mountSuspended(ChatPrompt, {

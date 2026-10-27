@@ -581,32 +581,29 @@ Read the full **Build an AI Chatbot** tutorial for a step-by-step guide.
 
 ### Queued messages :badge{label="Soon" class="align-text-top"}
 
-The AI SDK doesn't queue messages: calling `sendMessage` during a response starts a second request next to the current one. With `status`, `UChatPrompt` ignores submits while the chat is `submitted` or `streaming`. To let users send their next message anyway, leave it off, keep the text in a queue and send it once the chat is `ready` again:
+The AI SDK doesn't queue messages: calling `sendMessage` during a response starts a second request next to the current one. With `status`, `UChatPrompt` ignores submits while the chat is `submitted` or `streaming`. Bind `v-model:queue` to keep them instead: the prompt lists the queued messages above the textarea, where the user can send one now, edit it or remove it, and you send the next one once the chat is `ready` again.
 
 ::framework-only
 #nuxt
 ```vue
 <script setup lang="ts">
+import type { ChatPromptQueueItem } from '@nuxt/ui'
 import { useChat } from '@ai-sdk/vue'
 
 const input = ref('')
-const queue = ref<string[]>([])
+const queue = ref<ChatPromptQueueItem[]>([])
 
 const { status, error, sendMessage, regenerate, stop } = useChat()
 
-function sendNext() {
-  const text = queue.value.shift()
-  if (text) {
-    sendMessage({ text })
-  }
+function onSubmit() {
+  sendMessage({ text: input.value })
+  input.value = ''
 }
 
-function onSubmit() {
-  queue.value.push(input.value)
-  input.value = ''
-
-  if (status.value !== 'submitted' && status.value !== 'streaming') {
-    sendNext()
+function sendNext() {
+  const item = queue.value.shift()
+  if (item) {
+    sendMessage({ text: item.text })
   }
 }
 
@@ -615,26 +612,26 @@ watch(status, (value) => {
     sendNext()
   }
 })
+
+// The message picked to be sent now is at the front of the queue
+function onSendNow() {
+  if (status.value === 'submitted' || status.value === 'streaming') {
+    stop()
+  } else {
+    sendNext()
+  }
+}
 </script>
 
 <template>
-  <UChatPrompt v-model="input" :error="error" @submit="onSubmit">
-    <template v-if="queue.length" #header>
-      <ul class="flex flex-col gap-1 w-full">
-        <li v-for="(text, index) in queue" :key="index" class="flex items-center gap-2 text-sm text-muted">
-          <span class="truncate flex-1">{{ text }}</span>
-          <UButton
-            icon="i-lucide-x"
-            color="neutral"
-            variant="ghost"
-            size="xs"
-            :aria-label="`Remove ${text} from queue`"
-            @click="queue.splice(index, 1)"
-          />
-        </li>
-      </ul>
-    </template>
-
+  <UChatPrompt
+    v-model="input"
+    v-model:queue="queue"
+    :status="status"
+    :error="error"
+    @submit="onSubmit"
+    @send="onSendNow"
+  >
     <UChatPromptSubmit :status="status" @stop="stop()" @reload="regenerate()" />
   </UChatPrompt>
 </template>
@@ -644,26 +641,23 @@ watch(status, (value) => {
 ```vue
 <script setup lang="ts">
 import { ref, watch } from 'vue'
+import type { ChatPromptQueueItem } from '@nuxt/ui'
 import { useChat } from '@ai-sdk/vue'
 
 const input = ref('')
-const queue = ref<string[]>([])
+const queue = ref<ChatPromptQueueItem[]>([])
 
 const { status, error, sendMessage, regenerate, stop } = useChat()
 
-function sendNext() {
-  const text = queue.value.shift()
-  if (text) {
-    sendMessage({ text })
-  }
+function onSubmit() {
+  sendMessage({ text: input.value })
+  input.value = ''
 }
 
-function onSubmit() {
-  queue.value.push(input.value)
-  input.value = ''
-
-  if (status.value !== 'submitted' && status.value !== 'streaming') {
-    sendNext()
+function sendNext() {
+  const item = queue.value.shift()
+  if (item) {
+    sendMessage({ text: item.text })
   }
 }
 
@@ -672,26 +666,26 @@ watch(status, (value) => {
     sendNext()
   }
 })
+
+// The message picked to be sent now is at the front of the queue
+function onSendNow() {
+  if (status.value === 'submitted' || status.value === 'streaming') {
+    stop()
+  } else {
+    sendNext()
+  }
+}
 </script>
 
 <template>
-  <UChatPrompt v-model="input" :error="error" @submit="onSubmit">
-    <template v-if="queue.length" #header>
-      <ul class="flex flex-col gap-1 w-full">
-        <li v-for="(text, index) in queue" :key="index" class="flex items-center gap-2 text-sm text-muted">
-          <span class="truncate flex-1">{{ text }}</span>
-          <UButton
-            icon="i-lucide-x"
-            color="neutral"
-            variant="ghost"
-            size="xs"
-            :aria-label="`Remove ${text} from queue`"
-            @click="queue.splice(index, 1)"
-          />
-        </li>
-      </ul>
-    </template>
-
+  <UChatPrompt
+    v-model="input"
+    v-model:queue="queue"
+    :status="status"
+    :error="error"
+    @submit="onSubmit"
+    @send="onSendNow"
+  >
     <UChatPromptSubmit :status="status" @stop="stop()" @reload="regenerate()" />
   </UChatPrompt>
 </template>

@@ -44,7 +44,11 @@ export default defineLocale<Messages>({
       autoScroll: 'រំកិលចុះក្រោម'
     },
     chatPrompt: {
-      placeholder: 'សួរស្រឡាញ់មួយបីនេះមានប្រភេទបានទាមទារទេ…'
+      placeholder: 'សួរស្រឡាញ់មួយបីនេះមានប្រភេទបានទាមទារទេ…',
+      queue: 'សារក្នុងជួរ',
+      sendNow: 'ផ្ញើឥឡូវនេះ',
+      edit: 'កែសម្រួល',
+      remove: 'ដកចេញ'
     },
     chatPromptSubmit: {
       label: 'សាក់',

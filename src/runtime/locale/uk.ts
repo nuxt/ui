@@ -44,7 +44,11 @@ export default defineLocale<Messages>({
       autoScroll: 'Прокрутити вниз'
     },
     chatPrompt: {
-      placeholder: 'Введіть ваше повідомлення тут…'
+      placeholder: 'Введіть ваше повідомлення тут…',
+      queue: 'Повідомлення в черзі',
+      sendNow: 'Надіслати зараз',
+      edit: 'Редагувати',
+      remove: 'Видалити'
     },
     chatPromptSubmit: {
       label: 'Відправити',
