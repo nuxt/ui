@@ -96,7 +96,7 @@ watch(status, (value) => {
   }
 })
 
-function onSendNow() {
+function onSend() {
   if (status.value === 'submitted' || status.value === 'streaming') {
     stop()
   } else {
@@ -179,6 +179,7 @@ function generateMessages() {
       :messages="messages"
       :status="status"
       :assistant="{ actions: [{ label: 'Edit', icon: 'i-lucide-pencil', onClick: () => console.log('edit') }] }"
+      :ui="{ footer: 'pt-4' }"
       :user="{ actions: [{ label: 'Edit', icon: 'i-lucide-pencil', onClick: () => console.log('edit') }], icon: 'i-lucide-user' }"
     >
       <template #files="{ parts }">
@@ -271,9 +272,8 @@ function generateMessages() {
           :status="status"
           :error="error"
           variant="subtle"
-          class="mt-4"
           @submit="onSubmit"
-          @send="onSendNow"
+          @send="onSend"
         >
           <template #footer="{ open }">
             <UButton

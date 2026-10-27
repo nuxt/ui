@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { ChatPromptQueueItem } from '@nuxt/ui'
 import theme from '#build/ui/chat-prompt'
 
 const variants = Object.keys(theme.variants.variant)
@@ -11,10 +12,15 @@ const attrs = reactive({
 
 const input = ref('')
 const files = ref<File[]>([])
-const queue = ref([
-  { text: 'Can you also add a dark mode toggle?' },
-  { text: 'And write the tests for it' }
-])
+const queue = ref<ChatPromptQueueItem[]>([])
+
+// The queue room is measured on the client, filling it after mount avoids a jump on hydration
+onMounted(() => {
+  queue.value = [
+    { text: 'Can you also add a dark mode toggle?' },
+    { text: 'And write the tests for it' }
+  ]
+})
 
 function onSubmit() {
   console.log('submit', input.value, files.value)
@@ -34,7 +40,7 @@ function onSubmit() {
       v-model="input"
       v-model:queue="queue"
       v-model:files="files"
-      :attachment="{ variant: 'thumbnail', size: 'xl' }"
+      :attachment="{ variant: 'thumbnail' }"
       status="streaming"
       placeholder="Send a message while it answers..."
       v-bind="props"
