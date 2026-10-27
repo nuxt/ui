@@ -138,7 +138,7 @@ props:
 
 ### Variant
 
-Use the `variant` prop to change the style of the attachment. Defaults to `card`, `thumbnail` only displays the image or file icon with the remove button on its corner and the name available to screen readers.
+Use the `variant` prop to change the style of the attachment. Defaults to `card`, `thumbnail` only displays the image or file icon with the remove button on its corner and the name available to screen readers. Combine it with the `size` prop for a larger preview, from `40px` with `xs` to `120px` with `xl`.
 
 ::component-code
 ---

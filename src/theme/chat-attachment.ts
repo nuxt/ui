@@ -29,6 +29,18 @@ export default (options: Required<ModuleOptions>) => ({
         leading: 'w-10',
         leadingIcon: 'size-5',
         description: 'mt-0.5'
+      },
+      lg: {
+        root: 'gap-3 p-2.5 text-sm data-[orientation=vertical]:w-36 data-[variant=thumbnail]:w-20',
+        leading: 'w-12',
+        leadingIcon: 'size-6',
+        description: 'mt-0.5'
+      },
+      xl: {
+        root: 'gap-3 p-3 text-base data-[orientation=vertical]:w-44 data-[variant=thumbnail]:w-30',
+        leading: 'w-14 rounded-xl',
+        leadingIcon: 'size-7',
+        description: 'mt-0.5 text-sm'
       }
     },
     orientation: {
