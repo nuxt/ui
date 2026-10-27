@@ -468,7 +468,7 @@ export default defineEventHandler(async (event) => {
       onEnd: async () => {
         await httpClient.close()
       },
-      onError: async (error) => {
+      onError: async ({ error }) => {
         console.error(error)
         await httpClient.close()
       }

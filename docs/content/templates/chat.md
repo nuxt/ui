@@ -14,6 +14,8 @@ By the end of this tutorial, you'll have a fully functional AI chatbot with:
 - **Markdown rendering** for rich AI responses with code highlighting
 - **Multi-model support** allowing users to switch between OpenAI, Anthropic, and Google models
 - **Server-side AI integration** using Nitro API routes and the AI SDK
+- **Tools** with web search, an MCP server and user approval
+- **Queued messages** so users can keep typing while a response streams
 
 ::callout{icon="i-simple-icons-github"}
 Check out the [`Nuxt`](https://github.com/nuxt-ui-templates/chat) and [`Vue`](https://github.com/nuxt-ui-templates/chat-vue) AI Chat templates on GitHub for production-ready implementations with authentication, database persistence, and more.
@@ -350,6 +352,10 @@ The [`streamText`](https://ai-sdk.dev/docs/reference/ai-sdk-core/stream-text) fu
 - `model`: The AI model to use
 - `instructions`: Guidance that shapes the AI's behavior
 - `messages`: The conversation history
+
+**Reasoning**
+
+The `providerOptions` enable [reasoning](https://ai-sdk.dev/docs/ai-sdk-ui/chatbot#reasoning) for each provider ([Anthropic](https://ai-sdk.dev/providers/ai-sdk-providers/anthropic#reasoning), [Google](https://ai-sdk.dev/providers/ai-sdk-providers/google#thinking), [OpenAI](https://ai-sdk.dev/providers/ai-sdk-providers/openai#reasoning)). The model's thinking streams to the client as reasoning parts, which we render with [`UChatReasoning`](/docs/components/chat-reasoning).
 
 **UIMessageStream**
 
@@ -1069,6 +1075,544 @@ onMounted(() => {
 :::
 ::
 
+## Adding tools
+
+Tools let the model search the web, call your own functions or use an MCP server before it answers. Their calls reach the client as tool parts, which we render with the [`UChatTool`](/docs/components/chat-tool) component.
+
+### Installing the providers
+
+Web search tools come from the provider packages and MCP tools from `@ai-sdk/mcp`:
+
+::code-group{sync="pm"}
+```bash [pnpm]
+pnpm add @ai-sdk/anthropic @ai-sdk/openai @ai-sdk/mcp
+```
+
+```bash [yarn]
+yarn add @ai-sdk/anthropic @ai-sdk/openai @ai-sdk/mcp
+```
+
+```bash [npm]
+npm install @ai-sdk/anthropic @ai-sdk/openai @ai-sdk/mcp
+```
+
+```bash [bun]
+bun add @ai-sdk/anthropic @ai-sdk/openai @ai-sdk/mcp
+```
+::
+
+### Updating the endpoint
+
+Add the tools to `streamText` in the chat endpoint:
+
+::code-tree-intersection
+:::code-collapse
+
+```ts [server/api/chats/[id].post.ts] {10,13,16-18,70-75,77-81,85,91-100,102-107,109-116,135-141,155-166}
+import { createError, defineEventHandler, getValidatedRouterParams, readValidatedBody } from 'h3'
+import { eq } from 'drizzle-orm'
+import { db, schema } from 'hub:db'
+import { z } from 'zod'
+import {
+  convertToModelMessages,
+  createUIMessageStream,
+  createUIMessageStreamResponse,
+  generateText,
+  isStepCount,
+  streamText,
+  toUIMessageStream,
+  tool
+} from 'ai'
+import type { UIMessage } from 'ai'
+import { anthropic } from '@ai-sdk/anthropic'
+import { openai } from '@ai-sdk/openai'
+import { createMCPClient } from '@ai-sdk/mcp'
+
+const DEFAULT_MODEL = 'anthropic/claude-haiku-4.5'
+
+const MODELS = [
+  { value: 'openai/gpt-5-nano', label: 'GPT-5 Nano' },
+  { value: 'anthropic/claude-haiku-4.5', label: 'Claude Haiku 4.5' },
+  { value: 'google/gemini-3-flash', label: 'Gemini 3 Flash' }
+]
+
+export default defineEventHandler(async (event) => {
+  const { id } = await getValidatedRouterParams(event, z.object({
+    id: z.string()
+  }).parse)
+
+  const { model = DEFAULT_MODEL, messages } = await readValidatedBody(event, z.object({
+    model: z.string().refine(value => MODELS.some(m => m.value === value), {
+      message: 'Invalid model'
+    }).optional(),
+    messages: z.array(z.custom<UIMessage>())
+  }).parse)
+
+  // Fetch the chat from the database
+  const chat = await db.query.chats.findFirst({
+    where: (chat, { eq }) => eq(chat.id, id as string)
+  })
+
+  if (!chat) {
+    throw createError({ statusCode: 404, statusMessage: 'Chat not found' })
+  }
+
+  // Generate a title for the chat if it doesn't have one
+  if (!chat.title) {
+    const { text: title } = await generateText({
+      model: DEFAULT_MODEL,
+      instructions: `Generate a short title (max 30 characters) based on the user's message. No quotes or punctuation.`,
+      prompt: JSON.stringify(messages[0])
+    })
+
+    await db.update(schema.chats).set({ title }).where(eq(schema.chats.id, id))
+  }
+
+  // Save the user message if it's a follow-up
+  const lastMessage = messages[messages.length - 1]
+  if (lastMessage?.role === 'user' && messages.length > 1) {
+    await db.insert(schema.messages).values({
+      chatId: id,
+      role: 'user',
+      parts: lastMessage.parts
+    })
+  }
+
+  // Web search is a provider tool, Google can't combine it with other tools yet
+  const webSearch = model.startsWith('anthropic/')
+    ? anthropic.tools.webSearch_20250305()
+    : model.startsWith('openai/')
+      ? openai.tools.webSearch()
+      : undefined
+
+  // Connect to the Nuxt UI MCP server to search its documentation
+  const mcpClient = await createMCPClient({
+    transport: { type: 'http', url: 'https://ui.nuxt.com/mcp' }
+  })
+  const mcpTools = await mcpClient.tools()
+
+  // Create the streaming response
+  const stream = createUIMessageStream({
+    originalMessages: messages,
+    execute: async ({ writer }) => {
+      const result = streamText({
+        model,
+        instructions: `You are a helpful AI assistant. Be concise and friendly.`,
+        messages: await convertToModelMessages(messages),
+        tools: {
+          ...mcpTools,
+          ...(webSearch && { web_search: webSearch }),
+          rename_chat: tool({
+            description: 'Rename the current chat',
+            inputSchema: z.object({
+              title: z.string().describe('A short title, max 30 characters')
+            }),
+            execute: async ({ title }) => {
+              await db.update(schema.chats).set({ title }).where(eq(schema.chats.id, id))
+
+              // Refresh the chat list like for a generated title
+              writer.write({
+                type: 'data-chat-title',
+                data: { message: 'Chat renamed' },
+                transient: true
+              })
+
+              return { title }
+            }
+          })
+        },
+        toolApproval: {
+          rename_chat: 'user-approval'
+        },
+        stopWhen: isStepCount(5),
+        providerOptions: {
+          anthropic: {
+            thinking: {
+              type: 'enabled',
+              budgetTokens: 2048
+            }
+          },
+          google: {
+            thinkingConfig: {
+              includeThoughts: true,
+              thinkingLevel: 'low'
+            }
+          },
+          openai: {
+            reasoningEffort: 'low',
+            reasoningSummary: 'detailed'
+          }
+        },
+        onEnd: async () => {
+          await mcpClient.close()
+        },
+        onError: async ({ error }) => {
+          console.error(error)
+          await mcpClient.close()
+        }
+      })
+
+      // Notify the client that a title was generated
+      if (!chat.title) {
+        writer.write({
+          type: 'data-chat-title',
+          data: { message: 'Title generated' },
+          transient: true
+        })
+      }
+
+      writer.merge(toUIMessageStream({ stream: result.stream }))
+    },
+    onEnd: async ({ responseMessage }) => {
+      // A response continued after an approval keeps its id, so update it in place
+      await db.insert(schema.messages).values({
+        id: responseMessage.id,
+        chatId: chat.id,
+        role: 'assistant',
+        parts: responseMessage.parts
+      }).onConflictDoUpdate({
+        target: schema.messages.id,
+        set: { parts: responseMessage.parts }
+      })
+    }
+  })
+
+  return createUIMessageStreamResponse({ stream })
+})
+```
+
+:::
+::
+
+Here's what each tool does:
+
+**Web search**
+
+Anthropic and OpenAI provide a built-in web search tool ([Anthropic](https://ai-sdk.dev/providers/ai-sdk-providers/anthropic#web-search-tool), [OpenAI](https://ai-sdk.dev/providers/ai-sdk-providers/openai#web-search-tool)), so we pick the one matching the selected model. Google has its own [Google Search](https://ai-sdk.dev/providers/ai-sdk-providers/google#google-search) tool, but the AI SDK can't combine it with other tools yet.
+
+**MCP tools**
+
+[`createMCPClient`](https://ai-sdk.dev/docs/ai-sdk-core/mcp-tools) connects to a [Model Context Protocol](https://modelcontextprotocol.io) server and turns its tools into AI SDK tools. Here the [Nuxt UI MCP server](/docs/getting-started/ai/mcp) lets the model search the Nuxt UI documentation. The client is closed once the response ends or fails.
+
+**Tool approval**
+
+The `rename_chat` tool updates the chat title in the database. The [`toolApproval`](https://ai-sdk.dev/docs/agents/tool-approvals) option pauses it in the `approval-requested` state until the user approves or denies it. The approved call runs in a new request that continues the same assistant message, which is why `originalMessages` is passed to `createUIMessageStream` and the response is now updated in place by its id.
+
+**Multiple steps**
+
+`stopWhen: isStepCount(5)` lets the model call tools and keep answering with their results, for up to 5 steps.
+
+### Rendering tool calls
+
+Render the tool parts in the `#part` slot and add the approval actions:
+
+::code-tree-intersection
+:::code-collapse
+
+```vue [app/pages/chat/[id].vue] {2,4,18,27-28,83-92}
+<script setup lang="ts">
+import { DefaultChatTransport, getToolName, isReasoningUIPart, isTextUIPart, isToolUIPart, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
+import { useChat } from '@ai-sdk/vue'
+import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
+
+const route = useRoute()
+const toast = useToast()
+const { model } = useModels()
+
+const { data: chatData } = await useFetch(`/api/chats/${route.params.id}`)
+
+if (!chatData.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Chat not found', fatal: true })
+}
+
+const input = ref('')
+
+const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
+  id: chatData.value.id,
+  messages: chatData.value.messages,
+  transport: new DefaultChatTransport({
+    api: `/api/chats/${chatData.value.id}`,
+    body: () => ({
+      model: model.value // Read on every request so a model change applies
+    })
+  }),
+  // Send the approval responses back once every pending tool has one
+  sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses,
+  onData(dataPart) {
+    if (dataPart.type === 'data-chat-title') {
+      refreshNuxtData('chats')
+    }
+  },
+  onError(error) {
+    toast.add({
+      title: 'Error',
+      description: error.message,
+      color: 'error'
+    })
+  }
+})
+
+function handleSubmit(e: Event) {
+  e.preventDefault()
+  if (input.value.trim()) {
+    sendMessage({ text: input.value })
+    input.value = ''
+  }
+}
+
+onMounted(() => {
+  if (chatData.value?.messages.length === 1) {
+    regenerate()
+  }
+})
+</script>
+
+<template>
+  <UDashboardPanel :ui="{ body: 'p-0 sm:p-0' }">
+    <template #header>
+      <ChatsHistory />
+    </template>
+    <template #body>
+      <UContainer class="min-h-dvh flex flex-col py-4 sm:py-6">
+        <UChatMessages
+          :messages="messages"
+          :status="status"
+          should-auto-scroll
+          class="flex-1"
+        >
+          <template #part="{ part, message, streaming }">
+            <UChatReasoning
+              v-if="isReasoningUIPart(part)"
+              :text="part.text"
+              :streaming="isPartStreaming(part, streaming)"
+            >
+              <ChatMarkdown
+                :value="part.text"
+                :streaming="isPartStreaming(part, streaming)"
+              />
+            </UChatReasoning>
+
+            <UChatTool
+              v-else-if="isToolUIPart(part)"
+              :text="getToolName(part)"
+              :streaming="isToolStreaming(part, streaming)"
+              :error="part.state === 'output-error'"
+              :actions="part.state === 'approval-requested' ? [
+                { label: 'Approve', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: true }) },
+                { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) }
+              ] : undefined"
+            />
+
+            <ChatMarkdown
+              v-else-if="isTextUIPart(part) && message.role === 'assistant'"
+              :value="part.text"
+              :streaming="isPartStreaming(part, streaming)"
+            />
+          </template>
+        </UChatMessages>
+
+        <UChatPrompt
+          v-model="input"
+          :status="status"
+          :error="error"
+          variant="subtle"
+          class="sticky bottom-0"
+          @submit="handleSubmit"
+        >
+          <template #footer>
+            <ModelSelect v-model="model" />
+          </template>
+
+          <UChatPromptSubmit
+            :status="status"
+            color="neutral"
+            @stop="stop()"
+            @reload="regenerate()"
+          />
+        </UChatPrompt>
+      </UContainer>
+    </template>
+  </UDashboardPanel>
+</template>
+```
+
+:::
+::
+
+The [`UChatTool`](/docs/components/chat-tool) component shows the tool name and a shimmer while it runs. The `isToolStreaming` utility from `@nuxt/ui/utils/ai` detects if a tool call is still running. When a tool waits for approval, the `actions` prop displays the approve and deny buttons, which answer with `addToolApprovalResponse`. The `sendAutomaticallyWhen` option then sends the responses back to the server so the conversation continues.
+
+## Queuing messages :badge{label="Soon" class="align-text-top"}
+
+The AI SDK doesn't queue messages: calling `sendMessage` during a response starts a second request next to the current one. With `status`, `UChatPrompt` ignores submits while the chat is `submitted` or `streaming`. To let users send their next message anyway, leave it off, keep the text in a queue and send it once the chat is `ready` again:
+
+::code-tree-intersection
+:::code-collapse
+
+```vue [app/pages/chat/[id].vue] {17,44-49,54-55,57-59,63-67,127-141}
+<script setup lang="ts">
+import { DefaultChatTransport, getToolName, isReasoningUIPart, isTextUIPart, isToolUIPart, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
+import { useChat } from '@ai-sdk/vue'
+import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
+
+const route = useRoute()
+const toast = useToast()
+const { model } = useModels()
+
+const { data: chatData } = await useFetch(`/api/chats/${route.params.id}`)
+
+if (!chatData.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Chat not found', fatal: true })
+}
+
+const input = ref('')
+const queue = ref<string[]>([])
+
+const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
+  id: chatData.value.id,
+  messages: chatData.value.messages,
+  transport: new DefaultChatTransport({
+    api: `/api/chats/${chatData.value.id}`,
+    body: () => ({
+      model: model.value // Read on every request so a model change applies
+    })
+  }),
+  // Send the approval responses back once every pending tool has one
+  sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses,
+  onData(dataPart) {
+    if (dataPart.type === 'data-chat-title') {
+      refreshNuxtData('chats')
+    }
+  },
+  onError(error) {
+    toast.add({
+      title: 'Error',
+      description: error.message,
+      color: 'error'
+    })
+  }
+})
+
+function sendNext() {
+  const text = queue.value.shift()
+  if (text) {
+    sendMessage({ text })
+  }
+}
+
+function handleSubmit(e: Event) {
+  e.preventDefault()
+  if (input.value.trim()) {
+    queue.value.push(input.value)
+    input.value = ''
+
+    if (status.value !== 'submitted' && status.value !== 'streaming') {
+      sendNext()
+    }
+  }
+}
+
+watch(status, (value) => {
+  if (value === 'ready') {
+    sendNext()
+  }
+})
+
+onMounted(() => {
+  if (chatData.value?.messages.length === 1) {
+    regenerate()
+  }
+})
+</script>
+
+<template>
+  <UDashboardPanel :ui="{ body: 'p-0 sm:p-0' }">
+    <template #header>
+      <ChatsHistory />
+    </template>
+    <template #body>
+      <UContainer class="min-h-dvh flex flex-col py-4 sm:py-6">
+        <UChatMessages
+          :messages="messages"
+          :status="status"
+          should-auto-scroll
+          class="flex-1"
+        >
+          <template #part="{ part, message, streaming }">
+            <UChatReasoning
+              v-if="isReasoningUIPart(part)"
+              :text="part.text"
+              :streaming="isPartStreaming(part, streaming)"
+            >
+              <ChatMarkdown
+                :value="part.text"
+                :streaming="isPartStreaming(part, streaming)"
+              />
+            </UChatReasoning>
+
+            <UChatTool
+              v-else-if="isToolUIPart(part)"
+              :text="getToolName(part)"
+              :streaming="isToolStreaming(part, streaming)"
+              :error="part.state === 'output-error'"
+              :actions="part.state === 'approval-requested' ? [
+                { label: 'Approve', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: true }) },
+                { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) }
+              ] : undefined"
+            />
+
+            <ChatMarkdown
+              v-else-if="isTextUIPart(part) && message.role === 'assistant'"
+              :value="part.text"
+              :streaming="isPartStreaming(part, streaming)"
+            />
+          </template>
+        </UChatMessages>
+
+        <UChatPrompt
+          v-model="input"
+          :error="error"
+          variant="subtle"
+          class="sticky bottom-0"
+          @submit="handleSubmit"
+        >
+          <template v-if="queue.length" #header>
+            <ul class="flex flex-col gap-1 w-full">
+              <li v-for="(text, index) in queue" :key="index" class="flex items-center gap-2 text-sm text-muted">
+                <span class="truncate flex-1">{{ text }}</span>
+                <UButton
+                  icon="i-lucide-x"
+                  color="neutral"
+                  variant="ghost"
+                  size="xs"
+                  :aria-label="`Remove ${text} from queue`"
+                  @click="queue.splice(index, 1)"
+                />
+              </li>
+            </ul>
+          </template>
+
+          <template #footer>
+            <ModelSelect v-model="model" />
+          </template>
+
+          <UChatPromptSubmit
+            :status="status"
+            color="neutral"
+            @stop="stop()"
+            @reload="regenerate()"
+          />
+        </UChatPrompt>
+      </UContainer>
+    </template>
+  </UDashboardPanel>
+</template>
+```
+
+:::
+::
+
+Queued messages appear in the prompt's `#header` slot, where users can remove them before they're sent. After an `error`, the prompt is disabled and the queue waits until the user reloads the failed response. Stopping the response sends the next queued message right away.
+
 ## Going further
 
 You now have a working AI chatbot with database persistence! To take it further, consider adding:
@@ -1076,28 +1620,6 @@ You now have a working AI chatbot with database persistence! To take it further,
 **User Authentication**
 
 Add authentication with [nuxt-auth-utils](https://github.com/atinux/nuxt-auth-utils) to let users access their chat history across devices and keep conversations private.
-
-**AI Tools**
-
-Extend your chatbot with [AI SDK tools](https://ai-sdk.dev/docs/ai-sdk-core/tools-and-tool-calling) that can fetch real-time data, generate charts, or interact with external APIs:
-
-```ts
-import { tool } from 'ai'
-import { z } from 'zod'
-
-const weatherTool = tool({
-  description: 'Get the current weather for a location',
-  inputSchema: z.object({
-    location: z.string().describe('The city name')
-  }),
-  execute: async ({ location }) => {
-    // Fetch weather data from an API
-    return { location, temperature: 22, condition: 'Sunny' }
-  }
-})
-```
-
-Render the tool calls in the `#part` slot with [`UChatTool`](/docs/components/chat-tool). Its page also covers web search, MCP tools and tool approval.
 
 ## Deploying to Vercel
 
@@ -1128,6 +1650,7 @@ You've built a complete AI chatbot with:
 - **Real-time streaming responses** with the AI SDK
 - **Streaming Markdown rendering** with Comark for rich content display
 - **Multi-model support** via AI Gateway
+- **Tools** with web search, MCP and user approval
 - **Database persistence** with SQLite (local) / Turso (production) and Drizzle ORM
 
 The combination of Nuxt's full-stack capabilities, Nuxt UI's purpose-built chat components, a local SQLite dev database with a production Turso database, and the AI SDK's streaming infrastructure makes building AI applications straightforward and enjoyable.
