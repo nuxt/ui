@@ -126,6 +126,6 @@ describe('ChatMessage', () => {
     expect(captured.map(({ part, index }) => [part.type, index])).toEqual([['reasoning', 0], ['text', 1]])
     expect(captured[0]!.message).toMatchObject({ id: props.id, role: 'assistant', parts })
     expect(wrapper.find('.reasoning').text()).toBe('Thinking')
-    expect(wrapper.find('[data-slot="content"]').text()).toBe('ThinkingHello')
+    expect(wrapper.find('[data-slot="chat-message-content"]').text()).toBe('ThinkingHello')
   })
 })

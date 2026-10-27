@@ -735,8 +735,8 @@ defineExpose({
         </slot>
       </caption>
 
-      <thead data-slot="thead" :class="ui.thead({ class: [props.ui?.thead] })">
-        <tr v-for="headerGroup in headerGroups" :key="headerGroup.id" data-slot="tr" :class="ui.tr({ class: [props.ui?.tr] })">
+      <thead data-slot="table-thead" :class="ui.thead({ class: [props.ui?.thead] })">
+        <tr v-for="headerGroup in headerGroups" :key="headerGroup.id" data-slot="table-tr" :class="ui.tr({ class: [props.ui?.tr] })">
           <th
             v-for="{ header, rowSpan } in headerGroup.headers"
             :key="header.id"

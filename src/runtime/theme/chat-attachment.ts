@@ -53,7 +53,7 @@ export default defineTheme({
         leading: 'w-full',
         leadingIcon: 'size-6',
         wrapper: 'px-1',
-        remove: 'absolute top-3 end-3 rounded-full bg-default/75 backdrop-blur-xs'
+        remove: 'absolute top-3 inset-e-3 rounded-full bg-default/75 backdrop-blur-xs'
       }
     },
     variant: {
@@ -66,7 +66,7 @@ export default defineTheme({
         wrapper: 'contents',
         name: 'sr-only',
         description: 'sr-only',
-        remove: 'absolute -top-1.5 -end-1.5 m-0 p-0 rounded-full bg-neutral text-contrast hover:bg-neutral/90 active:bg-neutral/90 ring-2 ring-bg [@media(hover:hover)]:opacity-0 group-hover/attachment:opacity-100 group-focus-within/attachment:opacity-100 transition-opacity ease-out'
+        remove: 'absolute -top-1.5 -inset-e-1.5 m-0 p-0 rounded-full bg-neutral text-contrast hover:bg-neutral-hover active:bg-neutral-hover ring-2 ring-bg [@media(hover:hover)]:opacity-0 group-hover/attachment:opacity-100 group-focus-within/attachment:opacity-100 transition-opacity ease-out'
       }
     },
     status: {

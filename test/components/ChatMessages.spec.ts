@@ -69,8 +69,8 @@ describe('ChatMessages', () => {
   })
 
   it.each([
-    ['without', undefined, 'root'],
-    ['with', () => 'Prompt', 'footer']
+    ['without', undefined, 'chat-messages'],
+    ['with', () => 'Prompt', 'chat-messages-footer']
   ])('positions the auto scroll button %s a footer', async (_, footer, parent) => {
     const Parent = defineComponent({
       setup() {
@@ -86,9 +86,9 @@ describe('ChatMessages', () => {
     wrapper.element.dispatchEvent(new Event('scroll'))
     await nextTick()
 
-    const viewport = wrapper.find('[data-slot="viewport"]')
+    const viewport = wrapper.find('[data-slot="chat-messages-viewport"]')
     expect(viewport.classes()).toContain('absolute')
-    expect(viewport.classes().includes('top-[86%]')).toBe(parent === 'root')
+    expect(viewport.classes().includes('top-[86%]')).toBe(parent === 'chat-messages')
     // Out of the list's flow with a footer, so it doesn't add a gap while it shows
     expect(viewport.element.parentElement?.dataset.slot).toBe(parent)
 
@@ -136,7 +136,7 @@ describe('ChatMessages', () => {
     vi.spyOn(wrapper.element, 'getBoundingClientRect').mockReturnValue({ top: 0, height: 500 } as DOMRect)
     const scrollTo = vi.fn()
     wrapper.element.scrollTo = scrollTo
-    const footer = wrapper.find('[data-slot="footer"]').element
+    const footer = wrapper.find('[data-slot="chat-messages-footer"]').element
     const footerHeight = vi.spyOn(footer as HTMLElement, 'offsetHeight', 'get').mockReturnValue(200)
     for (const article of wrapper.findAll('article')) {
       (article.element as HTMLElement).style.scrollMarginTop = '24px'

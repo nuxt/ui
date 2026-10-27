@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/chat-attachment'
+import theme from '../theme/chat-attachment'
 import type { IconProps } from './Icon.vue'
 import type { ComponentConfig } from '../types/tv'
 
@@ -92,8 +92,7 @@ export interface ChatAttachmentEmits {
 <script setup lang="ts">
 import { computed, ref, watchEffect } from 'vue'
 import { Primitive, VisuallyHidden } from 'reka-ui'
-import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { formatFileSize } from '../utils/file'
 import { tv } from '../utils/tv'
@@ -109,10 +108,11 @@ const _props = withDefaults(defineProps<ChatAttachmentProps>(), {
 })
 const emits = defineEmits<ChatAttachmentEmits>()
 
-const props = useComponentProps('chatAttachment', _props)
+const props = useComponentProps('chatAttachment', _props, theme)
 
 const { t } = useLocale()
-const appConfig = useAppConfig() as ChatAttachment['AppConfig']
+const appConfig = useThemeConfig() as ChatAttachment['AppConfig']
+const overrides = useComponentOverrides((ui: ChatAttachment['AppConfig']['ui']) => ui.chatAttachment)
 
 const fileName = computed(() => props.name ?? props.file?.name)
 const fileType = computed(() => props.type || props.file?.type)
@@ -149,7 +149,7 @@ const leadingIcon = computed(() => {
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatAttachment || {}) })({
+const ui = computed(() => tv(theme, overrides.value)({
   size: props.size,
   orientation: props.orientation,
   status: props.status,
@@ -163,19 +163,19 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatAttachment |
     :data-status="props.status"
     :data-orientation="props.orientation"
     :data-variant="props.variant"
-    data-slot="root"
+    data-slot="chat-attachment"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
   >
-    <div data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
-      <img v-if="isImage" :src="previewUrl" :alt="fileName ?? ''" data-slot="image" :class="ui.image({ class: props.ui?.image })">
-      <UIcon v-if="leadingIcon" :name="leadingIcon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+    <div data-slot="chat-attachment-leading" :class="ui.leading({ class: props.ui?.leading })">
+      <img v-if="isImage" :src="previewUrl" :alt="fileName ?? ''" data-slot="chat-attachment-image" :class="ui.image({ class: props.ui?.image })">
+      <UIcon v-if="leadingIcon" :name="leadingIcon" data-slot="chat-attachment-leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
     </div>
 
-    <div data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
-      <UChatShimmer v-if="props.status === 'uploading' && fileName" :text="fileName" data-slot="name" :class="ui.name({ class: props.ui?.name })" />
-      <span v-else data-slot="name" :class="ui.name({ class: props.ui?.name })">{{ fileName }}</span>
+    <div data-slot="chat-attachment-wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+      <UChatShimmer v-if="props.status === 'uploading' && fileName" :text="fileName" data-slot="chat-attachment-name" :class="ui.name({ class: props.ui?.name })" />
+      <span v-else data-slot="chat-attachment-name" :class="ui.name({ class: props.ui?.name })">{{ fileName }}</span>
 
-      <span v-if="fileDescription" data-slot="description" :class="ui.description({ class: props.ui?.description })">{{ fileDescription }}</span>
+      <span v-if="fileDescription" data-slot="chat-attachment-description" :class="ui.description({ class: props.ui?.description })">{{ fileDescription }}</span>
 
       <UButton
         v-if="props.removable"
@@ -184,7 +184,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatAttachment |
         variant="ghost"
         size="xs"
         :aria-label="t('fileUpload.removeFile', { filename: fileName ?? '' })"
-        data-slot="remove"
+        data-slot="chat-attachment-remove"
         :class="ui.remove({ class: props.ui?.remove })"
         @click="emits('remove', $event)"
       />
