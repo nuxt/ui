@@ -654,17 +654,45 @@ describe('Table', () => {
     expect(rows[2]!.findAll('td')[1]!.attributes('colspan')).toBe('2')
   })
 
-  it('does not span cells in a virtualized table', async () => {
+  it('only spans columns in a virtualized table', async () => {
     const wrapper = await mountSuspended(Table, {
       props: {
-        data: [{ category: 'A', name: 'One' }, { category: 'A', name: 'Two' }],
-        columns: [{ accessorKey: 'category', spanRows: true }, { accessorKey: 'name' }] as any,
+        data: [{ category: 'A', name: 'One', note: 'x' }, { category: 'A', name: 'Two', note: 'y' }],
+        columns: [{ accessorKey: 'category', spanRows: true }, { accessorKey: 'name', spanColumns: 2 }, { accessorKey: 'note' }] as any,
         features: { cellSpanningFeature },
-        virtualize: true
+        virtualize: { observeElementRect: (_: unknown, cb: (rect: { width: number, height: number }) => void) => cb({ width: 1000, height: 500 }) }
       }
     })
 
     expect(wrapper.findAll('tbody td[rowspan]')).toHaveLength(0)
+    const cells = wrapper.findAll('tbody td').filter(td => td.text())
+    expect(cells.map(td => td.text())).toEqual(['A', 'One', 'A', 'Two'])
+    expect(cells[1]!.attributes('colspan')).toBe('2')
+  })
+
+  it('applies an explicit column size as the header width', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: { data: data.slice(0, 1), columns: [{ accessorKey: 'id', size: 120 }, { accessorKey: 'email' }] as any }
+    })
+
+    const headers = wrapper.findAll('thead th')
+    expect(headers[0]!.attributes('style')).toContain('width: 120px')
+    expect(headers[1]!.attributes('style') ?? '').not.toContain('width')
+  })
+
+  it('adds custom sorting and filtering functions to the built-in ones', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data: data.slice(0, 3),
+        columns: [{ accessorKey: 'id', sortFn: 'byLength' }, { accessorKey: 'email', filterFn: 'includesString' }] as any,
+        features: { sortFns: { byLength: (a: any, b: any, id: string) => String(a.getValue(id)).length - String(b.getValue(id)).length } }
+      }
+    })
+    const tableApi = (wrapper.vm as any).tableApi
+
+    expect(tableApi.getColumn('id').getSortFn()).toBeTypeOf('function')
+    expect(tableApi.getColumn('email').getFilterFn()).toBeTypeOf('function')
+    expect(tableApi.getColumn('id').getAutoSortFn()).toBeTypeOf('function')
   })
 
   it('selects cells with the pointer and the keyboard', async () => {
@@ -736,6 +764,25 @@ describe('Table', () => {
     expect(onSelect).not.toHaveBeenCalled()
     await rows[0]!.trigger('click')
     expect(onSelect).toHaveBeenCalledOnce()
+  })
+
+  it('keeps options in sync after mount', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data: data.slice(0, 2),
+        columns: [{ accessorKey: 'id' }] as any,
+        options: { enableRowSelection: false },
+        onSelect: () => {}
+      }
+    })
+    const tableApi = (wrapper.vm as any).tableApi
+
+    expect(wrapper.findAll('tbody tr').map(tr => tr.attributes('tabindex'))).toEqual([undefined, undefined])
+
+    await wrapper.setProps({ options: { enableRowSelection: true, rowCount: 42 } })
+
+    expect(wrapper.findAll('tbody tr').map(tr => tr.attributes('tabindex'))).toEqual(['0', '0'])
+    expect(tableApi.options.rowCount).toBe(42)
   })
 
   it('makes every row inert when enableRowSelection is false', async () => {

@@ -182,7 +182,6 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
   features?: TanStackTableFeatures
   /**
    * Options of the registered features, e.g. `enableRowSelection`, `enableMultiSort` or `manualPagination`.
-   * Read once when the table is created.
    * @see [API](https://tanstack.com/table/v9/docs/reference/index/type-aliases/TableOptions)
    */
   options?: Partial<Omit<TanStackTableOptions<TableFeatures, T>, keyof TableOptions<T> | 'data' | 'columns' | 'features' | 'meta' | `on${Capitalize<keyof TableState<TableFeatures>>}Change`>>
@@ -266,9 +265,16 @@ const columns = computed<TableColumn<T>[]>(() => processColumns(props.columns ??
   ...(props.defaultColumn?.header === undefined && { header: upperFirst(accessorKey) })
 }))))
 
+// TanStack fills in a default `size` on every column, so the columns that set one are marked. The spread in `constructColumn` keeps symbol keys.
+const hasSize = Symbol('hasSize')
+
 function processColumns(columns: TableColumn<T>[]): TableColumn<T>[] {
   return columns.map((column) => {
     const col = { ...column } as TableColumn<T>
+
+    if (col.size !== undefined || props.defaultColumn?.size !== undefined) {
+      Object.assign(col, { [hasSize]: true })
+    }
 
     if ('columns' in col && col.columns) {
       col.columns = processColumns(col.columns as TableColumn<T>[])
@@ -369,12 +375,19 @@ const defaultFeatures = {
   sortFns
 }
 
-const registeredFeatures = tableFeatures({ ...defaultFeatures, ...props.features }) as TableFeatures
+// Custom sorting and filtering functions are added to the built-in ones instead of replacing them.
+const registeredFeatures = tableFeatures({
+  ...defaultFeatures,
+  ...props.features,
+  filterFns: { ...filterFns, ...props.features?.filterFns },
+  sortFns: { ...sortFns, ...props.features?.sortFns }
+}) as TableFeatures
 
 // The cell APIs of these features only exist once they are registered.
 const hasCellSelection = 'cellSelectionFeature' in registeredFeatures
-// A span can't reach a row the virtualizer doesn't render, so virtualized tables don't span cells.
-const hasCellSpanning = 'cellSpanningFeature' in registeredFeatures && !props.virtualize
+const hasCellSpanning = 'cellSpanningFeature' in registeredFeatures
+// A row span can't reach a row the virtualizer doesn't render, so virtualized tables only span columns.
+const hasRowSpanning = hasCellSpanning && !props.virtualize
 
 // Each model is a state slice with a matching `on<Slice>Change` option, so supporting a new slice only takes a `defineModel` and an entry here.
 const models: { [K in keyof TableState<TableFeatures>]-?: Ref<TableState<TableFeatures>[K] | undefined> } = {
@@ -411,11 +424,11 @@ const onChangeHandlers = Object.fromEntries(Object.entries(models).map(([key, mo
   (updaterOrValue: Updater<any>) => model.value === undefined ? makeStateUpdater(key, tableApi)(updaterOrValue) : valueUpdater(updaterOrValue, model)
 ]))
 
-const tableApi: VueTable<TableFeatures, T> = useTable<TableFeatures, T>({
-  ...props.options,
+const tableOptions = computed(() => ({
   // Columns resize while dragging, in the text direction.
-  columnResizeMode: toRef(() => props.options?.columnResizeMode ?? 'onChange'),
-  columnResizeDirection: toRef(() => props.options?.columnResizeDirection ?? dir.value),
+  columnResizeMode: 'onChange' as const,
+  columnResizeDirection: dir.value,
+  ...props.options,
   ...tableProps.value,
   ...onChangeHandlers,
   features: registeredFeatures,
@@ -423,7 +436,15 @@ const tableApi: VueTable<TableFeatures, T> = useTable<TableFeatures, T>({
   columns,
   meta: meta.value,
   state
-})
+}))
+
+// The adapter watches the keys of the object it gets, so this proxy keeps `options` and the forwarded props in sync after setup, keys added later included.
+const tableApi: VueTable<TableFeatures, T> = useTable<TableFeatures, T>(new Proxy({} as typeof tableOptions.value, {
+  get: (_, key) => Reflect.get(tableOptions.value, key),
+  has: (_, key) => Reflect.has(tableOptions.value, key),
+  ownKeys: () => Reflect.ownKeys(tableOptions.value),
+  getOwnPropertyDescriptor: (_, key) => Reflect.has(tableOptions.value, key) ? { configurable: true, enumerable: true, value: Reflect.get(tableOptions.value, key) } : undefined
+}))
 
 // TanStack gives a placeholder heading a chain of its column's headers the `rowSpan` of the chain, and the headers below it a `rowSpan` of 0.
 // The leaf at the end of the chain is rendered in the placeholder's cell, so slots, sorting and `aria-sort` get the real header.
@@ -553,6 +574,10 @@ function FlexRender({ render, props, cell }: { render?: unknown, props?: unknown
     props = cell.getContext()
   }
   const rendered = typeof render === 'function' ? render(props) : render
+  // An empty string would render an empty text node, which hydrates as a mismatch.
+  if (rendered === '') {
+    return null
+  }
   if (rendered === null || (typeof rendered !== 'object' && typeof rendered !== 'function') || Array.isArray(rendered) || isVNode(rendered)) {
     return rendered
   }
@@ -609,7 +634,7 @@ function isRowSelectable(row: TableRow<T>) {
 }
 
 function isCellCovered(cell: Cell<TableFeatures, T, unknown>) {
-  return hasCellSpanning && cell.getIsCovered()
+  return hasRowSpanning ? cell.getIsCovered() : hasCellSpanning && cell.getColSpan() === 0
 }
 
 function getCellSpan(span: number) {
@@ -694,7 +719,8 @@ const hasResizableColumns = computed(() => tableApi.getAllLeafColumns().some(isC
 
 function getHeaderStyles(header: Header<TableFeatures, T, unknown>) {
   const styles = getColumnStyles(header.column)
-  if (hasResizableColumns.value) {
+  // A `size` is applied as soon as a column sets one, so pinned offsets match the rendered widths.
+  if (hasResizableColumns.value || hasSize in header.column.columnDef) {
     styles.width = `${header.getSize()}px`
   }
   return styles
@@ -798,7 +824,7 @@ defineExpose({
           :data-selected="hasCellSelection ? cell.getIsSelected() : undefined"
           :tabindex="hasCellSelection ? cell.getTabIndex() : undefined"
           :colspan="hasCellSpanning ? getCellSpan(cell.getColSpan()) : undefined"
-          :rowspan="hasCellSpanning ? getCellSpan(cell.getRowSpan()) : undefined"
+          :rowspan="hasRowSpanning ? getCellSpan(cell.getRowSpan()) : undefined"
           data-slot="table-td"
           :class="ui.td({
             class: [
