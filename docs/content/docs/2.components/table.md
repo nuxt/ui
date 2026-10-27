@@ -169,7 +169,7 @@ highlights:
 
 The table registers the TanStack Table features it renders: sorting, column and global filtering, expanding, row selection, column visibility, column pinning, sizing and resizing, and row pinning, along with their row models and every built-in sorting and filtering function.
 
-Use the `features` prop to register other [features](https://tanstack.com/table/v9/docs/guide/features) like [pagination](#with-pagination), [grouping](#with-grouped-rows), [cell selection](#with-cell-selection), [cell spanning](#with-column-span), [faceting](#with-column-faceting) or [column ordering](#with-column-ordering), along with their row models. It is read once when the table is created, so declare it in your script.
+Use the `features` prop to register other [features](https://tanstack.com/table/v9/docs/guide/features) like [pagination](#with-pagination), [grouping](#with-grouped-rows), [cell selection](#with-cell-selection), [cell spanning](#with-column-span), [faceting](#with-column-faceting) or [column ordering](#with-column-ordering), along with the row models some of them need. It is read once when the table is created, so declare it in your script.
 
 ```vue
 <script setup lang="ts">
@@ -461,7 +461,7 @@ You can use this to navigate to a page, open a modal or even to select the row m
 ::
 
 ::note
-Clickable rows get `tabindex="0"` to be reachable with the keyboard. In a long table, you can take them out of the tab order with `:meta="{ attrs: { tr: { tabindex: -1 } } }"`. When `enableRowSelection` is a function in the `options` prop, the rows it rejects don't emit `select` and aren't styled as clickable.
+Clickable rows get `tabindex="0"` to be reachable with the keyboard. In a long table, you can take them out of the tab order with `:meta="{ attrs: { tr: { tabindex: -1 } } }"`. When `enableRowSelection` is `false` or a function in the `options` prop, the rows it rejects don't emit `select` and aren't styled as clickable.
 ::
 
 ### With row context menu event
