@@ -4,9 +4,9 @@ export default {
     leading: 'relative flex items-center justify-center shrink-0 aspect-square overflow-hidden rounded-lg bg-elevated text-muted',
     leadingIcon: 'shrink-0',
     image: 'size-full object-cover',
-    wrapper: 'flex flex-col min-w-0 flex-1',
+    wrapper: 'grid grid-cols-[minmax(0,1fr)_auto] items-center min-w-0 flex-1',
     name: 'block truncate font-medium text-highlighted',
-    description: 'block truncate text-xs text-muted',
+    description: 'block truncate row-start-2 text-xs text-muted',
     remove: 'shrink-0'
   },
   variants: {
@@ -31,7 +31,8 @@ export default {
     },
     orientation: {
       horizontal: {
-        root: 'items-center min-w-40 pe-2.5'
+        root: 'items-center min-w-40 pe-2.5',
+        remove: 'col-start-2 row-start-1 -my-1 ms-1'
       },
       vertical: {
         root: 'flex-col',

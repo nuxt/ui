@@ -168,22 +168,22 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatAttachment |
       <span v-else data-slot="name" :class="ui.name({ class: props.ui?.name })">{{ fileName }}</span>
 
       <span v-if="fileDescription" data-slot="description" :class="ui.description({ class: props.ui?.description })">{{ fileDescription }}</span>
+
+      <UButton
+        v-if="props.removable"
+        :icon="props.removeIcon || appConfig.ui.icons.close"
+        color="neutral"
+        variant="ghost"
+        size="xs"
+        :aria-label="t('fileUpload.removeFile', { filename: fileName ?? '' })"
+        data-slot="remove"
+        :class="ui.remove({ class: props.ui?.remove })"
+        @click="emits('remove', $event)"
+      />
     </div>
 
     <VisuallyHidden aria-live="polite">
       {{ props.status === 'idle' ? '' : t(`chatAttachment.${props.status}`) }}
     </VisuallyHidden>
-
-    <UButton
-      v-if="props.removable"
-      :icon="props.removeIcon || appConfig.ui.icons.close"
-      color="neutral"
-      variant="ghost"
-      size="xs"
-      :aria-label="t('fileUpload.removeFile', { filename: fileName ?? '' })"
-      data-slot="remove"
-      :class="ui.remove({ class: props.ui?.remove })"
-      @click="emits('remove', $event)"
-    />
   </Primitive>
 </template>
