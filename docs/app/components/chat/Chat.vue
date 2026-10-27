@@ -323,7 +323,7 @@ function clearMessages() {
     rail
     breakpoint="xl"
     :style="{ '--sidebar-width': '24rem' }"
-    :ui="{ footer: 'p-0', actions: 'gap-0.5' }"
+    :ui="{ inner: 'divide-y-0', header: 'border-b border-default', footer: 'pt-0.75', actions: 'gap-0.5' }"
     class="bg-default"
   >
     <template #actions>
@@ -448,11 +448,11 @@ function clearMessages() {
         v-model:queue="queue"
         :status="status"
         :error="error"
-        placeholder="Ask me anything..."
-        variant="naked"
+        :placeholder="status === 'submitted' || status === 'streaming' ? 'Queue a follow-up...' : 'Ask me anything...'"
+        color="neutral"
+        variant="subtle"
         size="sm"
         autofocus
-        class="px-4"
         @submit="onSubmit"
         @send="onSendNow"
       >
@@ -462,6 +462,7 @@ function clearMessages() {
           </ULink>
 
           <UChatPromptSubmit
+            color="neutral"
             size="sm"
             :status="status"
             :disabled="!input.trim()"
