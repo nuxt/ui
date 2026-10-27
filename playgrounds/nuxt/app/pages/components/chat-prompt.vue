@@ -10,14 +10,16 @@ const attrs = reactive({
 })
 
 const input = ref('')
+const files = ref<File[]>([])
 const queue = ref([
   { text: 'Can you also add a dark mode toggle?' },
   { text: 'And write the tests for it' }
 ])
 
 function onSubmit() {
-  console.log('submit', input.value)
+  console.log('submit', input.value, files.value)
   input.value = ''
+  files.value = []
 }
 </script>
 
@@ -27,25 +29,29 @@ function onSubmit() {
     <USelect v-model="attrs.variant" :items="variants" multiple />
   </Navbar>
 
-  <Matrix v-slot="props" :attrs="attrs" class="flex-col" container-class="w-80">
-    <UChatPrompt
-      v-model="input"
-      placeholder="Type your message here..."
-      v-bind="props"
-      @submit="onSubmit"
-    >
-      <UChatPromptSubmit :color="props?.color" />
-    </UChatPrompt>
-
+  <Matrix v-slot="props" :attrs="attrs" container-class="w-80 gap-8">
     <UChatPrompt
       v-model="input"
       v-model:queue="queue"
+      v-model:files="files"
+      :attachment="{ variant: 'thumbnail', size: 'xl' }"
       status="streaming"
       placeholder="Send a message while it answers..."
-      :autofocus="false"
       v-bind="props"
+      @submit="onSubmit"
     >
-      <UChatPromptSubmit status="streaming" :color="props?.color" />
+      <template #footer="{ open }">
+        <UButton
+          icon="i-lucide-paperclip"
+          color="neutral"
+          variant="ghost"
+          size="sm"
+          aria-label="Attach files"
+          @click="open"
+        />
+
+        <UChatPromptSubmit status="streaming" :color="props?.color" size="sm" />
+      </template>
     </UChatPrompt>
   </Matrix>
 </template>
