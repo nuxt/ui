@@ -512,6 +512,9 @@ catalogs:
     tailwind-merge:
       specifier: ^3.7.0
       version: 3.7.0
+    tailwind-variants:
+      specifier: 3.2.2
+      version: 3.2.2
     tailwindcss:
       specifier: ^4.3.3
       version: 4.3.3
@@ -577,7 +580,6 @@ overrides:
   '@codspeed/vitest-plugin>vite': ^7.0.0 || ^8.0.0
   '@nuxt/kit': ^4.6.2
   '@nuxt/ui': workspace:*
-  tailwind-variants: 3.2.2
   unplugin: ^3.4.0
   c12: ^3.3.4
   typescript: ^6.0.3
@@ -767,7 +769,7 @@ importers:
         specifier: 'catalog:'
         version: 3.7.0
       tailwind-variants:
-        specifier: 3.2.2
+        specifier: 'catalog:'
         version: 3.2.2(tailwind-merge@3.7.0)(tailwindcss@4.3.3)
       tailwindcss:
         specifier: 'catalog:'
