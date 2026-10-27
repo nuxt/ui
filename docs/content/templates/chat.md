@@ -1,16 +1,7 @@
 ---
-title: Build an AI Chatbot with Nuxt, Nuxt UI, and AI SDK
+title: How to Build an AI Chatbot with Nuxt and AI SDK
 description: Learn how to build a full-featured AI chatbot with streaming responses, multiple models support, and a beautiful UI using Nuxt, Nuxt UI, and Vercel AI SDK.
 navigation: false
-authors:
-  - name: Hugo Richard
-    avatar:
-      src: https://github.com/hugorcd.png
-    to: https://x.com/hugorcd
-  - name: Benjamin Canac
-    avatar:
-      src: https://github.com/benjamincanac.png
-    to: https://x.com/benjamincanac
 date: 2025-12-16T10:00:00.000Z
 ---
 
@@ -986,9 +977,9 @@ const { messages, status, error, sendMessage, regenerate, stop } = useChat({
   messages: chatData.value.messages,
   transport: new DefaultChatTransport({
     api: `/api/chats/${chatData.value.id}`,
-    body: {
-      model: model.value // Pass the selected model
-    }
+    body: () => ({
+      model: model.value // Read on every request so a model change applies
+    })
   }),
   onData(dataPart) {
     if (dataPart.type === 'data-chat-title') {

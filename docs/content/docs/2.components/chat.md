@@ -362,5 +362,5 @@ html.dark .shiki span {
 To let users send messages while a response streams, see the [ChatPrompt](/docs/components/chat-prompt#with-queued-messages) queue example.
 
 ::tip{to="/templates/chat"}
-Follow the **Build an AI Chatbot** guide to build a full app with chat history, database persistence and a model selector.
+Follow the **How to Build an AI Chatbot** guide to build a full app with chat history, database persistence and a model selector.
 ::

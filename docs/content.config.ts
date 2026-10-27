@@ -108,6 +108,8 @@ export const collections = {
         description: z.string(),
         icon: z.string(),
         framework: z.enum(['nuxt', 'vue']),
+        // Path of the template's "how to build" guide, when it has one
+        guide: z.string().optional(),
         features: z.array(PageFeature).optional(),
         links: z.array(Button).optional(),
         open_links: z.array(Button).optional()
@@ -144,11 +146,6 @@ export const collections = {
     }],
     schema: z.object({
       date: z.string(),
-      authors: z.array(z.object({
-        name: z.string(),
-        avatar: Avatar.optional(),
-        to: z.string().optional()
-      })).optional(),
       sitemap
     })
   })

@@ -145,6 +145,7 @@ items:
     description: "An AI chatbot template to build your own chatbot powered by Vercel AI SDK."
     icon: i-lucide-message-circle
     framework: nuxt
+    guide: /templates/chat
     features:
       - title: GitHub authentication
         icon: i-lucide-lock
@@ -153,10 +154,6 @@ items:
       - title: Markdown syntax highlight
         icon: i-lucide-palette
     links:
-      - label: Guide
-        to: /templates/chat
-        icon: i-lucide-book-open
-        variant: outline
       - label: Preview
         to: https://chat-template.nuxt.dev
         target: _blank
