@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { ChatStatus } from 'ai'
 import type { ChatPromptQueueItem } from '@nuxt/ui'
 import theme from '#build/ui/chat-prompt'
 
@@ -13,6 +14,8 @@ const attrs = reactive({
 const input = ref('')
 const files = ref<File[]>([])
 const queue = ref<ChatPromptQueueItem[]>([])
+// Starts busy so submits queue, stopping lets the next submit go through `onSubmit`
+const status = ref<ChatStatus>('streaming')
 
 // The queue room is measured on the client, filling it after mount avoids a jump on hydration
 onMounted(() => {
@@ -41,7 +44,7 @@ function onSubmit() {
       v-model:queue="queue"
       v-model:files="files"
       :attachment="{ variant: 'thumbnail' }"
-      status="streaming"
+      :status="status"
       placeholder="Send a message while it answers..."
       v-bind="props"
       @submit="onSubmit"
@@ -56,7 +59,7 @@ function onSubmit() {
           @click="open"
         />
 
-        <UChatPromptSubmit status="streaming" :color="props?.color" size="sm" />
+        <UChatPromptSubmit :status="status" :color="props?.color" size="sm" @stop="status = 'ready'" />
       </template>
     </UChatPrompt>
   </Matrix>
