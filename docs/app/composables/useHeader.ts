@@ -16,7 +16,8 @@ export function useHeader() {
     to: '/theme'
   }, {
     label: 'Templates',
-    to: '/templates'
+    to: '/templates',
+    active: route.path.startsWith('/templates')
   }, {
     label: 'Showcase',
     to: '/showcase'
@@ -54,7 +55,8 @@ export function useHeader() {
   }, {
     label: 'Templates',
     icon: studioIcons.templates,
-    to: '/templates'
+    to: '/templates',
+    active: route.path.startsWith('/templates')
   }, {
     label: 'Showcase',
     icon: studioIcons.presentation,
@@ -63,11 +65,6 @@ export function useHeader() {
     label: 'Community',
     icon: studioIcons.globe,
     to: '/community'
-  }, {
-    label: 'Blog',
-    icon: studioIcons.newspaper,
-    to: '/blog',
-    active: route.path.startsWith('/blog')
   }, {
     label: 'Contribution',
     icon: studioIcons.heart,

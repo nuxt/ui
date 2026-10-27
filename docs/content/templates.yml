@@ -153,6 +153,10 @@ items:
       - title: Markdown syntax highlight
         icon: i-lucide-palette
     links:
+      - label: Guide
+        to: /templates/chat
+        icon: i-lucide-book-open
+        variant: outline
       - label: Preview
         to: https://chat-template.nuxt.dev
         target: _blank

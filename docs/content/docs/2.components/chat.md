@@ -144,212 +144,7 @@ export default defineEventHandler(async (event) => {
 })
 ```
 
-### Reasoning
-
-To enable [reasoning](https://ai-sdk.dev/docs/ai-sdk-ui/chatbot#reasoning), configure `providerOptions` for your provider ([Anthropic](https://ai-sdk.dev/providers/ai-sdk-providers/anthropic#reasoning), [Google](https://ai-sdk.dev/providers/ai-sdk-providers/google#thinking), [OpenAI](https://ai-sdk.dev/providers/ai-sdk-providers/openai#reasoning)):
-
-```ts [server/api/chat.post.ts]
-import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
-
-export default defineEventHandler(async (event) => {
-  const { messages } = await readBody(event)
-
-  const result = streamText({
-    model: 'anthropic/claude-sonnet-5.5',
-    maxOutputTokens: 10000,
-    instructions: 'You are a helpful assistant.',
-    messages: await convertToModelMessages(messages),
-    providerOptions: {
-      anthropic: {
-        thinking: {
-          type: 'adaptive'
-        },
-        effort: 'low'
-      },
-      google: {
-        thinkingConfig: {
-          includeThoughts: true,
-          thinkingLevel: 'low'
-        }
-      },
-      openai: {
-        reasoningEffort: 'low',
-        reasoningSummary: 'detailed'
-      }
-    }
-  })
-
-  const stream = toUIMessageStream({ stream: result.stream })
-  return createUIMessageStreamResponse({ stream })
-})
-```
-
-### Web Search
-
-Some providers offer built-in web search tools: [Anthropic](https://ai-sdk.dev/providers/ai-sdk-providers/anthropic#web-search-tool), [Google](https://ai-sdk.dev/providers/ai-sdk-providers/google#google-search), [OpenAI](https://ai-sdk.dev/providers/ai-sdk-providers/openai#web-search-tool).
-
-::code-group
-
-```ts [Anthropic]
-import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
-import { anthropic } from '@ai-sdk/anthropic'
-
-export default defineEventHandler(async (event) => {
-  const { messages } = await readBody(event)
-
-  const result = streamText({
-    model: 'anthropic/claude-sonnet-5.5',
-    instructions: 'You are a helpful assistant.',
-    messages: await convertToModelMessages(messages),
-    tools: {
-      web_search: anthropic.tools.webSearch_20260209({})
-    }
-  })
-
-  const stream = toUIMessageStream({ stream: result.stream })
-  return createUIMessageStreamResponse({ stream })
-})
-```
-
-```ts [Google]
-import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
-import { google } from '@ai-sdk/google'
-
-export default defineEventHandler(async (event) => {
-  const { messages } = await readBody(event)
-
-  const result = streamText({
-    model: 'google/gemini-3-flash',
-    instructions: 'You are a helpful assistant.',
-    messages: await convertToModelMessages(messages),
-    tools: {
-      google_search: google.tools.googleSearch({})
-    }
-  })
-
-  const stream = toUIMessageStream({ stream: result.stream })
-  return createUIMessageStreamResponse({ stream })
-})
-```
-
-```ts [OpenAI]
-import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
-import { openai } from '@ai-sdk/openai'
-
-export default defineEventHandler(async (event) => {
-  const { messages } = await readBody(event)
-
-  const result = streamText({
-    model: 'openai/gpt-5-nano',
-    instructions: 'You are a helpful assistant.',
-    messages: await convertToModelMessages(messages),
-    tools: {
-      web_search: openai.tools.webSearch({})
-    }
-  })
-
-  const stream = toUIMessageStream({ stream: result.stream })
-  return createUIMessageStreamResponse({ stream })
-})
-```
-
-::
-
-### MCP Client
-
-Empower your chatbot with advanced tool-calling features using the [Model Context Protocol (MCP)](https://ai-sdk.dev/docs/ai-sdk-core/mcp-tools) from `@ai-sdk/mcp`. MCP enables your AI to perform dynamic actions, such as searching your documentation or executing custom tasks, to provide more relevant and accurate responses.
-
-To get started, install the MCP package:
-
-:::code-group
-
-```bash [npm]
-npm install @ai-sdk/mcp
-```
-
-```bash [pnpm]
-pnpm add @ai-sdk/mcp
-```
-
-```bash [yarn]
-yarn add @ai-sdk/mcp
-```
-
-:::
-
-Then, configure your server endpoint to use MCP tools:
-
-```ts [server/api/chat.post.ts]
-import { streamText, convertToModelMessages, isStepCount, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
-import { createMCPClient } from '@ai-sdk/mcp'
-
-export default defineEventHandler(async (event) => {
-  const { messages } = await readBody(event)
-
-  const httpClient = await createMCPClient({
-    transport: { type: 'http', url: 'https://your-app.com/mcp' }
-  })
-  try {
-    const tools = await httpClient.tools()
-
-    const result = streamText({
-      model: 'anthropic/claude-sonnet-5.5',
-      maxOutputTokens: 10000,
-      instructions: 'You are a helpful assistant. Use your tools to search for relevant information before answering questions.',
-      messages: await convertToModelMessages(messages),
-      stopWhen: isStepCount(6),
-      tools,
-      onEnd: async () => {
-        await httpClient.close()
-      },
-      onError: async (error) => {
-        console.error(error)
-        await httpClient.close()
-      }
-    })
-
-    const stream = toUIMessageStream({ stream: result.stream })
-    return createUIMessageStreamResponse({ stream })
-  } catch (error) {
-    // Close the MCP client if setup fails before streaming starts
-    await httpClient.close()
-    throw error
-  }
-})
-```
-
-### Tool Approval
-
-Require a user confirmation before a tool runs with the [`toolApproval`](https://ai-sdk.dev/docs/agents/tool-approvals) option. The tool part pauses in the `approval-requested` state until the user responds:
-
-```ts [server/api/chat.post.ts]
-import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse, tool } from 'ai'
-import { z } from 'zod'
-
-export default defineEventHandler(async (event) => {
-  const { messages } = await readBody(event)
-
-  const result = streamText({
-    model: 'anthropic/claude-sonnet-5.5',
-    maxOutputTokens: 10000,
-    instructions: 'You are a helpful assistant.',
-    messages: await convertToModelMessages(messages),
-    tools: {
-      deleteFile: tool({
-        description: 'Delete a file from the project',
-        inputSchema: z.object({ path: z.string() }),
-        execute: async ({ path }) => ({ deleted: path })
-      })
-    },
-    toolApproval: {
-      deleteFile: 'user-approval'
-    }
-  })
-
-  const stream = toUIMessageStream({ stream: result.stream })
-  return createUIMessageStreamResponse({ stream })
-})
-```
+To stream reasoning, search the web, call tools from an MCP server or ask for a user approval before a tool runs, see the [ChatReasoning](/docs/components/chat-reasoning#with-reasoning-models) and [ChatTool](/docs/components/chat-tool#with-web-search) examples.
 
 ## Client Setup
 
@@ -359,7 +154,7 @@ Use the `useChat` composable from `@ai-sdk/vue` to manage chat state and connect
 #nuxt
 ```vue
 <script setup lang="ts">
-import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
+import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
 import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 import shiki from '@comark/nuxt/plugins/shiki'
@@ -368,8 +163,7 @@ const plugins = [shiki()]
 
 const input = ref('')
 
-const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
-  sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses,
+const { messages, status, error, sendMessage, regenerate, stop } = useChat({
   onError(error) {
     console.error(error)
   }
@@ -406,10 +200,6 @@ function onSubmit() {
         :text="getToolName(part)"
         :streaming="isToolStreaming(part, streaming)"
         :error="part.state === 'output-error'"
-        :actions="part.state === 'approval-requested' ? [
-          { label: 'Approve', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: true }) },
-          { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) }
-        ] : undefined"
       />
 
       <Markdown
@@ -441,7 +231,7 @@ function onSubmit() {
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
+import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
 import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 import { Markdown } from '@comark/vue'
@@ -451,8 +241,7 @@ const plugins = [shiki()]
 
 const input = ref('')
 
-const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
-  sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses,
+const { messages, status, error, sendMessage, regenerate, stop } = useChat({
   onError(error) {
     console.error(error)
   }
@@ -489,10 +278,6 @@ function onSubmit() {
         :text="getToolName(part)"
         :streaming="isToolStreaming(part, streaming)"
         :error="part.state === 'output-error'"
-        :actions="part.state === 'approval-requested' ? [
-          { label: 'Approve', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: true }) },
-          { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) }
-        ] : undefined"
       />
 
       <Markdown
@@ -574,127 +359,8 @@ html.dark .shiki span {
 ```
 ::
 
-::note{to="/blog/how-to-build-an-ai-chat"}
-Read the full **Build an AI Chatbot** tutorial for a step-by-step guide.
+To let users send messages while a response streams, see the [ChatPrompt](/docs/components/chat-prompt#with-queued-messages) queue example.
+
+::tip{to="/templates/chat"}
+Follow the **Build an AI Chatbot** guide to build a full app with chat history, database persistence and a model selector.
 ::
-
-### Queued messages :badge{label="Soon" class="align-text-top"}
-
-The AI SDK doesn't queue messages: calling `sendMessage` during a response starts a second request next to the current one. With `status`, `UChatPrompt` ignores submits while the chat is `submitted` or `streaming`. To let users send their next message anyway, leave it off, keep the text in a queue and send it once the chat is `ready` again:
-
-::framework-only
-#nuxt
-```vue
-<script setup lang="ts">
-import { useChat } from '@ai-sdk/vue'
-
-const input = ref('')
-const queue = ref<string[]>([])
-
-const { status, error, sendMessage, regenerate, stop } = useChat()
-
-function sendNext() {
-  const text = queue.value.shift()
-  if (text) {
-    sendMessage({ text })
-  }
-}
-
-function onSubmit() {
-  queue.value.push(input.value)
-  input.value = ''
-
-  if (status.value !== 'submitted' && status.value !== 'streaming') {
-    sendNext()
-  }
-}
-
-watch(status, (value) => {
-  if (value === 'ready') {
-    sendNext()
-  }
-})
-</script>
-
-<template>
-  <UChatPrompt v-model="input" :error="error" @submit="onSubmit">
-    <template v-if="queue.length" #header>
-      <ul class="flex flex-col gap-1 w-full">
-        <li v-for="(text, index) in queue" :key="index" class="flex items-center gap-2 text-sm text-muted">
-          <span class="truncate flex-1">{{ text }}</span>
-          <UButton
-            icon="i-lucide-x"
-            color="neutral"
-            variant="ghost"
-            size="xs"
-            :aria-label="`Remove ${text} from queue`"
-            @click="queue.splice(index, 1)"
-          />
-        </li>
-      </ul>
-    </template>
-
-    <UChatPromptSubmit :status="status" @stop="stop()" @reload="regenerate()" />
-  </UChatPrompt>
-</template>
-```
-
-#vue
-```vue
-<script setup lang="ts">
-import { ref, watch } from 'vue'
-import { useChat } from '@ai-sdk/vue'
-
-const input = ref('')
-const queue = ref<string[]>([])
-
-const { status, error, sendMessage, regenerate, stop } = useChat()
-
-function sendNext() {
-  const text = queue.value.shift()
-  if (text) {
-    sendMessage({ text })
-  }
-}
-
-function onSubmit() {
-  queue.value.push(input.value)
-  input.value = ''
-
-  if (status.value !== 'submitted' && status.value !== 'streaming') {
-    sendNext()
-  }
-}
-
-watch(status, (value) => {
-  if (value === 'ready') {
-    sendNext()
-  }
-})
-</script>
-
-<template>
-  <UChatPrompt v-model="input" :error="error" @submit="onSubmit">
-    <template v-if="queue.length" #header>
-      <ul class="flex flex-col gap-1 w-full">
-        <li v-for="(text, index) in queue" :key="index" class="flex items-center gap-2 text-sm text-muted">
-          <span class="truncate flex-1">{{ text }}</span>
-          <UButton
-            icon="i-lucide-x"
-            color="neutral"
-            variant="ghost"
-            size="xs"
-            :aria-label="`Remove ${text} from queue`"
-            @click="queue.splice(index, 1)"
-          />
-        </li>
-      </ul>
-    </template>
-
-    <UChatPromptSubmit :status="status" @stop="stop()" @reload="regenerate()" />
-  </UChatPrompt>
-</template>
-```
-::
-
-After an `error`, the prompt is disabled and the queue waits until the user reloads the failed response. Stopping the response sends the next queued message right away.

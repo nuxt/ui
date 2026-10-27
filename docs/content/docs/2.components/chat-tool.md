@@ -344,6 +344,144 @@ slots:
 Check the **Chat** overview page for installation instructions, server setup and usage examples.
 ::
 
+### With web search
+
+Some providers offer built-in web search tools: [Anthropic](https://ai-sdk.dev/providers/ai-sdk-providers/anthropic#web-search-tool), [Google](https://ai-sdk.dev/providers/ai-sdk-providers/google#google-search), [OpenAI](https://ai-sdk.dev/providers/ai-sdk-providers/openai#web-search-tool). Their calls reach the client as tool parts, so you render them with the ChatTool component like any other tool.
+
+::code-group
+
+```ts [Anthropic]
+import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
+import { anthropic } from '@ai-sdk/anthropic'
+
+export default defineEventHandler(async (event) => {
+  const { messages } = await readBody(event)
+
+  const result = streamText({
+    model: 'anthropic/claude-sonnet-5.5',
+    instructions: 'You are a helpful assistant.',
+    messages: await convertToModelMessages(messages),
+    tools: {
+      web_search: anthropic.tools.webSearch_20260209({})
+    }
+  })
+
+  const stream = toUIMessageStream({ stream: result.stream })
+  return createUIMessageStreamResponse({ stream })
+})
+```
+
+```ts [Google]
+import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
+import { google } from '@ai-sdk/google'
+
+export default defineEventHandler(async (event) => {
+  const { messages } = await readBody(event)
+
+  const result = streamText({
+    model: 'google/gemini-3-flash',
+    instructions: 'You are a helpful assistant.',
+    messages: await convertToModelMessages(messages),
+    tools: {
+      google_search: google.tools.googleSearch({})
+    }
+  })
+
+  const stream = toUIMessageStream({ stream: result.stream })
+  return createUIMessageStreamResponse({ stream })
+})
+```
+
+```ts [OpenAI]
+import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
+import { openai } from '@ai-sdk/openai'
+
+export default defineEventHandler(async (event) => {
+  const { messages } = await readBody(event)
+
+  const result = streamText({
+    model: 'openai/gpt-5-nano',
+    instructions: 'You are a helpful assistant.',
+    messages: await convertToModelMessages(messages),
+    tools: {
+      web_search: openai.tools.webSearch({})
+    }
+  })
+
+  const stream = toUIMessageStream({ stream: result.stream })
+  return createUIMessageStreamResponse({ stream })
+})
+```
+
+::
+
+### With MCP tools
+
+Give your chatbot tools from a [Model Context Protocol (MCP)](https://ai-sdk.dev/docs/ai-sdk-core/mcp-tools) server with `@ai-sdk/mcp`, for example to search your documentation or run custom tasks before answering.
+
+Install the MCP package:
+
+::code-group{sync="pm"}
+
+```bash [pnpm]
+pnpm add @ai-sdk/mcp
+```
+
+```bash [yarn]
+yarn add @ai-sdk/mcp
+```
+
+```bash [npm]
+npm install @ai-sdk/mcp
+```
+
+```bash [bun]
+bun add @ai-sdk/mcp
+```
+
+::
+
+Then pass the MCP tools to `streamText` in your server endpoint:
+
+```ts [server/api/chat.post.ts]
+import { streamText, convertToModelMessages, isStepCount, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
+import { createMCPClient } from '@ai-sdk/mcp'
+
+export default defineEventHandler(async (event) => {
+  const { messages } = await readBody(event)
+
+  const httpClient = await createMCPClient({
+    transport: { type: 'http', url: 'https://your-app.com/mcp' }
+  })
+  try {
+    const tools = await httpClient.tools()
+
+    const result = streamText({
+      model: 'anthropic/claude-sonnet-5.5',
+      maxOutputTokens: 10000,
+      instructions: 'You are a helpful assistant. Use your tools to search for relevant information before answering questions.',
+      messages: await convertToModelMessages(messages),
+      stopWhen: isStepCount(6),
+      tools,
+      onEnd: async () => {
+        await httpClient.close()
+      },
+      onError: async (error) => {
+        console.error(error)
+        await httpClient.close()
+      }
+    })
+
+    const stream = toUIMessageStream({ stream: result.stream })
+    return createUIMessageStreamResponse({ stream })
+  } catch (error) {
+    // Close the MCP client if setup fails before streaming starts
+    await httpClient.close()
+    throw error
+  }
+})
+```
+
 ### With approval flow :badge{label="4.10+" class="align-text-top"}
 
 Use the `actions` prop to build a tool approval flow with the [AI SDK](https://ai-sdk.dev/docs/agents/tool-approvals). When a tool part is in the `approval-requested` state, display the approve and deny actions and respond with `addToolApprovalResponse`.
@@ -355,6 +493,37 @@ prettier: true
 name: 'chat-tool-approval-example'
 ---
 ::
+
+On the server, require the approval with the [`toolApproval`](https://ai-sdk.dev/docs/agents/tool-approvals) option. The tool part pauses in the `approval-requested` state until the user responds:
+
+```ts [server/api/chat.post.ts]
+import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse, tool } from 'ai'
+import { z } from 'zod'
+
+export default defineEventHandler(async (event) => {
+  const { messages } = await readBody(event)
+
+  const result = streamText({
+    model: 'anthropic/claude-sonnet-5.5',
+    maxOutputTokens: 10000,
+    instructions: 'You are a helpful assistant.',
+    messages: await convertToModelMessages(messages),
+    tools: {
+      deleteFile: tool({
+        description: 'Delete a file from the project',
+        inputSchema: z.object({ path: z.string() }),
+        execute: async ({ path }) => ({ deleted: path })
+      })
+    },
+    toolApproval: {
+      deleteFile: 'user-approval'
+    }
+  })
+
+  const stream = toUIMessageStream({ stream: result.stream })
+  return createUIMessageStreamResponse({ stream })
+})
+```
 
 ::tip
 Use the `isToolApprovalPending` utility from `@nuxt/ui/utils/ai` to detect a pending approval, `isToolStreaming` returns `false` in this state.

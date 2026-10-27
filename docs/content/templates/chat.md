@@ -2,7 +2,7 @@
 title: Build an AI Chatbot with Nuxt, Nuxt UI, and AI SDK
 description: Learn how to build a full-featured AI chatbot with streaming responses, multiple models support, and a beautiful UI using Nuxt, Nuxt UI, and Vercel AI SDK.
 navigation: false
-image: /assets/blog/building-nuxt-ai-chatbot.png
+image: /assets/templates/guides/chat.png
 authors:
   - name: Hugo Richard
     avatar:
@@ -13,7 +13,6 @@ authors:
       src: https://github.com/benjamincanac.png
     to: https://x.com/benjamincanac
 date: 2025-12-16T10:00:00.000Z
-category: Tutorial
 ---
 
 Building AI-powered applications has never been more accessible. This guide walks through creating a full-featured AI chatbot using Nuxt, Nuxt UI, and the Vercel AI SDK. Each step is explained in detail so you understand how every piece works together.
@@ -580,30 +579,23 @@ onMounted(() => {
           should-auto-scroll
           class="flex-1"
         >
-          <template #content="{ message }">
-            <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
-              <UChatReasoning
-                v-if="isReasoningUIPart(part)"
-                :text="part.text"
-                :streaming="isPartStreaming(part)"
-              >
-                <ChatMarkdown
-                  :value="part.text"
-                  :streaming="isPartStreaming(part)"
-                />
-              </UChatReasoning>
+          <template #part="{ part, message, streaming }">
+            <UChatReasoning
+              v-if="isReasoningUIPart(part)"
+              :text="part.text"
+              :streaming="isPartStreaming(part, streaming)"
+            >
+              <ChatMarkdown
+                :value="part.text"
+                :streaming="isPartStreaming(part, streaming)"
+              />
+            </UChatReasoning>
 
-              <template v-else-if="isTextUIPart(part)">
-                <ChatMarkdown
-                  v-if="message.role === 'assistant'"
-                  :value="part.text"
-                  :streaming="isPartStreaming(part)"
-                />
-                <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
-                  {{ part.text }}
-                </p>
-              </template>
-            </template>
+            <ChatMarkdown
+              v-else-if="isTextUIPart(part) && message.role === 'assistant'"
+              :value="part.text"
+              :streaming="isPartStreaming(part, streaming)"
+            />
           </template>
         </UChatMessages>
 
@@ -654,7 +646,7 @@ The [`UChatMessages`](/docs/components/chat-messages) component is purpose-built
 
 **Rendering Message Parts**
 
-We iterate over message `parts` using AI SDK helpers like `isTextUIPart` and `isReasoningUIPart`, rendering assistant text with the `<ChatMarkdown>` component we created earlier and reasoning content with [`UChatReasoning`](/docs/components/chat-reasoning). The `isPartStreaming` utility from `@nuxt/ui/utils/ai` detects if a part is currently being streamed.
+The `#part` slot is called once for each part of a message. We use AI SDK helpers like `isTextUIPart` and `isReasoningUIPart` to render assistant text with the `<ChatMarkdown>` component we created earlier and reasoning content with [`UChatReasoning`](/docs/components/chat-reasoning). Any part the slot doesn't render falls back to the default output, so user messages are displayed as plain text without extra code. The `isPartStreaming` utility from `@nuxt/ui/utils/ai` detects if a part is currently being streamed, and passing it the slot's `streaming` prop makes it stop as soon as the response is stopped.
 
 **UChatPromptSubmit Component**
 
@@ -793,7 +785,7 @@ async function createChat() {
 ::code-tree-intersection
 :::code-collapse
 
-```vue [app/pages/chat/[id].vue] {62-64}
+```vue [app/pages/chat/[id].vue] {58-60}
 <script setup lang="ts">
 import { DefaultChatTransport, isReasoningUIPart, isTextUIPart } from 'ai'
 import { useChat } from '@ai-sdk/vue'
@@ -862,30 +854,23 @@ onMounted(() => {
           should-auto-scroll
           class="flex-1"
         >
-          <template #content="{ message }">
-            <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
-              <UChatReasoning
-                v-if="isReasoningUIPart(part)"
-                :text="part.text"
-                :streaming="isPartStreaming(part)"
-              >
-                <ChatMarkdown
-                  :value="part.text"
-                  :streaming="isPartStreaming(part)"
-                />
-              </UChatReasoning>
+          <template #part="{ part, message, streaming }">
+            <UChatReasoning
+              v-if="isReasoningUIPart(part)"
+              :text="part.text"
+              :streaming="isPartStreaming(part, streaming)"
+            >
+              <ChatMarkdown
+                :value="part.text"
+                :streaming="isPartStreaming(part, streaming)"
+              />
+            </UChatReasoning>
 
-              <template v-else-if="isTextUIPart(part)">
-                <ChatMarkdown
-                  v-if="message.role === 'assistant'"
-                  :value="part.text"
-                  :streaming="isPartStreaming(part)"
-                />
-                <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
-                  {{ part.text }}
-                </p>
-              </template>
-            </template>
+            <ChatMarkdown
+              v-else-if="isTextUIPart(part) && message.role === 'assistant'"
+              :value="part.text"
+              :streaming="isPartStreaming(part, streaming)"
+            />
           </template>
         </UChatMessages>
 
@@ -979,7 +964,7 @@ Update the chat page to include the model selector and pass the selected model t
 ::code-tree-intersection
 :::code-collapse
 
-```vue [app/pages/chat/[id].vue] {8,24-26,94-96}
+```vue [app/pages/chat/[id].vue] {8,23-25,97-99}
 <script setup lang="ts">
 import { DefaultChatTransport, isReasoningUIPart, isTextUIPart } from 'ai'
 import { useChat } from '@ai-sdk/vue'
@@ -1048,30 +1033,23 @@ onMounted(() => {
           should-auto-scroll
           class="flex-1"
         >
-          <template #content="{ message }">
-            <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
-              <UChatReasoning
-                v-if="isReasoningUIPart(part)"
-                :text="part.text"
-                :streaming="isPartStreaming(part)"
-              >
-                <ChatMarkdown
-                  :value="part.text"
-                  :streaming="isPartStreaming(part)"
-                />
-              </UChatReasoning>
+          <template #part="{ part, message, streaming }">
+            <UChatReasoning
+              v-if="isReasoningUIPart(part)"
+              :text="part.text"
+              :streaming="isPartStreaming(part, streaming)"
+            >
+              <ChatMarkdown
+                :value="part.text"
+                :streaming="isPartStreaming(part, streaming)"
+              />
+            </UChatReasoning>
 
-              <template v-else-if="isTextUIPart(part)">
-                <ChatMarkdown
-                  v-if="message.role === 'assistant'"
-                  :value="part.text"
-                  :streaming="isPartStreaming(part)"
-                />
-                <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
-                  {{ part.text }}
-                </p>
-              </template>
-            </template>
+            <ChatMarkdown
+              v-else-if="isTextUIPart(part) && message.role === 'assistant'"
+              :value="part.text"
+              :streaming="isPartStreaming(part, streaming)"
+            />
           </template>
         </UChatMessages>
 
@@ -1121,7 +1099,7 @@ import { z } from 'zod'
 
 const weatherTool = tool({
   description: 'Get the current weather for a location',
-  parameters: z.object({
+  inputSchema: z.object({
     location: z.string().describe('The city name')
   }),
   execute: async ({ location }) => {
@@ -1130,6 +1108,8 @@ const weatherTool = tool({
   }
 })
 ```
+
+Render the tool calls in the `#part` slot with [`UChatTool`](/docs/components/chat-tool). Its page also covers web search, MCP tools and tool approval.
 
 ## Deploying to Vercel
 
@@ -1166,7 +1146,7 @@ The combination of Nuxt's full-stack capabilities, Nuxt UI's purpose-built chat 
 
 **Resources:**
 
-- [Nuxt UI Chat Components](https://ui.nuxt.com/docs/components/chat)
+- [Nuxt UI Chat Components](/docs/components/chat)
 - [NuxtHub Database](https://hub.nuxt.com/docs/features/database)
 - [AI SDK Documentation](https://ai-sdk.dev)
 - [AI Gateway Documentation](https://vercel.com/docs/ai-gateway)
