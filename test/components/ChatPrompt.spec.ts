@@ -24,6 +24,7 @@ describe('ChatPrompt', () => {
     ['with files', { props: { files: [new File(['a'], 'notes.txt', { type: 'text/plain' })] } }],
     ['with queue', { props: { queue: [{ text: 'Next question' }, { text: '', files: [new File(['a'], 'notes.txt')] }] } }],
     ['with queue slot', { props: { queue: [{ text: 'Next question' }] }, slots: { queue: () => 'Queue slot' } }],
+    ['with attachment', { props: { files: [new File(['a'], 'notes.txt', { type: 'text/plain' })], attachment: { variant: 'thumbnail', size: 'xl' } } }],
     ['with files slot', { props: { files: [new File(['a'], 'notes.txt', { type: 'text/plain' })] }, slots: { files: () => 'Files slot' } }]
   ])
 

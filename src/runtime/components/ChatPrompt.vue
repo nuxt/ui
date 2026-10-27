@@ -5,6 +5,7 @@ import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/chat-prompt'
 import type { IconProps } from './Icon.vue'
 import type { TextareaProps, TextareaSlots } from './Textarea.vue'
+import type { ChatAttachmentProps } from './ChatAttachment.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type ChatPrompt = ComponentConfig<typeof theme, AppConfig, 'chatPrompt'>
@@ -59,6 +60,11 @@ export interface ChatPromptProps extends Pick<TextareaProps, 'rows' | 'autofocus
    * @defaultValue true
    */
   multiple?: boolean
+  /**
+   * The props of the attachments displayed above the textarea, used with `v-model:files`.
+   * `{ removable: true }`{lang="ts-type"}
+   */
+  attachment?: Pick<ChatAttachmentProps, 'variant' | 'size' | 'orientation' | 'removable' | 'icon' | 'removeIcon' | 'class' | 'ui'>
   /**
    * The icon displayed to collapse the queue, used with `v-model:queue`.
    * @defaultValue appConfig.ui.icons.chevronDown
@@ -419,6 +425,7 @@ defineExpose({
           :key="`${file.name}-${file.lastModified}-${index}`"
           :file="file"
           removable
+          v-bind="props.attachment"
           @remove="removeFile(index)"
         />
       </slot>
