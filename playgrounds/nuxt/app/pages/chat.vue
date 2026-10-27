@@ -49,10 +49,20 @@ async function send(text: string, submitted: File[] = []) {
   sendMessage(text.trim() ? { text, files: parts } : { files: parts })
 }
 
-function sendNext() {
+// Reading queued files is async, the chat only turns busy once `sendMessage` runs
+let sending = false
+
+async function sendNext() {
+  if (sending) return
+
   const item = queue.value.shift()
-  if (item) {
-    send(item.text, item.files)
+  if (!item) return
+
+  sending = true
+  try {
+    await send(item.text, item.files)
+  } finally {
+    sending = false
   }
 }
 
@@ -75,6 +85,7 @@ function clearMessages() {
     stop()
   }
   messages.value = []
+  queue.value = []
 }
 
 function getEmailToolText(state: string): string {

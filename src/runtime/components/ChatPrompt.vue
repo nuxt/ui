@@ -235,8 +235,20 @@ function takeQueued(index: number) {
   return item
 }
 
+// Sending and editing wait like the textarea while the prompt is disabled or the chat errored
+const queueDisabled = computed(() => Boolean(props.error) || props.disabled)
+
+// Without `v-model:files`, a queued message with files can't go back to the prompt as a whole
+function canEditQueued(item: ChatPromptQueueItem) {
+  return !queueDisabled.value && (!item.files?.length || files.value !== undefined)
+}
+
 // Moves a queued message to the front, the app stops the current response and sends it
 function sendQueued(index: number) {
+  if (queueDisabled.value) {
+    return
+  }
+
   const item = takeQueued(index)
   if (item) {
     queue.value = [item, ...(queue.value ?? [])]
@@ -246,6 +258,10 @@ function sendQueued(index: number) {
 
 // Puts a queued message back in the prompt, ahead of the current draft
 function editQueued(index: number) {
+  if (!queue.value?.[index] || !canEditQueued(queue.value[index])) {
+    return
+  }
+
   const item = takeQueued(index)
   if (!item) {
     return
@@ -332,12 +348,13 @@ defineExpose({
             <button
               :id="`${queueId}-${index}`"
               type="button"
+              :disabled="!canEditQueued(item)"
               :aria-description="t('chatPrompt.edit')"
               data-slot="queueItemLabel"
               :class="ui.queueItemLabel({ class: props.ui?.queueItemLabel })"
               @click="editQueued(index)"
             >
-              {{ item.text || item.files?.map(file => file.name).join(', ') }}
+              {{ item.text.trim() || item.files?.map(file => file.name).join(', ') }}
             </button>
 
             <div data-slot="queueItemActions" :class="ui.queueItemActions({ class: props.ui?.queueItemActions })">
@@ -346,6 +363,7 @@ defineExpose({
                 color="neutral"
                 variant="ghost"
                 size="xs"
+                :disabled="queueDisabled"
                 :aria-label="t('chatPrompt.sendNow')"
                 :aria-describedby="`${queueId}-${index}`"
                 @click="sendQueued(index)"
