@@ -32,8 +32,8 @@ function format(amount: number) {
           :name="transaction.name"
           :description="transaction.category"
           :avatar="{ icon: transaction.icon }"
-          :ui="{ wrapper: 'min-w-0', name: 'truncate', description: 'truncate' }"
-          class="min-w-0 flex-1"
+          :ui="{ wrapper: 'min-w-0 flex-1', name: 'truncate', description: 'truncate' }"
+          class="min-w-0 flex-1 gap-3"
         />
         <span class="text-sm font-medium" :class="transaction.amount < 0 ? 'text-highlighted' : 'text-success'">
           {{ format(transaction.amount) }}
