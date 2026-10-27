@@ -434,6 +434,8 @@ const tableApi = useVueTable({
   }
 })
 
+// TanStack fills the rows above a shallow column with placeholders and puts its header in the bottom row.
+// Keep only the top placeholder of each chain (header groups are numbered by column depth) and render the real header there with a `rowspan`.
 const headerGroups = computed(() => tableApi.getHeaderGroups().map(headerGroup => ({
   ...headerGroup,
   headers: headerGroup.headers
