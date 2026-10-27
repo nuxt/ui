@@ -614,7 +614,7 @@ watch(status, (value) => {
 })
 
 // The message picked to be sent now is at the front of the queue
-function onSendNow() {
+function onSend() {
   if (status.value === 'submitted' || status.value === 'streaming') {
     stop()
   } else {
@@ -630,7 +630,7 @@ function onSendNow() {
     :status="status"
     :error="error"
     @submit="onSubmit"
-    @send="onSendNow"
+    @send="onSend"
   >
     <UChatPromptSubmit :status="status" @stop="stop()" @reload="regenerate()" />
   </UChatPrompt>
@@ -668,7 +668,7 @@ watch(status, (value) => {
 })
 
 // The message picked to be sent now is at the front of the queue
-function onSendNow() {
+function onSend() {
   if (status.value === 'submitted' || status.value === 'streaming') {
     stop()
   } else {
@@ -684,7 +684,7 @@ function onSendNow() {
     :status="status"
     :error="error"
     @submit="onSubmit"
-    @send="onSendNow"
+    @send="onSend"
   >
     <UChatPromptSubmit :status="status" @stop="stop()" @reload="regenerate()" />
   </UChatPrompt>

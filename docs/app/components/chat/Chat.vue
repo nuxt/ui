@@ -75,7 +75,7 @@ function processThemeToolCalls() {
   }
 }
 
-const { messages: chatMessages, status, error, sendMessage, regenerate, stop } = useAIChat<DocsChatMessage>({
+const { messages: chatMessages, status, error, sendMessage, regenerate, stop, clearError } = useAIChat<DocsChatMessage>({
   messages: messages.value,
   transport: new DefaultChatTransport<DocsChatMessage>({
     api: '/api/ai',
@@ -158,7 +158,7 @@ watch(status, (value) => {
 
 // A queued message picked to be sent now is at the front of the queue, it goes
 // out once the current response stops
-function onSendNow() {
+function onSend() {
   if (status.value === 'submitted' || status.value === 'streaming') {
     stop()
   } else {
@@ -311,6 +311,8 @@ function clearMessages() {
   messages.value = []
   chatMessages.value = []
   queue.value = []
+  // A failed response would otherwise keep the empty prompt disabled
+  clearError()
   _themeApplied.clear()
 }
 </script>
@@ -323,7 +325,7 @@ function clearMessages() {
     rail
     breakpoint="xl"
     :style="{ '--sidebar-width': '24rem' }"
-    :ui="{ inner: 'divide-y-0', header: 'border-b border-default', footer: 'pt-0.75', actions: 'gap-0.5' }"
+    :ui="{ body: 'pb-0', actions: 'gap-0.5' }"
     class="bg-default"
   >
     <template #actions>
@@ -389,15 +391,25 @@ function clearMessages() {
       }"
     >
       <UChatMessages
-        v-if="chatMessages.length"
         should-auto-scroll
         :messages="chatMessages"
         :status="status"
         compact
         class="px-0 gap-2"
         :user="{ ui: { container: 'max-w-full', text: 'text-sm/6' } }"
-        :ui="{ viewport: 'sticky top-auto bottom-4 h-0' }"
+        :ui="{ footer: 'py-4 before:absolute before:inset-x-0 before:bottom-0 before:h-4 before:bg-default' }"
       >
+        <template v-if="!chatMessages.length" #default>
+          <div class="flex flex-col gap-6">
+            <UPageLinks
+              v-for="category in suggestions"
+              :key="category.category"
+              :title="category.category"
+              :links="category.items.map(item => ({ label: item, onClick: () => askQuestion(item) }))"
+            />
+          </div>
+        </template>
+
         <template #indicator>
           <UChatTool :icon="studioIcons.brain" text="Thinking..." streaming />
         </template>
@@ -429,48 +441,39 @@ function clearMessages() {
             :error="part.state === 'output-error'"
           />
         </template>
-      </UChatMessages>
 
-      <div v-else class="flex flex-col gap-6">
-        <UPageLinks
-          v-for="category in suggestions"
-          :key="category.category"
-          :title="category.category"
-          :links="category.items.map(item => ({ label: item, onClick: () => askQuestion(item) }))"
-        />
-      </div>
-    </UTheme>
-
-    <template #footer>
-      <UChatPrompt
-        ref="promptRef"
-        v-model="input"
-        v-model:queue="queue"
-        :status="status"
-        :error="error"
-        :placeholder="status === 'submitted' || status === 'streaming' ? 'Queue a follow-up...' : 'Ask me anything...'"
-        color="neutral"
-        variant="subtle"
-        size="sm"
-        autofocus
-        @submit="onSubmit"
-        @send="onSendNow"
-      >
         <template #footer>
-          <ULink to="https://vercel.com/ai-gateway" target="_blank" class="inline-flex items-center gap-1 text-xs text-dimmed hover:text-muted">
-            Powered by <UIcon name="i-simple-icons-vercel" class="size-3" /> AI Gateway
-          </ULink>
-
-          <UChatPromptSubmit
-            color="neutral"
-            size="sm"
+          <UChatPrompt
+            ref="promptRef"
+            v-model="input"
+            v-model:queue="queue"
             :status="status"
-            :disabled="!input.trim()"
-            @stop="stop()"
-            @reload="regenerate()"
-          />
+            :error="error"
+            :placeholder="status === 'submitted' || status === 'streaming' ? 'Queue a follow-up...' : 'Ask me anything...'"
+            color="neutral"
+            variant="subtle"
+            size="sm"
+            autofocus
+            @submit="onSubmit"
+            @send="onSend"
+          >
+            <template #footer>
+              <ULink to="https://vercel.com/ai-gateway" target="_blank" class="inline-flex items-center gap-1 text-xs text-dimmed hover:text-muted">
+                Powered by <UIcon name="i-simple-icons-vercel" class="size-3" /> AI Gateway
+              </ULink>
+
+              <UChatPromptSubmit
+                color="neutral"
+                size="sm"
+                :status="status"
+                :disabled="!input.trim()"
+                @stop="stop()"
+                @reload="regenerate()"
+              />
+            </template>
+          </UChatPrompt>
         </template>
-      </UChatPrompt>
-    </template>
+      </UChatMessages>
+    </UTheme>
   </USidebar>
 </template>
