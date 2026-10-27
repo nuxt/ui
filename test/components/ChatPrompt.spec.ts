@@ -53,7 +53,7 @@ describe('ChatPrompt', () => {
 
     async function mountQueue() {
       const wrapper = await mountSuspended(ChatPrompt, { props: { modelValue: 'Draft', queue } })
-      return { wrapper, item: wrapper.findAll('[data-slot="queueItem"]')[1]! }
+      return { wrapper, item: wrapper.findAll('[data-slot="chat-prompt-queueItem"]')[1]! }
     }
 
     it('moves the message to the front and emits send', async () => {
@@ -75,7 +75,7 @@ describe('ChatPrompt', () => {
     it('puts a message without text back in the prompt without a blank line', async () => {
       const files = [new File(['a'], 'a.txt')]
       const wrapper = await mountSuspended(ChatPrompt, { props: { modelValue: 'Draft', files: [], queue: [{ text: '', files }] } })
-      await wrapper.findAll('[data-slot="queueItem"] button').at(-2)!.trigger('click')
+      await wrapper.findAll('[data-slot="chat-prompt-queueItem"] button').at(-2)!.trigger('click')
 
       expect(wrapper.emitted('update:modelValue')).toBeUndefined()
       expect(wrapper.emitted('update:files')?.[0]).toEqual([files])
@@ -88,14 +88,14 @@ describe('ChatPrompt', () => {
       })
 
       const wrapper = await mountSuspended(Parent)
-      await wrapper.findAll('[data-slot="queueItem"]')[1]!.findAll('button').at(-3)!.trigger('click')
+      await wrapper.findAll('[data-slot="chat-prompt-queueItem"]')[1]!.findAll('button').at(-3)!.trigger('click')
 
       expect(model.value).toEqual([queue[1], queue[0]])
     })
 
     it('keeps the message while the chat errored', async () => {
       const wrapper = await mountSuspended(ChatPrompt, { props: { queue, error: new Error('Error') } })
-      const item = wrapper.findAll('[data-slot="queueItem"]')[1]!
+      const item = wrapper.findAll('[data-slot="chat-prompt-queueItem"]')[1]!
 
       await item.findAll('button').at(-3)!.trigger('click')
       await item.findAll('button').at(-2)!.trigger('click')
@@ -107,7 +107,7 @@ describe('ChatPrompt', () => {
     it('does not edit a message with files without `v-model:files`', async () => {
       const wrapper = await mountSuspended(ChatPrompt, { props: { queue: [{ text: 'With a file', files: [new File(['a'], 'a.txt')] }] } })
 
-      await wrapper.findAll('[data-slot="queueItem"] button').at(-2)!.trigger('click')
+      await wrapper.findAll('[data-slot="chat-prompt-queueItem"] button').at(-2)!.trigger('click')
 
       expect(wrapper.emitted('update:queue')).toBeUndefined()
     })
@@ -117,7 +117,7 @@ describe('ChatPrompt', () => {
         props: { files: [new File(['a'], 'a.txt')], multiple: false, queue: [{ text: 'With a file', files: [new File(['b'], 'b.txt')] }] }
       })
 
-      await wrapper.findAll('[data-slot="queueItem"] button').at(-2)!.trigger('click')
+      await wrapper.findAll('[data-slot="chat-prompt-queueItem"] button').at(-2)!.trigger('click')
 
       expect(wrapper.emitted('update:queue')).toBeUndefined()
     })
@@ -209,7 +209,7 @@ describe('ChatPrompt', () => {
       props: { files }
     })
 
-    await wrapper.findAll('[data-slot="remove"]')[0]!.trigger('click')
+    await wrapper.findAll('[data-slot="chat-attachment-remove"]')[0]!.trigger('click')
 
     expect(wrapper.emitted('update:files')?.[0]).toEqual([[files[1]]])
   })

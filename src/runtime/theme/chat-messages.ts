@@ -15,7 +15,7 @@ export default defineTheme({
     },
     footer: {
       true: {
-        viewport: 'sticky top-auto bottom-[calc(var(--bottom-offset)+--spacing(4))] h-0'
+        viewport: 'sticky top-auto bottom-[calc(var(--bottom-offset)+(--spacing(4)))] h-0'
       }
     }
   }

@@ -51,7 +51,7 @@ describe('theme templates', () => {
   it('skips prose themes with `prose: false`', () => {
     const hasProse = (overrides: Record<string, any>) => {
       const options = { ...defaultOptions, ...overrides }
-      return getTemplates(options as any, getDefaultConfig(options.theme)).some(template => template.filename === 'ui/prose/index.ts')
+      return getTemplates(options as any, getDefaultConfig(options.tailwindPrefix), undefined, resolve).some(template => template.filename === 'ui/prose/index.ts')
     }
 
     expect(hasProse({ content: true })).toBe(true)

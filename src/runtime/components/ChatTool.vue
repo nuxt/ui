@@ -171,11 +171,11 @@ const chevronIconName = computed(() => props.chevronIcon || appConfig.ui.icons?.
         data-slot="chat-tool-trigger"
         :class="ui.trigger({ class: props.ui?.trigger })"
       >
-        <span v-if="resolvedIcon || (hasContent() && props.chevron === 'leading')" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+        <span v-if="resolvedIcon || (hasContent() && props.chevron === 'leading')" data-slot="chat-tool-leading" :class="ui.leading({ class: props.ui?.leading })">
           <UIcon
             v-if="resolvedIcon"
             :name="resolvedIcon"
-            data-slot="leadingIcon"
+            data-slot="chat-tool-leadingIcon"
             :class="ui.leadingIcon({ class: props.ui?.leadingIcon, alone: !(hasContent() && props.chevron === 'leading') })"
           />
           <UIcon
@@ -209,7 +209,7 @@ const chevronIconName = computed(() => props.chevronIcon || appConfig.ui.icons?.
 
     <div
       v-if="props.actions?.length || !!slots.actions"
-      data-slot="actions"
+      data-slot="chat-tool-actions"
       :data-state="hasContent() && isOpen ? 'open' : 'closed'"
       :class="ui.actions({ class: props.ui?.actions })"
     >

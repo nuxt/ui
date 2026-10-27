@@ -129,14 +129,14 @@ const ui = computed(() => tv(theme, overrides.value)({
         </slot>
       </div>
 
-      <div v-if="hasContent || props.actions || !!slots.actions || !!slots.body" data-slot="body" :class="ui.body({ class: props.ui?.body })">
+      <div v-if="hasContent || props.actions || !!slots.actions || !!slots.body" data-slot="chat-message-body" :class="ui.body({ class: props.ui?.body })">
         <slot name="body" v-bind="{ ...messageProps }">
-          <div v-if="hasContent" data-slot="content" :class="ui.content({ class: props.ui?.content })">
+          <div v-if="hasContent" data-slot="chat-message-content" :class="ui.content({ class: props.ui?.content })">
             <slot name="content" v-bind="{ ...messageProps, content: props.content }">
               <template v-if="!!slots.part && props.parts?.length">
                 <template v-for="(part, index) in props.parts" :key="`${props.id}-${part.type}-${index}`">
                   <slot name="part" :part="part" :index="index" :message="messageProps">
-                    <span v-if="isTextPart(part)" data-slot="text" :class="ui.text({ class: props.ui?.text })">{{ part.text }}</span>
+                    <span v-if="isTextPart(part)" data-slot="chat-message-text" :class="ui.text({ class: props.ui?.text })">{{ part.text }}</span>
                   </slot>
                 </template>
               </template>
@@ -144,7 +144,7 @@ const ui = computed(() => tv(theme, overrides.value)({
                 {{ props.content }}
               </template>
               <template v-else>
-                <span v-for="(part, index) in textParts" :key="`${props.id}-${part.type}-${index}`" data-slot="text" :class="ui.text({ class: props.ui?.text })">{{ part.text }}</span>
+                <span v-for="(part, index) in textParts" :key="`${props.id}-${part.type}-${index}`" data-slot="chat-message-text" :class="ui.text({ class: props.ui?.text })">{{ part.text }}</span>
               </template>
             </slot>
           </div>
