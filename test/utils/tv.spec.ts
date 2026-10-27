@@ -308,6 +308,12 @@ describe('tv slot memoization', () => {
     expect(ui.label(Object.create({ class: 'font-bold' }))).toBe('truncate font-bold')
     expect(ui.label({})).toBe('truncate')
   })
+
+  it('does not key inputs carrying non-enumerable props', () => {
+    const ui = build()
+    expect(ui.label({})).toBe('truncate')
+    expect(ui.label(Object.defineProperty({}, 'class', { value: 'font-bold' }))).toBe('truncate font-bold')
+  })
 })
 
 describe('tv invocation memoization', () => {
@@ -346,6 +352,7 @@ describe('tv invocation memoization', () => {
     const component = tvt(theme)
     expect(component({ class: ['p-2'] })).toBe(component({ class: ['p-2'] }))
     expect(component({ class: { 'p-2': true } })).not.toBe(component({ class: { 'p-2': true } }))
+    expect(component(Object.defineProperty({}, 'active', { value: true })).base()).toContain('font-bold')
 
     const slotlessComponent = tvt(slotless) as any
     expect(slotlessComponent({ class: () => 'block' })).toBe('block')

@@ -150,7 +150,12 @@ function memoKey(slotProps: Record<string, any>): string | undefined {
 
   // `Object.keys` matches exactly what `JSON.stringify` serializes (own
   // enumerable keys), so everything the key omits is also never inspected here.
-  for (const key of Object.keys(slotProps)) {
+  // Non-enumerable own props are read by tv but missing from the key.
+  const keys = Object.keys(slotProps)
+  if (keys.length !== Object.getOwnPropertyNames(slotProps).length) {
+    return undefined
+  }
+  for (const key of keys) {
     if (!isMemoizable(slotProps[key])) {
       return undefined
     }
