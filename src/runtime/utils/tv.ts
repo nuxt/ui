@@ -1,4 +1,4 @@
-import { createTV, cnMerge } from 'tailwind-variants'
+import { createTV, cnMerge, cx } from 'tailwind-variants'
 import type { ClassValue, TVVariants, TVCompoundVariants, TVDefaultVariants, TVReturnType, defaultConfig } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import type { SlotClassReplacer } from '../types/tv'
@@ -299,6 +299,121 @@ function resolveReplacers(componentConfig: any): any {
   return resolved
 }
 
+function hasSlots(slots: unknown): boolean {
+  return !!slots && typeof slots === 'object' && Object.keys(slots).length > 0
+}
+
+/**
+ * Rewrite a top-level class array into something a slotted `tv` applies to the
+ * `base` slot. It reads a string variant value or compound class as `base` and
+ * an object as a slot map, so an array (also an object) is read as a slot map
+ * and silently dropped (heroui-inc/tailwind-variants#215). A variant value is
+ * merged with the extended theme's value for the same key, so it becomes a slot
+ * map next to a slot map and a string next to anything else, the two shapes
+ * `tv` merges cleanly.
+ */
+function baseClasses(value: unknown[], counterpart?: unknown): any {
+  if (counterpart && typeof counterpart === 'object' && !Array.isArray(counterpart)) {
+    return { base: value }
+  }
+  return cx(value as ClassValue) ?? ''
+}
+
+function normalizeVariants(variants: any, counterparts: any): any {
+  if (!variants || typeof variants !== 'object') {
+    return variants
+  }
+
+  let normalized: Record<string, any> | undefined
+  for (const name in variants) {
+    const values = variants[name]
+    if (!values || typeof values !== 'object') {
+      continue
+    }
+
+    let normalizedValues: Record<string, any> | undefined
+    for (const key in values) {
+      if (Array.isArray(values[key])) {
+        normalizedValues ??= { ...values } as Record<string, any>
+        normalizedValues[key] = baseClasses(values[key], counterparts?.[name]?.[key])
+      }
+    }
+    if (normalizedValues) {
+      normalized ??= { ...variants } as Record<string, any>
+      normalized[name] = normalizedValues
+    }
+  }
+  return normalized ?? variants
+}
+
+function normalizeCompoundVariants(compoundVariants: any): any {
+  if (!Array.isArray(compoundVariants)) {
+    return compoundVariants
+  }
+
+  let normalized: any[] | undefined
+  for (let i = 0; i < compoundVariants.length; i++) {
+    const compound = compoundVariants[i]
+    if (!compound || (!Array.isArray(compound.class) && !Array.isArray(compound.className))) {
+      continue
+    }
+
+    const resolved = { ...compound }
+    if (Array.isArray(resolved.class)) {
+      resolved.class = baseClasses(resolved.class)
+    }
+    if (Array.isArray(resolved.className)) {
+      resolved.className = baseClasses(resolved.className)
+    }
+    normalized ??= [...compoundVariants]
+    normalized[i] = resolved
+  }
+  return normalized ?? compoundVariants
+}
+
+/**
+ * Normalize the top-level class arrays `tv` drops on a slotted component (see
+ * {@link baseClasses}), both in the config and in the theme it extends, which is
+ * how `app.config.ui` reaches the component. A slotless component handles them
+ * fine and is returned untouched, as is any config without such an array. The
+ * incoming config is never mutated.
+ */
+function normalizeClassArrays(componentConfig: any): any {
+  if (!componentConfig || typeof componentConfig !== 'object') {
+    return componentConfig
+  }
+
+  const extend = componentConfig.extend && (typeof componentConfig.extend === 'object' || typeof componentConfig.extend === 'function')
+    ? componentConfig.extend
+    : undefined
+  // `tv` takes the slot path when the config or the theme it extends has slots.
+  if (!hasSlots(componentConfig.slots) && !hasSlots(extend?.slots)) {
+    return componentConfig
+  }
+
+  const extendVariants = normalizeVariants(extend?.variants, componentConfig.variants)
+  const extendCompoundVariants = normalizeCompoundVariants(extend?.compoundVariants)
+  const variants = normalizeVariants(componentConfig.variants, extendVariants)
+  const compoundVariants = normalizeCompoundVariants(componentConfig.compoundVariants)
+
+  const extendChanged = extendVariants !== extend?.variants || extendCompoundVariants !== extend?.compoundVariants
+  if (!extendChanged && variants === componentConfig.variants && compoundVariants === componentConfig.compoundVariants) {
+    return componentConfig
+  }
+
+  const resolved = { ...componentConfig }
+  if (variants !== componentConfig.variants) {
+    resolved.variants = variants
+  }
+  if (compoundVariants !== componentConfig.compoundVariants) {
+    resolved.compoundVariants = compoundVariants
+  }
+  if (extendChanged) {
+    resolved.extend = { ...extend, variants: extendVariants, compoundVariants: extendCompoundVariants }
+  }
+  return resolved
+}
+
 /**
  * Built components keyed by the `extend` theme object, then by the serialized
  * rest of the config, so a changed `app.config` or a reloaded theme rebuilds.
@@ -344,7 +459,7 @@ function componentCacheKey(componentConfig: any): string | undefined {
 }
 
 function createComponent(componentConfig?: any) {
-  const component = baseTv(resolveReplacers(componentConfig))
+  const component = baseTv(normalizeClassArrays(resolveReplacers(componentConfig)))
 
   return new Proxy(component, {
     apply(target, thisArg, args) {

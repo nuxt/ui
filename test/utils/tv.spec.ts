@@ -374,3 +374,50 @@ describe('tv factory memoization', () => {
     expect(tvt({ extend: theme, variants: Object.create({ color: { primary: { base: 'p-4' } } }) })().base()).toContain('p-4')
   })
 })
+
+describe('tv top-level class arrays', () => {
+  const tvBase = tv as unknown as (config?: any) => (props?: any) => string
+
+  it('applies a compound variant array to the base slot', () => {
+    expect(tvt({ slots: { base: 'a' }, variants: { color: { neutral: '' } }, compoundVariants: [{ color: 'neutral', class: ['b', 'c'] }] })({ color: 'neutral' }).base()).toBe('a b c')
+  })
+
+  it('applies a variant value array to the base slot', () => {
+    expect(tvt({ slots: { base: 'a' }, variants: { color: { neutral: ['b', 'c'] } } })({ color: 'neutral' }).base()).toBe('a b c')
+  })
+
+  it('keeps an array inside a compound variant slot map working', () => {
+    expect(tvt({ slots: { base: 'a' }, variants: { color: { neutral: '' } }, compoundVariants: [{ color: 'neutral', class: { base: ['b', 'c'] } }] })({ color: 'neutral' }).base()).toBe('a b c')
+  })
+
+  it('keeps a compound variant array working on a slotless component', () => {
+    expect(tvBase({ base: 'a', variants: { color: { neutral: '' } }, compoundVariants: [{ color: 'neutral', class: ['b', 'c'] }] })({ color: 'neutral' })).toBe('a b c')
+  })
+
+  describe('through `extend`', () => {
+    const theme = {
+      slots: { base: 'a', label: 'l' },
+      variants: {
+        color: { neutral: '' },
+        size: { md: { base: 'p-2', label: 'text-sm' } }
+      }
+    }
+
+    it('applies an override compound variant array to the base slot', () => {
+      const ui = tvt({ extend: theme, compoundVariants: [{ color: 'neutral', class: ['b', 'c'] }] })({ color: 'neutral' })
+      expect(ui.base()).toBe('a b c')
+      expect(ui.label()).toBe('l')
+    })
+
+    it('merges an override variant array with the theme value', () => {
+      const ui = tvt({ extend: theme, variants: { color: { neutral: ['b', 'c'] }, size: { md: ['d'] } } })({ color: 'neutral', size: 'md' })
+      expect(ui.base()).toBe('a b c p-2 d')
+      expect(ui.label()).toBe('l text-sm')
+    })
+
+    it('composes with a construction-time replacer', () => {
+      const ui = tvt({ extend: theme, slots: { base: () => 'x' }, compoundVariants: [{ color: 'neutral', class: ['b'] }] })({ color: 'neutral' })
+      expect(ui.base()).toBe('x b')
+    })
+  })
+})
