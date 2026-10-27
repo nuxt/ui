@@ -14,7 +14,7 @@ By the end of this tutorial, you'll have an admin dashboard with:
 - **A home page** with stats, a revenue chart and a date range picker
 - **A customers table** with sorting, filtering, pagination, row selection and row actions
 - **Modals** to add and delete customers, with a form validated by [Zod](https://zod.dev)
-- **An inbox** with two resizable panels that turns into a slideover on mobile
+- **An inbox** with a resizable list of mails, where the selected mail opens in a slideover on mobile
 - **Notifications** in a slideover and **keyboard shortcuts** to move around
 - **Settings pages** with forms, switches and a list of members
 
@@ -206,7 +206,7 @@ The [`resizable`](/docs/components/dashboard-sidebar#resizable) prop lets you dr
 
 The slots of `UDashboardSidebar` expose a `collapsed` boolean. Passed to [`UNavigationMenu`](/docs/components/navigation-menu), it hides the labels and shows them in a tooltip instead, while `popover` displays the children of the `Settings` item in a popover. The `trigger` type makes `Settings` expand its children instead of navigating.
 
-The links to the other pages lead to a 404 for now, they're created in the next sections.
+The links to the other pages lead to a 404 for now. They're created in the next sections.
 
 Then wrap the pages with `NuxtLayout`:
 
@@ -222,7 +222,7 @@ Then wrap the pages with `NuxtLayout`:
 ```
 ::
 
-### Creating the home page
+### Creating the first panel
 
 Every page renders a `UDashboardPanel`. Its `header` slot stays at the top while its `body` slot scrolls:
 
@@ -432,113 +432,16 @@ const items = computed<DropdownMenuItem[][]>(() => ([[{
 
 Both menus receive the `collapsed` state to only show an avatar when the sidebar is collapsed. Otherwise the `w-(--reka-dropdown-menu-trigger-width)` class makes the menu as wide as the button. Calling `e.preventDefault()` in `onSelect` keeps the menu open when you switch the color mode.
 
-Add them to the `header` and `footer` slots of the sidebar:
-
-::code-tree-intersection
-:::code-collapse
-
-```vue [app/layouts/default.vue] {57,59-61,81-83}
-<script setup lang="ts">
-import type { NavigationMenuItem } from '@nuxt/ui'
-
-const links = [[{
-  label: 'Home',
-  icon: 'i-lucide-house',
-  to: '/'
-}, {
-  label: 'Inbox',
-  icon: 'i-lucide-inbox',
-  to: '/inbox',
-  badge: '4'
-}, {
-  label: 'Customers',
-  icon: 'i-lucide-users',
-  to: '/customers'
-}, {
-  label: 'Settings',
-  to: '/settings',
-  icon: 'i-lucide-settings',
-  defaultOpen: true,
-  type: 'trigger',
-  children: [{
-    label: 'General',
-    to: '/settings',
-    exact: true
-  }, {
-    label: 'Members',
-    to: '/settings/members'
-  }, {
-    label: 'Notifications',
-    to: '/settings/notifications'
-  }, {
-    label: 'Security',
-    to: '/settings/security'
-  }]
-}], [{
-  label: 'Feedback',
-  icon: 'i-lucide-message-circle',
-  to: 'https://github.com/nuxt-ui-templates/dashboard',
-  target: '_blank'
-}, {
-  label: 'Help & Support',
-  icon: 'i-lucide-info',
-  to: 'https://github.com/nuxt-ui-templates/dashboard',
-  target: '_blank'
-}]] satisfies NavigationMenuItem[][]
-</script>
-
-<template>
-  <UDashboardGroup unit="rem">
-    <UDashboardSidebar
-      id="default"
-      collapsible
-      resizable
-      class="bg-elevated/25"
-      :ui="{ footer: 'lg:border-t lg:border-default' }"
-    >
-      <template #header="{ collapsed }">
-        <TeamsMenu :collapsed="collapsed" />
-      </template>
-
-      <template #default="{ collapsed }">
-        <UNavigationMenu
-          :collapsed="collapsed"
-          :items="links[0]"
-          orientation="vertical"
-          tooltip
-          popover
-        />
-
-        <UNavigationMenu
-          :collapsed="collapsed"
-          :items="links[1]"
-          orientation="vertical"
-          tooltip
-          class="mt-auto"
-        />
-      </template>
-
-      <template #footer="{ collapsed }">
-        <UserMenu :collapsed="collapsed" />
-      </template>
-    </UDashboardSidebar>
-
-    <slot />
-  </UDashboardGroup>
-</template>
-```
-
-:::
-::
-
 ### Adding the search
 
-The [`UDashboardSearch`](/docs/components/dashboard-search) component is a [`UCommandPalette`](/docs/components/command-palette) in a modal. It opens with :kbd{value="meta"} :kbd{value="k" class="ms-px"} or with the [`UDashboardSearchButton`](/docs/components/dashboard-search-button) component. Give it the links of the sidebar as a group:
+The [`UDashboardSearch`](/docs/components/dashboard-search) component is a [`UCommandPalette`](/docs/components/command-palette) in a modal. It opens with :kbd{value="meta"} :kbd{value="k" class="ms-px"} or with the [`UDashboardSearchButton`](/docs/components/dashboard-search-button) component.
+
+Add the menus to the `header` and `footer` slots of the sidebar, and the search with the links of the sidebar as a group:
 
 ::code-tree-intersection
 :::code-collapse
 
-```vue [app/layouts/default.vue] {49-53,70,94}
+```vue [app/layouts/default.vue] {49-53,63,65-67,70,89-91,94}
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
 
@@ -650,7 +553,7 @@ The search also adds a group to switch the color mode. Set the `color-mode` prop
 
 The home page has a toolbar with a date range picker and a period select. The stats, the chart and the table below all follow the selected range and period.
 
-### Installing the dependencies
+### Installing the chart dependencies
 
 ::code-group{sync="pm"}
 ```bash [pnpm]
@@ -674,15 +577,38 @@ The [`UChart`](/docs/components/chart) component is built on [TanStack Charts](h
 
 ### Defining the types
 
-Declare the types shared by the components:
+Declare the types used across the dashboard:
 
 ::code-tree-intersection
 ```ts [app/types/index.d.ts]
-export type Period = 'daily' | 'weekly' | 'monthly'
+import type { AvatarProps } from '@nuxt/ui'
 
-export interface Range {
-  start: Date
-  end: Date
+export type UserStatus = 'subscribed' | 'unsubscribed' | 'bounced'
+export type SaleStatus = 'paid' | 'failed' | 'refunded'
+
+export interface User {
+  id: number
+  name: string
+  email: string
+  avatar?: AvatarProps
+  status: UserStatus
+  location: string
+}
+
+export interface Mail {
+  id: number
+  unread?: boolean
+  from: User
+  subject: string
+  body: string
+  date: string
+}
+
+export interface Member {
+  name: string
+  username: string
+  role: 'member' | 'owner'
+  avatar: AvatarProps
 }
 
 export interface Stat {
@@ -693,14 +619,27 @@ export interface Stat {
   formatter?: (value: number) => string
 }
 
-export type SaleStatus = 'paid' | 'failed' | 'refunded'
-
 export interface Sale {
   id: string
   date: string
   status: SaleStatus
   email: string
   amount: number
+}
+
+export interface Notification {
+  id: number
+  unread?: boolean
+  sender: User
+  body: string
+  date: string
+}
+
+export type Period = 'daily' | 'weekly' | 'monthly'
+
+export interface Range {
+  start: Date
+  end: Date
 }
 ```
 ::
@@ -722,6 +661,8 @@ export function randomFrom<T>(array: T[]): T {
 Nuxt auto-imports the functions exported from `app/utils`.
 
 ### Picking a date range
+
+Nuxt prefixes components with the name of their directory, without doubling it. So `app/components/home/HomeStats.vue` becomes `HomeStats`, and `app/components/customers/AddModal.vue` becomes `CustomersAddModal`.
 
 The date range picker opens a [`UPopover`](/docs/components/popover) with a list of preset ranges and a [`UCalendar`](/docs/components/calendar) that shows two months:
 
@@ -868,7 +809,7 @@ const selectRange = (range: { days?: number, months?: number, years?: number }) 
 
 The model holds native `Date` objects, while `UCalendar` works with `CalendarDate` objects. The `calendarRange` computed converts between both. The presets are hidden on mobile to leave room for the calendar.
 
-The period select only offers the periods that make sense for the selected range, and falls back to the first one when the range changes:
+The period select only offers the periods that make sense for the selected range, and falls back to the first one when the selected period is no longer available:
 
 ::code-tree-intersection
 ```vue [app/components/home/HomePeriodSelect.vue]
@@ -1139,7 +1080,6 @@ The last sales are displayed in a [`UTable`](/docs/components/table). The `cell`
 
 ```vue [app/components/home/HomeSales.vue]
 <script setup lang="ts">
-import { h, resolveComponent } from 'vue'
 import type { TableColumn } from '@nuxt/ui'
 import type { Period, Range, Sale } from '~/types'
 
@@ -1227,7 +1167,7 @@ const columns: TableColumn<Sale>[] = [
 
       const formatted = new Intl.NumberFormat('en-US', {
         style: 'currency',
-        currency: 'EUR'
+        currency: 'USD'
       }).format(amount)
 
       return h('div', { class: 'text-right font-medium' }, formatted)
@@ -1329,7 +1269,7 @@ The range is a `shallowRef` since the date range picker always replaces it with 
 
 The customers page lists the customers in a [`UTable`](/docs/components/table) with sorting, filtering, pagination and row selection, all handled by [TanStack Table](https://tanstack.com/table/v8).
 
-### Installing the dependencies
+### Installing the table dependencies
 
 ::code-group{sync="pm"}
 ```bash [pnpm]
@@ -1351,53 +1291,9 @@ bun add @tanstack/table-core scule zod
 
 `@tanstack/table-core` provides the pagination row model and the `Row` type, `scule` formats the column names and `zod` validates the form to add a customer.
 
-### Creating the API route
+### Creating the customers API route
 
-Add a `User` type for the customers:
-
-::code-tree-intersection
-```ts [app/types/index.d.ts] {1,28,30-37}
-import type { AvatarProps } from '@nuxt/ui'
-
-export type Period = 'daily' | 'weekly' | 'monthly'
-
-export interface Range {
-  start: Date
-  end: Date
-}
-
-export interface Stat {
-  title: string
-  icon: string
-  value: number | string
-  variation: number
-  formatter?: (value: number) => string
-}
-
-export type SaleStatus = 'paid' | 'failed' | 'refunded'
-
-export interface Sale {
-  id: string
-  date: string
-  status: SaleStatus
-  email: string
-  amount: number
-}
-
-export type UserStatus = 'subscribed' | 'unsubscribed' | 'bounced'
-
-export interface User {
-  id: number
-  name: string
-  email: string
-  avatar?: AvatarProps
-  status: UserStatus
-  location: string
-}
-```
-::
-
-Then create a server route that returns them:
+Create a server route that returns the customers:
 
 ::code-tree-intersection
 :::code-collapse
@@ -1514,78 +1410,6 @@ const customers: User[] = [{
   },
   status: 'unsubscribed',
   location: 'Sydney, Australia'
-}, {
-  id: 13,
-  name: 'Jamie Jackson',
-  email: 'jamie.jackson@example.com',
-  avatar: {
-    src: 'https://i.pravatar.cc/128?u=13'
-  },
-  status: 'unsubscribed',
-  location: 'New York, USA'
-}, {
-  id: 14,
-  name: 'Riley White',
-  email: 'riley.white@example.com',
-  avatar: {
-    src: 'https://i.pravatar.cc/128?u=14'
-  },
-  status: 'unsubscribed',
-  location: 'London, UK'
-}, {
-  id: 15,
-  name: 'Kelly Harris',
-  email: 'kelly.harris@example.com',
-  avatar: {
-    src: 'https://i.pravatar.cc/128?u=15'
-  },
-  status: 'subscribed',
-  location: 'Paris, France'
-}, {
-  id: 16,
-  name: 'Drew Martin',
-  email: 'drew.martin@example.com',
-  avatar: {
-    src: 'https://i.pravatar.cc/128?u=16'
-  },
-  status: 'subscribed',
-  location: 'Berlin, Germany'
-}, {
-  id: 17,
-  name: 'Alex Thompson',
-  email: 'alex.thompson@example.com',
-  avatar: {
-    src: 'https://i.pravatar.cc/128?u=17'
-  },
-  status: 'unsubscribed',
-  location: 'Tokyo, Japan'
-}, {
-  id: 18,
-  name: 'Jordan Garcia',
-  email: 'jordan.garcia@example.com',
-  avatar: {
-    src: 'https://i.pravatar.cc/128?u=18'
-  },
-  status: 'subscribed',
-  location: 'Sydney, Australia'
-}, {
-  id: 19,
-  name: 'Taylor Rodriguez',
-  email: 'taylor.rodriguez@example.com',
-  avatar: {
-    src: 'https://i.pravatar.cc/128?u=19'
-  },
-  status: 'bounced',
-  location: 'New York, USA'
-}, {
-  id: 20,
-  name: 'Morgan Lopez',
-  email: 'morgan.lopez@example.com',
-  avatar: {
-    src: 'https://i.pravatar.cc/128?u=20'
-  },
-  status: 'subscribed',
-  location: 'London, UK'
 }]
 
 export default defineEventHandler(async () => {
@@ -1596,581 +1420,7 @@ export default defineEventHandler(async () => {
 :::
 ::
 
-### Displaying the customers
-
-Fetch the customers and define the columns of the table:
-
-::code-tree-intersection
-:::code-collapse
-
-```vue [app/pages/customers.vue]
-<script setup lang="ts">
-import type { TableColumn } from '@nuxt/ui'
-import type { Row } from '@tanstack/table-core'
-import type { User } from '~/types'
-
-const UAvatar = resolveComponent('UAvatar')
-const UButton = resolveComponent('UButton')
-const UBadge = resolveComponent('UBadge')
-const UDropdownMenu = resolveComponent('UDropdownMenu')
-const UCheckbox = resolveComponent('UCheckbox')
-
-const toast = useToast()
-
-const rowSelection = ref({})
-
-const { data, status } = await useFetch<User[]>('/api/customers', {
-  lazy: true
-})
-
-function getRowItems(row: Row<User>) {
-  return [
-    {
-      type: 'label',
-      label: 'Actions'
-    },
-    {
-      label: 'Copy customer ID',
-      icon: 'i-lucide-copy',
-      onSelect() {
-        navigator.clipboard.writeText(row.original.id.toString())
-        toast.add({
-          title: 'Copied to clipboard',
-          description: 'Customer ID copied to clipboard'
-        })
-      }
-    },
-    {
-      type: 'separator'
-    },
-    {
-      label: 'View customer details',
-      icon: 'i-lucide-list'
-    },
-    {
-      label: 'View customer payments',
-      icon: 'i-lucide-wallet'
-    },
-    {
-      type: 'separator'
-    },
-    {
-      label: 'Delete customer',
-      icon: 'i-lucide-trash',
-      color: 'error',
-      onSelect() {
-        toast.add({
-          title: 'Customer deleted',
-          description: 'The customer has been deleted.'
-        })
-      }
-    }
-  ]
-}
-
-const columns: TableColumn<User>[] = [
-  {
-    id: 'select',
-    header: ({ table }) =>
-      h(UCheckbox, {
-        'modelValue': table.getIsSomePageRowsSelected()
-          ? 'indeterminate'
-          : table.getIsAllPageRowsSelected(),
-        'onUpdate:modelValue': (value: boolean | 'indeterminate') =>
-          table.toggleAllPageRowsSelected(!!value),
-        'ariaLabel': 'Select all'
-      }),
-    cell: ({ row }) =>
-      h(UCheckbox, {
-        'modelValue': row.getIsSelected(),
-        'onUpdate:modelValue': (value: boolean | 'indeterminate') => row.toggleSelected(!!value),
-        'ariaLabel': 'Select row'
-      })
-  },
-  {
-    accessorKey: 'id',
-    header: 'ID'
-  },
-  {
-    accessorKey: 'name',
-    header: 'Name',
-    cell: ({ row }) => {
-      return h('div', { class: 'flex items-center gap-3' }, [
-        h(UAvatar, {
-          ...row.original.avatar,
-          size: 'lg'
-        }),
-        h('div', undefined, [
-          h('p', { class: 'font-medium text-highlighted' }, row.original.name),
-          h('p', undefined, `@${row.original.name}`)
-        ])
-      ])
-    }
-  },
-  {
-    accessorKey: 'email',
-    header: ({ column }) => {
-      const isSorted = column.getIsSorted()
-
-      return h(UButton, {
-        color: 'neutral',
-        variant: 'ghost',
-        label: 'Email',
-        icon: isSorted
-          ? isSorted === 'asc'
-            ? 'i-lucide-arrow-up-narrow-wide'
-            : 'i-lucide-arrow-down-wide-narrow'
-          : 'i-lucide-arrow-up-down',
-        class: '-mx-2.5',
-        onClick: () => column.toggleSorting(column.getIsSorted() === 'asc')
-      })
-    }
-  },
-  {
-    accessorKey: 'location',
-    header: 'Location',
-    cell: ({ row }) => row.original.location
-  },
-  {
-    accessorKey: 'status',
-    header: 'Status',
-    filterFn: 'equals',
-    cell: ({ row }) => {
-      const color = {
-        subscribed: 'success' as const,
-        unsubscribed: 'error' as const,
-        bounced: 'warning' as const
-      }[row.original.status]
-
-      return h(UBadge, { class: 'capitalize', variant: 'subtle', color }, () =>
-        row.original.status
-      )
-    }
-  },
-  {
-    id: 'actions',
-    cell: ({ row }) => {
-      return h(
-        'div',
-        { class: 'text-right' },
-        h(
-          UDropdownMenu,
-          {
-            content: {
-              align: 'end'
-            },
-            items: getRowItems(row)
-          },
-          () =>
-            h(UButton, {
-              icon: 'i-lucide-ellipsis-vertical',
-              color: 'neutral',
-              variant: 'ghost',
-              class: 'ml-auto'
-            })
-        )
-      )
-    }
-  }
-]
-</script>
-
-<template>
-  <UDashboardPanel id="customers">
-    <template #header>
-      <UDashboardNavbar title="Customers">
-        <template #leading>
-          <UDashboardSidebarCollapse />
-        </template>
-      </UDashboardNavbar>
-    </template>
-
-    <template #body>
-      <UTable
-        v-model:row-selection="rowSelection"
-        class="shrink-0"
-        :data="data"
-        :columns="columns"
-        :loading="status === 'pending'"
-        :ui="{
-          base: 'table-fixed border-separate border-spacing-0',
-          thead: '[&>tr]:bg-elevated/50 [&>tr]:after:content-none',
-          tbody: '[&>tr]:last:[&>td]:border-b-0',
-          th: 'py-2 first:rounded-l-lg last:rounded-r-lg border-y border-default first:border-l last:border-r',
-          td: 'border-b border-default',
-          separator: 'h-0'
-        }"
-      />
-    </template>
-  </UDashboardPanel>
-</template>
-```
-
-:::
-::
-
-Here's what each column does:
-
-**The `select` column**
-
-The [`UCheckbox`](/docs/components/checkbox) components select a row or all the rows of the page. The selection is bound to `rowSelection` with `v-model:row-selection`.
-
-**The `email` column**
-
-Its header is a button that toggles the sorting of the column, with an icon for each direction.
-
-**The `status` column**
-
-The `equals` filter function only keeps the rows with the exact status. It's used by the status filter in the next step.
-
-**The `actions` column**
-
-Each row gets a dropdown menu of actions, built by the `getRowItems` function. Copying the ID writes to the clipboard and shows a toast with [`useToast`](/docs/composables/use-toast).
-
-With `lazy: true`, `useFetch` doesn't block the navigation, and the table shows a loading state with the `loading` prop until the data arrives.
-
-::note{to="/docs/components/table#with-row-actions"}
-The Table documentation has an example for each of these features, like row actions, row selection and column sorting.
-::
-
-### Filtering and paginating
-
-The table exposes the TanStack Table instance as `tableApi`. Read it from a template ref to filter the rows, hide columns and change the page:
-
-::code-tree-intersection
-:::code-collapse
-
-```vue [app/pages/customers.vue] {3-4,15,17-21,179,181-182,184-185,187-192,194-201,203-206,220-226,228-268,271-273,275-278,293-297,299-307}
-<script setup lang="ts">
-import type { TableColumn } from '@nuxt/ui'
-import { upperFirst } from 'scule'
-import { getPaginationRowModel } from '@tanstack/table-core'
-import type { Row } from '@tanstack/table-core'
-import type { User } from '~/types'
-
-const UAvatar = resolveComponent('UAvatar')
-const UButton = resolveComponent('UButton')
-const UBadge = resolveComponent('UBadge')
-const UDropdownMenu = resolveComponent('UDropdownMenu')
-const UCheckbox = resolveComponent('UCheckbox')
-
-const toast = useToast()
-const table = useTemplateRef('table')
-
-const columnFilters = ref([{
-  id: 'email',
-  value: ''
-}])
-const columnVisibility = ref()
-const rowSelection = ref({})
-
-const { data, status } = await useFetch<User[]>('/api/customers', {
-  lazy: true
-})
-
-function getRowItems(row: Row<User>) {
-  return [
-    {
-      type: 'label',
-      label: 'Actions'
-    },
-    {
-      label: 'Copy customer ID',
-      icon: 'i-lucide-copy',
-      onSelect() {
-        navigator.clipboard.writeText(row.original.id.toString())
-        toast.add({
-          title: 'Copied to clipboard',
-          description: 'Customer ID copied to clipboard'
-        })
-      }
-    },
-    {
-      type: 'separator'
-    },
-    {
-      label: 'View customer details',
-      icon: 'i-lucide-list'
-    },
-    {
-      label: 'View customer payments',
-      icon: 'i-lucide-wallet'
-    },
-    {
-      type: 'separator'
-    },
-    {
-      label: 'Delete customer',
-      icon: 'i-lucide-trash',
-      color: 'error',
-      onSelect() {
-        toast.add({
-          title: 'Customer deleted',
-          description: 'The customer has been deleted.'
-        })
-      }
-    }
-  ]
-}
-
-const columns: TableColumn<User>[] = [
-  {
-    id: 'select',
-    header: ({ table }) =>
-      h(UCheckbox, {
-        'modelValue': table.getIsSomePageRowsSelected()
-          ? 'indeterminate'
-          : table.getIsAllPageRowsSelected(),
-        'onUpdate:modelValue': (value: boolean | 'indeterminate') =>
-          table.toggleAllPageRowsSelected(!!value),
-        'ariaLabel': 'Select all'
-      }),
-    cell: ({ row }) =>
-      h(UCheckbox, {
-        'modelValue': row.getIsSelected(),
-        'onUpdate:modelValue': (value: boolean | 'indeterminate') => row.toggleSelected(!!value),
-        'ariaLabel': 'Select row'
-      })
-  },
-  {
-    accessorKey: 'id',
-    header: 'ID'
-  },
-  {
-    accessorKey: 'name',
-    header: 'Name',
-    cell: ({ row }) => {
-      return h('div', { class: 'flex items-center gap-3' }, [
-        h(UAvatar, {
-          ...row.original.avatar,
-          size: 'lg'
-        }),
-        h('div', undefined, [
-          h('p', { class: 'font-medium text-highlighted' }, row.original.name),
-          h('p', undefined, `@${row.original.name}`)
-        ])
-      ])
-    }
-  },
-  {
-    accessorKey: 'email',
-    header: ({ column }) => {
-      const isSorted = column.getIsSorted()
-
-      return h(UButton, {
-        color: 'neutral',
-        variant: 'ghost',
-        label: 'Email',
-        icon: isSorted
-          ? isSorted === 'asc'
-            ? 'i-lucide-arrow-up-narrow-wide'
-            : 'i-lucide-arrow-down-wide-narrow'
-          : 'i-lucide-arrow-up-down',
-        class: '-mx-2.5',
-        onClick: () => column.toggleSorting(column.getIsSorted() === 'asc')
-      })
-    }
-  },
-  {
-    accessorKey: 'location',
-    header: 'Location',
-    cell: ({ row }) => row.original.location
-  },
-  {
-    accessorKey: 'status',
-    header: 'Status',
-    filterFn: 'equals',
-    cell: ({ row }) => {
-      const color = {
-        subscribed: 'success' as const,
-        unsubscribed: 'error' as const,
-        bounced: 'warning' as const
-      }[row.original.status]
-
-      return h(UBadge, { class: 'capitalize', variant: 'subtle', color }, () =>
-        row.original.status
-      )
-    }
-  },
-  {
-    id: 'actions',
-    cell: ({ row }) => {
-      return h(
-        'div',
-        { class: 'text-right' },
-        h(
-          UDropdownMenu,
-          {
-            content: {
-              align: 'end'
-            },
-            items: getRowItems(row)
-          },
-          () =>
-            h(UButton, {
-              icon: 'i-lucide-ellipsis-vertical',
-              color: 'neutral',
-              variant: 'ghost',
-              class: 'ml-auto'
-            })
-        )
-      )
-    }
-  }
-]
-
-const statusFilter = ref('all')
-
-watch(() => statusFilter.value, (newVal) => {
-  if (!table?.value?.tableApi) return
-
-  const statusColumn = table.value.tableApi.getColumn('status')
-  if (!statusColumn) return
-
-  if (newVal === 'all') {
-    statusColumn.setFilterValue(undefined)
-  } else {
-    statusColumn.setFilterValue(newVal)
-  }
-})
-
-const email = computed({
-  get: (): string => {
-    return (table.value?.tableApi?.getColumn('email')?.getFilterValue() as string) || ''
-  },
-  set: (value: string) => {
-    table.value?.tableApi?.getColumn('email')?.setFilterValue(value || undefined)
-  }
-})
-
-const pagination = ref({
-  pageIndex: 0,
-  pageSize: 10
-})
-</script>
-
-<template>
-  <UDashboardPanel id="customers">
-    <template #header>
-      <UDashboardNavbar title="Customers">
-        <template #leading>
-          <UDashboardSidebarCollapse />
-        </template>
-      </UDashboardNavbar>
-    </template>
-
-    <template #body>
-      <div class="flex flex-wrap items-center justify-between gap-1.5">
-        <UInput
-          v-model="email"
-          class="max-w-sm"
-          icon="i-lucide-search"
-          placeholder="Filter emails..."
-        />
-
-        <div class="flex flex-wrap items-center gap-1.5">
-          <USelect
-            v-model="statusFilter"
-            :items="[
-              { label: 'All', value: 'all' },
-              { label: 'Subscribed', value: 'subscribed' },
-              { label: 'Unsubscribed', value: 'unsubscribed' },
-              { label: 'Bounced', value: 'bounced' }
-            ]"
-            :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
-            placeholder="Filter status"
-            class="min-w-28"
-          />
-          <UDropdownMenu
-            :items="
-              table?.tableApi
-                ?.getAllColumns()
-                .filter((column: any) => column.getCanHide())
-                .map((column: any) => ({
-                  label: upperFirst(column.id),
-                  type: 'checkbox' as const,
-                  checked: column.getIsVisible(),
-                  onUpdateChecked(checked: boolean) {
-                    table?.tableApi?.getColumn(column.id)?.toggleVisibility(!!checked)
-                  },
-                  onSelect(e?: Event) {
-                    e?.preventDefault()
-                  }
-                }))
-            "
-            :content="{ align: 'end' }"
-          >
-            <UButton
-              label="Display"
-              color="neutral"
-              variant="outline"
-              trailing-icon="i-lucide-settings-2"
-            />
-          </UDropdownMenu>
-        </div>
-      </div>
-
-      <UTable
-        ref="table"
-        v-model:column-filters="columnFilters"
-        v-model:column-visibility="columnVisibility"
-        v-model:row-selection="rowSelection"
-        v-model:pagination="pagination"
-        :pagination-options="{
-          getPaginationRowModel: getPaginationRowModel()
-        }"
-        class="shrink-0"
-        :data="data"
-        :columns="columns"
-        :loading="status === 'pending'"
-        :ui="{
-          base: 'table-fixed border-separate border-spacing-0',
-          thead: '[&>tr]:bg-elevated/50 [&>tr]:after:content-none',
-          tbody: '[&>tr]:last:[&>td]:border-b-0',
-          th: 'py-2 first:rounded-l-lg last:rounded-r-lg border-y border-default first:border-l last:border-r',
-          td: 'border-b border-default',
-          separator: 'h-0'
-        }"
-      />
-
-      <div class="flex items-center justify-between gap-3 border-t border-default pt-4 mt-auto">
-        <div class="text-sm text-muted">
-          {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
-          {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
-        </div>
-
-        <div class="flex items-center gap-1.5">
-          <UPagination
-            :default-page="(table?.tableApi?.getState().pagination.pageIndex || 0) + 1"
-            :items-per-page="table?.tableApi?.getState().pagination.pageSize"
-            :total="table?.tableApi?.getFilteredRowModel().rows.length"
-            @update:page="(p: number) => table?.tableApi?.setPageIndex(p - 1)"
-          />
-        </div>
-      </div>
-    </template>
-  </UDashboardPanel>
-</template>
-```
-
-:::
-::
-
-Here's what's added:
-
-**The filters**
-
-The email input is bound to a computed that reads and writes the filter value of the `email` column. The status select sets the filter of the `status` column, or removes it for `All`.
-
-**The column visibility**
-
-The `Display` dropdown menu lists the columns that can be hidden as checkboxes. Calling `e.preventDefault()` keeps it open while you toggle them.
-
-**The pagination**
-
-Client side pagination needs the `getPaginationRowModel()` function in `pagination-options`. The [`UPagination`](/docs/components/pagination) component below the table changes the page through `tableApi`, which also gives the number of selected and filtered rows.
-
-### Adding and deleting customers
+### Creating the modals
 
 Create a [`UModal`](/docs/components/modal) with a [`UForm`](/docs/components/form) to add a customer. The button in the default slot opens the modal:
 
@@ -2184,7 +1434,7 @@ import type { FormSubmitEvent } from '@nuxt/ui'
 
 const schema = z.object({
   name: z.string().min(2, 'Too short'),
-  email: z.string().email('Invalid email')
+  email: z.email('Invalid email')
 })
 const open = ref(false)
 
@@ -2213,11 +1463,11 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         class="space-y-4"
         @submit="onSubmit"
       >
-        <UFormField label="Name" placeholder="John Doe" name="name">
-          <UInput v-model="state.name" class="w-full" />
+        <UFormField label="Name" name="name">
+          <UInput v-model="state.name" placeholder="John Doe" class="w-full" />
         </UFormField>
-        <UFormField label="Email" placeholder="john.doe@example.com" name="email">
-          <UInput v-model="state.email" class="w-full" />
+        <UFormField label="Email" name="email">
+          <UInput v-model="state.email" placeholder="john.doe@example.com" class="w-full" />
         </UFormField>
         <div class="flex justify-end gap-2">
           <UButton
@@ -2244,7 +1494,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
 The form validates the state against the Zod schema and only calls `onSubmit` when it's valid, with the parsed data in `event.data`.
 
-Then a confirmation modal to delete the selected customers:
+Then a confirmation modal to delete the selected customers. Its default slot receives the button that opens it:
 
 ::code-tree-intersection
 ```vue [app/components/customers/DeleteModal.vue]
@@ -2295,12 +1545,14 @@ async function onSubmit() {
 
 With `loading-auto`, the `Delete` button shows a loading icon until the promise returned by `onSubmit` resolves.
 
-Add the first modal to the navbar, and wrap a `Delete` button with the second one. The button only shows up when some rows are selected:
+### Displaying the customers
+
+Fetch the customers, define the columns of the table and add the filters, the pagination and the modals around it:
 
 ::code-tree-intersection
 :::code-collapse
 
-```vue [app/pages/customers.vue] {217-219,233-247}
+```vue [app/pages/customers.vue]
 <script setup lang="ts">
 import type { TableColumn } from '@nuxt/ui'
 import { upperFirst } from 'scule'
@@ -2636,7 +1888,47 @@ const pagination = ref({
 :::
 ::
 
-Nuxt names the components of `app/components/customers` with a `Customers` prefix, so `AddModal.vue` becomes `CustomersAddModal`.
+Here's what each column does:
+
+**The `select` column**
+
+The [`UCheckbox`](/docs/components/checkbox) components select a row or all the rows of the page. The selection is bound to `rowSelection` with `v-model:row-selection`.
+
+**The `email` column**
+
+Its header is a button that toggles the sorting of the column, with an icon for each direction.
+
+**The `status` column**
+
+The `equals` filter function only keeps the rows with the exact status picked in the status filter.
+
+**The `actions` column**
+
+Each row gets a dropdown menu of actions, built by the `getRowItems` function. Copying the ID writes to the clipboard and shows a toast with [`useToast`](/docs/composables/use-toast).
+
+The table exposes the TanStack Table instance as `tableApi`, read from the `table` template ref. The controls around the table use it:
+
+**The filters**
+
+The email input is bound to a computed that reads and writes the filter value of the `email` column. The status select sets the filter of the `status` column, or removes it for `All`.
+
+**The column visibility**
+
+The `Display` dropdown menu lists the columns that can be hidden as checkboxes. Calling `e.preventDefault()` keeps it open while you toggle them.
+
+**The pagination**
+
+Client side pagination needs the `getPaginationRowModel()` function in `pagination-options`. The [`UPagination`](/docs/components/pagination) component below the table changes the page through `tableApi`, which also gives the number of selected and filtered rows.
+
+**The modals**
+
+The add modal sits in the navbar. The delete modal wraps a `Delete` button that only shows up when some rows are selected, with their count in a [`UKbd`](/docs/components/kbd).
+
+With `lazy: true`, `useFetch` doesn't block the navigation, and the table shows a loading state with the `loading` prop until the data arrives.
+
+::note{to="/docs/components/table#with-row-actions"}
+The Table documentation has an example for each of these features, like row actions, row selection, column sorting and pagination.
+::
 
 ## Building the inbox
 
@@ -2679,62 +1971,9 @@ export default defineNuxtConfig({
 ```
 ::
 
-### Creating the API route
+### Creating the mails API route
 
-Add a `Mail` type:
-
-::code-tree-intersection
-```ts [app/types/index.d.ts] {39-46}
-import type { AvatarProps } from '@nuxt/ui'
-
-export type Period = 'daily' | 'weekly' | 'monthly'
-
-export interface Range {
-  start: Date
-  end: Date
-}
-
-export interface Stat {
-  title: string
-  icon: string
-  value: number | string
-  variation: number
-  formatter?: (value: number) => string
-}
-
-export type SaleStatus = 'paid' | 'failed' | 'refunded'
-
-export interface Sale {
-  id: string
-  date: string
-  status: SaleStatus
-  email: string
-  amount: number
-}
-
-export type UserStatus = 'subscribed' | 'unsubscribed' | 'bounced'
-
-export interface User {
-  id: number
-  name: string
-  email: string
-  avatar?: AvatarProps
-  status: UserStatus
-  location: string
-}
-
-export interface Mail {
-  id: number
-  unread?: boolean
-  from: User
-  subject: string
-  body: string
-  date: string
-}
-```
-::
-
-Then create a server route that returns the mails:
+Create a server route that returns the mails:
 
 ::code-tree-intersection
 :::code-collapse
@@ -3141,7 +2380,7 @@ function onSubmit() {
 
 This panel uses the default slot instead of `header` and `body`, so it lays out its content itself. Setting `toggle` to `false` on the navbar removes the button that opens the sidebar on mobile, since the close button takes its place.
 
-### Creating the page
+### Creating the inbox page
 
 Put both panels side by side in the inbox page:
 
@@ -3261,70 +2500,9 @@ Below the `lg` breakpoint, the mail opens in a [`USlideover`](/docs/components/s
 
 The notifications open in a slideover from a bell button on the home page, or with the :kbd{value="n"} key. A few more shortcuts navigate between the pages.
 
-### Creating the API route
+### Creating the notifications API route
 
-Add a `Notification` type:
-
-::code-tree-intersection
-```ts [app/types/index.d.ts] {48-54}
-import type { AvatarProps } from '@nuxt/ui'
-
-export type Period = 'daily' | 'weekly' | 'monthly'
-
-export interface Range {
-  start: Date
-  end: Date
-}
-
-export interface Stat {
-  title: string
-  icon: string
-  value: number | string
-  variation: number
-  formatter?: (value: number) => string
-}
-
-export type SaleStatus = 'paid' | 'failed' | 'refunded'
-
-export interface Sale {
-  id: string
-  date: string
-  status: SaleStatus
-  email: string
-  amount: number
-}
-
-export type UserStatus = 'subscribed' | 'unsubscribed' | 'bounced'
-
-export interface User {
-  id: number
-  name: string
-  email: string
-  avatar?: AvatarProps
-  status: UserStatus
-  location: string
-}
-
-export interface Mail {
-  id: number
-  unread?: boolean
-  from: User
-  subject: string
-  body: string
-  date: string
-}
-
-export interface Notification {
-  id: number
-  unread?: boolean
-  sender: User
-  body: string
-  date: string
-}
-```
-::
-
-Then create a server route that returns the notifications:
+Create a server route that returns the notifications:
 
 ::code-tree-intersection
 :::code-collapse
@@ -3528,118 +2706,16 @@ const { data: notifications } = await useFetch<Notification[]>('/api/notificatio
 :::
 ::
 
-Add it to the layout so it's available on every page:
+Add it at the end of the `UDashboardGroup` in `app/layouts/default.vue`, so it's available on every page:
 
-::code-tree-intersection
-:::code-collapse
-
-```vue [app/layouts/default.vue] {98}
-<script setup lang="ts">
-import type { NavigationMenuItem } from '@nuxt/ui'
-
-const links = [[{
-  label: 'Home',
-  icon: 'i-lucide-house',
-  to: '/'
-}, {
-  label: 'Inbox',
-  icon: 'i-lucide-inbox',
-  to: '/inbox',
-  badge: '4'
-}, {
-  label: 'Customers',
-  icon: 'i-lucide-users',
-  to: '/customers'
-}, {
-  label: 'Settings',
-  to: '/settings',
-  icon: 'i-lucide-settings',
-  defaultOpen: true,
-  type: 'trigger',
-  children: [{
-    label: 'General',
-    to: '/settings',
-    exact: true
-  }, {
-    label: 'Members',
-    to: '/settings/members'
-  }, {
-    label: 'Notifications',
-    to: '/settings/notifications'
-  }, {
-    label: 'Security',
-    to: '/settings/security'
-  }]
-}], [{
-  label: 'Feedback',
-  icon: 'i-lucide-message-circle',
-  to: 'https://github.com/nuxt-ui-templates/dashboard',
-  target: '_blank'
-}, {
-  label: 'Help & Support',
-  icon: 'i-lucide-info',
-  to: 'https://github.com/nuxt-ui-templates/dashboard',
-  target: '_blank'
-}]] satisfies NavigationMenuItem[][]
-
-const groups = [{
-  id: 'links',
-  label: 'Go to',
-  items: links.flat()
-}]
-</script>
-
-<template>
-  <UDashboardGroup unit="rem">
-    <UDashboardSidebar
-      id="default"
-      collapsible
-      resizable
-      class="bg-elevated/25"
-      :ui="{ footer: 'lg:border-t lg:border-default' }"
-    >
-      <template #header="{ collapsed }">
-        <TeamsMenu :collapsed="collapsed" />
-      </template>
-
-      <template #default="{ collapsed }">
-        <UDashboardSearchButton :collapsed="collapsed" class="bg-transparent ring-default" />
-
-        <UNavigationMenu
-          :collapsed="collapsed"
-          :items="links[0]"
-          orientation="vertical"
-          tooltip
-          popover
-        />
-
-        <UNavigationMenu
-          :collapsed="collapsed"
-          :items="links[1]"
-          orientation="vertical"
-          tooltip
-          class="mt-auto"
-        />
-      </template>
-
-      <template #footer="{ collapsed }">
-        <UserMenu :collapsed="collapsed" />
-      </template>
-    </UDashboardSidebar>
-
-    <UDashboardSearch :groups="groups" />
-
+```vue
     <slot />
 
     <NotificationsSlideover />
   </UDashboardGroup>
-</template>
 ```
 
-:::
-::
-
-Then add the bell button to the navbar of the home page. The `shortcuts` prop of [`UTooltip`](/docs/components/tooltip) displays the key next to its text:
+Then add the bell button to the navbar of the home page. The `kbds` prop of [`UTooltip`](/docs/components/tooltip) displays the key next to its text:
 
 ::code-tree-intersection
 :::code-collapse
@@ -3678,7 +2754,7 @@ const period = ref<Period>('daily')
         </template>
 
         <template #right>
-          <UTooltip text="Notifications" :shortcuts="['N']">
+          <UTooltip text="Notifications" :kbds="['n']">
             <UButton
               color="neutral"
               variant="ghost"
@@ -3766,7 +2842,6 @@ const links = [[{
       </UDashboardNavbar>
 
       <UDashboardToolbar>
-        <!-- NOTE: The `-mx-1` class is used to align with the `DashboardSidebarCollapse` button here. -->
         <UNavigationMenu :items="links" highlight class="-mx-1 flex-1" />
       </UDashboardToolbar>
     </template>
@@ -3799,7 +2874,7 @@ const fileRef = ref<HTMLInputElement>()
 
 const profileSchema = z.object({
   name: z.string().min(2, 'Too short'),
-  email: z.string().email('Invalid email'),
+  email: z.email('Invalid email'),
   username: z.string().min(2, 'Too short'),
   avatar: z.string().optional(),
   bio: z.string().optional()
@@ -3957,75 +3032,7 @@ The [`UPageCard`](/docs/components/page-card) with `variant="naked"` and `orient
 
 ### Listing the members
 
-Add a `Member` type:
-
-::code-tree-intersection
-```ts [app/types/index.d.ts] {48-53}
-import type { AvatarProps } from '@nuxt/ui'
-
-export type Period = 'daily' | 'weekly' | 'monthly'
-
-export interface Range {
-  start: Date
-  end: Date
-}
-
-export interface Stat {
-  title: string
-  icon: string
-  value: number | string
-  variation: number
-  formatter?: (value: number) => string
-}
-
-export type SaleStatus = 'paid' | 'failed' | 'refunded'
-
-export interface Sale {
-  id: string
-  date: string
-  status: SaleStatus
-  email: string
-  amount: number
-}
-
-export type UserStatus = 'subscribed' | 'unsubscribed' | 'bounced'
-
-export interface User {
-  id: number
-  name: string
-  email: string
-  avatar?: AvatarProps
-  status: UserStatus
-  location: string
-}
-
-export interface Mail {
-  id: number
-  unread?: boolean
-  from: User
-  subject: string
-  body: string
-  date: string
-}
-
-export interface Member {
-  name: string
-  username: string
-  role: 'member' | 'owner'
-  avatar: AvatarProps
-}
-
-export interface Notification {
-  id: number
-  unread?: boolean
-  sender: User
-  body: string
-  date: string
-}
-```
-::
-
-Then create a server route that returns the members:
+Create a server route that returns the members:
 
 ::code-tree-intersection
 :::code-collapse
@@ -4393,7 +3400,7 @@ The `validate` prop works alongside the `schema` prop, for checks that depend on
 
 ## Going further
 
-You now have a working admin dashboard! To take it further, consider adding:
+You now have a working admin dashboard. To take it further, consider adding:
 
 **A real backend**
 
@@ -4415,7 +3422,7 @@ Deploy your dashboard to Vercel with zero configuration:
 npx vercel deploy
 ```
 
-The server routes are deployed as Vercel Functions, no environment variable is needed.
+The server routes are deployed as Vercel Functions. No environment variable is needed.
 
 ## Conclusion
 
@@ -4434,5 +3441,3 @@ You've built an admin dashboard with:
 - [TanStack Table Documentation](https://tanstack.com/table/v8/docs)
 - [Nuxt Dashboard Template](https://github.com/nuxt-ui-templates/dashboard)
 - [Vue Dashboard Template](https://github.com/nuxt-ui-templates/dashboard-vue)
-
-We're excited to see what you'll build!
