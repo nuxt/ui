@@ -102,6 +102,16 @@ describe('ChatPrompt', () => {
       expect(wrapper.emitted('update:queue')).toBeUndefined()
     })
 
+    it('does not edit a message with files past the `multiple` limit', async () => {
+      const wrapper = await mountSuspended(ChatPrompt, {
+        props: { files: [new File(['a'], 'a.txt')], multiple: false, queue: [{ text: 'With a file', files: [new File(['b'], 'b.txt')] }] }
+      })
+
+      await wrapper.find('[data-slot="queueItemLabel"]').trigger('click')
+
+      expect(wrapper.emitted('update:queue')).toBeUndefined()
+    })
+
     it('removes the message', async () => {
       const { wrapper, item } = await mountQueue()
       await item.findAll('button').at(-1)!.trigger('click')

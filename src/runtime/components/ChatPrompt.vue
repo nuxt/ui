@@ -252,9 +252,9 @@ function takeQueued(index: number) {
 // Sending and editing wait like the textarea while the prompt is disabled or the chat errored
 const queueDisabled = computed(() => Boolean(props.error) || props.disabled)
 
-// Without `v-model:files`, a queued message with files can't go back to the prompt as a whole
+// Without `v-model:files`, or past the `multiple` limit, a queued message with files can't go back to the prompt as a whole
 function canEditQueued(item: ChatPromptQueueItem) {
-  return !queueDisabled.value && (!item.files?.length || files.value !== undefined)
+  return !queueDisabled.value && (!item.files?.length || (files.value !== undefined && (props.multiple || item.files.length + files.value.length <= 1)))
 }
 
 // Moves a queued message to the front, the app stops the current response and sends it
