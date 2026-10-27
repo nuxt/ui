@@ -45,7 +45,7 @@ export default defineLocale<Messages>({
     },
     chatPrompt: {
       placeholder: 'Tu napíšte svoje správu…',
-      queue: 'Správy v poradí',
+      queue: 'Správy vo fronte',
       sendNow: 'Odoslať teraz',
       edit: 'Upraviť',
       remove: 'Odstrániť'

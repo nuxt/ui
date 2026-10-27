@@ -44,7 +44,7 @@ export interface ChatPromptProps extends Pick<TextareaProps, 'rows' | 'autofocus
    */
   submitOnEnter?: boolean
   /**
-   * The status of the chat. Submitting is ignored while it is `submitted` or `streaming`.
+   * The status of the chat. Submitting while it is `submitted` or `streaming` is ignored, or queued with `v-model:queue`.
    */
   status?: ChatStatus
   error?: Error
@@ -215,7 +215,7 @@ function submit(e?: Event) {
       return
     }
 
-    queue.value = [...queue.value, { text: model.value, ...(files.value?.length ? { files: files.value } : {}) }]
+    queue.value = [...queue.value, { text: model.value, ...(files.value?.length ? { files: [...files.value] } : {}) }]
     model.value = ''
     if (files.value) {
       files.value = []
@@ -229,7 +229,7 @@ function submit(e?: Event) {
 const queueOpen = ref(true)
 const queueId = useId()
 
-// Rows are keyed by item, so focus follows a message moved to the front
+// Rows are keyed by item, the key also backs the label id the row actions are described by
 const queueKeys = new WeakMap<ChatPromptQueueItem, string>()
 let queueKeyCount = 0
 
@@ -272,6 +272,9 @@ function sendQueued(index: number) {
 
   queue.value = [item, ...current.filter((_, i) => i !== index)]
   emits('send', item)
+
+  // Moving or removing the row drops the focus of its buttons
+  textareaRef.value?.textareaRef?.focus()
 }
 
 // Puts a queued message back in the prompt, ahead of the current draft
@@ -285,7 +288,7 @@ function editQueued(index: number) {
     return
   }
 
-  model.value = model.value ? `${item.text}\n${model.value}` : item.text
+  model.value = [item.text, model.value].filter(Boolean).join('\n')
   if (item.files?.length && files.value) {
     files.value = [...item.files, ...files.value]
   }
@@ -294,6 +297,7 @@ function editQueued(index: number) {
 
 function removeQueued(index: number) {
   takeQueued(index)
+  textareaRef.value?.textareaRef?.focus()
 }
 
 function blur(e?: Event) {

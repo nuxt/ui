@@ -71,6 +71,15 @@ describe('ChatPrompt', () => {
       expect(wrapper.emitted('update:queue')?.[0]).toEqual([[queue[0]]])
     })
 
+    it('puts a message without text back in the prompt without a blank line', async () => {
+      const files = [new File(['a'], 'a.txt')]
+      const wrapper = await mountSuspended(ChatPrompt, { props: { modelValue: 'Draft', files: [], queue: [{ text: '', files }] } })
+      await wrapper.find('[data-slot="queueItemLabel"]').trigger('click')
+
+      expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+      expect(wrapper.emitted('update:files')?.[0]).toEqual([files])
+    })
+
     it('moves the message to the front with a bound `v-model:queue`', async () => {
       const model = ref([...queue])
       const Parent = defineComponent({
