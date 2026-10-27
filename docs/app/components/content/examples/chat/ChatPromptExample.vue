@@ -16,7 +16,7 @@ function onSubmit() {
 </script>
 
 <template>
-  <UChatPrompt v-model="input" class="w-full" @submit="onSubmit">
+  <UChatPrompt v-model="input" :autofocus="false" class="w-full" @submit="onSubmit">
     <template #footer>
       <UButton icon="i-lucide-plus" color="neutral" variant="ghost" size="sm" />
 

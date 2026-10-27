@@ -14,6 +14,7 @@ function onSubmit() {
     v-model:files="files"
     accept="image/*,application/pdf"
     placeholder="Paste or drop files here..."
+    :autofocus="false"
     class="w-full"
     @submit="onSubmit"
   >
