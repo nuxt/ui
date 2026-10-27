@@ -1186,14 +1186,14 @@ export default defineEventHandler(async (event) => {
       ? openai.tools.webSearch()
       : undefined
 
-  // Connect to the Nuxt UI MCP server to search its documentation
+  // Connect to the Nuxt UI MCP server to search its documentation, the chat works without it
   const mcpClient = await createMCPClient({
     transport: { type: 'http', url: 'https://ui.nuxt.com/mcp' }
-  })
-  const mcpTools = await mcpClient.tools().catch(async (error) => {
+  }).catch(() => undefined)
+  const mcpTools = await mcpClient?.tools().catch(async () => {
     await mcpClient.close()
-    throw error
-  })
+    return {}
+  }) ?? {}
 
   // Create the streaming response
   const stream = createUIMessageStream({
@@ -1262,7 +1262,7 @@ export default defineEventHandler(async (event) => {
     },
     onEnd: async ({ responseMessage }) => {
       // Called once the stream ends, whether it finished, failed or was stopped
-      await mcpClient.close()
+      await mcpClient?.close()
 
       // A response continued after an approval keeps its id, so update it in place
       await db.insert(schema.messages).values({
@@ -1292,7 +1292,7 @@ Anthropic and OpenAI provide a built-in web search tool ([Anthropic](https://ai-
 
 **MCP tools**
 
-[`createMCPClient`](https://ai-sdk.dev/docs/ai-sdk-core/mcp-tools) connects to a [Model Context Protocol](https://modelcontextprotocol.io) server and turns its tools into AI SDK tools. Here the [Nuxt UI MCP server](/docs/getting-started/ai/mcp) lets the model search the Nuxt UI documentation. The client is closed if listing its tools fails, and in the `onEnd` callback of `createUIMessageStream`, which runs once the stream ends, whether it finished, failed or was stopped.
+[`createMCPClient`](https://ai-sdk.dev/docs/ai-sdk-core/mcp-tools) connects to a [Model Context Protocol](https://modelcontextprotocol.io) server and turns its tools into AI SDK tools. Here the [Nuxt UI MCP server](/docs/getting-started/ai/mcp) lets the model search the Nuxt UI documentation. If the server can't be reached, the chat keeps working without its tools. The client is closed if listing its tools fails, and in the `onEnd` callback of `createUIMessageStream`, which runs once the stream ends, whether it finished, failed or was stopped.
 
 **Tool approval**
 
