@@ -45,30 +45,43 @@ async function onSubmit() {
     return
   }
 
-  await send(text, submitted)
+  await dispatch({ text, files: submitted })
 }
 
-async function send(text: string, submitted: File[] = []) {
-  const parts = await toFileUIParts(submitted)
-
-  // An empty text part is rejected by some providers, send the files alone
-  sendMessage(text.trim() ? { text, files: parts } : { files: parts })
-}
-
-// Reading queued files is async, the chat only turns busy once `sendMessage` runs
+// Reading files is async and the chat only turns busy once `sendMessage` runs,
+// so one message is dispatched at a time and clearing the chat drops it
 let sending = false
+let generation = 0
 
-async function sendNext() {
-  if (sending) return
-
-  const item = queue.value.shift()
-  if (!item) return
-
+async function dispatch(item: ChatPromptQueueItem) {
+  const current = generation
   sending = true
+
   try {
-    await send(item.text, item.files)
+    const parts = await toFileUIParts(item.files ?? [])
+    if (current !== generation) return
+
+    // An empty text part is rejected by some providers, send the files alone
+    sendMessage(item.text.trim() ? { text: item.text, files: parts } : { files: parts })
+  } catch (error) {
+    if (current === generation) {
+      queue.value.unshift(item)
+    }
+    toast.add({ description: (error as Error).message, icon: 'i-lucide-alert-circle', color: 'error' })
   } finally {
     sending = false
+  }
+}
+
+// A response waiting for a tool approval is `ready` too, a new message would leave the approval unanswered
+const awaitingApproval = computed(() => messages.value.at(-1)?.parts.some(part => isToolUIPart(part) && isToolApprovalPending(part)) ?? false)
+
+function sendNext() {
+  if (sending || awaitingApproval.value) return
+
+  const item = queue.value.shift()
+  if (item) {
+    dispatch(item)
   }
 }
 
@@ -90,6 +103,7 @@ function clearMessages() {
   if (status.value === 'streaming' || status.value === 'submitted') {
     stop()
   }
+  generation++
   messages.value = []
   queue.value = []
 }

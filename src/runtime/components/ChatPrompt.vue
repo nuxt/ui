@@ -97,7 +97,7 @@ export interface ChatPromptSlots extends TextareaSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, toRef, useId, useTemplateRef } from 'vue'
+import { computed, ref, toRaw, toRef, useId, useTemplateRef } from 'vue'
 import { Primitive } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -229,6 +229,20 @@ function submit(e?: Event) {
 const queueOpen = ref(true)
 const queueId = useId()
 
+// Rows are keyed by item, so focus follows a message moved to the front
+const queueKeys = new WeakMap<ChatPromptQueueItem, string>()
+let queueKeyCount = 0
+
+function getQueueKey(item: ChatPromptQueueItem) {
+  const raw = toRaw(item)
+  let key = queueKeys.get(raw)
+  if (!key) {
+    key = `${queueId}-${queueKeyCount++}`
+    queueKeys.set(raw, key)
+  }
+  return key
+}
+
 function takeQueued(index: number) {
   const item = queue.value?.[index]
   queue.value = queue.value?.filter((_, i) => i !== index)
@@ -347,10 +361,10 @@ defineExpose({
         </button>
 
         <ul v-show="queueOpen" :id="queueId" data-slot="queueList" :class="ui.queueList({ class: props.ui?.queueList })">
-          <li v-for="(item, index) in queue" :key="index" data-slot="queueItem" :class="ui.queueItem({ class: props.ui?.queueItem })">
+          <li v-for="(item, index) in queue" :key="getQueueKey(item)" data-slot="queueItem" :class="ui.queueItem({ class: props.ui?.queueItem })">
             <span data-slot="queueItemLeading" :class="ui.queueItemLeading({ class: props.ui?.queueItemLeading })" />
             <button
-              :id="`${queueId}-${index}`"
+              :id="getQueueKey(item)"
               type="button"
               :disabled="!canEditQueued(item)"
               :aria-description="t('chatPrompt.edit')"
@@ -369,7 +383,7 @@ defineExpose({
                 size="xs"
                 :disabled="queueDisabled"
                 :aria-label="t('chatPrompt.sendNow')"
-                :aria-describedby="`${queueId}-${index}`"
+                :aria-describedby="getQueueKey(item)"
                 @click="sendQueued(index)"
               />
               <UButton
@@ -378,7 +392,7 @@ defineExpose({
                 variant="ghost"
                 size="xs"
                 :aria-label="t('chatPrompt.remove')"
-                :aria-describedby="`${queueId}-${index}`"
+                :aria-describedby="getQueueKey(item)"
                 @click="removeQueued(index)"
               />
             </div>
