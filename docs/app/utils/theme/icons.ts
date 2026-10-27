@@ -26,6 +26,7 @@ export const themeIcons = {
     copyCheck: 'i-bi-clipboard-check',
     dark: 'i-bi-moon',
     drag: 'i-bi-grip-vertical',
+    edit: 'i-bi-pencil',
     ellipsis: 'i-bi-three-dots',
     error: 'i-bi-x-circle',
     external: 'i-bi-box-arrow-up-right',
@@ -50,6 +51,7 @@ export const themeIcons = {
     success: 'i-bi-check-circle',
     system: 'i-bi-display',
     tip: 'i-bi-lightbulb',
+    trash: 'i-bi-trash',
     upload: 'i-bi-upload',
     warning: 'i-bi-exclamation-triangle'
   },
@@ -71,6 +73,7 @@ export const themeIcons = {
     copyCheck: 'i-heroicons-clipboard-document-check',
     dark: 'i-heroicons-moon',
     drag: 'i-heroicons-bars-3',
+    edit: 'i-heroicons-pencil',
     ellipsis: 'i-heroicons-ellipsis-horizontal',
     error: 'i-heroicons-x-circle',
     external: 'i-heroicons-arrow-up-right',
@@ -95,6 +98,7 @@ export const themeIcons = {
     success: 'i-heroicons-check-circle',
     system: 'i-heroicons-computer-desktop',
     tip: 'i-heroicons-light-bulb',
+    trash: 'i-heroicons-trash',
     upload: 'i-heroicons-arrow-up-tray',
     warning: 'i-heroicons-exclamation-triangle'
   },
@@ -116,6 +120,7 @@ export const themeIcons = {
     copyCheck: 'i-iconoir-clipboard-check',
     dark: 'i-iconoir-half-moon',
     drag: 'i-iconoir-menu',
+    edit: 'i-iconoir-edit-pencil',
     ellipsis: 'i-iconoir-more-horiz',
     error: 'i-iconoir-xmark-circle',
     external: 'i-iconoir-arrow-up-right',
@@ -142,6 +147,7 @@ export const themeIcons = {
     success: 'i-iconoir-check-circle',
     system: 'i-iconoir-computer',
     tip: 'i-iconoir-light-bulb',
+    trash: 'i-iconoir-trash',
     upload: 'i-iconoir-upload',
     warning: 'i-iconoir-warning-triangle'
   },
@@ -163,6 +169,7 @@ export const themeIcons = {
     copyCheck: 'i-material-symbols-inventory-rounded',
     dark: 'i-material-symbols-dark-mode-outline-rounded',
     drag: 'i-material-symbols-drag-indicator',
+    edit: 'i-material-symbols-edit-outline-rounded',
     ellipsis: 'i-material-symbols-more-horiz',
     error: 'i-material-symbols-cancel-outline-rounded',
     external: 'i-material-symbols-arrow-outward-rounded',
@@ -189,6 +196,7 @@ export const themeIcons = {
     success: 'i-material-symbols-check-circle-outline-rounded',
     system: 'i-material-symbols-desktop-windows-outline-rounded',
     tip: 'i-material-symbols-lightbulb-outline-rounded',
+    trash: 'i-material-symbols-delete-outline-rounded',
     upload: 'i-material-symbols-upload-rounded',
     warning: 'i-material-symbols-warning-outline-rounded'
   },
@@ -210,6 +218,7 @@ export const themeIcons = {
     copyCheck: 'i-ph-check-circle',
     dark: 'i-ph-moon',
     drag: 'i-ph-dots-six-vertical',
+    edit: 'i-ph-pencil-simple',
     ellipsis: 'i-ph-dots-three',
     error: 'i-ph-x-circle',
     external: 'i-ph-arrow-up-right',
@@ -234,6 +243,7 @@ export const themeIcons = {
     success: 'i-ph-check-circle',
     system: 'i-ph-monitor',
     tip: 'i-ph-lightbulb',
+    trash: 'i-ph-trash',
     upload: 'i-ph-upload',
     warning: 'i-ph-warning'
   },
@@ -255,6 +265,7 @@ export const themeIcons = {
     copyCheck: 'i-ri-checkbox-multiple-line',
     dark: 'i-ri-moon-line',
     drag: 'i-ri-draggable',
+    edit: 'i-ri-pencil-line',
     ellipsis: 'i-ri-more-line',
     error: 'i-ri-close-circle-line',
     external: 'i-ri-external-link-line',
@@ -279,6 +290,7 @@ export const themeIcons = {
     success: 'i-ri-checkbox-circle-line',
     system: 'i-ri-computer-line',
     tip: 'i-ri-lightbulb-line',
+    trash: 'i-ri-delete-bin-line',
     upload: 'i-ri-upload-2-line',
     warning: 'i-ri-alert-line'
   },
@@ -300,6 +312,7 @@ export const themeIcons = {
     copyCheck: 'i-tabler-copy-check',
     dark: 'i-tabler-moon',
     drag: 'i-tabler-grip-vertical',
+    edit: 'i-tabler-pencil',
     ellipsis: 'i-tabler-dots',
     error: 'i-tabler-square-rounded-x',
     external: 'i-tabler-external-link',
@@ -324,6 +337,7 @@ export const themeIcons = {
     success: 'i-tabler-square-rounded-check',
     system: 'i-tabler-device-desktop',
     tip: 'i-tabler-bulb',
+    trash: 'i-tabler-trash',
     upload: 'i-tabler-upload',
     warning: 'i-tabler-alert-triangle'
   },
@@ -351,6 +365,7 @@ export const themeIcons = {
     dark: 'i-pixelarticons-moon',
     // No grip/drag handle, vertical dots read as a draggable affordance.
     drag: 'i-pixelarticons-more-vertical',
+    edit: 'i-pixelarticons-pencil',
     ellipsis: 'i-pixelarticons-more-horizontal',
     error: 'i-pixelarticons-letter-x-circle',
     external: 'i-pixelarticons-external-link',
@@ -377,6 +392,7 @@ export const themeIcons = {
     success: 'i-pixelarticons-check',
     system: 'i-pixelarticons-monitor',
     tip: 'i-pixelarticons-lightbulb',
+    trash: 'i-pixelarticons-trash',
     upload: 'i-pixelarticons-upload',
     warning: 'i-pixelarticons-warning-diamond'
   }

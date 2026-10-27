@@ -269,6 +269,22 @@ function askQuestion(question: string) {
 // `autofocus` only fires once. Refocus it each time the sidebar reopens.
 const promptRef = useTemplateRef('promptRef')
 
+// The queue floats over the end of the messages, they get its height as room
+// at the bottom so the last one never hides behind it.
+const queueRef = ref<HTMLElement | null>(null)
+const queueHeight = ref(0)
+
+function measureQueue() {
+  queueRef.value = promptRef.value?.$el?.querySelector('[data-slot="queue"]') ?? null
+  queueHeight.value = queueRef.value?.offsetHeight ?? 0
+}
+
+useResizeObserver(queueRef, measureQueue)
+// A resize observer reports after `UChatMessages` measures the room for a sent
+// message, so the row it removes from the queue is measured right after the
+// render or the scroll lands short.
+watch(() => queue.value.length, measureQueue, { flush: 'post' })
+
 watch(open, (value) => {
   if (value) {
     nextTick(() => {
@@ -322,8 +338,8 @@ function clearMessages() {
     title="Ask"
     rail
     breakpoint="xl"
-    :style="{ '--sidebar-width': '24rem' }"
-    :ui="{ footer: 'p-0', actions: 'gap-0.5' }"
+    :style="{ '--sidebar-width': '24rem', '--queue-height': `${queueHeight}px` }"
+    :ui="{ body: 'pb-[calc(--spacing(4)+var(--queue-height))]', footer: 'p-0 overflow-visible', actions: 'gap-0.5' }"
     class="bg-default"
   >
     <template #actions>
@@ -396,7 +412,7 @@ function clearMessages() {
         compact
         class="px-0 gap-2"
         :user="{ ui: { container: 'max-w-full', text: 'text-sm/6' } }"
-        :ui="{ viewport: 'sticky top-auto bottom-4 h-0' }"
+        :ui="{ viewport: 'sticky top-auto bottom-[calc(--spacing(4)+var(--queue-height))] h-0' }"
       >
         <template #indicator>
           <UChatTool :icon="studioIcons.brain" text="Thinking..." streaming />

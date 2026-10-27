@@ -581,7 +581,7 @@ Read the full **Build an AI Chatbot** tutorial for a step-by-step guide.
 
 ### Queued messages :badge{label="Soon" class="align-text-top"}
 
-The AI SDK doesn't queue messages: calling `sendMessage` during a response starts a second request next to the current one. With `status`, `UChatPrompt` ignores submits while the chat is `submitted` or `streaming`. Bind `v-model:queue` to keep them instead: the prompt lists the queued messages above the textarea, where the user can send one now, edit it or remove it, and you send the next one once the chat is `ready` again.
+The AI SDK doesn't queue messages: calling `sendMessage` during a response starts a second request next to the current one. With `status`, `UChatPrompt` ignores submits while the chat is `submitted` or `streaming`. Bind `v-model:queue` to keep them instead: the prompt lists the queued messages in a panel above it, where the user can send one now, edit it or remove it, and you send the next one once the chat is `ready` again.
 
 ::framework-only
 #nuxt

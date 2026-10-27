@@ -367,23 +367,15 @@ defineExpose({
         <ul v-show="queueOpen" :id="queueId" data-slot="queueList" :class="ui.queueList({ class: props.ui?.queueList })">
           <li v-for="(item, index) in queue" :key="getQueueKey(item)" data-slot="queueItem" :class="ui.queueItem({ class: props.ui?.queueItem })">
             <span data-slot="queueItemLeading" :class="ui.queueItemLeading({ class: props.ui?.queueItemLeading })" />
-            <button
-              :id="getQueueKey(item)"
-              type="button"
-              :disabled="!canEditQueued(item)"
-              :aria-description="t('chatPrompt.edit')"
-              data-slot="queueItemLabel"
-              :class="ui.queueItemLabel({ class: props.ui?.queueItemLabel })"
-              @click="editQueued(index)"
-            >
+            <span :id="getQueueKey(item)" data-slot="queueItemLabel" :class="ui.queueItemLabel({ class: props.ui?.queueItemLabel })">
               {{ item.text.trim() || item.files?.map(file => file.name).join(', ') }}
-            </button>
+            </span>
 
             <div data-slot="queueItemActions" :class="ui.queueItemActions({ class: props.ui?.queueItemActions })">
               <UButton
                 :icon="appConfig.ui.icons.arrowUp"
                 color="neutral"
-                variant="ghost"
+                variant="link"
                 size="xs"
                 :disabled="queueDisabled"
                 :aria-label="t('chatPrompt.sendNow')"
@@ -391,9 +383,19 @@ defineExpose({
                 @click="sendQueued(index)"
               />
               <UButton
-                :icon="appConfig.ui.icons.close"
+                :icon="appConfig.ui.icons.edit"
                 color="neutral"
-                variant="ghost"
+                variant="link"
+                size="xs"
+                :disabled="!canEditQueued(item)"
+                :aria-label="t('chatPrompt.edit')"
+                :aria-describedby="getQueueKey(item)"
+                @click="editQueued(index)"
+              />
+              <UButton
+                :icon="appConfig.ui.icons.trash"
+                color="neutral"
+                variant="link"
                 size="xs"
                 :aria-label="t('chatPrompt.remove')"
                 :aria-describedby="getQueueKey(item)"
