@@ -18,6 +18,7 @@ const title = ref('')
 const severity = ref('medium')
 const component = ref('dashboard')
 const steps = ref('')
+const file = ref<File | null>(null)
 </script>
 
 <template>
@@ -51,7 +52,16 @@ const steps = ref('')
     </div>
 
     <div class="flex items-center justify-between border-t border-default px-4 py-3">
-      <UButton label="Attach file" :icon="studioIcons.paperclip" color="neutral" variant="soft" />
+      <UFileUpload v-slot="{ open }" v-model="file" class="min-w-0">
+        <UButton
+          :label="file?.name ?? 'Attach file'"
+          :icon="studioIcons.paperclip"
+          color="neutral"
+          variant="soft"
+          class="max-w-full"
+          @click="open()"
+        />
+      </UFileUpload>
       <UButton label="Submit bug" variant="subtle" @click="toast.add({ title: 'Bug reported' })" />
     </div>
   </div>

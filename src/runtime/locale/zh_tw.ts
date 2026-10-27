@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: '輪播',
       slide: '投影片'
     },
+    chatAttachment: {
+      uploading: '正在上傳',
+      error: '上傳失敗'
+    },
     chatMessages: {
       autoScroll: '捲動到底部'
     },
     chatPrompt: {
-      placeholder: '在這裡輸入你的消息…'
+      placeholder: '在這裡輸入你的消息…',
+      queue: '排隊中的訊息',
+      sendNow: '立即傳送',
+      edit: '編輯',
+      remove: '移除'
     },
     chatPromptSubmit: {
       label: '發送',

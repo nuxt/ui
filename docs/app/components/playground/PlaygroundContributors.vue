@@ -29,9 +29,7 @@ const usernames = [
         :alt="username"
         loading="lazy"
       />
-      <div class="flex items-center justify-center size-8 rounded-full bg-elevated text-xs font-medium text-muted">
-        +300
-      </div>
+      <UAvatar text="+300" class="text-xs" />
     </div>
   </div>
 </template>

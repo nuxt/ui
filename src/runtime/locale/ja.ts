@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: 'カルーセル',
       slide: 'スライド'
     },
+    chatAttachment: {
+      uploading: 'アップロード中',
+      error: 'アップロードに失敗しました'
+    },
     chatMessages: {
       autoScroll: '一番下までスクロール'
     },
     chatPrompt: {
-      placeholder: 'ここにメッセージを入力してください…'
+      placeholder: 'ここにメッセージを入力してください…',
+      queue: 'キュー内のメッセージ',
+      sendNow: '今すぐ送信',
+      edit: '編集',
+      remove: '削除'
     },
     chatPromptSubmit: {
       label: '送信',

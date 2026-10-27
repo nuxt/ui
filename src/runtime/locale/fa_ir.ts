@@ -37,11 +37,19 @@ export default defineLocale<Messages>({
       roledescription: 'کاروسل',
       slide: 'اسلاید'
     },
+    chatAttachment: {
+      uploading: 'در حال بارگذاری',
+      error: 'بارگذاری ناموفق بود'
+    },
     chatMessages: {
       autoScroll: 'پیمایش به پایین'
     },
     chatPrompt: {
-      placeholder: 'اینجا پیام خود را بنویسید…'
+      placeholder: 'اینجا پیام خود را بنویسید…',
+      queue: 'پیام‌های در صف',
+      sendNow: 'اکنون ارسال شود',
+      edit: 'ویرایش',
+      remove: 'حذف'
     },
     chatPromptSubmit: {
       label: 'ارسال',

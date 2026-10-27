@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: 'ภาพหมุนเวียน',
       slide: 'สไลด์'
     },
+    chatAttachment: {
+      uploading: 'กำลังอัปโหลด',
+      error: 'อัปโหลดไม่สำเร็จ'
+    },
     chatMessages: {
       autoScroll: 'เลื่อนลงล่างสุด'
     },
     chatPrompt: {
-      placeholder: 'กรุณาป้อนข้อความของคุณที่นี่…'
+      placeholder: 'กรุณาป้อนข้อความของคุณที่นี่…',
+      queue: 'ข้อความที่รอคิว',
+      sendNow: 'ส่งเลย',
+      edit: 'แก้ไข',
+      remove: 'ลบ'
     },
     chatPromptSubmit: {
       label: 'ส่ง',

@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: 'карусел',
       slide: 'слайд'
     },
+    chatAttachment: {
+      uploading: 'Боргузорӣ',
+      error: 'Боргузорӣ ноком шуд'
+    },
     chatMessages: {
       autoScroll: 'Ба поён ҳаракат додан'
     },
     chatPrompt: {
-      placeholder: 'Пайём ворид кунед…'
+      placeholder: 'Пайём ворид кунед…',
+      queue: 'Паёмҳо дар навбат',
+      sendNow: 'Ҳозир фиристодан',
+      edit: 'Таҳрир',
+      remove: 'Хориҷ кардан'
     },
     chatPromptSubmit: {
       label: 'Фиристодан',

@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: 'карусель',
       slide: 'слайд'
     },
+    chatAttachment: {
+      uploading: 'Запампоўваецца',
+      error: 'Не ўдалося запампаваць'
+    },
     chatMessages: {
       autoScroll: 'Пракруціць уніз'
     },
     chatPrompt: {
-      placeholder: 'Увядзіце сваё паведамленне тут…'
+      placeholder: 'Увядзіце сваё паведамленне тут…',
+      queue: 'Паведамленні ў чарзе',
+      sendNow: 'Адправіць зараз',
+      edit: 'Рэдагаваць',
+      remove: 'Выдаліць'
     },
     chatPromptSubmit: {
       label: 'Адправіць',

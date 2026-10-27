@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: 'karusell',
       slide: 'lysbilde'
     },
+    chatAttachment: {
+      uploading: 'Laster opp',
+      error: 'Opplasting mislyktes'
+    },
     chatMessages: {
       autoScroll: 'Rull til bunnen'
     },
     chatPrompt: {
-      placeholder: 'Skriv din melding her…'
+      placeholder: 'Skriv din melding her…',
+      queue: 'Meldinger i kø',
+      sendNow: 'Send nå',
+      edit: 'Rediger',
+      remove: 'Fjern'
     },
     chatPromptSubmit: {
       label: 'Send',

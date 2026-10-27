@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: 'korsel',
       slide: 'slide'
     },
+    chatAttachment: {
+      uploading: 'Mengunggah',
+      error: 'Gagal mengunggah'
+    },
     chatMessages: {
       autoScroll: 'Gulir ke bawah'
     },
     chatPrompt: {
-      placeholder: 'Tulis pesan Anda di sini…'
+      placeholder: 'Tulis pesan Anda di sini…',
+      queue: 'Pesan dalam antrean',
+      sendNow: 'Kirim sekarang',
+      edit: 'Edit',
+      remove: 'Hapus'
     },
     chatPromptSubmit: {
       label: 'Kirim',
