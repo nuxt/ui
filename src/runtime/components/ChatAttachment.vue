@@ -145,7 +145,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatAttachment |
 <template>
   <Primitive :as="props.as" :data-status="props.status" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <template v-if="isImage">
-      <img :src="previewUrl" :alt="fileName" data-slot="image" :class="ui.image({ class: props.ui?.image })">
+      <img :src="previewUrl" :alt="fileName ?? ''" data-slot="image" :class="ui.image({ class: props.ui?.image })">
 
       <div v-if="statusIcon" data-slot="overlay" :class="ui.overlay({ class: props.ui?.overlay })">
         <UIcon :name="statusIcon" data-slot="overlayIcon" :class="ui.overlayIcon({ class: props.ui?.overlayIcon })" />
