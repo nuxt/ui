@@ -11,7 +11,7 @@ navigation.badge: Soon
 
 ## Usage
 
-The ChatAttachment component displays an image as a thumbnail and any other file as its name and a description next to an icon.
+The ChatAttachment component displays a file with its name and a description, next to an image preview or an icon.
 
 ::note
 This component is automatically used by the [`ChatPrompt`](/docs/components/chat-prompt#files) component to list the files bound with `v-model:files`.
@@ -80,7 +80,7 @@ Map a file part of a message to these props in the `#files` slot of [ChatMessage
 
 ### Description
 
-Use the `description` prop to set the text under the name of a file that is not an image. Defaults to the file extension and, with the `file` prop, its size.
+Use the `description` prop to set the text under the name. Defaults to the file extension and, with the `file` prop, its size.
 
 ::component-code
 ---
@@ -99,7 +99,7 @@ props:
 Use the `status` prop to show that the file is `uploading` or failed to upload with `error`. Defaults to `idle`.
 
 ::note
-While `uploading`, a spinner shows over the image or in place of the file icon. With `error`, pass the reason to the `description` prop.
+While `uploading`, the name shimmers, an image is dimmed and a file icon turns into a spinner. Pass the progress or, with `error`, the reason to the `description` prop.
 ::
 
 ::component-code
@@ -111,6 +111,24 @@ props:
   status: 'uploading'
   name: 'quarterly-report.pdf'
   type: 'application/pdf'
+---
+::
+
+### Orientation
+
+Use the `orientation` prop to change the layout of the attachment. Defaults to `horizontal`, `vertical` gives an image a large preview.
+
+::component-code
+---
+ignore:
+  - name
+  - type
+  - url
+props:
+  orientation: 'vertical'
+  name: 'landscape.jpg'
+  type: 'image/jpeg'
+  url: 'https://picsum.photos/id/1015/200'
 ---
 ::
 
@@ -132,7 +150,7 @@ props:
 
 ### Removable
 
-Use the `removable` prop to display a button that emits a `remove` event. It shows on hover or focus, and always on touch devices.
+Use the `removable` prop to display a button that emits a `remove` event.
 
 ::component-code
 ---

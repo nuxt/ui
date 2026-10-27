@@ -29,7 +29,7 @@ export interface ChatAttachmentProps {
    */
   url?: string
   /**
-   * The text displayed under the name of a file that is not an image. Defaults to its extension and size.
+   * The text displayed under the name. Defaults to the file extension and size.
    */
   description?: string
   /**
@@ -42,12 +42,17 @@ export interface ChatAttachmentProps {
    */
   size?: ChatAttachment['variants']['size']
   /**
+   * The orientation of the attachment, `vertical` gives an image a large preview.
+   * @defaultValue 'horizontal'
+   */
+  orientation?: ChatAttachment['variants']['orientation']
+  /**
    * Display a button to remove the file.
    * @defaultValue false
    */
   removable?: boolean
   /**
-   * The icon displayed for files that are not images.
+   * The icon displayed for files that are not images, while their upload has not failed.
    * @defaultValue appConfig.ui.icons.file
    * @IconifyIcon
    */
@@ -88,10 +93,13 @@ import { useLocale } from '../composables/useLocale'
 import { formatFileSize } from '../utils/file'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
+import UButton from './Button.vue'
+import UChatShimmer from './ChatShimmer.vue'
 
 const _props = withDefaults(defineProps<ChatAttachmentProps>(), {
   as: 'div',
-  status: 'idle'
+  status: 'idle',
+  orientation: 'horizontal'
 })
 const emits = defineEmits<ChatAttachmentEmits>()
 
@@ -127,55 +135,55 @@ const fileDescription = computed(() => {
   return [extension, formatFileSize(props.file?.size)].filter(Boolean).join(' · ')
 })
 
-const statusIcon = computed(() => {
+const leadingIcon = computed(() => {
   if (props.status === 'uploading') return props.loadingIcon || appConfig.ui.icons.loading
   if (props.status === 'error') return props.errorIcon || appConfig.ui.icons.error
 
-  return undefined
+  return props.icon || appConfig.ui.icons.file
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatAttachment || {}) })({
   size: props.size,
-  image: isImage.value,
+  orientation: props.orientation,
   status: props.status
 }))
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-status="props.status" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <template v-if="isImage">
-      <img :src="previewUrl" :alt="fileName ?? ''" data-slot="image" :class="ui.image({ class: props.ui?.image })">
+  <Primitive
+    :as="props.as"
+    :data-status="props.status"
+    :data-orientation="props.orientation"
+    data-slot="root"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
+  >
+    <div data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+      <img v-if="isImage" :src="previewUrl" :alt="fileName ?? ''" data-slot="image" :class="ui.image({ class: props.ui?.image })">
+      <UIcon v-else :name="leadingIcon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+    </div>
 
-      <div v-if="statusIcon" data-slot="overlay" :class="ui.overlay({ class: props.ui?.overlay })">
-        <UIcon :name="statusIcon" data-slot="overlayIcon" :class="ui.overlayIcon({ class: props.ui?.overlayIcon })" />
-      </div>
-    </template>
+    <div data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+      <UChatShimmer v-if="props.status === 'uploading' && fileName" :text="fileName" data-slot="name" :class="ui.name({ class: props.ui?.name })" />
+      <span v-else data-slot="name" :class="ui.name({ class: props.ui?.name })">{{ fileName }}</span>
 
-    <template v-else>
-      <div data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
-        <UIcon :name="statusIcon || props.icon || appConfig.ui.icons.file" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
-      </div>
-
-      <div data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
-        <span data-slot="name" :class="ui.name({ class: props.ui?.name })">{{ fileName }}</span>
-        <span v-if="fileDescription" data-slot="description" :class="ui.description({ class: props.ui?.description })">{{ fileDescription }}</span>
-      </div>
-    </template>
+      <span v-if="fileDescription" data-slot="description" :class="ui.description({ class: props.ui?.description })">{{ fileDescription }}</span>
+    </div>
 
     <VisuallyHidden aria-live="polite">
       {{ props.status === 'idle' ? '' : t(`chatAttachment.${props.status}`) }}
     </VisuallyHidden>
 
-    <button
+    <UButton
       v-if="props.removable"
-      type="button"
+      :icon="props.removeIcon || appConfig.ui.icons.close"
+      color="neutral"
+      variant="ghost"
+      size="xs"
       :aria-label="t('fileUpload.removeFile', { filename: fileName ?? '' })"
       data-slot="remove"
       :class="ui.remove({ class: props.ui?.remove })"
       @click="emits('remove', $event)"
-    >
-      <UIcon :name="props.removeIcon || appConfig.ui.icons.close" data-slot="removeIcon" :class="ui.removeIcon({ class: props.ui?.removeIcon })" />
-    </button>
+    />
   </Primitive>
 </template>
