@@ -167,7 +167,11 @@ function onPaste(event: ClipboardEvent) {
     return
   }
 
-  // Not prevented, a paste that also holds text still inserts it
+  // A paste that also holds text still inserts it, a file-only one is not inserted by an editor body
+  if (!event.clipboardData.getData('text/plain')) {
+    event.preventDefault()
+  }
+
   addFiles(pasted)
 }
 

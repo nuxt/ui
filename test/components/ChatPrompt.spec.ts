@@ -25,9 +25,9 @@ describe('ChatPrompt', () => {
     ['with files slot', { props: { files: [new File(['a'], 'notes.txt', { type: 'text/plain' })] }, slots: { files: () => 'Files slot' } }]
   ])
 
-  function paste(files: File[]) {
+  function paste(files: File[], text = '') {
     const event = new Event('paste', { bubbles: true, cancelable: true }) as ClipboardEvent
-    Object.defineProperty(event, 'clipboardData', { value: { files } })
+    Object.defineProperty(event, 'clipboardData', { value: { files, getData: (type: string) => type === 'text/plain' ? text : '' } })
     return event
   }
 
@@ -53,7 +53,21 @@ describe('ChatPrompt', () => {
     const event = paste([image, new File(['b'], 'notes.txt', { type: 'text/plain' })])
     wrapper.find('textarea').element.dispatchEvent(event)
 
+    expect(event.defaultPrevented).toBe(true)
     expect(wrapper.emitted('update:files')?.[0]).toEqual([[image]])
+  })
+
+  it('keeps the text of a paste that also holds files', async () => {
+    const wrapper = await mountSuspended(ChatPrompt, {
+      props: { files: [] }
+    })
+
+    const file = new File(['a'], 'notes.txt', { type: 'text/plain' })
+    const event = paste([file], 'Some text')
+    wrapper.find('textarea').element.dispatchEvent(event)
+
+    expect(event.defaultPrevented).toBe(false)
+    expect(wrapper.emitted('update:files')?.[0]).toEqual([[file]])
   })
 
   it('adds the files pasted in a custom body', async () => {
