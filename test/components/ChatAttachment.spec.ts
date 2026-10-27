@@ -8,6 +8,7 @@ import theme from '#build/ui/chat-attachment'
 describe('ChatAttachment', () => {
   const sizes = Object.keys(theme.variants.size) as any
   const orientations = Object.keys(theme.variants.orientation) as any
+  const variants = Object.keys(theme.variants.variant) as any
 
   const props = { name: 'report.pdf', type: 'application/pdf' }
   const image = { name: 'photo.png', type: 'image/png', url: 'https://picsum.photos/200' }
@@ -23,6 +24,7 @@ describe('ChatAttachment', () => {
     ['with removable', { props: { ...props, removable: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ...orientations.map((orientation: string) => [`with orientation ${orientation}`, { props: { ...image, orientation, removable: true } }]),
+    ...variants.map((variant: string) => [`with variant ${variant}`, { props: { ...image, variant, removable: true } }]),
     ['with icon', { props: { ...props, icon: 'i-lucide-file-text' } }],
     ['with errorIcon', { props: { ...props, status: 'error', errorIcon: 'i-lucide-circle-x' } }],
     ['with loadingIcon', { props: { ...props, status: 'uploading', loadingIcon: 'i-lucide-loader' } }],

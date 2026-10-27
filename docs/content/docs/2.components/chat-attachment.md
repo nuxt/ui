@@ -136,6 +136,31 @@ props:
 ---
 ::
 
+### Variant
+
+Use the `variant` prop to change the style of the attachment. Defaults to `card`, `thumbnail` only displays the image or file icon with the remove button on its corner and the name available to screen readers.
+
+::component-code
+---
+prettier: true
+ignore:
+  - name
+  - type
+  - url
+  - removable
+props:
+  variant: 'thumbnail'
+  name: 'landscape.jpg'
+  type: 'image/jpeg'
+  url: 'https://picsum.photos/id/1015/200'
+  removable: true
+---
+::
+
+::note
+The `orientation` prop only applies to the `card` variant.
+::
+
 ### Size
 
 Use the `size` prop to change the size of the attachment. Defaults to `md`.

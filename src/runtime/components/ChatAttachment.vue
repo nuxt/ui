@@ -47,24 +47,29 @@ export interface ChatAttachmentProps {
    */
   orientation?: ChatAttachment['variants']['orientation']
   /**
+   * The style of the attachment, `thumbnail` only shows the preview with the remove button on its corner.
+   * @defaultValue 'card'
+   */
+  variant?: ChatAttachment['variants']['variant']
+  /**
    * Display a button to remove the file.
    * @defaultValue false
    */
   removable?: boolean
   /**
-   * The icon displayed for files that are not images, while their upload has not failed.
+   * The icon displayed for files that are not images.
    * @defaultValue appConfig.ui.icons.file
    * @IconifyIcon
    */
   icon?: IconProps['name']
   /**
-   * The icon displayed while the file uploads.
+   * The icon displayed while the file uploads, over the image if any.
    * @defaultValue appConfig.ui.icons.loading
    * @IconifyIcon
    */
   loadingIcon?: IconProps['name']
   /**
-   * The icon displayed when the upload fails.
+   * The icon displayed when the upload fails, over the image if any.
    * @defaultValue appConfig.ui.icons.error
    * @IconifyIcon
    */
@@ -99,7 +104,8 @@ import UChatShimmer from './ChatShimmer.vue'
 const _props = withDefaults(defineProps<ChatAttachmentProps>(), {
   as: 'div',
   status: 'idle',
-  orientation: 'horizontal'
+  orientation: 'horizontal',
+  variant: 'card'
 })
 const emits = defineEmits<ChatAttachmentEmits>()
 
@@ -139,14 +145,15 @@ const leadingIcon = computed(() => {
   if (props.status === 'uploading') return props.loadingIcon || appConfig.ui.icons.loading
   if (props.status === 'error') return props.errorIcon || appConfig.ui.icons.error
 
-  return props.icon || appConfig.ui.icons.file
+  return isImage.value ? undefined : (props.icon || appConfig.ui.icons.file)
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatAttachment || {}) })({
   size: props.size,
   orientation: props.orientation,
-  status: props.status
+  status: props.status,
+  variant: props.variant
 }))
 </script>
 
@@ -155,12 +162,13 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatAttachment |
     :as="props.as"
     :data-status="props.status"
     :data-orientation="props.orientation"
+    :data-variant="props.variant"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
   >
     <div data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
       <img v-if="isImage" :src="previewUrl" :alt="fileName ?? ''" data-slot="image" :class="ui.image({ class: props.ui?.image })">
-      <UIcon v-else :name="leadingIcon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+      <UIcon v-if="leadingIcon" :name="leadingIcon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
     </div>
 
     <div data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
