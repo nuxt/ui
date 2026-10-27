@@ -15,7 +15,7 @@ const queue = ref<ChatPromptQueueItem[]>([
     status="streaming"
     placeholder="Send a message while it answers..."
     :autofocus="false"
-    class="w-full mt-24"
+    class="w-full"
   >
     <UChatPromptSubmit status="streaming" />
   </UChatPrompt>

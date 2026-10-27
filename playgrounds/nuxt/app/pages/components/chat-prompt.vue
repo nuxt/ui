@@ -10,6 +10,10 @@ const attrs = reactive({
 })
 
 const input = ref('')
+const queue = ref([
+  { text: 'Can you also add a dark mode toggle?' },
+  { text: 'And write the tests for it' }
+])
 
 function onSubmit() {
   console.log('submit', input.value)
@@ -31,6 +35,17 @@ function onSubmit() {
       @submit="onSubmit"
     >
       <UChatPromptSubmit :color="props?.color" />
+    </UChatPrompt>
+
+    <UChatPrompt
+      v-model="input"
+      v-model:queue="queue"
+      status="streaming"
+      placeholder="Send a message while it answers..."
+      :autofocus="false"
+      v-bind="props"
+    >
+      <UChatPromptSubmit status="streaming" :color="props?.color" />
     </UChatPrompt>
   </Matrix>
 </template>

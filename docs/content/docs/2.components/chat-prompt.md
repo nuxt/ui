@@ -115,10 +115,6 @@ name: 'chat-prompt-queue-example'
 ---
 ::
 
-::note
-The panel floats over the content above the prompt, leave room for its height there so it doesn't cover the last message.
-::
-
 ::tip{to="/docs/components/chat#queued-messages"}
 Sending the queued messages is up to you, check the **Chat** overview page for a recipe with the AI SDK.
 ::

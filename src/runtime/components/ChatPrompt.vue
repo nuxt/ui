@@ -99,7 +99,7 @@ export interface ChatPromptSlots extends TextareaSlots {
 <script setup lang="ts">
 import { computed, ref, toRaw, toRef, useId, useTemplateRef } from 'vue'
 import { Primitive } from 'reka-ui'
-import { reactivePick } from '@vueuse/core'
+import { reactivePick, useElementSize } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
@@ -227,6 +227,10 @@ function submit(e?: Event) {
 }
 
 const queueOpen = ref(true)
+
+// The queue floats above the prompt, its height is kept as room above the root so it covers nothing
+const queueRef = useTemplateRef<HTMLElement>('queueRef')
+const { height: queueHeight } = useElementSize(queueRef, undefined, { box: 'border-box' })
 const queueId = useId()
 
 // Rows are keyed by item, the key also backs the label id the row actions are described by
@@ -342,6 +346,7 @@ defineExpose({
     :data-dragging="hasFiles ? isDragging : undefined"
     :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :style="queueHeight ? { marginTop: `${queueHeight}px` } : undefined"
     @submit.prevent="submit"
     @paste="onPaste"
   >
@@ -349,7 +354,7 @@ defineExpose({
       <slot name="header" />
     </div>
 
-    <div v-if="queue?.length" data-slot="queue" :class="ui.queue({ class: props.ui?.queue })">
+    <div v-if="queue?.length" ref="queueRef" data-slot="queue" :class="ui.queue({ class: props.ui?.queue })">
       <slot name="queue" :queue="queue" :send="sendQueued" :edit="editQueued" :remove="removeQueued">
         <button
           type="button"
