@@ -45,7 +45,11 @@ export default defineLocale<Messages>({
       autoScroll: 'ئاستىغا سۈرۈش'
     },
     chatPrompt: {
-      placeholder: 'خەت كىرگۈزۈڭ…'
+      placeholder: 'خەت كىرگۈزۈڭ…',
+      queue: 'ئۆچىرەتتىكى ئۇچۇرلار',
+      sendNow: 'ھازىرلا يوللا',
+      edit: 'تەھرىرلەش',
+      remove: 'چىقىرىۋېتىش'
     },
     chatPromptSubmit: {
       label: 'يوللاش',

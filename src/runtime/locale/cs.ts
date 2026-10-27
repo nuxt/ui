@@ -44,7 +44,11 @@ export default defineLocale<Messages>({
       autoScroll: 'Posunout dolů'
     },
     chatPrompt: {
-      placeholder: 'Zde napište svůj text…'
+      placeholder: 'Zde napište svůj text…',
+      queue: 'Zprávy ve frontě',
+      sendNow: 'Odeslat nyní',
+      edit: 'Upravit',
+      remove: 'Odebrat'
     },
     chatPromptSubmit: {
       label: 'Odeslat',

@@ -55,6 +55,10 @@ name: 'chat-prompt-files-example'
 ---
 ::
 
+::tip
+Use the `attachment` prop to customize the attachments, like `{ variant: 'thumbnail', size: 'xl' }`{lang="ts-type"} for image previews, or the `#files` slot to render them yourself.
+::
+
 ::note
 Use the `accept` prop to restrict the file types and set `multiple` to `false` to keep a single file. The form is submitted with files even when the textarea is empty. While a file is dragged over the prompt, its root has `data-dragging="true"`, which you can style with `data-[dragging=true]:`.
 ::
@@ -102,6 +106,21 @@ async function onSubmit() {
   </UChatPrompt>
 </template>
 ```
+::
+
+### Queue :badge{label="Soon" class="align-text-top"}
+
+Use the `v-model:queue` directive to queue the messages submitted while the chat is `submitted` or `streaming` instead of ignoring them. They show in a panel attached above the prompt, where the user can send one now, put it back in the prompt to edit it, or remove it. The `send` event is emitted when one is picked to be sent now, after it moved to the front of the queue.
+
+::component-example
+---
+collapse: true
+name: 'chat-prompt-queue-example'
+---
+::
+
+::tip{to="/docs/components/chat#queued-messages"}
+Sending the queued messages is up to you, check the **Chat** overview page for a recipe with the AI SDK.
 ::
 
 ## Examples

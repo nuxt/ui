@@ -45,7 +45,11 @@ export default defineLocale<Messages>({
       autoScroll: 'نیچے سکرول کریں'
     },
     chatPrompt: {
-      placeholder: 'یہاں اپنا پیغام لکھیں'
+      placeholder: 'یہاں اپنا پیغام لکھیں',
+      queue: 'قطار میں پیغامات',
+      sendNow: 'ابھی بھیجیں',
+      edit: 'ترمیم کریں',
+      remove: 'ہٹائیں'
     },
     chatPromptSubmit: {
       label: 'پیغام بھیجیں',

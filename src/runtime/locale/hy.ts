@@ -44,7 +44,11 @@ export default defineLocale<Messages>({
       autoScroll: 'Ոլորել ներքև'
     },
     chatPrompt: {
-      placeholder: 'Շարունակել'
+      placeholder: 'Շարունակել',
+      queue: 'Հերթում գտնվող հաղորդագրություններ',
+      sendNow: 'Ուղարկել հիմա',
+      edit: 'Խմբագրել',
+      remove: 'Հեռացնել'
     },
     chatPromptSubmit: {
       label: 'Շարունակել',

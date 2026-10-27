@@ -44,7 +44,11 @@ export default defineLocale<Messages>({
       autoScroll: 'ເລື່ອນລົງລຸ່ມສຸດ'
     },
     chatPrompt: {
-      placeholder: 'ພິມຂໍ້ຄວາມຂອງທ່ານທີ່ນີ້…'
+      placeholder: 'ພິມຂໍ້ຄວາມຂອງທ່ານທີ່ນີ້…',
+      queue: 'ຂໍ້ຄວາມທີ່ລໍຖ້າ',
+      sendNow: 'ສົ່ງດຽວນີ້',
+      edit: 'ແກ້ໄຂ',
+      remove: 'ລຶບອອກ'
     },
     chatPromptSubmit: {
       label: 'ສົ່ງຄຳສັ່ງ',

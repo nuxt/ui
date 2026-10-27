@@ -44,7 +44,11 @@ export default defineLocale<Messages>({
       autoScroll: 'Ылдый жылдыруу'
     },
     chatPrompt: {
-      placeholder: 'Бул жерге билдирүүңүздү жазыңыз…'
+      placeholder: 'Бул жерге билдирүүңүздү жазыңыз…',
+      queue: 'Кезектеги билдирүүлөр',
+      sendNow: 'Азыр жөнөтүү',
+      edit: 'Түзөтүү',
+      remove: 'Өчүрүү'
     },
     chatPromptSubmit: {
       label: 'Билдирүү жөнөтүү',

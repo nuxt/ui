@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { ChatPromptQueueItem } from '@nuxt/ui'
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
 import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming, isToolApprovalPending, toFileUIParts } from '@nuxt/ui/utils/ai'
@@ -9,6 +10,7 @@ const toast = useToast()
 
 const input = ref('')
 const files = ref<File[]>([])
+const queue = ref<ChatPromptQueueItem[]>([])
 
 const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
   sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses,
@@ -37,17 +39,78 @@ async function onSubmit() {
   input.value = ''
   files.value = []
 
-  const parts = await toFileUIParts(submitted)
+  // A queued message whose files are still being read goes first
+  if (sending) {
+    queue.value.push({ text, files: submitted })
+    return
+  }
 
-  // An empty text part is rejected by some providers, send the files alone
-  sendMessage(text.trim() ? { text, files: parts } : { files: parts })
+  await dispatch({ text, files: submitted })
+}
+
+// Reading files is async and the chat only turns busy once `sendMessage` runs,
+// so one message is dispatched at a time and clearing the chat drops it
+let sending = false
+let generation = 0
+
+async function dispatch(item: ChatPromptQueueItem) {
+  const current = generation
+  sending = true
+
+  try {
+    const parts = await toFileUIParts(item.files ?? [])
+    if (current !== generation) return
+
+    // An empty text part is rejected by some providers, send the files alone
+    sendMessage(item.text.trim() ? { text: item.text, files: parts } : { files: parts })
+  } catch (error) {
+    if (current === generation) {
+      queue.value.unshift(item)
+    }
+    toast.add({ description: (error as Error).message, icon: 'i-lucide-alert-circle', color: 'error' })
+  } finally {
+    sending = false
+
+    // A cleared chat stays `ready`, a message queued during the read would wait forever
+    if (current !== generation && status.value === 'ready') {
+      sendNext()
+    }
+  }
+}
+
+// A response waiting for a tool approval is `ready` too, a new message would leave the approval unanswered
+const awaitingApproval = computed(() => messages.value.at(-1)?.parts.some(part => isToolUIPart(part) && isToolApprovalPending(part)) ?? false)
+
+function sendNext() {
+  if (sending || awaitingApproval.value) return
+
+  const item = queue.value.shift()
+  if (item) {
+    dispatch(item)
+  }
+}
+
+watch(status, (value) => {
+  if (value === 'ready') {
+    sendNext()
+  }
+})
+
+function onSend() {
+  if (status.value === 'submitted' || status.value === 'streaming') {
+    stop()
+  } else {
+    sendNext()
+  }
 }
 
 function clearMessages() {
   if (status.value === 'streaming' || status.value === 'submitted') {
     stop()
   }
+  generation++
   messages.value = []
+  queue.value = []
 }
 
 function getEmailToolText(state: string): string {
@@ -116,6 +179,7 @@ function generateMessages() {
       :messages="messages"
       :status="status"
       :assistant="{ actions: [{ label: 'Edit', icon: 'i-lucide-pencil', onClick: () => console.log('edit') }] }"
+      :ui="{ footer: 'pt-4' }"
       :user="{ actions: [{ label: 'Edit', icon: 'i-lucide-pencil', onClick: () => console.log('edit') }], icon: 'i-lucide-user' }"
     >
       <template #files="{ parts }">
@@ -203,12 +267,13 @@ function generateMessages() {
         <UChatPrompt
           v-model="input"
           v-model:files="files"
+          v-model:queue="queue"
           accept="image/*,application/pdf"
           :status="status"
           :error="error"
           variant="subtle"
-          class="mt-4"
           @submit="onSubmit"
+          @send="onSend"
         >
           <template #footer="{ open }">
             <UButton

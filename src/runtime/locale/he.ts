@@ -45,7 +45,11 @@ export default defineLocale<Messages>({
       autoScroll: 'גלול למטה'
     },
     chatPrompt: {
-      placeholder: 'כתוב את ההודעה שלך כאן…'
+      placeholder: 'כתוב את ההודעה שלך כאן…',
+      queue: 'הודעות בתור',
+      sendNow: 'שלח עכשיו',
+      edit: 'עריכה',
+      remove: 'הסרה'
     },
     chatPromptSubmit: {
       label: 'שלח',

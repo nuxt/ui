@@ -44,7 +44,11 @@ export default defineLocale<Messages>({
       autoScroll: 'Ба поён ҳаракат додан'
     },
     chatPrompt: {
-      placeholder: 'Пайём ворид кунед…'
+      placeholder: 'Пайём ворид кунед…',
+      queue: 'Паёмҳо дар навбат',
+      sendNow: 'Ҳозир фиристодан',
+      edit: 'Таҳрир',
+      remove: 'Хориҷ кардан'
     },
     chatPromptSubmit: {
       label: 'Фиристодан',

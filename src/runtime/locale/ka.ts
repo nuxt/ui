@@ -44,7 +44,11 @@ export default defineLocale<Messages>({
       autoScroll: 'ქვემოთ გადახვევა'
     },
     chatPrompt: {
-      placeholder: 'დაწერეთ თქვენი მესიჯი აქ…'
+      placeholder: 'დაწერეთ თქვენი მესიჯი აქ…',
+      queue: 'რიგში მყოფი შეტყობინებები',
+      sendNow: 'ახლავე გაგზავნა',
+      edit: 'რედაქტირება',
+      remove: 'წაშლა'
     },
     chatPromptSubmit: {
       label: 'შეტყობინების გაგზავნა',

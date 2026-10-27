@@ -44,7 +44,11 @@ export default defineLocale<Messages>({
       autoScroll: 'Desplaçar cap avall'
     },
     chatPrompt: {
-      placeholder: 'Escriu el teu missatge aquí…'
+      placeholder: 'Escriu el teu missatge aquí…',
+      queue: 'Missatges a la cua',
+      sendNow: 'Envia ara',
+      edit: 'Edita',
+      remove: 'Elimina'
     },
     chatPromptSubmit: {
       label: 'Enviar',
