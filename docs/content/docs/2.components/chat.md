@@ -693,3 +693,7 @@ function onSendNow() {
 ::
 
 After an `error`, the prompt is disabled and the queue waits until the user reloads the failed response. Stopping the response sends the next queued message right away.
+
+::note
+With [tool approval](#tool-approval), a response waiting for the user's answer is `ready` too. Skip `sendNext` while the last message has a part in the `approval-requested` state, a new message would leave the approval unanswered.
+::
