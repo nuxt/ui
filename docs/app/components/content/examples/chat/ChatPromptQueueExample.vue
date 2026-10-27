@@ -14,6 +14,7 @@ const queue = ref<ChatPromptQueueItem[]>([
     v-model:queue="queue"
     status="streaming"
     placeholder="Send a message while it answers..."
+    :autofocus="false"
     class="w-full"
   >
     <UChatPromptSubmit status="streaming" />
