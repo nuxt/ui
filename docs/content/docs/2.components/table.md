@@ -183,13 +183,24 @@ const features = { rowPaginationFeature, paginatedRowModel: createPaginatedRowMo
 </template>
 ```
 
+A column takes a custom sorting or filtering function in its `sortFn` or `filterFn`:
+
+```ts
+const columns: TableColumn<Payment>[] = [{
+  accessorKey: 'email',
+  sortFn: (rowA, rowB, columnId) => String(rowA.getValue(columnId)).length - String(rowB.getValue(columnId)).length
+}]
+```
+
+To refer to a function by name across columns, register it in the `sortFns` or `filterFns` of the `features` prop. It is added to the built-in ones.
+
 ::caution
 The `tableApi` and column types include the APIs of every TanStack Table feature. Calling the API of a feature that isn't registered type-checks but fails at runtime.
 ::
 
 ### Options
 
-Use the `options` prop to pass the [options](https://tanstack.com/table/v9/docs/reference/index/type-aliases/TableOptions) of the registered features, like `enableRowSelection`, `enableMultiSort`, `manualPagination` or `groupedColumnMode`. It is read once when the table is created.
+Use the `options` prop to pass the [options](https://tanstack.com/table/v9/docs/reference/index/type-aliases/TableOptions) of the registered features, like `enableRowSelection`, `enableMultiSort`, `manualPagination` or `groupedColumnMode`. They stay reactive, so a server-side `rowCount` can follow your data.
 
 ```vue
 <template>
@@ -356,10 +367,10 @@ You can use the `expanded` prop to control the expandable state of the rows (can
 ::
 
 ::note
-The expanded and selected states are keyed by row id, which is the row index by default. Set the `get-row-id` prop, like `:get-row-id="row => row.id"`, so they follow their rows when the data changes.
+The expanded and selected states are keyed by row id, which is the row index by default. Set the `get-row-id` prop, like `:get-row-id="row => row.id"`, so they follow their rows when the data changes. TanStack Table also collapses every row when the data changes, set `autoResetExpanded: false` in the `options` prop to keep them open.
 ::
 
-::note
+::tip
 You could also add this action to the [`DropdownMenu`](/docs/components/dropdown-menu) component inside the `actions` column.
 ::
 
@@ -371,7 +382,8 @@ You can group rows based on a given column value and show/hide sub rows via some
 
 * Add `grouping` prop with an array of column ids you want to group by.
 * Add `features` prop with `columnGroupingFeature`, `rowAggregationFeature`, `groupedRowModel: createGroupedRowModel()` and an `aggregationFns` map of the aggregation functions your columns use, like `{ sum: aggregationFn_sum }`, all imported from `@tanstack/vue-table`.
-* Add `options` prop for the grouping options like `groupedColumnMode`.
+* Add `options` prop for the grouping options like `groupedColumnMode`, and `autoResetExpanded: false` to keep groups open when the data changes.
+* Add `initial-state` prop like `{ expanded: true }` to show the groups expanded.
 * Expand rows via `row.toggleExpanded()` method on any cell of the row. Keep in mind, it also toggles `#expanded` slot.
 * Use `aggregationFn` on column definition to define how to aggregate the rows.
 * Use `aggregatedCell` on column definition to render the aggregated value on grouped rows. Without it, TanStack Table renders the formatted value.
@@ -599,7 +611,7 @@ In this example, we use a function to define the column header but you can also 
 You can update a column `header` to render a [Button](/docs/components/button) component inside the `header` to toggle the pinning state using the TanStack Table [Column Pinning APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/column-pinning).
 
 ::note
-A pinned column will become sticky on the `start` or `end` side of the table, which follows the text direction. When using column pinning, you should define explicit `size` values for your columns to ensure proper column width handling, especially with multiple pinned columns.
+A pinned column will become sticky on the `start` or `end` side of the table, which follows the text direction. When using column pinning, you should define explicit `size` values for your columns. A column that sets a `size` renders at that width, so the offsets of multiple pinned columns line up.
 ::
 
 ::component-example
@@ -813,7 +825,7 @@ class: '!p-0'
 Use the `virtualize` prop to enable virtualization for large datasets as a boolean or an object with options like `{ estimateSize: 65, overscan: 12 }`. You can also pass other [TanStack Virtual options](https://tanstack.com/virtual/v3/docs/api/virtualizer#optional-options) to customize the virtualization behavior. The `sticky` prop works in combination with `virtualize` to keep the header or footer visible while scrolling through large datasets.
 
 ::warning
-Row pinning and cell spanning are not supported when virtualization is enabled.
+Row pinning and row spanning are not supported when virtualization is enabled. Column spanning is.
 ::
 
 ::component-example
