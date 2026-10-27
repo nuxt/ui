@@ -5,8 +5,6 @@ navigation: false
 date: 2025-12-16T10:00:00.000Z
 ---
 
-Building AI-powered applications has never been more accessible. This guide walks through creating a full-featured AI chatbot using Nuxt, Nuxt UI, and the Vercel AI SDK. Each step is explained in detail so you understand how every piece works together.
-
 ## What we're building
 
 By the end of this tutorial, you'll have a fully functional AI chatbot with:

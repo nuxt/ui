@@ -42,8 +42,18 @@ if (import.meta.server) {
 const tree = ref<Record<string, Node>>({})
 const activePath = ref()
 
+const scrolled = ref(false)
+
+// The router scrolls to the top one frame after the page has loaded
+useNuxtApp().hooks.hookOnce('page:loading:end', () => {
+  requestAnimationFrame(() => {
+    scrolled.value = true
+  })
+})
+
 provide('tree', tree)
 provide('activePath', activePath)
+provide('scrolled', scrolled)
 
 const items = computed(() => Object.entries(tree.value).map(([key, value]) => ({ label: key, component: value })))
 </script>
