@@ -102,6 +102,22 @@ describe('colors plugin', () => {
     expect(style).toContain('--ui-color-primary-500: var(--color-red-500, oklch(')
   })
 
+  it('retries loading the palette on the next change after a failure', async () => {
+    const error = vi.spyOn(console, 'error').mockImplementation(() => {})
+    vi.mocked(loadColors).mockRejectedValueOnce(new Error('chunk failed'))
+    await hydrate(clientStyle)
+    await finishHydration()
+
+    appConfig.ui.colors.primary = 'red'
+    expect(await resolveStyle()).toBe(clientStyle)
+    expect(error).toHaveBeenCalled()
+
+    appConfig.ui.colors.primary = 'blue'
+    expect(await resolveStyle()).toContain('--ui-color-primary-500: var(--color-blue-500, oklch(')
+    expect(loadColors).toHaveBeenCalledTimes(2)
+    error.mockRestore()
+  })
+
   it('regenerates the style when the server rendered other colors', async () => {
     await hydrate(withBluePrimary(clientStyle))
     await finishHydration()

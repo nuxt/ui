@@ -77,6 +77,9 @@ export default defineNuxtPlugin(async () => {
     if (hydrated.value && generateRoot(undefined, appConfig.ui.colors, prefix) !== ssrSkeleton) {
       loading ||= loadColors().then((loaded) => {
         colors.value = loaded
+      }, (error) => {
+        loading = undefined
+        console.error('[@nuxt/ui] Failed to load the colors palette:', error)
       })
     }
     return ssrStyle
