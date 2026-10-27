@@ -7,7 +7,7 @@ const focusHighlight = (utilities: string) => ['textarea', '[contenteditable]']
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    root: 'relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm',
+    root: 'relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm mt-(--chat-prompt-queue-height)',
     header: 'flex items-center gap-1.5',
     files: 'flex flex-wrap items-center gap-1.5',
     queue: 'absolute bottom-full inset-x-[max(--spacing(2.5),calc(var(--ui-radius)*2))] z-10 isolate flex flex-col px-1 rounded-t-lg border border-b-0 border-default bg-default overflow-hidden before:absolute before:inset-0 before:-z-1 before:bg-elevated/50',

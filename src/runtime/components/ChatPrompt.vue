@@ -234,7 +234,7 @@ function submit(e?: Event) {
 
 const queueOpen = ref(true)
 
-// The queue floats above the prompt, its height is kept as room above the root so it covers nothing
+// The queue floats above the prompt, its height is kept as a top margin so it covers nothing, a caller margin takes over
 const queueRef = useTemplateRef<HTMLElement>('queueRef')
 const { height: queueHeight } = useElementSize(queueRef, undefined, { box: 'border-box' })
 const queueId = useId()
@@ -352,7 +352,7 @@ defineExpose({
     :data-dragging="hasFiles ? isDragging : undefined"
     :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
-    :style="queueHeight ? { marginTop: `${queueHeight}px` } : undefined"
+    :style="queueHeight ? { '--chat-prompt-queue-height': `${queueHeight}px` } : undefined"
     @submit.prevent="submit"
     @paste="onPaste"
   >

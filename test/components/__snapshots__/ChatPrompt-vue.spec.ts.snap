@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`ChatPrompt > renders with as correctly 1`] = `
-"<section data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+"<section data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm mt-(--chat-prompt-queue-height) bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -14,7 +14,7 @@ exports[`ChatPrompt > renders with as correctly 1`] = `
 `;
 
 exports[`ChatPrompt > renders with attachment correctly 1`] = `
-"<form method="post" data-dragging="false" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+"<form method="post" data-dragging="false" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm mt-(--chat-prompt-queue-height) bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
   <!--v-if-->
   <!--v-if-->
   <div data-slot="files" class="flex flex-wrap items-center gap-1.5">
@@ -37,7 +37,7 @@ exports[`ChatPrompt > renders with attachment correctly 1`] = `
 `;
 
 exports[`ChatPrompt > renders with body slot correctly 1`] = `
-"<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+"<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm mt-(--chat-prompt-queue-height) bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->Body slot
@@ -46,7 +46,7 @@ exports[`ChatPrompt > renders with body slot correctly 1`] = `
 `;
 
 exports[`ChatPrompt > renders with class correctly 1`] = `
-"<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary p-5">
+"<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 w-full rounded-lg backdrop-blur-sm mt-(--chat-prompt-queue-height) bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary p-5">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -59,7 +59,7 @@ exports[`ChatPrompt > renders with class correctly 1`] = `
 `;
 
 exports[`ChatPrompt > renders with error correctly 1`] = `
-"<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+"<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm mt-(--chat-prompt-queue-height) bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -72,7 +72,7 @@ exports[`ChatPrompt > renders with error correctly 1`] = `
 `;
 
 exports[`ChatPrompt > renders with files correctly 1`] = `
-"<form method="post" data-dragging="false" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+"<form method="post" data-dragging="false" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm mt-(--chat-prompt-queue-height) bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
   <!--v-if-->
   <!--v-if-->
   <div data-slot="files" class="flex flex-wrap items-center gap-1.5">
@@ -95,7 +95,7 @@ exports[`ChatPrompt > renders with files correctly 1`] = `
 `;
 
 exports[`ChatPrompt > renders with files slot correctly 1`] = `
-"<form method="post" data-dragging="false" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+"<form method="post" data-dragging="false" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm mt-(--chat-prompt-queue-height) bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
   <!--v-if-->
   <!--v-if-->
   <div data-slot="files" class="flex flex-wrap items-center gap-1.5">Files slot</div>
@@ -108,7 +108,7 @@ exports[`ChatPrompt > renders with files slot correctly 1`] = `
 `;
 
 exports[`ChatPrompt > renders with footer slot correctly 1`] = `
-"<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+"<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm mt-(--chat-prompt-queue-height) bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -121,7 +121,7 @@ exports[`ChatPrompt > renders with footer slot correctly 1`] = `
 `;
 
 exports[`ChatPrompt > renders with header slot correctly 1`] = `
-"<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+"<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm mt-(--chat-prompt-queue-height) bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
   <div data-slot="header" class="flex items-center gap-1.5">Header slot</div>
   <!--v-if-->
   <!--v-if-->
@@ -134,7 +134,7 @@ exports[`ChatPrompt > renders with header slot correctly 1`] = `
 `;
 
 exports[`ChatPrompt > renders with placeholder correctly 1`] = `
-"<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+"<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm mt-(--chat-prompt-queue-height) bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -147,7 +147,7 @@ exports[`ChatPrompt > renders with placeholder correctly 1`] = `
 `;
 
 exports[`ChatPrompt > renders with queue correctly 1`] = `
-"<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+"<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm mt-(--chat-prompt-queue-height) bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
   <!--v-if-->
   <div data-slot="queue" class="absolute inset-x-[max(--spacing(2.5),calc(var(--ui-radius)*2))] z-10 isolate flex flex-col px-1 rounded-t-lg border border-b-0 border-default bg-default overflow-hidden before:absolute before:inset-0 before:-z-1 before:bg-elevated/50 bottom-[calc(100%+1px)]"><button type="button" aria-expanded="true" aria-controls="v-0" data-slot="queueTrigger" class="flex items-center gap-1.5 w-full p-1.5 text-xs font-medium text-muted hover:text-default focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-inverted rounded-md"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-state="open" data-slot="queueTriggerIcon" class="shrink-0 size-4 data-[state=open]:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none"></svg><span>Queued messages</span><span data-slot="queueCount" class="text-dimmed tabular-nums">2</span></button>
     <ul id="v-0" data-slot="queueList" class="flex flex-col max-h-60 overflow-y-auto pb-1">
@@ -187,7 +187,7 @@ exports[`ChatPrompt > renders with queue correctly 1`] = `
 `;
 
 exports[`ChatPrompt > renders with queue slot correctly 1`] = `
-"<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+"<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm mt-(--chat-prompt-queue-height) bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
   <!--v-if-->
   <div data-slot="queue" class="absolute inset-x-[max(--spacing(2.5),calc(var(--ui-radius)*2))] z-10 isolate flex flex-col px-1 rounded-t-lg border border-b-0 border-default bg-default overflow-hidden before:absolute before:inset-0 before:-z-1 before:bg-elevated/50 bottom-[calc(100%+1px)]">Queue slot</div>
   <!--v-if-->
@@ -200,7 +200,7 @@ exports[`ChatPrompt > renders with queue slot correctly 1`] = `
 `;
 
 exports[`ChatPrompt > renders with ui correctly 1`] = `
-"<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+"<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm mt-(--chat-prompt-queue-height) bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -213,7 +213,7 @@ exports[`ChatPrompt > renders with ui correctly 1`] = `
 `;
 
 exports[`ChatPrompt > renders with variant naked correctly 1`] = `
-"<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm">
+"<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm mt-(--chat-prompt-queue-height)">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -226,7 +226,7 @@ exports[`ChatPrompt > renders with variant naked correctly 1`] = `
 `;
 
 exports[`ChatPrompt > renders with variant outline correctly 1`] = `
-"<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+"<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm mt-(--chat-prompt-queue-height) bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -239,7 +239,7 @@ exports[`ChatPrompt > renders with variant outline correctly 1`] = `
 `;
 
 exports[`ChatPrompt > renders with variant soft correctly 1`] = `
-"<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-elevated/50 outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:outline-3">
+"<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm mt-(--chat-prompt-queue-height) bg-elevated/50 outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:outline-3">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -252,7 +252,7 @@ exports[`ChatPrompt > renders with variant soft correctly 1`] = `
 `;
 
 exports[`ChatPrompt > renders with variant subtle correctly 1`] = `
-"<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-elevated/50 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+"<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm mt-(--chat-prompt-queue-height) bg-elevated/50 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
