@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'hringekja',
       slide: 'mynd'
     },
+    chatAttachment: {
+      uploading: 'Hleður upp',
+      error: 'Upphleðsla mistókst'
+    },
     chatMessages: {
       autoScroll: 'Skruna niður'
     },

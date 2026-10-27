@@ -37,6 +37,10 @@ export default defineLocale<Messages>({
       roledescription: 'عرض شرائح',
       slide: 'شريحة'
     },
+    chatAttachment: {
+      uploading: 'جارٍ الرفع',
+      error: 'فشل الرفع'
+    },
     chatMessages: {
       autoScroll: 'التمرير إلى الأسفل'
     },

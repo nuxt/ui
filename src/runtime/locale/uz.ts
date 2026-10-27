@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'karusel',
       slide: 'slayd'
     },
+    chatAttachment: {
+      uploading: 'Yuklanmoqda',
+      error: 'Yuklab boʻlmadi'
+    },
     chatMessages: {
       autoScroll: 'Pastga aylantirish'
     },

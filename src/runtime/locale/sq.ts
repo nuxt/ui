@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'karusel',
       slide: 'slajd'
     },
+    chatAttachment: {
+      uploading: 'Po ngarkohet',
+      error: 'Ngarkimi dështoi'
+    },
     chatMessages: {
       autoScroll: 'Lëviz poshtë'
     },

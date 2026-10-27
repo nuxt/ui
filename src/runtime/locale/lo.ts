@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'ຄາຣູເຊວ',
       slide: 'ສະໄລ້'
     },
+    chatAttachment: {
+      uploading: 'ກຳລັງອັບໂຫຼດ',
+      error: 'ອັບໂຫຼດບໍ່ສຳເລັດ'
+    },
     chatMessages: {
       autoScroll: 'ເລື່ອນລົງລຸ່ມສຸດ'
     },

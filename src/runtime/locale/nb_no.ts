@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'karusell',
       slide: 'lysbilde'
     },
+    chatAttachment: {
+      uploading: 'Laster opp',
+      error: 'Opplasting mislyktes'
+    },
     chatMessages: {
       autoScroll: 'Rull til bunnen'
     },

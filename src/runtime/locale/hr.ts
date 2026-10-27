@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'vrtuljak',
       slide: 'slajd'
     },
+    chatAttachment: {
+      uploading: 'Prijenos',
+      error: 'Prijenos nije uspio'
+    },
     chatMessages: {
       autoScroll: 'Pomakni na dno'
     },

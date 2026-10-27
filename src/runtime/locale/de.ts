@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'Karussell',
       slide: 'Folie'
     },
+    chatAttachment: {
+      uploading: 'Wird hochgeladen',
+      error: 'Hochladen fehlgeschlagen'
+    },
     chatMessages: {
       autoScroll: 'Nach unten scrollen'
     },

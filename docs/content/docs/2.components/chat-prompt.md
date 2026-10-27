@@ -44,6 +44,66 @@ props:
 ---
 ::
 
+### Files :badge{label="Soon" class="align-text-top"}
+
+Use the `v-model:files` directive to let users attach files. They can paste them in the textarea or drop them on the prompt, and each one shows above the textarea as a [ChatAttachment](/docs/components/chat-attachment) they can remove. The `#footer` slot receives an `open` function to pick files from a button.
+
+::component-example
+---
+collapse: true
+name: 'chat-prompt-files-example'
+---
+::
+
+::note
+Use the `accept` prop to restrict the file types and set `multiple` to `false` to keep a single file. The form is submitted with files even when the textarea is empty. While a file is dragged over the prompt, its root has `data-dragging="true"`, which you can style with `data-[dragging=true]:`.
+::
+
+::tip
+Use the `toFileUIParts` utility from `@nuxt/ui/utils/ai` to send the files as data URLs with the AI SDK, and the `#files` slot of [ChatMessages](/docs/components/chat-messages) to display them in the conversation.
+
+```vue
+<script setup lang="ts">
+import { useChat } from '@ai-sdk/vue'
+import { toFileUIParts } from '@nuxt/ui/utils/ai'
+
+const input = ref('')
+const files = ref<File[]>([])
+
+const { messages, status, sendMessage } = useChat()
+
+async function onSubmit() {
+  const text = input.value
+  const submitted = files.value
+
+  input.value = ''
+  files.value = []
+
+  const parts = await toFileUIParts(submitted)
+  sendMessage(text.trim() ? { text, files: parts } : { files: parts })
+}
+</script>
+
+<template>
+  <UChatMessages :messages="messages" :status="status">
+    <template #files="{ parts }">
+      <UChatAttachment
+        v-for="(part, index) in parts"
+        :key="index"
+        :name="part.filename"
+        :type="part.mediaType"
+        :url="part.url"
+      />
+    </template>
+  </UChatMessages>
+
+  <UChatPrompt v-model="input" v-model:files="files" @submit="onSubmit">
+    <UChatPromptSubmit :status="status" />
+  </UChatPrompt>
+</template>
+```
+::
+
 ## Examples
 
 ::tip{to="/docs/components/chat"}
@@ -52,7 +112,7 @@ Check the **Chat** overview page for installation instructions, server setup and
 
 ### With an Editor :badge{label="4.10+" class="align-text-top"}
 
-Compose the `#header`, `#body` and `#footer` slots to build a rich prompt: file attachments, an [Editor](/docs/components/editor) with `@` mentions and `/` commands through [EditorMentionMenu](/docs/components/editor-mention-menu), and a mode selector.
+Compose the `#body` and `#footer` slots with `v-model:files` to build a rich prompt: file attachments, an [Editor](/docs/components/editor) with `@` mentions and `/` commands through [EditorMentionMenu](/docs/components/editor-mention-menu), and a mode selector.
 
 ::component-example
 ---
@@ -128,6 +188,7 @@ When accessing the component via a template ref, you can use the following:
 | Name | Type |
 | ---- | ---- |
 | `textareaRef`{lang="ts-type"} | `Ref<HTMLTextAreaElement \| null>`{lang="ts-type"} |
+| `open()`{lang="ts-type"} | `void`{lang="ts-type"} |
 
 ## Theme
 

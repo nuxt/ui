@@ -44,6 +44,7 @@ export interface ThemeDefaults {
   changelogVersion?: Partial<ComponentTypes.ChangelogVersionProps>
   changelogVersions?: Partial<ComponentTypes.ChangelogVersionsProps>
   chart?: Partial<ComponentTypes.ChartProps>
+  chatAttachment?: Partial<ComponentTypes.ChatAttachmentProps>
   chatMessage?: Partial<ComponentTypes.ChatMessageProps>
   chatMessages?: Partial<ComponentTypes.ChatMessagesProps>
   chatPalette?: Partial<ComponentTypes.ChatPaletteProps>

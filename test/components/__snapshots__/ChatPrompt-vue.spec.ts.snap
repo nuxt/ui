@@ -3,6 +3,7 @@
 exports[`ChatPrompt > renders with as correctly 1`] = `
 "<section data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
   <!--v-if-->
+  <!--v-if-->
   <div data-slot="body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none resize-none px-0 rounded-none" data-slot="base" value=""></textarea>
     <!--v-if-->
     <!--v-if-->
@@ -13,6 +14,7 @@ exports[`ChatPrompt > renders with as correctly 1`] = `
 
 exports[`ChatPrompt > renders with body slot correctly 1`] = `
 "<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+  <!--v-if-->
   <!--v-if-->Body slot
   <!--v-if-->
 </form>"
@@ -20,6 +22,7 @@ exports[`ChatPrompt > renders with body slot correctly 1`] = `
 
 exports[`ChatPrompt > renders with class correctly 1`] = `
 "<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary p-5">
+  <!--v-if-->
   <!--v-if-->
   <div data-slot="body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none resize-none px-0 rounded-none" data-slot="base" value=""></textarea>
     <!--v-if-->
@@ -32,7 +35,42 @@ exports[`ChatPrompt > renders with class correctly 1`] = `
 exports[`ChatPrompt > renders with error correctly 1`] = `
 "<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
   <!--v-if-->
+  <!--v-if-->
   <div data-slot="body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none resize-none px-0 rounded-none" disabled="" data-slot="base" value=""></textarea>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</form>"
+`;
+
+exports[`ChatPrompt > renders with files correctly 1`] = `
+"<form method="post" data-dragging="false" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+  <!--v-if-->
+  <div data-slot="files" class="flex flex-wrap items-center gap-1.5">
+    <div data-status="idle" data-orientation="horizontal" data-variant="card" data-slot="root" class="group/attachment relative flex max-w-full w-fit shrink-0 gap-2.5 p-2 text-sm data-[orientation=vertical]:w-30 data-[variant=thumbnail]:w-14 items-center min-w-40 pe-2.5 rounded-xl border border-default bg-default">
+      <div data-slot="leading" class="relative flex items-center justify-center shrink-0 aspect-square overflow-hidden rounded-lg bg-elevated text-muted w-10">
+        <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="absolute shrink-0 size-5"></svg>
+      </div>
+      <div data-slot="wrapper" class="grid grid-cols-[minmax(0,1fr)_auto] items-center min-w-0 flex-1"><span data-slot="name" class="block truncate font-medium text-highlighted">notes.txt</span><span data-slot="description" class="block truncate row-start-2 text-xs text-muted mt-0.5">TXT · 1B</span><button type="button" data-slot="remove" aria-label="Remove notes.txt" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1 shrink-0 col-start-2 row-start-1 -my-1 ms-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-4"></svg>
+          <!--v-if-->
+          <!--v-if-->
+        </button></div><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;" aria-live="polite"></span>
+    </div>
+  </div>
+  <div data-slot="body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none resize-none px-0 rounded-none" data-slot="base" value=""></textarea>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</form>"
+`;
+
+exports[`ChatPrompt > renders with files slot correctly 1`] = `
+"<form method="post" data-dragging="false" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+  <!--v-if-->
+  <div data-slot="files" class="flex flex-wrap items-center gap-1.5">Files slot</div>
+  <div data-slot="body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none resize-none px-0 rounded-none" data-slot="base" value=""></textarea>
     <!--v-if-->
     <!--v-if-->
   </div>
@@ -42,6 +80,7 @@ exports[`ChatPrompt > renders with error correctly 1`] = `
 
 exports[`ChatPrompt > renders with footer slot correctly 1`] = `
 "<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+  <!--v-if-->
   <!--v-if-->
   <div data-slot="body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none resize-none px-0 rounded-none" data-slot="base" value=""></textarea>
     <!--v-if-->
@@ -54,6 +93,7 @@ exports[`ChatPrompt > renders with footer slot correctly 1`] = `
 exports[`ChatPrompt > renders with header slot correctly 1`] = `
 "<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
   <div data-slot="header" class="flex items-center gap-1.5">Header slot</div>
+  <!--v-if-->
   <div data-slot="body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none resize-none px-0 rounded-none" data-slot="base" value=""></textarea>
     <!--v-if-->
     <!--v-if-->
@@ -64,6 +104,7 @@ exports[`ChatPrompt > renders with header slot correctly 1`] = `
 
 exports[`ChatPrompt > renders with placeholder correctly 1`] = `
 "<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+  <!--v-if-->
   <!--v-if-->
   <div data-slot="body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Placeholder" class="w-full border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none resize-none px-0 rounded-none" data-slot="base" value=""></textarea>
     <!--v-if-->
@@ -76,6 +117,7 @@ exports[`ChatPrompt > renders with placeholder correctly 1`] = `
 exports[`ChatPrompt > renders with ui correctly 1`] = `
 "<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
   <!--v-if-->
+  <!--v-if-->
   <div data-slot="body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none resize-none px-0 rounded-none" data-slot="base" value=""></textarea>
     <!--v-if-->
     <!--v-if-->
@@ -86,6 +128,7 @@ exports[`ChatPrompt > renders with ui correctly 1`] = `
 
 exports[`ChatPrompt > renders with variant naked correctly 1`] = `
 "<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm">
+  <!--v-if-->
   <!--v-if-->
   <div data-slot="body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none resize-none px-0 rounded-none" data-slot="base" value=""></textarea>
     <!--v-if-->
@@ -98,6 +141,7 @@ exports[`ChatPrompt > renders with variant naked correctly 1`] = `
 exports[`ChatPrompt > renders with variant outline correctly 1`] = `
 "<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-default/75 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
   <!--v-if-->
+  <!--v-if-->
   <div data-slot="body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none resize-none px-0 rounded-none" data-slot="base" value=""></textarea>
     <!--v-if-->
     <!--v-if-->
@@ -109,6 +153,7 @@ exports[`ChatPrompt > renders with variant outline correctly 1`] = `
 exports[`ChatPrompt > renders with variant soft correctly 1`] = `
 "<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-elevated/50 outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:outline-3">
   <!--v-if-->
+  <!--v-if-->
   <div data-slot="body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none resize-none px-0 rounded-none" data-slot="base" value=""></textarea>
     <!--v-if-->
     <!--v-if-->
@@ -119,6 +164,7 @@ exports[`ChatPrompt > renders with variant soft correctly 1`] = `
 
 exports[`ChatPrompt > renders with variant subtle correctly 1`] = `
 "<form method="post" data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm bg-elevated/50 ring ring-default outline-primary/25 has-[textarea:focus-visible]:outline-3 has-[textarea:focus-visible]:ring-primary has-[[contenteditable]:focus-visible]:outline-3 has-[[contenteditable]:focus-visible]:ring-primary">
+  <!--v-if-->
   <!--v-if-->
   <div data-slot="body" class="relative inline-flex items-start gap-1.5"><textarea rows="1" placeholder="Type your message here…" class="w-full border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none resize-none px-0 rounded-none" data-slot="base" value=""></textarea>
     <!--v-if-->

@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'ការ៉ូសែល',
       slide: 'ស្លាយ'
     },
+    chatAttachment: {
+      uploading: 'កំពុងផ្ទុកឡើង',
+      error: 'ការផ្ទុកឡើងបានបរាជ័យ'
+    },
     chatMessages: {
       autoScroll: 'រំកិលចុះក្រោម'
     },

@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: '輪播',
       slide: '投影片'
     },
+    chatAttachment: {
+      uploading: '正在上傳',
+      error: '上傳失敗'
+    },
     chatMessages: {
       autoScroll: '捲動到底部'
     },

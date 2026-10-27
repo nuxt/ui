@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'ภาพหมุนเวียน',
       slide: 'สไลด์'
     },
+    chatAttachment: {
+      uploading: 'กำลังอัปโหลด',
+      error: 'อัปโหลดไม่สำเร็จ'
+    },
     chatMessages: {
       autoScroll: 'เลื่อนลงล่างสุด'
     },

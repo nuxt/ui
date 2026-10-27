@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'карусел',
       slide: 'слайд'
     },
+    chatAttachment: {
+      uploading: 'Качване',
+      error: 'Неуспешно качване'
+    },
     chatMessages: {
       autoScroll: 'Превърти надолу'
     },

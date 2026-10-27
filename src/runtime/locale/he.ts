@@ -37,6 +37,10 @@ export default defineLocale<Messages>({
       roledescription: 'קרוסלה',
       slide: 'שקופית'
     },
+    chatAttachment: {
+      uploading: 'מעלה',
+      error: 'ההעלאה נכשלה'
+    },
     chatMessages: {
       autoScroll: 'גלול למטה'
     },

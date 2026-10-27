@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'carrousel',
       slide: 'dia'
     },
+    chatAttachment: {
+      uploading: 'Uploaden',
+      error: 'Uploaden mislukt'
+    },
     chatMessages: {
       autoScroll: 'Naar beneden scrollen'
     },

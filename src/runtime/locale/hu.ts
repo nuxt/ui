@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'körhinta',
       slide: 'dia'
     },
+    chatAttachment: {
+      uploading: 'Feltöltés',
+      error: 'Sikertelen feltöltés'
+    },
     chatMessages: {
       autoScroll: 'Görgetés az aljára'
     },

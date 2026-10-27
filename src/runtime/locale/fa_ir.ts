@@ -37,6 +37,10 @@ export default defineLocale<Messages>({
       roledescription: 'کاروسل',
       slide: 'اسلاید'
     },
+    chatAttachment: {
+      uploading: 'در حال بارگذاری',
+      error: 'بارگذاری ناموفق بود'
+    },
     chatMessages: {
       autoScroll: 'پیمایش به پایین'
     },

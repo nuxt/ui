@@ -4,8 +4,7 @@ import type { EditorMentionMenuItem, SelectItem } from '@nuxt/ui'
 
 const input = ref('')
 const mode = ref('auto')
-const attachments = ref<{ name: string, src?: string }[]>([])
-const fileInputRef = useTemplateRef('fileInputRef')
+const attachments = ref<File[]>([])
 
 const files: EditorMentionMenuItem[] = [
   { label: 'app.vue', icon: 'i-vscode-icons-file-type-vue' },
@@ -35,19 +34,8 @@ const modes = [
 // SSR-safe target so the menus aren't clipped by overflow
 const appendToBody = import.meta.client ? () => document.body : undefined
 
-function onFilesChange(event: Event) {
-  const target = event.target as HTMLInputElement
-  for (const file of Array.from(target.files ?? [])) {
-    attachments.value.push({
-      name: file.name,
-      src: file.type.startsWith('image/') ? URL.createObjectURL(file) : undefined
-    })
-  }
-  target.value = ''
-}
-
 function onSubmit() {
-  console.log('submit', input.value)
+  console.log('submit', input.value, attachments.value)
 
   input.value = ''
   attachments.value = []
@@ -57,30 +45,15 @@ function onSubmit() {
 <template>
   <UChatPrompt
     v-model="input"
+    v-model:files="attachments"
     class="w-full p-0 gap-0"
     placeholder="Press / to open the command menu"
     :ui="{
-      header: 'px-2.5 py-2 border-b border-default',
+      files: 'px-2.5 py-2 border-b border-default',
       footer: 'px-2.5 py-2 border-t border-default'
     }"
     @submit="onSubmit"
   >
-    <template v-if="attachments.length" #header>
-      <UButton
-        v-for="(file, index) in attachments"
-        :key="index"
-        :label="file.name"
-        :avatar="file.src ? { src: file.src } : undefined"
-        :icon="file.src ? undefined : 'i-lucide-file'"
-        color="neutral"
-        variant="soft"
-        size="xs"
-        square
-        trailing-icon="i-lucide-x"
-        @click="attachments.splice(index, 1)"
-      />
-    </template>
-
     <template #body="{ submit, placeholder }">
       <UEditor
         v-slot="{ editor }"
@@ -101,7 +74,7 @@ function onSubmit() {
       </UEditor>
     </template>
 
-    <template #footer>
+    <template #footer="{ open }">
       <div class="flex items-center gap-0.5">
         <UButton
           icon="i-lucide-plus"
@@ -109,9 +82,8 @@ function onSubmit() {
           variant="ghost"
           aria-label="Attach files"
           size="sm"
-          @click="fileInputRef?.click()"
+          @click="open"
         />
-        <input ref="fileInputRef" type="file" multiple class="hidden" @change="onFilesChange">
       </div>
 
       <div class="flex items-center gap-1">
@@ -125,7 +97,7 @@ function onSubmit() {
           square
         />
 
-        <UChatPromptSubmit size="sm" :disabled="!input.trim()" />
+        <UChatPromptSubmit size="sm" :disabled="!input.trim() && !attachments.length" />
       </div>
     </template>
   </UChatPrompt>

@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'ক্যারোসেল',
       slide: 'স্লাইড'
     },
+    chatAttachment: {
+      uploading: 'আপলোড হচ্ছে',
+      error: 'আপলোড ব্যর্থ হয়েছে'
+    },
     chatMessages: {
       autoScroll: 'নিচে স্ক্রোল করুন'
     },

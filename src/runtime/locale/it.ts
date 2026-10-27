@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'carosello',
       slide: 'diapositiva'
     },
+    chatAttachment: {
+      uploading: 'Caricamento',
+      error: 'Caricamento non riuscito'
+    },
     chatMessages: {
       autoScroll: 'Scorri in fondo'
     },

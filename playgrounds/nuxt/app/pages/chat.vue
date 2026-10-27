@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
 import { useChat } from '@ai-sdk/vue'
-import { isPartStreaming, isToolStreaming, isToolApprovalPending } from '@nuxt/ui/utils/ai'
+import { isPartStreaming, isToolStreaming, isToolApprovalPending, toFileUIParts } from '@nuxt/ui/utils/ai'
 import { Markdown } from '@comark/vue'
 import shiki from '@comark/vue/plugins/shiki'
 
 const toast = useToast()
 
 const input = ref('')
+const files = ref<File[]>([])
 
 const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
   sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses,
@@ -28,12 +29,18 @@ const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalR
   }
 })
 
-function onSubmit() {
-  if (!input.value.trim()) return
+async function onSubmit() {
+  const text = input.value
+  const submitted = files.value
 
-  sendMessage({ text: input.value })
-
+  // Cleared before the files are read, so a second submit meanwhile has nothing to send
   input.value = ''
+  files.value = []
+
+  const parts = await toFileUIParts(submitted)
+
+  // An empty text part is rejected by some providers, send the files alone
+  sendMessage(text.trim() ? { text, files: parts } : { files: parts })
 }
 
 function clearMessages() {
@@ -111,6 +118,16 @@ function generateMessages() {
       :assistant="{ actions: [{ label: 'Edit', icon: 'i-lucide-pencil', onClick: () => console.log('edit') }] }"
       :user="{ actions: [{ label: 'Edit', icon: 'i-lucide-pencil', onClick: () => console.log('edit') }], icon: 'i-lucide-user' }"
     >
+      <template #files="{ parts }">
+        <UChatAttachment
+          v-for="(part, index) in parts"
+          :key="index"
+          :name="part.filename"
+          :type="part.mediaType"
+          :url="part.url"
+        />
+      </template>
+
       <template #part="{ part, message, streaming }">
         <UChatReasoning
           v-if="isReasoningUIPart(part)"
@@ -185,13 +202,26 @@ function generateMessages() {
       <template #footer>
         <UChatPrompt
           v-model="input"
+          v-model:files="files"
+          accept="image/*,application/pdf"
           :status="status"
           :error="error"
           variant="subtle"
           class="mt-4"
           @submit="onSubmit"
         >
-          <UChatPromptSubmit :status="status" @stop="stop()" @reload="regenerate()" />
+          <template #footer="{ open }">
+            <UButton
+              icon="i-lucide-paperclip"
+              color="neutral"
+              variant="ghost"
+              size="sm"
+              aria-label="Attach files"
+              @click="open"
+            />
+
+            <UChatPromptSubmit :status="status" @stop="stop()" @reload="regenerate()" />
+          </template>
         </UChatPrompt>
       </template>
     </UChatMessages>

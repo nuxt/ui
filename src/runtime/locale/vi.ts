@@ -36,6 +36,10 @@ export default defineLocale<Messages>({
       roledescription: 'băng chuyền',
       slide: 'slide'
     },
+    chatAttachment: {
+      uploading: 'Đang tải lên',
+      error: 'Tải lên thất bại'
+    },
     chatMessages: {
       autoScroll: 'Cuộn xuống dưới'
     },
