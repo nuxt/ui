@@ -98,7 +98,7 @@ export default defineNuxtPlugin(async () => {
   if (import.meta.client && nuxtApp.isHydrating && !nuxtApp.payload.serverRendered) {
     const style = document.createElement('style')
 
-    style.innerHTML = root.value
+    style.textContent = root.value
     style.setAttribute('data-nuxt-ui-colors', '')
     document.head.appendChild(style)
 
