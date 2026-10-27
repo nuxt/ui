@@ -167,6 +167,46 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 Check the **Chat** overview page for installation instructions, server setup and usage examples.
 ::
 
+### With reasoning models
+
+To stream [reasoning](https://ai-sdk.dev/docs/ai-sdk-ui/chatbot#reasoning) parts, configure `providerOptions` for your provider ([Anthropic](https://ai-sdk.dev/providers/ai-sdk-providers/anthropic#reasoning), [Google](https://ai-sdk.dev/providers/ai-sdk-providers/google#thinking), [OpenAI](https://ai-sdk.dev/providers/ai-sdk-providers/openai#reasoning)):
+
+```ts [server/api/chat.post.ts]
+import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
+
+export default defineEventHandler(async (event) => {
+  const { messages } = await readBody(event)
+
+  const result = streamText({
+    model: 'anthropic/claude-sonnet-5.5',
+    maxOutputTokens: 10000,
+    instructions: 'You are a helpful assistant.',
+    messages: await convertToModelMessages(messages),
+    providerOptions: {
+      anthropic: {
+        thinking: {
+          type: 'adaptive'
+        },
+        effort: 'low'
+      },
+      google: {
+        thinkingConfig: {
+          includeThoughts: true,
+          thinkingLevel: 'low'
+        }
+      },
+      openai: {
+        reasoningEffort: 'low',
+        reasoningSummary: 'detailed'
+      }
+    }
+  })
+
+  const stream = toUIMessageStream({ stream: result.stream })
+  return createUIMessageStreamResponse({ stream })
+})
+```
+
 ## API
 
 ### Props

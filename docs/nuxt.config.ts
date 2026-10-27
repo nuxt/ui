@@ -124,6 +124,9 @@ export default defineNuxtConfig({
     '/docs/getting-started/color-mode/**': { redirect: { to: '/docs/getting-started/integrations/color-mode/**', statusCode: 301 }, prerender: false },
     '/docs/getting-started/i18n/**': { redirect: { to: '/docs/getting-started/integrations/i18n/**', statusCode: 301 }, prerender: false },
     '/docs/getting-started/content': { redirect: { to: '/docs/getting-started/integrations/content', statusCode: 301 }, prerender: false },
+    // v4 redirects - the blog post moved to its template guide
+    '/blog': { redirect: { to: '/templates', statusCode: 301 }, prerender: false },
+    '/blog/how-to-build-an-ai-chat': { redirect: { to: '/templates/chat', statusCode: 301 }, prerender: false },
     // v4 redirects - renamed components
     '/docs/components/button-group': { redirect: { to: '/docs/components/field-group', statusCode: 301 }, prerender: false },
     '/docs/components/page-accordion': { redirect: { to: '/docs/components/accordion', statusCode: 301 }, prerender: false },
@@ -331,7 +334,7 @@ export default defineNuxtConfig({
     excludePrefixes: { extend: ['/docs/getting-started/figma', '/docs/getting-started/playground', '/docs/releases'] },
     sitemap: {
       markdown: {
-        // Split `/docs/**` into a section per area; `/blog/**` stays whole.
+        // Split `/docs/**` into a section per area; `/templates/**` stays whole.
         expand: ['/docs'],
         labels: { 'getting-started': 'Getting Started' }
       }

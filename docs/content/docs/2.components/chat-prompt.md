@@ -119,8 +119,8 @@ name: 'chat-prompt-queue-example'
 ---
 ::
 
-::tip{to="/docs/components/chat#queued-messages"}
-Sending the queued messages is up to you, check the **Chat** overview page for a recipe with the AI SDK.
+::tip{to="#with-queued-messages"}
+Sending the queued messages is up to you, check the **With queued messages** example for a recipe with the AI SDK.
 ::
 
 ## Examples
@@ -181,6 +181,125 @@ async function onSubmit() {
   </UDashboardPanel>
 </template>
 ```
+
+### With queued messages :badge{label="Soon" class="align-text-top"}
+
+The AI SDK doesn't queue messages: calling `sendMessage` during a response starts a second request next to the current one. With `status`, `UChatPrompt` ignores submits while the chat is `submitted` or `streaming`. Bind `v-model:queue` to keep them instead: the prompt lists the queued messages in a panel above it, where the user can send one now, edit it or remove it, and you send the next one once the chat is `ready` again.
+
+::framework-only
+#nuxt
+```vue
+<script setup lang="ts">
+import type { ChatPromptQueueItem } from '@nuxt/ui'
+import { useChat } from '@ai-sdk/vue'
+
+const input = ref('')
+const queue = ref<ChatPromptQueueItem[]>([])
+
+const { status, error, sendMessage, regenerate, stop } = useChat()
+
+function onSubmit() {
+  sendMessage({ text: input.value })
+  input.value = ''
+}
+
+function sendNext() {
+  const item = queue.value.shift()
+  if (item) {
+    sendMessage({ text: item.text })
+  }
+}
+
+watch(status, (value) => {
+  if (value === 'ready') {
+    sendNext()
+  }
+})
+
+// The message picked to be sent now is at the front of the queue
+function onSend() {
+  if (status.value === 'submitted' || status.value === 'streaming') {
+    stop()
+  } else {
+    sendNext()
+  }
+}
+</script>
+
+<template>
+  <UChatPrompt
+    v-model="input"
+    v-model:queue="queue"
+    :status="status"
+    :error="error"
+    @submit="onSubmit"
+    @send="onSend"
+  >
+    <UChatPromptSubmit :status="status" @stop="stop()" @reload="regenerate()" />
+  </UChatPrompt>
+</template>
+```
+
+#vue
+```vue
+<script setup lang="ts">
+import { ref, watch } from 'vue'
+import type { ChatPromptQueueItem } from '@nuxt/ui'
+import { useChat } from '@ai-sdk/vue'
+
+const input = ref('')
+const queue = ref<ChatPromptQueueItem[]>([])
+
+const { status, error, sendMessage, regenerate, stop } = useChat()
+
+function onSubmit() {
+  sendMessage({ text: input.value })
+  input.value = ''
+}
+
+function sendNext() {
+  const item = queue.value.shift()
+  if (item) {
+    sendMessage({ text: item.text })
+  }
+}
+
+watch(status, (value) => {
+  if (value === 'ready') {
+    sendNext()
+  }
+})
+
+// The message picked to be sent now is at the front of the queue
+function onSend() {
+  if (status.value === 'submitted' || status.value === 'streaming') {
+    stop()
+  } else {
+    sendNext()
+  }
+}
+</script>
+
+<template>
+  <UChatPrompt
+    v-model="input"
+    v-model:queue="queue"
+    :status="status"
+    :error="error"
+    @submit="onSubmit"
+    @send="onSend"
+  >
+    <UChatPromptSubmit :status="status" @stop="stop()" @reload="regenerate()" />
+  </UChatPrompt>
+</template>
+```
+::
+
+After an `error`, the prompt is disabled and the queue waits until the user reloads the failed response. Stopping the response sends the next queued message right away.
+
+::note
+With [tool approval](/docs/components/chat-tool#with-approval-flow), a response waiting for the user's answer is `ready` too. Skip `sendNext` while the last message has a part in the `approval-requested` state, a new message would leave the approval unanswered.
+::
 
 ## API
 
