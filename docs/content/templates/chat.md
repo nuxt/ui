@@ -1446,13 +1446,14 @@ The [`UChatTool`](/docs/components/chat-tool) component shows the tool name and 
 
 ## Queuing messages :badge{label="Soon" class="align-text-top"}
 
-The AI SDK doesn't queue messages: calling `sendMessage` during a response starts a second request next to the current one. With `status`, `UChatPrompt` ignores submits while the chat is `submitted` or `streaming`. To let users send their next message anyway, leave it off, keep the text in a queue and send it once the chat is `ready` again:
+The AI SDK doesn't queue messages: calling `sendMessage` during a response starts a second request next to the current one. With `status`, `UChatPrompt` ignores submits while the chat is `submitted` or `streaming`. Bind `v-model:queue` to keep them instead, then send the next one once the chat is `ready` again:
 
 ::code-tree-intersection
 :::code-collapse
 
-```vue [app/pages/chat/[id].vue] {17,44-49,54-55,57-59,63-67,127-141}
+```vue [app/pages/chat/[id].vue] {2,18,53-58,60-64,66-70,72-79,134,140}
 <script setup lang="ts">
+import type { ChatPromptQueueItem } from '@nuxt/ui'
 import { DefaultChatTransport, getToolName, isReasoningUIPart, isTextUIPart, isToolUIPart, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
 import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
@@ -1468,7 +1469,7 @@ if (!chatData.value) {
 }
 
 const input = ref('')
-const queue = ref<string[]>([])
+const queue = ref<ChatPromptQueueItem[]>([])
 
 const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
   id: chatData.value.id,
@@ -1495,22 +1496,24 @@ const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalR
   }
 })
 
-function sendNext() {
-  const text = queue.value.shift()
-  if (text) {
-    sendMessage({ text })
-  }
-}
-
 function handleSubmit(e: Event) {
   e.preventDefault()
   if (input.value.trim()) {
-    queue.value.push(input.value)
+    sendMessage({ text: input.value })
     input.value = ''
+  }
+}
 
-    if (status.value !== 'submitted' && status.value !== 'streaming') {
-      sendNext()
-    }
+function sendNext() {
+  // A response waiting for a tool approval is `ready` too, a new message would leave it unanswered
+  const parts = messages.value.at(-1)?.parts
+  if (parts?.some(part => isToolUIPart(part) && part.state === 'approval-requested')) {
+    return
+  }
+
+  const item = queue.value.shift()
+  if (item) {
+    sendMessage({ text: item.text })
   }
 }
 
@@ -1519,6 +1522,15 @@ watch(status, (value) => {
     sendNext()
   }
 })
+
+// The message picked to be sent now is at the front of the queue
+function onSend() {
+  if (status.value === 'submitted' || status.value === 'streaming') {
+    stop()
+  } else {
+    sendNext()
+  }
+}
 
 onMounted(() => {
   if (chatData.value?.messages.length === 1) {
@@ -1573,27 +1585,14 @@ onMounted(() => {
 
         <UChatPrompt
           v-model="input"
+          v-model:queue="queue"
+          :status="status"
           :error="error"
           variant="subtle"
           class="sticky bottom-0"
           @submit="handleSubmit"
+          @send="onSend"
         >
-          <template v-if="queue.length" #header>
-            <ul class="flex flex-col gap-1 w-full">
-              <li v-for="(text, index) in queue" :key="index" class="flex items-center gap-2 text-sm text-muted">
-                <span class="truncate flex-1">{{ text }}</span>
-                <UButton
-                  icon="i-lucide-x"
-                  color="neutral"
-                  variant="ghost"
-                  size="xs"
-                  :aria-label="`Remove ${text} from queue`"
-                  @click="queue.splice(index, 1)"
-                />
-              </li>
-            </ul>
-          </template>
-
           <template #footer>
             <ModelSelect v-model="model" />
           </template>
@@ -1614,7 +1613,7 @@ onMounted(() => {
 :::
 ::
 
-Queued messages appear in the prompt's `#header` slot, where users can remove them before they're sent. After an `error`, the prompt is disabled and the queue waits until the user reloads the failed response. Stopping the response sends the next queued message right away.
+The prompt lists the queued messages in a panel above it, where users can send one now, put it back in the prompt to edit it, or remove it. Picking one to send now emits `send` with that message at the front of the queue, so `onSend` stops the current response and the `status` watcher sends it. A response waiting for a tool approval is `ready` too, so `sendNext` waits until the user answers. After an `error`, the prompt is disabled and the queue waits until the user reloads the failed response.
 
 ## Going further
 
