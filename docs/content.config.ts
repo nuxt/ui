@@ -143,7 +143,6 @@ export const collections = {
       include: 'templates/**/*'
     }],
     schema: z.object({
-      image: z.string(),
       date: z.string(),
       authors: z.array(z.object({
         name: z.string(),

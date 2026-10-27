@@ -23,15 +23,11 @@ useSeoMeta({
 useCanonical()
 
 if (import.meta.server) {
-  if (page.value.image) {
-    useSeoMeta({ ogImage: page.value.image })
-  } else {
-    defineOgImage('Docs.takumi', {
-      headline: 'Templates',
-      title: page.value.title,
-      description: page.value.description
-    })
-  }
+  defineOgImage('Docs.takumi', {
+    headline: 'Templates',
+    title: page.value.title,
+    description: page.value.description
+  })
 
   useSchemaOrg([
     defineArticle({
