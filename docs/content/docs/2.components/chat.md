@@ -15,6 +15,10 @@ Nuxt UI provides a set of components designed to build AI-powered chat interface
 Check out the [`Nuxt`](https://github.com/nuxt-ui-templates/chat) and [`Vue`](https://github.com/nuxt-ui-templates/chat-vue) AI Chat templates on GitHub for production-ready implementations.
 ::
 
+::tip{to="/templates/chat"}
+Follow the **How to Build an AI Chatbot** guide to build a full app with chat history, database persistence and a model selector.
+::
+
 ## Components
 
 | Component | Description |
@@ -360,7 +364,3 @@ html.dark .shiki span {
 ::
 
 To let users send messages while a response streams, see the [ChatPrompt](/docs/components/chat-prompt#with-queued-messages) queue example.
-
-::tip{to="/templates/chat"}
-Follow the **How to Build an AI Chatbot** guide to build a full app with chat history, database persistence and a model selector.
-::
