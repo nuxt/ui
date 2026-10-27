@@ -1108,7 +1108,7 @@ Add the tools to `streamText` in the chat endpoint:
 ::code-tree-intersection
 :::code-collapse
 
-```ts [server/api/chats/[id].post.ts] {10,13,16-18,70-75,77-81,85,91-100,102-107,109-116,135-141,155-166}
+```ts [server/api/chats/[id].post.ts] {10,13,16-18,70-75,77-84,88,94-103,105-110,112-119,138-144,158-169}
 import { createError, defineEventHandler, getValidatedRouterParams, readValidatedBody } from 'h3'
 import { eq } from 'drizzle-orm'
 import { db, schema } from 'hub:db'
@@ -1189,7 +1189,10 @@ export default defineEventHandler(async (event) => {
   const mcpClient = await createMCPClient({
     transport: { type: 'http', url: 'https://ui.nuxt.com/mcp' }
   })
-  const mcpTools = await mcpClient.tools()
+  const mcpTools = await mcpClient.tools().catch(async (error) => {
+    await mcpClient.close()
+    throw error
+  })
 
   // Create the streaming response
   const stream = createUIMessageStream({
@@ -1292,7 +1295,7 @@ Anthropic and OpenAI provide a built-in web search tool ([Anthropic](https://ai-
 
 **MCP tools**
 
-[`createMCPClient`](https://ai-sdk.dev/docs/ai-sdk-core/mcp-tools) connects to a [Model Context Protocol](https://modelcontextprotocol.io) server and turns its tools into AI SDK tools. Here the [Nuxt UI MCP server](/docs/getting-started/ai/mcp) lets the model search the Nuxt UI documentation. The client is closed once the response ends or fails.
+[`createMCPClient`](https://ai-sdk.dev/docs/ai-sdk-core/mcp-tools) connects to a [Model Context Protocol](https://modelcontextprotocol.io) server and turns its tools into AI SDK tools. Here the [Nuxt UI MCP server](/docs/getting-started/ai/mcp) lets the model search the Nuxt UI documentation. The client is closed if listing its tools fails, and once the response ends or fails.
 
 **Tool approval**
 
