@@ -348,6 +348,8 @@ Check the **Chat** overview page for installation instructions, server setup and
 
 Some providers offer built-in web search tools: [Anthropic](https://ai-sdk.dev/providers/ai-sdk-providers/anthropic#web-search-tool), [Google](https://ai-sdk.dev/providers/ai-sdk-providers/google#google-search), [OpenAI](https://ai-sdk.dev/providers/ai-sdk-providers/openai#web-search-tool). Their calls reach the client as tool parts, so you render them with the ChatTool component like any other tool.
 
+Each tool comes from its provider package, so install the one you use: `@ai-sdk/anthropic`, `@ai-sdk/google` or `@ai-sdk/openai`.
+
 ::code-group
 
 ```ts [Anthropic]
@@ -531,23 +533,28 @@ Use the `isToolApprovalPending` utility from `@nuxt/ui/utils/ai` to detect a pen
 ```vue
 <script setup lang="ts">
 import { useChat } from '@ai-sdk/vue'
-import { lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
+import { isToolUIPart, getToolName, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
+import { isToolStreaming } from '@nuxt/ui/utils/ai'
 
-const { messages, addToolApprovalResponse } = useChat({
+const { messages, status, addToolApprovalResponse } = useChat({
   sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses
 })
 </script>
 
 <template>
-  <UChatTool
-    v-if="isToolUIPart(part)"
-    :text="getToolName(part)"
-    :streaming="isToolStreaming(part)"
-    :actions="part.state === 'approval-requested' ? [
-      { label: 'Approve', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: true }) },
-      { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) }
-    ] : undefined"
-  />
+  <UChatMessages :messages="messages" :status="status">
+    <template #part="{ part, streaming }">
+      <UChatTool
+        v-if="isToolUIPart(part)"
+        :text="getToolName(part)"
+        :streaming="isToolStreaming(part, streaming)"
+        :actions="part.state === 'approval-requested' ? [
+          { label: 'Approve', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: true }) },
+          { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) }
+        ] : undefined"
+      />
+    </template>
+  </UChatMessages>
 </template>
 ```
 ::
