@@ -70,6 +70,11 @@ async function dispatch(item: ChatPromptQueueItem) {
     toast.add({ description: (error as Error).message, icon: 'i-lucide-alert-circle', color: 'error' })
   } finally {
     sending = false
+
+    // A cleared chat stays `ready`, a message queued during the read would wait forever
+    if (current !== generation && status.value === 'ready') {
+      sendNext()
+    }
   }
 }
 
