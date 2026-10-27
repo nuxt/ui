@@ -10,7 +10,10 @@ links:
 
 ## Usage
 
+::framework-only
+#nuxt
 The ColorModeImage component uses the `<NuxtImg>` component when [`@nuxt/image`](/docs/getting-started/integrations/image) is installed, falling back to `img` otherwise.
+::
 
 ::component-code{prefix="color-mode"}
 ---
