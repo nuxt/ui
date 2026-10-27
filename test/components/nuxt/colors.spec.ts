@@ -118,6 +118,18 @@ describe('colors plugin', () => {
     error.mockRestore()
   })
 
+  it('registers the style without fallbacks when the palette fails to load before rendering', async () => {
+    const error = vi.spyOn(console, 'error').mockImplementation(() => {})
+    vi.mocked(loadColors).mockRejectedValueOnce(new Error('chunk failed'))
+    nuxtApp.isHydrating = true
+    await scope.run(() => nuxtApp.runWithContext(() => (plugin as any)(nuxtApp)))
+    document.querySelector('[data-nuxt-ui-colors]')?.remove()
+
+    expect(await resolveStyle()).toContain(`--ui-color-primary-500: var(--color-${primary}-500, );`)
+    expect(error).toHaveBeenCalled()
+    error.mockRestore()
+  })
+
   it('regenerates the style when the server rendered other colors', async () => {
     await hydrate(withBluePrimary(clientStyle))
     await finishHydration()

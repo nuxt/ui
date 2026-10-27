@@ -40,6 +40,10 @@ function generateRoot(colors: Colors | undefined, uiColors: Record<string, strin
 
 const FALLBACK_RE = /(var\(--[^,;]+,) [^;]*\);/g
 
+function logLoadError(error: unknown): undefined {
+  console.error('[@nuxt/ui] Failed to load the colors palette:', error)
+}
+
 function removeTemporaryColorsStyle() {
   document.querySelector('[data-nuxt-ui-colors]')?.remove()
 }
@@ -56,7 +60,7 @@ export default defineNuxtPlugin(async () => {
   // that the server rendered the same colors and prefix.
   const ssrSkeleton = ssrStyle?.replace(FALLBACK_RE, '$1 );')
 
-  const colors = shallowRef(bundledColors ?? (ssrStyle === undefined ? await loadColors() : undefined))
+  const colors = shallowRef(bundledColors ?? (ssrStyle === undefined ? await loadColors().catch(logLoadError) : undefined))
   let loading: Promise<void> | undefined
 
   // Plugins running after this one can still change the colors before hydration ends.
@@ -79,7 +83,7 @@ export default defineNuxtPlugin(async () => {
         colors.value = loaded
       }, (error) => {
         loading = undefined
-        console.error('[@nuxt/ui] Failed to load the colors palette:', error)
+        logLoadError(error)
       })
     }
     return ssrStyle
