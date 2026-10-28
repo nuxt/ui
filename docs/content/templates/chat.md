@@ -1883,5 +1883,3 @@ The combination of Nuxt's full-stack capabilities, Nuxt UI's purpose-built chat 
 - [AI Gateway Documentation](https://vercel.com/docs/ai-gateway)
 - [Nuxt AI Chat Template](https://github.com/nuxt-ui-templates/chat)
 - [Vue AI Chat Template](https://github.com/nuxt-ui-templates/chat-vue)
-
-We're excited to see what you'll build!
