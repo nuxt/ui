@@ -1,5 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
+import { TreeVirtualizer } from 'reka-ui'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import Tree from '../../src/runtime/components/Tree.vue'
@@ -83,6 +84,22 @@ describe('Tree', () => {
       }
     })
     expect(wrapper.exists()).toBe(true)
+  })
+
+  it.each([
+    ['label', 'Alpha'],
+    ['name', 'Zulu']
+  ] as const)('provides %s labels to virtualized typeahead', async (labelKey, expected) => {
+    const item = { label: 'Alpha', name: 'Zulu' }
+    const wrapper = await mountSuspended(Tree, {
+      props: { items: [item], labelKey, virtualize: true }
+    })
+    try {
+      const textContent = wrapper.findComponent(TreeVirtualizer).props('textContent')
+      expect(textContent?.(item)).toBe(expected)
+    } finally {
+      wrapper.unmount()
+    }
   })
 
   it('passes accessibility tests', async () => {

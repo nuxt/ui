@@ -376,7 +376,7 @@ defineExpose({
     <TreeVirtualizer
       v-if="!!props.virtualize"
       v-slot="{ item, virtualItem }"
-      :text-content="item => getItemLabel(item.value)"
+      :text-content="getItemLabel"
       v-bind="virtualizerProps"
     >
       <ReuseItemTemplate :item="item.value" :index="virtualItem.index" :level="item.level" />
