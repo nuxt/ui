@@ -353,6 +353,7 @@ Each tool comes from its provider package, so install the one you use: `@ai-sdk/
 ::code-group
 
 ```ts [Anthropic]
+import { defineEventHandler, readBody } from 'nuxt/server'
 import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
 import { anthropic } from '@ai-sdk/anthropic'
 
@@ -374,6 +375,7 @@ export default defineEventHandler(async (event) => {
 ```
 
 ```ts [Google]
+import { defineEventHandler, readBody } from 'nuxt/server'
 import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
 import { google } from '@ai-sdk/google'
 
@@ -395,6 +397,7 @@ export default defineEventHandler(async (event) => {
 ```
 
 ```ts [OpenAI]
+import { defineEventHandler, readBody } from 'nuxt/server'
 import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
 import { openai } from '@ai-sdk/openai'
 
@@ -402,7 +405,7 @@ export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
   const result = streamText({
-    model: 'openai/gpt-5-nano',
+    model: 'openai/gpt-5.6-luna',
     instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages),
     tools: {
@@ -446,6 +449,7 @@ bun add @ai-sdk/mcp
 Then pass the MCP tools to `streamText` in your server endpoint:
 
 ```ts [server/api/chat.post.ts]
+import { defineEventHandler, readBody } from 'nuxt/server'
 import { streamText, convertToModelMessages, isStepCount, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
 import { createMCPClient } from '@ai-sdk/mcp'
 
@@ -498,6 +502,7 @@ name: 'chat-tool-approval-example'
 On the server, require the approval with the [`toolApproval`](https://ai-sdk.dev/docs/agents/tool-approvals) option. The tool part pauses in the `approval-requested` state until the user responds:
 
 ```ts [server/api/chat.post.ts]
+import { defineEventHandler, readBody } from 'nuxt/server'
 import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse, tool } from 'ai'
 import { z } from 'zod'
 

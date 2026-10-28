@@ -16,7 +16,7 @@ const webSearch = ref(true)
 const models = [
   { value: 'opus-5-5', label: 'Opus 5.5', description: 'Deep reasoning and hard problems' },
   { value: 'sonnet-5-5', label: 'Sonnet 5.5', description: 'Balanced speed and intelligence' },
-  { value: 'haiku-4-5', label: 'Haiku 4.5', description: 'Fastest for everyday tasks' }
+  { value: 'haiku-5-5', label: 'Haiku 5.5', description: 'Fastest for everyday tasks' }
 ]
 const legacyModels = [
   { value: 'opus-5', label: 'Opus 5' },

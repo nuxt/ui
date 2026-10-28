@@ -34,7 +34,7 @@ Before we start, make sure you have:
 Start by creating a new Nuxt project:
 
 ```bash
-npx nuxi@latest init nuxt-ai-chat
+npm create nuxt@latest nuxt-ai-chat
 cd nuxt-ai-chat
 ```
 
@@ -185,7 +185,7 @@ First, create the endpoint that initializes a new chat and saves the first messa
 
 ::code-tree-intersection
 ```ts [server/api/chats.post.ts]
-import { defineEventHandler, readValidatedBody } from 'h3'
+import { defineEventHandler, readValidatedBody } from 'nuxt/server'
 import type { UIMessage } from 'ai'
 import { db, schema } from 'hub:db'
 import { z } from 'zod'
@@ -193,7 +193,7 @@ import { z } from 'zod'
 export default defineEventHandler(async (event) => {
   const { message } = await readValidatedBody(event, z.object({
     message: z.custom<UIMessage>()
-  }).parse)
+  }))
 
   // Create a new chat
   const [chat] = await db.insert(schema.chats).values({}).returning()
@@ -218,7 +218,7 @@ Next, create the endpoint that handles the AI conversation. This endpoint uses [
 :::code-collapse
 
 ```ts [server/api/chats/[id].post.ts]
-import { createError, defineEventHandler, getValidatedRouterParams, readValidatedBody } from 'h3'
+import { createError, defineEventHandler, getRouterParam, readValidatedBody } from 'nuxt/server'
 import { eq } from 'drizzle-orm'
 import { db, schema } from 'hub:db'
 import { z } from 'zod'
@@ -232,33 +232,31 @@ import {
 } from 'ai'
 import type { UIMessage } from 'ai'
 
-const DEFAULT_MODEL = 'anthropic/claude-haiku-4.5'
+const DEFAULT_MODEL = 'anthropic/claude-haiku-5.5'
 
 const MODELS = [
-  { value: 'openai/gpt-5-nano', label: 'GPT-5 Nano' },
-  { value: 'anthropic/claude-haiku-4.5', label: 'Claude Haiku 4.5' },
+  { value: 'openai/gpt-5.6-luna', label: 'GPT-5.6 Luna' },
+  { value: 'anthropic/claude-haiku-5.5', label: 'Claude Haiku 5.5' },
   { value: 'google/gemini-3-flash', label: 'Gemini 3 Flash' }
 ]
 
 export default defineEventHandler(async (event) => {
-  const { id } = await getValidatedRouterParams(event, z.object({
-    id: z.string()
-  }).parse)
+  const id = getRouterParam(event, 'id', { decode: true })!
 
   const { model = DEFAULT_MODEL, messages } = await readValidatedBody(event, z.object({
     model: z.string().refine(value => MODELS.some(m => m.value === value), {
       message: 'Invalid model'
     }).optional(),
     messages: z.array(z.custom<UIMessage>())
-  }).parse)
+  }))
 
   // Fetch the chat from the database
   const chat = await db.query.chats.findFirst({
-    where: (chat, { eq }) => eq(chat.id, id as string)
+    where: (chat, { eq }) => eq(chat.id, id)
   })
 
   if (!chat) {
-    throw createError({ statusCode: 404, statusMessage: 'Chat not found' })
+    throw createError({ status: 404, statusText: 'Chat not found' })
   }
 
   // Generate a title for the chat if it doesn't have one
@@ -286,14 +284,15 @@ export default defineEventHandler(async (event) => {
   const stream = createUIMessageStream({
     execute: async ({ writer }) => {
       const result = streamText({
+        abortSignal: event.req.signal,
         model,
         instructions: `You are a helpful AI assistant. Be concise and friendly.`,
         messages: await convertToModelMessages(messages),
         providerOptions: {
           anthropic: {
             thinking: {
-              type: 'enabled',
-              budgetTokens: 2048
+              type: 'adaptive',
+              display: 'summarized'
             }
           },
           google: {
@@ -353,6 +352,7 @@ The [`streamText`](https://ai-sdk.dev/docs/reference/ai-sdk-core/stream-text) fu
 - `model`: The AI model to use
 - `instructions`: Guidance that shapes the AI's behavior
 - `messages`: The conversation history
+- `abortSignal`: Stops the generation when the client disconnects, for example when the user clicks stop. `event.req.signal` aborts on disconnect since Nuxt 4.6.3
 
 **Reasoning**
 
@@ -370,15 +370,12 @@ Add an endpoint to fetch existing chat data from your database:
 
 ::code-tree-intersection
 ```ts [server/api/chats/[id].get.ts]
-import { createError, defineEventHandler, getValidatedRouterParams } from 'h3'
+import { createError, defineEventHandler, getRouterParam } from 'nuxt/server'
 import { asc, eq } from 'drizzle-orm'
 import { db, schema } from 'hub:db'
-import { z } from 'zod'
 
 export default defineEventHandler(async (event) => {
-  const { id } = await getValidatedRouterParams(event, z.object({
-    id: z.string()
-  }).parse)
+  const id = getRouterParam(event, 'id', { decode: true })!
 
   const chat = await db.query.chats.findFirst({
     where: (eq(schema.chats.id, id)),
@@ -390,7 +387,7 @@ export default defineEventHandler(async (event) => {
   })
 
   if (!chat) {
-    throw createError({ statusCode: 404, statusMessage: 'Chat not found' })
+    throw createError({ status: 404, statusText: 'Chat not found' })
   }
 
   return chat
@@ -521,7 +518,7 @@ const toast = useToast()
 const { data: chatData } = await useFetch(`/api/chats/${route.params.id}`)
 
 if (!chatData.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Chat not found', fatal: true })
+  throw createError({ status: 404, statusText: 'Chat not found', fatal: true })
 }
 
 const input = ref('')
@@ -592,23 +589,24 @@ onMounted(() => {
               :streaming="isPartStreaming(part, streaming)"
             />
           </template>
-        </UChatMessages>
 
-        <UChatPrompt
-          v-model="input"
-          :status="status"
-          :error="error"
-          variant="subtle"
-          class="sticky bottom-0"
-          @submit="handleSubmit"
-        >
-          <UChatPromptSubmit
-            :status="status"
-            color="neutral"
-            @stop="stop()"
-            @reload="regenerate()"
-          />
-        </UChatPrompt>
+          <template #footer>
+            <UChatPrompt
+              v-model="input"
+              :status="status"
+              :error="error"
+              variant="subtle"
+              @submit="handleSubmit"
+            >
+              <UChatPromptSubmit
+                :status="status"
+                color="neutral"
+                @stop="stop()"
+                @reload="regenerate()"
+              />
+            </UChatPrompt>
+          </template>
+        </UChatMessages>
       </UContainer>
     </template>
   </UDashboardPanel>
@@ -638,6 +636,7 @@ The [`UChatMessages`](/docs/components/chat-messages) component is purpose-built
 - Continuous scrolling as messages stream in
 - A loading indicator while the assistant processes
 - An "Auto scroll" button when scrolled up
+- A `#footer` slot that keeps the prompt stuck to the bottom and leaves room for it below the last message
 
 **Rendering Message Parts**
 
@@ -660,7 +659,7 @@ First, create an endpoint to fetch all chats:
 
 ::code-tree-intersection
 ```ts [server/api/chats.get.ts]
-import { defineEventHandler } from 'h3'
+import { defineEventHandler } from 'nuxt/server'
 import { db, schema } from 'hub:db'
 import { desc } from 'drizzle-orm'
 
@@ -793,7 +792,7 @@ const toast = useToast()
 const { data: chatData } = await useFetch(`/api/chats/${route.params.id}`)
 
 if (!chatData.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Chat not found', fatal: true })
+  throw createError({ status: 404, statusText: 'Chat not found', fatal: true })
 }
 
 const input = ref('')
@@ -867,23 +866,24 @@ onMounted(() => {
               :streaming="isPartStreaming(part, streaming)"
             />
           </template>
-        </UChatMessages>
 
-        <UChatPrompt
-          v-model="input"
-          :status="status"
-          :error="error"
-          variant="subtle"
-          class="sticky bottom-0"
-          @submit="handleSubmit"
-        >
-          <UChatPromptSubmit
-            :status="status"
-            color="neutral"
-            @stop="stop()"
-            @reload="regenerate()"
-          />
-        </UChatPrompt>
+          <template #footer>
+            <UChatPrompt
+              v-model="input"
+              :status="status"
+              :error="error"
+              variant="subtle"
+              @submit="handleSubmit"
+            >
+              <UChatPromptSubmit
+                :status="status"
+                color="neutral"
+                @stop="stop()"
+                @reload="regenerate()"
+              />
+            </UChatPrompt>
+          </template>
+        </UChatMessages>
       </UContainer>
     </template>
   </UDashboardPanel>
@@ -907,13 +907,13 @@ Define the available models and persist the user's selection using [`useCookie`]
 ```ts [app/composables/useModels.ts]
 export function useModels() {
   const models = [
-    { label: 'GPT-5 Nano', value: 'openai/gpt-5-nano', icon: 'i-simple-icons-openai' },
-    { label: 'Claude Haiku 4.5', value: 'anthropic/claude-haiku-4.5', icon: 'i-simple-icons-anthropic' },
+    { label: 'GPT-5.6 Luna', value: 'openai/gpt-5.6-luna', icon: 'i-simple-icons-openai' },
+    { label: 'Claude Haiku 5.5', value: 'anthropic/claude-haiku-5.5', icon: 'i-simple-icons-anthropic' },
     { label: 'Gemini 3 Flash', value: 'google/gemini-3-flash', icon: 'i-simple-icons-google' }
   ]
 
   const model = useCookie<string>('ai-model', {
-    default: () => 'anthropic/claude-haiku-4.5'
+    default: () => 'anthropic/claude-haiku-5.5'
   })
 
   return {
@@ -959,7 +959,7 @@ Update the chat page to include the model selector and pass the selected model t
 ::code-tree-intersection
 :::code-collapse
 
-```vue [app/pages/chat/[id].vue] {8,23-25,97-99}
+```vue [app/pages/chat/[id].vue] {8,23-25,96-98}
 <script setup lang="ts">
 import { DefaultChatTransport, isReasoningUIPart, isTextUIPart } from 'ai'
 import { useChat } from '@ai-sdk/vue'
@@ -972,7 +972,7 @@ const { model } = useModels()
 const { data: chatData } = await useFetch(`/api/chats/${route.params.id}`)
 
 if (!chatData.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Chat not found', fatal: true })
+  throw createError({ status: 404, statusText: 'Chat not found', fatal: true })
 }
 
 const input = ref('')
@@ -1046,27 +1046,28 @@ onMounted(() => {
               :streaming="isPartStreaming(part, streaming)"
             />
           </template>
-        </UChatMessages>
 
-        <UChatPrompt
-          v-model="input"
-          :status="status"
-          :error="error"
-          variant="subtle"
-          class="sticky bottom-0"
-          @submit="handleSubmit"
-        >
           <template #footer>
-            <ModelSelect v-model="model" />
-          </template>
+            <UChatPrompt
+              v-model="input"
+              :status="status"
+              :error="error"
+              variant="subtle"
+              @submit="handleSubmit"
+            >
+              <template #footer>
+                <ModelSelect v-model="model" />
+              </template>
 
-          <UChatPromptSubmit
-            :status="status"
-            color="neutral"
-            @stop="stop()"
-            @reload="regenerate()"
-          />
-        </UChatPrompt>
+              <UChatPromptSubmit
+                :status="status"
+                color="neutral"
+                @stop="stop()"
+                @reload="regenerate()"
+              />
+            </UChatPrompt>
+          </template>
+        </UChatMessages>
       </UContainer>
     </template>
   </UDashboardPanel>
@@ -1086,19 +1087,19 @@ Web search tools come from the provider packages and MCP tools from `@ai-sdk/mcp
 
 ::code-group{sync="pm"}
 ```bash [pnpm]
-pnpm add @ai-sdk/anthropic @ai-sdk/openai @ai-sdk/mcp
+pnpm add @ai-sdk/anthropic @ai-sdk/google @ai-sdk/openai @ai-sdk/mcp
 ```
 
 ```bash [yarn]
-yarn add @ai-sdk/anthropic @ai-sdk/openai @ai-sdk/mcp
+yarn add @ai-sdk/anthropic @ai-sdk/google @ai-sdk/openai @ai-sdk/mcp
 ```
 
 ```bash [npm]
-npm install @ai-sdk/anthropic @ai-sdk/openai @ai-sdk/mcp
+npm install @ai-sdk/anthropic @ai-sdk/google @ai-sdk/openai @ai-sdk/mcp
 ```
 
 ```bash [bun]
-bun add @ai-sdk/anthropic @ai-sdk/openai @ai-sdk/mcp
+bun add @ai-sdk/anthropic @ai-sdk/google @ai-sdk/openai @ai-sdk/mcp
 ```
 ::
 
@@ -1109,8 +1110,8 @@ Add the tools to `streamText` in the chat endpoint:
 ::code-tree-intersection
 :::code-collapse
 
-```ts [server/api/chats/[id].post.ts] {10,13,16-18,70-75,77-84,88,94-103,105-110,112-119,151-153,155-165}
-import { createError, defineEventHandler, getValidatedRouterParams, readValidatedBody } from 'h3'
+```ts [server/api/chats/[id].post.ts] {10,13,16-19,69-76,78-85,89,96-105,107-112,114-121,153-155,157-167}
+import { createError, defineEventHandler, getRouterParam, readValidatedBody } from 'nuxt/server'
 import { eq } from 'drizzle-orm'
 import { db, schema } from 'hub:db'
 import { z } from 'zod'
@@ -1126,36 +1127,35 @@ import {
 } from 'ai'
 import type { UIMessage } from 'ai'
 import { anthropic } from '@ai-sdk/anthropic'
+import { google } from '@ai-sdk/google'
 import { openai } from '@ai-sdk/openai'
 import { createMCPClient } from '@ai-sdk/mcp'
 
-const DEFAULT_MODEL = 'anthropic/claude-haiku-4.5'
+const DEFAULT_MODEL = 'anthropic/claude-haiku-5.5'
 
 const MODELS = [
-  { value: 'openai/gpt-5-nano', label: 'GPT-5 Nano' },
-  { value: 'anthropic/claude-haiku-4.5', label: 'Claude Haiku 4.5' },
+  { value: 'openai/gpt-5.6-luna', label: 'GPT-5.6 Luna' },
+  { value: 'anthropic/claude-haiku-5.5', label: 'Claude Haiku 5.5' },
   { value: 'google/gemini-3-flash', label: 'Gemini 3 Flash' }
 ]
 
 export default defineEventHandler(async (event) => {
-  const { id } = await getValidatedRouterParams(event, z.object({
-    id: z.string()
-  }).parse)
+  const id = getRouterParam(event, 'id', { decode: true })!
 
   const { model = DEFAULT_MODEL, messages } = await readValidatedBody(event, z.object({
     model: z.string().refine(value => MODELS.some(m => m.value === value), {
       message: 'Invalid model'
     }).optional(),
     messages: z.array(z.custom<UIMessage>())
-  }).parse)
+  }))
 
   // Fetch the chat from the database
   const chat = await db.query.chats.findFirst({
-    where: (chat, { eq }) => eq(chat.id, id as string)
+    where: (chat, { eq }) => eq(chat.id, id)
   })
 
   if (!chat) {
-    throw createError({ statusCode: 404, statusMessage: 'Chat not found' })
+    throw createError({ status: 404, statusText: 'Chat not found' })
   }
 
   // Generate a title for the chat if it doesn't have one
@@ -1179,12 +1179,14 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  // Web search is a provider tool, Google can't combine it with other tools yet
+  // Web search is a provider tool, each provider has its own
   const webSearch = model.startsWith('anthropic/')
     ? anthropic.tools.webSearch_20250305()
     : model.startsWith('openai/')
       ? openai.tools.webSearch()
-      : undefined
+      : model.startsWith('google/')
+        ? google.tools.googleSearch({})
+        : undefined
 
   // Connect to the Nuxt UI MCP server to search its documentation, the chat works without it
   const mcpClient = await createMCPClient({
@@ -1200,6 +1202,7 @@ export default defineEventHandler(async (event) => {
     originalMessages: messages,
     execute: async ({ writer }) => {
       const result = streamText({
+        abortSignal: event.req.signal,
         model,
         instructions: `You are a helpful AI assistant. Be concise and friendly.`,
         messages: await convertToModelMessages(messages),
@@ -1232,8 +1235,8 @@ export default defineEventHandler(async (event) => {
         providerOptions: {
           anthropic: {
             thinking: {
-              type: 'enabled',
-              budgetTokens: 2048
+              type: 'adaptive',
+              display: 'summarized'
             }
           },
           google: {
@@ -1288,7 +1291,7 @@ Here's what each tool does:
 
 **Web search**
 
-Anthropic and OpenAI provide a built-in web search tool ([Anthropic](https://ai-sdk.dev/providers/ai-sdk-providers/anthropic#web-search-tool), [OpenAI](https://ai-sdk.dev/providers/ai-sdk-providers/openai#web-search-tool)), so we pick the one matching the selected model. Google has its own [Google Search](https://ai-sdk.dev/providers/ai-sdk-providers/google#google-search) tool, but the AI SDK can't combine it with other tools yet.
+Each provider has its own built-in web search tool ([Anthropic](https://ai-sdk.dev/providers/ai-sdk-providers/anthropic#web-search-tool), [Google](https://ai-sdk.dev/providers/ai-sdk-providers/google#google-search), [OpenAI](https://ai-sdk.dev/providers/ai-sdk-providers/openai#web-search-tool)), so we pick the one matching the selected model.
 
 **MCP tools**
 
@@ -1322,7 +1325,7 @@ const { model } = useModels()
 const { data: chatData } = await useFetch(`/api/chats/${route.params.id}`)
 
 if (!chatData.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Chat not found', fatal: true })
+  throw createError({ status: 404, statusText: 'Chat not found', fatal: true })
 }
 
 const input = ref('')
@@ -1409,27 +1412,28 @@ onMounted(() => {
               :streaming="isPartStreaming(part, streaming)"
             />
           </template>
-        </UChatMessages>
 
-        <UChatPrompt
-          v-model="input"
-          :status="status"
-          :error="error"
-          variant="subtle"
-          class="sticky bottom-0"
-          @submit="handleSubmit"
-        >
           <template #footer>
-            <ModelSelect v-model="model" />
-          </template>
+            <UChatPrompt
+              v-model="input"
+              :status="status"
+              :error="error"
+              variant="subtle"
+              @submit="handleSubmit"
+            >
+              <template #footer>
+                <ModelSelect v-model="model" />
+              </template>
 
-          <UChatPromptSubmit
-            :status="status"
-            color="neutral"
-            @stop="stop()"
-            @reload="regenerate()"
-          />
-        </UChatPrompt>
+              <UChatPromptSubmit
+                :status="status"
+                color="neutral"
+                @stop="stop()"
+                @reload="regenerate()"
+              />
+            </UChatPrompt>
+          </template>
+        </UChatMessages>
       </UContainer>
     </template>
   </UDashboardPanel>
@@ -1448,7 +1452,7 @@ The AI SDK doesn't queue messages: calling `sendMessage` during a response start
 ::code-tree-intersection
 :::code-collapse
 
-```vue [app/pages/chat/[id].vue] {2,18,45-46,56-59,61-65,67-71,73-80,135-136,141}
+```vue [app/pages/chat/[id].vue] {2,18,45-46,56-59,61-65,67-71,73-80,135-136,140}
 <script setup lang="ts">
 import type { ChatPromptQueueItem } from '@nuxt/ui'
 import { DefaultChatTransport, getToolName, isReasoningUIPart, isTextUIPart, isToolUIPart, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
@@ -1462,7 +1466,7 @@ const { model } = useModels()
 const { data: chatData } = await useFetch(`/api/chats/${route.params.id}`)
 
 if (!chatData.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Chat not found', fatal: true })
+  throw createError({ status: 404, statusText: 'Chat not found', fatal: true })
 }
 
 const input = ref('')
@@ -1579,29 +1583,30 @@ onMounted(() => {
               :streaming="isPartStreaming(part, streaming)"
             />
           </template>
-        </UChatMessages>
 
-        <UChatPrompt
-          v-model="input"
-          v-model:queue="queue"
-          :status="awaitingApproval ? 'submitted' : status"
-          :error="error"
-          variant="subtle"
-          class="sticky bottom-0"
-          @submit="handleSubmit"
-          @send="onSend"
-        >
           <template #footer>
-            <ModelSelect v-model="model" />
-          </template>
+            <UChatPrompt
+              v-model="input"
+              v-model:queue="queue"
+              :status="awaitingApproval ? 'submitted' : status"
+              :error="error"
+              variant="subtle"
+              @submit="handleSubmit"
+              @send="onSend"
+            >
+              <template #footer>
+                <ModelSelect v-model="model" />
+              </template>
 
-          <UChatPromptSubmit
-            :status="status"
-            color="neutral"
-            @stop="stop()"
-            @reload="regenerate()"
-          />
-        </UChatPrompt>
+              <UChatPromptSubmit
+                :status="status"
+                color="neutral"
+                @stop="stop()"
+                @reload="regenerate()"
+              />
+            </UChatPrompt>
+          </template>
+        </UChatMessages>
       </UContainer>
     </template>
   </UDashboardPanel>
@@ -1620,7 +1625,7 @@ Bind `v-model:files` on the prompt to let users attach images and PDFs. They can
 ::code-tree-intersection
 :::code-collapse
 
-```vue [app/pages/chat/[id].vue] {5,19-21,51-71,75-77,81,87,126-134,170-172,179-186}
+```vue [app/pages/chat/[id].vue] {5,19-21,51-71,75-77,81,87,126-134,170-172,178-185}
 <script setup lang="ts">
 import type { ChatPromptQueueItem } from '@nuxt/ui'
 import { DefaultChatTransport, getToolName, isReasoningUIPart, isTextUIPart, isToolUIPart, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
@@ -1634,7 +1639,7 @@ const { model } = useModels()
 const { data: chatData } = await useFetch(`/api/chats/${route.params.id}`)
 
 if (!chatData.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Chat not found', fatal: true })
+  throw createError({ status: 404, statusText: 'Chat not found', fatal: true })
 }
 
 const input = ref('')
@@ -1785,38 +1790,39 @@ onMounted(() => {
               :streaming="isPartStreaming(part, streaming)"
             />
           </template>
-        </UChatMessages>
 
-        <UChatPrompt
-          v-model="input"
-          v-model:queue="queue"
-          v-model:files="files"
-          accept="image/*,application/pdf"
-          :status="reading || awaitingApproval ? 'submitted' : status"
-          :error="error"
-          variant="subtle"
-          class="sticky bottom-0"
-          @submit="handleSubmit"
-          @send="onSend"
-        >
-          <template #footer="{ open }">
-            <UButton
-              icon="i-lucide-paperclip"
-              color="neutral"
-              variant="ghost"
-              aria-label="Attach files"
-              @click="open"
-            />
-            <ModelSelect v-model="model" />
+          <template #footer>
+            <UChatPrompt
+              v-model="input"
+              v-model:queue="queue"
+              v-model:files="files"
+              accept="image/*,application/pdf"
+              :status="reading || awaitingApproval ? 'submitted' : status"
+              :error="error"
+              variant="subtle"
+              @submit="handleSubmit"
+              @send="onSend"
+            >
+              <template #footer="{ open }">
+                <UButton
+                  icon="i-lucide-paperclip"
+                  color="neutral"
+                  variant="ghost"
+                  aria-label="Attach files"
+                  @click="open"
+                />
+                <ModelSelect v-model="model" />
+              </template>
+
+              <UChatPromptSubmit
+                :status="status"
+                color="neutral"
+                @stop="stop()"
+                @reload="regenerate()"
+              />
+            </UChatPrompt>
           </template>
-
-          <UChatPromptSubmit
-            :status="status"
-            color="neutral"
-            @stop="stop()"
-            @reload="regenerate()"
-          />
-        </UChatPrompt>
+        </UChatMessages>
       </UContainer>
     </template>
   </UDashboardPanel>
