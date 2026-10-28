@@ -17,7 +17,7 @@ export interface Toast extends Omit<ToastProps, 'defaultOpen'>, EmitsToProps<Toa
   _animatedAt?: number
 }
 
-// Matches the slide-in animation duration in the `toaster` theme, the pulse is shorter.
+// Matches the enter transition duration in the `toaster` theme, the pulse is shorter.
 const ANIMATION_DURATION = 400
 
 export function useToast() {
