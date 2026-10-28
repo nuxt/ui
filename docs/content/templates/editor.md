@@ -1321,7 +1321,7 @@ CRITICAL RULES:
 :::
 ::
 
-With `reasoning: 'none'`, the model answers without a thinking step so suggestions come back fast. The gateway options prefer Baseten and only use providers with zero data retention and no prompt training. Request-level zero data retention is only available on Vercel Pro and Enterprise plans. Prompts over 10,000 characters are rejected.
+With `reasoning: 'none'`, the model answers without a thinking step, so suggestions come back fast. The gateway options prefer Baseten and only use providers with zero data retention and no prompt training. Request-level zero data retention is only available on Vercel Pro and Enterprise plans. Prompts over 10,000 characters are rejected.
 
 ### Creating the ghost text extension
 
@@ -1607,6 +1607,10 @@ export function useEditorCompletion(editorRef: Ref<{ editor: Editor | undefined 
       console.error('AI completion error:', error)
       target = undefined
       getCompletionStorage()?.clearSuggestion()
+
+      // Remove the ghost text already displayed
+      const editor = editorRef.value?.editor
+      editor?.view.dispatch(editor.state.tr.setMeta('completionUpdate', true))
     }
   })
 
@@ -2512,7 +2516,7 @@ const editorRef = useTemplateRef('editorRef')
 const user = useState('user', () => ({ name: getRandomName(), color: getRandomColor() }))
 
 const { enabled: collaborationEnabled, ready, extensions: collaborationExtensions, connectedUsers, synced } = useEditorCollaboration({
-  room: route.query.room as string | undefined,
+  room: typeof route.query.room === 'string' ? route.query.room : undefined,
   host: runtimeConfig.public.partykitHost,
   user: { name: user.value.name, color: COLORS[user.value.color]! }
 })

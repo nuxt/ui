@@ -50,6 +50,10 @@ export function useEditorCompletion(editorRef: Ref<{ editor: Editor | undefined 
       console.error('AI completion error:', error)
       target = undefined
       getCompletionStorage()?.clearSuggestion()
+
+      // Remove the ghost text already displayed
+      const editor = editorRef.value?.editor
+      editor?.view.dispatch(editor.state.tr.setMeta('completionUpdate', true))
     }
   })
 
