@@ -34,7 +34,7 @@ Before we start, make sure you have:
 Start by creating a new Nuxt project:
 
 ```bash
-npx nuxi@latest init nuxt-editor
+npm create nuxt@latest nuxt-editor
 cd nuxt-editor
 ```
 
