@@ -150,7 +150,12 @@ function memoKey(slotProps: Record<string, any>): string | undefined {
 
   // `Object.keys` matches exactly what `JSON.stringify` serializes (own
   // enumerable keys), so everything the key omits is also never inspected here.
-  for (const key of Object.keys(slotProps)) {
+  // Non-enumerable own props are read by tv but missing from the key.
+  const keys = Object.keys(slotProps)
+  if (keys.length !== Object.getOwnPropertyNames(slotProps).length) {
+    return undefined
+  }
+  for (const key of keys) {
     if (!isMemoizable(slotProps[key])) {
       return undefined
     }
@@ -168,8 +173,9 @@ function memoKey(slotProps: Record<string, any>): string | undefined {
  *
  * Repeated invocations with identical simple args (re-renders, table cells) are
  * memoized per slot: variant resolution + twMerge only run once per distinct
- * input. The cache lives on the invocation result, so a factory rebuild (e.g.
- * `app.config.ui` change) or variant-prop recompute starts fresh.
+ * input. The cache lives on the invocation result, which is shared by every
+ * invocation with the same simple variant props, so a factory rebuild (e.g.
+ * `app.config.ui` change) starts fresh.
  */
 function wrapSlots(slots: Record<string, any>) {
   // `undefined` is a real slot result: `tv` returns it (not `''`) for a slot
@@ -343,27 +349,52 @@ function componentCacheKey(componentConfig: any): string | undefined {
   }
 }
 
+function invokeComponent(target: any, thisArg: any, args: any[]) {
+  const result = Reflect.apply(target, thisArg, args)
+  if (result && typeof result === 'object') {
+    return wrapSlots(result)
+  }
+
+  // Slotless components (only a `base`, no `slots`) return a string. Honor a
+  // replacer passed through `class` / `className`, otherwise return the
+  // merged string untouched.
+  if (typeof result === 'string') {
+    const slotProps = args[0] ?? {}
+    const replacer = findReplacer(slotProps.class) ?? findReplacer(slotProps.className)
+    if (replacer) {
+      return applyReplacer(replacer, slotProps, () => Reflect.apply(target, thisArg, [{ ...slotProps, class: undefined, className: undefined }]))
+    }
+  }
+
+  return result
+}
+
+/**
+ * Invocations with identical simple variant props share one result, so every
+ * instance rendering the same variants also shares its slot memo.
+ */
 function createComponent(componentConfig?: any) {
   const component = baseTv(resolveReplacers(componentConfig))
+  const results = new Map<string, unknown>()
 
   return new Proxy(component, {
     apply(target, thisArg, args) {
-      const result = Reflect.apply(target, thisArg, args)
-      if (result && typeof result === 'object') {
-        return wrapSlots(result)
+      const variantProps = args[0]
+      const key = args.length === 1 && variantProps && typeof variantProps === 'object' ? memoKey(variantProps) : undefined
+      if (key === undefined) {
+        return invokeComponent(target, thisArg, args)
       }
 
-      // Slotless components (only a `base`, no `slots`) return a string. Honor a
-      // replacer passed through `class` / `className`, otherwise return the
-      // merged string untouched.
-      if (typeof result === 'string') {
-        const slotProps = args[0] ?? {}
-        const replacer = findReplacer(slotProps.class) ?? findReplacer(slotProps.className)
-        if (replacer) {
-          return applyReplacer(replacer, slotProps, () => Reflect.apply(target, thisArg, [{ ...slotProps, class: undefined, className: undefined }]))
+      let result = results.get(key)
+      if (result === undefined) {
+        if (results.size >= 500) {
+          results.clear()
         }
+        // The slot functions read their props lazily, so hand them a copy the
+        // caller cannot mutate after it has been keyed.
+        result = invokeComponent(target, thisArg, [JSON.parse(key)])
+        results.set(key, result)
       }
-
       return result
     }
   })

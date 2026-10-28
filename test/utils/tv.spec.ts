@@ -308,6 +308,79 @@ describe('tv slot memoization', () => {
     expect(ui.label(Object.create({ class: 'font-bold' }))).toBe('truncate font-bold')
     expect(ui.label({})).toBe('truncate')
   })
+
+  it('does not key inputs carrying non-enumerable props', () => {
+    const ui = build()
+    expect(ui.label({})).toBe('truncate')
+    expect(ui.label(Object.defineProperty({}, 'class', { value: 'font-bold' }))).toBe('truncate font-bold')
+  })
+})
+
+describe('tv invocation memoization', () => {
+  const theme = {
+    slots: { base: 'inline-flex text-sm', label: 'truncate' },
+    variants: {
+      active: {
+        true: { base: 'font-bold' },
+        false: { base: 'font-light' }
+      }
+    }
+  }
+
+  const slotless = {
+    base: 'inline-flex text-sm',
+    variants: {
+      active: { true: 'font-bold', false: 'font-light' }
+    }
+  }
+
+  it('shares the result across invocations with equal variant props', () => {
+    const component = tvt(theme)
+    expect(component({ active: true, class: ['p-2'] })).toBe(component({ active: true, class: ['p-2'] }))
+    expect(component({ active: true }).base()).toContain('font-bold')
+  })
+
+  it('does not share results across distinct variant props', () => {
+    const component = tvt(theme)
+    const active = component({ active: true })
+    expect(component({ active: true })).toBe(active)
+    expect(component({ active: false })).not.toBe(active)
+    expect(component({ active: false }).base()).toContain('font-light')
+  })
+
+  it('does not share results for variant props that cannot be keyed', () => {
+    const component = tvt(theme)
+    expect(component({ class: ['p-2'] })).toBe(component({ class: ['p-2'] }))
+    expect(component({ class: { 'p-2': true } })).not.toBe(component({ class: { 'p-2': true } }))
+    expect(component(Object.defineProperty({}, 'active', { value: true })).base()).toContain('font-bold')
+
+    const slotlessComponent = tvt(slotless) as any
+    expect(slotlessComponent({ class: () => 'block' })).toBe('block')
+    expect(slotlessComponent({ active: true })).toBe('inline-flex text-sm font-bold')
+  })
+
+  it('keeps a shared result independent of the caller props once keyed', () => {
+    const component = tvt(theme)
+    let active = true
+    const result = component({
+      get active() {
+        return active
+      }
+    })
+    active = false
+    expect(component({ active: true })).toBe(result)
+    expect(result.base()).toContain('font-bold')
+  })
+
+  it('keeps the shared results bounded', () => {
+    const component = tvt(theme)
+    const first = component({ index: 0 })
+    for (let i = 1; i < 600; i++) {
+      component({ index: i })
+    }
+    expect(component({ index: 599 })).toBe(component({ index: 599 }))
+    expect(component({ index: 0 })).not.toBe(first)
+  })
 })
 
 describe('tv factory memoization', () => {
