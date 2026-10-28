@@ -60,6 +60,7 @@ CRITICAL RULES:
     reasoning: 'none',
     providerOptions: {
       gateway: {
+        caching: 'auto',
         order: ['baseten'],
         zeroDataRetention: true,
         disallowPromptTraining: true,
