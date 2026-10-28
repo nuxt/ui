@@ -197,7 +197,7 @@ const virtualizerProps = toRef(() => {
 })
 
 const [DefineTreeTemplate, ReuseTreeTemplate] = createReusableTemplate<{ items?: TreeItem[], level: number }, TreeSlots<T>>()
-const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: TreeItem, index: number, level: number }, TreeSlots<T>>({
+const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: TreeItem, index: number, level: number, dataIndex?: number }, TreeSlots<T>>({
   props: {
     item: {
       type: Object,
@@ -207,6 +207,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: T
       type: Number,
       required: true
     },
+    dataIndex: Number,
     level: {
       type: Number,
       required: true
@@ -251,7 +252,7 @@ defineExpose({
 
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <DefineItemTemplate v-slot="{ item, index, level }">
+  <DefineItemTemplate v-slot="{ item, index, level, dataIndex }">
     <li
       role="presentation"
       :class="!!nested && level > 1 ? ui.itemWithChildren({ class: [props.ui?.itemWithChildren, item.ui?.itemWithChildren] }) : ui.item({ class: [props.ui?.item, item.ui?.item] })"
@@ -261,6 +262,7 @@ defineExpose({
         :level="level"
         :value="item"
         :disabled="item.disabled"
+        :data-index="dataIndex"
         as-child
         @toggle="(item.onToggle ?? props.onToggle)?.($event, item)"
         @select="(item.onSelect ?? props.onSelect)?.($event, item)"

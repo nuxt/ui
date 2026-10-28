@@ -1,6 +1,5 @@
-import { describe, it, expect, test } from 'vitest'
+import { describe, it, expect, test, vi } from 'vitest'
 import { axe } from 'vitest-axe'
-import { TreeVirtualizer } from 'reka-ui'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import Tree from '../../src/runtime/components/Tree.vue'
@@ -87,18 +86,35 @@ describe('Tree', () => {
   })
 
   it.each([
-    ['label', 'Alpha'],
-    ['name', 'Zulu']
-  ] as const)('provides %s labels to virtualized typeahead', async (labelKey, expected) => {
-    const item = { label: 'Alpha', name: 'Zulu' }
+    ['label', 'c', 2],
+    ['name', 'c', 2],
+    ['label', 'v', 0],
+    ['name', 'v', 0]
+  ] as const)('handles virtualized typeahead with labelKey %s and key %s', async (labelKey, key, focusedIndex) => {
+    const height = vi.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockReturnValue(300)
+    const width = vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(300)
     const wrapper = await mountSuspended(Tree, {
-      props: { items: [item], labelKey, virtualize: true }
+      attachTo: document.body,
+      props: {
+        items: ['Alpha', 'Bravo', 'Charlie'].map(label => ({ [labelKey]: label })),
+        labelKey,
+        virtualize: true
+      }
     })
     try {
-      const textContent = wrapper.findComponent(TreeVirtualizer).props('textContent')
-      expect(textContent?.(item)).toBe(expected)
+      await vi.waitFor(() => expect(wrapper.findAll('[role="treeitem"]')).toHaveLength(3))
+      const rows = wrapper.findAll<HTMLButtonElement>('[role="treeitem"]')
+      rows[0]!.element.focus()
+      await rows[0]!.trigger('click')
+      await rows[0]!.trigger('keydown', { key })
+      await new Promise(resolve => requestAnimationFrame(resolve))
+      await vi.waitFor(() => expect(document.activeElement).toBe(rows[focusedIndex]!.element))
+      expect(rows[0]!.attributes('aria-selected')).toBe('true')
+      expect(rows[2]!.attributes('aria-selected')).toBe('false')
     } finally {
       wrapper.unmount()
+      height.mockRestore()
+      width.mockRestore()
     }
   })
 
