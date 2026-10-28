@@ -235,9 +235,9 @@ import type { UIMessage } from 'ai'
 const DEFAULT_MODEL = 'anthropic/claude-haiku-5.5'
 
 const MODELS = [
-  { value: 'openai/gpt-6-luna', label: 'GPT-6 Luna' },
+  { value: 'openai/gpt-5.6-luna', label: 'GPT-5.6 Luna' },
   { value: 'anthropic/claude-haiku-5.5', label: 'Claude Haiku 5.5' },
-  { value: 'google/gemini-3.8-flash', label: 'Gemini 3.8 Flash' }
+  { value: 'google/gemini-3-flash', label: 'Gemini 3 Flash' }
 ]
 
 export default defineEventHandler(async (event) => {
@@ -907,9 +907,9 @@ Define the available models and persist the user's selection using [`useCookie`]
 ```ts [app/composables/useModels.ts]
 export function useModels() {
   const models = [
-    { label: 'GPT-6 Luna', value: 'openai/gpt-6-luna', icon: 'i-simple-icons-openai' },
+    { label: 'GPT-5.6 Luna', value: 'openai/gpt-5.6-luna', icon: 'i-simple-icons-openai' },
     { label: 'Claude Haiku 5.5', value: 'anthropic/claude-haiku-5.5', icon: 'i-simple-icons-anthropic' },
-    { label: 'Gemini 3.8 Flash', value: 'google/gemini-3.8-flash', icon: 'i-simple-icons-google' }
+    { label: 'Gemini 3 Flash', value: 'google/gemini-3-flash', icon: 'i-simple-icons-google' }
   ]
 
   const model = useCookie<string>('ai-model', {
@@ -1086,19 +1086,19 @@ Web search tools come from the provider packages and MCP tools from `@ai-sdk/mcp
 
 ::code-group{sync="pm"}
 ```bash [pnpm]
-pnpm add @ai-sdk/anthropic @ai-sdk/openai @ai-sdk/mcp
+pnpm add @ai-sdk/anthropic @ai-sdk/google @ai-sdk/openai @ai-sdk/mcp
 ```
 
 ```bash [yarn]
-yarn add @ai-sdk/anthropic @ai-sdk/openai @ai-sdk/mcp
+yarn add @ai-sdk/anthropic @ai-sdk/google @ai-sdk/openai @ai-sdk/mcp
 ```
 
 ```bash [npm]
-npm install @ai-sdk/anthropic @ai-sdk/openai @ai-sdk/mcp
+npm install @ai-sdk/anthropic @ai-sdk/google @ai-sdk/openai @ai-sdk/mcp
 ```
 
 ```bash [bun]
-bun add @ai-sdk/anthropic @ai-sdk/openai @ai-sdk/mcp
+bun add @ai-sdk/anthropic @ai-sdk/google @ai-sdk/openai @ai-sdk/mcp
 ```
 ::
 
@@ -1109,7 +1109,7 @@ Add the tools to `streamText` in the chat endpoint:
 ::code-tree-intersection
 :::code-collapse
 
-```ts [server/api/chats/[id].post.ts] {10,13,16-18,70-75,77-84,88,94-103,105-110,112-119,151-153,155-165}
+```ts [server/api/chats/[id].post.ts] {10,13,16-19,71-78,80-87,91,97-106,108-113,115-122,154-156,158-168}
 import { createError, defineEventHandler, getValidatedRouterParams, readValidatedBody } from 'h3'
 import { eq } from 'drizzle-orm'
 import { db, schema } from 'hub:db'
@@ -1126,15 +1126,16 @@ import {
 } from 'ai'
 import type { UIMessage } from 'ai'
 import { anthropic } from '@ai-sdk/anthropic'
+import { google } from '@ai-sdk/google'
 import { openai } from '@ai-sdk/openai'
 import { createMCPClient } from '@ai-sdk/mcp'
 
 const DEFAULT_MODEL = 'anthropic/claude-haiku-5.5'
 
 const MODELS = [
-  { value: 'openai/gpt-6-luna', label: 'GPT-6 Luna' },
+  { value: 'openai/gpt-5.6-luna', label: 'GPT-5.6 Luna' },
   { value: 'anthropic/claude-haiku-5.5', label: 'Claude Haiku 5.5' },
-  { value: 'google/gemini-3.8-flash', label: 'Gemini 3.8 Flash' }
+  { value: 'google/gemini-3-flash', label: 'Gemini 3 Flash' }
 ]
 
 export default defineEventHandler(async (event) => {
@@ -1179,12 +1180,14 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  // Web search is a provider tool, Google can't combine it with other tools yet
+  // Web search is a provider tool, each provider has its own
   const webSearch = model.startsWith('anthropic/')
     ? anthropic.tools.webSearch_20250305()
     : model.startsWith('openai/')
       ? openai.tools.webSearch()
-      : undefined
+      : model.startsWith('google/')
+        ? google.tools.googleSearch({})
+        : undefined
 
   // Connect to the Nuxt UI MCP server to search its documentation, the chat works without it
   const mcpClient = await createMCPClient({
@@ -1288,7 +1291,7 @@ Here's what each tool does:
 
 **Web search**
 
-Anthropic and OpenAI provide a built-in web search tool ([Anthropic](https://ai-sdk.dev/providers/ai-sdk-providers/anthropic#web-search-tool), [OpenAI](https://ai-sdk.dev/providers/ai-sdk-providers/openai#web-search-tool)), so we pick the one matching the selected model. Google has its own [Google Search](https://ai-sdk.dev/providers/ai-sdk-providers/google#google-search) tool, but the AI SDK can't combine it with other tools yet.
+Each provider has its own built-in web search tool ([Anthropic](https://ai-sdk.dev/providers/ai-sdk-providers/anthropic#web-search-tool), [Google](https://ai-sdk.dev/providers/ai-sdk-providers/google#google-search), [OpenAI](https://ai-sdk.dev/providers/ai-sdk-providers/openai#web-search-tool)), so we pick the one matching the selected model.
 
 **MCP tools**
 
