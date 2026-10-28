@@ -1,9 +1,11 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi, afterEach } from 'vitest'
+import { nextTick } from 'vue'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import PageCard from '../../src/runtime/components/PageCard.vue'
 import theme from '#build/ui/page-card'
+import { requestIdleCallback } from '../../src/runtime/utils/prefetch'
 
 describe('PageCard', () => {
   const variants = Object.keys(theme.variants.variant) as any
@@ -68,6 +70,76 @@ describe('PageCard', () => {
     })
     expect(wrapper.attributes('aria-label')).toBe('test-label')
     expect(wrapper.attributes('data-testid')).toBe('test-id')
+  })
+
+  describe('spotlight', () => {
+    const idle = () => new Promise<void>(resolve => requestIdleCallback(resolve))
+    const mouseEvents = ['mousemove', 'scroll', 'resize']
+
+    function spyOnClientRects() {
+      return vi.spyOn(Element.prototype, 'getClientRects').mockReturnValue([{ left: 0, top: 0, width: 100, height: 100 }] as unknown as DOMRectList)
+    }
+
+    function moveMouse(x: number, y: number) {
+      const event = new MouseEvent('mousemove')
+      Object.defineProperties(event, { pageX: { value: x }, pageY: { value: y } })
+      window.dispatchEvent(event)
+    }
+
+    afterEach(() => {
+      vi.restoreAllMocks()
+    })
+
+    it('does not measure the card without `spotlight`', async () => {
+      const getClientRects = spyOnClientRects()
+      const wrapper = await mountSuspended(PageCard, { props, attachTo: document.body })
+      await idle()
+      moveMouse(10, 20)
+      await nextTick()
+
+      expect(getClientRects.mock.contexts).not.toContain(wrapper.element)
+      wrapper.unmount()
+    })
+
+    it('does not listen to the mouse without `spotlight`', async () => {
+      const addEventListener = vi.spyOn(window, 'addEventListener')
+      const wrapper = await mountSuspended(PageCard, { props, attachTo: document.body })
+      await idle()
+
+      expect(addEventListener.mock.calls.map(([type]) => type).filter(type => mouseEvents.includes(type))).toEqual([])
+      wrapper.unmount()
+    })
+
+    it('stops listening to the mouse once `spotlight` is disabled or the card unmounts', async () => {
+      spyOnClientRects()
+      const removeEventListener = vi.spyOn(window, 'removeEventListener')
+      const removed = () => removeEventListener.mock.calls.map(([type]) => type)
+      const wrapper = await mountSuspended(PageCard, { props: { ...props, spotlight: true }, attachTo: document.body })
+      await idle()
+
+      await wrapper.setProps({ spotlight: false })
+      expect(removed()).toEqual(expect.arrayContaining(mouseEvents))
+
+      await wrapper.setProps({ spotlight: true })
+      removeEventListener.mockClear()
+      wrapper.unmount()
+      expect(removed()).toEqual(expect.arrayContaining(mouseEvents))
+    })
+
+    it('tracks the mouse with `spotlight` once idle', async () => {
+      const getClientRects = spyOnClientRects()
+      const wrapper = await mountSuspended(PageCard, { props: { ...props, spotlight: true }, attachTo: document.body })
+      expect(getClientRects.mock.contexts).not.toContain(wrapper.element)
+
+      await idle()
+      moveMouse(10, 20)
+      await nextTick()
+
+      expect(getClientRects.mock.contexts).toContain(wrapper.element)
+      expect(wrapper.attributes('style')).toContain('--spotlight-x: 10px')
+      expect(wrapper.attributes('style')).toContain('--spotlight-y: 20px')
+      wrapper.unmount()
+    })
   })
 
   it('forwards attrs to link when `to` prop is set', async () => {
