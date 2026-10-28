@@ -50,7 +50,7 @@ describe('useToast', () => {
     it('increments _duplicate instead of adding a toast with an existing id', async () => {
       toast.add({ id: 'dup', title: 'First' })
       await vi.waitFor(() => expect(toast.toasts.value).toHaveLength(1))
-      vi.setSystemTime(Date.now() + 200)
+      vi.setSystemTime(Date.now() + 400)
 
       toast.add({ id: 'dup', title: 'Second' })
 
@@ -73,7 +73,7 @@ describe('useToast', () => {
     it('increments _duplicate once for a toast added twice in the same tick', async () => {
       toast.add({ id: 'dup', title: 'First' })
       await vi.waitFor(() => expect(toast.toasts.value).toHaveLength(1))
-      vi.setSystemTime(Date.now() + 200)
+      vi.setSystemTime(Date.now() + 400)
 
       // An even count would leave `data-pulsing` unchanged and the pulse would not replay.
       toast.add({ id: 'dup', title: 'Second' })
