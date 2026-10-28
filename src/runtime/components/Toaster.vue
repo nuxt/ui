@@ -146,11 +146,18 @@ function onFocusout(event: FocusEvent) {
 
 const refs = ref<{ height: number }[]>([])
 
-const height = computed(() => refs.value.reduce((acc, { height }) => acc + height + 16, 0))
-const frontHeight = computed(() => refs.value[refs.value.length - 1]?.height || 0)
+// A closing toast stays mounted until its exit ends, leave it out of the stack so the others move while it leaves.
+const isOpen = (index: number) => toasts.value[index]?.open !== false
+
+const height = computed(() => refs.value.reduce((acc, { height }, index) => isOpen(index) ? acc + height + 16 : acc, 0))
+const frontHeight = computed(() => refs.value.findLast((_, index) => isOpen(index))?.height || 0)
+
+function getBefore(index: number) {
+  return toasts.value.slice(index + 1).filter(toast => toast.open !== false).length
+}
 
 function getOffset(index: number) {
-  return refs.value.slice(index + 1).reduce((acc, { height }) => acc + height + 16, 0)
+  return refs.value.slice(index + 1).reduce((acc, { height }, i) => isOpen(index + 1 + i) ? acc + height + 16 : acc, 0)
 }
 </script>
 
@@ -166,11 +173,11 @@ function getOffset(index: number) {
       v-bind="omit(toast, ['id', 'close', '_duplicate', '_updated', '_animatedAt', 'onClick'])"
       :close="(toast.close as boolean)"
       :data-collapsed="!expanded"
-      :data-front="!expanded && index === toasts.length - 1"
+      :data-front="!expanded && getBefore(index) === 0"
       :data-pulsing="toast._duplicate ? (toast._duplicate % 2 === 0 ? 'even' : 'odd') : undefined"
       :style="{
         '--index': (index - toasts.length) + toasts.length,
-        '--before': toasts.length - 1 - index,
+        '--before': getBefore(index),
         '--offset': getOffset(index),
         '--scale': expanded ? '1' : 'calc(1 - var(--before) * var(--scale-factor))',
         '--translate': expanded ? 'calc(var(--offset) * var(--translate-factor))' : 'calc(var(--before) * var(--gap))',

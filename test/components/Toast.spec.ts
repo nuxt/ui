@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue'
+import { defineComponent, nextTick } from 'vue'
 import { describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
@@ -83,6 +83,26 @@ describe('Toast', () => {
 
     expect([back!.attributes('data-collapsed'), back!.attributes('data-front')]).toEqual(['true', 'false'])
     expect([front!.attributes('data-collapsed'), front!.attributes('data-front')]).toEqual(['true', 'true'])
+
+    toast.clear()
+  })
+
+  it('moves the next toast to the front while the closing one leaves', async () => {
+    const toast = useToast()
+    toast.clear()
+
+    const wrapper = await mountSuspended(Toaster, { props: { portal: false, expand: false } })
+    toast.add({ title: 'Back' })
+    const front = toast.add({ title: 'Front' })
+
+    await vi.waitFor(() => expect(wrapper.findAll('li[data-slot="toaster-base"]')).toHaveLength(2), { timeout: 4000 })
+    toast.remove(front.id)
+    await nextTick()
+
+    const [back, closing] = wrapper.findAll('li[data-slot="toaster-base"]')
+
+    expect([back!.attributes('data-front'), back!.attributes('style')]).toEqual(['true', expect.stringContaining('--before: 0;')])
+    expect([closing!.attributes('data-state'), closing!.attributes('data-front')]).toEqual(['closed', 'true'])
 
     toast.clear()
   })
