@@ -589,23 +589,24 @@ onMounted(() => {
               :streaming="isPartStreaming(part, streaming)"
             />
           </template>
-        </UChatMessages>
 
-        <UChatPrompt
-          v-model="input"
-          :status="status"
-          :error="error"
-          variant="subtle"
-          class="sticky bottom-0"
-          @submit="handleSubmit"
-        >
-          <UChatPromptSubmit
-            :status="status"
-            color="neutral"
-            @stop="stop()"
-            @reload="regenerate()"
-          />
-        </UChatPrompt>
+          <template #footer>
+            <UChatPrompt
+              v-model="input"
+              :status="status"
+              :error="error"
+              variant="subtle"
+              @submit="handleSubmit"
+            >
+              <UChatPromptSubmit
+                :status="status"
+                color="neutral"
+                @stop="stop()"
+                @reload="regenerate()"
+              />
+            </UChatPrompt>
+          </template>
+        </UChatMessages>
       </UContainer>
     </template>
   </UDashboardPanel>
@@ -635,6 +636,7 @@ The [`UChatMessages`](/docs/components/chat-messages) component is purpose-built
 - Continuous scrolling as messages stream in
 - A loading indicator while the assistant processes
 - An "Auto scroll" button when scrolled up
+- A `#footer` slot that keeps the prompt stuck to the bottom and leaves room for it below the last message
 
 **Rendering Message Parts**
 
@@ -864,23 +866,24 @@ onMounted(() => {
               :streaming="isPartStreaming(part, streaming)"
             />
           </template>
-        </UChatMessages>
 
-        <UChatPrompt
-          v-model="input"
-          :status="status"
-          :error="error"
-          variant="subtle"
-          class="sticky bottom-0"
-          @submit="handleSubmit"
-        >
-          <UChatPromptSubmit
-            :status="status"
-            color="neutral"
-            @stop="stop()"
-            @reload="regenerate()"
-          />
-        </UChatPrompt>
+          <template #footer>
+            <UChatPrompt
+              v-model="input"
+              :status="status"
+              :error="error"
+              variant="subtle"
+              @submit="handleSubmit"
+            >
+              <UChatPromptSubmit
+                :status="status"
+                color="neutral"
+                @stop="stop()"
+                @reload="regenerate()"
+              />
+            </UChatPrompt>
+          </template>
+        </UChatMessages>
       </UContainer>
     </template>
   </UDashboardPanel>
@@ -956,7 +959,7 @@ Update the chat page to include the model selector and pass the selected model t
 ::code-tree-intersection
 :::code-collapse
 
-```vue [app/pages/chat/[id].vue] {8,23-25,97-99}
+```vue [app/pages/chat/[id].vue] {8,23-25,96-98}
 <script setup lang="ts">
 import { DefaultChatTransport, isReasoningUIPart, isTextUIPart } from 'ai'
 import { useChat } from '@ai-sdk/vue'
@@ -1043,27 +1046,28 @@ onMounted(() => {
               :streaming="isPartStreaming(part, streaming)"
             />
           </template>
-        </UChatMessages>
 
-        <UChatPrompt
-          v-model="input"
-          :status="status"
-          :error="error"
-          variant="subtle"
-          class="sticky bottom-0"
-          @submit="handleSubmit"
-        >
           <template #footer>
-            <ModelSelect v-model="model" />
-          </template>
+            <UChatPrompt
+              v-model="input"
+              :status="status"
+              :error="error"
+              variant="subtle"
+              @submit="handleSubmit"
+            >
+              <template #footer>
+                <ModelSelect v-model="model" />
+              </template>
 
-          <UChatPromptSubmit
-            :status="status"
-            color="neutral"
-            @stop="stop()"
-            @reload="regenerate()"
-          />
-        </UChatPrompt>
+              <UChatPromptSubmit
+                :status="status"
+                color="neutral"
+                @stop="stop()"
+                @reload="regenerate()"
+              />
+            </UChatPrompt>
+          </template>
+        </UChatMessages>
       </UContainer>
     </template>
   </UDashboardPanel>
@@ -1408,27 +1412,28 @@ onMounted(() => {
               :streaming="isPartStreaming(part, streaming)"
             />
           </template>
-        </UChatMessages>
 
-        <UChatPrompt
-          v-model="input"
-          :status="status"
-          :error="error"
-          variant="subtle"
-          class="sticky bottom-0"
-          @submit="handleSubmit"
-        >
           <template #footer>
-            <ModelSelect v-model="model" />
-          </template>
+            <UChatPrompt
+              v-model="input"
+              :status="status"
+              :error="error"
+              variant="subtle"
+              @submit="handleSubmit"
+            >
+              <template #footer>
+                <ModelSelect v-model="model" />
+              </template>
 
-          <UChatPromptSubmit
-            :status="status"
-            color="neutral"
-            @stop="stop()"
-            @reload="regenerate()"
-          />
-        </UChatPrompt>
+              <UChatPromptSubmit
+                :status="status"
+                color="neutral"
+                @stop="stop()"
+                @reload="regenerate()"
+              />
+            </UChatPrompt>
+          </template>
+        </UChatMessages>
       </UContainer>
     </template>
   </UDashboardPanel>
@@ -1447,7 +1452,7 @@ The AI SDK doesn't queue messages: calling `sendMessage` during a response start
 ::code-tree-intersection
 :::code-collapse
 
-```vue [app/pages/chat/[id].vue] {2,18,45-46,56-59,61-65,67-71,73-80,135-136,141}
+```vue [app/pages/chat/[id].vue] {2,18,45-46,56-59,61-65,67-71,73-80,135-136,140}
 <script setup lang="ts">
 import type { ChatPromptQueueItem } from '@nuxt/ui'
 import { DefaultChatTransport, getToolName, isReasoningUIPart, isTextUIPart, isToolUIPart, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
@@ -1578,29 +1583,30 @@ onMounted(() => {
               :streaming="isPartStreaming(part, streaming)"
             />
           </template>
-        </UChatMessages>
 
-        <UChatPrompt
-          v-model="input"
-          v-model:queue="queue"
-          :status="awaitingApproval ? 'submitted' : status"
-          :error="error"
-          variant="subtle"
-          class="sticky bottom-0"
-          @submit="handleSubmit"
-          @send="onSend"
-        >
           <template #footer>
-            <ModelSelect v-model="model" />
-          </template>
+            <UChatPrompt
+              v-model="input"
+              v-model:queue="queue"
+              :status="awaitingApproval ? 'submitted' : status"
+              :error="error"
+              variant="subtle"
+              @submit="handleSubmit"
+              @send="onSend"
+            >
+              <template #footer>
+                <ModelSelect v-model="model" />
+              </template>
 
-          <UChatPromptSubmit
-            :status="status"
-            color="neutral"
-            @stop="stop()"
-            @reload="regenerate()"
-          />
-        </UChatPrompt>
+              <UChatPromptSubmit
+                :status="status"
+                color="neutral"
+                @stop="stop()"
+                @reload="regenerate()"
+              />
+            </UChatPrompt>
+          </template>
+        </UChatMessages>
       </UContainer>
     </template>
   </UDashboardPanel>
@@ -1619,7 +1625,7 @@ Bind `v-model:files` on the prompt to let users attach images and PDFs. They can
 ::code-tree-intersection
 :::code-collapse
 
-```vue [app/pages/chat/[id].vue] {5,19-21,51-71,75-77,81,87,126-134,170-172,179-186}
+```vue [app/pages/chat/[id].vue] {5,19-21,51-71,75-77,81,87,126-134,170-172,178-185}
 <script setup lang="ts">
 import type { ChatPromptQueueItem } from '@nuxt/ui'
 import { DefaultChatTransport, getToolName, isReasoningUIPart, isTextUIPart, isToolUIPart, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
@@ -1784,38 +1790,39 @@ onMounted(() => {
               :streaming="isPartStreaming(part, streaming)"
             />
           </template>
-        </UChatMessages>
 
-        <UChatPrompt
-          v-model="input"
-          v-model:queue="queue"
-          v-model:files="files"
-          accept="image/*,application/pdf"
-          :status="reading || awaitingApproval ? 'submitted' : status"
-          :error="error"
-          variant="subtle"
-          class="sticky bottom-0"
-          @submit="handleSubmit"
-          @send="onSend"
-        >
-          <template #footer="{ open }">
-            <UButton
-              icon="i-lucide-paperclip"
-              color="neutral"
-              variant="ghost"
-              aria-label="Attach files"
-              @click="open"
-            />
-            <ModelSelect v-model="model" />
+          <template #footer>
+            <UChatPrompt
+              v-model="input"
+              v-model:queue="queue"
+              v-model:files="files"
+              accept="image/*,application/pdf"
+              :status="reading || awaitingApproval ? 'submitted' : status"
+              :error="error"
+              variant="subtle"
+              @submit="handleSubmit"
+              @send="onSend"
+            >
+              <template #footer="{ open }">
+                <UButton
+                  icon="i-lucide-paperclip"
+                  color="neutral"
+                  variant="ghost"
+                  aria-label="Attach files"
+                  @click="open"
+                />
+                <ModelSelect v-model="model" />
+              </template>
+
+              <UChatPromptSubmit
+                :status="status"
+                color="neutral"
+                @stop="stop()"
+                @reload="regenerate()"
+              />
+            </UChatPrompt>
           </template>
-
-          <UChatPromptSubmit
-            :status="status"
-            color="neutral"
-            @stop="stop()"
-            @reload="regenerate()"
-          />
-        </UChatPrompt>
+        </UChatMessages>
       </UContainer>
     </template>
   </UDashboardPanel>
