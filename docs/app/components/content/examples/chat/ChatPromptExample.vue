@@ -6,8 +6,8 @@ const model = ref('claude-opus-5.5')
 
 const models = [
   { label: 'Claude Opus 5.5', value: 'claude-opus-5.5', icon: 'i-simple-icons-anthropic' },
-  { label: 'Gemini 3 Pro', value: 'gemini-3-pro', icon: 'i-simple-icons-googlegemini' },
-  { label: 'GPT-5', value: 'gpt-5', icon: 'i-simple-icons-openai' }
+  { label: 'Gemini 4 Argon', value: 'gemini-4-argon', icon: 'i-simple-icons-googlegemini' },
+  { label: 'GPT-6 Astra', value: 'gpt-6-astra', icon: 'i-simple-icons-openai' }
 ] satisfies SelectItem[]
 
 function onSubmit() {
