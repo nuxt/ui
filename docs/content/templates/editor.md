@@ -2714,6 +2714,10 @@ The [Editor template](https://github.com/nuxt-ui-templates/editor) adds tables w
 
 The PartyKit server keeps each room in its storage. Use the `load` and `callback` options of `y-partykit` to load and save the documents in your own database.
 
+**Authentication**
+
+The upload and completion routes accept requests from anyone. Protect them before you deploy, for example with [nuxt-auth-utils](https://github.com/atinux/nuxt-auth-utils), and limit how much each user can upload or generate.
+
 **Another collaboration backend**
 
 Y.js works with other providers, like [Liveblocks](https://liveblocks.io) or [Tiptap Collaboration](https://tiptap.dev/product/collaboration), if you'd rather not host the server yourself.
