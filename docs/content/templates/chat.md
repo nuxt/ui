@@ -352,7 +352,7 @@ The [`streamText`](https://ai-sdk.dev/docs/reference/ai-sdk-core/stream-text) fu
 - `model`: The AI model to use
 - `instructions`: Guidance that shapes the AI's behavior
 - `messages`: The conversation history
-- `abortSignal`: Stops the generation when the client disconnects, for example when the user clicks stop
+- `abortSignal`: Stops the generation when the client disconnects, for example when the user clicks stop. `event.req.signal` aborts on disconnect since Nuxt 4.6.3
 
 **Reasoning**
 
