@@ -2,12 +2,12 @@
 import type { SelectItem } from '@nuxt/ui'
 
 const input = ref('')
-const model = ref('claude-opus-5.5')
+const model = ref('opus-5-5')
 
 const models = [
-  { label: 'Claude Opus 5.5', value: 'claude-opus-5.5', icon: 'i-simple-icons-anthropic' },
-  { label: 'Gemini 3 Pro', value: 'gemini-3-pro', icon: 'i-simple-icons-googlegemini' },
-  { label: 'GPT-5', value: 'gpt-5', icon: 'i-simple-icons-openai' }
+  { label: 'Opus 5.5', value: 'opus-5-5', icon: 'i-simple-icons-anthropic' },
+  { label: 'Sonnet 5.5', value: 'sonnet-5-5', icon: 'i-simple-icons-anthropic' },
+  { label: 'Haiku 5.5', value: 'haiku-5-5', icon: 'i-simple-icons-anthropic' }
 ] satisfies SelectItem[]
 
 function onSubmit() {

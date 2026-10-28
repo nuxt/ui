@@ -5,7 +5,7 @@ const NuxtLink = resolveComponent('NuxtLink')
 
 const { data: page } = await useAsyncData('templates', () => queryCollection('templates').first())
 if (!page.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+  throw createError({ status: 404, statusText: 'Page not found', fatal: true })
 }
 
 // One list per framework, each hidden whole by its class (a JS filter would
