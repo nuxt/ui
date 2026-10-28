@@ -185,7 +185,7 @@ First, create the endpoint that initializes a new chat and saves the first messa
 
 ::code-tree-intersection
 ```ts [server/api/chats.post.ts]
-import { defineEventHandler, readValidatedBody } from 'h3'
+import { defineEventHandler, readValidatedBody } from 'nuxt/server'
 import type { UIMessage } from 'ai'
 import { db, schema } from 'hub:db'
 import { z } from 'zod'
@@ -193,7 +193,7 @@ import { z } from 'zod'
 export default defineEventHandler(async (event) => {
   const { message } = await readValidatedBody(event, z.object({
     message: z.custom<UIMessage>()
-  }).parse)
+  }))
 
   // Create a new chat
   const [chat] = await db.insert(schema.chats).values({}).returning()
@@ -218,7 +218,7 @@ Next, create the endpoint that handles the AI conversation. This endpoint uses [
 :::code-collapse
 
 ```ts [server/api/chats/[id].post.ts]
-import { createError, defineEventHandler, getValidatedRouterParams, readValidatedBody } from 'h3'
+import { createError, defineEventHandler, getRouterParam, readValidatedBody } from 'nuxt/server'
 import { eq } from 'drizzle-orm'
 import { db, schema } from 'hub:db'
 import { z } from 'zod'
@@ -241,24 +241,22 @@ const MODELS = [
 ]
 
 export default defineEventHandler(async (event) => {
-  const { id } = await getValidatedRouterParams(event, z.object({
-    id: z.string()
-  }).parse)
+  const id = getRouterParam(event, 'id', { decode: true })!
 
   const { model = DEFAULT_MODEL, messages } = await readValidatedBody(event, z.object({
     model: z.string().refine(value => MODELS.some(m => m.value === value), {
       message: 'Invalid model'
     }).optional(),
     messages: z.array(z.custom<UIMessage>())
-  }).parse)
+  }))
 
   // Fetch the chat from the database
   const chat = await db.query.chats.findFirst({
-    where: (chat, { eq }) => eq(chat.id, id as string)
+    where: (chat, { eq }) => eq(chat.id, id)
   })
 
   if (!chat) {
-    throw createError({ statusCode: 404, statusMessage: 'Chat not found' })
+    throw createError({ status: 404, statusText: 'Chat not found' })
   }
 
   // Generate a title for the chat if it doesn't have one
@@ -286,6 +284,7 @@ export default defineEventHandler(async (event) => {
   const stream = createUIMessageStream({
     execute: async ({ writer }) => {
       const result = streamText({
+        abortSignal: event.req.signal,
         model,
         instructions: `You are a helpful AI assistant. Be concise and friendly.`,
         messages: await convertToModelMessages(messages),
@@ -353,6 +352,7 @@ The [`streamText`](https://ai-sdk.dev/docs/reference/ai-sdk-core/stream-text) fu
 - `model`: The AI model to use
 - `instructions`: Guidance that shapes the AI's behavior
 - `messages`: The conversation history
+- `abortSignal`: Stops the generation when the client disconnects, for example when the user clicks stop
 
 **Reasoning**
 
@@ -370,15 +370,12 @@ Add an endpoint to fetch existing chat data from your database:
 
 ::code-tree-intersection
 ```ts [server/api/chats/[id].get.ts]
-import { createError, defineEventHandler, getValidatedRouterParams } from 'h3'
+import { createError, defineEventHandler, getRouterParam } from 'nuxt/server'
 import { asc, eq } from 'drizzle-orm'
 import { db, schema } from 'hub:db'
-import { z } from 'zod'
 
 export default defineEventHandler(async (event) => {
-  const { id } = await getValidatedRouterParams(event, z.object({
-    id: z.string()
-  }).parse)
+  const id = getRouterParam(event, 'id', { decode: true })!
 
   const chat = await db.query.chats.findFirst({
     where: (eq(schema.chats.id, id)),
@@ -390,7 +387,7 @@ export default defineEventHandler(async (event) => {
   })
 
   if (!chat) {
-    throw createError({ statusCode: 404, statusMessage: 'Chat not found' })
+    throw createError({ status: 404, statusText: 'Chat not found' })
   }
 
   return chat
@@ -660,7 +657,7 @@ First, create an endpoint to fetch all chats:
 
 ::code-tree-intersection
 ```ts [server/api/chats.get.ts]
-import { defineEventHandler } from 'h3'
+import { defineEventHandler } from 'nuxt/server'
 import { db, schema } from 'hub:db'
 import { desc } from 'drizzle-orm'
 
@@ -1109,8 +1106,8 @@ Add the tools to `streamText` in the chat endpoint:
 ::code-tree-intersection
 :::code-collapse
 
-```ts [server/api/chats/[id].post.ts] {10,13,16-19,71-78,80-87,91,97-106,108-113,115-122,154-156,158-168}
-import { createError, defineEventHandler, getValidatedRouterParams, readValidatedBody } from 'h3'
+```ts [server/api/chats/[id].post.ts] {10,13,16-19,69-76,78-85,89,96-105,107-112,114-121,153-155,157-167}
+import { createError, defineEventHandler, getRouterParam, readValidatedBody } from 'nuxt/server'
 import { eq } from 'drizzle-orm'
 import { db, schema } from 'hub:db'
 import { z } from 'zod'
@@ -1139,24 +1136,22 @@ const MODELS = [
 ]
 
 export default defineEventHandler(async (event) => {
-  const { id } = await getValidatedRouterParams(event, z.object({
-    id: z.string()
-  }).parse)
+  const id = getRouterParam(event, 'id', { decode: true })!
 
   const { model = DEFAULT_MODEL, messages } = await readValidatedBody(event, z.object({
     model: z.string().refine(value => MODELS.some(m => m.value === value), {
       message: 'Invalid model'
     }).optional(),
     messages: z.array(z.custom<UIMessage>())
-  }).parse)
+  }))
 
   // Fetch the chat from the database
   const chat = await db.query.chats.findFirst({
-    where: (chat, { eq }) => eq(chat.id, id as string)
+    where: (chat, { eq }) => eq(chat.id, id)
   })
 
   if (!chat) {
-    throw createError({ statusCode: 404, statusMessage: 'Chat not found' })
+    throw createError({ status: 404, statusText: 'Chat not found' })
   }
 
   // Generate a title for the chat if it doesn't have one
@@ -1203,6 +1198,7 @@ export default defineEventHandler(async (event) => {
     originalMessages: messages,
     execute: async ({ writer }) => {
       const result = streamText({
+        abortSignal: event.req.signal,
         model,
         instructions: `You are a helpful AI assistant. Be concise and friendly.`,
         messages: await convertToModelMessages(messages),
