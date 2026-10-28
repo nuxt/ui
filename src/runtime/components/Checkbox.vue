@@ -63,7 +63,7 @@ export interface CheckboxSlots {
 </script>
 
 <script setup lang="ts" generic="T = boolean">
-import { computed, useAttrs, useId } from 'vue'
+import { computed, useId } from 'vue'
 import { Primitive, CheckboxRoot, CheckboxIndicator, Label, injectCheckboxGroupRootContext } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { isEqual } from 'ohash/utils'
@@ -71,6 +71,7 @@ import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useFormField } from '../composables/useFormField'
+import { getFormControlAttrs } from '../utils/attributes'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
@@ -122,14 +123,6 @@ const labelIcon = computed(() => props.indicator === 'hidden' ? props.icon : und
 // `<div>` inside it made the browser close the tag early and broke hydration. See #6033.
 const isListVariant = computed(() => !props.variant || props.variant === 'list')
 
-const attrs = useAttrs()
-
-// Omit `data-state` to prevent conflicts with parent components (e.g. TooltipTrigger)
-const forwardedAttrs = computed(() => {
-  const { 'data-state': _, ...rest } = attrs
-  return rest
-})
-
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.checkbox || {}) })({
   size: size.value,
@@ -152,11 +145,11 @@ function onUpdate(value: any) {
 
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <Primitive :as="isListVariant ? props.as : Label" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="isListVariant ? props.as : Label" v-bind="getFormControlAttrs($attrs, 'root')" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
       <CheckboxRoot
         :id="id"
-        v-bind="{ ...rootProps, ...forwardedAttrs, ...ariaAttrs }"
+        v-bind="{ ...rootProps, ...getFormControlAttrs($attrs, 'base'), ...ariaAttrs }"
         :name="name"
         :disabled="disabled"
         data-slot="base"
