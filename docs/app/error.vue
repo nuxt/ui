@@ -49,7 +49,7 @@ useHead({
 
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI',
-  title: String(props.error.statusCode)
+  title: String(props.error.status)
 })
 
 if (import.meta.server) {

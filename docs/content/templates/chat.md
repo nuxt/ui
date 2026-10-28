@@ -34,7 +34,7 @@ Before we start, make sure you have:
 Start by creating a new Nuxt project:
 
 ```bash
-npx nuxi@latest init nuxt-ai-chat
+npm create nuxt@latest nuxt-ai-chat
 cd nuxt-ai-chat
 ```
 
@@ -518,7 +518,7 @@ const toast = useToast()
 const { data: chatData } = await useFetch(`/api/chats/${route.params.id}`)
 
 if (!chatData.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Chat not found', fatal: true })
+  throw createError({ status: 404, statusText: 'Chat not found', fatal: true })
 }
 
 const input = ref('')
@@ -790,7 +790,7 @@ const toast = useToast()
 const { data: chatData } = await useFetch(`/api/chats/${route.params.id}`)
 
 if (!chatData.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Chat not found', fatal: true })
+  throw createError({ status: 404, statusText: 'Chat not found', fatal: true })
 }
 
 const input = ref('')
@@ -969,7 +969,7 @@ const { model } = useModels()
 const { data: chatData } = await useFetch(`/api/chats/${route.params.id}`)
 
 if (!chatData.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Chat not found', fatal: true })
+  throw createError({ status: 404, statusText: 'Chat not found', fatal: true })
 }
 
 const input = ref('')
@@ -1321,7 +1321,7 @@ const { model } = useModels()
 const { data: chatData } = await useFetch(`/api/chats/${route.params.id}`)
 
 if (!chatData.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Chat not found', fatal: true })
+  throw createError({ status: 404, statusText: 'Chat not found', fatal: true })
 }
 
 const input = ref('')
@@ -1461,7 +1461,7 @@ const { model } = useModels()
 const { data: chatData } = await useFetch(`/api/chats/${route.params.id}`)
 
 if (!chatData.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Chat not found', fatal: true })
+  throw createError({ status: 404, statusText: 'Chat not found', fatal: true })
 }
 
 const input = ref('')
@@ -1633,7 +1633,7 @@ const { model } = useModels()
 const { data: chatData } = await useFetch(`/api/chats/${route.params.id}`)
 
 if (!chatData.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Chat not found', fatal: true })
+  throw createError({ status: 404, statusText: 'Chat not found', fatal: true })
 }
 
 const input = ref('')
