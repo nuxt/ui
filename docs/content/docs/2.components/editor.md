@@ -368,6 +368,10 @@ Check out the image upload example for a complete implementation with custom han
 Check out the source code of our **Editor template** on GitHub for a real-life example.
 ::
 
+::tip{to="/templates/editor"}
+Follow the **How to Build a Notion-like Editor** guide to build a full app with slash commands, image uploads, AI completions and real-time collaboration.
+::
+
 ### With toolbar
 
 You can use the [EditorToolbar](/docs/components/editor-toolbar) component to add a `fixed`, `bubble`, or `floating` toolbar to the Editor with common formatting actions.

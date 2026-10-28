@@ -322,12 +322,13 @@ export default defineNuxtConfig({
   agentDiscovery: {
     siteUrl: SITE_URL,
     siteName: 'Nuxt UI',
-    // Only the homepage and the documentation have a Markdown representation.
+    // Only the homepage, the documentation and the template guides have a Markdown representation.
     // `*` matches one path segment, `**` one or more, so the generated Vercel
     // route table stays O(patterns) instead of growing with the page count.
     routes: [
       { path: '/', raw: '/raw/index.md' },
-      '/docs/**'
+      '/docs/**',
+      '/templates/*'
     ],
     // the Figma and playground entries link out (routeRules above) and the release pages are
     // Vue pages built from the GitHub API, none has a Markdown twin to list or serve
@@ -543,6 +544,9 @@ export default defineNuxtConfig({
       contentFilters: [
         { field: 'path', operator: 'LIKE', value: '/docs/typography%' }
       ]
+    }, {
+      title: 'Guides',
+      contentCollection: 'guides'
     }],
     notes: [
       'LLM guidance: Nuxt UI is a comprehensive Vue UI component library (Nuxt optional) with 125+ accessible, production-ready components. Free and open source under MIT license. Works with Nuxt and plain Vue apps (Vite, Inertia, SSR) via the Vite plugin. Includes a complete Figma Kit.',
