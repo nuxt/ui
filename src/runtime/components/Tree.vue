@@ -225,7 +225,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.tree || {}) })({
 const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef')
 
 function getItemLabel<Item extends T[number]>(item: Item): string {
-  return get(item, props.labelKey as string)
+  return get(item, props.labelKey as string) ?? ''
 }
 
 function getItemKey<Item extends T[number]>(item: Item): string {

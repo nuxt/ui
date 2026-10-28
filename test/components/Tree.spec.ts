@@ -86,20 +86,27 @@ describe('Tree', () => {
   })
 
   it.each([
-    ['label', 'c', 2],
-    ['name', 'c', 2],
-    ['label', 'v', 0],
-    ['name', 'v', 0]
-  ] as const)('handles virtualized typeahead with labelKey %s and key %s', async (labelKey, key, focusedIndex) => {
+    ['label', 'c', 2, false],
+    ['name', 'c', 2, false],
+    ['label', 'v', 0, false],
+    ['name', 'v', 0, false],
+    ['label', 'c', 2, true],
+    ['name', 'c', 2, true]
+  ] as const)('handles virtualized typeahead with labelKey %s, key %s, target %s and missing label %s', async (labelKey, key, focusedIndex, missingLabel) => {
     const height = vi.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockReturnValue(300)
     const width = vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(300)
     const wrapper = await mountSuspended(Tree, {
       attachTo: document.body,
       props: {
-        items: ['Alpha', 'Bravo', 'Charlie'].map(label => ({ [labelKey]: label })),
+        items: ['Alpha', 'Bravo', 'Charlie'].map((label, index) => ({
+          id: String(index),
+          ...(missingLabel && index === 1 ? {} : { [labelKey]: label })
+        })),
+        getKey: item => item.id,
         labelKey,
         virtualize: true
-      }
+      },
+      slots: { 'item-label': () => 'Custom label' }
     })
     try {
       await vi.waitFor(() => expect(wrapper.findAll('[role="treeitem"]')).toHaveLength(3))
