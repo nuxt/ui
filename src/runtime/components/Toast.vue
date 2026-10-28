@@ -92,7 +92,7 @@ export interface ToastSlots {
 import { ref, computed, onMounted, useTemplateRef } from 'vue'
 import { ToastRoot, ToastTitle, ToastDescription, ToastAction, ToastClose } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { reactivePick } from '@vueuse/core'
+import { reactivePick, useResizeObserver } from '@vueuse/core'
 import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
@@ -125,15 +125,26 @@ const ui = computed(() => tv(theme, overrides.value)({
 }))
 
 const rootRef = useTemplateRef('rootRef')
+const wrapperRef = useTemplateRef('wrapperRef')
 const height = ref(0)
 
-onMounted(() => {
-  if (!rootRef.value?.$el?.getBoundingClientRect) {
+// The Toaster sets an explicit height so the stack can animate it, measure without it to keep the natural one.
+function measure() {
+  const el = rootRef.value?.$el as HTMLElement | undefined
+  if (!el?.style) {
     return
   }
 
-  height.value = rootRef.value.$el.getBoundingClientRect().height
-})
+  const style = el.style.height
+  el.style.height = 'auto'
+  height.value = el.offsetHeight
+  el.style.height = style
+}
+
+onMounted(measure)
+
+// The content reflows when the toast is updated or the viewport resizes.
+useResizeObserver(wrapperRef, measure)
 
 defineExpose({
   height
@@ -155,7 +166,7 @@ defineExpose({
       <UIcon v-else-if="props.icon" :name="props.icon" data-slot="toast-icon" :class="ui.icon({ class: props.ui?.icon })" />
     </slot>
 
-    <div data-slot="toast-wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+    <div ref="wrapperRef" data-slot="toast-wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
       <ToastTitle v-if="props.title || !!slots.title" data-slot="toast-title" :class="ui.title({ class: props.ui?.title })">
         <slot name="title">
           <component :is="props.title()" v-if="typeof props.title === 'function'" />
