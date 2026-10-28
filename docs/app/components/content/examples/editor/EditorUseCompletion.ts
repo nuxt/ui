@@ -151,10 +151,8 @@ export function useEditorCompletion(editorRef: Ref<{ editor: Editor | undefined 
 
   function getMarkdownBefore(editor: Editor, pos: number): string {
     const { state } = editor
-    const serializer = (editor.storage.markdown as { serializer?: { serialize: (content: unknown) => string } })?.serializer
-    if (serializer) {
-      const slice = state.doc.slice(0, pos)
-      return serializer.serialize(slice.content)
+    if (editor.markdown) {
+      return editor.markdown.serialize(state.doc.cut(0, pos).toJSON())
     }
     // Fallback to plain text
     return state.doc.textBetween(0, pos, '\n')

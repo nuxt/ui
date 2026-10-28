@@ -11,7 +11,7 @@ export interface CompletionOptions {
   debounce?: number
   /**
    * Whether to automatically trigger completion while typing
-   * @defaultValue false
+   * @defaultValue true
    */
   autoTrigger?: boolean
   /**
@@ -50,7 +50,7 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
   addOptions() {
     return {
       debounce: 250,
-      autoTrigger: false,
+      autoTrigger: true,
       triggerCharacters: ['/', ':', '@'],
       onTrigger: undefined,
       onAccept: undefined,
@@ -104,17 +104,7 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
 
   addKeyboardShortcuts() {
     return {
-      'Mod-j': ({ editor }) => {
-        // Clear any existing suggestion first to avoid flickering
-        if (this.storage.visible) {
-          this.storage.clearSuggestion()
-          this.options.onDismiss?.()
-        }
-        // Manually trigger completion
-        this.storage.debouncedTrigger?.(editor as any)
-        return true
-      },
-      'Tab': ({ editor }) => {
+      Tab: ({ editor }) => {
         if (!this.storage.visible || !this.storage.suggestion || this.storage.position === undefined) {
           return false
         }
@@ -135,7 +125,7 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
         this.options.onAccept?.()
         return true
       },
-      'Escape': ({ editor }) => {
+      Escape: ({ editor }) => {
         if (this.storage.visible) {
           this.storage.clearSuggestion()
           // Force decoration update

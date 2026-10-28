@@ -53,13 +53,16 @@ CRITICAL RULES:
   }
 
   const result = streamText({
-    model: 'anthropic/claude-haiku-4.5',
+    model: 'deepseek/deepseek-v4.1-flash',
     instructions,
     prompt,
     maxOutputTokens,
+    reasoning: 'none',
     providerOptions: {
       gateway: {
-        caching: 'auto',
+        order: ['baseten'],
+        zeroDataRetention: true,
+        disallowPromptTraining: true,
         user: getChatUser(event),
         tags: ['docs-completion']
       } satisfies GatewayProviderOptions

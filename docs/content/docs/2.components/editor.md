@@ -588,10 +588,18 @@ CRITICAL RULES:
   }
 
   const result = streamText({
-    model: 'anthropic/claude-haiku-4.5',
+    model: 'deepseek/deepseek-v4.1-flash',
     instructions,
     prompt,
-    maxOutputTokens
+    maxOutputTokens,
+    reasoning: 'none',
+    providerOptions: {
+      gateway: {
+        order: ['baseten'],
+        zeroDataRetention: true,
+        disallowPromptTraining: true
+      }
+    }
   })
 
   return createTextStreamResponse({ stream: result.textStream })
@@ -613,7 +621,7 @@ class: '!p-0'
 ::
 
 ::note
-The completion extension can be configured with `autoTrigger: true` to automatically suggest completions while typing (disabled by default). You can also manually trigger it with :kbd{value="meta"} :kbd{value="j" class="ms-px"}.
+The completion extension suggests completions while you type. Accept one with :kbd{value="tab"}, dismiss it with :kbd{value="escape"}, or set `autoTrigger: false` to turn it off.
 ::
 
 ::callout{icon="i-simple-icons-vercel" to="https://ai-sdk.dev/" target="_blank"}
