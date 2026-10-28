@@ -3,9 +3,9 @@ import { join } from 'pathe'
 import { globSync } from 'tinyglobby'
 import { describe, it, expect } from 'vitest'
 import { createHooks } from 'hookable'
-import { runWithNuxtContext } from '@nuxt/kit'
+import { nuxtCtx, runWithNuxtContext } from '@nuxt/kit'
 import type { Nuxt, NuxtTemplate } from '@nuxt/schema'
-import { getTemplates, prefixedClasses } from '../../src/templates'
+import { addTemplates, getTemplates, prefixedClasses } from '../../src/templates'
 import { defaultOptions, getDefaultConfig, resolveColors } from '../../src/utils/defaults'
 
 function themeContents(overrides: Record<string, any>, vue?: { detectedComponents?: Set<string> }) {
@@ -118,5 +118,20 @@ describe('regeneration on file changes', () => {
     expect(recompiledOn(templates, nuxt, '/app/app/composables/useThing.ts')).toEqual(['ui.css'])
     expect(recompiledOn(templates, nuxt, '/app/server/api/thing.ts')).toEqual([])
     expect(recompiledOn(templates, nuxt, '/app/app/assets/main.css')).toEqual([])
+  })
+
+  it('leaves regeneration to Nuxt when a file changes', async () => {
+    const nuxt = createNuxt()
+    const requests: unknown[] = []
+    nuxt.hook('builder:generateApp', options => void requests.push(options))
+    nuxtCtx.set(nuxt)
+    try {
+      addTemplates(moduleOptions({ experimental: { componentDetection: true } }), nuxt, () => '/ui/runtime/components')
+      await nuxt.callHook('builder:watch', 'change', 'pages/index.vue')
+    } finally {
+      nuxtCtx.unset()
+    }
+
+    expect(requests).toEqual([])
   })
 })
