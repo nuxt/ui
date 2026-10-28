@@ -1256,6 +1256,9 @@ export default defineEventHandler(async (event) => {
   if (!prompt) {
     throw createError({ status: 400, message: 'Prompt is required' })
   }
+  if (prompt.length > 10_000) {
+    throw createError({ status: 413, message: 'Prompt is too long' })
+  }
 
   let instructions: string
   let maxOutputTokens: number
@@ -1295,7 +1298,7 @@ CRITICAL RULES:
 - NEVER repeat any words from the end of the user's text
 - Keep completions short (1 sentence max)
 - Match the tone and style of the existing text
-- ${preserveMarkdown}`
+- Output plain text only, never use markdown syntax`
       maxOutputTokens = 25
       break
   }
@@ -1322,7 +1325,7 @@ CRITICAL RULES:
 :::
 ::
 
-With `reasoning: 'none'`, the model answers without a thinking step so suggestions come back fast. The gateway options send the request to Baseten, with zero data retention and no prompt training.
+With `reasoning: 'none'`, the model answers without a thinking step so suggestions come back fast. The gateway options send the request to Baseten, with zero data retention and no prompt training. Prompts over 10,000 characters are rejected.
 
 ### Creating the ghost text extension
 
@@ -1350,14 +1353,15 @@ export interface CompletionOptions {
    */
   autoTrigger?: boolean
   /**
-   * Characters that should prevent completion from triggering
+   * Characters that prevent completion while typing the word they start (slash commands, emojis, mentions)
    * @defaultValue ['/', ':', '@']
    */
   triggerCharacters?: string[]
   /**
-   * Called when completion should be triggered, receives the editor instance
+   * Called when completion should be triggered, receives the editor instance.
+   * Return `false` to skip showing a suggestion.
    */
-  onTrigger?: (editor: Editor) => void
+  onTrigger?: (editor: Editor) => boolean | undefined
   /**
    * Called when suggestion is accepted
    */
@@ -1378,6 +1382,13 @@ export interface CompletionStorage {
 }
 
 export const completionPluginKey = new PluginKey('completion')
+
+function dismiss(editor: Editor, storage: CompletionStorage, options: CompletionOptions) {
+  storage.clearSuggestion()
+  // Force decoration update
+  editor.view.dispatch(editor.state.tr.setMeta('completionUpdate', true))
+  options.onDismiss?.()
+}
 
 export const Completion = Extension.create<CompletionOptions, CompletionStorage>({
   name: 'completion',
@@ -1461,14 +1472,12 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
         return true
       },
       Escape: ({ editor }) => {
-        if (this.storage.visible) {
-          this.storage.clearSuggestion()
-          // Force decoration update
-          editor.view.dispatch(editor.state.tr.setMeta('completionUpdate', true))
-          this.options.onDismiss?.()
-          return true
+        if (!this.storage.visible) {
+          return false
         }
-        return false
+
+        dismiss(editor as Editor, this.storage, this.options)
+        return true
       }
     }
   },
@@ -1476,13 +1485,9 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
   onUpdate({ editor }) {
     // Clear suggestion on any edit
     if (this.storage.visible) {
-      this.storage.clearSuggestion()
-      // Force decoration update
-      editor.view.dispatch(editor.state.tr.setMeta('completionUpdate', true))
-      this.options.onDismiss?.()
+      dismiss(editor as Editor, this.storage, this.options)
     }
 
-    // Debounced trigger check (only if autoTrigger is enabled)
     if (this.options.autoTrigger) {
       this.storage.debouncedTrigger?.(editor as Editor)
     }
@@ -1490,10 +1495,7 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
 
   onSelectionUpdate({ editor }) {
     if (this.storage.visible) {
-      this.storage.clearSuggestion()
-      // Force decoration update
-      editor.view.dispatch(editor.state.tr.setMeta('completionUpdate', true))
-      this.options.onDismiss?.()
+      dismiss(editor as Editor, this.storage, this.options)
     }
   },
 
@@ -1517,20 +1519,22 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
       // Don't trigger if sentence is complete (ends with punctuation)
       const endsWithPunctuation = /[.!?]\s*$/.test(textContent)
 
-      // Don't trigger if text ends with trigger characters
-      const triggerChars = options.triggerCharacters || []
-      const endsWithTrigger = triggerChars.some(char => textContent.endsWith(char))
+      // Don't trigger while typing a word that starts with a trigger character
+      const lastWord = textContent.split(/\s/).pop() || ''
+      const endsWithTrigger = (options.triggerCharacters || []).some(char => lastWord.startsWith(char))
 
       if (!isAtEndOfBlock || !hasContent || endsWithPunctuation || endsWithTrigger) {
+        return
+      }
+
+      // Pass editor to let the handler extract content (e.g., as markdown)
+      if (options.onTrigger(editor) === false) {
         return
       }
 
       // Set position and mark as visible
       storage.position = selection.from
       storage.visible = true
-
-      // Pass editor to let the handler extract content (e.g., as markdown)
-      options.onTrigger(editor)
     }, options.debounce || 250)
   },
 
@@ -1556,26 +1560,27 @@ The composable connects the extension to `useCompletion`, and exposes a handler 
 
 ```ts [app/composables/useEditorCompletion.ts]
 import { useCompletion } from '@ai-sdk/vue'
+import type { MappablePosition } from '@tiptap/core'
 import type { Editor } from '@tiptap/vue-3'
 import { Completion } from '~/components/editor/CompletionExtension'
 import type { CompletionStorage } from '~/components/editor/CompletionExtension'
 
-type CompletionMode = 'continue' | 'fix' | 'extend' | 'reduce' | 'simplify' | 'summarize' | 'translate'
+type TransformMode = 'fix' | 'extend' | 'reduce' | 'simplify' | 'summarize' | 'translate'
+type CompletionMode = 'continue' | TransformMode
+
+// Only the end of the document is sent as context to continue writing
+const MAX_CONTEXT_LENGTH = 2000
 
 export interface UseEditorCompletionOptions {
   api?: string
 }
 
 export function useEditorCompletion(editorRef: Ref<{ editor: Editor | undefined } | null | undefined>, options: UseEditorCompletionOptions = {}) {
-  // State for direct insertion/transform mode
-  const insertState = ref<{
-    pos: number
-    deleteRange?: { from: number, to: number }
-  }>()
+  // Range toolbar actions replace with their result, kept in sync with edits made while the request runs
+  let target: { from: MappablePosition, to: MappablePosition } | undefined
   const mode = ref<CompletionMode>('continue')
   const language = ref<string>()
 
-  // Helper to get completion storage
   function getCompletionStorage() {
     const storage = editorRef.value?.editor?.storage as Record<string, CompletionStorage> | undefined
     return storage?.completion
@@ -1589,160 +1594,141 @@ export function useEditorCompletion(editorRef: Ref<{ editor: Editor | undefined 
       language: language.value
     })),
     onFinish: (_prompt, completionText) => {
-      // For inline suggestion mode, don't clear - let user accept with Tab
-      const storage = getCompletionStorage()
-      if (mode.value === 'continue' && storage?.visible) {
-        return
+      const editor = editorRef.value?.editor
+
+      // Transform modes replace the selection with the full result
+      if (mode.value !== 'continue' && target && completionText && editor) {
+        const range = { from: target.from.position, to: target.to.position }
+        editor.chain()
+          .focus()
+          .insertContentAt(range, parseResult(editor, range, completionText))
+          .run()
       }
 
-      // For transform modes, insert the full completion with markdown parsing
-      const transformModes = ['fix', 'extend', 'reduce', 'simplify', 'summarize', 'translate']
-      if (transformModes.includes(mode.value) && insertState.value && completionText) {
-        const editor = editorRef.value?.editor
-        if (editor) {
-          // Delete the original selection if not already done
-          if (insertState.value.deleteRange) {
-            editor.chain()
-              .focus()
-              .deleteRange(insertState.value.deleteRange)
-              .run()
-          }
-
-          // Insert with markdown parsing
-          editor.chain()
-            .focus()
-            .insertContentAt(insertState.value.pos, completionText, { contentType: 'markdown' })
-            .run()
-        }
-      }
-
-      insertState.value = undefined
+      target = undefined
     },
     onError: (error) => {
       console.error('AI completion error:', error)
-      insertState.value = undefined
+      target = undefined
       getCompletionStorage()?.clearSuggestion()
     }
   })
 
-  // Watch completion for inline suggestion updates
+  // Stream "continue" results into the inline suggestion, or into the document for the toolbar action
   watch(completion, (newCompletion, oldCompletion) => {
     const editor = editorRef.value?.editor
-    if (!editor || !newCompletion) return
+    if (!editor || !newCompletion || mode.value !== 'continue') return
 
     const storage = getCompletionStorage()
-    if (storage?.visible) {
-      // Update inline suggestion
-      // Add space prefix if needed (so preview matches what will be inserted)
-      let suggestionText = newCompletion
-      if (storage.position !== undefined) {
-        const textBefore = editor.state.doc.textBetween(Math.max(0, storage.position - 1), storage.position)
-        if (textBefore && !/\s/.test(textBefore) && !suggestionText.startsWith(' ')) {
-          suggestionText = ' ' + suggestionText
-        }
-      }
-      storage.setSuggestion(suggestionText)
+    if (storage?.visible && storage.position !== undefined) {
+      storage.setSuggestion(withLeadingSpace(editor, storage.position, newCompletion))
       editor.view.dispatch(editor.state.tr.setMeta('completionUpdate', true))
-    } else if (insertState.value) {
-      // Direct insertion/transform mode (from toolbar actions)
-
-      // Transform modes use markdown insertion - wait for full completion
-      const transformModes = ['fix', 'extend', 'reduce', 'simplify', 'summarize', 'translate']
-      if (transformModes.includes(mode.value)) {
-        // Don't stream - will be handled in onFinish
-        return
-      }
-
-      // If this is the first chunk and we have a selection to replace, delete it first
-      if (insertState.value.deleteRange && !oldCompletion) {
-        editor.chain()
-          .focus()
-          .deleteRange(insertState.value.deleteRange)
-          .run()
-        insertState.value.deleteRange = undefined
-      }
-
+    } else if (target) {
+      // The target moves past each inserted chunk
+      const pos = target.to.position
       let delta = newCompletion.slice(oldCompletion?.length || 0)
-      if (delta) {
-        // For single-paragraph transforms, replace all line breaks with spaces
-        if (['fix', 'simplify', 'translate'].includes(mode.value)) {
-          delta = delta.replace(/[\r\n]+/g, ' ').replace(/\s{2,}/g, ' ')
-        }
-
-        // For "continue" mode, add a space before if needed (first chunk only)
-        if (mode.value === 'continue' && !oldCompletion) {
-          const textBefore = editor.state.doc.textBetween(Math.max(0, insertState.value.pos - 1), insertState.value.pos)
-          if (textBefore && !/\s/.test(textBefore)) {
-            delta = ' ' + delta
-          }
-        }
-
-        editor.chain().focus().command(({ tr }) => {
-          tr.insertText(delta, insertState.value!.pos)
-          return true
-        }).run()
-        insertState.value.pos += delta.length
+      if (!oldCompletion) {
+        delta = withLeadingSpace(editor, pos, delta)
       }
+
+      editor.chain().focus().command(({ tr }) => {
+        tr.insertText(delta, pos)
+        return true
+      }).run()
     }
   })
 
-  function triggerTransform(editor: Editor, transformMode: Exclude<CompletionMode, 'continue'>, lang?: string) {
-    if (isLoading.value) return
+  // Map the target through every transaction, `editor.utils` handles collaborators' edits too.
+  // Positions are recreated each time since the Yjs relative position isn't updated by local edits.
+  watch(() => editorRef.value?.editor, (editor) => {
+    editor?.on('transaction', ({ transaction }) => {
+      if (!target) return
+      setTarget(
+        editor,
+        editor.utils.getUpdatedPosition(target.from, transaction).position.position,
+        editor.utils.getUpdatedPosition(target.to, transaction).position.position
+      )
+    })
+  }, { immediate: true })
 
-    getCompletionStorage()?.clearSuggestion()
-
-    const { state } = editor
-    const { selection } = state
-
-    if (selection.empty) return
-
-    mode.value = transformMode
-    language.value = lang
-    const selectedText = state.doc.textBetween(selection.from, selection.to)
-
-    // Replace the selected text with the transformed version
-    insertState.value = { pos: selection.from, deleteRange: { from: selection.from, to: selection.to } }
-
-    complete(selectedText)
+  function setTarget(editor: Editor, from: number, to: number) {
+    target = {
+      from: editor.utils.createMappablePosition(from),
+      to: editor.utils.createMappablePosition(to)
+    }
   }
 
-  function getMarkdownBefore(editor: Editor, pos: number): string {
-    const { state } = editor
+  // Add a space before the text if it would stick to the previous word
+  function withLeadingSpace(editor: Editor, pos: number, text: string) {
+    const charBefore = editor.state.doc.textBetween(Math.max(0, pos - 1), pos)
+    return charBefore && !/\s/.test(charBefore) && !/^\s/.test(text) ? ` ${text}` : text
+  }
+
+  function getMarkdown(editor: Editor, from: number, to: number) {
+    const { doc } = editor.state
     if (editor.markdown) {
-      return editor.markdown.serialize(state.doc.cut(0, pos).toJSON())
+      return editor.markdown.serialize(doc.cut(from, to).toJSON())
     }
     // Fallback to plain text
-    return state.doc.textBetween(0, pos, '\n')
+    return doc.textBetween(from, to, '\n')
+  }
+
+  // Parse the result as markdown. Inside a single block, only insert its inline content so the block keeps its type.
+  function parseResult(editor: Editor, { from, to }: { from: number, to: number }, text: string) {
+    const blocks = editor.markdown?.parse(text).content
+    if (!blocks) return text
+
+    const { doc } = editor.state
+    if (blocks.length === 1 && blocks[0]?.type === 'paragraph' && doc.resolve(from).sameParent(doc.resolve(to))) {
+      return blocks[0].content ?? []
+    }
+    return blocks
+  }
+
+  // Within a single block, only send its inline content so list or quote markers aren't inserted again
+  function getSelectionMarkdown(editor: Editor) {
+    const { $from, $to, from, to } = editor.state.selection
+    if (!editor.markdown || !$from.sameParent($to)) {
+      return getMarkdown(editor, from, to)
+    }
+
+    const content = $from.parent.cut($from.parentOffset, $to.parentOffset).content.toJSON()
+    return editor.markdown.serialize({ type: 'doc', content: [{ type: 'paragraph', content }] })
+  }
+
+  function completeContinue(editor: Editor, pos: number) {
+    mode.value = 'continue'
+    complete(getMarkdown(editor, 0, pos).slice(-MAX_CONTEXT_LENGTH))
   }
 
   function triggerContinue(editor: Editor) {
     if (isLoading.value) return
 
-    mode.value = 'continue'
     getCompletionStorage()?.clearSuggestion()
-    const { state } = editor
-    const { selection } = state
 
-    if (selection.empty) {
-      // No selection: continue from cursor position
-      const textBefore = getMarkdownBefore(editor, selection.from)
-      insertState.value = { pos: selection.from }
-      complete(textBefore)
-    } else {
-      // Text selected: append completion after the selection
-      const textBefore = getMarkdownBefore(editor, selection.to)
-      insertState.value = { pos: selection.to }
-      complete(textBefore)
-    }
+    // Continue after the selection, or from the cursor
+    const { to } = editor.state.selection
+    setTarget(editor, to, to)
+    completeContinue(editor, to)
+  }
+
+  function triggerTransform(editor: Editor, transformMode: TransformMode, lang?: string) {
+    const { from, to, empty } = editor.state.selection
+    if (isLoading.value || empty) return
+
+    getCompletionStorage()?.clearSuggestion()
+
+    mode.value = transformMode
+    language.value = lang
+    setTarget(editor, from, to)
+    complete(getSelectionMarkdown(editor))
   }
 
   // Configure Completion extension
   const extension = Completion.configure({
     onTrigger: (editor) => {
-      if (isLoading.value) return
-      mode.value = 'continue'
-      const textBefore = getMarkdownBefore(editor, editor.state.selection.from)
-      complete(textBefore)
+      if (isLoading.value) return false
+      completeContinue(editor, editor.state.selection.from)
     },
     onAccept: () => {
       setCompletion('')
@@ -1752,6 +1738,18 @@ export function useEditorCompletion(editorRef: Ref<{ editor: Editor | undefined 
       setCompletion('')
     }
   })
+
+  function createTransformHandler(transformMode: TransformMode) {
+    return {
+      canExecute: (editor: Editor) => !editor.state.selection.empty && !isLoading.value,
+      execute: (editor: Editor, cmd?: { language?: string }) => {
+        triggerTransform(editor, transformMode, cmd?.language)
+        return editor.chain()
+      },
+      isActive: (_editor: Editor, cmd?: { language?: string }) => !!(isLoading.value && mode.value === transformMode && language.value === cmd?.language),
+      isDisabled: (editor: Editor) => editor.state.selection.empty || !!isLoading.value
+    }
+  }
 
   // Create handlers for toolbar
   const handlers = {
@@ -1764,60 +1762,12 @@ export function useEditorCompletion(editorRef: Ref<{ editor: Editor | undefined 
       isActive: () => !!(isLoading.value && mode.value === 'continue'),
       isDisabled: () => !!isLoading.value
     },
-    aiFix: {
-      canExecute: (editor: Editor) => !editor.state.selection.empty && !isLoading.value,
-      execute: (editor: Editor) => {
-        triggerTransform(editor, 'fix')
-        return editor.chain()
-      },
-      isActive: () => !!(isLoading.value && mode.value === 'fix'),
-      isDisabled: (editor: Editor) => editor.state.selection.empty || !!isLoading.value
-    },
-    aiExtend: {
-      canExecute: (editor: Editor) => !editor.state.selection.empty && !isLoading.value,
-      execute: (editor: Editor) => {
-        triggerTransform(editor, 'extend')
-        return editor.chain()
-      },
-      isActive: () => !!(isLoading.value && mode.value === 'extend'),
-      isDisabled: (editor: Editor) => editor.state.selection.empty || !!isLoading.value
-    },
-    aiReduce: {
-      canExecute: (editor: Editor) => !editor.state.selection.empty && !isLoading.value,
-      execute: (editor: Editor) => {
-        triggerTransform(editor, 'reduce')
-        return editor.chain()
-      },
-      isActive: () => !!(isLoading.value && mode.value === 'reduce'),
-      isDisabled: (editor: Editor) => editor.state.selection.empty || !!isLoading.value
-    },
-    aiSimplify: {
-      canExecute: (editor: Editor) => !editor.state.selection.empty && !isLoading.value,
-      execute: (editor: Editor) => {
-        triggerTransform(editor, 'simplify')
-        return editor.chain()
-      },
-      isActive: () => !!(isLoading.value && mode.value === 'simplify'),
-      isDisabled: (editor: Editor) => editor.state.selection.empty || !!isLoading.value
-    },
-    aiSummarize: {
-      canExecute: (editor: Editor) => !editor.state.selection.empty && !isLoading.value,
-      execute: (editor: Editor) => {
-        triggerTransform(editor, 'summarize')
-        return editor.chain()
-      },
-      isActive: () => !!(isLoading.value && mode.value === 'summarize'),
-      isDisabled: (editor: Editor) => editor.state.selection.empty || !!isLoading.value
-    },
-    aiTranslate: {
-      canExecute: (editor: Editor) => !editor.state.selection.empty && !isLoading.value,
-      execute: (editor: Editor, cmd: { language?: string } | undefined) => {
-        triggerTransform(editor, 'translate', cmd?.language)
-        return editor.chain()
-      },
-      isActive: (_editor: Editor, cmd: { language?: string } | undefined) => !!(isLoading.value && mode.value === 'translate' && language.value === cmd?.language),
-      isDisabled: (editor: Editor) => editor.state.selection.empty || !!isLoading.value
-    }
+    aiFix: createTransformHandler('fix'),
+    aiExtend: createTransformHandler('extend'),
+    aiReduce: createTransformHandler('reduce'),
+    aiSimplify: createTransformHandler('simplify'),
+    aiSummarize: createTransformHandler('summarize'),
+    aiTranslate: createTransformHandler('translate')
   }
 
   return {
@@ -1832,7 +1782,7 @@ export function useEditorCompletion(editorRef: Ref<{ editor: Editor | undefined 
 :::
 ::
 
-The ghost text streams into the extension, while the text transformations replace the selection once the full answer has arrived. The content before the cursor is sent as Markdown so the model sees its structure.
+The ghost text streams into the extension, while the text transformations replace the selection once the full answer has arrived. Both send Markdown so the model sees the structure, up to the last 2,000 characters before the cursor to continue writing. A transformation inside a single block only replaces its inline content, so lists, quotes and headings keep their type. The range to replace is tracked with the mappable positions of `editor.utils`, so edits made while the model answers don't shift it.
 
 ### Displaying the AI actions
 
@@ -2699,6 +2649,253 @@ The StarterKit's history would undo the other collaborators' changes too, so it'
 Each collaborator gets a random name and color. The color draws their cursor and avatar for the others, and becomes the primary color of their own page.
 
 Open [`localhost:3000/?room=my-room`](http://localhost:3000/?room=my-room) in two windows and start typing in one of them.
+
+### Ignoring collaborators' edits
+
+Remote changes fire the editor's `update` event too, so every keystroke from a collaborator would ask for a completion and dismiss yours. Update the completion extension to skip them with `isChangeOrigin`:
+
+::code-tree-intersection
+:::code-collapse
+
+```ts [app/components/editor/CompletionExtension.ts] {2,94-109,165-168,179-182}
+import { Extension } from '@tiptap/core'
+import { isChangeOrigin } from '@tiptap/extension-collaboration'
+import { Decoration, DecorationSet } from '@tiptap/pm/view'
+import { Plugin, PluginKey } from '@tiptap/pm/state'
+import type { Editor } from '@tiptap/vue-3'
+import { useDebounceFn } from '@vueuse/core'
+
+export interface CompletionOptions {
+  /**
+   * Debounce delay in ms before triggering completion
+   * @defaultValue 250
+   */
+  debounce?: number
+  /**
+   * Whether to automatically trigger completion while typing
+   * @defaultValue true
+   */
+  autoTrigger?: boolean
+  /**
+   * Characters that prevent completion while typing the word they start (slash commands, emojis, mentions)
+   * @defaultValue ['/', ':', '@']
+   */
+  triggerCharacters?: string[]
+  /**
+   * Called when completion should be triggered, receives the editor instance.
+   * Return `false` to skip showing a suggestion.
+   */
+  onTrigger?: (editor: Editor) => boolean | undefined
+  /**
+   * Called when suggestion is accepted
+   */
+  onAccept?: () => void
+  /**
+   * Called when suggestion is dismissed
+   */
+  onDismiss?: () => void
+}
+
+export interface CompletionStorage {
+  suggestion: string
+  position: number | undefined
+  visible: boolean
+  debouncedTrigger: ((editor: Editor) => void) | null
+  setSuggestion: (text: string) => void
+  clearSuggestion: () => void
+}
+
+export const completionPluginKey = new PluginKey('completion')
+
+function dismiss(editor: Editor, storage: CompletionStorage, options: CompletionOptions) {
+  storage.clearSuggestion()
+  // Force decoration update
+  editor.view.dispatch(editor.state.tr.setMeta('completionUpdate', true))
+  options.onDismiss?.()
+}
+
+export const Completion = Extension.create<CompletionOptions, CompletionStorage>({
+  name: 'completion',
+
+  addOptions() {
+    return {
+      debounce: 250,
+      autoTrigger: true,
+      triggerCharacters: ['/', ':', '@'],
+      onTrigger: undefined,
+      onAccept: undefined,
+      onDismiss: undefined
+    }
+  },
+
+  addStorage() {
+    return {
+      suggestion: '',
+      position: undefined as number | undefined,
+      visible: false,
+      debouncedTrigger: null as ((editor: Editor) => void) | null,
+      setSuggestion(text: string) {
+        this.suggestion = text
+      },
+      clearSuggestion() {
+        this.suggestion = ''
+        this.position = undefined
+        this.visible = false
+      }
+    }
+  },
+
+  addProseMirrorPlugins() {
+    const storage = this.storage
+
+    return [
+      new Plugin({
+        key: completionPluginKey,
+        state: {
+          init: () => null,
+          apply(tr, _value, oldState, newState) {
+            // Yjs replaces the whole document on remote changes, so the position can't be mapped. The suggestion
+            // sits at the cursor, so follow it, and drop the suggestion if a collaborator changed its paragraph.
+            if (isChangeOrigin(tr) && storage.position !== undefined) {
+              const { $from } = newState.selection
+              if ($from.parent.eq(oldState.doc.resolve(storage.position).parent)) {
+                storage.position = $from.pos
+              } else {
+                storage.clearSuggestion()
+              }
+            }
+            return null
+          }
+        },
+        props: {
+          decorations(state) {
+            if (!storage.visible || !storage.suggestion || storage.position === undefined) {
+              return DecorationSet.empty
+            }
+
+            const widget = Decoration.widget(storage.position, () => {
+              const span = document.createElement('span')
+              span.className = 'completion-suggestion'
+              span.textContent = storage.suggestion
+              span.style.cssText = 'color: var(--ui-text-muted); opacity: 0.6; pointer-events: none;'
+              return span
+            }, { side: 1 })
+
+            return DecorationSet.create(state.doc, [widget])
+          }
+        }
+      })
+    ]
+  },
+
+  addKeyboardShortcuts() {
+    return {
+      Tab: ({ editor }) => {
+        if (!this.storage.visible || !this.storage.suggestion || this.storage.position === undefined) {
+          return false
+        }
+
+        // Store values before clearing
+        const suggestion = this.storage.suggestion
+        const position = this.storage.position
+
+        // Clear suggestion first
+        this.storage.clearSuggestion()
+
+        // Force decoration update
+        editor.view.dispatch(editor.state.tr.setMeta('completionUpdate', true))
+
+        // Insert the suggestion text
+        editor.chain().focus().insertContentAt(position, suggestion).run()
+
+        this.options.onAccept?.()
+        return true
+      },
+      Escape: ({ editor }) => {
+        if (!this.storage.visible) {
+          return false
+        }
+
+        dismiss(editor as Editor, this.storage, this.options)
+        return true
+      }
+    }
+  },
+
+  onUpdate({ editor, transaction }) {
+    // Ignore edits from collaborators
+    if (isChangeOrigin(transaction)) return
+
+    // Clear suggestion on any edit
+    if (this.storage.visible) {
+      dismiss(editor as Editor, this.storage, this.options)
+    }
+
+    if (this.options.autoTrigger) {
+      this.storage.debouncedTrigger?.(editor as Editor)
+    }
+  },
+
+  onSelectionUpdate({ editor, transaction }) {
+    // Collaborator edits move the selection too
+    if (isChangeOrigin(transaction)) return
+
+    if (this.storage.visible) {
+      dismiss(editor as Editor, this.storage, this.options)
+    }
+  },
+
+  onCreate() {
+    const storage = this.storage
+    const options = this.options
+
+    // Create debounced trigger function for this instance
+    this.storage.debouncedTrigger = useDebounceFn((editor: Editor) => {
+      if (!options.onTrigger) return
+
+      const { state } = editor
+      const { selection } = state
+      const { $from } = selection
+
+      // Only suggest at end of block with content
+      const isAtEndOfBlock = $from.parentOffset === $from.parent.content.size
+      const hasContent = $from.parent.textContent.trim().length > 0
+      const textContent = $from.parent.textContent
+
+      // Don't trigger if sentence is complete (ends with punctuation)
+      const endsWithPunctuation = /[.!?]\s*$/.test(textContent)
+
+      // Don't trigger while typing a word that starts with a trigger character
+      const lastWord = textContent.split(/\s/).pop() || ''
+      const endsWithTrigger = (options.triggerCharacters || []).some(char => lastWord.startsWith(char))
+
+      if (!isAtEndOfBlock || !hasContent || endsWithPunctuation || endsWithTrigger) {
+        return
+      }
+
+      // Pass editor to let the handler extract content (e.g., as markdown)
+      if (options.onTrigger(editor) === false) {
+        return
+      }
+
+      // Set position and mark as visible
+      storage.position = selection.from
+      storage.visible = true
+    }, options.debounce || 250)
+  },
+
+  onDestroy() {
+    this.storage.debouncedTrigger = null
+  }
+})
+
+export default Completion
+```
+
+:::
+::
+
+Y.js replaces the whole document on remote changes, so the position of the suggestion can't be mapped. It sits at the cursor, so it follows the cursor instead, and is dropped if a collaborator changes its paragraph.
 
 ## Going further
 
