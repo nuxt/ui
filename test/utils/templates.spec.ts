@@ -2,7 +2,10 @@ import { readFileSync } from 'node:fs'
 import { join } from 'pathe'
 import { globSync } from 'tinyglobby'
 import { describe, it, expect } from 'vitest'
-import { getTemplates, prefixedClasses } from '../../src/templates'
+import { createHooks } from 'hookable'
+import { nuxtCtx, runWithNuxtContext } from '@nuxt/kit'
+import type { Nuxt, NuxtTemplate } from '@nuxt/schema'
+import { addTemplates, getTemplates, prefixedClasses } from '../../src/templates'
 import { defaultOptions, getDefaultConfig, resolveColors } from '../../src/utils/defaults'
 
 function themeContents(overrides: Record<string, any>, vue?: { detectedComponents?: Set<string> }) {
@@ -58,5 +61,77 @@ describe('prefixedClasses', () => {
     const contents = themeContents({ theme: { prefix: 'tw' } })
 
     expect(await contents('ui.css')).toContain(`@source inline("${prefixedClasses.map(cls => `tw:${cls}`).join(' ')}");`)
+  })
+})
+
+function createNuxt(): Nuxt {
+  const hooks = createHooks()
+  return {
+    hooks,
+    hook: hooks.hook,
+    callHook: hooks.callHook,
+    options: {
+      dev: true,
+      rootDir: '/app',
+      srcDir: '/app/app',
+      buildDir: '/app/.nuxt',
+      alias: {},
+      appConfig: {},
+      app: {},
+      modules: [],
+      _installedModules: [],
+      _layers: [{ cwd: '/app', config: { rootDir: '/app', srcDir: '/app/app' } }],
+      build: { templates: [] },
+      vite: {}
+    }
+  } as unknown as Nuxt
+}
+
+function moduleOptions(overrides: Record<string, any>) {
+  return { ...defaultOptions, ...overrides, theme: { ...defaultOptions.theme, colors: resolveColors(undefined) } } as any
+}
+
+// The templates Nuxt recompiles when an existing file is saved, following the `dependsOn`
+// contract: a template that declares nothing is always recompiled.
+function recompiledOn(templates: NuxtTemplate[], nuxt: Nuxt, path: string) {
+  return templates.filter(({ dependsOn, options }) => {
+    if (typeof dependsOn === 'function') {
+      return dependsOn({ event: 'change', path }, { nuxt, app: {} as any, options: options ?? {} })
+    }
+    return !dependsOn || dependsOn.length > 0
+  }).map(template => template.filename)
+}
+
+describe('regeneration on file changes', () => {
+  it('recompiles no template without component detection', () => {
+    const nuxt = createNuxt()
+    const templates = runWithNuxtContext(nuxt, () => getTemplates(moduleOptions({}), {}, nuxt, () => '/ui/runtime/components'))
+
+    expect(recompiledOn(templates, nuxt, '/app/app/pages/index.vue')).toEqual([])
+  })
+
+  it('recompiles only `ui.css` when a scanned file changes with component detection', () => {
+    const nuxt = createNuxt()
+    const templates = runWithNuxtContext(nuxt, () => getTemplates(moduleOptions({ experimental: { componentDetection: true } }), {}, nuxt, () => '/ui/runtime/components'))
+
+    expect(recompiledOn(templates, nuxt, '/app/app/pages/index.vue')).toEqual(['ui.css'])
+    expect(recompiledOn(templates, nuxt, '/app/app/composables/useThing.ts')).toEqual(['ui.css'])
+    expect(recompiledOn(templates, nuxt, '/app/server/api/thing.ts')).toEqual([])
+    expect(recompiledOn(templates, nuxt, '/app/app/assets/main.css')).toEqual([])
+  })
+
+  it('leaves regeneration to Nuxt when a file changes', async () => {
+    const nuxt = createNuxt()
+    const requests: unknown[] = []
+    nuxt.hook('builder:generateApp', options => void requests.push(options))
+    nuxtCtx.set(nuxt)
+    try {
+      addTemplates(moduleOptions({ experimental: { componentDetection: true } }), nuxt, () => '/ui/runtime/components')
+      await nuxt.callHook('builder:watch', 'change', 'pages/index.vue')
+    } finally {
+      nuxtCtx.unset()
+    }
+
+    expect(requests).toEqual([])
   })
 })
