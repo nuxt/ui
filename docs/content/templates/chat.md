@@ -128,8 +128,6 @@ With [Vercel AI Gateway](https://vercel.com/docs/ai-gateway), you don't need ind
 [NuxtHub](https://hub.nuxt.com) provides a zero-config database powered by [Drizzle ORM](https://orm.drizzle.team). Here is the schema for the chat application:
 
 ::code-tree-intersection
-:::code-collapse
-
 ```ts [server/db/schema.ts]
 import { sqliteTable, text, integer, index } from 'drizzle-orm/sqlite-core'
 import { relations } from 'drizzle-orm'
@@ -161,8 +159,6 @@ export const messagesRelations = relations(messages, ({ one }) => ({
   })
 }))
 ```
-
-:::
 ::
 
 Generate the database migrations from your schema:
@@ -404,6 +400,8 @@ Nuxt UI provides purpose-built components for AI chat interfaces: [`UChatPrompt`
 The home page is where users start a new conversation. The [`UChatPrompt`](/docs/components/chat-prompt) component provides a textarea with auto-resize, keyboard shortcuts, and a submit button:
 
 ::code-tree-intersection
+:::code-collapse
+
 ```vue [app/pages/index.vue] {34-42}
 <script setup lang="ts">
 const input = ref('')
@@ -452,6 +450,8 @@ async function createChat() {
   </UDashboardPanel>
 </template>
 ```
+
+:::
 ::
 
 The [`UChatPrompt`](/docs/components/chat-prompt) component automatically handles:
@@ -488,7 +488,11 @@ This creates a `<ChatMarkdown>` component we'll use in the chat page to render a
 
 Since Comark uses Shiki with dual themes, you need to add the following CSS to your stylesheet for dark mode support:
 
-```css [app/assets/css/main.css]
+::code-tree-intersection
+```css [app/assets/css/main.css] {4-10}
+@import "tailwindcss";
+@import "@nuxt/ui";
+
 html.dark .shiki span {
   color: var(--shiki-dark) !important;
   background-color: var(--shiki-dark-bg) !important;
@@ -497,6 +501,7 @@ html.dark .shiki span {
   text-decoration: var(--shiki-dark-text-decoration) !important;
 }
 ```
+::
 
 ## Creating the chat page
 

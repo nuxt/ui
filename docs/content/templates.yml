@@ -46,6 +46,7 @@ items:
     description: "A rich text editor template powered by TipTap with support for markdown, HTML, and JSON content types."
     icon: i-lucide-file-text
     framework: nuxt
+    guide: /templates/editor
     features:
       - title: Real-time collaboration
         icon: i-lucide-users
