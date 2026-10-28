@@ -580,6 +580,8 @@ The [`UChart`](/docs/components/chart) component is built on [TanStack Charts](h
 Declare the types used across the dashboard:
 
 ::code-tree-intersection
+:::code-collapse
+
 ```ts [app/types/index.d.ts]
 import type { AvatarProps } from '@nuxt/ui'
 
@@ -642,6 +644,8 @@ export interface Range {
   end: Date
 }
 ```
+
+:::
 ::
 
 The dashboard has no database, so the home page generates random numbers. Add two helpers for that:
@@ -812,6 +816,8 @@ The model holds native `Date` objects, while `UCalendar` works with `CalendarDat
 The period select only offers the periods that make sense for the selected range, and falls back to the first one when the selected period is no longer available:
 
 ::code-tree-intersection
+:::code-collapse
+
 ```vue [app/components/home/HomePeriodSelect.vue]
 <script setup lang="ts">
 import { eachDayOfInterval } from 'date-fns'
@@ -863,6 +869,8 @@ watch(periods, () => {
   />
 </template>
 ```
+
+:::
 ::
 
 ### Displaying the stats
@@ -1497,6 +1505,8 @@ The form validates the state against the Zod schema and only calls `onSubmit` wh
 Then a confirmation modal to delete the selected customers. Its default slot receives the button that opens it:
 
 ::code-tree-intersection
+:::code-collapse
+
 ```vue [app/components/customers/DeleteModal.vue]
 <script setup lang="ts">
 withDefaults(defineProps<{
@@ -1541,6 +1551,8 @@ async function onSubmit() {
   </UModal>
 </template>
 ```
+
+:::
 ::
 
 With `loading-auto`, the `Delete` button shows a loading icon until the promise returned by `onSubmit` resolves.
@@ -2804,6 +2816,8 @@ The settings are split into four pages, displayed in a single panel with a horiz
 A `settings.vue` page next to a `settings` directory becomes the parent of the pages in that directory, which render in its `NuxtPage`:
 
 ::code-tree-intersection
+:::code-collapse
+
 ```vue [app/pages/settings.vue]
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
@@ -2855,6 +2869,8 @@ const links = [[{
   </UDashboardPanel>
 </template>
 ```
+
+:::
 ::
 
 The [`UNavigationMenu`](/docs/components/navigation-menu) is horizontal by default, and `highlight` underlines the active link. The `exact` option keeps `General` from being active on the other settings pages.
@@ -3180,6 +3196,8 @@ const items = [{
 The members page filters the list with a search input in the header of the card:
 
 ::code-tree-intersection
+:::code-collapse
+
 ```vue [app/pages/settings/members.vue]
 <script setup lang="ts">
 import type { Member } from '~/types'
@@ -3227,6 +3245,8 @@ const filteredMembers = computed(() => {
   </div>
 </template>
 ```
+
+:::
 ::
 
 ### Setting the notification preferences

@@ -323,8 +323,6 @@ export function useEditorMentions() {
 The emoji menu uses the `Emoji` extension from Tiptap and its list of GitHub emojis:
 
 ::code-tree-intersection
-:::code-collapse
-
 ```ts [app/composables/useEditorEmojis.ts]
 import type { EditorEmojiMenuItem } from '@nuxt/ui'
 import { Emoji, gitHubEmojis, shortcodeToEmoji } from '@tiptap/extension-emoji'
@@ -366,8 +364,6 @@ export function useEditorEmojis() {
   }
 }
 ```
-
-:::
 ::
 
 Extending the extension with a Markdown tokenizer makes a `:sparkles:` shortcode in the Markdown content show as an emoji, and writes the emoji back when the content is saved.
@@ -2424,8 +2420,6 @@ export default defineNuxtConfig({
 Style the cursors of the other collaborators:
 
 ::code-tree-intersection
-:::code-collapse
-
 ```css [app/assets/css/main.css] {4-13,15-27}
 @import "tailwindcss";
 @import "@nuxt/ui";
@@ -2455,8 +2449,6 @@ Style the cursors of the other collaborators:
   white-space: nowrap;
 }
 ```
-
-:::
 ::
 
 Mention the people in the room instead of the fixed list:
