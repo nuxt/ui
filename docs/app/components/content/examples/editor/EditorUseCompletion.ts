@@ -113,11 +113,16 @@ export function useEditorCompletion(editorRef: Ref<{ editor: Editor | undefined 
 
   // Parse the result as markdown. Inside a single block, only insert its inline content so the block keeps its type.
   function parseResult(editor: Editor, { from, to }: { from: number, to: number }, text: string) {
+    const textblock = getTextblock(editor, from, to)
+    // Code is inserted as is
+    if (textblock?.type.spec.code) {
+      return [{ type: 'text', text }]
+    }
+
     const blocks = editor.markdown?.parse(text).content
     if (!blocks) return text
 
-    const { doc } = editor.state
-    if (blocks.length === 1 && blocks[0]?.type === 'paragraph' && doc.resolve(from).sameParent(doc.resolve(to))) {
+    if (textblock && blocks.length === 1 && blocks[0]?.type === 'paragraph') {
       return blocks[0].content ?? []
     }
     return blocks
@@ -126,12 +131,23 @@ export function useEditorCompletion(editorRef: Ref<{ editor: Editor | undefined 
   // Within a single block, only send its inline content so list or quote markers aren't inserted again
   function getSelectionMarkdown(editor: Editor) {
     const { $from, $to, from, to } = editor.state.selection
-    if (!editor.markdown || !$from.sameParent($to)) {
+    const textblock = getTextblock(editor, from, to)
+    if (!editor.markdown || !textblock) {
       return getMarkdown(editor, from, to)
     }
+    if (textblock.type.spec.code) {
+      return editor.state.doc.textBetween(from, to)
+    }
 
-    const content = $from.parent.cut($from.parentOffset, $to.parentOffset).content.toJSON()
+    const content = textblock.cut($from.parentOffset, $to.parentOffset).content.toJSON()
     return editor.markdown.serialize({ type: 'doc', content: [{ type: 'paragraph', content }] })
+  }
+
+  // The text block containing the whole range, if any
+  function getTextblock(editor: Editor, from: number, to: number) {
+    const { doc } = editor.state
+    const $from = doc.resolve(from)
+    return $from.parent.isTextblock && $from.sameParent(doc.resolve(to)) ? $from.parent : undefined
   }
 
   function completeContinue(editor: Editor, pos: number) {
