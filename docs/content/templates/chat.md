@@ -232,12 +232,12 @@ import {
 } from 'ai'
 import type { UIMessage } from 'ai'
 
-const DEFAULT_MODEL = 'anthropic/claude-haiku-4.5'
+const DEFAULT_MODEL = 'anthropic/claude-haiku-5.5'
 
 const MODELS = [
-  { value: 'openai/gpt-5-nano', label: 'GPT-5 Nano' },
-  { value: 'anthropic/claude-haiku-4.5', label: 'Claude Haiku 4.5' },
-  { value: 'google/gemini-3-flash', label: 'Gemini 3 Flash' }
+  { value: 'openai/gpt-6-luna', label: 'GPT-6 Luna' },
+  { value: 'anthropic/claude-haiku-5.5', label: 'Claude Haiku 5.5' },
+  { value: 'google/gemini-3.8-flash', label: 'Gemini 3.8 Flash' }
 ]
 
 export default defineEventHandler(async (event) => {
@@ -292,8 +292,8 @@ export default defineEventHandler(async (event) => {
         providerOptions: {
           anthropic: {
             thinking: {
-              type: 'enabled',
-              budgetTokens: 2048
+              type: 'adaptive',
+              display: 'summarized'
             }
           },
           google: {
@@ -907,13 +907,13 @@ Define the available models and persist the user's selection using [`useCookie`]
 ```ts [app/composables/useModels.ts]
 export function useModels() {
   const models = [
-    { label: 'GPT-5 Nano', value: 'openai/gpt-5-nano', icon: 'i-simple-icons-openai' },
-    { label: 'Claude Haiku 4.5', value: 'anthropic/claude-haiku-4.5', icon: 'i-simple-icons-anthropic' },
-    { label: 'Gemini 3 Flash', value: 'google/gemini-3-flash', icon: 'i-simple-icons-google' }
+    { label: 'GPT-6 Luna', value: 'openai/gpt-6-luna', icon: 'i-simple-icons-openai' },
+    { label: 'Claude Haiku 5.5', value: 'anthropic/claude-haiku-5.5', icon: 'i-simple-icons-anthropic' },
+    { label: 'Gemini 3.8 Flash', value: 'google/gemini-3.8-flash', icon: 'i-simple-icons-google' }
   ]
 
   const model = useCookie<string>('ai-model', {
-    default: () => 'anthropic/claude-haiku-4.5'
+    default: () => 'anthropic/claude-haiku-5.5'
   })
 
   return {
@@ -1129,12 +1129,12 @@ import { anthropic } from '@ai-sdk/anthropic'
 import { openai } from '@ai-sdk/openai'
 import { createMCPClient } from '@ai-sdk/mcp'
 
-const DEFAULT_MODEL = 'anthropic/claude-haiku-4.5'
+const DEFAULT_MODEL = 'anthropic/claude-haiku-5.5'
 
 const MODELS = [
-  { value: 'openai/gpt-5-nano', label: 'GPT-5 Nano' },
-  { value: 'anthropic/claude-haiku-4.5', label: 'Claude Haiku 4.5' },
-  { value: 'google/gemini-3-flash', label: 'Gemini 3 Flash' }
+  { value: 'openai/gpt-6-luna', label: 'GPT-6 Luna' },
+  { value: 'anthropic/claude-haiku-5.5', label: 'Claude Haiku 5.5' },
+  { value: 'google/gemini-3.8-flash', label: 'Gemini 3.8 Flash' }
 ]
 
 export default defineEventHandler(async (event) => {
@@ -1232,8 +1232,8 @@ export default defineEventHandler(async (event) => {
         providerOptions: {
           anthropic: {
             thinking: {
-              type: 'enabled',
-              budgetTokens: 2048
+              type: 'adaptive',
+              display: 'summarized'
             }
           },
           google: {

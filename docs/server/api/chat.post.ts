@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
   const { messages } = await readBody<{ messages: UIMessage[] }>(event)
 
   const result = streamText({
-    model: 'anthropic/claude-haiku-4.5',
+    model: 'anthropic/claude-haiku-5.5',
     instructions: 'You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue.',
     messages: await convertToModelMessages(messages),
     providerOptions: {
