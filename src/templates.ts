@@ -381,7 +381,9 @@ export {}
 
       return [
         image ? genExport(image.filePath, [{ name: image.export, as: 'default' }]) : 'export default "img"',
-        !!nuxt && hasNuxtModule('@nuxt/image', nuxt) ? `export { useImage } from '#imports'` : 'export const useImage = undefined as undefined | (() => { options: { provider?: string } })'
+        // an import, not a re-export: the imports plugin only rewrites `import ... from '#imports'`,
+        // a re-export would bundle every side-effectful module behind `#imports`
+        !!nuxt && hasNuxtModule('@nuxt/image', nuxt) ? `import { useImage } from '#imports'\nexport { useImage }` : 'export const useImage = undefined as undefined | (() => { options: { provider?: string } })'
       ].join('\n')
     }
   })
