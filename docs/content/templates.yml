@@ -212,6 +212,7 @@ items:
     description: "A dashboard template with multi-column layout for building sophisticated admin interfaces."
     icon: i-lucide-bar-chart-big
     framework: nuxt
+    guide: /templates/dashboard
     features:
       - title: Works with SaaS template
         icon: i-lucide-puzzle
