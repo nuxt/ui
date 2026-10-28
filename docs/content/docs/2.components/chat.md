@@ -132,6 +132,7 @@ export default defineConfig({
 Create a server API endpoint to handle chat requests using [`streamText`](https://ai-sdk.dev/docs/reference/ai-sdk-core/stream-text). You can use the [Vercel AI Gateway](https://vercel.com/ai-gateway) to access AI models through a centralized endpoint:
 
 ```ts [server/api/chat.post.ts]
+import { defineEventHandler, readBody } from 'nuxt/server'
 import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
 
 export default defineEventHandler(async (event) => {

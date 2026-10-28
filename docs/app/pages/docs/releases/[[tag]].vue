@@ -24,7 +24,7 @@ const release = releases.value[index]
 // A tag no version answers to is a 404. An empty list is GitHub being
 // unreachable, which the page says instead of erroring.
 if (!release && releases.value.length) {
-  throw createError({ statusCode: 404, statusMessage: 'Release not found', fatal: true })
+  throw createError({ status: 404, statusText: 'Release not found', fatal: true })
 }
 
 // The route serves the notes as Markdown, the page turns them into the tree it

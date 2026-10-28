@@ -9,6 +9,9 @@ import Toast from '../../src/runtime/components/Toast.vue'
 import { useToast } from '../../src/runtime/composables/useToast'
 import { ClientOnly } from '#components'
 
+// Reka UI keeps the close timer running after unmount, a 5s one fires once the test environment is gone
+const duration = 2 ** 31 - 1
+
 const ToastWrapper = defineComponent({
   components: {
     UToaster: Toaster,
@@ -16,7 +19,8 @@ const ToastWrapper = defineComponent({
     ClientOnly
   },
   inheritAttrs: false,
-  template: `<UToaster :portal="false">
+  setup: () => ({ duration }),
+  template: `<UToaster :portal="false" :duration="duration">
   <ClientOnly>
     <UToast v-bind="$attrs">
       <template v-for="(_, name) in $slots" #[name]="slotData">
@@ -58,7 +62,7 @@ describe('Toast', () => {
     const toast = useToast()
     toast.clear()
 
-    const wrapper = await mountSuspended(Toaster, { props: { portal: false } })
+    const wrapper = await mountSuspended(Toaster, { props: { portal: false, duration } })
     const body = toast.add({ title: 'Toast', onClick })
 
     await vi.waitFor(() => expect(wrapper.find('[data-slot="base"]').exists()).toBe(true), { timeout: 4000 })
@@ -74,7 +78,7 @@ describe('Toast', () => {
     const toast = useToast()
     toast.clear()
 
-    const wrapper = await mountSuspended(Toaster, { props: { portal: false, expand: false } })
+    const wrapper = await mountSuspended(Toaster, { props: { portal: false, expand: false, duration } })
     toast.add({ title: 'Back' })
     toast.add({ title: 'Front' })
 
