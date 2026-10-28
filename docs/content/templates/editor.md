@@ -1325,7 +1325,7 @@ CRITICAL RULES:
 :::
 ::
 
-With `reasoning: 'none'`, the model answers without a thinking step so suggestions come back fast. The gateway options send the request to Baseten, with zero data retention and no prompt training. Prompts over 10,000 characters are rejected.
+With `reasoning: 'none'`, the model answers without a thinking step so suggestions come back fast. The gateway options prefer Baseten and only use providers with zero data retention and no prompt training. Request-level zero data retention is only available on Vercel Pro and Enterprise plans. Prompts over 10,000 characters are rejected.
 
 ### Creating the ghost text extension
 

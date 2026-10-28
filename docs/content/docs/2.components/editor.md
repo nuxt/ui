@@ -612,6 +612,10 @@ CRITICAL RULES:
 
 ::
 
+::note
+The gateway options prefer Baseten and only use providers with zero data retention and no prompt training. Request-level zero data retention is only available on Vercel Pro and Enterprise plans.
+::
+
 4. Use the composable in the Editor:
 
 ::component-example
