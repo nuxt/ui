@@ -1301,10 +1301,18 @@ CRITICAL RULES:
   }
 
   const result = streamText({
-    model: 'openai/gpt-5-nano',
+    model: 'deepseek/deepseek-v4.1-flash',
     instructions,
     prompt,
-    maxOutputTokens
+    maxOutputTokens,
+    reasoning: 'none',
+    providerOptions: {
+      gateway: {
+        order: ['baseten'],
+        zeroDataRetention: true,
+        disallowPromptTraining: true
+      }
+    }
   })
 
   return createTextStreamResponse({ stream: result.textStream })
@@ -1313,6 +1321,8 @@ CRITICAL RULES:
 
 :::
 ::
+
+With `reasoning: 'none'`, the model answers without a thinking step so suggestions come back fast. The gateway options send the request to Baseten, with zero data retention and no prompt training.
 
 ### Creating the ghost text extension
 
@@ -1336,7 +1346,7 @@ export interface CompletionOptions {
   debounce?: number
   /**
    * Whether to automatically trigger completion while typing
-   * @defaultValue false
+   * @defaultValue true
    */
   autoTrigger?: boolean
   /**
@@ -1375,7 +1385,7 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
   addOptions() {
     return {
       debounce: 250,
-      autoTrigger: false,
+      autoTrigger: true,
       triggerCharacters: ['/', ':', '@'],
       onTrigger: undefined,
       onAccept: undefined,
@@ -1429,17 +1439,7 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
 
   addKeyboardShortcuts() {
     return {
-      'Mod-j': ({ editor }) => {
-        // Clear any existing suggestion first to avoid flickering
-        if (this.storage.visible) {
-          this.storage.clearSuggestion()
-          this.options.onDismiss?.()
-        }
-        // Manually trigger completion
-        this.storage.debouncedTrigger?.(editor as Editor)
-        return true
-      },
-      'Tab': ({ editor }) => {
+      Tab: ({ editor }) => {
         if (!this.storage.visible || !this.storage.suggestion || this.storage.position === undefined) {
           return false
         }
@@ -1460,7 +1460,7 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
         this.options.onAccept?.()
         return true
       },
-      'Escape': ({ editor }) => {
+      Escape: ({ editor }) => {
         if (this.storage.visible) {
           this.storage.clearSuggestion()
           // Force decoration update
@@ -1545,7 +1545,7 @@ export default Completion
 :::
 ::
 
-It accepts the suggestion with :kbd{value="tab"}, dismisses it with :kbd{value="escape"}, and asks for one with :kbd{value="meta"} :kbd{value="j" class="ms-px"}. Set its `autoTrigger` option to `true` to ask for one while you type.
+It asks for a suggestion while you type, accepts it with :kbd{value="tab"} and dismisses it with :kbd{value="escape"}. Set its `autoTrigger` option to `false` to turn it off.
 
 ### Creating the completion composable
 
