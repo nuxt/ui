@@ -310,7 +310,7 @@ name: 'toast-example'
 
 ### Stacked toasts
 
-Toasts are stacked by default (inspired by [Sonner](https://sonner.emilkowal.ski/)). Set the `toaster.expand` prop to `true` on the [App](/docs/components/app#props) component to display them all at once.
+Toasts are stacked by default (inspired by [Sonner](https://sonner.emilkowal.ski/)). The stack shows the three most recent toasts, the older ones come back as those close. Set the `toaster.expand` prop to `true` on the [App](/docs/components/app#props) component to display them all at once.
 
 ```vue [app.vue]
 <script setup lang="ts">
