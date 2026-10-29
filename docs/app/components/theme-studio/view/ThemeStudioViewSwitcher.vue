@@ -114,7 +114,6 @@ const gridUi = {
     :ui="{ content: 'w-158 max-w-[calc(100vw-2rem)] p-1.5 max-h-[70vh] overflow-y-auto' }"
   >
     <template #anchor>
-      <!-- styled like the color mode tabs: a plain pill on the elevated track -->
       <UTabs
         v-model="tab"
         :items="tabs"
@@ -123,8 +122,7 @@ const gridUi = {
         size="sm"
         :ui="{
           root: 'w-68',
-          indicator: 'bg-default',
-          trigger: 'data-[state=active]:text-strong w-1/2'
+          trigger: 'w-1/2'
         }"
         data-keep-panels
         aria-label="View"
