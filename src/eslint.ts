@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs'
-import { resolve } from 'pathe'
+import { dirname, resolve } from 'pathe'
 import type { Linter } from 'eslint'
 import betterTailwindcss from 'eslint-plugin-better-tailwindcss'
 import { getDefaultSelectors } from 'eslint-plugin-better-tailwindcss/defaults'
@@ -57,16 +57,33 @@ const GRAY_TOKENS: Record<string, string> = {
   ring: '`ring-default` or `ring-strong`'
 }
 
+const COMMENT = /\/\*[\s\S]*?\*\//g
+const IMPORT = /@import\s+(?:url\(\s*)?["'](\.{1,2}\/[^"']+)["']/g
+const COLORS_PLUGIN = /@plugin\s+["']@nuxt\/ui\/colors["']\s*\{([^}]*)\}/g
+
 /**
- * The palette each alias points at, from `@plugin "@nuxt/ui/colors" { primary: indigo; }`.
- * Only the entry is read, not the stylesheets it imports.
+ * The palette each alias points at, from `@plugin "@nuxt/ui/colors" { primary: indigo; }`,
+ * the colors it adds included, in the entry and the stylesheets it imports with a relative path.
  */
-function readColors(entryPoint: string): Record<string, string> {
-  const css = readFileSync(entryPoint, 'utf8').replace(/\/\*[\s\S]*?\*\//g, '')
-  const block = css.match(/@plugin\s+["']@nuxt\/ui\/colors["']\s*\{([^}]*)\}/)?.[1]
-  const colors = { ...DEFAULT_COLORS }
-  for (const [, alias, palette] of block?.matchAll(/([\w-]+)\s*:\s*["']?([a-z]+)/g) ?? []) {
-    colors[alias!] = palette!
+function readColors(path: string, colors: Record<string, string> = { ...DEFAULT_COLORS }, seen = new Set<string>()): Record<string, string> {
+  if (seen.has(path)) {
+    return colors
+  }
+  seen.add(path)
+  let css: string
+  try {
+    css = readFileSync(path, 'utf8').replace(COMMENT, '')
+  } catch {
+    return colors
+  }
+  // Tailwind CSS inlines the imports first, so a block in the entry wins over one it imports
+  for (const [, specifier] of css.matchAll(IMPORT)) {
+    readColors(resolve(dirname(path), specifier!), colors, seen)
+  }
+  for (const [, block] of css.matchAll(COLORS_PLUGIN)) {
+    for (const [, alias, palette] of block!.matchAll(/([\w-]+)\s*:\s*["']?([a-z]+)/g)) {
+      colors[alias!] = palette!
+    }
   }
   return colors
 }
@@ -112,7 +129,7 @@ function paletteRestrictions(colors: Record<string, string>) {
       pattern: `^((?:\\S*:)?!?-?)(${COLOR_UTILITY})-${hue}((?:-\\d{2,3})?(?:\\/\\S+)?!?)$`,
       message: alias
         ? `"$0" uses a raw palette color. \`${alias}\` points at \`${hue}\`, use \`$1$2-${alias}$3\` instead.`
-        : `"$0" uses a raw palette color. Point a color alias at \`${hue}\` in \`@nuxt/ui/colors\` and use the alias instead.`
+        : `"$0" uses a raw palette color. Point a color alias at \`${hue}\` in \`@nuxt/ui/colors\`, or add one like \`tertiary: ${hue}\`, and use it instead.`
     })
   }
 
