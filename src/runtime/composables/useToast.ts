@@ -17,7 +17,7 @@ export interface Toast extends Omit<ToastProps, 'defaultOpen'>, EmitsToProps<Toa
   _animatedAt?: number
 }
 
-// Matches the slide-in and pulse animation durations in the `toaster` theme.
+// Matches the pulse animation duration in the `toaster` theme.
 const ANIMATION_DURATION = 200
 
 export function useToast() {
@@ -32,7 +32,7 @@ export function useToast() {
   function mergeDuplicate(index: number, toast: Toast) {
     const existing = toasts.value[index] as Toast
     const now = Date.now()
-    // The pulse replaces the slide-in, and two pulses in the same tick cancel each other out, so skip it while the toast is still animating.
+    // Two pulses in the same tick cancel each other out, so skip it while the toast is still animating.
     const animating = now - (existing._animatedAt || 0) < ANIMATION_DURATION
 
     toasts.value[index] = {

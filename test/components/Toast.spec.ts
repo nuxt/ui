@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue'
+import { defineComponent, nextTick } from 'vue'
 import { describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
@@ -87,6 +87,83 @@ describe('Toast', () => {
 
     expect([back!.attributes('data-collapsed'), back!.attributes('data-front')]).toEqual(['true', 'false'])
     expect([front!.attributes('data-collapsed'), front!.attributes('data-front')]).toEqual(['true', 'true'])
+
+    toast.clear()
+  })
+
+  it('moves the next toast to the front while the closing one leaves', async () => {
+    const toast = useToast()
+    toast.clear()
+
+    const wrapper = await mountSuspended(Toaster, { props: { portal: false, expand: false } })
+    toast.add({ title: 'Back' })
+    const front = toast.add({ title: 'Front' })
+
+    await vi.waitFor(() => expect(wrapper.findAll('li[data-slot="toaster-base"]')).toHaveLength(2), { timeout: 4000 })
+    toast.remove(front.id)
+    await nextTick()
+
+    const [back, closing] = wrapper.findAll('li[data-slot="toaster-base"]')
+
+    expect([back!.attributes('data-front'), back!.attributes('style')]).toEqual(['true', expect.stringContaining('--before: 0;')])
+    expect([closing!.attributes('data-state'), closing!.attributes('data-front')]).toEqual(['closed', 'true'])
+
+    toast.clear()
+  })
+
+  it('keeps a closing toast in place when the one in front closes after it', async () => {
+    const toast = useToast()
+    toast.clear()
+
+    const wrapper = await mountSuspended(Toaster, { props: { portal: false, expand: false } })
+    const back = toast.add({ title: 'Back' })
+    const front = toast.add({ title: 'Front' })
+
+    await vi.waitFor(() => expect(wrapper.findAll('li[data-slot="toaster-base"]')).toHaveLength(2), { timeout: 4000 })
+    toast.remove(back.id)
+    await nextTick()
+    toast.remove(front.id)
+    await nextTick()
+
+    // Without an exit animation the closing toast leaves the DOM at once, read what the Toaster passes to it.
+    const [closing] = wrapper.findAllComponents(Toast)
+    expect([closing!.vm.$attrs['data-front'], (closing!.vm.$attrs.style as Record<string, unknown>)['--before']]).toEqual([false, 1])
+
+    toast.clear()
+  })
+
+  it('keeps each toast in place when they close in the same tick', async () => {
+    const toast = useToast()
+    toast.clear()
+
+    const wrapper = await mountSuspended(Toaster, { props: { portal: false, expand: false } })
+    toast.add({ title: 'Back' })
+    toast.add({ title: 'Front' })
+
+    await vi.waitFor(() => expect(wrapper.findAll('li[data-slot="toaster-base"]')).toHaveLength(2), { timeout: 4000 })
+    for (const { id } of [...toast.toasts.value]) {
+      toast.remove(id)
+    }
+    await nextTick()
+
+    const [back] = wrapper.findAllComponents(Toast)
+    expect([back!.vm.$attrs['data-front'], (back!.vm.$attrs.style as Record<string, unknown>)['--before']]).toEqual([false, 1])
+
+    toast.clear()
+  })
+
+  it('fades out the toasts behind the third one in the collapsed stack', async () => {
+    const toast = useToast()
+    toast.clear()
+
+    const wrapper = await mountSuspended(Toaster, { props: { portal: false, expand: false } })
+    for (const title of ['First', 'Second', 'Third', 'Fourth']) {
+      toast.add({ title })
+    }
+
+    await vi.waitFor(() => expect(wrapper.findAll('li[data-slot="toaster-base"]')).toHaveLength(4), { timeout: 4000 })
+
+    expect(wrapper.findAll('li[data-slot="toaster-base"]').map(li => li.attributes('data-visible'))).toEqual(['false', 'true', 'true', 'true'])
 
     toast.clear()
   })
