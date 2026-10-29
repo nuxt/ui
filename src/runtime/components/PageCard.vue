@@ -70,13 +70,14 @@ export interface PageCardSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, effectScope, ref, shallowRef, watch, onMounted, onBeforeUnmount } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useMouseInElement, pausableFilter } from '@vueuse/core'
+import { useMouseInElement } from '@vueuse/core'
 import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { usePrefix } from '../composables/usePrefix'
 import { getSlotChildrenText, resolveAs } from '../utils'
 import { tv } from '../utils/tv'
+import { requestIdleCallback, cancelIdleCallback } from '../utils/prefetch'
 import ULink from './Link.vue'
 import UIcon from './Icon.vue'
 
@@ -90,24 +91,42 @@ const slots = defineSlots<PageCardSlots>()
 const props = useComponentProps('pageCard', _props, theme)
 
 const cardRef = ref<HTMLElement>()
-const motionControl = pausableFilter()
 
 const overrides = useComponentOverrides((ui: PageCard['AppConfig']['ui']) => ui.pageCard)
-const { elementX, elementY } = useMouseInElement(cardRef, {
-  eventFilter: motionControl.eventFilter
+
+const idle = ref(false)
+let idleId: ReturnType<typeof requestIdleCallback>
+
+onMounted(() => {
+  idleId = requestIdleCallback(() => {
+    idle.value = true
+  })
 })
+
+onBeforeUnmount(() => {
+  cancelIdleCallback(idleId)
+})
+
+const mouse = shallowRef<ReturnType<typeof useMouseInElement>>()
+
+watch(() => props.spotlight && idle.value, (enabled, _, onCleanup) => {
+  if (!enabled) {
+    return
+  }
+  const scope = effectScope(true)
+  mouse.value = scope.run(() => useMouseInElement(cardRef))
+  onCleanup(() => {
+    scope.stop()
+    mouse.value = undefined
+  })
+})
+
+const elementX = computed(() => mouse.value?.elementX.value ?? 0)
+const elementY = computed(() => mouse.value?.elementY.value ?? 0)
 const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys
 const spotlight = computed(() => props.spotlight && (elementX.value !== 0 || elementY.value !== 0))
-
-watch(() => props.spotlight, (value) => {
-  if (value) {
-    motionControl.resume()
-  } else {
-    motionControl.pause()
-  }
-}, { immediate: true })
 
 // eslint-disable-next-line vue/no-dupe-keys
 const as = computed(() => resolveAs(props.as, { root: 'div', title: 'div' }))
