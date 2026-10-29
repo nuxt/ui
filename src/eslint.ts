@@ -112,18 +112,18 @@ function paletteRestrictions(colors: Record<string, string>) {
   const restrict: { pattern: string, message: string }[] = []
 
   const grays = GRAYS.join('|')
-  // The token keeps the class's other variants, `md:hover:text-gray-500` is `md:hover:text-muted`
+  // The token keeps the class's other variants and modifiers, `md:hover:text-gray-500/50` is `md:hover:text-muted/50`
   for (const [utility, modes] of SHADE_TOKENS) {
     for (const [shade, tokens] of Object.entries(modes.dark)) {
       restrict.push({
-        pattern: `^((?:\\S*:)?)dark:((?:\\S*:)?)!?(${utility})-(?:${grays})-${shade}(?:\\/\\S+)?!?$`,
-        message: `"$0" uses a raw palette color. Use ${[tokens].flat().map(token => `\`$1$2$3-${token}\``).join(' or ')} instead, it follows the color mode without \`dark:\`.`
+        pattern: `^((?:\\S*:)?)dark:((?:\\S*:)?)(!?)(${utility})-(?:${grays})-${shade}((?:\\/\\S+)?!?)$`,
+        message: `"$0" uses a raw palette color. Use ${[tokens].flat().map(token => `\`$1$2$3$4-${token}$5\``).join(' or ')} in place of it and its light mode class, the token follows the color mode.`
       })
     }
     for (const [shade, tokens] of Object.entries(modes.light)) {
       restrict.push({
-        pattern: `^(?!(?:\\S*:)?dark:)((?:\\S*:)?)!?(${utility})-(?:${grays})-${shade}(?:\\/\\S+)?!?$`,
-        message: `"$0" uses a raw palette color. Use ${[tokens].flat().map(token => `\`$1$2-${token}\``).join(' or ')} instead.`
+        pattern: `^(?!(?:\\S*:)?dark:)((?:\\S*:)?)(!?)(${utility})-(?:${grays})-${shade}((?:\\/\\S+)?!?)$`,
+        message: `"$0" uses a raw palette color. Use ${[tokens].flat().map(token => `\`$1$2$3-${token}$4\``).join(' or ')} instead.`
       })
     }
   }
