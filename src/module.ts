@@ -98,7 +98,9 @@ async function hasOwnESLintSetup(dirs: string[]) {
   for (const dir of new Set(dirs)) {
     const path = await findPath(join(dir, 'eslint.config'), { extensions: ['.js', '.mjs', '.cjs', '.ts', '.mts', '.cts'] })
     if (path) {
-      return (await readFile(path, 'utf-8')).includes('eslint-plugin-better-tailwindcss')
+      // An import of the plugin or one of its entries, left out when commented
+      const code = (await readFile(path, 'utf-8')).replace(/\/\*[\s\S]*?\*\/|^\s*\/\/.*$/gm, '')
+      return /["']eslint-plugin-better-tailwindcss(?:\/[^"']*)?["']/.test(code)
     }
   }
   return false
