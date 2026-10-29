@@ -94,7 +94,9 @@ describe('findAddedColors', () => {
     writeFileSync(join(dir, 'main.css'), '@import "tailwindcss";\n@import "./theme/colors.css";\n@import "./main.css";')
     writeFileSync(join(dir, 'other.css'), '@plugin "@nuxt/ui/colors" { tertiary: teal; brand: blue; }')
 
-    expect(await findAddedColors([join(dir, 'main.css'), join(dir, 'missing.css'), join(dir, 'other.css')])).toEqual(['tertiary', 'brand'])
+    const seen = new Set<string>()
+    expect(await findAddedColors([join(dir, 'main.css'), join(dir, 'missing.css'), join(dir, 'other.css')], seen)).toEqual(['tertiary', 'brand'])
+    expect([...seen]).toEqual(['main.css', 'theme/colors.css', 'missing.css', 'other.css'].map(file => join(dir, file)))
   })
 })
 

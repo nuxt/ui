@@ -2,7 +2,7 @@ import { existsSync } from 'node:fs'
 import { readFile } from 'node:fs/promises'
 import { camelCase, kebabCase } from 'scule'
 import { genExport } from 'knitwork'
-import { join } from 'pathe'
+import { dirname, join } from 'pathe'
 import { addTemplate, addTypeTemplate, hasNuxtModule, logger, resolvePath, updateTemplates, getLayerDirectories } from '@nuxt/kit'
 import type { Nuxt, NuxtApp, NuxtPage, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
 import type { Resolver } from '@nuxt/kit'
@@ -324,8 +324,7 @@ export default detected as Set<string> | null
     dependsOn: ({ path }) => path.endsWith('.css'),
     getContents: async () => {
       // The colors the app adds in `@plugin "@nuxt/ui/colors"`, for its `color` props to take them
-      const stylesheets = nuxt ? await Promise.all(nuxt.options.css.filter(entry => typeof entry === 'string').map(entry => resolvePath(entry))) : []
-      const addedColors = await findAddedColors(stylesheets)
+      const addedColors = await findAddedColors(nuxt ? await resolveStylesheets(nuxt) : [])
 
       const iconKeys = Object.keys(uiConfig?.icons || {})
       const iconUnion = iconKeys.length ? iconKeys.map(i => JSON.stringify(i)).join(' | ') : 'string'
@@ -384,6 +383,11 @@ export {}
   return templates
 }
 
+// The stylesheets of `css`, resolved
+function resolveStylesheets(nuxt: Nuxt) {
+  return Promise.all(nuxt.options.css.filter(entry => typeof entry === 'string').map(entry => resolvePath(entry)))
+}
+
 export function addTemplates(options: ModuleOptions, nuxt: Nuxt, resolve: Resolver['resolve']) {
   const templates = getTemplates(options, nuxt.options.appConfig.ui, nuxt, resolve)
   for (const template of templates) {
@@ -400,6 +404,20 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt, resolve: Resolv
 
   // A color added to the stylesheet reaches the `color` props on save
   if (nuxt.options.dev) {
+    // Nuxt only watches the app and server dirs: the dir of a stylesheet outside them,
+    // like `~~/assets/main.css`, or of one it imports, is added for its edits to reach
+    // `builder:watch`. A dir, not the file: Nuxt restarts on a change to a file in `watch`.
+    nuxt.hook('modules:done', async () => {
+      const files = new Set<string>()
+      await findAddedColors(await resolveStylesheets(nuxt), files)
+      const appDirs = getLayerDirectories(nuxt).map(layer => layer.app)
+      for (const dir of new Set([...files].filter(file => existsSync(file) && !file.includes('/node_modules/')).map(file => dirname(file)))) {
+        if (!appDirs.some(app => `${dir}/`.startsWith(app)) && !nuxt.options.watch.includes(dir)) {
+          nuxt.options.watch.push(dir)
+        }
+      }
+    })
+
     nuxt.hook('builder:watch', async (_, path) => {
       if (path.endsWith('.css')) {
         await updateTemplates({ filter: template => template.filename === 'types/ui.d.ts' })

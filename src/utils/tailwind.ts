@@ -130,9 +130,9 @@ async function readAddedColors(path: string, seen: Set<string>, names: Set<strin
 /**
  * Reads the colors the stylesheets add, themselves or through a relative `@import`.
  * @param paths - The stylesheets
+ * @param seen - Filled with every stylesheet read, the imported ones included
  */
-export async function findAddedColors(paths: string[]): Promise<string[]> {
-  const seen = new Set<string>()
+export async function findAddedColors(paths: string[], seen = new Set<string>()): Promise<string[]> {
   const names = new Set<string>()
   for (const path of paths) {
     await readAddedColors(path, seen, names)
