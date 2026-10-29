@@ -26,7 +26,8 @@ function mcpToolsToAiTools() {
     const name = def.name || (filename
       ? filename.replace(/\.(ts|js|mts|mjs)$/, '').replace(/([a-z0-9])([A-Z])/g, '$1-$2').replace(/[_\s]+/g, '-').toLowerCase()
       : null)
-    if (!name) continue
+    // The chat has its own `getComponentTheme`, which returns the raw theme `applyTheme` takes
+    if (!name || name === 'get-component-theme') continue
 
     const schema = def.inputSchema
       ? z.toJSONSchema(z.object(def.inputSchema)) as Record<string, unknown>
