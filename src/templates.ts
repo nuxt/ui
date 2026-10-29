@@ -327,7 +327,7 @@ type AppConfigUI = {
 } & TVConfig<typeof ui & CustomThemes>
 
 // The module writes \`prefix\` from \`tailwindPrefix\`, so it's read at runtime but not set here
-type AppConfigRuntimeUI = DeepRequired<Pick<AppConfigUI, 'icons' | 'tv'>> & { prefix?: string } & typeof ui & TVConfig<CustomThemes>
+type AppConfigRuntimeUI = DeepRequired<Pick<AppConfigUI, 'icons' | 'tv'>> & { prefix?: string } & typeof ui & CustomThemes
 
 declare module '@nuxt/schema' {
   interface AppConfigInput {

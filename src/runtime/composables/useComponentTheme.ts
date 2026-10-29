@@ -1,6 +1,6 @@
 import type { ComputedRef } from 'vue'
 import { computed } from 'vue'
-import type { ComponentThemeConfig, SlotClassValue, TVTheme, TVThemeCheck } from '../types/tv'
+import type { ComponentThemeConfig, SlotClassValue, TVTheme, TVThemeCheck, TVVariantProps } from '../types/tv'
 import { get } from '../utils'
 import { tv } from '../utils/tv'
 import { useComponentProps, useComponentOverrides } from './useComponentProps'
@@ -41,7 +41,7 @@ export function useComponentTheme<K extends string, P extends object, T extends 
   name: K,
   props: P,
   theme: T & TVThemeCheck<T>,
-  variants?: (props: P) => Record<string, unknown>
+  variants?: (props: P) => TVVariantProps<T> & Record<string, unknown>
 ): { props: P, ui: ComputedRef<ComponentThemeSlots<T, K>> } {
   const proxy = useComponentProps(name, props, theme)
   const overrides = useComponentOverrides(ui => get(ui, name))

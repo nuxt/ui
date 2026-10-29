@@ -835,6 +835,12 @@ describe('tv theme sources', () => {
     expect(theme.slots.label).toBe('truncate line-clamp-2')
   })
 
+  it('keeps the base\'s classes under an empty value', () => {
+    const theme = extendTheme(buttonTheme, { variants: { variant: { solid: '' } } })
+
+    expect(theme.variants.variant.solid).toEqual(buttonTheme.variants.variant.solid)
+  })
+
   it('calls a callback with `undefined` when the base has no value for it', () => {
     const theme = extendTheme(buttonTheme, { variants: { tone: () => ({ soft: { base: 'opacity-75' } }) } })
     const check = (value: TVTheme) => value

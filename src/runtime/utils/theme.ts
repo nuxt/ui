@@ -58,6 +58,10 @@ function mergeClasses(value: unknown, base: unknown): unknown {
     }
     return merged
   }
+  // An empty value, like a `false: ''` variant, keeps the base's classes
+  if (value === '') {
+    return base ?? value
+  }
   return base === undefined || base === '' ? value : [base, value]
 }
 

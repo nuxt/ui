@@ -114,5 +114,8 @@ describe('useComponentTheme', () => {
 
     expectTypeOf(recipe).returns.toHaveProperty('label')
     expectTypeOf(recipe).returns.not.toHaveProperty('value')
+
+    // @ts-expect-error `lg` is not a `size` of the theme
+    expectTypeOf(() => useComponentTheme('plain', {}, plain, () => ({ size: 'lg' }))).toBeFunction()
   })
 })
