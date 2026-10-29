@@ -97,7 +97,7 @@
 
   to {
     opacity: 0;
-    transform: translateY(calc((var(--before) + 1) * var(--gap))) scale(calc(var(--scale) - var(--scale-factor)));
+    transform: translateY(calc(var(--gap) * -0.5));
   }
 }
 
