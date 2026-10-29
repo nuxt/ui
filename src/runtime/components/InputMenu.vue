@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxContentEmits, ComboboxArrowProps } from 'reka-ui'
+import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxContentEmits, ComboboxArrowProps, ListboxItemSelectEvent } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-menu'
@@ -34,7 +34,7 @@ export type InputMenuItem = InputMenuValue | {
    */
   type?: 'label' | 'separator' | 'item'
   disabled?: boolean
-  onSelect?: (e: Event) => void
+  onSelect?: (e: ListboxItemSelectEvent<unknown>) => void
   class?: any
   ui?: Partial<Pick<InputMenu['slots'], 'tagsItem' | 'tagsItemText' | 'tagsItemDelete' | 'tagsItemDeleteIcon' | 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChip' | 'itemLeadingChipSize' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>>
   [key: string]: any
@@ -551,7 +551,7 @@ function onCreate(e: Event) {
   emits('create', searchTerm.value)
 }
 
-function onSelect(e: Event, item: InputMenuItem) {
+function onSelect(e: ListboxItemSelectEvent<unknown>, item: InputMenuItem) {
   if (!isInputItem(item)) {
     return
   }

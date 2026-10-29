@@ -84,7 +84,7 @@ Use the `items` prop as an array of objects with the following properties:
 - [`avatar?: AvatarProps`{lang="ts-type"}](#with-avatar-in-items)
 - [`chip?: ChipProps`{lang="ts-type"}](#with-chip-in-items)
 - `disabled?: boolean`{lang="ts-type"}
-- `onSelect?: (e: Event) => void`{lang="ts-type"}
+- `onSelect?: (e: ListboxItemSelectEvent<unknown>) => void`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
 - `ui?: { label?: ClassNameValue, separator?: ClassNameValue, item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, ... }`{lang="ts-type"}
 
