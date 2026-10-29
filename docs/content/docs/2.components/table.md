@@ -10,7 +10,7 @@ links:
     avatar:
       src: https://github.com/tanstack.png
       loading: lazy
-    to: https://tanstack.com/table/v8
+    to: https://tanstack.com/table/v9
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v5/src/runtime/components/Table.vue
@@ -18,7 +18,7 @@ links:
 
 ## Usage
 
-The Table component is built on top of [TanStack Table v8](https://tanstack.com/table/v8) and is powered by the [useVueTable](https://tanstack.com/table/v8/docs/framework/vue/vue-table#usevuetable) composable to provide a flexible and fully type-safe API.
+The Table component is built on top of [TanStack Table v9](https://tanstack.com/table/v9) and is powered by the [useTable](https://tanstack.com/table/v9/docs/framework/vue/reference/functions/useTable) composable to provide a flexible and fully type-safe API.
 
 It renders your data as rows and columns and supports sorting, filtering, pagination, row selection, expansion, grouping, pinning and virtualization, so you can build everything from a simple data table to a fully featured data grid.
 
@@ -103,7 +103,7 @@ props:
 
 ### Columns
 
-Use the `columns` prop as an array of [ColumnDef](https://tanstack.com/table/v8/docs/api/core/column-def) objects with properties like:
+Use the `columns` prop as an array of [ColumnDef](https://tanstack.com/table/v9/docs/framework/vue/guide/column-defs) objects with properties like:
 
 - `accessorKey`: [The key of the row object to use when extracting the value for the column.]{class="text-muted"}
 - `header`: [The header to display for the column. If a string is passed, it can be used as a default for the column ID. If a function is passed, it will be passed a props object for the header and should return the rendered header value (the exact type depends on the adapter being used).]{class="text-muted"}
@@ -116,10 +116,9 @@ Use the `columns` prop as an array of [ColumnDef](https://tanstack.com/table/v8/
   - `style`:
     - `td`: [The style to apply to the `td` element.]{class="text-muted"}
     - `th`: [The style to apply to the `th` element.]{class="text-muted"}
-  - [`colspan`](#with-column-span):
-    - `td`: [The colspan attribute to apply to the `td` element.]{class="text-muted"}
-  - [`rowspan`](#with-column-span):
-    - `td`: [The rowspan attribute to apply to the `td` element.]{class="text-muted"}
+  - `attrs`:
+    - `td`: [The attributes to apply to the `td` element.]{class="text-muted"}
+    - `th`: [The attributes to apply to the `th` element.]{class="text-muted"}
 
 To render components or other HTML elements, you need to use the Vue [`h` function](https://vuejs.org/api/render-function.html#h) inside the `header` and `cell` props. This is different from other components that use slots but allows for more flexibility.
 
@@ -145,12 +144,14 @@ When rendering components with `h`, you can either use the `resolveComponent` fu
 
 ### Meta
 
-Use the `meta` prop as an object ([TableMeta](https://tanstack.com/table/v8/docs/api/core/table#meta)) to pass properties like:
+Use the `meta` prop as an object ([TableMeta](https://tanstack.com/table/v9/docs/reference/index/interfaces/TableMeta)) to pass properties like:
 
 - `class`:
   - `tr`: [The classes to apply to the `tr` element.]{class="text-muted"}
 - `style`:
   - `tr`: [The style to apply to the `tr` element.]{class="text-muted"}
+- `attrs`:
+  - `tr`: [The attributes to apply to the `tr` element, like `data-*` or `tabindex`.]{class="text-muted"}
 
 ::component-example
 ---
@@ -162,6 +163,53 @@ highlights:
   - 128
   - 140
 ---
+::
+
+### Features
+
+The table registers the TanStack Table features it renders: sorting, column and global filtering, expanding, row selection, column visibility, column pinning, sizing and resizing, and row pinning, along with their row models and every built-in sorting and filtering function.
+
+Use the `features` prop to register other [features](https://tanstack.com/table/v9/docs/guide/features) like [pagination](#with-pagination), [grouping](#with-grouped-rows), [cell selection](#with-cell-selection), [cell spanning](#with-column-span), [faceting](#with-column-faceting) or [column ordering](#with-column-ordering), along with the row models some of them need. It is read once when the table is created, so declare it in your script.
+
+```vue
+<script setup lang="ts">
+import { createPaginatedRowModel, rowPaginationFeature } from '@tanstack/vue-table'
+
+const features = { rowPaginationFeature, paginatedRowModel: createPaginatedRowModel() }
+</script>
+
+<template>
+  <UTable :data="data" :columns="columns" :features="features" />
+</template>
+```
+
+A column takes a custom sorting or filtering function in its `sortFn` or `filterFn`:
+
+```ts
+const columns: TableColumn<Payment>[] = [{
+  accessorKey: 'email',
+  sortFn: (rowA, rowB, columnId) => String(rowA.getValue(columnId)).length - String(rowB.getValue(columnId)).length
+}]
+```
+
+To refer to a function by name across columns, register it in the `sortFns` or `filterFns` of the `features` prop. It is added to the built-in ones.
+
+::caution
+The `tableApi` and column types include the APIs of every TanStack Table feature. Calling the API of a feature that isn't registered type-checks but fails at runtime.
+::
+
+### Options
+
+Use the `options` prop to pass the [options](https://tanstack.com/table/v9/docs/reference/index/type-aliases/TableOptions) of the registered features, like `enableRowSelection`, `enableMultiSort`, `manualPagination` or `groupedColumnMode`. They stay reactive, so a server-side `rowCount` can follow your data.
+
+```vue
+<template>
+  <UTable :data="data" :columns="columns" :options="{ enableMultiSort: true, enableRowRangeSelection: false }" />
+</template>
+```
+
+::note
+The core options like `get-row-id`, `get-sub-rows`, `default-column` or `initial-state` are props of their own.
 ::
 
 ### Loading
@@ -288,15 +336,15 @@ prettier: true
 collapse: true
 name: 'table-row-actions-example'
 highlights:
-  - 115
-  - 141
+  - 114
+  - 140
 class: '!p-0'
 ---
 ::
 
 ### With expandable rows
 
-You can add a new column that renders a [Button](/docs/components/button) component inside the `cell` to toggle the expandable state of a row using the TanStack Table [Expanding APIs](https://tanstack.com/table/v8/docs/api/features/expanding).
+You can add a new column that renders a [Button](/docs/components/button) component inside the `cell` to toggle the expandable state of a row using the TanStack Table [Expanding APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/expanding).
 
 ::caution
 You need to define the `#expanded` slot to render the expanded content which will receive the row as a parameter.
@@ -319,20 +367,26 @@ You can use the `expanded` prop to control the expandable state of the rows (can
 ::
 
 ::note
+The expanded and selected states are keyed by row id, which is the row index by default. Set the `get-row-id` prop, like `:get-row-id="row => row.id"`, so they follow their rows when the data changes. TanStack Table also collapses every row when the data changes, set `autoResetExpanded: false` in the `options` prop to keep them open.
+::
+
+::tip
 You could also add this action to the [`DropdownMenu`](/docs/components/dropdown-menu) component inside the `actions` column.
 ::
 
 ### With grouped rows
 
-You can group rows based on a given column value and show/hide sub rows via some button added to the cell using the TanStack Table [Grouping APIs](https://tanstack.com/table/v8/docs/api/features/grouping).
+You can group rows based on a given column value and show/hide sub rows via some button added to the cell using the TanStack Table [Grouping APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/grouping).
 
 #### Important parts
 
 * Add `grouping` prop with an array of column ids you want to group by.
-* Add `grouping-options` prop. It must include `getGroupedRowModel`, you can import it from `@tanstack/vue-table` or implement your own.
+* Add `features` prop with `columnGroupingFeature`, `rowAggregationFeature`, `groupedRowModel: createGroupedRowModel()` and an `aggregationFns` map of the aggregation functions your columns use, like `{ sum: aggregationFn_sum }`, all imported from `@tanstack/vue-table`.
+* Add `options` prop for the grouping options like `groupedColumnMode`, and `autoResetExpanded: false` to keep groups open when the data changes.
+* Add `initial-state` prop like `{ expanded: true }` to show the groups expanded.
 * Expand rows via `row.toggleExpanded()` method on any cell of the row. Keep in mind, it also toggles `#expanded` slot.
-* Use `aggregateFn` on column definition to define how to aggregate the rows.
-* `agregatedCell` renderer on column definition only works if there is no `cell` renderer.
+* Use `aggregationFn` on column definition to define how to aggregate the rows.
+* Use `aggregatedCell` on column definition to render the aggregated value on grouped rows. Without it, TanStack Table renders the formatted value.
 
 ::component-example
 ---
@@ -340,15 +394,15 @@ prettier: true
 collapse: true
 name: 'table-grouped-rows-example'
 highlights:
-  - 157
-  - 160
+  - 169
+  - 179
 class: '!p-0'
 ---
 ::
 
 ### With row pinning :badge{label="4.6+" class="align-text-top"}
 
-You can add a column that renders a [Button](/docs/components/button) component inside the `cell` to toggle the pinning state of a row using the TanStack Table [Row Pinning APIs](https://tanstack.com/table/v8/docs/api/features/row-pinning). Pinned rows will stay at the top or bottom of the table regardless of sorting or filtering.
+You can add a column that renders a [Button](/docs/components/button) component inside the `cell` to toggle the pinning state of a row using the TanStack Table [Row Pinning APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/row-pinning). Pinned rows will stay at the top or bottom of the table regardless of sorting or filtering.
 
 ::component-example
 ---
@@ -372,7 +426,7 @@ You can use the `row-pinning` prop to control the pinning state of the rows (can
 
 ### With row selection
 
-You can add a new column that renders a [Checkbox](/docs/components/checkbox) component inside the `header` and `cell` to select rows using the TanStack Table [Row Selection APIs](https://tanstack.com/table/v8/docs/api/features/row-selection).
+You can add a new column that renders a [Checkbox](/docs/components/checkbox) component inside the `header` and `cell` to select rows using the TanStack Table [Row Selection APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/row-selection).
 
 ::component-example
 ---
@@ -380,14 +434,18 @@ prettier: true
 collapse: true
 name: 'table-row-selection-example'
 highlights:
-  - 55
-  - 72
+  - 56
+  - 80
 class: '!p-0'
 ---
 ::
 
 ::tip
 You can use the `row-selection` prop to control the selection state of the rows (can be bound with `v-model`).
+::
+
+::note
+The cell checkboxes call `row.getToggleSelectedHandler()` on click, so shift-clicking a row selects every row from the previously clicked one. Disable it with `:options="{ enableRowRangeSelection: false }"`.
 ::
 
 ### With row select event
@@ -404,14 +462,18 @@ prettier: true
 collapse: true
 name: 'table-row-select-event-example'
 highlights:
-  - 124
-  - 131
+  - 127
+  - 134
 class: '!p-0'
 ---
 ::
 
 ::tip
 You can use this to navigate to a page, open a modal or even to select the row manually.
+::
+
+::note
+Clickable rows get `tabindex="0"` to be reachable with the keyboard. In a long table, you can take them out of the tab order with `:meta="{ attrs: { tr: { tabindex: -1 } } }"`. When `enableRowSelection` is `false` or a function in the `options` prop, the rows it rejects don't emit `select` and aren't styled as clickable.
 ::
 
 ### With row context menu event
@@ -428,10 +490,27 @@ prettier: true
 collapse: true
 name: 'table-row-context-menu-event-example'
 highlights:
-  - 133
-  - 173
+  - 135
+  - 175
 class: '!p-0'
 ---
+::
+
+### With cell selection
+
+You can select cells like in a spreadsheet with the TanStack Table [Cell Selection APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/cell-selection) by registering `cellSelectionFeature` through the `features` prop. Click or drag to select a range, shift-click to extend it and :kbd{value="ctrl"} or :kbd{value="meta"} click to add another one. The arrow keys move the selection and extend it with :kbd{value="shift"}.
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-cell-selection-example'
+class: '!p-0'
+---
+::
+
+::tip
+You can use the `cell-selection` prop to control the selected ranges (can be bound with `v-model`).
 ::
 
 ### With row hover event
@@ -448,8 +527,8 @@ prettier: true
 collapse: true
 name: 'table-row-hover-event-example'
 highlights:
-  - 129
-  - 152
+  - 131
+  - 154
 class: '!p-0'
 ---
 ::
@@ -476,11 +555,7 @@ class: '!p-0'
 
 ### With column span
 
-You can use the `colspan` and `rowspan` properties in the column `meta` to merge cells. These properties accept a static value or a function that receives the cell and returns the span value.
-
-::note
-When using `rowspan`, cells that are "absorbed" by a previous row's span need to be visually hidden. Use the `class` meta with a function that returns `'hidden'` for those cells.
-::
+You can merge cells with the TanStack Table [Cell Spanning APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/cell-spanning) by registering `cellSpanningFeature` through the `features` prop. Use `spanRows` on a column definition to merge consecutive cells with the same value, and `spanColumns` to make a cell span the columns after it.
 
 ::component-example
 ---
@@ -493,7 +568,7 @@ class: '!p-0'
 
 ### With column sorting
 
-You can update a column `header` to render a [Button](/docs/components/button) component inside the `header` to toggle the sorting state using the TanStack Table [Sorting APIs](https://tanstack.com/table/v8/docs/api/features/sorting).
+You can update a column `header` to render a [Button](/docs/components/button) component inside the `header` to toggle the sorting state using the TanStack Table [Sorting APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/sorting).
 
 Set `enableSorting: true` on those columns as well. This puts `aria-sort` on the `<th>` so screen readers can read the current sort state of the column: `none`, `ascending` or `descending`. The `Button` stays the control that changes it.
 
@@ -533,10 +608,10 @@ In this example, we use a function to define the column header but you can also 
 
 ### With column pinning
 
-You can update a column `header` to render a [Button](/docs/components/button) component inside the `header` to toggle the pinning state using the TanStack Table [Column Pinning APIs](https://tanstack.com/table/v8/docs/api/features/column-pinning).
+You can update a column `header` to render a [Button](/docs/components/button) component inside the `header` to toggle the pinning state using the TanStack Table [Column Pinning APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/column-pinning).
 
 ::note
-A pinned column will become sticky on the left or right side of the table. When using column pinning, you should define explicit `size` values for your columns to ensure proper column width handling, especially with multiple pinned columns.
+A pinned column will become sticky on the `start` or `end` side of the table, which follows the text direction. When using column pinning, you should define explicit `size` values for your columns. A column that sets a `size` renders at that width, so the offsets of multiple pinned columns line up.
 ::
 
 ::component-example
@@ -547,7 +622,7 @@ overflowHidden: true
 name: 'table-column-pinning-example'
 highlights:
   - 108
-  - 126
+  - 130
 class: '!p-0 overflow-clip'
 ---
 ::
@@ -556,9 +631,26 @@ class: '!p-0 overflow-clip'
 You can use the `column-pinning` prop to control the pinning state of the columns (can be bound with `v-model`).
 ::
 
+### With column resizing
+
+You can set `enableResizing: true` on a column definition, or on every column with the `default-column` prop, to render a handle that resizes the column using the TanStack Table [Column Sizing APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/column-sizing). The headers and the table then take their sizes, so use `table-fixed` on the `base` slot to let columns shrink below their content.
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-column-resizing-example'
+class: '!p-0'
+---
+::
+
+::tip
+You can use the `column-sizing` prop to control the sizes of the columns (can be bound with `v-model`). Double-click a handle to reset its column.
+::
+
 ### With column visibility
 
-You can use a [DropdownMenu](/docs/components/dropdown-menu) component to toggle the visibility of the columns using the TanStack Table [Column Visibility APIs](https://tanstack.com/table/v8/docs/api/features/column-visibility).
+You can use a [DropdownMenu](/docs/components/dropdown-menu) component to toggle the visibility of the columns using the TanStack Table [Column Visibility APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/column-visibility).
 
 ::component-example
 ---
@@ -576,9 +668,26 @@ class: '!p-0'
 You can use the `column-visibility` prop to control the visibility state of the columns (can be bound with `v-model`).
 ::
 
+### With column ordering
+
+You can reorder the columns using the TanStack Table [Column Ordering APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/column-ordering) by registering `columnOrderingFeature` through the `features` prop. In this example, the buttons in each header move the column in the `column-order` array.
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-column-ordering-example'
+class: '!p-0'
+---
+::
+
+::tip
+You can use the `column-order` prop to control the order of the columns (can be bound with `v-model`).
+::
+
 ### With column filters
 
-You can use an [Input](/docs/components/input) component to filter per column the rows using the TanStack Table [Column Filtering APIs](https://tanstack.com/table/v8/docs/api/features/column-filtering).
+You can use an [Input](/docs/components/input) component to filter per column the rows using the TanStack Table [Column Filtering APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/column-filtering).
 
 ::component-example
 ---
@@ -598,7 +707,7 @@ You can use the `column-filters` prop to control the filters state of the column
 
 ### With global filter
 
-You can use an [Input](/docs/components/input) component to filter the rows using the TanStack Table [Global Filtering APIs](https://tanstack.com/table/v8/docs/api/features/global-filtering).
+You can use an [Input](/docs/components/input) component to filter the rows using the TanStack Table [Global Filtering APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/global-filtering).
 
 ::component-example
 ---
@@ -615,11 +724,24 @@ highlights:
 You can use the `global-filter` prop to control the global filter state (can be bound with `v-model`).
 ::
 
+### With column faceting
+
+You can list the values of a column and how many rows have each using the TanStack Table [Column Faceting APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/column-faceting). Register `columnFacetingFeature` with `createFacetedRowModel()` and `createFacetedUniqueValues()` through the `features` prop, then read `column.getFacetedUniqueValues()`. Add `createFacetedMinMaxValues()` for the range of a numeric column.
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-column-faceting-example'
+class: '!p-0'
+---
+::
+
 ### With pagination
 
-You can use a [Pagination](/docs/components/pagination) component to control the pagination state using the [Pagination APIs](https://tanstack.com/table/v8/docs/api/features/pagination).
+You can use a [Pagination](/docs/components/pagination) component to control the pagination state using the TanStack Table [Pagination APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/pagination).
 
-There are different pagination approaches as explained in [Pagination Guide](https://tanstack.com/table/v8/docs/guide/pagination#pagination-guide). In this example, we use client-side pagination so we need to manually pass `getPaginationRowModel()`{lang="ts-type"} function.
+Pagination is not registered by default. In this example, we use client-side pagination so we register `rowPaginationFeature` and `createPaginatedRowModel()`{lang="ts-type"} through the `features` prop. For server-side pagination, register `rowPaginationFeature` alone and set `manualPagination` in the `options` prop.
 
 ::component-example
 ---
@@ -703,7 +825,7 @@ class: '!p-0'
 Use the `virtualize` prop to enable virtualization for large datasets as a boolean or an object with options like `{ estimateSize: 65, overscan: 12 }`. You can also pass other [TanStack Virtual options](https://tanstack.com/virtual/v3/docs/api/virtualizer#optional-options) to customize the virtualization behavior. The `sticky` prop works in combination with `virtualize` to keep the header or footer visible while scrolling through large datasets.
 
 ::warning
-Row pinning is not supported when virtualization is enabled.
+Row pinning and row spanning are not supported when virtualization is enabled. Column spanning is.
 ::
 
 ::component-example
@@ -752,7 +874,7 @@ For example, if your data objects have a `children` array, set `:get-sub-rows="r
 prettier: true
 collapse: true
 highlights:
-  - 175
+  - 177
 name: 'table-tree-data-example'
 class: '!p-0'
 ---
@@ -808,7 +930,11 @@ This will give you access to the following:
 | Name | Type |
 | ---- | ---- |
 | `tableRef`{lang="ts-type"} | `Ref<HTMLTableElement \| null>`{lang="ts-type"} |
-| `tableApi`{lang="ts-type"} | [`Table`{lang="ts-type"}](https://tanstack.com/table/v8/docs/api/core/table#table-api) |
+| `tableApi`{lang="ts-type"} | [`Table`{lang="ts-type"}](https://tanstack.com/table/v9/docs/reference/index/type-aliases/Table) |
+
+::note
+`tableApi` is the TanStack Table instance, so its API follows TanStack Table's versioning, not Nuxt UI's.
+::
 
 ## Theme
 

@@ -1,8 +1,15 @@
 <script setup lang="ts">
 import { resolveComponent } from 'vue'
+import {
+  aggregationFn_count,
+  aggregationFn_max,
+  aggregationFn_sum,
+  aggregationFn_uniqueCount,
+  columnGroupingFeature,
+  createGroupedRowModel,
+  rowAggregationFeature
+} from '@tanstack/vue-table'
 import type { TableColumn } from '@nuxt/ui'
-import { getGroupedRowModel } from '@tanstack/vue-table'
-import type { GroupingOptions } from '@tanstack/vue-table'
 
 const UBadge = resolveComponent('UBadge')
 
@@ -88,6 +95,23 @@ const data = ref<Payment[]>([
   }
 ])
 
+function formatDate(date: Date) {
+  return date.toLocaleString('en-US', {
+    day: 'numeric',
+    month: 'short',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  })
+}
+
+function formatAmount(amount: number) {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'EUR'
+  }).format(amount)
+}
+
 const columns: TableColumn<Payment>[] = [
   {
     id: 'title',
@@ -100,25 +124,17 @@ const columns: TableColumn<Payment>[] = [
   {
     accessorKey: 'id',
     header: '#',
-    cell: ({ row }) =>
-      row.getIsGrouped()
-        ? `${row.getValue('id')} records`
-        : `#${row.getValue('id')}`,
-    aggregationFn: 'count'
+    cell: ({ row }) => `#${row.getValue('id')}`,
+    aggregationFn: 'count',
+    aggregatedCell: ({ getValue }) => `${getValue()} records`
   },
   {
-    accessorKey: 'date',
+    id: 'date',
+    accessorFn: row => new Date(row.date),
     header: 'Date',
-    cell: ({ row }) => {
-      return new Date(row.getValue('date')).toLocaleString('en-US', {
-        day: 'numeric',
-        month: 'short',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false
-      })
-    },
-    aggregationFn: 'max'
+    cell: ({ getValue }) => formatDate(getValue() as Date),
+    aggregationFn: 'max',
+    aggregatedCell: ({ getValue }) => formatDate(getValue() as Date)
   },
   {
     accessorKey: 'status',
@@ -132,11 +148,8 @@ const columns: TableColumn<Payment>[] = [
         td: 'w-full'
       }
     },
-    cell: ({ row }) =>
-      row.getIsGrouped()
-        ? `${row.getValue('email')} customers`
-        : row.getValue('email'),
-    aggregationFn: 'uniqueCount'
+    aggregationFn: 'uniqueCount',
+    aggregatedCell: ({ getValue }) => `${getValue()} customers`
   },
   {
     accessorKey: 'amount',
@@ -147,21 +160,23 @@ const columns: TableColumn<Payment>[] = [
         td: 'text-right font-medium'
       }
     },
-    cell: ({ row }) => {
-      const amount = Number.parseFloat(row.getValue('amount'))
-      return new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'EUR'
-      }).format(amount)
-    },
-    aggregationFn: 'sum'
+    cell: ({ getValue }) => formatAmount(getValue() as number),
+    aggregationFn: 'sum',
+    aggregatedCell: ({ getValue }) => formatAmount(getValue() as number)
   }
 ]
 
-const grouping_options = ref<GroupingOptions>({
-  groupedColumnMode: 'remove',
-  getGroupedRowModel: getGroupedRowModel()
-})
+const features = {
+  columnGroupingFeature,
+  rowAggregationFeature,
+  groupedRowModel: createGroupedRowModel(),
+  aggregationFns: {
+    count: aggregationFn_count,
+    max: aggregationFn_max,
+    sum: aggregationFn_sum,
+    uniqueCount: aggregationFn_uniqueCount
+  }
+}
 </script>
 
 <template>
@@ -169,7 +184,8 @@ const grouping_options = ref<GroupingOptions>({
     :data="data"
     :columns="columns"
     :grouping="['account_id', 'status']"
-    :grouping-options="grouping_options"
+    :features="features"
+    :options="{ groupedColumnMode: 'remove' }"
     :ui="{
       root: 'min-w-full',
       td: 'empty:p-0' // helps with the colspaned row added for expand slot

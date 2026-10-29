@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
 import type { TableColumn, TableRow } from '@nuxt/ui'
+import type { RowSelectionState } from '@tanstack/vue-table'
 
 const UBadge = resolveComponent('UBadge')
 const UCheckbox = resolveComponent('UCheckbox')
@@ -48,7 +49,7 @@ const data = ref<Payment[]>([{
 const columns: TableColumn<Payment>[] = [{
   id: 'select',
   header: ({ table }) => h(UCheckbox, {
-    'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
+    'modelValue': table.getIsAllPageRowsSelected() ? true : table.getIsSomePageRowsSelected() ? 'indeterminate' : false,
     'onUpdate:modelValue': (value: boolean | 'indeterminate') => table.toggleAllPageRowsSelected(!!value),
     'aria-label': 'Select all'
   }),
@@ -104,7 +105,7 @@ const columns: TableColumn<Payment>[] = [{
 
 const table = useTemplateRef('table')
 
-const rowSelection = ref<Record<string, boolean>>({ })
+const rowSelection = ref<RowSelectionState>({})
 
 function onSelect(e: Event, row: TableRow<Payment>) {
   /* If you decide to also select the column you can do this  */

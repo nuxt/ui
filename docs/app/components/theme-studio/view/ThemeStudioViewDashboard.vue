@@ -2,6 +2,7 @@
 import { h, resolveComponent } from 'vue'
 import { CalendarDate, DateFormatter } from '@internationalized/date'
 import type { DropdownMenuItem, NavigationMenuItem, TableColumn } from '@nuxt/ui'
+import type { RowSelectionState } from '@tanstack/vue-table'
 
 const UAvatar = resolveComponent('UAvatar')
 const UBadge = resolveComponent('UBadge')
@@ -330,7 +331,7 @@ const customers: Customer[] = [
   { id: 8, name: 'Kelly Wilson', username: 'kellywilson', email: 'kelly.wilson@example.com', location: 'Madrid, Spain', status: 'subscribed', avatar: { src: 'https://github.com/vueuse.png', alt: 'Kelly Wilson' } }
 ]
 
-const customerRowSelection = ref({ 1: true })
+const customerRowSelection = ref<RowSelectionState>({ 1: true })
 const customerEmailFilter = ref('')
 const customerStatusFilter = ref('all')
 
@@ -362,7 +363,7 @@ const customerRowItems = computed<DropdownMenuItem[]>(() => [
 const customerColumns: TableColumn<Customer>[] = [{
   id: 'select',
   header: ({ table }) => h(UCheckbox, {
-    'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
+    'modelValue': table.getIsAllPageRowsSelected() ? true : table.getIsSomePageRowsSelected() ? 'indeterminate' : false,
     'onUpdate:modelValue': (value: boolean | 'indeterminate') => table.toggleAllPageRowsSelected(!!value),
     'ariaLabel': 'Select all'
   }),

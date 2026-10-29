@@ -4,14 +4,15 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'relative overflow-auto outline-focus focus-visible:outline-(length:--ui-focus-width)',
-    base: 'min-w-full overflow-clip',
+    base: 'relative min-w-full overflow-clip',
     caption: 'sr-only',
     thead: 'relative',
     tbody: 'isolate [&>tr]:data-[selectable=true]:hover:bg-tint [&>tr]:data-[selectable=true]:outline-focus [&>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default',
     tfoot: 'relative *:data-[slot=table-separator]:z-2',
     tr: 'data-[selected=true]:bg-tint',
-    th: 'px-4 py-3.5 text-sm text-strong text-start font-semibold has-[[role=checkbox]]:pe-0',
-    td: 'p-4 text-sm text-muted whitespace-nowrap has-[[role=checkbox]]:pe-0',
+    th: 'relative px-4 py-3.5 text-sm text-strong text-start font-semibold has-[[role=checkbox]]:pe-0',
+    td: 'p-4 text-sm text-muted whitespace-nowrap has-[[role=checkbox]]:pe-0 data-[selected=true]:bg-tint outline-focus focus-visible:outline-(length:--ui-focus-width) -outline-offset-(--ui-focus-width)',
+    resizer: 'absolute inset-y-0 inset-e-0 w-2 cursor-col-resize select-none touch-none after:absolute after:inset-y-0 after:inset-e-0 after:w-px hover:after:bg-(--ui-border-strong) data-[resizing=true]:after:bg-(--ui-border-strong) after:transition-colors',
     separator: 'absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)',
     empty: 'py-6 text-center text-sm text-muted',
     loading: 'py-6 text-center'

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getPaginationRowModel } from '@tanstack/vue-table'
+import { createPaginatedRowModel, rowPaginationFeature } from '@tanstack/vue-table'
 import type { TableColumn } from '@nuxt/ui'
 
 const table = useTemplateRef('table')
@@ -148,6 +148,8 @@ const columns: TableColumn<Payment>[] = [{
   }
 }]
 
+const features = { rowPaginationFeature, paginatedRowModel: createPaginatedRowModel() }
+
 const pagination = ref({
   pageIndex: 0,
   pageSize: 5
@@ -172,16 +174,14 @@ const globalFilter = ref('')
       v-model:global-filter="globalFilter"
       :data="data"
       :columns="columns"
-      :pagination-options="{
-        getPaginationRowModel: getPaginationRowModel()
-      }"
+      :features="features"
       class="flex-1"
     />
 
     <div class="flex justify-end border-t border-default pt-4 px-4">
       <UPagination
-        :page="(table?.tableApi?.getState().pagination.pageIndex || 0) + 1"
-        :items-per-page="table?.tableApi?.getState().pagination.pageSize"
+        :page="pagination.pageIndex + 1"
+        :items-per-page="pagination.pageSize"
         :total="table?.tableApi?.getFilteredRowModel().rows.length"
         @update:page="(p) => table?.tableApi?.setPageIndex(p - 1)"
       />
