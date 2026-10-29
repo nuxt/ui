@@ -42,8 +42,8 @@ const mode = computed({
     :ui="{
       label: 'sr-only',
       list: 'bg-tint ring ring-default p-0.5',
-      indicator: 'bg-default inset-y-0.5',
-      trigger: 'data-[state=active]:text-strong w-full p-1.5'
+      indicator: 'inset-y-0.5',
+      trigger: 'w-full p-1.5'
     }"
     aria-label="Color mode"
   />

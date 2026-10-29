@@ -5,7 +5,7 @@ export default defineTheme({
   slots: {
     root: 'flex items-center gap-2',
     list: 'relative flex p-1 group',
-    indicator: 'absolute [[data-slot=tabs-indicator]~&]:hidden bg-accent transition-[translate,width] duration-200 ease-out motion-reduce:transition-none',
+    indicator: 'absolute [[data-slot=tabs-indicator]~&]:hidden transition-[translate,width] duration-200 ease-out motion-reduce:transition-none',
     trigger: 'group relative inline-flex items-center min-w-0 data-[state=active]:[anchor-name:--tabs-trigger] data-[state=inactive]:text-muted hover:data-[state=inactive]:not-disabled:text-default font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width)',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
@@ -18,12 +18,12 @@ export default defineTheme({
     variant: {
       pill: {
         list: 'bg-soft rounded-lg',
-        trigger: 'grow data-[state=active]:text-accent-contrast',
-        indicator: 'rounded-md shadow-xs'
+        trigger: 'grow data-[state=active]:text-accent',
+        indicator: 'bg-default rounded-md shadow-xs'
       },
       link: {
         list: 'border-default',
-        indicator: 'rounded-full',
+        indicator: 'bg-accent rounded-full',
         trigger: 'data-[state=active]:text-accent'
       }
     },
