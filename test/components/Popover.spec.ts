@@ -55,7 +55,7 @@ describe('Popover', () => {
   it.each([
     ['Checkbox', Checkbox],
     ['Switch', Switch]
-  ])('opens in hover mode when entering the %s label', async (_, component) => {
+  ])('opens in hover mode when entering the %s label', async (name, component) => {
     const wrapper = await mountSuspended(Popover, {
       props: { mode: 'hover', openDelay: 0, portal: false },
       slots: {
@@ -65,9 +65,9 @@ describe('Popover', () => {
       attachTo: document.body
     })
 
-    wrapper.find('[data-slot="root"]').element.dispatchEvent(new PointerEvent('pointerenter', { pointerType: 'mouse' }))
+    wrapper.find(`[data-slot="${name.toLowerCase()}"]`).element.dispatchEvent(new PointerEvent('pointerenter', { pointerType: 'mouse' }))
 
-    await vi.waitFor(() => expect(wrapper.find('[data-slot="content"]').exists()).toBe(true))
+    await vi.waitFor(() => expect(wrapper.find('[data-slot="popover-content"]').exists()).toBe(true))
     wrapper.unmount()
   })
 
