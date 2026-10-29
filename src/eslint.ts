@@ -35,6 +35,8 @@ export interface NuxtUIESLintOptions {
     'no-unknown-classes'?: Severity
     /** Raw palette colors (`text-gray-500`) and hardcoded colors (`bg-[#000]`). */
     'no-palette-colors'?: Severity
+    /** Classes that set the same property in the same list (`p-2 p-4`), where the stylesheet order decides which wins. */
+    'no-conflicting-classes'?: Severity
     /**
      * Physical classes on the inline axis (`ml-2`, `left-0`, `text-left`), for apps that support RTL.
      * @defaultValue 'off'
@@ -205,6 +207,7 @@ export default function nuxtUI(options: NuxtUIESLintOptions): Linter.Config[] {
   const rules = {
     'no-unknown-classes': 'off',
     'no-palette-colors': 'warn',
+    'no-conflicting-classes': 'warn',
     'enforce-logical-properties': 'off',
     ...options.rules
   } satisfies NuxtUIESLintOptions['rules']
@@ -224,6 +227,7 @@ export default function nuxtUI(options: NuxtUIESLintOptions): Linter.Config[] {
     rules: {
       'better-tailwindcss/no-unknown-classes': [rules['no-unknown-classes'], { ignore: options.ignore ?? [] }],
       'better-tailwindcss/no-restricted-classes': [rules['no-palette-colors'], { restrict: paletteRestrictions(colors) }],
+      'better-tailwindcss/no-conflicting-classes': rules['no-conflicting-classes'],
       'better-tailwindcss/enforce-logical-properties': [rules['enforce-logical-properties'], { ignore: BLOCK_AXIS }]
     }
   }]
