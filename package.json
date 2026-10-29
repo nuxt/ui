@@ -273,7 +273,7 @@
     "embla-carousel-fade": "^8",
     "embla-carousel-vue": "^8",
     "embla-carousel-wheel-gestures": "^8",
-    "eslint-plugin-better-tailwindcss": "^4.10.0",
+    "eslint-plugin-better-tailwindcss": "^4.10",
     "joi": "^18",
     "superstruct": "^2",
     "tailwindcss": "^4.2",
