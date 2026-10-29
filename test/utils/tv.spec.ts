@@ -811,13 +811,35 @@ describe('tv theme sources', () => {
     expectTypeOf(selectTheme.defaultVariants.variant).toEqualTypeOf<'outline' | 'soft' | 'subtle' | 'ghost' | 'none'>()
   })
 
-  it('keeps a callback typed as a function when the base has no value for it', () => {
+  // Like `app.config.ui`
+  it('adds an extension\'s classes to the base\'s, a callback replacing them', () => {
+    const theme = extendTheme(buttonTheme, {
+      slots: { base: 'shadow-sm', label: () => 'truncate' },
+      variants: { variant: { soft: { base: 'ring' } } },
+      compoundVariants: [{ color: 'neutral', variant: 'solid', class: { base: 'shadow-none' } }],
+      defaultVariants: { variant: 'soft' }
+    })
+
+    expect(theme.slots.base).toEqual([buttonTheme.slots.base, 'shadow-sm'])
+    expect(theme.slots.label).toBe('truncate')
+    expect(theme.variants.variant.soft.base).toEqual([buttonTheme.variants.variant.soft.base, 'ring'])
+    expect(theme.compoundVariants).toEqual([{ color: 'neutral', variant: 'solid', class: { base: 'shadow-none' } }])
+    expect(theme.defaultVariants).toEqual({ ...buttonTheme.defaultVariants, variant: 'soft' })
+  })
+
+  it('gives a callback the classes of a previous extension as one string', () => {
+    const theme = extendTheme(extendTheme(buttonTheme, { slots: { label: 'select-none' } }), {
+      slots: { label: (classes: string) => classes.replace('select-none', 'line-clamp-2') }
+    })
+
+    expect(theme.slots.label).toBe('truncate line-clamp-2')
+  })
+
+  it('calls a callback with `undefined` when the base has no value for it', () => {
     const theme = extendTheme(buttonTheme, { variants: { tone: () => ({ soft: { base: 'opacity-75' } }) } })
     const check = (value: TVTheme) => value
 
-    // `defuFn` only calls a callback with a base value, so `tone` stays a function
-    expect(theme.variants.tone).toBeTypeOf('function')
-    // @ts-expect-error a variant group can't be a function
+    expect(theme.variants.tone).toEqual({ soft: { base: 'opacity-75' } })
     check(theme)
   })
 

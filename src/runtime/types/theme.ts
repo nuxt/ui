@@ -3,6 +3,16 @@ import type * as ui from '#build/ui'
 import type icons from '../theme/icons'
 import type * as ComponentTypes from './index'
 
+/**
+ * The themes of your own components, by the name they're read under, so their
+ * `app.config.ui`, `<UTheme :ui>` and `<UTheme :variants>` keys are typed:
+ * `declare module '@nuxt/ui' { interface CustomThemes { acmeStat: typeof theme } }`.
+ * Their `<UTheme :props>` keys go in `ThemeDefaults`.
+ */
+export interface CustomThemes {}
+
+type AllThemes = typeof ui & CustomThemes
+
 type ThemeSlotOverrides<T> = T extends { slots: infer S extends Record<string, any> }
   ? { [K in keyof S]?: SlotClass }
   : { [K in keyof T]?: T[K] extends any[] ? SlotClass : T[K] extends Record<string, any> ? ThemeSlotOverrides<T[K]> : SlotClass }
@@ -13,7 +23,7 @@ type ThemeSlotOverrides<T> = T extends { slots: infer S extends Record<string, a
  * scope class overrides without touching component prop defaults.
  */
 export type ThemeUI = {
-  [K in keyof typeof ui]?: ThemeSlotOverrides<(typeof ui)[K]>
+  [K in keyof AllThemes]?: ThemeSlotOverrides<AllThemes[K]>
 }
 
 /**
@@ -22,9 +32,9 @@ export type ThemeUI = {
  * `:variants` prop on `<UTheme>`.
  */
 export type ThemeVariants = {
-  [K in keyof typeof ui]?: K extends 'prose'
-    ? { [P in keyof (typeof ui)[K]]?: TVVariants<(typeof ui)[K][P]> }
-    : TVVariants<(typeof ui)[K]>
+  [K in keyof AllThemes]?: K extends 'prose'
+    ? { [P in keyof AllThemes[K]]?: TVVariants<AllThemes[K][P]> }
+    : TVVariants<AllThemes[K]>
 }
 
 /**
