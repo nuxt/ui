@@ -92,13 +92,13 @@ export interface ModuleOptions {
 }
 
 /**
- * Whether an `eslint.config` in one of these directories already registers `eslint-plugin-better-tailwindcss`.
+ * Whether the nearest `eslint.config` in these directories, the one ESLint uses, already registers `eslint-plugin-better-tailwindcss`.
  */
 async function hasOwnESLintSetup(dirs: string[]) {
   for (const dir of new Set(dirs)) {
     const path = await findPath(join(dir, 'eslint.config'), { extensions: ['.js', '.mjs', '.cjs', '.ts', '.mts', '.cts'] })
-    if (path && (await readFile(path, 'utf-8')).includes('eslint-plugin-better-tailwindcss')) {
-      return true
+    if (path) {
+      return (await readFile(path, 'utf-8')).includes('eslint-plugin-better-tailwindcss')
     }
   }
   return false
