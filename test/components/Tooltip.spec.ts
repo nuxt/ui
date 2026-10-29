@@ -83,7 +83,7 @@ describe('Tooltip', () => {
   it.each([
     ['Checkbox', Checkbox],
     ['Switch', Switch]
-  ])('opens when hovering the %s label', async (_, component) => {
+  ])('opens when hovering the %s label', async (name, component) => {
     const wrapper = await mountSuspended(defineComponent({
       setup: () => () => h(TooltipProvider, { delayDuration: 0 }, {
         default: () => h(Tooltip, { text: 'Help', portal: false }, {
@@ -92,7 +92,7 @@ describe('Tooltip', () => {
       })
     }), { attachTo: document.body })
 
-    await wrapper.find('[data-slot="label"]').trigger('pointermove', { pointerType: 'mouse' })
+    await wrapper.find(`[data-slot="${name.toLowerCase()}-label"]`).trigger('pointermove', { pointerType: 'mouse' })
 
     await vi.waitFor(() => expect(wrapper.find('[role="tooltip"]').exists()).toBe(true))
     wrapper.unmount()

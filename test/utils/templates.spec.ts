@@ -209,3 +209,11 @@ describe('static css', () => {
     expect(accent).toContain(`--ui-accent-text-contrast: var(--ui-${color}-text-contrast`)
   })
 })
+
+describe('regeneration on file changes', () => {
+  it('recompiles no template when a file changes', () => {
+    const templates = getTemplates({ ...defaultOptions } as any, getDefaultConfig(), undefined, resolve)
+
+    expect(templates.filter(template => !Array.isArray(template.dependsOn) || template.dependsOn.length).map(template => template.filename)).toEqual([])
+  })
+})

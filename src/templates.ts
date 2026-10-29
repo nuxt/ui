@@ -36,6 +36,8 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
       templates.push({
         filename: `ui/${filename}.ts`,
         write: true,
+        // Built from the module options alone, so Nuxt can skip it when a file is edited
+        dependsOn: [],
         getContents: () => `export { default } from ${JSON.stringify(`${themeDir}/${filename}`)}\n`
       })
     }
@@ -51,6 +53,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     templates.push({
       filename: `ui/${path}/index.ts`,
       write: true,
+      dependsOn: [],
       getContents: () => Object.keys(themeProse).map(component => `export { default as ${component} } from './${kebabCase(component)}'`).join('\n')
     })
   }
@@ -220,6 +223,8 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   templates.push({
     filename: 'ui.css',
     write: true,
+    // With `componentDetection`, the dev watcher in `addTemplates` regenerates it on its own
+    dependsOn: [],
     getContents: ({ app }) => generateSources(app)
   })
 
@@ -229,6 +234,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   templates.push({
     filename: 'ui/detected.ts',
     write: true,
+    dependsOn: [],
     getContents: async ({ app }) => {
       if (!options.componentDetection || !isDev()) {
         return 'export const themes = null as Set<string> | null\nexport default null as Set<string> | null\n'
@@ -269,6 +275,7 @@ export default detected as Set<string> | null
   templates.push({
     filename: 'ui.base.css',
     write: true,
+    dependsOn: [],
     getContents: async () => {
       const prefix = options.tailwindPrefix
       if (!prefix) {
@@ -295,12 +302,14 @@ export default detected as Set<string> | null
   templates.push({
     filename: 'ui.static.css',
     write: true,
+    dependsOn: [],
     getContents: () => ''
   })
 
   templates.push({
     filename: 'ui/index.ts',
     write: true,
+    dependsOn: [],
     getContents: () => [
       ...Object.keys(theme).map(component => `export { default as ${component} } from './${kebabCase(component)}'`),
       ...(hasContent ? Object.keys(themeContent).map(component => `export { default as ${component} } from './content/${kebabCase(component)}'`) : []),
@@ -310,6 +319,7 @@ export default detected as Set<string> | null
 
   templates.push({
     filename: 'types/ui.d.ts',
+    dependsOn: [],
     getContents: () => {
       const iconKeys = Object.keys(uiConfig?.icons || {})
       const iconUnion = iconKeys.length ? iconKeys.map(i => JSON.stringify(i)).join(' | ') : 'string'
@@ -350,12 +360,16 @@ export {}
   templates.push({
     filename: 'ui-image-component.ts',
     write: true,
+    // `app.components` only changes when a file is added or removed
+    dependsOn: [],
     getContents: ({ app }) => {
       const image = app?.components?.find(c => c.pascalName === 'NuxtImg' && !/nuxt(?:-nightly)?\/dist\/app/.test(c.filePath))
 
       return [
         image ? genExport(image.filePath, [{ name: image.export, as: 'default' }]) : 'export default "img"',
-        !!nuxt && hasNuxtModule('@nuxt/image', nuxt) ? `export { useImage } from '#imports'` : 'export const useImage = undefined as undefined | (() => { options: { provider?: string } })'
+        // an import, not a re-export: the imports plugin only rewrites `import ... from '#imports'`,
+        // a re-export would bundle every side-effectful module behind `#imports`
+        !!nuxt && hasNuxtModule('@nuxt/image', nuxt) ? `import { useImage } from '#imports'\nexport { useImage }` : 'export const useImage = undefined as undefined | (() => { options: { provider?: string } })'
       ].join('\n')
     }
   })
