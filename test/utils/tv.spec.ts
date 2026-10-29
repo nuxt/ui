@@ -839,6 +839,7 @@ describe('tv theme sources', () => {
     const theme = extendTheme(buttonTheme, { variants: { variant: { solid: '' } } })
 
     expect(theme.variants.variant.solid).toEqual(buttonTheme.variants.variant.solid)
+    expectTypeOf(theme.variants.variant.solid).toHaveProperty('base')
   })
 
   it('calls a callback with `undefined` when the base has no value for it', () => {
