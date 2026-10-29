@@ -19,24 +19,41 @@ describe('i18n plugin', () => {
     expect(resolveLocaleKey(locale, keys)).toBe(key)
   })
 
-  it('imports only the configured locales', () => {
+  it('lazy loads only the configured locales', () => {
     const contents = generateI18nPlugin(['en', { code: 'fr' }, { code: 'pt-BR', language: 'pt-BR' }, 'en-US', 'xx'], keys, '/runtime')
 
     expect(contents).toMatchInlineSnapshot(`
-      "import { computed, unref } from "vue";
+      "import { computed, shallowReactive, unref } from "vue";
       import { defineNuxtPlugin } from "#app/nuxt";
       import { localeContextInjectionKey } from "/runtime/composables/useLocale";
       import en from "/runtime/locale/en";
-      import fr from "/runtime/locale/fr";
-      import pt_br from "/runtime/locale/pt_br";
       const locales = {
-        en: en,
-        fr: fr,
-        "pt-BR": pt_br,
-        "en-US": en
+        en: "en",
+        fr: "fr",
+        "pt-BR": "pt_br",
+        "en-US": "en"
       }
-      export default defineNuxtPlugin((nuxtApp) => {
-        nuxtApp.vueApp.provide(localeContextInjectionKey, computed(() => locales[unref(nuxtApp.$i18n?.locale)]))
+      const loaders = {
+        fr: () => import("/runtime/locale/fr"),
+        pt_br: () => import("/runtime/locale/pt_br")
+      }
+      export default defineNuxtPlugin(async (nuxtApp) => {
+        const loaded = shallowReactive({ en })
+        const load = async (code) => {
+          const key = locales[code]
+          if (key && !loaded[key]) {
+            loaded[key] = (await loaders[key]()).default
+          }
+        }
+        // Load the next locale before \`@nuxtjs/i18n\` switches to it
+        nuxtApp.hook('i18n:beforeLocaleSwitch', ({ newLocale }) => load(newLocale))
+        nuxtApp.vueApp.provide(localeContextInjectionKey, computed(() => {
+          const code = unref(nuxtApp.$i18n?.locale)
+          // A locale set without the hook, or changed by a later one
+          load(code)
+          return loaded[locales[code]]
+        }))
+        await load(unref(nuxtApp.$i18n?.locale))
       })"
     `)
   })

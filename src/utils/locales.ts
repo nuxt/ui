@@ -1,5 +1,5 @@
 import { readdirSync } from 'node:fs'
-import { genImport, genObjectFromRawEntries } from 'knitwork'
+import { genDynamicImport, genImport, genObjectFromRawEntries, genString } from 'knitwork'
 import { join } from 'pathe'
 
 export type I18nLocale = string | { code: string, language?: string }
@@ -29,7 +29,7 @@ export function resolveLocaleKey(locale: I18nLocale, keys: string[]): string | u
 }
 
 export function generateI18nPlugin(locales: I18nLocale[], keys: string[], runtimeDir: string): string {
-  const imports = new Set<string>()
+  const loaders = new Map<string, string>()
   const entries: [string, string][] = []
 
   for (const locale of locales) {
@@ -38,18 +38,37 @@ export function generateI18nPlugin(locales: I18nLocale[], keys: string[], runtim
       continue
     }
 
-    imports.add(key)
-    entries.push([typeof locale === 'string' ? locale : locale.code, key])
+    // `en` is already in the entry through `useLocale`
+    if (key !== 'en') {
+      loaders.set(key, genDynamicImport(join(runtimeDir, 'locale', key)))
+    }
+    entries.push([typeof locale === 'string' ? locale : locale.code, genString(key)])
   }
 
   return [
-    genImport('vue', ['computed', 'unref']),
+    genImport('vue', ['computed', 'shallowReactive', 'unref']),
     genImport('#app/nuxt', ['defineNuxtPlugin']),
     genImport(join(runtimeDir, 'composables/useLocale'), ['localeContextInjectionKey']),
-    ...[...imports].map(key => genImport(join(runtimeDir, 'locale', key), key)),
+    genImport(join(runtimeDir, 'locale/en'), 'en'),
     `const locales = ${genObjectFromRawEntries(entries)}`,
-    `export default defineNuxtPlugin((nuxtApp) => {`,
-    `  nuxtApp.vueApp.provide(localeContextInjectionKey, computed(() => locales[unref(nuxtApp.$i18n?.locale)]))`,
+    `const loaders = ${genObjectFromRawEntries([...loaders])}`,
+    `export default defineNuxtPlugin(async (nuxtApp) => {`,
+    `  const loaded = shallowReactive({ en })`,
+    `  const load = async (code) => {`,
+    `    const key = locales[code]`,
+    `    if (key && !loaded[key]) {`,
+    `      loaded[key] = (await loaders[key]()).default`,
+    `    }`,
+    `  }`,
+    `  // Load the next locale before \`@nuxtjs/i18n\` switches to it`,
+    `  nuxtApp.hook('i18n:beforeLocaleSwitch', ({ newLocale }) => load(newLocale))`,
+    `  nuxtApp.vueApp.provide(localeContextInjectionKey, computed(() => {`,
+    `    const code = unref(nuxtApp.$i18n?.locale)`,
+    `    // A locale set without the hook, or changed by a later one`,
+    `    load(code)`,
+    `    return loaded[locales[code]]`,
+    `  }))`,
+    `  await load(unref(nuxtApp.$i18n?.locale))`,
     `})`
   ].join('\n')
 }
