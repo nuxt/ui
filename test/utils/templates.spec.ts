@@ -211,9 +211,11 @@ describe('static css', () => {
 })
 
 describe('regeneration on file changes', () => {
-  it('recompiles no template when a file changes', () => {
+  it('recompiles no template when a source file changes', () => {
     const templates = getTemplates({ ...defaultOptions } as any, getDefaultConfig(), undefined, resolve)
+    const recompiles = (path: string) => templates.filter(({ dependsOn }) => typeof dependsOn === 'function' ? dependsOn({ event: 'change', path }, {} as any) : dependsOn?.length !== 0).map(template => template.filename)
 
-    expect(templates.filter(template => !Array.isArray(template.dependsOn) || template.dependsOn.length).map(template => template.filename)).toEqual([])
+    expect(recompiles('/app/pages/index.vue')).toEqual([])
+    expect(recompiles('/app/assets/css/main.css')).toEqual(['types/ui.d.ts'])
   })
 })
