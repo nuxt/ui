@@ -14,8 +14,8 @@ export interface NuxtUIESLintOptions {
    */
   files?: string[]
   /**
-   * The palette each color alias points at, `{ error: 'red' }`, on top of the defaults.
-   * The Nuxt module reads them from the `ui.colors` of your `app.config.ts`.
+   * The palette each color alias points at, `{ error: 'red' }`. Read from the
+   * `@plugin "@nuxt/ui/colors"` block of `entryPoint` when left out.
    */
   colors?: Record<string, string>
   /**
@@ -39,18 +39,4 @@ export interface NuxtUIESLintOptions {
      */
     'enforce-logical-properties'?: Severity
   }
-}
-
-/**
- * The `ui.colors` written in an `app.config.ts`, `{ primary: 'blue' }`. The file is
- * only evaluated at runtime, so a value that isn't a string literal is left out.
- */
-export function readAppConfigColors(code: string): Record<string, string> {
-  // Strings are matched first so a `//` inside one, like a URL, isn't read as a comment
-  const block = code.replace(/(["'`])(?:\\.|(?!\1)[^\\])*\1|\/\*[\s\S]*?\*\/|\/\/.*$/gm, match => match[0] === '/' ? '' : match).match(/\bcolors\s*:\s*\{([^{}]*)\}/)?.[1]
-  const colors: Record<string, string> = {}
-  for (const [, alias, palette] of block?.matchAll(/(?:^|[{,])\s*["'`]?([\w-]+)["'`]?\s*:\s*["'`]([\w-]+)["'`]\s*(?=,|$)/g) ?? []) {
-    colors[alias!] = palette!
-  }
-  return colors
 }
