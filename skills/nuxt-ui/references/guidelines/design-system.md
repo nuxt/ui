@@ -152,7 +152,7 @@ Override theme **slots** on a single instance — wins over global config and va
 
 Rules for `ui` overrides:
 - **Prefer `defaultVariants`** over slot class overrides when possible (e.g., changing default button variant/size).
-- **Don't duplicate default classes** — check the theme file first to see what's already there.
+- **Don't duplicate default classes** — check the theme first (`get-component-theme` or the theme file) to see what's already there.
 - Border radius defaults come from `--ui-radius`, but you can override with `rounded-*` classes in `ui` or `class` when you need a specific radius on a component.
 
 ### `class` prop
@@ -165,7 +165,9 @@ Override the **root** (or `base`) slot only — simpler than `ui` for single-slo
 
 ### Finding slot names
 
-Read the theme file for any component in `node_modules/@nuxt/ui/dist/runtime/theme/<component>.js`, with `prose/` and `content/` sub-directories for those components.
+Call the MCP `get-component-theme` tool with the component name. It returns every slot with its default classes and `data-slot` attribute, the variants and their values, `defaultVariants`, `compoundVariants`, and the CSS variables the classes read and set, like `--ui-control-px` or `--ui-accent-bg-soft`. Pass `full: true` to also get the classes of each variant value. A slot without `dataSlot` styles a child component or renders no element of its own.
+
+Without the MCP, read the theme file for any component in `node_modules/@nuxt/ui/dist/runtime/theme/<component>.js`, with `prose/` and `content/` sub-directories for those components.
 
 These files show every available slot name, variant combination, and default class. A theme that extends another, like Select with `extendTheme(input, {...})`, only holds its own changes, so read the one it extends too.
 
