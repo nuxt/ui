@@ -34,7 +34,7 @@ type AppConfigUI = {
   unstyled?: boolean
 } & TVConfig<typeof ui>
 
-export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode' | 'content'> {
+export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode' | 'content' | 'eslint'> {
   /** Whether to generate declaration files for auto-imported components. */
   dts?: boolean
   /**

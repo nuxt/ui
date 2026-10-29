@@ -5,7 +5,7 @@ import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImpo
 import { IconUsageScanner } from '@nuxt/icon/utils'
 import { createUnplugin } from 'unplugin'
 import type { HookResult, ModuleDependencies } from '@nuxt/schema'
-import type { NuxtUIESLintOptions } from './eslint'
+import type { NuxtUIESLintOptions } from './utils/eslint'
 import { addTemplates } from './templates'
 import { publicComposables } from './imports'
 import { defaultOptions, getDefaultConfig } from './utils/defaults'
@@ -226,8 +226,11 @@ export default defineNuxtModule<ModuleOptions>({
         if (options.eslint) {
           logger.warn('Nuxt UI `eslint` needs the `@nuxt/eslint` module and `eslint-plugin-better-tailwindcss`.')
         }
-      } else if (options.eslint === undefined && await hasOwnESLintSetup([nuxt.options.rootDir, nuxt.options.workspaceDir])) {
+      } else if (await hasOwnESLintSetup([nuxt.options.rootDir, nuxt.options.workspaceDir])) {
         // The app registers the plugin itself: a second instance makes ESLint fail, so leave its config alone
+        if (options.eslint) {
+          logger.warn('Nuxt UI `eslint` is skipped: your `eslint.config` already registers `eslint-plugin-better-tailwindcss`, remove it to use this config.')
+        }
       } else {
         // The stylesheet listed in `css` that imports Tailwind CSS, not the one it may delegate to
         let entryPoint = eslintOptions.entryPoint && await resolvePath(eslintOptions.entryPoint)

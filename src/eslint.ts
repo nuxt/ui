@@ -3,47 +3,9 @@ import { resolve } from 'pathe'
 import type { Linter } from 'eslint'
 import betterTailwindcss from 'eslint-plugin-better-tailwindcss'
 import { getDefaultSelectors } from 'eslint-plugin-better-tailwindcss/defaults'
+import type { NuxtUIESLintOptions } from './utils/eslint'
 
-type Severity = 'off' | 'warn' | 'error'
-
-export interface NuxtUIESLintOptions {
-  /**
-   * The stylesheet that imports `tailwindcss` and `@nuxt/ui`, so the classes
-   * it adds (semantic tokens, color aliases, your own `@theme`) are known.
-   */
-  entryPoint: string
-  /**
-   * The files to lint.
-   * @defaultValue ['**\/*.vue', '**\/*.{js,mjs,ts,mts,jsx,tsx}']
-   */
-  files?: string[]
-  /**
-   * The palette each color alias points at, `{ error: 'red' }`. Read from the
-   * `@plugin "@nuxt/ui/colors"` block of `entryPoint` when left out.
-   */
-  colors?: Record<string, string>
-  /**
-   * Classes `no-unknown-classes` leaves alone, as regular expressions.
-   */
-  ignore?: string[]
-  rules?: {
-    /**
-     * Classes the stylesheet doesn't generate. Off by default: classes styled in
-     * `<style>` blocks or your own CSS are unknown too, list them in `ignore`.
-     * @defaultValue 'off'
-     */
-    'no-unknown-classes'?: Severity
-    /** Raw palette colors (`text-gray-500`) and hardcoded colors (`bg-[#000]`). */
-    'no-palette-colors'?: Severity
-    /** Classes that set the same property in the same list (`p-2 p-4`), where the stylesheet order decides which wins. */
-    'no-conflicting-classes'?: Severity
-    /**
-     * Physical classes on the inline axis (`ml-2`, `left-0`, `text-left`), for apps that support RTL.
-     * @defaultValue 'off'
-     */
-    'enforce-logical-properties'?: Severity
-  }
-}
+export type { NuxtUIESLintOptions }
 
 const DEFAULT_COLORS: Record<string, string> = {
   primary: 'sky',
@@ -68,7 +30,7 @@ type Shades = Record<number, string | string[]>
 // The neutral shade each semantic token resolves to (`runtime/css/base.css`), in light mode and under `dark:`.
 // A shade between two tokens suggests both, a shade no token is close to falls back to the full list.
 const TEXT_SHADES: Record<'light' | 'dark', Shades> = {
-  light: { 50: 'faint', 100: 'faint', 200: 'faint', 300: 'faint', 400: 'faint', 500: 'muted', 600: ['muted', 'default'], 700: 'default', 800: ['default', 'strong'], 900: 'strong', 950: 'strong' },
+  light: { 50: 'contrast', 100: 'contrast', 300: 'faint', 400: 'faint', 500: 'muted', 600: ['muted', 'default'], 700: 'default', 800: ['default', 'strong'], 900: 'strong', 950: 'strong' },
   dark: { 50: 'strong', 100: 'strong', 200: 'default', 300: ['default', 'muted'], 400: 'muted', 500: 'faint', 600: 'faint', 700: 'faint', 900: 'contrast', 950: 'contrast' }
 }
 const BG_SHADES: Record<'light' | 'dark', Shades> = {
@@ -110,7 +72,11 @@ function readColors(entryPoint: string): Record<string, string> {
 }
 
 function paletteRestrictions(colors: Record<string, string>) {
-  const aliasOf = Object.fromEntries(Object.entries(colors).map(([alias, palette]) => [palette, alias]))
+  // The first alias wins when two point at the same palette, `primary` before the others
+  const aliasOf: Record<string, string> = {}
+  for (const [alias, palette] of Object.entries(colors)) {
+    aliasOf[palette] ??= alias
+  }
   const restrict: { pattern: string, message: string }[] = []
 
   const grays = GRAYS.join('|')
@@ -119,7 +85,7 @@ function paletteRestrictions(colors: Record<string, string>) {
     for (const [shade, tokens] of Object.entries(modes.dark)) {
       restrict.push({
         pattern: `^((?:\\S*:)?)dark:((?:\\S*:)?)(!?)(${utility})-(?:${grays})-${shade}((?:\\/\\S+)?!?)$`,
-        message: `"$0" uses a raw palette color. Use ${[tokens].flat().map(token => `\`$1$2$3$4-${token}$5\``).join(' or ')} in place of it and its light mode class, the token follows the color mode.`
+        message: `"$0" uses a raw palette color. In dark mode it's ${[tokens].flat().map(token => `\`$1$2$3$4-${token}$5\``).join(' or ')}. When its light mode class maps to the same token, use the token for both, it follows the color mode.`
       })
     }
     for (const [shade, tokens] of Object.entries(modes.light)) {
@@ -143,9 +109,9 @@ function paletteRestrictions(colors: Record<string, string>) {
   for (const hue of HUES) {
     const alias = aliasOf[hue]
     restrict.push({
-      pattern: CLASS(COLOR_UTILITY, hue),
+      pattern: `^((?:\\S*:)?!?-?)(${COLOR_UTILITY})-${hue}((?:-\\d{2,3})?(?:\\/\\S+)?!?)$`,
       message: alias
-        ? `"$0" uses a raw palette color. \`${alias}\` points at \`${hue}\`, use \`$1-${alias}\` instead.`
+        ? `"$0" uses a raw palette color. \`${alias}\` points at \`${hue}\`, use \`$1$2-${alias}$3\` instead.`
         : `"$0" uses a raw palette color. Point a color alias at \`${hue}\` in \`@nuxt/ui/colors\` and use the alias instead.`
     })
   }
