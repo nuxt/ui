@@ -9,7 +9,6 @@ import type { NuxtUIESLintOptions } from './utils/eslint'
 import { addTemplates } from './templates'
 import { publicComposables } from './imports'
 import { defaultOptions, getDefaultConfig } from './utils/defaults'
-import { readAppConfigColors } from './utils/eslint'
 import { getClientBundleIcons } from './utils/icons'
 import { generateI18nPlugin, getLocaleKeys } from './utils/locales'
 import type { I18nLocale } from './utils/locales'
@@ -66,8 +65,9 @@ export interface ModuleOptions {
 
   /**
    * Add the `@nuxt/ui/eslint` config to the one `@nuxt/eslint` generates, with
-   * your stylesheet as its entry point. Needs `@nuxt/eslint` and `eslint-plugin-better-tailwindcss`.
-   * @defaultValue false
+   * your stylesheet as its entry point. On when `@nuxt/eslint` and
+   * `eslint-plugin-better-tailwindcss` are both installed, `false` turns it off.
+   * @defaultValue undefined
    * @see https://ui.nuxt.com/docs/getting-started/integrations/eslint/nuxt
    */
   eslint?: boolean | Partial<NuxtUIESLintOptions>
@@ -320,34 +320,30 @@ export default defineNuxtModule<ModuleOptions>({
       )
     )
 
-    if (options.eslint) {
+    if (options.eslint !== false) {
       const eslintOptions = typeof options.eslint === 'object' ? options.eslint : {}
-      if (!hasNuxtModule('@nuxt/eslint') || !await tryResolveModule('eslint-plugin-better-tailwindcss', directoryToURL(nuxt.options.rootDir))) {
-        logger.warn('Nuxt UI `eslint` needs the `@nuxt/eslint` module and `eslint-plugin-better-tailwindcss`.')
+      const hasPlugin = hasNuxtModule('@nuxt/eslint') && !!await tryResolveModule('eslint-plugin-better-tailwindcss', directoryToURL(nuxt.options.rootDir))
+      if (!hasPlugin) {
+        if (options.eslint) {
+          logger.warn('Nuxt UI `eslint` needs the `@nuxt/eslint` module and `eslint-plugin-better-tailwindcss`.')
+        }
       } else if (await hasOwnESLintSetup([nuxt.options.rootDir, nuxt.options.workspaceDir])) {
-        // A second instance of the plugin makes ESLint fail, so leave the app's config alone
-        logger.warn('Nuxt UI `eslint` is skipped: your `eslint.config` already registers `eslint-plugin-better-tailwindcss`, remove it to use this config.')
+        // The app registers the plugin itself: a second instance makes ESLint fail, so leave its config alone
+        if (options.eslint) {
+          logger.warn('Nuxt UI `eslint` is skipped: your `eslint.config` already registers `eslint-plugin-better-tailwindcss`, remove it to use this config.')
+        }
       } else {
         // The stylesheet listed in `css` that imports Tailwind CSS, not the one it may delegate to
         let entryPoint = eslintOptions.entryPoint && await resolvePath(eslintOptions.entryPoint)
-        for (const entry of entryPoint ? [] : nuxt.options.css) {
-          const path = typeof entry === 'string' && await resolvePath(entry)
-          if (path && /@import\s+["']tailwindcss["']/.test(await readFile(path, 'utf-8').catch(() => ''))) {
-            entryPoint = path
+        for (const stylesheet of entryPoint ? [] : stylesheets) {
+          if (await findTailwindPrefix([stylesheet])) {
+            entryPoint = stylesheet
             break
           }
         }
         if (!entryPoint) {
           logger.warn('Nuxt UI `eslint` needs a stylesheet in `css` that imports Tailwind CSS.')
         } else {
-          // `ui.colors` is set at runtime in `app.config.ts`: read what each layer writes, the app's own last so it wins
-          const colors: Record<string, string> = { ...nuxt.options.appConfig.ui?.colors as Record<string, string> }
-          for (const layer of [...getLayerDirectories(nuxt)].reverse()) {
-            const path = await findPath(join(layer.app, 'app.config'))
-            if (path) {
-              Object.assign(colors, readAppConfigColors(await readFile(path, 'utf-8')))
-            }
-          }
           // Through the package export, `./eslint.mjs` next to `src/module.ts` doesn't exist when the module is stubbed
           const config = await tryResolveModule(`${name}/eslint`, import.meta.url) ?? resolve('./eslint.mjs')
           // Declared by `@nuxt/eslint`, called again on `builder:generateApp` so the order of the modules doesn't matter
@@ -356,7 +352,7 @@ export default defineNuxtModule<ModuleOptions>({
               name: 'nuxt-ui',
               getConfigs: () => ({
                 imports: [{ from: config, name: 'default', as: 'nuxtUI' }],
-                configs: [`...nuxtUI(${JSON.stringify({ ...eslintOptions, colors: { ...colors, ...eslintOptions.colors }, entryPoint })})`]
+                configs: [`...nuxtUI(${JSON.stringify({ ...eslintOptions, entryPoint })})`]
               })
             })
           })
