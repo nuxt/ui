@@ -128,17 +128,19 @@ const rootRef = useTemplateRef('rootRef')
 const wrapperRef = useTemplateRef('wrapperRef')
 const height = ref(0)
 
-// The Toaster sets an explicit height so the stack can animate it, measure without it to keep the natural one.
+// The Toaster clamps the height with `min-height` and `max-height` so the stack can animate it, measure without them to keep the natural one.
 function measure() {
   const el = rootRef.value?.$el as HTMLElement | undefined
   if (!el?.style) {
     return
   }
 
-  const style = el.style.height
-  el.style.height = 'auto'
+  const { minHeight, maxHeight } = el.style
+  el.style.minHeight = '0'
+  el.style.maxHeight = 'none'
   height.value = el.offsetHeight
-  el.style.height = style
+  el.style.minHeight = minHeight
+  el.style.maxHeight = maxHeight
 }
 
 onMounted(measure)

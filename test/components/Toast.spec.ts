@@ -128,6 +128,26 @@ describe('Toast', () => {
     toast.clear()
   })
 
+  it('keeps each toast in place when they close in the same tick', async () => {
+    const toast = useToast()
+    toast.clear()
+
+    const wrapper = await mountSuspended(Toaster, { props: { portal: false, expand: false } })
+    toast.add({ title: 'Back' })
+    toast.add({ title: 'Front' })
+
+    await vi.waitFor(() => expect(wrapper.findAll('li[data-slot="toaster-base"]')).toHaveLength(2), { timeout: 4000 })
+    for (const { id } of [...toast.toasts.value]) {
+      toast.remove(id)
+    }
+    await nextTick()
+
+    const [back] = wrapper.findAllComponents(Toast)
+    expect([back!.vm.$attrs['data-front'], (back!.vm.$attrs.style as Record<string, unknown>)['--before']]).toEqual([false, 1])
+
+    toast.clear()
+  })
+
   it('fades out the toasts behind the third one in the collapsed stack', async () => {
     const toast = useToast()
     toast.clear()

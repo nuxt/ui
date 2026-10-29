@@ -155,26 +155,33 @@ const isOpen = (index: number) => toasts.value[index]?.open !== false
 const height = computed(() => refs.value.reduce((acc, { height }, index) => isOpen(index) ? acc + height + 16 : acc, 0))
 const frontHeight = computed(() => refs.value.findLast((_, index) => isOpen(index))?.height || 0)
 
-// A closing toast keeps the place it had when it started leaving, the toasts closing after it don't move it.
-const closingPositions = new WeakMap<object, { before: number, offset: number }>()
+// A closing toast keeps the place it had while open, so the toasts closing with it and a hover don't move it while it leaves.
+const lastPositions = new Map<string | number, { collapsed: boolean, before: number, offset: number }>()
 
-function getPosition(index: number) {
-  const toast = toasts.value[index]!
-  const closing = closingPositions.get(toast)
-  if (closing) {
-    return closing
+const positions = computed(() => {
+  const ids = new Set(toasts.value.map(toast => toast.id))
+  for (const id of lastPositions.keys()) {
+    if (!ids.has(id)) {
+      lastPositions.delete(id)
+    }
   }
 
-  const position = {
-    before: toasts.value.slice(index + 1).filter(toast => toast.open !== false).length,
-    offset: refs.value.slice(index + 1).reduce((acc, { height }, i) => isOpen(index + 1 + i) ? acc + height + 16 : acc, 0)
-  }
-  if (toast.open === false) {
-    closingPositions.set(toast, position)
-  }
+  return toasts.value.map((toast, index) => {
+    const last = lastPositions.get(toast.id)
+    if (toast.open === false && last) {
+      return last
+    }
 
-  return position
-}
+    const position = {
+      collapsed: !expanded.value,
+      before: toasts.value.slice(index + 1).filter(toast => toast.open !== false).length,
+      offset: refs.value.slice(index + 1).reduce((acc, { height }, i) => isOpen(index + 1 + i) ? acc + height + 16 : acc, 0)
+    }
+    lastPositions.set(toast.id, position)
+
+    return position
+  })
+})
 </script>
 
 <template>
@@ -188,16 +195,16 @@ function getPosition(index: number) {
       :progress="props.progress"
       v-bind="omit(toast, ['id', 'close', '_duplicate', '_updated', '_animatedAt', 'onClick'])"
       :close="(toast.close as boolean)"
-      :data-collapsed="!expanded"
-      :data-front="!expanded && getPosition(index).before === 0"
-      :data-visible="expanded || getPosition(index).before < VISIBLE_TOASTS"
+      :data-collapsed="positions[index]!.collapsed"
+      :data-front="positions[index]!.collapsed && positions[index]!.before === 0"
+      :data-visible="!positions[index]!.collapsed || positions[index]!.before < VISIBLE_TOASTS"
       :data-pulsing="toast._duplicate ? (toast._duplicate % 2 === 0 ? 'even' : 'odd') : undefined"
       :style="{
         '--index': (index - toasts.length) + toasts.length,
-        '--before': getPosition(index).before,
-        '--offset': getPosition(index).offset,
-        '--scale': expanded ? '1' : 'calc(1 - var(--before) * var(--scale-factor))',
-        '--translate': expanded ? 'calc(var(--offset) * var(--translate-factor))' : 'calc(var(--before) * var(--gap))',
+        '--before': positions[index]!.before,
+        '--offset': positions[index]!.offset,
+        '--scale': positions[index]!.collapsed ? 'calc(1 - var(--before) * var(--scale-factor))' : '1',
+        '--translate': positions[index]!.collapsed ? 'calc(var(--before) * var(--gap))' : 'calc(var(--offset) * var(--translate-factor))',
         '--transform': 'translateY(var(--translate)) scale(var(--scale))'
       }"
       data-slot="toaster-base"
