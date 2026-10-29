@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs'
 import { resolve } from 'pathe'
 import type { Linter } from 'eslint'
 import betterTailwindcss from 'eslint-plugin-better-tailwindcss'
@@ -7,13 +8,13 @@ import type { NuxtUIESLintOptions } from './utils/eslint'
 export type { NuxtUIESLintOptions }
 
 const DEFAULT_COLORS: Record<string, string> = {
-  primary: 'green',
-  secondary: 'blue',
-  success: 'green',
+  primary: 'sky',
+  secondary: 'violet',
+  success: 'emerald',
   info: 'blue',
-  warning: 'yellow',
+  warning: 'amber',
   error: 'red',
-  neutral: 'slate'
+  neutral: 'gray'
 }
 
 // Tailwind's palettes, except `neutral`: Nuxt UI's alias takes over `--color-neutral-*`
@@ -26,19 +27,19 @@ const CLASS = (utility: string, color: string) => `^(?:\\S*:)?!?-?(${utility})-(
 
 type Shades = Record<number, string | string[]>
 
-// The neutral shade each semantic token resolves to (`runtime/index.css`), in light mode and under `dark:`.
+// The neutral shade each semantic token resolves to (`runtime/css/base.css`), in light mode and under `dark:`.
 // A shade between two tokens suggests both, a shade no token is close to falls back to the full list.
 const TEXT_SHADES: Record<'light' | 'dark', Shades> = {
-  light: { 50: 'inverted', 100: 'inverted', 300: 'dimmed', 400: 'dimmed', 500: 'muted', 600: 'toned', 700: 'default', 800: ['default', 'highlighted'], 900: 'highlighted', 950: 'highlighted' },
-  dark: { 50: 'highlighted', 100: 'highlighted', 200: 'default', 300: 'toned', 400: 'muted', 500: 'dimmed', 600: 'dimmed', 700: 'dimmed', 900: 'inverted', 950: 'inverted' }
+  light: { 50: 'contrast', 100: 'contrast', 300: 'faint', 400: 'faint', 500: 'muted', 600: ['muted', 'default'], 700: 'default', 800: ['default', 'strong'], 900: 'strong', 950: 'strong' },
+  dark: { 50: 'strong', 100: 'strong', 200: 'default', 300: ['default', 'muted'], 400: 'muted', 500: 'faint', 600: 'faint', 700: 'faint', 900: 'contrast', 950: 'contrast' }
 }
 const BG_SHADES: Record<'light' | 'dark', Shades> = {
-  light: { 50: 'muted', 100: 'elevated', 200: 'accented', 300: 'accented', 900: 'inverted', 950: 'inverted' },
-  dark: { 50: 'inverted', 100: 'inverted', 600: 'accented', 700: 'accented', 800: ['muted', 'elevated'], 900: 'default', 950: 'default' }
+  light: { 50: ['tint', 'soft'], 100: 'soft', 200: 'strong', 300: 'strong' },
+  dark: { 600: 'strong', 700: 'strong', 800: 'soft', 900: 'default', 950: 'default' }
 }
 const BORDER_SHADES: Record<'light' | 'dark', Shades> = {
-  light: { 50: 'default', 100: 'default', 200: 'default', 300: 'accented', 400: 'accented', 900: 'inverted', 950: 'inverted' },
-  dark: { 50: 'inverted', 100: 'inverted', 600: 'accented', 700: ['muted', 'accented'], 800: 'default', 900: 'default', 950: 'default' }
+  light: { 50: 'default', 100: 'default', 200: 'default', 300: 'strong', 400: 'strong' },
+  dark: { 600: 'strong', 700: 'strong', 800: 'default', 900: 'default', 950: 'default' }
 }
 const SHADE_TOKENS: [string, Record<'light' | 'dark', Shades>][] = [
   ['text', TEXT_SHADES],
@@ -49,11 +50,25 @@ const SHADE_TOKENS: [string, Record<'light' | 'dark', Shades>][] = [
 ]
 
 const GRAY_TOKENS: Record<string, string> = {
-  text: '`text-default`, `text-muted`, `text-dimmed`, `text-toned`, `text-highlighted` or `text-inverted`',
-  bg: '`bg-default`, `bg-muted`, `bg-elevated`, `bg-accented` or `bg-inverted`',
-  border: '`border-default`, `border-muted`, `border-accented` or `border-inverted`',
-  divide: '`divide-default`, `divide-muted`, `divide-accented` or `divide-inverted`',
-  ring: '`ring-default`, `ring-muted`, `ring-accented` or `ring-inverted`'
+  text: '`text-default`, `text-muted`, `text-faint`, `text-strong` or `text-contrast`',
+  bg: '`bg-default`, `bg-soft`, `bg-strong` or `bg-tint`',
+  border: '`border-default` or `border-strong`',
+  divide: '`divide-default` or `divide-strong`',
+  ring: '`ring-default` or `ring-strong`'
+}
+
+/**
+ * The palette each alias points at, from `@plugin "@nuxt/ui/colors" { primary: indigo; }`.
+ * Only the entry is read, not the stylesheets it imports.
+ */
+function readColors(entryPoint: string): Record<string, string> {
+  const css = readFileSync(entryPoint, 'utf8').replace(/\/\*[\s\S]*?\*\//g, '')
+  const block = css.match(/@plugin\s+["']@nuxt\/ui\/colors["']\s*\{([^}]*)\}/)?.[1]
+  const colors = { ...DEFAULT_COLORS }
+  for (const [, alias, palette] of block?.matchAll(/([\w-]+)\s*:\s*["']?([a-z]+)/g) ?? []) {
+    colors[alias!] = palette!
+  }
+  return colors
 }
 
 function paletteRestrictions(colors: Record<string, string>) {
@@ -97,7 +112,7 @@ function paletteRestrictions(colors: Record<string, string>) {
       pattern: `^((?:\\S*:)?!?-?)(${COLOR_UTILITY})-${hue}((?:-\\d{2,3})?(?:\\/\\S+)?!?)$`,
       message: alias
         ? `"$0" uses a raw palette color. \`${alias}\` points at \`${hue}\`, use \`$1$2-${alias}$3\` instead.`
-        : `"$0" uses a raw palette color. Point a color alias at \`${hue}\` in \`ui.colors\` and use the alias instead.`
+        : `"$0" uses a raw palette color. Point a color alias at \`${hue}\` in \`@nuxt/ui/colors\` and use the alias instead.`
     })
   }
 
@@ -119,7 +134,7 @@ const BLOCK_AXIS = [
   '(?:^|:)!?-?(?:left|right)-1/2$'
 ]
 
-// The `ui` of `app.config.ts` and of the Vite plugin. Only the paths that hold classes,
+// The `ui` of `app.config.ts`, of `app.use(ui, { ui })` and of the Vite plugin. Only the paths that hold classes,
 // minus the `*Size` slots which hold a size prop for a nested component.
 const APP_CONFIG_MATCHERS = [
   { type: 'objectValues', path: '^ui\\.(?:prose\\.)?[\\w-]+\\.slots(?!.*Size$).*$' },
@@ -131,9 +146,12 @@ const SELECTORS = [
   ...getDefaultSelectors(),
   // `:ui` on any component, `:ui` on `<UTheme>`
   { kind: 'attribute', name: '^v-bind:ui$', match: [{ type: 'objectValues' }] },
+  // `:variants` on `<UTheme>`, `{ button: { variant: { soft: { base } } } }`. The depth keeps
+  // other `:variants` out, like motion's.
+  { kind: 'attribute', name: '^v-bind:variants$', match: [{ type: 'objectValues', path: '^[\\w-]+\\.[\\w-]+\\.[\\w-]+\\.[\\w-]+$' }] },
   // `:props` on `<UTheme>`, `{ button: { ui: { base } } }`
   { kind: 'attribute', name: '^v-bind:props$', match: [{ type: 'objectValues', path: '^[\\w-]+\\.ui\\..*$' }] },
-  { kind: 'callee', name: '^(?:defineAppConfig|ui)$', match: APP_CONFIG_MATCHERS }
+  { kind: 'callee', name: '^(?:defineAppConfig|use|ui)$', match: APP_CONFIG_MATCHERS }
 ]
 
 /**
@@ -151,7 +169,7 @@ const SELECTORS = [
  */
 export default function nuxtUI(options: NuxtUIESLintOptions): Linter.Config[] {
   const entryPoint = resolve(options.entryPoint)
-  const colors = { ...DEFAULT_COLORS, ...options.colors }
+  const colors = options.colors ?? readColors(entryPoint)
   const rules = {
     'no-unknown-classes': 'off',
     'no-palette-colors': 'warn',

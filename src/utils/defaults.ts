@@ -18,5 +18,5 @@ export const defaultOptions = {
   componentDetection: true,
   prose: undefined,
   content: false,
-  eslint: false
+  eslint: undefined
 }
