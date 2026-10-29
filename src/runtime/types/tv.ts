@@ -1,3 +1,4 @@
+import type { AppConfig } from '@nuxt/schema'
 import type { ComponentOverrides } from '../utils/tv'
 
 /**
@@ -299,3 +300,12 @@ export type ComponentConfig<
   slots: ComponentSlots<T>
   ui: TVSlotFunctions<T & GetComponentAppConfig<A, U, K>>
 }
+
+/**
+ * `ComponentConfig` for a component styled with `useComponentTheme`, read from
+ * the app's config: `ComponentThemeConfig<typeof theme, 'acmeStat'>`. A
+ * `prose.<name>` key reads `app.config.ui.prose.<name>`.
+ */
+export type ComponentThemeConfig<T extends Record<string, any>, K extends string> = K extends `prose.${infer P}`
+  ? ComponentConfig<T, AppConfig, P, 'ui.prose'>
+  : ComponentConfig<T, AppConfig, K>

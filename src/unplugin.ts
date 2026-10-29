@@ -25,14 +25,14 @@ import IconsPlugin from './plugins/icons'
 import OptionalDepsPlugin from './plugins/optional-deps'
 
 import type { TVConfig, TVMergeConfig } from './runtime/types/tv'
-import type { ThemeDefaultVariants } from './runtime/types/theme'
+import type { CustomThemes, ThemeDefaultVariants } from './runtime/types/theme'
 
 type AppConfigUI = {
   icons?: Partial<typeof icons>
   tv?: TVMergeConfig
   defaultVariants?: ThemeDefaultVariants
   unstyled?: boolean
-} & TVConfig<typeof ui>
+} & TVConfig<typeof ui & CustomThemes>
 
 export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode' | 'content' | 'eslint'> {
   /** Whether to generate declaration files for auto-imported components. */
