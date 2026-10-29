@@ -146,7 +146,7 @@ function onFocusout(event: FocusEvent) {
 
 const refs = ref<{ height: number }[]>([])
 
-// The collapsed stack shows three toasts, the older ones fade out until the ones in front close.
+// The collapsed stack shows three toasts, the older ones wait hidden behind the third until the ones in front close.
 const VISIBLE_TOASTS = 3
 
 // A closing toast stays mounted until its exit ends, leave it out of the stack so the others move while it leaves.
@@ -201,7 +201,7 @@ const positions = computed(() => {
       :data-pulsing="toast._duplicate ? (toast._duplicate % 2 === 0 ? 'even' : 'odd') : undefined"
       :style="{
         '--index': (index - toasts.length) + toasts.length,
-        '--before': positions[index]!.before,
+        '--before': Math.min(positions[index]!.before, VISIBLE_TOASTS - 1),
         '--offset': positions[index]!.offset,
         '--scale': positions[index]!.collapsed ? 'calc(1 - var(--before) * var(--scale-factor))' : '1',
         '--translate': positions[index]!.collapsed ? 'calc(var(--before) * var(--gap))' : 'calc(var(--offset) * var(--translate-factor))',
