@@ -23,7 +23,7 @@ describe('i18n plugin', () => {
     const contents = generateI18nPlugin(['en', { code: 'fr' }, { code: 'pt-BR', language: 'pt-BR' }, 'en-US', 'xx'], keys, '/runtime')
 
     expect(contents).toMatchInlineSnapshot(`
-      "import { computed, shallowReactive, unref } from "vue";
+      "import { computed, shallowReactive, unref, watch } from "vue";
       import { defineNuxtPlugin } from "#app/nuxt";
       import { localeContextInjectionKey } from "/runtime/composables/useLocale";
       import en from "/runtime/locale/en";
@@ -47,12 +47,11 @@ describe('i18n plugin', () => {
         }
         // Load the next locale before \`@nuxtjs/i18n\` switches to it
         nuxtApp.hook('i18n:beforeLocaleSwitch', ({ newLocale }) => load(newLocale))
-        nuxtApp.vueApp.provide(localeContextInjectionKey, computed(() => {
-          const code = unref(nuxtApp.$i18n?.locale)
+        if (import.meta.client) {
           // A locale set without the hook, or changed by a later one
-          load(code)
-          return loaded[locales[code]]
-        }))
+          nuxtApp.hook('app:created', () => watch(() => unref(nuxtApp.$i18n?.locale), load, { immediate: true }))
+        }
+        nuxtApp.vueApp.provide(localeContextInjectionKey, computed(() => loaded[locales[unref(nuxtApp.$i18n?.locale)]]))
         await load(unref(nuxtApp.$i18n?.locale))
       })"
     `)
