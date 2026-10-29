@@ -147,7 +147,7 @@ onMounted(measure)
 useResizeObserver(wrapperRef, measure)
 
 // The leading content and the horizontal actions sit outside the wrapper, an update can change them without resizing it.
-watch([() => props.avatar, () => props.icon, () => props.actions, () => props.orientation], measure, { flush: 'post' })
+watch([() => props.avatar, () => props.icon, () => props.actions, () => props.orientation, () => props.close], measure, { flush: 'post' })
 
 defineExpose({
   height
