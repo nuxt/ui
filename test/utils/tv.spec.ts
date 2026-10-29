@@ -1,9 +1,10 @@
 import { describe, it, expect, expectTypeOf, vi } from 'vitest'
 import { reactive } from 'vue'
 import { tv, ComponentOverrides, engineFor } from '../../src/runtime/utils/tv'
-import type { ComponentConfig, TVTheme, VariantProps } from '../../src/runtime/types/tv'
+import type { ComponentConfig, ComponentThemeConfig, TVTheme, VariantProps } from '../../src/runtime/types/tv'
 import type { ThemeDefaultVariants } from '../../src/runtime/types/theme'
-import { extendTheme } from '../../src/runtime/utils/theme'
+import { defineTheme, extendTheme } from '../../src/runtime/utils/theme'
+import { colorVariant } from '../../src/runtime/theme/color'
 import buttonTheme from '../../src/runtime/theme/button'
 import selectTheme from '../../src/runtime/theme/select'
 import navigationMenuTheme from '../../src/runtime/theme/navigation-menu'
@@ -947,6 +948,14 @@ describe('tv added colors', () => {
     tv(buttonTheme)({ color: 'brand' })
     // @ts-expect-error not declared
     tv(buttonTheme)({ color: 'tertiary' })
+  })
+
+  it('types the colors an app declares on its own components', () => {
+    const theme = defineTheme({ slots: { root: '' }, variants: { color: colorVariant({ root: 'bg-accent' }) } })
+    type Tag = ComponentThemeConfig<typeof theme, 'acmeTag'>
+
+    expectTypeOf<Tag['variants']['color']>().toEqualTypeOf<'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral' | 'brand'>()
+    expect(tv(theme)({ color: 'brand' }).root()).toBe('[--ui-accent:var(--ui-brand)] bg-accent')
   })
 
   it('memoizes an added color like any value', () => {
