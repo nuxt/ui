@@ -38,7 +38,7 @@ export const WHEN_TO_USE_SECTION = {
     '',
     `- Read any documentation page as Markdown: append \`.md\` to its URL (\`${SITE_URL}/docs/components/button.md\`) or send \`Accept: text/markdown\`.`,
     `- Start from the Markdown sitemap at ${SITE_URL}/sitemap.md.`,
-    `- For component APIs (props, slots, events, examples), call the MCP server at \`${SITE_URL}/mcp\` (streamable HTTP) instead of scraping pages. Tools include \`search-components\`, \`get-component\`, \`get-component-metadata\`, \`get-example\` and \`search-icons\`.`,
+    `- For component APIs (props, slots, events, theme, examples), call the MCP server at \`${SITE_URL}/mcp\` (streamable HTTP) instead of scraping pages. Tools include \`search-components\`, \`get-component\`, \`get-component-metadata\`, \`get-component-theme\`, \`get-example\` and \`search-icons\`.`,
     `- For conventions and component selection guidance, load the agent skill at ${SITE_URL}/.well-known/skills/nuxt-ui/SKILL.md.`,
     `- For the machine-readable endpoint list, read ${SITE_URL}/openapi.json.`,
     '- Install with `npx nuxt module add ui` in a Nuxt app, or `npm install @nuxt/ui tailwindcss` plus the `@nuxt/ui/vite` plugin in a Vue app. Either way the CSS entry has to import Tailwind and Nuxt UI (`@import "tailwindcss"; @import "@nuxt/ui";`) and the app has to be wrapped in `UApp`. The installation guides below have the full steps.',
