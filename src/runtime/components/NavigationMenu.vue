@@ -287,6 +287,8 @@ const rootProps = useForwardProps(computed(() => ({
   unmountOnHide: props.unmountOnHide
 })), emits)
 const accordionProps = useForwardProps(reactivePick(props, 'collapsible', 'disabled', 'type', 'unmountOnHide'), emits)
+// Nested accordions keep their own state: `modelValue` only describes the top-level sections
+const childAccordionProps = useForwardProps(reactivePick(props, 'collapsible', 'disabled', 'type', 'unmountOnHide'))
 const contentProps = toRef(() => props.content)
 const viewportProps = toRef(() => props.viewport)
 const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : props.tooltip, { ...(props.orientation === 'vertical' && { delayDuration: 0, content: { side: 'right' } }) }) as TooltipProps)
@@ -512,7 +514,7 @@ function onLinkClick(e: Event) {
       <AccordionContent v-if="props.orientation === 'vertical' && item.children?.length && !props.collapsed" data-slot="content" :class="ui.content({ class: [props.ui?.content, item.ui?.content] })">
         <AccordionRoot
           v-bind="({
-            ...accordionProps,
+            ...childAccordionProps,
             defaultValue: getAccordionDefaultValue(item.children, level + 1, listIndex)
           } as AccordionRootProps)"
           as="ul"
