@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises'
 import { join, relative } from 'pathe'
 import { defu } from 'defu'
-import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addPluginTemplate, addBuildPlugin, findPath, getLayerDirectories, hasNuxtModule, logger, resolvePath } from '@nuxt/kit'
+import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addPluginTemplate, addBuildPlugin, findPath, getLayerDirectories, hasNuxtModule, logger, resolvePath, tryResolveModule, directoryToURL } from '@nuxt/kit'
 import { IconUsageScanner } from '@nuxt/icon/utils'
 import { createUnplugin } from 'unplugin'
 import type { HookResult, ModuleDependencies } from '@nuxt/schema'
@@ -83,8 +83,9 @@ export interface ModuleOptions {
 
   /**
    * Add the `@nuxt/ui/eslint` config to the one `@nuxt/eslint` generates, with
-   * your stylesheet as its entry point. Needs `eslint-plugin-better-tailwindcss`.
-   * @defaultValue false
+   * your stylesheet as its entry point. On when `@nuxt/eslint` and
+   * `eslint-plugin-better-tailwindcss` are both installed, `false` turns it off.
+   * @defaultValue undefined
    * @see https://ui.nuxt.com/docs/getting-started/integrations/eslint/nuxt
    */
   eslint?: boolean | Partial<NuxtUIESLintOptions>
@@ -205,31 +206,36 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, getDefaultConfig(options.tailwindPrefix)) as typeof nuxt.options.appConfig.ui
 
-    if (options.eslint) {
-      const eslintOptions = options.eslint === true ? {} : options.eslint
-      // The stylesheet listed in `css` that imports Tailwind CSS, not the one it may delegate to
-      let entryPoint = eslintOptions.entryPoint && await resolvePath(eslintOptions.entryPoint)
-      for (const stylesheet of entryPoint ? [] : stylesheets) {
-        if (await findTailwindPrefix([stylesheet])) {
-          entryPoint = stylesheet
-          break
+    if (options.eslint !== false) {
+      const eslintOptions = typeof options.eslint === 'object' ? options.eslint : {}
+      const hasPlugin = hasNuxtModule('@nuxt/eslint') && !!await tryResolveModule('eslint-plugin-better-tailwindcss', directoryToURL(nuxt.options.rootDir))
+      if (!hasPlugin) {
+        if (options.eslint) {
+          logger.warn('Nuxt UI `eslint` needs the `@nuxt/eslint` module and `eslint-plugin-better-tailwindcss`.')
         }
-      }
-      if (!hasNuxtModule('@nuxt/eslint')) {
-        logger.warn('Nuxt UI `eslint` needs the `@nuxt/eslint` module.')
-      } else if (!entryPoint) {
-        logger.warn('Nuxt UI `eslint` needs a stylesheet in `css` that imports Tailwind CSS.')
       } else {
-        // Declared by `@nuxt/eslint`, called again on `builder:generateApp` so the order of the modules doesn't matter
-        nuxt.hook('eslint:config:addons' as any, (addons: { name: string, getConfigs: () => unknown }[]) => {
-          addons.push({
-            name: 'nuxt-ui',
-            getConfigs: () => ({
-              imports: [{ from: resolve('./eslint.mjs'), name: 'default', as: 'nuxtUI' }],
-              configs: [`...nuxtUI(${JSON.stringify({ ...eslintOptions, entryPoint })})`]
+        // The stylesheet listed in `css` that imports Tailwind CSS, not the one it may delegate to
+        let entryPoint = eslintOptions.entryPoint && await resolvePath(eslintOptions.entryPoint)
+        for (const stylesheet of entryPoint ? [] : stylesheets) {
+          if (await findTailwindPrefix([stylesheet])) {
+            entryPoint = stylesheet
+            break
+          }
+        }
+        if (!entryPoint) {
+          logger.warn('Nuxt UI `eslint` needs a stylesheet in `css` that imports Tailwind CSS.')
+        } else {
+          // Declared by `@nuxt/eslint`, called again on `builder:generateApp` so the order of the modules doesn't matter
+          nuxt.hook('eslint:config:addons' as any, (addons: { name: string, getConfigs: () => unknown }[]) => {
+            addons.push({
+              name: 'nuxt-ui',
+              getConfigs: () => ({
+                imports: [{ from: resolve('./eslint.mjs'), name: 'default', as: 'nuxtUI' }],
+                configs: [`...nuxtUI(${JSON.stringify({ ...eslintOptions, entryPoint })})`]
+              })
             })
           })
-        })
+        }
       }
     }
 
