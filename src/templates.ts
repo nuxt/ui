@@ -3,11 +3,12 @@ import { readFile } from 'node:fs/promises'
 import { camelCase, kebabCase } from 'scule'
 import { genExport } from 'knitwork'
 import { join } from 'pathe'
-import { addTemplate, addTypeTemplate, hasNuxtModule, logger, updateTemplates, getLayerDirectories } from '@nuxt/kit'
+import { addTemplate, addTypeTemplate, hasNuxtModule, logger, resolvePath, updateTemplates, getLayerDirectories } from '@nuxt/kit'
 import type { Nuxt, NuxtApp, NuxtPage, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
 import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
 import { getThemeClasses } from './utils/theme'
+import { findAddedColors, getColorsDeclaration } from './utils/tailwind'
 import { detectUsedComponents, resolveExtraScanDirs } from './utils/components'
 import * as theme from './runtime/theme'
 import { colors } from './runtime/theme/color'
@@ -319,8 +320,13 @@ export default detected as Set<string> | null
 
   templates.push({
     filename: 'types/ui.d.ts',
-    dependsOn: [],
-    getContents: () => {
+    // The colors the app adds live in its stylesheets
+    dependsOn: ({ path }) => path.endsWith('.css'),
+    getContents: async () => {
+      // The colors the app adds in `@plugin "@nuxt/ui/colors"`, for its `color` props to take them
+      const stylesheets = nuxt ? await Promise.all(nuxt.options.css.filter(entry => typeof entry === 'string').map(entry => resolvePath(entry))) : []
+      const addedColors = await findAddedColors(stylesheets)
+
       const iconKeys = Object.keys(uiConfig?.icons || {})
       const iconUnion = iconKeys.length ? iconKeys.map(i => JSON.stringify(i)).join(' | ') : 'string'
 
@@ -352,6 +358,7 @@ declare module '@nuxt/schema' {
   }
 }
 
+${getColorsDeclaration(addedColors)}
 export {}
 `
     }
@@ -390,6 +397,15 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt, resolve: Resolv
   nuxt.hook('prepare:types', ({ references }) => {
     references.push({ path: resolve('./runtime/types/app.config.d.ts') })
   })
+
+  // A color added to the stylesheet reaches the `color` props on save
+  if (nuxt.options.dev) {
+    nuxt.hook('builder:watch', async (_, path) => {
+      if (path.endsWith('.css')) {
+        await updateTemplates({ filter: template => template.filename === 'types/ui.d.ts' })
+      }
+    })
+  }
 
   if (options.componentDetection && nuxt.options.dev) {
     let watcher: { emit: (event: string, file: string) => unknown } | undefined

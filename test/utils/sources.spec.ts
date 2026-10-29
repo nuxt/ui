@@ -139,7 +139,6 @@ describe('colors plugin', () => {
   })
 
   it('rejects an alias outside the set, a missing palette, another alias and a wrong shade', async () => {
-    await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { tertiary: indigo; }')).rejects.toThrow('`tertiary` isn\'t a color alias')
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: brand; }')).rejects.toThrow('`primary: brand` needs the name of a Tailwind palette')
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { neutral: zinx; }')).rejects.toThrow('Did you mean `zinc`?')
     await expect(build({}, undefined, '@theme { --color-brand-500: #ef4444; }\n@plugin "@nuxt/ui/colors" { primary: brand; }')).rejects.toThrow('`--color-brand-50` is missing')
@@ -168,5 +167,67 @@ describe('colors plugin', () => {
 
     const colored = await build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: indigo; }')
     expect(colored).not.toContain('--ui-primary-bg-soft:')
+  })
+
+  describe('an added color', () => {
+    const plugin = (options: string, css = '') => `@plugin "@nuxt/ui/colors" { ${options} }\n${css}`
+
+    it('takes a palette and the shades it uses, 500 and 400 by default', async () => {
+      const css = await build({}, undefined, plugin('tertiary: indigo; quaternary: brand 700 300;'), '@theme { --color-brand-50: #fafafa; --color-brand-100: #f5f5f5; --color-brand-200: #e5e5e5; --color-brand-300: #d4d4d4; --color-brand-400: #a3a3a3; --color-brand-500: #737373; --color-brand-600: #525252; --color-brand-700: #404040; --color-brand-800: #262626; --color-brand-900: #171717; --color-brand-950: #0a0a0a; }')
+
+      expect(rule(css, ':root, :host')).toContain(`--ui-color-tertiary-500: ${colors.indigo[500]};`)
+      expect(rule(css, ':root, :host')).toContain('--ui-color-quaternary-700: #404040;')
+      expect(aliasRule(css, ':root, :host, .light', '--ui-tertiary:')).toContain('--ui-tertiary: var(--ui-color-tertiary-500);')
+      expect(aliasRule(css, '.dark', '--ui-tertiary:')).toContain('--ui-tertiary: var(--ui-color-tertiary-400);')
+      expect(aliasRule(css, ':root, :host, .light', '--ui-quaternary:')).toContain('--ui-quaternary: var(--ui-color-quaternary-700);')
+      expect(aliasRule(css, '.dark', '--ui-quaternary:')).toContain('--ui-quaternary: var(--ui-color-quaternary-300);')
+    })
+
+    it('writes the scopes the engine puts on components, which no stylesheet lists', async () => {
+      const css = await build({}, undefined, plugin('tertiary: indigo;'))
+
+      const accent = aliasRule(css, '.\\[--ui-accent\\:var\\(--ui-tertiary\\)\\]', '--ui-accent:')
+      expect(accent).toContain('--ui-accent: var(--ui-tertiary);')
+      // every role `primary` has, on the color's own variables
+      expect(accent).toContain('--ui-accent-bg-soft: var(--ui-tertiary-bg-soft);')
+      expect(accent).toContain('--ui-accent-text-contrast: var(--ui-tertiary-text-contrast);')
+      expect(accent).toContain('--ui-accent-outline-focus: var(--ui-tertiary-outline-focus);')
+      expect(accent.match(/--ui-accent-/g)).toHaveLength(12)
+      expect(css).toContain('.\\[--ui-highlight\\:var\\(--ui-tertiary\\)\\] {\n    --ui-highlight: var(--ui-tertiary);')
+      expect(css).toContain('.\\[--spotlight-color\\:var\\(--ui-tertiary\\)\\] {\n    --spotlight-color: var(--ui-tertiary);')
+    })
+
+    it('adds its utilities, like the built-in colors', async () => {
+      const css = await build({}, undefined, plugin('tertiary: indigo;', '@source inline("bg-tertiary bg-tertiary-200 text-tertiary border-tertiary/50");'))
+
+      expect(css).toContain('.bg-tertiary {\n    background-color: var(--ui-tertiary);')
+      expect(css).toContain('.bg-tertiary-200 {\n    background-color: var(--ui-color-tertiary-200);')
+      expect(css).toContain('.text-tertiary {\n    color: var(--ui-tertiary-text-strong, var(--ui-tertiary-text-default, var(--ui-tertiary)));')
+      expect(css).toContain('.border-tertiary\\/50 {\n    border-color: var(--ui-tertiary);')
+    })
+
+    it('keeps its scopes unprefixed with a Tailwind prefix, where its utilities take it', async () => {
+      const css = await build({ tailwindPrefix: 'tw' }, undefined, plugin('tertiary: indigo;', '@source inline("tw:bg-tertiary");'))
+
+      expect(css).toContain('.\\[--ui-accent\\:var\\(--ui-tertiary\\)\\] {')
+      expect(css).toContain('.tw\\:bg-tertiary {\n    background-color: var(--ui-tertiary);')
+    })
+
+    it('takes neutral\'s surface roles on a gray palette', async () => {
+      const css = await build({}, undefined, plugin('tertiary: zinc;'))
+
+      expect(css).toContain('--ui-tertiary-bg-soft: var(--ui-layer-bg-soft, var(--ui-bg-soft));')
+    })
+
+    it('rejects a name that isn\'t one, or that a utility already has, and a missing palette', async () => {
+      await expect(build({}, undefined, plugin('Tertiary: indigo;'))).rejects.toThrow('`Tertiary` can\'t name a color: use lowercase words')
+      await expect(build({}, undefined, plugin('white: indigo;'))).rejects.toThrow('`white` can\'t name a color: Tailwind CSS or Nuxt UI already uses it')
+      await expect(build({}, undefined, plugin('indigo: violet;'))).rejects.toThrow('`indigo` can\'t name a color')
+      await expect(build({}, undefined, plugin('accent: indigo;'))).rejects.toThrow('`accent` can\'t name a color')
+      await expect(build({}, undefined, plugin('muted: indigo;'))).rejects.toThrow('`muted` can\'t name a color')
+      await expect(build({}, undefined, plugin('layer: indigo;'))).rejects.toThrow('`layer` can\'t name a color')
+      await expect(build({}, undefined, plugin('tertiary: 600 400;'))).rejects.toThrow('`tertiary: 600 400` needs a palette')
+      await expect(build({}, undefined, plugin('tertiary: tertiary;'))).rejects.toThrow('`tertiary: tertiary` points a color alias at another')
+    })
   })
 })

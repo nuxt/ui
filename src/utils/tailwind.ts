@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises'
 import { dirname, resolve } from 'pathe'
+import { colorName, colors } from '../runtime/theme/color'
 
 const COMMENT = /\/\*[\s\S]*?\*\//g
 const IMPORT = /@import\s+(?:url\(\s*)?["']([^"']+)["']\s*\)?([^;]*)/g
@@ -87,4 +88,70 @@ export async function findTailwindPrefix(paths: string[]): Promise<TailwindImpor
       return found
     }
   }
+}
+
+const COLORS_PLUGIN = /@plugin\s+["']@nuxt\/ui\/colors["']\s*\{([^}]*)\}/g
+const OPTION = /(?:^|;)\s*([\w-]+)\s*:/g
+
+/**
+ * The colors a stylesheet adds in `@plugin "@nuxt/ui/colors" { tertiary: indigo; }`,
+ * the seven aliases left out. A name the plugin rejects is left out too, it fails the build.
+ * @param css - The stylesheet source
+ */
+export function getAddedColors(css: string): string[] {
+  const names: string[] = []
+  for (const [, block] of css.replace(COMMENT, '').matchAll(COLORS_PLUGIN)) {
+    for (const [, name] of block!.matchAll(OPTION)) {
+      if (!(colors as readonly string[]).includes(name!) && colorName.test(name!) && !names.includes(name!)) {
+        names.push(name!)
+      }
+    }
+  }
+  return names
+}
+
+async function readAddedColors(path: string, seen: Set<string>, names: Set<string>) {
+  if (seen.has(path)) {
+    return
+  }
+  seen.add(path)
+  const css = await readFile(path, 'utf8').catch(() => undefined)
+  if (css === undefined) {
+    return
+  }
+  getAddedColors(css).forEach(name => names.add(name))
+  for (const [, specifier] of css.replace(COMMENT, '').matchAll(IMPORT)) {
+    if (RELATIVE.test(specifier!)) {
+      await readAddedColors(resolve(dirname(path), specifier!), seen, names)
+    }
+  }
+}
+
+/**
+ * Reads the colors the stylesheets add, themselves or through a relative `@import`.
+ * @param paths - The stylesheets
+ */
+export async function findAddedColors(paths: string[]): Promise<string[]> {
+  const seen = new Set<string>()
+  const names = new Set<string>()
+  for (const path of paths) {
+    await readAddedColors(path, seen, names)
+  }
+  return [...names]
+}
+
+/**
+ * The declaration that types the added colors in every `color` prop.
+ * @param names - The added colors
+ */
+export function getColorsDeclaration(names: string[]): string {
+  if (!names.length) {
+    return ''
+  }
+  return `declare module '@nuxt/ui' {
+  interface UIColors {
+${names.map(name => `    ${JSON.stringify(name)}: true`).join('\n')}
+  }
+}
+`
 }
