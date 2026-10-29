@@ -5,7 +5,6 @@ import type { AnthropicLanguageModelOptions } from '@ai-sdk/anthropic'
 import type { GatewayProviderOptions } from '@ai-sdk/gateway'
 import { z } from 'zod'
 import { tools as mcpToolDefinitions } from '#nuxt-mcp-toolkit/tools.mjs'
-import * as theme from '../../.nuxt/ui'
 import { themeIcons } from '../../app/utils/theme/icons'
 import { cssVariableDefaults } from '../../app/utils/theme/tokens'
 import { DEFAULT_COLORS } from '../../app/utils/theme/engine/types'
@@ -16,8 +15,6 @@ import { FONTS } from '../../app/utils/theme/studio'
 import type { FontCategory } from '../../app/utils/theme/studio'
 import { getChatUser } from '../utils/chatUser'
 
-const componentNames = Object.keys(theme)
-
 function mcpToolsToAiTools() {
   const aiTools: Record<string, Tool> = {}
 
@@ -26,8 +23,7 @@ function mcpToolsToAiTools() {
     const name = def.name || (filename
       ? filename.replace(/\.(ts|js|mts|mjs)$/, '').replace(/([a-z0-9])([A-Z])/g, '$1-$2').replace(/[_\s]+/g, '-').toLowerCase()
       : null)
-    // The chat has its own `getComponentTheme`, which returns the raw theme `applyTheme` takes
-    if (!name || name === 'get-component-theme') continue
+    if (!name) continue
 
     const schema = def.inputSchema
       ? z.toJSONSchema(z.object(def.inputSchema)) as Record<string, unknown>
@@ -139,20 +135,6 @@ const applyPreset = tool({
   execute: async ({ preset }) => ({ applied: true, preset })
 })
 
-const getComponentTheme = tool({
-  description: 'Get the theme definition (slots, variants, compoundVariants, defaultVariants) for a specific Nuxt UI component. Call this when you need to know the available slots and customization options to suggest component-level theming.',
-  inputSchema: z.object({
-    componentName: z.string().describe(`Component name in camelCase. Available: ${componentNames.join(', ')}`)
-  }),
-  execute: async ({ componentName }) => {
-    const componentTheme = (theme as Record<string, unknown>)[componentName]
-    if (!componentTheme) {
-      return { error: `Component "${componentName}" not found`, availableComponents: componentNames }
-    }
-    return { componentName, theme: componentTheme }
-  }
-})
-
 // Google's own category names, the catalog route passes them through as is.
 const FONT_CATEGORIES = ['Sans Serif', 'Serif', 'Display', 'Handwriting', 'Monospace'] as const
 // the shortlist speaks the studio's three, mapped so one response uses one vocabulary
@@ -187,7 +169,7 @@ const getThemeGuide = tool({
   execute: async () => ({
     guide: `When users ask to change the theme, customize colors, or modify the appearance, use the \`applyTheme\` tool to apply changes live on this docs site. Only include properties that changed.
 
-When users ask for a complete theme, to change "all colors", or describe a broad aesthetic (e.g. "sakura-inspired theme"), you MUST set ALL of: primary, neutral, secondary, success, info, warning, error, radius, and fontSans. You can change the icon set (lucide, bootstrap, heroicons, iconoir, material, phosphor, pixelarticons, remix or tabler) if it really enhances the theme, but prefer keeping lucide as the default — it works well with most themes. You can optionally include component-level \`ui\` overrides for a more polished result — if you do, look up the component theme first with \`getComponentTheme\` and prefer \`defaultVariants\` (e.g. button size or variant) over slot class overrides. Create a cohesive design system, not just random colors:
+When users ask for a complete theme, to change "all colors", or describe a broad aesthetic (e.g. "sakura-inspired theme"), you MUST set ALL of: primary, neutral, secondary, success, info, warning, error, radius, and fontSans. You can change the icon set (lucide, bootstrap, heroicons, iconoir, material, phosphor, pixelarticons, remix or tabler) if it really enhances the theme, but prefer keeping lucide as the default — it works well with most themes. You can optionally include component-level \`ui\` overrides for a more polished result — if you do, look up the component theme first with \`get-component-theme\` and prefer \`defaultVariants\` (e.g. button size or variant) over slot class overrides. Create a cohesive design system, not just random colors:
 - Pick a **primary** that embodies the theme's identity. If no standard Tailwind color fits, use \`customColors\` to define a bespoke palette with all shades 50-950 as \`oklch(L% C H)\` values, tailwind v4's native format, e.g. \`oklch(62.3% 0.214 259.815)\`. This is encouraged for creative/unique themes.
 - Pick a **secondary** that complements the primary (analogous or contrasting on the color wheel). Can also be a custom palette.
 - Pick **success/info/warning/error** that feel harmonious with the palette while staying semantically meaningful (success = green-ish, error = red-ish, warning = amber/yellow-ish, info = blue/cyan-ish). You can shift hues — e.g. \`lime\` for success in a nature theme, \`rose\` for error in a warm theme — but keep them recognizable.
@@ -317,15 +299,15 @@ In the code you show, these go under \`ui\` in \`app.config.ts\` for Nuxt, or in
 
 **Component Theme Lookup:**
 
-When users ask about component-specific customization, use the \`getComponentTheme\` tool to get the exact slots, variants, and defaults for that component. This lets you suggest precise config overrides.
+When users ask about component-specific customization, use the \`get-component-theme\` tool to get the exact slots, variants, and defaults for that component. This lets you suggest precise config overrides.
 
-When you want to suggest component \`ui\` overrides (e.g. customizing button styles), call \`getComponentTheme\` for that component first — never guess slot names. Only look up component themes when you actually plan to include \`ui\` overrides in the \`applyTheme\` call.
+When you want to suggest component \`ui\` overrides (e.g. customizing button styles), call \`get-component-theme\` for that component first — never guess slot names. Only look up component themes when you actually plan to include \`ui\` overrides in the \`applyTheme\` call.
 
-Prefer \`defaultVariants\` as your first tool for component customization — changing a component's default size, variant, or color is impactful and low-risk. Only include values that actually differ from the component's defaults (use \`getComponentTheme\` to check) — never include unchanged defaults like \`size: 'md'\` if that's already the default. Only add slot class overrides when \`defaultVariants\` alone can't achieve the desired effect. When creating a complete theme, if you want to customize one component to give it personality, prioritize **button** — e.g. \`button: { defaultVariants: { variant: 'subtle' } }\`. Button is the most visible and impactful component to customize.
+Prefer \`defaultVariants\` as your first tool for component customization — changing a component's default size, variant, or color is impactful and low-risk. Only include values that actually differ from the component's defaults (use \`get-component-theme\` to check) — never include unchanged defaults like \`size: 'md'\` if that's already the default. Only add slot class overrides when \`defaultVariants\` alone can't achieve the desired effect. When creating a complete theme, if you want to customize one component to give it personality, prioritize **button** — e.g. \`button: { defaultVariants: { variant: 'subtle' } }\`. Button is the most visible and impactful component to customize.
 
 CRITICAL rules for component \`ui\` overrides:
 - NEVER use \`rounded-*\` classes in component slot overrides. Border radius is controlled globally by \`--ui-radius\` — hardcoding rounded classes would override the CSS variable and break consistency.
-- Only ADD new classes that aren't already in the component's default theme. Do NOT repeat or duplicate default classes (e.g. \`inline-flex\`, \`items-center\`, \`disabled:cursor-not-allowed\`, \`transition-colors\` on button are already defaults). Use \`getComponentTheme\` to check what's already there.
+- Only ADD new classes that aren't already in the component's default theme. Do NOT repeat or duplicate default classes (e.g. \`inline-flex\`, \`items-center\`, \`disabled:cursor-not-allowed\`, \`transition-colors\` on button are already defaults). Use \`get-component-theme\` to check what's already there.
 - Keep overrides minimal and intentional — only include classes that actually change the look from the default.
 - Tailwind v4 only generates classes that are already used in source files. Arbitrary Tailwind utility classes (e.g. \`tracking-wide\`, \`shadow-2xl\`) may NOT exist in the user's CSS output. Prefer overrides that use classes already present in the component's default theme (e.g. changing \`font-medium\` to \`font-semibold\`) or CSS variables. For the exported code, mention that users may need to safelist any new utility classes.
 
@@ -424,8 +406,7 @@ const tools = {
   searchFonts,
   applyTheme,
   applyPreset,
-  resetTheme,
-  getComponentTheme
+  resetTheme
 }
 
 export type DocsChatTools = InferUITools<typeof tools>
