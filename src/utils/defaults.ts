@@ -17,5 +17,6 @@ export const defaultOptions = {
   tailwindPrefix: undefined,
   componentDetection: true,
   prose: undefined,
-  content: false
+  content: false,
+  eslint: false
 }

@@ -4,7 +4,9 @@ export default defineBuildConfig({
   entries: [
     // Vue support
     './src/unplugin',
-    './src/vite'
+    './src/vite',
+    // ESLint config for apps
+    './src/eslint'
   ],
   hooks: {
     'mkdist:entry:options'(ctx, entry, options) {
@@ -14,5 +16,5 @@ export default defineBuildConfig({
       options.esbuild = { ...options.esbuild, charset: 'utf8' }
     }
   },
-  externals: ['#build/ui', 'vite']
+  externals: ['#build/ui', 'vite', 'eslint', 'eslint-plugin-better-tailwindcss']
 })

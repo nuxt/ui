@@ -5,6 +5,7 @@ import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImpo
 import { IconUsageScanner } from '@nuxt/icon/utils'
 import { createUnplugin } from 'unplugin'
 import type { HookResult, ModuleDependencies } from '@nuxt/schema'
+import type { NuxtUIESLintOptions } from './eslint'
 import { addTemplates } from './templates'
 import { publicComposables } from './imports'
 import { defaultOptions, getDefaultConfig } from './utils/defaults'
@@ -79,6 +80,14 @@ export interface ModuleOptions {
    * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#scanpackages
    */
   scanPackages?: string[]
+
+  /**
+   * Add the `@nuxt/ui/eslint` config to the one `@nuxt/eslint` generates, with
+   * your stylesheet as its entry point. Needs `eslint-plugin-better-tailwindcss`.
+   * @defaultValue false
+   * @see https://ui.nuxt.com/docs/getting-started/integrations/eslint/nuxt
+   */
+  eslint?: boolean | Partial<NuxtUIESLintOptions>
 }
 
 declare module '#app' {
@@ -195,6 +204,34 @@ export default defineNuxtModule<ModuleOptions>({
     }
 
     nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, getDefaultConfig(options.tailwindPrefix)) as typeof nuxt.options.appConfig.ui
+
+    if (options.eslint) {
+      const eslintOptions = options.eslint === true ? {} : options.eslint
+      // The stylesheet listed in `css` that imports Tailwind CSS, not the one it may delegate to
+      let entryPoint = eslintOptions.entryPoint && await resolvePath(eslintOptions.entryPoint)
+      for (const stylesheet of entryPoint ? [] : stylesheets) {
+        if (await findTailwindPrefix([stylesheet])) {
+          entryPoint = stylesheet
+          break
+        }
+      }
+      if (!hasNuxtModule('@nuxt/eslint')) {
+        logger.warn('Nuxt UI `eslint` needs the `@nuxt/eslint` module.')
+      } else if (!entryPoint) {
+        logger.warn('Nuxt UI `eslint` needs a stylesheet in `css` that imports Tailwind CSS.')
+      } else {
+        // Declared by `@nuxt/eslint`, called again on `builder:generateApp` so the order of the modules doesn't matter
+        nuxt.hook('eslint:config:addons' as any, (addons: { name: string, getConfigs: () => unknown }[]) => {
+          addons.push({
+            name: 'nuxt-ui',
+            getConfigs: () => ({
+              imports: [{ from: resolve('./eslint.mjs'), name: 'default', as: 'nuxtUI' }],
+              configs: [`...nuxtUI(${JSON.stringify({ ...eslintOptions, entryPoint })})`]
+            })
+          })
+        })
+      }
+    }
 
     // Pre-bundle the icons Nuxt UI uses into `@nuxt/icon`'s client bundle so they're
     // embedded at build time instead of fetched at runtime. Its `clientBundle.scan`
