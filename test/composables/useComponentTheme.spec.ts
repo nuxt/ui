@@ -1,4 +1,5 @@
 import { describe, it, expect, expectTypeOf, beforeAll, afterAll } from 'vitest'
+import type { PropType } from 'vue'
 import { defineComponent, h } from 'vue'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { useAppConfig } from '#imports'
@@ -23,7 +24,7 @@ const theme = extendTheme(card, {
 const Stat = defineComponent({
   props: {
     value: Number,
-    trend: String,
+    trend: String as PropType<'up' | 'down'>,
     tone: String,
     variant: String,
     class: null,
