@@ -11,7 +11,7 @@ export function defineTheme<T extends TVTheme>(theme: T & TVThemeCheck<T>): Defi
 
 /**
  * A theme extended by another: objects merge, an empty value keeps the base's
- * and a function is called with the base value, `undefined` when the base has none. Classes the extension adds to
+ * and a function is called with the base value, its classes as one string. Classes the extension adds to
  * the base's keep the extension's type, which is all the slot and variant names
  * need.
  */
@@ -50,8 +50,9 @@ export function extendTheme<B extends TVTheme, const T extends Record<string, an
 /** Classes merged the way `app.config.ui` merges them: added to the base's, or replaced by a function. */
 function mergeClasses(value: unknown, base: unknown): unknown {
   if (typeof value === 'function') {
-    // Classes reach a replacer as one string, like in `app.config.ui`, even once a previous extension made them an array
-    return value(Array.isArray(base) ? joinClasses(base) : base)
+    // Classes reach a replacer as one string, like in `app.config.ui`, also when the base has none or a previous
+    // extension made them an array. A variant's object of slots is passed as is.
+    return value(base && typeof base === 'object' && !Array.isArray(base) ? base : joinClasses(base))
   }
   if (value && typeof value === 'object' && !Array.isArray(value)) {
     const merged: Record<string, unknown> = { ...(base && typeof base === 'object' && !Array.isArray(base) ? base : {}) }

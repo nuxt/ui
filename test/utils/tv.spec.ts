@@ -842,7 +842,13 @@ describe('tv theme sources', () => {
     expectTypeOf(theme.variants.variant.solid).toHaveProperty('base')
   })
 
-  it('calls a callback with `undefined` when the base has no value for it', () => {
+  it('gives a callback an empty string for a slot the base doesn\'t have', () => {
+    const theme = extendTheme(buttonTheme, { slots: { badge: (classes: string) => classes.replace('', 'rounded-full') } })
+
+    expect(theme.slots.badge).toBe('rounded-full')
+  })
+
+  it('keeps a callback\'s result when the base has no value for it', () => {
     const theme = extendTheme(buttonTheme, { variants: { tone: () => ({ soft: { base: 'opacity-75' } }) } })
     const check = (value: TVTheme) => value
 
