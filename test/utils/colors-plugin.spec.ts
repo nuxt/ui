@@ -50,6 +50,15 @@ describe('colors declaration in the Vite build', () => {
     expect(readFileSync(dts(), 'utf8')).not.toContain('UIColors')
   })
 
+  it('reads a stylesheet loaded with and without a query as one', async () => {
+    const plugin = setup('@plugin "@nuxt/ui/colors" { tertiary: indigo; }')
+    await plugin.transform('', `${main()}?direct`)
+
+    writeFileSync(join(root, 'colors.css'), '@plugin "@nuxt/ui/colors" { quaternary: teal; }')
+    await plugin.transform('', main())
+    expect(readFileSync(dts(), 'utf8')).not.toContain('"tertiary"')
+  })
+
   it('writes nothing with `dts: false`', async () => {
     const plugin = setup('@plugin "@nuxt/ui/colors" { tertiary: indigo; }', { dts: false })
 

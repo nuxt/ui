@@ -28,7 +28,9 @@ export default function ColorsPlugin(options: NuxtUIOptions): UnpluginOptions {
         return
       }
 
-      added.set(id, await findAddedColors([id.replace(/\?.*$/, '')]))
+      // One entry per file, whichever query Vite loads it with
+      const path = id.replace(/\?.*$/, '')
+      added.set(path, await findAddedColors([path]))
       const names = [...new Set([...added.values()].flat())]
 
       // Only an app that adds a color gets the file, and keeps it once it has it
