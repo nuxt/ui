@@ -25,10 +25,7 @@ function onFrameworkChange(newFramework: string) {
     :items="frameworks"
     :content="false"
     color="neutral"
-    :ui="{
-      indicator: 'bg-default',
-      trigger: 'px-1 data-[state=active]:text-strong w-full'
-    }"
+    :ui="{ trigger: 'px-1 w-full' }"
     size="xs"
     @update:model-value="onFrameworkChange($event as string)"
   />
