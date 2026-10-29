@@ -29,6 +29,7 @@ Key MCP tools:
 - `search-icons` — search Iconify icons (defaults to `lucide`), returns `i-{prefix}-{name}` names
 - `get-component` — full component documentation with usage examples
 - `get-component-metadata` — props, slots, events (lightweight, no docs content)
+- `get-component-theme` — theme slots with their classes and `data-slot`, variants, `defaultVariants`, `compoundVariants` and the CSS variables it reads (`full: true` adds the variant classes)
 - `get-example` — real-world code examples
 
 When you need to know **what a component accepts** or **how its API works**, use the MCP. This skill teaches you **when to use which component** and **how to build well**.
@@ -37,7 +38,7 @@ When you need to know **what a component accepts** or **how its API works**, use
 
 1. **Always wrap the app in `UApp`** — required for toasts, tooltips, and programmatic overlays. Accepts a `locale` prop for i18n.
 2. **Always use semantic colors** — `text-default`, `bg-soft`, `border-default`, etc. Never use raw Tailwind palette colors like `text-gray-500`.
-3. **Read the theme files for slot names** — `node_modules/@nuxt/ui/dist/runtime/theme/<component>.js` (`prose/` and `content/` for those components). These show every slot, variant, and default class for any component. A theme that extends another (`extendTheme(input, {...})` in Select) only holds its own changes, read the one it extends too.
+3. **Look up the theme before customizing a component** — call the MCP `get-component-theme` tool for its slots, variants, default classes and CSS variables. Without the MCP, read `node_modules/@nuxt/ui/dist/runtime/theme/<component>.js` (`prose/` and `content/` for those components). A theme that extends another (`extendTheme(input, {...})` in Select) only holds its own changes, read the one it extends too.
 4. **Override priority** (highest wins): `class` prop → `ui` prop → nearest `<UTheme>` → `app.config.ui` → theme. Every override applies after the whole theme, compound variants included.
 5. **Icons use `i-{collection}-{name}` format** — `lucide` is the default collection. Use the MCP `search-icons` tool to find icons, or browse at [icones.js.org](https://icones.js.org).
 
