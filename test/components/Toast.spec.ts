@@ -128,6 +128,22 @@ describe('Toast', () => {
     toast.clear()
   })
 
+  it('fades out the toasts behind the third one in the collapsed stack', async () => {
+    const toast = useToast()
+    toast.clear()
+
+    const wrapper = await mountSuspended(Toaster, { props: { portal: false, expand: false } })
+    for (const title of ['First', 'Second', 'Third', 'Fourth']) {
+      toast.add({ title })
+    }
+
+    await vi.waitFor(() => expect(wrapper.findAll('li[data-slot="toaster-base"]')).toHaveLength(4), { timeout: 4000 })
+
+    expect(wrapper.findAll('li[data-slot="toaster-base"]').map(li => li.attributes('data-visible'))).toEqual(['false', 'true', 'true', 'true'])
+
+    toast.clear()
+  })
+
   it('labels the toasts with the label prop', async () => {
     const wrapper = await mountSuspended(Toaster, { props: { portal: false, label: 'Alert' } })
 
