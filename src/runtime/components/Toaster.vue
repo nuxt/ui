@@ -152,12 +152,25 @@ const isOpen = (index: number) => toasts.value[index]?.open !== false
 const height = computed(() => refs.value.reduce((acc, { height }, index) => isOpen(index) ? acc + height + 16 : acc, 0))
 const frontHeight = computed(() => refs.value.findLast((_, index) => isOpen(index))?.height || 0)
 
-function getBefore(index: number) {
-  return toasts.value.slice(index + 1).filter(toast => toast.open !== false).length
-}
+// A closing toast keeps the place it had when it started leaving, the toasts closing after it don't move it.
+const closingPositions = new WeakMap<object, { before: number, offset: number }>()
 
-function getOffset(index: number) {
-  return refs.value.slice(index + 1).reduce((acc, { height }, i) => isOpen(index + 1 + i) ? acc + height + 16 : acc, 0)
+function getPosition(index: number) {
+  const toast = toasts.value[index]!
+  const closing = closingPositions.get(toast)
+  if (closing) {
+    return closing
+  }
+
+  const position = {
+    before: toasts.value.slice(index + 1).filter(toast => toast.open !== false).length,
+    offset: refs.value.slice(index + 1).reduce((acc, { height }, i) => isOpen(index + 1 + i) ? acc + height + 16 : acc, 0)
+  }
+  if (toast.open === false) {
+    closingPositions.set(toast, position)
+  }
+
+  return position
 }
 </script>
 
@@ -173,12 +186,12 @@ function getOffset(index: number) {
       v-bind="omit(toast, ['id', 'close', '_duplicate', '_updated', '_animatedAt', 'onClick'])"
       :close="(toast.close as boolean)"
       :data-collapsed="!expanded"
-      :data-front="!expanded && getBefore(index) === 0"
+      :data-front="!expanded && getPosition(index).before === 0"
       :data-pulsing="toast._duplicate ? (toast._duplicate % 2 === 0 ? 'even' : 'odd') : undefined"
       :style="{
         '--index': (index - toasts.length) + toasts.length,
-        '--before': getBefore(index),
-        '--offset': getOffset(index),
+        '--before': getPosition(index).before,
+        '--offset': getPosition(index).offset,
         '--scale': expanded ? '1' : 'calc(1 - var(--before) * var(--scale-factor))',
         '--translate': expanded ? 'calc(var(--offset) * var(--translate-factor))' : 'calc(var(--before) * var(--gap))',
         '--transform': 'translateY(var(--translate)) scale(var(--scale))'

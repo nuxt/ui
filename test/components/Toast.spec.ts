@@ -107,6 +107,27 @@ describe('Toast', () => {
     toast.clear()
   })
 
+  it('keeps a closing toast in place when the one in front closes after it', async () => {
+    const toast = useToast()
+    toast.clear()
+
+    const wrapper = await mountSuspended(Toaster, { props: { portal: false, expand: false } })
+    const back = toast.add({ title: 'Back' })
+    const front = toast.add({ title: 'Front' })
+
+    await vi.waitFor(() => expect(wrapper.findAll('li[data-slot="toaster-base"]')).toHaveLength(2), { timeout: 4000 })
+    toast.remove(back.id)
+    await nextTick()
+    toast.remove(front.id)
+    await nextTick()
+
+    // Without an exit animation the closing toast leaves the DOM at once, read what the Toaster passes to it.
+    const [closing] = wrapper.findAllComponents(Toast)
+    expect([closing!.vm.$attrs['data-front'], (closing!.vm.$attrs.style as Record<string, unknown>)['--before']]).toEqual([false, 1])
+
+    toast.clear()
+  })
+
   it('labels the toasts with the label prop', async () => {
     const wrapper = await mountSuspended(Toaster, { props: { portal: false, label: 'Alert' } })
 

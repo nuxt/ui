@@ -89,7 +89,7 @@ export interface ToastSlots {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, useTemplateRef } from 'vue'
+import { ref, computed, watch, onMounted, useTemplateRef } from 'vue'
 import { ToastRoot, ToastTitle, ToastDescription, ToastAction, ToastClose } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick, useResizeObserver } from '@vueuse/core'
@@ -145,6 +145,9 @@ onMounted(measure)
 
 // The content reflows when the toast is updated or the viewport resizes.
 useResizeObserver(wrapperRef, measure)
+
+// The leading content and the horizontal actions sit outside the wrapper, an update can change them without resizing it.
+watch([() => props.avatar, () => props.icon, () => props.actions, () => props.orientation], measure, { flush: 'post' })
 
 defineExpose({
   height
