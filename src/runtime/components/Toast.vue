@@ -135,20 +135,25 @@ function measure() {
     return
   }
 
-  // Their transitions would hold the previous values while measuring, pause them without touching the others.
-  const measured = height.value > 0
+  // Their transitions would hold the previous values while measuring, the first measure starts from zero and has none to pause.
+  const paused = height.value > 0
   const { minHeight, maxHeight, transitionProperty } = el.style
-  el.style.transitionProperty = getComputedStyle(el).transitionProperty.split(', ').filter(property => property !== 'min-height' && property !== 'max-height').join(', ') || 'none'
+  if (paused) {
+    const properties = getComputedStyle(el).transitionProperty.split(', ')
+    el.style.transitionProperty = properties.includes('all') ? 'none' : properties.filter(property => property !== 'min-height' && property !== 'max-height').join(', ') || 'none'
+  }
+
   el.style.minHeight = '0'
   el.style.maxHeight = 'none'
   height.value = el.offsetHeight
   el.style.minHeight = minHeight
   el.style.maxHeight = maxHeight
-  // Apply the restored values before the transitions come back so an update animates, but not on the first measure, which would grow the toast from zero.
-  if (measured) {
+
+  if (paused) {
+    // Apply the restored values before the transitions come back so the update animates from the current height.
     el.getBoundingClientRect()
+    el.style.transitionProperty = transitionProperty
   }
-  el.style.transitionProperty = transitionProperty
 }
 
 onMounted(measure)
