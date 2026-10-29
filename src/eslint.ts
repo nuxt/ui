@@ -61,6 +61,30 @@ const COLOR_UTILITY = '(?:bg|text|border(?:-[xytrblse]|-bs|-be)?|ring(?:-offset)
 // A class with its variants, `md:hover:bg-red-500/50`
 const CLASS = (utility: string, color: string) => `^(?:\\S*:)?!?-?(${utility})-(${color})(?:-\\d{2,3})?(?:\\/\\S+)?!?$`
 
+type Shades = Record<number, string | string[]>
+
+// The neutral shade each semantic token resolves to (`runtime/css/base.css`), in light mode and under `dark:`.
+// A shade between two tokens suggests both, a shade no token is close to falls back to the full list.
+const TEXT_SHADES: Record<'light' | 'dark', Shades> = {
+  light: { 50: 'faint', 100: 'faint', 200: 'faint', 300: 'faint', 400: 'faint', 500: 'muted', 600: ['muted', 'default'], 700: 'default', 800: ['default', 'strong'], 900: 'strong', 950: 'strong' },
+  dark: { 50: 'strong', 100: 'strong', 200: 'default', 300: ['default', 'muted'], 400: 'muted', 500: 'faint', 600: 'faint', 700: 'faint', 900: 'contrast', 950: 'contrast' }
+}
+const BG_SHADES: Record<'light' | 'dark', Shades> = {
+  light: { 50: ['tint', 'soft'], 100: 'soft', 200: 'strong', 300: 'strong' },
+  dark: { 600: 'strong', 700: 'strong', 800: 'soft', 900: 'default', 950: 'default' }
+}
+const BORDER_SHADES: Record<'light' | 'dark', Shades> = {
+  light: { 50: 'default', 100: 'default', 200: 'default', 300: 'strong', 400: 'strong' },
+  dark: { 600: 'strong', 700: 'strong', 800: 'default', 900: 'default', 950: 'default' }
+}
+const SHADE_TOKENS: [string, Record<'light' | 'dark', Shades>][] = [
+  ['text', TEXT_SHADES],
+  ['bg', BG_SHADES],
+  ['border(?:-[xytrblse]|-bs|-be)?', BORDER_SHADES],
+  ['divide', BORDER_SHADES],
+  ['ring(?:-offset)?', BORDER_SHADES]
+]
+
 const GRAY_TOKENS: Record<string, string> = {
   text: '`text-default`, `text-muted`, `text-faint`, `text-strong` or `text-contrast`',
   bg: '`bg-default`, `bg-soft`, `bg-strong` or `bg-tint`',
@@ -88,6 +112,21 @@ function paletteRestrictions(colors: Record<string, string>) {
   const restrict: { pattern: string, message: string }[] = []
 
   const grays = GRAYS.join('|')
+  // The token keeps the class's other variants, `md:hover:text-gray-500` is `md:hover:text-muted`
+  for (const [utility, modes] of SHADE_TOKENS) {
+    for (const [shade, tokens] of Object.entries(modes.dark)) {
+      restrict.push({
+        pattern: `^((?:\\S*:)?)dark:((?:\\S*:)?)!?(${utility})-(?:${grays})-${shade}(?:\\/\\S+)?!?$`,
+        message: `"$0" uses a raw palette color. Use ${[tokens].flat().map(token => `\`$1$2$3-${token}\``).join(' or ')} instead, it follows the color mode without \`dark:\`.`
+      })
+    }
+    for (const [shade, tokens] of Object.entries(modes.light)) {
+      restrict.push({
+        pattern: `^(?!(?:\\S*:)?dark:)((?:\\S*:)?)!?(${utility})-(?:${grays})-${shade}(?:\\/\\S+)?!?$`,
+        message: `"$0" uses a raw palette color. Use ${[tokens].flat().map(token => `\`$1$2-${token}\``).join(' or ')} instead.`
+      })
+    }
+  }
   for (const [utility, tokens] of Object.entries(GRAY_TOKENS)) {
     restrict.push({
       pattern: CLASS(utility === 'border' ? 'border(?:-[xytrblse]|-bs|-be)?' : utility, grays),
