@@ -27,6 +27,10 @@
       "types": "./dist/vite.d.mts",
       "import": "./dist/vite.mjs"
     },
+    "./eslint": {
+      "types": "./dist/eslint.d.mts",
+      "import": "./dist/eslint.mjs"
+    },
     "./vue-plugin": {
       "types": "./vue-plugin.d.ts"
     },
@@ -67,6 +71,9 @@
       ],
       "vite": [
         "./dist/vite.d.mts"
+      ],
+      "eslint": [
+        "./dist/eslint.d.mts"
       ],
       "vue-plugin": [
         "./vue-plugin.d.ts"
@@ -252,6 +259,7 @@
     "@tiptap/suggestion": "^3",
     "@tiptap/vue-3": "^3",
     "ai": "^6 || ^7",
+    "eslint-plugin-better-tailwindcss": "^4.10",
     "joi": "^18",
     "superstruct": "^2",
     "tailwindcss": "^4",
@@ -278,6 +286,9 @@
       "optional": true
     },
     "ai": {
+      "optional": true
+    },
+    "eslint-plugin-better-tailwindcss": {
       "optional": true
     },
     "joi": {

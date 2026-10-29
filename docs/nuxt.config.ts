@@ -117,6 +117,7 @@ export default defineNuxtConfig({
     '/docs/getting-started/integrations/icons': { redirect: '/docs/getting-started/integrations/icons/nuxt', prerender: false },
     '/docs/getting-started/integrations/color-mode': { redirect: '/docs/getting-started/integrations/color-mode/nuxt', prerender: false },
     '/docs/getting-started/integrations/i18n': { redirect: '/docs/getting-started/integrations/i18n/nuxt', prerender: false },
+    '/docs/getting-started/integrations/eslint': { redirect: '/docs/getting-started/integrations/eslint/nuxt', prerender: false },
     // v4 redirects - renamed pages
     '/docs/getting-started/typography': { redirect: { to: '/docs/typography', statusCode: 301 }, prerender: false },
     '/docs/getting-started/icons/**': { redirect: { to: '/docs/getting-started/integrations/icons/**', statusCode: 301 }, prerender: false },

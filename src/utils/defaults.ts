@@ -45,5 +45,6 @@ export const defaultOptions = {
   },
   prose: undefined,
   mdc: false,
-  content: false
+  content: false,
+  eslint: false
 }
