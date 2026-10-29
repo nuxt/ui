@@ -91,6 +91,19 @@ export interface ModuleOptions {
   eslint?: boolean | Partial<NuxtUIESLintOptions>
 }
 
+/**
+ * Whether an `eslint.config` in one of these directories already registers `eslint-plugin-better-tailwindcss`.
+ */
+async function hasOwnESLintSetup(dirs: string[]) {
+  for (const dir of new Set(dirs)) {
+    const path = await findPath(join(dir, 'eslint.config'), { extensions: ['.js', '.mjs', '.cjs', '.ts', '.mts', '.cts'] })
+    if (path && (await readFile(path, 'utf-8')).includes('eslint-plugin-better-tailwindcss')) {
+      return true
+    }
+  }
+  return false
+}
+
 declare module '#app' {
   interface RuntimeNuxtHooks {
     'dashboard:search:toggle': () => HookResult
@@ -213,6 +226,8 @@ export default defineNuxtModule<ModuleOptions>({
         if (options.eslint) {
           logger.warn('Nuxt UI `eslint` needs the `@nuxt/eslint` module and `eslint-plugin-better-tailwindcss`.')
         }
+      } else if (options.eslint === undefined && await hasOwnESLintSetup([nuxt.options.rootDir, nuxt.options.workspaceDir])) {
+        // The app registers the plugin itself: a second instance makes ESLint fail, so leave its config alone
       } else {
         // The stylesheet listed in `css` that imports Tailwind CSS, not the one it may delegate to
         let entryPoint = eslintOptions.entryPoint && await resolvePath(eslintOptions.entryPoint)
