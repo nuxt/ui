@@ -24,6 +24,7 @@ const Stat = defineComponent({
   props: {
     value: Number,
     trend: String,
+    tone: String,
     variant: String,
     class: null,
     ui: Object
@@ -87,7 +88,7 @@ describe('useComponentTheme', () => {
     beforeAll(() => {
       appConfig = useAppConfig() as { ui?: Record<string, any> }
       appConfig.ui ??= {}
-      appConfig.ui.stat = { slots: { root: 'shadow-sm' }, defaultVariants: { variant: 'subtle' } }
+      appConfig.ui.stat = { slots: { root: 'shadow-sm' }, variants: { tone: { strong: { value: 'font-black' } } }, defaultVariants: { variant: 'subtle' } }
     })
 
     afterAll(() => {
@@ -98,6 +99,12 @@ describe('useComponentTheme', () => {
       const wrapper = await render('<Stat :value="1" />')
 
       expect(wrapper.find('[data-slot="stat"]').classes()).toEqual(expect.arrayContaining(['shadow-sm', 'bg-tint', 'ring']))
+    })
+
+    it('reads a variant the app config adds from its prop', async () => {
+      const wrapper = await render('<Stat :value="1" tone="strong" />')
+
+      expect(wrapper.find('[data-slot="stat-value"]').classes()).toContain('font-black')
     })
   })
 

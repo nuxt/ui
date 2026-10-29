@@ -54,6 +54,12 @@ export function useComponentTheme<K extends string, P extends object, T extends 
     for (const key of keys) {
       variantProps[key] = own[key]
     }
+    // A variant the app config or a `<UTheme>` adds is read from its prop too
+    for (const level of overrides.value.levels) {
+      for (const key in level?.variants) {
+        variantProps[key] ??= own[key]
+      }
+    }
     Object.assign(variantProps, variants?.(proxy))
 
     const slots = tv(theme, overrides.value)(variantProps) as Record<string, (slotProps?: Record<string, any>) => string>
