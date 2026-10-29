@@ -89,10 +89,10 @@ export interface ToastSlots {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, useTemplateRef } from 'vue'
+import { ref, computed, watch, onMounted, useTemplateRef } from 'vue'
 import { ToastRoot, ToastTitle, ToastDescription, ToastAction, ToastClose } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { reactivePick } from '@vueuse/core'
+import { reactivePick, useResizeObserver } from '@vueuse/core'
 import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
@@ -125,15 +125,44 @@ const ui = computed(() => tv(theme, overrides.value)({
 }))
 
 const rootRef = useTemplateRef('rootRef')
+const wrapperRef = useTemplateRef('wrapperRef')
 const height = ref(0)
 
-onMounted(() => {
-  if (!rootRef.value?.$el?.getBoundingClientRect) {
+// The Toaster clamps the height with `min-height` and `max-height` so the stack can animate it, measure without them to keep the natural one.
+function measure() {
+  const el = rootRef.value?.$el as HTMLElement | undefined
+  if (!el?.style) {
     return
   }
 
-  height.value = rootRef.value.$el.getBoundingClientRect().height
-})
+  // Their transitions would hold the previous values while measuring, the first measure starts from zero and has none to pause.
+  const paused = height.value > 0
+  const { minHeight, maxHeight, transitionProperty } = el.style
+  if (paused) {
+    const properties = getComputedStyle(el).transitionProperty.split(', ')
+    el.style.transitionProperty = properties.includes('all') ? 'none' : properties.filter(property => property !== 'min-height' && property !== 'max-height').join(', ') || 'none'
+  }
+
+  el.style.minHeight = '0'
+  el.style.maxHeight = 'none'
+  height.value = el.offsetHeight
+  el.style.minHeight = minHeight
+  el.style.maxHeight = maxHeight
+
+  if (paused) {
+    // Apply the restored values before the transitions come back so the update animates from the current height.
+    el.getBoundingClientRect()
+    el.style.transitionProperty = transitionProperty
+  }
+}
+
+onMounted(measure)
+
+// The content reflows when the toast is updated or the viewport resizes.
+useResizeObserver(wrapperRef, measure)
+
+// The leading content and the horizontal actions sit outside the wrapper, an update can change them without resizing it.
+watch([() => props.avatar, () => props.icon, () => props.actions, () => props.orientation, () => props.close], measure, { flush: 'post' })
 
 defineExpose({
   height
@@ -155,7 +184,7 @@ defineExpose({
       <UIcon v-else-if="props.icon" :name="props.icon" data-slot="toast-icon" :class="ui.icon({ class: props.ui?.icon })" />
     </slot>
 
-    <div data-slot="toast-wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+    <div ref="wrapperRef" data-slot="toast-wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
       <ToastTitle v-if="props.title || !!slots.title" data-slot="toast-title" :class="ui.title({ class: props.ui?.title })">
         <slot name="title">
           <component :is="props.title()" v-if="typeof props.title === 'function'" />

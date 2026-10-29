@@ -146,12 +146,42 @@ function onFocusout(event: FocusEvent) {
 
 const refs = ref<{ height: number }[]>([])
 
-const height = computed(() => refs.value.reduce((acc, { height }) => acc + height + 16, 0))
-const frontHeight = computed(() => refs.value[refs.value.length - 1]?.height || 0)
+// The collapsed stack shows three toasts, the older ones wait hidden behind the third until the ones in front close.
+const VISIBLE_TOASTS = 3
 
-function getOffset(index: number) {
-  return refs.value.slice(index + 1).reduce((acc, { height }) => acc + height + 16, 0)
-}
+// A closing toast stays mounted until its exit ends, leave it out of the stack so the others move while it leaves.
+const isOpen = (index: number) => toasts.value[index]?.open !== false
+
+const height = computed(() => refs.value.reduce((acc, { height }, index) => isOpen(index) ? acc + height + 16 : acc, 0))
+const frontHeight = computed(() => refs.value.findLast((_, index) => isOpen(index))?.height || 0)
+
+// A closing toast keeps the place it had while open, so the toasts closing with it and a hover don't move it while it leaves.
+const lastPositions = new Map<string | number, { collapsed: boolean, before: number, offset: number }>()
+
+const positions = computed(() => {
+  const ids = new Set(toasts.value.map(toast => toast.id))
+  for (const id of lastPositions.keys()) {
+    if (!ids.has(id)) {
+      lastPositions.delete(id)
+    }
+  }
+
+  return toasts.value.map((toast, index) => {
+    const last = lastPositions.get(toast.id)
+    if (toast.open === false && last) {
+      return last
+    }
+
+    const position = {
+      collapsed: !expanded.value,
+      before: toasts.value.slice(index + 1).filter(toast => toast.open !== false).length,
+      offset: refs.value.slice(index + 1).reduce((acc, { height }, i) => isOpen(index + 1 + i) ? acc + height + 16 : acc, 0)
+    }
+    lastPositions.set(toast.id, position)
+
+    return position
+  })
+})
 </script>
 
 <template>
@@ -165,15 +195,16 @@ function getOffset(index: number) {
       :progress="props.progress"
       v-bind="omit(toast, ['id', 'close', '_duplicate', '_updated', '_animatedAt', 'onClick'])"
       :close="(toast.close as boolean)"
-      :data-collapsed="!expanded"
-      :data-front="!expanded && index === toasts.length - 1"
+      :data-collapsed="positions[index]!.collapsed"
+      :data-front="positions[index]!.collapsed && positions[index]!.before === 0"
+      :data-visible="!positions[index]!.collapsed || positions[index]!.before < VISIBLE_TOASTS"
       :data-pulsing="toast._duplicate ? (toast._duplicate % 2 === 0 ? 'even' : 'odd') : undefined"
       :style="{
         '--index': (index - toasts.length) + toasts.length,
-        '--before': toasts.length - 1 - index,
-        '--offset': getOffset(index),
-        '--scale': expanded ? '1' : 'calc(1 - var(--before) * var(--scale-factor))',
-        '--translate': expanded ? 'calc(var(--offset) * var(--translate-factor))' : 'calc(var(--before) * var(--gap))',
+        '--before': Math.min(positions[index]!.before, VISIBLE_TOASTS - 1),
+        '--offset': positions[index]!.offset,
+        '--scale': positions[index]!.collapsed ? 'calc(1 - var(--before) * var(--scale-factor))' : '1',
+        '--translate': positions[index]!.collapsed ? 'calc(var(--before) * var(--gap))' : 'calc(var(--offset) * var(--translate-factor))',
         '--transform': 'translateY(var(--translate)) scale(var(--scale))'
       }"
       data-slot="toaster-base"
