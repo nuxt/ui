@@ -3,6 +3,7 @@
 export const publicComposables: Record<string, string[]> = {
   defineLocale: ['defineLocale', 'extendLocale'],
   defineShortcuts: ['defineShortcuts', 'extractShortcuts'],
+  useComponentTheme: ['useComponentTheme'],
   useContentSearch: ['useContentSearch'],
   useFileUpload: ['useFileUpload'],
   useFormField: ['useFormField'],
