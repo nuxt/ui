@@ -60,29 +60,38 @@ const GRAY_TOKENS: Record<string, string> = {
 const COMMENT = /\/\*[\s\S]*?\*\//g
 const IMPORT = /@import\s+(?:url\(\s*)?["'](\.{1,2}\/[^"']+)["']/g
 const COLORS_PLUGIN = /@plugin\s+["']@nuxt\/ui\/colors["']\s*\{([^}]*)\}/g
+const OPTION = /([\w-]+)\s*:\s*([^;]+)/g
+const SHADE = /^(?:\d+|black|white)$/
 
 /**
  * The palette each alias points at, from `@plugin "@nuxt/ui/colors" { primary: indigo; }`,
  * the colors it adds included, in the entry and the stylesheets it imports with a relative path.
  */
-function readColors(path: string, colors: Record<string, string> = { ...DEFAULT_COLORS }, seen = new Set<string>()): Record<string, string> {
-  if (seen.has(path)) {
+function readColors(path: string, colors: Record<string, string> = { ...DEFAULT_COLORS }, importing = new Set<string>()): Record<string, string> {
+  // Only a stylesheet that imports itself is skipped: Tailwind CSS inlines one
+  // imported twice twice, so its last import decides
+  if (importing.has(path)) {
     return colors
   }
-  seen.add(path)
   let css: string
   try {
     css = readFileSync(path, 'utf8').replace(COMMENT, '')
   } catch {
     return colors
   }
+  importing.add(path)
   // Tailwind CSS inlines the imports first, so a block in the entry wins over one it imports
   for (const [, specifier] of css.matchAll(IMPORT)) {
-    readColors(resolve(dirname(path), specifier!), colors, seen)
+    readColors(resolve(dirname(path), specifier!), colors, importing)
   }
+  importing.delete(path)
   for (const [, block] of css.matchAll(COLORS_PLUGIN)) {
-    for (const [, alias, palette] of block!.matchAll(/([\w-]+)\s*:\s*["']?([a-z]+)/g)) {
-      colors[alias!] = palette!
+    for (const [, alias, value] of block!.matchAll(OPTION)) {
+      // The palette is the first word, like the plugin reads it: shades alone keep the alias's palette
+      const palette = value!.replace(/["']/g, '').trim().split(/\s+/)[0]
+      if (palette && !SHADE.test(palette)) {
+        colors[alias!] = palette
+      }
     }
   }
   return colors

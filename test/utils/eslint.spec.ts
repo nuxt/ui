@@ -31,4 +31,18 @@ describe('nuxtUI', () => {
     expect(message(entryPoint, 'rose')).toContain('`primary` points at `rose`')
     expect(message(entryPoint, 'indigo')).toContain('or add one like `tertiary: indigo`')
   })
+
+  it('takes the last import of a stylesheet imported twice', () => {
+    file('shared.css', '@plugin "@nuxt/ui/colors" {\n  primary: indigo;\n}')
+    file('a.css', '@import "./shared.css";\n@plugin "@nuxt/ui/colors" {\n  primary: rose;\n}')
+    const entryPoint = file('twice.css', '@import "tailwindcss";\n@import "./a.css";\n@import "./shared.css";')
+    expect(message(entryPoint, 'indigo')).toContain('`primary` points at `indigo`')
+    expect(message(entryPoint, 'rose')).toContain('or add one like `tertiary: rose`')
+  })
+
+  it('reads the palette like the plugin does', () => {
+    const entryPoint = file('palettes.css', '@import "tailwindcss";\n@plugin "@nuxt/ui/colors" {\n  primary: black white;\n  tertiary: "indigo-brand" 600 400;\n}')
+    expect(message(entryPoint, 'sky')).toContain('`primary` points at `sky`')
+    expect(message(entryPoint, 'indigo')).toContain('or add one like `tertiary: indigo`')
+  })
 })
