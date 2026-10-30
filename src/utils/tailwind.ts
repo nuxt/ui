@@ -11,6 +11,8 @@ const PREFIX = /\bprefix\(\s*([\w-]+)\s*\)/
 const WHOLE = /^tailwindcss(?:\/index\.css)?$/
 const LAYER = /\blayer\(\s*([\w.-]+)\s*\)/
 const RELATIVE = /^\.{1,2}\//
+// The imports Tailwind CSS inlines: it leaves `@import url(...)` as it is
+const INLINED_IMPORT = /@import\s+["']([^"']+)["']/g
 
 /**
  * The prefix a stylesheet gives Tailwind CSS, `@import "tailwindcss" prefix(tw)`.
@@ -120,7 +122,7 @@ async function readAddedColors(path: string, seen: Set<string>, names: Set<strin
     return
   }
   getAddedColors(css).forEach(name => names.add(name))
-  for (const [, specifier] of css.replace(COMMENT, '').matchAll(IMPORT)) {
+  for (const [, specifier] of css.replace(COMMENT, '').matchAll(INLINED_IMPORT)) {
     if (RELATIVE.test(specifier!)) {
       await readAddedColors(resolve(dirname(path), specifier!), seen, names)
     }

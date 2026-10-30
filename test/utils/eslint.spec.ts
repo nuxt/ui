@@ -74,4 +74,10 @@ describe('nuxtUI', () => {
     const [, { restrict }] = nuxtUI({ entryPoint, colors: { tertiary: 'indigo' } })[0]!.rules!['better-tailwindcss/no-restricted-classes'] as [string, { restrict: { pattern: string, message: string }[] }]
     expect(restrict.find(({ pattern }) => new RegExp(pattern).test('bg-indigo-600'))!.message).toContain('it\'s `indigo-600` in light mode and `indigo-300` in dark mode')
   })
+
+  it('leaves an `@import url(...)` alone, which Tailwind CSS doesn\'t inline', () => {
+    file('url-colors.css', '@plugin "@nuxt/ui/colors" {\n  primary: rose;\n}')
+    const entryPoint = file('url.css', '@import "tailwindcss";\n@import url("./url-colors.css");')
+    expect(message(entryPoint, 'sky')).toContain('`primary` points at `sky`')
+  })
 })

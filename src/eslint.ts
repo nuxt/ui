@@ -58,8 +58,9 @@ const GRAY_TOKENS: Record<string, string> = {
 }
 
 const COMMENT = /\/\*[\s\S]*?\*\//g
-// A relative `@import`, or a `@nuxt/ui/colors` block, in the order they're written
-const STATEMENT = /@import\s+(?:url\(\s*)?["'](\.{1,2}\/[^"']+)["']|@plugin\s+["']@nuxt\/ui\/colors["']\s*\{([^}]*)\}/g
+// A relative `@import`, or a `@nuxt/ui/colors` block, in the order they're written. Not
+// `@import url(...)`, which Tailwind CSS leaves as it is
+const STATEMENT = /@import\s+["'](\.{1,2}\/[^"']+)["']|@plugin\s+["']@nuxt\/ui\/colors["']\s*\{([^}]*)\}/g
 const OPTION = /([\w-]+)\s*:\s*([^;]+)/g
 const SHADE = /^(?:\d+|black|white)$/
 

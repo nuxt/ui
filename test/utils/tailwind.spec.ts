@@ -98,6 +98,13 @@ describe('findAddedColors', () => {
     expect(await findAddedColors([join(dir, 'main.css'), join(dir, 'missing.css'), join(dir, 'other.css')], seen)).toEqual(['tertiary', 'brand'])
     expect([...seen]).toEqual(['main.css', 'theme/colors.css', 'missing.css', 'other.css'].map(file => join(dir, file)))
   })
+
+  it('leaves an `@import url(...)` alone, which Tailwind CSS doesn\'t inline', async () => {
+    writeFileSync(join(dir, 'url-colors.css'), '@plugin "@nuxt/ui/colors" { quaternary: lime; }')
+    writeFileSync(join(dir, 'url.css'), '@import "tailwindcss";\n@import url("./url-colors.css");')
+
+    expect(await findAddedColors([join(dir, 'url.css')])).toEqual([])
+  })
 })
 
 describe('getColorsDeclaration', () => {
