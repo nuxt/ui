@@ -327,6 +327,8 @@ interface CompiledVariant {
   defaultValue: any
   /** On a color group, the slot's classes for `primary`, which a color it doesn't list takes in its own name. */
   color?: string
+  /** The classes built from `color` for each color the group doesn't list, built once. */
+  added?: Record<string, string>
 }
 
 interface CompiledCompound {
@@ -493,14 +495,18 @@ function variantClass(variant: CompiledVariant, props: Props, slotProps: Props):
   }
   const key = falsyToString(prop) ?? falsyToString(variant.defaultValue)
   const cls = variant.table[(key || 'false') as string]
+  if (cls !== undefined || !variant.color) {
+    return cls
+  }
   // A color the theme doesn't list, added with the `@nuxt/ui/colors` plugin,
   // takes `primary`'s classes with its own scope. Unprefixed, since the rule
   // the plugin writes for it is, and it sets the variable itself.
   const value = prop ?? variant.defaultValue
-  if (cls === undefined && variant.color && typeof value === 'string' && colorName.test(value)) {
-    return variant.color.replace(PRIMARY_SCOPE, (_, variable) => `[--${variable}:var(--ui-${value})]`)
+  if (typeof value !== 'string' || !colorName.test(value)) {
+    return undefined
   }
-  return cls
+  variant.added ??= {}
+  return variant.added[value] ??= variant.color.replace(PRIMARY_SCOPE, (_, variable) => `[--${variable}:var(--ui-${value})]`)
 }
 
 /**
