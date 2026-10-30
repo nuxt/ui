@@ -63,41 +63,48 @@ const COLORS_PLUGIN = /@plugin\s+["']@nuxt\/ui\/colors["']\s*\{([^}]*)\}/g
 const OPTION = /([\w-]+)\s*:\s*([^;]+)/g
 const SHADE = /^(?:\d+|black|white)$/
 
+// The shades an alias uses in light then dark mode, `runtime/css/base.css`
+type ModeShades = [light: string, dark: string]
+const defaultShades = (alias: string): ModeShades => alias === 'neutral' ? ['900', '50'] : ['500', '400']
+
 /**
- * The palette each alias points at, from `@plugin "@nuxt/ui/colors" { primary: indigo; }`,
- * the colors it adds included, in the entry and the stylesheets it imports with a relative path.
+ * The palette each alias points at, from `@plugin "@nuxt/ui/colors" { primary: indigo; }`, and the
+ * shades it sets, the colors it adds included, in the entry and the stylesheets it imports with a relative path.
  */
-function readColors(path: string, colors: Record<string, string> = { ...DEFAULT_COLORS }, importing = new Set<string>()): Record<string, string> {
+function readColors(path: string, colors: Record<string, string> = { ...DEFAULT_COLORS }, shades: Record<string, ModeShades> = {}, importing = new Set<string>()): { colors: Record<string, string>, shades: Record<string, ModeShades> } {
   // Only a stylesheet that imports itself is skipped: Tailwind CSS inlines one
   // imported twice twice, so its last import decides
   if (importing.has(path)) {
-    return colors
+    return { colors, shades }
   }
   let css: string
   try {
     css = readFileSync(path, 'utf8').replace(COMMENT, '')
   } catch {
-    return colors
+    return { colors, shades }
   }
   importing.add(path)
   // Tailwind CSS inlines the imports first, so a block in the entry wins over one it imports
   for (const [, specifier] of css.matchAll(IMPORT)) {
-    readColors(resolve(dirname(path), specifier!), colors, importing)
+    readColors(resolve(dirname(path), specifier!), colors, shades, importing)
   }
   importing.delete(path)
   for (const [, block] of css.matchAll(COLORS_PLUGIN)) {
     for (const [, alias, value] of block!.matchAll(OPTION)) {
       // The palette is the first word, like the plugin reads it: shades alone keep the alias's palette
-      const palette = value!.replace(/["']/g, '').trim().split(/\s+/)[0]
-      if (palette && !SHADE.test(palette)) {
-        colors[alias!] = palette
+      const words = value!.replace(/["']/g, '').trim().split(/\s+/)
+      if (words[0] && !SHADE.test(words[0])) {
+        colors[alias!] = words.shift()!
+      }
+      if (words.length === 2) {
+        shades[alias!] = words as ModeShades
       }
     }
   }
-  return colors
+  return { colors, shades }
 }
 
-function paletteRestrictions(colors: Record<string, string>) {
+function paletteRestrictions(colors: Record<string, string>, shades: Record<string, ModeShades> = {}) {
   // The first alias wins when two point at the same palette, `primary` before the others
   const aliasOf: Record<string, string> = {}
   for (const [alias, palette] of Object.entries(colors)) {
@@ -134,6 +141,20 @@ function paletteRestrictions(colors: Record<string, string>) {
 
   for (const hue of HUES) {
     const alias = aliasOf[hue]
+    // The alias's own shade is the alias itself, `bg-indigo-500` is `bg-tertiary`, which follows the color mode
+    if (alias) {
+      const [light, dark] = shades[alias] ?? defaultShades(alias)
+      // `black` and `white` aren't shades of the palette
+      if (/^\d+$/.test(light) && /^\d+$/.test(dark)) {
+        restrict.push({
+          pattern: `^((?:\\S*:)?)dark:((?:\\S*:)?)(!?-?)(${COLOR_UTILITY})-${hue}-${dark}((?:\\/\\S+)?!?)$`,
+          message: `"$0" uses a raw palette color. In dark mode it's \`$1dark:$2$3$4-${alias}$5\`. When its light mode class is \`$4-${hue}-${light}\`, use \`$1$2$3$4-${alias}$5\` for both, it follows the color mode.`
+        }, {
+          pattern: `^(?!(?:\\S*:)?dark:)((?:\\S*:)?!?-?)(${COLOR_UTILITY})-${hue}-${light}((?:\\/\\S+)?!?)$`,
+          message: `"$0" uses a raw palette color. \`${alias}\` points at \`${hue}\`, use \`$1$2-${alias}$3\` instead, it's \`${hue}-${light}\` in light mode and \`${hue}-${dark}\` in dark mode.`
+        })
+      }
+    }
     restrict.push({
       pattern: `^((?:\\S*:)?!?-?)(${COLOR_UTILITY})-${hue}((?:-\\d{2,3})?(?:\\/\\S+)?!?)$`,
       message: alias
@@ -195,7 +216,7 @@ const SELECTORS = [
  */
 export default function nuxtUI(options: NuxtUIESLintOptions): Linter.Config[] {
   const entryPoint = resolve(options.entryPoint)
-  const colors = options.colors ?? readColors(entryPoint)
+  const { colors, shades } = options.colors ? { colors: options.colors, shades: {} } : readColors(entryPoint)
   const rules = {
     'no-unknown-classes': 'off',
     'no-palette-colors': 'warn',
@@ -218,7 +239,7 @@ export default function nuxtUI(options: NuxtUIESLintOptions): Linter.Config[] {
     },
     rules: {
       'better-tailwindcss/no-unknown-classes': [rules['no-unknown-classes'], { ignore: options.ignore ?? [] }],
-      'better-tailwindcss/no-restricted-classes': [rules['no-palette-colors'], { restrict: paletteRestrictions(colors) }],
+      'better-tailwindcss/no-restricted-classes': [rules['no-palette-colors'], { restrict: paletteRestrictions(colors, shades) }],
       'better-tailwindcss/no-conflicting-classes': rules['no-conflicting-classes'],
       'better-tailwindcss/enforce-logical-properties': [rules['enforce-logical-properties'], { ignore: BLOCK_AXIS }]
     }
