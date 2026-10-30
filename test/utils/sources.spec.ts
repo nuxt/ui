@@ -150,6 +150,10 @@ describe('colors plugin', () => {
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: black; }')).rejects.toThrow('`primary: black` takes a palette and two shades')
   })
 
+  it('lists every color it rejects in one error', async () => {
+    await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: red2; tertiary: rose2; }')).rejects.toThrow(/`primary: red2` needs the name of a Tailwind palette.*Did you mean `red`\?\n.*`tertiary: rose2` needs the name of a Tailwind palette.*Did you mean `rose`\?$/)
+  })
+
   it('gives an alias on a gray palette neutral\'s surface roles', async () => {
     const gray = await build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: neutral 900 50; }')
     expect(gray).toContain(':root, :host, .light, .dark {')
