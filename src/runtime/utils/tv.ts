@@ -327,8 +327,6 @@ interface CompiledVariant {
   defaultValue: any
   /** On a color group, the slot's classes for `primary`, which a color it doesn't list takes in its own name. */
   color?: string
-  /** The classes built from `color` for each color the group doesn't list, built once. */
-  added?: Record<string, string>
 }
 
 interface CompiledCompound {
@@ -403,10 +401,10 @@ function compileLayer(layer: Layer, defaultVariants: Record<string, any>, slotKe
     let hasAny = false
     for (const valueKey in group) {
       const cls = cx(classForSlot(group[valueKey], slotKey))
-      if (cls) {
-        table[valueKey] = cls
-        hasAny = true
-      }
+      // Declared with no classes for this slot is still declared: a color the
+      // group lists never takes `primary`'s classes below
+      table[valueKey] = cls ?? ''
+      hasAny ||= !!cls
     }
     // A variant with nothing to contribute to this slot can't change its output,
     // so it stays out of both the resolve path and the cache key.
@@ -505,8 +503,7 @@ function variantClass(variant: CompiledVariant, props: Props, slotProps: Props):
   if (typeof value !== 'string' || !colorName.test(value)) {
     return undefined
   }
-  variant.added ??= {}
-  return variant.added[value] ??= variant.color.replace(PRIMARY_SCOPE, (_, variable) => `[--${variable}:var(--ui-${value})]`)
+  return variant.color.replace(PRIMARY_SCOPE, (_, variable) => `[--${variable}:var(--ui-${value})]`)
 }
 
 /**

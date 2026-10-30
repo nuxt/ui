@@ -975,6 +975,13 @@ describe('tv added colors', () => {
     // the fingerprint reads it, the resolve path doesn't run again
     expect(reads).toBeLessThan(miss)
   })
+
+  it('leaves a color the group declares without classes for a slot alone', () => {
+    const theme = { slots: { base: 'flex', label: '' }, variants: { color: { primary: { base: '[--ui-accent:var(--ui-primary)]', label: '[--ui-accent:var(--ui-primary)] text-accent' }, neutral: { base: '[--ui-accent:var(--ui-neutral)]' } } } }
+
+    expect(tvt(theme)({ color: 'neutral' }).label()).toBeUndefined()
+    expect(tvt(theme)({ color: 'tertiary' }).label()).toBe('[--ui-accent:var(--ui-tertiary)] text-accent')
+  })
 })
 
 describe('tv merger config', () => {
