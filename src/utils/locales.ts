@@ -57,7 +57,7 @@ export function generateI18nPlugin(locales: I18nLocale[], keys: string[], runtim
     `  const load = async (code) => {`,
     `    const key = locales[code]`,
     `    if (key && !loaded[key]) {`,
-    `      loaded[key] = (await loaders[key]()).default`,
+    `      loaded[key] = await loaders[key]().then(r => r.default).catch(() => undefined)`,
     `    }`,
     `  }`,
     `  // Load the next locale before \`@nuxtjs/i18n\` switches to it`,
