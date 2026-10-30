@@ -56,4 +56,22 @@ describe('nuxtUI', () => {
     expect(message(entryPoint, 'indigo', 'bg-indigo-600')).toContain('use `bg-tertiary-600` instead.')
     expect(message(entryPoint, 'violet', 'bg-violet-600')).toContain('use `bg-secondary` instead, it\'s `violet-600` in light mode and `violet-300` in dark mode.')
   })
+
+  it('reads the blocks and imports in the order they\'re written', () => {
+    file('late.css', '@plugin "@nuxt/ui/colors" {\n  primary: rose;\n}')
+    const entryPoint = file('order.css', '@import "tailwindcss";\n@plugin "@nuxt/ui/colors" {\n  primary: indigo;\n}\n@import "./late.css";')
+    expect(message(entryPoint, 'rose')).toContain('`primary` points at `rose`')
+  })
+
+  it('gives an added color its default shades back when a later block sets none', () => {
+    const entryPoint = file('reset.css', '@import "tailwindcss";\n@plugin "@nuxt/ui/colors" {\n  tertiary: indigo 600 300;\n  primary: sky 600 300;\n}\n@plugin "@nuxt/ui/colors" {\n  tertiary: indigo;\n  primary: sky;\n}')
+    expect(message(entryPoint, 'indigo')).toContain('use `bg-tertiary` instead, it\'s `indigo-500` in light mode')
+    expect(message(entryPoint, 'sky', 'bg-sky-600')).toContain('use `bg-primary` instead, it\'s `sky-600` in light mode')
+  })
+
+  it('keeps the stylesheet\'s shades with the `colors` option', () => {
+    const entryPoint = file('option.css', '@import "tailwindcss";\n@plugin "@nuxt/ui/colors" {\n  tertiary: indigo 600 300;\n}')
+    const [, { restrict }] = nuxtUI({ entryPoint, colors: { tertiary: 'indigo' } })[0]!.rules!['better-tailwindcss/no-restricted-classes'] as [string, { restrict: { pattern: string, message: string }[] }]
+    expect(restrict.find(({ pattern }) => new RegExp(pattern).test('bg-indigo-600'))!.message).toContain('it\'s `indigo-600` in light mode and `indigo-300` in dark mode')
+  })
 })

@@ -58,8 +58,8 @@ const GRAY_TOKENS: Record<string, string> = {
 }
 
 const COMMENT = /\/\*[\s\S]*?\*\//g
-const IMPORT = /@import\s+(?:url\(\s*)?["'](\.{1,2}\/[^"']+)["']/g
-const COLORS_PLUGIN = /@plugin\s+["']@nuxt\/ui\/colors["']\s*\{([^}]*)\}/g
+// A relative `@import`, or a `@nuxt/ui/colors` block, in the order they're written
+const STATEMENT = /@import\s+(?:url\(\s*)?["'](\.{1,2}\/[^"']+)["']|@plugin\s+["']@nuxt\/ui\/colors["']\s*\{([^}]*)\}/g
 const OPTION = /([\w-]+)\s*:\s*([^;]+)/g
 const SHADE = /^(?:\d+|black|white)$/
 
@@ -84,12 +84,12 @@ function readColors(path: string, colors: Record<string, string> = { ...DEFAULT_
     return { colors, shades }
   }
   importing.add(path)
-  // Tailwind CSS inlines the imports first, so a block in the entry wins over one it imports
-  for (const [, specifier] of css.matchAll(IMPORT)) {
-    readColors(resolve(dirname(path), specifier!), colors, shades, importing)
-  }
-  importing.delete(path)
-  for (const [, block] of css.matchAll(COLORS_PLUGIN)) {
+  // Tailwind CSS inlines each import where it's written, so the last block to set an alias wins
+  for (const [, specifier, block] of css.matchAll(STATEMENT)) {
+    if (specifier) {
+      readColors(resolve(dirname(path), specifier), colors, shades, importing)
+      continue
+    }
     for (const [, alias, value] of block!.matchAll(OPTION)) {
       // The palette is the first word, like the plugin reads it: shades alone keep the alias's palette
       const words = value!.replace(/["']/g, '').trim().split(/\s+/)
@@ -98,9 +98,13 @@ function readColors(path: string, colors: Record<string, string> = { ...DEFAULT_
       }
       if (words.length === 2) {
         shades[alias!] = words as ModeShades
+      } else if (!(alias! in DEFAULT_COLORS)) {
+        // An added color without shades takes the defaults again, a built-in one keeps what it had
+        shades[alias!] = defaultShades(alias!)
       }
     }
   }
+  importing.delete(path)
   return { colors, shades }
 }
 
@@ -216,7 +220,9 @@ const SELECTORS = [
  */
 export default function nuxtUI(options: NuxtUIESLintOptions): Linter.Config[] {
   const entryPoint = resolve(options.entryPoint)
-  const { colors, shades } = options.colors ? { colors: options.colors, shades: {} } : readColors(entryPoint)
+  // `colors` sets the palettes, the shades are still read from the stylesheet
+  const read = readColors(entryPoint)
+  const colors = options.colors ?? read.colors
   const rules = {
     'no-unknown-classes': 'off',
     'no-palette-colors': 'warn',
@@ -239,7 +245,7 @@ export default function nuxtUI(options: NuxtUIESLintOptions): Linter.Config[] {
     },
     rules: {
       'better-tailwindcss/no-unknown-classes': [rules['no-unknown-classes'], { ignore: options.ignore ?? [] }],
-      'better-tailwindcss/no-restricted-classes': [rules['no-palette-colors'], { restrict: paletteRestrictions(colors, shades) }],
+      'better-tailwindcss/no-restricted-classes': [rules['no-palette-colors'], { restrict: paletteRestrictions(colors, read.shades) }],
       'better-tailwindcss/no-conflicting-classes': rules['no-conflicting-classes'],
       'better-tailwindcss/enforce-logical-properties': [rules['enforce-logical-properties'], { ignore: BLOCK_AXIS }]
     }
