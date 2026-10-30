@@ -243,7 +243,8 @@ const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugi
             throw new TypeError(`[@nuxt/ui] \`${alias}: ${palette}\` needs every shade of \`${palette}\` from 50 to 950, and \`--color-${palette}-${shade}\` is missing.`)
           }
           const closest = closestPalette(palette, palettes)
-          throw new TypeError(`[@nuxt/ui] \`${alias}: ${palette}\` needs the name of a Tailwind palette with shades from 50 to 950, like \`indigo\`, or of one you declare in \`@theme\` as \`--color-<name>-50\` to \`-950\`.${closest ? ` Did you mean \`${closest}\`?` : ''}`)
+          // The suggestion first, for a log that only shows the start of the message
+          throw new TypeError(`[@nuxt/ui] \`${alias}: ${palette}\` isn't a Tailwind palette${closest ? `, did you mean \`${closest}\`?` : '.'} A palette has shades from 50 to 950, like \`indigo\`, or is one you declare in \`@theme\` as \`--color-<name>-50\` to \`-950\`.`)
         }
         declarations[`--ui-color-${alias}-${shade}`] = value
       }

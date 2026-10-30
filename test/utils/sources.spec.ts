@@ -139,8 +139,8 @@ describe('colors plugin', () => {
   })
 
   it('rejects an alias outside the set, a missing palette, another alias and a wrong shade', async () => {
-    await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: brand; }')).rejects.toThrow('`primary: brand` needs the name of a Tailwind palette')
-    await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { neutral: zinx; }')).rejects.toThrow('Did you mean `zinc`?')
+    await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: brand; }')).rejects.toThrow('`primary: brand` isn\'t a Tailwind palette. A palette has shades from 50 to 950')
+    await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { neutral: zinx; }')).rejects.toThrow('`neutral: zinx` isn\'t a Tailwind palette, did you mean `zinc`? A palette')
     await expect(build({}, undefined, '@theme { --color-brand-500: #ef4444; }\n@plugin "@nuxt/ui/colors" { primary: brand; }')).rejects.toThrow('`--color-brand-50` is missing')
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: #5865f2; }')).rejects.toThrow('set `--ui-primary` in your CSS')
     await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: primary; }')).rejects.toThrow('`primary: primary` points a color alias at another')
@@ -151,7 +151,7 @@ describe('colors plugin', () => {
   })
 
   it('lists every color it rejects in one error', async () => {
-    await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: red2; tertiary: rose2; }')).rejects.toThrow(/`primary: red2` needs the name of a Tailwind palette.*Did you mean `red`\?\n.*`tertiary: rose2` needs the name of a Tailwind palette.*Did you mean `rose`\?$/)
+    await expect(build({}, undefined, '@plugin "@nuxt/ui/colors" { primary: red2; tertiary: rose2; }')).rejects.toThrow(/^\[@nuxt\/ui\] `primary: red2` isn't a Tailwind palette, did you mean `red`\?.*\n\[@nuxt\/ui\] `tertiary: rose2` isn't a Tailwind palette, did you mean `rose`\?/)
   })
 
   it('gives an alias on a gray palette neutral\'s surface roles', async () => {
