@@ -77,6 +77,7 @@ import { computed } from 'vue'
 import { Primitive, ProgressRoot, ProgressIndicator } from 'reka-ui'
 import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
+import { resolveColor } from '../utils'
 import UIcon from './Icon.vue'
 
 const _props = withDefaults(defineProps<ProgressGroupProps<T>>(), {
@@ -117,14 +118,15 @@ const percent = computed(() => Math.min(100, Math.round(percents.value.reduce((t
 // `width` would win over the class.
 const statusStyle = computed(() => ({ '--percent': `${percent.value}%` }))
 
-// `tv` skips a color it doesn't know, so a value outside the theme palette adds no class
-// and is applied inline instead.
+// A color the theme doesn't list is applied inline. `tv` gives a name its scope, which
+// only has a rule for a color added with the `@nuxt/ui/colors` plugin, and adds no class
+// for any other CSS color.
 // The colors the theme knows, with the ones the app config and each `<UTheme>` add
 const themeColors = computed(() => Object.keys(Object.assign({ ...theme.variants?.color }, ...overrides.value.levels.map(level => level?.variants?.color))))
 
 const itemColors = computed(() => (props.items ?? []).map(item => (item.color || props.color) as ProgressGroup['variants']['color']))
 
-const customColors = computed(() => itemColors.value.map(color => color && !themeColors.value.includes(color) ? color : undefined))
+const customColors = computed(() => itemColors.value.map(color => color && !themeColors.value.includes(color) ? resolveColor(color) : undefined))
 
 const hasList = computed(() => !!props.items?.length
   && (props.items.some(item => item.label || item.icon || item.slot)

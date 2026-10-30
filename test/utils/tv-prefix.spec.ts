@@ -41,6 +41,13 @@ describe('tv with a Tailwind prefix', () => {
     expect(tvt(colored, withPrefix(undefined, true))({ color: 'error' }).base!()).toBe('tw:[--ui-accent:var(--ui-error)]')
   })
 
+  it('leaves the scope of an added color unprefixed, like the rule the colors plugin writes for it', () => {
+    const colored = { ...theme, variants: { ...theme.variants, color: { primary: { base: '[--ui-accent:var(--ui-primary)]' } } } }
+
+    expect(tvt(colored, withPrefix())({ color: 'primary' }).base!()).toBe('tw:inline-flex tw:px-2 tw:text-sm tw:[--ui-accent:var(--ui-primary)]')
+    expect(tvt(colored, withPrefix())({ color: 'tertiary' }).base!()).toBe('tw:inline-flex tw:px-2 tw:text-sm [--ui-accent:var(--ui-tertiary)]')
+  })
+
   it('shares one engine per merge config content and prefix', () => {
     expect(engineFor({ prefix: 'tw' }, 'tw')).toBe(engineFor({ prefix: 'tw' }, 'tw'))
     expect(engineFor({ prefix: 'tw' }, 'tw')).not.toBe(engineFor({ prefix: 'tw' }, 'ui'))

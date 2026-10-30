@@ -1,12 +1,16 @@
 import { describe, it, expect, expectTypeOf, vi } from 'vitest'
 import { reactive } from 'vue'
 import { tv, ComponentOverrides, engineFor } from '../../src/runtime/utils/tv'
-import type { TVTheme, VariantProps } from '../../src/runtime/types/tv'
-import { extendTheme } from '../../src/runtime/utils/theme'
+import type { ComponentConfig, ComponentThemeConfig, TVTheme, VariantProps } from '../../src/runtime/types/tv'
+import type { ThemeDefaultVariants } from '../../src/runtime/types/theme'
+import { defineTheme, extendTheme } from '../../src/runtime/utils/theme'
+import { colorVariant } from '../../src/runtime/theme/color'
 import buttonTheme from '../../src/runtime/theme/button'
 import selectTheme from '../../src/runtime/theme/select'
 import navigationMenuTheme from '../../src/runtime/theme/navigation-menu'
 import stepsTheme from '../../src/runtime/theme/prose/steps'
+import pageCardTheme from '../../src/runtime/theme/page-card'
+import progressGroupTheme from '../../src/runtime/theme/progress-group'
 
 // Cast to a permissive local signature: the strongly-typed `tv` is what
 // components rely on, whereas these tests exercise the engine at runtime with
@@ -803,7 +807,8 @@ describe('tv spec sharing', () => {
 describe('tv theme sources', () => {
   it('takes a theme source', () => {
     expect(tv(buttonTheme)({ color: 'error' }).base()).toContain('[--ui-accent:var(--ui-error)]')
-    expectTypeOf(buttonTheme.defaultVariants.color).toEqualTypeOf<'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral'>()
+    // with the color the tests declare, see `UIColors` above
+    expectTypeOf(buttonTheme.defaultVariants.color).toEqualTypeOf<'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral' | 'brand'>()
 
     // @ts-expect-error not a color
     tv(buttonTheme)({ color: 'tertiary' })
@@ -872,6 +877,110 @@ describe('tv theme sources', () => {
   it('matches a numeric variant key by its string form', () => {
     expect(tv(stepsTheme)({ level: '4' }).base()).toContain('[&>h4]:[counter-increment:step]')
     expect(tv(stepsTheme)({ level: 4 }).base()).toContain('[&>h4]:[counter-increment:step]')
+  })
+})
+
+// The colors an app adds, as `declare module '@nuxt/ui'` does it. `brand` and
+// not `tertiary`, which the tests below keep as an undeclared color.
+declare module '../../src/runtime/types/tv' {
+  interface UIColors {
+    brand: true
+  }
+}
+
+// A color the `@nuxt/ui/colors` plugin adds, like `tertiary`, is in no theme:
+// the engine gives it `primary`'s classes with its own scope.
+describe('tv added colors', () => {
+  it('scopes a color the theme doesn\'t list on the slots `primary` scopes', () => {
+    const ui = tvt(buttonTheme)({ color: 'tertiary', variant: 'solid' })
+
+    expect(ui.base()).toBe(tvt(buttonTheme)({ color: 'primary', variant: 'solid' }).base().replace('[--ui-accent:var(--ui-primary)]', '[--ui-accent:var(--ui-tertiary)]'))
+    expect(ui.label()).toBe('truncate')
+  })
+
+  it('keeps the classes a color group puts next to the scope', () => {
+    const ui = tvt(progressGroupTheme)({ color: 'brand-dark' }) as Record<string, () => string>
+
+    expect(ui.indicator!()).toContain('[--ui-accent:var(--ui-brand-dark)] bg-accent')
+  })
+
+  it('scopes the highlight and spotlight colors the same way', () => {
+    const nav = tvt(navigationMenuTheme)({ highlight: true, highlightColor: 'tertiary', color: 'quaternary' }) as Record<string, () => string>
+    const card = tvt(pageCardTheme)({ spotlight: true, spotlightColor: 'tertiary' }) as Record<string, () => string>
+
+    expect(nav.link!()).toContain('[--ui-highlight:var(--ui-tertiary)]')
+    expect(nav.link!()).toContain('[--ui-accent:var(--ui-quaternary)]')
+    expect(card.root!()).toContain('[--spotlight-color:var(--ui-tertiary)]')
+  })
+
+  it('ignores a value that can\'t name a color, like an unknown value of any other group', () => {
+    const none = tvt(buttonTheme)({ color: 'primary' }).base().replace('[--ui-accent:var(--ui-primary)] ', '')
+
+    expect(tvt(buttonTheme)({ color: 'x)] bg-red-500 [--a:b' }).base()).toBe(none)
+    expect(tvt(buttonTheme)({ color: 'Tertiary' }).base()).toBe(none)
+    expect(tvt(buttonTheme)({ color: 1 }).base()).toBe(none)
+  })
+
+  it('leaves a value the overrides add to the color group to them', () => {
+    const ui = tvt(buttonTheme, { variants: { color: { tertiary: { base: 'ring-2' } } } })({ color: 'tertiary' })
+
+    expect(ui.base()).toContain('[--ui-accent:var(--ui-tertiary)]')
+    expect(ui.base()).toMatch(/ ring-2$/)
+  })
+
+  it('takes one as the default color', () => {
+    expect(tvt(buttonTheme, { defaultVariants: { color: 'tertiary' } })().base()).toContain('[--ui-accent:var(--ui-tertiary)]')
+  })
+
+  it('keeps the scope when unstyled', () => {
+    expect(tvt(buttonTheme, { unstyled: true })({ color: 'tertiary' }).base()).toBe('[--ui-accent:var(--ui-tertiary)]')
+  })
+
+  it('types the colors an app declares on every color group, and nowhere else', () => {
+    type Button = ComponentConfig<typeof buttonTheme, { ui: object }, 'button'>
+    type Nav = ComponentConfig<typeof navigationMenuTheme, { ui: object }, 'navigationMenu'>
+
+    expectTypeOf<Button['variants']['color']>().toEqualTypeOf<'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral' | 'brand'>()
+    expectTypeOf<Nav['variants']['highlightColor']>().toEqualTypeOf<'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral' | 'brand'>()
+    expectTypeOf<Button['variants']['size']>().toEqualTypeOf<'xs' | 'sm' | 'md' | 'lg' | 'xl'>()
+    expectTypeOf<NonNullable<ThemeDefaultVariants['color']>>().toEqualTypeOf<'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral' | 'brand'>()
+
+    tv(buttonTheme)({ color: 'brand' })
+    // @ts-expect-error not declared
+    tv(buttonTheme)({ color: 'tertiary' })
+  })
+
+  it('types the colors an app declares on its own components', () => {
+    const theme = defineTheme({ slots: { root: '' }, variants: { color: colorVariant({ root: 'bg-accent' }) } })
+    type Tag = ComponentThemeConfig<typeof theme, 'acmeTag'>
+
+    expectTypeOf<Tag['variants']['color']>().toEqualTypeOf<'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral' | 'brand'>()
+    expect(tv(theme)({ color: 'brand' }).root()).toBe('[--ui-accent:var(--ui-brand)] bg-accent')
+  })
+
+  it('memoizes an added color like any value', () => {
+    const theme = { slots: { base: 'flex' }, variants: { color: { primary: { base: '[--ui-accent:var(--ui-primary)]' } } } }
+    let reads = 0
+    const props = {
+      get color() {
+        reads++
+        return 'tertiary'
+      }
+    }
+
+    expect(tvt(theme)().base(props)).toBe('flex [--ui-accent:var(--ui-tertiary)]')
+    const miss = reads
+    reads = 0
+    expect(tvt(theme)().base(props)).toBe('flex [--ui-accent:var(--ui-tertiary)]')
+    // the fingerprint reads it, the resolve path doesn't run again
+    expect(reads).toBeLessThan(miss)
+  })
+
+  it('leaves a color the group declares without classes for a slot alone', () => {
+    const theme = { slots: { base: 'flex', label: '' }, variants: { color: { primary: { base: '[--ui-accent:var(--ui-primary)]', label: '[--ui-accent:var(--ui-primary)] text-accent' }, neutral: { base: '[--ui-accent:var(--ui-neutral)]' } } } }
+
+    expect(tvt(theme)({ color: 'neutral' }).label()).toBeUndefined()
+    expect(tvt(theme)({ color: 'tertiary' }).label()).toBe('[--ui-accent:var(--ui-tertiary)] text-accent')
   })
 })
 

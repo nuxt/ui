@@ -5,6 +5,7 @@ import tables from 'cn/tables'
 import { isEmpty } from './index'
 import { unstyledTheme } from './unstyled'
 import { applyPrefix } from './prefix'
+import { colorName } from '../theme/color'
 import type { ClassValue, SlotClassReplacer, TVMergeConfig, TV } from '../types/tv'
 
 /**
@@ -313,11 +314,19 @@ function resolveSpec(theme: Record<string, any>, levels: readonly Record<string,
  * per-slot compilation
  * ------------------------------------------------------------------ */
 
+/**
+ * The scope a color group puts on a slot for `primary`, like `[--ui-accent:var(--ui-primary)]`,
+ * with any prefix in front of it.
+ */
+const PRIMARY_SCOPE = /(?:[\w-]+:)*\[--(ui-accent|ui-highlight|spotlight-color):var\(--ui-primary\)\]/
+
 interface CompiledVariant {
   key: string
   /** Variant value key to pre-joined class string for this slot. */
   table: Record<string, string | undefined>
   defaultValue: any
+  /** On a color group, the slot's classes for `primary`, which a color it doesn't list takes in its own name. */
+  color?: string
 }
 
 interface CompiledCompound {
@@ -392,16 +401,16 @@ function compileLayer(layer: Layer, defaultVariants: Record<string, any>, slotKe
     let hasAny = false
     for (const valueKey in group) {
       const cls = cx(classForSlot(group[valueKey], slotKey))
-      if (cls) {
-        table[valueKey] = cls
-        hasAny = true
-      }
+      // Declared with no classes for this slot is still declared: a color the
+      // group lists never takes `primary`'s classes below
+      table[valueKey] = cls ?? ''
+      hasAny ||= !!cls
     }
     // A variant with nothing to contribute to this slot can't change its output,
     // so it stays out of both the resolve path and the cache key.
     if (hasAny) {
       relevant.add(key)
-      variants.push({ key, table, defaultValue: defaultVariants[key] })
+      variants.push({ key, table, defaultValue: defaultVariants[key], color: table.primary && PRIMARY_SCOPE.test(table.primary) ? table.primary : undefined })
     }
   }
 
@@ -483,7 +492,18 @@ function variantClass(variant: CompiledVariant, props: Props, slotProps: Props):
     return undefined
   }
   const key = falsyToString(prop) ?? falsyToString(variant.defaultValue)
-  return variant.table[(key || 'false') as string]
+  const cls = variant.table[(key || 'false') as string]
+  if (cls !== undefined || !variant.color) {
+    return cls
+  }
+  // A color the theme doesn't list, added with the `@nuxt/ui/colors` plugin,
+  // takes `primary`'s classes with its own scope. Unprefixed, since the rule
+  // the plugin writes for it is, and it sets the variable itself.
+  const value = prop ?? variant.defaultValue
+  if (typeof value !== 'string' || !colorName.test(value)) {
+    return undefined
+  }
+  return variant.color.replace(PRIMARY_SCOPE, (_, variable) => `[--${variable}:var(--ui-${value})]`)
 }
 
 /**
