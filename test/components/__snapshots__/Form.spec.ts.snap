@@ -25,7 +25,10 @@ exports[`Form > custom validation works > with error 1`] = `
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Must be at least 8 characters</div>
+      <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">
+        <!--v-if-->
+        <!--v-if-->Must be at least 8 characters
+      </div>
     </div>
   </div>
 </form>"
@@ -87,7 +90,10 @@ exports[`Form > joi validation works > with error 1`] = `
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Must be at least 8 characters</div>
+      <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">
+        <!--v-if-->
+        <!--v-if-->Must be at least 8 characters
+      </div>
     </div>
   </div>
 </form>"
@@ -165,7 +171,10 @@ exports[`Form > superstruct validation works > with error 1`] = `
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Must be at least 8 characters</div>
+      <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">
+        <!--v-if-->
+        <!--v-if-->Must be at least 8 characters
+      </div>
     </div>
   </div>
 </form>"
@@ -227,7 +236,10 @@ exports[`Form > valibot validation works > with error 1`] = `
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Must be at least 8 characters</div>
+      <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">
+        <!--v-if-->
+        <!--v-if-->Must be at least 8 characters
+      </div>
     </div>
   </div>
 </form>"
@@ -289,7 +301,10 @@ exports[`Form > yup validation works > with error 1`] = `
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Must be at least 8 characters</div>
+      <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">
+        <!--v-if-->
+        <!--v-if-->Must be at least 8 characters
+      </div>
     </div>
   </div>
 </form>"
@@ -351,7 +366,10 @@ exports[`Form > zod validation works > with error 1`] = `
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Must be at least 8 characters</div>
+      <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">
+        <!--v-if-->
+        <!--v-if-->Must be at least 8 characters
+      </div>
     </div>
   </div>
 </form>"

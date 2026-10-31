@@ -94,6 +94,34 @@ describe('AuthForm', () => {
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
+  it('forwards errorPrefix and errorIcon to FormField without leaking to input', async () => {
+    const customFields = [{
+      name: 'email',
+      label: 'Email',
+      type: 'text' as const,
+      error: 'Invalid email format',
+      errorPrefix: 'Error:',
+      errorIcon: 'i-lucide-circle-alert'
+    }] satisfies AuthFormProps['fields']
+
+    const wrapper = await mountSuspended(AuthForm, {
+      props: { fields: customFields }
+    })
+
+    const prefix = wrapper.find('[data-slot="errorPrefix"]')
+    expect(prefix.exists()).toBe(true)
+    expect(prefix.text()).toBe('Error:')
+
+    const icon = wrapper.find('[data-slot="errorIcon"]')
+    expect(icon.exists()).toBe(true)
+
+    const input = wrapper.find('input')
+    expect(input.attributes('errorprefix')).toBeUndefined()
+    expect(input.attributes('error-prefix')).toBeUndefined()
+    expect(input.attributes('erroricon')).toBeUndefined()
+    expect(input.attributes('error-icon')).toBeUndefined()
+  })
+
   test('should have the correct types', () => {
     const schema = z.object({
       email: z.string(),
