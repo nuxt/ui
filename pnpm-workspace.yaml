@@ -32,9 +32,9 @@ catalog:
   "@nuxt/fonts": ^1.2.0
   "@nuxt/icon": ^2.6.1
   "@nuxt/image": ^2.2.0
-  "@nuxt/kit": ^4.6.2
+  "@nuxt/kit": ^4.6.3
   "@nuxt/module-builder": ^1.0.3
-  "@nuxt/schema": ^4.6.2
+  "@nuxt/schema": ^4.6.3
   "@nuxt/test-utils": ^4.3.4
   "@nuxt/ui": workspace:*
   "@nuxtjs/color-mode": ^4.0.1
@@ -114,7 +114,7 @@ catalog:
   minimark: ^0.2.0
   mlly: ^1.8.2
   motion-v: ^2.8.0
-  nuxt: ^4.6.2
+  nuxt: ^4.6.3
   nuxt-agent-discovery: ^0.8.1
   nuxt-component-meta: ^0.19.0
   nuxt-llms: ^0.3.0
@@ -132,7 +132,11 @@ catalog:
   sortablejs: ^1.15.7
   superstruct: ^2.0.2
   tailwind-merge: ^3.7.0
-  tailwind-variants: ^3.2.2
+  # tailwind-variants 3.3.x is a full internal rewrite: invoking a tv() result is
+  # 18 to 103x slower than 3.2.2 (see test/bench/tv.bench.ts) and the exported
+  # type constraints changed in a breaking way. Pinned exactly so the published
+  # package doesn't resolve 3.3.x for users, keep in sync with the renovate.json rule.
+  tailwind-variants: 3.2.2
   tailwindcss: ^4.3.3
   tinyglobby: ^0.2.17
   tiptap-extension-code-block-shiki: ^1.2.0
@@ -162,16 +166,10 @@ overrides:
   # the whole vite peer group down to vitest's vite 7. The plugin only ever runs
   # inside vitest's own vite, so the wider range is bookkeeping, not runtime.
   "@codspeed/vitest-plugin>vite": ^7.0.0 || ^8.0.0
-  "@nuxt/kit": ^4.6.2
+  "@nuxt/kit": ^4.6.3
   "@nuxt/ui": workspace:*
-  # tailwind-variants 3.3.x is a full internal rewrite: invoking a tv() result is
-  # 18 to 103x slower than 3.2.2 (see test/bench/tv.bench.ts) and the exported
-  # type constraints changed in a breaking way. Pinned until upstream addresses
-  # the perf regression, keep in sync with the renovate.json rule.
-  tailwind-variants: 3.2.2
   unplugin: ^3.4.0
   c12: ^3.3.4
-  h3: 1.15.11
   typescript: ^6.0.3
 
 allowBuilds:

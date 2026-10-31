@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: 'ការ៉ូសែល',
       slide: 'ស្លាយ'
     },
+    chatAttachment: {
+      uploading: 'កំពុងផ្ទុកឡើង',
+      error: 'ការផ្ទុកឡើងបានបរាជ័យ'
+    },
     chatMessages: {
       autoScroll: 'រំកិលចុះក្រោម'
     },
     chatPrompt: {
-      placeholder: 'សួរស្រឡាញ់មួយបីនេះមានប្រភេទបានទាមទារទេ…'
+      placeholder: 'សួរស្រឡាញ់មួយបីនេះមានប្រភេទបានទាមទារទេ…',
+      queue: 'សារក្នុងជួរ',
+      sendNow: 'ផ្ញើឥឡូវនេះ',
+      edit: 'កែសម្រួល',
+      remove: 'ដកចេញ'
     },
     chatPromptSubmit: {
       label: 'សាក់',

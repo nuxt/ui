@@ -1,10 +1,11 @@
 <script setup lang="ts">
 const appConfig = useAppConfig()
 const studioIcons = useStudioIcons()
+const NuxtLink = resolveComponent('NuxtLink')
 
 const { data: page } = await useAsyncData('templates', () => queryCollection('templates').first())
 if (!page.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+  throw createError({ status: 404, statusText: 'Page not found', fatal: true })
 }
 
 // One list per framework, each hidden whole by its class (a JS filter would
@@ -58,15 +59,23 @@ if (import.meta.server) {
               :key="template.title"
               class="grid grid-cols-1 md:grid-cols-[auto_1fr] xl:grid-cols-[auto_1fr_auto] md:items-center gap-x-6 lg:gap-x-9 gap-y-5 py-8 first:pt-0 last:pb-0"
             >
-              <UColorModeImage
-                :light="`/assets/templates/${template.framework}/${template.title.toLowerCase()}-light.png`"
-                :dark="`/assets/templates/${template.framework}/${template.title.toLowerCase()}-dark.png`"
-                :alt="`Template ${template.title} screenshot`"
-                width="654"
-                height="368"
-                :loading="framework === 'nuxt' && index < 2 ? 'eager' : 'lazy'"
-                class="w-full md:w-92 lg:w-110 md:row-span-2 xl:row-span-1 aspect-video object-cover object-top rounded-lg border border-default"
-              />
+              <!-- the screenshot opens the guide when the template has one -->
+              <component
+                :is="template.guide ? NuxtLink : 'div'"
+                :to="template.guide"
+                class="group/image block w-full md:w-92 lg:w-110 md:row-span-2 xl:row-span-1 overflow-hidden rounded-lg border border-default"
+              >
+                <UColorModeImage
+                  :light="`/assets/templates/${template.framework}/${template.title.toLowerCase()}-light.png`"
+                  :dark="`/assets/templates/${template.framework}/${template.title.toLowerCase()}-dark.png`"
+                  :alt="template.guide ? `Read the ${template.title} template guide` : `Template ${template.title} screenshot`"
+                  width="654"
+                  height="368"
+                  :loading="framework === 'nuxt' && index < 2 ? 'eager' : 'lazy'"
+                  class="w-full aspect-video object-cover object-top"
+                  :class="template.guide && 'group-hover/image:scale-[1.03] transition-transform duration-300'"
+                />
+              </component>
 
               <div class="flex flex-col gap-3 min-w-0">
                 <h2 class="text-2xl font-semibold tracking-tight text-highlighted">
@@ -101,6 +110,15 @@ if (import.meta.server) {
                     :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
                   />
                 </UDropdownMenu>
+
+                <UButton
+                  v-if="template.guide"
+                  color="neutral"
+                  variant="outline"
+                  :icon="studioIcons.bookOpen"
+                  label="Guide"
+                  :to="template.guide"
+                />
 
                 <UButton
                   v-for="link of template.links"

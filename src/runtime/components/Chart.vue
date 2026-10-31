@@ -119,7 +119,7 @@ export interface ChartProps<T extends ChartData = ChartData> {
   /**
    * A complete TanStack Charts definition. Takes precedence over `data`, `index` and `categories`.
    * When it has its own `tooltip`, that one is used in place of the `tooltip` prop.
-   * @see https://tanstack.com/charts/latest/docs/concepts/chart-definitions
+   * @see https://tanstack.com/charts/v1/docs/concepts/chart-definitions
    */
   definition?: ChartDefinition<any, any, any>
   class?: any

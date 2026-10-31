@@ -107,6 +107,10 @@ items:
     url: https://triadtrainer.vercel.app/
   - name: Uneed
     url: https://uneed.best/
+  - name: Virtual RH
+    url: https://virtualrh.fr/
+    screenshotOptions:
+      cookies: ['cookie-consent=denied']
   - name: Volta
     url: https://volta.net/
   - name: WhatsBox

@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: 'carosello',
       slide: 'diapositiva'
     },
+    chatAttachment: {
+      uploading: 'Caricamento',
+      error: 'Caricamento non riuscito'
+    },
     chatMessages: {
       autoScroll: 'Scorri in fondo'
     },
     chatPrompt: {
-      placeholder: 'Scrivi il tuo messaggio qui…'
+      placeholder: 'Scrivi il tuo messaggio qui…',
+      queue: 'Messaggi in coda',
+      sendNow: 'Invia ora',
+      edit: 'Modifica',
+      remove: 'Rimuovi'
     },
     chatPromptSubmit: {
       label: 'Invia',

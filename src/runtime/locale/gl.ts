@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: 'carrusel',
       slide: 'diapositiva'
     },
+    chatAttachment: {
+      uploading: 'Subindo',
+      error: 'Erro ao subir'
+    },
     chatMessages: {
       autoScroll: 'Desprazar cara abaixo'
     },
     chatPrompt: {
-      placeholder: 'Escribe a túa mensaxe aquí…'
+      placeholder: 'Escribe a túa mensaxe aquí…',
+      queue: 'Mensaxes na cola',
+      sendNow: 'Enviar agora',
+      edit: 'Editar',
+      remove: 'Quitar'
     },
     chatPromptSubmit: {
       label: 'Enviar',

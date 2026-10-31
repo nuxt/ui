@@ -86,12 +86,12 @@ const historyItems: NavigationMenuItem[] = [
 
 // The template's ModelSelect, over its own list (chat/shared/utils/models.ts).
 const models = [
-  { label: 'Claude Haiku 4.5', value: 'anthropic/claude-haiku-4.5', icon: 'i-simple-icons-anthropic' },
+  { label: 'Claude Haiku 5.5', value: 'anthropic/claude-haiku-5.5', icon: 'i-simple-icons-anthropic' },
   { label: 'Gemini 3 Flash', value: 'google/gemini-3-flash', icon: 'i-simple-icons-google' },
-  { label: 'GPT-5 Nano', value: 'openai/gpt-5-nano', icon: 'i-simple-icons-openai' }
+  { label: 'GPT-5.6 Luna', value: 'openai/gpt-5.6-luna', icon: 'i-simple-icons-openai' }
 ]
 
-const model = ref('anthropic/claude-haiku-4.5')
+const model = ref('anthropic/claude-haiku-5.5')
 const activeModel = computed(() => models.find(m => m.value === model.value))
 
 const ui = {
@@ -203,7 +203,7 @@ const ui = {
 
     <!-- The template's signature: the conversation floats over the body. -->
     <div class="flex-1 flex m-4 lg:ms-0 rounded-lg ring ring-default bg-default/75 shadow-sm min-w-0 overflow-hidden">
-      <UDashboardPanel class="relative min-h-0" :ui="{ body: 'p-0 sm:p-0 overscroll-none' }">
+      <UDashboardPanel class="relative min-h-0" :ui="{ body: 'p-0 sm:p-0 overscroll-none scroll-pt-(--ui-header-height)' }">
         <template #header>
           <!-- Transparent and absolute, so the messages scroll under a blur.
                Rounded like the panel: a backdrop filter paints its own square
@@ -242,9 +242,9 @@ const ui = {
                 :messages="messages"
                 :status="status"
                 should-auto-scroll
-                :spacing-offset="200"
                 :user="{ ui: { text: 'leading-6' } }"
-                class="pt-(--ui-header-height) pb-4 sm:pb-6"
+                class="pt-(--ui-header-height)"
+                :ui="{ footer: 'pt-4 sm:pt-6' }"
               >
                 <template #part="{ part, message, streaming }">
                   <Markdown
@@ -255,55 +255,57 @@ const ui = {
                     class="*:first:mt-0 *:last:mb-0"
                   />
                 </template>
+
+                <template #footer>
+                  <UChatPrompt
+                    v-model="input"
+                    :status="status"
+                    :error="error"
+                    color="neutral"
+                    variant="subtle"
+                    placeholder="Ask anything about Nuxt UI..."
+                    class="rounded-b-none"
+                    :ui="{ base: 'px-1.5' }"
+                    @submit="onSubmit"
+                  >
+                    <template #footer>
+                      <div class="flex items-center gap-1">
+                        <UTooltip text="Attach file" :content="{ side: 'top' }">
+                          <UButton
+                            :icon="studioIcons.paperclip"
+                            color="neutral"
+                            variant="ghost"
+                            size="sm"
+                            square
+                            aria-label="Attach file"
+                          />
+                        </UTooltip>
+
+                        <USelectMenu
+                          v-model="model"
+                          :items="models"
+                          :icon="activeModel?.icon"
+                          value-key="value"
+                          color="neutral"
+                          variant="ghost"
+                          size="sm"
+                          class="data-[state=open]:bg-elevated"
+                          :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                        />
+                      </div>
+
+                      <UChatPromptSubmit
+                        :status="status"
+                        color="neutral"
+                        size="sm"
+                        @stop="stop()"
+                        @reload="regenerate()"
+                      />
+                    </template>
+                  </UChatPrompt>
+                </template>
               </UChatMessages>
             </UTheme>
-
-            <UChatPrompt
-              v-model="input"
-              :status="status"
-              :error="error"
-              color="neutral"
-              variant="subtle"
-              placeholder="Ask anything about Nuxt UI..."
-              class="sticky bottom-0 rounded-b-none z-10"
-              :ui="{ base: 'px-1.5' }"
-              @submit="onSubmit"
-            >
-              <template #footer>
-                <div class="flex items-center gap-1">
-                  <UTooltip text="Attach file" :content="{ side: 'top' }">
-                    <UButton
-                      :icon="studioIcons.paperclip"
-                      color="neutral"
-                      variant="ghost"
-                      size="sm"
-                      square
-                      aria-label="Attach file"
-                    />
-                  </UTooltip>
-
-                  <USelectMenu
-                    v-model="model"
-                    :items="models"
-                    :icon="activeModel?.icon"
-                    value-key="value"
-                    color="neutral"
-                    variant="ghost"
-                    size="sm"
-                    class="data-[state=open]:bg-elevated"
-                    :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
-                  />
-                </div>
-
-                <UChatPromptSubmit
-                  :status="status"
-                  color="neutral"
-                  size="sm"
-                  @stop="stop()"
-                  @reload="regenerate()"
-                />
-              </template>
-            </UChatPrompt>
           </UContainer>
         </template>
       </UDashboardPanel>

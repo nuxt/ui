@@ -2,7 +2,8 @@
 import type { ToolUIPart, DynamicToolUIPart } from 'ai'
 import { DefaultChatTransport, isToolUIPart, isReasoningUIPart, isTextUIPart, getToolName } from 'ai'
 import { useChat as useAIChat } from '@ai-sdk/vue'
-import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
+import { getTextFromMessage, isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
+import type { ChatPromptQueueItem } from '@nuxt/ui'
 import type { DocsChatMessage, DocsChatTools } from '~~/server/api/ai.post'
 
 const input = ref('')
@@ -74,7 +75,7 @@ function processThemeToolCalls() {
   }
 }
 
-const { messages: chatMessages, status, error, sendMessage, regenerate, stop } = useAIChat<DocsChatMessage>({
+const { messages: chatMessages, status, error, sendMessage, regenerate, stop, clearError } = useAIChat<DocsChatMessage>({
   messages: messages.value,
   transport: new DefaultChatTransport<DocsChatMessage>({
     api: '/api/ai',
@@ -115,16 +116,54 @@ watchEffect(() => {
 
 const canClear = computed(() => messages.value.length > 0)
 
+// Messages sent while a response streams wait here: `UChatPrompt` queues a submit
+// while the chat is busy, the AI SDK would otherwise start a second request
+// next to the current one. A queued question keeps the page it was asked on.
+const queue = ref<ChatPromptQueueItem[]>([])
+
+watch(() => queue.value.length, () => {
+  for (const item of queue.value) {
+    item.currentPage ??= currentPage.value
+  }
+})
+
+function send(text: string, page: string) {
+  track('AI Chat Message Sent')
+
+  sendMessage({ text, metadata: { currentPage: page } })
+}
+
+function sendNext() {
+  const next = queue.value.shift()
+  if (next) {
+    send(next.text.trim(), next.currentPage)
+  }
+}
+
 function onSubmit() {
-  if (!input.value.trim()) {
+  const text = input.value.trim()
+  if (!text) {
     return
   }
 
-  track('AI Chat Message Sent')
-
-  sendMessage({ text: input.value, metadata: { currentPage: currentPage.value } })
-
   input.value = ''
+  send(text, currentPage.value)
+}
+
+watch(status, (value) => {
+  if (value === 'ready') {
+    sendNext()
+  }
+})
+
+// A queued message picked to be sent now is at the front of the queue, it goes
+// out once the current response stops
+function onSend() {
+  if (status.value === 'submitted' || status.value === 'streaming') {
+    stop()
+  } else {
+    sendNext()
+  }
 }
 
 // Sync external messages (e.g. from search→chat flow) into the chat instance.
@@ -132,6 +171,15 @@ function onSubmit() {
 // _skipSync prevents loops when onFinish writes back to the shared messages ref.
 watch(messages, (newMessages) => {
   if (_skipSync) return
+
+  // A question asked from the search palette or "Explain this page" while a
+  // response streams waits in the queue, syncing would restart the chat mid-answer
+  const last = newMessages.at(-1)
+  if (last?.role === 'user' && (status.value === 'submitted' || status.value === 'streaming')) {
+    pending.value = false
+    queue.value.push({ text: getTextFromMessage(last), currentPage: last.metadata?.currentPage ?? currentPage.value })
+    return
+  }
 
   chatMessages.value = newMessages
   if (chatMessages.value.at(-1)?.role === 'user') {
@@ -220,6 +268,7 @@ function askQuestion(question: string) {
 // The sidebar keeps its content mounted when closed (offcanvas), so the prompt's
 // `autofocus` only fires once. Refocus it each time the sidebar reopens.
 const promptRef = useTemplateRef('promptRef')
+
 watch(open, (value) => {
   if (value) {
     nextTick(() => {
@@ -261,6 +310,9 @@ function clearMessages() {
   }
   messages.value = []
   chatMessages.value = []
+  queue.value = []
+  // A failed response would otherwise keep the empty prompt disabled
+  clearError()
   _themeApplied.clear()
 }
 </script>
@@ -273,7 +325,7 @@ function clearMessages() {
     rail
     breakpoint="xl"
     :style="{ '--sidebar-width': '24rem' }"
-    :ui="{ footer: 'p-0', actions: 'gap-0.5' }"
+    :ui="{ body: 'pb-0', actions: 'gap-0.5' }"
     class="bg-default"
   >
     <template #actions>
@@ -339,14 +391,25 @@ function clearMessages() {
       }"
     >
       <UChatMessages
-        v-if="chatMessages.length"
         should-auto-scroll
         :messages="chatMessages"
         :status="status"
         compact
         class="px-0 gap-2"
         :user="{ ui: { container: 'max-w-full', text: 'text-sm/6' } }"
+        :ui="{ footer: 'py-4 before:absolute before:inset-x-0 before:bottom-0 before:h-4 before:bg-default' }"
       >
+        <template v-if="!chatMessages.length" #default>
+          <div class="flex flex-col gap-6">
+            <UPageLinks
+              v-for="category in suggestions"
+              :key="category.category"
+              :title="category.category"
+              :links="category.items.map(item => ({ label: item, onClick: () => askQuestion(item) }))"
+            />
+          </div>
+        </template>
+
         <template #indicator>
           <UChatTool :icon="studioIcons.brain" text="Thinking..." streaming />
         </template>
@@ -378,45 +441,39 @@ function clearMessages() {
             :error="part.state === 'output-error'"
           />
         </template>
-      </UChatMessages>
 
-      <div v-else class="flex flex-col gap-6">
-        <UPageLinks
-          v-for="category in suggestions"
-          :key="category.category"
-          :title="category.category"
-          :links="category.items.map(item => ({ label: item, onClick: () => askQuestion(item) }))"
-        />
-      </div>
-    </UTheme>
-
-    <template #footer>
-      <UChatPrompt
-        ref="promptRef"
-        v-model="input"
-        :status="status"
-        :error="error"
-        placeholder="Ask me anything..."
-        variant="naked"
-        size="sm"
-        autofocus
-        class="px-4"
-        @submit="onSubmit"
-      >
         <template #footer>
-          <ULink to="https://vercel.com/ai-gateway" target="_blank" class="inline-flex items-center gap-1 text-xs text-dimmed hover:text-muted">
-            Powered by <UIcon name="i-simple-icons-vercel" class="size-3" /> AI Gateway
-          </ULink>
-
-          <UChatPromptSubmit
-            size="sm"
+          <UChatPrompt
+            ref="promptRef"
+            v-model="input"
+            v-model:queue="queue"
             :status="status"
-            :disabled="!input.trim()"
-            @stop="stop()"
-            @reload="regenerate()"
-          />
+            :error="error"
+            :placeholder="status === 'submitted' || status === 'streaming' ? 'Queue a follow-up...' : 'Ask me anything...'"
+            color="neutral"
+            variant="subtle"
+            size="sm"
+            autofocus
+            @submit="onSubmit"
+            @send="onSend"
+          >
+            <template #footer>
+              <ULink to="https://vercel.com/ai-gateway" target="_blank" class="inline-flex items-center gap-1 text-xs text-dimmed hover:text-muted">
+                Powered by <UIcon name="i-simple-icons-vercel" class="size-3" /> AI Gateway
+              </ULink>
+
+              <UChatPromptSubmit
+                color="neutral"
+                size="sm"
+                :status="status"
+                :disabled="!input.trim()"
+                @stop="stop()"
+                @reload="regenerate()"
+              />
+            </template>
+          </UChatPrompt>
         </template>
-      </UChatPrompt>
-    </template>
+      </UChatMessages>
+    </UTheme>
   </USidebar>
 </template>

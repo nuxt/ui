@@ -108,6 +108,8 @@ export const collections = {
         description: z.string(),
         icon: z.string(),
         framework: z.enum(['nuxt', 'vue']),
+        // Path of the template's "how to build" guide, when it has one
+        guide: z.string().optional(),
         features: z.array(PageFeature).optional(),
         links: z.array(Button).optional(),
         open_links: z.array(Button).optional()
@@ -136,25 +138,14 @@ export const collections = {
     source: 'team.yml',
     schema: Page
   }),
-  blog: defineCollection({
-    type: 'page',
-    source: 'blog.yml',
-    schema: Page
-  }),
-  posts: defineCollection({
+  // A "how to build" guide per template, served at `/templates/<slug>`
+  guides: defineCollection({
     type: 'page',
     source: [{
-      include: 'blog/**/*'
+      include: 'templates/**/*'
     }],
     schema: z.object({
-      image: z.string(),
       date: z.string(),
-      category: z.string().optional(),
-      authors: z.array(z.object({
-        name: z.string(),
-        avatar: Avatar.optional(),
-        to: z.string().optional()
-      })).optional(),
       sitemap
     })
   })

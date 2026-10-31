@@ -46,6 +46,7 @@ items:
     description: "A rich text editor template powered by TipTap with support for markdown, HTML, and JSON content types."
     icon: i-lucide-file-text
     framework: nuxt
+    guide: /templates/editor
     features:
       - title: Real-time collaboration
         icon: i-lucide-users
@@ -145,6 +146,7 @@ items:
     description: "An AI chatbot template to build your own chatbot powered by Vercel AI SDK."
     icon: i-lucide-message-circle
     framework: nuxt
+    guide: /templates/chat
     features:
       - title: GitHub authentication
         icon: i-lucide-lock
@@ -211,6 +213,7 @@ items:
     description: "A dashboard template with multi-column layout for building sophisticated admin interfaces."
     icon: i-lucide-bar-chart-big
     framework: nuxt
+    guide: /templates/dashboard
     features:
       - title: Works with SaaS template
         icon: i-lucide-puzzle

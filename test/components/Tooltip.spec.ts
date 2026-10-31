@@ -1,10 +1,13 @@
-import { defineComponent } from 'vue'
-import { describe, it, expect } from 'vitest'
+import type { Component } from 'vue'
+import { defineComponent, h } from 'vue'
+import { describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import { TooltipProvider } from 'reka-ui'
 import Tooltip from '../../src/runtime/components/Tooltip.vue'
+import Checkbox from '../../src/runtime/components/Checkbox.vue'
+import Switch from '../../src/runtime/components/Switch.vue'
 
 const TooltipWrapper = defineComponent({
   components: {
@@ -75,6 +78,24 @@ describe('Tooltip', () => {
     })
 
     expect(wrapper.find('[role="tooltip"]').text()).toBe('Tooltip Ctrl K')
+  })
+
+  it.each([
+    ['Checkbox', Checkbox],
+    ['Switch', Switch]
+  ])('opens when hovering the %s label', async (_, component) => {
+    const wrapper = await mountSuspended(defineComponent({
+      setup: () => () => h(TooltipProvider, { delayDuration: 0 }, {
+        default: () => h(Tooltip, { text: 'Help', portal: false }, {
+          default: () => h(component as Component, { label: 'Accept terms' })
+        })
+      })
+    }), { attachTo: document.body })
+
+    await wrapper.find('[data-slot="label"]').trigger('pointermove', { pointerType: 'mouse' })
+
+    await vi.waitFor(() => expect(wrapper.find('[role="tooltip"]').exists()).toBe(true))
+    wrapper.unmount()
   })
 
   it('passes accessibility tests', async () => {

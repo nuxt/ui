@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: 'karusel',
       slide: 'snímek'
     },
+    chatAttachment: {
+      uploading: 'Nahrávání',
+      error: 'Nahrání se nezdařilo'
+    },
     chatMessages: {
       autoScroll: 'Posunout dolů'
     },
     chatPrompt: {
-      placeholder: 'Zde napište svůj text…'
+      placeholder: 'Zde napište svůj text…',
+      queue: 'Zprávy ve frontě',
+      sendNow: 'Odeslat nyní',
+      edit: 'Upravit',
+      remove: 'Odebrat'
     },
     chatPromptSubmit: {
       label: 'Odeslat',

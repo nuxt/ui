@@ -7,6 +7,8 @@ const studioIcons = useStudioIcons()
 const toast = useToast()
 
 const input = ref('')
+const files = ref<File[]>([])
+const prompt = useTemplateRef('prompt')
 const awsMarketplace = ref(true)
 const claudeInChrome = ref(true)
 const webSearch = ref(true)
@@ -14,7 +16,7 @@ const webSearch = ref(true)
 const models = [
   { value: 'opus-5-5', label: 'Opus 5.5', description: 'Deep reasoning and hard problems' },
   { value: 'sonnet-5-5', label: 'Sonnet 5.5', description: 'Balanced speed and intelligence' },
-  { value: 'haiku-4-5', label: 'Haiku 4.5', description: 'Fastest for everyday tasks' }
+  { value: 'haiku-5-5', label: 'Haiku 5.5', description: 'Fastest for everyday tasks' }
 ]
 const legacyModels = [
   { value: 'opus-5', label: 'Opus 5' },
@@ -68,7 +70,7 @@ const modelItems = computed<DropdownMenuItem[][]>(() => [
 
 const items = computed<DropdownMenuItem[][]>(() => [
   [
-    { label: 'Add files or photos', icon: studioIcons.paperclip, kbds: ['meta', 'U'] },
+    { label: 'Add files or photos', icon: studioIcons.paperclip, kbds: ['meta', 'U'], onSelect: () => prompt.value?.open() },
     {
       label: 'Add to project',
       icon: appConfig.ui.icons.folder,
@@ -154,16 +156,17 @@ const items = computed<DropdownMenuItem[][]>(() => [
 ])
 
 function onSubmit() {
-  if (!input.value.trim()) return
-
-  toast.add({ title: 'Message sent', description: input.value })
+  toast.add({ title: 'Message sent', description: input.value.trim() || `${files.value.length} file(s)` })
   input.value = ''
+  files.value = []
 }
 </script>
 
 <template>
   <UChatPrompt
+    ref="prompt"
     v-model="input"
+    v-model:files="files"
     variant="naked"
     :rows="3"
     autoresize
@@ -213,14 +216,7 @@ function onSubmit() {
 
         <div class="flex items-center gap-1">
           <UButton :icon="studioIcons.mic" color="neutral" variant="ghost" square aria-label="Dictate" />
-          <UButton
-            v-if="input.trim()"
-            :icon="appConfig.ui.icons.arrowUp"
-            color="primary"
-            square
-            aria-label="Send"
-            @click="onSubmit"
-          />
+          <UChatPromptSubmit v-if="input.trim() || files.length" />
           <UButton
             v-else
             :icon="studioIcons.audioLines"

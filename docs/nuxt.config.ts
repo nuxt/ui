@@ -117,6 +117,7 @@ export default defineNuxtConfig({
     '/docs/getting-started/integrations/icons': { redirect: '/docs/getting-started/integrations/icons/nuxt', prerender: false },
     '/docs/getting-started/integrations/color-mode': { redirect: '/docs/getting-started/integrations/color-mode/nuxt', prerender: false },
     '/docs/getting-started/integrations/i18n': { redirect: '/docs/getting-started/integrations/i18n/nuxt', prerender: false },
+    '/docs/getting-started/integrations/eslint': { redirect: '/docs/getting-started/integrations/eslint/nuxt', prerender: false },
     // v4 redirects - renamed pages
     '/docs/getting-started/typography': { redirect: { to: '/docs/typography', statusCode: 301 }, prerender: false },
     '/docs/getting-started/icons/**': { redirect: { to: '/docs/getting-started/integrations/icons/**', statusCode: 301 }, prerender: false },
@@ -124,6 +125,9 @@ export default defineNuxtConfig({
     '/docs/getting-started/color-mode/**': { redirect: { to: '/docs/getting-started/integrations/color-mode/**', statusCode: 301 }, prerender: false },
     '/docs/getting-started/i18n/**': { redirect: { to: '/docs/getting-started/integrations/i18n/**', statusCode: 301 }, prerender: false },
     '/docs/getting-started/content': { redirect: { to: '/docs/getting-started/integrations/content', statusCode: 301 }, prerender: false },
+    // v4 redirects - the blog post moved to its template guide
+    '/blog': { redirect: { to: '/templates', statusCode: 301 }, prerender: false },
+    '/blog/how-to-build-an-ai-chat': { redirect: { to: '/templates/chat', statusCode: 301 }, prerender: false },
     // v4 redirects - renamed components
     '/docs/components/button-group': { redirect: { to: '/docs/components/field-group', statusCode: 301 }, prerender: false },
     '/docs/components/page-accordion': { redirect: { to: '/docs/components/accordion', statusCode: 301 }, prerender: false },
@@ -251,7 +255,21 @@ export default defineNuxtConfig({
         'prettier',
         'tailwind-variants',
         '@comark/vue',
+        '@comark/vue/parse',
+        '@comark/vue/plugins/emoji',
+        '@comark/vue/plugins/security',
         '@comark/vue/plugins/shiki',
+        '@comark/vue/plugins/toc',
+        'shiki/core',
+        'shiki/dist/langs/bash.mjs',
+        'shiki/dist/langs/css.mjs',
+        'shiki/dist/langs/diff.mjs',
+        'shiki/dist/langs/html.mjs',
+        'shiki/dist/langs/javascript.mjs',
+        'shiki/dist/langs/json.mjs',
+        'shiki/dist/langs/typescript.mjs',
+        'shiki/dist/langs/vue.mjs',
+        'shiki/dist/langs/yaml.mjs',
         'vaul-vue',
         '@vueuse/integrations/useFuse',
         '@floating-ui/dom',
@@ -274,6 +292,7 @@ export default defineNuxtConfig({
         'tiptap-extension-code-block-shiki',
         'zod',
         'shiki-transformer-color-highlight',
+        'shiki-transformer-icon-highlight',
         'json5',
         '@internationalized/date',
         'fflate',
@@ -287,7 +306,16 @@ export default defineNuxtConfig({
         'embla-carousel-auto-height',
         'embla-carousel-class-names',
         'embla-carousel-fade',
-        'embla-carousel-wheel-gestures'
+        'embla-carousel-wheel-gestures',
+        '@tanstack/charts',
+        '@tanstack/charts/crosshair',
+        '@tanstack/charts/mark/decorative',
+        '@tanstack/charts/polar',
+        '@tanstack/charts/scales/band',
+        '@tanstack/charts/scales/linear',
+        '@tanstack/charts/scales/ordinal',
+        '@tanstack/charts/scales/point',
+        '@tanstack/charts/vue'
       ]
     }
   },
@@ -295,19 +323,20 @@ export default defineNuxtConfig({
   agentDiscovery: {
     siteUrl: SITE_URL,
     siteName: 'Nuxt UI',
-    // Only the homepage and the documentation have a Markdown representation.
+    // Only the homepage, the documentation and the template guides have a Markdown representation.
     // `*` matches one path segment, `**` one or more, so the generated Vercel
     // route table stays O(patterns) instead of growing with the page count.
     routes: [
       { path: '/', raw: '/raw/index.md' },
-      '/docs/**'
+      '/docs/**',
+      '/templates/*'
     ],
     // the Figma and playground entries link out (routeRules above) and the release pages are
     // Vue pages built from the GitHub API, none has a Markdown twin to list or serve
     excludePrefixes: { extend: ['/docs/getting-started/figma', '/docs/getting-started/playground', '/docs/releases'] },
     sitemap: {
       markdown: {
-        // Split `/docs/**` into a section per area; `/blog/**` stays whole.
+        // Split `/docs/**` into a section per area; `/templates/**` stays whole.
         expand: ['/docs'],
         labels: { 'getting-started': 'Getting Started' }
       }
@@ -516,6 +545,9 @@ export default defineNuxtConfig({
       contentFilters: [
         { field: 'path', operator: 'LIKE', value: '/docs/typography%' }
       ]
+    }, {
+      title: 'Guides',
+      contentCollection: 'guides'
     }],
     notes: [
       'LLM guidance: Nuxt UI is a comprehensive Vue UI component library (Nuxt optional) with 125+ accessible, production-ready components. Free and open source under MIT license. Works with Nuxt and plain Vue apps (Vite, Inertia, SSR) via the Vite plugin. Includes a complete Figma Kit.',
@@ -567,7 +599,6 @@ export default defineNuxtConfig({
       '/node_modules/',
       '/docs/src/',
       '/home/',
-      '/_nuxt/',
       '/_plausible',
       '/dev/',
       '/api/'

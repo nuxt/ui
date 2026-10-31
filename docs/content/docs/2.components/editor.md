@@ -368,6 +368,10 @@ Check out the image upload example for a complete implementation with custom han
 Check out the source code of our **Editor template** on GitHub for a real-life example.
 ::
 
+::tip{to="/templates/editor"}
+Follow the **How to Build a Notion-like Editor** guide to build a full app with slash commands, image uploads, AI completions and real-time collaboration.
+::
+
 ### With toolbar
 
 You can use the [EditorToolbar](/docs/components/editor-toolbar) component to add a `fixed`, `bubble`, or `floating` toolbar to the Editor with common formatting actions.
@@ -536,12 +540,16 @@ lang: 'ts'
 ::code-collapse
 
 ```ts [server/api/completion.post.ts]
+import { createError, defineEventHandler, readBody } from 'nuxt/server'
 import { streamText, createTextStreamResponse } from 'ai'
 
 export default defineEventHandler(async (event) => {
-  const { prompt, mode, language } = await readBody(event)
+  const { prompt, mode, language } = await readBody<{ prompt?: string, mode?: string, language?: string }>(event)
   if (!prompt) {
-    throw createError({ statusCode: 400, message: 'Prompt is required' })
+    throw createError({ status: 400, message: 'Prompt is required' })
+  }
+  if (prompt.length > 10_000) {
+    throw createError({ status: 413, message: 'Prompt is too long' })
   }
 
   let instructions: string
@@ -582,22 +590,34 @@ CRITICAL RULES:
 - NEVER repeat any words from the end of the user's text
 - Keep completions short (1 sentence max)
 - Match the tone and style of the existing text
-- ${preserveMarkdown}`
+- Output plain text only, never use markdown syntax`
       maxOutputTokens = 25
       break
   }
 
   const result = streamText({
-    model: 'anthropic/claude-haiku-4.5',
+    model: 'deepseek/deepseek-v4.1-flash',
     instructions,
     prompt,
-    maxOutputTokens
+    maxOutputTokens,
+    reasoning: 'none',
+    providerOptions: {
+      gateway: {
+        order: ['baseten'],
+        zeroDataRetention: true,
+        disallowPromptTraining: true
+      }
+    }
   })
 
   return createTextStreamResponse({ stream: result.textStream })
 })
 ```
 
+::
+
+::note
+The gateway options prefer Baseten and only use providers with zero data retention and no prompt training. Request-level zero data retention is only available on Vercel Pro and Enterprise plans.
 ::
 
 4. Use the composable in the Editor:
@@ -613,7 +633,7 @@ class: '!p-0'
 ::
 
 ::note
-The completion extension can be configured with `autoTrigger: true` to automatically suggest completions while typing (disabled by default). You can also manually trigger it with :kbd{value="meta"} :kbd{value="j" class="ms-px"}.
+The completion extension suggests completions while you type. Accept one with :kbd{value="tab"}, dismiss it with :kbd{value="escape"}, or set `autoTrigger: false` to turn it off.
 ::
 
 ::callout{icon="i-simple-icons-vercel" to="https://ai-sdk.dev/" target="_blank"}

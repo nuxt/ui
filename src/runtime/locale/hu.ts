@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: 'körhinta',
       slide: 'dia'
     },
+    chatAttachment: {
+      uploading: 'Feltöltés',
+      error: 'Sikertelen feltöltés'
+    },
     chatMessages: {
       autoScroll: 'Görgetés az aljára'
     },
     chatPrompt: {
-      placeholder: 'Írd be a kérdésedet itt…'
+      placeholder: 'Írd be a kérdésedet itt…',
+      queue: 'Várakozó üzenetek',
+      sendNow: 'Küldés most',
+      edit: 'Szerkesztés',
+      remove: 'Eltávolítás'
     },
     chatPromptSubmit: {
       label: 'Küldés',

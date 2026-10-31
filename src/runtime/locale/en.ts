@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: 'carousel',
       slide: 'slide'
     },
+    chatAttachment: {
+      uploading: 'Uploading',
+      error: 'Upload failed'
+    },
     chatMessages: {
       autoScroll: 'Scroll to bottom'
     },
     chatPrompt: {
-      placeholder: 'Type your message here…'
+      placeholder: 'Type your message here…',
+      queue: 'Queued messages',
+      sendNow: 'Send now',
+      edit: 'Edit',
+      remove: 'Remove'
     },
     chatPromptSubmit: {
       label: 'Send prompt',

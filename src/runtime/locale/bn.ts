@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: 'ক্যারোসেল',
       slide: 'স্লাইড'
     },
+    chatAttachment: {
+      uploading: 'আপলোড হচ্ছে',
+      error: 'আপলোড ব্যর্থ হয়েছে'
+    },
     chatMessages: {
       autoScroll: 'নিচে স্ক্রোল করুন'
     },
     chatPrompt: {
-      placeholder: 'এখানে আপনার বার্তা লিখুন…'
+      placeholder: 'এখানে আপনার বার্তা লিখুন…',
+      queue: 'সারিতে থাকা বার্তা',
+      sendNow: 'এখনই পাঠান',
+      edit: 'সম্পাদনা',
+      remove: 'সরান'
     },
     chatPromptSubmit: {
       label: 'প্রেরণ করুন',

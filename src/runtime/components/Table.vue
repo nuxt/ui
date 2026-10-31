@@ -100,7 +100,7 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
   /**
    * Enable virtualization for large datasets.
    * Note: row pinning is not supported when virtualization is enabled.
-   * @see https://tanstack.com/virtual/latest/docs/api/virtualizer#options
+   * @see https://tanstack.com/virtual/v3/docs/api/virtualizer#options
    * @defaultValue false
    */
   virtualize?: boolean | (Partial<Omit<VirtualizerOptions<Element, Element>, 'count' | 'estimateSize' | 'overscan'>> & {
@@ -434,6 +434,24 @@ const tableApi = useVueTable({
   }
 })
 
+// TanStack fills the rows above a shallow column with placeholders and puts its header in the bottom row.
+// Keep only the top placeholder of each chain (header groups are numbered by column depth) and render the real header there with a `rowspan`.
+const headerGroups = computed(() => tableApi.getHeaderGroups().map(headerGroup => ({
+  ...headerGroup,
+  headers: headerGroup.headers
+    .filter(header => header.column.depth >= headerGroup.depth)
+    .map((header) => {
+      let rowSpan = 1
+
+      while (header.isPlaceholder && header.subHeaders[0]) {
+        rowSpan++
+        header = header.subHeaders[0]
+      }
+
+      return { header, rowSpan }
+    })
+})))
+
 const rows = computed(() => tableApi.getRowModel().rows)
 const topRows = computed(() => props.virtualize ? [] : tableApi.getTopRows())
 const bottomRows = computed(() => props.virtualize ? [] : tableApi.getBottomRows())
@@ -719,14 +737,14 @@ defineExpose({
       </caption>
 
       <thead data-slot="thead" :class="ui.thead({ class: [props.ui?.thead] })">
-        <tr v-for="headerGroup in tableApi.getHeaderGroups()" :key="headerGroup.id" data-slot="tr" :class="ui.tr({ class: [props.ui?.tr] })">
+        <tr v-for="headerGroup in headerGroups" :key="headerGroup.id" data-slot="tr" :class="ui.tr({ class: [props.ui?.tr] })">
           <th
-            v-for="header in headerGroup.headers"
+            v-for="{ header, rowSpan } in headerGroup.headers"
             :key="header.id"
             :data-pinned="header.column.getIsPinned()"
             :scope="header.colSpan > 1 ? 'colgroup' : 'col'"
             :colspan="header.colSpan > 1 ? header.colSpan : undefined"
-            :rowspan="header.rowSpan > 1 ? header.rowSpan : undefined"
+            :rowspan="rowSpan > 1 ? rowSpan : undefined"
             :aria-sort="getAriaSort(header)"
             data-slot="th"
             :class="ui.th({
