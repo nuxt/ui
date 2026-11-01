@@ -47,6 +47,8 @@ describe('i18n plugin', () => {
         }
         // Load the next locale before \`@nuxtjs/i18n\` switches to it
         nuxtApp.hook('i18n:beforeLocaleSwitch', ({ newLocale }) => load(newLocale))
+        // A later \`i18n:beforeLocaleSwitch\` hook can still redirect to another locale
+        nuxtApp.hook('i18n:localeSwitched', ({ newLocale }) => load(newLocale))
         if (import.meta.client) {
           // A locale set without the hook, or changed by a later one
           nuxtApp.hook('app:created', () => watch(() => unref(nuxtApp.$i18n?.locale), load, { immediate: true }))
