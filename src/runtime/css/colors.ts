@@ -56,7 +56,7 @@ let neutralRoles: Array<[role: string, value: string]> | undefined
  */
 function declarations(block: string): Array<[role: string, value: string]> {
   return block.split(';').flatMap((declaration) => {
-    const match = declaration.trim().match(/^--ui-accent-([\w-]+):\s*(.+)$/)
+    const match = declaration.trim().match(/^--ui-accent-([\w-]+):(.+)$/)
     return match ? [[match[1]!, match[2]!.trim()] as [string, string]] : []
   })
 }
@@ -72,7 +72,7 @@ function getNeutralRoles() {
     const css = readFileSync(new URL('./accent.css', import.meta.url), 'utf8')
     const scope = css.match(/\.\\\[--ui-accent\\:var\\\(--ui-neutral\\\)\\\]\s*\{([^}]*)\}/)?.[1] ?? ''
     neutralRoles = declarations(scope).flatMap(([role, value]) => {
-      const fallback = value.match(new RegExp(`^var\\(--ui-neutral-${role},\\s*(.+)\\)$`))?.[1]
+      const fallback = value.match(new RegExp(`^var\\(--ui-neutral-${role},(.+)\\)$`))?.[1]?.trim()
       return fallback ? [[role, fallback] as [string, string]] : []
     })
     // None found means `accent.css` no longer reads the way this parses it
