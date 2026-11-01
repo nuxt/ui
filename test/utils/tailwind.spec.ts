@@ -2,7 +2,7 @@ import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'pathe'
 import { describe, it, expect, afterAll } from 'vitest'
-import { findTailwindPrefix, getTailwindLayer, getTailwindPrefix } from '../../src/utils/tailwind'
+import { findAddedColors, findTailwindPrefix, getAddedColors, getColorsDeclaration, getTailwindLayer, getTailwindPrefix } from '../../src/utils/tailwind'
 
 describe('getTailwindPrefix', () => {
   it.each([
@@ -68,5 +68,57 @@ describe('findTailwindPrefix', () => {
 
   it('is undefined when no stylesheet imports Tailwind CSS', async () => {
     expect(await findTailwindPrefix([file('fonts.css', '@font-face { font-family: Inter; }')])).toBeUndefined()
+  })
+})
+
+describe('getAddedColors', () => {
+  it.each([
+    ['@plugin "@nuxt/ui/colors" {\n  primary: indigo;\n  tertiary: indigo 600 400;\n  brand-dark: brand;\n}', ['tertiary', 'brand-dark']],
+    ['@plugin \'@nuxt/ui/colors\' { tertiary: indigo; quaternary: teal }', ['tertiary', 'quaternary']],
+    ['@plugin "@nuxt/ui/colors" {\n  /* tertiary: indigo; */\n  secondary: violet;\n}', []],
+    ['@plugin "@nuxt/ui/colors" { Tertiary: indigo; }', []],
+    ['@plugin "@nuxt/ui/colors";', []],
+    ['@plugin "./my-plugin" { tertiary: indigo; }', []]
+  ])('reads %j', (css, names) => {
+    expect(getAddedColors(css)).toEqual(names)
+  })
+})
+
+describe('findAddedColors', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'nuxt-ui-colors-'))
+  afterAll(() => rmSync(dir, { recursive: true, force: true }))
+
+  it('reads every stylesheet and the ones they import', async () => {
+    mkdirSync(join(dir, 'theme'), { recursive: true })
+    writeFileSync(join(dir, 'theme/colors.css'), '@plugin "@nuxt/ui/colors" { tertiary: indigo; }')
+    writeFileSync(join(dir, 'main.css'), '@import "tailwindcss";\n@import "./theme/colors.css";\n@import "./main.css";')
+    writeFileSync(join(dir, 'other.css'), '@plugin "@nuxt/ui/colors" { tertiary: teal; brand: blue; }')
+
+    const seen = new Set<string>()
+    expect(await findAddedColors([join(dir, 'main.css'), join(dir, 'missing.css'), join(dir, 'other.css')], seen)).toEqual(['tertiary', 'brand'])
+    expect([...seen]).toEqual(['main.css', 'theme/colors.css', 'missing.css', 'other.css'].map(file => join(dir, file)))
+  })
+
+  it('leaves an `@import url(...)` alone, which Tailwind CSS doesn\'t inline', async () => {
+    writeFileSync(join(dir, 'url-colors.css'), '@plugin "@nuxt/ui/colors" { quaternary: lime; }')
+    writeFileSync(join(dir, 'url.css'), '@import "tailwindcss";\n@import url("./url-colors.css");')
+
+    expect(await findAddedColors([join(dir, 'url.css')])).toEqual([])
+  })
+})
+
+describe('getColorsDeclaration', () => {
+  it('augments `UIColors` with the added colors', () => {
+    expect(getColorsDeclaration(['tertiary', 'brand-dark'])).toBe(`declare module '@nuxt/ui' {
+  interface UIColors {
+    "tertiary": true
+    "brand-dark": true
+  }
+}
+`)
+  })
+
+  it('is empty without one', () => {
+    expect(getColorsDeclaration([])).toBe('')
   })
 })
