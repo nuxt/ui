@@ -57,7 +57,7 @@ In this order, in the stylesheet that imports `@nuxt/ui`, after the imports:
 
 Put a comment over each group with the design system tokens it comes from, so the next update of the design system can be mapped again.
 
-When the project has components of its own styled with hardcoded design system classes, and the user wants them ported, rewrite their classes with the semantic utilities and style them with `useComponentTheme`, with `colorVariant` from `@nuxt/ui/utils/theme` for a `color` prop. The guide's "Your own components" section has the full example.
+When the project has components of its own styled with hardcoded design system classes, and the user wants them ported, rewrite their classes with the semantic utilities and style them with `useComponentTheme`, with `colorVariant` from `@nuxt/ui/utils/theme` for a `color` prop: it takes the added colors with no extra entry. The guide's "Your own components" section has the full example.
 
 ## 4. Verify
 
