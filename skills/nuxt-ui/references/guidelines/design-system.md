@@ -80,19 +80,16 @@ Available color palettes:
 
 ### Extending with new semantic color names
 
-The `color` prop only accepts the 7 defaults. To add another color such as `tertiary`, declare it in CSS and bridge it to Tailwind:
+To add a color beyond the 7 defaults, such as `tertiary`, give it a palette in the `@nuxt/ui/colors` plugin, like the built-in ones:
 
 ```css
 /* main.css */
-@theme inline {
-  --color-tertiary: var(--ui-tertiary);
+@plugin "@nuxt/ui/colors" {
+  tertiary: indigo;
 }
-
-:root { --ui-tertiary: var(--color-indigo-500); }
-.dark { --ui-tertiary: var(--color-indigo-400); }
 ```
 
-Apply it to a component through `--ui-accent` in `class`: `<UButton class="[--ui-accent:var(--ui-tertiary)]" />`. To use it as a `color` prop value, add it to that component's `color` variant in `app.config.ts`, scoping its root slot: `ui: { button: { variants: { color: { tertiary: { base: '[--ui-accent:var(--ui-tertiary)]' } } } } }`.
+Every `color` prop then takes it, `<UButton color="tertiary" />`, and it gets utilities like `bg-tertiary` or `text-tertiary-600`. It uses shade `500` in light mode and `400` in dark mode, or the two given after the palette, like `tertiary: indigo 600 400`. The types and the ESLint config find the block in the main stylesheet or one it imports with a relative path, not through an alias or a package. With Vue, the generated `ui.d.ts` has to be in the `include` of the `tsconfig` for the `color` prop to type it.
 
 ## Semantic utility classes
 

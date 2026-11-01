@@ -1,4 +1,4 @@
-import type { SlotClass, TVVariants } from './tv'
+import type { SlotClass, TVVariants, UIColors } from './tv'
 import type * as ui from '#build/ui'
 import type icons from '../theme/icons'
 import type * as ComponentTypes from './index'
@@ -49,7 +49,7 @@ export type ThemeIcons = Partial<Record<keyof typeof icons | (string & {}), stri
  * `md`, so a component with its own default color or size keeps it.
  */
 export interface ThemeDefaultVariants {
-  color?: 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral'
+  color?: 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral' | Extract<keyof UIColors, string>
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 }
 

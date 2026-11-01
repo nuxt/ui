@@ -7,6 +7,7 @@ import { UTheme } from '#components'
 import { useComponentTheme } from '../../src/runtime/composables/useComponentTheme'
 import { defineTheme, extendTheme } from '../../src/runtime/utils/theme'
 import card from '../../src/runtime/theme/card'
+import { colorVariant } from '../../src/runtime/theme/color'
 
 // A component of the app's own, styled like the library's
 const theme = extendTheme(card, {
@@ -44,6 +45,20 @@ const Stat = defineComponent({
 const render = (template: string) => mountSuspended({ components: { UTheme, Stat }, template })
 
 describe('useComponentTheme', () => {
+  it('scopes a color the app adds with the `@nuxt/ui/colors` plugin', async () => {
+    const Tag = defineComponent({
+      props: { color: String },
+      setup(_props) {
+        const { ui } = useComponentTheme('tag', _props, defineTheme({ slots: { root: 'rounded' }, variants: { color: colorVariant({ root: 'bg-accent' }) } }))
+
+        return () => h('span', { 'data-slot': 'tag', 'class': ui.value.root() })
+      }
+    })
+    const wrapper = await mountSuspended(Tag, { props: { color: 'tertiary' } })
+
+    expect(wrapper.find('[data-slot="tag"]').classes()).toEqual(['rounded', '[--ui-accent:var(--ui-tertiary)]', 'bg-accent'])
+  })
+
   it('resolves the theme from the props', async () => {
     const wrapper = await render('<Stat :value="1" variant="soft" />')
 

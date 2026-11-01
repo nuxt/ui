@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs'
-import { resolve } from 'pathe'
+import { dirname, resolve } from 'pathe'
 import type { Linter } from 'eslint'
 import betterTailwindcss from 'eslint-plugin-better-tailwindcss'
 import { getDefaultSelectors } from 'eslint-plugin-better-tailwindcss/defaults'
@@ -22,10 +22,8 @@ const GRAYS = ['slate', 'gray', 'zinc', 'stone', 'taupe', 'mauve', 'mist', 'oliv
 const HUES = ['red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose']
 
 const COLOR_UTILITY = '(?:bg|text|border(?:-[xytrblse]|-bs|-be)?|ring(?:-offset)?|outline|divide|fill|stroke|from|via|to|shadow|inset-shadow|inset-ring|decoration|accent|caret|placeholder)'
-// These numeric utilities can overlap custom palette names and set non-color properties.
-const NON_COLOR_NUMERIC_CLASS = '(?:bg-(?:linear|conic)|outline-offset|ring-offset|border-(?:[xytrblse]|bs|be|spacing(?:-[xy])?)|divide-[xy])-\\d{2,3}(?:/\\S+)?!?$'
 // A class with its variants, `md:hover:bg-red-500/50`
-const CLASS = (utility: string, color: string, start = '^') => `${start}(?:\\S*:)?!?-?(${utility})-(${color})(?:-\\d{2,3})?(?:\\/\\S+)?!?$`
+const CLASS = (utility: string, color: string) => `^(?:\\S*:)?!?-?(${utility})-(${color})(?:-\\d{2,3})?(?:\\/\\S+)?!?$`
 
 type Shades = Record<number, string | string[]>
 
@@ -59,77 +57,114 @@ const GRAY_TOKENS: Record<string, string> = {
   ring: '`ring-default` or `ring-strong`'
 }
 
+const COMMENT = /\/\*[\s\S]*?\*\//g
+// A relative `@import`, or a `@nuxt/ui/colors` block, in the order they're written. Not
+// `@import url(...)`, which Tailwind CSS leaves as it is
+const STATEMENT = /@import\s+["'](\.{1,2}\/[^"']+)["']|@plugin\s+["']@nuxt\/ui\/colors["']\s*\{([^}]*)\}/g
+const OPTION = /([\w-]+)\s*:\s*([^;]+)/g
+const SHADE = /^(?:\d+|black|white)$/
+
+// The shades an alias uses in light then dark mode, `runtime/css/base.css`
+type ModeShades = [light: string, dark: string]
+const defaultShades = (alias: string): ModeShades => alias === 'neutral' ? ['900', '50'] : ['500', '400']
+
 /**
- * The palette each alias points at, from `@plugin "@nuxt/ui/colors" { primary: indigo; }`.
- * Only the entry is read, not the stylesheets it imports.
+ * The palette each alias points at, from `@plugin "@nuxt/ui/colors" { primary: indigo; }`, and the
+ * shades it sets, the colors it adds included, in the entry and the stylesheets it imports with a relative path.
  */
-function readColors(entryPoint: string): Record<string, string> {
-  const css = readFileSync(entryPoint, 'utf8').replace(/\/\*[\s\S]*?\*\//g, '')
-  const block = css.match(/@plugin\s+["']@nuxt\/ui\/colors["']\s*\{([^}]*)\}/)?.[1]
-  const colors = { ...DEFAULT_COLORS }
-  for (const [, alias, palette] of block?.matchAll(/([\w-]+)\s*:\s*["']?([\w-]+)/g) ?? []) {
-    colors[alias!] = palette!
+function readColors(path: string, colors: Record<string, string> = { ...DEFAULT_COLORS }, shades: Record<string, ModeShades> = {}, importing = new Set<string>()): { colors: Record<string, string>, shades: Record<string, ModeShades> } {
+  // Only a stylesheet that imports itself is skipped: Tailwind CSS inlines one
+  // imported twice twice, so its last import decides
+  if (importing.has(path)) {
+    return { colors, shades }
   }
-  return colors
+  let css: string
+  try {
+    css = readFileSync(path, 'utf8').replace(COMMENT, '')
+  } catch {
+    return { colors, shades }
+  }
+  importing.add(path)
+  // Tailwind CSS inlines each import where it's written, so the last block to set an alias wins
+  for (const [, specifier, block] of css.matchAll(STATEMENT)) {
+    if (specifier) {
+      readColors(resolve(dirname(path), specifier), colors, shades, importing)
+      continue
+    }
+    for (const [, alias, value] of block!.matchAll(OPTION)) {
+      // The palette is the first word, like the plugin reads it: shades alone keep the alias's palette
+      const words = value!.replace(/["']/g, '').trim().split(/\s+/)
+      if (words[0] && !SHADE.test(words[0])) {
+        colors[alias!] = words.shift()!
+      }
+      if (words.length === 2) {
+        shades[alias!] = words as ModeShades
+      } else if (!(alias! in DEFAULT_COLORS)) {
+        // An added color without shades takes the defaults again, a built-in one keeps what it had
+        shades[alias!] = defaultShades(alias!)
+      }
+    }
+  }
+  importing.delete(path)
+  return { colors, shades }
 }
 
-const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-
-function paletteRestrictions(colors: Record<string, string>) {
-  // `neutral` can point at a custom palette, its classes map to the semantic tokens like Tailwind's grays
-  const neutral = colors.neutral && ![...GRAYS, ...HUES].includes(colors.neutral) && !Object.hasOwn(colors, colors.neutral) ? colors.neutral : undefined
+function paletteRestrictions(colors: Record<string, string>, shades: Record<string, ModeShades> = {}) {
   // The first alias wins when two point at the same palette, `primary` before the others
-  const aliasOf = new Map<string, string>()
-  const palettes = new Set(HUES)
+  const aliasOf: Record<string, string> = {}
   for (const [alias, palette] of Object.entries(colors)) {
-    if (!aliasOf.has(palette)) {
-      aliasOf.set(palette, alias)
-    }
-    if (palette && palette !== neutral && !GRAYS.includes(palette) && !Object.hasOwn(colors, palette)) {
-      palettes.add(palette)
-    }
+    aliasOf[palette] ??= alias
   }
   const restrict: { pattern: string, message: string }[] = []
 
-  // Like the other custom palettes, it needs a shade and skips the numeric utilities its name can overlap
-  const grays = [...GRAYS, ...neutral ? [`${escapeRegExp(neutral)}(?=-\\d{2,3})`] : []].join('|')
-  const start = neutral ? `^(?!(?:\\S*:)?!?-?${NON_COLOR_NUMERIC_CLASS})` : '^'
+  const grays = GRAYS.join('|')
   // The token keeps the class's other variants and modifiers, `md:hover:text-gray-500/50` is `md:hover:text-muted/50`
   for (const [utility, modes] of SHADE_TOKENS) {
     for (const [shade, tokens] of Object.entries(modes.dark)) {
       restrict.push({
-        pattern: `${start}((?:\\S*:)?)dark:((?:\\S*:)?)(!?)(${utility})-(?:${grays})-${shade}((?:\\/\\S+)?!?)$`,
+        pattern: `^((?:\\S*:)?)dark:((?:\\S*:)?)(!?)(${utility})-(?:${grays})-${shade}((?:\\/\\S+)?!?)$`,
         message: `"$0" uses a raw palette color. In dark mode it's ${[tokens].flat().map(token => `\`$1$2$3$4-${token}$5\``).join(' or ')}. When its light mode class maps to the same token, use the token for both, it follows the color mode.`
       })
     }
     for (const [shade, tokens] of Object.entries(modes.light)) {
       restrict.push({
-        pattern: `${start}(?!(?:\\S*:)?dark:)((?:\\S*:)?)(!?)(${utility})-(?:${grays})-${shade}((?:\\/\\S+)?!?)$`,
+        pattern: `^(?!(?:\\S*:)?dark:)((?:\\S*:)?)(!?)(${utility})-(?:${grays})-${shade}((?:\\/\\S+)?!?)$`,
         message: `"$0" uses a raw palette color. Use ${[tokens].flat().map(token => `\`$1$2$3-${token}$4\``).join(' or ')} instead.`
       })
     }
   }
   for (const [utility, tokens] of Object.entries(GRAY_TOKENS)) {
     restrict.push({
-      pattern: CLASS(utility === 'border' ? 'border(?:-[xytrblse]|-bs|-be)?' : utility, grays, start),
+      pattern: CLASS(utility === 'border' ? 'border(?:-[xytrblse]|-bs|-be)?' : utility, grays),
       message: `"$0" uses a raw palette color. Use a semantic token instead: ${tokens}.`
     })
   }
   restrict.push({
-    pattern: CLASS(COLOR_UTILITY, grays, start),
+    pattern: CLASS(COLOR_UTILITY, grays),
     message: '"$0" uses a raw palette color. Use a semantic token or the `neutral` color instead.'
   })
 
-  for (const palette of palettes) {
-    const alias = aliasOf.get(palette)
-    const palettePattern = escapeRegExp(palette)
-    // Custom palette names can also name utilities like `bg-cover`.
-    const shadePattern = `(?:-\\d{2,3})${HUES.includes(palette) ? '?' : ''}`
+  for (const hue of HUES) {
+    const alias = aliasOf[hue]
+    // The alias's own shade is the alias itself, `bg-indigo-500` is `bg-tertiary`, which follows the color mode
+    if (alias) {
+      const [light, dark] = shades[alias] ?? defaultShades(alias)
+      // `black` and `white` aren't shades of the palette
+      if (/^\d+$/.test(light) && /^\d+$/.test(dark)) {
+        restrict.push({
+          pattern: `^((?:\\S*:)?)dark:((?:\\S*:)?)(!?-?)(${COLOR_UTILITY})-${hue}-${dark}((?:\\/\\S+)?!?)$`,
+          message: `"$0" uses a raw palette color. In dark mode it's \`$1dark:$2$3$4-${alias}$5\`. When its light mode class is \`$4-${hue}-${light}\`, use \`$1$2$3$4-${alias}$5\` for both, it follows the color mode.`
+        }, {
+          pattern: `^(?!(?:\\S*:)?dark:)((?:\\S*:)?!?-?)(${COLOR_UTILITY})-${hue}-${light}((?:\\/\\S+)?!?)$`,
+          message: `"$0" uses a raw palette color. \`${alias}\` points at \`${hue}\`, use \`$1$2-${alias}$3\` instead, it's \`${hue}-${light}\` in light mode and \`${hue}-${dark}\` in dark mode.`
+        })
+      }
+    }
     restrict.push({
-      pattern: `^((?:\\S*:)?!?-?)(?!${NON_COLOR_NUMERIC_CLASS})(${COLOR_UTILITY})-${palettePattern}(${shadePattern}(?:\\/\\S+)?!?)$`,
+      pattern: `^((?:\\S*:)?!?-?)(${COLOR_UTILITY})-${hue}((?:-\\d{2,3})?(?:\\/\\S+)?!?)$`,
       message: alias
-        ? `"$0" uses a raw palette color. \`${alias}\` points at \`${palette}\`, use \`$1$2-${alias}$3\` instead.`
-        : `"$0" uses a raw palette color. Point a color alias at \`${palette}\` in \`@nuxt/ui/colors\` and use the alias instead.`
+        ? `"$0" uses a raw palette color. \`${alias}\` points at \`${hue}\`, use \`$1$2-${alias}$3\` instead.`
+        : `"$0" uses a raw palette color. Point a color alias at \`${hue}\` in \`@nuxt/ui/colors\`, or add one like \`tertiary: ${hue}\`, and use it instead.`
     })
   }
 
@@ -186,7 +221,9 @@ const SELECTORS = [
  */
 export default function nuxtUI(options: NuxtUIESLintOptions): Linter.Config[] {
   const entryPoint = resolve(options.entryPoint)
-  const colors = options.colors ?? readColors(entryPoint)
+  // `colors` sets the palettes, the shades are still read from the stylesheet
+  const read = readColors(entryPoint)
+  const colors = options.colors ?? read.colors
   const rules = {
     'no-unknown-classes': 'off',
     'no-palette-colors': 'warn',
@@ -209,7 +246,7 @@ export default function nuxtUI(options: NuxtUIESLintOptions): Linter.Config[] {
     },
     rules: {
       'better-tailwindcss/no-unknown-classes': [rules['no-unknown-classes'], { ignore: options.ignore ?? [] }],
-      'better-tailwindcss/no-restricted-classes': [rules['no-palette-colors'], { restrict: paletteRestrictions(colors) }],
+      'better-tailwindcss/no-restricted-classes': [rules['no-palette-colors'], { restrict: paletteRestrictions(colors, read.shades) }],
       'better-tailwindcss/no-conflicting-classes': rules['no-conflicting-classes'],
       'better-tailwindcss/enforce-logical-properties': [rules['enforce-logical-properties'], { ignore: BLOCK_AXIS }]
     }

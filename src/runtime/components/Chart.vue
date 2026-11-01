@@ -157,7 +157,7 @@ import { useComponentProps, useComponentOverrides } from '../composables/useComp
 import { useLocale } from '../composables/useLocale'
 import { chartCurves } from '../utils/chart'
 import { tv } from '../utils/tv'
-import { colors as themeColors } from '../theme/color'
+import { resolveColor } from '../utils'
 import UTooltip from './Tooltip.vue'
 
 const _props = withDefaults(defineProps<ChartProps<T>>(), {
@@ -187,10 +187,6 @@ const ui = computed(() => tv(theme, overrides.value)({
 
 // The default palette lives in CSS so it can be themed and follows the color mode.
 const seriesColors = computed(() => props.colors?.length ? props.colors : Array.from({ length: 6 }, (_, i) => `var(--ui-chart-${i + 1})`))
-
-function resolveColor(color: string) {
-  return (themeColors as readonly string[]).includes(color) ? `var(--ui-${color})` : color
-}
 
 const series = computed(() => (props.categories ?? []).map(category => typeof category === 'string'
   ? { key: category, label: category, color: undefined }

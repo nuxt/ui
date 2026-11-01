@@ -1,5 +1,6 @@
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentOverrides } from '../utils/tv'
+import type { Color } from '../theme/color'
 
 /**
  * The types the variants engine in `../utils/tv` resolves through, and the ones
@@ -81,6 +82,21 @@ export type SlotClass = ClassValue | SlotClassReplacer
  */
 type VariantKey<T> = T extends 'true' | 'false' ? boolean : T extends number ? T | `${T}` : T
 
+/**
+ * The colors you add with the `@nuxt/ui/colors` plugin, for every `color` prop
+ * to accept them:
+ * @example
+ * declare module '@nuxt/ui' {
+ *   interface UIColors {
+ *     tertiary: true
+ *   }
+ * }
+ */
+export interface UIColors {}
+
+/** The colors you add, which a color group, one that lists every built-in color, accepts too. */
+type AddedColor<G> = Color extends keyof G ? Extract<keyof UIColors, string> : never
+
 /** A variant value declared for its key alone, with no classes of its own. */
 type NoClass = '' | false | null | undefined
 
@@ -124,7 +140,7 @@ export type TVVariants<T> = {
 } & Record<string, VariantGroup<T>>
 
 /** The values one variant accepts. */
-type VariantValue<T, K> = K extends keyof VariantsOf<T> ? VariantKey<keyof VariantsOf<T>[K]> : never
+type VariantValue<T, K> = K extends keyof VariantsOf<T> ? VariantKey<keyof VariantsOf<T>[K]> | AddedColor<VariantsOf<T>[K]> : never
 
 /**
  * `compoundVariants` entries, which match one value or any of several.
@@ -251,7 +267,7 @@ type Id<T> = {} & { [P in keyof T]: T[P] }
 
 /** The values each variant accepts, the way the component's props declare them. */
 type ComponentVariants<T> = {
-  [K in keyof VariantsOf<T>]: VariantKey<keyof VariantsOf<T>[K]>
+  [K in keyof VariantsOf<T>]: VariantKey<keyof VariantsOf<T>[K]> | AddedColor<VariantsOf<T>[K]>
 }
 
 /** The `:ui` prop: classes to merge, or a replacer, per slot. */

@@ -23,6 +23,7 @@ import NuxtEnvironmentPlugin from './plugins/nuxt-environment'
 import AutoImportPlugin from './plugins/auto-import'
 import IconsPlugin from './plugins/icons'
 import OptionalDepsPlugin from './plugins/optional-deps'
+import ColorsPlugin from './plugins/colors'
 
 import type { TVConfig, TVMergeConfig } from './runtime/types/tv'
 import type { CustomThemes, ThemeDefaultVariants } from './runtime/types/theme'
@@ -35,7 +36,7 @@ type AppConfigUI = {
 } & TVConfig<typeof ui & CustomThemes>
 
 export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode' | 'content' | 'eslint'> {
-  /** Whether to generate declaration files for auto-imported components. */
+  /** Whether to generate declaration files for auto-imported components and composables, and `ui.d.ts` for the colors you add. */
   dts?: boolean
   /**
    * The icons components use, like `close` or `chevronDown`, bundled at build time. The rest
@@ -125,6 +126,7 @@ export const NuxtUIPlugin = createUnplugin<NuxtUIOptions | undefined>((_options 
     IconsPlugin(options, appConfig),
     PluginsPlugin(options),
     TemplatePlugin(options, appConfig, runtimeDir),
+    ColorsPlugin(options),
     AppConfigPlugin(options, appConfig),
     <UnpluginOptions>{
       name: 'nuxt:ui:plugins-duplication-detection',
