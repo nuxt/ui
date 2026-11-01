@@ -51,6 +51,17 @@ const grays = ['slate', 'gray', 'zinc', 'neutral', 'stone', 'taupe', 'mauve', 'm
 let neutralRoles: Array<[role: string, value: string]> | undefined
 
 /**
+ * The `--ui-accent-<role>` declarations of a scope's block, as written in
+ * `src` or minified in `dist`, where they lose their spaces and the last `;`.
+ */
+function declarations(block: string): Array<[role: string, value: string]> {
+  return block.split(';').flatMap((declaration) => {
+    const match = declaration.trim().match(/^--ui-accent-([\w-]+):\s*(.+)$/)
+    return match ? [[match[1]!, match[2]!.trim()] as [string, string]] : []
+  })
+}
+
+/**
  * The roles the neutral scope points at the surface tokens, read from
  * `accent.css` next to this file so the two can't drift. A role neutral leaves
  * to its recipe, like `text-contrast`, isn't listed. Read from this module's own URL:
@@ -60,7 +71,10 @@ function getNeutralRoles() {
   if (!neutralRoles) {
     const css = readFileSync(new URL('./accent.css', import.meta.url), 'utf8')
     const scope = css.match(/\.\\\[--ui-accent\\:var\\\(--ui-neutral\\\)\\\]\s*\{([^}]*)\}/)?.[1] ?? ''
-    neutralRoles = [...scope.matchAll(/--ui-accent-([\w-]+): var\(--ui-neutral-\1, (\S.*)\);/g)].map(([, role, value]) => [role!, value!])
+    neutralRoles = declarations(scope).flatMap(([role, value]) => {
+      const fallback = value.match(new RegExp(`^var\\(--ui-neutral-${role},\\s*(.+)\\)$`))?.[1]
+      return fallback ? [[role, fallback] as [string, string]] : []
+    })
     // None found means `accent.css` no longer reads the way this parses it
     if (!neutralRoles.length) {
       throw new Error('[@nuxt/ui] Found no neutral roles in `accent.css`.')
@@ -80,7 +94,7 @@ function getAccentRoles() {
   if (!accentRoles) {
     const css = readFileSync(new URL('./accent.css', import.meta.url), 'utf8')
     const scope = css.match(/\.\\\[--ui-accent\\:var\\\(--ui-primary\\\)\\\]\s*\{([^}]*)\}/)?.[1] ?? ''
-    accentRoles = [...scope.matchAll(/--ui-accent-([\w-]+): var\(--ui-primary-\1\);/g)].map(([, role]) => role!)
+    accentRoles = declarations(scope).filter(([role, value]) => value === `var(--ui-primary-${role})`).map(([role]) => role)
     if (!accentRoles.length) {
       throw new Error('[@nuxt/ui] Found no accent roles in `accent.css`.')
     }
