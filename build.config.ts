@@ -6,7 +6,9 @@ export default defineBuildConfig({
     './src/unplugin',
     './src/vite',
     // ESLint config for apps
-    './src/eslint'
+    './src/eslint',
+    // Tailwind CSS plugin for colors
+    './src/colors'
   ],
   hooks: {
     'mkdist:entry:options'(ctx, entry, options) {
