@@ -1,6 +1,6 @@
 # Nuxt UI v5 role variables
 
-Public API from 5.0, derived from the "Token contract" of the guide. Set them on `:root` and `.dark`, unlayered or in `@layer base`, except the `--ui-control-*` variables that components set in their `size` variants (see Control sizes). `neutral-<n>` means `var(--ui-color-neutral-<n>)`. An unset variable is a hook: its utility holds the default, so don't read it with `var()`.
+Public API from 5.0, derived from the "Token contract" of the guide. Set them on `:root` and `.dark`, unlayered or in `@layer base`, except the `--ui-control-*` variables components set in their `size` variants, all of them but `--ui-control-text-step` (see Control sizes). `neutral-<n>` means `var(--ui-color-neutral-<n>)`. An unset variable is a hook: its utility holds the default, so don't read it with `var()`.
 
 ## Colors
 
