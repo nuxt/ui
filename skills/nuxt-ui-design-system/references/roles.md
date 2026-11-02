@@ -98,7 +98,7 @@ Shadows: menus, popovers, modals and toasts use `shadow-lg`, tooltips `shadow-sm
 | `lg` | 36px | `--spacing(2)` | `--spacing(3)` | `--spacing(2)` | `--spacing(5)` | `text-sm` |
 | `xl` | 40px | `--spacing(2)` | `--spacing(3)` | `--spacing(2)` | `--spacing(6)` | `text-base` |
 
-Height is the text line height plus twice `py`, so `--ui-control-py-md: --spacing(1)` makes `md` 28px. The other components keep their own values, retune a size in their app config: the slot is `base` on Badge, `root` on InputDate, InputTime, Checkbox, RadioGroup, Calendar and Stepper, and `link` (per `orientation`) and `label` on NavigationMenu:
+The heights are those of Button and the fields: the text line height plus twice `py`, so `--ui-control-py-md: --spacing(1)` makes `md` 28px. FileUpload reads the scale for its file items, its icon and the padding of its `button` variant, its `area` variant keeps `p-4` (`base` slot). The other components keep their own values, retune a size in their app config: the slot is `base` on Badge, `root` on InputDate, InputTime, Checkbox, RadioGroup, Calendar and Stepper, and `link` (per `orientation`) and `label` on NavigationMenu:
 
 `badge`, `inputDate`, `inputTime`, `checkbox`, `radioGroup`, `navigationMenu`, `calendar`, `stepper`. Retune the ones the app uses.
 
