@@ -101,7 +101,7 @@ Height is the text line height plus twice `py`. `--ui-control-gap` is `--spacing
 
 `button`, `badge`, `input`, `textarea`, `inputMenu`, `inputNumber`, `inputTags`, `inputDate`, `inputTime`, `select`, `selectMenu`, `fileUpload`, `checkbox`, `radioGroup`, `navigationMenu`, `calendar`, `stepper`. Retune the ones the app uses.
 
-The MCP `get-component-theme` tool lists the variables a component sets. Without it, read `node_modules/@nuxt/ui/dist/runtime/theme/<name>.js`. `--ui-control-size` (Calendar cells, Stepper indicators, the room around Timeline indicators) and `--ui-control-thickness` (Slider, Progress, ProgressGroup, Separator) are set per size the same way.
+The MCP `get-component-theme` tool lists the variables a component sets. Without it, read `node_modules/@nuxt/ui/dist/runtime/theme/<name>.js`. `--ui-control-size` (Calendar cells, Stepper indicators, the room around Timeline indicators) and `--ui-control-thickness` (Slider, Progress, ProgressGroup, Separator) are set per size the same way, on `root`: `calendar`, `stepper`, `timeline`, `slider`, `progress`, `progressGroup`, `separator`.
 
 ## Names an added color can't take
 
