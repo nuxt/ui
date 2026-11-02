@@ -97,7 +97,7 @@ Shadows: menus, popovers, modals and toasts use `shadow-lg`, tooltips `shadow-sm
 | `lg` | 36px | `--spacing(2)` | `--spacing(3)` | `--spacing(5)` | `text-sm` |
 | `xl` | 40px | `--spacing(2)` | `--spacing(3)` | `--spacing(6)` | `text-base` |
 
-Height is the text line height plus twice `py`. `--ui-control-gap` is `--spacing(1)` on `xs`, `--spacing(1.5)` on `sm` and `md`, `--spacing(2)` on `lg` and `xl`. Retune a size in the app config of every component that sets these variables, the slot is `base` on Button, Badge and Select, `root` on fields, `link` on NavigationMenu, which sets them per `orientation`:
+Height is the text line height plus twice `py`. `--ui-control-gap` is `--spacing(1)` on `xs`, `--spacing(1.5)` on `sm` and `md`, `--spacing(2)` on `lg` and `xl`. Retune a size in the app config of every component that sets these variables, the slot is `base` on Button, Badge and Select, `root` on fields, FileUpload, Checkbox, RadioGroup, Calendar and Stepper, and `link` (per `orientation`) and `label` on NavigationMenu:
 
 `button`, `badge`, `input`, `textarea`, `inputMenu`, `inputNumber`, `inputTags`, `inputDate`, `inputTime`, `select`, `selectMenu`, `fileUpload`, `checkbox`, `radioGroup`, `navigationMenu`, `calendar`, `stepper`. Retune the ones the app uses.
 
