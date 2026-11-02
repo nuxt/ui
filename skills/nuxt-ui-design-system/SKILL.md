@@ -5,10 +5,12 @@ description: Apply a company's existing design system to an app built with Nuxt 
 
 # Apply a design system to Nuxt UI
 
-The guide is the source of truth, this skill is the procedure to apply it. The role variables, what reads them and their defaults are in [references/roles.md](references/roles.md), load it before mapping anything. Fetch the guide when a step needs more than the table:
+The theme pages of the docs are the source of truth, this skill is the procedure to apply them, in the order of their "Bring your own design system" section. The role variables, what reads them and their defaults are in [references/roles.md](references/roles.md), load it before mapping anything. Fetch a page when a step needs more than the table:
 
 ```
-https://raw.githubusercontent.com/nuxt/ui/v5/docs/content/docs/1.getting-started/5.theme/4.your-design-system.md
+https://raw.githubusercontent.com/nuxt/ui/v5/docs/content/docs/1.getting-started/5.theme/1.design-system.md
+https://raw.githubusercontent.com/nuxt/ui/v5/docs/content/docs/1.getting-started/5.theme/2.css-variables.md
+https://raw.githubusercontent.com/nuxt/ui/v5/docs/content/docs/1.getting-started/5.theme/3.components.md
 ```
 
 Components read semantic utilities, which read `--ui-*` variables. The job is to set those variables, in this order, and to touch the app config only for what they can't express.
@@ -34,7 +36,7 @@ Fill a table with one row per token: the token, the Nuxt UI variable or option i
 1. **Palettes** need every shade from `50` to `950`. A scale with other steps, like `100` to `900`, or with `25`, is `guessed`: say which shades you placed or interpolated. Name each palette with a prefix, like `acme-blue`, so it can't be taken for an alias or a Tailwind CSS palette.
 2. **Aliases** by purpose: brand or main action to `primary`, danger, critical or negative to `error`, positive to `success`, caution to `warning`, the grays to `neutral`. A second brand color takes `secondary` before you add one. Find the solid of each color in each mode on its scale, that's `primary: acme-blue 600 400`. A solid that isn't a shade of the scale goes in `--ui-<color>` for both modes. A light solid, like a yellow `400`, makes `text-<color>` hard to read on white: set `--ui-<color>-text-default` to a darker shade and mark it `guessed` when the design system has no text token for it.
 3. **Added colors** for the semantic colors left over. The name can't be a word a utility already has, the list is in the reference, nor the name of its palette. Rename a design system `accent` or `highlight` and say so.
-4. **Text, background and border** tokens to the variables of the reference by what they're used for, not by their name: a design system's `text.secondary` is usually `--ui-text-muted`. With a single primary text color, set both `--ui-text-strong` and `--ui-text-default` to it. Write a value as `var(--ui-color-<alias>-<shade>)` when it's a shade of an alias's palette, never `var(--color-<palette>-<shade>)`, a literal otherwise. Leave out the variables whose default already matches.
+4. **Text, background and border** tokens to the variables of the reference by what they're used for, not by their name: a design system's `text.secondary` is usually `--ui-text-muted`. With a single primary text color, set both `--ui-text-strong` and `--ui-text-default` to it. Write a value as `var(--ui-color-<alias>-<shade>)` when it's a shade of an alias's palette, never `var(--color-<palette>-<shade>)`, a literal otherwise. Leave out the variables whose default already matches. A value set on `:root` also applies in dark mode, so give every variable you set on `:root` its `.dark` value too, even when it's the default.
 5. **Per-color roles** only for a value that differs from the recipe of the reference, like dark text on a warning solid. A single focus color for the whole design system goes in `--ui-outline-focus` and in the `--ui-<color>-outline-focus` of every color, since each color's outline defaults to its own color.
 6. **Radius**: `--ui-radius` is the control radius divided by `1.5`. When the card radius isn't twice the base, keep `--ui-radius` for the small steps and set the steps that differ, `--radius-md`, `--radius-lg`, `--radius-xl`, in `@theme`, and tell the user it changes their own `rounded-*` classes too.
 7. **Control sizes**: compare the heights with the table of the reference. When the default control matches another Nuxt UI size, set `ui.defaultVariants.size`, then retune the padding, gap and icon of the sizes that still differ with `--ui-control-*` entries per component in the app config, extensions like Textarea included. A font size between two Tailwind CSS steps, like 13px, has no variable. Tell the user when the size names shift, like their `lg` becoming Nuxt UI's `md`.
@@ -51,18 +53,18 @@ In this order, in the stylesheet that imports `@nuxt/ui`, after the imports:
 
 1. The palettes in `@theme`, every shade.
 2. One `@plugin "@nuxt/ui/colors"` block with the aliases and the added colors.
-3. The text, background, border and per-color role variables, in `:root` and `.dark`, unlayered or in `@layer base`, never in `@layer theme`.
+3. The text, background, border and per-color role variables, in `:root` and `.dark`, unlayered or in `@layer base`, never in `@layer theme`. Each one in both blocks.
 4. The radius, then the fonts.
 5. The app config: `ui.defaultVariants`, then the `--ui-control-*` entries, then the slots.
 
 Put a comment over each group with the design system tokens it comes from, so the next update of the design system can be mapped again.
 
-When the project has components of its own styled with hardcoded design system classes, and the user wants them ported, rewrite their classes with the semantic utilities and style them with `useComponentTheme`, with `colorVariant` from `@nuxt/ui/utils/theme` for a `color` prop: it takes the added colors with no extra entry. The guide's "Your own components" section has the full example.
+When the project has components of its own styled with hardcoded design system classes, and the user wants them ported, rewrite their classes with the semantic utilities and style them with `useComponentTheme`, with `colorVariant` from `@nuxt/ui/utils/theme` for a `color` prop: it takes the added colors with no extra entry. The Components page's "Custom components" section has the full example.
 
 ## 4. Verify
 
 1. Run the build. The `@nuxt/ui/colors` plugin fails it on an unknown palette, a missing shade or a name that's taken, with the fix in the message.
-2. Run the linter with `no-palette-colors` at `error`: `ui.eslint.rules` in `nuxt.config.ts` with `@nuxt/eslint` and `eslint-plugin-better-tailwindcss` installed, or the `@nuxt/ui/eslint` config in a Vue app's `eslint.config`. It reports through `better-tailwindcss/no-restricted-classes`. Replace each class with the alias or the token the message names, or point an alias at the palette it names. It checks `class` attributes, `:ui` objects, the `:ui`, `:variants` and `:props` of `<UTheme>` and the `ui` of the app config or `app.use(ui)`, not class strings elsewhere in scripts, so search those too, like a column's `meta.class`.
+2. Run the linter with `no-palette-colors` at `error`: `ui.eslint.rules` in `nuxt.config.ts` with `@nuxt/eslint` and `eslint-plugin-better-tailwindcss` installed, or the `@nuxt/ui/eslint` config in a Vue app's `eslint.config`. It reports through `better-tailwindcss/no-restricted-classes`, and only knows Tailwind CSS's own palettes: a palette you declared in `@theme`, like `bg-acme-blue-600`, isn't reported, step 4 finds those. Replace each class with the alias or the token the message names, or point an alias at the palette it names. It checks `class` attributes, `:ui` objects, the `:ui`, `:variants` and `:props` of `<UTheme>` and the `ui` of the app config or `app.use(ui)`, not class strings elsewhere in scripts, so search those too, like a column's `meta.class`.
 3. Run the type check. An added color is part of every `color` prop type, so a `color` value that doesn't exist fails it. On Vue, `ui.d.ts` has to be in the `tsconfig` `include`.
 4. Search the templates, the app config and the stylesheets for the hex values and palette names of the design system that are left.
 

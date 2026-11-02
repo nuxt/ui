@@ -1,6 +1,6 @@
 # Nuxt UI v5 role variables
 
-Public API from 5.0, derived from the "Token contract" of the guide. Set them on `:root` and `.dark`, unlayered or in `@layer base`, except the `--ui-control-*` variables components set in their `size` variants, all of them but `--ui-control-text-step` (see Control sizes). `neutral-<n>` means `var(--ui-color-neutral-<n>)`. An unset variable is a hook: its utility holds the default, so don't read it with `var()`.
+Public API from 5.0, derived from the CSS Variables page of the docs. Set them on `:root` and `.dark`, both blocks for each variable since a `:root` value also applies in dark mode, unlayered or in `@layer base`, except the `--ui-control-*` variables components set in their `size` variants, all of them but `--ui-control-text-step` (see Control sizes). `neutral-<n>` means `var(--ui-color-neutral-<n>)`. An unset variable is a hook: its utility holds the default, so don't read it with `var()`.
 
 ## Colors
 
@@ -57,13 +57,13 @@ Unset by default, for every alias and added color. Set one only when the design 
 | `--ui-<color>-text-strong` | `text-<color>`, prose links | `text-default` |
 | `--ui-<color>-text-default` | `soft`, `subtle`, `outline`, `ghost` labels | The color |
 | `--ui-<color>-text-muted` | `link` Button, Avatar fallback | Text at 75% |
-| `--ui-<color>-text-faint` | Menu item icons, list markers | Text at 50% |
+| `--ui-<color>-text-faint` | Menu item icons, Callout list markers | Text at 50% |
 | `--ui-<color>-text-contrast` | Text on `solid` | `--ui-text-contrast` |
 | `--ui-<color>-border-default` | Callouts, colored separators | Color at 25% |
 | `--ui-<color>-border-strong` | `outline`, `subtle` rings | Color at 50% |
 | `--ui-<color>-outline-focus` | Focus outline | Color at 25% |
 
-`--ui-outline-focus` is the focus outline of components without a `color` prop, `primary` at 25%.
+`--ui-neutral-<role>` falls back to the neutral token of the same name, except `bg-hover` (`--ui-neutral` at 90%), `bg-strong` (`bg-strong` at 75%), `text-contrast` (`--ui-text-contrast`) and `outline-focus` (`--ui-neutral` at 25%). `--ui-outline-focus` is the focus outline of components without a `color` prop, `primary` at 25%.
 
 ## Shape and layout
 
@@ -97,11 +97,11 @@ Shadows: menus, popovers, modals and toasts use `shadow-lg`, tooltips `shadow-sm
 | `lg` | 36px | `--spacing(2)` | `--spacing(3)` | `--spacing(5)` | `text-sm` |
 | `xl` | 40px | `--spacing(2)` | `--spacing(3)` | `--spacing(6)` | `text-base` |
 
-Height is the text line height plus twice `py`. `--ui-control-gap` is `--spacing(1)` on `xs`, `--spacing(1.5)` on `sm` and `md`, `--spacing(2)` on `lg` and `xl`. Retune a size in the app config of every component that sets these variables, the slot is `base` on Button, Badge and Select, `root` on fields:
+Height is the text line height plus twice `py`. `--ui-control-gap` is `--spacing(1)` on `xs`, `--spacing(1.5)` on `sm` and `md`, `--spacing(2)` on `lg` and `xl`. Retune a size in the app config of every component that sets these variables, the slot is `base` on Button, Badge and Select, `root` on fields, `link` on NavigationMenu, which sets them per `orientation`:
 
 `button`, `badge`, `input`, `textarea`, `inputMenu`, `inputNumber`, `inputTags`, `inputDate`, `select`, `selectMenu`, `fileUpload`, `checkbox`, `radioGroup`, `navigationMenu`, `calendar`, `stepper`. Retune the ones the app uses.
 
-The MCP `get-component-theme` tool lists the variables a component sets. Without it, read `node_modules/@nuxt/ui/dist/runtime/theme/<name>.js`. `--ui-control-size` (Calendar, Timeline, Stepper) and `--ui-control-thickness` (Slider, Progress, Separator) are set per size the same way.
+The MCP `get-component-theme` tool lists the variables a component sets. Without it, read `node_modules/@nuxt/ui/dist/runtime/theme/<name>.js`. `--ui-control-size` (Calendar cells, Stepper indicators, the room around Timeline indicators) and `--ui-control-thickness` (Slider, Progress, ProgressGroup, Separator) are set per size the same way.
 
 ## Names an added color can't take
 
@@ -109,6 +109,7 @@ The name is lowercase words joined by dashes, not the name of its own palette, a
 
 - Tailwind CSS palettes and keywords: `red`, `orange`, `amber`, `yellow`, `lime`, `green`, `emerald`, `teal`, `cyan`, `sky`, `blue`, `indigo`, `violet`, `purple`, `fuchsia`, `pink`, `rose`, `slate`, `gray`, `zinc`, `neutral`, `stone`, `taupe`, `mauve`, `mist`, `olive`, `black`, `white`, `inherit`, `current`, `transparent`
 - Nuxt UI tokens: `accent`, `backdrop`, `bg`, `border`, `contrast`, `default`, `faint`, `focus`, `muted`, `soft`, `strong`, `tint`, `highlight`, `layer`, and the seven aliases
+- Any name whose `--ui-<name>` variable Nuxt UI sets, like `radius`, `gutter`, `overlay` or `text-muted`
 
 ## Internal, never set
 
