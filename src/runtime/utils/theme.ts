@@ -1,5 +1,9 @@
 import type { DefinedTheme, TVTheme, TVThemeCheck } from '../types/tv'
 
+// The `color` variant of the library's themes, for an app's own theme to take
+// every color, the ones added with `@nuxt/ui/colors` included
+export { colorVariant } from '../theme/color'
+
 /**
  * Declare a component theme. Checks its `compoundVariants` and `defaultVariants`
  * against its `variants`, and keeps their values literal, which inference alone
