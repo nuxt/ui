@@ -60,8 +60,8 @@ export default defineTheme({
         root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(2.5)] [--ui-control-icon-size:--spacing(3)]',
         legend: 'text-xs',
         base: 'size-3',
-        item: 'text-xs',
-        container: 'h-4',
+        item: 'text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height)',
+        container: 'h-(--ui-control-text-xs--line-height)',
         indicator: 'after:size-1'
       },
       sm: {
@@ -69,8 +69,8 @@ export default defineTheme({
         root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(3)] [--ui-control-icon-size:--spacing(3.5)]',
         legend: 'text-xs',
         base: 'size-3.5',
-        item: 'text-xs',
-        container: 'h-4',
+        item: 'text-(length:--ui-control-text-sm)/(--ui-control-text-sm--line-height)',
+        container: 'h-(--ui-control-text-sm--line-height)',
         indicator: 'after:size-1'
       },
       md: {
@@ -78,8 +78,8 @@ export default defineTheme({
         root: '[--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon-size:--spacing(4)]',
         legend: 'text-sm',
         base: 'size-4',
-        item: 'text-sm',
-        container: 'h-5',
+        item: 'text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height)',
+        container: 'h-(--ui-control-text-md--line-height)',
         indicator: 'after:size-1.5'
       },
       lg: {
@@ -87,8 +87,8 @@ export default defineTheme({
         root: '[--ui-control-px:--spacing(4)] [--ui-control-py:--spacing(4)] [--ui-control-icon-size:--spacing(4.5)]',
         legend: 'text-sm',
         base: 'size-4.5',
-        item: 'text-sm',
-        container: 'h-5',
+        item: 'text-(length:--ui-control-text-lg)/(--ui-control-text-lg--line-height)',
+        container: 'h-(--ui-control-text-lg--line-height)',
         indicator: 'after:size-1.5'
       },
       xl: {
@@ -96,8 +96,8 @@ export default defineTheme({
         root: '[--ui-control-px:--spacing(4.5)] [--ui-control-py:--spacing(4.5)] [--ui-control-icon-size:--spacing(5)]',
         legend: 'text-base',
         base: 'size-5',
-        item: 'text-base',
-        container: 'h-6',
+        item: 'text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)',
+        container: 'h-(--ui-control-text-xl--line-height)',
         indicator: 'after:size-2'
       }
     },

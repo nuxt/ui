@@ -715,8 +715,8 @@ describe('Theme', () => {
     })
 
     const btn = wrapper.find('button')
-    expect(btn.classes()).toContain('text-base')
-    expect(btn.classes()).not.toContain('text-xs')
+    expect(btn.classes()).toContain('text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)')
+    expect(btn.classes()).not.toContain('text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height)')
   })
 
   // `useAvatarGroup` follows the same pattern: `<UAvatarGroup size>` is the

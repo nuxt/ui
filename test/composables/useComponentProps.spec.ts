@@ -154,7 +154,7 @@ describe('\'*\' default variants', () => {
   it('replaces primary and md, and keeps a component\'s own default', async () => {
     const wrapper = await render({ '*': { color: 'error', size: 'sm' } })
 
-    expect(wrapper.find('[data-slot="button"]').classes()).toEqual(expect.arrayContaining(['[--ui-accent:var(--ui-error)]', 'text-xs']))
+    expect(wrapper.find('[data-slot="button"]').classes()).toEqual(expect.arrayContaining(['[--ui-accent:var(--ui-error)]', 'text-(length:--ui-control-text-sm)/(--ui-control-text-sm--line-height)']))
     expect(wrapper.find('[data-slot="avatar"]').classes()).toContain('[--ui-accent:var(--ui-neutral)]')
   })
 
@@ -169,7 +169,7 @@ describe('\'*\' default variants', () => {
       `
     })
 
-    expect(wrapper.find('[data-slot="button"]').classes()).toContain('text-base')
+    expect(wrapper.find('[data-slot="button"]').classes()).toContain('text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)')
     expect(wrapper.find('[data-slot="kbd"]').classes()).toContain('h-5')
   })
 
@@ -180,7 +180,7 @@ describe('\'*\' default variants', () => {
     })
 
     expect(wrapper.find('[data-slot="input"]').classes()).toContain('[--ui-accent:var(--ui-error)]')
-    expect(wrapper.find('[data-slot="input"]').classes()).toContain('text-[calc(var(--text-xs)+var(--ui-control-text-step,0px))]/4')
+    expect(wrapper.find('[data-slot="input"]').classes()).toContain('text-[calc(var(--ui-control-text-sm)+var(--ui-control-text-step,0px))]/(--ui-control-text-sm--line-height)')
   })
 
   it('lets a component\'s own key win', async () => {
@@ -231,8 +231,8 @@ describe('\'*\' default variants', () => {
       `
     })
 
-    expect(wrapper.find('[data-slot="input"]').classes()).toContain('text-base')
-    expect(wrapper.find('[data-slot="button"]').classes()).toContain('text-base')
+    expect(wrapper.find('[data-slot="input"]').classes()).toContain('text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)')
+    expect(wrapper.find('[data-slot="button"]').classes()).toContain('text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)')
     expect(wrapper.find('[data-slot="avatar-group-base"]').classes()).toContain('size-10')
   })
 

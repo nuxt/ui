@@ -30,7 +30,7 @@ export default defineTheme({
         empty: 'py-3 text-xs',
         loading: 'py-3',
         loadingIcon: 'size-(--ui-control-icon-size)',
-        item: 'p-(--ui-control-py) text-xs gap-(--ui-control-gap)',
+        item: 'p-(--ui-control-py) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) gap-(--ui-control-gap)',
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
         itemTrailingIcon: 'size-(--ui-control-icon-size)'
@@ -41,7 +41,7 @@ export default defineTheme({
         empty: 'py-4 text-xs',
         loading: 'py-4',
         loadingIcon: 'size-(--ui-control-icon-size)',
-        item: 'p-(--ui-control-py) text-xs gap-(--ui-control-gap)',
+        item: 'p-(--ui-control-py) text-(length:--ui-control-text-sm)/(--ui-control-text-sm--line-height) gap-(--ui-control-gap)',
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
         itemTrailingIcon: 'size-(--ui-control-icon-size)'
@@ -52,7 +52,7 @@ export default defineTheme({
         empty: 'py-6 text-sm',
         loading: 'py-6',
         loadingIcon: 'size-(--ui-control-icon-size)',
-        item: 'p-(--ui-control-py) text-sm gap-(--ui-control-gap)',
+        item: 'p-(--ui-control-py) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) gap-(--ui-control-gap)',
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
         itemTrailingIcon: 'size-(--ui-control-icon-size)'
@@ -63,7 +63,7 @@ export default defineTheme({
         empty: 'py-7 text-sm',
         loading: 'py-7',
         loadingIcon: 'size-(--ui-control-icon-size)',
-        item: 'p-(--ui-control-py) text-sm gap-(--ui-control-gap)',
+        item: 'p-(--ui-control-py) text-(length:--ui-control-text-lg)/(--ui-control-text-lg--line-height) gap-(--ui-control-gap)',
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
         itemTrailingIcon: 'size-(--ui-control-icon-size)'
@@ -74,7 +74,7 @@ export default defineTheme({
         empty: 'py-8 text-base',
         loading: 'py-8',
         loadingIcon: 'size-(--ui-control-icon-size)',
-        item: 'p-(--ui-control-py) text-base gap-(--ui-control-gap)',
+        item: 'p-(--ui-control-py) text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height) gap-(--ui-control-gap)',
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
         itemTrailingIcon: 'size-(--ui-control-icon-size)',

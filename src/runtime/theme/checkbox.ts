@@ -47,36 +47,36 @@ export default defineTheme({
         root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(2.5)] [--ui-control-icon-size:--spacing(2.5)]',
         base: 'size-3',
         icon: 'size-(--ui-control-icon-size)',
-        container: 'h-4',
-        wrapper: 'text-xs'
+        container: 'h-(--ui-control-text-xs--line-height)',
+        wrapper: 'text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height)'
       },
       sm: {
         root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(3)] [--ui-control-icon-size:--spacing(3)]',
         base: 'size-3.5',
         icon: 'size-(--ui-control-icon-size)',
-        container: 'h-4',
-        wrapper: 'text-xs'
+        container: 'h-(--ui-control-text-sm--line-height)',
+        wrapper: 'text-(length:--ui-control-text-sm)/(--ui-control-text-sm--line-height)'
       },
       md: {
         root: '[--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon-size:--spacing(3.5)]',
         base: 'size-4',
         icon: 'size-(--ui-control-icon-size)',
-        container: 'h-5',
-        wrapper: 'text-sm'
+        container: 'h-(--ui-control-text-md--line-height)',
+        wrapper: 'text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height)'
       },
       lg: {
         root: '[--ui-control-px:--spacing(4)] [--ui-control-py:--spacing(4)] [--ui-control-icon-size:--spacing(4)]',
         base: 'size-4.5',
         icon: 'size-(--ui-control-icon-size)',
-        container: 'h-5',
-        wrapper: 'text-sm'
+        container: 'h-(--ui-control-text-lg--line-height)',
+        wrapper: 'text-(length:--ui-control-text-lg)/(--ui-control-text-lg--line-height)'
       },
       xl: {
         root: '[--ui-control-px:--spacing(4.5)] [--ui-control-py:--spacing(4.5)] [--ui-control-icon-size:--spacing(4.5)]',
         base: 'size-5',
         icon: 'size-(--ui-control-icon-size)',
-        container: 'h-6',
-        wrapper: 'text-base'
+        container: 'h-(--ui-control-text-xl--line-height)',
+        wrapper: 'text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)'
       }
     },
     required: {

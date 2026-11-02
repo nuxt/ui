@@ -17,33 +17,33 @@ export default defineTheme({
     size: {
       xs: {
         base: 'w-7',
-        container: 'h-4',
+        container: 'h-(--ui-control-text-xs--line-height)',
         thumb: 'size-3 data-[state=checked]:translate-x-3 data-[state=checked]:rtl:-translate-x-3',
-        wrapper: 'text-xs'
+        wrapper: 'text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height)'
       },
       sm: {
         base: 'w-8',
-        container: 'h-4',
+        container: 'h-(--ui-control-text-sm--line-height)',
         thumb: 'size-3.5 data-[state=checked]:translate-x-3.5 data-[state=checked]:rtl:-translate-x-3.5',
-        wrapper: 'text-xs'
+        wrapper: 'text-(length:--ui-control-text-sm)/(--ui-control-text-sm--line-height)'
       },
       md: {
         base: 'w-9',
-        container: 'h-5',
+        container: 'h-(--ui-control-text-md--line-height)',
         thumb: 'size-4 data-[state=checked]:translate-x-4 data-[state=checked]:rtl:-translate-x-4',
-        wrapper: 'text-sm'
+        wrapper: 'text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height)'
       },
       lg: {
         base: 'w-10',
-        container: 'h-5',
+        container: 'h-(--ui-control-text-lg--line-height)',
         thumb: 'size-4.5 data-[state=checked]:translate-x-4.5 data-[state=checked]:rtl:-translate-x-4.5',
-        wrapper: 'text-sm'
+        wrapper: 'text-(length:--ui-control-text-lg)/(--ui-control-text-lg--line-height)'
       },
       xl: {
         base: 'w-11',
-        container: 'h-6',
+        container: 'h-(--ui-control-text-xl--line-height)',
         thumb: 'size-5 data-[state=checked]:translate-x-5 data-[state=checked]:rtl:-translate-x-5',
-        wrapper: 'text-base'
+        wrapper: 'text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)'
       }
     },
     checked: {

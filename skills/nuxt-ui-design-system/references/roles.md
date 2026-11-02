@@ -73,7 +73,7 @@ Unset by default, for every alias and added color. Set one only when the design 
 | `--ui-focus-width` | Focus outline width | `3px` |
 | `--ui-disabled-opacity` | Disabled components | `75%` |
 | `--ui-control-text-step` | Added to field text size | `0px` |
-| `--ui-control-<px\|py\|gap\|icon-size>-<size>` | Sizes of Button, the fields, Select, FileUpload, Tabs, Tree and the menu items | See Control sizes |
+| `--ui-control-<px\|py\|gap\|icon-size>-<size>`, `--ui-control-text-<size>`, `--ui-control-text-<size>--line-height` | Sizes of Button, the fields, Select, FileUpload, Tabs, Tree and the menu items | See Control sizes |
 | `--ui-container-width` | Container max width | `80rem` |
 | `--ui-gutter` | Container side padding, Card/Modal/Slideover padding | `--spacing(4)`, `--spacing(6)` from `sm` |
 | `--ui-header-height` | Header, Main height, PageAside offset | `4rem` |
@@ -88,15 +88,15 @@ Shadows: menus, popovers, modals and toasts use `shadow-lg`, tooltips `shadow-sm
 
 ## Control sizes
 
-`--ui-control-px`, `--ui-control-py`, `--ui-control-gap`, `--ui-control-icon-size` are set by each component's `size` variants, so `:root` can't change them. On Button, Input, Textarea, InputMenu, InputNumber, InputTags, Select, SelectMenu, FileUpload, Tabs and Tree each size reads them from a scale, and so do the items of DropdownMenu, ContextMenu, Listbox, CommandPalette, EditorSuggestionMenu and the Select, SelectMenu and InputMenu menus, with `py` as their padding on every side. `:root` sets the scale, `--ui-control-<px|py|gap|icon-size>-<size>`:
+`--ui-control-px`, `--ui-control-py`, `--ui-control-gap`, `--ui-control-icon-size` are set by each component's `size` variants, so `:root` can't change them. On Button, Input, Textarea, InputMenu, InputNumber, InputTags, Select, SelectMenu, FileUpload, Tabs and Tree each size reads them from a scale, and so do the items of DropdownMenu, ContextMenu, Listbox, CommandPalette, EditorSuggestionMenu and the Select, SelectMenu and InputMenu menus, with `py` as their padding on every side. `:root` sets the scale, `--ui-control-<px|py|gap|icon-size>-<size>`, and the text of each size, `--ui-control-text-<size>` and `--ui-control-text-<size>--line-height` (a length), which the same components read along with InputDate, InputTime, PinInput and the labels of Checkbox, RadioGroup and Switch:
 
-| Size | Height | `py` | `px` | `gap` | Icon | Text |
+| Size | Height | `py` | `px` | `gap` | Icon | Text / line height |
 | --- | --- | --- | --- | --- | --- | --- |
-| `xs` | 24px | `--spacing(1)` | `--spacing(2)` | `--spacing(1)` | `--spacing(4)` | `text-xs` |
-| `sm` | 28px | `--spacing(1.5)` | `--spacing(2.5)` | `--spacing(1.5)` | `--spacing(4)` | `text-xs` |
-| `md` | 32px | `--spacing(1.5)` | `--spacing(2.5)` | `--spacing(1.5)` | `--spacing(5)` | `text-sm` |
-| `lg` | 36px | `--spacing(2)` | `--spacing(3)` | `--spacing(2)` | `--spacing(5)` | `text-sm` |
-| `xl` | 40px | `--spacing(2)` | `--spacing(3)` | `--spacing(2)` | `--spacing(6)` | `text-base` |
+| `xs` | 24px | `--spacing(1)` | `--spacing(2)` | `--spacing(1)` | `--spacing(4)` | `--text-xs` / `--spacing(4)` |
+| `sm` | 28px | `--spacing(1.5)` | `--spacing(2.5)` | `--spacing(1.5)` | `--spacing(4)` | `--text-xs` / `--spacing(4)` |
+| `md` | 32px | `--spacing(1.5)` | `--spacing(2.5)` | `--spacing(1.5)` | `--spacing(5)` | `--text-sm` / `--spacing(5)` |
+| `lg` | 36px | `--spacing(2)` | `--spacing(3)` | `--spacing(2)` | `--spacing(5)` | `--text-sm` / `--spacing(5)` |
+| `xl` | 40px | `--spacing(2)` | `--spacing(3)` | `--spacing(2)` | `--spacing(6)` | `--text-base` / `--spacing(6)` |
 
 The heights are those of Button and the fields: the text line height plus twice `py`, so `--ui-control-py-md: --spacing(1)` makes `md` 28px. FileUpload reads the scale for its file items, its icon and the padding of its `button` variant, its `area` variant keeps `p-4` (`base` slot). The other components keep their own values, retune a size in their app config: the slot is `base` on Badge, `root` on InputDate, InputTime, Checkbox, RadioGroup, Calendar and Stepper, and `link` (per `orientation`) and `label` on NavigationMenu:
 

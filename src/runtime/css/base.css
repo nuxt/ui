@@ -170,8 +170,10 @@
     --ui-focus-width: 3px;
     --ui-disabled-opacity: 75%;
 
-    /* The control scale of Button, Input, Select and the fields built on them,
-       which each size sets on `--ui-control-*` */
+    /* The control scale: the padding, gap, icon and text of each size of
+       Button, the fields, the menus and the other controls. Each size copies the
+       padding, gap and icon to `--ui-control-*` and reads the text as is. The
+       line heights are lengths, so `--ui-control-text-step` doesn't grow a field */
     --ui-control-px-xs: --spacing(2);
     --ui-control-px-sm: --spacing(2.5);
     --ui-control-px-md: --spacing(2.5);
@@ -192,6 +194,16 @@
     --ui-control-icon-size-md: --spacing(5);
     --ui-control-icon-size-lg: --spacing(5);
     --ui-control-icon-size-xl: --spacing(6);
+    --ui-control-text-xs: --theme(--text-xs);
+    --ui-control-text-xs--line-height: --spacing(4);
+    --ui-control-text-sm: --theme(--text-xs);
+    --ui-control-text-sm--line-height: --spacing(4);
+    --ui-control-text-md: --theme(--text-sm);
+    --ui-control-text-md--line-height: --spacing(5);
+    --ui-control-text-lg: --theme(--text-sm);
+    --ui-control-text-lg--line-height: --spacing(5);
+    --ui-control-text-xl: --theme(--text-base);
+    --ui-control-text-xl--line-height: --spacing(6);
 
     @variant sm {
       --ui-gutter: --spacing(6);
