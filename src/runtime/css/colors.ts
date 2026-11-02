@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs'
+import { readdirSync, readFileSync } from 'node:fs'
 import plugin from 'tailwindcss/plugin'
 import tailwindColors from 'tailwindcss/colors'
 import { colorName, colors } from '../theme/color'
@@ -21,8 +21,9 @@ let tokenNames: Set<string> | undefined
 /**
  * The names Nuxt UI's color utilities already have, like `muted` in
  * `text-muted` or `accent` in `bg-accent-soft`, read from `tokens.css` next to
- * this file, and the ones whose variables it sets: `radius` would write over
- * `--ui-radius`, and `overlay` over `--ui-overlay-bg-soft` with its roles and
+ * this file, and the ones whose variables it sets, in its stylesheets and its
+ * themes: `radius` would write over `--ui-radius`, `control-px` over the padding
+ * a Button sets, and `overlay` over `--ui-overlay-bg-soft` with its roles and
  * the `bg-overlay` utility. Read before the theme is: the color a name adds is
  * in it by then.
  */
@@ -36,7 +37,11 @@ function getTokenNames() {
       words.forEach((_, i) => tokenNames!.add(words.slice(0, i + 1).join('-')))
     }
     const roles = getAccentRoles()
-    for (const css of [tokens, read('./base.css'), read('./tailwind.css')]) {
+    // The themes set some variables themselves, like `--ui-control-px` per size
+    const themes = (readdirSync(new URL('../theme/', import.meta.url), { recursive: true }) as string[])
+      .filter(file => /\.[jt]s$/.test(file) && !file.endsWith('.d.ts'))
+      .map(file => read(`../theme/${file.replace(/\\/g, '/')}`))
+    for (const css of [tokens, read('./base.css'), read('./tailwind.css'), read('./accent.css'), ...themes]) {
       for (const [, name] of css.matchAll(/--ui-([a-z\d-]+)/g)) {
         tokenNames.add(name!)
         // A color's roles are `--ui-<color>-<role>`, so a variable ending in a role takes its prefix
