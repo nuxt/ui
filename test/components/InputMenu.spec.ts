@@ -238,6 +238,64 @@ describe('InputMenu', () => {
     })
   })
 
+  describe('search term', () => {
+    function mountWithSearchTerm(props: Record<string, any> = {}) {
+      const wrapper: any = mount(InputMenu, {
+        attachTo: document.body,
+        props: {
+          'items': ['Option 1', 'Option 2'],
+          'portal': false,
+          'searchTerm': '',
+          'onUpdate:searchTerm': (searchTerm: string) => wrapper.setProps({ searchTerm }),
+          ...props
+        }
+      })
+
+      return wrapper
+    }
+
+    test.each([
+      ['single', {}],
+      ['multiple', { multiple: true }]
+    ])('clearing searchTerm clears the input in %s mode', async (_, props) => {
+      const wrapper = mountWithSearchTerm(props)
+      await flushPromises()
+
+      const input = wrapper.find('input')
+      await input.setValue('Opt')
+      await flushPromises()
+      expect(wrapper.props('searchTerm')).toBe('Opt')
+
+      await wrapper.setProps({ searchTerm: '' })
+      await flushPromises()
+      expect(input.element.value).toBe('')
+
+      wrapper.unmount()
+    })
+
+    // `searchTerm` is reset after selecting an item, the input must keep displaying its label
+    test('keeps the selected item label when searchTerm is reset', async () => {
+      const wrapper = mountWithSearchTerm({
+        'onUpdate:modelValue': (modelValue: string) => wrapper.setProps({ modelValue })
+      })
+      await flushPromises()
+
+      const input = wrapper.find('input')
+      await input.setValue('Option 2')
+      await flushPromises()
+
+      await input.trigger('keydown', { key: 'Enter' })
+      await new Promise(resolve => setTimeout(resolve, 150))
+      await flushPromises()
+
+      expect(wrapper.props('modelValue')).toBe('Option 2')
+      expect(wrapper.props('searchTerm')).toBe('')
+      expect(input.element.value).toBe('Option 2')
+
+      wrapper.unmount()
+    })
+  })
+
   describe('create-item', () => {
     // With `create-item`, the create item is always registered so reka-ui's collection
     // never goes from empty to non-empty, leaving the highlight stale when async items load.

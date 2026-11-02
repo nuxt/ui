@@ -424,6 +424,28 @@ const createItemPosition = computed(() => typeof props.createItem === 'object' ?
 
 const inputRef = useTemplateRef('inputRef')
 
+// In single mode `ComboboxInput` keeps its own value so it can show the selected item through
+// `displayValue` while `searchTerm` is reset, so `searchTerm` updates made by the parent are forwarded to it.
+const inputValue = ref<string>()
+let ownSearchTerm = searchTerm.value
+
+function setSearchTerm(value: string) {
+  ownSearchTerm = value
+  searchTerm.value = value
+}
+
+watch(searchTerm, (value) => {
+  if (value === ownSearchTerm) {
+    return
+  }
+
+  ownSearchTerm = value
+
+  if (!isAutocomplete.value && !isMultiple.value) {
+    inputValue.value = value
+  }
+})
+
 function autoFocus() {
   if (props.autofocus) {
     inputRef.value?.$el?.focus()
@@ -435,9 +457,9 @@ let autofocusTimeoutId: ReturnType<typeof setTimeout> | undefined
 onMounted(() => {
   nextTick(() => {
     if (isAutocomplete.value) {
-      searchTerm.value = String(props.modelValue ?? props.defaultValue ?? '')
+      setSearchTerm(String(props.modelValue ?? props.defaultValue ?? ''))
     } else {
-      searchTerm.value = ''
+      setSearchTerm('')
     }
   })
 
@@ -450,7 +472,7 @@ onScopeDispose(() => clearTimeout(autofocusTimeoutId))
 
 watch(() => props.modelValue, (newValue) => {
   if (isAutocomplete.value) {
-    searchTerm.value = String(newValue ?? '')
+    setSearchTerm(String(newValue ?? ''))
   }
 })
 
@@ -482,15 +504,16 @@ function onUpdate(value: any) {
   emitFormInput()
 
   if (isAutocomplete.value) {
-    searchTerm.value = String(value ?? '')
+    setSearchTerm(String(value ?? ''))
   } else if (props.resetSearchTermOnSelect) {
-    searchTerm.value = ''
+    setSearchTerm('')
   }
 }
 
 function onInputUpdate(value: string) {
   if (!isAutocomplete.value) {
-    searchTerm.value = value
+    inputValue.value = value
+    setSearchTerm(value)
   }
 }
 
@@ -524,7 +547,7 @@ function onUpdateOpen(value: boolean) {
       const STATE_ANIMATION_DELAY_MS = 100
 
       timeoutId = setTimeout(() => {
-        searchTerm.value = ''
+        setSearchTerm('')
       }, STATE_ANIMATION_DELAY_MS)
     }
   } else {
@@ -750,7 +773,7 @@ defineExpose({
         v-else
         :id="id"
         ref="inputRef"
-        v-bind="{ ...(!isAutocomplete ? { displayValue } : {}), ...$attrs, ...ariaAttrs }"
+        v-bind="{ ...(!isAutocomplete ? { displayValue, modelValue: inputValue } : {}), ...$attrs, ...ariaAttrs }"
         data-slot="base"
         :type="props.type"
         :placeholder="props.placeholder"
