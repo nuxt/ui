@@ -1,6 +1,6 @@
 # Nuxt UI v5 role variables
 
-Public API from 5.0, derived from the CSS Variables page of the docs. Set them on `:root` and `.dark`, both blocks for each variable since a `:root` value also applies in dark mode, unlayered or in `@layer base`, except the `--ui-control-*` variables components set in their `size` variants, all of them but `--ui-control-text-step` (see Control sizes). `neutral-<n>` means `var(--ui-color-neutral-<n>)`. An unset variable is a hook: its utility holds the default, so don't read it with `var()`.
+Derived from the CSS Variables page of the docs. Set them on `:root` and `.dark`, both blocks for each variable since a `:root` value also applies in dark mode, unlayered or in `@layer base`, except the `--ui-control-*` variables components set in their `size` variants, all of them but `--ui-control-text-step` (see Control sizes). `neutral-<n>` means `var(--ui-color-neutral-<n>)`. An unset variable is a hook: its utility holds the default, so don't read it with `var()`.
 
 ## Colors
 
