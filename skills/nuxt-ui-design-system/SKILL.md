@@ -5,7 +5,7 @@ description: Apply a company's existing design system to an app built with Nuxt 
 
 # Apply a design system to Nuxt UI
 
-The theme pages of the docs are the source of truth, this skill is the procedure to apply them, in the order of their "Bring your own design system" section. The role variables, what reads them and their defaults are in [references/roles.md](references/roles.md), load it before mapping anything. Fetch a page when a step needs more than the table:
+The theme pages of the docs are the source of truth, this skill is the procedure to apply them. The role variables, what reads them and their defaults are in [references/roles.md](references/roles.md), load it before mapping anything. Fetch a page when a step needs more than the table:
 
 ```
 https://raw.githubusercontent.com/nuxt/ui/v5/docs/content/docs/1.getting-started/5.theme/1.design-system.md
