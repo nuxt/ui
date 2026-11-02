@@ -1,5 +1,6 @@
 import { defineComponent, nextTick } from 'vue'
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect, vi, afterEach } from 'vitest'
+import { enableAutoUnmount } from '@vue/test-utils'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { ToastProvider } from 'reka-ui'
@@ -11,6 +12,9 @@ import { ClientOnly } from '#components'
 
 // Reka UI keeps the close timer running after unmount, a 5s one fires once the test environment is gone
 const duration = 2 ** 31 - 1
+
+// Every Toaster renders the shared toasts, so one left mounted by a test slows down the next ones
+enableAutoUnmount(afterEach)
 
 const ToastWrapper = defineComponent({
   components: {
