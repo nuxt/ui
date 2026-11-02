@@ -22,8 +22,8 @@
     "./tailwind": "./dist/runtime/css/tailwind.css",
     "./base": "./dist/runtime/css/base.css",
     "./colors": {
-      "types": "./dist/runtime/css/colors.d.ts",
-      "import": "./dist/runtime/css/colors.js"
+      "types": "./dist/colors.d.mts",
+      "import": "./dist/colors.mjs"
     },
     "./unplugin": {
       "types": "./dist/unplugin.d.mts",
@@ -82,7 +82,7 @@
         "./dist/eslint.d.mts"
       ],
       "colors": [
-        "./dist/runtime/css/colors.d.ts"
+        "./dist/colors.d.mts"
       ],
       "vue-plugin": [
         "./vue-plugin.d.ts"
