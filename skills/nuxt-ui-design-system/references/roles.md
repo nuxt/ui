@@ -73,7 +73,7 @@ Unset by default, for every alias and added color. Set one only when the design 
 | `--ui-focus-width` | Focus outline width | `3px` |
 | `--ui-disabled-opacity` | Disabled components | `75%` |
 | `--ui-control-text-step` | Added to field text size | `0px` |
-| `--ui-control-<px\|py\|gap\|icon-size>-<size>` | Sizes of Button, the fields, Select and FileUpload | See Control sizes |
+| `--ui-control-<px\|py\|gap\|icon-size>-<size>` | Sizes of Button, the fields, Select, FileUpload, Tree and the menu items | See Control sizes |
 | `--ui-container-width` | Container max width | `80rem` |
 | `--ui-gutter` | Container side padding, Card/Modal/Slideover padding | `--spacing(4)`, `--spacing(6)` from `sm` |
 | `--ui-header-height` | Header, Main height, PageAside offset | `4rem` |
@@ -88,7 +88,7 @@ Shadows: menus, popovers, modals and toasts use `shadow-lg`, tooltips `shadow-sm
 
 ## Control sizes
 
-`--ui-control-px`, `--ui-control-py`, `--ui-control-gap`, `--ui-control-icon-size` are set by each component's `size` variants, so `:root` can't change them. On Button, Input, Textarea, InputMenu, InputNumber, InputTags, Select, SelectMenu and FileUpload each size reads them from a scale, `--ui-control-<px|py|gap|icon-size>-<size>`, that `:root` sets:
+`--ui-control-px`, `--ui-control-py`, `--ui-control-gap`, `--ui-control-icon-size` are set by each component's `size` variants, so `:root` can't change them. On Button, Input, Textarea, InputMenu, InputNumber, InputTags, Select, SelectMenu, FileUpload and Tree each size reads them from a scale, and so do the items of DropdownMenu, ContextMenu, Listbox, CommandPalette, EditorSuggestionMenu and the Select, SelectMenu and InputMenu menus, with `py` as their padding on every side. `:root` sets the scale, `--ui-control-<px|py|gap|icon-size>-<size>`:
 
 | Size | Height | `py` | `px` | `gap` | Icon | Text |
 | --- | --- | --- | --- | --- | --- | --- |

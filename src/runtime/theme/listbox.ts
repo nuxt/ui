@@ -25,54 +25,59 @@ export default defineTheme({
   variants: {
     size: {
       xs: {
-        label: 'p-1 text-[10px]/3 gap-1',
+        content: '[--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)]',
+        label: 'p-(--ui-control-py) text-[10px]/3 gap-(--ui-control-gap)',
         empty: 'py-3 text-xs',
         loading: 'py-3',
-        loadingIcon: 'size-4',
-        item: 'p-1 text-xs gap-1',
-        itemLeadingIcon: 'size-4',
-        itemLeadingChip: 'size-4',
-        itemTrailingIcon: 'size-4'
+        loadingIcon: 'size-(--ui-control-icon-size)',
+        item: 'p-(--ui-control-py) text-xs gap-(--ui-control-gap)',
+        itemLeadingIcon: 'size-(--ui-control-icon-size)',
+        itemLeadingChip: 'size-(--ui-control-icon-size)',
+        itemTrailingIcon: 'size-(--ui-control-icon-size)'
       },
       sm: {
-        label: 'p-1.5 text-[10px]/3 gap-1.5',
+        content: '[--ui-control-py:var(--ui-control-py-sm)] [--ui-control-gap:var(--ui-control-gap-sm)] [--ui-control-icon-size:var(--ui-control-icon-size-sm)]',
+        label: 'p-(--ui-control-py) text-[10px]/3 gap-(--ui-control-gap)',
         empty: 'py-4 text-xs',
         loading: 'py-4',
-        loadingIcon: 'size-4',
-        item: 'p-1.5 text-xs gap-1.5',
-        itemLeadingIcon: 'size-4',
-        itemLeadingChip: 'size-4',
-        itemTrailingIcon: 'size-4'
+        loadingIcon: 'size-(--ui-control-icon-size)',
+        item: 'p-(--ui-control-py) text-xs gap-(--ui-control-gap)',
+        itemLeadingIcon: 'size-(--ui-control-icon-size)',
+        itemLeadingChip: 'size-(--ui-control-icon-size)',
+        itemTrailingIcon: 'size-(--ui-control-icon-size)'
       },
       md: {
-        label: 'p-1.5 text-xs gap-1.5',
+        content: '[--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)]',
+        label: 'p-(--ui-control-py) text-xs gap-(--ui-control-gap)',
         empty: 'py-6 text-sm',
         loading: 'py-6',
-        loadingIcon: 'size-5',
-        item: 'p-1.5 text-sm gap-1.5',
-        itemLeadingIcon: 'size-5',
-        itemLeadingChip: 'size-5',
-        itemTrailingIcon: 'size-5'
+        loadingIcon: 'size-(--ui-control-icon-size)',
+        item: 'p-(--ui-control-py) text-sm gap-(--ui-control-gap)',
+        itemLeadingIcon: 'size-(--ui-control-icon-size)',
+        itemLeadingChip: 'size-(--ui-control-icon-size)',
+        itemTrailingIcon: 'size-(--ui-control-icon-size)'
       },
       lg: {
-        label: 'p-2 text-xs gap-2',
+        content: '[--ui-control-py:var(--ui-control-py-lg)] [--ui-control-gap:var(--ui-control-gap-lg)] [--ui-control-icon-size:var(--ui-control-icon-size-lg)]',
+        label: 'p-(--ui-control-py) text-xs gap-(--ui-control-gap)',
         empty: 'py-7 text-sm',
         loading: 'py-7',
-        loadingIcon: 'size-5',
-        item: 'p-2 text-sm gap-2',
-        itemLeadingIcon: 'size-5',
-        itemLeadingChip: 'size-5',
-        itemTrailingIcon: 'size-5'
+        loadingIcon: 'size-(--ui-control-icon-size)',
+        item: 'p-(--ui-control-py) text-sm gap-(--ui-control-gap)',
+        itemLeadingIcon: 'size-(--ui-control-icon-size)',
+        itemLeadingChip: 'size-(--ui-control-icon-size)',
+        itemTrailingIcon: 'size-(--ui-control-icon-size)'
       },
       xl: {
-        label: 'p-2 text-sm gap-2',
+        content: '[--ui-control-py:var(--ui-control-py-xl)] [--ui-control-gap:var(--ui-control-gap-xl)] [--ui-control-icon-size:var(--ui-control-icon-size-xl)]',
+        label: 'p-(--ui-control-py) text-sm gap-(--ui-control-gap)',
         empty: 'py-8 text-base',
         loading: 'py-8',
-        loadingIcon: 'size-6',
-        item: 'p-2 text-base gap-2',
-        itemLeadingIcon: 'size-6',
-        itemLeadingChip: 'size-6',
-        itemTrailingIcon: 'size-6',
+        loadingIcon: 'size-(--ui-control-icon-size)',
+        item: 'p-(--ui-control-py) text-base gap-(--ui-control-gap)',
+        itemLeadingIcon: 'size-(--ui-control-icon-size)',
+        itemLeadingChip: 'size-(--ui-control-icon-size)',
+        itemTrailingIcon: 'size-(--ui-control-icon-size)',
         itemDescription: 'text-sm'
       }
     },

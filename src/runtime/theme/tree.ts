@@ -22,34 +22,39 @@ export default defineTheme({
     color: colorVariant({ root: '' }),
     size: {
       xs: {
+        root: '[--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)]',
         listWithChildren: 'ms-4',
-        link: 'px-2 py-1 text-xs gap-1',
-        linkLeadingIcon: 'size-4',
-        linkTrailingIcon: 'size-4'
+        link: 'px-(--ui-control-px) py-(--ui-control-py) text-xs gap-(--ui-control-gap)',
+        linkLeadingIcon: 'size-(--ui-control-icon-size)',
+        linkTrailingIcon: 'size-(--ui-control-icon-size)'
       },
       sm: {
+        root: '[--ui-control-px:var(--ui-control-px-sm)] [--ui-control-py:var(--ui-control-py-sm)] [--ui-control-gap:var(--ui-control-gap-sm)] [--ui-control-icon-size:var(--ui-control-icon-size-sm)]',
         listWithChildren: 'ms-4.5',
-        link: 'px-2.5 py-1.5 text-xs gap-1.5',
-        linkLeadingIcon: 'size-4',
-        linkTrailingIcon: 'size-4'
+        link: 'px-(--ui-control-px) py-(--ui-control-py) text-xs gap-(--ui-control-gap)',
+        linkLeadingIcon: 'size-(--ui-control-icon-size)',
+        linkTrailingIcon: 'size-(--ui-control-icon-size)'
       },
       md: {
+        root: '[--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)]',
         listWithChildren: 'ms-5',
-        link: 'px-2.5 py-1.5 text-sm gap-1.5',
-        linkLeadingIcon: 'size-5',
-        linkTrailingIcon: 'size-5'
+        link: 'px-(--ui-control-px) py-(--ui-control-py) text-sm gap-(--ui-control-gap)',
+        linkLeadingIcon: 'size-(--ui-control-icon-size)',
+        linkTrailingIcon: 'size-(--ui-control-icon-size)'
       },
       lg: {
+        root: '[--ui-control-px:var(--ui-control-px-lg)] [--ui-control-py:var(--ui-control-py-lg)] [--ui-control-gap:var(--ui-control-gap-lg)] [--ui-control-icon-size:var(--ui-control-icon-size-lg)]',
         listWithChildren: 'ms-5.5',
-        link: 'px-3 py-2 text-sm gap-2',
-        linkLeadingIcon: 'size-5',
-        linkTrailingIcon: 'size-5'
+        link: 'px-(--ui-control-px) py-(--ui-control-py) text-sm gap-(--ui-control-gap)',
+        linkLeadingIcon: 'size-(--ui-control-icon-size)',
+        linkTrailingIcon: 'size-(--ui-control-icon-size)'
       },
       xl: {
+        root: '[--ui-control-px:var(--ui-control-px-xl)] [--ui-control-py:var(--ui-control-py-xl)] [--ui-control-gap:var(--ui-control-gap-xl)] [--ui-control-icon-size:var(--ui-control-icon-size-xl)]',
         listWithChildren: 'ms-6',
-        link: 'px-3 py-2 text-base gap-2',
-        linkLeadingIcon: 'size-6',
-        linkTrailingIcon: 'size-6'
+        link: 'px-(--ui-control-px) py-(--ui-control-py) text-base gap-(--ui-control-gap)',
+        linkLeadingIcon: 'size-(--ui-control-icon-size)',
+        linkTrailingIcon: 'size-(--ui-control-icon-size)'
       }
     },
     selected: {
