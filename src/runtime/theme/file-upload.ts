@@ -32,34 +32,34 @@ export default defineTheme({
     },
     size: {
       xs: {
-        root: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon-size:--spacing(4)]',
+        root: '[--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)]',
         base: 'text-xs',
         icon: 'size-(--ui-control-icon-size)',
         file: 'text-xs px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)',
         fileWrapper: 'flex-row gap-1'
       },
       sm: {
-        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon-size:--spacing(4)]',
+        root: '[--ui-control-px:var(--ui-control-px-sm)] [--ui-control-py:var(--ui-control-py-sm)] [--ui-control-gap:var(--ui-control-gap-sm)] [--ui-control-icon-size:var(--ui-control-icon-size-sm)]',
         base: 'text-xs',
         icon: 'size-(--ui-control-icon-size)',
         file: 'text-xs px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)',
         fileWrapper: 'flex-row gap-1'
       },
       md: {
-        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon-size:--spacing(5)]',
+        root: '[--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)]',
         base: 'text-sm',
         icon: 'size-(--ui-control-icon-size)',
         file: 'text-xs px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)'
       },
       lg: {
-        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon-size:--spacing(5)]',
+        root: '[--ui-control-px:var(--ui-control-px-lg)] [--ui-control-py:var(--ui-control-py-lg)] [--ui-control-gap:var(--ui-control-gap-lg)] [--ui-control-icon-size:var(--ui-control-icon-size-lg)]',
         base: 'text-sm',
         icon: 'size-(--ui-control-icon-size)',
         file: 'text-sm px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)',
         fileSize: 'text-xs'
       },
       xl: {
-        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon-size:--spacing(6)]',
+        root: '[--ui-control-px:var(--ui-control-px-xl)] [--ui-control-py:var(--ui-control-py-xl)] [--ui-control-gap:var(--ui-control-gap-xl)] [--ui-control-icon-size:var(--ui-control-icon-size-xl)]',
         base: 'text-base',
         icon: 'size-(--ui-control-icon-size)',
         file: 'text-sm px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap)'

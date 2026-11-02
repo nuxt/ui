@@ -155,8 +155,8 @@
 }
 
 @layer base {
-  /* The surface tokens, shades of `neutral` that don't follow `color`, and the
-     layout sizes. In `base` at zero specificity, like the palettes, so an
+  /* The surface tokens, shades of `neutral` that don't follow `color`, the
+     layout sizes and the control scale. In `base` at zero specificity, like the palettes, so an
      override in `base` wins wherever `@nuxt/icon` puts that layer. `--ui-bg-tint`,
      `--ui-bg-backdrop`, `--ui-outline-focus` and `--ui-neutral-bg-hover` are unset:
      their utilities mix `--ui-bg-soft`, `--ui-primary` and `--ui-neutral` on the
@@ -169,6 +169,29 @@
     --ui-gutter: --spacing(4);
     --ui-focus-width: 3px;
     --ui-disabled-opacity: 75%;
+
+    /* The control scale of Button, Input, Select and the fields built on them,
+       which each size sets on `--ui-control-*` */
+    --ui-control-px-xs: --spacing(2);
+    --ui-control-px-sm: --spacing(2.5);
+    --ui-control-px-md: --spacing(2.5);
+    --ui-control-px-lg: --spacing(3);
+    --ui-control-px-xl: --spacing(3);
+    --ui-control-py-xs: --spacing(1);
+    --ui-control-py-sm: --spacing(1.5);
+    --ui-control-py-md: --spacing(1.5);
+    --ui-control-py-lg: --spacing(2);
+    --ui-control-py-xl: --spacing(2);
+    --ui-control-gap-xs: --spacing(1);
+    --ui-control-gap-sm: --spacing(1.5);
+    --ui-control-gap-md: --spacing(1.5);
+    --ui-control-gap-lg: --spacing(2);
+    --ui-control-gap-xl: --spacing(2);
+    --ui-control-icon-size-xs: --spacing(4);
+    --ui-control-icon-size-sm: --spacing(4);
+    --ui-control-icon-size-md: --spacing(5);
+    --ui-control-icon-size-lg: --spacing(5);
+    --ui-control-icon-size-xl: --spacing(6);
 
     @variant sm {
       --ui-gutter: --spacing(6);
