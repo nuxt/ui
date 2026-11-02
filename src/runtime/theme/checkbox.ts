@@ -44,36 +44,36 @@ export default defineTheme({
     },
     size: {
       xs: {
-        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(2.5)] [--ui-control-icon-size:--spacing(2.5)]',
-        base: 'size-3',
+        root: '[--ui-control-box:var(--ui-control-box-xs)] [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(2.5)] [--ui-control-icon-size:calc(var(--ui-control-box)-(--spacing(0.5)))]',
+        base: 'size-(--ui-control-box)',
         icon: 'size-(--ui-control-icon-size)',
         container: 'h-(--ui-control-text-xs--line-height)',
         wrapper: 'text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height)'
       },
       sm: {
-        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(3)] [--ui-control-icon-size:--spacing(3)]',
-        base: 'size-3.5',
+        root: '[--ui-control-box:var(--ui-control-box-sm)] [--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(3)] [--ui-control-icon-size:calc(var(--ui-control-box)-(--spacing(0.5)))]',
+        base: 'size-(--ui-control-box)',
         icon: 'size-(--ui-control-icon-size)',
         container: 'h-(--ui-control-text-sm--line-height)',
         wrapper: 'text-(length:--ui-control-text-sm)/(--ui-control-text-sm--line-height)'
       },
       md: {
-        root: '[--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon-size:--spacing(3.5)]',
-        base: 'size-4',
+        root: '[--ui-control-box:var(--ui-control-box-md)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon-size:calc(var(--ui-control-box)-(--spacing(0.5)))]',
+        base: 'size-(--ui-control-box)',
         icon: 'size-(--ui-control-icon-size)',
         container: 'h-(--ui-control-text-md--line-height)',
         wrapper: 'text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height)'
       },
       lg: {
-        root: '[--ui-control-px:--spacing(4)] [--ui-control-py:--spacing(4)] [--ui-control-icon-size:--spacing(4)]',
-        base: 'size-4.5',
+        root: '[--ui-control-box:var(--ui-control-box-lg)] [--ui-control-px:--spacing(4)] [--ui-control-py:--spacing(4)] [--ui-control-icon-size:calc(var(--ui-control-box)-(--spacing(0.5)))]',
+        base: 'size-(--ui-control-box)',
         icon: 'size-(--ui-control-icon-size)',
         container: 'h-(--ui-control-text-lg--line-height)',
         wrapper: 'text-(length:--ui-control-text-lg)/(--ui-control-text-lg--line-height)'
       },
       xl: {
-        root: '[--ui-control-px:--spacing(4.5)] [--ui-control-py:--spacing(4.5)] [--ui-control-icon-size:--spacing(4.5)]',
-        base: 'size-5',
+        root: '[--ui-control-box:var(--ui-control-box-xl)] [--ui-control-px:--spacing(4.5)] [--ui-control-py:--spacing(4.5)] [--ui-control-icon-size:calc(var(--ui-control-box)-(--spacing(0.5)))]',
+        base: 'size-(--ui-control-box)',
         icon: 'size-(--ui-control-icon-size)',
         container: 'h-(--ui-control-text-xl--line-height)',
         wrapper: 'text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)'
@@ -107,7 +107,7 @@ export default defineTheme({
       indicator: 'hidden',
       class: {
         container: 'h-auto',
-        icon: 'size-[calc(var(--ui-control-icon-size)+(--spacing(0.5)))]'
+        icon: 'size-(--ui-control-box)'
       }
     },
     {

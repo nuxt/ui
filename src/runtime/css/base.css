@@ -171,8 +171,9 @@
     --ui-disabled-opacity: 75%;
 
     /* The control scale: the padding, gap, icon and text of each size of
-       Button, the fields, the menus and the other controls. Each size copies the
-       padding, gap and icon to `--ui-control-*` and reads the text as is. The
+       Button, the fields, the menus and the other controls, and the box of
+       Checkbox, RadioGroup and the Switch thumb. Each size copies the padding,
+       gap, icon and box to `--ui-control-*` and reads the text as is. The
        line heights are lengths, so `--ui-control-text-step` doesn't grow a field */
     --ui-control-px-xs: --spacing(2);
     --ui-control-px-sm: --spacing(2.5);
@@ -194,6 +195,11 @@
     --ui-control-icon-size-md: --spacing(5);
     --ui-control-icon-size-lg: --spacing(5);
     --ui-control-icon-size-xl: --spacing(6);
+    --ui-control-box-xs: --spacing(3);
+    --ui-control-box-sm: --spacing(3.5);
+    --ui-control-box-md: --spacing(4);
+    --ui-control-box-lg: --spacing(4.5);
+    --ui-control-box-xl: --spacing(5);
     --ui-control-text-xs: --theme(--text-xs);
     --ui-control-text-xs--line-height: --spacing(4);
     --ui-control-text-sm: --theme(--text-xs);
