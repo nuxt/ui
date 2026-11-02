@@ -54,8 +54,9 @@ In this order, in the stylesheet that imports `@nuxt/ui`, after the imports:
 1. The palettes in `@theme`, every shade.
 2. One `@plugin "@nuxt/ui/colors"` block with the aliases and the added colors.
 3. The text, background, border and per-color role variables, in `:root` and `.dark`, unlayered or in `@layer base`, never in `@layer theme`. Each one in both blocks.
-4. The radius, then the fonts.
-5. The app config: `ui.defaultVariants`, then the `--ui-control-*` entries, then the slots.
+4. The other variables the mapping set: `--ui-focus-width`, `--ui-disabled-opacity`, `--ui-control-text-step`, `--ui-container-width`, `--ui-gutter`, `--ui-header-height` and `--ui-chart-*`, on `:root`, in `.dark` too when they differ by mode, and in an `@variant sm` or `@media` block inside `:root` for a value per breakpoint, like the gutter.
+5. The radius, then the fonts.
+6. The app config: `ui.defaultVariants`, then the `--ui-control-*` entries, then the slots.
 
 Put a comment over each group with the design system tokens it comes from, so the next update of the design system can be mapped again.
 

@@ -99,7 +99,7 @@ Shadows: menus, popovers, modals and toasts use `shadow-lg`, tooltips `shadow-sm
 
 Height is the text line height plus twice `py`. `--ui-control-gap` is `--spacing(1)` on `xs`, `--spacing(1.5)` on `sm` and `md`, `--spacing(2)` on `lg` and `xl`. Retune a size in the app config of every component that sets these variables, the slot is `base` on Button, Badge and Select, `root` on fields, `link` on NavigationMenu, which sets them per `orientation`:
 
-`button`, `badge`, `input`, `textarea`, `inputMenu`, `inputNumber`, `inputTags`, `inputDate`, `select`, `selectMenu`, `fileUpload`, `checkbox`, `radioGroup`, `navigationMenu`, `calendar`, `stepper`. Retune the ones the app uses.
+`button`, `badge`, `input`, `textarea`, `inputMenu`, `inputNumber`, `inputTags`, `inputDate`, `inputTime`, `select`, `selectMenu`, `fileUpload`, `checkbox`, `radioGroup`, `navigationMenu`, `calendar`, `stepper`. Retune the ones the app uses.
 
 The MCP `get-component-theme` tool lists the variables a component sets. Without it, read `node_modules/@nuxt/ui/dist/runtime/theme/<name>.js`. `--ui-control-size` (Calendar cells, Stepper indicators, the room around Timeline indicators) and `--ui-control-thickness` (Slider, Progress, ProgressGroup, Separator) are set per size the same way.
 
