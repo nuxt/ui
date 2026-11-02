@@ -200,15 +200,15 @@
     --ui-control-box-md: --spacing(4);
     --ui-control-box-lg: --spacing(4.5);
     --ui-control-box-xl: --spacing(5);
-    --ui-control-text-xs: --theme(--text-xs);
+    --ui-control-text-xs: --theme(--text-xs, 0.75rem);
     --ui-control-text-xs--line-height: --spacing(4);
-    --ui-control-text-sm: --theme(--text-xs);
+    --ui-control-text-sm: --theme(--text-xs, 0.75rem);
     --ui-control-text-sm--line-height: --spacing(4);
-    --ui-control-text-md: --theme(--text-sm);
+    --ui-control-text-md: --theme(--text-sm, 0.875rem);
     --ui-control-text-md--line-height: --spacing(5);
-    --ui-control-text-lg: --theme(--text-sm);
+    --ui-control-text-lg: --theme(--text-sm, 0.875rem);
     --ui-control-text-lg--line-height: --spacing(5);
-    --ui-control-text-xl: --theme(--text-base);
+    --ui-control-text-xl: --theme(--text-base, 1rem);
     --ui-control-text-xl--line-height: --spacing(6);
 
     @variant sm {
