@@ -51,6 +51,17 @@ const grays = ['slate', 'gray', 'zinc', 'neutral', 'stone', 'taupe', 'mauve', 'm
 let neutralRoles: Array<[role: string, value: string]> | undefined
 
 /**
+ * The `--ui-accent-<role>` declarations of a scope's block, as written in
+ * `src` or minified in `dist`, where they lose their spaces and the last `;`.
+ */
+function declarations(block: string): Array<[role: string, value: string]> {
+  return block.split(';').flatMap((declaration) => {
+    const match = declaration.trim().match(/^--ui-accent-([\w-]+):(.+)$/)
+    return match ? [[match[1]!, match[2]!.trim()] as [string, string]] : []
+  })
+}
+
+/**
  * The roles the neutral scope points at the surface tokens, read from
  * `accent.css` next to this file so the two can't drift. A role neutral leaves
  * to its recipe, like `text-contrast`, isn't listed. Read from this module's own URL:
@@ -58,15 +69,25 @@ let neutralRoles: Array<[role: string, value: string]> | undefined
  */
 function getNeutralRoles() {
   if (!neutralRoles) {
-    const css = readFileSync(new URL('./accent.css', import.meta.url), 'utf8')
-    const scope = css.match(/\.\\\[--ui-accent\\:var\\\(--ui-neutral\\\)\\\]\s*\{([^}]*)\}/)?.[1] ?? ''
-    neutralRoles = [...scope.matchAll(/--ui-accent-([\w-]+): var\(--ui-neutral-\1, (\S.*)\);/g)].map(([, role, value]) => [role!, value!])
+    neutralRoles = parseNeutralRoles(readFileSync(new URL('./accent.css', import.meta.url), 'utf8'))
     // None found means `accent.css` no longer reads the way this parses it
     if (!neutralRoles.length) {
       throw new Error('[@nuxt/ui] Found no neutral roles in `accent.css`.')
     }
   }
   return neutralRoles
+}
+
+/**
+ * The neutral roles and their fallbacks in the content of `accent.css`.
+ * @internal
+ */
+export function parseNeutralRoles(css: string): Array<[role: string, value: string]> {
+  const scope = css.match(/\.\\\[--ui-accent\\:var\\\(--ui-neutral\\\)\\\]\s*\{([^}]*)\}/)?.[1] ?? ''
+  return declarations(scope).flatMap(([role, value]) => {
+    const fallback = value.match(new RegExp(`^var\\(--ui-neutral-${role},(.+)\\)$`))?.[1]?.trim()
+    return fallback ? [[role, fallback] as [string, string]] : []
+  })
 }
 
 let accentRoles: string[] | undefined
@@ -78,14 +99,21 @@ let accentRoles: string[] | undefined
  */
 function getAccentRoles() {
   if (!accentRoles) {
-    const css = readFileSync(new URL('./accent.css', import.meta.url), 'utf8')
-    const scope = css.match(/\.\\\[--ui-accent\\:var\\\(--ui-primary\\\)\\\]\s*\{([^}]*)\}/)?.[1] ?? ''
-    accentRoles = [...scope.matchAll(/--ui-accent-([\w-]+): var\(--ui-primary-\1\);/g)].map(([, role]) => role!)
+    accentRoles = parseAccentRoles(readFileSync(new URL('./accent.css', import.meta.url), 'utf8'))
     if (!accentRoles.length) {
       throw new Error('[@nuxt/ui] Found no accent roles in `accent.css`.')
     }
   }
   return accentRoles
+}
+
+/**
+ * The accent roles in the content of `accent.css`.
+ * @internal
+ */
+export function parseAccentRoles(css: string): string[] {
+  const scope = css.match(/\.\\\[--ui-accent\\:var\\\(--ui-primary\\\)\\\]\s*\{([^}]*)\}/)?.[1] ?? ''
+  return declarations(scope).filter(([role, value]) => value === `var(--ui-primary-${role})`).map(([role]) => role)
 }
 
 // The selector of a scope class, like `[--ui-accent:var(--ui-tertiary)]`
