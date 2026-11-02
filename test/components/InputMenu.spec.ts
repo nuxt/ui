@@ -273,6 +273,22 @@ describe('InputMenu', () => {
       wrapper.unmount()
     })
 
+    test('updates the input when searchTerm changes to another value in single mode', async () => {
+      const wrapper = mountWithSearchTerm()
+      await flushPromises()
+
+      const input = wrapper.find('input')
+      await wrapper.setProps({ searchTerm: 'Option 1' })
+      await flushPromises()
+      expect(input.element.value).toBe('Option 1')
+
+      await wrapper.setProps({ searchTerm: 'Option 2' })
+      await flushPromises()
+      expect(input.element.value).toBe('Option 2')
+
+      wrapper.unmount()
+    })
+
     // `searchTerm` is reset after selecting an item, the input must keep displaying its label
     test('keeps the selected item label when searchTerm is reset', async () => {
       const wrapper = mountWithSearchTerm({
@@ -281,7 +297,7 @@ describe('InputMenu', () => {
       await flushPromises()
 
       const input = wrapper.find('input')
-      await input.setValue('Option 2')
+      await input.setValue('2')
       await flushPromises()
 
       await input.trigger('keydown', { key: 'Enter' })
