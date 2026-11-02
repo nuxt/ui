@@ -5,9 +5,8 @@ import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { useAppConfig } from '#imports'
 import { UTheme } from '#components'
 import { useComponentTheme } from '../../src/runtime/composables/useComponentTheme'
-import { defineTheme, extendTheme } from '../../src/runtime/utils/theme'
+import { colorVariant, defineTheme, extendTheme } from '../../src/runtime/utils/theme'
 import card from '../../src/runtime/theme/card'
-import { colorVariant } from '../../src/runtime/theme/color'
 
 // A component of the app's own, styled like the library's
 const theme = extendTheme(card, {
