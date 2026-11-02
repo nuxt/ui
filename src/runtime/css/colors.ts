@@ -21,15 +21,33 @@ let tokenNames: Set<string> | undefined
 /**
  * The names Nuxt UI's color utilities already have, like `muted` in
  * `text-muted` or `accent` in `bg-accent-soft`, read from `tokens.css` next to
- * this file. Read before the theme is: the color a name adds is in it by then.
+ * this file, and the ones whose variables it sets: `radius` would write over
+ * `--ui-radius`, and `overlay` over `--ui-overlay-bg-soft` with its roles and
+ * the `bg-overlay` utility. Read before the theme is: the color a name adds is
+ * in it by then.
  */
 function getTokenNames() {
   if (!tokenNames) {
-    const css = readFileSync(new URL('./tokens.css', import.meta.url), 'utf8')
+    const read = (file: string) => readFileSync(new URL(file, import.meta.url), 'utf8')
+    const tokens = read('./tokens.css')
     tokenNames = new Set()
-    for (const [, name] of css.matchAll(/^\s*--(?:color|text-color|background-color|border-color|ring-color|ring-offset-color|divide-color|outline-color|stroke|fill)-([\w-]+):/gm)) {
+    for (const [, name] of tokens.matchAll(/^\s*--(?:color|text-color|background-color|border-color|ring-color|ring-offset-color|divide-color|outline-color|stroke|fill)-([\w-]+):/gm)) {
       const words = name!.split('-')
       words.forEach((_, i) => tokenNames!.add(words.slice(0, i + 1).join('-')))
+    }
+    const roles = getAccentRoles()
+    for (const css of [tokens, read('./base.css'), read('./tailwind.css')]) {
+      for (const [, name] of css.matchAll(/--ui-([a-z\d-]+)/g)) {
+        tokenNames.add(name!)
+        // A color's roles are `--ui-<color>-<role>`, so a variable ending in a role takes its prefix
+        const role = roles.find(role => name!.endsWith(`-${role}`))
+        if (role) {
+          tokenNames.add(name!.slice(0, -role.length - 1))
+        }
+      }
+      for (const [, name] of css.matchAll(/@utility (?:bg|text|border|ring|outline|fill|stroke)-([a-z\d-]+)/g)) {
+        tokenNames.add(name!)
+      }
     }
   }
   return tokenNames
@@ -205,7 +223,7 @@ const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugi
         }
         // The utilities this color adds would take over ones that exist
         if (isTaken(alias)) {
-          throw new Error(`[@nuxt/ui] \`${alias}\` can't name a color: Tailwind CSS or Nuxt UI already uses it, like \`bg-${alias}\` or \`text-${alias}\`. Pick another name, like \`tertiary\`.`)
+          throw new Error(`[@nuxt/ui] \`${alias}\` can't name a color: Tailwind CSS or Nuxt UI already uses it, for a utility like \`bg-${alias}\` or a variable like \`--ui-${alias}\`. Pick another name, like \`tertiary\`.`)
         }
       }
       if (!value) {
