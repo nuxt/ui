@@ -62,7 +62,7 @@ When the project has components of its own styled with hardcoded design system c
 ## 4. Verify
 
 1. Run the build. The `@nuxt/ui/colors` plugin fails it on an unknown palette, a missing shade or a name that's taken, with the fix in the message.
-2. Run the linter with `no-palette-colors` at `error`: `ui.eslint.rules` in `nuxt.config.ts` with `@nuxt/eslint` and `eslint-plugin-better-tailwindcss` installed, or the `@nuxt/ui/eslint` config in a Vue app's `eslint.config`. It reports through `better-tailwindcss/no-restricted-classes`. Replace each class with the alias or the token the message names, or point an alias at the palette it names. It only sees classes in `class` attributes, `:ui` objects and the app config, so search the class strings of scripts too, like a column's `meta.class`.
+2. Run the linter with `no-palette-colors` at `error`: `ui.eslint.rules` in `nuxt.config.ts` with `@nuxt/eslint` and `eslint-plugin-better-tailwindcss` installed, or the `@nuxt/ui/eslint` config in a Vue app's `eslint.config`. It reports through `better-tailwindcss/no-restricted-classes`. Replace each class with the alias or the token the message names, or point an alias at the palette it names. It checks `class` attributes, `:ui` objects, the `:ui`, `:variants` and `:props` of `<UTheme>` and the `ui` of the app config or `app.use(ui)`, not class strings elsewhere in scripts, so search those too, like a column's `meta.class`.
 3. Run the type check. An added color is part of every `color` prop type, so a `color` value that doesn't exist fails it. On Vue, `ui.d.ts` has to be in the `tsconfig` `include`.
 4. Search the templates, the app config and the stylesheets for the hex values and palette names of the design system that are left.
 
