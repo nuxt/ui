@@ -128,6 +128,7 @@ export default defineTheme({
     collapsed: true,
     class: {
       link: 'px-(--ui-control-py)',
+      linkLeadingIcon: 'm-[calc((1lh-var(--ui-control-icon-size))/2)]',
       linkLabel: 'hidden',
       linkTrailing: 'hidden',
       content: 'shadow-sm rounded-sm min-h-6 p-1'
