@@ -94,14 +94,15 @@ export function useTheme() {
   }
 
   function setMixes(next: ThemeMixes, options: { track?: boolean } = {}) {
-    const changed = Object.keys(next).filter(token => next[token] !== mixes.value[token])
+    // removed keys count too, a reset clears a role by omitting it
+    const changed = [...new Set([...Object.keys(next), ...Object.keys(mixes.value)])].filter(token => next[token] !== mixes.value[token])
     mixes.value = normalizeExtras({ mixes: next }).mixes ?? {}
     dropTokens(changed)
     if (options.track !== false) trackThrottled('Theme Changed', { setting: 'mixes' })
   }
 
   function setCharts(next: ThemeCharts, options: { track?: boolean } = {}) {
-    const changed = (Object.keys(next) as Array<keyof ThemeCharts>).filter(series => next[series] !== charts.value[series])
+    const changed = ([...new Set([...Object.keys(next), ...Object.keys(charts.value)])] as Array<keyof ThemeCharts>).filter(series => next[series] !== charts.value[series])
     charts.value = normalizeExtras({ charts: next }).charts ?? {}
     dropTokens(changed.map(series => `--ui-chart-${series}`))
     if (options.track !== false) trackThrottled('Theme Changed', { setting: 'charts' })
