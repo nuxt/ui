@@ -127,7 +127,8 @@ const editorContent = { side: 'right' as const, align: 'start' as const, alignOf
                 :reset-dirty="scaleEdited"
                 @reset="clearScale"
               >
-                <div class="grid grid-cols-[auto_repeat(7,3rem)] gap-1 items-center text-xs">
+                <!-- scrolls on a phone, the grid is wider than the viewport there -->
+                <div class="grid grid-cols-[auto_repeat(7,3rem)] gap-1 items-center text-xs overflow-x-auto">
                   <span />
                   <span v-for="column in CONTROL_COLUMNS" :key="column.key" class="text-center text-muted">{{ column.label }}</span>
 

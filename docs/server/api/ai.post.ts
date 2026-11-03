@@ -9,7 +9,7 @@ import { themeIcons } from '../../app/utils/theme/icons'
 import { cssVariableDefaults } from '../../app/utils/theme/tokens'
 import { DEFAULT_COLORS } from '../../app/utils/theme/engine/types'
 import type { ThemeLayout, ThemeMixes, ThemeCharts } from '../../app/utils/theme/engine/extras'
-import { CHART_COLORS, CHART_DEFAULTS, CONTROL_COLUMNS, CONTROL_SIZES, LAYOUT_FIELDS, MIX_TARGETS, controlVariable } from '../../app/utils/theme/engine/extras'
+import { CHART_COLORS, CHART_DEFAULTS, CHART_SERIES, CONTROL_COLUMNS, DENSITIES, CONTROL_SIZES, LAYOUT_FIELDS, MIX_TARGETS, controlVariable } from '../../app/utils/theme/engine/extras'
 // The presets file itself, not the engine barrel: its only import is a type,
 // so this costs nothing beyond the preset data.
 import { presets } from '../../app/utils/theme/engine/presets'
@@ -118,7 +118,7 @@ const applyTheme = tool({
         type: 'object',
         description: 'The control scale, the page sizes and the states, in px (% for disabledOpacity). Only include fields that changed.',
         properties: {
-          density: { type: 'string', enum: ['compact', 'comfortable'], description: 'Moves the padding and gap of every control size by 2px. Omit for the default density.' },
+          density: { type: 'string', enum: DENSITIES, description: 'compact or comfortable move the padding and gap of every control size by 2px, default resets them.' },
           scale: {
             type: 'object',
             description: `Single cells of the control scale in px, over the density. Keys: ${CONTROL_COLUMNS.map(column => controlVariable(column.key, 'md')).join(', ')} and the same for ${CONTROL_SIZES.filter(size => size !== 'md').join(', ')}. Defaults at md: ${CONTROL_COLUMNS.map(column => `${column.key} ${column.values[2]}`).join(', ')}.`,
@@ -137,8 +137,9 @@ const applyTheme = tool({
       },
       charts: {
         type: 'object',
-        description: `The chart series, keys 1 to 6 (defaults: ${Object.entries(CHART_DEFAULTS).map(([key, value]) => `${key} ${value}`).join(', ')}). Values: ${Object.keys(CHART_COLORS).join(', ')}.`,
-        additionalProperties: { type: 'string' }
+        description: `The color of each chart series, an alias or a palette. Defaults: ${Object.entries(CHART_DEFAULTS).map(([key, value]) => `${key} ${value}`).join(', ')}.`,
+        properties: Object.fromEntries(CHART_SERIES.map(series => [series, { type: 'string', enum: Object.keys(CHART_COLORS) }])),
+        additionalProperties: false
       },
       ui: {
         type: 'object',
@@ -262,7 +263,7 @@ CRITICAL RULES for \`cssVariables\`:
 - ALWAYS provide BOTH \`light\` and \`dark\` objects, but only include variables you are CHANGING from their defaults. Do NOT include variables that keep their default value.
 - Values MUST use \`var(--ui-color-<name>-<shade>)\` references (e.g. \`var(--ui-color-neutral-950)\`), \`white\`, or \`black\`. NEVER use raw hex values.
 - The \`<name>\` in the variable reference MUST match the current neutral color (which the user may have changed). Use \`neutral\` as the name since it maps to whatever neutral palette is active.
-- In the exported main.css code, ONLY show overridden CSS variables (not defaults). Use \`:root, .light { }\` for light-mode overrides and \`.dark { }\` for dark-mode overrides. NEVER put CSS variable overrides in a plain \`:root { }\` block (that's only for \`--ui-radius\`, the layout and opacity role variables, and monochrome \`--ui-primary\`).
+- In the exported main.css code, ONLY show overridden CSS variables (not defaults). Use \`:root, .light { }\` for light-mode overrides and \`.dark { }\` for dark-mode overrides. NEVER put CSS variable overrides in a plain \`:root { }\` block (that's only for \`--ui-radius\`, the layout and opacity role variables, and monochrome \`--ui-primary\`). A \`--ui-gutter\` of \`--spacing(4)\` or more goes in \`@variant sm { }\` inside that \`:root\`, small screens keep \`--spacing(4)\`.
 
 Default values — only override the ones you want to change:
 

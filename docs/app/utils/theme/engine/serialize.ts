@@ -34,15 +34,14 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explici
 
   // Semantic token shades behind the style choices.
   const style = styleTokens(doc.style || {})
-  // Style expansion and explicit token overrides merge, explicit last so a
-  // round-tripped doc collapses instead of printing every variable twice.
-  const light: Record<string, string> = { ...style.light, ...doc.tokens?.light }
-  const dark: Record<string, string> = { ...style.dark, ...doc.tokens?.dark }
   // The control scale, the page sizes, the states, the roles and the charts,
   // only what differs from the library
   const extras = buildExtras(doc, EXTRAS_TABLES, px => `--spacing(${px / 4})`)
-  Object.assign(light, extras.light)
-  Object.assign(dark, extras.dark)
+  // Style expansion, chart series and explicit token overrides merge, explicit
+  // last like the page's own style tags, and so a round-tripped doc collapses
+  // instead of printing every variable twice.
+  const light: Record<string, string> = { ...style.light, ...extras.light, ...doc.tokens?.light }
+  const dark: Record<string, string> = { ...style.dark, ...extras.dark, ...doc.tokens?.dark }
 
   // An alias pinned to other shades of its own palette goes on its plugin line,
   // `primary: neutral 900 200`, instead of a variable

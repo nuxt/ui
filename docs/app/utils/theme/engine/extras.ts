@@ -194,7 +194,7 @@ export interface ThemeExtras {
 export function buildExtras(input: ExtrasInput, tables: ExtrasTables, spacing: (px: number) => string): ThemeExtras {
   const record = (value: unknown): Record<string, unknown> => (value && typeof value === 'object' ? value as Record<string, unknown> : {})
   const number = (value: unknown, min: number, max: number) => {
-    if ((typeof value !== 'number' && typeof value !== 'string') || value === '') return undefined
+    if ((typeof value !== 'number' && typeof value !== 'string') || String(value).trim() === '') return undefined
     const parsed = Number(value)
     return Number.isFinite(parsed) ? Math.round(Math.min(max, Math.max(min, parsed)) * 2) / 2 : undefined
   }
