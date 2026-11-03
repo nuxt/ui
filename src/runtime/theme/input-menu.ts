@@ -74,7 +74,7 @@ export default extendTheme(input, {
       },
       sm: {
         content: '[--ui-control-py:var(--ui-control-py-sm)] [--ui-control-gap:var(--ui-control-gap-sm)] [--ui-control-icon-size:var(--ui-control-icon-size-sm)]',
-        label: 'p-(--ui-control-py) text-[10px]/3 gap-(--ui-control-gap)',
+        label: 'p-(--ui-control-py) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) gap-(--ui-control-gap)',
         item: 'p-(--ui-control-py) text-(length:--ui-control-text-sm)/(--ui-control-text-sm--line-height) gap-(--ui-control-gap)',
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
@@ -85,7 +85,7 @@ export default extendTheme(input, {
       },
       md: {
         content: '[--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)]',
-        label: 'p-(--ui-control-py) text-xs gap-(--ui-control-gap)',
+        label: 'p-(--ui-control-py) text-(length:--ui-control-text-sm)/(--ui-control-text-sm--line-height) gap-(--ui-control-gap)',
         item: 'p-(--ui-control-py) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) gap-(--ui-control-gap)',
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
@@ -96,7 +96,7 @@ export default extendTheme(input, {
       },
       lg: {
         content: '[--ui-control-py:var(--ui-control-py-lg)] [--ui-control-gap:var(--ui-control-gap-lg)] [--ui-control-icon-size:var(--ui-control-icon-size-lg)]',
-        label: 'p-(--ui-control-py) text-xs gap-(--ui-control-gap)',
+        label: 'p-(--ui-control-py) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) gap-(--ui-control-gap)',
         item: 'p-(--ui-control-py) text-(length:--ui-control-text-lg)/(--ui-control-text-lg--line-height) gap-(--ui-control-gap)',
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
@@ -107,7 +107,7 @@ export default extendTheme(input, {
       },
       xl: {
         content: '[--ui-control-py:var(--ui-control-py-xl)] [--ui-control-gap:var(--ui-control-gap-xl)] [--ui-control-icon-size:var(--ui-control-icon-size-xl)]',
-        label: 'p-(--ui-control-py) text-sm gap-(--ui-control-gap)',
+        label: 'p-(--ui-control-py) text-(length:--ui-control-text-lg)/(--ui-control-text-lg--line-height) gap-(--ui-control-gap)',
         item: 'p-(--ui-control-py) text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height) gap-(--ui-control-gap)',
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
