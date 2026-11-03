@@ -29,6 +29,8 @@ Use the `ui` prop to hide the labels visually. They stay available to assistive 
 
 ::component-code{prefix="color-mode"}
 ---
+ignore:
+  - ui
 props:
   ui:
     label: 'sr-only'
@@ -71,6 +73,7 @@ export default defineConfig({
     vue(),
     ui({
       icons: {
+        system: 'i-lucide-laptop',
         light: 'i-lucide-sun-medium',
         dark: 'i-lucide-moon-star'
       }
