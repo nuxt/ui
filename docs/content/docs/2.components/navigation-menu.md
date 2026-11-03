@@ -1397,7 +1397,7 @@ export default defineAppConfig({
         collapsed: true,
         class: {
           link: 'flex-col',
-          linkLabel: 'block text-[10px]/3 text-center'
+          linkLabel: 'block text-[0.625rem]/3 text-center'
         }
       }]
     }
