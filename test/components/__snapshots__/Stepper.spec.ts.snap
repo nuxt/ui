@@ -32,7 +32,7 @@ exports[`Stepper > renders with as correctly 1`] = `
     </div>
   </div>
   <!--v-if-->
-  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
 </section>"
 `;
 
@@ -68,7 +68,7 @@ exports[`Stepper > renders with class correctly 1`] = `
     </div>
   </div>
   <!--v-if-->
-  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
 </div>"
 `;
 
@@ -104,7 +104,7 @@ exports[`Stepper > renders with content slot correctly 1`] = `
     </div>
   </div>
   <div data-slot="content" class="size-full">Content slot</div>
-  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
 </div>"
 `;
 
@@ -140,7 +140,7 @@ exports[`Stepper > renders with custom slot correctly 1`] = `
     </div>
   </div>
   <div data-slot="content" class="size-full">Custom slot</div>
-  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 2 of 3</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 3 of 3</div>
 </div>"
 `;
 
@@ -173,7 +173,7 @@ exports[`Stepper > renders with custom-wrapper slot correctly 1`] = `
     </div>
   </div>
   <!--v-if-->
-  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
 </div>"
 `;
 
@@ -209,7 +209,7 @@ exports[`Stepper > renders with default slot correctly 1`] = `
     </div>
   </div>
   <!--v-if-->
-  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
 </div>"
 `;
 
@@ -245,7 +245,7 @@ exports[`Stepper > renders with defaultValue correctly 1`] = `
     </div>
   </div>
   <!--v-if-->
-  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 2 of 3</div>
 </div>"
 `;
 
@@ -281,7 +281,7 @@ exports[`Stepper > renders with description slot correctly 1`] = `
     </div>
   </div>
   <!--v-if-->
-  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
 </div>"
 `;
 
@@ -317,7 +317,7 @@ exports[`Stepper > renders with indicator slot correctly 1`] = `
     </div>
   </div>
   <!--v-if-->
-  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
 </div>"
 `;
 
@@ -353,7 +353,7 @@ exports[`Stepper > renders with items correctly 1`] = `
     </div>
   </div>
   <!--v-if-->
-  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
 </div>"
 `;
 
@@ -389,7 +389,7 @@ exports[`Stepper > renders with modelValue correctly 1`] = `
     </div>
   </div>
   <!--v-if-->
-  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 2 of 3</div>
 </div>"
 `;
 
@@ -425,7 +425,7 @@ exports[`Stepper > renders with neutral color correctly 1`] = `
     </div>
   </div>
   <!--v-if-->
-  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
 </div>"
 `;
 
@@ -461,7 +461,7 @@ exports[`Stepper > renders with size lg horizontal correctly 1`] = `
     </div>
   </div>
   <!--v-if-->
-  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
 </div>"
 `;
 
@@ -497,7 +497,7 @@ exports[`Stepper > renders with size lg vertical correctly 1`] = `
     </div>
   </div>
   <!--v-if-->
-  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
 </div>"
 `;
 
@@ -533,7 +533,7 @@ exports[`Stepper > renders with size md horizontal correctly 1`] = `
     </div>
   </div>
   <!--v-if-->
-  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
 </div>"
 `;
 
@@ -569,7 +569,7 @@ exports[`Stepper > renders with size md vertical correctly 1`] = `
     </div>
   </div>
   <!--v-if-->
-  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
 </div>"
 `;
 
@@ -605,7 +605,7 @@ exports[`Stepper > renders with size sm horizontal correctly 1`] = `
     </div>
   </div>
   <!--v-if-->
-  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
 </div>"
 `;
 
@@ -641,7 +641,7 @@ exports[`Stepper > renders with size sm vertical correctly 1`] = `
     </div>
   </div>
   <!--v-if-->
-  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
 </div>"
 `;
 
@@ -677,7 +677,7 @@ exports[`Stepper > renders with size xl horizontal correctly 1`] = `
     </div>
   </div>
   <!--v-if-->
-  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
 </div>"
 `;
 
@@ -713,7 +713,7 @@ exports[`Stepper > renders with size xl vertical correctly 1`] = `
     </div>
   </div>
   <!--v-if-->
-  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
 </div>"
 `;
 
@@ -749,7 +749,7 @@ exports[`Stepper > renders with size xs horizontal correctly 1`] = `
     </div>
   </div>
   <!--v-if-->
-  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
 </div>"
 `;
 
@@ -785,7 +785,7 @@ exports[`Stepper > renders with size xs vertical correctly 1`] = `
     </div>
   </div>
   <!--v-if-->
-  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
 </div>"
 `;
 
@@ -821,7 +821,7 @@ exports[`Stepper > renders with title slot correctly 1`] = `
     </div>
   </div>
   <!--v-if-->
-  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
 </div>"
 `;
 
@@ -857,7 +857,7 @@ exports[`Stepper > renders with ui correctly 1`] = `
     </div>
   </div>
   <!--v-if-->
-  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
 </div>"
 `;
 
@@ -893,7 +893,7 @@ exports[`Stepper > renders with valueKey correctly 1`] = `
     </div>
   </div>
   <!--v-if-->
-  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
 </div>"
 `;
 
@@ -923,7 +923,7 @@ exports[`Stepper > renders with wrapper slot correctly 1`] = `
     </div>
   </div>
   <!--v-if-->
-  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
 </div>"
 `;
 
@@ -959,6 +959,6 @@ exports[`Stepper > renders without linear correctly 1`] = `
     </div>
   </div>
   <!--v-if-->
-  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
 </div>"
 `;
