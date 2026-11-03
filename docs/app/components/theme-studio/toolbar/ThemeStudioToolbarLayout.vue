@@ -8,7 +8,15 @@ import { DENSITIES, LAYOUT_FIELDS } from '../../../utils/theme/engine/extras'
  * The sizes of things and the states of controls. The density moves the
  * padding and gap of the whole control scale at once. Every value reads in px.
  */
-const { layout, setLayout } = useTheme()
+const { layout, setLayout, radius, radiuses } = useTheme()
+
+// `--ui-radius` is a rem length on a fixed ladder, read in px like the rest:
+// `.125rem` doesn't fit the readout
+const radiusPx = computed({
+  get: () => radius.value * 16,
+  set: (value: number) => (radius.value = value / 16)
+})
+const radiusStep = (radiuses[1]! - radiuses[0]!) * 16
 
 const densityItems = DENSITIES.map(value => ({ label: upperFirst(value), value, defaultTag: value === 'default' }))
 
@@ -67,6 +75,19 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
     />
 
     <template #content>
+      <ThemeStudioSection label="Shape" section-key="radius">
+        <ThemeStudioRow
+          v-model="radiusPx"
+          control="slider"
+          label="Radius"
+          aria-label="--ui-radius"
+          :min="radiuses[0]! * 16"
+          :max="radiuses.at(-1)! * 16"
+          :step="radiusStep"
+          unit="px"
+        />
+      </ThemeStudioSection>
+
       <ThemeStudioSection label="Controls" section-key="controls">
         <ThemeStudioRow
           v-model="density"
