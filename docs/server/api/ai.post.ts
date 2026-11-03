@@ -8,6 +8,8 @@ import { tools as mcpToolDefinitions } from '#nuxt-mcp-toolkit/tools.mjs'
 import { themeIcons } from '../../app/utils/theme/icons'
 import { cssVariableDefaults } from '../../app/utils/theme/tokens'
 import { DEFAULT_COLORS } from '../../app/utils/theme/engine/types'
+import type { ThemeLayout, ThemeMixes, ThemeCharts } from '../../app/utils/theme/engine/extras'
+import { CHART_COLORS, CHART_DEFAULTS, CONTROL_COLUMNS, CONTROL_SIZES, LAYOUT_FIELDS, MIX_TARGETS, controlVariable } from '../../app/utils/theme/engine/extras'
 // The presets file itself, not the engine barrel: its only import is a type,
 // so this costs nothing beyond the preset data.
 import { presets } from '../../app/utils/theme/engine/presets'
@@ -61,6 +63,9 @@ export interface ApplyThemeSettings {
   icons?: string
   customColors?: Record<string, Record<string, string>>
   cssVariables?: { light?: Record<string, string>, dark?: Record<string, string> }
+  layout?: ThemeLayout
+  mixes?: ThemeMixes
+  charts?: ThemeCharts
   ui?: Record<string, any>
 }
 
@@ -108,6 +113,32 @@ const applyTheme = tool({
             additionalProperties: { type: 'string' }
           }
         }
+      },
+      layout: {
+        type: 'object',
+        description: 'The control scale, the page sizes and the states, in px (% for disabledOpacity). Only include fields that changed.',
+        properties: {
+          density: { type: 'string', enum: ['compact', 'comfortable'], description: 'Moves the padding and gap of every control size by 2px. Omit for the default density.' },
+          scale: {
+            type: 'object',
+            description: `Single cells of the control scale in px, over the density. Keys: ${CONTROL_COLUMNS.map(column => controlVariable(column.key, 'md')).join(', ')} and the same for ${CONTROL_SIZES.filter(size => size !== 'md').join(', ')}. Defaults at md: ${CONTROL_COLUMNS.map(column => `${column.key} ${column.values[2]}`).join(', ')}.`,
+            additionalProperties: { type: 'number' }
+          },
+          ...Object.fromEntries(Object.entries(LAYOUT_FIELDS).map(([key, field]) => [key, {
+            type: 'number',
+            description: `${field.variable}, ${field.min} to ${field.max}, default ${field.default}.`
+          }]))
+        }
+      },
+      mixes: {
+        type: 'object',
+        description: `The opacity in % of a role whose default is a color at some opacity. Keys and defaults: ${MIX_TARGETS.map(target => `${target.token} ${target.default}`).join(', ')}.`,
+        additionalProperties: { type: 'number' }
+      },
+      charts: {
+        type: 'object',
+        description: `The chart series, keys 1 to 6 (defaults: ${Object.entries(CHART_DEFAULTS).map(([key, value]) => `${key} ${value}`).join(', ')}). Values: ${Object.keys(CHART_COLORS).join(', ')}.`,
+        additionalProperties: { type: 'string' }
       },
       ui: {
         type: 'object',
@@ -231,7 +262,7 @@ CRITICAL RULES for \`cssVariables\`:
 - ALWAYS provide BOTH \`light\` and \`dark\` objects, but only include variables you are CHANGING from their defaults. Do NOT include variables that keep their default value.
 - Values MUST use \`var(--ui-color-<name>-<shade>)\` references (e.g. \`var(--ui-color-neutral-950)\`), \`white\`, or \`black\`. NEVER use raw hex values.
 - The \`<name>\` in the variable reference MUST match the current neutral color (which the user may have changed). Use \`neutral\` as the name since it maps to whatever neutral palette is active.
-- In the exported main.css code, ONLY show overridden CSS variables (not defaults). Use \`:root, .light { }\` for light-mode overrides and \`.dark { }\` for dark-mode overrides. NEVER put CSS variable overrides in a plain \`:root { }\` block (that's only for \`--ui-radius\` and monochrome \`--ui-primary\`).
+- In the exported main.css code, ONLY show overridden CSS variables (not defaults). Use \`:root, .light { }\` for light-mode overrides and \`.dark { }\` for dark-mode overrides. NEVER put CSS variable overrides in a plain \`:root { }\` block (that's only for \`--ui-radius\`, the layout and opacity role variables, and monochrome \`--ui-primary\`).
 
 Default values — only override the ones you want to change:
 
@@ -335,7 +366,7 @@ CRITICAL rules for component \`ui\` overrides:
 }
 
 :root {
-  --ui-radius: 0.375rem; /* only radius goes here */
+  --ui-radius: 0.375rem; /* radius, the layout and the opacity roles go here */
 }
 
 :root, .light {
