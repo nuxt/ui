@@ -8,7 +8,7 @@ export default defineTheme({
     label: 'w-full flex items-center [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon-size:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) font-semibold text-xs/5 text-strong',
     item: 'min-w-0',
     link: 'group relative w-full flex items-center gap-(--ui-control-gap) font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-(length:--ui-focus-width) before:outline-accent-focus',
-    linkLeadingIcon: 'shrink-0 size-(--ui-control-icon-size)',
+    linkLeadingIcon: 'shrink-0 size-(--ui-control-icon-size) my-[calc((1lh-var(--ui-control-icon-size))/2)]',
     linkLeadingAvatar: 'shrink-0',
     linkLeadingChip: '',
     linkTrailing: 'group ms-auto inline-flex gap-1.5 items-center',
