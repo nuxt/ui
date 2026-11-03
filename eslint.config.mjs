@@ -533,7 +533,8 @@ function betterTailwindcssConfig(files, entryPoint, { ignore = [], settings = {}
       // Tailwind keeps the v3 names working, so nothing breaks until it doesn't.
       'better-tailwindcss/no-deprecated-classes': 'error',
       // One spelling per utility: `size-full` over `w-full h-full`, `z-1` over `z-[1]`.
-      'better-tailwindcss/enforce-canonical-classes': 'error',
+      // `rootFontSize` also moves px values onto the spacing scale, so they scale with the root font size.
+      'better-tailwindcss/enforce-canonical-classes': ['error', { rootFontSize: 16 }],
       ...rules
     }
   }

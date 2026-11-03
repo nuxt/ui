@@ -213,7 +213,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
           <div
             v-for="(img, index) in heroImages"
             :key="index"
-            class="w-[234px] aspect-square shrink-0 rounded-lg overflow-hidden relative bg-soft flex flex-col items-center justify-center gap-3"
+            class="w-58.5 aspect-square shrink-0 rounded-lg overflow-hidden relative bg-soft flex flex-col items-center justify-center gap-3"
             :class="index % 2 === 0 ? '-rotate-2' : 'rotate-2'"
           >
             <div
@@ -349,7 +349,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
           :ui="{
             root: 'flex items-center gap-4 w-full',
             list: 'relative flex bg-transparent dark:bg-transparent gap-2 px-0',
-            indicator: 'absolute top-[4px] duration-200 ease-out focus:outline-none rounded-lg bg-soft/60',
+            indicator: 'absolute top-1 duration-200 ease-out focus:outline-none rounded-lg bg-soft/60',
             trigger: 'px-3 py-2 rounded-lg hover:bg-tint data-[state=active]:text-strong data-[state=inactive]:text-muted',
             label: 'truncate'
           }"

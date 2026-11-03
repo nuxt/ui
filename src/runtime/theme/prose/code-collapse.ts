@@ -13,7 +13,7 @@ export default defineTheme({
         root: 'rounded-md'
       },
       false: {
-        root: 'max-h-[200px] overflow-hidden rounded-b-md [&_pre]:overflow-hidden',
+        root: 'max-h-50 overflow-hidden rounded-b-md [&_pre]:overflow-hidden',
         footer: 'inset-x-0 bottom-0 border border-t-0 border-default bg-linear-to-t from-default before:absolute before:inset-0 before:rounded-b-md before:pointer-events-none before:bg-linear-to-t before:from-tint'
       }
     }

@@ -28,7 +28,7 @@ export default defineTheme({
       vertical: {
         header: 'flex-col gap-4',
         item: 'flex text-start gap-(--ui-control-gap)',
-        separator: 'inset-s-[calc(50%-1px)] top-[calc(var(--ui-control-size)+6px)] bottom-[-10px] w-0.5'
+        separator: 'inset-s-[calc(50%-1px)] top-[calc(var(--ui-control-size)+6px)] -bottom-2.5 w-0.5'
       }
     },
 

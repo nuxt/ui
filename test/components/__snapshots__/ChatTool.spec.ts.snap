@@ -53,7 +53,7 @@ exports[`ChatTool > renders with actions variant card correctly 1`] = `
     <!--v-if-->
   </button>
   <div data-slot="chat-tool-content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
-    <div data-slot="chat-tool-body" class="text-sm text-faint whitespace-pre-wrap border-t border-default p-2 max-h-[200px] overflow-y-auto focus:outline-none"></div>
+    <div data-slot="chat-tool-body" class="text-sm text-faint whitespace-pre-wrap border-t border-default p-2 max-h-50 overflow-y-auto focus:outline-none"></div>
   </div>
   <div data-slot="chat-tool-actions" data-state="closed" class="flex items-center justify-end gap-1.5 border-t border-default p-2"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-primary)] text-accent-contrast bg-accent hover:bg-accent-hover active:bg-accent-hover disabled:bg-accent aria-disabled:bg-accent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height)">
       <!--v-if--><span data-slot="button-label" class="truncate">Approve</span>
@@ -262,7 +262,7 @@ exports[`ChatTool > renders with variant card correctly 1`] = `
     <!--v-if-->
   </button>
   <div data-slot="chat-tool-content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
-    <div data-slot="chat-tool-body" class="text-sm text-faint whitespace-pre-wrap border-t border-default p-2 max-h-[200px] overflow-y-auto focus:outline-none"></div>
+    <div data-slot="chat-tool-body" class="text-sm text-faint whitespace-pre-wrap border-t border-default p-2 max-h-50 overflow-y-auto focus:outline-none"></div>
   </div>
   <!--v-if-->
 </div>"

@@ -25,7 +25,7 @@ export default defineTheme({
         root: 'rounded-md ring ring-default overflow-hidden outline-focus has-focus-visible:outline-(length:--ui-focus-width) has-focus-visible:ring-primary',
         trigger: 'px-2 py-1 focus:outline-none',
         trailingIcon: 'ms-auto',
-        body: 'border-t border-default p-2 max-h-[200px] overflow-y-auto focus:outline-none',
+        body: 'border-t border-default p-2 max-h-50 overflow-y-auto focus:outline-none',
         actions: 'border-t border-default p-2'
       }
     },

@@ -5,8 +5,8 @@
     <USkeleton class="size-12 rounded-full" />
 
     <div class="space-y-2">
-      <USkeleton class="h-4 w-[250px]" />
-      <USkeleton class="h-4 w-[200px]" />
+      <USkeleton class="h-4 w-62.5" />
+      <USkeleton class="h-4 w-50" />
     </div>
   </div>
 </template>

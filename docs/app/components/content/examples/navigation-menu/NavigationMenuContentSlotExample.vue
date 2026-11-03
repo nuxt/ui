@@ -71,7 +71,7 @@ const items = [
     class="w-full justify-center"
   >
     <template #docs-content="{ item }">
-      <ul class="grid gap-2 p-4 lg:w-[500px] lg:grid-cols-[minmax(0,.75fr)_minmax(0,1fr)]">
+      <ul class="grid gap-2 p-4 lg:w-125 lg:grid-cols-[minmax(0,.75fr)_minmax(0,1fr)]">
         <li class="row-span-3">
           <Placeholder class="size-full min-h-48" />
         </li>

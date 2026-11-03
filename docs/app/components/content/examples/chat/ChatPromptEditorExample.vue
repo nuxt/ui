@@ -62,7 +62,7 @@ function onSubmit() {
         :starter-kit="false"
         :placeholder="placeholder"
         class="w-full min-h-12"
-        :ui="{ base: 'p-2.5! [&_.mention]:bg-primary/5 [&_.mention]:rounded-sm [&_.mention]:px-0.5 [&_.mention]:py-0.25' }"
+        :ui="{ base: 'p-2.5! [&_.mention]:bg-primary/5 [&_.mention]:rounded-sm [&_.mention]:px-0.5 [&_.mention]:py-px' }"
         :extensions="[Extension.create({
           name: 'chatPromptSubmit',
           priority: 1000,

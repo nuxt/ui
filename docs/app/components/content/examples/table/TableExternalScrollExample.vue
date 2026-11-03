@@ -119,7 +119,7 @@ const columns: TableColumn<Payment>[] = [{
       :data="data"
       :columns="columns"
       :virtualize="{ scrollMargin: titleHeight, getScrollElement }"
-      :ui="{ base: 'min-w-[1200px]' }"
+      :ui="{ base: 'min-w-300' }"
     />
   </div>
 </template>
