@@ -10,7 +10,7 @@ export default defineTheme({
     label: 'truncate',
     trailingIcon: 'size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none',
     content: 'data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden rounded-sm outline-focus has-focus-visible:outline-(length:--ui-focus-width)',
-    body: 'max-h-[200px] pt-2 overflow-y-auto text-sm text-faint whitespace-pre-wrap focus:outline-none'
+    body: 'max-h-50 pt-2 overflow-y-auto text-sm text-faint whitespace-pre-wrap focus:outline-none'
   },
   variants: {
     chevron: {
