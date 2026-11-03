@@ -61,6 +61,8 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
             :sliders="section.sliders"
             :chip="rampChip(section.ramp)"
           />
+
+          <ThemeStudioColorMixGroup v-if="group.key === 'background'" section="surfaces" label="Opacity" />
         </div>
       </ThemeStudioSection>
     </template>

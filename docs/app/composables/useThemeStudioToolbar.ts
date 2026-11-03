@@ -71,7 +71,7 @@ export function useThemeStudioToolbar() {
     font: afterMount(sectionDirty(['font', 'type', 'weights'])),
     icons: afterMount(sectionDirty('icons')),
     radius: afterMount(sectionDirty('radius')),
-    layout: afterMount(sectionDirty(['spacing', 'states']))
+    layout: afterMount(sectionDirty(['controls', 'page', 'states']))
   }
 
   // Two-stage reset: edits reset back to the preset, a second press clears

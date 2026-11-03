@@ -19,9 +19,10 @@ const SAFE_HEX = /^#[0-9a-f]{3,8}$/i
 const OKLCH_NUMBER = String.raw`\d+(?:\.\d+)?|\.\d+`
 const SAFE_OKLCH = new RegExp(String.raw`^oklch\(\s*(?:${OKLCH_NUMBER})%?\s+(?:${OKLCH_NUMBER}|none)\s+(?:(?:${OKLCH_NUMBER})(?:deg)?|none)\s*\)$`, 'i')
 const SAFE_CSS_VAR_KEY = /^--[\w-]+$/
-// var() refs, hex, keywords, px/% lengths, and literal oklch()/rgb() colors
-// (an imported token override is as likely to be a literal as a ramp ref)
-const SAFE_CSS_VAR_VALUE = /^(?:var\(--[\w-]+\)|#[0-9a-f]{3,8}|[a-z]+|-?\d{1,3}(?:\.\d+)?(?:px|%)|oklch\([\w.% -]{1,40}\)|rgba?\([\d.%, /]{1,40}\))$/i
+// var() refs, hex, keywords, px/% lengths, literal oklch()/rgb() colors (an
+// imported token override is as likely to be a literal as a ramp ref), and a
+// keyword or variable mixed with transparent, Mono's translucent dark borders
+const SAFE_CSS_VAR_VALUE = /^(?:var\(--[\w-]+\)|#[0-9a-f]{3,8}|[a-z]+|-?\d{1,3}(?:\.\d+)?(?:px|%)|oklch\([\w.% -]{1,40}\)|rgba?\([\d.%, /]{1,40}\)|color-mix\(in oklab, (?:[a-z]+|var\(--[\w-]+\)) \d{1,3}(?:\.\d+)?%, transparent\))$/i
 
 // A palette name becomes `--color-<name>-<shade>`, one ident: a space, fine
 // inside a quoted font family, would split the property and drop the ramp.

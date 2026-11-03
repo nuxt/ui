@@ -1,5 +1,7 @@
-import type { ThemeDoc, ThemeLayout, ShadeStop, StyleOptions } from './types'
-import { DEFAULT_COLORS, THEME_DEFAULTS, LAYOUT_DEFAULTS, SEMANTIC_ALIASES, VARIANT_GROUPS, VARIANT_SUPPORT, styleTokens, normalizeLayout, TOKEN_SHADE_TARGETS, parseUiColorRef } from './types'
+import type { ThemeDoc, ShadeStop, StyleOptions } from './types'
+import { DEFAULT_COLORS, THEME_DEFAULTS, SEMANTIC_ALIASES, VARIANT_GROUPS, VARIANT_SUPPORT, styleTokens, TOKEN_SHADE_TARGETS, parseUiColorRef } from './types'
+import type { ThemeLayout } from './extras'
+import { MIX_TARGETS, normalizeExtras } from './extras'
 import { FONT_WEIGHT_DEFAULTS } from '../studio'
 
 /**
@@ -19,29 +21,44 @@ type TokenSection = ColorSection | 'surfaces'
 export type SectionKey
   = | TokenSection
     | 'font' | 'type' | 'weights'
-    | 'icons' | 'radius' | 'spacing' | 'states' | 'size' | 'buttons' | 'panels' | 'inputs'
+    | 'icons' | 'radius' | 'controls' | 'page' | 'states' | 'charts'
+    | 'size' | 'buttons' | 'panels' | 'inputs'
 
 /** Which font fields the `font` and `type` sections each own. */
 const FONT_STACKS = ['sans', 'heading', 'mono'] as const
 const TYPE_FIELDS = ['uppercase', 'italic', 'letterSpacing', 'lineHeight'] as const
 
-/** Which layout fields the `spacing` and `states` sections each own. */
-const LAYOUT_FIELDS = {
-  spacing: ['density', 'gutter'],
+/** Which layout fields the `controls`, `page` and `states` sections each own. */
+const LAYOUT_SECTIONS = {
+  controls: ['density', 'scale', 'textStep'],
+  page: ['gutter', 'containerWidth', 'headerHeight'],
   states: ['focusWidth', 'disabledOpacity']
-} as const satisfies Record<'spacing' | 'states', readonly (keyof ThemeLayout)[]>
+} as const satisfies Record<'controls' | 'page' | 'states', readonly (keyof ThemeLayout)[]>
+
+type LayoutSection = keyof typeof LAYOUT_SECTIONS
+
+/** The opacity roles a section owns, normalized so an explicit default reads as absent. */
+function ownedMixes(doc: ThemeDoc, section: SectionKey) {
+  const mixes = normalizeExtras(doc).mixes ?? {}
+  return Object.fromEntries(MIX_TARGETS.filter(target => target.section === section && mixes[target.token] !== undefined).map(target => [target.token, mixes[target.token]]))
+}
+
+function ownedLayout(doc: ThemeDoc, section: LayoutSection) {
+  const layout = normalizeExtras(doc).layout ?? {}
+  return Object.fromEntries(LAYOUT_SECTIONS[section].map(field => [field, layout[field] ?? null]))
+}
 
 /**
  * Only the sections that back a multi-section panel. Every other section owns
  * a toolbar control and carries its own `sectionDirty`.
  */
 export const SECTION_GROUPS: Record<'colors' | 'defaults', SectionKey[]> = {
-  colors: ['primary', 'neutral', ...SEMANTIC_ALIASES],
+  colors: ['primary', 'neutral', ...SEMANTIC_ALIASES, 'charts'],
   defaults: ['size', 'buttons', 'panels', 'inputs']
 }
 
 /** Every section, for whole-document comparisons against the baseline. */
-export const ALL_SECTION_KEYS: SectionKey[] = [...SECTION_GROUPS.colors, ...SECTION_GROUPS.defaults, 'surfaces', 'font', 'type', 'weights', 'icons', 'radius', 'spacing', 'states']
+export const ALL_SECTION_KEYS: SectionKey[] = [...SECTION_GROUPS.colors, ...SECTION_GROUPS.defaults, 'surfaces', 'font', 'type', 'weights', 'icons', 'radius', 'controls', 'page', 'states']
 
 /** Which section a semantic token (or token shade) belongs to. */
 function tokenSection(token: string): TokenSection {
@@ -49,7 +66,7 @@ function tokenSection(token: string): TokenSection {
   // the alias itself or one of its roles, `--ui-success-text-default`
   const semantic = SEMANTIC_ALIASES.find(alias => token === `--ui-${alias}` || token.startsWith(`--ui-${alias}-`))
   if (semantic) return semantic
-  if (['--ui-bg-', '--ui-text-', '--ui-border-'].some(prefix => token.startsWith(prefix))) return 'surfaces'
+  if (['--ui-bg-', '--ui-text-', '--ui-border-', '--ui-overlay-'].some(prefix => token.startsWith(prefix))) return 'surfaces'
   return 'neutral'
 }
 
@@ -129,10 +146,11 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
         color: alias(doc, key),
         palette: aliasPalette(doc, key) ?? null,
         tokens: ownedTokens(doc, key),
-        shades: ownedTokenShades(doc, key)
+        shades: ownedTokenShades(doc, key),
+        mixes: ownedMixes(doc, key)
       }
     case 'surfaces':
-      return { tokens: ownedTokens(doc, key), shades: ownedTokenShades(doc, key) }
+      return { tokens: ownedTokens(doc, key), shades: ownedTokenShades(doc, key), mixes: ownedMixes(doc, key) }
     // Explicit stock values count as absent throughout: setFontPrefs strips
     // them on apply while a preset doc may spell them out, and a raw
     // comparison would read dirty forever, jamming the toolbar reset.
@@ -166,15 +184,13 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
       return doc.icons ?? THEME_DEFAULTS.icons
     case 'radius':
       return doc.radius ?? THEME_DEFAULTS.radius
-    // normalized, so a layout spelling out a default reads as absent
-    case 'spacing': {
-      const layout = normalizeLayout(doc.layout) ?? {}
-      return { density: layout.density ?? 'default', gutter: layout.gutter ?? LAYOUT_DEFAULTS.gutter }
-    }
-    case 'states': {
-      const layout = normalizeLayout(doc.layout) ?? {}
-      return { focusWidth: layout.focusWidth ?? LAYOUT_DEFAULTS.focusWidth, disabledOpacity: layout.disabledOpacity ?? LAYOUT_DEFAULTS.disabledOpacity }
-    }
+    case 'controls':
+    case 'page':
+      return ownedLayout(doc, key)
+    case 'states':
+      return { ...ownedLayout(doc, key), mixes: ownedMixes(doc, key) }
+    case 'charts':
+      return normalizeExtras(doc).charts ?? {}
     case 'size':
       return { size: chosen(style.defaults?.size), color: chosen(style.defaults?.color) }
     case 'buttons':
@@ -291,6 +307,26 @@ function mergeColorExtras(doc: ThemeDoc, base: ThemeDoc, section: TokenSection) 
   }
 }
 
+/** Replace a section's layout fields with the base doc's, dropping `layout` when nothing is left. */
+function mergeLayout(doc: ThemeDoc, base: ThemeDoc, section: LayoutSection) {
+  const layout: Record<string, unknown> = { ...normalizeExtras(doc).layout }
+  const baseLayout = normalizeExtras(base).layout
+  for (const field of LAYOUT_SECTIONS[section]) {
+    const value = baseLayout?.[field]
+    if (value === undefined) Reflect.deleteProperty(layout, field)
+    else layout[field] = structuredClone(value)
+  }
+  setOrDelete(doc, 'layout', normalizeExtras({ layout }).layout)
+}
+
+/** Replace a section's opacity roles with the base doc's. */
+function mergeMixes(doc: ThemeDoc, base: ThemeDoc, section: SectionKey) {
+  const owned = new Set(MIX_TARGETS.filter(target => target.section === section).map(target => target.token))
+  const kept = Object.entries(normalizeExtras(doc).mixes ?? {}).filter(([token]) => !owned.has(token))
+  const added = Object.entries(normalizeExtras(base).mixes ?? {}).filter(([token]) => owned.has(token))
+  setOrDelete(doc, 'mixes', normalizeExtras({ mixes: Object.fromEntries([...kept, ...added]) }).mixes)
+}
+
 /**
  * A new doc with `key`'s slice taken from `base` and everything else from
  * `current`, apply it and the section is reset to the baseline.
@@ -310,9 +346,11 @@ export function mergeSection(current: ThemeDoc, base: ThemeDoc, key: SectionKey)
     case 'error':
       mergeAlias(doc, base, key)
       mergeColorExtras(doc, base, key)
+      mergeMixes(doc, base, key)
       break
     case 'surfaces':
       mergeColorExtras(doc, base, key)
+      mergeMixes(doc, base, key)
       break
     case 'font':
       mergeFontFields(doc, base, FONT_STACKS)
@@ -330,17 +368,17 @@ export function mergeSection(current: ThemeDoc, base: ThemeDoc, key: SectionKey)
     case 'radius':
       setOrDelete(doc, 'radius', base.radius)
       break
-    case 'spacing':
-    case 'states': {
-      const layout: Record<string, unknown> = { ...doc.layout }
-      for (const field of LAYOUT_FIELDS[key]) {
-        const value = base.layout?.[field]
-        if (value === undefined) Reflect.deleteProperty(layout, field)
-        else layout[field] = value
-      }
-      setOrDelete(doc, 'layout', normalizeLayout(layout))
+    case 'controls':
+    case 'page':
+      mergeLayout(doc, base, key)
       break
-    }
+    case 'states':
+      mergeLayout(doc, base, key)
+      mergeMixes(doc, base, key)
+      break
+    case 'charts':
+      setOrDelete(doc, 'charts', normalizeExtras(base).charts)
+      break
     case 'size':
       if (doc.style?.defaults || baseStyle.defaults?.size !== undefined || baseStyle.defaults?.color !== undefined) {
         doc.style ??= {}
