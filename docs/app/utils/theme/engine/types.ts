@@ -219,26 +219,13 @@ export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, ramp: To
   { token: '--ui-text-contrast', label: 'Contrast', ramp: 'neutral', group: 'text', defaults: { light: 'white', dark: 900 } },
   { token: '--ui-border-default', label: 'Default', ramp: 'neutral', group: 'border', defaults: { light: 200, dark: 800 } },
   { token: '--ui-border-strong', label: 'Strong', ramp: 'neutral', group: 'border', defaults: { light: 300, dark: 700 } },
-  // The surfaces inside a floating layer, a step up from the page's until a shade is picked
-  { token: '--ui-overlay-bg-soft', label: 'Overlay soft', ramp: 'neutral', group: 'background', defaults: { light: 200, dark: 700 }, follows: '--ui-bg-strong' },
-  { token: '--ui-overlay-bg-strong', label: 'Overlay strong', ramp: 'neutral', group: 'background', defaults: { light: 300, dark: 600 }, follows: '--ui-bg-strong' },
+  // The ring and separators of menus, popovers and modals, `border-strong` once `--ui-bg-overlay` lifts them
   { token: '--ui-overlay-border-default', label: 'Overlay', ramp: 'neutral', group: 'border', defaults: { light: 300, dark: 700 }, follows: '--ui-border-strong' },
-  { token: '--ui-overlay-border-strong', label: 'Overlay strong', ramp: 'neutral', group: 'border', defaults: { light: 400, dark: 600 }, follows: '--ui-border-strong' },
-  // The roles of neutral-colored components, the page token of the same name until a shade is picked
-  { token: '--ui-neutral-bg-soft', label: 'Soft', ramp: 'neutral', group: 'colors', defaults: { light: 100, dark: 800 }, follows: '--ui-bg-soft' },
-  { token: '--ui-neutral-border-default', label: 'Border', ramp: 'neutral', group: 'colors', defaults: { light: 200, dark: 800 }, follows: '--ui-border-default' },
-  { token: '--ui-neutral-border-strong', label: 'Strong border', ramp: 'neutral', group: 'colors', defaults: { light: 300, dark: 700 }, follows: '--ui-border-strong' },
-  { token: '--ui-neutral-text-faint', label: 'Faint text', ramp: 'neutral', group: 'colors', defaults: { light: 400, dark: 500 }, follows: '--ui-text-faint' },
-  { token: '--ui-neutral-text-muted', label: 'Muted text', ramp: 'neutral', group: 'colors', defaults: { light: 500, dark: 400 }, follows: '--ui-text-muted' },
-  { token: '--ui-neutral-text-default', label: 'Text', ramp: 'neutral', group: 'colors', defaults: { light: 700, dark: 200 }, follows: '--ui-text-default' },
-  { token: '--ui-neutral-text-strong', label: 'Strong text', ramp: 'neutral', group: 'colors', defaults: { light: 900, dark: 'white' }, follows: '--ui-text-strong' },
-  { token: '--ui-neutral-text-contrast', label: 'Contrast text', ramp: 'neutral', group: 'colors', defaults: { light: 'white', dark: 900 }, follows: '--ui-text-contrast' },
   // The text of each color, `--ui-<color>-text-default` and its muted step
   ...(['primary', ...SEMANTIC_ALIASES] as const).flatMap(alias => [
     { token: `--ui-${alias}-text-default`, label: 'Text', ramp: alias, group: 'colors' as const, defaults: { light: 500, dark: 400 } as const, follows: `--ui-${alias}` },
     { token: `--ui-${alias}-text-muted`, label: 'Muted text', ramp: alias, group: 'colors' as const, defaults: { light: 500, dark: 400 } as const, follows: `--ui-${alias}` },
-    // `text-<color>` reads the strong step before the text, the contrast is the text on its solid
-    { token: `--ui-${alias}-text-strong`, label: 'Strong text', ramp: alias, group: 'colors' as const, defaults: { light: 500, dark: 400 } as const, follows: `--ui-${alias}-text-default` },
+    // the text on its solid, dark text on a light solid like amber
     { token: `--ui-${alias}-text-contrast`, label: 'Contrast text', ramp: alias, group: 'colors' as const, defaults: { light: 'white', dark: 900 } as const, follows: '--ui-text-contrast' }
   ])
 ]

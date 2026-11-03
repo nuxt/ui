@@ -63,11 +63,9 @@ const editorContent = { side: 'right' as const, align: 'start' as const, alignOf
               :chip="rampChip(alias)"
             />
 
-            <ThemeStudioColorMixGroup :section="alias" :label="`${title} opacity`" />
-
-            <!-- these restyle neutral-colored components only, the page has its own -->
+            <!-- neutral text is the page text, no pair of its own to show here -->
             <p v-if="alias === 'neutral'" class="text-xs text-muted">
-              These style neutral-colored components. The page text, backgrounds and borders are set in Surfaces.
+              Neutral text, backgrounds and borders are set in Surfaces.
             </p>
 
             <!-- The text sliders follow the solid until one is moved, this

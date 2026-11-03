@@ -9,7 +9,7 @@ import { themeIcons } from '../../app/utils/theme/icons'
 import { cssVariableDefaults } from '../../app/utils/theme/tokens'
 import { DEFAULT_COLORS } from '../../app/utils/theme/engine/types'
 import type { ThemeLayout, ThemeMixes, ThemeCharts } from '../../app/utils/theme/engine/extras'
-import { CHART_COLORS, CHART_DEFAULTS, CHART_SERIES, CONTROL_COLUMNS, DENSITIES, CONTROL_SIZES, LAYOUT_FIELDS, MIX_TARGETS, controlVariable } from '../../app/utils/theme/engine/extras'
+import { CHART_COLORS, CHART_DEFAULTS, CHART_SERIES, DENSITIES, LAYOUT_FIELDS, MIX_TARGETS } from '../../app/utils/theme/engine/extras'
 // The presets file itself, not the engine barrel: its only import is a type,
 // so this costs nothing beyond the preset data.
 import { presets } from '../../app/utils/theme/engine/presets'
@@ -116,15 +116,9 @@ const applyTheme = tool({
       },
       layout: {
         type: 'object',
-        description: 'The control scale, the page sizes and the states, in px (% for disabledOpacity). Only include fields that changed.',
+        description: 'The control density, the page sizes and the states, in px (% for disabledOpacity). Only include fields that changed.',
         properties: {
           density: { type: 'string', enum: DENSITIES, description: 'compact or comfortable move the padding and gap of every control size by 2px, default resets them.' },
-          scale: {
-            type: 'object',
-            description: `Single cells of the control scale in px, over the density. Defaults at md: ${CONTROL_COLUMNS.map(column => `${column.key} ${column.values[2]}`).join(', ')}.`,
-            properties: Object.fromEntries(CONTROL_COLUMNS.flatMap(column => CONTROL_SIZES.map(size => [controlVariable(column.key, size), { type: 'number' }]))),
-            additionalProperties: false
-          },
           ...Object.fromEntries(Object.entries(LAYOUT_FIELDS).map(([key, field]) => [key, {
             type: 'number',
             description: `${field.variable}, ${field.min} to ${field.max}, default ${field.default}.`
