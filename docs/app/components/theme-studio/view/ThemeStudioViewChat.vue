@@ -67,8 +67,7 @@ const chatActions = computed<DropdownMenuItem[]>(() => [
 ])
 
 const userItems = computed<DropdownMenuItem[][]>(() => [
-  [{ label: 'Benjamin Canac', avatar: { src: 'https://github.com/benjamincanac.png', alt: 'Benjamin Canac' }, type: 'label' }],
-  [{ label: 'Settings', icon: studioIcons.settings }, { label: 'Log out', icon: studioIcons.logout }]
+  [{ label: 'Benjamin Canac', type: 'label' }, { label: 'Settings', icon: studioIcons.settings }, { label: 'Log out', icon: studioIcons.logout }]
 ])
 
 const historyItems: NavigationMenuItem[] = [

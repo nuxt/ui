@@ -7,12 +7,8 @@ const loading = ref(false)
 const items = computed(() => [
   [{
     label: 'My account',
-    avatar: {
-      src: 'https://github.com/benjamincanac.png'
-    },
     type: 'label' as const
-  }],
-  [{
+  }, {
     label: 'Profile',
     description: 'View your profile',
     icon: 'i-lucide-user',

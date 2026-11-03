@@ -7,10 +7,7 @@ const showDownloads = ref(false)
 
 const items = computed(() => [{
   label: 'Interface',
-  icon: 'i-lucide-app-window',
   type: 'label' as const
-}, {
-  type: 'separator' as const
 }, {
   label: 'Show Bookmarks',
   icon: 'i-lucide-bookmark',

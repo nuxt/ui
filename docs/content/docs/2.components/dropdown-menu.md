@@ -32,12 +32,9 @@ externalTypes:
   - DropdownMenuItem[][]
 props:
   items:
-    - - label: Benjamin
-        avatar:
-          src: 'https://github.com/benjamincanac.png'
-          loading: lazy
+    - - label: My account
         type: label
-    - - label: Profile
+      - label: Profile
         icon: i-lucide-user
       - label: Billing
         icon: i-lucide-credit-card
@@ -166,12 +163,9 @@ externalTypes:
   - DropdownMenuItem[][]
 props:
   items:
-    - - label: Benjamin
-        avatar:
-          src: 'https://github.com/benjamincanac.png'
-          loading: lazy
+    - - label: My account
         type: label
-    - - label: Profile
+      - label: Profile
         icon: i-lucide-user
       - label: Billing
         icon: i-lucide-credit-card

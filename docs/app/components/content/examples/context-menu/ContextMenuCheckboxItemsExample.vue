@@ -8,8 +8,6 @@ const items = computed<ContextMenuItem[]>(() => [{
   label: 'View',
   type: 'label' as const
 }, {
-  type: 'separator' as const
-}, {
   label: 'Show Sidebar',
   type: 'checkbox' as const,
   checked: showSidebar.value,

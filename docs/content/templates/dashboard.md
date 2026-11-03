@@ -350,9 +350,8 @@ const user = ref({
 
 const items = computed<DropdownMenuItem[][]>(() => ([[{
   type: 'label',
-  label: user.value.name,
-  avatar: user.value.avatar
-}], [{
+  label: user.value.name
+}, {
   label: 'Profile',
   icon: 'i-lucide-user'
 }, {

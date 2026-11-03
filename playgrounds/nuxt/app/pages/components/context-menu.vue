@@ -5,13 +5,6 @@ const loading = ref(false)
 
 const items = computed(() => [
   [{
-    label: 'My account',
-    type: 'label' as const,
-    avatar: {
-      src: 'https://github.com/benjamincanac.png'
-    }
-  }],
-  [{
     label: 'Appearance',
     description: 'Change the appearance of the app',
     children: [{
@@ -26,6 +19,9 @@ const items = computed(() => [
     }]
   }],
   [{
+    label: 'View',
+    type: 'label' as const
+  }, {
     label: 'Show Sidebar',
     kbds: ['meta', 'S'],
     onSelect() {
