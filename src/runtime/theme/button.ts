@@ -66,10 +66,13 @@ export default defineTheme({
         trailingIcon: 'ms-auto'
       }
     },
-    // Equal padding, for `square` or an icon and nothing else
+    // Equal padding, for `square` or an icon and nothing else. The icon is
+    // smaller than the line, its margin keeps the height of a button with a label
     square: {
       true: {
-        base: 'px-(--ui-control-py)'
+        base: 'px-(--ui-control-py)',
+        leadingIcon: 'm-[calc((1lh-var(--ui-control-icon-size))/2)]',
+        trailingIcon: 'm-[calc((1lh-var(--ui-control-icon-size))/2)]'
       }
     },
     leading: {

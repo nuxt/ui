@@ -7,7 +7,7 @@ export default defineTheme({
     list: 'relative flex p-1 group',
     indicator: 'absolute [[data-slot=tabs-indicator]~&]:hidden transition-[translate,width] duration-200 ease-out motion-reduce:transition-none',
     trigger: 'group relative inline-flex items-center min-w-0 data-[state=active]:[anchor-name:--tabs-trigger] data-[state=inactive]:text-muted hover:data-[state=inactive]:not-disabled:text-default font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width)',
-    leadingIcon: 'shrink-0',
+    leadingIcon: 'shrink-0 my-[calc((1lh-var(--ui-control-icon-size))/2)]',
     leadingAvatar: 'shrink-0',
     label: 'truncate',
     trailingBadge: 'shrink-0',

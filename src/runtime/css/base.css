@@ -190,11 +190,11 @@
     --ui-control-gap-md: --spacing(1.5);
     --ui-control-gap-lg: --spacing(2);
     --ui-control-gap-xl: --spacing(2);
-    --ui-control-icon-size-xs: --spacing(4);
-    --ui-control-icon-size-sm: --spacing(4);
-    --ui-control-icon-size-md: --spacing(5);
-    --ui-control-icon-size-lg: --spacing(5);
-    --ui-control-icon-size-xl: --spacing(6);
+    --ui-control-icon-size-xs: --spacing(3.5);
+    --ui-control-icon-size-sm: --spacing(3.5);
+    --ui-control-icon-size-md: --spacing(4);
+    --ui-control-icon-size-lg: --spacing(4);
+    --ui-control-icon-size-xl: --spacing(5);
     --ui-control-box-xs: --spacing(3);
     --ui-control-box-sm: --spacing(3.5);
     --ui-control-box-md: --spacing(4);

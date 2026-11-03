@@ -25,7 +25,7 @@ export default defineTheme({
     tierBillingPeriod: 'text-default truncate text-xs font-medium',
     tierBillingCycle: 'text-muted truncate text-xs font-medium',
     tierButton: 'mt-6 md:mt-auto md:pt-6',
-    tierFeatureIcon: 'size-5 shrink-0',
+    tierFeatureIcon: 'size-4 shrink-0',
     section: 'mt-6 flex flex-col gap-2',
     sectionTitle: 'font-semibold text-sm text-strong',
     feature: 'flex items-center justify-between gap-1',

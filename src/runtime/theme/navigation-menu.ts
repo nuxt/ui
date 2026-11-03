@@ -5,7 +5,7 @@ export default defineTheme({
   slots: {
     root: 'relative flex gap-1.5 [&>div]:min-w-0',
     list: 'isolate min-w-0',
-    label: 'w-full flex items-center [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon-size:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) font-semibold text-xs/5 text-strong',
+    label: 'w-full flex items-center [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon-size:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) font-semibold text-xs/5 text-strong',
     item: 'min-w-0',
     link: 'group relative w-full flex items-center gap-(--ui-control-gap) font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-(length:--ui-focus-width) before:outline-accent-focus',
     linkLeadingIcon: 'shrink-0 size-(--ui-control-icon-size)',
@@ -13,7 +13,7 @@ export default defineTheme({
     linkLeadingChip: '',
     linkTrailing: 'group ms-auto inline-flex gap-1.5 items-center',
     linkTrailingBadge: 'shrink-0',
-    linkTrailingIcon: 'size-5 transform shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none',
+    linkTrailingIcon: 'size-4 transform shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none',
     linkLabel: 'truncate',
     linkLabelExternalIcon: 'inline-block size-3 align-top text-faint',
     childList: 'isolate',
@@ -21,7 +21,7 @@ export default defineTheme({
     childItem: '',
     childLink: 'group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-(length:--ui-focus-width) before:outline-accent-focus',
     childLinkWrapper: 'min-w-0',
-    childLinkIcon: 'size-5 shrink-0',
+    childLinkIcon: 'size-4 shrink-0',
     childLinkLabel: 'truncate',
     childLinkLabelExternalIcon: 'inline-block size-3 align-top text-faint',
     childLinkDescription: 'text-muted',
@@ -44,7 +44,7 @@ export default defineTheme({
         root: 'items-center justify-between',
         list: 'flex items-center',
         item: 'py-2',
-        link: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon-size:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) before:inset-x-px before:inset-y-0',
+        link: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon-size:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) before:inset-x-px before:inset-y-0',
         childList: 'grid p-2',
         childLink: 'px-3 py-2 gap-2 before:inset-x-px before:inset-y-0',
         childLinkLabel: 'font-medium',
@@ -52,15 +52,19 @@ export default defineTheme({
       },
       vertical: {
         root: 'flex-col',
-        link: 'flex-row [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon-size:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) before:inset-y-px before:inset-x-0',
+        link: 'flex-row [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon-size:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) before:inset-y-px before:inset-x-0',
         childLabel: 'px-1.5 py-0.5',
         childLink: 'p-1.5 gap-1.5 before:inset-y-px before:inset-x-0'
       }
     },
     // Equal padding, to keep a link in place while a sidebar collapses. After
-    // `orientation`, which sets the horizontal padding
+    // `orientation`, which sets the horizontal padding. The icon margin keeps
+    // the height of a link with a label
     square: {
-      true: { link: 'px-(--ui-control-py)' }
+      true: {
+        link: 'px-(--ui-control-py)',
+        linkLeadingIcon: 'm-[calc((1lh-var(--ui-control-icon-size))/2)]'
+      }
     },
     contentOrientation: {
       horizontal: {
