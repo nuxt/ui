@@ -55,7 +55,7 @@ defineShortcuts(shortcuts)
       </div>
     </UCard>
 
-    <UCard :ui="{ body: 'h-[200px] overflow-y-auto' }" class="flex-1">
+    <UCard :ui="{ body: 'h-50 overflow-y-auto' }" class="flex-1">
       <template #header>
         <div class="flex items-center justify-between gap-4">
           <h3 class="font-bold">
