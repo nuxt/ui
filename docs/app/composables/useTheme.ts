@@ -86,21 +86,24 @@ export function useTheme() {
   }
 
   // A token override of the same variable (the AI's cssVariables, an
-  // imported theme) sits in a later style tag and would win, so it goes.
+  // imported theme) sits in a later style tag and would win, so it goes,
+  // only for the values that changed.
   function dropTokens(keys: string[]) {
     const { light = {}, dark = {} } = cssVariablesData.value
     if (keys.some(key => key in light || key in dark)) removeCSSVariables({ light: keys, dark: keys })
   }
 
   function setMixes(next: ThemeMixes, options: { track?: boolean } = {}) {
+    const changed = Object.keys(next).filter(token => next[token] !== mixes.value[token])
     mixes.value = normalizeExtras({ mixes: next }).mixes ?? {}
-    dropTokens(Object.keys(next))
+    dropTokens(changed)
     if (options.track !== false) trackThrottled('Theme Changed', { setting: 'mixes' })
   }
 
   function setCharts(next: ThemeCharts, options: { track?: boolean } = {}) {
+    const changed = (Object.keys(next) as Array<keyof ThemeCharts>).filter(series => next[series] !== charts.value[series])
     charts.value = normalizeExtras({ charts: next }).charts ?? {}
-    dropTokens(Object.keys(next).map(series => `--ui-chart-${series}`))
+    dropTokens(changed.map(series => `--ui-chart-${series}`))
     if (options.track !== false) trackThrottled('Theme Changed', { setting: 'charts' })
   }
 

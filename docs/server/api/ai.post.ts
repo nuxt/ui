@@ -121,8 +121,9 @@ const applyTheme = tool({
           density: { type: 'string', enum: DENSITIES, description: 'compact or comfortable move the padding and gap of every control size by 2px, default resets them.' },
           scale: {
             type: 'object',
-            description: `Single cells of the control scale in px, over the density. Keys: ${CONTROL_COLUMNS.map(column => controlVariable(column.key, 'md')).join(', ')} and the same for ${CONTROL_SIZES.filter(size => size !== 'md').join(', ')}. Defaults at md: ${CONTROL_COLUMNS.map(column => `${column.key} ${column.values[2]}`).join(', ')}.`,
-            additionalProperties: { type: 'number' }
+            description: `Single cells of the control scale in px, over the density. Defaults at md: ${CONTROL_COLUMNS.map(column => `${column.key} ${column.values[2]}`).join(', ')}.`,
+            properties: Object.fromEntries(CONTROL_COLUMNS.flatMap(column => CONTROL_SIZES.map(size => [controlVariable(column.key, size), { type: 'number' }]))),
+            additionalProperties: false
           },
           ...Object.fromEntries(Object.entries(LAYOUT_FIELDS).map(([key, field]) => [key, {
             type: 'number',
@@ -132,8 +133,9 @@ const applyTheme = tool({
       },
       mixes: {
         type: 'object',
-        description: `The opacity in % of a role whose default is a color at some opacity. Keys and defaults: ${MIX_TARGETS.map(target => `${target.token} ${target.default}`).join(', ')}.`,
-        additionalProperties: { type: 'number' }
+        description: 'The opacity in % of a role whose default is a color at that opacity.',
+        properties: Object.fromEntries(MIX_TARGETS.map(target => [target.token, { type: 'number', description: `Default ${target.default}` }])),
+        additionalProperties: false
       },
       charts: {
         type: 'object',
