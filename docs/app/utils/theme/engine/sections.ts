@@ -1,7 +1,7 @@
 import type { ThemeDoc, ShadeStop, StyleOptions } from './types'
 import { DEFAULT_COLORS, THEME_DEFAULTS, SEMANTIC_ALIASES, VARIANT_GROUPS, VARIANT_SUPPORT, styleTokens, TOKEN_SHADE_TARGETS, parseUiColorRef } from './types'
 import type { ThemeLayout } from './extras'
-import { MIX_TARGETS, normalizeExtras } from './extras'
+import { normalizeExtras } from './extras'
 import { FONT_WEIGHT_DEFAULTS } from '../studio'
 
 /**
@@ -36,12 +36,6 @@ const LAYOUT_SECTIONS = {
 } as const satisfies Record<'controls' | 'page' | 'states', readonly (keyof ThemeLayout)[]>
 
 type LayoutSection = keyof typeof LAYOUT_SECTIONS
-
-/** The opacity roles a section owns, normalized so an explicit default reads as absent. */
-function ownedMixes(doc: ThemeDoc, section: SectionKey) {
-  const mixes = normalizeExtras(doc).mixes ?? {}
-  return Object.fromEntries(MIX_TARGETS.filter(target => target.section === section && mixes[target.token] !== undefined).map(target => [target.token, mixes[target.token]]))
-}
 
 function ownedLayout(doc: ThemeDoc, section: LayoutSection) {
   const layout = normalizeExtras(doc).layout ?? {}
@@ -146,11 +140,10 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
         color: alias(doc, key),
         palette: aliasPalette(doc, key) ?? null,
         tokens: ownedTokens(doc, key),
-        shades: ownedTokenShades(doc, key),
-        mixes: ownedMixes(doc, key)
+        shades: ownedTokenShades(doc, key)
       }
     case 'surfaces':
-      return { tokens: ownedTokens(doc, key), shades: ownedTokenShades(doc, key), mixes: ownedMixes(doc, key) }
+      return { tokens: ownedTokens(doc, key), shades: ownedTokenShades(doc, key) }
     // Explicit stock values count as absent throughout: setFontPrefs strips
     // them on apply while a preset doc may spell them out, and a raw
     // comparison would read dirty forever, jamming the toolbar reset.
@@ -188,7 +181,7 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
     case 'page':
       return ownedLayout(doc, key)
     case 'states':
-      return { ...ownedLayout(doc, key), mixes: ownedMixes(doc, key) }
+      return ownedLayout(doc, key)
     case 'charts':
       return normalizeExtras(doc).charts ?? {}
     case 'size':
@@ -319,14 +312,6 @@ function mergeLayout(doc: ThemeDoc, base: ThemeDoc, section: LayoutSection) {
   setOrDelete(doc, 'layout', normalizeExtras({ layout }).layout)
 }
 
-/** Replace a section's opacity roles with the base doc's. */
-function mergeMixes(doc: ThemeDoc, base: ThemeDoc, section: SectionKey) {
-  const owned = new Set(MIX_TARGETS.filter(target => target.section === section).map(target => target.token))
-  const kept = Object.entries(normalizeExtras(doc).mixes ?? {}).filter(([token]) => !owned.has(token))
-  const added = Object.entries(normalizeExtras(base).mixes ?? {}).filter(([token]) => owned.has(token))
-  setOrDelete(doc, 'mixes', normalizeExtras({ mixes: Object.fromEntries([...kept, ...added]) }).mixes)
-}
-
 /**
  * A new doc with `key`'s slice taken from `base` and everything else from
  * `current`, apply it and the section is reset to the baseline.
@@ -346,11 +331,9 @@ export function mergeSection(current: ThemeDoc, base: ThemeDoc, key: SectionKey)
     case 'error':
       mergeAlias(doc, base, key)
       mergeColorExtras(doc, base, key)
-      mergeMixes(doc, base, key)
       break
     case 'surfaces':
       mergeColorExtras(doc, base, key)
-      mergeMixes(doc, base, key)
       break
     case 'font':
       mergeFontFields(doc, base, FONT_STACKS)
@@ -374,7 +357,6 @@ export function mergeSection(current: ThemeDoc, base: ThemeDoc, key: SectionKey)
       break
     case 'states':
       mergeLayout(doc, base, key)
-      mergeMixes(doc, base, key)
       break
     case 'charts':
       setOrDelete(doc, 'charts', normalizeExtras(base).charts)

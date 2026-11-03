@@ -64,18 +64,18 @@ function asRow(item: unknown) {
         :trailing-icon="appConfig.ui.icons.chevronDown"
         aria-label="Chart series colors"
         class="group"
-        :ui="{
-          /* `ps-1` lines the first dot up with the chips above, which sit in a `mx-1` leading slot */
-          label: 'flex-1 flex items-center gap-1 ps-1',
-          trailingIcon: 'text-faint transition-transform duration-200 group-data-[state=open]:rotate-180'
-        }"
+        :ui="{ trailingIcon: 'text-faint transition-transform duration-200 group-data-[state=open]:rotate-180' }"
       >
-        <span
-          v-for="series in CHART_SERIES"
-          :key="series"
-          class="size-2 rounded-full"
-          :style="{ backgroundColor: swatch(value(series)) }"
-        />
+        <!-- the default slot replaces the label span; `ps-1` lines the first dot up
+             with the chips above, which sit in a `mx-1` leading slot -->
+        <span class="flex-1 flex items-center gap-1 ps-1">
+          <span
+            v-for="series in CHART_SERIES"
+            :key="series"
+            class="size-2 rounded-full"
+            :style="{ backgroundColor: swatch(value(series)) }"
+          />
+        </span>
       </UButton>
 
       <template #series-trailing="{ item }">

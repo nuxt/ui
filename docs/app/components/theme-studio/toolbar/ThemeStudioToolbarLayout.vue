@@ -32,9 +32,6 @@ const fields = (keys: LayoutField[]) => keys.map(key => ({
   model: fieldModel(key)
 }))
 
-// `--ui-outline-focus`, the primary's opacity on components without a color
-const { rows: focusMixes } = useTokenMixes('states')
-
 const controlFields = fields(['textStep'])
 const pageFields = fields(['gutter', 'headerHeight'])
 const stateFields = fields(['focusWidth', 'disabledOpacity'])
@@ -121,19 +118,6 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
           :max="field.max"
           :step="field.step"
           :unit="field.readout"
-        />
-
-        <ThemeStudioRow
-          v-for="row in focusMixes"
-          :key="row.token"
-          v-model="row.model.value"
-          control="slider"
-          :label="row.label"
-          :aria-label="row.token"
-          :min="0"
-          :max="100"
-          :step="5"
-          unit="%"
         />
       </ThemeStudioSection>
     </template>

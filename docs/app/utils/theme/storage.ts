@@ -1,4 +1,4 @@
-import type { ThemeDoc, ThemeLayout, ThemeMixes, ThemeCharts, StoredPaletteParams, StyleOptions } from './engine'
+import type { ThemeDoc, ThemeLayout, ThemeCharts, StoredPaletteParams, StyleOptions } from './engine'
 import { DEFAULT_COLORS, THEME_DEFAULTS } from './engine/types'
 import { normalizeExtras } from './engine/extras'
 import { SAFE_NAME } from './sanitize'
@@ -31,7 +31,6 @@ export interface StoredTheme {
   icons?: string
   font?: FontPrefs
   layout?: ThemeLayout
-  mixes?: ThemeMixes
   charts?: ThemeCharts
   /** Semantic alias overrides (secondary, success, info, warning, error). */
   colors?: Record<string, string>
@@ -158,7 +157,6 @@ export function readStoredTheme(): StoredTheme {
     parsed.font = normalizeFont(parsed.font)
     const extras = normalizeExtras(parsed)
     parsed.layout = extras.layout
-    parsed.mixes = extras.mixes
     parsed.charts = extras.charts
     return parsed as StoredTheme
   } catch {
@@ -208,7 +206,6 @@ export function snapshotStoredTheme(): StoredTheme {
     font: filled(useState<StoredTheme['font']>('nuxt-ui-font').value),
     icons: unless(useState<string>('nuxt-ui-icons').value, THEME_DEFAULTS.icons),
     layout: filled(useState<StoredTheme['layout']>(THEME_STATE_KEYS.layout).value),
-    mixes: filled(useState<StoredTheme['mixes']>(THEME_STATE_KEYS.mixes).value),
     charts: filled(useState<StoredTheme['charts']>(THEME_STATE_KEYS.charts).value),
     colors: filled(extras?.colors),
     components: filled(extras?.ui),
@@ -231,7 +228,6 @@ export const THEME_STATE_KEYS = {
   themePreset: 'nuxt-ui-theme-preset',
   paletteParams: 'nuxt-ui-palette-params-state',
   layout: 'nuxt-ui-layout',
-  mixes: 'nuxt-ui-mixes',
   charts: 'nuxt-ui-charts'
 } as const
 

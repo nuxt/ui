@@ -1,7 +1,7 @@
 /**
  * The variables of the theme that aren't shades of a ramp: the control
- * density, the page sizes, the focus and disabled states, the hover tint and
- * the chart series. One builder writes them for the live style tag,
+ * density, the page sizes, the focus and disabled states and the chart
+ * series. One builder writes them for the live style tag,
  * the FOUC script and the export, so the three can't drift.
  */
 import colors from 'tailwindcss/colors'
@@ -60,24 +60,6 @@ export interface ThemeLayout extends Partial<Record<LayoutField, number>> {
   density?: Exclude<Density, 'default'>
 }
 
-/* ---------------------------------------------------------------- mixes -- */
-
-/** Which slice of the studio owns a role, mirrors `SectionKey`. */
-type MixSection = 'surfaces' | 'states'
-
-/**
- * Roles whose recipe is a color at some opacity, unset in the library so they
- * default to it (src/runtime/css/tokens.css). The studio writes the recipe
- * back at another opacity.
- */
-export const MIX_TARGETS: Array<{ token: string, label: string, base: string, default: number, section: MixSection }> = [
-  { token: '--ui-bg-tint', label: 'Hover', base: 'var(--ui-bg-soft)', default: 50, section: 'surfaces' },
-  { token: '--ui-outline-focus', label: 'Focus color', base: 'var(--ui-primary)', default: 25, section: 'states' }
-]
-
-/** Role variable → opacity in %. */
-export type ThemeMixes = Record<string, number>
-
 /* --------------------------------------------------------------- charts -- */
 
 export const CHART_SERIES = ['1', '2', '3', '4', '5', '6'] as const
@@ -121,7 +103,6 @@ export const EXTRAS_TABLES = {
   density: DENSITY_STEPS,
   fields: LAYOUT_FIELDS,
   gutterBase: GUTTER_BASE,
-  mixes: Object.fromEntries(MIX_TARGETS.map(target => [target.token, { base: target.base, default: target.default }])),
   charts: { defaults: CHART_DEFAULTS, colors: CHART_COLORS },
   // Tailwind's `sm`, the docs keep the default breakpoints
   smMedia: '(width >= 40rem)'
@@ -131,14 +112,12 @@ export type ExtrasTables = typeof EXTRAS_TABLES
 
 export interface ExtrasInput {
   layout?: unknown
-  mixes?: unknown
   charts?: unknown
 }
 
 export interface ThemeExtras {
   /** The input with every value checked and every default dropped. */
   layout?: ThemeLayout
-  mixes?: ThemeMixes
   charts?: ThemeCharts
   /** The variables to set on `:root`, from `sm`, and per mode. */
   root: Record<string, string>
@@ -187,15 +166,6 @@ export function buildExtras(input: ExtrasInput, tables: ExtrasTables, spacing: (
     else root[field.variable] = write(value, field.unit)
   }
 
-  const rawMixes = record(input.mixes)
-  const mixes: ThemeMixes = {}
-  for (const [token, mix] of Object.entries(tables.mixes)) {
-    const value = number(rawMixes[token], 0, 100)
-    if (value === undefined || value === mix.default) continue
-    mixes[token] = value
-    root[token] = `color-mix(in oklab, ${mix.base} ${value}%, transparent)`
-  }
-
   const rawCharts = record(input.charts)
   const charts: ThemeCharts = {}
   for (const [series, fallback] of Object.entries(tables.charts.defaults)) {
@@ -215,7 +185,6 @@ export function buildExtras(input: ExtrasInput, tables: ExtrasTables, spacing: (
 
   return {
     layout: Object.keys(layout).length ? layout : undefined,
-    mixes: Object.keys(mixes).length ? mixes : undefined,
     charts: Object.keys(charts).length ? charts : undefined,
     root,
     sm,
@@ -234,7 +203,7 @@ export function themeExtras(input: ExtrasInput): ThemeExtras {
 }
 
 /** Only the fields that differ from the library, the shape the state and the doc hold. */
-export function normalizeExtras(input: ExtrasInput): { layout?: ThemeLayout, mixes?: ThemeMixes, charts?: ThemeCharts } {
-  const { layout, mixes, charts } = themeExtras(input)
-  return { ...(layout ? { layout } : {}), ...(mixes ? { mixes } : {}), ...(charts ? { charts } : {}) }
+export function normalizeExtras(input: ExtrasInput): { layout?: ThemeLayout, charts?: ThemeCharts } {
+  const { layout, charts } = themeExtras(input)
+  return { ...(layout ? { layout } : {}), ...(charts ? { charts } : {}) }
 }

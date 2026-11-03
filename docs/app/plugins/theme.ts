@@ -39,7 +39,6 @@ export default defineNuxtPlugin({
         useState('nuxt-ui-icons').value = saved.icons ?? THEME_DEFAULTS.icons
         // readStoredTheme already ran them through normalizeExtras
         useState(THEME_STATE_KEYS.layout).value = saved.layout ?? {}
-        useState(THEME_STATE_KEYS.mixes).value = saved.mixes ?? {}
         useState(THEME_STATE_KEYS.charts).value = saved.charts ?? {}
         // Through the same boundary the AI path uses: these two are
         // concatenated into <style> text, and storage is writable by anything

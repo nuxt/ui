@@ -11,7 +11,7 @@ import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables } from '../utils/
 // and the serializer with it. The serializer loads on demand below.
 import { mergeUi, isDefaultStyle, isDefaultTheme, styleTokens, DEFAULT_COLORS, DEFAULT_PRESET_ID, THEME_DEFAULTS, SEMANTIC_ALIASES, LIBRARY_TOKEN_DEFAULTS, tokenShadeDefaults, withoutCompoundVariants } from '../utils/theme/engine/types'
 import { normalizeExtras, themeExtras } from '../utils/theme/engine/extras'
-import type { ThemeDoc, ThemeLayout, ThemeMixes, ThemeCharts, ThemePalette, StyleOptions, StoredPaletteParams } from '../utils/theme/engine'
+import type { ThemeDoc, ThemeLayout, ThemeCharts, ThemePalette, StyleOptions, StoredPaletteParams } from '../utils/theme/engine'
 import colors from 'tailwindcss/colors'
 
 export function useTheme() {
@@ -76,7 +76,6 @@ export function useTheme() {
    * recipe roles, and the chart series. Sparse like the font document.
    */
   const layout = useState<ThemeLayout>(THEME_STATE_KEYS.layout, () => ({}))
-  const mixes = useState<ThemeMixes>(THEME_STATE_KEYS.mixes, () => ({}))
   const charts = useState<ThemeCharts>(THEME_STATE_KEYS.charts, () => ({}))
 
   // Normalize: defaults are absences, so hasChanges/export stay clean.
@@ -91,15 +90,6 @@ export function useTheme() {
   function dropTokens(keys: string[]) {
     const { light = {}, dark = {} } = cssVariablesData.value
     if (keys.some(key => key in light || key in dark)) removeCSSVariables({ light: keys, dark: keys })
-  }
-
-  function setMixes(next: ThemeMixes, options: { track?: boolean } = {}) {
-    // compared normalized, and removed keys count too: a reset clears a role by omitting it
-    const normalized = normalizeExtras({ mixes: next }).mixes ?? {}
-    const changed = [...new Set([...Object.keys(normalized), ...Object.keys(mixes.value)])].filter(token => normalized[token] !== mixes.value[token])
-    mixes.value = normalized
-    dropTokens(changed)
-    if (options.track !== false) trackThrottled('Theme Changed', { setting: 'mixes' })
   }
 
   function setCharts(next: ThemeCharts, options: { track?: boolean } = {}) {
@@ -231,7 +221,7 @@ export function useTheme() {
     return parts.join(' ')
   })
   // same sentinel rationale as customColorsStyle
-  const extrasStyle = computed(() => themeExtras({ layout: layout.value, mixes: mixes.value, charts: charts.value }).css || ':root {}')
+  const extrasStyle = computed(() => themeExtras({ layout: layout.value, charts: charts.value }).css || ':root {}')
   const customColorsStyle = computed(() => {
     const entries = Object.entries(customColorsData.value)
     // non-empty sentinel: unhead won't patch an emptied innerHTML, leaving
@@ -316,7 +306,6 @@ export function useTheme() {
     if (Object.keys(fontDoc).length) doc.font = fontDoc
     if (_iconSet.value !== THEME_DEFAULTS.icons) doc.icons = _iconSet.value
     if (Object.keys(layout.value).length) doc.layout = { ...layout.value }
-    if (Object.keys(mixes.value).length) doc.mixes = { ...mixes.value }
     if (Object.keys(charts.value).length) doc.charts = { ...charts.value }
 
     // Only alias-referenced palettes export. Reference by CURRENT value, not
@@ -480,7 +469,6 @@ export function useTheme() {
     if (settings.layout && typeof settings.layout === 'object') {
       setLayout({ ...layout.value, ...settings.layout }, { track: false })
     }
-    if (settings.mixes && typeof settings.mixes === 'object') setMixes({ ...mixes.value, ...settings.mixes }, { track: false })
     if (settings.charts && typeof settings.charts === 'object') setCharts({ ...charts.value, ...settings.charts }, { track: false })
 
     const semanticUpdates = SEMANTIC_ALIASES.filter(color => validPalette(settings[color]))
@@ -534,7 +522,6 @@ export function useTheme() {
     _fontSize.value = THEME_DEFAULTS.fontSize
     fontPrefs.value = {}
     layout.value = {}
-    mixes.value = {}
     charts.value = {}
     _iconSet.value = THEME_DEFAULTS.icons
     appConfig.ui.icons = themeIcons.lucide as any
@@ -590,8 +577,6 @@ export function useTheme() {
     setFontPrefs,
     layout,
     setLayout,
-    mixes,
-    setMixes,
     charts,
     setCharts,
     icon,

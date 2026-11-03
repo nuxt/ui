@@ -9,7 +9,7 @@
  * `--ui-border-width`, the library has no semantic tokens for them yet.
  */
 import colors from 'tailwindcss/colors'
-import type { ThemeLayout, ThemeMixes, ThemeCharts } from './extras'
+import type { ThemeLayout, ThemeCharts } from './extras'
 import { normalizeExtras } from './extras'
 
 /**
@@ -86,8 +86,6 @@ export interface ThemeDoc {
   icons?: string
   /** The control scale, the page sizes and the focus and disabled states. */
   layout?: ThemeLayout
-  /** The opacity of each recipe role, `--ui-primary-bg-soft` is the primary at 10%. */
-  mixes?: ThemeMixes
   /** The palette or alias of each chart series. */
   charts?: ThemeCharts
   /** Default variants and semantic token shades. */
@@ -489,7 +487,6 @@ export function docToSettings(doc: ThemeDoc): Record<string, any> {
   }
   if (doc.icons) settings.icons = doc.icons
   if (doc.layout) settings.layout = doc.layout
-  if (doc.mixes) settings.mixes = doc.mixes
   if (doc.charts) settings.charts = doc.charts
 
   if (doc.palettes) {

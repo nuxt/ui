@@ -13,7 +13,6 @@ const props = defineProps<{
 
 const { rampChip } = useThemeStudio()
 const { sections } = useTokenShades('neutral')
-const { rows: hoverRows, dirty: hoverDirty, reset: resetHover } = useTokenMixes('surfaces')
 const { groupDirtyFlags } = useThemeStudioToolbar()
 const studioIcons = useStudioIcons()
 
@@ -23,12 +22,8 @@ const groups = SURFACE_GROUPS.map((group) => {
   return {
     ...group,
     sections: groupSections,
-    // the background group owns the hover tint too
-    dirty: computed(() => sliders.some(slider => slider.dirty.value) || (group.key === 'background' && hoverDirty.value)),
-    reset: () => {
-      sliders.forEach(slider => slider.reset())
-      if (group.key === 'background') resetHover()
-    }
+    dirty: computed(() => sliders.some(slider => slider.dirty.value)),
+    reset: () => sliders.forEach(slider => slider.reset())
   }
 })
 
@@ -66,28 +61,6 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
             :sliders="section.sliders"
             :chip="rampChip(section.ramp)"
           />
-
-          <!-- `--ui-bg-tint`, the hover of rows and items, is `bg-soft` at an opacity rather than a shade -->
-          <ThemeStudioSection
-            v-if="group.key === 'background'"
-            label="Hover"
-            resettable
-            :reset-dirty="hoverDirty"
-            @reset="resetHover"
-          >
-            <ThemeStudioRow
-              v-for="row in hoverRows"
-              :key="row.token"
-              v-model="row.model.value"
-              control="slider"
-              label="Opacity"
-              :aria-label="row.token"
-              :min="0"
-              :max="100"
-              :step="5"
-              unit="%"
-            />
-          </ThemeStudioSection>
         </div>
       </ThemeStudioSection>
     </template>

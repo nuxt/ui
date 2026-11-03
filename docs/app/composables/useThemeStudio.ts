@@ -357,7 +357,7 @@ export function useThemeStudio() {
       doc.style = { defaults: { variants } }
     }
 
-    // The layout, the roles and the charts roll rarely and on short lists too,
+    // The layout and the charts roll rarely and on short lists too,
     // most shuffles keep the stock room. The text on a solid stays out: a
     // random one fails contrast, and the overlay border only shows once the
     // overlay surface is set, which the shuffle never does.
@@ -369,11 +369,6 @@ export function useThemeStudio() {
     if (Math.random() < 0.15) layout.focusWidth = pick([2, 4])
     if (Math.random() < 0.15) layout.disabledOpacity = pick([50, 60])
     if (Object.keys(layout).length) doc.layout = layout
-
-    const mixes: NonNullable<ThemeDoc['mixes']> = {}
-    if (Math.random() < 0.15) mixes['--ui-bg-tint'] = pick([30, 70])
-    if (Math.random() < 0.15) mixes['--ui-outline-focus'] = pick([40, 50])
-    if (Object.keys(mixes).length) doc.mixes = mixes
 
     // the first series stays on the primary, the other five take distinct palettes
     if (Math.random() < 0.3) {

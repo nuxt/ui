@@ -8,8 +8,8 @@ import { tools as mcpToolDefinitions } from '#nuxt-mcp-toolkit/tools.mjs'
 import { themeIcons } from '../../app/utils/theme/icons'
 import { cssVariableDefaults } from '../../app/utils/theme/tokens'
 import { DEFAULT_COLORS } from '../../app/utils/theme/engine/types'
-import type { ThemeLayout, ThemeMixes, ThemeCharts } from '../../app/utils/theme/engine/extras'
-import { CHART_COLORS, CHART_DEFAULTS, CHART_SERIES, DENSITIES, LAYOUT_FIELDS, MIX_TARGETS } from '../../app/utils/theme/engine/extras'
+import type { ThemeLayout, ThemeCharts } from '../../app/utils/theme/engine/extras'
+import { CHART_COLORS, CHART_DEFAULTS, CHART_SERIES, DENSITIES, LAYOUT_FIELDS } from '../../app/utils/theme/engine/extras'
 // The presets file itself, not the engine barrel: its only import is a type,
 // so this costs nothing beyond the preset data.
 import { presets } from '../../app/utils/theme/engine/presets'
@@ -64,7 +64,6 @@ export interface ApplyThemeSettings {
   customColors?: Record<string, Record<string, string>>
   cssVariables?: { light?: Record<string, string>, dark?: Record<string, string> }
   layout?: ThemeLayout
-  mixes?: ThemeMixes
   charts?: ThemeCharts
   ui?: Record<string, any>
 }
@@ -124,12 +123,6 @@ const applyTheme = tool({
             description: `${field.variable}, ${field.min} to ${field.max}, default ${field.default}.`
           }]))
         }
-      },
-      mixes: {
-        type: 'object',
-        description: 'The opacity in % of a role whose default is a color at that opacity.',
-        properties: Object.fromEntries(MIX_TARGETS.map(target => [target.token, { type: 'number', description: `Default ${target.default}` }])),
-        additionalProperties: false
       },
       charts: {
         type: 'object',
@@ -259,7 +252,7 @@ CRITICAL RULES for \`cssVariables\`:
 - ALWAYS provide BOTH \`light\` and \`dark\` objects, but only include variables you are CHANGING from their defaults. Do NOT include variables that keep their default value.
 - Values MUST use \`var(--ui-color-<name>-<shade>)\` references (e.g. \`var(--ui-color-neutral-950)\`), \`white\`, or \`black\`. NEVER use raw hex values.
 - The \`<name>\` in the variable reference MUST match the current neutral color (which the user may have changed). Use \`neutral\` as the name since it maps to whatever neutral palette is active.
-- In the exported main.css code, ONLY show overridden CSS variables (not defaults). Use \`:root, .light { }\` for light-mode overrides and \`.dark { }\` for dark-mode overrides. NEVER put CSS variable overrides in a plain \`:root { }\` block (that's only for \`--ui-radius\`, the layout and opacity role variables, and monochrome \`--ui-primary\`). A \`--ui-gutter\` of \`--spacing(4)\` or more goes in \`@variant sm { }\` inside that \`:root\`, small screens keep \`--spacing(4)\`.
+- In the exported main.css code, ONLY show overridden CSS variables (not defaults). Use \`:root, .light { }\` for light-mode overrides and \`.dark { }\` for dark-mode overrides. NEVER put CSS variable overrides in a plain \`:root { }\` block (that's only for \`--ui-radius\`, the layout variables, and monochrome \`--ui-primary\`). A \`--ui-gutter\` of \`--spacing(4)\` or more goes in \`@variant sm { }\` inside that \`:root\`, small screens keep \`--spacing(4)\`.
 
 Default values — only override the ones you want to change:
 
@@ -363,7 +356,7 @@ CRITICAL rules for component \`ui\` overrides:
 }
 
 :root {
-  --ui-radius: 0.375rem; /* radius, the layout and the opacity roles go here */
+  --ui-radius: 0.375rem; /* radius and the layout go here */
 }
 
 :root, .light {
