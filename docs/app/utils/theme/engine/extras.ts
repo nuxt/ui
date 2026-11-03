@@ -95,6 +95,7 @@ export const MIX_TARGETS: Array<{ token: string, label: string, base: string, de
     { token: `--ui-${alias}-border-strong`, label: 'Strong border', base: `var(--ui-${alias})`, default: 50, section: alias },
     { token: `--ui-${alias}-outline-focus`, label: 'Focus', base: `var(--ui-${alias})`, default: 25, section: alias }
   ]),
+  { token: '--ui-neutral-bg-tint', label: 'Tint', base: 'var(--ui-bg-soft)', default: 50, section: 'neutral' },
   { token: '--ui-neutral-bg-strong', label: 'Strong', base: 'var(--ui-bg-strong)', default: 75, section: 'neutral' },
   { token: '--ui-neutral-bg-hover', label: 'Hover', base: 'var(--ui-neutral)', default: 90, section: 'neutral' },
   { token: '--ui-neutral-outline-focus', label: 'Focus', base: 'var(--ui-neutral)', default: 25, section: 'neutral' },

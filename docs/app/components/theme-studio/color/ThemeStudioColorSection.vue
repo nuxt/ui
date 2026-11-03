@@ -65,9 +65,9 @@ const editorContent = { side: 'right' as const, align: 'start' as const, alignOf
 
             <ThemeStudioColorMixGroup :section="alias" :label="`${title} opacity`" />
 
-            <!-- neutral text is the page text, no pair of its own to show here -->
+            <!-- these restyle neutral-colored components only, the page has its own -->
             <p v-if="alias === 'neutral'" class="text-xs text-muted">
-              Neutral text, backgrounds and borders are set in Surfaces.
+              These style neutral-colored components. The page text, backgrounds and borders are set in Surfaces.
             </p>
 
             <!-- The text sliders follow the solid until one is moved, this
