@@ -94,16 +94,18 @@ export function useTheme() {
   }
 
   function setMixes(next: ThemeMixes, options: { track?: boolean } = {}) {
-    // removed keys count too, a reset clears a role by omitting it
-    const changed = [...new Set([...Object.keys(next), ...Object.keys(mixes.value)])].filter(token => next[token] !== mixes.value[token])
-    mixes.value = normalizeExtras({ mixes: next }).mixes ?? {}
+    // compared normalized, and removed keys count too: a reset clears a role by omitting it
+    const normalized = normalizeExtras({ mixes: next }).mixes ?? {}
+    const changed = [...new Set([...Object.keys(normalized), ...Object.keys(mixes.value)])].filter(token => normalized[token] !== mixes.value[token])
+    mixes.value = normalized
     dropTokens(changed)
     if (options.track !== false) trackThrottled('Theme Changed', { setting: 'mixes' })
   }
 
   function setCharts(next: ThemeCharts, options: { track?: boolean } = {}) {
-    const changed = ([...new Set([...Object.keys(next), ...Object.keys(charts.value)])] as Array<keyof ThemeCharts>).filter(series => next[series] !== charts.value[series])
-    charts.value = normalizeExtras({ charts: next }).charts ?? {}
+    const normalized = normalizeExtras({ charts: next }).charts ?? {}
+    const changed = ([...new Set([...Object.keys(normalized), ...Object.keys(charts.value)])] as Array<keyof ThemeCharts>).filter(series => normalized[series] !== charts.value[series])
+    charts.value = normalized
     dropTokens(changed.map(series => `--ui-chart-${series}`))
     if (options.track !== false) trackThrottled('Theme Changed', { setting: 'charts' })
   }
