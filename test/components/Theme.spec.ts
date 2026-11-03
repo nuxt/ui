@@ -551,8 +551,8 @@ describe('Theme', () => {
     // FormField-injected `size` (xl) wins over `<UTheme :props>` size (xs).
     // `useFormField` reads `_props.size` (raw, undefined here) so it falls back
     // to the FormField context — proving the proxy isn't shadowing field injection.
-    expect(wrapper.find('button[role="checkbox"]').classes()).toContain('size-5')
-    expect(wrapper.find('button[role="checkbox"]').classes()).not.toContain('size-3')
+    expect(wrapper.find('[data-slot="checkbox"]').classes()).toContain('[--ui-control-box:var(--ui-control-box-xl)]')
+    expect(wrapper.find('[data-slot="checkbox"]').classes()).not.toContain('[--ui-control-box:var(--ui-control-box-xs)]')
   })
 
   // FormField validation errors must always win over `<UTheme :props>` color.
@@ -715,8 +715,8 @@ describe('Theme', () => {
     })
 
     const btn = wrapper.find('button')
-    expect(btn.classes()).toContain('text-base')
-    expect(btn.classes()).not.toContain('text-xs')
+    expect(btn.classes()).toContain('text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)')
+    expect(btn.classes()).not.toContain('text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height)')
   })
 
   // `useAvatarGroup` follows the same pattern: `<UAvatarGroup size>` is the

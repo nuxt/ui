@@ -39,7 +39,7 @@ slots: {
 variants: {
   size: {
     md: {
-      base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon-size:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm',
+      base: '[--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-sm',
       leadingIcon: 'size-(--ui-control-icon-size)'
     }
   },
@@ -48,6 +48,8 @@ variants: {
   }
 }
 ```
+
+The values come from the scale `base.css` declares, `--ui-control-<px|py|gap|icon-size>-<size>`, so an app changes them once from CSS. A control whose sizes differ from that scale in any value, like Badge or Checkbox, writes its own `--spacing()` values instead.
 
 The classes that read the padding, the gap and the icon size stay in the `size` entry, next to the ones that write them. In the slot they would be dropped by a function slot from an app, and applied to a size an app adds without the variables. A theme without `size`, like NavigationMenu, writes and reads them in the same variant entry.
 

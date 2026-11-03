@@ -10,19 +10,19 @@ export default defineTheme({
   variants: {
     size: {
       xs: {
-        base: 'size-6 text-[calc(var(--text-xs)+var(--ui-control-text-step,0px))]/4'
+        base: 'size-6 text-[calc(var(--ui-control-text-xs)+var(--ui-control-text-step,0px))]/(--ui-control-text-xs--line-height)'
       },
       sm: {
-        base: 'size-7 text-[calc(var(--text-xs)+var(--ui-control-text-step,0px))]/4'
+        base: 'size-7 text-[calc(var(--ui-control-text-sm)+var(--ui-control-text-step,0px))]/(--ui-control-text-sm--line-height)'
       },
       md: {
-        base: 'size-8 text-[calc(var(--text-sm)+var(--ui-control-text-step,0px))]/5'
+        base: 'size-8 text-[calc(var(--ui-control-text-md)+var(--ui-control-text-step,0px))]/(--ui-control-text-md--line-height)'
       },
       lg: {
-        base: 'size-9 text-[calc(var(--text-sm)+var(--ui-control-text-step,0px))]/5'
+        base: 'size-9 text-[calc(var(--ui-control-text-lg)+var(--ui-control-text-step,0px))]/(--ui-control-text-lg--line-height)'
       },
       xl: {
-        base: 'size-10 text-base'
+        base: 'size-10 text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)'
       }
     },
     variant: {
