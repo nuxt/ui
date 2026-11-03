@@ -68,8 +68,8 @@ export default extendTheme(input, {
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
         itemTrailingIcon: 'size-(--ui-control-icon-size)',
-        tagsItem: 'text-[10px]/3',
-        tagsItemDeleteIcon: 'size-3',
+        tagsItem: 'text-[calc(var(--ui-control-text-xs)-0.125rem)]/[calc(var(--ui-control-text-xs--line-height)-0.25rem)]',
+        tagsItemDeleteIcon: 'size-(--ui-control-text-xs)',
         empty: 'p-2 text-xs'
       },
       sm: {
@@ -79,8 +79,8 @@ export default extendTheme(input, {
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
         itemTrailingIcon: 'size-(--ui-control-icon-size)',
-        tagsItem: 'text-[10px]/3',
-        tagsItemDeleteIcon: 'size-3',
+        tagsItem: 'text-[calc(var(--ui-control-text-sm)-0.125rem)]/[calc(var(--ui-control-text-sm--line-height)-0.25rem)]',
+        tagsItemDeleteIcon: 'size-(--ui-control-text-sm)',
         empty: 'p-2.5 text-xs'
       },
       md: {
@@ -90,8 +90,8 @@ export default extendTheme(input, {
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
         itemTrailingIcon: 'size-(--ui-control-icon-size)',
-        tagsItem: 'text-xs',
-        tagsItemDeleteIcon: 'size-3.5',
+        tagsItem: 'text-[calc(var(--ui-control-text-md)-0.125rem)]/[calc(var(--ui-control-text-md--line-height)-0.25rem)]',
+        tagsItemDeleteIcon: 'size-(--ui-control-text-md)',
         empty: 'p-2.5 text-sm'
       },
       lg: {
@@ -101,8 +101,8 @@ export default extendTheme(input, {
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
         itemTrailingIcon: 'size-(--ui-control-icon-size)',
-        tagsItem: 'text-xs',
-        tagsItemDeleteIcon: 'size-3.5',
+        tagsItem: 'text-[calc(var(--ui-control-text-lg)-0.125rem)]/[calc(var(--ui-control-text-lg--line-height)-0.25rem)]',
+        tagsItemDeleteIcon: 'size-(--ui-control-text-lg)',
         empty: 'p-3 text-sm'
       },
       xl: {
@@ -112,8 +112,8 @@ export default extendTheme(input, {
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
         itemTrailingIcon: 'size-(--ui-control-icon-size)',
-        tagsItem: 'text-sm',
-        tagsItemDeleteIcon: 'size-4',
+        tagsItem: 'text-[calc(var(--ui-control-text-xl)-0.125rem)]/[calc(var(--ui-control-text-xl--line-height)-0.25rem)]',
+        tagsItemDeleteIcon: 'size-(--ui-control-text-xl)',
         empty: 'p-3 text-base'
       }
     }
