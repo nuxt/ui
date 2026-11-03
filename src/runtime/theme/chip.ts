@@ -9,15 +9,15 @@ export default defineTheme({
   variants: {
     color: colorVariant({ base: '' }),
     size: {
-      '3xs': { base: 'h-1 min-w-1 text-[4px]' },
-      '2xs': { base: 'h-1.25 min-w-1.25 text-[5px]' },
-      'xs': { base: 'h-1.5 min-w-1.5 text-[6px]' },
-      'sm': { base: 'h-1.75 min-w-1.75 text-[7px]' },
-      'md': { base: 'h-2 min-w-2 text-[8px]' },
-      'lg': { base: 'h-2.25 min-w-2.25 text-[9px]' },
-      'xl': { base: 'h-2.5 min-w-2.5 text-[10px]' },
-      '2xl': { base: 'h-2.75 min-w-2.75 text-[11px]' },
-      '3xl': { base: 'h-3 min-w-3 text-[12px]' }
+      '3xs': { base: 'h-1 min-w-1 text-[0.25rem]' },
+      '2xs': { base: 'h-1.25 min-w-1.25 text-[0.3125rem]' },
+      'xs': { base: 'h-1.5 min-w-1.5 text-[0.375rem]' },
+      'sm': { base: 'h-1.75 min-w-1.75 text-[0.4375rem]' },
+      'md': { base: 'h-2 min-w-2 text-[0.5rem]' },
+      'lg': { base: 'h-2.25 min-w-2.25 text-[0.5625rem]' },
+      'xl': { base: 'h-2.5 min-w-2.5 text-[0.625rem]' },
+      '2xl': { base: 'h-2.75 min-w-2.75 text-[0.6875rem]' },
+      '3xl': { base: 'h-3 min-w-3 text-[0.75rem]' }
     },
     position: {
       'top-right': { base: 'top-0 right-0' },
