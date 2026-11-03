@@ -4742,13 +4742,13 @@ exports[`Calendar > renders with size xs correctly 1`] = `
     <table tabindex="-1" role="application" data-slot="calendar-grid" class="w-full border-collapse select-none space-y-1 focus:outline-none">
       <thead aria-hidden="true">
         <tr data-slot="calendar-gridWeekDaysRow" class="mb-1 grid w-full grid-cols-7">
-          <th data-slot="calendar-headCell" class="rounded-md text-accent text-[10px]">S</th>
-          <th data-slot="calendar-headCell" class="rounded-md text-accent text-[10px]">M</th>
-          <th data-slot="calendar-headCell" class="rounded-md text-accent text-[10px]">T</th>
-          <th data-slot="calendar-headCell" class="rounded-md text-accent text-[10px]">W</th>
-          <th data-slot="calendar-headCell" class="rounded-md text-accent text-[10px]">T</th>
-          <th data-slot="calendar-headCell" class="rounded-md text-accent text-[10px]">F</th>
-          <th data-slot="calendar-headCell" class="rounded-md text-accent text-[10px]">S</th>
+          <th data-slot="calendar-headCell" class="rounded-md text-accent text-[0.625rem]">S</th>
+          <th data-slot="calendar-headCell" class="rounded-md text-accent text-[0.625rem]">M</th>
+          <th data-slot="calendar-headCell" class="rounded-md text-accent text-[0.625rem]">T</th>
+          <th data-slot="calendar-headCell" class="rounded-md text-accent text-[0.625rem]">W</th>
+          <th data-slot="calendar-headCell" class="rounded-md text-accent text-[0.625rem]">T</th>
+          <th data-slot="calendar-headCell" class="rounded-md text-accent text-[0.625rem]">F</th>
+          <th data-slot="calendar-headCell" class="rounded-md text-accent text-[0.625rem]">S</th>
         </tr>
       </thead>
       <tbody data-slot="calendar-gridBody" class="grid">

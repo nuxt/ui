@@ -12,10 +12,10 @@ export default defineTheme({
     color: colorVariant({ root: '' }),
     size: {
       '3xs': {
-        root: 'size-4 text-[8px]'
+        root: 'size-4 text-[0.5rem]'
       },
       '2xs': {
-        root: 'size-5 text-[10px]'
+        root: 'size-5 text-[0.625rem]'
       },
       'xs': {
         root: 'size-6 text-xs'
@@ -33,7 +33,7 @@ export default defineTheme({
         root: 'size-10 text-xl'
       },
       '2xl': {
-        root: 'size-11 text-[22px]'
+        root: 'size-11 text-[1.375rem]'
       },
       '3xl': {
         root: 'size-12 text-2xl'
