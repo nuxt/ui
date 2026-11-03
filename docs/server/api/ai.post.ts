@@ -122,7 +122,8 @@ const applyTheme = tool({
             type: 'number',
             description: `${field.variable}, ${field.min} to ${field.max}, default ${field.default}.`
           }]))
-        }
+        },
+        additionalProperties: false
       },
       charts: {
         type: 'object',

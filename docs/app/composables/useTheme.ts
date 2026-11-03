@@ -10,7 +10,7 @@ import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables } from '../utils/
 // chunk on every page, and the barrel would drag presets, the palette math
 // and the serializer with it. The serializer loads on demand below.
 import { mergeUi, isDefaultStyle, isDefaultTheme, styleTokens, DEFAULT_COLORS, DEFAULT_PRESET_ID, THEME_DEFAULTS, SEMANTIC_ALIASES, LIBRARY_TOKEN_DEFAULTS, tokenShadeDefaults, withoutCompoundVariants } from '../utils/theme/engine/types'
-import { normalizeExtras, themeExtras } from '../utils/theme/engine/extras'
+import { EXTRAS_TABLES, LAYOUT_FIELDS, normalizeExtras, themeExtras } from '../utils/theme/engine/extras'
 import type { ThemeDoc, ThemeLayout, ThemeCharts, ThemePalette, StyleOptions, StoredPaletteParams } from '../utils/theme/engine'
 import colors from 'tailwindcss/colors'
 
@@ -80,7 +80,11 @@ export function useTheme() {
 
   // Normalize: defaults are absences, so hasChanges/export stay clean.
   function setLayout(next: ThemeLayout, options: { track?: boolean } = {}) {
-    layout.value = normalizeExtras({ layout: next }).layout ?? {}
+    const normalized = normalizeExtras({ layout: next }).layout ?? {}
+    const changed = ([...new Set([...Object.keys(normalized), ...Object.keys(layout.value)])] as Array<keyof ThemeLayout>).filter(key => normalized[key] !== layout.value[key])
+    layout.value = normalized
+    // the density writes the padding and gap of every size, a field its one variable
+    dropTokens(changed.flatMap(key => key === 'density' ? Object.keys(EXTRAS_TABLES.scale) : [LAYOUT_FIELDS[key].variable]))
     if (options.track !== false) trackThrottled('Theme Changed', { setting: 'layout' })
   }
 
