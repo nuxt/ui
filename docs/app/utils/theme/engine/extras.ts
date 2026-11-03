@@ -110,6 +110,17 @@ export const EXTRAS_TABLES = {
 
 export type ExtrasTables = typeof EXTRAS_TABLES
 
+/**
+ * The variables the studio writes from its own fields. A token override of one
+ * would sit in a later style tag and shadow the slider, so the token channel
+ * never takes them (sanitizeCSSVariables).
+ */
+export const EXTRAS_VARIABLES = new Set([
+  ...Object.keys(EXTRAS_TABLES.scale),
+  ...Object.values(LAYOUT_FIELDS).map(field => field.variable),
+  ...CHART_SERIES.map(series => `--ui-chart-${series}`)
+])
+
 export interface ExtrasInput {
   layout?: unknown
   charts?: unknown

@@ -1,3 +1,5 @@
+import { EXTRAS_VARIABLES } from './engine/extras'
+
 /**
  * The write boundary for untrusted theme input. AI `applyTheme` output and
  * the persisted theme both end up concatenated into `<style>` rules, so only
@@ -43,11 +45,12 @@ export function sanitizeCustomColors(input: Record<string, any>): Record<string,
   return result
 }
 
+/** Also drops the variables a studio field owns, see `EXTRAS_VARIABLES`. */
 export function sanitizeCSSVariables(input: { light?: Record<string, any>, dark?: Record<string, any> }): { light: Record<string, string>, dark: Record<string, string> } {
   const clean = (vars?: Record<string, unknown>) => {
     const result: Record<string, string> = {}
     for (const [key, value] of Object.entries(vars || {})) {
-      if (SAFE_CSS_VAR_KEY.test(key) && !UNSAFE_KEYS.has(key.slice(2)) && typeof value === 'string' && SAFE_CSS_VAR_VALUE.test(value)) {
+      if (SAFE_CSS_VAR_KEY.test(key) && !UNSAFE_KEYS.has(key.slice(2)) && !EXTRAS_VARIABLES.has(key) && typeof value === 'string' && SAFE_CSS_VAR_VALUE.test(value)) {
         result[key] = value
       }
     }
