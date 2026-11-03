@@ -51,50 +51,48 @@ function asRow(item: unknown) {
 
 <template>
   <ThemeStudioSection label="Charts" section-key="charts">
-    <ThemeStudioRow control="custom" label="Series">
-      <UDropdownMenu
-        :items="items"
-        :content="{ side: 'bottom', align: 'start' }"
-        :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width) min-w-48' }"
-        class="flex-1"
+    <UDropdownMenu
+      :items="items"
+      :content="{ side: 'bottom', align: 'start' }"
+      :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width)' }"
+    >
+      <UButton
+        size="sm"
+        color="neutral"
+        variant="subtle"
+        block
+        :trailing-icon="appConfig.ui.icons.chevronDown"
+        aria-label="Chart series colors"
+        class="group"
+        :ui="{
+          /* `ps-1` lines the first dot up with the chips above, which sit in a `mx-1` leading slot */
+          label: 'flex-1 flex items-center gap-1 ps-1',
+          trailingIcon: 'text-faint transition-transform duration-200 group-data-[state=open]:rotate-180'
+        }"
       >
-        <UButton
-          size="sm"
-          color="neutral"
-          variant="subtle"
-          block
-          :trailing-icon="appConfig.ui.icons.chevronDown"
-          aria-label="Chart series colors"
-          class="group"
-          :ui="{
-            label: 'flex-1 flex items-center gap-1',
-            trailingIcon: 'text-faint transition-transform duration-200 group-data-[state=open]:rotate-180'
-          }"
-        >
-          <span
-            v-for="series in CHART_SERIES"
-            :key="series"
-            class="size-2 rounded-full"
-            :style="{ backgroundColor: swatch(value(series)) }"
-          />
-        </UButton>
+        <span
+          v-for="series in CHART_SERIES"
+          :key="series"
+          class="size-2 rounded-full"
+          :style="{ backgroundColor: swatch(value(series)) }"
+        />
+      </UButton>
 
-        <template #series-trailing="{ item }">
-          <span class="flex items-center gap-1.5 min-w-0" :class="asRow(item).dirty ? 'text-primary' : 'text-muted'">
-            <span class="size-2 shrink-0 rounded-full" :style="{ backgroundColor: asRow(item).dot }" />
-            <span class="truncate">{{ asRow(item).value }}</span>
-          </span>
+      <template #series-trailing="{ item }">
+        <span class="flex items-center gap-1.5 min-w-0" :class="asRow(item).dirty ? 'text-primary' : 'text-muted'">
+          <span class="size-2 shrink-0 rounded-full" :style="{ backgroundColor: asRow(item).dot }" />
+          <span class="truncate">{{ asRow(item).value }}</span>
+        </span>
 
-          <UIcon :name="appConfig.ui.icons.chevronRight" class="size-5 shrink-0 text-faint" />
-        </template>
+        <UIcon :name="appConfig.ui.icons.chevronRight" class="size-5 shrink-0 text-faint" />
+      </template>
 
-        <!-- the swatch sits in the box an item icon takes, so it centers on the label -->
-        <template #color-leading="{ item }">
-          <span class="size-5 shrink-0 flex items-center justify-center">
-            <span class="size-2 rounded-full" :style="{ backgroundColor: asRow(item).dot }" />
-          </span>
-        </template>
-      </UDropdownMenu>
-    </ThemeStudioRow>
+      <!-- the swatch sits in the box an item icon takes, so it centers on the label -->
+      <template #color-leading="{ item }">
+        <span class="size-5 shrink-0 flex items-center justify-center">
+          <span class="size-2 rounded-full" :style="{ backgroundColor: asRow(item).dot }" />
+        </span>
+      </template>
+    </UDropdownMenu>
   </ThemeStudioSection>
 </template>
