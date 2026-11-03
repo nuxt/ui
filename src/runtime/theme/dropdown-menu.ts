@@ -41,43 +41,48 @@ export default defineTheme({
     },
     size: {
       xs: {
-        label: 'p-1 text-xs gap-1',
-        item: 'p-1 text-xs gap-1',
+        content: '[--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)]',
+        label: 'p-(--ui-control-py) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) gap-(--ui-control-gap)',
+        item: 'p-(--ui-control-py) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) gap-(--ui-control-gap)',
         empty: 'p-2 text-xs',
-        itemLeadingIcon: 'size-4',
-        itemTrailingIcon: 'size-4',
+        itemLeadingIcon: 'size-(--ui-control-icon-size)',
+        itemTrailingIcon: 'size-(--ui-control-icon-size)',
         itemTrailingKbds: 'gap-0.5'
       },
       sm: {
-        label: 'p-1.5 text-xs gap-1.5',
-        item: 'p-1.5 text-xs gap-1.5',
+        content: '[--ui-control-py:var(--ui-control-py-sm)] [--ui-control-gap:var(--ui-control-gap-sm)] [--ui-control-icon-size:var(--ui-control-icon-size-sm)]',
+        label: 'p-(--ui-control-py) text-(length:--ui-control-text-sm)/(--ui-control-text-sm--line-height) gap-(--ui-control-gap)',
+        item: 'p-(--ui-control-py) text-(length:--ui-control-text-sm)/(--ui-control-text-sm--line-height) gap-(--ui-control-gap)',
         empty: 'p-2.5 text-xs',
-        itemLeadingIcon: 'size-4',
-        itemTrailingIcon: 'size-4',
+        itemLeadingIcon: 'size-(--ui-control-icon-size)',
+        itemTrailingIcon: 'size-(--ui-control-icon-size)',
         itemTrailingKbds: 'gap-0.5'
       },
       md: {
-        label: 'p-1.5 text-sm gap-1.5',
-        item: 'p-1.5 text-sm gap-1.5',
+        content: '[--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)]',
+        label: 'p-(--ui-control-py) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) gap-(--ui-control-gap)',
+        item: 'p-(--ui-control-py) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) gap-(--ui-control-gap)',
         empty: 'p-2.5 text-sm',
-        itemLeadingIcon: 'size-5',
-        itemTrailingIcon: 'size-5',
+        itemLeadingIcon: 'size-(--ui-control-icon-size)',
+        itemTrailingIcon: 'size-(--ui-control-icon-size)',
         itemTrailingKbds: 'gap-0.5'
       },
       lg: {
-        label: 'p-2 text-sm gap-2',
-        item: 'p-2 text-sm gap-2',
+        content: '[--ui-control-py:var(--ui-control-py-lg)] [--ui-control-gap:var(--ui-control-gap-lg)] [--ui-control-icon-size:var(--ui-control-icon-size-lg)]',
+        label: 'p-(--ui-control-py) text-(length:--ui-control-text-lg)/(--ui-control-text-lg--line-height) gap-(--ui-control-gap)',
+        item: 'p-(--ui-control-py) text-(length:--ui-control-text-lg)/(--ui-control-text-lg--line-height) gap-(--ui-control-gap)',
         empty: 'p-3 text-sm',
-        itemLeadingIcon: 'size-5',
-        itemTrailingIcon: 'size-5',
+        itemLeadingIcon: 'size-(--ui-control-icon-size)',
+        itemTrailingIcon: 'size-(--ui-control-icon-size)',
         itemTrailingKbds: 'gap-1'
       },
       xl: {
-        label: 'p-2 text-base gap-2',
-        item: 'p-2 text-base gap-2',
+        content: '[--ui-control-py:var(--ui-control-py-xl)] [--ui-control-gap:var(--ui-control-gap-xl)] [--ui-control-icon-size:var(--ui-control-icon-size-xl)]',
+        label: 'p-(--ui-control-py) text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height) gap-(--ui-control-gap)',
+        item: 'p-(--ui-control-py) text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height) gap-(--ui-control-gap)',
         empty: 'p-3 text-base',
-        itemLeadingIcon: 'size-6',
-        itemTrailingIcon: 'size-6',
+        itemLeadingIcon: 'size-(--ui-control-icon-size)',
+        itemTrailingIcon: 'size-(--ui-control-icon-size)',
         itemTrailingKbds: 'gap-1'
       }
     }
