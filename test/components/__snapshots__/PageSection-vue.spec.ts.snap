@@ -110,7 +110,7 @@ exports[`PageSection > renders with features and description correctly 1`] = `
             <div data-slot="page-feature-wrapper" class="">
               <!--v-if-->
               <div data-slot="page-feature-title" class="text-base text-pretty font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold)) text-strong">Title</div>
-              <div data-slot="page-feature-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+              <div data-slot="page-feature-description" class="text-[0.9375rem] text-pretty text-muted mt-1">Description</div>
             </div>
           </li>
         </ul>
@@ -139,7 +139,7 @@ exports[`PageSection > renders with features and title correctly 1`] = `
             <div data-slot="page-feature-wrapper" class="">
               <!--v-if-->
               <div data-slot="page-feature-title" class="text-base text-pretty font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold)) text-strong">Title</div>
-              <div data-slot="page-feature-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+              <div data-slot="page-feature-description" class="text-[0.9375rem] text-pretty text-muted mt-1">Description</div>
             </div>
           </li>
         </ul>
@@ -163,7 +163,7 @@ exports[`PageSection > renders with features correctly 1`] = `
             <div data-slot="page-feature-wrapper" class="">
               <!--v-if-->
               <div data-slot="page-feature-title" class="text-base text-pretty font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold)) text-strong">Title</div>
-              <div data-slot="page-feature-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+              <div data-slot="page-feature-description" class="text-[0.9375rem] text-pretty text-muted mt-1">Description</div>
             </div>
           </li>
         </ul>
@@ -300,7 +300,7 @@ exports[`PageSection > renders with links and features correctly 1`] = `
             <div data-slot="page-feature-wrapper" class="">
               <!--v-if-->
               <div data-slot="page-feature-title" class="text-base text-pretty font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold)) text-strong">Title</div>
-              <div data-slot="page-feature-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+              <div data-slot="page-feature-description" class="text-[0.9375rem] text-pretty text-muted mt-1">Description</div>
             </div>
           </li>
         </ul>
@@ -371,7 +371,7 @@ exports[`PageSection > renders with orientation horizontal features correctly 1`
             <div data-slot="page-feature-wrapper" class="">
               <!--v-if-->
               <div data-slot="page-feature-title" class="text-base text-pretty font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold)) text-strong">Title</div>
-              <div data-slot="page-feature-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+              <div data-slot="page-feature-description" class="text-[0.9375rem] text-pretty text-muted mt-1">Description</div>
             </div>
           </li>
         </ul>

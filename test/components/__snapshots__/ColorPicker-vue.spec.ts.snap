@@ -8,8 +8,8 @@ exports[`ColorPicker > renders with as correctly 1`] = `
         <div data-v-c9a043d6="" data-slot="color-picker-selectorThumb" class="-translate-1/2 absolute size-4 ring-2 ring-white rounded-full cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #FFFFFF; left: 0%; top: 0%;"></div>
       </div>
     </div>
-    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-[8px] relative rounded-md touch-none h-42" data-color-picker-track="">
-      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 translate-x-[-4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #FF0000; top: 0%;"></div>
+    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-2 relative rounded-md touch-none h-42" data-color-picker-track="">
+      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 -translate-x-1 rtl:translate-x-1 size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #FF0000; top: 0%;"></div>
     </div>
   </div>
 </section>"
@@ -23,8 +23,8 @@ exports[`ColorPicker > renders with class correctly 1`] = `
         <div data-v-c9a043d6="" data-slot="color-picker-selectorThumb" class="-translate-1/2 absolute size-4 ring-2 ring-white rounded-full cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #FFFFFF; left: 0%; top: 0%;"></div>
       </div>
     </div>
-    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-[8px] relative rounded-md touch-none h-42" data-color-picker-track="">
-      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 translate-x-[-4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #FF0000; top: 0%;"></div>
+    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-2 relative rounded-md touch-none h-42" data-color-picker-track="">
+      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 -translate-x-1 rtl:translate-x-1 size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #FF0000; top: 0%;"></div>
     </div>
   </div>
 </div>"
@@ -38,8 +38,8 @@ exports[`ColorPicker > renders with disabled correctly 1`] = `
         <div data-v-c9a043d6="" data-slot="color-picker-selectorThumb" class="-translate-1/2 absolute size-4 ring-2 ring-white rounded-full cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #FFFFFF; left: 0%; top: 0%;" data-disabled="true"></div>
       </div>
     </div>
-    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-[8px] relative rounded-md touch-none h-42" data-color-picker-track="">
-      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 translate-x-[-4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #FF0000; top: 0%;" data-disabled="true"></div>
+    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-2 relative rounded-md touch-none h-42" data-color-picker-track="">
+      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 -translate-x-1 rtl:translate-x-1 size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #FF0000; top: 0%;" data-disabled="true"></div>
     </div>
   </div>
 </div>"
@@ -53,8 +53,8 @@ exports[`ColorPicker > renders with format cmyk correctly 1`] = `
         <div data-v-c9a043d6="" data-slot="color-picker-selectorThumb" class="-translate-1/2 absolute size-4 ring-2 ring-white rounded-full cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #00C16A; left: 100%; top: 24.310000000000002%;"></div>
       </div>
     </div>
-    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-[8px] relative rounded-md touch-none h-42" data-color-picker-track="">
-      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 translate-x-[-4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #00FF8C; top: 42.48666666666667%;"></div>
+    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-2 relative rounded-md touch-none h-42" data-color-picker-track="">
+      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 -translate-x-1 rtl:translate-x-1 size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #00FF8C; top: 42.48666666666667%;"></div>
     </div>
   </div>
 </div>"
@@ -68,8 +68,8 @@ exports[`ColorPicker > renders with format hex correctly 1`] = `
         <div data-v-c9a043d6="" data-slot="color-picker-selectorThumb" class="-translate-1/2 absolute size-4 ring-2 ring-white rounded-full cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #00C16A; left: 100%; top: 24.313726000000003%;"></div>
       </div>
     </div>
-    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-[8px] relative rounded-md touch-none h-42" data-color-picker-track="">
-      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 translate-x-[-4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #00FF8C; top: 42.48704666666667%;"></div>
+    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-2 relative rounded-md touch-none h-42" data-color-picker-track="">
+      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 -translate-x-1 rtl:translate-x-1 size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #00FF8C; top: 42.48704666666667%;"></div>
     </div>
   </div>
 </div>"
@@ -83,8 +83,8 @@ exports[`ColorPicker > renders with format hsl correctly 1`] = `
         <div data-v-c9a043d6="" data-slot="color-picker-selectorThumb" class="-translate-1/2 absolute size-4 ring-2 ring-white rounded-full cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #00C16A; left: 100%; top: 24.400000000000006%;"></div>
       </div>
     </div>
-    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-[8px] relative rounded-md touch-none h-42" data-color-picker-track="">
-      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 translate-x-[-4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #00FF8C; top: 42.5%;"></div>
+    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-2 relative rounded-md touch-none h-42" data-color-picker-track="">
+      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 -translate-x-1 rtl:translate-x-1 size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #00FF8C; top: 42.5%;"></div>
     </div>
   </div>
 </div>"
@@ -98,8 +98,8 @@ exports[`ColorPicker > renders with format lab correctly 1`] = `
         <div data-v-c9a043d6="" data-slot="color-picker-selectorThumb" class="-translate-1/2 absolute size-4 ring-2 ring-white rounded-full cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #00C757; left: 100%; top: 22.031043999999994%;"></div>
       </div>
     </div>
-    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-[8px] relative rounded-md touch-none h-42" data-color-picker-track="">
-      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 translate-x-[-4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #00FF6F; top: 40.609066111111105%;"></div>
+    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-2 relative rounded-md touch-none h-42" data-color-picker-track="">
+      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 -translate-x-1 rtl:translate-x-1 size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #00FF6F; top: 40.609066111111105%;"></div>
     </div>
   </div>
 </div>"
@@ -113,8 +113,8 @@ exports[`ColorPicker > renders with format rgb correctly 1`] = `
         <div data-v-c9a043d6="" data-slot="color-picker-selectorThumb" class="-translate-1/2 absolute size-4 ring-2 ring-white rounded-full cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #00C16A; left: 100%; top: 24.313726000000003%;"></div>
       </div>
     </div>
-    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-[8px] relative rounded-md touch-none h-42" data-color-picker-track="">
-      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 translate-x-[-4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #00FF8C; top: 42.48704666666667%;"></div>
+    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-2 relative rounded-md touch-none h-42" data-color-picker-track="">
+      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 -translate-x-1 rtl:translate-x-1 size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #00FF8C; top: 42.48704666666667%;"></div>
     </div>
   </div>
 </div>"
@@ -128,8 +128,8 @@ exports[`ColorPicker > renders with size lg correctly 1`] = `
         <div data-v-c9a043d6="" data-slot="color-picker-selectorThumb" class="-translate-1/2 absolute size-4 ring-2 ring-white rounded-full cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #FFFFFF; left: 0%; top: 0%;"></div>
       </div>
     </div>
-    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-[8px] relative rounded-md touch-none h-44" data-color-picker-track="">
-      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 translate-x-[-4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #FF0000; top: 0%;"></div>
+    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-2 relative rounded-md touch-none h-44" data-color-picker-track="">
+      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 -translate-x-1 rtl:translate-x-1 size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #FF0000; top: 0%;"></div>
     </div>
   </div>
 </div>"
@@ -143,8 +143,8 @@ exports[`ColorPicker > renders with size md correctly 1`] = `
         <div data-v-c9a043d6="" data-slot="color-picker-selectorThumb" class="-translate-1/2 absolute size-4 ring-2 ring-white rounded-full cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #FFFFFF; left: 0%; top: 0%;"></div>
       </div>
     </div>
-    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-[8px] relative rounded-md touch-none h-42" data-color-picker-track="">
-      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 translate-x-[-4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #FF0000; top: 0%;"></div>
+    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-2 relative rounded-md touch-none h-42" data-color-picker-track="">
+      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 -translate-x-1 rtl:translate-x-1 size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #FF0000; top: 0%;"></div>
     </div>
   </div>
 </div>"
@@ -158,8 +158,8 @@ exports[`ColorPicker > renders with size sm correctly 1`] = `
         <div data-v-c9a043d6="" data-slot="color-picker-selectorThumb" class="-translate-1/2 absolute size-4 ring-2 ring-white rounded-full cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #FFFFFF; left: 0%; top: 0%;"></div>
       </div>
     </div>
-    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-[8px] relative rounded-md touch-none h-40" data-color-picker-track="">
-      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 translate-x-[-4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #FF0000; top: 0%;"></div>
+    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-2 relative rounded-md touch-none h-40" data-color-picker-track="">
+      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 -translate-x-1 rtl:translate-x-1 size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #FF0000; top: 0%;"></div>
     </div>
   </div>
 </div>"
@@ -173,8 +173,8 @@ exports[`ColorPicker > renders with size xl correctly 1`] = `
         <div data-v-c9a043d6="" data-slot="color-picker-selectorThumb" class="-translate-1/2 absolute size-4 ring-2 ring-white rounded-full cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #FFFFFF; left: 0%; top: 0%;"></div>
       </div>
     </div>
-    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-[8px] relative rounded-md touch-none h-46" data-color-picker-track="">
-      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 translate-x-[-4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #FF0000; top: 0%;"></div>
+    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-2 relative rounded-md touch-none h-46" data-color-picker-track="">
+      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 -translate-x-1 rtl:translate-x-1 size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #FF0000; top: 0%;"></div>
     </div>
   </div>
 </div>"
@@ -188,8 +188,8 @@ exports[`ColorPicker > renders with size xs correctly 1`] = `
         <div data-v-c9a043d6="" data-slot="color-picker-selectorThumb" class="-translate-1/2 absolute size-4 ring-2 ring-white rounded-full cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #FFFFFF; left: 0%; top: 0%;"></div>
       </div>
     </div>
-    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-[8px] relative rounded-md touch-none h-38" data-color-picker-track="">
-      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 translate-x-[-4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #FF0000; top: 0%;"></div>
+    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-2 relative rounded-md touch-none h-38" data-color-picker-track="">
+      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 -translate-x-1 rtl:translate-x-1 size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #FF0000; top: 0%;"></div>
     </div>
   </div>
 </div>"
@@ -203,8 +203,8 @@ exports[`ColorPicker > renders with ui correctly 1`] = `
         <div data-v-c9a043d6="" data-slot="color-picker-selectorThumb" class="-translate-1/2 absolute size-4 ring-2 ring-white rounded-full cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #FFFFFF; left: 0%; top: 0%;"></div>
       </div>
     </div>
-    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-[8px] relative rounded-md touch-none h-42" data-color-picker-track="">
-      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 translate-x-[-4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #FF0000; top: 0%;"></div>
+    <div data-v-c9a043d6="" data-slot="color-picker-track" class="w-2 relative rounded-md touch-none h-42" data-color-picker-track="">
+      <div data-v-c9a043d6="" data-slot="color-picker-trackThumb" class="absolute transform -translate-y-1/2 -translate-x-1 rtl:translate-x-1 size-4 rounded-full ring-2 ring-white cursor-pointer data-disabled:cursor-not-allowed" style="background-color: #FF0000; top: 0%;"></div>
     </div>
   </div>
 </div>"
