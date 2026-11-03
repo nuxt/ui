@@ -9,8 +9,8 @@ import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables } from '../utils/
 // Tables only, never the engine barrel: this composable rides the entry
 // chunk on every page, and the barrel would drag presets, the palette math
 // and the serializer with it. The serializer loads on demand below.
-import { mergeUi, isDefaultStyle, isDefaultTheme, styleTokens, DEFAULT_COLORS, DEFAULT_PRESET_ID, THEME_DEFAULTS, SEMANTIC_ALIASES, LIBRARY_TOKEN_DEFAULTS, tokenShadeDefaults, withoutCompoundVariants } from '../utils/theme/engine/types'
-import type { ThemeDoc, ThemePalette, StyleOptions, StoredPaletteParams } from '../utils/theme/engine'
+import { mergeUi, isDefaultStyle, isDefaultTheme, styleTokens, layoutCSS, normalizeLayout, DEFAULT_COLORS, DEFAULT_PRESET_ID, THEME_DEFAULTS, SEMANTIC_ALIASES, LIBRARY_TOKEN_DEFAULTS, tokenShadeDefaults, withoutCompoundVariants } from '../utils/theme/engine/types'
+import type { ThemeDoc, ThemeLayout, ThemePalette, StyleOptions, StoredPaletteParams } from '../utils/theme/engine'
 import colors from 'tailwindcss/colors'
 
 export function useTheme() {
@@ -69,6 +69,15 @@ export function useTheme() {
    * means "inherit", so a stock theme stores nothing.
    */
   const fontPrefs = useState<FontPrefs>('nuxt-ui-font', () => ({}))
+
+  /** The control density, the gutter and the states, sparse like the font document. */
+  const layout = useState<ThemeLayout>(THEME_STATE_KEYS.layout, () => ({}))
+
+  function setLayout(next: ThemeLayout, options: { track?: boolean } = {}) {
+    // Normalize: defaults are absences, so hasChanges/export stay clean.
+    layout.value = normalizeLayout(next) ?? {}
+    if (options.track !== false) trackThrottled('Theme Changed', { setting: 'layout' })
+  }
 
   function setFontPrefs(next: FontPrefs, options: { track?: boolean } = {}) {
     // Normalize: defaults are absences, so hasChanges/export stay clean.
@@ -190,6 +199,8 @@ export function useTheme() {
     // --font-mono, and Nuxt UI points h1–h6 at --font-heading.
     return parts.join(' ')
   })
+  // same sentinel rationale as customColorsStyle
+  const layoutStyle = computed(() => layoutCSS(layout.value) || ':root {}')
   const customColorsStyle = computed(() => {
     const entries = Object.entries(customColorsData.value)
     // non-empty sentinel: unhead won't patch an emptied innerHTML, leaving
@@ -235,6 +246,7 @@ export function useTheme() {
     { innerHTML: radiusStyle, id: 'nuxt-ui-radius', tagPriority: -2 },
     { innerHTML: fontSizeStyle, id: 'nuxt-ui-font-size', tagPriority: -2 },
     { innerHTML: fontStyle, id: 'nuxt-ui-font', tagPriority: -2 },
+    { innerHTML: layoutStyle, id: THEME_TAG_IDS.layout, tagPriority: -2 },
     { innerHTML: customColorsStyle, id: THEME_TAG_IDS.customColors, tagPriority: -2 },
     { innerHTML: cssVariablesStyle, id: THEME_TAG_IDS.cssVariables, tagPriority: -2 }
   ]
@@ -272,6 +284,7 @@ export function useTheme() {
     }
     if (Object.keys(fontDoc).length) doc.font = fontDoc
     if (_iconSet.value !== THEME_DEFAULTS.icons) doc.icons = _iconSet.value
+    if (Object.keys(layout.value).length) doc.layout = { ...layout.value }
 
     // Only alias-referenced palettes export. Reference by CURRENT value, not
     // overrides, a custom palette can shadow a default name and must still export.
@@ -430,6 +443,10 @@ export function useTheme() {
       })
     }
     if (settings.icons && Object.hasOwn(themeIcons, settings.icons)) icon.value = settings.icons
+    // merged over the current layout, a payload naming one field keeps the rest
+    if (settings.layout && typeof settings.layout === 'object') {
+      setLayout({ ...layout.value, ...settings.layout }, { track: false })
+    }
 
     const semanticUpdates = SEMANTIC_ALIASES.filter(color => validPalette(settings[color]))
     const savedExtras: Record<string, any> = { ...aiThemeExtras.value }
@@ -481,6 +498,7 @@ export function useTheme() {
     _radius.value = THEME_DEFAULTS.radius
     _fontSize.value = THEME_DEFAULTS.fontSize
     fontPrefs.value = {}
+    layout.value = {}
     _iconSet.value = THEME_DEFAULTS.icons
     appConfig.ui.icons = themeIcons.lucide as any
 
@@ -533,6 +551,8 @@ export function useTheme() {
     font,
     fontPrefs,
     setFontPrefs,
+    layout,
+    setLayout,
     icon,
     icons: ICON_PACKS,
     hasChanges,

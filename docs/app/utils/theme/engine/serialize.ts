@@ -17,6 +17,7 @@ import {
   tokenShadeDefaults,
   styleComponents,
   styleTokens,
+  layoutVariables,
   mergeUi
 } from './types'
 import json5 from 'json5'
@@ -129,6 +130,13 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explici
   if (doc.font?.weights?.body !== undefined) rootLines.push(`  --ui-font-weight-body: ${doc.font.weights.body};`)
   if (doc.font?.weights?.heading !== undefined) rootLines.push(`  --ui-font-weight-heading: ${doc.font.weights.heading};`)
   if (doc.radius !== undefined && doc.radius !== THEME_DEFAULTS.radius) rootLines.push(`  --ui-radius: ${doc.radius}rem;`)
+  // The density, the gutter and the states, only what differs from the library
+  const layout = layoutVariables(doc.layout, steps => `--spacing(${steps})`)
+  rootLines.push(...Object.entries(layout.root).map(([key, value]) => `  ${key}: ${value};`))
+  const smLines = Object.entries(layout.sm).map(([key, value]) => `    ${key}: ${value};`)
+  if (smLines.length) {
+    rootLines.push(...(rootLines.length ? [''] : []), '  @variant sm {', ...smLines, '  }')
+  }
   if (rootLines.length) {
     lines.push('', ':root {', ...rootLines, '}')
   }

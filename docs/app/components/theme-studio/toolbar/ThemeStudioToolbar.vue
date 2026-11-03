@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * The seven theme controls, one component each. They ride the footer on
+ * The eight theme controls, one component each. They ride the footer on
  * desktop; below `lg` the footer copy hides and the header's mobile menu
  * renders the same set with `vertical`, stacked one per row with each
  * label shown.
@@ -56,6 +56,10 @@ const { style } = useScrollShadow(toolbarRef, { orientation: 'horizontal' })
 
     <UFormField label="Radius" :ui="fieldUi">
       <ThemeStudioToolbarRadius :vertical="vertical" />
+    </UFormField>
+
+    <UFormField label="Layout" :ui="fieldUi">
+      <ThemeStudioToolbarLayout :vertical="vertical" />
     </UFormField>
 
     <UFormField label="Defaults" :ui="fieldUi">

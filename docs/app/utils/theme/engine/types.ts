@@ -82,6 +82,8 @@ export interface ThemeDoc {
     lineHeight?: number
   }
   icons?: string
+  /** The control density, the gutter and the focus and disabled states. */
+  layout?: ThemeLayout
   /** Default variants and semantic token shades. */
   style?: StyleOptions
   /** L4, per-component overrides merged into `app.config ui.<component>` */
@@ -107,6 +109,134 @@ export const THEME_DEFAULTS = {
   font: 'Public Sans',
   icons: 'lucide'
 } as const
+
+/* --------------------------------------------------------------- layout -- */
+
+export const CONTROL_SIZES = ['xs', 'sm', 'md', 'lg', 'xl'] as const
+
+export type ControlSize = typeof CONTROL_SIZES[number]
+
+/**
+ * The padding and gap of the control scale as @nuxt/ui ships them
+ * (src/runtime/css/base.css), in `--spacing` steps. The icon, box and text of
+ * each size stay out: a density moves the room around them, not their size.
+ */
+export const CONTROL_SPACING: Record<'px' | 'py' | 'gap', Record<ControlSize, number>> = {
+  px: { xs: 2, sm: 2.5, md: 2.5, lg: 3, xl: 3 },
+  py: { xs: 1, sm: 1.5, md: 1.5, lg: 2, xl: 2 },
+  gap: { xs: 1, sm: 1.5, md: 1.5, lg: 2, xl: 2 }
+}
+
+export type Density = 'compact' | 'default' | 'comfortable'
+
+/** How far a density moves every padding and gap of the scale, in `--spacing` steps. */
+export const DENSITY_STEPS: Record<Density, number> = {
+  compact: -0.5,
+  default: 0,
+  comfortable: 0.5
+}
+
+export const DENSITIES = Object.keys(DENSITY_STEPS) as Density[]
+
+/** Sparse like the rest of the doc: an absent field is the library's value. */
+export interface ThemeLayout {
+  density?: Exclude<Density, 'default'>
+  /** `--ui-gutter` from `sm`, in `--spacing` steps. */
+  gutter?: number
+  /** `--ui-focus-width` in px. */
+  focusWidth?: number
+  /** `--ui-disabled-opacity` in %. */
+  disabledOpacity?: number
+}
+
+/** The library's values (src/runtime/css/base.css) and the travel the studio gives each. */
+export const LAYOUT_DEFAULTS = {
+  gutter: 6,
+  focusWidth: 3,
+  disabledOpacity: 75
+} as const
+
+export const LAYOUT_RANGES: Record<keyof typeof LAYOUT_DEFAULTS, { min: number, max: number, step: number }> = {
+  gutter: { min: 2, max: 12, step: 1 },
+  focusWidth: { min: 1, max: 6, step: 1 },
+  disabledOpacity: { min: 25, max: 100, step: 5 }
+}
+
+/**
+ * The gutter under `sm`. One slider sets the gutter from `sm`, small screens
+ * keep this one unless the slider goes below it.
+ */
+export const GUTTER_BASE = 4
+
+/**
+ * A layout with every value checked and every default dropped, the shape the
+ * state, the storage and the doc all hold. Anything else in `raw` (a stored
+ * theme, a link, the AI) is dropped, these values end up in `<style>` text.
+ */
+export function normalizeLayout(raw: unknown): ThemeLayout | undefined {
+  if (!raw || typeof raw !== 'object') return undefined
+  const input = raw as Record<string, unknown>
+  const layout: ThemeLayout = {}
+  if (input.density === 'compact' || input.density === 'comfortable') layout.density = input.density
+  for (const key of Object.keys(LAYOUT_DEFAULTS) as Array<keyof typeof LAYOUT_DEFAULTS>) {
+    const value = typeof input[key] === 'number' || typeof input[key] === 'string' ? Number(input[key]) : Number.NaN
+    if (input[key] === '' || !Number.isFinite(value)) continue
+    const { min, max } = LAYOUT_RANGES[key]
+    // halves at most, a value off the slider's travel still lands on a step the export can spell
+    const clamped = Math.round(Math.min(max, Math.max(min, value)) * 2) / 2
+    if (clamped !== LAYOUT_DEFAULTS[key]) layout[key] = clamped
+  }
+  return Object.keys(layout).length ? layout : undefined
+}
+
+/**
+ * The variables a layout sets, `root` on `:root` and `sm` from the `sm`
+ * breakpoint, only those that differ from the library. `spacing` spells a
+ * `--spacing` step: `--spacing(n)` in an export Tailwind compiles, a `calc()`
+ * in a style tag it never sees.
+ */
+export function layoutVariables(layout: ThemeLayout | undefined, spacing: (steps: number) => string): { root: Record<string, string>, sm: Record<string, string> } {
+  const root: Record<string, string> = {}
+  const sm: Record<string, string> = {}
+  const { density, gutter, focusWidth, disabledOpacity } = normalizeLayout(layout) ?? {}
+
+  const step = density ? DENSITY_STEPS[density] : 0
+  if (step) {
+    for (const [property, sizes] of Object.entries(CONTROL_SPACING)) {
+      for (const size of CONTROL_SIZES) {
+        root[`--ui-control-${property}-${size}`] = spacing(sizes[size] + step)
+      }
+    }
+  }
+
+  // An unlayered `:root` outranks the library's `sm` rule, which sits in
+  // `base`: a gutter under the base one goes on `:root` alone, any other
+  // only from `sm`, small screens keeping theirs.
+  if (gutter !== undefined) {
+    if (gutter < GUTTER_BASE) root['--ui-gutter'] = spacing(gutter)
+    else sm['--ui-gutter'] = spacing(gutter)
+  }
+  if (focusWidth !== undefined) root['--ui-focus-width'] = `${focusWidth}px`
+  if (disabledOpacity !== undefined) root['--ui-disabled-opacity'] = `${disabledOpacity}%`
+
+  return { root, sm }
+}
+
+/** `--spacing(n)` outside Tailwind, for the live style tags. */
+export const spacingCalc = (steps: number) => `calc(var(--spacing) * ${steps})`
+
+/** Tailwind's `sm`, the docs keep the default breakpoints. */
+export const SM_MEDIA = '(width >= 40rem)'
+
+/** The layout as the live style tag's text, empty when the layout is stock. */
+export function layoutCSS(layout: ThemeLayout | undefined): string {
+  const { root, sm } = layoutVariables(layout, spacingCalc)
+  const declarations = (variables: Record<string, string>) => Object.entries(variables).map(([key, value]) => `${key}: ${value};`).join(' ')
+  const parts: string[] = []
+  if (Object.keys(root).length) parts.push(`:root { ${declarations(root)} }`)
+  if (Object.keys(sm).length) parts.push(`@media ${SM_MEDIA} { :root { ${declarations(sm)} } }`)
+  return parts.join(' ')
+}
 
 /* ---------------------------------------------------------------- style -- */
 
@@ -450,6 +580,7 @@ export function isDefaultTheme(doc: ThemeDoc): boolean {
     && !doc.font?.uppercase && !doc.font?.italic
     && doc.font?.letterSpacing === undefined && doc.font?.lineHeight === undefined
     && !doc.icons && !doc.components
+    && !normalizeLayout(doc.layout)
     && isDefaultStyle(doc.style)
 }
 
@@ -475,6 +606,7 @@ export function docToSettings(doc: ThemeDoc): Record<string, any> {
     settings.fontBody = { uppercase: doc.font.uppercase, italic: doc.font.italic, letterSpacing: doc.font.letterSpacing, lineHeight: doc.font.lineHeight }
   }
   if (doc.icons) settings.icons = doc.icons
+  if (doc.layout) settings.layout = doc.layout
 
   if (doc.palettes) {
     settings.customColors = Object.fromEntries(

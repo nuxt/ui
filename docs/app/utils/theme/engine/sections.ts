@@ -1,5 +1,5 @@
-import type { ThemeDoc, ShadeStop, StyleOptions } from './types'
-import { DEFAULT_COLORS, THEME_DEFAULTS, SEMANTIC_ALIASES, VARIANT_GROUPS, VARIANT_SUPPORT, styleTokens, TOKEN_SHADE_TARGETS, parseUiColorRef } from './types'
+import type { ThemeDoc, ThemeLayout, ShadeStop, StyleOptions } from './types'
+import { DEFAULT_COLORS, THEME_DEFAULTS, LAYOUT_DEFAULTS, SEMANTIC_ALIASES, VARIANT_GROUPS, VARIANT_SUPPORT, styleTokens, normalizeLayout, TOKEN_SHADE_TARGETS, parseUiColorRef } from './types'
 import { FONT_WEIGHT_DEFAULTS } from '../studio'
 
 /**
@@ -19,11 +19,17 @@ type TokenSection = ColorSection | 'surfaces'
 export type SectionKey
   = | TokenSection
     | 'font' | 'type' | 'weights'
-    | 'icons' | 'radius' | 'size' | 'buttons' | 'panels' | 'inputs'
+    | 'icons' | 'radius' | 'spacing' | 'states' | 'size' | 'buttons' | 'panels' | 'inputs'
 
 /** Which font fields the `font` and `type` sections each own. */
 const FONT_STACKS = ['sans', 'heading', 'mono'] as const
 const TYPE_FIELDS = ['uppercase', 'italic', 'letterSpacing', 'lineHeight'] as const
+
+/** Which layout fields the `spacing` and `states` sections each own. */
+const LAYOUT_FIELDS = {
+  spacing: ['density', 'gutter'],
+  states: ['focusWidth', 'disabledOpacity']
+} as const satisfies Record<'spacing' | 'states', readonly (keyof ThemeLayout)[]>
 
 /**
  * Only the sections that back a multi-section panel. Every other section owns
@@ -35,7 +41,7 @@ export const SECTION_GROUPS: Record<'colors' | 'defaults', SectionKey[]> = {
 }
 
 /** Every section, for whole-document comparisons against the baseline. */
-export const ALL_SECTION_KEYS: SectionKey[] = [...SECTION_GROUPS.colors, ...SECTION_GROUPS.defaults, 'surfaces', 'font', 'type', 'weights', 'icons', 'radius']
+export const ALL_SECTION_KEYS: SectionKey[] = [...SECTION_GROUPS.colors, ...SECTION_GROUPS.defaults, 'surfaces', 'font', 'type', 'weights', 'icons', 'radius', 'spacing', 'states']
 
 /** Which section a semantic token (or token shade) belongs to. */
 function tokenSection(token: string): TokenSection {
@@ -160,6 +166,15 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
       return doc.icons ?? THEME_DEFAULTS.icons
     case 'radius':
       return doc.radius ?? THEME_DEFAULTS.radius
+    // normalized, so a layout spelling out a default reads as absent
+    case 'spacing': {
+      const layout = normalizeLayout(doc.layout) ?? {}
+      return { density: layout.density ?? 'default', gutter: layout.gutter ?? LAYOUT_DEFAULTS.gutter }
+    }
+    case 'states': {
+      const layout = normalizeLayout(doc.layout) ?? {}
+      return { focusWidth: layout.focusWidth ?? LAYOUT_DEFAULTS.focusWidth, disabledOpacity: layout.disabledOpacity ?? LAYOUT_DEFAULTS.disabledOpacity }
+    }
     case 'size':
       return { size: chosen(style.defaults?.size), color: chosen(style.defaults?.color) }
     case 'buttons':
@@ -315,6 +330,17 @@ export function mergeSection(current: ThemeDoc, base: ThemeDoc, key: SectionKey)
     case 'radius':
       setOrDelete(doc, 'radius', base.radius)
       break
+    case 'spacing':
+    case 'states': {
+      const layout: Record<string, unknown> = { ...doc.layout }
+      for (const field of LAYOUT_FIELDS[key]) {
+        const value = base.layout?.[field]
+        if (value === undefined) Reflect.deleteProperty(layout, field)
+        else layout[field] = value
+      }
+      setOrDelete(doc, 'layout', normalizeLayout(layout))
+      break
+    }
     case 'size':
       if (doc.style?.defaults || baseStyle.defaults?.size !== undefined || baseStyle.defaults?.color !== undefined) {
         doc.style ??= {}

@@ -5,7 +5,7 @@ import { themeIcons } from '../utils/theme/icons'
 import { cssVariableDefaults } from '../utils/theme/tokens'
 import { THEME_STATE_KEYS, THEME_STORAGE_KEY, clamped, readStoredTheme, snapshotStoredTheme, writeStoredTheme } from '../utils/theme/storage'
 import type { StoredTheme } from '../utils/theme/storage'
-import { mergeUi, styleComponents, withoutCompoundVariants, DEFAULT_COLORS, THEME_DEFAULTS } from '../utils/theme/engine/types'
+import { mergeUi, styleComponents, withoutCompoundVariants, layoutCSS, DEFAULT_COLORS, THEME_DEFAULTS, DENSITIES, GUTTER_BASE, LAYOUT_DEFAULTS, LAYOUT_RANGES, SM_MEDIA } from '../utils/theme/engine/types'
 import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables } from '../utils/theme/sanitize'
 
 export default defineNuxtPlugin({
@@ -36,6 +36,8 @@ export default defineNuxtPlugin({
         useState('nuxt-ui-font-size').value = clamped(saved.fontSize, 12, 20) ?? THEME_DEFAULTS.fontSize
         useState('nuxt-ui-font').value = saved.font ?? {}
         useState('nuxt-ui-icons').value = saved.icons ?? THEME_DEFAULTS.icons
+        // readStoredTheme already ran it through normalizeLayout
+        useState(THEME_STATE_KEYS.layout).value = saved.layout ?? {}
         // Through the same boundary the AI path uses: these two are
         // concatenated into <style> text, and storage is writable by anything
         // on the origin. (The inline FOUC script still paints the raw values
@@ -179,6 +181,24 @@ export default defineNuxtPlugin({
 
               var fontSize = num(T.fontSize, 12, 20);
               if (fontSize !== undefined && fontSize !== 16) { set('nuxt-ui-font-size', 'html { font-size: ' + fontSize + 'px; }'); }
+
+              /* the densities come prebuilt, the rest restates layoutVariables */
+              var L = (T.layout && typeof T.layout === 'object') ? T.layout : {};
+              var DENSITY = ${JSON.stringify(Object.fromEntries(DENSITIES.map(density => [density, layoutCSS({ density: density === 'default' ? undefined : density })])))};
+              var LR = ${JSON.stringify(LAYOUT_RANGES)};
+              var LD = ${JSON.stringify(LAYOUT_DEFAULTS)};
+              function half(v, range) { var n = num(v, range.min, range.max); return n === undefined ? undefined : Math.round(n * 2) / 2; }
+              var layoutCss = Object.prototype.hasOwnProperty.call(DENSITY, L.density) ? DENSITY[L.density] : '';
+              var gutter = half(L.gutter, LR.gutter);
+              var focusWidth = half(L.focusWidth, LR.focusWidth);
+              var disabledOpacity = half(L.disabledOpacity, LR.disabledOpacity);
+              var layoutVars = '';
+              if (gutter !== undefined && gutter !== LD.gutter && gutter < ${GUTTER_BASE}) { layoutVars += ' --ui-gutter: calc(var(--spacing) * ' + gutter + ');'; }
+              if (focusWidth !== undefined && focusWidth !== LD.focusWidth) { layoutVars += ' --ui-focus-width: ' + focusWidth + 'px;'; }
+              if (disabledOpacity !== undefined && disabledOpacity !== LD.disabledOpacity) { layoutVars += ' --ui-disabled-opacity: ' + disabledOpacity + '%;'; }
+              if (layoutVars) { layoutCss += ' :root {' + layoutVars + ' }'; }
+              if (gutter !== undefined && gutter !== LD.gutter && gutter >= ${GUTTER_BASE}) { layoutCss += ' @media ${SM_MEDIA} { :root { --ui-gutter: calc(var(--spacing) * ' + gutter + '); } }'; }
+              if (layoutCss) { set('nuxt-ui-layout', layoutCss); }
 
               var prefs = T.font || {};
               var font = (prefs.sans && SAFE.test(prefs.sans)) ? prefs.sans : 'Public Sans';
