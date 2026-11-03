@@ -6,7 +6,7 @@ export default defineTheme({
     base: 'group relative block my-5 p-(--ui-gutter) border border-default rounded-md bg-default transition-colors',
     icon: 'size-6 mb-2 block text-accent',
     title: 'text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold))',
-    description: 'text-[15px] text-muted *:first:mt-0 *:last:mb-0 *:my-1',
+    description: 'text-[0.9375rem] text-muted *:first:mt-0 *:last:mb-0 *:my-1',
     externalIcon: 'size-4 align-top absolute inset-e-2 top-2 text-faint pointer-events-none transition-colors'
   },
   variants: {

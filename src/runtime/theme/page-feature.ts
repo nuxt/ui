@@ -7,7 +7,7 @@ export default defineTheme({
     leading: 'inline-flex items-center justify-center',
     leadingIcon: 'size-5 shrink-0 text-primary',
     title: 'text-base text-pretty font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold)) text-strong',
-    description: 'text-[15px] text-pretty text-muted'
+    description: 'text-[0.9375rem] text-pretty text-muted'
   },
   variants: {
     orientation: {
