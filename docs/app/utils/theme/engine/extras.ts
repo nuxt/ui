@@ -146,7 +146,8 @@ export type ThemeCharts = Partial<Record<typeof CHART_SERIES[number], string>>
 export const EXTRAS_TABLES = {
   scale: Object.fromEntries(CONTROL_COLUMNS.flatMap(column => CONTROL_SIZES.map((size, index) => [controlVariable(column.key, size), {
     default: column.values[index]!,
-    min: column.key === 'text' ? 8 : 0,
+    // menu labels read the text less 2px, 10px keeps them legible
+    min: column.key === 'text' ? 10 : 0,
     max: column.key === 'text' ? 32 : 64,
     density: column.density,
     unit: column.key === 'text' ? 'rem' : 'spacing'
