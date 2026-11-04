@@ -793,7 +793,7 @@ const pageTitles: Record<Page, string> = {
                 <template #trailing>
                   <UIcon
                     :name="appConfig.ui.icons.chevronDown"
-                    class="shrink-0 text-faint size-5 group-data-[state=open]:rotate-180 transition-transform duration-200"
+                    class="shrink-0 text-faint size-(--ui-control-icon-size) group-data-[state=open]:rotate-180 transition-transform duration-200"
                   />
                 </template>
               </UButton>
@@ -936,7 +936,9 @@ const pageTitles: Record<Page, string> = {
                 :icon="studioIcons.trash"
               >
                 <template #trailing>
-                  <UKbd>{{ selectedCustomersCount }}</UKbd>
+                  <UKbd size="sm">
+                    {{ selectedCustomersCount }}
+                  </UKbd>
                 </template>
               </UButton>
 

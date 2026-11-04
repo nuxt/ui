@@ -73,7 +73,7 @@ function toggleChat() {
         @click="toggleChat"
       >
         <template #leading>
-          <NuxiIcon class="size-5 shrink-0" />
+          <NuxiIcon class="size-(--ui-control-icon-size) shrink-0" />
         </template>
       </UButton>
 
@@ -86,7 +86,7 @@ function toggleChat() {
           @click="toggleChat"
         >
           <template #leading>
-            <NuxiIcon class="size-5 shrink-0" />
+            <NuxiIcon class="size-(--ui-control-icon-size) shrink-0" />
           </template>
         </UButton>
       </UTooltip>

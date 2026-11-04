@@ -159,7 +159,7 @@ watch(open, async (isOpen) => {
             @click="tab = entry.key"
           >
             <template #leading>
-              <ProseCodeIcon :filename="entry.filename" class="size-5 shrink-0" />
+              <ProseCodeIcon :filename="entry.filename" class="size-(--ui-control-icon-size) shrink-0" />
             </template>
           </UButton>
 
