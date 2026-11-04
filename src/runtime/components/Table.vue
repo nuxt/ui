@@ -674,7 +674,7 @@ function getCellSpan(span: number) {
 }
 
 function isInteractive(target: EventTarget | null) {
-  return target instanceof Element && !!target.closest('a, button, input, label, select, textarea, [contenteditable]:not([contenteditable="false"]), [role="slider"]')
+  return target instanceof Element && !!target.closest('a, button, input, label, select, textarea, [contenteditable]:not([contenteditable="false"]), [role="button"], [role="slider"]')
 }
 
 let isPointerFocus = false
@@ -790,9 +790,10 @@ function getCellTabIndex(cell: Cell<TableFeatures, T, unknown>) {
   return cell.getTabIndex()
 }
 
-// A cell focused outside the selection becomes the active cell. A selected one keeps the range, like after a shift-click.
+// A cell focused with the keyboard or from code becomes the active cell, so the arrow keys start from it.
+// The pointer and the arrow keys focus the active cell themselves, so their ranges are kept.
 function onCellFocus(cell: Cell<TableFeatures, T, unknown>) {
-  if (!isPointerFocus && !cell.getIsSelected()) {
+  if (!isPointerFocus && !cell.getIsFocused()) {
     tableApi.setFocusedCell(cell.row.id, cell.column.id)
   }
 }
