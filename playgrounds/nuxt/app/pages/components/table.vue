@@ -368,7 +368,7 @@ onMounted(() => {
         :virtualize="virtualize"
         :features="virtualize ? undefined : paginationFeatures"
         sticky
-        class="border border-strong rounded-sm"
+        class="border border-default rounded-sm"
         @select="onSelect"
         @contextmenu="onContextmenu"
         @pointermove="(ev: PointerEvent) => {
