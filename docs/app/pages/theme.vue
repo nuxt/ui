@@ -108,9 +108,10 @@ const shareOpen = ref(false)
 </script>
 
 <template>
-  <!-- its own width, the Container slider sizes the views, not the studio -->
+  <!-- The studio keeps the docs' 90rem, its header and footer included: the
+       Container slider sizes the views, not the chrome around them -->
   <main class="max-w-8xl mx-auto w-full">
-    <UHeader :menu="{ modal: false }" :ui="{ root: () => 'h-(--ui-header-height) border-b border-transparent' }">
+    <UHeader :menu="{ modal: false }" class="[--ui-container-width:var(--container-8xl)]" :ui="{ root: () => 'h-(--ui-header-height) border-b border-transparent' }">
       <template #left>
         <HeaderLogo />
       </template>
@@ -199,7 +200,7 @@ const shareOpen = ref(false)
 
     <!-- the centre takes every pixel the two clusters leave and shrinks
          (min-w-0), so the toolbar inside it scrolls instead of widening the bar -->
-    <UFooter class="hidden lg:block ring ring-default rounded-xl bg-default mx-2 mt-2" :ui="{ container: 'py-3! px-6!', left: 'mt-0 gap-0 lg:flex-none', center: 'flex-1 min-w-0 justify-start', right: 'mt-0 lg:flex-none' }">
+    <UFooter class="hidden lg:block [--ui-container-width:var(--container-8xl)] ring ring-default rounded-xl bg-default mx-2 mt-2" :ui="{ container: 'py-3! px-6!', left: 'mt-0 gap-0 lg:flex-none', center: 'flex-1 min-w-0 justify-start', right: 'mt-0 lg:flex-none' }">
       <template #left>
         <div class="flex items-center gap-0.5 p-0.5 rounded-lg ring ring-default bg-tint">
           <UTooltip text="Undo" :kbds="['meta', 'Z']">
