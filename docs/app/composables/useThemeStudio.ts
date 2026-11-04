@@ -375,8 +375,8 @@ export function useThemeStudio() {
     // the first series stays on the primary, the other five take distinct palettes
     if (Math.random() < 0.3) {
       const palettes = Object.keys(CHART_COLORS).filter(name => !CHART_ALIASES.includes(name) && name !== doc.colors!.primary)
-        .sort(() => Math.random() - 0.5)
-      doc.charts = Object.fromEntries(CHART_SERIES.slice(1).map((series, index) => [series, palettes[index]!]))
+      // drawn without replacement, five distinct palettes
+      doc.charts = Object.fromEntries(CHART_SERIES.slice(1).map(series => [series, palettes.splice(Math.floor(Math.random() * palettes.length), 1)[0]!]))
     }
 
     applyDoc(doc)

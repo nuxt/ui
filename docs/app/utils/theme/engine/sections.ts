@@ -180,7 +180,6 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
       return doc.radius ?? THEME_DEFAULTS.radius
     case 'controls':
     case 'page':
-      return ownedLayout(doc, key)
     case 'states':
     case 'tint':
       return ownedLayout(doc, key)
@@ -355,8 +354,6 @@ export function mergeSection(current: ThemeDoc, base: ThemeDoc, key: SectionKey)
       break
     case 'controls':
     case 'page':
-      mergeLayout(doc, base, key)
-      break
     case 'states':
     case 'tint':
       mergeLayout(doc, base, key)

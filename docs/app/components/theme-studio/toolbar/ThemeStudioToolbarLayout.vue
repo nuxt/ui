@@ -67,10 +67,13 @@ function cellValue(variable: string) {
   return layout.value.scale?.[variable] ?? controlBase(variable, density.value)
 }
 
-function setCell(variable: string, raw: string | number) {
-  const value = Number(raw)
-  if (raw === '' || !Number.isFinite(value)) return
-  setLayout({ ...layout.value, scale: { ...layout.value.scale, [variable]: value } })
+function setCell(variable: string, input: HTMLInputElement) {
+  const value = Number(input.value)
+  if (input.value !== '' && Number.isFinite(value)) {
+    setLayout({ ...layout.value, scale: { ...layout.value.scale, [variable]: value } })
+  }
+  // a rejected, clamped or unchanged value doesn't re-render, restate the cell
+  input.value = String(cellValue(variable))
 }
 
 const rows = CONTROL_SIZES.map(size => ({
@@ -177,7 +180,7 @@ const editorContent = { side: 'right' as const, align: 'start' as const, alignOf
                       size="xs"
                       :ui="{ base: ['px-1 text-center font-mono', layout.scale?.[cell.variable] !== undefined ? 'text-strong' : 'text-muted'] }"
                       :aria-label="cell.variable"
-                      @change="setCell(cell.variable, ($event.target as HTMLInputElement).value)"
+                      @change="setCell(cell.variable, $event.target as HTMLInputElement)"
                     />
                   </template>
                 </div>

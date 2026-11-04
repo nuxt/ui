@@ -108,7 +108,8 @@ const shareOpen = ref(false)
 </script>
 
 <template>
-  <main class="max-w-(--ui-container-width) mx-auto w-full">
+  <!-- its own width, the Container slider sizes the views, not the studio -->
+  <main class="max-w-8xl mx-auto w-full">
     <UHeader :menu="{ modal: false }" :ui="{ root: () => 'h-(--ui-header-height) border-b border-transparent' }">
       <template #left>
         <HeaderLogo />

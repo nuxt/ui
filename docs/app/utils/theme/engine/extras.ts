@@ -222,7 +222,7 @@ export function buildExtras(input: ExtrasInput, tables: ExtrasTables, spacing: (
   for (const [variable, cell] of Object.entries(tables.scale)) {
     const base = cell.default + (cell.density ? step : 0)
     const own = number(rawScale[variable], cell.min, cell.max)
-    if (own !== undefined && own !== base) scale[variable] = own
+    if (own !== undefined && (own !== base || own !== cell.default)) scale[variable] = own
     const value = own ?? base
     if (value !== cell.default) root[variable] = write(value, cell.unit)
   }

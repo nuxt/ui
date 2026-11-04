@@ -6,7 +6,7 @@ import { cssVariableDefaults } from '../utils/theme/tokens'
 import { THEME_STATE_KEYS, THEME_TAG_IDS, THEME_STORAGE_KEY, clamped, readStoredTheme, snapshotStoredTheme, writeStoredTheme } from '../utils/theme/storage'
 import type { StoredTheme } from '../utils/theme/storage'
 import { mergeUi, styleComponents, withoutCompoundVariants, DEFAULT_COLORS, THEME_DEFAULTS } from '../utils/theme/engine/types'
-import { buildExtras, EXTRAS_TABLES } from '../utils/theme/engine/extras'
+import { buildExtras, EXTRAS_TABLES, EXTRAS_VARIABLES } from '../utils/theme/engine/extras'
 import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables } from '../utils/theme/sanitize'
 
 export default defineNuxtPlugin({
@@ -238,11 +238,13 @@ export default defineNuxtPlugin({
               var cssVars = T.cssVariables;
               if (cssVars) {
                 var defaults = ${JSON.stringify(cssVariableDefaults)};
+                /* the variables a studio field owns, sanitizeCSSVariables drops them too */
+                var OWNED = ${JSON.stringify(Object.fromEntries([...EXTRAS_VARIABLES].map(name => [name, true])))};
                 var merge = function(defs, overrides) {
                   var result = [];
                   var safe = function(v) { return v != null && !BREAKOUT.test(String(v)); };
                   for (var key in defs) { result.push(key + ': ' + (safe(overrides[key]) ? overrides[key] : defs[key]) + ';'); }
-                  for (var key2 in overrides) { if (!defs[key2] && VAR_KEY.test(key2) && safe(overrides[key2])) result.push(key2 + ': ' + overrides[key2] + ';'); }
+                  for (var key2 in overrides) { if (!defs[key2] && !OWNED[key2] && VAR_KEY.test(key2) && safe(overrides[key2])) result.push(key2 + ': ' + overrides[key2] + ';'); }
                   return result;
                 };
                 var parts = [];
