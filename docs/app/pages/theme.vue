@@ -123,7 +123,7 @@ const shareOpen = ref(false)
         <!-- below `lg`, where the footer bar that carries it is hidden -->
         <UColorModeTabs
           size="sm"
-          :ui="{ list: 'bg-tint ring ring-default p-0.5', indicator: 'inset-y-0.5' }"
+          :ui="{ list: 'p-0.5', indicator: 'inset-y-0.5' }"
           aria-label="Color mode"
           class="lg:hidden"
         />
