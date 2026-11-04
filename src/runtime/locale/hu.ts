@@ -215,6 +215,7 @@ export default defineLocale<Messages>({
       label: 'előrehaladás'
     },
     table: {
+      loading: 'Betöltés…',
       noData: 'Nincs adat'
     },
     toast: {

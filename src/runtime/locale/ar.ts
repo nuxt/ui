@@ -216,6 +216,7 @@ export default defineLocale<Messages>({
       label: 'التقدم'
     },
     table: {
+      loading: 'جارٍ التحميل…',
       noData: 'لا توجد بيانات'
     },
     toast: {

@@ -194,6 +194,8 @@ props:
 The loading animation is automatically disabled when the user prefers reduced motion, the bar is displayed as a full width pulse instead.
 ::
 
+When the table has no data, a loading message is displayed in place of the empty state. You can customize it with the `#loading` slot.
+
 ### Sticky
 
 Use the `sticky` prop to make the header or footer sticky.

@@ -215,6 +215,7 @@ export default defineLocale<Messages>({
       label: 'aurrerapena'
     },
     table: {
+      loading: 'Kargatzen…',
       noData: 'Daturik gabe'
     },
     toast: {

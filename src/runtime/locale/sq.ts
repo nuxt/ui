@@ -215,6 +215,7 @@ export default defineLocale<Messages>({
       label: 'përparimi'
     },
     table: {
+      loading: 'Po ngarkohet…',
       noData: 'Nuk ka të dhëna'
     },
     toast: {

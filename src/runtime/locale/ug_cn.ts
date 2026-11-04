@@ -216,6 +216,7 @@ export default defineLocale<Messages>({
       label: 'ئىلگىرىلەش'
     },
     table: {
+      loading: 'يۈكلىنىۋاتىدۇ…',
       noData: 'سانلىق مەلۇمات يوق'
     },
     toast: {

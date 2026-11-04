@@ -215,6 +215,7 @@ export default defineLocale<Messages>({
       label: 'irəliləyiş'
     },
     table: {
+      loading: 'Yüklənir…',
       noData: 'Məlumat yoxdur'
     },
     toast: {

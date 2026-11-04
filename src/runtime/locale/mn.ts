@@ -215,6 +215,7 @@ export default defineLocale<Messages>({
       label: 'явц'
     },
     table: {
+      loading: 'Ачаалж байна…',
       noData: 'Мэдээлэл байхгүй'
     },
     toast: {

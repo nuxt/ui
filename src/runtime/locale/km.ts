@@ -215,6 +215,7 @@ export default defineLocale<Messages>({
       label: 'វឌ្ឍនភាព'
     },
     table: {
+      loading: 'កំពុងផ្ទុក…',
       noData: 'មិនមានទិន្នន័យ'
     },
     toast: {

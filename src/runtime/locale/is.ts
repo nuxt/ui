@@ -215,6 +215,7 @@ export default defineLocale<Messages>({
       label: 'framvinda'
     },
     table: {
+      loading: 'Hleður…',
       noData: 'Engin gögn'
     },
     toast: {

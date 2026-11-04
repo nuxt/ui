@@ -215,6 +215,7 @@ export default defineLocale<Messages>({
       label: 'norise'
     },
     table: {
+      loading: 'Ielādē…',
       noData: 'Nav datu'
     },
     toast: {

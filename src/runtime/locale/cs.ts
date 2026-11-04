@@ -215,6 +215,7 @@ export default defineLocale<Messages>({
       label: 'průběh'
     },
     table: {
+      loading: 'Načítání…',
       noData: 'Žádná data'
     },
     toast: {

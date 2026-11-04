@@ -215,6 +215,7 @@ export default defineLocale<Messages>({
       label: 'Fortschrëtt'
     },
     table: {
+      loading: 'Lueden…',
       noData: 'Keng Donnéeën'
     },
     toast: {

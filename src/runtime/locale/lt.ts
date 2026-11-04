@@ -215,6 +215,7 @@ export default defineLocale<Messages>({
       label: 'eiga'
     },
     table: {
+      loading: 'Įkeliama…',
       noData: 'Nėra duomenų'
     },
     toast: {

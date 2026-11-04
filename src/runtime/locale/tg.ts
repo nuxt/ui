@@ -215,6 +215,7 @@ export default defineLocale<Messages>({
       label: 'пешрафт'
     },
     table: {
+      loading: 'Боргирӣ…',
       noData: 'Маълумот нест'
     },
     toast: {

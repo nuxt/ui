@@ -215,6 +215,7 @@ export default defineLocale<Messages>({
       label: 'edistyminen'
     },
     table: {
+      loading: 'Ladataan…',
       noData: 'Ei tietoja'
     },
     toast: {

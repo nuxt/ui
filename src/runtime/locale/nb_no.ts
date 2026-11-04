@@ -215,6 +215,7 @@ export default defineLocale<Messages>({
       label: 'fremdrift'
     },
     table: {
+      loading: 'Laster inn…',
       noData: 'Ingen data'
     },
     toast: {

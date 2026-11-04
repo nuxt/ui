@@ -215,6 +215,7 @@ export default defineLocale<Messages>({
       label: '进度'
     },
     table: {
+      loading: '加载中…',
       noData: '没有数据'
     },
     toast: {

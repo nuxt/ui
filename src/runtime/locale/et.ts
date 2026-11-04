@@ -215,6 +215,7 @@ export default defineLocale<Messages>({
       label: 'edenemine'
     },
     table: {
+      loading: 'Laadimine…',
       noData: 'Pole andmeid'
     },
     toast: {

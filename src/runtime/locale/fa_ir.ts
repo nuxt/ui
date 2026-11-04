@@ -216,6 +216,7 @@ export default defineLocale<Messages>({
       label: 'پیشرفت'
     },
     table: {
+      loading: 'در حال بارگذاری…',
       noData: 'داده‌ای موجود نیست'
     },
     toast: {
