@@ -164,7 +164,12 @@ const shareOpen = ref(false)
           <ThemeStudioToolbar vertical />
 
           <UFormField label="Color mode" :ui="{ root: 'text-xs', container: 'mt-1' }">
-            <ThemeStudioColorModeTabs class="w-full" />
+            <UColorModeTabs
+              size="sm"
+              :ui="{ list: 'bg-tint ring ring-default p-0.5', indicator: 'inset-y-0.5' }"
+              aria-label="Color mode"
+              class="w-full"
+            />
           </UFormField>
 
           <USeparator class="my-5" />
@@ -241,7 +246,10 @@ const shareOpen = ref(false)
 
       <template #right>
         <UTooltip text="Switch color mode" :kbds="['d']">
-          <ThemeStudioColorModeTabs
+          <UColorModeTabs
+            size="sm"
+            :ui="{ list: 'bg-tint ring ring-default p-0.5', indicator: 'inset-y-0.5' }"
+            aria-label="Color mode"
             data-keep-panels
             class="shrink-0"
           />
