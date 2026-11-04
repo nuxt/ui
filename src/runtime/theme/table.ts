@@ -12,8 +12,8 @@ export default defineTheme({
     tr: 'data-[selected=true]:bg-tint',
     th: 'relative px-4 py-3.5 text-sm text-strong text-start font-semibold has-[[role=checkbox]]:pe-0',
     td: 'p-4 text-sm text-muted whitespace-nowrap has-[[role=checkbox]]:pe-0 data-[selected=true]:bg-tint outline-focus focus-visible:outline-(length:--ui-focus-width) -outline-offset-(--ui-focus-width)',
-    resizer: 'absolute inset-y-0 inset-e-0 w-2 cursor-col-resize select-none touch-none after:absolute after:inset-y-0 after:inset-e-0 after:w-px hover:after:bg-(--ui-border-strong) data-[resizing=true]:after:bg-(--ui-border-strong) after:transition-colors',
-    separator: 'absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)',
+    resizer: 'absolute z-2 inset-y-0 -inset-e-1 w-2 cursor-col-resize select-none touch-none after:absolute after:inset-y-0 after:inset-e-1 after:w-px hover:after:bg-(--ui-border-strong) data-[resizing=true]:after:bg-(--ui-border-strong) after:transition-colors',
+    separator: 'absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)',
     empty: 'py-6 text-center text-sm text-muted',
     loading: 'py-6 text-center'
   },

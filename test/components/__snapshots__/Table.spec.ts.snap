@@ -19,7 +19,7 @@ exports[`Table > renders with as correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
@@ -82,7 +82,7 @@ exports[`Table > renders with body-bottom slot correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
@@ -145,7 +145,7 @@ exports[`Table > renders with body-top slot correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">Body top slot<tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap has-[[role=checkbox]]:pe-0 data-[selected=true]:bg-tint outline-focus focus-visible:outline-(length:--ui-focus-width) -outline-offset-(--ui-focus-width)">m5gr84i9</td>
@@ -207,7 +207,7 @@ exports[`Table > renders with caption correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
@@ -270,7 +270,7 @@ exports[`Table > renders with caption slot correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
@@ -333,7 +333,7 @@ exports[`Table > renders with cell slot correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
@@ -396,7 +396,7 @@ exports[`Table > renders with class correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
@@ -482,7 +482,7 @@ exports[`Table > renders with column pinning and footer correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
@@ -622,7 +622,7 @@ exports[`Table > renders with column pinning and footer correctly 1`] = `
       <!--v-if-->
     </tbody>
     <tfoot data-slot="table-tfoot" class="relative *:data-[slot=table-separator]:z-2">
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
       <tr data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <th data-pinned="start" data-slot="table-th" class="px-4 py-3.5 text-sm text-strong text-start font-semibold has-[[role=checkbox]]:pe-0 sticky bg-default/75 z-1" style="inset-inline-start: 0px;">
           <!---->
@@ -691,7 +691,7 @@ exports[`Table > renders with columns correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
@@ -831,7 +831,7 @@ exports[`Table > renders with columns correctly 1`] = `
       <!--v-if-->
     </tbody>
     <tfoot data-slot="table-tfoot" class="relative *:data-[slot=table-separator]:z-2">
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
       <tr data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <th data-pinned="false" data-slot="table-th" class="relative px-4 py-3.5 text-sm text-strong text-start font-semibold has-[[role=checkbox]]:pe-0">
           <!---->
@@ -877,7 +877,7 @@ exports[`Table > renders with data correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
@@ -927,7 +927,7 @@ exports[`Table > renders with empty correctly 1`] = `
     <!--v-if-->
     <thead data-slot="table-thead" class="relative [--ui-accent:var(--ui-primary)]">
       <tr data-slot="table-tr" class="data-[selected=true]:bg-tint"></tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr>
@@ -981,7 +981,7 @@ exports[`Table > renders with empty slot correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr>
@@ -989,7 +989,7 @@ exports[`Table > renders with empty slot correctly 1`] = `
       </tr>
     </tbody>
     <tfoot data-slot="table-tfoot" class="relative *:data-[slot=table-separator]:z-2">
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
       <tr data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <th data-pinned="false" data-slot="table-th" class="relative px-4 py-3.5 text-sm text-strong text-start font-semibold has-[[role=checkbox]]:pe-0">
           <!---->
@@ -1035,7 +1035,7 @@ exports[`Table > renders with expanded slot correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
@@ -1098,7 +1098,7 @@ exports[`Table > renders with header slot correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
@@ -1161,7 +1161,7 @@ exports[`Table > renders with loading animation carousel correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
@@ -1224,7 +1224,7 @@ exports[`Table > renders with loading animation carousel-inverse correctly 1`] =
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
@@ -1287,7 +1287,7 @@ exports[`Table > renders with loading animation elastic correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
@@ -1350,7 +1350,7 @@ exports[`Table > renders with loading animation swing correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
@@ -1413,7 +1413,7 @@ exports[`Table > renders with loading color error correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
@@ -1476,7 +1476,7 @@ exports[`Table > renders with loading color info correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
@@ -1539,7 +1539,7 @@ exports[`Table > renders with loading color neutral correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
@@ -1602,7 +1602,7 @@ exports[`Table > renders with loading color primary correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
@@ -1665,7 +1665,7 @@ exports[`Table > renders with loading color secondary correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
@@ -1728,7 +1728,7 @@ exports[`Table > renders with loading color success correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
@@ -1791,7 +1791,7 @@ exports[`Table > renders with loading color warning correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
@@ -1854,7 +1854,7 @@ exports[`Table > renders with loading correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
@@ -1940,7 +1940,7 @@ exports[`Table > renders with loading slot correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr>
@@ -1948,7 +1948,7 @@ exports[`Table > renders with loading slot correctly 1`] = `
       </tr>
     </tbody>
     <tfoot data-slot="table-tfoot" class="relative *:data-[slot=table-separator]:z-2">
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
       <tr data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <th data-pinned="false" data-slot="table-th" class="relative px-4 py-3.5 text-sm text-strong text-start font-semibold has-[[role=checkbox]]:pe-0">
           <!---->
@@ -2017,7 +2017,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
@@ -2157,7 +2157,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
       <!--v-if-->
     </tbody>
     <tfoot data-slot="table-tfoot" class="relative *:data-[slot=table-separator]:z-2">
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
       <tr data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <th data-pinned="false" data-slot="table-th" class="relative px-4 py-3.5 text-sm text-strong text-start font-semibold has-[[role=checkbox]]:pe-0 custom-heading-class" style="background-color: black;">
           <!---->
@@ -2203,7 +2203,7 @@ exports[`Table > renders with meta prop correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint custom-row-class" style="background-color: lightgray;">
@@ -2266,7 +2266,7 @@ exports[`Table > renders with row pinning and virtualization correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <!--v-if-->
@@ -2296,7 +2296,7 @@ exports[`Table > renders with row pinning correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-pinned="top" data-slot="table-tr" class="data-[selected=true]:bg-tint">
@@ -2359,7 +2359,7 @@ exports[`Table > renders with sticky correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
@@ -2422,7 +2422,7 @@ exports[`Table > renders with ui correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="table-tr" class="data-[selected=true]:bg-tint">
@@ -2508,14 +2508,14 @@ exports[`Table > renders with virtualize and sticky correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <!--v-if-->
       <!--v-if-->
     </tbody>
     <tfoot data-slot="table-tfoot" class="*:data-[slot=table-separator]:z-2 sticky bottom-0 inset-x-0 bg-default/75 backdrop-blur-sm z-1">
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
       <tr data-slot="table-tr" class="data-[selected=true]:bg-tint">
         <th data-pinned="false" data-slot="table-th" class="relative px-4 py-3.5 text-sm text-strong text-start font-semibold has-[[role=checkbox]]:pe-0">
           <!---->
@@ -2561,7 +2561,7 @@ exports[`Table > renders with virtualize correctly 1`] = `
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <!--v-if-->
@@ -2591,7 +2591,7 @@ exports[`Table > renders with virtualize external scroll element correctly 1`] =
           <!--v-if-->
         </th>
       </tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <!--v-if-->
@@ -2608,7 +2608,7 @@ exports[`Table > renders without data correctly 1`] = `
     <!--v-if-->
     <thead data-slot="table-thead" class="relative [--ui-accent:var(--ui-primary)]">
       <tr data-slot="table-tr" class="data-[selected=true]:bg-tint"></tr>
-      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--ui-border-strong)"></tr>
+      <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr>
