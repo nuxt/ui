@@ -73,7 +73,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `ui?: { item?: ClassNameValue, itemWithChildren?: ClassNameValue, link?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLabel?: ClassNameValue, linkTrailing?: ClassNameValue, linkTrailingIcon?: ClassNameValue, listWithChildren?: ClassNameValue }`{lang="ts-type"}
 
 ::note
-A unique identifier is required for each item. By default, the component uses the `value` property and falls back to the label when no value is provided. Use the `valueKey` prop to specify a different property, or `getKey` to compute a unique identifier. The `labelKey` prop changes which property is displayed as the label, so it only affects the identifier of items that fall back to their label.
+A unique identifier is required for each item. By default, the component uses the `value` property and falls back to the label when no value is provided. A fallback label must not match the identifier of another item, including its `value`. Use the `valueKey` prop to specify a different property, or `getKey` to compute a unique identifier. The `labelKey` prop changes which property is displayed as the label, so it only affects the identifier of items that fall back to their label.
 ::
 
 ::component-code
