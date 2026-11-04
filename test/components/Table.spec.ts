@@ -835,14 +835,21 @@ describe('Table', () => {
   })
 
   it('makes a cell focused from code the active cell', async () => {
-    const wrapper = await mountSuspended(Table, { props: { data: data.slice(0, 2), columns: [{ accessorKey: 'id' }, { accessorKey: 'email' }] as any, features: { cellSelectionFeature } } })
+    const wrapper = await mountSuspended(Table, {
+      props: { data: data.slice(0, 2), columns: [{ accessorKey: 'id' }, { accessorKey: 'email' }] as any, features: { cellSelectionFeature } },
+      attachTo: document.body
+    })
     const tableApi = (wrapper.vm as any).tableApi
     tableApi.selectAllCells()
     await flushPromises()
-    await wrapper.findAll('tbody td')[3]!.trigger('focus')
+    const cell = wrapper.findAll('tbody td')[3]!.element as HTMLElement
+    cell.focus()
+    await flushPromises()
 
+    expect(document.activeElement).toBe(cell)
     expect(tableApi.getFocusedCell().id).toBe('1_email')
     expect(tableApi.getSelectedCellCount()).toBe(1)
+    wrapper.unmount()
   })
 
   it('moves the tab stop to the entry cell when the active cell is hidden', async () => {

@@ -674,7 +674,7 @@ function getCellSpan(span: number) {
 }
 
 function isInteractive(target: EventTarget | null) {
-  return target instanceof Element && !!target.closest('a, button, input, label, select, textarea, [contenteditable]:not([contenteditable="false"]), [role="button"], [role="slider"]')
+  return target instanceof Element && !!target.closest('a, button, input, label, select, textarea, [contenteditable]:not([contenteditable="false"]), [role="button"], [role="checkbox"], [role="radio"], [role="switch"], [role="slider"]')
 }
 
 let isPointerFocus = false
