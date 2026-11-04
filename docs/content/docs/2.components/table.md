@@ -381,7 +381,7 @@ You can group rows based on a given column value and show/hide sub rows via some
 #### Important parts
 
 * Add `grouping` prop with an array of column ids you want to group by.
-* Add `features` prop with `columnGroupingFeature`, `rowAggregationFeature`, `groupedRowModel: createGroupedRowModel()` and an `aggregationFns` map of the aggregation functions your columns use, like `{ sum: aggregationFn_sum }`, all imported from `@tanstack/vue-table`.
+* Add `features` prop with `columnGroupingFeature`, `rowAggregationFeature`, and `groupedRowModel: createGroupedRowModel()`, all imported from `@tanstack/vue-table`. The built-in aggregation functions are registered by the table.
 * Add `options` prop for the grouping options like `groupedColumnMode`, and `autoResetExpanded: false` to keep groups open when the data changes.
 * Add `initial-state` prop like `{ expanded: true }` to show the groups expanded.
 * Expand rows via `row.toggleExpanded()` method on any cell of the row. Keep in mind, it also toggles `#expanded` slot.
@@ -555,7 +555,7 @@ class: '!p-0'
 
 ### With column span
 
-You can merge cells with the TanStack Table [Cell Spanning APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/cell-spanning) by registering `cellSpanningFeature` through the `features` prop. Use `spanRows` on a column definition to merge consecutive cells with the same value, and `spanColumns` to make a cell span the columns after it.
+You can merge cells with the TanStack Table [Cell Spanning APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/cell-spanning) by registering `cellSpanningFeature` through the `features` prop. Use `spanRows` on a column definition to merge consecutive cells with the same value, and `spanColumns` to make a cell span the columns after it. Row spans count data rows only, so don't combine `spanRows` with the `expanded` slot.
 
 ::component-example
 ---

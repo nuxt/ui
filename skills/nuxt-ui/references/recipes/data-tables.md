@@ -100,7 +100,7 @@ const filteredRows = computed(() => {
 
 ## With row selection
 
-Row selection uses TanStack Table's `rowSelection` state — a `Record<string, true>` keyed by row id (the row index unless `get-row-id` is set). Unselected rows are absent from it. Set `get-row-id` to a stable unique string ID when replacing data, filtering it before passing it to the table, or fetching server pages.
+Row selection uses TanStack Table's `rowSelection` state: a `Record<string, true>` keyed by row id, which is the row index unless `get-row-id` is set. Unselected rows are absent from it. Set `get-row-id` to a stable unique string ID when replacing data, filtering it before passing it to the table, or fetching server pages.
 
 ```vue
 <script setup lang="ts">
@@ -148,7 +148,7 @@ const columns: TableColumn[] = [{
 
 ## With pagination
 
-Pagination is not in `UTable`'s default features: register `rowPaginationFeature` and a `paginatedRowModel` through the `features` prop (read once, so declare it in the script). Bind `v-model:pagination`, then wire `UPagination` to it and to the table API. `UPagination`'s `total` is total **items** (not pages) — it calculates page count from `total / items-per-page`.
+Pagination is not in `UTable`'s default features: register `rowPaginationFeature` and a `paginatedRowModel` through the `features` prop. It is read once, so declare it in the script. Bind `v-model:pagination`, then wire `UPagination` to it and to the table API. `UPagination`'s `total` is the total number of **items**, not pages. It calculates page count from `total / items-per-page`.
 
 ```vue
 <script setup lang="ts">

@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import { resolveComponent } from 'vue'
 import {
-  aggregationFn_count,
-  aggregationFn_max,
-  aggregationFn_sum,
-  aggregationFn_uniqueCount,
   columnGroupingFeature,
   createGroupedRowModel,
   rowAggregationFeature
@@ -169,13 +165,7 @@ const columns: TableColumn<Payment>[] = [
 const features = {
   columnGroupingFeature,
   rowAggregationFeature,
-  groupedRowModel: createGroupedRowModel(),
-  aggregationFns: {
-    count: aggregationFn_count,
-    max: aggregationFn_max,
-    sum: aggregationFn_sum,
-    uniqueCount: aggregationFn_uniqueCount
-  }
+  groupedRowModel: createGroupedRowModel()
 }
 </script>
 
