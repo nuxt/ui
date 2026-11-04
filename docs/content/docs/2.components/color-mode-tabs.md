@@ -21,6 +21,17 @@ The ColorModeTabs component extends the [Tabs](/docs/components/tabs) component,
 The tabs default to `color="neutral"`.
 ::
 
+### Size
+
+Use the `size` prop to change the size of the ColorModeTabs.
+
+::component-code{prefix="color-mode"}
+---
+props:
+  size: md
+---
+::
+
 ## Examples
 
 ### With labels
@@ -29,8 +40,9 @@ The labels are visually hidden by default and stay available to assistive techno
 
 ::component-code{prefix="color-mode"}
 ---
+prettier: true
 ignore:
-  - ui
+  - ui.label
 props:
   ui:
     label: 'not-sr-only'
