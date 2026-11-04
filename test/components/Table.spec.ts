@@ -307,7 +307,8 @@ describe('Table', () => {
             h('input', { 'type': 'checkbox', 'aria-label': 'Select row' }),
             h('button', { type: 'button' }, 'Edit'),
             h('a', { href: '#' }, 'Details'),
-            h('label', {}, [h('input', { type: 'checkbox' }), 'Toggle'])
+            h('label', {}, [h('input', { type: 'checkbox' }), 'Toggle']),
+            h('div', { role: 'switch button', tabindex: 0 }, 'Custom')
           ]
         }] as any,
         onSelect
@@ -330,6 +331,7 @@ describe('Table', () => {
     await wrapper.find('tbody tr button').trigger('click')
     await wrapper.find('tbody tr a').trigger('click')
     await wrapper.find('tbody tr label').trigger('click')
+    await wrapper.find('tbody tr [role="switch button"]').trigger('click')
     expect(wrapper.find<HTMLInputElement>('tbody tr label input').element.checked).toBe(true)
 
     expect(onSelect).not.toHaveBeenCalled()
