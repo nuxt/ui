@@ -119,9 +119,8 @@ const gridUi = {
         :items="tabs"
         :content="false"
         color="neutral"
-        size="sm"
         :ui="{
-          root: 'w-68',
+          root: 'w-72',
           trigger: 'w-1/2'
         }"
         data-keep-panels
