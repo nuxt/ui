@@ -196,6 +196,14 @@ props:
 ---
 ::
 
+A `pill` Tabs is as tall as a [Button](/docs/components/button) of the same size: the track takes half of the vertical padding of the tabs. Set `--ui-tabs-track-padding` on the `list` slot to change the track, the height stays the same.
+
+```vue
+<template>
+  <UTabs :items="items" :ui="{ list: '[--ui-tabs-track-padding:--spacing(0.5)]' }" />
+</template>
+```
+
 ### Orientation
 
 Use the `orientation` prop to change the orientation of the Tabs. Defaults to `horizontal`.
