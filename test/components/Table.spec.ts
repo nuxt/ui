@@ -762,6 +762,9 @@ describe('Table', () => {
 
     expect(resizer.attributes('role')).toBe('separator')
     expect(resizer.attributes('aria-labelledby')).toBe(wrapper.find('thead th').attributes('id'))
+
+    const custom = await mountSuspended(Table, { props: { data, columns: [{ accessorKey: 'id', enableResizing: true, meta: { attrs: { th: { id: 'id-header' } } } }] as any } })
+    expect(custom.find('[data-slot="table-resizer"]').attributes('aria-labelledby')).toBe('id-header')
     await resizer.trigger('keydown', { key: 'ArrowRight' })
     expect(resizer.attributes('aria-valuenow')).toBe('130')
     await resizer.trigger('keydown', { key: 'Enter' })
@@ -775,6 +778,13 @@ describe('Table', () => {
     await wrapper.setProps({ state: { sorting: [{ id: 'email', desc: true }] } })
 
     expect(tableApi.atoms.sorting.get()).toEqual([{ id: 'email', desc: true }])
+  })
+
+  it('leaves cells out of the tab order when cell selection is disabled', async () => {
+    const wrapper = await mountSuspended(Table, { props: { data: data.slice(0, 1), columns: [{ accessorKey: 'id' }] as any, features: { cellSelectionFeature }, options: { enableCellSelection: false } } })
+
+    expect(wrapper.find('tbody td').attributes('tabindex')).toBeUndefined()
+    expect(wrapper.find('table').attributes('role')).toBeUndefined()
   })
 
   it('clears the cell selection when the data is replaced', async () => {

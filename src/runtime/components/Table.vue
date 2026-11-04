@@ -742,7 +742,7 @@ function focusSelectedCell() {
 }
 
 function getCellSelectionListeners(cell: Cell<TableFeatures, T, unknown>) {
-  if (!hasCellSelection) {
+  if (!isCellSelectionEnabled.value) {
     return {}
   }
   return {
@@ -802,6 +802,12 @@ function onResizerKeydown(e: KeyboardEvent, header: Header<TableFeatures, T, unk
     ...sizing,
     ...Object.fromEntries(leaves.map(leaf => [leaf.column.id, Math.max(leaf.column.columnDef.minSize ?? 20, leaf.getSize() + delta / leaves.length)]))
   }))
+}
+
+// The resize handle is labelled by its header, through the `id` set with `meta.attrs.th` when there is one.
+function getHeaderId(header: Header<TableFeatures, T, unknown>) {
+  const attrs = resolveValue(header.column.columnDef.meta?.attrs?.th, header) as Record<string, unknown> | undefined
+  return (attrs?.id as string | undefined) ?? `${id}-${header.id}`
 }
 
 // A group header resizes its leaves, so resetting it resets them.
@@ -949,7 +955,7 @@ defineExpose({
           v-if="!isCellCovered(cell)"
           :data-pinned="cell.column.getIsPinned()"
           :data-selected="hasCellSelection ? cell.getIsSelected() : undefined"
-          :tabindex="hasCellSelection ? getCellTabIndex(cell) : undefined"
+          :tabindex="isCellSelectionEnabled ? getCellTabIndex(cell) : undefined"
           :aria-selected="isCellSelectionEnabled ? cell.getIsSelected() : undefined"
           :colspan="hasCellSpanning ? getCellSpan(cell.getColSpan()) : undefined"
           :rowspan="hasRowSpanning ? getCellSpan(cell.getRowSpan()) : undefined"
@@ -1007,7 +1013,7 @@ defineExpose({
         <tr v-for="headerGroup in headerGroups" :key="headerGroup.id" data-slot="table-tr" :class="ui.tr({ class: [props.ui?.tr] })">
           <th
             v-for="{ header, rowSpan } in headerGroup.headers"
-            :id="isResizable(header) ? `${id}-${header.id}` : undefined"
+            :id="isResizable(header) ? getHeaderId(header) : undefined"
             :key="header.id"
             :data-pinned="getHeaderPinned(header)"
             :scope="header.colSpan > 1 ? 'colgroup' : 'col'"
@@ -1037,7 +1043,7 @@ defineExpose({
               role="separator"
               aria-orientation="vertical"
               tabindex="0"
-              :aria-labelledby="`${id}-${header.id}`"
+              :aria-labelledby="getHeaderId(header)"
               :aria-valuenow="header.getSize()"
               :aria-valuemin="header.column.columnDef.minSize ?? 20"
               :aria-valuemax="header.column.columnDef.maxSize"
