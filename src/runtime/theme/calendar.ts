@@ -40,8 +40,8 @@ export default defineTheme({
         headingLabel: 'text-xs',
         cell: 'text-xs',
         cellWeek: 'text-xs',
-        headCell: 'text-[10px]',
-        headCellWeek: 'text-[10px]',
+        headCell: 'text-[0.625rem]',
+        headCellWeek: 'text-[0.625rem]',
         body: 'space-y-2 pt-2'
       },
       sm: {

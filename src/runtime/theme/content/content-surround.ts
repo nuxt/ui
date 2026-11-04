@@ -6,7 +6,7 @@ export default defineTheme({
     link: 'group block px-6 py-8 rounded-lg border border-default hover:bg-tint outline-focus focus-visible:outline-(length:--ui-focus-width) focus-visible:border-primary transition-colors',
     linkLeading: 'inline-flex items-center rounded-full p-1.5 bg-soft group-hover:bg-primary/10 ring ring-strong mb-4 group-hover:ring-primary/50 transition',
     linkLeadingIcon: 'size-5 shrink-0 text-strong group-hover:text-primary transition-[color,translate] ease-out motion-reduce:transition-none',
-    linkTitle: 'font-medium text-[15px] text-strong mb-1 truncate',
+    linkTitle: 'font-medium text-[0.9375rem] text-strong mb-1 truncate',
     linkDescription: 'text-sm text-muted line-clamp-2'
   },
   variants: {

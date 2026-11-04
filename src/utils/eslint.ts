@@ -14,8 +14,8 @@ export interface NuxtUIESLintOptions {
    */
   files?: string[]
   /**
-   * The palette each color alias points at, `{ error: 'red' }`. Read from the
-   * `@plugin "@nuxt/ui/colors"` block of `entryPoint` when left out.
+   * The palette each color alias points at, `{ error: 'red', tertiary: 'indigo' }`. Read from
+   * the `@plugin "@nuxt/ui/colors"` blocks of `entryPoint` and the stylesheets it imports when left out.
    */
   colors?: Record<string, string>
   /**

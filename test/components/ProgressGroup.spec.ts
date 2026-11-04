@@ -47,6 +47,21 @@ describe('ProgressGroup', () => {
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Trailing slot' } }]
   ])
 
+  it('reads an added color\'s variable and falls back to a CSS color name', async () => {
+    const wrapper = await mountSuspended(ProgressGroup, {
+      props: {
+        items: [{ label: 'System', value: 24, color: 'tertiary' }, { label: 'Apps', value: 8, color: 'red' }, { label: 'Other', value: 4, color: '#8b5cf6' }],
+        max: 128
+      }
+    })
+    const indicators = wrapper.findAll('[data-slot="progress-group-indicator"]')
+
+    expect(indicators[0]!.classes()).toContain('[--ui-accent:var(--ui-tertiary)]')
+    expect(indicators[0]!.attributes('style')).toContain('background-color: var(--ui-tertiary, tertiary)')
+    expect(indicators[1]!.attributes('style')).toContain('background-color: var(--ui-red, red)')
+    expect(indicators[2]!.attributes('style')).toContain('background-color: #8b5cf6')
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(ProgressGroup, {
       props: {

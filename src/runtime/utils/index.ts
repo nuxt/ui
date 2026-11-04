@@ -2,6 +2,7 @@ import { defu } from 'defu'
 import { isEqual } from 'ohash/utils'
 import { withTrailingSlash, withLeadingSlash, joinURL } from 'ufo'
 import type { GetItemKeys } from '../types/utils'
+import { colorName, colors } from '../theme/color'
 
 export function pick<Data extends object, Keys extends keyof Data>(data: Data, keys: Keys[]): Pick<Data, Keys> {
   const result = {} as Pick<Data, Keys>
@@ -224,6 +225,18 @@ export function resolveAs<T extends { root: any }>(as: any, defaults: T): T {
   }
 
   return defu(as, defaults) as T
+}
+
+/**
+ * A `color` prop that also takes any CSS color, as a CSS value. A name reads the
+ * variable of the color it may be, one the app adds with the `@nuxt/ui/colors`
+ * plugin, and falls back to itself as a CSS color name, like `red`.
+ */
+export function resolveColor(color: string): string {
+  if ((colors as readonly string[]).includes(color)) {
+    return `var(--ui-${color})`
+  }
+  return colorName.test(color) ? `var(--ui-${color}, ${color})` : color
 }
 
 export * from './content'
