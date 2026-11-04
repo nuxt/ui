@@ -363,6 +363,7 @@ export function useThemeStudio() {
     // overlay surface is set, which the shuffle never does.
     const layout: NonNullable<ThemeDoc['layout']> = {}
     if (Math.random() < 0.25) layout.density = pick(['compact', 'comfortable'] as const)
+    if (Math.random() < 0.2) layout.tint = pick(['subtle', 'vivid'] as const)
     if (Math.random() < 0.15) layout.gutter = pick([16, 32])
     if (Math.random() < 0.1) layout.containerWidth = pick([1152, 1440])
     if (Math.random() < 0.1) layout.headerHeight = pick([56, 72])

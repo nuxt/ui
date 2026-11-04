@@ -72,6 +72,26 @@ export interface ThemeLayout extends Partial<Record<LayoutField, number>> {
   density?: Exclude<Density, 'default'>
   /** Cells of the control scale, by variable, in px, only where they differ from the density. */
   scale?: Record<string, number>
+  tint?: Exclude<Tint, 'default'>
+}
+
+/* ----------------------------------------------------------------- tint -- */
+
+export type Tint = 'subtle' | 'default' | 'vivid'
+
+export const TINTS: Tint[] = ['subtle', 'default', 'vivid']
+
+/** The colors a tint reaches, neutral's fills are surfaces of their own. */
+export const TINT_COLORS = ['primary', 'secondary', 'success', 'info', 'warning', 'error'] as const
+
+/**
+ * The opacity of each color's fills and borders per tint, the recipes of
+ * src/runtime/css/tokens.css at `default`. `bg-strong` is the hover of
+ * `bg-soft`, so it stays above it at every step.
+ */
+export const TINT_LEVELS: Record<Exclude<Tint, 'default'>, Record<string, number>> = {
+  subtle: { 'bg-tint': 3, 'bg-soft': 6, 'bg-strong': 10, 'border-default': 15, 'border-strong': 35 },
+  vivid: { 'bg-tint': 10, 'bg-soft': 20, 'bg-strong': 30, 'border-default': 40, 'border-strong': 70 }
 }
 
 /* --------------------------------------------------------------- charts -- */
@@ -122,6 +142,7 @@ export const EXTRAS_TABLES = {
     unit: column.key === 'text' ? 'rem' : 'spacing'
   }]))),
   density: DENSITY_STEPS,
+  tint: { colors: TINT_COLORS, levels: TINT_LEVELS },
   fields: LAYOUT_FIELDS,
   gutterBase: GUTTER_BASE,
   charts: { defaults: CHART_DEFAULTS, colors: CHART_COLORS },
@@ -139,7 +160,8 @@ export type ExtrasTables = typeof EXTRAS_TABLES
 export const EXTRAS_VARIABLES = new Set([
   ...Object.keys(EXTRAS_TABLES.scale),
   ...Object.values(LAYOUT_FIELDS).map(field => field.variable),
-  ...CHART_SERIES.map(series => `--ui-chart-${series}`)
+  ...CHART_SERIES.map(series => `--ui-chart-${series}`),
+  ...TINT_COLORS.flatMap(color => Object.keys(TINT_LEVELS.vivid).map(role => `--ui-${color}-${role}`))
 ])
 
 export interface ExtrasInput {
@@ -186,6 +208,14 @@ export function buildExtras(input: ExtrasInput, tables: ExtrasTables, spacing: (
   const rawLayout = record(input.layout)
   const layout: ThemeLayout = {}
   if (rawLayout.density === 'compact' || rawLayout.density === 'comfortable') layout.density = rawLayout.density
+  if (rawLayout.tint === 'subtle' || rawLayout.tint === 'vivid') {
+    layout.tint = rawLayout.tint
+    for (const color of tables.tint.colors) {
+      for (const [role, value] of Object.entries(tables.tint.levels[layout.tint])) {
+        root[`--ui-${color}-${role}`] = `color-mix(in oklab, var(--ui-${color}) ${value}%, transparent)`
+      }
+    }
+  }
   const step = layout.density ? tables.density[layout.density] : 0
   const rawScale = record(rawLayout.scale)
   const scale: Record<string, number> = {}

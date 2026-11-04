@@ -21,7 +21,7 @@ type TokenSection = ColorSection | 'surfaces'
 export type SectionKey
   = | TokenSection
     | 'font' | 'type' | 'weights'
-    | 'icons' | 'radius' | 'controls' | 'page' | 'states' | 'charts'
+    | 'icons' | 'radius' | 'controls' | 'page' | 'states' | 'tint' | 'charts'
     | 'size' | 'buttons' | 'panels' | 'inputs'
 
 /** Which font fields the `font` and `type` sections each own. */
@@ -32,8 +32,9 @@ const TYPE_FIELDS = ['uppercase', 'italic', 'letterSpacing', 'lineHeight'] as co
 const LAYOUT_SECTIONS = {
   controls: ['density', 'scale', 'textStep'],
   page: ['gutter', 'containerWidth', 'headerHeight'],
-  states: ['focusWidth', 'disabledOpacity']
-} as const satisfies Record<'controls' | 'page' | 'states', readonly (keyof ThemeLayout)[]>
+  states: ['focusWidth', 'disabledOpacity'],
+  tint: ['tint']
+} as const satisfies Record<'controls' | 'page' | 'states' | 'tint', readonly (keyof ThemeLayout)[]>
 
 type LayoutSection = keyof typeof LAYOUT_SECTIONS
 
@@ -47,7 +48,7 @@ function ownedLayout(doc: ThemeDoc, section: LayoutSection) {
  * a toolbar control and carries its own `sectionDirty`.
  */
 export const SECTION_GROUPS: Record<'colors' | 'defaults', SectionKey[]> = {
-  colors: ['primary', 'neutral', ...SEMANTIC_ALIASES, 'charts'],
+  colors: ['primary', 'neutral', ...SEMANTIC_ALIASES, 'tint', 'charts'],
   defaults: ['size', 'buttons', 'panels', 'inputs']
 }
 
@@ -181,6 +182,7 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
     case 'page':
       return ownedLayout(doc, key)
     case 'states':
+    case 'tint':
       return ownedLayout(doc, key)
     case 'charts':
       return normalizeExtras(doc).charts ?? {}
@@ -356,6 +358,7 @@ export function mergeSection(current: ThemeDoc, base: ThemeDoc, key: SectionKey)
       mergeLayout(doc, base, key)
       break
     case 'states':
+    case 'tint':
       mergeLayout(doc, base, key)
       break
     case 'charts':
