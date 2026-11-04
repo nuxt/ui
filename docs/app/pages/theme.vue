@@ -120,6 +120,14 @@ const shareOpen = ref(false)
       <ThemeStudioViewSwitcher />
 
       <template #right>
+        <!-- only in the menu, which renders this cluster again in its header -->
+        <UColorModeTabs
+          size="sm"
+          :ui="{ list: 'bg-tint ring ring-default p-0.5', indicator: 'inset-y-0.5' }"
+          aria-label="Color mode"
+          class="hidden in-data-[slot=header-header]:flex"
+        />
+
         <UTooltip text="Ask" :kbds="['meta', 'I']" ignore-non-keyboard-focus>
           <UButton
             color="neutral"
@@ -162,15 +170,6 @@ const shareOpen = ref(false)
           </UFormField>
 
           <ThemeStudioToolbar vertical />
-
-          <UFormField label="Color mode" :ui="{ root: 'text-xs', container: 'mt-1' }">
-            <UColorModeTabs
-              size="sm"
-              :ui="{ list: 'bg-tint ring ring-default p-0.5', indicator: 'inset-y-0.5' }"
-              aria-label="Color mode"
-              class="w-full"
-            />
-          </UFormField>
 
           <USeparator class="my-5" />
 
