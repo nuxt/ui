@@ -250,12 +250,12 @@ export function useTheme() {
   })
 
   const style = [
-    { innerHTML: radiusStyle, id: 'nuxt-ui-radius', tagPriority: -2 },
-    { innerHTML: fontSizeStyle, id: 'nuxt-ui-font-size', tagPriority: -2 },
-    { innerHTML: blackAsPrimaryStyle, id: 'nuxt-ui-black-as-primary', tagPriority: -2 },
-    { innerHTML: fontStyle, id: 'nuxt-ui-font', tagPriority: -2 },
-    { innerHTML: customColorsStyle, id: THEME_TAG_IDS.customColors, tagPriority: -2 },
-    { innerHTML: cssVariablesStyle, id: THEME_TAG_IDS.cssVariables, tagPriority: -2 }
+    { innerHTML: radiusStyle, id: 'nuxt-ui-radius', tagPriority: 'critical' },
+    { innerHTML: fontSizeStyle, id: 'nuxt-ui-font-size', tagPriority: 'critical' },
+    { innerHTML: blackAsPrimaryStyle, id: 'nuxt-ui-black-as-primary', tagPriority: 'critical' },
+    { innerHTML: fontStyle, id: 'nuxt-ui-font', tagPriority: 'critical' },
+    { innerHTML: customColorsStyle, id: THEME_TAG_IDS.customColors, tagPriority: 'critical' },
+    { innerHTML: cssVariablesStyle, id: THEME_TAG_IDS.cssVariables, tagPriority: 'critical' }
   ]
 
   /**
