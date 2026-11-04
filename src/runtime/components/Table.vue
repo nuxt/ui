@@ -759,7 +759,7 @@ function getCellSelectionListeners(cell: Cell<TableFeatures, T, unknown>) {
 const entryCell = computed(() => {
   const center = virtualizer ? virtualItems.value.map(item => centerRows.value[item.index]) : centerRows.value
   for (const row of [...topRows.value, ...center, ...bottomRows.value]) {
-    const cell = row?.getVisibleCells().find(cell => cell.getCanSelect())
+    const cell = row?.getVisibleCells().find(cell => !isCellCovered(cell) && cell.getCanSelect())
     if (cell) {
       return cell.id
     }
