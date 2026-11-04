@@ -231,7 +231,8 @@ import {
   filterFn_includesString,
   filterFn_inNumberRange,
   filterFn_weakEquals,
-  makeStateUpdater,
+  functionalUpdate,
+  getInitialTableState,
   sortFn_alphanumeric,
   sortFn_datetime,
   sortFn_text
@@ -286,8 +287,8 @@ function processColumns(columns: TableColumn<T>[]): TableColumn<T>[] {
     }
 
     if (!col.cell && !props.defaultColumn?.cell) {
-      col.cell = ({ getValue }) => {
-        const value = getValue()
+      col.cell = ({ renderValue }) => {
+        const value = renderValue()
         if (value === '' || value === null || value === undefined) {
           return '\u00A0'
         }
@@ -405,7 +406,7 @@ const hasCellSpanning = 'cellSpanningFeature' in registeredFeatures
 // A row span can't reach a row the virtualizer doesn't render, so virtualized tables only span columns.
 const hasRowSpanning = hasCellSpanning && !props.virtualize
 
-// Each model is a state slice with a matching `on<Slice>Change` option, so supporting a new slice only takes a `defineModel` and an entry here.
+// Each model is a state slice, so supporting a new slice only takes a `defineModel` and an entry here.
 const models: { [K in keyof TableState<TableFeatures>]-?: Ref<TableState<TableFeatures>[K] | undefined> } = {
   globalFilter: globalFilterState,
   columnFilters: columnFiltersState,
@@ -423,35 +424,36 @@ const models: { [K in keyof TableState<TableFeatures>]-?: Ref<TableState<TableFe
   cellSelection: cellSelectionState
 }
 
-// TanStack falls back to the initial state for a slice that is present but `undefined`, so only bound models are passed.
-const state = computed(() => {
-  const state: Record<string, unknown> = { ...props.state }
-  for (const [key, model] of Object.entries(models)) {
-    if (model.value !== undefined) {
-      state[key] = model.value
-    }
-  }
-  return state
-})
-
-// An unbound model leaves the slice in TanStack's own state, and a model bound after setup takes over from then on.
-const onChangeHandlers = Object.fromEntries(Object.entries(models).map(([key, model]) => [
-  `on${upperFirst(key)}Change`,
-  (updaterOrValue: Updater<any>) => model.value === undefined ? makeStateUpdater(key, tableApi)(updaterOrValue) : valueUpdater(updaterOrValue, model)
-]))
+// Each model backs the external atom of its slice. TanStack writes a change to the atom before emitting it,
+// so the table API reads the new state right away, in the `update:*` handler included. An unbound model keeps its own value.
+const initialState = getInitialTableState(registeredFeatures, props.initialState) as unknown as Record<string, unknown>
+const atoms = Object.fromEntries(Object.keys(initialState).filter(key => key in models).map((key) => {
+  const model = models[key as keyof typeof models] as Ref<unknown>
+  const get = () => model.value ?? props.state?.[key as keyof typeof props.state] ?? initialState[key]
+  return [key, {
+    get,
+    set: (updater: Updater<unknown>) => {
+      model.value = functionalUpdate(updater, get())
+    },
+    subscribe: (observer: ((value: unknown) => void) | { next?: (value: unknown) => void }) => ({
+      unsubscribe: watch(get, typeof observer === 'function' ? observer : value => observer.next?.(value), { flush: 'sync' })
+    })
+  }]
+}))
 
 const tableOptions = computed(() => ({
   // Columns resize while dragging, in the text direction.
   columnResizeMode: 'onChange' as const,
   columnResizeDirection: dir.value,
+  // `data` is copied on every deep change, which would clear the cell selection after each inline edit.
+  autoResetCellSelection: false,
   ...props.options,
   ...tableProps.value,
-  ...onChangeHandlers,
   features: registeredFeatures,
+  atoms,
   data,
   columns,
-  meta: meta.value,
-  state
+  meta: meta.value
 }))
 
 // The adapter watches the keys of the object it gets, so this proxy keeps `options` and the forwarded props in sync after setup, keys added later included.
@@ -600,10 +602,6 @@ function FlexRender({ render, props, cell }: { render?: unknown, props?: unknown
   return h(rendered as any, props as any)
 }
 
-function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
-  ref.value = typeof updaterOrValue === 'function' ? updaterOrValue(ref.value) : updaterOrValue
-}
-
 function onRowSelect(e: Event, row: TableRow<T>) {
   if (!props.onSelect || !row.getCanSelect()) {
     return
@@ -715,8 +713,35 @@ function getCellSelectionListeners(cell: Cell<TableFeatures, T, unknown>) {
   return {
     mousedown: (e: MouseEvent) => onCellMousedown(e, cell),
     mouseenter: cell.getSelectionExtendHandler(),
-    keydown: onCellKeydown
+    keydown: onCellKeydown,
+    focus: () => onCellFocus(cell)
   }
+}
+
+// Until a cell is selected, the first cell takes the roving `tabindex` so the keyboard can reach the grid.
+const entryCell = computed(() => {
+  const row = topRows.value[0] ?? centerRows.value[0]
+  const column = tableApi.getVisibleLeafColumns()[0]
+  return row && column ? `${row.id}_${column.id}` : undefined
+})
+
+function getCellTabIndex(cell: Cell<TableFeatures, T, unknown>) {
+  if (!tableApi.getFocusedCell()) {
+    return cell.id === entryCell.value ? 0 : -1
+  }
+  return cell.getTabIndex()
+}
+
+function onCellFocus(cell: Cell<TableFeatures, T, unknown>) {
+  if (!tableApi.getFocusedCell()) {
+    tableApi.setFocusedCell(cell.row.id, cell.column.id)
+  }
+}
+
+// A group header resizes its leaves, so resetting it resets them.
+function resetHeaderSize(header: Header<TableFeatures, T, unknown>) {
+  const ids = header.getLeafHeaders().map(leaf => leaf.column.id)
+  tableApi.setColumnSizing(sizing => Object.fromEntries(Object.entries(sizing).filter(([id]) => !ids.includes(id))))
 }
 
 // Like sorting, a resize handle is only rendered for columns that opt in with `enableResizing: true`.
@@ -731,8 +756,26 @@ function isResizable(header: Header<TableFeatures, T, unknown>) {
 // Once a column can be resized, every header and the table take their TanStack size.
 const hasResizableColumns = computed(() => tableApi.getAllLeafColumns().some(isColumnResizable))
 
+// A group header reports the side of any pinned leaf, so it is pinned only when all its leaves are, at the offset of its outer leaf.
+function getHeaderPinned(header: Header<TableFeatures, T, unknown>) {
+  const pins = header.getLeafHeaders().map(leaf => leaf.column.getIsPinned())
+  return pins.every(pin => pin === pins[0]) ? pins[0] : false
+}
+
+function getHeaderPinStyles(header: Header<TableFeatures, T, unknown>): Record<string, string> {
+  const pinned = getHeaderPinned(header)
+  const leaves = header.getLeafHeaders()
+  if (pinned === 'start') {
+    return { insetInlineStart: `${leaves[0]!.column.getStart('start')}px` }
+  }
+  if (pinned === 'end') {
+    return { insetInlineEnd: `${leaves[leaves.length - 1]!.column.getAfter('end')}px` }
+  }
+  return {}
+}
+
 function getHeaderStyles(header: Header<TableFeatures, T, unknown>) {
-  const styles = getColumnStyles(header.column)
+  const styles = getHeaderPinStyles(header)
   // A `size` is applied as soon as a column sets one, so pinned offsets match the rendered widths.
   if (hasResizableColumns.value || hasSize in header.column.columnDef) {
     styles.width = `${header.getSize()}px`
@@ -836,7 +879,7 @@ defineExpose({
           v-if="!isCellCovered(cell)"
           :data-pinned="cell.column.getIsPinned()"
           :data-selected="hasCellSelection ? cell.getIsSelected() : undefined"
-          :tabindex="hasCellSelection ? cell.getTabIndex() : undefined"
+          :tabindex="hasCellSelection ? getCellTabIndex(cell) : undefined"
           :colspan="hasCellSpanning ? getCellSpan(cell.getColSpan()) : undefined"
           :rowspan="hasRowSpanning ? getCellSpan(cell.getRowSpan()) : undefined"
           data-slot="table-td"
@@ -862,7 +905,7 @@ defineExpose({
     </tr>
 
     <tr
-      v-if="row.getIsExpanded()"
+      v-if="row.getIsExpanded() && !!slots.expanded"
       data-slot="table-tr"
       :class="ui.tr({ class: [props.ui?.tr] })"
       @vue:mounted="onExpandedRowMounted"
@@ -892,7 +935,7 @@ defineExpose({
           <th
             v-for="{ header, rowSpan } in headerGroup.headers"
             :key="header.id"
-            :data-pinned="header.column.getIsPinned()"
+            :data-pinned="getHeaderPinned(header)"
             :scope="header.colSpan > 1 ? 'colgroup' : 'col'"
             :colspan="header.colSpan > 1 ? header.colSpan : undefined"
             :rowspan="rowSpan > 1 ? rowSpan : undefined"
@@ -903,7 +946,7 @@ defineExpose({
                 props.ui?.th,
                 resolveValue(header.column.columnDef.meta?.class?.th, header)
               ],
-              pinned: !!header.column.getIsPinned()
+              pinned: !!getHeaderPinned(header)
             })"
             :style="[
               getHeaderStyles(header),
@@ -923,7 +966,7 @@ defineExpose({
               :class="ui.resizer({ class: props.ui?.resizer })"
               @mousedown="header.getResizeHandler()($event)"
               @touchstart.passive="header.getResizeHandler()($event)"
-              @dblclick="header.column.resetSize()"
+              @dblclick="resetHeaderSize(header)"
             />
           </th>
         </tr>
@@ -934,7 +977,7 @@ defineExpose({
       <tbody data-slot="table-tbody" :class="ui.tbody({ class: [props.ui?.tbody] })">
         <slot name="body-top" />
 
-        <template v-if="rows.length">
+        <template v-if="rows.length || topRows.length || bottomRows.length">
           <ReuseRowTemplate v-for="row in topRows" :key="row.id" :row="row" />
 
           <template v-if="virtualizer">
@@ -988,7 +1031,7 @@ defineExpose({
           <th
             v-for="header in footerGroup.headers"
             :key="header.id"
-            :data-pinned="header.column.getIsPinned()"
+            :data-pinned="getHeaderPinned(header)"
             :colspan="header.colSpan > 1 ? header.colSpan : undefined"
             data-slot="table-th"
             :class="ui.th({
@@ -996,10 +1039,10 @@ defineExpose({
                 props.ui?.th,
                 resolveValue(header.column.columnDef.meta?.class?.th, header)
               ],
-              pinned: !!header.column.getIsPinned()
+              pinned: !!getHeaderPinned(header)
             })"
             :style="[
-              getColumnStyles(header.column),
+              getHeaderPinStyles(header),
               resolveValue(header.column.columnDef.meta?.style?.th, header)
             ]"
             v-bind="resolveValue(header.column.columnDef.meta?.attrs?.th, header)"

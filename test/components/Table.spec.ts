@@ -1,4 +1,4 @@
-import { h, ref, computed } from 'vue'
+import { h, ref, computed, defineComponent } from 'vue'
 import { describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { flushPromises } from '@vue/test-utils'
@@ -609,6 +609,38 @@ describe('Table', () => {
     expect(onUpdate).toHaveBeenLastCalledWith([{ id: 'id', desc: true }])
   })
 
+  it('reads a bound model change synchronously, in its update event included', async () => {
+    const seen: string[][] = []
+    const wrapper = await mountSuspended(defineComponent({
+      setup() {
+        const rowSelection = ref({})
+        const table = ref()
+        return () => h(Table as any, {
+          'ref': table,
+          data,
+          'rowSelection': rowSelection.value,
+          'onUpdate:rowSelection': (value: any) => {
+            rowSelection.value = value
+            seen.push((table.value as any).tableApi.getSelectedRowModel().rows.map((row: any) => row.id))
+          }
+        })
+      }
+    }))
+    const tableApi = (wrapper.findComponent(Table).vm as any).tableApi
+    tableApi.getRowModel().rows[0].toggleSelected(true)
+
+    expect(seen).toEqual([['0']])
+    expect(tableApi.getSelectedRowModel().rows.map((row: any) => row.id)).toEqual(['0'])
+  })
+
+  it('emits a change with only a listener bound', async () => {
+    const onUpdate = vi.fn()
+    const wrapper = await mountSuspended(Table, { props: { data, 'onUpdate:sorting': onUpdate } })
+    ;(wrapper.vm as any).tableApi.setSorting([{ id: 'id', desc: true }])
+
+    expect(onUpdate).toHaveBeenLastCalledWith([{ id: 'id', desc: true }])
+  })
+
   it('keeps an unbound slice in TanStack state', async () => {
     const wrapper = await mountSuspended(Table, { props: { data } })
     ;(wrapper.vm as any).tableApi.setColumnVisibility({ email: false })
@@ -634,7 +666,44 @@ describe('Table', () => {
     const rows = wrapper.findAll('tbody tr')
     const successTotal = data.filter(row => row.status === 'success').reduce((acc, row) => acc + row.amount, 0)
     expect(rows[0]!.findAll('td').map(td => td.text())).toEqual(['success', `Total ${successTotal}`])
+    expect(rows[1]!.findAll('td')).toHaveLength(2)
     expect(rows[1]!.findAll('td')[0]!.text()).toBe('')
+  })
+
+  it('keeps pinned rows when no other row matches', async () => {
+    const wrapper = await mountSuspended(Table, { props: { data, rowPinning: { top: [data[0]!.id], bottom: [] }, getRowId: (row: any) => row.id, globalFilter: 'no match' } })
+
+    expect(wrapper.findAll('tbody tr')).toHaveLength(1)
+    expect(wrapper.find('tbody tr').attributes('data-pinned')).toBe('top')
+  })
+
+  it('renders the fallback value in default cells', async () => {
+    const wrapper = await mountSuspended(Table, { props: { data: [{ id: null }], columns: [{ accessorKey: 'id' }] as any, renderFallbackValue: '-' } })
+
+    expect(wrapper.find('tbody td').text()).toBe('-')
+  })
+
+  it('only pins a group header when all its columns are pinned', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data,
+        columns: [{ id: 'info', header: 'Info', columns: [{ accessorKey: 'id' }, { accessorKey: 'email' }] }, { accessorKey: 'status' }] as any,
+        columnPinning: { start: ['id'], end: [] }
+      }
+    })
+    const info = wrapper.findAll('thead th').find(th => th.text() === 'Info')!
+
+    expect(info.attributes('data-pinned')).toBe('false')
+    expect(info.attributes('style') ?? '').not.toContain('inset-inline-start')
+  })
+
+  it('makes the first cell reachable with the keyboard before any selection', async () => {
+    const wrapper = await mountSuspended(Table, { props: { data: data.slice(0, 2), columns: [{ accessorKey: 'id' }, { accessorKey: 'email' }] as any, features: { cellSelectionFeature } } })
+    const cells = () => wrapper.findAll('tbody td')
+
+    expect(cells().map(td => td.attributes('tabindex'))).toEqual(['0', '-1', '-1', '-1'])
+    await cells()[0]!.trigger('focus')
+    expect(cells()[0]!.attributes('data-selected')).toBe('true')
   })
 
   it('spans cells with the cell spanning feature', async () => {
