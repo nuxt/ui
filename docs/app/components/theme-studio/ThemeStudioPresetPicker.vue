@@ -253,7 +253,12 @@ watch(open, (isOpen) => {
     <template #color-mode="{ item }">
       <UIcon :name="asRow(item).icon" class="size-5 shrink-0 text-faint" />
       {{ asRow(item).label }}
-      <ThemeStudioColorModeTabs class="ms-auto -my-1.5 [&>div]:ring-0" />
+      <UColorModeTabs
+        size="sm"
+        :ui="{ list: 'bg-tint p-0.5', indicator: 'inset-y-0.5' }"
+        aria-label="Color mode"
+        class="ms-auto -my-1.5"
+      />
     </template>
 
     <!-- its own slot: the menu only draws a trailing icon for submenus, and

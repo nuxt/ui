@@ -62,6 +62,8 @@ export interface TabsProps<T extends TabsItem = TabsItem> extends Pick<TabsRootP
    * @defaultValue 'horizontal'
    */
   orientation?: Tabs['variants']['orientation']
+  /** Render the triggers with equal padding on all sides. */
+  square?: boolean
   /**
    * The content of the tabs, can be disabled to prevent rendering the content.
    * @defaultValue true
@@ -132,7 +134,8 @@ const ui = computed(() => tv(theme, overrides.value)({
   color: props.color,
   variant: props.variant,
   size: props.size,
-  orientation: props.orientation
+  orientation: props.orientation,
+  square: props.square
 }))
 
 // reka-ui renders its indicator once it has measured the active trigger on the client,
