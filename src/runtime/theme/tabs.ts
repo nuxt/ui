@@ -24,7 +24,7 @@ export default defineTheme({
         indicator: 'bg-default rounded-md shadow-xs'
       },
       link: {
-        list: 'border-default p-1',
+        list: 'border-default',
         indicator: 'bg-accent rounded-full',
         trigger: 'data-[state=active]:text-accent'
       }

@@ -196,7 +196,7 @@ props:
 ---
 ::
 
-A `pill` Tabs is as tall as a [Button](/docs/components/button) of the same size: the track takes half of the vertical padding of the tabs. Set `--ui-tabs-track-padding` on the `list` slot to change the track, the height stays the same.
+Tabs are as tall as a [Button](/docs/components/button) of the same size. The `pill` track takes half of the vertical padding of the tabs. Set `--ui-tabs-track-padding` on the `list` slot to change the track, the height stays the same.
 
 ::component-code
 ---
