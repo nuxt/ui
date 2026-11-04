@@ -43,7 +43,7 @@ props:
 
 ### With labels
 
-The labels are visually hidden by default and stay available to assistive technologies. Use the `ui` prop to show them:
+The labels are visually hidden by default and stay available to assistive technologies. Use the `ui` prop to show them, and set `square` to `false` to pad the triggers around them:
 
 ::component-code{prefix="color-mode"}
 ---
@@ -51,6 +51,7 @@ prettier: true
 ignore:
   - ui.label
 props:
+  square: false
   ui:
     label: 'not-sr-only'
 ---
