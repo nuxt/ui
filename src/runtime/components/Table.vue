@@ -744,7 +744,7 @@ function focusSelectedCell() {
 }
 
 function getCellSelectionListeners(cell: Cell<TableFeatures, T, unknown>) {
-  if (!isCellSelectionEnabled.value) {
+  if (!isCellSelectionEnabled.value || !cell.getCanSelect()) {
     return {}
   }
   return {
@@ -809,7 +809,8 @@ function onResizerKeydown(e: KeyboardEvent, header: Header<TableFeatures, T, unk
 // The resize handle is labelled by its header, through the `id` set with `meta.attrs.th` when there is one.
 function getHeaderId(header: Header<TableFeatures, T, unknown>) {
   const attrs = resolveValue(header.column.columnDef.meta?.attrs?.th, header) as Record<string, unknown> | undefined
-  return (attrs?.id as string | undefined) ?? `${id}-${header.id}`
+  // `aria-labelledby` is a list of ids, so the generated one can't contain whitespace.
+  return (attrs?.id as string | undefined) ?? `${id}-${header.id.replace(/\s+/g, '-')}`
 }
 
 // A group header resizes its leaves, so resetting it resets them.
