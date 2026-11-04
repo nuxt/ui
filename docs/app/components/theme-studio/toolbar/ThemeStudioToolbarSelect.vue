@@ -2,7 +2,7 @@
 import { keepPanels, toolbarPanelClass } from '../../../utils/theme/studio'
 
 /**
- * The toolbar's pick-one controls (preset, icons, radius): the shared trigger
+ * The toolbar's pick-one controls (preset, icons): the shared trigger
  * opening a plain listbox, the same shape as the popover panels beside them.
  * A select menu is a whole combobox with its own trigger styling; these
  * lists are a dozen rows at most.

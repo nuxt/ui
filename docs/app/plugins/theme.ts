@@ -3,9 +3,10 @@ import colors from 'tailwindcss/colors'
 import { watchDebounced } from '@vueuse/core'
 import { themeIcons } from '../utils/theme/icons'
 import { cssVariableDefaults } from '../utils/theme/tokens'
-import { THEME_STATE_KEYS, THEME_STORAGE_KEY, clamped, readStoredTheme, snapshotStoredTheme, writeStoredTheme } from '../utils/theme/storage'
+import { THEME_STATE_KEYS, THEME_TAG_IDS, THEME_STORAGE_KEY, clamped, readStoredTheme, snapshotStoredTheme, writeStoredTheme } from '../utils/theme/storage'
 import type { StoredTheme } from '../utils/theme/storage'
 import { mergeUi, styleComponents, withoutCompoundVariants, DEFAULT_COLORS, THEME_DEFAULTS } from '../utils/theme/engine/types'
+import { buildExtras, EXTRAS_TABLES, EXTRAS_VARIABLES } from '../utils/theme/engine/extras'
 import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables } from '../utils/theme/sanitize'
 
 export default defineNuxtPlugin({
@@ -36,6 +37,9 @@ export default defineNuxtPlugin({
         useState('nuxt-ui-font-size').value = clamped(saved.fontSize, 12, 20) ?? THEME_DEFAULTS.fontSize
         useState('nuxt-ui-font').value = saved.font ?? {}
         useState('nuxt-ui-icons').value = saved.icons ?? THEME_DEFAULTS.icons
+        // readStoredTheme already ran them through normalizeExtras
+        useState(THEME_STATE_KEYS.layout).value = saved.layout ?? {}
+        useState(THEME_STATE_KEYS.charts).value = saved.charts ?? {}
         // Through the same boundary the AI path uses: these two are
         // concatenated into <style> text, and storage is writable by anything
         // on the origin. (The inline FOUC script still paints the raw values
@@ -180,6 +184,12 @@ export default defineNuxtPlugin({
               var fontSize = num(T.fontSize, 12, 20);
               if (fontSize !== undefined && fontSize !== 16) { set('nuxt-ui-font-size', 'html { font-size: ' + fontSize + 'px; }'); }
 
+              /* the same builder as the live tag, its source inlined; a build that keeps names wraps its helpers in __name */
+              var __name = function(fn) { return fn; };
+              var buildExtras = ${buildExtras.toString()};
+              var extras = buildExtras(T, ${JSON.stringify(EXTRAS_TABLES)}, function(px) { return 'calc(var(--spacing) * ' + (px / 4) + ')'; });
+              if (extras.css) { set('${THEME_TAG_IDS.extras}', extras.css); }
+
               var prefs = T.font || {};
               var font = (prefs.sans && SAFE.test(prefs.sans)) ? prefs.sans : 'Public Sans';
               var css = ':root { --font-sans: \\'' + font + '\\', sans-serif; }';
@@ -228,11 +238,13 @@ export default defineNuxtPlugin({
               var cssVars = T.cssVariables;
               if (cssVars) {
                 var defaults = ${JSON.stringify(cssVariableDefaults)};
+                /* the variables a studio field owns, sanitizeCSSVariables drops them too */
+                var OWNED = ${JSON.stringify(Object.fromEntries([...EXTRAS_VARIABLES].map(name => [name, true])))};
                 var merge = function(defs, overrides) {
                   var result = [];
                   var safe = function(v) { return v != null && !BREAKOUT.test(String(v)); };
                   for (var key in defs) { result.push(key + ': ' + (safe(overrides[key]) ? overrides[key] : defs[key]) + ';'); }
-                  for (var key2 in overrides) { if (!defs[key2] && VAR_KEY.test(key2) && safe(overrides[key2])) result.push(key2 + ': ' + overrides[key2] + ';'); }
+                  for (var key2 in overrides) { if (!defs[key2] && !OWNED[key2] && VAR_KEY.test(key2) && safe(overrides[key2])) result.push(key2 + ': ' + overrides[key2] + ';'); }
                   return result;
                 };
                 var parts = [];
