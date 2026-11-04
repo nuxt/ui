@@ -826,6 +826,7 @@ defineExpose({
             v-for="header in footerGroup.headers"
             :key="header.id"
             :data-pinned="header.column.getIsPinned()"
+            :scope="header.colSpan > 1 ? 'colgroup' : 'col'"
             :colspan="header.colSpan > 1 ? header.colSpan : undefined"
             :rowspan="header.rowSpan > 1 ? header.rowSpan : undefined"
             data-slot="th"
