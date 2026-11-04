@@ -759,8 +759,7 @@ function getCellSelectionListeners(cell: Cell<TableFeatures, T, unknown>) {
 const entryCell = computed(() => {
   const firstIndex = virtualizer ? virtualItems.value[0]?.index ?? 0 : 0
   const row = topRows.value[0] ?? centerRows.value[firstIndex]
-  const column = tableApi.getVisibleLeafColumns()[0]
-  return row && column ? `${row.id}_${column.id}` : undefined
+  return row?.getVisibleCells().find(cell => cell.getCanSelect())?.id
 })
 
 function getCellTabIndex(cell: Cell<TableFeatures, T, unknown>) {
@@ -809,8 +808,8 @@ function onResizerKeydown(e: KeyboardEvent, header: Header<TableFeatures, T, unk
 // The resize handle is labelled by its header, through the `id` set with `meta.attrs.th` when there is one.
 function getHeaderId(header: Header<TableFeatures, T, unknown>) {
   const attrs = resolveValue(header.column.columnDef.meta?.attrs?.th, header) as Record<string, unknown> | undefined
-  // `aria-labelledby` is a list of ids, so the generated one can't contain whitespace.
-  return (attrs?.id as string | undefined) ?? `${id}-${header.id.replace(/\s+/g, '-')}`
+  // `aria-labelledby` is a list of ids, so whitespace in the generated one is percent-encoded, `%` first to keep ids distinct.
+  return (attrs?.id as string | undefined) ?? `${id}-${header.id.replace(/%/g, '%25').replace(/\s/g, encodeURIComponent)}`
 }
 
 // A group header resizes its leaves, so resetting it resets them.

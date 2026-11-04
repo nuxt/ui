@@ -773,6 +773,12 @@ describe('Table', () => {
 
     const custom = await mountSuspended(Table, { props: { data, columns: [{ accessorKey: 'id', enableResizing: true, meta: { attrs: { th: { id: 'id-header' } } } }] as any } })
     expect(custom.find('[data-slot="table-resizer"]').attributes('aria-labelledby')).toBe('id-header')
+
+    const spaced = await mountSuspended(Table, { props: { data: [{ 'foo bar': 1, 'foo-bar': 2 }], columns: [{ accessorKey: 'foo bar', enableResizing: true }, { accessorKey: 'foo-bar', enableResizing: true }] as any } })
+    const labels = spaced.findAll('[data-slot="table-resizer"]').map(resizer => resizer.attributes('aria-labelledby')!)
+    expect(labels.every(label => !/\s/.test(label))).toBe(true)
+    expect(new Set(labels).size).toBe(2)
+    expect(spaced.findAll('thead th').map(th => th.attributes('id'))).toEqual(labels)
     await resizer.trigger('keydown', { key: 'ArrowRight' })
     expect(resizer.attributes('aria-valuenow')).toBe('130')
     await resizer.trigger('keydown', { key: 'Enter' })
@@ -810,6 +816,9 @@ describe('Table', () => {
     const cells = () => wrapper.findAll('tbody td')
 
     expect(cells().map(td => td.attributes('tabindex'))).toEqual(['0', '-1', '-1', '-1'])
+
+    const skipped = await mountSuspended(Table, { props: { data: data.slice(0, 1), columns: [{ accessorKey: 'id', enableCellSelection: false }, { accessorKey: 'email' }] as any, features: { cellSelectionFeature } } })
+    expect(skipped.findAll('tbody td').map(td => td.attributes('tabindex'))).toEqual(['-1', '0'])
     await cells()[0]!.trigger('focus')
     expect(cells()[0]!.attributes('data-selected')).toBe('true')
   })
