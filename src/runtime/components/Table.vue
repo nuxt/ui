@@ -4,9 +4,6 @@ import type { AriaAttributes, Ref, WatchOptions, ComponentPublicInstance, VNode 
 import type { AppConfig } from '@nuxt/schema'
 import type {
   AggregationFnDef,
-  BuiltInAggregationFn,
-  BuiltInFilterFn,
-  BuiltInSortFn,
   Cell,
   CellContext,
   CellData,
@@ -76,10 +73,10 @@ declare module '@tanstack/table-core' {
     }
   }
 
-  // The table registers every built-in sort, filter and aggregation function, so their names stay valid on column definitions.
-  interface SortFns extends Record<BuiltInSortFn, SortFn<any, any>> {}
-  interface FilterFns extends Record<BuiltInFilterFn, FilterFn<any, any>> {}
-  interface AggregationFns extends Record<BuiltInAggregationFn, AggregationFnDef<any, any>> {}
+  // The table registers the built-in functions `auto` resolves to, so their names stay valid on column definitions.
+  interface SortFns extends Record<'alphanumeric' | 'text' | 'datetime', SortFn<any, any>> {}
+  interface FilterFns extends Record<'includesString' | 'inNumberRange' | 'inDateRange' | 'arrIncludes' | 'equals' | 'weakEquals', FilterFn<any, any>> {}
+  interface AggregationFns extends Record<'sum' | 'extent', AggregationFnDef<any, any>> {}
 
 }
 
@@ -226,10 +223,18 @@ import {
   createExpandedRowModel,
   createFilteredRowModel,
   createSortedRowModel,
-  aggregationFns,
-  filterFns,
+  aggregationFn_extent,
+  aggregationFn_sum,
+  filterFn_arrIncludes,
+  filterFn_equals,
+  filterFn_inDateRange,
+  filterFn_includesString,
+  filterFn_inNumberRange,
+  filterFn_weakEquals,
   makeStateUpdater,
-  sortFns
+  sortFn_alphanumeric,
+  sortFn_datetime,
+  sortFn_text
 } from '@tanstack/vue-table'
 import { useVirtualizer } from '@tanstack/vue-virtual'
 import { reactivePick, createReusableTemplate, createRef } from '@vueuse/core'
@@ -370,13 +375,22 @@ const defaultFeatures = {
   rowSortingFeature,
   filteredRowModel: createFilteredRowModel(),
   sortedRowModel: createSortedRowModel(),
-  expandedRowModel: createExpandedRowModel(),
-  aggregationFns,
-  filterFns,
-  sortFns
+  expandedRowModel: createExpandedRowModel()
 }
 
-// Custom sorting, filtering and aggregation functions are added to the built-in ones instead of replacing them.
+// TanStack Table only resolves the function names that are registered, `auto` included, so the ones `auto` picks are registered here.
+const aggregationFns = { sum: aggregationFn_sum, extent: aggregationFn_extent }
+const filterFns = {
+  includesString: filterFn_includesString,
+  inNumberRange: filterFn_inNumberRange,
+  inDateRange: filterFn_inDateRange,
+  arrIncludes: filterFn_arrIncludes,
+  equals: filterFn_equals,
+  weakEquals: filterFn_weakEquals
+}
+const sortFns = { alphanumeric: sortFn_alphanumeric, text: sortFn_text, datetime: sortFn_datetime }
+
+// Custom sorting, filtering and aggregation functions are added to these instead of replacing them.
 const registeredFeatures = tableFeatures({
   ...defaultFeatures,
   ...props.features,

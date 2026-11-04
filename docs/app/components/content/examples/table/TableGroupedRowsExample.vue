@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { resolveComponent } from 'vue'
 import {
+  aggregationFn_count,
+  aggregationFn_max,
+  aggregationFn_uniqueCount,
   columnGroupingFeature,
   createGroupedRowModel,
   rowAggregationFeature
@@ -121,7 +124,7 @@ const columns: TableColumn<Payment>[] = [
     accessorKey: 'id',
     header: '#',
     cell: ({ row }) => `#${row.getValue('id')}`,
-    aggregationFn: 'count',
+    aggregationFn: aggregationFn_count,
     aggregatedCell: ({ getValue }) => `${getValue()} records`
   },
   {
@@ -129,7 +132,7 @@ const columns: TableColumn<Payment>[] = [
     accessorFn: row => new Date(row.date),
     header: 'Date',
     cell: ({ getValue }) => formatDate(getValue() as Date),
-    aggregationFn: 'max',
+    aggregationFn: aggregationFn_max,
     aggregatedCell: ({ getValue }) => formatDate(getValue() as Date)
   },
   {
@@ -144,7 +147,7 @@ const columns: TableColumn<Payment>[] = [
         td: 'w-full'
       }
     },
-    aggregationFn: 'uniqueCount',
+    aggregationFn: aggregationFn_uniqueCount,
     aggregatedCell: ({ getValue }) => `${getValue()} customers`
   },
   {

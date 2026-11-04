@@ -192,7 +192,7 @@ const columns: TableColumn<Payment>[] = [{
 }]
 ```
 
-To refer to a function by name across columns, register it in the `sortFns` or `filterFns` of the `features` prop. It is added to the built-in ones.
+Only the built-in functions `auto` picks are registered: `alphanumeric`, `text` and `datetime` for sorting, `includesString`, `inNumberRange`, `inDateRange`, `arrIncludes`, `equals` and `weakEquals` for filtering, `sum` and `extent` for aggregation. Import the others from `@tanstack/vue-table`, like `filterFn_startsWith` or `aggregationFn_count`, and pass them to the column. To refer to a function by name across columns, register it in the `sortFns`, `filterFns` or `aggregationFns` of the `features` prop, it is added to the built-in ones.
 
 ::caution
 The `tableApi` and column types include the APIs of every TanStack Table feature. Calling the API of a feature that isn't registered type-checks but fails at runtime.
@@ -381,7 +381,7 @@ You can group rows based on a given column value and show/hide sub rows via some
 #### Important parts
 
 * Add `grouping` prop with an array of column ids you want to group by.
-* Add `features` prop with `columnGroupingFeature`, `rowAggregationFeature`, and `groupedRowModel: createGroupedRowModel()`, all imported from `@tanstack/vue-table`. The built-in aggregation functions are registered by the table.
+* Add `features` prop with `columnGroupingFeature`, `rowAggregationFeature`, and `groupedRowModel: createGroupedRowModel()`, all imported from `@tanstack/vue-table`.
 * Add `options` prop for the grouping options like `groupedColumnMode`, and `autoResetExpanded: false` to keep groups open when the data changes.
 * Add `initial-state` prop like `{ expanded: true }` to show the groups expanded.
 * Expand rows via `row.toggleExpanded()` method on any cell of the row. Keep in mind, it also toggles `#expanded` slot.

@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { flushPromises } from '@vue/test-utils'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { aggregationFn_sum, cellSelectionFeature, cellSpanningFeature, columnGroupingFeature, columnOrderingFeature, createGroupedRowModel, rowAggregationFeature, stockFeatures } from '@tanstack/vue-table'
+import { aggregationFn_sum, cellSelectionFeature, filterFn_includesString, sortFn_text, cellSpanningFeature, columnGroupingFeature, columnOrderingFeature, createGroupedRowModel, rowAggregationFeature, stockFeatures } from '@tanstack/vue-table'
 import { upperFirst } from 'scule'
 import { renderEach } from '../component-render'
 import { UCheckbox, UButton, UBadge, UDropdownMenu } from '#components'
@@ -698,17 +698,20 @@ describe('Table', () => {
     expect(tableApi.getColumn('id').getAutoSortFn()).toBeTypeOf('function')
   })
 
-  it('registers the built-in aggregation functions', async () => {
+  it('registers the built-in functions auto resolves to', async () => {
     const wrapper = await mountSuspended(Table, {
       props: {
         data: data.slice(0, 3),
-        columns: [{ accessorKey: 'status' }, { accessorKey: 'amount', aggregationFn: 'median' }] as any,
+        columns: [{ accessorKey: 'status' }, { accessorKey: 'amount', aggregationFn: 'auto' }] as any,
         grouping: ['status'],
         features: { columnGroupingFeature, rowAggregationFeature, groupedRowModel: createGroupedRowModel() }
       }
     })
 
-    expect((wrapper.vm as any).tableApi.getRowModel().rows[0].getValue('amount')).toBeTypeOf('number')
+    const tableApi = (wrapper.vm as any).tableApi
+    expect(tableApi.getRowModel().rows[0].getValue('amount')).toBeTypeOf('number')
+    expect(tableApi.getColumn('status').getAutoSortFn()).toBe(sortFn_text)
+    expect(tableApi.getColumn('status').getAutoFilterFn()).toBe(filterFn_includesString)
   })
 
   it('selects cells with the pointer and the keyboard', async () => {
