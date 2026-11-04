@@ -33,7 +33,7 @@ const value = ref(50)
     <UInputNumber placeholder="Required" required :orientation="orientation" v-bind="props" />
     <UInputNumber :default-value="16" :orientation="orientation" v-bind="props">
       <template #leading>
-        <UIcon name="i-lucide-ruler" class="size-(--ui-control-icon) text-faint" />
+        <UIcon name="i-lucide-ruler" class="size-(--ui-control-icon-size) text-faint" />
       </template>
 
       <template #trailing>
