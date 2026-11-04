@@ -36,30 +36,22 @@ const tint = computed({
   set: (value: Tint) => setLayout({ ...layout.value, tint: value === 'default' ? undefined : value })
 })
 
-/** Stored in px, read in px or %, the container in rem: four digits don't fit the readout. */
-function fieldModel(key: LayoutField, scale: number) {
+function fieldModel(key: LayoutField) {
   return computed({
-    get: () => (layout.value[key] ?? LAYOUT_FIELDS[key].default) / scale,
-    set: (value: number) => setLayout({ ...layout.value, [key]: value * scale })
+    get: () => layout.value[key] ?? LAYOUT_FIELDS[key].default,
+    set: (value: number) => setLayout({ ...layout.value, [key]: value })
   })
 }
 
-const fields = (keys: LayoutField[]) => keys.map((key) => {
-  const field = LAYOUT_FIELDS[key]
-  const scale = key === 'containerWidth' ? 16 : 1
-  return {
-    key,
-    ...field,
-    min: field.min / scale,
-    max: field.max / scale,
-    step: field.step / scale,
-    readout: key === 'containerWidth' ? 'rem' : field.unit === '%' ? '%' : 'px',
-    model: fieldModel(key, scale)
-  }
-})
+const fields = (keys: LayoutField[]) => keys.map(key => ({
+  key,
+  ...LAYOUT_FIELDS[key],
+  readout: LAYOUT_FIELDS[key].unit === '%' ? '%' : 'px',
+  model: fieldModel(key)
+}))
 
 const controlFields = fields(['textStep'])
-const pageFields = fields(['gutter', 'containerWidth', 'headerHeight'])
+const pageFields = fields(['gutter', 'headerHeight'])
 const stateFields = fields(['focusWidth', 'disabledOpacity'])
 
 /** A cell of the scale, the density's value until it is typed over. */
