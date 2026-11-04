@@ -32,5 +32,5 @@ const expanded = ref(['app', 'app/composables'])
 </script>
 
 <template>
-  <UTree v-model:expanded="expanded" :items="items" :get-key="i => i.id" />
+  <UTree v-model:expanded="expanded" :items="items" value-key="id" />
 </template>
