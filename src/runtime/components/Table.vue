@@ -687,8 +687,9 @@ function onCellMousedown(e: MouseEvent, cell: Cell<TableFeatures, T, unknown>) {
   // so `onCellFocus` must not collapse it, a ctrl-click that removes this cell from a range included.
   e.preventDefault()
   cell.getSelectionStartHandler()(e)
+  const target = e.currentTarget as HTMLElement
   isPointerFocus = true
-  ;(e.currentTarget as HTMLElement).focus()
+  target.focus()
   isPointerFocus = false
 }
 
