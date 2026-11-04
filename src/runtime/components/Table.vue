@@ -642,7 +642,7 @@ function getCellSpan(span: number) {
 }
 
 function isInteractive(target: EventTarget | null) {
-  return target instanceof Element && !!target.closest('a, button, input, label, select, textarea, [contenteditable], [role="slider"]')
+  return target instanceof Element && !!target.closest('a, button, input, label, select, textarea, [contenteditable]:not([contenteditable="false"]), [role="slider"]')
 }
 
 function onCellMousedown(e: MouseEvent, cell: Cell<TableFeatures, T, unknown>) {
