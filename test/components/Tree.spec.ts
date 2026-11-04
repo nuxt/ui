@@ -101,6 +101,7 @@ describe('Tree', () => {
     const wrapper = await mountSuspended(Tree, {
       props: {
         valueKey: 'path',
+        modelValue: { label: 'references', path: 'module/references' },
         items: [
           {
             label: 'references',
@@ -126,9 +127,13 @@ describe('Tree', () => {
     })
 
     const foundItems = wrapper.findAll('[role="treeitem"]')
+    const initialRootReferences = foundItems.find(item => item.text() === 'references' && item.attributes('aria-level') === '1')
     const nestedReferences = foundItems.find(item => item.text() === 'references' && item.attributes('aria-level') === '2')
 
     expect(nestedReferences).toBeDefined()
+    expect(initialRootReferences?.attributes('aria-selected')).toBe('false')
+    expect(nestedReferences?.attributes('aria-selected')).toBe('true')
+
     await nestedReferences!.trigger('click')
 
     const updatedFoundItems = wrapper.findAll('[role="treeitem"]')
@@ -209,14 +214,14 @@ describe('Tree', () => {
   it('emits getKey values for expanded state', async () => {
     const wrapper = await mountSuspended(Tree, {
       props: {
-        valueKey: 'value',
+        valueKey: 'path',
         getKey: item => item.id,
         items: [
           {
             id: 'custom-key',
             label: 'label-key',
-            value: 'value-key',
-            children: [{ id: 'child-key', label: 'child-label', value: 'child-value' }]
+            path: 'path-key',
+            children: [{ id: 'child-key', label: 'child-label', path: 'child-path' }]
           }
         ]
       }
@@ -225,6 +230,25 @@ describe('Tree', () => {
     await wrapper.get('[role="treeitem"]').trigger('click')
 
     expect(wrapper.emitted('update:expanded')).toEqual([[['custom-key']]])
+  })
+
+  it('keeps an empty string getKey result as the item key', async () => {
+    const wrapper = await mountSuspended(Tree, {
+      props: {
+        getKey: () => '',
+        items: [
+          {
+            label: 'references',
+            value: 'references',
+            children: [{ label: 'nuxt.md' }]
+          }
+        ]
+      }
+    })
+
+    await wrapper.get('[role="treeitem"]').trigger('click')
+
+    expect(wrapper.emitted('update:expanded')).toEqual([[['']]])
   })
 
   test('should have the correct types', () => {
