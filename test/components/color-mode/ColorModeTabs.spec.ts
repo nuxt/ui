@@ -19,6 +19,15 @@ describe('ColorModeTabs', () => {
 
     const shown = await mountSuspended(ColorModeTabs, { props: { ui: { label: 'not-sr-only' } } })
     expect(shown.find('[data-slot="tabs-label"]').classes()).not.toContain('sr-only')
+    expect(shown.find('[data-slot="tabs-label"]').classes()).toContain('pe-1.5')
+  })
+
+  it('pads the triggers like their height so an icon sits in a square', async () => {
+    const wrapper = await mountSuspended(ColorModeTabs, { props: { size: 'lg' } })
+    const classes = wrapper.find('[data-slot="tabs-trigger"]').classes()
+    expect(classes).toContain('px-2')
+    expect(classes).toContain('py-2')
+    expect(classes).not.toContain('px-3')
   })
 
   it('selects the preference after hydrating', async () => {

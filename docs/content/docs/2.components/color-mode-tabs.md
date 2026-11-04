@@ -27,8 +27,15 @@ Use the `size` prop to change the size of the ColorModeTabs.
 
 ::component-code{prefix="color-mode"}
 ---
+items:
+  size:
+    - xs
+    - sm
+    - md
+    - lg
+    - xl
 props:
-  size: md
+  size: xs
 ---
 ::
 

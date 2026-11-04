@@ -35,10 +35,25 @@ const prefix = usePrefix()
 const tabsProps = useForwardProps(props)
 
 // The icons carry the control, the labels are only read by assistive technologies.
-// A replacer function on `label` takes over the slot, so it decides whether they show.
+// Each trigger pads its sides like its top and bottom so an icon alone sits in a
+// square, and a shown label pads its end back to the width of a Tabs trigger.
+// A replacer function on a slot takes it over, so it is passed as is.
+const square = {
+  xs: { trigger: 'px-1', label: 'pe-1' },
+  sm: { trigger: 'px-1.5', label: 'pe-1' },
+  md: { trigger: 'px-1.5', label: 'pe-1.5' },
+  lg: { trigger: 'px-2', label: 'pe-1' },
+  xl: { trigger: 'px-2', label: 'pe-1' }
+}
+
 const tabsUi = computed(() => {
-  const label = props.ui?.label
-  return { ...props.ui, label: typeof label === 'function' ? label : [prefix('sr-only'), label] }
+  const { trigger, label } = props.ui ?? {}
+  const size = square[props.size ?? 'md']
+  return {
+    ...props.ui,
+    trigger: typeof trigger === 'function' ? trigger : [prefix(size.trigger), trigger],
+    label: typeof label === 'function' ? label : [prefix(`sr-only ${size.label}`), label]
+  }
 })
 
 // The preference is only known on the client, so the selected tab matches the server until mounted.
