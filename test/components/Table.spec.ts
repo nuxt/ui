@@ -455,8 +455,9 @@ describe('Table', () => {
     expect(secondRow!.findAll('th').map(th => th.text())).toEqual(['Id'])
 
     const footerThs = wrapper.findAll('tfoot th')
-    expect(footerThs.length).toBeGreaterThan(0)
-    expect(footerThs.every(th => th.attributes('aria-sort') === undefined && th.attributes('rowspan') === undefined)).toBe(true)
+    expect(footerThs.every(th => th.attributes('aria-sort') === undefined)).toBe(true)
+    expect(footerThs.find(th => th.text() === 'Id total')).toBeDefined()
+    expect(footerThs.filter(th => th.attributes('rowspan') === '2')).toHaveLength(1)
   })
 
   describe('grouped headers with different depths', () => {
@@ -695,6 +696,61 @@ describe('Table', () => {
 
     expect(info.attributes('data-pinned')).toBe('false')
     expect(info.attributes('style') ?? '').not.toContain('inset-inline-start')
+  })
+
+  it('spans footer cells across the rows of their group placeholders', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data,
+        columns: [
+          { id: 'info', header: 'Info', footer: 'Info footer', columns: [{ accessorKey: 'id', footer: 'Id footer' }, { accessorKey: 'email', footer: 'Email footer' }] },
+          { accessorKey: 'status', footer: 'Status footer' }
+        ] as any
+      }
+    })
+    const footerRows = wrapper.findAll('tfoot tr[data-slot="table-tr"]')
+
+    expect(footerRows.map(tr => tr.findAll('th').map(th => th.text()))).toEqual([['Id footer', 'Email footer', 'Status footer'], ['Info footer']])
+    expect(footerRows[0]!.findAll('th')[2]!.attributes('rowspan')).toBe('2')
+  })
+
+  it('selects every cell with Ctrl+A and collapses to the active cell with Escape', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: { data: data.slice(0, 2), columns: [{ accessorKey: 'id' }, { accessorKey: 'email' }] as any, features: { cellSelectionFeature } },
+      attachTo: document.body
+    })
+    const cells = () => wrapper.findAll('tbody td')
+
+    expect(wrapper.find('table').attributes('role')).toBe('grid')
+    await cells()[0]!.trigger('mousedown', { button: 0 })
+    await cells()[0]!.trigger('keydown', { key: 'a', ctrlKey: true })
+    expect(cells().map(td => td.attributes('aria-selected'))).toEqual(['true', 'true', 'true', 'true'])
+
+    await cells()[0]!.trigger('keydown', { key: 'Escape' })
+    expect(cells().map(td => td.attributes('aria-selected'))).toEqual(['true', 'false', 'false', 'false'])
+
+    wrapper.unmount()
+  })
+
+  it('moves the resize handle with the pointer until release in onEnd mode', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: { data, columns: [{ accessorKey: 'id', enableResizing: true, size: 120 }] as any, options: { columnResizeMode: 'onEnd' } },
+      attachTo: document.body
+    })
+    const resizer = wrapper.find('[data-slot="table-resizer"]')
+    await resizer.trigger('mousedown', { clientX: 100 })
+    document.dispatchEvent(new MouseEvent('mousemove', { clientX: 140 }))
+    await flushPromises()
+
+    expect(resizer.attributes('style')).toContain('translateX(40px)')
+    expect(wrapper.find('thead th').attributes('style')).toContain('width: 120px')
+
+    document.dispatchEvent(new MouseEvent('mouseup', { clientX: 140 }))
+    await flushPromises()
+    expect(resizer.attributes('style') ?? '').not.toContain('translateX')
+    expect(wrapper.find('thead th').attributes('style')).toContain('width: 160px')
+
+    wrapper.unmount()
   })
 
   it('makes the first cell reachable with the keyboard before any selection', async () => {

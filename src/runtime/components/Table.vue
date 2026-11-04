@@ -477,6 +477,20 @@ const headerGroups = computed(() => tableApi.getHeaderGroups().map(headerGroup =
   })
 })))
 
+// TanStack's footer groups are the header groups reversed, so each spanning header is moved to the footer row its span starts on.
+const footerGroups = computed(() => {
+  const groups = headerGroups.value
+  const leafIds = tableApi.getHeaderGroups().at(-1)?.headers.map(header => header.column.id) ?? []
+  const position = (header: Header<TableFeatures, T, unknown>) => leafIds.indexOf(header.getLeafHeaders()[0]?.column.id ?? header.column.id)
+  const footer = groups.map((_, index) => ({ id: `footer-${index}`, headers: [] as typeof groups[number]['headers'] }))
+  groups.forEach((group, depth) => {
+    for (const entry of group.headers) {
+      footer[groups.length - depth - entry.rowSpan]?.headers.push(entry)
+    }
+  })
+  return footer.map(group => ({ ...group, headers: group.headers.sort((a, b) => position(a.header) - position(b.header)) }))
+})
+
 const rows = computed(() => tableApi.getRowModel().rows)
 const topRows = computed(() => props.virtualize ? [] : tableApi.getTopRows())
 const bottomRows = computed(() => props.virtualize ? [] : tableApi.getBottomRows())
@@ -675,8 +689,24 @@ const cellSelectionKeys: Record<string, CellSelectionDirection> = {
 }
 
 function onCellKeydown(e: KeyboardEvent) {
+  if (isInteractive(e.target)) {
+    return
+  }
+  if (e.key === 'a' && (e.metaKey || e.ctrlKey)) {
+    e.preventDefault()
+    tableApi.selectAllCells()
+    focusSelectedCell()
+    return
+  }
+  // Escape collapses the selection to the active cell, so the keyboard keeps its place.
+  const focused = tableApi.getFocusedCell()
+  if (e.key === 'Escape' && focused && tableApi.getSelectedCellCount() > 1) {
+    e.preventDefault()
+    tableApi.setFocusedCell(focused.row.id, focused.column.id)
+    return
+  }
   let direction = cellSelectionKeys[e.key]
-  if (!direction || isInteractive(e.target)) {
+  if (!direction) {
     return
   }
   // TanStack steps through the column order, which runs from the right in RTL.
@@ -736,6 +766,15 @@ function onCellFocus(cell: Cell<TableFeatures, T, unknown>) {
   if (!tableApi.getFocusedCell()) {
     tableApi.setFocusedCell(cell.row.id, cell.column.id)
   }
+}
+
+// With `columnResizeMode: 'onEnd'`, the sizes only change on release, so the handle follows the pointer until then.
+function getResizerStyles(header: Header<TableFeatures, T, unknown>) {
+  const deltaOffset = tableApi.atoms.columnResizing.get().deltaOffset
+  if (tableApi.options.columnResizeMode !== 'onEnd' || !header.column.getIsResizing() || !deltaOffset) {
+    return undefined
+  }
+  return { transform: `translateX(${dir.value === 'rtl' ? -deltaOffset : deltaOffset}px)` }
 }
 
 // A group header resizes its leaves, so resetting it resets them.
@@ -880,6 +919,7 @@ defineExpose({
           :data-pinned="cell.column.getIsPinned()"
           :data-selected="hasCellSelection ? cell.getIsSelected() : undefined"
           :tabindex="hasCellSelection ? getCellTabIndex(cell) : undefined"
+          :aria-selected="hasCellSelection ? cell.getIsSelected() : undefined"
           :colspan="hasCellSpanning ? getCellSpan(cell.getColSpan()) : undefined"
           :rowspan="hasRowSpanning ? getCellSpan(cell.getRowSpan()) : undefined"
           data-slot="table-td"
@@ -921,6 +961,8 @@ defineExpose({
     <table
       ref="tableRef"
       data-slot="table-base"
+      :role="hasCellSelection ? 'grid' : undefined"
+      :aria-multiselectable="hasCellSelection || undefined"
       :class="ui.base({ class: [props.ui?.base] })"
       :style="hasResizableColumns ? { width: `${tableApi.getTotalSize()}px` } : undefined"
     >
@@ -964,6 +1006,7 @@ defineExpose({
               :data-resizing="header.column.getIsResizing()"
               data-slot="table-resizer"
               :class="ui.resizer({ class: props.ui?.resizer })"
+              :style="getResizerStyles(header)"
               @mousedown="header.getResizeHandler()($event)"
               @touchstart.passive="header.getResizeHandler()($event)"
               @dblclick="resetHeaderSize(header)"
@@ -1027,12 +1070,13 @@ defineExpose({
       >
         <tr data-slot="table-separator" :class="ui.separator({ class: [props.ui?.separator] })" />
 
-        <tr v-for="footerGroup in tableApi.getFooterGroups()" :key="footerGroup.id" data-slot="table-tr" :class="ui.tr({ class: [props.ui?.tr] })">
+        <tr v-for="footerGroup in footerGroups" :key="footerGroup.id" data-slot="table-tr" :class="ui.tr({ class: [props.ui?.tr] })">
           <th
-            v-for="header in footerGroup.headers"
+            v-for="{ header, rowSpan } in footerGroup.headers"
             :key="header.id"
             :data-pinned="getHeaderPinned(header)"
             :colspan="header.colSpan > 1 ? header.colSpan : undefined"
+            :rowspan="rowSpan > 1 ? rowSpan : undefined"
             data-slot="table-th"
             :class="ui.th({
               class: [
