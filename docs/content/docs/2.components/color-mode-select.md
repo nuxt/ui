@@ -55,6 +55,7 @@ export default defineConfig({
     vue(),
     ui({
       icons: {
+        system: 'i-lucide-laptop',
         light: 'i-lucide-sun-medium',
         dark: 'i-lucide-moon-star'
       }

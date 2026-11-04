@@ -244,5 +244,6 @@ Nuxt UI also registers shorthand aliases for `Callout`: `::note`, `::tip`, `::wa
 | `UColorModeButton` | Toggle button (light/dark) |
 | `UColorModeSwitch` | Toggle switch (light/dark) |
 | `UColorModeSelect` | Dropdown (light/dark/system) |
+| `UColorModeTabs` | Segmented tabs (system/light/dark) |
 | `UColorModeAvatar` | Avatar that changes with color mode |
 | `UColorModeImage` | Image that changes with color mode |

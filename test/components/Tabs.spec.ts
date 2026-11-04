@@ -38,6 +38,7 @@ describe('Tabs', () => {
     ['with valueKey', { props: { ...props, valueKey: 'label', defaultValue: 'Tab1' } }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
     ['with orientation vertical', { props: { ...props, orientation: 'vertical' } }],
+    ['with square', { props: { ...props, square: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),

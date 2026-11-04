@@ -122,6 +122,14 @@ const shareOpen = ref(false)
       <ThemeStudioViewSwitcher />
 
       <template #right>
+        <!-- below `lg`, where the footer bar that carries it is hidden -->
+        <UColorModeTabs
+          size="sm"
+          :ui="{ list: 'p-0.5', indicator: 'inset-y-0.5' }"
+          aria-label="Color mode"
+          class="lg:hidden"
+        />
+
         <UTooltip text="Ask" :kbds="['meta', 'I']" ignore-non-keyboard-focus>
           <UButton
             color="neutral"
@@ -164,10 +172,6 @@ const shareOpen = ref(false)
           </UFormField>
 
           <ThemeStudioToolbar vertical />
-
-          <UFormField label="Color mode" :ui="{ root: 'text-xs', container: 'mt-1' }">
-            <ThemeStudioColorModeTabs size="sm" class="w-full" />
-          </UFormField>
 
           <USeparator class="my-5" />
 
@@ -243,7 +247,10 @@ const shareOpen = ref(false)
 
       <template #right>
         <UTooltip text="Switch color mode" :kbds="['d']">
-          <ThemeStudioColorModeTabs
+          <UColorModeTabs
+            size="sm"
+            :ui="{ list: 'bg-tint ring ring-default p-0.5', indicator: 'inset-y-0.5' }"
+            aria-label="Color mode"
             data-keep-panels
             class="shrink-0"
           />

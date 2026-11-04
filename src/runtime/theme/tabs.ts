@@ -65,6 +65,11 @@ export default defineTheme({
         trigger: 'px-(--ui-control-px) py-(--ui-control-py) text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height) gap-(--ui-control-gap)',
         leadingIcon: 'size-(--ui-control-icon-size)'
       }
+    },
+    // Equal padding, for triggers that only show an icon. After `size`, which sets the
+    // horizontal padding
+    square: {
+      true: { trigger: 'px-(--ui-control-py)' }
     }
   },
   compoundVariants: [{
