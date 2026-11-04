@@ -142,6 +142,10 @@ highlights:
 When rendering components with `h`, you can either use the `resolveComponent` function or import from `#components`.
 ::
 
+::tip
+TanStack Table's `createColumnHelper<TableFeatures, Payment>()` builds the same columns with the value type of each `accessor` inferred, so `getValue()` in its `cell` is typed. `TableFeatures` is exported from `@nuxt/ui`.
+::
+
 ### Meta
 
 Use the `meta` prop as an object ([TableMeta](https://tanstack.com/table/v9/docs/reference/index/interfaces/TableMeta)) to pass properties like:
