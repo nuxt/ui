@@ -40,7 +40,10 @@ describe('InputNumber', () => {
     ['with ui', { props: { ui: { base: 'rounded-full' } } }],
     // Slots
     ['with increment slot', { slots: { increment: () => '+' } }],
-    ['with decrement slot', { slots: { decrement: () => '-' } }]
+    ['with decrement slot', { slots: { decrement: () => '-' } }],
+    ['with leading slot', { slots: { leading: () => '$' } }],
+    ['with trailing slot', { slots: { trailing: () => 'px' } }],
+    ['with leading and trailing slots vertical', { props: { orientation: 'vertical' }, slots: { leading: () => '$', trailing: () => 'px' } }]
   ])
 
   it.each(['increment', 'decrement'])('starts from startingValue on the first %s of an empty field', async (slot) => {
