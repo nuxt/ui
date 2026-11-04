@@ -23,7 +23,7 @@ describe('ColorModeTabs', () => {
 
   it('renders square triggers unless `square` is false', async () => {
     const square = await mountSuspended(ColorModeTabs)
-    expect(square.find('[data-slot="tabs-trigger"]').classes()).toContain('px-(--ui-control-py)')
+    expect(square.find('[data-slot="tabs-trigger"]').classes()).toContain('px-[calc(var(--ui-control-py)-var(--ui-tabs-track-padding,0px))]')
     expect(square.find('[data-slot="tabs-trigger"]').classes()).not.toContain('px-(--ui-control-px)')
 
     const padded = await mountSuspended(ColorModeTabs, { props: { square: false } })
