@@ -120,12 +120,12 @@ const shareOpen = ref(false)
       <ThemeStudioViewSwitcher />
 
       <template #right>
-        <!-- only in the menu, which renders this cluster again in its header -->
+        <!-- below `lg`, where the footer bar that carries it is hidden -->
         <UColorModeTabs
           size="sm"
           :ui="{ list: 'bg-tint ring ring-default p-0.5', indicator: 'inset-y-0.5' }"
           aria-label="Color mode"
-          class="hidden in-data-[slot=header-header]:flex"
+          class="lg:hidden"
         />
 
         <UTooltip text="Ask" :kbds="['meta', 'I']" ignore-non-keyboard-focus>
