@@ -49,14 +49,6 @@ function toggleChat() {
              defer every mount, and the mobile menu mounts this cluster again -->
       <LazyThemeStudioPresetPicker />
 
-      <!-- only in the mobile menu, which renders this cluster again in its header -->
-      <UColorModeTabs
-        size="sm"
-        :ui="{ list: 'bg-tint ring ring-default p-0.5', indicator: 'inset-y-0.5' }"
-        aria-label="Color mode"
-        class="hidden in-data-[slot=header-header]:flex me-1"
-      />
-
       <UTooltip text="Open on GitHub" class="hidden lg:flex" ignore-non-keyboard-focus>
         <UButton
           color="neutral"
