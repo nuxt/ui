@@ -642,6 +642,14 @@ describe('Table', () => {
     expect(onUpdate).toHaveBeenLastCalledWith([{ id: 'id', desc: true }])
   })
 
+  it('expands a row without sub-rows when the expanded slot is used', async () => {
+    const wrapper = await mountSuspended(Table, { props: { data: data.slice(0, 2) }, slots: { expanded: () => 'Details' } })
+    ;(wrapper.vm as any).tableApi.getRowModel().rows[0].toggleExpanded()
+    await flushPromises()
+
+    expect(wrapper.findAll('tbody tr')[1]!.text()).toBe('Details')
+  })
+
   it('keeps an unbound slice in TanStack state', async () => {
     const wrapper = await mountSuspended(Table, { props: { data } })
     ;(wrapper.vm as any).tableApi.setColumnVisibility({ email: false })

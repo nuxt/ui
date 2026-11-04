@@ -451,6 +451,8 @@ const tableOptions = computed(() => ({
   columnResizeDirection: dir.value,
   // `data` is copied on every deep change, which would clear the cell selection after each inline edit.
   autoResetCellSelection: false,
+  // TanStack only expands rows with sub-rows, a row with an `expanded` slot can expand too.
+  getRowCanExpand: slots.expanded ? () => true : undefined,
   ...props.options,
   ...tableProps.value,
   features: registeredFeatures,
