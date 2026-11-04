@@ -29,12 +29,12 @@ export default defineTheme({
     },
     size: {
       xs: {
-        base: 'text-[8px]/3 [--ui-control-px:--spacing(1)] [--ui-control-py:--spacing(0.5)] [--ui-control-gap:--spacing(1)] [--ui-control-icon-size:--spacing(3)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-sm',
+        base: 'text-[0.5rem]/3 [--ui-control-px:--spacing(1)] [--ui-control-py:--spacing(0.5)] [--ui-control-gap:--spacing(1)] [--ui-control-icon-size:--spacing(3)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-sm',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)'
       },
       sm: {
-        base: 'text-[10px]/3 [--ui-control-px:--spacing(1.5)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon-size:--spacing(3)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-sm',
+        base: 'text-[0.625rem]/3 [--ui-control-px:--spacing(1.5)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon-size:--spacing(3)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-sm',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)'
       },

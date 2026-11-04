@@ -73,7 +73,7 @@ const keep = (apply: () => void) => (event: Event) => {
  * The menu's width (ui.content) reaches every submenu too, this hands the
  * submenus their own size back.
  */
-const submenu = { content: { class: 'w-auto' } }
+const submenu = { content: { class: 'w-auto max-w-36' } }
 
 /**
  * A setting row: its value and swatch ride the trailing slot, its options the
@@ -222,7 +222,7 @@ watch(open, (isOpen) => {
     v-model:open="open"
     :items="items"
     :content="{ align: 'start', alignOffset: -4, onInteractOutside: keepPanels }"
-    :ui="{ content: 'w-56 min-w-36 max-h-98', label: 'text-xs' }"
+    :ui="{ content: 'w-52 min-w-36 max-h-98', label: 'text-xs' }"
   >
     <UTooltip :text="name" ignore-non-keyboard-focus>
       <UButton
@@ -253,7 +253,12 @@ watch(open, (isOpen) => {
     <template #color-mode="{ item }">
       <UIcon :name="asRow(item).icon" class="size-5 shrink-0 text-faint" />
       {{ asRow(item).label }}
-      <ThemeStudioColorModeTabs class="ms-auto -my-1.5 [&>div]:ring-0" />
+      <UColorModeTabs
+        size="sm"
+        :ui="{ list: 'bg-tint p-0.5', indicator: 'inset-y-0.5' }"
+        aria-label="Color mode"
+        class="ms-auto -my-1.5"
+      />
     </template>
 
     <!-- its own slot: the menu only draws a trailing icon for submenus, and

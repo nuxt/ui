@@ -133,7 +133,7 @@ const items = Array.from({ length: 6 }).map((_, index) => ({
 
   <div class="space-y-11 min-h-0">
     <template v-if="classNames">
-      <UCarousel v-slot="{ item }" v-bind="bind" :items="items" :ui="{ item: 'basis-[70%] transition-opacity ease-in-out [&:not(.is-snapped)]:opacity-10', container: 'h-[352px]' }" class="w-full max-w-xl mx-auto">
+      <UCarousel v-slot="{ item }" v-bind="bind" :items="items" :ui="{ item: 'basis-[70%] transition-opacity ease-in-out [&:not(.is-snapped)]:opacity-10', container: 'h-88' }" class="w-full max-w-xl mx-auto">
         <img :src="item.src" class="rounded-lg">
       </UCarousel>
     </template>
@@ -143,7 +143,7 @@ const items = Array.from({ length: 6 }).map((_, index) => ({
       </UCarousel>
     </template>
     <template v-else>
-      <UCarousel v-slot="{ item }" v-bind="bind" :items="items" class="w-[320px] mx-auto" :ui="{ container: 'h-[336px]' }">
+      <UCarousel v-slot="{ item }" v-bind="bind" :items="items" class="w-[320px] mx-auto" :ui="{ container: 'h-84' }">
         <img :src="item.src" class="rounded-lg">
       </UCarousel>
 

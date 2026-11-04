@@ -8,6 +8,8 @@
       <UColorModeButton />
     </div>
 
+    <UColorModeTabs />
+
     <div class="flex items-center gap-2">
       <UColorModeAvatar light="https://github.com/vuejs.png" dark="https://github.com/nuxt.png" />
       <UColorModeImage light="https://github.com/vuejs.png" dark="https://github.com/nuxt.png" class="size-8" />

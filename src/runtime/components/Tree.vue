@@ -184,15 +184,10 @@ const as = computed(() => resolveAs(props.as, { root: 'ul', link: 'button' }))
 const nested = computed(() => props.virtualize ? false : props.nested)
 
 const flattenedPaddingFormula = computed(() => {
-  const sizeConfig = {
-    xs: { base: 2, perLevel: 5.5 }, // px-2, ms-4 + ps-1.5
-    sm: { base: 2.5, perLevel: 6 }, // px-2.5, ms-4.5 + ps-1.5
-    md: { base: 2.5, perLevel: 6.5 }, // px-2.5, ms-5 + ps-1.5
-    lg: { base: 3, perLevel: 7 }, // px-3, ms-5.5 + ps-1.5
-    xl: { base: 3, perLevel: 7.5 } // px-3, ms-6 + ps-1.5
-  }
-  const config = sizeConfig[props.size as keyof typeof sizeConfig] ?? sizeConfig.md
-  return (level: number) => `calc(var(--spacing) * ${(level - 1) * config.perLevel + config.base})`
+  // The indent of each level, `ms-*` of `listWithChildren` + `ps-1.5`
+  const perLevel = { xs: 5.5, sm: 6, md: 6.5, lg: 7, xl: 7.5 }[props.size as string] ?? 6.5
+  // `--ui-control-px` is the padding of the row at its size
+  return (level: number) => `calc(var(--ui-control-px) + var(--spacing) * ${(level - 1) * perLevel})`
 })
 
 const virtualizerProps = toRef(() => {

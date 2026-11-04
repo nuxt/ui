@@ -322,6 +322,7 @@ Nuxt UI registers `@nuxtjs/color-mode` automatically. Built-in components for sw
 - `UColorModeButton` — single button toggle (light/dark)
 - `UColorModeSwitch` — toggle switch
 - `UColorModeSelect` — dropdown with system/light/dark options
+- `UColorModeTabs` — tabs with system/light/dark options
 - `UColorModeAvatar` — displays different avatar per mode
 - `UColorModeImage` — displays different image per mode
 

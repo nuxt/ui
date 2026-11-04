@@ -1,9 +1,13 @@
 // The color aliases every component accepts. Each scope below is written out in
 // full so Tailwind finds it by scanning this file: nothing is generated or
-// safelisted, and a theme never builds a class from a color name.
+// safelisted. A color you add with the `@nuxt/ui/colors` plugin is the one
+// class built from a name, by the engine: the plugin writes its rule.
 export const colors = ['primary', 'secondary', 'success', 'info', 'warning', 'error', 'neutral'] as const
 
 export type Color = typeof colors[number]
+
+/** The names a color you add can take: words in small letters joined by dashes, valid in a class and a variable alike. */
+export const colorName = /^[a-z][a-z\d]*(?:-[a-z\d]+)*$/
 
 const accentScopes: Record<Color, string> = {
   primary: '[--ui-accent:var(--ui-primary)]',
@@ -45,7 +49,8 @@ function scoped<S extends string>(scopes: Record<Color, string>, slots: Record<S
 
 /**
  * A `color` variant group: every color scopes `--ui-accent` on the given slots,
- * next to their classes. `colorVariant({ base: '' })` only scopes.
+ * next to their classes. `colorVariant({ base: '' })` only scopes. A color the
+ * group doesn't list takes `primary`'s classes with its own scope, see `tv`.
  */
 export const colorVariant = <S extends string>(slots: Record<S, string>) => scoped(accentScopes, slots)
 

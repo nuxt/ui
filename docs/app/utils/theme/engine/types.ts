@@ -9,6 +9,8 @@
  * `--ui-border-width`, the library has no semantic tokens for them yet.
  */
 import colors from 'tailwindcss/colors'
+import type { ThemeLayout, ThemeCharts } from './extras'
+import { normalizeExtras } from './extras'
 
 /**
  * The stock preset, what an untouched theme already is. Lives with the
@@ -82,6 +84,10 @@ export interface ThemeDoc {
     lineHeight?: number
   }
   icons?: string
+  /** The control scale, the page sizes and the focus and disabled states. */
+  layout?: ThemeLayout
+  /** The palette or alias of each chart series. */
+  charts?: ThemeCharts
   /** Default variants and semantic token shades. */
   style?: StyleOptions
   /** L4, per-component overrides merged into `app.config ui.<component>` */
@@ -211,10 +217,14 @@ export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, ramp: To
   { token: '--ui-text-contrast', label: 'Contrast', ramp: 'neutral', group: 'text', defaults: { light: 'white', dark: 900 } },
   { token: '--ui-border-default', label: 'Default', ramp: 'neutral', group: 'border', defaults: { light: 200, dark: 800 } },
   { token: '--ui-border-strong', label: 'Strong', ramp: 'neutral', group: 'border', defaults: { light: 300, dark: 700 } },
+  // The ring and separators of menus, popovers and modals, `border-strong` once `--ui-bg-overlay` lifts them
+  { token: '--ui-overlay-border-default', label: 'Overlay', ramp: 'neutral', group: 'border', defaults: { light: 300, dark: 700 }, follows: '--ui-border-strong' },
   // The text of each color, `--ui-<color>-text-default` and its muted step
   ...(['primary', ...SEMANTIC_ALIASES] as const).flatMap(alias => [
     { token: `--ui-${alias}-text-default`, label: 'Text', ramp: alias, group: 'colors' as const, defaults: { light: 500, dark: 400 } as const, follows: `--ui-${alias}` },
-    { token: `--ui-${alias}-text-muted`, label: 'Muted text', ramp: alias, group: 'colors' as const, defaults: { light: 500, dark: 400 } as const, follows: `--ui-${alias}` }
+    { token: `--ui-${alias}-text-muted`, label: 'Muted text', ramp: alias, group: 'colors' as const, defaults: { light: 500, dark: 400 } as const, follows: `--ui-${alias}` },
+    // the text on its solid, dark text on a light solid like amber
+    { token: `--ui-${alias}-text-contrast`, label: 'Contrast text', ramp: alias, group: 'colors' as const, defaults: { light: 'white', dark: 900 } as const, follows: '--ui-text-contrast' }
   ])
 ]
 /**
@@ -450,6 +460,7 @@ export function isDefaultTheme(doc: ThemeDoc): boolean {
     && !doc.font?.uppercase && !doc.font?.italic
     && doc.font?.letterSpacing === undefined && doc.font?.lineHeight === undefined
     && !doc.icons && !doc.components
+    && !Object.keys(normalizeExtras(doc)).length
     && isDefaultStyle(doc.style)
 }
 
@@ -475,6 +486,8 @@ export function docToSettings(doc: ThemeDoc): Record<string, any> {
     settings.fontBody = { uppercase: doc.font.uppercase, italic: doc.font.italic, letterSpacing: doc.font.letterSpacing, lineHeight: doc.font.lineHeight }
   }
   if (doc.icons) settings.icons = doc.icons
+  if (doc.layout) settings.layout = doc.layout
+  if (doc.charts) settings.charts = doc.charts
 
   if (doc.palettes) {
     settings.customColors = Object.fromEntries(
