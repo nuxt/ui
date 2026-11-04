@@ -32,6 +32,7 @@ catalog:
   "@nuxt/fonts": ^1.2.0
   "@nuxt/icon": ^2.6.2
   "@nuxt/image": ^2.2.1
+  "@nuxt/cli": ^4.0.3
   "@nuxt/kit": ^4.6.4
   "@nuxt/module-builder": ^1.0.3
   "@nuxt/schema": ^4.6.4
@@ -166,6 +167,7 @@ overrides:
   # the whole vite peer group down to vitest's vite 7. The plugin only ever runs
   # inside vitest's own vite, so the wider range is bookkeeping, not runtime.
   "@codspeed/vitest-plugin>vite": ^7.0.0 || ^8.0.0
+  "@nuxt/cli": ^4.0.3
   "@nuxt/kit": ^4.6.4
   "@nuxt/ui": workspace:*
   unplugin: ^3.7.0
@@ -186,7 +188,7 @@ allowBuilds:
 minimumReleaseAgeExclude:
   - 'exsolve@1.1.3'
   - 'eslint-plugin-better-tailwindcss@4.8.0'
-  - "@nuxt/cli@4.0.0"
+  - "@nuxt/cli@4.0.3"
   - "@nuxt/kit@4.6.0"
   - "@nuxt/nitro-server@4.6.0"
   - "@nuxt/schema@4.6.0"
