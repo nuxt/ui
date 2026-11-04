@@ -621,7 +621,6 @@ const pageTitles: Record<Page, string> = {
               v-model="selectedMailTab"
               :items="mailTabItems"
               :content="false"
-              size="xs"
             />
           </template>
         </UDashboardNavbar>
