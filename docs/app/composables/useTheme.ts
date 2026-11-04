@@ -10,7 +10,8 @@ import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables } from '../utils/
 // chunk on every page, and the barrel would drag presets, the palette math
 // and the serializer with it. The serializer loads on demand below.
 import { mergeUi, isDefaultStyle, isDefaultTheme, styleTokens, DEFAULT_COLORS, DEFAULT_PRESET_ID, THEME_DEFAULTS, SEMANTIC_ALIASES, LIBRARY_TOKEN_DEFAULTS, tokenShadeDefaults, withoutCompoundVariants } from '../utils/theme/engine/types'
-import type { ThemeDoc, ThemePalette, StyleOptions, StoredPaletteParams } from '../utils/theme/engine'
+import { normalizeExtras, themeExtras } from '../utils/theme/engine/extras'
+import type { ThemeDoc, ThemeLayout, ThemeCharts, ThemePalette, StyleOptions, StoredPaletteParams } from '../utils/theme/engine'
 import colors from 'tailwindcss/colors'
 
 export function useTheme() {
@@ -69,6 +70,24 @@ export function useTheme() {
    * means "inherit", so a stock theme stores nothing.
    */
   const fontPrefs = useState<FontPrefs>('nuxt-ui-font', () => ({}))
+
+  /**
+   * The control scale, the page sizes and the states, the opacity of the
+   * recipe roles, and the chart series. Sparse like the font document.
+   */
+  const layout = useState<ThemeLayout>(THEME_STATE_KEYS.layout, () => ({}))
+  const charts = useState<ThemeCharts>(THEME_STATE_KEYS.charts, () => ({}))
+
+  // Normalize: defaults are absences, so hasChanges/export stay clean.
+  function setLayout(next: ThemeLayout, options: { track?: boolean } = {}) {
+    layout.value = normalizeExtras({ layout: next }).layout ?? {}
+    if (options.track !== false) trackThrottled('Theme Changed', { setting: 'layout' })
+  }
+
+  function setCharts(next: ThemeCharts, options: { track?: boolean } = {}) {
+    charts.value = normalizeExtras({ charts: next }).charts ?? {}
+    if (options.track !== false) trackThrottled('Theme Changed', { setting: 'charts' })
+  }
 
   function setFontPrefs(next: FontPrefs, options: { track?: boolean } = {}) {
     // Normalize: defaults are absences, so hasChanges/export stay clean.
@@ -190,6 +209,8 @@ export function useTheme() {
     // --font-mono, and Nuxt UI points h1–h6 at --font-heading.
     return parts.join(' ')
   })
+  // same sentinel rationale as customColorsStyle
+  const extrasStyle = computed(() => themeExtras({ layout: layout.value, charts: charts.value }).css || ':root {}')
   const customColorsStyle = computed(() => {
     const entries = Object.entries(customColorsData.value)
     // non-empty sentinel: unhead won't patch an emptied innerHTML, leaving
@@ -235,6 +256,7 @@ export function useTheme() {
     { innerHTML: radiusStyle, id: 'nuxt-ui-radius', tagPriority: -2 },
     { innerHTML: fontSizeStyle, id: 'nuxt-ui-font-size', tagPriority: -2 },
     { innerHTML: fontStyle, id: 'nuxt-ui-font', tagPriority: -2 },
+    { innerHTML: extrasStyle, id: THEME_TAG_IDS.extras, tagPriority: -2 },
     { innerHTML: customColorsStyle, id: THEME_TAG_IDS.customColors, tagPriority: -2 },
     { innerHTML: cssVariablesStyle, id: THEME_TAG_IDS.cssVariables, tagPriority: -2 }
   ]
@@ -272,6 +294,8 @@ export function useTheme() {
     }
     if (Object.keys(fontDoc).length) doc.font = fontDoc
     if (_iconSet.value !== THEME_DEFAULTS.icons) doc.icons = _iconSet.value
+    if (Object.keys(layout.value).length) doc.layout = JSON.parse(JSON.stringify(layout.value))
+    if (Object.keys(charts.value).length) doc.charts = { ...charts.value }
 
     // Only alias-referenced palettes export. Reference by CURRENT value, not
     // overrides, a custom palette can shadow a default name and must still export.
@@ -430,6 +454,12 @@ export function useTheme() {
       })
     }
     if (settings.icons && Object.hasOwn(themeIcons, settings.icons)) icon.value = settings.icons
+    // merged over the current state, a payload naming one field keeps the rest
+    if (settings.layout && typeof settings.layout === 'object') {
+      const scale = settings.layout.scale && typeof settings.layout.scale === 'object' ? { ...layout.value.scale, ...settings.layout.scale } : layout.value.scale
+      setLayout({ ...layout.value, ...settings.layout, scale }, { track: false })
+    }
+    if (settings.charts && typeof settings.charts === 'object') setCharts({ ...charts.value, ...settings.charts }, { track: false })
 
     const semanticUpdates = SEMANTIC_ALIASES.filter(color => validPalette(settings[color]))
     const savedExtras: Record<string, any> = { ...aiThemeExtras.value }
@@ -481,6 +511,8 @@ export function useTheme() {
     _radius.value = THEME_DEFAULTS.radius
     _fontSize.value = THEME_DEFAULTS.fontSize
     fontPrefs.value = {}
+    layout.value = {}
+    charts.value = {}
     _iconSet.value = THEME_DEFAULTS.icons
     appConfig.ui.icons = themeIcons.lucide as any
 
@@ -533,6 +565,10 @@ export function useTheme() {
     font,
     fontPrefs,
     setFontPrefs,
+    layout,
+    setLayout,
+    charts,
+    setCharts,
     icon,
     icons: ICON_PACKS,
     hasChanges,

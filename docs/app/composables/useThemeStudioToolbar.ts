@@ -53,7 +53,7 @@ export function useThemeStudioToolbar() {
 
   /**
    * "Changed from preset" per toolbar control, the cue each trigger carries.
-   * Type, icons and radius sit in the bar on their own, so they are listed
+   * Type, icons and layout sit in the bar on their own, so they are listed
    * here rather than rolled into a group.
    *
    * Gated on mount like everything else here. The theme plugin restores the
@@ -70,7 +70,10 @@ export function useThemeStudioToolbar() {
     surfaces: afterMount(sectionDirty('surfaces')),
     font: afterMount(sectionDirty(['font', 'type', 'weights'])),
     icons: afterMount(sectionDirty('icons')),
-    radius: afterMount(sectionDirty('radius'))
+    // the header's theme menu still shows radius as its own row
+    radius: afterMount(sectionDirty('radius')),
+    // radius rides the layout panel in the bar
+    layout: afterMount(sectionDirty(['radius', 'controls', 'page', 'states', 'tint']))
   }
 
   // Two-stage reset: edits reset back to the preset, a second press clears

@@ -416,7 +416,7 @@ onMounted(() => {
           :items="billingCycleItems"
           :content="false"
           color="neutral"
-          size="xs"
+          size="sm"
           class="w-48"
           :ui="{ list: 'ring ring-strong rounded-full', indicator: 'rounded-full', trigger: 'w-1/2' }"
         />
