@@ -17,7 +17,7 @@ export default defineTheme({
         root: 'gap-1.5 p-1 rounded-lg text-xs data-[orientation=vertical]:w-20 data-[variant=thumbnail]:w-10',
         leading: 'w-7 rounded-md',
         leadingIcon: 'size-3.5',
-        description: 'text-[10px]/3'
+        description: 'text-[0.625rem]/3'
       },
       sm: {
         root: 'gap-2 p-1.5 text-xs data-[orientation=vertical]:w-24 data-[variant=thumbnail]:w-12',

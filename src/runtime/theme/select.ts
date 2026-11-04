@@ -42,54 +42,59 @@ export default defineTheme({
     color: colorVariant({ base: '' }),
     size: {
       xs: {
-        base: '[--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon-size:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--text-xs)+var(--ui-control-text-step,0px))]/4',
+        content: '[--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)]',
+        base: '[--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--ui-control-text-xs)+var(--ui-control-text-step,0px))]/(--ui-control-text-xs--line-height)',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)',
-        label: 'p-1 text-[10px]/3 gap-1',
-        item: 'p-1 text-xs gap-1',
-        itemLeadingIcon: 'size-4',
-        itemLeadingChip: 'size-4',
-        itemTrailingIcon: 'size-4'
+        label: 'p-(--ui-control-py) text-[calc(var(--ui-control-text-xs)-0.125rem)]/[calc(var(--ui-control-text-xs--line-height)-0.25rem)] gap-(--ui-control-gap)',
+        item: 'p-(--ui-control-py) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) gap-(--ui-control-gap)',
+        itemLeadingIcon: 'size-(--ui-control-icon-size)',
+        itemLeadingChip: 'size-(--ui-control-icon-size)',
+        itemTrailingIcon: 'size-(--ui-control-icon-size)'
       },
       sm: {
-        base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon-size:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--text-xs)+var(--ui-control-text-step,0px))]/4',
+        content: '[--ui-control-py:var(--ui-control-py-sm)] [--ui-control-gap:var(--ui-control-gap-sm)] [--ui-control-icon-size:var(--ui-control-icon-size-sm)]',
+        base: '[--ui-control-px:var(--ui-control-px-sm)] [--ui-control-py:var(--ui-control-py-sm)] [--ui-control-gap:var(--ui-control-gap-sm)] [--ui-control-icon-size:var(--ui-control-icon-size-sm)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--ui-control-text-sm)+var(--ui-control-text-step,0px))]/(--ui-control-text-sm--line-height)',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)',
-        label: 'p-1.5 text-[10px]/3 gap-1.5',
-        item: 'p-1.5 text-xs gap-1.5',
-        itemLeadingIcon: 'size-4',
-        itemLeadingChip: 'size-4',
-        itemTrailingIcon: 'size-4'
+        label: 'p-(--ui-control-py) text-[calc(var(--ui-control-text-sm)-0.125rem)]/[calc(var(--ui-control-text-sm--line-height)-0.25rem)] gap-(--ui-control-gap)',
+        item: 'p-(--ui-control-py) text-(length:--ui-control-text-sm)/(--ui-control-text-sm--line-height) gap-(--ui-control-gap)',
+        itemLeadingIcon: 'size-(--ui-control-icon-size)',
+        itemLeadingChip: 'size-(--ui-control-icon-size)',
+        itemTrailingIcon: 'size-(--ui-control-icon-size)'
       },
       md: {
-        base: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon-size:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--text-sm)+var(--ui-control-text-step,0px))]/5',
+        content: '[--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)]',
+        base: '[--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--ui-control-text-md)+var(--ui-control-text-step,0px))]/(--ui-control-text-md--line-height)',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)',
-        label: 'p-1.5 text-xs gap-1.5',
-        item: 'p-1.5 text-sm gap-1.5',
-        itemLeadingIcon: 'size-5',
-        itemLeadingChip: 'size-5',
-        itemTrailingIcon: 'size-5'
+        label: 'p-(--ui-control-py) text-[calc(var(--ui-control-text-md)-0.125rem)]/[calc(var(--ui-control-text-md--line-height)-0.25rem)] gap-(--ui-control-gap)',
+        item: 'p-(--ui-control-py) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) gap-(--ui-control-gap)',
+        itemLeadingIcon: 'size-(--ui-control-icon-size)',
+        itemLeadingChip: 'size-(--ui-control-icon-size)',
+        itemTrailingIcon: 'size-(--ui-control-icon-size)'
       },
       lg: {
-        base: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon-size:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--text-sm)+var(--ui-control-text-step,0px))]/5',
+        content: '[--ui-control-py:var(--ui-control-py-lg)] [--ui-control-gap:var(--ui-control-gap-lg)] [--ui-control-icon-size:var(--ui-control-icon-size-lg)]',
+        base: '[--ui-control-px:var(--ui-control-px-lg)] [--ui-control-py:var(--ui-control-py-lg)] [--ui-control-gap:var(--ui-control-gap-lg)] [--ui-control-icon-size:var(--ui-control-icon-size-lg)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--ui-control-text-lg)+var(--ui-control-text-step,0px))]/(--ui-control-text-lg--line-height)',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)',
-        label: 'p-2 text-xs gap-2',
-        item: 'p-2 text-sm gap-2',
-        itemLeadingIcon: 'size-5',
-        itemLeadingChip: 'size-5',
-        itemTrailingIcon: 'size-5'
+        label: 'p-(--ui-control-py) text-[calc(var(--ui-control-text-lg)-0.125rem)]/[calc(var(--ui-control-text-lg--line-height)-0.25rem)] gap-(--ui-control-gap)',
+        item: 'p-(--ui-control-py) text-(length:--ui-control-text-lg)/(--ui-control-text-lg--line-height) gap-(--ui-control-gap)',
+        itemLeadingIcon: 'size-(--ui-control-icon-size)',
+        itemLeadingChip: 'size-(--ui-control-icon-size)',
+        itemTrailingIcon: 'size-(--ui-control-icon-size)'
       },
       xl: {
-        base: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2)] [--ui-control-gap:--spacing(2)] [--ui-control-icon-size:--spacing(6)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-base',
+        content: '[--ui-control-py:var(--ui-control-py-xl)] [--ui-control-gap:var(--ui-control-gap-xl)] [--ui-control-icon-size:var(--ui-control-icon-size-xl)]',
+        base: '[--ui-control-px:var(--ui-control-px-xl)] [--ui-control-py:var(--ui-control-py-xl)] [--ui-control-gap:var(--ui-control-gap-xl)] [--ui-control-icon-size:var(--ui-control-icon-size-xl)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)',
-        label: 'p-2 text-sm gap-2',
-        item: 'p-2 text-base gap-2',
-        itemLeadingIcon: 'size-6',
-        itemLeadingChip: 'size-6',
-        itemTrailingIcon: 'size-6'
+        label: 'p-(--ui-control-py) text-[calc(var(--ui-control-text-xl)-0.125rem)]/[calc(var(--ui-control-text-xl--line-height)-0.25rem)] gap-(--ui-control-gap)',
+        item: 'p-(--ui-control-py) text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height) gap-(--ui-control-gap)',
+        itemLeadingIcon: 'size-(--ui-control-icon-size)',
+        itemLeadingChip: 'size-(--ui-control-icon-size)',
+        itemTrailingIcon: 'size-(--ui-control-icon-size)'
       }
     },
     position: {

@@ -1,13 +1,65 @@
-import { readFileSync } from 'node:fs'
+import { readdirSync, readFileSync } from 'node:fs'
 import plugin from 'tailwindcss/plugin'
 import tailwindColors from 'tailwindcss/colors'
-import { colors } from '../theme/color'
+import { colorName, colors } from '../theme/color'
 import type { Color } from '../theme/color'
 
 const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
 
-/** A palette name, optionally followed by the two shades the alias uses, for light then dark mode. */
-export type ColorsOptions = Partial<Record<Color, string>>
+/**
+ * A palette name, optionally followed by the two shades the alias uses, for
+ * light then dark mode. A name outside the built-in aliases adds a color.
+ */
+export type ColorsOptions = Partial<Record<Color, string>> & Record<string, string | undefined>
+
+// Names a color can't take beyond the ones a color utility already has: CSS
+// keywords Tailwind has utilities for, and variables Nuxt UI sets under `--ui-<name>`
+const reserved = ['inherit', 'current', 'transparent', 'highlight', 'layer']
+
+let tokenNames: Set<string> | undefined
+
+/**
+ * The names Nuxt UI's color utilities already have, like `muted` in
+ * `text-muted` or `accent` in `bg-accent-soft`, read from `tokens.css` next to
+ * this file, and the ones whose variables it sets, in its stylesheets and its
+ * themes: `radius` would write over `--ui-radius`, `control-px` over the padding
+ * a Button sets, and `overlay` over `--ui-overlay-bg-soft` with its roles and
+ * the `bg-overlay` utility. Read before the theme is: the color a name adds is
+ * in it by then.
+ */
+function getTokenNames() {
+  if (!tokenNames) {
+    const read = (file: string) => readFileSync(new URL(file, import.meta.url), 'utf8')
+    const tokens = read('./tokens.css')
+    tokenNames = new Set()
+    for (const [, name] of tokens.matchAll(/^\s*--(?:color|text-color|background-color|border-color|ring-color|ring-offset-color|divide-color|outline-color|stroke|fill)-([\w-]+):/gm)) {
+      const words = name!.split('-')
+      words.forEach((_, i) => tokenNames!.add(words.slice(0, i + 1).join('-')))
+    }
+    const roles = getAccentRoles()
+    // The themes set some variables themselves, like `--ui-control-px` per size
+    const themes = (readdirSync(new URL('../theme/', import.meta.url), { recursive: true }) as string[])
+      .filter(file => /\.[jt]s$/.test(file) && !file.endsWith('.d.ts'))
+      .map(file => read(`../theme/${file.replace(/\\/g, '/')}`))
+    for (const css of [tokens, read('./base.css'), read('./tailwind.css'), read('./accent.css'), ...themes]) {
+      for (const [, name] of css.matchAll(/--ui-([a-z\d-]+)/g)) {
+        tokenNames.add(name!)
+        // A color's roles are `--ui-<color>-<role>`, so a variable ending in a role takes its prefix
+        const role = roles.find(role => name!.endsWith(`-${role}`))
+        if (role) {
+          tokenNames.add(name!.slice(0, -role.length - 1))
+        }
+      }
+      for (const [, name] of css.matchAll(/@utility (?:bg|text|border|ring|outline|fill|stroke)-([a-z\d-]+)/g)) {
+        tokenNames.add(name!)
+      }
+    }
+  }
+  return tokenNames
+}
+
+// A name whose utilities Tailwind CSS or Nuxt UI already has, like `white` or `muted`
+const isTaken = (alias: string) => reserved.includes(alias) || alias in tailwindColors || getTokenNames().has(alias)
 
 // Compared as written: `050` would pass as a number but name no variable
 const isShade = (word: string) => word === 'black' || word === 'white' || shades.some(shade => String(shade) === word)
@@ -22,6 +74,17 @@ const grays = ['slate', 'gray', 'zinc', 'neutral', 'stone', 'taupe', 'mauve', 'm
 let neutralRoles: Array<[role: string, value: string]> | undefined
 
 /**
+ * The `--ui-accent-<role>` declarations of a scope's block, as written in
+ * `src` or minified in `dist`, where they lose their spaces and the last `;`.
+ */
+function declarations(block: string): Array<[role: string, value: string]> {
+  return block.split(';').flatMap((declaration) => {
+    const match = declaration.trim().match(/^--ui-accent-([\w-]+):(.+)$/)
+    return match ? [[match[1]!, match[2]!.trim()] as [string, string]] : []
+  })
+}
+
+/**
  * The roles the neutral scope points at the surface tokens, read from
  * `accent.css` next to this file so the two can't drift. A role neutral leaves
  * to its recipe, like `text-contrast`, isn't listed. Read from this module's own URL:
@@ -29,9 +92,7 @@ let neutralRoles: Array<[role: string, value: string]> | undefined
  */
 function getNeutralRoles() {
   if (!neutralRoles) {
-    const css = readFileSync(new URL('./accent.css', import.meta.url), 'utf8')
-    const scope = css.match(/\.\\\[--ui-accent\\:var\\\(--ui-neutral\\\)\\\]\s*\{([^}]*)\}/)?.[1] ?? ''
-    neutralRoles = [...scope.matchAll(/--ui-accent-([\w-]+): var\(--ui-neutral-\1, (\S.*)\);/g)].map(([, role, value]) => [role!, value!])
+    neutralRoles = parseNeutralRoles(readFileSync(new URL('./accent.css', import.meta.url), 'utf8'))
     // None found means `accent.css` no longer reads the way this parses it
     if (!neutralRoles.length) {
       throw new Error('[@nuxt/ui] Found no neutral roles in `accent.css`.')
@@ -39,6 +100,47 @@ function getNeutralRoles() {
   }
   return neutralRoles
 }
+
+/**
+ * The neutral roles and their fallbacks in the content of `accent.css`.
+ * @internal
+ */
+export function parseNeutralRoles(css: string): Array<[role: string, value: string]> {
+  const scope = css.match(/\.\\\[--ui-accent\\:var\\\(--ui-neutral\\\)\\\]\s*\{([^}]*)\}/)?.[1] ?? ''
+  return declarations(scope).flatMap(([role, value]) => {
+    const fallback = value.match(new RegExp(`^var\\(--ui-neutral-${role},(.+)\\)$`))?.[1]?.trim()
+    return fallback ? [[role, fallback] as [string, string]] : []
+  })
+}
+
+let accentRoles: string[] | undefined
+
+/**
+ * The roles a color's scope points at its own variables, `--ui-accent-<role>`
+ * at `--ui-<color>-<role>`, read from `primary`'s scope in `accent.css` like
+ * neutral's above, for the scope of a color added here.
+ */
+function getAccentRoles() {
+  if (!accentRoles) {
+    accentRoles = parseAccentRoles(readFileSync(new URL('./accent.css', import.meta.url), 'utf8'))
+    if (!accentRoles.length) {
+      throw new Error('[@nuxt/ui] Found no accent roles in `accent.css`.')
+    }
+  }
+  return accentRoles
+}
+
+/**
+ * The accent roles in the content of `accent.css`.
+ * @internal
+ */
+export function parseAccentRoles(css: string): string[] {
+  const scope = css.match(/\.\\\[--ui-accent\\:var\\\(--ui-primary\\\)\\\]\s*\{([^}]*)\}/)?.[1] ?? ''
+  return declarations(scope).filter(([role, value]) => value === `var(--ui-primary-${role})`).map(([role]) => role)
+}
+
+// The selector of a scope class, like `[--ui-accent:var(--ui-tertiary)]`
+const scopeSelector = (variable: string, color: string) => `.\\[--${variable}\\:var\\(--ui-${color}\\)\\]`
 
 // Edits between two words, for the palette a typo was probably meant as
 function distance(a: string, b: string) {
@@ -85,11 +187,27 @@ function closestPalette(name: string, shadesByName: unknown) {
  *
  * The defaults are plain CSS in `base.css`, at zero specificity, so the
  * aliases you set win wherever you register it.
+ *
+ * A name outside the built-in aliases adds a color, `tertiary: indigo`, with
+ * the same shades and defaults: the plugin also writes its scopes and its
+ * utilities (`bg-tertiary`, `text-tertiary`), and every `color` prop takes it.
  */
 // The palette an alias's value names, if any
 const paletteOf = (value?: string) => {
   const word = value && String(value).replace(/["']/g, '').trim().split(/\s+/)[0]
   return word && !isShade(word) ? word : undefined
+}
+
+// A name outside the built-in aliases adds a color
+const isAdded = (alias: string) => !(colors as readonly string[]).includes(alias)
+
+// The utilities of a color added here, `bg-tertiary` to `bg-tertiary-950`, and
+// `text-tertiary` on its strong text like the built-in colors in `tokens.css`
+function bridge(alias: string) {
+  return {
+    colors: { DEFAULT: `var(--ui-${alias})`, ...Object.fromEntries(shades.map(shade => [shade, `var(--ui-color-${alias}-${shade})`])) },
+    textColor: `var(--ui-${alias}-text-strong, var(--ui-${alias}-text-default, var(--ui-${alias})))`
+  }
 }
 
 const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugin.withOptions<ColorsOptions>(options => ({ addBase, theme }) => {
@@ -98,59 +216,105 @@ const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugi
   const declarations: Record<string, string> = {}
   const light: Record<string, string> = {}
   const dark: Record<string, string> = {}
+  const scopes: Record<string, Record<string, string>> = {}
+  // Every color is checked before one error lists them all, to fix them in one save
+  const errors: Error[] = []
   for (const [alias, value] of Object.entries(aliases)) {
-    if (!(colors as readonly string[]).includes(alias)) {
-      throw new Error(`[@nuxt/ui] \`${alias}\` isn't a color alias. The \`@nuxt/ui/colors\` plugin takes ${colors.map(color => `\`${color}\``).join(', ')}.`)
-    }
-    if (!value) {
-      continue
-    }
-    const words = String(value).replace(/["']/g, '').trim().split(/\s+/)
-    // The palette is optional: shades alone keep the alias's palette
-    const palette = isShade(words[0]!) ? undefined : words.shift()
-    const [lightShade, darkShade, ...rest] = words
-    if (lightShade) {
-      // Both or none: a shade that suits one mode rarely suits the other
-      if (!darkShade || rest.length || ![lightShade, darkShade].every(shade => isShade(shade))) {
-        throw new Error(`[@nuxt/ui] \`${alias}: ${value}\` takes a palette and two shades, for light then dark mode, from ${shades.join(', ')}, \`black\` or \`white\`, like \`${alias}: indigo 600 300\`.`)
-      }
-      light[`--ui-${alias}`] = shadeValue(alias, lightShade)
-      dark[`--ui-${alias}`] = shadeValue(alias, darkShade)
-    }
-    if (!palette) {
-      continue
-    }
-    // A color value like `#5865f2` or `oklch(...)` isn't a palette: the alias
-    // itself takes it, as a CSS variable
-    if (/^#|\(/.test(palette)) {
-      throw new Error(`[@nuxt/ui] \`${alias}: ${palette}\` takes a palette name, not a color. To use a color of your own, set \`--ui-${alias}\` in your CSS, or declare a palette in \`@theme\` and give its name.`)
-    }
-    // An alias's palette is the alias itself (`--color-primary-500` reads
-    // `--ui-color-primary-500`), so pointing one at another loops
-    if (palette !== 'neutral' && (colors as readonly string[]).includes(palette)) {
-      throw new Error(`[@nuxt/ui] \`${alias}: ${palette}\` points a color alias at another. Give it a Tailwind palette, like \`indigo\`.`)
-    }
-    // Nuxt UI's `neutral` alias takes over `--color-neutral-*`, so Tailwind's
-    // own neutral palette is read from its package
-    for (const shade of shades) {
-      const value = palette === 'neutral' ? tailwindColors.neutral[shade] : theme(`colors.${palette}.${shade}`)
-      if (typeof value !== 'string') {
-        const palettes = theme('colors')
-        if (!palettes || !Object.keys(palettes).length) {
-          throw new TypeError(`[@nuxt/ui] \`${alias}: ${palette}\` can't be read: Tailwind CSS's theme isn't loaded in this stylesheet. Import \`tailwindcss\` before the plugin, or in a stylesheet that only adds colors, like a layer's, \`@import "tailwindcss/theme" theme(reference);\`.`)
+    try {
+      const added = isAdded(alias)
+      if (added) {
+        if (!colorName.test(alias)) {
+          throw new Error(`[@nuxt/ui] \`${alias}\` can't name a color: use lowercase words joined by dashes, like \`tertiary\` or \`brand-dark\`.`)
         }
-        if (typeof theme(`colors.${palette}.500`) === 'string') {
-          throw new TypeError(`[@nuxt/ui] \`${alias}: ${palette}\` needs every shade of \`${palette}\` from 50 to 950, and \`--color-${palette}-${shade}\` is missing.`)
+        // The utilities this color adds would take over ones that exist
+        if (isTaken(alias)) {
+          throw new Error(`[@nuxt/ui] \`${alias}\` can't name a color: Tailwind CSS or Nuxt UI already uses it, for a utility like \`bg-${alias}\` or a variable like \`--ui-${alias}\`. Pick another name, like \`tertiary\`.`)
         }
-        const closest = closestPalette(palette, palettes)
-        throw new TypeError(`[@nuxt/ui] \`${alias}: ${palette}\` needs the name of a Tailwind palette with shades from 50 to 950, like \`indigo\`, or of one you declare in \`@theme\` as \`--color-<name>-50\` to \`-950\`.${closest ? ` Did you mean \`${closest}\`?` : ''}`)
       }
-      declarations[`--ui-color-${alias}-${shade}`] = value
+      if (!value) {
+        if (added) {
+          throw new Error(`[@nuxt/ui] \`${alias}\` needs a palette, like \`${alias}: indigo\`.`)
+        }
+        continue
+      }
+      const words = String(value).replace(/["']/g, '').trim().split(/\s+/)
+      // The palette is optional: shades alone keep the alias's palette
+      const palette = isShade(words[0]!) ? undefined : words.shift()
+      const [lightShade, darkShade, ...rest] = words
+      if (lightShade) {
+        // Both or none: a shade that suits one mode rarely suits the other
+        if (!darkShade || rest.length || ![lightShade, darkShade].every(shade => isShade(shade))) {
+          throw new Error(`[@nuxt/ui] \`${alias}: ${value}\` takes a palette and two shades, for light then dark mode, from ${shades.join(', ')}, \`black\` or \`white\`, like \`${alias}: indigo 600 300\`.`)
+        }
+        light[`--ui-${alias}`] = shadeValue(alias, lightShade)
+        dark[`--ui-${alias}`] = shadeValue(alias, darkShade)
+      } else if (added) {
+        // The shades the built-in colors default to in `base.css`
+        light[`--ui-${alias}`] = shadeValue(alias, '500')
+        dark[`--ui-${alias}`] = shadeValue(alias, '400')
+      }
+      if (added) {
+        // The scopes components put on an element for this color, which the
+        // engine builds from its name, so no stylesheet lists them for Tailwind
+        // to find: each rule sets its variable itself. The accent scope also
+        // points the roles at this color's own, like `primary`'s in `accent.css`.
+        scopes[scopeSelector('ui-accent', alias)] = {
+          '--ui-accent': `var(--ui-${alias})`,
+          ...Object.fromEntries(getAccentRoles().map(role => [`--ui-accent-${role}`, `var(--ui-${alias}-${role})`]))
+        }
+        scopes[scopeSelector('ui-highlight', alias)] = { '--ui-highlight': `var(--ui-${alias})` }
+        scopes[scopeSelector('spotlight-color', alias)] = { '--spotlight-color': `var(--ui-${alias})` }
+      }
+      if (!palette) {
+        if (added) {
+          throw new Error(`[@nuxt/ui] \`${alias}: ${value}\` needs a palette, like \`${alias}: indigo ${words.join(' ')}\`: an added color has no default one.`)
+        }
+        continue
+      }
+      // A color value like `#5865f2` or `oklch(...)` isn't a palette: the alias
+      // itself takes it, as a CSS variable
+      if (/^#|\(/.test(palette)) {
+        throw new Error(`[@nuxt/ui] \`${alias}: ${palette}\` takes a palette name, not a color. To use a color of your own, set \`--ui-${alias}\` in your CSS, or declare a palette in \`@theme\` and give its name.`)
+      }
+      // An alias's palette is the alias itself (`--color-primary-500` reads
+      // `--ui-color-primary-500`), so pointing one at another loops
+      if ((added && palette === alias) || (palette !== 'neutral' && (colors as readonly string[]).includes(palette))) {
+        throw new Error(`[@nuxt/ui] \`${alias}: ${palette}\` points a color alias at another. Give it a Tailwind palette, like \`indigo\`.`)
+      }
+      // Nuxt UI's `neutral` alias takes over `--color-neutral-*`, so Tailwind's
+      // own neutral palette is read from its package
+      for (const shade of shades) {
+        const value = palette === 'neutral' ? tailwindColors.neutral[shade] : theme(`colors.${palette}.${shade}`)
+        if (typeof value !== 'string') {
+          const palettes = theme('colors')
+          if (!palettes || !Object.keys(palettes).length) {
+            throw new TypeError(`[@nuxt/ui] \`${alias}: ${palette}\` can't be read: Tailwind CSS's theme isn't loaded in this stylesheet. Import \`tailwindcss\` before the plugin, or in a stylesheet that only adds colors, like a layer's, \`@import "tailwindcss/theme" theme(reference);\`.`)
+          }
+          if (typeof theme(`colors.${palette}.500`) === 'string') {
+            throw new TypeError(`[@nuxt/ui] \`${alias}: ${palette}\` needs every shade of \`${palette}\` from 50 to 950, and \`--color-${palette}-${shade}\` is missing.`)
+          }
+          const closest = closestPalette(palette, palettes)
+          // The suggestion first, for a log that only shows the start of the message
+          throw new TypeError(`[@nuxt/ui] \`${alias}: ${palette}\` isn't a Tailwind palette${closest ? `, did you mean \`${closest}\`?` : '.'} A palette has shades from 50 to 950, like \`indigo\`, or is one you declare in \`@theme\` as \`--color-<name>-50\` to \`-950\`.`)
+        }
+        declarations[`--ui-color-${alias}-${shade}`] = value
+      }
+    } catch (error) {
+      errors.push(error as Error)
     }
+  }
+  if (errors.length > 1) {
+    throw new Error(errors.map(error => error.message).join('\n'))
+  }
+  if (errors[0]) {
+    throw errors[0]
   }
 
   if (Object.keys(declarations).length) {
     addBase({ ':root, :host': declarations })
+  }
+  if (Object.keys(scopes).length) {
+    addBase(scopes)
   }
 
   // An alias on a gray takes neutral's roles, like `color="neutral"`: soft,
@@ -174,6 +338,19 @@ const colorsPlugin: ReturnType<typeof plugin.withOptions<ColorsOptions>> = plugi
   if (Object.keys(light).length) {
     addBase({ ':root, :host, .light': light })
     addBase({ '.dark': dark })
+  }
+}, (options) => {
+  const added = Object.keys(options ?? {}).filter(alias => isAdded(alias) && colorName.test(alias) && !isTaken(alias))
+  if (!added.length) {
+    return {}
+  }
+  return {
+    theme: {
+      extend: {
+        colors: Object.fromEntries(added.map(alias => [alias, bridge(alias).colors])),
+        textColor: Object.fromEntries(added.map(alias => [alias, bridge(alias).textColor]))
+      }
+    }
   }
 })
 

@@ -89,11 +89,8 @@ const user = {
   avatar: { src: 'https://github.com/benjamincanac.png', alt: 'Benjamin Canac' }
 }
 
-const userItems = computed<DropdownMenuItem[][]>(() => [[{
-  type: 'label',
-  label: user.name,
-  avatar: user.avatar
-}], [
+const userItems = computed<DropdownMenuItem[][]>(() => [[
+  { type: 'label', label: user.name },
   { label: 'Profile', icon: studioIcons.user },
   { label: 'Billing', icon: studioIcons.creditCard },
   { label: 'Settings', icon: studioIcons.settings }

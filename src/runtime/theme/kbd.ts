@@ -22,9 +22,9 @@ export default defineTheme({
       }
     },
     size: {
-      sm: { base: 'h-4 min-w-[16px] text-[10px]' },
-      md: { base: 'h-5 min-w-[20px] text-[11px]' },
-      lg: { base: 'h-6 min-w-[24px] text-[12px]' }
+      sm: { base: 'h-4 min-w-4 text-[0.625rem]' },
+      md: { base: 'h-5 min-w-5 text-[0.6875rem]' },
+      lg: { base: 'h-6 min-w-6 text-[0.75rem]' }
     }
   },
   defaultVariants: {
