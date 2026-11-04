@@ -73,7 +73,7 @@ export function useThemeStudioToolbar() {
     // the header's theme menu still shows radius as its own row
     radius: afterMount(sectionDirty('radius')),
     // radius rides the layout panel in the bar
-    layout: afterMount(sectionDirty(['radius', 'controls', 'page', 'states']))
+    layout: afterMount(sectionDirty(['radius', 'controls', 'page', 'states', 'tint']))
   }
 
   // Two-stage reset: edits reset back to the preset, a second press clears

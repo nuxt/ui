@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { upperFirst } from 'scule'
 import { keepPanels, toolbarPanelClass } from '../../../utils/theme/studio'
-import type { Density, LayoutField } from '../../../utils/theme/engine/extras'
-import { CONTROL_COLUMNS, CONTROL_SIZES, DENSITIES, LAYOUT_FIELDS, controlBase, controlVariable } from '../../../utils/theme/engine/extras'
+import type { Density, LayoutField, Tint } from '../../../utils/theme/engine/extras'
+import { CONTROL_COLUMNS, CONTROL_SIZES, DENSITIES, LAYOUT_FIELDS, TINTS, controlBase, controlVariable } from '../../../utils/theme/engine/extras'
 
 /**
  * The sizes of things and the states of controls. The density moves the
@@ -25,6 +25,15 @@ const densityItems = DENSITIES.map(value => ({ label: upperFirst(value), value, 
 const density = computed({
   get: (): Density => layout.value.density ?? 'default',
   set: (value: Density) => setLayout({ ...layout.value, density: value === 'default' ? undefined : value })
+})
+
+const tintItems = TINTS.map(value => ({ label: upperFirst(value), value, defaultTag: value === 'default' }))
+
+// The opacity of every color's fills and borders, the `soft`, `subtle` and
+// `outline` variants: one choice writes the five roles of the six colors
+const tint = computed({
+  get: (): Tint => layout.value.tint ?? 'default',
+  set: (value: Tint) => setLayout({ ...layout.value, tint: value === 'default' ? undefined : value })
 })
 
 /** Stored in px, read in px or %, the container in rem: four digits don't fit the readout. */
@@ -114,6 +123,17 @@ const editorContent = { side: 'right' as const, align: 'start' as const, alignOf
           :max="radiuses.at(-1)! * 16"
           :step="radiusStep"
           unit="px"
+        />
+      </ThemeStudioSection>
+
+      <ThemeStudioSection label="Tint" section-key="tint">
+        <ThemeStudioRow
+          v-model="tint"
+          control="select"
+          label="Fills"
+          :control-icon="studioIcons.layers"
+          :items="tintItems"
+          aria-label="Tint of the color fills and borders"
         />
       </ThemeStudioSection>
 

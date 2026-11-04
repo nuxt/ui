@@ -48,12 +48,12 @@ function ownedLayout(doc: ThemeDoc, section: LayoutSection) {
  * a toolbar control and carries its own `sectionDirty`.
  */
 export const SECTION_GROUPS: Record<'colors' | 'defaults', SectionKey[]> = {
-  colors: ['primary', 'neutral', ...SEMANTIC_ALIASES, 'tint', 'charts'],
+  colors: ['primary', 'neutral', ...SEMANTIC_ALIASES, 'charts'],
   defaults: ['size', 'buttons', 'panels', 'inputs']
 }
 
 /** Every section, for whole-document comparisons against the baseline. */
-export const ALL_SECTION_KEYS: SectionKey[] = [...SECTION_GROUPS.colors, ...SECTION_GROUPS.defaults, 'surfaces', 'font', 'type', 'weights', 'icons', 'radius', 'controls', 'page', 'states']
+export const ALL_SECTION_KEYS: SectionKey[] = [...SECTION_GROUPS.colors, ...SECTION_GROUPS.defaults, 'surfaces', 'font', 'type', 'weights', 'icons', 'radius', 'controls', 'page', 'states', 'tint']
 
 /** Which section a semantic token (or token shade) belongs to. */
 function tokenSection(token: string): TokenSection {
