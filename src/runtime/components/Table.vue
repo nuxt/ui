@@ -76,8 +76,7 @@ declare module '@tanstack/table-core' {
     }
   }
 
-  // The default features register every built-in sort and filter function, and grouping tables register the built-in aggregation functions,
-  // so their names stay valid on column definitions.
+  // The table registers every built-in sort, filter and aggregation function, so their names stay valid on column definitions.
   interface SortFns extends Record<BuiltInSortFn, SortFn<any, any>> {}
   interface FilterFns extends Record<BuiltInFilterFn, FilterFn<any, any>> {}
   interface AggregationFns extends Record<BuiltInAggregationFn, AggregationFnDef<any, any>> {}
@@ -227,6 +226,7 @@ import {
   createExpandedRowModel,
   createFilteredRowModel,
   createSortedRowModel,
+  aggregationFns,
   filterFns,
   makeStateUpdater,
   sortFns
@@ -371,14 +371,16 @@ const defaultFeatures = {
   filteredRowModel: createFilteredRowModel(),
   sortedRowModel: createSortedRowModel(),
   expandedRowModel: createExpandedRowModel(),
+  aggregationFns,
   filterFns,
   sortFns
 }
 
-// Custom sorting and filtering functions are added to the built-in ones instead of replacing them.
+// Custom sorting, filtering and aggregation functions are added to the built-in ones instead of replacing them.
 const registeredFeatures = tableFeatures({
   ...defaultFeatures,
   ...props.features,
+  aggregationFns: { ...aggregationFns, ...props.features?.aggregationFns },
   filterFns: { ...filterFns, ...props.features?.filterFns },
   sortFns: { ...sortFns, ...props.features?.sortFns }
 }) as TableFeatures
@@ -592,9 +594,7 @@ function onRowSelect(e: Event, row: TableRow<T>) {
   if (!props.onSelect || !row.getCanSelect()) {
     return
   }
-  const target = e.target as HTMLElement
-  const isInteractive = target.closest('a, button, input, label, select, textarea')
-  if (isInteractive) {
+  if (isInteractive(e.target)) {
     return
   }
 
@@ -642,7 +642,7 @@ function getCellSpan(span: number) {
 }
 
 function isInteractive(target: EventTarget | null) {
-  return target instanceof Element && !!target.closest('a, button, input, label, select, textarea')
+  return target instanceof Element && !!target.closest('a, button, input, label, select, textarea, [contenteditable], [role="slider"]')
 }
 
 function onCellMousedown(e: MouseEvent, cell: Cell<TableFeatures, T, unknown>) {
@@ -682,7 +682,7 @@ function onCellKeydown(e: KeyboardEvent) {
 
 // Moves the focus to the active cell, scrolling a virtualized table to its row first.
 function focusSelectedCell() {
-  const focus = () => tableRef.value?.querySelector<HTMLElement>('td[tabindex="0"]')?.focus()
+  const focus = () => tableRef.value?.querySelector<HTMLElement>(':scope > tbody > tr > td[tabindex="0"]')?.focus()
   const rowId = tableApi.getFocusedCell()?.row.id
   const index = virtualizerInstance && rowId !== undefined ? centerRows.value.findIndex(row => row.id === rowId) : -1
   if (index >= 0) {

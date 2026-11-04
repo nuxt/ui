@@ -698,6 +698,19 @@ describe('Table', () => {
     expect(tableApi.getColumn('id').getAutoSortFn()).toBeTypeOf('function')
   })
 
+  it('registers the built-in aggregation functions', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data: data.slice(0, 3),
+        columns: [{ accessorKey: 'status' }, { accessorKey: 'amount', aggregationFn: 'median' }] as any,
+        grouping: ['status'],
+        features: { columnGroupingFeature, rowAggregationFeature, groupedRowModel: createGroupedRowModel() }
+      }
+    })
+
+    expect((wrapper.vm as any).tableApi.getRowModel().rows[0].getValue('amount')).toBeTypeOf('number')
+  })
+
   it('selects cells with the pointer and the keyboard', async () => {
     const wrapper = await mountSuspended(Table, {
       props: { data: data.slice(0, 3), columns: [{ accessorKey: 'id' }, { accessorKey: 'email' }] as any, features: { cellSelectionFeature } },
