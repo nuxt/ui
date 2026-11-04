@@ -11,10 +11,10 @@ export default defineTheme({
     itemWithChildren: 'flex flex-col data-[state=open]:mb-1.5',
     trigger: 'font-semibold',
     link: 'group relative w-full px-2.5 py-1.5 before:inset-y-px before:inset-x-0 flex items-center gap-1.5 text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-(length:--ui-focus-width) before:outline-accent-focus',
-    linkLeadingIcon: 'shrink-0 size-5',
+    linkLeadingIcon: 'shrink-0 size-4',
     linkTrailing: 'ms-auto inline-flex gap-1.5 items-center',
     linkTrailingBadge: 'shrink-0',
-    linkTrailingIcon: 'size-5 transform transition-transform duration-200 ease-out motion-reduce:transition-none shrink-0 group-data-[state=open]:rotate-180',
+    linkTrailingIcon: 'size-4 transform transition-transform duration-200 ease-out motion-reduce:transition-none shrink-0 group-data-[state=open]:rotate-180',
     linkTitle: 'truncate',
     linkTitleExternalIcon: 'size-3 align-top text-faint'
   },

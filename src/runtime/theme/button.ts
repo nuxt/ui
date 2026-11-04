@@ -66,17 +66,23 @@ export default defineTheme({
         trailingIcon: 'ms-auto'
       }
     },
-    // Equal padding, for `square` or an icon and nothing else
+    // An icon is denser than text, so the side it's on takes 2px less padding
+    leading: {
+      true: {
+        base: 'ps-[calc(var(--ui-control-px)-(--spacing(0.5)))]'
+      }
+    },
+    trailing: {
+      true: {
+        base: 'pe-[calc(var(--ui-control-px)-(--spacing(0.5)))]'
+      }
+    },
+    // Equal padding, for `square` or an icon and nothing else. After `leading`
+    // and `trailing`, so it replaces their padding
     square: {
       true: {
         base: 'px-(--ui-control-py)'
       }
-    },
-    leading: {
-      true: ''
-    },
-    trailing: {
-      true: ''
     },
     // The component turns it off on the trailing icon when the leading one is the loading icon
     loading: {

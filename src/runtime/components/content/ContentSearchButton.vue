@@ -63,6 +63,7 @@ import { useContentSearch } from '../../composables/useContentSearch'
 import { useLocale } from '../../composables/useLocale'
 import { omit, transformUI } from '../../utils'
 import { tv } from '../../utils/tv'
+import { getItemSize } from '../../utils/size'
 import UButton from '../Button.vue'
 import UKbd from '../Kbd.vue'
 import UTooltip from '../Tooltip.vue'
@@ -124,7 +125,7 @@ const ui = computed(() => tv(theme, overrides.value)({
         <div data-slot="content-search-button-trailing" :class="ui.trailing({ class: props.ui?.trailing })">
           <slot name="trailing" :ui="uiProxy">
             <template v-if="props.kbds?.length">
-              <UKbd v-for="(kbd, index) in props.kbds" :key="index" variant="subtle" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
+              <UKbd v-for="(kbd, index) in props.kbds" :key="index" variant="subtle" :size="getItemSize(props.size)" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
             </template>
           </slot>
         </div>

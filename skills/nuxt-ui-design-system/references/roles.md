@@ -94,11 +94,11 @@ Shadows: menus, popovers, modals and toasts use `shadow-lg`, tooltips `shadow-sm
 | --- | --- | --- | --- | --- | --- | --- |
 | `xs` | 24px | `--spacing(1)` | `--spacing(2)` | `--spacing(1)` | `--spacing(4)` | `--text-xs` / `--spacing(4)` |
 | `sm` | 28px | `--spacing(1.5)` | `--spacing(2.5)` | `--spacing(1.5)` | `--spacing(4)` | `--text-xs` / `--spacing(4)` |
-| `md` | 32px | `--spacing(1.5)` | `--spacing(2.5)` | `--spacing(1.5)` | `--spacing(5)` | `--text-sm` / `--spacing(5)` |
-| `lg` | 36px | `--spacing(2)` | `--spacing(3)` | `--spacing(2)` | `--spacing(5)` | `--text-sm` / `--spacing(5)` |
-| `xl` | 40px | `--spacing(2)` | `--spacing(3)` | `--spacing(2)` | `--spacing(6)` | `--text-base` / `--spacing(6)` |
+| `md` | 32px | `--spacing(2)` | `--spacing(2.5)` | `--spacing(1.5)` | `--spacing(4)` | `--text-sm` / `--spacing(4)` |
+| `lg` | 36px | `--spacing(2.5)` | `--spacing(3)` | `--spacing(2)` | `--spacing(4)` | `--text-sm` / `--spacing(4)` |
+| `xl` | 40px | `--spacing(2.5)` | `--spacing(3)` | `--spacing(2)` | `--spacing(5)` | `--text-base` / `--spacing(5)` |
 
-The heights are those of Button and the fields: the text line height plus twice `py`, so `--ui-control-py-md: --spacing(1)` makes `md` 28px. FileUpload reads the scale for its file items, its icon and the padding of its `button` variant, its `area` variant keeps `p-4` (`base` slot). The other components keep their own values, retune a size in their app config: the slot is `base` on Badge, `root` on InputDate, InputTime, Checkbox, RadioGroup, Calendar and Stepper, and `link` (per `orientation`) and `label` on NavigationMenu. PinInput only reads the text, its boxes are a fixed square per size on `base`:
+The heights are those of Button and the fields: the text line height plus twice `py`, so `--ui-control-py-md: --spacing(1.5)` makes `md` 28px. The line height matches the icon, keep them equal so an icon-only button stays as tall as one with a label. The labels and descriptions of Checkbox, RadioGroup and Switch and the text of Textarea keep a reading line height of their own (`--spacing(4)`, `5`, `6` from `xs`/`sm` to `xl`), Textarea with `0.125rem` less `py`. FileUpload reads the scale for its file items, its icon and the padding of its `button` variant, its `area` variant keeps `p-4` (`base` slot). The other components keep their own values, retune a size in their app config: the slot is `base` on Badge, `root` on InputDate, InputTime, Checkbox, RadioGroup, Calendar and Stepper, and `link` (per `orientation`) and `label` on NavigationMenu. PinInput only reads the text, its boxes are a fixed square per size on `base`:
 
 `badge`, `pinInput`, `inputDate`, `inputTime`, `checkbox`, `radioGroup`, `navigationMenu`, `calendar`, `stepper`. Retune the ones the app uses.
 

@@ -174,7 +174,9 @@
        Button, the fields, the menus and the other controls, and the box of
        Checkbox, RadioGroup and the Switch thumb. Each size copies the padding,
        gap, icon and box to `--ui-control-*` and reads the text as is. The
-       line heights are lengths, so `--ui-control-text-step` doesn't grow a field */
+       line height of a size is the line of a one-line control and matches its
+       icon, so an icon alone is as tall as a label. The line heights are lengths,
+       so `--ui-control-text-step` doesn't grow a field */
     --ui-control-px-xs: --spacing(2);
     --ui-control-px-sm: --spacing(2.5);
     --ui-control-px-md: --spacing(2.5);
@@ -182,9 +184,9 @@
     --ui-control-px-xl: --spacing(3);
     --ui-control-py-xs: --spacing(1);
     --ui-control-py-sm: --spacing(1.5);
-    --ui-control-py-md: --spacing(1.5);
-    --ui-control-py-lg: --spacing(2);
-    --ui-control-py-xl: --spacing(2);
+    --ui-control-py-md: --spacing(2);
+    --ui-control-py-lg: --spacing(2.5);
+    --ui-control-py-xl: --spacing(2.5);
     --ui-control-gap-xs: --spacing(1);
     --ui-control-gap-sm: --spacing(1.5);
     --ui-control-gap-md: --spacing(1.5);
@@ -192,9 +194,9 @@
     --ui-control-gap-xl: --spacing(2);
     --ui-control-icon-size-xs: --spacing(4);
     --ui-control-icon-size-sm: --spacing(4);
-    --ui-control-icon-size-md: --spacing(5);
-    --ui-control-icon-size-lg: --spacing(5);
-    --ui-control-icon-size-xl: --spacing(6);
+    --ui-control-icon-size-md: --spacing(4);
+    --ui-control-icon-size-lg: --spacing(4);
+    --ui-control-icon-size-xl: --spacing(5);
     --ui-control-box-xs: --spacing(3);
     --ui-control-box-sm: --spacing(3.5);
     --ui-control-box-md: --spacing(4);
@@ -205,11 +207,11 @@
     --ui-control-text-sm: --theme(--text-xs, 0.75rem);
     --ui-control-text-sm--line-height: --spacing(4);
     --ui-control-text-md: --theme(--text-sm, 0.875rem);
-    --ui-control-text-md--line-height: --spacing(5);
+    --ui-control-text-md--line-height: --spacing(4);
     --ui-control-text-lg: --theme(--text-sm, 0.875rem);
-    --ui-control-text-lg--line-height: --spacing(5);
+    --ui-control-text-lg--line-height: --spacing(4);
     --ui-control-text-xl: --theme(--text-base, 1rem);
-    --ui-control-text-xl--line-height: --spacing(6);
+    --ui-control-text-xl--line-height: --spacing(5);
 
     @variant sm {
       --ui-gutter: --spacing(6);

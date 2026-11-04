@@ -7,7 +7,7 @@ export default defineTheme({
     wrapper: 'min-w-0 flex-1 flex flex-col',
     title: 'text-sm font-medium',
     description: 'text-sm opacity-90',
-    icon: 'shrink-0 size-5',
+    icon: 'shrink-0 size-4',
     avatar: 'shrink-0',
     actions: 'flex flex-wrap gap-1.5 shrink-0',
     close: 'p-0'
