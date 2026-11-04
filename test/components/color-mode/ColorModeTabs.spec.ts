@@ -7,14 +7,18 @@ import { useColorMode } from '#imports'
 import ColorModeTabs from '../../../src/runtime/components/color-mode/ColorModeTabs.vue'
 
 describe('ColorModeTabs', () => {
-  it('passes accessibility tests with icon-only tabs', async () => {
-    const wrapper = await mountSuspended(ColorModeTabs, {
-      props: {
-        ui: { label: 'sr-only' }
-      }
-    })
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(ColorModeTabs)
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  it('hides the labels visually unless the `ui` prop shows them', async () => {
+    const hidden = await mountSuspended(ColorModeTabs)
+    expect(hidden.find('[data-slot="tabs-label"]').classes()).toContain('sr-only')
+
+    const shown = await mountSuspended(ColorModeTabs, { props: { ui: { label: 'not-sr-only' } } })
+    expect(shown.find('[data-slot="tabs-label"]').classes()).not.toContain('sr-only')
   })
 
   it('selects the preference after hydrating', async () => {

@@ -23,9 +23,9 @@ The tabs default to `color="neutral"`.
 
 ## Examples
 
-### Icon only
+### With labels
 
-Use the `ui` prop to hide the labels visually. They stay available to assistive technologies.
+The labels are visually hidden by default and stay available to assistive technologies. Use the `ui` prop to show them:
 
 ::component-code{prefix="color-mode"}
 ---
@@ -33,7 +33,7 @@ ignore:
   - ui
 props:
   ui:
-    label: 'sr-only'
+    label: 'not-sr-only'
 ---
 ::
 

@@ -17,7 +17,6 @@ withDefaults(defineProps<{
   <UColorModeTabs
     :size="size"
     :ui="{
-      label: 'sr-only',
       list: 'bg-tint ring ring-default p-0.5',
       indicator: 'inset-y-0.5',
       trigger: 'w-full p-1.5'

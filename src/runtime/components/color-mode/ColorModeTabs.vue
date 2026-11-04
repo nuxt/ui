@@ -16,6 +16,7 @@ import { useColorMode } from '#imports'
 import { useComponentProps, useThemeConfig } from '../../composables/useComponentProps'
 import { useForwardProps } from '../../composables/useForwardProps'
 import { useLocale } from '../../composables/useLocale'
+import { usePrefix } from '../../composables/usePrefix'
 import UTabs from '../Tabs.vue'
 
 defineOptions({ inheritAttrs: false })
@@ -29,8 +30,16 @@ const props = useComponentProps('tabs', _props)
 const { t } = useLocale()
 const colorMode = useColorMode()
 const appConfig = useThemeConfig()
+const prefix = usePrefix()
 
 const tabsProps = useForwardProps(props)
+
+// The icons carry the control, the labels are only read by assistive technologies.
+// A replacer function on `label` takes over the slot, so it decides whether they show.
+const tabsUi = computed(() => {
+  const label = props.ui?.label
+  return { ...props.ui, label: typeof label === 'function' ? label : [prefix('sr-only'), label] }
+})
 
 // The preference is only known on the client, so the selected tab matches the server until mounted.
 const mounted = useMounted()
@@ -57,6 +66,7 @@ const preference = computed({
     v-model="preference"
     v-bind="{ ...tabsProps, ...$attrs }"
     :items="items"
+    :ui="tabsUi"
     :content="false"
   />
 </template>
