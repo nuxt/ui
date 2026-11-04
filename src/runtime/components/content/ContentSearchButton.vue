@@ -58,6 +58,7 @@ import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useComponentProps, useComponentOverrides, useThemeConfig } from '../../composables/useComponentProps'
+import { useFieldGroup } from '../../composables/useFieldGroup'
 import { useForwardProps } from '../../composables/useForwardProps'
 import { useContentSearch } from '../../composables/useContentSearch'
 import { useLocale } from '../../composables/useLocale'
@@ -79,6 +80,9 @@ const _props = withDefaults(defineProps<ContentSearchButtonProps>(), {
 const slots = defineSlots<ButtonSlots>()
 
 const props = useComponentProps('contentSearchButton', _props, theme)
+const { size: fieldGroupSize } = useFieldGroup<ContentSearchButtonProps>(_props)
+// The kbds follow the size the button renders at, a wrapping FieldGroup included
+const kbdSize = computed(() => getItemSize(fieldGroupSize.value ?? props.size))
 
 const [DefineButtonTemplate, ReuseButtonTemplate] = createReusableTemplate()
 
@@ -125,7 +129,7 @@ const ui = computed(() => tv(theme, overrides.value)({
         <div data-slot="content-search-button-trailing" :class="ui.trailing({ class: props.ui?.trailing })">
           <slot name="trailing" :ui="uiProxy">
             <template v-if="props.kbds?.length">
-              <UKbd v-for="(kbd, index) in props.kbds" :key="index" variant="subtle" :size="getItemSize(props.size)" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
+              <UKbd v-for="(kbd, index) in props.kbds" :key="index" variant="subtle" :size="kbdSize" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
             </template>
           </slot>
         </div>
