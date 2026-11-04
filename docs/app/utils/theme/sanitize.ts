@@ -1,3 +1,5 @@
+import { EXTRAS_VARIABLES } from './engine/extras'
+
 /**
  * The write boundary for untrusted theme input. AI `applyTheme` output and
  * the persisted theme both end up concatenated into `<style>` rules, so only
@@ -19,9 +21,10 @@ const SAFE_HEX = /^#[0-9a-f]{3,8}$/i
 const OKLCH_NUMBER = String.raw`\d+(?:\.\d+)?|\.\d+`
 const SAFE_OKLCH = new RegExp(String.raw`^oklch\(\s*(?:${OKLCH_NUMBER})%?\s+(?:${OKLCH_NUMBER}|none)\s+(?:(?:${OKLCH_NUMBER})(?:deg)?|none)\s*\)$`, 'i')
 const SAFE_CSS_VAR_KEY = /^--[\w-]+$/
-// var() refs, hex, keywords, px/% lengths, and literal oklch()/rgb() colors
-// (an imported token override is as likely to be a literal as a ramp ref)
-const SAFE_CSS_VAR_VALUE = /^(?:var\(--[\w-]+\)|#[0-9a-f]{3,8}|[a-z]+|-?\d{1,3}(?:\.\d+)?(?:px|%)|oklch\([\w.% -]{1,40}\)|rgba?\([\d.%, /]{1,40}\))$/i
+// var() refs, hex, keywords, px/% lengths, literal oklch()/rgb() colors (an
+// imported token override is as likely to be a literal as a ramp ref), and a
+// keyword or variable mixed with transparent, Mono's translucent dark borders
+const SAFE_CSS_VAR_VALUE = /^(?:var\(--[\w-]+\)|#[0-9a-f]{3,8}|[a-z]+|-?\d{1,3}(?:\.\d+)?(?:px|%)|oklch\([\w.% -]{1,40}\)|rgba?\([\d.%, /]{1,40}\)|color-mix\(in oklab, (?:[a-z]+|var\(--[\w-]+\)) \d{1,3}(?:\.\d+)?%, transparent\))$/i
 
 // A palette name becomes `--color-<name>-<shade>`, one ident: a space, fine
 // inside a quoted font family, would split the property and drop the ramp.
@@ -42,11 +45,12 @@ export function sanitizeCustomColors(input: Record<string, any>): Record<string,
   return result
 }
 
+/** Also drops the variables a studio field owns, see `EXTRAS_VARIABLES`. */
 export function sanitizeCSSVariables(input: { light?: Record<string, any>, dark?: Record<string, any> }): { light: Record<string, string>, dark: Record<string, string> } {
   const clean = (vars?: Record<string, unknown>) => {
     const result: Record<string, string> = {}
     for (const [key, value] of Object.entries(vars || {})) {
-      if (SAFE_CSS_VAR_KEY.test(key) && !UNSAFE_KEYS.has(key.slice(2)) && typeof value === 'string' && SAFE_CSS_VAR_VALUE.test(value)) {
+      if (SAFE_CSS_VAR_KEY.test(key) && !UNSAFE_KEYS.has(key.slice(2)) && !EXTRAS_VARIABLES.has(key) && typeof value === 'string' && SAFE_CSS_VAR_VALUE.test(value)) {
         result[key] = value
       }
     }
