@@ -1,5 +1,6 @@
-import type { ThemeDoc, StoredPaletteParams, StyleOptions } from './engine'
+import type { ThemeDoc, ThemeLayout, ThemeCharts, StoredPaletteParams, StyleOptions } from './engine'
 import { DEFAULT_COLORS, THEME_DEFAULTS } from './engine/types'
+import { normalizeExtras } from './engine/extras'
 import { SAFE_NAME } from './sanitize'
 import { FONT_WEIGHT_DEFAULTS } from './studio'
 
@@ -29,6 +30,8 @@ export interface StoredTheme {
   fontSize?: number
   icons?: string
   font?: FontPrefs
+  layout?: ThemeLayout
+  charts?: ThemeCharts
   /** Semantic alias overrides (secondary, success, info, warning, error). */
   colors?: Record<string, string>
   /** Explicit per-component overrides, from presets, imports or the AI chat. */
@@ -152,6 +155,9 @@ export function readStoredTheme(): StoredTheme {
     const parsed = JSON.parse(raw)
     if (!parsed || typeof parsed !== 'object') return {}
     parsed.font = normalizeFont(parsed.font)
+    const extras = normalizeExtras(parsed)
+    parsed.layout = extras.layout
+    parsed.charts = extras.charts
     return parsed as StoredTheme
   } catch {
     return {}
@@ -199,6 +205,8 @@ export function snapshotStoredTheme(): StoredTheme {
     fontSize: unless(useState<number>('nuxt-ui-font-size').value, THEME_DEFAULTS.fontSize),
     font: filled(useState<StoredTheme['font']>('nuxt-ui-font').value),
     icons: unless(useState<string>('nuxt-ui-icons').value, THEME_DEFAULTS.icons),
+    layout: filled(useState<StoredTheme['layout']>(THEME_STATE_KEYS.layout).value),
+    charts: filled(useState<StoredTheme['charts']>(THEME_STATE_KEYS.charts).value),
     colors: filled(extras?.colors),
     components: filled(extras?.ui),
     customColors: filled(useState<StoredTheme['customColors']>('nuxt-ui-custom-colors').value),
@@ -218,11 +226,14 @@ export type { ThemeDoc }
 export const THEME_STATE_KEYS = {
   stylePrefs: 'nuxt-ui-style-prefs',
   themePreset: 'nuxt-ui-theme-preset',
-  paletteParams: 'nuxt-ui-palette-params-state'
+  paletteParams: 'nuxt-ui-palette-params-state',
+  layout: 'nuxt-ui-layout',
+  charts: 'nuxt-ui-charts'
 } as const
 
 /** DOM ids of the style tags useHead owns and the FOUC scripts pre-fill. */
 export const THEME_TAG_IDS = {
   cssVariables: 'nuxt-ui-css-variables',
-  customColors: 'nuxt-ui-custom-colors'
+  customColors: 'nuxt-ui-custom-colors',
+  extras: 'nuxt-ui-extras'
 } as const

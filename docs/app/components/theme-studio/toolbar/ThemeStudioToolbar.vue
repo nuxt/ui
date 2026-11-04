@@ -54,8 +54,8 @@ const { style } = useScrollShadow(toolbarRef, { orientation: 'horizontal' })
       <ThemeStudioToolbarIcons :vertical="vertical" />
     </UFormField>
 
-    <UFormField label="Radius" :ui="fieldUi">
-      <ThemeStudioToolbarRadius :vertical="vertical" />
+    <UFormField label="Variables" :ui="fieldUi">
+      <ThemeStudioToolbarLayout :vertical="vertical" />
     </UFormField>
 
     <UFormField label="Defaults" :ui="fieldUi">

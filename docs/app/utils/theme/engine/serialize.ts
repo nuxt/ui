@@ -19,6 +19,7 @@ import {
   styleTokens,
   mergeUi
 } from './types'
+import { buildExtras, EXTRAS_TABLES } from './extras'
 import json5 from 'json5'
 import { themeIcons } from '../icons'
 
@@ -33,10 +34,14 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explici
 
   // Semantic token shades behind the style choices.
   const style = styleTokens(doc.style || {})
-  // Style expansion and explicit token overrides merge, explicit last so a
-  // round-tripped doc collapses instead of printing every variable twice.
-  const light: Record<string, string> = { ...style.light, ...doc.tokens?.light }
-  const dark: Record<string, string> = { ...style.dark, ...doc.tokens?.dark }
+  // The control scale, the page sizes, the states, the roles and the charts,
+  // only what differs from the library
+  const extras = buildExtras(doc, EXTRAS_TABLES, px => `--spacing(${px / 4})`)
+  // Style expansion, chart series and explicit token overrides merge, explicit
+  // last like the page's own style tags, and so a round-tripped doc collapses
+  // instead of printing every variable twice.
+  const light: Record<string, string> = { ...style.light, ...extras.light, ...doc.tokens?.light }
+  const dark: Record<string, string> = { ...style.dark, ...extras.dark, ...doc.tokens?.dark }
 
   // An alias pinned to other shades of its own palette goes on its plugin line,
   // `primary: neutral 900 200`, instead of a variable
@@ -129,6 +134,11 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explici
   if (doc.font?.weights?.body !== undefined) rootLines.push(`  --ui-font-weight-body: ${doc.font.weights.body};`)
   if (doc.font?.weights?.heading !== undefined) rootLines.push(`  --ui-font-weight-heading: ${doc.font.weights.heading};`)
   if (doc.radius !== undefined && doc.radius !== THEME_DEFAULTS.radius) rootLines.push(`  --ui-radius: ${doc.radius}rem;`)
+  rootLines.push(...Object.entries(extras.root).map(([key, value]) => `  ${key}: ${value};`))
+  const smLines = Object.entries(extras.sm).map(([key, value]) => `    ${key}: ${value};`)
+  if (smLines.length) {
+    rootLines.push(...(rootLines.length ? [''] : []), '  @variant sm {', ...smLines, '  }')
+  }
   if (rootLines.length) {
     lines.push('', ':root {', ...rootLines, '}')
   }

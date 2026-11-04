@@ -6,6 +6,7 @@ import { NEUTRAL_COLORS, THEME_STUDIO_VIEWS } from '../utils/theme/studio'
 // every docs page, which would put the exporter in the entry chunk.
 import { docToSettings, isDefaultTheme, styleComponents, styleTokens, DEFAULT_COLORS, SHADES, nearestShade } from '../utils/theme/engine/types'
 import { presets, tintedNeutralBase } from '../utils/theme/engine/presets'
+import { CHART_ALIASES, CHART_COLORS, CHART_SERIES } from '../utils/theme/engine/extras'
 import { generatePalette, applyPaletteEffects, isDefaultEffects, parseCssColor } from '../utils/theme/engine/palette'
 import { sectionFingerprint, stableStringify, mergeSection, canonicalTokenShades, ALL_SECTION_KEYS, SECTION_GROUPS } from '../utils/theme/engine/sections'
 import type { SectionKey, ThemeDoc, ThemePreset, PaletteCurveParams, PaletteEffects, StoredPaletteParams, PalettePin, StyleOptions, Shade, ShadeStop, ColorAlias, TokenRamp, VariantGroup, DefaultVariant } from '../utils/theme/engine'
@@ -354,6 +355,28 @@ export function useThemeStudio() {
     if (Math.random() < 0.1) variants.panels = pick(['soft', 'subtle'] as const)
     if (Object.keys(variants).length) {
       doc.style = { defaults: { variants } }
+    }
+
+    // The layout and the charts roll rarely and on short lists too,
+    // most shuffles keep the stock room. The text on a solid stays out: a
+    // random one fails contrast, and the overlay border only shows once the
+    // overlay surface is set, which the shuffle never does.
+    const layout: NonNullable<ThemeDoc['layout']> = {}
+    if (Math.random() < 0.25) layout.density = pick(['compact', 'comfortable'] as const)
+    if (Math.random() < 0.2) layout.tint = pick(['subtle', 'vivid'] as const)
+    if (Math.random() < 0.15) layout.gutter = pick([16, 32])
+    if (Math.random() < 0.1) layout.containerWidth = pick([1152, 1440])
+    if (Math.random() < 0.1) layout.headerHeight = pick([56, 72])
+    if (Math.random() < 0.1) layout.textStep = 2
+    if (Math.random() < 0.15) layout.focusWidth = pick([2, 4])
+    if (Math.random() < 0.15) layout.disabledOpacity = pick([50, 60])
+    if (Object.keys(layout).length) doc.layout = layout
+
+    // the first series stays on the primary, the other five take distinct palettes
+    if (Math.random() < 0.3) {
+      const palettes = Object.keys(CHART_COLORS).filter(name => !CHART_ALIASES.includes(name) && name !== doc.colors!.primary)
+      // drawn without replacement, five distinct palettes
+      doc.charts = Object.fromEntries(CHART_SERIES.slice(1).map(series => [series, palettes.splice(Math.floor(Math.random() * palettes.length), 1)[0]!]))
     }
 
     applyDoc(doc)

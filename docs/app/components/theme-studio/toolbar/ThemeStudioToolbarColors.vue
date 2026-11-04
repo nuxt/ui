@@ -50,6 +50,8 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'p-3 flex 
       />
 
       <ThemeStudioColorSection alias="neutral" section-key="neutral" />
+
+      <ThemeStudioColorCharts />
     </template>
   </UPopover>
 </template>
