@@ -757,9 +757,14 @@ function getCellSelectionListeners(cell: Cell<TableFeatures, T, unknown>) {
 
 // Until a cell is selected, the first cell takes the roving `tabindex` so the keyboard can reach the grid.
 const entryCell = computed(() => {
-  const firstIndex = virtualizer ? virtualItems.value[0]?.index ?? 0 : 0
-  const row = topRows.value[0] ?? centerRows.value[firstIndex]
-  return row?.getVisibleCells().find(cell => cell.getCanSelect())?.id
+  const center = virtualizer ? virtualItems.value.map(item => centerRows.value[item.index]) : centerRows.value
+  for (const row of [...topRows.value, ...center, ...bottomRows.value]) {
+    const cell = row?.getVisibleCells().find(cell => cell.getCanSelect())
+    if (cell) {
+      return cell.id
+    }
+  }
+  return undefined
 })
 
 function getCellTabIndex(cell: Cell<TableFeatures, T, unknown>) {

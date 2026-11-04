@@ -819,6 +819,9 @@ describe('Table', () => {
 
     const skipped = await mountSuspended(Table, { props: { data: data.slice(0, 1), columns: [{ accessorKey: 'id', enableCellSelection: false }, { accessorKey: 'email' }] as any, features: { cellSelectionFeature } } })
     expect(skipped.findAll('tbody td').map(td => td.attributes('tabindex'))).toEqual(['-1', '0'])
+
+    const firstRowSkipped = await mountSuspended(Table, { props: { data: data.slice(0, 2), columns: [{ accessorKey: 'id' }] as any, features: { cellSelectionFeature }, options: { enableCellSelection: (cell: any) => cell.row.index > 0 } } })
+    expect(firstRowSkipped.findAll('tbody td').map(td => td.attributes('tabindex'))).toEqual(['-1', '0'])
     await cells()[0]!.trigger('focus')
     expect(cells()[0]!.attributes('data-selected')).toBe('true')
   })
