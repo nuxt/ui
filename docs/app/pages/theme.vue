@@ -164,7 +164,7 @@ const shareOpen = ref(false)
           <ThemeStudioToolbar vertical />
 
           <UFormField label="Color mode" :ui="{ root: 'text-xs', container: 'mt-1' }">
-            <ThemeStudioColorModeTabs size="sm" class="w-full" />
+            <ThemeStudioColorModeTabs class="w-full" />
           </UFormField>
 
           <USeparator class="my-5" />

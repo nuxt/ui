@@ -9,7 +9,7 @@ import type { TabsProps } from '@nuxt/ui'
 withDefaults(defineProps<{
   size?: TabsProps['size']
 }>(), {
-  size: 'xs'
+  size: 'sm'
 })
 </script>
 
@@ -18,8 +18,7 @@ withDefaults(defineProps<{
     :size="size"
     :ui="{
       list: 'bg-tint ring ring-default p-0.5',
-      indicator: 'inset-y-0.5',
-      trigger: 'w-full p-1.5'
+      indicator: 'inset-y-0.5'
     }"
     aria-label="Color mode"
   />
