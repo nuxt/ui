@@ -31,7 +31,7 @@ const TYPE_FIELDS = ['uppercase', 'italic', 'letterSpacing', 'lineHeight'] as co
 /** Which layout fields the `controls`, `page` and `states` sections each own. */
 const LAYOUT_SECTIONS = {
   controls: ['density', 'scale', 'textStep'],
-  page: ['gutter', 'headerHeight'],
+  page: ['gutter', 'containerWidth', 'headerHeight'],
   states: ['focusWidth', 'disabledOpacity'],
   tint: ['tint']
 } as const satisfies Record<'controls' | 'page' | 'states' | 'tint', readonly (keyof ThemeLayout)[]>

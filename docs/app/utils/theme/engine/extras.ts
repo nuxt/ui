@@ -53,6 +53,7 @@ export const DENSITIES = Object.keys(DENSITY_STEPS) as Density[]
 export const LAYOUT_FIELDS = {
   textStep: { variable: '--ui-control-text-step', label: 'Field text', default: 0, min: 0, max: 4, step: 1, unit: 'rem' },
   gutter: { variable: '--ui-gutter', label: 'Gutter', default: 24, min: 8, max: 48, step: 4, unit: 'spacing' },
+  containerWidth: { variable: '--ui-container-width', label: 'Container', default: 1280, min: 768, max: 1920, step: 32, unit: 'rem' },
   headerHeight: { variable: '--ui-header-height', label: 'Header', default: 64, min: 48, max: 96, step: 4, unit: 'rem' },
   focusWidth: { variable: '--ui-focus-width', label: 'Focus', default: 3, min: 1, max: 6, step: 1, unit: 'px' },
   disabledOpacity: { variable: '--ui-disabled-opacity', label: 'Disabled', default: 75, min: 25, max: 100, step: 5, unit: '%' }

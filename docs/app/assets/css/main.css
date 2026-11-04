@@ -14,7 +14,9 @@
   --font-sans: 'Public Sans', sans-serif;
 }
 
-:root {
+/* The docs run wider than the library's 80rem. Kept off the studio, whose
+   Container slider writes `:root` and rests on the library's value. */
+body:not(.theme-studio) {
   --ui-container-width: var(--container-8xl);
 }
 
