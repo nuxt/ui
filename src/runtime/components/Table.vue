@@ -203,7 +203,7 @@ export type TableSlots<T extends TableData = TableData> = {
 </script>
 
 <script setup lang="ts" generic="T extends TableData">
-import { computed, useTemplateRef, watch, toRef, onBeforeUnmount, h, isVNode, nextTick } from 'vue'
+import { computed, useTemplateRef, watch, toRef, onBeforeUnmount, h, isVNode, nextTick, useId } from 'vue'
 import { Primitive } from 'reka-ui'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
@@ -400,8 +400,11 @@ const registeredFeatures = tableFeatures({
   sortFns: { ...sortFns, ...props.features?.sortFns }
 }) as TableFeatures
 
+const id = useId()
+
 // The cell APIs of these features only exist once they are registered.
 const hasCellSelection = 'cellSelectionFeature' in registeredFeatures
+const isCellSelectionEnabled = computed(() => hasCellSelection && tableApi.options.enableCellSelection !== false)
 const hasCellSpanning = 'cellSpanningFeature' in registeredFeatures
 // A row span can't reach a row the virtualizer doesn't render, so virtualized tables only span columns.
 const hasRowSpanning = hasCellSpanning && !props.virtualize
@@ -429,7 +432,8 @@ const models: { [K in keyof TableState<TableFeatures>]-?: Ref<TableState<TableFe
 const initialState = getInitialTableState(registeredFeatures, props.initialState) as unknown as Record<string, unknown>
 const atoms = Object.fromEntries(Object.keys(initialState).filter(key => key in models).map((key) => {
   const model = models[key as keyof typeof models] as Ref<unknown>
-  const get = () => model.value ?? props.state?.[key as keyof typeof props.state] ?? initialState[key]
+  // A slice in the `state` prop stays controlled by it, like TanStack's `state` option.
+  const get = () => props.state && key in props.state ? props.state[key as keyof typeof props.state] : model.value ?? initialState[key]
   return [key, {
     get,
     set: (updater: Updater<unknown>) => {
@@ -450,7 +454,7 @@ const tableOptions = computed(() => ({
   ...props.options,
   ...tableProps.value,
   features: registeredFeatures,
-  atoms,
+  atoms: { ...atoms, ...props.options?.atoms },
   data,
   columns,
   meta: meta.value
@@ -706,7 +710,8 @@ function onCellKeydown(e: KeyboardEvent) {
     return
   }
   let direction = cellSelectionKeys[e.key]
-  if (!direction) {
+  // Alt with an arrow is the browser's history navigation.
+  if (!direction || e.altKey) {
     return
   }
   // TanStack steps through the column order, which runs from the right in RTL.
@@ -750,7 +755,8 @@ function getCellSelectionListeners(cell: Cell<TableFeatures, T, unknown>) {
 
 // Until a cell is selected, the first cell takes the roving `tabindex` so the keyboard can reach the grid.
 const entryCell = computed(() => {
-  const row = topRows.value[0] ?? centerRows.value[0]
+  const firstIndex = virtualizer ? virtualItems.value[0]?.index ?? 0 : 0
+  const row = topRows.value[0] ?? centerRows.value[firstIndex]
   const column = tableApi.getVisibleLeafColumns()[0]
   return row && column ? `${row.id}_${column.id}` : undefined
 })
@@ -762,8 +768,9 @@ function getCellTabIndex(cell: Cell<TableFeatures, T, unknown>) {
   return cell.getTabIndex()
 }
 
+// A cell focused outside the selection becomes the active cell. A selected one keeps the range, like after a shift-click.
 function onCellFocus(cell: Cell<TableFeatures, T, unknown>) {
-  if (!tableApi.getFocusedCell()) {
+  if (!cell.getIsSelected()) {
     tableApi.setFocusedCell(cell.row.id, cell.column.id)
   }
 }
@@ -775,6 +782,26 @@ function getResizerStyles(header: Header<TableFeatures, T, unknown>) {
     return undefined
   }
   return { transform: `translateX(${dir.value === 'rtl' ? -deltaOffset : deltaOffset}px)` }
+}
+
+// The arrow keys resize the column in the text direction, and Enter resets it.
+function onResizerKeydown(e: KeyboardEvent, header: Header<TableFeatures, T, unknown>) {
+  const step = e.key === 'ArrowRight' ? 10 : e.key === 'ArrowLeft' ? -10 : 0
+  if (e.key === 'Enter') {
+    e.preventDefault()
+    resetHeaderSize(header)
+    return
+  }
+  if (!step) {
+    return
+  }
+  e.preventDefault()
+  const delta = dir.value === 'rtl' ? -step : step
+  const leaves = header.getLeafHeaders()
+  tableApi.setColumnSizing(sizing => ({
+    ...sizing,
+    ...Object.fromEntries(leaves.map(leaf => [leaf.column.id, Math.max(leaf.column.columnDef.minSize ?? 20, leaf.getSize() + delta / leaves.length)]))
+  }))
 }
 
 // A group header resizes its leaves, so resetting it resets them.
@@ -875,8 +902,12 @@ function getAriaSort(header: Header<TableFeatures, T, unknown>): AriaAttributes[
   return sorted === 'asc' ? 'ascending' : 'descending'
 }
 
-watch(() => props.data, () => {
+watch(() => props.data, (value, oldValue) => {
   data.value = props.data ? [...props.data] : []
+  // `autoResetCellSelection` is off so inline edits keep the selection, but new data still clears it.
+  if (hasCellSelection && value !== oldValue && (tableApi.options.autoResetAll ?? props.options?.autoResetCellSelection ?? true)) {
+    tableApi.resetCellSelection()
+  }
 }, props.watchOptions)
 
 defineExpose({
@@ -919,7 +950,7 @@ defineExpose({
           :data-pinned="cell.column.getIsPinned()"
           :data-selected="hasCellSelection ? cell.getIsSelected() : undefined"
           :tabindex="hasCellSelection ? getCellTabIndex(cell) : undefined"
-          :aria-selected="hasCellSelection ? cell.getIsSelected() : undefined"
+          :aria-selected="isCellSelectionEnabled ? cell.getIsSelected() : undefined"
           :colspan="hasCellSpanning ? getCellSpan(cell.getColSpan()) : undefined"
           :rowspan="hasRowSpanning ? getCellSpan(cell.getRowSpan()) : undefined"
           data-slot="table-td"
@@ -961,8 +992,8 @@ defineExpose({
     <table
       ref="tableRef"
       data-slot="table-base"
-      :role="hasCellSelection ? 'grid' : undefined"
-      :aria-multiselectable="hasCellSelection || undefined"
+      :role="isCellSelectionEnabled ? 'grid' : undefined"
+      :aria-multiselectable="isCellSelectionEnabled && tableApi.options.enableMultiCellRangeSelection !== false ? true : undefined"
       :class="ui.base({ class: [props.ui?.base] })"
       :style="hasResizableColumns ? { width: `${tableApi.getTotalSize()}px` } : undefined"
     >
@@ -976,6 +1007,7 @@ defineExpose({
         <tr v-for="headerGroup in headerGroups" :key="headerGroup.id" data-slot="table-tr" :class="ui.tr({ class: [props.ui?.tr] })">
           <th
             v-for="{ header, rowSpan } in headerGroup.headers"
+            :id="isResizable(header) ? `${id}-${header.id}` : undefined"
             :key="header.id"
             :data-pinned="getHeaderPinned(header)"
             :scope="header.colSpan > 1 ? 'colgroup' : 'col'"
@@ -1002,7 +1034,13 @@ defineExpose({
 
             <div
               v-if="isResizable(header)"
-              aria-hidden="true"
+              role="separator"
+              aria-orientation="vertical"
+              tabindex="0"
+              :aria-labelledby="`${id}-${header.id}`"
+              :aria-valuenow="header.getSize()"
+              :aria-valuemin="header.column.columnDef.minSize ?? 20"
+              :aria-valuemax="header.column.columnDef.maxSize"
               :data-resizing="header.column.getIsResizing()"
               data-slot="table-resizer"
               :class="ui.resizer({ class: props.ui?.resizer })"
@@ -1010,6 +1048,7 @@ defineExpose({
               @mousedown="header.getResizeHandler()($event)"
               @touchstart.passive="header.getResizeHandler()($event)"
               @dblclick="resetHeaderSize(header)"
+              @keydown="onResizerKeydown($event, header)"
             />
           </th>
         </tr>

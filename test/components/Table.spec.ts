@@ -729,6 +729,9 @@ describe('Table', () => {
     await cells()[0]!.trigger('keydown', { key: 'Escape' })
     expect(cells().map(td => td.attributes('aria-selected'))).toEqual(['true', 'false', 'false', 'false'])
 
+    await cells()[0]!.trigger('keydown', { key: 'ArrowDown', altKey: true })
+    expect(cells()[0]!.attributes('aria-selected')).toBe('true')
+
     wrapper.unmount()
   })
 
@@ -751,6 +754,37 @@ describe('Table', () => {
     expect(wrapper.find('thead th').attributes('style')).toContain('width: 160px')
 
     wrapper.unmount()
+  })
+
+  it('resizes a column with the keyboard', async () => {
+    const wrapper = await mountSuspended(Table, { props: { data, columns: [{ accessorKey: 'id', header: 'Id', enableResizing: true, size: 120 }] as any } })
+    const resizer = wrapper.find('[data-slot="table-resizer"]')
+
+    expect(resizer.attributes('role')).toBe('separator')
+    expect(resizer.attributes('aria-labelledby')).toBe(wrapper.find('thead th').attributes('id'))
+    await resizer.trigger('keydown', { key: 'ArrowRight' })
+    expect(resizer.attributes('aria-valuenow')).toBe('130')
+    await resizer.trigger('keydown', { key: 'Enter' })
+    expect(resizer.attributes('aria-valuenow')).toBe('120')
+  })
+
+  it('keeps a slice of the state prop controlled', async () => {
+    const wrapper = await mountSuspended(Table, { props: { data, state: { sorting: [{ id: 'id', desc: true }] } } })
+    const tableApi = (wrapper.vm as any).tableApi
+    tableApi.setSorting([{ id: 'email', desc: false }])
+    await wrapper.setProps({ state: { sorting: [{ id: 'email', desc: true }] } })
+
+    expect(tableApi.atoms.sorting.get()).toEqual([{ id: 'email', desc: true }])
+  })
+
+  it('clears the cell selection when the data is replaced', async () => {
+    const wrapper = await mountSuspended(Table, { props: { data: data.slice(0, 2), columns: [{ accessorKey: 'id' }] as any, features: { cellSelectionFeature } } })
+    const tableApi = (wrapper.vm as any).tableApi
+    tableApi.setFocusedCell('0', 'id')
+    expect(tableApi.getSelectedCellCount()).toBe(1)
+
+    await wrapper.setProps({ data: data.slice(0, 2).map(row => ({ ...row })) })
+    expect(tableApi.getSelectedCellCount()).toBe(0)
   })
 
   it('makes the first cell reachable with the keyboard before any selection', async () => {

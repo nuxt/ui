@@ -502,7 +502,7 @@ class: '!p-0'
 
 ### With cell selection
 
-You can select cells like in a spreadsheet with the TanStack Table [Cell Selection APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/cell-selection) by registering `cellSelectionFeature` through the `features` prop. Click or drag to select a range, shift-click to extend it and :kbd{value="ctrl"} or :kbd{value="meta"} click to add another one. The arrow keys move the selection and extend it with :kbd{value="shift"}, :kbd{value="meta"} :kbd{value="A"} selects every cell and :kbd{value="escape"} collapses the selection to the active cell. The table then takes the `grid` role and its cells get `aria-selected`.
+You can select cells like in a spreadsheet with the TanStack Table [Cell Selection APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/cell-selection) by registering `cellSelectionFeature` through the `features` prop. Click or drag to select a range, shift-click to extend it and :kbd{value="ctrl"} or :kbd{value="meta"} click to add another one. The arrow keys move the selection and extend it with :kbd{value="shift"}, :kbd{value="ctrl"} or :kbd{value="meta"} :kbd{value="A"} selects every cell and :kbd{value="escape"} collapses the selection to the active cell. The table then takes the `grid` role and its cells get `aria-selected`.
 
 ::component-example
 ---
@@ -637,7 +637,7 @@ You can use the `column-pinning` prop to control the pinning state of the column
 
 ### With column resizing
 
-You can set `enableResizing: true` on a column definition, or on every column with the `default-column` prop, to render a handle that resizes the column using the TanStack Table [Column Sizing APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/column-sizing). The headers and the table then take their sizes, so use `table-fixed` on the `base` slot to let columns shrink below their content. With `columnResizeMode: 'onEnd'` in the `options` prop, the handle follows the pointer and the columns resize on release.
+You can set `enableResizing: true` on a column definition, or on every column with the `default-column` prop, to render a handle that resizes the column using the TanStack Table [Column Sizing APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/column-sizing). The headers and the table then take their sizes, so use `table-fixed` on the `base` slot to let columns shrink below their content. With `columnResizeMode: 'onEnd'` in the `options` prop, the handle follows the pointer and the columns resize on release. The handle can also be focused, the arrow keys resize the column and :kbd{value="enter"} resets it, like a double-click.
 
 ::component-example
 ---
