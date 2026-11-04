@@ -642,6 +642,12 @@ describe('Table', () => {
     expect(onUpdate).toHaveBeenLastCalledWith([{ id: 'id', desc: true }])
   })
 
+  it('keeps expanding off with enableExpanding false', async () => {
+    const wrapper = await mountSuspended(Table, { props: { data: data.slice(0, 1), options: { enableExpanding: false } }, slots: { expanded: () => 'Details' } })
+
+    expect((wrapper.vm as any).tableApi.getRowModel().rows[0].getCanExpand()).toBe(false)
+  })
+
   it('expands a row without sub-rows when the expanded slot is used', async () => {
     const wrapper = await mountSuspended(Table, { props: { data: data.slice(0, 2) }, slots: { expanded: () => 'Details' } })
     ;(wrapper.vm as any).tableApi.getRowModel().rows[0].toggleExpanded()
@@ -771,14 +777,17 @@ describe('Table', () => {
     expect(resizer.attributes('role')).toBe('separator')
     expect(resizer.attributes('aria-labelledby')).toBe(wrapper.find('thead th').attributes('id'))
 
-    const custom = await mountSuspended(Table, { props: { data, columns: [{ accessorKey: 'id', enableResizing: true, meta: { attrs: { th: { id: 'id-header' } } } }] as any } })
+    const custom = await mountSuspended(Table, { props: { data, columns: [{ accessorKey: 'id', footer: 'Total', enableResizing: true, meta: { attrs: { th: { 'id': 'id-header', 'data-th': 'id' } } } }] as any } })
     expect(custom.find('[data-slot="table-resizer"]').attributes('aria-labelledby')).toBe('id-header')
+    expect(custom.findAll('#id-header')).toHaveLength(1)
+    expect(custom.find('tfoot th').attributes('data-th')).toBe('id')
 
     const spaced = await mountSuspended(Table, { props: { data: [{ 'foo bar': 1, 'foo-bar': 2 }], columns: [{ accessorKey: 'foo bar', enableResizing: true }, { accessorKey: 'foo-bar', enableResizing: true }] as any } })
     const labels = spaced.findAll('[data-slot="table-resizer"]').map(resizer => resizer.attributes('aria-labelledby')!)
     expect(labels.every(label => !/\s/.test(label))).toBe(true)
     expect(new Set(labels).size).toBe(2)
     expect(spaced.findAll('thead th').map(th => th.attributes('id'))).toEqual(labels)
+    expect(resizer.attributes('aria-valuemax')).toBeUndefined()
     await resizer.trigger('keydown', { key: 'ArrowRight' })
     expect(resizer.attributes('aria-valuenow')).toBe('130')
     await resizer.trigger('keydown', { key: 'Enter' })
@@ -809,6 +818,30 @@ describe('Table', () => {
 
     await wrapper.setProps({ data: data.slice(0, 2).map(row => ({ ...row })) })
     expect(tableApi.getSelectedCellCount()).toBe(0)
+  })
+
+  it('keeps a cell removed with a ctrl-click out of the selection', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: { data: data.slice(0, 2), columns: [{ accessorKey: 'id' }, { accessorKey: 'email' }] as any, features: { cellSelectionFeature } },
+      attachTo: document.body
+    })
+    const tableApi = (wrapper.vm as any).tableApi
+    tableApi.selectAllCells()
+    await flushPromises()
+    await wrapper.findAll('tbody td')[3]!.trigger('mousedown', { button: 0, ctrlKey: true })
+
+    expect(tableApi.getSelectedCellCount()).toBe(3)
+    wrapper.unmount()
+  })
+
+  it('moves the tab stop to the entry cell when the active cell is hidden', async () => {
+    const wrapper = await mountSuspended(Table, { props: { data: data.slice(0, 1), columns: [{ accessorKey: 'id' }, { accessorKey: 'email' }] as any, features: { cellSelectionFeature } } })
+    const tableApi = (wrapper.vm as any).tableApi
+    tableApi.setFocusedCell('0', 'email')
+    tableApi.setColumnVisibility({ email: false })
+    await flushPromises()
+
+    expect(wrapper.find('tbody td').attributes('tabindex')).toBe('0')
   })
 
   it('makes the first cell reachable with the keyboard before any selection', async () => {

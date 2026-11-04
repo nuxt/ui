@@ -451,8 +451,8 @@ const tableOptions = computed(() => ({
   columnResizeDirection: dir.value,
   // `data` is copied on every deep change, which would clear the cell selection after each inline edit.
   autoResetCellSelection: false,
-  // TanStack only expands rows with sub-rows, a row with an `expanded` slot can expand too.
-  getRowCanExpand: slots.expanded ? () => true : undefined,
+  // TanStack only expands rows with sub-rows, a row with an `expanded` slot can expand too unless `enableExpanding` is `false`.
+  getRowCanExpand: slots.expanded ? () => tableApi.options.enableExpanding !== false : undefined,
   ...props.options,
   ...tableProps.value,
   features: registeredFeatures,
@@ -677,14 +677,19 @@ function isInteractive(target: EventTarget | null) {
   return target instanceof Element && !!target.closest('a, button, input, label, select, textarea, [contenteditable]:not([contenteditable="false"]), [role="slider"]')
 }
 
+let isPointerFocus = false
+
 function onCellMousedown(e: MouseEvent, cell: Cell<TableFeatures, T, unknown>) {
   if (e.button !== 0 || isInteractive(e.target)) {
     return
   }
-  // Keep the drag from selecting text, then focus the cell ourselves.
+  // Keep the drag from selecting text, then focus the cell ourselves. The pointer already set the selection,
+  // so `onCellFocus` must not collapse it, a ctrl-click that removes this cell from a range included.
   e.preventDefault()
   cell.getSelectionStartHandler()(e)
+  isPointerFocus = true
   ;(e.currentTarget as HTMLElement).focus()
+  isPointerFocus = false
 }
 
 const cellSelectionKeys: Record<string, CellSelectionDirection> = {
@@ -698,10 +703,10 @@ function onCellKeydown(e: KeyboardEvent) {
   if (isInteractive(e.target)) {
     return
   }
-  if (e.key === 'a' && (e.metaKey || e.ctrlKey)) {
+  // Focus stays where it is, so a virtualized table doesn't scroll to the first row.
+  if (e.key.toLowerCase() === 'a' && (e.metaKey || e.ctrlKey)) {
     e.preventDefault()
     tableApi.selectAllCells()
-    focusSelectedCell()
     return
   }
   // Escape collapses the selection to the active cell, so the keyboard keeps its place.
@@ -756,9 +761,13 @@ function getCellSelectionListeners(cell: Cell<TableFeatures, T, unknown>) {
 }
 
 // Until a cell is selected, the first cell takes the roving `tabindex` so the keyboard can reach the grid.
-const entryCell = computed(() => {
+const renderedRows = computed(() => {
   const center = virtualizer ? virtualItems.value.map(item => centerRows.value[item.index]) : centerRows.value
-  for (const row of [...topRows.value, ...center, ...bottomRows.value]) {
+  return [...topRows.value, ...center, ...bottomRows.value].filter(row => !!row)
+})
+
+const entryCell = computed(() => {
+  for (const row of renderedRows.value) {
     const cell = row?.getVisibleCells().find(cell => !isCellCovered(cell) && cell.getCanSelect())
     if (cell) {
       return cell.id
@@ -767,8 +776,14 @@ const entryCell = computed(() => {
   return undefined
 })
 
+// The active cell can be off the page, scrolled out of a virtualized table or in a hidden column, the entry cell then takes the tab stop.
+const isFocusedCellRendered = computed(() => {
+  const focused = tableApi.getFocusedCell()
+  return !!focused && focused.column.getIsVisible() && renderedRows.value.some(row => row.id === focused.row.id)
+})
+
 function getCellTabIndex(cell: Cell<TableFeatures, T, unknown>) {
-  if (!tableApi.getFocusedCell()) {
+  if (!isFocusedCellRendered.value) {
     return cell.id === entryCell.value ? 0 : -1
   }
   return cell.getTabIndex()
@@ -776,7 +791,7 @@ function getCellTabIndex(cell: Cell<TableFeatures, T, unknown>) {
 
 // A cell focused outside the selection becomes the active cell. A selected one keeps the range, like after a shift-click.
 function onCellFocus(cell: Cell<TableFeatures, T, unknown>) {
-  if (!cell.getIsSelected()) {
+  if (!isPointerFocus && !cell.getIsSelected()) {
     tableApi.setFocusedCell(cell.row.id, cell.column.id)
   }
 }
@@ -808,6 +823,21 @@ function onResizerKeydown(e: KeyboardEvent, header: Header<TableFeatures, T, unk
     ...sizing,
     ...Object.fromEntries(leaves.map(leaf => [leaf.column.id, Math.max(leaf.column.columnDef.minSize ?? 20, leaf.getSize() + delta / leaves.length)]))
   }))
+}
+
+// A group header resizes its leaves together, so its limits are theirs summed. TanStack's unbounded `maxSize` is left out.
+function getHeaderSizeLimit(header: Header<TableFeatures, T, unknown>, key: 'minSize' | 'maxSize') {
+  const limits = header.getLeafHeaders().map(leaf => leaf.column.columnDef[key] ?? (key === 'minSize' ? 20 : Number.MAX_SAFE_INTEGER))
+  if (key === 'maxSize' && limits.some(limit => limit >= Number.MAX_SAFE_INTEGER)) {
+    return undefined
+  }
+  return limits.reduce((sum, limit) => sum + limit, 0)
+}
+
+// The footer cells share `meta.attrs.th`, without its `id` so it stays on the header.
+function getFooterAttrs(header: Header<TableFeatures, T, unknown>) {
+  const { id: _id, ...attrs } = (resolveValue(header.column.columnDef.meta?.attrs?.th, header) ?? {}) as Record<string, unknown>
+  return attrs
 }
 
 // The resize handle is labelled by its header, through the `id` set with `meta.attrs.th` when there is one.
@@ -1052,8 +1082,8 @@ defineExpose({
               tabindex="0"
               :aria-labelledby="getHeaderId(header)"
               :aria-valuenow="header.getSize()"
-              :aria-valuemin="header.column.columnDef.minSize ?? 20"
-              :aria-valuemax="header.column.columnDef.maxSize"
+              :aria-valuemin="getHeaderSizeLimit(header, 'minSize')"
+              :aria-valuemax="getHeaderSizeLimit(header, 'maxSize')"
               :data-resizing="header.column.getIsResizing()"
               data-slot="table-resizer"
               :class="ui.resizer({ class: props.ui?.resizer })"
@@ -1141,7 +1171,7 @@ defineExpose({
               getHeaderPinStyles(header),
               resolveValue(header.column.columnDef.meta?.style?.th, header)
             ]"
-            v-bind="resolveValue(header.column.columnDef.meta?.attrs?.th, header)"
+            v-bind="getFooterAttrs(header)"
           >
             <slot :name="`${header.id}-footer`" v-bind="header.getContext()">
               <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.footer" :props="header.getContext()" />

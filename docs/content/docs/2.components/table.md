@@ -171,7 +171,7 @@ highlights:
 
 ### Features
 
-The table registers the TanStack Table features it renders: sorting, column and global filtering, expanding, row selection, column visibility, column pinning, sizing and resizing, and row pinning, along with their row models and every built-in sorting and filtering function.
+The table registers the TanStack Table features it renders: sorting, column and global filtering, expanding, row selection, column visibility, column pinning, sizing and resizing, and row pinning, along with their row models and the built-in sorting, filtering and aggregation functions `auto` picks.
 
 Use the `features` prop to register other [features](https://tanstack.com/table/v9/docs/guide/features) like [pagination](#with-pagination), [grouping](#with-grouped-rows), [cell selection](#with-cell-selection), [cell spanning](#with-column-span), [faceting](#with-column-faceting) or [column ordering](#with-column-ordering), along with the row models some of them need. It is read once when the table is created, so declare it in your script.
 
