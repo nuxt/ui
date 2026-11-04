@@ -41,24 +41,29 @@ export default defineTheme({
     },
     size: {
       xs: {
-        trigger: 'px-2 py-1 text-xs gap-1',
-        leadingIcon: 'size-4'
+        list: '[--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)]',
+        trigger: 'px-(--ui-control-px) py-(--ui-control-py) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) gap-(--ui-control-gap)',
+        leadingIcon: 'size-(--ui-control-icon-size)'
       },
       sm: {
-        trigger: 'px-2.5 py-1.5 text-xs gap-1.5',
-        leadingIcon: 'size-4'
+        list: '[--ui-control-px:var(--ui-control-px-sm)] [--ui-control-py:var(--ui-control-py-sm)] [--ui-control-gap:var(--ui-control-gap-sm)] [--ui-control-icon-size:var(--ui-control-icon-size-sm)]',
+        trigger: 'px-(--ui-control-px) py-(--ui-control-py) text-(length:--ui-control-text-sm)/(--ui-control-text-sm--line-height) gap-(--ui-control-gap)',
+        leadingIcon: 'size-(--ui-control-icon-size)'
       },
       md: {
-        trigger: 'px-3 py-1.5 text-sm gap-1.5',
-        leadingIcon: 'size-5'
+        list: '[--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)]',
+        trigger: 'px-(--ui-control-px) py-(--ui-control-py) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) gap-(--ui-control-gap)',
+        leadingIcon: 'size-(--ui-control-icon-size)'
       },
       lg: {
-        trigger: 'px-3 py-2 text-sm gap-2',
-        leadingIcon: 'size-5'
+        list: '[--ui-control-px:var(--ui-control-px-lg)] [--ui-control-py:var(--ui-control-py-lg)] [--ui-control-gap:var(--ui-control-gap-lg)] [--ui-control-icon-size:var(--ui-control-icon-size-lg)]',
+        trigger: 'px-(--ui-control-px) py-(--ui-control-py) text-(length:--ui-control-text-lg)/(--ui-control-text-lg--line-height) gap-(--ui-control-gap)',
+        leadingIcon: 'size-(--ui-control-icon-size)'
       },
       xl: {
-        trigger: 'px-3 py-2 text-base gap-2',
-        leadingIcon: 'size-6'
+        list: '[--ui-control-px:var(--ui-control-px-xl)] [--ui-control-py:var(--ui-control-py-xl)] [--ui-control-gap:var(--ui-control-gap-xl)] [--ui-control-icon-size:var(--ui-control-icon-size-xl)]',
+        trigger: 'px-(--ui-control-px) py-(--ui-control-py) text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height) gap-(--ui-control-gap)',
+        leadingIcon: 'size-(--ui-control-icon-size)'
       }
     }
   },

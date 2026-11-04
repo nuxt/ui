@@ -202,7 +202,7 @@ const vReveal = {
             <span class="size-2.5 rounded-full border border-default bg-tint" />
           </div>
 
-          <div class="min-h-[200px] p-5 sm:p-6 font-mono text-[13px] leading-[1.8] text-start">
+          <div class="min-h-50 p-5 sm:p-6 font-mono text-[13px] leading-[1.8] text-start">
             <p
               v-for="(line, index) in terminalLines"
               :key="index"

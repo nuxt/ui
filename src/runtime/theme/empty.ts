@@ -29,7 +29,7 @@ export default defineTheme({
         description: 'text-sm'
       },
       lg: {
-        avatar: 'size-11 text-[22px]',
+        avatar: 'size-11 text-[1.375rem]',
         title: 'text-base',
         description: 'text-sm'
       },

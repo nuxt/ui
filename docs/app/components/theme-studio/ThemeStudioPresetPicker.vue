@@ -73,7 +73,7 @@ const keep = (apply: () => void) => (event: Event) => {
  * The menu's width (ui.content) reaches every submenu too, this hands the
  * submenus their own size back.
  */
-const submenu = { content: { class: 'w-auto' } }
+const submenu = { content: { class: 'w-auto max-w-36' } }
 
 /**
  * A setting row: its value and swatch ride the trailing slot, its options the
@@ -222,7 +222,7 @@ watch(open, (isOpen) => {
     v-model:open="open"
     :items="items"
     :content="{ align: 'start', alignOffset: -4, onInteractOutside: keepPanels }"
-    :ui="{ content: 'w-56 min-w-36 max-h-98', label: 'text-xs' }"
+    :ui="{ content: 'w-52 min-w-36 max-h-98', label: 'text-xs' }"
   >
     <UTooltip :text="name" ignore-non-keyboard-focus>
       <UButton

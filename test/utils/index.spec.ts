@@ -6,6 +6,7 @@ import {
   set,
   looseToNumber,
   compare,
+  resolveColor,
   isEmpty,
   getDisplayValue,
   isArrayOfArray,
@@ -250,5 +251,18 @@ describe('resolveBaseURL', () => {
     expect(resolveBaseURL('/docs')).toBe('/docs')
     expect(resolveBaseURL('/docs', '/')).toBe('/docs')
     expect(resolveBaseURL(undefined, '/app/')).toBeUndefined()
+  })
+})
+
+describe('resolveColor', () => {
+  it.each([
+    ['primary', 'var(--ui-primary)'],
+    ['tertiary', 'var(--ui-tertiary, tertiary)'],
+    ['red', 'var(--ui-red, red)'],
+    ['#8b5cf6', '#8b5cf6'],
+    ['var(--color-green-400)', 'var(--color-green-400)'],
+    ['oklch(0.7 0.1 200)', 'oklch(0.7 0.1 200)']
+  ])('resolves %j', (color, value) => {
+    expect(resolveColor(color)).toBe(value)
   })
 })

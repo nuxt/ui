@@ -14,8 +14,13 @@
   --font-sans: 'Public Sans', sans-serif;
 }
 
-:root {
-  --ui-container-width: var(--container-8xl);
+/* The docs run wider than the library's 80rem. In `base`, so the studio's
+   unlayered `:root` Container wins on every page, and off /theme, where the
+   slider rests on the library's value. */
+@layer base {
+  :root:not(:has(> body.theme-studio)) {
+    --ui-container-width: var(--container-8xl);
+  }
 }
 
 /* The studio's canvas sits recessed behind the preview card. Mixed off
