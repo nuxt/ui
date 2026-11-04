@@ -179,10 +179,7 @@ const features = {
     :grouping="['account_id', 'status']"
     :features="features"
     :options="{ groupedColumnMode: 'remove' }"
-    :ui="{
-      root: 'min-w-full',
-      td: 'empty:p-0' // helps with the colspaned row added for expand slot
-    }"
+    :ui="{ root: 'min-w-full' }"
   >
     <template #title-cell="{ row }">
       <div v-if="row.getIsGrouped()" class="flex items-center">
