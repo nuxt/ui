@@ -244,7 +244,6 @@ const shareOpen = ref(false)
       <template #right>
         <UTooltip text="Switch color mode" :kbds="['d']">
           <UColorModeTabs
-            size="sm"
             :ui="{ list: 'bg-tint ring ring-default' }"
             aria-label="Color mode"
             data-keep-panels
