@@ -1,6 +1,6 @@
 /**
  * The variables of the theme that aren't shades of a ramp: the control
- * density, the page sizes, the focus and disabled states and the chart
+ * scale, the page sizes, the focus and disabled states and the chart
  * series. One builder writes them for the live style tag,
  * the FOUC script and the export, so the three can't drift.
  */
@@ -13,15 +13,26 @@ export const CONTROL_SIZES = ['xs', 'sm', 'md', 'lg', 'xl'] as const
 export type ControlSize = typeof CONTROL_SIZES[number]
 
 /**
- * The padding and gap of the control scale in px, as @nuxt/ui ships them
- * (src/runtime/css/base.css): what a density moves. The icon, box and text of
- * each size stay, a density moves the room around them.
+ * Each column of the control scale, with its values in px as @nuxt/ui ships
+ * them (src/runtime/css/base.css). `density` marks the columns a density
+ * moves: the padding and the gap, the room around the icon, box and text.
  */
-export const CONTROL_SPACING = {
-  px: [8, 10, 10, 12, 12],
-  py: [4, 6, 6, 8, 8],
-  gap: [4, 6, 6, 8, 8]
-} as const
+export const CONTROL_COLUMNS = [
+  { key: 'px', label: 'X', values: [8, 10, 10, 12, 12], density: true },
+  { key: 'py', label: 'Y', values: [4, 6, 6, 8, 8], density: true },
+  { key: 'gap', label: 'Gap', values: [4, 6, 6, 8, 8], density: true },
+  { key: 'icon-size', label: 'Icon', values: [16, 16, 20, 20, 24], density: false },
+  { key: 'box', label: 'Box', values: [12, 14, 16, 18, 20], density: false },
+  { key: 'text', label: 'Text', values: [12, 12, 14, 14, 16], density: false },
+  { key: 'text--line-height', label: 'Line', values: [16, 16, 20, 20, 24], density: false }
+] as const
+
+export type ControlColumn = typeof CONTROL_COLUMNS[number]['key']
+
+/** `--ui-control-text-md--line-height` keeps the size before the suffix. */
+export function controlVariable(column: ControlColumn, size: ControlSize): string {
+  return column === 'text--line-height' ? `--ui-control-text-${size}--line-height` : `--ui-control-${column}-${size}`
+}
 
 export type Density = 'compact' | 'default' | 'comfortable'
 
@@ -59,6 +70,8 @@ export const GUTTER_BASE = 16
 /** Sparse like the rest of the doc: an absent field is the library's value. */
 export interface ThemeLayout extends Partial<Record<LayoutField, number>> {
   density?: Exclude<Density, 'default'>
+  /** Cells of the control scale, by variable, in px, only where they differ from the density. */
+  scale?: Record<string, number>
 }
 
 /* --------------------------------------------------------------- charts -- */
@@ -100,7 +113,14 @@ export type ThemeCharts = Partial<Record<typeof CHART_SERIES[number], string>>
 
 /** Every table the builder reads, plain data so the FOUC script can inline it. */
 export const EXTRAS_TABLES = {
-  scale: Object.fromEntries(Object.entries(CONTROL_SPACING).flatMap(([key, values]) => CONTROL_SIZES.map((size, index) => [`--ui-control-${key}-${size}`, values[index]!]))),
+  scale: Object.fromEntries(CONTROL_COLUMNS.flatMap(column => CONTROL_SIZES.map((size, index) => [controlVariable(column.key, size), {
+    default: column.values[index]!,
+    // menu labels read the text less 2px, 10px keeps them legible
+    min: column.key === 'text' ? 10 : 0,
+    max: column.key === 'text' ? 32 : 64,
+    density: column.density,
+    unit: column.key === 'text' ? 'rem' : 'spacing'
+  }]))),
   density: DENSITY_STEPS,
   fields: LAYOUT_FIELDS,
   gutterBase: GUTTER_BASE,
@@ -167,9 +187,16 @@ export function buildExtras(input: ExtrasInput, tables: ExtrasTables, spacing: (
   const layout: ThemeLayout = {}
   if (rawLayout.density === 'compact' || rawLayout.density === 'comfortable') layout.density = rawLayout.density
   const step = layout.density ? tables.density[layout.density] : 0
-  if (step) {
-    for (const [variable, value] of Object.entries(tables.scale)) root[variable] = spacing(value + step)
+  const rawScale = record(rawLayout.scale)
+  const scale: Record<string, number> = {}
+  for (const [variable, cell] of Object.entries(tables.scale)) {
+    const base = cell.default + (cell.density ? step : 0)
+    const own = number(rawScale[variable], cell.min, cell.max)
+    if (own !== undefined && own !== base) scale[variable] = own
+    const value = own ?? base
+    if (value !== cell.default) root[variable] = write(value, cell.unit)
   }
+  if (Object.keys(scale).length) layout.scale = scale
   for (const [key, field] of Object.entries(tables.fields)) {
     const value = number(rawLayout[key], field.min, field.max)
     if (value === undefined || value === field.default) continue
@@ -218,4 +245,10 @@ export function themeExtras(input: ExtrasInput): ThemeExtras {
 export function normalizeExtras(input: ExtrasInput): { layout?: ThemeLayout, charts?: ThemeCharts } {
   const { layout, charts } = themeExtras(input)
   return { ...(layout ? { layout } : {}), ...(charts ? { charts } : {}) }
+}
+
+/** The value a scale cell rests on for a density, before any override. */
+export function controlBase(variable: string, density: Density = 'default'): number {
+  const cell = EXTRAS_TABLES.scale[variable]!
+  return cell.default + (cell.density ? DENSITY_STEPS[density] : 0)
 }

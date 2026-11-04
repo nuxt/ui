@@ -294,7 +294,7 @@ export function useTheme() {
     }
     if (Object.keys(fontDoc).length) doc.font = fontDoc
     if (_iconSet.value !== THEME_DEFAULTS.icons) doc.icons = _iconSet.value
-    if (Object.keys(layout.value).length) doc.layout = { ...layout.value }
+    if (Object.keys(layout.value).length) doc.layout = JSON.parse(JSON.stringify(layout.value))
     if (Object.keys(charts.value).length) doc.charts = { ...charts.value }
 
     // Only alias-referenced palettes export. Reference by CURRENT value, not
@@ -456,7 +456,8 @@ export function useTheme() {
     if (settings.icons && Object.hasOwn(themeIcons, settings.icons)) icon.value = settings.icons
     // merged over the current state, a payload naming one field keeps the rest
     if (settings.layout && typeof settings.layout === 'object') {
-      setLayout({ ...layout.value, ...settings.layout }, { track: false })
+      const scale = settings.layout.scale && typeof settings.layout.scale === 'object' ? { ...layout.value.scale, ...settings.layout.scale } : layout.value.scale
+      setLayout({ ...layout.value, ...settings.layout, scale }, { track: false })
     }
     if (settings.charts && typeof settings.charts === 'object') setCharts({ ...charts.value, ...settings.charts }, { track: false })
 
