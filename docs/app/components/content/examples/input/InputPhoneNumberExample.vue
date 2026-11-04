@@ -53,12 +53,12 @@ watch(countryCode, () => {
       trailing-icon="i-lucide-chevrons-up-down"
       @update:open="onOpen"
     >
-      <span class="size-5 flex items-center text-lg">
+      <span class="size-(--ui-control-icon-size) flex items-center text-lg">
         {{ country?.emoji || '\u{1F1FA}\u{1F1F8}' }}
       </span>
 
       <template #item-leading="{ item }">
-        <span class="size-5 flex items-center text-lg">
+        <span class="size-(--ui-control-icon-size) flex items-center text-lg">
           {{ item.emoji }}
         </span>
       </template>

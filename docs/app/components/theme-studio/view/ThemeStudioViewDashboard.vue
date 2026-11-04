@@ -763,7 +763,7 @@ const pageTitles: Record<Page, string> = {
             <UTooltip text="Notifications" :kbds="['n']">
               <UButton color="neutral" variant="ghost" square aria-label="Notifications">
                 <UChip color="error" inset>
-                  <UIcon :name="studioIcons.bell" class="size-5 shrink-0" />
+                  <UIcon :name="studioIcons.bell" class="size-(--ui-control-icon-size) shrink-0" />
                 </UChip>
               </UButton>
             </UTooltip>

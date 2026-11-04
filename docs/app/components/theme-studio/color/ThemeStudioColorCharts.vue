@@ -84,12 +84,12 @@ function asRow(item: unknown) {
           <span class="truncate">{{ asRow(item).value }}</span>
         </span>
 
-        <UIcon :name="appConfig.ui.icons.chevronRight" class="size-5 shrink-0 text-faint" />
+        <UIcon :name="appConfig.ui.icons.chevronRight" class="size-(--ui-control-icon-size) shrink-0 text-faint" />
       </template>
 
       <!-- the swatch sits in the box an item icon takes, so it centers on the label -->
       <template #color-leading="{ item }">
-        <span class="size-5 shrink-0 flex items-center justify-center">
+        <span class="size-(--ui-control-icon-size) shrink-0 flex items-center justify-center">
           <span class="size-2 rounded-full" :style="{ backgroundColor: asRow(item).dot }" />
         </span>
       </template>

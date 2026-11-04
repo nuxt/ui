@@ -166,7 +166,7 @@ const links = computed(() => [{
           v-bind="link"
         >
           <template v-if="link.avatar" #leading>
-            <UAvatar v-bind="link.avatar" size="2xs" :alt="`${link.label} avatar`" />
+            <UAvatar v-bind="link.avatar" size="3xs" :alt="`${link.label} avatar`" />
           </template>
         </UButton>
         <PageHeaderLinks />

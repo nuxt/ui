@@ -90,13 +90,13 @@ function getEmojiFlag(locale: string): string {
     :items="locales"
   >
     <template #leading>
-      <span v-if="modelValue" class="size-5 text-center">
+      <span v-if="modelValue" class="size-(--ui-control-icon-size) text-center">
         {{ getEmojiFlag(modelValue) }}
       </span>
     </template>
 
     <template #item-leading="{ item }">
-      <span class="size-5 text-center">
+      <span class="size-(--ui-control-icon-size) text-center">
         {{ getEmojiFlag(item.code) }}
       </span>
     </template>
