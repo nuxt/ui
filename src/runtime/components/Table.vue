@@ -3,41 +3,40 @@
 import type { AriaAttributes, Ref, WatchOptions, ComponentPublicInstance, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type {
+  AggregationFnDef,
   Cell,
   CellContext,
+  CellData,
+  CellSelectionDirection,
+  CellSelectionState,
   Column,
   ColumnDef,
-  ColumnFiltersOptions,
   ColumnFiltersState,
   ColumnOrderState,
-  ColumnPinningOptions,
   ColumnPinningState,
-  ColumnSizingInfoState,
-  ColumnSizingOptions,
   ColumnSizingState,
-  CoreOptions,
-  ExpandedOptions,
+  ColumnVisibilityState,
   ExpandedState,
-  FacetedOptions,
-  GlobalFilterOptions,
-  GroupingOptions,
+  FilterFn,
   GroupingState,
   Header,
   HeaderContext,
-  PaginationOptions,
   PaginationState,
   Row,
   RowData,
-  RowPinningOptions,
   RowPinningState,
-  RowSelectionOptions,
   RowSelectionState,
-  SortingOptions,
+  SortFn,
   SortingState,
+  StockFeatures,
+  TableFeatures as TanStackTableFeatures,
   TableMeta,
+  TableOptions as TanStackTableOptions,
+  TableOptions_Table,
+  TableState,
   Updater,
-  VisibilityOptions,
-  VisibilityState
+  VueTable,
+  columnResizingState
 } from '@tanstack/vue-table'
 import type { Virtualizer, VirtualizerOptions } from '@tanstack/vue-virtual'
 import theme from '../theme/table'
@@ -46,45 +45,67 @@ import type { ComponentConfig } from '../types/tv'
 
 declare module '@tanstack/table-core' {
 
-  interface ColumnMeta<TData extends RowData, TValue> {
+  interface ColumnMeta<TFeatures extends TanStackTableFeatures, TData extends RowData, TValue extends CellData> {
     class?: {
-      th?: string | ((cell: Header<TData, TValue>) => string)
-      td?: string | ((cell: Cell<TData, TValue>) => string)
+      th?: string | ((cell: Header<TFeatures, TData, TValue>) => string)
+      td?: string | ((cell: Cell<TFeatures, TData, TValue>) => string)
     }
     style?: {
-      th?: string | Record<string, string> | ((cell: Header<TData, TValue>) => string | Record<string, string>)
-      td?: string | Record<string, string> | ((cell: Cell<TData, TValue>) => string | Record<string, string>)
+      th?: string | Record<string, string> | ((cell: Header<TFeatures, TData, TValue>) => string | Record<string, string>)
+      td?: string | Record<string, string> | ((cell: Cell<TFeatures, TData, TValue>) => string | Record<string, string>)
     }
-    colspan?: {
-      td?: string | ((cell: Cell<TData, TValue>) => string)
-    }
-    rowspan?: {
-      td?: string | ((cell: Cell<TData, TValue>) => string)
+    attrs?: {
+      th?: Record<string, unknown> | ((cell: Header<TFeatures, TData, TValue>) => Record<string, unknown>)
+      td?: Record<string, unknown> | ((cell: Cell<TFeatures, TData, TValue>) => Record<string, unknown>)
     }
 
   }
 
-  interface TableMeta<TData> {
+  interface TableMeta<TFeatures extends TanStackTableFeatures, TData extends RowData> {
     class?: {
-      tr?: string | ((row: Row<TData>) => string)
+      tr?: string | ((row: Row<TFeatures, TData>) => string)
     }
     style?: {
-      tr?: string | Record<string, string> | ((row: Row<TData>) => string | Record<string, string>)
+      tr?: string | Record<string, string> | ((row: Row<TFeatures, TData>) => string | Record<string, string>)
+    }
+    attrs?: {
+      tr?: Record<string, unknown> | ((row: Row<TFeatures, TData>) => Record<string, unknown>)
     }
   }
+
+  // The table registers the built-in functions `auto` resolves to, so their names stay valid on column definitions.
+  interface SortFns extends Record<'alphanumeric' | 'text' | 'datetime', SortFn<any, any>> {}
+  interface FilterFns extends Record<'includesString' | 'inNumberRange' | 'inDateRange' | 'arrIncludes' | 'equals' | 'weakEquals', FilterFn<any, any>> {}
+  interface AggregationFns extends Record<'sum' | 'extent', AggregationFnDef<any, any>> {}
 
 }
 
 type Table = ComponentConfig<typeof theme, AppConfig, 'table'>
 
-export type TableRow<T> = Row<T>
+/**
+ * The feature set the table types are written against. Every stock feature is included, so column
+ * definitions and `tableApi` expose the APIs of the features an app registers through the `features` prop.
+ */
+export type TableFeatures = StockFeatures
+export type TableRow<T extends TableData> = Row<TableFeatures, T>
 export type TableData = RowData
-export type TableColumn<T extends TableData, D = unknown> = ColumnDef<T, D>
+export type TableColumn<T extends TableData, D = unknown> = ColumnDef<TableFeatures, T, D>
 
-export interface TableOptions<T extends TableData = TableData> extends Omit<CoreOptions<T>, 'data' | 'columns' | 'getCoreRowModel' | 'state' | 'onStateChange' | 'renderFallbackValue'> {
-  state?: CoreOptions<T>['state']
-  onStateChange?: CoreOptions<T>['onStateChange']
-  renderFallbackValue?: CoreOptions<T>['renderFallbackValue']
+export interface TableOptions<T extends TableData = TableData> {
+  autoResetAll?: TableOptions_Table<TableFeatures, T>['autoResetAll']
+  initialState?: TableOptions_Table<TableFeatures, T>['initialState']
+  mergeOptions?: TableOptions_Table<TableFeatures, T>['mergeOptions']
+  state?: TableOptions_Table<TableFeatures, T>['state']
+  defaultColumn?: Partial<TableColumn<T>>
+  getRowId?: (originalRow: T, index: number, parent?: TableRow<T>) => string
+  getSubRows?: (originalRow: T, index: number) => undefined | ReadonlyArray<T>
+  renderFallbackValue?: any
+  debugAll?: boolean
+  debugCells?: boolean
+  debugColumns?: boolean
+  debugHeaders?: boolean
+  debugRows?: boolean
+  debugTable?: boolean
 }
 
 export interface TableProps<T extends TableData = TableData> extends TableOptions<T>, /** @vue-ignore */ TableHTMLAttributes {
@@ -96,10 +117,9 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
   data?: T[]
   columns?: TableColumn<T>[]
   caption?: string
-  meta?: TableMeta<T>
+  meta?: TableMeta<TableFeatures, T>
   /**
    * Enable virtualization for large datasets.
-   * Note: row pinning is not supported when virtualization is enabled.
    * @see https://tanstack.com/virtual/v3/docs/api/virtualizer#options
    * @defaultValue false
    */
@@ -149,65 +169,17 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
    */
   watchOptions?: WatchOptions
   /**
-   * @see [API](https://tanstack.com/table/v8/docs/api/features/global-filtering#table-options)
-   * @see [Guide](https://tanstack.com/table/v8/docs/guide/global-filtering)
+   * Table features registered on top of the default ones (sorting, column and global filtering, expanding, row selection, column visibility, pinning and sizing, row pinning).
+   * Register pagination, grouping, faceting, column ordering, cell selection or cell spanning here with their row models, e.g. `{ rowPaginationFeature, paginatedRowModel: createPaginatedRowModel() }`.
+   * Read once when the table is created.
+   * @see [Guide](https://tanstack.com/table/v9/docs/guide/features)
    */
-  globalFilterOptions?: Omit<GlobalFilterOptions<T>, 'onGlobalFilterChange'>
+  features?: TanStackTableFeatures
   /**
-   * @see [API](https://tanstack.com/table/v8/docs/api/features/column-filtering#table-options)
-   * @see [Guide](https://tanstack.com/table/v8/docs/guide/column-filtering)
+   * Options of the registered features, e.g. `enableRowSelection`, `enableMultiSort` or `manualPagination`.
+   * @see [API](https://tanstack.com/table/v9/docs/reference/index/type-aliases/TableOptions)
    */
-  columnFiltersOptions?: Omit<ColumnFiltersOptions<T>, 'getFilteredRowModel' | 'onColumnFiltersChange'>
-  /**
-   * @see [API](https://tanstack.com/table/v8/docs/api/features/column-pinning#table-options)
-   * @see [Guide](https://tanstack.com/table/v8/docs/guide/column-pinning)
-   */
-  columnPinningOptions?: Omit<ColumnPinningOptions, 'onColumnPinningChange'>
-  /**
-   * @see [API](https://tanstack.com/table/v8/docs/api/features/column-sizing#table-options)
-   * @see [Guide](https://tanstack.com/table/v8/docs/guide/column-sizing)
-   */
-  columnSizingOptions?: Omit<ColumnSizingOptions, 'onColumnSizingChange' | 'onColumnSizingInfoChange'>
-  /**
-   * @see [API](https://tanstack.com/table/v8/docs/api/features/column-visibility#table-options)
-   * @see [Guide](https://tanstack.com/table/v8/docs/guide/column-visibility)
-   */
-  visibilityOptions?: Omit<VisibilityOptions, 'onColumnVisibilityChange'>
-  /**
-   * @see [API](https://tanstack.com/table/v8/docs/api/features/sorting#table-options)
-   * @see [Guide](https://tanstack.com/table/v8/docs/guide/sorting)
-   */
-  sortingOptions?: Omit<SortingOptions<T>, 'getSortedRowModel' | 'onSortingChange'>
-  /**
-   * @see [API](https://tanstack.com/table/v8/docs/api/features/grouping#table-options)
-   * @see [Guide](https://tanstack.com/table/v8/docs/guide/grouping)
-   */
-  groupingOptions?: Omit<GroupingOptions, 'onGroupingChange'>
-  /**
-   * @see [API](https://tanstack.com/table/v8/docs/api/features/expanding#table-options)
-   * @see [Guide](https://tanstack.com/table/v8/docs/guide/expanding)
-   */
-  expandedOptions?: Omit<ExpandedOptions<T>, 'getExpandedRowModel' | 'onExpandedChange'>
-  /**
-   * @see [API](https://tanstack.com/table/v8/docs/api/features/row-selection#table-options)
-   * @see [Guide](https://tanstack.com/table/v8/docs/guide/row-selection)
-   */
-  rowSelectionOptions?: Omit<RowSelectionOptions<T>, 'onRowSelectionChange'>
-  /**
-   * @see [API](https://tanstack.com/table/v8/docs/api/features/row-pinning#table-options)
-   * @see [Guide](https://tanstack.com/table/v8/docs/guide/row-pinning)
-   */
-  rowPinningOptions?: Omit<RowPinningOptions<T>, 'onRowPinningChange'>
-  /**
-   * @see [API](https://tanstack.com/table/v8/docs/api/features/pagination#table-options)
-   * @see [Guide](https://tanstack.com/table/v8/docs/guide/pagination)
-   */
-  paginationOptions?: Omit<PaginationOptions, 'onPaginationChange'>
-  /**
-   * @see [API](https://tanstack.com/table/v8/docs/api/features/column-faceting#table-options)
-   * @see [Guide](https://tanstack.com/table/v8/docs/guide/column-faceting)
-   */
-  facetedOptions?: FacetedOptions<T>
+  options?: Partial<Omit<TanStackTableOptions<TableFeatures, T>, keyof TableOptions<T> | 'data' | 'columns' | 'features' | 'meta' | `on${Capitalize<keyof TableState<TableFeatures>>}Change`>>
   onSelect?: (e: Event, row: TableRow<T>) => void
   onHover?: (e: Event, row: TableRow<T> | null) => void
   onContextmenu?: ((e: Event, row: TableRow<T>) => void) | Array<((e: Event, row: TableRow<T>) => void)>
@@ -215,11 +187,11 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
   ui?: Table['slots']
 }
 
-type DynamicHeaderFooterSlots<T, K = keyof T> = Record<`${K extends string ? K : never}-header` | `${K extends string ? K : never}-footer` | (string & {}), (props: HeaderContext<T, unknown>) => VNode[]>
-type DynamicCellSlots<T, K = keyof T> = Record<`${K extends string ? K : never}-cell` | (string & {}), (props: CellContext<T, unknown>) => VNode[]>
+type DynamicHeaderFooterSlots<T extends TableData, K = keyof T> = Record<`${K extends string ? K : never}-header` | `${K extends string ? K : never}-footer` | (string & {}), (props: HeaderContext<TableFeatures, T, unknown>) => VNode[]>
+type DynamicCellSlots<T extends TableData, K = keyof T> = Record<`${K extends string ? K : never}-cell` | (string & {}), (props: CellContext<TableFeatures, T, unknown>) => VNode[]>
 
 export type TableSlots<T extends TableData = TableData> = {
-  'expanded'?: (props: { row: Row<T> }) => VNode[]
+  'expanded'?: (props: { row: TableRow<T> }) => VNode[]
   'empty'?: (props?: {}) => VNode[]
   'loading'?: (props?: {}) => VNode[]
   'caption'?: (props?: {}) => VNode[]
@@ -230,11 +202,40 @@ export type TableSlots<T extends TableData = TableData> = {
 </script>
 
 <script setup lang="ts" generic="T extends TableData">
-import { computed, useTemplateRef, watch, toRef, onBeforeUnmount } from 'vue'
+import { computed, useTemplateRef, watch, toRef, onBeforeUnmount, h, isVNode, nextTick, useId } from 'vue'
 import { Primitive } from 'reka-ui'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
-import { FlexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, getExpandedRowModel, useVueTable } from '@tanstack/vue-table'
+import {
+  useTable,
+  tableFeatures,
+  columnFilteringFeature,
+  columnPinningFeature,
+  columnResizingFeature,
+  columnSizingFeature,
+  columnVisibilityFeature,
+  globalFilteringFeature,
+  rowExpandingFeature,
+  rowPinningFeature,
+  rowSelectionFeature,
+  rowSortingFeature,
+  createExpandedRowModel,
+  createFilteredRowModel,
+  createSortedRowModel,
+  aggregationFn_extent,
+  aggregationFn_sum,
+  filterFn_arrIncludes,
+  filterFn_equals,
+  filterFn_inDateRange,
+  filterFn_includesString,
+  filterFn_inNumberRange,
+  filterFn_weakEquals,
+  functionalUpdate,
+  getInitialTableState,
+  sortFn_alphanumeric,
+  sortFn_datetime,
+  sortFn_text
+} from '@tanstack/vue-table'
 import { useVirtualizer } from '@tanstack/vue-virtual'
 import { createReusableTemplate, createRef } from '@vueuse/core'
 import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
@@ -254,7 +255,7 @@ const slots = defineSlots<TableSlots<T>>()
 
 const props = useComponentProps<TableProps<T>>('table', _props, theme)
 
-const { t } = useLocale()
+const { t, dir } = useLocale()
 const overrides = useComponentOverrides((ui: Table['AppConfig']['ui']) => ui.table)
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -269,17 +270,24 @@ const columns = computed<TableColumn<T>[]>(() => processColumns(props.columns ??
   ...(props.defaultColumn?.header === undefined && { header: upperFirst(accessorKey) })
 }))))
 
+// TanStack fills in a default `size` on every column, so the columns that set one are marked. The spread in `constructColumn` keeps symbol keys.
+const hasSize = Symbol('hasSize')
+
 function processColumns(columns: TableColumn<T>[]): TableColumn<T>[] {
   return columns.map((column) => {
     const col = { ...column } as TableColumn<T>
+
+    if (col.size !== undefined || props.defaultColumn?.size !== undefined) {
+      Object.assign(col, { [hasSize]: true })
+    }
 
     if ('columns' in col && col.columns) {
       col.columns = processColumns(col.columns as TableColumn<T>[])
     }
 
     if (!col.cell && !props.defaultColumn?.cell) {
-      col.cell = ({ getValue }) => {
-        const value = getValue()
+      col.cell = ({ renderValue }) => {
+        const value = renderValue()
         if (value === '' || value === null || value === undefined) {
           return '\u00A0'
         }
@@ -336,124 +344,169 @@ const hasFooter = computed(() => {
 const globalFilterState = defineModel<string>('globalFilter')
 const columnFiltersState = defineModel<ColumnFiltersState>('columnFilters')
 const columnOrderState = defineModel<ColumnOrderState>('columnOrder')
-const columnVisibilityState = defineModel<VisibilityState>('columnVisibility')
+const columnVisibilityState = defineModel<ColumnVisibilityState>('columnVisibility')
 const columnPinningState = defineModel<ColumnPinningState>('columnPinning')
 const columnSizingState = defineModel<ColumnSizingState>('columnSizing')
-const columnSizingInfoState = defineModel<ColumnSizingInfoState>('columnSizingInfo')
+const columnResizingState = defineModel<columnResizingState>('columnResizing')
 const rowSelectionState = defineModel<RowSelectionState>('rowSelection')
 const rowPinningState = defineModel<RowPinningState>('rowPinning')
 const sortingState = defineModel<SortingState>('sorting')
 const groupingState = defineModel<GroupingState>('grouping')
 const expandedState = defineModel<ExpandedState>('expanded')
 const paginationState = defineModel<PaginationState>('pagination')
+const cellSelectionState = defineModel<CellSelectionState>('cellSelection')
 
 const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef')
 const tableRef = useTemplateRef<HTMLTableElement>('tableRef')
 
-const tableProps = useForwardProps(props, ['_features', 'autoResetAll', 'debugAll', 'debugCells', 'debugColumns', 'debugHeaders', 'debugRows', 'debugTable', 'defaultColumn', 'getRowId', 'getSubRows', 'initialState', 'mergeOptions', 'renderFallbackValue'])
+const tableProps = useForwardProps(props, ['autoResetAll', 'debugAll', 'debugCells', 'debugColumns', 'debugHeaders', 'debugRows', 'debugTable', 'defaultColumn', 'initialState', 'mergeOptions', 'renderFallbackValue'])
 
-const tableApi = useVueTable({
-  ...tableProps.value,
-  get data() {
-    return data.value
-  },
-  get columns() {
-    return columns.value
-  },
-  meta: meta.value,
-  getCoreRowModel: getCoreRowModel(),
-  ...(props.globalFilterOptions || {}),
-  ...(globalFilterState.value !== undefined && { onGlobalFilterChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, globalFilterState) }),
-  ...(props.columnFiltersOptions || {}),
-  getFilteredRowModel: getFilteredRowModel(),
-  ...(columnFiltersState.value !== undefined && { onColumnFiltersChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnFiltersState) }),
-  ...(columnOrderState.value !== undefined && { onColumnOrderChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnOrderState) }),
-  ...(props.visibilityOptions || {}),
-  ...(columnVisibilityState.value !== undefined && { onColumnVisibilityChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnVisibilityState) }),
-  ...(props.columnPinningOptions || {}),
-  ...(columnPinningState.value !== undefined && { onColumnPinningChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnPinningState) }),
-  ...(props.columnSizingOptions || {}),
-  ...(columnSizingState.value !== undefined && { onColumnSizingChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnSizingState) }),
-  ...(columnSizingInfoState.value !== undefined && { onColumnSizingInfoChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnSizingInfoState) }),
-  ...(props.rowSelectionOptions || {}),
-  ...(rowSelectionState.value !== undefined && { onRowSelectionChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, rowSelectionState) }),
-  ...(props.rowPinningOptions || {}),
-  ...(rowPinningState.value !== undefined && { onRowPinningChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, rowPinningState) }),
-  ...(props.sortingOptions || {}),
-  getSortedRowModel: getSortedRowModel(),
-  ...(sortingState.value !== undefined && { onSortingChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, sortingState) }),
-  ...(props.groupingOptions || {}),
-  ...(groupingState.value !== undefined && { onGroupingChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, groupingState) }),
-  ...(props.expandedOptions || {}),
-  getExpandedRowModel: getExpandedRowModel(),
-  ...(expandedState.value !== undefined && { onExpandedChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, expandedState) }),
-  ...(props.paginationOptions || {}),
-  ...(paginationState.value !== undefined && { onPaginationChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, paginationState) }),
-  ...(props.facetedOptions || {}),
-  state: {
-    get globalFilter() {
-      return globalFilterState.value
-    },
-    get columnFilters() {
-      return columnFiltersState.value
-    },
-    get columnOrder() {
-      return columnOrderState.value
-    },
-    get columnVisibility() {
-      return columnVisibilityState.value
-    },
-    get columnPinning() {
-      return columnPinningState.value
-    },
-    get expanded() {
-      return expandedState.value
-    },
-    get rowSelection() {
-      return rowSelectionState.value
-    },
-    get sorting() {
-      return sortingState.value
-    },
-    get grouping() {
-      return groupingState.value
-    },
-    get rowPinning() {
-      return rowPinningState.value
-    },
-    get columnSizing() {
-      return columnSizingState.value
-    },
-    get columnSizingInfo() {
-      return columnSizingInfoState.value
-    },
-    get pagination() {
-      return paginationState.value
-    }
-  }
-})
+// What the table renders itself. The other features are registered through the `features` prop.
+const defaultFeatures = {
+  columnFilteringFeature,
+  columnPinningFeature,
+  columnResizingFeature,
+  columnSizingFeature,
+  columnVisibilityFeature,
+  globalFilteringFeature,
+  rowExpandingFeature,
+  rowPinningFeature,
+  rowSelectionFeature,
+  rowSortingFeature,
+  filteredRowModel: createFilteredRowModel(),
+  sortedRowModel: createSortedRowModel(),
+  expandedRowModel: createExpandedRowModel()
+}
 
-// TanStack fills the rows above a shallow column with placeholders and puts its header in the bottom row.
-// Keep only the top placeholder of each chain (header groups are numbered by column depth) and render the real header there with a `rowspan`.
-const headerGroups = computed(() => tableApi.getHeaderGroups().map(headerGroup => ({
-  ...headerGroup,
-  headers: headerGroup.headers
-    .filter(header => header.column.depth >= headerGroup.depth)
-    .map((header) => {
-      let rowSpan = 1
+// TanStack Table only resolves the function names that are registered, `auto` included, so the ones `auto` picks are registered here.
+const aggregationFns = { sum: aggregationFn_sum, extent: aggregationFn_extent }
+const filterFns = {
+  includesString: filterFn_includesString,
+  inNumberRange: filterFn_inNumberRange,
+  inDateRange: filterFn_inDateRange,
+  arrIncludes: filterFn_arrIncludes,
+  equals: filterFn_equals,
+  weakEquals: filterFn_weakEquals
+}
+const sortFns = { alphanumeric: sortFn_alphanumeric, text: sortFn_text, datetime: sortFn_datetime }
 
-      while (header.isPlaceholder && header.subHeaders[0]) {
-        rowSpan++
-        header = header.subHeaders[0]
-      }
+// Custom sorting, filtering and aggregation functions are added to these instead of replacing them.
+const registeredFeatures = tableFeatures({
+  ...defaultFeatures,
+  ...props.features,
+  aggregationFns: { ...aggregationFns, ...props.features?.aggregationFns },
+  filterFns: { ...filterFns, ...props.features?.filterFns },
+  sortFns: { ...sortFns, ...props.features?.sortFns }
+}) as TableFeatures
 
-      return { header, rowSpan }
+const id = useId()
+
+// The cell APIs of these features only exist once they are registered.
+const hasCellSelection = 'cellSelectionFeature' in registeredFeatures
+const isCellSelectionEnabled = computed(() => hasCellSelection && tableApi.options.enableCellSelection !== false)
+const hasCellSpanning = 'cellSpanningFeature' in registeredFeatures
+// `spanRows` can't reach a row the virtualizer doesn't render, so virtualized tables only apply `spanColumns`.
+const hasRowSpanning = hasCellSpanning && !props.virtualize
+
+// Each model is a state slice, so supporting a new slice only takes a `defineModel` and an entry here.
+const models: { [K in keyof TableState<TableFeatures>]-?: Ref<TableState<TableFeatures>[K] | undefined> } = {
+  globalFilter: globalFilterState,
+  columnFilters: columnFiltersState,
+  columnOrder: columnOrderState,
+  columnVisibility: columnVisibilityState,
+  columnPinning: columnPinningState,
+  columnSizing: columnSizingState,
+  columnResizing: columnResizingState,
+  rowSelection: rowSelectionState,
+  rowPinning: rowPinningState,
+  sorting: sortingState,
+  grouping: groupingState,
+  expanded: expandedState,
+  pagination: paginationState,
+  cellSelection: cellSelectionState
+}
+
+// Each model backs the external atom of its slice. TanStack writes a change to the atom before emitting it,
+// so the table API reads the new state right away, in the `update:*` handler included. An unbound model keeps its own value.
+const initialState = getInitialTableState(registeredFeatures, props.initialState) as unknown as Record<string, unknown>
+const atoms = Object.fromEntries(Object.keys(initialState).filter(key => key in models).map((key) => {
+  const model = models[key as keyof typeof models] as Ref<unknown>
+  // A slice in the `state` prop stays controlled by it, like TanStack's `state` option.
+  const get = () => (props.state && key in props.state ? props.state[key as keyof typeof props.state] : model.value) ?? initialState[key]
+  return [key, {
+    get,
+    set: (updater: Updater<unknown>) => {
+      model.value = functionalUpdate(updater, get())
+    },
+    subscribe: (observer: ((value: unknown) => void) | { next?: (value: unknown) => void }) => ({
+      unsubscribe: watch(get, typeof observer === 'function' ? observer : value => observer.next?.(value), { flush: 'sync' })
     })
+  }]
+}))
+
+// TanStack rebuilds every row when `getRowId` or `getSubRows` changes, so an inline function would rebuild them on each render
+// of a parent that reads table state, in a loop. Stable wrappers call the latest one instead, TanStack falls back to the row index when it returns nothing.
+const getRowId = (...args: Parameters<NonNullable<TableOptions<T>['getRowId']>>) => props.getRowId?.(...args) as string
+const getSubRows = (...args: Parameters<NonNullable<TableOptions<T>['getSubRows']>>) => props.getSubRows?.(...args)
+
+const tableOptions = computed(() => ({
+  // Columns resize while dragging, in the text direction.
+  columnResizeMode: 'onChange' as const,
+  columnResizeDirection: dir.value,
+  // `data` is copied on every deep change, which would clear the cell selection after each inline edit.
+  autoResetCellSelection: false,
+  // TanStack only expands rows with sub-rows, a row with an `expanded` slot can expand too unless `enableExpanding` is `false`.
+  getRowCanExpand: slots.expanded ? () => tableApi.options.enableExpanding !== false : undefined,
+  ...props.options,
+  ...tableProps.value,
+  getRowId,
+  getSubRows,
+  features: registeredFeatures,
+  atoms: { ...atoms, ...props.options?.atoms },
+  data,
+  columns,
+  meta: meta.value
+}))
+
+// The adapter watches the keys of the object it gets, so this proxy keeps `options` and the forwarded props in sync after setup, keys added later included.
+const tableApi: VueTable<TableFeatures, T> = useTable<TableFeatures, T>(new Proxy({} as typeof tableOptions.value, {
+  get: (_, key) => Reflect.get(tableOptions.value, key),
+  has: (_, key) => Reflect.has(tableOptions.value, key),
+  ownKeys: () => Reflect.ownKeys(tableOptions.value),
+  getOwnPropertyDescriptor: (_, key) => Reflect.has(tableOptions.value, key) ? { configurable: true, enumerable: true, value: Reflect.get(tableOptions.value, key) } : undefined
+}))
+
+// TanStack gives a placeholder heading a chain of its column's headers the `rowSpan` of the chain, and the headers below it a `rowSpan` of 0.
+// The leaf at the end of the chain is rendered in the placeholder's cell, so slots, sorting and `aria-sort` get the real header.
+const headerGroups = computed(() => tableApi.getHeaderGroups().map(headerGroup => ({
+  id: headerGroup.id,
+  headers: headerGroup.headers.filter(header => header.rowSpan !== 0).map((header) => {
+    const rowSpan = header.rowSpan
+    while (rowSpan > 1 && header.isPlaceholder && header.subHeaders[0]?.column === header.column) {
+      header = header.subHeaders[0]
+    }
+    return { header, rowSpan }
+  })
 })))
 
+// TanStack's footer groups are the header groups reversed, so each spanning header is moved to the footer row its span starts on.
+const footerGroups = computed(() => {
+  const groups = headerGroups.value
+  const leafIds = tableApi.getHeaderGroups().at(-1)?.headers.map(header => header.column.id) ?? []
+  const position = (header: Header<TableFeatures, T, unknown>) => leafIds.indexOf(header.getLeafHeaders()[0]?.column.id ?? header.column.id)
+  const footer = groups.map((_, index) => ({ id: `footer-${index}`, headers: [] as typeof groups[number]['headers'] }))
+  groups.forEach((group, depth) => {
+    for (const entry of group.headers) {
+      footer[groups.length - depth - entry.rowSpan]?.headers.push(entry)
+    }
+  })
+  return footer.map(group => ({ ...group, headers: group.headers.sort((a, b) => position(a.header) - position(b.header)) }))
+})
+
 const rows = computed(() => tableApi.getRowModel().rows)
-const topRows = computed(() => props.virtualize ? [] : tableApi.getTopRows())
-const bottomRows = computed(() => props.virtualize ? [] : tableApi.getBottomRows())
+// Pinned rows render around the rows, the virtualizer only handles the center ones.
+const topRows = computed(() => tableApi.getTopRows())
+const bottomRows = computed(() => tableApi.getBottomRows())
 const centerRows = computed(() => topRows.value.length || bottomRows.value.length ? tableApi.getCenterRows() : rows.value)
 
 const virtualizerProps = toRef(() => defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
@@ -510,7 +563,8 @@ const virtualizerInstance = virtualizer ? virtualizer.value : undefined
 
 // Register each rendered row with the virtualizer so its actual height is measured (and re-measured on resize).
 function measureRow(el: Element | ComponentPublicInstance | null) {
-  if (el instanceof Element) {
+  // Pinned rows have no index, they sit outside the virtualized range.
+  if (el instanceof Element && el.hasAttribute(indexAttribute.value)) {
     virtualizerInstance?.measureElement(el)
   }
 }
@@ -529,7 +583,7 @@ function measureRowElement(el: Element, entry: ResizeObserverEntry | undefined, 
 }
 
 function remeasureRow(el: Element | null | undefined) {
-  if (!el?.isConnected || !virtualizer) return
+  if (!el?.isConnected || !virtualizer || !el.hasAttribute(indexAttribute.value)) return
   const instance = virtualizer.value
   instance.resizeItem(instance.indexFromElement(el), instance.options.measureElement(el, undefined, instance))
 }
@@ -555,17 +609,32 @@ function onExpandedRowUnmounted({ el }: VNode) {
 
 onBeforeUnmount(() => expandedRowsObserver?.disconnect())
 
-function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
-  ref.value = typeof updaterOrValue === 'function' ? updaterOrValue(ref.value) : updaterOrValue
+// TanStack's `FlexRender` passes an array returned by a column template to `h()` as if it were a component, so arrays are returned as they are.
+// A `cell` renders like TanStack's `<FlexRender :cell>`: `aggregatedCell` on aggregated cells, nothing on placeholder ones.
+function FlexRender({ render, props, cell }: { render?: unknown, props?: unknown, cell?: Cell<TableFeatures, T, unknown> }) {
+  if (cell) {
+    if (cell.getIsPlaceholder?.()) {
+      return null
+    }
+    render = cell.getIsAggregated?.() ? (cell.column.columnDef.aggregatedCell ?? cell.column.columnDef.cell) : cell.column.columnDef.cell
+    props = cell.getContext()
+  }
+  const rendered = typeof render === 'function' ? render(props) : render
+  // An empty string would render an empty text node, which hydrates as a mismatch.
+  if (rendered === '') {
+    return null
+  }
+  if (rendered === null || (typeof rendered !== 'object' && typeof rendered !== 'function') || Array.isArray(rendered) || isVNode(rendered)) {
+    return rendered
+  }
+  return h(rendered as any, props as any)
 }
 
 function onRowSelect(e: Event, row: TableRow<T>) {
-  if (!props.onSelect) {
+  if (!props.onSelect || !row.getCanSelect()) {
     return
   }
-  const target = e.target as HTMLElement
-  const isInteractive = target.closest('a, button, input, label, select, textarea')
-  if (isInteractive) {
+  if (isInteractive(e.target)) {
     return
   }
 
@@ -599,6 +668,240 @@ function onRowContextmenu(e: Event, row: TableRow<T>) {
   }
 }
 
+// A per-row `enableRowSelection` predicate turns the rows it rejects inert: no selectable styles, no `tabindex` and no `select` event.
+function isRowSelectable(row: TableRow<T>) {
+  return (!!props.onSelect || !!props.onHover || !!props.onContextmenu) && row.getCanSelect()
+}
+
+function isCellCovered(cell: Cell<TableFeatures, T, unknown>) {
+  return hasRowSpanning ? cell.getIsCovered() : hasCellSpanning && cell.getColSpan() === 0
+}
+
+function getCellSpan(span: number) {
+  return span > 1 ? span : undefined
+}
+
+function isInteractive(target: EventTarget | null) {
+  return target instanceof Element && !!target.closest('a, button, input, label, select, textarea, [contenteditable]:not([contenteditable="false"]), [role~="button"], [role~="checkbox"], [role~="radio"], [role~="switch"], [role~="slider"]')
+}
+
+let isPointerFocus = false
+
+function onCellMousedown(e: MouseEvent, cell: Cell<TableFeatures, T, unknown>) {
+  if (e.button !== 0 || isInteractive(e.target)) {
+    return
+  }
+  // Keep the drag from selecting text, then focus the cell ourselves. The pointer already set the selection,
+  // so `onCellFocus` must not collapse it, a ctrl-click that removes this cell from a range included.
+  e.preventDefault()
+  cell.getSelectionStartHandler()(e)
+  const target = e.currentTarget as HTMLElement
+  isPointerFocus = true
+  target.focus()
+  isPointerFocus = false
+}
+
+const cellSelectionKeys: Record<string, CellSelectionDirection> = {
+  ArrowUp: 'up',
+  ArrowDown: 'down',
+  ArrowLeft: 'left',
+  ArrowRight: 'right'
+}
+
+function onCellKeydown(e: KeyboardEvent) {
+  if (isInteractive(e.target)) {
+    return
+  }
+  // Focus stays where it is, so a virtualized table doesn't scroll to the first row.
+  if (e.key.toLowerCase() === 'a' && (e.metaKey || e.ctrlKey)) {
+    e.preventDefault()
+    tableApi.selectAllCells()
+    return
+  }
+  // Escape collapses the selection to the active cell, so the keyboard keeps its place.
+  const focused = tableApi.getFocusedCell()
+  if (e.key === 'Escape' && focused && tableApi.getSelectedCellCount() > 1) {
+    e.preventDefault()
+    tableApi.setFocusedCell(focused.row.id, focused.column.id)
+    return
+  }
+  let direction = cellSelectionKeys[e.key]
+  // Alt with an arrow is the browser's history navigation.
+  if (!direction || e.altKey) {
+    return
+  }
+  // TanStack steps through the column order, which runs from the right in RTL.
+  if (dir.value === 'rtl' && (direction === 'left' || direction === 'right')) {
+    direction = direction === 'left' ? 'right' : 'left'
+  }
+  e.preventDefault()
+  if (e.shiftKey) {
+    tableApi.extendCellSelection(direction)
+  } else {
+    tableApi.moveCellSelection(direction)
+  }
+  focusSelectedCell()
+}
+
+// Moves the focus to the active cell, scrolling a virtualized table to its row first.
+function focusSelectedCell() {
+  const focus = () => tableRef.value?.querySelector<HTMLElement>(':scope > tbody > tr > td[tabindex="0"]')?.focus()
+  const rowId = tableApi.getFocusedCell()?.row.id
+  const index = virtualizerInstance && rowId !== undefined ? centerRows.value.findIndex(row => row.id === rowId) : -1
+  if (index >= 0) {
+    // `auto` only scrolls when the row is out of view, the row renders on the next frame.
+    virtualizerInstance!.scrollToIndex(index, { align: 'auto' })
+    requestAnimationFrame(() => nextTick(focus))
+    return
+  }
+  nextTick(focus)
+}
+
+function getCellSelectionListeners(cell: Cell<TableFeatures, T, unknown>) {
+  if (!isCellSelectionEnabled.value || !cell.getCanSelect()) {
+    return {}
+  }
+  return {
+    mousedown: (e: MouseEvent) => onCellMousedown(e, cell),
+    mouseenter: cell.getSelectionExtendHandler(),
+    keydown: onCellKeydown,
+    focus: () => onCellFocus(cell)
+  }
+}
+
+const renderedRows = computed(() => {
+  const center = virtualizer ? virtualItems.value.map(item => centerRows.value[item.index]) : centerRows.value
+  return [...topRows.value, ...center, ...bottomRows.value].filter(row => !!row)
+})
+
+// Until a cell is selected, the first selectable cell takes the roving `tabindex` so the keyboard can reach the grid.
+const entryCell = computed(() => {
+  for (const row of renderedRows.value) {
+    const cell = row.getVisibleCells().find(cell => !isCellCovered(cell) && cell.getCanSelect())
+    if (cell) {
+      return cell.id
+    }
+  }
+  return undefined
+})
+
+// The active cell can be off the page, scrolled out of a virtualized table or in a hidden column, the entry cell then takes the tab stop.
+const isFocusedCellRendered = computed(() => {
+  const focused = tableApi.getFocusedCell()
+  return !!focused && focused.column.getIsVisible() && renderedRows.value.some(row => row.id === focused.row.id)
+})
+
+function getCellTabIndex(cell: Cell<TableFeatures, T, unknown>) {
+  if (!isFocusedCellRendered.value) {
+    return cell.id === entryCell.value ? 0 : -1
+  }
+  return cell.getTabIndex()
+}
+
+// A cell focused with the keyboard or from code becomes the active cell, so the arrow keys start from it.
+// The pointer and the arrow keys focus the active cell themselves, so their ranges are kept.
+function onCellFocus(cell: Cell<TableFeatures, T, unknown>) {
+  if (!isPointerFocus && !cell.getIsFocused()) {
+    tableApi.setFocusedCell(cell.row.id, cell.column.id)
+  }
+}
+
+// With `columnResizeMode: 'onEnd'`, the sizes only change on release, so the handle follows the pointer until then.
+function getResizerStyles(header: Header<TableFeatures, T, unknown>) {
+  const deltaOffset = tableApi.atoms.columnResizing.get().deltaOffset
+  if (tableApi.options.columnResizeMode !== 'onEnd' || !header.column.getIsResizing() || !deltaOffset) {
+    return undefined
+  }
+  return { transform: `translateX(${dir.value === 'rtl' ? -deltaOffset : deltaOffset}px)` }
+}
+
+// The arrow keys resize the column in the text direction, and Enter resets it.
+function onResizerKeydown(e: KeyboardEvent, header: Header<TableFeatures, T, unknown>) {
+  const step = e.key === 'ArrowRight' ? 10 : e.key === 'ArrowLeft' ? -10 : 0
+  if (e.key === 'Enter') {
+    e.preventDefault()
+    resetHeaderSize(header)
+    return
+  }
+  if (!step) {
+    return
+  }
+  e.preventDefault()
+  const delta = dir.value === 'rtl' ? -step : step
+  const leaves = header.getLeafHeaders()
+  tableApi.setColumnSizing(sizing => ({
+    ...sizing,
+    ...Object.fromEntries(leaves.map(leaf => [leaf.column.id, Math.max(leaf.column.columnDef.minSize ?? 20, leaf.getSize() + delta / leaves.length)]))
+  }))
+}
+
+// A group header resizes its leaves together, so its limits are theirs summed. TanStack's unbounded `maxSize` is left out.
+function getHeaderSizeLimit(header: Header<TableFeatures, T, unknown>, key: 'minSize' | 'maxSize') {
+  const limits = header.getLeafHeaders().map(leaf => leaf.column.columnDef[key] ?? (key === 'minSize' ? 20 : Number.MAX_SAFE_INTEGER))
+  if (key === 'maxSize' && limits.some(limit => limit >= Number.MAX_SAFE_INTEGER)) {
+    return undefined
+  }
+  return limits.reduce((sum, limit) => sum + limit, 0)
+}
+
+// The footer cells share `meta.attrs.th`, without its `id` so it stays on the header.
+function getFooterAttrs(header: Header<TableFeatures, T, unknown>) {
+  const { id: _id, ...attrs } = (resolveValue(header.column.columnDef.meta?.attrs?.th, header) ?? {}) as Record<string, unknown>
+  return attrs
+}
+
+// The resize handle is labelled by its header, through the `id` set with `meta.attrs.th` when there is one.
+function getHeaderId(header: Header<TableFeatures, T, unknown>) {
+  const attrs = resolveValue(header.column.columnDef.meta?.attrs?.th, header) as Record<string, unknown> | undefined
+  // `aria-labelledby` is a list of ids, so whitespace in the generated one is percent-encoded, `%` first to keep ids distinct.
+  return (attrs?.id as string | undefined) ?? `${id}-${header.id.replace(/%/g, '%25').replace(/\s/g, encodeURIComponent)}`
+}
+
+// A group header resizes its leaves, so resetting it resets them.
+function resetHeaderSize(header: Header<TableFeatures, T, unknown>) {
+  const ids = header.getLeafHeaders().map(leaf => leaf.column.id)
+  tableApi.setColumnSizing(sizing => Object.fromEntries(Object.entries(sizing).filter(([columnId]) => !ids.includes(columnId))))
+}
+
+// Like sorting, a resize handle is only rendered for columns that opt in with `enableResizing: true`.
+function isColumnResizable(column: Column<TableFeatures, T, unknown>) {
+  return column.columnDef.enableResizing === true && column.getCanResize()
+}
+
+function isResizable(header: Header<TableFeatures, T, unknown>) {
+  return !header.isPlaceholder && isColumnResizable(header.column)
+}
+
+// Once a column can be resized, every header and the table take their TanStack size.
+const hasResizableColumns = computed(() => tableApi.getAllLeafColumns().some(isColumnResizable))
+
+// A group header reports the side of any pinned leaf, so it is pinned only when all its leaves are, at the offset of its outer leaf.
+function getHeaderPinned(header: Header<TableFeatures, T, unknown>) {
+  const pins = header.getLeafHeaders().map(leaf => leaf.column.getIsPinned())
+  return pins.every(pin => pin === pins[0]) ? pins[0] : false
+}
+
+function getHeaderPinStyles(header: Header<TableFeatures, T, unknown>): Record<string, string> {
+  const pinned = getHeaderPinned(header)
+  const leaves = header.getLeafHeaders()
+  if (pinned === 'start') {
+    return { insetInlineStart: `${leaves[0]!.column.getStart('start')}px` }
+  }
+  if (pinned === 'end') {
+    return { insetInlineEnd: `${leaves[leaves.length - 1]!.column.getAfter('end')}px` }
+  }
+  return {}
+}
+
+function getHeaderStyles(header: Header<TableFeatures, T, unknown>) {
+  const styles = getHeaderPinStyles(header)
+  // A `size` is applied as soon as a column sets one, so pinned offsets match the rendered widths.
+  if (hasResizableColumns.value || hasSize in header.column.columnDef) {
+    styles.width = `${header.getSize()}px`
+  }
+  return styles
+}
+
 function resolveValue<T, A = undefined>(prop: T | ((arg: A) => T), arg?: A): T | undefined {
   if (typeof prop === 'function') {
     // @ts-expect-error: TS can't know if prop is a function here
@@ -607,14 +910,14 @@ function resolveValue<T, A = undefined>(prop: T | ((arg: A) => T), arg?: A): T |
   return prop
 }
 
-function getColumnStyles(column: Column<T>): Record<string, string> {
+function getColumnStyles(column: Column<TableFeatures, T, unknown>): Record<string, string> {
   const styles: Record<string, string> = {}
 
   const pinned = column.getIsPinned()
-  if (pinned === 'left') {
-    styles.left = `${column.getStart('left')}px`
-  } else if (pinned === 'right') {
-    styles.right = `${column.getAfter('right')}px`
+  if (pinned === 'start') {
+    styles.insetInlineStart = `${column.getStart('start')}px`
+  } else if (pinned === 'end') {
+    styles.insetInlineEnd = `${column.getAfter('end')}px`
   }
 
   return styles
@@ -622,12 +925,12 @@ function getColumnStyles(column: Column<T>): Record<string, string> {
 
 // `getCanSort()` is true for every accessor column, so it cannot tell a column that offers sort UI
 // from a plain one, and an explicit `enableSorting: true` can still come from `defaultColumn` or be
-// overridden by `sortingOptions`. A header is sortable only when both agree.
-function isSortable(column: Column<T, unknown>) {
+// overridden by `options`. A header is sortable only when both agree.
+function isSortable(column: Column<TableFeatures, T, unknown>) {
   return column.columnDef.enableSorting === true && column.getCanSort()
 }
 
-function getAriaSort(header: Header<T, unknown>): AriaAttributes['aria-sort'] {
+function getAriaSort(header: Header<TableFeatures, T, unknown>): AriaAttributes['aria-sort'] {
   if (header.isPlaceholder || !isSortable(header.column)) {
     return undefined
   }
@@ -643,7 +946,7 @@ function getAriaSort(header: Header<T, unknown>): AriaAttributes['aria-sort'] {
   const sortableIds = new Set(tableApi.getVisibleLeafColumns()
     .filter(isSortable)
     .map(column => column.id))
-  const primary = tableApi.getState().sorting.find(({ id }) => sortableIds.has(id))
+  const primary = tableApi.atoms.sorting.get().find(({ id }) => sortableIds.has(id))
 
   if (primary?.id !== header.column.id) {
     return 'none'
@@ -652,8 +955,12 @@ function getAriaSort(header: Header<T, unknown>): AriaAttributes['aria-sort'] {
   return sorted === 'asc' ? 'ascending' : 'descending'
 }
 
-watch(() => props.data, () => {
+watch(() => props.data, (value, oldValue) => {
   data.value = props.data ? [...props.data] : []
+  // `autoResetCellSelection` is off so inline edits keep the selection, but new data still clears it.
+  if (hasCellSelection && value !== oldValue && (tableApi.options.autoResetAll ?? props.options?.autoResetCellSelection ?? true)) {
+    tableApi.resetCellSelection()
+  }
 }, props.watchOptions)
 
 defineExpose({
@@ -671,10 +978,10 @@ defineExpose({
       :ref="measureRowRef"
       :[indexAttribute]="index"
       :data-selected="row.getIsSelected()"
-      :data-selectable="!!props.onSelect || !!props.onHover || !!props.onContextmenu"
+      :data-selectable="isRowSelectable(row)"
       :data-expanded="row.getIsExpanded()"
       :data-pinned="row.getIsPinned() || undefined"
-      :tabindex="props.onSelect ? 0 : undefined"
+      :tabindex="props.onSelect && row.getCanSelect() ? 0 : undefined"
       data-slot="table-tr"
       :class="ui.tr({
         class: [
@@ -683,39 +990,46 @@ defineExpose({
         ]
       })"
       :style="resolveValue(tableApi.options.meta?.style?.tr, row)"
+      v-bind="resolveValue(tableApi.options.meta?.attrs?.tr, row)"
       @click="onRowSelect($event, row)"
       @keydown.self.exact.enter.space="onRowSelect($event, row)"
       @pointerenter="onRowHover($event, row)"
       @pointerleave="onRowHover($event, null)"
       @contextmenu="onRowContextmenu($event, row)"
     >
-      <td
-        v-for="cell in row.getVisibleCells()"
-        :key="cell.id"
-        :data-pinned="cell.column.getIsPinned()"
-        :colspan="resolveValue(cell.column.columnDef.meta?.colspan?.td, cell)"
-        :rowspan="resolveValue(cell.column.columnDef.meta?.rowspan?.td, cell)"
-        data-slot="table-td"
-        :class="ui.td({
-          class: [
-            props.ui?.td,
-            resolveValue(cell.column.columnDef.meta?.class?.td, cell)
-          ],
-          pinned: !!cell.column.getIsPinned()
-        })"
-        :style="[
-          getColumnStyles(cell.column),
-          resolveValue(cell.column.columnDef.meta?.style?.td, cell)
-        ]"
-      >
-        <slot :name="`${cell.column.id}-cell`" v-bind="cell.getContext()">
-          <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
-        </slot>
-      </td>
+      <template v-for="cell in row.getVisibleCells()" :key="cell.id">
+        <td
+          v-if="!isCellCovered(cell)"
+          :data-pinned="cell.column.getIsPinned()"
+          :data-selected="hasCellSelection ? cell.getIsSelected() : undefined"
+          :tabindex="isCellSelectionEnabled ? getCellTabIndex(cell) : undefined"
+          :aria-selected="isCellSelectionEnabled ? cell.getIsSelected() : undefined"
+          :colspan="hasCellSpanning ? getCellSpan(cell.getColSpan()) : undefined"
+          :rowspan="hasRowSpanning ? getCellSpan(cell.getRowSpan()) : undefined"
+          data-slot="table-td"
+          :class="ui.td({
+            class: [
+              props.ui?.td,
+              resolveValue(cell.column.columnDef.meta?.class?.td, cell)
+            ],
+            pinned: !!cell.column.getIsPinned()
+          })"
+          :style="[
+            getColumnStyles(cell.column),
+            resolveValue(cell.column.columnDef.meta?.style?.td, cell)
+          ]"
+          v-bind="resolveValue(cell.column.columnDef.meta?.attrs?.td, cell)"
+          v-on="getCellSelectionListeners(cell)"
+        >
+          <slot :name="`${cell.column.id}-cell`" v-bind="cell.getContext()">
+            <FlexRender :cell="cell" />
+          </slot>
+        </td>
+      </template>
     </tr>
 
     <tr
-      v-if="row.getIsExpanded()"
+      v-if="row.getIsExpanded() && !!slots.expanded"
       data-slot="table-tr"
       :class="ui.tr({ class: [props.ui?.tr] })"
       @vue:mounted="onExpandedRowMounted"
@@ -728,8 +1042,16 @@ defineExpose({
   </DefineRowTemplate>
 
   <DefineTableTemplate>
-    <table ref="tableRef" :aria-busy="props.loading ? 'true' : undefined" data-slot="base" :class="ui.base({ class: [props.ui?.base] })">
-      <caption v-if="props.caption || !!slots.caption" data-slot="caption" :class="ui.caption({ class: [props.ui?.caption] })">
+    <table
+      ref="tableRef"
+      :aria-busy="props.loading ? 'true' : undefined"
+      data-slot="table-base"
+      :role="isCellSelectionEnabled ? 'grid' : undefined"
+      :aria-multiselectable="isCellSelectionEnabled && tableApi.options.enableMultiCellRangeSelection !== false ? true : undefined"
+      :class="ui.base({ class: [props.ui?.base] })"
+      :style="hasResizableColumns ? { width: `${tableApi.getTotalSize()}px` } : undefined"
+    >
+      <caption v-if="props.caption || !!slots.caption" data-slot="table-caption" :class="ui.caption({ class: [props.ui?.caption] })">
         <slot name="caption">
           {{ props.caption }}
         </slot>
@@ -739,8 +1061,9 @@ defineExpose({
         <tr v-for="headerGroup in headerGroups" :key="headerGroup.id" data-slot="table-tr" :class="ui.tr({ class: [props.ui?.tr] })">
           <th
             v-for="{ header, rowSpan } in headerGroup.headers"
+            :id="isResizable(header) ? getHeaderId(header) : undefined"
             :key="header.id"
-            :data-pinned="header.column.getIsPinned()"
+            :data-pinned="getHeaderPinned(header)"
             :scope="header.colSpan > 1 ? 'colgroup' : 'col'"
             :colspan="header.colSpan > 1 ? header.colSpan : undefined"
             :rowspan="rowSpan > 1 ? rowSpan : undefined"
@@ -751,16 +1074,36 @@ defineExpose({
                 props.ui?.th,
                 resolveValue(header.column.columnDef.meta?.class?.th, header)
               ],
-              pinned: !!header.column.getIsPinned()
+              pinned: !!getHeaderPinned(header)
             })"
             :style="[
-              getColumnStyles(header.column),
+              getHeaderStyles(header),
               resolveValue(header.column.columnDef.meta?.style?.th, header)
             ]"
+            v-bind="resolveValue(header.column.columnDef.meta?.attrs?.th, header)"
           >
             <slot :name="`${header.id}-header`" v-bind="header.getContext()">
               <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header" :props="header.getContext()" />
             </slot>
+
+            <div
+              v-if="isResizable(header)"
+              role="separator"
+              aria-orientation="vertical"
+              tabindex="0"
+              :aria-labelledby="getHeaderId(header)"
+              :aria-valuenow="header.getSize()"
+              :aria-valuemin="getHeaderSizeLimit(header, 'minSize')"
+              :aria-valuemax="getHeaderSizeLimit(header, 'maxSize')"
+              :data-resizing="header.column.getIsResizing()"
+              data-slot="table-resizer"
+              :class="ui.resizer({ class: props.ui?.resizer })"
+              :style="getResizerStyles(header)"
+              @mousedown="header.getResizeHandler()($event)"
+              @touchstart.passive="header.getResizeHandler()($event)"
+              @dblclick="resetHeaderSize(header)"
+              @keydown="onResizerKeydown($event, header)"
+            />
           </th>
         </tr>
 
@@ -770,7 +1113,7 @@ defineExpose({
       <tbody data-slot="table-tbody" :class="ui.tbody({ class: [props.ui?.tbody] })">
         <slot name="body-top" />
 
-        <template v-if="rows.length">
+        <template v-if="rows.length || topRows.length || bottomRows.length">
           <ReuseRowTemplate v-for="row in topRows" :key="row.id" :row="row" />
 
           <template v-if="virtualizer">
@@ -820,26 +1163,27 @@ defineExpose({
       >
         <tr data-slot="table-separator" :class="ui.separator({ class: [props.ui?.separator] })" />
 
-        <tr v-for="footerGroup in tableApi.getFooterGroups()" :key="footerGroup.id" data-slot="table-tr" :class="ui.tr({ class: [props.ui?.tr] })">
+        <tr v-for="footerGroup in footerGroups" :key="footerGroup.id" data-slot="table-tr" :class="ui.tr({ class: [props.ui?.tr] })">
           <th
-            v-for="header in footerGroup.headers"
+            v-for="{ header, rowSpan } in footerGroup.headers"
             :key="header.id"
-            :data-pinned="header.column.getIsPinned()"
+            :data-pinned="getHeaderPinned(header)"
             :scope="header.colSpan > 1 ? 'colgroup' : 'col'"
             :colspan="header.colSpan > 1 ? header.colSpan : undefined"
-            :rowspan="header.rowSpan > 1 ? header.rowSpan : undefined"
+            :rowspan="rowSpan > 1 ? rowSpan : undefined"
             data-slot="table-th"
             :class="ui.th({
               class: [
                 props.ui?.th,
                 resolveValue(header.column.columnDef.meta?.class?.th, header)
               ],
-              pinned: !!header.column.getIsPinned()
+              pinned: !!getHeaderPinned(header)
             })"
             :style="[
-              getColumnStyles(header.column),
+              getHeaderPinStyles(header),
               resolveValue(header.column.columnDef.meta?.style?.th, header)
             ]"
+            v-bind="getFooterAttrs(header)"
           >
             <slot :name="`${header.id}-footer`" v-bind="header.getContext()">
               <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.footer" :props="header.getContext()" />

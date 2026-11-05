@@ -1,8 +1,10 @@
-import { h, ref, computed } from 'vue'
+import { h, ref, computed, defineComponent } from 'vue'
 import { describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { flushPromises } from '@vue/test-utils'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { aggregationFn_sum, cellSelectionFeature, filterFn_includesString, sortFn_text, cellSpanningFeature, columnGroupingFeature, columnOrderingFeature, createGroupedRowModel, rowAggregationFeature, stockFeatures } from '@tanstack/vue-table'
+import { upperFirst } from 'scule'
 import { renderEach } from '../component-render'
 import { UCheckbox, UButton, UBadge, UDropdownMenu } from '#components'
 import Table from '../../src/runtime/components/Table.vue'
@@ -51,7 +53,7 @@ describe('Table', () => {
   const columns: TableColumn<typeof data[number]>[] = [{
     id: 'select',
     header: ({ table }) => h(UCheckbox<boolean>, {
-      'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
+      'modelValue': table.getIsAllPageRowsSelected() ? true : table.getIsSomePageRowsSelected() ? 'indeterminate' : false,
       'onUpdate:modelValue': value => table.toggleAllPageRowsSelected(!!value),
       'label': 'Select all'
     }),
@@ -118,8 +120,8 @@ describe('Table', () => {
         td: 'text-right font-medium'
       }
     },
-    footer: ({ column }) => {
-      const total = column.getFacetedRowModel().rows.reduce((acc: number, row: TableRow<typeof data[number]>) => acc + Number.parseFloat(row.getValue('amount')), 0)
+    footer: ({ table }) => {
+      const total = table.getFilteredRowModel().rows.reduce((acc: number, row: TableRow<typeof data[number]>) => acc + Number.parseFloat(row.getValue('amount')), 0)
       const formatted = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'EUR'
@@ -173,23 +175,6 @@ describe('Table', () => {
 
   const props = { data }
 
-  const groupedHeaderColumns: TableColumn<typeof data[number]>[] = [
-    { accessorKey: 'id', header: 'ID' },
-    {
-      header: 'Payment',
-      columns: [
-        { accessorKey: 'email', header: 'Email' },
-        {
-          header: 'Details',
-          columns: [
-            { accessorKey: 'status', header: 'Status' },
-            { accessorKey: 'amount', header: 'Amount' }
-          ]
-        }
-      ]
-    }
-  ]
-
   renderEach(Table, [
     // Props
     ['with data', { props }],
@@ -209,7 +194,7 @@ describe('Table', () => {
     ['with virtualize external scroll element', { props: { ...props, virtualize: { getScrollElement: () => document.body, scrollMargin: 20 } } }],
     ['with row pinning', { props: { ...props, rowPinning: { top: ['2'], bottom: ['3'] } } }],
     ['with row pinning and virtualization', { props: { ...props, virtualize: true, rowPinning: { top: ['2'], bottom: ['3'] } } }],
-    ['with column pinning and footer', { props: { ...props, columns, columnPinning: { left: ['id'], right: ['actions'] } } }],
+    ['with column pinning and footer', { props: { ...props, columns, columnPinning: { start: ['id'], end: ['actions'] } } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'absolute' } }],
     ['with ui', { props: { ...props, ui: { base: 'table-auto' } } }],
@@ -223,76 +208,6 @@ describe('Table', () => {
     ['with body-top slot', { props, slots: { 'body-top': () => 'Body top slot' } }],
     ['with body-bottom slot', { props, slots: { 'body-bottom': () => 'Body bottom slot' } }]
   ])
-
-  it('merges grouped headers with different depths', async () => {
-    const wrapper = await mountSuspended(Table<typeof data[number]>, {
-      props: { data, columns: groupedHeaderColumns },
-      slots: { 'id-header': 'Custom ID' }
-    })
-
-    const rows = wrapper.findAll('thead tr[data-slot="table-tr"]')
-    expect(rows.map(row => row.findAll('th').map(th => th.text()))).toEqual([
-      ['Custom ID', 'Payment'],
-      ['Email', 'Details'],
-      ['Status', 'Amount']
-    ])
-    expect(rows[0]!.findAll('th')[0]!.attributes('rowspan')).toBe('3')
-    expect(rows[0]!.findAll('th')[1]!.attributes('colspan')).toBe('3')
-    expect(rows[1]!.findAll('th')[0]!.attributes('rowspan')).toBe('2')
-    expect(rows[1]!.findAll('th')[1]!.attributes('colspan')).toBe('2')
-    expect(await axe(wrapper.element)).toHaveNoViolations()
-  })
-
-  it('updates merged headers when columns are hidden', async () => {
-    const wrapper = await mountSuspended(Table<typeof data[number]>, {
-      props: { data, columns: groupedHeaderColumns }
-    })
-
-    await wrapper.setProps({ columnVisibility: { status: false, amount: false } })
-
-    const rows = wrapper.findAll('thead tr[data-slot="table-tr"]')
-    expect(rows.map(row => row.findAll('th').map(th => th.text()))).toEqual([
-      ['ID', 'Payment'],
-      ['Email']
-    ])
-    expect(rows[0]!.find('th').attributes('rowspan')).toBe('2')
-    expect(rows[0]!.findAll('th')[1]!.attributes('colspan')).toBeUndefined()
-
-    await wrapper.setProps({ columnVisibility: { email: false, status: false, amount: false } })
-
-    expect(wrapper.findAll('thead th').map(th => th.text())).toEqual(['ID'])
-    expect(wrapper.find('thead th').attributes('rowspan')).toBeUndefined()
-
-    await wrapper.setProps({ columnVisibility: {} })
-
-    expect(wrapper.find('thead th').attributes('rowspan')).toBe('3')
-    expect(wrapper.findAll('thead th')).toHaveLength(6)
-  })
-
-  it('keeps merged headers aligned when columns are reordered and pinned', async () => {
-    const wrapper = await mountSuspended(Table<typeof data[number]>, {
-      props: {
-        data,
-        columns: groupedHeaderColumns,
-        columnOrder: ['id', 'amount', 'email', 'status'],
-        columnPinning: { left: [], right: ['id'] }
-      }
-    })
-
-    const rows = wrapper.findAll('thead tr[data-slot="table-tr"]')
-    expect(rows.map(row => row.findAll('th').map(th => th.text()))).toEqual([
-      ['Payment', 'ID'],
-      ['Details', 'Email', 'Details'],
-      ['Amount', 'Status']
-    ])
-    const idTh = rows[0]!.findAll('th')[1]!
-    expect(idTh.attributes('rowspan')).toBe('3')
-    expect(idTh.attributes('data-pinned')).toBe('right')
-    expect(rows[1]!.findAll('th')[1]!.attributes('rowspan')).toBe('2')
-    expect(wrapper.find('tbody tr').findAll('td').map(td => td.text())).toEqual([
-      '316', 'ken99@yahoo.com', 'success', 'm5gr84i9'
-    ])
-  })
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Table, {
@@ -393,7 +308,8 @@ describe('Table', () => {
             h('input', { 'type': 'checkbox', 'aria-label': 'Select row' }),
             h('button', { type: 'button' }, 'Edit'),
             h('a', { href: '#' }, 'Details'),
-            h('label', {}, [h('input', { type: 'checkbox' }), 'Toggle'])
+            h('label', {}, [h('input', { type: 'checkbox' }), 'Toggle']),
+            h('div', { role: 'switch button', tabindex: 0 }, 'Custom')
           ]
         }] as any,
         onSelect
@@ -416,6 +332,7 @@ describe('Table', () => {
     await wrapper.find('tbody tr button').trigger('click')
     await wrapper.find('tbody tr a').trigger('click')
     await wrapper.find('tbody tr label').trigger('click')
+    await wrapper.find('tbody tr [role="switch button"]').trigger('click')
     expect(wrapper.find<HTMLInputElement>('tbody tr label input').element.checked).toBe(true)
 
     expect(onSelect).not.toHaveBeenCalled()
@@ -521,25 +438,119 @@ describe('Table', () => {
     expect(visibleThs[0]!.attributes('aria-sort')).toBe('descending')
   })
 
-  it('sets aria-sort on merged headers but not footer th elements', async () => {
+  it('spans a header over the placeholders above it', async () => {
     const groupedColumns: TableColumn<typeof data[number]>[] = [
       { header: 'Group', columns: [{ accessorKey: 'id', header: 'Id', footer: 'Id total', enableSorting: true }] },
       { accessorKey: 'email', header: 'Email', enableSorting: true }
     ]
 
     const wrapper = await mountSuspended(Table, {
-      props: { data, columns: groupedColumns as any, sorting: [{ id: 'email', desc: false }] }
+      props: { data, columns: groupedColumns as any, sorting: [{ id: 'email', desc: false }] },
+      slots: { 'email-header': () => 'Email slot' }
     })
 
-    const [, emailTh] = wrapper.findAll('thead th')
-    expect(emailTh!.text()).toBe('Email')
+    const [firstRow, secondRow] = wrapper.findAll('thead tr')
+    const [groupTh, emailTh] = firstRow!.findAll('th')
+    expect(groupTh!.attributes('aria-sort')).toBeUndefined()
     expect(emailTh!.attributes('rowspan')).toBe('2')
     expect(emailTh!.attributes('aria-sort')).toBe('ascending')
-    expect(wrapper.findAll('thead tr')[1]!.findAll('th').map(th => th.text())).toEqual(['Id'])
+    expect(emailTh!.text()).toBe('Email slot')
+    expect(secondRow!.findAll('th').map(th => th.text())).toEqual(['Id'])
 
     const footerThs = wrapper.findAll('tfoot th')
-    expect(footerThs.length).toBeGreaterThan(0)
     expect(footerThs.every(th => th.attributes('aria-sort') === undefined)).toBe(true)
+    expect(footerThs.find(th => th.text() === 'Id total')).toBeDefined()
+    expect(footerThs.filter(th => th.attributes('rowspan') === '2')).toHaveLength(1)
+  })
+
+  describe('grouped headers with different depths', () => {
+    const groupedHeaderColumns: TableColumn<typeof data[number]>[] = [
+      { accessorKey: 'id', header: 'ID' },
+      {
+        header: 'Payment',
+        columns: [
+          { accessorKey: 'email', header: 'Email' },
+          {
+            header: 'Details',
+            columns: [
+              { accessorKey: 'status', header: 'Status' },
+              { accessorKey: 'amount', header: 'Amount' }
+            ]
+          }
+        ]
+      }
+    ]
+
+    it('merges each chain of placeholders into the real header', async () => {
+      const wrapper = await mountSuspended(Table, {
+        props: { data, columns: groupedHeaderColumns as any },
+        slots: { 'id-header': () => 'Custom ID' }
+      })
+
+      const rows = wrapper.findAll('thead tr[data-slot="table-tr"]')
+      expect(rows.map(row => row.findAll('th').map(th => th.text()))).toEqual([
+        ['Custom ID', 'Payment'],
+        ['Email', 'Details'],
+        ['Status', 'Amount']
+      ])
+      expect(rows[0]!.findAll('th')[0]!.attributes('rowspan')).toBe('3')
+      expect(rows[0]!.findAll('th')[1]!.attributes('colspan')).toBe('3')
+      expect(rows[1]!.findAll('th')[0]!.attributes('rowspan')).toBe('2')
+      expect(rows[1]!.findAll('th')[1]!.attributes('colspan')).toBe('2')
+      expect(await axe(wrapper.element)).toHaveNoViolations()
+    })
+
+    it('updates the merged headers when columns are hidden', async () => {
+      const wrapper = await mountSuspended(Table, {
+        props: { data, columns: groupedHeaderColumns as any }
+      })
+
+      await wrapper.setProps({ columnVisibility: { status: false, amount: false } })
+
+      const rows = wrapper.findAll('thead tr[data-slot="table-tr"]')
+      expect(rows.map(row => row.findAll('th').map(th => th.text()))).toEqual([
+        ['ID', 'Payment'],
+        ['Email']
+      ])
+      expect(rows[0]!.find('th').attributes('rowspan')).toBe('2')
+      expect(rows[0]!.findAll('th')[1]!.attributes('colspan')).toBeUndefined()
+
+      await wrapper.setProps({ columnVisibility: { email: false, status: false, amount: false } })
+
+      expect(wrapper.findAll('thead th').map(th => th.text())).toEqual(['ID'])
+      expect(wrapper.find('thead th').attributes('rowspan')).toBeUndefined()
+
+      await wrapper.setProps({ columnVisibility: {} })
+
+      expect(wrapper.find('thead th').attributes('rowspan')).toBe('3')
+      expect(wrapper.findAll('thead th')).toHaveLength(6)
+    })
+
+    it('keeps the merged headers aligned when columns are reordered and pinned', async () => {
+      const wrapper = await mountSuspended(Table, {
+        props: {
+          data,
+          columns: groupedHeaderColumns as any,
+          columnOrder: ['id', 'amount', 'email', 'status'],
+          columnPinning: { start: [], end: ['id'] },
+          features: { columnOrderingFeature }
+        }
+      })
+
+      const rows = wrapper.findAll('thead tr[data-slot="table-tr"]')
+      expect(rows.map(row => row.findAll('th').map(th => th.text()))).toEqual([
+        ['Payment', 'ID'],
+        ['Details', 'Email', 'Details'],
+        ['Amount', 'Status']
+      ])
+      const idTh = rows[0]!.findAll('th')[1]!
+      expect(idTh.attributes('rowspan')).toBe('3')
+      expect(idTh.attributes('data-pinned')).toBe('end')
+      expect(rows[1]!.findAll('th')[1]!.attributes('rowspan')).toBe('2')
+      expect(wrapper.find('tbody tr').findAll('td').map(td => td.text())).toEqual([
+        '316', 'ken99@yahoo.com', 'success', 'm5gr84i9'
+      ])
+    })
   })
 
   it('does not set aria-sort on th elements the table cannot sort', async () => {
@@ -549,7 +560,7 @@ describe('Table', () => {
     ]
 
     const disabledWrapper = await mountSuspended(Table, {
-      props: { data, columns: sortableColumns as any, sortingOptions: { enableSorting: false } }
+      props: { data, columns: sortableColumns as any, options: { enableSorting: false } }
     })
 
     expect(disabledWrapper.findAll('th').every(th => th.attributes('aria-sort') === undefined)).toBe(true)
@@ -566,6 +577,541 @@ describe('Table', () => {
     const [actionsTh, idTh] = defaultColumnWrapper.findAll('th')
     expect(actionsTh!.attributes('aria-sort')).toBeUndefined()
     expect(idTh!.attributes('aria-sort')).toBe('none')
+  })
+
+  it.each([
+    ['globalFilter', '', 'carmella'],
+    ['columnFilters', [], [{ id: 'email', value: 'carmella' }]],
+    ['columnOrder', [], ['email', 'id']],
+    ['columnVisibility', {}, { email: false }],
+    ['columnPinning', { start: [], end: [] }, { start: ['id'], end: [] }],
+    ['columnSizing', {}, { id: 200 }],
+    ['columnResizing', {}, { columnSizingStart: [], deltaOffset: null, deltaPercentage: null, isResizingColumn: 'id', startOffset: null, startSize: null }],
+    ['rowSelection', {}, { 0: true }],
+    ['rowPinning', { top: [], bottom: [] }, { top: ['0'], bottom: [] }],
+    ['sorting', [], [{ id: 'id', desc: true }]],
+    ['grouping', [], ['status']],
+    ['expanded', {}, { 0: true }],
+    ['pagination', { pageIndex: 0, pageSize: 10 }, { pageIndex: 1, pageSize: 2 }],
+    ['cellSelection', [], [{ anchorRowId: '0', anchorColumnId: 'id', focusRowId: '0', focusColumnId: 'id' }]]
+  ])('updates a bound %s model through TanStack', async (key, initial, value) => {
+    const onUpdate = vi.fn()
+    const wrapper = await mountSuspended(Table, {
+      props: { data, features: stockFeatures, [key]: initial, [`onUpdate:${key}`]: onUpdate }
+    })
+    const { tableApi } = wrapper.vm as any
+    tableApi[`set${upperFirst(key)}`](value)
+
+    expect(onUpdate).toHaveBeenLastCalledWith(value)
+  })
+
+  it('updates a model bound after setup', async () => {
+    const onUpdate = vi.fn()
+    const wrapper = await mountSuspended(Table, { props: { data, 'onUpdate:sorting': onUpdate } })
+    await wrapper.setProps({ sorting: [] })
+    const { tableApi } = wrapper.vm as any
+    tableApi.setSorting([{ id: 'id', desc: true }])
+
+    expect(onUpdate).toHaveBeenLastCalledWith([{ id: 'id', desc: true }])
+  })
+
+  it('reads a bound model change synchronously, in its update event included', async () => {
+    const seen: string[][] = []
+    const wrapper = await mountSuspended(defineComponent({
+      setup() {
+        const rowSelection = ref({})
+        const table = ref()
+        return () => h(Table as any, {
+          'ref': table,
+          data,
+          'rowSelection': rowSelection.value,
+          'onUpdate:rowSelection': (value: any) => {
+            rowSelection.value = value
+            seen.push((table.value as any).tableApi.getSelectedRowModel().rows.map((row: any) => row.id))
+          }
+        })
+      }
+    }))
+    const tableApi = (wrapper.findComponent(Table).vm as any).tableApi
+    tableApi.getRowModel().rows[0].toggleSelected(true)
+
+    expect(seen).toEqual([['0']])
+    expect(tableApi.getSelectedRowModel().rows.map((row: any) => row.id)).toEqual(['0'])
+  })
+
+  it('emits a change with only a listener bound', async () => {
+    const onUpdate = vi.fn()
+    const wrapper = await mountSuspended(Table, { props: { data, 'onUpdate:sorting': onUpdate } })
+    const { tableApi } = wrapper.vm as any
+    tableApi.setSorting([{ id: 'id', desc: true }])
+
+    expect(onUpdate).toHaveBeenLastCalledWith([{ id: 'id', desc: true }])
+  })
+
+  it('keeps expanding off with enableExpanding false', async () => {
+    const wrapper = await mountSuspended(Table, { props: { data: data.slice(0, 1), options: { enableExpanding: false } }, slots: { expanded: () => 'Details' } })
+
+    expect((wrapper.vm as any).tableApi.getRowModel().rows[0].getCanExpand()).toBe(false)
+  })
+
+  it('expands a row without sub-rows when the expanded slot is used', async () => {
+    const wrapper = await mountSuspended(Table, { props: { data: data.slice(0, 2) }, slots: { expanded: () => 'Details' } })
+    const { tableApi } = wrapper.vm as any
+    tableApi.getRowModel().rows[0].toggleExpanded()
+    await flushPromises()
+
+    expect(wrapper.findAll('tbody tr')[1]!.text()).toBe('Details')
+  })
+
+  it('keeps an inline getRowId from rebuilding the rows in a loop', async () => {
+    const wrapper = await mountSuspended(defineComponent({
+      setup() {
+        const table = ref()
+        return () => h('div', [
+          h('span', (table.value as any)?.tableApi?.getSelectedRowModel().rows.length ?? 0),
+          h(Table as any, { ref: table, data, getRowId: (row: any) => row.id })
+        ])
+      }
+    }))
+    const tableApi = (wrapper.findComponent(Table).vm as any).tableApi
+    tableApi.getRowModel().rows[0].toggleSelected(true)
+    await flushPromises()
+
+    expect(wrapper.find('span').text()).toBe('1')
+  })
+
+  it('keeps an unbound slice in TanStack state', async () => {
+    const wrapper = await mountSuspended(Table, { props: { data } })
+    const { tableApi } = wrapper.vm as any
+    tableApi.setColumnVisibility({ email: false })
+    await flushPromises()
+
+    expect(wrapper.findAll('th').map(th => th.text())).not.toContain('Email')
+  })
+
+  it('renders aggregated cells with aggregatedCell and leaves placeholder cells empty', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data,
+        columns: [
+          { accessorKey: 'status', header: 'Status' },
+          { accessorKey: 'amount', header: 'Amount', aggregationFn: 'sum', aggregatedCell: ({ getValue }: any) => `Total ${getValue()}` }
+        ] as any,
+        grouping: ['status'],
+        expanded: true,
+        features: { columnGroupingFeature, rowAggregationFeature, groupedRowModel: createGroupedRowModel(), aggregationFns: { sum: aggregationFn_sum } }
+      }
+    })
+
+    const rows = wrapper.findAll('tbody tr')
+    const successTotal = data.filter(row => row.status === 'success').reduce((acc, row) => acc + row.amount, 0)
+    expect(rows[0]!.findAll('td').map(td => td.text())).toEqual(['success', `Total ${successTotal}`])
+    expect(rows[1]!.findAll('td')).toHaveLength(2)
+    expect(rows[1]!.findAll('td')[0]!.text()).toBe('')
+  })
+
+  it('renders pinned rows around a virtualized table', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data,
+        getRowId: (row: any) => row.id,
+        rowPinning: { top: [data[2]!.id], bottom: [data[0]!.id] },
+        virtualize: { observeElementRect: (_: any, cb: any) => cb({ width: 1000, height: 500 }) }
+      },
+      attachTo: document.body
+    })
+    await flushPromises()
+    const rows = wrapper.findAll('tbody tr[data-slot="table-tr"]')
+
+    expect(rows[0]!.attributes('data-pinned')).toBe('top')
+    expect(rows[0]!.attributes('data-index')).toBeUndefined()
+    expect(rows.at(-1)!.attributes('data-pinned')).toBe('bottom')
+    expect(rows.filter(row => row.attributes('data-index') !== undefined)).toHaveLength(data.length - 2)
+    wrapper.unmount()
+  })
+
+  it('keeps pinned rows when no other row matches', async () => {
+    const wrapper = await mountSuspended(Table, { props: { data, rowPinning: { top: [data[0]!.id], bottom: [] }, getRowId: (row: any) => row.id, globalFilter: 'no match' } })
+
+    expect(wrapper.findAll('tbody tr')).toHaveLength(1)
+    expect(wrapper.find('tbody tr').attributes('data-pinned')).toBe('top')
+  })
+
+  it('renders the fallback value in default cells', async () => {
+    const wrapper = await mountSuspended(Table, { props: { data: [{ id: null }], columns: [{ accessorKey: 'id' }] as any, renderFallbackValue: '-' } })
+
+    expect(wrapper.find('tbody td').text()).toBe('-')
+  })
+
+  it('only pins a group header when all its columns are pinned', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data,
+        columns: [{ id: 'info', header: 'Info', columns: [{ accessorKey: 'id' }, { accessorKey: 'email' }] }, { accessorKey: 'status' }] as any,
+        columnPinning: { start: ['id'], end: [] }
+      }
+    })
+    const info = wrapper.findAll('thead th').find(th => th.text() === 'Info')!
+
+    expect(info.attributes('data-pinned')).toBe('false')
+    expect(info.attributes('style') ?? '').not.toContain('inset-inline-start')
+  })
+
+  it('spans footer cells across the rows of their group placeholders', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data,
+        columns: [
+          { id: 'info', header: 'Info', footer: 'Info footer', columns: [{ accessorKey: 'id', footer: 'Id footer' }, { accessorKey: 'email', footer: 'Email footer' }] },
+          { accessorKey: 'status', footer: 'Status footer' }
+        ] as any
+      }
+    })
+    const footerRows = wrapper.findAll('tfoot tr[data-slot="table-tr"]')
+
+    expect(footerRows.map(tr => tr.findAll('th').map(th => th.text()))).toEqual([['Id footer', 'Email footer', 'Status footer'], ['Info footer']])
+    expect(footerRows[0]!.findAll('th')[2]!.attributes('rowspan')).toBe('2')
+  })
+
+  it('selects every cell with Ctrl+A and collapses to the active cell with Escape', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: { data: data.slice(0, 2), columns: [{ accessorKey: 'id' }, { accessorKey: 'email' }] as any, features: { cellSelectionFeature } },
+      attachTo: document.body
+    })
+    const cells = () => wrapper.findAll('tbody td')
+
+    expect(wrapper.find('table').attributes('role')).toBe('grid')
+    await cells()[0]!.trigger('mousedown', { button: 0 })
+    await cells()[0]!.trigger('keydown', { key: 'a', ctrlKey: true })
+    expect(cells().map(td => td.attributes('aria-selected'))).toEqual(['true', 'true', 'true', 'true'])
+
+    await cells()[0]!.trigger('keydown', { key: 'Escape' })
+    expect(cells().map(td => td.attributes('aria-selected'))).toEqual(['true', 'false', 'false', 'false'])
+
+    await cells()[0]!.trigger('keydown', { key: 'ArrowDown', altKey: true })
+    expect(cells()[0]!.attributes('aria-selected')).toBe('true')
+
+    wrapper.unmount()
+  })
+
+  it('moves the resize handle with the pointer until release in onEnd mode', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: { data, columns: [{ accessorKey: 'id', enableResizing: true, size: 120 }] as any, options: { columnResizeMode: 'onEnd' } },
+      attachTo: document.body
+    })
+    const resizer = wrapper.find('[data-slot="table-resizer"]')
+    await resizer.trigger('mousedown', { clientX: 100 })
+    document.dispatchEvent(new MouseEvent('mousemove', { clientX: 140 }))
+    await flushPromises()
+
+    expect(resizer.attributes('style')).toContain('translateX(40px)')
+    expect(wrapper.find('thead th').attributes('style')).toContain('width: 120px')
+
+    document.dispatchEvent(new MouseEvent('mouseup', { clientX: 140 }))
+    await flushPromises()
+    expect(resizer.attributes('style') ?? '').not.toContain('translateX')
+    expect(wrapper.find('thead th').attributes('style')).toContain('width: 160px')
+
+    wrapper.unmount()
+  })
+
+  it('resizes a column with the keyboard', async () => {
+    const wrapper = await mountSuspended(Table, { props: { data, columns: [{ accessorKey: 'id', header: 'Id', enableResizing: true, size: 120 }] as any } })
+    const resizer = wrapper.find('[data-slot="table-resizer"]')
+
+    expect(resizer.attributes('role')).toBe('separator')
+    expect(resizer.attributes('aria-labelledby')).toBe(wrapper.find('thead th').attributes('id'))
+
+    const custom = await mountSuspended(Table, { props: { data, columns: [{ accessorKey: 'id', footer: 'Total', enableResizing: true, meta: { attrs: { th: { 'id': 'id-header', 'data-th': 'id' } } } }] as any } })
+    expect(custom.find('[data-slot="table-resizer"]').attributes('aria-labelledby')).toBe('id-header')
+    expect(custom.findAll('#id-header')).toHaveLength(1)
+    expect(custom.find('tfoot th').attributes('data-th')).toBe('id')
+
+    const spaced = await mountSuspended(Table, { props: { data: [{ 'foo bar': 1, 'foo-bar': 2 }], columns: [{ accessorKey: 'foo bar', enableResizing: true }, { accessorKey: 'foo-bar', enableResizing: true }] as any } })
+    const labels = spaced.findAll('[data-slot="table-resizer"]').map(resizer => resizer.attributes('aria-labelledby')!)
+    expect(labels.every(label => !/\s/.test(label))).toBe(true)
+    expect(new Set(labels).size).toBe(2)
+    expect(spaced.findAll('thead th').map(th => th.attributes('id'))).toEqual(labels)
+    expect(resizer.attributes('aria-valuemax')).toBeUndefined()
+    await resizer.trigger('keydown', { key: 'ArrowRight' })
+    expect(resizer.attributes('aria-valuenow')).toBe('130')
+    await resizer.trigger('keydown', { key: 'Enter' })
+    expect(resizer.attributes('aria-valuenow')).toBe('120')
+  })
+
+  it('falls back to the initial state for an undefined slice of the state prop', async () => {
+    const wrapper = await mountSuspended(Table, { props: { data, state: { sorting: undefined } } })
+
+    expect((wrapper.vm as any).tableApi.atoms.sorting.get()).toEqual([])
+  })
+
+  it('keeps a slice of the state prop controlled', async () => {
+    const wrapper = await mountSuspended(Table, { props: { data, state: { sorting: [{ id: 'id', desc: true }] } } })
+    const tableApi = (wrapper.vm as any).tableApi
+    tableApi.setSorting([{ id: 'email', desc: false }])
+    await wrapper.setProps({ state: { sorting: [{ id: 'email', desc: true }] } })
+
+    expect(tableApi.atoms.sorting.get()).toEqual([{ id: 'email', desc: true }])
+  })
+
+  it('leaves cells out of the tab order when cell selection is disabled', async () => {
+    const wrapper = await mountSuspended(Table, { props: { data: data.slice(0, 1), columns: [{ accessorKey: 'id' }] as any, features: { cellSelectionFeature }, options: { enableCellSelection: false } } })
+
+    expect(wrapper.find('tbody td').attributes('tabindex')).toBeUndefined()
+    expect(wrapper.find('table').attributes('role')).toBeUndefined()
+  })
+
+  it('clears the cell selection when the data is replaced', async () => {
+    const wrapper = await mountSuspended(Table, { props: { data: data.slice(0, 2), columns: [{ accessorKey: 'id' }] as any, features: { cellSelectionFeature } } })
+    const tableApi = (wrapper.vm as any).tableApi
+    tableApi.setFocusedCell('0', 'id')
+    expect(tableApi.getSelectedCellCount()).toBe(1)
+
+    await wrapper.setProps({ data: data.slice(0, 2).map(row => ({ ...row })) })
+    expect(tableApi.getSelectedCellCount()).toBe(0)
+  })
+
+  it('keeps a cell removed with a ctrl-click out of the selection', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: { data: data.slice(0, 2), columns: [{ accessorKey: 'id' }, { accessorKey: 'email' }] as any, features: { cellSelectionFeature } },
+      attachTo: document.body
+    })
+    const tableApi = (wrapper.vm as any).tableApi
+    tableApi.selectAllCells()
+    await flushPromises()
+    await wrapper.findAll('tbody td')[3]!.trigger('mousedown', { button: 0, ctrlKey: true })
+
+    expect(tableApi.getSelectedCellCount()).toBe(3)
+    wrapper.unmount()
+  })
+
+  it('makes a cell focused from code the active cell', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: { data: data.slice(0, 2), columns: [{ accessorKey: 'id' }, { accessorKey: 'email' }] as any, features: { cellSelectionFeature } },
+      attachTo: document.body
+    })
+    const tableApi = (wrapper.vm as any).tableApi
+    tableApi.selectAllCells()
+    await flushPromises()
+    const cell = wrapper.findAll('tbody td')[3]!.element as HTMLElement
+    cell.focus()
+    await flushPromises()
+
+    expect(document.activeElement).toBe(cell)
+    expect(tableApi.getFocusedCell().id).toBe('1_email')
+    expect(tableApi.getSelectedCellCount()).toBe(1)
+    wrapper.unmount()
+  })
+
+  it('moves the tab stop to the entry cell when the active cell is hidden', async () => {
+    const wrapper = await mountSuspended(Table, { props: { data: data.slice(0, 1), columns: [{ accessorKey: 'id' }, { accessorKey: 'email' }] as any, features: { cellSelectionFeature } } })
+    const tableApi = (wrapper.vm as any).tableApi
+    tableApi.setFocusedCell('0', 'email')
+    tableApi.setColumnVisibility({ email: false })
+    await flushPromises()
+
+    expect(wrapper.find('tbody td').attributes('tabindex')).toBe('0')
+  })
+
+  it('makes the first cell reachable with the keyboard before any selection', async () => {
+    const wrapper = await mountSuspended(Table, { props: { data: data.slice(0, 2), columns: [{ accessorKey: 'id' }, { accessorKey: 'email' }] as any, features: { cellSelectionFeature } } })
+    const cells = () => wrapper.findAll('tbody td')
+
+    expect(cells().map(td => td.attributes('tabindex'))).toEqual(['0', '-1', '-1', '-1'])
+
+    const skipped = await mountSuspended(Table, { props: { data: data.slice(0, 1), columns: [{ accessorKey: 'id', enableCellSelection: false }, { accessorKey: 'email' }] as any, features: { cellSelectionFeature } } })
+    expect(skipped.findAll('tbody td').map(td => td.attributes('tabindex'))).toEqual(['-1', '0'])
+
+    const firstRowSkipped = await mountSuspended(Table, { props: { data: data.slice(0, 2), columns: [{ accessorKey: 'id' }] as any, features: { cellSelectionFeature }, options: { enableCellSelection: (cell: any) => cell.row.index > 0 } } })
+    expect(firstRowSkipped.findAll('tbody td').map(td => td.attributes('tabindex'))).toEqual(['-1', '0'])
+    await cells()[0]!.trigger('focus')
+    expect(cells()[0]!.attributes('data-selected')).toBe('true')
+  })
+
+  it('spans cells with the cell spanning feature', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data: [{ category: 'A', name: 'One', note: 'x' }, { category: 'A', name: 'Two', note: 'y' }, { category: 'B', name: 'Three', note: 'z' }],
+        columns: [
+          { accessorKey: 'category', header: 'Category', spanRows: true },
+          { accessorKey: 'name', header: 'Name', spanColumns: ({ row }: any) => row.original.category === 'B' ? 2 : 1 },
+          { accessorKey: 'note', header: 'Note' }
+        ] as any,
+        features: { cellSpanningFeature }
+      }
+    })
+
+    const rows = wrapper.findAll('tbody tr')
+    expect(rows[0]!.findAll('td')[0]!.attributes('rowspan')).toBe('2')
+    expect(rows[1]!.findAll('td').map(td => td.text())).toEqual(['Two', 'y'])
+    expect(rows[2]!.findAll('td').map(td => td.text())).toEqual(['B', 'Three'])
+    expect(rows[2]!.findAll('td')[1]!.attributes('colspan')).toBe('2')
+  })
+
+  it('only spans columns in a virtualized table', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data: [{ category: 'A', name: 'One', note: 'x' }, { category: 'A', name: 'Two', note: 'y' }],
+        columns: [{ accessorKey: 'category', spanRows: true }, { accessorKey: 'name', spanColumns: 2 }, { accessorKey: 'note' }] as any,
+        features: { cellSpanningFeature },
+        virtualize: { observeElementRect: (_: unknown, cb: (rect: { width: number, height: number }) => void) => cb({ width: 1000, height: 500 }) }
+      }
+    })
+
+    expect(wrapper.findAll('tbody td[rowspan]')).toHaveLength(0)
+    const cells = wrapper.findAll('tbody td').filter(td => td.text())
+    expect(cells.map(td => td.text())).toEqual(['A', 'One', 'A', 'Two'])
+    expect(cells[1]!.attributes('colspan')).toBe('2')
+  })
+
+  it('applies an explicit column size as the header width', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: { data: data.slice(0, 1), columns: [{ accessorKey: 'id', size: 120 }, { accessorKey: 'email' }] as any }
+    })
+
+    const headers = wrapper.findAll('thead th')
+    expect(headers[0]!.attributes('style')).toContain('width: 120px')
+    expect(headers[1]!.attributes('style') ?? '').not.toContain('width')
+  })
+
+  it('adds custom sorting and filtering functions to the built-in ones', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data: data.slice(0, 3),
+        columns: [{ accessorKey: 'id', sortFn: 'byLength' }, { accessorKey: 'email', filterFn: 'includesString' }] as any,
+        features: { sortFns: { byLength: (a: any, b: any, id: string) => String(a.getValue(id)).length - String(b.getValue(id)).length } }
+      }
+    })
+    const tableApi = (wrapper.vm as any).tableApi
+
+    expect(tableApi.getColumn('id').getSortFn()).toBeTypeOf('function')
+    expect(tableApi.getColumn('email').getFilterFn()).toBeTypeOf('function')
+    expect(tableApi.getColumn('id').getAutoSortFn()).toBeTypeOf('function')
+  })
+
+  it('registers the built-in functions auto resolves to', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data: data.slice(0, 3),
+        columns: [{ accessorKey: 'status' }, { accessorKey: 'amount', aggregationFn: 'auto' }] as any,
+        grouping: ['status'],
+        features: { columnGroupingFeature, rowAggregationFeature, groupedRowModel: createGroupedRowModel() }
+      }
+    })
+
+    const tableApi = (wrapper.vm as any).tableApi
+    expect(tableApi.getRowModel().rows[0].getValue('amount')).toBeTypeOf('number')
+    expect(tableApi.getColumn('status').getAutoSortFn()).toBe(sortFn_text)
+    expect(tableApi.getColumn('status').getAutoFilterFn()).toBe(filterFn_includesString)
+  })
+
+  it('selects cells with the pointer and the keyboard', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: { data: data.slice(0, 3), columns: [{ accessorKey: 'id' }, { accessorKey: 'email' }] as any, features: { cellSelectionFeature } },
+      attachTo: document.body
+    })
+
+    const firstCell = () => wrapper.findAll('tbody tr')[0]!.findAll('td')[0]!
+    await firstCell().trigger('mousedown', { button: 0 })
+    expect(firstCell().attributes('data-selected')).toBe('true')
+    expect(firstCell().attributes('tabindex')).toBe('0')
+
+    await firstCell().trigger('keydown', { key: 'ArrowDown', shiftKey: true })
+    expect(wrapper.findAll('tbody tr')[1]!.findAll('td')[0]!.attributes('data-selected')).toBe('true')
+    expect(firstCell().attributes('data-selected')).toBe('true')
+
+    await firstCell().trigger('keydown', { key: 'ArrowRight' })
+    expect(firstCell().attributes('data-selected')).toBe('false')
+    expect(wrapper.findAll('tbody tr')[0]!.findAll('td')[1]!.attributes('tabindex')).toBe('0')
+
+    wrapper.unmount()
+  })
+
+  it('renders a resize handle on columns that enable resizing', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: { data, columns: [{ accessorKey: 'id', header: 'Id', enableResizing: true, size: 120 }, { accessorKey: 'email', header: 'Email' }] as any }
+    })
+
+    const [idTh, emailTh] = wrapper.findAll('thead th')
+    expect(idTh!.find('[data-slot="table-resizer"]').exists()).toBe(true)
+    expect(idTh!.attributes('style')).toContain('width: 120px')
+    expect(emailTh!.find('[data-slot="table-resizer"]').exists()).toBe(false)
+  })
+
+  it('binds meta attrs on rows and cells', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data: data.slice(0, 1),
+        columns: [{ accessorKey: 'id', header: 'Id', meta: { attrs: { th: { 'data-th': 'id' }, td: (cell: any) => ({ 'data-td': cell.getValue() }) } } }] as any,
+        meta: { attrs: { tr: (row: any) => ({ 'data-id': row.original.id, 'tabindex': -1 }) } },
+        onSelect: () => {}
+      }
+    })
+
+    const tr = wrapper.find('tbody tr')
+    expect(tr.attributes('data-id')).toBe(data[0]!.id)
+    expect(tr.attributes('tabindex')).toBe('-1')
+    expect(tr.find('td').attributes('data-td')).toBe(data[0]!.id)
+    expect(wrapper.find('thead th').attributes('data-th')).toBe('id')
+  })
+
+  it('makes the rows an enableRowSelection predicate rejects inert', async () => {
+    const onSelect = vi.fn()
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data: data.slice(0, 2),
+        columns: [{ accessorKey: 'id' }] as any,
+        options: { enableRowSelection: (row: any) => row.index === 0 },
+        onSelect
+      }
+    })
+
+    const rows = wrapper.findAll('tbody tr')
+    expect(rows.map(tr => tr.attributes('data-selectable'))).toEqual(['true', 'false'])
+    expect(rows.map(tr => tr.attributes('tabindex'))).toEqual(['0', undefined])
+
+    await rows[1]!.trigger('click')
+    expect(onSelect).not.toHaveBeenCalled()
+    await rows[0]!.trigger('click')
+    expect(onSelect).toHaveBeenCalledOnce()
+  })
+
+  it('keeps options in sync after mount', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data: data.slice(0, 2),
+        columns: [{ accessorKey: 'id' }] as any,
+        options: { enableRowSelection: false },
+        onSelect: () => {}
+      }
+    })
+    const tableApi = (wrapper.vm as any).tableApi
+
+    expect(wrapper.findAll('tbody tr').map(tr => tr.attributes('tabindex'))).toEqual([undefined, undefined])
+
+    await wrapper.setProps({ options: { enableRowSelection: true, rowCount: 42 } })
+
+    expect(wrapper.findAll('tbody tr').map(tr => tr.attributes('tabindex'))).toEqual(['0', '0'])
+    expect(tableApi.options.rowCount).toBe(42)
+  })
+
+  it('makes every row inert when enableRowSelection is false', async () => {
+    const onSelect = vi.fn()
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data: data.slice(0, 2),
+        columns: [{ accessorKey: 'id' }] as any,
+        options: { enableRowSelection: false },
+        onSelect
+      }
+    })
+
+    const rows = wrapper.findAll('tbody tr')
+    expect(rows.map(tr => tr.attributes('data-selectable'))).toEqual(['false', 'false'])
+    expect(rows.map(tr => tr.attributes('tabindex'))).toEqual([undefined, undefined])
+
+    await rows[0]!.trigger('click')
+    expect(onSelect).not.toHaveBeenCalled()
   })
 
   describe('defaultColumn', () => {
