@@ -797,7 +797,7 @@ defineExpose({
           <ReuseRowTemplate v-for="row in bottomRows" :key="row.id" :row="row" />
         </template>
 
-        <tr v-else-if="props.loading && !!slots['loading']">
+        <tr v-else-if="props.loading">
           <td :colspan="tableApi.getVisibleLeafColumns().length" data-slot="loading" :class="ui.loading({ class: props.ui?.loading })">
             <slot name="loading" />
           </td>
