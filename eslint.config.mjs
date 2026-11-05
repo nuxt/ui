@@ -549,8 +549,8 @@ function appTailwindcssConfig(files, entryPoint, options = {}) {
   const [, palette] = rules['better-tailwindcss/no-restricted-classes']
   return betterTailwindcssConfig(files, entryPoint, {
     ...options,
-    settings: { selectors: settings['better-tailwindcss'].selectors },
-    rules: { 'better-tailwindcss/no-restricted-classes': ['error', palette] }
+    settings: { selectors: settings['better-tailwindcss'].selectors, ...options.settings },
+    rules: { 'better-tailwindcss/no-restricted-classes': ['error', palette], ...options.rules }
   })
 }
 
@@ -586,13 +586,19 @@ export default createConfigForNuxt({
     'nuxt-ui/no-unresolved-form-field-refs': 'error',
     'nuxt-ui/data-slot-namespace': 'error'
   }
-}).append(appTailwindcssConfig(['docs/app/**/*.vue'], 'docs/app/assets/css/main.css', {
+}).append(appTailwindcssConfig(['docs/app/**/*.{vue,ts}'], 'docs/app/assets/css/main.css', {
   // Hook classes styled in scoped `<style>` blocks or `main.css`, not Tailwind utilities.
   ignore: [
     '^nuxi-', '^landing-', '^(nuxt|vue)-only$', '^(playground-)?wall$', '^horizon$', '^twinkle$',
     '^stars?$', '^star-layer$', '^dice-(rolling|bumping)$', '^root$', '^theme-studio$', '^squircle$', '^carbon$', '^example$', '^my-table-tbody$'
   ]
 })).append({
+  // `nuxt-only` and `vue-only` are built from the framework, they're hook classes and not Tailwind utilities.
+  files: ['docs/app/components/Footer.vue', 'docs/app/pages/templates/index.vue', 'docs/app/composables/useNavigation.ts'],
+  rules: {
+    'better-tailwindcss/no-concatenated-classes': 'off'
+  }
+}).append({
   // Rendered by Takumi, which reads the classes itself and not through Tailwind, so without the theme's tokens.
   files: ['docs/app/components/og-image/**/*.vue'],
   rules: {
@@ -600,9 +606,9 @@ export default createConfigForNuxt({
     'better-tailwindcss/no-restricted-classes': 'off'
   }
 }).append(
-  appTailwindcssConfig(['playgrounds/nuxt/app/**/*.vue'], 'playgrounds/nuxt/app/assets/css/main.css')
+  appTailwindcssConfig(['playgrounds/nuxt/app/**/*.{vue,ts}'], 'playgrounds/nuxt/app/assets/css/main.css')
 ).append(
-  appTailwindcssConfig(['playgrounds/vue/src/**/*.vue'], 'playgrounds/vue/src/assets/css/main.css')
+  appTailwindcssConfig(['playgrounds/vue/src/**/*.{vue,ts}'], 'playgrounds/vue/src/assets/css/main.css')
 ).append(
   // Theme files are `export default defineTheme({...})` or `export default extendTheme(base, {...})`.
   // Only the tv class paths are checked, minus the `*Size` slots which hold a size prop for a nested component.

@@ -70,7 +70,7 @@ const sections = [
     <template #section-security-title="{ section }">
       <div class="flex items-center gap-2">
         <UIcon name="i-lucide-shield-check" class="size-4 text-success" />
-        <span class="font-semibold text-success">{{ section.title }}</span>
+        <span class="font-semibold">{{ section.title }}</span>
       </div>
     </template>
 
