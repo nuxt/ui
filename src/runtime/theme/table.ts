@@ -6,7 +6,7 @@ export default defineTheme({
     root: 'relative overflow-auto outline-focus focus-visible:outline-(length:--ui-focus-width)',
     base: 'relative min-w-full overflow-clip',
     caption: 'sr-only',
-    thead: 'relative',
+    thead: 'relative [&>tr>th]:align-bottom',
     tbody: 'isolate [&>tr]:data-[selectable=true]:hover:bg-tint [&>tr]:data-[selectable=true]:outline-focus [&>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default',
     tfoot: 'relative *:data-[slot=table-separator]:z-2',
     tr: 'data-[selected=true]:bg-tint',
