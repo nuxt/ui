@@ -80,8 +80,11 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.formField || {})
 
 const formErrors = inject<Ref<FormError[]> | null>(formErrorsInjectionKey, null)
 
+const formError = computed(() => formErrors?.value?.find(error => error.name === props.name || (props.errorPattern && error.name?.match(props.errorPattern))))
+
 // eslint-disable-next-line vue/no-dupe-keys
-const error = computed(() => props.error || formErrors?.value?.find(error => error.name === props.name || (props.errorPattern && error.name?.match(props.errorPattern)))?.message)
+const error = computed(() => props.error || formError.value?.message)
+const hasError = computed(() => props.error !== false && ((typeof error.value === 'string' && !!error.value) || !!slots.error))
 
 const id = ref(useId())
 // Copies id's initial value to bind aria-attributes such as aria-describedby.
@@ -98,15 +101,16 @@ watch(id, () => {
 provide(inputIdInjectionKey, id)
 
 provide(formFieldInjectionKey, computed(() => ({
-  error: error.value,
+  error: hasError.value ? error.value : undefined,
+  invalid: !!error.value || !!formError.value,
   name: props.name,
   size: props.size,
   eagerValidation: props.eagerValidation,
   validateOnInputDelay: props.validateOnInputDelay,
   errorPattern: props.errorPattern,
-  hint: props.hint,
+  hint: props.label || slots.label ? props.hint : undefined,
   description: props.description,
-  help: props.help,
+  help: hasError.value ? undefined : props.help,
   ariaId,
   labelId: (props.label || !!slots.label) ? `${ariaId}-label` : undefined
 }) as FormFieldInjectedOptions<FormFieldProps>))
