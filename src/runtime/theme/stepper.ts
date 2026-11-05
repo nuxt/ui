@@ -22,7 +22,7 @@ export default defineTheme({
       horizontal: {
         root: 'flex-col',
         container: 'flex justify-center',
-        separator: 'top-[calc(50%-2px)] h-0.5',
+        separator: 'top-[calc(50%-2px)] inset-s-[calc(50%+var(--ui-control-size)/2+6px)] inset-e-[calc(-50%+var(--ui-control-size)/2+6px)] h-0.5',
         wrapper: 'mt-1'
       },
       vertical: {
@@ -77,28 +77,6 @@ export default defineTheme({
 
     color: colorVariant({ root: '' })
   },
-
-  compoundVariants: [{
-    orientation: 'horizontal',
-    size: 'xs',
-    class: { separator: 'inset-s-[calc(50%+16px)] inset-e-[calc(-50%+16px)]' }
-  }, {
-    orientation: 'horizontal',
-    size: 'sm',
-    class: { separator: 'inset-s-[calc(50%+20px)] inset-e-[calc(-50%+20px)]' }
-  }, {
-    orientation: 'horizontal',
-    size: 'md',
-    class: { separator: 'inset-s-[calc(50%+28px)] inset-e-[calc(-50%+28px)]' }
-  }, {
-    orientation: 'horizontal',
-    size: 'lg',
-    class: { separator: 'inset-s-[calc(50%+32px)] inset-e-[calc(-50%+32px)]' }
-  }, {
-    orientation: 'horizontal',
-    size: 'xl',
-    class: { separator: 'inset-s-[calc(50%+36px)] inset-e-[calc(-50%+36px)]' }
-  }],
 
   defaultVariants: {
     size: 'md',

@@ -24,7 +24,7 @@ export default defineTheme({
     itemLeadingIcon: 'shrink-0 text-faint group-data-highlighted:not-group-data-disabled:text-default transition-colors',
     itemLeadingAvatar: 'shrink-0',
     itemLeadingChip: 'shrink-0',
-    itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
+    itemTrailing: 'ms-auto inline-flex gap-(--ui-control-gap) items-center',
     itemTrailingIcon: 'shrink-0',
     itemWrapper: 'flex-1 flex flex-col min-w-0',
     itemLabel: 'truncate',

@@ -35,23 +35,23 @@ export default defineTheme({
     size: {
       xs: {
         fieldset: 'gap-y-0.5',
-        legend: 'text-xs'
+        legend: 'text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height)'
       },
       sm: {
         fieldset: 'gap-y-0.5',
-        legend: 'text-xs'
+        legend: 'text-(length:--ui-control-text-sm)/(--ui-control-text-sm--line-height)'
       },
       md: {
         fieldset: 'gap-y-1',
-        legend: 'text-sm'
+        legend: 'text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height)'
       },
       lg: {
         fieldset: 'gap-y-1',
-        legend: 'text-sm'
+        legend: 'text-(length:--ui-control-text-lg)/(--ui-control-text-lg--line-height)'
       },
       xl: {
         fieldset: 'gap-y-1.5',
-        legend: 'text-base'
+        legend: 'text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)'
       }
     },
     required: {
