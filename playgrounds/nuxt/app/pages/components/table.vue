@@ -306,8 +306,12 @@ function randomize() {
 
 const rowSelection = ref<RowSelectionState>({})
 
-function onSelect(e: Event, row: TableRow<Payment>) {
-  row.toggleSelected(!row.getIsSelected())
+function onSelect(_e: Event, row: TableRow<Payment>) {
+  // With cell selection, a click selects cells, the checkboxes still select rows.
+  if (cellSelectable.value) {
+    return
+  }
+  row.toggleSelected()
 }
 
 const contextmenuRow = shallowRef<TableRow<Payment> | null>(null)
@@ -400,6 +404,7 @@ onMounted(() => {
         v-model:pagination="pagination"
         :data="data"
         :columns="columns"
+        :get-row-id="(row: Payment) => row.id"
         :loading="loading"
         :virtualize="virtualize"
         :features="features"

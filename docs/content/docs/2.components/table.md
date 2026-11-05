@@ -631,8 +631,8 @@ collapse: true
 overflowHidden: true
 name: 'table-column-pinning-example'
 highlights:
-  - 108
-  - 130
+  - 117
+  - 139
 class: '!p-0 overflow-clip'
 ---
 ::
