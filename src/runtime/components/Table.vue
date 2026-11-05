@@ -359,7 +359,7 @@ const cellSelectionState = defineModel<CellSelectionState>('cellSelection')
 const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef')
 const tableRef = useTemplateRef<HTMLTableElement>('tableRef')
 
-const tableProps = useForwardProps(reactivePick(props, 'autoResetAll', 'debugAll', 'debugCells', 'debugColumns', 'debugHeaders', 'debugRows', 'debugTable', 'defaultColumn', 'getRowId', 'getSubRows', 'initialState', 'mergeOptions', 'renderFallbackValue'))
+const tableProps = useForwardProps(reactivePick(props, 'autoResetAll', 'debugAll', 'debugCells', 'debugColumns', 'debugHeaders', 'debugRows', 'debugTable', 'defaultColumn', 'initialState', 'mergeOptions', 'renderFallbackValue'))
 
 // What the table renders itself. The other features are registered through the `features` prop.
 const defaultFeatures = {
@@ -444,6 +444,11 @@ const atoms = Object.fromEntries(Object.keys(initialState).filter(key => key in 
   }]
 }))
 
+// TanStack rebuilds every row when `getRowId` or `getSubRows` changes, so an inline function would rebuild them on each render
+// of a parent that reads table state, in a loop. Stable wrappers call the latest one instead, TanStack falls back to the row index when it returns nothing.
+const getRowId = (...args: Parameters<NonNullable<TableOptions<T>['getRowId']>>) => props.getRowId?.(...args) as string
+const getSubRows = (...args: Parameters<NonNullable<TableOptions<T>['getSubRows']>>) => props.getSubRows?.(...args)
+
 const tableOptions = computed(() => ({
   // Columns resize while dragging, in the text direction.
   columnResizeMode: 'onChange' as const,
@@ -454,6 +459,8 @@ const tableOptions = computed(() => ({
   getRowCanExpand: slots.expanded ? () => tableApi.options.enableExpanding !== false : undefined,
   ...props.options,
   ...tableProps.value,
+  getRowId,
+  getSubRows,
   features: registeredFeatures,
   atoms: { ...atoms, ...props.options?.atoms },
   data,

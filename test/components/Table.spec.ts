@@ -598,7 +598,8 @@ describe('Table', () => {
     const wrapper = await mountSuspended(Table, {
       props: { data, features: stockFeatures, [key]: initial, [`onUpdate:${key}`]: onUpdate }
     })
-    ;(wrapper.vm as any).tableApi[`set${upperFirst(key)}`](value)
+    const { tableApi } = wrapper.vm as any
+    tableApi[`set${upperFirst(key)}`](value)
 
     expect(onUpdate).toHaveBeenLastCalledWith(value)
   })
@@ -607,7 +608,8 @@ describe('Table', () => {
     const onUpdate = vi.fn()
     const wrapper = await mountSuspended(Table, { props: { data, 'onUpdate:sorting': onUpdate } })
     await wrapper.setProps({ sorting: [] })
-    ;(wrapper.vm as any).tableApi.setSorting([{ id: 'id', desc: true }])
+    const { tableApi } = wrapper.vm as any
+    tableApi.setSorting([{ id: 'id', desc: true }])
 
     expect(onUpdate).toHaveBeenLastCalledWith([{ id: 'id', desc: true }])
   })
@@ -639,7 +641,8 @@ describe('Table', () => {
   it('emits a change with only a listener bound', async () => {
     const onUpdate = vi.fn()
     const wrapper = await mountSuspended(Table, { props: { data, 'onUpdate:sorting': onUpdate } })
-    ;(wrapper.vm as any).tableApi.setSorting([{ id: 'id', desc: true }])
+    const { tableApi } = wrapper.vm as any
+    tableApi.setSorting([{ id: 'id', desc: true }])
 
     expect(onUpdate).toHaveBeenLastCalledWith([{ id: 'id', desc: true }])
   })
@@ -652,15 +655,34 @@ describe('Table', () => {
 
   it('expands a row without sub-rows when the expanded slot is used', async () => {
     const wrapper = await mountSuspended(Table, { props: { data: data.slice(0, 2) }, slots: { expanded: () => 'Details' } })
-    ;(wrapper.vm as any).tableApi.getRowModel().rows[0].toggleExpanded()
+    const { tableApi } = wrapper.vm as any
+    tableApi.getRowModel().rows[0].toggleExpanded()
     await flushPromises()
 
     expect(wrapper.findAll('tbody tr')[1]!.text()).toBe('Details')
   })
 
+  it('keeps an inline getRowId from rebuilding the rows in a loop', async () => {
+    const wrapper = await mountSuspended(defineComponent({
+      setup() {
+        const table = ref()
+        return () => h('div', [
+          h('span', (table.value as any)?.tableApi?.getSelectedRowModel().rows.length ?? 0),
+          h(Table as any, { ref: table, data, getRowId: (row: any) => row.id })
+        ])
+      }
+    }))
+    const tableApi = (wrapper.findComponent(Table).vm as any).tableApi
+    tableApi.getRowModel().rows[0].toggleSelected(true)
+    await flushPromises()
+
+    expect(wrapper.find('span').text()).toBe('1')
+  })
+
   it('keeps an unbound slice in TanStack state', async () => {
     const wrapper = await mountSuspended(Table, { props: { data } })
-    ;(wrapper.vm as any).tableApi.setColumnVisibility({ email: false })
+    const { tableApi } = wrapper.vm as any
+    tableApi.setColumnVisibility({ email: false })
     await flushPromises()
 
     expect(wrapper.findAll('th').map(th => th.text())).not.toContain('Email')
