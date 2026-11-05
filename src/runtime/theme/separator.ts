@@ -6,7 +6,7 @@ export default defineTheme({
     root: 'flex items-center text-center',
     border: 'border-accent-default',
     container: 'font-medium text-default flex',
-    icon: 'shrink-0 size-5',
+    icon: 'shrink-0 size-4',
     avatar: 'shrink-0',
     label: 'text-sm'
   },

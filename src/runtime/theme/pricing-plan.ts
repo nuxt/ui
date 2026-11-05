@@ -17,7 +17,7 @@ export default defineTheme({
     billingCycle: 'text-muted truncate text-xs font-medium',
     features: 'flex flex-col gap-3 flex-1 mt-6 grow-0',
     feature: 'flex items-center gap-2 min-w-0',
-    featureIcon: 'size-5 shrink-0 text-primary',
+    featureIcon: 'size-4 shrink-0 text-primary',
     featureTitle: 'text-muted text-sm truncate',
     badge: '',
     button: '',

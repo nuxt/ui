@@ -8,8 +8,8 @@ export default defineTheme({
     trigger: 'group flex-1 flex items-center gap-1.5 font-medium text-sm py-3.5 outline-focus focus-visible:outline-(length:--ui-focus-width) min-w-0 rounded-md',
     content: 'data-[state=open]:animate-[accordion-down_200ms_var(--ease-out)] data-[state=closed]:animate-[accordion-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden focus:outline-none',
     body: 'text-sm pb-3.5',
-    leadingIcon: 'shrink-0 size-5',
-    trailingIcon: 'shrink-0 size-5 ms-auto group-data-[state=open]:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none',
+    leadingIcon: 'shrink-0 size-4',
+    trailingIcon: 'shrink-0 size-4 ms-auto group-data-[state=open]:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none',
     label: 'text-start wrap-break-word'
   },
   variants: {

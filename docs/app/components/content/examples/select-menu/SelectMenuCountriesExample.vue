@@ -26,13 +26,13 @@ function onOpen() {
     @update:open="onOpen"
   >
     <template #leading="{ modelValue, ui }">
-      <span v-if="modelValue" class="size-5 text-center">
+      <span v-if="modelValue" class="size-(--ui-control-icon-size) text-center">
         {{ modelValue?.emoji }}
       </span>
       <UIcon v-else name="i-lucide-earth" :class="ui.leadingIcon()" />
     </template>
     <template #item-leading="{ item }">
-      <span class="size-5 text-center">
+      <span class="size-(--ui-control-icon-size) text-center">
         {{ item.emoji }}
       </span>
     </template>

@@ -46,6 +46,7 @@ import { useFieldGroup } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
+import { getAvatarSize } from '../utils/size'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 
@@ -60,9 +61,7 @@ const overrides = useComponentOverrides((ui: Badge['AppConfig']['ui']) => ui.bad
 const { orientation, size: fieldGroupSize } = useFieldGroup<BadgeProps>(_props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
-// Badges keep a smaller avatar than buttons up to `md`
-const avatarSizes = { xs: '3xs', sm: '3xs', md: '3xs', lg: '2xs', xl: '2xs' } as const
-const avatarSize = computed(() => avatarSizes[(fieldGroupSize.value ?? props.size) as keyof typeof avatarSizes] ?? avatarSizes.md)
+const avatarSize = computed(() => getAvatarSize(fieldGroupSize.value ?? props.size))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({

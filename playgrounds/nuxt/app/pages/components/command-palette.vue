@@ -218,7 +218,7 @@ defineShortcuts({
           <div class="flex items-center gap-1">
             <UButton color="neutral" variant="ghost" label="Open" size="xs">
               <template #trailing>
-                <UKbd value="enter" />
+                <UKbd size="sm" value="enter" />
               </template>
             </UButton>
 
@@ -226,8 +226,8 @@ defineShortcuts({
 
             <UButton color="neutral" variant="ghost" label="Actions" size="xs">
               <template #trailing>
-                <UKbd value="meta" />
-                <UKbd value="k" />
+                <UKbd size="sm" value="meta" />
+                <UKbd size="sm" value="k" />
               </template>
             </UButton>
           </div>

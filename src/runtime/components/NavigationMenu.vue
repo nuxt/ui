@@ -368,7 +368,7 @@ function onLinkClick(e: Event) {
   <DefineLinkTemplate v-slot="{ item, active, index, trailingTrigger }">
     <slot :name="((item.slot || 'item') as keyof NavigationMenuSlots<T>)" :item="item" :index="index" :active="active" :ui="ui">
       <slot :name="((item.slot ? `${item.slot}-leading` : 'item-leading') as keyof NavigationMenuSlots<T>)" :item="item" :active="active" :index="index" :ui="ui">
-        <UAvatar v-if="item.avatar" size="2xs" v-bind="item.avatar" data-slot="navigation-menu-linkLeadingAvatar" :class="ui.linkLeadingAvatar({ class: [props.ui?.linkLeadingAvatar, item.ui?.linkLeadingAvatar], active, disabled: !!item.disabled })" />
+        <UAvatar v-if="item.avatar" size="3xs" v-bind="item.avatar" data-slot="navigation-menu-linkLeadingAvatar" :class="ui.linkLeadingAvatar({ class: [props.ui?.linkLeadingAvatar, item.ui?.linkLeadingAvatar], active, disabled: !!item.disabled })" />
         <UChip
           v-else-if="item.icon && item.chip"
           size="sm"

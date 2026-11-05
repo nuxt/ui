@@ -215,8 +215,8 @@ export default defineAppConfig({
       >
         <template #trailing>
           <div class="ms-auto hidden lg:flex items-center gap-0.5">
-            <UKbd value="meta" />
-            <UKbd value="K" />
+            <UKbd size="sm" value="meta" />
+            <UKbd size="sm" value="K" />
           </div>
         </template>
       </UButton>

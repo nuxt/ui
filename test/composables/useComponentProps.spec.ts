@@ -180,7 +180,7 @@ describe('\'*\' default variants', () => {
     })
 
     expect(wrapper.find('[data-slot="input"]').classes()).toContain('[--ui-accent:var(--ui-error)]')
-    expect(wrapper.find('[data-slot="input"]').classes()).toContain('text-[calc(var(--ui-control-text-sm)+var(--ui-control-text-step,0px))]/(--ui-control-text-sm--line-height)')
+    expect(wrapper.find('[data-slot="input"]').classes()).toContain('text-[calc(var(--ui-control-text-sm)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-sm--line-height)+var(--ui-control-text-step,0px))]')
   })
 
   it('lets a component\'s own key win', async () => {
@@ -242,7 +242,7 @@ describe('\'*\' default variants', () => {
       template: `<UTheme :props="{ '*': { size: 'xs' } }"><UFormField label="Field"><UInput /></UFormField></UTheme>`
     })
 
-    expect(wrapper.find('[data-slot="input"]').classes()).toEqual(expect.arrayContaining(['[--ui-control-px:var(--ui-control-px-xs)]', '[--ui-control-py:var(--ui-control-py-xs)]']))
+    expect(wrapper.find('[data-slot="input"]').classes()).toEqual(expect.arrayContaining(['[--ui-control-px:var(--ui-control-px-xs)]', '[--ui-control-py:calc(var(--ui-control-py-xs)-var(--ui-control-text-step,0px)/2)]']))
   })
 
   describe('from app.config', () => {

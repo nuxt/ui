@@ -25,22 +25,22 @@ export default defineTheme({
     ...fieldGroupVariantRoot,
     size: {
       xs: {
-        root: '[--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] text-[calc(var(--ui-control-text-xs)+var(--ui-control-text-step,0px))]/(--ui-control-text-xs--line-height)',
+        root: '[--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:calc(var(--ui-control-py-xs)-var(--ui-control-text-step,0px)/2)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] text-[calc(var(--ui-control-text-xs)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-xs--line-height)+var(--ui-control-text-step,0px))]',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)'
       },
       sm: {
-        root: '[--ui-control-px:var(--ui-control-px-sm)] [--ui-control-py:var(--ui-control-py-sm)] [--ui-control-gap:var(--ui-control-gap-sm)] [--ui-control-icon-size:var(--ui-control-icon-size-sm)] text-[calc(var(--ui-control-text-sm)+var(--ui-control-text-step,0px))]/(--ui-control-text-sm--line-height)',
+        root: '[--ui-control-px:var(--ui-control-px-sm)] [--ui-control-py:calc(var(--ui-control-py-sm)-var(--ui-control-text-step,0px)/2)] [--ui-control-gap:var(--ui-control-gap-sm)] [--ui-control-icon-size:var(--ui-control-icon-size-sm)] text-[calc(var(--ui-control-text-sm)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-sm--line-height)+var(--ui-control-text-step,0px))]',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)'
       },
       md: {
-        root: '[--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] text-[calc(var(--ui-control-text-md)+var(--ui-control-text-step,0px))]/(--ui-control-text-md--line-height)',
+        root: '[--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:calc(var(--ui-control-py-md)-var(--ui-control-text-step,0px)/2)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] text-[calc(var(--ui-control-text-md)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-md--line-height)+var(--ui-control-text-step,0px))]',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)'
       },
       lg: {
-        root: '[--ui-control-px:var(--ui-control-px-lg)] [--ui-control-py:var(--ui-control-py-lg)] [--ui-control-gap:var(--ui-control-gap-lg)] [--ui-control-icon-size:var(--ui-control-icon-size-lg)] text-[calc(var(--ui-control-text-lg)+var(--ui-control-text-step,0px))]/(--ui-control-text-lg--line-height)',
+        root: '[--ui-control-px:var(--ui-control-px-lg)] [--ui-control-py:calc(var(--ui-control-py-lg)-var(--ui-control-text-step,0px)/2)] [--ui-control-gap:var(--ui-control-gap-lg)] [--ui-control-icon-size:var(--ui-control-icon-size-lg)] text-[calc(var(--ui-control-text-lg)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-lg--line-height)+var(--ui-control-text-step,0px))]',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)'
       },

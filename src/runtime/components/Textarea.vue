@@ -196,12 +196,13 @@ function autoResize() {
     textareaRef.value.style.overflow = 'hidden'
 
     const styles = window.getComputedStyle(textareaRef.value)
-    const paddingTop = Number.parseInt(styles.paddingTop)
-    const paddingBottom = Number.parseInt(styles.paddingBottom)
+    const paddingTop = Number.parseFloat(styles.paddingTop)
+    const paddingBottom = Number.parseFloat(styles.paddingBottom)
     const padding = paddingTop + paddingBottom
-    const lineHeight = Number.parseInt(styles.lineHeight)
+    const lineHeight = Number.parseFloat(styles.lineHeight)
     const { scrollHeight } = textareaRef.value
-    const newRows = (scrollHeight - padding) / lineHeight
+    // The padding can be fractional with `--ui-control-text-step`, round to whole rows
+    const newRows = Math.round((scrollHeight - padding) / lineHeight)
 
     if (newRows > props.rows!) {
       textareaRef.value.rows = props.maxrows ? Math.min(newRows, props.maxrows) : newRows

@@ -71,7 +71,7 @@ const items = computed<DropdownMenuItem[]>(() => [{
     />
 
     <template #item-leading="{ item }">
-      <div class="inline-flex items-center justify-center shrink-0 size-5">
+      <div class="inline-flex items-center justify-center shrink-0 size-(--ui-control-icon-size)">
         <span
           class="rounded-full ring ring-bg bg-(--chip-light) dark:bg-(--chip-dark) size-2"
           :style="{

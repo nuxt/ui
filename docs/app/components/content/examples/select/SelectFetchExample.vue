@@ -32,7 +32,7 @@ function onOpen() {
       <UAvatar
         v-if="item"
         v-bind="item.avatar"
-        size="2xs"
+        size="3xs"
         :class="ui.leadingAvatar()"
       />
     </template>

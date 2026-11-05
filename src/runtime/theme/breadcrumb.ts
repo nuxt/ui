@@ -7,11 +7,11 @@ export default defineTheme({
     list: 'flex items-center gap-1.5',
     item: 'flex min-w-0',
     link: 'group relative flex items-center gap-1.5 text-sm min-w-0 rounded-md outline-accent-focus focus-visible:outline-(length:--ui-focus-width)',
-    linkLeadingIcon: 'shrink-0 size-5',
+    linkLeadingIcon: 'shrink-0 size-4',
     linkLeadingAvatar: 'shrink-0',
     linkLabel: 'truncate',
     separator: 'flex',
-    separatorIcon: 'shrink-0 size-5 text-muted'
+    separatorIcon: 'shrink-0 size-4 text-muted'
   },
   variants: {
     active: {

@@ -20,7 +20,7 @@ function handleColorChange(event: Event) {
 
     <UFieldGroup>
       <UButton color="neutral" variant="outline" square>
-        <span :style="{ backgroundColor: colorHex }" class="inline-flex size-5 rounded-sm" />
+        <span :style="{ backgroundColor: colorHex }" class="inline-flex size-(--ui-control-icon-size) rounded-sm" />
       </UButton>
       <UInput :model-value="colorHex" @change="handleColorChange" />
     </UFieldGroup>

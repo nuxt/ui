@@ -54,8 +54,8 @@ const items: NavigationMenuItem[][] = [[{
       >
         <template v-if="!collapsed" #trailing>
           <div class="flex items-center gap-0.5 ms-auto">
-            <UKbd value="meta" variant="subtle" />
-            <UKbd value="K" variant="subtle" />
+            <UKbd size="sm" value="meta" variant="subtle" />
+            <UKbd size="sm" value="K" variant="subtle" />
           </div>
         </template>
       </UButton>

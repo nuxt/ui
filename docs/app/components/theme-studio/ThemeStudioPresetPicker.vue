@@ -317,18 +317,18 @@ function isApplied(key: string) {
         <span class="truncate">{{ asRow(item).value }}</span>
       </span>
 
-      <UIcon :name="appConfig.ui.icons.chevronRight" class="size-5 shrink-0 text-faint" />
+      <UIcon :name="appConfig.ui.icons.chevronRight" class="size-(--ui-control-icon-size) shrink-0 text-faint" />
     </template>
 
     <!-- the swatch sits in the box an item icon takes, so it centers on the label -->
     <template #color-leading="{ item }">
-      <span class="size-5 shrink-0 flex items-center justify-center">
+      <span class="size-(--ui-control-icon-size) shrink-0 flex items-center justify-center">
         <span class="size-2 rounded-full" :style="{ backgroundColor: asRow(item).dot }" />
       </span>
     </template>
 
     <template #color-mode="{ item }">
-      <UIcon :name="asRow(item).icon" class="size-5 shrink-0 text-faint" />
+      <UIcon :name="asRow(item).icon" class="size-(--ui-control-icon-size) shrink-0 text-faint" />
       {{ asRow(item).label }}
       <UColorModeTabs
         size="sm"
@@ -341,7 +341,7 @@ function isApplied(key: string) {
     <!-- its own slot: the menu only draws a trailing icon for submenus, and
          appConfig.ui.icons is swapped whole with the pack so this follows it -->
     <template #link-trailing>
-      <UIcon :name="appConfig.ui.icons.arrowRight" class="size-5 shrink-0 text-faint" />
+      <UIcon :name="appConfig.ui.icons.arrowRight" class="size-(--ui-control-icon-size) shrink-0 text-faint" />
     </template>
 
     <template #font-label="{ item }">

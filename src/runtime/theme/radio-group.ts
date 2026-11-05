@@ -54,50 +54,51 @@ export default defineTheme({
         wrapper: 'flex flex-col items-center gap-1 text-center'
       }
     },
+    // The label and the description wrap, so they read the reading line of the size
     size: {
       xs: {
         fieldset: 'gap-y-0.5',
         root: '[--ui-control-box:var(--ui-control-box-xs)] [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(2.5)] [--ui-control-icon-size:var(--ui-control-box)]',
-        legend: 'text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height)',
+        legend: 'text-(length:--ui-control-text-xs)/(--ui-control-text-xs--leading)',
         base: 'size-(--ui-control-box)',
-        item: 'text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height)',
-        container: 'h-(--ui-control-text-xs--line-height)',
+        item: 'text-(length:--ui-control-text-xs)/(--ui-control-text-xs--leading)',
+        container: 'h-(--ui-control-text-xs--leading)',
         indicator: 'after:size-1'
       },
       sm: {
         fieldset: 'gap-y-0.5',
         root: '[--ui-control-box:var(--ui-control-box-sm)] [--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(3)] [--ui-control-icon-size:var(--ui-control-box)]',
-        legend: 'text-(length:--ui-control-text-sm)/(--ui-control-text-sm--line-height)',
+        legend: 'text-(length:--ui-control-text-sm)/(--ui-control-text-sm--leading)',
         base: 'size-(--ui-control-box)',
-        item: 'text-(length:--ui-control-text-sm)/(--ui-control-text-sm--line-height)',
-        container: 'h-(--ui-control-text-sm--line-height)',
+        item: 'text-(length:--ui-control-text-sm)/(--ui-control-text-sm--leading)',
+        container: 'h-(--ui-control-text-sm--leading)',
         indicator: 'after:size-1'
       },
       md: {
         fieldset: 'gap-y-1',
         root: '[--ui-control-box:var(--ui-control-box-md)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon-size:var(--ui-control-box)]',
-        legend: 'text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height)',
+        legend: 'text-(length:--ui-control-text-md)/(--ui-control-text-md--leading)',
         base: 'size-(--ui-control-box)',
-        item: 'text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height)',
-        container: 'h-(--ui-control-text-md--line-height)',
+        item: 'text-(length:--ui-control-text-md)/(--ui-control-text-md--leading)',
+        container: 'h-(--ui-control-text-md--leading)',
         indicator: 'after:size-1.5'
       },
       lg: {
         fieldset: 'gap-y-1',
         root: '[--ui-control-box:var(--ui-control-box-lg)] [--ui-control-px:--spacing(4)] [--ui-control-py:--spacing(4)] [--ui-control-icon-size:var(--ui-control-box)]',
-        legend: 'text-(length:--ui-control-text-lg)/(--ui-control-text-lg--line-height)',
+        legend: 'text-(length:--ui-control-text-lg)/(--ui-control-text-lg--leading)',
         base: 'size-(--ui-control-box)',
-        item: 'text-(length:--ui-control-text-lg)/(--ui-control-text-lg--line-height)',
-        container: 'h-(--ui-control-text-lg--line-height)',
+        item: 'text-(length:--ui-control-text-lg)/(--ui-control-text-lg--leading)',
+        container: 'h-(--ui-control-text-lg--leading)',
         indicator: 'after:size-1.5'
       },
       xl: {
         fieldset: 'gap-y-1.5',
         root: '[--ui-control-box:var(--ui-control-box-xl)] [--ui-control-px:--spacing(4.5)] [--ui-control-py:--spacing(4.5)] [--ui-control-icon-size:var(--ui-control-box)]',
-        legend: 'text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)',
+        legend: 'text-(length:--ui-control-text-xl)/(--ui-control-text-xl--leading)',
         base: 'size-(--ui-control-box)',
-        item: 'text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)',
-        container: 'h-(--ui-control-text-xl--line-height)',
+        item: 'text-(length:--ui-control-text-xl)/(--ui-control-text-xl--leading)',
+        container: 'h-(--ui-control-text-xl--leading)',
         indicator: 'after:size-2'
       }
     },
