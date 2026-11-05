@@ -248,7 +248,7 @@
     "@internationalized/number": "^3",
     "@nuxt/content": "^3",
     "@tanstack/charts": "^1",
-    "@tanstack/vue-table": "^8",
+    "@tanstack/vue-table": "^9",
     "@tiptap/core": "^3",
     "@tiptap/extension-bubble-menu": "^3",
     "@tiptap/extension-code": "^3",

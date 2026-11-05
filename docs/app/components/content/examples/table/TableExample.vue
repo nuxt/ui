@@ -145,7 +145,7 @@ const data = ref<Payment[]>([{
 const columns: TableColumn<Payment>[] = [{
   id: 'select',
   header: ({ table }) => h(UCheckbox, {
-    'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
+    'modelValue': table.getIsAllPageRowsSelected() ? true : table.getIsSomePageRowsSelected() ? 'indeterminate' : false,
     'onUpdate:modelValue': (value: boolean | 'indeterminate') => table.toggleAllPageRowsSelected(!!value),
     'aria-label': 'Select all'
   }),
@@ -209,8 +209,8 @@ const columns: TableColumn<Payment>[] = [{
   header: 'Amount',
   meta: {
     class: {
-      th: 'text-right',
-      td: 'text-right font-medium'
+      th: 'text-end',
+      td: 'text-end font-medium'
     }
   },
   cell: ({ row }) => {
@@ -225,7 +225,7 @@ const columns: TableColumn<Payment>[] = [{
   enableHiding: false,
   meta: {
     class: {
-      td: 'text-right'
+      td: 'text-end'
     }
   },
   cell: ({ row }) => {
@@ -279,7 +279,7 @@ function randomize() {
 </script>
 
 <template>
-  <div class="flex-1 divide-y divide-strong w-full">
+  <div class="flex-1 divide-y divide-default w-full">
     <div class="flex items-center gap-2 px-4 py-3.5 overflow-x-auto">
       <UInput
         :model-value="(table?.tableApi?.getColumn('email')?.getFilterValue() as string)"
@@ -296,7 +296,7 @@ function randomize() {
           type: 'checkbox' as const,
           checked: column.getIsVisible(),
           onUpdateChecked(checked: boolean) {
-            table?.tableApi?.getColumn(column.id)?.toggleVisibility(!!checked)
+            column.toggleVisibility(checked)
           },
           onSelect(e: Event) {
             e.preventDefault()
@@ -309,7 +309,7 @@ function randomize() {
           color="neutral"
           variant="outline"
           trailing-icon="i-lucide-chevron-down"
-          class="ml-auto"
+          class="ms-auto"
           aria-label="Columns select dropdown"
         />
       </UDropdownMenu>
@@ -319,6 +319,7 @@ function randomize() {
       ref="table"
       :data="data"
       :columns="columns"
+      :get-row-id="(row: Payment) => row.id"
       sticky
       class="h-96"
     >
