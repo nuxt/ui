@@ -166,6 +166,15 @@ Use the `color` prop to set the color of the items that are not pressed. Default
 
 ::component-code
 ---
+items:
+  color:
+    - primary
+    - secondary
+    - success
+    - info
+    - warning
+    - error
+    - neutral
 ignore:
   - items
   - defaultValue
@@ -192,6 +201,22 @@ Use the `variant` prop to set the variant of the items that are not pressed. Def
 
 ::component-code
 ---
+items:
+  color:
+    - primary
+    - secondary
+    - success
+    - info
+    - warning
+    - error
+    - neutral
+  variant:
+    - solid
+    - outline
+    - soft
+    - subtle
+    - ghost
+    - link
 ignore:
   - items
   - defaultValue
@@ -200,6 +225,7 @@ external:
 externalTypes:
   - ToggleGroupItem[]
 props:
+  color: neutral
   variant: outline
   defaultValue: 'week'
   items:
@@ -218,6 +244,15 @@ Use the `active-color` prop to set the color of the pressed items. Defaults to `
 
 ::component-code
 ---
+items:
+  activeColor:
+    - primary
+    - secondary
+    - success
+    - info
+    - warning
+    - error
+    - neutral
 ignore:
   - items
   - defaultValue
@@ -244,6 +279,22 @@ Use the `active-variant` prop to set the variant of the pressed items. Defaults 
 
 ::component-code
 ---
+items:
+  activeColor:
+    - primary
+    - secondary
+    - success
+    - info
+    - warning
+    - error
+    - neutral
+  activeVariant:
+    - solid
+    - outline
+    - soft
+    - subtle
+    - ghost
+    - link
 ignore:
   - items
   - defaultValue
@@ -252,6 +303,7 @@ external:
 externalTypes:
   - ToggleGroupItem[]
 props:
+  activeColor: primary
   activeVariant: solid
   defaultValue: 'week'
   items:
@@ -270,6 +322,13 @@ Use the `size` prop to set the size of the items.
 
 ::component-code
 ---
+items:
+  size:
+    - xs
+    - sm
+    - md
+    - lg
+    - xl
 ignore:
   - items
   - defaultValue

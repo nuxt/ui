@@ -59,6 +59,15 @@ Use the `color` prop to set the color of the Toggle when not pressed. Defaults t
 
 ::component-code
 ---
+items:
+  color:
+    - primary
+    - secondary
+    - success
+    - info
+    - warning
+    - error
+    - neutral
 ignore:
   - label
 props:
@@ -73,9 +82,26 @@ Use the `variant` prop to set the variant of the Toggle when not pressed. Defaul
 
 ::component-code
 ---
+items:
+  color:
+    - primary
+    - secondary
+    - success
+    - info
+    - warning
+    - error
+    - neutral
+  variant:
+    - solid
+    - outline
+    - soft
+    - subtle
+    - ghost
+    - link
 ignore:
   - label
 props:
+  color: neutral
   variant: outline
   label: Bold
 ---
@@ -87,6 +113,15 @@ Use the `active-color` prop to set the color of the Toggle when pressed. Default
 
 ::component-code
 ---
+items:
+  activeColor:
+    - primary
+    - secondary
+    - success
+    - info
+    - warning
+    - error
+    - neutral
 ignore:
   - label
   - defaultValue
@@ -103,10 +138,27 @@ Use the `active-variant` prop to set the variant of the Toggle when pressed. Def
 
 ::component-code
 ---
+items:
+  activeColor:
+    - primary
+    - secondary
+    - success
+    - info
+    - warning
+    - error
+    - neutral
+  activeVariant:
+    - solid
+    - outline
+    - soft
+    - subtle
+    - ghost
+    - link
 ignore:
   - label
   - defaultValue
 props:
+  activeColor: primary
   activeVariant: solid
   defaultValue: true
   label: Bold
