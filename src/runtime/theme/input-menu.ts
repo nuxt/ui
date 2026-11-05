@@ -7,7 +7,8 @@ export default extendTheme(input, {
     root: (prev: string) => [prev, 'has-[>[data-disabled]]:cursor-not-allowed has-[>[data-disabled]]:opacity-(--ui-disabled-opacity)'],
     // The tags wrap in their own container, so the leading and the trailing stay
     // centered on the box whatever its number of lines
-    // The tags sit on the reading line, so their row gives back the difference
+    // The tags sit on the reading line, so their row gives back the difference,
+    // and keeps the height of the field when it only holds the input
     tags: 'flex flex-wrap items-center flex-1 min-w-0 gap-(--ui-control-gap) px-(--ui-control-px) py-(--ui-control-py)',
     trailing: () => 'group flex items-center pe-(--ui-control-px) disabled:cursor-not-allowed focus:outline-none',
     trailingClear: 'p-0',
@@ -70,7 +71,7 @@ export default extendTheme(input, {
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
         itemTrailingIcon: 'size-(--ui-control-icon-size)',
-        tags: 'py-[calc(var(--ui-control-py)-(var(--ui-control-text-xs--leading)-var(--ui-control-text-xs--line-height))/2)]',
+        tags: 'min-h-[calc(var(--ui-control-text-xs--line-height)+var(--ui-control-text-step,0px)+2*var(--ui-control-py))] py-[calc(var(--ui-control-py)-(var(--ui-control-text-xs--leading)-var(--ui-control-text-xs--line-height))/2)]',
         tagsItem: 'text-[calc(var(--ui-control-text-xs)-0.125rem)]/[calc(var(--ui-control-text-xs--leading)-0.25rem)]',
         tagsItemDeleteIcon: 'size-(--ui-control-text-xs)',
         empty: 'p-2 text-xs'
@@ -83,7 +84,7 @@ export default extendTheme(input, {
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
         itemTrailingIcon: 'size-(--ui-control-icon-size)',
-        tags: 'py-[calc(var(--ui-control-py)-(var(--ui-control-text-sm--leading)-var(--ui-control-text-sm--line-height))/2)]',
+        tags: 'min-h-[calc(var(--ui-control-text-sm--line-height)+var(--ui-control-text-step,0px)+2*var(--ui-control-py))] py-[calc(var(--ui-control-py)-(var(--ui-control-text-sm--leading)-var(--ui-control-text-sm--line-height))/2)]',
         tagsItem: 'text-[calc(var(--ui-control-text-sm)-0.125rem)]/[calc(var(--ui-control-text-sm--leading)-0.25rem)]',
         tagsItemDeleteIcon: 'size-(--ui-control-text-sm)',
         empty: 'p-2.5 text-xs'
@@ -96,7 +97,7 @@ export default extendTheme(input, {
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
         itemTrailingIcon: 'size-(--ui-control-icon-size)',
-        tags: 'py-[calc(var(--ui-control-py)-(var(--ui-control-text-md--leading)-var(--ui-control-text-md--line-height))/2)]',
+        tags: 'min-h-[calc(var(--ui-control-text-md--line-height)+var(--ui-control-text-step,0px)+2*var(--ui-control-py))] py-[calc(var(--ui-control-py)-(var(--ui-control-text-md--leading)-var(--ui-control-text-md--line-height))/2)]',
         tagsItem: 'text-[calc(var(--ui-control-text-md)-0.125rem)]/[calc(var(--ui-control-text-md--leading)-0.25rem)]',
         tagsItemDeleteIcon: 'size-(--ui-control-text-md)',
         empty: 'p-2.5 text-sm'
@@ -109,7 +110,7 @@ export default extendTheme(input, {
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
         itemTrailingIcon: 'size-(--ui-control-icon-size)',
-        tags: 'py-[calc(var(--ui-control-py)-(var(--ui-control-text-lg--leading)-var(--ui-control-text-lg--line-height))/2)]',
+        tags: 'min-h-[calc(var(--ui-control-text-lg--line-height)+var(--ui-control-text-step,0px)+2*var(--ui-control-py))] py-[calc(var(--ui-control-py)-(var(--ui-control-text-lg--leading)-var(--ui-control-text-lg--line-height))/2)]',
         tagsItem: 'text-[calc(var(--ui-control-text-lg)-0.125rem)]/[calc(var(--ui-control-text-lg--leading)-0.25rem)]',
         tagsItemDeleteIcon: 'size-(--ui-control-text-lg)',
         empty: 'p-3 text-sm'
@@ -122,7 +123,7 @@ export default extendTheme(input, {
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
         itemTrailingIcon: 'size-(--ui-control-icon-size)',
-        tags: 'py-[calc(var(--ui-control-py)-(var(--ui-control-text-xl--leading)-var(--ui-control-text-xl--line-height))/2)]',
+        tags: 'min-h-[calc(var(--ui-control-text-xl--line-height)+var(--ui-control-text-step,0px)+2*var(--ui-control-py))] py-[calc(var(--ui-control-py)-(var(--ui-control-text-xl--leading)-var(--ui-control-text-xl--line-height))/2)]',
         tagsItem: 'text-[calc(var(--ui-control-text-xl)-0.125rem)]/[calc(var(--ui-control-text-xl--leading)-0.25rem)]',
         tagsItemDeleteIcon: 'size-(--ui-control-text-xl)',
         empty: 'p-3 text-base'
