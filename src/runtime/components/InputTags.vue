@@ -72,7 +72,6 @@ export interface InputTagsSlots<T extends InputTagItem = InputTagItem> {
 import { computed, useTemplateRef, onMounted, onScopeDispose, toRaw, toRef } from 'vue'
 import { TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useFieldGroup } from '../composables/useFieldGroup'
@@ -95,7 +94,7 @@ const props = useComponentProps<InputTagsProps<T>>('inputTags', _props)
 
 const appConfig = useAppConfig() as InputTags['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'addOnPaste', 'addOnTab', 'addOnBlur', 'duplicate', 'delimiter', 'max', 'convertValue', 'displayValue', 'required'), emits)
+const rootProps = useForwardProps(props, ['as', 'addOnPaste', 'addOnTab', 'addOnBlur', 'duplicate', 'delimiter', 'max', 'convertValue', 'displayValue', 'required'], emits)
 
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formFieldSize, color: formFieldColor, id, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<InputTagsProps>(_props)
 

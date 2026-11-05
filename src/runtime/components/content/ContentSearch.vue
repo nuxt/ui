@@ -138,7 +138,7 @@ export type ContentSearchSlots = CommandPaletteSlots<ContentSearchItem> & {
 <script setup lang="ts" generic="T extends ContentSearchLink">
 import { computed, defineAsyncComponent, shallowRef, useAttrs, useTemplateRef, watch } from 'vue'
 import { defu } from 'defu'
-import { reactivePick, refDebounced } from '@vueuse/core'
+import { refDebounced } from '@vueuse/core'
 import { useAppConfig, useColorMode, defineShortcuts } from '#imports'
 import { useComponentProps } from '../../composables/useComponentProps'
 import { useForwardProps } from '../../composables/useForwardProps'
@@ -168,8 +168,8 @@ const { open, mapNavigationItems, mapLinks, mapSearchResults, postFilter } = use
 const colorMode = useColorMode()
 const appConfig = useAppConfig() as ContentSearch['AppConfig']
 
-const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'trailingIcon', 'selectedIcon', 'childrenIcon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon', 'back', 'backIcon', 'disabled', 'highlightOnHover', 'loop', 'labelKey', 'descriptionKey', 'preserveGroupOrder', 'virtualize', 'searchDelay'))
-const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal', 'unmountOnHide'))
+const commandPaletteProps = useForwardProps(props, ['size', 'icon', 'trailingIcon', 'selectedIcon', 'childrenIcon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon', 'back', 'backIcon', 'disabled', 'highlightOnHover', 'loop', 'labelKey', 'descriptionKey', 'preserveGroupOrder', 'virtualize', 'searchDelay'])
+const modalProps = useForwardProps(props, ['overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal', 'unmountOnHide'])
 const inputProps = computed(() => {
   if (props.input === false) {
     return false

@@ -116,7 +116,6 @@ export interface CollapsibleSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
-import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
@@ -137,7 +136,7 @@ const appConfig = useAppConfig() as Collapsible['AppConfig']
 // Use the local `useForwardProps` — reka-ui's `useForwardProps` /
 // `useForwardPropsEmits` filter root props by `vm.vnode.props ∪ withDefaults`
 // and would strip <UTheme :props> values.
-const rootProps = useForwardProps(reactivePick(props, 'as', 'defaultOpen', 'open', 'disabled', 'unmountOnHide'), emits)
+const rootProps = useForwardProps(props, ['as', 'defaultOpen', 'open', 'disabled', 'unmountOnHide'], emits)
 
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.collapsible || {}) })())
 </script>
@@ -318,11 +317,10 @@ Notes:
 | Pattern | Usage |
 |---------|-------|
 | `useComponentProps(name, _props)` | Theme-aware proxy — default for new components |
-| `useForwardProps(source, emits?)` (local) | Forward Reka UI props/emits without filtering theme defaults |
+| `useForwardProps(props, keys?, emits?)` (local) | Forward the listed Reka UI props/emits without filtering theme defaults |
 | `withDefaults` | Runtime default values |
 | `defineOptions({ inheritAttrs: false })` | When spreading `$attrs` to inner element |
 | Caller `data-slot` wins on root | Place the default `data-slot` before the root `v-bind`, or read `$attrs['data-slot']` on the root — see [`data-slot` on the root](#data-slot-on-the-root) |
-| `reactivePick` | Pick keys off `props` (the proxy) before forwarding |
 | `createReusableTemplate` | Complex template reuse (Table, Modal) |
 | `useTemplateRef` | Template refs (Vue 3.5+) |
 | `toRef(() => props.x)` | Reactive prop access |

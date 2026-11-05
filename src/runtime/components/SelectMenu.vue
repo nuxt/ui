@@ -237,7 +237,7 @@ import { useTemplateRef, useId, computed, ref, onMounted, onScopeDispose, toRef,
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxCancel, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxVirtualizer, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, FocusScope } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
-import { reactivePick, createReusableTemplate } from '@vueuse/core'
+import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useFieldGroup, FieldGroupReset } from '../composables/useFieldGroup'
@@ -278,7 +278,7 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 const { t } = useLocale()
 const appConfig = useAppConfig() as SelectMenu['AppConfig']
 const { filterGroups } = useFilter()
-const rootProps = useForwardProps(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'highlightOnHover', 'loop', 'by'), emits)
+const rootProps = useForwardProps(props, ['modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'highlightOnHover', 'loop', 'by'], emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as ComboboxArrowProps)

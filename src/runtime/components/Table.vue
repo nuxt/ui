@@ -236,7 +236,7 @@ import { upperFirst } from 'scule'
 import { defu } from 'defu'
 import { FlexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, getExpandedRowModel, useVueTable } from '@tanstack/vue-table'
 import { useVirtualizer } from '@tanstack/vue-virtual'
-import { reactivePick, createReusableTemplate, createRef } from '@vueuse/core'
+import { createReusableTemplate, createRef } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
@@ -351,7 +351,7 @@ const paginationState = defineModel<PaginationState>('pagination')
 const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef')
 const tableRef = useTemplateRef<HTMLTableElement>('tableRef')
 
-const tableProps = useForwardProps(reactivePick(props, '_features', 'autoResetAll', 'debugAll', 'debugCells', 'debugColumns', 'debugHeaders', 'debugRows', 'debugTable', 'defaultColumn', 'getRowId', 'getSubRows', 'initialState', 'mergeOptions', 'renderFallbackValue'))
+const tableProps = useForwardProps(props, ['_features', 'autoResetAll', 'debugAll', 'debugCells', 'debugColumns', 'debugHeaders', 'debugRows', 'debugTable', 'defaultColumn', 'getRowId', 'getSubRows', 'initialState', 'mergeOptions', 'renderFallbackValue'])
 
 const tableApi = useVueTable({
   ...tableProps.value,

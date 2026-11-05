@@ -116,7 +116,6 @@ export type ContextMenuSlots<
 import { computed, toRef } from 'vue'
 import { ContextMenuRoot, ContextMenuTrigger } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { omit } from '../utils'
@@ -137,7 +136,7 @@ const props = useComponentProps<ContextMenuProps<T>>('contextMenu', _props)
 
 const appConfig = useAppConfig() as ContextMenu['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'open', 'pressOpenDelay', 'modal'), emits)
+const rootProps = useForwardProps(props, ['open', 'pressOpenDelay', 'modal'], emits)
 const contentProps = toRef(() => props.content)
 const getProxySlots = () => omit(slots, ['default'])
 

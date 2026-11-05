@@ -57,7 +57,6 @@ export type ProgressSlots = {
 import { computed } from 'vue'
 import { Primitive, ProgressRoot, ProgressIndicator } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
@@ -76,7 +75,7 @@ const props = useComponentProps('progress', _props)
 const { dir } = useLocale()
 const appConfig = useAppConfig() as Progress['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'getValueLabel', 'getValueText', 'modelValue'), emits)
+const rootProps = useForwardProps(props, ['getValueLabel', 'getValueText', 'modelValue'], emits)
 
 const isIndeterminate = computed(() => rootProps.value.modelValue === null)
 const hasSteps = computed(() => Array.isArray(props.max))

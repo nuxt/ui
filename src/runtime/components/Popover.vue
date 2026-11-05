@@ -66,7 +66,6 @@ import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { useForwardProps } from '../composables/useForwardProps'
 import { PopoverRoot, PopoverTrigger, PopoverPortal, PopoverContent, PopoverArrow, PopoverAnchor, HoverCardRoot, HoverCardTrigger, HoverCardPortal, HoverCardContent, HoverCardArrow } from 'reka-ui'
-import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { FieldGroupReset } from '../composables/useFieldGroup'
@@ -91,8 +90,7 @@ const props = useComponentProps<PopoverProps<M>>('popover', _props)
 
 const appConfig = useAppConfig() as Popover['AppConfig']
 
-const pick = props.mode === 'hover' ? reactivePick(props, 'defaultOpen', 'open', 'openDelay', 'closeDelay', 'enableTouch') : reactivePick(props, 'defaultOpen', 'open', 'modal')
-const rootProps = useForwardProps(pick, emits)
+const rootProps = useForwardProps(props, props.mode === 'hover' ? ['defaultOpen', 'open', 'openDelay', 'closeDelay', 'enableTouch'] : ['defaultOpen', 'open', 'modal'], emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as PopoverContentProps)
 const contentEvents = computed(() => {

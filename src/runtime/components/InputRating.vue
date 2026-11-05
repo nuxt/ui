@@ -62,7 +62,6 @@ export interface InputRatingSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { RatingRoot, RatingItem, RatingItemIndicator } from 'reka-ui'
-import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
@@ -90,7 +89,7 @@ const props = useComponentProps<InputRatingProps>('inputRating', _props)
 const { t } = useLocale()
 const appConfig = useAppConfig() as InputRating['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'length', 'step', 'hoverable', 'clearable', 'required', 'modelValue', 'defaultValue'), emits)
+const rootProps = useForwardProps(props, ['as', 'length', 'step', 'hoverable', 'clearable', 'required', 'modelValue', 'defaultValue'], emits)
 
 const { id, emitFormChange, emitFormInput, size: formFieldSize, color: formFieldColor, name, disabled: formFieldDisabled, ariaAttrs } = useFormField<InputRatingProps>(_props)
 
