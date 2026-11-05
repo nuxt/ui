@@ -208,7 +208,11 @@ Use the `options` prop to pass the [options](https://tanstack.com/table/v9/docs/
 
 ```vue
 <template>
-  <UTable :data="data" :columns="columns" :options="{ enableMultiSort: true, enableRowRangeSelection: false }" />
+  <UTable
+    :data="data"
+    :columns="columns"
+    :options="{ enableMultiSort: true, enableRowRangeSelection: false }"
+  />
 </template>
 ```
 

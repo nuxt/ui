@@ -85,7 +85,7 @@ const table = useTemplateRef('table')
   <div class="flex-1 w-full">
     <UTable ref="table" :data="data" :columns="columns" :features="features" />
 
-    <div class="px-4 py-3.5 border-t border-strong text-sm text-muted">
+    <div class="px-4 py-3.5 border-t border-default text-sm text-muted">
       {{ table?.tableApi?.getSelectedCellCount() || 0 }} cell(s) selected.
     </div>
   </div>

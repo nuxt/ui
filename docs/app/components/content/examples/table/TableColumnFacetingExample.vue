@@ -106,7 +106,7 @@ const statusItems = computed((): { label: string, value: string }[] => [
 
 <template>
   <div class="flex flex-col flex-1 w-full">
-    <div class="flex px-4 py-3.5 border-b border-strong">
+    <div class="flex px-4 py-3.5 border-b border-default">
       <USelect
         :model-value="(statusColumn?.getFilterValue() as string | undefined) ?? 'all'"
         :items="statusItems"
