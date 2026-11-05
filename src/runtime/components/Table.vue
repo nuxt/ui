@@ -1140,7 +1140,7 @@ defineExpose({
         </template>
 
         <tr v-else-if="props.loading">
-          <td :colspan="tableApi.getVisibleLeafColumns().length" data-slot="loading" :class="ui.loading({ class: props.ui?.loading })">
+          <td :colspan="tableApi.getVisibleLeafColumns().length" data-slot="table-loading" :class="ui.loading({ class: props.ui?.loading })">
             <slot name="loading" />
           </td>
         </tr>

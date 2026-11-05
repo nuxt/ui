@@ -1219,13 +1219,13 @@ describe('Table', () => {
       props: { columns: columns as any, loading: true, empty: 'There is no data' }
     })
 
-    expect(wrapper.find('[data-slot="loading"]').text()).toBe('')
-    expect(wrapper.find('[data-slot="empty"]').exists()).toBe(false)
+    expect(wrapper.find('[data-slot="table-loading"]').text()).toBe('')
+    expect(wrapper.find('[data-slot="table-empty"]').exists()).toBe(false)
 
     await wrapper.setProps({ loading: false })
 
-    expect(wrapper.find('[data-slot="loading"]').exists()).toBe(false)
-    expect(wrapper.find('[data-slot="empty"]').text()).toBe('There is no data')
+    expect(wrapper.find('[data-slot="table-loading"]').exists()).toBe(false)
+    expect(wrapper.find('[data-slot="table-empty"]').text()).toBe('There is no data')
   })
 
   it.each([

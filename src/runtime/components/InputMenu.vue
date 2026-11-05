@@ -240,7 +240,7 @@ import { TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, T
 import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
 import { isEqual } from 'ohash/utils'
-import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
+import { createReusableTemplate } from '@vueuse/core'
 import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useFieldGroup, FieldGroupReset } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
