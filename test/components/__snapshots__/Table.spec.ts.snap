@@ -931,7 +931,7 @@ exports[`Table > renders with empty correctly 1`] = `
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr>
-        <td colspan="0" data-slot="table-empty" class="py-6 text-center text-sm text-muted">There is no data</td>
+        <td colspan="0" data-slot="table-empty" class="p-4 text-sm text-muted text-center">There is no data</td>
       </tr>
     </tbody>
     <!--v-if-->
@@ -985,7 +985,7 @@ exports[`Table > renders with empty slot correctly 1`] = `
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr>
-        <td colspan="7" data-slot="table-empty" class="py-6 text-center text-sm text-muted">Empty slot</td>
+        <td colspan="7" data-slot="table-empty" class="p-4 text-sm text-muted text-center">Empty slot</td>
       </tr>
     </tbody>
     <tfoot data-slot="table-tfoot" class="relative *:data-[slot=table-separator]:z-2">
@@ -1944,7 +1944,7 @@ exports[`Table > renders with loading slot correctly 1`] = `
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr>
-        <td colspan="7" data-slot="table-loading" class="py-6 text-center">Loading slot</td>
+        <td colspan="7" data-slot="table-loading" class="p-4 text-sm text-muted text-center">Loading slot</td>
       </tr>
     </tbody>
     <tfoot data-slot="table-tfoot" class="relative *:data-[slot=table-separator]:z-2">
@@ -2626,7 +2626,7 @@ exports[`Table > renders without data correctly 1`] = `
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
       <tr>
-        <td colspan="0" data-slot="table-empty" class="py-6 text-center text-sm text-muted">No data</td>
+        <td colspan="0" data-slot="table-empty" class="p-4 text-sm text-muted text-center">No data</td>
       </tr>
     </tbody>
     <!--v-if-->
