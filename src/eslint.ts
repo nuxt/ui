@@ -194,8 +194,21 @@ const APP_CONFIG_MATCHERS = [
   { type: 'objectValues', path: '^ui\\.(?:prose\\.)?[\\w-]+\\.compoundVariants\\[\\d+\\]\\.class.*$' }
 ]
 
+// The classes of a `<UTable>` column, `meta.class.th` and `meta.class.td`, and of its rows, `class.tr` in
+// the table `meta`. The path keeps other `class` keys out, a function value isn't read.
+const TABLE_MATCHERS = [
+  { type: 'objectValues', path: '^(?:.*\\.)?meta\\.class\\.(?:th|td|tr)$' },
+  { type: 'objectValues', path: '^class\\.tr$' }
+]
+
 const SELECTORS = [
   ...getDefaultSelectors(),
+  // `const columns: TableColumn<T>[] = [...]`, `const meta: TableMeta<T> = {...}`
+  { kind: 'variable', name: '^.*$', match: TABLE_MATCHERS },
+  // `ref([...])`, `computed(() => [...])` and TanStack's `columnHelper.accessor('id', {...})`
+  { kind: 'callee', name: '^(?:ref|shallowRef|reactive|computed|accessor|display|group)$', match: [...TABLE_MATCHERS, { type: 'anonymousFunctionReturn', match: TABLE_MATCHERS }] },
+  // `:columns` and `:meta` on `<UTable>`
+  { kind: 'attribute', name: '^v-bind:(?:columns|meta)$', match: TABLE_MATCHERS },
   // `:ui` on any component, `:ui` on `<UTheme>`
   { kind: 'attribute', name: '^v-bind:ui$', match: [{ type: 'objectValues' }] },
   // `:variants` on `<UTheme>`, `{ button: { variant: { soft: { base } } } }`. The depth keeps
@@ -208,7 +221,7 @@ const SELECTORS = [
 
 /**
  * Lints the Tailwind CSS classes of an app that uses Nuxt UI, in templates,
- * `:ui` objects, `<UTheme>` and the `ui` of `app.config.ts`.
+ * `:ui` objects, `<UTheme>`, `<UTable>` columns and the `ui` of `app.config.ts`.
  *
  * ```ts
  * // eslint.config.mjs

@@ -2,6 +2,7 @@ import { mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'pathe'
 import { describe, it, expect, afterAll } from 'vitest'
+import { Linter } from 'eslint'
 import nuxtUI from '../../src/eslint'
 
 describe('nuxtUI', () => {
@@ -79,5 +80,30 @@ describe('nuxtUI', () => {
     file('url-colors.css', '@plugin "@nuxt/ui/colors" {\n  primary: rose;\n}')
     const entryPoint = file('url.css', '@import "tailwindcss";\n@import url("./url-colors.css");')
     expect(message(entryPoint, 'sky')).toContain('`primary` points at `sky`')
+  })
+
+  // The classes `no-palette-colors` reports in `code`
+  const lint = (code: string) => {
+    const entryPoint = file('lint.css', '@import "tailwindcss";')
+    const config = nuxtUI({ entryPoint, rules: { 'no-conflicting-classes': 'off' } })
+    return new Linter().verify(code, config as Linter.Config[], 'columns.js').map(({ message }) => message.match(/^"([^"]+)"/)?.[1])
+  }
+
+  it('lints the classes of table columns and rows', () => {
+    expect(lint(`
+      const columns = [{ meta: { class: { th: 'text-red-500', td: sorted ? 'text-gray-500' : 'p-2' } }, columns: [{ meta: { class: { td: 'bg-blue-500' } } }] }]
+      const meta = { class: { tr: 'bg-green-500' } }
+      const refColumns = ref([{ meta: { class: { td: 'text-amber-500' } } }])
+      const computedColumns = computed(() => [{ meta: { class: { th: 'text-lime-500' } } }])
+      const column = columnHelper.accessor('id', { meta: { class: { td: 'text-pink-500' } } })
+    `)).toEqual(['text-red-500', 'text-gray-500', 'bg-blue-500', 'bg-green-500', 'text-amber-500', 'text-lime-500', 'text-pink-500'])
+  })
+
+  it('leaves other `class` keys, styles and functions alone', () => {
+    expect(lint(`
+      const columns = [{ meta: { style: { th: 'color: red' }, class: { td: () => 'text-teal-500' } } }]
+      const item = { class: 'text-rose-500', ui: { th: 'text-cyan-500' } }
+      const link = { class: { th: 'text-orange-500' } }
+    `)).toEqual([])
   })
 })
