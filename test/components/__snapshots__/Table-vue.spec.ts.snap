@@ -2269,7 +2269,21 @@ exports[`Table > renders with row pinning and virtualization correctly 1`] = `
       <tr data-slot="table-separator" class="absolute z-1 inset-s-0 w-full h-px bg-(--border-color-default)"></tr>
     </thead>
     <tbody data-slot="table-tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-tint [&amp;>tr]:data-[selectable=true]:outline-focus [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(length:--ui-focus-width) [&amp;>tr]:data-[selectable=true]:-outline-offset-(--ui-focus-width) divide-y divide-default">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" data-pinned="top" data-slot="table-tr" class="data-[selected=true]:bg-tint">
+        <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap has-[[role=checkbox]]:pe-0 data-[selected=true]:bg-tint outline-focus focus-visible:outline-(length:--ui-focus-width) -outline-offset-(--ui-focus-width)">derv1ws0</td>
+        <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap has-[[role=checkbox]]:pe-0 data-[selected=true]:bg-tint outline-focus focus-visible:outline-(length:--ui-focus-width) -outline-offset-(--ui-focus-width)">837</td>
+        <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap has-[[role=checkbox]]:pe-0 data-[selected=true]:bg-tint outline-focus focus-visible:outline-(length:--ui-focus-width) -outline-offset-(--ui-focus-width)">processing</td>
+        <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap has-[[role=checkbox]]:pe-0 data-[selected=true]:bg-tint outline-focus focus-visible:outline-(length:--ui-focus-width) -outline-offset-(--ui-focus-width)">Monserrat44@gmail.com</td>
+      </tr>
       <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" data-pinned="bottom" data-slot="table-tr" class="data-[selected=true]:bg-tint">
+        <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap has-[[role=checkbox]]:pe-0 data-[selected=true]:bg-tint outline-focus focus-visible:outline-(length:--ui-focus-width) -outline-offset-(--ui-focus-width)">5kma53ae</td>
+        <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap has-[[role=checkbox]]:pe-0 data-[selected=true]:bg-tint outline-focus focus-visible:outline-(length:--ui-focus-width) -outline-offset-(--ui-focus-width)">874</td>
+        <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap has-[[role=checkbox]]:pe-0 data-[selected=true]:bg-tint outline-focus focus-visible:outline-(length:--ui-focus-width) -outline-offset-(--ui-focus-width)">success</td>
+        <td data-pinned="false" data-slot="table-td" class="p-4 text-sm text-muted whitespace-nowrap has-[[role=checkbox]]:pe-0 data-[selected=true]:bg-tint outline-focus focus-visible:outline-(length:--ui-focus-width) -outline-offset-(--ui-focus-width)">Silas22@gmail.com</td>
+      </tr>
       <!--v-if-->
     </tbody>
     <!--v-if-->

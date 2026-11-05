@@ -687,6 +687,26 @@ describe('Table', () => {
     expect(rows[1]!.findAll('td')[0]!.text()).toBe('')
   })
 
+  it('renders pinned rows around a virtualized table', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data,
+        getRowId: (row: any) => row.id,
+        rowPinning: { top: [data[2]!.id], bottom: [data[0]!.id] },
+        virtualize: { observeElementRect: (_: any, cb: any) => cb({ width: 1000, height: 500 }) }
+      },
+      attachTo: document.body
+    })
+    await flushPromises()
+    const rows = wrapper.findAll('tbody tr[data-slot="table-tr"]')
+
+    expect(rows[0]!.attributes('data-pinned')).toBe('top')
+    expect(rows[0]!.attributes('data-index')).toBeUndefined()
+    expect(rows.at(-1)!.attributes('data-pinned')).toBe('bottom')
+    expect(rows.filter(row => row.attributes('data-index') !== undefined)).toHaveLength(data.length - 2)
+    wrapper.unmount()
+  })
+
   it('keeps pinned rows when no other row matches', async () => {
     const wrapper = await mountSuspended(Table, { props: { data, rowPinning: { top: [data[0]!.id], bottom: [] }, getRowId: (row: any) => row.id, globalFilter: 'no match' } })
 

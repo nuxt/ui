@@ -120,7 +120,6 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
   meta?: TableMeta<TableFeatures, T>
   /**
    * Enable virtualization for large datasets.
-   * Note: row pinning is not supported when virtualization is enabled.
    * @see https://tanstack.com/virtual/v3/docs/api/virtualizer#options
    * @defaultValue false
    */
@@ -498,8 +497,9 @@ const footerGroups = computed(() => {
 })
 
 const rows = computed(() => tableApi.getRowModel().rows)
-const topRows = computed(() => props.virtualize ? [] : tableApi.getTopRows())
-const bottomRows = computed(() => props.virtualize ? [] : tableApi.getBottomRows())
+// Pinned rows render around the rows, the virtualizer only handles the center ones.
+const topRows = computed(() => tableApi.getTopRows())
+const bottomRows = computed(() => tableApi.getBottomRows())
 const centerRows = computed(() => topRows.value.length || bottomRows.value.length ? tableApi.getCenterRows() : rows.value)
 
 const virtualizerProps = toRef(() => defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
@@ -556,7 +556,8 @@ const virtualizerInstance = virtualizer ? virtualizer.value : undefined
 
 // Register each rendered row with the virtualizer so its actual height is measured (and re-measured on resize).
 function measureRow(el: Element | ComponentPublicInstance | null) {
-  if (el instanceof Element) {
+  // Pinned rows have no index, they sit outside the virtualized range.
+  if (el instanceof Element && el.hasAttribute(indexAttribute.value)) {
     virtualizerInstance?.measureElement(el)
   }
 }
@@ -575,7 +576,7 @@ function measureRowElement(el: Element, entry: ResizeObserverEntry | undefined, 
 }
 
 function remeasureRow(el: Element | null | undefined) {
-  if (!el?.isConnected || !virtualizer) return
+  if (!el?.isConnected || !virtualizer || !el.hasAttribute(indexAttribute.value)) return
   const instance = virtualizer.value
   instance.resizeItem(instance.indexFromElement(el), instance.options.measureElement(el, undefined, instance))
 }
