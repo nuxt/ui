@@ -451,7 +451,7 @@ exports[`DropdownMenu > renders with filter and searchTerm correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-slot="dropdown-menu-empty" class="text-center text-muted p-(--ui-control-py) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height)">No matching data</div>
+    <div data-slot="dropdown-menu-empty" class="text-center text-muted p-[calc(var(--ui-control-py)+var(--spacing))] text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height)">No matching data</div>
     <!--v-if-->
   </div>
 </div>

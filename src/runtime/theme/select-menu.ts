@@ -12,11 +12,11 @@ export default extendTheme(select, {
   },
   variants: {
     size: {
-      xs: { empty: 'p-(--ui-control-py) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height)' },
-      sm: { empty: 'p-(--ui-control-py) text-(length:--ui-control-text-sm)/(--ui-control-text-sm--line-height)' },
-      md: { empty: 'p-(--ui-control-py) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height)' },
-      lg: { empty: 'p-(--ui-control-py) text-(length:--ui-control-text-lg)/(--ui-control-text-lg--line-height)' },
-      xl: { empty: 'p-(--ui-control-py) text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)' }
+      xs: { empty: 'p-[calc(var(--ui-control-py)+var(--spacing))] text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height)' },
+      sm: { empty: 'p-[calc(var(--ui-control-py)+var(--spacing))] text-(length:--ui-control-text-sm)/(--ui-control-text-sm--line-height)' },
+      md: { empty: 'p-[calc(var(--ui-control-py)+var(--spacing))] text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height)' },
+      lg: { empty: 'p-[calc(var(--ui-control-py)+var(--spacing))] text-(length:--ui-control-text-lg)/(--ui-control-text-lg--line-height)' },
+      xl: { empty: 'p-[calc(var(--ui-control-py)+var(--spacing))] text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)' }
     },
     virtualize: {
       true: {
