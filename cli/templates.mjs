@@ -108,7 +108,6 @@ export interface ${upperName}Slots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { ${upperName}Root } from 'reka-ui'
-import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '${importPrefix}/composables/useComponentProps'
 import { useForwardProps } from '${importPrefix}/composables/useForwardProps'
@@ -123,7 +122,7 @@ const props = useComponentProps('${componentKey}', _props)
 const appConfig = useAppConfig() as ${upperName}['AppConfig']
 
 // TODO: list the same keys as in \`${upperName}Props\` Pick.
-const rootProps = useForwardProps(reactivePick(props, 'as'), emits)
+const rootProps = useForwardProps(props, ['as'], emits)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(${appConfigLookup} || {}) })())

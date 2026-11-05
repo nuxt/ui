@@ -75,7 +75,6 @@ export type SplitterSlots<T extends SplitterItem = SplitterItem> = {
 <script setup lang="ts" generic="T extends SplitterItem">
 import { ref, computed, onBeforeUpdate } from 'vue'
 import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from 'reka-ui'
-import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
@@ -91,7 +90,7 @@ const props = useComponentProps<SplitterProps<T>>('splitter', _props)
 
 const appConfig = useAppConfig() as Splitter['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'id', 'autoSaveId', 'keyboardResizeBy', 'storage'))
+const rootProps = useForwardProps(props, ['as', 'id', 'autoSaveId', 'keyboardResizeBy', 'storage'])
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.splitter || {}) })({

@@ -199,6 +199,7 @@ describe('Table', () => {
     ['with columns', { props: { ...props, columns } }],
     ['with sticky', { props: { ...props, sticky: true } }],
     ['with loading', { props: { ...props, loading: true } }],
+    ['with loading without data', { props: { columns, loading: true } }],
     ...loadingColors.map((loadingColor: string) => [`with loading color ${loadingColor}`, { props: { ...props, loading: true, loadingColor } }]),
     ...loadingAnimations.map((loadingAnimation: string) => [`with loading animation ${loadingAnimation}`, { props: { ...props, loading: true, loadingAnimation } }]),
     ['with meta prop', { props: { ...props, meta: { class: { tr: 'custom-row-class' }, style: { tr: { backgroundColor: 'lightgray' } } } } }],
@@ -665,6 +666,20 @@ describe('Table', () => {
     })
 
     expect(expanded.findAll('td').find(td => td.text() === 'Expanded slot')?.attributes('colspan')).toBe(visibleColumns)
+  })
+
+  it('shows the loading row instead of the empty one while loading without data', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: { columns: columns as any, loading: true, empty: 'There is no data' }
+    })
+
+    expect(wrapper.find('[data-slot="loading"]').text()).toBe('')
+    expect(wrapper.find('[data-slot="empty"]').exists()).toBe(false)
+
+    await wrapper.setProps({ loading: false })
+
+    expect(wrapper.find('[data-slot="loading"]').exists()).toBe(false)
+    expect(wrapper.find('[data-slot="empty"]').text()).toBe('There is no data')
   })
 
   it.each([

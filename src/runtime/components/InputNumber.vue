@@ -89,7 +89,6 @@ export interface InputNumberSlots {
 import { onMounted, onScopeDispose, computed, useTemplateRef, toRef } from 'vue'
 import { NumberFieldRoot, NumberFieldInput, NumberFieldDecrement, NumberFieldIncrement } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useFieldGroup } from '../composables/useFieldGroup'
@@ -114,7 +113,7 @@ const props = useComponentProps<InputNumberProps<T, Mod>>('inputNumber', _props)
 const { t } = useLocale()
 const appConfig = useAppConfig() as InputNumber['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'stepSnapping', 'startingValue', 'allowInvalid', 'formatOptions', 'disableWheelChange', 'invertWheelChange', 'required', 'readonly', 'focusOnChange', 'locale'))
+const rootProps = useForwardProps(props, ['as', 'stepSnapping', 'startingValue', 'allowInvalid', 'formatOptions', 'disableWheelChange', 'invertWheelChange', 'required', 'readonly', 'focusOnChange', 'locale'])
 
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color: formFieldColor, size: formFieldSize, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<InputNumberProps<T, Mod>>(_props)
 

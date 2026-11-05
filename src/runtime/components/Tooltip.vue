@@ -54,7 +54,6 @@ export interface TooltipSlots {
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArrow, injectTooltipProviderContext } from 'reka-ui'
-import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useKbd } from '../composables/useKbd'
 import { useComponentProps } from '../composables/useComponentProps'
@@ -76,7 +75,7 @@ const appConfig = useAppConfig() as Tooltip['AppConfig']
 
 const providerContext = injectTooltipProviderContext()
 
-const rootProps = useForwardProps(reactivePick(props, 'defaultOpen', 'open', 'delayDuration', 'disableHoverableContent', 'disableClosingTrigger', 'ignoreNonKeyboardFocus'), emits)
+const rootProps = useForwardProps(props, ['defaultOpen', 'open', 'delayDuration', 'disableHoverableContent', 'disableClosingTrigger', 'ignoreNonKeyboardFocus'], emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, providerContext.content.value, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as TooltipContentProps)
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as TooltipArrowProps)

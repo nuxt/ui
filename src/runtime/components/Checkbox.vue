@@ -65,7 +65,6 @@ export interface CheckboxSlots {
 <script setup lang="ts" generic="T = boolean">
 import { computed, useId } from 'vue'
 import { Primitive, CheckboxRoot, CheckboxIndicator, Label, injectCheckboxGroupRootContext } from 'reka-ui'
-import { reactivePick } from '@vueuse/core'
 import { isEqual } from 'ohash/utils'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
@@ -85,7 +84,7 @@ const props = useComponentProps<CheckboxProps<T>>('checkbox', _props)
 
 const appConfig = useAppConfig() as Checkbox['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue', 'modelValue', 'trueValue', 'falseValue'), emits)
+const rootProps = useForwardProps(props, ['required', 'value', 'defaultValue', 'modelValue', 'trueValue', 'falseValue'], emits)
 
 const { id: _id, emitFormChange, emitFormInput, size: formFieldSize, color: formFieldColor, highlight: formFieldHighlight, name, disabled: formFieldDisabled, ariaAttrs } = useFormField<CheckboxProps<T>>(_props)
 const id = _id.value ?? useId()

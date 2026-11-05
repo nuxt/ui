@@ -49,7 +49,6 @@ export default {
 <script setup lang="ts">
 import { ref, computed, defineAsyncComponent, toRef, provide, onMounted, onBeforeUnmount } from 'vue'
 import { ToastProvider, ToastViewport, ToastPortal } from 'reka-ui'
-import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
@@ -97,7 +96,7 @@ const appConfig = useAppConfig() as Toaster['AppConfig']
 
 provide(toastMaxInjectionKey, toRef(() => props.max))
 
-const providerProps = useForwardProps(reactivePick(props, 'duration', 'swipeThreshold', 'disableSwipe'))
+const providerProps = useForwardProps(props, ['duration', 'swipeThreshold', 'disableSwipe'])
 const portalProps = usePortal(toRef(() => props.portal))
 
 const swipeDirection = computed(() => {

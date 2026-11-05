@@ -236,7 +236,7 @@ import { upperFirst } from 'scule'
 import { defu } from 'defu'
 import { FlexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, getExpandedRowModel, useVueTable } from '@tanstack/vue-table'
 import { useVirtualizer } from '@tanstack/vue-virtual'
-import { reactivePick, createReusableTemplate, createRef } from '@vueuse/core'
+import { createReusableTemplate, createRef } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
@@ -351,7 +351,7 @@ const paginationState = defineModel<PaginationState>('pagination')
 const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef')
 const tableRef = useTemplateRef<HTMLTableElement>('tableRef')
 
-const tableProps = useForwardProps(reactivePick(props, '_features', 'autoResetAll', 'debugAll', 'debugCells', 'debugColumns', 'debugHeaders', 'debugRows', 'debugTable', 'defaultColumn', 'getRowId', 'getSubRows', 'initialState', 'mergeOptions', 'renderFallbackValue'))
+const tableProps = useForwardProps(props, ['_features', 'autoResetAll', 'debugAll', 'debugCells', 'debugColumns', 'debugHeaders', 'debugRows', 'debugTable', 'defaultColumn', 'getRowId', 'getSubRows', 'initialState', 'mergeOptions', 'renderFallbackValue'])
 
 const tableApi = useVueTable({
   ...tableProps.value,
@@ -729,7 +729,7 @@ defineExpose({
   </DefineRowTemplate>
 
   <DefineTableTemplate>
-    <table ref="tableRef" data-slot="base" :class="ui.base({ class: [props.ui?.base] })">
+    <table ref="tableRef" :aria-busy="props.loading ? 'true' : undefined" data-slot="base" :class="ui.base({ class: [props.ui?.base] })">
       <caption v-if="props.caption || !!slots.caption" data-slot="caption" :class="ui.caption({ class: [props.ui?.caption] })">
         <slot name="caption">
           {{ props.caption }}
@@ -797,7 +797,7 @@ defineExpose({
           <ReuseRowTemplate v-for="row in bottomRows" :key="row.id" :row="row" />
         </template>
 
-        <tr v-else-if="props.loading && !!slots['loading']">
+        <tr v-else-if="props.loading">
           <td :colspan="tableApi.getVisibleLeafColumns().length" data-slot="loading" :class="ui.loading({ class: props.ui?.loading })">
             <slot name="loading" />
           </td>

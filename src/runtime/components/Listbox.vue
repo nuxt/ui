@@ -163,7 +163,7 @@ export type ListboxSlots<T extends ArrayOrNested<ListboxItem> = ArrayOrNested<Li
 import { computed, toRaw, toRef } from 'vue'
 import { ListboxRoot, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxVirtualizer, ListboxItem as RekaListboxItem, ListboxItemIndicator, ListboxFilter } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { createReusableTemplate, reactivePick } from '@vueuse/core'
+import { createReusableTemplate } from '@vueuse/core'
 import { defu } from 'defu'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
@@ -203,7 +203,7 @@ const { filterGroups } = useFilter()
 const labelAttrs = ['aria-label', 'aria-labelledby']
 const fieldAttrs = ['aria-describedby', 'aria-invalid']
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'multiple', 'selectionBehavior', 'highlightOnHover', 'loop', 'by', 'orientation', 'required'), emits)
+const rootProps = useForwardProps(props, ['as', 'modelValue', 'defaultValue', 'multiple', 'selectionBehavior', 'highlightOnHover', 'loop', 'by', 'orientation', 'required'], emits)
 
 const virtualizerProps = toRef(() => {
   if (!props.virtualize) return false

@@ -47,7 +47,6 @@ export interface SliderEmits {
 import { computed, useAttrs } from 'vue'
 import { SliderRoot, SliderRange, SliderTrack, SliderThumb } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useFormField } from '../composables/useFormField'
@@ -73,7 +72,7 @@ const modelValue = defineModel<T>()
 const { t } = useLocale()
 const appConfig = useAppConfig() as Slider['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'orientation', 'min', 'max', 'step', 'minStepsBetweenThumbs', 'inverted'))
+const rootProps = useForwardProps(props, ['as', 'orientation', 'min', 'max', 'step', 'minStepsBetweenThumbs', 'inverted'])
 
 const { id, emitFormChange, emitFormInput, size: formFieldSize, color: formFieldColor, name, disabled: formFieldDisabled, ariaAttrs } = useFormField<SliderProps>(_props)
 

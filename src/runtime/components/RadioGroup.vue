@@ -99,7 +99,6 @@ export interface RadioGroupSlots<T extends RadioGroupItem[] = RadioGroupItem[]> 
 <script setup lang="ts" generic="T extends RadioGroupItem[], VK extends GetItemKeys<T> = 'value'">
 import { computed, useId } from 'vue'
 import { RadioGroupRoot, RadioGroupItem as RRadioGroupItem, RadioGroupIndicator, Label } from 'reka-ui'
-import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
@@ -121,7 +120,7 @@ const props = useComponentProps<RadioGroupProps<T, VK>>('radioGroup', _props)
 
 const appConfig = useAppConfig() as RadioGroup['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'loop', 'required'), emits)
+const rootProps = useForwardProps(props, ['as', 'loop', 'required'], emits)
 
 const { emitFormChange, emitFormInput, color: formFieldColor, name, size: formFieldSize, highlight: formFieldHighlight, id: _id, disabled: formFieldDisabled, ariaAttrs } = useFormField<RadioGroupProps<T>>(_props, { bind: false })
 const id = _id.value ?? useId()

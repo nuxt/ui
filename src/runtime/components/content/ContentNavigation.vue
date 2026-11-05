@@ -97,7 +97,7 @@ export interface ContentNavigationSlots<T extends ContentNavigationLink = Conten
 import { computed } from 'vue'
 import { Primitive, AccordionRoot, AccordionItem, AccordionTrigger, AccordionContent } from 'reka-ui'
 import { useForwardProps } from '../../composables/useForwardProps'
-import { reactivePick, createReusableTemplate } from '@vueuse/core'
+import { createReusableTemplate } from '@vueuse/core'
 import { useRoute, useAppConfig } from '#imports'
 import { useComponentProps } from '../../composables/useComponentProps'
 import { pickLinkProps } from '../../utils/link'
@@ -125,7 +125,7 @@ const slots = defineSlots<ContentNavigationSlots<T>>()
 
 const props = useComponentProps<ContentNavigationProps<T>>('contentNavigation', _props)
 
-const rootProps = useForwardProps(reactivePick(props, 'collapsible', 'type', 'unmountOnHide'), emits)
+const rootProps = useForwardProps(props, ['collapsible', 'type', 'unmountOnHide'], emits)
 
 const route = useRoute()
 const appConfig = useAppConfig() as ContentNavigation['AppConfig']

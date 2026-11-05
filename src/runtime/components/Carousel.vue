@@ -120,7 +120,6 @@ export interface CarouselEmits {
 import { computed, ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import useEmblaCarousel from 'embla-carousel-vue'
 import { Primitive } from 'reka-ui'
-import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
@@ -165,7 +164,7 @@ const props = useComponentProps<CarouselProps<T>>('carousel', _props)
 const { dir, t } = useLocale()
 const appConfig = useAppConfig() as Carousel['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'active', 'align', 'breakpoints', 'containScroll', 'dragFree', 'dragThreshold', 'duration', 'inViewThreshold', 'loop', 'skipSnaps', 'slidesToScroll', 'startIndex', 'watchDrag', 'watchResize', 'watchSlides', 'watchFocus'))
+const rootProps = useForwardProps(props, ['active', 'align', 'breakpoints', 'containScroll', 'dragFree', 'dragThreshold', 'duration', 'inViewThreshold', 'loop', 'skipSnaps', 'slidesToScroll', 'startIndex', 'watchDrag', 'watchResize', 'watchSlides', 'watchFocus'])
 
 // eslint-disable-next-line vue/no-dupe-keys
 const prevIcon = computed(() => props.prevIcon || (dir.value === 'rtl' ? appConfig.ui.icons.arrowRight : appConfig.ui.icons.arrowLeft))

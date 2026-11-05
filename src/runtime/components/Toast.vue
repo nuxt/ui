@@ -92,7 +92,6 @@ export interface ToastSlots {
 import { ref, computed, onMounted, useTemplateRef } from 'vue'
 import { ToastRoot, ToastTitle, ToastDescription, ToastAction, ToastClose } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
@@ -115,7 +114,7 @@ const props = useComponentProps('toast', _props)
 const { t } = useLocale()
 const appConfig = useAppConfig() as Toast['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'defaultOpen', 'open', 'duration', 'type'), emits)
+const rootProps = useForwardProps(props, ['as', 'defaultOpen', 'open', 'duration', 'type'], emits)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.toast || {}) })({
