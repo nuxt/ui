@@ -87,7 +87,7 @@ import { defu } from 'defu'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
-import { fieldGroupInjectionKey } from '../composables/useFieldGroup'
+import { fieldGroupInjectionKey, useFieldGroup } from '../composables/useFieldGroup'
 import { useFormField } from '../composables/useFormField'
 import { get, omit } from '../utils'
 import { tv } from '../utils/tv'
@@ -95,7 +95,6 @@ import UButton from './Button.vue'
 
 const _props = withDefaults(defineProps<ToggleGroupProps<T>>(), {
   type: 'single',
-  color: 'neutral',
   variant: 'ghost',
   activeColor: 'primary',
   activeVariant: 'soft',
@@ -117,10 +116,13 @@ const rootProps = useForwardProps(props, ['as', 'type', 'modelValue', 'defaultVa
 const { id: _id, name, size: formFieldSize, color: formFieldColor, disabled: formFieldDisabled, labelId, ariaAttrs, emitFormChange, emitFormInput } = useFormField<ToggleGroupProps<T>>(_props, { bind: false })
 const id = _id.value ?? useId()
 
+const { size: fieldGroupSize } = useFieldGroup<ToggleGroupProps<T>>(_props)
+
+// The `neutral` default lives here rather than in `withDefaults`, so `useFormField` doesn't return it over `<UTheme :props>`
 // eslint-disable-next-line vue/no-dupe-keys
-const color = computed(() => formFieldColor.value ?? props.color)
+const color = computed(() => formFieldColor.value ?? props.color ?? 'neutral')
 // eslint-disable-next-line vue/no-dupe-keys
-const size = computed(() => formFieldSize.value ?? props.size)
+const size = computed(() => fieldGroupSize.value ?? formFieldSize.value ?? props.size)
 
 const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
@@ -141,8 +143,10 @@ function getValue(item: T, index: number) {
 }
 
 function getButtonProps(item: T): ButtonProps {
-  return defu(omit(item as ToggleGroupItem, ['value', 'disabled', props.valueKey as string, props.labelKey as string]), {
-    label: get(item, props.labelKey as string),
+  return defu({
+    ...omit(item as ToggleGroupItem, ['value', 'disabled', 'label', props.valueKey as string, props.labelKey as string]),
+    label: get(item, props.labelKey as string)
+  }, {
     color: color.value,
     variant: props.variant,
     activeColor: props.activeColor,

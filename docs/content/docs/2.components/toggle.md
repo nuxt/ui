@@ -50,7 +50,7 @@ props:
 ::
 
 ::note
-The Toggle component extends the [Button](/docs/components/button) component, so you can pass any property such as `label`, `icon`, `size`, etc. It sets the `active` prop of the Button from its pressed state.
+The Toggle component extends the [Button](/docs/components/button) component, so you can pass its properties such as `label`, `icon`, `size`, etc., except the link ones. It sets the `active` prop of the Button from its pressed state.
 ::
 
 ### Color

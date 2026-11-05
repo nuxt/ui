@@ -52,7 +52,6 @@ import UButton from './Button.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<ToggleProps>(), {
-  color: 'neutral',
   variant: 'ghost',
   activeColor: 'primary',
   activeVariant: 'soft',
@@ -70,8 +69,9 @@ const buttonProps = useForwardProps(reactiveOmit(props, 'id', 'modelValue', 'def
 
 const { id, name, size: formFieldSize, color: formFieldColor, disabled: formFieldDisabled, ariaAttrs, emitFormChange, emitFormInput } = useFormField<ToggleProps>(_props)
 
+// The `neutral` default lives here rather than in `withDefaults`, so `useFormField` doesn't return it over `<UTheme :props>`
 // eslint-disable-next-line vue/no-dupe-keys
-const color = computed(() => formFieldColor.value ?? props.color)
+const color = computed(() => formFieldColor.value ?? props.color ?? 'neutral')
 
 const size = computed(() => formFieldSize.value ?? props.size)
 
