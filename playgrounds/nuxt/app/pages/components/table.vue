@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
+import type { Ref } from 'vue'
 import { upperFirst } from 'scule'
 import type { TableColumn, TableFeatures, TableRow } from '@nuxt/ui'
 import type { CellSelectionState, Column, ColumnPinningState, RowPinningState, RowSelectionState } from '@tanstack/vue-table'
@@ -269,6 +270,28 @@ const features = computed(() => ({
   ...(virtualize.value ? {} : { rowPaginationFeature, paginatedRowModel: createPaginatedRowModel() }),
   ...(cellSelectable.value ? { cellSelectionFeature } : {})
 }))
+function optionItem(label: string, model: Ref<boolean>, disabled = false) {
+  return {
+    label,
+    type: 'checkbox' as const,
+    checked: model.value,
+    disabled,
+    onUpdateChecked(checked: boolean) {
+      model.value = checked
+    },
+    onSelect(e: Event) {
+      e.preventDefault()
+    }
+  }
+}
+
+const optionItems = computed(() => [
+  optionItem('Virtualize', virtualize),
+  optionItem('Cell selection', cellSelectable),
+  optionItem('Resizable', resizable),
+  optionItem('Resize on end', resizeOnEnd, !resizable.value)
+])
+
 const tableKey = computed(() => [virtualize.value, cellSelectable.value, resizable.value].join('-'))
 
 const pagination = ref({
@@ -331,10 +354,9 @@ onMounted(() => {
 
 <template>
   <Navbar>
-    <USwitch v-model="virtualize" label="Virtualize" />
-    <USwitch v-model="resizable" label="Resizable" />
-    <USwitch v-model="resizeOnEnd" :disabled="!resizable" label="Resize on end" />
-    <USwitch v-model="cellSelectable" label="Cell selection" />
+    <UDropdownMenu :items="optionItems" :content="{ align: 'start' }">
+      <UButton label="Options" color="neutral" variant="outline" trailing-icon="i-lucide-chevron-down" />
+    </UDropdownMenu>
 
     <UInput
       :model-value="(table?.tableApi?.getColumn('email')?.getFilterValue() as string)"
