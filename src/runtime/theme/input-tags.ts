@@ -64,7 +64,7 @@ export default defineTheme({
         root: '[--ui-control-px:var(--ui-control-px-xl)] [--ui-control-py:var(--ui-control-py-xl)] [--ui-control-gap:var(--ui-control-gap-xl)] [--ui-control-icon-size:var(--ui-control-icon-size-xl)] text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)',
-        tags: 'min-h-[calc(var(--ui-control-text-xl--line-height)+var(--ui-control-text-step,0px)+2*var(--ui-control-py))] py-[calc(var(--ui-control-py)-(var(--ui-control-text-xl--leading)-var(--ui-control-text-xl--line-height))/2)]',
+        tags: 'min-h-[calc(var(--ui-control-text-xl--line-height)+2*var(--ui-control-py))] py-[calc(var(--ui-control-py)-(var(--ui-control-text-xl--leading)-var(--ui-control-text-xl--line-height))/2)]',
         item: 'text-[calc(var(--ui-control-text-xl)-0.125rem)]/[calc(var(--ui-control-text-xl--leading)-0.25rem)]',
         itemDeleteIcon: 'size-(--ui-control-text-xl)'
       }
