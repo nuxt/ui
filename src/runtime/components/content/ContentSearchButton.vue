@@ -126,7 +126,7 @@ const ui = computed(() => tv(theme, overrides.value)({
       </template>
 
       <template #trailing="{ ui: uiProxy }">
-        <span data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
+        <span data-slot="content-search-button-trailing" :class="ui.trailing({ class: props.ui?.trailing })">
           <slot name="trailing" :ui="uiProxy">
             <template v-if="props.kbds?.length">
               <UKbd v-for="(kbd, index) in props.kbds" :key="index" variant="subtle" :size="kbdSize" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
