@@ -83,7 +83,6 @@ export interface ToggleGroupSlots<T extends ToggleGroupItem = ToggleGroupItem> {
 <script setup lang="ts" generic="T extends ToggleGroupItem">
 import { computed, provide, useId } from 'vue'
 import { ToggleGroupRoot, ToggleGroupItem as RToggleGroupItem } from 'reka-ui'
-import { reactivePick } from '@vueuse/core'
 import { defu } from 'defu'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
@@ -113,7 +112,7 @@ const props = useComponentProps<ToggleGroupProps<T>>('toggleGroup', _props)
 
 const appConfig = useAppConfig() as ToggleGroup['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'type', 'modelValue', 'defaultValue', 'loop', 'rovingFocus', 'orientation', 'required'), emits)
+const rootProps = useForwardProps(props, ['as', 'type', 'modelValue', 'defaultValue', 'loop', 'rovingFocus', 'orientation', 'required'], emits)
 
 const { id: _id, name, size: formFieldSize, color: formFieldColor, disabled: formFieldDisabled, labelId, ariaAttrs, emitFormChange, emitFormInput } = useFormField<ToggleGroupProps<T>>(_props, { bind: false })
 const id = _id.value ?? useId()
