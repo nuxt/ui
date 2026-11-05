@@ -196,7 +196,7 @@ const columns: TableColumn<Payment>[] = [{
 }]
 ```
 
-Only the built-in functions `auto` picks are registered: `alphanumeric`, `text` and `datetime` for sorting, `includesString`, `inNumberRange`, `inDateRange`, `arrIncludes`, `equals` and `weakEquals` for filtering, `sum` and `extent` for aggregation. Import the others from `@tanstack/vue-table`, like `filterFn_startsWith` or `aggregationFn_count`, and pass them to the column. To refer to a function by name across columns, register it in the `sortFns`, `filterFns` or `aggregationFns` of the `features` prop, it is added to the built-in ones.
+Only the built-in functions `auto` picks are registered. Import the others from `@tanstack/vue-table`, like `filterFn_startsWith` or `aggregationFn_count`, and pass them to the column, or register them by name in the `sortFns`, `filterFns` or `aggregationFns` of the `features` prop.
 
 ::caution
 The `tableApi` and column types include the APIs of every TanStack Table feature. Calling the API of a feature that isn't registered type-checks but fails at runtime.
@@ -502,7 +502,7 @@ class: '!p-0'
 
 ### With cell selection
 
-You can select cells like in a spreadsheet with the TanStack Table [Cell Selection APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/cell-selection) by registering `cellSelectionFeature` through the `features` prop. Click or drag to select a range, shift-click to extend it and :kbd{value="ctrl"} or :kbd{value="meta"} click to add another one. The arrow keys move the selection and extend it with :kbd{value="shift"}, :kbd{value="ctrl"} or :kbd{value="meta"} :kbd{value="A"} selects every cell and :kbd{value="escape"} collapses the selection to the active cell. The table then takes the `grid` role and its cells get `aria-selected`.
+You can select cells like in a spreadsheet with the TanStack Table [Cell Selection APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/cell-selection) by registering `cellSelectionFeature` through the `features` prop. Click or drag to select a range, shift-click to extend it and :kbd{value="ctrl"} or :kbd{value="meta"} click to add another one. The arrow keys move the selection and extend it with :kbd{value="shift"}, :kbd{value="meta"} :kbd{value="A"} selects every cell and :kbd{value="escape"} collapses the selection.
 
 ::component-example
 ---
@@ -559,7 +559,7 @@ class: '!p-0'
 
 ### With column span
 
-You can merge cells with the TanStack Table [Cell Spanning APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/cell-spanning) by registering `cellSpanningFeature` through the `features` prop. Use `spanRows` on a column definition to merge consecutive cells with the same value, and `spanColumns` to make a cell span the columns after it. Row spans count data rows only, so don't combine `spanRows` with the `expanded` slot.
+You can merge cells with the TanStack Table [Cell Spanning APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/cell-spanning) by registering `cellSpanningFeature` through the `features` prop. Use `spanRows` on a column definition to merge consecutive cells with the same value, and `spanColumns` to make a cell span the columns after it.
 
 ::component-example
 ---
@@ -637,7 +637,7 @@ You can use the `column-pinning` prop to control the pinning state of the column
 
 ### With column resizing
 
-You can set `enableResizing: true` on a column definition, or on every column with the `default-column` prop, to render a handle that resizes the column using the TanStack Table [Column Sizing APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/column-sizing). The headers and the table then take their sizes, so use `table-fixed` on the `base` slot to let columns shrink below their content. With `columnResizeMode: 'onEnd'` in the `options` prop, the handle follows the pointer and the columns resize on release. The handle can also be focused, the arrow keys resize the column and :kbd{value="enter"} resets it, like a double-click.
+You can set `enableResizing: true` on a column definition, or on every column with the `default-column` prop, to render a handle that resizes the column using the TanStack Table [Column Sizing APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/column-sizing). The headers and the table then take their sizes, so use `table-fixed` on the `base` slot to let columns shrink below their content.
 
 ::component-example
 ---
@@ -829,7 +829,7 @@ class: '!p-0'
 Use the `virtualize` prop to enable virtualization for large datasets as a boolean or an object with options like `{ estimateSize: 65, overscan: 12 }`. You can also pass other [TanStack Virtual options](https://tanstack.com/virtual/v3/docs/api/virtualizer#optional-options) to customize the virtualization behavior. The `sticky` prop works in combination with `virtualize` to keep the header or footer visible while scrolling through large datasets.
 
 ::warning
-Row pinning and row spanning are not supported when virtualization is enabled. Column spanning still works.
+Row spanning is not supported when virtualization is enabled.
 ::
 
 ::component-example
