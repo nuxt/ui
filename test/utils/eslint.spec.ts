@@ -2,6 +2,7 @@ import { mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'pathe'
 import { describe, it, expect, afterAll } from 'vitest'
+import { Linter } from 'eslint'
 import nuxtUI from '../../src/eslint'
 
 describe('nuxtUI', () => {
@@ -79,5 +80,43 @@ describe('nuxtUI', () => {
     file('url-colors.css', '@plugin "@nuxt/ui/colors" {\n  primary: rose;\n}')
     const entryPoint = file('url.css', '@import "tailwindcss";\n@import url("./url-colors.css");')
     expect(message(entryPoint, 'sky')).toContain('`primary` points at `sky`')
+  })
+
+  // The classes `no-palette-colors` reports in `code`
+  const lint = (code: string) => {
+    const entryPoint = file('lint.css', '@import "tailwindcss";')
+    const config = nuxtUI({ entryPoint, rules: { 'no-conflicting-classes': 'off' } })
+    return new Linter().verify(code, config as Linter.Config[], 'columns.js').map(({ message }) => message.match(/^"([^"]+)"/)?.[1])
+  }
+
+  it('lints the `class` and `ui` of items and table columns', () => {
+    expect(lint(`
+      const items = [{ label: 'Delete', class: 'text-red-500', ui: { itemLabel: ['text-gray-500', ['text-sky-500']] } }]
+      const button = h(UButton, { class: sorted ? 'bg-blue-500' : 'p-2' })
+      const columns = [{ meta: { class: { th: 'text-amber-500' } }, columns: [{ meta: { class: { td: 'text-lime-500' } } }] }]
+      const meta = { class: { tr: 'bg-green-500' } }
+      const refItems = ref([{ class: 'text-pink-500' }])
+      const computedItems = computed(() => [{ class: 'text-teal-500' }])
+      const column = columnHelper.accessor('id', { meta: { class: { td: 'text-cyan-500' } } })
+    `)).toEqual(['text-red-500', 'text-gray-500', 'text-sky-500', 'bg-blue-500', 'text-amber-500', 'text-lime-500', 'bg-green-500', 'text-pink-500', 'text-teal-500', 'text-cyan-500'])
+  })
+
+  it('lints the keys of a conditional `class`, minus the table\'s', () => {
+    expect(lint(`
+      const button = h(UButton, { class: { 'text-red-500': active, flex: true } })
+      const items = [{ label: 'Delete', class: ['p-2', [{ 'text-gray-500': muted }]] }]
+      const columns = [{ meta: { class: { th: 'p-2', td: 'p-2' } } }]
+      const meta = { class: { tr: 'p-2' } }
+    `)).toEqual(['text-red-500', 'text-gray-500'])
+  })
+
+  it('leaves other keys, styles, functions and the nested `ui` of options alone', () => {
+    expect(lint(`
+      const columns = [{ meta: { style: { th: 'color: red' }, class: { td: () => 'text-teal-500' } } }]
+      const link = { label: 'text-rose-500', icon: 'i-lucide-text-red-500' }
+      const options = { ui: { colors: { primary: 'text-red-500' } } }
+      export default defineNuxtConfig({ ui: { prefix: 'text-red-500' } })
+      const nuxtConfig = { ui: { prefix: 'text-red-500', tailwindPrefix: 'text-red-500', componentDetection: ['text-red-500'], scanPackages: ['text-red-500'] } }
+    `)).toEqual([])
   })
 })
