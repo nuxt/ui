@@ -89,21 +89,24 @@ describe('nuxtUI', () => {
     return new Linter().verify(code, config as Linter.Config[], 'columns.js').map(({ message }) => message.match(/^"([^"]+)"/)?.[1])
   }
 
-  it('lints the classes of table columns and rows', () => {
+  it('lints the `class` and `ui` of items and table columns', () => {
     expect(lint(`
-      const columns = [{ meta: { class: { th: 'text-red-500', td: sorted ? 'text-gray-500' : 'p-2' } }, columns: [{ meta: { class: { td: 'bg-blue-500' } } }] }]
+      const items = [{ label: 'Delete', class: 'text-red-500', ui: { itemLabel: ['text-gray-500'] } }]
+      const button = h(UButton, { class: sorted ? 'bg-blue-500' : 'p-2' })
+      const columns = [{ meta: { class: { th: 'text-amber-500' } }, columns: [{ meta: { class: { td: 'text-lime-500' } } }] }]
       const meta = { class: { tr: 'bg-green-500' } }
-      const refColumns = ref([{ meta: { class: { td: 'text-amber-500' } } }])
-      const computedColumns = computed(() => [{ meta: { class: { th: 'text-lime-500' } } }])
-      const column = columnHelper.accessor('id', { meta: { class: { td: 'text-pink-500' } } })
-    `)).toEqual(['text-red-500', 'text-gray-500', 'bg-blue-500', 'bg-green-500', 'text-amber-500', 'text-lime-500', 'text-pink-500'])
+      const refItems = ref([{ class: 'text-pink-500' }])
+      const computedItems = computed(() => [{ class: 'text-teal-500' }])
+      const column = columnHelper.accessor('id', { meta: { class: { td: 'text-cyan-500' } } })
+    `)).toEqual(['text-red-500', 'text-gray-500', 'bg-blue-500', 'text-amber-500', 'text-lime-500', 'bg-green-500', 'text-pink-500', 'text-teal-500', 'text-cyan-500'])
   })
 
-  it('leaves other `class` keys, styles and functions alone', () => {
+  it('leaves other keys, styles, functions and the nested `ui` of options alone', () => {
     expect(lint(`
       const columns = [{ meta: { style: { th: 'color: red' }, class: { td: () => 'text-teal-500' } } }]
-      const item = { class: 'text-rose-500', ui: { th: 'text-cyan-500' } }
-      const link = { class: { th: 'text-orange-500' } }
+      const link = { label: 'text-rose-500', icon: 'i-lucide-text-red-500' }
+      const options = { ui: { colors: { primary: 'text-red-500' } } }
+      export default defineNuxtConfig({ ui: { prefix: 'text-red-500' } })
     `)).toEqual([])
   })
 })

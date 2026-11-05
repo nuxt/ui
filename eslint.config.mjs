@@ -587,7 +587,7 @@ export default createConfigForNuxt({
   // Hook classes styled in scoped `<style>` blocks or `main.css`, not Tailwind utilities.
   ignore: [
     '^nuxi-', '^landing-', '^(nuxt|vue)-only$', '^(playground-)?wall$', '^horizon$', '^twinkle$',
-    '^stars?$', '^star-layer$', '^dice-(rolling|bumping)$', '^root$', '^squircle$', '^carbon$', '^example$', '^my-table-tbody$'
+    '^stars?$', '^star-layer$', '^dice-(rolling|bumping)$', '^root$', '^theme-studio$', '^squircle$', '^carbon$', '^example$', '^my-table-tbody$'
   ]
 })).append({
   // Rendered by Takumi, which reads the classes itself and not through Tailwind, so without the theme's tokens.

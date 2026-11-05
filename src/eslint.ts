@@ -194,21 +194,20 @@ const APP_CONFIG_MATCHERS = [
   { type: 'objectValues', path: '^ui\\.(?:prose\\.)?[\\w-]+\\.compoundVariants\\[\\d+\\]\\.class.*$' }
 ]
 
-// The classes of a `<UTable>` column, `meta.class.th` and `meta.class.td`, and of its rows, `class.tr` in
-// the table `meta`. The path keeps other `class` keys out, a function value isn't read.
-const TABLE_MATCHERS = [
-  { type: 'objectValues', path: '^(?:.*\\.)?meta\\.class\\.(?:th|td|tr)$' },
-  { type: 'objectValues', path: '^class\\.tr$' }
+// The `class` and `ui` keys every component and item takes, outside the templates: `items` with `{ class }`,
+// `h(UButton, { ui: { base } })`, the table `meta` with `{ class: { tr } }` and its columns with `meta.class.th`.
+// Only one level under each, so the app config and module options, which nest their own `ui`, stay out.
+const CLASS_MATCHERS = [
+  { type: 'objectValues', path: '^(?:.*[.\\]])?(?:class|class\\.[\\w-]+|ui\\.[\\w-]+)(?:\\[\\d+\\])?$' }
 ]
 
 const SELECTORS = [
   ...getDefaultSelectors(),
-  // `const columns: TableColumn<T>[] = [...]`, `const meta: TableMeta<T> = {...}`
-  { kind: 'variable', name: '^.*$', match: TABLE_MATCHERS },
-  // `ref([...])`, `computed(() => [...])` and TanStack's `columnHelper.accessor('id', {...})`
-  { kind: 'callee', name: '^(?:ref|shallowRef|reactive|computed|accessor|display|group)$', match: [...TABLE_MATCHERS, { type: 'anonymousFunctionReturn', match: TABLE_MATCHERS }] },
-  // `:columns` and `:meta` on `<UTable>`
-  { kind: 'attribute', name: '^v-bind:(?:columns|meta)$', match: TABLE_MATCHERS },
+  { kind: 'variable', name: '^.*$', match: CLASS_MATCHERS },
+  // `ref([...])`, `computed(() => [...])`, `h()`, minus the callees of the app config and the module options
+  { kind: 'callee', name: '^(?!(?:defineAppConfig|defineNuxtConfig|use|ui)$).*$', match: [...CLASS_MATCHERS, { type: 'anonymousFunctionReturn', match: CLASS_MATCHERS }] },
+  // `:items`, `:columns`, `:meta` and any other bound prop
+  { kind: 'attribute', name: '^v-bind:(?!class$|ui$).*$', match: CLASS_MATCHERS },
   // `:ui` on any component, `:ui` on `<UTheme>`
   { kind: 'attribute', name: '^v-bind:ui$', match: [{ type: 'objectValues' }] },
   // `:variants` on `<UTheme>`, `{ button: { variant: { soft: { base } } } }`. The depth keeps
@@ -221,7 +220,7 @@ const SELECTORS = [
 
 /**
  * Lints the Tailwind CSS classes of an app that uses Nuxt UI, in templates,
- * `:ui` objects, `<UTheme>`, `<UTable>` columns and the `ui` of `app.config.ts`.
+ * `:ui` objects, `<UTheme>`, the `class` and `ui` of items and table columns and the `ui` of `app.config.ts`.
  *
  * ```ts
  * // eslint.config.mjs
