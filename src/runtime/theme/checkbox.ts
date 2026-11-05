@@ -42,43 +42,42 @@ export default defineTheme({
         wrapper: 'flex flex-col items-center gap-1 text-center'
       }
     },
-    // The label and the description wrap, so they keep a reading line height
-    // instead of the line of a control
+    // The label and the description wrap, so they read the reading line of the size
     size: {
       xs: {
         root: '[--ui-control-box:var(--ui-control-box-xs)] [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(2.5)] [--ui-control-icon-size:calc(var(--ui-control-box)-(--spacing(0.5)))]',
         base: 'size-(--ui-control-box)',
         icon: 'size-(--ui-control-icon-size)',
-        container: 'h-4',
-        wrapper: 'text-(length:--ui-control-text-xs)/4'
+        container: 'h-(--ui-control-text-xs--leading)',
+        wrapper: 'text-(length:--ui-control-text-xs)/(--ui-control-text-xs--leading)'
       },
       sm: {
         root: '[--ui-control-box:var(--ui-control-box-sm)] [--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(3)] [--ui-control-icon-size:calc(var(--ui-control-box)-(--spacing(0.5)))]',
         base: 'size-(--ui-control-box)',
         icon: 'size-(--ui-control-icon-size)',
-        container: 'h-4',
-        wrapper: 'text-(length:--ui-control-text-sm)/4'
+        container: 'h-(--ui-control-text-sm--leading)',
+        wrapper: 'text-(length:--ui-control-text-sm)/(--ui-control-text-sm--leading)'
       },
       md: {
         root: '[--ui-control-box:var(--ui-control-box-md)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon-size:calc(var(--ui-control-box)-(--spacing(0.5)))]',
         base: 'size-(--ui-control-box)',
         icon: 'size-(--ui-control-icon-size)',
-        container: 'h-5',
-        wrapper: 'text-(length:--ui-control-text-md)/5'
+        container: 'h-(--ui-control-text-md--leading)',
+        wrapper: 'text-(length:--ui-control-text-md)/(--ui-control-text-md--leading)'
       },
       lg: {
         root: '[--ui-control-box:var(--ui-control-box-lg)] [--ui-control-px:--spacing(4)] [--ui-control-py:--spacing(4)] [--ui-control-icon-size:calc(var(--ui-control-box)-(--spacing(0.5)))]',
         base: 'size-(--ui-control-box)',
         icon: 'size-(--ui-control-icon-size)',
-        container: 'h-5',
-        wrapper: 'text-(length:--ui-control-text-lg)/5'
+        container: 'h-(--ui-control-text-lg--leading)',
+        wrapper: 'text-(length:--ui-control-text-lg)/(--ui-control-text-lg--leading)'
       },
       xl: {
         root: '[--ui-control-box:var(--ui-control-box-xl)] [--ui-control-px:--spacing(4.5)] [--ui-control-py:--spacing(4.5)] [--ui-control-icon-size:calc(var(--ui-control-box)-(--spacing(0.5)))]',
         base: 'size-(--ui-control-box)',
         icon: 'size-(--ui-control-icon-size)',
-        container: 'h-6',
-        wrapper: 'text-(length:--ui-control-text-xl)/6'
+        container: 'h-(--ui-control-text-xl--leading)',
+        wrapper: 'text-(length:--ui-control-text-xl)/(--ui-control-text-xl--leading)'
       }
     },
     required: {

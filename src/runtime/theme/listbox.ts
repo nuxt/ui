@@ -31,6 +31,7 @@ export default defineTheme({
         loading: 'py-3',
         loadingIcon: 'size-(--ui-control-icon-size)',
         item: 'p-(--ui-control-py) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) gap-(--ui-control-gap)',
+        itemDescription: 'leading-(--ui-control-text-xs--leading)',
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
         itemTrailingIcon: 'size-(--ui-control-icon-size)'
@@ -42,6 +43,7 @@ export default defineTheme({
         loading: 'py-4',
         loadingIcon: 'size-(--ui-control-icon-size)',
         item: 'p-(--ui-control-py) text-(length:--ui-control-text-sm)/(--ui-control-text-sm--line-height) gap-(--ui-control-gap)',
+        itemDescription: 'leading-(--ui-control-text-sm--leading)',
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
         itemTrailingIcon: 'size-(--ui-control-icon-size)'
@@ -53,6 +55,7 @@ export default defineTheme({
         loading: 'py-6',
         loadingIcon: 'size-(--ui-control-icon-size)',
         item: 'p-(--ui-control-py) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) gap-(--ui-control-gap)',
+        itemDescription: 'leading-(--ui-control-text-md--leading)',
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
         itemTrailingIcon: 'size-(--ui-control-icon-size)'
@@ -64,6 +67,7 @@ export default defineTheme({
         loading: 'py-7',
         loadingIcon: 'size-(--ui-control-icon-size)',
         item: 'p-(--ui-control-py) text-(length:--ui-control-text-lg)/(--ui-control-text-lg--line-height) gap-(--ui-control-gap)',
+        itemDescription: 'leading-(--ui-control-text-lg--leading)',
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
         itemTrailingIcon: 'size-(--ui-control-icon-size)'

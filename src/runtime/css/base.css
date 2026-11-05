@@ -212,6 +212,14 @@
     --ui-control-text-lg--line-height: --spacing(4);
     --ui-control-text-xl: --theme(--text-base, 1rem);
     --ui-control-text-xl--line-height: --spacing(5);
+    /* The reading line of each size, for text that wraps or stacks: the labels and
+       descriptions of Checkbox, RadioGroup and Switch, Textarea, the description
+       of a menu item and the tags of a field */
+    --ui-control-text-xs--leading: --spacing(4);
+    --ui-control-text-sm--leading: --spacing(4);
+    --ui-control-text-md--leading: --spacing(5);
+    --ui-control-text-lg--leading: --spacing(5);
+    --ui-control-text-xl--leading: --spacing(6);
 
     @variant sm {
       --ui-gutter: --spacing(6);

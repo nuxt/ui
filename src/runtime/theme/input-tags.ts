@@ -10,6 +10,7 @@ export default defineTheme({
     base: 'flex-1 border-0 bg-transparent text-strong placeholder:text-faint focus:outline-none disabled:cursor-not-allowed',
     // The tags wrap in their own container, so the leading and the trailing stay
     // centered on the box whatever its number of lines
+    // The tags sit on the reading line, so their row gives back the difference
     tags: 'flex flex-wrap items-center flex-1 min-w-0 gap-(--ui-control-gap) px-(--ui-control-px) py-(--ui-control-py)',
     // After the input in the DOM, so the input keeps the first tab stop. The
     // invisible character gives the leading the baseline of the text, see `input.ts`
@@ -27,38 +28,43 @@ export default defineTheme({
     ...fieldGroupVariantRoot,
     size: {
       xs: {
-        root: '[--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] text-[calc(var(--ui-control-text-xs)+var(--ui-control-text-step,0px))]/(--ui-control-text-xs--line-height)',
+        root: '[--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:calc(var(--ui-control-py-xs)-var(--ui-control-text-step,0px)/2)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] text-[calc(var(--ui-control-text-xs)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-xs--line-height)+var(--ui-control-text-step,0px))]',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)',
-        item: 'text-[calc(var(--ui-control-text-xs)-0.125rem)]/[calc(var(--ui-control-text-xs--line-height)-0.25rem)]',
+        tags: 'py-[calc(var(--ui-control-py)-(var(--ui-control-text-xs--leading)-var(--ui-control-text-xs--line-height))/2)]',
+        item: 'text-[calc(var(--ui-control-text-xs)-0.125rem)]/[calc(var(--ui-control-text-xs--leading)-0.25rem)]',
         itemDeleteIcon: 'size-(--ui-control-text-xs)'
       },
       sm: {
-        root: '[--ui-control-px:var(--ui-control-px-sm)] [--ui-control-py:var(--ui-control-py-sm)] [--ui-control-gap:var(--ui-control-gap-sm)] [--ui-control-icon-size:var(--ui-control-icon-size-sm)] text-[calc(var(--ui-control-text-sm)+var(--ui-control-text-step,0px))]/(--ui-control-text-sm--line-height)',
+        root: '[--ui-control-px:var(--ui-control-px-sm)] [--ui-control-py:calc(var(--ui-control-py-sm)-var(--ui-control-text-step,0px)/2)] [--ui-control-gap:var(--ui-control-gap-sm)] [--ui-control-icon-size:var(--ui-control-icon-size-sm)] text-[calc(var(--ui-control-text-sm)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-sm--line-height)+var(--ui-control-text-step,0px))]',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)',
-        item: 'text-[calc(var(--ui-control-text-sm)-0.125rem)]/[calc(var(--ui-control-text-sm--line-height)-0.25rem)]',
+        tags: 'py-[calc(var(--ui-control-py)-(var(--ui-control-text-sm--leading)-var(--ui-control-text-sm--line-height))/2)]',
+        item: 'text-[calc(var(--ui-control-text-sm)-0.125rem)]/[calc(var(--ui-control-text-sm--leading)-0.25rem)]',
         itemDeleteIcon: 'size-(--ui-control-text-sm)'
       },
       md: {
-        root: '[--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] text-[calc(var(--ui-control-text-md)+var(--ui-control-text-step,0px))]/(--ui-control-text-md--line-height)',
+        root: '[--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:calc(var(--ui-control-py-md)-var(--ui-control-text-step,0px)/2)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] text-[calc(var(--ui-control-text-md)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-md--line-height)+var(--ui-control-text-step,0px))]',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)',
-        item: 'text-[calc(var(--ui-control-text-md)-0.125rem)]/[calc(var(--ui-control-text-md--line-height)-0.25rem)]',
+        tags: 'py-[calc(var(--ui-control-py)-(var(--ui-control-text-md--leading)-var(--ui-control-text-md--line-height))/2)]',
+        item: 'text-[calc(var(--ui-control-text-md)-0.125rem)]/[calc(var(--ui-control-text-md--leading)-0.25rem)]',
         itemDeleteIcon: 'size-(--ui-control-text-md)'
       },
       lg: {
-        root: '[--ui-control-px:var(--ui-control-px-lg)] [--ui-control-py:var(--ui-control-py-lg)] [--ui-control-gap:var(--ui-control-gap-lg)] [--ui-control-icon-size:var(--ui-control-icon-size-lg)] text-[calc(var(--ui-control-text-lg)+var(--ui-control-text-step,0px))]/(--ui-control-text-lg--line-height)',
+        root: '[--ui-control-px:var(--ui-control-px-lg)] [--ui-control-py:calc(var(--ui-control-py-lg)-var(--ui-control-text-step,0px)/2)] [--ui-control-gap:var(--ui-control-gap-lg)] [--ui-control-icon-size:var(--ui-control-icon-size-lg)] text-[calc(var(--ui-control-text-lg)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-lg--line-height)+var(--ui-control-text-step,0px))]',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)',
-        item: 'text-[calc(var(--ui-control-text-lg)-0.125rem)]/[calc(var(--ui-control-text-lg--line-height)-0.25rem)]',
+        tags: 'py-[calc(var(--ui-control-py)-(var(--ui-control-text-lg--leading)-var(--ui-control-text-lg--line-height))/2)]',
+        item: 'text-[calc(var(--ui-control-text-lg)-0.125rem)]/[calc(var(--ui-control-text-lg--leading)-0.25rem)]',
         itemDeleteIcon: 'size-(--ui-control-text-lg)'
       },
       xl: {
         root: '[--ui-control-px:var(--ui-control-px-xl)] [--ui-control-py:var(--ui-control-py-xl)] [--ui-control-gap:var(--ui-control-gap-xl)] [--ui-control-icon-size:var(--ui-control-icon-size-xl)] text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)',
-        item: 'text-[calc(var(--ui-control-text-xl)-0.125rem)]/[calc(var(--ui-control-text-xl--line-height)-0.25rem)]',
+        tags: 'py-[calc(var(--ui-control-py)-(var(--ui-control-text-xl--leading)-var(--ui-control-text-xl--line-height))/2)]',
+        item: 'text-[calc(var(--ui-control-text-xl)-0.125rem)]/[calc(var(--ui-control-text-xl--leading)-0.25rem)]',
         itemDeleteIcon: 'size-(--ui-control-text-xl)'
       }
     },

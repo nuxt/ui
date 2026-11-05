@@ -54,16 +54,15 @@ export default defineTheme({
         wrapper: 'flex flex-col items-center gap-1 text-center'
       }
     },
-    // The label and the description wrap, so they keep a reading line height
-    // instead of the line of a control
+    // The label and the description wrap, so they read the reading line of the size
     size: {
       xs: {
         fieldset: 'gap-y-0.5',
         root: '[--ui-control-box:var(--ui-control-box-xs)] [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(2.5)] [--ui-control-icon-size:var(--ui-control-box)]',
         legend: 'text-xs',
         base: 'size-(--ui-control-box)',
-        item: 'text-(length:--ui-control-text-xs)/4',
-        container: 'h-4',
+        item: 'text-(length:--ui-control-text-xs)/(--ui-control-text-xs--leading)',
+        container: 'h-(--ui-control-text-xs--leading)',
         indicator: 'after:size-1'
       },
       sm: {
@@ -71,8 +70,8 @@ export default defineTheme({
         root: '[--ui-control-box:var(--ui-control-box-sm)] [--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(3)] [--ui-control-icon-size:var(--ui-control-box)]',
         legend: 'text-xs',
         base: 'size-(--ui-control-box)',
-        item: 'text-(length:--ui-control-text-sm)/4',
-        container: 'h-4',
+        item: 'text-(length:--ui-control-text-sm)/(--ui-control-text-sm--leading)',
+        container: 'h-(--ui-control-text-sm--leading)',
         indicator: 'after:size-1'
       },
       md: {
@@ -80,8 +79,8 @@ export default defineTheme({
         root: '[--ui-control-box:var(--ui-control-box-md)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon-size:var(--ui-control-box)]',
         legend: 'text-sm',
         base: 'size-(--ui-control-box)',
-        item: 'text-(length:--ui-control-text-md)/5',
-        container: 'h-5',
+        item: 'text-(length:--ui-control-text-md)/(--ui-control-text-md--leading)',
+        container: 'h-(--ui-control-text-md--leading)',
         indicator: 'after:size-1.5'
       },
       lg: {
@@ -89,8 +88,8 @@ export default defineTheme({
         root: '[--ui-control-box:var(--ui-control-box-lg)] [--ui-control-px:--spacing(4)] [--ui-control-py:--spacing(4)] [--ui-control-icon-size:var(--ui-control-box)]',
         legend: 'text-sm',
         base: 'size-(--ui-control-box)',
-        item: 'text-(length:--ui-control-text-lg)/5',
-        container: 'h-5',
+        item: 'text-(length:--ui-control-text-lg)/(--ui-control-text-lg--leading)',
+        container: 'h-(--ui-control-text-lg--leading)',
         indicator: 'after:size-1.5'
       },
       xl: {
@@ -98,8 +97,8 @@ export default defineTheme({
         root: '[--ui-control-box:var(--ui-control-box-xl)] [--ui-control-px:--spacing(4.5)] [--ui-control-py:--spacing(4.5)] [--ui-control-icon-size:var(--ui-control-box)]',
         legend: 'text-base',
         base: 'size-(--ui-control-box)',
-        item: 'text-(length:--ui-control-text-xl)/6',
-        container: 'h-6',
+        item: 'text-(length:--ui-control-text-xl)/(--ui-control-text-xl--leading)',
+        container: 'h-(--ui-control-text-xl--leading)',
         indicator: 'after:size-2'
       }
     },

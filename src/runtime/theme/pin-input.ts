@@ -10,16 +10,16 @@ export default defineTheme({
   variants: {
     size: {
       xs: {
-        base: 'size-6 text-[calc(var(--ui-control-text-xs)+var(--ui-control-text-step,0px))]/(--ui-control-text-xs--line-height)'
+        base: 'size-6 text-[calc(var(--ui-control-text-xs)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-xs--line-height)+var(--ui-control-text-step,0px))]'
       },
       sm: {
-        base: 'size-7 text-[calc(var(--ui-control-text-sm)+var(--ui-control-text-step,0px))]/(--ui-control-text-sm--line-height)'
+        base: 'size-7 text-[calc(var(--ui-control-text-sm)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-sm--line-height)+var(--ui-control-text-step,0px))]'
       },
       md: {
-        base: 'size-8 text-[calc(var(--ui-control-text-md)+var(--ui-control-text-step,0px))]/(--ui-control-text-md--line-height)'
+        base: 'size-8 text-[calc(var(--ui-control-text-md)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-md--line-height)+var(--ui-control-text-step,0px))]'
       },
       lg: {
-        base: 'size-9 text-[calc(var(--ui-control-text-lg)+var(--ui-control-text-step,0px))]/(--ui-control-text-lg--line-height)'
+        base: 'size-9 text-[calc(var(--ui-control-text-lg)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-lg--line-height)+var(--ui-control-text-step,0px))]'
       },
       xl: {
         base: 'size-10 text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)'
