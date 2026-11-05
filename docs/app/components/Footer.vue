@@ -14,7 +14,7 @@ const { frameworks } = useFrameworks()
       v-for="framework in frameworks"
       :key="framework.value"
       :name="framework.icon"
-      :class="[`${framework.value}-only`, 'shrink-0 size-5']"
+      :class="[framework.value === 'nuxt' ? 'nuxt-only' : 'vue-only', 'shrink-0 size-5']"
     />
   </USeparator>
 

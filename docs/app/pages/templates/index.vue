@@ -47,13 +47,13 @@ if (import.meta.server) {
 
             <!-- both counts render, the framework class shows one -->
             <template #meta>
-              <span v-for="(templates, framework) in byFramework" :key="framework" :class="`${framework}-only`">
+              <span v-for="(templates, framework) in byFramework" :key="framework" :class="framework === 'nuxt' ? 'nuxt-only' : 'vue-only'">
                 {{ templates.length }} {{ templates.length === 1 ? 'template' : 'templates' }}
               </span>
             </template>
           </PageSectionHeading>
 
-          <div v-for="(templates, framework) in byFramework" :key="framework" :class="`${framework}-only`" class="flex flex-col divide-y divide-default">
+          <div v-for="(templates, framework) in byFramework" :key="framework" :class="framework === 'nuxt' ? 'nuxt-only' : 'vue-only'" class="flex flex-col divide-y divide-default">
             <article
               v-for="(template, index) in templates"
               :key="template.title"

@@ -120,7 +120,7 @@ const columns: TableColumn<Payment>[] = [{
   meta: {
     class: {
       td: 'text-center font-semibold',
-      th: 'text-right text-green-500 w-48'
+      th: 'text-right text-success w-48'
     }
   },
   cell: ({ row }) => {

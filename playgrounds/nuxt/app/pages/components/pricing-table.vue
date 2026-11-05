@@ -63,7 +63,7 @@ const sections = [
     <!-- Customize specific tier title -->
     <template #team-title="{ tier }">
       <div class="flex items-center gap-2">
-        <UIcon name="i-lucide-crown" class="size-4 text-amber-500" />
+        <UIcon name="i-lucide-crown" class="size-4 text-warning" />
         {{ tier.title }}
       </div>
     </template>
@@ -71,8 +71,8 @@ const sections = [
     <!-- Customize specific section title -->
     <template #section-security-title="{ section }">
       <div class="flex items-center gap-2">
-        <UIcon name="i-lucide-shield-check" class="size-4 text-green-500" />
-        <span class="font-semibold text-green-700">{{ section.title }}</span>
+        <UIcon name="i-lucide-shield-check" class="size-4 text-success" />
+        <span class="font-semibold text-success">{{ section.title }}</span>
       </div>
     </template>
 
