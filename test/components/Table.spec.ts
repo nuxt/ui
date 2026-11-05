@@ -816,6 +816,12 @@ describe('Table', () => {
     expect(resizer.attributes('aria-valuenow')).toBe('120')
   })
 
+  it('falls back to the initial state for an undefined slice of the state prop', async () => {
+    const wrapper = await mountSuspended(Table, { props: { data, state: { sorting: undefined } } })
+
+    expect((wrapper.vm as any).tableApi.atoms.sorting.get()).toEqual([])
+  })
+
   it('keeps a slice of the state prop controlled', async () => {
     const wrapper = await mountSuspended(Table, { props: { data, state: { sorting: [{ id: 'id', desc: true }] } } })
     const tableApi = (wrapper.vm as any).tableApi

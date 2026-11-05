@@ -170,7 +170,7 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
   watchOptions?: WatchOptions
   /**
    * Table features registered on top of the default ones (sorting, column and global filtering, expanding, row selection, column visibility, pinning and sizing, row pinning).
-   * Register pagination, grouping, faceting or column ordering here with their row models, e.g. `{ rowPaginationFeature, paginatedRowModel: createPaginatedRowModel() }`.
+   * Register pagination, grouping, faceting, column ordering, cell selection or cell spanning here with their row models, e.g. `{ rowPaginationFeature, paginatedRowModel: createPaginatedRowModel() }`.
    * Read once when the table is created.
    * @see [Guide](https://tanstack.com/table/v9/docs/guide/features)
    */
@@ -361,7 +361,7 @@ const tableRef = useTemplateRef<HTMLTableElement>('tableRef')
 
 const tableProps = useForwardProps(reactivePick(props, 'autoResetAll', 'debugAll', 'debugCells', 'debugColumns', 'debugHeaders', 'debugRows', 'debugTable', 'defaultColumn', 'getRowId', 'getSubRows', 'initialState', 'mergeOptions', 'renderFallbackValue'))
 
-// What the table renders itself. Pagination, grouping, faceting and column ordering are registered through the `features` prop.
+// What the table renders itself. The other features are registered through the `features` prop.
 const defaultFeatures = {
   columnFilteringFeature,
   columnPinningFeature,
@@ -405,7 +405,7 @@ const id = useId()
 const hasCellSelection = 'cellSelectionFeature' in registeredFeatures
 const isCellSelectionEnabled = computed(() => hasCellSelection && tableApi.options.enableCellSelection !== false)
 const hasCellSpanning = 'cellSpanningFeature' in registeredFeatures
-// A row span can't reach a row the virtualizer doesn't render, so virtualized tables only span columns.
+// `spanRows` can't reach a row the virtualizer doesn't render, so virtualized tables only apply `spanColumns`.
 const hasRowSpanning = hasCellSpanning && !props.virtualize
 
 // Each model is a state slice, so supporting a new slice only takes a `defineModel` and an entry here.
@@ -432,7 +432,7 @@ const initialState = getInitialTableState(registeredFeatures, props.initialState
 const atoms = Object.fromEntries(Object.keys(initialState).filter(key => key in models).map((key) => {
   const model = models[key as keyof typeof models] as Ref<unknown>
   // A slice in the `state` prop stays controlled by it, like TanStack's `state` option.
-  const get = () => props.state && key in props.state ? props.state[key as keyof typeof props.state] : model.value ?? initialState[key]
+  const get = () => (props.state && key in props.state ? props.state[key as keyof typeof props.state] : model.value) ?? initialState[key]
   return [key, {
     get,
     set: (updater: Updater<unknown>) => {
@@ -762,15 +762,15 @@ function getCellSelectionListeners(cell: Cell<TableFeatures, T, unknown>) {
   }
 }
 
-// Until a cell is selected, the first cell takes the roving `tabindex` so the keyboard can reach the grid.
 const renderedRows = computed(() => {
   const center = virtualizer ? virtualItems.value.map(item => centerRows.value[item.index]) : centerRows.value
   return [...topRows.value, ...center, ...bottomRows.value].filter(row => !!row)
 })
 
+// Until a cell is selected, the first selectable cell takes the roving `tabindex` so the keyboard can reach the grid.
 const entryCell = computed(() => {
   for (const row of renderedRows.value) {
-    const cell = row?.getVisibleCells().find(cell => !isCellCovered(cell) && cell.getCanSelect())
+    const cell = row.getVisibleCells().find(cell => !isCellCovered(cell) && cell.getCanSelect())
     if (cell) {
       return cell.id
     }
@@ -853,7 +853,7 @@ function getHeaderId(header: Header<TableFeatures, T, unknown>) {
 // A group header resizes its leaves, so resetting it resets them.
 function resetHeaderSize(header: Header<TableFeatures, T, unknown>) {
   const ids = header.getLeafHeaders().map(leaf => leaf.column.id)
-  tableApi.setColumnSizing(sizing => Object.fromEntries(Object.entries(sizing).filter(([id]) => !ids.includes(id))))
+  tableApi.setColumnSizing(sizing => Object.fromEntries(Object.entries(sizing).filter(([columnId]) => !ids.includes(columnId))))
 }
 
 // Like sorting, a resize handle is only rendered for columns that opt in with `enableResizing: true`.
