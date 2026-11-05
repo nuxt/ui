@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
 import type { TableColumn } from '@nuxt/ui'
+import type { RowSelectionState } from '@tanstack/vue-table'
 
 const UCheckbox = resolveComponent('UCheckbox')
 const UBadge = resolveComponent('UBadge')
@@ -48,13 +49,14 @@ const data = ref<Payment[]>([{
 const columns: TableColumn<Payment>[] = [{
   id: 'select',
   header: ({ table }) => h(UCheckbox, {
-    'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
+    'modelValue': table.getIsAllPageRowsSelected() ? true : table.getIsSomePageRowsSelected() ? 'indeterminate' : false,
     'onUpdate:modelValue': (value: boolean | 'indeterminate') => table.toggleAllPageRowsSelected(!!value),
     'aria-label': 'Select all'
   }),
   cell: ({ row }) => h(UCheckbox, {
     'modelValue': row.getIsSelected(),
-    'onUpdate:modelValue': (value: boolean | 'indeterminate') => row.toggleSelected(!!value),
+    // TanStack reads the new state from `target.checked` and selects a range on shift-click.
+    'onClick': (e: MouseEvent) => row.getToggleSelectedHandler()({ shiftKey: e.shiftKey, target: { checked: !row.getIsSelected() } }),
     'aria-label': 'Select row'
   })
 }, {
@@ -89,8 +91,8 @@ const columns: TableColumn<Payment>[] = [{
   header: 'Amount',
   meta: {
     class: {
-      th: 'text-right',
-      td: 'text-right font-medium'
+      th: 'text-end',
+      td: 'text-end font-medium'
     }
   },
   cell: ({ row }) => {
@@ -104,7 +106,7 @@ const columns: TableColumn<Payment>[] = [{
 
 const table = useTemplateRef('table')
 
-const rowSelection = ref({ 1: true })
+const rowSelection = ref<RowSelectionState>({ 1: true })
 </script>
 
 <template>
@@ -116,7 +118,7 @@ const rowSelection = ref({ 1: true })
       :columns="columns"
     />
 
-    <div class="px-4 py-3.5 border-t border-strong text-sm text-muted">
+    <div class="px-4 py-3.5 border-t border-default text-sm text-muted">
       {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
       {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
     </div>

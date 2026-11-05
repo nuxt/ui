@@ -70,7 +70,7 @@ const columns: TableColumn<User>[] = [{
 function getDropdownActions(user: User): DropdownMenuItem[][] {
   return [
     [{
-      label: 'Copy user Id',
+      label: 'Copy user ID',
       icon: 'i-lucide-copy',
       onSelect: () => {
         copy(user.id.toString())

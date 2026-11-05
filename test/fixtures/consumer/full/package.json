@@ -7,7 +7,7 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@tanstack/vue-table": "^8.21.3",
+    "@tanstack/vue-table": "^9.3.1",
     "@tiptap/core": "^3.31.3",
     "@tiptap/extension-bubble-menu": "^3.31.3",
     "@tiptap/extension-code": "^3.31.3",

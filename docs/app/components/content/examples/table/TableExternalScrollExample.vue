@@ -79,8 +79,8 @@ const columns: TableColumn<Payment>[] = [{
   header: 'Amount',
   meta: {
     class: {
-      th: 'text-right',
-      td: 'text-right font-medium'
+      th: 'text-end',
+      td: 'text-end font-medium'
     }
   },
   cell: ({ row }) => new Intl.NumberFormat('en-US', {
@@ -97,7 +97,7 @@ const columns: TableColumn<Payment>[] = [{
   >
     <div
       ref="title"
-      class="sticky left-0 z-10 flex items-end justify-between gap-4 p-6 bg-tint"
+      class="sticky inset-s-0 z-10 flex items-end justify-between gap-4 p-6 bg-tint"
     >
       <div>
         <h2 class="text-2xl font-bold text-strong">

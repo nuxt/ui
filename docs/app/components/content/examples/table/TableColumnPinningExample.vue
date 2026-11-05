@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
-import type { TableColumn } from '@nuxt/ui'
+import type { TableColumn, TableFeatures } from '@nuxt/ui'
 import type { Column } from '@tanstack/vue-table'
 
 const UBadge = resolveComponent('UBadge')
@@ -48,16 +48,25 @@ const data = ref<Payment[]>([{
 
 const columns: TableColumn<Payment>[] = [{
   accessorKey: 'id',
-  header: ({ column }) => getHeader(column, 'ID', 'left'),
+  header: ({ column }) => getHeader(column, 'ID', 'start'),
   cell: ({ row }) => `#${row.getValue('id')}`,
   size: 381
 }, {
   accessorKey: 'date',
-  header: ({ column }) => getHeader(column, 'Date', 'left'),
+  header: ({ column }) => getHeader(column, 'Date', 'start'),
+  cell: ({ row }) => {
+    return new Date(row.getValue('date')).toLocaleString('en-US', {
+      day: 'numeric',
+      month: 'short',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    })
+  },
   size: 172
 }, {
   accessorKey: 'status',
-  header: ({ column }) => getHeader(column, 'Status', 'left'),
+  header: ({ column }) => getHeader(column, 'Status', 'start'),
   cell: ({ row }) => {
     const color = ({
       paid: 'success' as const,
@@ -70,15 +79,15 @@ const columns: TableColumn<Payment>[] = [{
   size: 103
 }, {
   accessorKey: 'email',
-  header: ({ column }) => getHeader(column, 'Email', 'left'),
+  header: ({ column }) => getHeader(column, 'Email', 'start'),
   size: 232
 }, {
   accessorKey: 'amount',
-  header: ({ column }) => getHeader(column, 'Amount', 'right'),
+  header: ({ column }) => getHeader(column, 'Amount', 'end'),
   meta: {
     class: {
-      th: 'text-right',
-      td: 'text-right font-medium'
+      th: 'text-end',
+      td: 'text-end font-medium'
     }
   },
   cell: ({ row }) => {
@@ -91,7 +100,7 @@ const columns: TableColumn<Payment>[] = [{
   size: 130
 }]
 
-function getHeader(column: Column<Payment>, label: string, position: 'left' | 'right') {
+function getHeader(column: Column<TableFeatures, Payment>, label: string, position: 'start' | 'end') {
   const isPinned = column.getIsPinned()
 
   return h(UButton, {
@@ -107,8 +116,8 @@ function getHeader(column: Column<Payment>, label: string, position: 'left' | 'r
 }
 
 const columnPinning = ref({
-  left: ['id'],
-  right: ['amount']
+  start: ['id'],
+  end: ['amount']
 })
 </script>
 

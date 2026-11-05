@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
 import type { TableColumn, TableRow } from '@nuxt/ui'
+import type { RowSelectionState } from '@tanstack/vue-table'
 
 const UBadge = resolveComponent('UBadge')
 const UCheckbox = resolveComponent('UCheckbox')
@@ -48,7 +49,7 @@ const data = ref<Payment[]>([{
 const columns: TableColumn<Payment>[] = [{
   id: 'select',
   header: ({ table }) => h(UCheckbox, {
-    'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
+    'modelValue': table.getIsAllPageRowsSelected() ? true : table.getIsSomePageRowsSelected() ? 'indeterminate' : false,
     'onUpdate:modelValue': (value: boolean | 'indeterminate') => table.toggleAllPageRowsSelected(!!value),
     'aria-label': 'Select all'
   }),
@@ -89,8 +90,8 @@ const columns: TableColumn<Payment>[] = [{
   header: 'Amount',
   meta: {
     class: {
-      th: 'text-right',
-      td: 'text-right font-medium'
+      th: 'text-end',
+      td: 'text-end font-medium'
     }
   },
   cell: ({ row }) => {
@@ -104,11 +105,11 @@ const columns: TableColumn<Payment>[] = [{
 
 const table = useTemplateRef('table')
 
-const rowSelection = ref<Record<string, boolean>>({ })
+const rowSelection = ref<RowSelectionState>({})
 
-function onSelect(e: Event, row: TableRow<Payment>) {
-  /* If you decide to also select the column you can do this  */
-  row.toggleSelected(!row.getIsSelected())
+function onSelect(_e: Event, row: TableRow<Payment>) {
+  /* If you decide to also select the row you can do this */
+  row.toggleSelected()
 }
 </script>
 
@@ -123,7 +124,7 @@ function onSelect(e: Event, row: TableRow<Payment>) {
         @select="onSelect"
       />
 
-      <div class="px-4 py-3.5 border-t border-strong text-sm text-muted">
+      <div class="px-4 py-3.5 border-t border-default text-sm text-muted">
         {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
         {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
       </div>

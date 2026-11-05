@@ -80,8 +80,8 @@ const columns: TableColumn<Payment>[] = [{
   header: 'Amount',
   meta: {
     class: {
-      th: 'text-right',
-      td: 'text-right font-medium'
+      th: 'text-end',
+      td: 'text-end font-medium'
     }
   },
   cell: ({ row }) => {
@@ -98,7 +98,7 @@ const globalFilter = ref('45')
 
 <template>
   <div class="flex flex-col flex-1 w-full">
-    <div class="flex px-4 py-3.5 border-b border-strong">
+    <div class="flex px-4 py-3.5 border-b border-default">
       <UInput
         v-model="globalFilter"
         class="max-w-sm"
@@ -107,7 +107,6 @@ const globalFilter = ref('45')
     </div>
 
     <UTable
-      ref="table"
       v-model:global-filter="globalFilter"
       :data="data"
       :columns="columns"

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
-import type { TableColumn } from '@nuxt/ui'
-import type { Row } from '@tanstack/vue-table'
+import type { TableColumn, TableRow } from '@nuxt/ui'
 import { useClipboard } from '@vueuse/core'
 
 const UButton = resolveComponent('UButton')
@@ -87,8 +86,8 @@ const columns: TableColumn<Payment>[] = [{
   header: 'Amount',
   meta: {
     class: {
-      th: 'text-right',
-      td: 'text-right font-medium'
+      th: 'text-end',
+      td: 'text-end font-medium'
     }
   },
   cell: ({ row }) => {
@@ -102,7 +101,7 @@ const columns: TableColumn<Payment>[] = [{
   id: 'actions',
   meta: {
     class: {
-      td: 'text-right'
+      td: 'text-end'
     }
   },
   cell: ({ row }) => {
@@ -121,7 +120,7 @@ const columns: TableColumn<Payment>[] = [{
   }
 }]
 
-function getRowItems(row: Row<Payment>) {
+function getRowItems(row: TableRow<Payment>) {
   return [{
     type: 'label',
     label: 'Actions'

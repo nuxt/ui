@@ -52,9 +52,9 @@ const columns: TableColumn<Payment>[] = [{
     'variant': 'ghost',
     'icon': 'i-lucide-chevron-down',
     'square': true,
-    'aria-label': 'Expand',
+    'aria-label': row.getIsExpanded() ? 'Collapse' : 'Expand',
     'ui': {
-      leadingIcon: ['transition-transform', row.getIsExpanded() ? 'duration-200 rotate-180' : '']
+      leadingIcon: ['transition-transform duration-200', row.getIsExpanded() ? 'rotate-180' : '']
     },
     'onClick': () => row.toggleExpanded()
   })
@@ -94,8 +94,8 @@ const columns: TableColumn<Payment>[] = [{
   header: 'Amount',
   meta: {
     class: {
-      th: 'text-right',
-      td: 'text-right font-medium'
+      th: 'text-end',
+      td: 'text-end font-medium'
     }
   },
   cell: ({ row }) => {
