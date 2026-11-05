@@ -125,6 +125,16 @@ const currentStepIndex = computed({
   }
 })
 
+// Reka UI numbers steps from 1, `currentStepIndex` is the 0-based index in `items`
+const rootStep = computed({
+  get() {
+    return currentStepIndex.value + 1
+  },
+  set(value: number) {
+    currentStepIndex.value = value - 1
+  }
+})
+
 const currentStep = computed(() => props.items?.[currentStepIndex.value])
 const hasNext = computed(() => currentStepIndex.value < props.items?.length - 1)
 const hasPrev = computed(() => currentStepIndex.value > 0)
@@ -150,7 +160,7 @@ defineExpose({
 <template>
   <StepperRoot
     v-bind="rootProps"
-    v-model="currentStepIndex"
+    v-model="rootStep"
     :orientation="props.orientation"
     :aria-label="t('stepper.label')"
     data-slot="root"
@@ -160,7 +170,7 @@ defineExpose({
       <StepperItem
         v-for="(item, count) in props.items"
         :key="count"
-        :step="count"
+        :step="count + 1"
         :disabled="item.disabled || props.disabled"
         data-slot="item"
         :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"

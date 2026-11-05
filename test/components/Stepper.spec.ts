@@ -50,6 +50,31 @@ describe('Stepper', () => {
     ['with custom-wrapper slot', { props, slots: { 'custom-wrapper': () => 'Custom wrapper slot' } }]
   ])
 
+  it('announces the current step counting from 1', async () => {
+    const wrapper = await mountSuspended(Stepper, { props: { items } })
+
+    expect(wrapper.get('[role="status"]').text()).toBe('Step 1 of 3')
+
+    await wrapper.setProps({ modelValue: 2 })
+
+    expect(wrapper.get('[role="status"]').text()).toBe('Step 3 of 3')
+  })
+
+  it('announces the current step counting from 1 with valueKey', async () => {
+    const wrapper = await mountSuspended(Stepper, { props: { items, valueKey: 'title', modelValue: 'Shipping' } })
+
+    expect(wrapper.get('[role="status"]').text()).toBe('Step 2 of 3')
+  })
+
+  it('emits the 0-based index when a step trigger is clicked', async () => {
+    const wrapper = await mountSuspended(Stepper, { props: { items, modelValue: 0 } })
+
+    await wrapper.findAll('[data-slot="trigger"]')[1]!.trigger('mousedown', { button: 0 })
+
+    expect(wrapper.emitted('update:modelValue')).toEqual([[1]])
+    expect(wrapper.findAll('[data-slot="item"]')[1]!.attributes('data-state')).toBe('active')
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Stepper, {
       props: {
