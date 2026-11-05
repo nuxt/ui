@@ -215,7 +215,6 @@ export default defineLocale<Messages>({
       label: 'kemajuan'
     },
     table: {
-      loading: 'Memuatkan…',
       noData: 'Tiada data'
     },
     toast: {

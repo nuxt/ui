@@ -215,7 +215,6 @@ export default defineLocale<Messages>({
       label: 'অগ্রগতি'
     },
     table: {
-      loading: 'লোড হচ্ছে…',
       noData: 'কোন তথ্য নেই'
     },
     toast: {

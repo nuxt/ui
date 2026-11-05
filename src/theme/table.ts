@@ -13,7 +13,7 @@ export default (options: Required<ModuleOptions>) => ({
     td: 'p-4 text-sm text-muted whitespace-nowrap [&:has([role=checkbox])]:pe-0',
     separator: 'absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)',
     empty: 'py-6 text-center text-sm text-muted',
-    loading: 'py-6 text-center text-sm text-muted'
+    loading: 'py-6 text-center'
   },
   variants: {
     pinned: {

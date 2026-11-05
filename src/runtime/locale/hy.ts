@@ -215,7 +215,6 @@ export default defineLocale<Messages>({
       label: 'առաջընթաց'
     },
     table: {
-      loading: 'Բեռնում…',
       noData: 'Տվյալներ չկան'
     },
     toast: {

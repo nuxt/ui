@@ -215,7 +215,6 @@ export default defineLocale<Messages>({
       label: 'tiến trình'
     },
     table: {
-      loading: 'Đang tải…',
       noData: 'Không có dữ liệu'
     },
     toast: {

@@ -215,7 +215,6 @@ export default defineLocale<Messages>({
       label: 'πρόοδος'
     },
     table: {
-      loading: 'Φόρτωση…',
       noData: 'Δεν υπάρχουν δεδομένα'
     },
     toast: {

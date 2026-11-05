@@ -215,7 +215,6 @@ export default defineLocale<Messages>({
       label: 'jarayon'
     },
     table: {
-      loading: 'Yuklanmoqda…',
       noData: 'Maʼlumot yoʻq'
     },
     toast: {

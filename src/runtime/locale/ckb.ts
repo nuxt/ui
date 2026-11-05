@@ -216,7 +216,6 @@ export default defineLocale<Messages>({
       label: 'پێشکەوتن'
     },
     table: {
-      loading: 'بارکردن…',
       noData: 'هیچ داتایەک نییە'
     },
     toast: {

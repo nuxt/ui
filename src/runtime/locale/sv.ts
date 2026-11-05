@@ -215,7 +215,6 @@ export default defineLocale<Messages>({
       label: 'förlopp'
     },
     table: {
-      loading: 'Laddar…',
       noData: 'Inga data'
     },
     toast: {

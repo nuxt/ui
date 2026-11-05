@@ -216,7 +216,6 @@ export default defineLocale<Messages>({
       label: 'התקדמות'
     },
     table: {
-      loading: 'טוען…',
       noData: 'אין נתונים להצגה'
     },
     toast: {

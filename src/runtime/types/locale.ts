@@ -219,7 +219,6 @@ export type Messages = {
     label: string
   }
   table: {
-    loading: string
     noData: string
   }
   toast: {

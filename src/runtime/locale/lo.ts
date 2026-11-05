@@ -215,7 +215,6 @@ export default defineLocale<Messages>({
       label: 'ຄວາມຄືບໜ້າ'
     },
     table: {
-      loading: 'ກຳລັງໂຫຼດ…',
       noData: 'ບໍ່ມີຂໍ້ມູນ'
     },
     toast: {

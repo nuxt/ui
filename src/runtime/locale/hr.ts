@@ -215,7 +215,6 @@ export default defineLocale<Messages>({
       label: 'napredak'
     },
     table: {
-      loading: 'Učitavanje…',
       noData: 'Nema podataka'
     },
     toast: {

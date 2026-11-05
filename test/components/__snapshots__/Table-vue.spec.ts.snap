@@ -1710,7 +1710,7 @@ exports[`Table > renders with loading slot correctly 1`] = `
     </thead>
     <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:outline-primary/25 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-3 [&amp;>tr]:data-[selectable=true]:-outline-offset-3 divide-y divide-default">
       <tr>
-        <td colspan="7" data-slot="loading" class="py-6 text-center text-sm text-muted">Loading slot</td>
+        <td colspan="7" data-slot="loading" class="py-6 text-center">Loading slot</td>
       </tr>
     </tbody>
     <tfoot data-slot="tfoot" class="relative [&amp;>[data-slot=separator]]:z-2">
@@ -1775,7 +1775,7 @@ exports[`Table > renders with loading without data correctly 1`] = `
     </thead>
     <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:outline-primary/25 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-3 [&amp;>tr]:data-[selectable=true]:-outline-offset-3 divide-y divide-default">
       <tr>
-        <td colspan="7" data-slot="loading" class="py-6 text-center text-sm text-muted">Loading…</td>
+        <td colspan="7" data-slot="loading" class="py-6 text-center"></td>
       </tr>
     </tbody>
     <tfoot data-slot="tfoot" class="relative [&amp;>[data-slot=separator]]:z-2">

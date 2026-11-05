@@ -20,7 +20,6 @@ import UPinInput from '../../src/runtime/components/PinInput.vue'
 import USkeleton from '../../src/runtime/components/Skeleton.vue'
 import USlider from '../../src/runtime/components/Slider.vue'
 import UStepper from '../../src/runtime/components/Stepper.vue'
-import UTable from '../../src/runtime/components/Table.vue'
 import type { AppProps } from '../../src/runtime/components/App.vue'
 import ar from '../../src/runtime/locale/ar'
 import de from '../../src/runtime/locale/de'
@@ -218,12 +217,6 @@ describe('useLocale', () => {
     const wrapper = await mountInApp({ locale: fr }, () => h(UStepper, { items: [{ title: 'A' }] }))
 
     expect(wrapper.findComponent(UStepper).attributes('aria-label')).toBe('progression')
-  })
-
-  it('shows the Table loading message in the App locale', async () => {
-    const wrapper = await mountInApp({ locale: fr }, () => h(UTable as Component, { loading: true }))
-
-    expect(wrapper.get('[data-slot="loading"]').text()).toBe('Chargement…')
   })
 
   it('labels Toaster in the App locale', async () => {

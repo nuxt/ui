@@ -668,12 +668,12 @@ describe('Table', () => {
     expect(expanded.findAll('td').find(td => td.text() === 'Expanded slot')?.attributes('colspan')).toBe(visibleColumns)
   })
 
-  it('shows the loading message instead of the empty one while loading without data', async () => {
+  it('shows the loading row instead of the empty one while loading without data', async () => {
     const wrapper = await mountSuspended(Table, {
       props: { columns: columns as any, loading: true, empty: 'There is no data' }
     })
 
-    expect(wrapper.find('[data-slot="loading"]').text()).toBe('Loading…')
+    expect(wrapper.find('[data-slot="loading"]').text()).toBe('')
     expect(wrapper.find('[data-slot="empty"]').exists()).toBe(false)
 
     await wrapper.setProps({ loading: false })

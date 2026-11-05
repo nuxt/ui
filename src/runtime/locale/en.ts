@@ -215,7 +215,6 @@ export default defineLocale<Messages>({
       label: 'progress'
     },
     table: {
-      loading: 'Loading…',
       noData: 'No data'
     },
     toast: {
