@@ -276,7 +276,7 @@ onMounted(() => {
           class="absolute w-full -top-px transition-all text-primary shrink-0 pointer-events-none"
           :class="[
             heroAppear ? '' : 'opacity-0',
-            heroAppeared ? 'duration-[400ms]' : 'duration-1000'
+            heroAppeared ? 'duration-400' : 'duration-1000'
           ]"
         >
           <svg viewBox="0 0 1440 181" fill="none" xmlns="http://www.w3.org/2000/svg">

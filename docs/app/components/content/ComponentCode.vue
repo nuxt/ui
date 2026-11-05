@@ -140,7 +140,7 @@ const componentProps = reactive({
 })
 const componentEvents = reactive({
   ...Object.fromEntries((props.model || []).map(key => [`onUpdate:${key}`, (e: any) => setComponentProp(key, e)])),
-  ...(componentProps.modelValue ? { [`onUpdate:modelValue`]: (e: any) => setComponentProp('modelValue', e) } : {})
+  ...(componentProps.modelValue ? { 'onUpdate:modelValue': (e: any) => setComponentProp('modelValue', e) } : {})
 })
 
 function getComponentProp(name: string) {

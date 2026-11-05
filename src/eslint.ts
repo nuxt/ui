@@ -194,8 +194,23 @@ const APP_CONFIG_MATCHERS = [
   { type: 'objectValues', path: '^ui\\.(?:prose\\.)?[\\w-]+\\.compoundVariants\\[\\d+\\]\\.class.*$' }
 ]
 
+// The `class` and `ui` keys every component and item takes, outside the templates: `items` with `{ class }`,
+// `h(UButton, { ui: { base } })`, the table `meta` with `{ class: { tr } }` and its columns with `meta.class.th`.
+// Only one level under each, so the app config, which nests its own `ui`, stays out. The module options
+// that hold a string are left out too, for a Nuxt config built in a variable. The keys of a conditional
+// `class: { 'text-muted': active }` are classes as well, minus the table's `th`, `td` and `tr`.
+const CLASS_MATCHERS = [
+  { type: 'objectValues', path: '^(?:.*[.\\]])?(?:class|class\\.[\\w-]+|ui\\.(?!(?:prefix|tailwindPrefix|componentDetection|scanPackages)(?:\\[|$))[\\w-]+)(?:\\[\\d+\\])*$' },
+  { type: 'objectKeys', path: '^(?:.*[.\\]])?class(?:\\[\\d+\\])*(?:\\.(?!(?:th|td|tr)$)\\w+|\\["[^"]+"\\])$' }
+]
+
 const SELECTORS = [
   ...getDefaultSelectors(),
+  { kind: 'variable', name: '^.*$', match: CLASS_MATCHERS },
+  // `ref([...])`, `computed(() => [...])`, `h()`, minus the callees of the app config and the module options
+  { kind: 'callee', name: '^(?!(?:defineAppConfig|defineNuxtConfig|use|ui)$).*$', match: [...CLASS_MATCHERS, { type: 'anonymousFunctionReturn', match: CLASS_MATCHERS }] },
+  // `:items`, `:columns`, `:meta` and any other bound prop
+  { kind: 'attribute', name: '^v-bind:(?!class$|ui$).*$', match: CLASS_MATCHERS },
   // `:ui` on any component, `:ui` on `<UTheme>`
   { kind: 'attribute', name: '^v-bind:ui$', match: [{ type: 'objectValues' }] },
   // `:variants` on `<UTheme>`, `{ button: { variant: { soft: { base } } } }`. The depth keeps
@@ -208,7 +223,7 @@ const SELECTORS = [
 
 /**
  * Lints the Tailwind CSS classes of an app that uses Nuxt UI, in templates,
- * `:ui` objects, `<UTheme>` and the `ui` of `app.config.ts`.
+ * `:ui` objects, `<UTheme>`, the `class` and `ui` of items and table columns and the `ui` of `app.config.ts`.
  *
  * ```ts
  * // eslint.config.mjs

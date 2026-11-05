@@ -146,6 +146,8 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
                     class="text-muted hover:text-strong"
                   />
 
+                  <!-- GitHub's pink sponsor heart, no color alias points at pink -->
+                  <!-- eslint-disable better-tailwindcss/no-restricted-classes -->
                   <UButton
                     v-if="person.sponsorsListing"
                     :to="person.sponsorsListing"
@@ -157,6 +159,7 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
                     :icon="studioIcons.heart"
                     :ui="{ leadingIcon: 'text-pink-500' }"
                   />
+                  <!-- eslint-enable better-tailwindcss/no-restricted-classes -->
                 </div>
 
                 <div class="ms-auto flex items-baseline gap-1 shrink-0">

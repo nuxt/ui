@@ -31,7 +31,7 @@ const { style } = useScrollShadow(toolbarRef, { orientation: 'horizontal' })
   <div
     ref="toolbarRef"
     class="relative"
-    :class="vertical ? 'flex flex-col gap-3' : 'flex items-center gap-x-1.5 min-w-0 overflow-x-auto p-1 -m-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'"
+    :class="vertical ? 'flex flex-col gap-3' : 'flex items-center gap-x-1.5 min-w-0 overflow-x-auto p-1 -m-1 scrollbar-none [&::-webkit-scrollbar]:hidden'"
     :style="style"
   >
     <UFormField label="Preset" :ui="fieldUi">
