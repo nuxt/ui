@@ -124,7 +124,7 @@ const columns: TableColumn<Payment>[] = [{
   meta: {
     class: {
       td: 'text-center font-semibold',
-      th: 'text-right text-green-500 w-48'
+      th: 'text-end text-success w-48'
     }
   },
   cell: ({ row }) => {
@@ -151,27 +151,23 @@ const columns: TableColumn<Payment>[] = [{
   },
   size: 102
 }, {
-  id: 'name',
-  header: 'Name',
-  columns: [{
-    accessorKey: 'firstName',
-    header: ({ column }) => getPinnedHeader(column, 'First Name', 'start'),
-    meta: {
-      class: {
-        td: 'capitalize'
-      }
-    },
-    size: 128
-  }, {
-    accessorKey: 'lastName',
-    header: ({ column }) => getPinnedHeader(column, 'Last Name', 'start'),
-    meta: {
-      class: {
-        td: 'capitalize'
-      }
-    },
-    size: 128
-  }]
+  accessorKey: 'firstName',
+  header: ({ column }) => getPinnedHeader(column, 'First Name', 'start'),
+  meta: {
+    class: {
+      td: 'capitalize'
+    }
+  },
+  size: 128
+}, {
+  accessorKey: 'lastName',
+  header: ({ column }) => getPinnedHeader(column, 'Last Name', 'start'),
+  meta: {
+    class: {
+      td: 'capitalize'
+    }
+  },
+  size: 128
 }, {
   accessorKey: 'email',
   enableSorting: true,
@@ -197,8 +193,8 @@ const columns: TableColumn<Payment>[] = [{
   header: ({ column }) => getPinnedHeader(column, 'Amount', 'end'),
   meta: {
     class: {
-      th: 'text-right',
-      td: 'text-right font-medium'
+      th: 'text-end',
+      td: 'text-end font-medium'
     }
   },
   footer: ({ table }) => {
@@ -222,7 +218,7 @@ const columns: TableColumn<Payment>[] = [{
   enableHiding: false,
   meta: {
     class: {
-      td: 'text-right'
+      td: 'text-end'
     }
   },
   cell: ({ row }) => {
