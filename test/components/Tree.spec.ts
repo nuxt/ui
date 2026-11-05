@@ -1,4 +1,4 @@
-import { describe, it, expect, test } from 'vitest'
+import { describe, it, expect, test, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
@@ -83,6 +83,46 @@ describe('Tree', () => {
       }
     })
     expect(wrapper.exists()).toBe(true)
+  })
+
+  it.each([
+    ['label', 'c', 2, false],
+    ['name', 'c', 2, false],
+    ['label', 'v', 0, false],
+    ['name', 'v', 0, false],
+    ['label', 'c', 2, true],
+    ['name', 'c', 2, true]
+  ] as const)('handles virtualized typeahead with labelKey %s, key %s, target %s and missing label %s', async (labelKey, key, focusedIndex, missingLabel) => {
+    const height = vi.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockReturnValue(300)
+    const width = vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(300)
+    const wrapper = await mountSuspended(Tree, {
+      attachTo: document.body,
+      props: {
+        items: ['Alpha', 'Bravo', 'Charlie'].map((label, index) => ({
+          id: String(index),
+          ...(missingLabel && index === 1 ? {} : { [labelKey]: label })
+        })),
+        getKey: item => item.id,
+        labelKey,
+        virtualize: true
+      },
+      slots: { 'item-label': () => 'Custom label' }
+    })
+    try {
+      await vi.waitFor(() => expect(wrapper.findAll('[role="treeitem"]')).toHaveLength(3))
+      const rows = wrapper.findAll<HTMLButtonElement>('[role="treeitem"]')
+      rows[0]!.element.focus()
+      await rows[0]!.trigger('click')
+      await rows[0]!.trigger('keydown', { key })
+      await new Promise(resolve => requestAnimationFrame(resolve))
+      await vi.waitFor(() => expect(document.activeElement).toBe(rows[focusedIndex]!.element))
+      expect(rows[0]!.attributes('aria-selected')).toBe('true')
+      expect(rows[2]!.attributes('aria-selected')).toBe('false')
+    } finally {
+      wrapper.unmount()
+      height.mockRestore()
+      width.mockRestore()
+    }
   })
 
   it('passes accessibility tests', async () => {
