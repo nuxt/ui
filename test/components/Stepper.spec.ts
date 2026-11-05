@@ -69,10 +69,10 @@ describe('Stepper', () => {
   it('emits the 0-based index when a step trigger is clicked', async () => {
     const wrapper = await mountSuspended(Stepper, { props: { items, modelValue: 0 } })
 
-    await wrapper.findAll('[data-slot="trigger"]')[1]!.trigger('mousedown', { button: 0 })
+    await wrapper.findAll('[data-slot="stepper-trigger"]')[1]!.trigger('mousedown', { button: 0 })
 
     expect(wrapper.emitted('update:modelValue')).toEqual([[1]])
-    expect(wrapper.findAll('[data-slot="item"]')[1]!.attributes('data-state')).toBe('active')
+    expect(wrapper.findAll('[data-slot="stepper-item"]')[1]!.attributes('data-state')).toBe('active')
   })
 
   it('passes accessibility tests', async () => {
