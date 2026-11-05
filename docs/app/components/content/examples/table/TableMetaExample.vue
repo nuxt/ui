@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { TableColumn } from '@nuxt/ui'
-import type { TableMeta, Row } from '@tanstack/vue-table'
+import type { TableColumn, TableFeatures, TableRow } from '@nuxt/ui'
+import type { TableMeta } from '@tanstack/vue-table'
 
 type Payment = {
   id: string
@@ -86,8 +86,8 @@ const columns: TableColumn<Payment>[] = [{
   header: 'Email',
   meta: {
     class: {
-      th: 'text-left',
-      td: 'text-left'
+      th: 'text-start',
+      td: 'text-start'
     }
   }
 }, {
@@ -95,23 +95,23 @@ const columns: TableColumn<Payment>[] = [{
   header: 'Amount',
   meta: {
     class: {
-      th: 'text-right font-bold text-primary',
-      td: 'text-right font-mono'
+      th: 'text-end font-bold text-primary',
+      td: 'text-end font-mono'
     }
   },
   cell: ({ row }) => {
     const amount = Number.parseFloat(row.getValue('amount'))
     const formatted = new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD'
+      currency: 'EUR'
     }).format(amount)
     return h('span', { class: 'font-semibold text-success' }, formatted)
   }
 }]
 
-const meta: TableMeta<Payment> = {
+const meta: TableMeta<TableFeatures, Payment> = {
   class: {
-    tr: (row: Row<Payment>) => {
+    tr: (row: TableRow<Payment>) => {
       if (row.original.status === 'failed') {
         return 'bg-error/10'
       }

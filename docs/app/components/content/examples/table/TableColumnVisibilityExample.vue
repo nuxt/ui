@@ -81,8 +81,8 @@ const columns: TableColumn<Payment>[] = [{
   header: 'Amount',
   meta: {
     class: {
-      th: 'text-right',
-      td: 'text-right font-medium'
+      th: 'text-end',
+      td: 'text-end font-medium'
     }
   },
   cell: ({ row }) => {
@@ -103,14 +103,14 @@ const columnVisibility = ref({
 
 <template>
   <div class="flex flex-col flex-1 w-full">
-    <div class="flex justify-end px-4 py-3.5 border-b border-strong">
+    <div class="flex justify-end px-4 py-3.5 border-b border-default">
       <UDropdownMenu
         :items="table?.tableApi?.getAllColumns().filter(column => column.getCanHide()).map(column => ({
           label: upperFirst(column.id),
           type: 'checkbox' as const,
           checked: column.getIsVisible(),
           onUpdateChecked(checked: boolean) {
-            table?.tableApi?.getColumn(column.id)?.toggleVisibility(!!checked)
+            column.toggleVisibility(checked)
           },
           onSelect(e: Event) {
             e.preventDefault()
