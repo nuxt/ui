@@ -307,10 +307,6 @@ function randomize() {
 const rowSelection = ref<RowSelectionState>({})
 
 function onSelect(_e: Event, row: TableRow<Payment>) {
-  // With cell selection, a click selects cells, the checkboxes still select rows.
-  if (cellSelectable.value) {
-    return
-  }
   row.toggleSelected()
 }
 
@@ -413,7 +409,7 @@ onMounted(() => {
         :ui="resizable ? { base: 'table-fixed', td: 'truncate' } : undefined"
         sticky
         class="border border-default rounded-sm"
-        @select="onSelect"
+        :on-select="cellSelectable ? undefined : onSelect"
         @contextmenu="onContextmenu"
         @pointermove="(ev: PointerEvent) => {
           popoverAnchor.x = ev.clientX
