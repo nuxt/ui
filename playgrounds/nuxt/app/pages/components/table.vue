@@ -2,8 +2,8 @@
 import { h, resolveComponent } from 'vue'
 import { upperFirst } from 'scule'
 import type { TableColumn, TableFeatures, TableRow } from '@nuxt/ui'
-import type { Column, RowPinningState, RowSelectionState } from '@tanstack/vue-table'
-import { createPaginatedRowModel, rowPaginationFeature } from '@tanstack/vue-table'
+import type { CellSelectionState, Column, ColumnPinningState, RowPinningState, RowSelectionState } from '@tanstack/vue-table'
+import { cellSelectionFeature, createPaginatedRowModel, rowPaginationFeature } from '@tanstack/vue-table'
 import { useClipboard, refDebounced } from '@vueuse/core'
 
 const UButton = resolveComponent('UButton')
@@ -27,6 +27,9 @@ type Payment = {
 const table = useTemplateRef('table')
 
 const virtualize = ref(false)
+const resizable = ref(false)
+const resizeOnEnd = ref(false)
+const cellSelectable = ref(false)
 
 const statuses: Payment['status'][] = ['paid', 'failed', 'refunded']
 const domains = ['gmail.com', 'outlook.com', 'yahoo.com', 'company.com', 'mail.com']
@@ -147,23 +150,27 @@ const columns: TableColumn<Payment>[] = [{
   },
   size: 102
 }, {
-  accessorKey: 'firstName',
-  header: ({ column }) => getPinnedHeader(column, 'First Name', 'start'),
-  meta: {
-    class: {
-      td: 'capitalize'
-    }
-  },
-  size: 128
-}, {
-  accessorKey: 'lastName',
-  header: ({ column }) => getPinnedHeader(column, 'Last Name', 'start'),
-  meta: {
-    class: {
-      td: 'capitalize'
-    }
-  },
-  size: 128
+  id: 'name',
+  header: 'Name',
+  columns: [{
+    accessorKey: 'firstName',
+    header: ({ column }) => getPinnedHeader(column, 'First Name', 'start'),
+    meta: {
+      class: {
+        td: 'capitalize'
+      }
+    },
+    size: 128
+  }, {
+    accessorKey: 'lastName',
+    header: ({ column }) => getPinnedHeader(column, 'Last Name', 'start'),
+    meta: {
+      class: {
+        td: 'capitalize'
+      }
+    },
+    size: 128
+  }]
 }, {
   accessorKey: 'email',
   enableSorting: true,
@@ -250,12 +257,19 @@ function getPinnedHeader(column: Column<TableFeatures, Payment>, label: string, 
 }
 
 const loading = ref(true)
-const columnPinning = ref({
+const columnPinning = ref<ColumnPinningState>({
   start: ['pin', 'select'],
   end: ['actions']
 })
 
-const paginationFeatures = { rowPaginationFeature, paginatedRowModel: createPaginatedRowModel() }
+const cellSelection = ref<CellSelectionState>([])
+
+// `features` and the columns are read once, so the table is recreated when they change.
+const features = computed(() => ({
+  ...(virtualize.value ? {} : { rowPaginationFeature, paginatedRowModel: createPaginatedRowModel() }),
+  ...(cellSelectable.value ? { cellSelectionFeature } : {})
+}))
+const tableKey = computed(() => [virtualize.value, cellSelectable.value, resizable.value].join('-'))
 
 const pagination = ref({
   pageIndex: 0,
@@ -318,6 +332,9 @@ onMounted(() => {
 <template>
   <Navbar>
     <USwitch v-model="virtualize" label="Virtualize" />
+    <USwitch v-model="resizable" label="Resizable" />
+    <USwitch v-model="resizeOnEnd" :disabled="!resizable" label="Resize on end" />
+    <USwitch v-model="cellSelectable" label="Cell selection" />
 
     <UInput
       :model-value="(table?.tableApi?.getColumn('email')?.getFilterValue() as string)"
@@ -357,16 +374,20 @@ onMounted(() => {
     <UContextMenu :items="contextmenuItems">
       <UTable
         ref="table"
-        :key="String(virtualize)"
+        :key="tableKey"
         v-model:row-pinning="rowPinning"
+        v-model:column-pinning="columnPinning"
+        v-model:row-selection="rowSelection"
+        v-model:cell-selection="cellSelection"
         v-model:pagination="pagination"
         :data="data"
         :columns="columns"
-        :column-pinning="columnPinning"
-        :row-selection="rowSelection"
         :loading="loading"
         :virtualize="virtualize"
-        :features="virtualize ? undefined : paginationFeatures"
+        :features="features"
+        :default-column="{ enableResizing: resizable }"
+        :options="{ columnResizeMode: resizeOnEnd ? 'onEnd' : 'onChange' }"
+        :ui="resizable ? { base: 'table-fixed', td: 'truncate' } : undefined"
         sticky
         class="border border-default rounded-sm"
         @select="onSelect"
@@ -395,6 +416,9 @@ onMounted(() => {
       <div class="text-sm text-muted">
         {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
         {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
+        <template v-if="cellSelectable">
+          {{ table?.tableApi?.getSelectedCellCount?.() || 0 }} cell(s) selected.
+        </template>
       </div>
 
       <div class="flex items-center gap-1.5">
