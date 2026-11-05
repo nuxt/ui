@@ -190,12 +190,20 @@ props:
 
 ### Color
 
-Use the `color` prop to set the color of the items that are not pressed. Defaults to `neutral`.
+Use the `color` and `active-color` props to set the color of the items when not pressed and when pressed. Defaults to `neutral` and `primary`.
 
 ::component-code
 ---
 items:
   color:
+    - primary
+    - secondary
+    - success
+    - info
+    - warning
+    - error
+    - neutral
+  activeColor:
     - primary
     - secondary
     - success
@@ -212,6 +220,7 @@ externalTypes:
   - ToggleGroupItem[]
 props:
   color: neutral
+  activeColor: neutral
   defaultValue: 'week'
   items:
     - label: 'Day'
@@ -225,19 +234,11 @@ props:
 
 ### Variant
 
-Use the `variant` prop to set the variant of the items that are not pressed. Defaults to `ghost`.
+Use the `variant` and `active-variant` props to set the variant of the items when not pressed and when pressed. Defaults to `ghost` and `soft`.
 
 ::component-code
 ---
 items:
-  color:
-    - primary
-    - secondary
-    - success
-    - info
-    - warning
-    - error
-    - neutral
   variant:
     - solid
     - outline
@@ -245,77 +246,6 @@ items:
     - subtle
     - ghost
     - link
-ignore:
-  - items
-  - defaultValue
-external:
-  - items
-externalTypes:
-  - ToggleGroupItem[]
-props:
-  color: neutral
-  variant: outline
-  defaultValue: 'week'
-  items:
-    - label: 'Day'
-      value: 'day'
-    - label: 'Week'
-      value: 'week'
-    - label: 'Month'
-      value: 'month'
----
-::
-
-### Active Color
-
-Use the `active-color` prop to set the color of the pressed items. Defaults to `primary`.
-
-::component-code
----
-items:
-  activeColor:
-    - primary
-    - secondary
-    - success
-    - info
-    - warning
-    - error
-    - neutral
-ignore:
-  - items
-  - defaultValue
-external:
-  - items
-externalTypes:
-  - ToggleGroupItem[]
-props:
-  activeColor: neutral
-  defaultValue: 'week'
-  items:
-    - label: 'Day'
-      value: 'day'
-    - label: 'Week'
-      value: 'week'
-    - label: 'Month'
-      value: 'month'
----
-::
-
-### Active Variant
-
-Use the `active-variant` prop to set the variant of the pressed items. Defaults to `soft`.
-
-::component-code
----
-items:
-  activeColor:
-    - primary
-    - secondary
-    - success
-    - info
-    - warning
-    - error
-    - neutral
   activeVariant:
     - solid
     - outline
@@ -331,8 +261,8 @@ external:
 externalTypes:
   - ToggleGroupItem[]
 props:
-  activeColor: primary
-  activeVariant: solid
+  variant: outline
+  activeVariant: subtle
   defaultValue: 'week'
   items:
     - label: 'Day'

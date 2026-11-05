@@ -55,7 +55,7 @@ The Toggle component extends the [Button](/docs/components/button) component, so
 
 ### Color
 
-Use the `color` prop to set the color of the Toggle when not pressed. Defaults to `neutral`.
+Use the `color` and `active-color` props to set the color of the Toggle when not pressed and when pressed. Defaults to `neutral` and `primary`.
 
 ::component-code
 ---
@@ -68,52 +68,6 @@ items:
     - warning
     - error
     - neutral
-ignore:
-  - label
-props:
-  color: neutral
-  label: Bold
----
-::
-
-### Variant
-
-Use the `variant` prop to set the variant of the Toggle when not pressed. Defaults to `ghost`.
-
-::component-code
----
-items:
-  color:
-    - primary
-    - secondary
-    - success
-    - info
-    - warning
-    - error
-    - neutral
-  variant:
-    - solid
-    - outline
-    - soft
-    - subtle
-    - ghost
-    - link
-ignore:
-  - label
-props:
-  color: neutral
-  variant: outline
-  label: Bold
----
-::
-
-### Active Color
-
-Use the `active-color` prop to set the color of the Toggle when pressed. Defaults to `primary`.
-
-::component-code
----
-items:
   activeColor:
     - primary
     - secondary
@@ -126,27 +80,27 @@ ignore:
   - label
   - defaultValue
 props:
+  color: neutral
   activeColor: neutral
   defaultValue: true
   label: Bold
 ---
 ::
 
-### Active Variant
+### Variant
 
-Use the `active-variant` prop to set the variant of the Toggle when pressed. Defaults to `soft`.
+Use the `variant` and `active-variant` props to set the variant of the Toggle when not pressed and when pressed. Defaults to `ghost` and `soft`.
 
 ::component-code
 ---
 items:
-  activeColor:
-    - primary
-    - secondary
-    - success
-    - info
-    - warning
-    - error
-    - neutral
+  variant:
+    - solid
+    - outline
+    - soft
+    - subtle
+    - ghost
+    - link
   activeVariant:
     - solid
     - outline
@@ -158,8 +112,8 @@ ignore:
   - label
   - defaultValue
 props:
-  activeColor: primary
-  activeVariant: solid
+  variant: outline
+  activeVariant: subtle
   defaultValue: true
   label: Bold
 ---
