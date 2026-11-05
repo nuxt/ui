@@ -7,7 +7,7 @@ export default defineTheme({
     list: 'flex flex-col gap-2',
     item: 'relative',
     link: 'group text-sm flex items-center gap-1.5 rounded-sm outline-focus focus-visible:outline-(length:--ui-focus-width)',
-    linkLeadingIcon: 'size-5 shrink-0',
+    linkLeadingIcon: 'size-4 shrink-0',
     linkLabel: 'truncate',
     linkLabelExternalIcon: 'size-3 absolute top-0 text-faint'
   },

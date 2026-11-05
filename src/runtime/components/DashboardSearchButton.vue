@@ -58,11 +58,13 @@ import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
+import { useFieldGroup } from '../composables/useFieldGroup'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useLocale } from '../composables/useLocale'
 import { useDashboard } from '../utils/dashboard'
 import { omit, transformUI } from '../utils'
 import { tv } from '../utils/tv'
+import { getItemSize } from '../utils/size'
 import UButton from './Button.vue'
 import UKbd from './Kbd.vue'
 import UTooltip from './Tooltip.vue'
@@ -78,6 +80,9 @@ const _props = withDefaults(defineProps<DashboardSearchButtonProps>(), {
 const slots = defineSlots<ButtonSlots>()
 
 const props = useComponentProps('dashboardSearchButton', _props, theme)
+const { size: fieldGroupSize } = useFieldGroup<DashboardSearchButtonProps>(_props)
+// The kbds follow the size the button renders at, a wrapping FieldGroup included
+const kbdSize = computed(() => getItemSize(fieldGroupSize.value ?? props.size))
 
 const [DefineButtonTemplate, ReuseButtonTemplate] = createReusableTemplate()
 
@@ -124,7 +129,7 @@ const ui = computed(() => tv(theme, overrides.value)({
         <span data-slot="dashboard-search-button-trailing" :class="ui.trailing({ class: props.ui?.trailing })">
           <slot name="trailing" :ui="uiProxy">
             <template v-if="props.kbds?.length">
-              <UKbd v-for="(kbd, index) in props.kbds" :key="index" variant="subtle" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
+              <UKbd v-for="(kbd, index) in props.kbds" :key="index" variant="subtle" :size="kbdSize" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
             </template>
           </slot>
         </span>

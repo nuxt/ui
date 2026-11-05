@@ -61,14 +61,14 @@ const groups = [
         <div class="flex items-center gap-1">
           <UButton color="neutral" variant="ghost" label="Open Command" class="text-faint" size="xs">
             <template #trailing>
-              <UKbd value="enter" />
+              <UKbd size="sm" value="enter" />
             </template>
           </UButton>
           <USeparator orientation="vertical" class="h-4" />
           <UButton color="neutral" variant="ghost" label="Actions" class="text-faint" size="xs">
             <template #trailing>
-              <UKbd value="meta" />
-              <UKbd value="k" />
+              <UKbd size="sm" value="meta" />
+              <UKbd size="sm" value="k" />
             </template>
           </UButton>
         </div>

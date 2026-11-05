@@ -19,12 +19,12 @@ export type ControlSize = typeof CONTROL_SIZES[number]
  */
 export const CONTROL_COLUMNS = [
   { key: 'px', label: 'X', values: [8, 10, 10, 12, 12], density: true },
-  { key: 'py', label: 'Y', values: [4, 6, 6, 8, 8], density: true },
+  { key: 'py', label: 'Y', values: [4, 6, 8, 10, 10], density: true },
   { key: 'gap', label: 'Gap', values: [4, 6, 6, 8, 8], density: true },
-  { key: 'icon-size', label: 'Icon', values: [16, 16, 20, 20, 24], density: false },
+  { key: 'icon-size', label: 'Icon', values: [16, 16, 16, 16, 20], density: false },
   { key: 'box', label: 'Box', values: [12, 14, 16, 18, 20], density: false },
   { key: 'text', label: 'Text', values: [12, 12, 14, 14, 16], density: false },
-  { key: 'text--line-height', label: 'Line', values: [16, 16, 20, 20, 24], density: false }
+  { key: 'text--line-height', label: 'Line', values: [16, 16, 16, 16, 20], density: false }
 ] as const
 
 export type ControlColumn = typeof CONTROL_COLUMNS[number]['key']

@@ -14,41 +14,42 @@ export default defineTheme({
   },
   variants: {
     color: colorVariant({ root: '' }),
+    // The label and the description wrap, so they read the reading line of the size
     size: {
       xs: {
         root: '[--ui-control-box:var(--ui-control-box-xs)]',
         base: 'group/switch w-[calc(var(--ui-control-box)*2+(--spacing(1)))]',
-        container: 'h-(--ui-control-text-xs--line-height)',
+        container: 'h-(--ui-control-text-xs--leading)',
         thumb: 'size-(--ui-control-box) data-[state=checked]:translate-x-(--ui-control-box) data-[state=checked]:rtl:-translate-x-(--ui-control-box)',
-        wrapper: 'text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height)'
+        wrapper: 'text-(length:--ui-control-text-xs)/(--ui-control-text-xs--leading)'
       },
       sm: {
         root: '[--ui-control-box:var(--ui-control-box-sm)]',
         base: 'w-[calc(var(--ui-control-box)*2+(--spacing(1)))]',
-        container: 'h-(--ui-control-text-sm--line-height)',
+        container: 'h-(--ui-control-text-sm--leading)',
         thumb: 'size-(--ui-control-box) data-[state=checked]:translate-x-(--ui-control-box) data-[state=checked]:rtl:-translate-x-(--ui-control-box)',
-        wrapper: 'text-(length:--ui-control-text-sm)/(--ui-control-text-sm--line-height)'
+        wrapper: 'text-(length:--ui-control-text-sm)/(--ui-control-text-sm--leading)'
       },
       md: {
         root: '[--ui-control-box:var(--ui-control-box-md)]',
         base: 'w-[calc(var(--ui-control-box)*2+(--spacing(1)))]',
-        container: 'h-(--ui-control-text-md--line-height)',
+        container: 'h-(--ui-control-text-md--leading)',
         thumb: 'size-(--ui-control-box) data-[state=checked]:translate-x-(--ui-control-box) data-[state=checked]:rtl:-translate-x-(--ui-control-box)',
-        wrapper: 'text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height)'
+        wrapper: 'text-(length:--ui-control-text-md)/(--ui-control-text-md--leading)'
       },
       lg: {
         root: '[--ui-control-box:var(--ui-control-box-lg)]',
         base: 'w-[calc(var(--ui-control-box)*2+(--spacing(1)))]',
-        container: 'h-(--ui-control-text-lg--line-height)',
+        container: 'h-(--ui-control-text-lg--leading)',
         thumb: 'size-(--ui-control-box) data-[state=checked]:translate-x-(--ui-control-box) data-[state=checked]:rtl:-translate-x-(--ui-control-box)',
-        wrapper: 'text-(length:--ui-control-text-lg)/(--ui-control-text-lg--line-height)'
+        wrapper: 'text-(length:--ui-control-text-lg)/(--ui-control-text-lg--leading)'
       },
       xl: {
         root: '[--ui-control-box:var(--ui-control-box-xl)]',
         base: 'w-[calc(var(--ui-control-box)*2+(--spacing(1)))]',
-        container: 'h-(--ui-control-text-xl--line-height)',
+        container: 'h-(--ui-control-text-xl--leading)',
         thumb: 'size-(--ui-control-box) data-[state=checked]:translate-x-(--ui-control-box) data-[state=checked]:rtl:-translate-x-(--ui-control-box)',
-        wrapper: 'text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)'
+        wrapper: 'text-(length:--ui-control-text-xl)/(--ui-control-text-xl--leading)'
       }
     },
     checked: {
