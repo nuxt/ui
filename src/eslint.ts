@@ -200,8 +200,8 @@ const APP_CONFIG_MATCHERS = [
 // that hold a string are left out too, for a Nuxt config built in a variable. The keys of a conditional
 // `class: { 'text-muted': active }` are classes as well, minus the table's `th`, `td` and `tr`.
 const CLASS_MATCHERS = [
-  { type: 'objectValues', path: '^(?:.*[.\\]])?(?:class|class\\.[\\w-]+|ui\\.(?!(?:prefix|tailwindPrefix|componentDetection|scanPackages)(?:\\[|$))[\\w-]+)(?:\\[\\d+\\])?$' },
-  { type: 'objectKeys', path: '^(?:.*[.\\]])?class(?:\\[\\d+\\])?(?:\\.(?!(?:th|td|tr)$)\\w+|\\["[^"]+"\\])$' }
+  { type: 'objectValues', path: '^(?:.*[.\\]])?(?:class|class\\.[\\w-]+|ui\\.(?!(?:prefix|tailwindPrefix|componentDetection|scanPackages)(?:\\[|$))[\\w-]+)(?:\\[\\d+\\])*$' },
+  { type: 'objectKeys', path: '^(?:.*[.\\]])?class(?:\\[\\d+\\])*(?:\\.(?!(?:th|td|tr)$)\\w+|\\["[^"]+"\\])$' }
 ]
 
 const SELECTORS = [
