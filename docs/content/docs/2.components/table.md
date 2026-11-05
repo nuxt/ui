@@ -20,7 +20,7 @@ links:
 
 The Table component is built on top of [TanStack Table v9](https://tanstack.com/table/v9) and is powered by the [useTable](https://tanstack.com/table/v9/docs/framework/vue/reference/functions/useTable) composable to provide a flexible and fully type-safe API.
 
-It renders your data as rows and columns and supports sorting, filtering, pagination, row selection, expansion, grouping, pinning and virtualization, so you can build everything from a simple data table to a fully featured data grid.
+It renders your data as rows and columns and supports sorting, filtering, pagination, row and cell selection, expansion, grouping, pinning, resizing and virtualization, so you can build everything from a simple data table to a fully featured data grid.
 
 TanStack Table is an optional peer dependency, install it first:
 
@@ -173,7 +173,7 @@ highlights:
 
 The table registers the TanStack Table features it renders: sorting, column and global filtering, expanding, row selection, column visibility, column pinning, sizing and resizing, and row pinning, along with their row models and the built-in sorting, filtering and aggregation functions `auto` picks.
 
-Use the `features` prop to register other [features](https://tanstack.com/table/v9/docs/guide/features) like [pagination](#with-pagination), [grouping](#with-grouped-rows), [cell selection](#with-cell-selection), [cell spanning](#with-column-span), [faceting](#with-column-faceting) or [column ordering](#with-column-ordering), along with the row models some of them need. It is read once when the table is created, so declare it in your script.
+Use the `features` prop to register other [features](https://tanstack.com/table/v9/docs/guide/features) like [pagination](#with-pagination), [grouping](#with-grouped-rows), [cell selection](#with-cell-selection), [cell spanning](#with-cell-spanning), [faceting](#with-column-faceting) or [column ordering](#with-column-ordering), along with the row models some of them need. It is read once when the table is created, so declare it in your script.
 
 ```vue
 <script setup lang="ts">
@@ -386,8 +386,8 @@ You can group rows based on a given column value and show/hide sub rows via some
 
 * Add `grouping` prop with an array of column ids you want to group by.
 * Add `features` prop with `columnGroupingFeature`, `rowAggregationFeature`, and `groupedRowModel: createGroupedRowModel()`, all imported from `@tanstack/vue-table`.
-* Add `options` prop for the grouping options like `groupedColumnMode`, and `autoResetExpanded: false` to keep groups open when the data changes.
-* Add `initial-state` prop like `{ expanded: true }` to show the groups expanded.
+* Add `options` prop for the grouping options like `groupedColumnMode`. Set `autoResetExpanded: false` there to keep groups open when the data changes.
+* Optionally add `initial-state` prop like `{ expanded: true }` to show the groups expanded.
 * Expand rows via `row.toggleExpanded()` method on any cell of the row. Keep in mind, it also toggles `#expanded` slot.
 * Use `aggregationFn` on column definition to define how to aggregate the rows.
 * Use `aggregatedCell` on column definition to render the aggregated value on grouped rows. Without it, TanStack Table renders the formatted value.
@@ -398,8 +398,8 @@ prettier: true
 collapse: true
 name: 'table-grouped-rows-example'
 highlights:
-  - 169
-  - 179
+  - 168
+  - 181
 class: '!p-0'
 ---
 ::
@@ -414,13 +414,10 @@ prettier: true
 collapse: true
 name: 'table-row-pinning-example'
 overflowHidden: true
+class: '!p-0'
 highlights:
   - 91
   - 107
-  - 160
-  - 165
-  - 168
-class: '!p-0'
 ---
 ::
 
@@ -449,7 +446,7 @@ You can use the `row-selection` prop to control the selection state of the rows 
 ::
 
 ::note
-The cell checkboxes call `row.getToggleSelectedHandler()` on click, so shift-clicking a row selects every row from the previously clicked one. Disable it with `:options="{ enableRowRangeSelection: false }"`.
+The cell checkboxes call `row.getToggleSelectedHandler()` on click, so shift-clicking a checkbox selects every row from the previously clicked one. Disable it with `:options="{ enableRowRangeSelection: false }"`.
 ::
 
 ### With row select event
@@ -466,7 +463,7 @@ prettier: true
 collapse: true
 name: 'table-row-select-event-example'
 highlights:
-  - 127
+  - 131
   - 134
 class: '!p-0'
 ---
@@ -502,7 +499,7 @@ class: '!p-0'
 
 ### With cell selection
 
-You can select cells like in a spreadsheet with the TanStack Table [Cell Selection APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/cell-selection) by registering `cellSelectionFeature` through the `features` prop. Click or drag to select a range, shift-click to extend it and :kbd{value="ctrl"} or :kbd{value="meta"} click to add another one. The arrow keys move the selection and extend it with :kbd{value="shift"}, :kbd{value="meta"} :kbd{value="A"} selects every cell and :kbd{value="escape"} collapses the selection.
+You can select cells like in a spreadsheet with the TanStack Table [Cell Selection APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/cell-selection) by registering `cellSelectionFeature` through the `features` prop. Click or drag to select a range, shift-click to extend it and :kbd{value="meta"} click to add another one. The arrow keys move the selection and extend it with :kbd{value="shift"}, :kbd{value="meta"} :kbd{value="A"} selects every cell and :kbd{value="escape"} collapses the selection.
 
 ::component-example
 ---
@@ -510,6 +507,8 @@ prettier: true
 collapse: true
 name: 'table-cell-selection-example'
 class: '!p-0'
+highlights:
+  - 90
 ---
 ::
 
@@ -557,16 +556,19 @@ class: '!p-0'
 ---
 ::
 
-### With column span
+### With cell spanning
 
-You can merge cells with the TanStack Table [Cell Spanning APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/cell-spanning) by registering `cellSpanningFeature` through the `features` prop. Use `spanRows` on a column definition to merge consecutive cells with the same value, and `spanColumns` to make a cell span the columns after it.
+You can merge cells with the TanStack Table [Cell Spanning APIs](https://tanstack.com/table/v9/docs/framework/vue/guide/cell-spanning) by registering `cellSpanningFeature` through the `features` prop. Use `spanRows` on a column definition to merge consecutive cells with the same value, and `spanColumns` to make a cell span the columns after it, like the total row of this example.
 
 ::component-example
 ---
 prettier: true
 collapse: true
-name: 'table-column-span-example'
+name: 'table-cell-spanning-example'
 class: '!p-0'
+highlights:
+  - 44
+  - 46
 ---
 ::
 
@@ -600,8 +602,8 @@ prettier: true
 collapse: true
 name: 'table-column-sorting-reusable-example'
 highlights:
-  - 115
-  - 166
+  - 118
+  - 170
 class: '!p-0'
 ---
 ::
@@ -645,6 +647,9 @@ prettier: true
 collapse: true
 name: 'table-column-resizing-example'
 class: '!p-0'
+highlights:
+  - 94
+  - 95
 ---
 ::
 
@@ -682,6 +687,8 @@ prettier: true
 collapse: true
 name: 'table-column-ordering-example'
 class: '!p-0'
+highlights:
+  - 99
 ---
 ::
 
@@ -738,6 +745,9 @@ prettier: true
 collapse: true
 name: 'table-column-faceting-example'
 class: '!p-0'
+highlights:
+  - 105
+  - 109
 ---
 ::
 
@@ -785,15 +795,15 @@ This example uses `useLazyFetch` with `server: false` to fetch data on the clien
 
 ### With infinite scroll
 
-If you use server-side pagination, you can use the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/#useinfinitescroll) composable to load more data  as the user scrolls.
+If you use server-side pagination, you can use the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/#useinfinitescroll) composable to load more data as the user scrolls.
 
 ::component-example
 ---
 prettier: true
 collapse: true
 highlights:
-  - 72
-  - 83
+  - 68
+  - 81
 overflowHidden: true
 name: 'table-infinite-scroll-example'
 class: '!p-0'
@@ -829,7 +839,7 @@ class: '!p-0'
 Use the `virtualize` prop to enable virtualization for large datasets as a boolean or an object with options like `{ estimateSize: 65, overscan: 12 }`. You can also pass other [TanStack Virtual options](https://tanstack.com/virtual/v3/docs/api/virtualizer#optional-options) to customize the virtualization behavior. The `sticky` prop works in combination with `virtualize` to keep the header or footer visible while scrolling through large datasets.
 
 ::warning
-Row spanning is not supported when virtualization is enabled.
+[Cell spanning](#with-cell-spanning) only applies `spanColumns` when virtualization is enabled, `spanRows` is ignored.
 ::
 
 ::component-example
@@ -877,10 +887,11 @@ For example, if your data objects have a `children` array, set `:get-sub-rows="r
 ---
 prettier: true
 collapse: true
-highlights:
-  - 177
 name: 'table-tree-data-example'
 class: '!p-0'
+highlights:
+  - 177
+  - 180
 ---
 ::
 

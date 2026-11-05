@@ -54,6 +54,15 @@ const columns: TableColumn<Payment>[] = [{
 }, {
   accessorKey: 'date',
   header: ({ column }) => getHeader(column, 'Date', 'start'),
+  cell: ({ row }) => {
+    return new Date(row.getValue('date')).toLocaleString('en-US', {
+      day: 'numeric',
+      month: 'short',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    })
+  },
   size: 172
 }, {
   accessorKey: 'status',
@@ -77,8 +86,8 @@ const columns: TableColumn<Payment>[] = [{
   header: ({ column }) => getHeader(column, 'Amount', 'end'),
   meta: {
     class: {
-      th: 'text-right',
-      td: 'text-right font-medium'
+      th: 'text-end',
+      td: 'text-end font-medium'
     }
   },
   cell: ({ row }) => {

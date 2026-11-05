@@ -86,8 +86,8 @@ const columns: TableColumn<Payment>[] = [{
   header: 'Email',
   meta: {
     class: {
-      th: 'text-left',
-      td: 'text-left'
+      th: 'text-start',
+      td: 'text-start'
     }
   }
 }, {
@@ -95,15 +95,15 @@ const columns: TableColumn<Payment>[] = [{
   header: 'Amount',
   meta: {
     class: {
-      th: 'text-right font-bold text-primary',
-      td: 'text-right font-mono'
+      th: 'text-end font-bold text-primary',
+      td: 'text-end font-mono'
     }
   },
   cell: ({ row }) => {
     const amount = Number.parseFloat(row.getValue('amount'))
     const formatted = new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD'
+      currency: 'EUR'
     }).format(amount)
     return h('span', { class: 'font-semibold text-success' }, formatted)
   }

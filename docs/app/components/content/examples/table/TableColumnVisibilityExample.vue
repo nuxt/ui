@@ -81,8 +81,8 @@ const columns: TableColumn<Payment>[] = [{
   header: 'Amount',
   meta: {
     class: {
-      th: 'text-right',
-      td: 'text-right font-medium'
+      th: 'text-end',
+      td: 'text-end font-medium'
     }
   },
   cell: ({ row }) => {
@@ -110,7 +110,7 @@ const columnVisibility = ref({
           type: 'checkbox' as const,
           checked: column.getIsVisible(),
           onUpdateChecked(checked: boolean) {
-            table?.tableApi?.getColumn(column.id)?.toggleVisibility(!!checked)
+            column.toggleVisibility(checked)
           },
           onSelect(e: Event) {
             e.preventDefault()

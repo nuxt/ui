@@ -61,6 +61,12 @@ const columns: TableColumn<Payment>[] = [{
   accessorKey: 'amount',
   header: 'Amount',
   size: 140,
+  meta: {
+    class: {
+      th: 'text-end',
+      td: 'text-end font-medium'
+    }
+  },
   cell: ({ row }) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',

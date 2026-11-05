@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { h } from 'vue'
 import { cellSelectionFeature } from '@tanstack/vue-table'
 import type { TableColumn } from '@nuxt/ui'
 
@@ -58,7 +57,13 @@ const columns: TableColumn<Payment>[] = [{
   header: 'Email'
 }, {
   accessorKey: 'amount',
-  header: () => h('div', { class: 'text-right' }, 'Amount'),
+  header: 'Amount',
+  meta: {
+    class: {
+      th: 'text-end',
+      td: 'text-end font-medium'
+    }
+  },
   cell: ({ row }) => {
     const amount = Number.parseFloat(row.getValue('amount'))
 
@@ -67,7 +72,7 @@ const columns: TableColumn<Payment>[] = [{
       currency: 'EUR'
     }).format(amount)
 
-    return h('div', { class: 'text-right font-medium' }, formatted)
+    return formatted
   }
 }]
 

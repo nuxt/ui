@@ -155,8 +155,8 @@ const columns: TableColumn<Payment>[] = [
     header: 'Amount',
     meta: {
       class: {
-        th: 'text-right',
-        td: 'text-right font-medium'
+        th: 'text-end',
+        td: 'text-end font-medium'
       }
     },
     cell: ({ getValue }) => formatAmount(getValue() as number),
@@ -179,7 +179,7 @@ const features = {
     :grouping="['account_id', 'status']"
     :features="features"
     :options="{ groupedColumnMode: 'remove' }"
-    :ui="{ root: 'min-w-full' }"
+    class="flex-1"
   >
     <template #title-cell="{ row }">
       <div v-if="row.getIsGrouped()" class="flex items-center">
@@ -191,7 +191,7 @@ const features = {
         <UButton
           variant="outline"
           color="neutral"
-          class="mr-2"
+          class="me-2"
           size="xs"
           :icon="row.getIsExpanded() ? 'i-lucide-minus' : 'i-lucide-plus'"
           @click="row.toggleExpanded()"

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
 import type { TableColumn } from '@nuxt/ui'
-import type { RowPinningState } from '@tanstack/table-core'
+import type { RowPinningState } from '@tanstack/vue-table'
 
 const UButton = resolveComponent('UButton')
 const UBadge = resolveComponent('UBadge')
@@ -100,8 +100,7 @@ const columns: TableColumn<Payment>[] = [{
       month: 'short',
       hour: '2-digit',
       minute: '2-digit',
-      hour12: false,
-      timeZone: 'UTC'
+      hour12: false
     })
   }
 }, {
@@ -124,8 +123,8 @@ const columns: TableColumn<Payment>[] = [{
   header: 'Amount',
   meta: {
     class: {
-      th: 'text-right',
-      td: 'text-right font-medium'
+      th: 'text-end',
+      td: 'text-end font-medium'
     }
   },
   cell: ({ row }) => {

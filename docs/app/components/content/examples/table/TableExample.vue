@@ -209,8 +209,8 @@ const columns: TableColumn<Payment>[] = [{
   header: 'Amount',
   meta: {
     class: {
-      th: 'text-right',
-      td: 'text-right font-medium'
+      th: 'text-end',
+      td: 'text-end font-medium'
     }
   },
   cell: ({ row }) => {
@@ -225,7 +225,7 @@ const columns: TableColumn<Payment>[] = [{
   enableHiding: false,
   meta: {
     class: {
-      td: 'text-right'
+      td: 'text-end'
     }
   },
   cell: ({ row }) => {
@@ -296,7 +296,7 @@ function randomize() {
           type: 'checkbox' as const,
           checked: column.getIsVisible(),
           onUpdateChecked(checked: boolean) {
-            table?.tableApi?.getColumn(column.id)?.toggleVisibility(!!checked)
+            column.toggleVisibility(checked)
           },
           onSelect(e: Event) {
             e.preventDefault()
@@ -309,7 +309,7 @@ function randomize() {
           color="neutral"
           variant="outline"
           trailing-icon="i-lucide-chevron-down"
-          class="ml-auto"
+          class="ms-auto"
           aria-label="Columns select dropdown"
         />
       </UDropdownMenu>
@@ -319,6 +319,7 @@ function randomize() {
       ref="table"
       :data="data"
       :columns="columns"
+      :get-row-id="(row: Payment) => row.id"
       sticky
       class="h-96"
     >

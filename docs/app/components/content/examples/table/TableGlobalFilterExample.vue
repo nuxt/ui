@@ -80,8 +80,8 @@ const columns: TableColumn<Payment>[] = [{
   header: 'Amount',
   meta: {
     class: {
-      th: 'text-right',
-      td: 'text-right font-medium'
+      th: 'text-end',
+      td: 'text-end font-medium'
     }
   },
   cell: ({ row }) => {
@@ -107,7 +107,6 @@ const globalFilter = ref('45')
     </div>
 
     <UTable
-      ref="table"
       v-model:global-filter="globalFilter"
       :data="data"
       :columns="columns"

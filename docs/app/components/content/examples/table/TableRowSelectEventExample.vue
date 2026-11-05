@@ -90,8 +90,8 @@ const columns: TableColumn<Payment>[] = [{
   header: 'Amount',
   meta: {
     class: {
-      th: 'text-right',
-      td: 'text-right font-medium'
+      th: 'text-end',
+      td: 'text-end font-medium'
     }
   },
   cell: ({ row }) => {
@@ -107,9 +107,9 @@ const table = useTemplateRef('table')
 
 const rowSelection = ref<RowSelectionState>({})
 
-function onSelect(e: Event, row: TableRow<Payment>) {
-  /* If you decide to also select the column you can do this  */
-  row.toggleSelected(!row.getIsSelected())
+function onSelect(_e: Event, row: TableRow<Payment>) {
+  /* If you decide to also select the row you can do this */
+  row.toggleSelected()
 }
 </script>
 

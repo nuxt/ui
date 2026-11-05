@@ -5,6 +5,7 @@ import type { TableColumn, TableFeatures } from '@nuxt/ui'
 import type { Column } from '@tanstack/vue-table'
 
 const UButton = resolveComponent('UButton')
+const UBadge = resolveComponent('UBadge')
 
 type Payment = {
   id: string
@@ -52,13 +53,28 @@ const columns: TableColumn<Payment>[] = [{
   cell: ({ row }) => `#${row.getValue('id')}`
 }, {
   accessorKey: 'status',
-  header: ({ column }) => getHeader(column, 'Status')
+  header: ({ column }) => getHeader(column, 'Status'),
+  cell: ({ row }) => {
+    const color = ({
+      paid: 'success' as const,
+      failed: 'error' as const,
+      refunded: 'neutral' as const
+    })[row.getValue('status') as string]
+
+    return h(UBadge, { class: 'capitalize', variant: 'subtle', color }, () => row.getValue('status'))
+  }
 }, {
   accessorKey: 'email',
   header: ({ column }) => getHeader(column, 'Email')
 }, {
   accessorKey: 'amount',
   header: ({ column }) => getHeader(column, 'Amount'),
+  meta: {
+    class: {
+      th: 'text-end',
+      td: 'text-end font-medium'
+    }
+  },
   cell: ({ row }) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -82,7 +98,7 @@ function moveColumn(id: string, offset: number) {
 function getHeader(column: Column<TableFeatures, Payment>, label: string) {
   const index = columnOrder.value.indexOf(column.id)
 
-  return h('div', { class: 'flex items-center gap-1' }, [
+  return h('div', { class: 'inline-flex items-center gap-1' }, [
     h(UButton, {
       'icon': 'i-lucide-chevron-left',
       'color': 'neutral',
