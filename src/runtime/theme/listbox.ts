@@ -19,7 +19,7 @@ export default defineTheme({
     itemWrapper: 'flex-1 flex flex-col min-w-0',
     itemLabel: 'truncate',
     itemDescription: 'truncate text-muted',
-    itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
+    itemTrailing: 'ms-auto inline-flex gap-(--ui-control-gap) items-center',
     itemTrailingIcon: 'shrink-0'
   },
   variants: {
@@ -81,8 +81,7 @@ export default defineTheme({
         item: 'p-(--ui-control-py) text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height) gap-(--ui-control-gap)',
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
-        itemTrailingIcon: 'size-(--ui-control-icon-size)',
-        itemDescription: 'text-sm'
+        itemTrailingIcon: 'size-(--ui-control-icon-size)'
       }
     },
     color: colorVariant({ root: '' }),

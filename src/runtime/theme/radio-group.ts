@@ -59,7 +59,7 @@ export default defineTheme({
       xs: {
         fieldset: 'gap-y-0.5',
         root: '[--ui-control-box:var(--ui-control-box-xs)] [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(2.5)] [--ui-control-icon-size:var(--ui-control-box)]',
-        legend: 'text-xs',
+        legend: 'text-(length:--ui-control-text-xs)/(--ui-control-text-xs--leading)',
         base: 'size-(--ui-control-box)',
         item: 'text-(length:--ui-control-text-xs)/(--ui-control-text-xs--leading)',
         container: 'h-(--ui-control-text-xs--leading)',
@@ -68,7 +68,7 @@ export default defineTheme({
       sm: {
         fieldset: 'gap-y-0.5',
         root: '[--ui-control-box:var(--ui-control-box-sm)] [--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(3)] [--ui-control-icon-size:var(--ui-control-box)]',
-        legend: 'text-xs',
+        legend: 'text-(length:--ui-control-text-sm)/(--ui-control-text-sm--leading)',
         base: 'size-(--ui-control-box)',
         item: 'text-(length:--ui-control-text-sm)/(--ui-control-text-sm--leading)',
         container: 'h-(--ui-control-text-sm--leading)',
@@ -77,7 +77,7 @@ export default defineTheme({
       md: {
         fieldset: 'gap-y-1',
         root: '[--ui-control-box:var(--ui-control-box-md)] [--ui-control-px:--spacing(3.5)] [--ui-control-py:--spacing(3.5)] [--ui-control-icon-size:var(--ui-control-box)]',
-        legend: 'text-sm',
+        legend: 'text-(length:--ui-control-text-md)/(--ui-control-text-md--leading)',
         base: 'size-(--ui-control-box)',
         item: 'text-(length:--ui-control-text-md)/(--ui-control-text-md--leading)',
         container: 'h-(--ui-control-text-md--leading)',
@@ -86,7 +86,7 @@ export default defineTheme({
       lg: {
         fieldset: 'gap-y-1',
         root: '[--ui-control-box:var(--ui-control-box-lg)] [--ui-control-px:--spacing(4)] [--ui-control-py:--spacing(4)] [--ui-control-icon-size:var(--ui-control-box)]',
-        legend: 'text-sm',
+        legend: 'text-(length:--ui-control-text-lg)/(--ui-control-text-lg--leading)',
         base: 'size-(--ui-control-box)',
         item: 'text-(length:--ui-control-text-lg)/(--ui-control-text-lg--leading)',
         container: 'h-(--ui-control-text-lg--leading)',
@@ -95,7 +95,7 @@ export default defineTheme({
       xl: {
         fieldset: 'gap-y-1.5',
         root: '[--ui-control-box:var(--ui-control-box-xl)] [--ui-control-px:--spacing(4.5)] [--ui-control-py:--spacing(4.5)] [--ui-control-icon-size:var(--ui-control-box)]',
-        legend: 'text-base',
+        legend: 'text-(length:--ui-control-text-xl)/(--ui-control-text-xl--leading)',
         base: 'size-(--ui-control-box)',
         item: 'text-(length:--ui-control-text-xl)/(--ui-control-text-xl--leading)',
         container: 'h-(--ui-control-text-xl--leading)',

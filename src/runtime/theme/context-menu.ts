@@ -11,7 +11,7 @@ export default defineTheme({
     item: 'group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-(--ui-disabled-opacity)',
     itemLeadingIcon: 'shrink-0',
     itemLeadingAvatar: 'shrink-0',
-    itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
+    itemTrailing: 'ms-auto inline-flex gap-(--ui-control-gap) items-center',
     itemTrailingIcon: 'shrink-0',
     itemTrailingKbds: 'hidden lg:inline-flex items-center shrink-0',
     itemWrapper: 'flex-1 flex flex-col text-start min-w-0',

@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
+import type { Ref } from 'vue'
 import { upperFirst } from 'scule'
-import type { TableColumn, TableRow } from '@nuxt/ui'
-import type { Column, RowPinningState } from '@tanstack/vue-table'
-import { getPaginationRowModel } from '@tanstack/vue-table'
+import type { TableColumn, TableFeatures, TableRow } from '@nuxt/ui'
+import type { CellSelectionState, Column, ColumnPinningState, RowPinningState, RowSelectionState } from '@tanstack/vue-table'
+import { cellSelectionFeature, createPaginatedRowModel, rowPaginationFeature } from '@tanstack/vue-table'
 import { useClipboard, refDebounced } from '@vueuse/core'
 
 const UButton = resolveComponent('UButton')
@@ -27,6 +28,9 @@ type Payment = {
 const table = useTemplateRef('table')
 
 const virtualize = ref(false)
+const resizable = ref(false)
+const resizeOnEnd = ref(false)
+const cellSelectable = ref(false)
 
 const statuses: Payment['status'][] = ['paid', 'failed', 'refunded']
 const domains = ['gmail.com', 'outlook.com', 'yahoo.com', 'company.com', 'mail.com']
@@ -97,7 +101,7 @@ const columns: TableColumn<Payment>[] = [{
 }, {
   id: 'select',
   header: ({ table }) => h(UCheckbox, {
-    'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
+    'modelValue': table.getIsAllPageRowsSelected() ? true : table.getIsSomePageRowsSelected() ? 'indeterminate' : false,
     'onUpdate:modelValue': (value: boolean | 'indeterminate') => table.toggleAllPageRowsSelected(!!value),
     'aria-label': 'Select all'
   }),
@@ -111,7 +115,7 @@ const columns: TableColumn<Payment>[] = [{
   size: 32
 }, {
   accessorKey: 'id',
-  header: ({ column }) => getPinnedHeader(column, '#', 'left'),
+  header: ({ column }) => getPinnedHeader(column, '#', 'start'),
   cell: ({ row }) => `#${row.getValue('id')}`,
   size: 84
 }, {
@@ -120,7 +124,7 @@ const columns: TableColumn<Payment>[] = [{
   meta: {
     class: {
       td: 'text-center font-semibold',
-      th: 'text-right text-green-500 w-48'
+      th: 'text-end text-success w-48'
     }
   },
   cell: ({ row }) => {
@@ -135,7 +139,7 @@ const columns: TableColumn<Payment>[] = [{
   }
 }, {
   accessorKey: 'status',
-  header: ({ column }) => getPinnedHeader(column, 'Status', 'left'),
+  header: ({ column }) => getPinnedHeader(column, 'Status', 'start'),
   cell: ({ row }) => {
     const color = ({
       paid: 'success' as const,
@@ -148,7 +152,7 @@ const columns: TableColumn<Payment>[] = [{
   size: 102
 }, {
   accessorKey: 'firstName',
-  header: ({ column }) => getPinnedHeader(column, 'First Name', 'left'),
+  header: ({ column }) => getPinnedHeader(column, 'First Name', 'start'),
   meta: {
     class: {
       td: 'capitalize'
@@ -157,7 +161,7 @@ const columns: TableColumn<Payment>[] = [{
   size: 128
 }, {
   accessorKey: 'lastName',
-  header: ({ column }) => getPinnedHeader(column, 'Last Name', 'left'),
+  header: ({ column }) => getPinnedHeader(column, 'Last Name', 'start'),
   meta: {
     class: {
       td: 'capitalize'
@@ -186,15 +190,15 @@ const columns: TableColumn<Payment>[] = [{
   }
 }, {
   accessorKey: 'amount',
-  header: ({ column }) => getPinnedHeader(column, 'Amount', 'right'),
+  header: ({ column }) => getPinnedHeader(column, 'Amount', 'end'),
   meta: {
     class: {
-      th: 'text-right',
-      td: 'text-right font-medium'
+      th: 'text-end',
+      td: 'text-end font-medium'
     }
   },
-  footer: ({ column }) => {
-    const total = column.getFacetedRowModel().rows.reduce((acc: number, row: TableRow<Payment>) => acc + Number.parseFloat(row.getValue('amount')), 0)
+  footer: ({ table }) => {
+    const total = table.getPreFilteredRowModel().rows.reduce((acc: number, row: TableRow<Payment>) => acc + Number.parseFloat(row.getValue('amount')), 0)
     const formatted = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'EUR'
@@ -214,7 +218,7 @@ const columns: TableColumn<Payment>[] = [{
   enableHiding: false,
   meta: {
     class: {
-      td: 'text-right'
+      td: 'text-end'
     }
   },
   cell: ({ row }) => {
@@ -234,7 +238,7 @@ const columns: TableColumn<Payment>[] = [{
   size: 64
 }]
 
-function getPinnedHeader(column: Column<Payment>, label: string, position: 'left' | 'right') {
+function getPinnedHeader(column: Column<TableFeatures, Payment>, label: string, position: 'start' | 'end') {
   const isPinned = column.getIsPinned()
 
   return h(UButton, {
@@ -250,10 +254,41 @@ function getPinnedHeader(column: Column<Payment>, label: string, position: 'left
 }
 
 const loading = ref(true)
-const columnPinning = ref({
-  left: ['pin', 'select'],
-  right: ['actions']
+const columnPinning = ref<ColumnPinningState>({
+  start: ['pin', 'select'],
+  end: ['actions']
 })
+
+const cellSelection = ref<CellSelectionState>([])
+
+// `features` and the columns are read once, so the table is recreated when they change.
+const features = computed(() => ({
+  ...(virtualize.value ? {} : { rowPaginationFeature, paginatedRowModel: createPaginatedRowModel() }),
+  ...(cellSelectable.value ? { cellSelectionFeature } : {})
+}))
+function optionItem(label: string, model: Ref<boolean>, disabled = false) {
+  return {
+    label,
+    type: 'checkbox' as const,
+    checked: model.value,
+    disabled,
+    onUpdateChecked(checked: boolean) {
+      model.value = checked
+    },
+    onSelect(e: Event) {
+      e.preventDefault()
+    }
+  }
+}
+
+const optionItems = computed(() => [
+  optionItem('Virtualize', virtualize),
+  optionItem('Cell selection', cellSelectable),
+  optionItem('Resizable', resizable),
+  optionItem('Resize on end', resizeOnEnd, !resizable.value)
+])
+
+const tableKey = computed(() => [virtualize.value, cellSelectable.value, resizable.value].join('-'))
 
 const pagination = ref({
   pageIndex: 0,
@@ -269,13 +304,13 @@ function randomize() {
   data.value.sort(() => Math.random() - 0.5)
 }
 
-const rowSelection = ref<Record<string, boolean>>({})
+const rowSelection = ref<RowSelectionState>({})
 
-function onSelect(e: Event, row: TableRow<Payment>) {
-  row.toggleSelected(!row.getIsSelected())
+function onSelect(_e: Event, row: TableRow<Payment>) {
+  row.toggleSelected()
 }
 
-const contextmenuRow = ref<TableRow<Payment> | null>(null)
+const contextmenuRow = shallowRef<TableRow<Payment> | null>(null)
 const contextmenuItems = computed(() => contextmenuRow.value ? getRowItems(contextmenuRow.value) : [])
 
 function onContextmenu(e: Event, row: TableRow<Payment>) {
@@ -285,7 +320,7 @@ function onContextmenu(e: Event, row: TableRow<Payment>) {
 const popoverOpen = ref(false)
 const popoverOpenDebounced = refDebounced(popoverOpen, 1)
 const popoverAnchor = ref({ x: 0, y: 0 })
-const popoverRow = ref<TableRow<Payment> | null>(null)
+const popoverRow = shallowRef<TableRow<Payment> | null>(null)
 
 const reference = computed(() => ({
   getBoundingClientRect: () =>
@@ -315,7 +350,9 @@ onMounted(() => {
 
 <template>
   <Navbar>
-    <USwitch v-model="virtualize" label="Virtualize" />
+    <UDropdownMenu :items="optionItems" :content="{ align: 'start' }">
+      <UButton label="Options" color="neutral" variant="outline" trailing-icon="i-lucide-chevron-down" />
+    </UDropdownMenu>
 
     <UInput
       :model-value="(table?.tableApi?.getColumn('email')?.getFilterValue() as string)"
@@ -355,24 +392,24 @@ onMounted(() => {
     <UContextMenu :items="contextmenuItems">
       <UTable
         ref="table"
-        :key="String(virtualize)"
+        :key="tableKey"
         v-model:row-pinning="rowPinning"
+        v-model:column-pinning="columnPinning"
+        v-model:row-selection="rowSelection"
+        v-model:cell-selection="cellSelection"
+        v-model:pagination="pagination"
         :data="data"
         :columns="columns"
-        :column-pinning="columnPinning"
-        :row-selection="rowSelection"
+        :get-row-id="(row: Payment) => row.id"
         :loading="loading"
         :virtualize="virtualize"
-        v-bind="virtualize ? {} : {
-          data,
-          pagination,
-          paginationOptions: {
-            getPaginationRowModel: getPaginationRowModel()
-          }
-        }"
+        :features="features"
+        :default-column="{ enableResizing: resizable }"
+        :options="{ columnResizeMode: resizeOnEnd ? 'onEnd' : 'onChange' }"
+        :ui="resizable ? { base: 'table-fixed', td: 'truncate' } : undefined"
         sticky
-        class="border border-strong rounded-sm"
-        @select="onSelect"
+        class="border border-default rounded-sm"
+        :on-select="cellSelectable ? undefined : onSelect"
         @contextmenu="onContextmenu"
         @pointermove="(ev: PointerEvent) => {
           popoverAnchor.x = ev.clientX
@@ -398,13 +435,16 @@ onMounted(() => {
       <div class="text-sm text-muted">
         {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
         {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
+        <template v-if="cellSelectable">
+          {{ table?.tableApi?.getSelectedCellCount?.() || 0 }} cell(s) selected.
+        </template>
       </div>
 
       <div class="flex items-center gap-1.5">
         <UPagination
           :disabled="!!virtualize"
-          :page="(table?.tableApi?.getState().pagination.pageIndex ?? 0) + 1"
-          :items-per-page="table?.tableApi?.getState().pagination.pageSize ?? 10"
+          :page="pagination.pageIndex + 1"
+          :items-per-page="pagination.pageSize"
           :total="table?.tableApi?.getFilteredRowModel().rows.length || 0"
           @update:page="(p: number) => table?.tableApi?.setPageIndex(p - 1)"
         />

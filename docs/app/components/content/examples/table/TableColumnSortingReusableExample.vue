@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
-import type { TableColumn } from '@nuxt/ui'
+import type { TableColumn, TableFeatures } from '@nuxt/ui'
 import type { Column } from '@tanstack/vue-table'
 
 const UBadge = resolveComponent('UBadge')
@@ -88,8 +88,8 @@ const columns: TableColumn<Payment>[] = [{
   header: ({ column }) => getHeader(column, 'Amount'),
   meta: {
     class: {
-      th: 'text-right',
-      td: 'text-right font-medium'
+      th: 'text-end',
+      td: 'text-end font-medium'
     }
   },
   cell: ({ row }) => {
@@ -101,14 +101,14 @@ const columns: TableColumn<Payment>[] = [{
   }
 }]
 
-function getHeader(column: Column<Payment>, label: string) {
+function getHeader(column: Column<TableFeatures, Payment>, label: string) {
   const isSorted = column.getIsSorted()
 
   return h(UDropdownMenu, {
     'content': {
       align: 'start'
     },
-    'aria-label': 'Actions dropdown',
+    'aria-label': `Sort ${label}`,
     'items': [{
       label: 'Asc',
       type: 'checkbox',
@@ -140,7 +140,7 @@ function getHeader(column: Column<Payment>, label: string) {
     label,
     'icon': isSorted ? (isSorted === 'asc' ? 'i-lucide-arrow-up-narrow-wide' : 'i-lucide-arrow-down-wide-narrow') : 'i-lucide-arrow-up-down',
     'class': '-mx-2.5 data-[state=open]:bg-soft',
-    'aria-label': `Sort by ${isSorted === 'asc' ? 'descending' : 'ascending'}`
+    'aria-label': `Sort by ${label}`
   }))
 }
 

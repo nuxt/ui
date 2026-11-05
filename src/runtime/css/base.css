@@ -172,7 +172,7 @@
 
     /* The control scale: the padding, gap, icon and text of each size of
        Button, the fields, the menus and the other controls, and the box of
-       Checkbox, RadioGroup and the Switch thumb. Each size copies the padding,
+       Checkbox, RadioGroup and the Switch and Slider thumbs. Each size copies the padding,
        gap, icon and box to `--ui-control-*` and reads the text as is. The
        line height of a size is the line of a one-line control and matches its
        icon, so an icon alone is as tall as a label. The line heights are lengths,
