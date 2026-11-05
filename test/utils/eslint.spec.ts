@@ -107,6 +107,7 @@ describe('nuxtUI', () => {
       const link = { label: 'text-rose-500', icon: 'i-lucide-text-red-500' }
       const options = { ui: { colors: { primary: 'text-red-500' } } }
       export default defineNuxtConfig({ ui: { prefix: 'text-red-500' } })
+      const nuxtConfig = { ui: { prefix: 'text-red-500', tailwindPrefix: 'text-red-500', componentDetection: ['text-red-500'], scanPackages: ['text-red-500'] } }
     `)).toEqual([])
   })
 })

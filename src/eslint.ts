@@ -196,9 +196,10 @@ const APP_CONFIG_MATCHERS = [
 
 // The `class` and `ui` keys every component and item takes, outside the templates: `items` with `{ class }`,
 // `h(UButton, { ui: { base } })`, the table `meta` with `{ class: { tr } }` and its columns with `meta.class.th`.
-// Only one level under each, so the app config and module options, which nest their own `ui`, stay out.
+// Only one level under each, so the app config, which nests its own `ui`, stays out. The module options
+// that hold a string are left out too, for a Nuxt config built in a variable.
 const CLASS_MATCHERS = [
-  { type: 'objectValues', path: '^(?:.*[.\\]])?(?:class|class\\.[\\w-]+|ui\\.[\\w-]+)(?:\\[\\d+\\])?$' }
+  { type: 'objectValues', path: '^(?:.*[.\\]])?(?:class|class\\.[\\w-]+|ui\\.(?!(?:prefix|tailwindPrefix|componentDetection|scanPackages)(?:\\[|$))[\\w-]+)(?:\\[\\d+\\])?$' }
 ]
 
 const SELECTORS = [
