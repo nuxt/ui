@@ -177,7 +177,7 @@ const passwordVisibility = reactive<Record<string, boolean>>(
 const passwordRefs = shallowReactive<Record<string, { inputRef?: HTMLInputElement | null } | null>>({})
 
 function pickFieldProps(field: F) {
-  const fields = ['name', 'errorPattern', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay'] as (keyof F)[]
+  const fields = ['name', 'errorPattern', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay', 'errorPrefix', 'errorIcon'] as (keyof F)[]
 
   // Prevent binding `label` and `description` on Checkbox's FormField
   if (field.type === 'checkbox') {
@@ -188,7 +188,7 @@ function pickFieldProps(field: F) {
 }
 
 function omitFieldProps(field: F) {
-  const fields = ['errorPattern', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay'] as (keyof F)[]
+  const fields = ['errorPattern', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay', 'errorPrefix', 'errorIcon'] as (keyof F)[]
 
   // Prevent binding `type` on other fields than Input
   if (field.type === 'checkbox' || field.type === 'select' || field.type === 'otp') {
