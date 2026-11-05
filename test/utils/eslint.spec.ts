@@ -101,6 +101,15 @@ describe('nuxtUI', () => {
     `)).toEqual(['text-red-500', 'text-gray-500', 'bg-blue-500', 'text-amber-500', 'text-lime-500', 'bg-green-500', 'text-pink-500', 'text-teal-500', 'text-cyan-500'])
   })
 
+  it('lints the keys of a conditional `class`, minus the table\'s', () => {
+    expect(lint(`
+      const button = h(UButton, { class: { 'text-red-500': active, flex: true } })
+      const items = [{ label: 'Delete', class: ['p-2', { 'text-gray-500': muted }] }]
+      const columns = [{ meta: { class: { th: 'p-2', td: 'p-2' } } }]
+      const meta = { class: { tr: 'p-2' } }
+    `)).toEqual(['text-red-500', 'text-gray-500'])
+  })
+
   it('leaves other keys, styles, functions and the nested `ui` of options alone', () => {
     expect(lint(`
       const columns = [{ meta: { style: { th: 'color: red' }, class: { td: () => 'text-teal-500' } } }]
