@@ -70,7 +70,7 @@ export default defineTheme({
         root: 'gap-2 items-start',
         files: 'flex flex-col w-full gap-2',
         file: 'min-w-0 flex items-center border border-default rounded-md w-full',
-        fileTrailingButton: 'ms-auto'
+        fileTrailingButton: 'ms-auto -me-(--ui-control-py)'
       },
       grid: {
         fileWrapper: 'hidden',
@@ -99,36 +99,6 @@ export default defineTheme({
     }
   },
   compoundVariants: [{
-    size: 'xs',
-    layout: 'list',
-    class: {
-      fileTrailingButton: '-me-1'
-    }
-  }, {
-    size: 'sm',
-    layout: 'list',
-    class: {
-      fileTrailingButton: '-me-1.5'
-    }
-  }, {
-    size: 'md',
-    layout: 'list',
-    class: {
-      fileTrailingButton: '-me-1.5'
-    }
-  }, {
-    size: 'lg',
-    layout: 'list',
-    class: {
-      fileTrailingButton: '-me-2'
-    }
-  }, {
-    size: 'xl',
-    layout: 'list',
-    class: {
-      fileTrailingButton: '-me-2'
-    }
-  }, {
     layout: 'grid',
     multiple: true,
     class: {
