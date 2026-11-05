@@ -2,7 +2,10 @@ import { createConfigForNuxt } from '@nuxt/eslint-config/flat'
 import { fileURLToPath } from 'node:url'
 import betterTailwindcss from 'eslint-plugin-better-tailwindcss'
 import { getDefaultSelectors } from 'eslint-plugin-better-tailwindcss/defaults'
-import nuxtUI from './src/eslint.ts'
+import { createJiti } from 'jiti'
+
+// Through jiti: not every Node version in `engines` strips types
+const nuxtUI = await createJiti(import.meta.url).import('./src/eslint.ts', { default: true })
 
 /**
  * Flag bare prop references in templates of components that use
