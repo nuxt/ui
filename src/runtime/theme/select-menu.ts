@@ -12,11 +12,11 @@ export default extendTheme(select, {
   },
   variants: {
     size: {
-      xs: { empty: 'p-2 text-xs' },
-      sm: { empty: 'p-2.5 text-xs' },
-      md: { empty: 'p-2.5 text-sm' },
-      lg: { empty: 'p-3 text-sm' },
-      xl: { empty: 'p-3 text-base' }
+      xs: { empty: 'p-(--ui-control-py) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height)' },
+      sm: { empty: 'p-(--ui-control-py) text-(length:--ui-control-text-sm)/(--ui-control-text-sm--line-height)' },
+      md: { empty: 'p-(--ui-control-py) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height)' },
+      lg: { empty: 'p-(--ui-control-py) text-(length:--ui-control-text-lg)/(--ui-control-text-lg--line-height)' },
+      xl: { empty: 'p-(--ui-control-py) text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)' }
     },
     virtualize: {
       true: {
