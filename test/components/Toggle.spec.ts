@@ -1,8 +1,11 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Toggle from '../../src/runtime/components/Toggle.vue'
+import { flushPromises } from '@vue/test-utils'
 import { renderEach } from '../component-render'
+import { renderForm } from '../utils/form'
+import type { FormInputEvents } from '../../src/module'
 
 describe('Toggle', () => {
   const props = { 'icon': 'i-lucide-bold', 'aria-label': 'Bold' }
@@ -42,5 +45,47 @@ describe('Toggle', () => {
     const wrapper = await mountSuspended(Toggle, { props })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  describe('form integration', async () => {
+    async function createForm(validateOn?: FormInputEvents[]) {
+      const wrapper = await renderForm({
+        props: {
+          validateOn,
+          validateOnInputDelay: 0,
+          async validate(state: any) {
+            if (!state.value)
+              return [{ name: 'value', message: 'Error message' }]
+            return []
+          }
+        },
+        slotTemplate: `
+        <UFormField name="value" label="Bold">
+          <UToggle v-model="state.value" icon="i-lucide-bold" />
+        </UFormField>
+        `
+      })
+      return { wrapper, button: wrapper.find('button') }
+    }
+
+    test('validate on change works', async () => {
+      const { wrapper, button } = await createForm(['change'])
+
+      await button.trigger('click')
+      await button.trigger('click')
+      await flushPromises()
+      expect(wrapper.text()).toContain('Error message')
+      expect(button.attributes('aria-invalid')).toBe('true')
+
+      await button.trigger('click')
+      await flushPromises()
+      expect(wrapper.text()).not.toContain('Error message')
+    })
+
+    test('binds the FormField label to the button', async () => {
+      const { wrapper, button } = await createForm()
+
+      expect(wrapper.find('label').attributes('for')).toBe(button.attributes('id'))
+    })
   })
 })

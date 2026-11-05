@@ -67,7 +67,9 @@ export interface ToggleGroupProps<T extends ToggleGroupItem = ToggleGroupItem> e
   ui?: ToggleGroup['slots']
 }
 
-export interface ToggleGroupEmits extends ToggleGroupRootEmits {}
+export interface ToggleGroupEmits extends ToggleGroupRootEmits {
+  change: [event: Event]
+}
 
 type SlotProps<T extends ToggleGroupItem> = (props: { item: T, index: number, pressed: boolean, ui: Parameters<NonNullable<ButtonSlots['default']>>[0]['ui'] }) => VNode[]
 
@@ -79,7 +81,7 @@ export interface ToggleGroupSlots<T extends ToggleGroupItem = ToggleGroupItem> {
 </script>
 
 <script setup lang="ts" generic="T extends ToggleGroupItem">
-import { computed, provide } from 'vue'
+import { computed, provide, useId } from 'vue'
 import { ToggleGroupRoot, ToggleGroupItem as RToggleGroupItem } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { defu } from 'defu'
@@ -87,6 +89,7 @@ import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { fieldGroupInjectionKey } from '../composables/useFieldGroup'
+import { useFormField } from '../composables/useFormField'
 import { get, omit } from '../utils'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
@@ -110,7 +113,17 @@ const props = useComponentProps<ToggleGroupProps<T>>('toggleGroup', _props)
 
 const appConfig = useAppConfig() as ToggleGroup['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'type', 'modelValue', 'defaultValue', 'disabled', 'loop', 'rovingFocus', 'orientation', 'name', 'required'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'as', 'type', 'modelValue', 'defaultValue', 'loop', 'rovingFocus', 'orientation', 'required'), emits)
+
+const { id: _id, name, size: formFieldSize, color: formFieldColor, disabled: formFieldDisabled, labelId, ariaAttrs, emitFormChange, emitFormInput } = useFormField<ToggleGroupProps<T>>(_props, { bind: false })
+const id = _id.value ?? useId()
+
+// eslint-disable-next-line vue/no-dupe-keys
+const color = computed(() => formFieldColor.value ?? props.color)
+// eslint-disable-next-line vue/no-dupe-keys
+const size = computed(() => formFieldSize.value ?? props.size)
+
+const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.toggleGroup || {}) })({
@@ -131,17 +144,34 @@ function getValue(item: T, index: number) {
 function getButtonProps(item: T): ButtonProps {
   return defu(omit(item as ToggleGroupItem, ['value', 'disabled', props.valueKey as string, props.labelKey as string]), {
     label: get(item, props.labelKey as string),
-    color: props.color,
+    color: color.value,
     variant: props.variant,
     activeColor: props.activeColor,
     activeVariant: props.activeVariant,
-    size: props.size
+    size: size.value
   })
+}
+
+function onUpdate(value: any) {
+  // @ts-expect-error - 'target' does not exist in type 'EventInit'
+  const event = new Event('change', { target: { value } })
+  emits('change', event)
+  emitFormChange()
+  emitFormInput()
 }
 </script>
 
 <template>
-  <ToggleGroupRoot v-bind="rootProps" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <ToggleGroupRoot
+    :id="id"
+    v-bind="{ ...rootProps, ...ariaAttrs }"
+    :name="name"
+    :disabled="disabled"
+    :aria-labelledby="($attrs['aria-labelledby'] as string | undefined) ?? ($attrs['aria-label'] ? undefined : labelId)"
+    data-slot="root"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    @update:model-value="onUpdate"
+  >
     <RToggleGroupItem
       v-for="(item, index) in props.items"
       :key="getValue(item, index)"

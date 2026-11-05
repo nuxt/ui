@@ -9,6 +9,7 @@ import type { ComponentConfig } from '../types/tv'
 type Toggle = ComponentConfig<typeof theme, AppConfig, 'toggle'>
 
 export interface ToggleProps extends Omit<ButtonProps, Exclude<LinkPropsKeys, 'activeClass' | 'inactiveClass'> | 'type' | 'loadingAuto' | 'color' | 'variant' | 'activeColor' | 'activeVariant'>, Pick<RekaToggleProps, 'defaultValue' | 'modelValue' | 'name' | 'required'> {
+  id?: string
   /**
    * @defaultValue 'neutral'
    */
@@ -31,6 +32,7 @@ export interface ToggleProps extends Omit<ButtonProps, Exclude<LinkPropsKeys, 'a
 
 export interface ToggleEmits {
   'update:modelValue': [value: boolean]
+  'change': [event: Event]
 }
 
 export interface ToggleSlots extends ButtonSlots {}
@@ -43,6 +45,7 @@ import { reactiveOmit, reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
+import { useFormField } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
@@ -62,17 +65,48 @@ const props = useComponentProps('toggle', _props)
 
 const appConfig = useAppConfig() as Toggle['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'modelValue', 'defaultValue', 'disabled', 'name', 'required'), emits)
-const buttonProps = useForwardProps(reactiveOmit(props, 'modelValue', 'defaultValue', 'disabled', 'name', 'required', 'class'))
+const rootProps = useForwardProps(reactivePick(props, 'modelValue', 'defaultValue', 'required'), emits)
+const buttonProps = useForwardProps(reactiveOmit(props, 'id', 'modelValue', 'defaultValue', 'disabled', 'name', 'required', 'color', 'size', 'class'))
+
+const { id, name, size: formFieldSize, color: formFieldColor, disabled: formFieldDisabled, ariaAttrs, emitFormChange, emitFormInput } = useFormField<ToggleProps>(_props)
+
+// eslint-disable-next-line vue/no-dupe-keys
+const color = computed(() => formFieldColor.value ?? props.color)
+
+const size = computed(() => formFieldSize.value ?? props.size)
+
+const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.toggle || {}) }))
+
+function onUpdate(value: boolean) {
+  // @ts-expect-error - 'target' does not exist in type 'EventInit'
+  const event = new Event('change', { target: { value } })
+  emits('change', event)
+  emitFormChange()
+  emitFormInput()
+}
 </script>
 
 <template>
-  <Toggle v-slot="{ pressed }" v-bind="rootProps" as-child>
-    <UButton v-bind="{ ...buttonProps, ...$attrs }" :active="pressed" :class="ui({ class: props.class })">
-      <template v-for="(_, name) in slots" #[name]="slotData">
-        <slot :name="name" v-bind="slotData" />
+  <Toggle
+    v-slot="{ pressed }"
+    v-bind="rootProps"
+    :name="name"
+    :disabled="disabled"
+    as-child
+    @update:model-value="onUpdate"
+  >
+    <UButton
+      :id="id"
+      v-bind="{ ...buttonProps, ...ariaAttrs, ...$attrs }"
+      :color="color"
+      :size="size"
+      :active="pressed"
+      :class="ui({ class: props.class })"
+    >
+      <template v-for="(_, slotName) in slots" #[slotName]="slotData">
+        <slot :name="slotName" v-bind="slotData" />
       </template>
     </UButton>
   </Toggle>

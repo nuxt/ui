@@ -1,8 +1,11 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import ToggleGroup from '../../src/runtime/components/ToggleGroup.vue'
+import { flushPromises } from '@vue/test-utils'
 import { renderEach } from '../component-render'
+import { renderForm } from '../utils/form'
+import type { FormInputEvents } from '../../src/module'
 
 describe('ToggleGroup', () => {
   const items = [{
@@ -73,5 +76,61 @@ describe('ToggleGroup', () => {
     const wrapper = await mountSuspended(ToggleGroup, { props: { ...props, defaultValue: 'center' } })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  describe('form integration', async () => {
+    async function createForm(validateOn?: FormInputEvents[]) {
+      const wrapper = await renderForm({
+        props: {
+          validateOn,
+          validateOnInputDelay: 0,
+          async validate(state: any) {
+            if (state.value !== 'center')
+              return [{ name: 'value', message: 'Error message' }]
+            return []
+          }
+        },
+        slotVars: { items },
+        slotTemplate: `
+        <UFormField name="value" label="Alignment">
+          <UToggleGroup v-model="state.value" :items="items" />
+        </UFormField>
+        `
+      })
+      return { wrapper, buttons: wrapper.findAll('button') }
+    }
+
+    test('validate on change works', async () => {
+      const { wrapper, buttons } = await createForm(['change'])
+
+      await buttons[0]!.trigger('click')
+      await flushPromises()
+      expect(wrapper.text()).toContain('Error message')
+      expect(wrapper.find('[role="group"]').attributes('aria-invalid')).toBe('true')
+
+      await buttons[1]!.trigger('click')
+      await flushPromises()
+      expect(wrapper.text()).not.toContain('Error message')
+    })
+
+    test('validate on input works', async () => {
+      const { wrapper, buttons } = await createForm(['input'])
+
+      await buttons[0]!.trigger('click')
+      await flushPromises()
+      expect(wrapper.text()).toContain('Error message')
+
+      await buttons[1]!.trigger('click')
+      await flushPromises()
+      expect(wrapper.text()).not.toContain('Error message')
+    })
+
+    test('labels the group with the FormField label', async () => {
+      const { wrapper } = await createForm()
+      const label = wrapper.find('label')
+
+      expect(label.attributes('for')).toBeUndefined()
+      expect(wrapper.find('[role="group"]').attributes('aria-labelledby')).toBe(label.attributes('id'))
+    })
   })
 })
