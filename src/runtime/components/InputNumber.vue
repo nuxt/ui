@@ -86,7 +86,7 @@ export interface InputNumberSlots {
 </script>
 
 <script setup lang="ts" generic="T extends InputNumberValue = InputNumberValue, Mod extends Pick<ModelModifiers, 'optional'> = Pick<ModelModifiers, 'optional'>">
-import { onMounted, onScopeDispose, computed, useTemplateRef, toRef } from 'vue'
+import { onMounted, onScopeDispose, computed, shallowRef, useTemplateRef, toRef, watch } from 'vue'
 import { NumberFieldRoot, NumberFieldInput, NumberFieldDecrement, NumberFieldIncrement } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
@@ -149,14 +149,30 @@ const decrementIcon = computed(() => props.decrementIcon || (props.orientation =
 
 const inputRef = useTemplateRef('inputRef')
 
+// uncontrolled, reka commits unparseable text to its own state before `onUpdate` can veto it, so it always gets a value from here
+// eslint-disable-next-line vue/no-dupe-keys
+const modelValue = shallowRef(props.modelValue !== undefined ? props.modelValue : props.defaultValue)
+watch(() => props.modelValue, (value) => {
+  modelValue.value = value
+})
+
 function onUpdate(value: ApplyModifiers<T, Mod> | undefined) {
+  // reka reports unparseable text ("." / "-") and a cleared input the same way; text left in the field means unparseable, and it restores the display itself
+  if (value === undefined && inputRef.value?.$el?.value) {
+    return
+  }
+
   if (props.modelModifiers?.optional) {
     value = value ?? undefined
   }
 
-  // In controlled mode reka emits on every write, even when nothing changed (blur, Enter, stepping at a bound).
-  if (value === props.modelValue || (value == null && props.modelValue == null)) {
+  // reka emits on every write, even when nothing changed (blur, Enter, stepping at a bound).
+  if (value === modelValue.value || (value == null && modelValue.value == null)) {
     return
+  }
+
+  if (props.modelValue === undefined) {
+    modelValue.value = value
   }
 
   emits('update:modelValue', value as ApplyModifiers<T, Mod>)
@@ -199,8 +215,7 @@ defineExpose({
   <NumberFieldRoot
     v-bind="rootProps"
     :id="id"
-    :default-value="props.defaultValue"
-    :model-value="props.modelValue"
+    :model-value="modelValue ?? null"
     :min="props.min"
     :max="props.max"
     :step="props.step"
