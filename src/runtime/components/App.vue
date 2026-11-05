@@ -21,9 +21,8 @@ export default {
 </script>
 
 <script setup lang="ts" generic="T extends Messages">
-import { toRef, useId, inject, provide } from 'vue'
-import { ConfigProvider, TooltipProvider } from 'reka-ui'
-import { useForwardProps } from '../composables/useForwardProps'
+import { computed, toRef, useId, inject, provide } from 'vue'
+import { ConfigProvider, TooltipProvider, useForwardProps } from 'reka-ui'
 import { localeContextInjectionKey } from '../composables/useLocale'
 import { portalTargetInjectionKey } from '../composables/usePortal'
 import UToaster from './Toaster.vue'
@@ -35,7 +34,7 @@ const props = withDefaults(defineProps<AppProps<T>>(), {
 })
 defineSlots<AppSlots>()
 
-const configProviderProps = useForwardProps(props, ['scrollBody', 'nonce'])
+const configProviderProps = useForwardProps(computed(() => ({ scrollBody: props.scrollBody, nonce: props.nonce })))
 const tooltipProps = toRef(() => props.tooltip)
 const toasterProps = toRef(() => props.toaster)
 
