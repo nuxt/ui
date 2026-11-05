@@ -31,6 +31,8 @@ describe('ToggleGroup', () => {
     ['with type multiple', { props: { ...props, type: 'multiple', modelValue: ['left', 'center'] } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with orientation vertical', { props: { ...props, orientation: 'vertical' } }],
+    ['with attached', { props: { ...props, attached: true, variant: 'outline' } }],
+    ['with attached vertical', { props: { ...props, attached: true, variant: 'outline', orientation: 'vertical' } }],
     ['with color', { props: { ...props, color: 'primary' } }],
     ['with variant', { props: { ...props, variant: 'outline' } }],
     ['with activeColor', { props: { ...props, modelValue: 'center', activeColor: 'neutral' } }],

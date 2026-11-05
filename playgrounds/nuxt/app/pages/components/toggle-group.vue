@@ -41,6 +41,16 @@ const periodItems = [{ label: 'Day', value: 'day' }, { label: 'Week', value: 'we
     <UToggleGroup v-model="align" :items="alignItems" />
     <UToggleGroup v-model="marks" type="multiple" :items="markItems" />
     <UToggleGroup :items="periodItems" default-value="week" variant="outline" active-variant="subtle" />
+    <UToggleGroup :items="periodItems" default-value="week" variant="outline" active-variant="subtle" attached />
     <UToggleGroup :items="periodItems" default-value="week" orientation="vertical" class="w-32" />
+    <UToggleGroup
+      :items="periodItems"
+      default-value="week"
+      variant="outline"
+      active-variant="subtle"
+      orientation="vertical"
+      attached
+      class="w-32"
+    />
   </div>
 </template>

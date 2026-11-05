@@ -11,6 +11,14 @@ export default {
       vertical: {
         root: 'flex flex-col gap-1'
       }
+    },
+    fieldGroup: {
+      horizontal: {
+        root: 'gap-0 -space-x-px'
+      },
+      vertical: {
+        root: 'gap-0 -space-y-px'
+      }
     }
   }
 }

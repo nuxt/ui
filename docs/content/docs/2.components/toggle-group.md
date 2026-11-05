@@ -160,6 +160,34 @@ props:
 ---
 ::
 
+### Attached
+
+Use the `attached` prop to attach the items together, like in a [FieldGroup](/docs/components/field-group).
+
+::component-code
+---
+ignore:
+  - items
+  - defaultValue
+external:
+  - items
+externalTypes:
+  - ToggleGroupItem[]
+props:
+  attached: true
+  variant: outline
+  activeVariant: subtle
+  defaultValue: 'week'
+  items:
+    - label: 'Day'
+      value: 'day'
+    - label: 'Week'
+      value: 'week'
+    - label: 'Month'
+      value: 'month'
+---
+::
+
 ### Color
 
 Use the `color` prop to set the color of the items that are not pressed. Defaults to `neutral`.

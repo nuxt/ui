@@ -10,7 +10,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type ToggleGroup = ComponentConfig<typeof theme, AppConfig, 'toggleGroup'>
 
-export interface ToggleGroupItem extends Omit<ButtonProps, Exclude<LinkPropsKeys, 'activeClass' | 'inactiveClass'> | 'type'> {
+export interface ToggleGroupItem extends Omit<ButtonProps, Exclude<LinkPropsKeys, 'activeClass' | 'inactiveClass'> | 'type' | 'loadingAuto'> {
   /**
    * A unique value for the item. Defaults to the index.
    */
@@ -51,6 +51,8 @@ export interface ToggleGroupProps<T extends ToggleGroupItem = ToggleGroupItem> e
    * @defaultValue 'horizontal'
    */
   orientation?: ToggleGroup['variants']['orientation']
+  /** Attach the items together, like in a FieldGroup. */
+  attached?: boolean
   /**
    * The key used to get the value from the item.
    * @defaultValue 'value'
@@ -77,13 +79,14 @@ export interface ToggleGroupSlots<T extends ToggleGroupItem = ToggleGroupItem> {
 </script>
 
 <script setup lang="ts" generic="T extends ToggleGroupItem">
-import { computed } from 'vue'
+import { computed, provide } from 'vue'
 import { ToggleGroupRoot, ToggleGroupItem as RToggleGroupItem } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { defu } from 'defu'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
+import { fieldGroupInjectionKey } from '../composables/useFieldGroup'
 import { get, omit } from '../utils'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
@@ -111,8 +114,15 @@ const rootProps = useForwardProps(reactivePick(props, 'as', 'type', 'modelValue'
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.toggleGroup || {}) })({
-  orientation: props.orientation
+  orientation: props.orientation,
+  fieldGroup: props.attached ? props.orientation : undefined
 }))
+
+// Rounds the item buttons like in a FieldGroup when attached, and keeps a wrapping FieldGroup from reaching them
+provide(fieldGroupInjectionKey, computed(() => ({
+  size: undefined,
+  orientation: props.attached ? props.orientation : undefined
+})))
 
 function getValue(item: T, index: number) {
   return get(item, props.valueKey as string) ?? String(index)

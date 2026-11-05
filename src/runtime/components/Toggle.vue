@@ -8,7 +8,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Toggle = ComponentConfig<typeof theme, AppConfig, 'toggle'>
 
-export interface ToggleProps extends Omit<ButtonProps, Exclude<LinkPropsKeys, 'activeClass' | 'inactiveClass'> | 'type' | 'color' | 'variant' | 'activeColor' | 'activeVariant'>, Pick<RekaToggleProps, 'defaultValue' | 'modelValue' | 'name' | 'required'> {
+export interface ToggleProps extends Omit<ButtonProps, Exclude<LinkPropsKeys, 'activeClass' | 'inactiveClass'> | 'type' | 'loadingAuto' | 'color' | 'variant' | 'activeColor' | 'activeVariant'>, Pick<RekaToggleProps, 'defaultValue' | 'modelValue' | 'name' | 'required'> {
   /**
    * @defaultValue 'neutral'
    */
