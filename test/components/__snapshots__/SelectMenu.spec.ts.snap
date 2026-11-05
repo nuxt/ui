@@ -2899,7 +2899,7 @@ exports[`SelectMenu > renders with virtualize correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div data-slot="select-menu-empty" class="text-center text-muted p-[calc(var(--ui-control-py)+var(--spacing))] text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height)">No data</div>
+      <div data-slot="select-menu-empty" class="p-[calc(var(--ui-control-py)+(--spacing(1)))] text-center text-muted text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height)">No data</div>
       <div id="select-menu-listbox-v-0-0" role="listbox" aria-labelledby="select-menu-v-0-0" aria-multiselectable="false" aria-orientation="vertical" data-slot="select-menu-viewport" class="relative scroll-py-1 overflow-y-auto flex-1 p-1 isolate">
         <!--v-if-->
         <div data-reka-virtualizer="" style="position: relative; width: 100%; height: 160px;"></div>
