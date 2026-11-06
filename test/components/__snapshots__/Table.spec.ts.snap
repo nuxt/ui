@@ -2,9 +2,9 @@
 
 exports[`Table > renders with as correctly 1`] = `
 "<section data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table data-slot="base" class="relative min-w-full overflow-clip">
+  <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative">
+    <thead data-slot="thead" class="sticky z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -57,9 +57,9 @@ exports[`Table > renders with as correctly 1`] = `
 
 exports[`Table > renders with body-bottom slot correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table data-slot="base" class="relative min-w-full overflow-clip">
+  <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative">
+    <thead data-slot="thead" class="sticky z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -112,9 +112,9 @@ exports[`Table > renders with body-bottom slot correctly 1`] = `
 
 exports[`Table > renders with body-top slot correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table data-slot="base" class="relative min-w-full overflow-clip">
+  <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative">
+    <thead data-slot="thead" class="sticky z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -166,9 +166,9 @@ exports[`Table > renders with body-top slot correctly 1`] = `
 
 exports[`Table > renders with caption correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table data-slot="base" class="relative min-w-full overflow-clip">
+  <table data-slot="base" class="min-w-full overflow-clip">
     <caption data-slot="caption" class="sr-only">Table caption</caption>
-    <thead data-slot="thead" class="relative">
+    <thead data-slot="thead" class="sticky z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -221,9 +221,9 @@ exports[`Table > renders with caption correctly 1`] = `
 
 exports[`Table > renders with caption slot correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table data-slot="base" class="relative min-w-full overflow-clip">
+  <table data-slot="base" class="min-w-full overflow-clip">
     <caption data-slot="caption" class="sr-only">Caption slot</caption>
-    <thead data-slot="thead" class="relative">
+    <thead data-slot="thead" class="sticky z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -276,9 +276,9 @@ exports[`Table > renders with caption slot correctly 1`] = `
 
 exports[`Table > renders with cell slot correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table data-slot="base" class="relative min-w-full overflow-clip">
+  <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative">
+    <thead data-slot="thead" class="sticky z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -331,9 +331,9 @@ exports[`Table > renders with cell slot correctly 1`] = `
 
 exports[`Table > renders with class correctly 1`] = `
 "<div data-slot="root" class="overflow-auto outline-primary/25 focus-visible:outline-3 absolute">
-  <table data-slot="base" class="relative min-w-full overflow-clip">
+  <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative">
+    <thead data-slot="thead" class="sticky z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -386,9 +386,9 @@ exports[`Table > renders with class correctly 1`] = `
 
 exports[`Table > renders with column pinning and footer correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table data-slot="base" class="relative min-w-full overflow-clip">
+  <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative">
+    <thead data-slot="thead" class="sticky z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="left" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 sticky bg-default/75 z-1" style="left: 0px;">#</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
@@ -548,7 +548,7 @@ exports[`Table > renders with column pinning and footer correctly 1`] = `
       </tr>
       <!--v-if-->
     </tbody>
-    <tfoot data-slot="tfoot" class="relative [&amp;>[data-slot=separator]]:z-2">
+    <tfoot data-slot="tfoot" class="sticky z-1 [&amp;>[data-slot=separator]]:z-2">
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="left" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 sticky bg-default/75 z-1" style="left: 0px;">
@@ -578,9 +578,9 @@ exports[`Table > renders with column pinning and footer correctly 1`] = `
 
 exports[`Table > renders with columns correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table data-slot="base" class="relative min-w-full overflow-clip">
+  <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative">
+    <thead data-slot="thead" class="sticky z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <div data-slot="root" class="relative flex items-start flex-row">
@@ -740,7 +740,7 @@ exports[`Table > renders with columns correctly 1`] = `
       </tr>
       <!--v-if-->
     </tbody>
-    <tfoot data-slot="tfoot" class="relative [&amp;>[data-slot=separator]]:z-2">
+    <tfoot data-slot="tfoot" class="sticky z-1 [&amp;>[data-slot=separator]]:z-2">
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
@@ -770,9 +770,9 @@ exports[`Table > renders with columns correctly 1`] = `
 
 exports[`Table > renders with data correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table data-slot="base" class="relative min-w-full overflow-clip">
+  <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative">
+    <thead data-slot="thead" class="sticky z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -825,9 +825,9 @@ exports[`Table > renders with data correctly 1`] = `
 
 exports[`Table > renders with empty correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table data-slot="base" class="relative min-w-full overflow-clip">
+  <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative">
+    <thead data-slot="thead" class="sticky z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50"></tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -843,9 +843,9 @@ exports[`Table > renders with empty correctly 1`] = `
 
 exports[`Table > renders with empty slot correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table data-slot="base" class="relative min-w-full overflow-clip">
+  <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative">
+    <thead data-slot="thead" class="sticky z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <div data-slot="root" class="relative flex items-start flex-row">
@@ -878,7 +878,7 @@ exports[`Table > renders with empty slot correctly 1`] = `
         <td colspan="7" data-slot="empty" class="py-6 text-center text-sm text-muted">Empty slot</td>
       </tr>
     </tbody>
-    <tfoot data-slot="tfoot" class="relative [&amp;>[data-slot=separator]]:z-2">
+    <tfoot data-slot="tfoot" class="sticky z-1 [&amp;>[data-slot=separator]]:z-2">
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
@@ -908,9 +908,9 @@ exports[`Table > renders with empty slot correctly 1`] = `
 
 exports[`Table > renders with expanded slot correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table data-slot="base" class="relative min-w-full overflow-clip">
+  <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative">
+    <thead data-slot="thead" class="sticky z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -963,9 +963,9 @@ exports[`Table > renders with expanded slot correctly 1`] = `
 
 exports[`Table > renders with header slot correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table data-slot="base" class="relative min-w-full overflow-clip">
+  <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative">
+    <thead data-slot="thead" class="sticky z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">ID Header slot</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -1018,9 +1018,9 @@ exports[`Table > renders with header slot correctly 1`] = `
 
 exports[`Table > renders with loading animation carousel correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table aria-busy="true" data-slot="base" class="relative min-w-full overflow-clip">
+  <table aria-busy="true" data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-primary motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
+    <thead data-slot="thead" class="sticky z-1 after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-primary motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -1073,9 +1073,9 @@ exports[`Table > renders with loading animation carousel correctly 1`] = `
 
 exports[`Table > renders with loading animation carousel-inverse correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table aria-busy="true" data-slot="base" class="relative min-w-full overflow-clip">
+  <table aria-busy="true" data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-primary motion-safe:after:animate-[carousel-inverse_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-inverse-rtl_2s_linear_infinite]">
+    <thead data-slot="thead" class="sticky z-1 after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-primary motion-safe:after:animate-[carousel-inverse_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-inverse-rtl_2s_linear_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -1128,9 +1128,9 @@ exports[`Table > renders with loading animation carousel-inverse correctly 1`] =
 
 exports[`Table > renders with loading animation elastic correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table aria-busy="true" data-slot="base" class="relative min-w-full overflow-clip">
+  <table aria-busy="true" data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-primary motion-safe:after:animate-[elastic_2s_var(--ease-in-out)_infinite]">
+    <thead data-slot="thead" class="sticky z-1 after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-primary motion-safe:after:animate-[elastic_2s_var(--ease-in-out)_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -1183,9 +1183,9 @@ exports[`Table > renders with loading animation elastic correctly 1`] = `
 
 exports[`Table > renders with loading animation swing correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table aria-busy="true" data-slot="base" class="relative min-w-full overflow-clip">
+  <table aria-busy="true" data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-primary motion-safe:after:animate-[swing_2s_var(--ease-in-out)_infinite]">
+    <thead data-slot="thead" class="sticky z-1 after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-primary motion-safe:after:animate-[swing_2s_var(--ease-in-out)_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -1238,9 +1238,9 @@ exports[`Table > renders with loading animation swing correctly 1`] = `
 
 exports[`Table > renders with loading color error correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table aria-busy="true" data-slot="base" class="relative min-w-full overflow-clip">
+  <table aria-busy="true" data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-error motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
+    <thead data-slot="thead" class="sticky z-1 after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-error motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -1293,9 +1293,9 @@ exports[`Table > renders with loading color error correctly 1`] = `
 
 exports[`Table > renders with loading color info correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table aria-busy="true" data-slot="base" class="relative min-w-full overflow-clip">
+  <table aria-busy="true" data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-info motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
+    <thead data-slot="thead" class="sticky z-1 after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-info motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -1348,9 +1348,9 @@ exports[`Table > renders with loading color info correctly 1`] = `
 
 exports[`Table > renders with loading color neutral correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table aria-busy="true" data-slot="base" class="relative min-w-full overflow-clip">
+  <table aria-busy="true" data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-inverted motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
+    <thead data-slot="thead" class="sticky z-1 after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-inverted motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -1403,9 +1403,9 @@ exports[`Table > renders with loading color neutral correctly 1`] = `
 
 exports[`Table > renders with loading color primary correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table aria-busy="true" data-slot="base" class="relative min-w-full overflow-clip">
+  <table aria-busy="true" data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-primary motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
+    <thead data-slot="thead" class="sticky z-1 after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-primary motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -1458,9 +1458,9 @@ exports[`Table > renders with loading color primary correctly 1`] = `
 
 exports[`Table > renders with loading color secondary correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table aria-busy="true" data-slot="base" class="relative min-w-full overflow-clip">
+  <table aria-busy="true" data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-secondary motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
+    <thead data-slot="thead" class="sticky z-1 after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-secondary motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -1513,9 +1513,9 @@ exports[`Table > renders with loading color secondary correctly 1`] = `
 
 exports[`Table > renders with loading color success correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table aria-busy="true" data-slot="base" class="relative min-w-full overflow-clip">
+  <table aria-busy="true" data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-success motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
+    <thead data-slot="thead" class="sticky z-1 after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-success motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -1568,9 +1568,9 @@ exports[`Table > renders with loading color success correctly 1`] = `
 
 exports[`Table > renders with loading color warning correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table aria-busy="true" data-slot="base" class="relative min-w-full overflow-clip">
+  <table aria-busy="true" data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-warning motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
+    <thead data-slot="thead" class="sticky z-1 after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-warning motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -1623,9 +1623,9 @@ exports[`Table > renders with loading color warning correctly 1`] = `
 
 exports[`Table > renders with loading correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table aria-busy="true" data-slot="base" class="relative min-w-full overflow-clip">
+  <table aria-busy="true" data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-primary motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
+    <thead data-slot="thead" class="sticky z-1 after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-primary motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -1678,9 +1678,9 @@ exports[`Table > renders with loading correctly 1`] = `
 
 exports[`Table > renders with loading slot correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table aria-busy="true" data-slot="base" class="relative min-w-full overflow-clip">
+  <table aria-busy="true" data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-primary motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
+    <thead data-slot="thead" class="sticky z-1 after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-primary motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <div data-slot="root" class="relative flex items-start flex-row">
@@ -1713,7 +1713,7 @@ exports[`Table > renders with loading slot correctly 1`] = `
         <td colspan="7" data-slot="loading" class="py-6 text-center">Loading slot</td>
       </tr>
     </tbody>
-    <tfoot data-slot="tfoot" class="relative [&amp;>[data-slot=separator]]:z-2">
+    <tfoot data-slot="tfoot" class="sticky z-1 [&amp;>[data-slot=separator]]:z-2">
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
@@ -1743,9 +1743,9 @@ exports[`Table > renders with loading slot correctly 1`] = `
 
 exports[`Table > renders with loading without data correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table aria-busy="true" data-slot="base" class="relative min-w-full overflow-clip">
+  <table aria-busy="true" data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-primary motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
+    <thead data-slot="thead" class="sticky z-1 after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-primary motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <div data-slot="root" class="relative flex items-start flex-row">
@@ -1778,7 +1778,7 @@ exports[`Table > renders with loading without data correctly 1`] = `
         <td colspan="7" data-slot="loading" class="py-6 text-center"></td>
       </tr>
     </tbody>
-    <tfoot data-slot="tfoot" class="relative [&amp;>[data-slot=separator]]:z-2">
+    <tfoot data-slot="tfoot" class="sticky z-1 [&amp;>[data-slot=separator]]:z-2">
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
@@ -1808,9 +1808,9 @@ exports[`Table > renders with loading without data correctly 1`] = `
 
 exports[`Table > renders with meta field on columns correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table data-slot="base" class="relative min-w-full overflow-clip">
+  <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative">
+    <thead data-slot="thead" class="sticky z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;">
           <div data-slot="root" class="relative flex items-start flex-row">
@@ -1970,7 +1970,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
       </tr>
       <!--v-if-->
     </tbody>
-    <tfoot data-slot="tfoot" class="relative [&amp;>[data-slot=separator]]:z-2">
+    <tfoot data-slot="tfoot" class="sticky z-1 [&amp;>[data-slot=separator]]:z-2">
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;">
@@ -2000,9 +2000,9 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
 
 exports[`Table > renders with meta prop correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table data-slot="base" class="relative min-w-full overflow-clip">
+  <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative">
+    <thead data-slot="thead" class="sticky z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -2055,9 +2055,9 @@ exports[`Table > renders with meta prop correctly 1`] = `
 
 exports[`Table > renders with row pinning and virtualization correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table data-slot="base" class="relative min-w-full overflow-clip">
+  <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative">
+    <thead data-slot="thead" class="sticky z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -2077,9 +2077,9 @@ exports[`Table > renders with row pinning and virtualization correctly 1`] = `
 
 exports[`Table > renders with row pinning correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table data-slot="base" class="relative min-w-full overflow-clip">
+  <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative">
+    <thead data-slot="thead" class="sticky z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -2132,7 +2132,7 @@ exports[`Table > renders with row pinning correctly 1`] = `
 
 exports[`Table > renders with sticky correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table data-slot="base" class="relative min-w-full overflow-clip">
+  <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="sticky top-0 inset-x-0 bg-default/75 backdrop-blur-sm z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
@@ -2187,9 +2187,9 @@ exports[`Table > renders with sticky correctly 1`] = `
 
 exports[`Table > renders with ui correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table data-slot="base" class="relative min-w-full overflow-clip table-auto">
+  <table data-slot="base" class="min-w-full overflow-clip table-auto">
     <!--v-if-->
-    <thead data-slot="thead" class="relative">
+    <thead data-slot="thead" class="sticky z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -2242,7 +2242,7 @@ exports[`Table > renders with ui correctly 1`] = `
 
 exports[`Table > renders with virtualize and sticky correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table data-slot="base" class="relative min-w-full overflow-clip">
+  <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="sticky top-0 inset-x-0 bg-default/75 backdrop-blur-sm z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
@@ -2306,9 +2306,9 @@ exports[`Table > renders with virtualize and sticky correctly 1`] = `
 
 exports[`Table > renders with virtualize correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table data-slot="base" class="relative min-w-full overflow-clip">
+  <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative">
+    <thead data-slot="thead" class="sticky z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -2328,9 +2328,9 @@ exports[`Table > renders with virtualize correctly 1`] = `
 
 exports[`Table > renders with virtualize external scroll element correctly 1`] = `
 "<div data-slot="root" class="relative outline-primary/25 focus-visible:outline-3 overflow-visible">
-  <table data-slot="base" class="relative min-w-full overflow-clip">
+  <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative">
+    <thead data-slot="thead" class="sticky z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -2350,9 +2350,9 @@ exports[`Table > renders with virtualize external scroll element correctly 1`] =
 
 exports[`Table > renders without data correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
-  <table data-slot="base" class="relative min-w-full overflow-clip">
+  <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative">
+    <thead data-slot="thead" class="sticky z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50"></tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
