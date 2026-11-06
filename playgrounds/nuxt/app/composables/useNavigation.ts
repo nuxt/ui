@@ -93,6 +93,8 @@ const components = [
   'theme',
   'timeline',
   'toast',
+  'toggle',
+  'toggle-group',
   'tooltip',
   'tree',
   'user'
