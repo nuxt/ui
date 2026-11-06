@@ -605,6 +605,12 @@
   }
 }
 
+/* ProseImg zoom: the image moves between its place in the page and the zoomed view through a view transition. */
+::view-transition-group(*.ui-prose-img) {
+  animation-duration: 300ms;
+  animation-timing-function: var(--ease-out);
+}
+
 /*
  * Reduced motion: keep the fade for comprehension, drop scale/slide movement
  * on enter/exit presence animations. Redefining the keyframes here covers every

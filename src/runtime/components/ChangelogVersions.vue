@@ -2,12 +2,18 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import type { SpringOptions, UseScrollOptions } from 'motion-v'
 import theme from '../theme/changelog-versions'
 import type { ChangelogVersionProps, ChangelogVersionSlots } from './ChangelogVersion.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type ChangelogVersions = ComponentConfig<typeof theme, AppConfig, 'changelogVersions'>
+
+export interface ChangelogVersionsIndicator {
+  /**
+   * The scroll container the indicator tracks. Defaults to the page.
+   */
+  container?: HTMLElement | null
+}
 
 export interface ChangelogVersionsProps<T extends ChangelogVersionProps = ChangelogVersionProps> {
   /**
@@ -18,18 +24,15 @@ export interface ChangelogVersionsProps<T extends ChangelogVersionProps = Change
   versions?: T[]
   /**
    * Display an indicator bar on the left.
-   * By default, the indicator will track the scroll of the page. (https://motion.dev/docs/vue-use-scroll#page-scroll)
+   * By default, the indicator tracks the scroll of the page.
    * @defaultValue true
-   * @see https://motion.dev/docs/vue-use-scroll#api
    */
-  indicator?: boolean | UseScrollOptions
+  indicator?: boolean | ChangelogVersionsIndicator
   /**
-   * Enable scrolling motion effect on the indicator bar.
-   * `{ damping: 30, restDelta: 0.001 }`{lang="ts-type"}
+   * Fill the indicator bar as the page scrolls.
    * @defaultValue true
-   * @see https://motion.dev/docs/vue-transitions#spring
    */
-  indicatorMotion?: boolean | SpringOptions
+  indicatorMotion?: boolean
   class?: any
   ui?: ChangelogVersions['slots']
 }
@@ -49,10 +52,9 @@ export type ChangelogVersionsSlots<T extends ChangelogVersionProps = ChangelogVe
 </script>
 
 <script setup lang="ts" generic="T extends ChangelogVersionProps">
-import { computed } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { Primitive } from 'reka-ui'
-import { Motion, useScroll, useSpring, useTransform } from 'motion-v'
-import { defu } from 'defu'
+import { defaultWindow, useEventListener, usePreferredReducedMotion } from '@vueuse/core'
 import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
@@ -70,12 +72,54 @@ const getProxySlots = () => omit(slots, ['default', 'indicator'])
 
 const overrides = useComponentOverrides((ui: ChangelogVersions['AppConfig']['ui']) => ui.changelogVersions)
 
-const springOptions = computed(() => defu(typeof props.indicatorMotion === 'object' ? props.indicatorMotion : {}, { damping: 30, restDelta: 0.001 }))
-const scrollOptions = computed(() => typeof props.indicator === 'object' ? props.indicator : {})
+const container = computed(() => (typeof props.indicator === 'object' && props.indicator.container) || undefined)
+const reducedMotion = usePreferredReducedMotion()
 
-const { scrollYProgress } = useScroll(scrollOptions.value)
-const y = useSpring(scrollYProgress, springOptions)
-const height = useTransform(() => `${Number(y.get()) * 100}%`)
+const progress = ref(0)
+let frame: number | undefined
+let lastTime: number | undefined
+
+function readProgress() {
+  const el = container.value
+  const scrolled = el ? el.scrollTop : window.scrollY
+  const max = el ? el.scrollHeight - el.clientHeight : document.documentElement.scrollHeight - window.innerHeight
+  return max > 0 ? Math.min(Math.max(scrolled / max, 0), 1) : 0
+}
+
+// Eases the beam towards the scroll position, so it trails the scroll slightly instead of jumping with each wheel step
+function tick(time: number) {
+  const target = readProgress()
+  const elapsed = lastTime === undefined ? 16 : time - lastTime
+  const next = reducedMotion.value === 'reduce' ? target : progress.value + (target - progress.value) * (1 - Math.exp(-elapsed / 100))
+
+  progress.value = Math.abs(target - next) < 0.001 ? target : next
+
+  if (progress.value === target) {
+    frame = undefined
+    lastTime = undefined
+  } else {
+    lastTime = time
+    frame = requestAnimationFrame(tick)
+  }
+}
+
+function update() {
+  if (!props.indicator || !props.indicatorMotion || frame !== undefined) {
+    return
+  }
+
+  frame = requestAnimationFrame(tick)
+}
+
+useEventListener(() => container.value ?? defaultWindow, 'scroll', update, { passive: true })
+useEventListener(defaultWindow, 'resize', update, { passive: true })
+
+onMounted(update)
+onBeforeUnmount(() => {
+  if (frame !== undefined) {
+    cancelAnimationFrame(frame)
+  }
+})
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)())
@@ -85,7 +129,7 @@ const ui = computed(() => tv(theme, overrides.value)())
   <Primitive :as="props.as" data-slot="changelog-versions" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div v-if="!!props.indicator || !!slots.indicator" data-slot="changelog-versions-indicator" :class="ui.indicator({ class: props.ui?.indicator })">
       <slot name="indicator">
-        <Motion v-if="!!props.indicatorMotion" data-slot="changelog-versions-beam" :class="ui.beam({ class: props.ui?.beam })" :style="{ height }" />
+        <div v-if="!!props.indicatorMotion" data-slot="changelog-versions-beam" :class="ui.beam({ class: props.ui?.beam })" :style="{ transform: `scaleY(${progress})` }" />
       </slot>
     </div>
 

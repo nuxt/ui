@@ -61,7 +61,6 @@ export default defineNuxtConfig({
         'embla-carousel-fade',
         'embla-carousel-vue',
         'embla-carousel-wheel-gestures',
-        'motion-v',
         'tailwindcss/colors',
         'vaul-vue',
         'zod'
