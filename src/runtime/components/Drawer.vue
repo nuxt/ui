@@ -1,7 +1,6 @@
 <script lang="ts">
 import type { VNode } from 'vue'
-import type { DrawerRootProps, DrawerRootEmits } from 'vaul-vue'
-import type { DialogContentProps, DialogContentEmits } from 'reka-ui'
+import type { DrawerRootProps, DrawerRootEmits, DrawerOpenChangeDetails, DrawerContentProps, DrawerContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '../theme/drawer'
 import type { ButtonProps } from './Button.vue'
@@ -12,7 +11,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Drawer = ComponentConfig<typeof theme, AppConfig, 'drawer'>
 
-export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | 'closeThreshold' | 'shouldScaleBackground' | 'setBackgroundColorOnScale' | 'scrollLockTimeout' | 'fixed' | 'dismissible' | 'modal' | 'open' | 'defaultOpen' | 'nested' | 'direction' | 'noBodyStyles' | 'handleOnly' | 'preventScrollRestoration' | 'snapPoints'> {
+export interface DrawerProps extends Pick<DrawerRootProps, 'modal' | 'open' | 'defaultOpen' | 'snapPoints' | 'snapPoint' | 'defaultSnapPoint' | 'snapToSequentialPoints'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -21,12 +20,17 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
   title?: string
   description?: string
   /**
+   * The edge the drawer slides in from (and the direction it's swiped to dismiss).
+   * @defaultValue 'bottom'
+   */
+  direction?: 'top' | 'right' | 'bottom' | 'left'
+  /**
    * Whether to inset the drawer from the edges.
-   * @defaultValue false
+   * @defaultValue true
    */
   inset?: boolean
   /** The content of the drawer. */
-  content?: Omit<DialogContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DialogContentEmits>>
+  content?: Omit<DrawerContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DrawerContentEmits>>
   /**
    * Render an overlay behind the drawer.
    * @defaultValue true
@@ -34,7 +38,7 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
   overlay?: boolean
   /**
    * Render a handle on the drawer.
-   * @defaultValue true
+   * @defaultValue false
    */
   handle?: boolean
   /**
@@ -42,11 +46,6 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
    * @defaultValue true
    */
   portal?: boolean | string | HTMLElement
-  /**
-   * Whether the drawer is nested in another drawer.
-   * @defaultValue false
-   */
-  nested?: boolean
   /**
    * Display a close button to dismiss the drawer.
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
@@ -59,12 +58,19 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
    * @IconifyIcon
    */
   closeIcon?: IconProps['name']
+  /**
+   * When `false`, the drawer will not close when clicking outside, pressing escape, or swiping.
+   * @defaultValue true
+   */
+  dismissible?: boolean
   class?: any
   ui?: Drawer['slots']
 }
 
 export interface DrawerEmits extends DrawerRootEmits {
-  (e: 'after:leave' | 'after:enter' | 'close:prevent'): void
+  'close:prevent': []
+  'after:enter': []
+  'after:leave': []
 }
 
 export interface DrawerSlots {
@@ -82,9 +88,9 @@ export interface DrawerSlots {
 
 <script setup lang="ts">
 import { computed, toRef } from 'vue'
-import { VisuallyHidden } from 'reka-ui'
+import { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerOverlay, DrawerContent, DrawerTitle, DrawerDescription, DrawerHandle, DrawerClose, VisuallyHidden } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { DrawerRoot, DrawerRootNested, DrawerTrigger, DrawerPortal, DrawerOverlay, DrawerContent, DrawerTitle, DrawerDescription, DrawerHandle, DrawerClose } from 'vaul-vue'
+import { reactivePick } from '@vueuse/core'
 import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { FieldGroupReset } from '../composables/useFieldGroup'
 import { useLocale } from '../composables/useLocale'
@@ -95,9 +101,9 @@ import UButton from './Button.vue'
 
 const _props = withDefaults(defineProps<DrawerProps>(), {
   direction: 'bottom',
+  inset: true,
   portal: true,
   overlay: true,
-  handle: true,
   modal: true,
   dismissible: true
 })
@@ -110,39 +116,61 @@ const { t } = useLocale()
 const appConfig = useThemeConfig() as Drawer['AppConfig']
 const overrides = useComponentOverrides((ui: Drawer['AppConfig']['ui']) => ui.drawer)
 
-const rootProps = useForwardProps(props, ['activeSnapPoint', 'closeThreshold', 'shouldScaleBackground', 'setBackgroundColorOnScale', 'scrollLockTimeout', 'fixed', 'dismissible', 'modal', 'open', 'defaultOpen', 'nested', 'direction', 'noBodyStyles', 'handleOnly', 'preventScrollRestoration', 'snapPoints'], emits)
-const portalProps = usePortal(toRef(() => props.portal))
-// reka-ui sets `pointer-events: none` on `<body>` for modal dialogs, so `noBodyStyles` must opt out of it too
-const contentProps = toRef(() => props.noBodyStyles ? { disableOutsidePointerEvents: false, ...props.content } : props.content)
-const contentEvents = computed(() => {
-  if (!props.dismissible) {
-    const events = ['interactOutside', 'escapeKeyDown']
+// reka-ui's Drawer dismisses by swiping towards the edge the drawer slides in
+// from, so `direction` (which edge to anchor to) and `swipeDirection` (which
+// way a swipe-to-dismiss gesture travels) are always the same value — just
+// named differently between the two axes' vocabularies (top/bottom vs up/down).
+const SWIPE_DIRECTION = { top: 'up', bottom: 'down', left: 'left', right: 'right' } as const
+const swipeDirection = computed(() => SWIPE_DIRECTION[props.direction])
 
-    return events.reduce((acc, curr) => {
-      acc[curr] = (e: Event) => {
-        e.preventDefault()
-        emits('close:prevent')
-      }
-      return acc
-    }, {} as Record<typeof events[number], (e: Event) => void>)
+// reka-ui's Drawer can close for reasons that never pass through a DOM event
+// (e.g. `swipe`, or dragging past the last snap point), so `dismissible` is
+// enforced centrally on the open-change reason rather than by intercepting
+// individual outside-click/escape-key events like `Modal` does. `details.cancel()`
+// is what the swipe gesture branches on to abort and restore its transform.
+// A press on the trigger or on a `DrawerClose` stays allowed, like `Modal`.
+const ALLOWED_CLOSE_REASONS = new Set(['close-press', 'trigger-press'])
+function onOpenChange(value: boolean, details: DrawerOpenChangeDetails) {
+  if (!value && !props.dismissible && !ALLOWED_CLOSE_REASONS.has(details.reason ?? '')) {
+    details.cancel()
+    emits('close:prevent')
+    return
   }
 
-  return {
-    pointerDownOutside
-  }
+  // eslint-disable-next-line vue/require-explicit-emits -- `update:open` is declared via `DrawerEmits extends DrawerRootEmits`, which the rule doesn't resolve through
+  emits('update:open', value, details)
+}
+
+// reka-ui's `useEmitAsProps` (used internally by `useForwardProps`) maps every
+// event declared on *this* component's own `defineEmits` into an `onXxx` prop —
+// regardless of which emit function is passed in — so `onUpdate:open` and
+// `onClose:prevent` end up in the result below. Both are omitted before
+// binding to `DrawerRoot`: `update:open` is wired explicitly via `onOpenChange`
+// so the `dismissible` gate isn't bypassed, and `close:prevent` isn't a
+// `DrawerRoot` prop at all (forwarding it just trips Vue's fallthrough-attrs
+// warning, since `DrawerRoot`'s template root is a `<slot>` fragment).
+const rawRootProps = useForwardProps(computed(() => ({
+  ...reactivePick(props, 'open', 'defaultOpen', 'modal', 'snapPoints', 'snapPoint', 'defaultSnapPoint', 'snapToSequentialPoints'),
+  swipeDirection: swipeDirection.value
+})), emits)
+const rootProps = computed(() => {
+  const { 'onUpdate:open': _onUpdateOpen, 'onClose:prevent': _onClosePrevent, 'onAfter:enter': _onAfterEnter, 'onAfter:leave': _onAfterLeave, ...rest } = rawRootProps.value as Record<string, unknown>
+  return rest
 })
 
-// vaul also fires `animationEnd(false)` when a closed drawer mounts, so only a real close emits `after:leave`
-let entered = false
-function onAnimationEnd(open: boolean) {
-  if (open) {
-    entered = true
+function onOpenComplete(value: boolean) {
+  if (value) {
     emits('after:enter')
-  } else if (entered) {
-    entered = false
+  } else {
     emits('after:leave')
   }
 }
+
+const portalProps = usePortal(toRef(() => props.portal))
+const contentProps = toRef(() => props.content)
+const contentEvents = computed(() => ({
+  pointerDownOutside
+}))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
@@ -153,7 +181,7 @@ const ui = computed(() => tv(theme, overrides.value)({
 </script>
 
 <template>
-  <component :is="props.nested ? DrawerRootNested : DrawerRoot" v-bind="rootProps" @animation-end="onAnimationEnd">
+  <DrawerRoot v-bind="rootProps" @update:open="onOpenChange" @update:open-complete="onOpenComplete">
     <DrawerTrigger v-if="!!slots.default" as-child :class="props.class">
       <slot />
     </DrawerTrigger>
@@ -232,5 +260,5 @@ const ui = computed(() => tv(theme, overrides.value)({
         </DrawerContent>
       </FieldGroupReset>
     </DrawerPortal>
-  </component>
+  </DrawerRoot>
 </template>

@@ -8,7 +8,7 @@ keywords:
 links:
   - label: Drawer
     icon: i-custom-reka-ui
-    to: https://github.com/unovue/vaul-vue
+    to: https://reka-ui.com/docs/components/drawer
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v5/src/runtime/components/Drawer.vue
@@ -185,14 +185,14 @@ slots:
 
 ### Inset
 
-Use the `inset` prop to inset the Drawer from the edges.
+Use the `inset` prop to control whether the Drawer floats away from the edges. Defaults to `true`.
 
 ::component-code
 ---
 prettier: true
 props:
   direction: 'right'
-  inset: true
+  inset: false
 slots:
   default: |
 
@@ -211,38 +211,15 @@ slots:
 
 ### Handle
 
-Use the `handle` prop to control whether the Drawer has a handle or not. Defaults to `true`.
+Use the `handle` prop to render a grab handle on the Drawer. Defaults to `false`.
+
+The handle is decorative, the whole content is draggable without it, so it's most useful as a hint on touch devices.
 
 ::component-code
 ---
 prettier: true
 props:
-  handle: false
-slots:
-  default: |
-
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
-
-  content: |
-
-    <Placeholder class="h-48 m-4" />
----
-
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
-
-#content
-:placeholder{class="h-48 m-4"}
-::
-
-### Handle Only
-
-Use the `handle-only` prop to only allow the Drawer to be dragged by the handle.
-
-::component-code
----
-prettier: true
-props:
-  handleOnly: true
+  handle: true
 slots:
   default: |
 
@@ -315,7 +292,7 @@ slots:
 
 ### Dismissible
 
-Use the `dismissible` prop to control whether the Drawer is dismissible when clicking outside of it or pressing escape. Defaults to `true`.
+Use the `dismissible` prop to control whether the Drawer can be dismissed by clicking outside of it, pressing escape or swiping it away. Defaults to `true`.
 
 ::note
 A `close:prevent` event will be emitted when the user tries to close it.
@@ -330,90 +307,6 @@ You can combine `modal: false` with `dismissible: false` to make the Drawer's ba
 prettier: true
 name: 'drawer-dismissible-example'
 ---
-::
-
-### Scale Background
-
-Use the `should-scale-background` prop to scale the background when the Drawer is open, creating a visual depth effect. You can set the `set-background-color-on-scale` prop to `false` to prevent changing the background color.
-
-::component-code
----
-prettier: true
-props:
-  shouldScaleBackground: true
-  setBackgroundColorOnScale: true
-slots:
-  default: |
-
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
-
-  content: |
-
-    <Placeholder class="h-48 m-4" />
----
-
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
-
-#content
-:placeholder{class="h-screen m-4"}
-::
-
-::warning
-Make sure to add the `data-vaul-drawer-wrapper` directive to a parent element of your app to make this work.
-
-```vue [app.vue]
-<template>
-  <UApp>
-    <div class="bg-default" data-vaul-drawer-wrapper>
-      <NuxtLayout>
-        <NuxtPage />
-      </NuxtLayout>
-    </div>
-  </UApp>
-</template>
-```
-
-```ts [nuxt.config.ts]
-export default defineNuxtConfig({
-  app: {
-    rootAttrs: {
-      'data-vaul-drawer-wrapper': '',
-      'class': 'bg-default'
-    }
-  }
-})
-```
-
-::
-
-### No Body Styles :badge{label="4.12+" class="align-text-top"}
-
-Use the `no-body-styles` prop to prevent the Drawer from applying styles to the `<body>` element, such as `pointer-events: none` which blocks interaction with the page while the Drawer is open.
-
-::note
-When `overlay` is enabled, it still locks the body scroll. Combine `no-body-styles` with `overlay: false` to keep the page interactive.
-::
-
-::component-code
----
-prettier: true
-props:
-  noBodyStyles: true
-  overlay: false
-slots:
-  default: |
-
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
-
-  content: |
-
-    <Placeholder class="h-48 m-4" />
----
-
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
-
-#content
-:placeholder{class="h-48 m-4"}
 ::
 
 ## Examples
@@ -450,7 +343,7 @@ name: 'drawer-responsive-example'
 
 ### Nested drawers
 
-You can nest drawers within each other by using the `nested` prop.
+You can nest drawers within each other, nesting is detected automatically.
 
 ::component-example
 ---

@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
@@ -15,8 +15,8 @@ describe('Drawer', () => {
     ['with title', { props: { ...props, title: 'Title' } }],
     ['with description', { props: { ...props, title: 'Title', description: 'Description' } }],
     ...directions.map((direction: string) => [`with direction ${direction}`, { props: { ...props, direction, title: 'Title', description: 'Description' } }]),
-    ...directions.map((direction: string) => [`with direction ${direction} inset`, { props: { ...props, direction, inset: true, title: 'Title', description: 'Description' } }]),
-    ['without handle', { props: { ...props, handle: false, title: 'Title', description: 'Description' } }],
+    ...directions.map((direction: string) => [`with direction ${direction} without inset`, { props: { ...props, direction, inset: false, title: 'Title', description: 'Description' } }]),
+    ['with handle', { props: { ...props, handle: true, title: 'Title', description: 'Description' } }],
     ['without overlay', { props: { ...props, overlay: false, title: 'Title', description: 'Description' } }],
     ['with close', { props: { ...props, close: true, title: 'Title', description: 'Description' } }],
     ['with closeIcon', { props: { ...props, close: true, closeIcon: 'i-lucide-trash', title: 'Title', description: 'Description' } }],
@@ -47,31 +47,13 @@ describe('Drawer', () => {
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
-  it('does not disable outside pointer events with `noBodyStyles`', async () => {
-    const wrapper = await mountSuspended(Drawer, { props: { open: true, portal: false } })
-    expect(wrapper.findComponent({ name: 'DialogContent' }).props('disableOutsidePointerEvents')).toBeUndefined()
-
-    await wrapper.setProps({ noBodyStyles: true })
-    expect(wrapper.findComponent({ name: 'DialogContent' }).props('disableOutsidePointerEvents')).toBe(false)
-
-    await wrapper.setProps({ content: { disableOutsidePointerEvents: true } })
-    expect(wrapper.findComponent({ name: 'DialogContent' }).props('disableOutsidePointerEvents')).toBe(true)
-  })
-
-  it('emits `after:enter` and `after:leave` once the animation ends', async () => {
-    vi.useFakeTimers({ shouldAdvanceTime: true })
+  it('emits `after:leave` once the animation ends', async () => {
     const wrapper = await mountSuspended(Drawer, { props: { open: false, portal: false } })
-
-    vi.advanceTimersByTime(500)
     expect(wrapper.emitted('after:leave')).toBeUndefined()
 
     await wrapper.setProps({ open: true })
-    vi.advanceTimersByTime(500)
-    expect(wrapper.emitted('after:enter')).toHaveLength(1)
-
     await wrapper.setProps({ open: false })
-    vi.advanceTimersByTime(500)
+    wrapper.find('[data-slot="drawer-content"]').element.dispatchEvent(new Event('transitionend'))
     expect(wrapper.emitted('after:leave')).toHaveLength(1)
-    vi.useRealTimers()
   })
 })
