@@ -9,7 +9,7 @@ export default defineTheme({
   },
   variants: {
     zoom: {
-      true: { base: 'will-change-transform' }
+      true: ''
     },
     open: {
       true: ''
