@@ -92,7 +92,7 @@ function onUpdate(value: boolean) {
   <Toggle
     v-slot="{ pressed }"
     v-bind="rootProps"
-    :name="name"
+    :name="disabled ? undefined : name"
     :disabled="disabled"
     as-child
     @update:model-value="onUpdate"

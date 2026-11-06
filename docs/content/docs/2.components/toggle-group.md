@@ -73,7 +73,7 @@ props:
 
 ### Items
 
-Use the `items` prop as an array of objects that accept the [Button](/docs/components/button) props except the link ones, plus a `value` that defaults to the index:
+Use the `items` prop as an array of objects that accept the [Button](/docs/components/button) props except the link ones, plus a `value` that defaults to the index as a string, so the model holds strings too:
 
 - `value?: AcceptableValue`{lang="ts-type"}
 - `label?: string`{lang="ts-type"}

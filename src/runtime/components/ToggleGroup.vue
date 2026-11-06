@@ -168,7 +168,7 @@ function onUpdate(value: any) {
   <ToggleGroupRoot
     :id="id"
     v-bind="{ ...rootProps, ...ariaAttrs }"
-    :name="name"
+    :name="disabled ? undefined : name"
     :disabled="disabled"
     :aria-labelledby="($attrs['aria-labelledby'] as string | undefined) ?? ($attrs['aria-label'] ? undefined : labelId)"
     data-slot="root"
