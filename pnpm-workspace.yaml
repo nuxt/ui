@@ -168,7 +168,11 @@ overrides:
   # inside vitest's own vite, so the wider range is bookkeeping, not runtime.
   "@codspeed/vitest-plugin>vite": ^7.0.0 || ^8.0.0
   "@nuxt/cli": ^4.0.3
-  "@nuxt/kit": ^4.6.4
+  "@nuxt/kit": npm:@nuxt/kit-nightly@4.6.4-2611050021-c80eb9c
+  "@nuxt/schema": npm:@nuxt/schema-nightly@4.6.4-2611050021-c80eb9c
+  nuxt: npm:nuxt-nightly@4.6.4-2611050021-c80eb9c
+  "@nuxt/vite-builder": npm:@nuxt/vite-builder-nightly@4.6.4-2611050021-c80eb9c
+  "@nuxt/nitro-server": npm:@nuxt/nitro-server-nightly@4.6.4-2611050021-c80eb9c
   "@nuxt/ui": workspace:*
   unplugin: ^3.7.0
   c12: ^3.3.4
