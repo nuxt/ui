@@ -3,7 +3,7 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative overflow-auto outline-primary/25 focus-visible:outline-3',
-    base: 'min-w-full overflow-clip',
+    base: 'relative min-w-full overflow-clip',
     caption: 'sr-only',
     thead: 'relative',
     tbody: 'isolate [&>tr]:data-[selectable=true]:hover:bg-elevated/50 [&>tr]:data-[selectable=true]:outline-primary/25 [&>tr]:data-[selectable=true]:focus-visible:outline-3 [&>tr]:data-[selectable=true]:-outline-offset-3 divide-y divide-default',
