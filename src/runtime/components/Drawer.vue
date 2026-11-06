@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { VNode } from 'vue'
-import type { DrawerRootProps, DrawerRootEmits, DrawerOpenChangeDetails, DialogContentProps, DialogContentEmits } from 'reka-ui'
+import type { DrawerRootProps, DrawerRootEmits, DrawerOpenChangeDetails, DrawerContentProps, DrawerContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '../theme/drawer'
 import type { ButtonProps } from './Button.vue'
@@ -26,11 +26,11 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'modal' | 'open' | 'd
   direction?: 'top' | 'right' | 'bottom' | 'left'
   /**
    * Whether to inset the drawer from the edges.
-   * @defaultValue false
+   * @defaultValue true
    */
   inset?: boolean
   /** The content of the drawer. */
-  content?: Omit<DialogContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DialogContentEmits>>
+  content?: Omit<DrawerContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DrawerContentEmits>>
   /**
    * Render an overlay behind the drawer.
    * @defaultValue true
@@ -38,7 +38,7 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'modal' | 'open' | 'd
   overlay?: boolean
   /**
    * Render a handle on the drawer.
-   * @defaultValue true
+   * @defaultValue false
    */
   handle?: boolean
   /**
@@ -87,7 +87,7 @@ export interface DrawerSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, toRef } from 'vue'
+import { computed, toRef } from 'vue'
 import { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerOverlay, DrawerContent, DrawerTitle, DrawerDescription, DrawerHandle, DrawerClose, VisuallyHidden } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
@@ -101,9 +101,9 @@ import UButton from './Button.vue'
 
 const _props = withDefaults(defineProps<DrawerProps>(), {
   direction: 'bottom',
+  inset: true,
   portal: true,
   overlay: true,
-  handle: true,
   modal: true,
   dismissible: true
 })
@@ -126,26 +126,17 @@ const swipeDirection = computed(() => SWIPE_DIRECTION[props.direction])
 // reka-ui's Drawer can close for reasons that never pass through a DOM event
 // (e.g. `swipe`, or dragging past the last snap point), so `dismissible` is
 // enforced centrally on the open-change reason rather than by intercepting
-// individual outside-click/escape-key events like `Modal` does.
-const isControlled = computed(() => props.open !== undefined)
-const uncontrolledOpen = ref(props.defaultOpen ?? false)
-const openModel = computed({
-  get: () => isControlled.value ? !!props.open : uncontrolledOpen.value,
-  set: (value: boolean) => {
-    if (!isControlled.value) {
-      uncontrolledOpen.value = value
-    }
-  }
-})
-
-const ALLOWED_CLOSE_REASONS = new Set(['close-press', 'cancel'])
+// individual outside-click/escape-key events like `Modal` does. `details.cancel()`
+// is what the swipe gesture branches on to abort and restore its transform.
+// A press on the trigger or on a `DrawerClose` stays allowed, like `Modal`.
+const ALLOWED_CLOSE_REASONS = new Set(['close-press', 'trigger-press'])
 function onOpenChange(value: boolean, details: DrawerOpenChangeDetails) {
   if (!value && !props.dismissible && !ALLOWED_CLOSE_REASONS.has(details.reason ?? '')) {
+    details.cancel()
     emits('close:prevent')
     return
   }
 
-  openModel.value = value
   // eslint-disable-next-line vue/require-explicit-emits -- `update:open` is declared via `DrawerEmits extends DrawerRootEmits`, which the rule doesn't resolve through
   emits('update:open', value, details)
 }
@@ -159,7 +150,7 @@ function onOpenChange(value: boolean, details: DrawerOpenChangeDetails) {
 // `DrawerRoot` prop at all (forwarding it just trips Vue's fallthrough-attrs
 // warning, since `DrawerRoot`'s template root is a `<slot>` fragment).
 const rawRootProps = useForwardProps(computed(() => ({
-  ...reactivePick(props, 'modal', 'snapPoints', 'snapPoint', 'defaultSnapPoint', 'snapToSequentialPoints'),
+  ...reactivePick(props, 'open', 'defaultOpen', 'modal', 'snapPoints', 'snapPoint', 'defaultSnapPoint', 'snapToSequentialPoints'),
   swipeDirection: swipeDirection.value
 })), emits)
 const rootProps = computed(() => {
@@ -190,7 +181,7 @@ const ui = computed(() => tv(theme, overrides.value)({
 </script>
 
 <template>
-  <DrawerRoot v-bind="rootProps" :open="openModel" @update:open="onOpenChange" @update:open-complete="onOpenComplete">
+  <DrawerRoot v-bind="rootProps" @update:open="onOpenChange" @update:open-complete="onOpenComplete">
     <DrawerTrigger v-if="!!slots.default" as-child :class="props.class">
       <slot />
     </DrawerTrigger>

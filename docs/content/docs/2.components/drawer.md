@@ -185,14 +185,14 @@ slots:
 
 ### Inset
 
-Use the `inset` prop to inset the Drawer from the edges.
+Use the `inset` prop to control whether the Drawer floats away from the edges. Defaults to `true`.
 
 ::component-code
 ---
 prettier: true
 props:
   direction: 'right'
-  inset: true
+  inset: false
 slots:
   default: |
 
@@ -211,13 +211,15 @@ slots:
 
 ### Handle
 
-Use the `handle` prop to control whether the Drawer has a handle or not. Defaults to `true`.
+Use the `handle` prop to render a grab handle on the Drawer. Defaults to `false`.
+
+The handle is decorative, the whole content is draggable without it, so it's most useful as a hint on touch devices.
 
 ::component-code
 ---
 prettier: true
 props:
-  handle: false
+  handle: true
 slots:
   default: |
 
