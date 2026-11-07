@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: 'karusel',
       slide: 'slayt'
     },
+    chatAttachment: {
+      uploading: 'Yükleniyor',
+      error: 'Yükleme başarısız'
+    },
     chatMessages: {
       autoScroll: 'Aşağı kaydır'
     },
     chatPrompt: {
-      placeholder: 'Buraya mesajınızı yazın…'
+      placeholder: 'Buraya mesajınızı yazın…',
+      queue: 'Sıradaki mesajlar',
+      sendNow: 'Şimdi gönder',
+      edit: 'Düzenle',
+      remove: 'Kaldır'
     },
     chatPromptSubmit: {
       label: 'Gönder',

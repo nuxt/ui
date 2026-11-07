@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: 'карусель',
       slide: 'слайд'
     },
+    chatAttachment: {
+      uploading: 'Жүктөлүүдө',
+      error: 'Жүктөө ишке ашкан жок'
+    },
     chatMessages: {
       autoScroll: 'Ылдый жылдыруу'
     },
     chatPrompt: {
-      placeholder: 'Бул жерге билдирүүңүздү жазыңыз…'
+      placeholder: 'Бул жерге билдирүүңүздү жазыңыз…',
+      queue: 'Кезектеги билдирүүлөр',
+      sendNow: 'Азыр жөнөтүү',
+      edit: 'Түзөтүү',
+      remove: 'Өчүрүү'
     },
     chatPromptSubmit: {
       label: 'Билдирүү жөнөтүү',

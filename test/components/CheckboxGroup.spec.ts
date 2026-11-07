@@ -208,4 +208,27 @@ describe('CheckboxGroup', () => {
       expect(formFieldLabel?.for).toBeUndefined()
     })
   })
+
+  // https://github.com/nuxt/ui/issues/6033
+  describe('label element', () => {
+    const items = [{ value: '1', label: 'Option 1' }]
+
+    test('is a <label> in the default (list) variant', async () => {
+      const wrapper = await mountSuspended(CheckboxGroup, { props: { items, defaultValue: ['1'] } })
+      const label = wrapper.find('[data-slot="label"]')
+
+      expect(label.exists()).toBe(true)
+      expect(label.element.tagName).toBe('LABEL')
+      expect(label.attributes('for')).toBeTruthy()
+    })
+
+    test.each(['card', 'table'] as const)('is a <div> in the %s variant', async (variant) => {
+      const wrapper = await mountSuspended(CheckboxGroup, { props: { items, defaultValue: ['1'], variant } })
+      const label = wrapper.find('[data-slot="label"]')
+
+      expect(label.exists()).toBe(true)
+      expect(label.element.tagName).toBe('DIV')
+      expect(label.attributes('for')).toBeUndefined()
+    })
+  })
 })

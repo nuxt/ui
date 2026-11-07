@@ -227,6 +227,9 @@ export function resolveAs<T extends { root: any }>(as: any, defaults: T): T {
     || typeof as === 'function'
     || typeof as?.render === 'function'
     || typeof as?.setup === 'function'
+    // Components inheriting their `render` or `setup`
+    || !!as?.extends
+    || !!as?.mixins
   ) {
     return { ...defaults, root: as }
   }

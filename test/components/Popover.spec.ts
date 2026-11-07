@@ -1,8 +1,12 @@
-import { describe, it, expect } from 'vitest'
+import type { Component } from 'vue'
+import { h } from 'vue'
+import { describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import Popover from '../../src/runtime/components/Popover.vue'
+import Checkbox from '../../src/runtime/components/Checkbox.vue'
+import Switch from '../../src/runtime/components/Switch.vue'
 
 const reference = { getBoundingClientRect: () => ({ x: 0, y: 0, top: 0, left: 0, right: 0, bottom: 0, width: 0, height: 0, toJSON: () => ({}) }) as DOMRect }
 
@@ -46,6 +50,25 @@ describe('Popover', () => {
     expect(wrapper.text()).toContain('Trigger')
     expect(wrapper.find('[data-slot="content"]').exists()).toBe(true)
     expect(wrapper.text()).toContain('Anchored content')
+  })
+
+  it.each([
+    ['Checkbox', Checkbox],
+    ['Switch', Switch]
+  ])('opens in hover mode when entering the %s label', async (_, component) => {
+    const wrapper = await mountSuspended(Popover, {
+      props: { mode: 'hover', openDelay: 0, portal: false },
+      slots: {
+        default: () => h(component as Component, { label: 'Accept terms' }),
+        content: () => h('p', 'Help')
+      },
+      attachTo: document.body
+    })
+
+    wrapper.find('[data-slot="root"]').element.dispatchEvent(new PointerEvent('pointerenter', { pointerType: 'mouse' }))
+
+    await vi.waitFor(() => expect(wrapper.find('[data-slot="content"]').exists()).toBe(true))
+    wrapper.unmount()
   })
 
   it('passes accessibility tests', async () => {

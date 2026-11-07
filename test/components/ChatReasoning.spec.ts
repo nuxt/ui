@@ -63,4 +63,21 @@ describe('ChatReasoning', () => {
     await wrapper.setProps({ streaming: true })
     expect(root.attributes('data-state')).toBe('closed')
   })
+
+  it('stays open when opened by the user while streaming', async () => {
+    const wrapper = await mountSuspended(ChatReasoning, {
+      props: { text: 'Thinking...', streaming: true, autoOpen: false }
+    })
+
+    const root = wrapper.find('[data-slot="root"]')
+    await wrapper.find('[data-slot="trigger"]').trigger('click')
+    expect(root.attributes('data-state')).toBe('open')
+
+    vi.useFakeTimers()
+    await wrapper.setProps({ streaming: false })
+    vi.advanceTimersByTime(500)
+    vi.useRealTimers()
+    await wrapper.vm.$nextTick()
+    expect(root.attributes('data-state')).toBe('open')
+  })
 })

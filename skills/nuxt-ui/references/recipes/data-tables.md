@@ -100,7 +100,7 @@ const filteredRows = computed(() => {
 
 ## With row selection
 
-Row selection uses TanStack Table's `rowSelection` state — a `Record<string, boolean>` keyed by row index.
+Row selection uses TanStack Table's `rowSelection` state, a `Record<string, boolean>` keyed by row ID. The default ID is the row index. Provide `getRowId` with a stable unique string ID when replacing data, filtering it before passing it to the table, or fetching server pages.
 
 ```vue
 <script setup lang="ts">
@@ -109,7 +109,7 @@ const rowSelection = ref<Record<string, boolean>>({})
 </script>
 
 <template>
-  <UTable ref="table" v-model:row-selection="rowSelection" :data="data" :columns="columns" />
+  <UTable ref="table" v-model:row-selection="rowSelection" :data="data" :columns="columns" :get-row-id="row => row.id" />
 
   <div class="px-4 py-3.5 text-sm text-muted">
     {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
@@ -117,6 +117,8 @@ const rowSelection = ref<Record<string, boolean>>({})
   </div>
 </template>
 ```
+
+This example assumes each record has a unique string `id`. With server-side pagination, selected row models only include records in the current input data. For cross-page bulk actions, keep the selected IDs in `rowSelection` rather than deriving the full selection from `getSelectedRowModel()` or `getFilteredSelectedRowModel()`. Decide whether page or filter changes should clear selection.
 
 Add a checkbox column using the `h` function. Use tri-state `modelValue` (`true`, `false`, or `'indeterminate'`) for the "select all" header:
 
@@ -213,6 +215,28 @@ const { data, status } = await useAsyncData(
   </div>
 </template>
 ```
+
+## Updating large datasets
+
+UTable deep-watches `data` by default. For rows managed through array replacement, disable deep watching with `:watch-options="{ deep: false }"`. Replace the array and each changed row so the table refreshes its row models.
+
+```vue
+<script setup lang="ts">
+const rows = shallowRef([{ id: '1', name: 'Alice' }])
+
+function renameRow(id: string, name: string) {
+  rows.value = rows.value.map(row => row.id === id ? { ...row, name } : row)
+}
+</script>
+
+<template>
+  <UTable :data="rows" :watch-options="{ deep: false }" />
+</template>
+```
+
+With deep watching disabled, do not rely on `push()`, `splice()`, or nested edits alone to refresh table row models. Keep the default watcher when in-place mutation is part of the update model.
+
+The separate `virtualize` option limits rendered rows for large datasets. It does not disable deep watching. Check the installed Nuxt UI version for virtualization support and its sticky or pinning restrictions.
 
 ## Tips
 

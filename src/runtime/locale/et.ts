@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: 'karussell',
       slide: 'slaid'
     },
+    chatAttachment: {
+      uploading: 'Üleslaadimine',
+      error: 'Üleslaadimine ebaõnnestus'
+    },
     chatMessages: {
       autoScroll: 'Keri alla'
     },
     chatPrompt: {
-      placeholder: 'Siia kirjutage oma sõnum…'
+      placeholder: 'Siia kirjutage oma sõnum…',
+      queue: 'Järjekorras sõnumid',
+      sendNow: 'Saada kohe',
+      edit: 'Muuda',
+      remove: 'Eemalda'
     },
     chatPromptSubmit: {
       label: 'Saada',

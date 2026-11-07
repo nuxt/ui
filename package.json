@@ -2,7 +2,7 @@
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
   "version": "4.12.0",
-  "packageManager": "pnpm@12.11.2",
+  "packageManager": "pnpm@12.16.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nuxt/ui.git"
@@ -26,6 +26,10 @@
     "./vite": {
       "types": "./dist/vite.d.mts",
       "import": "./dist/vite.mjs"
+    },
+    "./eslint": {
+      "types": "./dist/eslint.d.mts",
+      "import": "./dist/eslint.mjs"
     },
     "./vue-plugin": {
       "types": "./vue-plugin.d.ts"
@@ -67,6 +71,9 @@
       ],
       "vite": [
         "./dist/vite.d.mts"
+      ],
+      "eslint": [
+        "./dist/eslint.d.mts"
       ],
       "vue-plugin": [
         "./vue-plugin.d.ts"
@@ -131,7 +138,7 @@
     "test": "vitest",
     "test:vue": "vitest --project vue",
     "test:nuxt": "vitest --project nuxt",
-    "bench": "vitest bench --project vue",
+    "bench": "vitest bench --project 'vue (bench)'",
     "size": "node test/bundle/size.mjs",
     "release": "release-it"
   },
@@ -205,6 +212,7 @@
   "devDependencies": {
     "@codspeed/vitest-plugin": "catalog:",
     "@nuxt/eslint-config": "catalog:",
+    "@nuxt/image": "catalog:",
     "@nuxt/module-builder": "catalog:",
     "@nuxt/test-utils": "catalog:",
     "@release-it/conventional-changelog": "catalog:",
@@ -251,6 +259,7 @@
     "@tiptap/suggestion": "^3",
     "@tiptap/vue-3": "^3",
     "ai": "^6 || ^7",
+    "eslint-plugin-better-tailwindcss": "^4.10",
     "joi": "^18",
     "superstruct": "^2",
     "tailwindcss": "^4",
@@ -277,6 +286,9 @@
       "optional": true
     },
     "ai": {
+      "optional": true
+    },
+    "eslint-plugin-better-tailwindcss": {
       "optional": true
     },
     "joi": {

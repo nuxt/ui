@@ -870,7 +870,7 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
   }
 
   // Remove wrapper elements by extracting children content
-  const wrapperTypes = ['card-group', 'accordion', 'steps', 'code-group', 'code-collapse', 'tabs', 'div']
+  const wrapperTypes = ['card-group', 'accordion', 'steps', 'code-group', 'code-collapse', 'code-tree-intersection', 'tabs', 'div']
   for (const wrapperType of wrapperTypes) {
     visitAndReplace(doc, wrapperType, (node) => {
       replaceWithChildren(node, node.slice(2))

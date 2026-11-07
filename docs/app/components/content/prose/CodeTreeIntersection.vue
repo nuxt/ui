@@ -13,6 +13,7 @@ const target = useTemplateRef('target')
 
 const tree = inject<Ref<Record<string, Node>>>('tree', ref({}))
 const activePath = inject<Ref<string>>('activePath', ref(''))
+const scrolled = inject<Ref<boolean>>('scrolled', ref(true))
 
 const children = computed(() => slots.default?.().map(transformSlot).filter(Boolean))
 
@@ -61,25 +62,31 @@ function addToTree() {
   }
 }
 
+const { resume } = useIntersectionObserver(target, ([entry]) => {
+  if (entry?.isIntersecting) {
+    addToTree()
+  }
+}, {
+  rootMargin: '-200px 0px -50% 0px',
+  immediate: false
+})
+
 onMounted(() => {
   if (props.default) {
     addToTree()
     return
   }
 
-  // If element is already above or in the top 50% of the viewport (e.g., page refresh in the middle), add it to the tree immediately
-  const rect = target.value?.getBoundingClientRect()
-  if (rect && rect.top < window.innerHeight * 0.5) {
-    addToTree()
-  }
-})
+  // Wait for the router to scroll the new page, the previous page's scroll is still applied on mount
+  watch(scrolled, () => {
+    // If element is already above or in the top 50% of the viewport (e.g., page refresh in the middle), add it to the tree immediately
+    const rect = target.value?.getBoundingClientRect()
+    if (rect && rect.top < window.innerHeight * 0.5) {
+      addToTree()
+    }
 
-useIntersectionObserver(target, ([entry]) => {
-  if (entry?.isIntersecting) {
-    addToTree()
-  }
-}, {
-  rootMargin: '-200px 0px -50% 0px'
+    resume()
+  }, { once: true, immediate: scrolled.value })
 })
 </script>
 

@@ -49,7 +49,6 @@ export default {
 <script setup lang="ts">
 import { ref, computed, defineAsyncComponent, toRef, provide, onMounted, onBeforeUnmount } from 'vue'
 import { ToastProvider, ToastViewport, ToastPortal } from 'reka-ui'
-import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
@@ -97,7 +96,7 @@ const appConfig = useAppConfig() as Toaster['AppConfig']
 
 provide(toastMaxInjectionKey, toRef(() => props.max))
 
-const providerProps = useForwardProps(reactivePick(props, 'duration', 'swipeThreshold', 'disableSwipe'))
+const providerProps = useForwardProps(props, ['duration', 'swipeThreshold', 'disableSwipe'])
 const portalProps = usePortal(toRef(() => props.portal))
 
 const swipeDirection = computed(() => {
@@ -131,7 +130,19 @@ function onUpdateOpen(value: boolean, id: string | number) {
 }
 
 const hovered = ref(false)
-const expanded = computed(() => props.expand || hovered.value)
+const focused = ref(false)
+const expanded = computed(() => props.expand || hovered.value || focused.value)
+
+// Only keyboard focus expands, a click on a toast is already covered by the hover.
+function onFocusin(event: FocusEvent) {
+  focused.value = (event.target as HTMLElement).matches(':focus-visible')
+}
+
+function onFocusout(event: FocusEvent) {
+  if (!(event.currentTarget as HTMLElement).contains(event.relatedTarget as Node | null)) {
+    focused.value = false
+  }
+}
 
 const refs = ref<{ height: number }[]>([])
 
@@ -186,6 +197,8 @@ function getOffset(index: number) {
         }"
         @mouseenter="hovered = true"
         @mouseleave="hovered = false"
+        @focusin="onFocusin"
+        @focusout="onFocusout"
       />
     </ToastPortal>
   </ToastProvider>

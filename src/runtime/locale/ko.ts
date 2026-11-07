@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: '캐러셀',
       slide: '슬라이드'
     },
+    chatAttachment: {
+      uploading: '업로드 중',
+      error: '업로드 실패'
+    },
     chatMessages: {
       autoScroll: '맨 아래로 스크롤'
     },
     chatPrompt: {
-      placeholder: '여기에 메시지를 입력하세요…'
+      placeholder: '여기에 메시지를 입력하세요…',
+      queue: '대기 중인 메시지',
+      sendNow: '지금 보내기',
+      edit: '편집',
+      remove: '삭제'
     },
     chatPromptSubmit: {
       label: '전송',

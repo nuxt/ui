@@ -10,13 +10,13 @@ export interface IconProps {
 </script>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useForwardProps } from 'reka-ui'
-import { reactivePick } from '@vueuse/core'
 import NuxtIcon from '@nuxt/icon/runtime/components/index.js'
 
 const props = defineProps<IconProps>()
 
-const iconProps = useForwardProps(reactivePick(props, 'mode', 'size', 'customize'))
+const iconProps = useForwardProps(computed(() => ({ mode: props.mode, size: props.size, customize: props.customize })))
 </script>
 
 <template>

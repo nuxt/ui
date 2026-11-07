@@ -33,8 +33,8 @@ hide:
 prettier: true
 props:
   error:
-    statusCode: 404
-    statusMessage: 'Page not found'
+    status: 404
+    statusText: 'Page not found'
     message: 'The page you are looking for does not exist.'
   class: '!min-h-96'
 ---
@@ -54,14 +54,14 @@ hide:
   - class
 prettier: true
 ignore:
-  - error.statusCode
-  - error.statusMessage
+  - error.status
+  - error.statusText
   - error.message
 props:
   icon: 'i-lucide-file-x'
   error:
-    statusCode: 404
-    statusMessage: 'Page not found'
+    status: 404
+    statusText: 'Page not found'
     message: 'The page you are looking for does not exist.'
   class: '!min-h-96'
 ---
@@ -75,13 +75,13 @@ hide:
   - class
 prettier: true
 ignore:
-  - error.statusCode
-  - error.statusMessage
+  - error.status
+  - error.statusText
   - error.message
 props:
   error:
-    statusCode: 404
-    statusMessage: 'Page not found'
+    status: 404
+    statusText: 'Page not found'
     message: 'The page you are looking for does not exist.'
   class: '!min-h-96'
 slots:
@@ -105,8 +105,8 @@ prettier: true
 hide:
   - class
 ignore:
-  - error.statusCode
-  - error.statusMessage
+  - error.status
+  - error.statusText
   - error.message
   - clear.color
   - clear.size
@@ -119,8 +119,8 @@ props:
     icon: i-lucide-arrow-left
     class: 'rounded-full'
   error:
-    statusCode: 404
-    statusMessage: 'Page not found'
+    status: 404
+    statusText: 'Page not found'
     message: 'The page you are looking for does not exist.'
   class: '!min-h-96'
 ---
@@ -136,14 +136,14 @@ prettier: true
 hide:
   - class
 ignore:
-  - error.statusCode
-  - error.statusMessage
+  - error.status
+  - error.statusText
   - error.message
 props:
   redirect: '/docs/getting-started'
   error:
-    statusCode: 404
-    statusMessage: 'Page not found'
+    status: 404
+    statusText: 'Page not found'
     message: 'The page you are looking for does not exist.'
   class: '!min-h-96'
 ---
@@ -190,7 +190,7 @@ const { data: page } = await useAsyncData(route.path, () => {
   return queryCollection('docs').path(route.path).first()
 })
 if (!page.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+  throw createError({ status: 404, statusText: 'Page not found', fatal: true })
 }
 </script>
 ```

@@ -10,6 +10,24 @@ exports[`PageCard > renders with as correctly 1`] = `
 </section>"
 `;
 
+exports[`PageCard > renders with as object correctly 1`] = `
+"<section data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <!--v-if-->
+      <div data-slot="body" class="flex-1">
+        <h3 data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</h3>
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</section>"
+`;
+
 exports[`PageCard > renders with body slot correctly 1`] = `
 "<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
   <!--v-if-->

@@ -173,6 +173,23 @@ describe('Table', () => {
 
   const props = { data }
 
+  const groupedHeaderColumns: TableColumn<typeof data[number]>[] = [
+    { accessorKey: 'id', header: 'ID' },
+    {
+      header: 'Payment',
+      columns: [
+        { accessorKey: 'email', header: 'Email' },
+        {
+          header: 'Details',
+          columns: [
+            { accessorKey: 'status', header: 'Status' },
+            { accessorKey: 'amount', header: 'Amount' }
+          ]
+        }
+      ]
+    }
+  ]
+
   renderEach(Table, [
     // Props
     ['with data', { props }],
@@ -182,6 +199,7 @@ describe('Table', () => {
     ['with columns', { props: { ...props, columns } }],
     ['with sticky', { props: { ...props, sticky: true } }],
     ['with loading', { props: { ...props, loading: true } }],
+    ['with loading without data', { props: { columns, loading: true } }],
     ...loadingColors.map((loadingColor: string) => [`with loading color ${loadingColor}`, { props: { ...props, loading: true, loadingColor } }]),
     ...loadingAnimations.map((loadingAnimation: string) => [`with loading animation ${loadingAnimation}`, { props: { ...props, loading: true, loadingAnimation } }]),
     ['with meta prop', { props: { ...props, meta: { class: { tr: 'custom-row-class' }, style: { tr: { backgroundColor: 'lightgray' } } } } }],
@@ -205,6 +223,76 @@ describe('Table', () => {
     ['with body-top slot', { props, slots: { 'body-top': () => 'Body top slot' } }],
     ['with body-bottom slot', { props, slots: { 'body-bottom': () => 'Body bottom slot' } }]
   ])
+
+  it('merges grouped headers with different depths', async () => {
+    const wrapper = await mountSuspended(Table<typeof data[number]>, {
+      props: { data, columns: groupedHeaderColumns },
+      slots: { 'id-header': 'Custom ID' }
+    })
+
+    const rows = wrapper.findAll('thead tr[data-slot="tr"]')
+    expect(rows.map(row => row.findAll('th').map(th => th.text()))).toEqual([
+      ['Custom ID', 'Payment'],
+      ['Email', 'Details'],
+      ['Status', 'Amount']
+    ])
+    expect(rows[0]!.findAll('th')[0]!.attributes('rowspan')).toBe('3')
+    expect(rows[0]!.findAll('th')[1]!.attributes('colspan')).toBe('3')
+    expect(rows[1]!.findAll('th')[0]!.attributes('rowspan')).toBe('2')
+    expect(rows[1]!.findAll('th')[1]!.attributes('colspan')).toBe('2')
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  it('updates merged headers when columns are hidden', async () => {
+    const wrapper = await mountSuspended(Table<typeof data[number]>, {
+      props: { data, columns: groupedHeaderColumns }
+    })
+
+    await wrapper.setProps({ columnVisibility: { status: false, amount: false } })
+
+    const rows = wrapper.findAll('thead tr[data-slot="tr"]')
+    expect(rows.map(row => row.findAll('th').map(th => th.text()))).toEqual([
+      ['ID', 'Payment'],
+      ['Email']
+    ])
+    expect(rows[0]!.find('th').attributes('rowspan')).toBe('2')
+    expect(rows[0]!.findAll('th')[1]!.attributes('colspan')).toBeUndefined()
+
+    await wrapper.setProps({ columnVisibility: { email: false, status: false, amount: false } })
+
+    expect(wrapper.findAll('thead th').map(th => th.text())).toEqual(['ID'])
+    expect(wrapper.find('thead th').attributes('rowspan')).toBeUndefined()
+
+    await wrapper.setProps({ columnVisibility: {} })
+
+    expect(wrapper.find('thead th').attributes('rowspan')).toBe('3')
+    expect(wrapper.findAll('thead th')).toHaveLength(6)
+  })
+
+  it('keeps merged headers aligned when columns are reordered and pinned', async () => {
+    const wrapper = await mountSuspended(Table<typeof data[number]>, {
+      props: {
+        data,
+        columns: groupedHeaderColumns,
+        columnOrder: ['id', 'amount', 'email', 'status'],
+        columnPinning: { left: [], right: ['id'] }
+      }
+    })
+
+    const rows = wrapper.findAll('thead tr[data-slot="tr"]')
+    expect(rows.map(row => row.findAll('th').map(th => th.text()))).toEqual([
+      ['Payment', 'ID'],
+      ['Details', 'Email', 'Details'],
+      ['Amount', 'Status']
+    ])
+    const idTh = rows[0]!.findAll('th')[1]!
+    expect(idTh.attributes('rowspan')).toBe('3')
+    expect(idTh.attributes('data-pinned')).toBe('right')
+    expect(rows[1]!.findAll('th')[1]!.attributes('rowspan')).toBe('2')
+    expect(wrapper.find('tbody tr').findAll('td').map(td => td.text())).toEqual([
+      '316', 'ken99@yahoo.com', 'success', 'm5gr84i9'
+    ])
+  })
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Table, {
@@ -433,7 +521,7 @@ describe('Table', () => {
     expect(visibleThs[0]!.attributes('aria-sort')).toBe('descending')
   })
 
-  it('does not set aria-sort on footer or placeholder th elements', async () => {
+  it('sets aria-sort on merged headers but not footer th elements', async () => {
     const groupedColumns: TableColumn<typeof data[number]>[] = [
       { header: 'Group', columns: [{ accessorKey: 'id', header: 'Id', footer: 'Id total', enableSorting: true }] },
       { accessorKey: 'email', header: 'Email', enableSorting: true }
@@ -443,10 +531,11 @@ describe('Table', () => {
       props: { data, columns: groupedColumns as any, sorting: [{ id: 'email', desc: false }] }
     })
 
-    const [, emailPlaceholderTh] = wrapper.findAll('thead th')
-    expect(emailPlaceholderTh!.attributes('aria-sort')).toBeUndefined()
-    // The real email header sits on the second header row and does carry the attribute.
-    expect(wrapper.findAll('thead tr')[1]!.findAll('th')[1]!.attributes('aria-sort')).toBe('ascending')
+    const [, emailTh] = wrapper.findAll('thead th')
+    expect(emailTh!.text()).toBe('Email')
+    expect(emailTh!.attributes('rowspan')).toBe('2')
+    expect(emailTh!.attributes('aria-sort')).toBe('ascending')
+    expect(wrapper.findAll('thead tr')[1]!.findAll('th').map(th => th.text())).toEqual(['Id'])
 
     const footerThs = wrapper.findAll('tfoot th')
     expect(footerThs.length).toBeGreaterThan(0)
@@ -579,6 +668,20 @@ describe('Table', () => {
     expect(expanded.findAll('td').find(td => td.text() === 'Expanded slot')?.attributes('colspan')).toBe(visibleColumns)
   })
 
+  it('shows the loading row instead of the empty one while loading without data', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: { columns: columns as any, loading: true, empty: 'There is no data' }
+    })
+
+    expect(wrapper.find('[data-slot="loading"]').text()).toBe('')
+    expect(wrapper.find('[data-slot="empty"]').exists()).toBe(false)
+
+    await wrapper.setProps({ loading: false })
+
+    expect(wrapper.find('[data-slot="loading"]').exists()).toBe(false)
+    expect(wrapper.find('[data-slot="empty"]').text()).toBe('There is no data')
+  })
+
   it.each([
     ['default index attribute', undefined, 'data-index'],
     ['custom index attribute', 'data-row-index', 'data-row-index']
@@ -689,5 +792,41 @@ describe('Table', () => {
 
     wrapper.unmount()
     offsetHeight.mockRestore()
+  })
+
+  it('does not re-render virtualized rows when the visible range is unchanged', async () => {
+    const renderCell = vi.fn(() => 'cell')
+    let onScroll: ((offset: number, isScrolling: boolean) => void) | undefined
+    let virtualizer: Virtualizer<Element, Element> | undefined
+
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data,
+        virtualize: {
+          observeElementRect: (_, cb) => cb({ width: 1000, height: 500 }),
+          observeElementOffset: (_, cb) => {
+            onScroll = cb
+          },
+          onChange: (instance) => {
+            virtualizer = instance
+          }
+        }
+      },
+      slots: { 'id-cell': renderCell },
+      attachTo: document.body
+    })
+    await flushPromises()
+
+    const range = virtualizer!.getVirtualItems().map(item => item.index)
+    renderCell.mockClear()
+
+    // Starting to scroll notifies the virtualizer's listeners without changing the rendered rows
+    onScroll!(5, true)
+    await flushPromises()
+
+    expect(virtualizer!.getVirtualItems().map(item => item.index)).toEqual(range)
+    expect(renderCell).not.toHaveBeenCalled()
+
+    wrapper.unmount()
   })
 })

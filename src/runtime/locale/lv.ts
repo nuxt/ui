@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: 'karuselis',
       slide: 'slaids'
     },
+    chatAttachment: {
+      uploading: 'Augšupielādē',
+      error: 'Augšupielāde neizdevās'
+    },
     chatMessages: {
       autoScroll: 'Ritināt uz leju'
     },
     chatPrompt: {
-      placeholder: 'Raksti savu ziņu šeit…'
+      placeholder: 'Raksti savu ziņu šeit…',
+      queue: 'Rindā esošās ziņas',
+      sendNow: 'Sūtīt tagad',
+      edit: 'Rediģēt',
+      remove: 'Noņemt'
     },
     chatPromptSubmit: {
       label: 'Sūtīt ziņu',

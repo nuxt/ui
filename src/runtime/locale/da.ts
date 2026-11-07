@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: 'karrusel',
       slide: 'dias'
     },
+    chatAttachment: {
+      uploading: 'Uploader',
+      error: 'Upload mislykkedes'
+    },
     chatMessages: {
       autoScroll: 'Rul til bunden'
     },
     chatPrompt: {
-      placeholder: 'Skriv din besked her…'
+      placeholder: 'Skriv din besked her…',
+      queue: 'Beskeder i kø',
+      sendNow: 'Send nu',
+      edit: 'Rediger',
+      remove: 'Fjern'
     },
     chatPromptSubmit: {
       label: 'Send',

@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: 'karuselli',
       slide: 'dia'
     },
+    chatAttachment: {
+      uploading: 'Ladataan',
+      error: 'Lataus epäonnistui'
+    },
     chatMessages: {
       autoScroll: 'Vieritä alas'
     },
     chatPrompt: {
-      placeholder: 'Kirjoita viestisi tähän…'
+      placeholder: 'Kirjoita viestisi tähän…',
+      queue: 'Jonossa olevat viestit',
+      sendNow: 'Lähetä nyt',
+      edit: 'Muokkaa',
+      remove: 'Poista'
     },
     chatPromptSubmit: {
       label: 'Lähetä',

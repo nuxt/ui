@@ -11,7 +11,7 @@ links:
     avatar:
       src: https://github.com/tanstack.png
       loading: lazy
-    to: https://tanstack.com/virtual/latest
+    to: https://tanstack.com/virtual/v3
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/ScrollArea.vue
@@ -266,7 +266,7 @@ This will give you access to the following:
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | `$el`{lang="ts-type"} | `HTMLElement`{lang="ts-type"} | The root element of the component. |
-| `virtualizer`{lang="ts-type"} | `Ref<Virtualizer> \| undefined`{lang="ts-type"} | The [TanStack Virtual](https://tanstack.com/virtual/latest/docs/api/virtualizer) virtualizer instance (`undefined` if virtualization is disabled). |
+| `virtualizer`{lang="ts-type"} | `Ref<Virtualizer> \| undefined`{lang="ts-type"} | The [TanStack Virtual](https://tanstack.com/virtual/v3/docs/api/virtualizer) virtualizer instance (`undefined` if virtualization is disabled). |
 
 ## Theme
 

@@ -5,6 +5,15 @@ export const fieldGroupVariant = {
   }
 }
 
+// Reka UI renders a hidden native `<select>` or `<input>` right after the trigger of `Select` and `SelectMenu` when they have a `name`,
+// so the trigger is never the `:last-child` of the group, ignore these hidden elements to find the last item instead
+export const fieldGroupVariantWithHiddenInput = {
+  fieldGroup: {
+    horizontal: 'first:not-nth-last-[1_of_:not(input[aria-hidden],select[aria-hidden])]:rounded-e-none not-first:nth-last-[1_of_:not(input[aria-hidden],select[aria-hidden])]:rounded-s-none not-first:not-nth-last-[1_of_:not(input[aria-hidden],select[aria-hidden])]:rounded-none focus-visible:z-[1]',
+    vertical: 'first:not-nth-last-[1_of_:not(input[aria-hidden],select[aria-hidden])]:rounded-b-none not-first:nth-last-[1_of_:not(input[aria-hidden],select[aria-hidden])]:rounded-t-none not-first:not-nth-last-[1_of_:not(input[aria-hidden],select[aria-hidden])]:rounded-none focus-visible:z-[1]'
+  }
+}
+
 export const fieldGroupVariantWithRoot = {
   fieldGroup: {
     horizontal: {

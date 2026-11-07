@@ -25,7 +25,7 @@ function toggleChat() {
 <template>
   <UHeader
     :ui="{
-      container: [route.path.startsWith('/blog/') ? 'max-w-none' : ''],
+      container: [route.path.startsWith('/templates/') ? 'max-w-none' : ''],
       right: 'gap-0.5'
     }"
     class="flex flex-col"

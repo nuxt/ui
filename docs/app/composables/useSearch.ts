@@ -65,7 +65,8 @@ export function useSearch() {
     label: 'Templates',
     description: 'Explore official starter templates.',
     icon: studioIcons.templates,
-    to: '/templates'
+    to: '/templates',
+    active: route.path.startsWith('/templates')
   }, {
     label: 'Showcase',
     description: 'Discover websites built with the library.',
@@ -76,12 +77,6 @@ export function useSearch() {
     description: 'Explore community projects and resources.',
     icon: studioIcons.globe,
     to: '/community'
-  }, {
-    label: 'Blog',
-    description: 'Read articles and tutorials.',
-    icon: studioIcons.newspaper,
-    to: '/blog',
-    active: route.path.startsWith('/blog')
   }, {
     label: 'Contribution',
     description: 'Learn how to contribute to the project.',

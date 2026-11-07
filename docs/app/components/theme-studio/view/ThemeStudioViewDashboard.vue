@@ -763,7 +763,7 @@ const pageTitles: Record<Page, string> = {
           </template>
 
           <template #right>
-            <UTooltip text="Notifications" :shortcuts="['N']">
+            <UTooltip text="Notifications" :kbds="['n']">
               <UButton color="neutral" variant="ghost" square aria-label="Notifications">
                 <UChip color="error" inset>
                   <UIcon :name="studioIcons.bell" class="size-5 shrink-0" />
@@ -994,7 +994,7 @@ const pageTitles: Record<Page, string> = {
           <template v-if="settingsSection === 'general'">
             <UPageCard
               title="Profile"
-              description="These informations will be displayed publicly."
+              description="This information will be displayed publicly."
               variant="naked"
               orientation="horizontal"
             >

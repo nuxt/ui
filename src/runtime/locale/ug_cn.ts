@@ -37,11 +37,19 @@ export default defineLocale<Messages>({
       roledescription: 'ئايلانما كۆرسەتكۈچ',
       slide: 'سلايد'
     },
+    chatAttachment: {
+      uploading: 'يۈكلەۋاتىدۇ',
+      error: 'يۈكلەش مەغلۇپ بولدى'
+    },
     chatMessages: {
       autoScroll: 'ئاستىغا سۈرۈش'
     },
     chatPrompt: {
-      placeholder: 'خەت كىرگۈزۈڭ…'
+      placeholder: 'خەت كىرگۈزۈڭ…',
+      queue: 'ئۆچىرەتتىكى ئۇچۇرلار',
+      sendNow: 'ھازىرلا يوللا',
+      edit: 'تەھرىرلەش',
+      remove: 'چىقىرىۋېتىش'
     },
     chatPromptSubmit: {
       label: 'يوللاش',

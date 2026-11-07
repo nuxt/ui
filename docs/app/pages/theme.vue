@@ -87,6 +87,8 @@ useSeoMeta({
   // for ?doc= (nuxt.config routeRules) and ogImage.zeroRuntime only builds
   // images for prerendered routes, so the call would be a no-op here.
   ogImage: joinURL(url, '/theme/og-image.png'),
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
   // a shared link is one visitor's theme, not a page to index
   robots: linked ? 'noindex' : undefined
 })

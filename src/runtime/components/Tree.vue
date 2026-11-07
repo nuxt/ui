@@ -145,7 +145,7 @@ export type TreeSlots<
 import { computed, toRef, useTemplateRef } from 'vue'
 import { TreeRoot, TreeItem, TreeVirtualizer } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { reactivePick, createReusableTemplate } from '@vueuse/core'
+import { createReusableTemplate } from '@vueuse/core'
 import { defu } from 'defu'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
@@ -168,7 +168,7 @@ const props = useComponentProps<TreeProps<T, M>>('tree', _props)
 
 const appConfig = useAppConfig() as Tree['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'items', 'multiple', 'expanded', 'disabled', 'propagateSelect', 'bubbleSelect', 'loop'), emits)
+const rootProps = useForwardProps(props, ['items', 'multiple', 'expanded', 'disabled', 'propagateSelect', 'bubbleSelect', 'loop'], emits)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const as = computed(() => resolveAs(props.as, { root: 'ul', link: 'button' }))

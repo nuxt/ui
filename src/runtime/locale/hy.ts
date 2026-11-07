@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: 'կարուսել',
       slide: 'սլայդ'
     },
+    chatAttachment: {
+      uploading: 'Վերբեռնվում է',
+      error: 'Վերբեռնումը ձախողվեց'
+    },
     chatMessages: {
       autoScroll: 'Ոլորել ներքև'
     },
     chatPrompt: {
-      placeholder: 'Շարունակել'
+      placeholder: 'Շարունակել',
+      queue: 'Հերթում գտնվող հաղորդագրություններ',
+      sendNow: 'Ուղարկել հիմա',
+      edit: 'Խմբագրել',
+      remove: 'Հեռացնել'
     },
     chatPromptSubmit: {
       label: 'Շարունակել',

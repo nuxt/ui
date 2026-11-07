@@ -47,7 +47,7 @@ export interface ChatReasoningProps extends Pick<CollapsibleRootProps, 'defaultO
   autoOpen?: boolean
   /**
    * The delay in milliseconds before auto-closing when streaming ends.
-   * Set to `0` to disable auto-close.
+   * Set to `0` to disable auto-close. Skipped when the user toggled it while streaming.
    * @defaultValue 500
    */
   autoCloseDelay?: number
@@ -106,6 +106,8 @@ const internalOpen = ref(props.defaultOpen ?? (props.streaming && props.autoOpen
 const startTime = ref<number | null>(props.streaming ? Date.now() : null)
 const internalDuration = ref<number | undefined>(undefined)
 const autoCloseTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
+// Set when the user toggles while streaming, so auto-close doesn't override their choice
+const userToggled = ref(false)
 
 watch(() => props.streaming, (streaming, wasStreaming) => {
   if (streaming) {
@@ -114,6 +116,7 @@ watch(() => props.streaming, (streaming, wasStreaming) => {
       autoCloseTimeout.value = null
     }
     if (!wasStreaming) {
+      userToggled.value = false
       if (props.autoOpen) {
         setOpen(true)
       }
@@ -124,7 +127,7 @@ watch(() => props.streaming, (streaming, wasStreaming) => {
       internalDuration.value = Math.ceil((Date.now() - startTime.value) / 1000)
       startTime.value = null
     }
-    if (props.autoCloseDelay > 0) {
+    if (props.autoCloseDelay > 0 && !userToggled.value) {
       autoCloseTimeout.value = setTimeout(() => {
         setOpen(false)
       }, props.autoCloseDelay)
@@ -159,6 +162,13 @@ function setOpen(value: boolean) {
   }
   internalOpen.value = value
   emits('update:open', value)
+}
+
+function onUpdateOpen(value: boolean) {
+  if (props.streaming) {
+    userToggled.value = true
+  }
+  setOpen(value)
 }
 
 onUnmounted(() => {
@@ -197,7 +207,7 @@ watch(() => props.text, () => {
     :unmount-on-hide="props.unmountOnHide"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
-    @update:open="setOpen"
+    @update:open="onUpdateOpen"
   >
     <CollapsibleTrigger as-child :disabled="!hasContent">
       <button

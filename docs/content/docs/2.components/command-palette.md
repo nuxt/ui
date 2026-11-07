@@ -948,6 +948,10 @@ props:
 This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls. The loading state checks for both `pending` and `idle` status to display a loading indicator before and during the fetch.
 ::
 
+::tip
+Set the `ignore-filter` prop to `true` to disable the internal search for every group at once. A group can opt back in by setting its `ignoreFilter` field to `false`.
+::
+
 ### With post-filtered items
 
 You can use the `postFilter` field on a group to filter items after the search happened.

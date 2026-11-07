@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: 'карусель',
       slide: 'слайд'
     },
+    chatAttachment: {
+      uploading: 'Загрузка',
+      error: 'Не удалось загрузить'
+    },
     chatMessages: {
       autoScroll: 'Прокрутить вниз'
     },
     chatPrompt: {
-      placeholder: 'Введите ваше сообщение здесь…'
+      placeholder: 'Введите ваше сообщение здесь…',
+      queue: 'Сообщения в очереди',
+      sendNow: 'Отправить сейчас',
+      edit: 'Редактировать',
+      remove: 'Удалить'
     },
     chatPromptSubmit: {
       label: 'Отправить',

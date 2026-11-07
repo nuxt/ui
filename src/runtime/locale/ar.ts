@@ -37,11 +37,19 @@ export default defineLocale<Messages>({
       roledescription: 'عرض شرائح',
       slide: 'شريحة'
     },
+    chatAttachment: {
+      uploading: 'جارٍ الرفع',
+      error: 'فشل الرفع'
+    },
     chatMessages: {
       autoScroll: 'التمرير إلى الأسفل'
     },
     chatPrompt: {
-      placeholder: 'اكتب رسالتك هنا…'
+      placeholder: 'اكتب رسالتك هنا…',
+      queue: 'الرسائل في قائمة الانتظار',
+      sendNow: 'إرسال الآن',
+      edit: 'تعديل',
+      remove: 'إزالة'
     },
     chatPromptSubmit: {
       label: 'إرسال',

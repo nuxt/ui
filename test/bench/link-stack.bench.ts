@@ -1,4 +1,4 @@
-import { bench, describe } from 'vitest'
+import { describe, test } from 'vitest'
 import { h } from 'vue'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { Primitive } from 'reka-ui'
@@ -33,12 +33,12 @@ function makeParent(render: (cls: string) => any) {
   }
 }
 
-describe('mount', () => {
+test('mount', async ({ bench }) => {
   for (const [name, render] of CASES) {
-    bench(name, async () => {
+    await bench(name, async () => {
       const wrapper = await mountSuspended(makeParent(render), { props: { cls: 'p-2' } })
       wrapper.unmount()
-    })
+    }).run()
   }
 })
 
@@ -48,18 +48,15 @@ const CYCLES = 20
 
 describe('re-render', () => {
   for (const [name, render] of CASES) {
-    describe(name, () => {
-      let wrapper: Awaited<ReturnType<typeof mountSuspended>> | undefined
+    test(name, async ({ bench }) => {
+      const wrapper = await mountSuspended(makeParent(render), { props: { cls: 'p-2' } })
 
-      // Mounted lazily on the first call: CodSpeed's analysis runner invokes the
-      // bench function without tinybench's `setup`/`teardown` options.
-      bench(`${name} x${CYCLES}`, async () => {
-        wrapper ??= await mountSuspended(makeParent(render), { props: { cls: 'p-2' } })
+      await bench(`${name} x${CYCLES}`, async () => {
         for (let i = 0; i < CYCLES; i++) {
           await wrapper.setProps({ cls: 'p-3' })
           await wrapper.setProps({ cls: 'p-2' })
         }
-      })
+      }).run()
     })
   }
 })

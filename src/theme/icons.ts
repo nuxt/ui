@@ -16,6 +16,7 @@ export default {
   copyCheck: 'i-lucide-copy-check',
   dark: 'i-lucide-moon',
   drag: 'i-lucide-grip-vertical',
+  edit: 'i-lucide-pencil',
   ellipsis: 'i-lucide-ellipsis',
   error: 'i-lucide-circle-x',
   external: 'i-lucide-arrow-up-right',
@@ -40,6 +41,7 @@ export default {
   success: 'i-lucide-circle-check',
   system: 'i-lucide-monitor',
   tip: 'i-lucide-lightbulb',
+  trash: 'i-lucide-trash',
   upload: 'i-lucide-upload',
   warning: 'i-lucide-triangle-alert'
 }

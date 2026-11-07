@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: 'καρουζέλ',
       slide: 'διαφάνεια'
     },
+    chatAttachment: {
+      uploading: 'Μεταφόρτωση',
+      error: 'Η μεταφόρτωση απέτυχε'
+    },
     chatMessages: {
       autoScroll: 'Κύλιση προς τα κάτω'
     },
     chatPrompt: {
-      placeholder: 'Εδώ γράψτε το μήνυμά σας…'
+      placeholder: 'Εδώ γράψτε το μήνυμά σας…',
+      queue: 'Μηνύματα σε αναμονή',
+      sendNow: 'Αποστολή τώρα',
+      edit: 'Επεξεργασία',
+      remove: 'Αφαίρεση'
     },
     chatPromptSubmit: {
       label: 'Αποστολή',

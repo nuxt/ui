@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: 'karuselė',
       slide: 'skaidrė'
     },
+    chatAttachment: {
+      uploading: 'Įkeliama',
+      error: 'Nepavyko įkelti'
+    },
     chatMessages: {
       autoScroll: 'Slinkti žemyn'
     },
     chatPrompt: {
-      placeholder: 'Įveskite savo žinutę čia…'
+      placeholder: 'Įveskite savo žinutę čia…',
+      queue: 'Eilėje esantys pranešimai',
+      sendNow: 'Siųsti dabar',
+      edit: 'Redaguoti',
+      remove: 'Pašalinti'
     },
     chatPromptSubmit: {
       label: 'Siųsti žinutę',

@@ -58,7 +58,7 @@ export interface SeparatorSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Separator } from 'reka-ui'
-import { reactivePick, createReusableTemplate } from '@vueuse/core'
+import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
@@ -78,7 +78,7 @@ const props = useComponentProps('separator', _props)
 
 const appConfig = useAppConfig() as Separator['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'decorative', 'orientation'))
+const rootProps = useForwardProps(props, ['as', 'decorative', 'orientation'])
 
 const [DefineContainer, ReuseContainer] = createReusableTemplate()
 

@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: 'კარუსელი',
       slide: 'სლაიდი'
     },
+    chatAttachment: {
+      uploading: 'იტვირთება',
+      error: 'ატვირთვა ვერ მოხერხდა'
+    },
     chatMessages: {
       autoScroll: 'ქვემოთ გადახვევა'
     },
     chatPrompt: {
-      placeholder: 'დაწერეთ თქვენი მესიჯი აქ…'
+      placeholder: 'დაწერეთ თქვენი მესიჯი აქ…',
+      queue: 'რიგში მყოფი შეტყობინებები',
+      sendNow: 'ახლავე გაგზავნა',
+      edit: 'რედაქტირება',
+      remove: 'წაშლა'
     },
     chatPromptSubmit: {
       label: 'შეტყობინების გაგზავნა',

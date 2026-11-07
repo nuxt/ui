@@ -106,3 +106,28 @@ describe('Vue internal flags', () => {
     expect(flags).toEqual([false, false, false])
   })
 })
+
+describe('prop name conversion cache', () => {
+  const Probe = defineComponent({
+    props: { cachedProp: String },
+    setup(rawProps) {
+      const p = useComponentProps('button', rawProps)
+      return { p }
+    },
+    render: () => h('i')
+  })
+
+  it('does not re-convert a prop name on repeated reads', async () => {
+    const wrapper = await mountSuspended(Probe, { props: { cachedProp: 'a' } })
+    const p = (wrapper.vm as any).p as { cachedProp: string }
+    expect(p.cachedProp).toBe('a')
+
+    const replace = vi.spyOn(String.prototype, 'replace')
+    try {
+      expect(p.cachedProp).toBe('a')
+      expect(replace).not.toHaveBeenCalled()
+    } finally {
+      replace.mockRestore()
+    }
+  })
+})

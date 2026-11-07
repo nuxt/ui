@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: 'karrusela',
       slide: 'diapositiba'
     },
+    chatAttachment: {
+      uploading: 'Igotzen',
+      error: 'Ezin izan da igo'
+    },
     chatMessages: {
       autoScroll: 'Korritu behera'
     },
     chatPrompt: {
-      placeholder: 'Idatzi zure mezua hemen…'
+      placeholder: 'Idatzi zure mezua hemen…',
+      queue: 'Ilaran dauden mezuak',
+      sendNow: 'Bidali orain',
+      edit: 'Editatu',
+      remove: 'Kendu'
     },
     chatPromptSubmit: {
       label: 'Bidali',

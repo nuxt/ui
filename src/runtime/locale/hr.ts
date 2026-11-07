@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: 'vrtuljak',
       slide: 'slajd'
     },
+    chatAttachment: {
+      uploading: 'Prijenos',
+      error: 'Prijenos nije uspio'
+    },
     chatMessages: {
       autoScroll: 'Pomakni na dno'
     },
     chatPrompt: {
-      placeholder: 'Upišite svoju poruku ovdje…'
+      placeholder: 'Upišite svoju poruku ovdje…',
+      queue: 'Poruke u redu čekanja',
+      sendNow: 'Pošalji sada',
+      edit: 'Uredi',
+      remove: 'Ukloni'
     },
     chatPromptSubmit: {
       label: 'Pošalji upit',

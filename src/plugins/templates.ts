@@ -2,6 +2,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { consola } from 'consola'
 import type { UnpluginOptions } from 'unplugin'
+import { runtimeDir } from '../unplugin'
 import type { NuxtUIOptions } from '../unplugin'
 import { getTemplates } from '../templates'
 import { detectUsedComponents, resolveExtraScanDirs } from '../utils/components'
@@ -15,7 +16,7 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
   // any template's `getContents` runs — so `experimental.componentDetection`
   // can blank the theme of unused components (see `getTemplates`).
   const vue: { detectedComponents?: Set<string> } = {}
-  const templates = getTemplates(options, appConfig.ui, undefined, undefined, vue)
+  const templates = getTemplates(options, appConfig.ui, undefined, id => path.join(runtimeDir, '..', id), vue)
   const templateKeys = new Set(templates.map(t => `#build/${t.filename}`))
 
   async function writeTemplates(root: string) {

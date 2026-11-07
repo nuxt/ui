@@ -146,6 +146,28 @@ exports[`ChatTool > renders with defaultOpen correctly 1`] = `
 </div>"
 `;
 
+exports[`ChatTool > renders with error and errorIcon correctly 1`] = `
+"<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" disabled="" data-slot="trigger" class="group flex w-full items-center gap-1.5 text-sm disabled:cursor-default min-w-0 transition-colors rounded-sm outline-primary/25 focus-visible:outline-3 text-error hover:text-error disabled:hover:text-error"><span data-slot="leading" class="relative size-4 shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="size-4 shrink-0"></svg><!--v-if--></span><span data-slot="label" class="truncate">Searching components<!--v-if--></span>
+    <!--v-if-->
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+    <div data-slot="body" class="text-sm text-dimmed whitespace-pre-wrap pt-2"></div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`ChatTool > renders with error correctly 1`] = `
+"<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" disabled="" data-slot="trigger" class="group flex w-full items-center gap-1.5 text-sm disabled:cursor-default min-w-0 transition-colors rounded-sm outline-primary/25 focus-visible:outline-3 text-error hover:text-error disabled:hover:text-error"><span data-slot="leading" class="relative size-4 shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="size-4 shrink-0"></svg><!--v-if--></span><span data-slot="label" class="truncate">Searching components<!--v-if--></span>
+    <!--v-if-->
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+    <div data-slot="body" class="text-sm text-dimmed whitespace-pre-wrap pt-2"></div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
 exports[`ChatTool > renders with icon correctly 1`] = `
 "<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" disabled="" data-slot="trigger" class="group flex w-full items-center gap-1.5 text-muted text-sm disabled:cursor-default disabled:hover:text-muted hover:text-default min-w-0 transition-colors rounded-sm outline-primary/25 focus-visible:outline-3"><span data-slot="leading" class="relative size-4 shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="size-4 shrink-0"></svg><!--v-if--></span><span data-slot="label" class="truncate">Searching components<!--v-if--></span>
     <!--v-if-->

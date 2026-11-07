@@ -36,11 +36,19 @@ export default defineLocale<Messages>({
       roledescription: 'Karussell',
       slide: 'Dia'
     },
+    chatAttachment: {
+      uploading: 'Gëtt eropgelueden',
+      error: 'Eropluede feelgeschloen'
+    },
     chatMessages: {
       autoScroll: 'No ënnen scrollen'
     },
     chatPrompt: {
-      placeholder: 'Tippt hei Äre Message…'
+      placeholder: 'Tippt hei Äre Message…',
+      queue: 'Messagen an der Schlaang',
+      sendNow: 'Elo schécken',
+      edit: 'Änneren',
+      remove: 'Ewechhuelen'
     },
     chatPromptSubmit: {
       label: 'Prompt schécken',

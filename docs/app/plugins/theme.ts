@@ -239,7 +239,8 @@ export default defineNuxtPlugin({
             })();
           `.replace(/\s+/g, ' '),
           type: 'text/javascript',
-          tagPriority: -1
+          // in <body> so the style tags it patches by id already exist
+          tagPosition: 'bodyOpen'
         }]
       })
     }

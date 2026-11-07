@@ -25,12 +25,18 @@ export function injectThemeContext(fallback: ThemeContext = defaultThemeContext)
 
 export { provideThemeContext }
 
-function camelCase(str: string): string {
-  return str.replace(/-(\w)/g, (_, c: string) => c.toUpperCase())
-}
+const propNameCache = new Map<string, [string, string]>()
 
-function kebabCase(str: string): string {
-  return str.replace(/[A-Z]/g, c => `-${c.toLowerCase()}`)
+function propNames(prop: string): [string, string] {
+  let names = propNameCache.get(prop)
+  if (!names) {
+    names = [
+      prop.replace(/-(\w)/g, (_, c: string) => c.toUpperCase()),
+      prop.replace(/[A-Z]/g, c => `-${c.toLowerCase()}`)
+    ]
+    propNameCache.set(prop, names)
+  }
+  return names
 }
 
 /**
@@ -40,8 +46,9 @@ function kebabCase(str: string): string {
  */
 function propIsDefined(vnode: VNode | null | undefined, prop: string): boolean {
   if (!vnode || !vnode.props) return false
-  return vnode.props[camelCase(prop)] !== undefined
-    || vnode.props[kebabCase(prop)] !== undefined
+  const [camel, kebab] = propNames(prop)
+  return vnode.props[camel] !== undefined
+    || vnode.props[kebab] !== undefined
 }
 
 /**
@@ -61,6 +68,7 @@ export function useComponentProps<T extends object>(name: string, props: T): T {
   const vm = getCurrentInstance()
   const { defaults } = injectThemeContext()
   const appConfig = useAppConfig() as { ui?: Record<string, any> }
+  const isNested = name.includes('.')
 
   return new Proxy(props, {
     get(target, prop, receiver) {
@@ -83,7 +91,7 @@ export function useComponentProps<T extends object>(name: string, props: T): T {
       // Support dotted-path names (e.g. `prose.p`, `prose.code`) so prose
       // components can pull from the same nested `ThemeContext.defaults` shape
       // that `normalizeUi` produces in `<UTheme>`.
-      const themeEntry = name.includes('.') ? get(defaults.value, name) : defaults.value[name]
+      const themeEntry = isNested ? get(defaults.value, name) : defaults.value[name]
 
       if (prop === 'ui') {
         const themeUi = themeEntry?.ui
@@ -111,7 +119,7 @@ export function useComponentProps<T extends object>(name: string, props: T): T {
       // working uniformly for every variant, including props a component pins in
       // `withDefaults` (e.g. `orientation`, kept defined so `:data-orientation`
       // always renders a value).
-      const appConfigEntry = name.includes('.') ? get(appConfig.ui ?? {}, name) : appConfig.ui?.[name]
+      const appConfigEntry = isNested ? get(appConfig.ui ?? {}, name) : appConfig.ui?.[name]
       const appConfigValue = appConfigEntry?.defaultVariants?.[prop]
       if (appConfigValue !== undefined) return appConfigValue
 

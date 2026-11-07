@@ -100,7 +100,7 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
   /**
    * Enable virtualization for large datasets.
    * Note: row pinning is not supported when virtualization is enabled.
-   * @see https://tanstack.com/virtual/latest/docs/api/virtualizer#options
+   * @see https://tanstack.com/virtual/v3/docs/api/virtualizer#options
    * @defaultValue false
    */
   virtualize?: boolean | (Partial<Omit<VirtualizerOptions<Element, Element>, 'count' | 'estimateSize' | 'overscan'>> & {
@@ -236,7 +236,7 @@ import { upperFirst } from 'scule'
 import { defu } from 'defu'
 import { FlexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, getExpandedRowModel, useVueTable } from '@tanstack/vue-table'
 import { useVirtualizer } from '@tanstack/vue-virtual'
-import { reactivePick, createReusableTemplate, createRef } from '@vueuse/core'
+import { createReusableTemplate, createRef } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
@@ -351,7 +351,7 @@ const paginationState = defineModel<PaginationState>('pagination')
 const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef')
 const tableRef = useTemplateRef<HTMLTableElement>('tableRef')
 
-const tableProps = useForwardProps(reactivePick(props, '_features', 'autoResetAll', 'debugAll', 'debugCells', 'debugColumns', 'debugHeaders', 'debugRows', 'debugTable', 'defaultColumn', 'getRowId', 'getSubRows', 'initialState', 'mergeOptions', 'renderFallbackValue'))
+const tableProps = useForwardProps(props, ['_features', 'autoResetAll', 'debugAll', 'debugCells', 'debugColumns', 'debugHeaders', 'debugRows', 'debugTable', 'defaultColumn', 'getRowId', 'getSubRows', 'initialState', 'mergeOptions', 'renderFallbackValue'])
 
 const tableApi = useVueTable({
   ...tableProps.value,
@@ -434,6 +434,24 @@ const tableApi = useVueTable({
   }
 })
 
+// TanStack fills the rows above a shallow column with placeholders and puts its header in the bottom row.
+// Keep only the top placeholder of each chain (header groups are numbered by column depth) and render the real header there with a `rowspan`.
+const headerGroups = computed(() => tableApi.getHeaderGroups().map(headerGroup => ({
+  ...headerGroup,
+  headers: headerGroup.headers
+    .filter(header => header.column.depth >= headerGroup.depth)
+    .map((header) => {
+      let rowSpan = 1
+
+      while (header.isPlaceholder && header.subHeaders[0]) {
+        rowSpan++
+        header = header.subHeaders[0]
+      }
+
+      return { header, rowSpan }
+    })
+})))
+
 const rows = computed(() => tableApi.getRowModel().rows)
 const topRows = computed(() => props.virtualize ? [] : tableApi.getTopRows())
 const bottomRows = computed(() => props.virtualize ? [] : tableApi.getBottomRows())
@@ -488,12 +506,17 @@ const virtualPaddingBottom = computed(() => {
   return virtualizer.value.getTotalSize() - (virtualItems.value[virtualItems.value.length - 1]?.end ?? 0) + scrollMargin.value
 })
 
+// The instance never changes: reading it once keeps the row template from subscribing to every virtualizer update (e.g. on scroll).
+const virtualizerInstance = virtualizer ? virtualizer.value : undefined
+
 // Register each rendered row with the virtualizer so its actual height is measured (and re-measured on resize).
 function measureRow(el: Element | ComponentPublicInstance | null) {
-  if (el instanceof Element && virtualizer) {
-    virtualizer.value.measureElement(el)
+  if (el instanceof Element) {
+    virtualizerInstance?.measureElement(el)
   }
 }
+
+const measureRowRef = virtualizerInstance ? measureRow : undefined
 
 // An expanded `<tr>` belongs to its row's virtual item, so its height is added to the row's (measured by a custom `measureElement` if given). Maps it to its row's `<tr>`.
 const expandedRows = new WeakMap<Element, Element>()
@@ -646,7 +669,7 @@ defineExpose({
 <template>
   <DefineRowTemplate v-slot="{ row, index }">
     <tr
-      :ref="virtualizer ? measureRow : undefined"
+      :ref="measureRowRef"
       :[indexAttribute]="index"
       :data-selected="row.getIsSelected()"
       :data-selectable="!!props.onSelect || !!props.onHover || !!props.onContextmenu"
@@ -706,7 +729,7 @@ defineExpose({
   </DefineRowTemplate>
 
   <DefineTableTemplate>
-    <table ref="tableRef" data-slot="base" :class="ui.base({ class: [props.ui?.base] })">
+    <table ref="tableRef" :aria-busy="props.loading ? 'true' : undefined" data-slot="base" :class="ui.base({ class: [props.ui?.base] })">
       <caption v-if="props.caption || !!slots.caption" data-slot="caption" :class="ui.caption({ class: [props.ui?.caption] })">
         <slot name="caption">
           {{ props.caption }}
@@ -714,14 +737,14 @@ defineExpose({
       </caption>
 
       <thead data-slot="thead" :class="ui.thead({ class: [props.ui?.thead] })">
-        <tr v-for="headerGroup in tableApi.getHeaderGroups()" :key="headerGroup.id" data-slot="tr" :class="ui.tr({ class: [props.ui?.tr] })">
+        <tr v-for="headerGroup in headerGroups" :key="headerGroup.id" data-slot="tr" :class="ui.tr({ class: [props.ui?.tr] })">
           <th
-            v-for="header in headerGroup.headers"
+            v-for="{ header, rowSpan } in headerGroup.headers"
             :key="header.id"
             :data-pinned="header.column.getIsPinned()"
             :scope="header.colSpan > 1 ? 'colgroup' : 'col'"
             :colspan="header.colSpan > 1 ? header.colSpan : undefined"
-            :rowspan="header.rowSpan > 1 ? header.rowSpan : undefined"
+            :rowspan="rowSpan > 1 ? rowSpan : undefined"
             :aria-sort="getAriaSort(header)"
             data-slot="th"
             :class="ui.th({
@@ -774,7 +797,7 @@ defineExpose({
           <ReuseRowTemplate v-for="row in bottomRows" :key="row.id" :row="row" />
         </template>
 
-        <tr v-else-if="props.loading && !!slots['loading']">
+        <tr v-else-if="props.loading">
           <td :colspan="tableApi.getVisibleLeafColumns().length" data-slot="loading" :class="ui.loading({ class: props.ui?.loading })">
             <slot name="loading" />
           </td>
@@ -803,6 +826,7 @@ defineExpose({
             v-for="header in footerGroup.headers"
             :key="header.id"
             :data-pinned="header.column.getIsPinned()"
+            :scope="header.colSpan > 1 ? 'colgroup' : 'col'"
             :colspan="header.colSpan > 1 ? header.colSpan : undefined"
             :rowspan="header.rowSpan > 1 ? header.rowSpan : undefined"
             data-slot="th"

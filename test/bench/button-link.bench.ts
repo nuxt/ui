@@ -1,4 +1,4 @@
-import { bench, describe } from 'vitest'
+import { test } from 'vitest'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Button from '../../src/runtime/components/Button.vue'
 
@@ -12,21 +12,21 @@ import Button from '../../src/runtime/components/Button.vue'
 // Declares `loading` so the re-render benches can toggle a prop on it too.
 const Plain = { props: ['loading'], template: '<button type="button">x</button>' }
 
-describe('mount', () => {
-  bench('plain <button>', async () => {
+test('mount', async ({ bench }) => {
+  await bench('plain <button>', async () => {
     const wrapper = await mountSuspended(Plain)
     wrapper.unmount()
-  })
+  }).run()
 
-  bench('UButton (no link)', async () => {
+  await bench('UButton (no link)', async () => {
     const wrapper = await mountSuspended(Button, { props: { label: 'x' } })
     wrapper.unmount()
-  })
+  }).run()
 
-  bench('UButton (link)', async () => {
+  await bench('UButton (link)', async () => {
     const wrapper = await mountSuspended(Button, { props: { label: 'x', to: '/' } })
     wrapper.unmount()
-  })
+  }).run()
 })
 
 // CodSpeed measures one run after a forced GC, and a single on/off cycle is
@@ -39,18 +39,15 @@ const CYCLES = 20
 // Re-render cost: a full on/off `loading` cycle per iteration (deterministic,
 // ends in the initial state), re-rendering the whole subtree.
 function reRenderBench(name: string, comp: any, props: Record<string, any> = {}) {
-  describe(`re-render: ${name}`, () => {
-    let wrapper: Awaited<ReturnType<typeof mountSuspended>> | undefined
+  test(`re-render: ${name}`, async ({ bench }) => {
+    const wrapper = await mountSuspended(comp, { props })
 
-    // Mounted lazily on the first call: CodSpeed's analysis runner invokes the
-    // bench function without tinybench's `setup`/`teardown` options.
-    bench(`${name} x${CYCLES}`, async () => {
-      wrapper ??= await mountSuspended(comp, { props })
+    await bench(`${name} x${CYCLES}`, async () => {
       for (let i = 0; i < CYCLES; i++) {
         await wrapper.setProps({ loading: true })
         await wrapper.setProps({ loading: false })
       }
-    })
+    }).run()
   })
 }
 

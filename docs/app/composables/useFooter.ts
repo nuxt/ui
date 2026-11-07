@@ -6,10 +6,6 @@ export function useFooter() {
     to: '/community',
     active: route.path.startsWith('/community')
   }, {
-    label: 'Blog',
-    to: '/blog',
-    active: route.path.startsWith('/blog')
-  }, {
     label: 'Contribution',
     to: '/docs/getting-started/contribution',
     active: route.path === '/docs/getting-started/contribution'

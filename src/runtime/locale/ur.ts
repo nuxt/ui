@@ -37,11 +37,19 @@ export default defineLocale<Messages>({
       roledescription: 'کیروسل',
       slide: 'سلائیڈ'
     },
+    chatAttachment: {
+      uploading: 'اپ لوڈ ہو رہا ہے',
+      error: 'اپ لوڈ ناکام ہو گیا'
+    },
     chatMessages: {
       autoScroll: 'نیچے سکرول کریں'
     },
     chatPrompt: {
-      placeholder: 'یہاں اپنا پیغام لکھیں'
+      placeholder: 'یہاں اپنا پیغام لکھیں',
+      queue: 'قطار میں پیغامات',
+      sendNow: 'ابھی بھیجیں',
+      edit: 'ترمیم کریں',
+      remove: 'ہٹائیں'
     },
     chatPromptSubmit: {
       label: 'پیغام بھیجیں',

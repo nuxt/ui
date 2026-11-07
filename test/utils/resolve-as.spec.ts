@@ -28,6 +28,11 @@ describe('resolveAs', () => {
     expect(resolveAs(component, defaults).root).toBe(component)
   })
 
+  it('applies a component inheriting its render function to root', () => {
+    const component = defineComponent({ extends: { render: () => h('div') } })
+    expect(resolveAs(component, defaults).root).toBe(component)
+  })
+
   it('applies a functional component to root', () => {
     const component = () => h('div')
     expect(resolveAs(component, defaults).root).toBe(component)

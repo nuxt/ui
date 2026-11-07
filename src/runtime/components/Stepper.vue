@@ -80,7 +80,6 @@ export type StepperSlots<T extends StepperItem = StepperItem> = {
 <script setup lang="ts" generic="T extends StepperItem">
 import { computed } from 'vue'
 import { StepperRoot, StepperItem, StepperTrigger, StepperIndicator, StepperSeparator, StepperTitle, StepperDescription } from 'reka-ui'
-import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
@@ -104,7 +103,7 @@ const modelValue = defineModel<string | number>()
 const { t } = useLocale()
 const appConfig = useAppConfig() as Stepper['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'linear'))
+const rootProps = useForwardProps(props, ['as', 'linear'])
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.stepper || {}) })({
@@ -123,6 +122,16 @@ const currentStepIndex = computed({
   },
   set(value: number) {
     modelValue.value = get(props.items?.[value], props.valueKey as string) ?? value
+  }
+})
+
+// Reka UI numbers steps from 1, `currentStepIndex` is the 0-based index in `items`
+const rootStep = computed({
+  get() {
+    return currentStepIndex.value + 1
+  },
+  set(value: number) {
+    currentStepIndex.value = value - 1
   }
 })
 
@@ -151,7 +160,7 @@ defineExpose({
 <template>
   <StepperRoot
     v-bind="rootProps"
-    v-model="currentStepIndex"
+    v-model="rootStep"
     :orientation="props.orientation"
     :aria-label="t('stepper.label')"
     data-slot="root"
@@ -161,7 +170,7 @@ defineExpose({
       <StepperItem
         v-for="(item, count) in props.items"
         :key="count"
-        :step="count"
+        :step="count + 1"
         :disabled="item.disabled || props.disabled"
         data-slot="item"
         :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"
