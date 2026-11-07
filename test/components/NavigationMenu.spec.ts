@@ -149,6 +149,29 @@ describe('NavigationMenu', () => {
     expect(wrapper.find('[data-slot="content"]').attributes('data-state')).toBe('open')
   })
 
+  it('keeps nested vertical sections out of `modelValue`', async () => {
+    const wrapper = await mountSuspended(NavigationMenu, {
+      props: {
+        orientation: 'vertical',
+        valueKey: 'label',
+        modelValue: ['Parent'],
+        items: [{
+          label: 'Parent',
+          children: [
+            { label: 'Page', to: '/page' },
+            { label: 'Nested', children: [{ label: 'Child', to: '/child' }] }
+          ]
+        }]
+      }
+    })
+
+    const nested = wrapper.findAll('[data-slot="childItem"] [data-slot="link"]').find(link => link.text().includes('Nested'))
+    await nested!.trigger('click')
+
+    expect(nested!.attributes('data-state')).toBe('open')
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+  })
+
   it('toggles a horizontal item with `to` from its trailing area', async () => {
     const wrapper = await mountSuspended(NavigationMenu, {
       props: {
