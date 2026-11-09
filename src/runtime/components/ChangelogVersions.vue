@@ -52,9 +52,8 @@ export type ChangelogVersionsSlots<T extends ChangelogVersionProps = ChangelogVe
 </script>
 
 <script setup lang="ts" generic="T extends ChangelogVersionProps">
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { computed, useId, watch } from 'vue'
 import { Primitive } from 'reka-ui'
-import { defaultWindow, useEventListener, usePreferredReducedMotion } from '@vueuse/core'
 import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
@@ -72,54 +71,18 @@ const getProxySlots = () => omit(slots, ['default', 'indicator'])
 
 const overrides = useComponentOverrides((ui: ChangelogVersions['AppConfig']['ui']) => ui.changelogVersions)
 
+// The beam fills through a scroll-driven animation, on the page or on a named timeline set on the container
+const timelineName = `--ui-changelog-versions-${useId().replace(/[^\w-]/g, '')}`
 const container = computed(() => (typeof props.indicator === 'object' && props.indicator.container) || undefined)
-const reducedMotion = usePreferredReducedMotion()
 
-const progress = ref(0)
-let frame: number | undefined
-let lastTime: number | undefined
-
-function readProgress() {
-  const el = container.value
-  const scrolled = el ? el.scrollTop : window.scrollY
-  const max = el ? el.scrollHeight - el.clientHeight : document.documentElement.scrollHeight - window.innerHeight
-  return max > 0 ? Math.min(Math.max(scrolled / max, 0), 1) : 0
-}
-
-// Eases the beam towards the scroll position, so it trails the scroll slightly instead of jumping with each wheel step
-function tick(time: number) {
-  const target = readProgress()
-  const elapsed = lastTime === undefined ? 16 : time - lastTime
-  const next = reducedMotion.value === 'reduce' ? target : progress.value + (target - progress.value) * (1 - Math.exp(-elapsed / 100))
-
-  progress.value = Math.abs(target - next) < 0.001 ? target : next
-
-  if (progress.value === target) {
-    frame = undefined
-    lastTime = undefined
-  } else {
-    lastTime = time
-    frame = requestAnimationFrame(tick)
-  }
-}
-
-function update() {
-  if (!props.indicator || !props.indicatorMotion || frame !== undefined) {
+watch(container, (el, _, onCleanup) => {
+  if (!el) {
     return
   }
 
-  frame = requestAnimationFrame(tick)
-}
-
-useEventListener(() => container.value ?? defaultWindow, 'scroll', update, { passive: true })
-useEventListener(defaultWindow, 'resize', update, { passive: true })
-
-onMounted(update)
-onBeforeUnmount(() => {
-  if (frame !== undefined) {
-    cancelAnimationFrame(frame)
-  }
-})
+  el.style.setProperty('scroll-timeline', `${timelineName} block`)
+  onCleanup(() => el.style.removeProperty('scroll-timeline'))
+}, { immediate: true })
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)())
@@ -129,7 +92,7 @@ const ui = computed(() => tv(theme, overrides.value)())
   <Primitive :as="props.as" data-slot="changelog-versions" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div v-if="!!props.indicator || !!slots.indicator" data-slot="changelog-versions-indicator" :class="ui.indicator({ class: props.ui?.indicator })">
       <slot name="indicator">
-        <div v-if="!!props.indicatorMotion" data-slot="changelog-versions-beam" :class="ui.beam({ class: props.ui?.beam })" :style="{ transform: `scaleY(${progress})` }" />
+        <div v-if="!!props.indicatorMotion" data-slot="changelog-versions-beam" :class="ui.beam({ class: props.ui?.beam })" :style="{ animationTimeline: container ? timelineName : 'scroll(root block)' }" />
       </slot>
     </div>
 

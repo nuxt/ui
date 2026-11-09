@@ -5,6 +5,6 @@ export default defineTheme({
     root: 'relative',
     container: 'flex flex-col gap-y-8 sm:gap-y-12 lg:gap-y-16',
     indicator: 'absolute hidden lg:block overflow-hidden inset-y-3 inset-s-32 h-full w-px bg-border ms-[-8.5px]',
-    beam: 'absolute inset-0 origin-top bg-primary will-change-transform'
+    beam: 'absolute inset-0 origin-top bg-primary animate-[changelog-versions-beam_linear_both]'
   }
 })

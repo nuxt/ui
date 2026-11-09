@@ -139,6 +139,16 @@
   }
 }
 
+@keyframes changelog-versions-beam {
+  from {
+    transform: scaleY(0);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
+}
+
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -621,6 +631,10 @@
  * site) are intentionally left untouched.
  */
 @media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*.ui-prose-img) {
+    animation: none;
+  }
+
   @keyframes scale-in {
     from { opacity: 0; }
     to { opacity: 1; }

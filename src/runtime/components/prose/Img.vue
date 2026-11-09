@@ -23,7 +23,7 @@ export interface ProseImgProps {
 <script setup lang="ts">
 import { ref, computed, nextTick, useAttrs, useId } from 'vue'
 import { DialogRoot, DialogPortal, DialogTrigger } from 'reka-ui'
-import { useEventListener, usePreferredReducedMotion, createReusableTemplate } from '@vueuse/core'
+import { useEventListener, createReusableTemplate } from '@vueuse/core'
 import { useRuntimeConfig } from '#imports'
 import ImageComponent, { useImage } from '#build/ui-image-component'
 import { useComponentProps, useComponentOverrides } from '../../composables/useComponentProps'
@@ -63,7 +63,6 @@ const refinedSrc = computed(() => {
 // The name is only set while the zoom transition runs, so the image doesn't take part in page view transitions
 const transitionName = `ui-prose-img-${useId().replace(/[^\w-]/g, '')}`
 const transitioning = ref(false)
-const reducedMotion = usePreferredReducedMotion()
 
 const transitionStyle = computed(() => transitioning.value ? { viewTransitionName: transitionName, viewTransitionClass: 'ui-prose-img' } : undefined)
 
@@ -72,20 +71,23 @@ async function setOpen(value: boolean, animate = true) {
     return
   }
 
-  if (!animate || !document.startViewTransition || reducedMotion.value === 'reduce') {
+  if (!animate || !document.startViewTransition) {
     open.value = value
+    return
+  }
+
+  // A second click or Escape while the zoom runs would start another transition and clear the name under it
+  if (transitioning.value) {
     return
   }
 
   transitioning.value = true
   await nextTick()
 
-  const transition = document.startViewTransition(async () => {
+  document.startViewTransition(async () => {
     open.value = value
     await nextTick()
-  })
-
-  transition.finished.finally(() => {
+  }).finished.finally(() => {
     transitioning.value = false
   })
 }
