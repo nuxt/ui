@@ -329,6 +329,7 @@ You can combine `modal: false` with `dismissible: false` to make the Drawer's ba
 ::component-example
 ---
 prettier: true
+collapse: true
 name: 'drawer-dismissible-example'
 ---
 ::
@@ -342,6 +343,7 @@ You can control the open state by using the `default-open` prop or the `v-model:
 ::component-example
 ---
 prettier: true
+collapse: true
 name: 'drawer-open-example'
 ---
 ::
@@ -361,6 +363,7 @@ You can render a [Modal](/docs/components/modal) component on desktop and a Draw
 ::component-example
 ---
 prettier: true
+collapse: true
 name: 'drawer-responsive-example'
 ---
 ::
@@ -372,6 +375,7 @@ You can nest drawers within each other. The ones behind recede and match the siz
 ::component-example
 ---
 prettier: true
+collapse: true
 name: 'drawer-nested-example'
 ---
 ::
