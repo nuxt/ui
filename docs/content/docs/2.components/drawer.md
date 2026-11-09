@@ -16,6 +16,13 @@ links:
 
 ## Usage
 
+::component-example
+---
+collapse: true
+name: 'drawer-example'
+---
+::
+
 Use a [Button](/docs/components/button) or any other component in the default slot of the Drawer.
 
 Then, use the `#content` slot to add the content displayed when the Drawer is open.
@@ -365,18 +372,6 @@ name: 'drawer-snap-points-example'
 
 ::note
 Snap points apply to top and bottom drawers.
-::
-
-### With footer slot
-
-Use the `#footer` slot to add content after the Drawer's body.
-
-::component-example
----
-prettier: true
-collapse: true
-name: 'drawer-footer-slot-example'
----
 ::
 
 ### With command palette
