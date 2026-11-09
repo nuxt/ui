@@ -121,8 +121,6 @@ export const presets: ThemePreset[] = [{
       neutral: 'cobalt-gray'
     },
     radius: 0.125,
-    // a point under stock, utility UIs run dense
-    fontSize: 15,
     font: { sans: 'Roboto' },
     icons: 'bootstrap',
     // Light rides the gray ramp one step deeper than stock.
@@ -174,7 +172,7 @@ export const presets: ThemePreset[] = [{
 }, {
   id: 'mint',
   name: 'Mint',
-  description: 'Teal on an olive neutral, pill buttons and fields, chunky rounded type, large controls.',
+  description: 'Teal on an olive neutral, pill buttons and fields, chunky rounded type.',
   doc: {
     version: 1,
     colors: {
@@ -186,7 +184,7 @@ export const presets: ThemePreset[] = [{
     font: { sans: 'Nunito', weights: { normal: 500, medium: 600, semibold: 700, bold: 800 } },
     icons: 'iconoir',
     style: {
-      defaults: { size: 'lg', variants: { inputs: 'soft' } },
+      defaults: { variants: { inputs: 'soft' } },
       tokenShades: tintedNeutral()
     },
     // the radius ladder stops at 0.75rem, the pill has to come from the slots
