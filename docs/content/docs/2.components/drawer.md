@@ -352,6 +352,21 @@ name: 'drawer-nested-example'
 ---
 ::
 
+### With snap points
+
+Use the `snap-points` prop to let the Drawer rest at several heights, as fractions of the viewport, pixels or `rem` strings. Bind `v-model:snap-point` to control the current one.
+
+::component-example
+---
+prettier: true
+name: 'drawer-snap-points-example'
+---
+::
+
+::note
+Snap points apply to top and bottom drawers.
+::
+
 ### With footer slot
 
 Use the `#footer` slot to add content after the Drawer's body.
