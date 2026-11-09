@@ -306,5 +306,34 @@ describe('ContentSearch', () => {
 
       wrapper.unmount()
     })
+
+    it('renders angle brackets in result content as text', async () => {
+      vi.useFakeTimers({ shouldAdvanceTime: true })
+      const search = vi.fn(async () => [{
+        id: '/getting-started#some-section',
+        title: 'Some Section',
+        titles: [],
+        level: 2,
+        content: 'Wrap it in <UButton> to style it'
+      }])
+
+      const wrapper = await mountSuspended(ContentSearch, {
+        props: {
+          open: true,
+          portal: false,
+          navigation,
+          search,
+          searchTerm: ''
+        }
+      })
+
+      await wrapper.setProps({ searchTerm: 'wrap' })
+      await vi.advanceTimersByTimeAsync(150)
+      await wrapper.vm.$nextTick()
+
+      expect(wrapper.text()).toContain('Wrap it in <UButton> to style it')
+
+      wrapper.unmount()
+    })
   })
 })
