@@ -3,21 +3,10 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     overlay: 'fixed inset-0 bg-backdrop data-[state=open]:animate-[fade-in_300ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_300ms_var(--ease-out)]',
-    /**
-     * The component sets `--drawer-stack` to the number of drawers open above this one
-     * and `--drawer-frontmost-*` to the size of the frontmost of them, so every level
-     * peeks the same: a top or bottom drawer collapses to its height, a side drawer
-     * keeps its width so its content doesn't reflow and shifts by the difference. reka-ui sets
-     * `--drawer-swipe-progress` to how far the frontmost is swiped away, so `--stack` is
-     * the depth this drawer recedes by. The `after` element extends the background past
-     * the anchored edge, so dragging the drawer away from it doesn't open a gap.
-     */
+    // The component sets `--drawer-stack` and `--drawer-frontmost-*`, reka-ui sets `--drawer-swipe-*`.
     content: 'group/drawer fixed bg-overlay ring ring-default flex focus:outline-none [interpolate-size:allow-keywords] transition-[translate,scale,height,width,filter] duration-300 ease-out data-swiping:duration-0 [--bleed:3rem] [--stack:max(0,calc(var(--drawer-stack,0)-var(--drawer-swipe-progress,0)))] scale-[calc(1-var(--stack)*0.05)] data-stacked:brightness-95 data-stacked:overflow-hidden after:pointer-events-none after:absolute after:bg-inherit',
-    handle: 'shrink-0 bg-strong rounded-full opacity-70 hover:opacity-100 active:opacity-100 transition-opacity ease-out',
-    /**
-     * Content fades out quickly when a drawer opens above, and back in only once the
-     * drawer has grown back to its own size, so nothing slides while it's visible.
-     */
+    handle: 'shrink-0 bg-strong rounded-full opacity-70 hover:opacity-100 active:opacity-100 group-data-stacked/drawer:opacity-0 transition-opacity ease-out',
+    // Fades back in once the drawer has grown back, so nothing moves while visible.
     container: 'w-full flex flex-col gap-4 p-4 overflow-y-auto transition-opacity duration-300 ease-out delay-200 group-data-stacked/drawer:opacity-0 group-data-stacked/drawer:delay-0 group-data-stacked/drawer:duration-100',
     header: 'flex items-center gap-1.5 min-h-8',
     wrapper: 'min-w-0 flex-1',
@@ -49,12 +38,7 @@ export default defineTheme({
     },
     inset: {
       true: {
-        /**
-         * The margin does the insetting, so every direction keeps the offsets of its
-         * anchored edge. A floating drawer has no edge to extend past, so `--bleed` goes
-         * to zero, and `--initial-transform` makes the `slide-*` keyframes travel past
-         * the gap instead of peeking through it while closed.
-         */
+        // `--initial-transform` makes the `slide-*` keyframes travel past the margin.
         content: 'm-4 max-h-[calc(100%-2rem)] rounded-lg overflow-hidden [--bleed:0px] [--initial-transform:calc(100%+1.5rem)]'
       }
     },
