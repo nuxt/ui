@@ -56,25 +56,25 @@ catalog:
   "@tanstack/charts": ^1.5.0
   "@tanstack/vue-table": ^8.21.3
   "@tanstack/vue-virtual": ^3.13.52
-  "@tiptap/core": ^3.32.2
-  "@tiptap/extension-bubble-menu": ^3.32.2
-  "@tiptap/extension-code": ^3.32.2
-  "@tiptap/extension-collaboration": ^3.32.2
-  "@tiptap/extension-drag-handle": ^3.32.2
-  "@tiptap/extension-drag-handle-vue-3": ^3.32.2
-  "@tiptap/extension-emoji": ^3.32.2
-  "@tiptap/extension-floating-menu": ^3.32.2
-  "@tiptap/extension-horizontal-rule": ^3.32.2
-  "@tiptap/extension-image": ^3.32.2
-  "@tiptap/extension-mention": ^3.32.2
-  "@tiptap/extension-node-range": ^3.32.2
-  "@tiptap/extension-placeholder": ^3.32.2
-  "@tiptap/extension-text-align": ^3.32.2
-  "@tiptap/markdown": ^3.32.2
-  "@tiptap/pm": ^3.32.2
-  "@tiptap/starter-kit": ^3.32.2
-  "@tiptap/suggestion": ^3.32.2
-  "@tiptap/vue-3": ^3.32.2
+  "@tiptap/core": ^3.33.0
+  "@tiptap/extension-bubble-menu": ^3.33.0
+  "@tiptap/extension-code": ^3.33.0
+  "@tiptap/extension-collaboration": ^3.33.0
+  "@tiptap/extension-drag-handle": ^3.33.0
+  "@tiptap/extension-drag-handle-vue-3": ^3.33.0
+  "@tiptap/extension-emoji": ^3.33.0
+  "@tiptap/extension-floating-menu": ^3.33.0
+  "@tiptap/extension-horizontal-rule": ^3.33.0
+  "@tiptap/extension-image": ^3.33.0
+  "@tiptap/extension-mention": ^3.33.0
+  "@tiptap/extension-node-range": ^3.33.0
+  "@tiptap/extension-placeholder": ^3.33.0
+  "@tiptap/extension-text-align": ^3.33.0
+  "@tiptap/markdown": ^3.33.0
+  "@tiptap/pm": ^3.33.0
+  "@tiptap/starter-kit": ^3.33.0
+  "@tiptap/suggestion": ^3.33.0
+  "@tiptap/vue-3": ^3.33.0
   "@types/sortablejs": ^1.15.9
   "@unhead/vue": ^3.4.3
   "@vercel/analytics": ^2.0.1
