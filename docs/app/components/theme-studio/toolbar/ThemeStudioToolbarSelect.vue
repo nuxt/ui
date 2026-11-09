@@ -21,11 +21,10 @@ const props = defineProps<{
   vertical?: boolean
   /** Hovering a row previews it on the page, picking it applies it. */
   preview?: boolean
+  modelValue?: string | number
 }>()
 
 defineOptions({ inheritAttrs: false })
-
-const model = defineModel<string | number>()
 
 /** Local unless a caller binds it; drives the chevron rotation. */
 const open = defineModel<boolean>('open', { default: false })
@@ -33,12 +32,20 @@ const open = defineModel<boolean>('open', { default: false })
 const attrs = useAttrs()
 
 /** The selected row picked again, which Reka reports as a toggle off. */
-const emit = defineEmits<{ reselect: [value: string | number] }>()
+const emit = defineEmits<{
+  'reselect': [value: string | number]
+  'update:modelValue': [value: string | number]
+}>()
+
+// A plain prop and emit, not defineModel: a preview writes the value and
+// the pick's restore puts the old one back outside the model, so the model's
+// local copy still holds the previewed value and would swallow the pick.
+const update = (value: string | number) => emit('update:modelValue', value)
 
 const { show, cancel, commit, onPointermove, onKeydown } = useThemePreview({ intent: true })
 
 // the applied value, held while a preview runs so the label and check stay on it
-const applied = useHeldDuringPreview(() => model.value)
+const applied = useHeldDuringPreview(() => props.modelValue)
 
 const triggerLabel = computed(() => props.items.find(item => item.value === applied.value)?.label ?? props.placeholder)
 
@@ -50,7 +57,7 @@ const selected = computed({
   set: (value: string | number | undefined) => {
     const current = applied.value
     commit(() => {
-      if (value !== undefined) model.value = value
+      if (value !== undefined) update(value)
       else if (current !== undefined) emit('reselect', current)
     })
     open.value = false
@@ -62,7 +69,7 @@ const selected = computed({
 function onHighlight(payload?: { value: unknown }) {
   if (!props.preview) return
   const value = payload?.value as string | number | undefined
-  show(value === undefined || value === applied.value ? undefined : () => (model.value = value))
+  show(value === undefined || value === applied.value ? undefined : () => update(value))
 }
 
 watch(open, (isOpen) => {

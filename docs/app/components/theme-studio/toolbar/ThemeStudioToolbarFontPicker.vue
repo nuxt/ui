@@ -21,9 +21,15 @@ const props = defineProps<{
   /** Prepend an "Inherit" option, for the stacks that may follow the body. */
   inherit?: boolean
   ariaLabel?: string
+  modelValue: string
 }>()
 
-const model = defineModel<string>({ required: true })
+const emit = defineEmits<{ 'update:modelValue': [value: string] }>()
+
+// A plain prop and emit, not defineModel: a preview writes the value and
+// the pick's restore puts the old one back outside the model, so the model's
+// local copy still holds the previewed value and would swallow the pick.
+const update = (value: string) => emit('update:modelValue', value)
 
 const { status, load, search } = useGoogleFonts()
 // the studio chrome skins to the applied pack, the search glyph included
@@ -35,10 +41,10 @@ const query = ref('')
 // Hovering a face previews it on the page, picking it applies it. The
 // trigger and the check stay on the applied face meanwhile.
 const { show, cancel, commit, onPointermove, onKeydown } = useThemePreview({ intent: true })
-const applied = useHeldDuringPreview(() => model.value)
+const applied = useHeldDuringPreview(() => props.modelValue)
 const selected = computed({
   get: () => applied.value,
-  set: (value: string) => commit(() => (model.value = value))
+  set: (value: string) => commit(() => update(value))
 })
 
 // The pointer and key listeners aren't content props, they fall through to
@@ -51,7 +57,7 @@ const content = {
 
 function onHighlight(payload?: { value: unknown }) {
   const value = payload?.value as string | undefined
-  show(!value || value === applied.value ? undefined : () => (model.value = value))
+  show(!value || value === applied.value ? undefined : () => update(value))
 }
 
 // A stale query would flash old results on reopen; the catalog fetch only
