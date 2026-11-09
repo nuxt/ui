@@ -233,9 +233,10 @@ const items = computed<DropdownMenuItem[][]>(() => [[{
       icon: pack.icon,
       type: 'checkbox' as const,
       checked: view.value.icon === pack.value,
+      // through commit all the same, a preview still ending must not restore over it
       onSelect: (event: Event) => {
         event.preventDefault()
-        icon.value = pack.value
+        commit(() => (icon.value = pack.value))
       }
     }))
   }),
