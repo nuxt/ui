@@ -172,17 +172,18 @@ const frontmost = computed(() => [...nestedStack].reduce<DrawerStackEntry>((deep
 const stack = computed(() => frontmost.value.depth)
 
 // A stacked top or bottom drawer collapses to the frontmost height, so its own height is
-// only measured while nothing is open above it. `borderBoxSize` ignores the stack's scale.
+// only measured while nothing is open above it. `offset*` ignores the stack's scale and
+// stays physical in a vertical writing mode.
 const contentRef = useTemplateRef<InstanceType<typeof DrawerContent>>('contentRef')
 const size = ref({ width: 0, height: 0 })
 // `$el` isn't reactive, so `isOpen` re-runs the target once the content renders, and
 // a closed drawer renders a comment node in its place.
 useResizeObserver(() => isOpen.value && contentRef.value?.$el?.nodeType === 1 ? contentRef.value.$el : undefined, ([entry]) => {
-  const box = entry?.borderBoxSize?.[0]
-  if (!box) {
+  const el = entry?.target as HTMLElement | undefined
+  if (!el) {
     return
   }
-  size.value = { width: box.inlineSize, height: stack.value > 0 ? size.value.height : box.blockSize }
+  size.value = { width: el.offsetWidth, height: stack.value > 0 ? size.value.height : el.offsetHeight }
 })
 // A drawer that opened under an already open one has never been measured, and the
 // observer won't fire if it comes back at the same size. `offset*` ignores the scale.
