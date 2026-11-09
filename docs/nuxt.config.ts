@@ -48,9 +48,6 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'en'
       }
-    },
-    rootAttrs: {
-      class: 'bg-default'
     }
   },
 
