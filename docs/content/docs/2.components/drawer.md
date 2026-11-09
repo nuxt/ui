@@ -295,7 +295,7 @@ slots:
 Use the `dismissible` prop to control whether the Drawer can be dismissed by clicking outside of it, pressing escape or swiping it away. Defaults to `true`.
 
 ::note
-A `close:prevent` event will be emitted when the user tries to close it.
+A `close:prevent` event will be emitted when a click outside, the escape key or a swipe is blocked. The close button and the trigger still close the Drawer.
 ::
 
 ::tip
