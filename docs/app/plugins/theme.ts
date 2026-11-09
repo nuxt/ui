@@ -119,7 +119,12 @@ export default defineNuxtPlugin({
       // self-heals to reconcile; one atomic write makes that impossible.
       // Debounced: the getter still runs per flush, but a slider drag no
       // longer costs a synchronous localStorage write per frame.
-      watchDebounced(() => JSON.stringify(snapshotStoredTheme()), json => writeStoredTheme(JSON.parse(json)), { debounce: 250, flush: 'post' })
+      // A hover preview from the theme menu is not a change yet, it waits
+      // out the preview and writes whatever the menu leaves behind.
+      const previewing = useThemePreviewing()
+      watchDebounced(() => previewing.value ? undefined : JSON.stringify(snapshotStoredTheme()), (json) => {
+        if (json) writeStoredTheme(JSON.parse(json))
+      }, { debounce: 250, flush: 'post' })
     }
 
     if (import.meta.server) {

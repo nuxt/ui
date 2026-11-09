@@ -34,6 +34,9 @@ function plainPins(pins: readonly PalettePin[]): PalettePin[] {
   return pins.map(pin => ({ shade: pin.shade, l: pin.l, c: pin.c, h: pin.h }))
 }
 
+// the curves below are read once, a hover preview's restore would strand them
+useThemePreviewBlock()
+
 // Restore the lens too, so a reload doesn't silently bake the sliders in.
 const stored = paletteParams.value[props.alias]
 const effects = reactive<PaletteEffects>({ ...PALETTE_EFFECT_DEFAULTS, ...(stored?.effects ?? {}) })

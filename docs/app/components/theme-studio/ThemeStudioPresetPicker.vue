@@ -12,6 +12,9 @@ import { keepPanels, paletteLabel, rampCssName, themeChipStyle, loadFontPreviews
  * icons, radius) as rows with a submenu each, color mode as an inline
  * segmented control, and the full studio at the bottom. The header drops this on /theme, where the
  * studio's own toolbar covers it.
+ *
+ * Hovering an option previews it on the page, picking it applies it. The menu
+ * itself keeps showing the applied theme while a preview runs.
  */
 const { track } = useAnalytics()
 const appConfig = useAppConfig()
@@ -21,6 +24,7 @@ const { primary, primaryColors, neutral, neutralColors, blackAsPrimary, setBlack
 const { presets, selectedPreset, applyPreset, selectPalette, isCustomPalette, neutralChip, sectionDirty } = useThemeStudio()
 // "changed from the preset" per control, the cue the studio toolbar carries
 const { groupDirtyFlags } = useThemeStudioToolbar()
+const { show, cancel, commit } = useThemePreview()
 
 // The persisted theme is client-only, resolve once the client has it so
 // hydration matches the server's fallback (the stock preset). Shared, or the
@@ -36,6 +40,30 @@ const modified = computed(() => Object.values(groupDirtyFlags).some(flag => flag
 const primaryDirty = sectionDirty('primary')
 const neutralDirty = sectionDirty('neutral')
 
+/** What the menu shows of the applied theme: names, checks and dirty cues. */
+const live = computed(() => ({
+  preset: preset.value,
+  // a custom theme's chip is drawn from the live doc
+  doc: preset.value?.doc ?? currentDoc(),
+  name: name.value,
+  modified: modified.value,
+  primary: blackAsPrimary.value ? 'black' : isCustomPalette('primary') ? 'custom' : primary.value,
+  primaryDirty: mounted.value && primaryDirty.value,
+  neutral: isCustomPalette('neutral') ? 'custom' : neutral.value,
+  neutralChip: neutralChip.value,
+  neutralDirty: mounted.value && neutralDirty.value,
+  font: font.value,
+  fontDirty: groupDirtyFlags.font.value,
+  icon: icon.value,
+  iconsDirty: groupDirtyFlags.icons.value,
+  radius: radius.value,
+  radiusDirty: groupDirtyFlags.radius.value
+}))
+
+// held while a preview runs: a check that follows the pointer would stop
+// telling which option is applied
+const view = useHeldDuringPreview(() => live.value)
+
 /** A preset's glyph in the menu; a custom theme wears the studio's palette. */
 const presetIcon = (id?: string) => (id && PRESET_ICONS[id]) || studioIcons.palette
 
@@ -46,7 +74,7 @@ const presetIcon = (id?: string) => (id && PRESET_ICONS[id]) || studioIcons.pale
 // markup is never patched during hydration.
 const triggerIcon = computed(() => {
   if (!mounted.value) return stockIcons.palette
-  const id = preset.value?.id
+  const id = view.value.preset?.id
   return (id && id !== DEFAULT_PRESET_ID && PRESET_ICONS[id]) || studioIcons.palette
 })
 
@@ -63,10 +91,44 @@ function chip(id: string | undefined, doc: ThemeDoc): DropdownMenuItem['avatar']
   }
 }
 
-/** Picking an option keeps the menu open, so several settings can be changed in a row. */
-const keep = (apply: () => void) => (event: Event) => {
-  event.preventDefault()
-  apply()
+/**
+ * What an option does, from the key its row carries (`kind:value`), so the
+ * hover preview and the pick run the same change.
+ */
+function action(key: string): (() => void) | undefined {
+  const index = key.indexOf(':')
+  const kind = key.slice(0, index)
+  const value = key.slice(index + 1)
+  switch (kind) {
+    case 'preset': {
+      const entry = presets.find(entry => entry.id === value)
+      return entry && (() => applyPreset(entry))
+    }
+    case 'black': return () => setBlackAsPrimary(true)
+    case 'primary':
+    case 'neutral': return () => selectPalette(kind, value)
+    case 'font': return () => (font.value = value)
+    case 'radius': return () => (radius.value = Number(value))
+  }
+}
+
+/**
+ * An option that previews on hover. Its key rides the row's `data-preview`
+ * marker, see the focus listener below. Picking it keeps the menu open, so
+ * several settings can be changed in a row.
+ */
+function option(key: string, item: DropdownMenuItem): DropdownMenuItem {
+  return {
+    slot: 'option',
+    ...item,
+    preview: key,
+    type: 'checkbox',
+    onSelect: (event: Event) => {
+      event.preventDefault()
+      const apply = action(key)
+      if (apply) commit(apply)
+    }
+  }
 }
 
 /**
@@ -87,13 +149,11 @@ function setting(row: { label: string, icon: string, value: string, dot?: string
 
 /** A font as a menu option, previewing its own face through the `font` slot. */
 function fontOption(name: string): DropdownMenuItem {
-  return {
+  return option(`font:${name}`, {
     label: name,
     slot: 'font',
-    type: 'checkbox',
-    checked: font.value === name,
-    onSelect: keep(() => (font.value = name))
-  }
+    checked: view.value.font === name
+  })
 }
 
 /**
@@ -102,7 +162,7 @@ function fontOption(name: string): DropdownMenuItem {
  * search isn't in the shortlist, it sits on top so its check stays visible.
  */
 const fontGroups = computed<DropdownMenuItem[][]>(() => [
-  ...(FONTS.some(entry => entry.name === font.value) ? [] : [[fontOption(font.value)]]),
+  ...(FONTS.some(entry => entry.name === view.value.font) ? [] : [[fontOption(view.value.font)]]),
   ...(['Sans', 'Serif', 'Mono'] as const).map(category => [
     { label: category, type: 'label' as const },
     ...FONTS.filter(entry => entry.category === category).map(entry => fontOption(entry.name))
@@ -111,87 +171,83 @@ const fontGroups = computed<DropdownMenuItem[][]>(() => [
 
 const items = computed<DropdownMenuItem[][]>(() => [[{
   ...submenu,
-  label: preset.value?.name ?? 'Custom',
-  avatar: chip(preset.value?.id, preset.value?.doc ?? currentDoc()),
+  label: view.value.preset?.name ?? 'Custom',
+  avatar: chip(view.value.preset?.id, view.value.doc),
   // edits on top of a preset keep its name (it stays the baseline), the name
   // goes primary like a changed value does
-  ui: { itemLabel: `font-semibold ${preset.value && modified.value ? 'text-primary' : 'text-highlighted'}` },
-  children: presets.map(entry => ({
+  ui: { itemLabel: `font-semibold ${view.value.preset && view.value.modified ? 'text-primary' : 'text-highlighted'}` },
+  // picking the current preset again reapplies it, dropping the edits on top
+  children: presets.map(entry => option(`preset:${entry.id}`, {
     label: entry.name,
-    type: 'checkbox' as const,
-    checked: entry.id === preset.value?.id,
-    avatar: chip(entry.id, entry.doc),
-    // picking the current preset again reapplies it, dropping the edits on top
-    onSelect: keep(() => applyPreset(entry))
+    checked: entry.id === view.value.preset?.id,
+    avatar: chip(entry.id, entry.doc)
   }))
 }], [
   setting({
     label: 'Primary',
-    dirty: mounted.value && primaryDirty.value,
+    dirty: view.value.primaryDirty,
     icon: studioIcons.brush,
-    value: blackAsPrimary.value ? 'Black' : isCustomPalette('primary') ? 'Custom' : upperFirst(paletteLabel(primary.value)),
-    dot: 'var(--ui-primary)',
-    children: [{
+    value: upperFirst(paletteLabel(view.value.primary)),
+    // the live var only for black and a custom ramp, which have no held swatch
+    dot: view.value.primary === 'black' || view.value.primary === 'custom' ? 'var(--ui-primary)' : swatch(view.value.primary),
+    children: [option('black:', {
       label: 'Black',
       slot: 'color',
       dot: 'var(--ui-text-highlighted)',
-      type: 'checkbox' as const,
-      checked: blackAsPrimary.value,
-      onSelect: keep(() => setBlackAsPrimary(true))
-    }, ...primaryColors.map(color => ({
+      checked: view.value.primary === 'black'
+    }), ...primaryColors.map(color => option(`primary:${color}`, {
       label: upperFirst(paletteLabel(color)),
       slot: 'color',
       dot: swatch(color),
-      type: 'checkbox' as const,
-      checked: !blackAsPrimary.value && !isCustomPalette('primary') && primary.value === color,
-      onSelect: keep(() => selectPalette('primary', color))
+      checked: view.value.primary === color
     }))]
   }),
   setting({
     label: 'Neutral',
-    dirty: mounted.value && neutralDirty.value,
+    dirty: view.value.neutralDirty,
     icon: studioIcons.contrast,
-    value: isCustomPalette('neutral') ? 'Custom' : upperFirst(paletteLabel(neutral.value)),
-    dot: `var(--color-${neutralChip.value}-500)`,
-    children: neutralColors.map(color => ({
+    value: upperFirst(paletteLabel(view.value.neutral)),
+    dot: `var(--color-${view.value.neutralChip}-500)`,
+    children: neutralColors.map(color => option(`neutral:${color}`, {
       label: upperFirst(paletteLabel(color)),
       slot: 'color',
       dot: swatch(color),
-      type: 'checkbox' as const,
-      checked: !isCustomPalette('neutral') && neutral.value === color,
-      onSelect: keep(() => selectPalette('neutral', color))
+      checked: view.value.neutral === color
     }))
   }),
   setting({
     label: 'Font',
-    dirty: groupDirtyFlags.font.value,
+    dirty: view.value.fontDirty,
     icon: studioIcons.text,
-    value: font.value,
+    value: view.value.font,
     children: fontGroups.value
   }),
   setting({
     label: 'Icons',
-    dirty: groupDirtyFlags.icons.value,
+    dirty: view.value.iconsDirty,
     icon: studioIcons.shapes,
-    value: icons.find(pack => pack.value === icon.value)?.label ?? icon.value,
+    value: icons.find(pack => pack.value === view.value.icon)?.label ?? view.value.icon,
+    // no preview: a pack swap re-renders every icon on the page
     children: icons.map(pack => ({
       label: pack.label,
       icon: pack.icon,
       type: 'checkbox' as const,
-      checked: icon.value === pack.value,
-      onSelect: keep(() => (icon.value = pack.value))
+      checked: view.value.icon === pack.value,
+      // through commit all the same, a preview still ending must not restore over it
+      onSelect: (event: Event) => {
+        event.preventDefault()
+        commit(() => (icon.value = pack.value))
+      }
     }))
   }),
   setting({
     label: 'Radius',
-    dirty: groupDirtyFlags.radius.value,
+    dirty: view.value.radiusDirty,
     icon: studioIcons.radius,
-    value: `${radius.value}rem`,
-    children: radiuses.map(value => ({
+    value: `${view.value.radius}rem`,
+    children: radiuses.map(value => option(`radius:${value}`, {
       label: `${value}rem`,
-      type: 'checkbox' as const,
-      checked: radius.value === value,
-      onSelect: keep(() => (radius.value = value))
+      checked: view.value.radius === value
     }))
   })
 ], [{
@@ -210,7 +266,7 @@ const items = computed<DropdownMenuItem[][]>(() => [[{
 }]])
 
 function asRow(item: unknown) {
-  return item as { label: string, icon?: string, value?: string, dot?: string, dirty?: boolean }
+  return item as { label: string, icon?: string, value?: string, dot?: string, dirty?: boolean, preview?: string }
 }
 
 const open = ref(false)
@@ -220,8 +276,28 @@ watch(open, (isOpen) => {
     track('Theme Picker Opened')
     // the font submenu previews each face, load them once the menu is in use
     loadFontPreviews(FONTS.map(entry => entry.name))
+  } else {
+    cancel()
   }
 })
+
+// The highlighted row holds focus, the pointer moves it as well as the keys,
+// so focus is the hover. A row without a marker (a submenu trigger, or the
+// menu itself once the pointer leaves an item) ends the preview.
+useEventListener('focusin', (event) => {
+  if (!open.value) return
+  const key = (event.target as Element | null)?.closest?.('[role^="menuitem"]')?.querySelector('[data-preview]')?.getAttribute('data-preview')
+  show(key && !isApplied(key) ? action(key) : undefined)
+})
+
+/**
+ * The applied option previews nothing, like the studio's lists: a preset
+ * previewed over its own edits would drop them. Picking it still reapplies.
+ */
+function isApplied(key: string) {
+  const { preset, primary, neutral, font, radius } = view.value
+  return [`preset:${preset?.id}`, primary === 'black' ? 'black:' : `primary:${primary}`, `neutral:${neutral}`, `font:${font}`, `radius:${radius}`].includes(key)
+}
 </script>
 
 <template>
@@ -231,13 +307,13 @@ watch(open, (isOpen) => {
     :content="{ align: 'start', alignOffset: -4, onInteractOutside: keepPanels }"
     :ui="{ content: 'w-56 min-w-36 max-h-98', label: 'text-xs' }"
   >
-    <UTooltip :text="name" ignore-non-keyboard-focus>
+    <UTooltip :text="view.name" ignore-non-keyboard-focus>
       <UButton
         :icon="triggerIcon"
         color="neutral"
         variant="ghost"
         :ui="{ leadingIcon: 'text-primary' }"
-        :aria-label="name"
+        :aria-label="view.name"
       />
     </UTooltip>
 
@@ -270,7 +346,16 @@ watch(open, (isOpen) => {
     </template>
 
     <template #font-label="{ item }">
-      <span :style="{ fontFamily: `'${asRow(item).label}', sans-serif` }">{{ asRow(item).label }}</span>
+      <span :data-preview="asRow(item).preview" :style="{ fontFamily: `'${asRow(item).label}', sans-serif` }">{{ asRow(item).label }}</span>
+    </template>
+
+    <!-- the marker the focus listener reads the option's key from -->
+    <template #option-label="{ item }">
+      <span :data-preview="asRow(item).preview">{{ asRow(item).label }}</span>
+    </template>
+
+    <template #color-label="{ item }">
+      <span :data-preview="asRow(item).preview">{{ asRow(item).label }}</span>
     </template>
   </UDropdownMenu>
 </template>

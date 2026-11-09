@@ -19,11 +19,12 @@ const props = defineProps<{
   placeholder?: string
   /** Stacked in the mobile menu: the list takes the trigger's width. */
   vertical?: boolean
+  /** Hovering a row previews it on the page, picking it applies it. */
+  preview?: boolean
+  modelValue?: string | number
 }>()
 
 defineOptions({ inheritAttrs: false })
-
-const model = defineModel<string | number>()
 
 /** Local unless a caller binds it; drives the chevron rotation. */
 const open = defineModel<boolean>('open', { default: false })
@@ -31,20 +32,48 @@ const open = defineModel<boolean>('open', { default: false })
 const attrs = useAttrs()
 
 /** The selected row picked again, which Reka reports as a toggle off. */
-const emit = defineEmits<{ reselect: [value: string | number] }>()
+const emit = defineEmits<{
+  'reselect': [value: string | number]
+  'update:modelValue': [value: string | number]
+}>()
 
-const triggerLabel = computed(() => props.items.find(item => item.value === model.value)?.label ?? props.placeholder)
+// A plain prop and emit, not defineModel: a preview writes the value and
+// the pick's restore puts the old one back outside the model, so the model's
+// local copy still holds the previewed value and would swallow the pick.
+const update = (value: string | number) => emit('update:modelValue', value)
+
+const { show, cancel, commit, onPointermove, onKeydown } = useThemePreview({ intent: true })
+
+// the applied value, held while a preview runs so the label and check stay on it
+const applied = useHeldDuringPreview(() => props.modelValue)
+
+const triggerLabel = computed(() => props.items.find(item => item.value === applied.value)?.label ?? props.placeholder)
 
 // Reka toggles the selected row off with `undefined`; a pick-one control
 // keeps its value and just closes, but still reports the re-pick, which the
 // preset control turns into a re-apply.
 const selected = computed({
-  get: () => model.value,
+  get: () => applied.value,
   set: (value: string | number | undefined) => {
-    if (value !== undefined) model.value = value
-    else if (model.value !== undefined) emit('reselect', model.value)
+    const current = applied.value
+    commit(() => {
+      if (value !== undefined) update(value)
+      else if (current !== undefined) emit('reselect', current)
+    })
     open.value = false
   }
+})
+
+// The applied row previews nothing: a preset previewed over its own edits
+// would drop them.
+function onHighlight(payload?: { value: unknown }) {
+  if (!props.preview) return
+  const value = payload?.value as string | number | undefined
+  show(value === undefined || value === applied.value ? undefined : () => update(value))
+}
+
+watch(open, (isOpen) => {
+  if (!isOpen) cancel()
 })
 </script>
 
@@ -60,19 +89,25 @@ const selected = computed({
     />
 
     <template #content>
-      <!-- the popover already frames the panel, the listbox only fills it -->
-      <UListbox
-        v-model="selected"
-        :items="items"
-        value-key="value"
-        highlight-on-hover
-        :aria-label="(attrs['aria-label'] as string | undefined)"
-        :ui="{ root: 'ring-0 has-focus-visible:outline-0', content: 'max-h-106' }"
-      >
-        <template v-for="(_, name) in $slots" :key="name" #[name]="scope">
-          <slot :name="name" v-bind="scope ?? {}" />
-        </template>
-      </UListbox>
+      <!-- the popover already frames the panel, the listbox only fills it;
+           the wrapper tells a hover from the listbox's own highlight on open,
+           in the capture phase so the move that highlights a row arms it -->
+      <div class="contents" @pointermove.capture="onPointermove" @keydown.capture="onKeydown">
+        <UListbox
+          v-model="selected"
+          :items="items"
+          value-key="value"
+          highlight-on-hover
+          :aria-label="(attrs['aria-label'] as string | undefined)"
+          :ui="{ root: 'ring-0 has-focus-visible:outline-0', content: 'max-h-106' }"
+          @highlight="onHighlight"
+          @leave="onHighlight()"
+        >
+          <template v-for="(_, name) in $slots" :key="name" #[name]="scope">
+            <slot :name="name" v-bind="scope ?? {}" />
+          </template>
+        </UListbox>
+      </div>
     </template>
   </UPopover>
 </template>

@@ -108,6 +108,6 @@ const editorContent = { side: 'right' as const, align: 'start' as const, alignOf
       </UPopover>
     </template>
 
-    <ThemeStudioColorMenu :alias="alias" />
+    <ThemeStudioColorMenu :alias="alias" preview />
   </ThemeStudioSection>
 </template>

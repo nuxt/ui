@@ -21,9 +21,15 @@ const props = defineProps<{
   /** Prepend an "Inherit" option, for the stacks that may follow the body. */
   inherit?: boolean
   ariaLabel?: string
+  modelValue: string
 }>()
 
-const model = defineModel<string>({ required: true })
+const emit = defineEmits<{ 'update:modelValue': [value: string] }>()
+
+// A plain prop and emit, not defineModel: a preview writes the value and
+// the pick's restore puts the old one back outside the model, so the model's
+// local copy still holds the previewed value and would swallow the pick.
+const update = (value: string) => emit('update:modelValue', value)
 
 const { status, load, search } = useGoogleFonts()
 // the studio chrome skins to the applied pack, the search glyph included
@@ -32,12 +38,37 @@ const appConfig = useAppConfig()
 const open = ref(false)
 const query = ref('')
 
+// Hovering a face previews it on the page, picking it applies it. The
+// trigger and the check stay on the applied face meanwhile.
+const { show, cancel, commit, onPointermove, onKeydown } = useThemePreview({ intent: true })
+const applied = useHeldDuringPreview(() => props.modelValue)
+const selected = computed({
+  get: () => applied.value,
+  set: (value: string) => commit(() => update(value))
+})
+
+// The pointer and key listeners aren't content props, they fall through to
+// the panel element (the search input sits inside it). Capture phase, so the
+// move or key that highlights a row arms the preview before the row reports.
+const content = {
+  onInteractOutside: keepPanels,
+  sideOffset: 5,
+  ...({ onPointermoveCapture: onPointermove, onKeydownCapture: onKeydown, onPointerleave: () => show() } as object)
+}
+
+function onHighlight(payload?: { value: unknown }) {
+  const value = payload?.value as string | undefined
+  show(!value || value === applied.value ? undefined : () => update(value))
+}
+
 // A stale query would flash old results on reopen; the catalog fetch only
 // starts once someone actually reaches for the picker.
 watch(open, (value) => {
   if (value) {
     query.value = ''
     load()
+  } else {
+    cancel()
   }
 })
 
@@ -74,8 +105,8 @@ const items = computed<FontItem[][]>(() => {
   const curated = [...props.curated]
   // A searched pick isn't in the shortlist, pin it on top so the selection
   // stays visible (and deselectable) on reopen.
-  if (model.value !== 'inherit' && !curated.some(entry => entry.name === model.value)) {
-    curated.unshift({ name: model.value, category: 'Sans' })
+  if (applied.value !== 'inherit' && !curated.some(entry => entry.name === applied.value)) {
+    curated.unshift({ name: applied.value, category: 'Sans' })
   }
   return [
     ...(props.inherit ? [[{ label: 'Inherit', value: 'inherit' }]] : []),
@@ -99,23 +130,24 @@ function faceOf(value?: string) {
 
 <template>
   <USelectMenu
-    v-model="model"
+    v-model="selected"
     v-model:open="open"
     v-model:search-term="query"
     :items="items"
     value-key="value"
     ignore-filter
-    :content="{ onInteractOutside: keepPanels, sideOffset: 5 }"
+    :content="content"
     :search-input="{ placeholder: 'Search Google Fonts…', icon: appConfig.ui.icons.search }"
     :aria-label="ariaLabel"
     size="sm"
     class="w-full"
     :ui="{ content: 'w-(--reka-combobox-trigger-width)', trailingIcon: ['transition-transform duration-200', open && 'rotate-180'] }"
+    @highlight="onHighlight"
   >
     <!-- No inline face on the trigger: the panel already renders in the body
          font, so the name inherits it. -->
     <template #default>
-      <span class="truncate">{{ model === 'inherit' ? 'Inherit' : model }}</span>
+      <span class="truncate">{{ applied === 'inherit' ? 'Inherit' : applied }}</span>
     </template>
 
     <template #item-label="{ item }">

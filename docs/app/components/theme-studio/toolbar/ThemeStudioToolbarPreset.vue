@@ -23,7 +23,8 @@ onMounted(() => loadFontPreviews(fonts.map(entry => entry.name)))
 // Edits deliberately don't clear the preset name (the controls that changed
 // go primary to carry divergence); 'Custom' only when preset-less but
 // diverged from stock, via the placeholder.
-const activeEntry = computed(() => (mounted.value
+// held while a preview runs, the trigger keeps naming the applied preset
+const activeEntry = useHeldDuringPreview(() => (mounted.value
   ? presets.find(preset => preset.id === selectedPreset.value)
   : undefined))
 
@@ -87,6 +88,7 @@ const selected = computed({
     :aria-label="`Preset: ${presetLabel}`"
     :vertical="vertical"
     :class="vertical ? 'w-full' : 'w-38'"
+    preview
     @reselect="pick"
   >
     <template #item-description="{ item }">
