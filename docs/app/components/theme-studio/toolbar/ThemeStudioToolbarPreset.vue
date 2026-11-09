@@ -87,6 +87,7 @@ const selected = computed({
     :aria-label="`Preset: ${presetLabel}`"
     :vertical="vertical"
     :class="vertical ? 'w-full' : 'w-38'"
+    preview
     @reselect="pick"
   >
     <template #item-description="{ item }">

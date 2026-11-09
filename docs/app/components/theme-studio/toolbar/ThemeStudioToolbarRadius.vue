@@ -28,5 +28,6 @@ const selected = computed({
     aria-label="Radius"
     :vertical="vertical"
     :class="vertical ? 'w-full' : 'w-38'"
+    preview
   />
 </template>

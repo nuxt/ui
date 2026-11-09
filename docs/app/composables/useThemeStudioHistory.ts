@@ -26,6 +26,14 @@ interface HistoryEntry {
  * edits folds into one step. Slider drags fire per pixel, so a raw watcher
  * would record a step per frame.
  */
+/**
+ * Set to have the next settled snapshot realign the stack instead of
+ * recording, for a restore that brings the theme back to where it was.
+ */
+export function useThemeStudioHistoryPending() {
+  return useState('theme-studio-history-pending', () => false)
+}
+
 export function useThemeStudioHistory(options: { record?: boolean } = {}) {
   const { applyDoc, paletteParams, setPaletteParams, activePreset } = useThemeStudio()
   const { currentDoc } = useTheme()
@@ -33,7 +41,7 @@ export function useThemeStudioHistory(options: { record?: boolean } = {}) {
   const past = useState<HistoryEntry[]>('theme-studio-history-past', () => [])
   const future = useState<HistoryEntry[]>('theme-studio-history-future', () => [])
   const lastSnapshot = useState('theme-studio-history-snapshot', () => '')
-  const pendingRestore = useState('theme-studio-history-pending', () => false)
+  const pendingRestore = useThemeStudioHistoryPending()
 
   // The recorder's debounce, kept here so undo/redo can flush it: an edit
   // still inside the window must become a step before the stack moves, or
@@ -137,11 +145,13 @@ export function useThemeStudioHistory(options: { record?: boolean } = {}) {
 
   if (options.record) {
     const mounted = useMounted()
+    const previewing = useThemePreviewing()
 
     onMounted(() => align(snapshot()))
 
-    // the snapshot spans the doc AND the editor's curve/pin params
-    watch(() => (mounted.value ? snapshot() : undefined), (snap) => {
+    // the snapshot spans the doc AND the editor's curve/pin params; a hover
+    // preview is not an edit, the settle after it records what was picked
+    watch(() => (mounted.value && !previewing.value ? snapshot() : undefined), (snap) => {
       if (!snap) return
       // The first flush after an undo/redo is the restore itself: realign
       // now, without the debounce, so an edit made inside the window gets
