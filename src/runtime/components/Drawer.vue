@@ -240,6 +240,7 @@ const ui = computed(() => tv(theme, overrides.value)({
           ref="contentRef"
           data-slot="drawer-content"
           :data-stacked="stack > 0 ? '' : undefined"
+          :inert="stack > 0 || undefined"
           :style="stackStyle"
           :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
           v-bind="contentProps"
