@@ -16,6 +16,8 @@ links:
 
 ## Usage
 
+Use the Drawer component to display content in a panel that slides in from an edge of the screen and can be swiped away.
+
 ::component-example
 ---
 collapse: true
@@ -243,6 +245,21 @@ slots:
 :placeholder{class="h-48 m-4"}
 ::
 
+### Snap points
+
+Use the `snap-points` prop to let the Drawer rest at several heights, as fractions of the viewport, pixels or `rem` strings. Bind `v-model:snap-point` to control the current one.
+
+::component-example
+---
+prettier: true
+name: 'drawer-snap-points-example'
+---
+::
+
+::note
+Snap points apply to top and bottom drawers.
+::
+
 ### Overlay
 
 Use the `overlay` prop to control whether the Drawer has an overlay or not. Defaults to `true`.
@@ -359,19 +376,16 @@ name: 'drawer-nested-example'
 ---
 ::
 
-### With snap points
+### With footer slot
 
-Use the `snap-points` prop to let the Drawer rest at several heights, as fractions of the viewport, pixels or `rem` strings. Bind `v-model:snap-point` to control the current one.
+Use the `#footer` slot to add content after the Drawer's body.
 
 ::component-example
 ---
 prettier: true
-name: 'drawer-snap-points-example'
+collapse: true
+name: 'drawer-footer-slot-example'
 ---
-::
-
-::note
-Snap points apply to top and bottom drawers.
 ::
 
 ### With command palette
