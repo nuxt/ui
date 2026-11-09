@@ -204,7 +204,7 @@ parentStack?.add(stackEntry)
 onBeforeUnmount(() => parentStack?.delete(stackEntry))
 
 const stackStyle = computed(() => stack.value > 0
-  ? { '--drawer-stack': stack.value, '--drawer-frontmost-width': `${frontmost.value.width}px`, '--drawer-frontmost-height': `${frontmost.value.height}px` }
+  ? { '--drawer-stack': stack.value, '--drawer-own-width': `${size.value.width}px`, '--drawer-frontmost-width': `${frontmost.value.width}px`, '--drawer-frontmost-height': `${frontmost.value.height}px` }
   : undefined)
 
 // reka-ui's `useEmitAsProps` (used internally by `useForwardProps`) maps every
