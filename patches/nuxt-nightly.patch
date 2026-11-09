@@ -1,0 +1,50 @@
+diff --git a/dist/app/plugins/deferred-prefetch.client.js b/dist/app/plugins/deferred-prefetch.client.js
+index a04288a..ea1e8f4 100644
+--- a/dist/app/plugins/deferred-prefetch.client.js
++++ b/dist/app/plugins/deferred-prefetch.client.js
+@@ -1,24 +1,35 @@
+ import { defineNuxtPlugin } from "../nuxt.js";
+ import { onNuxtReady } from "../composables/ready.js";
++import { requestIdleCallback } from "../compat/idle-callback.js";
+ import { canPrefetch } from "../internal/prefetch-util.js";
+ import { buildAssetsURL } from "#internal/nuxt/paths";
+ // src/app/plugins/deferred-prefetch.client.ts
++const MIN_SLICE_MS = 4;
++const TIMEOUT_MS = 2e3;
+ const plugin = /* @__PURE__ */ defineNuxtPlugin({
+ 	name: "nuxt:deferred-prefetch",
+ 	setup() {
+ 		onNuxtReady(() => {
+ 			if (!canPrefetch()) return;
+ 			const assetsURL = new URL(buildAssetsURL("/"), document.baseURI).href;
+-			for (const link of document.head.querySelectorAll("link[rel=prefetch][data-href]")) {
+-				let href;
+-				try {
+-					href = new URL(link.dataset.href, document.baseURI).href;
+-				} catch {
+-					continue;
+-				}
+-				if (href.startsWith(assetsURL)) link.href = href;
+-			}
+-		}, { timeout: 2e3 });
++			const links = document.head.querySelectorAll("link[rel=prefetch][data-href]");
++			let index = 0;
++			const activate = (deadline) => {
++				const end = performance.now() + Math.max(deadline?.timeRemaining() ?? 0, MIN_SLICE_MS);
++				do {
++					const link = links[index++];
++					let href;
++					try {
++						href = new URL(link.dataset.href, document.baseURI).href;
++					} catch {
++						continue;
++					}
++					if (href.startsWith(assetsURL)) link.href = href;
++				} while (index < links.length && performance.now() < end);
++				if (index < links.length) requestIdleCallback(activate, { timeout: TIMEOUT_MS });
++			};
++			if (links.length) activate();
++		}, { timeout: TIMEOUT_MS });
+ 	}
+ });
+ export { plugin as default };

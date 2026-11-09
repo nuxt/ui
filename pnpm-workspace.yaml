@@ -200,3 +200,6 @@ minimumReleaseAgeExclude:
   - "@nuxt/vite-server@4.6.0"
   - nuxt@4.6.0
   - nuxt-agent-discovery@0.8.1
+
+patchedDependencies:
+  nuxt-nightly@4.6.4-2611050021-c80eb9c: patches/nuxt-nightly.patch
