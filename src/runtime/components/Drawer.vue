@@ -168,7 +168,7 @@ useResizeObserver(() => isOpen.value && contentRef.value?.$el?.nodeType === 1 ? 
     return
   }
   size.value = { width: el.offsetWidth, height: stack.value > 0 ? size.value.height : el.offsetHeight }
-})
+}, { box: 'border-box' })
 // The observer doesn't fire if the drawer comes back to the same size it was stacked at.
 watch(stack, (value) => {
   const el = contentRef.value?.$el
