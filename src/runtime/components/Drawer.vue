@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { VNode } from 'vue'
+import type { VNode, InjectionKey, ComputedRef } from 'vue'
 import type { DrawerRootProps, DrawerRootEmits, DrawerOpenChangeDetails, DrawerContentProps, DrawerContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '../theme/drawer'
@@ -10,6 +10,17 @@ import type { EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Drawer = ComponentConfig<typeof theme, AppConfig, 'drawer'>
+
+/**
+ * What each drawer nested in a drawer reports: how many open drawers it adds to the
+ * stack, `0` when closed, and the size of the frontmost one the stack collapses to.
+ */
+interface DrawerStackEntry {
+  depth: number
+  width: number
+  height: number
+}
+const drawerStackInjectionKey: InjectionKey<Set<ComputedRef<DrawerStackEntry>>> = Symbol('nuxt-ui.drawer-stack')
 
 export interface DrawerProps extends Pick<DrawerRootProps, 'modal' | 'open' | 'defaultOpen' | 'snapPoints' | 'snapPoint' | 'defaultSnapPoint' | 'snapToSequentialPoints'> {
   /**
@@ -87,10 +98,10 @@ export interface DrawerSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, toRef } from 'vue'
+import { computed, inject, onBeforeUnmount, provide, ref, shallowReactive, toRef, useTemplateRef, watch } from 'vue'
 import { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerOverlay, DrawerContent, DrawerTitle, DrawerDescription, DrawerHandle, DrawerClose, VisuallyHidden } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { reactivePick } from '@vueuse/core'
+import { reactivePick, useResizeObserver } from '@vueuse/core'
 import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { FieldGroupReset } from '../composables/useFieldGroup'
 import { useLocale } from '../composables/useLocale'
@@ -139,7 +150,54 @@ function onOpenChange(value: boolean, details: DrawerOpenChangeDetails) {
 
   // eslint-disable-next-line vue/require-explicit-emits -- `update:open` is declared via `DrawerEmits extends DrawerRootEmits`, which the rule doesn't resolve through
   emits('update:open', value, details)
+  if (!details.isCanceled && props.open === undefined) {
+    isOpen.value = value
+  }
 }
+
+// reka-ui's `--nested-drawers` only counts one level and clears once the nested
+// drawer has finished leaving, so each drawer counts the open drawers above it
+// itself. It flips as soon as a nested drawer starts closing, which lets the
+// stack come back forward while it leaves instead of after.
+const isOpen = ref(props.open ?? props.defaultOpen ?? false)
+watch(() => props.open, (value) => {
+  if (value !== undefined) {
+    isOpen.value = value
+  }
+})
+
+const nestedStack = shallowReactive(new Set<ComputedRef<DrawerStackEntry>>())
+provide(drawerStackInjectionKey, nestedStack)
+const frontmost = computed(() => [...nestedStack].reduce<DrawerStackEntry>((deepest, entry) => entry.value.depth > deepest.depth ? entry.value : deepest, { depth: 0, width: 0, height: 0 }))
+const stack = computed(() => frontmost.value.depth)
+
+// A stacked drawer collapses to the size of the frontmost one, so its own size is only
+// measured while nothing is open above it. `borderBoxSize` ignores the stack's scale.
+const contentRef = useTemplateRef<InstanceType<typeof DrawerContent>>('contentRef')
+const size = ref({ width: 0, height: 0 })
+// `$el` isn't reactive, so `isOpen` re-runs the target once the content renders, and
+// a closed drawer renders a comment node in its place.
+useResizeObserver(() => isOpen.value && contentRef.value?.$el?.nodeType === 1 ? contentRef.value.$el : undefined, ([entry]) => {
+  const box = entry?.borderBoxSize?.[0]
+  if (!box || stack.value > 0) {
+    return
+  }
+  size.value = { width: box.inlineSize, height: box.blockSize }
+})
+
+const parentStack = inject(drawerStackInjectionKey, undefined)
+const stackEntry = computed<DrawerStackEntry>(() => {
+  if (!isOpen.value) {
+    return { depth: 0, width: 0, height: 0 }
+  }
+  return { ...(stack.value > 0 ? frontmost.value : size.value), depth: stack.value + 1 }
+})
+parentStack?.add(stackEntry)
+onBeforeUnmount(() => parentStack?.delete(stackEntry))
+
+const stackStyle = computed(() => stack.value > 0
+  ? { '--drawer-stack': stack.value, '--drawer-frontmost-width': `${frontmost.value.width}px`, '--drawer-frontmost-height': `${frontmost.value.height}px` }
+  : undefined)
 
 // reka-ui's `useEmitAsProps` (used internally by `useForwardProps`) maps every
 // event declared on *this* component's own `defineEmits` into an `onXxx` prop —
@@ -190,7 +248,15 @@ const ui = computed(() => tv(theme, overrides.value)({
       <FieldGroupReset>
         <DrawerOverlay v-if="props.overlay" data-slot="drawer-overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
-        <DrawerContent data-slot="drawer-content" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" v-on="contentEvents">
+        <DrawerContent
+          ref="contentRef"
+          data-slot="drawer-content"
+          :data-stacked="stack > 0 ? '' : undefined"
+          :style="stackStyle"
+          :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
+          v-bind="contentProps"
+          v-on="contentEvents"
+        >
           <DrawerHandle v-if="props.handle" data-slot="drawer-handle" :class="ui.handle({ class: props.ui?.handle })" />
 
           <VisuallyHidden v-if="(!props.title && !slots.title) || (!props.description && !slots.description) || !!slots.content">
