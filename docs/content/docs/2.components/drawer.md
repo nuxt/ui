@@ -343,7 +343,7 @@ name: 'drawer-responsive-example'
 
 ### Nested drawers
 
-You can nest drawers within each other, nesting is detected automatically.
+You can nest drawers within each other. The ones behind recede and match the size of the frontmost one.
 
 ::component-example
 ---
