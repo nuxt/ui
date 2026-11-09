@@ -48,11 +48,12 @@ const selected = computed({
 })
 
 // The pointer and key listeners aren't content props, they fall through to
-// the panel element (the search input sits inside it, its keys bubble here).
+// the panel element (the search input sits inside it). Capture phase, so the
+// move or key that highlights a row arms the preview before the row reports.
 const content = {
   onInteractOutside: keepPanels,
   sideOffset: 5,
-  ...({ onPointermove, onKeydown, onPointerleave: () => show() } as object)
+  ...({ onPointermoveCapture: onPointermove, onKeydownCapture: onKeydown, onPointerleave: () => show() } as object)
 }
 
 function onHighlight(payload?: { value: unknown }) {

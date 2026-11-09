@@ -286,8 +286,17 @@ watch(open, (isOpen) => {
 useEventListener('focusin', (event) => {
   if (!open.value) return
   const key = (event.target as Element | null)?.closest?.('[role^="menuitem"]')?.querySelector('[data-preview]')?.getAttribute('data-preview')
-  show(key ? action(key) : undefined)
+  show(key && !isApplied(key) ? action(key) : undefined)
 })
+
+/**
+ * The applied option previews nothing, like the studio's lists: a preset
+ * previewed over its own edits would drop them. Picking it still reapplies.
+ */
+function isApplied(key: string) {
+  const { preset, primary, neutral, font, radius } = view.value
+  return [`preset:${preset?.id}`, primary === 'black' ? 'black:' : `primary:${primary}`, `neutral:${neutral}`, `font:${font}`, `radius:${radius}`].includes(key)
+}
 </script>
 
 <template>

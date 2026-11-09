@@ -159,7 +159,15 @@ export function useThemeStudioHistory(options: { record?: boolean } = {}) {
       if (pendingRestore.value) {
         clearTimeout(timeout)
         timeout = undefined
+        // an edit still inside the debounce (a hover preview ended right
+        // after it) is a step of its own, record it before realigning
+        const edit = pending
         pending = undefined
+        if (edit) {
+          pendingRestore.value = false
+          capture(edit)
+          pendingRestore.value = true
+        }
         capture(snap)
         return
       }

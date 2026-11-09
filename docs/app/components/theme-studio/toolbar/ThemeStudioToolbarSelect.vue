@@ -90,8 +90,9 @@ watch(open, (isOpen) => {
 
     <template #content>
       <!-- the popover already frames the panel, the listbox only fills it;
-           the wrapper tells a hover from the listbox's own highlight on open -->
-      <div class="contents" @pointermove="onPointermove" @keydown="onKeydown">
+           the wrapper tells a hover from the listbox's own highlight on open,
+           in the capture phase so the move that highlights a row arms it -->
+      <div class="contents" @pointermove.capture="onPointermove" @keydown.capture="onKeydown">
         <UListbox
           v-model="selected"
           :items="items"
