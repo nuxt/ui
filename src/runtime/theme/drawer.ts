@@ -11,9 +11,13 @@ export default defineTheme({
      * the depth this drawer recedes by. The `after` element extends the background past
      * the anchored edge, so dragging the drawer away from it doesn't open a gap.
      */
-    content: 'group/drawer fixed bg-overlay ring ring-default flex focus:outline-none transition-[translate,scale] duration-300 ease-out data-swiping:duration-0 [--bleed:3rem] [--stack:max(0,calc(var(--drawer-stack,0)-var(--drawer-swipe-progress,0)))] scale-[calc(1-var(--stack)*0.05)] data-stacked:brightness-95 data-stacked:overflow-hidden after:pointer-events-none after:absolute after:bg-inherit',
+    content: 'group/drawer fixed bg-overlay ring ring-default flex focus:outline-none [interpolate-size:allow-keywords] transition-[translate,scale,height,width,filter] duration-300 ease-out data-swiping:duration-0 [--bleed:3rem] [--stack:max(0,calc(var(--drawer-stack,0)-var(--drawer-swipe-progress,0)))] scale-[calc(1-var(--stack)*0.05)] data-stacked:brightness-95 data-stacked:overflow-hidden after:pointer-events-none after:absolute after:bg-inherit',
     handle: 'shrink-0 bg-strong rounded-full opacity-70 hover:opacity-100 active:opacity-100 transition-opacity ease-out',
-    container: 'w-full flex flex-col gap-4 p-4 overflow-y-auto transition-opacity duration-300 ease-out group-data-stacked/drawer:opacity-0',
+    /**
+     * Content fades out at once when a drawer opens above, and back in only once the
+     * drawer has grown back to its own size, so nothing slides while it reappears.
+     */
+    container: 'w-full flex flex-col gap-4 p-4 overflow-y-auto transition-opacity duration-300 ease-out delay-200 group-data-stacked/drawer:opacity-0 group-data-stacked/drawer:delay-0',
     header: 'flex items-center gap-1.5 min-h-8',
     wrapper: 'min-w-0 flex-1',
     title: 'text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold))',
