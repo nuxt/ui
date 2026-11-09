@@ -54,7 +54,7 @@ export default defineTheme({
          * to zero, and `--initial-transform` makes the `slide-*` keyframes travel past
          * the gap instead of peeking through it while closed.
          */
-        content: 'm-4 rounded-lg overflow-hidden [--bleed:0px] [--initial-transform:calc(100%+1.5rem)]'
+        content: 'm-4 max-h-[calc(100%-2rem)] rounded-lg overflow-hidden [--bleed:0px] [--initial-transform:calc(100%+1.5rem)]'
       }
     },
     snapPoints: {

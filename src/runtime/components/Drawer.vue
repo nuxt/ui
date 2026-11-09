@@ -184,6 +184,14 @@ useResizeObserver(() => isOpen.value && contentRef.value?.$el?.nodeType === 1 ? 
   }
   size.value = { width: box.inlineSize, height: box.blockSize }
 })
+// A drawer that opened under an already open one has never been measured, and the
+// observer won't fire if it comes back at the same size. `offset*` ignores the scale.
+watch(stack, (value) => {
+  const el = contentRef.value?.$el
+  if (value === 0 && el?.nodeType === 1) {
+    size.value = { width: el.offsetWidth, height: el.offsetHeight }
+  }
+}, { flush: 'post' })
 
 const parentStack = inject(drawerStackInjectionKey, undefined)
 const stackEntry = computed<DrawerStackEntry>(() => {
