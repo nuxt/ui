@@ -492,8 +492,8 @@ function onUpdate(value: any) {
 }
 
 function onInputUpdate(value: string, details?: { reason?: string }) {
-  // `ComboboxInput` also reports the selected label it writes on mount and on parent changes, which isn't a search.
-  if (!isAutocomplete.value && details?.reason !== 'none') {
+  // `ComboboxInput` also reports the selected label it writes into the input, which isn't a search.
+  if (!isAutocomplete.value && (details?.reason === 'input-change' || !value)) {
     searchTerm.value = value
   }
 }

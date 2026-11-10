@@ -137,7 +137,7 @@ watch(() => props.open, (value) => {
 })
 
 // A swipe closes without a DOM event, so `dismissible` is checked on the close reason.
-const ALLOWED_CLOSE_REASONS = new Set(['close-press', 'trigger-press'])
+const ALLOWED_CLOSE_REASONS = new Set(['close-press', 'trigger-press', 'imperative-action'])
 function onBeforeOpenChange(value: boolean, details: ChangeEventDetails<DrawerOpenChangeReason>) {
   if (!value && !props.dismissible && !ALLOWED_CLOSE_REASONS.has(details.reason ?? '')) {
     details.cancel()

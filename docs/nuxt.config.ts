@@ -393,32 +393,32 @@ export default defineNuxtConfig({
       UEditorEmojiMenu: { props: { editor: { name: 'editor', type: 'Editor' } } },
       UCalendar: {
         props: {
-          defaultValue: { name: 'defaultValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime | DateRange | DateValue[]' },
-          modelValue: { name: 'modelValue', type: 'null | CalendarDate | CalendarDateTime | ZonedDateTime | DateRange | DateValue[]' },
-          defaultPlaceholder: { name: 'defaultPlaceholder', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
-          placeholder: { name: 'placeholder', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
-          maxValue: { name: 'maxValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
-          minValue: { name: 'minValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' }
+          defaultValue: { name: 'defaultValue', type: 'Temporal.PlainDate | Temporal.PlainDateTime | Temporal.ZonedDateTime | DateRange | DateValue[]' },
+          modelValue: { name: 'modelValue', type: 'null | Temporal.PlainDate | Temporal.PlainDateTime | Temporal.ZonedDateTime | DateRange | DateValue[]' },
+          defaultPlaceholder: { name: 'defaultPlaceholder', type: 'Temporal.PlainDate | Temporal.PlainDateTime | Temporal.ZonedDateTime' },
+          placeholder: { name: 'placeholder', type: 'Temporal.PlainDate | Temporal.PlainDateTime | Temporal.ZonedDateTime' },
+          maxValue: { name: 'maxValue', type: 'Temporal.PlainDate | Temporal.PlainDateTime | Temporal.ZonedDateTime' },
+          minValue: { name: 'minValue', type: 'Temporal.PlainDate | Temporal.PlainDateTime | Temporal.ZonedDateTime' }
         }
       },
       UInputDate: {
         props: {
-          defaultValue: { name: 'defaultValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime | DateRange' },
-          modelValue: { name: 'modelValue', type: 'null | CalendarDate | CalendarDateTime | ZonedDateTime | DateRange' },
-          defaultPlaceholder: { name: 'defaultPlaceholder', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
-          placeholder: { name: 'placeholder', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
-          maxValue: { name: 'maxValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
-          minValue: { name: 'minValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' }
+          defaultValue: { name: 'defaultValue', type: 'Temporal.PlainDate | Temporal.PlainDateTime | Temporal.ZonedDateTime | DateRange' },
+          modelValue: { name: 'modelValue', type: 'null | Temporal.PlainDate | Temporal.PlainDateTime | Temporal.ZonedDateTime | DateRange' },
+          defaultPlaceholder: { name: 'defaultPlaceholder', type: 'Temporal.PlainDate | Temporal.PlainDateTime | Temporal.ZonedDateTime' },
+          placeholder: { name: 'placeholder', type: 'Temporal.PlainDate | Temporal.PlainDateTime | Temporal.ZonedDateTime' },
+          maxValue: { name: 'maxValue', type: 'Temporal.PlainDate | Temporal.PlainDateTime | Temporal.ZonedDateTime' },
+          minValue: { name: 'minValue', type: 'Temporal.PlainDate | Temporal.PlainDateTime | Temporal.ZonedDateTime' }
         }
       },
       UInputTime: {
         props: {
-          defaultValue: { name: 'defaultValue', type: 'Time | CalendarDateTime | ZonedDateTime' },
-          modelValue: { name: 'modelValue', type: 'null | Time | CalendarDateTime | ZonedDateTime' },
-          defaultPlaceholder: { name: 'defaultPlaceholder', type: 'Time | CalendarDateTime | ZonedDateTime' },
-          placeholder: { name: 'placeholder', type: 'Time | CalendarDateTime | ZonedDateTime' },
-          maxValue: { name: 'maxValue', type: 'Time | CalendarDateTime | ZonedDateTime' },
-          minValue: { name: 'minValue', type: 'Time | CalendarDateTime | ZonedDateTime' }
+          defaultValue: { name: 'defaultValue', type: 'Temporal.PlainTime | Temporal.PlainDateTime | Temporal.ZonedDateTime' },
+          modelValue: { name: 'modelValue', type: 'null | Temporal.PlainTime | Temporal.PlainDateTime | Temporal.ZonedDateTime' },
+          defaultPlaceholder: { name: 'defaultPlaceholder', type: 'Temporal.PlainTime | Temporal.PlainDateTime | Temporal.ZonedDateTime' },
+          placeholder: { name: 'placeholder', type: 'Temporal.PlainTime | Temporal.PlainDateTime | Temporal.ZonedDateTime' },
+          maxValue: { name: 'maxValue', type: 'Temporal.PlainTime | Temporal.PlainDateTime | Temporal.ZonedDateTime' },
+          minValue: { name: 'minValue', type: 'Temporal.PlainTime | Temporal.PlainDateTime | Temporal.ZonedDateTime' }
         }
       }
     },

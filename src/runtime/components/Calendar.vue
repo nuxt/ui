@@ -192,6 +192,9 @@ watch(() => props.view, (value) => {
 watch(granularity, () => {
   view.value = clampView(props.view ?? granularity.value)
 })
+watch(maxView, () => {
+  view.value = clampView(view.value)
+})
 
 const switchable = computed(() => granularity.value !== clampView(maxView.value))
 
