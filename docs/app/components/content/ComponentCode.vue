@@ -166,6 +166,16 @@ function mapKeys(obj: object, parentKey = ''): any {
   }).filter(Boolean)
 }
 
+// Any union with `boolean` gets a select, string literals of the union (`'trap-focus'`) become extra options
+function booleanItems(prop: any) {
+  const members = Object.values(prop?.schema?.schema || {}).filter((member): member is string => typeof member === 'string')
+  if (!members.includes('true') || !members.includes('false')) {
+    return
+  }
+
+  return [true, false, ...members.filter(member => /^".*"$/.test(member)).map(member => JSON.parse(member))].map(value => ({ value, label: String(value) }))
+}
+
 const options = computed(() => {
   const keys = mapKeys(props.props || {})
 
@@ -178,15 +188,14 @@ const options = computed(() => {
           label: String(item),
           chip: key.toLowerCase().endsWith('color') ? { color: item } : undefined
         }))
-      : prop?.type === 'boolean' || prop?.type === 'boolean | undefined'
-        ? [{ value: true, label: 'true' }, { value: false, label: 'false' }]
-        : Object.keys(componentTheme?.variants?.[key] || {}).filter((variant) => {
-            return variant !== 'true' && variant !== 'false'
-          }).map(variant => ({
-            value: variant,
-            label: variant,
-            chip: key.toLowerCase().endsWith('color') ? { color: variant } : undefined
-          }))
+      : booleanItems(prop)
+        ?? Object.keys(componentTheme?.variants?.[key] || {}).filter((variant) => {
+          return variant !== 'true' && variant !== 'false'
+        }).map(variant => ({
+          value: variant,
+          label: variant,
+          chip: key.toLowerCase().endsWith('color') ? { color: variant } : undefined
+        }))
 
     const type = props?.cast?.[key] ?? prop?.type
 
