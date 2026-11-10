@@ -491,8 +491,9 @@ function onUpdate(value: any) {
   }
 }
 
-function onInputUpdate(value: string) {
-  if (!isAutocomplete.value) {
+function onInputUpdate(value: string, details?: { reason?: string }) {
+  // `ComboboxInput` also reports the selected label it writes on mount and on parent changes, which isn't a search.
+  if (!isAutocomplete.value && details?.reason !== 'none') {
     searchTerm.value = value
   }
 }
@@ -717,7 +718,7 @@ defineExpose({
     :data-slot="($attrs['data-slot'] as string | undefined) ?? 'input-menu'"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :as-child="isMultiple"
-    ignore-filter
+    :filter="null"
     @click="onRootClick"
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"

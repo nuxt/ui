@@ -50,15 +50,19 @@ props:
 ---
 ::
 
+::warning{to="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal"}
+This component takes and emits Temporal values such as `Temporal.PlainTime`. On runtimes without native Temporal, load a polyfill such as `temporal-polyfill-lite` in your app, on the server as well as the client.
+::
+
 ::framework-only
 #nuxt
 :::note{to="/docs/getting-started/integrations/i18n/nuxt#locale"}
-This component uses the `@internationalized/date` package for locale-aware formatting. The time format is determined by the `locale` prop of the App component.
+This component uses `Intl.DateTimeFormat` for locale-aware formatting. The time format is determined by the `locale` prop of the App component.
 :::
 
 #vue
 :::note{to="/docs/getting-started/integrations/i18n/vue#locale"}
-This component uses the `@internationalized/date` package for locale-aware formatting. The time format is determined by the `locale` prop of the App component.
+This component uses `Intl.DateTimeFormat` for locale-aware formatting. The time format is determined by the `locale` prop of the App component.
 :::
 ::
 

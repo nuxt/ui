@@ -155,7 +155,6 @@
   "dependencies": {
     "@floating-ui/dom": "catalog:",
     "@iconify/vue": "catalog:",
-    "@internationalized/date": "catalog:",
     "@internationalized/number": "catalog:",
     "@nuxt/fonts": "catalog:",
     "@nuxt/icon": "catalog:",
@@ -234,6 +233,7 @@
     "jiti": "catalog:",
     "nuxt": "catalog:",
     "release-it": "catalog:",
+    "temporal-polyfill-lite": "catalog:",
     "unbuild": "catalog:",
     "vitest": "catalog:",
     "vitest-axe": "catalog:",
@@ -243,7 +243,6 @@
   },
   "peerDependencies": {
     "@inertiajs/vue3": "^2.0.7 || ^3",
-    "@internationalized/date": "^3",
     "@internationalized/number": "^3",
     "@nuxt/content": "^3",
     "@tanstack/charts": "^1",
@@ -284,9 +283,6 @@
   },
   "peerDependenciesMeta": {
     "@inertiajs/vue3": {
-      "optional": true
-    },
-    "@internationalized/date": {
       "optional": true
     },
     "@internationalized/number": {

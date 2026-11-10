@@ -243,7 +243,7 @@ describe('SelectMenu', () => {
       await wrapper.find('[data-slot="select-menu"]').trigger('keydown', { key })
       await flushPromises()
 
-      expect(wrapper.emitted('update:open')).toMatchObject([[true]])
+      expect(wrapper.emitted('update:open')).toMatchObject([[true, expect.anything()]])
 
       wrapper.unmount()
     })
@@ -304,7 +304,7 @@ describe('SelectMenu', () => {
 
       await focusScope.trigger('keydown', { key: 'Enter' })
       await flushPromises()
-      expect(wrapper.emitted('update:modelValue')).toMatchObject([[items[1]]])
+      expect(wrapper.emitted('update:modelValue')).toMatchObject([[items[1], expect.anything()]])
 
       wrapper.unmount()
     })

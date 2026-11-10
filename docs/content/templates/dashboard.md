@@ -556,23 +556,39 @@ The home page has a toolbar with a date range picker and a period select. The st
 
 ::code-group{sync="pm"}
 ```bash [pnpm]
-pnpm add @tanstack/charts @internationalized/date date-fns
+pnpm add @tanstack/charts temporal-polyfill-lite date-fns
 ```
 
 ```bash [yarn]
-yarn add @tanstack/charts @internationalized/date date-fns
+yarn add @tanstack/charts temporal-polyfill-lite date-fns
 ```
 
 ```bash [npm]
-npm install @tanstack/charts @internationalized/date date-fns
+npm install @tanstack/charts temporal-polyfill-lite date-fns
 ```
 
 ```bash [bun]
-bun add @tanstack/charts @internationalized/date date-fns
+bun add @tanstack/charts temporal-polyfill-lite date-fns
 ```
 ::
 
-The [`UChart`](/docs/components/chart) component is built on [TanStack Charts](https://tanstack.com/charts/v1), an optional peer dependency of Nuxt UI. The [`UCalendar`](/docs/components/calendar) component works with the date objects of `@internationalized/date`, and `date-fns` handles the date math.
+The [`UChart`](/docs/components/chart) component is built on [TanStack Charts](https://tanstack.com/charts/v1), an optional peer dependency of Nuxt UI. The [`UCalendar`](/docs/components/calendar) component works with Temporal dates, `temporal-polyfill-lite` provides them on runtimes without native Temporal, and `date-fns` handles the date math.
+
+Load the polyfill in a plugin so it runs on the server and the client:
+
+::code-tree-intersection
+```ts [app/plugins/temporal.ts]
+import { install } from 'temporal-polyfill-lite/shim'
+
+export default defineNuxtPlugin({
+  name: 'temporal',
+  enforce: 'pre',
+  setup() {
+    install(false)
+  }
+})
+```
+::
 
 ### Defining the types
 
@@ -674,10 +690,9 @@ The date range picker opens a [`UPopover`](/docs/components/popover) with a list
 
 ```vue [app/components/home/HomeDateRangePicker.vue]
 <script setup lang="ts">
-import { DateFormatter, getLocalTimeZone, CalendarDate, today } from '@internationalized/date'
 import type { Range } from '~/types'
 
-const df = new DateFormatter('en-US', {
+const df = new Intl.DateTimeFormat('en-US', {
   dateStyle: 'medium'
 })
 
@@ -692,62 +707,50 @@ const ranges = [
   { label: 'Last year', years: 1 }
 ]
 
-const toCalendarDate = (date: Date) => {
-  return new CalendarDate(
+const toPlainDate = (date: Date) => {
+  return new Temporal.PlainDate(
     date.getFullYear(),
     date.getMonth() + 1,
     date.getDate()
   )
 }
 
+const toDate = (date: Temporal.PlainDate) => {
+  return new Date(date.year, date.month - 1, date.day)
+}
+
 const calendarRange = computed({
   get: () => ({
-    start: selected.value.start ? toCalendarDate(selected.value.start) : undefined,
-    end: selected.value.end ? toCalendarDate(selected.value.end) : undefined
+    start: selected.value.start ? toPlainDate(selected.value.start) : undefined,
+    end: selected.value.end ? toPlainDate(selected.value.end) : undefined
   }),
-  set: (newValue: { start: CalendarDate | null, end: CalendarDate | null }) => {
+  set: (newValue: { start?: Temporal.PlainDate, end?: Temporal.PlainDate } | null) => {
     selected.value = {
-      start: newValue.start ? newValue.start.toDate(getLocalTimeZone()) : new Date(),
-      end: newValue.end ? newValue.end.toDate(getLocalTimeZone()) : new Date()
+      start: newValue?.start ? toDate(newValue.start) : new Date(),
+      end: newValue?.end ? toDate(newValue.end) : new Date()
     }
   }
 })
 
+const getStartDate = (range: { days?: number, months?: number, years?: number }, endDate: Temporal.PlainDate) => {
+  return endDate.subtract({ days: range.days, months: range.months, years: range.years })
+}
+
 const isRangeSelected = (range: { days?: number, months?: number, years?: number }) => {
   if (!selected.value.start || !selected.value.end) return false
 
-  const currentDate = today(getLocalTimeZone())
-  let startDate = currentDate.copy()
+  const currentDate = Temporal.Now.plainDateISO()
 
-  if (range.days) {
-    startDate = startDate.subtract({ days: range.days })
-  } else if (range.months) {
-    startDate = startDate.subtract({ months: range.months })
-  } else if (range.years) {
-    startDate = startDate.subtract({ years: range.years })
-  }
-
-  const selectedStart = toCalendarDate(selected.value.start)
-  const selectedEnd = toCalendarDate(selected.value.end)
-
-  return selectedStart.compare(startDate) === 0 && selectedEnd.compare(currentDate) === 0
+  return toPlainDate(selected.value.start).equals(getStartDate(range, currentDate))
+    && toPlainDate(selected.value.end).equals(currentDate)
 }
 
 const selectRange = (range: { days?: number, months?: number, years?: number }) => {
-  const endDate = today(getLocalTimeZone())
-  let startDate = endDate.copy()
-
-  if (range.days) {
-    startDate = startDate.subtract({ days: range.days })
-  } else if (range.months) {
-    startDate = startDate.subtract({ months: range.months })
-  } else if (range.years) {
-    startDate = startDate.subtract({ years: range.years })
-  }
+  const endDate = Temporal.Now.plainDateISO()
 
   selected.value = {
-    start: startDate.toDate(getLocalTimeZone()),
-    end: endDate.toDate(getLocalTimeZone())
+    start: toDate(getStartDate(range, endDate)),
+    end: toDate(endDate)
   }
 }
 </script>
@@ -810,7 +813,7 @@ const selectRange = (range: { days?: number, months?: number, years?: number }) 
 :::
 ::
 
-The model holds native `Date` objects, while `UCalendar` works with `CalendarDate` objects. The `calendarRange` computed converts between both. The presets are hidden on mobile to leave room for the calendar.
+The model holds native `Date` objects, while `UCalendar` works with `Temporal.PlainDate` objects. The `calendarRange` computed converts between both. The presets are hidden on mobile to leave room for the calendar.
 
 The period select only offers the periods that make sense for the selected range, and falls back to the first one when the selected period is no longer available:
 

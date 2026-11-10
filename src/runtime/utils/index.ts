@@ -81,12 +81,12 @@ export function compare<T>(value?: T, currentValue?: T, comparator?: string | ((
     return false
   }
 
-  if (typeof value === 'string') {
-    return value === currentValue
-  }
-
   if (typeof comparator === 'function') {
     return comparator(value, currentValue)
+  }
+
+  if (typeof value === 'string') {
+    return value === currentValue
   }
 
   if (typeof comparator === 'string') {

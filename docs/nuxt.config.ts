@@ -295,7 +295,7 @@ export default defineNuxtConfig({
         'shiki-transformer-color-highlight',
         'shiki-transformer-icon-highlight',
         'json5',
-        '@internationalized/date',
+        'temporal-polyfill-lite/calendars-full/shim',
         'fflate',
         'shiki/wasm',
         '@tanstack/vue-table',

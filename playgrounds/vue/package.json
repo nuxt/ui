@@ -39,6 +39,7 @@
     "embla-carousel-vue": "catalog:",
     "embla-carousel-wheel-gestures": "catalog:",
     "tailwindcss": "catalog:",
+    "temporal-polyfill-lite": "catalog:",
     "vue": "catalog:",
     "vue-router": "catalog:",
     "zod": "catalog:"

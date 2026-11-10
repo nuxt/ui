@@ -699,7 +699,7 @@ defineExpose({
     ref="comboboxRootRef"
     v-slot="{ modelValue, open }"
     v-bind="(rootProps as any)"
-    ignore-filter
+    :filter="null"
     as-child
     :name="name"
     :disabled="disabled"

@@ -324,7 +324,7 @@ describe('InputMenu', () => {
       await input.trigger('keydown', { key: 'Enter' })
       await flushPromises()
 
-      expect(wrapper.emitted('update:modelValue')).toMatchObject([[['Option 1', 'Option 2']]])
+      expect(wrapper.emitted('update:modelValue')).toMatchObject([[['Option 1', 'Option 2'], expect.anything()]])
 
       wrapper.unmount()
     })

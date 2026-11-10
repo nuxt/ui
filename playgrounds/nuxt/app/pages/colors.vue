@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { CalendarDate } from '@internationalized/date'
 import type { DropdownMenuItem, ContextMenuItem, TreeItem, NavigationMenuItem } from '@nuxt/ui'
 
 import badgeTheme from '#build/ui/badge'
@@ -128,7 +127,7 @@ const tabsItems = [{ label: 'Tab1' }, { label: 'Tab2' }]
 // Calendar
 const calendarColors = Object.keys(calendarTheme.variants.color)
 const calendarVariants = Object.keys(calendarTheme.variants.variant)
-const calendarValue = shallowRef(new CalendarDate(2022, 1, 10))
+const calendarValue = shallowRef(new Temporal.PlainDate(2022, 1, 10))
 
 // Breadcrumb
 const breadcrumbColors = Object.keys(breadcrumbTheme.variants.color)

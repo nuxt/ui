@@ -1,10 +1,13 @@
 import './assets/css/main.css'
 
+import { install } from 'temporal-polyfill-lite/shim'
 import { createApp, ref } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import ui from '@nuxt/ui/vue-plugin'
 
 import App from './app.vue'
+
+install(false)
 
 const pages = import.meta.glob(['../../nuxt/app/pages/*.vue', '../../nuxt/app/pages/components/*.vue'])
 

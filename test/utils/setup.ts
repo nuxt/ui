@@ -2,6 +2,9 @@ import * as matchers from 'vitest-axe/matchers'
 
 import { expect } from 'vitest'
 import { configureAxe } from 'vitest-axe'
+import { install } from 'temporal-polyfill-lite/shim'
+
+install(false)
 
 // @ts-expect-error incomplete implementation
 window.IntersectionObserver = class IntersectionObserver {
