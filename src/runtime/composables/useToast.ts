@@ -161,23 +161,42 @@ export function useToast() {
 
   function promise<T>(promise: Promise<T>, options: ToastPromiseOptions<T>): Promise<T> {
     const loading = resolveState(options.loading)
+    const icon = loading.ui?.icon
     const toast = add({
       icon: appConfig.ui.icons.loading,
       duration: 0,
       ...loading,
-      ui: { ...loading.ui, icon: ['animate-spin', loading.ui?.icon].filter(Boolean).join(' ') }
+      ui: { ...loading.ui, icon: typeof icon === 'function' ? (defaults: string) => ['animate-spin', icon(defaults)] : ['animate-spin', icon] }
     })
+
+    function close() {
+      // The toast is still waiting in the queue when the promise settles in the same tick.
+      const index = queue.findIndex(t => t.id === toast.id)
+      if (index !== -1) {
+        queue.splice(index, 1)
+      } else {
+        remove(toast.id)
+      }
+    }
 
     function settle(state: ToastPromiseOptions<T>['success' | 'error'], value: any) {
       if (state === undefined) {
-        remove(toast.id)
+        close()
         return
       }
 
-      // Reset what the loading state set, a field the settled state doesn't pass would otherwise keep its loading value.
-      const body = { icon: undefined, duration: undefined, ui: loading.ui, ...resolveState(typeof state === 'function' ? state(value) : state) }
+      let resolved: Partial<Toast>
+      try {
+        resolved = resolveState(typeof state === 'function' ? state(value) : state)
+      } catch (error) {
+        // Don't leave the loading toast open forever, the error still surfaces as an unhandled rejection.
+        close()
+        throw error
+      }
 
-      // The toast is still waiting in the queue when the promise settles in the same tick.
+      // Reset what the loading state set, a field the settled state doesn't pass would otherwise keep its loading value.
+      const body = { icon: undefined, duration: undefined, ui: loading.ui, ...resolved }
+
       const queued = queue.find(t => t.id === toast.id)
       if (queued) {
         Object.assign(queued, body)
