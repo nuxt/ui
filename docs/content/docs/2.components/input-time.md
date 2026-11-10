@@ -51,7 +51,7 @@ props:
 ::
 
 ::note{to="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal"}
-This component takes and emits Temporal values such as `Temporal.PlainTime`. On runtimes without native Temporal, it loads a polyfill itself, see the [`temporal`](/docs/getting-started/installation/nuxt#temporal) option.
+This component takes and emits Temporal values such as `Temporal.PlainTime`. On runtimes without native Temporal, Nuxt UI loads a polyfill for you, see the [`temporal`](/docs/getting-started/installation/nuxt#temporal) option.
 ::
 
 ::framework-only

@@ -72,7 +72,7 @@ export interface InputNumberProps<T extends InputNumberValue = InputNumberValue,
 }
 
 export interface InputNumberEmits<T extends InputNumberValue = InputNumberValue, Mod extends Pick<ModelModifiers, 'optional'> = Pick<ModelModifiers, 'optional'>> {
-  'beforeUpdate:modelValue': [value: ApplyModifiers<T, Mod>, details: ChangeEventDetails<NumberFieldChangeReason>]
+  'beforeUpdate:modelValue': [value: T | undefined, details: ChangeEventDetails<NumberFieldChangeReason>]
   'update:modelValue': [value: ApplyModifiers<T, Mod>, details?: ChangeEventDetails<NumberFieldChangeReason>]
   'blur': [event: FocusEvent]
   'change': [event: Event]
@@ -219,7 +219,7 @@ defineExpose({
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :name="name"
     :disabled="disabled"
-    @before-update:model-value="(val: number | undefined, details: ChangeEventDetails<NumberFieldChangeReason>) => emits('beforeUpdate:modelValue', val as ApplyModifiers<T, Mod>, details)"
+    @before-update:model-value="(val: number | undefined, details: ChangeEventDetails<NumberFieldChangeReason>) => emits('beforeUpdate:modelValue', val as T | undefined, details)"
     @update:model-value="(val: number | undefined, details: ChangeEventDetails<NumberFieldChangeReason>) => onUpdate(val as ApplyModifiers<T, Mod>, details)"
     @click="onRootClick"
   >

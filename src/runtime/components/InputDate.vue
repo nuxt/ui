@@ -68,7 +68,6 @@ export interface InputDateSlots {
 </script>
 
 <script setup lang="ts" generic="R extends boolean">
-import '../utils/temporal'
 import { computed, onMounted, onScopeDispose, ref } from 'vue'
 import { useForwardProps } from '../composables/useForwardProps'
 import { DateFieldRoot, DateFieldInput, DateRangeFieldRoot, DateRangeFieldInput } from 'reka-ui'

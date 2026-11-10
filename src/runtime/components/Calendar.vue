@@ -143,7 +143,6 @@ export interface CalendarSlots {
 </script>
 
 <script setup lang="ts" generic="R extends boolean, M extends boolean">
-import '../utils/temporal'
 import { computed, ref, shallowRef, watch } from 'vue'
 import { useForwardProps } from '../composables/useForwardProps'
 import { CalendarRoot, CalendarHeader, CalendarHeading, CalendarViewTrigger, CalendarGrid, CalendarCell, CalendarHeadCell, CalendarNext, CalendarPrev, CalendarGridHead, CalendarGridBody, CalendarGridRow, CalendarCellTrigger, RangeCalendarRoot, RangeCalendarHeader, RangeCalendarHeading, RangeCalendarViewTrigger, RangeCalendarGrid, RangeCalendarCell, RangeCalendarHeadCell, RangeCalendarNext, RangeCalendarPrev, RangeCalendarGridHead, RangeCalendarGridBody, RangeCalendarGridRow, RangeCalendarCellTrigger } from 'reka-ui'
@@ -185,23 +184,26 @@ function clampView(value: CalendarView): CalendarView {
 }
 
 const view = ref<CalendarView>(clampView(props.view ?? props.defaultView ?? granularity.value))
-watch(() => props.view, (value) => {
-  if (value) {
-    view.value = clampView(value)
+// A controlled `view` stays the source of truth, a `type` change resets an uncontrolled one, and the result is
+// clamped between the granularity and `maxView`. A parent whose `view` gets clamped hears about it.
+watch([() => props.view, granularity, maxView], ([value], [, prevGranularity]) => {
+  const next = clampView(value ?? (granularity.value !== prevGranularity ? granularity.value : view.value))
+  if (next !== view.value) {
+    view.value = next
   }
-})
-watch(granularity, () => {
-  view.value = clampView(props.view ?? granularity.value)
-})
-watch(maxView, () => {
-  view.value = clampView(props.view ?? view.value)
+  if (value && next !== value) {
+    emits('update:view', next)
+  }
 })
 
 const switchable = computed(() => granularity.value !== clampView(maxView.value))
 
 function setView(value: CalendarView, details?: CalendarChangeDetails) {
-  view.value = clampView(value)
-  emits('update:view', view.value, details)
+  const next = clampView(value)
+  if (props.view === undefined) {
+    view.value = next
+  }
+  emits('update:view', next, details)
 }
 
 function resolveDateValue(value: DateValue | DateValue[] | DateRange | null | undefined): DateValue | undefined {

@@ -229,14 +229,6 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     getContents: ({ app }) => generateSources(app)
   })
 
-  // Read by `runtime/utils/temporal`, which loads the polyfill the option names when `Temporal` is missing
-  templates.push({
-    filename: 'ui/temporal.ts',
-    write: true,
-    dependsOn: [],
-    getContents: () => `export default ${JSON.stringify(options.temporal ?? true)} as boolean | 'full'\n`
-  })
-
   // The themes detection puts in the build's CSS, for the dev warning in
   // `useComponentProps` when a component renders that the build would leave
   // without its classes. `null` when there's nothing to check.

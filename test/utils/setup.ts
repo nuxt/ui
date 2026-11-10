@@ -2,6 +2,10 @@ import * as matchers from 'vitest-axe/matchers'
 
 import { expect } from 'vitest'
 import { configureAxe } from 'vitest-axe'
+import { install } from 'temporal-polyfill-lite/shim'
+
+// The app plugins install it in apps, components mounted on their own need it here
+install(false)
 
 // @ts-expect-error incomplete implementation
 window.IntersectionObserver = class IntersectionObserver {

@@ -190,7 +190,7 @@ export interface SelectMenuEmits<
     ref: HTMLElement
     value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>
   } | undefined]
-  'beforeUpdate:modelValue': [value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>, details: ChangeEventDetails<ComboboxChangeReason>]
+  'beforeUpdate:modelValue': [value: GetModelValue<A, VK, M, ExcludeItem> | IsClearUsed<M, C>, details: ChangeEventDetails<ComboboxChangeReason>]
   'update:modelValue': [value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>, details?: ChangeEventDetails<ComboboxChangeReason>]
 }
 

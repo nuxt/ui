@@ -125,7 +125,7 @@ export interface SelectEmits<
   'change': [event: Event]
   'blur': [event: FocusEvent]
   'focus': [event: FocusEvent]
-  'beforeUpdate:modelValue': [value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>, details: ChangeEventDetails<SelectChangeReason>]
+  'beforeUpdate:modelValue': [value: GetModelValue<A, VK, M, ExcludeItem>, details: ChangeEventDetails<SelectChangeReason>]
   'update:modelValue': [value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>, details?: ChangeEventDetails<SelectChangeReason>]
 }
 

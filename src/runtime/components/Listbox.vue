@@ -140,7 +140,7 @@ export interface ListboxProps<T extends ArrayOrNested<ListboxItem> = ArrayOrNest
 
 export type ListboxEmits<T extends ArrayOrNested<ListboxItem> = ArrayOrNested<ListboxItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>> = Pick<ListboxRootEmits, 'entryFocus' | 'highlight' | 'leave'> & {
   'change': [event: Event]
-  'beforeUpdate:modelValue': [value: ApplyModifiers<GetModelValue<T, VK, M>, Mod>, details: ChangeEventDetails<ListboxChangeReason>]
+  'beforeUpdate:modelValue': [value: GetModelValue<T, VK, M>, details: ChangeEventDetails<ListboxChangeReason>]
   'update:modelValue': [value: ApplyModifiers<GetModelValue<T, VK, M>, Mod>, details?: ChangeEventDetails<ListboxChangeReason>]
 }
 

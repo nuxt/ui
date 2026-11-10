@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxContentEmits, ComboboxArrowProps, ChangeEventDetails, ComboboxChangeReason, AutocompleteChangeReason } from 'reka-ui'
+import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxContentEmits, ComboboxArrowProps, ChangeEventDetails, ComboboxChangeReason, AutocompleteChangeReason, ComboboxInputChangeReason } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '../theme/input-menu'
@@ -204,7 +204,7 @@ export interface InputMenuEmits<
   } | undefined]
   'remove-tag': [item: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>]
   /** Event handler called when the value changes. */
-  'beforeUpdate:modelValue': [value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>, details: ChangeEventDetails<ComboboxChangeReason | AutocompleteChangeReason>]
+  'beforeUpdate:modelValue': [value: GetModelValue<A, VK, M, ExcludeItem> | IsClearUsed<M, C>, details: ChangeEventDetails<ComboboxChangeReason | AutocompleteChangeReason>]
   'update:modelValue': [value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>, details?: ChangeEventDetails<ComboboxChangeReason | AutocompleteChangeReason>]
 }
 
@@ -488,7 +488,7 @@ function onUpdate(value: any) {
   }
 }
 
-function onInputUpdate(value: string, details?: { reason?: string }) {
+function onInputUpdate(value: string, details?: ChangeEventDetails<ComboboxInputChangeReason>) {
   // `ComboboxInput` also reports the selected label it writes into the input, which isn't a search.
   if (!isAutocomplete.value && (details?.reason === 'input-change' || !value)) {
     searchTerm.value = value
