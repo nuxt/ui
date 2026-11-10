@@ -97,6 +97,19 @@ describe('Calendar', () => {
   })
 
   describe('views', () => {
+    test('clamps a controlled view to maxView and restores it when maxView grows', async () => {
+      const wrapper = await mountSuspended(Calendar, { props: { view: 'year', maxView: 'month' } })
+      const view = () => wrapper.find('[data-reka-calendar-cell-trigger]').attributes('data-view')
+
+      expect(view()).toBe('month')
+
+      await wrapper.setProps({ maxView: 'year' })
+      expect(view()).toBe('year')
+
+      await wrapper.setProps({ maxView: 'day' })
+      expect(view()).toBe('day')
+    })
+
     test('heading button switches to the month then the year view', async () => {
       const wrapper = await mountSuspended(Calendar)
 
