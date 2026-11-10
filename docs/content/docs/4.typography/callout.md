@@ -22,6 +22,8 @@ hide:
 slots:
   default: This is a `callout` with full **markdown** support.
 ---
+
+This is a `callout` with full **markdown** support.
 ::
 
 ### Icon
@@ -38,6 +40,8 @@ hide:
 slots:
   default: This is a `callout` with an icon.
 ---
+
+This is a `callout` with an icon.
 ::
 
 ### Color
@@ -57,6 +61,8 @@ hide:
 slots:
   default: This is a `callout` with a custom color.
 ---
+
+This is a `callout` with a custom color.
 ::
 
 ### Link
@@ -78,6 +84,8 @@ props:
 slots:
   default: Learn how to install `@nuxt/ui` in your project.
 ---
+
+Learn how to install `@nuxt/ui` in your project.
 ::
 
 ## Shortcuts
