@@ -64,6 +64,15 @@ describe('Link', () => {
     expect(forwarded).not.toHaveProperty('external')
   })
 
+  it('forwards hyphenated and explicitly false NuxtLink props', async () => {
+    const wrapper = await mountSuspended(Link, {
+      props: { 'to': '/about', 'exact-active-class': 'font-bold', 'replace': false }
+    })
+    const forwarded = wrapper.vm.$.subTree.props!
+
+    expect(forwarded).toMatchObject({ exactActiveClass: 'font-bold', replace: false })
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Link, {
       props: {

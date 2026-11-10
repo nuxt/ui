@@ -116,33 +116,16 @@ interface NuxtLinkDefaultSlotProps {
   prefetched?: boolean
   shouldPrefetch?: (mode: 'visibility' | 'interaction') => boolean
 }
-
-/** `<NuxtLink>` props Link forwards, with the hyphenated name they may be passed as. */
-const nuxtLinkPropEntries = [
-  ['external', 'external'],
-  ['target', 'target'],
-  ['rel', 'rel'],
-  ['noRel', 'no-rel'],
-  ['prefetchedClass', 'prefetched-class'],
-  ['prefetch', 'prefetch'],
-  ['prefetchOn', 'prefetch-on'],
-  ['noPrefetch', 'no-prefetch'],
-  ['trailingSlash', 'trailing-slash'],
-  ['exactActiveClass', 'exact-active-class'],
-  ['ariaCurrentValue', 'aria-current-value'],
-  ['viewTransition', 'view-transition'],
-  ['replace', 'replace']
-] as const satisfies ReadonlyArray<readonly [keyof NuxtLinkProps, string]>
 </script>
 
 <script setup lang="ts">
 import { computed, getCurrentInstance, mergeProps, onMounted, onBeforeUnmount } from 'vue'
 import { isEqual } from 'ohash/utils'
-import { Slot } from 'reka-ui'
+import { useForwardProps, Slot } from 'reka-ui'
 import { defu } from 'defu'
 import { hasProtocol } from 'ufo'
 import { useRoute, useAppConfig, useNuxtApp, onNuxtReady } from '#imports'
-import { mergeClasses } from '../utils'
+import { mergeClasses, omit } from '../utils'
 import { tv } from '../utils/tv'
 import { isPartiallyEqual } from '../utils/link'
 import { requestIdleCallback, cancelIdleCallback, observeIntersection } from '../utils/prefetch'
@@ -163,21 +146,7 @@ const route = useRoute()
 const appConfig = useAppConfig() as Link['AppConfig']
 const nuxtApp = useNuxtApp()
 
-const vm = getCurrentInstance()
-
-// forward only the `<NuxtLink>` props that were passed or have a default, like reka-ui's `useForwardProps`:
-// absent boolean props are cast to `false`, and forwarding `prefetch: false` would turn prefetching off
-const nuxtLinkProps = computed(() => {
-  const passed = vm?.vnode.props
-  const forwarded: Partial<NuxtLinkProps> = {}
-  for (const [key, hyphenated] of nuxtLinkPropEntries) {
-    const value = props[key]
-    if (value !== undefined && (key === 'ariaCurrentValue' || (passed && (key in passed || hyphenated in passed)))) {
-      forwarded[key] = value as any
-    }
-  }
-  return forwarded
-})
+const nuxtLinkProps = useForwardProps(computed(() => omit(props, ['as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'locale', 'class'])))
 
 const ui = computed(() => tv({
   extend: theme,
