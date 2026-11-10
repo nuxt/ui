@@ -46,8 +46,8 @@ props:
 ---
 ::
 
-::warning{to="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal"}
-This component takes and emits Temporal values such as `Temporal.PlainDate`. On runtimes without native Temporal, it loads `temporal-polyfill-lite` itself, which supports the ISO and Gregorian calendars.
+::note{to="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal"}
+This component takes and emits Temporal values such as `Temporal.PlainDate`. On runtimes without native Temporal, it loads a polyfill itself, see the [`temporal`](/docs/getting-started/installation/nuxt#temporal) option.
 ::
 
 ::framework-only
@@ -440,7 +440,7 @@ name: 'calendar-other-system-example'
 ::
 
 ::note{to="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/supportedValuesOf#supported_calendar_types"}
-You can check all the available calendars on MDN. On runtimes without native Temporal, load `temporal-polyfill-lite/calendars-full/shim` before the app mounts for calendars other than ISO and Gregorian.
+You can check all the available calendars on MDN. On runtimes without native Temporal, set the [`temporal`](/docs/getting-started/installation/nuxt#temporal) option to `'full'` for calendars other than ISO and Gregorian.
 ::
 
 ### With external controls

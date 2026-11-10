@@ -1091,9 +1091,6 @@ importers:
       tailwindcss:
         specifier: 'catalog:'
         version: 4.3.3
-      temporal-polyfill-lite:
-        specifier: 'catalog:'
-        version: 1.0.1
       tiptap-extension-code-block-shiki:
         specifier: 'catalog:'
         version: 1.2.0(@tiptap/core@3.32.2(@tiptap/pm@3.32.2))(@tiptap/pm@3.32.2)(shiki@4.5.0)

@@ -85,6 +85,16 @@ export interface ModuleOptions {
   componentDetection?: boolean | string[]
 
   /**
+   * Load a Temporal polyfill for the date components on runtimes without native Temporal, like Node.js
+   * - `true`: the ISO and Gregorian calendars
+   * - `'full'`: every calendar, for apps that use other calendars or a locale whose default one isn't Gregorian
+   * - `false`: don't load one, the app provides `Temporal`
+   * @defaultValue true
+   * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#temporal
+   */
+  temporal?: boolean | 'full'
+
+  /**
    * Additional packages to scan for components using Nuxt UI
    * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#scanpackages
    */

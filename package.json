@@ -120,7 +120,8 @@
   "style": "./dist/runtime/css/index.css",
   "main": "./dist/module.mjs",
   "sideEffects": [
-    "**/*.css"
+    "**/*.css",
+    "**/runtime/utils/temporal.*"
   ],
   "files": [
     ".nuxt/ui.static.css",

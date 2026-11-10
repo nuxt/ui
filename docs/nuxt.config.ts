@@ -72,7 +72,9 @@ export default defineNuxtConfig({
 
   ui: {
     // The component pages import components by a dynamic path, which detection can't follow
-    componentDetection: false
+    componentDetection: false,
+    // The Hebrew calendar example needs every calendar on runtimes without native Temporal
+    temporal: 'full'
   },
 
   runtimeConfig: {
@@ -295,7 +297,6 @@ export default defineNuxtConfig({
         'shiki-transformer-color-highlight',
         'shiki-transformer-icon-highlight',
         'json5',
-        'temporal-polyfill-lite/calendars-full/shim',
         'fflate',
         'shiki/wasm',
         '@tanstack/vue-table',
