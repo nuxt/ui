@@ -188,7 +188,7 @@ parentStack?.add(stackEntry)
 onBeforeUnmount(() => parentStack?.delete(stackEntry))
 
 const stackStyle = computed(() => stack.value > 0
-  ? { '--drawer-stack': stack.value, '--drawer-own-width': `${size.value.width}px`, '--drawer-frontmost-width': `${frontmost.value.width}px`, '--drawer-frontmost-height': `${frontmost.value.height}px` }
+  ? { '--drawer-stack': stack.value, '--drawer-own-width': `${size.value.width}px`, '--drawer-stack-width': `${frontmost.value.width}px`, '--drawer-stack-height': `${frontmost.value.height}px` }
   : undefined)
 
 const rootProps = useForwardProps(props, ['open', 'defaultOpen', 'modal', 'snapPoints', 'snapPoint', 'defaultSnapPoint', 'snapToSequentialPoints'])
@@ -198,7 +198,21 @@ function onSnapPointChange(value: NonNullable<DrawerRootProps['snapPoint']> | nu
   emits('update:snapPoint', value)
 }
 
+// reka-ui only reports the open animation ending when the drawer reopens mid close: its watch on
+// `open` isn't immediate and the content mounts already open, so the content's own `animationend` covers it.
+let entered = false
+watch(isOpen, (value) => {
+  if (!value) {
+    entered = false
+  }
+})
+
 function onOpenComplete(value: boolean) {
+  if (value && entered) {
+    return
+  }
+  entered = value
+
   // eslint-disable-next-line vue/require-explicit-emits -- declared via `DrawerEmits extends DrawerRootEmits`, which the rule doesn't resolve through
   emits('update:openComplete', value)
   if (value) {
@@ -210,7 +224,14 @@ function onOpenComplete(value: boolean) {
 
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => props.content)
-const contentEvents = { pointerDownOutside }
+const contentEvents = {
+  pointerDownOutside,
+  animationend: (event: AnimationEvent) => {
+    if (event.target === event.currentTarget && isOpen.value) {
+      onOpenComplete(true)
+    }
+  }
+}
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({

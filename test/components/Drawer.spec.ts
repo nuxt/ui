@@ -56,4 +56,14 @@ describe('Drawer', () => {
     wrapper.find('[data-slot="drawer-content"]').element.dispatchEvent(new Event('transitionend'))
     expect(wrapper.emitted('after:leave')).toHaveLength(1)
   })
+
+  it('emits `after:enter` once the open animation ends', async () => {
+    const wrapper = await mountSuspended(Drawer, { props: { open: false, portal: false } })
+
+    await wrapper.setProps({ open: true })
+    expect(wrapper.emitted('after:enter')).toBeUndefined()
+
+    wrapper.find('[data-slot="drawer-content"]').element.dispatchEvent(new Event('animationend'))
+    expect(wrapper.emitted('after:enter')).toHaveLength(1)
+  })
 })
