@@ -83,7 +83,7 @@ export interface InputTimeSlots {
 import { computed, onMounted, onScopeDispose, ref } from 'vue'
 import { useForwardProps } from '../composables/useForwardProps'
 import { TimeFieldRoot, TimeFieldInput, TimeRangeFieldRoot, TimeRangeFieldInput } from 'reka-ui'
-import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
+import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useFieldGroup } from '../composables/useFieldGroup'
@@ -93,6 +93,7 @@ import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
+import { omit } from '../utils'
 
 const SingleTimeField = { Root: TimeFieldRoot, Input: TimeFieldInput }
 const RangeTimeField = { Root: TimeRangeFieldRoot, Input: TimeRangeFieldInput }
@@ -110,7 +111,7 @@ const props = useComponentProps<InputTimeProps<R>>('inputTime', _props)
 const { t } = useLocale()
 const appConfig = useAppConfig() as InputTime['AppConfig']
 
-const rootProps = useForwardProps(reactiveOmit(props, 'id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'ui'), emits)
+const rootProps = useForwardProps(computed(() => omit(props, ['id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'ui'])), emits)
 
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color: formFieldColor, size: formFieldSize, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<InputTimeProps<R>>(_props)
 

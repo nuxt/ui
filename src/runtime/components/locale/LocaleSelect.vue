@@ -8,9 +8,10 @@ export interface LocaleSelectProps extends Omit<SelectMenuProps<Locale<any>[], '
 </script>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useForwardProps } from 'reka-ui'
-import { reactiveOmit } from '@vueuse/core'
 import USelectMenu from '../SelectMenu.vue'
+import { omit } from '../../utils'
 
 defineOptions({ inheritAttrs: false })
 
@@ -20,7 +21,7 @@ const props = withDefaults(defineProps<LocaleSelectProps>(), {
   labelKey: 'name'
 })
 
-const selectMenuProps = useForwardProps(reactiveOmit(props, 'locales'))
+const selectMenuProps = useForwardProps(computed(() => omit(props, ['locales'])))
 
 const modelValue = defineModel<string>({ required: true })
 

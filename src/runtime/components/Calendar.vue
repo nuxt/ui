@@ -144,10 +144,10 @@ export interface CalendarSlots {
 import { computed, ref, shallowRef, watch } from 'vue'
 import { useForwardProps } from '../composables/useForwardProps'
 import { CalendarRoot, CalendarHeader, CalendarHeading, CalendarGrid, CalendarCell, CalendarHeadCell, CalendarNext, CalendarPrev, CalendarGridHead, CalendarGridBody, CalendarGridRow, CalendarCellTrigger, RangeCalendarRoot, RangeCalendarHeader, RangeCalendarHeading, RangeCalendarGrid, RangeCalendarCell, RangeCalendarHeadCell, RangeCalendarNext, RangeCalendarPrev, RangeCalendarGridHead, RangeCalendarGridBody, RangeCalendarGridRow, RangeCalendarCellTrigger, MonthPickerRoot, MonthPickerHeader, MonthPickerHeading, MonthPickerGrid, MonthPickerCell, MonthPickerNext, MonthPickerPrev, MonthPickerGridBody, MonthPickerGridRow, MonthPickerCellTrigger, MonthRangePickerRoot, MonthRangePickerHeader, MonthRangePickerHeading, MonthRangePickerGrid, MonthRangePickerCell, MonthRangePickerNext, MonthRangePickerPrev, MonthRangePickerGridBody, MonthRangePickerGridRow, MonthRangePickerCellTrigger, YearPickerRoot, YearPickerHeader, YearPickerHeading, YearPickerGrid, YearPickerCell, YearPickerNext, YearPickerPrev, YearPickerGridBody, YearPickerGridRow, YearPickerCellTrigger, YearRangePickerRoot, YearRangePickerHeader, YearRangePickerHeading, YearRangePickerGrid, YearRangePickerCell, YearRangePickerNext, YearRangePickerPrev, YearRangePickerGridBody, YearRangePickerGridRow, YearRangePickerCellTrigger } from 'reka-ui'
-import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
+import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
@@ -271,13 +271,13 @@ const yearOnlyProps = ['isYearDisabled', 'isYearUnavailable', 'yearsPerPage']
 // Only declared by the range pickers, omitted when drilling above the terminal view since the picker is not a range picker there.
 const rangeOnlyProps = ['allowNonContiguousRanges', 'fixedDate']
 
-const rootProps = useForwardProps(reactiveOmit(props, (_, key) =>
-  omittedProps.includes(key as string)
-  || (view.value !== 'day' && dayOnlyProps.includes(key as string))
-  || (view.value !== 'month' && monthOnlyProps.includes(key as string))
-  || (view.value !== 'year' && yearOnlyProps.includes(key as string))
-  || (!isMinView.value && rangeOnlyProps.includes(key as string))
-))
+const rootProps = useForwardProps(computed(() => omit(props, [
+  ...omittedProps,
+  ...(view.value !== 'day' ? dayOnlyProps : []),
+  ...(view.value !== 'month' ? monthOnlyProps : []),
+  ...(view.value !== 'year' ? yearOnlyProps : []),
+  ...(!isMinView.value ? rangeOnlyProps : [])
+] as (keyof typeof props)[])))
 
 function cellProps(cellDate: DateValue, monthValue: DateValue) {
   if (view.value === 'month') {

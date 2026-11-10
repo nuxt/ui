@@ -50,13 +50,12 @@ export interface EditorDragHandleEmits {
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import DragHandle from '@tiptap/extension-drag-handle-vue-3'
-import { reactiveOmit } from '@vueuse/core'
 import { defu } from 'defu'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { buildFloatingUIMiddleware } from '../utils/editor'
-import { transformUI } from '../utils'
+import { transformUI, omit } from '../utils'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
@@ -73,7 +72,7 @@ const emit = defineEmits<EditorDragHandleEmits>()
 const props = useComponentProps('editorDragHandle', _props)
 
 const dragHandleProps = useForwardProps(props, ['pluginKey', 'nested', 'nestedOptions', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement'])
-const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'options', 'editor', 'pluginKey', 'nested', 'nestedOptions', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement', 'class', 'ui'))
+const buttonProps = useForwardProps(computed(() => omit(props, ['icon', 'options', 'editor', 'pluginKey', 'nested', 'nestedOptions', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement', 'class', 'ui'])))
 
 const appConfig = useAppConfig() as EditorDragHandle['AppConfig']
 

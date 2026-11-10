@@ -87,12 +87,11 @@ export interface ChatPromptSubmitEmits {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useLocale } from '../composables/useLocale'
-import { transformUI } from '../utils'
+import { transformUI, omit } from '../utils'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
@@ -115,7 +114,7 @@ const props = useComponentProps('chatPromptSubmit', _props)
 const { t } = useLocale()
 const appConfig = useAppConfig() as ChatPromptSubmit['AppConfig']
 
-const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'color', 'variant', 'status', 'disabled', 'streamingIcon', 'streamingColor', 'streamingVariant', 'submittedIcon', 'submittedColor', 'submittedVariant', 'errorIcon', 'errorColor', 'errorVariant', 'class', 'ui'))
+const buttonProps = useForwardProps(computed(() => omit(props, ['icon', 'color', 'variant', 'status', 'disabled', 'streamingIcon', 'streamingColor', 'streamingVariant', 'submittedIcon', 'submittedColor', 'submittedVariant', 'errorIcon', 'errorColor', 'errorVariant', 'class', 'ui'])))
 
 const disabled = computed(() => props.status === 'ready' ? props.disabled : false)
 

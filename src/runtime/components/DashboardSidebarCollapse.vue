@@ -27,7 +27,6 @@ export interface DashboardSidebarCollapseProps extends Omit<ButtonProps, LinkPro
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { useComponentProps } from '../composables/useComponentProps'
@@ -35,6 +34,7 @@ import { useForwardProps } from '../composables/useForwardProps'
 import { useDashboard } from '../utils/dashboard'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
+import { omit } from '../utils'
 
 const _props = withDefaults(defineProps<DashboardSidebarCollapseProps>(), {
   color: 'neutral',
@@ -44,7 +44,7 @@ const _props = withDefaults(defineProps<DashboardSidebarCollapseProps>(), {
 
 const props = useComponentProps('dashboardSidebarCollapse', _props)
 
-const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'side', 'class'))
+const buttonProps = useForwardProps(computed(() => omit(props, ['icon', 'side', 'class'])))
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as DashboardSidebarCollapse['AppConfig']

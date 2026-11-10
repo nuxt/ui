@@ -8,16 +8,17 @@ export interface ColorModeAvatarProps extends Omit<AvatarProps, 'src'> {
 </script>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useForwardProps } from 'reka-ui'
-import { reactiveOmit } from '@vueuse/core'
 import { usePrefix } from '../../composables/usePrefix'
 import UAvatar from '../Avatar.vue'
+import { omit } from '../../utils'
 
 defineOptions({ inheritAttrs: false })
 
 const props = defineProps<ColorModeAvatarProps>()
 
-const avatarProps = useForwardProps(reactiveOmit(props, 'light', 'dark'))
+const avatarProps = useForwardProps(computed(() => omit(props, ['light', 'dark'])))
 const prefix = usePrefix()
 </script>
 

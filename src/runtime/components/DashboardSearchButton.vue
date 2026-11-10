@@ -56,7 +56,7 @@ export interface DashboardSearchButtonProps extends Omit<ButtonProps, LinkPropsK
 <script setup lang="ts">
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
-import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
+import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
@@ -84,7 +84,7 @@ const [DefineButtonTemplate, ReuseButtonTemplate] = createReusableTemplate()
 
 const getProxySlots = () => omit(slots, ['trailing'])
 
-const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'label', 'variant', 'collapsed', 'tooltip', 'kbds', 'class', 'ui'))
+const buttonProps = useForwardProps(computed(() => omit(props, ['icon', 'label', 'variant', 'collapsed', 'tooltip', 'kbds', 'class', 'ui'])))
 const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : props.tooltip, { delayDuration: 0, content: { side: 'right' } }) as TooltipProps)
 
 const { t } = useLocale()
