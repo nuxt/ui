@@ -143,6 +143,7 @@ export interface CalendarSlots {
 </script>
 
 <script setup lang="ts" generic="R extends boolean, M extends boolean">
+import '../utils/temporal'
 import { computed, ref, shallowRef, watch } from 'vue'
 import { useForwardProps } from '../composables/useForwardProps'
 import { CalendarRoot, CalendarHeader, CalendarHeading, CalendarViewTrigger, CalendarGrid, CalendarCell, CalendarHeadCell, CalendarNext, CalendarPrev, CalendarGridHead, CalendarGridBody, CalendarGridRow, CalendarCellTrigger, RangeCalendarRoot, RangeCalendarHeader, RangeCalendarHeading, RangeCalendarViewTrigger, RangeCalendarGrid, RangeCalendarCell, RangeCalendarHeadCell, RangeCalendarNext, RangeCalendarPrev, RangeCalendarGridHead, RangeCalendarGridBody, RangeCalendarGridRow, RangeCalendarCellTrigger } from 'reka-ui'

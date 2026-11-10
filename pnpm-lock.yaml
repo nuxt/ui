@@ -682,6 +682,9 @@ importers:
       tailwindcss:
         specifier: 'catalog:'
         version: 4.3.3
+      temporal-polyfill-lite:
+        specifier: 'catalog:'
+        version: 1.0.1
       tinyglobby:
         specifier: 'catalog:'
         version: 0.2.17
@@ -839,9 +842,6 @@ importers:
       release-it:
         specifier: 'catalog:'
         version: 21.1.2(@types/node@25.9.0)(magicast@0.5.5)(supports-color@10.2.2)
-      temporal-polyfill-lite:
-        specifier: 'catalog:'
-        version: 1.0.1
       unbuild:
         specifier: 'catalog:'
         version: 3.6.1(typescript@6.0.3)(vue-sfc-transformer@0.2.3(@volar/typescript@2.4.30(typescript@6.0.3))(@vue/compiler-core@3.5.44)(@vue/language-core@3.3.14)(esbuild@0.28.2)(rolldown@1.2.15)(typescript@6.0.3)(vue@3.5.44(typescript@6.0.3)))(vue-tsc@3.3.11(typescript@6.0.3))(vue@3.5.44(typescript@6.0.3))
@@ -1242,9 +1242,6 @@ importers:
       tailwindcss:
         specifier: 'catalog:'
         version: 4.3.3
-      temporal-polyfill-lite:
-        specifier: 'catalog:'
-        version: 1.0.1
       vue:
         specifier: 'catalog:'
         version: 3.5.44(typescript@6.0.3)
@@ -1270,9 +1267,6 @@ importers:
       tailwindcss:
         specifier: 'catalog:'
         version: 4.3.3
-      temporal-polyfill-lite:
-        specifier: 'catalog:'
-        version: 1.0.1
       vue:
         specifier: 'catalog:'
         version: 3.5.44(typescript@6.0.3)
@@ -1373,9 +1367,6 @@ importers:
       tailwindcss:
         specifier: 'catalog:'
         version: 4.3.3
-      temporal-polyfill-lite:
-        specifier: 'catalog:'
-        version: 1.0.1
       vue:
         specifier: 'catalog:'
         version: 3.5.44(typescript@6.0.3)

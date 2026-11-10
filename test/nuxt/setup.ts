@@ -3,9 +3,6 @@ import type { AxeMatchers } from 'vitest-axe/matchers'
 
 import { expect } from 'vitest'
 import { configureAxe } from 'vitest-axe'
-import { install } from 'temporal-polyfill-lite/shim'
-
-install(false)
 
 declare module 'vitest' {
   export interface Assertion extends AxeMatchers {}

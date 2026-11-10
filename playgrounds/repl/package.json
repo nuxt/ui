@@ -12,7 +12,6 @@
     "@nuxt/ui": "catalog:",
     "@vue/repl": "catalog:",
     "tailwindcss": "catalog:",
-    "temporal-polyfill-lite": "catalog:",
     "vue": "catalog:"
   },
   "devDependencies": {

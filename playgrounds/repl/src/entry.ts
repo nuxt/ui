@@ -1,7 +1,6 @@
 import './main.css'
 import type { App } from 'vue'
 import basePlugin from '@nuxt/ui/vue-plugin'
-import { install as installTemporal } from 'temporal-polyfill-lite/shim'
 
 const componentModules = import.meta.glob([
   '../../../src/runtime/components/*.vue',
@@ -24,7 +23,6 @@ for (const [path, mod] of Object.entries(componentModules)) {
 }
 
 export function install(app: App) {
-  installTemporal(false)
   app.use(basePlugin)
   for (const [name, component] of Object.entries(components)) {
     app.component(name, component)

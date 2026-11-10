@@ -78,6 +78,7 @@ export interface InputTimeSlots {
 </script>
 
 <script setup lang="ts" generic="R extends boolean">
+import '../utils/temporal'
 import { computed, onMounted, onScopeDispose, ref } from 'vue'
 import { useForwardProps } from '../composables/useForwardProps'
 import { TimeFieldRoot, TimeFieldInput, TimeRangeFieldRoot, TimeRangeFieldInput } from 'reka-ui'

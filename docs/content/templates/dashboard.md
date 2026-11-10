@@ -556,39 +556,23 @@ The home page has a toolbar with a date range picker and a period select. The st
 
 ::code-group{sync="pm"}
 ```bash [pnpm]
-pnpm add @tanstack/charts temporal-polyfill-lite date-fns
+pnpm add @tanstack/charts date-fns
 ```
 
 ```bash [yarn]
-yarn add @tanstack/charts temporal-polyfill-lite date-fns
+yarn add @tanstack/charts date-fns
 ```
 
 ```bash [npm]
-npm install @tanstack/charts temporal-polyfill-lite date-fns
+npm install @tanstack/charts date-fns
 ```
 
 ```bash [bun]
-bun add @tanstack/charts temporal-polyfill-lite date-fns
+bun add @tanstack/charts date-fns
 ```
 ::
 
-The [`UChart`](/docs/components/chart) component is built on [TanStack Charts](https://tanstack.com/charts/v1), an optional peer dependency of Nuxt UI. The [`UCalendar`](/docs/components/calendar) component works with Temporal dates, `temporal-polyfill-lite` provides them on runtimes without native Temporal, and `date-fns` handles the date math.
-
-Load the polyfill in a plugin so it runs on the server and the client:
-
-::code-tree-intersection
-```ts [app/plugins/temporal.ts]
-import { install } from 'temporal-polyfill-lite/shim'
-
-export default defineNuxtPlugin({
-  name: 'temporal',
-  enforce: 'pre',
-  setup() {
-    install(false)
-  }
-})
-```
-::
+The [`UChart`](/docs/components/chart) component is built on [TanStack Charts](https://tanstack.com/charts/v1), an optional peer dependency of Nuxt UI. The [`UCalendar`](/docs/components/calendar) component works with Temporal dates, and `date-fns` handles the date math.
 
 ### Defining the types
 
