@@ -29,7 +29,7 @@ name: 'drawer-example'
 ::
 
 ::tip
-You can also use the `#header`{lang="ts-type"} and `#footer`{lang="ts-type"} slots to customize the Drawer's content, or the `#content`{lang="ts-type"} slot to replace it entirely.
+You can use the `#header` and `#footer` slots to customize the Drawer's content, or the `#content` slot to replace it entirely.
 ::
 
 ### Title
@@ -275,12 +275,17 @@ slots:
 Use the `modal` prop to control whether the Drawer blocks interaction with outside content. Defaults to `true`.
 
 ::note
-When `modal` is set to `false`, the overlay is automatically disabled and outside content becomes interactive.
+When `modal` is set to `false`, the overlay is automatically disabled and outside content becomes interactive. Set it to `trap-focus` to keep the focus inside the Drawer while outside content stays clickable.
 ::
 
 ::component-code
 ---
 prettier: true
+items:
+  modal:
+    - true
+    - false
+    - 'trap-focus'
 props:
   modal: false
 slots:
