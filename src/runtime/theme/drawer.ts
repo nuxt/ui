@@ -5,7 +5,7 @@ export default defineTheme({
     overlay: 'fixed inset-0 bg-backdrop data-[state=open]:animate-[fade-in_300ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_300ms_var(--ease-out)]',
     // The component sets `--drawer-stack` and `--drawer-frontmost-*`, reka-ui sets `--drawer-swipe-*`.
     content: 'group/drawer fixed bg-overlay ring ring-default flex focus:outline-none [interpolate-size:allow-keywords] transition-[translate,scale,height,width,filter] duration-300 ease-out data-swiping:duration-0 data-swiping:cursor-grabbing [--bleed:3rem] [--stack:max(0,calc(var(--drawer-stack,0)-var(--drawer-swipe-progress,0)))] scale-[calc(1-var(--stack)*0.05)] data-stacked:brightness-95 data-stacked:overflow-hidden after:pointer-events-none after:absolute after:bg-inherit',
-    handle: 'shrink-0 bg-strong rounded-full opacity-70 hover:opacity-100 active:opacity-100 cursor-grab active:cursor-grabbing group-data-swiping/drawer:cursor-grabbing group-data-stacked/drawer:opacity-0 transition-opacity ease-out',
+    handle: 'relative shrink-0 bg-strong rounded-full before:absolute before:-inset-3 opacity-70 hover:opacity-100 active:opacity-100 cursor-grab active:cursor-grabbing group-data-swiping/drawer:cursor-grabbing group-data-stacked/drawer:opacity-0 transition-opacity ease-out',
     // Fades back in once the drawer has grown back, so nothing moves while visible.
     container: 'w-full flex flex-col gap-4 p-4 overflow-y-auto transition-opacity duration-300 ease-out delay-200 group-data-stacked/drawer:opacity-0 group-data-stacked/drawer:delay-0 group-data-stacked/drawer:duration-100',
     header: 'flex items-center gap-1.5 min-h-8',
