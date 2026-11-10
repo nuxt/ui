@@ -30,7 +30,7 @@ name: 'modal-example'
 ::
 
 ::tip
-You can also use the `#header`{lang="ts-type"} and `#footer`{lang="ts-type"} slots to customize the Modal's content, or the `#content`{lang="ts-type"} slot to replace it entirely.
+You can use the `#header` and `#footer` slots to customize the Modal's content, or the `#content` slot to replace it entirely.
 ::
 
 ### Title
