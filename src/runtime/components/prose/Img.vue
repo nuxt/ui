@@ -81,15 +81,17 @@ async function setOpen(value: boolean, animate = true) {
     return
   }
 
+  const reset = () => {
+    transitioning.value = false
+  }
+
   transitioning.value = true
   await nextTick()
 
   document.startViewTransition(async () => {
     open.value = value
     await nextTick()
-  }).finished.finally(() => {
-    transitioning.value = false
-  })
+  }).finished.then(reset, reset)
 }
 
 if (props.zoom) {

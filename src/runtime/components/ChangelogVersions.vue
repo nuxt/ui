@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { VNode } from 'vue'
+import type { ComponentPublicInstance, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '../theme/changelog-versions'
 import type { ChangelogVersionProps, ChangelogVersionSlots } from './ChangelogVersion.vue'
@@ -10,9 +10,10 @@ type ChangelogVersions = ComponentConfig<typeof theme, AppConfig, 'changelogVers
 
 export interface ChangelogVersionsIndicator {
   /**
-   * The scroll container the indicator tracks. Defaults to the page.
+   * Track the nearest scroll container around the component instead of the page.
+   * Pass the container element or its ref.
    */
-  container?: HTMLElement | null
+  container?: HTMLElement | ComponentPublicInstance | null
 }
 
 export interface ChangelogVersionsProps<T extends ChangelogVersionProps = ChangelogVersionProps> {
@@ -52,7 +53,7 @@ export type ChangelogVersionsSlots<T extends ChangelogVersionProps = ChangelogVe
 </script>
 
 <script setup lang="ts" generic="T extends ChangelogVersionProps">
-import { computed, useId, watch } from 'vue'
+import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { omit } from '../utils'
@@ -71,18 +72,8 @@ const getProxySlots = () => omit(slots, ['default', 'indicator'])
 
 const overrides = useComponentOverrides((ui: ChangelogVersions['AppConfig']['ui']) => ui.changelogVersions)
 
-// The beam fills through a scroll-driven animation, on the page or on a named timeline set on the container
-const timelineName = `--ui-changelog-versions-${useId().replace(/[^\w-]/g, '')}`
-const container = computed(() => (typeof props.indicator === 'object' && props.indicator.container) || undefined)
-
-watch(container, (el, _, onCleanup) => {
-  if (!el) {
-    return
-  }
-
-  el.style.setProperty('scroll-timeline', `${timelineName} block`)
-  onCleanup(() => el.style.removeProperty('scroll-timeline'))
-}, { immediate: true })
+// The beam fills through a scroll-driven animation on the page, or on the nearest scroll container when one is given
+const timeline = computed(() => typeof props.indicator === 'object' && props.indicator.container ? 'scroll(nearest block)' : 'scroll(root block)')
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)())
@@ -92,7 +83,7 @@ const ui = computed(() => tv(theme, overrides.value)())
   <Primitive :as="props.as" data-slot="changelog-versions" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div v-if="!!props.indicator || !!slots.indicator" data-slot="changelog-versions-indicator" :class="ui.indicator({ class: props.ui?.indicator })">
       <slot name="indicator">
-        <div v-if="!!props.indicatorMotion" data-slot="changelog-versions-beam" :class="ui.beam({ class: props.ui?.beam })" :style="{ animationTimeline: container ? timelineName : 'scroll(root block)' }" />
+        <div v-if="!!props.indicatorMotion" data-slot="changelog-versions-beam" :class="ui.beam({ class: props.ui?.beam })" :style="{ animationTimeline: timeline }" />
       </slot>
     </div>
 

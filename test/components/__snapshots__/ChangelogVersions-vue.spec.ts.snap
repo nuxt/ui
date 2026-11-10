@@ -2,8 +2,8 @@
 
 exports[`ChangelogVersions > renders with as correctly 1`] = `
 "<section data-slot="changelog-versions" class="relative">
-  <div data-slot="changelog-versions-indicator" class="absolute hidden lg:block overflow-hidden inset-y-3 inset-s-32 h-full w-px bg-border ms-[-8.5px]">
-    <div data-slot="changelog-versions-beam" class="absolute inset-0 origin-top bg-primary animate-[changelog-versions-beam_linear_both]" style="animation-timeline: scroll(root block);"></div>
+  <div data-slot="changelog-versions-indicator" class="absolute hidden lg:block inset-y-3 inset-s-32 h-full w-px bg-border ms-[-8.5px]">
+    <div data-slot="changelog-versions-beam" class="absolute inset-0 origin-top scale-y-0 bg-primary supports-[animation-timeline:scroll()]:animate-[changelog-versions-beam_linear_both]" style="animation-timeline: scroll(root block);"></div>
   </div>
   <div data-slot="changelog-versions-container" class="flex flex-col gap-y-8 sm:gap-y-12 lg:gap-y-16">
     <!---->
@@ -46,8 +46,8 @@ exports[`ChangelogVersions > renders with as correctly 1`] = `
 
 exports[`ChangelogVersions > renders with class correctly 1`] = `
 "<div data-slot="changelog-versions" class="absolute">
-  <div data-slot="changelog-versions-indicator" class="absolute hidden lg:block overflow-hidden inset-y-3 inset-s-32 h-full w-px bg-border ms-[-8.5px]">
-    <div data-slot="changelog-versions-beam" class="absolute inset-0 origin-top bg-primary animate-[changelog-versions-beam_linear_both]" style="animation-timeline: scroll(root block);"></div>
+  <div data-slot="changelog-versions-indicator" class="absolute hidden lg:block inset-y-3 inset-s-32 h-full w-px bg-border ms-[-8.5px]">
+    <div data-slot="changelog-versions-beam" class="absolute inset-0 origin-top scale-y-0 bg-primary supports-[animation-timeline:scroll()]:animate-[changelog-versions-beam_linear_both]" style="animation-timeline: scroll(root block);"></div>
   </div>
   <div data-slot="changelog-versions-container" class="flex flex-col gap-y-8 sm:gap-y-12 lg:gap-y-16">
     <!---->
@@ -90,8 +90,8 @@ exports[`ChangelogVersions > renders with class correctly 1`] = `
 
 exports[`ChangelogVersions > renders with default slot correctly 1`] = `
 "<div data-slot="changelog-versions" class="relative">
-  <div data-slot="changelog-versions-indicator" class="absolute hidden lg:block overflow-hidden inset-y-3 inset-s-32 h-full w-px bg-border ms-[-8.5px]">
-    <div data-slot="changelog-versions-beam" class="absolute inset-0 origin-top bg-primary animate-[changelog-versions-beam_linear_both]" style="animation-timeline: scroll(root block);"></div>
+  <div data-slot="changelog-versions-indicator" class="absolute hidden lg:block inset-y-3 inset-s-32 h-full w-px bg-border ms-[-8.5px]">
+    <div data-slot="changelog-versions-beam" class="absolute inset-0 origin-top scale-y-0 bg-primary supports-[animation-timeline:scroll()]:animate-[changelog-versions-beam_linear_both]" style="animation-timeline: scroll(root block);"></div>
   </div>
   <div data-slot="changelog-versions-container" class="flex flex-col gap-y-8 sm:gap-y-12 lg:gap-y-16">Default slot</div>
 </div>"
@@ -99,7 +99,7 @@ exports[`ChangelogVersions > renders with default slot correctly 1`] = `
 
 exports[`ChangelogVersions > renders with indicator slot correctly 1`] = `
 "<div data-slot="changelog-versions" class="relative">
-  <div data-slot="changelog-versions-indicator" class="absolute hidden lg:block overflow-hidden inset-y-3 inset-s-32 h-full w-px bg-border ms-[-8.5px]">Indicator slot</div>
+  <div data-slot="changelog-versions-indicator" class="absolute hidden lg:block inset-y-3 inset-s-32 h-full w-px bg-border ms-[-8.5px]">Indicator slot</div>
   <div data-slot="changelog-versions-container" class="flex flex-col gap-y-8 sm:gap-y-12 lg:gap-y-16">
     <!---->
     <!---->
@@ -141,8 +141,8 @@ exports[`ChangelogVersions > renders with indicator slot correctly 1`] = `
 
 exports[`ChangelogVersions > renders with ui correctly 1`] = `
 "<div data-slot="changelog-versions" class="relative">
-  <div data-slot="changelog-versions-indicator" class="absolute hidden lg:block overflow-hidden inset-y-3 inset-s-32 h-full w-px ms-[-8.5px] bg-primary">
-    <div data-slot="changelog-versions-beam" class="absolute inset-0 origin-top bg-primary animate-[changelog-versions-beam_linear_both]" style="animation-timeline: scroll(root block);"></div>
+  <div data-slot="changelog-versions-indicator" class="absolute hidden lg:block inset-y-3 inset-s-32 h-full w-px ms-[-8.5px] bg-primary">
+    <div data-slot="changelog-versions-beam" class="absolute inset-0 origin-top scale-y-0 bg-primary supports-[animation-timeline:scroll()]:animate-[changelog-versions-beam_linear_both]" style="animation-timeline: scroll(root block);"></div>
   </div>
   <div data-slot="changelog-versions-container" class="flex flex-col gap-y-8 sm:gap-y-12 lg:gap-y-16">
     <!---->
@@ -185,8 +185,8 @@ exports[`ChangelogVersions > renders with ui correctly 1`] = `
 
 exports[`ChangelogVersions > renders with versions correctly 1`] = `
 "<div data-slot="changelog-versions" class="relative">
-  <div data-slot="changelog-versions-indicator" class="absolute hidden lg:block overflow-hidden inset-y-3 inset-s-32 h-full w-px bg-border ms-[-8.5px]">
-    <div data-slot="changelog-versions-beam" class="absolute inset-0 origin-top bg-primary animate-[changelog-versions-beam_linear_both]" style="animation-timeline: scroll(root block);"></div>
+  <div data-slot="changelog-versions-indicator" class="absolute hidden lg:block inset-y-3 inset-s-32 h-full w-px bg-border ms-[-8.5px]">
+    <div data-slot="changelog-versions-beam" class="absolute inset-0 origin-top scale-y-0 bg-primary supports-[animation-timeline:scroll()]:animate-[changelog-versions-beam_linear_both]" style="animation-timeline: scroll(root block);"></div>
   </div>
   <div data-slot="changelog-versions-container" class="flex flex-col gap-y-8 sm:gap-y-12 lg:gap-y-16">
     <!---->

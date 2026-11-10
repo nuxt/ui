@@ -141,11 +141,11 @@
 
 @keyframes changelog-versions-beam {
   from {
-    transform: scaleY(0);
+    scale: 1 0;
   }
 
   to {
-    transform: scaleY(1);
+    scale: 1 1;
   }
 }
 
