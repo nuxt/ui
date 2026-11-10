@@ -14,10 +14,12 @@ export default {
     },
     fieldGroup: {
       horizontal: {
-        root: 'gap-0 -space-x-px'
+        root: 'gap-0 -space-x-px',
+        item: 'data-[state=on]:z-[1]'
       },
       vertical: {
-        root: 'gap-0 -space-y-px'
+        root: 'gap-0 -space-y-px',
+        item: 'data-[state=on]:z-[1]'
       }
     }
   }
