@@ -22,19 +22,19 @@ export default defineTheme({
     side: {
       top: {
         content: 'inset-x-0 top-0 origin-bottom rounded-b-lg h-(--drawer-content-height,auto) data-stacked:h-(--drawer-frontmost-height) max-h-[96%] flex-col-reverse translate-y-[calc(var(--drawer-snap-point-offset,0px)+var(--drawer-swipe-movement-y,0px)+var(--stack)*1rem)] after:inset-x-0 after:bottom-full after:h-(--bleed) data-[state=open]:animate-[slide-in-from-top_300ms_var(--ease-out)] data-[state=closed]:animate-[slide-out-to-top_300ms_var(--ease-out)]',
-        handle: 'w-full justify-center pb-2 before:inset-x-0 before:bottom-0 before:-top-3 after:w-12 after:h-1.5'
+        handle: 'w-full justify-center pb-2 before:inset-x-0 before:bottom-0 before:-top-4 after:w-12 after:h-1.5'
       },
       right: {
         content: 'inset-y-0 right-0 origin-left rounded-l-lg w-(--drawer-content-width,auto) max-w-[calc(100%-2rem)] flex-row rtl:flex-row-reverse [--stack-shift:calc(var(--drawer-own-width,0px)-var(--drawer-frontmost-width,0px))] translate-x-[calc(var(--drawer-swipe-movement-x,0px)-var(--stack)*1rem+var(--stack-shift))] data-stacked:[clip-path:inset(-1rem_max(0px,var(--stack-shift))_-1rem_-1rem)] after:inset-y-0 after:left-full after:w-(--bleed) data-[state=open]:animate-[slide-in-from-right_300ms_var(--ease-out)] data-[state=closed]:animate-[slide-out-to-right_300ms_var(--ease-out)]',
-        handle: 'h-full items-center pl-2 before:inset-y-0 before:left-0 before:-right-3 after:h-12 after:w-1.5'
+        handle: 'h-full items-center pl-2 before:inset-y-0 before:left-0 before:-right-4 after:h-12 after:w-1.5'
       },
       bottom: {
         content: 'inset-x-0 bottom-0 origin-top rounded-t-lg h-(--drawer-content-height,auto) data-stacked:h-(--drawer-frontmost-height) max-h-[96%] flex-col translate-y-[calc(var(--drawer-snap-point-offset,0px)+var(--drawer-swipe-movement-y,0px)-var(--stack)*1rem)] after:inset-x-0 after:top-full after:h-(--bleed) data-[state=open]:animate-[slide-in-from-bottom_300ms_var(--ease-out)] data-[state=closed]:animate-[slide-out-to-bottom_300ms_var(--ease-out)]',
-        handle: 'w-full justify-center pt-2 before:inset-x-0 before:top-0 before:-bottom-3 after:w-12 after:h-1.5'
+        handle: 'w-full justify-center pt-2 before:inset-x-0 before:top-0 before:-bottom-4 after:w-12 after:h-1.5'
       },
       left: {
         content: 'inset-y-0 left-0 origin-right rounded-r-lg w-(--drawer-content-width,auto) max-w-[calc(100%-2rem)] flex-row-reverse rtl:flex-row [--stack-shift:calc(var(--drawer-own-width,0px)-var(--drawer-frontmost-width,0px))] translate-x-[calc(var(--drawer-swipe-movement-x,0px)+var(--stack)*1rem-var(--stack-shift))] data-stacked:[clip-path:inset(-1rem_-1rem_-1rem_max(0px,var(--stack-shift)))] after:inset-y-0 after:right-full after:w-(--bleed) data-[state=open]:animate-[slide-in-from-left_300ms_var(--ease-out)] data-[state=closed]:animate-[slide-out-to-left_300ms_var(--ease-out)]',
-        handle: 'h-full items-center pr-2 before:inset-y-0 before:right-0 before:-left-3 after:h-12 after:w-1.5'
+        handle: 'h-full items-center pr-2 before:inset-y-0 before:right-0 before:-left-4 after:h-12 after:w-1.5'
       }
     },
     inset: {
