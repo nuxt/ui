@@ -166,10 +166,10 @@ function mapKeys(obj: object, parentKey = ''): any {
   }).filter(Boolean)
 }
 
-// Any union with `boolean` gets a select, string literals of the union (`'trap-focus'`) become extra options
+// A union with `boolean` gets a select, its string literals (`'trap-focus'`) become extra options, unless it also takes free text
 function booleanItems(prop: any) {
   const members = Object.values(prop?.schema?.schema || {}).filter((member): member is string => typeof member === 'string')
-  if (!members.includes('true') || !members.includes('false')) {
+  if (!members.includes('true') || !members.includes('false') || members.includes('string') || members.includes('number')) {
     return
   }
 
