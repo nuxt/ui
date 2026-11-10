@@ -119,7 +119,7 @@ const snapPoint = ref<string | number | null>(0.4)
       <UButton color="neutral" variant="outline" label="Open with snap points" />
 
       <template #body>
-        <Placeholder class="size-full " />
+        <Placeholder class="size-full" />
       </template>
     </UDrawer>
 
