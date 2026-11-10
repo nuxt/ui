@@ -6,7 +6,7 @@ import Drawer from '../../src/runtime/components/Drawer.vue'
 import theme from '#build/ui/drawer'
 
 describe('Drawer', () => {
-  const directions = Object.keys(theme.variants.direction) as any
+  const sides = Object.keys(theme.variants.side) as any
 
   const props = { open: true, portal: false }
 
@@ -14,8 +14,8 @@ describe('Drawer', () => {
     // Props
     ['with title', { props: { ...props, title: 'Title' } }],
     ['with description', { props: { ...props, title: 'Title', description: 'Description' } }],
-    ...directions.map((direction: string) => [`with direction ${direction}`, { props: { ...props, direction, title: 'Title', description: 'Description' } }]),
-    ...directions.map((direction: string) => [`with direction ${direction} without inset`, { props: { ...props, direction, inset: false, title: 'Title', description: 'Description' } }]),
+    ...sides.map((side: string) => [`with side ${side}`, { props: { ...props, side, title: 'Title', description: 'Description' } }]),
+    ...sides.map((side: string) => [`with side ${side} without inset`, { props: { ...props, side, inset: false, title: 'Title', description: 'Description' } }]),
     ['with handle', { props: { ...props, handle: true, title: 'Title', description: 'Description' } }],
     ['without overlay', { props: { ...props, overlay: false, title: 'Title', description: 'Description' } }],
     ['with close', { props: { ...props, close: true, title: 'Title', description: 'Description' } }],

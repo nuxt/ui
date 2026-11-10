@@ -14,16 +14,14 @@ links:
     to: https://github.com/nuxt/ui/blob/v5/src/runtime/components/Drawer.vue
 ---
 
-## Usage
-
-Use the Drawer component to display content in a panel that slides in from an edge of the screen and can be swiped away.
-
 ::component-example
 ---
 collapse: true
 name: 'drawer-example'
 ---
 ::
+
+## Usage
 
 Use a [Button](/docs/components/button) or any other component in the default slot of the Drawer.
 
@@ -35,14 +33,14 @@ prettier: true
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   content: |
 
     <Placeholder class="h-48 m-4" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #content
 :placeholder{class="h-48 m-4"}
@@ -62,14 +60,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 
     <Placeholder class="h-48" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :placeholder{class="h-48"}
@@ -90,14 +88,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 
     <Placeholder class="h-48" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :placeholder{class="h-48"}
@@ -125,14 +123,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 
     <Placeholder class="h-48" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :placeholder{class="h-48"}
@@ -154,39 +152,39 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 
     <Placeholder class="h-48" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :placeholder{class="h-48"}
 ::
 
-### Direction
+### Side
 
-Use the `direction` prop to control the direction of the Drawer. Defaults to `bottom`.
+Use the `side` prop to set the side of the screen where the Drawer will slide in from. Defaults to `bottom`.
 
 ::component-code
 ---
 prettier: true
 props:
-  direction: 'right'
+  side: 'right'
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   content: |
 
     <Placeholder class="min-w-96 min-h-96 size-full m-4" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #content
 :placeholder{class="min-w-96 min-h-96 size-full m-4"}
@@ -200,19 +198,19 @@ Use the `inset` prop to control whether the Drawer floats away from the edges. D
 ---
 prettier: true
 props:
-  direction: 'right'
+  side: 'right'
   inset: false
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   content: |
 
     <Placeholder class="min-w-96 min-h-96 size-full m-4" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #content
 :placeholder{class="min-w-96 min-h-96 size-full m-4"}
@@ -232,14 +230,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   content: |
 
     <Placeholder class="h-48 m-4" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #content
 :placeholder{class="h-48 m-4"}
@@ -272,14 +270,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   content: |
 
     <Placeholder class="h-48 m-4" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #content
 :placeholder{class="h-48 m-4"}
@@ -301,14 +299,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   content: |
 
     <Placeholder class="h-48 m-4" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #content
 :placeholder{class="h-48 m-4"}

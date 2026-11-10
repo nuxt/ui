@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import theme from '#build/ui/drawer'
 
-const directions = Object.keys(theme.variants.direction)
+const sides = Object.keys(theme.variants.side)
 
 const open = ref(false)
 const inset = ref(true)
 const handle = ref(false)
-const direction = ref<any>('bottom')
+const side = ref<any>('bottom')
 
 const snapPoints = [0.4, 0.75, 1]
 const snapPoint = ref<string | number | null>(0.4)
@@ -16,14 +16,14 @@ const snapPoint = ref<string | number | null>(0.4)
   <Navbar>
     <USwitch v-model="inset" label="Inset" />
     <USwitch v-model="handle" label="Handle" />
-    <USelect v-model="direction" :items="directions" class="w-32" />
+    <USelect v-model="side" :items="sides" class="w-32" />
   </Navbar>
 
   <div class="flex flex-col gap-2 min-h-0">
     <UDrawer
       v-model:open="open"
       title="Drawer with v-model"
-      :direction="direction"
+      :side="side"
       :inset="inset"
       :handle="handle"
       close
@@ -43,7 +43,7 @@ const snapPoint = ref<string | number | null>(0.4)
     <UDrawer
       title="Drawer"
       description="Open another one from the same side."
-      :direction="direction"
+      :side="side"
       :inset="inset"
       :handle="handle"
       close
@@ -58,7 +58,7 @@ const snapPoint = ref<string | number | null>(0.4)
         <UDrawer
           title="Nested drawer"
           description="The parent stays mounted behind this one."
-          :direction="direction"
+          :side="side"
           :inset="inset"
           :handle="handle"
           close
@@ -73,7 +73,7 @@ const snapPoint = ref<string | number | null>(0.4)
             <UDrawer
               title="Third drawer"
               description="Two drawers are stacked behind this one."
-              :direction="direction"
+              :side="side"
               :inset="inset"
               :handle="handle"
               close
@@ -88,7 +88,7 @@ const snapPoint = ref<string | number | null>(0.4)
                 <UDrawer
                   title="Fourth drawer"
                   description="This one is the frontmost of the stack."
-                  :direction="direction"
+                  :side="side"
                   :inset="inset"
                   :handle="handle"
                   close
@@ -111,7 +111,7 @@ const snapPoint = ref<string | number | null>(0.4)
       title="Drawer with snap points"
       :description="`Snapped at ${snapPoint}.`"
       :snap-points="snapPoints"
-      direction="bottom"
+      side="bottom"
       :inset="inset"
       :handle="handle"
       close
@@ -127,7 +127,7 @@ const snapPoint = ref<string | number | null>(0.4)
       title="Drawer prevent close"
       description="This drawer has `dismissible: false` so clicking outside, pressing escape and swiping are all blocked."
       :dismissible="false"
-      :direction="direction"
+      :side="side"
       :inset="inset"
       :handle="handle"
       close
@@ -144,7 +144,7 @@ const snapPoint = ref<string | number | null>(0.4)
       title="Drawer without overlay"
       :modal="false"
       :overlay="false"
-      :direction="direction"
+      :side="side"
       :inset="inset"
       :handle="handle"
       close

@@ -28,10 +28,10 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'modal' | 'open' | 'd
   title?: string
   description?: string
   /**
-   * The edge the drawer slides in from (and the direction it's swiped to dismiss).
+   * The side of the screen the drawer slides in from and is swiped back to.
    * @defaultValue 'bottom'
    */
-  direction?: 'top' | 'right' | 'bottom' | 'left'
+  side?: 'top' | 'right' | 'bottom' | 'left'
   /**
    * Whether to inset the drawer from the edges.
    * @defaultValue true
@@ -108,7 +108,7 @@ import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
 const _props = withDefaults(defineProps<DrawerProps>(), {
-  direction: 'bottom',
+  side: 'bottom',
   inset: true,
   portal: true,
   overlay: true,
@@ -125,7 +125,7 @@ const appConfig = useThemeConfig() as Drawer['AppConfig']
 const overrides = useComponentOverrides((ui: Drawer['AppConfig']['ui']) => ui.drawer)
 
 const SWIPE_DIRECTION = { top: 'up', bottom: 'down', left: 'left', right: 'right' } as const
-const swipeDirection = computed(() => SWIPE_DIRECTION[props.direction])
+const swipeDirection = computed(() => SWIPE_DIRECTION[props.side])
 
 // reka-ui's `--nested-drawers` only counts one level and clears once the nested drawer
 // has left, so the stack is counted here and flips as soon as a nested drawer closes.
@@ -214,7 +214,7 @@ const contentEvents = { pointerDownOutside }
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
-  direction: props.direction,
+  side: props.side,
   inset: props.inset,
   snapPoints: props.snapPoints && props.snapPoints.length > 0
 }))
