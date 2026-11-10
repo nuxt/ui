@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { VNode } from 'vue'
-import type { ListboxRootEmits, ListboxRootProps } from 'reka-ui'
+import type { ListboxRootEmits, ListboxRootProps, ChangeEventDetails, ListboxChangeReason } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '../theme/listbox'
 import type { AvatarProps } from './Avatar.vue'
@@ -140,7 +140,8 @@ export interface ListboxProps<T extends ArrayOrNested<ListboxItem> = ArrayOrNest
 
 export type ListboxEmits<T extends ArrayOrNested<ListboxItem> = ArrayOrNested<ListboxItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>> = Pick<ListboxRootEmits, 'entryFocus' | 'highlight' | 'leave'> & {
   'change': [event: Event]
-  'update:modelValue': [value: ApplyModifiers<GetModelValue<T, VK, M>, Mod>]
+  'beforeUpdate:modelValue': [value: ApplyModifiers<GetModelValue<T, VK, M>, Mod>, details: ChangeEventDetails<ListboxChangeReason>]
+  'update:modelValue': [value: ApplyModifiers<GetModelValue<T, VK, M>, Mod>, details?: ChangeEventDetails<ListboxChangeReason>]
 }
 
 type SlotProps<T> = (props: { item: T, index: number, ui: Listbox['ui'] }) => VNode[]
@@ -158,7 +159,7 @@ export type ListboxSlots<T extends ArrayOrNested<ListboxItem> = ArrayOrNested<Li
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<ListboxItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>">
-import { computed, toRaw, toRef } from 'vue'
+import { computed, toRef } from 'vue'
 import { ListboxRoot, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxVirtualizer, ListboxItem as RekaListboxItem, ListboxItemIndicator, ListboxFilter } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { createReusableTemplate } from '@vueuse/core'
@@ -249,10 +250,6 @@ const ui = computed(() => tv(theme, overrides.value)({
 }))
 
 function onUpdate(value: any) {
-  if (toRaw(props.modelValue) === value) {
-    return
-  }
-
   if (props.modelModifiers?.trim && (typeof value === 'string' || value === null || value === undefined)) {
     value = value?.trim() ?? null
   }

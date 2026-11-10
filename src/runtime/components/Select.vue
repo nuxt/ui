@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { SelectRootProps, SelectRootEmits, SelectContentProps, SelectContentEmits, SelectArrowProps } from 'reka-ui'
+import type { SelectRootProps, SelectRootEmits, SelectContentProps, SelectContentEmits, SelectArrowProps, ChangeEventDetails, SelectChangeReason } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '../theme/select'
@@ -121,11 +121,12 @@ export interface SelectEmits<
   VK extends GetItemKeys<A> | undefined,
   M extends boolean,
   Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>
-> extends Omit<SelectRootEmits, 'update:modelValue'> {
+> extends Omit<SelectRootEmits, 'beforeUpdate:modelValue' | 'update:modelValue'> {
   'change': [event: Event]
   'blur': [event: FocusEvent]
   'focus': [event: FocusEvent]
-  'update:modelValue': [value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>]
+  'beforeUpdate:modelValue': [value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>, details: ChangeEventDetails<SelectChangeReason>]
+  'update:modelValue': [value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>, details?: ChangeEventDetails<SelectChangeReason>]
 }
 
 type SlotProps<T extends SelectItem> = (props: { item: T, index: number, ui: Select['ui'] }) => VNode[]

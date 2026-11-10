@@ -7,6 +7,7 @@ import InputMenu from '../../src/runtime/components/InputMenu.vue'
 import { UButton, UFieldGroup } from '#components'
 import type { FormInputEvents } from '../../src/module'
 import { renderForm } from '../utils/form'
+import type { ChangeEventDetails, ComboboxChangeReason, AutocompleteChangeReason } from 'reka-ui'
 import { expectEmitPayloadType } from '../utils/types'
 import theme from '#build/ui/input'
 
@@ -445,67 +446,67 @@ describe('InputMenu', () => {
       // with object item
       expectEmitPayloadType('update:modelValue', () => InputMenu({
         items: [{ label: 'foo', value: 'bar' }]
-      })).toEqualTypeOf<[{ label: string, value: string }]>()
+      })).toEqualTypeOf<[{ label: string, value: string }, ChangeEventDetails<ComboboxChangeReason | AutocompleteChangeReason>?]>()
 
       // with object item and multiple
       expectEmitPayloadType('update:modelValue', () => InputMenu({
         items: [{ label: 'foo', value: 1 }],
         multiple: true
-      })).toEqualTypeOf<[{ label: string, value: number }[]]>()
+      })).toEqualTypeOf<[{ label: string, value: number }[], ChangeEventDetails<ComboboxChangeReason | AutocompleteChangeReason>?]>()
 
       // with object item and valueKey
       expectEmitPayloadType('update:modelValue', () => InputMenu({
         items: [{ label: 'foo', value: 'bar' }],
         valueKey: 'value'
-      })).toEqualTypeOf<[string]>()
+      })).toEqualTypeOf<[string, ChangeEventDetails<ComboboxChangeReason | AutocompleteChangeReason>?]>()
 
       // with object item and multiple and valueKey
       expectEmitPayloadType('update:modelValue', () => InputMenu({
         items: [{ label: 'foo', value: 1 }],
         multiple: true,
         valueKey: 'value'
-      })).toEqualTypeOf<[number[]]>()
+      })).toEqualTypeOf<[number[], ChangeEventDetails<ComboboxChangeReason | AutocompleteChangeReason>?]>()
 
       // with object item and object valueKey
       expectEmitPayloadType('update:modelValue', () => InputMenu({
         items: [{ label: 'foo', value: { id: 1, name: 'bar' } }],
         valueKey: 'value'
-      })).toEqualTypeOf<[{ id: number, name: string }]>()
+      })).toEqualTypeOf<[{ id: number, name: string }, ChangeEventDetails<ComboboxChangeReason | AutocompleteChangeReason>?]>()
 
       // with string item
       expectEmitPayloadType('update:modelValue', () => InputMenu({
         items: ['foo']
-      })).toEqualTypeOf<[string]>()
+      })).toEqualTypeOf<[string, ChangeEventDetails<ComboboxChangeReason | AutocompleteChangeReason>?]>()
 
       // with string item and multiple
       expectEmitPayloadType('update:modelValue', () => InputMenu({
         items: ['foo'],
         multiple: true
-      })).toEqualTypeOf<[string[]]>()
+      })).toEqualTypeOf<[string[], ChangeEventDetails<ComboboxChangeReason | AutocompleteChangeReason>?]>()
 
       // with groups
       expectEmitPayloadType('update:modelValue', () => InputMenu({
         items: [['foo']]
-      })).toEqualTypeOf<[string]>()
+      })).toEqualTypeOf<[string, ChangeEventDetails<ComboboxChangeReason | AutocompleteChangeReason>?]>()
 
       // with groups and multiple
       expectEmitPayloadType('update:modelValue', () => InputMenu({
         items: [['foo']],
         multiple: true
-      })).toEqualTypeOf<[string[]]>()
+      })).toEqualTypeOf<[string[], ChangeEventDetails<ComboboxChangeReason | AutocompleteChangeReason>?]>()
 
       // with groups, multiple and mixed types
       expectEmitPayloadType('update:modelValue', () => InputMenu({
         items: [['foo', { value: 1 }], [{ value: 'bar' }, 2]],
         multiple: true
-      })).toEqualTypeOf<[(string | number | { value: string } | { value: number })[]]>()
+      })).toEqualTypeOf<[(string | number | { value: string } | { value: number })[], ChangeEventDetails<ComboboxChangeReason | AutocompleteChangeReason>?]>()
 
       // with groups, multiple, mixed types and valueKey
       expectEmitPayloadType('update:modelValue', () => InputMenu({
         items: [['foo', { value: 1 }], [{ value: 'bar' }, 2]],
         multiple: true,
         valueKey: 'value'
-      })).toEqualTypeOf<[(string | number)[]]>()
+      })).toEqualTypeOf<[(string | number)[], ChangeEventDetails<ComboboxChangeReason | AutocompleteChangeReason>?]>()
     })
   })
 })
