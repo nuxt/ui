@@ -109,6 +109,11 @@ Set the `type` prop to `multiple` to allow several items to be pressed at once. 
 
 ::component-code
 ---
+prettier: true
+items:
+  type:
+    - single
+    - multiple
 ignore:
   - items
   - defaultValue
@@ -140,6 +145,10 @@ Use the `orientation` prop to change the orientation of the ToggleGroup. Default
 
 ::component-code
 ---
+items:
+  orientation:
+    - horizontal
+    - vertical
 ignore:
   - items
   - defaultValue
@@ -166,6 +175,21 @@ Use the `attached` prop to attach the items together, like in a [FieldGroup](/do
 
 ::component-code
 ---
+items:
+  variant:
+    - solid
+    - outline
+    - soft
+    - subtle
+    - ghost
+    - link
+  activeVariant:
+    - solid
+    - outline
+    - soft
+    - subtle
+    - ghost
+    - link
 ignore:
   - items
   - defaultValue
