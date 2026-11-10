@@ -287,6 +287,17 @@ describe('useToast', () => {
       expect(toast.toasts.value[0]!.open).toBe(false)
     })
 
+    it('keeps the queue running when a queued toast is closed before it is displayed', async () => {
+      toast.add({ id: 'a', title: 'A' })
+      // Queued behind `a`, then dropped from the queue when the promise settles while the queue waits for the next tick.
+      toast.promise(Promise.resolve(), { loading: 'Saving' })
+      await vi.waitFor(() => expect(toast.toasts.value).toHaveLength(1))
+
+      toast.add({ id: 'b', title: 'B' })
+
+      await vi.waitFor(() => expect(toast.toasts.value.map(t => t.id)).toEqual(['a', 'b']))
+    })
+
     it('does not reopen a toast dismissed while loading', async () => {
       const { promise, resolve } = deferred<undefined>()
       toast.promise(promise, { loading: { id: 'p', title: 'Saving' }, success: 'Saved' })

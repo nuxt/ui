@@ -71,7 +71,12 @@ export function useToast() {
     while (queue.length > 0) {
       await nextTick()
 
-      const toast = queue.shift()!
+      // `promise()` can drop a queued toast while this waits for the next tick.
+      const toast = queue.shift()
+      if (!toast) {
+        break
+      }
+
       const maxValue = max?.value ?? 5
       if (maxValue <= 0) {
         if (toasts.value.length) {
