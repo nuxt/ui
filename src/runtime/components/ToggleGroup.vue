@@ -133,9 +133,10 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.toggleGroup || {
 }))
 
 // Rounds the item buttons like in a FieldGroup when attached, and keeps a wrapping FieldGroup from reaching them
+// The theme rounds attached items itself, so a wrapping FieldGroup must not reach the item buttons
 provide(fieldGroupInjectionKey, computed(() => ({
   size: undefined,
-  orientation: props.attached ? props.orientation : undefined
+  orientation: undefined
 })))
 
 function getValue(item: T, index: number) {
@@ -144,7 +145,7 @@ function getValue(item: T, index: number) {
 
 function getButtonProps(item: T): ButtonProps {
   return defu({
-    ...omit(item as ToggleGroupItem, ['value', 'disabled', 'label', props.valueKey as string, props.labelKey as string]),
+    ...omit(item as ToggleGroupItem, ['value', 'disabled', 'label', 'class', props.valueKey as string, props.labelKey as string]),
     label: get(item, props.labelKey as string)
   }, {
     color: color.value,

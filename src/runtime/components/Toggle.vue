@@ -46,6 +46,7 @@ import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useFormField } from '../composables/useFormField'
+import { useFieldGroup } from '../composables/useFieldGroup'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
@@ -73,7 +74,9 @@ const { id, name, size: formFieldSize, color: formFieldColor, disabled: formFiel
 // eslint-disable-next-line vue/no-dupe-keys
 const color = computed(() => formFieldColor.value ?? props.color ?? 'neutral')
 
-const size = computed(() => formFieldSize.value ?? props.size)
+const { size: fieldGroupSize } = useFieldGroup<ToggleProps>(_props)
+
+const size = computed(() => fieldGroupSize.value ?? formFieldSize.value ?? props.size)
 
 const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 

@@ -1,3 +1,7 @@
+import { fieldGroupVariantWithHiddenInput } from './field-group'
+
+// Reka renders a hidden input after the items when the group has a `name`, so the rounding skips it like `Select`.
+// The pressed item is lifted above its neighbors so its border shows, and the focused one above both.
 export default {
   slots: {
     root: 'relative',
@@ -15,11 +19,11 @@ export default {
     fieldGroup: {
       horizontal: {
         root: 'gap-0 -space-x-px',
-        item: 'data-[state=on]:z-[1]'
+        item: `${fieldGroupVariantWithHiddenInput.fieldGroup.horizontal} data-[state=on]:z-[1] focus-visible:z-[2]`
       },
       vertical: {
         root: 'gap-0 -space-y-px',
-        item: 'data-[state=on]:z-[1]'
+        item: `${fieldGroupVariantWithHiddenInput.fieldGroup.vertical} data-[state=on]:z-[1] focus-visible:z-[2]`
       }
     }
   }
