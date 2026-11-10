@@ -178,6 +178,8 @@ export interface ThemeDefaults {
   timeline?: Partial<ComponentTypes.TimelineProps>
   toast?: Partial<ComponentTypes.ToastProps>
   toaster?: Partial<ComponentTypes.ToasterProps>
+  toggle?: Partial<ComponentTypes.ToggleProps>
+  toggleGroup?: Partial<ComponentTypes.ToggleGroupProps>
   tooltip?: Partial<ComponentTypes.TooltipProps>
   tree?: Partial<ComponentTypes.TreeProps>
   user?: Partial<ComponentTypes.UserProps>
