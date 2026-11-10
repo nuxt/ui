@@ -5,7 +5,7 @@ const sides = Object.keys(theme.variants.side)
 
 const open = ref(false)
 const inset = ref(true)
-const handle = ref(false)
+const handle = ref(true)
 const side = ref<any>('bottom')
 
 const snapPoints = [0.4, 0.75, 1]

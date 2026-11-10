@@ -14,39 +14,23 @@ links:
     to: https://github.com/nuxt/ui/blob/v5/src/runtime/components/Drawer.vue
 ---
 
+## Usage
+
+Use a [Button](/docs/components/button) or any other component in the default slot of the Drawer.
+
+Then, use the `#body` slot to add the content displayed when the Drawer is open.
+
 ::component-example
 ---
+prettier: true
 collapse: true
 name: 'drawer-example'
 ---
 ::
 
-## Usage
-
-Use a [Button](/docs/components/button) or any other component in the default slot of the Drawer.
-
-Then, use the `#content` slot to add the content displayed when the Drawer is open.
-
-::component-code
----
-prettier: true
-slots:
-  default: |
-
-    <UButton label="Open" color="neutral" variant="subtle" />
-
-  content: |
-
-    <Placeholder class="h-48 m-4" />
----
-
-:u-button{label="Open" color="neutral" variant="subtle"}
-
-#content
-:placeholder{class="h-48 m-4"}
+::tip
+You can also use the `#header`{lang="ts-type"} and `#footer`{lang="ts-type"} slots to customize the Drawer's content, or the `#content`{lang="ts-type"} slot to replace it entirely.
 ::
-
-You can also use the `#header`{lang="ts-type"}, `#body`{lang="ts-type"} and `#footer`{lang="ts-type"} slots to customize the Drawer's content.
 
 ### Title
 
@@ -179,15 +163,15 @@ slots:
 
     <UButton label="Open" color="neutral" variant="subtle" />
 
-  content: |
+  body: |
 
-    <Placeholder class="min-w-96 min-h-96 size-full m-4" />
+    <Placeholder class="min-w-96 min-h-96 size-full" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle"}
 
-#content
-:placeholder{class="min-w-96 min-h-96 size-full m-4"}
+#body
+:placeholder{class="min-w-96 min-h-96 size-full"}
 ::
 
 ### Inset
@@ -205,22 +189,24 @@ slots:
 
     <UButton label="Open" color="neutral" variant="subtle" />
 
-  content: |
+  body: |
 
-    <Placeholder class="min-w-96 min-h-96 size-full m-4" />
+    <Placeholder class="min-w-96 min-h-96 size-full" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle"}
 
-#content
-:placeholder{class="min-w-96 min-h-96 size-full m-4"}
+#body
+:placeholder{class="min-w-96 min-h-96 size-full"}
 ::
 
 ### Handle
 
 Use the `handle` prop to render a grab handle on the Drawer. Defaults to `false`.
 
+::note
 The handle is decorative, the whole content is draggable without it, so it's most useful as a hint on touch devices.
+::
 
 ::component-code
 ---
@@ -232,15 +218,15 @@ slots:
 
     <UButton label="Open" color="neutral" variant="subtle" />
 
-  content: |
+  body: |
 
-    <Placeholder class="h-48 m-4" />
+    <Placeholder class="h-48" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle"}
 
-#content
-:placeholder{class="h-48 m-4"}
+#body
+:placeholder{class="h-48"}
 ::
 
 ### Snap points
@@ -250,6 +236,7 @@ Use the `snap-points` prop to let the Drawer rest at several heights, as fractio
 ::component-example
 ---
 prettier: true
+collapse: true
 name: 'drawer-snap-points-example'
 ---
 ::
@@ -272,15 +259,15 @@ slots:
 
     <UButton label="Open" color="neutral" variant="subtle" />
 
-  content: |
+  body: |
 
-    <Placeholder class="h-48 m-4" />
+    <Placeholder class="h-48" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle"}
 
-#content
-:placeholder{class="h-48 m-4"}
+#body
+:placeholder{class="h-48"}
 ::
 
 ### Modal
@@ -301,15 +288,15 @@ slots:
 
     <UButton label="Open" color="neutral" variant="subtle" />
 
-  content: |
+  body: |
 
-    <Placeholder class="h-48 m-4" />
+    <Placeholder class="h-48" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle"}
 
-#content
-:placeholder{class="h-48 m-4"}
+#body
+:placeholder{class="h-48"}
 ::
 
 ### Dismissible

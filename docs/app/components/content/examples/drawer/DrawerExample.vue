@@ -33,11 +33,11 @@ function onConfirm() {
 </script>
 
 <template>
-  <UDrawer v-model:open="open" title="Pick a delivery time" description="We'll prepare your order as soon as possible." :ui="{ container: 'max-w-xl mx-auto' }">
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+  <UDrawer v-model:open="open" title="Pick a delivery time" description="We'll prepare your order as soon as possible." side="right">
+    <UButton label="Open" color="neutral" variant="subtle" />
 
     <template #body>
-      <URadioGroup v-model="value" :items="items" variant="card" indicator="end" />
+      <URadioGroup v-model="value" :items="items" color="neutral" variant="card" indicator="end" />
     </template>
 
     <template #footer>

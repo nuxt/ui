@@ -12,7 +12,7 @@ const open = ref(false)
     :modal="false"
     :ui="{ container: 'max-w-xl mx-auto' }"
   >
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
     <template #body>
       <div class="space-y-3 text-sm text-muted">

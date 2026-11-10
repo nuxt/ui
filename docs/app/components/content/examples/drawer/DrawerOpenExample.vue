@@ -19,7 +19,7 @@ const shortcuts = [{
 
 <template>
   <UDrawer v-model:open="open" title="Keyboard shortcuts" description="Press O anywhere on the page to toggle this drawer." :ui="{ container: 'max-w-xl mx-auto' }">
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
     <template #body>
       <ul class="divide-y divide-default">

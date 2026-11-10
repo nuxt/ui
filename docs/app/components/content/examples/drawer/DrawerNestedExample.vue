@@ -8,7 +8,7 @@ const ui = { container: 'max-w-xl mx-auto', footer: 'flex-row justify-end' }
 
 <template>
   <UDrawer v-model:open="first" title="First drawer" description="Opening another drawer stacks it on top of this one." :ui="ui">
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
     <template #body>
       <Placeholder class="h-48" />

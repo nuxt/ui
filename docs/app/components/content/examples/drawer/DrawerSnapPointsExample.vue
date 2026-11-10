@@ -1,6 +1,6 @@
 <script setup lang="ts">
-const snapPoints = [0.4, 1]
-const snapPoint = ref<number | string | null>(0.4)
+const snapPoints = ['20rem', 0.6, 1]
+const snapPoint = ref<number | string | null>('20rem')
 
 const places = [
   { name: 'Blue Bottle Coffee', category: 'Café', distance: '120 m', icon: 'i-lucide-coffee' },
@@ -22,10 +22,10 @@ const places = [
     :snap-points="snapPoints"
     handle
     title="Nearby places"
-    description="Drag the drawer up to see all of them."
+    description="Drag the drawer between a peek, most of the screen and full height."
     :ui="{ container: 'max-w-xl mx-auto' }"
   >
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
     <template #body>
       <ul class="divide-y divide-default">
