@@ -66,12 +66,12 @@ const transitioning = ref(false)
 
 const transitionStyle = computed(() => transitioning.value ? { viewTransitionName: transitionName, viewTransitionClass: 'ui-prose-img' } : undefined)
 
-async function setOpen(value: boolean, animate = true) {
+async function setOpen(value: boolean) {
   if (value === open.value) {
     return
   }
 
-  if (!animate || !document.startViewTransition) {
+  if (!document.startViewTransition) {
     open.value = value
     return
   }
@@ -96,7 +96,7 @@ async function setOpen(value: boolean, animate = true) {
 
 if (props.zoom) {
   useEventListener(window, 'scroll', () => {
-    setOpen(false, false)
+    setOpen(false)
   }, { passive: true })
 
   useEventListener(window, 'keydown', (e: KeyboardEvent) => {
