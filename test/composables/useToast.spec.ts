@@ -226,6 +226,80 @@ describe('useToast', () => {
     })
   })
 
+  describe('promise', () => {
+    function deferred<T>() {
+      let resolve!: (value: T) => void
+      let reject!: (error: unknown) => void
+      const promise = new Promise<T>((res, rej) => {
+        resolve = res
+        reject = rej
+      })
+      return { promise, resolve, reject }
+    }
+
+    it('shows a loading toast that stays open', async () => {
+      const { promise } = deferred<undefined>()
+      toast.promise(promise, { loading: 'Saving' })
+
+      await vi.waitFor(() => expect(toast.toasts.value).toHaveLength(1))
+      expect(toast.toasts.value[0]).toMatchObject({ title: 'Saving', icon: 'i-lucide-loader-circle', duration: 0 })
+      expect(toast.toasts.value[0]!.ui?.icon).toContain('animate-spin')
+    })
+
+    it('updates the toast with the resolved value', async () => {
+      const { promise, resolve } = deferred<string>()
+      toast.promise(promise, { loading: 'Saving', success: name => ({ title: `Saved ${name}`, color: 'success' }) })
+      await vi.waitFor(() => expect(toast.toasts.value).toHaveLength(1))
+
+      resolve('file')
+      await promise
+
+      expect(toast.toasts.value[0]).toMatchObject({ title: 'Saved file', color: 'success', icon: undefined, duration: undefined })
+      expect(toast.toasts.value[0]!.ui?.icon).toBeUndefined()
+    })
+
+    it('updates the toast with the error and returns the rejected promise', async () => {
+      const { promise, reject } = deferred<undefined>()
+      const result = toast.promise(promise, { loading: 'Saving', error: (error: any) => error.message })
+      await vi.waitFor(() => expect(toast.toasts.value).toHaveLength(1))
+
+      reject(new Error('Failed'))
+
+      await expect(result).rejects.toThrow('Failed')
+      expect(toast.toasts.value[0]!.title).toBe('Failed')
+    })
+
+    it('applies the settled state when the promise settles before the toast is displayed', async () => {
+      toast.promise(Promise.resolve(), { loading: 'Saving', success: 'Saved' })
+
+      await vi.waitFor(() => expect(toast.toasts.value).toHaveLength(1))
+      expect(toast.toasts.value[0]).toMatchObject({ title: 'Saved', icon: undefined })
+    })
+
+    it('closes the toast when the settled state is omitted', async () => {
+      const { promise, resolve } = deferred<undefined>()
+      toast.promise(promise, { loading: 'Saving' })
+      await vi.waitFor(() => expect(toast.toasts.value).toHaveLength(1))
+
+      resolve(undefined)
+      await promise
+
+      expect(toast.toasts.value[0]!.open).toBe(false)
+    })
+
+    it('does not reopen a toast dismissed while loading', async () => {
+      const { promise, resolve } = deferred<undefined>()
+      toast.promise(promise, { loading: { id: 'p', title: 'Saving' }, success: 'Saved' })
+      await vi.waitFor(() => expect(toast.toasts.value).toHaveLength(1))
+
+      toast.remove('p')
+      resolve(undefined)
+      await promise
+
+      expect(toast.toasts.value[0]).toMatchObject({ title: 'Saving', open: false })
+    })
+  })
+
   describe('clear', () => {
     it('removes all toasts', async () => {
       toast.add({ id: 'a' })

@@ -1,6 +1,6 @@
 import type { Ref, InjectionKey } from 'vue'
 import { ref, nextTick, inject } from 'vue'
-import { useState } from '#imports'
+import { useState, useAppConfig } from '#imports'
 import type { ToastProps, ToastEmits } from '../components/Toast.vue'
 import type { EmitsToProps } from '../types/utils'
 
@@ -17,12 +17,30 @@ export interface Toast extends Omit<ToastProps, 'defaultOpen'>, EmitsToProps<Toa
   _animatedAt?: number
 }
 
+export type ToastPromiseState = string | Omit<Partial<Toast>, 'id'>
+
+export interface ToastPromiseOptions<T> {
+  /**
+   * The toast displayed while the promise is pending. It shows `appConfig.ui.icons.loading` and stays open until the promise settles.
+   */
+  loading?: string | Partial<Toast>
+  /**
+   * The toast displayed when the promise resolves. The toast closes when omitted.
+   */
+  success?: ToastPromiseState | ((data: T) => ToastPromiseState)
+  /**
+   * The toast displayed when the promise rejects. The toast closes when omitted.
+   */
+  error?: ToastPromiseState | ((error: unknown) => ToastPromiseState)
+}
+
 // Matches the slide-in and pulse animation durations in the `toaster` theme.
 const ANIMATION_DURATION = 200
 
 export function useToast() {
   const toasts = useState<Toast[]>('toasts', () => [])
   const max = inject(toastMaxInjectionKey, undefined)
+  const appConfig = useAppConfig()
 
   const running = ref(false)
   const queue: Toast[] = []
@@ -141,11 +159,52 @@ export function useToast() {
     toasts.value = []
   }
 
+  function promise<T>(promise: Promise<T>, options: ToastPromiseOptions<T>): Promise<T> {
+    const loading = resolveState(options.loading)
+    const toast = add({
+      icon: appConfig.ui.icons.loading,
+      duration: 0,
+      ...loading,
+      ui: { ...loading.ui, icon: ['animate-spin', loading.ui?.icon].filter(Boolean).join(' ') }
+    })
+
+    function settle(state: ToastPromiseOptions<T>['success' | 'error'], value: any) {
+      if (state === undefined) {
+        remove(toast.id)
+        return
+      }
+
+      // Reset what the loading state set, a field the settled state doesn't pass would otherwise keep its loading value.
+      const body = { icon: undefined, duration: undefined, ui: loading.ui, ...resolveState(typeof state === 'function' ? state(value) : state) }
+
+      // The toast is still waiting in the queue when the promise settles in the same tick.
+      const queued = queue.find(t => t.id === toast.id)
+      if (queued) {
+        Object.assign(queued, body)
+        return
+      }
+
+      // Skip a toast that was dismissed while loading.
+      if (toasts.value.find(t => t.id === toast.id)?.open) {
+        update(toast.id, body)
+      }
+    }
+
+    promise.then(value => settle(options.success, value), error => settle(options.error, error))
+
+    return promise
+  }
+
   return {
     toasts,
     add,
     update,
     remove,
-    clear
+    clear,
+    promise
   }
+}
+
+function resolveState(state?: ToastPromiseState): Partial<Toast> {
+  return typeof state === 'string' ? { title: state } : { ...state }
 }
