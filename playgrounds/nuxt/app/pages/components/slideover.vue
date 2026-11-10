@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { defineAsyncComponent } from 'vue'
+import theme from '#build/ui/slideover'
 
 const LazySlideoverExample = defineAsyncComponent(() => import('../../components/SlideoverExample.vue'))
 
+const sides = Object.keys(theme.variants.side)
+
 const open = ref(false)
 const inset = ref(false)
+const side = ref<any>('right')
 const count = ref(0)
 const overlay = useOverlay()
 
@@ -24,10 +28,11 @@ function openSlideover() {
 <template>
   <Navbar>
     <USwitch v-model="inset" label="Inset" />
+    <USelect v-model="side" :items="sides" class="w-32" />
   </Navbar>
 
   <div class="flex flex-col gap-2 min-h-0">
-    <USlideover title="First slideover" :inset="inset">
+    <USlideover title="First slideover" :side="side" :inset="inset">
       <UButton color="neutral" variant="outline" label="Open with nested" />
 
       <template #body>
@@ -35,37 +40,13 @@ function openSlideover() {
       </template>
 
       <template #footer>
-        <USlideover title="Second slideover" :inset="inset">
+        <USlideover title="Second slideover" :side="side" :inset="inset">
           <UButton label="Open second" />
         </USlideover>
       </template>
     </USlideover>
 
-    <USlideover title="Slideover on left side" description="This slideover has `side: 'left'` prop." side="left" :inset="inset">
-      <UButton label="Open on left" color="neutral" variant="subtle" />
-
-      <template #body>
-        <Placeholder class="size-full" />
-      </template>
-    </USlideover>
-
-    <USlideover title="Slideover on top side" description="This slideover has `side: 'top'` prop." side="top" :inset="inset">
-      <UButton label="Open on top" color="neutral" variant="outline" />
-
-      <template #body>
-        <Placeholder class="h-48 w-full" />
-      </template>
-    </USlideover>
-
-    <USlideover title="Slideover on bottom side" description="This slideover has `side: 'bottom'` prop." side="bottom" :inset="inset">
-      <UButton label="Open on bottom" color="neutral" variant="subtle" />
-
-      <template #body>
-        <Placeholder class="h-48 w-full" />
-      </template>
-    </USlideover>
-
-    <USlideover v-model:open="open" title="Slideover with v-model" description="This is useful to control the state yourself." :inset="inset">
+    <USlideover v-model:open="open" title="Slideover with v-model" description="This is useful to control the state yourself." :side="side" :inset="inset">
       <template #body>
         <Placeholder class="size-full" />
       </template>
@@ -73,7 +54,7 @@ function openSlideover() {
 
     <UButton label="Open with v-model" color="neutral" variant="outline" @click="open = true" />
 
-    <USlideover title="Slideover without overlay" description="This slideover has `overlay: false` prop." :overlay="false" :inset="inset">
+    <USlideover title="Slideover without overlay" description="This slideover has `overlay: false` prop." :overlay="false" :side="side" :inset="inset">
       <UButton label="Open without overlay" color="neutral" variant="subtle" />
 
       <template #body>
@@ -81,7 +62,14 @@ function openSlideover() {
       </template>
     </USlideover>
 
-    <USlideover title="Slideover without modal & overlay" description="This slideover has `modal: false` and `overlay: false` to interact with outside content." :overlay="false" :modal="false" :inset="inset">
+    <USlideover
+      title="Slideover without modal & overlay"
+      description="This slideover has `modal: false` and `overlay: false` to interact with outside content."
+      :overlay="false"
+      :modal="false"
+      :side="side"
+      :inset="inset"
+    >
       <UButton label="Open without modal" color="neutral" variant="outline" />
 
       <template #body>
@@ -89,7 +77,7 @@ function openSlideover() {
       </template>
     </USlideover>
 
-    <USlideover title="Slideover without transition" description="This slideover has `transition: false` prop." :transition="false" :inset="inset">
+    <USlideover title="Slideover without transition" description="This slideover has `transition: false` prop." :transition="false" :side="side" :inset="inset">
       <UButton label="Open without transition" color="neutral" variant="subtle" />
 
       <template #body>
@@ -97,7 +85,7 @@ function openSlideover() {
       </template>
     </USlideover>
 
-    <USlideover title="Slideover without portal" description="This slideover has `portal: false` prop." :portal="false" :inset="inset">
+    <USlideover title="Slideover without portal" description="This slideover has `portal: false` prop." :portal="false" :side="side" :inset="inset">
       <UButton label="Open without portal" color="neutral" variant="outline" />
 
       <template #body>
@@ -111,6 +99,7 @@ function openSlideover() {
       :dismissible="false"
       :modal="false"
       :overlay="false"
+      :side="side"
       :inset="inset"
     >
       <UButton label="Open unclosable" color="neutral" variant="subtle" />
@@ -120,7 +109,7 @@ function openSlideover() {
       </template>
     </USlideover>
 
-    <USlideover title="Slideover without close button" description="This slideover has `close: false` prop." :close="false" :inset="inset">
+    <USlideover title="Slideover without close button" description="This slideover has `close: false` prop." :close="false" :side="side" :inset="inset">
       <UButton label="Open without close button" color="neutral" variant="outline" />
 
       <template #body>
@@ -128,7 +117,14 @@ function openSlideover() {
       </template>
     </USlideover>
 
-    <USlideover title="Slideover with custom close button" description="The `close` prop inherits from the Button props." :close="{ color: 'primary', variant: 'solid', size: 'xs' }" :ui="{ close: 'top-3.5 rounded-full' }" :inset="inset">
+    <USlideover
+      title="Slideover with custom close button"
+      description="The `close` prop inherits from the Button props."
+      :close="{ color: 'primary', variant: 'solid', size: 'xs' }"
+      :ui="{ close: 'top-3.5 rounded-full' }"
+      :side="side"
+      :inset="inset"
+    >
       <UButton label="Open with custom close button" color="neutral" variant="subtle" />
 
       <template #body>
@@ -138,7 +134,7 @@ function openSlideover() {
 
     <UButton label="Open programmatically" color="neutral" variant="outline" @click="openSlideover" />
 
-    <USlideover title="Slideover with scoped slot close" description="This slideover has a scoped slot close that can be used to close the slideover from within the content." :inset="inset">
+    <USlideover title="Slideover with scoped slot close" description="This slideover has a scoped slot close that can be used to close the slideover from within the content." :side="side" :inset="inset">
       <UButton color="neutral" variant="subtle" label="Open with scoped slot close" />
 
       <template #header="{ close }">

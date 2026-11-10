@@ -2,7 +2,7 @@
 import { createReusableTemplate, useMediaQuery } from '@vueuse/core'
 
 const [DefineFormTemplate, ReuseFormTemplate] = createReusableTemplate()
-const isDesktop = useMediaQuery('(min-width: 768px)')
+const isDesktop = useMediaQuery('(min-width: 768px)', { ssrWidth: 1024 })
 
 const open = ref(false)
 

@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
@@ -6,7 +6,7 @@ import Drawer from '../../src/runtime/components/Drawer.vue'
 import theme from '#build/ui/drawer'
 
 describe('Drawer', () => {
-  const directions = Object.keys(theme.variants.direction) as any
+  const sides = Object.keys(theme.variants.side) as any
 
   const props = { open: true, portal: false }
 
@@ -14,9 +14,9 @@ describe('Drawer', () => {
     // Props
     ['with title', { props: { ...props, title: 'Title' } }],
     ['with description', { props: { ...props, title: 'Title', description: 'Description' } }],
-    ...directions.map((direction: string) => [`with direction ${direction}`, { props: { ...props, direction, title: 'Title', description: 'Description' } }]),
-    ...directions.map((direction: string) => [`with direction ${direction} inset`, { props: { ...props, direction, inset: true, title: 'Title', description: 'Description' } }]),
-    ['without handle', { props: { ...props, handle: false, title: 'Title', description: 'Description' } }],
+    ...sides.map((side: string) => [`with side ${side}`, { props: { ...props, side, title: 'Title', description: 'Description' } }]),
+    ...sides.map((side: string) => [`with side ${side} without inset`, { props: { ...props, side, inset: false, title: 'Title', description: 'Description' } }]),
+    ['with handle', { props: { ...props, handle: true, title: 'Title', description: 'Description' } }],
     ['without overlay', { props: { ...props, overlay: false, title: 'Title', description: 'Description' } }],
     ['with close', { props: { ...props, close: true, title: 'Title', description: 'Description' } }],
     ['with closeIcon', { props: { ...props, close: true, closeIcon: 'i-lucide-trash', title: 'Title', description: 'Description' } }],
@@ -47,31 +47,23 @@ describe('Drawer', () => {
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
-  it('does not disable outside pointer events with `noBodyStyles`', async () => {
-    const wrapper = await mountSuspended(Drawer, { props: { open: true, portal: false } })
-    expect(wrapper.findComponent({ name: 'DialogContent' }).props('disableOutsidePointerEvents')).toBeUndefined()
-
-    await wrapper.setProps({ noBodyStyles: true })
-    expect(wrapper.findComponent({ name: 'DialogContent' }).props('disableOutsidePointerEvents')).toBe(false)
-
-    await wrapper.setProps({ content: { disableOutsidePointerEvents: true } })
-    expect(wrapper.findComponent({ name: 'DialogContent' }).props('disableOutsidePointerEvents')).toBe(true)
-  })
-
-  it('emits `after:enter` and `after:leave` once the animation ends', async () => {
-    vi.useFakeTimers({ shouldAdvanceTime: true })
+  it('emits `after:leave` once the animation ends', async () => {
     const wrapper = await mountSuspended(Drawer, { props: { open: false, portal: false } })
-
-    vi.advanceTimersByTime(500)
     expect(wrapper.emitted('after:leave')).toBeUndefined()
 
     await wrapper.setProps({ open: true })
-    vi.advanceTimersByTime(500)
-    expect(wrapper.emitted('after:enter')).toHaveLength(1)
-
     await wrapper.setProps({ open: false })
-    vi.advanceTimersByTime(500)
+    wrapper.find('[data-slot="drawer-content"]').element.dispatchEvent(new Event('transitionend'))
     expect(wrapper.emitted('after:leave')).toHaveLength(1)
-    vi.useRealTimers()
+  })
+
+  it('emits `after:enter` once the open animation ends', async () => {
+    const wrapper = await mountSuspended(Drawer, { props: { open: false, portal: false } })
+
+    await wrapper.setProps({ open: true })
+    expect(wrapper.emitted('after:enter')).toBeUndefined()
+
+    wrapper.find('[data-slot="drawer-content"]').element.dispatchEvent(new Event('animationend'))
+    expect(wrapper.emitted('after:enter')).toHaveLength(1)
   })
 })

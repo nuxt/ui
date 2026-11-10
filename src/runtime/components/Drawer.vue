@@ -1,7 +1,6 @@
 <script lang="ts">
-import type { VNode } from 'vue'
-import type { DrawerRootProps, DrawerRootEmits } from 'vaul-vue'
-import type { DialogContentProps, DialogContentEmits } from 'reka-ui'
+import type { VNode, InjectionKey, ComputedRef } from 'vue'
+import type { DrawerRootProps, DrawerRootEmits, DrawerOpenChangeDetails, DrawerContentProps, DrawerContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '../theme/drawer'
 import type { ButtonProps } from './Button.vue'
@@ -12,7 +11,15 @@ import type { ComponentConfig } from '../types/tv'
 
 type Drawer = ComponentConfig<typeof theme, AppConfig, 'drawer'>
 
-export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | 'closeThreshold' | 'shouldScaleBackground' | 'setBackgroundColorOnScale' | 'scrollLockTimeout' | 'fixed' | 'dismissible' | 'modal' | 'open' | 'defaultOpen' | 'nested' | 'direction' | 'noBodyStyles' | 'handleOnly' | 'preventScrollRestoration' | 'snapPoints'> {
+/** How many open drawers a nested drawer adds to the stack, and the size of the frontmost one. */
+interface DrawerStackEntry {
+  depth: number
+  width: number
+  height: number
+}
+const drawerStackInjectionKey: InjectionKey<Set<ComputedRef<DrawerStackEntry>>> = Symbol('nuxt-ui.drawer-stack')
+
+export interface DrawerProps extends Pick<DrawerRootProps, 'modal' | 'open' | 'defaultOpen' | 'snapPoints' | 'snapPoint' | 'defaultSnapPoint' | 'snapToSequentialPoints'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -21,12 +28,17 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
   title?: string
   description?: string
   /**
+   * The side of the screen the drawer slides in from and is swiped back to.
+   * @defaultValue 'bottom'
+   */
+  side?: 'top' | 'right' | 'bottom' | 'left'
+  /**
    * Whether to inset the drawer from the edges.
-   * @defaultValue false
+   * @defaultValue true
    */
   inset?: boolean
   /** The content of the drawer. */
-  content?: Omit<DialogContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DialogContentEmits>>
+  content?: Omit<DrawerContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DrawerContentEmits>>
   /**
    * Render an overlay behind the drawer.
    * @defaultValue true
@@ -34,7 +46,7 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
   overlay?: boolean
   /**
    * Render a handle on the drawer.
-   * @defaultValue true
+   * @defaultValue false
    */
   handle?: boolean
   /**
@@ -42,11 +54,6 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
    * @defaultValue true
    */
   portal?: boolean | string | HTMLElement
-  /**
-   * Whether the drawer is nested in another drawer.
-   * @defaultValue false
-   */
-  nested?: boolean
   /**
    * Display a close button to dismiss the drawer.
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
@@ -59,12 +66,19 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
    * @IconifyIcon
    */
   closeIcon?: IconProps['name']
+  /**
+   * When `false`, the drawer will not close when clicking outside, pressing escape, or swiping.
+   * @defaultValue true
+   */
+  dismissible?: boolean
   class?: any
   ui?: Drawer['slots']
 }
 
 export interface DrawerEmits extends DrawerRootEmits {
-  (e: 'after:leave' | 'after:enter' | 'close:prevent'): void
+  'close:prevent': []
+  'after:enter': []
+  'after:leave': []
 }
 
 export interface DrawerSlots {
@@ -81,10 +95,10 @@ export interface DrawerSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, toRef } from 'vue'
-import { VisuallyHidden } from 'reka-ui'
+import { computed, inject, onBeforeUnmount, provide, ref, shallowReactive, toRef, useTemplateRef, watch } from 'vue'
+import { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerOverlay, DrawerContent, DrawerTitle, DrawerDescription, DrawerHandle, DrawerClose, VisuallyHidden } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { DrawerRoot, DrawerRootNested, DrawerTrigger, DrawerPortal, DrawerOverlay, DrawerContent, DrawerTitle, DrawerDescription, DrawerHandle, DrawerClose } from 'vaul-vue'
+import { useResizeObserver } from '@vueuse/core'
 import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { FieldGroupReset } from '../composables/useFieldGroup'
 import { useLocale } from '../composables/useLocale'
@@ -94,10 +108,10 @@ import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
 const _props = withDefaults(defineProps<DrawerProps>(), {
-  direction: 'bottom',
+  side: 'bottom',
+  inset: true,
   portal: true,
   overlay: true,
-  handle: true,
   modal: true,
   dismissible: true
 })
@@ -110,50 +124,131 @@ const { t } = useLocale()
 const appConfig = useThemeConfig() as Drawer['AppConfig']
 const overrides = useComponentOverrides((ui: Drawer['AppConfig']['ui']) => ui.drawer)
 
-const rootProps = useForwardProps(props, ['activeSnapPoint', 'closeThreshold', 'shouldScaleBackground', 'setBackgroundColorOnScale', 'scrollLockTimeout', 'fixed', 'dismissible', 'modal', 'open', 'defaultOpen', 'nested', 'direction', 'noBodyStyles', 'handleOnly', 'preventScrollRestoration', 'snapPoints'], emits)
-const portalProps = usePortal(toRef(() => props.portal))
-// reka-ui sets `pointer-events: none` on `<body>` for modal dialogs, so `noBodyStyles` must opt out of it too
-const contentProps = toRef(() => props.noBodyStyles ? { disableOutsidePointerEvents: false, ...props.content } : props.content)
-const contentEvents = computed(() => {
-  if (!props.dismissible) {
-    const events = ['interactOutside', 'escapeKeyDown']
+const SWIPE_DIRECTION = { top: 'up', bottom: 'down', left: 'left', right: 'right' } as const
+const swipeDirection = computed(() => SWIPE_DIRECTION[props.side])
 
-    return events.reduce((acc, curr) => {
-      acc[curr] = (e: Event) => {
-        e.preventDefault()
-        emits('close:prevent')
-      }
-      return acc
-    }, {} as Record<typeof events[number], (e: Event) => void>)
-  }
-
-  return {
-    pointerDownOutside
+// reka-ui's `--nested-drawers` only counts one level and clears once the nested drawer
+// has left, so the stack is counted here and flips as soon as a nested drawer closes.
+const isOpen = ref(props.open ?? props.defaultOpen ?? false)
+watch(() => props.open, (value) => {
+  if (value !== undefined) {
+    isOpen.value = value
   }
 })
 
-// vaul also fires `animationEnd(false)` when a closed drawer mounts, so only a real close emits `after:leave`
+// A swipe closes without a DOM event, so `dismissible` is checked on the close reason.
+const ALLOWED_CLOSE_REASONS = new Set(['close-press', 'trigger-press'])
+function onOpenChange(value: boolean, details: DrawerOpenChangeDetails) {
+  if (!value && !props.dismissible && !ALLOWED_CLOSE_REASONS.has(details.reason ?? '')) {
+    details.cancel()
+    emits('close:prevent')
+    return
+  }
+
+  // eslint-disable-next-line vue/require-explicit-emits -- `update:open` is declared via `DrawerEmits extends DrawerRootEmits`, which the rule doesn't resolve through
+  emits('update:open', value, details)
+  if (!details.isCanceled && props.open === undefined) {
+    isOpen.value = value
+  }
+}
+
+const nestedStack = shallowReactive(new Set<ComputedRef<DrawerStackEntry>>())
+provide(drawerStackInjectionKey, nestedStack)
+const frontmost = computed(() => [...nestedStack].reduce<DrawerStackEntry>((deepest, entry) => entry.value.depth > deepest.depth ? entry.value : deepest, { depth: 0, width: 0, height: 0 }))
+const stack = computed(() => frontmost.value.depth)
+
+// A stacked top or bottom drawer collapses to the frontmost height, so its own height is
+// only measured while nothing is open above it.
+const contentRef = useTemplateRef<InstanceType<typeof DrawerContent>>('contentRef')
+const size = ref({ width: 0, height: 0 })
+// `$el` isn't reactive and is a comment node while closed, so `isOpen` re-runs the target.
+useResizeObserver(() => isOpen.value && contentRef.value?.$el?.nodeType === 1 ? contentRef.value.$el : undefined, ([entry]) => {
+  const el = entry?.target as HTMLElement | undefined
+  if (!el) {
+    return
+  }
+  size.value = { width: el.offsetWidth, height: stack.value > 0 ? size.value.height : el.offsetHeight }
+}, { box: 'border-box' })
+// The observer doesn't fire if the drawer comes back to the same size it was stacked at.
+watch(stack, (value) => {
+  const el = contentRef.value?.$el
+  if (value === 0 && el?.nodeType === 1) {
+    size.value = { width: el.offsetWidth, height: el.offsetHeight }
+  }
+}, { flush: 'post' })
+
+const parentStack = inject(drawerStackInjectionKey, undefined)
+const stackEntry = computed<DrawerStackEntry>(() => {
+  if (!isOpen.value) {
+    return { depth: 0, width: 0, height: 0 }
+  }
+  return { ...(stack.value > 0 ? frontmost.value : size.value), depth: stack.value + 1 }
+})
+parentStack?.add(stackEntry)
+onBeforeUnmount(() => parentStack?.delete(stackEntry))
+
+const stackStyle = computed(() => stack.value > 0
+  ? { '--drawer-stack': stack.value, '--drawer-own-width': `${size.value.width}px`, '--drawer-stack-width': `${frontmost.value.width}px`, '--drawer-stack-height': `${frontmost.value.height}px` }
+  : undefined)
+
+const rootProps = useForwardProps(props, ['open', 'defaultOpen', 'modal', 'snapPoints', 'snapPoint', 'defaultSnapPoint', 'snapToSequentialPoints'])
+
+function onSnapPointChange(value: NonNullable<DrawerRootProps['snapPoint']> | null) {
+  // eslint-disable-next-line vue/require-explicit-emits -- declared via `DrawerEmits extends DrawerRootEmits`, which the rule doesn't resolve through
+  emits('update:snapPoint', value)
+}
+
+// reka-ui only reports the open animation ending when the drawer reopens mid close: its watch on
+// `open` isn't immediate and the content mounts already open, so the content's own `animationend` covers it.
 let entered = false
-function onAnimationEnd(open: boolean) {
-  if (open) {
-    entered = true
-    emits('after:enter')
-  } else if (entered) {
+watch(isOpen, (value) => {
+  if (!value) {
     entered = false
+  }
+})
+
+function onOpenComplete(value: boolean) {
+  if (value && entered) {
+    return
+  }
+  entered = value
+
+  // eslint-disable-next-line vue/require-explicit-emits -- declared via `DrawerEmits extends DrawerRootEmits`, which the rule doesn't resolve through
+  emits('update:openComplete', value)
+  if (value) {
+    emits('after:enter')
+  } else {
     emits('after:leave')
+  }
+}
+
+const portalProps = usePortal(toRef(() => props.portal))
+const contentProps = toRef(() => props.content)
+const contentEvents = {
+  pointerDownOutside,
+  animationend: (event: AnimationEvent) => {
+    if (event.target === event.currentTarget && isOpen.value) {
+      onOpenComplete(true)
+    }
   }
 }
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
-  direction: props.direction,
+  side: props.side,
   inset: props.inset,
   snapPoints: props.snapPoints && props.snapPoints.length > 0
 }))
 </script>
 
 <template>
-  <component :is="props.nested ? DrawerRootNested : DrawerRoot" v-bind="rootProps" @animation-end="onAnimationEnd">
+  <DrawerRoot
+    v-bind="rootProps"
+    :swipe-direction="swipeDirection"
+    @update:open="onOpenChange"
+    @update:open-complete="onOpenComplete"
+    @update:snap-point="onSnapPointChange"
+  >
     <DrawerTrigger v-if="!!slots.default" as-child :class="props.class">
       <slot />
     </DrawerTrigger>
@@ -162,7 +257,15 @@ const ui = computed(() => tv(theme, overrides.value)({
       <FieldGroupReset>
         <DrawerOverlay v-if="props.overlay" data-slot="drawer-overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
-        <DrawerContent data-slot="drawer-content" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" v-on="contentEvents">
+        <DrawerContent
+          ref="contentRef"
+          data-slot="drawer-content"
+          :data-stacked="stack > 0 ? '' : undefined"
+          :style="stackStyle"
+          :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
+          v-bind="contentProps"
+          v-on="contentEvents"
+        >
           <DrawerHandle v-if="props.handle" data-slot="drawer-handle" :class="ui.handle({ class: props.ui?.handle })" />
 
           <VisuallyHidden v-if="(!props.title && !slots.title) || (!props.description && !slots.description) || !!slots.content">
@@ -232,5 +335,5 @@ const ui = computed(() => tv(theme, overrides.value)({
         </DrawerContent>
       </FieldGroupReset>
     </DrawerPortal>
-  </component>
+  </DrawerRoot>
 </template>
