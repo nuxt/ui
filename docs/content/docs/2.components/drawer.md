@@ -275,17 +275,12 @@ slots:
 Use the `modal` prop to control whether the Drawer blocks interaction with outside content. Defaults to `true`.
 
 ::note
-When `modal` is set to `false`, the overlay is automatically disabled and outside content becomes interactive. Set it to `trap-focus` to keep the focus inside the Drawer while outside content stays clickable.
+When `modal` is set to `false`, the overlay is automatically disabled and outside content becomes interactive. Set it to `trap-focus` with `overlay: false` to keep the focus inside the Drawer while outside content stays clickable.
 ::
 
 ::component-code
 ---
 prettier: true
-items:
-  modal:
-    - true
-    - false
-    - 'trap-focus'
 props:
   modal: false
 slots:
