@@ -19,28 +19,19 @@ links:
 
 Use a [Button](/docs/components/button) or any other component in the default slot of the Modal.
 
-Then, use the `#content` slot to add the content displayed when the Modal is open.
+Then, use the `#body` slot to add the content displayed when the Modal is open.
 
-::component-code
+::component-example
 ---
 prettier: true
-slots:
-  default: |
-
-    <UButton label="Open" color="neutral" variant="subtle" />
-
-  content: |
-
-    <Placeholder class="h-48 m-4" />
+collapse: true
+name: 'modal-example'
 ---
-
-:u-button{label="Open" color="neutral" variant="subtle"}
-
-#content
-:placeholder{class="h-48 m-4"}
 ::
 
-You can also use the `#header`{lang="ts-type"}, `#body`{lang="ts-type"} and `#footer`{lang="ts-type"} slots to customize the Modal's content.
+::tip
+You can use the `#header` and `#footer` slots to customize the Modal's content, or the `#content` slot to replace it entirely.
+::
 
 ### Title
 
@@ -434,7 +425,7 @@ First, create a modal component that will be opened programmatically:
 ::component-example
 ---
 prettier: true
-name: 'modal-example'
+name: 'modal-programmatic-component-example'
 preview: false
 ---
 ::

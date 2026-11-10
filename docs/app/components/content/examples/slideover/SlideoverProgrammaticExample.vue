@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { LazySlideoverExample } from '#components'
+import { LazySlideoverProgrammaticComponentExample } from '#components'
 
 const count = ref(0)
 
 const toast = useToast()
 const overlay = useOverlay()
 
-const slideover = overlay.create(LazySlideoverExample)
+const slideover = overlay.create(LazySlideoverProgrammaticComponentExample)
 
 async function open() {
   const instance = slideover.open({

@@ -18,28 +18,19 @@ links:
 
 Use a [Button](/docs/components/button) or any other component in the default slot of the Slideover.
 
-Then, use the `#content` slot to add the content displayed when the Slideover is open.
+Then, use the `#body` slot to add the content displayed when the Slideover is open.
 
-::component-code
+::component-example
 ---
 prettier: true
-slots:
-  default: |
-
-    <UButton label="Open" color="neutral" variant="subtle" />
-
-  content: |
-
-    <Placeholder class="h-full m-4" />
+collapse: true
+name: 'slideover-example'
 ---
-
-:u-button{label="Open" color="neutral" variant="subtle"}
-
-#content
-:placeholder{class="h-full m-4"}
 ::
 
-You can also use the `#header`{lang="ts-type"}, `#body`{lang="ts-type"} and `#footer`{lang="ts-type"} slots to customize the Slideover's content.
+::tip
+You can use the `#header` and `#footer` slots to customize the Slideover's content, or the `#content` slot to replace it entirely.
+::
 
 ### Title
 
@@ -424,7 +415,7 @@ First, create a slideover component that will be opened programmatically:
 ::component-example
 ---
 prettier: true
-name: 'slideover-example'
+name: 'slideover-programmatic-component-example'
 preview: false
 ---
 ::

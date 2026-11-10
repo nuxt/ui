@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { LazyModalExample } from '#components'
+import { LazyModalProgrammaticComponentExample } from '#components'
 
 const count = ref(0)
 
 const toast = useToast()
 const overlay = useOverlay()
 
-const modal = overlay.create(LazyModalExample)
+const modal = overlay.create(LazyModalProgrammaticComponentExample)
 
 async function open() {
   const instance = modal.open({
