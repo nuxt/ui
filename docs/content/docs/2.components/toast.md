@@ -361,6 +361,17 @@ name: 'toast-callback-example'
 ---
 ::
 
+### With promise :badge{label="Soon" class="align-text-top"}
+
+Use `toast.promise` to display a loading toast that updates when the promise resolves or rejects.
+
+::component-example
+---
+collapse: true
+name: 'toast-promise-example'
+---
+::
+
 ### With HTML content
 
 Use the [`h()` render function](https://vuejs.org/api/render-function.html#h) in the `title` or `description` fields to render HTML elements or Vue components with custom styling.

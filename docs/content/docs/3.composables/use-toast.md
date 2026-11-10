@@ -166,6 +166,57 @@ function updateToast(id: string | number) {
 </script>
 ```
 
+### promise() :badge{label="Soon" class="align-text-top"}
+
+`promise<T>(promise: Promise<T>, options: ToastPromiseOptions<T>): Promise<T>`{lang="ts-type"}
+
+Displays a loading toast while the promise is pending, then updates it when the promise settles.
+
+#### Parameters
+
+::field-group
+  ::field{name="promise" type="Promise<T>" required}
+  The promise to track.
+  ::
+
+  ::field{name="options" type="ToastPromiseOptions<T>" required}
+  The toast to display for each state. Each state is a partial `Toast` object or a string used as the title.
+
+    ::collapsible
+
+      ::field-group
+        ::field{name="loading" type="string | Partial<Toast>"}
+        The toast displayed while the promise is pending. It shows the `loading` icon from the app config and stays open until the promise settles.
+        ::
+
+        ::field{name="success" type="string | Partial<Toast> | ((data: T) => string | Partial<Toast>)"}
+        The toast displayed when the promise resolves. Pass a function to use the resolved value. The toast closes when omitted.
+        ::
+
+        ::field{name="error" type="string | Partial<Toast> | ((error: unknown) => string | Partial<Toast>)"}
+        The toast displayed when the promise rejects. Pass a function to use the error. The toast closes when omitted.
+        ::
+      ::
+    ::
+  ::
+::
+
+**Returns:** The promise passed in, so you can await its result.
+
+```vue
+<script setup lang="ts">
+const toast = useToast()
+
+async function save() {
+  await toast.promise($fetch('/api/save', { method: 'POST' }), {
+    loading: 'Saving...',
+    success: { title: 'Saved', color: 'success' },
+    error: (error: any) => ({ title: error.message, color: 'error' })
+  })
+}
+</script>
+```
+
 ### remove()
 
 `remove(id: string | number): void`{lang="ts-type"}
