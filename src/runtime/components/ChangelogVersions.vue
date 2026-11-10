@@ -72,7 +72,7 @@ const getProxySlots = () => omit(slots, ['default', 'indicator'])
 
 const overrides = useComponentOverrides((ui: ChangelogVersions['AppConfig']['ui']) => ui.changelogVersions)
 
-// The beam fills through a scroll-driven animation on the page, or on the nearest scroll container when one is given
+// The indicator animates the scroll progress of the page, or of the nearest scroll container when one is given
 const timeline = computed(() => typeof props.indicator === 'object' && props.indicator.container ? 'scroll(nearest block)' : 'scroll(root block)')
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -81,9 +81,9 @@ const ui = computed(() => tv(theme, overrides.value)())
 
 <template>
   <Primitive :as="props.as" data-slot="changelog-versions" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="!!props.indicator || !!slots.indicator" data-slot="changelog-versions-indicator" :class="ui.indicator({ class: props.ui?.indicator })">
+    <div v-if="!!props.indicator || !!slots.indicator" data-slot="changelog-versions-indicator" :class="ui.indicator({ class: props.ui?.indicator })" :style="{ animationTimeline: timeline }">
       <slot name="indicator">
-        <div v-if="!!props.indicatorMotion" data-slot="changelog-versions-beam" :class="ui.beam({ class: props.ui?.beam })" :style="{ animationTimeline: timeline }" />
+        <div v-if="!!props.indicatorMotion" data-slot="changelog-versions-beam" :class="ui.beam({ class: props.ui?.beam })" />
       </slot>
     </div>
 

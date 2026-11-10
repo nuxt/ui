@@ -139,13 +139,20 @@
   }
 }
 
-@keyframes changelog-versions-beam {
+/* ChangelogVersions: the scroll progress is animated on the indicator and inherited by the beam, which eases towards it with a transition. */
+@property --ui-changelog-versions-progress {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
+@keyframes changelog-versions-progress {
   from {
-    scale: 1 0;
+    --ui-changelog-versions-progress: 0;
   }
 
   to {
-    scale: 1 1;
+    --ui-changelog-versions-progress: 1;
   }
 }
 
