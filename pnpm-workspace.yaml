@@ -18,7 +18,7 @@ catalog:
   "@ai-sdk/gateway": ^4.0.138
   "@ai-sdk/vue": ^4.0.165
   "@codspeed/vitest-plugin": ^6.1.1
-  "@comark/vue": ^0.9.0
+  "@comark/vue": ^0.9.1
   "@floating-ui/dom": ^1.8.0
   "@iconify-json/logos": ^1.2.19
   "@iconify-json/lucide": ^1.2.152
@@ -196,3 +196,5 @@ minimumReleaseAgeExclude:
   - "@nuxt/vite-server@4.6.0"
   - nuxt@4.6.0
   - nuxt-agent-discovery@0.8.1
+  - "@comark/vue@0.9.1"
+  - comark@0.9.1
